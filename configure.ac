@@ -1,0 +1,61 @@
+# Process this file with autoconf to produce a configure script.
+
+# Sets up autoconf.
+AC_INIT([Déjà Dup],[1.0],[mike@mterry.name],[deja-dup])
+AC_PREREQ([2.53])
+AC_CONFIG_SRCDIR(src/MainWindow.vala)
+AC_CONFIG_HEADERS([config.h:config.h.in])
+
+# Sets up automake.
+AM_INIT_AUTOMAKE([1.9 foreign no-dist-gzip dist-bzip2])
+
+# Checks for programs.
+AC_PROG_CC
+AC_PROG_INSTALL
+AC_PROG_MAKE_SET
+
+AC_PATH_PROG(GCONFTOOL, gconftool-2)
+AM_GCONF_SOURCE_2
+
+# Checks for vala
+AC_PROG_VALAC([0.3.5])
+
+# Sets up gettext.
+GETTEXT_PACKAGE="$PACKAGE"
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext domain])
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION([0.17])
+AC_PROG_INTLTOOL([0.37], [no-xml])
+
+# Sets up a few prefix-relative directories
+if test "x${prefix}" = "xNONE"; then
+  PREFIX="${ac_default_prefix}"
+else
+  PREFIX="${prefix}"
+fi
+AC_DEFINE_UNQUOTED(LOCALE_DIR, "${PREFIX}/${DATADIRNAME}/locale",[Locale directory])
+AC_DEFINE_UNQUOTED(THEME_DIR, "${PREFIX}/${DATADIRNAME}/icons",[Icon directory])
+AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package data directory])
+
+# Check dependencies
+PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.14 gio-2.0 gconf-2.0 libgnomeui-2.0 gnome-keyring-1)
+AC_SUBST(GTK_CFLAGS)
+AC_SUBST(GTK_LIBS)
+
+# Determines if we're debugging.
+AC_ARG_ENABLE(debug,
+  AC_HELP_STRING([--enable-debug=[no/yes]],[turn on debugging [default=no]]),
+  enable_debug="$enableval",
+  enable_debug=no)
+if test "$enable_debug" = "yes"; then
+  DEBUG_CFLAGS="-g -DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGTK_MULTIHEAD_SAFE"
+else
+  DEBUG_CFLAGS=""
+fi
+AC_SUBST(DEBUG_CFLAGS)
+
+# Sets up output files.
+AC_CONFIG_FILES([Makefile data/Makefile src/Makefile po/Makefile.in vapi/Makefile])
+AC_OUTPUT
+

@@ -1,0 +1,58 @@
+/* -*- Mode: C; indent-tabs-mode: nil; c-basic-offset: 2; tab-width: 2 -*- */
+/*
+    Déjà Dup
+    © 2008 Michael Terry <mike@mterry.name>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+using GLib;
+
+public abstract class ConfigWidget : Gtk.EventBox
+{
+  public string key {get; construct;}
+  
+  string dir;
+  protected GConf.Client client;
+  construct {
+    client = GConf.Client.get_default();
+    
+    if (key != null) {
+      dir = key;
+      weak string end = dir.rchr(-1, '/');
+      if (end != null)
+        dir = dir.substring(0, dir.length - end.length);
+      try {
+        client.add_dir(dir, GConf.ClientPreloadType.NONE);
+        client.notify_add(key, set_from_config, null);
+      }
+      catch (Error e) {
+        printerr("%s\n", e.message);
+      }
+    }
+  }
+  
+  ~ConfigWidget()
+  {
+    try {
+      client.remove_dir(dir);
+    }
+    catch (Error e) {
+      printerr("%s\n", e.message);
+    }
+  }
+  
+  protected abstract void set_from_config();
+}
+
