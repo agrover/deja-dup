@@ -1,0 +1,24 @@
+Source: deja-dup
+Section: utils
+Priority: optional
+Maintainer: Michael Terry <mike@mterry.name>
+Build-Depends: cdbs,
+               pkg-config,
+               libglib2.0-dev,
+               libgtk2.0-dev (>= 2.14),
+               libgconf2-dev,
+               libgnomeui-dev,
+               libgnome-keyring-dev,
+               valac (>= 0.3.5)
+Standards-Version: 3.7.2
+
+Package: deja-dup
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         duplicity
+Recommends: python-boto
+Description: Backup utility
+ Déjà Dup is a simple backup program. It hides the complexity of
+ doing backups the 'right way' (encrypted, off-site) and uses
+ duplicity as the backend.
