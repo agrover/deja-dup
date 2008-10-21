@@ -1,2 +1,2 @@
-EXTRA_DIST = config.vapi
+EXTRA_DIST = config.vapi PassphraseSchema.vapi packagekit.vapi
 
