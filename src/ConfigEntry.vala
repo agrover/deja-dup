@@ -39,6 +39,8 @@ public class ConfigEntry : ConfigWidget
   {
     try {
       var val = client.get_string(key);
+      if (val == null)
+        val = "";
       entry.set_text(val);
     }
     catch (Error e) {

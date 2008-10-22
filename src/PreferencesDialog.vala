@@ -69,7 +69,7 @@ public class PreferencesDialog : Gtk.Dialog
     
     var s3_table = new Gtk.Table(1, 3, false);
     w = new ConfigEntry(S3_BUCKET_KEY);
-    label = new Gtk.Label("    %s".printf(_("S3 b_ucket:")));
+    label = new Gtk.Label("    %s".printf(_("S3 buc_ket:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "xalign", 0.0f);
@@ -79,6 +79,19 @@ public class PreferencesDialog : Gtk.Dialog
     s3_table.attach(w, 1, 3, 0, 1,
                     Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                     Gtk.AttachOptions.FILL, 3, 3);
+    
+    w = new ConfigEntry(S3_ID_KEY);
+    label = new Gtk.Label("    %s".printf(_("S3 I_D:")));
+    label.set("mnemonic-widget", w,
+              "use-underline", true,
+              "xalign", 0.0f);
+    label_sizes.add_widget(label);
+    s3_table.attach(label, 0, 1, 1, 2,
+                    0, Gtk.AttachOptions.FILL, 3, 3);
+    s3_table.attach(w, 1, 3, 1, 2,
+                    Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
+                    Gtk.AttachOptions.FILL, 3, 3);
+    
     table.attach(s3_table, 0, 3, row, row + 1,
                  Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL,
                  0, 0);
@@ -87,7 +100,7 @@ public class PreferencesDialog : Gtk.Dialog
     
     var file_table = new Gtk.Table(1, 3, false);
     w = new ConfigFolder(FILE_PATH_KEY);
-    label = new Gtk.Label("    %s".printf(_("Folder:")));
+    label = new Gtk.Label("    %s".printf(_("_Folder:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "xalign", 0.0f);
