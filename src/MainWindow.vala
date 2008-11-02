@@ -113,7 +113,7 @@ public class MainWindow : Gtk.Window
   
   void do_backup()
   {
-    Backup back = new Backup();
+    var back = new OperationBackup();
     back.@ref();
     back.done += (b, s) => {
       b.unref();
@@ -136,7 +136,7 @@ public class MainWindow : Gtk.Window
   
   void do_restore()
   {
-    Restore rest = new Restore();
+    var rest = new OperationRestore();
     rest.@ref();
     rest.done += (b, s) => {
       b.unref();

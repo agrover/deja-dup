@@ -19,7 +19,6 @@ deja_dup_VALASOURCES = \
 	Backend.vala \
 	BackendFile.vala \
 	BackendS3.vala \
-	Backup.vala \
 	ConfigBackend.vala \
 	ConfigBool.vala \
 	ConfigChoice.vala \
@@ -30,8 +29,9 @@ deja_dup_VALASOURCES = \
 	Duplicity.vala \
 	MainWindow.vala \
 	Operation.vala \
+	OperationBackup.vala \
+	OperationRestore.vala \
 	PreferencesDialog.vala \
-	Restore.vala \
 	main.vala
 
 BUILT_SOURCES = \

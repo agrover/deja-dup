@@ -19,7 +19,7 @@
 
 using GLib;
 
-public class Restore : Operation
+public class OperationRestore : Operation
 {
   construct
   {

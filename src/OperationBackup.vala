@@ -23,7 +23,7 @@ errordomain BackupError {
   INTERNAL
 }
 
-public class Backup : Operation
+public class OperationBackup : Operation
 {
   construct
   {
