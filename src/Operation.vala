@@ -63,7 +63,7 @@ public abstract class Operation : Object
       dup.start(argv, envp);
   }
   
-  void operation_finished(Duplicity dup, bool success)
+  protected virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
     done(success);
   }

@@ -22,7 +22,7 @@ using GLib;
 [CCode (cheader_filename = "sys/wait.h")]
 public class Duplicity : Object
 {
-  public signal void done(bool success);
+  public signal void done(bool success, bool cancelled);
   
   public string? progress_label {get; set; default = null;}
   
@@ -100,6 +100,7 @@ public class Duplicity : Object
       Source.remove(timeout_id);
     
     bool success = Process.if_exited(status) && Process.exit_status(status) == 0;
+    bool cancelled = !Process.if_exited(status);
     
     if (stderr != null) {
       if (Process.if_exited(status)) {
@@ -134,7 +135,7 @@ public class Duplicity : Object
     
     Process.close_pid(pid);
     
-    done(success);
+    done(success, cancelled);
   }
   
   void handle_response(Gtk.Dialog dlg, int response)

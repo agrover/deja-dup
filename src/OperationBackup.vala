@@ -30,6 +30,21 @@ public class OperationBackup : Operation
     dup.progress_label = _("Backing up files...");
   }
   
+  protected override void operation_finished(Duplicity dup, bool success, bool cancelled)
+  {
+    if (cancelled) {
+      // We have to cleanup after aborted job 
+      var clean = new OperationCleanup();
+      clean.done += (b, s) => {Gtk.main_quit();};
+      
+      try {clean.start();}
+      catch (Error e) {printerr("%s\n", e.message);}
+      
+      Gtk.main();
+    }
+    done(success);
+  }
+  
   protected override string[]? make_argv() throws Error
   {
     var target = backend.get_location();

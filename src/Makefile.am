@@ -30,6 +30,7 @@ deja_dup_VALASOURCES = \
 	MainWindow.vala \
 	Operation.vala \
 	OperationBackup.vala \
+	OperationCleanup.vala \
 	OperationRestore.vala \
 	PreferencesDialog.vala \
 	main.vala
