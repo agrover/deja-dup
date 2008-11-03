@@ -49,9 +49,10 @@ public class OperationRestore : Operation
     if (source == null || target == null)
       return null;
     
-    string[] argv = new string[5];
+    string[] argv = new string[6];
     int i = 0;
     argv[i++] = "duplicity";
+    argv[i++] = "restore";
     if (!client.get_bool(ENCRYPT_KEY))
       argv[i++] = "--no-encryption";
     argv[i++] = target;
