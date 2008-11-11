@@ -45,12 +45,29 @@ public class Duplicity : Object
       progress.response += handle_response;
     }
     
-    var env_len = envp == null ? 0 : envp.length;
+    // Copy current environment, add custom variables
+    var myenv = Environment.list_variables();
+    int myenv_len = 0;
+    while (myenv[myenv_len] != null)
+      ++myenv_len;
+    
+    var env_len = myenv_len + (envp == null ? 0 : envp.length);
     string[] real_envp = new string[env_len + 1];
     int i = 0;
+    for (; i < myenv_len; ++i)
+      real_envp[i] = "%s=%s".printf(myenv[i], Environment.get_variable(myenv[i]));
     for (; i < env_len; ++i)
-      real_envp[i] = envp[i];
+      real_envp[i] = envp[i - myenv_len];
     real_envp[i] = null;
+    
+    // Open pipes to communicate with subprocess
+    if (pipe(pipes) != 0) {
+      done(false, false);
+      return;
+    }
+    
+    // Add always-there arguments
+    argv.append("--log-fd=%d".printf(pipes[1]));
     
     string cmd = null;
     string[] real_argv = new string[argv.length()];
@@ -64,12 +81,16 @@ public class Duplicity : Object
     }
     debug("Running the following duplicity command: %s", cmd);
     
-    int stderr_fd;
     Process.spawn_async_with_pipes(null, real_argv, real_envp,
-                        SpawnFlags.SEARCH_PATH | SpawnFlags.DO_NOT_REAP_CHILD,
-                        null, out child_pid, null, null, out stderr_fd);
+                        SpawnFlags.SEARCH_PATH |
+                        SpawnFlags.DO_NOT_REAP_CHILD |
+                        SpawnFlags.LEAVE_DESCRIPTORS_OPEN |
+                        SpawnFlags.STDOUT_TO_DEV_NULL |
+                        SpawnFlags.STDERR_TO_DEV_NULL,
+                        null, out child_pid, null, null, null);
     
-    stderr = new IOChannel.unix_new(stderr_fd);
+    reader = new IOChannel.unix_new(pipes[0]);
+    reader.add_watch(IOCondition.IN, read_stanza);
     
     this.timeout_id = Timeout.add(200, pulse);
     this.progress_bar.set_fraction(0); // Reset progress bar if this is second time we run this
@@ -83,16 +104,75 @@ public class Duplicity : Object
   Gtk.Dialog progress;
   Gtk.ProgressBar progress_bar;
   Pid child_pid;
-  IOChannel stderr;
+  int[] pipes;
+  IOChannel reader;
+  bool error_issued;
   construct {
     timeout_id = 0;
-    stderr = null;
+    reader = null;
+    pipes = new int[2];
+    pipes[0] = pipes[1] = -1;
+    error_issued = true;
+  }
+  
+  ~Duplicity() {
   }
   
   bool pulse()
   {
     progress_bar.pulse();
     return true;
+  }
+  
+  bool read_stanza(IOChannel channel, IOCondition cond)
+  {
+    string result;
+    int len;
+    try {
+      IOStatus status;
+      List<string> stanza = new List<string>();
+      while (true) {
+        status = channel.read_line(out result, null, null);
+        if (status == IOStatus.NORMAL && result != "\n")
+          stanza.append(result);
+        else
+          break;
+      }
+      
+      process_stanza(stanza);
+    }
+    catch (Error e) {
+      printerr("%s\n", e.message);
+    }
+    
+    return true;
+  }
+  
+  void process_stanza(List<string> stanza)
+  {
+    var firstline = stanza.data.split(" ");
+    var keyword = firstline[0];
+    if (keyword == "ERROR") {
+      var errorstr = grab_stanza_text(stanza);
+      error_issued = true;
+      
+      var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Error occurred"));
+      dlg.format_secondary_text("%s".printf(errorstr));
+      dlg.run();
+      dlg.destroy();
+    }
+  }
+  
+  string grab_stanza_text(List<string> stanza)
+  {
+    string text = "";
+    foreach (string line in stanza) {
+      if (line.has_prefix(". ")) {
+        var split = line.split(". ", 2);
+        text = "%s%s".printf(text, split[1]);
+      }
+    }
+    return text.chomp();
   }
   
   void spawn_finished(Pid pid, int status)
@@ -106,23 +186,17 @@ public class Duplicity : Object
     bool success = Process.if_exited(status) && Process.exit_status(status) == 0;
     bool cancelled = !Process.if_exited(status);
     
-    if (stderr != null) {
+    if (reader != null) {
       if (Process.if_exited(status)) {
         var exitval = Process.exit_status(status);
         debug("duplicity exited with value %i", exitval);
         
         if (exitval != 0) {
-          string errstr = null;
-          try {
-            stderr.read_to_end(out errstr, null);
-            errstr.strip();
-          } catch (Error e) {
-            printerr("%s\n", e.message);
-          }
+          if (!error_issued) {
+            var errorstr = _("Could not start duplicity.  It may not be installed.");
           
-          if (errstr != null) {
             var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Error occurred"));
-            dlg.format_secondary_text("%s".printf(errstr));
+            dlg.format_secondary_text("%s".printf(errorstr));
             dlg.run();
             dlg.destroy();
           }
@@ -130,11 +204,11 @@ public class Duplicity : Object
       }
       
       try {
-        stderr.shutdown(false);
+        reader.shutdown(false);
       } catch (Error e) {
         printerr("%s\n", e.message);
       }
-      stderr = null;
+      reader = null;
     }
     
     Process.close_pid(pid);
@@ -144,16 +218,8 @@ public class Duplicity : Object
   
   void handle_response(Gtk.Dialog dlg, int response)
   {
-    if (response == Gtk.ResponseType.CANCEL) {
-      // FIXME: No way in vala to kill a process(?), so we do a kill call... Gross
-      var cmd = "kill %i".printf((int)child_pid);
-      try {
-        Process.spawn_command_line_async(cmd);
-      }
-      catch (Error e) {
-        printerr("%s\n", e.message);
-      }
-    }
+    if (response == Gtk.ResponseType.CANCEL)
+      kill((int)child_pid, 15);
   }
 }
 
