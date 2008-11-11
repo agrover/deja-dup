@@ -26,20 +26,18 @@ public class OperationCleanup : Operation
     dup.progress_label = _("Cleaning up...");
   }
   
-  protected override string[]? make_argv() throws Error
+  protected override List<string>? make_argv() throws Error
   {
     var target = backend.get_location();
     
     if (target == null)
       return null;
     
-    string[] argv = new string[5];
-    int i = 0;
-    argv[i++] = "duplicity";
-    argv[i++] = "cleanup";
-    argv[i++] = "--force";
-    argv[i++] = target;
-    argv[i++] = null;
+    List<string> argv = new List<string>();
+    argv.append("duplicity");
+    argv.append("cleanup");
+    argv.append("--force");
+    argv.append(target);
     return argv;
   }
 }

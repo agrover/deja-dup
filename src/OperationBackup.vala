@@ -45,7 +45,7 @@ public class OperationBackup : Operation
     done(success);
   }
   
-  protected override string[]? make_argv() throws Error
+  protected override List<string>? make_argv() throws Error
   {
     var target = backend.get_location();
     if (target == null)
@@ -59,25 +59,24 @@ public class OperationBackup : Operation
                                                       GConf.ValueType.STRING));
     var options = backend.get_options();
     
-    string[] rv = new string[include_list.length + exclude_list.length + options.length + 6];
+    List<string> rv = new List<string>();
     int i = 0;
-    rv[i++] = "duplicity";
+    rv.append("duplicity");
     
     if (options != null) {
       for (int j = 0; j < options.length; ++j)
-        rv[i++] = options[j];
+        rv.append(options[j]);
     }
     
     if (!client.get_bool(ENCRYPT_KEY))
-      rv[i++] = "--no-encryption";
+      rv.append("--no-encryption");
     foreach (File s in exclude_list)
-      rv[i++] = "--exclude=%s".printf(s.get_path());
+      rv.append("--exclude=%s".printf(s.get_path()));
     foreach (File s in include_list)
-      rv[i++] = "--include=%s".printf(s.get_path());
-    rv[i++] = "--exclude=**";
-    rv[i++] = "/";
-    rv[i++] = target;
-    rv[i++] = null;
+      rv.append("--include=%s".printf(s.get_path()));
+    rv.append("--exclude=**");
+    rv.append("/");
+    rv.append(target);
     
     return rv;
   }

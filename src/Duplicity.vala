@@ -26,7 +26,7 @@ public class Duplicity : Object
   
   public string? progress_label {get; set; default = null;}
   
-  public void start(string[] argv, string[]? envp) throws SpawnError
+  public void start(List<string> argv, string[]? envp) throws SpawnError
   {
     if (progress_label != null && progress == null) {
       progress = new Gtk.Dialog.with_buttons("", toplevel,
@@ -53,15 +53,19 @@ public class Duplicity : Object
     real_envp[i] = null;
     
     string cmd = null;
-    foreach(string a in argv)
+    string[] real_argv = new string[argv.length()];
+    i = 0;
+    foreach(string a in argv) {
+      real_argv[i++] = a;
       if (cmd == null)
         cmd = a;
       else if (a != null)
         cmd = "%s %s".printf(cmd, a);
+    }
     debug("Running the following duplicity command: %s", cmd);
     
     int stderr_fd;
-    Process.spawn_async_with_pipes(null, argv, real_envp,
+    Process.spawn_async_with_pipes(null, real_argv, real_envp,
                         SpawnFlags.SEARCH_PATH | SpawnFlags.DO_NOT_REAP_CHILD,
                         null, out child_pid, null, null, out stderr_fd);
     

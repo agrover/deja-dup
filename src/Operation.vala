@@ -40,7 +40,7 @@ public abstract class Operation : Object
     }
     
     dup.done += operation_finished;
-    string[]? argv = make_argv();
+    List<string> argv = make_argv();
     if (argv == null)
       return;
     string[]? envp = backend.get_envp();
@@ -68,7 +68,7 @@ public abstract class Operation : Object
     done(success);
   }
   
-  protected abstract string[]? make_argv() throws Error;
+  protected abstract List<string>? make_argv() throws Error;
   
   void found_passphrase(GnomeKeyring.Result result, string? str)
   {

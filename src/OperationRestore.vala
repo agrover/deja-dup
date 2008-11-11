@@ -26,7 +26,7 @@ public class OperationRestore : Operation
     dup.progress_label = _("Restoring files...");
   }
   
-  protected override string[]? make_argv() throws Error
+  protected override List<string>? make_argv() throws Error
   {
     var client = GConf.Client.get_default();
     
@@ -49,15 +49,13 @@ public class OperationRestore : Operation
     if (source == null || target == null)
       return null;
     
-    string[] argv = new string[6];
-    int i = 0;
-    argv[i++] = "duplicity";
-    argv[i++] = "restore";
+    List<string> argv = new List<string>();
+    argv.append("duplicity");
+    argv.append("restore");
     if (!client.get_bool(ENCRYPT_KEY))
-      argv[i++] = "--no-encryption";
-    argv[i++] = target;
-    argv[i++] = source;
-    argv[i++] = null;
+      argv.append("--no-encryption");
+    argv.append(target);
+    argv.append(source);
     return argv;
   }
 }
