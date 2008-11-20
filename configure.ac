@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 
 # Sets up autoconf.
-AC_INIT([Déjà Dup],[1.0],[mike@mterry.name],[deja-dup])
+AC_INIT([Déjà Dup],[2.0],[mike@mterry.name],[deja-dup])
 AC_PREREQ([2.53])
 AC_CONFIG_SRCDIR(src/MainWindow.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
