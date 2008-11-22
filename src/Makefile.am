@@ -28,6 +28,7 @@ deja_dup_VALASOURCES = \
 	ConfigList.vala \
 	ConfigWidget.vala \
 	Duplicity.vala \
+	DuplicityInfo.vala \
 	MainWindow.vala \
 	Operation.vala \
 	OperationBackup.vala \

@@ -95,8 +95,17 @@ public class MainWindow : Gtk.Window
     
     add (vb);
     
+    Idle.add(check_duplicity_version);
+    
     destroy += Gtk.main_quit;
   }
+  
+  bool check_duplicity_version()
+  {
+    DuplicityInfo.check_duplicity_version(this);
+    return false;
+  }
+  
   
   void show_success(string label, string desc)
   {
