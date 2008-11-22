@@ -1,0 +1,311 @@
+# Hebrew translation for deja-dup
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the deja-dup package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: deja-dup\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-10-16 11:53-0400\n"
+"PO-Revision-Date: 2008-11-08 11:47+0000\n"
+"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
+"Language-Team: Hebrew <he@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2008-11-22 15:48+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../data/deja-dup.desktop.in.h:1
+msgid "Backup your files"
+msgstr "גיבוי הקבצים שלך"
+
+#: ../data/deja-dup.desktop.in.h:2
+msgid "Déjà Dup Backup Utility"
+msgstr "כלי הגיבוי Déjà Dup"
+
+#: ../data/deja-dup.schemas.in.h:1
+msgid "Amazon S3 Key ID"
+msgstr "מזהה מפתח Amazon S3"
+
+#: ../data/deja-dup.schemas.in.h:2
+msgid "Directories not to backup"
+msgstr "תיקיות שאין לגבות"
+
+#: ../data/deja-dup.schemas.in.h:3
+msgid "Directories to backup"
+msgstr "תיקיות לגיבוי"
+
+#: ../data/deja-dup.schemas.in.h:4
+msgid "Folder on your system in which to hold the backup files."
+msgstr "תיקייה במערכת שלך בה ישמרו קבצי הגיבוי."
+
+#: ../data/deja-dup.schemas.in.h:5
+msgid "Local backup location"
+msgstr "מיקום הגיבוי המקומי"
+
+#: ../data/deja-dup.schemas.in.h:6
+msgid "The Amazon S3 bucket name to use"
+msgstr "שם דלי ה־Amazon S3 לשימוש"
+
+#: ../data/deja-dup.schemas.in.h:7
+msgid ""
+"The protocol used for the backup location. Valid values are 's3' or 'file'."
+msgstr ""
+"הפרוטוקול המשמש למיקום הגיבוי. ערכים מורשים לדוגמה הינם 's3' או 'file'."
+
+#: ../data/deja-dup.schemas.in.h:8
+msgid ""
+"This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
+"$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+"and $VIDEO are recognized as the user's special directories. Relative "
+"entries are relative to the user's home directory."
+msgstr ""
+"רשימת תיקיות זו לא תגובה. הערכים השמורים $HOME, $DESKTOP, $DOCUMENTS, "
+"$DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, ו־$VIDEO "
+"הינם מזוהים כתיקיות משתמש מיוחדות. רשומות יחסיות הינן ביחס לתיקיית הבית של "
+"המשתמש."
+
+#: ../data/deja-dup.schemas.in.h:9
+msgid ""
+"This list of directories will not be backed up. Reserved values $HOME, "
+"$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user's special "
+"directories. Relative entries are relative to the user's home directory. "
+"This list takes precedence over the include list."
+msgstr ""
+"התיקיות ברשימה זו לא יגובו. הערכים השמורים הינם $HOME, $DESKTOP, $DOCUMENTS, "
+"$DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, ו־$VIDEO "
+"הינם מזוהים כתיקיות המשתמש המיוחדות. רשומות יחסיות הינן יחסיות לתיקיית הבית "
+"של המשתמש. רשימה זו מועדפת על פני רשימת ההכללה."
+
+#: ../data/deja-dup.schemas.in.h:10
+msgid "Type of location to store backup"
+msgstr "סוג המיקום לשמירת גיבוי"
+
+#: ../data/deja-dup.schemas.in.h:11
+msgid "Whether to encrypt your backup"
+msgstr "האם להצפין את הגיבוי"
+
+#: ../data/deja-dup.schemas.in.h:12
+msgid ""
+"Whether to encrypt your backup files in the storage location. It's strongly "
+"recommended to leave this as 'true'."
+msgstr ""
+"האם יש להצפין את קבצי הגיבוי שלך במיקום האיחסון. מומלץ בחום להשאיר ערך זה "
+"כ־'אמת'."
+
+#: ../data/deja-dup.schemas.in.h:13
+msgid ""
+"Which Amazon S3 bucket to store files in. This does not need to exist "
+"already. Only legal hostname strings are valid."
+msgstr ""
+"באיזה דלי של Amazon S3 יש לאחסן את הקבצים. הדלי לא חייב להיות מבעוד מועד. רק "
+"מחרוזות שם מארח חוקיות הן תקניות."
+
+#: ../data/deja-dup.schemas.in.h:14
+msgid "Your Amazon S3 Key identifier. This acts as your S3 username."
+msgstr "מזהה מפתח ה־Amazon S3. המזהה מהווה שם המשתמש שלך ב־S3"
+
+#: ../src/BackendFile.vala:31
+msgid "Choose backup destination"
+msgstr "בחר את יעד הגיבוי"
+
+#. Ask user
+#: ../src/BackendS3.vala:79
+msgid "Amazon S3 Password"
+msgstr "סיסמת Amazon S3"
+
+#: ../src/BackendS3.vala:80
+msgid ""
+"Enter your Amazon Web Services user ID and secret key.  This is not the same "
+"as your amazon.com username and password."
+msgstr ""
+"הזן את מזהה המשתמש שלך והמפתח הסודי בשירותים המקוונים של Amazon. אלו אינם "
+"הפרטים בהם אתה משתמש להתחברות לאתר amazon.com."
+
+#: ../src/Backup.vala:30
+msgid "Backing up files..."
+msgstr "מגבה קבצים..."
+
+#: ../src/Backup.vala:37
+msgid "Could not connect to backup location"
+msgstr "לא ניתן להתחבר אל מיקום הגיבוי"
+
+#: ../src/ConfigBackend.vala:34
+msgid "Amazon S3"
+msgstr "Amazon S3"
+
+#: ../src/ConfigBackend.vala:35
+msgid "Local Folder"
+msgstr "תיקייה מקומית"
+
+#: ../src/ConfigFolder.vala:31
+msgid "Select Folder"
+msgstr "בחר תיקייה"
+
+#: ../src/ConfigList.vala:88
+msgid "Home Folder"
+msgstr "תיקיית הבית"
+
+#: ../src/ConfigList.vala:90
+msgid "Trash"
+msgstr "אשפה"
+
+#: ../src/ConfigList.vala:128
+msgid "Choose folder"
+msgstr "בחר תיקייה"
+
+#: ../src/ConfigList.vala:162
+msgid "Could not add the folder"
+msgstr "לא ניתן להוסיף את התיקייה"
+
+#: ../src/Duplicity.vala:119
+msgid "Error occurred"
+msgstr "ארעה שגיאה"
+
+#: ../src/main.vala:83
+#, c-format
+msgid "Could not display %s"
+msgstr "לא ניתן להציג את %s"
+
+#. to open display ('cause we passed false above)
+#. Translators: The name is a play on the French phrase "déjà vu" meaning
+#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
+#. context is itself a reference to both the underlying command line tool
+#. "duplicity" and the act of duplicating data for backup.  As a whole, it
+#. may not be very translatable.
+#: ../src/main.vala:112
+msgid "Déjà Dup"
+msgstr "Déjà Dup"
+
+#: ../src/MainWindow.vala:121
+msgid "Backup finished"
+msgstr "הגיבוי הסתיים"
+
+#: ../src/MainWindow.vala:121
+msgid "Your files were successfully backed up."
+msgstr "הקבצים שלך גובו בהצלחה."
+
+#: ../src/MainWindow.vala:144
+msgid "Restore finished"
+msgstr "השיחזור הושלם"
+
+#: ../src/MainWindow.vala:144
+msgid "Your files were successfully restored."
+msgstr "הקבצים שלך שוחזרו בהצלחה."
+
+#: ../src/MainWindow.vala:180
+msgid "About Déjà Dup"
+msgstr "אודות Déjà Dup"
+
+#: ../src/MainWindow.vala:182
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Yaron https://launchpad.net/~sh-yaron"
+
+#: ../src/MainWindow.vala:188
+#, c-format
+msgid ""
+"This program is free software; you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation; either version 3 of the License, or (at your option) "
+"any later version."
+msgstr ""
+"תוכנה זו הינה תוכנה חופשית; תוכל להפיץ אותה מחדש ו/או לשנותה תחת תנאי הרשיון "
+"הציבורי הכללי של GNU כפי שפורסם על ידי קרן התוכנה החופשית; ניתן לפעול לפי "
+"גירסה 3, או (לבחירתך) בכל גירסה מאוחרת יותר."
+
+#: ../src/MainWindow.vala:189
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details."
+msgstr ""
+"תוכנה זו מופצת בתקווה שתהיה שימושית, אך ללא כל אחריות; אפילו לא אחריות "
+"מרומזת למסחר או התאמה לצרכים מסויימים. אנא פנה לרשיון הציבורי הכללי של GNU "
+"לפרטים נוספים."
+
+#: ../src/MainWindow.vala:190
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program; if not, write to the Free Software Foundation, Inc., 59 Temple "
+"Place - Suite 330, Boston, MA  02111-1307, USA."
+msgstr ""
+"יחד עם תוכנית זו היית אמור לקבל עותק של הרישיון הציבורי הכללי של GNU; במידה "
+"ולא, כתוב אל Free Software Foundation, Inc., 59 Temple Place, Suite 330, "
+"Boston, , MA 02111-1307, USA."
+
+#: ../src/MainWindow.vala:218
+msgid "_File"
+msgstr "_קובץ"
+
+#: ../src/MainWindow.vala:221
+msgid "_Backup"
+msgstr "_גיבוי"
+
+#: ../src/MainWindow.vala:227
+msgid "_Restore"
+msgstr "_שחזר"
+
+#: ../src/MainWindow.vala:237
+msgid "_Edit"
+msgstr "_ערוך"
+
+#: ../src/MainWindow.vala:244
+msgid "_Help"
+msgstr "ע_זרה"
+
+#. Ask user
+#: ../src/Operation.vala:95
+msgid "Encryption Password"
+msgstr "סיסמת הצפנה"
+
+#: ../src/Operation.vala:96
+msgid "Enter the password used to encrypt your backup files."
+msgstr "הזן את הסיסמה המשמשת להצפנת קבצי הגיבוי שלך."
+
+#: ../src/Operation.vala:113
+msgid "Déjà Dup backup passphrase"
+msgstr "מילת הצופן של גיבוי ה־Déjà Dup"
+
+#: ../src/PreferencesDialog.vala:33
+msgid "Déjà Dup Preferences"
+msgstr "העדפות Déjà Dup"
+
+#: ../src/PreferencesDialog.vala:49
+msgid "_Backup location:"
+msgstr "_מיקום הגיבוי:"
+
+#: ../src/PreferencesDialog.vala:72
+#, c-format
+msgid "S3 b_ucket:"
+msgstr "_דלי S3:"
+
+#: ../src/PreferencesDialog.vala:90
+#, c-format
+msgid "Folder:"
+msgstr "תיקייה:"
+
+#: ../src/PreferencesDialog.vala:107
+msgid "I_nclude:"
+msgstr "ה_כללה:"
+
+#: ../src/PreferencesDialog.vala:121
+msgid "E_xclude:"
+msgstr "הוצאה מה_כלל:"
+
+#: ../src/PreferencesDialog.vala:134
+msgid "_Encrypt backup files"
+msgstr "ה_צפן קבצי גיבוי"
+
+#: ../src/Restore.vala:26
+msgid "Restoring files..."
+msgstr "משחזר קבצים..."
+
+#: ../src/Restore.vala:33
+msgid "Choose destination for restored files"
+msgstr "בחר את יעד הקבצים המשוחזרים"
