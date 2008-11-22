@@ -90,7 +90,8 @@ public class Duplicity : Object
                         null, out child_pid, null, null, null);
     
     reader = new IOChannel.unix_new(pipes[0]);
-    reader.add_watch(IOCondition.IN, read_stanza);
+    stanza_id = reader.add_watch(IOCondition.IN, read_stanza);
+    close(pipes[1]);
     
     this.timeout_id = Timeout.add(200, pulse);
     this.progress_bar.set_fraction(0); // Reset progress bar if this is second time we run this
@@ -101,6 +102,7 @@ public class Duplicity : Object
   }
   
   uint timeout_id;
+  uint stanza_id;
   Gtk.Dialog progress;
   Gtk.ProgressBar progress_bar;
   Pid child_pid;
@@ -113,9 +115,6 @@ public class Duplicity : Object
     pipes = new int[2];
     pipes[0] = pipes[1] = -1;
     error_issued = true;
-  }
-  
-  ~Duplicity() {
   }
   
   bool pulse()
@@ -183,6 +182,9 @@ public class Duplicity : Object
     if (timeout_id != 0)
       Source.remove(timeout_id);
     
+    if (stanza_id != 0)
+      Source.remove(stanza_id);
+    
     bool success = Process.if_exited(status) && Process.exit_status(status) == 0;
     bool cancelled = !Process.if_exited(status);
     
@@ -194,7 +196,7 @@ public class Duplicity : Object
         if (exitval != 0) {
           if (!error_issued) {
             var errorstr = _("Could not start duplicity.  It may not be installed.");
-          
+            
             var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Error occurred"));
             dlg.format_secondary_text("%s".printf(errorstr));
             dlg.run();

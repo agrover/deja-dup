@@ -20,6 +20,9 @@
 [CCode (cheader_filename = "unistd.h"), NoArrayLength]
 int pipe(int[] fildes);
 
+[CCode (cheader_filename = "unistd.h")]
+int close(int fildes);
+
 [CCode (cheader_filename = "sys/types.h,signal.h")]
 int kill(int pid, int sig);
 
