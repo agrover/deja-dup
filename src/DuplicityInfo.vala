@@ -25,7 +25,7 @@ public class DuplicityInfo : Object
   public static const int REQUIRED_MINOR = 5;
   public static const int REQUIRED_MICRO = 3;
 
-  public bool has_progress {get; private set; default = false; };
+  public bool has_progress {get; private set; default = false; }
   
   static DuplicityInfo info = null;
   public static DuplicityInfo get_default() {
