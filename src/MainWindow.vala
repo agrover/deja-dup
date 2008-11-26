@@ -102,7 +102,7 @@ public class MainWindow : Gtk.Window
   
   bool check_duplicity_version()
   {
-    DuplicityInfo.check_duplicity_version(this);
+    DuplicityInfo.get_default().check_duplicity_version(this);
     return false;
   }
   

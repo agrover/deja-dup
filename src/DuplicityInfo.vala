@@ -21,13 +21,22 @@ using GLib;
 
 public class DuplicityInfo : Object
 {
-  public static const int required_major = 0;
-  public static const int required_minor = 5;
-  public static const int required_micro = 3;
+  public static const int REQUIRED_MAJOR = 0;
+  public static const int REQUIRED_MINOR = 5;
+  public static const int REQUIRED_MICRO = 3;
+
+  public bool has_progress {get; private set; default = false; };
+  
+  static DuplicityInfo info = null;
+  public static DuplicityInfo get_default() {
+    if (info == null)
+      info = new DuplicityInfo();
+    return info;
+  }
   
   // Returns true if everything is OK.  If false, program will close.  A dialog
   // will already have been thrown up.
-  public static bool check_duplicity_version(Gtk.Window parent) {
+  public bool check_duplicity_version(Gtk.Window parent) {
     string stdout;
     
     try {
@@ -65,22 +74,30 @@ public class DuplicityInfo : Object
       show_bad_version_error(parent);
       return false;
     }
+    
+    if (meets_version(0, 5, 4))
+      has_progress = true;
+    
     return true;
   }
   
-  static string version_string = null;
-  static int major = 0;
-  static int minor = 0;
-  static int micro = 0;
+  string version_string = null;
+  int major = 0;
+  int minor = 0;
+  int micro = 0;
   
-  // Doesn't yet handle a blacklist of versions.  We'll cross that bridge when we come to it
-  static bool meets_requirements() {
-    return (major > required_major) ||
-           (major == required_major && minor > required_minor) ||
-           (major == required_major && minor == required_minor && micro >= required_micro);
+  bool meets_version(int vmaj, int vmin, int vmic) {
+    return (major > vmaj) ||
+           (major == vmaj && minor > vmin) ||
+           (major == vmaj && minor == vmin && micro >= vmic);
   }
   
-  static void show_missing_duplicity_error(Gtk.Window parent, string? msg_in) {
+  // Doesn't yet handle a blacklist of versions.  We'll cross that bridge when we come to it
+  bool meets_requirements() {
+    return meets_version(REQUIRED_MAJOR, REQUIRED_MINOR, REQUIRED_MICRO);
+  }
+  
+  void show_missing_duplicity_error(Gtk.Window parent, string? msg_in) {
     Gtk.MessageDialog dlg = new Gtk.MessageDialog (parent,
         Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL,
         Gtk.MessageType.ERROR,
@@ -101,13 +118,13 @@ public class DuplicityInfo : Object
     Gtk.main_quit();
   }
   
-  static void show_bad_version_error(Gtk.Window parent) {
+  void show_bad_version_error(Gtk.Window parent) {
     Gtk.MessageDialog dlg = new Gtk.MessageDialog (parent,
         Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL,
         Gtk.MessageType.ERROR,
         Gtk.ButtonsType.OK,
         _("Duplicity's version is too old"));
-    dlg.format_secondary_text(_("Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found version %d.%d.%.2d").printf(required_major, required_minor, required_micro, major, minor, micro));
+    dlg.format_secondary_text(_("Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found version %d.%d.%.2d").printf(REQUIRED_MAJOR, REQUIRED_MINOR, REQUIRED_MICRO, major, minor, micro));
     dlg.run();
     dlg.destroy();
     Gtk.main_quit();
