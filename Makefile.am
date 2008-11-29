@@ -1,4 +1,4 @@
-SUBDIRS = data po vapi libdeja-dup monitor preferences deja-dup
+SUBDIRS = data po vapi libdeja-dup applet monitor preferences deja-dup
 
 # Distribute pot file
 dist-hook:

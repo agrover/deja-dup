@@ -45,19 +45,25 @@ public abstract class Operation : Object
     
     dup.done += operation_finished;
     List<string> argv = make_argv();
-    if (argv == null)
+    if (argv == null) {
+      done(false);
       return;
+    }
     string[]? envp = backend.get_envp();
-    if (envp == null)
+    if (envp == null) {
+      done(false);
       return;
+    }
     
     // Get encryption passphrase if needed
     var client = GConf.Client.get_default();
     if (client.get_bool(ENCRYPT_KEY)) {
       string[] real_envp = new string[envp.length + 1];
       
-      if (!get_passphrase())
+      if (!get_passphrase()) {
+        done(false);
         return;
+      }
       real_envp[0] = "PASSPHRASE=%s".printf(passphrase);
       for (int i = 0; i < envp.length; ++i)
         real_envp[i + 1] = envp[i];
