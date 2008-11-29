@@ -1,4 +1,4 @@
-SUBDIRS = data src po vapi
+SUBDIRS = data monitor src po vapi
 
 # Grabs all the latest po files from translationproject.org
 fetch-po:

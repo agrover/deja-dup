@@ -12,7 +12,7 @@ VALA_CFLAGS = \
   --pkg config
 
 AM_CFLAGS = \
-  $(GTK_CFLAGS) \
+  $(DUP_CFLAGS) \
   $(DEBUG_CFLAGS) \
   -DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
@@ -55,7 +55,7 @@ else
 	@exit 1
 endif
 
-deja_dup_LDADD = $(GTK_LIBS) @INTLLIBS@
+deja_dup_LDADD = $(DUP_LIBS) @INTLLIBS@
 
 EXTRA_DIST = deja-dup.stamp
 DISTCLEANFILES = \

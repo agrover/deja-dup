@@ -11,11 +11,13 @@ dist_schema_DATA = $(schema_in_file:.schemas.in=.schemas)
 
 @INTLTOOL_DESKTOP_RULE@
 desktopdir = $(datadir)/applications
-desktop_in_file = deja-dup.desktop.in
-dist_desktop_DATA = $(desktop_in_file:.desktop.in=.desktop)
+dist_desktop_DATA = deja-dup.desktop
 
-EXTRA_DIST = deja-dup.schemas.in deja-dup.desktop.in
-DISTCLEANFILES = deja-dup.schemas deja-dup.desktop
+autostartdir = $(sysconfdir)/xdg/autostart
+dist_autostart_DATA = deja-dup-monitor.desktop
+
+EXTRA_DIST = deja-dup.schemas.in deja-dup.desktop.in deja-dup-monitor.desktop.in
+DISTCLEANFILES = deja-dup.schemas deja-dup.desktop deja-dup-monitor.desktop
 
 if GCONF_SCHEMAS_INSTALL
 install-data-local:

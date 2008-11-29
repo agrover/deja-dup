@@ -40,6 +40,41 @@
     </schema>
 
     <schema>
+      <key>/schemas/apps/deja-dup/last-run</key>
+      <applyto>/apps/deja-dup/last-run</applyto>
+      <owner>deja-dup</owner>
+      <type>string</type>
+      <locale name="C">
+        <short>The last time Déjà Dup was run</short>
+        <long>The last time Déjà Dup was run, in ISO 8601 format.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/periodic</key>
+      <applyto>/apps/deja-dup/periodic</applyto>
+      <owner>deja-dup</owner>
+      <type>bool</type>
+      <default>false</default>
+      <locale name="C">
+        <short>Whether to periodically backup</short>
+        <long>Whether to automatically backup on a regular schedule.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/periodic-period</key>
+      <applyto>/apps/deja-dup/periodic-period</applyto>
+      <owner>deja-dup</owner>
+      <type>int</type>
+      <default>7</default>
+      <locale name="C">
+        <short>How often to periodically backup</short>
+        <long>The number of days between backups.</long>
+      </locale>
+    </schema>
+
+    <schema>
       <key>/schemas/apps/deja-dup/backend</key>
       <applyto>/apps/deja-dup/backend</applyto>
       <owner>deja-dup</owner>

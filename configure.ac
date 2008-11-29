@@ -39,9 +39,13 @@ AC_DEFINE_UNQUOTED(THEME_DIR, "${PREFIX}/${DATADIRNAME}/icons",[Icon directory])
 AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package data directory])
 
 # Check dependencies
-PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.14 gio-2.0 gconf-2.0 libgnomeui-2.0 gnome-keyring-1)
-AC_SUBST(GTK_CFLAGS)
-AC_SUBST(GTK_LIBS)
+PKG_CHECK_MODULES(DUP, gtk+-2.0 >= 2.14 gio-2.0 gconf-2.0 libgnomeui-2.0 gnome-keyring-1)
+AC_SUBST(DUP_CFLAGS)
+AC_SUBST(DUP_LIBS)
+
+PKG_CHECK_MODULES(MONITOR, gconf-2.0)
+AC_SUBST(MONITOR_CFLAGS)
+AC_SUBST(MONITOR_LIBS)
 
 # Determines if we're debugging.
 AC_ARG_ENABLE(debug,
@@ -56,6 +60,11 @@ fi
 AC_SUBST(DEBUG_CFLAGS)
 
 # Sets up output files.
-AC_CONFIG_FILES([Makefile data/Makefile src/Makefile po/Makefile.in vapi/Makefile])
+AC_CONFIG_FILES([Makefile
+                 data/Makefile
+                 monitor/Makefile
+                 src/Makefile
+                 po/Makefile.in
+                 vapi/Makefile])
 AC_OUTPUT
 
