@@ -19,7 +19,7 @@
 
 using GLib;
 
-public class ConfigBool : ConfigWidget
+public class ConfigBool : ConfigWidget, Togglable
 {
   public string label {get; construct;}
   
@@ -28,6 +28,8 @@ public class ConfigBool : ConfigWidget
     this.key = key;
     this.label = label;
   }
+  
+  public bool get_active() {return button.get_active();}
   
   Gtk.CheckButton button;
   construct {
@@ -57,6 +59,8 @@ public class ConfigBool : ConfigWidget
     catch (Error e) {
       printerr("%s\n", e.message);
     }
+    
+    toggled();
   }
 }
 

@@ -17,15 +17,36 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-[CCode (cheader_filename = "unistd.h"), NoArrayLength]
-int pipe(int[] fildes);
+using GLib;
 
-[CCode (cheader_filename = "unistd.h")]
-int close(int fildes);
+public interface Togglable : Object
+{
+  public signal void toggled();
+  public abstract bool get_active();
+}
 
-[CCode (cheader_filename = "sys/types.h,signal.h")]
-int kill(int pid, int sig);
-
-[CCode (cheader_filename = "libintl.h")]
-weak string ngettext(string msgid, string msgid_plural, ulong n);
+public class ToggleGroup : Object
+{
+  public Togglable toggle {get; construct;}
+  
+  public ToggleGroup(Togglable toggle) {
+    this.toggle = toggle;
+  }
+  
+  List<Gtk.Widget> dependents;
+  public void add_dependent(Gtk.Widget w) {
+    dependents.append(w);
+  }
+  
+  public void check()
+  {
+    bool on = toggle.get_active();
+    foreach (Gtk.Widget w in dependents)
+      w.set_sensitive(on);
+  }
+  
+  construct {
+    toggle.toggled += (t) => {check();};
+  }
+}
 

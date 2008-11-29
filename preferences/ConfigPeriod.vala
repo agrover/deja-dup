@@ -19,64 +19,56 @@
 
 using GLib;
 
-public class ConfigChoice : ConfigWidget
+public class ConfigPeriod : ConfigChoice
 {
-  public signal void changed(string val);
+  public ConfigPeriod(string key) {
+    this.key = key;
+  }
   
-  protected Gtk.ComboBox combo;
   construct {
-    combo = new Gtk.ComboBox.text();
-    add(combo);
-  }
-  
-  // Subclasses use this to setup the choice list
-  protected int gconf_col;
-  public void init(Gtk.TreeModel model, int gconf_col)
-  {
-    combo.model = model;
-    this.gconf_col = gconf_col;
+    var store = new Gtk.ListStore(2, typeof(string), typeof(int));
     
-    combo.changed += handle_changed;
-    
-    set_from_config();
-  }
-  
-  public Value? get_current_value()
-  {
     Gtk.TreeIter iter;
-    if (combo.get_active_iter(out iter)) {
-      Value val;
-      combo.model.get_value(iter, gconf_col, ref val);
-      return val;
-    }
-    return null;
+    int i = 0;
+    
+    store.insert_with_values(out iter, i++, 0, _("Daily"), 1, 1);
+    store.insert_with_values(out iter, i++, 0, _("Weekly"), 1, 7);
+    // Translators: Biweekly is every two weeks
+    store.insert_with_values(out iter, i++, 0, _("Biweekly"), 1, 14);
+    store.insert_with_values(out iter, i++, 0, _("Monthly"), 1, 28);
+    
+    store.set_sort_column_id(1, Gtk.SortType.ASCENDING);
+    
+    init(store, 1);
   }
   
-  protected virtual void handle_changed()
+  protected override void handle_changed()
   {
     Value? val = get_current_value();
-    string strval = val == null ? "" : val.get_string();
+    int intval = val == null ? 1 : val.get_int();
     
     try {
-        client.set_string(key, strval);
+        client.set_int(key, intval);
     }
     catch (Error e) {
       printerr("%s\n", e.message);
     }
     
-    changed(strval);
+    changed(intval.to_string());
   }
   
   protected override void set_from_config()
   {
-    string confval;
+    int confval;
     try {
-        confval = client.get_string(key);
+        confval = client.get_int(key);
     }
     catch (Error e) {
       printerr("%s\n", e.message);
       return;
     }
+    if (confval < 1)
+      confval = 1;
     
     bool valid;
     Gtk.TreeIter iter;
@@ -85,13 +77,23 @@ public class ConfigChoice : ConfigWidget
     while (valid) {
       Value val;
       combo.model.get_value(iter, gconf_col, ref val);
-      string strval = val.get_string();
+      int intval = val.get_int();
       
-      if (strval == confval) {
+      if (intval == confval) {
         combo.set_active_iter(iter);
         break;
       }
       valid = combo.model.iter_next(ref iter);
+    }
+    
+    // If we didn't find the period, user must have set it to something non
+    // standard.  Let's add an entry to the combo.
+    if (!valid) {
+      var store = (Gtk.ListStore)combo.model;
+      store.insert_with_values(out iter, 0, 0,
+                               ngettext("Every %d day", "Every %d days", confval).printf(confval),
+                               1, confval);
+      combo.set_active_iter(iter);
     }
   }
 }

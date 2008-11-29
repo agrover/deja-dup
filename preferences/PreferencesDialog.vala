@@ -27,6 +27,7 @@ public class PreferencesDialog : Gtk.Dialog
   List<Gtk.Widget>[] backend_widgets;
   
   Gtk.SizeGroup label_sizes;
+  ToggleGroup periodic_toggle;
   
   public PreferencesDialog(Gtk.Window? parent = null) {
     transient_for = parent;
@@ -153,7 +154,32 @@ public class PreferencesDialog : Gtk.Dialog
                  Gtk.AttachOptions.FILL, 3, 3);
     ++row;
     
-    handle_backend_changed(backend, backend.get_current_value());
+    ConfigBool periodic_check = new ConfigBool(DejaDup.PERIODIC_KEY, _("_Automatically backup on a regular schedule"));
+    table.attach(periodic_check, 0, 3, row, row + 1,
+                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
+                 Gtk.AttachOptions.FILL, 3, 3);
+    ++row;
+    
+    w = new ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
+    label = new Gtk.Label("    %s".printf(_("How _often to backup:")));
+    label.set("mnemonic-widget", backend,
+              "use-underline", true,
+              "xalign", 0.0f);
+    label_sizes.add_widget(label);
+    table.attach(label, 0, 1, row, row + 1,
+                 0, Gtk.AttachOptions.FILL, 3, 3);
+    table.attach(w, 1, 3, row, row + 1,
+                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
+                 Gtk.AttachOptions.FILL,
+                 3, 3);
+    periodic_toggle = new ToggleGroup(periodic_check);
+    periodic_toggle.add_dependent(label);
+    periodic_toggle.add_dependent(w);
+    periodic_toggle.check();
+    ++row;
+    
+    Value val = backend.get_current_value();
+    handle_backend_changed(backend, val.get_string());
     vbox.add(table);
   }
   
