@@ -19,12 +19,19 @@
 
 using GLib;
 
+namespace DejaDup {
+
 [CCode (cheader_filename = "sys/wait.h")]
 public class Duplicity : Object
 {
   public signal void done(bool success, bool cancelled);
   
+  public Gtk.Window toplevel {get; construct;}
   public string? progress_label {get; set; default = null;}
+  
+  public Duplicity(Gtk.Window? win) {
+    toplevel = win;
+  }
   
   public void start(List<string> argv, string[]? envp) throws SpawnError
   {
@@ -224,4 +231,6 @@ public class Duplicity : Object
       kill((int)child_pid, 15);
   }
 }
+
+} // end namespace
 

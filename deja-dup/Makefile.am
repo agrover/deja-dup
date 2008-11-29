@@ -1,47 +1,32 @@
 bin_PROGRAMS = deja-dup
 
 VALA_CFLAGS = \
+  --vapidir $(top_srcdir)/libdeja-dup \
   --vapidir $(top_srcdir)/vapi \
   --pkg gtk+-2.0 \
   --pkg gio-2.0 \
   --pkg gconf-2.0 \
   --pkg libgnomeui-2.0 \
   --pkg gnome-keyring-1 \
+  --pkg libdeja-dup \
   --pkg PassphraseSchema \
   --pkg unix \
   --pkg config
 
 AM_CFLAGS = \
+  -I$(top_srcdir)/libdeja-dup \
   $(DUP_CFLAGS) \
   $(DEBUG_CFLAGS) \
   -DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 deja_dup_VALASOURCES = \
-	Backend.vala \
-	BackendFile.vala \
-	BackendS3.vala \
-	ConfigBackend.vala \
-	ConfigBool.vala \
-	ConfigChoice.vala \
-	ConfigEntry.vala \
-	ConfigFolder.vala \
-	ConfigList.vala \
-	ConfigWidget.vala \
-	Duplicity.vala \
-	DuplicityInfo.vala \
 	MainWindow.vala \
-	Operation.vala \
-	OperationBackup.vala \
-	OperationCleanup.vala \
-	OperationRestore.vala \
-	PreferencesDialog.vala \
 	main.vala
 
 BUILT_SOURCES = \
 	deja-dup.stamp
 
 deja_dup_SOURCES = \
-	PassphraseSchema.c PassphraseSchema.h \
 	$(deja_dup_VALASOURCES:.vala=.c) \
 	$(deja_dup_VALASOURCES:.vala=.h) \
 	$(deja_dup_VALASOURCES)
@@ -55,7 +40,7 @@ else
 	@exit 1
 endif
 
-deja_dup_LDADD = $(DUP_LIBS) @INTLLIBS@
+deja_dup_LDADD = $(DUP_LIBS) @INTLLIBS@ $(top_srcdir)/libdeja-dup/libdeja-dup.la
 
 EXTRA_DIST = deja-dup.stamp
 DISTCLEANFILES = \

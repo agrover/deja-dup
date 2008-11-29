@@ -22,7 +22,6 @@ using GLib;
 public class MainWindow : Gtk.Window
 {
   Gtk.AboutDialog about;
-  Gtk.Dialog preferences;
   
   construct
   {
@@ -102,7 +101,7 @@ public class MainWindow : Gtk.Window
   
   bool check_duplicity_version()
   {
-    DuplicityInfo.get_default().check_duplicity_version(this);
+    DejaDup.DuplicityInfo.get_default().check_duplicity_version(this);
     return false;
   }
   
@@ -122,7 +121,7 @@ public class MainWindow : Gtk.Window
   
   void do_backup()
   {
-    var back = new OperationBackup();
+    var back = new DejaDup.OperationBackup(this);
     back.@ref();
     back.done += (b, s) => {
       b.unref();
@@ -145,7 +144,7 @@ public class MainWindow : Gtk.Window
   
   void do_restore()
   {
-    var rest = new OperationRestore();
+    var rest = new DejaDup.OperationRestore(this);
     rest.@ref();
     rest.done += (b, s) => {
       b.unref();
@@ -163,12 +162,12 @@ public class MainWindow : Gtk.Window
   
   void handle_about_uri(Gtk.AboutDialog about, string link)
   {
-    show_uri(about, link);
+    DejaDup.show_uri(about, link);
   }
   
   void handle_about_mail(Gtk.AboutDialog about, string link)
   {
-    show_uri(about, "mailto:%s".printf(link));
+    DejaDup.show_uri(about, "mailto:%s".printf(link));
   }
   
   // These need to be class-wide to prevent an odd compiler syntax error.
@@ -207,15 +206,15 @@ public class MainWindow : Gtk.Window
   
   void on_preferences(Gtk.Action action)
   {
-    if (preferences != null)
-    {
-      preferences.present ();
-      return;
+    try {
+      Process.spawn_command_line_async("deja-dup-preferences");
     }
-    
-    preferences = new PreferencesDialog();
-    preferences.response += (dlg, resp) => {dlg.destroy(); preferences = null;};
-    preferences.show_all();
+    catch (Error e) {
+      Gtk.MessageDialog dlg = new Gtk.MessageDialog (this, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not open preferences"));
+      dlg.format_secondary_text("%s".printf(e.message));
+      dlg.run();
+      dlg.destroy();
+    }
   }
   
   Gtk.Action backup_action;

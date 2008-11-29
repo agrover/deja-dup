@@ -19,6 +19,8 @@
 
 using GLib;
 
+namespace DejaDup {
+
 public class DuplicityInfo : Object
 {
   public static const int REQUIRED_MAJOR = 0;
@@ -130,4 +132,6 @@ public class DuplicityInfo : Object
     Gtk.main_quit();
   }
 }
+
+} // end namespace
 

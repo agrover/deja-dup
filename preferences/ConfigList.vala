@@ -73,7 +73,7 @@ public class ConfigList : ConfigWidget
       return;
     }
     
-    var list = parse_dir_list(slist);
+    var list = DejaDup.parse_dir_list(slist);
     
     Gtk.ListStore model;
     tree.get("model", out model);
@@ -81,7 +81,7 @@ public class ConfigList : ConfigWidget
     
     int i = 0;
     File home = File.new_for_path(Environment.get_home_dir());
-    File trash = File.new_for_path(get_trash_path());
+    File trash = File.new_for_path(DejaDup.get_trash_path());
     foreach (File f in list) {
       string s;
       if (f.equal(home))
@@ -188,7 +188,7 @@ public class ConfigList : ConfigWidget
       weak SList<string> slist = client.get_list(key, GConf.ValueType.STRING);
       weak SList<string> iter = slist;
       while (iter != null) {
-        var sfile = parse_dir(iter.data);
+        var sfile = DejaDup.parse_dir(iter.data);
         if (sfile.equal(current_file)) {
           slist.remove_link(iter);
           client.set_list(key, GConf.ValueType.STRING, slist);

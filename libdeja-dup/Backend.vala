@@ -19,22 +19,27 @@
 
 using GLib;
 
+namespace DejaDup {
+
 public abstract class Backend : Object
 {
+  public Gtk.Window toplevel {get; construct;}
   public abstract string? get_location() throws Error;
   public virtual string[]? get_options() throws Error {return null;}
   protected virtual string[]? get_envp() throws Error {return new string[0];}
   
-  public static Backend? get_default() throws Error
+  public static Backend? get_default(Gtk.Window? win) throws Error
   {
     var client = GConf.Client.get_default();
     var backend_name = client.get_string(BACKEND_KEY);
     if (backend_name == "s3")
-      return new BackendS3();
+      return new BackendS3(win);
     else if (backend_name == "file")
-      return new BackendFile();
+      return new BackendFile(win);
     else
       return null;
   }
 }
+
+} // end namespace
 

@@ -19,17 +19,21 @@
 
 using GLib;
 
+namespace DejaDup {
+
 public abstract class Operation : Object
 {
   public signal void done(bool success);
+  
+  public Gtk.Window toplevel {get; construct;}
   
   protected Duplicity dup;
   protected Backend backend;
   string passphrase;
   construct
   {
-    dup = new Duplicity();
-    backend = Backend.get_default();
+    dup = new Duplicity(toplevel);
+    backend = Backend.get_default(toplevel);
   }
   
   public void start() throws Error
@@ -119,4 +123,6 @@ public abstract class Operation : Object
     return true;
   }
 }
+
+} // end namespace
 

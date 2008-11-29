@@ -3,8 +3,9 @@
 # Sets up autoconf.
 AC_INIT([Déjà Dup],[2.0],[mike@mterry.name],[deja-dup])
 AC_PREREQ([2.53])
-AC_CONFIG_SRCDIR(src/MainWindow.vala)
+AC_CONFIG_SRCDIR(deja-dup/main.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
+AC_CONFIG_MACRO_DIR([m4])
 
 # Sets up automake.
 AM_INIT_AUTOMAKE([1.9 foreign no-dist-gzip dist-bzip2])
@@ -13,6 +14,7 @@ AM_INIT_AUTOMAKE([1.9 foreign no-dist-gzip dist-bzip2])
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
+AC_PROG_LIBTOOL
 
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 AM_GCONF_SOURCE_2
@@ -38,12 +40,37 @@ AC_DEFINE_UNQUOTED(LOCALE_DIR, "${PREFIX}/${DATADIRNAME}/locale",[Locale directo
 AC_DEFINE_UNQUOTED(THEME_DIR, "${PREFIX}/${DATADIRNAME}/icons",[Icon directory])
 AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package data directory])
 
+GTK_REQ_VER=2.14
+
 # Check dependencies
-PKG_CHECK_MODULES(DUP, gtk+-2.0 >= 2.14 gio-2.0 gconf-2.0 libgnomeui-2.0 gnome-keyring-1)
+PKG_CHECK_MODULES(DUP,
+                  gtk+-2.0 >= $GTK_REQ_VER
+                  gio-2.0
+                  gconf-2.0
+                  libgnomeui-2.0
+                  gnome-keyring-1)
 AC_SUBST(DUP_CFLAGS)
 AC_SUBST(DUP_LIBS)
 
-PKG_CHECK_MODULES(MONITOR, gconf-2.0)
+PKG_CHECK_MODULES(LIBRARY,
+                  gtk+-2.0 >= $GTK_REQ_VER
+                  gio-2.0
+                  gconf-2.0
+                  libgnomeui-2.0
+                  gnome-keyring-1)
+AC_SUBST(LIBRARY_CFLAGS)
+AC_SUBST(LIBRARY_LIBS)
+
+PKG_CHECK_MODULES(PREF,
+                  gtk+-2.0 >= $GTK_REQ_VER
+                  gio-2.0
+                  gconf-2.0
+                  unique-1.0)
+AC_SUBST(PREF_CFLAGS)
+AC_SUBST(PREF_LIBS)
+
+PKG_CHECK_MODULES(MONITOR,
+                  gconf-2.0)
 AC_SUBST(MONITOR_CFLAGS)
 AC_SUBST(MONITOR_LIBS)
 
@@ -62,9 +89,11 @@ AC_SUBST(DEBUG_CFLAGS)
 # Sets up output files.
 AC_CONFIG_FILES([Makefile
                  data/Makefile
+                 libdeja-dup/Makefile
                  monitor/Makefile
-                 src/Makefile
+                 deja-dup/Makefile
                  po/Makefile.in
+                 preferences/Makefile
                  vapi/Makefile])
 AC_OUTPUT
 

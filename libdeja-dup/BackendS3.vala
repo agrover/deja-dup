@@ -19,6 +19,8 @@
 
 using GLib;
 
+namespace DejaDup {
+
 public const string S3_ID_KEY = "/apps/deja-dup/s3/id";
 public const string S3_BUCKET_KEY = "/apps/deja-dup/s3/bucket";
 
@@ -26,6 +28,10 @@ const string S3_SERVER = "s3.amazonaws.com";
 
 public class BackendS3 : Backend
 {
+  public BackendS3(Gtk.Window? win) {
+    toplevel = win;
+  }
+  
   public override string? get_location() throws Error
   {
     var client = GConf.Client.get_default();
@@ -99,4 +105,6 @@ public class BackendS3 : Backend
     return true;
   }
 }
+
+} // end namespace
 

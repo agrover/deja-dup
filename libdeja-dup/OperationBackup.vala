@@ -19,12 +19,18 @@
 
 using GLib;
 
+namespace DejaDup {
+
 errordomain BackupError {
   INTERNAL
 }
 
 public class OperationBackup : Operation
 {
+  public OperationBackup(Gtk.Window? win) {
+    toplevel = win;
+  }
+  
   construct
   {
     dup.progress_label = _("Backing up files...");
@@ -34,7 +40,7 @@ public class OperationBackup : Operation
   {
     if (cancelled) {
       // We have to cleanup after aborted job 
-      var clean = new OperationCleanup();
+      var clean = new OperationCleanup(toplevel);
       clean.done += (b, s) => {Gtk.main_quit();};
       
       try {clean.start();}
@@ -81,4 +87,6 @@ public class OperationBackup : Operation
     return rv;
   }
 }
+
+} // end namespace
 

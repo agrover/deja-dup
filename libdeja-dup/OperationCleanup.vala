@@ -19,44 +19,34 @@
 
 using GLib;
 
-public class OperationRestore : Operation
+namespace DejaDup {
+
+public class OperationCleanup : Operation
 {
+  public OperationCleanup(Gtk.Window? win) {
+    toplevel = win;
+  }
+  
   construct
   {
-    dup.progress_label = _("Restoring files...");
+    dup.progress_label = _("Cleaning up...");
   }
   
   protected override List<string>? make_argv() throws Error
   {
-    var client = GConf.Client.get_default();
-    
-    var dlg = new Gtk.FileChooserDialog(_("Choose destination for restored files"),
-                                        toplevel,
-                                        Gtk.FileChooserAction.SELECT_FOLDER,
-                                        Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                          				      Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT);
-    
-    if (dlg.run() != Gtk.ResponseType.ACCEPT) {
-      dlg.hide();
-      return null;
-    }
-    
-    var source = dlg.get_filename();
-    dlg.hide();
-    
     var target = backend.get_location();
     
-    if (source == null || target == null)
+    if (target == null)
       return null;
     
     List<string> argv = new List<string>();
     argv.append("duplicity");
-    argv.append("restore");
-    if (!client.get_bool(ENCRYPT_KEY))
-      argv.append("--no-encryption");
+    argv.append("cleanup");
+    argv.append("--force");
     argv.append(target);
-    argv.append(source);
     return argv;
   }
 }
+
+} // end namespace
 

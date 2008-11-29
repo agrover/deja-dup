@@ -28,9 +28,12 @@ public class PreferencesDialog : Gtk.Dialog
   
   Gtk.SizeGroup label_sizes;
   
+  public PreferencesDialog(Gtk.Window? parent = null) {
+    transient_for = parent;
+  }
+  
   construct {
-    set("transient-for", toplevel,
-        "title", _("Déjà Dup Preferences"),
+    set("title", _("Déjà Dup Preferences"),
         "has-separator", false);
     add_buttons(Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE);
     
@@ -44,7 +47,7 @@ public class PreferencesDialog : Gtk.Dialog
     backend_widgets = new List<Gtk.Widget>[NUM_LISTS];
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
-    ConfigBackend backend = new ConfigBackend(BACKEND_KEY);
+    ConfigBackend backend = new ConfigBackend(DejaDup.BACKEND_KEY);
     backend.changed += handle_backend_changed;
     label = new Gtk.Label(_("_Backup location:"));
     label.set("mnemonic-widget", backend,
@@ -68,7 +71,7 @@ public class PreferencesDialog : Gtk.Dialog
     ++row;
     
     var s3_table = new Gtk.Table(1, 3, false);
-    w = new ConfigEntry(S3_BUCKET_KEY);
+    w = new ConfigEntry(DejaDup.S3_BUCKET_KEY);
     label = new Gtk.Label("    %s".printf(_("S3 buc_ket:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -80,7 +83,7 @@ public class PreferencesDialog : Gtk.Dialog
                     Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                     Gtk.AttachOptions.FILL, 3, 3);
     
-    w = new ConfigEntry(S3_ID_KEY);
+    w = new ConfigEntry(DejaDup.S3_ID_KEY);
     label = new Gtk.Label("    %s".printf(_("S3 I_D:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -99,7 +102,7 @@ public class PreferencesDialog : Gtk.Dialog
     ++row;
     
     var file_table = new Gtk.Table(1, 3, false);
-    w = new ConfigFolder(FILE_PATH_KEY);
+    w = new ConfigFolder(DejaDup.FILE_PATH_KEY);
     label = new Gtk.Label("    %s".printf(_("_Folder:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -116,7 +119,7 @@ public class PreferencesDialog : Gtk.Dialog
     backend_widgets[FILE_LIST].append(file_table);
     ++row;
     
-    w = new ConfigList(INCLUDE_LIST_KEY);
+    w = new ConfigList(DejaDup.INCLUDE_LIST_KEY);
     label = new Gtk.Label(_("I_nclude:"));
     label.set("use-underline", true,
               "xalign", 0.0f,
@@ -130,7 +133,7 @@ public class PreferencesDialog : Gtk.Dialog
                  3, 3);
     ++row;
     
-    w = new ConfigList(EXCLUDE_LIST_KEY);
+    w = new ConfigList(DejaDup.EXCLUDE_LIST_KEY);
     label = new Gtk.Label(_("E_xclude:"));
     label.set("use-underline", true,
               "xalign", 0.0f,
@@ -144,7 +147,7 @@ public class PreferencesDialog : Gtk.Dialog
                  3, 3);
     ++row;
     
-    w = new ConfigBool(ENCRYPT_KEY, _("_Encrypt backup files"));
+    w = new ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
     table.attach(w, 0, 3, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL, 3, 3);
@@ -175,7 +178,7 @@ public class PreferencesDialog : Gtk.Dialog
   
   void handle_link_clicked(Gtk.Button button)
   {
-    show_uri((Gtk.Window)button.get_toplevel(), "http://aws.amazon.com/s3/");
+    DejaDup.show_uri((Gtk.Window)button.get_toplevel(), "http://aws.amazon.com/s3/");
   }
 }
 

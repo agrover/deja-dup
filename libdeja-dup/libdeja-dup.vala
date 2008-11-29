@@ -1,6 +1,6 @@
-/* -*- Mode: C; indent-tabs-mode: nil; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
-    Déjà Dup
+    Déjà Dup Library
     © 2008 Michael Terry <mike@mterry.name>
 
     This program is free software: you can redistribute it and/or modify
@@ -19,13 +19,15 @@
 
 using GLib;
 
-public Gtk.Builder builder = null;
-public Gtk.Window toplevel = null;
+namespace DejaDup {
 
 public const string INCLUDE_LIST_KEY = "/apps/deja-dup/include-list";
 public const string EXCLUDE_LIST_KEY = "/apps/deja-dup/exclude-list";
 public const string BACKEND_KEY = "/apps/deja-dup/backend";
 public const string ENCRYPT_KEY = "/apps/deja-dup/encrypt";
+public const string LAST_RUN_KEY = "/apps/deja-dup/last-run";
+public const string PERIODIC_KEY = "/apps/deja-dup/periodic";
+public const string PERIODIC_PERIOD_KEY = "/apps/deja-dup/periodic-period";
 
 public string get_trash_path()
 {
@@ -87,63 +89,5 @@ public void show_uri(Gtk.Window parent, string link)
   }
 }
 
-class DejaDup : Object
-{
-  static bool show_version = false;
-  static const OptionEntry[] options = {
-    {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
-    {null}
-  };
-  
-  static bool handle_console_options(out int status)
-  {
-    status = 0;
-    
-    if (show_version) {
-      print("%s %s\n", _("Déjà Dup"), Config.VERSION);
-      return false;
-    }
-    
-    return true;
-  }
-  
-  public static int main(string [] args)
-  {
-    GLib.Intl.textdomain(Config.GETTEXT_PACKAGE);
-    GLib.Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
-    GLib.Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
-    
-    // Translators: The name is a play on the French phrase "déjà vu" meaning
-    // "already seen", but with the "vu" replaced with "dup".  "Dup" in this
-    // context is itself a reference to both the underlying command line tool
-    // "duplicity" and the act of duplicating data for backup.  As a whole, it
-    // may not be very translatable.
-    GLib.Environment.set_application_name(_("Déjà Dup"));
-    
-    OptionContext context = new OptionContext("");
-    context.add_main_entries(options, Config.GETTEXT_PACKAGE);
-    context.add_group(Gtk.get_option_group(false)); // allow console use
-    try {
-      context.parse(ref args);
-    } catch (Error e) {
-      printerr("%s\n\n%s", e.message, context.get_help(true, null));
-      return 1;
-    }
-    
-    int status;
-    if (!handle_console_options(out status))
-      return status;
-    
-    Gtk.init(ref args); // to open display ('cause we passed false above)
-    
-    Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
-    Gtk.Window.set_default_icon_name(Config.PACKAGE);
-    
-    toplevel = new MainWindow();
-    toplevel.show_all();
-    Gtk.main();
-    
-    return 0;
-  }
-}
+} // end namespace
 

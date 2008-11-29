@@ -19,10 +19,16 @@
 
 using GLib;
 
+namespace DejaDup {
+
 public const string FILE_PATH_KEY = "/apps/deja-dup/file/path";
 
 public class BackendFile : Backend
 {
+  public BackendFile(Gtk.Window? win) {
+    toplevel = win;
+  }
+  
   public override string? get_location() throws Error
   {
     var client = GConf.Client.get_default();
@@ -45,4 +51,6 @@ public class BackendFile : Backend
     return "file://%s".printf(path);
   }
 }
+
+} // end namespace
 
