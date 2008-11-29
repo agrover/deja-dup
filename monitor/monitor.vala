@@ -151,7 +151,7 @@ static long seconds_until(Date date)
 static bool kickoff()
 {
   try {
-    Process.command_line_async("deja-dup-applet");
+    Process.spawn_command_line_async("deja-dup-applet");
   }
   catch (Error e) {
     printerr("%s\n", e.message);
