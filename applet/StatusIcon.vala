@@ -23,6 +23,7 @@ public class StatusIcon : Gtk.StatusIcon
 {
   public signal void done();
   
+  DejaDup.OperationBackup op;
   construct {
     icon_name = Config.PACKAGE;
     Idle.add(start);
@@ -30,21 +31,23 @@ public class StatusIcon : Gtk.StatusIcon
   
   bool start()
   {
-    var back = new DejaDup.OperationBackup(null);
-    back.@ref();
-    back.done += (b, s) => {
-      b.unref();
-      done();
-    };
+    op = new DejaDup.OperationBackup(null);
+    op.done += (b, s) => {done();};
+    op.passphrase_required += notify_passphrase;
     
     try {
-      back.start();
+      op.start();
     }
     catch (Error e) {
       printerr("%s\n", e.message);
     }
     
     return false;
+  }
+  
+  bool notify_passphrase(DejaDup.OperationBackup op) {
+    
+    return true; // don't immediately ask user, wait for our response
   }
 }
 

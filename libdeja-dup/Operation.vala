@@ -24,6 +24,7 @@ namespace DejaDup {
 public abstract class Operation : Object
 {
   public signal void done(bool success);
+  public signal bool passphrase_required();
   
   public Gtk.Window toplevel {get; construct;}
   
@@ -34,6 +35,10 @@ public abstract class Operation : Object
   {
     dup = new Duplicity(toplevel);
     backend = Backend.get_default(toplevel);
+    
+    // Default is to go ahead with password collection.  This will be
+    // overridden by anyone else that connects to this signal.
+    passphrase_required += (o) => {return true;};
   }
   
   public void start() throws Error
@@ -44,6 +49,17 @@ public abstract class Operation : Object
     }
     
     dup.done += operation_finished;
+    
+    // Get encryption passphrase if needed
+    var client = GConf.Client.get_default();
+    if (client.get_bool(ENCRYPT_KEY))
+      get_passphrase(); // will call continue_dup_start when ready
+    else
+      continue_dup_start();
+  }
+  
+  void continue_dup_start() throws Error
+  {
     List<string> argv = make_argv();
     if (argv == null) {
       done(false);
@@ -55,22 +71,15 @@ public abstract class Operation : Object
       return;
     }
     
-    // Get encryption passphrase if needed
     var client = GConf.Client.get_default();
     if (client.get_bool(ENCRYPT_KEY)) {
       string[] real_envp = new string[envp.length + 1];
-      
-      if (!get_passphrase()) {
-        done(false);
-        return;
-      }
       real_envp[0] = "PASSPHRASE=%s".printf(passphrase);
       for (int i = 0; i < envp.length; ++i)
         real_envp[i + 1] = envp[i];
-      dup.start(argv, real_envp);
     }
-    else
-      dup.start(argv, envp);
+    
+    dup.start(argv, envp);
   }
   
   protected virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
@@ -84,23 +93,33 @@ public abstract class Operation : Object
   {
     if (result == GnomeKeyring.Result.OK)
       passphrase = str;
-    Gtk.main_quit();
+    
+    try {
+      if (passphrase != null)
+        continue_dup_start();
+      else {
+        bool can_ask_now = passphrase_required();
+        if (can_ask_now)
+          ask_passphrase();
+        // else wait for consumer of Operation to call ask_passphrase
+      }
+    }
+    catch (Error e) {
+      printerr("%s\n", e.message);
+    }
   }
   
-  bool get_passphrase()
+  void get_passphrase()
   {
-    passphrase = null;
-    
     // First, try user's keyring
     GnomeKeyring.find_password(PASSPHRASE_SCHEMA,
                                found_passphrase, null,
                                "owner", Config.PACKAGE,
                                "type", "passphrase");
-    Gtk.main();
-    
-    if (passphrase != null)
-      return true;
-    
+  }
+  
+  public void ask_passphrase()
+  {
     // Ask user
     var dlg = new Gnome.PasswordDialog(_("Encryption Password"),
                                        _("Enter the password used to encrypt your backup files."),
@@ -108,8 +127,10 @@ public abstract class Operation : Object
     dlg.transient_parent = toplevel;
     dlg.show_remember = true;
     dlg.show_username = false;
-    if (!dlg.run_and_block())
-      return false;
+    if (!dlg.run_and_block()) {
+      done(false);
+      return;
+    }
     
     passphrase = dlg.get_password();
     
@@ -125,8 +146,6 @@ public abstract class Operation : Object
                                   "owner", Config.PACKAGE,
                                   "type", "passphrase");
     }
-    
-    return true;
   }
 }
 
