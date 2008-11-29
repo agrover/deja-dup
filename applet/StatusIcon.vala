@@ -46,8 +46,39 @@ public class StatusIcon : Gtk.StatusIcon
   }
   
   bool notify_passphrase(DejaDup.OperationBackup op) {
-    
-    return true; // don't immediately ask user, wait for our response
+    var note = new Notify.Notification.with_status_icon(_("Backup passphrase needed"),
+                       _("Please enter the encryption passphrase for your backup files."),
+                       "dialog-password", this);
+    note.add_action("later", _("Ask Later"), (Notify.ActionCallback)later, this, null);
+    note.add_action("skip", _("Skip Backup"), (Notify.ActionCallback)skip, this, null);
+    note.add_action("enter", _("Enter"), (Notify.ActionCallback)enter, this, null);
+    note.set_timeout(Notify.EXPIRES_NEVER);
+    note.@ref();
+    try {
+      note.show();
+    }
+    catch (Error e) {
+      printerr("%s\n", e.message);
+    }
+    return false; // don't immediately ask user, wait for our response
+  }
+  
+  static void enter(Notify.Notification note, string action, StatusIcon icon)
+  {
+    icon.op.ask_passphrase();
+    note.unref();
+  }
+  
+  static void later(Notify.Notification note, string action, StatusIcon icon)
+  {
+    print("later\n");
+    note.unref();
+  }
+  
+  static void skip(Notify.Notification note, string action, StatusIcon icon)
+  {
+    print("skip\n");
+    note.unref();
   }
 }
 
