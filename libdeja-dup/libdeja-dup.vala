@@ -89,5 +89,59 @@ public void show_uri(Gtk.Window parent, string link)
   }
 }
 
+
+void handle_about_uri(Gtk.AboutDialog about, string link)
+{
+  show_uri(about, link);
+}
+
+void handle_about_mail(Gtk.AboutDialog about, string link)
+{
+  show_uri(about, "mailto:%s".printf(link));
+}
+
+// These need to be namespace-wide to prevent an odd compiler syntax error.
+const string[] authors = {"Michael Terry <mike@mterry.name>",
+                          null};
+
+public void show_about(Object owner, Gtk.Window? parent)
+{
+  Gtk.AboutDialog about = (Gtk.AboutDialog)owner.get_data("about-dlg");
+  
+  if (about != null)
+  {
+    about.present ();
+    return;
+  }
+  
+  about = new Gtk.AboutDialog ();
+  about.set_email_hook (handle_about_mail, null);
+  about.set_url_hook (handle_about_uri, null);
+  about.title = _("About Déjà Dup");
+  about.authors = authors;
+  about.translator_credits = _("translator-credits");
+  about.logo_icon_name = Config.PACKAGE;
+  about.version = Config.VERSION;
+  about.copyright = "© 2008 Michael Terry";
+  about.website = "http://mterry.name/deja-dup/";
+  about.license = "%s\n\n%s\n\n%s".printf (
+    _("This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version."),
+    _("This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."),
+    _("You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA."));
+  about.wrap_license = true;
+  
+  owner.set_data("about-dlg", about);
+  about.set_data("owner", owner);
+  
+  about.set_transient_for(parent);
+  about.response += (dlg, resp) => {
+    Object owner = (Object)dlg.get_data("owner");
+    owner.set_data("about-dlg", null);
+    dlg.destroy();
+  };
+  
+  about.show();
+}
+
 } // end namespace
 
