@@ -27,6 +27,7 @@ public class StatusIcon : Gtk.StatusIcon
   construct {
     icon_name = Config.PACKAGE;
     Idle.add(start);
+    popup_menu += show_menu;
   }
   
   bool start()
@@ -46,12 +47,14 @@ public class StatusIcon : Gtk.StatusIcon
   }
   
   bool notify_passphrase(DejaDup.OperationBackup op) {
-    var note = new Notify.Notification.with_status_icon(_("Backup passphrase needed"),
-                       _("Please enter the encryption passphrase for your backup files."),
+    var note = new Notify.Notification.with_status_icon(_("Backup password needed"),
+                       _("Please enter the encryption password for your backup files."),
                        "dialog-password", this);
     note.add_action("later", _("Ask Later"), (Notify.ActionCallback)later, this, null);
     note.add_action("skip", _("Skip Backup"), (Notify.ActionCallback)skip, this, null);
     note.add_action("enter", _("Enter"), (Notify.ActionCallback)enter, this, null);
+    note.add_action("default", _("Enter"), (Notify.ActionCallback)enter, this, null);
+    note.closed += passphrase_closed;
     note.set_timeout(Notify.EXPIRES_NEVER);
     note.@ref();
     try {
@@ -61,6 +64,10 @@ public class StatusIcon : Gtk.StatusIcon
       printerr("%s\n", e.message);
     }
     return false; // don't immediately ask user, wait for our response
+  }
+  
+  void passphrase_closed(Notify.Notification note) {
+    later(note, "later", this);
   }
   
   static void enter(Notify.Notification note, string action, StatusIcon icon)
@@ -79,6 +86,42 @@ public class StatusIcon : Gtk.StatusIcon
   {
     print("skip\n");
     note.unref();
+  }
+  
+  void show_menu(Gtk.StatusIcon status_icon, uint button, uint activate_time)
+  {
+    var menu = new Gtk.Menu();
+    
+    var item = new Gtk.ImageMenuItem.from_stock(Gtk.STOCK_PREFERENCES, null);
+    item.activate += preferences_clicked;
+    menu.append(item);
+    
+    item = new Gtk.ImageMenuItem.from_stock(Gtk.STOCK_ABOUT, null);
+    item.activate += about_clicked;
+    menu.append(item);
+    
+    menu.show_all();
+    // FIXME: We should be able to pass gtk_status_icon_position_menu function
+    // to popup to position the menu correctly, but bug 562725
+    // (http://bugzilla.gnome.org/show_bug.cgi?id=562725) is getting in the
+    // way.
+    menu.popup(null, null, null, button, activate_time);
+  }
+  
+  void about_clicked(Gtk.ImageMenuItem item) {
+    DejaDup.show_about(this, null);
+  }
+  
+  void preferences_clicked(Gtk.ImageMenuItem item) {
+    try {
+      Process.spawn_command_line_async("deja-dup-preferences");
+    }
+    catch (Error e) {
+      Gtk.MessageDialog dlg = new Gtk.MessageDialog (null, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not open preferences"));
+      dlg.format_secondary_text("%s".printf(e.message));
+      dlg.run();
+      dlg.destroy();
+    }
   }
 }
 
