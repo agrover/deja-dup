@@ -120,7 +120,7 @@ public class MainWindow : Gtk.Window
   
   void show_error(DejaDup.Operation op, string errstr)
   {
-    hide_progress;
+    hide_progress();
     
     var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Error occurred"));
     dlg.format_secondary_text("%s".printf(errstr));
@@ -138,6 +138,9 @@ public class MainWindow : Gtk.Window
   {
     if (timeout_id != 0)
       Source.remove(timeout_id);
+    
+    if (progress != null)
+      progress.destroy();
     
     timeout_id = 0;
     progress = null;
@@ -186,6 +189,7 @@ public class MainWindow : Gtk.Window
   
   void do_backup()
   {
+    show_progress();
     op = new DejaDup.OperationBackup(this);
     op.done += (b, s) => {
       hide_progress();
@@ -211,6 +215,7 @@ public class MainWindow : Gtk.Window
   
   void do_restore()
   {
+    show_progress();
     op = new DejaDup.OperationRestore(this);
     op.done += (b, s) => {
       hide_progress();
