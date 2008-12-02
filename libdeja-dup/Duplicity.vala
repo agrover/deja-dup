@@ -196,6 +196,15 @@ public class Duplicity : Object
     bool cancelled = !Process.if_exited(status);
     
     if (reader != null) {
+      // Get last reads in before we shut down (needed sometimes, not sure why)
+      while (true) {
+        IOCondition cond = reader.get_buffer_condition();
+        if (cond == IOCondition.IN)
+          read_stanza(reader, cond);
+        else
+          break;
+      }
+      
       if (Process.if_exited(status)) {
         var exitval = Process.exit_status(status);
         debug("duplicity exited with value %i", exitval);
