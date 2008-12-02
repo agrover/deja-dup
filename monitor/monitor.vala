@@ -150,6 +150,25 @@ static long seconds_until(Date date)
 
 static bool kickoff()
 {
+  long wait_time;
+  if (!seconds_until_next_run(out wait_time))
+    return false;
+  
+  if (wait_time > 0) {
+    // Huh?  Shouldn't have been called now.
+    prepare_next_run();
+    return false;
+  }
+  
+  // Now we secretly schedule another kickoff tomorrow, in case something
+  // goes wrong with this run (or user chooses to ignore for now)
+  // If this run is successful, it will change 'last-run' key and this will
+  // get rescheduled anyway.
+  Date tomorrow = today();
+  tomorrow.add_days(1);
+  var secs = seconds_until(tomorrow);
+  prepare_run(secs);
+  
   try {
     Process.spawn_command_line_async("deja-dup-applet");
   }
@@ -159,19 +178,24 @@ static bool kickoff()
   return false;
 }
 
-static void prepare_next_run()
+static bool seconds_until_next_run(out long secs)
+{
+  var next_date = next_run_date();
+  if (!next_date.valid()) {
+    debug("Invalid next run date.  Not scheduling a backup.");
+    return false;
+  }
+  
+  secs = seconds_until(next_date);
+  return true;
+}
+
+static void prepare_run(long wait_time)
 {
   // Stop previous run timeout
   if (timeout_id != 0)
     Source.remove(timeout_id);
   
-  var next_date = next_run_date();
-  if (!next_date.valid()) {
-    debug("Invalid next run date.  Not scheduling a backup.");
-    return;
-  }
-  
-  var wait_time = seconds_until(next_date);
   if (wait_time > 0) {
     debug("Waiting %ld seconds until next backup.", wait_time);
     timeout_id = Timeout.add_seconds((uint)wait_time, kickoff);
@@ -180,6 +204,15 @@ static void prepare_next_run()
     debug("Late by %ld seconds.  Backing up now.", wait_time * -1);
     kickoff();
   }
+}
+
+static void prepare_next_run()
+{
+  long wait_time;
+  if (!seconds_until_next_run(out wait_time))
+    return;
+  
+  prepare_run(wait_time);
 }
 
 static void watch_gconf()
