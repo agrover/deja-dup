@@ -28,6 +28,7 @@ static const string PERIODIC_PERIOD_KEY = "/apps/deja-dup/periodic-period";
 
 static MainLoop loop;
 static uint timeout_id;
+static Pid pid;
 
 static bool show_version = false;
 static const OptionEntry[] options = {
@@ -148,6 +149,12 @@ static long seconds_until(Date date)
   return next_time.tv_sec - cur_time.tv_sec;
 }
 
+static void close_pid(Pid child_pid, int status)
+{
+  Process.close_pid(child_pid);
+  pid = 0;
+}
+
 static bool kickoff()
 {
   long wait_time;
@@ -164,17 +171,29 @@ static bool kickoff()
   // goes wrong with this run (or user chooses to ignore for now)
   // If this run is successful, it will change 'last-run' key and this will
   // get rescheduled anyway.
-  Date tomorrow = today();
-  tomorrow.add_days(1);
-  var secs = seconds_until(tomorrow);
-  prepare_run(secs);
+  prepare_tomorrow();
   
-  try {
-    Process.spawn_command_line_async("deja-dup-applet");
+  // Don't run right now if an applet is already running
+  if (pid == 0) {
+    try {
+      string[] argv = new string[2];
+      argv[0] = "deja-dup-applet";
+      argv[1] = null;
+      Process.spawn_async(null, argv, null,
+                          SpawnFlags.SEARCH_PATH |
+                          SpawnFlags.DO_NOT_REAP_CHILD |
+                          SpawnFlags.STDOUT_TO_DEV_NULL |
+                          SpawnFlags.STDERR_TO_DEV_NULL,
+                          null, out pid);
+      ChildWatch.add(pid, close_pid);
+    }
+    catch (Error e) {
+      printerr("%s\n", e.message);
+    }
   }
-  catch (Error e) {
-    printerr("%s\n", e.message);
-  }
+  else
+    debug("Not rerunning deja-dup-applet, already doing so.");
+  
   return false;
 }
 
@@ -204,6 +223,14 @@ static void prepare_run(long wait_time)
     debug("Late by %ld seconds.  Backing up now.", wait_time * -1);
     kickoff();
   }
+}
+
+static void prepare_tomorrow()
+{
+  Date tomorrow = today();
+  tomorrow.add_days(1);
+  var secs = seconds_until(tomorrow);
+  prepare_run(secs);
 }
 
 static void prepare_next_run()
