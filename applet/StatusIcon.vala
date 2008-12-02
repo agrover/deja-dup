@@ -72,7 +72,12 @@ public class StatusIcon : Gtk.StatusIcon
   
   static void enter(Notify.Notification note, string action, StatusIcon icon)
   {
-    icon.op.ask_passphrase();
+    try {
+      icon.op.ask_passphrase();
+    }
+    catch (Error e) {
+      printerr("%s\n", e.message);
+    }
     note.unref();
   }
   

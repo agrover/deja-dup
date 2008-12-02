@@ -118,7 +118,7 @@ public abstract class Operation : Object
                                "type", "passphrase");
   }
   
-  public void ask_passphrase()
+  public void ask_passphrase() throws Error
   {
     // Ask user
     var dlg = new Gnome.PasswordDialog(_("Encryption Password"),
@@ -146,6 +146,8 @@ public abstract class Operation : Object
                                   "owner", Config.PACKAGE,
                                   "type", "passphrase");
     }
+    
+    continue_dup_start();
   }
 }
 
