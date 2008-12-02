@@ -25,6 +25,7 @@ namespace DejaDup {
 public class Duplicity : Object
 {
   public signal void done(bool success, bool cancelled);
+  public signal void raise_error(string errstr);
   
   public Gtk.Window toplevel {get; construct;}
   public string? progress_label {get; set; default = null;}
@@ -124,6 +125,11 @@ public class Duplicity : Object
     error_issued = false;
   }
   
+  public bool is_started()
+  {
+    return (int)child_pid > 0;
+  }
+  
   bool pulse()
   {
     progress_bar.pulse();
@@ -162,10 +168,7 @@ public class Duplicity : Object
       var errorstr = grab_stanza_text(stanza);
       error_issued = true;
       
-      var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Error occurred"));
-      dlg.format_secondary_text("%s".printf(errorstr));
-      dlg.run();
-      dlg.destroy();
+      raise_error(errorstr);
     }
   }
   
@@ -211,12 +214,7 @@ public class Duplicity : Object
         
         if (exitval != 0) {
           if (!error_issued) {
-            var errorstr = _("Could not start duplicity.  It may not be installed.");
-            
-            var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Error occurred"));
-            dlg.format_secondary_text("%s".printf(errorstr));
-            dlg.run();
-            dlg.destroy();
+            raise_error(_("Could not start duplicity.  It may not be installed."));
           }
         }
       }
@@ -234,10 +232,18 @@ public class Duplicity : Object
     done(success, cancelled);
   }
   
+  public void cancel()
+  {
+    if (is_started())
+      kill((int)child_pid, 15);
+    else
+      done(false, true);
+  }
+  
   void handle_response(Gtk.Dialog dlg, int response)
   {
     if (response == Gtk.ResponseType.CANCEL)
-      kill((int)child_pid, 15);
+      cancel();
   }
 }
 

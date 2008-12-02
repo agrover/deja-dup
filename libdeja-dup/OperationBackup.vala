@@ -38,8 +38,8 @@ public class OperationBackup : Operation
   
   protected override void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
-    if (cancelled) {
-      // We have to cleanup after aborted job 
+    if (cancelled && dup.is_started()) {
+      // We have to cleanup after aborted job
       var clean = new OperationCleanup(toplevel);
       clean.done += (b, s) => {Gtk.main_quit();};
       
@@ -48,6 +48,12 @@ public class OperationBackup : Operation
       
       Gtk.main();
     }
+    
+    if (success) {
+      try {DejaDup.update_last_run_timestamp();}
+      catch (Error e) {printerr("%s\n", e.message);}
+    }
+    
     done(success);
   }
   

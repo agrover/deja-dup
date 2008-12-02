@@ -24,6 +24,7 @@ namespace DejaDup {
 public abstract class Operation : Object
 {
   public signal void done(bool success);
+  public signal void raise_error(string errstr);
   public signal bool passphrase_required();
   
   public Gtk.Window toplevel {get; construct;}
@@ -49,6 +50,7 @@ public abstract class Operation : Object
     }
     
     dup.done += operation_finished;
+    dup.raise_error += (d, s) => {raise_error(s);};
     
     // Get encryption passphrase if needed
     var client = GConf.Client.get_default();
@@ -56,6 +58,11 @@ public abstract class Operation : Object
       get_passphrase(); // will call continue_dup_start when ready
     else
       continue_dup_start();
+  }
+  
+  public void cancel()
+  {
+    dup.cancel();
   }
   
   void continue_dup_start() throws Error

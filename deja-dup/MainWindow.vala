@@ -112,6 +112,14 @@ public class MainWindow : Gtk.Window
     dlg.destroy();
   }
   
+  void show_error(DejaDup.Operation op, string errstr)
+  {
+    var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Error occurred"));
+    dlg.format_secondary_text("%s".printf(errstr));
+    dlg.run();
+    dlg.destroy();
+  }
+  
   void on_backup(Gtk.Action action)
   {
     do_backup();
@@ -119,13 +127,14 @@ public class MainWindow : Gtk.Window
   
   void do_backup()
   {
-    var back = new DejaDup.OperationBackup(this);
+    DejaDup.Operation back = new DejaDup.OperationBackup(this);
     back.@ref();
     back.done += (b, s) => {
       b.unref();
       if (s)
         show_success(_("Backup finished"), _("Your files were successfully backed up."));
     };
+    back.raise_error += show_error;
     
     try {
       back.start();
@@ -142,13 +151,14 @@ public class MainWindow : Gtk.Window
   
   void do_restore()
   {
-    var rest = new DejaDup.OperationRestore(this);
+    DejaDup.Operation rest = new DejaDup.OperationRestore(this);
     rest.@ref();
     rest.done += (b, s) => {
       b.unref();
       if (s)
         show_success(_("Restore finished"), _("Your files were successfully restored."));
     };
+    rest.raise_error += show_error;
     
     try {
       rest.start();

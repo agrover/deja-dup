@@ -30,11 +30,19 @@ public class StatusIcon : Gtk.StatusIcon
     popup_menu += show_menu;
   }
   
+  void send_done(DejaDup.Operation op, bool success)
+  {
+    done();
+  }
+  
   bool start()
   {
     op = new DejaDup.OperationBackup(null);
-    op.done += (b, s) => {done();};
+    op.done += send_done;
     op.passphrase_required += notify_passphrase;
+    op.raise_error += notify_error;
+    
+    set_tooltip(_("Backing up..."));
     
     try {
       op.start();
@@ -47,6 +55,8 @@ public class StatusIcon : Gtk.StatusIcon
   }
   
   bool notify_passphrase(DejaDup.OperationBackup op) {
+    set_blinking(true);
+    
     var note = new Notify.Notification.with_status_icon(_("Backup password needed"),
                        _("Please enter the encryption password for your backup files."),
                        "dialog-password", this);
@@ -55,7 +65,6 @@ public class StatusIcon : Gtk.StatusIcon
     note.add_action("enter", _("Enter"), (Notify.ActionCallback)enter, this, null);
     note.add_action("default", _("Enter"), (Notify.ActionCallback)enter, this, null);
     note.closed += passphrase_closed;
-    note.set_timeout(Notify.EXPIRES_NEVER);
     note.@ref();
     try {
       note.show();
@@ -66,8 +75,33 @@ public class StatusIcon : Gtk.StatusIcon
     return false; // don't immediately ask user, wait for our response
   }
   
+  void notify_error(DejaDup.OperationBackup op, string errstr) {
+    // We want to stay open until user acknowledges our error/it times out
+    op.done -= send_done;
+    var note = new Notify.Notification.with_status_icon(_("Backup error occurred"),
+                       errstr, "dialog-error", this);
+    note.closed += error_closed;
+    note.@ref();
+    try {
+      note.show();
+    }
+    catch (Error e) {
+      printerr("%s\n", e.message);
+    }
+  }
+  
+  void end_notify(Notify.Notification note) {
+    set_blinking(false);
+    note.unref();
+  }
+  
   void passphrase_closed(Notify.Notification note) {
-    later(note, "later", this);
+    note.unref();
+  }
+  
+  void error_closed(Notify.Notification note) {
+    note.unref();
+    done();
   }
   
   static void enter(Notify.Notification note, string action, StatusIcon icon)
@@ -78,19 +112,27 @@ public class StatusIcon : Gtk.StatusIcon
     catch (Error e) {
       printerr("%s\n", e.message);
     }
-    note.unref();
+    icon.end_notify(note);
   }
   
   static void later(Notify.Notification note, string action, StatusIcon icon)
   {
-    print("later\n");
-    note.unref();
+    icon.end_notify(note);
+    icon.op.cancel();
   }
   
   static void skip(Notify.Notification note, string action, StatusIcon icon)
   {
-    print("skip\n");
-    note.unref();
+    // Fake a run by setting today's timestamp as the 'last-run' gconf key
+    try {
+      DejaDup.update_last_run_timestamp();
+    }
+    catch (Error e) {
+      printerr("%s\n", e.message);
+    }
+    
+    icon.end_notify(note);
+    icon.op.cancel();
   }
   
   void show_menu(Gtk.StatusIcon status_icon, uint button, uint activate_time)

@@ -29,6 +29,16 @@ public const string LAST_RUN_KEY = "/apps/deja-dup/last-run";
 public const string PERIODIC_KEY = "/apps/deja-dup/periodic";
 public const string PERIODIC_PERIOD_KEY = "/apps/deja-dup/periodic-period";
 
+public void update_last_run_timestamp() throws Error
+{
+  TimeVal cur_time = TimeVal();
+  cur_time.get_current_time();
+  var cur_time_str = cur_time.to_iso8601();
+  
+  var client = GConf.Client.get_default();
+  client.set_string(DejaDup.LAST_RUN_KEY, cur_time_str);
+}
+
 public string get_trash_path()
 {
   return Path.build_filename(Environment.get_user_data_dir(), "Trash");
