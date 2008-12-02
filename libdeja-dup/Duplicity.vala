@@ -121,7 +121,7 @@ public class Duplicity : Object
     reader = null;
     pipes = new int[2];
     pipes[0] = pipes[1] = -1;
-    error_issued = true;
+    error_issued = false;
   }
   
   bool pulse()
