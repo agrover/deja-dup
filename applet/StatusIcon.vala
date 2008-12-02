@@ -24,10 +24,24 @@ public class StatusIcon : Gtk.StatusIcon
   public signal void done();
   
   DejaDup.OperationBackup op;
+  Notify.Notification note;
+  
   construct {
     icon_name = Config.PACKAGE;
     Idle.add(start);
     popup_menu += show_menu;
+  }
+  
+  ~StatusIcon()
+  {
+    if (note != null) {
+      try {
+        note.close();
+      }
+      catch (Error e) {
+        printerr("%s\n", e.message);
+      }
+    }
   }
   
   void send_done(DejaDup.Operation op, bool success)
@@ -61,7 +75,7 @@ public class StatusIcon : Gtk.StatusIcon
   bool notify_passphrase(DejaDup.OperationBackup op) {
     set_blinking(true);
     
-    var note = new Notify.Notification.with_status_icon(_("Backup password needed"),
+    note = new Notify.Notification.with_status_icon(_("Backup password needed"),
                        _("Please enter the encryption password for your backup files."),
                        "dialog-password", this);
     note.add_action("later", _("Ask Later"), (Notify.ActionCallback)later, this, null);
@@ -69,7 +83,6 @@ public class StatusIcon : Gtk.StatusIcon
     note.add_action("enter", _("Enter"), (Notify.ActionCallback)enter, this, null);
     note.add_action("default", _("Enter"), (Notify.ActionCallback)enter, this, null);
     note.closed += passphrase_closed;
-    note.@ref();
     try {
       note.show();
     }
@@ -82,10 +95,9 @@ public class StatusIcon : Gtk.StatusIcon
   void notify_error(DejaDup.OperationBackup op, string errstr) {
     // We want to stay open until user acknowledges our error/it times out
     op.done -= send_done;
-    var note = new Notify.Notification.with_status_icon(_("Backup error occurred"),
+    note = new Notify.Notification.with_status_icon(_("Backup error occurred"),
                        errstr, "dialog-error", this);
     note.closed += error_closed;
-    note.@ref();
     try {
       note.show();
     }
@@ -96,15 +108,12 @@ public class StatusIcon : Gtk.StatusIcon
   
   void end_notify(Notify.Notification note) {
     set_blinking(false);
-    note.unref();
   }
   
   void passphrase_closed(Notify.Notification note) {
-    note.unref();
   }
   
   void error_closed(Notify.Notification note) {
-    note.unref();
     done();
   }
   
@@ -119,13 +128,14 @@ public class StatusIcon : Gtk.StatusIcon
     icon.end_notify(note);
   }
   
-  static void later(Notify.Notification note, string action, StatusIcon icon)
+  static void later(Notify.Notification? note, string? action, StatusIcon icon)
   {
-    icon.end_notify(note);
+    if (note != null)
+      icon.end_notify(note);
     icon.op.cancel();
   }
   
-  static void skip(Notify.Notification note, string action, StatusIcon icon)
+  static void skip(Notify.Notification? note, string? action, StatusIcon icon)
   {
     // Fake a run by setting today's timestamp as the 'last-run' gconf key
     try {
@@ -135,7 +145,8 @@ public class StatusIcon : Gtk.StatusIcon
       printerr("%s\n", e.message);
     }
     
-    icon.end_notify(note);
+    if (note != null)
+      icon.end_notify(note);
     icon.op.cancel();
   }
   
@@ -143,7 +154,20 @@ public class StatusIcon : Gtk.StatusIcon
   {
     var menu = new Gtk.Menu();
     
-    var item = new Gtk.ImageMenuItem.from_stock(Gtk.STOCK_PREFERENCES, null);
+    Gtk.MenuItem item;
+    
+    item = new Gtk.MenuItem.with_mnemonic(_("Backup _Later"));
+    item.activate += later_clicked;
+    menu.append(item);
+    
+    item = new Gtk.MenuItem.with_mnemonic(_("_Skip Backup"));
+    item.activate += skip_clicked;
+    menu.append(item);
+    
+    item = new Gtk.SeparatorMenuItem();
+    menu.append(item);
+    
+    item = new Gtk.ImageMenuItem.from_stock(Gtk.STOCK_PREFERENCES, null);
     item.activate += preferences_clicked;
     menu.append(item);
     
@@ -159,11 +183,19 @@ public class StatusIcon : Gtk.StatusIcon
     menu.popup(null, null, null, button, activate_time);
   }
   
-  void about_clicked(Gtk.ImageMenuItem item) {
+  void later_clicked(Gtk.MenuItem item) {
+    later(note, null, this);
+  }
+  
+  void skip_clicked(Gtk.MenuItem item) {
+    skip(note, null, this);
+  }
+  
+  void about_clicked(Gtk.MenuItem item) {
     DejaDup.show_about(this, null);
   }
   
-  void preferences_clicked(Gtk.ImageMenuItem item) {
+  void preferences_clicked(Gtk.MenuItem item) {
     try {
       Process.spawn_command_line_async("deja-dup-preferences");
     }
