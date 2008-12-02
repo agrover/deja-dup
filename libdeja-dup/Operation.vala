@@ -77,9 +77,10 @@ public abstract class Operation : Object
       real_envp[0] = "PASSPHRASE=%s".printf(passphrase);
       for (int i = 0; i < envp.length; ++i)
         real_envp[i + 1] = envp[i];
+      dup.start(argv, real_envp);
     }
-    
-    dup.start(argv, envp);
+    else
+      dup.start(argv, envp);
   }
   
   protected virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
