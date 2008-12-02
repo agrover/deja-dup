@@ -74,6 +74,7 @@ public class StatusIcon : Gtk.StatusIcon
   
   bool notify_passphrase(DejaDup.OperationBackup op) {
     set_blinking(true);
+    activate += activate_enter;
     
     note = new Notify.Notification.with_status_icon(_("Backup password needed"),
                        _("Please enter the encryption password for your backup files."),
@@ -106,8 +107,9 @@ public class StatusIcon : Gtk.StatusIcon
     }
   }
   
-  void end_notify(Notify.Notification note) {
+  void end_notify(Notify.Notification? note) {
     set_blinking(false);
+    activate -= activate_enter;
   }
   
   void passphrase_closed(Notify.Notification note) {
@@ -117,7 +119,7 @@ public class StatusIcon : Gtk.StatusIcon
     done();
   }
   
-  static void enter(Notify.Notification note, string action, StatusIcon icon)
+  static void enter(Notify.Notification? note, string? action, StatusIcon icon)
   {
     try {
       icon.op.ask_passphrase();
@@ -128,10 +130,14 @@ public class StatusIcon : Gtk.StatusIcon
     icon.end_notify(note);
   }
   
+  void activate_enter()
+  {
+    enter(note, null, this);
+  }
+  
   static void later(Notify.Notification? note, string? action, StatusIcon icon)
   {
-    if (note != null)
-      icon.end_notify(note);
+    icon.end_notify(note);
     icon.op.cancel();
   }
   
@@ -145,8 +151,7 @@ public class StatusIcon : Gtk.StatusIcon
       printerr("%s\n", e.message);
     }
     
-    if (note != null)
-      icon.end_notify(note);
+    icon.end_notify(note);
     icon.op.cancel();
   }
   
