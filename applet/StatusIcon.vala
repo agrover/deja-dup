@@ -35,14 +35,18 @@ public class StatusIcon : Gtk.StatusIcon
     done();
   }
   
+  void set_action_desc(DejaDup.Operation op, string action)
+  {
+    set_tooltip(action);
+  }
+  
   bool start()
   {
     op = new DejaDup.OperationBackup(null);
     op.done += send_done;
     op.passphrase_required += notify_passphrase;
     op.raise_error += notify_error;
-    
-    set_tooltip(_("Backing up..."));
+    op.action_desc_changed += set_action_desc;
     
     try {
       op.start();

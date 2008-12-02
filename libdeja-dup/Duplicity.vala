@@ -28,7 +28,6 @@ public class Duplicity : Object
   public signal void raise_error(string errstr);
   
   public Gtk.Window toplevel {get; construct;}
-  public string? progress_label {get; set; default = null;}
   
   public Duplicity(Gtk.Window? win) {
     toplevel = win;
@@ -36,23 +35,6 @@ public class Duplicity : Object
   
   public void start(List<string> argv, string[]? envp) throws SpawnError
   {
-    if (progress_label != null && progress == null) {
-      progress = new Gtk.Dialog.with_buttons("", toplevel,
-                                             Gtk.DialogFlags.MODAL |
-                                             Gtk.DialogFlags.DESTROY_WITH_PARENT |
-                                             Gtk.DialogFlags.NO_SEPARATOR,
-                                             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL);
-      
-      var label = new Gtk.Label(progress_label);
-      label.set("xalign", 0.0f);
-      progress.vbox.add(label);
-      
-      progress_bar = new Gtk.ProgressBar();
-      progress.vbox.add(progress_bar);
-      
-      progress.response += handle_response;
-    }
-    
     // Copy current environment, add custom variables
     var myenv = Environment.list_variables();
     int myenv_len = 0;
@@ -101,24 +83,15 @@ public class Duplicity : Object
     stanza_id = reader.add_watch(IOCondition.IN, read_stanza);
     close(pipes[1]);
     
-    this.timeout_id = Timeout.add(200, pulse);
-    this.progress_bar.set_fraction(0); // Reset progress bar if this is second time we run this
-    
-    this.progress.show_all();
-    
     ChildWatch.add(child_pid, spawn_finished);
   }
   
-  uint timeout_id;
   uint stanza_id;
-  Gtk.Dialog progress;
-  Gtk.ProgressBar progress_bar;
   Pid child_pid;
   int[] pipes;
   IOChannel reader;
   bool error_issued;
   construct {
-    timeout_id = 0;
     reader = null;
     pipes = new int[2];
     pipes[0] = pipes[1] = -1;
@@ -128,12 +101,6 @@ public class Duplicity : Object
   public bool is_started()
   {
     return (int)child_pid > 0;
-  }
-  
-  bool pulse()
-  {
-    progress_bar.pulse();
-    return true;
   }
   
   bool read_stanza(IOChannel channel, IOCondition cond)
@@ -186,12 +153,6 @@ public class Duplicity : Object
   
   void spawn_finished(Pid pid, int status)
   {
-    progress.hide();
-    progress = null;
-    
-    if (timeout_id != 0)
-      Source.remove(timeout_id);
-    
     if (stanza_id != 0)
       Source.remove(stanza_id);
     
@@ -238,12 +199,6 @@ public class Duplicity : Object
       kill((int)child_pid, 15);
     else
       done(false, true);
-  }
-  
-  void handle_response(Gtk.Dialog dlg, int response)
-  {
-    if (response == Gtk.ResponseType.CANCEL)
-      cancel();
   }
 }
 

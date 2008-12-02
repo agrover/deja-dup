@@ -31,9 +31,10 @@ public class OperationBackup : Operation
     toplevel = win;
   }
   
-  construct
+  public override void start() throws Error
   {
-    dup.progress_label = _("Backing up files...");
+    action_desc_changed(_("Backing up files..."));
+    base.start();
   }
   
   protected override void operation_finished(Duplicity dup, bool success, bool cancelled)

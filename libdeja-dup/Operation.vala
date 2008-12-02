@@ -25,6 +25,7 @@ public abstract class Operation : Object
 {
   public signal void done(bool success);
   public signal void raise_error(string errstr);
+  public signal void action_desc_changed(string action);
   public signal bool passphrase_required();
   
   public Gtk.Window toplevel {get; construct;}
@@ -42,7 +43,7 @@ public abstract class Operation : Object
     passphrase_required += (o) => {return true;};
   }
   
-  public void start() throws Error
+  public virtual void start() throws Error
   {
     if (backend == null) {
       done(false);

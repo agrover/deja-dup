@@ -27,9 +27,10 @@ public class OperationRestore : Operation
     toplevel = win;
   }
   
-  construct
+  public override void start() throws Error
   {
-    dup.progress_label = _("Restoring files...");
+    action_desc_changed(_("Restoring files..."));
+    base.start();
   }
   
   protected override List<string>? make_argv() throws Error

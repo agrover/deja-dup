@@ -27,9 +27,10 @@ public class OperationCleanup : Operation
     toplevel = win;
   }
   
-  construct
+  public override void start() throws Error
   {
-    dup.progress_label = _("Cleaning up...");
+    action_desc_changed(_("Cleaning up..."));
+    base.start();
   }
   
   protected override List<string>? make_argv() throws Error

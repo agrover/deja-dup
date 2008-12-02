@@ -21,6 +21,13 @@ using GLib;
 
 public class MainWindow : Gtk.Window
 {
+  Gtk.Dialog progress;
+  Gtk.ProgressBar progress_bar;
+  Gtk.Label progress_label;
+  uint timeout_id;
+  
+  DejaDup.Operation op;
+  
   construct
   {
     Gtk.VBox vb = new Gtk.VBox (false, 0);
@@ -103,7 +110,6 @@ public class MainWindow : Gtk.Window
     return false;
   }
   
-  
   void show_success(string label, string desc)
   {
     var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "%s", label);
@@ -114,10 +120,63 @@ public class MainWindow : Gtk.Window
   
   void show_error(DejaDup.Operation op, string errstr)
   {
+    progress = null;
+    
     var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Error occurred"));
     dlg.format_secondary_text("%s".printf(errstr));
     dlg.run();
     dlg.destroy();
+  }
+  
+  bool pulse()
+  {
+    progress_bar.pulse();
+    return true;
+  }
+  
+  void hide_progress()
+  {
+    if (timeout_id != 0)
+      Source.remove(timeout_id);
+    
+    timeout_id = 0;
+    progress = null;
+  }
+  
+  void handle_progress_response(Gtk.Dialog dlg, int response)
+  {
+    if (response == Gtk.ResponseType.CANCEL)
+      op.cancel();
+  }
+  
+  void show_progress()
+  {
+    if (progress == null) {
+      progress = new Gtk.Dialog.with_buttons("", this,
+                                             Gtk.DialogFlags.MODAL |
+                                             Gtk.DialogFlags.DESTROY_WITH_PARENT |
+                                             Gtk.DialogFlags.NO_SEPARATOR,
+                                             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL);
+      
+      progress_label = new Gtk.Label("");
+      progress_label.set("xalign", 0.0f);
+      progress.vbox.add(progress_label);
+      
+      progress_bar = new Gtk.ProgressBar();
+      progress.vbox.add(progress_bar);
+      
+      progress.response += handle_progress_response;
+      
+      timeout_id = Timeout.add(200, pulse);
+      progress_bar.set_fraction(0); // Reset progress bar if this is second time we run this
+      
+      progress.show_all();
+    }
+  }
+  
+  void set_progress_label(DejaDup.Operation op, string action)
+  {
+    progress_label.set_text(action);
   }
   
   void on_backup(Gtk.Action action)
@@ -127,17 +186,18 @@ public class MainWindow : Gtk.Window
   
   void do_backup()
   {
-    DejaDup.Operation back = new DejaDup.OperationBackup(this);
-    back.@ref();
-    back.done += (b, s) => {
-      b.unref();
+    op = new DejaDup.OperationBackup(this);
+    op.done += (b, s) => {
+      hide_progress();
+      op = null;
       if (s)
         show_success(_("Backup finished"), _("Your files were successfully backed up."));
     };
-    back.raise_error += show_error;
+    op.raise_error += show_error;
+    op.action_desc_changed += set_progress_label;
     
     try {
-      back.start();
+      op.start();
     }
     catch (Error e) {
       printerr("%s\n", e.message);
@@ -151,17 +211,18 @@ public class MainWindow : Gtk.Window
   
   void do_restore()
   {
-    DejaDup.Operation rest = new DejaDup.OperationRestore(this);
-    rest.@ref();
-    rest.done += (b, s) => {
-      b.unref();
+    op = new DejaDup.OperationRestore(this);
+    op.done += (b, s) => {
+      hide_progress();
+      op = null;
       if (s)
         show_success(_("Restore finished"), _("Your files were successfully restored."));
     };
-    rest.raise_error += show_error;
+    op.raise_error += show_error;
+    op.action_desc_changed += set_progress_label;
     
     try {
-      rest.start();
+      op.start();
     }
     catch (Error e) {
       printerr("%s\n", e.message);
