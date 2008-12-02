@@ -120,7 +120,7 @@ public class MainWindow : Gtk.Window
   
   void show_error(DejaDup.Operation op, string errstr)
   {
-    progress = null;
+    hide_progress;
     
     var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Error occurred"));
     dlg.format_secondary_text("%s".printf(errstr));
