@@ -152,7 +152,7 @@ static long seconds_until(Date date)
 static void close_pid(Pid child_pid, int status)
 {
   Process.close_pid(child_pid);
-  pid = 0;
+  pid = (Pid)0;
 }
 
 static bool kickoff()
@@ -174,7 +174,7 @@ static bool kickoff()
   prepare_tomorrow();
   
   // Don't run right now if an applet is already running
-  if (pid == 0) {
+  if (pid == (Pid)0) {
     try {
       string[] argv = new string[2];
       argv[0] = "deja-dup-applet";
