@@ -33,7 +33,7 @@ public class Duplicity : Object
     toplevel = win;
   }
   
-  public void start(List<string> argv, string[]? envp) throws SpawnError
+  public void start(List<string> argv, List<string> envp) throws SpawnError
   {
     // Copy current environment, add custom variables
     var myenv = Environment.list_variables();
@@ -41,13 +41,13 @@ public class Duplicity : Object
     while (myenv[myenv_len] != null)
       ++myenv_len;
     
-    var env_len = myenv_len + (envp == null ? 0 : envp.length);
+    var env_len = myenv_len + envp.length();
     string[] real_envp = new string[env_len + 1];
     int i = 0;
     for (; i < myenv_len; ++i)
       real_envp[i] = "%s=%s".printf(myenv[i], Environment.get_variable(myenv[i]));
-    for (; i < env_len; ++i)
-      real_envp[i] = envp[i - myenv_len];
+    foreach (string env in envp)
+      real_envp[i++] = env;
     real_envp[i] = null;
     
     // Open pipes to communicate with subprocess

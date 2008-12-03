@@ -73,22 +73,17 @@ public abstract class Operation : Object
       done(false);
       return;
     }
-    string[]? envp = backend.get_envp();
-    if (envp == null) {
+    List<string> envp = new List<string>();
+    if (!backend.get_envp(ref envp)) {
       done(false);
       return;
     }
     
     var client = GConf.Client.get_default();
-    if (client.get_bool(ENCRYPT_KEY)) {
-      string[] real_envp = new string[envp.length + 1];
-      real_envp[0] = "PASSPHRASE=%s".printf(passphrase);
-      for (int i = 0; i < envp.length; ++i)
-        real_envp[i + 1] = envp[i];
-      dup.start(argv, real_envp);
-    }
-    else
-      dup.start(argv, envp);
+    if (client.get_bool(ENCRYPT_KEY))
+      envp.append("PASSPHRASE=%s".printf(passphrase));
+    
+    dup.start(argv, envp);
   }
   
   protected virtual void operation_finished(Duplicity dup, bool success, bool cancelled)

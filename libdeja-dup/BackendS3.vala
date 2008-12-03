@@ -43,22 +43,21 @@ public class BackendS3 : Backend
   
   string id;
   string secret_key;
-  public override string[]? get_envp() throws Error
+  public override bool get_envp(ref List<string> envp) throws Error
   {
     var client = GConf.Client.get_default();
     var gconf_id = client.get_string(S3_ID_KEY);
     id = gconf_id == null ? "" : gconf_id;
     
     if (!get_secret_key())
-      return null;
+      return false;
     
     if (id != gconf_id)
       client.set_string(S3_ID_KEY, id);
     
-    string[] envp = new string[2];
-    envp[0] = "AWS_ACCESS_KEY_ID=%s".printf(id);
-    envp[1] = "AWS_SECRET_ACCESS_KEY=%s".printf(secret_key);
-    return envp;
+    envp.append("AWS_ACCESS_KEY_ID=%s".printf(id));
+    envp.append("AWS_SECRET_ACCESS_KEY=%s".printf(secret_key));
+    return true;
   }
   
   void found_password(GnomeKeyring.Result result, GLib.List? list)

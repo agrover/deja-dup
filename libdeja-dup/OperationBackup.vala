@@ -70,16 +70,10 @@ public class OperationBackup : Operation
                                                       GConf.ValueType.STRING));
     var exclude_list = parse_dir_list(client.get_list(EXCLUDE_LIST_KEY,
                                                       GConf.ValueType.STRING));
-    var options = backend.get_options();
     
     List<string> rv = new List<string>();
     int i = 0;
     rv.append("duplicity");
-    
-    if (options != null) {
-      for (int j = 0; j < options.length; ++j)
-        rv.append(options[j]);
-    }
     
     if (!client.get_bool(ENCRYPT_KEY))
       rv.append("--no-encryption");
