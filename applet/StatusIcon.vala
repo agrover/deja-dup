@@ -62,14 +62,34 @@ public class StatusIcon : Gtk.StatusIcon
     op.raise_error += notify_error;
     op.action_desc_changed += set_action_desc;
     
+    notify_start();
+    
+    return false;
+  }
+  
+  void begin_backup() {
     try {
       op.start();
     }
     catch (Error e) {
       printerr("%s\n", e.message);
     }
-    
-    return false;
+  }
+  
+  void notify_start() {
+    note = new Notify.Notification.with_status_icon(_("Backup started"),
+                       _("A scheduled backup has begun.  You can choose to run the backup later, or even skip it altogether."),
+                       Config.PACKAGE, this);
+    note.add_action("skip", _("Skip Backup"), (Notify.ActionCallback)skip, this, null);
+    note.add_action("later", _("Run Later"), (Notify.ActionCallback)later, this, null);
+    note.closed += begin_backup;
+    try {
+      note.show();
+    }
+    catch (Error e) {
+      printerr("%s\n", e.message);
+      begin_backup();
+    }
   }
   
   bool notify_passphrase(DejaDup.OperationBackup op) {
@@ -79,9 +99,6 @@ public class StatusIcon : Gtk.StatusIcon
     note = new Notify.Notification.with_status_icon(_("Backup password needed"),
                        _("Please enter the encryption password for your backup files."),
                        "dialog-password", this);
-    note.add_action("later", _("Ask Later"), (Notify.ActionCallback)later, this, null);
-    note.add_action("skip", _("Skip Backup"), (Notify.ActionCallback)skip, this, null);
-    note.add_action("enter", _("Enter"), (Notify.ActionCallback)enter, this, null);
     note.add_action("default", _("Enter"), (Notify.ActionCallback)enter, this, null);
     note.closed += passphrase_closed;
     try {
