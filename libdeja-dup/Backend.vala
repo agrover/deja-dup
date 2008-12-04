@@ -23,9 +23,14 @@ namespace DejaDup {
 
 public abstract class Backend : Object
 {
+  public signal void envp_ready(bool success, List<string>? envp);
+  
   public Gtk.Window toplevel {get; construct;}
+  
   public abstract string? get_location() throws Error;
-  protected virtual bool get_envp(ref List<string> envp) throws Error {return true;}
+  protected virtual void get_envp() throws Error {
+    envp_ready(true, new List<string>());
+  }
   
   public static Backend? get_default(Gtk.Window? win) throws Error
   {

@@ -41,53 +41,47 @@ public class BackendS3 : Backend
     return "s3+http://%s".printf(bucket);
   }
   
+  string gconf_id;
   string id;
   string secret_key;
-  public override bool get_envp(ref List<string> envp) throws Error
+  public override void get_envp() throws Error
   {
     var client = GConf.Client.get_default();
-    var gconf_id = client.get_string(S3_ID_KEY);
+    gconf_id = client.get_string(S3_ID_KEY);
     id = gconf_id == null ? "" : gconf_id;
     
-    if (!get_secret_key())
-      return false;
-    
-    if (id != gconf_id)
-      client.set_string(S3_ID_KEY, id);
-    
-    envp.append("AWS_ACCESS_KEY_ID=%s".printf(id));
-    envp.append("AWS_SECRET_ACCESS_KEY=%s".printf(secret_key));
-    return true;
-  }
-  
-  void found_password(GnomeKeyring.Result result, GLib.List? list)
-  {
-    if (result == GnomeKeyring.Result.OK && list != null)
-      secret_key = ((GnomeKeyring.NetworkPasswordData)list.data).password;
-    Gtk.main_quit();
-  }
-  
-  bool get_secret_key()
-  {
     if (id != "") {
       // First, try user's keyring
       secret_key = null;
       GnomeKeyring.find_network_password(id, null, S3_SERVER, null, "https",
                                          null, 0, found_password, null);
-      Gtk.main();
-      
-      if (secret_key != null)
-        return true;
     }
-    
+    else
+      ask_for_password();
+  }
+  
+  void found_password(GnomeKeyring.Result result, GLib.List? list)
+  {
+    if (result == GnomeKeyring.Result.OK && list != null) {
+      secret_key = ((GnomeKeyring.NetworkPasswordData)list.data).password;
+      got_secret_key();
+    }
+    else {
+      ask_for_password();
+    }
+  }
+  
+  void ask_for_password() {
     // Ask user
     var dlg = new Gnome.PasswordDialog(_("Amazon S3 Password"),
                                        _("Enter your Amazon Web Services user ID and secret key.  This is not the same as your amazon.com username and password."),
                                        id, "", false);
     dlg.transient_parent = toplevel;
     dlg.show_remember = true;
-    if (!dlg.run_and_block())
-      return false;
+    if (!dlg.run_and_block()) {
+      envp_ready(false, new List<string>());
+      return;
+    }
     
     id = dlg.get_username();
     secret_key = dlg.get_password();
@@ -101,7 +95,22 @@ public class BackendS3 : Backend
                                         "https", null, 0, secret_key, null, null);
     }
     
-    return true;
+    got_secret_key();
+  }
+  
+  void got_secret_key() {
+    var client = GConf.Client.get_default();
+    if (id != gconf_id) {
+      try {
+        client.set_string(S3_ID_KEY, id);
+      }
+      catch (Error e) {printerr("%s\n", e.message);}
+    }
+    
+    List<string> envp = new List<string>();
+    envp.append("AWS_ACCESS_KEY_ID=%s".printf(id));
+    envp.append("AWS_SECRET_ACCESS_KEY=%s".printf(secret_key));
+    envp_ready(true, envp);
   }
 }
 

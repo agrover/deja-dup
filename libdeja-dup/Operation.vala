@@ -52,13 +52,14 @@ public abstract class Operation : Object
     
     dup.done += operation_finished;
     dup.raise_error += (d, s) => {raise_error(s);};
+    backend.envp_ready += continue_with_envp;
     
     // Get encryption passphrase if needed
     var client = GConf.Client.get_default();
     if (client.get_bool(ENCRYPT_KEY))
-      get_passphrase(); // will call continue_dup_start when ready
+      get_passphrase(); // will call continue_with_passphrase when ready
     else
-      continue_dup_start();
+      continue_with_passphrase();
   }
   
   public void cancel()
@@ -66,24 +67,35 @@ public abstract class Operation : Object
     dup.cancel();
   }
   
-  void continue_dup_start() throws Error
+  void continue_with_passphrase() throws Error
   {
-    List<string> argv = make_argv();
-    if (argv == null) {
-      done(false);
-      return;
-    }
-    List<string> envp = new List<string>();
-    if (!backend.get_envp(ref envp)) {
+    backend.get_envp();
+  }
+  
+  void continue_with_envp(DejaDup.Backend b, bool success, List<string>? envp) {
+    if (!success) {
       done(false);
       return;
     }
     
-    var client = GConf.Client.get_default();
-    if (client.get_bool(ENCRYPT_KEY))
-      envp.append("PASSPHRASE=%s".printf(passphrase));
+    try {
+      var client = GConf.Client.get_default();
+      if (client.get_bool(ENCRYPT_KEY))
+        envp.append("PASSPHRASE=%s".printf(passphrase));
     
-    dup.start(argv, envp);
+      List<string> argv = make_argv();
+      if (argv == null) {
+        done(false);
+        return;
+      }
+      
+      dup.start(argv, envp);
+    }
+    catch (Error e) {
+      printerr("%s\n", e.message);
+      done(false);
+      return;
+    }
   }
   
   protected virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
@@ -100,7 +112,7 @@ public abstract class Operation : Object
     
     try {
       if (passphrase != null)
-        continue_dup_start();
+        continue_with_passphrase();
       else {
         bool can_ask_now = passphrase_required();
         if (can_ask_now)
@@ -151,7 +163,7 @@ public abstract class Operation : Object
                                   "type", "passphrase");
     }
     
-    continue_dup_start();
+    continue_with_passphrase();
   }
 }
 
