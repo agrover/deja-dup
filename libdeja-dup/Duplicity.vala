@@ -29,12 +29,18 @@ public class Duplicity : Object
   
   public Gtk.Window toplevel {get; construct;}
   
+  bool verbose = false;
+  
   public Duplicity(Gtk.Window? win) {
     toplevel = win;
   }
   
   public void start(List<string> argv, List<string> envp) throws SpawnError
   {
+    var verbose_str = Environment.get_variable("DEJA_DUP_DEBUG");
+    if (verbose_str != null && verbose_str.to_int() > 0)
+      verbose = true;
+    
     // Copy current environment, add custom variables
     var myenv = Environment.list_variables();
     int myenv_len = 0;
@@ -56,8 +62,12 @@ public class Duplicity : Object
       return;
     }
     
+    if (verbose)
+      argv.prepend("--verbosity=9");
+    
     // Add always-there arguments
     argv.prepend("--log-fd=%d".printf(pipes[1]));
+    argv.prepend("--volsize=1");
     argv.prepend("duplicity");
     
     string cmd = null;
@@ -113,11 +123,17 @@ public class Duplicity : Object
       List<string> stanza = new List<string>();
       while (true) {
         status = channel.read_line(out result, null, null);
-        if (status == IOStatus.NORMAL && result != "\n")
+        if (status == IOStatus.NORMAL && result != "\n") {
+          if (verbose)
+            print("DUPLICITY: %s", result); // result has line ending
           stanza.append(result);
+        }
         else
           break;
       }
+      
+      if (verbose)
+        print("\n"); // breather
       
       process_stanza(stanza);
     }
