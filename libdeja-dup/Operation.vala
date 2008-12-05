@@ -27,6 +27,7 @@ public abstract class Operation : Object
   public signal void raise_error(string errstr);
   public signal void action_desc_changed(string action);
   public signal bool passphrase_required();
+  public signal bool backend_password_required();
   
   public Gtk.Window toplevel {get; construct;}
   
@@ -41,6 +42,7 @@ public abstract class Operation : Object
     // Default is to go ahead with password collection.  This will be
     // overridden by anyone else that connects to this signal.
     passphrase_required += (o) => {return true;};
+    backend_password_required += (o) => {return true;};
   }
   
   public virtual void start() throws Error
@@ -53,6 +55,11 @@ public abstract class Operation : Object
     dup.done += operation_finished;
     dup.raise_error += (d, s) => {raise_error(s);};
     backend.envp_ready += continue_with_envp;
+    backend.need_password += (b) => {
+      bool can_ask_now = backend_password_required();
+      if (can_ask_now)
+        backend.ask_password();
+    };
     
     // Get encryption passphrase if needed
     var client = GConf.Client.get_default();
@@ -166,6 +173,11 @@ public abstract class Operation : Object
     }
     
     continue_with_passphrase();
+  }
+  
+  public void ask_backend_password() throws Error
+  {
+    backend.ask_password();
   }
 }
 

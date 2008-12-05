@@ -61,7 +61,7 @@ public class BackendS3 : Backend
                                          null, 0, found_password, null);
     }
     else
-      ask_for_password();
+      need_password();
   }
   
   void found_password(GnomeKeyring.Result result, GLib.List? list)
@@ -71,11 +71,11 @@ public class BackendS3 : Backend
       got_secret_key();
     }
     else {
-      ask_for_password();
+      need_password();
     }
   }
   
-  void ask_for_password() {
+  public override void ask_password() {
     // Ask user
     var dlg = new Gnome.PasswordDialog(_("Amazon S3 Password"),
                                        _("Enter your Amazon Web Services user ID and secret key.  This is not the same as your amazon.com username and password."),

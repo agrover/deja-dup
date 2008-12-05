@@ -25,6 +25,7 @@ public class StatusIcon : Gtk.StatusIcon
   
   DejaDup.OperationBackup op;
   Notify.Notification note;
+  bool need_passphrase = false;
   
   construct {
     icon_name = Config.PACKAGE;
@@ -59,6 +60,7 @@ public class StatusIcon : Gtk.StatusIcon
     op = new DejaDup.OperationBackup(null);
     op.done += send_done;
     op.passphrase_required += notify_passphrase;
+    op.backend_password_required += notify_backend_password;
     op.raise_error += notify_error;
     op.action_desc_changed += set_action_desc;
     
@@ -77,7 +79,7 @@ public class StatusIcon : Gtk.StatusIcon
   }
   
   void notify_start() {
-    note = new Notify.Notification.with_status_icon(_("Backup is about to start"),
+    note = new Notify.Notification.with_status_icon(_("Backup about to start"),
                        _("A scheduled backup will shortly begin.  You can instead choose to run the backup later, or even skip it altogether."),
                        Config.PACKAGE, this);
     note.add_action("skip", _("Skip Backup"), (Notify.ActionCallback)skip, this, null);
@@ -93,14 +95,31 @@ public class StatusIcon : Gtk.StatusIcon
   }
   
   bool notify_passphrase(DejaDup.OperationBackup op) {
+    need_passphrase = true;
     set_blinking(true);
     activate += activate_enter;
     
-    note = new Notify.Notification.with_status_icon(_("Backup password needed"),
+    note = new Notify.Notification.with_status_icon(_("Encryption password needed"),
                        _("Please enter the encryption password for your backup files."),
                        "dialog-password", this);
     note.add_action("default", _("Enter"), (Notify.ActionCallback)enter, this, null);
-    note.closed += passphrase_closed;
+    try {
+      note.show();
+    }
+    catch (Error e) {
+      printerr("%s\n", e.message);
+    }
+    return false; // don't immediately ask user, wait for our response
+  }
+  
+  bool notify_backend_password(DejaDup.OperationBackup op) {
+    set_blinking(true);
+    activate += activate_enter;
+    
+    note = new Notify.Notification.with_status_icon(_("Server password needed"),
+                       _("Please enter the server password for your backup."),
+                       "dialog-password", this);
+    note.add_action("default", _("Enter"), (Notify.ActionCallback)enter, this, null);
     try {
       note.show();
     }
@@ -129,9 +148,6 @@ public class StatusIcon : Gtk.StatusIcon
     activate -= activate_enter;
   }
   
-  void passphrase_closed(Notify.Notification note) {
-  }
-  
   void error_closed(Notify.Notification note) {
     done();
   }
@@ -139,7 +155,12 @@ public class StatusIcon : Gtk.StatusIcon
   static void enter(Notify.Notification? note, string? action, StatusIcon icon)
   {
     try {
-      icon.op.ask_passphrase();
+      if (icon.need_passphrase) {
+        icon.op.ask_passphrase();
+        icon.need_passphrase = false;
+      }
+      else
+        icon.op.ask_backend_password();
     }
     catch (Error e) {
       printerr("%s\n", e.message);

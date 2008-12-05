@@ -67,7 +67,6 @@ public class Duplicity : Object
     
     // Add always-there arguments
     argv.prepend("--log-fd=%d".printf(pipes[1]));
-    argv.prepend("--volsize=1");
     argv.prepend("duplicity");
     
     string cmd = null;
