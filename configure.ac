@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 
 # Sets up autoconf.
-AC_INIT([Déjà Dup],[2.1],[mike@mterry.name],[deja-dup])
+AC_INIT([Déjà Dup],[3.0],[mike@mterry.name],[deja-dup])
 AC_PREREQ([2.53])
 AC_CONFIG_SRCDIR(deja-dup/main.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
@@ -28,7 +28,7 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext domain])
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.17])
-AC_PROG_INTLTOOL([0.37], [no-xml])
+AC_PROG_INTLTOOL([0.37])
 
 # Sets up a few prefix-relative directories
 if test "x${prefix}" = "xNONE"; then
