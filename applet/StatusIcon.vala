@@ -80,10 +80,10 @@ public class StatusIcon : Gtk.StatusIcon
   
   void notify_start() {
     note = new Notify.Notification.with_status_icon(_("Backup about to start"),
-                       _("A scheduled backup will shortly begin.  You can instead choose to run the backup later, or even skip it altogether."),
+                       _("A scheduled backup will shortly begin.  You can instead choose to backup later or not at all."),
                        Config.PACKAGE, this);
     note.add_action("skip", _("Skip Backup"), (Notify.ActionCallback)skip, this, null);
-    note.add_action("later", _("Run Later"), (Notify.ActionCallback)later, this, null);
+    note.add_action("later", _("Backup Later"), (Notify.ActionCallback)later, this, null);
     note.closed += begin_backup;
     try {
       note.show();
