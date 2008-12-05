@@ -37,7 +37,7 @@ else
 	@exit 1
 endif
 
-deja_dup_applet_LDADD = $(APPLET_LIBS) @INTLLIBS@ $(top_srcdir)/libdeja-dup/libdeja-dup.la
+deja_dup_applet_LDADD = $(APPLET_LIBS) @INTLLIBS@ $(top_builddir)/libdeja-dup/libdeja-dup.la
 
 EXTRA_DIST = deja-dup-applet.stamp
 DISTCLEANFILES = \
