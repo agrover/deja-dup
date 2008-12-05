@@ -10,8 +10,7 @@ VALA_CFLAGS = \
   --pkg libnotify \
   --pkg gnome-keyring-1 \
   --pkg libdeja-dup \
-  --pkg PassphraseSchema \
-  --pkg unix \
+  --pkg hacks \
   --pkg config
 
 AM_CFLAGS = \

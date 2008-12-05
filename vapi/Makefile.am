@@ -1,2 +1,2 @@
-EXTRA_DIST = config.vapi PassphraseSchema.vapi packagekit.vapi unix.vapi
+EXTRA_DIST = config.vapi hacks.vapi libnotify.vapi packagekit.vapi PassphraseSchema.vapi unix.vapi
 

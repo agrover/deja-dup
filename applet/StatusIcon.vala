@@ -219,11 +219,7 @@ public class StatusIcon : Gtk.StatusIcon
     menu.append(item);
     
     menu.show_all();
-    // FIXME: We should be able to pass gtk_status_icon_position_menu function
-    // to popup to position the menu correctly, but bug 562725
-    // (http://bugzilla.gnome.org/show_bug.cgi?id=562725) is getting in the
-    // way.
-    menu.popup(null, null, null, button, activate_time);
+    hacks_menu_popup(this, menu, button, activate_time);
   }
   
   void later_clicked(Gtk.MenuItem item) {

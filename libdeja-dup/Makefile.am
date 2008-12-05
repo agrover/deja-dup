@@ -9,6 +9,7 @@ VALA_CFLAGS = \
   --pkg libgnomeui-2.0 \
   --pkg libnotify \
   --pkg gnome-keyring-1 \
+  --pkg hacks \
   --pkg PassphraseSchema \
   --pkg unix \
   --pkg config
@@ -34,6 +35,7 @@ BUILT_SOURCES = \
 	libdeja-dup.stamp
 
 libdeja_dup_la_SOURCES = \
+	hacks.c hacks.h \
 	PassphraseSchema.c PassphraseSchema.h \
 	$(libdeja_dup_la_VALASOURCES:.vala=.c) \
 	$(libdeja_dup_la_VALASOURCES:.vala=.h) \

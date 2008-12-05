@@ -9,8 +9,6 @@ VALA_CFLAGS = \
   --pkg libgnomeui-2.0 \
   --pkg gnome-keyring-1 \
   --pkg libdeja-dup \
-  --pkg PassphraseSchema \
-  --pkg unix \
   --pkg config
 
 AM_CFLAGS = \
