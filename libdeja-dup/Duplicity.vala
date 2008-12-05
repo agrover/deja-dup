@@ -175,7 +175,7 @@ public class Duplicity : Object
         
         if (exitval != 0) {
           if (!error_issued) {
-            raise_error(_("Could not start duplicity.  It may not be installed."));
+            raise_error(_("Failed with an unknown error."));
           }
         }
       }
