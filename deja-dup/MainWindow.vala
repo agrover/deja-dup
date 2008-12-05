@@ -148,8 +148,11 @@ public class MainWindow : Gtk.Window
   
   void handle_progress_response(Gtk.Dialog dlg, int response)
   {
-    if (response == Gtk.ResponseType.CANCEL)
+    if (response == Gtk.ResponseType.CANCEL) {
       op.cancel();
+      // May take a bit, if we do a cleanup.  Mark cancel insensitive
+      dlg.set_response_sensitive(response, false);
+    }
   }
   
   void show_progress()
