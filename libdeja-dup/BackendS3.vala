@@ -33,7 +33,7 @@ public class BackendS3 : Backend
   }
   
   public override void add_argv(ref List<string> argv) {
-    argv.prepend("--s3-use-new-style");
+    argv.append("--s3-use-new-style");
   }
   
   public override string? get_location() throws Error

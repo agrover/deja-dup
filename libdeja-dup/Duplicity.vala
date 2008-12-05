@@ -63,10 +63,10 @@ public class Duplicity : Object
     }
     
     if (verbose)
-      argv.prepend("--verbosity=9");
+      argv.append("--verbosity=9");
     
     // Add always-there arguments
-    argv.prepend("--log-fd=%d".printf(pipes[1]));
+    argv.append("--log-fd=%d".printf(pipes[1]));
     argv.prepend("duplicity");
     
     string cmd = null;
