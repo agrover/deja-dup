@@ -41,7 +41,6 @@ public class OperationCleanup : Operation
       return null;
     
     List<string> argv = new List<string>();
-    argv.append("duplicity");
     argv.append("cleanup");
     argv.append("--force");
     argv.append(target);

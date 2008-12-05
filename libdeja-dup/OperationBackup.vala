@@ -72,8 +72,6 @@ public class OperationBackup : Operation
                                                       GConf.ValueType.STRING));
     
     List<string> rv = new List<string>();
-    int i = 0;
-    rv.append("duplicity");
     
     if (!client.get_bool(ENCRYPT_KEY))
       rv.append("--no-encryption");

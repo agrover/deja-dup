@@ -57,7 +57,6 @@ public class OperationRestore : Operation
       return null;
     
     List<string> argv = new List<string>();
-    argv.append("duplicity");
     argv.append("restore");
     if (!client.get_bool(ENCRYPT_KEY))
       argv.append("--no-encryption");

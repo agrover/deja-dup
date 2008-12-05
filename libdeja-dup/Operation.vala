@@ -82,12 +82,14 @@ public abstract class Operation : Object
       var client = GConf.Client.get_default();
       if (client.get_bool(ENCRYPT_KEY))
         envp.append("PASSPHRASE=%s".printf(passphrase));
-    
+      
       List<string> argv = make_argv();
       if (argv == null) {
         done(false);
         return;
       }
+      
+      backend.add_argv(ref argv);
       
       dup.start(argv, envp);
     }

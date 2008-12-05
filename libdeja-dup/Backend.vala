@@ -28,9 +28,11 @@ public abstract class Backend : Object
   public Gtk.Window toplevel {get; construct;}
   
   public abstract string? get_location() throws Error;
-  protected virtual void get_envp() throws Error {
+  public virtual void get_envp() throws Error {
     envp_ready(true, new List<string>());
   }
+  
+  public virtual void add_argv(ref List<string> argv) {}
   
   public static Backend? get_default(Gtk.Window? win) throws Error
   {

@@ -57,7 +57,8 @@ public class Duplicity : Object
     }
     
     // Add always-there arguments
-    argv.append("--log-fd=%d".printf(pipes[1]));
+    argv.prepend("--log-fd=%d".printf(pipes[1]));
+    argv.prepend("duplicity");
     
     string cmd = null;
     string[] real_argv = new string[argv.length()];
