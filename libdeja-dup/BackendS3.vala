@@ -54,6 +54,12 @@ public class BackendS3 : Backend
     gconf_id = client.get_string(S3_ID_KEY);
     id = gconf_id == null ? "" : gconf_id;
     
+    if (id != "" && secret_key != null) {
+      // We've already been run before and got the key
+      got_secret_key();
+      return;
+    }
+    
     if (id != "") {
       // First, try user's keyring
       secret_key = null;

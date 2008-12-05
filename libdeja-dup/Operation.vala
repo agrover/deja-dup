@@ -33,7 +33,7 @@ public abstract class Operation : Object
   
   protected Duplicity dup;
   protected Backend backend;
-  string passphrase;
+  protected string passphrase;
   construct
   {
     dup = new Duplicity(toplevel);
@@ -63,7 +63,7 @@ public abstract class Operation : Object
     
     // Get encryption passphrase if needed
     var client = GConf.Client.get_default();
-    if (client.get_bool(ENCRYPT_KEY))
+    if (client.get_bool(ENCRYPT_KEY) && passphrase == null)
       get_passphrase(); // will call continue_with_passphrase when ready
     else
       continue_with_passphrase();

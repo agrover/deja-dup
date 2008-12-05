@@ -44,6 +44,13 @@ public class OperationBackup : Operation
       var clean = new OperationCleanup(toplevel);
       clean.done += (b, s) => {Gtk.main_quit();};
       
+      // Make cleanup operation inherit most of our state and pass important
+      // signals back.
+      clean.action_desc_changed += (op, str) => {action_desc_changed(str);};
+      clean.raise_error += (op, str) => {raise_error(str);};
+      clean.passphrase = passphrase;
+      clean.backend = backend;
+      
       try {clean.start();}
       catch (Error e) {printerr("%s\n", e.message);}
       
