@@ -25,11 +25,12 @@ public class StatusIcon : Gtk.StatusIcon
   
   DejaDup.OperationBackup op;
   Notify.Notification note;
-  bool need_passphrase = false;
+  bool need_passphrase;
+  bool fatal_error;
   
   construct {
     icon_name = Config.PACKAGE;
-    Idle.add(start);
+    Idle.add(start_idle);
     popup_menu += show_menu;
   }
   
@@ -55,8 +56,16 @@ public class StatusIcon : Gtk.StatusIcon
     set_tooltip(action);
   }
   
-  bool start()
+  bool start_idle() {
+    start(true);
+    return false;
+  }
+  
+  void start(bool warn)
   {
+    need_passphrase = false;
+    fatal_error = false;
+    
     op = new DejaDup.OperationBackup(null);
     op.done += send_done;
     op.passphrase_required += notify_passphrase;
@@ -64,9 +73,10 @@ public class StatusIcon : Gtk.StatusIcon
     op.raise_error += notify_error;
     op.action_desc_changed += set_action_desc;
     
-    notify_start();
-    
-    return false;
+    if (warn)
+      notify_start();
+    else
+      begin_backup();
   }
   
   void begin_backup() {
@@ -132,8 +142,11 @@ public class StatusIcon : Gtk.StatusIcon
   void notify_error(DejaDup.OperationBackup op, string errstr) {
     // We want to stay open until user acknowledges our error/it times out
     op.done -= send_done;
+    fatal_error = true;
     note = new Notify.Notification.with_status_icon(_("Backup error occurred"),
                        errstr, "dialog-error", this);
+    note.add_action("rerun", _("Rerun"), (Notify.ActionCallback)rerun, this, null);
+    note.set_timeout(Notify.EXPIRES_NEVER);
     note.closed += error_closed;
     try {
       note.show();
@@ -148,8 +161,10 @@ public class StatusIcon : Gtk.StatusIcon
     activate -= activate_enter;
   }
   
-  void error_closed(Notify.Notification note) {
-    done();
+  void error_closed(Notify.Notification note)
+  {
+    if (fatal_error)
+      done();
   }
   
   static void enter(Notify.Notification? note, string? action, StatusIcon icon)
@@ -171,6 +186,12 @@ public class StatusIcon : Gtk.StatusIcon
   void activate_enter()
   {
     enter(note, null, this);
+  }
+  
+  static void rerun(Notify.Notification? note, string? action, StatusIcon icon)
+  {
+    icon.fatal_error = false;
+    icon.start(false);
   }
   
   static void later(Notify.Notification? note, string? action, StatusIcon icon)
