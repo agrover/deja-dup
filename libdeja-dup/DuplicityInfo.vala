@@ -114,7 +114,7 @@ public class DuplicityInfo : Object
     else
         msg = _("Couldn't understand duplicity version '%s'").printf(version_string);
 
-    dlg.format_secondary_text("%s%s".printf(msg, _("Without duplicity, Déjà Dup cannot function.  It will close now.")));
+    dlg.format_secondary_text("%s%s", msg, _("Without duplicity, Déjà Dup cannot function.  It will close now."));
     dlg.run();
     dlg.destroy();
     Gtk.main_quit();
@@ -126,7 +126,7 @@ public class DuplicityInfo : Object
         Gtk.MessageType.ERROR,
         Gtk.ButtonsType.OK,
         _("Duplicity's version is too old"));
-    dlg.format_secondary_text(_("Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found version %d.%d.%.2d").printf(REQUIRED_MAJOR, REQUIRED_MINOR, REQUIRED_MICRO, major, minor, micro));
+    dlg.format_secondary_text(_("Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found version %d.%d.%.2d"), REQUIRED_MAJOR, REQUIRED_MINOR, REQUIRED_MICRO, major, minor, micro);
     dlg.run();
     dlg.destroy();
     Gtk.main_quit();

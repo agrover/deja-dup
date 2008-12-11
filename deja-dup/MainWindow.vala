@@ -113,7 +113,7 @@ public class MainWindow : Gtk.Window
   void show_success(string label, string desc)
   {
     var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "%s", label);
-    dlg.format_secondary_text("%s".printf(desc));
+    dlg.format_secondary_text("%s", desc);
     dlg.run();
     dlg.destroy();
   }
@@ -123,7 +123,7 @@ public class MainWindow : Gtk.Window
     hide_progress();
     
     var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Error occurred"));
-    dlg.format_secondary_text("%s".printf(errstr));
+    dlg.format_secondary_text("%s", errstr);
     dlg.run();
     dlg.destroy();
   }
@@ -249,7 +249,7 @@ public class MainWindow : Gtk.Window
     }
     catch (Error e) {
       Gtk.MessageDialog dlg = new Gtk.MessageDialog (this, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not open preferences"));
-      dlg.format_secondary_text("%s".printf(e.message));
+      dlg.format_secondary_text("%s", e.message);
       dlg.run();
       dlg.destroy();
     }

@@ -261,7 +261,7 @@ public class StatusIcon : Gtk.StatusIcon
     }
     catch (Error e) {
       Gtk.MessageDialog dlg = new Gtk.MessageDialog (null, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not open preferences"));
-      dlg.format_secondary_text("%s".printf(e.message));
+      dlg.format_secondary_text("%s", e.message);
       dlg.run();
       dlg.destroy();
     }

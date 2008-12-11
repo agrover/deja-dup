@@ -161,7 +161,7 @@ public class ConfigList : ConfigWidget
                                            Gtk.MessageType.ERROR,
                                            Gtk.ButtonsType.OK,
                                            _("Could not add the folder"));
-        msgdlg.format_secondary_text("%s is already in the list".printf(folder.get_path()));
+        msgdlg.format_secondary_text(_("%s is already in the list."), folder.get_path());
         msgdlg.run();
         msgdlg.destroy();
       }
