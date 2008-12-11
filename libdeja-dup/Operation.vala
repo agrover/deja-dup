@@ -37,7 +37,13 @@ public abstract class Operation : Object
   construct
   {
     dup = new Duplicity(toplevel);
-    backend = Backend.get_default(toplevel);
+    
+    try {
+      backend = Backend.get_default(toplevel);
+    }
+    catch (Error e) {
+      printerr("%s\n", e.message);    
+    }
     
     // Default is to go ahead with password collection.  This will be
     // overridden by anyone else that connects to this signal.

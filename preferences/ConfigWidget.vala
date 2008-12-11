@@ -35,7 +35,7 @@ public abstract class ConfigWidget : Gtk.EventBox
         dir = dir.substring(0, dir.length - end.length);
       try {
         client.add_dir(dir, GConf.ClientPreloadType.NONE);
-        client.notify_add(key, set_from_config, null);
+        client.notify_add(key, set_from_config);
       }
       catch (Error e) {
         printerr("%s\n", e.message);

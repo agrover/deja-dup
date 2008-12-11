@@ -100,8 +100,9 @@ public class ConfigList : ConfigWidget
       // reason, gio doesn't do it for us.
       Icon icon = null;
       if (f.equal(trash)) {
-        string[] names = {"user-trash", "folder"};
-        icon = new ThemedIcon.from_names(names, 2);
+        // Until vala bug #564062 is fixed, we use append.  Else I'd use from_names
+        icon = new ThemedIcon("user-trash");
+        ((ThemedIcon)icon).append_name("folder");
       }
       else {
         try {

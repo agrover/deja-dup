@@ -46,12 +46,12 @@ public class StatusIcon : Gtk.StatusIcon
     }
   }
   
-  void send_done(DejaDup.Operation op, bool success)
+  void send_done(DejaDup.OperationBackup op, bool success)
   {
     done();
   }
   
-  void set_action_desc(DejaDup.Operation op, string action)
+  void set_action_desc(DejaDup.OperationBackup op, string action)
   {
     set_tooltip(action);
   }
@@ -214,7 +214,7 @@ public class StatusIcon : Gtk.StatusIcon
     icon.op.cancel();
   }
   
-  void show_menu(Gtk.StatusIcon status_icon, uint button, uint activate_time)
+  void show_menu(StatusIcon status_icon, uint button, uint activate_time)
   {
     var menu = new Gtk.Menu();
     

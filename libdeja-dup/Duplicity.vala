@@ -21,7 +21,6 @@ using GLib;
 
 namespace DejaDup {
 
-[CCode (cheader_filename = "sys/wait.h")]
 public class Duplicity : Object
 {
   public signal void done(bool success, bool cancelled);

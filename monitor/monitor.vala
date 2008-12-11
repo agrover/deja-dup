@@ -248,9 +248,9 @@ static void watch_gconf()
   
   try {
     client.add_dir(GCONF_DIR, GConf.ClientPreloadType.NONE);
-    client.notify_add(LAST_RUN_KEY, prepare_next_run, null);
-    client.notify_add(PERIODIC_KEY, prepare_next_run, null);
-    client.notify_add(PERIODIC_PERIOD_KEY, prepare_next_run, null);
+    client.notify_add(LAST_RUN_KEY, prepare_next_run);
+    client.notify_add(PERIODIC_KEY, prepare_next_run);
+    client.notify_add(PERIODIC_PERIOD_KEY, prepare_next_run);
   }
   catch (Error e) {
     printerr("%s\n", e.message);
