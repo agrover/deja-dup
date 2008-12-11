@@ -76,7 +76,7 @@ public class ConfigPeriod : ConfigChoice
     
     while (valid) {
       Value val;
-      combo.model.get_value(iter, gconf_col, ref val);
+      combo.model.get_value(iter, gconf_col, out val);
       int intval = val.get_int();
       
       if (intval == confval) {

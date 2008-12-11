@@ -46,7 +46,7 @@ public class ConfigChoice : ConfigWidget
     Gtk.TreeIter iter;
     if (combo.get_active_iter(out iter)) {
       Value val;
-      combo.model.get_value(iter, gconf_col, ref val);
+      combo.model.get_value(iter, gconf_col, out val);
       return val;
     }
     return null;
@@ -84,7 +84,7 @@ public class ConfigChoice : ConfigWidget
     
     while (valid) {
       Value val;
-      combo.model.get_value(iter, gconf_col, ref val);
+      combo.model.get_value(iter, gconf_col, out val);
       string strval = val.get_string();
       
       if (strval == confval) {

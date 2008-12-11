@@ -115,7 +115,6 @@ public class Duplicity : Object
   bool read_stanza(IOChannel channel, IOCondition cond)
   {
     string result;
-    int len;
     try {
       IOStatus status;
       List<string> stanza = new List<string>();

@@ -52,7 +52,7 @@ static Date today()
 {
   TimeVal cur_time = TimeVal();
   cur_time.get_current_time();
-  Date cur_date;
+  Date cur_date = Date();
   cur_date.set_time_val(cur_time);
   return cur_date;
 }

@@ -20,7 +20,7 @@ AC_PATH_PROG(GCONFTOOL, gconftool-2)
 AM_GCONF_SOURCE_2
 
 # Checks for vala
-AC_PROG_VALAC([0.5.1])
+AC_PROG_VALAC([0.5.2])
 
 # Sets up gettext.
 GETTEXT_PACKAGE="$PACKAGE"
