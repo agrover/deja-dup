@@ -115,7 +115,9 @@ public class OperationBackup : Operation
       rv.append(Path.build_filename(dir, ".thumbnails"));
     
     // Some problematic directories like /tmp and /proc should be left alone
-    rv.append(Environment.get_tmp_dir());
+    dir = Environment.get_tmp_dir();
+    if (dir != null)
+      rv.append(dir);
     rv.append("/proc");
     
     return rv;
