@@ -68,6 +68,12 @@ public class Duplicity : Object
     argv.append("--log-fd=%d".printf(pipes[1]));
     argv.prepend("duplicity");
     
+    // Check for ionice to be a good disk citizen
+    if (Environment.find_program_in_path("ionice") != null) {
+      argv.prepend("-c3"); // idle class
+      argv.prepend("ionice");
+    }
+    
     string cmd = null;
     string[] real_argv = new string[argv.length()];
     i = 0;
