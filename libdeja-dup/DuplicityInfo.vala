@@ -110,9 +110,9 @@ public class DuplicityInfo : Object
     if (msg != null)
       msg = msg.chomp() + "\n\n";
     else if (version_string == null)
-        msg = _("Couldn't understand duplicity version");
+        msg = _("Could not understand duplicity version.\n\n");
     else
-        msg = _("Couldn't understand duplicity version '%s'").printf(version_string);
+        msg = _("Could not understand duplicity version '%s'.\n\n").printf(version_string);
 
     dlg.format_secondary_text("%s%s", msg, _("Without duplicity, Déjà Dup cannot function.  It will close now."));
     dlg.run();
