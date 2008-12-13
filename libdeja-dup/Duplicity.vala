@@ -34,7 +34,7 @@ public class Duplicity : Object
     toplevel = win;
   }
   
-  public void start(List<string> argv, List<string> envp) throws SpawnError
+  public void start(List<string> argv, List<string>? envp) throws SpawnError
   {
     var verbose_str = Environment.get_variable("DEJA_DUP_DEBUG");
     if (verbose_str != null && verbose_str.to_int() > 0)
