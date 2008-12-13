@@ -77,10 +77,13 @@ public class OperationRestore : Operation
     if (success) {
       fixup_home_dir();
       mv_source_to_dest();
+      cleanup_source();
     }
     else if (!cancelled) {
       // Error case.  TODO: Should tell user about partial restore in /tmp
     }
+    else
+      cleanup_source();
     
     base.operation_finished(dup, success, cancelled);
   }
@@ -144,6 +147,12 @@ public class OperationRestore : Operation
   {
     // TODO: Would be nice if this handled merging.
     FileUtils.rename(source, dest);
+  }
+  
+  void cleanup_source()
+  {
+    // TODO: Should be recursive
+    DirUtils.remove(source);
   }
 }
 
