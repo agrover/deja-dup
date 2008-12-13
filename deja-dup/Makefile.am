@@ -19,6 +19,7 @@ AM_CFLAGS = \
 
 deja_dup_VALASOURCES = \
 	MainWindow.vala \
+	RestoreAssistant.vala \
 	main.vala
 
 BUILT_SOURCES = \
