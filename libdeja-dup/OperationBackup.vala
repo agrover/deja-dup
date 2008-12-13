@@ -82,13 +82,39 @@ public class OperationBackup : Operation
     
     if (!client.get_bool(ENCRYPT_KEY))
       rv.append("--no-encryption");
+    
+    // Exclude directories no one wants to backup
+    var always_excluded = get_always_excluded_dirs();
+    foreach (string dir in always_excluded)
+      rv.append("--exclude=%s".printf(dir));
+    
     foreach (File s in exclude_list)
       rv.append("--exclude=%s".printf(s.get_path()));
     foreach (File s in include_list)
       rv.append("--include=%s".printf(s.get_path()));
+    
     rv.append("--exclude=**");
     rv.append("/");
     rv.append(target);
+    
+    return rv;
+  }
+  
+  List<string> get_always_excluded_dirs()
+  {
+    List<string> rv = new List<string>();
+    
+    // User doesn't care about cache
+    string dir = Environment.get_user_cache_dir();
+    if (dir != null)
+      rv.append(dir);
+    
+    // Likewise, user doesn't care about cache-like thumbnail directory
+    dir = Environment.get_home_dir();
+    if (dir != null)
+      rv.append(Path.build_filename(dir, ".thumbnails"));
+    
+    rv.append(Environment.get_tmp_dir());
     
     return rv;
   }
