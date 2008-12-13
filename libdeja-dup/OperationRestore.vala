@@ -23,6 +23,9 @@ namespace DejaDup {
 
 public class OperationRestore : Operation
 {
+  string dest; // Directory user wants to put files in
+  string source; // Directory duplicity puts files in
+  
   public OperationRestore(Gtk.Window? win) {
     toplevel = win;
   }
@@ -48,13 +51,17 @@ public class OperationRestore : Operation
       return null;
     }
     
-    var source = dlg.get_filename();
+    dest = dlg.get_filename();
     dlg.hide();
-    
-    var target = backend.get_location();
-    
-    if (source == null || target == null)
+    if (dest == null)
       return null;
+    
+    var target = backend.get_location();    
+    if (target == null)
+      return null;
+    
+    source = Path.build_filename(Environment.get_tmp_dir(), "deja-dup-XXXXXX");
+    DirUtils.mkdtemp(source);
     
     List<string> argv = new List<string>();
     argv.append("restore");
@@ -63,6 +70,80 @@ public class OperationRestore : Operation
     argv.append(target);
     argv.append(source);
     return argv;
+  }
+  
+  protected override void operation_finished(Duplicity dup, bool success, bool cancelled)
+  {
+    if (success) {
+      fixup_home_dir();
+      mv_source_to_dest();
+    }
+    else if (!cancelled) {
+      // Error case.  TODO: Should tell user about partial restore in /tmp
+    }
+    
+    base.operation_finished(dup, success, cancelled);
+  }
+  
+  /**
+   * The idea here is to cover the following scenario:
+   *   I backup my machine as user 'bob'
+   *   I recover on another machine as user 'robert'
+   * For the simple case (one home dir), we can note this and correct it.
+   * We even cover the case of having backed up as root, and having a home dir
+   * of /root.
+   * 
+   * This rejiggering is all done inside the source directory before we move it
+   * to its destination.
+   */
+  void fixup_home_dir()
+  {
+    string ideal_home = Path.build_filename(source, Environment.get_home_dir());
+    if (FileUtils.test(ideal_home, FileTest.EXISTS | FileTest.IS_DIR))
+      return;
+    
+    // We check if there is only one /home/XXXXXX directory in restored files.
+    // If so, we make sure it matches current user directory.
+    string current_home = null;
+    
+    string strd = Path.build_filename(source, "home");
+    Dir d;
+    try                 { d = Dir.open(strd); }
+    catch (FileError e) { d = null; }
+    
+    if (d != null) {
+      string child = d.read_name();
+      weak string end = d.read_name();
+      if (end != null) {
+        return; // more than one home dir, we don't know which they want
+      }
+      
+      if (child != null) { // exactly one home dir, will rename
+        current_home = Path.build_filename(strd, child);
+        if (!FileUtils.test(current_home, FileTest.IS_DIR))
+          current_home = null;
+      }
+    }
+    
+    if (current_home == null) { // hmm, no home dirs...  Check /root
+      current_home = Path.build_filename(source, "root");
+      if (!FileUtils.test(current_home, FileTest.EXISTS | FileTest.IS_DIR))
+        current_home = null;
+    }
+    
+    if (current_home != null) {
+      // Ideal home may not have all parents ("/home" part) yet
+      string dirname = Path.get_dirname(ideal_home);
+      DirUtils.create_with_parents(dirname, 0755);
+      
+      FileUtils.rename(current_home, ideal_home);
+    }
+  }
+  
+  void mv_source_to_dest()
+  {
+    // TODO: Would be nice if this handled merging.
+    FileUtils.rename(source, dest);
   }
 }
 
