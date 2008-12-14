@@ -39,17 +39,17 @@ public class DuplicityInfo : Object
   // Returns true if everything is OK.  If false, program will close.  A dialog
   // will already have been thrown up.
   public bool check_duplicity_version(Gtk.Window parent) {
-    string stdout;
+    string output;
     
     try {
-      Process.spawn_command_line_sync("duplicity --version", out stdout, null, null);
+      Process.spawn_command_line_sync("duplicity --version", out output, null, null);
     }
     catch (Error e) {
       show_missing_duplicity_error(parent, e.message);
       return false;
     }
     
-    var tokens = stdout.split(" ", 2);
+    var tokens = output.split(" ", 2);
     if (tokens == null || tokens[0] == null || tokens[1] == null) {
       show_missing_duplicity_error(parent, null);
       return false;
