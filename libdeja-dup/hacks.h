@@ -22,12 +22,8 @@
 #define __HACKS_H__
 
 #include <gnome-keyring.h>
-#include <gtk/gtk.h>
 
 extern const GnomeKeyringPasswordSchema *PASSPHRASE_SCHEMA;
-
-void hacks_menu_popup(GtkStatusIcon *icon, GtkMenu *menu,
-                      guint button, guint activate_time);
 
 #endif
 

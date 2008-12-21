@@ -30,15 +30,3 @@ static const GnomeKeyringPasswordSchema PASSPHRASE_SCHEMA_DEF = {
 
 const GnomeKeyringPasswordSchema *PASSPHRASE_SCHEMA = &PASSPHRASE_SCHEMA_DEF;
 
-/* FIXME: We should be able to pass gtk_status_icon_position_menu function
- * to popup to position the menu correctly, but bug 562725
- * (http://bugzilla.gnome.org/show_bug.cgi?id=562725) is getting in the
- * way.  For now, we use a C hack.
- */
-void hacks_menu_popup(GtkStatusIcon *icon, GtkMenu *menu,
-                      guint button, guint activate_time)
-{
-  gtk_menu_popup(menu, NULL, NULL, gtk_status_icon_position_menu, icon,
-                 button, activate_time);
-}
-

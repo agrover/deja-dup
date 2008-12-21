@@ -240,7 +240,7 @@ public class StatusIcon : Gtk.StatusIcon
     menu.append(item);
     
     menu.show_all();
-    hacks_menu_popup(this, menu, button, activate_time);
+    menu.popup(null, null, position_menu, button, activate_time);
   }
   
   void later_clicked(Gtk.MenuItem item) {
