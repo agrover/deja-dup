@@ -9,7 +9,6 @@ VALA_CFLAGS = \
 	--pkg gconf-2.0 \
 	--pkg libnotify \
 	--pkg libdeja-dup \
-	--pkg hacks \
 	--pkg config
 
 AM_CFLAGS = \
