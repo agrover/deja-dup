@@ -1,23 +1,25 @@
+# -*- indent-tabs-mode: t; tab-width: 2 -*-
+
 bin_PROGRAMS = deja-dup-applet
 
 VALA_CFLAGS = \
-  --vapidir $(top_srcdir)/libdeja-dup \
-  --vapidir $(top_srcdir)/vapi \
-  --pkg gtk+-2.0 \
-  --pkg gconf-2.0 \
-  --pkg libnotify \
-  --pkg libdeja-dup \
-  --pkg hacks \
-  --pkg config
+	--vapidir $(top_srcdir)/libdeja-dup \
+	--vapidir $(top_srcdir)/vapi \
+	--pkg gtk+-2.0 \
+	--pkg gconf-2.0 \
+	--pkg libnotify \
+	--pkg libdeja-dup \
+	--pkg hacks \
+	--pkg config
 
 AM_CFLAGS = \
-  -I$(top_srcdir)/libdeja-dup \
-  $(APPLET_CFLAGS) \
-  $(DEBUG_CFLAGS) \
-  -DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
+	-I$(top_srcdir)/libdeja-dup \
+	$(APPLET_CFLAGS) \
+	$(DEBUG_CFLAGS) \
+	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 deja_dup_applet_VALASOURCES = \
-    StatusIcon.vala \
+	StatusIcon.vala \
 	applet.vala
 
 BUILT_SOURCES = \
