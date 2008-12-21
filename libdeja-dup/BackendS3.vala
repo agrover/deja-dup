@@ -64,7 +64,7 @@ public class BackendS3 : Backend
       // First, try user's keyring
       secret_key = null;
       GnomeKeyring.find_network_password(id, null, S3_SERVER, null, "https",
-                                         null, 0, found_password, null);
+                                         null, 0, found_password);
     }
     else
       need_password();
@@ -102,7 +102,7 @@ public class BackendS3 : Backend
       string where = remember == Gnome.PasswordDialogRemember.SESSION ?
                                  "session" : GnomeKeyring.DEFAULT;
       GnomeKeyring.set_network_password(where, id, null, S3_SERVER, null,
-                                        "https", null, 0, secret_key, null, null);
+                                        "https", null, 0, secret_key, null);
     }
     
     got_secret_key();

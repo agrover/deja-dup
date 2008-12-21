@@ -125,8 +125,8 @@ public void show_about(Object owner, Gtk.Window? parent)
   }
   
   about = new Gtk.AboutDialog ();
-  about.set_email_hook (handle_about_mail, null);
-  about.set_url_hook (handle_about_uri, null);
+  about.set_email_hook (handle_about_mail);
+  about.set_url_hook (handle_about_uri);
   about.title = _("About Déjà Dup");
   about.authors = authors;
   about.translator_credits = _("translator-credits");
