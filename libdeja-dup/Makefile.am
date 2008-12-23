@@ -9,6 +9,7 @@ VALA_CFLAGS = \
   --pkg libgnomeui-2.0 \
   --pkg libnotify \
   --pkg gnome-keyring-1 \
+  --pkg gnome-vfs-2.0 \
   --pkg hacks \
   --pkg PassphraseSchema \
   --pkg unix \

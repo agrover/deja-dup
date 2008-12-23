@@ -143,10 +143,34 @@ public class OperationRestore : Operation
     }
   }
   
+  int mv_callback(GnomeVFS.XferProgressInfo info)
+  {
+      switch (info.status) {
+      case GnomeVFS.XferProgressStatus.OK:
+          // just a progress bump
+          break;
+      }
+      return 1;
+  }
+  
   void mv_source_to_dest()
   {
-    // TODO: Would be nice if this handled merging.
-    FileUtils.rename(source, dest);
+    string source_uri_str = GnomeVFS.get_uri_from_local_path(source);
+    string dest_uri_str = GnomeVFS.get_uri_from_local_path(dest);
+    GnomeVFS.URI source_uri = new GnomeVFS.URI(source_uri_str);
+    GnomeVFS.URI dest_uri = new GnomeVFS.URI(dest_uri_str);
+    
+    GnomeVFS.Result result = 
+      GnomeVFS.xfer_uri(source_uri, dest_uri,
+                        GnomeVFS.XferOptions.RECURSIVE |
+                        GnomeVFS.XferOptions.REMOVESOURCE,
+                        GnomeVFS.XferErrorMode.ABORT,
+                        GnomeVFS.XferOverwriteMode.REPLACE,
+                        mv_callback);
+    
+    if (result != GnomeVFS.Result.OK) {
+        warning("%s", GnomeVFS.result_to_string(result));
+    }
   }
   
   void cleanup_source()
