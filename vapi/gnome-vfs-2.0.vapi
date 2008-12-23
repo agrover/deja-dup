@@ -1435,7 +1435,7 @@ namespace GnomeVFS {
 	[CCode (cheader_filename = "libgnomevfs/gnome-vfs.h")]
 	public static GnomeVFS.Result write (GnomeVFS.Handle handle, void* buffer, GnomeVFS.FileSize bytes, GnomeVFS.FileSize bytes_written);
 	[CCode (cheader_filename = "libgnomevfs/gnome-vfs.h")]
-	public static GnomeVFS.Result xfer_delete_list (GLib.List source_uri_list, GnomeVFS.XferErrorMode error_mode, GnomeVFS.XferOptions xfer_options, GnomeVFS.XferProgressCallback progress_callback, void* data);
+	public static GnomeVFS.Result xfer_delete_list (GLib.List source_uri_list, GnomeVFS.XferErrorMode error_mode, GnomeVFS.XferOptions xfer_options, GnomeVFS.XferProgressCallback progress_callback);
 	[CCode (cheader_filename = "libgnomevfs/gnome-vfs.h")]
 	public static GnomeVFS.Result xfer_uri (GnomeVFS.URI source_uri, GnomeVFS.URI target_uri, GnomeVFS.XferOptions xfer_options, GnomeVFS.XferErrorMode error_mode, GnomeVFS.XferOverwriteMode overwrite_mode, GnomeVFS.XferProgressCallback progress_callback);
 	[CCode (cheader_filename = "libgnomevfs/gnome-vfs.h")]

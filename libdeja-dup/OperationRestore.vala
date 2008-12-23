@@ -173,10 +173,34 @@ public class OperationRestore : Operation
     }
   }
   
+  int rmdir_callback(GnomeVFS.XferProgressInfo info)
+  {
+      switch (info.status) {
+      case GnomeVFS.XferProgressStatus.OK:
+          // just a progress bump
+          break;
+      }
+      return 1;
+  }
+  
   void cleanup_source()
   {
-    // TODO: Should be recursive
-    DirUtils.remove(source);
+    string source_uri_str = GnomeVFS.get_uri_from_local_path(source);
+    GnomeVFS.URI source_uri = new GnomeVFS.URI(source_uri_str);
+    
+    var list = new List<GnomeVFS.URI>();
+    list.append(source_uri);
+    
+    GnomeVFS.Result result = 
+      GnomeVFS.delete_list(list,
+                           GnomeVFS.XferErrorMode.ABORT,
+                           GnomeVFS.XferOptions.RECURSIVE |
+                           GnomeVFS.XferOptions.REMOVESOURCE,
+                           rmdir_callback);
+    
+    if (result != GnomeVFS.Result.OK) {
+        warning("%s", GnomeVFS.result_to_string(result));
+    }
   }
 }
 
