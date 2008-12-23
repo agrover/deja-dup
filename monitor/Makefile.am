@@ -1,14 +1,16 @@
+# -*- indent-tabs-mode: t; tab-width: 2 -*-
+
 bin_PROGRAMS = deja-dup-monitor
 
 VALA_CFLAGS = \
-  --vapidir $(top_srcdir)/vapi \
-  --pkg gconf-2.0 \
-  --pkg config
+	--vapidir $(top_srcdir)/vapi \
+	--pkg gconf-2.0 \
+	--pkg config
 
 AM_CFLAGS = \
-  $(MONITOR_CFLAGS) \
-  $(DEBUG_CFLAGS) \
-  -DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
+	$(MONITOR_CFLAGS) \
+	$(DEBUG_CFLAGS) \
+	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 deja_dup_monitor_VALASOURCES = \
 	monitor.vala

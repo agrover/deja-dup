@@ -173,7 +173,7 @@ public abstract class Operation : Object
       GnomeKeyring.store_password(PASSPHRASE_SCHEMA,
                                   where,
                                   _("Déjà Dup backup passphrase"),
-                                  passphrase, null, null,
+                                  passphrase, null,
                                   "owner", Config.PACKAGE,
                                   "type", "passphrase");
     }

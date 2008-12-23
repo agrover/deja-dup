@@ -1,24 +1,26 @@
+# -*- indent-tabs-mode: t; tab-width: 2 -*-
+
 noinst_LTLIBRARIES = libdeja-dup.la
 
 VALA_CFLAGS = \
-  --library=libdeja-dup \
-  --vapidir $(top_srcdir)/vapi \
-  --pkg gtk+-2.0 \
-  --pkg gio-2.0 \
-  --pkg gconf-2.0 \
-  --pkg libgnomeui-2.0 \
-  --pkg libnotify \
-  --pkg gnome-keyring-1 \
-  --pkg gnome-vfs-2.0 \
-  --pkg hacks \
-  --pkg PassphraseSchema \
-  --pkg unix \
-  --pkg config
+	--library=libdeja-dup \
+	--vapidir $(top_srcdir)/vapi \
+	--pkg gtk+-2.0 \
+	--pkg gio-2.0 \
+	--pkg gconf-2.0 \
+	--pkg libgnomeui-2.0 \
+	--pkg libnotify \
+	--pkg gnome-keyring-1 \
+	--pkg gnome-vfs-2.0 \
+	--pkg hacks \
+	--pkg PassphraseSchema \
+	--pkg unix \
+	--pkg config
 
 AM_CFLAGS = \
-  $(LIBRARY_CFLAGS) \
-  $(DEBUG_CFLAGS) \
-  -DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
+	$(LIBRARY_CFLAGS) \
+	$(DEBUG_CFLAGS) \
+	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 libdeja_dup_la_VALASOURCES = \
 	Backend.vala \

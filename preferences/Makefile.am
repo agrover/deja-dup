@@ -1,21 +1,23 @@
+# -*- indent-tabs-mode: t; tab-width: 2 -*-
+
 bin_PROGRAMS = deja-dup-preferences
 
 VALA_CFLAGS = \
-  --vapidir $(top_srcdir)/libdeja-dup \
-  --vapidir $(top_srcdir)/vapi \
-  --pkg gtk+-2.0 \
-  --pkg gio-2.0 \
-  --pkg gconf-2.0 \
-  --pkg unique-1.0 \
-  --pkg libdeja-dup \
-  --pkg unix \
-  --pkg config
+	--vapidir $(top_srcdir)/libdeja-dup \
+	--vapidir $(top_srcdir)/vapi \
+	--pkg gtk+-2.0 \
+	--pkg gio-2.0 \
+	--pkg gconf-2.0 \
+	--pkg unique-1.0 \
+	--pkg libdeja-dup \
+	--pkg unix \
+	--pkg config
 
 AM_CFLAGS = \
-  -I$(top_srcdir)/libdeja-dup \
-  $(PREF_CFLAGS) \
-  $(DEBUG_CFLAGS) \
-  -DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
+	-I$(top_srcdir)/libdeja-dup \
+	$(PREF_CFLAGS) \
+	$(DEBUG_CFLAGS) \
+	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 deja_dup_preferences_VALASOURCES = \
 	ConfigBackend.vala \

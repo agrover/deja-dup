@@ -17,7 +17,4 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-[CCode (cprefix = "", lower_case_cprefix = "", cheader_filename = "hacks.h")]
-public void hacks_menu_popup(Gtk.StatusIcon icon, Gtk.Menu menu,
-                             uint button, uint activate_time);
 

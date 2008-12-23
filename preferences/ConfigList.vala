@@ -187,15 +187,15 @@ public class ConfigList : ConfigWidget
     
     try {
       weak SList<string> slist = client.get_list(key, GConf.ValueType.STRING);
-      weak SList<string> iter = slist;
-      while (iter != null) {
-        var sfile = DejaDup.parse_dir(iter.data);
+      weak SList<string> siter = slist;
+      while (siter != null) {
+        var sfile = DejaDup.parse_dir(siter.data);
         if (sfile.equal(current_file)) {
-          slist.remove_link(iter);
+          slist.remove_link(siter);
           client.set_list(key, GConf.ValueType.STRING, slist);
           break;
         }
-        iter = iter.next;
+        siter = siter.next;
       }
     }
     catch (Error e) {
