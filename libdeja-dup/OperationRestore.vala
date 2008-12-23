@@ -195,7 +195,8 @@ public class OperationRestore : Operation
       GnomeVFS.delete_list(list,
                            GnomeVFS.XferErrorMode.ABORT,
                            GnomeVFS.XferOptions.RECURSIVE |
-                           GnomeVFS.XferOptions.REMOVESOURCE,
+                           GnomeVFS.XferOptions.DELETE_ITEMS |
+                           GnomeVFS.XferOptions.EMPTY_DIRECTORIES,
                            rmdir_callback);
     
     if (result != GnomeVFS.Result.OK) {
