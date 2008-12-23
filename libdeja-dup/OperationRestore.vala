@@ -25,6 +25,7 @@ public class OperationRestore : Operation
 {
   string dest; // Directory user wants to put files in
   string source; // Directory duplicity puts files in
+  List<string> errors;
   
   public OperationRestore(Gtk.Window? win) {
     toplevel = win;
@@ -76,8 +77,8 @@ public class OperationRestore : Operation
   {
     if (success) {
       fixup_home_dir();
-      mv_source_to_dest();
-      cleanup_source();
+      if (mv_source_to_dest())
+        cleanup_source();
     }
     else if (!cancelled) {
       // Error case.  TODO: Should tell user about partial restore in /tmp
@@ -143,22 +144,62 @@ public class OperationRestore : Operation
     }
   }
   
-  int mv_callback(GnomeVFS.XferProgressInfo info)
+  void show_errors()
   {
-      switch (info.status) {
-      case GnomeVFS.XferProgressStatus.OK:
-          // just a progress bump
-          break;
-      }
-      return 1;
+    // Various file errors piled up as we restored everything to its rightful
+    // place.  Show them as a big ol' list, and let the user know that
+    // they can still get the files in /tmp.
+    var dlg = new Gtk.Dialog.with_buttons(
+                ngettext("Error while restoring files",
+                         "Errors while restoring files", errors.length()),
+                toplevel,
+                Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+                Gtk.STOCK_OK, null);
+    
+    var label = new Gtk.Label(_("Not all files could be restored.  Any files that could not be restored may still be found in %s.").printf(source));
+    
+    var error_buf = new Gtk.TextBuffer(null);
+    string[] error_array = new string[errors.length() + 1];
+    int i = 0;
+    foreach (string err in errors)
+      error_array[i++] = err;
+    error_array[i] = null;
+    error_buf.set_text(string.joinv("\n", error_array), -1);
+    
+    var error_view = new Gtk.TextView.with_buffer(error_buf);
+    error_view.editable = false;
+    
+    dlg.vbox.pack_end_defaults(label);
+    dlg.vbox.pack_end_defaults(error_view);
+    
+    dlg.run();
+    dlg.destroy();
   }
   
-  void mv_source_to_dest()
+  int mv_callback(GnomeVFS.XferProgressInfo info)
+  {
+    switch (info.status) {
+    case GnomeVFS.XferProgressStatus.OK:
+      // just a progress bump
+      break;
+    case GnomeVFS.XferProgressStatus.VFSERROR:
+      errors.append(_("Could not restore %s: %s").printf(
+                    info.target_name,
+                    GnomeVFS.result_to_string(info.vfs_status)));
+      return GnomeVFS.XferErrorAction.SKIP; // Always skip, try to do as much
+                                            // as possible.
+    }
+    return 1;
+  }
+  
+  bool mv_source_to_dest()
   {
     string source_uri_str = GnomeVFS.get_uri_from_local_path(source);
     string dest_uri_str = GnomeVFS.get_uri_from_local_path(dest);
     GnomeVFS.URI source_uri = new GnomeVFS.URI(source_uri_str);
     GnomeVFS.URI dest_uri = new GnomeVFS.URI(dest_uri_str);
+    
+    errors = new List<string>();
     
     GnomeVFS.Result result = 
       GnomeVFS.xfer_uri(source_uri, dest_uri,
@@ -168,19 +209,29 @@ public class OperationRestore : Operation
                         GnomeVFS.XferOverwriteMode.REPLACE,
                         mv_callback);
     
-    if (result != GnomeVFS.Result.OK) {
-        warning("%s", GnomeVFS.result_to_string(result));
+    if (errors != null) {
+      show_errors();
+      return false;
     }
+    else
+      return true;
   }
   
   int rmdir_callback(GnomeVFS.XferProgressInfo info)
   {
-      switch (info.status) {
-      case GnomeVFS.XferProgressStatus.OK:
-          // just a progress bump
-          break;
-      }
-      return 1;
+    switch (info.status) {
+    case GnomeVFS.XferProgressStatus.OK:
+      // just a progress bump
+      break;
+    case GnomeVFS.XferProgressStatus.VFSERROR:
+      warning(_("Could not delete %s: %s"),
+              info.source_name,
+              GnomeVFS.result_to_string(info.vfs_status));
+      // Always skip, don't bother worrying about left over files,
+      // everything is in /tmp and will be cleared out anyway.
+      return GnomeVFS.XferErrorAction.SKIP;
+    }
+    return 1;
   }
   
   void cleanup_source()
@@ -192,16 +243,12 @@ public class OperationRestore : Operation
     list.append(source_uri);
     
     GnomeVFS.Result result = 
-      GnomeVFS.delete_list(list,
-                           GnomeVFS.XferErrorMode.ABORT,
-                           GnomeVFS.XferOptions.RECURSIVE |
-                           GnomeVFS.XferOptions.DELETE_ITEMS |
-                           GnomeVFS.XferOptions.EMPTY_DIRECTORIES,
-                           rmdir_callback);
-    
-    if (result != GnomeVFS.Result.OK) {
-        warning("%s", GnomeVFS.result_to_string(result));
-    }
+      GnomeVFS.xfer_delete_list(list,
+                                GnomeVFS.XferErrorMode.ABORT,
+                                GnomeVFS.XferOptions.RECURSIVE |
+                                GnomeVFS.XferOptions.DELETE_ITEMS |
+                                GnomeVFS.XferOptions.EMPTY_DIRECTORIES,
+                                rmdir_callback);
   }
 }
 
