@@ -24,7 +24,7 @@ namespace DejaDup {
 public class Duplicity : Object
 {
   public signal void done(bool success, bool cancelled);
-  public signal void raise_error(string errstr);
+  public signal void raise_error(string errstr, string? detail);
   
   public Gtk.Window toplevel {get; construct;}
   
@@ -155,7 +155,7 @@ public class Duplicity : Object
       var errorstr = grab_stanza_text(stanza);
       error_issued = true;
       
-      raise_error(errorstr);
+      raise_error(errorstr, null);
     }
   }
   
@@ -195,7 +195,7 @@ public class Duplicity : Object
         
         if (exitval != 0) {
           if (!error_issued) {
-            raise_error(_("Failed with an unknown error."));
+            raise_error(_("Failed with an unknown error."), null);
           }
         }
       }

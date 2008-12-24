@@ -139,7 +139,9 @@ public class StatusIcon : Gtk.StatusIcon
     return false; // don't immediately ask user, wait for our response
   }
   
-  void notify_error(DejaDup.OperationBackup op, string errstr) {
+  void notify_error(DejaDup.OperationBackup op, string errstr, string? detail) {
+    // TODO: Do something sane with detail.  Not urgent right now, it's only used for restore
+    
     // We want to stay open until user acknowledges our error/it times out
     op.done -= send_done;
     fatal_error = true;

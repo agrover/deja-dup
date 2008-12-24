@@ -118,12 +118,31 @@ public class MainWindow : Gtk.Window
     dlg.destroy();
   }
   
-  void show_error(DejaDup.Operation op, string errstr)
+  void show_error(DejaDup.Operation op, string errstr, string? detail)
   {
     hide_progress();
     
     var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Error occurred"));
     dlg.format_secondary_text("%s", errstr);
+    
+    if (detail != null) {
+      var error_buf = new Gtk.TextBuffer(null);
+      error_buf.set_text(detail, -1);
+      
+      var error_view = new Gtk.TextView.with_buffer(error_buf);
+      error_view.editable = false;
+      error_view.wrap_mode = Gtk.WrapMode.WORD;
+      
+      var scroll = new Gtk.ScrolledWindow(null, null);
+      scroll.add(error_view);
+      
+      var expander = new Gtk.Expander.with_mnemonic(_("_Details"));
+      expander.add(scroll);
+      
+      expander.show_all();
+      dlg.vbox.pack_start_defaults(expander);
+    }
+    
     dlg.run();
     dlg.destroy();
   }

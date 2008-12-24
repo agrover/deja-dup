@@ -62,7 +62,7 @@ public class OperationRestore : Operation
       return null;
     
     source = Path.build_filename(Environment.get_tmp_dir(), "deja-dup-XXXXXX");
-    DirUtils.mkdtemp(source);
+    source = DirUtils.mkdtemp(source);
     
     List<string> argv = new List<string>();
     argv.append("restore");
@@ -79,6 +79,8 @@ public class OperationRestore : Operation
       fixup_home_dir();
       if (mv_source_to_dest())
         cleanup_source();
+      else
+        success = false;
     }
     else if (!cancelled) {
       // Error case.  TODO: Should tell user about partial restore in /tmp
@@ -149,31 +151,23 @@ public class OperationRestore : Operation
     // Various file errors piled up as we restored everything to its rightful
     // place.  Show them as a big ol' list, and let the user know that
     // they can still get the files in /tmp.
-    var dlg = new Gtk.Dialog.with_buttons(
-                ngettext("Error while restoring files",
-                         "Errors while restoring files", errors.length()),
-                toplevel,
-                Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-                Gtk.STOCK_OK, null);
+    var len = errors.length();
+    string detail = null;
     
-    var label = new Gtk.Label(_("Not all files could be restored.  Any files that could not be restored may still be found in %s.").printf(source));
+    if (len > 1) {
+      string[] error_array = new string[len + 1];
+      int i = 0;
+      foreach (string err in errors)
+        error_array[i++] = err;
+      error_array[i] = null;
+      detail = string.joinv("\n\n", error_array);
+    }
     
-    var error_buf = new Gtk.TextBuffer(null);
-    string[] error_array = new string[errors.length() + 1];
-    int i = 0;
-    foreach (string err in errors)
-      error_array[i++] = err;
-    error_array[i] = null;
-    error_buf.set_text(string.joinv("\n", error_array), -1);
+    var error_text = _("Not all files could be restored. Any files that could not be restored may still be found in %s.").printf(source);
+    if (detail == null)
+      error_text += "\n\n" + errors.data;
     
-    var error_view = new Gtk.TextView.with_buffer(error_buf);
-    error_view.editable = false;
-    
-    dlg.vbox.pack_end_defaults(label);
-    dlg.vbox.pack_end_defaults(error_view);
-    
-    dlg.run();
-    dlg.destroy();
+    raise_error(error_text, detail);
   }
   
   int mv_callback(GnomeVFS.XferProgressInfo info)
@@ -183,8 +177,15 @@ public class OperationRestore : Operation
       // just a progress bump
       break;
     case GnomeVFS.XferProgressStatus.VFSERROR:
+      // Some errors don't have target_names.  These tend to be errors when
+      // collecting information about the destination, and seem ignorable.
+      if (info.target_name == null)
+        return GnomeVFS.XferErrorAction.SKIP;
+      var target = File.new_for_uri(info.target_name);
+      var dest_dir = File.new_for_path(dest);
+      var relative_target = dest_dir.get_relative_path(target);
       errors.append(_("Could not restore %s: %s").printf(
-                    info.target_name,
+                    relative_target,
                     GnomeVFS.result_to_string(info.vfs_status)));
       return GnomeVFS.XferErrorAction.SKIP; // Always skip, try to do as much
                                             // as possible.
@@ -194,6 +195,8 @@ public class OperationRestore : Operation
   
   bool mv_source_to_dest()
   {
+    GnomeVFS.init();
+    
     string source_uri_str = GnomeVFS.get_uri_from_local_path(source);
     string dest_uri_str = GnomeVFS.get_uri_from_local_path(dest);
     GnomeVFS.URI source_uri = new GnomeVFS.URI(source_uri_str);
@@ -201,13 +204,12 @@ public class OperationRestore : Operation
     
     errors = new List<string>();
     
-    GnomeVFS.Result result = 
-      GnomeVFS.xfer_uri(source_uri, dest_uri,
-                        GnomeVFS.XferOptions.RECURSIVE |
-                        GnomeVFS.XferOptions.REMOVESOURCE,
-                        GnomeVFS.XferErrorMode.ABORT,
-                        GnomeVFS.XferOverwriteMode.REPLACE,
-                        mv_callback);
+    GnomeVFS.xfer_uri(source_uri, dest_uri,
+                      GnomeVFS.XferOptions.RECURSIVE |
+                      GnomeVFS.XferOptions.REMOVESOURCE,
+                      GnomeVFS.XferErrorMode.QUERY,
+                      GnomeVFS.XferOverwriteMode.REPLACE,
+                      mv_callback);
     
     if (errors != null) {
       show_errors();
@@ -224,8 +226,9 @@ public class OperationRestore : Operation
       // just a progress bump
       break;
     case GnomeVFS.XferProgressStatus.VFSERROR:
+      var source = File.new_for_uri(info.source_name);
       warning(_("Could not delete %s: %s"),
-              info.source_name,
+              source.get_parse_name(),
               GnomeVFS.result_to_string(info.vfs_status));
       // Always skip, don't bother worrying about left over files,
       // everything is in /tmp and will be cleared out anyway.
@@ -236,19 +239,20 @@ public class OperationRestore : Operation
   
   void cleanup_source()
   {
+    GnomeVFS.init();
+    
     string source_uri_str = GnomeVFS.get_uri_from_local_path(source);
     GnomeVFS.URI source_uri = new GnomeVFS.URI(source_uri_str);
     
     var list = new List<GnomeVFS.URI>();
     list.append(source_uri);
     
-    GnomeVFS.Result result = 
-      GnomeVFS.xfer_delete_list(list,
-                                GnomeVFS.XferErrorMode.ABORT,
-                                GnomeVFS.XferOptions.RECURSIVE |
-                                GnomeVFS.XferOptions.DELETE_ITEMS |
-                                GnomeVFS.XferOptions.EMPTY_DIRECTORIES,
-                                rmdir_callback);
+    GnomeVFS.xfer_delete_list(list,
+                              GnomeVFS.XferErrorMode.QUERY,
+                              GnomeVFS.XferOptions.RECURSIVE |
+                              GnomeVFS.XferOptions.DELETE_ITEMS |
+                              GnomeVFS.XferOptions.EMPTY_DIRECTORIES,
+                              rmdir_callback);
   }
 }
 

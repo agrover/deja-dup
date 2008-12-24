@@ -24,7 +24,7 @@ namespace DejaDup {
 public abstract class Operation : Object
 {
   public signal void done(bool success);
-  public signal void raise_error(string errstr);
+  public signal void raise_error(string errstr, string? detail);
   public signal void action_desc_changed(string action);
   public signal bool passphrase_required();
   public signal bool backend_password_required();
@@ -59,7 +59,7 @@ public abstract class Operation : Object
     }
     
     dup.done += operation_finished;
-    dup.raise_error += (d, s) => {raise_error(s);};
+    dup.raise_error += (d, s, detail) => {raise_error(s, detail);};
     backend.envp_ready += continue_with_envp;
     backend.need_password += (b) => {
       bool can_ask_now = backend_password_required();

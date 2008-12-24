@@ -47,7 +47,7 @@ public class OperationBackup : Operation
       // Make cleanup operation inherit most of our state and pass important
       // signals back.
       clean.action_desc_changed += (op, str) => {action_desc_changed(str);};
-      clean.raise_error += (op, str) => {raise_error(str);};
+      clean.raise_error += (op, str, detail) => {raise_error(str, detail);};
       clean.passphrase = passphrase;
       clean.backend = backend;
       
