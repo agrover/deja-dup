@@ -27,8 +27,9 @@ public class OperationRestore : Operation
   string source; // Directory duplicity puts files in
   List<string> errors;
   
-  public OperationRestore(Gtk.Window? win) {
+  public OperationRestore(Gtk.Window? win, string dest_in) {
     toplevel = win;
+    dest = dest_in;
   }
   
   public override void start() throws Error
@@ -40,22 +41,6 @@ public class OperationRestore : Operation
   protected override List<string>? make_argv() throws Error
   {
     var client = GConf.Client.get_default();
-    
-    var dlg = new Gtk.FileChooserDialog(_("Choose destination for restored files"),
-                                        toplevel,
-                                        Gtk.FileChooserAction.SELECT_FOLDER,
-                                        Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                          				      Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT);
-    
-    if (dlg.run() != Gtk.ResponseType.ACCEPT) {
-      dlg.hide();
-      return null;
-    }
-    
-    dest = dlg.get_filename();
-    dlg.hide();
-    if (dest == null)
-      return null;
     
     var target = backend.get_location();    
     if (target == null)

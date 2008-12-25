@@ -19,6 +19,14 @@
 
 using GLib;
 
+public string get_restore_icon_filename() {
+  return Path.build_filename(Config.PKG_DATA_DIR, "document-save.svg");
+}
+
+public string get_backup_icon_filename() {
+  return Path.build_filename(Config.PKG_DATA_DIR, "document-send.svg");
+}
+
 public class MainWindow : Gtk.Window
 {
   Gtk.Dialog progress;
@@ -39,7 +47,7 @@ public class MainWindow : Gtk.Window
     
     var restore_icon = new Gtk.Image();
     try {
-      var filename = "%s/document-save.svg".printf(Config.PKG_DATA_DIR);
+      var filename = get_restore_icon_filename();
       var restore_pix = new Gdk.Pixbuf.from_file_at_size(filename, 128, 128);
       restore_icon.set("pixbuf", restore_pix);
     }
@@ -65,7 +73,7 @@ public class MainWindow : Gtk.Window
     
     var backup_icon = new Gtk.Image();
     try {
-      var filename = "%s/document-send.svg".printf(Config.PKG_DATA_DIR);
+      var filename = get_backup_icon_filename();
       var backup_pix = new Gdk.Pixbuf.from_file_at_size(filename, 128, 128);
       backup_icon.set("pixbuf", backup_pix);
     }
@@ -89,7 +97,7 @@ public class MainWindow : Gtk.Window
              "child", restore_button,
              "child", backup_button);
     
-    restore_button.clicked += (b) => {do_restore();};
+    restore_button.clicked += (b) => {ask_restore();};
     backup_button.clicked += (b) => {do_backup();};
     
     vb.pack_start (setup_menu (), false, false, 0);
@@ -232,13 +240,22 @@ public class MainWindow : Gtk.Window
   
   void on_restore(Gtk.Action action)
   {
-    do_restore();
+    ask_restore();
   }
   
-  void do_restore()
+  void ask_restore()
   {
+    var dlg = new RestoreAssistant();
+    dlg.transient_for = this;
+    dlg.close += do_restore;
+    dlg.cancel += (d) => {d.destroy();};
+    dlg.show_all();
+  }
+  
+  void do_restore(RestoreAssistant dlg)
+  { 
     show_progress();
-    op = new DejaDup.OperationRestore(this);
+    op = new DejaDup.OperationRestore(this, dlg.restore_location);
     op.done += (b, s) => {
       hide_progress();
       op = null;
