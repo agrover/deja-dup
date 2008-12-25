@@ -246,31 +246,9 @@ public class MainWindow : Gtk.Window
   void ask_restore()
   {
     var dlg = new RestoreAssistant();
+    dlg.modal = true;
     dlg.transient_for = this;
-    dlg.close += do_restore;
-    dlg.cancel += (d) => {d.destroy();};
     dlg.show_all();
-  }
-  
-  void do_restore(RestoreAssistant dlg)
-  { 
-    show_progress();
-    op = new DejaDup.OperationRestore(this, dlg.restore_location);
-    op.done += (b, s) => {
-      hide_progress();
-      op = null;
-      if (s)
-        show_success(_("Restore finished"), _("Your files were successfully restored."));
-    };
-    op.raise_error += show_error;
-    op.action_desc_changed += set_progress_label;
-    
-    try {
-      op.start();
-    }
-    catch (Error e) {
-      printerr("%s\n", e.message);
-    }
   }
   
   void on_about(Gtk.Action action)

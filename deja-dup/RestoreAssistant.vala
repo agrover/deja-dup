@@ -25,7 +25,14 @@ public class RestoreAssistant : Gtk.Assistant
   
   Gtk.HBox cust_box;
   Gtk.FileChooserButton cust_button;
+  Gtk.Label progress_label;
+  Gtk.ProgressBar progress_bar;
+  Gtk.Widget progress_page;
+  Gtk.Label summary_label;
+  Gtk.Widget summary_page;
   Gdk.Pixbuf icon;
+  DejaDup.OperationRestore op;
+  uint timeout_id;
   construct
   {
     title = _("Restore");
@@ -35,11 +42,18 @@ public class RestoreAssistant : Gtk.Assistant
       icon = new Gdk.Pixbuf.from_file_at_size(filename, 48, 48);
     }
     catch (Error e) {
-      warning("%s", e.message);
+      warning("%s\n", e.message);
     }
     
     add_restore_dest_page();
+    add_confirm_page();
+    add_progress_page();
     add_summary_page();
+    
+    apply += do_apply;
+    cancel += do_cancel;
+    close += do_close;
+    prepare += do_prepare;
   }
   
   Gtk.Widget make_restore_dest_page()
@@ -85,7 +99,7 @@ public class RestoreAssistant : Gtk.Assistant
     return page;
   }
   
-  Gtk.Widget make_summary_page()
+  Gtk.Widget make_confirm_page()
   {
     int rows = 0;
     
@@ -106,15 +120,84 @@ public class RestoreAssistant : Gtk.Assistant
     return page;
   }
   
+  bool pulse()
+  {
+    progress_bar.pulse();
+    return true;
+  }
+  
+  void set_progress_label(DejaDup.OperationRestore restore, string label)
+  {
+    progress_label.label = label;
+  }
+  
+  Gtk.Widget make_progress_page()
+  {
+    progress_label = new Gtk.Label("");
+    progress_label.set("xalign", 0.0f);
+    
+    progress_bar = new Gtk.ProgressBar();
+    
+    var page = new Gtk.VBox(false, 6);
+    page.set("child", progress_label,
+             "child", progress_bar,
+             "border-width", 12);
+    page.child_set(progress_label, "expand", false);
+    page.child_set(progress_bar, "expand", false);
+    
+    return page;
+  }
+  
+  void show_error(DejaDup.OperationRestore restore, string error, string? detail)
+  {
+    child_set(summary_page,
+              "title", _("Restore Failed"));
+    summary_label.label = error;
+  }
+  
+  Gtk.Widget make_summary_page()
+  {
+    summary_label = new Gtk.Label("");
+    summary_label.set("xalign", 0.0f);
+    
+    var page = new Gtk.VBox(false, 6);
+    page.set("child", summary_label,
+             "border-width", 12);
+    page.child_set(summary_label, "expand", false);
+    
+    return page;
+  }
+  
   void add_restore_dest_page()
   {
     var page = make_restore_dest_page();
     append_page(page);
     child_set(page,
-              "title", _("Restore to where?"),
-              "page-type", Gtk.AssistantPageType.CONTENT,
+              "title", _("Restore to Where?"),
               "complete", true,
               "header-image", icon);
+  }
+  
+  void add_confirm_page()
+  {
+    var page = make_confirm_page();
+    append_page(page);
+    child_set(page,
+              "title", _("Summary"),
+              "page-type", Gtk.AssistantPageType.CONFIRM,
+              "complete", true,
+              "header-image", icon);
+  }
+
+  void add_progress_page()
+  {
+    var page = make_progress_page();
+    append_page(page);
+    child_set(page,
+              "title", _("Restoring"),
+              "page-type", Gtk.AssistantPageType.PROGRESS,
+              "header-image", icon);
+    progress_page = page;
   }
   
   void add_summary_page()
@@ -122,10 +205,62 @@ public class RestoreAssistant : Gtk.Assistant
     var page = make_summary_page();
     append_page(page);
     child_set(page,
-              "title", _("Summary"),
-              "page-type", Gtk.AssistantPageType.CONFIRM,
+              "title", _("Restore Finished"),
+              "page-type", Gtk.AssistantPageType.SUMMARY,
               "complete", true,
               "header-image", icon);
+    summary_page = page;
+  }
+  
+  void apply_finished(DejaDup.OperationRestore restore, bool success)
+  {
+    if (success)
+      summary_label.label = _("Your files were successfully restored.");
+    // else show_error set label
+    
+    set_current_page(get_n_pages() - 1); // last, summary page
+    
+    if (timeout_id > 0) {
+      Source.remove(timeout_id);
+      timeout_id = 0;
+    }
+    
+    op = null;
+  }
+  
+  void do_apply()
+  {
+    op = new DejaDup.OperationRestore(this, restore_location);
+    op.done += apply_finished;
+    op.raise_error += show_error;
+    op.action_desc_changed += set_progress_label;
+    
+    try {
+      op.start();
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      show_error(op, e.message, null); // not really user-friendly text, but ideally this won't happen
+      apply_finished(op, false);
+    }
+  }
+  
+  void do_prepare(RestoreAssistant assist, Gtk.Widget page)
+  {
+    if (page == progress_page)
+      timeout_id = Timeout.add(200, pulse);
+  }
+  
+  void do_cancel()
+  {
+    if (op != null)
+      op.cancel();
+    destroy();
+  }
+  
+  void do_close()
+  {
+    destroy();
   }
 }
 
