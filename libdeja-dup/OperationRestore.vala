@@ -176,9 +176,7 @@ public class OperationRestore : Operation
     File destf = File.new_for_path(dest);
     var move = new RecursiveMove(sourcef, destf);
     move.raise_error += mv_error;
-    move.done += (m) => {Gtk.main_quit();};
-    Idle.add(move.start);
-    Gtk.main();
+    move.start();
     
     if (errors != null) {
       show_errors();
@@ -188,40 +186,11 @@ public class OperationRestore : Operation
       return true;
   }
   
-  int rmdir_callback(GnomeVFS.XferProgressInfo info)
-  {
-    switch (info.status) {
-    case GnomeVFS.XferProgressStatus.OK:
-      // just a progress bump
-      break;
-    case GnomeVFS.XferProgressStatus.VFSERROR:
-      var source = File.new_for_uri(info.source_name);
-      warning(_("Could not delete %s: %s"),
-              source.get_parse_name(),
-              GnomeVFS.result_to_string(info.vfs_status));
-      // Always skip, don't bother worrying about left over files,
-      // everything is in /tmp and will be cleared out anyway.
-      return GnomeVFS.XferErrorAction.SKIP;
-    }
-    return 1;
-  }
-  
   void cleanup_source()
   {
-    GnomeVFS.init();
-    
-    string source_uri_str = GnomeVFS.get_uri_from_local_path(source);
-    GnomeVFS.URI source_uri = new GnomeVFS.URI(source_uri_str);
-    
-    var list = new List<GnomeVFS.URI>();
-    list.append(source_uri);
-    
-    GnomeVFS.xfer_delete_list(list,
-                              GnomeVFS.XferErrorMode.QUERY,
-                              GnomeVFS.XferOptions.RECURSIVE |
-                              GnomeVFS.XferOptions.DELETE_ITEMS |
-                              GnomeVFS.XferOptions.EMPTY_DIRECTORIES,
-                              rmdir_callback);
+    File sourcef = File.new_for_path(source);
+    var move = new RecursiveDelete(sourcef);
+    move.start();
   }
 }
 

@@ -75,8 +75,7 @@ PKG_CHECK_MODULES(LIBRARY,
                   gio-2.0
                   gconf-2.0
                   libgnomeui-2.0
-                  gnome-keyring-1
-                  gnome-vfs-2.0)
+                  gnome-keyring-1)
 AC_SUBST(LIBRARY_CFLAGS)
 AC_SUBST(LIBRARY_LIBS)
 

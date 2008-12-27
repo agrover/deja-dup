@@ -29,40 +29,12 @@ namespace DejaDup {
  * This is not optimized for remote files.  It's mostly async, but it does the
  * occasional sync operation.
  */
-public class RecursiveMove : Object
+public class RecursiveMove : RecursiveOp
 {
-  public signal void done();
-  public signal void raise_error(File src, File dst, string errstr);
-  
-  public File src {get; construct;}
-  public File dst {get; construct;}
-  
-  int ref_count;
-  FileType src_type;
-  FileType dst_type;
   public RecursiveMove(File source, File dest)
   {
     this.src = source;
     this.dst = dest;
-  }
-  
-  public bool start()
-  {
-    src_type = src.query_file_type(FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
-    dst_type = dst.query_file_type(FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
-    
-    switch (src_type) {
-    case FileType.DIRECTORY:
-      move_dir();
-      break;
-    default:
-      move_file();
-      break;
-    }
-    
-    check_ref();
-    
-    return true;
   }
   
   void progress_callback(int64 current_num_bytes, int64 total_num_bytes)
@@ -70,7 +42,7 @@ public class RecursiveMove : Object
     // Do nothing right now
   }
   
-  void move_file()
+  protected override void handle_file()
   {
     if (dst_type == FileType.DIRECTORY) {
       // GIO will throw a fit if we try to overwrite a directory with a file.
@@ -104,7 +76,7 @@ public class RecursiveMove : Object
     }
   }
   
-  void move_dir()
+  protected override void handle_dir()
   {
     if (dst_type != FileType.UNKNOWN && dst_type != FileType.DIRECTORY) {
       // Hmmm...  Something that's not a directory is in our way.
@@ -152,71 +124,9 @@ public class RecursiveMove : Object
       // If we fail, no big deal.  There'll often be stuff like /home that we
       // can't change and don't care about changing.
     }
-    
-    // Now descend
-    add_ref();
-    move_children();
   }
   
-  void move_children()
-  {
-    src.enumerate_children_async(FILE_ATTRIBUTE_STANDARD_NAME,
-                                 FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
-                                 Priority.DEFAULT, null,
-                                 move_children_ready1);
-  }
-  
-  static const int NUM_ENUMERATED = 16;
-  void move_children_ready1(Object obj, AsyncResult res)
-  {
-    FileEnumerator enumerator;
-    try {
-      enumerator = src.enumerate_children_finish(res);
-    }
-    catch (Error e) {
-      raise_error(src, dst, e.message);
-      remove_ref(); // parent dir itself
-      return;
-    }
-    
-    enumerator.next_files_async(NUM_ENUMERATED, Priority.DEFAULT, null,
-                                move_children_ready2);
-  }
-  
-  void move_children_ready2(Object obj, AsyncResult res)
-  {
-    var enumerator = (FileEnumerator)obj;
-    
-    List<FileInfo> infos;
-    try {
-      infos = enumerator.next_files_finish(res);
-    }
-    catch (Error e) {
-      raise_error(src, dst, e.message);
-      remove_ref(); // parent dir itself
-      return;
-    }
-    
-    foreach (FileInfo info in infos) {
-      var child_name = info.get_name();
-      File src_child = src.get_child(child_name);
-      File dst_child = dst.get_child(child_name);
-      add_ref();
-      var moveobj = new RecursiveMove(src_child, dst_child);
-      moveobj.@ref();
-      moveobj.done += (m) => {remove_ref(); m.unref();};
-      moveobj.raise_error += (m, s, d, e) => {raise_error(s, d, e);}; // percolate up
-      moveobj.start();
-    }
-    
-    if (infos.length() == NUM_ENUMERATED)
-      enumerator.next_files_async(NUM_ENUMERATED, Priority.DEFAULT, null,
-                                  move_children_ready2);
-    else
-      remove_ref(); // parent dir itself
-  }
-  
-  void finish_dir()
+  protected override void finish_dir()
   {
     try {
       src.@delete(null); // will only be deleted if empty, so we won't
@@ -229,21 +139,12 @@ public class RecursiveMove : Object
     }
   }
   
-  void add_ref() {
-    ++ref_count;
-  }
-  
-  void remove_ref() {
-    --ref_count;
-    check_ref();
-  }
-  
-  void check_ref() {
-    if (ref_count == 0) {
-      if (src_type == FileType.DIRECTORY)
-        finish_dir();
-      done();
-    }
+  protected override RecursiveOp clone_for_info(FileInfo info)
+  {
+    var child_name = info.get_name();
+    var src_child = src.get_child(child_name);
+    var dst_child = dst.get_child(child_name);
+    return new RecursiveMove(src_child, dst_child);
   }
 }
 

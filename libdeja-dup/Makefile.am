@@ -11,7 +11,6 @@ VALA_CFLAGS = \
 	--pkg libgnomeui-2.0 \
 	--pkg libnotify \
 	--pkg gnome-keyring-1 \
-	--pkg gnome-vfs-2.0 \
 	--pkg hacks \
 	--pkg PassphraseSchema \
 	--pkg unix \
@@ -32,7 +31,9 @@ libdeja_dup_la_VALASOURCES = \
 	OperationBackup.vala \
 	OperationCleanup.vala \
 	OperationRestore.vala \
+	RecursiveDelete.vala \
 	RecursiveMove.vala \
+	RecursiveOp.vala \
 	libdeja-dup.vala
 
 BUILT_SOURCES = \
