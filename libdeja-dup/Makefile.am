@@ -32,6 +32,7 @@ libdeja_dup_la_VALASOURCES = \
 	OperationBackup.vala \
 	OperationCleanup.vala \
 	OperationRestore.vala \
+	RecursiveMove.vala \
 	libdeja-dup.vala
 
 BUILT_SOURCES = \

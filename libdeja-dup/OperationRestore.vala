@@ -62,9 +62,7 @@ public class OperationRestore : Operation
   {
     if (success) {
       fixup_home_dir();
-      if (mv_source_to_dest())
-        cleanup_source();
-      else
+      if (!mv_source_to_dest())
         success = false;
     }
     else if (!cancelled) {
@@ -155,46 +153,32 @@ public class OperationRestore : Operation
     raise_error(error_text, detail);
   }
   
-  int mv_callback(GnomeVFS.XferProgressInfo info)
+  void add_error(string relpath, string errstr)
   {
-    switch (info.status) {
-    case GnomeVFS.XferProgressStatus.OK:
-      // just a progress bump
-      break;
-    case GnomeVFS.XferProgressStatus.VFSERROR:
-      // Some errors don't have target_names.  These tend to be errors when
-      // collecting information about the destination, and seem ignorable.
-      if (info.target_name == null)
-        return GnomeVFS.XferErrorAction.SKIP;
-      var target = File.new_for_uri(info.target_name);
-      var dest_dir = File.new_for_path(dest);
-      var relative_target = dest_dir.get_relative_path(target);
-      errors.append(_("Could not restore %s: %s").printf(
-                    relative_target,
-                    GnomeVFS.result_to_string(info.vfs_status)));
-      return GnomeVFS.XferErrorAction.SKIP; // Always skip, try to do as much
-                                            // as possible.
-    }
-    return 1;
+    errors.append(_("Could not restore %s: %s").printf(
+                  relpath, errstr));
+  }
+  
+  void mv_error(RecursiveMove move, File src, File dst, string errstr)
+  {
+    var dest_top = File.new_for_path(dest);
+    var relative_dst = dest_top.get_relative_path(dst);
+    if (relative_dst == null || relative_dst == "")
+      relative_dst = dest;
+    add_error(relative_dst, errstr);
   }
   
   bool mv_source_to_dest()
   {
-    GnomeVFS.init();
-    
-    string source_uri_str = GnomeVFS.get_uri_from_local_path(source);
-    string dest_uri_str = GnomeVFS.get_uri_from_local_path(dest);
-    GnomeVFS.URI source_uri = new GnomeVFS.URI(source_uri_str);
-    GnomeVFS.URI dest_uri = new GnomeVFS.URI(dest_uri_str);
-    
     errors = new List<string>();
     
-    GnomeVFS.xfer_uri(source_uri, dest_uri,
-                      GnomeVFS.XferOptions.RECURSIVE |
-                      GnomeVFS.XferOptions.REMOVESOURCE,
-                      GnomeVFS.XferErrorMode.QUERY,
-                      GnomeVFS.XferOverwriteMode.REPLACE,
-                      mv_callback);
+    File sourcef = File.new_for_path(source);
+    File destf = File.new_for_path(dest);
+    var move = new RecursiveMove(sourcef, destf);
+    move.raise_error += mv_error;
+    move.done += (m) => {Gtk.main_quit();};
+    Idle.add(move.start);
+    Gtk.main();
     
     if (errors != null) {
       show_errors();
