@@ -40,7 +40,7 @@ public abstract class RecursiveOp : Object
   
   bool idle_action()
   {
-    start();
+    start_async();
     return false;
   }
   
