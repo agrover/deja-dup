@@ -120,6 +120,7 @@ public class OperationBackup : Operation
     if (dir != null)
       rv.append(dir);
     rv.append("/proc");
+    rv.append("/sys");
     
     return rv;
   }
