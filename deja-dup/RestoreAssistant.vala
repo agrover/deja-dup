@@ -25,14 +25,20 @@ public class RestoreAssistant : Gtk.Assistant
   
   Gtk.HBox cust_box;
   Gtk.FileChooserButton cust_button;
+  Gtk.Label confirm_backup;
+  Gtk.Label confirm_location;
+  Gtk.Widget confirm_page;
   Gtk.Label progress_label;
   Gtk.ProgressBar progress_bar;
   Gtk.Widget progress_page;
   Gtk.Label summary_label;
+  Gtk.Widget error_widget;
+  Gtk.TextView error_text_view;
   Gtk.Widget summary_page;
   Gdk.Pixbuf icon;
   DejaDup.OperationRestore op;
   uint timeout_id;
+  bool error_occurred;
   construct
   {
     title = _("Restore");
@@ -76,6 +82,8 @@ public class RestoreAssistant : Gtk.Assistant
     cust_button =
       new Gtk.FileChooserButton(_("Choose destination for restored files"),
                                 Gtk.FileChooserAction.SELECT_FOLDER);
+    cust_button.file_set += (b) => {restore_location = b.get_filename();};
+    cust_button.current_folder_changed += (b) => {restore_location = b.get_filename();};
     
     var cust_label = new Gtk.Label("    " + _("Restore _folder:"));
     cust_label.set("mnemonic-widget", cust_button,
@@ -103,19 +111,29 @@ public class RestoreAssistant : Gtk.Assistant
   {
     int rows = 0;
     
+    var backup_label = new Gtk.Label(_("Backup location:"));
+    backup_label.set("xalign", 0.0f);
+    confirm_backup = new Gtk.Label("");
+    confirm_backup.set("xalign", 0.0f);
+    ++rows;
+    
     var location_label = new Gtk.Label(_("Restore folder:"));
     location_label.set("xalign", 0.0f);
-    
-    var location = new Gtk.Label(restore_location);
-    if (restore_location == "/")
-      location.label = _("Original location");
+    confirm_location = new Gtk.Label("");
+    confirm_location.set("xalign", 0.0f);
+    ++rows;
     
     var page = new Gtk.Table(rows, 2, false);
     page.set("row-spacing", 6,
              "column-spacing", 6,
              "border-width", 12);
-    page.attach(location_label, 0, 1, 0, 1, 0, 0, 0, 0);
-    page.attach(location, 1, 2, 0, 1, 0, 0, 0, 0);
+    
+    rows = 0;
+    page.attach(backup_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(confirm_backup, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    ++rows;
+    page.attach(location_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(confirm_location, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
     
     return page;
   }
@@ -150,9 +168,34 @@ public class RestoreAssistant : Gtk.Assistant
   
   void show_error(DejaDup.OperationRestore restore, string error, string? detail)
   {
+    error_occurred = true;
+    
     child_set(summary_page,
               "title", _("Restore Failed"));
+    
+    // Try to show nice error icon
+    try {
+      var pixbuf = Gtk.IconTheme.get_default().load_icon(
+                     Gtk.STOCK_DIALOG_ERROR, 48, 
+                     Gtk.IconLookupFlags.FORCE_SIZE);
+      child_set(summary_page,
+                "header-image", pixbuf);
+    }
+    catch (Error e) {
+      // Eh, don't worry about it
+    }
+    
     summary_label.label = error;
+    summary_label.wrap = true;
+    summary_label.selectable = true;
+    
+    if (detail != null) {
+      error_widget.no_show_all = false;
+      error_widget.show_all();
+      error_text_view.buffer.set_text(detail, -1);
+    }
+    
+    set_current_page(get_n_pages() - 1); // last, summary page
   }
   
   Gtk.Widget make_summary_page()
@@ -160,8 +203,19 @@ public class RestoreAssistant : Gtk.Assistant
     summary_label = new Gtk.Label("");
     summary_label.set("xalign", 0.0f);
     
+    error_text_view = new Gtk.TextView();
+    error_text_view.editable = false;
+    error_text_view.wrap_mode = Gtk.WrapMode.WORD;
+    error_text_view.height_request = 150;
+
+    var scroll = new Gtk.ScrolledWindow(null, null);
+    scroll.add(error_text_view);
+    scroll.no_show_all = true; // only will be shown if an error occurs
+    error_widget = scroll;
+    
     var page = new Gtk.VBox(false, 6);
     page.set("child", summary_label,
+             "child", error_widget,
              "border-width", 12);
     page.child_set(summary_label, "expand", false);
     
@@ -187,15 +241,18 @@ public class RestoreAssistant : Gtk.Assistant
               "page-type", Gtk.AssistantPageType.CONFIRM,
               "complete", true,
               "header-image", icon);
+    confirm_page = page;
   }
 
   void add_progress_page()
   {
     var page = make_progress_page();
     append_page(page);
+    // We don't actually use a PROGRESS type for this page, because that
+    // doesn't allow for cancelling.
     child_set(page,
               "title", _("Restoring"),
-              "page-type", Gtk.AssistantPageType.PROGRESS,
+              "page-type", Gtk.AssistantPageType.CONTENT,
               "header-image", icon);
     progress_page = page;
   }
@@ -214,18 +271,16 @@ public class RestoreAssistant : Gtk.Assistant
   
   void apply_finished(DejaDup.OperationRestore restore, bool success)
   {
-    if (success)
-      summary_label.label = _("Your files were successfully restored.");
-    // else show_error set label
-    
-    set_current_page(get_n_pages() - 1); // last, summary page
-    
-    if (timeout_id > 0) {
-      Source.remove(timeout_id);
-      timeout_id = 0;
-    }
-    
     op = null;
+    
+    if (success) {
+      summary_label.label = _("Your files were successfully restored.");
+      set_current_page(get_n_pages() - 1); // last, summary page
+    }
+    else if (!error_occurred) {
+      // was cancelled...  Close dialog
+      do_cancel();
+    }
   }
   
   void do_apply()
@@ -247,19 +302,55 @@ public class RestoreAssistant : Gtk.Assistant
   
   void do_prepare(RestoreAssistant assist, Gtk.Widget page)
   {
-    if (page == progress_page)
-      timeout_id = Timeout.add(200, pulse);
+    if (timeout_id > 0) {
+      Source.remove(timeout_id);
+      timeout_id = 0;
+    }
+    
+    if (page == confirm_page) {
+      if (op != null) {
+        op.done -= apply_finished;
+        op.cancel(); // in case we just went back from progress page
+      }
+      
+      // Where the backup is
+      string backup_loc = null;
+      try {
+        backup_loc = DejaDup.Backend.get_default(this).get_location_pretty();
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
+      if (backup_loc == null)
+        backup_loc = _("Unknown");
+      confirm_backup.label = backup_loc;
+      
+      // Where we restore to
+      if (restore_location == "/")
+        confirm_location.label = _("Original location");
+      else
+        confirm_location.label = restore_location;
+    }
+    else if (page == progress_page) {
+      progress_bar.fraction = 0;
+      timeout_id = Timeout.add(250, pulse);
+    }
   }
   
   void do_cancel()
   {
     if (op != null)
       op.cancel();
-    destroy();
+    do_close();
   }
   
   void do_close()
   {
+    if (timeout_id > 0) {
+      Source.remove(timeout_id);
+      timeout_id = 0;
+    }
+    
     destroy();
   }
 }

@@ -45,6 +45,14 @@ public class BackendS3 : Backend
     return "s3+http://%s".printf(bucket);
   }
   
+  public override string? get_location_pretty() throws Error
+  {
+    var client = GConf.Client.get_default();
+    var bucket = client.get_string(S3_BUCKET_KEY);
+    
+    return _("Bucket %s on Amazon S3").printf(bucket);
+  }
+  
   string gconf_id;
   string id;
   string secret_key;

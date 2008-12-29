@@ -29,10 +29,16 @@ public class BackendFile : Backend
     toplevel = win;
   }
   
-  public override string? get_location() throws Error
+  string? get_location_from_gconf() throws Error
   {
     var client = GConf.Client.get_default();
     var path = client.get_string(FILE_PATH_KEY);
+    return path;
+  }
+  
+  public override string? get_location() throws Error
+  {
+    var path = get_location_from_gconf();
     if (path == null) {
       var dlg = new Gtk.FileChooserDialog(_("Choose backup destination"),
                                           toplevel,
@@ -41,14 +47,19 @@ public class BackendFile : Backend
                             				      Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT);
       
       if (dlg.run() != Gtk.ResponseType.ACCEPT) {
-        dlg.hide();
+        dlg.destroy();
         return null;
       }
       
       path = dlg.get_filename();
-      dlg.hide();
+      dlg.destroy();
     }
     return "file://%s".printf(path);
+  }
+
+  public override string? get_location_pretty() throws Error
+  {
+    return get_location_from_gconf();
   }
 }
 
