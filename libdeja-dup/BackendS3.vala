@@ -89,6 +89,10 @@ public class BackendS3 : Backend
     }
   }
   
+  void save_password_callback(GnomeKeyring.Result result, uint val)
+  {
+  }
+  
   public override void ask_password() {
     // Ask user
     var dlg = new Gnome.PasswordDialog(_("Amazon S3 Password"),
@@ -110,7 +114,8 @@ public class BackendS3 : Backend
       string where = remember == Gnome.PasswordDialogRemember.SESSION ?
                                  "session" : GnomeKeyring.DEFAULT;
       GnomeKeyring.set_network_password(where, id, null, S3_SERVER, null,
-                                        "https", null, 0, secret_key, null);
+                                        "https", null, 0, secret_key,
+                                        save_password_callback);
     }
     
     got_secret_key();

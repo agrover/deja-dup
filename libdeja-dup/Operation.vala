@@ -149,6 +149,10 @@ public abstract class Operation : Object
                                "type", "passphrase");
   }
   
+  void save_password_callback(GnomeKeyring.Result result)
+  {
+  }
+  
   public void ask_passphrase() throws Error
   {
     // Ask user
@@ -173,7 +177,7 @@ public abstract class Operation : Object
       GnomeKeyring.store_password(PASSPHRASE_SCHEMA,
                                   where,
                                   _("Déjà Dup backup passphrase"),
-                                  passphrase, null,
+                                  passphrase, save_password_callback,
                                   "owner", Config.PACKAGE,
                                   "type", "passphrase");
     }
