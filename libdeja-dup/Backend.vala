@@ -46,6 +46,8 @@ public abstract class Backend : Object
       return new BackendS3(win);
     else if (backend_name == "file")
       return new BackendFile(win);
+    else if (backend_name == "ssh")
+      return new BackendSSH(win);
     else
       return null;
   }

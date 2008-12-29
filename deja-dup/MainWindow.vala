@@ -234,7 +234,7 @@ public class MainWindow : Gtk.Window
       op.start();
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      show_error(op, e.message, null);
     }
   }
   

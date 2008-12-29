@@ -33,6 +33,7 @@ public class ConfigBackend : ConfigChoice
     
     store.insert_with_values(out iter, i++, 0, _("Amazon S3"), 1, "s3");
     store.insert_with_values(out iter, i++, 0, _("Local Folder"), 1, "file");
+    store.insert_with_values(out iter, i++, 0, _("SSH"), 1, "ssh");
     
     store.set_sort_column_id(0, Gtk.SortType.ASCENDING);
     

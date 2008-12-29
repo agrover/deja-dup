@@ -107,7 +107,7 @@ public abstract class Operation : Object
       dup.start(argv, envp);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      raise_error(e.message, null);
       done(false);
       return;
     }

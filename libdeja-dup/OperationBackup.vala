@@ -21,7 +21,8 @@ using GLib;
 
 namespace DejaDup {
 
-errordomain BackupError {
+public errordomain BackupError {
+  BAD_CONFIG,
   INTERNAL
 }
 

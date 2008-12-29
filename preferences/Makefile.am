@@ -26,6 +26,7 @@ deja_dup_preferences_VALASOURCES = \
 	ConfigEntry.vala \
 	ConfigFolder.vala \
 	ConfigList.vala \
+	ConfigNumber.vala \
 	ConfigPeriod.vala \
 	ConfigWidget.vala \
 	PreferencesDialog.vala \
