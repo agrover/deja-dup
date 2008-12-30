@@ -50,7 +50,7 @@ public class OperationBackup : Operation
       clean.action_desc_changed += (op, str) => {action_desc_changed(str);};
       clean.raise_error += (op, str, detail) => {raise_error(str, detail);};
       clean.passphrase = passphrase;
-      clean.backend = backend;
+      clean.backend = backend.clone();
       
       try {clean.start();}
       catch (Error e) {warning("%s\n", e.message);}

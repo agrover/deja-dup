@@ -32,6 +32,10 @@ public class BackendS3 : Backend
     toplevel = win;
   }
   
+  public override Backend clone() {
+    return new BackendS3(toplevel);
+  }
+  
   public override void add_argv(ref List<string> argv) {
     argv.append("--s3-use-new-style");
   }

@@ -38,6 +38,8 @@ public abstract class Backend : Object
   public virtual void add_argv(ref List<string> argv) {}
   public virtual void ask_password() {}
   
+  public abstract Backend clone();
+  
   public static Backend? get_default(Gtk.Window? win) throws Error
   {
     var client = GConf.Client.get_default();

@@ -95,6 +95,8 @@ public abstract class Operation : Object
       var client = GConf.Client.get_default();
       if (client.get_bool(ENCRYPT_KEY))
         envp.append("PASSPHRASE=%s".printf(passphrase));
+      else
+        envp.append("PASSPHRASE="); // duplicity sometimes asks for a passphrase when it doesn't need it (during cleanup), so this stops it from prompting the user and us getting an exception as a result
       
       List<string> argv = make_argv();
       if (argv == null) {

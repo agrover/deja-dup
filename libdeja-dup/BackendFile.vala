@@ -29,6 +29,10 @@ public class BackendFile : Backend
     toplevel = win;
   }
   
+  public override Backend clone() {
+    return new BackendFile(toplevel);
+  }
+  
   string? get_location_from_gconf() throws Error
   {
     var client = GConf.Client.get_default();
