@@ -147,9 +147,28 @@ public class Duplicity : Object
     return true;
   }
   
+  void split_line(string line, out string[] split)
+  {
+    var firstsplit = line.split(" ");
+    
+    int i;
+    for (i = 0; firstsplit[i] != null; ++i)
+      ;
+    
+    split = new string[i];
+    
+    for (i = 0; firstsplit[i] != null; ++i)
+      split[i] = firstsplit[i];
+    
+    if (i > 0)
+      split[i - 1].chomp();
+  }
+  
   void process_stanza(List<string> stanza)
   {
-    var firstline = stanza.data.split(" ");
+    string[] firstline;
+    split_line(stanza.data, out firstline);
+    
     var keyword = firstline[0];
     if (keyword == "ERROR") {
       var errorstr = grab_stanza_text(stanza);
@@ -157,16 +176,29 @@ public class Duplicity : Object
       if (firstline.length > 1) {
         switch (firstline[1].to_int()) {
         case 30: // exception
-          // don't do anything.  error string won't be useful to humans, and
-          // by not raising it, we'll eventually hit the 'unknown error'
-          // message which is slightly better than a giant exception string.
+          process_exception(firstline.length > 2 ? firstline[2] : "", errorstr, stanza);
           return;
         }
       }
       
-      error_issued = true;
-      raise_error(errorstr, null);
+      show_error(errorstr);
     }
+  }
+  
+  void process_exception(string exception, string errorstr, List<string> stanza)
+  {
+    switch (exception) {
+    case "S3ResponseError":
+      if (errorstr.str("<Code>InvalidAccessKeyId</Code>") != null)
+        show_error(_("Invalid ID"));
+      else if (errorstr.str("<Code>SignatureDoesNotMatch</Code>") != null)
+        show_error(_("Invalid secret key"));
+      break;
+    }
+    
+    // For most, don't do anything. Error string won't be useful to humans, and
+    // by not raising it, we'll eventually hit the 'unknown error'
+    // message which is slightly better than a giant exception string.
   }
   
   string grab_stanza_text(List<string> stanza)
@@ -205,7 +237,7 @@ public class Duplicity : Object
         
         if (exitval != 0) {
           if (!error_issued) {
-            raise_error(_("Failed with an unknown error."), null);
+            show_error(_("Failed with an unknown error."));
           }
         }
       }
@@ -229,6 +261,12 @@ public class Duplicity : Object
       kill((int)child_pid, 15);
     else
       done(false, true);
+  }
+  
+  void show_error(string errorstr)
+  {
+    error_issued = true;
+    raise_error(errorstr, null);
   }
 }
 
