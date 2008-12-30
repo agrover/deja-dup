@@ -153,8 +153,18 @@ public class Duplicity : Object
     var keyword = firstline[0];
     if (keyword == "ERROR") {
       var errorstr = grab_stanza_text(stanza);
-      error_issued = true;
       
+      if (firstline.length > 1) {
+        switch (firstline[1].to_int()) {
+        case 30: // exception
+          // don't do anything.  error string won't be useful to humans, and
+          // by not raising it, we'll eventually hit the 'unknown error'
+          // message which is slightly better than a giant exception string.
+          return;
+        }
+      }
+      
+      error_issued = true;
       raise_error(errorstr, null);
     }
   }
