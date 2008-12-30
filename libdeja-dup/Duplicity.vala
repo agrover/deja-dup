@@ -84,7 +84,7 @@ public class Duplicity : Object
       else if (a != null)
         cmd = "%s %s".printf(cmd, a);
     }
-    debug("Running the following duplicity command: %s", cmd);
+    debug("Running the following duplicity command: %s\n", cmd);
     
     Process.spawn_async_with_pipes(null, real_argv, real_envp,
                         SpawnFlags.SEARCH_PATH |
@@ -141,7 +141,7 @@ public class Duplicity : Object
       process_stanza(stanza);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
     
     return true;
@@ -191,7 +191,7 @@ public class Duplicity : Object
       
       if (Process.if_exited(status)) {
         var exitval = Process.exit_status(status);
-        debug("duplicity exited with value %i", exitval);
+        debug("duplicity exited with value %i\n", exitval);
         
         if (exitval != 0) {
           if (!error_issued) {
@@ -203,7 +203,7 @@ public class Duplicity : Object
       try {
         reader.shutdown(false);
       } catch (Error e) {
-        printerr("%s\n", e.message);
+        warning("%s\n", e.message);
       }
       reader = null;
     }

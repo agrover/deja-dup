@@ -42,7 +42,7 @@ public abstract class Operation : Object
       backend = Backend.get_default(toplevel);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);    
+      warning("%s\n", e.message);    
     }
     
     // Default is to go ahead with password collection.  This will be
@@ -136,7 +136,7 @@ public abstract class Operation : Object
       }
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
   }
   

@@ -69,7 +69,7 @@ public class ConfigList : ConfigWidget
       slist = client.get_list(key, GConf.ValueType.STRING);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
       return;
     }
     
@@ -110,7 +110,7 @@ public class ConfigList : ConfigWidget
           icon = info.get_icon();
         }
         catch (Error e) {
-          printerr("%s\n", e.message);
+          warning("%s\n", e.message);
         }
       }
       if (icon != null)
@@ -167,7 +167,7 @@ public class ConfigList : ConfigWidget
       }
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
       return;
     }
   }
@@ -199,7 +199,7 @@ public class ConfigList : ConfigWidget
       }
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
       return;
     }
   }

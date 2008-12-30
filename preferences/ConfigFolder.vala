@@ -43,7 +43,7 @@ public class ConfigFolder : ConfigWidget
       val = client.get_string(key);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
       return;
     }
     if (val == null)
@@ -59,7 +59,7 @@ public class ConfigFolder : ConfigWidget
       client.set_string(key, button.get_filename());
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
   }
 }

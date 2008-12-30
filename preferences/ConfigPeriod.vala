@@ -51,7 +51,7 @@ public class ConfigPeriod : ConfigChoice
         client.set_int(key, intval);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
     
     changed(intval.to_string());
@@ -64,7 +64,7 @@ public class ConfigPeriod : ConfigChoice
         confval = client.get_int(key);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
       return;
     }
     if (confval < 1)

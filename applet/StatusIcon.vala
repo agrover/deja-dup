@@ -41,7 +41,7 @@ public class StatusIcon : Gtk.StatusIcon
         note.close();
       }
       catch (Error e) {
-        printerr("%s\n", e.message);
+        warning("%s\n", e.message);
       }
     }
   }
@@ -84,7 +84,7 @@ public class StatusIcon : Gtk.StatusIcon
       op.start();
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
   }
   
@@ -99,7 +99,7 @@ public class StatusIcon : Gtk.StatusIcon
       note.show();
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
       begin_backup();
     }
   }
@@ -117,7 +117,7 @@ public class StatusIcon : Gtk.StatusIcon
       note.show();
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
     return false; // don't immediately ask user, wait for our response
   }
@@ -134,7 +134,7 @@ public class StatusIcon : Gtk.StatusIcon
       note.show();
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
     return false; // don't immediately ask user, wait for our response
   }
@@ -154,7 +154,7 @@ public class StatusIcon : Gtk.StatusIcon
       note.show();
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
   }
   
@@ -180,7 +180,7 @@ public class StatusIcon : Gtk.StatusIcon
         icon.op.ask_backend_password();
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
     icon.end_notify(note);
   }
@@ -209,7 +209,7 @@ public class StatusIcon : Gtk.StatusIcon
       DejaDup.update_last_run_timestamp();
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
     
     icon.end_notify(note);

@@ -38,7 +38,7 @@ public abstract class ConfigWidget : Gtk.EventBox
         client.notify_add(key, set_from_config);
       }
       catch (Error e) {
-        printerr("%s\n", e.message);
+        warning("%s\n", e.message);
       }
     }
   }
@@ -49,7 +49,7 @@ public abstract class ConfigWidget : Gtk.EventBox
       client.remove_dir(dir);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
   }
   

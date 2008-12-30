@@ -61,7 +61,7 @@ public class ConfigChoice : ConfigWidget
         client.set_string(key, strval);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
     
     changed(strval);
@@ -74,7 +74,7 @@ public class ConfigChoice : ConfigWidget
         confval = client.get_string(key);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
       return;
     }
     

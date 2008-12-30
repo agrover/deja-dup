@@ -53,14 +53,14 @@ public class OperationBackup : Operation
       clean.backend = backend;
       
       try {clean.start();}
-      catch (Error e) {printerr("%s\n", e.message);}
+      catch (Error e) {warning("%s\n", e.message);}
       
       Gtk.main();
     }
     
     if (success) {
       try {DejaDup.update_last_run_timestamp();}
-      catch (Error e) {printerr("%s\n", e.message);}
+      catch (Error e) {warning("%s\n", e.message);}
     }
     
     done(success);

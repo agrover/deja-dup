@@ -188,7 +188,7 @@ static bool kickoff()
       ChildWatch.add(pid, close_pid);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
   }
   else
@@ -253,7 +253,7 @@ static void watch_gconf()
     client.notify_add(PERIODIC_PERIOD_KEY, prepare_next_run);
   }
   catch (Error e) {
-    printerr("%s\n", e.message);
+    warning("%s\n", e.message);
   }
 }
 

@@ -44,7 +44,7 @@ public class ConfigEntry : ConfigWidget
       entry.set_text(val);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
   }
   
@@ -54,7 +54,7 @@ public class ConfigEntry : ConfigWidget
       client.set_string(key, entry.get_text());
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
     return false;
   }

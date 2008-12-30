@@ -127,7 +127,7 @@ public class BackendS3 : Backend
       try {
         client.set_string(S3_ID_KEY, id);
       }
-      catch (Error e) {printerr("%s\n", e.message);}
+      catch (Error e) {warning("%s\n", e.message);}
     }
     
     List<string> envp = new List<string>();

@@ -52,7 +52,7 @@ public class MainWindow : Gtk.Window
       restore_icon.set("pixbuf", restore_pix);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
     
     var restore_label = new Gtk.Label("_Restore");
@@ -78,7 +78,7 @@ public class MainWindow : Gtk.Window
       backup_icon.set("pixbuf", backup_pix);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
     
     var backup_label = new Gtk.Label("_Backup");

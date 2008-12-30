@@ -47,7 +47,7 @@ public class ConfigBool : ConfigWidget, Togglable
       button.set_active(val);
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
   }
   
@@ -57,7 +57,7 @@ public class ConfigBool : ConfigWidget, Togglable
       client.set_bool(key, button.get_active());
     }
     catch (Error e) {
-      printerr("%s\n", e.message);
+      warning("%s\n", e.message);
     }
     
     toggled();
