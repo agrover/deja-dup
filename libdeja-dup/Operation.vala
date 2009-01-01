@@ -60,6 +60,7 @@ public abstract class Operation : Object
     
     dup.done += operation_finished;
     dup.raise_error += (d, s, detail) => {raise_error(s, detail);};
+    dup.action_desc_changed += (d, s) => {action_desc_changed(s);};
     backend.envp_ready += continue_with_envp;
     backend.need_password += (b) => {
       bool can_ask_now = backend_password_required();

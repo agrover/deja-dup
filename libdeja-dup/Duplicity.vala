@@ -25,6 +25,7 @@ public class Duplicity : Object
 {
   public signal void done(bool success, bool cancelled);
   public signal void raise_error(string errstr, string? detail);
+  public signal void action_desc_changed(string action);
   
   public Gtk.Window toplevel {get; construct;}
   
@@ -61,8 +62,7 @@ public class Duplicity : Object
       return;
     }
     
-    if (verbose)
-      argv.append("--verbosity=9");
+    argv.append("--verbosity=9");
     
     // Add always-there arguments
     argv.append("--log-fd=%d".printf(pipes[1]));
@@ -147,22 +147,87 @@ public class Duplicity : Object
     return true;
   }
   
-  void split_line(string line, out string[] split)
+  // If start is < 0, starts at word.size() - 1.
+  static int num_suffix(string word, char ch, long start = -1)
+  {
+    int rv = 0;
+    
+    if (start < 0)
+      start = word.size() - 1;
+    
+    for (long i = start; i >= 0; --i, ++rv)
+      if (word[i] != ch)
+        break;
+    
+    return rv;
+  }
+  
+  static void split_line(string line, out string[] split)
   {
     var firstsplit = line.split(" ");
+    var splitlist = new List<string>();
     
     int i;
-    for (i = 0; firstsplit[i] != null; ++i)
-      ;
+    bool in_group = false;
+    string group_word = "";
+    for (i = 0; firstsplit[i] != null; ++i) {
+      string word = firstsplit[i];
+      
+      if (firstsplit[i+1] == null)
+        word.chomp();
+      
+      // Merge word groupings like 'hello \'goodbye' as one word.
+      // Assumes that duplicity isn't a dick and gives us well formed groupings
+      // so we only check for apostrophe at beginning and end of words.  We
+      // won't crash if duplicity is a dick, but we won't correctly group words.
+      if (!in_group && word.has_prefix("\'"))
+        in_group = true;
+      
+      if (in_group) {
+        if (word.has_suffix("\'") &&
+            // OK, word ends with '...  But is it a *real* ' or a fake one?
+            // i.e. is it escaped or not?  Test this by seeing if it has an even
+            // number of backslashes before it.
+            num_suffix(word, '\\', word.size() - 2) % 2 == 0)
+          in_group = false;
+        // Else...  If it ends with just a backslash, the backslash was
+        // supposed to be for the space.  So just drop it.
+        else if (num_suffix(word, '\\') % 2 == 1)
+          // Chop off last backslash.
+          word = word.substring(0, word.len() - 2);
+        
+        // get rid of any other escaping backslashes and translate octals
+        word = word.compress();
+        
+        // Now join to rest of group.
+        if (group_word == "")
+          group_word = word;
+        else
+          group_word += " " + word;
+        
+        if (!in_group) {
+          // add to list, but drop single quotes
+          splitlist.append(group_word.substring(1, group_word.len() - 2));
+          group_word = "";
+        }
+      }
+      else
+        splitlist.append(word);
+    }
     
-    split = new string[i];
-    
-    for (i = 0; firstsplit[i] != null; ++i)
-      split[i] = firstsplit[i];
-    
-    if (i > 0)
-      split[i - 1].chomp();
+    // Now make it nice array for ease of random access
+    split = new string[splitlist.length()];
+    i = 0;
+    foreach (string s in splitlist)
+      split[i++] = s;
   }
+  
+  static const int ERROR_EXCEPTION = 30;
+  static const int INFO_DIFF_FILE_NEW = 4;
+  static const int INFO_DIFF_FILE_CHANGED = 5;
+  static const int INFO_DIFF_FILE_DELETED = 6;
+  static const int INFO_PATCH_FILE_WRITING = 7;
+  static const int INFO_PATCH_FILE_PATCHING = 8;
   
   void process_stanza(List<string> stanza)
   {
@@ -170,19 +235,39 @@ public class Duplicity : Object
     split_line(stanza.data, out firstline);
     
     var keyword = firstline[0];
-    if (keyword == "ERROR") {
+    switch (keyword) {
+    case "ERROR":
       var errorstr = grab_stanza_text(stanza);
       
       if (firstline.length > 1) {
         switch (firstline[1].to_int()) {
-        case 30: // exception
+        case ERROR_EXCEPTION: // exception
           process_exception(firstline.length > 2 ? firstline[2] : "", errorstr, stanza);
           return;
         }
       }
       
       show_error(errorstr);
+      break;
+    case "INFO":
+      if (firstline.length > 1) {
+        switch (firstline[1].to_int()) {
+        case INFO_DIFF_FILE_NEW:
+        case INFO_DIFF_FILE_CHANGED:
+        case INFO_DIFF_FILE_DELETED:
+          if (firstline.length > 2)
+            process_diff_file(firstline[2]);
+          break;
+        case INFO_PATCH_FILE_WRITING:
+        case INFO_PATCH_FILE_PATCHING:
+          if (firstline.length > 2)
+            process_patch_file(firstline[2]);
+          break;
+        }
+      }
+      break;
     }
+    
   }
   
   void process_exception(string exception, string errorstr, List<string> stanza)
@@ -199,6 +284,22 @@ public class Duplicity : Object
     // For most, don't do anything. Error string won't be useful to humans, and
     // by not raising it, we'll eventually hit the 'unknown error'
     // message which is slightly better than a giant exception string.
+  }
+  
+  void process_diff_file(string file) {
+    action_desc_changed(_("Backing up %s").printf(make_filename(file)));
+  }
+  
+  void process_patch_file(string file) {
+    action_desc_changed(_("Restoring %s").printf(make_filename(file)));
+  }
+  
+  string make_filename(string file)
+  {
+    // All files are relative to root.
+    File root = File.new_for_path("/");
+    File full = root.resolve_relative_path(file);
+    return full.get_path();
   }
   
   string grab_stanza_text(List<string> stanza)
