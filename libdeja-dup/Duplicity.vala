@@ -26,18 +26,61 @@ public class Duplicity : Object
   public signal void done(bool success, bool cancelled);
   public signal void raise_error(string errstr, string? detail);
   public signal void action_desc_changed(string action);
+  public signal void progress(double percent);
   
   public Gtk.Window toplevel {get; construct;}
+  public Operation.Mode mode {get; construct;}
   public bool error_issued {get; private set;}
   
   bool verbose = false;
   
-  public Duplicity(Gtk.Window? win) {
+  DuplicityDry dry_run;
+  List<string> dry_argv;
+  List<string> dry_envp;
+  uint dry_total;
+  
+  public Duplicity(Operation.Mode mode, Gtk.Window? win) {
+    this.mode = mode;
     toplevel = win;
   }
   
   public virtual void start(List<string> argv, List<string>? envp) throws SpawnError
   {
+    // If we're backing up, and the version of duplicity supports it, we should
+    // first run using --dry-run to get the total size of the backup, to make
+    // accurate progress bars.
+    if (dry_run == null && mode == Operation.Mode.BACKUP &&
+        DuplicityInfo.get_default().has_progress) {
+      action_desc_changed(_("Preparing..."));
+      
+      // save arguments for calling start() on ourselves again later
+      dry_argv = new List<string>();
+      dry_envp = new List<string>();
+      foreach (string s in argv) dry_argv.append(s);
+      foreach (string s in envp) dry_envp.append(s);
+      dry_total = 0;
+      
+      dry_run = new DuplicityDry(Operation.Mode.INVALID, toplevel);
+      dry_run.done += dry_done;
+      dry_run.start(argv, envp);
+      
+      return;
+    }
+    
+    // Send appropriate description for what we're about to do.  Is often
+    // very quickly overridden by a message like "Backing up file X"
+    switch (mode) {
+    case Operation.Mode.BACKUP:
+      action_desc_changed(_("Backing up files..."));
+      break;
+    case Operation.Mode.RESTORE:
+      action_desc_changed(_("Restoring..."));
+      break;
+    case Operation.Mode.CLEANUP:
+      action_desc_changed(_("Cleaning up..."));
+      break;
+    }
+    
     var verbose_str = Environment.get_variable("DEJA_DUP_DEBUG");
     if (verbose_str != null && verbose_str.to_int() > 0)
       verbose = true;
@@ -64,6 +107,7 @@ public class Duplicity : Object
     }
     
     argv.append("--verbosity=9");
+    argv.append("--volsize=1");
     
     // Add always-there arguments
     argv.append("--log-fd=%d".printf(pipes[1]));
@@ -116,6 +160,25 @@ public class Duplicity : Object
   public bool is_started()
   {
     return (int)child_pid > 0;
+  }
+  
+  void dry_done(DuplicityDry dry, bool success, bool cancelled)
+  {
+    if (success == true)
+      dry_total = dry.total_bytes;
+    
+    try {
+      start(dry_argv, dry_envp);
+    }
+    catch (Error e) {
+      show_error(e.message);
+      done(false, false);
+    }
+    finally {
+      dry_run = null;
+      dry_argv = null;
+      dry_envp = null;
+    }
   }
   
   bool read_stanza(IOChannel channel, IOCondition cond)
@@ -196,8 +259,7 @@ public class Duplicity : Object
           // Chop off last backslash.
           word = word.substring(0, word.len() - 2);
         
-        // get rid of any othe
-  static const int INFO_DIFF_FILE_NEW = 4;r escaping backslashes and translate octals
+        // get rid of any other escaping backslashes and translate octals
         word = word.compress();
         
         // Now join to rest of group.
@@ -223,13 +285,13 @@ public class Duplicity : Object
       split[i++] = s;
   }
   
-  static const int ERROR_EXCEPTION = 30;
-  static const int INFO_PROGRESS = 2;
-  static const int INFO_DIFF_FILE_NEW = 4;
-  static const int INFO_DIFF_FILE_CHANGED = 5;
-  static const int INFO_DIFF_FILE_DELETED = 6;
-  static const int INFO_PATCH_FILE_WRITING = 7;
-  static const int INFO_PATCH_FILE_PATCHING = 8;
+  protected static const int ERROR_EXCEPTION = 30;
+  protected static const int INFO_PROGRESS = 2;
+  protected static const int INFO_DIFF_FILE_NEW = 4;
+  protected static const int INFO_DIFF_FILE_CHANGED = 5;
+  protected static const int INFO_DIFF_FILE_DELETED = 6;
+  protected static const int INFO_PATCH_FILE_WRITING = 7;
+  protected static const int INFO_PATCH_FILE_PATCHING = 8;
   
   void process_stanza(List<string> stanza)
   {
@@ -294,6 +356,9 @@ public class Duplicity : Object
         if (firstline.length > 2)
           process_patch_file(firstline[2]);
         break;
+      case INFO_PROGRESS:
+        process_progress(firstline);
+        break;
       }
     }
   }
@@ -304,6 +369,27 @@ public class Duplicity : Object
   
   void process_patch_file(string file) {
     action_desc_changed(_("Restoring %s").printf(make_filename(file)));
+  }
+  
+  void process_progress(string[] firstline) {
+    uint now, total;
+    
+    if (firstline.length > 2)
+      now = firstline[2].to_int();
+    else
+      return;
+    
+    if (firstline.length > 3)
+      total = firstline[3].to_int();
+    else if (dry_total > 0)
+      total = dry_total;
+    else
+      return; // can't do progress without a total
+    
+    double percent = now / (double)total;
+    if (percent > 1)
+      percent = 1;
+    progress(percent);
   }
   
   string make_filename(string file)

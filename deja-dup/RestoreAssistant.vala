@@ -39,6 +39,7 @@ public class RestoreAssistant : Gtk.Assistant
   DejaDup.OperationRestore op;
   uint timeout_id;
   bool error_occurred;
+  bool gives_progress;
   construct
   {
     title = _("Restore");
@@ -140,8 +141,16 @@ public class RestoreAssistant : Gtk.Assistant
   
   bool pulse()
   {
-    progress_bar.pulse();
+    if (!gives_progress)
+      progress_bar.pulse();
     return true;
+  }
+  
+  void show_progress(DejaDup.OperationRestore restore, double percent)
+  {
+    progress_bar.fraction = percent;
+    print("percent is %f\n", percent);
+    gives_progress = true;
   }
   
   void set_progress_label(DejaDup.OperationRestore restore, string label)
@@ -289,6 +298,7 @@ public class RestoreAssistant : Gtk.Assistant
     op.done += apply_finished;
     op.raise_error += show_error;
     op.action_desc_changed += set_progress_label;
+    op.progress += show_progress;
     
     try {
       op.start();

@@ -30,6 +30,7 @@ public class OperationRestore : Operation
   public OperationRestore(Gtk.Window? win, string dest_in) {
     toplevel = win;
     dest = dest_in;
+    mode = Mode.RESTORE;
   }
   
   public override void start() throws Error

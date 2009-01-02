@@ -27,6 +27,7 @@ libdeja_dup_la_VALASOURCES = \
 	BackendS3.vala \
 	BackendSSH.vala \
 	Duplicity.vala \
+	DuplicityDry.vala \
 	DuplicityInfo.vala \
 	Operation.vala \
 	OperationBackup.vala \

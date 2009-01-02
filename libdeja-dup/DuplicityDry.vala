@@ -30,8 +30,8 @@ public class DuplicityDry : Duplicity
 {
   public uint total_bytes {get; protected set; default = 0;}
   
-  public DuplicityDry(Gtk.Window? win) {
-    base(win);
+  public DuplicityDry(Operation.Mode mode, Gtk.Window? win) {
+    base(mode, win);
   }
   
   public override void start(List<string> argv, List<string>? envp) throws SpawnError
@@ -49,6 +49,7 @@ public class DuplicityDry : Duplicity
           total_bytes = firstline[2].to_int();
         }
         break;
+      }
     }
     base.process_info(firstline, stanza);
   }

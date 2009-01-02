@@ -32,6 +32,7 @@ public class MainWindow : Gtk.Window
   Gtk.Dialog progress;
   Gtk.ProgressBar progress_bar;
   Gtk.Label progress_label;
+  bool gives_progress;
   uint timeout_id;
   
   DejaDup.Operation op;
@@ -157,8 +158,16 @@ public class MainWindow : Gtk.Window
   
   bool pulse()
   {
-    progress_bar.pulse();
+    if (!gives_progress)
+      progress_bar.pulse();
     return true;
+  }
+  
+  void show_progress_percent(DejaDup.Operation op, double percent)
+  {
+    progress_bar.fraction = percent;
+    print("percent is %f\n", percent);
+    gives_progress = true;
   }
   
   void hide_progress()
@@ -229,6 +238,8 @@ public class MainWindow : Gtk.Window
     };
     op.raise_error += show_error;
     op.action_desc_changed += set_progress_label;
+    op.progress += show_progress_percent;
+    gives_progress = false;
     
     try {
       op.start();

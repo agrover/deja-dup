@@ -30,12 +30,7 @@ public class OperationBackup : Operation
 {
   public OperationBackup(Gtk.Window? win) {
     toplevel = win;
-  }
-  
-  public override void start() throws Error
-  {
-    action_desc_changed(_("Backing up files..."));
-    base.start();
+    mode = Mode.BACKUP;
   }
   
   protected override void operation_finished(Duplicity dup, bool success, bool cancelled)

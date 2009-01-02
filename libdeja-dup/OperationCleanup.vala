@@ -25,12 +25,7 @@ public class OperationCleanup : Operation
 {
   public OperationCleanup(Gtk.Window? win) {
     toplevel = win;
-  }
-  
-  public override void start() throws Error
-  {
-    action_desc_changed(_("Cleaning up..."));
-    base.start();
+    mode = Mode.CLEANUP;
   }
   
   protected override List<string>? make_argv() throws Error
