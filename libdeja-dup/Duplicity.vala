@@ -28,6 +28,7 @@ public class Duplicity : Object
   public signal void action_desc_changed(string action);
   
   public Gtk.Window toplevel {get; construct;}
+  public bool error_issued {get; private set;}
   
   bool verbose = false;
   
@@ -35,7 +36,7 @@ public class Duplicity : Object
     toplevel = win;
   }
   
-  public void start(List<string> argv, List<string>? envp) throws SpawnError
+  public virtual void start(List<string> argv, List<string>? envp) throws SpawnError
   {
     var verbose_str = Environment.get_variable("DEJA_DUP_DEBUG");
     if (verbose_str != null && verbose_str.to_int() > 0)
@@ -105,7 +106,6 @@ public class Duplicity : Object
   Pid child_pid;
   int[] pipes;
   IOChannel reader;
-  bool error_issued;
   construct {
     reader = null;
     pipes = new int[2];
@@ -196,7 +196,8 @@ public class Duplicity : Object
           // Chop off last backslash.
           word = word.substring(0, word.len() - 2);
         
-        // get rid of any other escaping backslashes and translate octals
+        // get rid of any othe
+  static const int INFO_DIFF_FILE_NEW = 4;r escaping backslashes and translate octals
         word = word.compress();
         
         // Now join to rest of group.
@@ -223,6 +224,7 @@ public class Duplicity : Object
   }
   
   static const int ERROR_EXCEPTION = 30;
+  static const int INFO_PROGRESS = 2;
   static const int INFO_DIFF_FILE_NEW = 4;
   static const int INFO_DIFF_FILE_CHANGED = 5;
   static const int INFO_DIFF_FILE_DELETED = 6;
@@ -237,37 +239,28 @@ public class Duplicity : Object
     var keyword = firstline[0];
     switch (keyword) {
     case "ERROR":
-      var errorstr = grab_stanza_text(stanza);
-      
-      if (firstline.length > 1) {
-        switch (firstline[1].to_int()) {
-        case ERROR_EXCEPTION: // exception
-          process_exception(firstline.length > 2 ? firstline[2] : "", errorstr, stanza);
-          return;
-        }
-      }
-      
-      show_error(errorstr);
+      process_error(firstline, stanza);
       break;
     case "INFO":
-      if (firstline.length > 1) {
-        switch (firstline[1].to_int()) {
-        case INFO_DIFF_FILE_NEW:
-        case INFO_DIFF_FILE_CHANGED:
-        case INFO_DIFF_FILE_DELETED:
-          if (firstline.length > 2)
-            process_diff_file(firstline[2]);
-          break;
-        case INFO_PATCH_FILE_WRITING:
-        case INFO_PATCH_FILE_PATCHING:
-          if (firstline.length > 2)
-            process_patch_file(firstline[2]);
-          break;
-        }
-      }
+      process_info(firstline, stanza);
       break;
     }
     
+  }
+  
+  protected virtual void process_error(string[] firstline, List<string> stanza)
+  {
+    var errorstr = grab_stanza_text(stanza);
+    
+    if (firstline.length > 1) {
+      switch (firstline[1].to_int()) {
+      case ERROR_EXCEPTION: // exception
+        process_exception(firstline.length > 2 ? firstline[2] : "", errorstr, stanza);
+        return;
+      }
+    }
+    
+    show_error(errorstr);
   }
   
   void process_exception(string exception, string errorstr, List<string> stanza)
@@ -284,6 +277,25 @@ public class Duplicity : Object
     // For most, don't do anything. Error string won't be useful to humans, and
     // by not raising it, we'll eventually hit the 'unknown error'
     // message which is slightly better than a giant exception string.
+  }
+  
+  protected virtual void process_info(string[] firstline, List<string> stanza)
+  {
+    if (firstline.length > 1) {
+      switch (firstline[1].to_int()) {
+      case INFO_DIFF_FILE_NEW:
+      case INFO_DIFF_FILE_CHANGED:
+      case INFO_DIFF_FILE_DELETED:
+        if (firstline.length > 2)
+          process_diff_file(firstline[2]);
+        break;
+      case INFO_PATCH_FILE_WRITING:
+      case INFO_PATCH_FILE_PATCHING:
+        if (firstline.length > 2)
+          process_patch_file(firstline[2]);
+        break;
+      }
+    }
   }
   
   void process_diff_file(string file) {
