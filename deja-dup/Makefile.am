@@ -20,8 +20,9 @@ AM_CFLAGS = \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 deja_dup_VALASOURCES = \
+	AssistantOperation.vala \
+	AssistantRestore.vala \
 	MainWindow.vala \
-	RestoreAssistant.vala \
 	main.vala
 
 BUILT_SOURCES = \

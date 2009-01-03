@@ -255,7 +255,7 @@ public class MainWindow : Gtk.Window
   
   void ask_restore()
   {
-    var dlg = new RestoreAssistant();
+    var dlg = new AssistantRestore();
     dlg.modal = true;
     dlg.transient_for = this;
     dlg.show_all();
