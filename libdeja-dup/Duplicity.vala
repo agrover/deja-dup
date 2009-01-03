@@ -108,6 +108,17 @@ public class Duplicity : Object
     }
     
     argv.append("--verbosity=9");
+    
+    // Default volsize is 5.  We prefer 1 because:
+    // * takes less temp space
+    // * retries of a volume take less time
+    // * quicker restore of a particular file (less excess baggage to download)
+    // * we get feedback more frequently (duplicity only gives us a progress
+    //   report at the end of a volume)
+    // Downsides:
+    // * network throughput might be lower.  Some protocols have large per-file
+    //   overhead (like ssh) and the network doesn't have time to ramp up to
+    //   max tcp transfer speed per file.
     argv.append("--volsize=1");
     
     // Add always-there arguments
