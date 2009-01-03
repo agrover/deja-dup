@@ -29,14 +29,6 @@ public string get_backup_icon_filename() {
 
 public class MainWindow : Gtk.Window
 {
-  Gtk.Dialog progress;
-  Gtk.ProgressBar progress_bar;
-  Gtk.Label progress_label;
-  bool gives_progress;
-  uint timeout_id;
-  
-  DejaDup.Operation op;
-  
   construct
   {
     Gtk.VBox vb = new Gtk.VBox (false, 0);
@@ -99,7 +91,7 @@ public class MainWindow : Gtk.Window
              "child", backup_button);
     
     restore_button.clicked += (b) => {ask_restore();};
-    backup_button.clicked += (b) => {do_backup();};
+    backup_button.clicked += (b) => {ask_backup();};
     
     vb.pack_start (setup_menu (), false, false, 0);
     vb.pack_start (hbox, true, true, 0);
@@ -119,133 +111,17 @@ public class MainWindow : Gtk.Window
     return false;
   }
   
-  void show_success(string label, string desc)
-  {
-    var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "%s", label);
-    dlg.format_secondary_text("%s", desc);
-    dlg.run();
-    dlg.destroy();
-  }
-  
-  void show_error(DejaDup.Operation op, string errstr, string? detail)
-  {
-    hide_progress();
-    
-    var dlg = new Gtk.MessageDialog (toplevel, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Error occurred"));
-    dlg.format_secondary_text("%s", errstr);
-    
-    if (detail != null) {
-      var error_buf = new Gtk.TextBuffer(null);
-      error_buf.set_text(detail, -1);
-      
-      var error_view = new Gtk.TextView.with_buffer(error_buf);
-      error_view.editable = false;
-      error_view.wrap_mode = Gtk.WrapMode.WORD;
-      
-      var scroll = new Gtk.ScrolledWindow(null, null);
-      scroll.add(error_view);
-      
-      var expander = new Gtk.Expander.with_mnemonic(_("_Details"));
-      expander.add(scroll);
-      
-      expander.show_all();
-      dlg.vbox.pack_start_defaults(expander);
-    }
-    
-    dlg.run();
-    dlg.destroy();
-  }
-  
-  bool pulse()
-  {
-    if (!gives_progress)
-      progress_bar.pulse();
-    return true;
-  }
-  
-  void show_progress_percent(DejaDup.Operation op, double percent)
-  {
-    progress_bar.fraction = percent;
-    gives_progress = true;
-  }
-  
-  void hide_progress()
-  {
-    if (timeout_id != 0)
-      Source.remove(timeout_id);
-    
-    if (progress != null)
-      progress.destroy();
-    
-    timeout_id = 0;
-    progress = null;
-  }
-  
-  void handle_progress_response(Gtk.Dialog dlg, int response)
-  {
-    if (response == Gtk.ResponseType.CANCEL) {
-      op.cancel();
-      // May take a bit, if we do a cleanup.  Mark cancel insensitive
-      dlg.set_response_sensitive(response, false);
-    }
-  }
-  
-  void show_progress()
-  {
-    if (progress == null) {
-      progress = new Gtk.Dialog.with_buttons("", this,
-                                             Gtk.DialogFlags.MODAL |
-                                             Gtk.DialogFlags.DESTROY_WITH_PARENT |
-                                             Gtk.DialogFlags.NO_SEPARATOR,
-                                             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL);
-      
-      progress_label = new Gtk.Label("");
-      progress_label.set("xalign", 0.0f);
-      progress.vbox.add(progress_label);
-      
-      progress_bar = new Gtk.ProgressBar();
-      progress.vbox.add(progress_bar);
-      
-      progress.response += handle_progress_response;
-      
-      timeout_id = Timeout.add(200, pulse);
-      progress_bar.set_fraction(0); // Reset progress bar if this is second time we run this
-      
-      progress.show_all();
-    }
-  }
-  
-  void set_progress_label(DejaDup.Operation op, string action)
-  {
-    progress_label.set_text(action);
-  }
-  
   void on_backup(Gtk.Action action)
   {
-    do_backup();
+    ask_backup();
   }
   
-  void do_backup()
+  void ask_backup()
   {
-    show_progress();
-    op = new DejaDup.OperationBackup(this);
-    op.done += (b, s) => {
-      hide_progress();
-      op = null;
-      if (s)
-        show_success(_("Backup finished"), _("Your files were successfully backed up."));
-    };
-    op.raise_error += show_error;
-    op.action_desc_changed += set_progress_label;
-    op.progress += show_progress_percent;
-    gives_progress = false;
-    
-    try {
-      op.start();
-    }
-    catch (Error e) {
-      show_error(op, e.message, null);
-    }
+    var dlg = new AssistantBackup();
+    dlg.modal = true;
+    dlg.transient_for = this;
+    dlg.show_all();
   }
   
   void on_restore(Gtk.Action action)

@@ -30,14 +30,6 @@ public class AssistantRestore : AssistantOperation
   construct
   {
     title = _("Restore");
-    
-    try {
-      var filename = get_restore_icon_filename();
-      icon = new Gdk.Pixbuf.from_file_at_size(filename, 48, 48);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
   }
   
   protected override void add_setup_pages()
@@ -136,6 +128,25 @@ public class AssistantRestore : AssistantOperation
     return new DejaDup.OperationRestore(this, restore_location);
   }
   
+  protected override string get_progress_file_prefix()
+  {
+    // Translators:  This is the word 'Restoring' in the phrase
+    // "Restoring '%s'".  %s is a filename.
+    return _("Restoring");
+  }
+  
+  protected override Gdk.Pixbuf? get_op_icon()
+  {
+    try {
+      var filename = get_restore_icon_filename();
+      return new Gdk.Pixbuf.from_file_at_size(filename, 48, 48);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      return null;
+    }
+  }
+  
   protected override void do_prepare(AssistantOperation assist, Gtk.Widget page)
   {
     base.do_prepare(assist, page);
@@ -168,7 +179,7 @@ public class AssistantRestore : AssistantOperation
       }
     }
     else if (page == progress_page) {
-      assist.child_set(page, "title", _("Restoring"));
+      assist.child_set(page, "title", _("Restoring..."));
     }
   }
 }
