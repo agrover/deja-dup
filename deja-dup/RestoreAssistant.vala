@@ -29,6 +29,7 @@ public class RestoreAssistant : Gtk.Assistant
   Gtk.Label confirm_location;
   Gtk.Widget confirm_page;
   Gtk.Label progress_label;
+  Gtk.Label progress_file_label;
   Gtk.ProgressBar progress_bar;
   Gtk.Widget progress_page;
   Gtk.Label summary_label;
@@ -157,18 +158,35 @@ public class RestoreAssistant : Gtk.Assistant
     progress_label.label = label;
   }
   
+  void set_progress_label_file(DejaDup.OperationRestore restore, File file)
+  {
+    var parse_name = file.get_parse_name();
+    var basename = Path.get_basename(parse_name);
+    progress_label.label = _("Restoring") + " ";
+    progress_file_label.label = "'%s'".printf(basename);
+  }
+  
   Gtk.Widget make_progress_page()
   {
     progress_label = new Gtk.Label("");
     progress_label.set("xalign", 0.0f);
     
+    progress_file_label = new Gtk.Label("");
+    progress_file_label.set("xalign", 0.0f,
+                            "ellipsize", Pango.EllipsizeMode.MIDDLE);
+    
+    var progress_hbox = new Gtk.HBox(false, 0);
+    progress_hbox.set("child", progress_label,
+                      "child", progress_file_label);
+    progress_hbox.child_set(progress_label, "expand", false);
+    
     progress_bar = new Gtk.ProgressBar();
     
     var page = new Gtk.VBox(false, 6);
-    page.set("child", progress_label,
+    page.set("child", progress_hbox,
              "child", progress_bar,
              "border-width", 12);
-    page.child_set(progress_label, "expand", false);
+    page.child_set(progress_hbox, "expand", false);
     page.child_set(progress_bar, "expand", false);
     
     return page;
@@ -297,6 +315,7 @@ public class RestoreAssistant : Gtk.Assistant
     op.done += apply_finished;
     op.raise_error += show_error;
     op.action_desc_changed += set_progress_label;
+    op.action_file_changed += set_progress_label_file;
     op.progress += show_progress;
     
     try {

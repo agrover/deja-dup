@@ -26,6 +26,7 @@ public abstract class Operation : Object
   public signal void done(bool success);
   public signal void raise_error(string errstr, string? detail);
   public signal void action_desc_changed(string action);
+  public signal void action_file_changed(File file);
   public signal void progress(double percent);
   public signal bool passphrase_required();
   public signal bool backend_password_required();
@@ -70,6 +71,7 @@ public abstract class Operation : Object
     dup.done += operation_finished;
     dup.raise_error += (d, s, detail) => {raise_error(s, detail);};
     dup.action_desc_changed += (d, s) => {action_desc_changed(s);};
+    dup.action_file_changed += (d, f) => {action_file_changed(f);};
     dup.progress += (d, p) => {progress(p);};
     backend.envp_ready += continue_with_envp;
     backend.need_password += (b) => {

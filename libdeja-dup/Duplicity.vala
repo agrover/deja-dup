@@ -26,6 +26,7 @@ public class Duplicity : Object
   public signal void done(bool success, bool cancelled);
   public signal void raise_error(string errstr, string? detail);
   public signal void action_desc_changed(string action);
+  public signal void action_file_changed(File file);
   public signal void progress(double percent);
   
   public Gtk.Window toplevel {get; construct;}
@@ -364,11 +365,11 @@ public class Duplicity : Object
   }
   
   void process_diff_file(string file) {
-    action_desc_changed(_("Backing up %s").printf(make_filename(file)));
+    action_file_changed(make_file_obj(file));
   }
   
   void process_patch_file(string file) {
-    action_desc_changed(_("Restoring %s").printf(make_filename(file)));
+    action_file_changed(make_file_obj(file));
   }
   
   void process_progress(string[] firstline)
@@ -397,12 +398,14 @@ public class Duplicity : Object
     progress(percent);
   }
   
-  string make_filename(string file)
+  static File root;
+  File make_file_obj(string file)
   {
     // All files are relative to root.
-    File root = File.new_for_path("/");
-    File full = root.resolve_relative_path(file);
-    return full.get_path();
+    if (root == null)
+      root = File.new_for_path("/");
+    
+    return root.resolve_relative_path(file);
   }
   
   string grab_stanza_text(List<string> stanza)
