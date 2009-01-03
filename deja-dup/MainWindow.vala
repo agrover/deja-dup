@@ -166,7 +166,6 @@ public class MainWindow : Gtk.Window
   void show_progress_percent(DejaDup.Operation op, double percent)
   {
     progress_bar.fraction = percent;
-    print("percent is %f\n", percent);
     gives_progress = true;
   }
   

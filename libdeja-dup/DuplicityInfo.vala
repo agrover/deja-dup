@@ -27,7 +27,8 @@ public class DuplicityInfo : Object
   public static const int REQUIRED_MINOR = 5;
   public static const int REQUIRED_MICRO = 3;
 
-  public bool has_progress {get; private set; default = false; }
+  public bool has_backup_progress {get; private set; default = false; }
+  public bool has_restore_progress {get; private set; default = false; }
   
   static DuplicityInfo info = null;
   public static DuplicityInfo get_default() {
@@ -78,7 +79,9 @@ public class DuplicityInfo : Object
     }
     
     if (meets_version(0, 5, 4))
-      has_progress = true;
+      has_backup_progress = true;
+    if (meets_version(0, 5, 6))
+      has_restore_progress = true;
     
     return true;
   }

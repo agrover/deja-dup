@@ -50,7 +50,7 @@ public class Duplicity : Object
     // first run using --dry-run to get the total size of the backup, to make
     // accurate progress bars.
     if (dry_run == null && mode == Operation.Mode.BACKUP &&
-        DuplicityInfo.get_default().has_progress) {
+        DuplicityInfo.get_default().has_backup_progress) {
       action_desc_changed(_("Preparing..."));
       
       // save arguments for calling start() on ourselves again later
@@ -371,7 +371,12 @@ public class Duplicity : Object
     action_desc_changed(_("Restoring %s").printf(make_filename(file)));
   }
   
-  void process_progress(string[] firstline) {
+  void process_progress(string[] firstline)
+  {
+    if (!DuplicityInfo.get_default().has_restore_progress &&
+        mode == Operation.Mode.RESTORE)
+      return;
+    
     uint now, total;
     
     if (firstline.length > 2)

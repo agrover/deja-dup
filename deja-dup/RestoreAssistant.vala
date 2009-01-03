@@ -149,7 +149,6 @@ public class RestoreAssistant : Gtk.Assistant
   void show_progress(DejaDup.OperationRestore restore, double percent)
   {
     progress_bar.fraction = percent;
-    print("percent is %f\n", percent);
     gives_progress = true;
   }
   
