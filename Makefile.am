@@ -12,7 +12,6 @@ ACLOCAL_AMFLAGS = -I m4
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
 EXTRA_DIST = \
-	m4 \
 	autogen.sh \
 	intltool-extract.in \
 	intltool-merge.in \
