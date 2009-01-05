@@ -1,0 +1,412 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY appname          "Déjà Dup">
+  <!ENTITY app "<application>Déjà Dup</application>">
+  <!ENTITY appversion   "4.0">
+  <!ENTITY manrevision  "1.0">
+  <!ENTITY date "January 2009">
+  <!-- Information about the entities
+       Use the app and appname entities to specify the name of the application.  
+       Use the appversion entity to specify the version of the application.
+       Use the manrevision entity to specify the revision number of this manual.
+       Use the date entity to specify the release date of this manual.
+-->
+]>
+<!-- =============Document Header ============================= -->
+<article id="index" lang="en">
+  <articleinfo> 
+    <title>&app; Manual</title>
+    <abstract role="description">
+      <para>&app; is a simple backup utility.</para>
+    </abstract>
+
+    <copyright> 
+      <year>2009</year> 
+      <holder>Michael Terry <email>mike@mterry.name</email></holder> 
+    </copyright> 
+
+    <!-- An address can be added to the publisher information. -->
+    <publisher role="maintainer"> 
+      <publishername><ulink url="http://launchpad.net/~deja-dup-team" type="http">&app; Administrators</ulink></publishername>
+    </publisher> 
+
+    <xi:include href="legal.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+    <authorgroup>
+      <author>
+        <firstname>Michael</firstname>
+        <surname>Terry</surname>
+        <address> <email>mike@mterry.name</email> </address>
+      </author>
+    </authorgroup>
+    
+    <revhistory>
+      <revision> 
+		<revnumber>&appname; Manual V&manrevision;</revnumber> 
+		<date>&date;</date>
+		<revdescription> 
+	  		<para role="author">Michael Terry
+	    	<email>mike@mterry.name</email>
+	  		</para>
+	  		<para role="publisher"><ulink url="http://launchpad.net/~deja-dup-team" type="http">&app; Administrators</ulink></para>
+		</revdescription> 
+      </revision> 
+    </revhistory> 
+
+    <releaseinfo>This manual describes version &appversion; of &appname;.
+    </releaseinfo> 
+    <legalnotice> 
+      <title>Feedback</title> 
+      <para>To report a bug or make a suggestion regarding the &app; application or
+      this manual, visit the
+      <ulink url="http://bugs.launchpad.net/deja-dup" type="http">&app; project page</ulink>.
+      </para>
+<!-- Translators may also add here feedback address for translations -->
+    </legalnotice> 
+  </articleinfo> 
+
+  <indexterm zone="index"> 
+    <primary>&appname;</primary> 
+  </indexterm> 
+  <indexterm zone="index"> 
+    <primary>deja-dup</primary> 
+  </indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+<!-- Use the Introduction section to give a brief overview of what
+     the application is and what it does. -->
+  <sect1 id="deja-dup-introduction"> 
+    <title>Introduction</title> 
+    <para>&app; is a simple backup program. It hides the complexity of doing backups the 'right way' (encrypted, off-site, and regular) and uses duplicity as the backend. </para> 
+    <para>&app; provides the following features:</para> 
+    <itemizedlist> 
+      <listitem> 
+    <para>Support for the following backup locations:</para> 
+    <itemizedlist> 
+        <listitem> 
+        <para>Amazon S3</para> 
+        </listitem> 
+        <listitem> 
+        <para>SSH server</para> 
+        </listitem> 
+        <listitem> 
+        <para>Local folder</para> 
+        </listitem> 
+    </itemizedlist> 
+      </listitem> 
+      <listitem> 
+    <para>Automatically schedules backups at regular intervals. </para> 
+      </listitem> 
+    </itemizedlist>
+  </sect1>
+
+  <sect1 id="deja-dup-getting-started"> 
+    <title>Getting Started</title> 
+
+    <sect2 id="deja-dup-start">
+    <title>Starting &app;</title>
+    <para>You can start &app; in the following ways:
+    </para> 
+    <variablelist>
+      <varlistentry>
+        <term><guimenu>Applications</guimenu> menu</term>
+        <listitem>
+        <para>Choose 
+        <menuchoice>
+        <guisubmenu>Accessories</guisubmenu>
+        <guimenuitem>&appname; Backup Utility</guimenuitem>
+        </menuchoice>. </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>Command line</term>
+        <listitem>
+        <para>To start &app; from a command line, type the following command, 
+        then press <keycap>Return</keycap>:</para>
+        <para> 
+      <command>deja-dup</command>
+        </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+    </sect2>
+
+    <sect2 id="deja-dup-when-start">
+    <title>When You Start &app;</title>
+    <para>When you start &app;, the following window is displayed.</para>
+
+    <!-- ==== Figure ==== -->
+      <figure id="mainwindow-fig"> 
+  <title>&app; Start Up Window</title> 
+  <screenshot> 
+    <mediaobject> 
+      <imageobject><imagedata
+    fileref="figures/start_window.png" format="PNG"/> 
+      </imageobject>
+      <textobject> 
+        <phrase>Shows &app; main window. Contains titlebar, menubar, and display area.
+        Menubar contains File, Edit, and Help menus. </phrase> 
+      </textobject> 
+    </mediaobject> 
+  </screenshot> 
+      </figure>
+    <!-- ==== End of Figure ==== -->
+
+    </sect2>
+  </sect1>
+  
+  <sect1 id="deja-dup-backup"> 
+      <title>Backing Up</title> 
+      <para>To backup, choose 
+  <menuchoice> 
+    <guimenu>File</guimenu> 
+    <guimenuitem>Backup</guimenuitem> 
+  </menuchoice>. Or press the <guibutton>Backup</guibutton> button on
+  the main window.</para>
+  
+      <figure id="backup-fig"> 
+  <title>Backup Window</title> 
+  <screenshot> 
+    <mediaobject> 
+      <imageobject><imagedata
+    fileref="figures/backup.png" format="PNG"/> 
+      </imageobject>
+      <textobject> 
+        <phrase>Shows initial backup window.</phrase> 
+      </textobject> 
+    </mediaobject> 
+  </screenshot> 
+      </figure>
+
+  <para>The <guilabel>Backup</guilabel> dialog is displayed. Click <guibutton>
+  Apply</guibutton> to start the backup. A progress bar will appear.  If an
+  error occurs, the dialog will display an error message.</para>
+  </sect1> 
+
+  <sect1 id="deja-dup-restore"> 
+      <title>Restoring</title> 
+      <para>To restore, choose 
+  <menuchoice> 
+    <guimenu>File</guimenu> 
+    <guimenuitem>Restore</guimenuitem> 
+  </menuchoice>. Or press the <guibutton>Restore</guibutton> button on
+  the main window.</para>
+  
+      <figure id="restore-fig"> 
+  <title>Restore Window</title> 
+  <screenshot> 
+    <mediaobject> 
+      <imageobject><imagedata
+    fileref="figures/restore.png" format="PNG"/> 
+      </imageobject>
+      <textobject> 
+        <phrase>Shows initial restore window.</phrase> 
+      </textobject> 
+    </mediaobject> 
+  </screenshot> 
+      </figure>
+
+  <para>The <guilabel>Restore</guilabel> dialog is displayed. You first must
+  pick where to put the restored files. You can either restore them to their
+  original locations or put them under a folder of your choice.</para>
+  <para>After clicking <guibutton>Forward</guibutton>, you can review your
+  restore options, then click <guibutton>Apply</guibutton> to start the restore.
+  A progress bar will appear.  If an error occurs, the dialog will display an
+  error message.</para>
+  </sect1>
+
+  <sect1 id="deja-dup-prefs"> 
+    <title>Preferences</title> 
+    <para>To configure &app;, choose 
+      <menuchoice> 
+  <guimenu>Edit</guimenu> 
+  <guimenuitem>Preferences</guimenuitem> 
+      </menuchoice>.</para>
+      
+      <figure id="preferences-fig"> 
+  <title>&app; Preferences</title> 
+  <screenshot> 
+    <mediaobject> 
+      <imageobject><imagedata
+    fileref="figures/preferences.png" format="PNG"/> 
+      </imageobject>
+      <textobject> 
+        <phrase>Shows &app; preferences window.</phrase> 
+      </textobject> 
+    </mediaobject> 
+  </screenshot> 
+      </figure>
+      
+      <variablelist> 
+  <varlistentry> 
+    <term> 
+      <guilabel>Backup location</guilabel> </term> 
+    <listitem> 
+      <para>Use this drop-down list box to specify the
+        backup location that
+        &app; uses when backing up or restoring. Select one of the following
+        options:</para>
+      <itemizedlist> 
+        <listitem> 
+    <para> 
+      <guilabel>Amazon S3</guilabel> </para> 
+    <para>This backup location uses the S3 storage service from
+      Amazon. For a small fee per gigabyte, they hold your data for you.
+      This is the recommended default because it is an easy way to keep
+      your data offsite (meaning out of your home: in case of disaster or
+      theft, your data will still be safe). You can sign up
+      <ulink url="http://aws.amazon.com/s3/" type="http">online</ulink>.
+      </para> 
+          <caution>
+          <para>This service costs money.  Read their rates carefully before
+          using it.</para>
+          </caution>
+        </listitem> 
+        <listitem> 
+    <para> 
+      <guilabel>Local Folder</guilabel> </para> 
+      <para>This is the backup location to pick if you have an external hard
+      drive that you want to use for backups. </para> 
+        </listitem> 
+        <listitem> 
+    <para> 
+      <guilabel>SSH</guilabel> </para> 
+      <para>If you have access to a server running SSH (a protocol
+      that lets remote users log in), pick this location. Web hosts or
+      data servers often provide SSH access. </para> 
+        </listitem> 
+      </itemizedlist> 
+      <para>Default: 
+        <guilabel>Amazon S3</guilabel>.</para> 
+    </listitem> 
+  </varlistentry> 
+  <varlistentry> 
+    <term> <guilabel>S3 bucket</guilabel> </term> 
+    <listitem> 
+      <note>
+        <para>This option only appears if the <guilabel>Amazon S3</guilabel>
+        backup location has been selected.</para>
+      </note>
+      <para>Amazon S3 uses 'buckets' to keep your data organized. Each bucket is
+      separate from the rest. Think of each bucket as a separate named remote
+      hard drive. The default is <userinput>deja-dup</userinput>.</para> 
+    </listitem> 
+  </varlistentry> 
+  <varlistentry> 
+    <term> <guilabel>S3 ID</guilabel> </term> 
+    <listitem> 
+      <note>
+        <para>This option only appears if the <guilabel>Amazon S3</guilabel>
+        backup location has been selected.</para>
+      </note>
+      <para>This is your Access Key ID that Amazon gave you when you signed up
+      for S3. It is like a username for logging into S3. If left empty, you
+      will be prompted for it as you backup or restore.</para> 
+    </listitem> 
+  </varlistentry> 
+  <varlistentry> 
+    <term> <guilabel>Folder</guilabel> </term> 
+    <listitem> 
+      <note>
+        <para>This option only appears if the <guilabel>Local Folder</guilabel>
+        backup location has been selected.</para>
+      </note>
+      <para>Choose the folder into which you want to store the backup files.
+      This often will be an external drive that you plug in.</para> 
+    </listitem> 
+  </varlistentry> 
+  <varlistentry> 
+    <term> <guilabel>Username</guilabel> </term> 
+    <listitem> 
+      <note>
+        <para>This option only appears if the <guilabel>SSH</guilabel>
+        backup location has been selected.</para>
+      </note>
+      <para>Enter the username used to log in to the server.</para> 
+    </listitem> 
+  </varlistentry> 
+  <varlistentry> 
+    <term> <guilabel>Server</guilabel> </term> 
+    <listitem> 
+      <note>
+        <para>This option only appears if the <guilabel>SSH</guilabel>
+        backup location has been selected.</para>
+      </note>
+      <para>Enter the address of the server to use. This can either
+      be an IP address (all numbers) or a domain name.</para> 
+    </listitem> 
+  </varlistentry> 
+  <varlistentry> 
+    <term> <guilabel>Port</guilabel> </term> 
+    <listitem> 
+      <note>
+        <para>This option only appears if the <guilabel>SSH</guilabel>
+        backup location has been selected.</para>
+      </note>
+      <para>Enter the SSH port for the server. This is almost always best left
+      blank or as the default <userinput>22</userinput>. </para> 
+    </listitem> 
+  </varlistentry> 
+  <varlistentry> 
+    <term> <guilabel>Directory</guilabel> </term> 
+    <listitem> 
+      <note>
+        <para>This option only appears if the <guilabel>SSH</guilabel>
+        backup location has been selected.</para>
+      </note>
+      <para>Enter the directory to store backup files on the server.</para>
+    </listitem> 
+  </varlistentry> 
+  <varlistentry> 
+    <term> <guilabel>Include</guilabel> </term> 
+    <listitem> 
+      <para>Select a list of directories to backup. Press the <guibutton>Add
+      </guibutton> or <guibutton>Remove</guibutton> buttons to modify the list.
+      If you are only interested in backing up your own data, the default of
+      <guilabel>Home Folder</guilabel> is sufficient.</para>
+    </listitem> 
+  </varlistentry> 
+  <varlistentry> 
+    <term> <guilabel>Exclude</guilabel> </term> 
+    <listitem> 
+      <para>Select a list of directories to not backup. Press the <guibutton>Add
+      </guibutton> or <guibutton>Remove</guibutton> buttons to modify the list.
+      This list takes precedence over the list of included directories.</para>
+      <para>Some of your data may be large and not very important to you.  In that
+      case, you can save yourself some time and space by not backing them up.</para>
+    </listitem> 
+  </varlistentry> 
+  <varlistentry> 
+    <term> <guilabel>Encrypt backup files</guilabel> </term> 
+    <listitem> 
+      <para>Encrypting your backup files is recommended to keep your data safe.
+      If you don't have exclusive physical control of your backup location, or
+      if it is stolen, an encrypted backup prevents others from looking at your
+      personal data.</para>
+      <para>If on, you will be prompted for a password. Keep this
+      password safe, you will need it to restore your data.</para>
+      <para>Default: <userinput>On</userinput>.</para> 
+    </listitem> 
+  </varlistentry> 
+  <varlistentry> 
+    <term> <guilabel>Automatically backup on a regular schedule</guilabel> </term> 
+    <listitem> 
+      <para>Turn this option on to have &app; automatically backup for you. This
+      is recommended so that you don't forget to backup. Backups are more useful
+      the more recently you have made them, so it is important to regularly do so.
+      </para>
+      <para>Default: <userinput>Off</userinput>.</para> 
+    </listitem> 
+  </varlistentry> 
+  <varlistentry> 
+    <term> <guilabel>How often to backup</guilabel> </term> 
+    <listitem> 
+      <para>Choose a schedule for automatic backups.</para>
+      <para>Default: <guilabel>Weekly</guilabel>.</para> 
+    </listitem> 
+  </varlistentry> 
+    </variablelist> 
+  </sect1> 
+</article>

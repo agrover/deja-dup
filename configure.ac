@@ -10,6 +10,8 @@ AC_CONFIG_MACRO_DIR([m4])
 # Sets up automake.
 AM_INIT_AUTOMAKE([1.9 foreign no-dist-gzip dist-bzip2])
 
+GNOME_DOC_INIT
+
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_INSTALL
@@ -103,6 +105,7 @@ AC_CONFIG_FILES([Makefile
                  applet/Makefile
                  monitor/Makefile
                  deja-dup/Makefile
+                 help/Makefile
                  po/Makefile.in
                  preferences/Makefile
                  vapi/Makefile])

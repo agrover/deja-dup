@@ -1,6 +1,6 @@
 # -*- indent-tabs-mode: t; tab-width: 2 -*-
 
-SUBDIRS = data po vapi libdeja-dup applet monitor preferences deja-dup
+SUBDIRS = data po vapi libdeja-dup applet monitor preferences deja-dup help
 
 # Distribute pot file
 dist-hook:
@@ -8,6 +8,21 @@ dist-hook:
 	cp "$(srcdir)/po/$(GETTEXT_PACKAGE).pot" "$(distdir)/po/"
 
 ACLOCAL_AMFLAGS = -I m4
-EXTRA_DIST = autogen.sh intltool-extract.in intltool-merge.in intltool-update.in
-DISTCLEANFILES = intltool-extract intltool-merge intltool-update
+
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
+
+EXTRA_DIST = \
+	m4 \
+	autogen.sh \
+	intltool-extract.in \
+	intltool-merge.in \
+	intltool-update.in \
+	COPYING-DOCS \
+	gnome-doc-utils.make
+
+DISTCLEANFILES = \
+	intltool-extract \
+	intltool-merge \
+	intltool-update \
+	gnome-doc-utils.make
 

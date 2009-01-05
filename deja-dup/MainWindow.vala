@@ -142,6 +142,11 @@ public class MainWindow : Gtk.Window
     DejaDup.show_about(this, this);
   }
   
+  void on_contents(Gtk.Action action)
+  {
+    DejaDup.show_uri(this, "ghelp:deja-dup");
+  }
+  
   void on_get_help(Gtk.Action action)
   {
     DejaDup.show_uri(this, "https://answers.launchpad.net/deja-dup");
@@ -205,6 +210,10 @@ public class MainWindow : Gtk.Window
     action = new Gtk.Action ("HelpMenuAction", _("_Help"), null, null);
     action_group.add_action (action);
     
+    action = new Gtk.Action ("ContentsAction", _("Contents"), null, Gtk.STOCK_HELP);
+    action.activate += on_contents;
+    action_group.add_action_with_accel (action, "F1");
+    
     action = new Gtk.Action ("GetHelpAction", _("Get Help _Online..."), null, null);
     action.activate += on_get_help;
     action_group.add_action (action);
@@ -213,7 +222,7 @@ public class MainWindow : Gtk.Window
     action.activate += on_translate;
     action_group.add_action (action);
     
-    action = new Gtk.Action ("ReportAction", _("_Report a Problem"), null, null);
+    action = new Gtk.Action ("ReportAction", _("_Report a Problem..."), null, null);
     action.activate += on_report;
     action_group.add_action (action);
     
@@ -234,6 +243,8 @@ public class MainWindow : Gtk.Window
       <menuitem name="Preferences" action="PreferencesAction"/>
     </menu>
     <menu name="HelpMenu" action="HelpMenuAction">
+      <menuitem name="Contents" action="ContentsAction"/>
+      <separator/>
       <menuitem name="GetHelp" action="GetHelpAction"/>
       <menuitem name="Translate" action="TranslateAction"/>
       <menuitem name="Report" action="ReportAction"/>
