@@ -37,7 +37,9 @@ public class PreferencesDialog : Gtk.Dialog
   construct {
     set("title", _("Déjà Dup Preferences"),
         "has-separator", false);
-    add_buttons(Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE);
+    add_buttons(Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE,
+                Gtk.STOCK_HELP, Gtk.ResponseType.HELP);
+    response += handle_response;
     
     var table = new Gtk.Table(0, 3, false);
     table.set("border-width", 3);
@@ -257,6 +259,17 @@ public class PreferencesDialog : Gtk.Dialog
         else
           w.hide();
       }
+    }
+  }
+  
+  void handle_response(PreferencesDialog dlg, int response) {
+    switch (response) {
+    case Gtk.ResponseType.HELP:
+      DejaDup.show_uri(dlg, "ghelp:deja-dup#deja-dup-prefs");
+      break;
+    default:
+      Gtk.main_quit();
+      break;
     }
   }
   

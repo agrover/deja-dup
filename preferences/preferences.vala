@@ -92,7 +92,6 @@ class DejaDupPreferences : Object
       Gtk.Window.set_default_icon_name(Config.PACKAGE);
       
       pref_window = new PreferencesDialog();
-      pref_window.response += Gtk.main_quit;
       
       app.message_received += message_received;
       app.watch_window(pref_window);
