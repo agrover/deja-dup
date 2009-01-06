@@ -27,6 +27,7 @@ public class DuplicityInfo : Object
   public static const int REQUIRED_MINOR = 5;
   public static const int REQUIRED_MICRO = 3;
 
+  public bool has_broken_cleanup {get; private set; default = false; }
   public bool has_backup_progress {get; private set; default = false; }
   public bool has_restore_progress {get; private set; default = false; }
   
@@ -80,6 +81,8 @@ public class DuplicityInfo : Object
     
     if (meets_version(0, 5, 4))
       has_backup_progress = true;
+    if (equals_version(0, 5, 4) || equals_version(0, 5, 5))
+      has_broken_cleanup = true;
     if (meets_version(0, 5, 6))
       has_restore_progress = true;
     
@@ -95,6 +98,10 @@ public class DuplicityInfo : Object
     return (major > vmaj) ||
            (major == vmaj && minor > vmin) ||
            (major == vmaj && minor == vmin && micro >= vmic);
+  }
+  
+  bool equals_version(int vmaj, int vmin, int vmic) {
+    return major == vmaj && minor == vmin && micro == vmic;
   }
   
   // Doesn't yet handle a blacklist of versions.  We'll cross that bridge when we come to it

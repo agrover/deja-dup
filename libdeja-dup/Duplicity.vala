@@ -79,6 +79,10 @@ public class Duplicity : Object
       break;
     case Operation.Mode.CLEANUP:
       action_desc_changed(_("Cleaning up..."));
+      if (DuplicityInfo.get_default().has_broken_cleanup) {
+        done(true, false); // pretend we're naturally done
+        return;
+      }
       break;
     }
     
