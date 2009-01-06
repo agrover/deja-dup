@@ -27,6 +27,8 @@ public class StatusIcon : Gtk.StatusIcon
   Notify.Notification note;
   bool need_passphrase;
   bool fatal_error;
+  double progress;
+  string action;
   
   construct {
     icon_name = Config.PACKAGE;
@@ -53,7 +55,24 @@ public class StatusIcon : Gtk.StatusIcon
   
   void set_action_desc(DejaDup.OperationBackup op, string action)
   {
-    set_tooltip(action);
+    this.action = action;
+    update_tooltip();
+  }
+  
+  void note_progress(DejaDup.OperationBackup op, double percent)
+  {
+    this.progress = percent;
+    update_tooltip();
+  }
+  
+  void update_tooltip()
+  {
+    var tooltip = "";
+    if (this.action != null)
+      tooltip = this.action;
+    if (progress > 0)
+      tooltip = tooltip + "\n" + _("%.1f%% complete").printf(progress * 100);
+    set_tooltip(tooltip);
   }
   
   bool start_idle() {
@@ -65,6 +84,7 @@ public class StatusIcon : Gtk.StatusIcon
   {
     need_passphrase = false;
     fatal_error = false;
+    progress = 0;
     
     op = new DejaDup.OperationBackup(null);
     op.done += send_done;
@@ -72,6 +92,7 @@ public class StatusIcon : Gtk.StatusIcon
     op.backend_password_required += notify_backend_password;
     op.raise_error += notify_error;
     op.action_desc_changed += set_action_desc;
+    op.progress += note_progress;
     
     if (warn)
       notify_start();

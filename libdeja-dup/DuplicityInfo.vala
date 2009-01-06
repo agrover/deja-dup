@@ -39,7 +39,7 @@ public class DuplicityInfo : Object
   
   // Returns true if everything is OK.  If false, program will close.  A dialog
   // will already have been thrown up.
-  public bool check_duplicity_version(Gtk.Window parent) {
+  public bool check_duplicity_version(Gtk.Window? parent) {
     string output;
     
     try {

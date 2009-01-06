@@ -68,6 +68,8 @@ class DejaDupApplet : Object
     Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
     Gtk.Window.set_default_icon_name(Config.PACKAGE);
     
+    DejaDup.DuplicityInfo.get_default().check_duplicity_version(null);
+    
     var icon = new StatusIcon();
     icon.done += Gtk.main_quit;
     
