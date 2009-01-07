@@ -8,7 +8,7 @@ AC_CONFIG_HEADERS([config.h:config.h.in])
 AC_CONFIG_MACRO_DIR([m4])
 
 # Sets up automake.
-AM_INIT_AUTOMAKE([1.9 foreign no-dist-gzip dist-bzip2])
+AM_INIT_AUTOMAKE([1.9 foreign dist-bzip2])
 
 GNOME_DOC_INIT
 
