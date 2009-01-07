@@ -11,7 +11,9 @@ Build-Depends: cdbs,
                libgnomeui-dev,
                libgnome-keyring-dev,
                libnotify-dev,
-               libunique-dev
+               libunique-dev,
+               gnome-doc-utils (>= 0.3.2),
+               rarian-compat
 Standards-Version: 3.7.2
 Vcs-Bzr: http://bazaar.launchpad.net/~deja-dup-team/deja-dup/trunk
 
@@ -20,8 +22,8 @@ Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          duplicity (>= 0.5.03)
-Recommends: python-boto (>= 0.9d),
-            util-linux (>= 2.13)
+Recommends: python-boto (>= 0.9d)
+Suggests: util-linux (>= 2.13)
 Description: Backup utility
  Déjà Dup is a simple backup program. It hides the complexity of
  doing backups the 'right way' (encrypted, off-site) and uses
