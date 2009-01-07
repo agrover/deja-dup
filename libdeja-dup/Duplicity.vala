@@ -45,6 +45,20 @@ public class Duplicity : Object
     toplevel = win;
   }
   
+  public string default_action_desc()
+  {
+    switch (mode) {
+    case Operation.Mode.BACKUP:
+      return _("Backing up...");
+    case Operation.Mode.RESTORE:
+      return _("Restoring...");
+    case Operation.Mode.CLEANUP:
+      return _("Cleaning up...");
+    default:
+      return "";
+    }
+  }
+  
   public virtual void start(List<string> argv, List<string>? envp) throws SpawnError
   {
     // If we're backing up, and the version of duplicity supports it, we should
@@ -70,20 +84,12 @@ public class Duplicity : Object
     
     // Send appropriate description for what we're about to do.  Is often
     // very quickly overridden by a message like "Backing up file X"
-    switch (mode) {
-    case Operation.Mode.BACKUP:
-      action_desc_changed(_("Backing up files..."));
-      break;
-    case Operation.Mode.RESTORE:
-      action_desc_changed(_("Restoring..."));
-      break;
-    case Operation.Mode.CLEANUP:
-      action_desc_changed(_("Cleaning up..."));
-      if (DuplicityInfo.get_default().has_broken_cleanup) {
-        done(true, false); // pretend we're naturally done
-        return;
-      }
-      break;
+    action_desc_changed(default_action_desc());
+    
+    if (mode == Operation.Mode.CLEANUP &&
+        DuplicityInfo.get_default().has_broken_cleanup) {
+      done(true, false); // pretend we're naturally done
+      return;
     }
     
     var verbose_str = Environment.get_variable("DEJA_DUP_DEBUG");

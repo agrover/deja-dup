@@ -28,8 +28,9 @@ public errordomain BackupError {
 
 public class OperationBackup : Operation
 {
-  public OperationBackup(Gtk.Window? win) {
+  public OperationBackup(Gtk.Window? win, uint xid = 0) {
     toplevel = win;
+    uppermost_xid = xid;
     mode = Mode.BACKUP;
   }
   
@@ -58,7 +59,7 @@ public class OperationBackup : Operation
       catch (Error e) {warning("%s\n", e.message);}
     }
     
-    done(success);
+    base.operation_finished(dup, success, cancelled);
   }
   
   protected override List<string>? make_argv() throws Error

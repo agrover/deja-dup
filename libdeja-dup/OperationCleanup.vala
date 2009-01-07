@@ -23,8 +23,9 @@ namespace DejaDup {
 
 public class OperationCleanup : Operation
 {
-  public OperationCleanup(Gtk.Window? win) {
+  public OperationCleanup(Gtk.Window? win, uint xid = 0) {
     toplevel = win;
+    uppermost_xid = xid;
     mode = Mode.CLEANUP;
   }
   

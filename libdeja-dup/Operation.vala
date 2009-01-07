@@ -32,6 +32,7 @@ public abstract class Operation : Object
   public signal bool backend_password_required();
   
   public Gtk.Window toplevel {get; construct;}
+  public uint uppermost_xid {get; construct;}
   
   public enum Mode {
     INVALID,
@@ -79,6 +80,8 @@ public abstract class Operation : Object
       if (can_ask_now)
         backend.ask_password();
     };
+    
+    set_session_inhibited(true);
     
     // Get encryption passphrase if needed
     var client = GConf.Client.get_default();
@@ -130,6 +133,7 @@ public abstract class Operation : Object
   
   protected virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
+    set_session_inhibited(false);
     done(success);
   }
   
@@ -203,6 +207,42 @@ public abstract class Operation : Object
   public void ask_backend_password() throws Error
   {
     backend.ask_password();
+  }
+  
+  uint inhibit_cookie = 0;
+  void set_session_inhibited(bool inhibit)
+  {
+    try {
+      var conn = DBus.Bus.@get(DBus.BusType.SESSION);
+      
+      dynamic DBus.Object obj = conn.get_object ("org.gnome.SessionManager",
+                                                 "/org/gnome/SessionManager",
+                                                 "org.gnome.SessionManager");
+      
+      if (inhibit) {
+        if (inhibit_cookie > 0)
+          return; // already inhibited
+        
+        uint xid = uppermost_xid;
+        if (xid == 0 && toplevel != null) {
+          toplevel.realize();
+          xid = Gdk.x11_drawable_get_xid(toplevel.window);
+        }
+        
+        obj.Inhibit(Config.PACKAGE,
+                    xid,
+                    dup.default_action_desc(),
+                    (uint) (1 | 4), // logout and suspend, but not switch user
+                    out inhibit_cookie);
+      }
+      else if (inhibit_cookie > 0) {
+        obj.Uninhibit(inhibit_cookie);
+        inhibit_cookie = 0;
+      }
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
   }
 }
 

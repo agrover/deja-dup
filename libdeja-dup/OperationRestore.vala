@@ -27,8 +27,9 @@ public class OperationRestore : Operation
   string source; // Directory duplicity puts files in
   List<string> errors;
   
-  public OperationRestore(Gtk.Window? win, string dest_in) {
+  public OperationRestore(Gtk.Window? win, string dest_in, uint xid = 0) {
     toplevel = win;
+    uppermost_xid = xid;
     dest = dest_in;
     mode = Mode.RESTORE;
   }
