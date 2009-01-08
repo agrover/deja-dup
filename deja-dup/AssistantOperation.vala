@@ -209,7 +209,7 @@ public abstract class AssistantOperation : Gtk.Assistant
     }
     else if (!error_occurred) {
       // was cancelled...  Close dialog
-      do_cancel();
+      do_close();
     }
   }
   
@@ -254,8 +254,9 @@ public abstract class AssistantOperation : Gtk.Assistant
   void do_cancel()
   {
     if (op != null)
-      op.cancel();
-    do_close();
+      op.cancel(); // do_close will happen in done() callback
+    else
+      do_close();
   }
   
   void do_close()
