@@ -181,7 +181,10 @@ public class Duplicity : Object
   
   public bool is_started()
   {
-    return (int)child_pid > 0;
+    if (dry_run != null)
+      return dry_run.is_started();
+    else
+      return (int)child_pid > 0;
   }
   
   void dry_done(DuplicityDry dry, bool success, bool cancelled)
@@ -190,7 +193,10 @@ public class Duplicity : Object
       dry_total = dry.total_bytes;
     
     try {
-      start(dry_argv, dry_envp);
+      if (cancelled)
+        done(success, cancelled);
+      else
+        start(dry_argv, dry_envp);
     }
     catch (Error e) {
       show_error(e.message);
@@ -485,7 +491,9 @@ public class Duplicity : Object
   
   public void cancel()
   {
-    if (is_started())
+    if (dry_run != null)
+      dry_run.cancel();
+    else if (is_started())
       kill((int)child_pid, 15);
     else
       done(false, true);
