@@ -163,7 +163,7 @@ public abstract class Operation : Object
   {
     // First, try user's keyring
     GnomeKeyring.find_password(PASSPHRASE_SCHEMA,
-                               found_passphrase, null,
+                               found_passphrase,
                                "owner", Config.PACKAGE,
                                "type", "passphrase");
   }
