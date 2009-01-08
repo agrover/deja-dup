@@ -108,13 +108,16 @@ public class OperationBackup : Operation
     
     // Likewise, user doesn't care about cache-like thumbnail directory
     dir = Environment.get_home_dir();
-    if (dir != null)
+    if (dir != null) {
       rv.append(Path.build_filename(dir, ".thumbnails"));
+      rv.append(Path.build_filename(dir, ".gvfs"));
+    }
     
     // Some problematic directories like /tmp and /proc should be left alone
     dir = Environment.get_tmp_dir();
     if (dir != null)
       rv.append(dir);
+    
     rv.append("/proc");
     rv.append("/sys");
     
