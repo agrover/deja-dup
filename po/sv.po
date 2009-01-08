@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2008-12-30 12:13-0500\n"
-"PO-Revision-Date: 2009-01-04 18:46+0000\n"
+"POT-Creation-Date: 2009-01-06 20:20-0500\n"
+"PO-Revision-Date: 2009-01-07 23:16+0000\n"
 "Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-01-06 02:40+0000\n"
+"X-Launchpad-Export-Date: 2009-01-08 01:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -191,11 +191,16 @@ msgstr "Visa version"
 msgid "Déjà Dup Applet"
 msgstr "Panelprogrammet Déjà Dup"
 
-#: ../applet/StatusIcon.vala:92
+#: ../applet/StatusIcon.vala:74
+#, c-format
+msgid "%.1f%% complete"
+msgstr "%.1f%% färdigt"
+
+#: ../applet/StatusIcon.vala:113
 msgid "Backup about to start"
 msgstr "Säkerhetskopiering på väg att starta"
 
-#: ../applet/StatusIcon.vala:93
+#: ../applet/StatusIcon.vala:114
 msgid ""
 "A scheduled backup will shortly begin.  You can instead choose to backup "
 "later or not at all."
@@ -203,53 +208,145 @@ msgstr ""
 "En schemalagd säkerhetskopiering kommer att starta inom kort. Du kan välja "
 "att säkerhetskopiera senare eller inte alls."
 
-#: ../applet/StatusIcon.vala:95
+#: ../applet/StatusIcon.vala:116
 msgid "Skip Backup"
 msgstr "Hoppa över säkerhetskopiering"
 
-#: ../applet/StatusIcon.vala:96
+#: ../applet/StatusIcon.vala:117
 msgid "Backup Later"
 msgstr "Säkerhetskopiera senare"
 
-#: ../applet/StatusIcon.vala:112
+#: ../applet/StatusIcon.vala:133
 msgid "Encryption password needed"
 msgstr "Lösenord för kryptering krävs"
 
-#: ../applet/StatusIcon.vala:113
+#: ../applet/StatusIcon.vala:134
 msgid "Please enter the encryption password for your backup files."
 msgstr "Ange krypteringslösenordet för dina säkerhetskopierade filer."
 
-#: ../applet/StatusIcon.vala:115 ../applet/StatusIcon.vala:132
+#: ../applet/StatusIcon.vala:136 ../applet/StatusIcon.vala:153
 msgid "Enter"
 msgstr "Ange"
 
-#: ../applet/StatusIcon.vala:129
+#: ../applet/StatusIcon.vala:150
 msgid "Server password needed"
 msgstr "Serverlösenord krävs"
 
-#: ../applet/StatusIcon.vala:130
+#: ../applet/StatusIcon.vala:151
 msgid "Please enter the server password for your backup."
 msgstr "Ange serverlösenordet för din säkerhetskopia."
 
-#: ../applet/StatusIcon.vala:148
+#: ../applet/StatusIcon.vala:169
 msgid "Backup error occurred"
 msgstr "Fel vid säkerhetskopiering inträffade"
 
-#: ../applet/StatusIcon.vala:150
+#: ../applet/StatusIcon.vala:171
 msgid "Rerun"
 msgstr "Kör igen"
 
-#: ../applet/StatusIcon.vala:225
+#: ../applet/StatusIcon.vala:246
 msgid "Backup _Later"
 msgstr "Säkerhetskopiera _senare"
 
-#: ../applet/StatusIcon.vala:229
+#: ../applet/StatusIcon.vala:250
 msgid "_Skip Backup"
 msgstr "_Hoppa över säkerhetskopiering"
 
-#: ../applet/StatusIcon.vala:265 ../deja-dup/MainWindow.vala:280
+#: ../applet/StatusIcon.vala:286 ../deja-dup/MainWindow.vala:171
 msgid "Could not open preferences"
 msgstr "Kunde inte öppna inställningarna"
+
+#: ../deja-dup/AssistantBackup.vala:27
+msgid "Backup"
+msgstr "Säkerhetskopiera"
+
+#: ../deja-dup/AssistantBackup.vala:38 ../deja-dup/AssistantRestore.vala:89
+msgid "Backup location:"
+msgstr "Plats för säkerhetskopior:"
+
+#. Translators:  This is the phrase 'Backing up' in the larger phrase
+#. "Backing up '%s'".  %s is a filename.
+#: ../deja-dup/AssistantBackup.vala:65
+msgid "Backing up"
+msgstr "Säkerhetskopierar"
+
+#: ../deja-dup/AssistantBackup.vala:94 ../deja-dup/AssistantRestore.vala:164
+msgid "Unknown"
+msgstr "Okänt"
+
+#: ../deja-dup/AssistantBackup.vala:99
+msgid "Backup Failed"
+msgstr "Säkerhetskopiering misslyckades"
+
+#: ../deja-dup/AssistantBackup.vala:101
+msgid "Backup Finished"
+msgstr "Säkerhetskopieringen är färdig"
+
+#: ../deja-dup/AssistantBackup.vala:102
+msgid "Your files were successfully backed up."
+msgstr "Dina filer har nu säkerhetskopierats."
+
+#: ../deja-dup/AssistantBackup.vala:106 ../libdeja-dup/Duplicity.vala:52
+msgid "Backing up..."
+msgstr "Säkerhetskopierar..."
+
+#: ../deja-dup/AssistantOperation.vala:173
+msgid "Summary"
+msgstr "Sammandrag"
+
+#: ../deja-dup/AssistantRestore.vala:32
+msgid "Restore"
+msgstr "Återställ"
+
+#: ../deja-dup/AssistantRestore.vala:43
+msgid "Restore files to _original locations"
+msgstr "Återställ filer till deras _ursprungliga platser"
+
+#: ../deja-dup/AssistantRestore.vala:48
+msgid "Restore to _specific folder"
+msgstr "Återställ till _specifik mapp"
+
+#: ../deja-dup/AssistantRestore.vala:58
+msgid "Choose destination for restored files"
+msgstr "Välj mål för återskapade filer"
+
+#: ../deja-dup/AssistantRestore.vala:63
+msgid "Restore _folder:"
+msgstr "Återställnings_mapp:"
+
+#: ../deja-dup/AssistantRestore.vala:95
+msgid "Restore folder:"
+msgstr "Återställningsmapp:"
+
+#: ../deja-dup/AssistantRestore.vala:121
+msgid "Restore to Where?"
+msgstr "Återställ till vilken plats?"
+
+#. Translators:  This is the word 'Restoring' in the phrase
+#. "Restoring '%s'".  %s is a filename.
+#: ../deja-dup/AssistantRestore.vala:135
+msgid "Restoring"
+msgstr "Återställer"
+
+#: ../deja-dup/AssistantRestore.vala:169
+msgid "Original location"
+msgstr "Ursprunglig plats"
+
+#: ../deja-dup/AssistantRestore.vala:175
+msgid "Restore Failed"
+msgstr "Återställning misslyckades"
+
+#: ../deja-dup/AssistantRestore.vala:177
+msgid "Restore Finished"
+msgstr "Återställning färdig"
+
+#: ../deja-dup/AssistantRestore.vala:178
+msgid "Your files were successfully restored."
+msgstr "Dina filer har nu återskapats."
+
+#: ../deja-dup/AssistantRestore.vala:182 ../libdeja-dup/Duplicity.vala:54
+msgid "Restoring..."
+msgstr "Återställer..."
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
@@ -260,113 +357,41 @@ msgstr "Kunde inte öppna inställningarna"
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
-#: ../deja-dup/MainWindow.vala:133
-msgid "Error occurred"
-msgstr "Fel har uppstått"
-
-#: ../deja-dup/MainWindow.vala:147
-msgid "_Details"
-msgstr "_Detaljer"
-
-#: ../deja-dup/MainWindow.vala:228
-msgid "Backup finished"
-msgstr "Säkerhetskopieringen är färdig"
-
-#: ../deja-dup/MainWindow.vala:228
-msgid "Your files were successfully backed up."
-msgstr "Dina filer har nu säkerhetskopierats."
-
-#: ../deja-dup/MainWindow.vala:293
+#: ../deja-dup/MainWindow.vala:184
 msgid "_File"
 msgstr "_Arkiv"
 
-#: ../deja-dup/MainWindow.vala:296
+#: ../deja-dup/MainWindow.vala:187
 msgid "_Backup"
 msgstr "_Säkerhetskopiera"
 
-#: ../deja-dup/MainWindow.vala:302
+#: ../deja-dup/MainWindow.vala:193
 msgid "_Restore"
 msgstr "Åte_rskapa"
 
-#: ../deja-dup/MainWindow.vala:312
+#: ../deja-dup/MainWindow.vala:203
 msgid "_Edit"
 msgstr "R_edigera"
 
-#: ../deja-dup/MainWindow.vala:319
+#: ../deja-dup/MainWindow.vala:210
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: ../deja-dup/MainWindow.vala:322
+#: ../deja-dup/MainWindow.vala:213
+msgid "Contents"
+msgstr "Innehåll"
+
+#: ../deja-dup/MainWindow.vala:217
 msgid "Get Help _Online..."
 msgstr "Få hjälp på _nätet..."
 
-#: ../deja-dup/MainWindow.vala:326
+#: ../deja-dup/MainWindow.vala:221
 msgid "_Translate This Application..."
 msgstr "_Översätt det här programmet..."
 
-#: ../deja-dup/MainWindow.vala:330
-msgid "_Report a Problem"
-msgstr "_Rapportera ett fel"
-
-#: ../deja-dup/RestoreAssistant.vala:44
-msgid "Restore"
-msgstr "Återställ"
-
-#: ../deja-dup/RestoreAssistant.vala:68
-msgid "Restore files to _original locations"
-msgstr "Återställ filer till deras _ursprungliga platser"
-
-#: ../deja-dup/RestoreAssistant.vala:73
-msgid "Restore to _specific folder"
-msgstr "Återställ till _specifik mapp"
-
-#: ../deja-dup/RestoreAssistant.vala:83
-msgid "Choose destination for restored files"
-msgstr "Välj mål för återskapade filer"
-
-#: ../deja-dup/RestoreAssistant.vala:88
-msgid "Restore _folder:"
-msgstr "Återställnings_mapp:"
-
-#: ../deja-dup/RestoreAssistant.vala:114
-msgid "Backup location:"
-msgstr "Plats för säkerhetskopior:"
-
-#: ../deja-dup/RestoreAssistant.vala:120
-msgid "Restore folder:"
-msgstr "Återställningsmapp:"
-
-#: ../deja-dup/RestoreAssistant.vala:174
-msgid "Restore Failed"
-msgstr "Återställning misslyckades"
-
-#: ../deja-dup/RestoreAssistant.vala:230
-msgid "Restore to Where?"
-msgstr "Återställ till vilken plats?"
-
-#: ../deja-dup/RestoreAssistant.vala:240
-msgid "Summary"
-msgstr "Sammandrag"
-
-#: ../deja-dup/RestoreAssistant.vala:254
-msgid "Restoring"
-msgstr "Återställer"
-
-#: ../deja-dup/RestoreAssistant.vala:265
-msgid "Restore Finished"
-msgstr "Återställning färdig"
-
-#: ../deja-dup/RestoreAssistant.vala:277
-msgid "Your files were successfully restored."
-msgstr "Dina filer har nu återskapats."
-
-#: ../deja-dup/RestoreAssistant.vala:325
-msgid "Unknown"
-msgstr "Okänt"
-
-#: ../deja-dup/RestoreAssistant.vala:330
-msgid "Original location"
-msgstr "Ursprunglig plats"
+#: ../deja-dup/MainWindow.vala:225
+msgid "_Report a Problem..."
+msgstr "_Rapportera ett fel..."
 
 #: ../libdeja-dup/BackendFile.vala:47
 msgid "Choose backup destination"
@@ -413,11 +438,11 @@ msgstr "SSH-lösenord"
 msgid "Enter your SSH username and password for server %s."
 msgstr "Ange ditt SSH-användarnamn och lösenord för servern %s."
 
-#: ../libdeja-dup/DuplicityInfo.vala:107
+#: ../libdeja-dup/DuplicityInfo.vala:117
 msgid "Could not run duplicity"
 msgstr "Kunde inte köra duplicity"
 
-#: ../libdeja-dup/DuplicityInfo.vala:113
+#: ../libdeja-dup/DuplicityInfo.vala:123
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -425,7 +450,7 @@ msgstr ""
 "Kunde inte förstå duplicitys versionsnummer.\n"
 "\n"
 
-#: ../libdeja-dup/DuplicityInfo.vala:115
+#: ../libdeja-dup/DuplicityInfo.vala:125
 #, c-format
 msgid ""
 "Could not understand duplicity version '%s'.\n"
@@ -434,16 +459,16 @@ msgstr ""
 "Kunde inte förstå duplicitys versionsnummer \"%s\".\n"
 "\n"
 
-#: ../libdeja-dup/DuplicityInfo.vala:117
+#: ../libdeja-dup/DuplicityInfo.vala:127
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr ""
 "Utan duplicity kan inte Déjà Dup fungera.  Det kommer nu att stängas."
 
-#: ../libdeja-dup/DuplicityInfo.vala:128
+#: ../libdeja-dup/DuplicityInfo.vala:138
 msgid "Duplicity's version is too old"
 msgstr "Duplicitys version är för gammal"
 
-#: ../libdeja-dup/DuplicityInfo.vala:129
+#: ../libdeja-dup/DuplicityInfo.vala:139
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -452,15 +477,23 @@ msgstr ""
 "Déjà Dup kräver minst version %d.%d.%.2d av duplicity, men hittade endast "
 "version %d.%d.%.2d"
 
-#: ../libdeja-dup/Duplicity.vala:193
+#: ../libdeja-dup/Duplicity.vala:56
+msgid "Cleaning up..."
+msgstr "Rensar upp..."
+
+#: ../libdeja-dup/Duplicity.vala:69
+msgid "Preparing..."
+msgstr "Förbereder..."
+
+#: ../libdeja-dup/Duplicity.vala:355
 msgid "Invalid ID"
 msgstr "Ogiltigt id"
 
-#: ../libdeja-dup/Duplicity.vala:195
+#: ../libdeja-dup/Duplicity.vala:357
 msgid "Invalid secret key"
 msgstr "Ogiltig  hemlig nyckel"
 
-#: ../libdeja-dup/Duplicity.vala:240
+#: ../libdeja-dup/Duplicity.vala:468
 msgid "Failed with an unknown error."
 msgstr "Misslyckades med ett okänt fel."
 
@@ -476,6 +509,11 @@ msgstr "Om Déjà Dup"
 #: ../libdeja-dup/libdeja-dup.vala:132
 msgid "translator-credits"
 msgstr ""
+"Launchpad Contributions:\n"
+"  Christian Widell https://launchpad.net/~christian.w\n"
+"  Daniel Nylander https://launchpad.net/~yeager\n"
+"  Paul Sundvall https://launchpad.net/~slask-paulsundvall\n"
+"\n"
 "Launchpad Contributions:\n"
 "  Christian Widell https://launchpad.net/~christian.w\n"
 "  Daniel Nylander https://launchpad.net/~yeager\n"
@@ -516,23 +554,15 @@ msgstr ""
 "program; om inte, skriv till Free Software Foundation, Inc., 59 Temple Place "
 "- Suite 330, Boston, MA  02111-1307, USA."
 
-#: ../libdeja-dup/OperationBackup.vala:37
-msgid "Backing up files..."
-msgstr "Säkerhetskopierar filer..."
-
-#: ../libdeja-dup/OperationBackup.vala:73
+#: ../libdeja-dup/OperationBackup.vala:69
 msgid "Could not connect to backup location"
 msgstr "Kunde inte ansluta till plats för säkerhetskopia"
 
-#: ../libdeja-dup/OperationCleanup.vala:32
-msgid "Cleaning up..."
-msgstr "Rensar upp..."
-
-#: ../libdeja-dup/OperationRestore.vala:37
+#: ../libdeja-dup/OperationRestore.vala:39
 msgid "Restoring files..."
 msgstr "Återskapar filer..."
 
-#: ../libdeja-dup/OperationRestore.vala:149
+#: ../libdeja-dup/OperationRestore.vala:151
 #, c-format
 msgid ""
 "Not all files could be restored. Any files that could not be restored may "
@@ -541,23 +571,23 @@ msgstr ""
 "Alla filer kunde inte återställas. Filer som inte kunde återställas kan "
 "hittas i %s."
 
-#: ../libdeja-dup/OperationRestore.vala:158
+#: ../libdeja-dup/OperationRestore.vala:160
 #, c-format
 msgid "Could not restore %s: %s"
 msgstr "Kunde inte återställa %s: %s"
 
 #. Ask user
-#: ../libdeja-dup/Operation.vala:161
+#: ../libdeja-dup/Operation.vala:178
 msgid "Encryption Password"
 msgstr "Krypteringslösenord"
 
-#: ../libdeja-dup/Operation.vala:162
+#: ../libdeja-dup/Operation.vala:179
 msgid "Enter the password used to encrypt your backup files."
 msgstr ""
 "Ange lösenordet som du använde för att kryptera dina säkerhetskopierade "
 "filer."
 
-#: ../libdeja-dup/Operation.vala:181
+#: ../libdeja-dup/Operation.vala:198
 msgid "Déjà Dup backup passphrase"
 msgstr "Lösenfras för Déjà Dup-säkerhetskopia"
 
@@ -627,62 +657,77 @@ msgstr[1] "%d dagars intervall"
 msgid "Déjà Dup Preferences"
 msgstr "Inställningar för Déjà Dup"
 
-#: ../preferences/PreferencesDialog.vala:54
+#: ../preferences/PreferencesDialog.vala:56
 msgid "_Backup location:"
 msgstr "_Plats för säkerhetskopia:"
 
-#: ../preferences/PreferencesDialog.vala:77
+#: ../preferences/PreferencesDialog.vala:79
 #, c-format
 msgid "S3 buc_ket:"
 msgstr "S3 buc_ket:"
 
-#: ../preferences/PreferencesDialog.vala:89
+#: ../preferences/PreferencesDialog.vala:91
 #, c-format
 msgid "S3 I_D:"
 msgstr "S3 I_D:"
 
-#: ../preferences/PreferencesDialog.vala:108
+#: ../preferences/PreferencesDialog.vala:110
 #, c-format
 msgid "_Folder:"
 msgstr "_Mapp:"
 
-#: ../preferences/PreferencesDialog.vala:126
+#: ../preferences/PreferencesDialog.vala:128
 #, c-format
 msgid "_Username:"
 msgstr "_Användarnamn:"
 
-#: ../preferences/PreferencesDialog.vala:138
+#: ../preferences/PreferencesDialog.vala:140
 #, c-format
 msgid "_Server:"
 msgstr "_Server:"
 
-#: ../preferences/PreferencesDialog.vala:150
+#: ../preferences/PreferencesDialog.vala:152
 #, c-format
 msgid "_Port:"
 msgstr "_Port:"
 
-#: ../preferences/PreferencesDialog.vala:162
+#: ../preferences/PreferencesDialog.vala:164
 #, c-format
 msgid "_Directory:"
 msgstr "_Katalog:"
 
-#: ../preferences/PreferencesDialog.vala:180
+#: ../preferences/PreferencesDialog.vala:182
 msgid "I_nclude:"
 msgstr "I_nkludera:"
 
-#: ../preferences/PreferencesDialog.vala:194
+#: ../preferences/PreferencesDialog.vala:196
 msgid "E_xclude:"
 msgstr "E_xkludera:"
 
-#: ../preferences/PreferencesDialog.vala:207
+#: ../preferences/PreferencesDialog.vala:209
 msgid "_Encrypt backup files"
 msgstr "_Kryptera säkerhetskopior"
 
-#: ../preferences/PreferencesDialog.vala:213
+#: ../preferences/PreferencesDialog.vala:215
 msgid "_Automatically backup on a regular schedule"
 msgstr "Säkerhetskopiera _automatiskt vid fasta tidspunkter"
 
-#: ../preferences/PreferencesDialog.vala:220
+#: ../preferences/PreferencesDialog.vala:222
 #, c-format
 msgid "How _often to backup:"
 msgstr "Hur _ofta säkerhetskopior ska tas:"
+
+#~ msgid "Backing up files..."
+#~ msgstr "Säkerhetskopierar filer..."
+
+#~ msgid "Error occurred"
+#~ msgstr "Fel har uppstått"
+
+#~ msgid "Backup finished"
+#~ msgstr "Säkerhetskopieringen är färdig"
+
+#~ msgid "_Details"
+#~ msgstr "_Detaljer"
+
+#~ msgid "_Report a Problem"
+#~ msgstr "_Rapportera ett fel"
