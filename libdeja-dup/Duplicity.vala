@@ -494,7 +494,7 @@ public class Duplicity : Object
     if (dry_run != null)
       dry_run.cancel();
     else if (is_started())
-      kill((int)child_pid, 15);
+      kill((int)child_pid, 9);
     else
       done(false, true);
   }
