@@ -33,7 +33,7 @@ public class ConfigFolder : ConfigWidget
     add(button);
     
     set_from_config();
-    button.file_set += handle_file_set;
+    button.current_folder_changed += handle_file_set;
   }
   
   protected override void set_from_config()
@@ -50,7 +50,9 @@ public class ConfigFolder : ConfigWidget
       val = ""; // There should really be a better default, but I'm not sure
                 // what.  The first mounted volume we see?  Create a directory
                 // in $HOME called 'deja-dup'?
-    button.set_filename(val);
+    
+    if (button.get_filename() != val)
+      button.set_filename(val);
   }
   
   void handle_file_set()
