@@ -36,7 +36,7 @@ public class OperationBackup : Operation
   
   protected override void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
-    if (cancelled && dup.is_started()) {
+    if (cancelled) {
       // We have to cleanup after aborted job
       var clean = new OperationCleanup(toplevel);
       clean.done += (b, s) => {Gtk.main_quit();};
