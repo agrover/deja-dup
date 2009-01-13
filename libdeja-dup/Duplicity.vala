@@ -108,8 +108,6 @@ public class Duplicity : Object
   
   void handle_done(DuplicityInstance inst, bool success, bool cancelled)
   {
-    inst = null;
-    
     if (!cancelled) {
       switch (state) {
       case State.DRY_RUN:
@@ -126,6 +124,7 @@ public class Duplicity : Object
     if (!success && !cancelled && !error_issued)
       show_error(_("Failed with an unknown error."));
     
+    inst = null;
     done(success, cancelled);
   }
   
@@ -176,6 +175,23 @@ public class Duplicity : Object
         show_error(_("Invalid ID"));
       else if (text.str("<Code>SignatureDoesNotMatch</Code>") != null)
         show_error(_("Invalid secret key"));
+      break;
+    case "IOError":
+      // Very possibly a FAT file system that can't handle the colons that 
+      // duplicity likes to use.  Try again with --short-filenames
+      // But first make sure we aren't already doing that.
+      bool found = false;
+      foreach (string s in saved_argv) {
+        if (s == "--short-filenames") {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        saved_argv.append("--short-filenames");
+        connect_and_start();
+        return;
+      }
       break;
     }
     
@@ -262,6 +278,12 @@ public class Duplicity : Object
   void connect_and_start(List<string>? argv_extra = null,
                          List<string>? envp_extra = null)
   {
+    if (inst != null) {
+      inst.done -= handle_done;
+      inst.message -= handle_message;
+      inst.cancel();
+    }
+    
     inst = new DuplicityInstance();
     inst.done += handle_done;
     inst.message += handle_message;

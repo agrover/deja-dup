@@ -108,7 +108,7 @@ public class DuplicityInstance : Object
     stanza_id = reader.add_watch(IOCondition.IN, read_stanza);
     close(pipes[1]);
     
-    ChildWatch.add(child_pid, spawn_finished);
+    watch_id = ChildWatch.add(child_pid, spawn_finished);
   }
   
   public bool is_started()
@@ -119,12 +119,13 @@ public class DuplicityInstance : Object
   public void cancel()
   {
     if (is_started())
-      kill((int)child_pid, 9);
+      kill_child();
     else
       done(false, true);
   }
   
   uint stanza_id;
+  uint watch_id;
   Pid child_pid;
   int[] pipes;
   IOChannel reader;
@@ -132,6 +133,22 @@ public class DuplicityInstance : Object
     reader = null;
     pipes = new int[2];
     pipes[0] = pipes[1] = -1;
+  }
+  
+  ~DuplicityInstance()
+  {
+    if (stanza_id != 0)
+      Source.remove(stanza_id);
+    
+    if (watch_id != 0)
+      Source.remove(watch_id);
+    
+    if (is_started())
+      kill_child();
+  }
+  
+  void kill_child() {
+    kill((int)child_pid, 9);
   }
   
   bool read_stanza(IOChannel channel, IOCondition cond)
