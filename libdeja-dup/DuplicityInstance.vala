@@ -143,8 +143,10 @@ public class DuplicityInstance : Object
     if (watch_id != 0)
       Source.remove(watch_id);
     
-    if (is_started())
+    if (is_started()) {
+      debug("duplicity process killed\n");
       kill_child();
+    }
   }
   
   void kill_child() {
@@ -311,6 +313,9 @@ public class DuplicityInstance : Object
       if (Process.if_exited(status)) {
         var exitval = Process.exit_status(status);
         debug("duplicity exited with value %i\n", exitval);
+      }
+      else {
+        debug("duplicity process killed\n");
       }
       
       try {
