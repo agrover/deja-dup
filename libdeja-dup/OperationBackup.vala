@@ -36,24 +36,6 @@ public class OperationBackup : Operation
   
   protected override void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
-    if (cancelled) {
-      // We have to cleanup after aborted job
-      var clean = new OperationCleanup(toplevel);
-      clean.done += (b, s) => {Gtk.main_quit();};
-      
-      // Make cleanup operation inherit most of our state and pass important
-      // signals back.
-      clean.action_desc_changed += (op, str) => {action_desc_changed(str);};
-      clean.raise_error += (op, str, detail) => {raise_error(str, detail);};
-      clean.passphrase = passphrase;
-      clean.backend = backend.clone();
-      
-      try {clean.start();}
-      catch (Error e) {warning("%s\n", e.message);}
-      
-      Gtk.main();
-    }
-    
     if (success) {
       try {DejaDup.update_last_run_timestamp();}
       catch (Error e) {warning("%s\n", e.message);}

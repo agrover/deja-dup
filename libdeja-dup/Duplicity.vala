@@ -30,7 +30,7 @@ public class Duplicity : Object
   public signal void progress(double percent);
   
   public Gtk.Window toplevel {get; construct;}
-  public Operation.Mode mode {get; construct;}
+  public Operation.Mode mode {get; private set;}
   public bool error_issued {get; private set; default = false;}
   
   protected enum State {
@@ -41,6 +41,7 @@ public class Duplicity : Object
   
   DuplicityInstance inst;
   
+  string target;
   List<string> saved_argv;
   List<string> saved_envp;
   
@@ -66,9 +67,10 @@ public class Duplicity : Object
     }
   }
   
-  public virtual void start(List<string> argv, List<string>? envp)
+  public virtual void start(string target, List<string> argv, List<string>? envp)
   {
     // save arguments for calling duplicity again later
+    this.target = target;
     saved_argv = new List<string>();
     saved_envp = new List<string>();
     foreach (string s in argv) saved_argv.append(s);
@@ -89,12 +91,6 @@ public class Duplicity : Object
       return;
     }
     
-    if (mode == Operation.Mode.CLEANUP &&
-        DuplicityInfo.get_default().has_broken_cleanup) {
-      done(true, false); // pretend we're naturally done
-      return;
-    }
-    
     // Send appropriate description for what we're about to do.  Is often
     // very quickly overridden by a message like "Backing up file X"
     action_desc_changed(default_action_desc());
@@ -103,7 +99,26 @@ public class Duplicity : Object
   }
   
   public void cancel() {
+    if (mode == Operation.Mode.BACKUP) {
+      // cleanup our mess
+      if (cleanup())
+        return;
+    }
+    
     inst.cancel();
+  }
+  
+  bool cleanup() {
+    if (DuplicityInfo.get_default().has_broken_cleanup)
+      return false;
+    
+    mode = Operation.Mode.CLEANUP;
+    var cleanup_argv = new List<string>();
+    cleanup_argv.append("cleanup");
+    cleanup_argv.append("--force");
+    cleanup_argv.append(this.target);
+    connect_and_start(null, null, cleanup_argv);
+    return true;
   }
   
   void handle_done(DuplicityInstance inst, bool success, bool cancelled)
@@ -276,7 +291,8 @@ public class Duplicity : Object
   }
   
   void connect_and_start(List<string>? argv_extra = null,
-                         List<string>? envp_extra = null)
+                         List<string>? envp_extra = null,
+                         List<string>? argv_entire = null)
   {
     if (inst != null) {
       inst.done -= handle_done;
@@ -288,8 +304,10 @@ public class Duplicity : Object
     inst.done += handle_done;
     inst.message += handle_message;
     
+    weak List<string> master_argv = argv_entire == null ? saved_argv : argv_entire;
+    
     var argv = new List<string>();
-    foreach (string s in saved_argv) argv.append(s);
+    foreach (string s in master_argv) argv.append(s);
     foreach (string s in argv_extra) argv.append(s);
     
     var envp = new List<string>();

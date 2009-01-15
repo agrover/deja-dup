@@ -125,8 +125,9 @@ public abstract class Operation : Object
       }
       
       backend.add_argv(ref argv);
+      string target = backend.get_location();
       
-      dup.start(argv, envp);
+      dup.start(target, argv, envp);
     }
     catch (Error e) {
       raise_error(e.message, null);

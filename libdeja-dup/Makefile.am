@@ -34,7 +34,6 @@ libdeja_dup_la_VALASOURCES = \
 	DuplicityInstance.vala \
 	Operation.vala \
 	OperationBackup.vala \
-	OperationCleanup.vala \
 	OperationRestore.vala \
 	RecursiveDelete.vala \
 	RecursiveMove.vala \

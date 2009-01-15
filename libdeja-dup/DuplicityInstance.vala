@@ -113,7 +113,7 @@ public class DuplicityInstance : Object
   
   public bool is_started()
   {
-      return (int)child_pid > 0;
+    return (int)child_pid > 0;
   }
   
   public void cancel()
