@@ -151,6 +151,7 @@ public class DuplicityInstance : Object
   
   void kill_child() {
     kill((int)child_pid, 9);
+    child_pid = 0;
   }
   
   bool read_stanza(IOChannel channel, IOCondition cond)
