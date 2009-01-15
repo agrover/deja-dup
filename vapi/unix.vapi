@@ -17,8 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-[CCode (cheader_filename = "unistd.h"), NoArrayLength]
-int pipe(int[] fildes);
+[CCode (cheader_filename = "unistd.h")]
+int pipe([CCode (array_length = false)] int[] fildes);
 
 [CCode (cheader_filename = "unistd.h")]
 int close(int fildes);

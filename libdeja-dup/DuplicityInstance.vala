@@ -155,16 +155,16 @@ public class DuplicityInstance : Object
   
   bool read_stanza(IOChannel channel, IOCondition cond)
   {
-    string result;
+    string line;
     try {
       IOStatus status;
       List<string> stanza = new List<string>();
       while (true) {
-        status = channel.read_line(out result, null, null);
-        if (status == IOStatus.NORMAL && result != "\n") {
+        status = channel.read_line(out line, null, null);
+        if (status == IOStatus.NORMAL && line != "\n") {
           if (verbose)
-            print("DUPLICITY: %s", result); // result has line ending
-          stanza.append(result);
+            print("DUPLICITY: %s", line); // line has line ending
+          stanza.append(line);
         }
         else
           break;
