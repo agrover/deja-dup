@@ -117,7 +117,10 @@ public class Duplicity : Object
     cleanup_argv.append("cleanup");
     cleanup_argv.append("--force");
     cleanup_argv.append(this.target);
+    
+    action_desc_changed(default_action_desc());
     connect_and_start(null, null, cleanup_argv);
+    
     return true;
   }
   
