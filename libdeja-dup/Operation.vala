@@ -81,6 +81,10 @@ public abstract class Operation : Object
         backend.ask_password();
     };
     
+    if (!set_bus_claimed(true)) {
+      done(false);
+      return;
+    }
     set_session_inhibited(true);
     
     // Get encryption passphrase if needed
@@ -134,6 +138,7 @@ public abstract class Operation : Object
   protected virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
     set_session_inhibited(false);
+    set_bus_claimed(false);
     done(success);
   }
   
@@ -207,6 +212,24 @@ public abstract class Operation : Object
   public void ask_backend_password() throws Error
   {
     backend.ask_password();
+  }
+  
+  Unique.App app;
+  bool set_bus_claimed(bool claimed)
+  {
+    if (claimed) {
+      app = new Unique.App("net.launchpad.deja-dup.operation", null);
+      if (app.is_running) {
+        raise_error(_("Another Déjà Dup is already running"), null);
+        app = null;
+        return false;
+      }
+    }
+    else {
+      app = null;
+    }
+    
+    return true;
   }
   
   uint inhibit_cookie = 0;

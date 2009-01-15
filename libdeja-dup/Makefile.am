@@ -13,6 +13,7 @@ VALA_CFLAGS = \
 	--pkg gnome-keyring-1 \
 	--pkg dbus-glib-1 \
 	--pkg gdk-x11-2.0 \
+	--pkg unique-1.0 \
 	--pkg hacks \
 	--pkg PassphraseSchema \
 	--pkg unix \

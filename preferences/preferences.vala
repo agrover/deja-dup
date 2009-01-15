@@ -82,7 +82,7 @@ class DejaDupPreferences : Object
     Gtk.init(ref args); // to open display ('cause we passed false above)
     
     // We don't have a solid domain for Déjà Dup...
-    var app = new Unique.App ("net.launchpad.deja-dup.preferences", null);
+    var app = new Unique.App("net.launchpad.deja-dup.preferences", null);
     
     if (app.is_running)
       app.send_message(Unique.Command.ACTIVATE, null);
