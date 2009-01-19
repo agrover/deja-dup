@@ -70,12 +70,20 @@ class DejaDupApplet : Object
     
     DejaDup.DuplicityInfo.get_default().check_duplicity_version(null);
     
-    var icon = new StatusIcon();
-    icon.done += Gtk.main_quit;
-    
-    Gtk.main();
-    
-    return 0;
+    // Try to claim bus, else don't run.  If the regularly scheduled backup
+    // occurs while user is doing a manual backup, we don't want to run.
+    // We'll try again the next day.
+    if (DejaDup.set_bus_claimed("operation", true)) {
+      var icon = new StatusIcon();
+      icon.done += Gtk.main_quit;
+      
+      Gtk.main();
+      
+      DejaDup.set_bus_claimed("operation", false);
+      return 0;
+    }
+    else
+      return 1;
   }
 }
 

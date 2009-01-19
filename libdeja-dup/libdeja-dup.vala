@@ -153,5 +153,34 @@ public void show_about(Object owner, Gtk.Window? parent)
   about.show();
 }
 
+public bool set_bus_claimed(string busname, bool claim)
+{
+  try {
+    var conn = DBus.Bus.@get(DBus.BusType.SESSION);
+    
+    dynamic DBus.Object bus = conn.get_object ("org.freedesktop.DBus",
+                                                "/org/freedesktop/DBus",
+                                                "org.freedesktop.DBus");
+    
+    if (claim) {
+      // Try to register service in session bus.
+      // The flag '4' means do not add ourselves to the queue of applications
+      // wanting the name, if this request fails.
+      uint result = bus.request_name("net.launchpad.deja-dup." + busname,
+                                     (uint)4);
+      
+      if (result == DBus.RequestNameReply.EXISTS)
+        return false;
+    }
+    else
+      bus.release_name("net.launchpad.deja-dup." + busname);
+  }
+  catch (Error e) {
+    warning("%s\n", e.message);
+  }
+  
+  return true;
+}
+
 } // end namespace
 

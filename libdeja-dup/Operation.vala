@@ -80,7 +80,7 @@ public abstract class Operation : Object
         backend.ask_password();
     };
     
-    if (!set_bus_claimed(true)) {
+    if (!claim_bus(true)) {
       done(false);
       return;
     }
@@ -138,7 +138,7 @@ public abstract class Operation : Object
   protected virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
     set_session_inhibited(false);
-    set_bus_claimed(false);
+    claim_bus(false);
     done(success);
   }
   
@@ -214,36 +214,12 @@ public abstract class Operation : Object
     backend.ask_password();
   }
   
-  bool set_bus_claimed(bool claimed)
+  bool claim_bus(bool claimed)
   {
-    try {
-      var conn = DBus.Bus.@get(DBus.BusType.SESSION);
-      
-      dynamic DBus.Object bus = conn.get_object ("org.freedesktop.DBus",
-                                                 "/org/freedesktop/DBus",
-                                                 "org.freedesktop.DBus");
-      
-      if (claimed) {
-        // Try to register service in session bus.
-        // The flag '4' means do not add ourselves to the queue of applications
-        // wanting the name, if this request fails.
-        uint request_name_result = bus.request_name("net.launchpad.deja-dup.operation",
-                                                    (uint)4);
-        
-        if (request_name_result != DBus.RequestNameReply.PRIMARY_OWNER) {
-          raise_error(_("Another Déjà Dup is already running"), null);
-          return false;
-        }
-      }
-      else {
-        bus.release_name("net.launchpad.deja-dup.operation");
-      }
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
-    
-    return true;
+    bool rv = set_bus_claimed("operation", claimed);
+    if (claimed && !rv)
+      raise_error(_("Another Déjà Dup is already running"), null);
+    return rv;
   }
   
   uint inhibit_cookie = 0;
