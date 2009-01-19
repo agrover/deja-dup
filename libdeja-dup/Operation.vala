@@ -37,8 +37,7 @@ public abstract class Operation : Object
   public enum Mode {
     INVALID,
     BACKUP,
-    RESTORE,
-    CLEANUP
+    RESTORE
   }
   public Mode mode {get; construct; default = Mode.INVALID;}
   

@@ -35,7 +35,8 @@ public class Duplicity : Object
   
   protected enum State {
     NORMAL,
-    DRY_RUN
+    DRY_RUN,
+    CLEANUP
   }
   protected State state {get; set;}
   
@@ -60,8 +61,6 @@ public class Duplicity : Object
       return _("Backing up...");
     case Operation.Mode.RESTORE:
       return _("Restoring...");
-    case Operation.Mode.CLEANUP:
-      return _("Cleaning up...");
     default:
       return "";
     }
@@ -76,31 +75,14 @@ public class Duplicity : Object
     foreach (string s in argv) saved_argv.append(s);
     foreach (string s in envp) saved_envp.append(s);
     
-    // If we're backing up, and the version of duplicity supports it, we should
-    // first run using --dry-run to get the total size of the backup, to make
-    // accurate progress bars.
-    if (mode == Operation.Mode.BACKUP &&
-        DuplicityInfo.get_default().has_backup_progress) {
-      action_desc_changed(_("Preparing..."));
-      state = State.DRY_RUN;
-      
-      var extra_argv = new List<string>();
-      extra_argv.append("--dry-run");
-      connect_and_start(extra_argv);
-      
-      return;
-    }
-    
-    // Send appropriate description for what we're about to do.  Is often
-    // very quickly overridden by a message like "Backing up file X"
-    action_desc_changed(default_action_desc());
-    
-    connect_and_start();
+    restart();
   }
   
   public void cancel() {
-    if (mode == Operation.Mode.BACKUP) {
-      // cleanup our mess
+    var old_mode = mode;
+    mode = Operation.Mode.INVALID;
+    
+    if (old_mode == Operation.Mode.BACKUP) {
       if (cleanup())
         return;
     }
@@ -108,17 +90,49 @@ public class Duplicity : Object
     inst.cancel();
   }
   
-  bool cleanup() {
-    if (DuplicityInfo.get_default().has_broken_cleanup)
+  bool restart()
+  {
+    state = State.NORMAL;
+    
+    if (mode == Operation.Mode.INVALID)
       return false;
     
-    mode = Operation.Mode.CLEANUP;
+    // If we're backing up, and the version of duplicity supports it, we should
+    // first run using --dry-run to get the total size of the backup, to make
+    // accurate progress bars.
+    if (mode == Operation.Mode.BACKUP &&
+        DuplicityInfo.get_default().has_backup_progress &&
+        progress_total == 0) {
+      action_desc_changed(_("Preparing..."));
+      state = State.DRY_RUN;
+      
+      var extra_argv = new List<string>();
+      extra_argv.append("--dry-run");
+      connect_and_start(extra_argv);
+      
+      return true;
+    }
+    
+    // Send appropriate description for what we're about to do.  Is often
+    // very quickly overridden by a message like "Backing up file X"
+    action_desc_changed(default_action_desc());
+    
+    connect_and_start();
+    return true;
+  }
+  
+  bool cleanup() {
+    if (DuplicityInfo.get_default().has_broken_cleanup ||
+        state == State.CLEANUP)
+      return false;
+    
+    state = State.CLEANUP;
     var cleanup_argv = new List<string>();
     cleanup_argv.append("cleanup");
     cleanup_argv.append("--force");
     cleanup_argv.append(this.target);
     
-    action_desc_changed(default_action_desc());
+    action_desc_changed(_("Cleaning up..."));
     connect_and_start(null, null, cleanup_argv);
     
     return true;
@@ -135,6 +149,16 @@ public class Duplicity : Object
           connect_and_start();
           return;
         }
+        break;
+      
+      case State.CLEANUP:
+        if (restart()) // restart in case cleanup was interrupting normal flow
+          return;
+        
+        // Else, we probably started cleaning up after a cancel.  Just continue
+        // that cancel
+        success = false;
+        cancelled = true;
         break;
       }
     }
@@ -153,6 +177,11 @@ public class Duplicity : Object
   protected static const int INFO_DIFF_FILE_DELETED = 6;
   protected static const int INFO_PATCH_FILE_WRITING = 7;
   protected static const int INFO_PATCH_FILE_PATCHING = 8;
+  protected static const int WARNING_ORPHANED_SIG = 2;
+  protected static const int WARNING_UNNECESSARY_SIG = 3;
+  protected static const int WARNING_UNMATCHED_SIG = 4;
+  protected static const int WARNING_INCOMPLETE_BACKUP = 5;
+  protected static const int WARNING_ORPHANED_BACKUP = 6;
   
   void handle_message(DuplicityInstance inst, string[] control_line,
                       List<string>? data_lines, string user_text)
@@ -167,6 +196,9 @@ public class Duplicity : Object
       break;
     case "INFO":
       process_info(control_line, data_lines, user_text);
+      break;
+    case "WARNING":
+      process_warning(control_line, data_lines, user_text);
       break;
     }
   }
@@ -285,6 +317,26 @@ public class Duplicity : Object
       root = File.new_for_path("/");
     
     return root.resolve_relative_path(file);
+  }
+  
+  protected virtual void process_warning(string[] firstline, List<string>? data,
+                                         string text)
+  {
+    if (firstline.length > 1) {
+      switch (firstline[1].to_int()) {
+      case WARNING_ORPHANED_SIG:
+      case WARNING_UNNECESSARY_SIG:
+      case WARNING_UNMATCHED_SIG:
+      case WARNING_INCOMPLETE_BACKUP:
+      case WARNING_ORPHANED_BACKUP:
+        // Random files left on backend from previous run.  Should clean them
+        // up before we continue.  We don't want to wait until we finish to
+        // clean them up, since we may want that space, and if there's a bug
+        // in ourselves, we may never get to it.
+        cleanup(); // stops current backup, cleans up, then resumes
+      break;
+      }
+    }
   }
   
   void show_error(string errorstr)
