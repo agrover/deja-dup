@@ -111,8 +111,7 @@ public class AssistantRestore : AssistantOperation
     cust_button =
       new Gtk.FileChooserButton(_("Choose destination for restored files"),
                                 Gtk.FileChooserAction.SELECT_FOLDER);
-    cust_button.file_set += (b) => {restore_location = b.get_filename();};
-    cust_button.current_folder_changed += (b) => {restore_location = b.get_filename();};
+    cust_button.selection_changed += (b) => {restore_location = b.get_filename();};
     
     var cust_label = new Gtk.Label("    " + _("Restore _folder:"));
     cust_label.set("mnemonic-widget", cust_button,

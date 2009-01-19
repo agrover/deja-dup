@@ -33,7 +33,7 @@ public class ConfigFolder : ConfigWidget
     add(button);
     
     set_from_config();
-    button.current_folder_changed += handle_file_set;
+    button.selection_changed += handle_selection_changed;
   }
   
   protected override void set_from_config()
@@ -51,14 +51,27 @@ public class ConfigFolder : ConfigWidget
                 // what.  The first mounted volume we see?  Create a directory
                 // in $HOME called 'deja-dup'?
     
-    if (button.get_filename() != val)
+    if (button.get_filename() != val) {
+      print("setting from filename %s (from %s)\n", val, button.get_filename());
       button.set_filename(val);
+    }
   }
   
-  void handle_file_set()
+  void handle_selection_changed()
   {
+    string val = null;
     try {
-      client.set_string(key, button.get_filename());
+      val = client.get_string(key);
+    }
+    catch (Error e) {} // ignore
+    
+    string filename = button.get_filename();
+    if (filename == val)
+      return; // we sometimes get several selection changed notices in a row...
+    
+    try {
+      print("file set: setting %s\n", filename);
+      client.set_string(key, filename);
     }
     catch (Error e) {
       warning("%s\n", e.message);
