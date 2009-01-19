@@ -94,7 +94,6 @@ public class DuplicityInstance : Object
       else if (a != null)
         cmd = "%s %s".printf(cmd, a);
     }
-    debug("Running the following duplicity command: %s\n", cmd);
     
     Process.spawn_async_with_pipes(null, real_argv, real_envp,
                         SpawnFlags.SEARCH_PATH |
@@ -103,6 +102,8 @@ public class DuplicityInstance : Object
                         SpawnFlags.STDOUT_TO_DEV_NULL |
                         SpawnFlags.STDERR_TO_DEV_NULL,
                         null, out child_pid, null, null, null);
+    
+    debug("Running the following duplicity (%i) command: %s\n", (int)child_pid, cmd);
     
     reader = new IOChannel.unix_new(pipes[0]);
     stanza_id = reader.add_watch(IOCondition.IN, read_stanza);
@@ -144,7 +145,7 @@ public class DuplicityInstance : Object
       Source.remove(watch_id);
     
     if (is_started()) {
-      debug("duplicity process killed\n");
+      debug("duplicity (%i) process killed\n", (int)child_pid);
       kill_child();
     }
   }
@@ -312,10 +313,10 @@ public class DuplicityInstance : Object
       
       if (Process.if_exited(status)) {
         var exitval = Process.exit_status(status);
-        debug("duplicity exited with value %i\n", exitval);
+        debug("duplicity (%i) exited with value %i\n", (int)pid, exitval);
       }
       else {
-        debug("duplicity process killed\n");
+        debug("duplicity (%i) process killed\n", (int)pid);
       }
       
       try {

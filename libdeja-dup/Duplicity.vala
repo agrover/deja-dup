@@ -324,7 +324,6 @@ public class Duplicity : Object
     var dates = new List<string>();
     bool in_chain = false;
     foreach (string line in lines) {
-      print("looking at line: %s\n", line);
       if (line == "chain-complete")
         in_chain = true;
       else if (in_chain && line.length > 0 && line[0] == ' ') {
