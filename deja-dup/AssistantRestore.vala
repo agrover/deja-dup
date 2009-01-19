@@ -25,6 +25,7 @@ public class AssistantRestore : AssistantOperation
   
   DejaDup.OperationStatus query_op;
   Gtk.ProgressBar query_progress_bar;
+  uint query_timeout_id;
   Gtk.ComboBox date_combo;
   Gtk.ListStore date_store;
   Gtk.HBox cust_box;
@@ -182,7 +183,7 @@ public class AssistantRestore : AssistantOperation
     var page = make_query_backend_page();
     append_page(page);
     child_set(page,
-              "title", _("Checking Backups"),
+              "title", _("Checking for Backups"),
               "complete", false,
               "header-image", icon);
     query_progress_page = page;
@@ -272,6 +273,12 @@ public class AssistantRestore : AssistantOperation
     this.query_op = null;
   }
   
+  bool query_pulse()
+  {
+    query_progress_bar.pulse();
+    return true;
+  }
+  
   protected void do_query()
   {
     query_op = new DejaDup.OperationStatus(this);
@@ -313,6 +320,11 @@ public class AssistantRestore : AssistantOperation
   protected override void do_prepare(AssistantOperation assist, Gtk.Widget page)
   {
     base.do_prepare(assist, page);
+    
+    if (query_timeout_id > 0) {
+      Source.remove(query_timeout_id);
+      query_timeout_id = 0;
+    }
     
     if (page == confirm_page) {
       // Where the backup is
@@ -359,8 +371,20 @@ public class AssistantRestore : AssistantOperation
       assist.child_set(page, "title", _("Restoring..."));
     }
     else if (page == query_progress_page) {
+      query_progress_bar.fraction = 0;
+      query_timeout_id = Timeout.add(250, query_pulse);
       do_query();
     }
+  }
+  
+  protected override void do_close()
+  {
+    if (query_timeout_id > 0) {
+      Source.remove(query_timeout_id);
+      query_timeout_id = 0;
+    }
+    
+    base.do_close();
   }
 }
 

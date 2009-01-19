@@ -50,7 +50,7 @@ public abstract class Operation : Object
     case Operation.Mode.RESTORE:
       return _("Restoring...");
     case Operation.Mode.STATUS:
-      return _("Checking backups...");
+      return _("Checking for backups...");
     default:
       return "";
     }

@@ -259,7 +259,7 @@ public abstract class AssistantOperation : Gtk.Assistant
       do_close();
   }
   
-  void do_close()
+  protected virtual void do_close()
   {
     if (timeout_id > 0) {
       Source.remove(timeout_id);
