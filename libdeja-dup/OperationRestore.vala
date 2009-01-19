@@ -24,13 +24,16 @@ namespace DejaDup {
 public class OperationRestore : Operation
 {
   string dest; // Directory user wants to put files in
+  string time; // Date user wants to restore to
   string source; // Directory duplicity puts files in
   List<string> errors;
   
-  public OperationRestore(Gtk.Window? win, string dest_in, uint xid = 0) {
+  public OperationRestore(Gtk.Window? win, string dest_in,
+                          string? time_in = null, uint xid = 0) {
     toplevel = win;
     uppermost_xid = xid;
     dest = dest_in;
+    time = time_in;
     mode = Mode.RESTORE;
   }
   
@@ -55,6 +58,8 @@ public class OperationRestore : Operation
     argv.append("restore");
     if (!client.get_bool(ENCRYPT_KEY))
       argv.append("--no-encryption");
+    if (time != null)
+      argv.append("--restore-time=%s".printf(time));
     argv.append(target);
     argv.append(source);
     return argv;

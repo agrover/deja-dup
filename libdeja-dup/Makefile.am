@@ -35,6 +35,7 @@ libdeja_dup_la_VALASOURCES = \
 	Operation.vala \
 	OperationBackup.vala \
 	OperationRestore.vala \
+	OperationStatus.vala \
 	RecursiveDelete.vala \
 	RecursiveMove.vala \
 	RecursiveOp.vala \

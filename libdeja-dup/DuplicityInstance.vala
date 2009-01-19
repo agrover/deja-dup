@@ -275,7 +275,7 @@ public class DuplicityInstance : Object
     stanza = stanza.next; // skip first control line
     foreach (string line in stanza) {
       if (!line.has_prefix(". "))
-        list.append(line);
+        list.append(line.chomp()); // drop endline
     }
     return list;
   }

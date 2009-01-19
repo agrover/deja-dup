@@ -37,9 +37,24 @@ public abstract class Operation : Object
   public enum Mode {
     INVALID,
     BACKUP,
-    RESTORE
+    RESTORE,
+    STATUS
   }
   public Mode mode {get; construct; default = Mode.INVALID;}
+  
+  public static string mode_to_string(Mode mode)
+  {
+    switch (mode) {
+    case Operation.Mode.BACKUP:
+      return _("Backing up...");
+    case Operation.Mode.RESTORE:
+      return _("Restoring...");
+    case Operation.Mode.STATUS:
+      return _("Checking backups...");
+    default:
+      return "";
+    }
+  }
   
   protected Duplicity dup;
   protected Backend backend;
@@ -68,17 +83,7 @@ public abstract class Operation : Object
       return;
     }
     
-    dup.done += operation_finished;
-    dup.raise_error += (d, s, detail) => {raise_error(s, detail);};
-    dup.action_desc_changed += (d, s) => {action_desc_changed(s);};
-    dup.action_file_changed += (d, f) => {action_file_changed(f);};
-    dup.progress += (d, p) => {progress(p);};
-    backend.envp_ready += continue_with_envp;
-    backend.need_password += (b) => {
-      bool can_ask_now = backend_password_required();
-      if (can_ask_now)
-        backend.ask_password();
-    };
+    connect_to_dup();
     
     if (!claim_bus(true)) {
       done(false);
@@ -97,6 +102,21 @@ public abstract class Operation : Object
   public void cancel()
   {
     dup.cancel();
+  }
+  
+  protected virtual void connect_to_dup()
+  {
+    dup.done += operation_finished;
+    dup.raise_error += (d, s, detail) => {raise_error(s, detail);};
+    dup.action_desc_changed += (d, s) => {action_desc_changed(s);};
+    dup.action_file_changed += (d, f) => {action_file_changed(f);};
+    dup.progress += (d, p) => {progress(p);};
+    backend.envp_ready += continue_with_envp;
+    backend.need_password += (b) => {
+      bool can_ask_now = backend_password_required();
+      if (can_ask_now)
+        backend.ask_password();
+    };
   }
   
   void continue_with_passphrase() throws Error
@@ -244,7 +264,7 @@ public abstract class Operation : Object
         
         obj.Inhibit(Config.PACKAGE,
                     xid,
-                    dup.default_action_desc(),
+                    mode_to_string(dup.mode),
                     (uint) (1 | 4), // logout and suspend, but not switch user
                     out inhibit_cookie);
       }

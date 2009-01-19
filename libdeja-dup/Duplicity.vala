@@ -28,6 +28,7 @@ public class Duplicity : Object
   public signal void action_desc_changed(string action);
   public signal void action_file_changed(File file);
   public signal void progress(double percent);
+  public signal void collection_dates(List<string>? dates);
   
   public Gtk.Window toplevel {get; construct;}
   public Operation.Mode mode {get; private set;}
@@ -52,18 +53,6 @@ public class Duplicity : Object
   public Duplicity(Operation.Mode mode, Gtk.Window? win) {
     this.mode = mode;
     toplevel = win;
-  }
-  
-  public string default_action_desc()
-  {
-    switch (mode) {
-    case Operation.Mode.BACKUP:
-      return _("Backing up...");
-    case Operation.Mode.RESTORE:
-      return _("Restoring...");
-    default:
-      return "";
-    }
   }
   
   public virtual void start(string target, List<string> argv, List<string>? envp)
@@ -115,7 +104,7 @@ public class Duplicity : Object
     
     // Send appropriate description for what we're about to do.  Is often
     // very quickly overridden by a message like "Backing up file X"
-    action_desc_changed(default_action_desc());
+    action_desc_changed(Operation.mode_to_string(mode));
     
     connect_and_start();
     return true;
@@ -172,6 +161,7 @@ public class Duplicity : Object
   
   protected static const int ERROR_EXCEPTION = 30;
   protected static const int INFO_PROGRESS = 2;
+  protected static const int INFO_COLLECTION_STATUS = 3;
   protected static const int INFO_DIFF_FILE_NEW = 4;
   protected static const int INFO_DIFF_FILE_CHANGED = 5;
   protected static const int INFO_DIFF_FILE_DELETED = 6;
@@ -269,6 +259,9 @@ public class Duplicity : Object
       case INFO_PROGRESS:
         process_progress(firstline);
         break;
+      case INFO_COLLECTION_STATUS:
+        process_collection_status(data);
+        break;
       }
     }
   }
@@ -317,6 +310,36 @@ public class Duplicity : Object
       root = File.new_for_path("/");
     
     return root.resolve_relative_path(file);
+  }
+  
+  void process_collection_status(List<string>? lines)
+  {
+    // Collection status is a bunch of lines, some of which are indented,
+    // which contain information about specific chains.  We gather this all up
+    // and report back to caller via a signal.
+    // We're really only interested in the list of entries in the complete chain,
+    // though.
+    
+    var timeval = TimeVal();
+    var dates = new List<string>();
+    bool in_chain = false;
+    foreach (string line in lines) {
+      print("looking at line: %s\n", line);
+      if (line == "chain-complete")
+        in_chain = true;
+      else if (in_chain && line.length > 0 && line[0] == ' ') {
+        // OK, appears to be a date line.  Try to parse.  Should look like:
+        // ' inc TIMESTR NUMVOLS'.  Since there's a space at the beginnning,
+        // when we tokenize it, we should expect an extra token at the front.
+        string[] tokens = line.split(" ");
+        if (tokens.length > 2 && timeval.from_iso8601(tokens[2]))
+          dates.append(tokens[2]);
+      }
+      else if (in_chain)
+        in_chain = false;
+    }
+    
+    collection_dates(dates);
   }
   
   protected virtual void process_warning(string[] firstline, List<string>? data,
