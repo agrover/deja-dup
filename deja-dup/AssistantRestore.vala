@@ -250,7 +250,7 @@ public class AssistantRestore : AssistantOperation
     
     foreach (string date in dates) {
       if (tv.from_iso8601(date)) {
-        Time t = Time.gm(tv.tv_sec);
+        Time t = Time.local(tv.tv_sec);
         string user_str = t.format("%c");
         Gtk.TreeIter iter;
         date_store.prepend(out iter);
