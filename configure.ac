@@ -107,7 +107,6 @@ AC_CONFIG_FILES([Makefile
                  monitor/Makefile
                  deja-dup/Makefile
                  help/Makefile
-                 help/C/deja-dup.xml
                  po/Makefile.in
                  preferences/Makefile
                  vapi/Makefile])
