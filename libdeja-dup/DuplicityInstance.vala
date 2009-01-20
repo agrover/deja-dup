@@ -114,6 +114,11 @@ public class DuplicityInstance : Object
     debug("Running the following duplicity (%i) command: %s\n", (int)child_pid, cmd);
     
     reader = new IOChannel.unix_new(pipes[0]);
+    try {
+      // Don't use an encoding, filenames may have any old bytes in them
+      reader.set_encoding(null);
+    }
+    catch (IOChannelError e) {} // ignore
     stanza_id = reader.add_watch(IOCondition.IN, read_stanza);
     close(pipes[1]);
     
@@ -206,6 +211,94 @@ public class DuplicityInstance : Object
     return rv;
   }
   
+  static string validated_string(string s)
+  {
+    string rv = "";
+    weak string p = s;
+    char[] charstr = new char[6];
+    
+    while (p[0] != 0) {
+      unichar ch = p.get_char_validated();
+      if (ch == (uint)(-1) || ch == (uint)(-2)) {
+        rv += "\xef\xbf\xbd"; // the 'unknown character' character in utf-8
+        p = p.offset(1);
+      }
+      else {
+        ch.to_utf8((string)charstr);
+        rv += (string)charstr;
+        p = p.next_char();
+      }
+    }
+    
+    return rv;
+  }
+  
+  static string compress_string(string s_in)
+  {
+    char[] rv = new char[s_in.size()];
+    weak char[] s = (char[])s_in;
+    
+    int i = 0, j = 0;
+    while (s[i] != 0) {
+      if (s[i] == '\\' && s[i+1] != 0) {
+        bool bare_escape = false;
+        
+        switch (s[i+1]) {
+        case 'b': rv[j++] = '\b'; i += 2; break;
+        case 'f': rv[j++] = '\014'; i += 2; break;
+        case 't': rv[j++] = '\t'; i += 2; break;
+        case 'n': rv[j++] = '\n'; i += 2; break;
+        case 'r': rv[j++] = '\r'; i += 2; break;
+        case 'v': rv[j++] = '\013'; i += 2; break;
+        case 'a': rv[j++] = '\007'; i += 2; break;
+        case 'x':
+          // start of a hex number
+          if (s[i+2] != 0 && s[i+3] != 0) {
+            char[] tmpstr = new char[3];
+            tmpstr[0] = s[i+2];
+            tmpstr[1] = s[i+3];
+            var val = ((string)tmpstr).to_ulong(null, 16);
+            rv[j++] = (char)val;
+            i += 4;
+          }
+          else
+            bare_escape = true;
+          break;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+          // start of an octal number
+          if (s[i+2] != 0 && s[i+3] != 0 && s[i+4] != 0) {
+            char[] tmpstr = new char[4];
+            tmpstr[0] = s[i+2];
+            tmpstr[1] = s[i+3];
+            tmpstr[2] = s[i+4];
+            var val = ((string)tmpstr).to_ulong(null, 8);
+            rv[j++] = (char)val;
+            i += 5;
+          }
+          else
+            bare_escape = true;
+          break;
+        default:
+          bare_escape = true; break;
+        }
+        if (bare_escape) {
+          rv[j++] = s[i+1]; i+=2;
+        }
+      }
+      else
+        rv[j++] = s[i++];
+    }
+    
+    return (string)rv;
+  }
+  
   static void split_line(string line, out string[] split)
   {
     var firstsplit = line.split(" ");
@@ -241,7 +334,7 @@ public class DuplicityInstance : Object
           word = word.substring(0, word.len() - 2);
         
         // get rid of any other escaping backslashes and translate octals
-        word = word.compress();
+        word = compress_string(word);
         
         // Now join to rest of group.
         if (group_word == "")
@@ -284,7 +377,7 @@ public class DuplicityInstance : Object
     stanza = stanza.next; // skip first control line
     foreach (string line in stanza) {
       if (!line.has_prefix(". "))
-        list.append(line.chomp()); // drop endline
+        list.append(validated_string(line.chomp())); // drop endline
     }
     return list;
   }
@@ -295,7 +388,7 @@ public class DuplicityInstance : Object
     foreach (string line in stanza) {
       if (line.has_prefix(". ")) {
         var split = line.split(". ", 2);
-        text = "%s%s".printf(text, split[1]);
+        text = "%s%s".printf(text, validated_string(split[1]));
       }
     }
     return text.chomp();
