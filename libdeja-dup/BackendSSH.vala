@@ -147,7 +147,7 @@ public class BackendSSH : Backend
     }
   }
   
-  void save_password_callback(GnomeKeyring.Result result, uint val)
+  void save_password_callback(GnomeKeyring.Result result, uint32 val)
   {
   }
   

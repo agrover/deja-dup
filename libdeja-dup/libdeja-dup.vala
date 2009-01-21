@@ -145,8 +145,8 @@ public void show_about(Object owner, Gtk.Window? parent)
   
   about.set_transient_for(parent);
   about.response += (dlg, resp) => {
-    Object owner = (Object)dlg.get_data("owner");
-    owner.set_data("about-dlg", null);
+    Object about_owner = (Object)dlg.get_data("owner");
+    about_owner.set_data("about-dlg", null);
     dlg.destroy();
   };
   
@@ -166,8 +166,8 @@ public bool set_bus_claimed(string busname, bool claim)
       // Try to register service in session bus.
       // The flag '4' means do not add ourselves to the queue of applications
       // wanting the name, if this request fails.
-      uint result = bus.request_name("net.launchpad.deja-dup." + busname,
-                                     (uint)4);
+      uint32 result = bus.request_name("net.launchpad.deja-dup." + busname,
+                                     (uint32)4);
       
       if (result == DBus.RequestNameReply.EXISTS)
         return false;
