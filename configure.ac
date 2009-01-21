@@ -87,6 +87,16 @@ PKG_CHECK_MODULES(MONITOR,
 AC_SUBST(MONITOR_CFLAGS)
 AC_SUBST(MONITOR_LIBS)
 
+PKG_CHECK_MODULES(NAUTILUS,
+                  libnautilus-extension
+                  glib-2.0)
+AC_SUBST(NAUTILUS_CFLAGS)
+AC_SUBST(NAUTILUS_LIBS)
+
+dnl Get nautilus extensions directory
+NAUTILUS_EXTENSION_DIR=`$PKG_CONFIG --variable=extensiondir libnautilus-extension`
+AC_SUBST(NAUTILUS_EXTENSION_DIR)
+
 # Determines if we're debugging.
 AC_ARG_ENABLE(debug,
   AC_HELP_STRING([--enable-debug=[no/yes]],[turn on debugging [default=no]]),
@@ -107,6 +117,7 @@ AC_CONFIG_FILES([Makefile
                  monitor/Makefile
                  deja-dup/Makefile
                  help/Makefile
+                 nautilus/Makefile
                  po/Makefile.in
                  preferences/Makefile
                  vapi/Makefile])
