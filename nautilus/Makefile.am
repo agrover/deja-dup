@@ -13,13 +13,13 @@ AM_CFLAGS = \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
-libnautilus_deja_dup_la_VALASOURCES = \
-	nautilus.vala
+libnautilus_deja_dup_la_VALASOURCES = 
 
 BUILT_SOURCES = \
 	vala.stamp
 
 libnautilus_deja_dup_la_SOURCES = \
+	NautilusExtension.c NautilusExtension.h \
 	$(libnautilus_deja_dup_la_VALASOURCES:.vala=.c) \
 	$(libnautilus_deja_dup_la_VALASOURCES:.vala=.h) \
 	$(libnautilus_deja_dup_la_VALASOURCES)
