@@ -48,7 +48,7 @@ public class MainWindow : Gtk.Window
       warning("%s\n", e.message);
     }
     
-    var restore_label = new Gtk.Label("_Restore");
+    var restore_label = new Gtk.Label(_("_Restore"));
     restore_label.set("use-underline", true,
                       "mnemonic-widget", restore_button);
     
@@ -74,7 +74,7 @@ public class MainWindow : Gtk.Window
       warning("%s\n", e.message);
     }
     
-    var backup_label = new Gtk.Label("_Backup");
+    var backup_label = new Gtk.Label(_("_Backup"));
     backup_label.set("use-underline", true,
                      "mnemonic-widget", backup_button);
     
