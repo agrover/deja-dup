@@ -1,6 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     Déjà Dup
+    © 2004, 2005 Free Software Foundation, Inc.
     © 2009 Michael Terry <mike@mterry.name>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,13 +19,55 @@
 */
 
 #include "NautilusExtension.h"
+#include "config.h"
 #include <libnautilus-extension/nautilus-menu-provider.h>
+#include <glib/gi18n-lib.h>
+
+static void
+make_file_list(NautilusFileInfo *info, GString *str)
+{
+  GFile *file = nautilus_file_info_get_location(info);
+  gchar *uri = g_file_get_uri(file);
+  if (str->len)
+    g_string_assign(str, uri);
+  else
+    g_string_append_printf(str, " %s", uri);
+  g_free(uri);
+  g_object_unref(file);
+}
+
+static void
+restore_files_callback(NautilusMenuItem *item, GList *files)
+{
+  GString *str = g_string_new("");
+  gchar *cmd;
+
+  g_list_foreach(files, (GFunc)make_file_list, str);
+  cmd = g_strdup_printf("deja-dup --restore %s", str->str);
+
+  g_spawn_command_line_async(cmd, NULL);
+
+  g_free(cmd);
+  g_string_free(str, TRUE);
+  g_list_foreach(files, (GFunc)g_object_unref, NULL);
+  g_list_free(files);
+}
 
 static GList *
 deja_dup_nautilus_extension_get_background_items(NautilusMenuProvider *provider,
                                                  GtkWidget *window,
                                                  NautilusFileInfo *file)
 {
+  gchar *path;
+
+  if (file == NULL)
+    return NULL;
+
+  path = g_find_program_in_path("deja-dup");
+  if (!path)
+    return NULL;
+  g_free(path);
+
   return NULL;
 }
 
@@ -33,7 +76,36 @@ deja_dup_nautilus_extension_get_file_items(NautilusMenuProvider *provider,
                                            GtkWidget *window,
                                            GList *files)
 {
-  return NULL;
+  NautilusMenuItem *item;
+  guint length;
+  GList *file_copies;
+  gchar *path;
+
+  if (files == NULL)
+    return NULL;
+
+  path = g_find_program_in_path("deja-dup");
+  if (!path)
+    return NULL;
+  g_free(path);
+
+  length = g_list_length(files);
+  item = nautilus_menu_item_new("DejaDupNautilusExtension::restore_item",
+                                dngettext(GETTEXT_PACKAGE,
+                                          "Revert to Previous Version...",
+                                          "Revert to Previous Versions...",
+                                          length),
+                                dngettext(GETTEXT_PACKAGE,
+                                          "Restore file from backup",
+                                          "Restore files from backup",
+                                          length),
+                                "document-revert");
+
+  file_copies = g_list_copy(files);
+  g_list_foreach(file_copies, (GFunc)g_object_ref, NULL);
+  g_signal_connect(item, "activate", G_CALLBACK (restore_files_callback), file_copies);
+
+  return g_list_append(NULL, item);
 }
 
 
@@ -113,9 +185,12 @@ static GType type_list[1];
 
 void nautilus_module_initialize(GTypeModule *module)
 {
-  g_print("Initializing deja-dup Extension\n");
+  /*g_print("Initializing Déjà Dup extension\n");*/
   deja_dup_nautilus_extension_register_type(module);
   type_list[0] = TYPE_DEJA_DUP_NAUTILUS_EXTENSION;
+
+  bindtextdomain(GETTEXT_PACKAGE, LOCALE_DIR);
+  bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 }
 
 void nautilus_module_list_types (const GType **types, int *num_types)
@@ -126,6 +201,6 @@ void nautilus_module_list_types (const GType **types, int *num_types)
 
 void nautilus_module_shutdown(void)
 {
-  g_print("Shutting down deja-dup Extension\n");
+  /*g_print("Shutting down Déjà Dup extension\n");*/
 }
 
