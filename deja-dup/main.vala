@@ -24,8 +24,10 @@ public Gtk.Window toplevel = null;
 class DejaDupApp : Object
 {
   static bool show_version = false;
+  static bool restore_mode = false;
   static const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
+    {"restore", 0, 0, OptionArg.NONE, ref restore_mode, N_("Restore given files"), null},
     {null}
   };
   
