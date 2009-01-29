@@ -94,7 +94,7 @@ AC_SUBST(NAUTILUS_CFLAGS)
 AC_SUBST(NAUTILUS_LIBS)
 
 dnl Get nautilus extensions directory
-NAUTILUS_EXTENSION_DIR=`$PKG_CONFIG --variable=extensiondir libnautilus-extension`
+NAUTILUS_EXTENSION_DIR="${libdir}/nautilus/extensions-2.0"
 AC_SUBST(NAUTILUS_EXTENSION_DIR)
 
 # Determines if we're debugging.
