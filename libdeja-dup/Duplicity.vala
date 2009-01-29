@@ -308,6 +308,17 @@ public class Duplicity : Object
       // But first make sure we aren't already doing that.
       restart_with_short_filenames_if_needed();
       break;
+    case "CollectionsError":
+      // Very possibly a FAT file system that we are trying to restore from.
+      // Duplicity can't find the short filenames that duplicity uses and
+      // throws an exception. We should try again with --short-filenames.
+      // Note that this code path is unlikely to have been hit on recent
+      // versions of duplicity (ones with parsable collection-status support)
+      // because when we run collection-status and see no backups, we add
+      // --short-filenames to argv then.
+      if (restart_with_short_filenames_if_needed())
+        show_error(_("No backup files found"));
+      break;
     }
     
     // For most, don't do anything. Error string won't be useful to humans, and
