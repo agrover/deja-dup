@@ -64,8 +64,8 @@ public class Duplicity : Object
   List<string> saved_envp;
   
   bool has_progress_total = false;
-  uint progress_total; // zero, unless we already know limit
-  uint progress_count; // count of how far we are along in the current instance
+  double progress_total; // zero, unless we already know limit
+  double progress_count; // count of how far we are along in the current instance
   
   public Duplicity(Operation.Mode mode, Gtk.Window? win) {
     this.mode = mode;
@@ -355,15 +355,15 @@ public class Duplicity : Object
         mode == Operation.Mode.RESTORE)
       return;
     
-    uint total;
+    double total;
     
     if (firstline.length > 2)
-      this.progress_count = firstline[2].to_int();
+      this.progress_count = firstline[2].to_double();
     else
       return;
     
     if (firstline.length > 3)
-      total = firstline[3].to_int();
+      total = firstline[3].to_double();
     else if (this.progress_total > 0)
       total = this.progress_total;
     else
