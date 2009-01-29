@@ -28,7 +28,7 @@ make_file_list(NautilusFileInfo *info, GString *str)
 {
   GFile *file = nautilus_file_info_get_location(info);
   gchar *uri = g_file_get_uri(file);
-  if (str->len)
+  if (!str->len)
     g_string_assign(str, uri);
   else
     g_string_append_printf(str, " %s", uri);
