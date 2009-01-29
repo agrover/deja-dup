@@ -22,8 +22,7 @@ using GLib;
 namespace DejaDup {
 
 public errordomain BackupError {
-  BAD_CONFIG,
-  INTERNAL
+  BAD_CONFIG
 }
 
 public class OperationBackup : Operation
@@ -46,10 +45,6 @@ public class OperationBackup : Operation
   
   protected override List<string>? make_argv() throws Error
   {
-    var target = backend.get_location();
-    if (target == null)
-      throw new BackupError.INTERNAL(_("Could not connect to backup location"));
-    
     var client = GConf.Client.get_default();
     
     var include_list = parse_dir_list(client.get_list(INCLUDE_LIST_KEY,
@@ -73,8 +68,8 @@ public class OperationBackup : Operation
       rv.append("--include=%s".printf(s.get_path()));
     
     rv.append("--exclude=**");
-    rv.append("/");
-    rv.append(target);
+    
+    dup.local = "/";
     
     return rv;
   }

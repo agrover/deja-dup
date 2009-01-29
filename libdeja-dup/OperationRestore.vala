@@ -27,13 +27,30 @@ public class OperationRestore : Operation
   string time; // Date user wants to restore to
   string source; // Directory duplicity puts files in
   List<string> errors;
+  private List<File> _restore_files;
+  public List<File> restore_files {
+    get {
+      return this._restore_files;
+    }
+    set {
+      foreach (File f in this._restore_files)
+        f.unref();
+      this._restore_files = value.copy();
+      foreach (File f in this._restore_files)
+        f.ref();
+    }
+  }
   
   public OperationRestore(Gtk.Window? win, string dest_in,
-                          string? time_in = null, uint xid = 0) {
+                          string? time_in = null,
+                          List<File>? files_in = null,
+                          uint xid = 0) {
     toplevel = win;
     uppermost_xid = xid;
     dest = dest_in;
     time = time_in;
+    restore_files = files_in;
+    dup.restore_files = restore_files;
     mode = Mode.RESTORE;
   }
   
@@ -47,21 +64,17 @@ public class OperationRestore : Operation
   {
     var client = GConf.Client.get_default();
     
-    var target = backend.get_location();    
-    if (target == null)
-      return null;
-    
     source = Path.build_filename(Environment.get_tmp_dir(), "deja-dup-XXXXXX");
     source = DirUtils.mkdtemp(source);
     
     List<string> argv = new List<string>();
-    argv.append("restore");
     if (!client.get_bool(ENCRYPT_KEY))
       argv.append("--no-encryption");
     if (time != null)
       argv.append("--restore-time=%s".printf(time));
-    argv.append(target);
-    argv.append(source);
+    
+    dup.local = source;
+    
     return argv;
   }
   
@@ -179,11 +192,31 @@ public class OperationRestore : Operation
   {
     errors = new List<string>();
     
-    File sourcef = File.new_for_path(source);
-    File destf = File.new_for_path(dest);
-    var move = new RecursiveMove(sourcef, destf);
-    move.raise_error += mv_error;
-    move.start();
+    var destf = File.new_for_path(dest);
+    var sourcef = File.new_for_path(source);
+    
+    // If we're doing a full restore, just move the whole thing over.
+    // But if we asked duplicity to restore specific files, it created
+    // the parent directories itself without making sure they have the same
+    // permissions as the directories in the backup.  So we go and specifically
+    // move each of the specific files over, ignoring their parent directories.
+    if (restore_files == null) {
+      var move = new RecursiveMove(sourcef, destf);
+      move.raise_error += mv_error;
+      move.start();
+    }
+    else {
+      File root = File.new_for_path("/");
+      foreach (File f in restore_files) {
+        var rel_file_path = root.get_relative_path(f);
+        var full_source = sourcef.resolve_relative_path(rel_file_path);
+        var full_dest = destf.resolve_relative_path(rel_file_path);
+        
+        var move = new RecursiveMove(full_source, full_dest);
+        move.raise_error += mv_error;
+        move.start();
+      }
+    }
     
     if (errors != null) {
       show_errors();

@@ -25,9 +25,11 @@ class DejaDupApp : Object
 {
   static bool show_version = false;
   static bool restore_mode = false;
+  static string[] filenames = null;
   static const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
     {"restore", 0, 0, OptionArg.NONE, ref restore_mode, N_("Restore given files"), null},
+    {"", 0, 0, OptionArg.FILENAME_ARRAY, ref filenames, null, null}, // remaining
     {null}
   };
   
@@ -38,6 +40,14 @@ class DejaDupApp : Object
     if (show_version) {
       print("%s %s\n", _("Déjà Dup"), Config.VERSION);
       return false;
+    }
+    
+    if (restore_mode) {
+      if (filenames == null) {
+        printerr("%s\n", _("No filenames provided"));
+        status = 1;
+        return false;
+      }
     }
     
     return true;
@@ -75,7 +85,17 @@ class DejaDupApp : Object
     Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
     Gtk.Window.set_default_icon_name(Config.PACKAGE);
     
-    toplevel = new MainWindow();
+    if (restore_mode) {
+      List<File> file_list = new List<File>();
+      int i = 0;
+      while (filenames[i] != null)
+        file_list.append(File.new_for_commandline_arg(filenames[i++]));
+      toplevel = new AssistantRestore.with_files(file_list);
+      toplevel.destroy += (t) => {Gtk.main_quit();};
+    }
+    else
+      toplevel = new MainWindow();
+    
     toplevel.show_all();
     Gtk.main();
     

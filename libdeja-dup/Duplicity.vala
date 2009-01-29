@@ -34,6 +34,22 @@ public class Duplicity : Object
   public Operation.Mode mode {get; private set;}
   public bool error_issued {get; private set; default = false;}
   
+  public string local {get; set;}
+  
+  private List<File> _restore_files;
+  public List<File> restore_files {
+    get {
+      return this._restore_files;
+    }
+    set {
+      foreach (File f in this._restore_files)
+        f.unref();
+      this._restore_files = value.copy();
+      foreach (File f in this._restore_files)
+        f.ref();
+    }
+  }
+  
   protected enum State {
     NORMAL,
     DRY_RUN,
@@ -43,10 +59,11 @@ public class Duplicity : Object
   
   DuplicityInstance inst;
   
-  string target;
+  string remote;
   List<string> saved_argv;
   List<string> saved_envp;
   
+  bool has_progress_total = false;
   uint progress_total; // zero, unless we already know limit
   uint progress_count; // count of how far we are along in the current instance
   
@@ -55,16 +72,18 @@ public class Duplicity : Object
     toplevel = win;
   }
   
-  public virtual void start(string target, List<string> argv, List<string>? envp)
+  public virtual void start(string remote, List<string>? argv,
+                            List<string>? envp)
   {
     // save arguments for calling duplicity again later
-    this.target = target;
+    this.remote = remote;
     saved_argv = new List<string>();
     saved_envp = new List<string>();
     foreach (string s in argv) saved_argv.append(s);
     foreach (string s in envp) saved_envp.append(s);
     
-    restart();
+    if (!restart())
+      done(false, false);
   }
   
   public void cancel() {
@@ -86,27 +105,54 @@ public class Duplicity : Object
     if (mode == Operation.Mode.INVALID)
       return false;
     
-    // If we're backing up, and the version of duplicity supports it, we should
-    // first run using --dry-run to get the total size of the backup, to make
-    // accurate progress bars.
-    if (mode == Operation.Mode.BACKUP &&
-        DuplicityInfo.get_default().has_backup_progress &&
-        progress_total == 0) {
-      action_desc_changed(_("Preparing..."));
-      state = State.DRY_RUN;
-      
-      var extra_argv = new List<string>();
-      extra_argv.append("--dry-run");
-      connect_and_start(extra_argv);
-      
-      return true;
+    var extra_argv = new List<string>();
+    string action_desc = null;
+    string custom_local = null;
+    
+    switch (mode) {
+    case Operation.Mode.BACKUP:
+      // If we're backing up, and the version of duplicity supports it, we should
+      // first run using --dry-run to get the total size of the backup, to make
+      // accurate progress bars.
+      if (DuplicityInfo.get_default().has_backup_progress &&
+          !has_progress_total) {
+        state = State.DRY_RUN;
+        action_desc = _("Preparing...");
+        extra_argv.append("--dry-run");
+      }
+      break;
+    case Operation.Mode.RESTORE:
+      if (restore_files != null) {
+        // Just do first one.  Others will come when we're done
+        
+        // make path to specific restore file, since duplicity will just 
+        // drop the file exactly where you ask it
+        File local_file = File.new_for_path(local);
+        File root = File.new_for_path("/");
+        string rel_file_path = root.get_relative_path(restore_files.data);
+        local_file = local_file.resolve_relative_path(rel_file_path);
+        
+        try {
+          // won't have correct permissions...
+          local_file.make_directory_with_parents(null);
+        }
+        catch (Error e) {
+          show_error(e.message);
+          return false;
+        }
+        custom_local = local_file.get_path();
+        extra_argv.append("--file-to-restore=%s".printf(rel_file_path));
+      }
+      break;
     }
     
     // Send appropriate description for what we're about to do.  Is often
     // very quickly overridden by a message like "Backing up file X"
-    action_desc_changed(Operation.mode_to_string(mode));
+    if (action_desc == null)
+      action_desc = Operation.mode_to_string(mode);
+    action_desc_changed(action_desc);
     
-    connect_and_start();
+    connect_and_start(extra_argv, null, null, custom_local);
     return true;
   }
   
@@ -119,7 +165,7 @@ public class Duplicity : Object
     var cleanup_argv = new List<string>();
     cleanup_argv.append("cleanup");
     cleanup_argv.append("--force");
-    cleanup_argv.append(this.target);
+    cleanup_argv.append(this.remote);
     
     action_desc_changed(_("Cleaning up..."));
     connect_and_start(null, null, cleanup_argv);
@@ -133,10 +179,10 @@ public class Duplicity : Object
       switch (state) {
       case State.DRY_RUN:
         if (success) {
+          has_progress_total = true;
           progress_total = progress_count; // save max progress for next run
-          state = State.NORMAL;
-          connect_and_start();
-          return;
+          if (restart())
+            return;
         }
         break;
       
@@ -149,8 +195,21 @@ public class Duplicity : Object
         success = false;
         cancelled = true;
         break;
+      
+      case State.NORMAL:
+        if (success && mode == Operation.Mode.RESTORE && restore_files != null) {
+          _restore_files.delete_link(_restore_files);
+          if (restore_files != null) {
+            if (restart())
+              return;
+          }
+        }
+        break;
       }
     }
+    
+    if (error_issued)
+      success = false;
     
     if (!success && !cancelled && !error_issued)
       show_error(_("Failed with an unknown error."));
@@ -159,6 +218,7 @@ public class Duplicity : Object
     done(success, cancelled);
   }
   
+  protected static const int ERROR_RESTORE_DIR_NOT_FOUND = 19;
   protected static const int ERROR_EXCEPTION = 30;
   protected static const int INFO_PROGRESS = 2;
   protected static const int INFO_COLLECTION_STATUS = 3;
@@ -194,13 +254,23 @@ public class Duplicity : Object
   }
   
   protected virtual void process_error(string[] firstline, List<string>? data,
-                                       string text)
+                                       string text_in)
   {
+    string text = text_in;
+    
     if (firstline.length > 1) {
       switch (firstline[1].to_int()) {
       case ERROR_EXCEPTION: // exception
         process_exception(firstline.length > 2 ? firstline[2] : "", text);
         return;
+      case ERROR_RESTORE_DIR_NOT_FOUND:
+        // make text a little nicer than duplicity gives
+        // duplicity gives something like "home/blah/blah not found in archive,
+        // no files restored".
+        if (restore_files != null)
+          text = _("Could not restore '%s': File not found in backup").printf(
+                   restore_files.data.get_parse_name());
+        break;
       }
     }
     
@@ -229,7 +299,8 @@ public class Duplicity : Object
       }
       if (!found) {
         saved_argv.append("--short-filenames");
-        connect_and_start();
+        if (!restart())
+          done(false, false);
         return;
       }
       break;
@@ -369,7 +440,8 @@ public class Duplicity : Object
   
   void connect_and_start(List<string>? argv_extra = null,
                          List<string>? envp_extra = null,
-                         List<string>? argv_entire = null)
+                         List<string>? argv_entire = null,
+                         string? custom_local = null)
   {
     if (inst != null) {
       inst.done -= handle_done;
@@ -382,10 +454,30 @@ public class Duplicity : Object
     inst.message += handle_message;
     
     weak List<string> master_argv = argv_entire == null ? saved_argv : argv_entire;
+    weak string local_arg = custom_local == null ? local : custom_local;
     
     var argv = new List<string>();
     foreach (string s in master_argv) argv.append(s);
     foreach (string s in argv_extra) argv.append(s);
+    
+    if (argv_entire == null) {
+      // add operation, local, and remote args
+      switch (mode) {
+      case Operation.Mode.BACKUP:
+        argv.append(local_arg);
+        argv.append(remote);
+        break;
+      case Operation.Mode.RESTORE:
+        argv.prepend("restore");
+        argv.append(remote);
+        argv.append(local_arg);
+        break;
+      case Operation.Mode.STATUS:
+        argv.prepend("collection-status");
+        argv.append(remote);
+        break;
+      }
+    }
     
     var envp = new List<string>();
     foreach (string s in saved_envp) envp.append(s);

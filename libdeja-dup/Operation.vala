@@ -138,10 +138,6 @@ public abstract class Operation : Object
         envp.append("PASSPHRASE="); // duplicity sometimes asks for a passphrase when it doesn't need it (during cleanup), so this stops it from prompting the user and us getting an exception as a result
       
       List<string> argv = make_argv();
-      if (argv == null) {
-        done(false);
-        return;
-      }
       
       backend.add_argv(ref argv);
       string target = backend.get_location();

@@ -23,6 +23,27 @@ public class AssistantRestore : AssistantOperation
 {
   public string restore_location {get; protected set; default = "/";}
   
+  private List<File> _restore_files;
+  public List<File> restore_files {
+    get {
+      return this._restore_files;
+    }
+    set {
+      foreach (File f in this._restore_files)
+        f.unref();
+      this._restore_files = value.copy();
+      foreach (File f in this._restore_files)
+        f.ref();
+    }
+  }
+  
+  public AssistantRestore.with_files(List<File> files)
+  {
+    // This puts the restore dialog into 'known file mode', where it only
+    // restores the listed files, not the whole backup
+    restore_files = files;
+  }
+  
   DejaDup.OperationStatus query_op;
   Gtk.ProgressBar query_progress_bar;
   uint query_timeout_id;
@@ -32,12 +53,18 @@ public class AssistantRestore : AssistantOperation
   Gtk.FileChooserButton cust_button;
   Gtk.Table confirm_table;
   Gtk.Label confirm_backup;
+  int confirm_location_row;
+  Gtk.Label confirm_location_label;
   Gtk.Label confirm_location;
   int confirm_date_row;
   Gtk.Label confirm_date_label;
   Gtk.Label confirm_date;
+  int confirm_files_row;
+  Gtk.Label confirm_files_label;
+  Gtk.VBox confirm_files;
   Gtk.Widget query_progress_page;
   Gtk.Widget date_page;
+  Gtk.Widget restore_dest_page;
   bool got_dates;
   construct
   {
@@ -151,10 +178,15 @@ public class AssistantRestore : AssistantOperation
     confirm_date.set("xalign", 0.0f);
     ++rows;
     
-    var location_label = new Gtk.Label(_("Restore folder:"));
-    location_label.set("xalign", 0.0f);
+    confirm_location_label = new Gtk.Label(_("Restore folder:"));
+    confirm_location_label.set("xalign", 0.0f);
     confirm_location = new Gtk.Label("");
     confirm_location.set("xalign", 0.0f);
+    ++rows;
+    
+    confirm_files_label = new Gtk.Label("");
+    confirm_files_label.set("xalign", 0.0f, "yalign", 0.0f);
+    confirm_files = new Gtk.VBox(true, 6);
     ++rows;
     
     confirm_table = new Gtk.Table(rows, 3, false);
@@ -164,15 +196,20 @@ public class AssistantRestore : AssistantOperation
              "border-width", 12);
     
     rows = 0;
-    page.attach(backup_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(backup_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     page.attach(confirm_backup, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
     ++rows;
     confirm_date_row = rows;
-    page.attach(confirm_date_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(confirm_date_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     page.attach(confirm_date, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
     ++rows;
-    page.attach(location_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    confirm_location_row = rows;
+    page.attach(confirm_location_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     page.attach(confirm_location, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    ++rows;
+    confirm_files_row = rows;
+    page.attach(confirm_files_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(confirm_files, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
     
     return page;
   }
@@ -207,6 +244,7 @@ public class AssistantRestore : AssistantOperation
               "title", _("Restore to Where?"),
               "complete", true,
               "header-image", icon);
+    restore_dest_page = page;
   }
   
   protected override DejaDup.Operation create_op()
@@ -218,7 +256,8 @@ public class AssistantRestore : AssistantOperation
         date_store.get(iter, 1, out date);
     }
     
-    return new DejaDup.OperationRestore(this, restore_location, date);
+    return new DejaDup.OperationRestore(this, restore_location, date,
+                                        restore_files);
   }
   
   protected override string get_progress_file_prefix()
@@ -309,9 +348,14 @@ public class AssistantRestore : AssistantOperation
         // didn't hit an error (since we're about to show this page, and not
         // the summary/error page).  Skip the date portion, since the backend
         // must not be capable of giving us dates (duplicity < 0.5.04 couldn't).
-        ++next;
+        next_page = get_nth_page(++next);
       }
     }
+    
+    // If we're doing a known-file-set restore, assume user wants same-location
+    // restore.
+    if (next_page == restore_dest_page && restore_files != null)
+      next_page = get_nth_page(++next);
     
     return next;
   }
@@ -353,10 +397,40 @@ public class AssistantRestore : AssistantOperation
       }
       
       // Where we restore to
-      if (restore_location == "/")
-        confirm_location.label = _("Original location");
-      else
-        confirm_location.label = restore_location;
+      if (restore_files == null) {
+        if (restore_location == "/")
+          confirm_location.label = _("Original location");
+        else
+          confirm_location.label = restore_location;
+        
+        confirm_location_label.show();
+        confirm_location.show();
+        confirm_table.set_row_spacing(confirm_location_row,
+                                      confirm_table.get_default_row_spacing());
+        confirm_files_label.hide();
+        confirm_files.hide();
+        confirm_table.set_row_spacing(confirm_files_row, 0);
+      }
+      else {
+        confirm_files_label.label = ngettext("File to restore:",
+                                             "Files to restore:",
+                                             restore_files.length());
+        foreach (File f in restore_files) {
+          var parse_name = f.get_parse_name();
+          var file_label = new Gtk.Label(Path.get_basename(parse_name));
+          file_label.set_tooltip_text(parse_name);
+          file_label.set("xalign", 0.0f);
+          confirm_files.add(file_label);
+        }
+        
+        confirm_location_label.hide();
+        confirm_location.hide();
+        confirm_table.set_row_spacing(confirm_location_row, 0);
+        confirm_files_label.show();
+        confirm_files.show_all();
+        confirm_table.set_row_spacing(confirm_files_row,
+                                      confirm_table.get_default_row_spacing());
+      }
     }
     else if (page == summary_page) {
       if (error_occurred)

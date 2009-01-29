@@ -41,14 +41,9 @@ public class OperationStatus : Operation
   {
     List<string> rv = new List<string>();
     
-    rv.append("collection-status");
-    
     var client = GConf.Client.get_default();
     if (!client.get_bool(ENCRYPT_KEY))
       rv.append("--no-encryption");
-    
-    var target = backend.get_location();
-    rv.append(target);
     
     return rv;
   }
