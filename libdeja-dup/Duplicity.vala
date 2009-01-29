@@ -342,11 +342,13 @@ public class Duplicity : Object
   }
   
   void process_diff_file(string file) {
-    action_file_changed(make_file_obj(file));
+    if (state != State.DRY_RUN)
+      action_file_changed(make_file_obj(file));
   }
   
   void process_patch_file(string file) {
-    action_file_changed(make_file_obj(file));
+    if (state != State.DRY_RUN)
+      action_file_changed(make_file_obj(file));
   }
   
   void process_progress(string[] firstline)
