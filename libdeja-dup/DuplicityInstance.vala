@@ -396,8 +396,16 @@ public class DuplicityInstance : Object
   
   void spawn_finished(Pid pid, int status)
   {
+    // Reference ourselves, because when processing stanza we have not
+    // yet gotten to below, whoever owns us might unref us in the middle of
+    // this function, and we don't want to die immediately.  Wait until the
+    // end.
+    ref();
+    
     if (stanza_id != 0)
       Source.remove(stanza_id);
+    stanza_id = 0;
+    watch_id = 0;
     
     bool success = Process.if_exited(status) && Process.exit_status(status) == 0;
     bool cancelled = !Process.if_exited(status);
@@ -432,6 +440,7 @@ public class DuplicityInstance : Object
     child_pid = (Pid)0;
     
     done(success, cancelled);
+    unref();
   }
 }
 

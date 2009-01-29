@@ -218,6 +218,22 @@ public class Duplicity : Object
     done(success, cancelled);
   }
   
+  bool restart_with_short_filenames_if_needed()
+  {
+    foreach (string s in saved_argv) {
+      if (s == "--short-filenames")
+        return false;
+    }
+    
+    saved_argv.append("--short-filenames");
+    if (!restart()) {
+      done(false, false);
+      return false;
+    }
+    
+    return true;
+  }
+  
   protected static const int ERROR_RESTORE_DIR_NOT_FOUND = 19;
   protected static const int ERROR_EXCEPTION = 30;
   protected static const int INFO_PROGRESS = 2;
@@ -290,19 +306,7 @@ public class Duplicity : Object
       // Very possibly a FAT file system that can't handle the colons that 
       // duplicity likes to use.  Try again with --short-filenames
       // But first make sure we aren't already doing that.
-      bool found = false;
-      foreach (string s in saved_argv) {
-        if (s == "--short-filenames") {
-          found = true;
-          break;
-        }
-      }
-      if (!found) {
-        saved_argv.append("--short-filenames");
-        if (!restart())
-          done(false, false);
-        return;
-      }
+      restart_with_short_filenames_if_needed();
       break;
     }
     
@@ -407,6 +411,12 @@ public class Duplicity : Object
       }
       else if (in_chain)
         in_chain = false;
+    }
+    
+    if (mode == Operation.Mode.STATUS &&
+        dates.length() == 0) { // may not have found short-filenamed-backups
+      if (restart_with_short_filenames_if_needed())
+        return;
     }
     
     collection_dates(dates);
