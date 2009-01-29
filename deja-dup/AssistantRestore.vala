@@ -304,8 +304,10 @@ public class AssistantRestore : AssistantOperation
   
   protected void query_finished(DejaDup.OperationStatus op, bool success)
   {
-    if (success) {
-      set_current_page(do_forward(get_current_page())); // next page
+    if (success && !error_occurred) {
+      var next_page = do_forward(get_current_page());
+      if (next_page >= 0)
+        set_current_page(next_page);
     }
     
     this.query_op = null;
