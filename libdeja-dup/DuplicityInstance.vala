@@ -62,7 +62,8 @@ public class DuplicityInstance : Object
     
     argv.append("--verbosity=9");
     
-    // Default volsize is 5.  Advantages of a smaller value:
+    // Our default volsize is 5M (duplicity's default is now 25M).
+    // Advantages of a smaller value:
     // * takes less temp space
     // * retries of a volume take less time
     // * quicker restore of a particular file (less excess baggage to download)
@@ -80,7 +81,7 @@ public class DuplicityInstance : Object
     // All told, it would be nice if we could do lower volsize.  If duplicity
     // ever solves the 'too many files' problem, we should go down to volsize
     // 1 or 2.  For now, we'll keep with the default.
-    //argv.append("--volsize=1");
+    argv.append("--volsize=5");
     
     // Add always-there arguments
     argv.append("--log-fd=%d".printf(pipes[1]));

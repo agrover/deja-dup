@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-01-19 19:41-0500\n"
-"PO-Revision-Date: 2009-01-23 21:50+0000\n"
+"POT-Creation-Date: 2009-01-29 15:51-0500\n"
+"PO-Revision-Date: 2009-02-01 22:57+0000\n"
 "Last-Translator: Maximilian Blömer <mail@maxbloemer.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-01-29 17:00+0000\n"
+"X-Launchpad-Export-Date: 2009-02-03 01:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -44,11 +44,11 @@ msgstr "Amazon S3 Key ID"
 
 #: ../data/deja-dup.schemas.in.h:2
 msgid "Directories not to backup"
-msgstr "Order, die nicht gesichert werden sollen"
+msgstr "Ordner, die nicht gesichert werden sollen"
 
 #: ../data/deja-dup.schemas.in.h:3
 msgid "Directories to backup"
-msgstr "Order, die gesichert werden sollen"
+msgstr "Ordner, die gesichert werden sollen"
 
 #: ../data/deja-dup.schemas.in.h:4
 msgid "Folder on your system in which to hold the backup files."
@@ -92,11 +92,11 @@ msgstr "Déjà Dup wurde zuletzt ausgeführt am"
 
 #: ../data/deja-dup.schemas.in.h:14
 msgid "The last time Déjà Dup was run, in ISO 8601 format."
-msgstr ""
+msgstr "Déjà Dup wurde zuletzt ausgeführt am, im ISO 8601-Format"
 
 #: ../data/deja-dup.schemas.in.h:15
 msgid "The number of days between backups."
-msgstr "anzahl der Tage zwischen den Datensicherungen"
+msgstr "Anzahl der Tage zwischen den Datensicherungen"
 
 #: ../data/deja-dup.schemas.in.h:16
 msgid "The port used for SSH connections."
@@ -179,7 +179,7 @@ msgstr ""
 msgid "Your Amazon S3 Key identifier. This acts as your S3 username."
 msgstr ""
 
-#: ../applet/applet.vala:26 ../deja-dup/main.vala:28
+#: ../applet/applet.vala:26 ../deja-dup/main.vala:30
 #: ../monitor/monitor.vala:35 ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr "Version anzeigen"
@@ -260,7 +260,7 @@ msgstr "Einstellungen konnten nicht aufgerufen werden"
 msgid "Backup"
 msgstr "Datensicherung"
 
-#: ../deja-dup/AssistantBackup.vala:38 ../deja-dup/AssistantRestore.vala:142
+#: ../deja-dup/AssistantBackup.vala:38 ../deja-dup/AssistantRestore.vala:169
 msgid "Backup location:"
 msgstr "Sicherungs-Ort:"
 
@@ -270,7 +270,7 @@ msgstr "Sicherungs-Ort:"
 msgid "Backing up"
 msgstr "Sichere Daten"
 
-#: ../deja-dup/AssistantBackup.vala:94 ../deja-dup/AssistantRestore.vala:338
+#: ../deja-dup/AssistantBackup.vala:94 ../deja-dup/AssistantRestore.vala:384
 msgid "Unknown"
 msgstr "Unbekannt"
 
@@ -294,100 +294,114 @@ msgstr "Sichere Daten..."
 msgid "Summary"
 msgstr "Zusammenfassung"
 
-#: ../deja-dup/AssistantRestore.vala:44
+#: ../deja-dup/AssistantRestore.vala:71
 msgid "Restore"
 msgstr "Wiederherstellen"
 
-#: ../deja-dup/AssistantRestore.vala:74
+#: ../deja-dup/AssistantRestore.vala:101
 msgid "_Date:"
-msgstr ""
+msgstr "_Datum:"
 
-#: ../deja-dup/AssistantRestore.vala:97
+#: ../deja-dup/AssistantRestore.vala:124
 msgid "Restore files to _original locations"
 msgstr "Daten an den ursprünglichen Ordner wiederherstellen"
 
-#: ../deja-dup/AssistantRestore.vala:102
+#: ../deja-dup/AssistantRestore.vala:129
 msgid "Restore to _specific folder"
 msgstr "in einen anderen Ordner wiederherstellen"
 
-#: ../deja-dup/AssistantRestore.vala:112
+#: ../deja-dup/AssistantRestore.vala:139
 msgid "Choose destination for restored files"
 msgstr "Position der gesicherten Daten auswählen"
 
-#: ../deja-dup/AssistantRestore.vala:116
+#: ../deja-dup/AssistantRestore.vala:143
 msgid "Restore _folder:"
 msgstr "Order für die Wiederherstellung:"
 
-#: ../deja-dup/AssistantRestore.vala:148
+#: ../deja-dup/AssistantRestore.vala:175
 msgid "Restore date:"
-msgstr ""
+msgstr "Wiederherstellungsdatum"
 
-#: ../deja-dup/AssistantRestore.vala:154
+#: ../deja-dup/AssistantRestore.vala:181
 msgid "Restore folder:"
 msgstr "Ordner der Wiederherstellung:"
 
-#: ../deja-dup/AssistantRestore.vala:185
+#: ../deja-dup/AssistantRestore.vala:222
 msgid "Checking for Backups"
-msgstr ""
+msgstr "Nach Datensicherungen wird gesucht"
 
-#: ../deja-dup/AssistantRestore.vala:196
+#: ../deja-dup/AssistantRestore.vala:233
 msgid "Restore from When?"
-msgstr ""
+msgstr "Von wann soll wiederhergestellt werden?"
 
-#: ../deja-dup/AssistantRestore.vala:207
+#: ../deja-dup/AssistantRestore.vala:244
 msgid "Restore to Where?"
 msgstr "Wohin soll die Datensicherung wiederhergestellt werden?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:228
+#: ../deja-dup/AssistantRestore.vala:267
 msgid "Restoring"
 msgstr "Wiederherstellung von"
 
-#: ../deja-dup/AssistantRestore.vala:263
+#: ../deja-dup/AssistantRestore.vala:302
 msgid "No backups to restore"
-msgstr ""
+msgstr "keine Datensicherungen zur Wiederherstellung gefunden"
 
-#: ../deja-dup/AssistantRestore.vala:357
+#: ../deja-dup/AssistantRestore.vala:404
 msgid "Original location"
 msgstr "Ursprünglicher Ordner"
 
-#: ../deja-dup/AssistantRestore.vala:363
+#: ../deja-dup/AssistantRestore.vala:417
+msgid "File to restore:"
+msgid_plural "Files to restore:"
+msgstr[0] "Datei, die wiederhergestellt werden soll:"
+msgstr[1] "Dateien, die wiederhergestellt werden sollen:"
+
+#: ../deja-dup/AssistantRestore.vala:439
 msgid "Restore Failed"
 msgstr "Wiederherstellung fehlgeschlagen"
 
-#: ../deja-dup/AssistantRestore.vala:365
+#: ../deja-dup/AssistantRestore.vala:441
 msgid "Restore Finished"
 msgstr "Wiederherstellung abgeschlossen"
 
-#: ../deja-dup/AssistantRestore.vala:366
+#: ../deja-dup/AssistantRestore.vala:442
 msgid "Your files were successfully restored."
 msgstr "Ihre Daten wurden erfolgreich wiederhergestellt."
 
-#: ../deja-dup/AssistantRestore.vala:370 ../libdeja-dup/Operation.vala:51
+#: ../deja-dup/AssistantRestore.vala:446 ../libdeja-dup/Operation.vala:51
 msgid "Restoring..."
 msgstr "Wiederherstellung läuft..."
+
+#: ../deja-dup/main.vala:31
+msgid "Restore given files"
+msgstr "gegebene Dateiegn wiederherstellen"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, it
 #. may not be very translatable.
-#: ../deja-dup/main.vala:37 ../deja-dup/main.vala:55
+#: ../deja-dup/main.vala:41 ../deja-dup/main.vala:67
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
+
+#: ../deja-dup/main.vala:47
+msgid "No filenames provided"
+msgstr "keine Dateinamen angegeben"
+
+#: ../deja-dup/MainWindow.vala:51 ../deja-dup/MainWindow.vala:193
+msgid "_Restore"
+msgstr "_Wiederherstellung"
+
+#: ../deja-dup/MainWindow.vala:77 ../deja-dup/MainWindow.vala:187
+msgid "_Backup"
+msgstr "_Datensicherung"
 
 #: ../deja-dup/MainWindow.vala:184
 msgid "_File"
 msgstr "_Datei"
-
-#: ../deja-dup/MainWindow.vala:187
-msgid "_Backup"
-msgstr "_Datensicherung"
-
-#: ../deja-dup/MainWindow.vala:193
-msgid "_Restore"
-msgstr "_Wiederherstellung"
 
 #: ../deja-dup/MainWindow.vala:203
 msgid "_Edit"
@@ -420,7 +434,7 @@ msgstr "Position der Datensicherung auswählen"
 #: ../libdeja-dup/BackendS3.vala:57
 #, c-format
 msgid "Bucket %s on Amazon S3"
-msgstr ""
+msgstr "Bucket %s auf Amazon S3"
 
 #. Ask user
 #: ../libdeja-dup/BackendS3.vala:102
@@ -484,7 +498,7 @@ msgstr "Déjà Dup funktioniert ohne duplicity nicht und wird nun beendet."
 
 #: ../libdeja-dup/DuplicityInfo.vala:138
 msgid "Duplicity's version is too old"
-msgstr "Die version von duplicity ist zu alt."
+msgstr "Die Version von duplicity ist zu alt."
 
 #: ../libdeja-dup/DuplicityInfo.vala:139
 #, c-format
@@ -495,25 +509,36 @@ msgstr ""
 "Déjà Dup benötigt mindestens duplicity Version %d.%d.%.2d, es konnte aber "
 "nur duplicity Version %d.%d.%.2d gefunden werden."
 
-#: ../libdeja-dup/Duplicity.vala:95
+#: ../libdeja-dup/Duplicity.vala:120
 msgid "Preparing..."
 msgstr "Daten vorbereiten..."
 
-#: ../libdeja-dup/Duplicity.vala:124
+#: ../libdeja-dup/Duplicity.vala:170
 msgid "Cleaning up..."
 msgstr "Räume auf..."
 
-#: ../libdeja-dup/Duplicity.vala:156
-msgid "Failed with an unknown error."
-msgstr ""
-
 #: ../libdeja-dup/Duplicity.vala:215
+msgid "Failed with an unknown error."
+msgstr "mit unbekanntem Fehler fehlgeschlagen"
+
+#: ../libdeja-dup/Duplicity.vala:287
+#, c-format
+msgid "Could not restore '%s': File not found in backup"
+msgstr ""
+"'%s' konnte nicht wiederhergestellt werden. Datei in Datensicherung nicht "
+"vorhanden."
+
+#: ../libdeja-dup/Duplicity.vala:301
 msgid "Invalid ID"
 msgstr "Ungültige ID"
 
-#: ../libdeja-dup/Duplicity.vala:217
+#: ../libdeja-dup/Duplicity.vala:303
 msgid "Invalid secret key"
-msgstr ""
+msgstr "Ungültiger Schlüssel"
+
+#: ../libdeja-dup/Duplicity.vala:320
+msgid "No backup files found"
+msgstr "Keine Datensicherungsdateien gefunden"
 
 #: ../libdeja-dup/libdeja-dup.vala:95
 #, c-format
@@ -567,15 +592,11 @@ msgstr ""
 "Software Foundation, Inc. 59 Temple Place, Suite 330, Boston, MA 02111-1307, "
 "USA."
 
-#: ../libdeja-dup/OperationBackup.vala:51
-msgid "Could not connect to backup location"
-msgstr "Zum Ort der Datensicherung konnte nicht verbunden werden."
-
-#: ../libdeja-dup/OperationRestore.vala:42
+#: ../libdeja-dup/OperationRestore.vala:59
 msgid "Restoring files..."
 msgstr "Dateien werden wiederhergestellt..."
 
-#: ../libdeja-dup/OperationRestore.vala:156
+#: ../libdeja-dup/OperationRestore.vala:169
 #, c-format
 msgid ""
 "Not all files could be restored. Any files that could not be restored may "
@@ -584,33 +605,45 @@ msgstr ""
 "Nicht alle Dateien konnten wiederhergestellt werden. Die Dateien, die nicht "
 "wiederhergestellt werden konnten, befinden sich möglicherweise noch in %s."
 
-#: ../libdeja-dup/OperationRestore.vala:165
+#: ../libdeja-dup/OperationRestore.vala:178
 #, c-format
 msgid "Could not restore %s: %s"
 msgstr "%s: %s konnte nicht wiederhergestellt werden"
 
 #: ../libdeja-dup/Operation.vala:53
 msgid "Checking for backups..."
-msgstr ""
+msgstr "Nach Datensicherungen wird gesucht..."
 
 #. Ask user
-#: ../libdeja-dup/Operation.vala:203
+#: ../libdeja-dup/Operation.vala:199
 msgid "Encryption Password"
 msgstr "Verschlüsselungspasswort"
 
-#: ../libdeja-dup/Operation.vala:204
+#: ../libdeja-dup/Operation.vala:200
 msgid "Enter the password used to encrypt your backup files."
 msgstr ""
 "geben Sie das Passwort ein, mit dem die Datensicherung verschlüsselt werden "
 "soll."
 
-#: ../libdeja-dup/Operation.vala:223
+#: ../libdeja-dup/Operation.vala:219
 msgid "Déjà Dup backup passphrase"
 msgstr "Déjà DupDatensicherung Passwortsatz"
 
-#: ../libdeja-dup/Operation.vala:241
+#: ../libdeja-dup/Operation.vala:237
 msgid "Another Déjà Dup is already running"
-msgstr ""
+msgstr "Déjà Dup wird bereits ausgeführt"
+
+#: ../nautilus/NautilusExtension.c:95
+msgid "Revert to Previous Version..."
+msgid_plural "Revert to Previous Versions..."
+msgstr[0] "Alte Version wiederherstellen..."
+msgstr[1] "Alte Versionen wiederherstellen..."
+
+#: ../nautilus/NautilusExtension.c:99
+msgid "Restore file from backup"
+msgid_plural "Restore files from backup"
+msgstr[0] "Datei aus Datensicherung wiederherstellen"
+msgstr[1] "Dateien aus Datensicherung wiederherstellen"
 
 #: ../preferences/ConfigBackend.vala:34
 msgid "Amazon S3"
@@ -670,8 +703,8 @@ msgstr "monatlich"
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "jeden %d Tag"
+msgstr[1] "alle %d Tage"
 
 #: ../preferences/PreferencesDialog.vala:38 ../preferences/preferences.vala:35
 #: ../preferences/preferences.vala:66
@@ -737,3 +770,6 @@ msgstr "regelmäßige Datensicherungen erstellen"
 #, c-format
 msgid "How _often to backup:"
 msgstr "Wie _oft gesichert werden soll:"
+
+#~ msgid "Could not connect to backup location"
+#~ msgstr "Zum Ort der Datensicherung konnte nicht verbunden werden."
