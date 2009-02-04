@@ -35,6 +35,7 @@ public class Duplicity : Object
   public bool error_issued {get; private set; default = false;}
   
   public string local {get; set;}
+  public Backend backend {get; set;}
   
   private List<File> _restore_files;
   public List<File> restore_files {
@@ -72,11 +73,12 @@ public class Duplicity : Object
     toplevel = win;
   }
   
-  public virtual void start(string remote, List<string>? argv,
+  public virtual void start(Backend backend, string remote, List<string>? argv,
                             List<string>? envp)
   {
     // save arguments for calling duplicity again later
     this.remote = remote;
+    this.backend = backend;
     saved_argv = new List<string>();
     saved_envp = new List<string>();
     foreach (string s in argv) saved_argv.append(s);
@@ -482,6 +484,7 @@ public class Duplicity : Object
     var argv = new List<string>();
     foreach (string s in master_argv) argv.append(s);
     foreach (string s in argv_extra) argv.append(s);
+    backend.add_argv(ref argv);
     
     if (argv_entire == null) {
       // add operation, local, and remote args
