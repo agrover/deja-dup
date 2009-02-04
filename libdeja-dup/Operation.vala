@@ -139,10 +139,9 @@ public abstract class Operation : Object
       
       List<string> argv = make_argv();
       
-      backend.add_argv(ref argv);
       string target = backend.get_location();
       
-      dup.start(target, argv, envp);
+      dup.start(backend, target, argv, envp);
     }
     catch (Error e) {
       raise_error(e.message, null);
