@@ -61,6 +61,7 @@ public class Duplicity : Object
   DuplicityInstance inst;
   
   string remote;
+  List<string> backend_argv;
   List<string> saved_argv;
   List<string> saved_envp;
   
@@ -81,8 +82,10 @@ public class Duplicity : Object
     this.backend = backend;
     saved_argv = new List<string>();
     saved_envp = new List<string>();
+    backend_argv = new List<string>();
     foreach (string s in argv) saved_argv.append(s);
     foreach (string s in envp) saved_envp.append(s);
+    backend.add_argv(ref backend_argv);
     
     if (!restart())
       done(false, false);
@@ -222,12 +225,12 @@ public class Duplicity : Object
   
   bool restart_with_short_filenames_if_needed()
   {
-    foreach (string s in saved_argv) {
+    foreach (string s in backend_argv) {
       if (s == "--short-filenames")
         return false;
     }
     
-    saved_argv.append("--short-filenames");
+    backend_argv.append("--short-filenames");
     if (!restart()) {
       done(false, false);
       return false;
@@ -484,7 +487,7 @@ public class Duplicity : Object
     var argv = new List<string>();
     foreach (string s in master_argv) argv.append(s);
     foreach (string s in argv_extra) argv.append(s);
-    backend.add_argv(ref argv);
+    foreach (string s in this.backend_argv) argv.append(s);
     
     if (argv_entire == null) {
       // add operation, local, and remote args
