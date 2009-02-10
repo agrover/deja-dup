@@ -52,7 +52,6 @@ public class ConfigFolder : ConfigWidget
                 // in $HOME called 'deja-dup'?
     
     if (button.get_filename() != val) {
-      print("setting from filename %s (from %s)\n", val, button.get_filename());
       button.set_filename(val);
     }
   }
@@ -70,7 +69,6 @@ public class ConfigFolder : ConfigWidget
       return; // we sometimes get several selection changed notices in a row...
     
     try {
-      print("file set: setting %s\n", filename);
       client.set_string(key, filename);
     }
     catch (Error e) {

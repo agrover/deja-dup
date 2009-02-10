@@ -92,8 +92,8 @@
       <owner>deja-dup</owner>
       <type>string</type>
       <locale name="C">
-        <short>Amazon S3 Key ID</short>
-        <long>Your Amazon S3 Key identifier.  This acts as your S3 username.</long>
+        <short>Amazon S3 Access Key ID</short>
+        <long>Your Amazon S3 Access Key Identifier.  This acts as your S3 username.</long>
       </locale>
     </schema>
 
@@ -102,10 +102,21 @@
       <applyto>/apps/deja-dup/s3/bucket</applyto>
       <owner>deja-dup</owner>
       <type>string</type>
-      <default>deja-dup</default>
       <locale name="C">
         <short>The Amazon S3 bucket name to use</short>
         <long>Which Amazon S3 bucket to store files in.  This does not need to exist already.  Only legal hostname strings are valid.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/s3/folder</key>
+      <applyto>/apps/deja-dup/s3/folder</applyto>
+      <owner>deja-dup</owner>
+      <type>string</type>
+      <default>/</default>
+      <locale name="C">
+        <short>The Amazon S3 folder</short>
+        <long>An optional folder name to store files in.  This folder will be created in the chosen bucket.</long>
       </locale>
     </schema>
 

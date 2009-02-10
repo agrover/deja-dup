@@ -306,6 +306,13 @@ public class Duplicity : Object
         show_error(_("Invalid ID"));
       else if (text.str("<Code>SignatureDoesNotMatch</Code>") != null)
         show_error(_("Invalid secret key"));
+      else if (text.str("<Code>BucketAlreadyExists</Code>") != null)
+        if (((BackendS3)backend).bump_bucket()) {
+          remote = backend.get_location();
+          restart();
+        }
+        else
+          show_error(_("S3 bucket name is not available"));
       break;
     case "IOError":
       // Very possibly a FAT file system that can't handle the colons that 
