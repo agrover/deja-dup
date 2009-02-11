@@ -303,16 +303,21 @@ public class Duplicity : Object
     switch (exception) {
     case "S3ResponseError":
       if (text.str("<Code>InvalidAccessKeyId</Code>") != null)
-        show_error(_("Invalid ID"));
+        show_error(_("Invalid ID."));
       else if (text.str("<Code>SignatureDoesNotMatch</Code>") != null)
-        show_error(_("Invalid secret key"));
-      else if (text.str("<Code>BucketAlreadyExists</Code>") != null)
+        show_error(_("Invalid secret key."));
+      else if (text.str("<Code>NotSignedUp</Code>") != null)
+        show_error(_("Your Amazon Web Services account is not signed up for the S3 service."));
+      break;
+    case "S3CreateError":
+      if (text.str("<Code>BucketAlreadyExists</Code>") != null) {
         if (((BackendS3)backend).bump_bucket()) {
           remote = backend.get_location();
           restart();
         }
         else
-          show_error(_("S3 bucket name is not available"));
+          show_error(_("S3 bucket name is not available."));
+      }
       break;
     case "IOError":
       // Very possibly a FAT file system that can't handle the colons that 
