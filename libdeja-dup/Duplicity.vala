@@ -320,10 +320,14 @@ public class Duplicity : Object
       }
       break;
     case "IOError":
-      // Very possibly a FAT file system that can't handle the colons that 
-      // duplicity likes to use.  Try again with --short-filenames
-      // But first make sure we aren't already doing that.
-      restart_with_short_filenames_if_needed();
+      if (text.str("GnuPG") != null)
+        show_error(_("Bad passphrase."));
+      else {
+        // Very possibly a FAT file system that can't handle the colons that 
+        // duplicity likes to use.  Try again with --short-filenames
+        // But first make sure we aren't already doing that.
+        restart_with_short_filenames_if_needed();
+      }
       break;
     case "CollectionsError":
       // Very possibly a FAT file system that we are trying to restore from.
