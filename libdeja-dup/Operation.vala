@@ -208,17 +208,29 @@ public abstract class Operation : Object
     
     passphrase = dlg.get_password();
     
-    // Save it
-    var remember = dlg.get_remember();
-    if (remember != Gnome.PasswordDialogRemember.NOTHING) {
-      string where = remember == Gnome.PasswordDialogRemember.SESSION ?
-                                 "session" : GnomeKeyring.DEFAULT;
-      GnomeKeyring.store_password(PASSPHRASE_SCHEMA,
-                                  where,
-                                  _("Déjà Dup backup passphrase"),
-                                  passphrase, save_password_callback,
-                                  "owner", Config.PACKAGE,
-                                  "type", "passphrase");
+    if (passphrase == "") {
+      // User entered no password.  Turn off encryption
+      try {
+        var client = GConf.Client.get_default();
+        client.set_bool(ENCRYPT_KEY, false);
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
+    }
+    else {
+      // Save it
+      var remember = dlg.get_remember();
+      if (remember != Gnome.PasswordDialogRemember.NOTHING) {
+        string where = remember == Gnome.PasswordDialogRemember.SESSION ?
+                                   "session" : GnomeKeyring.DEFAULT;
+        GnomeKeyring.store_password(PASSPHRASE_SCHEMA,
+                                    where,
+                                    _("Déjà Dup backup passphrase"),
+                                    passphrase, save_password_callback,
+                                    "owner", Config.PACKAGE,
+                                    "type", "passphrase");
+      }
     }
     
     continue_with_passphrase();
