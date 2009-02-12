@@ -68,8 +68,6 @@ public class OperationRestore : Operation
     source = DirUtils.mkdtemp(source);
     
     List<string> argv = new List<string>();
-    if (!client.get_bool(ENCRYPT_KEY))
-      argv.append("--no-encryption");
     if (time != null)
       argv.append("--restore-time=%s".printf(time));
     

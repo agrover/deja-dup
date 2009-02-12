@@ -75,8 +75,8 @@ public class PreferencesDialog : Gtk.Dialog
     ++row;
     
     var s3_table = new Gtk.Table(1, 3, false);
-    w = new ConfigEntry(DejaDup.S3_BUCKET_KEY);
-    label = new Gtk.Label("    %s".printf(_("S3 buc_ket:")));
+    w = new ConfigEntry(DejaDup.S3_ID_KEY);
+    label = new Gtk.Label("    %s".printf(_("S3 Access Key I_D:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "xalign", 0.0f);
@@ -87,8 +87,8 @@ public class PreferencesDialog : Gtk.Dialog
                     Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                     Gtk.AttachOptions.FILL, 3, 3);
     
-    w = new ConfigEntry(DejaDup.S3_ID_KEY);
-    label = new Gtk.Label("    %s".printf(_("S3 I_D:")));
+    w = new ConfigEntry(DejaDup.S3_FOLDER_KEY);
+    label = new Gtk.Label("    %s".printf(_("_Folder:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "xalign", 0.0f);
@@ -161,7 +161,7 @@ public class PreferencesDialog : Gtk.Dialog
                      Gtk.AttachOptions.FILL, 3, 3);
     
     w = new ConfigEntry(DejaDup.SSH_DIRECTORY_KEY);
-    label = new Gtk.Label("    %s".printf(_("_Directory:")));
+    label = new Gtk.Label("    %s".printf(_("_Folder:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "xalign", 0.0f);

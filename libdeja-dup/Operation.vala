@@ -130,18 +130,18 @@ public abstract class Operation : Object
       return;
     }
     
-    try {
-      var client = GConf.Client.get_default();
-      if (client.get_bool(ENCRYPT_KEY))
-        envp.append("PASSPHRASE=%s".printf(passphrase));
-      else
-        envp.append("PASSPHRASE="); // duplicity sometimes asks for a passphrase when it doesn't need it (during cleanup), so this stops it from prompting the user and us getting an exception as a result
+    bool encrypted = (passphrase != null && passphrase != "");
+    if (encrypted)
+      envp.append("PASSPHRASE=%s".printf(passphrase));
+    else
+      envp.append("PASSPHRASE="); // duplicity sometimes asks for a passphrase when it doesn't need it (during cleanup), so this stops it from prompting the user and us getting an exception as a result
       
+    try {
       List<string> argv = make_argv();
       
       string target = backend.get_location();
       
-      dup.start(backend, target, argv, envp);
+      dup.start(backend, target, encrypted, argv, envp);
     }
     catch (Error e) {
       raise_error(e.message, null);
@@ -154,10 +154,25 @@ public abstract class Operation : Object
   {
     set_session_inhibited(false);
     claim_bus(false);
+    
+    if (success && passphrase == "") {
+      // User entered no password.  Turn off encryption
+      try {
+        var client = GConf.Client.get_default();
+        client.set_bool(ENCRYPT_KEY, false);
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
+    }
+    
     done(success);
   }
   
-  protected abstract List<string>? make_argv() throws Error;
+  protected virtual List<string>? make_argv() throws Error
+  {
+    return null;
+  }
   
   void found_passphrase(GnomeKeyring.Result result, string? str)
   {
@@ -208,17 +223,19 @@ public abstract class Operation : Object
     
     passphrase = dlg.get_password();
     
-    // Save it
-    var remember = dlg.get_remember();
-    if (remember != Gnome.PasswordDialogRemember.NOTHING) {
-      string where = remember == Gnome.PasswordDialogRemember.SESSION ?
-                                 "session" : GnomeKeyring.DEFAULT;
-      GnomeKeyring.store_password(PASSPHRASE_SCHEMA,
-                                  where,
-                                  _("Déjà Dup backup passphrase"),
-                                  passphrase, save_password_callback,
-                                  "owner", Config.PACKAGE,
-                                  "type", "passphrase");
+    if (passphrase != "") {
+      // Save it
+      var remember = dlg.get_remember();
+      if (remember != Gnome.PasswordDialogRemember.NOTHING) {
+        string where = remember == Gnome.PasswordDialogRemember.SESSION ?
+                                   "session" : GnomeKeyring.DEFAULT;
+        GnomeKeyring.store_password(PASSPHRASE_SCHEMA,
+                                    where,
+                                    _("Déjà Dup backup passphrase"),
+                                    passphrase, save_password_callback,
+                                    "owner", Config.PACKAGE,
+                                    "type", "passphrase");
+      }
     }
     
     continue_with_passphrase();

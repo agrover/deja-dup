@@ -54,9 +54,6 @@ public class OperationBackup : Operation
     
     List<string> rv = new List<string>();
     
-    if (!client.get_bool(ENCRYPT_KEY))
-      rv.append("--no-encryption");
-    
     // Exclude directories no one wants to backup
     var always_excluded = get_always_excluded_dirs();
     foreach (string dir in always_excluded)

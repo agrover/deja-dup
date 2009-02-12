@@ -61,6 +61,7 @@ public class Duplicity : Object
   DuplicityInstance inst;
   
   string remote;
+  List<string> backend_argv;
   List<string> saved_argv;
   List<string> saved_envp;
   
@@ -73,16 +74,20 @@ public class Duplicity : Object
     toplevel = win;
   }
   
-  public virtual void start(Backend backend, string remote, List<string>? argv,
-                            List<string>? envp)
+  public virtual void start(Backend backend, string remote, bool encrypted,
+                            List<string>? argv, List<string>? envp)
   {
     // save arguments for calling duplicity again later
     this.remote = remote;
     this.backend = backend;
     saved_argv = new List<string>();
     saved_envp = new List<string>();
+    backend_argv = new List<string>();
     foreach (string s in argv) saved_argv.append(s);
     foreach (string s in envp) saved_envp.append(s);
+    backend.add_argv(ref backend_argv);
+    if (!encrypted)
+      backend_argv.append("--no-encryption");
     
     if (!restart())
       done(false, false);
@@ -222,12 +227,12 @@ public class Duplicity : Object
   
   bool restart_with_short_filenames_if_needed()
   {
-    foreach (string s in saved_argv) {
+    foreach (string s in backend_argv) {
       if (s == "--short-filenames")
         return false;
     }
     
-    saved_argv.append("--short-filenames");
+    backend_argv.append("--short-filenames");
     if (!restart()) {
       done(false, false);
       return false;
@@ -300,15 +305,31 @@ public class Duplicity : Object
     switch (exception) {
     case "S3ResponseError":
       if (text.str("<Code>InvalidAccessKeyId</Code>") != null)
-        show_error(_("Invalid ID"));
+        show_error(_("Invalid ID."));
       else if (text.str("<Code>SignatureDoesNotMatch</Code>") != null)
-        show_error(_("Invalid secret key"));
+        show_error(_("Invalid secret key."));
+      else if (text.str("<Code>NotSignedUp</Code>") != null)
+        show_error(_("Your Amazon Web Services account is not signed up for the S3 service."));
+      break;
+    case "S3CreateError":
+      if (text.str("<Code>BucketAlreadyExists</Code>") != null) {
+        if (((BackendS3)backend).bump_bucket()) {
+          remote = backend.get_location();
+          restart();
+        }
+        else
+          show_error(_("S3 bucket name is not available."));
+      }
       break;
     case "IOError":
-      // Very possibly a FAT file system that can't handle the colons that 
-      // duplicity likes to use.  Try again with --short-filenames
-      // But first make sure we aren't already doing that.
-      restart_with_short_filenames_if_needed();
+      if (text.str("GnuPG") != null)
+        show_error(_("Bad encryption password."));
+      else {
+        // Very possibly a FAT file system that can't handle the colons that 
+        // duplicity likes to use.  Try again with --short-filenames
+        // But first make sure we aren't already doing that.
+        restart_with_short_filenames_if_needed();
+      }
       break;
     case "CollectionsError":
       // Very possibly a FAT file system that we are trying to restore from.
@@ -484,7 +505,7 @@ public class Duplicity : Object
     var argv = new List<string>();
     foreach (string s in master_argv) argv.append(s);
     foreach (string s in argv_extra) argv.append(s);
-    backend.add_argv(ref argv);
+    foreach (string s in this.backend_argv) argv.append(s);
     
     if (argv_entire == null) {
       // add operation, local, and remote args
