@@ -3,7 +3,7 @@
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY appname          "Déjà Dup">
   <!ENTITY app "<application>Déjà Dup</application>">
-  <!ENTITY appversion   "7.3">
+  <!ENTITY appversion   "7.4">
   <!ENTITY manrevision  "1.0">
   <!ENTITY date "February 2009">
   <!-- Information about the entities
@@ -285,19 +285,7 @@
     </listitem> 
   </varlistentry> 
   <varlistentry> 
-    <term> <guilabel>S3 bucket</guilabel> </term> 
-    <listitem> 
-      <note>
-        <para>This option only appears if the <guilabel>Amazon S3</guilabel>
-        backup location has been selected.</para>
-      </note>
-      <para>Amazon S3 uses 'buckets' to keep your data organized. Each bucket is
-      separate from the rest. Think of each bucket as a separate named remote
-      hard drive. The default is <userinput>deja-dup</userinput>.</para> 
-    </listitem> 
-  </varlistentry> 
-  <varlistentry> 
-    <term> <guilabel>S3 ID</guilabel> </term> 
+    <term> <guilabel>S3 Access Key ID</guilabel> </term> 
     <listitem> 
       <note>
         <para>This option only appears if the <guilabel>Amazon S3</guilabel>
@@ -306,6 +294,18 @@
       <para>This is your Access Key ID that Amazon gave you when you signed up
       for S3. It is like a username for logging into S3. If left empty, you
       will be prompted for it as you backup or restore.</para> 
+    </listitem> 
+  </varlistentry> 
+  <varlistentry> 
+    <term> <guilabel>Folder</guilabel> </term> 
+    <listitem> 
+      <note>
+        <para>This option only appears if the <guilabel>Amazon S3</guilabel>
+        backup location has been selected.</para>
+      </note>
+      <para>If you have multiple backups, you may want to keep them separated
+      in multiple folders.  Use this option to enter a path on the S3 service
+      in which to put your files.</para> 
     </listitem> 
   </varlistentry> 
   <varlistentry> 
