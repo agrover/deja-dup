@@ -1,3 +1,13 @@
+deja-dup 7.4 (2008-02-10)
+-------------------------
+* Don't ask for S3 bucket name (and default to deja-dup).  Buckets are
+  S3-global and that default is certainly taken.  Instead, generate bucket name
+  from user ID.  Ask user for an optional folder in the bucket instead.
+* Fix bug that prevented cleanup on FAT32.
+* If no passphrase is provided, turn off encryption.
+* Add better errors for a couple cases (bad encryption password, not signed up
+  for S3).
+
 deja-dup 7.3
 ------------
 * Fix SSH password problem, preventing the SSH backend from working
