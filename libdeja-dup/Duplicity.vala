@@ -74,8 +74,8 @@ public class Duplicity : Object
     toplevel = win;
   }
   
-  public virtual void start(Backend backend, string remote, List<string>? argv,
-                            List<string>? envp)
+  public virtual void start(Backend backend, string remote, bool encrypted,
+                            List<string>? argv, List<string>? envp)
   {
     // save arguments for calling duplicity again later
     this.remote = remote;
@@ -86,6 +86,8 @@ public class Duplicity : Object
     foreach (string s in argv) saved_argv.append(s);
     foreach (string s in envp) saved_envp.append(s);
     backend.add_argv(ref backend_argv);
+    if (!encrypted)
+      backend_argv.append("--no-encryption");
     
     if (!restart())
       done(false, false);
@@ -321,7 +323,7 @@ public class Duplicity : Object
       break;
     case "IOError":
       if (text.str("GnuPG") != null)
-        show_error(_("Bad passphrase."));
+        show_error(_("Bad encryption password."));
       else {
         // Very possibly a FAT file system that can't handle the colons that 
         // duplicity likes to use.  Try again with --short-filenames

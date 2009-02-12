@@ -36,17 +36,6 @@ public class OperationStatus : Operation
     dup.collection_dates += (d, dates) => {collection_dates(dates);};
     base.connect_to_dup();
   }
-  
-  protected override List<string>? make_argv() throws Error
-  {
-    List<string> rv = new List<string>();
-    
-    var client = GConf.Client.get_default();
-    if (!client.get_bool(ENCRYPT_KEY))
-      rv.append("--no-encryption");
-    
-    return rv;
-  }
 }
 
 } // end namespace
