@@ -62,8 +62,6 @@ public class OperationRestore : Operation
   
   protected override List<string>? make_argv() throws Error
   {
-    var client = get_gconf_client();
-    
     source = Path.build_filename(Environment.get_tmp_dir(), "deja-dup-XXXXXX");
     source = DirUtils.mkdtemp(source);
     
