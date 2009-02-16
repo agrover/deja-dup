@@ -1,4 +1,4 @@
-# -*- indent-tabs-mode: t; tab-width: 2 -*-
+# -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 
 include $(top_srcdir)/gnome-doc-utils.make
 dist-hook: doc-dist-hook

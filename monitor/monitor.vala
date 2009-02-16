@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: nil; tab-width: 2 -*- */
+/* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     Déjà Dup Monitor
     © 2008—2009 Michael Terry <mike@mterry.name>

@@ -1,4 +1,4 @@
-# -*- indent-tabs-mode: t; tab-width: 2 -*-
+# -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 
 nautilusdir = $(NAUTILUS_EXTENSION_DIR)
 

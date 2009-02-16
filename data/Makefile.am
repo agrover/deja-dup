@@ -1,4 +1,4 @@
-# -*- indent-tabs-mode: t; tab-width: 2 -*-
+# -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 
 icondir = $(datadir)/icons/hicolor/scalable/apps
 dist_icon_DATA = deja-dup.svg

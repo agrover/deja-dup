@@ -1,4 +1,4 @@
-# -*- indent-tabs-mode: t; tab-width: 2 -*-
+# -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 
 SUBDIRS = data po vapi libdeja-dup applet monitor preferences deja-dup nautilus help
 
