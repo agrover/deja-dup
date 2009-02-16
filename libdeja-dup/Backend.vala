@@ -42,7 +42,7 @@ public abstract class Backend : Object
   
   public static Backend? get_default(Gtk.Window? win) throws Error
   {
-    var client = GConf.Client.get_default();
+    var client = get_gconf_client();
     var backend_name = client.get_string(BACKEND_KEY);
     if (backend_name == "s3")
       return new BackendS3(win);

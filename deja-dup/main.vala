@@ -26,9 +26,11 @@ class DejaDupApp : Object
   static bool show_version = false;
   static bool restore_mode = false;
   static string[] filenames = null;
+  static string[] gconf_sources = null;
   static const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
     {"restore", 0, 0, OptionArg.NONE, ref restore_mode, N_("Restore given files"), null},
+    {"gconf-source", 0, OptionFlags.HIDDEN, OptionArg.STRING_ARRAY, ref gconf_sources, null, null},
     {"", 0, 0, OptionArg.FILENAME_ARRAY, ref filenames, null, null}, // remaining
     {null}
   };
@@ -45,6 +47,23 @@ class DejaDupApp : Object
     if (restore_mode) {
       if (filenames == null) {
         printerr("%s\n", _("No filenames provided"));
+        status = 1;
+        return false;
+      }
+    }
+    
+    if (gconf_sources != null) {
+      var list = new SList<string>();
+      int i = 0;
+      while (gconf_sources[i] != null)
+        list.append(gconf_sources[i++]);
+      try {
+        var engine = GConf.Engine.get_for_addresses(list);
+        var client = GConf.Client.get_for_engine(engine);
+        DejaDup.set_gconf_client(client);
+      }
+      catch (Error e) {
+        printerr("%s\n", e.message);
         status = 1;
         return false;
       }

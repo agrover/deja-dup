@@ -35,7 +35,7 @@ public void update_last_run_timestamp() throws Error
   cur_time.get_current_time();
   var cur_time_str = cur_time.to_iso8601();
   
-  var client = GConf.Client.get_default();
+  var client = get_gconf_client();
   client.set_string(DejaDup.LAST_RUN_KEY, cur_time_str);
 }
 
@@ -180,6 +180,19 @@ public bool set_bus_claimed(string busname, bool claim)
   }
   
   return true;
+}
+
+GConf.Client client;
+public void set_gconf_client(GConf.Client client_in)
+{
+  client = client_in;
+}
+
+public GConf.Client get_gconf_client()
+{
+  if (client == null)
+    client = GConf.Client.get_default();
+  return client;
 }
 
 } // end namespace

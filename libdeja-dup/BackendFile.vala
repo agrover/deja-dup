@@ -35,7 +35,7 @@ public class BackendFile : Backend
   
   string? get_location_from_gconf() throws Error
   {
-    var client = GConf.Client.get_default();
+    var client = get_gconf_client();
     var path = client.get_string(FILE_PATH_KEY);
     return path;
   }

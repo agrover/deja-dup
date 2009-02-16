@@ -43,14 +43,14 @@ public class BackendSSH : Backend
   
   int get_port() throws Error
   {
-    var client = GConf.Client.get_default();
+    var client = get_gconf_client();
     var port = client.get_int(SSH_PORT_KEY);
     return port > 0 ? port : 22;
   }
   
   string get_username() throws Error
   {
-    var client = GConf.Client.get_default();
+    var client = get_gconf_client();
     var username = client.get_string(SSH_USERNAME_KEY);
     if (username == null || username == "")
       throw new BackupError.BAD_CONFIG(_("No username specified"));
@@ -59,7 +59,7 @@ public class BackendSSH : Backend
   
   string get_server() throws Error
   {
-    var client = GConf.Client.get_default();
+    var client = get_gconf_client();
     var server = client.get_string(SSH_SERVER_KEY);
     if (server == null || server == "")
       throw new BackupError.BAD_CONFIG(_("No server specified"));
@@ -68,7 +68,7 @@ public class BackendSSH : Backend
   
   string get_directory() throws Error
   {
-    var client = GConf.Client.get_default();
+    var client = get_gconf_client();
     var directory = client.get_string(SSH_DIRECTORY_KEY);
     if (directory == null || directory == "")
       return "/";
@@ -113,7 +113,7 @@ public class BackendSSH : Backend
   string secret_key;
   public override void get_envp() throws Error
   {
-    var client = GConf.Client.get_default();
+    var client = get_gconf_client();
     gconf_id = client.get_string(SSH_USERNAME_KEY);
     id = gconf_id == null ? "" : gconf_id;
     
@@ -180,7 +180,7 @@ public class BackendSSH : Backend
   }
   
   void got_secret_key() {
-    var client = GConf.Client.get_default();
+    var client = get_gconf_client();
     if (id != gconf_id) {
       try {
         client.set_string(SSH_USERNAME_KEY, id);

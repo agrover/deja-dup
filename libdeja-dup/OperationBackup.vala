@@ -45,7 +45,7 @@ public class OperationBackup : Operation
   
   protected override List<string>? make_argv() throws Error
   {
-    var client = GConf.Client.get_default();
+    var client = get_gconf_client();
     
     var include_list = parse_dir_list(client.get_list(INCLUDE_LIST_KEY,
                                                       GConf.ValueType.STRING));

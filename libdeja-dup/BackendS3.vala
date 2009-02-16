@@ -47,7 +47,7 @@ public class BackendS3 : Backend
   
   public override string? get_location() throws Error
   {
-    var client = GConf.Client.get_default();
+    var client = get_gconf_client();
     
     var bucket = client.get_string(S3_BUCKET_KEY);
     var default_bucket = get_default_bucket();
@@ -113,7 +113,7 @@ public class BackendS3 : Backend
   
   public override string? get_location_pretty() throws Error
   {
-    var client = GConf.Client.get_default();
+    var client = get_gconf_client();
     var folder = client.get_string(S3_FOLDER_KEY);
     if (folder == null || folder == "")
       folder = "/";
@@ -126,7 +126,7 @@ public class BackendS3 : Backend
   string secret_key;
   public override void get_envp() throws Error
   {
-    var client = GConf.Client.get_default();
+    var client = get_gconf_client();
     gconf_id = client.get_string(S3_ID_KEY);
     id = gconf_id == null ? "" : gconf_id;
     
@@ -190,7 +190,7 @@ public class BackendS3 : Backend
   }
   
   void got_secret_key() {
-    var client = GConf.Client.get_default();
+    var client = get_gconf_client();
     if (id != gconf_id) {
       try {
         client.set_string(S3_ID_KEY, id);

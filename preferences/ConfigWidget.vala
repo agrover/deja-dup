@@ -26,7 +26,7 @@ public abstract class ConfigWidget : Gtk.EventBox
   string dir;
   protected GConf.Client client;
   construct {
-    client = GConf.Client.get_default();
+    client = DejaDup.get_gconf_client();
     
     if (key != null) {
       dir = key;

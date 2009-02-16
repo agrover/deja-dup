@@ -92,7 +92,7 @@ public abstract class Operation : Object
     set_session_inhibited(true);
     
     // Get encryption passphrase if needed
-    var client = GConf.Client.get_default();
+    var client = get_gconf_client();
     if (client.get_bool(ENCRYPT_KEY) && passphrase == null)
       get_passphrase(); // will call continue_with_passphrase when ready
     else
