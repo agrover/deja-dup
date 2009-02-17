@@ -1,3 +1,5 @@
+# -*- Mode: m4; indent-tabs-mode: nil; tab-width: 2 -*-
+#
 # Process this file with autoconf to produce a configure script.
 
 # Sets up autoconf.

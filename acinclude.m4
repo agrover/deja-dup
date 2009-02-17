@@ -1,4 +1,5 @@
-## acinclude.m4 -*-Shell-script-*-
+## -*- Mode: m4; indent-tabs-mode: nil; tab-width: 2 -*-
+##
 ## Copyright (C) 2001 Eazel, Inc.
 ## Author: Maciej Stachowiak <mjs@noisehavoc.org>
 ##         Kenneth Christiansen <kenneth@gnu.org>
