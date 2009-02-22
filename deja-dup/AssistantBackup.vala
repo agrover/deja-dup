@@ -65,7 +65,7 @@ public class AssistantBackup : AssistantOperation
     return _("Backing up");
   }
   
-  protected override Gdk.Pixbuf? get_op_icon()
+  protected override Gdk.Pixbuf? make_op_icon()
   {
     try {
       var filename = get_backup_icon_filename();

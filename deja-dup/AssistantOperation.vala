@@ -33,7 +33,7 @@ public abstract class AssistantOperation : Gtk.Assistant
   Gtk.TextView error_text_view;
   protected Gtk.Widget summary_page {get; private set;}
   
-  protected Gdk.Pixbuf icon {get; private set;}
+  protected Gdk.Pixbuf op_icon {get; private set;}
   DejaDup.Operation op;
   uint timeout_id;
   protected bool error_occurred {get; private set;}
@@ -41,7 +41,7 @@ public abstract class AssistantOperation : Gtk.Assistant
   
   construct
   {
-    icon = get_op_icon();
+    op_icon = make_op_icon();
     
     add_setup_pages();
     add_confirm_page();
@@ -58,7 +58,7 @@ public abstract class AssistantOperation : Gtk.Assistant
   protected abstract void add_setup_pages();
   protected abstract DejaDup.Operation create_op();
   protected abstract string get_progress_file_prefix();
-  protected abstract Gdk.Pixbuf? get_op_icon();
+  protected abstract Gdk.Pixbuf? make_op_icon();
   
   bool pulse()
   {
@@ -173,7 +173,7 @@ public abstract class AssistantOperation : Gtk.Assistant
               "title", _("Summary"),
               "page-type", Gtk.AssistantPageType.CONFIRM,
               "complete", true,
-              "header-image", icon);
+              "header-image", op_icon);
     confirm_page = page;
   }
 
@@ -185,7 +185,7 @@ public abstract class AssistantOperation : Gtk.Assistant
     // doesn't allow for cancelling.
     child_set(page,
               "page-type", Gtk.AssistantPageType.CONTENT,
-              "header-image", icon);
+              "header-image", op_icon);
     progress_page = page;
   }
   
@@ -196,7 +196,7 @@ public abstract class AssistantOperation : Gtk.Assistant
     child_set(page,
               "page-type", Gtk.AssistantPageType.SUMMARY,
               "complete", true,
-              "header-image", icon);
+              "header-image", op_icon);
     summary_page = page;
   }
   

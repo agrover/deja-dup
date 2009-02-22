@@ -221,7 +221,7 @@ public class AssistantRestore : AssistantOperation
     child_set(page,
               "title", _("Checking for Backups"),
               "complete", false,
-              "header-image", icon);
+              "header-image", op_icon);
     query_progress_page = page;
   }
   
@@ -232,7 +232,7 @@ public class AssistantRestore : AssistantOperation
     child_set(page,
               "title", _("Restore from When?"),
               "complete", true,
-              "header-image", icon);
+              "header-image", op_icon);
     date_page = page;
   }
   
@@ -243,7 +243,7 @@ public class AssistantRestore : AssistantOperation
     child_set(page,
               "title", _("Restore to Where?"),
               "complete", true,
-              "header-image", icon);
+              "header-image", op_icon);
     restore_dest_page = page;
   }
   
@@ -267,7 +267,7 @@ public class AssistantRestore : AssistantOperation
     return _("Restoring");
   }
   
-  protected override Gdk.Pixbuf? get_op_icon()
+  protected override Gdk.Pixbuf? make_op_icon()
   {
     try {
       var filename = get_restore_icon_filename();

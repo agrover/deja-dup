@@ -36,7 +36,7 @@ public abstract class RecursiveOp : Object
   protected virtual void finish_dir() {} // src is dir we are done with
   protected abstract RecursiveOp clone_for_info(FileInfo info);
   
-  int ref_count;
+  int refs;
   
   bool idle_action()
   {
@@ -135,16 +135,16 @@ public abstract class RecursiveOp : Object
   }
   
   void add_ref() {
-    ++ref_count;
+    ++refs;
   }
   
   void remove_ref() {
-    --ref_count;
+    --refs;
     check_ref();
   }
   
   void check_ref() {
-    if (ref_count == 0) {
+    if (refs == 0) {
       if (src_type == FileType.DIRECTORY)
         finish_dir();
       done();
