@@ -1,6 +1,6 @@
 # -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 
-SUBDIRS = data po vapi libdeja-dup applet monitor preferences deja-dup nautilus help
+SUBDIRS = data po vapi libdeja-dup applet monitor preferences deja-dup nautilus help tests
 
 # Distribute pot file
 dist-hook:

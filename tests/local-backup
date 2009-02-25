@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+# -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
+
+# Do a simple local backup
+# NOTE: This file is not finished.  I'll come back to it later.
+
+import ldtp
+import base
+import atspi
+
+deja = base.setup('file', encrypt=False)
+
+ldtp.click('dlgDéjàDup', 'btnBackup')
+ldtp.waittillguiexist('Backup')
+
+ldtp.click('dlgBackup', 'btnApply')
+
+def callback(event):
+  source = event.source
+  if isinstance(source, atspi.Accessible):
+    sourceStr = " source:%s"%(str(dogtail.tree.Node(source)))
+  else:
+    sourceStr = ""
+  print "Got event: %s%s"%(event.type, sourceStr)
+  #atspi.event_quit()
+
+ldtp.waittillguiexist('dlgBackup', 'lblYourfilesweresuccessfullybackedup.')
+
+base.quit()
+base.cleanup(True)
+

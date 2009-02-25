@@ -122,6 +122,7 @@ AC_CONFIG_FILES([Makefile
                  nautilus/Makefile
                  po/Makefile.in
                  preferences/Makefile
+                 tests/Makefile
                  vapi/Makefile])
 AC_OUTPUT
 
