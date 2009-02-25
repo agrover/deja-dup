@@ -65,6 +65,20 @@ public class BackendFile : Backend
   {
     return get_location_from_gconf();
   }
+  
+  public override void add_argv(Operation.Mode mode, ref List<string> argv)
+  {
+    if (mode == Operation.Mode.BACKUP) {
+      try {
+        var path = get_location_from_gconf();
+        if (path != null)
+          argv.prepend("--exclude=%s".printf(path));
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
+    }
+  }
 }
 
 } // end namespace

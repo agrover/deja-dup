@@ -36,9 +36,11 @@ public class BackendSSH : Backend
     return new BackendSSH(toplevel);
   }
   
-  public override void add_argv(ref List<string> argv) {
-    argv.append("--ssh-askpass");
-    argv.append("--ssh-options=-oStrictHostKeyChecking=no");
+  public override void add_argv(Operation.Mode mode, ref List<string> argv) {
+    if (mode == Operation.Mode.INVALID) {
+      argv.append("--ssh-askpass");
+      argv.append("--ssh-options=-oStrictHostKeyChecking=no");
+    }
   }
   
   int get_port() throws Error

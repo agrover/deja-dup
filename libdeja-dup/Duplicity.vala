@@ -85,7 +85,7 @@ public class Duplicity : Object
     backend_argv = new List<string>();
     foreach (string s in argv) saved_argv.append(s);
     foreach (string s in envp) saved_envp.append(s);
-    backend.add_argv(ref backend_argv);
+    backend.add_argv(Operation.Mode.INVALID, ref backend_argv);
     if (!encrypted)
       backend_argv.append("--no-encryption");
     

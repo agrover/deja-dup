@@ -138,6 +138,7 @@ public abstract class Operation : Object
       
     try {
       List<string> argv = make_argv();
+      backend.add_argv(mode, ref argv);
       
       string target = backend.get_location();
       

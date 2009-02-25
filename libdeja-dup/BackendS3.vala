@@ -37,8 +37,9 @@ public class BackendS3 : Backend
     return new BackendS3(toplevel);
   }
   
-  public override void add_argv(ref List<string> argv) {
-    argv.append("--s3-use-new-style");
+  public override void add_argv(Operation.Mode mode, ref List<string> argv) {
+    if (mode == Operation.Mode.INVALID)
+      argv.append("--s3-use-new-style");
   }
   
   string get_default_bucket() {

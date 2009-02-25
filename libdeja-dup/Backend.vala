@@ -35,7 +35,10 @@ public abstract class Backend : Object
     envp_ready(true, new List<string>());
   }
   
-  public virtual void add_argv(ref List<string> argv) {}
+  // Arguments needed only when the particular mode is active
+  // If mode == INVALID, arguments needed any time the backup is referenced.
+  public virtual void add_argv(Operation.Mode mode, ref List<string> argv) {}
+  
   public virtual void ask_password() {}
   
   public abstract Backend clone();
