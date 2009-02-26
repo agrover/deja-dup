@@ -109,12 +109,22 @@ public class StatusIcon : Gtk.StatusIcon
     }
   }
   
+  bool can_display_actions() {
+    weak List<string> caps = Notify.get_server_caps();
+    foreach (string cap in caps)
+      if (cap == "actions")
+        return true;
+    return false;
+  }
+  
   void notify_start() {
     note = new Notify.Notification.with_status_icon(_("Backup about to start"),
                        _("A scheduled backup will shortly begin.  You can instead choose to backup later or not at all."),
                        Config.PACKAGE, this);
-    note.add_action("skip", _("Skip Backup"), (Notify.ActionCallback)skip, this, null);
-    note.add_action("later", _("Backup Later"), (Notify.ActionCallback)later, this, null);
+    if (can_display_actions()) {
+      note.add_action("skip", _("Skip Backup"), (Notify.ActionCallback)skip, this, null);
+      note.add_action("later", _("Backup Later"), (Notify.ActionCallback)later, this, null);
+    }
     note.closed += begin_backup;
     try {
       note.show();
@@ -133,7 +143,8 @@ public class StatusIcon : Gtk.StatusIcon
     note = new Notify.Notification.with_status_icon(_("Encryption password needed"),
                        _("Please enter the encryption password for your backup files."),
                        "dialog-password", this);
-    note.add_action("default", _("Enter"), (Notify.ActionCallback)enter, this, null);
+    if (can_display_actions())
+      note.add_action("default", _("Enter"), (Notify.ActionCallback)enter, this, null);
     try {
       note.show();
     }
@@ -150,7 +161,8 @@ public class StatusIcon : Gtk.StatusIcon
     note = new Notify.Notification.with_status_icon(_("Server password needed"),
                        _("Please enter the server password for your backup."),
                        "dialog-password", this);
-    note.add_action("default", _("Enter"), (Notify.ActionCallback)enter, this, null);
+    if (can_display_actions())
+      note.add_action("default", _("Enter"), (Notify.ActionCallback)enter, this, null);
     try {
       note.show();
     }
@@ -163,13 +175,18 @@ public class StatusIcon : Gtk.StatusIcon
   void notify_error(DejaDup.OperationBackup op, string errstr, string? detail) {
     // TODO: Do something sane with detail.  Not urgent right now, it's only used for restore
     
-    // We want to stay open until user acknowledges our error/it times out
-    op.done -= send_done;
     fatal_error = true;
     note = new Notify.Notification.with_status_icon(_("Backup error occurred"),
                        errstr, "dialog-error", this);
-    note.add_action("rerun", _("Rerun"), (Notify.ActionCallback)rerun, this, null);
-    note.set_timeout(Notify.EXPIRES_NEVER);
+    if (can_display_actions()) {
+      // We want to stay open until user acknowledges our error/it times out
+      op.done -= send_done;
+      
+      note.add_action("rerun", _("Rerun"), (Notify.ActionCallback)rerun, this, null);
+      
+      // Doesn't seem like we can ask if daemon supports timeouts
+      note.set_timeout(Notify.EXPIRES_NEVER);
+    }
     note.closed += error_closed;
     try {
       note.show();
