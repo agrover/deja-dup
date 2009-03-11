@@ -6,25 +6,14 @@
 
 import ldtp
 import base
-import atspi
 
 deja = base.setup('file', encrypt=False)
 
-ldtp.click('dlgDéjàDup', 'btnBackup')
-ldtp.waittillguiexist('Backup')
+ldtp.click('frmDéjàDup', 'btnBackup')
+ldtp.waittillguiexist('frmBackup')
 
-ldtp.click('dlgBackup', 'btnApply')
-
-def callback(event):
-  source = event.source
-  if isinstance(source, atspi.Accessible):
-    sourceStr = " source:%s"%(str(dogtail.tree.Node(source)))
-  else:
-    sourceStr = ""
-  print "Got event: %s%s"%(event.type, sourceStr)
-  #atspi.event_quit()
-
-ldtp.waittillguiexist('dlgBackup', 'lblYourfilesweresuccessfullybackedup.')
+ldtp.click('frmBackup', 'btnApply')
+ldtp.waittillguiexist('frmBackup', 'lblYourfilesweresuccessfullybackedup')
 
 base.quit()
 base.cleanup(True)

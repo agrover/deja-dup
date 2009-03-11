@@ -45,14 +45,7 @@ def set_gconf_value(key, value, key_type = "string", list_type = None):
 def start_deja_dup():
   global gconf_dir
   ldtp.launchapp('deja-dup', ['--gconf-source=xml:readwrite:%s' % gconf_dir], env=1)
-  ldtp.wait(1)
-  print ldtp.getapplist()
-  print ldtp.getwindowlist()
-  print ldtp.guiexist('dlgDéjàDup')
-  print ldtp.guiexist('*DéjàDup')
-  print ldtp.guiexist('frmDéjàDup')
-  sys.exit(1)
-  ldtp.waittillguiexist('dlgDéjàDup')
+  ldtp.waittillguiexist('frmDéjàDup')
 
 local_dir = None
 def create_local_config():
