@@ -1,0 +1,26 @@
+#!/bin/sh
+# -*- Mode: sh; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
+
+set -e
+
+SCRIPTDIR=$(dirname "$0")
+SCRIPTDIR=$(readlink -m "$SCRIPTDIR")
+SRCDIR="$SCRIPTDIR/duplicity-src"
+INSTDIR="$SCRIPTDIR/duplicity"
+
+for tgz in "$SRCDIR"/*; do
+  DUPNAME=$(basename "$tgz" .tar.gz)
+  if [ -d "$INSTDIR/$DUPNAME" ]; then
+    continue
+  fi
+  
+  BUILDDIR=$(mktemp -d)
+  tar -xzf "$tgz" -C "$BUILDDIR"
+  
+  cd "$BUILDDIR"/*
+  ./setup.py install --root="$INSTDIR/$DUPNAME"
+  cd -
+  
+  rm -r "$BUILDDIR"
+done
+
