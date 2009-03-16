@@ -13,7 +13,7 @@ cleanup_dirs = []
 def setup(backend, encrypt = True):
   global gconf_dir, cleanup_dirs
   
-  environ['LANG'] = 'en_US.UTF-8'
+  environ['LANG'] = 'C'
   environ['PATH'] = '../deja-dup:../preferences:../applet:../monitor' + environ['PATH']
   
   gconf_dir = tempfile.mkdtemp()
@@ -44,7 +44,7 @@ def set_gconf_value(key, value, key_type = "string", list_type = None):
 
 def start_deja_dup():
   global gconf_dir
-  ldtp.launchapp('deja-dup', ['--gconf-source=xml:readwrite:%s' % gconf_dir], env=1)
+  ldtp.launchapp('deja-dup', ['--gconf-source=xml:readwrite:%s' % gconf_dir], delay=0)
   ldtp.waittillguiexist('frmDéjàDup')
 
 local_dir = None
