@@ -8,19 +8,42 @@ SCRIPTDIR=$(readlink -m "$SCRIPTDIR")
 SRCDIR="$SCRIPTDIR/duplicity-src"
 INSTDIR="$SCRIPTDIR/duplicity"
 
-for tgz in "$SRCDIR"/*; do
-  DUPNAME=$(basename "$tgz" .tar.gz)
+download_tgz()
+{
+  mkdir -p "$SRCDIR"
+  if [ ! -e "$SRCDIR/$1" ]; then
+    wget "http://download.savannah.gnu.org/releases-noredirect/duplicity/$1" -P "$SRCDIR"
+  fi
+}
+
+install_tgz()
+{
+  mkdir -p "$INSTDIR"
+  
+  TGZ="$SRCDIR/duplicity-$1.tar.gz"
+  
+  DUPNAME=$(basename "$TGZ" .tar.gz)
   if [ -d "$INSTDIR/$DUPNAME" ]; then
     continue
   fi
   
+  download_tgz $(basename "$TGZ")
+  
   BUILDDIR=$(mktemp -d)
-  tar -xzf "$tgz" -C "$BUILDDIR"
+  tar -xzf "$TGZ" -C "$BUILDDIR"
   
   cd "$BUILDDIR"/*
   ./setup.py install --root="$INSTDIR/$DUPNAME"
   cd -
   
   rm -r "$BUILDDIR"
-done
+}
+
+if [ -z "$1" ]; then
+  echo 'Must provide a duplicity version'
+  exit 1
+else
+  install_tgz "$1"
+  exit 0
+fi
 
