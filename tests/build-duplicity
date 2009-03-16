@@ -39,9 +39,31 @@ install_tgz()
   rm -r "$BUILDDIR"
 }
 
+install_bzr()
+{
+  mkdir -p "$SRCDIR"
+  if [ -d "$SRCDIR/duplicity-bzr" ]; then
+    cd "$SRCDIR/duplicity-bzr"
+    if LANG=C bzr update | grep "Tree is up to date"; then
+      install_tgz "bzr"
+      return
+    fi
+  else
+    # Don't use lp:duplicity because that likes to use bzr+ssh, which can prompt
+    # for ssh passphrase (which we don't want)
+    bzr co "http://bazaar.launchpad.net/~vcs-imports/duplicity/trunk" "$SRCDIR/duplicity-bzr"
+    cd "$SRCDIR/duplicity-bzr"
+  fi
+  ./dist/makedist "999" # fake a really big version number
+  mv "duplicity-999.tar.gz" "../duplicity-bzr.tar.gz"
+  install_tgz "bzr"
+}
+
 if [ -z "$1" ]; then
   echo 'Must provide a duplicity version'
   exit 1
+elif [ "$1" = "bzr" ]; then
+  install_bzr
 else
   install_tgz "$1"
   exit 0
