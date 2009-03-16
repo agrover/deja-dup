@@ -14,7 +14,31 @@ def setup(backend, encrypt = True):
   global gconf_dir, cleanup_dirs
   
   environ['LANG'] = 'C'
-  environ['PATH'] = '../deja-dup:../preferences:../applet:../monitor' + environ['PATH']
+  
+  extra_paths = '../deja-dup:../preferences:../applet:../monitor:'
+  extra_pythonpaths = ''
+  
+  version = None
+  if 'DEJA_DUP_DUPLICITY_VERSION' in environ:
+    version = environ['DEJA_DUP_DUPLICITY_VERSION']
+  if version != None:
+    duproot = './duplicity/duplicity-%s' % version
+    if not os.path.exists(duproot):
+      os.system('./build-duplicity')
+    if not os.path.exists(duproot):
+      print 'Could not find duplicity %s' % version
+      sys.exit(1)
+    
+    extra_paths += duproot + '/usr/bin:'
+    
+    # Also add the module path, but we have to find it
+    libdir = duproot + '/usr/lib/'
+    libdir += os.listdir(libdir)[0] # python2.5 or python2.6, etc
+    libdir += '/site-packages:'
+    extra_pythonpaths += libdir
+  
+  environ['PYTHONPATH'] = extra_pythonpaths + (environ['PYTHONPATH'] if 'PYTHONPATH' in environ else '')
+  environ['PATH'] = extra_paths + environ['PATH']
   
   gconf_dir = tempfile.mkdtemp()
   cleanup_dirs += [gconf_dir]
