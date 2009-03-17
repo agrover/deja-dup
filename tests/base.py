@@ -24,7 +24,7 @@ def setup(backend, encrypt = True):
   if 'DEJA_DUP_TEST_VERSION' in environ:
     version = environ['DEJA_DUP_TEST_VERSION']
   if version is None:
-    version = 'latest_duplicity'
+    version = latest_duplicity
   if version != 'system':
     os.system('./build-duplicity %s' % version)
     duproot = './duplicity/duplicity-%s' % version
