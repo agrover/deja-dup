@@ -22,9 +22,8 @@ install_tgz()
   
   TGZ="$SRCDIR/duplicity-$1.tar.gz"
   
-  DUPNAME=$(basename "$TGZ" .tar.gz)
-  if [ -d "$INSTDIR/$DUPNAME" ]; then
-    continue
+  if [ -d "$INSTDIR/duplicity-$1" ]; then
+    return
   fi
   
   download_tgz $(basename "$TGZ")
@@ -33,7 +32,7 @@ install_tgz()
   tar -xzf "$TGZ" -C "$BUILDDIR"
   
   cd "$BUILDDIR"/*
-  ./setup.py install --root="$INSTDIR/$DUPNAME"
+  ./setup.py install --root="$INSTDIR/duplicity-$1"
   cd -
   
   rm -r "$BUILDDIR"
@@ -64,6 +63,7 @@ if [ -z "$1" ]; then
   exit 1
 elif [ "$1" = "bzr" ]; then
   install_bzr
+  exit 0
 else
   install_tgz "$1"
   exit 0

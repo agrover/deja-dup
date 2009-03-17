@@ -11,6 +11,7 @@ latest_duplicity = '0.5.12'
 
 gconf_dir = None
 cleanup_dirs = []
+cleanup_mounts = []
 
 def setup(backend, encrypt = True):
   global gconf_dir, cleanup_dirs, latest_duplicity
@@ -32,10 +33,10 @@ def setup(backend, encrypt = True):
       print 'Could not find duplicity %s' % version
       sys.exit(1)
     
-    extra_paths += duproot + '/usr/bin:'
+    extra_paths += duproot + '/usr/local/bin:'
     
     # Also add the module path, but we have to find it
-    libdir = duproot + '/usr/lib/'
+    libdir = duproot + '/usr/local/lib/'
     libdir += os.listdir(libdir)[0] # python2.5 or python2.6, etc
     libdir += '/site-packages:'
     extra_pythonpaths += libdir
@@ -57,9 +58,11 @@ def setup(backend, encrypt = True):
   start_deja_dup()
 
 def cleanup(success):
-  global cleanup_dirs
+  global cleanup_dirs, cleanup_mounts
+  for d in cleanup_mounts:
+    os.system('gksudo "umount %s"' % d)
   for d in cleanup_dirs:
-    os.system("rm -r %s" % d)
+    os.system("rm -rf %s" % d)
   sys.exit(0 if success else 1)
 
 def set_gconf_value(key, value, key_type = "string", list_type = None):
@@ -84,14 +87,20 @@ def create_local_config():
   set_gconf_value("include-list", '[%s/data/source]' % sys.path[0], "list", "string")
 
 def create_mount(path=None, mtype='ext3', size=20):
-  global cleanup_dirs
+  global cleanup_dirs, cleanup_mounts
   mount_dir = tempfile.mkdtemp()
   cleanup_dirs += [mount_dir]
+  cleanup_mounts += [mount_dir + '/mount']
   if path is None:
     path = mount_dir + '/blob'
-    os.system('dd if=/dev/zero of=%s bs=1M count=%d' % (path, size))
+    os.system('dd if=/dev/zero of=%s bs=1 count=0 seek=%dM' % (path, size))
+    if mtype == 'ext3':
+      args = '-F'
+    else:
+      args = ''
+    os.system('mkfs -t %s %s %s' % (mtype, args, path))
   os.system('mkdir %s/mount' % mount_dir)
-  os.system('gksudo mount -t %s -o loop,size-limit=%d %s %s/mount' % (mtype, size*1024*1024, path, mount_dir))
+  os.system('gksudo "mount -t %s -o loop,sizelimit=%d %s %s/mount"' % (mtype, size*1024*1024, path, mount_dir))
   return mount_dir + '/mount'
 
 def quit():
