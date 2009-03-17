@@ -83,6 +83,17 @@ def create_local_config():
   set_gconf_value("file/path", local_dir)
   set_gconf_value("include-list", '[%s/data/source]' % sys.path[0], "list", "string")
 
+def create_mount(path=None, mtype='ext3', size=20):
+  global cleanup_dirs
+  mount_dir = tempfile.mkdtemp()
+  cleanup_dirs += [mount_dir]
+  if path is None:
+    path = mount_dir + '/blob'
+    os.system('dd if=/dev/zero of=%s bs=1M count=%d' % (path, size))
+  os.system('mkdir %s/mount' % mount_dir)
+  os.system('gksudo mount -t %s -o loop,size-limit=%d %s %s/mount' % (mtype, size*1024*1024, path, mount_dir))
+  return mount_dir + '/mount'
+
 def quit():
   ldtp.selectmenuitem('frmDéjàDup', 'mnuFile;mnuQuit')
 
