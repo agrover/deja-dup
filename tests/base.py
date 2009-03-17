@@ -13,7 +13,7 @@ gconf_dir = None
 cleanup_dirs = []
 
 def setup(backend, encrypt = True):
-  global gconf_dir, cleanup_dirs
+  global gconf_dir, cleanup_dirs, latest_duplicity
   
   environ['LANG'] = 'C'
   
