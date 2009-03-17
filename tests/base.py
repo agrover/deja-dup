@@ -7,6 +7,8 @@ import sys
 import os
 import ldtp
 
+latest_duplicity = '0.5.12'
+
 gconf_dir = None
 cleanup_dirs = []
 
@@ -19,10 +21,10 @@ def setup(backend, encrypt = True):
   extra_pythonpaths = ''
   
   version = None
-  if 'DEJA_DUP_DUPLICITY_VERSION' in environ:
-    version = environ['DEJA_DUP_DUPLICITY_VERSION']
+  if 'DEJA_DUP_TEST_VERSION' in environ:
+    version = environ['DEJA_DUP_TEST_VERSION']
   if version is None:
-    version = 'bzr'
+    version = 'latest_duplicity'
   if version != 'system':
     os.system('./build-duplicity %s' % version)
     duproot = './duplicity/duplicity-%s' % version
