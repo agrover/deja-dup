@@ -49,7 +49,7 @@ def setup(backend, encrypt = True):
   cleanup_dirs += [gconf_dir]
   
   # Now install default rules into our temporary config dir
-  os.system('GCONF_CONFIG_SOURCE="xml:readwrite:%s" gconftool-2 --makefile-install-rule %s' % (gconf_dir, '../data/deja-dup.schemas.in'))
+  os.system('GCONF_CONFIG_SOURCE="xml:readwrite:%s" gconftool-2 --makefile-install-rule %s > /dev/null' % (gconf_dir, '../data/deja-dup.schemas.in'))
   
   if backend == 'file':
     create_local_config()
