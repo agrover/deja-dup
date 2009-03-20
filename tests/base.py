@@ -42,6 +42,7 @@ def setup(backend, encrypt = True):
     extra_pythonpaths += libdir
   
   environ['PYTHONPATH'] = extra_pythonpaths + (environ['PYTHONPATH'] if 'PYTHONPATH' in environ else '')
+	print os.environ['PYTHONPATH']
   environ['PATH'] = extra_paths + environ['PATH']
   
   gconf_dir = tempfile.mkdtemp()
@@ -106,3 +107,12 @@ def create_mount(path=None, mtype='ext3', size=20):
 def quit():
   ldtp.selectmenuitem('frmDéjàDup', 'mnuFile;mnuQuit')
 
+def run(method):
+	success = False
+	try:
+		method()
+		success = True
+	except:
+	  quit()
+	finally:
+	  cleanup(success)

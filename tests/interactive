@@ -8,14 +8,11 @@
 import base
 import ldtp
 
-base.setup('file')
+def test():
+	base.setup('file')
+	
+	# Let user play with it for a while, maximum 2 hours
+	if ldtp.waittillguinotexist('frmDéjàDup', guiTimeOut=60*60*2) == 0:
+		base.quit()
 
-# Let user play with it for a while, maximum 2 hours
-try:
-  if ldtp.waittillguinotexist('frmDéjàDup', guiTimeOut=60*60*2) == 0:
-    base.quit()
-except:
-  base.quit()
-finally:
-  base.cleanup(True)
-
+base.run(test)
