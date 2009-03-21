@@ -17,10 +17,8 @@ cleanup_mounts = []
 # if we're running inside a distcheck for example.  So note that we check for
 # srcdir and use it if available.  Else, default to current directory.
 
-def setup(backend, encrypt = True):
+def setup(backend = None, encrypt = True):
   global gconf_dir, cleanup_dirs, latest_duplicity
-  
-  print environ
   
   if 'srcdir' in environ:
     srcdir = environ['srcdir']
@@ -59,7 +57,7 @@ def setup(backend, encrypt = True):
   cleanup_dirs += [gconf_dir]
   
   # Now install default rules into our temporary config dir
-  os.system('GCONF_CONFIG_SOURCE="xml:readwrite:%s" gconftool-2 --makefile-install-rule %s > /dev/null' % (gconf_dir, '%s/data/deja-dup.schemas.in' % srcdir))
+  os.system('GCONF_CONFIG_SOURCE="xml:readwrite:%s" gconftool-2 --makefile-install-rule %s > /dev/null' % (gconf_dir, '%s/../data/deja-dup.schemas.in' % srcdir))
   
   if backend == 'file':
     create_local_config()
@@ -89,14 +87,20 @@ def start_deja_dup():
   ldtp.appundertest('deja-dup')
   ldtp.waittillguiexist('frmDéjàDup')
 
-local_dir = None
-def create_local_config():
-  global local_dir, cleanup_dirs
-  local_dir = tempfile.mkdtemp()
-  cleanup_dirs += [local_dir]
+def create_local_config(dest=None, includes=None, excludes=None):
+  global cleanup_dirs
+  if dest is None:
+    dest = tempfile.mkdtemp()
+  cleanup_dirs += [dest]
   set_gconf_value("backend", "file")
-  set_gconf_value("file/path", local_dir)
-  set_gconf_value("include-list", '[%s/data/source]' % sys.path[0], "list", "string")
+  set_gconf_value("file/path", dest)
+  if includes is not None:
+    includes += '$HOME'
+    includes = '[' + ','.join(includes) + ']'
+    set_gconf_value("include-list", includes, "list", "string")
+  if excludes is not None:
+    excludes = '[' + ','.join(excludes) + ']'
+    set_gconf_value("exclude-list", excludes, "list", "string")
 
 def create_mount(path=None, mtype='ext3', size=20):
   global cleanup_dirs, cleanup_mounts

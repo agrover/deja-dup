@@ -7,9 +7,25 @@
 
 import base
 import ldtp
+import sys
+import os
 
 def test():
-	base.setup('file')
+  version = None
+  dest = None
+  for arg in sys.argv[1:]:
+    if arg == 'vfat':
+      dest = base.create_mount(mtype='vfat')
+    elif arg == 'ext3':
+      dest = base.create_mount(mtype='ext3')
+    else:
+      version = arg
+  
+  if version is not None:
+    os.environ['DEJA_DUP_TEST_VERSION'] = version
+  
+	base.setup()
+	base.create_local_config(dest)
 	
 	# Let user play with it for a while, maximum 2 hours
 	if ldtp.waittillguinotexist('frmDéjàDup', guiTimeOut=60*60*2) == 0:
