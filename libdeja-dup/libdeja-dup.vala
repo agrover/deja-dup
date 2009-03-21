@@ -183,9 +183,18 @@ public bool set_bus_claimed(string busname, bool claim)
 }
 
 GConf.Client client;
-public void set_gconf_client(GConf.Client client_in)
+public void set_gconf_client()
 {
-  client = client_in;
+  var source_str = Environment.get_variable("GCONF_CONFIG_SOURCE");
+  if (source_str != null) {
+    try {
+      var engine = GConf.Engine.get_for_address(source_str);
+      client = GConf.Client.get_for_engine(engine);
+    }
+    catch (Error e) {
+      printerr("%s\n", e.message);
+    }
+  }
 }
 
 public GConf.Client get_gconf_client()

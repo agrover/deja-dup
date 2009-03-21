@@ -77,6 +77,7 @@ class DejaDupApplet : Object
       var icon = new StatusIcon();
       icon.done += Gtk.main_quit;
       
+      DejaDup.set_gconf_client();
       Gtk.main();
       
       DejaDup.set_bus_claimed("operation", false);

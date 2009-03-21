@@ -22,10 +22,8 @@ using GLib;
 class DejaDupPreferences : Object
 {
   static bool show_version = false;
-  static string[] gconf_sources = null;
   static const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
-    {"gconf-source", 0, OptionFlags.HIDDEN, OptionArg.STRING_ARRAY, ref gconf_sources, null, null},
     {null}
   };
   
@@ -36,23 +34,6 @@ class DejaDupPreferences : Object
     if (show_version) {
       print("%s %s\n", _("Déjà Dup Preferences"), Config.VERSION);
       return false;
-    }
-    
-    if (gconf_sources != null) {
-      var list = new SList<string>();
-      int i = 0;
-      while (gconf_sources[i] != null)
-        list.append(gconf_sources[i++]);
-      try {
-        var engine = GConf.Engine.get_for_addresses(list);
-        var client = GConf.Client.get_for_engine(engine);
-        DejaDup.set_gconf_client(client);
-      }
-      catch (Error e) {
-        printerr("%s\n", e.message);
-        status = 1;
-        return false;
-      }
     }
     
     return true;
@@ -98,6 +79,7 @@ class DejaDupPreferences : Object
     if (!handle_console_options(out status))
       return status;
     
+    DejaDup.set_gconf_client();
     Gtk.init(ref args); // to open display ('cause we passed false above)
     
     // We don't have a solid domain for Déjà Dup...

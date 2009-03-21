@@ -55,9 +55,10 @@ def setup(backend = None, encrypt = True):
   
   gconf_dir = tempfile.mkdtemp()
   cleanup_dirs += [gconf_dir]
+  environ['GCONF_CONFIG_SOURCE'] = 'xml:readwrite:' + gconf_dir
   
   # Now install default rules into our temporary config dir
-  os.system('GCONF_CONFIG_SOURCE="xml:readwrite:%s" gconftool-2 --makefile-install-rule %s > /dev/null' % (gconf_dir, '%s/../data/deja-dup.schemas.in' % srcdir))
+  os.system('gconftool-2 --makefile-install-rule %s > /dev/null' % ('%s/../data/deja-dup.schemas.in' % srcdir))
   
   if backend == 'file':
     create_local_config()
@@ -75,15 +76,13 @@ def cleanup(success):
   sys.exit(0 if success else 1)
 
 def set_gconf_value(key, value, key_type = "string", list_type = None):
-  global gconf_dir
   cmd = "gconftool-2 --config-source=xml:readwrite:%s -t %s -s /apps/deja-dup/%s %s" % (gconf_dir, key_type, key, value)
   if key_type == "list" and list_type:
     cmd += " --list-type=%s" % list_type
   os.system(cmd)
 
 def start_deja_dup():
-  global gconf_dir
-  ldtp.launchapp('deja-dup', ['--gconf-source=xml:readwrite:%s' % gconf_dir], delay=0)
+  ldtp.launchapp('deja-dup', delay=0)
   ldtp.appundertest('deja-dup')
   ldtp.waittillguiexist('frmDéjàDup')
 
