@@ -3,7 +3,7 @@
 
 set -e
 
-SCRIPTDIR=$(dirname "$0")
+SCRIPTDIR='.'
 SCRIPTDIR=$(readlink -m "$SCRIPTDIR")
 SRCDIR="$SCRIPTDIR/duplicity-src"
 INSTDIR="$SCRIPTDIR/duplicity"
@@ -32,7 +32,7 @@ install_tgz()
   tar -xzf "$TGZ" -C "$BUILDDIR"
   
   cd "$BUILDDIR"/*
-  ./setup.py install --root="$INSTDIR/duplicity-$1"
+  ./setup.py install --root="$INSTDIR/duplicity-$1" --prefix="/usr/local" > /dev/null
   cd -
   
   rm -r "$BUILDDIR"

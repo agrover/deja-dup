@@ -13,8 +13,19 @@ gconf_dir = None
 cleanup_dirs = []
 cleanup_mounts = []
 
+# The current directory is always the 'distdir'.  But 'srcdir' may be different
+# if we're running inside a distcheck for example.  So note that we check for
+# srcdir and use it if available.  Else, default to current directory.
+
 def setup(backend, encrypt = True):
   global gconf_dir, cleanup_dirs, latest_duplicity
+  
+  print environ
+  
+  if 'srcdir' in environ:
+    srcdir = environ['srcdir']
+  else:
+    srcdir = '.'
   
   environ['LANG'] = 'C'
   
@@ -27,8 +38,8 @@ def setup(backend, encrypt = True):
   if version is None:
     version = latest_duplicity
   if version != 'system':
-    os.system('./build-duplicity %s' % version)
-    duproot = './duplicity/duplicity-%s' % version
+    os.system('%s/build-duplicity %s' % (srcdir, version))
+    duproot = './duplicity/duplicity-%s' % (version)
     if not os.path.exists(duproot):
       print 'Could not find duplicity %s' % version
       sys.exit(1)
@@ -42,14 +53,13 @@ def setup(backend, encrypt = True):
     extra_pythonpaths += libdir
   
   environ['PYTHONPATH'] = extra_pythonpaths + (environ['PYTHONPATH'] if 'PYTHONPATH' in environ else '')
-	print os.environ['PYTHONPATH']
   environ['PATH'] = extra_paths + environ['PATH']
   
   gconf_dir = tempfile.mkdtemp()
   cleanup_dirs += [gconf_dir]
   
   # Now install default rules into our temporary config dir
-  os.system('GCONF_CONFIG_SOURCE="xml:readwrite:%s" gconftool-2 --makefile-install-rule %s > /dev/null' % (gconf_dir, '../data/deja-dup.schemas.in'))
+  os.system('GCONF_CONFIG_SOURCE="xml:readwrite:%s" gconftool-2 --makefile-install-rule %s > /dev/null' % (gconf_dir, '%s/data/deja-dup.schemas.in' % srcdir))
   
   if backend == 'file':
     create_local_config()
@@ -76,6 +86,7 @@ def set_gconf_value(key, value, key_type = "string", list_type = None):
 def start_deja_dup():
   global gconf_dir
   ldtp.launchapp('deja-dup', ['--gconf-source=xml:readwrite:%s' % gconf_dir], delay=0)
+  ldtp.appundertest('deja-dup')
   ldtp.waittillguiexist('frmDéjàDup')
 
 local_dir = None
@@ -105,14 +116,14 @@ def create_mount(path=None, mtype='ext3', size=20):
   return mount_dir + '/mount'
 
 def quit():
-  ldtp.selectmenuitem('frmDéjàDup', 'mnuFile;mnuQuit')
+  return ldtp.selectmenuitem('frmDéjàDup', 'mnuFile;mnuQuit')
 
 def run(method):
 	success = False
 	try:
-		method()
-		success = True
-	except:
+		success = method()
+	except Exception, e:
+	  print e
 	  quit()
 	finally:
 	  cleanup(success)

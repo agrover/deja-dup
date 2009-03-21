@@ -1,20 +1,30 @@
 # -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 
-BASE_FILES = \
-	base.py
+# This special name 'TESTS' will trigger an automatically-created 'check'
+# target used during distcheck, for example.  This is nice.
 
 TESTS = \
-	local-backup
+	basic/quit \
+	basic/badversion
+#	backup/local
 
 test:
 	@for t in $(TESTS); do \
 		echo -n "Testing $$t..."; \
-		if ./$$t  2>/dev/null; then \
-			echo " PASSED"; \
+		if ./$$t >/dev/null 2>&1; then \
+			echo -e " \e[32mPASSED\e[0m"; \
 		else \
-			echo " FAIL"; \
+			echo -e " \e[31mFAILED\e[0m"; \
 		fi; \
 	done
 
-EXTRA_DIST = $(TESTS) $(BASE_FILES) data
+EXTRA_DIST = $(TESTS) \
+	base.py \
+	basic/base.py \
+	backup/base.py \
+	build-duplicity \
+	interactive \
+	README
 
+distclean-local:
+	rm -rf duplicity duplicity-src

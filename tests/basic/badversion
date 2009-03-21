@@ -8,7 +8,10 @@ import os
 def test():
 	os.environ['DEJA_DUP_TEST_VERSION'] = '0.5.02'
 	base.setup('file')
-	ldtp.waittillguiexist('Error')
+	ldtp.waittillguiexist('dlgError')
+	rv = ldtp.guiexist('dlgError', "lblDuplicity'sversionistooold")
+	ldtp.click('dlgError', 'btnOK')
+	return rv
 
 base.run(test)
 
