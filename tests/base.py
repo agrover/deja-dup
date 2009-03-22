@@ -9,6 +9,7 @@ import ldtp
 
 latest_duplicity = '0.5.12'
 
+temp_dir = None
 gconf_dir = None
 cleanup_dirs = []
 cleanup_mounts = []
@@ -53,8 +54,8 @@ def setup(backend = None, encrypt = True):
   environ['PYTHONPATH'] = extra_pythonpaths + (environ['PYTHONPATH'] if 'PYTHONPATH' in environ else '')
   environ['PATH'] = extra_paths + environ['PATH']
   
-  gconf_dir = tempfile.mkdtemp()
-  cleanup_dirs += [gconf_dir]
+  gconf_dir = get_temp_name('gconf')
+  os.system('mkdir -p %s' % gconf_dir)
   environ['GCONF_CONFIG_SOURCE'] = 'xml:readwrite:' + gconf_dir
   
   # Now install default rules into our temporary config dir
@@ -87,10 +88,9 @@ def start_deja_dup():
   ldtp.waittillguiexist('frmDéjàDup')
 
 def create_local_config(dest=None, includes=None, excludes=None):
-  global cleanup_dirs
   if dest is None:
-    dest = tempfile.mkdtemp()
-  cleanup_dirs += [dest]
+    dest = get_temp_name('local')
+    os.system('mkdir -p %s' % dest)
   set_gconf_value("backend", "file")
   set_gconf_value("file/path", dest)
   if includes is not None:
@@ -101,22 +101,40 @@ def create_local_config(dest=None, includes=None, excludes=None):
     excludes = '[' + ','.join(excludes) + ']'
     set_gconf_value("exclude-list", excludes, "list", "string")
 
+def create_temp_dir():
+  global temp_dir, cleanup_dirs
+  if temp_dir is not None:
+    return
+  if 'DEJA_DUP_TEST_TMP' in environ:
+    temp_dir = environ['DEJA_DUP_TEST_TMP']
+    os.system('mkdir -p %s' % temp_dir)
+    # Don't automatically clean it
+  else:
+    temp_dir = tempfile.mkdtemp()
+    cleanup_dirs += [temp_dir]
+
+def get_temp_name(extra):
+  global temp_dir
+  create_temp_dir()
+  return temp_dir + '/' + extra
+
 def create_mount(path=None, mtype='ext3', size=20):
-  global cleanup_dirs, cleanup_mounts
-  mount_dir = tempfile.mkdtemp()
-  cleanup_dirs += [mount_dir]
-  cleanup_mounts += [mount_dir + '/mount']
+  global cleanup_mounts
   if path is None:
-    path = mount_dir + '/blob'
-    os.system('dd if=/dev/zero of=%s bs=1 count=0 seek=%dM' % (path, size))
-    if mtype == 'ext3':
-      args = '-F'
-    else:
-      args = ''
-    os.system('mkfs -t %s %s %s' % (mtype, args, path))
-  os.system('mkdir %s/mount' % mount_dir)
-  os.system('gksudo "mount -t %s -o loop,sizelimit=%d %s %s/mount"' % (mtype, size*1024*1024, path, mount_dir))
-  return mount_dir + '/mount'
+    path = get_temp_name('blob')
+    if not os.path.exists(path):
+      os.system('dd if=/dev/zero of=%s bs=1 count=0 seek=%dM' % (path, size))
+      if mtype == 'ext3':
+        args = '-F'
+      else:
+        args = ''
+      os.system('mkfs -t %s %s %s' % (mtype, args, path))
+  mount_dir = get_temp_name('mount')
+  os.system('mkdir -p %s' % mount_dir)
+  if os.system('gksudo "mount -t %s -o loop,sizelimit=%d %s %s"' % (mtype, size*1024*1024, path, mount_dir)):
+    raise Exception("Couldn't mount")
+  cleanup_mounts += [mount_dir]
+  return mount_dir
 
 def quit():
   return ldtp.selectmenuitem('frmDéjàDup', 'mnuFile;mnuQuit')
