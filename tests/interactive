@@ -15,6 +15,7 @@ def test():
   version = None
   mtype = None
   tmpid = None
+  sources = None
   for arg in sys.argv[1:]:
     if arg == 'vfat':
       mtype = arg
@@ -24,6 +25,8 @@ def test():
       tmpid = arg.split('=', 1)[-1]
     elif arg.startswith('dup='):
       version = arg.split('=', 1)[-1]
+    elif arg.startswith('source='):
+      sources = arg.split('=', 1)[-1]
   
   if version is not None:
     os.environ['DEJA_DUP_TEST_VERSION'] = version
@@ -32,9 +35,11 @@ def test():
     os.environ['DEJA_DUP_TEST_TMP'] = tmpdir
   if mtype is not None:
     dest = base.create_mount(mtype=mtype)
+  if sources is not None:
+    sources = map(lambda s: os.path.abspath(s), [sources])
   
   base.setup()
-  base.create_local_config(dest)
+  base.create_local_config(dest, sources)
   
   # Let user play with it for a while, maximum 2 hours
   if ldtp.waittillguinotexist('frmDéjàDup', guiTimeOut=60*60*2) == 0:
