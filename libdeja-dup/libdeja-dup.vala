@@ -159,21 +159,25 @@ public bool set_bus_claimed(string busname, bool claim)
     var conn = DBus.Bus.@get(DBus.BusType.SESSION);
     
     dynamic DBus.Object bus = conn.get_object ("org.freedesktop.DBus",
-                                                "/org/freedesktop/DBus",
-                                                "org.freedesktop.DBus");
+                                               "/org/freedesktop/DBus",
+                                               "org.freedesktop.DBus");
     
     if (claim) {
       // Try to register service in session bus.
       // The flag '4' means do not add ourselves to the queue of applications
       // wanting the name, if this request fails.
       uint32 result = bus.request_name("net.launchpad.deja-dup." + busname,
-                                     (uint32)4);
+                                       (uint32)4);
       
       if (result == DBus.RequestNameReply.EXISTS)
         return false;
     }
-    else
-      bus.release_name("net.launchpad.deja-dup." + busname);
+    else {
+      // We have to assign reply to a variable because it is a dynamic binding
+      // and otherwise, generated code will expect no return value.
+      uint32 result = bus.release_name("net.launchpad.deja-dup." + busname);
+      result = result; // to silence warning about not using it.
+    }
   }
   catch (Error e) {
     warning("%s\n", e.message);
