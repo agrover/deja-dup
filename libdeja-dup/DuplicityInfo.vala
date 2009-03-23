@@ -30,6 +30,7 @@ public class DuplicityInfo : Object
   public bool has_broken_cleanup {get; private set; default = false; }
   public bool has_backup_progress {get; private set; default = false; }
   public bool has_restore_progress {get; private set; default = false; }
+  public bool new_time_format {get; private set; default = false; }
   
   static DuplicityInfo info = null;
   public static DuplicityInfo get_default() {
@@ -65,13 +66,12 @@ public class DuplicityInfo : Object
       return false;
     }
     major = ver_tokens[0].to_int();
-    if (ver_tokens[1] == null) {
-      show_missing_duplicity_error(parent, null);
-      return false;
+    // Don't error out if no minor or micro.  Duplicity might not have them?
+    if (ver_tokens[1] != null) {
+      minor = ver_tokens[1].to_int();
+      if (ver_tokens[2] != null)
+        micro = ver_tokens[2].to_int();
     }
-    minor = ver_tokens[1].to_int();
-    if (ver_tokens[2] != null) // Don't error out if no micro.  Duplicity might not have one?
-      micro = ver_tokens[2].to_int();
     
     var good_enough = meets_requirements();
     if (!good_enough) {
@@ -85,6 +85,8 @@ public class DuplicityInfo : Object
       has_broken_cleanup = true;
     if (meets_version(0, 5, 6))
       has_restore_progress = true;
+    if (meets_version(0, 5, 10))
+      new_time_format = true;
     
     return true;
   }
