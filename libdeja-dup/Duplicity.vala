@@ -328,7 +328,9 @@ public class Duplicity : Object
         // Very possibly a FAT file system that can't handle the colons that 
         // duplicity likes to use.  Try again with --short-filenames
         // But first make sure we aren't already doing that.
-        restart_with_short_filenames_if_needed();
+        // Happens on backup only.
+        if (!DuplicityInfo.get_default().new_time_format)
+          restart_with_short_filenames_if_needed();
       }
       break;
     case "CollectionsError":
@@ -439,7 +441,7 @@ public class Duplicity : Object
         in_chain = true;
       else if (in_chain && line.length > 0 && line[0] == ' ') {
         // OK, appears to be a date line.  Try to parse.  Should look like:
-        // ' inc TIMESTR NUMVOLS'.  Since there's a space at the beginnning,
+        // ' inc TIMESTR NUMVOLS'.  Since there's a space at the beginning,
         // when we tokenize it, we should expect an extra token at the front.
         string[] tokens = line.split(" ");
         if (tokens.length > 2 && timeval.from_iso8601(tokens[2]))
