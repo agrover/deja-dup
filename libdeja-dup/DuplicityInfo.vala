@@ -30,6 +30,7 @@ public class DuplicityInfo : Object
   public bool has_broken_cleanup {get; private set; default = false; }
   public bool has_backup_progress {get; private set; default = false; }
   public bool has_restore_progress {get; private set; default = false; }
+  public bool has_collection_status {get; private set; default = false; }
   public bool new_time_format {get; private set; default = false; }
   
   static DuplicityInfo info = null;
@@ -79,8 +80,10 @@ public class DuplicityInfo : Object
       return false;
     }
     
-    if (meets_version(0, 5, 4))
+    if (meets_version(0, 5, 4)) {
       has_backup_progress = true;
+      has_collection_status = true;
+    }
     if (equals_version(0, 5, 4) || equals_version(0, 5, 5))
       has_broken_cleanup = true;
     if (meets_version(0, 5, 6))

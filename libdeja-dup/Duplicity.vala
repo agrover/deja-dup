@@ -31,6 +31,7 @@ public class Duplicity : Object
   public signal void collection_dates(List<string>? dates);
   
   public Gtk.Window toplevel {get; construct;}
+  public Operation.Mode original_mode {get; private set;}
   public Operation.Mode mode {get; private set;}
   public bool error_issued {get; private set; default = false;}
   
@@ -53,7 +54,8 @@ public class Duplicity : Object
   
   protected enum State {
     NORMAL,
-    DRY_RUN,
+    DRY_RUN, // used when backing up, and we need to first get time estimate
+    STATUS, // used when backing up, and we need to first get collection info
     CLEANUP
   }
   protected State state {get; set;}
@@ -69,8 +71,13 @@ public class Duplicity : Object
   double progress_total; // zero, unless we already know limit
   double progress_count; // count of how far we are along in the current instance
   
+  bool checked_collection_info = false;
+  bool got_collection_info = false;
+  List<string> collection_info = null;
+  
   public Duplicity(Operation.Mode mode, Gtk.Window? win) {
     this.mode = mode;
+    this.original_mode = mode;
     toplevel = win;
   }
   
@@ -94,10 +101,10 @@ public class Duplicity : Object
   }
   
   public void cancel() {
-    var old_mode = mode;
+    var prev_mode = mode;
     mode = Operation.Mode.INVALID;
     
-    if (old_mode == Operation.Mode.BACKUP) {
+    if (prev_mode == Operation.Mode.BACKUP) {
       if (cleanup())
         return;
     }
@@ -116,12 +123,21 @@ public class Duplicity : Object
     string action_desc = null;
     string custom_local = null;
     
-    switch (mode) {
+    switch (original_mode) {
     case Operation.Mode.BACKUP:
+      // If duplicity is using the new time format, we need to first check if
+      // the user has files in the old 'short-filenames' format.  If so, we'll
+      // add to that chain.
+      if (!checked_collection_info &&
+          DuplicityInfo.get_default().has_collection_status) {
+        mode = Operation.Mode.STATUS;
+        state = State.STATUS;
+        action_desc = _("Preparing...");
+      }
       // If we're backing up, and the version of duplicity supports it, we should
       // first run using --dry-run to get the total size of the backup, to make
       // accurate progress bars.
-      if (DuplicityInfo.get_default().has_backup_progress &&
+      else if (DuplicityInfo.get_default().has_backup_progress &&
           !has_progress_total) {
         state = State.DRY_RUN;
         action_desc = _("Preparing...");
@@ -201,6 +217,28 @@ public class Duplicity : Object
         // that cancel
         success = false;
         cancelled = true;
+        break;
+      
+      case State.STATUS:
+        if (success) {
+          checked_collection_info = true;
+          mode = Operation.Mode.BACKUP;
+          
+          if (!got_collection_info || collection_info == null) {
+            // Checking for backup files added the short-filename parameter.
+            // If there were no files, we want to take it out again and
+            // proceed with a normal filename backup.
+            foreach (weak string s in backend_argv) {
+              if (s == "--short-filenames")
+                backend_argv.remove(s);
+            }
+          }
+          
+          if (restart())
+            return;
+          else
+            success = false;
+        }
         break;
       
       case State.NORMAL:
@@ -456,6 +494,11 @@ public class Duplicity : Object
       if (restart_with_short_filenames_if_needed())
         return;
     }
+    
+    got_collection_info = true;
+    collection_info = new List<string>();
+    foreach (string s in dates)
+      collection_info.append(s); // we want to keep our own copy too
     
     collection_dates(dates);
   }
