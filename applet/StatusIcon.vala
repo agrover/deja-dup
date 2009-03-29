@@ -86,7 +86,7 @@ public class StatusIcon : Gtk.StatusIcon
     fatal_error = false;
     progress = 0;
     
-    op = new DejaDup.OperationBackup(null, get_x11_window_id());
+    op = new DejaDup.OperationBackup(null, hacks_status_icon_get_x11_window_id(this));
     op.done += send_done;
     op.passphrase_required += notify_passphrase;
     op.backend_password_required += notify_backend_password;

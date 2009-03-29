@@ -90,7 +90,7 @@ public File[] parse_dir_list(SList<string>? dirs)
 public void show_uri(Gtk.Window parent, string link)
 {
   try {
-    Gtk.show_uri (null, link, Gdk.CURRENT_TIME);
+    hacks_show_uri (link);
   } catch (Error e) {
     Gtk.MessageDialog dlg = new Gtk.MessageDialog (parent, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not display %s"), link);
     dlg.format_secondary_text("%s", e.message);

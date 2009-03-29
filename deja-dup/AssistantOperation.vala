@@ -118,9 +118,7 @@ public abstract class AssistantOperation : Gtk.Assistant
     
     // Try to show nice error icon
     try {
-      var pixbuf = Gtk.IconTheme.get_default().load_icon(
-                     Gtk.STOCK_DIALOG_ERROR, 48, 
-                     Gtk.IconLookupFlags.FORCE_SIZE);
+      var pixbuf = hacks_get_icon_at_size(Gtk.STOCK_DIALOG_ERROR, 48);
       child_set(summary_page,
                 "header-image", pixbuf);
     }

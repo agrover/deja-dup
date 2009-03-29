@@ -157,7 +157,7 @@ public class Duplicity : Object
         
         try {
           // won't have correct permissions...
-          local_file.make_directory_with_parents(null);
+          hacks_file_make_directory_with_parents(local_file);
         }
         catch (Error e) {
           show_error(e.message);

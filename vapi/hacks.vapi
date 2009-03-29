@@ -17,4 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+uint32 hacks_status_icon_get_x11_window_id (Gtk.StatusIcon icon);
+bool hacks_show_uri (string uri) throws GLib.Error;
+bool hacks_file_make_directory_with_parents (GLib.File file) throws GLib.Error;
+Gdk.Pixbuf hacks_get_icon_at_size (string name, int size) throws GLib.Error;
+GLib.FileType hacks_file_query_file_type (GLib.File file, GLib.FileQueryInfoFlags flags);
 

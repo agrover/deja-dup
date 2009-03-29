@@ -44,7 +44,7 @@ AC_DEFINE_UNQUOTED(LOCALE_DIR, "${PREFIX}/${DATADIRNAME}/locale",[Locale directo
 AC_DEFINE_UNQUOTED(THEME_DIR, "${PREFIX}/${DATADIRNAME}/icons",[Icon directory])
 AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package data directory])
 
-GTK_REQ_VER=2.14
+GTK_REQ_VER=2.12
 
 # Check dependencies
 PKG_CHECK_MODULES(DUP,
@@ -80,6 +80,7 @@ PKG_CHECK_MODULES(LIBRARY,
                   gconf-2.0
                   libgnomeui-2.0
                   unique-1.0
+                  dbus-glib-1
                   gnome-keyring-1)
 AC_SUBST(LIBRARY_CFLAGS)
 AC_SUBST(LIBRARY_LIBS)

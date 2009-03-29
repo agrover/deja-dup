@@ -12,6 +12,7 @@ VALA_CFLAGS = \
 	--pkg gnome-keyring-1 \
 	--pkg libdeja-dup \
 	--pkg unix \
+	--pkg hacks \
 	--pkg config
 
 AM_CFLAGS = \

@@ -22,8 +22,16 @@
 #define __HACKS_H__
 
 #include <gnome-keyring.h>
+#include <gtk/gtk.h>
+#include <gio/gio.h>
 
 extern const GnomeKeyringPasswordSchema *PASSPHRASE_SCHEMA;
+
+extern guint32 hacks_status_icon_get_x11_window_id (GtkStatusIcon *icon);
+extern gboolean hacks_show_uri (const gchar *uri, GError **error);
+extern gboolean hacks_file_make_directory_with_parents (GFile *file, GError **error);
+extern GdkPixbuf *hacks_get_icon_at_size (const gchar *name, gint size, GError **error);
+extern GFileType hacks_file_query_file_type (GFile *file, GFileQueryInfoFlags flags);
 
 #endif
 
