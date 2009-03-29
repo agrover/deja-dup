@@ -2,8 +2,9 @@ Source: deja-dup
 Section: utils
 Priority: optional
 Maintainer: Michael Terry <mike@mterry.name>
+Homepage: https://launchpad.net/deja-dup
 Build-Depends: cdbs,
-               debhelper,
+               debhelper (>= 5),
                pkg-config,
                libglib2.0-dev,
                libgtk2.0-dev (>= 2.12),
@@ -14,8 +15,9 @@ Build-Depends: cdbs,
                libunique-dev,
                libnautilus-extension-dev,
                gnome-doc-utils (>= 0.3.2),
+               librarian-dev,
                rarian-compat
-Standards-Version: 3.7.2
+Standards-Version: 3.8.0
 Vcs-Bzr: http://bazaar.launchpad.net/~deja-dup-team/deja-dup/trunk
 
 Package: deja-dup
@@ -23,20 +25,33 @@ Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          duplicity (>= 0.5.03)
-Recommends: python-boto (>= 0.9d)
+Recommends: python-boto (>= 0.9d), ssh-client | openssh-client
 Suggests: util-linux (>= 2.13)
 Description: Backup utility
  Déjà Dup is a simple backup program. It hides the complexity of
- doing backups the 'right way' (encrypted, off-site) and uses
- duplicity as the backend.
+ doing backups the 'right way' (encrypted, off-site, and regular)
+ and uses duplicity as the backend.
+ .
+ Features:
+  * Uses Amazon S3, an SSH server, or a local folder as a backup location
+  * Securely encrypts your data
+  * Schedules regular backups
+  * Integrates well into your GNOME desktop
 
 Package: deja-dup-dbg
 Architecture: any
-Depends: deja-dup (= ${binary:Version})
+Depends: deja-dup (= ${binary:Version}),
+         ${misc:Depends}
 Priority: extra
-Description: Backup utility
+Description: Déjà Dup debugging symbols
  Déjà Dup is a simple backup program. It hides the complexity of
- doing backups the 'right way' (encrypted, off-site) and uses
- duplicity as the backend.
+ doing backups the 'right way' (encrypted, off-site, and regular)
+ and uses duplicity as the backend.
+ .
+ Features:
+  * Uses Amazon S3, an SSH server, or a local folder as a backup location
+  * Securely encrypts your data
+  * Schedules regular backups
+  * Integrates well into your GNOME desktop
  .
  This package contains gdb debugging symbols for the deja-dup package.

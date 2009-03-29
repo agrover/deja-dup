@@ -2,6 +2,8 @@
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/autotools.mk
 include /usr/share/cdbs/1/class/gnome.mk
+include /usr/share/cdbs/1/rules/simple-patchsys.mk
 
 DEB_DESTDIR := $(CURDIR)/debian/deja-dup
+DEB_DH_MAKESHLIBS_ARGS += --exclude=libnautilus-deja-dup.so
 
