@@ -122,8 +122,8 @@ public class StatusIcon : Gtk.StatusIcon
                        _("A scheduled backup will shortly begin.  You can instead choose to backup later or not at all."),
                        Config.PACKAGE, this);
     if (can_display_actions()) {
-      note.add_action("skip", _("Skip Backup"), (Notify.ActionCallback)skip, this, null);
-      note.add_action("later", _("Backup Later"), (Notify.ActionCallback)later, this, null);
+      note.add_action("skip", _("Skip Backup"), skip);
+      note.add_action("later", _("Backup Later"), later);
     }
     note.closed += begin_backup;
     try {
@@ -144,7 +144,7 @@ public class StatusIcon : Gtk.StatusIcon
                        _("Please enter the encryption password for your backup files."),
                        "dialog-password", this);
     if (can_display_actions())
-      note.add_action("default", _("Enter"), (Notify.ActionCallback)enter, this, null);
+      note.add_action("default", _("Enter"), enter);
     try {
       note.show();
     }
@@ -162,7 +162,7 @@ public class StatusIcon : Gtk.StatusIcon
                        _("Please enter the server password for your backup."),
                        "dialog-password", this);
     if (can_display_actions())
-      note.add_action("default", _("Enter"), (Notify.ActionCallback)enter, this, null);
+      note.add_action("default", _("Enter"), enter);
     try {
       note.show();
     }
@@ -182,7 +182,7 @@ public class StatusIcon : Gtk.StatusIcon
       // We want to stay open until user acknowledges our error/it times out
       op.done -= send_done;
       
-      note.add_action("rerun", _("Rerun"), (Notify.ActionCallback)rerun, this, null);
+      note.add_action("rerun", _("Rerun"), rerun);
       
       // Doesn't seem like we can ask if daemon supports timeouts
       note.set_timeout(Notify.EXPIRES_NEVER);
@@ -207,40 +207,40 @@ public class StatusIcon : Gtk.StatusIcon
       done();
   }
   
-  static void enter(Notify.Notification? note, string? action, StatusIcon icon)
+  void enter(Notify.Notification? note, string? action)
   {
     try {
-      if (icon.need_passphrase) {
-        icon.op.ask_passphrase();
-        icon.need_passphrase = false;
+      if (need_passphrase) {
+        op.ask_passphrase();
+        need_passphrase = false;
       }
       else
-        icon.op.ask_backend_password();
+        op.ask_backend_password();
     }
     catch (Error e) {
       warning("%s\n", e.message);
     }
-    icon.end_notify(note);
+    end_notify(note);
   }
   
   void activate_enter()
   {
-    enter(note, null, this);
+    enter(note, null);
   }
   
-  static void rerun(Notify.Notification? note, string? action, StatusIcon icon)
+  void rerun(Notify.Notification? note, string? action)
   {
-    icon.fatal_error = false;
-    icon.start(false);
+    fatal_error = false;
+    start(false);
   }
   
-  static void later(Notify.Notification? note, string? action, StatusIcon icon)
+  void later(Notify.Notification? note, string? action)
   {
-    icon.end_notify(note);
-    icon.op.cancel();
+    end_notify(note);
+    op.cancel();
   }
   
-  static void skip(Notify.Notification? note, string? action, StatusIcon icon)
+  void skip(Notify.Notification? note, string? action)
   {
     // Fake a run by setting today's timestamp as the 'last-run' gconf key
     try {
@@ -250,8 +250,8 @@ public class StatusIcon : Gtk.StatusIcon
       warning("%s\n", e.message);
     }
     
-    icon.end_notify(note);
-    icon.op.cancel();
+    end_notify(note);
+    op.cancel();
   }
   
   void show_menu(StatusIcon status_icon, uint button, uint activate_time)
@@ -284,11 +284,11 @@ public class StatusIcon : Gtk.StatusIcon
   }
   
   void later_clicked(Gtk.MenuItem item) {
-    later(note, null, this);
+    later(note, null);
   }
   
   void skip_clicked(Gtk.MenuItem item) {
-    skip(note, null, this);
+    skip(note, null);
   }
   
   void about_clicked(Gtk.MenuItem item) {
