@@ -93,6 +93,8 @@ public class DuplicityInstance : Object
       argv.prepend("-c2"); // best-effort class (can't use idle as normal user on <2.6.25)
       argv.prepend("ionice");
     }
+    if (Environment.find_program_in_path("nice") != null)
+      argv.prepend("nice");
     
     string cmd = null;
     string[] real_argv = new string[argv.length()];
