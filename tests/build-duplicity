@@ -22,7 +22,7 @@ install_tgz()
   
   TGZ="$SRCDIR/duplicity-$1.tar.gz"
   
-  if [ -d "$INSTDIR/duplicity-$1" ]; then
+  if [ "$1" != "bzr" ] && [ -d "$INSTDIR/duplicity-$1" ]; then
     return
   fi
   
@@ -44,8 +44,10 @@ install_bzr()
   if [ -d "$SRCDIR/duplicity-bzr" ]; then
     cd "$SRCDIR/duplicity-bzr"
     if LANG=C bzr update | grep "Tree is up to date"; then
-      install_tgz "bzr"
-      return
+      #install_tgz "bzr"
+      #return
+      : # ignore...  Still want to makedist.  Doesn't cost much to redo, and
+        # lets us package changes made in the tree since last update
     fi
   else
     # Don't use lp:duplicity because that likes to use bzr+ssh, which can prompt
