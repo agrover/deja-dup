@@ -27,7 +27,6 @@ BUILT_SOURCES = \
 
 deja_dup_applet_SOURCES = \
 	$(deja_dup_applet_VALASOURCES:.vala=.c) \
-	$(deja_dup_applet_VALASOURCES:.vala=.h) \
 	$(deja_dup_applet_VALASOURCES)
 
 deja-dup-applet.stamp: $(deja_dup_applet_VALASOURCES)

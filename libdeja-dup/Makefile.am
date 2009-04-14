@@ -47,13 +47,13 @@ BUILT_SOURCES = \
 libdeja_dup_la_SOURCES = \
 	hacks.c hacks.h \
 	PassphraseSchema.c PassphraseSchema.h \
+	deja-dup.h \
 	$(libdeja_dup_la_VALASOURCES:.vala=.c) \
-	$(libdeja_dup_la_VALASOURCES:.vala=.h) \
 	$(libdeja_dup_la_VALASOURCES)
 
 libdeja-dup.stamp: $(libdeja_dup_la_VALASOURCES)
 if USE_VALAC
-	$(VALAC) -C $(VALA_CFLAGS) $^
+	$(VALAC) -C -H deja-dup.h $(VALA_CFLAGS) $^
 	touch $@
 else
 	@echo "ERROR: Valac compilation is disabled, but the C sources are out-of-date."

@@ -20,7 +20,6 @@ BUILT_SOURCES = \
 
 deja_dup_monitor_SOURCES = \
 	$(deja_dup_monitor_VALASOURCES:.vala=.c) \
-	$(deja_dup_monitor_VALASOURCES:.vala=.h) \
 	$(deja_dup_monitor_VALASOURCES)
 
 deja-dup-monitor.stamp: $(deja_dup_monitor_VALASOURCES)

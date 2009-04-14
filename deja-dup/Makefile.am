@@ -33,7 +33,6 @@ BUILT_SOURCES = \
 
 deja_dup_SOURCES = \
 	$(deja_dup_VALASOURCES:.vala=.c) \
-	$(deja_dup_VALASOURCES:.vala=.h) \
 	$(deja_dup_VALASOURCES)
 
 deja-dup.stamp: $(deja_dup_VALASOURCES)

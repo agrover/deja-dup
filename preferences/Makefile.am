@@ -38,7 +38,6 @@ BUILT_SOURCES = \
 
 deja_dup_preferences_SOURCES = \
 	$(deja_dup_preferences_VALASOURCES:.vala=.c) \
-	$(deja_dup_preferences_VALASOURCES:.vala=.h) \
 	$(deja_dup_preferences_VALASOURCES)
 
 deja-dup-preferences.stamp: $(deja_dup_preferences_VALASOURCES)
