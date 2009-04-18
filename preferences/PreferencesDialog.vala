@@ -179,6 +179,7 @@ public class PreferencesDialog : Gtk.Dialog
     ++row;
     
     w = new ConfigList(DejaDup.INCLUDE_LIST_KEY);
+    w.set_size_request(250, 80);
     label = new Gtk.Label(_("I_nclude:"));
     label.set("use-underline", true,
               "xalign", 0.0f,
@@ -193,6 +194,7 @@ public class PreferencesDialog : Gtk.Dialog
     ++row;
     
     w = new ConfigList(DejaDup.EXCLUDE_LIST_KEY);
+    w.set_size_request(250, 120);
     label = new Gtk.Label(_("E_xclude:"));
     label.set("use-underline", true,
               "xalign", 0.0f,

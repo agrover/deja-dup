@@ -48,12 +48,17 @@ public class ConfigList : ConfigWidget
     remove_button = new Gtk.Button.from_stock(Gtk.STOCK_REMOVE);
     remove_button.clicked += handle_remove;
     
+    var scroll = new Gtk.ScrolledWindow(null, null);
+    scroll.hscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
+    scroll.vscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
+    
     var hbox = new Gtk.HBox(false, 6);
     var vbox = new Gtk.VBox(false, 6);
     
     vbox.pack_start(add_button, false, false, 0);
     vbox.pack_start(remove_button, false, false, 0);
-    hbox.add(tree);
+    scroll.add(tree);
+    hbox.add(scroll);
     hbox.pack_start(vbox, false, false, 0);
     add(hbox);
     
