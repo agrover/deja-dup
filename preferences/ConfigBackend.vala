@@ -37,6 +37,7 @@ public class ConfigBackend : ConfigChoice
     
     store.set_sort_column_id(0, Gtk.SortType.ASCENDING);
     
+    this.default_val = "s3";
     init(store, 1);
   }
 }

@@ -24,6 +24,7 @@ public class ConfigChoice : ConfigWidget
   public signal void changed(string val);
   
   protected Gtk.ComboBox combo;
+  protected string default_val = null;
   construct {
     combo = new Gtk.ComboBox.text();
     add(combo);
@@ -69,14 +70,17 @@ public class ConfigChoice : ConfigWidget
   
   protected override void set_from_config()
   {
-    string confval;
+    string confval = null;
     try {
-        confval = client.get_string(key);
+      confval = client.get_string(key);
     }
     catch (Error e) {
       warning("%s\n", e.message);
-      return;
     }
+    if (confval == null || confval == "")
+      confval = default_val;
+    if (confval == null)
+      return;
     
     bool valid;
     Gtk.TreeIter iter;

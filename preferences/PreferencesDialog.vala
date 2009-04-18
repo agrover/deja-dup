@@ -238,8 +238,11 @@ public class PreferencesDialog : Gtk.Dialog
     periodic_toggle.check();
     ++row;
     
-    Value val = backend.get_current_value();
-    handle_backend_changed(backend, val.get_string());
+    Value? val = backend.get_current_value();
+    if (val != null)
+      handle_backend_changed(backend, val.get_string());
+    else
+      handle_backend_changed(backend, "");
     vbox.add(table);
   }
   
