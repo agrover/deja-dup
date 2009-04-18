@@ -76,6 +76,7 @@ public abstract class AssistantOperation : Gtk.Assistant
   void set_progress_label(DejaDup.Operation op, string label)
   {
     progress_label.label = label;
+    progress_file_label.label = "";
   }
   
   void set_progress_label_file(DejaDup.Operation op, File file)
