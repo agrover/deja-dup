@@ -86,6 +86,8 @@ public class OperationBackup : Operation
       rv.append(Path.build_filename(dir, ".thumbnails"));
       rv.append(Path.build_filename(dir, ".gvfs"));
       rv.append(Path.build_filename(dir, ".xsession-errors"));
+      rv.append(Path.build_filename(dir, ".recently-used.xbel"));
+      rv.append(Path.build_filename(dir, ".recent-applications.xbel"));
     }
     
     // Some problematic directories like /tmp and /proc should be left alone
