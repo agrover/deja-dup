@@ -85,6 +85,7 @@ public class OperationBackup : Operation
     if (dir != null) {
       rv.append(Path.build_filename(dir, ".thumbnails"));
       rv.append(Path.build_filename(dir, ".gvfs"));
+      rv.append(Path.build_filename(dir, ".xsession-errors"));
     }
     
     // Some problematic directories like /tmp and /proc should be left alone
