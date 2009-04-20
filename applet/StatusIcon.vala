@@ -33,7 +33,7 @@ public class StatusIcon : Gtk.StatusIcon
   construct {
     icon_name = Config.PACKAGE;
     Idle.add(start_idle);
-    popup_menu += show_menu;
+    popup_menu.connect(show_menu);
   }
   
   ~StatusIcon()
@@ -48,18 +48,18 @@ public class StatusIcon : Gtk.StatusIcon
     }
   }
   
-  void send_done(DejaDup.OperationBackup op, bool success)
+  void send_done(DejaDup.Operation op, bool success)
   {
     done();
   }
   
-  void set_action_desc(DejaDup.OperationBackup op, string action)
+  void set_action_desc(DejaDup.Operation op, string action)
   {
     this.action = action;
     update_tooltip();
   }
   
-  void note_progress(DejaDup.OperationBackup op, double percent)
+  void note_progress(DejaDup.Operation op, double percent)
   {
     this.progress = percent;
     update_tooltip();
@@ -87,12 +87,12 @@ public class StatusIcon : Gtk.StatusIcon
     progress = 0;
     
     op = new DejaDup.OperationBackup(null, hacks_status_icon_get_x11_window_id(this));
-    op.done += send_done;
-    op.passphrase_required += notify_passphrase;
-    op.backend_password_required += notify_backend_password;
-    op.raise_error += notify_error;
-    op.action_desc_changed += set_action_desc;
-    op.progress += note_progress;
+    op.done.connect(send_done);
+    op.passphrase_required.connect(notify_passphrase);
+    op.backend_password_required.connect(notify_backend_password);
+    op.raise_error.connect(notify_error);
+    op.action_desc_changed.connect(set_action_desc);
+    op.progress.connect(note_progress);
     
     if (warn)
       notify_start();
@@ -125,7 +125,7 @@ public class StatusIcon : Gtk.StatusIcon
       note.add_action("skip", _("Skip Backup"), skip);
       note.add_action("later", _("Backup Later"), later);
     }
-    note.closed += begin_backup;
+    note.closed.connect(begin_backup);
     try {
       note.show();
     }
@@ -135,10 +135,10 @@ public class StatusIcon : Gtk.StatusIcon
     }
   }
   
-  bool notify_passphrase(DejaDup.OperationBackup op) {
+  bool notify_passphrase(DejaDup.Operation op) {
     need_passphrase = true;
     set_blinking(true);
-    activate += activate_enter;
+    activate.connect(activate_enter);
     
     note = new Notify.Notification.with_status_icon(_("Encryption password needed"),
                        _("Please enter the encryption password for your backup files."),
@@ -154,9 +154,9 @@ public class StatusIcon : Gtk.StatusIcon
     return false; // don't immediately ask user, wait for our response
   }
   
-  bool notify_backend_password(DejaDup.OperationBackup op) {
+  bool notify_backend_password(DejaDup.Operation op) {
     set_blinking(true);
-    activate += activate_enter;
+    activate.connect(activate_enter);
     
     note = new Notify.Notification.with_status_icon(_("Server password needed"),
                        _("Please enter the server password for your backup."),
@@ -172,7 +172,7 @@ public class StatusIcon : Gtk.StatusIcon
     return false; // don't immediately ask user, wait for our response
   }
   
-  void notify_error(DejaDup.OperationBackup op, string errstr, string? detail) {
+  void notify_error(DejaDup.Operation op, string errstr, string? detail) {
     // TODO: Do something sane with detail.  Not urgent right now, it's only used for restore
     
     fatal_error = true;
@@ -180,14 +180,14 @@ public class StatusIcon : Gtk.StatusIcon
                        errstr, "dialog-error", this);
     if (can_display_actions()) {
       // We want to stay open until user acknowledges our error/it times out
-      op.done -= send_done;
+      op.done.disconnect(send_done);
       
       note.add_action("rerun", _("Rerun"), rerun);
       
       // Doesn't seem like we can ask if daemon supports timeouts
       note.set_timeout(Notify.EXPIRES_NEVER);
     }
-    note.closed += error_closed;
+    note.closed.connect(error_closed);
     try {
       note.show();
     }
@@ -198,7 +198,7 @@ public class StatusIcon : Gtk.StatusIcon
   
   void end_notify(Notify.Notification? note) {
     set_blinking(false);
-    activate -= activate_enter;
+    activate.disconnect(activate_enter);
   }
   
   void error_closed(Notify.Notification note)
@@ -254,29 +254,29 @@ public class StatusIcon : Gtk.StatusIcon
     op.cancel();
   }
   
-  void show_menu(StatusIcon status_icon, uint button, uint activate_time)
+  void show_menu(Gtk.StatusIcon status_icon, uint button, uint activate_time)
   {
     var menu = new Gtk.Menu();
     
     Gtk.MenuItem item;
     
     item = new Gtk.MenuItem.with_mnemonic(_("Backup _Later"));
-    item.activate += later_clicked;
+    item.activate.connect(later_clicked);
     menu.append(item);
     
     item = new Gtk.MenuItem.with_mnemonic(_("_Skip Backup"));
-    item.activate += skip_clicked;
+    item.activate.connect(skip_clicked);
     menu.append(item);
     
     item = new Gtk.SeparatorMenuItem();
     menu.append(item);
     
     item = new Gtk.ImageMenuItem.from_stock(Gtk.STOCK_PREFERENCES, null);
-    item.activate += preferences_clicked;
+    item.activate.connect(preferences_clicked);
     menu.append(item);
     
     item = new Gtk.ImageMenuItem.from_stock(Gtk.STOCK_ABOUT, null);
-    item.activate += about_clicked;
+    item.activate.connect(about_clicked);
     menu.append(item);
     
     menu.show_all();

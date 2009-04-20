@@ -43,10 +43,10 @@ public class ConfigList : ConfigWidget
                                        "text", 1);
     
     add_button = new Gtk.Button.from_stock(Gtk.STOCK_ADD);
-    add_button.clicked += handle_add;
+    add_button.clicked.connect(handle_add);
     
     remove_button = new Gtk.Button.from_stock(Gtk.STOCK_REMOVE);
-    remove_button.clicked += handle_remove;
+    remove_button.clicked.connect(handle_remove);
     
     var scroll = new Gtk.ScrolledWindow(null, null);
     scroll.hscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
@@ -64,7 +64,7 @@ public class ConfigList : ConfigWidget
     
     set_from_config();
     handle_selection_change(tree.get_selection());
-    tree.get_selection().changed += handle_selection_change;
+    tree.get_selection().changed.connect(handle_selection_change);
   }
   
   protected override void set_from_config()

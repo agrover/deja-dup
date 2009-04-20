@@ -77,7 +77,7 @@ public class AssistantBackup : AssistantOperation
     }
   }
   
-  protected override void do_prepare(AssistantOperation assist, Gtk.Widget page)
+  protected override void do_prepare(Gtk.Assistant assist, Gtk.Widget page)
   {
     base.do_prepare(assist, page);
     

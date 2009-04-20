@@ -175,7 +175,7 @@ public class OperationRestore : Operation
                   relpath, errstr));
   }
   
-  void mv_error(RecursiveMove move, File src, File dst, string errstr)
+  void mv_error(RecursiveOp move, File src, File dst, string errstr)
   {
     var dest_top = File.new_for_path(dest);
     var relative_dst = dest_top.get_relative_path(dst);
@@ -198,7 +198,7 @@ public class OperationRestore : Operation
     // move each of the specific files over, ignoring their parent directories.
     if (restore_files == null) {
       var move = new RecursiveMove(sourcef, destf);
-      move.raise_error += mv_error;
+      move.raise_error.connect(mv_error);
       move.start();
     }
     else {
@@ -209,7 +209,7 @@ public class OperationRestore : Operation
         var full_dest = destf.resolve_relative_path(rel_file_path);
         
         var move = new RecursiveMove(full_source, full_dest);
-        move.raise_error += mv_error;
+        move.raise_error.connect(mv_error);
         move.start();
       }
     }

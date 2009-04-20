@@ -92,7 +92,7 @@ class DejaDupApp : Object
       while (filenames[i] != null)
         file_list.append(File.new_for_commandline_arg(filenames[i++]));
       toplevel = new AssistantRestore.with_files(file_list);
-      toplevel.destroy += (t) => {Gtk.main_quit();};
+      toplevel.destroy.connect((t) => {Gtk.main_quit();});
     }
     else
       toplevel = new MainWindow();

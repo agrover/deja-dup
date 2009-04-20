@@ -46,7 +46,7 @@ public class ToggleGroup : Object
   }
   
   construct {
-    toggle.toggled += (t) => {check();};
+    toggle.toggled.connect((t) => {check();});
   }
 }
 

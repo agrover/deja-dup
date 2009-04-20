@@ -123,22 +123,22 @@ public class AssistantRestore : AssistantOperation
     var orig_radio = new Gtk.RadioButton(null);
     orig_radio.set("label", _("Restore files to _original locations"),
                    "use-underline", true);
-    orig_radio.toggled += (r) => {if (r.active) restore_location = "/";};
+    orig_radio.toggled.connect((r) => {if (r.active) restore_location = "/";});
     
     var cust_radio = new Gtk.RadioButton(null);
     cust_radio.set("label", _("Restore to _specific folder"),
                    "use-underline", true,
                    "group", orig_radio);
-    cust_radio.toggled += (r) => {
+    cust_radio.toggled.connect((r) => {
       if (r.active)
         restore_location = cust_button.get_filename();
       cust_box.sensitive = r.active;
-    };
+    });
     
     cust_button =
       new Gtk.FileChooserButton(_("Choose destination for restored files"),
                                 Gtk.FileChooserAction.SELECT_FOLDER);
-    cust_button.selection_changed += (b) => {restore_location = b.get_filename();};
+    cust_button.selection_changed.connect((b) => {restore_location = b.get_filename();});
     
     var cust_label = new Gtk.Label("    " + _("Restore _folder:"));
     cust_label.set("mnemonic-widget", cust_button,
@@ -302,7 +302,7 @@ public class AssistantRestore : AssistantOperation
       show_error(query_op, _("No backups to restore"), null);
   }
   
-  protected void query_finished(DejaDup.OperationStatus op, bool success)
+  protected void query_finished(DejaDup.Operation op, bool success)
   {
     if (success && !error_occurred) {
       var next_page = do_forward(get_current_page());
@@ -322,9 +322,9 @@ public class AssistantRestore : AssistantOperation
   protected void do_query()
   {
     query_op = new DejaDup.OperationStatus(this);
-    query_op.collection_dates += handle_collection_dates;
-    query_op.done += query_finished;
-    ((DejaDup.Operation)query_op).raise_error += show_error;
+    query_op.collection_dates.connect(handle_collection_dates);
+    query_op.done.connect(query_finished);
+    ((DejaDup.Operation)query_op).raise_error.connect(show_error);
     
     try {
       query_op.start();
@@ -362,7 +362,7 @@ public class AssistantRestore : AssistantOperation
     return next;
   }
   
-  protected override void do_prepare(AssistantOperation assist, Gtk.Widget page)
+  protected override void do_prepare(Gtk.Assistant assist, Gtk.Widget page)
   {
     base.do_prepare(assist, page);
     

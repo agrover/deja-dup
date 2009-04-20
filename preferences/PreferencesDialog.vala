@@ -39,7 +39,7 @@ public class PreferencesDialog : Gtk.Dialog
         "has-separator", false);
     add_buttons(Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE,
                 Gtk.STOCK_HELP, Gtk.ResponseType.HELP);
-    response += handle_response;
+    response.connect(handle_response);
     
     var table = new Gtk.Table(0, 3, false);
     table.set("border-width", 3);
@@ -52,7 +52,7 @@ public class PreferencesDialog : Gtk.Dialog
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
     ConfigBackend backend = new ConfigBackend(DejaDup.BACKEND_KEY);
-    backend.changed += handle_backend_changed;
+    backend.changed.connect(handle_backend_changed);
     label = new Gtk.Label(_("_Backup location:"));
     label.set("mnemonic-widget", backend,
               "use-underline", true,
@@ -66,7 +66,7 @@ public class PreferencesDialog : Gtk.Dialog
     
     w = new Gtk.Image.from_stock(Gtk.STOCK_HELP, Gtk.IconSize.BUTTON);
     var button = new Gtk.Button();
-    button.clicked += handle_link_clicked;
+    button.clicked.connect(handle_link_clicked);
     button.add(w);
     table.attach(button, 2, 3, row, row + 1,
                  Gtk.AttachOptions.FILL,
@@ -246,7 +246,7 @@ public class PreferencesDialog : Gtk.Dialog
     vbox.add(table);
   }
   
-  void handle_backend_changed(ConfigBackend backend, string val)
+  void handle_backend_changed(ConfigWidget backend, string val)
   {
     for (int i = 0; i < NUM_LISTS; ++i) {
       bool show = false;
@@ -267,7 +267,7 @@ public class PreferencesDialog : Gtk.Dialog
     }
   }
   
-  void handle_response(PreferencesDialog dlg, int response) {
+  void handle_response(Gtk.Dialog dlg, int response) {
     switch (response) {
     case Gtk.ResponseType.HELP:
       DejaDup.show_uri(dlg, "ghelp:deja-dup#deja-dup-prefs");

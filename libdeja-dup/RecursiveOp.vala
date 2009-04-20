@@ -47,7 +47,7 @@ public abstract class RecursiveOp : Object
   public void start()
   {
     Idle.add(idle_action);
-    done += (m) => {Gtk.main_quit();};
+    done.connect((m) => {Gtk.main_quit();});
     Gtk.main();
   }
   
@@ -122,8 +122,8 @@ public abstract class RecursiveOp : Object
       add_ref();
       var op = clone_for_info(info);
       op.@ref();
-      op.done += (m) => {remove_ref(); m.unref();};
-      op.raise_error += (m, s, d, e) => {raise_error(s, d, e);}; // percolate up
+      op.done.connect((m) => {remove_ref(); m.unref();});
+      op.raise_error.connect((m, s, d, e) => {raise_error(s, d, e);}); // percolate up
       op.start_async();
     }
     

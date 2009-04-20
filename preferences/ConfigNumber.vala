@@ -37,7 +37,7 @@ public class ConfigNumber : ConfigWidget
     add(spin);
     
     set_from_config();
-    spin.value_changed += handle_value_changed;
+    spin.value_changed.connect(handle_value_changed);
   }
   
   protected override void set_from_config()

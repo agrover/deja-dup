@@ -37,7 +37,7 @@ public class ConfigBool : ConfigWidget, Togglable
     add(button);
     
     set_from_config();
-    button.toggled += handle_toggled;
+    button.toggled.connect(handle_toggled);
   }
   
   protected override void set_from_config()

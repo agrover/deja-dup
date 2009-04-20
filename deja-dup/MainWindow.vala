@@ -92,8 +92,8 @@ public class MainWindow : Gtk.Window
              "child", restore_button,
              "child", backup_button);
     
-    restore_button.clicked += (b) => {ask_restore();};
-    backup_button.clicked += (b) => {ask_backup();};
+    restore_button.clicked.connect((b) => {ask_restore();});
+    backup_button.clicked.connect((b) => {ask_backup();});
     
     vb.pack_start (setup_menu (), false, false, 0);
     vb.pack_start (hbox, true, true, 0);
@@ -104,7 +104,7 @@ public class MainWindow : Gtk.Window
     
     Idle.add(check_duplicity_version);
     
-    destroy += Gtk.main_quit;
+    destroy.connect(Gtk.main_quit);
   }
   
   bool check_duplicity_version()
@@ -188,48 +188,48 @@ public class MainWindow : Gtk.Window
     
     action = new Gtk.Action ("BackupAction", _("_Backup"), null, null);
     //action.set("icon-name", "document-send");
-    action.activate += on_backup;
+    action.activate.connect(on_backup);
     action_group.add_action_with_accel (action, "<control>B");
     this.backup_action = action;
     
     action = new Gtk.Action ("RestoreAction", _("_Restore"), null, null);
     //action.set("icon-name", "document-save");
-    action.activate += on_restore;
+    action.activate.connect(on_restore);
     action_group.add_action_with_accel (action, "<control>R");
     this.restore_action = action;
     
     action = new Gtk.Action ("QuitAction", null, null, Gtk.STOCK_QUIT);
-    action.activate += Gtk.main_quit;
+    action.activate.connect(Gtk.main_quit);
     action_group.add_action_with_accel (action, "<control>Q");
     
     action = new Gtk.Action ("EditMenuAction", _("_Edit"), null, null);
     action_group.add_action (action);
     
     action = new Gtk.Action ("PreferencesAction", null, null, Gtk.STOCK_PREFERENCES);
-    action.activate += on_preferences;
+    action.activate.connect(on_preferences);
     action_group.add_action (action);
     
     action = new Gtk.Action ("HelpMenuAction", _("_Help"), null, null);
     action_group.add_action (action);
     
     action = new Gtk.Action ("ContentsAction", _("Contents"), null, Gtk.STOCK_HELP);
-    action.activate += on_contents;
+    action.activate.connect(on_contents);
     action_group.add_action_with_accel (action, "F1");
     
     action = new Gtk.Action ("GetHelpAction", _("Get Help _Online..."), null, null);
-    action.activate += on_get_help;
+    action.activate.connect(on_get_help);
     action_group.add_action (action);
     
     action = new Gtk.Action ("TranslateAction", _("_Translate This Application..."), null, null);
-    action.activate += on_translate;
+    action.activate.connect(on_translate);
     action_group.add_action (action);
     
     action = new Gtk.Action ("ReportAction", _("_Report a Problem..."), null, null);
-    action.activate += on_report;
+    action.activate.connect(on_report);
     action_group.add_action (action);
     
     action = new Gtk.Action ("AboutAction", null, null, Gtk.STOCK_ABOUT);
-    action.activate += on_about;
+    action.activate.connect(on_about);
     action_group.add_action (action);
     
     var ui = """

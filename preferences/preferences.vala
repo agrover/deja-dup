@@ -94,7 +94,7 @@ class DejaDupPreferences : Object
       
       pref_window = new PreferencesDialog();
       
-      app.message_received += message_received;
+      app.message_received.connect(message_received);
       app.watch_window(pref_window);
       
       pref_window.show_all();

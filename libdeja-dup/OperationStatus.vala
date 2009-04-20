@@ -33,7 +33,7 @@ public class OperationStatus : Operation
   
   protected override void connect_to_dup()
   {
-    dup.collection_dates += (d, dates) => {collection_dates(dates);};
+    dup.collection_dates.connect((d, dates) => {collection_dates(dates);});
     base.connect_to_dup();
   }
 }

@@ -37,7 +37,7 @@ public class ConfigChoice : ConfigWidget
     combo.model = model;
     this.gconf_col = gconf_col;
     
-    combo.changed += handle_changed;
+    combo.changed.connect(handle_changed);
     
     set_from_config();
   }

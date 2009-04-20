@@ -33,7 +33,7 @@ public class ConfigFolder : ConfigWidget
     add(button);
     
     set_from_config();
-    button.selection_changed += handle_selection_changed;
+    button.selection_changed.connect(handle_selection_changed);
   }
   
   protected override void set_from_config()

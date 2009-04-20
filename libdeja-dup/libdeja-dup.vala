@@ -144,11 +144,11 @@ public void show_about(Object owner, Gtk.Window? parent)
   about.set_data("owner", owner);
   
   about.set_transient_for(parent);
-  about.response += (dlg, resp) => {
+  about.response.connect((dlg, resp) => {
     Object about_owner = (Object)dlg.get_data("owner");
     about_owner.set_data("about-dlg", null);
     dlg.destroy();
-  };
+  });
   
   about.show();
 }

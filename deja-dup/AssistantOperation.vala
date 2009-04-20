@@ -48,10 +48,10 @@ public abstract class AssistantOperation : Gtk.Assistant
     add_progress_page();
     add_summary_page();
     
-    apply += do_apply;
-    cancel += do_cancel;
-    close += do_close;
-    prepare += do_prepare;
+    apply.connect(do_apply);
+    cancel.connect(do_cancel);
+    close.connect(do_close);
+    prepare.connect(do_prepare);
   }
   
   protected abstract Gtk.Widget make_confirm_page();
@@ -215,11 +215,11 @@ public abstract class AssistantOperation : Gtk.Assistant
   void do_apply()
   {
     op = create_op();
-    op.done += apply_finished;
-    op.raise_error += show_error;
-    op.action_desc_changed += set_progress_label;
-    op.action_file_changed += set_progress_label_file;
-    op.progress += show_progress;
+    op.done.connect(apply_finished);
+    op.raise_error.connect(show_error);
+    op.action_desc_changed.connect(set_progress_label);
+    op.action_file_changed.connect(set_progress_label_file);
+    op.progress.connect(show_progress);
     
     try {
       op.start();
@@ -231,7 +231,7 @@ public abstract class AssistantOperation : Gtk.Assistant
     }
   }
   
-  protected virtual void do_prepare(AssistantOperation assist, Gtk.Widget page)
+  protected virtual void do_prepare(Gtk.Assistant assist, Gtk.Widget page)
   {
     if (timeout_id > 0) {
       Source.remove(timeout_id);
@@ -240,7 +240,7 @@ public abstract class AssistantOperation : Gtk.Assistant
     
     if (page == confirm_page) {
       if (op != null) {
-        op.done -= apply_finished;
+        op.done.disconnect(apply_finished);
         op.cancel(); // in case we just went back from progress page
       }
     }

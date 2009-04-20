@@ -72,8 +72,8 @@ public abstract class Operation : Object
     
     // Default is to go ahead with password collection.  This will be
     // overridden by anyone else that connects to this signal.
-    passphrase_required += (o) => {return true;};
-    backend_password_required += (o) => {return true;};
+    passphrase_required.connect((o) => {return true;});
+    backend_password_required.connect((o) => {return true;});
   }
   
   public virtual void start() throws Error
@@ -106,17 +106,17 @@ public abstract class Operation : Object
   
   protected virtual void connect_to_dup()
   {
-    dup.done += operation_finished;
-    dup.raise_error += (d, s, detail) => {raise_error(s, detail);};
-    dup.action_desc_changed += (d, s) => {action_desc_changed(s);};
-    dup.action_file_changed += (d, f) => {action_file_changed(f);};
-    dup.progress += (d, p) => {progress(p);};
-    backend.envp_ready += continue_with_envp;
-    backend.need_password += (b) => {
+    dup.done.connect(operation_finished);
+    dup.raise_error.connect((d, s, detail) => {raise_error(s, detail);});
+    dup.action_desc_changed.connect((d, s) => {action_desc_changed(s);});
+    dup.action_file_changed.connect((d, f) => {action_file_changed(f);});
+    dup.progress.connect((d, p) => {progress(p);});
+    backend.envp_ready.connect(continue_with_envp);
+    backend.need_password.connect((b) => {
       bool can_ask_now = backend_password_required();
       if (can_ask_now)
         backend.ask_password();
-    };
+    });
   }
   
   void continue_with_passphrase() throws Error

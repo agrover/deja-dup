@@ -32,7 +32,7 @@ public class ConfigEntry : ConfigWidget
     add(entry);
     
     set_from_config();
-    entry.focus_out_event += handle_focus_out;
+    entry.focus_out_event.connect(handle_focus_out);
   }
   
   protected override void set_from_config()

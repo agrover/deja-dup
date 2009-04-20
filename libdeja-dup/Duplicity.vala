@@ -535,14 +535,14 @@ public class Duplicity : Object
                          string? custom_local = null)
   {
     if (inst != null) {
-      inst.done -= handle_done;
-      inst.message -= handle_message;
+      inst.done.disconnect(handle_done);
+      inst.message.disconnect(handle_message);
       inst.cancel();
     }
     
     inst = new DuplicityInstance();
-    inst.done += handle_done;
-    inst.message += handle_message;
+    inst.done.connect(handle_done);
+    inst.message.connect(handle_message);
     
     weak List<string> master_argv = argv_entire == null ? saved_argv : argv_entire;
     weak string local_arg = custom_local == null ? local : custom_local;
