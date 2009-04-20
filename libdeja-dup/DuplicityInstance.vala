@@ -36,7 +36,7 @@ public class DuplicityInstance : Object
       verbose = true;
     
     // Open pipes to communicate with subprocess
-    if (pipe(pipes) != 0) {
+    if (Posix.pipe(pipes) != 0) {
       done(false, false);
       return;
     }
@@ -124,7 +124,7 @@ public class DuplicityInstance : Object
     }
     catch (IOChannelError e) {} // ignore
     stanza_id = reader.add_watch(IOCondition.IN, read_stanza);
-    close(pipes[1]);
+    Posix.close(pipes[1]);
     
     watch_id = ChildWatch.add(child_pid, spawn_finished);
   }
@@ -168,7 +168,7 @@ public class DuplicityInstance : Object
   }
   
   void kill_child() {
-    kill((int)child_pid, 9);
+    Posix.kill((Posix.pid_t)child_pid, Posix.SIGKILL);
   }
   
   bool read_stanza(IOChannel channel, IOCondition cond)

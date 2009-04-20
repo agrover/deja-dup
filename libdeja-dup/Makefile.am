@@ -14,6 +14,7 @@ VALA_CFLAGS = \
 	--pkg dbus-glib-1 \
 	--pkg gdk-x11-2.0 \
 	--pkg unique-1.0 \
+	--pkg posix \
 	--pkg hacks \
 	--pkg PassphraseSchema \
 	--pkg unix \

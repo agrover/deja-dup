@@ -17,15 +17,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-[CCode (cheader_filename = "unistd.h")]
-int pipe([CCode (array_length = false)] int[] fildes);
-
-[CCode (cheader_filename = "unistd.h")]
-int close(int fildes);
-
-[CCode (cheader_filename = "sys/types.h,signal.h")]
-int kill(int pid, int sig);
-
 [CCode (cheader_filename = "libintl.h")]
 weak string ngettext(string msgid, string msgid_plural, ulong n);
 
