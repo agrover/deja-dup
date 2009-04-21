@@ -387,9 +387,10 @@ public class Duplicity : Object
       break;
     }
     
-    // For most, don't do anything. Error string won't be useful to humans, and
-    // by not raising it, we'll eventually hit the 'unknown error'
-    // message which is slightly better than a giant exception string.
+    // For most, don't do anything special.  Show generic 'unknown error'
+    // message, but provide the exception text for better bug reports.
+    // Plus, sometimes it may clue the user in to what's wrong.
+    show_error(_("Failed with an unknown error."), text);
   }
   
   protected virtual void process_info(string[] firstline, List<string>? data,
@@ -526,10 +527,10 @@ public class Duplicity : Object
     }
   }
   
-  void show_error(string errorstr)
+  void show_error(string errorstr, string? detail = null)
   {
     error_issued = true;
-    raise_error(errorstr, null);
+    raise_error(errorstr, detail);
   }
   
   void connect_and_start(List<string>? argv_extra = null,
