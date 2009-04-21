@@ -265,6 +265,9 @@ public class Duplicity : Object
   
   bool restart_with_short_filenames_if_needed()
   {
+    if (DuplicityInfo.get_default().can_read_short_filenames)
+      return false;
+    
     foreach (string s in backend_argv) {
       if (s == "--short-filenames")
         return false;

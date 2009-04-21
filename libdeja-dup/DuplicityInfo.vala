@@ -32,6 +32,7 @@ public class DuplicityInfo : Object
   public bool has_restore_progress {get; private set; default = false; }
   public bool has_collection_status {get; private set; default = false; }
   public bool new_time_format {get; private set; default = false; }
+  public bool can_read_short_filenames {get; private set; default = false; }
   
   static DuplicityInfo info = null;
   public static DuplicityInfo get_default() {
@@ -90,6 +91,8 @@ public class DuplicityInfo : Object
       has_restore_progress = true;
     if (meets_version(0, 5, 10))
       new_time_format = true;
+    if (meets_version(0, 5, 16))
+      can_read_short_filenames = true;
     
     return true;
   }
