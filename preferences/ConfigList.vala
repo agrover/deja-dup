@@ -138,11 +138,12 @@ public class ConfigList : ConfigWidget
                           				      Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT);
     
     if (dlg.run() != Gtk.ResponseType.ACCEPT) {
+      dlg.destroy();
       return;
     }
     
     var folder = File.new_for_path(dlg.get_filename());
-    dlg.hide();
+    dlg.destroy();
     
     weak SList<string> slist;
     try {
