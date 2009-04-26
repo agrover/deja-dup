@@ -88,6 +88,20 @@ public class OperationBackup : Operation
       rv.append(Path.build_filename(dir, ".xsession-errors"));
       rv.append(Path.build_filename(dir, ".recently-used.xbel"));
       rv.append(Path.build_filename(dir, ".recent-applications.xbel"));
+      
+      // Get encrypted Private directory (we don't want to back this up,
+      // because we'd be backing content up twice.  We already get it in
+      // the example of any .Private directory).  We only append it if the
+      // location is a mountpoint.  Else, it isn't part of an ecryptfs setup.
+      File priv_mnt = File.new_for_path(Path.build_filename(dir, ".ecryptfs", "Private.mnt"));
+      string priv_dir = null;
+      try {priv_mnt.load_contents(null, out priv_dir, null, null);}
+      catch (Error e) {} // ignore, this directory often won't exist or whatever
+      if (priv_dir == null)
+        priv_dir = Path.build_filename(dir, "Private"); // fallback
+      priv_dir_file = File.new_for_path(priv_dir);
+      if (priv_dir_file.query_file_type(FileQueryInfoFlags.NONE, null) == FileType.MOUNTABLE)
+        rv.append(priv_dir);
     }
     
     // Some problematic directories like /tmp and /proc should be left alone
