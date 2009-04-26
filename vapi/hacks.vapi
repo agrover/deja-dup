@@ -17,21 +17,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-[CCode (cheader_filename = "libdeja-dup/hacks.h")]
+[CCode (cheader_filename = "hacks.h")]
 uint32 hacks_status_icon_get_x11_window_id (Gtk.StatusIcon icon);
 
-[CCode (cheader_filename = "libdeja-dup/hacks.h")]
+[CCode (cheader_filename = "hacks.h")]
 bool hacks_show_uri (string uri) throws GLib.Error;
 
-[CCode (cheader_filename = "libdeja-dup/hacks.h")]
+[CCode (cheader_filename = "hacks.h")]
 bool hacks_file_make_directory_with_parents (GLib.File file) throws GLib.Error;
 
-[CCode (cheader_filename = "libdeja-dup/hacks.h")]
+[CCode (cheader_filename = "hacks.h")]
 Gdk.Pixbuf hacks_get_icon_at_size (string name, int size) throws GLib.Error;
 
-[CCode (cheader_filename = "libdeja-dup/hacks.h")]
+[CCode (cheader_filename = "hacks.h")]
 GLib.FileType hacks_file_query_file_type (GLib.File file, GLib.FileQueryInfoFlags flags);
 
-[CCode (cheader_filename = "libdeja-dup/hacks.h")]
+[CCode (cheader_filename = "hacks.h")]
 string hacks_unix_mount_get_fs_type (string file);
 
