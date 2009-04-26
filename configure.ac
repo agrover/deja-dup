@@ -77,6 +77,7 @@ AC_SUBST(PREF_LIBS)
 PKG_CHECK_MODULES(LIBRARY,
                   gtk+-2.0 >= $GTK_REQ_VER
                   gio-2.0
+                  gio-unix-2.0
                   gconf-2.0
                   libgnomeui-2.0
                   unique-1.0

@@ -18,6 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <gio/gunixmounts.h>
 #include "hacks.h"
 
 static const GnomeKeyringPasswordSchema PASSPHRASE_SCHEMA_DEF = {
@@ -180,5 +181,18 @@ hacks_file_query_file_type (GFile *file, GFileQueryInfoFlags flags)
   
   return file_type;
 #endif
+}
+
+/**
+ * At the time of this writing, vala 0.7.1's gio-unix-2.0 bindings are crap.
+ * This function grabs a unix mount's filesystem type (vfat, ecryptfs, etc)
+ */
+gchar *
+hacks_unix_mount_get_fs_type (const gchar *file)
+{
+  GUnixMountEntry *mount = g_unix_mount_at(file, NULL);
+  gchar *fs_type = g_strdup(g_unix_mount_get_fs_type(mount));
+  g_unix_mount_free(mount);
+  return fs_type;
 }
 

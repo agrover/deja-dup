@@ -32,6 +32,7 @@ extern gboolean hacks_show_uri (const gchar *uri, GError **error);
 extern gboolean hacks_file_make_directory_with_parents (GFile *file, GError **error);
 extern GdkPixbuf *hacks_get_icon_at_size (const gchar *name, gint size, GError **error);
 extern GFileType hacks_file_query_file_type (GFile *file, GFileQueryInfoFlags flags);
+extern gchar *hacks_unix_mount_get_fs_type (const gchar *file);
 
 #endif
 

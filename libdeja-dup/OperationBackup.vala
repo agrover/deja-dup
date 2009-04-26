@@ -93,22 +93,9 @@ public class OperationBackup : Operation
       // because we'd be backing content up twice.  We already get it in
       // the example of any .Private directory).  We only append it if the
       // location is a mountpoint.  Else, it isn't part of an ecryptfs setup.
-      File priv_mnt = File.new_for_path(Path.build_filename(dir, ".ecryptfs", "Private.mnt"));
-      string priv_dir = null;
-      try {
-        priv_mnt.load_contents(null, out priv_dir, null, null);
-        priv_dir = priv_dir.strip(); // in case any trailing newlines from an echo
-      }
-      catch (Error e) {} // ignore, this directory often won't exist or whatever
-      if (priv_dir == null)
-        priv_dir = Path.build_filename(dir, "Private"); // fallback
-      File priv_dir_file = File.new_for_path(priv_dir);
-      try {
-        var info = priv_dir_file.query_info(FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT, FileQueryInfoFlags.NONE, null);
-        if (info.get_attribute_boolean(FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT))
-          rv.append(priv_dir);
-      }
-      catch (Error e) {} // ignore, just don't add
+      File priv_dir = get_ecryptfs_private_dir(dir);
+      if (is_mount(priv_dir) && is_encrypted(priv_dir))
+        rv.append(priv_dir.get_path());
     }
     
     // Some problematic directories like /tmp and /proc should be left alone
@@ -120,6 +107,46 @@ public class OperationBackup : Operation
     rv.append("/sys");
     
     return rv;
+  }
+  
+  File get_ecryptfs_private_dir(string home)
+  {
+    string priv_pref_path = Path.build_filename(home, ".ecryptfs", "Private.mnt");
+    File priv_pref = File.new_for_path(priv_pref_path);
+    
+    string priv_path = null;
+    try {
+      priv_pref.load_contents(null, out priv_path, null, null);
+      priv_path = priv_path.strip(); // in case any trailing newlines from an echo
+    }
+    catch (Error e) {} // ignore, this path often won't exist
+    
+    if (priv_path == null)
+      priv_path = Path.build_filename(home, "Private"); // default fallback
+    
+    return File.new_for_path(priv_path);
+  }
+  
+  bool is_mount(File file)
+  {
+    try {
+      var info = file.query_info(FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT,
+                                 FileQueryInfoFlags.NONE, null);
+      if (info.get_attribute_boolean(FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT))
+        return true;
+    }
+    catch (Error e) {} // ignore
+    
+    return false;
+  }
+  
+  bool is_encrypted(File file)
+  {
+    var fs_type = hacks_unix_mount_get_fs_type(file.get_path());
+    if (fs_type == "ecryptfs")
+      return true;
+    
+    return false;
   }
 }
 
