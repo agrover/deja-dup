@@ -95,13 +95,20 @@ public class OperationBackup : Operation
       // location is a mountpoint.  Else, it isn't part of an ecryptfs setup.
       File priv_mnt = File.new_for_path(Path.build_filename(dir, ".ecryptfs", "Private.mnt"));
       string priv_dir = null;
-      try {priv_mnt.load_contents(null, out priv_dir, null, null);}
+      try {
+        priv_mnt.load_contents(null, out priv_dir, null, null);
+        priv_dir = priv_dir.strip(); // in case any trailing newlines from an echo
+      }
       catch (Error e) {} // ignore, this directory often won't exist or whatever
       if (priv_dir == null)
         priv_dir = Path.build_filename(dir, "Private"); // fallback
-      priv_dir_file = File.new_for_path(priv_dir);
-      if (priv_dir_file.query_file_type(FileQueryInfoFlags.NONE, null) == FileType.MOUNTABLE)
-        rv.append(priv_dir);
+      File priv_dir_file = File.new_for_path(priv_dir);
+      try {
+        var info = priv_dir_file.query_info(FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT, FileQueryInfoFlags.NONE, null);
+        if (info.get_attribute_boolean(FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT))
+          rv.append(priv_dir);
+      }
+      catch (Error e) {} // ignore, just don't add
     }
     
     // Some problematic directories like /tmp and /proc should be left alone
