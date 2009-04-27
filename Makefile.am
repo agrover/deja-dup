@@ -3,8 +3,9 @@
 SUBDIRS = data po vapi libdeja-dup applet monitor preferences deja-dup nautilus help tests
 
 # Distribute pot file
-dist-hook:
+pot:
 	$(MAKE) -C "$(srcdir)/po" "$(GETTEXT_PACKAGE).pot"
+dist-hook: pot
 	cp "$(srcdir)/po/$(GETTEXT_PACKAGE).pot" "$(distdir)/po/"
 
 ACLOCAL_AMFLAGS = -I m4

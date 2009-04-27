@@ -272,7 +272,7 @@ public abstract class Operation : Object
         uint xid = uppermost_xid;
         if (xid == 0 && toplevel != null) {
           toplevel.realize();
-          xid = Gdk.x11_drawable_get_xid(toplevel.window);
+          xid = Gdk.x11_drawable_get_xid(hacks_widget_get_window(toplevel));
         }
         
         obj.Inhibit(Config.PACKAGE,

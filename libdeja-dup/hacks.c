@@ -196,3 +196,23 @@ hacks_unix_mount_get_fs_type (const gchar *file)
   return fs_type;
 }
 
+void
+hacks_status_icon_set_tooltip_text (GtkStatusIcon *icon, const gchar *text)
+{
+#if GTK_CHECK_VERSION(2, 16, 0)
+  return gtk_status_icon_set_tooltip_text (icon, text);
+#else
+  return gtk_status_icon_set_tooltip (icon, text);
+#endif
+}
+
+GdkWindow *
+hacks_widget_get_window (GtkWidget *widget)
+{
+#if GTK_CHECK_VERSION(2, 14, 0)
+  return gtk_widget_get_window (widget);
+#else
+  return widget->window;
+#endif
+}
+

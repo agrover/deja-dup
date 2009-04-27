@@ -72,7 +72,7 @@ public class StatusIcon : Gtk.StatusIcon
       tooltip = this.action;
     if (progress > 0)
       tooltip = tooltip + "\n" + _("%.1f%% complete").printf(progress * 100);
-    set_tooltip_text(tooltip);
+    hacks_status_icon_set_tooltip_text(this, tooltip);
   }
   
   bool start_idle() {

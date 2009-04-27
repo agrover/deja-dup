@@ -35,3 +35,9 @@ GLib.FileType hacks_file_query_file_type (GLib.File file, GLib.FileQueryInfoFlag
 [CCode (cheader_filename = "hacks.h")]
 string hacks_unix_mount_get_fs_type (string file);
 
+[CCode (cheader_filename = "hacks.h")]
+void hacks_status_icon_set_tooltip_text (Gtk.StatusIcon icon, string text);
+
+[CCode (cheader_filename = "hacks.h")]
+Gdk.Window hacks_widget_get_window (Gtk.Widget widget);
+
