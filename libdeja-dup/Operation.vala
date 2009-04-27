@@ -223,6 +223,7 @@ public abstract class Operation : Object
     }
     
     passphrase = dlg.get_password();
+    passphrase = passphrase.strip();
     
     if (passphrase != "") {
       // Save it

@@ -167,6 +167,7 @@ public class BackendSSH : Backend
     
     id = dlg.get_username();
     secret_key = dlg.get_password();
+    secret_key = secret_key.strip();
     
     // Save it
     var remember = dlg.get_remember();
