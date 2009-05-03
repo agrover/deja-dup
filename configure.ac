@@ -23,6 +23,8 @@ AC_PROG_LIBTOOL
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 AM_GCONF_SOURCE_2
 
+AC_PATH_PROG(PO4A, po4a)
+
 # Checks for vala
 AC_PROG_VALAC([0.7.1])
 
