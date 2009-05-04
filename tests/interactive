@@ -31,6 +31,9 @@ def test():
       sources = arg.split('=', 1)[-1]
     elif arg.startswith('size='):
       size = int(arg.split('=', 1)[-1])
+    else:
+      print "Unrecognized argument '%s'" % arg
+      return 1
   
   if version is not None:
     os.environ['DEJA_DUP_TEST_VERSION'] = version
