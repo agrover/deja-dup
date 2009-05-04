@@ -75,6 +75,8 @@ public class Duplicity : Object
   bool got_collection_info = false;
   List<string> collection_info = null;
   
+  File last_touched_file = null;
+  
   public Duplicity(Operation.Mode mode, Gtk.Window? win) {
     this.mode = mode;
     this.original_mode = mode;
@@ -365,13 +367,20 @@ public class Duplicity : Object
     case "IOError":
       if (text.str("GnuPG") != null)
         show_error(_("Bad encryption password."));
+      else if (text.str("[Errno 5]") != null && // I/O Error
+               last_touched_file != null) {
+        if (mode == Operation.Mode.BACKUP)
+          show_error(_("Error reading file '%s'.").printf(last_touched_file.get_parse_name()));
+        else
+          show_error(_("Error writing file '%s'.").printf(last_touched_file.get_parse_name()));
+      }
       else if (text.str("[Errno 28]") != null) { // No space left on device
         string where;
         if (mode == Operation.Mode.BACKUP)
           where = backend.get_location_pretty();
         else
           where = local;
-        show_error(_("No space left in %s".printf(where)));
+        show_error(_("No space left in %s").printf(where));
       }
       else {
         // Very possibly a FAT file system that can't handle the colons that 
@@ -429,13 +438,17 @@ public class Duplicity : Object
   }
   
   void process_diff_file(string file) {
+    var gfile = make_file_obj(file);
+    last_touched_file = gfile;
     if (state != State.DRY_RUN)
-      action_file_changed(make_file_obj(file));
+      action_file_changed(gfile);
   }
   
   void process_patch_file(string file) {
+    var gfile = make_file_obj(file);
+    last_touched_file = gfile;
     if (state != State.DRY_RUN)
-      action_file_changed(make_file_obj(file));
+      action_file_changed(gfile);
   }
   
   void process_progress(string[] firstline)
