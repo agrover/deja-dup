@@ -365,6 +365,14 @@ public class Duplicity : Object
     case "IOError":
       if (text.str("GnuPG") != null)
         show_error(_("Bad encryption password."));
+      else if (text.str("[Errno 28]") != null) { // No space left on device
+        string where;
+        if (mode == Operation.Mode.BACKUP)
+          where = backend.get_location_pretty();
+        else
+          where = local;
+        show_error(_("No space left in %s".printf(where)));
+      }
       else {
         // Very possibly a FAT file system that can't handle the colons that 
         // duplicity likes to use.  Try again with --short-filenames
@@ -390,7 +398,8 @@ public class Duplicity : Object
     // For most, don't do anything special.  Show generic 'unknown error'
     // message, but provide the exception text for better bug reports.
     // Plus, sometimes it may clue the user in to what's wrong.
-    show_error(_("Failed with an unknown error."), text);
+    if (!error_issued)
+      show_error(_("Failed with an unknown error."), text);
   }
   
   protected virtual void process_info(string[] firstline, List<string>? data,
@@ -529,8 +538,10 @@ public class Duplicity : Object
   
   void show_error(string errorstr, string? detail = null)
   {
-    error_issued = true;
-    raise_error(errorstr, detail);
+    if (error_issued == false) {
+      error_issued = true;
+      raise_error(errorstr, detail);
+    }
   }
   
   void connect_and_start(List<string>? argv_extra = null,
