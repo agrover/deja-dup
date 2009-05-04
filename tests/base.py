@@ -119,6 +119,8 @@ def get_temp_name(extra):
 
 def create_mount(path=None, mtype='ext3', size=20):
   global cleanup_mounts
+  if mtype is None: mtype = 'ext3'
+  if size is None: size = 20
   if path is None:
     path = get_temp_name('blob')
     if not os.path.exists(path):
@@ -130,7 +132,11 @@ def create_mount(path=None, mtype='ext3', size=20):
       os.system('mkfs -t %s %s %s' % (mtype, args, path))
   mount_dir = get_temp_name('mount')
   os.system('mkdir -p %s' % mount_dir)
-  if os.system('gksudo "mount -t %s -o loop,sizelimit=%d,umask=0000 %s %s"' % (mtype, size*1024*1024, path, mount_dir)):
+  if mtype == 'vfat':
+    args = ',umask=0000'
+  else:
+    args = ''
+  if os.system('gksudo "mount -t %s -o loop,sizelimit=%d%s %s %s"' % (mtype, size*1024*1024, args, path, mount_dir)):
     raise Exception("Couldn't mount")
   cleanup_mounts += [mount_dir]
   return mount_dir

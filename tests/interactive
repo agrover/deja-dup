@@ -17,6 +17,7 @@ def test():
   tmpid = None
   sources = None
   dest = None
+  size = None
   for arg in sys.argv[1:]:
     if arg == 'vfat':
       mtype = arg
@@ -28,14 +29,16 @@ def test():
       version = arg.split('=', 1)[-1]
     elif arg.startswith('source='):
       sources = arg.split('=', 1)[-1]
+    elif arg.startswith('size='):
+      size = int(arg.split('=', 1)[-1])
   
   if version is not None:
     os.environ['DEJA_DUP_TEST_VERSION'] = version
   if tmpid is not None:
     tmpdir = tempfile.gettempdir() + '/' + tmpid
     os.environ['DEJA_DUP_TEST_TMP'] = tmpdir
-  if mtype is not None:
-    dest = base.create_mount(mtype=mtype)
+  if mtype is not None or size is not None:
+    dest = base.create_mount(mtype=mtype, size=size)
   if sources is not None:
     sources = map(lambda s: os.path.abspath(s), [sources])
   
