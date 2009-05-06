@@ -7,7 +7,7 @@ import sys
 import os
 import ldtp
 
-latest_duplicity = '0.5.16'
+latest_duplicity = '0.5.17'
 
 temp_dir = None
 gconf_dir = None
