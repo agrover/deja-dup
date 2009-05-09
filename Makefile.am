@@ -4,14 +4,13 @@ SUBDIRS = data po vapi libdeja-dup applet monitor preferences deja-dup nautilus 
 
 # Distribute pot file
 update-po:
-	rm "$(srcdir)/po/$(GETTEXT_PACKAGE).pot"
+	rm "po/$(GETTEXT_PACKAGE).pot"
 	$(MAKE) -C "$(srcdir)/po" "$(GETTEXT_PACKAGE).pot"
-	cp "$(srcdir)/po/$(GETTEXT_PACKAGE).pot" "$(srcdir)/po/$(GETTEXT_PACKAGE).simple.pot"
 	$(MAKE) -C "$(srcdir)/help" update-po
-dist-hook: update-po
-	cp "$(srcdir)/po/$(GETTEXT_PACKAGE).pot" "$(distdir)/po/"
+dist-hook:
+	cd "$(distdir)/po" && INTLTOOL_EXTRACT=@INTLTOOL_EXTRACT@ srcdir=$(srcdir) @INTLTOOL_UPDATE@ --gettext-package $(GETTEXT_PACKAGE) --pot
 	for lang in $(shell cat "$(srcdir)/po/LINGUAS"); do \
-		msgmerge po/$$lang.po "$(srcdir)/po/$(GETTEXT_PACKAGE).simple.pot" -o po/$$lang.po; \
+		msgmerge $(srcdir)/po/$$lang.po "$(distdir)/po/$(GETTEXT_PACKAGE).pot" -o $(distdir)/po/$$lang.po; \
 	done
 
 ACLOCAL_AMFLAGS = -I m4
