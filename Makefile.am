@@ -8,9 +8,16 @@ update-po:
 	$(MAKE) -C "$(srcdir)/po" "$(GETTEXT_PACKAGE).pot"
 	$(MAKE) -C "$(srcdir)/help" update-po
 dist-hook:
-	cd "$(distdir)/po" && INTLTOOL_EXTRACT=@INTLTOOL_EXTRACT@ srcdir=$(srcdir) @INTLTOOL_UPDATE@ --gettext-package $(GETTEXT_PACKAGE) --pot
+	(cd po && INTLTOOL_EXTRACT=@INTLTOOL_EXTRACT@ srcdir=../$(srcdir)/po @INTLTOOL_UPDATE@ --gettext-package $(GETTEXT_PACKAGE) --pot)
 	for lang in $(shell cat "$(srcdir)/po/LINGUAS"); do \
-		msgmerge $(srcdir)/po/$$lang.po "$(distdir)/po/$(GETTEXT_PACKAGE).pot" -o $(distdir)/po/$$lang.po; \
+		msgmerge $(srcdir)/po/$$lang.po po/$(GETTEXT_PACKAGE).pot -o po/$$lang.po; \
+	done
+
+distclean-local: clean-local-@USE_NLS@
+clean-local-no:
+clean-local-yes:
+	for lang in $(shell cat "$(srcdir)/po/LINGUAS"); do \
+		test "$(srcdir)" = "." || rm -f po/$$lang.po; \
 	done
 
 ACLOCAL_AMFLAGS = -I m4

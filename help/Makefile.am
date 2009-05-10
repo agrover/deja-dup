@@ -4,6 +4,11 @@
 # This is very hacky, true.
 _xml2po = cp ../$(srcdir)/$@ $(notdir $@).tmp && chmod u+w $(notdir $@).tmp || true
 
+clean-local: clean-local-@USE_NLS@
+distclean-local: clean-local-@USE_NLS@
+mostlyclean-local: clean-local-@USE_NLS@
+maintainer-clean-local: clean-local-@USE_NLS@
+
 include $(top_srcdir)/gnome-doc-utils.make
 
 dist_man1_MANS = \
@@ -36,7 +41,7 @@ all-local-yes: po4a.stamp
 prepare.stamp: po4a.cfg $(top_srcdir)/po/LINGUAS
 	for lang in C $(LINGUAS); do \
 		$(mkdir_p) $$lang; \
-		test "$(srcdir)" = "." || cp -ar $(srcdir)/$$lang $$lang; \
+		test "$(srcdir)" = "." || cp -ar $(srcdir)/$$lang/* $$lang; \
 	done
 	test "$(PO4A_LINGUAS)" = "$(LINGUAS)" || sed -i "s/^\(.*\[po4a_langs\] \).*$$/\1$(LINGUAS)/" $(srcdir)/po4a.cfg
 	touch $@
@@ -45,9 +50,14 @@ po4a.stamp: po4a.cfg $(dist_man1_MANS) C/deja-dup.xml C/legal.xml prepare.stamp 
 	test -e $(srcdir)/no-po4a || $(PO4A) --no-backups --variable srcdir=$(srcdir) --variable top_srcdir=$(top_srcdir) $(srcdir)/po4a.cfg
 	touch $@
 
-clean-local: clean-local-@USE_NLS@
 clean-local-no:
 clean-local-yes:
+	for lang in $(LINGUAS); do \
+		if [ -d $$lang ]; then \
+			rm -f $$(echo "$(dist_man1_MANS)" | sed "s|C/|$$lang/|g"); \
+		fi \
+	done
+	test "$(srcdir)" = "." || rm -fr C
 	test -e $(srcdir)/no-po4a || $(PO4A) --rm-backups --rm-translations --variable top_srcdir=$(top_srcdir) --variable srcdir=$(srcdir) $(srcdir)/po4a.cfg
 	rm -f po4a.stamp prepare.stamp
 
