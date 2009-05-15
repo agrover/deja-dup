@@ -20,27 +20,17 @@ AM_CFLAGS = \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 deja_dup_preferences_VALASOURCES = \
-	ConfigBackend.vala \
-	ConfigBool.vala \
-	ConfigChoice.vala \
-	ConfigEntry.vala \
-	ConfigFolder.vala \
-	ConfigList.vala \
-	ConfigNumber.vala \
-	ConfigPeriod.vala \
-	ConfigWidget.vala \
 	PreferencesDialog.vala \
-	ToggleGroup.vala \
 	preferences.vala
 
 BUILT_SOURCES = \
-	deja-dup-preferences.stamp
+	vala.stamp
 
 deja_dup_preferences_SOURCES = \
 	$(deja_dup_preferences_VALASOURCES:.vala=.c) \
 	$(deja_dup_preferences_VALASOURCES)
 
-deja-dup-preferences.stamp: $(deja_dup_preferences_VALASOURCES)
+vala.stamp: $(deja_dup_preferences_VALASOURCES)
 if USE_VALAC
 	$(VALAC) -C $(VALA_CFLAGS) $^
 	touch $@
@@ -51,7 +41,7 @@ endif
 
 deja_dup_preferences_LDADD = $(PREF_LIBS) @INTLLIBS@ $(top_builddir)/libdeja-dup/libdeja-dup.la
 
-EXTRA_DIST = deja-dup-preferences.stamp
+EXTRA_DIST = vala.stamp
 DISTCLEANFILES = \
 	$(BUILT_SOURCES) \
 	$(deja_dup_preferences_VALASOURCES:.vala=.c) \

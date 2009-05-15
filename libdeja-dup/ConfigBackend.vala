@@ -19,48 +19,29 @@
 
 using GLib;
 
-public class ConfigBool : ConfigWidget, Togglable
+namespace DejaDup {
+
+public class ConfigBackend : ConfigChoice
 {
-  public string label {get; construct;}
-  
-  public ConfigBool(string key, string label)
-  {
+  public ConfigBackend(string key) {
     this.key = key;
-    this.label = label;
   }
   
-  public bool get_active() {return button.get_active();}
-  
-  Gtk.CheckButton button;
   construct {
-    button = new Gtk.CheckButton.with_mnemonic(label);
-    add(button);
+    var store = new Gtk.ListStore(2, typeof(string), typeof(string));
     
-    set_from_config();
-    button.toggled.connect(handle_toggled);
-  }
-  
-  protected override void set_from_config()
-  {
-    try {
-      var val = client.get_bool(key);
-      button.set_active(val);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
-  }
-  
-  void handle_toggled()
-  {
-    try {
-      client.set_bool(key, button.get_active());
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    Gtk.TreeIter iter;
+    int i = 0;
     
-    toggled();
+    store.insert_with_values(out iter, i++, 0, _("Amazon S3"), 1, "s3");
+    store.insert_with_values(out iter, i++, 0, _("Local Folder"), 1, "file");
+    store.insert_with_values(out iter, i++, 0, _("SSH"), 1, "ssh");
+    
+    store.set_sort_column_id(0, Gtk.SortType.ASCENDING);
+    
+    this.default_val = "s3";
+    init(store, 1);
   }
 }
 
+}

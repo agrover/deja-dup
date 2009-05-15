@@ -28,7 +28,7 @@ public class PreferencesDialog : Gtk.Dialog
   List<Gtk.Widget>[] backend_widgets;
   
   Gtk.SizeGroup label_sizes;
-  ToggleGroup periodic_toggle;
+  DejaDup.ToggleGroup periodic_toggle;
   
   public PreferencesDialog(Gtk.Window? parent = null) {
     transient_for = parent;
@@ -51,7 +51,7 @@ public class PreferencesDialog : Gtk.Dialog
     backend_widgets = new List<Gtk.Widget>[NUM_LISTS];
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
-    ConfigBackend backend = new ConfigBackend(DejaDup.BACKEND_KEY);
+    DejaDup.ConfigBackend backend = new DejaDup.ConfigBackend(DejaDup.BACKEND_KEY);
     backend.changed.connect(handle_backend_changed);
     label = new Gtk.Label(_("_Backup location:"));
     label.set("mnemonic-widget", backend,
@@ -75,7 +75,7 @@ public class PreferencesDialog : Gtk.Dialog
     ++row;
     
     var s3_table = new Gtk.Table(1, 3, false);
-    w = new ConfigEntry(DejaDup.S3_ID_KEY);
+    w = new DejaDup.ConfigEntry(DejaDup.S3_ID_KEY);
     label = new Gtk.Label("    %s".printf(_("S3 Access Key I_D:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -87,7 +87,7 @@ public class PreferencesDialog : Gtk.Dialog
                     Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                     Gtk.AttachOptions.FILL, 3, 3);
     
-    w = new ConfigEntry(DejaDup.S3_FOLDER_KEY);
+    w = new DejaDup.ConfigEntry(DejaDup.S3_FOLDER_KEY);
     label = new Gtk.Label("    %s".printf(_("_Folder:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -106,7 +106,7 @@ public class PreferencesDialog : Gtk.Dialog
     ++row;
     
     var file_table = new Gtk.Table(1, 3, false);
-    w = new ConfigFolder(DejaDup.FILE_PATH_KEY);
+    w = new DejaDup.ConfigFolder(DejaDup.FILE_PATH_KEY);
     label = new Gtk.Label("    %s".printf(_("_Folder:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -124,7 +124,7 @@ public class PreferencesDialog : Gtk.Dialog
     ++row;
     
     var ssh_table = new Gtk.Table(4, 3, false);
-    w = new ConfigEntry(DejaDup.SSH_USERNAME_KEY);
+    w = new DejaDup.ConfigEntry(DejaDup.SSH_USERNAME_KEY);
     label = new Gtk.Label("    %s".printf(_("_Username:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -136,7 +136,7 @@ public class PreferencesDialog : Gtk.Dialog
                      Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                      Gtk.AttachOptions.FILL, 3, 3);
     
-    w = new ConfigEntry(DejaDup.SSH_SERVER_KEY);
+    w = new DejaDup.ConfigEntry(DejaDup.SSH_SERVER_KEY);
     label = new Gtk.Label("    %s".printf(_("_Server:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -148,7 +148,7 @@ public class PreferencesDialog : Gtk.Dialog
                      Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                      Gtk.AttachOptions.FILL, 3, 3);
     
-    w = new ConfigNumber(DejaDup.SSH_PORT_KEY, 1, 100000);
+    w = new DejaDup.ConfigNumber(DejaDup.SSH_PORT_KEY, 1, 100000);
     label = new Gtk.Label("    %s".printf(_("_Port:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -160,7 +160,7 @@ public class PreferencesDialog : Gtk.Dialog
                      Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                      Gtk.AttachOptions.FILL, 3, 3);
     
-    w = new ConfigEntry(DejaDup.SSH_DIRECTORY_KEY);
+    w = new DejaDup.ConfigEntry(DejaDup.SSH_DIRECTORY_KEY);
     label = new Gtk.Label("    %s".printf(_("_Folder:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -178,7 +178,7 @@ public class PreferencesDialog : Gtk.Dialog
     backend_widgets[SSH_LIST].append(ssh_table);
     ++row;
     
-    w = new ConfigList(DejaDup.INCLUDE_LIST_KEY);
+    w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY);
     w.set_size_request(250, 80);
     label = new Gtk.Label(_("I_nclude:"));
     label.set("use-underline", true,
@@ -193,7 +193,7 @@ public class PreferencesDialog : Gtk.Dialog
                  3, 3);
     ++row;
     
-    w = new ConfigList(DejaDup.EXCLUDE_LIST_KEY);
+    w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY);
     w.set_size_request(250, 120);
     label = new Gtk.Label(_("E_xclude:"));
     label.set("use-underline", true,
@@ -208,19 +208,19 @@ public class PreferencesDialog : Gtk.Dialog
                  3, 3);
     ++row;
     
-    w = new ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
+    w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
     table.attach(w, 0, 3, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL, 3, 3);
     ++row;
     
-    ConfigBool periodic_check = new ConfigBool(DejaDup.PERIODIC_KEY, _("_Automatically backup on a regular schedule"));
+    DejaDup.ConfigBool periodic_check = new DejaDup.ConfigBool(DejaDup.PERIODIC_KEY, _("_Automatically backup on a regular schedule"));
     table.attach(periodic_check, 0, 3, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL, 3, 3);
     ++row;
     
-    w = new ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
+    w = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
     label = new Gtk.Label("    %s".printf(_("How _often to backup:")));
     label.set("mnemonic-widget", backend,
               "use-underline", true,
@@ -232,7 +232,7 @@ public class PreferencesDialog : Gtk.Dialog
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL,
                  3, 3);
-    periodic_toggle = new ToggleGroup(periodic_check);
+    periodic_toggle = new DejaDup.ToggleGroup(periodic_check);
     periodic_toggle.add_dependent(label);
     periodic_toggle.add_dependent(w);
     periodic_toggle.check();
@@ -246,7 +246,7 @@ public class PreferencesDialog : Gtk.Dialog
     vbox.add(table);
   }
   
-  void handle_backend_changed(ConfigWidget backend, string val)
+  void handle_backend_changed(DejaDup.ConfigWidget backend, string val)
   {
     for (int i = 0; i < NUM_LISTS; ++i) {
       bool show = false;

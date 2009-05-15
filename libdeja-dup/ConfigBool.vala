@@ -19,61 +19,52 @@
 
 using GLib;
 
-public class ConfigFolder : ConfigWidget
+namespace DejaDup {
+
+public class ConfigBool : ConfigWidget, Togglable
 {
-  public ConfigFolder(string key)
+  public string label {get; construct;}
+  
+  public ConfigBool(string key, string label)
   {
     this.key = key;
+    this.label = label;
   }
   
-  Gtk.FileChooserButton button;
+  public bool get_active() {return button.get_active();}
+  
+  Gtk.CheckButton button;
   construct {
-    button = new Gtk.FileChooserButton(_("Select Folder"),
-                                       Gtk.FileChooserAction.SELECT_FOLDER);
+    button = new Gtk.CheckButton.with_mnemonic(label);
     add(button);
     
     set_from_config();
-    button.selection_changed.connect(handle_selection_changed);
+    button.toggled.connect(handle_toggled);
   }
   
   protected override void set_from_config()
   {
-    string val;
     try {
-      val = client.get_string(key);
+      var val = client.get_bool(key);
+      button.set_active(val);
     }
     catch (Error e) {
       warning("%s\n", e.message);
-      return;
-    }
-    if (val == null)
-      val = ""; // There should really be a better default, but I'm not sure
-                // what.  The first mounted volume we see?  Create a directory
-                // in $HOME called 'deja-dup'?
-    
-    if (button.get_filename() != val) {
-      button.set_filename(val);
     }
   }
   
-  void handle_selection_changed()
+  void handle_toggled()
   {
-    string val = null;
     try {
-      val = client.get_string(key);
-    }
-    catch (Error e) {} // ignore
-    
-    string filename = button.get_filename();
-    if (filename == val)
-      return; // we sometimes get several selection changed notices in a row...
-    
-    try {
-      client.set_string(key, filename);
+      client.set_bool(key, button.get_active());
     }
     catch (Error e) {
       warning("%s\n", e.message);
     }
+    
+    toggled();
   }
+}
+
 }
 

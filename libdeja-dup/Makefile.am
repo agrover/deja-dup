@@ -30,6 +30,15 @@ libdeja_dup_la_VALASOURCES = \
 	BackendFile.vala \
 	BackendS3.vala \
 	BackendSSH.vala \
+	ConfigBackend.vala \
+	ConfigBool.vala \
+	ConfigChoice.vala \
+	ConfigEntry.vala \
+	ConfigFolder.vala \
+	ConfigList.vala \
+	ConfigNumber.vala \
+	ConfigPeriod.vala \
+	ConfigWidget.vala \
 	Duplicity.vala \
 	DuplicityInfo.vala \
 	DuplicityInstance.vala \
@@ -40,6 +49,7 @@ libdeja_dup_la_VALASOURCES = \
 	RecursiveDelete.vala \
 	RecursiveMove.vala \
 	RecursiveOp.vala \
+	ToggleGroup.vala \
 	libdeja-dup.vala
 
 BUILT_SOURCES = \

@@ -19,56 +19,70 @@
 
 using GLib;
 
-public class ConfigPeriod : ConfigChoice
+namespace DejaDup {
+
+public class ConfigChoice : ConfigWidget
 {
-  public ConfigPeriod(string key) {
-    this.key = key;
-  }
+  public signal void changed(string val);
   
+  protected Gtk.ComboBox combo;
+  protected string default_val = null;
   construct {
-    var store = new Gtk.ListStore(2, typeof(string), typeof(int));
-    
-    Gtk.TreeIter iter;
-    int i = 0;
-    
-    store.insert_with_values(out iter, i++, 0, _("Daily"), 1, 1);
-    store.insert_with_values(out iter, i++, 0, _("Weekly"), 1, 7);
-    // Translators: Biweekly is every two weeks
-    store.insert_with_values(out iter, i++, 0, _("Biweekly"), 1, 14);
-    store.insert_with_values(out iter, i++, 0, _("Monthly"), 1, 28);
-    
-    store.set_sort_column_id(1, Gtk.SortType.ASCENDING);
-    
-    init(store, 1);
+    combo = new Gtk.ComboBox.text();
+    add(combo);
   }
   
-  protected override void handle_changed()
+  // Subclasses use this to setup the choice list
+  protected int gconf_col;
+  public void init(Gtk.TreeModel model, int gconf_col)
+  {
+    combo.model = model;
+    this.gconf_col = gconf_col;
+    
+    combo.changed.connect(handle_changed);
+    
+    set_from_config();
+  }
+  
+  public Value? get_current_value()
+  {
+    Gtk.TreeIter iter;
+    if (combo.get_active_iter(out iter)) {
+      Value val;
+      combo.model.get_value(iter, gconf_col, out val);
+      return val;
+    }
+    return null;
+  }
+  
+  protected virtual void handle_changed()
   {
     Value? val = get_current_value();
-    int intval = val == null ? 1 : val.get_int();
+    string strval = val == null ? "" : val.get_string();
     
     try {
-        client.set_int(key, intval);
+        client.set_string(key, strval);
     }
     catch (Error e) {
       warning("%s\n", e.message);
     }
     
-    changed(intval.to_string());
+    changed(strval);
   }
   
   protected override void set_from_config()
   {
-    int confval;
+    string confval = null;
     try {
-        confval = client.get_int(key);
+      confval = client.get_string(key);
     }
     catch (Error e) {
       warning("%s\n", e.message);
-      return;
     }
-    if (confval < 1)
-      confval = 1;
+    if (confval == null || confval == "")
+      confval = default_val;
+    if (confval == null)
+      return;
     
     bool valid;
     Gtk.TreeIter iter;
@@ -77,24 +91,16 @@ public class ConfigPeriod : ConfigChoice
     while (valid) {
       Value val;
       combo.model.get_value(iter, gconf_col, out val);
-      int intval = val.get_int();
+      string strval = val.get_string();
       
-      if (intval == confval) {
+      if (strval == confval) {
         combo.set_active_iter(iter);
         break;
       }
       valid = combo.model.iter_next(ref iter);
     }
-    
-    // If we didn't find the period, user must have set it to something non
-    // standard.  Let's add an entry to the combo.
-    if (!valid) {
-      var store = (Gtk.ListStore)combo.model;
-      store.insert_with_values(out iter, 0, 0,
-                               ngettext("Every %d day", "Every %d days", confval).printf(confval),
-                               1, confval);
-      combo.set_active_iter(iter);
-    }
   }
+}
+
 }
 

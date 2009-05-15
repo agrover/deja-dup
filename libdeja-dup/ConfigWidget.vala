@@ -19,34 +19,44 @@
 
 using GLib;
 
-public interface Togglable : Object
+namespace DejaDup {
+
+public abstract class ConfigWidget : Gtk.EventBox
 {
-  public signal void toggled();
-  public abstract bool get_active();
+  public string key {get; construct;}
+  
+  string dir;
+  protected GConf.Client client;
+  construct {
+    client = DejaDup.get_gconf_client();
+    
+    if (key != null) {
+      dir = key;
+      weak string end = dir.rchr(-1, '/');
+      if (end != null)
+        dir = dir.substring(0, dir.length - end.length);
+      try {
+        client.add_dir(dir, GConf.ClientPreloadType.NONE);
+        client.notify_add(key, set_from_config);
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
+    }
+  }
+  
+  ~ConfigWidget()
+  {
+    try {
+      client.remove_dir(dir);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
+  }
+  
+  protected abstract void set_from_config();
 }
 
-public class ToggleGroup : Object
-{
-  public Togglable toggle {get; construct;}
-  
-  public ToggleGroup(Togglable toggle) {
-    this.toggle = toggle;
-  }
-  
-  List<Gtk.Widget> dependents;
-  public void add_dependent(Gtk.Widget w) {
-    dependents.append(w);
-  }
-  
-  public void check()
-  {
-    bool on = toggle.get_active();
-    foreach (Gtk.Widget w in dependents)
-      w.set_sensitive(on);
-  }
-  
-  construct {
-    toggle.toggled.connect((t) => {check();});
-  }
 }
 
