@@ -19,6 +19,8 @@
 
 using GLib;
 
+namespace DejaDup {
+
 public class ConfigList : ConfigWidget
 {
   public ConfigList(string key)
@@ -209,5 +211,7 @@ public class ConfigList : ConfigWidget
       return;
     }
   }
+}
+
 }
 

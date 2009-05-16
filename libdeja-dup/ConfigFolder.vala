@@ -19,46 +19,65 @@
 
 using GLib;
 
-public class ConfigNumber : ConfigWidget
+namespace DejaDup {
+
+public class ConfigFolder : ConfigWidget
 {
-  public int lower_bound {get; construct;}
-  public int upper_bound {get; construct;}
-  
-  public ConfigNumber(string key, int lower_bound, int upper_bound)
+  public ConfigFolder(string key)
   {
     this.key = key;
-    this.lower_bound = lower_bound;
-    this.upper_bound = upper_bound;
   }
   
-  Gtk.SpinButton spin;
+  Gtk.FileChooserButton button;
   construct {
-    spin = new Gtk.SpinButton.with_range(lower_bound, upper_bound, 1);
-    add(spin);
+    button = new Gtk.FileChooserButton(_("Select Folder"),
+                                       Gtk.FileChooserAction.SELECT_FOLDER);
+    add(button);
     
     set_from_config();
-    spin.value_changed.connect(handle_value_changed);
+    button.selection_changed.connect(handle_selection_changed);
   }
   
   protected override void set_from_config()
   {
+    string val;
     try {
-      var val = client.get_int(key);
-      spin.@value = val;
+      val = client.get_string(key);
     }
     catch (Error e) {
       warning("%s\n", e.message);
+      return;
+    }
+    if (val == null)
+      val = ""; // There should really be a better default, but I'm not sure
+                // what.  The first mounted volume we see?  Create a directory
+                // in $HOME called 'deja-dup'?
+    
+    if (button.get_filename() != val) {
+      button.set_filename(val);
     }
   }
   
-  void handle_value_changed()
+  void handle_selection_changed()
   {
+    string val = null;
     try {
-      client.set_int(key, (int)spin.@value);
+      val = client.get_string(key);
+    }
+    catch (Error e) {} // ignore
+    
+    string filename = button.get_filename();
+    if (filename == val)
+      return; // we sometimes get several selection changed notices in a row...
+    
+    try {
+      client.set_string(key, filename);
     }
     catch (Error e) {
       warning("%s\n", e.message);
     }
   }
+}
+
 }
 

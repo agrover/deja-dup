@@ -19,26 +19,48 @@
 
 using GLib;
 
-public class ConfigBackend : ConfigChoice
+namespace DejaDup {
+
+public class ConfigEntry : ConfigWidget
 {
-  public ConfigBackend(string key) {
+  public ConfigEntry(string key)
+  {
     this.key = key;
   }
   
+  Gtk.Entry entry;
   construct {
-    var store = new Gtk.ListStore(2, typeof(string), typeof(string));
+    entry = new Gtk.Entry();
+    add(entry);
     
-    Gtk.TreeIter iter;
-    int i = 0;
-    
-    store.insert_with_values(out iter, i++, 0, _("Amazon S3"), 1, "s3");
-    store.insert_with_values(out iter, i++, 0, _("Local Folder"), 1, "file");
-    store.insert_with_values(out iter, i++, 0, _("SSH"), 1, "ssh");
-    
-    store.set_sort_column_id(0, Gtk.SortType.ASCENDING);
-    
-    this.default_val = "s3";
-    init(store, 1);
+    set_from_config();
+    entry.focus_out_event.connect(handle_focus_out);
   }
+  
+  protected override void set_from_config()
+  {
+    try {
+      var val = client.get_string(key);
+      if (val == null)
+        val = "";
+      entry.set_text(val);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
+  }
+  
+  bool handle_focus_out()
+  {
+    try {
+      client.set_string(key, entry.get_text());
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
+    return false;
+  }
+}
+
 }
 
