@@ -19,7 +19,7 @@ dist_man1_MANS = \
 
 DOC_MODULE = deja-dup
 DOC_ENTITIES = 
-DOC_INCLUDES = legal.xml
+DOC_INCLUDES = 
 DOC_FIGURES = 
 
 # Here's a bunch of translation support.  It's largely stolen from dpkg
@@ -46,7 +46,7 @@ prepare.stamp: po4a.cfg $(top_srcdir)/po/LINGUAS
 	test "$(PO4A_LINGUAS)" = "$(LINGUAS)" || sed -i "s/^\(.*\[po4a_langs\] \).*$$/\1$(LINGUAS)/" $(srcdir)/po4a.cfg
 	touch $@
 
-po4a.stamp: po4a.cfg $(dist_man1_MANS) C/deja-dup.xml C/legal.xml prepare.stamp  $(top_srcdir)/po/*.po
+po4a.stamp: po4a.cfg $(dist_man1_MANS) C/deja-dup.xml prepare.stamp  $(top_srcdir)/po/*.po
 	test -e $(srcdir)/no-po4a || $(PO4A) --no-backups --variable srcdir=$(srcdir) --variable top_srcdir=$(top_srcdir) $(srcdir)/po4a.cfg
 	touch $@
 
