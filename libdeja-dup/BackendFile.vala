@@ -43,22 +43,7 @@ public class BackendFile : Backend
   public override string? get_location() throws Error
   {
     var path = get_location_from_gconf();
-    if (path == null) {
-      var dlg = new Gtk.FileChooserDialog(_("Choose backup destination"),
-                                          toplevel,
-                                          Gtk.FileChooserAction.CREATE_FOLDER,
-                                          Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                            				      Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT);
-      
-      if (dlg.run() != Gtk.ResponseType.ACCEPT) {
-        dlg.destroy();
-        return null;
-      }
-      
-      path = dlg.get_filename();
-      dlg.destroy();
-    }
-    return "file://%s".printf(path);
+    return path;
   }
 
   public override string? get_location_pretty() throws Error
@@ -71,8 +56,11 @@ public class BackendFile : Backend
     if (mode == Operation.Mode.BACKUP) {
       try {
         var path = get_location_from_gconf();
-        if (path != null)
-          argv.prepend("--exclude=%s".printf(path));
+        if (path != null) {
+          var file = File.parse_name(path);
+          if (file.is_native())
+          argv.prepend("--exclude=%s".printf(file.get_path()));
+        }
       }
       catch (Error e) {
         warning("%s\n", e.message);

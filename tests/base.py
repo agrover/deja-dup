@@ -91,8 +91,8 @@ def create_local_config(dest=None, includes=None, excludes=None):
   if dest is None:
     dest = get_temp_name('local')
     os.system('mkdir -p %s' % dest)
-  set_gconf_value("backend", "gio")
-  set_gconf_value("gio/location", dest)
+  set_gconf_value("backend", "file")
+  set_gconf_value("file/path", dest)
   if includes is not None:
     includes = '[' + ','.join(includes) + ']'
     set_gconf_value("include-list", includes, "list", "string")

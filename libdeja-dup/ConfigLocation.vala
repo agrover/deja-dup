@@ -69,7 +69,7 @@ public class ConfigLocation : ConfigWidget
     if (val == "s3" && tmpdir != null)
       file = tmpdir;
     else {
-      val = client.get_string(GIO_LOCATION_KEY);
+      val = client.get_string(FILE_PATH_KEY);
       if (val == null)
         val = ""; // current directory
       file = File.parse_name(val);
@@ -114,8 +114,8 @@ public class ConfigLocation : ConfigWidget
       if (tmpdir != null && file.equal(tmpdir))
         client.set_string(BACKEND_KEY, "s3");
       else {
-        client.set_string(BACKEND_KEY, "gio");
-        client.set_string(GIO_LOCATION_KEY, file.get_parse_name());
+        client.set_string(BACKEND_KEY, "file");
+        client.set_string(FILE_PATH_KEY, file.get_parse_name());
       }
     }
     catch (Error e) {
