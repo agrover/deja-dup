@@ -5,7 +5,8 @@
 
 TESTS = \
 	basic/quit \
-	basic/badversion
+	basic/badversion \
+	prefs/ssh-to-file
 #	backup/local
 
 test:

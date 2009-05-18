@@ -186,7 +186,7 @@ public bool set_bus_claimed(string busname, bool claim)
 }
 
 GConf.Client client;
-public void set_gconf_client()
+void set_gconf_client()
 {
   var source_str = Environment.get_variable("GCONF_CONFIG_SOURCE");
   if (source_str != null) {
@@ -205,6 +205,50 @@ public GConf.Client get_gconf_client()
   if (client == null)
     client = GConf.Client.get_default();
   return client;
+}
+
+// Once, we didn't use GIO, but had a special SSH backend for duplicity that
+// would tell duplicity to use its own SSH handling.  We convert those gconf
+// values to the new ones here.
+void convert_ssh_to_file()
+{
+  var client = get_gconf_client();
+  try {
+    var backend = client.get_string(BACKEND_KEY);
+    if (backend == "ssh") {
+      client.set_string(BACKEND_KEY, "file");
+      var server = client.get_string(SSH_SERVER_KEY);
+      if (server != null && server != "") {
+        var username = client.get_string(SSH_USERNAME_KEY);
+        var port = client.get_string(SSH_PORT_KEY); // was int with schema installed...
+        var directory = client.get_string(SSH_DIRECTORY_KEY);
+        
+        var gio_uri = "ssh://";
+        if (username != null && username != "")
+          gio_uri += username + "@";
+        gio_uri += server;
+        if (port != null && port != "")
+          gio_uri += ":" + port;
+        if (directory == null || directory == "")
+          gio_uri += "/";
+        else if (directory[0] != '/')
+          gio_uri += "/" + directory;
+        else
+          gio_uri += directory;
+        
+        client.set_string(FILE_PATH_KEY, gio_uri);
+      }
+    }
+  }
+  catch (Error e) {
+    warning("%s\n", e.message);
+  }
+}
+
+public void initialize()
+{
+  set_gconf_client();
+  convert_ssh_to_file();
 }
 
 } // end namespace

@@ -28,7 +28,6 @@ AM_CFLAGS = \
 libdeja_dup_la_VALASOURCES = \
 	Backend.vala \
 	BackendFile.vala \
-	BackendGIO.vala \
 	BackendS3.vala \
 	BackendSSH.vala \
 	ConfigBackend.vala \
@@ -54,7 +53,7 @@ libdeja_dup_la_VALASOURCES = \
 	libdeja-dup.vala
 
 BUILT_SOURCES = \
-	libdeja-dup.stamp
+	vala.stamp
 
 libdeja_dup_la_SOURCES = \
 	hacks.c hacks.h \
@@ -63,7 +62,7 @@ libdeja_dup_la_SOURCES = \
 	$(libdeja_dup_la_VALASOURCES:.vala=.c) \
 	$(libdeja_dup_la_VALASOURCES)
 
-libdeja-dup.stamp: $(libdeja_dup_la_VALASOURCES)
+vala.stamp: $(libdeja_dup_la_VALASOURCES)
 if USE_VALAC
 	$(VALAC) -C -H deja-dup.h $(VALA_CFLAGS) $^
 	touch $@
@@ -74,7 +73,7 @@ endif
 
 libdeja_dup_la_LIBADD = $(LIBRARY_LIBS) @INTLLIBS@
 
-EXTRA_DIST = libdeja-dup.stamp
+EXTRA_DIST = vala.stamp
 DISTCLEANFILES = \
 	$(BUILT_SOURCES) \
 	$(libdeja_dup_la_VALASOURCES:.vala=.c) \

@@ -6,6 +6,7 @@ import tempfile
 import sys
 import os
 import ldtp
+import subprocess
 
 latest_duplicity = '0.5.17'
 
@@ -18,7 +19,7 @@ cleanup_mounts = []
 # if we're running inside a distcheck for example.  So note that we check for
 # srcdir and use it if available.  Else, default to current directory.
 
-def setup(backend = None, encrypt = True):
+def setup(backend = None, encrypt = True, start = True):
   global gconf_dir, cleanup_dirs, latest_duplicity
   
   if 'srcdir' in environ:
@@ -66,7 +67,8 @@ def setup(backend = None, encrypt = True):
   
   set_gconf_value("encrypt", 'true' if encrypt else 'false', 'bool')
   
-  start_deja_dup()
+  if start:
+    start_deja_dup()
 
 def cleanup(success):
   global cleanup_dirs, cleanup_mounts
@@ -74,18 +76,33 @@ def cleanup(success):
     os.system('gksudo "umount %s"' % d)
   for d in cleanup_dirs:
     os.system("rm -rf %s" % d)
-  sys.exit(0 if success else 1)
+  if not success:
+    sys.exit(1)
 
 def set_gconf_value(key, value, key_type = "string", list_type = None):
-  cmd = "gconftool-2 --config-source=xml:readwrite:%s -t %s -s /apps/deja-dup/%s %s" % (gconf_dir, key_type, key, value)
+  cmd = ['gconftool-2', '--config-source=xml:readwrite:%s' % gconf_dir, '-t',
+         key_type, '-s', '/apps/deja-dup/%s' % key, value]
   if key_type == "list" and list_type:
-    cmd += " --list-type=%s" % list_type
-  os.system(cmd)
+    cmd += ["--list-type=%s" % list_type]
+  sp = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+  sp.communicate()
+
+def get_gconf_value(key):
+  cmd = ['gconftool-2', '--config-source=xml:readwrite:%s' % gconf_dir,
+         '-g', '/apps/deja-dup/%s' % key]
+  sp = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+  pout = sp.communicate()[0]
+  return pout.strip()
 
 def start_deja_dup():
   ldtp.launchapp('deja-dup', delay=0)
   ldtp.appundertest('deja-dup')
   ldtp.waittillguiexist('frmDéjàDup')
+
+def start_deja_dup_prefs():
+  ldtp.launchapp('deja-dup-preferences', delay=0)
+  ldtp.appundertest('deja-dup-preferences')
+  ldtp.waittillguiexist('frmDéjàDupPreferences')
 
 def create_local_config(dest=None, includes=None, excludes=None):
   if dest is None:

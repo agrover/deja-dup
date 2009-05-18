@@ -80,7 +80,7 @@ class DejaDupApp : Object
     if (!handle_console_options(out status))
       return status;
     
-    DejaDup.set_gconf_client();
+    DejaDup.initialize();
     Gtk.init(ref args); // to open display ('cause we passed false above)
     
     Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
