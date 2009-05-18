@@ -21,10 +21,8 @@ using GLib;
 
 public class PreferencesDialog : Gtk.Dialog
 {
-  static const int FILE_LIST = 0;
-  static const int S3_LIST = 1;
-  static const int SSH_LIST = 2;
-  static const int NUM_LISTS = 3;
+  static const int S3_LIST = 0;
+  static const int NUM_LISTS = 1;
   List<Gtk.Widget>[] backend_widgets;
   
   Gtk.SizeGroup label_sizes;
@@ -51,16 +49,16 @@ public class PreferencesDialog : Gtk.Dialog
     backend_widgets = new List<Gtk.Widget>[NUM_LISTS];
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
-    DejaDup.ConfigBackend backend = new DejaDup.ConfigBackend(DejaDup.BACKEND_KEY);
-    backend.changed.connect(handle_backend_changed);
+    var location = new DejaDup.ConfigLocation();
+    location.changed.connect(handle_location_changed);
     label = new Gtk.Label(_("_Backup location:"));
-    label.set("mnemonic-widget", backend,
+    label.set("mnemonic-widget", location,
               "use-underline", true,
               "xalign", 0.0f);
     label_sizes.add_widget(label);
     table.attach(label, 0, 1, row, row + 1,
                  0, Gtk.AttachOptions.FILL, 3, 3);
-    table.attach(backend, 1, 2, row, row + 1,
+    table.attach(location, 1, 2, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL, 3, 3);
     
@@ -103,79 +101,6 @@ public class PreferencesDialog : Gtk.Dialog
                  Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL,
                  0, 0);
     backend_widgets[S3_LIST].append(s3_table);
-    ++row;
-    
-    var file_table = new Gtk.Table(1, 3, false);
-    w = new DejaDup.ConfigFolder(DejaDup.FILE_PATH_KEY);
-    label = new Gtk.Label("    %s".printf(_("_Folder:")));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "xalign", 0.0f);
-    label_sizes.add_widget(label);
-    file_table.attach(label, 0, 1, 0, 1,
-                      0, Gtk.AttachOptions.FILL, 3, 3);
-    file_table.attach(w, 1, 3, 0, 1,
-                      Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                      Gtk.AttachOptions.FILL, 3, 3);
-    table.attach(file_table, 0, 3, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL,
-                 0, 0);
-    backend_widgets[FILE_LIST].append(file_table);
-    ++row;
-    
-    var ssh_table = new Gtk.Table(4, 3, false);
-    w = new DejaDup.ConfigEntry(DejaDup.SSH_USERNAME_KEY);
-    label = new Gtk.Label("    %s".printf(_("_Username:")));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "xalign", 0.0f);
-    label_sizes.add_widget(label);
-    ssh_table.attach(label, 0, 1, 0, 1,
-                     0, Gtk.AttachOptions.FILL, 3, 3);
-    ssh_table.attach(w, 1, 3, 0, 1,
-                     Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                     Gtk.AttachOptions.FILL, 3, 3);
-    
-    w = new DejaDup.ConfigEntry(DejaDup.SSH_SERVER_KEY);
-    label = new Gtk.Label("    %s".printf(_("_Server:")));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "xalign", 0.0f);
-    label_sizes.add_widget(label);
-    ssh_table.attach(label, 0, 1, 1, 2,
-                     0, Gtk.AttachOptions.FILL, 3, 3);
-    ssh_table.attach(w, 1, 3, 1, 2,
-                     Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                     Gtk.AttachOptions.FILL, 3, 3);
-    
-    w = new DejaDup.ConfigNumber(DejaDup.SSH_PORT_KEY, 1, 100000);
-    label = new Gtk.Label("    %s".printf(_("_Port:")));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "xalign", 0.0f);
-    label_sizes.add_widget(label);
-    ssh_table.attach(label, 0, 1, 2, 3,
-                     0, Gtk.AttachOptions.FILL, 3, 3);
-    ssh_table.attach(w, 1, 3, 2, 3,
-                     Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                     Gtk.AttachOptions.FILL, 3, 3);
-    
-    w = new DejaDup.ConfigEntry(DejaDup.SSH_DIRECTORY_KEY);
-    label = new Gtk.Label("    %s".printf(_("_Folder:")));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "xalign", 0.0f);
-    label_sizes.add_widget(label);
-    ssh_table.attach(label, 0, 1, 3, 4,
-                     0, Gtk.AttachOptions.FILL, 3, 3);
-    ssh_table.attach(w, 1, 3, 3, 4,
-                     Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                     Gtk.AttachOptions.FILL, 3, 3);
-    
-    table.attach(ssh_table, 0, 3, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL,
-                 0, 0);
-    backend_widgets[SSH_LIST].append(ssh_table);
     ++row;
     
     w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY);
@@ -222,7 +147,7 @@ public class PreferencesDialog : Gtk.Dialog
     
     w = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
     label = new Gtk.Label("    %s".printf(_("How _often to backup:")));
-    label.set("mnemonic-widget", backend,
+    label.set("mnemonic-widget", w,
               "use-underline", true,
               "xalign", 0.0f);
     label_sizes.add_widget(label);
@@ -238,23 +163,17 @@ public class PreferencesDialog : Gtk.Dialog
     periodic_toggle.check();
     ++row;
     
-    Value? val = backend.get_current_value();
-    if (val != null)
-      handle_backend_changed(backend, val.get_string());
-    else
-      handle_backend_changed(backend, "");
+    handle_location_changed(location);
     vbox.add(table);
   }
   
-  void handle_backend_changed(DejaDup.ConfigWidget backend, string val)
+  void handle_location_changed(DejaDup.ConfigWidget widget)
   {
+    var location = (DejaDup.ConfigLocation)widget;
+    
     for (int i = 0; i < NUM_LISTS; ++i) {
       bool show = false;
-      if (i == S3_LIST && val == "s3")
-        show = true;
-      else if (i == FILE_LIST && val == "file")
-        show = true;
-      else if (i == SSH_LIST && val == "ssh")
+      if (i == S3_LIST && location.is_s3)
         show = true;
       
       foreach (Gtk.Widget w in backend_widgets[i]) {

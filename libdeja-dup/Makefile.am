@@ -28,14 +28,15 @@ AM_CFLAGS = \
 libdeja_dup_la_VALASOURCES = \
 	Backend.vala \
 	BackendFile.vala \
+	BackendGIO.vala \
 	BackendS3.vala \
 	BackendSSH.vala \
 	ConfigBackend.vala \
 	ConfigBool.vala \
 	ConfigChoice.vala \
 	ConfigEntry.vala \
-	ConfigFolder.vala \
 	ConfigList.vala \
+	ConfigLocation.vala \
 	ConfigNumber.vala \
 	ConfigPeriod.vala \
 	ConfigWidget.vala \

@@ -21,27 +21,17 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigFolder : ConfigWidget
+public class ConfigLocation : ConfigWidget
 {
-  string special_name {get; construct};
-  string special_key {get; construct};
+  public signal void changed();
   
-  public ConfigFolder(string key, string? special_name, string? special_key)
-  {
-    this.key = key;
-    this.special_name = special_name;
-    this.special_key = special_key;
-  }
-  
-  public bool is_special()
-  {
-    return tmpdir.equal(button.get_file());
-  }
+  public bool is_s3 {get; private set;}
   
   Gtk.FileChooserDialog dialog;
   Gtk.FileChooserButton button;
   File top_tmpdir;
   File tmpdir;
+  string s3_name;
   construct {
     dialog = new Gtk.FileChooserDialog (_("Select Backup Location"), null,
                           						  Gtk.FileChooserAction.SELECT_FOLDER,
@@ -53,12 +43,14 @@ public class ConfigFolder : ConfigWidget
     button.local_only = false;
     add(button);
     
+    s3_name = _("Amazon S3");
     add_special_location();
+    
     set_from_config();
     button.selection_changed.connect(handle_selection_changed);
   }
   
-  ~ConfigFolder()
+  ~ConfigLocation()
   {
     try {
       tmpdir.delete(null);
@@ -69,53 +61,77 @@ public class ConfigFolder : ConfigWidget
     }
   }
   
+  File get_file_from_gconf() throws Error
+  {
+    // Check the backend type, then GIO uri if needed
+    File file = null;
+    var val = client.get_string(BACKEND_KEY);
+    if (val == "s3" && tmpdir != null)
+      file = tmpdir;
+    else {
+      val = client.get_string(GIO_LOCATION_KEY);
+      if (val == null)
+        val = ""; // current directory
+      file = File.parse_name(val);
+    }
+    return file;
+  }
+  
   protected override void set_from_config()
   {
-    string val;
+    // Check the backend type, then GIO uri if needed
+    File file = null;
     try {
-      val = client.get_string(key);
+      var uri = button.get_uri();
+      var button_file = uri == null ? null : File.new_for_uri(uri);
+      file = get_file_from_gconf();
+      if (button_file == null || !file.equal(button_file)) {
+        button.select_uri(file.get_uri());
+        is_s3 = tmpdir != null && file.equal(tmpdir);
+      }
     }
     catch (Error e) {
       warning("%s\n", e.message);
-      return;
-    }
-    if (val == null)
-      val = ""; // There should really be a better default, but I'm not sure
-                // what.  The first mounted volume we see?  Create a directory
-                // in $HOME called 'deja-dup'?
-    
-    if (button.get_filename() != val) {
-      button.set_filename(val);
     }
   }
   
   void handle_selection_changed()
   {
-    string val = null;
+    File gconf_file = null;
     try {
-      val = client.get_string(key);
+      gconf_file = get_file_from_gconf();
     }
     catch (Error e) {} // ignore
     
-    string filename = button.get_filename();
-    if (filename == val)
+    var uri = button.get_uri();
+    var file = uri == null ? null : File.new_for_uri(uri);
+    if (file == null || file.equal(gconf_file))
       return; // we sometimes get several selection changed notices in a row...
     
+    is_s3 = tmpdir != null && file.equal(tmpdir);
+    
     try {
-      client.set_string(key, filename);
+      if (tmpdir != null && file.equal(tmpdir))
+        client.set_string(BACKEND_KEY, "s3");
+      else {
+        client.set_string(BACKEND_KEY, "gio");
+        client.set_string(GIO_LOCATION_KEY, file.get_parse_name());
+      }
     }
     catch (Error e) {
       warning("%s\n", e.message);
     }
+    
+    changed();
   }
   
   void add_special_location()
   {
     // This is a big ol' hack to show a custom, non-GIO name as a location,
-    // Should try to get that S3 in as a patch someday...
+    // Should try to get S3 in as a patch to GIO someday...
     var template = Path.build_filename(Environment.get_tmp_dir(), "deja-dup-XXXXXX");
     top_tmpdir = File.new_for_path(DirUtils.mkdtemp(template));
-    tmpdir = top_tmpdir.get_child(special_name);
+    tmpdir = top_tmpdir.get_child(s3_name);
     
     try {
       tmpdir.make_directory(null);
@@ -130,7 +146,7 @@ public class ConfigFolder : ConfigWidget
   
   void handle_dialog_show(Gtk.Widget w)
   {
-    if (is_special()) {
+    if (is_s3) {
       // We need to reset the current folder, because we don't want to expose
       // the temporary folder used for s3.  So go to $HOME.
       button.set_current_folder(Environment.get_home_dir());
