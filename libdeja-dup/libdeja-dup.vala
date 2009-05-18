@@ -132,7 +132,6 @@ public void show_about(Object owner, Gtk.Window? parent)
   about.translator_credits = _("translator-credits");
   about.logo_icon_name = Config.PACKAGE;
   about.version = Config.VERSION;
-  about.copyright = "© 2008—2009 Michael Terry";
   about.website = "http://mterry.name/deja-dup/";
   about.license = "%s\n\n%s\n\n%s".printf (
     _("This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version."),
