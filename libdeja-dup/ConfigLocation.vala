@@ -69,6 +69,9 @@ public class ConfigLocation : ConfigWidget
     
     set_from_config();
     button.selection_changed.connect(handle_selection_changed);
+    
+    watch_key(BACKEND_KEY);
+    watch_key(FILE_PATH_KEY);
   }
   
   ~ConfigLocation()

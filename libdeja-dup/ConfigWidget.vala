@@ -25,19 +25,20 @@ public abstract class ConfigWidget : Gtk.EventBox
 {
   public string key {get; construct;}
   
-  string dir = null;
+  List<string> dirs = null;
   protected GConf.Client client;
   construct {
     client = DejaDup.get_gconf_client();
     
-    if (key != null) {
-      dir = key;
-      weak string end = dir.rchr(-1, '/');
-      if (end != null)
-        dir = dir.substring(0, dir.length - end.length);
+    if (key != null)
+      watch_key(key);
+  }
+  
+  ~ConfigWidget()
+  {
+    foreach (string dir in dirs) {
       try {
-        client.add_dir(dir, GConf.ClientPreloadType.NONE);
-        client.notify_add(key, set_from_config);
+        client.remove_dir(dir);
       }
       catch (Error e) {
         warning("%s\n", e.message);
@@ -45,11 +46,16 @@ public abstract class ConfigWidget : Gtk.EventBox
     }
   }
   
-  ~ConfigWidget()
+  protected void watch_key(string key)
   {
+    string dir = key;
+    weak string end = dir.rchr(-1, '/');
+    if (end != null)
+      dir = dir.substring(0, dir.length - end.length);
     try {
-      if (dir != null)
-        client.remove_dir(dir);
+      client.add_dir(dir, GConf.ClientPreloadType.NONE);
+      client.notify_add(key, set_from_config);
+      dirs.prepend(dir);
     }
     catch (Error e) {
       warning("%s\n", e.message);
