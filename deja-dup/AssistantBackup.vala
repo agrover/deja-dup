@@ -21,7 +21,7 @@ using GLib;
 
 public class AssistantBackup : AssistantOperation
 {
-  Gtk.Label confirm_backup;
+  Gtk.Widget confirm_backup;
   construct
   {
     title = _("Backup");
@@ -35,10 +35,10 @@ public class AssistantBackup : AssistantOperation
   {
     int rows = 0;
     
-    var backup_label = new Gtk.Label(_("Backup location:"));
-    backup_label.set("xalign", 0.0f);
-    confirm_backup = new Gtk.Label("");
-    confirm_backup.set("xalign", 0.0f);
+    confirm_backup = new DejaDup.ConfigLocation();
+    var backup_label = new Gtk.Label.with_mnemonic(_("_Backup location:"));
+    backup_label.set("xalign", 0.0f,
+                     "mnemonic-widget", confirm_backup);
     ++rows;
     
     var page = new Gtk.Table(rows, 2, false);
@@ -81,20 +81,7 @@ public class AssistantBackup : AssistantOperation
   {
     base.do_prepare(assist, page);
     
-    if (page == confirm_page) {
-      // Where the backup is
-      string backup_loc = null;
-      try {
-        backup_loc = DejaDup.Backend.get_default(this).get_location_pretty();
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
-      if (backup_loc == null)
-        backup_loc = _("Unknown");
-      confirm_backup.label = backup_loc;
-    }
-    else if (page == summary_page) {
+    if (page == summary_page) {
       if (error_occurred)
         assist.child_set(page, "title", _("Backup Failed"));
       else {
