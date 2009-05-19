@@ -27,6 +27,8 @@ public class ConfigLocation : ConfigWidget
   
   public bool is_s3 {get; private set;}
   
+  static const int CONNECT_ID = 1;
+  
   Gtk.FileChooserDialog dialog;
   Gtk.FileChooserButton button;
   File top_tmpdir;
@@ -34,9 +36,26 @@ public class ConfigLocation : ConfigWidget
   string s3_name;
   construct {
     dialog = new Gtk.FileChooserDialog (_("Select Backup Location"), null,
-                          						  Gtk.FileChooserAction.SELECT_FOLDER,
-                          						  Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                          						  Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT);
+                          						  Gtk.FileChooserAction.SELECT_FOLDER);
+    
+    if (Environment.find_program_in_path("nautilus-connect-server") != null) {
+      dialog.add_buttons(_("Connect to Server..."), CONNECT_ID);
+      dialog.response.connect((b, r) => {
+        if (r != CONNECT_ID)
+          return;
+        try {
+          Process.spawn_command_line_async("nautilus-connect-server");
+        } catch (Error e) {
+          Gtk.MessageDialog dlg = new Gtk.MessageDialog (dialog, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not open connection dialog"));
+          dlg.format_secondary_text("%s", e.message);
+          dlg.run ();
+          dlg.destroy ();
+        }
+      });
+    }
+    
+    dialog.add_buttons(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+                       Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT);
     dialog.set_default_response(Gtk.ResponseType.ACCEPT);
     
     button = new Gtk.FileChooserButton.with_dialog(dialog);
