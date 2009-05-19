@@ -25,7 +25,7 @@ public abstract class ConfigWidget : Gtk.EventBox
 {
   public string key {get; construct;}
   
-  string dir;
+  string dir = null;
   protected GConf.Client client;
   construct {
     client = DejaDup.get_gconf_client();
@@ -48,7 +48,8 @@ public abstract class ConfigWidget : Gtk.EventBox
   ~ConfigWidget()
   {
     try {
-      client.remove_dir(dir);
+      if (dir != null)
+        client.remove_dir(dir);
     }
     catch (Error e) {
       warning("%s\n", e.message);
