@@ -152,6 +152,15 @@ public void show_about(Object owner, Gtk.Window? parent)
   about.show();
 }
 
+public Gtk.Window? get_topwindow(Gtk.Widget w)
+{
+  w = w.get_toplevel();
+  if (w != null && w.is_toplevel())
+    return (Gtk.Window)w;
+  else
+    return null;
+}
+
 public bool set_bus_claimed(string busname, bool claim)
 {
   try {
