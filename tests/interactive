@@ -19,11 +19,14 @@ def test():
   dest = None
   size = None
   back = 'file'
+  prog = None
   for arg in sys.argv[1:]:
     if arg == 'vfat':
       mtype = arg
     elif arg == 'ext3':
       mtype = arg
+    elif arg == 'applet':
+      prog = arg
     elif arg.startswith('id='):
       tmpid = arg.split('=', 1)[-1]
     elif arg.startswith('dup='):
@@ -48,10 +51,15 @@ def test():
   if sources is not None:
     sources = map(lambda s: os.path.abspath(s), [sources])
   
-  base.setup(backend=back, dest=dest, sources=sources)
+  base.setup(backend=back, dest=dest, sources=sources, start=False)
   
-  # Let user play with it for a while, maximum 2 hours
-  if ldtp.waittillguinotexist('frmDéjàDup', guiTimeOut=60*60*2) == 0:
-    base.quit()
+  if prog is None:
+    base.start_deja_dup()  
+    # Let user play with it for a while, maximum 2 hours
+    if ldtp.waittillguinotexist('frmDéjàDup', guiTimeOut=60*60*2) == 0:
+      base.quit()
+  elif prog == 'applet':
+    base.start_deja_dup_applet()
+    ldtp.wait(60*60*2)
 
 base.run(test)

@@ -106,6 +106,10 @@ def start_deja_dup_prefs():
   ldtp.appundertest('deja-dup-preferences')
   ldtp.waittillguiexist('frmDéjàDupPreferences')
 
+def start_deja_dup_applet():
+  ldtp.launchapp('deja-dup-applet')
+  ldtp.appundertest('deja-dup-applet')
+
 def create_local_config(dest='/', includes=None, excludes=None):
   if dest is None:
     dest = get_temp_name('local')
