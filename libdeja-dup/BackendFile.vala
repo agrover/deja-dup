@@ -43,7 +43,8 @@ public class BackendFile : Backend
   public override string? get_location() throws Error
   {
     var path = get_location_from_gconf();
-    return path;
+    var file = File.parse_name(path);
+    return "file://" + file.get_path();
   }
 
   public override string? get_location_pretty() throws Error
