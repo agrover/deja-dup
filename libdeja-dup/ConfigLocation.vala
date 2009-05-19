@@ -62,6 +62,8 @@ public class ConfigLocation : ConfigWidget
     button.local_only = false;
     add(button);
     
+    mnemonic_activate.connect((w, g) => {return button.mnemonic_activate(g);});
+    
     s3_name = _("Amazon S3");
     add_special_location();
     

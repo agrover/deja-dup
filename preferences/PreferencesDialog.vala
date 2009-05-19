@@ -106,7 +106,8 @@ public class PreferencesDialog : Gtk.Dialog
     w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY);
     w.set_size_request(250, 80);
     label = new Gtk.Label(_("I_nclude:"));
-    label.set("use-underline", true,
+    label.set("mnemonic-widget", w,
+              "use-underline", true,
               "xalign", 0.0f,
               "yalign", 0.0f);
     label_sizes.add_widget(label);
@@ -121,7 +122,8 @@ public class PreferencesDialog : Gtk.Dialog
     w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY);
     w.set_size_request(250, 120);
     label = new Gtk.Label(_("E_xclude:"));
-    label.set("use-underline", true,
+    label.set("mnemonic-widget", w,
+              "use-underline", true,
               "xalign", 0.0f,
               "yalign", 0.0f);
     label_sizes.add_widget(label);

@@ -64,6 +64,8 @@ public class ConfigList : ConfigWidget
     hbox.pack_start(vbox, false, false, 0);
     add(hbox);
     
+    mnemonic_activate.connect((w, g) => {return tree.mnemonic_activate(g);});
+    
     set_from_config();
     handle_selection_change(tree.get_selection());
     tree.get_selection().changed.connect(handle_selection_change);
