@@ -18,6 +18,7 @@ def test():
   sources = None
   dest = None
   size = None
+  back = 'file'
   for arg in sys.argv[1:]:
     if arg == 'vfat':
       mtype = arg
@@ -31,6 +32,8 @@ def test():
       sources = arg.split('=', 1)[-1]
     elif arg.startswith('size='):
       size = int(arg.split('=', 1)[-1])
+    elif arg.startswith('back='):
+      back = arg.split('=', 1)[-1]
     else:
       print "Unrecognized argument '%s'" % arg
       return 1
@@ -45,8 +48,7 @@ def test():
   if sources is not None:
     sources = map(lambda s: os.path.abspath(s), [sources])
   
-  base.setup()
-  base.create_local_config(dest, sources)
+  base.setup(backend=back, dest=dest, sources=sources)
   
   # Let user play with it for a while, maximum 2 hours
   if ldtp.waittillguinotexist('frmDéjàDup', guiTimeOut=60*60*2) == 0:

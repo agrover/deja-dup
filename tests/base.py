@@ -19,7 +19,7 @@ cleanup_mounts = []
 # if we're running inside a distcheck for example.  So note that we check for
 # srcdir and use it if available.  Else, default to current directory.
 
-def setup(backend = None, encrypt = True, start = True):
+def setup(backend = None, encrypt = True, start = True, dest = '/', sources = []):
   global gconf_dir, cleanup_dirs, latest_duplicity
   
   if 'srcdir' in environ:
@@ -63,7 +63,9 @@ def setup(backend = None, encrypt = True, start = True):
   os.system('gconftool-2 --makefile-install-rule %s > /dev/null' % ('%s/../data/deja-dup.schemas.in' % srcdir))
   
   if backend == 'file':
-    create_local_config()
+    create_local_config(dest, sources)
+  elif backend == 'ssh':
+    create_ssh_config(dest, sources);
   
   set_gconf_value("encrypt", 'true' if encrypt else 'false', 'bool')
   
@@ -104,12 +106,25 @@ def start_deja_dup_prefs():
   ldtp.appundertest('deja-dup-preferences')
   ldtp.waittillguiexist('frmDéjàDupPreferences')
 
-def create_local_config(dest=None, includes=None, excludes=None):
+def create_local_config(dest='/', includes=None, excludes=None):
   if dest is None:
     dest = get_temp_name('local')
     os.system('mkdir -p %s' % dest)
   set_gconf_value("backend", "file")
   set_gconf_value("file/path", dest)
+  if includes is not None:
+    includes = '[' + ','.join(includes) + ']'
+    set_gconf_value("include-list", includes, "list", "string")
+  if excludes is not None:
+    excludes = '[' + ','.join(excludes) + ']'
+    set_gconf_value("exclude-list", excludes, "list", "string")
+
+def create_ssh_config(dest='/', includes=None, excludes=None):
+  if dest is None:
+    dest = get_temp_name('local')
+    os.system('mkdir -p %s' % dest)
+  set_gconf_value("backend", "file")
+  set_gconf_value("file/path", "ssh://localhost" + dest)
   if includes is not None:
     includes = '[' + ','.join(includes) + ']'
     set_gconf_value("include-list", includes, "list", "string")
