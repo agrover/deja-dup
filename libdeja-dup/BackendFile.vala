@@ -62,13 +62,75 @@ public class BackendFile : Backend
         if (path != null) {
           var file = File.parse_name(path);
           if (file.is_native())
-          argv.prepend("--exclude=%s".printf(file.get_path()));
+            argv.prepend("--exclude=%s".printf(file.get_path()));
         }
       }
       catch (Error e) {
         warning("%s\n", e.message);
       }
     }
+  }
+  
+  // This doesn't *really* worry about envp, it just is a convenient point to
+  // hook into the operation steps to mount the file.
+  public override void get_envp() throws Error
+  {
+    var path = get_location_from_gconf();
+    var file = File.parse_name(path);
+    Mount mount = null;
+    if (!file.is_native()) {
+      // Check if it's mounted
+      try {
+        mount = file.find_enclosing_mount(null);
+      }
+      catch (Error e) {}
+      
+      if (mount == null)
+        check_if_password_needed(file);
+    }
+  }
+  
+  void check_if_password_needed(File file)
+  {
+    // disallow interaction
+    file.mount_enclosing_volume(MountMountFlags.NONE, null, null, (o, r) => {
+      try {
+        var success = ((File)o).mount_enclosing_volume_finish(r);
+        envp_ready(success, new List<string>());
+      }
+      catch (IOError.PERMISSION_DENIED e) {
+        need_password();
+        return;
+      }
+      catch (Error e) {
+        envp_ready(false, new List<string>(), e.message);
+      }
+    });
+  }
+  
+  public override void ask_password()
+  {
+    // Make sure it's mounted
+    string path;
+    try {
+      path = get_location_from_gconf();
+    }
+    catch (Error e) {
+      envp_ready(false, new List<string>(), e.message);
+      return;
+    }
+    
+    var file = File.parse_name(path);
+    var op = hacks_mount_operation_new(toplevel);
+    file.mount_enclosing_volume(MountMountFlags.NONE, op, null, (o, r) => {
+      try {
+        var success = ((File)o).mount_enclosing_volume_finish(r);
+        envp_ready(success, new List<string>());
+      }
+      catch (Error e) {
+        envp_ready(false, new List<string>(), e.message);
+      }
+    });
   }
 }
 

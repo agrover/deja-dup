@@ -124,8 +124,10 @@ public abstract class Operation : Object
     backend.get_envp();
   }
   
-  void continue_with_envp(DejaDup.Backend b, bool success, List<string>? envp) {
+  void continue_with_envp(DejaDup.Backend b, bool success, List<string>? envp, string? error) {
     if (!success) {
+      if (error != null)
+        raise_error(error, null);
       done(false);
       return;
     }
@@ -140,9 +142,7 @@ public abstract class Operation : Object
       List<string> argv = make_argv();
       backend.add_argv(mode, ref argv);
       
-      string target = backend.get_location();
-      
-      dup.start(backend, target, encrypted, argv, envp);
+      dup.start(backend, encrypted, argv, envp);
     }
     catch (Error e) {
       raise_error(e.message, null);

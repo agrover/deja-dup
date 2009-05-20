@@ -178,10 +178,9 @@ public class StatusIcon : Gtk.StatusIcon
     fatal_error = true;
     note = new Notify.Notification.with_status_icon(_("Backup error occurred"),
                        errstr, "dialog-error", this);
+    // We want to stay open until user acknowledges our error/it times out
+    op.done.disconnect(send_done);
     if (can_display_actions()) {
-      // We want to stay open until user acknowledges our error/it times out
-      op.done.disconnect(send_done);
-      
       note.add_action("rerun", _("Rerun"), rerun);
       
       // Doesn't seem like we can ask if daemon supports timeouts

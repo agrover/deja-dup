@@ -41,3 +41,6 @@ void hacks_status_icon_set_tooltip_text (Gtk.StatusIcon icon, string text);
 [CCode (cheader_filename = "hacks.h")]
 Gdk.Window hacks_widget_get_window (Gtk.Widget widget);
 
+[CCode (cheader_filename = "hacks.h")]
+GLib.MountOperation hacks_mount_operation_new (Gtk.Window parent);
+

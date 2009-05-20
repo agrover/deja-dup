@@ -57,6 +57,7 @@ BUILT_SOURCES = \
 
 libdeja_dup_la_SOURCES = \
 	hacks.c hacks.h \
+	mountoperation.c mountoperation.h \
 	PassphraseSchema.c PassphraseSchema.h \
 	deja-dup.h \
 	$(libdeja_dup_la_VALASOURCES:.vala=.c) \

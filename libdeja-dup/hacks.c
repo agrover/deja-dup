@@ -20,6 +20,7 @@
 
 #include <gio/gunixmounts.h>
 #include "hacks.h"
+#include "mountoperation.h"
 
 static const GnomeKeyringPasswordSchema PASSPHRASE_SCHEMA_DEF = {
   GNOME_KEYRING_ITEM_GENERIC_SECRET,
@@ -213,6 +214,16 @@ hacks_widget_get_window (GtkWidget *widget)
   return gtk_widget_get_window (widget);
 #else
   return widget->window;
+#endif
+}
+
+GMountOperation *
+hacks_mount_operation_new (GtkWindow *parent)
+{
+#if GTK_CHECK_VERSION(2, 14, 0)
+  return gtk_mount_operation_new (parent);
+#else
+  return dup_mount_operation_new (parent);
 #endif
 }
 

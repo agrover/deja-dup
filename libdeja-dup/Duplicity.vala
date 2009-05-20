@@ -83,11 +83,11 @@ public class Duplicity : Object
     toplevel = win;
   }
   
-  public virtual void start(Backend backend, string remote, bool encrypted,
+  public virtual void start(Backend backend, bool encrypted,
                             List<string>? argv, List<string>? envp)
   {
     // save arguments for calling duplicity again later
-    this.remote = remote;
+    this.remote = backend.get_location();
     this.backend = backend;
     saved_argv = new List<string>();
     saved_envp = new List<string>();

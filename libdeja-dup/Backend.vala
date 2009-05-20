@@ -23,7 +23,7 @@ namespace DejaDup {
 
 public abstract class Backend : Object
 {
-  public signal void envp_ready(bool success, List<string>? envp);
+  public signal void envp_ready(bool success, List<string>? envp, string? error = null);
   public signal void need_password();
   
   public Gtk.Window toplevel {get; construct;}
