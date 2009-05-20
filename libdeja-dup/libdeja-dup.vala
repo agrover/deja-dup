@@ -229,15 +229,15 @@ void convert_ssh_to_file()
       var server = client.get_string(SSH_SERVER_KEY);
       if (server != null && server != "") {
         var username = client.get_string(SSH_USERNAME_KEY);
-        var port = client.get_string(SSH_PORT_KEY); // was int with schema installed...
+        var port = client.get_int(SSH_PORT_KEY);
         var directory = client.get_string(SSH_DIRECTORY_KEY);
         
         var gio_uri = "ssh://";
         if (username != null && username != "")
           gio_uri += username + "@";
         gio_uri += server;
-        if (port != null && port != "")
-          gio_uri += ":" + port;
+        if (port > 0)
+          gio_uri += ":" + port.to_string();
         if (directory == null || directory == "")
           gio_uri += "/";
         else if (directory[0] != '/')
