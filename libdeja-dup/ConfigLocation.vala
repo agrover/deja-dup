@@ -110,7 +110,7 @@ public class ConfigLocation : ConfigWidget
       var button_file = uri == null ? null : File.new_for_uri(uri);
       file = get_file_from_gconf();
       if (button_file == null || !file.equal(button_file)) {
-        button.select_uri(file.get_uri());
+        button.set_current_folder_uri(file.get_uri());
         is_s3 = tmpdir != null && file.equal(tmpdir);
       }
     }
