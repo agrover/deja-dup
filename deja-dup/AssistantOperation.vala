@@ -26,6 +26,7 @@ public abstract class AssistantOperation : Gtk.Assistant
   Gtk.Label progress_label;
   Gtk.Label progress_file_label;
   Gtk.ProgressBar progress_bar;
+  Gtk.TextView progress_text;
   protected Gtk.Widget progress_page {get; private set;}
   
   protected Gtk.Label summary_label;
@@ -85,6 +86,10 @@ public abstract class AssistantOperation : Gtk.Assistant
     var basename = Path.get_basename(parse_name);
     progress_label.label = get_progress_file_prefix() + " ";
     progress_file_label.label = "'%s'".printf(basename);
+    
+    Gtk.TextIter iter;
+    progress_text.buffer.get_end_iter(out iter);
+    progress_text.buffer.insert_text(iter, parse_name, -1);
   }
   
   protected virtual Gtk.Widget make_progress_page()
@@ -103,9 +108,14 @@ public abstract class AssistantOperation : Gtk.Assistant
     
     progress_bar = new Gtk.ProgressBar();
     
+    progress_text = new Gtk.TextView();
+    var expander = new Gtk.Expander.with_mnemonic(_("_Details"));
+    expander.set("child", progress_text);
+    
     var page = new Gtk.VBox(false, 6);
     page.set("child", progress_hbox,
              "child", progress_bar,
+             "child", expander,
              "border-width", 12);
     page.child_set(progress_hbox, "expand", false);
     page.child_set(progress_bar, "expand", false);
