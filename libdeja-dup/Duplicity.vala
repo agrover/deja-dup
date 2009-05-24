@@ -440,14 +440,16 @@ public class Duplicity : Object
   void process_diff_file(string file) {
     var gfile = make_file_obj(file);
     last_touched_file = gfile;
-    if (state != State.DRY_RUN)
+    if (state != State.DRY_RUN &&
+        gfile.query_file_type(FileQueryInfoFlags.NONE, null) != FileType.DIRECTORY)
       action_file_changed(gfile);
   }
   
   void process_patch_file(string file) {
     var gfile = make_file_obj(file);
     last_touched_file = gfile;
-    if (state != State.DRY_RUN)
+    if (state != State.DRY_RUN &&
+        gfile.query_file_type(FileQueryInfoFlags.NONE, null) != FileType.DIRECTORY)
       action_file_changed(gfile);
   }
   
