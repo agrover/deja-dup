@@ -85,9 +85,13 @@ public class BackendFile : Backend
       }
       catch (Error e) {}
       
-      if (mount == null)
+      if (mount == null) {
         check_if_password_needed(file);
+        return;
+      }
     }
+    
+    envp_ready(true, new List<string>());
   }
   
   void check_if_password_needed(File file)
