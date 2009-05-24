@@ -29,7 +29,6 @@ libdeja_dup_la_VALASOURCES = \
 	Backend.vala \
 	BackendFile.vala \
 	BackendS3.vala \
-	BackendSSH.vala \
 	ConfigBackend.vala \
 	ConfigBool.vala \
 	ConfigChoice.vala \

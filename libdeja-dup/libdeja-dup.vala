@@ -216,6 +216,11 @@ public GConf.Client get_gconf_client()
   return client;
 }
 
+const string SSH_USERNAME_KEY = "/apps/deja-dup/ssh/username";
+const string SSH_SERVER_KEY = "/apps/deja-dup/ssh/server";
+const string SSH_PORT_KEY = "/apps/deja-dup/ssh/port";
+const string SSH_DIRECTORY_KEY = "/apps/deja-dup/ssh/directory";
+
 // Once, we didn't use GIO, but had a special SSH backend for duplicity that
 // would tell duplicity to use its own SSH handling.  We convert those gconf
 // values to the new ones here.
