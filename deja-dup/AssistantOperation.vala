@@ -27,6 +27,7 @@ public abstract class AssistantOperation : Gtk.Assistant
   Gtk.Label progress_file_label;
   Gtk.ProgressBar progress_bar;
   Gtk.TextView progress_text;
+  Gtk.ScrolledWindow progress_scroll;
   protected Gtk.Widget progress_page {get; private set;}
   
   protected Gtk.Label summary_label;
@@ -89,7 +90,22 @@ public abstract class AssistantOperation : Gtk.Assistant
     
     Gtk.TextIter iter;
     progress_text.buffer.get_end_iter(out iter);
+    if (progress_text.buffer.get_char_count() != 0)
+      parse_name = "\n" + parse_name;
     progress_text.buffer.insert_text(iter, parse_name, -1);
+  }
+  
+  bool adjustment_at_end = true; // FIXME: really should subclass adjustment or something...
+  void make_adjustment_stay_at_end(Gtk.Widget range)
+  {
+    Gtk.Adjustment adjust = ((Gtk.Range)range).adjustment;
+    adjust.value_changed.connect((a) => {
+      adjustment_at_end = (a.value >= a.upper - a.page_size);
+    });
+    adjust.changed.connect((a) => {
+      if (adjustment_at_end)
+        a.value = a.upper;
+    });
   }
   
   protected virtual Gtk.Widget make_progress_page()
@@ -109,8 +125,15 @@ public abstract class AssistantOperation : Gtk.Assistant
     progress_bar = new Gtk.ProgressBar();
     
     progress_text = new Gtk.TextView();
+    progress_scroll = new Gtk.ScrolledWindow(null, null);
+    progress_scroll.set("child", progress_text,
+                        "hscrollbar-policy", Gtk.PolicyType.AUTOMATIC,
+                        "vscrollbar-policy", Gtk.PolicyType.AUTOMATIC,
+                        "border-width", 6);
+    var range = ((Gtk.Range)progress_scroll.vscrollbar);
+    range.realize.connect(make_adjustment_stay_at_end);
     var expander = new Gtk.Expander.with_mnemonic(_("_Details"));
-    expander.set("child", progress_text);
+    expander.set("child", progress_scroll);
     
     var page = new Gtk.VBox(false, 6);
     page.set("child", progress_hbox,
