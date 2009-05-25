@@ -55,6 +55,8 @@ def setup(backend = None, encrypt = True, start = True, dest = '/', sources = []
   environ['PYTHONPATH'] = extra_pythonpaths + (environ['PYTHONPATH'] if 'PYTHONPATH' in environ else '')
   environ['PATH'] = extra_paths + environ['PATH']
   
+  environ['XDG_CACHE_HOME'] = get_temp_name('cache')
+  
   gconf_dir = get_temp_name('gconf')
   os.system('mkdir -p %s' % gconf_dir)
   environ['GCONF_CONFIG_SOURCE'] = 'xml:readwrite:' + gconf_dir

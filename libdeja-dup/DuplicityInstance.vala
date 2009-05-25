@@ -83,6 +83,26 @@ public class DuplicityInstance : Object
     // 1 or 2.  For now, we'll keep with the default.
     argv.append("--volsize=5");
     
+    // Cache signature files
+    var cache_dir = Environment.get_user_cache_dir();
+    if (cache_dir != null) {
+      bool add_dir = false;
+      var cache_file = File.new_for_path(cache_dir);
+      cache_file = cache_file.get_child(Config.PACKAGE);
+      try {
+        if (hacks_file_make_directory_with_parents(cache_file))
+          add_dir = true;
+      }
+      catch (IOError.EXISTS e) {
+        add_dir = true; // ignore
+      }
+      catch (IOError e) {
+        warning("%s\n", e.message);
+      }
+      if (add_dir)
+        argv.append("--archive-dir=" + cache_file.get_path());
+    }
+    
     // Add always-there arguments
     argv.append("--log-fd=%d".printf(pipes[1]));
     argv.prepend("duplicity");
