@@ -77,9 +77,16 @@ public class OperationRestore : Operation
   protected override void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
     if (success) {
+    }
+    
+    if (success) {
       fixup_home_dir();
       if (!mv_source_to_dest())
         success = false;
+      else {
+        try {DejaDup.update_last_run_timestamp();}
+        catch (Error e) {warning("%s\n", e.message);}
+      }
     }
     else if (!cancelled) {
       // Error case.  TODO: Should tell user about partial restore in /tmp
