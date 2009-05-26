@@ -135,51 +135,49 @@ public class ConfigList : ConfigWidget
   
   void handle_add()
   {
-    var dlg = new Gtk.FileChooserDialog(_("Choose folder"),
+    var dlg = new Gtk.FileChooserDialog(_("Choose folders"),
                                         (Gtk.Window)get_toplevel(),
                                         Gtk.FileChooserAction.SELECT_FOLDER,
                                         Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
                           				      Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT);
+    dlg.select_multiple = true;
     
     if (dlg.run() != Gtk.ResponseType.ACCEPT) {
       dlg.destroy();
       return;
     }
     
-    var folder = File.new_for_path(dlg.get_filename());
+    weak SList<string> files = dlg.get_filenames();
     dlg.destroy();
     
     weak SList<string> slist;
     try {
       slist = client.get_list(key, GConf.ValueType.STRING);
-      bool found = false;
-      foreach (string s in slist) {
-        var sfile = File.new_for_path(s);
-        if (sfile.equal(folder)) {
-          found = true;
-          break;
-        }
-      }
       
-      if (!found) {
-        slist.append(folder.get_path());
-        client.set_list(key, GConf.ValueType.STRING, slist);
-      }
-      else {
-        var msgdlg = new Gtk.MessageDialog((Gtk.Window)get_toplevel(),
-                                           Gtk.DialogFlags.DESTROY_WITH_PARENT,
-                                           Gtk.MessageType.ERROR,
-                                           Gtk.ButtonsType.OK,
-                                           _("Could not add the folder"));
-        msgdlg.format_secondary_text(_("%s is already in the list."), folder.get_path());
-        msgdlg.run();
-        msgdlg.destroy();
+      foreach (string file in files) {
+        var folder = File.new_for_path(file);
+        bool found = false;
+        foreach (string s in slist) {
+          var sfile = File.new_for_path(s);
+          if (sfile.equal(folder)) {
+            found = true;
+            break;
+          }
+        }
+        
+        if (!found)
+          slist.append(file);
       }
     }
     catch (Error e) {
       warning("%s\n", e.message);
-      return;
+      slist = files;
     }
+    
+    try {
+      client.set_list(key, GConf.ValueType.STRING, slist);
+    }
+    catch (Error e) {warning("%s\n", e.message);}
   }
   
   void handle_remove()
