@@ -90,11 +90,20 @@ public abstract class AssistantOperation : Gtk.Assistant
     progress_label.label = get_progress_file_prefix() + " ";
     progress_file_label.label = "'%s'".printf(basename);
     
-    Gtk.TextIter iter;
-    progress_text.buffer.get_end_iter(out iter);
-    if (progress_text.buffer.get_char_count() != 0)
+    var buffer = progress_text.buffer;
+    if (buffer.get_char_count() > 0)
       parse_name = "\n" + parse_name;
-    progress_text.buffer.insert_text(iter, parse_name, -1);
+    if (buffer.get_line_count() >= 100 && adjustment_at_end) {
+      // If we're watching text scroll by, optimize memory by only keeping last 100 lines
+      Gtk.TextIter start, line1;
+      buffer.get_start_iter(out start);
+      buffer.get_iter_at_line(out line1, 1);
+      buffer.delete(start, line1);
+    }
+    
+    Gtk.TextIter iter;
+    buffer.get_end_iter(out iter);
+    buffer.insert_text(iter, parse_name, -1);
   }
   
   bool adjustment_at_end = true; // FIXME: really should subclass adjustment or something...
@@ -127,6 +136,7 @@ public abstract class AssistantOperation : Gtk.Assistant
     progress_bar = new Gtk.ProgressBar();
     
     progress_text = new Gtk.TextView();
+    progress_text.editable = false;
     progress_scroll = new Gtk.ScrolledWindow(null, null);
     progress_scroll.set("child", progress_text,
                         "hscrollbar-policy", Gtk.PolicyType.AUTOMATIC,
