@@ -265,5 +265,33 @@ public void initialize()
   convert_ssh_to_file();
 }
 
+public static string get_location_desc()
+{
+  File file = null;
+  try {
+    var val = client.get_string(BACKEND_KEY);
+    if (val == "s3")
+      return _("Amazon S3");
+    else {
+      val = client.get_string(FILE_PATH_KEY);
+      if (val == null)
+        val = ""; // current directory
+      file = File.parse_name(val);
+    }
+    
+    // First try to get the DESCRIPTION.  Else get the DISPLAY_NAME
+    var info = file.query_info(FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME + "," +
+                               FILE_ATTRIBUTE_STANDARD_DESCRIPTION,
+                               FileQueryInfoFlags.NONE, null);
+    if (info.has_attribute(FILE_ATTRIBUTE_STANDARD_DESCRIPTION))
+      return info.get_attribute_string(FILE_ATTRIBUTE_STANDARD_DESCRIPTION);
+    else if (info.has_attribute(FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME))
+      return info.get_attribute_string(FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME);
+  }
+  catch (Error e) {warning("%s\n", e.message);}
+  
+  return _("Unknown");
+}
+
 } // end namespace
 
