@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     Déjà Dup Preferences
-    © 2008—2009 Michael Terry <mike@mterry.name>
+    © 2008,2009 Michael Terry <mike@mterry.name>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
