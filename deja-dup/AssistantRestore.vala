@@ -342,13 +342,17 @@ public class AssistantRestore : AssistantOperation
   
   protected void query_finished(DejaDup.Operation op, bool success)
   {
-    if (success && !error_occurred) {
-      var next_page = do_forward(get_current_page());
-      if (next_page >= 0)
-        set_current_page(next_page);
-    }
-    
     this.query_op = null;
+    
+    if (!error_occurred) {
+      if (success) {
+        var next_page = do_forward(get_current_page());
+        if (next_page >= 0)
+          set_current_page(next_page);
+      }
+      else // cancelled
+        do_close();
+    }
   }
   
   bool query_pulse()
