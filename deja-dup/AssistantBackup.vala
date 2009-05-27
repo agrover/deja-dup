@@ -27,8 +27,89 @@ public class AssistantBackup : AssistantOperation
     title = _("Backup");
   }
   
-  protected override void add_setup_pages()
+  Gtk.Widget make_backup_location_page()
   {
+    int rows = 0;
+    Gtk.Widget w, label;
+    
+    var page = new Gtk.Table(rows, 2, false);
+    page.set("row-spacing", 6,
+             "column-spacing", 6,
+             "border-width", 12);
+    
+    w = new DejaDup.ConfigLocation();
+    label = new Gtk.Label.with_mnemonic(_("_Backup location:"));
+    label.set("xalign", 0.0f,
+              "mnemonic-widget", w);
+    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
+    ++rows;
+    
+    w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
+    page.attach(w, 0, 2, rows, rows + 1,
+                Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
+                Gtk.AttachOptions.FILL, 0, 0);
+    ++rows;
+    
+    return page;
+  }
+  
+  Gtk.Widget make_include_exclude_page()
+  {
+    int rows = 0;
+    Gtk.Widget w, label;
+    
+    var page = new Gtk.Table(rows, 2, false);
+    page.set("row-spacing", 6,
+             "column-spacing", 6,
+             "border-width", 12);
+    
+    w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY);
+    w.set_size_request(250, -1);
+    label = new Gtk.Label(_("I_nclude files in folders:"));
+    label.set("mnemonic-widget", w,
+              "use-underline", true,
+              "wrap", true,
+              "width-request", 100,
+              "xalign", 0.0f,
+              "yalign", 0.0f);
+    page.attach(label, 0, 1, rows, rows + 1, 0, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    ++rows;
+    
+    w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY);
+    w.set_size_request(250, -1);
+    label = new Gtk.Label(_("E_xcept files in folders:"));
+    label.set("mnemonic-widget", w,
+              "use-underline", true,
+              "wrap", true,
+              "width-request", 100,
+              "xalign", 0.0f,
+              "yalign", 0.0f);
+    page.attach(label, 0, 1, rows, rows + 1, 0, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    ++rows;
+    
+    return page;
+  }
+  
+  protected override void add_custom_config_pages()
+  {
+    var page = make_backup_location_page();
+    append_page(page);
+    child_set(page,
+              "title", _("Preferences"),
+              "page-type", Gtk.AssistantPageType.CONTENT,
+              "complete", true,
+              "header-image", op_icon);
+    
+    page = make_include_exclude_page();
+    append_page(page);
+    child_set(page,
+              "title", _("Preferences"),
+              "page-type", Gtk.AssistantPageType.CONTENT,
+              "complete", true,
+              "header-image", op_icon);
   }
   
   protected override Gtk.Widget make_confirm_page()
@@ -48,7 +129,7 @@ public class AssistantBackup : AssistantOperation
     
     rows = 0;
     page.attach(backup_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-    page.attach(confirm_backup, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(confirm_backup, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
     
     return page;
   }

@@ -80,6 +80,44 @@ public class AssistantRestore : AssistantOperation
     add_restore_dest_page();
   }
   
+  Gtk.Widget make_backup_location_page()
+  {
+    int rows = 0;
+    Gtk.Widget w, label;
+    
+    var page = new Gtk.Table(rows, 2, false);
+    page.set("row-spacing", 6,
+             "column-spacing", 6,
+             "border-width", 12);
+    
+    w = new DejaDup.ConfigLocation();
+    label = new Gtk.Label.with_mnemonic(_("_Backup location:"));
+    label.set("xalign", 0.0f,
+              "mnemonic-widget", w);
+    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
+    ++rows;
+    
+    w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("Backup files are _encrypted"));
+    page.attach(w, 0, 2, rows, rows + 1,
+                Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
+                Gtk.AttachOptions.FILL, 0, 0);
+    ++rows;
+    
+    return page;
+  }
+  
+  protected override void add_custom_config_pages()
+  {
+    var page = make_backup_location_page();
+    append_page(page);
+    child_set(page,
+              "title", _("Preferences"),
+              "page-type", Gtk.AssistantPageType.CONTENT,
+              "complete", true,
+              "header-image", op_icon);
+  }
+  
   Gtk.Widget make_query_backend_page()
   {
     query_progress_bar = new Gtk.ProgressBar();
@@ -197,7 +235,7 @@ public class AssistantRestore : AssistantOperation
     
     rows = 0;
     page.attach(backup_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    page.attach(confirm_backup, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(confirm_backup, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
     ++rows;
     confirm_date_row = rows;
     page.attach(confirm_date_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);

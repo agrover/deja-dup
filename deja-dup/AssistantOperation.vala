@@ -45,6 +45,7 @@ public abstract class AssistantOperation : Gtk.Assistant
   {
     op_icon = make_op_icon();
     
+    add_config_pages_if_needed();
     add_setup_pages();
     add_confirm_page();
     add_progress_page();
@@ -57,7 +58,8 @@ public abstract class AssistantOperation : Gtk.Assistant
   }
   
   protected abstract Gtk.Widget make_confirm_page();
-  protected abstract void add_setup_pages();
+  protected virtual void add_setup_pages() {}
+  protected virtual void add_custom_config_pages() {}
   protected abstract DejaDup.Operation create_op();
   protected abstract string get_progress_file_prefix();
   protected abstract Gdk.Pixbuf? make_op_icon();
@@ -195,6 +197,23 @@ public abstract class AssistantOperation : Gtk.Assistant
     page.child_set(summary_label, "expand", false);
     
     return page;
+  }
+  
+  void add_config_pages_if_needed()
+  {
+    var client = DejaDup.get_gconf_client();
+    string val;
+    try {
+      val = client.get_string(DejaDup.LAST_RUN_KEY);
+      if (val != null && val != "")
+        return;
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      return;
+    }
+    
+    add_custom_config_pages();
   }
   
   void add_confirm_page()
