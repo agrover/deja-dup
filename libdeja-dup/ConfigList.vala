@@ -64,11 +64,25 @@ public class ConfigList : ConfigWidget
     hbox.pack_start(vbox, false, false, 0);
     add(hbox);
     
+    var selection = tree.get_selection();
+    selection.set_mode(Gtk.SelectionMode.MULTIPLE);
+    
     mnemonic_activate.connect((w, g) => {return tree.mnemonic_activate(g);});
+    key_press_event.connect((w, e) => {
+      uint modifiers = Gtk.accelerator_get_default_mod_mask();
+      
+      // Vala keysym bindings would be nice.  Check for delete or kp_delete
+      if ((e.keyval == 0xffff || e.keyval == 0xff9f) && modifiers == 0) {
+        handle_remove();
+        return true;
+      }
+      else
+        return false;
+    });
     
     set_from_config();
-    handle_selection_change(tree.get_selection());
-    tree.get_selection().changed.connect(handle_selection_change);
+    handle_selection_change(selection);
+    selection.changed.connect(handle_selection_change);
   }
   
   protected override void set_from_config()
@@ -185,30 +199,45 @@ public class ConfigList : ConfigWidget
     var sel = tree.get_selection();
     
     weak Gtk.TreeModel model;
-    Gtk.TreeIter iter;
-    if (!sel.get_selected(out model, out iter))
+    List<Gtk.TreePath> paths = sel.get_selected_rows(out model);
+    if (paths == null)
       return;
     
-    string current;
-    model.get(iter, 0, out current);
-    var current_file = File.new_for_path(current);
-    
+    weak SList<string> slist;
     try {
-      weak SList<string> slist = client.get_list(key, GConf.ValueType.STRING);
-      weak SList<string> siter = slist;
-      while (siter != null) {
-        var sfile = DejaDup.parse_dir(siter.data);
-        if (sfile.equal(current_file)) {
-          slist.remove_link(siter);
-          client.set_list(key, GConf.ValueType.STRING, slist);
-          break;
-        }
-        siter = siter.next;
-      }
+      slist = client.get_list(key, GConf.ValueType.STRING);
     }
     catch (Error e) {
       warning("%s\n", e.message);
       return;
+    }
+    
+    foreach (Gtk.TreePath path in paths) {
+      Gtk.TreeIter iter;
+      if (!model.get_iter(out iter, path))
+        continue;
+      
+      string current;
+      model.get(iter, 0, out current);
+      var current_file = File.new_for_path(current);
+      
+      weak SList<string> siter = slist, snext;
+      while (siter != null) {
+        snext = siter.next;
+        var sfile = DejaDup.parse_dir(siter.data);
+        if (sfile.equal(current_file)) {
+          slist.remove_link(siter);
+          break;
+        }
+        siter = snext;
+      }
+    }
+    
+    try {
+      client.set_list(key, GConf.ValueType.STRING, slist);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
     }
   }
 }
