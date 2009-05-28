@@ -212,7 +212,7 @@ public class Duplicity : Object
         break;
       
       case State.CLEANUP:
-        if (restart()) // restart in case cleanup was interrupting normal flow
+        if (success && restart()) // restart in case cleanup was interrupting normal flow
           return;
         
         // Else, we probably started cleaning up after a cancel.  Just continue
