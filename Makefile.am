@@ -4,7 +4,7 @@ SUBDIRS = data po vapi libdeja-dup applet monitor preferences deja-dup nautilus 
 
 # Distribute pot file
 update-po:
-	rm "po/$(GETTEXT_PACKAGE).pot"
+	rm -f "po/$(GETTEXT_PACKAGE).pot"
 	$(MAKE) -C "$(srcdir)/po" "$(GETTEXT_PACKAGE).pot"
 	$(MAKE) -C "$(srcdir)/help" update-po
 dist-hook:
