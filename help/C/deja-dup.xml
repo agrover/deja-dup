@@ -56,14 +56,7 @@
     <para><application>Déjà Dup</application> is a simple backup program. It hides the complexity of doing backups the 'right way' (encrypted, off-site, and regular) and uses duplicity as the backend. </para>
     <para><application>Déjà Dup</application> provides the following features:</para>
     <itemizedlist>
-      <listitem>
-        <para>Support for the following backup locations:</para>
-        <itemizedlist>
-          <listitem><para>Amazon S3</para></listitem>
-          <listitem><para>SSH server</para></listitem>
-          <listitem><para>Local folder</para></listitem>
-        </itemizedlist>
-      </listitem>
+      <listitem><para>Support for local or remote backup locations, including Amazon S3</para></listitem>
       <listitem><para>Securely encrypts and compresses your data.</para></listitem>
       <listitem><para>Incrementally backs up, letting you restore from any particular backup.</para></listitem>
       <listitem><para>Schedules regular backups.</para></listitem>
@@ -93,12 +86,19 @@
         </varlistentry>
       </variablelist>
     </sect2>
+  </sect1>
 
-    <sect2 id="deja-dup-when-start">
-      <title>When You Start <application>Déjà Dup</application></title>
-      <para>If this is the first time you have run <application>Déjà Dup</application>, you should configure your backup before continuing.  You'll need to decide where to put the backup files and which folders to include or exclude.</para>
-      <para>Choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Preferences</guimenuitem></menuchoice> to open the <link linkend="deja-dup-prefs">Preferences window</link>.</para>
-    </sect2>
+  <sect1 id="deja-dup-backup">
+    <title>Backing Up</title>
+    <para>To backup, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Backup</guimenuitem></menuchoice>. Or press the <guibutton>Backup</guibutton> button on the main window.</para>
+    <para>The <guilabel>Backup</guilabel> dialog will then be displayed.  If this is your first time using <application>Déjà Dup</application>, you will be asked to choose a backup location and which files to include or exclude.  On the Summary page, click <guibutton>Apply</guibutton> to start the backup.</para>
+  </sect1>
+
+  <sect1 id="deja-dup-restore">
+    <title>Restoring</title>
+    <para>To restore, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Restore</guimenuitem></menuchoice>. Or press the <guibutton>Restore</guibutton> button on the main window.</para>
+    <para>The <guilabel>Restore</guilabel> dialog will then be displayed.  If this is your first time using <application>Déjà Dup</application>, you will be asked to choose a backup location.  Then choose which backup date to restore from and where to put the restored files. You can either restore them to their original locations or put them under a folder of your choice.</para>
+    <para>After clicking <guibutton>Forward</guibutton>, you can review your restore options, then click <guibutton>Apply</guibutton> to start the restore.</para>
   </sect1>
 
   <sect1 id="deja-dup-prefs">
@@ -108,7 +108,7 @@
       <varlistentry>
         <term><guilabel>Backup location</guilabel></term>
         <listitem>
-          <para>Use this drop-down list box to specify the backup location that <application>Déjà Dup</application> uses when backing up or restoring. Select one of the following options:</para>
+          <para>Use this drop-down list box to specify the backup location that <application>Déjà Dup</application> uses when backing up or restoring:</para>
           <itemizedlist>
             <listitem>
               <para><guilabel>Amazon S3</guilabel></para>
@@ -116,12 +116,16 @@
               <caution><para>This service costs money.  Read their rates carefully before using it.</para></caution>
             </listitem>
             <listitem>
-              <para><guilabel>Local Folder</guilabel></para>
-              <para>This is the backup location to pick if you have an external hard drive that you want to use for backups.</para>
+              <para>Removable Media</para>
+              <para>You may see removable media like external hard drives or thumb drives listed.</para>
             </listitem>
             <listitem>
-              <para><guilabel>SSH</guilabel></para>
-              <para>If you have access to a server running SSH (a protocol that lets remote users log in), pick this location. Web hosts or data servers often provide SSH access. </para>
+              <para>Connected Servers</para>
+              <para>If you have connected to any servers, they will appear.  To connect to a server not listed, select <guilabel>Other...</guilabel> and click <guibutton>Connect to Server...</guibutton>.  This will let you enter the server information.</para>
+            </listitem>
+            <listitem>
+              <para>Local Folders</para>
+              <para>You may also want to choose a local folder as a backup location.  Note that backups can be quite large, so make sure you have enough free disk space.</para>
             </listitem>
           </itemizedlist>
           <para>Default: <guilabel>Amazon S3</guilabel>.</para>
@@ -143,41 +147,6 @@
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guilabel>Folder</guilabel></term>
-        <listitem>
-          <note><para>This option only appears if the <guilabel>Local Folder</guilabel> backup location has been selected.</para></note>
-          <para>Choose the folder into which you want to store the backup files. This often will be an external drive that you plug in.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><guilabel>Username</guilabel></term>
-        <listitem>
-          <note><para>This option only appears if the <guilabel>SSH</guilabel> backup location has been selected.</para></note>
-          <para>Enter the username used to log in to the server.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><guilabel>Server</guilabel></term>
-        <listitem>
-          <note><para>This option only appears if the <guilabel>SSH</guilabel> backup location has been selected.</para></note>
-          <para>Enter the address of the server to use. This can either be an IP address (all numbers) or a domain name.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><guilabel>Port</guilabel></term>
-        <listitem>
-          <note><para>This option only appears if the <guilabel>SSH</guilabel> backup location has been selected.</para></note>
-          <para>Enter the SSH port for the server. This is almost always best left blank or as the default <userinput>22</userinput>.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><guilabel>Directory</guilabel></term>
-        <listitem>
-          <note><para>This option only appears if the <guilabel>SSH</guilabel> backup location has been selected.</para></note>
-          <para>Enter the directory to store backup files on the server.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
         <term><guilabel>Include</guilabel></term>
         <listitem>
           <para>Select a list of directories to backup. Press the <guibutton>Add</guibutton> or <guibutton>Remove</guibutton> buttons to modify the list. If you are only interested in backing up your own data, the default of <guilabel>Home Folder</guilabel> is sufficient.</para>
@@ -196,7 +165,7 @@
               <listitem><para>~/.xsession-errors</para></listitem>
               <listitem><para>~/.recently-used.xbel</para></listitem>
               <listitem><para>~/.recent-applications.xbel</para></listitem>
-              <listitem><para>~/Private</para></listitem>
+              <listitem><para>~/.Private</para></listitem>
               <listitem><para>/proc</para></listitem>
               <listitem><para>/tmp</para></listitem>
               <listitem><para>/sys</para></listitem>
@@ -227,19 +196,5 @@
         </listitem>
       </varlistentry>
     </variablelist>
-  </sect1>
-
-  <sect1 id="deja-dup-backup">
-    <title>Backing Up</title>
-    <para>To backup, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Backup</guimenuitem></menuchoice>. Or press the <guibutton>Backup</guibutton> button on the main window.</para>
-    <para>The <guilabel>Backup</guilabel> dialog will then be displayed. Click <guibutton>Apply</guibutton> to start the backup. A progress bar will appear.  If an error occurs, the dialog will display an error message.</para>
-  </sect1>
-
-  <sect1 id="deja-dup-restore">
-    <title>Restoring</title>
-    <para>To restore, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Restore</guimenuitem></menuchoice>. Or press the <guibutton>Restore</guibutton> button on
-  the main window.</para>
-    <para>The <guilabel>Restore</guilabel> dialog will then be displayed. You first must pick where to put the restored files. You can either restore them to their original locations or put them under a folder of your choice.</para>
-    <para>After clicking <guibutton>Forward</guibutton>, you can review your restore options, then click <guibutton>Apply</guibutton> to start the restore. A progress bar will appear. If an error occurs, the dialog will display an error message.</para>
   </sect1>
 </article>
