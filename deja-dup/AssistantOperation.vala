@@ -95,10 +95,10 @@ public abstract class AssistantOperation : Gtk.Assistant
       parse_name = "\n" + parse_name;
     if (buffer.get_line_count() >= 100 && adjustment_at_end) {
       // If we're watching text scroll by, optimize memory by only keeping last 100 lines
-      Gtk.TextIter start, line1;
+      Gtk.TextIter start, line100;
       buffer.get_start_iter(out start);
-      buffer.get_iter_at_line(out line1, 1);
-      buffer.delete(start, line1);
+      buffer.get_iter_at_line(out line100, buffer.get_line_count() - 100);
+      buffer.delete(start, line100);
     }
     
     Gtk.TextIter iter;
