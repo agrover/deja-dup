@@ -114,7 +114,8 @@ public class PreferencesDialog : Gtk.Dialog
               "yalign", 0.0f);
     label_sizes.add_widget(label);
     table.attach(label, 0, 1, row, row + 1,
-                 0, Gtk.AttachOptions.FILL, 3, 3);
+                 Gtk.AttachOptions.FILL,
+                 Gtk.AttachOptions.FILL, 3, 3);
     table.attach(w, 1, 3, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
@@ -132,7 +133,8 @@ public class PreferencesDialog : Gtk.Dialog
               "yalign", 0.0f);
     label_sizes.add_widget(label);
     table.attach(label, 0, 1, row, row + 1,
-                 0, Gtk.AttachOptions.FILL, 3, 3);
+                 Gtk.AttachOptions.FILL,
+                 Gtk.AttachOptions.FILL, 3, 3);
     table.attach(w, 1, 3, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
