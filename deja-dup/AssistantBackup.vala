@@ -21,7 +21,6 @@ using GLib;
 
 public class AssistantBackup : AssistantOperation
 {
-  Gtk.Label confirm_backup;
   construct
   {
     title = _("Backup");
@@ -73,8 +72,8 @@ public class AssistantBackup : AssistantOperation
               "width-request", 100,
               "xalign", 0.0f,
               "yalign", 0.0f);
-    page.attach(label, 0, 1, rows, rows + 1, 0, Gtk.AttachOptions.FILL, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
     ++rows;
     
     w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY);
@@ -86,8 +85,8 @@ public class AssistantBackup : AssistantOperation
               "width-request", 100,
               "xalign", 0.0f,
               "yalign", 0.0f);
-    page.attach(label, 0, 1, rows, rows + 1, 0, Gtk.AttachOptions.FILL, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0);
     ++rows;
     
     return page;
@@ -115,21 +114,42 @@ public class AssistantBackup : AssistantOperation
   protected override Gtk.Widget make_confirm_page()
   {
     int rows = 0;
-    
-    confirm_backup = new Gtk.Label("");
-    confirm_backup.set("xalign", 0.0f);
-    var backup_label = new Gtk.Label.with_mnemonic(_("_Backup location:"));
-    backup_label.set("xalign", 0.0f);
-    ++rows;
+    Gtk.Widget label, w;
     
     var page = new Gtk.Table(rows, 2, false);
     page.set("row-spacing", 6,
              "column-spacing", 6,
              "border-width", 12);
     
-    rows = 0;
-    page.attach(backup_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-    page.attach(confirm_backup, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
+    label = new Gtk.Label(_("Backup location:"));
+    label.set("xalign", 0.0f);
+    w = new DejaDup.ConfigLabelLocation();
+    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    ++rows;
+    
+    label = new Gtk.Label(_("Encrypted:"));
+    label.set("xalign", 0.0f);
+    w = new DejaDup.ConfigLabelBool(DejaDup.ENCRYPT_KEY);
+    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    ++rows;
+    
+    label = new Gtk.Label(_("Include from:"));
+    label.set("xalign", 0.0f, "yalign", 0.0f);
+    w = new DejaDup.ConfigLabelList(DejaDup.INCLUDE_LIST_KEY);
+    w.set("width-request", 250);
+    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, 0, Gtk.AttachOptions.FILL, 0, 0);
+    ++rows;
+    
+    label = new Gtk.Label(_("Except for:"));
+    label.set("xalign", 0.0f, "yalign", 0.0f);
+    w = new DejaDup.ConfigLabelList(DejaDup.EXCLUDE_LIST_KEY);
+    w.set("width-request", 250);
+    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, 0, Gtk.AttachOptions.FILL, 0, 0);
+    ++rows;
     
     return page;
   }
@@ -162,9 +182,6 @@ public class AssistantBackup : AssistantOperation
   {
     base.do_prepare(assist, page);
     
-    if (page == confirm_page) {
-      confirm_backup.label = DejaDup.get_location_desc();
-    }
     if (page == summary_page) {
       if (error_occurred)
         assist.child_set(page, "title", _("Backup Failed"));

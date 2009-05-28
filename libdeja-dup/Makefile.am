@@ -33,6 +33,10 @@ libdeja_dup_la_VALASOURCES = \
 	ConfigBool.vala \
 	ConfigChoice.vala \
 	ConfigEntry.vala \
+	ConfigLabel.vala \
+	ConfigLabelBool.vala \
+	ConfigLabelList.vala \
+	ConfigLabelLocation.vala \
 	ConfigList.vala \
 	ConfigLocation.vala \
 	ConfigNumber.vala \

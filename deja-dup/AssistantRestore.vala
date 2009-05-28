@@ -52,7 +52,6 @@ public class AssistantRestore : AssistantOperation
   Gtk.HBox cust_box;
   Gtk.FileChooserButton cust_button;
   Gtk.Table confirm_table;
-  Gtk.Label confirm_backup;
   int confirm_location_row;
   Gtk.Label confirm_location_label;
   Gtk.Label confirm_location;
@@ -203,29 +202,7 @@ public class AssistantRestore : AssistantOperation
   protected override Gtk.Widget make_confirm_page()
   {
     int rows = 0;
-    
-    var backup_label = new Gtk.Label.with_mnemonic(_("_Backup location:"));
-    backup_label.set("xalign", 0.0f);
-    confirm_backup = new Gtk.Label("");
-    confirm_backup.set("xalign", 0.0f);
-    ++rows;
-    
-    confirm_date_label = new Gtk.Label(_("Restore date:"));
-    confirm_date_label.set("xalign", 0.0f);
-    confirm_date = new Gtk.Label("");
-    confirm_date.set("xalign", 0.0f);
-    ++rows;
-    
-    confirm_location_label = new Gtk.Label(_("Restore folder:"));
-    confirm_location_label.set("xalign", 0.0f);
-    confirm_location = new Gtk.Label("");
-    confirm_location.set("xalign", 0.0f);
-    ++rows;
-    
-    confirm_files_label = new Gtk.Label("");
-    confirm_files_label.set("xalign", 0.0f, "yalign", 0.0f);
-    confirm_files = new Gtk.VBox(true, 6);
-    ++rows;
+    Gtk.Widget label, w;
     
     confirm_table = new Gtk.Table(rows, 3, false);
     var page = confirm_table;
@@ -233,21 +210,45 @@ public class AssistantRestore : AssistantOperation
              "column-spacing", 6,
              "border-width", 12);
     
-    rows = 0;
-    page.attach(backup_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    page.attach(confirm_backup, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
+    label = new Gtk.Label(_("Backup location:"));
+    label.set("xalign", 0.0f);
+    w = new DejaDup.ConfigLabelLocation();
+    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
     ++rows;
+    
+    label = new Gtk.Label(_("Encrypted:"));
+    label.set("xalign", 0.0f);
+    w = new DejaDup.ConfigLabelBool(DejaDup.ENCRYPT_KEY);
+    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    ++rows;
+    
+    confirm_date_label = new Gtk.Label(_("Restore date:"));
+    confirm_date_label.set("xalign", 0.0f);
+    confirm_date = new Gtk.Label("");
+    confirm_date.set("xalign", 0.0f);
     confirm_date_row = rows;
     page.attach(confirm_date_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     page.attach(confirm_date, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
     ++rows;
+    
+    confirm_location_label = new Gtk.Label(_("Restore folder:"));
+    confirm_location_label.set("xalign", 0.0f);
+    confirm_location = new Gtk.Label("");
+    confirm_location.set("xalign", 0.0f);
     confirm_location_row = rows;
     page.attach(confirm_location_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     page.attach(confirm_location, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
     ++rows;
+    
+    confirm_files_label = new Gtk.Label("");
+    confirm_files_label.set("xalign", 0.0f, "yalign", 0.0f);
+    confirm_files = new Gtk.VBox(true, 6);
     confirm_files_row = rows;
     page.attach(confirm_files_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     page.attach(confirm_files, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    ++rows;
     
     return page;
   }
@@ -414,9 +415,6 @@ public class AssistantRestore : AssistantOperation
     }
     
     if (page == confirm_page) {
-      // Location
-      confirm_backup.label = DejaDup.get_location_desc();
-      
       // When we restore from
       if (got_dates) {
         confirm_date.label = date_combo.get_active_text();

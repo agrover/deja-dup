@@ -15,7 +15,7 @@ def test():
   version = None
   mtype = None
   tmpid = None
-  sources = None
+  sources = []
   dest = None
   size = None
   back = 'file'
@@ -32,7 +32,8 @@ def test():
     elif arg.startswith('dup='):
       version = arg.split('=', 1)[-1]
     elif arg.startswith('source='):
-      sources = arg.split('=', 1)[-1]
+      source = arg.split('=', 1)[-1]
+      sources += [source]
     elif arg.startswith('size='):
       size = int(arg.split('=', 1)[-1])
     elif arg.startswith('back='):
@@ -48,8 +49,8 @@ def test():
     os.environ['DEJA_DUP_TEST_TMP'] = tmpdir
   if mtype is not None or size is not None:
     dest = base.create_mount(mtype=mtype, size=size)
-  if sources is not None:
-    sources = map(lambda s: os.path.abspath(s), [sources])
+  if sources:
+    sources = map(lambda s: os.path.abspath(s), sources)
   
   base.setup(backend=back, dest=dest, sources=sources, start=False)
   

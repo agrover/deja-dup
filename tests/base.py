@@ -118,10 +118,10 @@ def create_local_config(dest='/', includes=None, excludes=None):
     os.system('mkdir -p %s' % dest)
   set_gconf_value("backend", "file")
   set_gconf_value("file/path", dest)
-  if includes is not None:
+  if includes:
     includes = '[' + ','.join(includes) + ']'
     set_gconf_value("include-list", includes, "list", "string")
-  if excludes is not None:
+  if excludes:
     excludes = '[' + ','.join(excludes) + ']'
     set_gconf_value("exclude-list", excludes, "list", "string")
 
@@ -131,10 +131,10 @@ def create_ssh_config(dest='/', includes=None, excludes=None):
     os.system('mkdir -p %s' % dest)
   set_gconf_value("backend", "file")
   set_gconf_value("file/path", "ssh://localhost" + dest)
-  if includes is not None:
+  if includes:
     includes = '[' + ','.join(includes) + ']'
     set_gconf_value("include-list", includes, "list", "string")
-  if excludes is not None:
+  if excludes:
     excludes = '[' + ','.join(excludes) + ']'
     set_gconf_value("exclude-list", excludes, "list", "string")
 
