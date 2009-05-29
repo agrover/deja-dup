@@ -1,18 +1,34 @@
-deja-dup 9.2 (2009-05-09)
+Déjà Dup 10.0
+-------------
+* Use GIO, letting one backup to FTP, WebDAV, and Windows Networking servers.
+* Add a 'Details' box when backing up or restoring.  This lets you see the
+  full path of each file as it is touched (rather than just the filename).
+* If the user tries to backup or restore for the first time, show the relevant
+  preferences in the wizard directly.  Don't require that they first open the
+  Preferences window.
+* Add a more complete summary right before user approves a backup or restore.
+* Exclude ~/.Private, not ~/Private.  This means we no longer backup the
+  encrypted version of ecryptfs files, but the unencrypted version.  So
+  encrypt your backups appropriately.  This change lets us work more elegantly
+  in all ecryptfs setups, especially when your whole home directory is
+  encrypted.
+* Bug fixes and UI tweaks
+
+Déjà Dup 9.2 (2009-05-09)
 -------------------------
 * Re-enable some kinder, specific messages for certain duplicity exceptions,
   including I/O errors and 'destination out of space' errors
 * Enable translation of user documentation (man pages and manual)
 * Updated English (UK), French, German, and Russian translations
 
-deja-dup 9.1 (2009-04-27)
+Déjà Dup 9.1 (2009-04-27)
 -------------------------
 * Strip spaces from the ends of passwords, they are likely just cut+paste
   errors from web sites -- notably Amazon's S3 password page (LP: #362899).
 * Make bleeding-edge GTK+ symbols introduced by vala 0.7 optional, so we now
   compile again with GTK+ 2.12.
 
-deja-dup 9.0 (2009-04-26)
+Déjà Dup 9.0 (2009-04-26)
 -------------------------
 * Use 'nice' for duplicity subprocess to be less of a resource hog
 * Make folder include/exclude lists scrollable if too large
@@ -29,12 +45,12 @@ deja-dup 9.0 (2009-04-26)
 * Let user cancel 'add directory' dialog (LP: #364690)
 * New Finnish, Pashto, and Russian translations
 
-deja-dup 8.1 (2009-04-03)
+Déjà Dup 8.1 (2009-04-03)
 -------------------------
 * Fix use of ionice program that prevent deja-dup from working on kernels
   versions less than 2.6.25.  LP: #352492
 
-deja-dup 8.0 (2009-03-29)
+Déjà Dup 8.0 (2009-03-29)
 -------------------------
 * Support Ubuntu-9.10-style notifications without action buttons
 * Don't backup the backup destination directory
@@ -44,7 +60,7 @@ deja-dup 8.0 (2009-03-29)
 * New Arabic, Danish, and English (United Kingdom) translations
 * Updated Dutch, French, German, and Swedish translations
 
-deja-dup 7.4 (2009-02-11)
+Déjà Dup 7.4 (2009-02-11)
 -------------------------
 * Don't ask for S3 bucket name (and default to deja-dup).  Buckets are
   S3-global and that default is certainly taken.  Instead, generate bucket name
@@ -56,28 +72,28 @@ deja-dup 7.4 (2009-02-11)
 * New Dutch translation
 * Updated French, Hebrew, and Spanish translations
 
-deja-dup 7.3
+Déjà Dup 7.3
 ------------
 * Fix SSH password problem, preventing the SSH backend from working
 
-deja-dup 7.2
+Déjà Dup 7.2
 ------------
 * Enforce volume size of 5M, regardless of duplicity's default
 * New Norwegian Bokmal translation
 * Updated German and Swedish translations
 
-deja-dup 7.1
+Déjà Dup 7.1
 ------------
 * Fix mangled German translation, whoops
 
-deja-dup 7.0
+Déjà Dup 7.0
 ------------
 * Add nautilus extension to restore files via a right click
 * Fix crash when restoring from an empty folder or from FAT32
 * Make backup progress bar more accurate for large backups
 * Updated German and Swedish translations
 
-deja-dup 6.0
+Déjà Dup 6.0
 ------------
 * Allow restoring from any backup time point, not just the most recent
 * Allow backing up to a Windows partition
@@ -88,17 +104,17 @@ deja-dup 6.0
 * Be more forceful about killing duplicity subprocesses, to avoid orphaned ones
 * New Galician and German translations
 
-deja-dup 5.2
+Déjà Dup 5.2
 ------------
 * Don't backup ~/.gvfs
 * Fix crash when cancelling while preparing a backup
 
-deja-dup 5.1
+Déjà Dup 5.1
 ------------
 * Fixed a bug that caused deja-dup to hang if encryption is requested
 * Updated Swedish translation
 
-deja-dup 5.0
+Déjà Dup 5.0
 ------------
 * Use a (short) wizard for backing up too, just like restoring
 * Progress during backup is now indicated by showing what file is being
@@ -107,7 +123,7 @@ deja-dup 5.0
 * New help documentation and man pages
 * New Swedish translation
 
-deja-dup 4.0
+Déjà Dup 4.0
 ------------
 * New SSH backend
 * Uses ionice if available to not fight with user for disk access
@@ -120,19 +136,19 @@ deja-dup 4.0
 * Added Spanish translation
 * Updated French translation
 
-deja-dup 3.0
+Déjà Dup 3.0
 ------------
 * Added ability to set a regular backup schedule (daily, weekly, biweekly, or
   monthly).
 * Added --version
 * Added French translation
 
-deja-dup 2.1
+Déjà Dup 2.1
 ------------
 * Finish reading all output from duplicity before closing -- this fixes the
   'silent failure' problem if an error occurs
 
-deja-dup 2.0
+Déjà Dup 2.0
 ------------
 * Fix typo that caused encryption preference to default to off
 * Fix menu icon
@@ -142,7 +158,7 @@ deja-dup 2.0
 * Require duplicity 0.5.03
 * New Hebrew and Lithuanian translations
 
-deja-dup 1.0
+Déjà Dup 1.0
 ------------
 * Initial release
 * Supports backing up to Amazon S3 or a local directory
