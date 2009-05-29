@@ -23,6 +23,7 @@ EXTRA_DIST = $(TESTS) \
 	base.py \
 	basic/base.py \
 	backup/base.py \
+	prefs/base.py \
 	build-duplicity \
 	interactive \
 	README
