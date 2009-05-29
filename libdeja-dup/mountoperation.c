@@ -70,8 +70,6 @@ static void   dup_mount_operation_ask_question (GMountOperation *op,
                                                 const char      *message,
                                                 const char      *choices[]);
 
-static void   dup_mount_operation_aborted      (GMountOperation *op);
-
 G_DEFINE_TYPE (DupMountOperation, dup_mount_operation, G_TYPE_MOUNT_OPERATION);
 
 enum {
@@ -113,7 +111,6 @@ dup_mount_operation_class_init (DupMountOperationClass *klass)
 
   mount_op_class->ask_password = dup_mount_operation_ask_password;
   mount_op_class->ask_question = dup_mount_operation_ask_question;
-  mount_op_class->aborted = dup_mount_operation_aborted;
 
   g_object_class_install_property (object_class,
                                    PROP_PARENT,
@@ -144,7 +141,7 @@ static void
 dup_mount_operation_init (DupMountOperation *operation)
 {
   operation->priv = G_TYPE_INSTANCE_GET_PRIVATE (operation,
-                                                 GTK_TYPE_MOUNT_OPERATION,
+                                                 DUP_TYPE_MOUNT_OPERATION,
                                                  DupMountOperationPrivate);
 }
 
@@ -684,7 +681,7 @@ dup_mount_operation_ask_question (GMountOperation *op,
   char       *primary;
   int        count, len = 0;
 
-  g_return_if_fail (GTK_IS_MOUNT_OPERATION (op));
+  g_return_if_fail (DUP_IS_MOUNT_OPERATION (op));
   g_return_if_fail (message != NULL);
   g_return_if_fail (choices != NULL);
 
@@ -729,22 +726,6 @@ dup_mount_operation_ask_question (GMountOperation *op,
   g_object_ref (op);
 }
 
-static void
-dup_mount_operation_aborted (GMountOperation *op)
-{
-  DupMountOperationPrivate *priv;
-
-  priv = DUP_MOUNT_OPERATION (op)->priv;
-
-  if (priv->dialog != NULL)
-    {
-      gtk_widget_destroy (GTK_WIDGET (priv->dialog));
-      priv->dialog = NULL;
-      g_object_notify (G_OBJECT (op), "is-showing");
-      g_object_unref (op);
-    }
-}
-
 /**
  * dup_mount_operation_new:
  * @parent: transient parent of the window, or %NULL
@@ -760,7 +741,7 @@ dup_mount_operation_new (GtkWindow *parent)
 {
   GMountOperation *mount_operation;
 
-  mount_operation = g_object_new (GTK_TYPE_MOUNT_OPERATION,
+  mount_operation = g_object_new (DUP_TYPE_MOUNT_OPERATION,
                                   "parent", parent, NULL);
 
   return mount_operation;
@@ -780,7 +761,7 @@ dup_mount_operation_new (GtkWindow *parent)
 gboolean
 dup_mount_operation_is_showing (DupMountOperation *op)
 {
-  g_return_val_if_fail (GTK_IS_MOUNT_OPERATION (op), FALSE);
+  g_return_val_if_fail (DUP_IS_MOUNT_OPERATION (op), FALSE);
 
   return op->priv->dialog != NULL;
 }
@@ -801,7 +782,7 @@ dup_mount_operation_set_parent (DupMountOperation *op,
 {
   DupMountOperationPrivate *priv;
 
-  g_return_if_fail (GTK_IS_MOUNT_OPERATION (op));
+  g_return_if_fail (DUP_IS_MOUNT_OPERATION (op));
   g_return_if_fail (parent == NULL || GTK_IS_WINDOW (parent));
 
   priv = op->priv;
@@ -845,7 +826,7 @@ dup_mount_operation_set_parent (DupMountOperation *op,
 GtkWindow *
 dup_mount_operation_get_parent (DupMountOperation *op)
 {
-  g_return_val_if_fail (GTK_IS_MOUNT_OPERATION (op), NULL);
+  g_return_val_if_fail (DUP_IS_MOUNT_OPERATION (op), NULL);
 
   return op->priv->parent_window;
 }
@@ -865,7 +846,7 @@ dup_mount_operation_set_screen (DupMountOperation *op,
 {
   DupMountOperationPrivate *priv;
 
-  g_return_if_fail (GTK_IS_MOUNT_OPERATION (op));
+  g_return_if_fail (DUP_IS_MOUNT_OPERATION (op));
   g_return_if_fail (GDK_IS_SCREEN (screen));
 
   priv = op->priv;
@@ -900,7 +881,7 @@ dup_mount_operation_get_screen (DupMountOperation *op)
 {
   DupMountOperationPrivate *priv;
 
-  g_return_val_if_fail (GTK_IS_MOUNT_OPERATION (op), NULL);
+  g_return_val_if_fail (DUP_IS_MOUNT_OPERATION (op), NULL);
 
   priv = op->priv;
 

@@ -227,3 +227,23 @@ hacks_mount_operation_new (GtkWindow *parent)
 #endif
 }
 
+gdouble
+hacks_adjustment_get_page_size (GtkAdjustment *adjust)
+{
+#if GTK_CHECK_VERSION(2, 14, 0)
+  return gtk_adjustment_get_page_size (adjust);
+#else
+  return adjust->page_size;
+#endif
+}
+
+gdouble
+hacks_adjustment_get_upper (GtkAdjustment *adjust)
+{
+#if GTK_CHECK_VERSION(2, 14, 0)
+  return gtk_adjustment_get_upper (adjust);
+#else
+  return adjust->upper;
+#endif
+}
+

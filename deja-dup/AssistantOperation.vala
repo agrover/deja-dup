@@ -111,11 +111,11 @@ public abstract class AssistantOperation : Gtk.Assistant
   {
     Gtk.Adjustment adjust = ((Gtk.Range)range).adjustment;
     adjust.value_changed.connect((a) => {
-      adjustment_at_end = (a.value >= a.upper - a.page_size);
+      adjustment_at_end = (a.value >= hacks_adjustment_get_upper(a) - hacks_adjustment_get_page_size(a));
     });
     adjust.changed.connect((a) => {
       if (adjustment_at_end)
-        a.value = a.upper;
+        a.value = hacks_adjustment_get_upper(a);
     });
   }
   

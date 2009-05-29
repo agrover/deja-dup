@@ -44,3 +44,9 @@ Gdk.Window hacks_widget_get_window (Gtk.Widget widget);
 [CCode (cheader_filename = "hacks.h")]
 GLib.MountOperation hacks_mount_operation_new (Gtk.Window parent);
 
+[CCode (cheader_filename = "hacks.h")]
+double hacks_adjustment_get_page_size (Gtk.Adjustment adjust);
+
+[CCode (cheader_filename = "hacks.h")]
+double hacks_adjustment_get_upper (Gtk.Adjustment adjust);
+

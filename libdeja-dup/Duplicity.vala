@@ -441,7 +441,7 @@ public class Duplicity : Object
     var gfile = make_file_obj(file);
     last_touched_file = gfile;
     if (state != State.DRY_RUN &&
-        gfile.query_file_type(FileQueryInfoFlags.NONE, null) != FileType.DIRECTORY)
+        hacks_file_query_file_type(gfile, FileQueryInfoFlags.NONE) != FileType.DIRECTORY)
       action_file_changed(gfile);
   }
   
@@ -449,7 +449,7 @@ public class Duplicity : Object
     var gfile = make_file_obj(file);
     last_touched_file = gfile;
     if (state != State.DRY_RUN &&
-        gfile.query_file_type(FileQueryInfoFlags.NONE, null) != FileType.DIRECTORY)
+        hacks_file_query_file_type(gfile, FileQueryInfoFlags.NONE) != FileType.DIRECTORY)
       action_file_changed(gfile);
   }
   

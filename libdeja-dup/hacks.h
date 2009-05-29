@@ -36,6 +36,8 @@ extern gchar *hacks_unix_mount_get_fs_type (const gchar *file);
 extern void hacks_status_icon_set_tooltip_text (GtkStatusIcon *icon, const gchar *text);
 extern GdkWindow *hacks_widget_get_window (GtkWidget *widget);
 extern GMountOperation *hacks_mount_operation_new (GtkWindow *parent);
+extern gdouble hacks_adjustment_get_page_size (GtkAdjustment *adjust);
+extern gdouble hacks_adjustment_get_upper (GtkAdjustment *adjust);
 
 #endif
 
