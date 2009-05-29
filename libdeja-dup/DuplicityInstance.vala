@@ -83,6 +83,9 @@ public class DuplicityInstance : Object
     // 1 or 2.  For now, we'll keep with the default.
     argv.append("--volsize=5");
     
+    /* Duplicity can't gracefully start using archive dir in the middle of a
+       backup series, so we don't turn this on yet.  I'll have to submit a
+       a patch to make that work.
     // Cache signature files
     var cache_dir = Environment.get_user_cache_dir();
     if (cache_dir != null) {
@@ -102,6 +105,7 @@ public class DuplicityInstance : Object
       if (add_dir)
         argv.append("--archive-dir=" + cache_file.get_path());
     }
+    */
     
     // Add always-there arguments
     argv.append("--log-fd=%d".printf(pipes[1]));
