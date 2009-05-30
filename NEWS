@@ -1,3 +1,14 @@
+deja-dup 9.3 (2009-05-30)
+-------------------------
+* Exclude ~/.Private, not ~/Private.  This means we no longer backup the
+  encrypted version of ecryptfs files, but the unencrypted version.  So
+  encrypt your backups appropriately.  This change lets us work more elegantly
+  in all ecryptfs setups, especially when your whole home directory is
+  encrypted.
+* Update icons to Tango style ones
+* Relicense help documentation from GFDL to GPL-3+
+* Some minor bug fixes
+
 deja-dup 9.2 (2009-05-09)
 -------------------------
 * Re-enable some kinder, specific messages for certain duplicity exceptions,
