@@ -19,14 +19,6 @@
 
 using GLib;
 
-public string get_restore_icon_filename() {
-  return Path.build_filename(Config.PKG_DATA_DIR, "document-save.svg");
-}
-
-public string get_backup_icon_filename() {
-  return Path.build_filename(Config.PKG_DATA_DIR, "document-send.svg");
-}
-
 public class MainWindow : Gtk.Window
 {
   construct
@@ -42,8 +34,7 @@ public class MainWindow : Gtk.Window
     
     var restore_icon = new Gtk.Image();
     try {
-      var filename = get_restore_icon_filename();
-      var restore_pix = new Gdk.Pixbuf.from_file_at_size(filename, 128, 128);
+      var restore_pix = hacks_get_icon_at_size("deja-dup-restore", 128);
       restore_icon.set("pixbuf", restore_pix);
     }
     catch (Error e) {
@@ -68,8 +59,7 @@ public class MainWindow : Gtk.Window
     
     var backup_icon = new Gtk.Image();
     try {
-      var filename = get_backup_icon_filename();
-      var backup_pix = new Gdk.Pixbuf.from_file_at_size(filename, 128, 128);
+      var backup_pix = hacks_get_icon_at_size("deja-dup-backup", 128);
       backup_icon.set("pixbuf", backup_pix);
     }
     catch (Error e) {
@@ -187,13 +177,13 @@ public class MainWindow : Gtk.Window
     action_group.add_action (action);
     
     action = new Gtk.Action ("BackupAction", _("_Backup"), null, null);
-    //action.set("icon-name", "document-send");
+    action.set("icon-name", "deja-dup-backup");
     action.activate.connect(on_backup);
     action_group.add_action_with_accel (action, "<control>B");
     this.backup_action = action;
     
     action = new Gtk.Action ("RestoreAction", _("_Restore"), null, null);
-    //action.set("icon-name", "document-save");
+    action.set("icon-name", "deja-dup-restore");
     action.activate.connect(on_restore);
     action_group.add_action_with_accel (action, "<control>R");
     this.restore_action = action;

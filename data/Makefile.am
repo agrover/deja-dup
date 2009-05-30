@@ -1,10 +1,10 @@
 # -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 
-icondir = $(datadir)/icons/hicolor/scalable/apps
-dist_icon_DATA = deja-dup.svg
+iconappdir = $(datadir)/icons/hicolor/scalable/apps
+dist_iconapp_DATA = deja-dup.svg
 
-pixdir = $(pkgdatadir)
-dist_pix_DATA = document-save.svg document-send.svg
+iconactiondir = $(datadir)/icons/hicolor/scalable/actions
+dist_iconaction_DATA = deja-dup-backup.svg deja-dup-restore.svg
 
 @INTLTOOL_SCHEMAS_RULE@
 schemadir = $(sysconfdir)/gconf/schemas
