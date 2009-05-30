@@ -239,7 +239,7 @@ public class DuplicityInstance : Object
   
   static string compress_string(string s_in)
   {
-    char[] rv = new char[s_in.size()];
+    char[] rv = new char[s_in.size()+1];
     weak char[] s = (char[])s_in;
     
     int i = 0, j = 0;
