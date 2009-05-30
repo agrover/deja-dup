@@ -145,6 +145,8 @@ public class Duplicity : Object
         action_desc = _("Preparing...");
         extra_argv.append("--dry-run");
       }
+      else if (DuplicityInfo.get_default().has_backup_progress)
+        progress(0f);
       break;
     case Operation.Mode.RESTORE:
       if (restore_files != null) {
@@ -168,6 +170,8 @@ public class Duplicity : Object
         custom_local = local_file.get_path();
         extra_argv.append("--file-to-restore=%s".printf(rel_file_path));
       }
+      if (DuplicityInfo.get_default().has_restore_progress)
+        progress(0f);
       break;
     }
     
