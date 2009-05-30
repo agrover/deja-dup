@@ -138,11 +138,11 @@ public void show_about(Object owner, Gtk.Window? parent)
   about.translator_credits = _("translator-credits");
   about.logo_icon_name = Config.PACKAGE;
   about.version = Config.VERSION;
-  about.website = "http://mterry.name/deja-dup/";
+  about.website = "https://launchpad.net/deja-dup";
   about.license = "%s\n\n%s\n\n%s".printf (
     _("This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version."),
     _("This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."),
-    _("You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA."));
+    _("You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/."));
   about.wrap_license = true;
   
   owner.set_data("about-dlg", about);

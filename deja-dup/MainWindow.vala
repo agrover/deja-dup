@@ -202,7 +202,7 @@ public class MainWindow : Gtk.Window
     action = new Gtk.Action ("HelpMenuAction", _("_Help"), null, null);
     action_group.add_action (action);
     
-    action = new Gtk.Action ("ContentsAction", _("Contents"), null, Gtk.STOCK_HELP);
+    action = new Gtk.Action ("ContentsAction", _("_Contents"), null, Gtk.STOCK_HELP);
     action.activate.connect(on_contents);
     action_group.add_action_with_accel (action, "F1");
     
