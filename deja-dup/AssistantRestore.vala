@@ -270,8 +270,7 @@ public class AssistantRestore : AssistantOperation
   protected override Gdk.Pixbuf? make_op_icon()
   {
     try {
-      var filename = get_restore_icon_filename();
-      return new Gdk.Pixbuf.from_file_at_size(filename, 48, 48);
+      return hacks_get_icon_at_size("deja-dup-restore", 48);
     }
     catch (Error e) {
       warning("%s\n", e.message);

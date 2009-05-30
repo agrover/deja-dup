@@ -114,6 +114,11 @@ void handle_about_mail(Gtk.AboutDialog about, string link)
 const string[] authors = {"Michael Terry <mike@mterry.name>",
                           null};
 
+const string[] artists = {"Andreas Nilsson <nisses.mail@home.se>",
+                          "Jakub Steiner <jimmac@novell.com>",
+                          "Michael Terry <mike@mterry.name>",
+                          null};
+
 public void show_about(Object owner, Gtk.Window? parent)
 {
   Gtk.AboutDialog about = (Gtk.AboutDialog)owner.get_data("about-dlg");
@@ -129,6 +134,7 @@ public void show_about(Object owner, Gtk.Window? parent)
   about.set_url_hook (handle_about_uri);
   about.title = _("About Déjà Dup");
   about.authors = authors;
+  about.artists = artists;
   about.translator_credits = _("translator-credits");
   about.logo_icon_name = Config.PACKAGE;
   about.version = Config.VERSION;
