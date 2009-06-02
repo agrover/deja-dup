@@ -61,15 +61,6 @@ public class PreferencesDialog : Gtk.Dialog
     table.attach(location, 1, 2, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL, 3, 3);
-    
-    w = new Gtk.Image.from_stock(Gtk.STOCK_HELP, Gtk.IconSize.BUTTON);
-    var button = new Gtk.Button();
-    button.clicked.connect(handle_link_clicked);
-    button.add(w);
-    table.attach(button, 2, 3, row, row + 1,
-                 Gtk.AttachOptions.FILL,
-                 Gtk.AttachOptions.FILL, 3, 3);
-    backend_widgets[S3_LIST].append(button);
     ++row;
     
     var s3_table = new Gtk.Table(1, 3, false);
@@ -175,10 +166,8 @@ public class PreferencesDialog : Gtk.Dialog
     vbox.add(table);
   }
   
-  void handle_location_changed(DejaDup.ConfigWidget widget)
+  void handle_location_changed(DejaDup.ConfigLocation location)
   {
-    var location = (DejaDup.ConfigLocation)widget;
-    
     for (int i = 0; i < NUM_LISTS; ++i) {
       bool show = false;
       if (i == S3_LIST && location.is_s3)
@@ -203,11 +192,6 @@ public class PreferencesDialog : Gtk.Dialog
       Gtk.main_quit();
       break;
     }
-  }
-  
-  void handle_link_clicked(Gtk.Button button)
-  {
-    DejaDup.show_uri((Gtk.Window)button.get_toplevel(), "http://aws.amazon.com/s3/");
   }
 }
 

@@ -247,3 +247,12 @@ hacks_adjustment_get_upper (GtkAdjustment *adjust)
 #endif
 }
 
+GtkWidget *
+hacks_dialog_get_action_area (GtkDialog *dialog)
+{
+#if GTK_CHECK_VERSION(2, 14, 0)
+  return gtk_dialog_get_action_area (dialog);
+#else
+  return dialog->action_area;
+#endif
+}

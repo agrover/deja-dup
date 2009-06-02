@@ -35,23 +35,17 @@ public class ConfigLocation : ConfigWidget
   File tmpdir;
   string s3_name;
   construct {
+    var hbox = new Gtk.HBox(false, 6);
+    add(hbox);
+    
     dialog = new Gtk.FileChooserDialog (_("Select Backup Location"), null,
                           						  Gtk.FileChooserAction.SELECT_FOLDER);
     
     if (Environment.find_program_in_path("nautilus-connect-server") != null) {
-      dialog.add_buttons(_("Connect to Server..."), CONNECT_ID);
-      dialog.response.connect((b, r) => {
-        if (r != CONNECT_ID)
-          return;
-        try {
-          Process.spawn_command_line_async("nautilus-connect-server");
-        } catch (Error e) {
-          Gtk.MessageDialog dlg = new Gtk.MessageDialog (dialog, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not open connection dialog"));
-          dlg.format_secondary_text("%s", e.message);
-          dlg.run ();
-          dlg.destroy ();
-        }
-      });
+      var button = new ButtonConnect();
+      var action_area = (Gtk.Box)hacks_dialog_get_action_area(dialog);
+      action_area.pack_end(button, false, false, 0);
+      button.show_all();
     }
     
     dialog.add_buttons(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
@@ -60,7 +54,10 @@ public class ConfigLocation : ConfigWidget
     
     button = new Gtk.FileChooserButton.with_dialog(dialog);
     button.local_only = false;
-    add(button);
+    hbox.add(button);
+    
+    var connect_button = new ButtonConnect();
+    hbox.add(connect_button);
     
     mnemonic_activate.connect((w, g) => {return button.mnemonic_activate(g);});
     

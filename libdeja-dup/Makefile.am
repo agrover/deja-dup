@@ -29,6 +29,7 @@ libdeja_dup_la_VALASOURCES = \
 	Backend.vala \
 	BackendFile.vala \
 	BackendS3.vala \
+	ButtonConnect.vala \
 	ConfigBool.vala \
 	ConfigChoice.vala \
 	ConfigEntry.vala \

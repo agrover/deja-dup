@@ -50,3 +50,5 @@ double hacks_adjustment_get_page_size (Gtk.Adjustment adjust);
 [CCode (cheader_filename = "hacks.h")]
 double hacks_adjustment_get_upper (Gtk.Adjustment adjust);
 
+[CCode (cheader_filename = "hacks.h")]
+weak Gtk.Widget hacks_dialog_get_action_area (Gtk.Dialog dialog);

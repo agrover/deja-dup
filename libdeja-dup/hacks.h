@@ -38,6 +38,7 @@ extern GdkWindow *hacks_widget_get_window (GtkWidget *widget);
 extern GMountOperation *hacks_mount_operation_new (GtkWindow *parent);
 extern gdouble hacks_adjustment_get_page_size (GtkAdjustment *adjust);
 extern gdouble hacks_adjustment_get_upper (GtkAdjustment *adjust);
+extern GtkWidget *hacks_dialog_get_action_area (GtkDialog *dialog);
 
 #endif
 
