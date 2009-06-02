@@ -433,7 +433,7 @@ public class AssistantRestore : AssistantOperation
         if (restore_location == "/")
           confirm_location.label = _("Original location");
         else
-          confirm_location.label = restore_location;
+          confirm_location.label = DejaDup.get_file_desc(File.new_for_path(restore_location));
         
         confirm_location_label.show();
         confirm_location.show();
