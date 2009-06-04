@@ -304,6 +304,7 @@ public abstract class AssistantOperation : Gtk.Assistant
       if (op != null) {
         op.done.disconnect(apply_finished);
         op.cancel(); // in case we just went back from progress page
+        op = null;
       }
     }
     else if (page == progress_page) {
