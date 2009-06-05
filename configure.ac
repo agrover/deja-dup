@@ -3,7 +3,7 @@
 # Process this file with autoconf to produce a configure script.
 
 # Sets up autoconf.
-AC_INIT([Déjà Dup],[10.0],[deja-dup-team@lists.launchpad.net],[deja-dup])
+AC_INIT([Déjà Dup],[10.1],[deja-dup-team@lists.launchpad.net],[deja-dup])
 AC_PREREQ([2.53])
 AC_CONFIG_SRCDIR(deja-dup/main.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
