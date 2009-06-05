@@ -41,7 +41,8 @@ public class ConfigLocation : ConfigWidget
     dialog = new Gtk.FileChooserDialog (_("Select Backup Location"), null,
                           						  Gtk.FileChooserAction.SELECT_FOLDER);
     
-    if (Environment.find_program_in_path("nautilus-connect-server") != null) {
+    var has_connect_prog = Environment.find_program_in_path("nautilus-connect-server") != null;
+    if (has_connect_prog) {
       var button = new ButtonConnect();
       var action_area = (Gtk.Box)hacks_dialog_get_action_area(dialog);
       action_area.pack_end(button, false, false, 0);
@@ -56,8 +57,10 @@ public class ConfigLocation : ConfigWidget
     button.local_only = false;
     hbox.add(button);
     
-    var connect_button = new ButtonConnect();
-    hbox.add(connect_button);
+    if (has_connect_prog) {
+      var connect_button = new ButtonConnect();
+      hbox.add(connect_button);
+    }
     
     mnemonic_activate.connect((w, g) => {return button.mnemonic_activate(g);});
     
