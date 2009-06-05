@@ -26,15 +26,14 @@ Depends: ${shlibs:Depends},
          ${misc:Depends},
          duplicity (>= 0.5.03),
          gvfs-fuse
-Recommends: python-boto (>= 0.9d)
-Suggests: util-linux (>= 2.13)
+Recommends: python-boto (>= 0.9d), nautilus
 Description: Backup utility
  Déjà Dup is a simple backup program. It hides the complexity of
  doing backups the 'right way' (encrypted, off-site, and regular)
  and uses duplicity as the backend.
  .
  Features:
-  * Uses Amazon S3, an SSH server, or a local folder as a backup location
+  * Support for local or remote backup locations, including Amazon S3
   * Securely encrypts your data
   * Schedules regular backups
   * Integrates well into your GNOME desktop
@@ -50,7 +49,7 @@ Description: Déjà Dup debugging symbols
  and uses duplicity as the backend.
  .
  Features:
-  * Uses Amazon S3, an SSH server, or a local folder as a backup location
+  * Support for local or remote backup locations, including Amazon S3
   * Securely encrypts your data
   * Schedules regular backups
   * Integrates well into your GNOME desktop
