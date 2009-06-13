@@ -8,7 +8,7 @@ import os
 import ldtp
 import subprocess
 
-latest_duplicity = '0.5.17'
+latest_duplicity = '0.6.00'
 
 temp_dir = None
 gconf_dir = None

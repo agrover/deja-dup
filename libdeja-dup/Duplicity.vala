@@ -66,6 +66,7 @@ public class Duplicity : Object
   List<string> backend_argv;
   List<string> saved_argv;
   List<string> saved_envp;
+  bool cleaned_up_once = false;
   
   bool has_progress_total = false;
   double progress_total; // zero, unless we already know limit
@@ -216,7 +217,8 @@ public class Duplicity : Object
         break;
       
       case State.CLEANUP:
-        if (success && restart()) // restart in case cleanup was interrupting normal flow
+        cleaned_up_once = true;
+        if (restart()) // restart in case cleanup was interrupting normal flow
           return;
         
         // Else, we probably started cleaning up after a cancel.  Just continue
@@ -327,6 +329,14 @@ public class Duplicity : Object
                                        string text_in)
   {
     string text = text_in;
+    
+    // Ignore errors during cleanup.  If they're real, they'll repeat.
+    // They might be not-so-real, like the errors one gets when restoring
+    // from a backup when not all of the signature files are in your archive
+    // dir (which happens when you start using an archive dir in the middle
+    // of a backup chain).
+    if (state == State.CLEANUP)
+      return;
     
     if (firstline.length > 1) {
       switch (firstline[1].to_int()) {
@@ -549,7 +559,8 @@ public class Duplicity : Object
         // up before we continue.  We don't want to wait until we finish to
         // clean them up, since we may want that space, and if there's a bug
         // in ourselves, we may never get to it.
-        cleanup(); // stops current backup, cleans up, then resumes
+        if (!this.cleaned_up_once)
+          cleanup(); // stops current backup, cleans up, then resumes
       break;
       }
     }
