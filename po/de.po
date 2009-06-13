@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-06-02 17:36-0400\n"
-"PO-Revision-Date: 2009-05-06 01:36+0000\n"
-"Last-Translator: Maximilian Blömer <mail@maxbloemer.de>\n"
+"POT-Creation-Date: 2009-06-05 15:13-0400\n"
+"PO-Revision-Date: 2009-06-08 10:37+0000\n"
+"Last-Translator: Philipp Wolfer <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-06-05 12:04+0000\n"
+"X-Launchpad-Export-Date: 2009-06-13 16:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -50,6 +50,10 @@ msgstr ""
 "Optionaler Name eines Ordners, in dem die Dateien gespeichert werden. Der "
 "Ordner wird im gewählten S3 bucket erstellt."
 
+#: ../data/deja-dup.schemas.in.h:3
+msgid "Backup location"
+msgstr ""
+
 #: ../data/deja-dup.schemas.in.h:4
 msgid "Directories not to backup"
 msgstr "Ordner, die nicht gesichert werden sollen"
@@ -61,6 +65,10 @@ msgstr "Ordner, die gesichert werden sollen"
 #: ../data/deja-dup.schemas.in.h:6
 msgid "How often to periodically backup"
 msgstr "Datensicherung regelmäßig ausführen"
+
+#: ../data/deja-dup.schemas.in.h:7
+msgid "Location in which to hold the backup files."
+msgstr ""
 
 #: ../data/deja-dup.schemas.in.h:8
 msgid "The Amazon S3 bucket name to use"
@@ -81,6 +89,10 @@ msgstr "Déjà Dup wurde zuletzt ausgeführt am, im ISO 8601-Format"
 #: ../data/deja-dup.schemas.in.h:12
 msgid "The number of days between backups."
 msgstr "Anzahl der Tage zwischen den Datensicherungen"
+
+#: ../data/deja-dup.schemas.in.h:13
+msgid "The type of backup location. Valid values are 's3' or 'file'."
+msgstr ""
 
 #: ../data/deja-dup.schemas.in.h:14
 msgid ""
@@ -237,9 +249,36 @@ msgstr "Ort der Datensicherung:"
 msgid "_Encrypt backup files"
 msgstr "Datensicherungsdateien verschlüsseln"
 
+#: ../deja-dup/AssistantBackup.vala:68
+#: ../preferences/PreferencesDialog.vala:99
+msgid "I_nclude files in folders:"
+msgstr ""
+
+#: ../deja-dup/AssistantBackup.vala:81
+#: ../preferences/PreferencesDialog.vala:118
+msgid "E_xcept files in folders:"
+msgstr ""
+
+#: ../deja-dup/AssistantBackup.vala:100 ../deja-dup/AssistantBackup.vala:108
+#: ../deja-dup/AssistantRestore.vala:114
+msgid "Preferences"
+msgstr "Einstellungen"
+
 #: ../deja-dup/AssistantBackup.vala:124 ../deja-dup/AssistantRestore.vala:213
 msgid "Backup location:"
 msgstr "Sicherungs-Ort:"
+
+#: ../deja-dup/AssistantBackup.vala:131 ../deja-dup/AssistantRestore.vala:220
+msgid "Encrypted:"
+msgstr "Verschlüsselt:"
+
+#: ../deja-dup/AssistantBackup.vala:138
+msgid "Include from:"
+msgstr ""
+
+#: ../deja-dup/AssistantBackup.vala:146
+msgid "Except for:"
+msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
@@ -263,6 +302,10 @@ msgstr "Ihre Daten wurden erfolgreich gesichert."
 msgid "Backing up..."
 msgstr "Sichere Daten..."
 
+#: ../deja-dup/AssistantOperation.vala:147
+msgid "_Details"
+msgstr "_Details"
+
 #: ../deja-dup/AssistantOperation.vala:234
 msgid "Summary"
 msgstr "Zusammenfassung"
@@ -270,6 +313,10 @@ msgstr "Zusammenfassung"
 #: ../deja-dup/AssistantRestore.vala:70
 msgid "Restore"
 msgstr "Wiederherstellen"
+
+#: ../deja-dup/AssistantRestore.vala:100
+msgid "Backup files are _encrypted"
+msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:138
 msgid "_Date:"
@@ -385,6 +432,10 @@ msgstr "Bearbeiten"
 msgid "_Help"
 msgstr "_Hilfe"
 
+#: ../deja-dup/MainWindow.vala:205
+msgid "_Contents"
+msgstr ""
+
 #: ../deja-dup/MainWindow.vala:209
 msgid "Get Help _Online..."
 msgstr "Online Hilfe erhalten ..."
@@ -396,6 +447,10 @@ msgstr "Diese _Anwendung übersetzen..."
 #: ../deja-dup/MainWindow.vala:217
 msgid "_Report a Problem..."
 msgstr "Fehler melden"
+
+#: ../libdeja-dup/BackendFile.vala:48
+msgid "GVFS FUSE is not installed"
+msgstr "GVFS FUSE ist nicht installiert"
 
 #: ../libdeja-dup/BackendS3.vala:122
 #, c-format
@@ -415,6 +470,22 @@ msgstr ""
 "Bitte Amazon Web Services Benutzer-ID und geheimen Schlüssel eingeben. Dies "
 "entspricht nicht dem amazon.com Benutzernamen und Passwort."
 
+#: ../libdeja-dup/ButtonConnect.vala:28
+msgid "Connect to _Server..."
+msgstr "Mit _Server verbinden..."
+
+#: ../libdeja-dup/ButtonConnect.vala:37
+msgid "Could not open connection dialog"
+msgstr ""
+
+#: ../libdeja-dup/ConfigLabelBool.vala:36
+msgid "Yes"
+msgstr "Ja"
+
+#: ../libdeja-dup/ConfigLabelBool.vala:36
+msgid "No"
+msgstr "Nein"
+
 #: ../libdeja-dup/ConfigLabelList.vala:56 ../libdeja-dup/ConfigList.vala:111
 msgid "Home Folder"
 msgstr "Persönlicher Ordner"
@@ -423,7 +494,15 @@ msgstr "Persönlicher Ordner"
 msgid "Trash"
 msgstr "Mülleimer"
 
-#: ../libdeja-dup/ConfigLocation.vala:64 ../libdeja-dup/libdeja-dup.vala:297
+#: ../libdeja-dup/ConfigList.vala:152
+msgid "Choose folders"
+msgstr "Verzeichnisse wählen"
+
+#: ../libdeja-dup/ConfigLocation.vala:41
+msgid "Select Backup Location"
+msgstr ""
+
+#: ../libdeja-dup/ConfigLocation.vala:67 ../libdeja-dup/libdeja-dup.vala:301
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -529,6 +608,21 @@ msgstr "S3 bucket Name nicht verfügbar."
 msgid "Bad encryption password."
 msgstr "falsches Passwort zum Verschlüsseln"
 
+#: ../libdeja-dup/Duplicity.vala:377
+#, c-format
+msgid "Error reading file '%s'."
+msgstr "Fehler beim Lesen von Datei '%s'."
+
+#: ../libdeja-dup/Duplicity.vala:379
+#, c-format
+msgid "Error writing file '%s'."
+msgstr "Fehler beim Schreiben von Datei '%s'."
+
+#: ../libdeja-dup/Duplicity.vala:387
+#, c-format
+msgid "No space left in %s"
+msgstr "Nicht genügend Speicherplatz unter %s verfügbar"
+
 #: ../libdeja-dup/Duplicity.vala:407
 msgid "No backup files found"
 msgstr "Keine Datensicherungsdateien gefunden"
@@ -538,11 +632,11 @@ msgstr "Keine Datensicherungsdateien gefunden"
 msgid "Could not display %s"
 msgstr "%s konnte nicht angezeigt werden"
 
-#: ../libdeja-dup/libdeja-dup.vala:135
+#: ../libdeja-dup/libdeja-dup.vala:138
 msgid "About Déjà Dup"
 msgstr "über Déjà Dup"
 
-#: ../libdeja-dup/libdeja-dup.vala:138
+#: ../libdeja-dup/libdeja-dup.vala:142
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -558,9 +652,14 @@ msgstr ""
 "\n"
 "Launchpad Contributions:\n"
 "  Daniel Nylander https://launchpad.net/~yeager\n"
-"  Maximilian Blömer https://launchpad.net/~maxbloemer"
+"  Maximilian Blömer https://launchpad.net/~maxbloemer\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Daniel Nylander https://launchpad.net/~yeager\n"
+"  Maximilian Blömer https://launchpad.net/~maxbloemer\n"
+"  Philipp Wolfer https://launchpad.net/~phw"
 
-#: ../libdeja-dup/libdeja-dup.vala:143
+#: ../libdeja-dup/libdeja-dup.vala:147
 #, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
@@ -574,7 +673,7 @@ msgstr ""
 "entweder in Version 3 der Lizenz oder (nach Ihrem Ermessen) in jeder "
 "folgenden Lizenz."
 
-#: ../libdeja-dup/libdeja-dup.vala:144
+#: ../libdeja-dup/libdeja-dup.vala:148
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -586,13 +685,51 @@ msgstr ""
 "implizierte Garantie der MARKTREIFE oder der VERWENDBARKEIT FÜR EINEN "
 "BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License."
 
-#: ../libdeja-dup/libdeja-dup.vala:309
+#: ../libdeja-dup/libdeja-dup.vala:149
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program.  If not, see http://www.gnu.org/licenses/."
+msgstr ""
+
+#: ../libdeja-dup/libdeja-dup.vala:313
 msgid "Unknown"
 msgstr "Unbekannt"
+
+#: ../libdeja-dup/mountoperation.c:447
+msgid "Co_nnect"
+msgstr "Verbi_nden"
+
+#: ../libdeja-dup/mountoperation.c:514
+msgid "Connect _anonymously"
+msgstr "_Anonym verbinden"
+
+#: ../libdeja-dup/mountoperation.c:523
+msgid "Connect as u_ser:"
+msgstr ""
 
 #: ../libdeja-dup/mountoperation.c:561
 msgid "_Username:"
 msgstr "_Benutzername:"
+
+#: ../libdeja-dup/mountoperation.c:566
+msgid "_Domain:"
+msgstr "_Domäne:"
+
+#: ../libdeja-dup/mountoperation.c:572
+msgid "_Password:"
+msgstr "_Passwort:"
+
+#: ../libdeja-dup/mountoperation.c:590
+msgid "Forget password _immediately"
+msgstr "Passwort sofort _vergessen"
+
+#: ../libdeja-dup/mountoperation.c:600
+msgid "Remember password until you _logout"
+msgstr ""
+
+#: ../libdeja-dup/mountoperation.c:610
+msgid "Remember _forever"
+msgstr ""
 
 #: ../libdeja-dup/OperationRestore.vala:59
 msgid "Restoring files..."
@@ -670,238 +807,6 @@ msgstr "regelmäßige Datensicherungen erstellen"
 #, c-format
 msgid "How _often to backup:"
 msgstr "Wie _oft gesichert werden soll:"
-
-#~ msgid "Folder on your system in which to hold the backup files."
-#~ msgstr "Position der Datensicherungsdateien"
-
-#~ msgid "Local backup location"
-#~ msgstr "lokaler Ordner für Datensicherung"
-
-#~ msgid "Choose backup destination"
-#~ msgstr "Position der Datensicherung auswählen"
-
-#~ msgid "Local Folder"
-#~ msgstr "Lokaler Ordner"
-
-#~ msgid "Select Folder"
-#~ msgstr "Ordner auswählen"
-
-#~ msgid "Choose folder"
-#~ msgstr "Ordner wählen"
-
-#~ msgid "Could not add the folder"
-#~ msgstr "konnte den Ordner nicht hinzufügen"
-
-#~ msgid ""
-#~ "You should have received a copy of the GNU General Public License along with "
-#~ "this program; if not, write to the Free Software Foundation, Inc., 59 Temple "
-#~ "Place - Suite 330, Boston, MA  02111-1307, USA."
-#~ msgstr ""
-#~ "Sie sollten ein Exemplar der GNU General Public License zusammen mit\r\n"
-#~ "diesem Programm erhalten haben. Falls nicht, schreiben Sie an die Free\r\n"
-#~ "Software Foundation, Inc. 59 Temple Place, Suite 330, Boston, MA 02111-1307, "
-#~ "USA."
-
-#~ msgid "I_nclude:"
-#~ msgstr "_Einbeziehen:"
-
-#~ msgid "E_xclude:"
-#~ msgstr "_Ausschließen:"
-
-#~ msgid "SSH directory"
-#~ msgstr "SSH Ordner"
-
-#~ msgid "SSH port"
-#~ msgstr "SSH Port"
-
-#~ msgid "SSH server"
-#~ msgstr "SSH Server"
-
-#~ msgid "SSH username"
-#~ msgstr "SSH Benutzername"
-
-#~ msgid "The directory used for SSH connections."
-#~ msgstr "der Ordner, der für SSH-Verbindungen genutzt werden soll"
-
-#~ msgid "The port used for SSH connections."
-#~ msgstr "der Port, der für SSH-Verbindungen verwendet wird"
-
-#~ msgid ""
-#~ "The protocol used for the backup location. Valid values are 's3', 'file', or "
-#~ "'ssh'."
-#~ msgstr ""
-#~ "Das für Datensicherungen verwendete Protokoll. Gültige Werte sind \"s3\", "
-#~ "\"file\" oder \"ssh\"."
-
-#~ msgid "The server used for SSH connections."
-#~ msgstr "Der für SSH-Verbindungen verwendete Server."
-
-#~ msgid "The user used for SSH connections."
-#~ msgstr "Der für SSH-Verbindungen verwendete Benutzer."
-
-#~ msgid "No username specified"
-#~ msgstr "kein Benutzername angegeben"
-
-#~ msgid "No server specified"
-#~ msgstr "Kein Server angegeben"
-
-#, c-format
-#~ msgid "%s on ssh://%s@%s:%d"
-#~ msgstr "%s auf ssh://%s@%s:%d"
-
-#~ msgid "SSH Password"
-#~ msgstr "SSH Passwort"
-
-#, c-format
-#~ msgid "Enter your SSH username and password for server %s."
-#~ msgstr ""
-#~ "Geben Sie den Benutzernamen und das Passwort für den SSH-Server %s ein,"
-
-#~ msgid "SSH"
-#~ msgstr "SSH"
-
-#, c-format
-#~ msgid "%s is already in the list."
-#~ msgstr "%s ist bereits in der Liste."
-
-#, c-format
-#~ msgid "_Server:"
-#~ msgstr "_Server:"
-
-#, c-format
-#~ msgid "_Port:"
-#~ msgstr "_Port:"
-
-#~ msgid "Contents"
-#~ msgstr "Hilfe"
-
-#: ../data/deja-dup.schemas.in.h:3
-msgid "Backup location"
-msgstr ""
-
-#: ../data/deja-dup.schemas.in.h:7
-msgid "Location in which to hold the backup files."
-msgstr ""
-
-#: ../data/deja-dup.schemas.in.h:13
-msgid "The type of backup location. Valid values are 's3' or 'file'."
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:68
-#: ../preferences/PreferencesDialog.vala:99
-msgid "I_nclude files in folders:"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:81
-#: ../preferences/PreferencesDialog.vala:118
-msgid "E_xcept files in folders:"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:100 ../deja-dup/AssistantBackup.vala:108
-#: ../deja-dup/AssistantRestore.vala:114
-msgid "Preferences"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:131 ../deja-dup/AssistantRestore.vala:220
-msgid "Encrypted:"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:138
-msgid "Include from:"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:146
-msgid "Except for:"
-msgstr ""
-
-#: ../deja-dup/AssistantOperation.vala:147
-msgid "_Details"
-msgstr ""
-
-#: ../deja-dup/AssistantRestore.vala:100
-msgid "Backup files are _encrypted"
-msgstr ""
-
-#: ../deja-dup/MainWindow.vala:205
-msgid "_Contents"
-msgstr ""
-
-#: ../libdeja-dup/ButtonConnect.vala:28
-msgid "Connect to _Server..."
-msgstr ""
-
-#: ../libdeja-dup/ButtonConnect.vala:37
-msgid "Could not open connection dialog"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLabelBool.vala:36
-msgid "Yes"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLabelBool.vala:36
-msgid "No"
-msgstr ""
-
-#: ../libdeja-dup/ConfigList.vala:152
-msgid "Choose folders"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLocation.vala:41
-msgid "Select Backup Location"
-msgstr ""
-
-#: ../libdeja-dup/Duplicity.vala:377
-#, c-format
-msgid "Error reading file '%s'."
-msgstr "Fehler beim Lesen von Datei '%s'."
-
-#: ../libdeja-dup/Duplicity.vala:379
-#, c-format
-msgid "Error writing file '%s'."
-msgstr "Fehler beim Schreiben von Datei '%s'."
-
-#: ../libdeja-dup/Duplicity.vala:387
-#, c-format
-msgid "No space left in %s"
-msgstr "Nicht genügend Speicherplatz unter %s verfügbar"
-
-#: ../libdeja-dup/libdeja-dup.vala:145
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program.  If not, see http://www.gnu.org/licenses/."
-msgstr ""
-
-#: ../libdeja-dup/mountoperation.c:447
-msgid "Co_nnect"
-msgstr ""
-
-#: ../libdeja-dup/mountoperation.c:514
-msgid "Connect _anonymously"
-msgstr ""
-
-#: ../libdeja-dup/mountoperation.c:523
-msgid "Connect as u_ser:"
-msgstr ""
-
-#: ../libdeja-dup/mountoperation.c:566
-msgid "_Domain:"
-msgstr ""
-
-#: ../libdeja-dup/mountoperation.c:572
-msgid "_Password:"
-msgstr ""
-
-#: ../libdeja-dup/mountoperation.c:590
-msgid "Forget password _immediately"
-msgstr ""
-
-#: ../libdeja-dup/mountoperation.c:600
-msgid "Remember password until you _logout"
-msgstr ""
-
-#: ../libdeja-dup/mountoperation.c:610
-msgid "Remember _forever"
-msgstr ""
 
 #. type: Content of: <article><indexterm><primary>
 #: C/deja-dup.1:1 C/deja-dup-applet.1:1 C/deja-dup-monitor.1:1
@@ -1132,7 +1037,7 @@ msgstr ""
 #. type: Content of: <article><articleinfo><title>
 #: C/deja-dup.xml:5
 msgid "<application>Déjà Dup</application> Manual"
-msgstr ""
+msgstr "<application>Déjà Dup</application>-Handbuch"
 
 #. type: Content of: <article><articleinfo><abstract><para>
 #: C/deja-dup.xml:7
@@ -1202,12 +1107,12 @@ msgstr ""
 #. type: Content of: <article><articleinfo><releaseinfo>
 #: C/deja-dup.xml:40
 msgid "This manual describes version %VERSION% of Déjà Dup."
-msgstr ""
+msgstr "Dieses Handbuch beschreibt Version %VERSION% von Déjà Dup."
 
 #. type: Content of: <article><articleinfo><legalnotice><title>
 #: C/deja-dup.xml:42
 msgid "Feedback"
-msgstr ""
+msgstr "Rückmeldung"
 
 #. type: Content of: <article><articleinfo><legalnotice><para>
 #: C/deja-dup.xml:43
@@ -1265,7 +1170,7 @@ msgstr ""
 #. type: Content of: <article><sect1><title>
 #: C/deja-dup.xml:68
 msgid "Getting Started"
-msgstr ""
+msgstr "Erste Schritte"
 
 #. type: Content of: <article><sect1><sect2><title>
 #: C/deja-dup.xml:71
@@ -1293,7 +1198,7 @@ msgstr ""
 #. type: Content of: <article><sect1><sect2><variablelist><varlistentry><term>
 #: C/deja-dup.xml:81
 msgid "Command line"
-msgstr ""
+msgstr "Kommandozeile"
 
 #. type: Content of: <article><sect1><sect2><variablelist><varlistentry><listitem><para>
 #: C/deja-dup.xml:83
@@ -1621,3 +1526,107 @@ msgstr ""
 #: C/deja-dup.xml:195
 msgid "Default: <guilabel>Weekly</guilabel>."
 msgstr ""
+
+#~ msgid "Folder on your system in which to hold the backup files."
+#~ msgstr "Position der Datensicherungsdateien"
+
+#~ msgid "Local backup location"
+#~ msgstr "lokaler Ordner für Datensicherung"
+
+#~ msgid "Choose backup destination"
+#~ msgstr "Position der Datensicherung auswählen"
+
+#~ msgid "Local Folder"
+#~ msgstr "Lokaler Ordner"
+
+#~ msgid "Select Folder"
+#~ msgstr "Ordner auswählen"
+
+#~ msgid "Choose folder"
+#~ msgstr "Ordner wählen"
+
+#~ msgid "Could not add the folder"
+#~ msgstr "konnte den Ordner nicht hinzufügen"
+
+#~ msgid ""
+#~ "You should have received a copy of the GNU General Public License along with "
+#~ "this program; if not, write to the Free Software Foundation, Inc., 59 Temple "
+#~ "Place - Suite 330, Boston, MA  02111-1307, USA."
+#~ msgstr ""
+#~ "Sie sollten ein Exemplar der GNU General Public License zusammen mit\r\n"
+#~ "diesem Programm erhalten haben. Falls nicht, schreiben Sie an die Free\r\n"
+#~ "Software Foundation, Inc. 59 Temple Place, Suite 330, Boston, MA 02111-1307, "
+#~ "USA."
+
+#~ msgid "I_nclude:"
+#~ msgstr "_Einbeziehen:"
+
+#~ msgid "E_xclude:"
+#~ msgstr "_Ausschließen:"
+
+#~ msgid "SSH directory"
+#~ msgstr "SSH Ordner"
+
+#~ msgid "SSH port"
+#~ msgstr "SSH Port"
+
+#~ msgid "SSH server"
+#~ msgstr "SSH Server"
+
+#~ msgid "SSH username"
+#~ msgstr "SSH Benutzername"
+
+#~ msgid "The directory used for SSH connections."
+#~ msgstr "der Ordner, der für SSH-Verbindungen genutzt werden soll"
+
+#~ msgid "The port used for SSH connections."
+#~ msgstr "der Port, der für SSH-Verbindungen verwendet wird"
+
+#~ msgid ""
+#~ "The protocol used for the backup location. Valid values are 's3', 'file', or "
+#~ "'ssh'."
+#~ msgstr ""
+#~ "Das für Datensicherungen verwendete Protokoll. Gültige Werte sind \"s3\", "
+#~ "\"file\" oder \"ssh\"."
+
+#~ msgid "The server used for SSH connections."
+#~ msgstr "Der für SSH-Verbindungen verwendete Server."
+
+#~ msgid "The user used for SSH connections."
+#~ msgstr "Der für SSH-Verbindungen verwendete Benutzer."
+
+#~ msgid "No username specified"
+#~ msgstr "kein Benutzername angegeben"
+
+#~ msgid "No server specified"
+#~ msgstr "Kein Server angegeben"
+
+#, c-format
+#~ msgid "%s on ssh://%s@%s:%d"
+#~ msgstr "%s auf ssh://%s@%s:%d"
+
+#~ msgid "SSH Password"
+#~ msgstr "SSH Passwort"
+
+#, c-format
+#~ msgid "Enter your SSH username and password for server %s."
+#~ msgstr ""
+#~ "Geben Sie den Benutzernamen und das Passwort für den SSH-Server %s ein,"
+
+#~ msgid "SSH"
+#~ msgstr "SSH"
+
+#, c-format
+#~ msgid "%s is already in the list."
+#~ msgstr "%s ist bereits in der Liste."
+
+#, c-format
+#~ msgid "_Server:"
+#~ msgstr "_Server:"
+
+#, c-format
+#~ msgid "_Port:"
+#~ msgstr "_Port:"
+
+#~ msgid "Contents"
+#~ msgstr "Hilfe"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-06-02 17:36-0400\n"
-"PO-Revision-Date: 2009-06-03 12:33+0000\n"
+"POT-Creation-Date: 2009-06-05 15:13-0400\n"
+"PO-Revision-Date: 2009-06-07 18:50+0000\n"
 "Last-Translator: Sergei Sedov <sedov@webmail.perm.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2009-06-05 12:04+0000\n"
+"X-Launchpad-Export-Date: 2009-06-13 16:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -43,6 +43,16 @@ msgstr "Запланированноые резервное копировани
 msgid "Amazon S3 Access Key ID"
 msgstr "Ключ доступа ID Amazon S3"
 
+#: ../data/deja-dup.schemas.in.h:2
+msgid ""
+"An optional folder name to store files in. This folder will be created in "
+"the chosen bucket."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:3
+msgid "Backup location"
+msgstr "Местоположение резервных копий"
+
 #: ../data/deja-dup.schemas.in.h:4
 msgid "Directories not to backup"
 msgstr "Каталоги, которые не надо сохранять"
@@ -55,6 +65,14 @@ msgstr "Каталоги, которые надо сохранить"
 msgid "How often to periodically backup"
 msgstr "С какой периодичностью делать архивные копии"
 
+#: ../data/deja-dup.schemas.in.h:7
+msgid "Location in which to hold the backup files."
+msgstr "Местоположение в котором хранятся файлы резервных копий"
+
+#: ../data/deja-dup.schemas.in.h:8
+msgid "The Amazon S3 bucket name to use"
+msgstr ""
+
 #: ../data/deja-dup.schemas.in.h:9
 msgid "The Amazon S3 folder"
 msgstr "Каталог на Amazon S3"
@@ -63,9 +81,39 @@ msgstr "Каталог на Amazon S3"
 msgid "The last time Déjà Dup was run"
 msgstr "Время, когда Déjà Dup запускалось в последний раз"
 
+#: ../data/deja-dup.schemas.in.h:11
+msgid "The last time Déjà Dup was run, in ISO 8601 format."
+msgstr ""
+"Время, когда Déjà Dup запускалось в последний раз, в формате ISO 8601"
+
 #: ../data/deja-dup.schemas.in.h:12
 msgid "The number of days between backups."
 msgstr "Количество дней между резервными копиями"
+
+#: ../data/deja-dup.schemas.in.h:13
+msgid "The type of backup location. Valid values are 's3' or 'file'."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:14
+msgid ""
+"This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
+"$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+"and $VIDEO are recognized as the user's special directories. Relative "
+"entries are relative to the user's home directory."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:15
+msgid ""
+"This list of directories will not be backed up. Reserved values $HOME, "
+"$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user's special "
+"directories. Relative entries are relative to the user's home directory. "
+"This list takes precedence over the include list."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:16
+msgid "Type of location to store backup"
+msgstr ""
 
 #: ../data/deja-dup.schemas.in.h:17
 msgid "Whether to automatically backup on a regular schedule."
@@ -75,9 +123,27 @@ msgstr "Следует ли автоматически создавать рез
 msgid "Whether to encrypt your backup"
 msgstr "Следует ли шифровать резервную копию"
 
+#: ../data/deja-dup.schemas.in.h:19
+msgid ""
+"Whether to encrypt your backup files in the storage location. It's strongly "
+"recommended to leave this as 'true'."
+msgstr ""
+"Следует ли шифровать ваши файлы резервных копий? Настоятельно рекомендуется "
+"оставить как 'true'."
+
 #: ../data/deja-dup.schemas.in.h:20
 msgid "Whether to periodically backup"
 msgstr "Выполнять ли периодическое резервное копирование"
+
+#: ../data/deja-dup.schemas.in.h:21
+msgid ""
+"Which Amazon S3 bucket to store files in. This does not need to exist "
+"already. Only legal hostname strings are valid."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:22
+msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
+msgstr ""
 
 #: ../applet/applet.vala:26 ../deja-dup/main.vala:30
 #: ../monitor/monitor.vala:35 ../preferences/preferences.vala:26
@@ -88,6 +154,15 @@ msgstr "Показать версию"
 #: ../applet/applet.vala:35 ../applet/applet.vala:49
 msgid "Déjà Dup Applet"
 msgstr "Апплет Déjà Dup"
+
+#: ../applet/StatusIcon.vala:74
+#, c-format
+msgid "%.1f%% complete"
+msgstr "%.1f%% завершено"
+
+#: ../applet/StatusIcon.vala:121
+msgid "Backup about to start"
+msgstr "Готовится резервное копирование"
 
 #: ../applet/StatusIcon.vala:122
 msgid ""
@@ -108,6 +183,11 @@ msgstr "Выполнить резервное копирование позже"
 #: ../applet/StatusIcon.vala:143
 msgid "Encryption password needed"
 msgstr "Требуется пароль для шифрования"
+
+#: ../applet/StatusIcon.vala:144
+msgid "Please enter the encryption password for your backup files."
+msgstr ""
+"Пожалуйста, введите пароль шифрования для ваших файлов резервных копий."
 
 #: ../applet/StatusIcon.vala:147 ../applet/StatusIcon.vala:165
 msgid "Enter"
@@ -155,9 +235,42 @@ msgstr "_Местоположение резервной копии:"
 msgid "_Encrypt backup files"
 msgstr "_Зашифровать копируемые файлы"
 
+#: ../deja-dup/AssistantBackup.vala:68
+#: ../preferences/PreferencesDialog.vala:99
+msgid "I_nclude files in folders:"
+msgstr "В_ключить файлы в каталогах:"
+
+#: ../deja-dup/AssistantBackup.vala:81
+#: ../preferences/PreferencesDialog.vala:118
+msgid "E_xcept files in folders:"
+msgstr "И_сключить файлы в каталогах:"
+
+#: ../deja-dup/AssistantBackup.vala:100 ../deja-dup/AssistantBackup.vala:108
+#: ../deja-dup/AssistantRestore.vala:114
+msgid "Preferences"
+msgstr "Параметры"
+
 #: ../deja-dup/AssistantBackup.vala:124 ../deja-dup/AssistantRestore.vala:213
 msgid "Backup location:"
 msgstr "Местоположение резервных копий"
+
+#: ../deja-dup/AssistantBackup.vala:131 ../deja-dup/AssistantRestore.vala:220
+msgid "Encrypted:"
+msgstr "Зашифрованные:"
+
+#: ../deja-dup/AssistantBackup.vala:138
+msgid "Include from:"
+msgstr ""
+
+#: ../deja-dup/AssistantBackup.vala:146
+msgid "Except for:"
+msgstr ""
+
+#. Translators:  This is the phrase 'Backing up' in the larger phrase
+#. "Backing up '%s'".  %s is a filename.
+#: ../deja-dup/AssistantBackup.vala:166
+msgid "Backing up"
+msgstr "Резервное сохранение"
 
 #: ../deja-dup/AssistantBackup.vala:186
 msgid "Backup Failed"
@@ -175,6 +288,10 @@ msgstr "Ваши файлы были успешно сохранены"
 msgid "Backing up..."
 msgstr "Резервное копирование..."
 
+#: ../deja-dup/AssistantOperation.vala:147
+msgid "_Details"
+msgstr "_Подробности"
+
 #: ../deja-dup/AssistantOperation.vala:234
 msgid "Summary"
 msgstr "Сводная информация"
@@ -182,6 +299,10 @@ msgstr "Сводная информация"
 #: ../deja-dup/AssistantRestore.vala:70
 msgid "Restore"
 msgstr "Восстановить"
+
+#: ../deja-dup/AssistantRestore.vala:100
+msgid "Backup files are _encrypted"
+msgstr "Файлы резервной копии _зашифрованы"
 
 #: ../deja-dup/AssistantRestore.vala:138
 msgid "_Date:"
@@ -211,6 +332,10 @@ msgstr "Дата восстановления:"
 msgid "Restore folder:"
 msgstr "Восстановить в каталог:"
 
+#: ../deja-dup/AssistantRestore.vala:261
+msgid "Checking for Backups"
+msgstr "Проверяю резервные архивы"
+
 #: ../deja-dup/AssistantRestore.vala:272
 msgid "Restore from When?"
 msgstr "Восстановить с какой даты?"
@@ -228,6 +353,10 @@ msgstr "Идёт восстановление"
 #: ../deja-dup/AssistantRestore.vala:340
 msgid "No backups to restore"
 msgstr "Нет резервных копий для восстановления"
+
+#: ../deja-dup/AssistantRestore.vala:434
+msgid "Original location"
+msgstr "Первоначальное местоположение"
 
 #: ../deja-dup/AssistantRestore.vala:447
 msgid "File to restore:"
@@ -265,6 +394,10 @@ msgstr "Восстановить данные файлы"
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
+#: ../deja-dup/main.vala:47
+msgid "No filenames provided"
+msgstr ""
+
 #: ../deja-dup/MainWindow.vala:44 ../deja-dup/MainWindow.vala:185
 msgid "_Restore"
 msgstr "_Восстановление"
@@ -285,6 +418,10 @@ msgstr "_Настройки"
 msgid "_Help"
 msgstr "_Помощь"
 
+#: ../deja-dup/MainWindow.vala:205
+msgid "_Contents"
+msgstr "_Содержание"
+
 #: ../deja-dup/MainWindow.vala:209
 msgid "Get Help _Online..."
 msgstr "Помощь в интернете..."
@@ -296,6 +433,10 @@ msgstr "_Перевести это приложение..."
 #: ../deja-dup/MainWindow.vala:217
 msgid "_Report a Problem..."
 msgstr "_Сообщить об ошибке..."
+
+#: ../libdeja-dup/BackendFile.vala:48
+msgid "GVFS FUSE is not installed"
+msgstr "Не установлен GVFS FUSE"
 
 #: ../libdeja-dup/BackendS3.vala:122
 #, c-format
@@ -312,8 +453,24 @@ msgid ""
 "Enter your Amazon Web Services user ID and secret key.  This is not the same "
 "as your amazon.com username and password."
 msgstr ""
-"Введите свои  пользовательский ID и секетный ключ на Amazon Web Services. Он "
-"не должен соответствовать вашему логину и паролю на  amazon.com"
+"Введите свой ID и секретный ключ на Amazon Web Services. Он не должен "
+"соответствовать вашему логину и паролю на  amazon.com"
+
+#: ../libdeja-dup/ButtonConnect.vala:28
+msgid "Connect to _Server..."
+msgstr "Подключение к _серверу..."
+
+#: ../libdeja-dup/ButtonConnect.vala:37
+msgid "Could not open connection dialog"
+msgstr "Не удалось открыть диалог соединения"
+
+#: ../libdeja-dup/ConfigLabelBool.vala:36
+msgid "Yes"
+msgstr "Да"
+
+#: ../libdeja-dup/ConfigLabelBool.vala:36
+msgid "No"
+msgstr "Нет"
 
 #: ../libdeja-dup/ConfigLabelList.vala:56 ../libdeja-dup/ConfigList.vala:111
 msgid "Home Folder"
@@ -323,7 +480,15 @@ msgstr "Домашний каталог"
 msgid "Trash"
 msgstr "Корзина"
 
-#: ../libdeja-dup/ConfigLocation.vala:64 ../libdeja-dup/libdeja-dup.vala:297
+#: ../libdeja-dup/ConfigList.vala:152
+msgid "Choose folders"
+msgstr "Выберите каталоги"
+
+#: ../libdeja-dup/ConfigLocation.vala:41
+msgid "Select Backup Location"
+msgstr ""
+
+#: ../libdeja-dup/ConfigLocation.vala:67 ../libdeja-dup/libdeja-dup.vala:301
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -350,382 +515,6 @@ msgid "Every %d day"
 msgid_plural "Every %d days"
 msgstr[0] "Каждый %d день"
 msgstr[1] "Каждые %d дней"
-
-#: ../libdeja-dup/Duplicity.vala:137 ../libdeja-dup/Duplicity.vala:145
-msgid "Preparing..."
-msgstr "Подготовка..."
-
-#: ../libdeja-dup/Duplicity.vala:199
-msgid "Cleaning up..."
-msgstr "Очистка..."
-
-#: ../libdeja-dup/Duplicity.vala:266 ../libdeja-dup/Duplicity.vala:415
-msgid "Failed with an unknown error."
-msgstr "Не удалось (неизвестная ошибка)"
-
-#: ../libdeja-dup/Duplicity.vala:341
-#, c-format
-msgid "Could not restore '%s': File not found in backup"
-msgstr ""
-"Не получилось восстановить '%s': файл не найден в архиве резервного "
-"копирования"
-
-#: ../libdeja-dup/Duplicity.vala:355
-msgid "Invalid ID."
-msgstr "Неправильный ID."
-
-#: ../libdeja-dup/Duplicity.vala:357
-msgid "Invalid secret key."
-msgstr "Не правильный секретный ключ."
-
-#: ../libdeja-dup/Duplicity.vala:373
-msgid "Bad encryption password."
-msgstr "Не правильный пароль шифрования"
-
-#: ../libdeja-dup/Duplicity.vala:407
-msgid "No backup files found"
-msgstr "Резервных копий не обнаружено"
-
-#: ../libdeja-dup/libdeja-dup.vala:135
-msgid "About Déjà Dup"
-msgstr "О Déjà Dup"
-
-#: ../libdeja-dup/libdeja-dup.vala:138
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  Sergei Sedov https://launchpad.net/~serg-sedov\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Michael Terry https://launchpad.net/~mterry\n"
-"  Sergei Sedov https://launchpad.net/~serg-sedov\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Michael Terry https://launchpad.net/~mterry\n"
-"  Sergei Sedov https://launchpad.net/~serg-sedov"
-
-#: ../libdeja-dup/libdeja-dup.vala:143
-#, c-format
-msgid ""
-"This program is free software; you can redistribute it and/or modify it "
-"under the terms of the GNU General Public License as published by the Free "
-"Software Foundation; either version 3 of the License, or (at your option) "
-"any later version."
-msgstr ""
-"Эта программа является свободным ПО; вы можете передавать ее и/или "
-"модифицировать в соответствии с условиями GNU General Public License версии "
-"3 или, на ваш выбор, более поздней как она публикуется фондом свободного  "
-"программного обеспечения FSF;"
-
-#: ../libdeja-dup/libdeja-dup.vala:144
-msgid ""
-"This program is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-"more details."
-msgstr ""
-"Эта программа распространяется в надежде, что она будет полезна, но БЕЗ "
-"КАКОГО-ЛИБО ВИДА ГАРАНТИЙ, даже без подразумеваемой КОММЕРЧЕСКОЙ ЦЕННОСТИ "
-"или ПРИГОДНОСТИ ДЛЯ КОНКРЕТНОЙ ЦЕЛИ. Для дополнительной информации "
-"обратитесь к лицензии GNU General Public License."
-
-#: ../libdeja-dup/mountoperation.c:561
-msgid "_Username:"
-msgstr "_Имя пользователя:"
-
-#: ../libdeja-dup/OperationRestore.vala:59
-msgid "Restoring files..."
-msgstr "Восстановление файлов..."
-
-#: ../libdeja-dup/OperationRestore.vala:172
-#, c-format
-msgid ""
-"Not all files could be restored. Any files that could not be restored may "
-"still be found in %s."
-msgstr ""
-"Не все файлы могут быть восстановлены. Любые файлы, которые не удалось "
-"восстановить могут быть найдены в %s."
-
-#: ../libdeja-dup/OperationRestore.vala:181
-#, c-format
-msgid "Could not restore %s: %s"
-msgstr "Не смог восстановить %s: %s"
-
-#. Ask user
-#: ../libdeja-dup/Operation.vala:214
-msgid "Encryption Password"
-msgstr "Пароль шифрования"
-
-#: ../libdeja-dup/Operation.vala:215
-msgid "Enter the password used to encrypt your backup files."
-msgstr "Введите пароль для шифрования резервных копий файлов."
-
-#: ../libdeja-dup/Operation.vala:255
-msgid "Another Déjà Dup is already running"
-msgstr "Уже запущена одна копия Déjà Dup"
-
-#: ../nautilus/NautilusExtension.c:95
-msgid "Revert to Previous Version..."
-msgid_plural "Revert to Previous Versions..."
-msgstr[0] "Вернуться к предыдущей версии..."
-msgstr[1] "Вернуться к предыдущим версиям..."
-
-#: ../nautilus/NautilusExtension.c:99
-msgid "Restore file from backup"
-msgid_plural "Restore files from backup"
-msgstr[0] "Восстановить файл из резервной копии"
-msgstr[1] "Восстановить файлы из резервной копии"
-
-#: ../preferences/PreferencesDialog.vala:36 ../preferences/preferences.vala:35
-#: ../preferences/preferences.vala:66
-msgid "Déjà Dup Preferences"
-msgstr "Настройки Déjà Dup"
-
-#: ../preferences/PreferencesDialog.vala:80
-#, c-format
-msgid "_Folder:"
-msgstr "_Каталог:"
-
-#: ../preferences/PreferencesDialog.vala:141
-msgid "_Automatically backup on a regular schedule"
-msgstr "_Автоматическое резервное копирование по расписанию"
-
-#: ../preferences/PreferencesDialog.vala:148
-#, c-format
-msgid "How _often to backup:"
-msgstr "Как _часто выполнять копирование:"
-
-#~ msgid "Folder on your system in which to hold the backup files."
-#~ msgstr ""
-#~ "Каталоги на вашем компьютере, в которых необходимо хранить резервные копии."
-
-#~ msgid "Choose backup destination"
-#~ msgstr "Выберите местоположение резервной копии"
-
-#~ msgid "Local Folder"
-#~ msgstr "Локальный каталог"
-
-#~ msgid "Select Folder"
-#~ msgstr "Выбрать каталог"
-
-#~ msgid "Choose folder"
-#~ msgstr "Выбрать каталог"
-
-#~ msgid "Could not add the folder"
-#~ msgstr "Не смог добавить каталог"
-
-#~ msgid "I_nclude:"
-#~ msgstr "В_ключить:"
-
-#~ msgid "E_xclude:"
-#~ msgstr "_Исключить:"
-
-#~ msgid "SSH directory"
-#~ msgstr "Каталог SSH"
-
-#~ msgid "SSH port"
-#~ msgstr "Порт SSH"
-
-#~ msgid "SSH server"
-#~ msgstr "Сервер SSH"
-
-#~ msgid "SSH username"
-#~ msgstr "Имя пользователя SSH"
-
-#~ msgid "The server used for SSH connections."
-#~ msgstr "Сервер, используемый для SSH соединений."
-
-#~ msgid "The user used for SSH connections."
-#~ msgstr "Пользователь, используемый для SSH соединений."
-
-#~ msgid "No username specified"
-#~ msgstr "Имя пользователя не указано"
-
-#~ msgid "No server specified"
-#~ msgstr "Не указан сервер"
-
-#~ msgid "SSH Password"
-#~ msgstr "Пароль SSH"
-
-#, c-format
-#~ msgid "Enter your SSH username and password for server %s."
-#~ msgstr "Введите ваше имя пользователя и пароль для SSH сервера %s."
-
-#~ msgid "SSH"
-#~ msgstr "SSH"
-
-#, c-format
-#~ msgid "%s is already in the list."
-#~ msgstr "%s уже в списке."
-
-#, c-format
-#~ msgid "_Server:"
-#~ msgstr "_Сервер:"
-
-#, c-format
-#~ msgid "_Port:"
-#~ msgstr "_Порт:"
-
-#: ../data/deja-dup.schemas.in.h:2
-msgid ""
-"An optional folder name to store files in. This folder will be created in "
-"the chosen bucket."
-msgstr ""
-
-#: ../data/deja-dup.schemas.in.h:3
-msgid "Backup location"
-msgstr "Местоположение резервных копий"
-
-#: ../data/deja-dup.schemas.in.h:7
-msgid "Location in which to hold the backup files."
-msgstr "Местоположение в котором хранятся файлы резервных копий"
-
-#: ../data/deja-dup.schemas.in.h:8
-msgid "The Amazon S3 bucket name to use"
-msgstr ""
-
-#: ../data/deja-dup.schemas.in.h:11
-msgid "The last time Déjà Dup was run, in ISO 8601 format."
-msgstr ""
-"Время, когда Déjà Dup запускалось в последний раз, в формате ISO 8601"
-
-#: ../data/deja-dup.schemas.in.h:13
-msgid "The type of backup location. Valid values are 's3' or 'file'."
-msgstr ""
-
-#: ../data/deja-dup.schemas.in.h:14
-msgid ""
-"This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
-"$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-"and $VIDEO are recognized as the user's special directories. Relative "
-"entries are relative to the user's home directory."
-msgstr ""
-
-#: ../data/deja-dup.schemas.in.h:15
-msgid ""
-"This list of directories will not be backed up. Reserved values $HOME, "
-"$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user's special "
-"directories. Relative entries are relative to the user's home directory. "
-"This list takes precedence over the include list."
-msgstr ""
-
-#: ../data/deja-dup.schemas.in.h:16
-msgid "Type of location to store backup"
-msgstr ""
-
-#: ../data/deja-dup.schemas.in.h:19
-msgid ""
-"Whether to encrypt your backup files in the storage location. It's strongly "
-"recommended to leave this as 'true'."
-msgstr ""
-"Следует ли шифровать ваши файлы резервных копий? Настоятельно рекомендуется "
-"оставить как 'true'."
-
-#: ../data/deja-dup.schemas.in.h:21
-msgid ""
-"Which Amazon S3 bucket to store files in. This does not need to exist "
-"already. Only legal hostname strings are valid."
-msgstr ""
-
-#: ../data/deja-dup.schemas.in.h:22
-msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
-msgstr ""
-
-#: ../applet/StatusIcon.vala:74
-#, c-format
-msgid "%.1f%% complete"
-msgstr "%.1f%% завершено"
-
-#: ../applet/StatusIcon.vala:121
-msgid "Backup about to start"
-msgstr "Готовится резервное копирование"
-
-#: ../applet/StatusIcon.vala:144
-msgid "Please enter the encryption password for your backup files."
-msgstr ""
-"Пожалуйста, введите пароль шифрования для ваших файлов резервных копий."
-
-#: ../deja-dup/AssistantBackup.vala:68
-#: ../preferences/PreferencesDialog.vala:99
-msgid "I_nclude files in folders:"
-msgstr "В_ключить файлы в каталоги:"
-
-#: ../deja-dup/AssistantBackup.vala:81
-#: ../preferences/PreferencesDialog.vala:118
-msgid "E_xcept files in folders:"
-msgstr "И_сключить файлы из каталогов:"
-
-#: ../deja-dup/AssistantBackup.vala:100 ../deja-dup/AssistantBackup.vala:108
-#: ../deja-dup/AssistantRestore.vala:114
-msgid "Preferences"
-msgstr "Параметры"
-
-#: ../deja-dup/AssistantBackup.vala:131 ../deja-dup/AssistantRestore.vala:220
-msgid "Encrypted:"
-msgstr "Зашифрованные:"
-
-#: ../deja-dup/AssistantBackup.vala:138
-msgid "Include from:"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:146
-msgid "Except for:"
-msgstr ""
-
-#. Translators:  This is the phrase 'Backing up' in the larger phrase
-#. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:166
-msgid "Backing up"
-msgstr "Резервное сохранение"
-
-#: ../deja-dup/AssistantOperation.vala:147
-msgid "_Details"
-msgstr ""
-
-#: ../deja-dup/AssistantRestore.vala:100
-msgid "Backup files are _encrypted"
-msgstr ""
-
-#: ../deja-dup/AssistantRestore.vala:261
-msgid "Checking for Backups"
-msgstr "Проверяю резервные архивы"
-
-#: ../deja-dup/AssistantRestore.vala:434
-msgid "Original location"
-msgstr "Первоначальное местоположение"
-
-#: ../deja-dup/main.vala:47
-msgid "No filenames provided"
-msgstr ""
-
-#: ../deja-dup/MainWindow.vala:205
-msgid "_Contents"
-msgstr ""
-
-#: ../libdeja-dup/ButtonConnect.vala:28
-msgid "Connect to _Server..."
-msgstr ""
-
-#: ../libdeja-dup/ButtonConnect.vala:37
-msgid "Could not open connection dialog"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLabelBool.vala:36
-msgid "Yes"
-msgstr "Да"
-
-#: ../libdeja-dup/ConfigLabelBool.vala:36
-msgid "No"
-msgstr "Нет"
-
-#: ../libdeja-dup/ConfigList.vala:152
-msgid "Choose folders"
-msgstr "Выберите каталоги"
-
-#: ../libdeja-dup/ConfigLocation.vala:41
-msgid "Select Backup Location"
-msgstr ""
 
 #: ../libdeja-dup/DuplicityInfo.vala:125
 msgid "Could not run duplicity"
@@ -765,6 +554,33 @@ msgstr ""
 "Déjà Dup требуется по меньшей мере версия %d.%d.%.2d duplicity, но найдена "
 "только версия %d.%d.%.2d"
 
+#: ../libdeja-dup/Duplicity.vala:137 ../libdeja-dup/Duplicity.vala:145
+msgid "Preparing..."
+msgstr "Подготовка..."
+
+#: ../libdeja-dup/Duplicity.vala:199
+msgid "Cleaning up..."
+msgstr "Очистка..."
+
+#: ../libdeja-dup/Duplicity.vala:266 ../libdeja-dup/Duplicity.vala:415
+msgid "Failed with an unknown error."
+msgstr "Не удалось (неизвестная ошибка)"
+
+#: ../libdeja-dup/Duplicity.vala:341
+#, c-format
+msgid "Could not restore '%s': File not found in backup"
+msgstr ""
+"Не получилось восстановить '%s': файл не найден в архиве резервного "
+"копирования"
+
+#: ../libdeja-dup/Duplicity.vala:355
+msgid "Invalid ID."
+msgstr "Неправильный ID."
+
+#: ../libdeja-dup/Duplicity.vala:357
+msgid "Invalid secret key."
+msgstr "Не правильный секретный ключ."
+
 #: ../libdeja-dup/Duplicity.vala:359
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Ваш аккаунт на службе Amazon не имеет подписки на сервис S3."
@@ -772,6 +588,10 @@ msgstr "Ваш аккаунт на службе Amazon не имеет подп�
 #: ../libdeja-dup/Duplicity.vala:368
 msgid "S3 bucket name is not available."
 msgstr ""
+
+#: ../libdeja-dup/Duplicity.vala:373
+msgid "Bad encryption password."
+msgstr "Не правильный пароль шифрования"
 
 #: ../libdeja-dup/Duplicity.vala:377
 #, c-format
@@ -788,65 +608,184 @@ msgstr "Ошибка записи файла '%s'."
 msgid "No space left in %s"
 msgstr "Не осталось места в %s"
 
+#: ../libdeja-dup/Duplicity.vala:407
+msgid "No backup files found"
+msgstr "Резервных копий не обнаружено"
+
 #: ../libdeja-dup/libdeja-dup.vala:95
 #, c-format
 msgid "Could not display %s"
 msgstr "Не могу отобразить %s"
 
-#: ../libdeja-dup/libdeja-dup.vala:145
+#: ../libdeja-dup/libdeja-dup.vala:138
+msgid "About Déjà Dup"
+msgstr "О Déjà Dup"
+
+#: ../libdeja-dup/libdeja-dup.vala:142
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Sergei Sedov https://launchpad.net/~serg-sedov\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Michael Terry https://launchpad.net/~mterry\n"
+"  Sergei Sedov https://launchpad.net/~serg-sedov\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Michael Terry https://launchpad.net/~mterry\n"
+"  Sergei Sedov https://launchpad.net/~serg-sedov\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Michael Terry https://launchpad.net/~mterry\n"
+"  Sergei Sedov https://launchpad.net/~serg-sedov"
+
+#: ../libdeja-dup/libdeja-dup.vala:147
+#, c-format
+msgid ""
+"This program is free software; you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation; either version 3 of the License, or (at your option) "
+"any later version."
+msgstr ""
+"Эта программа является свободным ПО; вы можете передавать ее и/или "
+"модифицировать в соответствии с условиями GNU General Public License версии "
+"3 или, на ваш выбор, более поздней как она публикуется фондом свободного  "
+"программного обеспечения FSF;"
+
+#: ../libdeja-dup/libdeja-dup.vala:148
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details."
+msgstr ""
+"Эта программа распространяется в надежде, что она будет полезна, но БЕЗ "
+"КАКОГО-ЛИБО ВИДА ГАРАНТИЙ, даже без подразумеваемой КОММЕРЧЕСКОЙ ЦЕННОСТИ "
+"или ПРИГОДНОСТИ ДЛЯ КОНКРЕТНОЙ ЦЕЛИ. Для дополнительной информации "
+"обратитесь к лицензии GNU General Public License."
+
+#: ../libdeja-dup/libdeja-dup.vala:149
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see http://www.gnu.org/licenses/."
 msgstr ""
+"Вы должны были получить копию лицензии GNU General Public с этой программой. "
+"Вы также можете найти её здесь: http://www.gnu.org/licenses/."
 
-#: ../libdeja-dup/libdeja-dup.vala:309
+#: ../libdeja-dup/libdeja-dup.vala:313
 msgid "Unknown"
 msgstr "Неизвестно"
 
 #: ../libdeja-dup/mountoperation.c:447
 msgid "Co_nnect"
-msgstr ""
+msgstr "По_дключиться"
 
 #: ../libdeja-dup/mountoperation.c:514
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "Подключиться _анонимно"
 
 #: ../libdeja-dup/mountoperation.c:523
 msgid "Connect as u_ser:"
-msgstr ""
+msgstr "Подключиться как п_ользователь:"
+
+#: ../libdeja-dup/mountoperation.c:561
+msgid "_Username:"
+msgstr "_Имя пользователя:"
 
 #: ../libdeja-dup/mountoperation.c:566
 msgid "_Domain:"
-msgstr ""
+msgstr "_Домен:"
 
 #: ../libdeja-dup/mountoperation.c:572
 msgid "_Password:"
-msgstr ""
+msgstr "_Пароль:"
 
 #: ../libdeja-dup/mountoperation.c:590
 msgid "Forget password _immediately"
-msgstr ""
+msgstr "_Немедленно забыть пароль"
 
 #: ../libdeja-dup/mountoperation.c:600
 msgid "Remember password until you _logout"
-msgstr ""
+msgstr "Запомнить пароль до _выхода из системы"
 
 #: ../libdeja-dup/mountoperation.c:610
 msgid "Remember _forever"
+msgstr "Запомнить _навсегда"
+
+#: ../libdeja-dup/OperationRestore.vala:59
+msgid "Restoring files..."
+msgstr "Восстановление файлов..."
+
+#: ../libdeja-dup/OperationRestore.vala:172
+#, c-format
+msgid ""
+"Not all files could be restored. Any files that could not be restored may "
+"still be found in %s."
 msgstr ""
+"Не все файлы могут быть восстановлены. Любые файлы, которые не удалось "
+"восстановить могут быть найдены в %s."
+
+#: ../libdeja-dup/OperationRestore.vala:181
+#, c-format
+msgid "Could not restore %s: %s"
+msgstr "Не смог восстановить %s: %s"
 
 #: ../libdeja-dup/Operation.vala:53
 msgid "Checking for backups..."
 msgstr "Проверяю резервные копии..."
 
+#. Ask user
+#: ../libdeja-dup/Operation.vala:214
+msgid "Encryption Password"
+msgstr "Пароль шифрования"
+
+#: ../libdeja-dup/Operation.vala:215
+msgid "Enter the password used to encrypt your backup files."
+msgstr "Введите пароль для шифрования резервных копий файлов."
+
 #: ../libdeja-dup/Operation.vala:236
 msgid "Déjà Dup backup passphrase"
 msgstr ""
+
+#: ../libdeja-dup/Operation.vala:255
+msgid "Another Déjà Dup is already running"
+msgstr "Уже запущена одна копия Déjà Dup"
+
+#: ../nautilus/NautilusExtension.c:95
+msgid "Revert to Previous Version..."
+msgid_plural "Revert to Previous Versions..."
+msgstr[0] "Вернуться к предыдущей версии..."
+msgstr[1] "Вернуться к предыдущим версиям..."
+
+#: ../nautilus/NautilusExtension.c:99
+msgid "Restore file from backup"
+msgid_plural "Restore files from backup"
+msgstr[0] "Восстановить файл из резервной копии"
+msgstr[1] "Восстановить файлы из резервной копии"
+
+#: ../preferences/PreferencesDialog.vala:36 ../preferences/preferences.vala:35
+#: ../preferences/preferences.vala:66
+msgid "Déjà Dup Preferences"
+msgstr "Настройки Déjà Dup"
 
 #: ../preferences/PreferencesDialog.vala:68
 #, c-format
 msgid "S3 Access Key I_D:"
 msgstr "Ключ доступа I_D S3:"
+
+#: ../preferences/PreferencesDialog.vala:80
+#, c-format
+msgid "_Folder:"
+msgstr "_Каталог:"
+
+#: ../preferences/PreferencesDialog.vala:141
+msgid "_Automatically backup on a regular schedule"
+msgstr "_Автоматическое резервное копирование по расписанию"
+
+#: ../preferences/PreferencesDialog.vala:148
+#, c-format
+msgid "How _often to backup:"
+msgstr "Как _часто выполнять копирование:"
 
 #. type: Content of: <article><indexterm><primary>
 #: C/deja-dup.1:1 C/deja-dup-applet.1:1 C/deja-dup-monitor.1:1
@@ -912,6 +851,10 @@ msgid ""
 "restore using a local folder or a remote server, including Amazon S3, as "
 "well as schedule backups at regular intervals."
 msgstr ""
+"deja-dup - это графическая оболочка B<duplicity>(1). С помощью неё можно "
+"выполнять резервное копирование и последующее восстановление файлов, "
+"используя локальный каталог или удалённый сервер, включая сервис Amazon S3. "
+"Имеется возможность работы по расписанию."
 
 #. type: SH
 #: C/deja-dup.1:16 C/deja-dup-applet.1:11 C/deja-dup-monitor.1:12
@@ -973,6 +916,8 @@ msgstr "DEJA_DUP_DEBUG"
 #: C/deja-dup.1:30 C/deja-dup-applet.1:22
 msgid "Set to 1 to enable more verbose output. Helpful for debugging."
 msgstr ""
+"Установите 1, чтобы включить более информативный вывод, который полезен для "
+"режима отладки."
 
 #. type: SH
 #: C/deja-dup.1:30 C/deja-dup-applet.1:22 C/deja-dup-monitor.1:19
@@ -1078,7 +1023,7 @@ msgstr ""
 #. type: Attribute 'lang' of: <article>
 #: C/deja-dup.xml:3
 msgid "C"
-msgstr ""
+msgstr "C"
 
 #. type: Content of: <article><articleinfo><title>
 #: C/deja-dup.xml:5
@@ -1099,6 +1044,9 @@ msgid ""
 "url=\"http://launchpad.net/~deja-dup-team\" type=\"http\"><application>Déjà "
 "Dup</application> Administrators</ulink></publishername> </publisher>"
 msgstr ""
+"<publisher role=\"maintainer\"> <publishername><ulink "
+"url=\"http://launchpad.net/~deja-dup-team\" type=\"http\"><application>Déjà "
+"Dup</application> Администраторы</ulink></publishername> </publisher>"
 
 #. type: Content of: <article><articleinfo><legalnotice><para>
 #: C/deja-dup.xml:15
@@ -1109,6 +1057,12 @@ msgid ""
 "the GPL at this <ulink type=\"help\" url=\"ghelp:gpl\">link</ulink> or in "
 "the file COPYING distributed with this manual."
 msgstr ""
+"Вы можете копировать этот документ, передавать его и/или модифицировать в "
+"соответствии с соглашением GNU General Public License опубликованным Free "
+"Software Foundation версии 3 или (по вашему выбору) более поздней версии. Вы "
+"можете найти копию этого соглашения по ссылке <ulink type=\"help\" "
+"url=\"ghelp:gpl\">link</ulink> или в файле COPYING, который распространяется "
+"вместе с этим руководством."
 
 #. type: Content of: <article><articleinfo><legalnotice><para>
 #: C/deja-dup.xml:16
@@ -1118,16 +1072,20 @@ msgid ""
 "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 "more details."
 msgstr ""
+"Это руководство распространяется с верой в то, что она будет полезно вам, но "
+"БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ и даже без гарантий КОММЕРЧЕСКОЙ ЦЕННОСТИ или "
+"ПРИГОДНОСТИ ДЛЯ ЦЕЛЕЙ КАКОГО-ЛИБО ОПРЕДЕЛЁННОГО ИСПОЛЬЗОВАНИЯ. Для "
+"дополнительной информации читайте GNU General Public License."
 
 #. type: Content of: <article><articleinfo><authorgroup><author><firstname>
 #: C/deja-dup.xml:21
 msgid "Michael"
-msgstr ""
+msgstr "Michael"
 
 #. type: Content of: <article><articleinfo><authorgroup><author><surname>
 #: C/deja-dup.xml:22
 msgid "Terry"
-msgstr ""
+msgstr "Terry"
 
 #. type: Content of: <article><articleinfo><authorgroup><author><affiliation><address>
 #: C/deja-dup.xml:24
@@ -1201,6 +1159,8 @@ msgstr ""
 #: C/deja-dup.xml:59
 msgid "Support for local or remote backup locations, including Amazon S3"
 msgstr ""
+"Поддержка резервного копирования в локальные каталоги или удалённые "
+"хранилища, включая Amazon S3"
 
 #. type: Content of: <article><sect1><itemizedlist><listitem><para>
 #: C/deja-dup.xml:60
@@ -1378,7 +1338,7 @@ msgstr "Этот сервис платный. Посмотрите их тари
 #. type: Content of: <article><sect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: C/deja-dup.xml:119
 msgid "Removable Media"
-msgstr ""
+msgstr "Съёмные носители"
 
 #. type: Content of: <article><sect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: C/deja-dup.xml:120
@@ -1389,7 +1349,7 @@ msgstr ""
 #. type: Content of: <article><sect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: C/deja-dup.xml:123
 msgid "Connected Servers"
-msgstr ""
+msgstr "Подключённые сервера"
 
 #. type: Content of: <article><sect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: C/deja-dup.xml:124
@@ -1403,7 +1363,7 @@ msgstr ""
 #. type: Content of: <article><sect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: C/deja-dup.xml:127
 msgid "Local Folders"
-msgstr ""
+msgstr "Локальные каталоги"
 
 #. type: Content of: <article><sect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: C/deja-dup.xml:128
@@ -1411,6 +1371,9 @@ msgid ""
 "You may also want to choose a local folder as a backup location.  Note that "
 "backups can be quite large, so make sure you have enough free disk space."
 msgstr ""
+"Возможно вы зазахотите хранить резервные копии файлов в локальных каталогах. "
+"Помните, что резервные копии могут быть очень большими, поэтому будьте "
+"уверены, что у вас достаточно свободного места на жёстком диске."
 
 #. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para>
 #: C/deja-dup.xml:131
@@ -1546,7 +1509,7 @@ msgstr "~/.recent-applications.xbel"
 #. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
 #: C/deja-dup.xml:168
 msgid "~/.Private"
-msgstr ""
+msgstr "~/.Private"
 
 #. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
 #: C/deja-dup.xml:169
@@ -1635,15 +1598,86 @@ msgstr "Выберите расписание для создания резер
 msgid "Default: <guilabel>Weekly</guilabel>."
 msgstr "По умолчанию: <guilabel>Еженедельно</guilabel>."
 
+#~ msgid "Folder on your system in which to hold the backup files."
+#~ msgstr ""
+#~ "Каталоги на вашем компьютере, в которых необходимо хранить резервные копии."
+
+#~ msgid "Choose backup destination"
+#~ msgstr "Выберите местоположение резервной копии"
+
+#~ msgid "Local Folder"
+#~ msgstr "Локальный каталог"
+
+#~ msgid "Select Folder"
+#~ msgstr "Выбрать каталог"
+
+#~ msgid "Choose folder"
+#~ msgstr "Выбрать каталог"
+
+#~ msgid "Could not add the folder"
+#~ msgstr "Не смог добавить каталог"
+
+#~ msgid "I_nclude:"
+#~ msgstr "В_ключить:"
+
+#~ msgid "E_xclude:"
+#~ msgstr "_Исключить:"
+
+#~ msgid "SSH directory"
+#~ msgstr "Каталог SSH"
+
+#~ msgid "SSH port"
+#~ msgstr "Порт SSH"
+
+#~ msgid "SSH server"
+#~ msgstr "Сервер SSH"
+
+#~ msgid "SSH username"
+#~ msgstr "Имя пользователя SSH"
+
 #~ msgid "The directory used for SSH connections."
 #~ msgstr "Каталог используемый для SSH соединений."
 
 #~ msgid "The port used for SSH connections."
 #~ msgstr "Порт используемый для SSH соединений."
 
+#~ msgid "The server used for SSH connections."
+#~ msgstr "Сервер, используемый для SSH соединений."
+
+#~ msgid "The user used for SSH connections."
+#~ msgstr "Пользователь, используемый для SSH соединений."
+
+#~ msgid "No username specified"
+#~ msgstr "Имя пользователя не указано"
+
+#~ msgid "No server specified"
+#~ msgstr "Не указан сервер"
+
 #, c-format
 #~ msgid "%s on ssh://%s@%s:%d"
 #~ msgstr "%s на ssh://%s@%s:%d"
+
+#~ msgid "SSH Password"
+#~ msgstr "Пароль SSH"
+
+#, c-format
+#~ msgid "Enter your SSH username and password for server %s."
+#~ msgstr "Введите ваше имя пользователя и пароль для SSH сервера %s."
+
+#~ msgid "SSH"
+#~ msgstr "SSH"
+
+#, c-format
+#~ msgid "%s is already in the list."
+#~ msgstr "%s уже в списке."
+
+#, c-format
+#~ msgid "_Server:"
+#~ msgstr "_Сервер:"
+
+#, c-format
+#~ msgid "_Port:"
+#~ msgstr "_Порт:"
 
 #~ msgid "Contents"
 #~ msgstr "Содержимое"
