@@ -90,7 +90,7 @@ public class DuplicityInstance : Object
       var cache_file = File.new_for_path(cache_dir);
       cache_file = cache_file.get_child(Config.PACKAGE);
       try {
-        if (hacks_file_make_directory_with_parents(cache_file))
+        if (cache_file.make_directory_with_parents(null))
           add_dir = true;
       }
       catch (IOError.EXISTS e) {

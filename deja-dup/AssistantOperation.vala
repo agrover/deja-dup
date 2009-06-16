@@ -111,11 +111,11 @@ public abstract class AssistantOperation : Gtk.Assistant
   {
     Gtk.Adjustment adjust = ((Gtk.Range)range).adjustment;
     adjust.value_changed.connect((a) => {
-      adjustment_at_end = (a.value >= hacks_adjustment_get_upper(a) - hacks_adjustment_get_page_size(a));
+      adjustment_at_end = (a.value >= a.upper - a.page_size);
     });
     adjust.changed.connect((a) => {
       if (adjustment_at_end)
-        a.value = hacks_adjustment_get_upper(a);
+        a.value = a.upper;
     });
   }
   
@@ -164,7 +164,9 @@ public abstract class AssistantOperation : Gtk.Assistant
     
     // Try to show nice error icon
     try {
-      var pixbuf = hacks_get_icon_at_size(Gtk.STOCK_DIALOG_ERROR, 48);
+      var theme = Gtk.IconTheme.get_for_screen(get_screen());
+      var pixbuf = theme.load_icon(Gtk.STOCK_DIALOG_ERROR, 48,
+                                   Gtk.IconLookupFlags.FORCE_SIZE);
       child_set(summary_page,
                 "header-image", pixbuf);
     }

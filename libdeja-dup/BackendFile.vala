@@ -125,7 +125,7 @@ public class BackendFile : Backend
     }
     
     var file = File.parse_name(path);
-    var op = hacks_mount_operation_new(toplevel);
+    var op = new Gtk.MountOperation(toplevel);
     file.mount_enclosing_volume(MountMountFlags.NONE, op, null, (o, r) => {
       try {
         var success = ((File)o).mount_enclosing_volume_finish(r);

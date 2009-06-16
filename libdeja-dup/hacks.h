@@ -27,18 +27,8 @@
 
 extern const GnomeKeyringPasswordSchema *PASSPHRASE_SCHEMA;
 
-extern guint32 hacks_status_icon_get_x11_window_id (GtkStatusIcon *icon);
-extern gboolean hacks_show_uri (const gchar *uri, GError **error);
-extern gboolean hacks_file_make_directory_with_parents (GFile *file, GError **error);
-extern GdkPixbuf *hacks_get_icon_at_size (const gchar *name, gint size, GError **error);
-extern GFileType hacks_file_query_file_type (GFile *file, GFileQueryInfoFlags flags);
 extern gchar *hacks_unix_mount_get_fs_type (const gchar *file);
 extern void hacks_status_icon_set_tooltip_text (GtkStatusIcon *icon, const gchar *text);
-extern GdkWindow *hacks_widget_get_window (GtkWidget *widget);
-extern GMountOperation *hacks_mount_operation_new (GtkWindow *parent);
-extern gdouble hacks_adjustment_get_page_size (GtkAdjustment *adjust);
-extern gdouble hacks_adjustment_get_upper (GtkAdjustment *adjust);
-extern GtkWidget *hacks_dialog_get_action_area (GtkDialog *dialog);
 
 #endif
 

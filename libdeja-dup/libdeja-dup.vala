@@ -90,12 +90,13 @@ public File[] parse_dir_list(SList<string>? dirs)
 public void show_uri(Gtk.Window parent, string link)
 {
   try {
-    hacks_show_uri (link);
+    Gdk.Screen screen = parent.get_screen();
+    Gtk.show_uri(screen, link, Gdk.CURRENT_TIME);
   } catch (Error e) {
-    Gtk.MessageDialog dlg = new Gtk.MessageDialog (parent, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not display %s"), link);
+    Gtk.MessageDialog dlg = new Gtk.MessageDialog(parent, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not display %s"), link);
     dlg.format_secondary_text("%s", e.message);
-    dlg.run ();
-    dlg.destroy ();
+    dlg.run();
+    dlg.destroy();
   }
 }
 

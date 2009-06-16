@@ -54,9 +54,9 @@ public abstract class RecursiveOp : Object
   public void start_async()
   {
     if (src != null)
-      src_type = hacks_file_query_file_type(src, FileQueryInfoFlags.NOFOLLOW_SYMLINKS);
+      src_type = src.query_file_type(FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
     if (dst != null)
-      dst_type = hacks_file_query_file_type(dst, FileQueryInfoFlags.NOFOLLOW_SYMLINKS);
+      dst_type = dst.query_file_type(FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
     
     switch (src_type) {
     case FileType.DIRECTORY:

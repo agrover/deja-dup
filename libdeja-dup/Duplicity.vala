@@ -162,7 +162,7 @@ public class Duplicity : Object
         
         try {
           // won't have correct permissions...
-          hacks_file_make_directory_with_parents(local_file);
+          local_file.make_directory_with_parents(null);
         }
         catch (Error e) {
           show_error(e.message);
@@ -455,7 +455,7 @@ public class Duplicity : Object
     var gfile = make_file_obj(file);
     last_touched_file = gfile;
     if (state != State.DRY_RUN &&
-        hacks_file_query_file_type(gfile, FileQueryInfoFlags.NONE) != FileType.DIRECTORY)
+        gfile.query_file_type(FileQueryInfoFlags.NONE, null) != FileType.DIRECTORY)
       action_file_changed(gfile);
   }
   
@@ -463,7 +463,7 @@ public class Duplicity : Object
     var gfile = make_file_obj(file);
     last_touched_file = gfile;
     if (state != State.DRY_RUN &&
-        hacks_file_query_file_type(gfile, FileQueryInfoFlags.NONE) != FileType.DIRECTORY)
+        gfile.query_file_type(FileQueryInfoFlags.NONE, null) != FileType.DIRECTORY)
       action_file_changed(gfile);
   }
   

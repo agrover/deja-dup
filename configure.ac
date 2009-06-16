@@ -46,12 +46,14 @@ AC_DEFINE_UNQUOTED(LOCALE_DIR, "${PREFIX}/${DATADIRNAME}/locale",[Locale directo
 AC_DEFINE_UNQUOTED(THEME_DIR, "${PREFIX}/${DATADIRNAME}/icons",[Icon directory])
 AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package data directory])
 
-GTK_REQ_VER=2.12
+GTK_REQ_VER=2.14
+GLIB_REQ_VER=2.18
+GIO_REQ_VER=$GLIB_REQ_VER
 
 # Check dependencies
 PKG_CHECK_MODULES(DUP,
                   gtk+-2.0 >= $GTK_REQ_VER
-                  gio-2.0
+                  gio-2.0 >= $GIO_REQ_VER
                   gconf-2.0
                   libgnomeui-2.0
                   gnome-keyring-1)
@@ -60,7 +62,7 @@ AC_SUBST(DUP_LIBS)
 
 PKG_CHECK_MODULES(APPLET,
                   gtk+-2.0 >= $GTK_REQ_VER
-                  gio-2.0
+                  gio-2.0 >= $GIO_REQ_VER
                   gconf-2.0
                   libgnomeui-2.0
                   gnome-keyring-1
@@ -70,7 +72,7 @@ AC_SUBST(APPLET_LIBS)
 
 PKG_CHECK_MODULES(PREF,
                   gtk+-2.0 >= $GTK_REQ_VER
-                  gio-2.0
+                  gio-2.0 >= $GIO_REQ_VER
                   gconf-2.0
                   unique-1.0)
 AC_SUBST(PREF_CFLAGS)
@@ -78,7 +80,7 @@ AC_SUBST(PREF_LIBS)
 
 PKG_CHECK_MODULES(LIBRARY,
                   gtk+-2.0 >= $GTK_REQ_VER
-                  gio-2.0
+                  gio-2.0 >= $GIO_REQ_VER
                   gio-unix-2.0
                   gconf-2.0
                   libgnomeui-2.0
@@ -95,7 +97,7 @@ AC_SUBST(MONITOR_LIBS)
 
 PKG_CHECK_MODULES(NAUTILUS,
                   libnautilus-extension
-                  glib-2.0)
+                  glib-2.0 >= $GLIB_REQ_VER)
 AC_SUBST(NAUTILUS_CFLAGS)
 AC_SUBST(NAUTILUS_LIBS)
 

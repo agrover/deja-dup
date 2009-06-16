@@ -34,7 +34,9 @@ public class MainWindow : Gtk.Window
     
     var restore_icon = new Gtk.Image();
     try {
-      var restore_pix = hacks_get_icon_at_size("deja-dup-restore", 128);
+      var theme = Gtk.IconTheme.get_for_screen(get_screen());
+      var restore_pix = theme.load_icon("deja-dup-restore", 128,
+                                        Gtk.IconLookupFlags.FORCE_SIZE);
       restore_icon.set("pixbuf", restore_pix);
     }
     catch (Error e) {
@@ -59,7 +61,9 @@ public class MainWindow : Gtk.Window
     
     var backup_icon = new Gtk.Image();
     try {
-      var backup_pix = hacks_get_icon_at_size("deja-dup-backup", 128);
+      var theme = Gtk.IconTheme.get_for_screen(get_screen());
+      var backup_pix = theme.load_icon("deja-dup-backup", 128,
+                                       Gtk.IconLookupFlags.FORCE_SIZE);
       backup_icon.set("pixbuf", backup_pix);
     }
     catch (Error e) {

@@ -169,7 +169,9 @@ public class AssistantBackup : AssistantOperation
   protected override Gdk.Pixbuf? make_op_icon()
   {
     try {
-      return hacks_get_icon_at_size("deja-dup-backup", 48);
+      var theme = Gtk.IconTheme.get_for_screen(get_screen());
+      return theme.load_icon("deja-dup-backup", 48,
+                             Gtk.IconLookupFlags.FORCE_SIZE);
     }
     catch (Error e) {
       warning("%s\n", e.message);
