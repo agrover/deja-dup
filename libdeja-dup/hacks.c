@@ -19,7 +19,6 @@
 
 #include <gio/gunixmounts.h>
 #include "hacks.h"
-#include "mountoperation.h"
 
 static const GnomeKeyringPasswordSchema PASSPHRASE_SCHEMA_DEF = {
   GNOME_KEYRING_ITEM_GENERIC_SECRET,
