@@ -49,7 +49,9 @@ def setup(backend = None, encrypt = True, start = True, dest = '/', sources = []
     # Also add the module path, but we have to find it
     libdir = duproot + '/usr/local/lib/'
     libdir += os.listdir(libdir)[0] # python2.5 or python2.6, etc
-    libdir += '/site-packages:'
+    libdir += '/'
+    libdir += os.listdir(libdir)[0] # site-packages or dist-packages
+    libdir += ':'
     extra_pythonpaths += libdir
   
   environ['PYTHONPATH'] = extra_pythonpaths + (environ['PYTHONPATH'] if 'PYTHONPATH' in environ else '')

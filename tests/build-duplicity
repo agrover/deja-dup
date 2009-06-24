@@ -28,11 +28,13 @@ install_tgz()
   
   download_tgz $(basename "$TGZ")
   
+  rm -rf "$INSTDIR/duplicity-$1"
+  
   BUILDDIR=$(mktemp -d)
   tar -xzf "$TGZ" -C "$BUILDDIR"
   
   cd "$BUILDDIR"/*
-  ./setup.py install --root="$INSTDIR/duplicity-$1" --prefix="/usr/local" > /dev/null
+  ./setup.py install --root="$INSTDIR/duplicity-$1" > /dev/null
   cd -
   
   rm -r "$BUILDDIR"
@@ -52,7 +54,7 @@ install_bzr()
   else
     # Don't use lp:duplicity because that likes to use bzr+ssh, which can prompt
     # for ssh passphrase (which we don't want)
-    bzr co "http://bazaar.launchpad.net/~vcs-imports/duplicity/trunk" "$SRCDIR/duplicity-bzr"
+    bzr co "http://bazaar.launchpad.net/~duplicity-team/duplicity/trunk" "$SRCDIR/duplicity-bzr"
     cd "$SRCDIR/duplicity-bzr"
   fi
   ./dist/makedist "999" # fake a really big version number
