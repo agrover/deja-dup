@@ -1,24 +1,28 @@
 # -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
+#
+# This file is part of Déjà Dup.
+# © 2008,2009 Michael Terry <mike@mterry.name>
+#
+# Déjà Dup is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Déjà Dup is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 SUBDIRS = data po vapi libdeja-dup applet monitor preferences deja-dup nautilus help tests
 
 # Distribute pot file
-update-po:
-	rm -f "po/$(GETTEXT_PACKAGE).pot"
-	$(MAKE) -C "$(srcdir)/po" "$(GETTEXT_PACKAGE).pot"
-	$(MAKE) -C "$(srcdir)/help" update-po
-dist-hook:
-	(cd po && INTLTOOL_EXTRACT=@INTLTOOL_EXTRACT@ srcdir=../$(srcdir)/po @INTLTOOL_UPDATE@ --gettext-package $(GETTEXT_PACKAGE) --pot)
-	for lang in $(shell cat "$(srcdir)/po/LINGUAS"); do \
-		msgmerge $(srcdir)/po/$$lang.po po/$(GETTEXT_PACKAGE).pot -o po/$$lang.po; \
-	done
-
-distclean-local: clean-local-@USE_NLS@
-clean-local-no:
-clean-local-yes:
-	for lang in $(shell cat "$(srcdir)/po/LINGUAS"); do \
-		test "$(srcdir)" = "." || rm -f po/$$lang.po; \
-	done
+update-pot:
+	$(MAKE) -C po "$(GETTEXT_PACKAGE).pot"
+	$(MAKE) -C help update-pot
+dist-hook: update-pot
 
 ACLOCAL_AMFLAGS = -I m4
 
