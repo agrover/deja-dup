@@ -44,9 +44,13 @@ public class BackendFile : Backend
   {
     var path = get_location_from_gconf();
     var file = File.parse_name(path);
-    if (file.get_path() == null)
-      throw new BackupError.BAD_CONFIG(_("GVFS FUSE is not installed"));
-    return "file://" + file.get_path();
+    if (DuplicityInfo.get_default().has_native_gio)
+      return file.get_uri();
+    else {
+      if (file.get_path() == null)
+        throw new BackupError.BAD_CONFIG(_("GVFS FUSE is not installed"));
+      return "file://" + file.get_path();
+    }
   }
 
   public override string? get_location_pretty() throws Error
@@ -69,6 +73,9 @@ public class BackendFile : Backend
         warning("%s\n", e.message);
       }
     }
+    
+    if (DuplicityInfo.get_default().has_native_gio)
+      argv.prepend("--gio");
   }
   
   // This doesn't *really* worry about envp, it just is a convenient point to

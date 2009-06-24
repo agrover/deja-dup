@@ -25,7 +25,7 @@ def test():
       mtype = arg
     elif arg == 'ext3':
       mtype = arg
-    elif arg == 'applet':
+    elif arg in ('applet', 'shell'):
       prog = arg
     elif arg.startswith('id='):
       tmpid = arg.split('=', 1)[-1]
@@ -62,5 +62,7 @@ def test():
   elif prog == 'applet':
     base.start_deja_dup_applet()
     ldtp.wait(60*60*2)
+  elif prog == 'shell':
+    os.system('bash')
 
 base.run(test)
