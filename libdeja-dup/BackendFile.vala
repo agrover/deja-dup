@@ -74,7 +74,7 @@ public class BackendFile : Backend
       }
     }
     
-    if (DuplicityInfo.get_default().has_native_gio)
+    if (mode == Operation.Mode.INVALID && DuplicityInfo.get_default().has_native_gio)
       argv.prepend("--gio");
   }
   
