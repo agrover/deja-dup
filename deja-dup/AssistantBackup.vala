@@ -21,6 +21,8 @@ using GLib;
 
 public class AssistantBackup : AssistantOperation
 {
+  DejaDup.ToggleGroup periodic_toggle;
+  
   construct
   {
     title = _("Backup");
@@ -92,6 +94,10 @@ public class AssistantBackup : AssistantOperation
     return page;
   }
   
+  void add_periodic_checkbox()
+  {
+  }
+  
   protected override void add_custom_config_pages()
   {
     var page = make_backup_location_page();
@@ -109,6 +115,8 @@ public class AssistantBackup : AssistantOperation
               "page-type", Gtk.AssistantPageType.CONTENT,
               "complete", true,
               "header-image", op_icon);
+     
+     add_periodic_checkbox();
   }
   
   protected override Gtk.Widget make_confirm_page()
@@ -179,6 +187,32 @@ public class AssistantBackup : AssistantOperation
     }
   }
   
+  void add_periodic_widgets(Gtk.VBox page)
+  {
+    var check = new DejaDup.ConfigBool(DejaDup.PERIODIC_KEY, _("_Automatically backup on a regular schedule"));
+    
+    var combo = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
+    var label = new Gtk.Label("    %s".printf(_("How _often to backup:")));
+    label.set("mnemonic-widget", combo,
+              "use-underline", true,
+              "xalign", 0.0f);
+    
+    var hbox = new Gtk.HBox(false, 6);
+    hbox.set("child", label,
+             "child", combo);
+    
+    page.pack_end(hbox, false, false, 0);
+    page.pack_end(check, false, false, 0);
+    
+    periodic_toggle = new DejaDup.ToggleGroup(check);
+    periodic_toggle.add_dependent(label);
+    periodic_toggle.add_dependent(combo);
+    periodic_toggle.check();
+    
+    check.show_all();
+    hbox.show_all();
+  }
+  
   protected override void do_prepare(Gtk.Assistant assist, Gtk.Widget page)
   {
     base.do_prepare(assist, page);
@@ -189,6 +223,18 @@ public class AssistantBackup : AssistantOperation
       else {
         assist.child_set(page, "title", _("Backup Finished"));
         summary_label.label = _("Your files were successfully backed up.");
+
+        // Summary page is a vbox, let's add some widgets here to allow user to
+        // make this backup on a regular basis.  But only show if user isn't
+        // already automatically backing up.
+        var client = DejaDup.get_gconf_client();
+        bool val = false;
+        try {
+          val = client.get_bool(DejaDup.PERIODIC_KEY);
+        }
+        catch (Error e) {warning("%s\n", e.message);}
+        if (!val)
+          add_periodic_widgets((Gtk.VBox)page);
       }
     }
     else if (page == progress_page) {
