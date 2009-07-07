@@ -162,6 +162,20 @@ public class PreferencesDialog : Gtk.Dialog
     periodic_toggle.check();
     ++row;
     
+    w = new DejaDup.ConfigDelete(DejaDup.DELETE_AFTER_KEY);
+    label = new Gtk.Label("%s".printf(_("_Keep backups:")));
+    label.set("mnemonic-widget", w,
+              "use-underline", true,
+              "xalign", 0.0f);
+    label_sizes.add_widget(label);
+    table.attach(label, 0, 1, row, row + 1,
+                 0, Gtk.AttachOptions.FILL, 3, 3);
+    table.attach(w, 1, 3, row, row + 1,
+                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
+                 Gtk.AttachOptions.FILL,
+                 3, 3);
+    ++row;
+    
     handle_location_changed(location);
     vbox.add(table);
   }

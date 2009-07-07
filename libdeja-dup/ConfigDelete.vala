@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2009 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,9 +21,9 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigPeriod : ConfigChoice
+public class ConfigDelete : ConfigChoice
 {
-  public ConfigPeriod(string key) {
+  public ConfigDelete(string key) {
     this.key = key;
   }
   
@@ -33,11 +33,13 @@ public class ConfigPeriod : ConfigChoice
     Gtk.TreeIter iter;
     int i = 0;
     
-    store.insert_with_values(out iter, i++, 0, _("Daily"), 1, 1);
-    store.insert_with_values(out iter, i++, 0, _("Weekly"), 1, 7);
-    // Translators: Biweekly is every two weeks
-    store.insert_with_values(out iter, i++, 0, _("Biweekly"), 1, 14);
-    store.insert_with_values(out iter, i++, 0, _("Monthly"), 1, 28);
+    store.insert_with_values(out iter, i++, 0, _("A Day"), 1, 1);
+    store.insert_with_values(out iter, i++, 0, _("A Month"), 1, 28);
+    store.insert_with_values(out iter, i++, 0, _("Two Months"), 1, 28*2);
+    store.insert_with_values(out iter, i++, 0, _("Three Months"), 1, 28*3);
+    store.insert_with_values(out iter, i++, 0, _("Six Months"), 1, 365/2);
+    store.insert_with_values(out iter, i++, 0, _("A Year"), 1, 365);
+    store.insert_with_values(out iter, i++, 0, _("Forever"), 1, int.MAX);
     
     store.set_sort_column_id(1, Gtk.SortType.ASCENDING);
     
@@ -47,7 +49,9 @@ public class ConfigPeriod : ConfigChoice
   protected override void handle_changed()
   {
     Value? val = get_current_value();
-    int intval = val == null ? 1 : val.get_int();
+    int intval = val == null ? 0 : val.get_int();
+    if (intval == int.MAX)
+      intval = 0; // forever
     
     try {
         client.set_int(key, intval);
@@ -69,8 +73,8 @@ public class ConfigPeriod : ConfigChoice
       warning("%s\n", e.message);
       return;
     }
-    if (confval < 1)
-      confval = 1;
+    if (confval <= 0)
+      confval = int.MAX;
     
     bool valid;
     Gtk.TreeIter iter;
@@ -88,12 +92,12 @@ public class ConfigPeriod : ConfigChoice
       valid = combo.model.iter_next(ref iter);
     }
     
-    // If we didn't find the period, user must have set it to something non
+    // If we didn't find the time, user must have set it to something non
     // standard.  Let's add an entry to the combo.
     if (!valid) {
       var store = (Gtk.ListStore)combo.model;
       store.insert_with_values(out iter, 0, 0,
-                               ngettext("Every %d Day", "Every %d Days", confval).printf(confval),
+                               ngettext("After %d Day", "After %d Days", confval).printf(confval),
                                1, confval);
       combo.set_active_iter(iter);
     }

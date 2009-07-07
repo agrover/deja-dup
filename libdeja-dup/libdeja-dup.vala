@@ -28,6 +28,7 @@ public const string ENCRYPT_KEY = "/apps/deja-dup/encrypt";
 public const string LAST_RUN_KEY = "/apps/deja-dup/last-run";
 public const string PERIODIC_KEY = "/apps/deja-dup/periodic";
 public const string PERIODIC_PERIOD_KEY = "/apps/deja-dup/periodic-period";
+public const string DELETE_AFTER_KEY = "/apps/deja-dup/delete-after";
 
 public void update_last_run_timestamp() throws Error
 {
@@ -313,6 +314,58 @@ public string get_location_desc()
     warning("%s\n", e.message);
     return _("Unknown");
   }
+}
+
+public int get_full_backup_threshold()
+{
+  int threshold = 7 * 6; // default to 6 weeks
+  try {
+    // So, there are a few factors affecting how often to make a fresh full
+    // backup:
+    // 1) The longer we wait, the more we're filling up the backend with 
+    //    iterations on the same crap.
+    // 2) The longer we wait, there's a higher risk that some bit will flip
+    //    and the whole backup is toast.
+    // 3) The longer we wait, the less annoying we are, since full backups 
+    //    take a long time.
+    // So we try to do them at reasonable times.  But almost nobody should be
+    // going longer than 3 months without a full backup, and nobody should
+    // really be making full backups shorter than a week.  Further, we want
+    // to try to keep at least 2 full backups around, so also don't allow a
+    // longer full threshold than half the delete age.
+    // 
+    // 'daily' gets 1 week 1 * 7
+    // 'weekly' gets 6 weeks 7 * 6
+    // 'biweekly' gets 12 weeks 14 * 6
+    // 'monthly' gets 12 weeks 28 * 3
+    var period = client.get_int(PERIODIC_PERIOD_KEY);
+    var max = 12 * 7;
+    var min = 1 * 7;
+    
+    var delete_age = client.get_int(DELETE_AFTER_KEY);
+    if (delete_age > 0)
+      max = int.min(delete_age/2, max);
+    
+    threshold = period * 6;
+    threshold.clamp(min, max);
+  }
+  catch (Error e) {warning("%s\n", e.message);}
+  
+  return threshold;
+}
+
+public Date get_full_backup_threshold_date()
+{
+  TimeVal now = TimeVal();
+  now.get_current_time();
+  
+  Date date = Date();
+  date.set_time_val(now);
+  
+  var days = get_full_backup_threshold();
+  date.subtract_days(days);
+  
+  return date;
 }
 
 } // end namespace

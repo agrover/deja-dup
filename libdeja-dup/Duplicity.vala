@@ -74,7 +74,14 @@ public class Duplicity : Object
   
   bool checked_collection_info = false;
   bool got_collection_info = false;
-  List<string> collection_info = null;
+  struct DateInfo {
+    public bool full;
+    public TimeVal time;
+  }
+  List<DateInfo?> collection_info = null;
+  
+  bool deleted_files = false;
+  int delete_age = 0;
   
   File last_touched_file = null;
   
@@ -98,6 +105,11 @@ public class Duplicity : Object
     backend.add_argv(Operation.Mode.INVALID, ref backend_argv);
     if (!encrypted)
       backend_argv.append("--no-encryption");
+    
+    try {
+      delete_age = client.get_int(DELETE_AFTER_KEY);
+    }
+    catch (Error e) {warning("%s\n", e.message);}
     
     if (!restart())
       done(false, false);
@@ -137,17 +149,66 @@ public class Duplicity : Object
         state = State.STATUS;
         action_desc = _("Preparing...");
       }
+      // If we got collection info, examine it to see if we should delete old
+      // files.
+      else if (got_collection_info && !deleted_files) {
+        // Alright, let's look at collection data
+        int full_dates = 0;
+        TimeVal prev_time = TimeVal();
+        var too_old = false;
+        TimeVal now = TimeVal();
+        now.get_current_time();
+
+        Date today = Date();
+        today.set_time_val(now);
+        
+        foreach (DateInfo info in collection_info) {
+          if (info.full) {
+            if (full_dates > 0) {
+              Date prev_date = Date();
+              prev_date.set_time_val(prev_time);
+              if (today.days_between(prev_date) > delete_age) {
+                too_old = true;
+                break;
+              }
+            }
+            ++full_dates;
+          }
+          prev_time = info.time;
+        }
+        
+        if (too_old && full_dates > 2) {
+          // Alright, let's delete those ancient files!
+          print("deleting! %i %i\n", (int)too_old, full_dates);
+          return true;
+        }
+        else {
+          print("I ain't touching that shit! %i, %i\n", (int)too_old, full_dates);
+        }
+        
+        // If we don't need to delete, pretend we did and move on.
+        deleted_files = true;
+        return restart();
+      }
       // If we're backing up, and the version of duplicity supports it, we should
       // first run using --dry-run to get the total size of the backup, to make
       // accurate progress bars.
-      else if (DuplicityInfo.get_default().has_backup_progress &&
-          !has_progress_total) {
+      else if (!has_progress_total &&
+               DuplicityInfo.get_default().has_backup_progress) {
         state = State.DRY_RUN;
         action_desc = _("Preparing...");
         extra_argv.append("--dry-run");
       }
-      else if (DuplicityInfo.get_default().has_backup_progress)
-        progress(0f);
+      else {
+        if (DuplicityInfo.get_default().has_backup_progress)
+          progress(0f);
+        
+        Date threshold = DejaDup.get_full_backup_threshold_date();
+        extra_argv.append("--full-if-older-than=%d-%d-%d".printf(
+            (int)threshold.get_year(), (int)threshold.get_month(),
+            (int)threshold.get_day()));
+      }
+      
       break;
     case Operation.Mode.RESTORE:
       if (restore_files != null) {
@@ -515,17 +576,24 @@ public class Duplicity : Object
     
     var timeval = TimeVal();
     var dates = new List<string>();
+    var infos = new List<DateInfo?>();
     bool in_chain = false;
     foreach (string line in lines) {
-      if (line == "chain-complete")
+      if (line == "chain-complete" || line.str("chain-no-sig") == line)
         in_chain = true;
       else if (in_chain && line.length > 0 && line[0] == ' ') {
         // OK, appears to be a date line.  Try to parse.  Should look like:
         // ' inc TIMESTR NUMVOLS'.  Since there's a space at the beginning,
         // when we tokenize it, we should expect an extra token at the front.
         string[] tokens = line.split(" ");
-        if (tokens.length > 2 && timeval.from_iso8601(tokens[2]))
+        if (tokens.length > 2 && timeval.from_iso8601(tokens[2])) {
           dates.append(tokens[2]);
+          
+          var info = DateInfo();
+          info.time = timeval;
+          info.full = tokens[1] == "full";
+          infos.append(info);
+        }
       }
       else if (in_chain)
         in_chain = false;
@@ -538,8 +606,8 @@ public class Duplicity : Object
     }
     
     got_collection_info = true;
-    collection_info = new List<string>();
-    foreach (string s in dates)
+    collection_info = new List<DateInfo?>();
+    foreach (DateInfo s in infos)
       collection_info.append(s); // we want to keep our own copy too
     
     collection_dates(dates);

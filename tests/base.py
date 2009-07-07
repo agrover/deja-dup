@@ -23,6 +23,8 @@ import sys
 import os
 import ldtp
 import subprocess
+import glob
+import re
 
 latest_duplicity = '0.6.00'
 
@@ -35,7 +37,7 @@ cleanup_mounts = []
 # if we're running inside a distcheck for example.  So note that we check for
 # srcdir and use it if available.  Else, default to current directory.
 
-def setup(backend = None, encrypt = True, start = True, dest = '/', sources = []):
+def setup(backend = None, encrypt = None, start = True, dest = '/', sources = []):
   global gconf_dir, cleanup_dirs, latest_duplicity
   
   if 'srcdir' in environ:
@@ -87,7 +89,8 @@ def setup(backend = None, encrypt = True, start = True, dest = '/', sources = []
   elif backend == 'ssh':
     create_ssh_config(dest, sources);
   
-  set_gconf_value("encrypt", 'true' if encrypt else 'false', 'bool')
+  if encrypt is not None:
+    set_gconf_value("encrypt", 'true' if encrypt else 'false', 'bool')
   
   if start:
     start_deja_dup()
@@ -201,11 +204,28 @@ def quit():
   return ldtp.selectmenuitem('frmDéjàDup', 'mnuFile;mnuQuit')
 
 def run(method):
-	success = False
-	try:
-		success = method()
-	except Exception, e:
-	  print e
-	  quit()
-	finally:
-	  cleanup(success)
+  success = False
+  try:
+    success = method()
+  except Exception, e:
+    print e
+    quit()
+  finally:
+    cleanup(success)
+
+def change_date(to_date):
+  '''Changes the most recent set of duplicity files to look like they were
+     from to_date's timestamp'''
+  destdir = get_temp_name('local')
+  files = glob.glob('%s/*.manifest' % destdir)
+  if not files:
+    return
+  latest = files[-1]
+  olddate = re.sub('.*\.([0-9TZ]+)\.manifest', '\\1', latest)
+  print olddate
+  newdate = subprocess.Popen(['date', '-d', to_date, '+%Y%m%dT%H%M%SZ'], stdout=subprocess.PIPE).communicate()[0].strip()
+  files = glob.glob('%s/*' % destdir)
+  for d in files:
+    if d.find(olddate) != -1:
+      newname = re.sub(olddate, newdate, d)
+      os.rename(d, newname)

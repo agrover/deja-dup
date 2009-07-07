@@ -28,7 +28,15 @@ download_tgz()
 {
   mkdir -p "$SRCDIR"
   if [ ! -e "$SRCDIR/$1" ]; then
-    wget "http://download.savannah.gnu.org/releases-noredirect/duplicity/$1" -P "$SRCDIR"
+    VER=$(basename $1 .tar.gz | cut -d- -f2)
+    MAJ=$(echo $VER | cut -d. -f1)
+    MIN=$(echo $VER | cut -d. -f2)
+    MIC=$(echo $VER | cut -d. -f3)
+    if [ $MAJ -ge "6" -a \( $MIN -gt "0" -o $MIC -ge "1" \) ]; then
+      wget -nv -r -l 1 -np -nd -A "$1" "https://launchpad.net/duplicity/+download" -P "$SRCDIR"
+    else
+      wget "http://download.savannah.gnu.org/releases-noredirect/duplicity/$1" -P "$SRCDIR"
+    fi
   fi
 }
 

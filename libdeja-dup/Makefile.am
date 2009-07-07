@@ -48,6 +48,7 @@ libdeja_dup_la_VALASOURCES = \
 	ButtonConnect.vala \
 	ConfigBool.vala \
 	ConfigChoice.vala \
+	ConfigDelete.vala \
 	ConfigEntry.vala \
 	ConfigLabel.vala \
 	ConfigLabelBool.vala \
