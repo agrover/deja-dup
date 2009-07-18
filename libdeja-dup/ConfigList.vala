@@ -161,7 +161,7 @@ public class ConfigList : ConfigWidget
       return;
     }
     
-    weak SList<string> files = dlg.get_filenames();
+    SList<string> files = dlg.get_filenames();
     dlg.destroy();
     
     weak SList<string> slist;
