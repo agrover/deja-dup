@@ -20,10 +20,10 @@
 # target used during distcheck, for example.  This is nice.
 
 TESTS = \
+	backup/local \
 	basic/quit \
 	basic/badversion \
 	prefs/ssh-to-file
-#	backup/local
 
 test:
 	@for t in $(TESTS); do \

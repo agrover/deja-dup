@@ -24,12 +24,15 @@ import ldtp
 import base
 
 def test():
-  base.setup('file', encrypt=False)
+  base.setup('file', encrypt=False, sources=['data/simple'])
   ldtp.click('frmDéjàDup', 'btnBackup')
   ldtp.waittillguiexist('frmBackup')
+  ldtp.click('frmBackup', 'btnLast')
   ldtp.click('frmBackup', 'btnApply')
-  ldtp.waittillguiexist('frmBackup', 'lblYourfilesweresuccessfullybackedup')
-  return base.quit()
+  rv = ldtp.waittillguiexist('frmBackup', 'lblYourfilesweresuccessfullybackedup.')
+  ldtp.click('frmBackup', 'btnClose')
+  base.quit()
+  return rv
 
 base.run(test)
 

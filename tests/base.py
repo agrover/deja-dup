@@ -26,7 +26,7 @@ import subprocess
 import glob
 import re
 
-latest_duplicity = '0.6.00'
+latest_duplicity = '0.6.02'
 
 temp_dir = None
 gconf_dir = None
@@ -37,7 +37,7 @@ cleanup_mounts = []
 # if we're running inside a distcheck for example.  So note that we check for
 # srcdir and use it if available.  Else, default to current directory.
 
-def setup(backend = None, encrypt = None, start = True, dest = '/', sources = []):
+def setup(backend = None, encrypt = None, start = True, dest = None, sources = []):
   global gconf_dir, cleanup_dirs, latest_duplicity
   
   if 'srcdir' in environ:
@@ -101,7 +101,10 @@ def cleanup(success):
     os.system('gksudo "umount %s"' % d)
   for d in cleanup_dirs:
     os.system("rm -rf %s" % d)
-  if not success:
+  if success:
+    os.system('bash -c "echo -e \e[32mPASSED\e[0m"')
+  else:
+    os.system('bash -c "echo -e \e[31mFAILED\e[0m"')
     sys.exit(1)
 
 def set_gconf_value(key, value, key_type = "string", list_type = None):
