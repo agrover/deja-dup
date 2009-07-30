@@ -26,7 +26,7 @@ import subprocess
 import glob
 import re
 
-latest_duplicity = '0.6.02'
+latest_duplicity = '0.6.03'
 
 temp_dir = None
 gconf_dir = None
@@ -102,9 +102,9 @@ def cleanup(success):
   for d in cleanup_dirs:
     os.system("rm -rf %s" % d)
   if success:
-    os.system('bash -c "echo -e \e[32mPASSED\e[0m"')
+    os.system('bash -c "echo -e \'\e[32mPASSED\e[0m\'"')
   else:
-    os.system('bash -c "echo -e \e[31mFAILED\e[0m"')
+    os.system('bash -c "echo -e \'\e[31mFAILED\e[0m\'"')
     sys.exit(1)
 
 def set_gconf_value(key, value, key_type = "string", list_type = None):
@@ -142,6 +142,8 @@ def create_local_config(dest='/', includes=None, excludes=None):
     os.system('mkdir -p %s' % dest)
   set_gconf_value("backend", "file")
   set_gconf_value("file/path", dest)
+  includes = includes and [os.getcwd()+'/'+x for x in includes]
+  excludes = excludes and [os.getcwd()+'/'+x for x in excludes]
   if includes:
     includes = '[' + ','.join(includes) + ']'
     set_gconf_value("include-list", includes, "list", "string")
@@ -216,19 +218,47 @@ def run(method):
   finally:
     cleanup(success)
 
-def change_date(to_date):
-  '''Changes the most recent set of duplicity files to look like they were
-     from to_date's timestamp'''
+def last_manifest():
+  '''Returns last backup manifest (directory, filename) pair'''
   destdir = get_temp_name('local')
   files = glob.glob('%s/*.manifest' % destdir)
   if not files:
-    return
+    raise Exception("Expected manifest, found none")
   latest = files[-1]
+  return (destdir, latest)
+
+def last_type():
+  '''Returns last backup type, inc or full'''
+  filename = last_manifest()[1]
+  # filename looks like duplicity-TYPE.DATES.manifest
+  return filename.split('.')[0].split('-')[1]
+
+def last_date_change(to_date):
+  '''Changes the most recent set of duplicity files to look like they were
+     from to_date's timestamp'''
+  destdir, latest = last_manifest()
   olddate = re.sub('.*\.([0-9TZ]+)\.manifest', '\\1', latest)
-  print olddate
   newdate = subprocess.Popen(['date', '-d', to_date, '+%Y%m%dT%H%M%SZ'], stdout=subprocess.PIPE).communicate()[0].strip()
-  files = glob.glob('%s/*' % destdir)
-  for d in files:
-    if d.find(olddate) != -1:
-      newname = re.sub(olddate, newdate, d)
-      os.rename(d, newname)
+  cachedir = environ['XDG_CACHE_HOME'] + '/deja-dup/'
+  cachedir += os.listdir(cachedir)[0]
+  for d in (destdir, cachedir):
+    files = glob.glob('%s/*' % d)
+    for f in files:
+      if f.find(olddate) != -1:
+        newname = re.sub(olddate, newdate, f)
+        os.rename(f, newname)
+
+def guivisible(frm, obj):
+  states = ldtp.getallstates(frm, obj)
+  return ldtp.state.VISIBLE in states
+
+def backup_simple():
+  ldtp.click('frmDéjàDup', 'btnBackup')
+  ldtp.waittillguiexist('frmBackup')
+  if guivisible('frmBackup', 'btnLast'):
+    ldtp.click('frmBackup', 'btnLast')
+  ldtp.click('frmBackup', 'btnApply')
+  rv = ldtp.waittillguiexist('frmBackup', 'lblYourfilesweresuccessfullybackedup.')
+  rv = rv and guivisible('frmBackup', 'lblYourfilesweresuccessfullybackedup.')
+  ldtp.click('frmBackup', 'btnClose')
+  return rv

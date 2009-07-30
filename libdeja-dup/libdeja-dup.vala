@@ -338,7 +338,6 @@ public int get_full_backup_threshold()
     // 'weekly' gets 6 weeks 7 * 6
     // 'biweekly' gets 12 weeks 14 * 6
     // 'monthly' gets 12 weeks 28 * 3
-    var period = client.get_int(PERIODIC_PERIOD_KEY);
     var max = 12 * 7;
     var min = 1 * 7;
     
@@ -346,8 +345,14 @@ public int get_full_backup_threshold()
     if (delete_age > 0)
       max = int.min(delete_age/2, max);
     
-    threshold = period * 6;
-    threshold.clamp(min, max);
+    var periodic = client.get_bool(PERIODIC_KEY);
+    if (periodic) {
+      var period = client.get_int(PERIODIC_PERIOD_KEY);
+      threshold = period * 6;
+      threshold.clamp(min, max);
+    }
+    else
+      threshold = max;
   }
   catch (Error e) {warning("%s\n", e.message);}
   

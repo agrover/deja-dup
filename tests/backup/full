@@ -17,18 +17,34 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-# Do a simple local backup
+# Test whether we correctly switch to full backup mode vs incremental
 
 import ldtp
 import sys
 sys.path.insert(0, '.')
 import base
 
-def test():
+max_allowed = 12 * 7
+
+def max_inc():
   base.setup('file', encrypt=False, sources=['data/simple'])
-  rv = base.backup_simple()
+  if not base.backup_simple(): return False
+  # Change date to maximum allowed incremental, confirm next is incremental
+  base.last_date_change('%d days ago' % (max_allowed))
+  if not base.backup_simple(): return False
+  rv = base.last_type() == 'inc'
   base.quit()
   return rv
 
-base.run(test)
+def max_full():
+  base.setup('file', encrypt=False, sources=['data/simple'])
+  if not base.backup_simple(): return False
+  # Change date to maximum allowed incremental, confirm next is full
+  base.last_date_change('%d days ago' % (max_allowed+1))
+  if not base.backup_simple(): return False
+  rv = base.last_type() == 'full'
+  base.quit()
+  return rv
 
+base.run(max_inc)
+base.run(max_full)
