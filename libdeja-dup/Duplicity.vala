@@ -179,11 +179,7 @@ public class Duplicity : Object
         
         if (too_old && full_dates > 2) {
           // Alright, let's delete those ancient files!
-          print("deleting! %i %i\n", (int)too_old, full_dates);
           return true;
-        }
-        else {
-          print("I ain't touching that shit! %i, %i\n", (int)too_old, full_dates);
         }
         
         // If we don't need to delete, pretend we did and move on.
