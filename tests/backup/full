@@ -33,7 +33,6 @@ def max_inc():
   base.last_date_change('%d days ago' % (max_allowed))
   if not base.backup_simple(): return False
   rv = base.last_type() == 'inc'
-  base.quit()
   return rv
 
 def max_full():
@@ -43,7 +42,6 @@ def max_full():
   base.last_date_change('%d days ago' % (max_allowed+1))
   if not base.backup_simple(): return False
   rv = base.last_type() == 'full'
-  base.quit()
   return rv
 
 def half_inc():
@@ -54,7 +52,6 @@ def half_inc():
   base.last_date_change('%d days ago' % (10))
   if not base.backup_simple(): return False
   rv = base.last_type() == 'inc'
-  base.quit()
   return rv
 
 def half_full():
@@ -65,7 +62,6 @@ def half_full():
   base.last_date_change('%d days ago' % (11))
   if not base.backup_simple(): return False
   rv = base.last_type() == 'full'
-  base.quit()
   return rv
 
 def period_inc():
@@ -77,7 +73,6 @@ def period_inc():
   base.last_date_change('%d days ago' % (7*6))
   if not base.backup_simple(): return False
   rv = base.last_type() == 'inc'
-  base.quit()
   return rv
 
 def period_full():

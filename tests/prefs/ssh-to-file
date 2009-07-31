@@ -29,7 +29,6 @@ def no_values():
 	base.set_gconf_value('backend', 'ssh')
 	base.start_deja_dup()
 	rv = base.get_gconf_value('backend') == 'file'
-	base.quit()
 	return rv
 
 # Now test bits and pieces missing
@@ -40,7 +39,6 @@ def some_values():
 	base.start_deja_dup()
 	rv = base.get_gconf_value('backend') == 'file' and \
 	     base.get_gconf_value('file/path') == 'ssh://localhost/'
-	base.quit()
 	return rv
 
 # Now test everything together
@@ -54,7 +52,6 @@ def all_values():
 	base.start_deja_dup()
 	rv = base.get_gconf_value('backend') == 'file' and \
        base.get_gconf_value('file/path') == 'ssh://goober@localhost:42/hello'
-	base.quit()
 	return rv
 
 base.run(no_values)

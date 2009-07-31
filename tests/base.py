@@ -215,8 +215,8 @@ def run(method):
     success = method()
   except Exception, e:
     print e
-    quit()
   finally:
+    quit()
     cleanup(success)
 
 def get_manifest_date(filename):
