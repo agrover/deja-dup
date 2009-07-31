@@ -38,7 +38,7 @@ public abstract class Operation : Object
     INVALID,
     BACKUP,
     RESTORE,
-    STATUS
+    STATUS,
   }
   public Mode mode {get; construct; default = Mode.INVALID;}
   

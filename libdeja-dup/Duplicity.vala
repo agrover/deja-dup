@@ -56,7 +56,8 @@ public class Duplicity : Object
     NORMAL,
     DRY_RUN, // used when backing up, and we need to first get time estimate
     STATUS, // used when backing up, and we need to first get collection info
-    CLEANUP
+    CLEANUP,
+    DELETE,
   }
   protected State state {get; set;}
   
@@ -67,6 +68,7 @@ public class Duplicity : Object
   List<string> saved_argv;
   List<string> saved_envp;
   bool cleaned_up_once = false;
+  bool is_full_backup = false;
   
   bool has_progress_total = false;
   double progress_total; // zero, unless we already know limit
@@ -80,6 +82,7 @@ public class Duplicity : Object
   }
   List<DateInfo?> collection_info = null;
   
+  static const int MINIMUM_FULL = 2;
   bool deleted_files = false;
   int delete_age = 0;
   
@@ -119,7 +122,7 @@ public class Duplicity : Object
     var prev_mode = mode;
     mode = Operation.Mode.INVALID;
     
-    if (prev_mode == Operation.Mode.BACKUP) {
+    if (prev_mode == Operation.Mode.BACKUP && state == State.NORMAL) {
       if (cleanup())
         return;
     }
@@ -149,43 +152,6 @@ public class Duplicity : Object
         state = State.STATUS;
         action_desc = _("Preparing...");
       }
-      // If we got collection info, examine it to see if we should delete old
-      // files.
-      else if (got_collection_info && !deleted_files) {
-        // Alright, let's look at collection data
-        int full_dates = 0;
-        TimeVal prev_time = TimeVal();
-        var too_old = false;
-        TimeVal now = TimeVal();
-        now.get_current_time();
-
-        Date today = Date();
-        today.set_time_val(now);
-        
-        foreach (DateInfo info in collection_info) {
-          if (info.full) {
-            if (full_dates > 0) {
-              Date prev_date = Date();
-              prev_date.set_time_val(prev_time);
-              if (today.days_between(prev_date) > delete_age) {
-                too_old = true;
-                break;
-              }
-            }
-            ++full_dates;
-          }
-          prev_time = info.time;
-        }
-        
-        if (too_old && full_dates > 2) {
-          // Alright, let's delete those ancient files!
-          return true;
-        }
-        
-        // If we don't need to delete, pretend we did and move on.
-        deleted_files = true;
-        return restart();
-      }
       // If we're backing up, and the version of duplicity supports it, we should
       // first run using --dry-run to get the total size of the backup, to make
       // accurate progress bars.
@@ -198,11 +164,19 @@ public class Duplicity : Object
       else {
         if (DuplicityInfo.get_default().has_backup_progress)
           progress(0f);
-        
-        Date threshold = DejaDup.get_full_backup_threshold_date();
-        extra_argv.append("--full-if-older-than=%d-%d-%d".printf(
-            (int)threshold.get_year(), (int)threshold.get_month(),
-            (int)threshold.get_day()));
+
+        /* Set full backup threshold and determine whether we should trigger
+           a full backup. */
+        if (got_collection_info) {
+          Date threshold = DejaDup.get_full_backup_threshold_date();
+          Date full_backup = Date();
+          foreach (DateInfo info in collection_info) {
+            if (info.full)
+              full_backup.set_time_val(info.time);
+          }
+          if (!full_backup.valid() || threshold.compare(full_backup) > 0)
+            is_full_backup = true;
+        }
       }
       
       break;
@@ -256,6 +230,23 @@ public class Duplicity : Object
     
     action_desc_changed(_("Cleaning up..."));
     connect_and_start(null, null, cleanup_argv);
+    
+    return true;
+  }
+  
+  bool delete_excess(int cutoff) {
+    if (cutoff < MINIMUM_FULL)
+      return false;
+
+    state = State.DELETE;
+    var argv = new List<string>();
+    argv.append("remove-all-but-n-full");
+    argv.append("%d".printf(cutoff));
+    argv.append("--force");
+    argv.append(this.remote);
+    
+    action_desc_changed(_("Cleaning up..."));
+    connect_and_start(null, null, argv);
     
     return true;
   }
@@ -314,6 +305,10 @@ public class Duplicity : Object
               return;
           }
         }
+        else if (success && mode == Operation.Mode.BACKUP) {
+          if (delete_files_if_needed())
+            return;
+        }
         break;
       }
     }
@@ -347,6 +342,59 @@ public class Duplicity : Object
     return true;
   }
   
+  // Should only be called *after* a successful backup
+  bool delete_files_if_needed()
+  {
+    // Check if we need to delete any backups
+    // If we got collection info, examine it to see if we should delete old
+    // files.
+    if (got_collection_info && !deleted_files) {
+      // Alright, let's look at collection data
+      int full_dates = 0;
+      TimeVal prev_time = TimeVal();
+      Date prev_date = Date();
+      int too_old = 0;
+      TimeVal now = TimeVal();
+      now.get_current_time();
+
+      Date today = Date();
+      today.set_time_val(now);
+      
+      foreach (DateInfo info in collection_info) {
+        if (info.full) {
+          if (full_dates > 0) { // Wait until we have a prev_time
+            prev_date.set_time_val(prev_time); // compare last incremental backup
+            if (prev_date.days_between(today) > delete_age)
+              ++too_old;
+          }
+          ++full_dates;
+        }
+        prev_time = info.time;
+      }
+      prev_date.set_time_val(prev_time); // compare last incremental backup
+      if (prev_date.days_between(today) > delete_age)
+        ++too_old;
+      
+      // Did we just finished a successful full backup?
+      // Collection info won't have our recent backup, because it is done at
+      // beginning of backup.
+      if (is_full_backup)
+        ++full_dates;
+
+      if (too_old > 0 && full_dates > MINIMUM_FULL) {
+        // Alright, let's delete those ancient files!
+        int cutoff = int.max(MINIMUM_FULL, full_dates - too_old);
+        return delete_excess(cutoff);
+      }
+      
+      // If we don't need to delete, pretend we did and move on.
+      deleted_files = true;
+      return false;
+    }
+    else
+      return false;
+  }
+
   protected static const int ERROR_RESTORE_DIR_NOT_FOUND = 19;
   protected static const int ERROR_EXCEPTION = 30;
   protected static const int INFO_PROGRESS = 2;
@@ -665,6 +713,8 @@ public class Duplicity : Object
       // add operation, local, and remote args
       switch (mode) {
       case Operation.Mode.BACKUP:
+        if (is_full_backup)
+          argv.prepend("full");
         argv.append(local_arg);
         argv.append(remote);
         break;

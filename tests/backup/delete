@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+# -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
+#
+# This file is part of Déjà Dup.
+# © 2009 Michael Terry <mike@mterry.name>
+#
+# Déjà Dup is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Déjà Dup is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
+
+# Test whether we correctly switch to full backup mode vs incremental
+
+import ldtp
+import sys
+sys.path.insert(0, '.')
+import base
+
+def delete():
+  base.setup('file', encrypt=False, sources=['data/simple'])
+  base.set_gconf_value('delete-after', '30', 'int')
+  assert base.backup_simple()
+  base.last_date_change('%d days ago' % 100)
+  assert base.backup_simple()
+  assert base.num_manifests() == 2 and base.num_manifests('full') == 2
+  base.last_date_change('%d days ago' % 80)
+  assert base.backup_simple()
+  assert base.num_manifests() == 2 and base.num_manifests('full') == 2
+  base.last_date_change('%d days ago' % 60)
+  assert base.backup_simple()
+  assert base.num_manifests() == 2 and base.num_manifests('full') == 2
+  base.last_date_change('%d days ago' % 30)
+  assert base.backup_simple()
+  assert base.num_manifests() == 2 and base.num_manifests('full') == 2
+  base.last_date_change('%d days ago' % 10)
+  assert base.backup_simple()
+  assert base.num_manifests() == 3 and base.num_manifests('full') == 2
+  return True
+
+# make sure to test case of many full backups, but none that are too old.
+# make sure to test case of full+incrementals, using the correct date
+
+base.run(delete)

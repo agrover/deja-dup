@@ -21,7 +21,8 @@
 
 TESTS = \
 	backup/local \
-	basic/quit \
+	backup/full \
+	backup/delete \
 	basic/badversion \
 	prefs/ssh-to-file
 
@@ -37,9 +38,6 @@ test:
 
 EXTRA_DIST = $(TESTS) \
 	base.py \
-	basic/base.py \
-	backup/base.py \
-	prefs/base.py \
 	build-duplicity \
 	interactive \
 	README

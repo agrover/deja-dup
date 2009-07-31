@@ -25,6 +25,7 @@ import ldtp
 import subprocess
 import glob
 import re
+import traceback
 
 latest_duplicity = '0.6.03'
 
@@ -213,8 +214,8 @@ def run(method):
   success = False
   try:
     success = method()
-  except Exception, e:
-    print e
+  except:
+    traceback.print_exc()
   finally:
     quit()
     cleanup(success)
@@ -222,20 +223,34 @@ def run(method):
 def get_manifest_date(filename):
   return re.sub('.*\.([0-9TZ]+)\.manifest', '\\1', filename)
 
-def last_manifest():
-  '''Returns last backup manifest (directory, filename) pair'''
+def list_manifests():
   destdir = get_temp_name('local')
   files = sorted(glob.glob('%s/*.manifest' % destdir), key=get_manifest_date)
   if not files:
     raise Exception("Expected manifest, found none")
+  files = filter(lambda x: x.count('duplicity-full') == 0 or x.count('.to.') == 0, files) # don't get the in-between manifests
+  return (destdir, files)
+
+def num_manifests(mtype=None):
+  destdir, files = list_manifests()
+  if mtype:
+    files = filter(lambda x: manifest_type(x) == mtype, files)
+  return len(files)
+
+def last_manifest():
+  '''Returns last backup manifest (directory, filename) pair'''
+  destdir, files = list_manifests()
   latest = files[-1]
   return (destdir, latest)
+
+def manifest_type(fn):
+  # fn looks like duplicity-TYPE.DATES.manifest
+  return fn.split('.')[0].split('-')[1]
 
 def last_type():
   '''Returns last backup type, inc or full'''
   filename = last_manifest()[1]
-  # filename looks like duplicity-TYPE.DATES.manifest
-  return filename.split('.')[0].split('-')[1]
+  return manifest_type(filename)
 
 def last_date_change(to_date):
   '''Changes the most recent set of duplicity files to look like they were
@@ -262,7 +277,7 @@ def backup_simple():
   if guivisible('frmBackup', 'btnLast'):
     ldtp.click('frmBackup', 'btnLast')
   ldtp.click('frmBackup', 'btnApply')
-  rv = ldtp.waittillguiexist('frmBackup', 'lblYourfilesweresuccessfullybackedup.')
+  rv = ldtp.waittillguiexist('frmBackup', 'lblYourfilesweresuccessfullybackedup.', guiTimeOut=200)
   rv = rv and guivisible('frmBackup', 'lblYourfilesweresuccessfullybackedup.')
   ldtp.click('frmBackup', 'btnClose')
   return rv
