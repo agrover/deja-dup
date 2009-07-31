@@ -96,11 +96,12 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
     start_deja_dup()
 
 def cleanup(success):
-  global cleanup_dirs, cleanup_mounts
+  global temp_dir, cleanup_dirs, cleanup_mounts
   for d in cleanup_mounts:
     os.system('gksudo "umount %s"' % d)
   for d in cleanup_dirs:
     os.system("rm -rf %s" % d)
+  temp_dir = None
   if success:
     os.system('bash -c "echo -e \'\e[32mPASSED\e[0m\'"')
   else:
@@ -218,10 +219,13 @@ def run(method):
   finally:
     cleanup(success)
 
+def get_manifest_date(filename):
+  return re.sub('.*\.([0-9TZ]+)\.manifest', '\\1', filename)
+
 def last_manifest():
   '''Returns last backup manifest (directory, filename) pair'''
   destdir = get_temp_name('local')
-  files = glob.glob('%s/*.manifest' % destdir)
+  files = sorted(glob.glob('%s/*.manifest' % destdir), key=get_manifest_date)
   if not files:
     raise Exception("Expected manifest, found none")
   latest = files[-1]
@@ -237,7 +241,7 @@ def last_date_change(to_date):
   '''Changes the most recent set of duplicity files to look like they were
      from to_date's timestamp'''
   destdir, latest = last_manifest()
-  olddate = re.sub('.*\.([0-9TZ]+)\.manifest', '\\1', latest)
+  olddate = get_manifest_date(latest)
   newdate = subprocess.Popen(['date', '-d', to_date, '+%Y%m%dT%H%M%SZ'], stdout=subprocess.PIPE).communicate()[0].strip()
   cachedir = environ['XDG_CACHE_HOME'] + '/deja-dup/'
   cachedir += os.listdir(cachedir)[0]
