@@ -27,7 +27,9 @@ public abstract class Backend : Object
   public signal void need_password();
   
   public Gtk.Window toplevel {get; construct;}
-  
+
+  public abstract bool is_native();
+
   public abstract string? get_location() throws Error;
   public abstract string? get_location_pretty() throws Error; // short description for user
   

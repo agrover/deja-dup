@@ -45,6 +45,10 @@ public class BackendS3 : Backend
   string get_default_bucket() {
     return "deja-dup-auto-%s".printf(id.down());
   }
+
+  public override bool is_native() {
+    return false;
+  }
   
   public override string? get_location() throws Error
   {

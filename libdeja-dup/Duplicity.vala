@@ -683,7 +683,33 @@ public class Duplicity : Object
       raise_error(errorstr, detail);
     }
   }
-  
+
+  // Returns volume size in megs
+  int get_volsize()
+  {
+    // Advantages of a smaller value:
+    // * takes less temp space
+    // * retries of a volume take less time
+    // * quicker restore of a particular file (less excess baggage to download)
+    // * we get feedback more frequently (duplicity only gives us a progress
+    //   report at the end of a volume) -- fixed by reporting when we're uploading
+    // Downsides:
+    // * less throughput:
+    //   * some protocols have large per-file overhead (like sftp)
+    //   * the network doesn't have time to ramp up to max tcp transfer speed per
+    //     file
+    // * lots of files looks ugly to users
+    //
+    // duplicity's default is 25 (used to be 5).
+    //
+    // For local filesystems, we'll choose large volsize.
+    // For remote FSs, we'll go smaller.
+    if (backend.is_native())
+      return 30;
+    else
+      return 10;
+  }
+
   void connect_and_start(List<string>? argv_extra = null,
                          List<string>? envp_extra = null,
                          List<string>? argv_entire = null,
@@ -713,6 +739,7 @@ public class Duplicity : Object
       case Operation.Mode.BACKUP:
         if (is_full_backup)
           argv.prepend("full");
+        argv.append("--volsize=%d".printf(get_volsize()));
         argv.append(local_arg);
         argv.append(remote);
         break;

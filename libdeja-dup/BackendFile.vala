@@ -32,7 +32,7 @@ public class BackendFile : Backend
   public override Backend clone() {
     return new BackendFile(toplevel);
   }
-  
+
   string? get_location_from_gconf() throws Error
   {
     var client = get_gconf_client();
@@ -58,6 +58,21 @@ public class BackendFile : Backend
     return get_location_from_gconf();
   }
   
+  public override bool is_native() {
+    try {
+      var path = get_location_from_gconf();
+      if (path != null) {
+        var file = File.parse_name(path);
+        return file.is_native();
+      }
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
+
+    return true; // default to yes?
+  }
+
   public override void add_argv(Operation.Mode mode, ref List<string> argv)
   {
     if (mode == Operation.Mode.BACKUP) {

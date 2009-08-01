@@ -62,27 +62,6 @@ public class DuplicityInstance : Object
     
     argv.append("--verbosity=9");
     
-    // Our default volsize is 5M (duplicity's default is now 25M).
-    // Advantages of a smaller value:
-    // * takes less temp space
-    // * retries of a volume take less time
-    // * quicker restore of a particular file (less excess baggage to download)
-    // * we get feedback more frequently (duplicity only gives us a progress
-    //   report at the end of a volume)
-    // Downsides:
-    // * network throughput might be lower
-    // * some protocols have large per-file overhead (like sftp)
-    // * the network doesn't have time to ramp up to max tcp transfer speed per
-    //   file.
-    // * too many files on the backend can lead to not being able to do
-    //   anything with duplicity, as ssh (or ftp or others?) can't list all
-    //   the files without timing out
-    //
-    // All told, it would be nice if we could do lower volsize.  If duplicity
-    // ever solves the 'too many files' problem, we should go down to volsize
-    // 1 or 2.  For now, we'll keep with the default.
-    argv.append("--volsize=5");
-    
     // Cache signature files
     var cache_dir = Environment.get_user_cache_dir();
     if (cache_dir != null) {
