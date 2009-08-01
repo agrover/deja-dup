@@ -303,7 +303,7 @@ public class AssistantRestore : AssistantOperation
   {
     // Translators:  This is the word 'Restoring' in the phrase
     // "Restoring '%s'".  %s is a filename.
-    return _("Restoring");
+    return _("Restoring:");
   }
   
   protected override Gdk.Pixbuf? make_op_icon()

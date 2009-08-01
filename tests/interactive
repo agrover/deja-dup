@@ -65,8 +65,6 @@ def test():
     os.environ['DEJA_DUP_TEST_TMP'] = tmpdir
   if mtype is not None or size is not None:
     dest = base.create_mount(mtype=mtype, size=size)
-  if sources:
-    sources = map(lambda s: os.path.abspath(s), sources)
   
   base.setup(backend=back, dest=dest, sources=sources, start=False)
   

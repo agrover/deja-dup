@@ -28,6 +28,7 @@ public abstract class AssistantOperation : Gtk.Assistant
   Gtk.ProgressBar progress_bar;
   Gtk.TextView progress_text;
   Gtk.ScrolledWindow progress_scroll;
+  Gtk.Expander progress_expander;
   protected Gtk.Widget progress_page {get; private set;}
   
   protected Gtk.Label summary_label;
@@ -83,18 +84,35 @@ public abstract class AssistantOperation : Gtk.Assistant
     progress_file_label.label = "";
   }
   
-  void set_progress_label_file(DejaDup.Operation op, File file)
+  void set_progress_label_file(DejaDup.Operation op, File file, bool actual)
   {
     var parse_name = file.get_parse_name();
-    var basename = Path.get_basename(parse_name);
-    progress_label.label = get_progress_file_prefix() + " ";
-    progress_file_label.label = "'%s'".printf(basename);
-    
+    string prefix;
+    if (actual) {
+      prefix = get_progress_file_prefix();
+      progress_label.label = prefix + " ";
+      progress_file_label.label = Path.get_basename(parse_name);
+    }
+    else {
+      prefix = _("Scanning:");
+      progress_label.label = _("Scanning...");
+      progress_file_label.label = "";
+    }
+
+    string log_line = prefix + " " + parse_name;
+
+    bool adjustment_at_end = false;
+    Gtk.Adjustment adjust = progress_text.vadjustment;
+    if (adjust.value >= adjust.upper - adjust.page_size ||
+        adjust.page_size == 0 || // means never been set, means not realized
+        !progress_expander.expanded)
+      adjustment_at_end = true;
+
     var buffer = progress_text.buffer;
     if (buffer.get_char_count() > 0)
-      parse_name = "\n" + parse_name;
+      log_line = "\n" + log_line;
     if (buffer.get_line_count() >= 100 && adjustment_at_end) {
-      // If we're watching text scroll by, optimize memory by only keeping last 100 lines
+      // If we're watching text scroll by, save memory by only keeping last 100 lines
       Gtk.TextIter start, line100;
       buffer.get_start_iter(out start);
       buffer.get_iter_at_line(out line100, buffer.get_line_count() - 100);
@@ -103,20 +121,9 @@ public abstract class AssistantOperation : Gtk.Assistant
     
     Gtk.TextIter iter;
     buffer.get_end_iter(out iter);
-    buffer.insert_text(iter, parse_name, -1);
-  }
-  
-  bool adjustment_at_end = true; // FIXME: really should subclass adjustment or something...
-  void make_adjustment_stay_at_end(Gtk.Widget range)
-  {
-    Gtk.Adjustment adjust = ((Gtk.Range)range).adjustment;
-    adjust.value_changed.connect((a) => {
-      adjustment_at_end = (a.value >= a.upper - a.page_size);
-    });
-    adjust.changed.connect((a) => {
-      if (adjustment_at_end)
-        a.value = a.upper;
-    });
+    buffer.insert_text(iter, log_line, -1);
+    if (adjustment_at_end)
+      adjust.value = adjust.upper;
   }
   
   protected virtual Gtk.Widget make_progress_page()
@@ -142,15 +149,13 @@ public abstract class AssistantOperation : Gtk.Assistant
                         "hscrollbar-policy", Gtk.PolicyType.AUTOMATIC,
                         "vscrollbar-policy", Gtk.PolicyType.AUTOMATIC,
                         "border-width", 6);
-    var range = ((Gtk.Range)progress_scroll.vscrollbar);
-    range.realize.connect(make_adjustment_stay_at_end);
-    var expander = new Gtk.Expander.with_mnemonic(_("_Details"));
-    expander.set("child", progress_scroll);
+    progress_expander = new Gtk.Expander.with_mnemonic(_("_Details"));
+    progress_expander.set("child", progress_scroll);
     
     var page = new Gtk.VBox(false, 6);
     page.set("child", progress_hbox,
              "child", progress_bar,
-             "child", expander,
+             "child", progress_expander,
              "border-width", 12);
     page.child_set(progress_hbox, "expand", false);
     page.child_set(progress_bar, "expand", false);

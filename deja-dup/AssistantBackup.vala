@@ -171,7 +171,7 @@ public class AssistantBackup : AssistantOperation
   {
     // Translators:  This is the phrase 'Backing up' in the larger phrase
     // "Backing up '%s'".  %s is a filename.
-    return _("Backing up");
+    return _("Backing up:");
   }
   
   protected override Gdk.Pixbuf? make_op_icon()
