@@ -215,6 +215,11 @@ public class OperationRestore : Operation
         var full_source = sourcef.resolve_relative_path(rel_file_path);
         var full_dest = destf.resolve_relative_path(rel_file_path);
         
+        try {
+          full_dest.make_directory_with_parents(null);
+        }
+        catch (Error e) {warning("%s\n", e.message);}
+
         var move = new RecursiveMove(full_source, full_dest);
         move.raise_error.connect(mv_error);
         move.start();
