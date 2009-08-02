@@ -54,6 +54,8 @@ def test():
       size = int(arg.split('=', 1)[-1])
     elif arg.startswith('back='):
       back = arg.split('=', 1)[-1]
+    elif arg.startswith('dest='):
+      dest = arg.split('=', 1)[-1]
     else:
       print "Unrecognized argument '%s'" % arg
       return 1

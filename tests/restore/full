@@ -17,17 +17,36 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-# Do a simple local backup
-
 import ldtp
 import sys
+import os
 sys.path.insert(0, '.')
 import base
 
+BASEPATH = '/tmp/deja-dup-test/'
+DATE1 = 'Sat Aug  1 21:14:21 2009'
+DATE2 = 'Sat Aug  1 21:14:34 2009'
+DATE3 = 'Sat Aug  1 21:14:41 2009'
+
+def check_dir(path, oneval):
+  root = path+BASEPATH
+  assert base.file_equals(root+'one', oneval)
+  assert base.file_equals(root+'two', 'two\n')
+  assert base.file_equals(root+'three', 'three\n')
+  assert base.file_equals(root+'top/one', 'one\n')
+  assert os.path.isdir(root+'top/next')
+
 def test():
-  base.setup('file', encrypt=False, sources=['data/simple'])
-  rv = base.backup_simple()
-  return rv
+  restoredir = base.get_temp_name('restore')
+  base.setup('file', dest='volumes/simple', encrypt=False)
+  base.restore_simple(restoredir, DATE1)
+  check_dir(restoredir, 'one\n')
+  os.system("rm -r %s" % restoredir)
+  base.restore_simple(restoredir, DATE2)
+  check_dir(restoredir, 'one1\n')
+  os.system("rm -r %s" % restoredir)
+  base.restore_simple(restoredir, DATE3)
+  check_dir(restoredir, 'one1!\n')
+  return True
 
 base.run(test)
-

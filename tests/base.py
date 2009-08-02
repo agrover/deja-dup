@@ -27,7 +27,7 @@ import glob
 import re
 import traceback
 
-latest_duplicity = '0.6.03'
+latest_duplicity = '0.6.04'
 
 temp_dir = None
 gconf_dir = None
@@ -38,7 +38,7 @@ cleanup_mounts = []
 # if we're running inside a distcheck for example.  So note that we check for
 # srcdir and use it if available.  Else, default to current directory.
 
-def setup(backend = None, encrypt = None, start = True, dest = None, sources = []):
+def setup(backend = None, encrypt = None, start = True, dest = None, sources = [], args=['']):
   global gconf_dir, cleanup_dirs, latest_duplicity
   
   if 'srcdir' in environ:
@@ -94,7 +94,7 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
     set_gconf_value("encrypt", 'true' if encrypt else 'false', 'bool')
   
   if start:
-    start_deja_dup()
+    start_deja_dup(args)
 
 def cleanup(success):
   global temp_dir, cleanup_dirs, cleanup_mounts
@@ -124,10 +124,11 @@ def get_gconf_value(key):
   pout = sp.communicate()[0]
   return pout.strip()
 
-def start_deja_dup():
-  ldtp.launchapp('deja-dup', delay=0)
+def start_deja_dup(args=['']):
+  ldtp.launchapp('deja-dup', arg=args, delay=0)
   ldtp.appundertest('deja-dup')
-  ldtp.waittillguiexist('frmDéjàDup')
+  if '--restore' not in args: # bit of a hack, but...
+    ldtp.waittillguiexist('frmDéjàDup')
 
 def start_deja_dup_prefs():
   ldtp.launchapp('deja-dup-preferences', delay=0)
@@ -142,6 +143,8 @@ def create_local_config(dest='/', includes=None, excludes=None):
   if dest is None:
     dest = get_temp_name('local')
     os.system('mkdir -p %s' % dest)
+  elif dest[0] != '/':
+    dest = os.getcwd()+'/'+dest
   set_gconf_value("backend", "file")
   set_gconf_value("file/path", dest)
   includes = includes and [os.getcwd()+'/'+x for x in includes]
@@ -208,7 +211,8 @@ def create_mount(path=None, mtype='ext3', size=20):
   return mount_dir
 
 def quit():
-  return ldtp.selectmenuitem('frmDéjàDup', 'mnuFile;mnuQuit')
+  if ldtp.guiexist('frmDéjàDup'):
+    ldtp.selectmenuitem('frmDéjàDup', 'mnuFile;mnuQuit')
 
 def run(method):
   success = False
@@ -273,11 +277,46 @@ def guivisible(frm, obj):
 
 def backup_simple():
   ldtp.click('frmDéjàDup', 'btnBackup')
-  ldtp.waittillguiexist('frmBackup')
+  assert ldtp.waittillguiexist('frmBackup')
   if guivisible('frmBackup', 'btnLast'):
     ldtp.click('frmBackup', 'btnLast')
   ldtp.click('frmBackup', 'btnApply')
-  rv = ldtp.waittillguiexist('frmBackup', 'lblYourfilesweresuccessfullybackedup.', guiTimeOut=200)
-  rv = rv and guivisible('frmBackup', 'lblYourfilesweresuccessfullybackedup.')
+  assert ldtp.waittillguiexist('frmBackup', 'lblYourfilesweresuccessfullybackedup.', guiTimeOut=200)
+  assert guivisible('frmBackup', 'lblYourfilesweresuccessfullybackedup.')
   ldtp.click('frmBackup', 'btnClose')
-  return rv
+
+def restore_simple(path, date=None):
+  ldtp.click('frmDéjàDup', 'btnRestore')
+  assert ldtp.waittillguiexist('frmRestore')
+  if ldtp.guiexist('frmRestore', 'pnlPreferences'):
+    ldtp.click('frmRestore', 'btnForward')
+  assert ldtp.waittillguiexist('frmRestore', 'flrRestorefromWhen?')
+  if date:
+    ldtp.comboselect('frmRestore', 'cboDate', date)
+  ldtp.click('frmRestore', 'btnForward')
+  ldtp.click('frmRestore', 'rbtnRestoretospecificfolder')
+  ldtp.comboselect('frmRestore', 'cboRestorefolder', 'Other...')
+  assert ldtp.waittillguiexist('dlgChoosedestinationforrestoredfiles')
+  ldtp.settextvalue('dlgChoosedestinationforrestoredfiles', 'txtLocation', path)
+  ldtp.click('dlgChoosedestinationforrestoredfiles', 'btnOpen')
+  ldtp.click('frmRestore', 'btnForward')
+  ldtp.click('frmRestore', 'btnApply')
+  assert ldtp.waittillguiexist('frmRestore', 'lblYourfilesweresuccessfullyrestored.')
+  assert guivisible('frmRestore', 'lblYourfilesweresuccessfullyrestored.')
+  ldtp.click('frmRestore', 'btnClose')
+
+def restore_specific(path, date=None):
+  if ldtp.guiexist('frmRestore', 'pnlPreferences'):
+    ldtp.click('frmRestore', 'btnForward')
+  assert ldtp.waittillguiexist('frmRestore', 'flrRestorefromWhen?')
+  if date:
+    ldtp.comboselect('frmRestore', 'cboDate', date)
+  ldtp.click('frmRestore', 'btnForward')
+  ldtp.click('frmRestore', 'btnApply')
+  assert ldtp.waittillguiexist('frmRestore', 'lblYourfilesweresuccessfullyrestored.')
+  assert guivisible('frmRestore', 'lblYourfilesweresuccessfullyrestored.')
+  ldtp.click('frmRestore', 'btnClose')
+
+def file_equals(path, contents):
+  f = open(path)
+  return f.read() == contents

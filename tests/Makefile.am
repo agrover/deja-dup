@@ -20,11 +20,12 @@
 # target used during distcheck, for example.  This is nice.
 
 TESTS = \
-	backup/local \
 	backup/full \
 	backup/delete \
 	basic/badversion \
-	prefs/ssh-to-file
+	prefs/ssh-to-file \
+	restore/full \
+	restore/two
 
 test:
 	@for t in $(TESTS); do \
