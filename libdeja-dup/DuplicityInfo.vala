@@ -94,7 +94,7 @@ public class DuplicityInfo : Object
       new_time_format = true;
     if (meets_version(0, 5, 16))
       can_read_short_filenames = true;
-    if (meets_version(0, 6, 1))
+    if (meets_version(0, 6, 5)) // had it in 0.6.1, but didn't work on restore
       has_native_gio = true;
     
     return true;
