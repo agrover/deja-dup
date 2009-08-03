@@ -68,13 +68,13 @@ def test():
   if mtype is not None or size is not None:
     dest = base.create_mount(mtype=mtype, size=size)
   
-  base.setup(backend=back, dest=dest, sources=sources, start=False)
+  base.setup(backend=back, dest=dest, sources=sources, start=False, encrypt=False)
   
   if prog is None:
     base.start_deja_dup()  
     # Let user play with it for a while, maximum 2 hours
     if ldtp.waittillguinotexist('frmDéjàDup', guiTimeOut=60*60*2) == 0:
-      base.quit()
+      return
   elif prog == 'applet':
     base.start_deja_dup_applet()
     ldtp.wait(60*60*2)
