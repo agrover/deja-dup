@@ -93,7 +93,7 @@ public class ConfigPeriod : ConfigChoice
     if (!valid) {
       var store = (Gtk.ListStore)combo.model;
       store.insert_with_values(out iter, 0, 0,
-                               ngettext("Every %d Day", "Every %d Days", confval).printf(confval),
+                               ngettext("Every %d day", "Every %d days", confval).printf(confval),
                                1, confval);
       combo.set_active_iter(iter);
     }
