@@ -19,10 +19,17 @@
 
 using GLib;
 
-public abstract class AssistantOperation : Gtk.Assistant
+public abstract class AssistantOperation : Assistant
 {
   protected Gtk.Widget confirm_page {get; private set;}
+  public signal void closing(bool success);
   
+  StatusIcon status_icon;
+  bool succeeded = false;
+
+  Gtk.Entry encrypt_entry;
+  protected Gtk.Widget password_page {get; private set;}
+
   Gtk.Label progress_label;
   Gtk.Label progress_file_label;
   Gtk.ProgressBar progress_bar;
@@ -44,26 +51,43 @@ public abstract class AssistantOperation : Gtk.Assistant
   
   construct
   {
+    set_op_icon_name();
     op_icon = make_op_icon();
+    header_icon.pixbuf = op_icon;
     
     add_config_pages_if_needed();
     add_setup_pages();
     add_confirm_page();
+    add_password_page();
     add_progress_page();
     add_summary_page();
     
-    apply.connect(do_apply);
-    cancel.connect(do_cancel);
-    close.connect(do_close);
+    canceled.connect(do_cancel);
+    closed.connect(do_close);
     prepare.connect(do_prepare);
   }
   
-  protected abstract Gtk.Widget make_confirm_page();
+  protected abstract Gtk.Widget? make_confirm_page();
   protected virtual void add_setup_pages() {}
   protected virtual void add_custom_config_pages() {}
   protected abstract DejaDup.Operation create_op();
   protected abstract string get_progress_file_prefix();
-  protected abstract Gdk.Pixbuf? make_op_icon();
+  protected virtual void set_op_icon_name() {}
+
+  protected Gdk.Pixbuf? make_op_icon()
+  {
+    if (this.icon_name == null)
+      return null;
+    try {
+      var theme = Gtk.IconTheme.get_for_screen(get_screen());
+      return theme.load_icon(this.icon_name, 48,
+                             Gtk.IconLookupFlags.FORCE_SIZE);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      return null;
+    }
+  }
   
   bool pulse()
   {
@@ -172,8 +196,7 @@ public abstract class AssistantOperation : Gtk.Assistant
       var theme = Gtk.IconTheme.get_for_screen(get_screen());
       var pixbuf = theme.load_icon(Gtk.STOCK_DIALOG_ERROR, 48,
                                    Gtk.IconLookupFlags.FORCE_SIZE);
-      child_set(summary_page,
-                "header-image", pixbuf);
+      header_icon.pixbuf = pixbuf;
     }
     catch (Error e) {
       // Eh, don't worry about it
@@ -184,14 +207,43 @@ public abstract class AssistantOperation : Gtk.Assistant
     summary_label.selectable = true;
     
     if (detail != null) {
+      page_box.set_size_request(300, 200);
       error_widget.no_show_all = false;
       error_widget.show_all();
       error_text_view.buffer.set_text(detail, -1);
     }
     
-    set_current_page(get_n_pages() - 1); // last, summary page
+    go_to_end();
+    page_box.queue_resize();
   }
-  
+
+  protected Gtk.Widget make_password_page()
+  {
+    int rows = 0;
+    Gtk.Widget w, label;
+
+    var page = new Gtk.Table(rows, 2, false);
+    page.set("row-spacing", 6,
+             "column-spacing", 6,
+             "border-width", 12);
+
+    w = new Gtk.Entry();
+    w.set("visibility", false,
+          "activates-default", true);
+    label = new Gtk.Label(_("E_ncryption password:"));
+    label.set("mnemonic-widget", w,
+              "use-underline", true,
+              "xalign", 0.0f);
+    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
+    ++rows;
+    encrypt_entry = (Gtk.Entry)w;
+
+    
+
+    return page;
+  }
+
   protected virtual Gtk.Widget make_summary_page()
   {
     summary_label = new Gtk.Label("");
@@ -236,48 +288,50 @@ public abstract class AssistantOperation : Gtk.Assistant
   void add_confirm_page()
   {
     var page = make_confirm_page();
-    append_page(page);
-    child_set(page,
-              "title", _("Summary"),
-              "page-type", Gtk.AssistantPageType.CONFIRM,
-              "complete", true,
-              "header-image", op_icon);
+    if (page == null)
+      return;
+    append_page(page, Type.SUMMARY);
+    set_page_title(page, _("Summary"));
     confirm_page = page;
   }
 
   void add_progress_page()
   {
     var page = make_progress_page();
-    append_page(page);
-    // We don't actually use a PROGRESS type for this page, because that
-    // doesn't allow for cancelling.
-    child_set(page,
-              "page-type", Gtk.AssistantPageType.CONTENT,
-              "header-image", op_icon);
+    append_page(page, Type.PROGRESS);
     progress_page = page;
   }
-  
+
+  void add_password_page()
+  {
+    var page = make_password_page();
+    append_page(page);
+    set_page_title(page, _("Password Needed"));
+    password_page = page;
+  }
+
   void add_summary_page()
   {
     var page = make_summary_page();
-    append_page(page);
-    child_set(page,
-              "page-type", Gtk.AssistantPageType.SUMMARY,
-              "complete", true,
-              "header-image", op_icon);
+    append_page(page, Type.FINISH);
     summary_page = page;
   }
   
   void apply_finished(DejaDup.Operation op, bool success)
   {
     this.op = null;
-    
-    if (success) {
-      set_current_page(get_n_pages() - 1); // last, summary page
-    }
-    else if (!error_occurred) {
+    status_icon = null;
+
+    if (!success && !error_occurred)
       // was cancelled...  Close dialog
       do_close();
+    else {
+      if (success) {
+        succeeded = true;
+        go_to_end();
+      }
+      else
+        force_visible(false);
     }
   }
   
@@ -286,10 +340,15 @@ public abstract class AssistantOperation : Gtk.Assistant
     op = create_op();
     op.done.connect(apply_finished);
     op.raise_error.connect(show_error);
+    op.passphrase_required.connect(get_passphrase);
+    //op.backend_password_required.connect(notify_backend_password);
     op.action_desc_changed.connect(set_progress_label);
     op.action_file_changed.connect(set_progress_label_file);
     op.progress.connect(show_progress);
     
+    status_icon = new StatusIcon();
+    status_icon.activated.connect((s, t) => {toggle_window(t, true);});
+
     try {
       op.start();
     }
@@ -299,8 +358,8 @@ public abstract class AssistantOperation : Gtk.Assistant
       apply_finished(op, false);
     }
   }
-  
-  protected virtual void do_prepare(Gtk.Assistant assist, Gtk.Widget page)
+
+  protected virtual void do_prepare(Assistant assist, Gtk.Widget page)
   {
     if (timeout_id > 0) {
       Source.remove(timeout_id);
@@ -317,7 +376,15 @@ public abstract class AssistantOperation : Gtk.Assistant
     else if (page == progress_page) {
       progress_bar.fraction = 0;
       timeout_id = Timeout.add(250, pulse);
+      if (op != null && op.needs_password) {
+        // Operation is waiting for password
+        provide_password();
+      }
+      else
+        do_apply();
     }
+    else if (page == password_page && (op == null || !op.needs_password))
+      skip();
   }
   
   void do_cancel()
@@ -334,8 +401,106 @@ public abstract class AssistantOperation : Gtk.Assistant
       Source.remove(timeout_id);
       timeout_id = 0;
     }
+
+    closing(succeeded);
+
+    print("doing close\n");
+    Idle.add(() => {destroy(); return false;});
+  }
+
+  protected void force_visible(bool user_click)
+  {
+    if (!visible)
+      toggle_window(0, user_click);
+    else
+      show_to_user(this, 0, user_click);
+  }
+
+  bool user_focused(Gtk.Widget win, Gdk.EventFocus e)
+  {
+    ((Gtk.Window)win).urgency_hint = false;
+    win.focus_in_event.disconnect(user_focused);
+    return false;
+  }
+
+  void show_to_user(Gtk.Window win, uint time, bool user_click)
+  {
+    win.focus_on_map = user_click;
+    if (user_click)
+      win.present_with_time(time);
+    else {
+      win.urgency_hint = true;
+      win.focus_in_event.connect(user_focused);
+      win.show();
+    }
+  }
+
+  void toggle_window(uint time, bool user_click)
+  {
+    var will_hide = this.visible;
+
+    if (time == 0)
+      time = Gtk.get_current_event_time();
+
+    if (will_hide)
+      hide();
+    else
+      show_to_user(this, time, user_click);
+  }
+
+  void found_passphrase(GnomeKeyring.Result result, string? str)
+  {
+    try {
+      if (str != null)
+        op.continue_with_passphrase(str);
+      else
+        ask_passphrase();
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
+  }
+
+  void get_passphrase()
+  {
+    // First, try user's keyring
+    GnomeKeyring.find_password(PASSPHRASE_SCHEMA,
+                               found_passphrase,
+                               "owner", Config.PACKAGE,
+                               "type", "passphrase");
+  }
+
+  void save_password_callback(GnomeKeyring.Result result)
+  {
+  }
+
+  void ask_passphrase()
+  {
+    go_to_page(password_page);
+    force_visible(false);
+  }
+
+  void provide_password()
+  {
+    var passphrase = encrypt_entry.get_text();
+    passphrase = passphrase.strip();
     
-    destroy();
+    if (passphrase != "") {
+      // Save it
+/*      var remember = dlg.get_remember();
+      if (remember != Gnome.PasswordDialogRemember.NOTHING) {
+        string where = remember == Gnome.PasswordDialogRemember.SESSION ?
+                                   "session" : GnomeKeyring.DEFAULT;
+        GnomeKeyring.store_password(PASSPHRASE_SCHEMA,
+                                    where,
+                                    _("Déjà Dup backup passphrase"),
+                                    passphrase, save_password_callback,
+                                    "owner", Config.PACKAGE,
+                                    "type", "passphrase");
+      }*/
+    }
+    
+    op.continue_with_passphrase(passphrase);
   }
 }
 

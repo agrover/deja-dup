@@ -138,7 +138,6 @@ public class DuplicityInfo : Object
     dlg.format_secondary_text("%s%s", msg, _("Without duplicity, Déjà Dup cannot function.  It will close now."));
     dlg.run();
     dlg.destroy();
-    Gtk.main_quit();
   }
   
   void show_bad_version_error(Gtk.Window parent) {
@@ -150,7 +149,6 @@ public class DuplicityInfo : Object
     dlg.format_secondary_text(_("Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found version %d.%d.%.2d"), REQUIRED_MAJOR, REQUIRED_MINOR, REQUIRED_MICRO, major, minor, micro);
     dlg.run();
     dlg.destroy();
-    Gtk.main_quit();
   }
 }
 

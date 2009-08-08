@@ -68,8 +68,6 @@ public class AssistantRestore : AssistantOperation
   construct
   {
     title = _("Restore");
-    
-    set_forward_page_func(do_forward);
   }
   
   protected override void add_setup_pages()
@@ -110,11 +108,7 @@ public class AssistantRestore : AssistantOperation
   {
     var page = make_backup_location_page();
     append_page(page);
-    child_set(page,
-              "title", _("Preferences"),
-              "page-type", Gtk.AssistantPageType.CONTENT,
-              "complete", true,
-              "header-image", op_icon);
+    set_page_title(page, _("Preferences"));
   }
   
   Gtk.Widget make_query_backend_page()
@@ -199,7 +193,7 @@ public class AssistantRestore : AssistantOperation
     return page;
   }
   
-  protected override Gtk.Widget make_confirm_page()
+  protected override Gtk.Widget? make_confirm_page()
   {
     int rows = 0;
     Gtk.Widget label, w;
@@ -256,11 +250,8 @@ public class AssistantRestore : AssistantOperation
   void add_query_backend_page()
   {
     var page = make_query_backend_page();
-    append_page(page);
-    child_set(page,
-              "title", _("Checking for Backups"),
-              "complete", false,
-              "header-image", op_icon);
+    append_page(page, Type.PROGRESS);
+    set_page_title(page, _("Checking for Backups"));
     query_progress_page = page;
   }
   
@@ -268,10 +259,7 @@ public class AssistantRestore : AssistantOperation
   {
     var page = make_date_page();
     append_page(page);
-    child_set(page,
-              "title", _("Restore from When?"),
-              "complete", true,
-              "header-image", op_icon);
+    set_page_title(page, _("Restore from When?"));
     date_page = page;
   }
   
@@ -279,10 +267,7 @@ public class AssistantRestore : AssistantOperation
   {
     var page = make_restore_dest_page();
     append_page(page);
-    child_set(page,
-              "title", _("Restore to Where?"),
-              "complete", true,
-              "header-image", op_icon);
+    set_page_title(page, _("Restore to Where?"));
     restore_dest_page = page;
   }
   
@@ -306,17 +291,9 @@ public class AssistantRestore : AssistantOperation
     return _("Restoring:");
   }
   
-  protected override Gdk.Pixbuf? make_op_icon()
+  protected override void set_op_icon_name()
   {
-    try {
-      var theme = Gtk.IconTheme.get_for_screen(get_screen());
-      return theme.load_icon("deja-dup-restore", 48,
-                             Gtk.IconLookupFlags.FORCE_SIZE);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      return null;
-    }
+    icon_name = "deja-dup-restore";
   }
   
   protected void handle_collection_dates(DejaDup.OperationStatus op, List<string>? dates)
@@ -347,11 +324,8 @@ public class AssistantRestore : AssistantOperation
     this.query_op = null;
     
     if (!error_occurred) {
-      if (success) {
-        var next_page = do_forward(get_current_page());
-        if (next_page >= 0)
-          set_current_page(next_page);
-      }
+      if (success)
+        go_forward();
       else // cancelled
         do_close();
     }
@@ -380,33 +354,7 @@ public class AssistantRestore : AssistantOperation
     }
   }
   
-  protected int do_forward(int n)
-  {
-    if (n >= get_n_pages() - 1)
-      return -1;
-    
-    int next = n + 1;
-    Gtk.Widget next_page = get_nth_page(next);
-    
-    if (next_page == date_page) {
-      if (!got_dates) {
-        // Hmm, we never got a date from querying the backend, but we also
-        // didn't hit an error (since we're about to show this page, and not
-        // the summary/error page).  Skip the date portion, since the backend
-        // must not be capable of giving us dates (duplicity < 0.5.04 couldn't).
-        next_page = get_nth_page(++next);
-      }
-    }
-    
-    // If we're doing a known-file-set restore, assume user wants same-location
-    // restore.
-    if (next_page == restore_dest_page && restore_files != null)
-      next_page = get_nth_page(++next);
-    
-    return next;
-  }
-  
-  protected override void do_prepare(Gtk.Assistant assist, Gtk.Widget page)
+  protected override void do_prepare(Assistant assist, Gtk.Widget page)
   {
     base.do_prepare(assist, page);
     
@@ -415,7 +363,22 @@ public class AssistantRestore : AssistantOperation
       query_timeout_id = 0;
     }
     
-    if (page == confirm_page) {
+
+    if (page == date_page) {
+      // Hmm, we never got a date from querying the backend, but we also
+      // didn't hit an error (since we're about to show this page, and not
+      // the summary/error page).  Skip the date portion, since the backend
+      // must not be capable of giving us dates (duplicity < 0.5.04 couldn't).
+      if (!got_dates)
+        go_forward();
+    }
+    else if (page == restore_dest_page) {
+      // If we're doing a known-file-set restore, assume user wants same-location
+      // restore.
+      if (restore_files != null)
+        go_forward();
+    }
+    else if (page == confirm_page) {
       // When we restore from
       if (got_dates) {
         confirm_date.label = date_combo.get_active_text();
@@ -468,14 +431,14 @@ public class AssistantRestore : AssistantOperation
     }
     else if (page == summary_page) {
       if (error_occurred)
-        assist.child_set(page, "title", _("Restore Failed"));
+        set_page_title(page, _("Restore Failed"));
       else {
-        assist.child_set(page, "title", _("Restore Finished"));
+        set_page_title(page, _("Restore Finished"));
         summary_label.label = _("Your files were successfully restored.");
       }
     }
     else if (page == progress_page) {
-      assist.child_set(page, "title", _("Restoring..."));
+      set_page_title(page, _("Restoring..."));
     }
     else if (page == query_progress_page) {
       query_progress_bar.fraction = 0;

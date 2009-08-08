@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008 Michael Terry <mike@mterry.name>
+    © 2009 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,16 +17,20 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-[CCode (cheader_filename = "hacks.h")]
-string hacks_unix_mount_get_fs_type (string file);
+using GLib;
 
-[CCode (cheader_filename = "hacks.h")]
-void hacks_status_icon_set_tooltip_text (Gtk.StatusIcon icon, string text);
+public class StatusIcon : Gtk.StatusIcon
+{
+  public signal void activated(uint time);
 
-[CCode (cprefix = "G", lower_case_cprefix = "g_", cheader_filename = "glib.h")]
-namespace GLib {
-	public class ParamSpecString : ParamSpec {
-		[CCode (cname = "g_param_spec_string")]
-		public ParamSpecString (string name, string nick, string blurb, string default_value, ParamFlags flags);
-	}
+  construct {
+    icon_name = Config.PACKAGE;
+    popup_menu.connect((s, b, t) => {
+      activated(t);
+    });
+    activate.connect((s) => {
+      activated(0);
+    });
+  }  
 }
+

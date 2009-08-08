@@ -23,12 +23,15 @@ public Gtk.Window toplevel = null;
 
 class DejaDupApp : Object
 {
+  static bool valid_duplicity = false;
   static bool show_version = false;
   static bool restore_mode = false;
+  static bool backup_mode = false;
   static string[] filenames = null;
   static const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
     {"restore", 0, 0, OptionArg.NONE, ref restore_mode, N_("Restore given files"), null},
+    {"backup", 0, 0, OptionArg.NONE, ref backup_mode, N_("Immediately start a backup"), null},
     {"", 0, 0, OptionArg.FILENAME_ARRAY, ref filenames, null, null}, // remaining
     {null}
   };
@@ -52,7 +55,7 @@ class DejaDupApp : Object
     
     return true;
   }
-  
+
   public static int main(string [] args)
   {
     GLib.Intl.textdomain(Config.GETTEXT_PACKAGE);
@@ -85,7 +88,21 @@ class DejaDupApp : Object
     
     Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
     Gtk.Window.set_default_icon_name(Config.PACKAGE);
-    
+
+    /* First, check duplicity version info */
+    Idle.add(() => {
+      valid_duplicity = DejaDup.DuplicityInfo.get_default().check_duplicity_version(toplevel);
+      Gtk.main_quit();
+      return false;
+    });
+
+    Gtk.main();
+
+    if (!valid_duplicity)
+      return 1;
+
+    /* Now proceed with main program */
+
     if (restore_mode) {
       List<File> file_list = new List<File>();
       int i = 0;
@@ -93,13 +110,22 @@ class DejaDupApp : Object
         file_list.append(File.new_for_commandline_arg(filenames[i++]));
       toplevel = new AssistantRestore.with_files(file_list);
       toplevel.destroy.connect((t) => {Gtk.main_quit();});
+      toplevel.show_all();
     }
-    else
+    else if (backup_mode) {
+      toplevel = new AssistantBackup(true);
+      toplevel.destroy.connect((t) => {Gtk.main_quit();});
+      // specifically don't show
+    }
+    else {
       toplevel = new MainWindow();
-    
-    toplevel.show_all();
+      toplevel.show_all();
+    }
+
+    toplevel.destroy.connect((w) => {Gtk.main_quit();});
+
     Gtk.main();
-    
+
     return 0;
   }
 }

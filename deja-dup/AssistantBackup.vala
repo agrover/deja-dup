@@ -21,8 +21,14 @@ using GLib;
 
 public class AssistantBackup : AssistantOperation
 {
+  public bool automatic {get; construct;}
   DejaDup.ToggleGroup periodic_toggle;
   
+  public AssistantBackup(bool automatic)
+  {
+    this.automatic = automatic;
+  }
+
   construct
   {
     title = _("Backup");
@@ -66,7 +72,7 @@ public class AssistantBackup : AssistantOperation
              "border-width", 12);
     
     w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY);
-    w.set_size_request(250, -1);
+    w.set_size_request(250, 100);
     label = new Gtk.Label(_("I_nclude files in folders:"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -79,7 +85,7 @@ public class AssistantBackup : AssistantOperation
     ++rows;
     
     w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY);
-    w.set_size_request(250, -1);
+    w.set_size_request(250, 70);
     label = new Gtk.Label(_("E_xcept files in folders:"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -94,33 +100,25 @@ public class AssistantBackup : AssistantOperation
     return page;
   }
   
-  void add_periodic_checkbox()
-  {
-  }
-  
   protected override void add_custom_config_pages()
   {
+    if (automatic)
+      return;
+
     var page = make_backup_location_page();
     append_page(page);
-    child_set(page,
-              "title", _("Preferences"),
-              "page-type", Gtk.AssistantPageType.CONTENT,
-              "complete", true,
-              "header-image", op_icon);
+    set_page_title(page, _("Preferences"));
     
     page = make_include_exclude_page();
     append_page(page);
-    child_set(page,
-              "title", _("Preferences"),
-              "page-type", Gtk.AssistantPageType.CONTENT,
-              "complete", true,
-              "header-image", op_icon);
-     
-     add_periodic_checkbox();
+    set_page_title(page, _("Preferences"));
   }
   
-  protected override Gtk.Widget make_confirm_page()
+  protected override Gtk.Widget? make_confirm_page()
   {
+    if (automatic)
+      return null;
+
     int rows = 0;
     Gtk.Widget label, w;
     
@@ -174,17 +172,9 @@ public class AssistantBackup : AssistantOperation
     return _("Backing up:");
   }
   
-  protected override Gdk.Pixbuf? make_op_icon()
+  protected override void set_op_icon_name()
   {
-    try {
-      var theme = Gtk.IconTheme.get_for_screen(get_screen());
-      return theme.load_icon("deja-dup-backup", 48,
-                             Gtk.IconLookupFlags.FORCE_SIZE);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      return null;
-    }
+    icon_name = "deja-dup-backup";
   }
   
   void add_periodic_widgets(Gtk.VBox page)
@@ -213,15 +203,16 @@ public class AssistantBackup : AssistantOperation
     hbox.show_all();
   }
   
-  protected override void do_prepare(Gtk.Assistant assist, Gtk.Widget page)
+  protected override void do_prepare(Assistant assist, Gtk.Widget page)
   {
     base.do_prepare(assist, page);
     
     if (page == summary_page) {
-      if (error_occurred)
-        assist.child_set(page, "title", _("Backup Failed"));
+      if (error_occurred) {
+        set_page_title(page, _("Backup Failed"));
+      }
       else {
-        assist.child_set(page, "title", _("Backup Finished"));
+        set_page_title(page, _("Backup Finished"));
         summary_label.label = _("Your files were successfully backed up.");
 
         // Summary page is a vbox, let's add some widgets here to allow user to
@@ -235,10 +226,13 @@ public class AssistantBackup : AssistantOperation
         catch (Error e) {warning("%s\n", e.message);}
         if (!val)
           add_periodic_widgets((Gtk.VBox)page);
+
+        if (automatic)
+          Idle.add(() => {do_close(); return false;});
       }
     }
     else if (page == progress_page) {
-      assist.child_set(page, "title", _("Backing up..."));
+      set_page_title(page, _("Backing up..."));
     }
   }
 }

@@ -28,11 +28,12 @@ public abstract class Operation : Object
   public signal void action_desc_changed(string action);
   public signal void action_file_changed(File file, bool actual);
   public signal void progress(double percent);
-  public signal bool passphrase_required();
+  public signal void passphrase_required();
   public signal bool backend_password_required();
   
   public Gtk.Window toplevel {get; construct;}
   public uint uppermost_xid {get; construct;}
+  public bool needs_password {get; private set;}
   
   public enum Mode {
     INVALID,
@@ -72,12 +73,13 @@ public abstract class Operation : Object
     
     // Default is to go ahead with password collection.  This will be
     // overridden by anyone else that connects to this signal.
-    passphrase_required.connect((o) => {return true;});
     backend_password_required.connect((o) => {return true;});
   }
   
   public virtual void start() throws Error
   {
+    action_desc_changed(_("Preparing..."));
+
     if (backend == null) {
       done(false);
       return;
@@ -93,10 +95,13 @@ public abstract class Operation : Object
     
     // Get encryption passphrase if needed
     var client = get_gconf_client();
-    if (client.get_bool(ENCRYPT_KEY) && passphrase == null)
-      get_passphrase(); // will call continue_with_passphrase when ready
+    if (client.get_bool(ENCRYPT_KEY) && passphrase == null) {
+      needs_password = true;
+      Timeout.add_seconds(1, () => {passphrase_required(); return false;});
+//      passphrase_required(); // will call continue_with_passphrase when ready
+    }
     else
-      continue_with_passphrase();
+      continue_with_passphrase(passphrase);
   }
   
   public void cancel()
@@ -119,9 +124,17 @@ public abstract class Operation : Object
     });
   }
   
-  void continue_with_passphrase() throws Error
+  public void continue_with_passphrase(string? passphrase)
   {
-    backend.get_envp();
+    needs_password = false;
+    this.passphrase = passphrase;
+    try {
+      backend.get_envp();
+    }
+    catch (Error e) {
+      raise_error(e.message, null);
+      done(false);
+    }
   }
   
   void continue_with_envp(DejaDup.Backend b, bool success, List<string>? envp, string? error) {
@@ -173,74 +186,6 @@ public abstract class Operation : Object
   protected virtual List<string>? make_argv() throws Error
   {
     return null;
-  }
-  
-  void found_passphrase(GnomeKeyring.Result result, string? str)
-  {
-    if (result == GnomeKeyring.Result.OK)
-      passphrase = str;
-    
-    try {
-      if (passphrase != null)
-        continue_with_passphrase();
-      else {
-        bool can_ask_now = passphrase_required();
-        if (can_ask_now)
-          ask_passphrase();
-        // else wait for consumer of Operation to call ask_passphrase
-      }
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
-  }
-  
-  void get_passphrase()
-  {
-    // First, try user's keyring
-    GnomeKeyring.find_password(PASSPHRASE_SCHEMA,
-                               found_passphrase,
-                               "owner", Config.PACKAGE,
-                               "type", "passphrase");
-  }
-  
-  void save_password_callback(GnomeKeyring.Result result)
-  {
-  }
-  
-  public void ask_passphrase() throws Error
-  {
-    // Ask user
-    var dlg = new Gnome.PasswordDialog(_("Encryption Password"),
-                                       _("Enter the password used to encrypt your backup files."),
-                                       "", "", false);
-    dlg.transient_parent = toplevel;
-    dlg.show_remember = true;
-    dlg.show_username = false;
-    if (!dlg.run_and_block()) {
-      done(false);
-      return;
-    }
-    
-    passphrase = dlg.get_password();
-    passphrase = passphrase.strip();
-    
-    if (passphrase != "") {
-      // Save it
-      var remember = dlg.get_remember();
-      if (remember != Gnome.PasswordDialogRemember.NOTHING) {
-        string where = remember == Gnome.PasswordDialogRemember.SESSION ?
-                                   "session" : GnomeKeyring.DEFAULT;
-        GnomeKeyring.store_password(PASSPHRASE_SCHEMA,
-                                    where,
-                                    _("Déjà Dup backup passphrase"),
-                                    passphrase, save_password_callback,
-                                    "owner", Config.PACKAGE,
-                                    "type", "passphrase");
-      }
-    }
-    
-    continue_with_passphrase();
   }
   
   public void ask_backend_password() throws Error

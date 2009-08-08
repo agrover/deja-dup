@@ -95,16 +95,6 @@ public class MainWindow : Gtk.Window
     backup_button.grab_focus();
     
     add (vb);
-    
-    Idle.add(check_duplicity_version);
-    
-    destroy.connect(Gtk.main_quit);
-  }
-  
-  bool check_duplicity_version()
-  {
-    DejaDup.DuplicityInfo.get_default().check_duplicity_version(this);
-    return false;
   }
   
   void on_backup(Gtk.Action action)
@@ -114,10 +104,7 @@ public class MainWindow : Gtk.Window
   
   void ask_backup()
   {
-    var dlg = new AssistantBackup();
-    dlg.modal = true;
-    dlg.transient_for = this;
-    dlg.show_all();
+    show_assistant(new AssistantBackup(false));
   }
   
   void on_restore(Gtk.Action action)
@@ -127,12 +114,29 @@ public class MainWindow : Gtk.Window
   
   void ask_restore()
   {
-    var dlg = new AssistantRestore();
-    dlg.modal = true;
-    dlg.transient_for = this;
-    dlg.show_all();
+    show_assistant(new AssistantRestore());
   }
   
+  void show_assistant(AssistantOperation win)
+  {
+    int x, y;
+    this.get_position(out x, out y);
+    win.move(x, y);
+    win.show();
+    this.hide();
+    win.present();
+    win.closing.connect((w, succeeded) => {
+      if (succeeded)
+        this.destroy();
+      else {
+        int x2, y2;
+        w.get_position(out x2, out y2);
+        this.move(x2, y2);
+        this.show();
+      }
+    });
+  }
+
   void on_about(Gtk.Action action)
   {
     DejaDup.show_about(this, this);

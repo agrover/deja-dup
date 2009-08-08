@@ -27,6 +27,7 @@ VALA_CFLAGS = \
 	--pkg libgnomeui-2.0 \
 	--pkg gnome-keyring-1 \
 	--pkg libdeja-dup \
+	--pkg PassphraseSchema \
 	--pkg unix \
 	--pkg hacks \
 	--pkg config
@@ -38,10 +39,12 @@ AM_CFLAGS = \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 deja_dup_VALASOURCES = \
+	Assistant.vala \
 	AssistantBackup.vala \
 	AssistantOperation.vala \
 	AssistantRestore.vala \
 	MainWindow.vala \
+	StatusIcon.vala \
 	main.vala
 
 BUILT_SOURCES = \

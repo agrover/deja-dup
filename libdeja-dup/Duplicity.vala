@@ -397,6 +397,7 @@ public class Duplicity : Object
 
   protected static const int ERROR_RESTORE_DIR_NOT_FOUND = 19;
   protected static const int ERROR_EXCEPTION = 30;
+  protected static const int ERROR_GPG = 31;
   protected static const int INFO_PROGRESS = 2;
   protected static const int INFO_COLLECTION_STATUS = 3;
   protected static const int INFO_DIFF_FILE_NEW = 4;
@@ -455,6 +456,9 @@ public class Duplicity : Object
         if (restore_files != null)
           text = _("Could not restore '%s': File not found in backup").printf(
                    restore_files.data.get_parse_name());
+        break;
+      case ERROR_GPG:
+        text = _("Bad encryption passphrase");
         break;
       }
     }

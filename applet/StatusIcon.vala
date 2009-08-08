@@ -210,7 +210,7 @@ public class StatusIcon : Gtk.StatusIcon
   {
     try {
       if (need_passphrase) {
-        op.ask_passphrase();
+        //op.ask_passphrase();
         need_passphrase = false;
       }
       else

@@ -136,8 +136,8 @@ def start_deja_dup_prefs():
   ldtp.waittillguiexist('frmDéjàDupPreferences')
 
 def start_deja_dup_applet():
-  ldtp.launchapp('deja-dup-applet')
-  ldtp.appundertest('deja-dup-applet')
+  ldtp.launchapp('deja-dup', arg=['--backup'], delay=0)
+  ldtp.appundertest('deja-dup')
 
 def create_local_config(dest='/', includes=None, excludes=None):
   if dest is None:
@@ -320,3 +320,14 @@ def restore_specific(path, date=None):
 def file_equals(path, contents):
   f = open(path)
   return f.read() == contents
+
+def wait_for_quit():
+  cmd = ['pgrep', '-n', '-x', 'deja-dup']
+  pid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0].strip()
+  cmd = ['ps', '-p', pid]
+  while True:
+    sub = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    if sub.wait() == 0 and sub.communicate()[0].count('defunct') == 0:
+      ldtp.wait(1)
+    else:
+      return
