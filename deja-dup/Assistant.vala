@@ -51,6 +51,9 @@ public abstract class Assistant : Gtk.Dialog
     public Type type;
   }
 
+  bool interrupted_from_hidden = false;
+  weak List<PageInfo> interrupted;
+
   weak List<PageInfo> current;
   List<PageInfo> infos;
 
@@ -90,9 +93,6 @@ public abstract class Assistant : Gtk.Dialog
     ebox.modify_bg(Gtk.StateType.NORMAL, ebox.style.bg[Gtk.StateType.SELECTED]);
     ebox.modify_fg(Gtk.StateType.NORMAL, ebox.style.fg[Gtk.StateType.SELECTED]);
 
-    // disable default delete_event handler
-    destroy_event.connect((w, e) => {return true;});
-
     response.connect(handle_response);
   }
 
@@ -120,18 +120,33 @@ public abstract class Assistant : Gtk.Dialog
 
   public void go_back()
   {
-    if (current.prev != null) {
+    weak List<PageInfo> next;
+    if (interrupted != null)
+      next = interrupted.prev;
+    else
+      next = current.prev;
+
+    if (next != null) {
       last_op_was_back = true;
-      current = current.prev;
+      current = next;
       page_changed();
     }
   }
 
   public void go_forward()
   {
-    if (current.next != null) {
+    weak List<PageInfo> next;
+    if (interrupted != null) {
+      next = interrupted;
+      if (interrupted_from_hidden)
+        hide();
+    }
+    else
+      next = current.next;
+
+    if (next != null) {
       last_op_was_back = false;
-      current = current.next;
+      current = next;
       page_changed();
     }
   }
@@ -158,6 +173,17 @@ public abstract class Assistant : Gtk.Dialog
     }
   }
 
+  public void interrupt(Gtk.Widget page)
+  {
+    weak List<PageInfo> was = current;
+    go_to_page(page);
+    if (!visible) { // If we are interrupting from a hidden mode
+      interrupted_from_hidden = true;
+      forward_button.set("label", "Conti_nue");
+    }
+    interrupted = was;
+  }
+
   void use_title(PageInfo info)
   {
     var title = Markup.printf_escaped("<span size=\"xx-large\" weight=\"ultrabold\">%s</span>", info.title);
@@ -168,6 +194,8 @@ public abstract class Assistant : Gtk.Dialog
   {
     return_if_fail(current != null);
 
+    interrupted = null;
+    interrupted_from_hidden = false;
     weak PageInfo info = current.data;
 
     prepare(info.page);

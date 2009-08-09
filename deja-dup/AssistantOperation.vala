@@ -28,6 +28,7 @@ public abstract class AssistantOperation : Assistant
   bool succeeded = false;
 
   Gtk.Entry encrypt_entry;
+  Gtk.CheckButton encrypt_remember;
   protected Gtk.Widget password_page {get; private set;}
 
   Gtk.Label progress_label;
@@ -239,7 +240,10 @@ public abstract class AssistantOperation : Assistant
     ++rows;
     encrypt_entry = (Gtk.Entry)w;
 
-    
+    w = new Gtk.CheckButton.with_mnemonic(_("_Remember password"));
+    page.attach(w, 0, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
+    ++rows;
+    encrypt_remember = (Gtk.CheckButton)w;
 
     return page;
   }
@@ -476,7 +480,7 @@ public abstract class AssistantOperation : Assistant
 
   void ask_passphrase()
   {
-    go_to_page(password_page);
+    interrupt(password_page);
     force_visible(false);
   }
 
@@ -487,17 +491,14 @@ public abstract class AssistantOperation : Assistant
     
     if (passphrase != "") {
       // Save it
-/*      var remember = dlg.get_remember();
-      if (remember != Gnome.PasswordDialogRemember.NOTHING) {
-        string where = remember == Gnome.PasswordDialogRemember.SESSION ?
-                                   "session" : GnomeKeyring.DEFAULT;
+      if (encrypt_remember.active) {
         GnomeKeyring.store_password(PASSPHRASE_SCHEMA,
-                                    where,
+                                    GnomeKeyring.DEFAULT,
                                     _("Déjà Dup backup passphrase"),
                                     passphrase, save_password_callback,
                                     "owner", Config.PACKAGE,
                                     "type", "passphrase");
-      }*/
+      }
     }
     
     op.continue_with_passphrase(passphrase);
