@@ -176,8 +176,9 @@ static bool kickoff()
   // Don't run right now if an applet is already running
   if (pid == (Pid)0) {
     try {
-      string[] argv = new string[2];
-      argv[0] = "deja-dup-applet";
+      string[] argv = new string[3];
+      argv[0] = "deja-dup";
+      argv[2] = "--backup";
       argv[1] = null;
       Process.spawn_async(null, argv, null,
                           SpawnFlags.SEARCH_PATH |
@@ -192,7 +193,7 @@ static bool kickoff()
     }
   }
   else
-    debug("Not rerunning deja-dup-applet, already doing so.");
+    debug("Not rerunning deja-dup, already doing so.");
   
   return false;
 }
