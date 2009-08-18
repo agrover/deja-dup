@@ -25,6 +25,7 @@ AC_CONFIG_MACRO_DIR([m4])
 
 # Sets up automake.
 AM_INIT_AUTOMAKE([1.9 foreign dist-bzip2])
+m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 GNOME_DOC_INIT
 

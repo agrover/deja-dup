@@ -39,13 +39,12 @@ deja_dup_applet_VALASOURCES = \
 	applet.vala
 
 BUILT_SOURCES = \
-	deja-dup-applet.stamp
+	vala.stamp
 
 deja_dup_applet_SOURCES = \
-	$(deja_dup_applet_VALASOURCES:.vala=.c) \
-	$(deja_dup_applet_VALASOURCES)
+	$(deja_dup_applet_VALASOURCES:.vala=.c)
 
-deja-dup-applet.stamp: $(deja_dup_applet_VALASOURCES)
+vala.stamp: $(deja_dup_applet_VALASOURCES)
 if USE_VALAC
 	$(VALAC) -C $(VALA_CFLAGS) $^
 	touch $@
@@ -56,7 +55,7 @@ endif
 
 deja_dup_applet_LDADD = $(APPLET_LIBS) @INTLLIBS@ $(top_builddir)/libdeja-dup/libdeja-dup.la
 
-EXTRA_DIST = deja-dup-applet.stamp
+EXTRA_DIST = vala.stamp $(deja_dup_applet_VALASOURCES)
 DISTCLEANFILES = \
 	$(BUILT_SOURCES) \
 	$(deja_dup_applet_VALASOURCES:.vala=.c) \

@@ -32,13 +32,12 @@ deja_dup_monitor_VALASOURCES = \
 	monitor.vala
 
 BUILT_SOURCES = \
-	deja-dup-monitor.stamp
+	vala.stamp
 
 deja_dup_monitor_SOURCES = \
-	$(deja_dup_monitor_VALASOURCES:.vala=.c) \
-	$(deja_dup_monitor_VALASOURCES)
+	$(deja_dup_monitor_VALASOURCES:.vala=.c)
 
-deja-dup-monitor.stamp: $(deja_dup_monitor_VALASOURCES)
+vala.stamp: $(deja_dup_monitor_VALASOURCES)
 if USE_VALAC
 	$(VALAC) -C $(VALA_CFLAGS) $^
 	touch $@
@@ -49,7 +48,7 @@ endif
 
 deja_dup_monitor_LDADD = $(MONITOR_LIBS) @INTLLIBS@
 
-EXTRA_DIST = deja-dup-monitor.stamp
+EXTRA_DIST = vala.stamp $(deja_dup_monitor_VALASOURCES)
 DISTCLEANFILES = \
 	$(BUILT_SOURCES) \
 	$(deja_dup_monitor_VALASOURCES:.vala=.c) \

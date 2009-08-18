@@ -135,7 +135,7 @@ public class StatusIcon : Gtk.StatusIcon
     }
   }
   
-  bool notify_passphrase(DejaDup.Operation op) {
+  void notify_passphrase(DejaDup.Operation op) {
     need_passphrase = true;
     set_blinking(true);
     activate.connect(activate_enter);
@@ -151,7 +151,6 @@ public class StatusIcon : Gtk.StatusIcon
     catch (Error e) {
       warning("%s\n", e.message);
     }
-    return false; // don't immediately ask user, wait for our response
   }
   
   bool notify_backend_password(DejaDup.Operation op) {

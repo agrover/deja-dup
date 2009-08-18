@@ -48,13 +48,12 @@ deja_dup_VALASOURCES = \
 	main.vala
 
 BUILT_SOURCES = \
-	deja-dup.stamp
+	vala.stamp
 
 deja_dup_SOURCES = \
-	$(deja_dup_VALASOURCES:.vala=.c) \
-	$(deja_dup_VALASOURCES)
+	$(deja_dup_VALASOURCES:.vala=.c)
 
-deja-dup.stamp: $(deja_dup_VALASOURCES)
+vala.stamp: $(deja_dup_VALASOURCES)
 if USE_VALAC
 	$(VALAC) -C $(VALA_CFLAGS) $^
 	touch $@
@@ -65,7 +64,7 @@ endif
 
 deja_dup_LDADD = $(DUP_LIBS) @INTLLIBS@ $(top_builddir)/libdeja-dup/libdeja-dup.la
 
-EXTRA_DIST = deja-dup.stamp
+EXTRA_DIST = vala.stamp $(deja_dup_VALASOURCES)
 DISTCLEANFILES = \
 	$(BUILT_SOURCES) \
 	$(deja_dup_VALASOURCES:.vala=.c) \

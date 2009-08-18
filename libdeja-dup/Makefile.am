@@ -79,8 +79,7 @@ libdeja_dup_la_SOURCES = \
 	hacks.c hacks.h \
 	PassphraseSchema.c PassphraseSchema.h \
 	deja-dup.h \
-	$(libdeja_dup_la_VALASOURCES:.vala=.c) \
-	$(libdeja_dup_la_VALASOURCES)
+	$(libdeja_dup_la_VALASOURCES:.vala=.c)
 
 vala.stamp: $(libdeja_dup_la_VALASOURCES)
 if USE_VALAC
@@ -93,7 +92,7 @@ endif
 
 libdeja_dup_la_LIBADD = $(LIBRARY_LIBS) @INTLLIBS@
 
-EXTRA_DIST = vala.stamp
+EXTRA_DIST = vala.stamp $(libdeja_dup_la_VALASOURCES)
 DISTCLEANFILES = \
 	$(BUILT_SOURCES) \
 	$(libdeja_dup_la_VALASOURCES:.vala=.c) \
