@@ -1,0 +1,31 @@
+#!/bin/sh
+# -*- Mode: sh; indent-tabs-mode: nil; tab-width: 2 -*-
+
+# This script builds daily debian packages for testing.  It should be run as a
+# cron job.  It requires bzr-builder to be installed.
+
+# Should be called like so:
+# ./recipe 11 7F10DA66 'intrepid jaunty karmic'
+
+if [ $# -ne 3 ]; then
+  echo "recipe should be given exactly 3 arguments, DEJAVER, KEY, and DISTROS"
+  exit 1
+fi
+
+DEJAVER="$1" # which version is unreleased that we're heading towards
+KEY="$2"
+DISTROS="$3" # a list of distros like 'intrepid jaunty karmic'
+
+WORKDIR=$(mktemp -d)
+RECIPE="$WORKDIR/recipe"
+BUILDDIR="$WORKDIR/build"
+
+for distro in $DISTROS; do
+  recipetext="# bzr-builder format 0.1 deb-version ${DEJAVER}~bzr{revno}-0${distro}{time}
+lp:deja-dup"
+  echo "$recipetext" > "$RECIPE"
+  bzr dailydeb "$RECIPE" "$BUILDDIR" --key-id=$KEY --distribution=$distro --dput=ppa:deja-dup-team/testing #&>/dev/null
+done
+
+# cleanup
+rm -rf "$WORKDIR"
