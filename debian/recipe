@@ -7,6 +7,8 @@
 # Should be called like so:
 # ./recipe 11 7F10DA66 'intrepid jaunty karmic'
 
+set -e
+
 if [ $# -ne 3 ]; then
   echo "recipe should be given exactly 3 arguments, DEJAVER, KEY, and DISTROS"
   exit 1
@@ -19,14 +21,32 @@ DISTROS="$3" # a list of distros like 'intrepid jaunty karmic'
 WORKDIR=$(mktemp -d)
 RECIPE="$WORKDIR/recipe"
 BUILDDIR="$WORKDIR/build"
+EXTRACTDIR="$WORKDIR/extract"
+
+cleanup() {
+  #echo "Worked in $WORKDIR"
+  rm -rf "$WORKDIR"
+}
+
+trap cleanup INT TERM EXIT
 
 for distro in $DISTROS; do
-  recipetext="# bzr-builder format 0.1 deb-version ${DEJAVER}~bzr{revno}${distro}{time}
+  # We build a dist tarball and use that instead because generating the dist
+  # tarball does a lot of things we want -- ship Vala and C code, generate
+  # help documentation, and gives us just one code path for distributing code
+  # (rather than having two ways of source->deb: bzr->deb and tarball->deb).
+  #
+  # I know it seems silly to 'run make && make dist' but without the original
+  # make, the C sources don't get generated.  This is basically a bug with our
+  # automake scripts.
+  recipetext="# bzr-builder format 0.2 deb-version ${DEJAVER}~bzr{revno}${distro}{time}
 lp:deja-dup
-run ./autogen.sh"
+run ./autogen.sh
+run make && make dist
+run tar xj -C $EXTRACTDIR -f *.tar.bz2 && cp -r debian $EXTRACTDIR/*/
+run rm -r * && mv $EXTRACTDIR/*/* ."
   echo "$recipetext" > "$RECIPE"
-  bzr dailydeb "$RECIPE" "$BUILDDIR" --key-id=$KEY --distribution=$distro --dput=ppa:deja-dup-team/testing #&>/dev/null
+  mkdir "$EXTRACTDIR"
+  bzr dailydeb "$RECIPE" "$BUILDDIR" --key-id=$KEY --distribution=$distro --dput=ppa:deja-dup-team/testing >/dev/null 2>/dev/null
+  rm -r "$EXTRACTDIR"
 done
-
-# cleanup
-rm -rf "$WORKDIR"
