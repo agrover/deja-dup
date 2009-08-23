@@ -93,8 +93,3 @@ endif
 libdeja_dup_la_LIBADD = $(LIBRARY_LIBS) @INTLLIBS@
 
 EXTRA_DIST = vala.stamp $(libdeja_dup_la_VALASOURCES)
-DISTCLEANFILES = \
-	$(BUILT_SOURCES) \
-	$(libdeja_dup_la_VALASOURCES:.vala=.c) \
-	$(libdeja_dup_la_VALASOURCES:.vala=.h)
-

@@ -56,8 +56,3 @@ endif
 deja_dup_applet_LDADD = $(APPLET_LIBS) @INTLLIBS@ $(top_builddir)/libdeja-dup/libdeja-dup.la
 
 EXTRA_DIST = vala.stamp $(deja_dup_applet_VALASOURCES)
-DISTCLEANFILES = \
-	$(BUILT_SOURCES) \
-	$(deja_dup_applet_VALASOURCES:.vala=.c) \
-	$(deja_dup_applet_VALASOURCES:.vala=.h)
-

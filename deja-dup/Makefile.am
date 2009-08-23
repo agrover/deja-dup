@@ -65,8 +65,3 @@ endif
 deja_dup_LDADD = $(DUP_LIBS) @INTLLIBS@ $(top_builddir)/libdeja-dup/libdeja-dup.la
 
 EXTRA_DIST = vala.stamp $(deja_dup_VALASOURCES)
-DISTCLEANFILES = \
-	$(BUILT_SOURCES) \
-	$(deja_dup_VALASOURCES:.vala=.c) \
-	$(deja_dup_VALASOURCES:.vala=.h)
-

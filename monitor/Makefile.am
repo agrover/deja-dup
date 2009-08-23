@@ -49,8 +49,3 @@ endif
 deja_dup_monitor_LDADD = $(MONITOR_LIBS) @INTLLIBS@
 
 EXTRA_DIST = vala.stamp $(deja_dup_monitor_VALASOURCES)
-DISTCLEANFILES = \
-	$(BUILT_SOURCES) \
-	$(deja_dup_monitor_VALASOURCES:.vala=.c) \
-	$(deja_dup_monitor_VALASOURCES:.vala=.h)
-
