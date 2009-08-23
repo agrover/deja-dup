@@ -21,7 +21,7 @@ RECIPE="$WORKDIR/recipe"
 BUILDDIR="$WORKDIR/build"
 
 for distro in $DISTROS; do
-  recipetext="# bzr-builder format 0.1 deb-version ${DEJAVER}~bzr{revno}-0${distro}{time}
+  recipetext="# bzr-builder format 0.1 deb-version ${DEJAVER}~bzr{revno}${distro}{time}
 lp:deja-dup"
   echo "$recipetext" > "$RECIPE"
   bzr dailydeb "$RECIPE" "$BUILDDIR" --key-id=$KEY --distribution=$distro --dput=ppa:deja-dup-team/testing #&>/dev/null
