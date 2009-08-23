@@ -22,7 +22,8 @@ BUILDDIR="$WORKDIR/build"
 
 for distro in $DISTROS; do
   recipetext="# bzr-builder format 0.1 deb-version ${DEJAVER}~bzr{revno}${distro}{time}
-lp:deja-dup"
+lp:deja-dup
+run ./autogen.sh"
   echo "$recipetext" > "$RECIPE"
   bzr dailydeb "$RECIPE" "$BUILDDIR" --key-id=$KEY --distribution=$distro --dput=ppa:deja-dup-team/testing #&>/dev/null
 done
