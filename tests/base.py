@@ -277,45 +277,46 @@ def guivisible(frm, obj):
 
 def backup_simple():
   ldtp.click('frmDéjàDup', 'btnBackup')
-  assert ldtp.waittillguiexist('frmBackup')
-  if guivisible('frmBackup', 'btnLast'):
-    ldtp.click('frmBackup', 'btnLast')
-  ldtp.click('frmBackup', 'btnApply')
-  assert ldtp.waittillguiexist('frmBackup', 'lblYourfilesweresuccessfullybackedup.', guiTimeOut=200)
-  assert guivisible('frmBackup', 'lblYourfilesweresuccessfullybackedup.')
-  ldtp.click('frmBackup', 'btnClose')
+  assert ldtp.waittillguiexist('dlgBackup')
+  if guivisible('dlgBackup', 'lblPreferences'):
+    ldtp.click('dlgBackup', 'btnForward')
+    ldtp.click('dlgBackup', 'btnForward')
+  ldtp.click('dlgBackup', 'btnApply')
+  assert ldtp.waittillguiexist('dlgBackup', 'lblYourfilesweresuccessfullybackedup.', guiTimeOut=200)
+  assert guivisible('dlgBackup', 'lblYourfilesweresuccessfullybackedup.')
+  ldtp.click('dlgBackup', 'btnClose')
 
 def restore_simple(path, date=None):
   ldtp.click('frmDéjàDup', 'btnRestore')
-  assert ldtp.waittillguiexist('frmRestore')
-  if ldtp.guiexist('frmRestore', 'pnlPreferences'):
-    ldtp.click('frmRestore', 'btnForward')
-  assert ldtp.waittillguiexist('frmRestore', 'flrRestorefromWhen?')
+  assert ldtp.waittillguiexist('dlgRestore')
+  if ldtp.guiexist('dlgRestore', 'lblPreferences'):
+    ldtp.click('dlgRestore', 'btnForward')
+  assert ldtp.waittillguiexist('dlgRestore', 'flrRestorefromWhen?')
   if date:
-    ldtp.comboselect('frmRestore', 'cboDate', date)
-  ldtp.click('frmRestore', 'btnForward')
-  ldtp.click('frmRestore', 'rbtnRestoretospecificfolder')
-  ldtp.comboselect('frmRestore', 'cboRestorefolder', 'Other...')
+    ldtp.comboselect('dlgRestore', 'cboDate', date)
+  ldtp.click('dlgRestore', 'btnForward')
+  ldtp.click('dlgRestore', 'rbtnRestoretospecificfolder')
+  ldtp.comboselect('dlgRestore', 'cboRestorefolder', 'Other...')
   assert ldtp.waittillguiexist('dlgChoosedestinationforrestoredfiles')
   ldtp.settextvalue('dlgChoosedestinationforrestoredfiles', 'txtLocation', path)
   ldtp.click('dlgChoosedestinationforrestoredfiles', 'btnOpen')
-  ldtp.click('frmRestore', 'btnForward')
-  ldtp.click('frmRestore', 'btnApply')
-  assert ldtp.waittillguiexist('frmRestore', 'lblYourfilesweresuccessfullyrestored.')
-  assert guivisible('frmRestore', 'lblYourfilesweresuccessfullyrestored.')
-  ldtp.click('frmRestore', 'btnClose')
+  ldtp.click('dlgRestore', 'btnForward')
+  ldtp.click('dlgRestore', 'btnApply')
+  assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
+  assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
+  ldtp.click('dlgRestore', 'btnClose')
 
 def restore_specific(path, date=None):
-  if ldtp.guiexist('frmRestore', 'pnlPreferences'):
-    ldtp.click('frmRestore', 'btnForward')
-  assert ldtp.waittillguiexist('frmRestore', 'flrRestorefromWhen?')
+  if ldtp.guiexist('dlgRestore', 'lblPreferences'):
+    ldtp.click('dlgRestore', 'btnForward')
+  assert ldtp.waittillguiexist('dlgRestore', 'flrRestorefromWhen?')
   if date:
-    ldtp.comboselect('frmRestore', 'cboDate', date)
-  ldtp.click('frmRestore', 'btnForward')
-  ldtp.click('frmRestore', 'btnApply')
-  assert ldtp.waittillguiexist('frmRestore', 'lblYourfilesweresuccessfullyrestored.')
-  assert guivisible('frmRestore', 'lblYourfilesweresuccessfullyrestored.')
-  ldtp.click('frmRestore', 'btnClose')
+    ldtp.comboselect('dlgRestore', 'cboDate', date)
+  ldtp.click('dlgRestore', 'btnForward')
+  ldtp.click('dlgRestore', 'btnApply')
+  assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
+  assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
+  ldtp.click('dlgRestore', 'btnClose')
 
 def file_equals(path, contents):
   f = open(path)
