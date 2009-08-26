@@ -272,12 +272,15 @@ def last_date_change(to_date):
         os.rename(f, newname)
 
 def guivisible(frm, obj):
+  if obj not in ldtp.getobjectlist(frm):
+    return False
   states = ldtp.getallstates(frm, obj)
   return ldtp.state.VISIBLE in states
 
 def backup_simple():
   ldtp.click('frmDéjàDup', 'btnBackup')
   assert ldtp.waittillguiexist('dlgBackup')
+  ldtp.remap('dlgBackup') # in case this is second time we've run it
   if guivisible('dlgBackup', 'lblPreferences'):
     ldtp.click('dlgBackup', 'btnForward')
     ldtp.click('dlgBackup', 'btnForward')
@@ -285,10 +288,12 @@ def backup_simple():
   assert ldtp.waittillguiexist('dlgBackup', 'lblYourfilesweresuccessfullybackedup.', guiTimeOut=200)
   assert guivisible('dlgBackup', 'lblYourfilesweresuccessfullybackedup.')
   ldtp.click('dlgBackup', 'btnClose')
+  ldtp.waittillguinotexist('dlgBackup')
 
 def restore_simple(path, date=None):
   ldtp.click('frmDéjàDup', 'btnRestore')
   assert ldtp.waittillguiexist('dlgRestore')
+  ldtp.remap('dlgRestore') # in case this is second time we've run it
   if ldtp.guiexist('dlgRestore', 'lblPreferences'):
     ldtp.click('dlgRestore', 'btnForward')
   assert ldtp.waittillguiexist('dlgRestore', 'flrRestorefromWhen?')
@@ -305,6 +310,7 @@ def restore_simple(path, date=None):
   assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
   assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
   ldtp.click('dlgRestore', 'btnClose')
+  ldtp.waittillguinotexist('dlgRestore')
 
 def restore_specific(path, date=None):
   if ldtp.guiexist('dlgRestore', 'lblPreferences'):

@@ -31,9 +31,9 @@ def max_inc():
   base.backup_simple()
   # Change date to maximum allowed incremental, confirm next is incremental
   base.last_date_change('%d days ago' % (max_allowed))
+  base.start_deja_dup()
   base.backup_simple()
   rv = base.last_type() == 'inc'
-  print base.last_type(), rv
   return rv
 
 def max_full():
@@ -41,6 +41,7 @@ def max_full():
   base.backup_simple()
   # Change date to maximum allowed incremental+1, confirm next is full
   base.last_date_change('%d days ago' % (max_allowed+1))
+  base.start_deja_dup()
   base.backup_simple()
   rv = base.last_type() == 'full'
   return rv
@@ -51,6 +52,7 @@ def half_inc():
   base.backup_simple()
   # Change date to maximum allowed incremental, confirm next is inc
   base.last_date_change('%d days ago' % (10))
+  base.start_deja_dup()
   base.backup_simple()
   rv = base.last_type() == 'inc'
   return rv
@@ -61,6 +63,7 @@ def half_full():
   base.backup_simple()
   # Change date to maximum allowed incremental+1, confirm next is full
   base.last_date_change('%d days ago' % (11))
+  base.start_deja_dup()
   base.backup_simple()
   rv = base.last_type() == 'full'
   return rv
@@ -72,6 +75,7 @@ def period_inc():
   base.backup_simple()
   # Change date to maximum allowed incremental, confirm next is inc
   base.last_date_change('%d days ago' % (7*6))
+  base.start_deja_dup()
   base.backup_simple()
   rv = base.last_type() == 'inc'
   return rv
@@ -83,6 +87,7 @@ def period_full():
   base.backup_simple()
   # Change date to maximum allowed incremental+1, confirm next is full
   base.last_date_change('%d days ago' % ((7*6)+1))
+  base.start_deja_dup()
   base.backup_simple()
   rv = base.last_type() == 'full'
   return rv
