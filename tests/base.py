@@ -124,11 +124,11 @@ def get_gconf_value(key):
   pout = sp.communicate()[0]
   return pout.strip()
 
-def start_deja_dup(args=['']):
+def start_deja_dup(args=[''], waitfor='frmDéjàDup'):
   ldtp.launchapp('deja-dup', arg=args, delay=0)
   ldtp.appundertest('deja-dup')
-  if '--restore' not in args: # bit of a hack, but...
-    ldtp.waittillguiexist('frmDéjàDup')
+  if waitfor is not None:
+    ldtp.waittillguiexist(waitfor)
 
 def start_deja_dup_prefs():
   ldtp.launchapp('deja-dup-preferences', delay=0)
@@ -296,7 +296,7 @@ def restore_simple(path, date=None):
   ldtp.remap('dlgRestore') # in case this is second time we've run it
   if ldtp.guiexist('dlgRestore', 'lblPreferences'):
     ldtp.click('dlgRestore', 'btnForward')
-  assert ldtp.waittillguiexist('dlgRestore', 'flrRestorefromWhen?')
+  assert ldtp.waittillguiexist('dlgRestore', 'lblRestorefromWhen?')
   if date:
     ldtp.comboselect('dlgRestore', 'cboDate', date)
   ldtp.click('dlgRestore', 'btnForward')
@@ -315,7 +315,7 @@ def restore_simple(path, date=None):
 def restore_specific(path, date=None):
   if ldtp.guiexist('dlgRestore', 'lblPreferences'):
     ldtp.click('dlgRestore', 'btnForward')
-  assert ldtp.waittillguiexist('dlgRestore', 'flrRestorefromWhen?')
+  assert ldtp.waittillguiexist('dlgRestore', 'lblRestorefromWhen?')
   if date:
     ldtp.comboselect('dlgRestore', 'cboDate', date)
   ldtp.click('dlgRestore', 'btnForward')
