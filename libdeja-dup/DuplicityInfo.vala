@@ -140,7 +140,7 @@ public class DuplicityInfo : Object
     dlg.destroy();
   }
   
-  void show_bad_version_error(Gtk.Window parent) {
+  void show_bad_version_error(Gtk.Window? parent) {
     Gtk.MessageDialog dlg = new Gtk.MessageDialog (parent,
         Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL,
         Gtk.MessageType.ERROR,
