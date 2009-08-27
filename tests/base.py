@@ -86,9 +86,10 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
   os.system('gconftool-2 --makefile-install-rule %s > /dev/null' % ('%s/../data/deja-dup.schemas.in' % srcdir))
   
   if backend == 'file':
-    create_local_config(dest, sources)
+    create_local_config(dest)
   elif backend == 'ssh':
-    create_ssh_config(dest, sources);
+    create_ssh_config(dest)
+  set_include_exclude(include=sources)
   
   if encrypt is not None:
     set_gconf_value("encrypt", 'true' if encrypt else 'false', 'bool')
@@ -139,7 +140,7 @@ def start_deja_dup_applet():
   ldtp.launchapp('deja-dup', arg=['--backup'], delay=0)
   ldtp.appundertest('deja-dup')
 
-def create_local_config(dest='/', includes=None, excludes=None):
+def create_local_config(dest='/'):
   if dest is None:
     dest = get_temp_name('local')
     os.system('mkdir -p %s' % dest)
@@ -147,21 +148,17 @@ def create_local_config(dest='/', includes=None, excludes=None):
     dest = os.getcwd()+'/'+dest
   set_gconf_value("backend", "file")
   set_gconf_value("file/path", dest)
-  includes = includes and [os.getcwd()+'/'+x for x in includes]
-  excludes = excludes and [os.getcwd()+'/'+x for x in excludes]
-  if includes:
-    includes = '[' + ','.join(includes) + ']'
-    set_gconf_value("include-list", includes, "list", "string")
-  if excludes:
-    excludes = '[' + ','.join(excludes) + ']'
-    set_gconf_value("exclude-list", excludes, "list", "string")
 
-def create_ssh_config(dest='/', includes=None, excludes=None):
+def create_ssh_config(dest='/'):
   if dest is None:
     dest = get_temp_name('local')
     os.system('mkdir -p %s' % dest)
   set_gconf_value("backend", "file")
   set_gconf_value("file/path", "ssh://localhost" + dest)
+
+def set_include_excludes(includes=None, excludes=None):
+  includes = includes and [os.getcwd()+'/'+x for x in includes]
+  excludes = excludes and [os.getcwd()+'/'+x for x in excludes]
   if includes:
     includes = '[' + ','.join(includes) + ']'
     set_gconf_value("include-list", includes, "list", "string")
