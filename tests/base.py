@@ -89,7 +89,7 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
     create_local_config(dest)
   elif backend == 'ssh':
     create_ssh_config(dest)
-  set_include_exclude(include=sources)
+  set_includes_excludes(includes=sources)
   
   if encrypt is not None:
     set_gconf_value("encrypt", 'true' if encrypt else 'false', 'bool')
@@ -156,7 +156,7 @@ def create_ssh_config(dest='/'):
   set_gconf_value("backend", "file")
   set_gconf_value("file/path", "ssh://localhost" + dest)
 
-def set_include_excludes(includes=None, excludes=None):
+def set_includes_excludes(includes=None, excludes=None):
   includes = includes and [os.getcwd()+'/'+x for x in includes]
   excludes = excludes and [os.getcwd()+'/'+x for x in excludes]
   if includes:
