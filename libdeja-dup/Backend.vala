@@ -24,7 +24,6 @@ namespace DejaDup {
 public abstract class Backend : Object
 {
   public signal void envp_ready(bool success, List<string>? envp, string? error = null);
-  public signal void need_password();
 
   public MountOperation mount_op {get; set;}
   
@@ -42,8 +41,6 @@ public abstract class Backend : Object
   // Arguments needed only when the particular mode is active
   // If mode == INVALID, arguments needed any time the backup is referenced.
   public virtual void add_argv(Operation.Mode mode, ref List<string> argv) {}
-  
-  public virtual void ask_password() {}
   
   public abstract Backend clone();
   

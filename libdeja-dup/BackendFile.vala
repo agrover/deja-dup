@@ -118,7 +118,6 @@ public class BackendFile : Backend
   
   void mount_file(File file)
   {
-    // disallow interaction
     this.ref();
     file.mount_enclosing_volume(MountMountFlags.NONE, mount_op, null, (o, r) => {
       try {

@@ -29,7 +29,6 @@ public abstract class Operation : Object
   public signal void action_file_changed(File file, bool actual);
   public signal void progress(double percent);
   public signal void passphrase_required();
-  public signal bool backend_password_required();
   
   public Gtk.Window toplevel {get; construct;}
   public uint uppermost_xid {get; construct;}
@@ -70,10 +69,6 @@ public abstract class Operation : Object
     catch (Error e) {
       warning("%s\n", e.message);    
     }
-    
-    // Default is to go ahead with password collection.  This will be
-    // overridden by anyone else that connects to this signal.
-    backend_password_required.connect((o) => {return true;});
   }
   
   public virtual void start() throws Error
@@ -97,7 +92,6 @@ public abstract class Operation : Object
     var client = get_gconf_client();
     if (client.get_bool(ENCRYPT_KEY) && passphrase == null) {
       needs_password = true;
-//      Timeout.add_seconds(1, () => {passphrase_required(); return false;});
       passphrase_required(); // will call continue_with_passphrase when ready
     }
     else
@@ -117,11 +111,6 @@ public abstract class Operation : Object
     dup.action_file_changed.connect((d, f, b) => {action_file_changed(f, b);});
     dup.progress.connect((d, p) => {progress(p);});
     backend.envp_ready.connect(continue_with_envp);
-    backend.need_password.connect((b) => {
-      bool can_ask_now = backend_password_required();
-      if (can_ask_now)
-        backend.ask_password();
-    });
   }
   
   public void continue_with_passphrase(string? passphrase)
@@ -186,11 +175,6 @@ public abstract class Operation : Object
   protected virtual List<string>? make_argv() throws Error
   {
     return null;
-  }
-  
-  public void ask_backend_password() throws Error
-  {
-    backend.ask_password();
   }
   
   bool claim_bus(bool claimed)

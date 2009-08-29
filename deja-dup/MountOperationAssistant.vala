@@ -21,6 +21,7 @@ using GLib;
 
 public class MountOperationAssistant : MountOperation
 {
+  public bool s3_mode {get; set;}
   public AssistantOperation assist {get; construct;}
   Gtk.Bin password_page;
   Gtk.VBox layout;
@@ -119,6 +120,14 @@ public class MountOperationAssistant : MountOperation
       layout.pack_start(label, false, false, 0);
     }
 
+    if (s3_mode) {
+      label = hacks_make_link_label(_("You can sign up for an Amazon S3 account <a href=\"%s\">online</a>.").printf("http://aws.amazon.com/s3/"));
+      if (label != null) {
+        label.set("xalign", 0f);
+        layout.pack_start(label, false, false, 0);
+      }
+    }
+
     // Buffer
     label = new Gtk.Label("");
     layout.pack_start(label, false, false, 0);
@@ -152,7 +161,8 @@ public class MountOperationAssistant : MountOperation
       username_w.set("activates-default", true,
                      "text", default_user);
       username_w.changed.connect((e) => {check_valid_inputs();});
-      label = new Gtk.Label(_("_Username:"));
+      var label_txt = s3_mode ? _("_Access key ID:") : _("_Username:");
+      label = new Gtk.Label(label_txt);
       label.set("mnemonic-widget", username_w,
                 "use-underline", true,
                 "xalign", 0.0f);
@@ -183,7 +193,8 @@ public class MountOperationAssistant : MountOperation
       password_w = new Gtk.Entry();
       password_w.set("visibility", false,
                      "activates-default", true);
-      label = new Gtk.Label(_("_Password:"));
+      var label_txt = s3_mode ? _("_Secret access key:") : _("_Password:");
+      label = new Gtk.Label(label_txt);
       label.set("mnemonic-widget", password_w,
                 "use-underline", true,
                 "xalign", 0.0f);
@@ -195,7 +206,8 @@ public class MountOperationAssistant : MountOperation
       password_w = null;
 
     if ((flags & AskPasswordFlags.SAVING_SUPPORTED) != 0) {
-      remember_w = new Gtk.CheckButton.with_mnemonic(_("_Remember password"));
+      var label_txt = s3_mode ? _("_Remember secret access key") : _("_Remember password");
+      remember_w = new Gtk.CheckButton.with_mnemonic(label_txt);
       layout.pack_start(remember_w, false, false, 0);
     }
     else
@@ -249,12 +261,18 @@ public class MountOperationAssistant : MountOperation
   {
     if (looping) {
       // This signal happens before a prepare, when going forward
-      if (username_w != null)
-        username = username_w.get_text();
-      if (domain_w != null)
-        domain = domain_w.get_text();
-      if (password_w != null)
-        password = password_w.get_text();
+      if (username_w != null) {
+        var txt = username_w.get_text();
+        username = txt.strip();
+      }
+      if (domain_w != null) {
+        var txt = domain_w.get_text();
+        domain = txt.strip();
+      }
+      if (password_w != null) {
+        var txt = password_w.get_text();
+        password = txt.strip();
+      }
       if (anonymous_w != null)
         anonymous = anonymous_w.get_active();
       if (remember_w != null)

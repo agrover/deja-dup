@@ -341,7 +341,6 @@ public abstract class AssistantOperation : Assistant
     op.done.connect(apply_finished);
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
     op.passphrase_required.connect(get_passphrase);
-    //op.backend_password_required.connect(notify_backend_password);
     op.action_desc_changed.connect(set_progress_label);
     op.action_file_changed.connect(set_progress_label_file);
     op.progress.connect(show_progress);
@@ -390,6 +389,7 @@ public abstract class AssistantOperation : Assistant
   
   void do_cancel()
   {
+    hide();
     if (op != null)
       op.cancel(); // do_close will happen in done() callback
     else

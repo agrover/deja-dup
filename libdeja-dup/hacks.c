@@ -54,3 +54,15 @@ hacks_status_icon_set_tooltip_text (GtkStatusIcon *icon, const gchar *text)
 #endif
 }
 
+GtkLabel *
+hacks_make_link_label (const gchar *text)
+{
+#if GTK_CHECK_VERSION(2, 17, 0)
+  GtkLabel *label = GTK_LABEL (g_object_ref_sink (gtk_label_new ("")));
+  gtk_label_set_markup (label, text);
+  gtk_label_set_track_visited_links (label, FALSE);
+  return label;
+#else
+  return NULL;
+#endif
+}

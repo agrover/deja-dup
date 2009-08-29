@@ -89,7 +89,7 @@ public class StatusIcon : Gtk.StatusIcon
     op = new DejaDup.OperationBackup(null, get_x11_window_id());
     op.done.connect(send_done);
     op.passphrase_required.connect(notify_passphrase);
-    op.backend_password_required.connect(notify_backend_password);
+    //op.backend_password_required.connect(notify_backend_password);
     op.raise_error.connect(notify_error);
     op.action_desc_changed.connect(set_action_desc);
     op.progress.connect(note_progress);
@@ -212,8 +212,8 @@ public class StatusIcon : Gtk.StatusIcon
         //op.ask_passphrase();
         need_passphrase = false;
       }
-      else
-        op.ask_backend_password();
+//      else
+//        op.ask_backend_password();
     }
     catch (Error e) {
       warning("%s\n", e.message);
