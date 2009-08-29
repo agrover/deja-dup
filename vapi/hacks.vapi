@@ -23,6 +23,9 @@ string hacks_unix_mount_get_fs_type (string file);
 [CCode (cheader_filename = "hacks.h")]
 void hacks_status_icon_set_tooltip_text (Gtk.StatusIcon icon, string text);
 
+[CCode (cheader_filename = "hacks.h")]
+Gtk.Label hacks_make_link_label (string text);
+
 [CCode (cprefix = "G", lower_case_cprefix = "g_", cheader_filename = "glib.h")]
 namespace GLib {
 	public class ParamSpecString : ParamSpec {

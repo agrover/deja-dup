@@ -29,6 +29,7 @@ extern const GnomeKeyringPasswordSchema *PASSPHRASE_SCHEMA;
 
 extern gchar *hacks_unix_mount_get_fs_type (const gchar *file);
 extern void hacks_status_icon_set_tooltip_text (GtkStatusIcon *icon, const gchar *text);
+extern GtkLabel *hacks_make_link_label (const gchar *text);
 
 #endif
 
