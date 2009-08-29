@@ -31,9 +31,11 @@ public abstract class Assistant : Gtk.Dialog
   public signal void canceled();
   public signal void closed();
   public signal void prepare(Gtk.Widget page);
+  public signal void forward();
+  public signal void backward();
 
   public enum Type {
-    NORMAL, SUMMARY, PROGRESS, FINISH
+    NORMAL, INTERRUPT, SUMMARY, PROGRESS, FINISH
   }
 
   Gtk.Label header_title;
@@ -96,6 +98,27 @@ public abstract class Assistant : Gtk.Dialog
     response.connect(handle_response);
   }
 
+  public void allow_forward(bool allow)
+  {
+    forward_button.sensitive = allow;
+  }
+
+  public void set_header_icon(string? name)
+  {
+    if (name == null)
+      name = this.icon_name;
+
+    try {
+      var theme = Gtk.IconTheme.get_for_screen(get_screen());
+      var pixbuf = theme.load_icon(name, 48,
+                                   Gtk.IconLookupFlags.FORCE_SIZE);
+      header_icon.pixbuf = pixbuf;
+    }
+    catch (Error e) {
+      // Eh, don't worry about it
+    }
+  }
+
   void handle_response(int resp)
   {
     switch (resp) {
@@ -123,13 +146,17 @@ public abstract class Assistant : Gtk.Dialog
     weak List<PageInfo> next;
     if (interrupted != null)
       next = interrupted.prev;
-    else
+    else {
       next = current.prev;
+      while (next != null && next.data.type == Type.INTERRUPT)
+        next = next.prev;
+    }
 
     if (next != null) {
       last_op_was_back = true;
       current = next;
       page_changed();
+      backward();
     }
   }
 
@@ -141,22 +168,17 @@ public abstract class Assistant : Gtk.Dialog
       if (interrupted_from_hidden)
         hide();
     }
-    else
+    else {
       next = current.next;
+      while (next != null && next.data.type == Type.INTERRUPT)
+        next = next.next;
+    }
 
     if (next != null) {
       last_op_was_back = false;
       current = next;
       page_changed();
-    }
-  }
-
-  public void go_to_end()
-  {
-    if (infos != null) {
-      last_op_was_back = false;
-      current = infos.last();
-      page_changed();
+      forward();
     }
   }
 
@@ -179,7 +201,6 @@ public abstract class Assistant : Gtk.Dialog
     go_to_page(page);
     if (!visible) { // If we are interrupting from a hidden mode
       interrupted_from_hidden = true;
-      forward_button.set("label", "Conti_nue");
     }
     interrupted = was;
   }
@@ -198,6 +219,8 @@ public abstract class Assistant : Gtk.Dialog
     interrupted_from_hidden = false;
     weak PageInfo info = current.data;
 
+    set_header_icon(null); // reset icon
+
     prepare(info.page);
 
     // Listeners of prepare may have changed current on us, so only proceed
@@ -213,8 +236,9 @@ public abstract class Assistant : Gtk.Dialog
       page_box.add(info.page);
       info.page.show();
 
-      info.page.child_focus(Gtk.DirectionType.TAB_FORWARD);
-      Gtk.Widget w = get_focus();
+      reset_size(info.page);
+
+      var w = get_focus();
       if (w != null && w.get_type() == typeof(Gtk.Label))
         ((Gtk.Label)w).select_region(-1, -1);
     }
@@ -228,6 +252,7 @@ public abstract class Assistant : Gtk.Dialog
 
     bool show_cancel = false, show_back = false, show_forward = false,
          show_apply = false, show_close = false;
+    string forward_text = Gtk.STOCK_GO_FORWARD;
 
     switch (info.type) {
     default:
@@ -240,6 +265,11 @@ public abstract class Assistant : Gtk.Dialog
       show_cancel = true;
       show_back = current.prev != null;
       show_apply = true;
+      break;
+    case Type.INTERRUPT:
+      show_cancel = true;
+      show_forward = true;
+      forward_text = _("Co_ntinue");
       break;
     case Type.PROGRESS:
       show_cancel = true;
@@ -270,7 +300,7 @@ public abstract class Assistant : Gtk.Dialog
     if (show_back)
       back_button = add_button(Gtk.STOCK_GO_BACK, BACK);
     if (show_forward) {
-      forward_button = add_button(Gtk.STOCK_GO_FORWARD, FORWARD);
+      forward_button = add_button(forward_text, FORWARD);
       forward_button.grab_default();
     }
     if (show_apply) {
@@ -302,14 +332,19 @@ public abstract class Assistant : Gtk.Dialog
     if (was_empty)
       page_box.size_request(out page_box_req);
 
+    reset_size(page);
+
+    if (was_empty)
+      Idle.add(set_first_page);
+  }
+
+  void reset_size(Gtk.Widget page)
+  {
     Gtk.Requisition pagereq;
     int boxw, boxh;
     page_box.get_size_request(out boxw, out boxh);
     page.size_request(out pagereq);
     page_box.set_size_request(int.max(boxw, pagereq.width+page_box_req.width), int.max(boxh, pagereq.height+page_box_req.height));
-
-    if (was_empty)
-      Idle.add(set_first_page);
   }
 
   public void set_page_title(Gtk.Widget page, string title)

@@ -25,6 +25,8 @@ public abstract class Backend : Object
 {
   public signal void envp_ready(bool success, List<string>? envp, string? error = null);
   public signal void need_password();
+
+  public MountOperation mount_op {get; set;}
   
   public Gtk.Window toplevel {get; construct;}
 

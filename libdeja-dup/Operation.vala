@@ -97,8 +97,8 @@ public abstract class Operation : Object
     var client = get_gconf_client();
     if (client.get_bool(ENCRYPT_KEY) && passphrase == null) {
       needs_password = true;
-      Timeout.add_seconds(1, () => {passphrase_required(); return false;});
-//      passphrase_required(); // will call continue_with_passphrase when ready
+//      Timeout.add_seconds(1, () => {passphrase_required(); return false;});
+      passphrase_required(); // will call continue_with_passphrase when ready
     }
     else
       continue_with_passphrase(passphrase);

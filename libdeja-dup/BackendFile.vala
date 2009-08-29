@@ -108,7 +108,7 @@ public class BackendFile : Backend
       catch (Error e) {}
       
       if (mount == null) {
-        check_if_password_needed(file);
+        mount_file(file);
         return;
       }
     }
@@ -116,39 +116,11 @@ public class BackendFile : Backend
     envp_ready(true, new List<string>());
   }
   
-  void check_if_password_needed(File file)
+  void mount_file(File file)
   {
     // disallow interaction
-    file.mount_enclosing_volume(MountMountFlags.NONE, null, null, (o, r) => {
-      try {
-        var success = ((File)o).mount_enclosing_volume_finish(r);
-        envp_ready(success, new List<string>());
-      }
-      catch (IOError.PERMISSION_DENIED e) {
-        need_password();
-        return;
-      }
-      catch (Error e) {
-        envp_ready(false, new List<string>(), e.message);
-      }
-    });
-  }
-  
-  public override void ask_password()
-  {
-    // Make sure it's mounted
-    string path;
-    try {
-      path = get_location_from_gconf();
-    }
-    catch (Error e) {
-      envp_ready(false, new List<string>(), e.message);
-      return;
-    }
-    
-    var file = File.parse_name(path);
-    var op = new Gtk.MountOperation(toplevel);
-    file.mount_enclosing_volume(MountMountFlags.NONE, op, null, (o, r) => {
+    this.ref();
+    file.mount_enclosing_volume(MountMountFlags.NONE, mount_op, null, (o, r) => {
       try {
         var success = ((File)o).mount_enclosing_volume_finish(r);
         envp_ready(success, new List<string>());
@@ -156,6 +128,7 @@ public class BackendFile : Backend
       catch (Error e) {
         envp_ready(false, new List<string>(), e.message);
       }
+      this.unref();
     });
   }
 }
