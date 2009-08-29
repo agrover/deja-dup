@@ -169,7 +169,7 @@ public abstract class Assistant : Gtk.Dialog
         hide();
     }
     else {
-      next = current.next;
+      next = (current == null) ? infos : current.next;
       while (next != null && next.data.type == Type.INTERRUPT)
         next = next.next;
     }
@@ -311,8 +311,8 @@ public abstract class Assistant : Gtk.Dialog
 
   bool set_first_page()
   {
-    current = infos;
-    page_changed();
+    current = null;
+    go_forward();
     return false;
   }
 
