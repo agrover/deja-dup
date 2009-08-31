@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS = deja-dup-applet
+#bin_PROGRAMS = deja-dup-applet
 
 VALA_CFLAGS = \
 	--vapidir $(top_srcdir)/libdeja-dup \
@@ -38,8 +38,8 @@ deja_dup_applet_VALASOURCES = \
 	StatusIcon.vala \
 	applet.vala
 
-BUILT_SOURCES = \
-	vala.stamp
+#BUILT_SOURCES = \
+#	vala.stamp
 
 deja_dup_applet_SOURCES = \
 	$(deja_dup_applet_VALASOURCES:.vala=.c)
@@ -55,4 +55,4 @@ endif
 
 deja_dup_applet_LDADD = $(APPLET_LIBS) @INTLLIBS@ $(top_builddir)/libdeja-dup/libdeja-dup.la
 
-EXTRA_DIST = vala.stamp $(deja_dup_applet_VALASOURCES)
+#EXTRA_DIST = vala.stamp $(deja_dup_applet_VALASOURCES)
