@@ -18,5 +18,5 @@
 */
 
 [CCode (cprefix = "", lower_case_cprefix = "", cheader_filename = "PassphraseSchema.h")]
-public const GnomeKeyring.PasswordSchema PASSPHRASE_SCHEMA;
+public GnomeKeyring.PasswordSchema PASSPHRASE_SCHEMA;
 

@@ -205,7 +205,7 @@ public class DuplicityInstance : Object
     int rv = 0;
     
     if (start < 0)
-      start = word.size() - 1;
+      start = (long)word.size() - 1;
     
     for (long i = start; i >= 0; --i, ++rv)
       if (word[i] != ch)
@@ -328,7 +328,7 @@ public class DuplicityInstance : Object
             // OK, word ends with '...  But is it a *real* ' or a fake one?
             // i.e. is it escaped or not?  Test this by seeing if it has an even
             // number of backslashes before it.
-            num_suffix(word, '\\', word.size() - 2) % 2 == 0)
+            num_suffix(word, '\\', (long)word.size() - 2) % 2 == 0)
           in_group = false;
         // Else...  If it ends with just a backslash, the backslash was
         // supposed to be for the space.  So just drop it.

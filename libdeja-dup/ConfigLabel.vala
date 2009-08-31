@@ -23,7 +23,7 @@ namespace DejaDup {
 
 public class ConfigLabel : ConfigWidget
 {
-  public ConfigLabel(string key)
+  public ConfigLabel(string? key)
   {
     this.key = key;
   }
