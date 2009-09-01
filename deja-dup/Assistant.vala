@@ -33,6 +33,7 @@ public abstract class Assistant : Gtk.Dialog
   public signal void prepare(Gtk.Widget page);
   public signal void forward();
   public signal void backward();
+  public string apply_text {get; set;}
 
   public enum Type {
     NORMAL, INTERRUPT, SUMMARY, PROGRESS, FINISH
@@ -68,6 +69,7 @@ public abstract class Assistant : Gtk.Dialog
   construct
   {
     has_separator = false;
+    apply_text = Gtk.STOCK_APPLY;
 
     infos = new List<PageInfo>();
 
@@ -304,7 +306,7 @@ public abstract class Assistant : Gtk.Dialog
       forward_button.grab_default();
     }
     if (show_apply) {
-      apply_button = add_button(Gtk.STOCK_APPLY, APPLY);
+      apply_button = add_button(apply_text, APPLY);
       apply_button.grab_default();
     }
   }

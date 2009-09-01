@@ -68,6 +68,7 @@ public class AssistantRestore : AssistantOperation
   construct
   {
     title = _("Restore");
+    apply_text = _("_Restore");
   }
   
   protected override void add_setup_pages()

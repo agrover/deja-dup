@@ -32,6 +32,7 @@ public class AssistantBackup : AssistantOperation
   construct
   {
     title = _("Backup");
+    apply_text = _("_Backup");
   }
   
   Gtk.Widget make_backup_location_page()
