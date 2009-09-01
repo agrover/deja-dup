@@ -82,7 +82,7 @@ libdeja_dup_la_SOURCES = \
 
 vala.stamp: $(libdeja_dup_la_VALASOURCES)
 if USE_VALAC
-	$(VALAC) -C -H deja-dup.h $(VALA_CFLAGS) $^
+	$(AM_V_GEN)$(VALAC) -C -H deja-dup.h $(VALA_CFLAGS) $^
 	touch $@
 else
 	@echo "ERROR: Valac compilation is disabled, but the C sources are out-of-date."
