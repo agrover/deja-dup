@@ -25,12 +25,14 @@ static const string GCONF_DIR = "/apps/deja-dup";
 static const string LAST_RUN_KEY = "/apps/deja-dup/last-run";
 static const string PERIODIC_KEY = "/apps/deja-dup/periodic";
 static const string PERIODIC_PERIOD_KEY = "/apps/deja-dup/periodic-period";
+static const uint32 NM_STATE_CONNECTED = 3;
 
 static MainLoop loop;
 static uint timeout_id;
 static Pid pid;
-static bool connected = true;
 static bool native_path = true;
+static bool connected = true;
+static bool connection_postponed = false;
 
 static bool show_version = false;
 static const OptionEntry[] options = {
@@ -41,47 +43,38 @@ static const OptionEntry[] options = {
 static DBus.Connection conn;
 static dynamic DBus.Object network_manager;
 
-static void init_dbus_to_network_manager() throws DBus.Error, GLib.Error {
-  
+static void init_dbus_to_network_manager() throws DBus.Error, GLib.Error
+{ 
   //Set up the DBus connection to network manager
   conn = DBus.Bus.@get(DBus.BusType.SYSTEM);
   network_manager = conn.get_object(
     "org.freedesktop.NetworkManager",
     "/org/freedesktop/NetworkManager",
     "org.freedesktop.NetworkManager");
-  
-  DBus.Object[] devices = network_manager.GetDevices();
 
-  //Record the network manager connection state.
+  //Retrieve the network manager connection state.
   uint32 network_manager_state = network_manager.State;
-  connected = network_manager_state == 3;
-  
-  if (connected)
-    debug("Network connection found!");
-  else
-    debug("Network connection not found!");
+  connected = network_manager_state == NM_STATE_CONNECTED;
 
   //Dbus signal when the state of the connection is changed.
-  //network_manager.StateChanged.connect(network_manager_state_changed);
   network_manager.StateChanged += network_manager_state_changed;
 }
 
 static void network_manager_state_changed(DBus.Object obj, uint32 new_state)
 {
-  //Record the network manager connection state.
-  connected = new_state == 3;
+  connected = new_state == NM_STATE_CONNECTED;
 
   if (connected) {
-    debug("Network connection found!");
     long wait_time;
     if (!seconds_until_next_run(out wait_time))
       return;
-    
-    if (wait_time < 1)
-      kickoff();
+
+    if (connection_postponed) {
+      prepare_run(0);
+      connection_postponed = false;
+    }
   }
-  else
-    debug("Network connection lost!");
+
 }
 
 static bool handle_options(out int status)
@@ -194,8 +187,7 @@ static long seconds_until(Date date)
   
   TimeVal next_time = date_to_timeval(date);
   
-  //return next_time.tv_sec - cur_time.tv_sec;
-  return 60;
+  return next_time.tv_sec - cur_time.tv_sec;
 }
 
 static void close_pid(Pid child_pid, int status)
@@ -210,11 +202,11 @@ static bool kickoff()
   if (!seconds_until_next_run(out wait_time))
     return false;
   
-  /*if (wait_time > 0) {
+  if (wait_time > 0) {
     // Huh?  Shouldn't have been called now.
     prepare_next_run();
     return false;
-  }*/
+  }
 
   // Now we secretly schedule another kickoff tomorrow, in case something
   // goes wrong with this run (or user chooses to ignore for now)
@@ -223,7 +215,8 @@ static bool kickoff()
   prepare_tomorrow();
   
   if (!native_path && !connected) {
-      debug("Cannot backup because I'm not connected to the internet!");
+      debug("No connection found. Postponing the backup.");
+      connection_postponed = true;
       return false;
   }
 
@@ -232,8 +225,8 @@ static bool kickoff()
     try {
       string[] argv = new string[3];
       argv[0] = "deja-dup";
-      argv[1] = "--backup";
-      argv[2] = null;
+      argv[2] = "--backup";
+      argv[1] = null;
       Process.spawn_async(null, argv, null,
                           SpawnFlags.SEARCH_PATH |
                           SpawnFlags.DO_NOT_REAP_CHILD |
@@ -319,7 +312,6 @@ static int main(string[] args)
     var path = DejaDup.BackendFile.get_location_from_gconf();
     var file = File.parse_name(path);
     native_path = file.is_native();
-    debug("%s", path);
   }
   catch (GLib.Error e) {
     printerr("%s\n\n%s", e.message, "GLib Error!\n");
@@ -327,12 +319,10 @@ static int main(string[] args)
   }
 
   if (!native_path) {
-    debug("remote path");
     try {
       init_dbus_to_network_manager();
     }
     catch (Error e) {
-      debug("Failed to initialize DBus");
       printerr("%s\n\n%s", e.message, "Failed to initialize DBus\n");
       return 1;
     }
