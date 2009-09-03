@@ -67,8 +67,8 @@ install_tgz()
 install_bzr()
 {
   mkdir -p "$SRCDIR"
-  if [ -d "$SRCDIR/duplicity-bzr" ]; then
-    cd "$SRCDIR/duplicity-bzr"
+  if [ -d "$SRCDIR/duplicity-$1" ]; then
+    cd "$SRCDIR/duplicity-$1"
     if LANG=C bzr update | grep "Tree is up to date"; then
       #install_tgz "bzr"
       #return
@@ -78,19 +78,29 @@ install_bzr()
   else
     # Don't use lp:duplicity because that likes to use bzr+ssh, which can prompt
     # for ssh passphrase (which we don't want)
-    bzr co "http://bazaar.launchpad.net/~duplicity-team/duplicity/trunk" "$SRCDIR/duplicity-bzr"
-    cd "$SRCDIR/duplicity-bzr"
+    if [ "$1" = "bzr-stable" ]; then
+      url="http://bazaar.launchpad.net/~duplicity-team/duplicity/stable"
+    else
+      url="http://bazaar.launchpad.net/~duplicity-team/duplicity/trunk"
+    fi
+    bzr co "$url" "$SRCDIR/duplicity-$1"
+    cd "$SRCDIR/duplicity-$1"
   fi
-  ./dist/makedist "999" # fake a really big version number
-  mv "duplicity-999.tar.gz" "../duplicity-bzr.tar.gz"
-  install_tgz "bzr"
+  if [ "$1" = "bzr-stable" ]; then
+    ver="0.5.999"
+  else
+    ver="999"
+  fi
+  ./dist/makedist "$ver" # fake a really big version number
+  mv "duplicity-$ver.tar.gz" "../duplicity-$1.tar.gz"
+  install_tgz "$1"
 }
 
 if [ -z "$1" ]; then
   echo 'Must provide a duplicity version'
   exit 1
-elif [ "$1" = "bzr" ]; then
-  install_bzr
+elif [ "$1" = "bzr" -o "$1" = "bzr-stable" ]; then
+  install_bzr "$1"
   exit 0
 else
   install_tgz "$1"

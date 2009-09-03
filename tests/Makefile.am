@@ -20,6 +20,7 @@
 # target used during distcheck, for example.  This is nice.
 
 TESTS = \
+	backup/cancel-clean \
 	backup/full \
 	backup/delete \
 	basic/badversion \

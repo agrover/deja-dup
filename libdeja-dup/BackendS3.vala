@@ -148,7 +148,7 @@ public class BackendS3 : Backend
                                          null, 0, found_password);
     }
     else
-      need_password();
+      ask_password();
   }
   
   void found_password(GnomeKeyring.Result result, GLib.List? list)
@@ -158,7 +158,7 @@ public class BackendS3 : Backend
       got_secret_key();
     }
     else {
-      need_password();
+      ask_password();
     }
   }
   
@@ -166,33 +166,36 @@ public class BackendS3 : Backend
   {
   }
   
-  public override void ask_password() {
-    // Ask user
-    var dlg = new Gnome.PasswordDialog(_("Amazon S3 Password"),
-                                       _("Enter your Amazon Web Services user ID and secret key.  This is not the same as your amazon.com username and password."),
-                                       id, "", false);
-    dlg.transient_parent = toplevel;
-    dlg.show_remember = true;
-    if (!dlg.run_and_block()) {
-      envp_ready(false, new List<string>());
+  void got_password_reply(MountOperation mount_op, MountOperationResult result)
+  {
+    if (result != MountOperationResult.HANDLED) {
+      envp_ready(false, new List<string>(), _("Permission denied"));
       return;
     }
-    
-    id = dlg.get_username();
-    secret_key = dlg.get_password();
-    secret_key = secret_key.strip();
-    
+
+    id = mount_op.username;
+    secret_key = mount_op.password;
+
     // Save it
-    var remember = dlg.get_remember();
-    if (remember != Gnome.PasswordDialogRemember.NOTHING) {
-      string where = remember == Gnome.PasswordDialogRemember.SESSION ?
-                                 "session" : GnomeKeyring.DEFAULT;
+    var remember = mount_op.password_save;
+    if (remember != PasswordSave.NEVER) {
+      string where = (remember == PasswordSave.FOR_SESSION) ?
+                     "session" : GnomeKeyring.DEFAULT;
       GnomeKeyring.set_network_password(where, id, null, S3_SERVER, null,
                                         "https", null, 0, secret_key,
                                         save_password_callback);
     }
     
     got_secret_key();
+  }
+
+  void ask_password() {
+    mount_op.set("s3_mode", true);
+    mount_op.reply.connect(got_password_reply);
+    mount_op.ask_password(_("Enter Amazon S3 access key"), id, "",
+                          AskPasswordFlags.NEED_PASSWORD |
+                          AskPasswordFlags.NEED_USERNAME |
+                          AskPasswordFlags.SAVING_SUPPORTED);
   }
   
   void got_secret_key() {

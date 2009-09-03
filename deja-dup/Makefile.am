@@ -24,7 +24,6 @@ VALA_CFLAGS = \
 	--pkg gtk+-2.0 \
 	--pkg gio-2.0 \
 	--pkg gconf-2.0 \
-	--pkg libgnomeui-2.0 \
 	--pkg gnome-keyring-1 \
 	--pkg libdeja-dup \
 	--pkg PassphraseSchema \
@@ -44,6 +43,7 @@ deja_dup_VALASOURCES = \
 	AssistantOperation.vala \
 	AssistantRestore.vala \
 	MainWindow.vala \
+	MountOperationAssistant.vala \
 	StatusIcon.vala \
 	main.vala
 
@@ -55,8 +55,8 @@ deja_dup_SOURCES = \
 
 vala.stamp: $(deja_dup_VALASOURCES)
 if USE_VALAC
-	$(VALAC) -C $(VALA_CFLAGS) $^
-	touch $@
+	$(AM_V_GEN)$(VALAC) -C $(VALA_CFLAGS) $^
+	@touch $@
 else
 	@echo "ERROR: Valac compilation is disabled, but the C sources are out-of-date."
 	@exit 1

@@ -42,9 +42,11 @@ def test():
   base.restore_simple(restoredir, DATE1)
   check_dir(restoredir, 'one\n')
   os.system("rm -r %s" % restoredir)
+  base.start_deja_dup()
   base.restore_simple(restoredir, DATE2)
   check_dir(restoredir, 'one1\n')
   os.system("rm -r %s" % restoredir)
+  base.start_deja_dup()
   base.restore_simple(restoredir, DATE3)
   check_dir(restoredir, 'one1!\n')
   return True

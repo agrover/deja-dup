@@ -70,7 +70,6 @@ PKG_CHECK_MODULES(DUP,
                   gtk+-2.0 >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
                   gconf-2.0
-                  libgnomeui-2.0
                   gnome-keyring-1)
 AC_SUBST(DUP_CFLAGS)
 AC_SUBST(DUP_LIBS)
@@ -79,7 +78,6 @@ PKG_CHECK_MODULES(APPLET,
                   gtk+-2.0 >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
                   gconf-2.0
-                  libgnomeui-2.0
                   gnome-keyring-1
                   libnotify)
 AC_SUBST(APPLET_CFLAGS)
@@ -98,7 +96,6 @@ PKG_CHECK_MODULES(LIBRARY,
                   gio-2.0 >= $GIO_REQ_VER
                   gio-unix-2.0
                   gconf-2.0
-                  libgnomeui-2.0
                   unique-1.0
                   dbus-glib-1
                   gnome-keyring-1)

@@ -68,6 +68,7 @@ public class AssistantRestore : AssistantOperation
   construct
   {
     title = _("Restore");
+    apply_text = _("_Restore");
   }
   
   protected override void add_setup_pages()
@@ -316,7 +317,7 @@ public class AssistantRestore : AssistantOperation
     
     // If we didn't see any dates...  Must not be any backups on the backend
     if (date_store.iter_n_children(null) == 0)
-      show_error(query_op, _("No backups to restore"), null);
+      show_error(_("No backups to restore"), null);
   }
   
   protected void query_finished(DejaDup.Operation op, bool success)
@@ -342,14 +343,14 @@ public class AssistantRestore : AssistantOperation
     query_op = new DejaDup.OperationStatus(this);
     query_op.collection_dates.connect(handle_collection_dates);
     query_op.done.connect(query_finished);
-    ((DejaDup.Operation)query_op).raise_error.connect(show_error);
+    ((DejaDup.Operation)query_op).raise_error.connect((o, e, d) => {show_error(e, d);});
     
     try {
       query_op.start();
     }
     catch (Error e) {
       warning("%s\n", e.message);
-      show_error(query_op, e.message, null); // not really user-friendly text, but ideally this won't happen
+      show_error(e.message, null); // not really user-friendly text, but ideally this won't happen
       query_finished(query_op, false);
     }
   }

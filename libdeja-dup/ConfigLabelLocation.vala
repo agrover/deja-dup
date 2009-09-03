@@ -23,6 +23,11 @@ namespace DejaDup {
 
 public class ConfigLabelLocation : ConfigLabel
 {
+  public ConfigLabelLocation()
+  {
+    base(null);
+  }
+  
   construct {
     watch_key(BACKEND_KEY);
     watch_key(FILE_PATH_KEY);

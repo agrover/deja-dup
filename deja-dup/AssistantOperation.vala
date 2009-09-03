@@ -49,13 +49,15 @@ public abstract class AssistantOperation : Assistant
   uint timeout_id;
   protected bool error_occurred {get; private set;}
   bool gives_progress;
+
+  MountOperation mount_op;
   
   construct
   {
     set_op_icon_name();
     op_icon = make_op_icon();
     header_icon.pixbuf = op_icon;
-    
+
     add_config_pages_if_needed();
     add_setup_pages();
     add_confirm_page();
@@ -188,20 +190,11 @@ public abstract class AssistantOperation : Assistant
     return page;
   }
   
-  protected virtual void show_error(DejaDup.Operation op, string error, string? detail)
+  public virtual void show_error(string error, string? detail)
   {
     error_occurred = true;
     
-    // Try to show nice error icon
-    try {
-      var theme = Gtk.IconTheme.get_for_screen(get_screen());
-      var pixbuf = theme.load_icon(Gtk.STOCK_DIALOG_ERROR, 48,
-                                   Gtk.IconLookupFlags.FORCE_SIZE);
-      header_icon.pixbuf = pixbuf;
-    }
-    catch (Error e) {
-      // Eh, don't worry about it
-    }
+    set_header_icon(Gtk.STOCK_DIALOG_ERROR);
     
     summary_label.label = error;
     summary_label.wrap = true;
@@ -214,7 +207,7 @@ public abstract class AssistantOperation : Assistant
       error_text_view.buffer.set_text(detail, -1);
     }
     
-    go_to_end();
+    go_to_page(summary_page);
     page_box.queue_resize();
   }
 
@@ -309,8 +302,8 @@ public abstract class AssistantOperation : Assistant
   void add_password_page()
   {
     var page = make_password_page();
-    append_page(page);
-    set_page_title(page, _("Password Needed"));
+    append_page(page, Type.INTERRUPT);
+    set_page_title(page, _("Password needed"));
     password_page = page;
   }
 
@@ -332,7 +325,7 @@ public abstract class AssistantOperation : Assistant
     else {
       if (success) {
         succeeded = true;
-        go_to_end();
+        go_to_page(summary_page);
       }
       else
         force_visible(false);
@@ -341,14 +334,17 @@ public abstract class AssistantOperation : Assistant
   
   void do_apply()
   {
+    if (mount_op == null)
+      mount_op = new MountOperationAssistant(this);
+
     op = create_op();
     op.done.connect(apply_finished);
-    op.raise_error.connect(show_error);
+    op.raise_error.connect((o, e, d) => {show_error(e, d);});
     op.passphrase_required.connect(get_passphrase);
-    //op.backend_password_required.connect(notify_backend_password);
     op.action_desc_changed.connect(set_progress_label);
     op.action_file_changed.connect(set_progress_label_file);
     op.progress.connect(show_progress);
+    op.backend.mount_op = mount_op;
     
     status_icon = new StatusIcon();
     status_icon.activated.connect((s, t) => {toggle_window(t, true);});
@@ -358,7 +354,7 @@ public abstract class AssistantOperation : Assistant
     }
     catch (Error e) {
       warning("%s\n", e.message);
-      show_error(op, e.message, null); // not really user-friendly text, but ideally this won't happen
+      show_error(e.message, null); // not really user-friendly text, but ideally this won't happen
       apply_finished(op, false);
     }
   }
@@ -384,15 +380,16 @@ public abstract class AssistantOperation : Assistant
         // Operation is waiting for password
         provide_password();
       }
-      else
+      else if (op == null)
         do_apply();
     }
-    else if (page == password_page && (op == null || !op.needs_password))
-      skip();
+    else if (page == password_page)
+      set_header_icon(Gtk.STOCK_DIALOG_AUTHENTICATION);
   }
   
   void do_cancel()
   {
+    hide();
     if (op != null)
       op.cancel(); // do_close will happen in done() callback
     else
@@ -408,11 +405,10 @@ public abstract class AssistantOperation : Assistant
 
     closing(succeeded);
 
-    print("doing close\n");
     Idle.add(() => {destroy(); return false;});
   }
 
-  protected void force_visible(bool user_click)
+  public void force_visible(bool user_click)
   {
     if (!visible)
       toggle_window(0, user_click);
@@ -454,15 +450,10 @@ public abstract class AssistantOperation : Assistant
 
   void found_passphrase(GnomeKeyring.Result result, string? str)
   {
-    try {
-      if (str != null)
-        op.continue_with_passphrase(str);
-      else
-        ask_passphrase();
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    if (str != null)
+      op.continue_with_passphrase(str);
+    else
+      ask_passphrase();
   }
 
   void get_passphrase()

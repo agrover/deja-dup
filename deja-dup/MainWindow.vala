@@ -256,7 +256,7 @@ public class MainWindow : Gtk.Window
 
     var manager = new Gtk.UIManager ();
     try {
-    manager.add_ui_from_string (ui, ui.size ());
+    manager.add_ui_from_string (ui, (ssize_t)ui.size ());
     } catch (Error e)  {
       error ("Internal error: bad ui string.\n");
     }

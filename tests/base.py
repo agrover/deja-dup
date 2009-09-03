@@ -27,7 +27,7 @@ import glob
 import re
 import traceback
 
-latest_duplicity = '0.6.04'
+latest_duplicity = '0.6.05'
 
 temp_dir = None
 gconf_dir = None
@@ -86,9 +86,10 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
   os.system('gconftool-2 --makefile-install-rule %s > /dev/null' % ('%s/../data/deja-dup.schemas.in' % srcdir))
   
   if backend == 'file':
-    create_local_config(dest, sources)
+    create_local_config(dest)
   elif backend == 'ssh':
-    create_ssh_config(dest, sources);
+    create_ssh_config(dest)
+  set_includes_excludes(includes=sources)
   
   if encrypt is not None:
     set_gconf_value("encrypt", 'true' if encrypt else 'false', 'bool')
@@ -124,11 +125,11 @@ def get_gconf_value(key):
   pout = sp.communicate()[0]
   return pout.strip()
 
-def start_deja_dup(args=['']):
+def start_deja_dup(args=[''], waitfor='frmDéjàDup'):
   ldtp.launchapp('deja-dup', arg=args, delay=0)
   ldtp.appundertest('deja-dup')
-  if '--restore' not in args: # bit of a hack, but...
-    ldtp.waittillguiexist('frmDéjàDup')
+  if waitfor is not None:
+    ldtp.waittillguiexist(waitfor)
 
 def start_deja_dup_prefs():
   ldtp.launchapp('deja-dup-preferences', delay=0)
@@ -139,7 +140,7 @@ def start_deja_dup_applet():
   ldtp.launchapp('deja-dup', arg=['--backup'], delay=0)
   ldtp.appundertest('deja-dup')
 
-def create_local_config(dest='/', includes=None, excludes=None):
+def create_local_config(dest='/'):
   if dest is None:
     dest = get_temp_name('local')
     os.system('mkdir -p %s' % dest)
@@ -147,21 +148,17 @@ def create_local_config(dest='/', includes=None, excludes=None):
     dest = os.getcwd()+'/'+dest
   set_gconf_value("backend", "file")
   set_gconf_value("file/path", dest)
-  includes = includes and [os.getcwd()+'/'+x for x in includes]
-  excludes = excludes and [os.getcwd()+'/'+x for x in excludes]
-  if includes:
-    includes = '[' + ','.join(includes) + ']'
-    set_gconf_value("include-list", includes, "list", "string")
-  if excludes:
-    excludes = '[' + ','.join(excludes) + ']'
-    set_gconf_value("exclude-list", excludes, "list", "string")
 
-def create_ssh_config(dest='/', includes=None, excludes=None):
+def create_ssh_config(dest='/'):
   if dest is None:
     dest = get_temp_name('local')
     os.system('mkdir -p %s' % dest)
   set_gconf_value("backend", "file")
   set_gconf_value("file/path", "ssh://localhost" + dest)
+
+def set_includes_excludes(includes=None, excludes=None):
+  includes = includes and [os.getcwd()+'/'+x for x in includes]
+  excludes = excludes and [os.getcwd()+'/'+x for x in excludes]
   if includes:
     includes = '[' + ','.join(includes) + ']'
     set_gconf_value("include-list", includes, "list", "string")
@@ -272,50 +269,58 @@ def last_date_change(to_date):
         os.rename(f, newname)
 
 def guivisible(frm, obj):
+  if obj not in ldtp.getobjectlist(frm):
+    return False
   states = ldtp.getallstates(frm, obj)
   return ldtp.state.VISIBLE in states
 
-def backup_simple():
+def backup_simple(finish=True):
   ldtp.click('frmDéjàDup', 'btnBackup')
-  assert ldtp.waittillguiexist('frmBackup')
-  if guivisible('frmBackup', 'btnLast'):
-    ldtp.click('frmBackup', 'btnLast')
-  ldtp.click('frmBackup', 'btnApply')
-  assert ldtp.waittillguiexist('frmBackup', 'lblYourfilesweresuccessfullybackedup.', guiTimeOut=200)
-  assert guivisible('frmBackup', 'lblYourfilesweresuccessfullybackedup.')
-  ldtp.click('frmBackup', 'btnClose')
+  ldtp.waittillguiexist('dlgBackup')
+  ldtp.remap('dlgBackup') # in case this is second time we've run it
+  if guivisible('dlgBackup', 'lblPreferences'):
+    ldtp.click('dlgBackup', 'btnForward')
+    ldtp.click('dlgBackup', 'btnForward')
+  ldtp.click('dlgBackup', 'btnBackup')
+  if finish:
+    ldtp.waittillguiexist('dlgBackup', 'lblYourfilesweresuccessfullybackedup.')
+    assert guivisible('dlgBackup', 'lblYourfilesweresuccessfullybackedup.')
+    ldtp.click('dlgBackup', 'btnClose')
+    ldtp.waittillguinotexist('dlgBackup')
 
 def restore_simple(path, date=None):
   ldtp.click('frmDéjàDup', 'btnRestore')
-  assert ldtp.waittillguiexist('frmRestore')
-  if ldtp.guiexist('frmRestore', 'pnlPreferences'):
-    ldtp.click('frmRestore', 'btnForward')
-  assert ldtp.waittillguiexist('frmRestore', 'flrRestorefromWhen?')
+  assert ldtp.waittillguiexist('dlgRestore')
+  ldtp.remap('dlgRestore') # in case this is second time we've run it
+  if ldtp.guiexist('dlgRestore', 'lblPreferences'):
+    ldtp.click('dlgRestore', 'btnForward')
+  assert ldtp.waittillguiexist('dlgRestore', 'lblRestorefromWhen?')
   if date:
-    ldtp.comboselect('frmRestore', 'cboDate', date)
-  ldtp.click('frmRestore', 'btnForward')
-  ldtp.click('frmRestore', 'rbtnRestoretospecificfolder')
-  ldtp.comboselect('frmRestore', 'cboRestorefolder', 'Other...')
+    ldtp.comboselect('dlgRestore', 'cboDate', date)
+  ldtp.click('dlgRestore', 'btnForward')
+  ldtp.click('dlgRestore', 'rbtnRestoretospecificfolder')
+  ldtp.comboselect('dlgRestore', 'cboRestorefolder', 'Other...')
   assert ldtp.waittillguiexist('dlgChoosedestinationforrestoredfiles')
   ldtp.settextvalue('dlgChoosedestinationforrestoredfiles', 'txtLocation', path)
   ldtp.click('dlgChoosedestinationforrestoredfiles', 'btnOpen')
-  ldtp.click('frmRestore', 'btnForward')
-  ldtp.click('frmRestore', 'btnApply')
-  assert ldtp.waittillguiexist('frmRestore', 'lblYourfilesweresuccessfullyrestored.')
-  assert guivisible('frmRestore', 'lblYourfilesweresuccessfullyrestored.')
-  ldtp.click('frmRestore', 'btnClose')
+  ldtp.click('dlgRestore', 'btnForward')
+  ldtp.click('dlgRestore', 'btnRestore')
+  assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
+  assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
+  ldtp.click('dlgRestore', 'btnClose')
+  ldtp.waittillguinotexist('dlgRestore')
 
 def restore_specific(path, date=None):
-  if ldtp.guiexist('frmRestore', 'pnlPreferences'):
-    ldtp.click('frmRestore', 'btnForward')
-  assert ldtp.waittillguiexist('frmRestore', 'flrRestorefromWhen?')
+  if ldtp.guiexist('dlgRestore', 'lblPreferences'):
+    ldtp.click('dlgRestore', 'btnForward')
+  assert ldtp.waittillguiexist('dlgRestore', 'lblRestorefromWhen?')
   if date:
-    ldtp.comboselect('frmRestore', 'cboDate', date)
-  ldtp.click('frmRestore', 'btnForward')
-  ldtp.click('frmRestore', 'btnApply')
-  assert ldtp.waittillguiexist('frmRestore', 'lblYourfilesweresuccessfullyrestored.')
-  assert guivisible('frmRestore', 'lblYourfilesweresuccessfullyrestored.')
-  ldtp.click('frmRestore', 'btnClose')
+    ldtp.comboselect('dlgRestore', 'cboDate', date)
+  ldtp.click('dlgRestore', 'btnForward')
+  ldtp.click('dlgRestore', 'btnRestore')
+  assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
+  assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
+  ldtp.click('dlgRestore', 'btnClose')
 
 def file_equals(path, contents):
   f = open(path)
@@ -331,3 +336,11 @@ def wait_for_quit():
       ldtp.wait(1)
     else:
       return
+
+def create_big_source():
+  os.system('mkdir -p data/big')
+  def make_sparse(name, size):
+    os.system('dd if=/dev/zero of=data/big/%s bs=1 count=0 seek=%sM >/dev/null 2>/dev/null' % (name, size))
+  make_sparse('first', 5)
+  make_sparse('second', 20)
+  make_sparse('third', 70)

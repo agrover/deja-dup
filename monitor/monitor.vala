@@ -33,10 +33,12 @@ static Pid pid;
 static bool native_path = true;
 static bool connected = true;
 static bool connection_postponed = false;
+static bool testing;
 
 static bool show_version = false;
 static const OptionEntry[] options = {
   {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
+  {"testing", 0, OptionFlags.HIDDEN, OptionArg.NONE, ref testing, null, null},
   {null}
 };
 
@@ -187,7 +189,10 @@ static long seconds_until(Date date)
   
   TimeVal next_time = date_to_timeval(date);
   
-  return next_time.tv_sec - cur_time.tv_sec;
+  if (testing)
+    return 10;
+  else
+    return next_time.tv_sec - cur_time.tv_sec;
 }
 
 static void close_pid(Pid child_pid, int status)
@@ -202,7 +207,7 @@ static bool kickoff()
   if (!seconds_until_next_run(out wait_time))
     return false;
   
-  if (wait_time > 0) {
+  if (!testing && wait_time > 0) {
     // Huh?  Shouldn't have been called now.
     prepare_next_run();
     return false;
@@ -225,8 +230,8 @@ static bool kickoff()
     try {
       string[] argv = new string[3];
       argv[0] = "deja-dup";
-      argv[2] = "--backup";
-      argv[1] = null;
+      argv[1] = "--backup";
+      argv[2] = null;
       Process.spawn_async(null, argv, null,
                           SpawnFlags.SEARCH_PATH |
                           SpawnFlags.DO_NOT_REAP_CHILD |

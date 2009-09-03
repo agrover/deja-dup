@@ -47,8 +47,8 @@ deja_dup_preferences_SOURCES = \
 
 vala.stamp: $(deja_dup_preferences_VALASOURCES)
 if USE_VALAC
-	$(VALAC) -C $(VALA_CFLAGS) $^
-	touch $@
+	$(AM_V_GEN)$(VALAC) -C $(VALA_CFLAGS) $^
+	@touch $@
 else
 	@echo "ERROR: Valac compilation is disabled, but the C sources are out-of-date."
 	@exit 1
