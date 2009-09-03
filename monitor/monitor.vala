@@ -53,7 +53,7 @@ static void init_dbus_to_network_manager() throws DBus.Error, GLib.Error {
   DBus.Object[] devices = network_manager.GetDevices();
 
   //Record the network manager connection state.
-  uint32 network_manager_state = network_manager.state();
+  uint32 network_manager_state = network_manager.State;
   connected = network_manager_state == 3;
   
   if (connected)
@@ -222,8 +222,10 @@ static bool kickoff()
   // get rescheduled anyway.
   prepare_tomorrow();
   
-  if (!native_path && !connected)
+  if (!native_path && !connected) {
+      debug("Cannot backup because I'm not connected to the internet!");
       return false;
+  }
 
   // Don't run right now if an applet is already running
   if (pid == (Pid)0) {
