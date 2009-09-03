@@ -53,7 +53,8 @@ static void init_dbus_to_network_manager() throws DBus.Error, GLib.Error {
   DBus.Object[] devices = network_manager.GetDevices();
 
   //Record the network manager connection state.
-  connected = network_manager.State == network_manager.NM_STATE_CONNECTED;
+  uint32 network_manager_state = network_manager.state();
+  connected = network_manager_state == 3;
   
   if (connected)
     debug("Network connection found!");
@@ -61,14 +62,14 @@ static void init_dbus_to_network_manager() throws DBus.Error, GLib.Error {
     debug("Network connection not found!");
 
   //Dbus signal when the state of the connection is changed.
-  network_manager.StateChanged.connect("network_manager_state_changed");
-  //network_manager.StateChanged += network_manager_state_changed;
+  //network_manager.StateChanged.connect(network_manager_state_changed);
+  network_manager.StateChanged += network_manager_state_changed;
 }
 
-static void network_manager_state_changed(DBus.Object new_state)
+static void network_manager_state_changed(DBus.Object obj, uint32 new_state)
 {
   //Record the network manager connection state.
-  connected = new_state == network_manager.NM_STATE_CONNECTED;
+  connected = new_state == 3;
 
   if (connected) {
     debug("Network connection found!");
