@@ -106,7 +106,9 @@ AC_SUBST(LIBRARY_CFLAGS)
 AC_SUBST(LIBRARY_LIBS)
 
 PKG_CHECK_MODULES(MONITOR,
-                  gconf-2.0)
+                  gtk+-2.0 >= $GTK_REQ_VER
+                  gconf-2.0
+                  dbus-glib-1)
 AC_SUBST(MONITOR_CFLAGS)
 AC_SUBST(MONITOR_LIBS)
 

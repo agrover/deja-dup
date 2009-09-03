@@ -33,7 +33,7 @@ public class BackendFile : Backend
     return new BackendFile(toplevel);
   }
 
-  string? get_location_from_gconf() throws Error
+  public static string? get_location_from_gconf() throws Error
   {
     var client = get_gconf_client();
     var path = client.get_string(FILE_PATH_KEY);

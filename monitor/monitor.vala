@@ -29,12 +29,59 @@ static const string PERIODIC_PERIOD_KEY = "/apps/deja-dup/periodic-period";
 static MainLoop loop;
 static uint timeout_id;
 static Pid pid;
+static bool connected = true;
+static bool native_path = true;
 
 static bool show_version = false;
 static const OptionEntry[] options = {
   {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
   {null}
 };
+
+static DBus.Connection conn;
+static dynamic DBus.Object network_manager;
+
+static void init_dbus_to_network_manager() throws DBus.Error, GLib.Error {
+  
+  //Set up the DBus connection to network manager
+  conn = DBus.Bus.@get(DBus.BusType.SYSTEM);
+  network_manager = conn.get_object(
+    "org.freedesktop.NetworkManager",
+    "/org/freedesktop/NetworkManager",
+    "org.freedesktop.NetworkManager");
+  
+  DBus.Object[] devices = network_manager.GetDevices();
+
+  //Record the network manager connection state.
+  connected = network_manager.State == network_manager.NM_STATE_CONNECTED;
+  
+  if (connected)
+    debug("Network connection found!");
+  else
+    debug("Network connection not found!");
+
+  //Dbus signal when the state of the connection is changed.
+  network_manager.StateChanged.connect("network_manager_state_changed");
+  //network_manager.StateChanged += network_manager_state_changed;
+}
+
+static void network_manager_state_changed(DBus.Object new_state)
+{
+  //Record the network manager connection state.
+  connected = new_state == network_manager.NM_STATE_CONNECTED;
+
+  if (connected) {
+    debug("Network connection found!");
+    long wait_time;
+    if (!seconds_until_next_run(out wait_time))
+      return;
+    
+    if (wait_time < 1)
+      kickoff();
+  }
+  else
+    debug("Network connection lost!");
+}
 
 static bool handle_options(out int status)
 {
@@ -146,7 +193,8 @@ static long seconds_until(Date date)
   
   TimeVal next_time = date_to_timeval(date);
   
-  return next_time.tv_sec - cur_time.tv_sec;
+  //return next_time.tv_sec - cur_time.tv_sec;
+  return 60;
 }
 
 static void close_pid(Pid child_pid, int status)
@@ -161,25 +209,28 @@ static bool kickoff()
   if (!seconds_until_next_run(out wait_time))
     return false;
   
-  if (wait_time > 0) {
+  /*if (wait_time > 0) {
     // Huh?  Shouldn't have been called now.
     prepare_next_run();
     return false;
-  }
-  
+  }*/
+
   // Now we secretly schedule another kickoff tomorrow, in case something
   // goes wrong with this run (or user chooses to ignore for now)
   // If this run is successful, it will change 'last-run' key and this will
   // get rescheduled anyway.
   prepare_tomorrow();
   
+  if (!native_path && !connected)
+      return false;
+
   // Don't run right now if an applet is already running
   if (pid == (Pid)0) {
     try {
       string[] argv = new string[3];
       argv[0] = "deja-dup";
-      argv[2] = "--backup";
-      argv[1] = null;
+      argv[1] = "--backup";
+      argv[2] = null;
       Process.spawn_async(null, argv, null,
                           SpawnFlags.SEARCH_PATH |
                           SpawnFlags.DO_NOT_REAP_CHILD |
@@ -260,6 +311,30 @@ static void watch_gconf()
 
 static int main(string[] args)
 {
+  //Detect a remote backend such as Amazon S3, and delay the start of backup.
+  try {
+    var path = DejaDup.BackendFile.get_location_from_gconf();
+    var file = File.parse_name(path);
+    native_path = file.is_native();
+    debug("%s", path);
+  }
+  catch (GLib.Error e) {
+    printerr("%s\n\n%s", e.message, "GLib Error!\n");
+    return 1;
+  }
+
+  if (!native_path) {
+    debug("remote path");
+    try {
+      init_dbus_to_network_manager();
+    }
+    catch (Error e) {
+      debug("Failed to initialize DBus");
+      printerr("%s\n\n%s", e.message, "Failed to initialize DBus\n");
+      return 1;
+    }
+  }
+
   GLib.Intl.textdomain(Config.GETTEXT_PACKAGE);
   GLib.Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
   GLib.Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
@@ -277,11 +352,11 @@ static int main(string[] args)
     printerr("%s\n\n%s", e.message, context.get_help(true, null));
     return 1;
   }
-  
+
   int status;
   if (!handle_options(out status))
     return status;
-  
+
   loop = new MainLoop(null, false);
   
   prepare_next_run();
