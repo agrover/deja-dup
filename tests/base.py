@@ -274,18 +274,19 @@ def guivisible(frm, obj):
   states = ldtp.getallstates(frm, obj)
   return ldtp.state.VISIBLE in states
 
-def backup_simple():
+def backup_simple(finish=True):
   ldtp.click('frmDéjàDup', 'btnBackup')
-  assert ldtp.waittillguiexist('dlgBackup')
+  ldtp.waittillguiexist('dlgBackup')
   ldtp.remap('dlgBackup') # in case this is second time we've run it
   if guivisible('dlgBackup', 'lblPreferences'):
     ldtp.click('dlgBackup', 'btnForward')
     ldtp.click('dlgBackup', 'btnForward')
-  ldtp.click('dlgBackup', 'btnApply')
-  assert ldtp.waittillguiexist('dlgBackup', 'lblYourfilesweresuccessfullybackedup.', guiTimeOut=200)
-  assert guivisible('dlgBackup', 'lblYourfilesweresuccessfullybackedup.')
-  ldtp.click('dlgBackup', 'btnClose')
-  ldtp.waittillguinotexist('dlgBackup')
+  ldtp.click('dlgBackup', 'btnBackup')
+  if finish:
+    ldtp.waittillguiexist('dlgBackup', 'lblYourfilesweresuccessfullybackedup.')
+    assert guivisible('dlgBackup', 'lblYourfilesweresuccessfullybackedup.')
+    ldtp.click('dlgBackup', 'btnClose')
+    ldtp.waittillguinotexist('dlgBackup')
 
 def restore_simple(path, date=None):
   ldtp.click('frmDéjàDup', 'btnRestore')
@@ -303,7 +304,7 @@ def restore_simple(path, date=None):
   ldtp.settextvalue('dlgChoosedestinationforrestoredfiles', 'txtLocation', path)
   ldtp.click('dlgChoosedestinationforrestoredfiles', 'btnOpen')
   ldtp.click('dlgRestore', 'btnForward')
-  ldtp.click('dlgRestore', 'btnApply')
+  ldtp.click('dlgRestore', 'btnRestore')
   assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
   assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
   ldtp.click('dlgRestore', 'btnClose')
@@ -316,7 +317,7 @@ def restore_specific(path, date=None):
   if date:
     ldtp.comboselect('dlgRestore', 'cboDate', date)
   ldtp.click('dlgRestore', 'btnForward')
-  ldtp.click('dlgRestore', 'btnApply')
+  ldtp.click('dlgRestore', 'btnRestore')
   assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
   assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
   ldtp.click('dlgRestore', 'btnClose')
@@ -335,3 +336,11 @@ def wait_for_quit():
       ldtp.wait(1)
     else:
       return
+
+def create_big_source():
+  os.system('mkdir -p data/big')
+  def make_sparse(name, size):
+    os.system('dd if=/dev/zero of=data/big/%s bs=1 count=0 seek=%sM >/dev/null 2>/dev/null' % (name, size))
+  make_sparse('first', 5)
+  make_sparse('second', 20)
+  make_sparse('third', 70)
