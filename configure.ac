@@ -1,7 +1,8 @@
 # -*- Mode: m4; indent-tabs-mode: nil; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008,2009 Michael Terry <mike@mterry.name>
+# © 2008,2009 Michael Terry <mike@mterry.name>,
+# © 2009 Andrew Fister <temposs@gmail.com>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -103,7 +104,9 @@ AC_SUBST(LIBRARY_CFLAGS)
 AC_SUBST(LIBRARY_LIBS)
 
 PKG_CHECK_MODULES(MONITOR,
-                  gconf-2.0)
+                  gconf-2.0
+                  gio-2.0 >= $GIO_REQ_VER
+                  dbus-glib-1)
 AC_SUBST(MONITOR_CFLAGS)
 AC_SUBST(MONITOR_LIBS)
 

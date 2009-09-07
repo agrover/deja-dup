@@ -1,7 +1,8 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008,2009 Michael Terry <mike@mterry.name>,
+    © 2009 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,10 +26,14 @@ static const string GCONF_DIR = "/apps/deja-dup";
 static const string LAST_RUN_KEY = "/apps/deja-dup/last-run";
 static const string PERIODIC_KEY = "/apps/deja-dup/periodic";
 static const string PERIODIC_PERIOD_KEY = "/apps/deja-dup/periodic-period";
+static const string BACKEND_KEY = "/apps/deja-dup/backend";
+static const string FILE_PATH_KEY = "/apps/deja-dup/file/path";
+static const uint32 NM_STATE_CONNECTED = 3;
 
 static MainLoop loop;
 static uint timeout_id;
 static Pid pid;
+static bool connected = true;
 static bool testing;
 
 static bool show_version = false;
@@ -37,6 +42,57 @@ static const OptionEntry[] options = {
   {"testing", 0, OptionFlags.HIDDEN, OptionArg.NONE, ref testing, null, null},
   {null}
 };
+
+static dynamic DBus.Object network_manager;
+
+static void init_dbus_to_network_manager() throws DBus.Error, GLib.Error
+{ 
+  //Set up the DBus connection to network manager
+  DBus.Connection conn = DBus.Bus.get(DBus.BusType.SYSTEM);
+  network_manager = conn.get_object(
+    "org.freedesktop.NetworkManager",
+    "/org/freedesktop/NetworkManager",
+    "org.freedesktop.NetworkManager");
+
+  //Retrieve the network manager connection state.
+  uint32 network_manager_state = network_manager.State;
+  connected = network_manager_state == NM_STATE_CONNECTED;
+
+  //Dbus signal when the state of the connection is changed.
+  network_manager.StateChanged += network_manager_state_changed;
+}
+
+static void network_manager_state_changed(DBus.Object obj, uint32 new_state)
+{
+  connected = new_state == NM_STATE_CONNECTED;
+
+  if (connected)
+      prepare_next_run();
+}
+
+static bool is_native()
+{
+  //Detect a remote backend such as Amazon S3 or SSH.
+  bool native_path = true;
+  try {
+    var client = GConf.Client.get_default();
+    string backend_name = client.get_string(BACKEND_KEY);
+
+    if (backend_name == "s3")
+      native_path = false;
+    else if (backend_name == "file")
+    {
+      string path = client.get_string(FILE_PATH_KEY);
+      var backend_file = File.parse_name(path);
+      native_path = backend_file.is_native();
+    }
+  }
+  catch (GLib.Error e) {
+    warning("%s", e.message);
+  }
+
+  return native_path;
+}
 
 static bool handle_options(out int status)
 {
@@ -171,13 +227,18 @@ static bool kickoff()
     prepare_next_run();
     return false;
   }
-  
+
   // Now we secretly schedule another kickoff tomorrow, in case something
   // goes wrong with this run (or user chooses to ignore for now)
   // If this run is successful, it will change 'last-run' key and this will
   // get rescheduled anyway.
   prepare_tomorrow();
-  
+
+  if (!is_native() && !connected) {
+      debug("No connection found. Postponing the backup.");
+      return false;
+  }
+
   // Don't run right now if an applet is already running
   if (pid == (Pid)0) {
     try {
@@ -265,6 +326,13 @@ static void watch_gconf()
 
 static int main(string[] args)
 {
+  try {
+    init_dbus_to_network_manager();
+  }
+  catch (Error e) {
+    warning("%s\n\n%s", e.message, "Failed to initialize DBus\n");
+  }
+
   GLib.Intl.textdomain(Config.GETTEXT_PACKAGE);
   GLib.Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
   GLib.Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
@@ -282,11 +350,11 @@ static int main(string[] args)
     printerr("%s\n\n%s", e.message, context.get_help(true, null));
     return 1;
   }
-  
+
   int status;
   if (!handle_options(out status))
     return status;
-  
+
   loop = new MainLoop(null, false);
   
   prepare_next_run();
