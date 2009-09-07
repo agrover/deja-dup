@@ -31,9 +31,7 @@ static const uint32 NM_STATE_CONNECTED = 3;
 static MainLoop loop;
 static uint timeout_id;
 static Pid pid;
-static bool native_path = true;
 static bool connected = true;
-static bool connection_postponed = false;
 static bool testing;
 
 static bool show_version = false;
@@ -67,16 +65,8 @@ static void network_manager_state_changed(DBus.Object obj, uint32 new_state)
 {
   connected = new_state == NM_STATE_CONNECTED;
 
-  if (connected) {
-    long wait_time;
-    if (!seconds_until_next_run(out wait_time))
-      return;
-
-    if (connection_postponed) {
-      prepare_run(0);
-      connection_postponed = false;
-    }
-  }
+  if (connected)
+      prepare_next_run();
 
 }
 
@@ -220,9 +210,27 @@ static bool kickoff()
   // get rescheduled anyway.
   prepare_tomorrow();
   
+  //Detect a remote backend such as Amazon S3, and delay the start of backup.
+  var native_path = true;
+  try {
+    var client = DejaDup.get_gconf_client();
+    var backend_name = client.get_string(DejaDup.BACKEND_KEY);
+
+    if (backend_name == "s3")
+      native_path = false;
+    else if (backend_name == "file")
+    {
+      var path = DejaDup.BackendFile.get_location_from_gconf();
+      var backend_file = File.parse_name(path);
+      native_path = backend_file.is_native();
+    }
+  }
+  catch (GLib.Error e) {
+    warning("%s", e.message);
+  }
+
   if (!native_path && !connected) {
       debug("No connection found. Postponing the backup.");
-      connection_postponed = true;
       return false;
   }
 
@@ -313,26 +321,12 @@ static void watch_gconf()
 
 static int main(string[] args)
 {
-  //Detect a remote backend such as Amazon S3, and delay the start of backup.
-  try {
-    var path = DejaDup.BackendFile.get_location_from_gconf();
-    var file = File.parse_name(path);
-    native_path = file.is_native();
-  }
-  catch (GLib.Error e) {
-    printerr("%s\n\n%s", e.message, "GLib Error!\n");
-    return 1;
-  }
-
-  if (!native_path) {
     try {
       init_dbus_to_network_manager();
     }
     catch (Error e) {
-      printerr("%s\n\n%s", e.message, "Failed to initialize DBus\n");
-      return 1;
+      warning("%s\n\n%s", e.message, "Failed to initialize DBus\n");
     }
-  }
 
   GLib.Intl.textdomain(Config.GETTEXT_PACKAGE);
   GLib.Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
