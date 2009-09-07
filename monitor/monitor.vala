@@ -78,7 +78,7 @@ static bool is_native()
   bool native_path = true;
   try {
     var client = GConf.Client.get_default();
-    var backend_name = client.get_string(BACKEND_KEY);
+    string backend_name = client.get_string(BACKEND_KEY);
 
     if (backend_name == "s3")
       native_path = false;
