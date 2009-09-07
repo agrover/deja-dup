@@ -20,16 +20,13 @@
 bin_PROGRAMS = deja-dup-monitor
 
 VALA_CFLAGS = \
-	--vapidir $(top_srcdir)/libdeja-dup \
 	--vapidir $(top_srcdir)/vapi \
 	--pkg gtk+-2.0 \
 	--pkg gconf-2.0 \
-	--pkg libdeja-dup \
 	--pkg config \
 	--pkg dbus-glib-1
 
 AM_CFLAGS = \
-	-I$(top_srcdir)/libdeja-dup \
 	$(MONITOR_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
@@ -52,6 +49,6 @@ else
 	@exit 1
 endif
 
-deja_dup_monitor_LDADD = $(MONITOR_LIBS) @INTLLIBS@ $(top_builddir)/libdeja-dup/libdeja-dup.la
+deja_dup_monitor_LDADD = $(MONITOR_LIBS) @INTLLIBS@
 
 EXTRA_DIST = vala.stamp $(deja_dup_monitor_VALASOURCES)

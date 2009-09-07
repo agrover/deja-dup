@@ -26,6 +26,8 @@ static const string GCONF_DIR = "/apps/deja-dup";
 static const string LAST_RUN_KEY = "/apps/deja-dup/last-run";
 static const string PERIODIC_KEY = "/apps/deja-dup/periodic";
 static const string PERIODIC_PERIOD_KEY = "/apps/deja-dup/periodic-period";
+static const string BACKEND_KEY = "/apps/deja-dup/backend";
+static const string FILE_PATH_KEY = "/apps/deja-dup/file/path";
 static const uint32 NM_STATE_CONNECTED = 3;
 
 static MainLoop loop;
@@ -210,17 +212,17 @@ static bool kickoff()
   // get rescheduled anyway.
   prepare_tomorrow();
   
-  //Detect a remote backend such as Amazon S3, and delay the start of backup.
+  //Detect a remote backend such as Amazon S3 or SSH.
   var native_path = true;
   try {
-    var client = DejaDup.get_gconf_client();
-    var backend_name = client.get_string(DejaDup.BACKEND_KEY);
+    var client = GConf.Client.get_default();
+    var backend_name = client.get_string(BACKEND_KEY);
 
     if (backend_name == "s3")
       native_path = false;
     else if (backend_name == "file")
     {
-      var path = DejaDup.BackendFile.get_location_from_gconf();
+      var path = client.get_string(FILE_PATH_KEY);
       var backend_file = File.parse_name(path);
       native_path = backend_file.is_native();
     }
