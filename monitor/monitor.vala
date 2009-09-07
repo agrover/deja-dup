@@ -72,6 +72,30 @@ static void network_manager_state_changed(DBus.Object obj, uint32 new_state)
 
 }
 
+static bool is_native()
+{
+  //Detect a remote backend such as Amazon S3 or SSH.
+  bool native_path = true;
+  try {
+    var client = GConf.Client.get_default();
+    var backend_name = client.get_string(BACKEND_KEY);
+
+    if (backend_name == "s3")
+      native_path = false;
+    else if (backend_name == "file")
+    {
+      string path = client.get_string(FILE_PATH_KEY);
+      var backend_file = File.parse_name(path);
+      native_path = backend_file.is_native();
+    }
+  }
+  catch (GLib.Error e) {
+    warning("%s", e.message);
+  }
+
+  return native_path;
+}
+
 static bool handle_options(out int status)
 {
   status = 0;
@@ -211,27 +235,8 @@ static bool kickoff()
   // If this run is successful, it will change 'last-run' key and this will
   // get rescheduled anyway.
   prepare_tomorrow();
-  
-  //Detect a remote backend such as Amazon S3 or SSH.
-  var native_path = true;
-  try {
-    var client = GConf.Client.get_default();
-    var backend_name = client.get_string(BACKEND_KEY);
 
-    if (backend_name == "s3")
-      native_path = false;
-    else if (backend_name == "file")
-    {
-      var path = client.get_string(FILE_PATH_KEY);
-      var backend_file = File.parse_name(path);
-      native_path = backend_file.is_native();
-    }
-  }
-  catch (GLib.Error e) {
-    warning("%s", e.message);
-  }
-
-  if (!native_path && !connected) {
+  if (!is_native() && !connected) {
       debug("No connection found. Postponing the backup.");
       return false;
   }
