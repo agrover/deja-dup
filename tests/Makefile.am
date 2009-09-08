@@ -21,6 +21,7 @@
 
 TESTS = \
 	backup/cancel-clean \
+	backup/continue \
 	backup/full \
 	backup/delete \
 	basic/badversion \
