@@ -410,6 +410,10 @@ public class Duplicity : Object
   protected static const int INFO_DIFF_FILE_DELETED = 6;
   protected static const int INFO_PATCH_FILE_WRITING = 7;
   protected static const int INFO_PATCH_FILE_PATCHING = 8;
+  protected static const int INFO_SYNCHRONOUS_UPLOAD_BEGIN = 11;
+  protected static const int INFO_ASYNCHRONOUS_UPLOAD_BEGIN = 12;
+  protected static const int INFO_SYNCHRONOUS_UPLOAD_DONE = 13;
+  protected static const int INFO_ASYNCHRONOUS_UPLOAD_DONE = 14;
   protected static const int WARNING_ORPHANED_SIG = 2;
   protected static const int WARNING_UNNECESSARY_SIG = 3;
   protected static const int WARNING_UNMATCHED_SIG = 4;
@@ -560,6 +564,11 @@ public class Duplicity : Object
         break;
       case INFO_COLLECTION_STATUS:
         process_collection_status(data);
+        break;
+      case INFO_SYNCHRONOUS_UPLOAD_BEGIN:
+      case INFO_ASYNCHRONOUS_UPLOAD_BEGIN:
+        if (!backend.is_native())
+          action_desc_changed(_("Uploading..."));
         break;
       }
     }
