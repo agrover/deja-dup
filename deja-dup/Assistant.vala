@@ -30,10 +30,12 @@ public abstract class Assistant : Gtk.Dialog
 {
   public signal void canceled();
   public signal void closed();
+  public signal void resumed();
   public signal void prepare(Gtk.Widget page);
   public signal void forward();
   public signal void backward();
-  public string apply_text {get; set;}
+  public string apply_text {get; set; default = Gtk.STOCK_APPLY;}
+  public bool resume_supported {get; set; default = false;}
 
   public enum Type {
     NORMAL, INTERRUPT, SUMMARY, PROGRESS, FINISH
@@ -45,6 +47,7 @@ public abstract class Assistant : Gtk.Dialog
   Gtk.Widget forward_button;
   Gtk.Widget cancel_button;
   Gtk.Widget close_button;
+  Gtk.Widget resume_button;
   Gtk.Widget apply_button;
   protected Gtk.EventBox page_box;
 
@@ -65,11 +68,11 @@ public abstract class Assistant : Gtk.Dialog
   static const int FORWARD = 3;
   static const int CANCEL = 4;
   static const int CLOSE = 5;
+  static const int RESUME = 6;
 
   construct
   {
     has_separator = false;
-    apply_text = Gtk.STOCK_APPLY;
 
     infos = new List<PageInfo>();
 
@@ -130,6 +133,7 @@ public abstract class Assistant : Gtk.Dialog
     default:
     case CANCEL: canceled(); break;
     case CLOSE: closed(); break;
+    case RESUME: resumed(); break;
     }
   }
 
@@ -253,7 +257,7 @@ public abstract class Assistant : Gtk.Dialog
     weak PageInfo info = current.data;
 
     bool show_cancel = false, show_back = false, show_forward = false,
-         show_apply = false, show_close = false;
+         show_apply = false, show_close = false, show_resume = false;
     string forward_text = Gtk.STOCK_GO_FORWARD;
 
     switch (info.type) {
@@ -275,7 +279,7 @@ public abstract class Assistant : Gtk.Dialog
       break;
     case Type.PROGRESS:
       show_cancel = true;
-      show_back = current.prev != null;
+      show_resume = resume_supported;
       break;
     case Type.FINISH:
       show_close = true;
@@ -288,6 +292,8 @@ public abstract class Assistant : Gtk.Dialog
       action_area.remove(close_button); close_button = null;}
     if (back_button != null) {
       action_area.remove(back_button); back_button = null;}
+    if (resume_button != null) {
+      action_area.remove(resume_button); resume_button = null;}
     if (forward_button != null) {
       action_area.remove(forward_button); forward_button = null;}
     if (apply_button != null) {
@@ -301,6 +307,10 @@ public abstract class Assistant : Gtk.Dialog
     }
     if (show_back)
       back_button = add_button(Gtk.STOCK_GO_BACK, BACK);
+    if (show_resume) {
+      resume_button = add_button(_("_Resume Later"), RESUME);
+      resume_button.grab_default();
+    }
     if (show_forward) {
       forward_button = add_button(forward_text, FORWARD);
       forward_button.grab_default();

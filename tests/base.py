@@ -157,8 +157,8 @@ def create_ssh_config(dest='/'):
   set_gconf_value("file/path", "ssh://localhost" + dest)
 
 def set_includes_excludes(includes=None, excludes=None):
-  includes = includes and [os.getcwd()+'/'+x for x in includes]
-  excludes = excludes and [os.getcwd()+'/'+x for x in excludes]
+  includes = includes and [os.getcwd()+'/'+x if x[0] != '/' else x for x in includes]
+  excludes = excludes and [os.getcwd()+'/'+x if x[0] != '/' else x for x in excludes]
   if includes:
     includes = '[' + ','.join(includes) + ']'
     set_gconf_value("include-list", includes, "list", "string")
@@ -283,7 +283,7 @@ def backup_simple(finish=True):
     ldtp.click('dlgBackup', 'btnForward')
   ldtp.click('dlgBackup', 'btnBackup')
   if finish:
-    ldtp.waittillguiexist('dlgBackup', 'lblYourfilesweresuccessfullybackedup.')
+    ldtp.waittillguiexist('dlgBackup', 'lblYourfilesweresuccessfullybackedup.', 400)
     assert guivisible('dlgBackup', 'lblYourfilesweresuccessfullybackedup.')
     ldtp.click('dlgBackup', 'btnClose')
     ldtp.waittillguinotexist('dlgBackup')
@@ -336,11 +336,3 @@ def wait_for_quit():
       ldtp.wait(1)
     else:
       return
-
-def create_big_source():
-  os.system('mkdir -p data/big')
-  def make_sparse(name, size):
-    os.system('dd if=/dev/zero of=data/big/%s bs=1 count=0 seek=%sM >/dev/null 2>/dev/null' % (name, size))
-  make_sparse('first', 5)
-  make_sparse('second', 20)
-  make_sparse('third', 70)

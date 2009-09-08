@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: mike@mterry.name\n"
-"POT-Creation-Date: 2009-08-28 23:02-0400\n"
+"POT-Creation-Date: 2009-09-07 20:32-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,8 +28,8 @@ msgstr ""
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer monitor.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.h:1 ../monitor/monitor.vala:44
-#: ../monitor/monitor.vala:270
+#: ../data/deja-dup-monitor.desktop.in.h:1 ../monitor/monitor.vala:46
+#: ../monitor/monitor.vala:275
 msgid "Déjà Dup Monitor"
 msgstr ""
 
@@ -152,7 +152,7 @@ msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 
 #: ../applet/applet.vala:26 ../deja-dup/main.vala:32
-#: ../monitor/monitor.vala:35 ../preferences/preferences.vala:26
+#: ../monitor/monitor.vala:36 ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr ""
 
@@ -224,85 +224,94 @@ msgstr ""
 msgid "Could not open preferences"
 msgstr ""
 
-#: ../deja-dup/Assistant.vala:272
+#: ../deja-dup/Assistant.vala:278
 msgid "Co_ntinue"
+msgstr ""
+
+#: ../deja-dup/Assistant.vala:311
+msgid "_Resume Later"
 msgstr ""
 
 #: ../deja-dup/AssistantBackup.vala:34
 msgid "Backup"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:48 ../deja-dup/AssistantRestore.vala:91
+#: ../deja-dup/AssistantBackup.vala:35 ../deja-dup/MainWindow.vala:73
+#: ../deja-dup/MainWindow.vala:187
+msgid "_Backup"
+msgstr ""
+
+#: ../deja-dup/AssistantBackup.vala:51 ../deja-dup/AssistantRestore.vala:92
 #: ../preferences/PreferencesDialog.vala:54
 msgid "_Backup location:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:55
+#: ../deja-dup/AssistantBackup.vala:58
 #: ../preferences/PreferencesDialog.vala:135
 msgid "_Encrypt backup files"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:76
+#: ../deja-dup/AssistantBackup.vala:79
 #: ../preferences/PreferencesDialog.vala:99
 msgid "I_nclude files in folders:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:89
+#: ../deja-dup/AssistantBackup.vala:92
 #: ../preferences/PreferencesDialog.vala:118
 msgid "E_xcept files in folders:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:110 ../deja-dup/AssistantBackup.vala:114
-#: ../deja-dup/AssistantRestore.vala:111
+#: ../deja-dup/AssistantBackup.vala:113 ../deja-dup/AssistantBackup.vala:117
+#: ../deja-dup/AssistantRestore.vala:112
 msgid "Preferences"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:130 ../deja-dup/AssistantRestore.vala:207
+#: ../deja-dup/AssistantBackup.vala:133 ../deja-dup/AssistantRestore.vala:208
 msgid "Backup location:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:137 ../deja-dup/AssistantRestore.vala:214
+#: ../deja-dup/AssistantBackup.vala:140 ../deja-dup/AssistantRestore.vala:215
 msgid "Encrypted:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:144
+#: ../deja-dup/AssistantBackup.vala:147
 msgid "Include from:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:152
+#: ../deja-dup/AssistantBackup.vala:155
 msgid "Except for:"
 msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:172
+#: ../deja-dup/AssistantBackup.vala:185
 msgid "Backing up:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:182
+#: ../deja-dup/AssistantBackup.vala:195
 #: ../preferences/PreferencesDialog.vala:141
 msgid "_Automatically backup on a regular schedule"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:185
+#: ../deja-dup/AssistantBackup.vala:198
 #: ../preferences/PreferencesDialog.vala:148
 #, c-format
 msgid "How _often to backup:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:212
+#: ../deja-dup/AssistantBackup.vala:225
 msgid "Backup Failed"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:215
+#: ../deja-dup/AssistantBackup.vala:228
 msgid "Backup Finished"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:216
+#: ../deja-dup/AssistantBackup.vala:229
 msgid "Your files were successfully backed up."
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:235 ../libdeja-dup/Operation.vala:49
+#: ../deja-dup/AssistantBackup.vala:248 ../libdeja-dup/Operation.vala:49
 msgid "Backing up..."
 msgstr ""
 
@@ -343,83 +352,88 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:98
+#: ../deja-dup/AssistantRestore.vala:71 ../deja-dup/MainWindow.vala:46
+#: ../deja-dup/MainWindow.vala:193
+msgid "_Restore"
+msgstr ""
+
+#: ../deja-dup/AssistantRestore.vala:99
 msgid "Backup files are _encrypted"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:132
+#: ../deja-dup/AssistantRestore.vala:133
 msgid "_Date:"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:155
+#: ../deja-dup/AssistantRestore.vala:156
 msgid "Restore files to _original locations"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:160
+#: ../deja-dup/AssistantRestore.vala:161
 msgid "Restore to _specific folder"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:170
+#: ../deja-dup/AssistantRestore.vala:171
 msgid "Choose destination for restored files"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:174
+#: ../deja-dup/AssistantRestore.vala:175
 msgid "Restore _folder:"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:222
 msgid "Restore date:"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:230
+#: ../deja-dup/AssistantRestore.vala:231
 msgid "Restore folder:"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:254
+#: ../deja-dup/AssistantRestore.vala:255
 msgid "Checking for Backups"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:262
+#: ../deja-dup/AssistantRestore.vala:263
 msgid "Restore from When?"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:270
+#: ../deja-dup/AssistantRestore.vala:271
 msgid "Restore to Where?"
 msgstr ""
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:291
+#: ../deja-dup/AssistantRestore.vala:292
 msgid "Restoring:"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:319
+#: ../deja-dup/AssistantRestore.vala:320
 msgid "No backups to restore"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:399
+#: ../deja-dup/AssistantRestore.vala:400
 msgid "Original location"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:412
+#: ../deja-dup/AssistantRestore.vala:413
 msgid "File to restore:"
 msgid_plural "Files to restore:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../deja-dup/AssistantRestore.vala:434
+#: ../deja-dup/AssistantRestore.vala:435
 msgid "Restore Failed"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:436
+#: ../deja-dup/AssistantRestore.vala:437
 msgid "Restore Finished"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:437
+#: ../deja-dup/AssistantRestore.vala:438
 msgid "Your files were successfully restored."
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:441 ../libdeja-dup/Operation.vala:51
+#: ../deja-dup/AssistantRestore.vala:442 ../libdeja-dup/Operation.vala:51
 msgid "Restoring..."
 msgstr ""
 
@@ -443,14 +457,6 @@ msgstr ""
 
 #: ../deja-dup/main.vala:50
 msgid "No filenames provided"
-msgstr ""
-
-#: ../deja-dup/MainWindow.vala:46 ../deja-dup/MainWindow.vala:193
-msgid "_Restore"
-msgstr ""
-
-#: ../deja-dup/MainWindow.vala:73 ../deja-dup/MainWindow.vala:187
-msgid "_Backup"
 msgstr ""
 
 #: ../deja-dup/MainWindow.vala:184
@@ -638,96 +644,96 @@ msgid_plural "Every %d days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:128
+#: ../libdeja-dup/DuplicityInfo.vala:131
 msgid "Could not run duplicity"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:134
+#: ../libdeja-dup/DuplicityInfo.vala:137
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:136
+#: ../libdeja-dup/DuplicityInfo.vala:139
 #, c-format
 msgid ""
 "Could not understand duplicity version '%s'.\n"
 "\n"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:138
+#: ../libdeja-dup/DuplicityInfo.vala:141
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:148
+#: ../libdeja-dup/DuplicityInfo.vala:151
 msgid "Duplicity's version is too old"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:149
+#: ../libdeja-dup/DuplicityInfo.vala:152
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
 "version %d.%d.%.2d"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:153 ../libdeja-dup/Duplicity.vala:161
+#: ../libdeja-dup/Duplicity.vala:158 ../libdeja-dup/Duplicity.vala:166
 #: ../libdeja-dup/Operation.vala:76
 msgid "Preparing..."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:231 ../libdeja-dup/Duplicity.vala:248
+#: ../libdeja-dup/Duplicity.vala:236 ../libdeja-dup/Duplicity.vala:253
 msgid "Cleaning up..."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:320 ../libdeja-dup/Duplicity.vala:534
+#: ../libdeja-dup/Duplicity.vala:325 ../libdeja-dup/Duplicity.vala:539
 msgid "Failed with an unknown error."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:457
+#: ../libdeja-dup/Duplicity.vala:462
 #, c-format
 msgid "Could not restore '%s': File not found in backup"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:461
+#: ../libdeja-dup/Duplicity.vala:466
 msgid "Bad encryption passphrase"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:474
+#: ../libdeja-dup/Duplicity.vala:479
 msgid "Invalid ID."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:476
+#: ../libdeja-dup/Duplicity.vala:481
 msgid "Invalid secret key."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:478
+#: ../libdeja-dup/Duplicity.vala:483
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:487
+#: ../libdeja-dup/Duplicity.vala:492
 msgid "S3 bucket name is not available."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:492
+#: ../libdeja-dup/Duplicity.vala:497
 msgid "Bad encryption password."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:496
+#: ../libdeja-dup/Duplicity.vala:501
 #, c-format
 msgid "Error reading file '%s'."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:498
+#: ../libdeja-dup/Duplicity.vala:503
 #, c-format
 msgid "Error writing file '%s'."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:506
+#: ../libdeja-dup/Duplicity.vala:511
 #, c-format
 msgid "No space left in %s"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:526
+#: ../libdeja-dup/Duplicity.vala:531
 msgid "No backup files found"
 msgstr ""
 
@@ -791,7 +797,7 @@ msgstr ""
 msgid "Checking for backups..."
 msgstr ""
 
-#: ../libdeja-dup/Operation.vala:184
+#: ../libdeja-dup/Operation.vala:189
 msgid "Another Déjà Dup is already running"
 msgstr ""
 

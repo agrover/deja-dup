@@ -103,6 +103,11 @@ public abstract class Operation : Object
     dup.cancel();
   }
   
+  public void stop()
+  {
+    dup.stop();
+  }
+  
   protected virtual void connect_to_dup()
   {
     dup.done.connect(operation_finished);
@@ -188,6 +193,10 @@ public abstract class Operation : Object
   uint inhibit_cookie = 0;
   void set_session_inhibited(bool inhibit)
   {
+    // Don't inhibit if we can resume safely
+    if (DuplicityInfo.get_default().can_resume)
+      return;
+
     try {
       var conn = DBus.Bus.@get(DBus.BusType.SESSION);
       

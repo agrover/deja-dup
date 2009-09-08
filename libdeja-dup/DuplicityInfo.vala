@@ -34,6 +34,7 @@ public class DuplicityInfo : Object
   public bool new_time_format {get; private set; default = false; }
   public bool can_read_short_filenames {get; private set; default = false; }
   public bool has_native_gio {get; private set; default = false; }
+  public bool can_resume {get; private set; default = false; }
   
   static DuplicityInfo info = null;
   public static DuplicityInfo get_default() {
@@ -94,8 +95,10 @@ public class DuplicityInfo : Object
       new_time_format = true;
     if (meets_version(0, 5, 16))
       can_read_short_filenames = true;
-    if (meets_version(0, 6, 5)) // had it in 0.6.1, but didn't work on restore
-      has_native_gio = true;
+    if (meets_version(0, 6, 5)) {
+      has_native_gio = true; // had it in 0.6.1, but didn't work on restore
+      can_resume = true; // had it in 0.6.0, but didn't quite work right
+    }
     
     return true;
   }

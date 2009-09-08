@@ -25,7 +25,7 @@ public abstract class AssistantOperation : Assistant
   public signal void closing(bool success);
   
   StatusIcon status_icon;
-  bool succeeded = false;
+  protected bool succeeded = false;
 
   Gtk.Entry encrypt_entry;
   Gtk.CheckButton encrypt_remember;
@@ -45,7 +45,7 @@ public abstract class AssistantOperation : Assistant
   protected Gtk.Widget summary_page {get; private set;}
   
   protected Gdk.Pixbuf op_icon {get; private set;}
-  DejaDup.Operation op;
+  protected DejaDup.Operation op;
   uint timeout_id;
   protected bool error_occurred {get; private set;}
   bool gives_progress;
@@ -148,7 +148,7 @@ public abstract class AssistantOperation : Assistant
     
     Gtk.TextIter iter;
     buffer.get_end_iter(out iter);
-    buffer.insert_text(iter, log_line, -1);
+    buffer.insert_text(iter, log_line, (int)log_line.size());
     if (adjustment_at_end)
       adjust.value = adjust.upper;
   }

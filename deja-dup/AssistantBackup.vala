@@ -33,6 +33,8 @@ public class AssistantBackup : AssistantOperation
   {
     title = _("Backup");
     apply_text = _("_Backup");
+    resume_supported = DejaDup.DuplicityInfo.get_default().can_resume;
+    resumed.connect(do_resume);
   }
   
   Gtk.Widget make_backup_location_page()
@@ -166,6 +168,16 @@ public class AssistantBackup : AssistantOperation
     return new DejaDup.OperationBackup(this);
   }
   
+  void do_resume()
+  {
+    hide();
+    succeeded = true; // fake it
+    if (op != null)
+      op.stop();
+    else
+      do_close();
+  }
+
   protected override string get_progress_file_prefix()
   {
     // Translators:  This is the phrase 'Backing up' in the larger phrase

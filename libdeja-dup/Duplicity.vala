@@ -130,6 +130,11 @@ public class Duplicity : Object
     inst.cancel();
   }
   
+  public void stop() {
+    mode = Operation.Mode.INVALID;
+    inst.cancel();
+  }
+  
   bool restart()
   {
     state = State.NORMAL;
