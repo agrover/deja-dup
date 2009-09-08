@@ -20,3 +20,6 @@
 [CCode (cheader_filename = "libintl.h")]
 weak string ngettext(string msgid, string msgid_plural, ulong n);
 
+[CCode (cheader_filename = "glib/gi18n.h")]
+weak string C_(string context, string msgid);
+

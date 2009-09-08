@@ -70,7 +70,7 @@ public class MainWindow : Gtk.Window
       warning("%s\n", e.message);
     }
     
-    var backup_label = new Gtk.Label(_("_Backup"));
+    var backup_label = new Gtk.Label(C_("backup is verb", "_Backup"));
     backup_label.set("use-underline", true,
                      "mnemonic-widget", backup_button);
     
@@ -181,10 +181,10 @@ public class MainWindow : Gtk.Window
   {
     var action_group = new Gtk.ActionGroup ("actions");
     
-    var action = new Gtk.Action ("FileMenuAction", _("_File"), null, null);
+    var action = new Gtk.Action ("FileMenuAction", C_("backup is noun", "_Backup"), null, null);
     action_group.add_action (action);
     
-    action = new Gtk.Action ("BackupAction", _("_Backup"), null, null);
+    action = new Gtk.Action ("BackupAction", C_("backup is verb", "_Backup"), null, null);
     action.set("icon-name", "deja-dup-backup");
     action.activate.connect(on_backup);
     action_group.add_action_with_accel (action, "<control>B");
