@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: mike@mterry.name\n"
-"POT-Creation-Date: 2009-09-12 10:34-0400\n"
+"POT-Creation-Date: 2009-09-15 12:22-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,17 @@ msgstr ""
 msgid "Backup your files"
 msgstr ""
 
-#: ../data/deja-dup.desktop.in.h:3
+#. Translators: The name is a play on the French phrase "déjà vu" meaning
+#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
+#. context is itself a reference to both the underlying command line tool
+#. "duplicity" and the act of duplicating data for backup.  As a whole, it
+#. may not be very translatable.
+#: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
+#: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
+msgid "Déjà Dup"
+msgstr ""
+
+#: ../data/deja-dup.desktop.in.h:4
 msgid "Déjà Dup Backup Tool"
 msgstr ""
 
@@ -155,84 +165,11 @@ msgstr ""
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 
-#: ../applet/applet.vala:26 ../deja-dup/main.vala:32
-#: ../monitor/monitor.vala:41 ../preferences/preferences.vala:26
-msgid "Show version"
-msgstr ""
-
-#. Translators: 'Applet' in the sense of a notification area icon
-#: ../applet/applet.vala:35 ../applet/applet.vala:49
-msgid "Déjà Dup Applet"
-msgstr ""
-
-#: ../applet/StatusIcon.vala:74
-#, c-format
-msgid "%.1f%% complete"
-msgstr ""
-
-#: ../applet/StatusIcon.vala:121
-msgid "Backup about to start"
-msgstr ""
-
-#: ../applet/StatusIcon.vala:122
-msgid ""
-"A scheduled backup will shortly begin.  You can instead choose to backup "
-"later or not at all."
-msgstr ""
-
-#: ../applet/StatusIcon.vala:125
-msgid "Skip Backup"
-msgstr ""
-
-#: ../applet/StatusIcon.vala:126
-msgid "Backup Later"
-msgstr ""
-
-#: ../applet/StatusIcon.vala:143
-msgid "Encryption password needed"
-msgstr ""
-
-#: ../applet/StatusIcon.vala:144
-msgid "Please enter the encryption password for your backup files."
-msgstr ""
-
-#: ../applet/StatusIcon.vala:147 ../applet/StatusIcon.vala:164
-msgid "Enter"
-msgstr ""
-
-#: ../applet/StatusIcon.vala:160
-msgid "Server password needed"
-msgstr ""
-
-#: ../applet/StatusIcon.vala:161
-msgid "Please enter the server password for your backup."
-msgstr ""
-
-#: ../applet/StatusIcon.vala:178
-msgid "Backup error occurred"
-msgstr ""
-
-#: ../applet/StatusIcon.vala:183
-msgid "Rerun"
-msgstr ""
-
-#: ../applet/StatusIcon.vala:261
-msgid "Backup _Later"
-msgstr ""
-
-#: ../applet/StatusIcon.vala:265
-msgid "_Skip Backup"
-msgstr ""
-
-#: ../applet/StatusIcon.vala:301 ../deja-dup/MainWindow.vala:171
-msgid "Could not open preferences"
-msgstr ""
-
 #: ../deja-dup/Assistant.vala:278
 msgid "Co_ntinue"
 msgstr ""
 
-#: ../deja-dup/Assistant.vala:311
+#: ../deja-dup/Assistant.vala:311 ../deja-dup/StatusIcon.vala:92
 msgid "_Resume Later"
 msgstr ""
 
@@ -290,34 +227,34 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:185
+#: ../deja-dup/AssistantBackup.vala:186
 msgid "Backing up:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:195
+#: ../deja-dup/AssistantBackup.vala:196
 #: ../preferences/PreferencesDialog.vala:141
 msgid "_Automatically backup on a regular schedule"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:198
+#: ../deja-dup/AssistantBackup.vala:199
 #: ../preferences/PreferencesDialog.vala:148
 #, c-format
 msgid "How _often to backup:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:225
+#: ../deja-dup/AssistantBackup.vala:226
 msgid "Backup Failed"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:228
+#: ../deja-dup/AssistantBackup.vala:229
 msgid "Backup Finished"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:229
+#: ../deja-dup/AssistantBackup.vala:230
 msgid "Your files were successfully backed up."
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:248 ../libdeja-dup/Operation.vala:49
+#: ../deja-dup/AssistantBackup.vala:249 ../libdeja-dup/Operation.vala:49
 msgid "Backing up..."
 msgstr ""
 
@@ -417,30 +354,35 @@ msgstr ""
 msgid "No backups to restore"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:400
+#: ../deja-dup/AssistantRestore.vala:407
 msgid "Original location"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:413
+#: ../deja-dup/AssistantRestore.vala:420
 msgid "File to restore:"
 msgid_plural "Files to restore:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../deja-dup/AssistantRestore.vala:435
+#: ../deja-dup/AssistantRestore.vala:442
 msgid "Restore Failed"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:437
+#: ../deja-dup/AssistantRestore.vala:444
 msgid "Restore Finished"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:438
+#: ../deja-dup/AssistantRestore.vala:445
 msgid "Your files were successfully restored."
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:442 ../libdeja-dup/Operation.vala:51
+#: ../deja-dup/AssistantRestore.vala:449 ../libdeja-dup/Operation.vala:51
 msgid "Restoring..."
+msgstr ""
+
+#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:41
+#: ../preferences/preferences.vala:26
+msgid "Show version"
 msgstr ""
 
 #: ../deja-dup/main.vala:33
@@ -451,18 +393,12 @@ msgstr ""
 msgid "Immediately start a backup"
 msgstr ""
 
-#. Translators: The name is a play on the French phrase "déjà vu" meaning
-#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
-#. context is itself a reference to both the underlying command line tool
-#. "duplicity" and the act of duplicating data for backup.  As a whole, it
-#. may not be very translatable.
-#: ../deja-dup/main.vala:44 ../deja-dup/main.vala:70
-#: ../deja-dup/MainWindow.vala:28
-msgid "Déjà Dup"
-msgstr ""
-
 #: ../deja-dup/main.vala:50
 msgid "No filenames provided"
+msgstr ""
+
+#: ../deja-dup/MainWindow.vala:171
+msgid "Could not open preferences"
 msgstr ""
 
 #: ../deja-dup/MainWindow.vala:184
@@ -537,6 +473,19 @@ msgstr ""
 
 #: ../deja-dup/MountOperationAssistant.vala:209
 msgid "_Remember secret access key"
+msgstr ""
+
+#: ../deja-dup/StatusIcon.vala:63
+#, c-format
+msgid "%.1f%% complete"
+msgstr ""
+
+#: ../deja-dup/StatusIcon.vala:94
+msgid "_Delay Backup"
+msgstr ""
+
+#: ../deja-dup/StatusIcon.vala:98
+msgid "_Skip Backup"
 msgstr ""
 
 #: ../libdeja-dup/BackendFile.vala:51
@@ -683,68 +632,68 @@ msgid ""
 "version %d.%d.%.2d"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:158 ../libdeja-dup/Duplicity.vala:166
+#: ../libdeja-dup/Duplicity.vala:179 ../libdeja-dup/Duplicity.vala:187
 #: ../libdeja-dup/Operation.vala:76
 msgid "Preparing..."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:236 ../libdeja-dup/Duplicity.vala:253
+#: ../libdeja-dup/Duplicity.vala:257 ../libdeja-dup/Duplicity.vala:274
 msgid "Cleaning up..."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:325 ../libdeja-dup/Duplicity.vala:543
+#: ../libdeja-dup/Duplicity.vala:348 ../libdeja-dup/Duplicity.vala:566
 msgid "Failed with an unknown error."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:466
+#: ../libdeja-dup/Duplicity.vala:489
 #, c-format
 msgid "Could not restore '%s': File not found in backup"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:470
+#: ../libdeja-dup/Duplicity.vala:493
 msgid "Bad encryption passphrase"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:483
+#: ../libdeja-dup/Duplicity.vala:506
 msgid "Invalid ID."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:485
+#: ../libdeja-dup/Duplicity.vala:508
 msgid "Invalid secret key."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:487
+#: ../libdeja-dup/Duplicity.vala:510
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:496
+#: ../libdeja-dup/Duplicity.vala:519
 msgid "S3 bucket name is not available."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:501
+#: ../libdeja-dup/Duplicity.vala:524
 msgid "Bad encryption password."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:505
+#: ../libdeja-dup/Duplicity.vala:528
 #, c-format
 msgid "Error reading file '%s'."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:507
+#: ../libdeja-dup/Duplicity.vala:530
 #, c-format
 msgid "Error writing file '%s'."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:515
+#: ../libdeja-dup/Duplicity.vala:538
 #, c-format
 msgid "No space left in %s"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:535
+#: ../libdeja-dup/Duplicity.vala:558
 msgid "No backup files found"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:571
+#: ../libdeja-dup/Duplicity.vala:594
 msgid "Uploading..."
 msgstr ""
 
