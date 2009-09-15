@@ -99,7 +99,14 @@ public class Duplicity : Object
                             List<string>? argv, List<string>? envp)
   {
     // save arguments for calling duplicity again later
-    this.remote = backend.get_location();
+    try {
+      this.remote = backend.get_location();
+    }
+    catch (Error e) {
+      raise_error(e.message, null);
+      done(false, false);
+      return;
+    }
     this.backend = backend;
     saved_argv = new List<string>();
     saved_envp = new List<string>();
