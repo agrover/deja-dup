@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-SUBDIRS = data po vapi libdeja-dup applet monitor preferences deja-dup nautilus help tests
+SUBDIRS = data po vapi libdeja-dup monitor preferences deja-dup nautilus help tests
 
 # Distribute pot file
 update-pot:

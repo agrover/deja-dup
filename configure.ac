@@ -75,15 +75,6 @@ PKG_CHECK_MODULES(DUP,
 AC_SUBST(DUP_CFLAGS)
 AC_SUBST(DUP_LIBS)
 
-PKG_CHECK_MODULES(APPLET,
-                  gtk+-2.0 >= $GTK_REQ_VER
-                  gio-2.0 >= $GIO_REQ_VER
-                  gconf-2.0
-                  gnome-keyring-1
-                  libnotify)
-AC_SUBST(APPLET_CFLAGS)
-AC_SUBST(APPLET_LIBS)
-
 PKG_CHECK_MODULES(PREF,
                   gtk+-2.0 >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
@@ -136,7 +127,6 @@ AC_SUBST(DEBUG_CFLAGS)
 AC_CONFIG_FILES([Makefile
                  data/Makefile
                  libdeja-dup/Makefile
-                 applet/Makefile
                  monitor/Makefile
                  deja-dup/Makefile
                  help/Makefile

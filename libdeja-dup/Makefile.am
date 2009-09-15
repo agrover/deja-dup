@@ -24,7 +24,6 @@ VALA_CFLAGS = \
 	--pkg gtk+-2.0 \
 	--pkg gio-2.0 \
 	--pkg gconf-2.0 \
-	--pkg libnotify \
 	--pkg gnome-keyring-1 \
 	--pkg dbus-glib-1 \
 	--pkg gdk-x11-2.0 \
