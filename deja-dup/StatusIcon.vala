@@ -22,15 +22,85 @@ using GLib;
 public class StatusIcon : Gtk.StatusIcon
 {
   public signal void activated(uint time);
+  public DejaDup.Operation op {get; construct;}
+
+  string action;
+  double progress;
+  public StatusIcon(DejaDup.Operation op)
+  {
+    this.op = op;
+  }
 
   construct {
     icon_name = Config.PACKAGE;
-    popup_menu.connect((s, b, t) => {
-      activated(t);
-    });
+    popup_menu.connect(show_menu);
     activate.connect((s) => {
       activated(0);
     });
-  }  
+
+    op.action_desc_changed.connect(set_action_desc);
+    op.progress.connect(note_progress);
+  }
+
+  void set_action_desc(DejaDup.Operation op, string action)
+  {
+    this.action = action;
+    update_tooltip();
+  }
+
+  void note_progress(DejaDup.Operation op, double progress)
+  {
+    this.progress = progress;
+    update_tooltip();
+  }
+
+  void update_tooltip()
+  {
+    var tooltip = "";
+    if (this.action != null)
+      tooltip = this.action;
+    if (this.progress > 0)
+      tooltip = tooltip + "\n" + _("%.1f%% complete").printf(this.progress * 100);
+    hacks_status_icon_set_tooltip_text(this, tooltip);
+  }
+
+  void later()
+  {
+    op.stop();
+  }
+
+  void skip()
+  {
+    // Fake a run by setting today's timestamp as the 'last-run' gconf key
+    try {
+      DejaDup.update_last_run_timestamp();
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
+
+    op.cancel();
+  }
+
+  void show_menu(Gtk.StatusIcon status_icon, uint button, uint activate_time)
+  {
+    var menu = new Gtk.Menu();
+
+    Gtk.MenuItem item;
+
+    if (DejaDup.DuplicityInfo.get_default().can_resume)
+      item = new Gtk.MenuItem.with_mnemonic(_("_Resume Later"));
+    else
+      item = new Gtk.MenuItem.with_mnemonic(_("_Delay Backup"));
+    item.activate.connect((i) => {later();});
+    menu.append(item);
+
+    item = new Gtk.MenuItem.with_mnemonic(_("_Skip Backup"));
+    item.activate.connect((i) => {skip();});
+    menu.append(item);
+
+    menu.show_all();
+    menu.popup(null, null, position_menu, button, activate_time);
+  }
 }
 

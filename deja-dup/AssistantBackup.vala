@@ -171,11 +171,12 @@ public class AssistantBackup : AssistantOperation
   void do_resume()
   {
     hide();
-    succeeded = true; // fake it
     if (op != null)
       op.stop();
-    else
+    else {
+      succeeded = true; // fake it
       do_close();
+    }
   }
 
   protected override string get_progress_file_prefix()

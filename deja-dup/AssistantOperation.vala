@@ -316,8 +316,8 @@ public abstract class AssistantOperation : Assistant
   
   void apply_finished(DejaDup.Operation op, bool success)
   {
-    this.op = null;
     status_icon = null;
+    this.op = null;
 
     if (!success && !error_occurred)
       // was cancelled...  Close dialog
@@ -346,7 +346,7 @@ public abstract class AssistantOperation : Assistant
     op.progress.connect(show_progress);
     op.backend.mount_op = mount_op;
     
-    status_icon = new StatusIcon();
+    status_icon = new StatusIcon(op);
     status_icon.activated.connect((s, t) => {toggle_window(t, true);});
 
     try {

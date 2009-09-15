@@ -34,6 +34,7 @@ public class Duplicity : Object
   public Operation.Mode original_mode {get; private set;}
   public Operation.Mode mode {get; private set;}
   public bool error_issued {get; private set; default = false;}
+  public bool was_stopped {get; private set; default = false;}
   
   public string local {get; set;}
   public Backend backend {get; set;}
@@ -127,14 +128,27 @@ public class Duplicity : Object
         return;
     }
     
-    inst.cancel();
+    cancel_inst();
   }
   
   public void stop() {
-    mode = Operation.Mode.INVALID;
-    inst.cancel();
+    was_stopped = true;
+    if (!DuplicityInfo.get_default().can_resume)
+      cancel(); // might as well be clean about it
+    else { // just abruptly stop, without a cleanup
+      mode = Operation.Mode.INVALID;
+      cancel_inst();
+    }
   }
-  
+
+  void cancel_inst()
+  {
+    if (inst == null)
+      handle_done(null, false, true);
+    else
+      inst.cancel();
+  }
+
   bool restart()
   {
     state = State.NORMAL;
@@ -256,7 +270,7 @@ public class Duplicity : Object
     return true;
   }
   
-  void handle_done(DuplicityInstance inst, bool success, bool cancelled)
+  void handle_done(DuplicityInstance? inst, bool success, bool cancelled)
   {
     if (!cancelled) {
       switch (state) {
@@ -317,6 +331,8 @@ public class Duplicity : Object
         break;
       }
     }
+    else if (was_stopped)
+      success = true; // we treat stops as success
     
     if (error_issued)
       success = false;
