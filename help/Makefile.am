@@ -29,7 +29,6 @@ include $(top_srcdir)/gnome-doc-utils.make
 
 dist_man1_MANS = \
 	C/deja-dup.1 \
-	C/deja-dup-applet.1 \
 	C/deja-dup-monitor.1 \
 	C/deja-dup-preferences.1
 
