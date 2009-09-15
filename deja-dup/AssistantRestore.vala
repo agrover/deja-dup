@@ -323,6 +323,7 @@ public class AssistantRestore : AssistantOperation
   protected void query_finished(DejaDup.Operation op, bool success)
   {
     this.query_op = null;
+    this.op = null;
     
     if (!error_occurred) {
       if (success)
@@ -340,10 +341,16 @@ public class AssistantRestore : AssistantOperation
   
   protected void do_query()
   {
+    if (mount_op == null)
+      mount_op = new MountOperationAssistant(this);
+
     query_op = new DejaDup.OperationStatus(this);
     query_op.collection_dates.connect(handle_collection_dates);
     query_op.done.connect(query_finished);
-    ((DejaDup.Operation)query_op).raise_error.connect((o, e, d) => {show_error(e, d);});
+    op = query_op;
+    op.backend.mount_op = mount_op;
+    op.passphrase_required.connect(get_passphrase);
+    op.raise_error.connect((o, e, d) => {show_error(e, d);});
     
     try {
       query_op.start();

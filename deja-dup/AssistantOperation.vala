@@ -50,7 +50,7 @@ public abstract class AssistantOperation : Assistant
   protected bool error_occurred {get; private set;}
   bool gives_progress;
 
-  MountOperation mount_op;
+  protected MountOperation mount_op;
   
   construct
   {
@@ -456,7 +456,7 @@ public abstract class AssistantOperation : Assistant
       ask_passphrase();
   }
 
-  void get_passphrase()
+  protected void get_passphrase()
   {
     // First, try user's keyring
     GnomeKeyring.find_password(PASSPHRASE_SCHEMA,
