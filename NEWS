@@ -1,3 +1,26 @@
+Déjà Dup 11.0 ()
+----------------
+Features:
+ * Allow deleting old backups past a certain date (e.g. 3 months ago)
+ * Will create fresh full backups occasionally to avoid backup corruption
+ * Support resuming an unfinished backup
+Bug Fixes:
+ * Support duplicity's native gio handling, fixing some remote connection bugs
+ * Don't start an automatic backup if no network connection
+Polish:
+ * Allow turning on automatic backups after a successful manual backup
+ * Make backup chunk sizes much larger, as fewer files are easier to deal with
+ * Allow hiding progress window while backing up by clicking on the applet
+ * Ask for passwords in-window rather than popping up a new dialog
+ * Provide feedback about when we're uploading vs backing up
+Packaging Changes:
+ * Bumped required gtk+ version to 2.14
+ * Bumped required glib version to 2.18
+ * Dropped libgnomeui dependency
+ * Dropped libnotify dependency
+ * Dropped gfvs-fuse dependency (if you have duplicity 0.6.05 or later)
+ * Added a bunch of new tests
+
 Déjà Dup 10.1 (2009-06-13)
 --------------------------
 * Support caching backup metadata, which means Déjà Dup supports the recently
