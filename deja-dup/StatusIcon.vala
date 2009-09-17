@@ -23,17 +23,22 @@ public class StatusIcon : Gtk.StatusIcon
 {
   public signal void activated(uint time);
   public DejaDup.Operation op {get; construct;}
+  public bool automatic {get; construct; default = false;}
 
   string action;
   double progress;
-  public StatusIcon(DejaDup.Operation op)
+  public StatusIcon(DejaDup.Operation op, bool automatic)
   {
     this.op = op;
+    this.automatic = automatic;
   }
 
   construct {
     icon_name = Config.PACKAGE;
-    popup_menu.connect(show_menu);
+
+    if (op.mode == DejaDup.Operation.Mode.BACKUP)
+      popup_menu.connect(show_menu);
+
     activate.connect((s) => {
       activated(0);
     });
@@ -95,9 +100,11 @@ public class StatusIcon : Gtk.StatusIcon
     item.activate.connect((i) => {later();});
     menu.append(item);
 
-    item = new Gtk.MenuItem.with_mnemonic(_("_Skip Backup"));
-    item.activate.connect((i) => {skip();});
-    menu.append(item);
+    if (automatic) {
+      item = new Gtk.MenuItem.with_mnemonic(_("_Skip Backup"));
+      item.activate.connect((i) => {skip();});
+      menu.append(item);
+    }
 
     menu.show_all();
     menu.popup(null, null, position_menu, button, activate_time);

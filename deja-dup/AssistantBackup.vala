@@ -21,7 +21,6 @@ using GLib;
 
 public class AssistantBackup : AssistantOperation
 {
-  public bool automatic {get; construct;}
   DejaDup.ToggleGroup periodic_toggle;
   
   public AssistantBackup(bool automatic)

@@ -23,21 +23,13 @@ import os
 sys.path.insert(0, '.')
 import base
 
-def check_dir(path):
-  assert base.file_equals(path+'one', 'one\n')
-  assert base.file_equals(path+'two', 'two\n')
-  assert base.file_equals(path+'three', 'three\n')
-  assert base.file_equals(path+'top/one', 'one\n')
-  assert os.path.isdir(path+'top/next')
-
 def test():
   restoredir = base.get_temp_name('restore')
-  datapath = os.getcwd()+'/data/simple/'
+  datapath = '/usr/bin'
   base.setup('file', sources=[datapath], encrypt=False)
   base.backup_simple()
   base.start_deja_dup()
   base.restore_simple(restoredir)
-  check_dir(restoredir+datapath)
   return True
 
 base.run(test)

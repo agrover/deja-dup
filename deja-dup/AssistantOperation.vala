@@ -24,6 +24,7 @@ public abstract class AssistantOperation : Assistant
   protected Gtk.Widget confirm_page {get; private set;}
   public signal void closing(bool success);
   
+  public bool automatic {get; construct; default = false;}
   StatusIcon status_icon;
   protected bool succeeded = false;
 
@@ -346,7 +347,7 @@ public abstract class AssistantOperation : Assistant
     op.progress.connect(show_progress);
     op.backend.mount_op = mount_op;
     
-    status_icon = new StatusIcon(op);
+    status_icon = new StatusIcon(op, automatic);
     status_icon.activated.connect((s, t) => {toggle_window(t, true);});
 
     try {
