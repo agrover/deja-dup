@@ -476,7 +476,7 @@ public abstract class AssistantOperation : Assistant
     force_visible(false);
   }
 
-  void provide_password()
+  protected void provide_password()
   {
     var passphrase = encrypt_entry.get_text();
     passphrase = passphrase.strip();

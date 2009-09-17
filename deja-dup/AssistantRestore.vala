@@ -45,6 +45,7 @@ public class AssistantRestore : AssistantOperation
   }
   
   DejaDup.OperationStatus query_op;
+  DejaDup.Operation.State op_state;
   Gtk.ProgressBar query_progress_bar;
   uint query_timeout_id;
   Gtk.ComboBox date_combo;
@@ -281,8 +282,12 @@ public class AssistantRestore : AssistantOperation
         date_store.get(iter, 1, out date);
     }
     
-    return new DejaDup.OperationRestore(this, restore_location, date,
-                                        restore_files);
+    var rest_op = new DejaDup.OperationRestore(this, restore_location, date,
+                                               restore_files);
+    if (this.op_state != null)
+      rest_op.set_state(this.op_state);
+
+    return rest_op;
   }
   
   protected override string get_progress_file_prefix()
@@ -322,6 +327,7 @@ public class AssistantRestore : AssistantOperation
   
   protected void query_finished(DejaDup.Operation op, bool success)
   {
+    this.op_state = op.get_state();
     this.query_op = null;
     this.op = null;
     
@@ -451,7 +457,12 @@ public class AssistantRestore : AssistantOperation
     else if (page == query_progress_page) {
       query_progress_bar.fraction = 0;
       query_timeout_id = Timeout.add(250, query_pulse);
-      do_query();
+      if (query_op != null && query_op.needs_password) {
+        // Operation is waiting for password
+        provide_password();
+      }
+      else if (query_op == null)
+        do_query();
     }
   }
   

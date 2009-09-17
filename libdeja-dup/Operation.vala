@@ -56,6 +56,23 @@ public abstract class Operation : Object
     }
   }
   
+  // The State functions can be used to carry information from one operation
+  // to another.
+  public class State {
+    public Backend backend;
+    public string passphrase;
+  }
+  public State get_state() {
+    var rv = new State();
+    rv.backend = backend;
+    rv.passphrase = passphrase;
+    return rv;
+  }
+  public void set_state(State state) {
+    backend = state.backend;
+    passphrase = state.passphrase;
+  }
+
   protected Duplicity dup;
   protected Backend backend;
   protected string passphrase;
