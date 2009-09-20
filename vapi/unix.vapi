@@ -17,9 +17,5 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-[CCode (cheader_filename = "libintl.h")]
-weak string ngettext(string msgid, string msgid_plural, ulong n);
-
 [CCode (cheader_filename = "glib.h,glib/gi18n-lib.h")]
 weak string C_(string context, string msgid);
-

@@ -39,7 +39,8 @@ public class ConfigLocation : ConfigWidget
     add(hbox);
     
     dialog = new Gtk.FileChooserDialog (_("Select Backup Location"), null,
-                          						  Gtk.FileChooserAction.SELECT_FOLDER);
+                          						  Gtk.FileChooserAction.SELECT_FOLDER,
+                                        null);
     
     var has_connect_prog = Environment.find_program_in_path("nautilus-connect-server") != null;
     if (has_connect_prog) {

@@ -42,7 +42,7 @@ AM_GCONF_SOURCE_2
 AC_PATH_PROG(PO4A, po4a)
 
 # Checks for vala
-AC_PROG_VALAC([0.7.4])
+AC_PROG_VALAC([0.7.6])
 
 # Sets up gettext.
 GETTEXT_PACKAGE="$PACKAGE"

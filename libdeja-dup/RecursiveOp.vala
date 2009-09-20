@@ -69,69 +69,47 @@ public abstract class RecursiveOp : Object
     
     check_ref();
   }
-  
-  void do_dir()
+
+  void recurse_on_info(FileInfo info)
+  {
+    add_ref();
+    var op = clone_for_info(info);
+    op.ref();
+    op.done.connect((m) => {remove_ref(); m.unref();});
+    op.raise_error.connect((m, s, d, e) => {raise_error(s, d, e);}); // percolate up
+    op.start_async();
+  }
+
+  static const int NUM_ENUMERATED = 16;
+  async void do_dir()
   {
     handle_dir();
-    
+
     // Now descend
     add_ref();
-    do_children();
-  }
-  
-  void do_children()
-  {
-    src.enumerate_children_async(FILE_ATTRIBUTE_STANDARD_NAME,
-                                 FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
-                                 Priority.DEFAULT, null,
-                                 do_children_ready1);
-  }
-  
-  static const int NUM_ENUMERATED = 16;
-  void do_children_ready1(Object obj, AsyncResult res)
-  {
-    FileEnumerator enumerator;
     try {
-      enumerator = src.enumerate_children_finish(res);
+      var enumerator = yield src.enumerate_children_async(
+                         FILE_ATTRIBUTE_STANDARD_NAME,
+                         FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
+                         Priority.DEFAULT, null);
+
+      while (true) {
+        var infos = yield enumerator.next_files_async(NUM_ENUMERATED,
+                                                      Priority.DEFAULT, null);
+
+        foreach (FileInfo info in infos)
+          recurse_on_info(info);
+
+        if (infos.length() != NUM_ENUMERATED) {
+          remove_ref(); // parent dir itself
+          break;
+        }
+      }
     }
     catch (Error e) {
       raise_error(src, dst, e.message);
       remove_ref(); // parent dir itself
-      return;
     }
-    
-    enumerator.next_files_async(NUM_ENUMERATED, Priority.DEFAULT, null,
-                                do_children_ready2);
-  }
-  
-  void do_children_ready2(Object obj, AsyncResult res)
-  {
-    var enumerator = (FileEnumerator)obj;
-    
-    List<FileInfo> infos;
-    try {
-      infos = enumerator.next_files_finish(res);
-    }
-    catch (Error e) {
-      raise_error(src, dst, e.message);
-      remove_ref(); // parent dir itself
-      return;
-    }
-    
-    foreach (FileInfo info in infos) {
-      add_ref();
-      var op = clone_for_info(info);
-      op.@ref();
-      op.done.connect((m) => {remove_ref(); m.unref();});
-      op.raise_error.connect((m, s, d, e) => {raise_error(s, d, e);}); // percolate up
-      op.start_async();
-    }
-    
-    if (infos.length() == NUM_ENUMERATED)
-      enumerator.next_files_async(NUM_ENUMERATED, Priority.DEFAULT, null,
-                                  do_children_ready2);
-    else
-      remove_ref(); // parent dir itself
   }
   
   void add_ref() {
