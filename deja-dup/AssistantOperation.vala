@@ -51,6 +51,10 @@ public abstract class AssistantOperation : Assistant
   protected bool error_occurred {get; private set;}
   bool gives_progress;
 
+  bool saved_pos;
+  int saved_x;
+  int saved_y;
+
   protected MountOperation mount_op;
   
   construct
@@ -426,6 +430,8 @@ public abstract class AssistantOperation : Assistant
   void show_to_user(Gtk.Window win, uint time, bool user_click)
   {
     win.focus_on_map = user_click;
+    if (saved_pos)
+      win.move(saved_x, saved_y);
     if (user_click)
       win.present_with_time(time);
     else {
@@ -442,8 +448,11 @@ public abstract class AssistantOperation : Assistant
     if (time == 0)
       time = Gtk.get_current_event_time();
 
-    if (will_hide)
+    if (will_hide) {
+      saved_pos = true;
+      get_position(out saved_x, out saved_y);
       hide();
+    }
     else
       show_to_user(this, time, user_click);
   }
