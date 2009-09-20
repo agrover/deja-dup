@@ -195,8 +195,6 @@ public abstract class AssistantOperation : Assistant
   {
     error_occurred = true;
     
-    set_header_icon(Gtk.STOCK_DIALOG_ERROR);
-    
     summary_label.label = error;
     summary_label.wrap = true;
     summary_label.selectable = true;
@@ -209,6 +207,7 @@ public abstract class AssistantOperation : Assistant
     }
     
     go_to_page(summary_page);
+    set_header_icon(Gtk.STOCK_DIALOG_ERROR);
     page_box.queue_resize();
   }
 
