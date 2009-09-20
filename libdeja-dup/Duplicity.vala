@@ -31,8 +31,8 @@ public class Duplicity : Object
   public signal void collection_dates(List<string>? dates);
   
   public Gtk.Window toplevel {get; construct;}
-  public Operation.Mode original_mode {get; private set;}
-  public Operation.Mode mode {get; private set;}
+  public Operation.Mode original_mode {get; construct;}
+  public Operation.Mode mode {get; private set; default = Operation.Mode.INVALID;}
   public bool error_issued {get; private set; default = false;}
   public bool was_stopped {get; private set; default = false;}
   
@@ -90,7 +90,6 @@ public class Duplicity : Object
   File last_touched_file = null;
   
   public Duplicity(Operation.Mode mode, Gtk.Window? win) {
-    this.mode = mode;
     this.original_mode = mode;
     toplevel = win;
   }
@@ -99,6 +98,7 @@ public class Duplicity : Object
                             List<string>? argv, List<string>? envp)
   {
     // save arguments for calling duplicity again later
+    mode = original_mode;
     try {
       this.remote = backend.get_location();
     }
