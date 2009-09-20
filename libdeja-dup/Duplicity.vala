@@ -423,6 +423,7 @@ public class Duplicity : Object
       return false;
   }
 
+  protected static const int ERROR_HOSTNAME_CHANGED = 3;
   protected static const int ERROR_RESTORE_DIR_NOT_FOUND = 19;
   protected static const int ERROR_EXCEPTION = 30;
   protected static const int ERROR_GPG = 31;
@@ -490,7 +491,7 @@ public class Duplicity : Object
                    restore_files.data.get_parse_name());
         break;
       case ERROR_GPG:
-        text = _("Bad encryption passphrase");
+        text = _("Bad encryption password.");
         break;
       }
     }
