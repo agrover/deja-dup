@@ -23,8 +23,8 @@ namespace DejaDup {
 
 public class OperationRestore : Operation
 {
-  string dest; // Directory user wants to put files in
-  string time; // Date user wants to restore to
+  public string dest {get; construct;} // Directory user wants to put files in
+  public string time {get; construct;} // Date user wants to restore to
   string source; // Directory duplicity puts files in
   List<string> errors;
   private List<File> _restore_files;
@@ -32,12 +32,14 @@ public class OperationRestore : Operation
     get {
       return this._restore_files;
     }
-    set {
+    construct {
       foreach (File f in this._restore_files)
         f.unref();
       this._restore_files = value.copy();
       foreach (File f in this._restore_files)
         f.ref();
+      if (dup != null)
+        dup.restore_files = restore_files;
     }
   }
   
@@ -50,7 +52,6 @@ public class OperationRestore : Operation
     dest = dest_in;
     time = time_in;
     restore_files = files_in;
-    dup.restore_files = restore_files;
     mode = Mode.RESTORE;
   }
   
