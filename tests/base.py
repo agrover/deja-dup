@@ -94,6 +94,12 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
   if encrypt is not None:
     set_gconf_value("encrypt", 'true' if encrypt else 'false', 'bool')
   
+  #daemon_env = subprocess.Popen(['gnome-keyring-daemon'], stdout=subprocess.PIPE).communicate()[0].strip()
+  #daemon_env = daemon_env.split('\n')
+  #for line in daemon_env:
+  #  bits = line.split('=')
+  #  os.environ[bits[0]] = bits[1]
+
   if start:
     start_deja_dup(args)
 
@@ -103,6 +109,7 @@ def cleanup(success):
     os.system('gksudo "umount %s"' % d)
   for d in cleanup_dirs:
     os.system("rm -rf %s" % d)
+  #os.system('kill %s' % os.environ['GNOME_KEYRING_PID'])
   temp_dir = None
   if success:
     os.system('bash -c "echo -e \'\e[32mPASSED\e[0m\'"')
@@ -222,11 +229,11 @@ def run(method):
     cleanup(success)
 
 def get_manifest_date(filename):
-  return re.sub('.*\.([0-9TZ]+)\.manifest', '\\1', filename)
+  return re.sub('.*\.([0-9TZ]+)\.manifest.*', '\\1', filename)
 
 def list_manifests():
   destdir = get_temp_name('local')
-  files = sorted(glob.glob('%s/*.manifest' % destdir), key=get_manifest_date)
+  files = sorted(glob.glob('%s/*.manifest*' % destdir), key=get_manifest_date)
   if not files:
     raise Exception("Expected manifest, found none")
   files = filter(lambda x: x.count('duplicity-full') == 0 or x.count('.to.') == 0, files) # don't get the in-between manifests
@@ -274,6 +281,20 @@ def guivisible(frm, obj):
   states = ldtp.getallstates(frm, obj)
   return ldtp.state.VISIBLE in states
 
+def wait_for_encryption(dlg, obj, max_count):
+  count = 0
+  while count < max_count:
+    if ldtp.guiexist(dlg, obj):
+      break
+    if ldtp.guiexist('dlgAllowaccess'):
+      ldtp.click('dlgAllowaccess', 'btnDeny')
+    if ldtp.guiexist(dlg, 'txtEncryptionpassword'):
+      ldtp.settextvalue(dlg, 'txtEncryptionpassword', 'blarg')
+      ldtp.click(dlg, 'btnContinue')
+    ldtp.wait(1)
+    count += 1
+  assert guivisible(dlg, obj)
+
 def backup_simple(finish=True):
   ldtp.click('frmDéjàDup', 'btnBackup')
   ldtp.waittillguiexist('dlgBackup')
@@ -283,8 +304,7 @@ def backup_simple(finish=True):
     ldtp.click('dlgBackup', 'btnForward')
   ldtp.click('dlgBackup', 'btnBackup')
   if finish:
-    ldtp.waittillguiexist('dlgBackup', 'lblYourfilesweresuccessfullybackedup.', 400)
-    assert guivisible('dlgBackup', 'lblYourfilesweresuccessfullybackedup.')
+    wait_for_encryption('dlgBackup', 'lblYourfilesweresuccessfullybackedup.', 400)
     ldtp.click('dlgBackup', 'btnClose')
     ldtp.waittillguinotexist('dlgBackup')
 
@@ -294,7 +314,7 @@ def restore_simple(path, date=None):
   ldtp.remap('dlgRestore') # in case this is second time we've run it
   if ldtp.guiexist('dlgRestore', 'lblPreferences'):
     ldtp.click('dlgRestore', 'btnForward')
-  assert ldtp.waittillguiexist('dlgRestore', 'lblRestorefromWhen?')
+  wait_for_encryption('dlgRestore', 'lblRestorefromWhen?', 200)
   if date:
     ldtp.comboselect('dlgRestore', 'cboDate', date)
   ldtp.click('dlgRestore', 'btnForward')
@@ -305,7 +325,7 @@ def restore_simple(path, date=None):
   ldtp.click('dlgChoosedestinationforrestoredfiles', 'btnOpen')
   ldtp.click('dlgRestore', 'btnForward')
   ldtp.click('dlgRestore', 'btnRestore')
-  assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
+  assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored.', 400)
   assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
   ldtp.click('dlgRestore', 'btnClose')
   ldtp.waittillguinotexist('dlgRestore')
@@ -313,7 +333,7 @@ def restore_simple(path, date=None):
 def restore_specific(path, date=None):
   if ldtp.guiexist('dlgRestore', 'lblPreferences'):
     ldtp.click('dlgRestore', 'btnForward')
-  assert ldtp.waittillguiexist('dlgRestore', 'lblRestorefromWhen?')
+  wait_for_encryption('dlgRestore', 'lblRestorefromWhen?', 200)
   if date:
     ldtp.comboselect('dlgRestore', 'cboDate', date)
   ldtp.click('dlgRestore', 'btnForward')

@@ -25,7 +25,7 @@ sys.path.insert(0, '.')
 import base
 
 def delete():
-  base.setup('file', encrypt=False, sources=['data/simple'])
+  base.setup('file', sources=['data/simple'])
   base.set_gconf_value('delete-after', '30', 'int')
   base.backup_simple()
   base.last_date_change('%d days ago' % 100)

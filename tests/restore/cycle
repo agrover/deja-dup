@@ -26,7 +26,7 @@ import base
 def test():
   restoredir = base.get_temp_name('restore')
   datapath = '/usr/bin'
-  base.setup('file', sources=[datapath], encrypt=False)
+  base.setup('file', sources=[datapath])
   base.backup_simple()
   base.start_deja_dup()
   base.restore_simple(restoredir)
