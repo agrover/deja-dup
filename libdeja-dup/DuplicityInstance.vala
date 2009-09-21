@@ -314,7 +314,7 @@ public class DuplicityInstance : Object
       string word = firstsplit[i];
       
       if (firstsplit[i+1] == null)
-        word.chomp();
+        word = word.chomp();
       
       // Merge word groupings like 'hello \'goodbye' as one word.
       // Assumes that duplicity isn't a dick and gives us well formed groupings
