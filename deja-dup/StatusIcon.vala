@@ -35,6 +35,7 @@ public class StatusIcon : Gtk.StatusIcon
 
   construct {
     icon_name = Config.PACKAGE;
+    set("title", _("Déjà Dup")); // Only in GTK+ 2.18
 
     if (op.mode == DejaDup.Operation.Mode.BACKUP)
       popup_menu.connect(show_menu);
