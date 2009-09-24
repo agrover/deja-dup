@@ -18,7 +18,7 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 # Sets up autoconf.
-AC_INIT([Déjà Dup],[10.2],[deja-dup-team@lists.launchpad.net],[deja-dup])
+AC_INIT([Déjà Dup],[11.0],[deja-dup-team@lists.launchpad.net],[deja-dup])
 AC_PREREQ([2.53])
 AC_CONFIG_SRCDIR(deja-dup/main.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
@@ -110,18 +110,6 @@ AC_SUBST(NAUTILUS_LIBS)
 dnl Get nautilus extensions directory
 NAUTILUS_EXTENSION_DIR="${libdir}/nautilus/extensions-2.0"
 AC_SUBST(NAUTILUS_EXTENSION_DIR)
-
-# Determines if we're debugging.
-AC_ARG_ENABLE(debug,
-  AC_HELP_STRING([--enable-debug=[no/yes]],[turn on debugging [default=no]]),
-  enable_debug="$enableval",
-  enable_debug=no)
-if test "$enable_debug" = "yes"; then
-  DEBUG_CFLAGS="-g -DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGTK_MULTIHEAD_SAFE"
-else
-  DEBUG_CFLAGS=""
-fi
-AC_SUBST(DEBUG_CFLAGS)
 
 # Sets up output files.
 AC_CONFIG_FILES([Makefile
