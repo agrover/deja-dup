@@ -40,7 +40,7 @@
     <releaseinfo>This manual describes version %VERSION% of Déjà Dup.</releaseinfo>
     <legalnotice>
       <title>Feedback</title>
-      <para>To report a bug or make a suggestion regarding the <application>Déjà Dup</application> application or this manual, visit the <ulink url="http://bugs.launchpad.net/deja-dup" type="http"><application>Déjà Dup</application> project page</ulink>.</para>
+      <para>To report a bug or make a suggestion regarding the <application>Déjà Dup</application> application or this manual, visit the <ulink url="http://bugs.launchpad.net/deja-dup/+filebug" type="http"><application>Déjà Dup</application> project page</ulink>.</para>
     </legalnotice>
   </articleinfo>
 
@@ -53,7 +53,7 @@
 
   <sect1 id="deja-dup-introduction">
     <title>Introduction</title>
-    <para><application>Déjà Dup</application> is a simple backup program. It hides the complexity of doing backups the 'right way' (encrypted, off-site, and regular) and uses duplicity as the backend. </para>
+    <para><application>Déjà Dup</application> is a simple backup tool. It hides the complexity of doing backups the 'right way' (encrypted, off-site, and regular) and uses duplicity as the backend. </para>
     <para><application>Déjà Dup</application> provides the following features:</para>
     <itemizedlist>
       <listitem><para>Support for local or remote backup locations, including Amazon S3</para></listitem>
@@ -90,15 +90,15 @@
 
   <sect1 id="deja-dup-backup">
     <title>Backing Up</title>
-    <para>To backup, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Backup</guimenuitem></menuchoice>. Or press the <guibutton>Backup</guibutton> button on the main window.</para>
-    <para>The <guilabel>Backup</guilabel> dialog will then be displayed.  If this is your first time using <application>Déjà Dup</application>, you will be asked to choose a backup location and which files to include or exclude.  On the Summary page, click <guibutton>Apply</guibutton> to start the backup.</para>
+    <para>To backup, choose <menuchoice><guimenu>Backup</guimenu><guimenuitem>Backup</guimenuitem></menuchoice>. Or press the <guibutton>Backup</guibutton> button on the main window.</para>
+    <para>The <guilabel>Backup</guilabel> dialog will then be displayed.  If this is your first time using <application>Déjà Dup</application>, you will be asked to choose a backup location and which files to include or exclude.  On the Summary page, click <guibutton>Backup</guibutton> to start the backup.</para>
   </sect1>
 
   <sect1 id="deja-dup-restore">
     <title>Restoring</title>
-    <para>To restore, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Restore</guimenuitem></menuchoice>. Or press the <guibutton>Restore</guibutton> button on the main window.</para>
-    <para>The <guilabel>Restore</guilabel> dialog will then be displayed.  If this is your first time using <application>Déjà Dup</application>, you will be asked to choose a backup location.  Then choose which backup date to restore from and where to put the restored files. You can either restore them to their original locations or put them under a folder of your choice.</para>
-    <para>After clicking <guibutton>Forward</guibutton>, you can review your restore options, then click <guibutton>Apply</guibutton> to start the restore.</para>
+    <para>To restore, choose <menuchoice><guimenu>Backup</guimenu><guimenuitem>Restore</guimenuitem></menuchoice>. Or press the <guibutton>Restore</guibutton> button on the main window.</para>
+    <para>The <guilabel>Restore</guilabel> dialog will then be displayed.  If this is your first time using <application>Déjà Dup</application>, you will be asked to choose a backup location.  Then choose which backup date to restore from and where to put the restored files. You can either restore them to their original locations or put them in a folder of your choice.</para>
+    <para>After clicking <guibutton>Forward</guibutton>, you can review your restore options, then click <guibutton>Restore</guibutton> to start the restore.</para>
   </sect1>
 
   <sect1 id="deja-dup-prefs">
@@ -193,6 +193,13 @@
         <listitem>
           <para>Choose a schedule for automatic backups.</para>
           <para>Default: <guilabel>Weekly</guilabel>.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><guilabel>Keep backups</guilabel></term>
+        <listitem>
+          <para>Choose the minimum amount of time to keep backup files.  If you find that the backup files are taking up too much space, you may want to decrease this duration.  Due to implementation details, files may be kept a bit longer than the chosen time.  But no files will be deleted early.</para>
+          <para>Default: <guilabel>Forever</guilabel>.</para>
         </listitem>
       </varlistentry>
     </variablelist>
