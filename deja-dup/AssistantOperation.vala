@@ -32,6 +32,9 @@ public abstract class AssistantOperation : Assistant
   Gtk.CheckButton encrypt_remember;
   protected Gtk.Widget password_page {get; private set;}
 
+  Gtk.Label question_label;
+  protected Gtk.Widget question_page {get; private set;}
+
   Gtk.Label progress_label;
   Gtk.Label progress_file_label;
   Gtk.ProgressBar progress_bar;
@@ -67,6 +70,7 @@ public abstract class AssistantOperation : Assistant
     add_setup_pages();
     add_confirm_page();
     add_password_page();
+    add_question_page();
     add_progress_page();
     add_summary_page();
     
@@ -245,6 +249,26 @@ public abstract class AssistantOperation : Assistant
     return page;
   }
 
+  protected Gtk.Widget make_question_page()
+  {
+    int rows = 0;
+
+    var page = new Gtk.Table(rows, 2, false);
+    page.set("row-spacing", 6,
+             "column-spacing", 6,
+             "border-width", 12);
+
+    var label = new Gtk.Label("");
+    label.set("use-underline", true,
+              "wrap", true,
+              "xalign", 0.0f);
+    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
+    ++rows;
+    question_label = label;
+
+    return page;
+  }
+
   protected virtual Gtk.Widget make_summary_page()
   {
     summary_label = new Gtk.Label("");
@@ -311,6 +335,13 @@ public abstract class AssistantOperation : Assistant
     password_page = page;
   }
 
+  void add_question_page()
+  {
+    var page = make_question_page();
+    append_page(page, Type.INTERRUPT);
+    question_page = page;
+  }
+
   void add_summary_page()
   {
     var page = make_summary_page();
@@ -348,6 +379,7 @@ public abstract class AssistantOperation : Assistant
     op.action_desc_changed.connect(set_progress_label);
     op.action_file_changed.connect(set_progress_label_file);
     op.progress.connect(show_progress);
+    op.question.connect(show_question);
     op.backend.mount_op = mount_op;
     
     status_icon = new StatusIcon(op, automatic);
@@ -502,6 +534,22 @@ public abstract class AssistantOperation : Assistant
     }
     
     op.continue_with_passphrase(passphrase);
+  }
+
+  void stop_question(Gtk.Dialog dlg, int resp)
+  {
+    Gtk.main_quit();
+    response.disconnect(stop_question);
+  }
+
+  void show_question(DejaDup.Operation op, string title, string message)
+  {
+    set_page_title(question_page, title);
+    question_label.label = message;
+    interrupt(question_page);
+    force_visible(false);
+    response.connect(stop_question);
+    Gtk.main();
   }
 }
 

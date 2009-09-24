@@ -29,6 +29,7 @@ public class Duplicity : Object
   public signal void action_file_changed(File file, bool actual);
   public signal void progress(double percent);
   public signal void collection_dates(List<string>? dates);
+  public signal void question(string title, string msg);
   
   public Gtk.Window toplevel {get; construct;}
   public Operation.Mode original_mode {get; construct;}
@@ -464,6 +465,16 @@ public class Duplicity : Object
     }
   }
   
+  bool ask_question(string t, string m)
+  {
+    disconnect_inst();
+    question(t, m);
+    var rv = mode != Operation.Mode.INVALID; // return whether we were canceled
+    if (!rv)
+      handle_done(null, false, true);
+    return rv;
+  }
+
   protected virtual void process_error(string[] firstline, List<string>? data,
                                        string text_in)
   {
@@ -492,6 +503,17 @@ public class Duplicity : Object
         break;
       case ERROR_GPG:
         text = _("Bad encryption password.");
+        break;
+      case ERROR_HOSTNAME_CHANGED:
+        if (firstline.length >= 4) {
+          if (!ask_question(_("Computer name changed"), _("The existing backup is of a computer named %s, but the current computer's name is %s.  If this is unexpected, you should backup to a different location.").printf(firstline[2], firstline[3])))
+            return;
+        }
+        // Else just assume that user wants to allow the mismatch...
+        // A little troubling but better than not letting user proceed
+        saved_argv.append("--allow-source-mismatch");
+        if (restart())
+          return;
         break;
       }
     }
@@ -752,17 +774,23 @@ public class Duplicity : Object
       return 10;
   }
 
-  void connect_and_start(List<string>? argv_extra = null,
-                         List<string>? envp_extra = null,
-                         List<string>? argv_entire = null,
-                         string? custom_local = null)
+  void disconnect_inst()
   {
     if (inst != null) {
       inst.done.disconnect(handle_done);
       inst.message.disconnect(handle_message);
       inst.cancel();
+      inst = null;
     }
-    
+  }
+
+  void connect_and_start(List<string>? argv_extra = null,
+                         List<string>? envp_extra = null,
+                         List<string>? argv_entire = null,
+                         string? custom_local = null)
+  {
+    disconnect_inst();
+
     inst = new DuplicityInstance();
     inst.done.connect(handle_done);
     inst.message.connect(handle_message);
