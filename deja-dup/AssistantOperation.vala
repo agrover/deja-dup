@@ -466,7 +466,7 @@ public abstract class AssistantOperation : Assistant
       win.move(saved_x, saved_y);
     if (user_click)
       win.present_with_time(time);
-    else {
+    else if (!win.is_active) {
       win.urgency_hint = true;
       win.focus_in_event.connect(user_focused);
       win.show();
