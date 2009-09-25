@@ -40,10 +40,13 @@ test:
 		fi; \
 	done
 
-EXTRA_DIST = $(TESTS) \
+EXTRA_DIST =
+	$(TESTS) \
 	base.py \
 	build-duplicity \
 	interactive \
+	data \
+	volumes \
 	README
 
 distclean-local:
