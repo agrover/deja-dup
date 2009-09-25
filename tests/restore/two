@@ -29,7 +29,7 @@ DATE = 'Sat Aug  1 21:14:34 2009'
 def test():
   restoredir = base.get_temp_name('restore')
   args = ['--restore', BASEPATH+'one', BASEPATH+'top/one']
-  base.setup('file', dest='volumes/simple', encrypt=False, start=False)
+  base.setup('file', dest='vols/simple', encrypt=False, start=False)
   base.start_deja_dup(args=args, waitfor='dlgRestore')
   os.system('rm -rf %s' % BASEPATH)
   base.restore_specific(restoredir, DATE)

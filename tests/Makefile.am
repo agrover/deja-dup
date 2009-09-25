@@ -46,7 +46,7 @@ EXTRA_DIST = \
 	build-duplicity \
 	interactive \
 	data \
-	volumes \
+	vols \
 	README
 
 distclean-local:
