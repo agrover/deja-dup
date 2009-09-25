@@ -40,7 +40,7 @@ test:
 		fi; \
 	done
 
-EXTRA_DIST =
+EXTRA_DIST = \
 	$(TESTS) \
 	base.py \
 	build-duplicity \
