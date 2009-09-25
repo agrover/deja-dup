@@ -20,7 +20,7 @@ iconappdir = $(datadir)/icons/hicolor/scalable/apps
 dist_iconapp_DATA = deja-dup.svg
 
 iconactiondir = $(datadir)/icons/hicolor/scalable/actions
-dist_iconaction_DATA = deja-dup-backup.svg deja-dup-restore.svg
+dist_iconaction_DATA = deja-dup-backup.svg deja-dup-restore.svg deja-dup-applet.svg
 
 @INTLTOOL_SCHEMAS_RULE@
 schemadir = $(sysconfdir)/gconf/schemas

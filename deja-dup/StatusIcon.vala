@@ -34,7 +34,7 @@ public class StatusIcon : Gtk.StatusIcon
   }
 
   construct {
-    icon_name = Config.PACKAGE;
+    icon_name = "deja-dup-applet";
     set("title", _("Déjà Dup")); // Only in GTK+ 2.18
 
     if (op.mode == DejaDup.Operation.Mode.BACKUP)
