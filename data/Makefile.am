@@ -16,11 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-iconappdir = $(datadir)/icons/hicolor/scalable/apps
-dist_iconapp_DATA = deja-dup.svg
-
-iconactiondir = $(datadir)/icons/hicolor/scalable/actions
-dist_iconaction_DATA = deja-dup-backup.svg deja-dup-restore.svg deja-dup-applet.svg
+nobase_dist_data_DATA = \
+	icons/hicolor/scalable/apps/deja-dup.svg \
+	icons/hicolor/scalable/actions/deja-dup-backup.svg \
+	icons/hicolor/scalable/actions/deja-dup-restore.svg \
+	icons/hicolor/scalable/status/deja-dup-applet.svg \
+	icons/Human/scalable/status/deja-dup-applet.svg
 
 @INTLTOOL_SCHEMAS_RULE@
 schemadir = $(sysconfdir)/gconf/schemas
@@ -49,15 +50,17 @@ uninstall-local:
 	$(GCONFTOOL) --makefile-uninstall-rule $(dist_schema_DATA)
 endif
 
-gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
+gtk_update_icon_cache = gtk-update-icon-cache -f -t
 install-data-hook: update-icon-cache
 uninstall-hook: update-icon-cache
 update-icon-cache:
 	@-if test -z "$(DESTDIR)"; then \
 		echo "Updating Gtk icon cache."; \
-		$(gtk_update_icon_cache); \
+		$(gtk_update_icon_cache) $(datadir)/icons/hicolor; \
+		$(gtk_update_icon_cache) $(datadir)/icons/Human; \
 	else \
-		echo "*** Icon cache not updated.  After (un)install, run this:"; \
-		echo "***   $(gtk_update_icon_cache)"; \
+		echo "*** Icon cache not updated.  After (un)install, run these:"; \
+		echo "***   $(gtk_update_icon_cache) $(datadir)/icons/hicolor"; \
+		echo "***   $(gtk_update_icon_cache) $(datadir)/icons/Human"; \
 	fi
 
