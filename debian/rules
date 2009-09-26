@@ -3,9 +3,6 @@
 %:
 	dh --with quilt $@
 
-# Don't do anything.  Déjà Dup's automated tests require X
-override_dh_auto_test:
-
 override_dh_makeshlibs:
 	dh_makeshlibs --exclude=libnautilus-deja-dup.so
 

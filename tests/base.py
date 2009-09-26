@@ -17,10 +17,14 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
+import sys
+if not os.environ.get('DISPLAY'):
+  os.system('bash -c "echo -e \'\e[32mSKIPPED\e[0m\'"')
+  sys.exit(0)
+
 from os import environ, path, remove
 import tempfile
-import sys
-import os
 import ldtp
 import subprocess
 import glob
