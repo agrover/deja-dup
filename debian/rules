@@ -1,10 +1,13 @@
 #!/usr/bin/make -f
 # -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
+%:
+	dh --with quilt $@
 
-include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/autotools.mk
-include /usr/share/cdbs/1/class/gnome.mk
-include /usr/share/cdbs/1/rules/simple-patchsys.mk
+# Don't do anything.  Déjà Dup's automated tests require X
+override_dh_auto_test:
 
-DEB_DESTDIR := $(CURDIR)/debian/deja-dup
-DEB_DH_MAKESHLIBS_ARGS += --exclude=libnautilus-deja-dup.so
+override_dh_makeshlibs:
+	dh_makeshlibs --exclude=libnautilus-deja-dup.so
+
+override_dh_strip:
+	dh_strip --dbg-package=deja-dup-dbg

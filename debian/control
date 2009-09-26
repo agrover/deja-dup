@@ -3,9 +3,10 @@ Section: utils
 Priority: optional
 Maintainer: Michael Terry <mike@mterry.name>
 Homepage: https://launchpad.net/deja-dup
-Build-Depends: cdbs,
-               debhelper (>= 5),
+Build-Depends: debhelper (>= 7.0.50),
+               quilt,
                pkg-config,
+               intltool (>= 0.37),
                libglib2.0-dev (>= 2.18),
                libgtk2.0-dev (>= 2.14),
                libdbus-glib-1-dev,
@@ -14,9 +15,8 @@ Build-Depends: cdbs,
                libunique-dev,
                libnautilus-extension-dev,
                gnome-doc-utils (>= 0.3.2),
-               librarian-dev,
                rarian-compat
-Standards-Version: 3.8.0
+Standards-Version: 3.8.3
 Vcs-Bzr: http://bazaar.launchpad.net/~deja-dup-team/deja-dup/trunk
 
 Package: deja-dup
@@ -26,7 +26,7 @@ Depends: ${shlibs:Depends},
          duplicity (>= 0.6.05)
 Recommends: python-boto (>= 0.9d), nautilus
 Description: Backup utility
- Déjà Dup is a simple backup program. It hides the complexity of
+ Déjà Dup is a simple backup tool. It hides the complexity of
  doing backups the 'right way' (encrypted, off-site, and regular)
  and uses duplicity as the backend.
  .
@@ -37,12 +37,13 @@ Description: Backup utility
   * Integrates well into your GNOME desktop
 
 Package: deja-dup-dbg
+Section: debug
 Architecture: any
 Depends: deja-dup (= ${binary:Version}),
          ${misc:Depends}
 Priority: extra
 Description: Déjà Dup debugging symbols
- Déjà Dup is a simple backup program. It hides the complexity of
+ Déjà Dup is a simple backup tool. It hides the complexity of
  doing backups the 'right way' (encrypted, off-site, and regular)
  and uses duplicity as the backend.
  .
