@@ -289,7 +289,7 @@ def wait_for_encryption(dlg, obj, max_count):
     if ldtp.guiexist('dlgAllowaccess'):
       ldtp.click('dlgAllowaccess', 'btnDeny')
     if ldtp.guiexist(dlg, 'txtEncryptionpassword'):
-      ldtp.settextvalue(dlg, 'txtEncryptionpassword', 'blarg')
+      ldtp.settextvalue(dlg, 'txtEncryptionpassword', 'test')
       ldtp.click(dlg, 'btnContinue')
     ldtp.wait(1)
     count += 1
