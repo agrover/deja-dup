@@ -24,7 +24,8 @@ sys.path.insert(0, '.')
 import base
 import ldtp
 
-max_allowed = 12 * 7
+max_allowed = 24 * 7
+scale = 8
 
 def max_inc():
   base.setup('file', encrypt=False, sources=['data/simple'])
@@ -74,7 +75,7 @@ def period_inc():
   base.set_gconf_value("periodic-period", '7', 'int')
   base.backup_simple()
   # Change date to maximum allowed incremental, confirm next is inc
-  base.last_date_change('%d days ago' % (7*6))
+  base.last_date_change('%d days ago' % (7*scale))
   base.start_deja_dup()
   base.backup_simple()
   rv = base.last_type() == 'inc'
@@ -86,7 +87,7 @@ def period_full():
   base.set_gconf_value("periodic-period", '7', 'int')
   base.backup_simple()
   # Change date to maximum allowed incremental+1, confirm next is full
-  base.last_date_change('%d days ago' % ((7*6)+1))
+  base.last_date_change('%d days ago' % ((7*scale)+1))
   base.start_deja_dup()
   base.backup_simple()
   rv = base.last_type() == 'full'

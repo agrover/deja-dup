@@ -330,26 +330,28 @@ public int get_full_backup_threshold()
     // 3) The longer we wait, the less annoying we are, since full backups 
     //    take a long time.
     // So we try to do them at reasonable times.  But almost nobody should be
-    // going longer than 3 months without a full backup, and nobody should
-    // really be making full backups shorter than a week.  Further, we want
+    // going longer than 6 months without a full backup, and nobody should
+    // really be making full backups shorter than 2 weeks.  Further, we want
     // to try to keep at least 2 full backups around, so also don't allow a
     // longer full threshold than half the delete age.
     // 
-    // 'daily' gets 1 week 1 * 7
-    // 'weekly' gets 6 weeks 7 * 6
-    // 'biweekly' gets 12 weeks 14 * 6
-    // 'monthly' gets 12 weeks 28 * 3
-    var max = 12 * 7;
-    var min = 1 * 7;
+    // 'daily' gets 2 weeks: 1 * 8 => 2 * 7
+    // 'weekly' gets 2 months: 7 * 8
+    // 'biweekly' gets 4 months: 14 * 8
+    // 'monthly' gets 6 months: 28 * 8 => 24 * 7
+    var max = 24 * 7; // 6 months
+    var min = 2 * 7; // 2 weeks
+    var scale = 8;
+    var min_fulls = 2;
     
     var delete_age = client.get_int(DELETE_AFTER_KEY);
     if (delete_age > 0)
-      max = int.min(delete_age/2, max);
+      max = int.min(delete_age/min_fulls, max);
     
     var periodic = client.get_bool(PERIODIC_KEY);
     if (periodic) {
       var period = client.get_int(PERIODIC_PERIOD_KEY);
-      threshold = period * 6;
+      threshold = period * scale;
       threshold.clamp(min, max);
     }
     else
