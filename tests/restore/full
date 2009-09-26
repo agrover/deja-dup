@@ -20,13 +20,14 @@
 import ldtp
 import sys
 import os
+import datetime
 sys.path.insert(0, '.')
 import base
 
 BASEPATH = '/tmp/deja-dup-test/'
-DATE1 = 'Sat Aug  1 21:14:21 2009'
-DATE2 = 'Sat Aug  1 21:14:34 2009'
-DATE3 = 'Sat Aug  1 21:14:41 2009'
+DATE1 = datetime.datetime.strptime('8 1 21:14:21 2009', '%m %d %H:%M:%S %Y').strftime('%c')
+DATE2 = datetime.datetime.strptime('8 1 21:14:34 2009', '%m %d %H:%M:%S %Y').strftime('%c')
+DATE3 = datetime.datetime.strptime('8 1 21:14:41 2009', '%m %d %H:%M:%S %Y').strftime('%c')
 
 def check_dir(path, oneval):
   root = path+BASEPATH
