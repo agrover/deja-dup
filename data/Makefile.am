@@ -21,7 +21,7 @@ nobase_dist_data_DATA = \
 	icons/hicolor/scalable/actions/deja-dup-backup.svg \
 	icons/hicolor/scalable/actions/deja-dup-restore.svg \
 	icons/hicolor/scalable/status/deja-dup-applet.svg \
-	icons/Human/scalable/status/deja-dup-applet.svg
+	icons/Humanity/scalable/status/deja-dup-applet.svg
 
 @INTLTOOL_SCHEMAS_RULE@
 schemadir = $(sysconfdir)/gconf/schemas
@@ -57,10 +57,10 @@ update-icon-cache:
 	@-if test -z "$(DESTDIR)"; then \
 		echo "Updating Gtk icon cache."; \
 		$(gtk_update_icon_cache) $(datadir)/icons/hicolor; \
-		$(gtk_update_icon_cache) $(datadir)/icons/Human; \
+		$(gtk_update_icon_cache) $(datadir)/icons/Humanity; \
 	else \
 		echo "*** Icon cache not updated.  After (un)install, run these:"; \
 		echo "***   $(gtk_update_icon_cache) $(datadir)/icons/hicolor"; \
-		echo "***   $(gtk_update_icon_cache) $(datadir)/icons/Human"; \
+		echo "***   $(gtk_update_icon_cache) $(datadir)/icons/Humanity"; \
 	fi
 
