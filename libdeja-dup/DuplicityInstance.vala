@@ -140,6 +140,22 @@ public class DuplicityInstance : Object
     else
       done(false, true);
   }
+
+  public void pause()
+  {
+    if (is_started())
+      stop_child();
+    else
+      done(false, true);
+  }
+
+  public void resume()
+  {
+    if (is_started())
+      cont_child();
+    else
+      done(false, true);
+  }
   
   uint stanza_id;
   uint watch_id;
@@ -168,6 +184,14 @@ public class DuplicityInstance : Object
   
   void kill_child() {
     Posix.kill((Posix.pid_t)child_pid, Posix.SIGKILL);
+  }
+
+  void stop_child() {
+    Posix.kill((Posix.pid_t)child_pid, Posix.SIGSTOP);
+  }
+
+  void cont_child() {
+    Posix.kill((Posix.pid_t)child_pid, Posix.SIGCONT);
   }
   
   bool read_stanza(IOChannel channel, IOCondition cond)

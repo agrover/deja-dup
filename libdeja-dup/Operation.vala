@@ -97,7 +97,7 @@ public abstract class Operation : Object
       done(false);
       return;
     }
-    
+
     connect_to_dup();
     
     if (!claim_bus(true)) {
