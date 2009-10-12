@@ -1,7 +1,8 @@
 # -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008,2009 Michael Terry <mike@mterry.name>
+# © 2008,2009 Michael Terry <mike@mterry.name>,
+#	© 2009 Andrew Fister <temposs@gmail.com>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,6 +26,7 @@ VALA_CFLAGS = \
 	--pkg gio-2.0 \
 	--pkg gconf-2.0 \
 	--pkg gnome-keyring-1 \
+	--pkg dbus-glib-1 \
 	--pkg libdeja-dup \
 	--pkg PassphraseSchema \
 	--pkg unix \
