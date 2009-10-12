@@ -25,6 +25,7 @@ VALA_CFLAGS = \
 	--pkg gio-2.0 \
 	--pkg gconf-2.0 \
 	--pkg gnome-keyring-1 \
+	--pkg dbus-glib-1 \
 	--pkg libdeja-dup \
 	--pkg PassphraseSchema \
 	--pkg unix \

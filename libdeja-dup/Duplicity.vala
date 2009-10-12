@@ -90,9 +90,48 @@ public class Duplicity : Object
   
   File last_touched_file = null;
   
+  protected dynamic DBus.Object network_manager;
+  protected bool connected = true;
+  protected const uint32 NM_STATE_CONNECTED = 3;
+
+  protected void init_dbus_to_network_manager() throws DBus.Error, GLib.Error
+  {
+    //Set up the DBus connection to network manager
+    DBus.Connection conn = DBus.Bus.get(DBus.BusType.SYSTEM);
+    network_manager = conn.get_object(
+      "org.freedesktop.NetworkManager",
+      "/org/freedesktop/NetworkManager",
+      "org.freedesktop.NetworkManager");
+
+    //Retrieve the network manager connection state.
+    uint32 network_manager_state = network_manager.State;
+    connected = network_manager_state == NM_STATE_CONNECTED;
+
+    //Dbus signal when the state of the connection is changed.
+    network_manager.StateChanged += network_manager_state_changed;
+  }
+
+  protected void network_manager_state_changed(DBus.Object obj, uint32 new_state)
+  {
+    bool was_connected = connected;
+    connected = new_state == NM_STATE_CONNECTED;
+
+    if (connected)
+      resume();
+    else if (was_connected)
+      pause();
+  }
+
   public Duplicity(Operation.Mode mode, Gtk.Window? win) {
     this.original_mode = mode;
     toplevel = win;
+
+    try {
+      init_dbus_to_network_manager();
+    }
+    catch (Error e) {
+      warning("%s\n\n%s", e.message, "Failed to initialize DBus\n");
+    }
   }
   
   public virtual void start(Backend backend, bool encrypted,
@@ -122,9 +161,15 @@ public class Duplicity : Object
       delete_age = client.get_int(DELETE_AFTER_KEY);
     }
     catch (Error e) {warning("%s\n", e.message);}
-    
+
     if (!restart())
       done(false, false);
+
+    if (!backend.is_native() && !connected) {
+      debug("No connection found. Postponing the backup.");
+      pause();
+      return;
+    }
   }
   
   public void cancel() {
@@ -147,6 +192,14 @@ public class Duplicity : Object
       mode = Operation.Mode.INVALID;
       cancel_inst();
     }
+  }
+
+  public void pause() {
+    inst.pause();
+  }
+
+  public void resume() {
+    inst.resume();
   }
 
   void cancel_inst()
