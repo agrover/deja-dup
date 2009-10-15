@@ -1,7 +1,8 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008,2009 Michael Terry <mike@mterry.name>,
+    © 2009 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -140,6 +141,18 @@ public class DuplicityInstance : Object
     else
       done(false, true);
   }
+
+  public void pause()
+  {
+    if (is_started())
+      stop_child();
+  }
+
+  public void resume()
+  {
+    if (is_started())
+      cont_child();
+  }
   
   uint stanza_id;
   uint watch_id;
@@ -168,6 +181,14 @@ public class DuplicityInstance : Object
   
   void kill_child() {
     Posix.kill((Posix.pid_t)child_pid, Posix.SIGKILL);
+  }
+
+  void stop_child() {
+    Posix.kill((Posix.pid_t)child_pid, Posix.SIGSTOP);
+  }
+
+  void cont_child() {
+    Posix.kill((Posix.pid_t)child_pid, Posix.SIGCONT);
   }
   
   bool read_stanza(IOChannel channel, IOCondition cond)

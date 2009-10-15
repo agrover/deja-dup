@@ -71,6 +71,7 @@ PKG_CHECK_MODULES(DUP,
                   gtk+-2.0 >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
                   gconf-2.0
+                  dbus-glib-1
                   gnome-keyring-1)
 AC_SUBST(DUP_CFLAGS)
 AC_SUBST(DUP_LIBS)

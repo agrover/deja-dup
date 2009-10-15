@@ -1,7 +1,8 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008,2009 Michael Terry <mike@mterry.name>,
+    © 2009 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -90,6 +91,38 @@ public class Duplicity : Object
   
   File last_touched_file = null;
   
+  protected dynamic DBus.Object network_manager;
+  protected bool connected = true;
+  protected const uint32 NM_STATE_CONNECTED = 3;
+
+  protected void init_dbus_to_network_manager() throws DBus.Error, GLib.Error
+  {
+    //Set up the DBus connection to network manager
+    DBus.Connection conn = DBus.Bus.get(DBus.BusType.SYSTEM);
+    network_manager = conn.get_object(
+      "org.freedesktop.NetworkManager",
+      "/org/freedesktop/NetworkManager",
+      "org.freedesktop.NetworkManager");
+
+    //Retrieve the network manager connection state.
+    uint32 network_manager_state = network_manager.State;
+    connected = network_manager_state == NM_STATE_CONNECTED;
+
+    //Dbus signal when the state of the connection is changed.
+    network_manager.StateChanged += network_manager_state_changed;
+  }
+
+  protected void network_manager_state_changed(DBus.Object obj, uint32 new_state)
+  {
+    bool was_connected = connected;
+    connected = new_state == NM_STATE_CONNECTED;
+
+    if (connected)
+      resume();
+    else if (was_connected)
+      pause();
+  }
+
   public Duplicity(Operation.Mode mode, Gtk.Window? win) {
     this.original_mode = mode;
     toplevel = win;
@@ -122,9 +155,22 @@ public class Duplicity : Object
       delete_age = client.get_int(DELETE_AFTER_KEY);
     }
     catch (Error e) {warning("%s\n", e.message);}
-    
+
+    try {
+      if (!backend.is_native())
+        init_dbus_to_network_manager();
+    }
+    catch (Error e) {
+      warning("%s\n\n%s", e.message, "Failed to initialize DBus\n");
+    }
+
     if (!restart())
       done(false, false);
+
+    if (!connected) {
+      debug("No connection found. Postponing the backup.");
+      pause();
+    }
   }
   
   public void cancel() {
@@ -146,6 +192,22 @@ public class Duplicity : Object
     else { // just abruptly stop, without a cleanup
       mode = Operation.Mode.INVALID;
       cancel_inst();
+    }
+  }
+
+  public void pause()
+  {
+    if (inst != null) {
+      inst.pause();
+      set_status(_("Paused (no network)"), false);
+    }
+  }
+
+  public void resume()
+  {
+    if (inst != null) {
+      inst.resume();
+      set_saved_status();
     }
   }
 
@@ -238,7 +300,7 @@ public class Duplicity : Object
     // very quickly overridden by a message like "Backing up file X"
     if (action_desc == null)
       action_desc = Operation.mode_to_string(mode);
-    action_desc_changed(action_desc);
+    set_status(action_desc);
     
     connect_and_start(extra_argv, null, null, custom_local);
     return true;
@@ -255,7 +317,7 @@ public class Duplicity : Object
     cleanup_argv.append("--force");
     cleanup_argv.append(this.remote);
     
-    action_desc_changed(_("Cleaning up..."));
+    set_status(_("Cleaning up..."));
     connect_and_start(null, null, cleanup_argv);
     
     return true;
@@ -272,7 +334,7 @@ public class Duplicity : Object
     argv.append("--force");
     argv.append(this.remote);
     
-    action_desc_changed(_("Cleaning up..."));
+    set_status(_("Cleaning up..."));
     connect_and_start(null, null, argv);
     
     return true;
@@ -352,6 +414,36 @@ public class Duplicity : Object
     done(success, cancelled);
   }
   
+  string saved_status;
+  File saved_status_file;
+  bool saved_status_file_action;
+  void set_status(string msg, bool save = true)
+  {
+    if (save) {
+      saved_status = msg;
+      saved_status_file = null;
+    }
+    action_desc_changed(msg);
+  }
+
+  void set_status_file(File file, bool action, bool save = true)
+  {
+    if (save) {
+      saved_status = null;
+      saved_status_file = file;
+      saved_status_file_action = action;
+    }
+    action_file_changed(file, action);
+  }
+
+  void set_saved_status()
+  {
+    if (saved_status != null)
+      set_status(saved_status, false);
+    else
+      set_status_file(saved_status_file, saved_status_file_action, false);
+  }
+
   bool restart_with_short_filenames_if_needed()
   {
     if (DuplicityInfo.get_default().can_read_short_filenames)
@@ -614,7 +706,7 @@ public class Duplicity : Object
       case INFO_SYNCHRONOUS_UPLOAD_BEGIN:
       case INFO_ASYNCHRONOUS_UPLOAD_BEGIN:
         if (!backend.is_native())
-          action_desc_changed(_("Uploading..."));
+          set_status(_("Uploading..."));
         break;
       }
     }
@@ -624,14 +716,14 @@ public class Duplicity : Object
     var gfile = make_file_obj(file);
     last_touched_file = gfile;
     if (gfile.query_file_type(FileQueryInfoFlags.NONE, null) != FileType.DIRECTORY)
-      action_file_changed(gfile, state != State.DRY_RUN);
+      set_status_file(gfile, state != State.DRY_RUN);
   }
   
   void process_patch_file(string file) {
     var gfile = make_file_obj(file);
     last_touched_file = gfile;
     if (gfile.query_file_type(FileQueryInfoFlags.NONE, null) != FileType.DIRECTORY)
-      action_file_changed(gfile, state != State.DRY_RUN);
+      set_status_file(gfile, state != State.DRY_RUN);
   }
   
   void process_progress(string[] firstline)
