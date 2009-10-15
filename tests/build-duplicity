@@ -76,12 +76,10 @@ install_bzr()
         # lets us package changes made in the tree since last update
     fi
   else
-    # Don't use lp:duplicity because that likes to use bzr+ssh, which can prompt
-    # for ssh passphrase (which we don't want)
     if [ "$1" = "bzr-stable" ]; then
-      url="http://bazaar.launchpad.net/~duplicity-team/duplicity/stable"
+      url="lp:duplicity/0.6-series"
     else
-      url="http://bazaar.launchpad.net/~duplicity-team/duplicity/trunk"
+      url="lp:duplicity"
     fi
     bzr co "$url" "$SRCDIR/duplicity-$1"
     cd "$SRCDIR/duplicity-$1"
