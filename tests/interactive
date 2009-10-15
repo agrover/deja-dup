@@ -36,12 +36,16 @@ def test():
   size = None
   back = 'file'
   prog = None
+  cmd = ''
   for arg in sys.argv[1:]:
+    if prog == 'cmd':
+      cmd += arg + ' '
+      continue
     if arg == 'vfat':
       mtype = arg
     elif arg == 'ext3':
       mtype = arg
-    elif arg in ('applet', 'shell'):
+    elif arg in ('applet', 'shell', 'cmd'):
       prog = arg
     elif arg.startswith('id='):
       tmpid = arg.split('=', 1)[-1]
@@ -78,6 +82,8 @@ def test():
     base.wait_for_quit()
   elif prog == 'shell':
     os.system('bash')
+  elif prog == 'cmd':
+    os.system(cmd)
   return True
 
 base.run(test)
