@@ -335,13 +335,13 @@ public int get_full_backup_threshold()
     // to try to keep at least 2 full backups around, so also don't allow a
     // longer full threshold than half the delete age.
     // 
-    // 'daily' gets 2 weeks: 1 * 8 => 2 * 7
-    // 'weekly' gets 2 months: 7 * 8
-    // 'biweekly' gets 4 months: 14 * 8
-    // 'monthly' gets 6 months: 28 * 8 => 24 * 7
+    // 'daily' gets 2 weeks: 1 * 12 => 2 * 7
+    // 'weekly' gets 3 months: 7 * 12
+    // 'biweekly' gets 6 months: 14 * 12
+    // 'monthly' gets 6 months: 28 * 12 => 24 * 7
     var max = 24 * 7; // 6 months
     var min = 2 * 7; // 2 weeks
-    var scale = 8;
+    var scale = 12;
     var min_fulls = 2;
     
     var delete_age = client.get_int(DELETE_AFTER_KEY);
