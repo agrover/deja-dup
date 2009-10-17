@@ -1,208 +1,211 @@
 Déjà Dup 11.0 ()
 ----------------
 Features:
- * Allow deleting old backups past a certain date (e.g. 3 months ago)
- * Will create fresh full backups occasionally to avoid backup corruption
- * Support resuming an unfinished backup
+ • Allow deleting old backups past a certain date (e.g. 3 months ago)
+ • Will create fresh full backups occasionally to avoid backup corruption
+ • Support resuming an unfinished backup
 Bug Fixes:
- * Support duplicity's native gio handling, fixing some remote connection bugs
- * Don't start an automatic backup if no network connection
- * Don't ask for encryption passphrase twice during restore
- * If a hostname mismatch occurs, allow the user to decide what to do
+ • Support duplicity's native gio handling, fixing some remote connection bugs
+ • Don't start an automatic backup if no network connection
+ • Don't ask for encryption passphrase twice during restore
+ • If a hostname mismatch occurs, allow the user to decide what to do
 Polish:
- * Allow turning on automatic backups after a successful manual backup
- * Make backup chunk sizes much larger, as fewer files are easier to deal with
- * Allow hiding progress window while backing up by clicking on the applet
- * Ask for passwords in-window rather than popping up a new dialog
- * Provide feedback about when we're uploading vs backing up
+ • Allow turning on automatic backups after a successful manual backup
+ • Make backup chunk sizes much larger, as fewer files are easier to deal with
+ • Allow hiding progress window while backing up by clicking on the applet
+ • Ask for passwords in-window rather than popping up a new dialog
+ • Provide feedback about when we're uploading vs backing up
+Translations:
+ • New Czech, Esperanto, Italian, Kurdish, Portuguese, Slovak, and Traditional Chinese translations
+ • Updated Dutch, French, Galacian, German, Norwegian Bokmal, Russian, Spanish, and Swedish translations
 Packaging Changes:
- * Bumped required gtk+ version to 2.14
- * Bumped required glib version to 2.18
- * Dropped libgnomeui dependency
- * Dropped libnotify dependency
- * Dropped gfvs-fuse dependency (if you have duplicity 0.6.05 or later)
- * Added a bunch of new tests
+ • Bumped required gtk+ version to 2.14
+ • Bumped required glib version to 2.18
+ • Dropped libgnomeui dependency
+ • Dropped libnotify dependency
+ • Dropped gfvs-fuse dependency (if you have duplicity 0.6.05 or later)
+ • Added a bunch of new tests
 
 Déjà Dup 10.2 (2009-10-09)
 --------------------------
-* Fix an occasional crasher when manually backing up/restoring
+• Fix an occasional crasher when manually backing up/restoring
 
 Déjà Dup 10.1 (2009-06-13)
 --------------------------
-* Support caching backup metadata, which means Déjà Dup supports the recently
+• Support caching backup metadata, which means Déjà Dup supports the recently
   released duplicity 0.6.00 which requires a cache
-* Updated French, German, Russian, and Swedish translations
+• Updated French, German, Russian, and Swedish translations
 
 Déjà Dup 10.0 (2009-06-05)
 --------------------------
-* Use GIO, letting one backup to FTP, WebDAV, and Windows Networking servers.
-* Add a 'Details' box when backing up or restoring.  This lets you see the
+• Use GIO, letting one backup to FTP, WebDAV, and Windows Networking servers.
+• Add a 'Details' box when backing up or restoring.  This lets you see the
   full path of each file as it is touched (rather than just the filename).
-* If the user tries to backup or restore for the first time, show the relevant
+• If the user tries to backup or restore for the first time, show the relevant
   preferences in the wizard directly.  Don't require that they first open the
   Preferences window.
-* Add a more complete summary right before user approves a backup or restore.
-* Bug fixes and UI tweaks
-* New Indonesian and Turkish translations
-* Updated Finnish, French, and Russian translations
+• Add a more complete summary right before user approves a backup or restore.
+• Bug fixes and UI tweaks
+• New Indonesian and Turkish translations
+• Updated Finnish, French, and Russian translations
 
 Déjà Dup 9.3 (2009-05-30)
 -------------------------
-* Exclude ~/.Private, not ~/Private.  This means we no longer backup the
+• Exclude ~/.Private, not ~/Private.  This means we no longer backup the
   encrypted version of ecryptfs files, but the unencrypted version.  So
   encrypt your backups appropriately.  This change lets us work more elegantly
   in all ecryptfs setups, especially when your whole home directory is
   encrypted.
-* Update icons to Tango style ones
-* Relicense help documentation from GFDL to GPL-3+
-* Some minor bug fixes
+• Update icons to Tango style ones
+• Relicense help documentation from GFDL to GPL-3+
+• Some minor bug fixes
 
 Déjà Dup 9.2 (2009-05-09)
 -------------------------
-* Re-enable some kinder, specific messages for certain duplicity exceptions,
+• Re-enable some kinder, specific messages for certain duplicity exceptions,
   including I/O errors and 'destination out of space' errors
-* Enable translation of user documentation (man pages and manual)
-* Updated English (UK), French, German, and Russian translations
+• Enable translation of user documentation (man pages and manual)
+• Updated English (UK), French, German, and Russian translations
 
 Déjà Dup 9.1 (2009-04-27)
 -------------------------
-* Strip spaces from the ends of passwords, they are likely just cut+paste
+• Strip spaces from the ends of passwords, they are likely just cut+paste
   errors from web sites -- notably Amazon's S3 password page (LP: #362899).
-* Make bleeding-edge GTK+ symbols introduced by vala 0.7 optional, so we now
+• Make bleeding-edge GTK+ symbols introduced by vala 0.7 optional, so we now
   compile again with GTK+ 2.12.
 
 Déjà Dup 9.0 (2009-04-26)
 -------------------------
-* Use 'nice' for duplicity subprocess to be less of a resource hog
-* Make folder include/exclude lists scrollable if too large
-* Add some additional default excludes and document all such defaults in the
+• Use 'nice' for duplicity subprocess to be less of a resource hog
+• Make folder include/exclude lists scrollable if too large
+• Add some additional default excludes and document all such defaults in the
   user help:
   ~/.xsession-errors
   ~/.recently-used.xbel
   ~/.recent-applications.xbel
   ~/Private (LP: #320019)
-* Support recent duplicity feature that allows migrating vfat users to new
+• Support recent duplicity feature that allows migrating vfat users to new
   filename scheme
-* Show exception text if duplicity fails
-* Fix crash if gconf schema isn't installed (LP: #318146)
-* Let user cancel 'add directory' dialog (LP: #364690)
-* New Finnish, Pashto, and Russian translations
+• Show exception text if duplicity fails
+• Fix crash if gconf schema isn't installed (LP: #318146)
+• Let user cancel 'add directory' dialog (LP: #364690)
+• New Finnish, Pashto, and Russian translations
 
 Déjà Dup 8.1 (2009-04-03)
 -------------------------
-* Fix use of ionice program that prevent deja-dup from working on kernels
+• Fix use of ionice program that prevent deja-dup from working on kernels
   versions less than 2.6.25.  LP: #352492
 
 Déjà Dup 8.0 (2009-03-29)
 -------------------------
-* Support Ubuntu-9.10-style notifications without action buttons
-* Don't backup the backup destination directory
-* Don't forcibly migrate FAT32 users to new duplicity (>= 0.5.10) naming scheme
-* Lower GTK+ requirement to 2.12 from 2.14
-* Add test suite
-* New Arabic, Danish, and English (United Kingdom) translations
-* Updated Dutch, French, German, and Swedish translations
+• Support Ubuntu-9.10-style notifications without action buttons
+• Don't backup the backup destination directory
+• Don't forcibly migrate FAT32 users to new duplicity (>= 0.5.10) naming scheme
+• Lower GTK+ requirement to 2.12 from 2.14
+• Add test suite
+• New Arabic, Danish, and English (United Kingdom) translations
+• Updated Dutch, French, German, and Swedish translations
 
 Déjà Dup 7.4 (2009-02-11)
 -------------------------
-* Don't ask for S3 bucket name (and default to deja-dup).  Buckets are
+• Don't ask for S3 bucket name (and default to deja-dup).  Buckets are
   S3-global and that default is certainly taken.  Instead, generate bucket name
   from user ID.  Ask user for an optional folder in the bucket instead.
-* Fix bug that prevented cleanup on FAT32.
-* If no passphrase is provided, turn off encryption.
-* Add better errors for a couple cases (bad encryption password, not signed up
+• Fix bug that prevented cleanup on FAT32.
+• If no passphrase is provided, turn off encryption.
+• Add better errors for a couple cases (bad encryption password, not signed up
   for S3).
-* New Dutch translation
-* Updated French, Hebrew, and Spanish translations
+• New Dutch translation
+• Updated French, Hebrew, and Spanish translations
 
 Déjà Dup 7.3
 ------------
-* Fix SSH password problem, preventing the SSH backend from working
+• Fix SSH password problem, preventing the SSH backend from working
 
 Déjà Dup 7.2
 ------------
-* Enforce volume size of 5M, regardless of duplicity's default
-* New Norwegian Bokmal translation
-* Updated German and Swedish translations
+• Enforce volume size of 5M, regardless of duplicity's default
+• New Norwegian Bokmal translation
+• Updated German and Swedish translations
 
 Déjà Dup 7.1
 ------------
-* Fix mangled German translation, whoops
+• Fix mangled German translation, whoops
 
 Déjà Dup 7.0
 ------------
-* Add nautilus extension to restore files via a right click
-* Fix crash when restoring from an empty folder or from FAT32
-* Make backup progress bar more accurate for large backups
-* Updated German and Swedish translations
+• Add nautilus extension to restore files via a right click
+• Fix crash when restoring from an empty folder or from FAT32
+• Make backup progress bar more accurate for large backups
+• Updated German and Swedish translations
 
 Déjà Dup 6.0
 ------------
-* Allow restoring from any backup time point, not just the most recent
-* Allow backing up to a Windows partition
-* Clean up any leftover backend files from aborted previous runs
-* Don't have scheduled backup start while a manual backup is happening
-* Don't hang when non-UTF-8 characters appear in filenames
-* Fix a bug with local folder selection when not using the file dialog
-* Be more forceful about killing duplicity subprocesses, to avoid orphaned ones
-* New Galician and German translations
+• Allow restoring from any backup time point, not just the most recent
+• Allow backing up to a Windows partition
+• Clean up any leftover backend files from aborted previous runs
+• Don't have scheduled backup start while a manual backup is happening
+• Don't hang when non-UTF-8 characters appear in filenames
+• Fix a bug with local folder selection when not using the file dialog
+• Be more forceful about killing duplicity subprocesses, to avoid orphaned ones
+• New Galician and German translations
 
 Déjà Dup 5.2
 ------------
-* Don't backup ~/.gvfs
-* Fix crash when cancelling while preparing a backup
+• Don't backup ~/.gvfs
+• Fix crash when cancelling while preparing a backup
 
 Déjà Dup 5.1
 ------------
-* Fixed a bug that caused deja-dup to hang if encryption is requested
-* Updated Swedish translation
+• Fixed a bug that caused deja-dup to hang if encryption is requested
+• Updated Swedish translation
 
 Déjà Dup 5.0
 ------------
-* Use a (short) wizard for backing up too, just like restoring
-* Progress during backup is now indicated by showing what file is being
+• Use a (short) wizard for backing up too, just like restoring
+• Progress during backup is now indicated by showing what file is being
   backed up and how much of the total is done
-* Inhibit session to warn user about logging out while backing up
-* New help documentation and man pages
-* New Swedish translation
+• Inhibit session to warn user about logging out while backing up
+• New help documentation and man pages
+• New Swedish translation
 
 Déjà Dup 4.0
 ------------
-* New SSH backend
-* Uses ionice if available to not fight with user for disk access
-* Automatically excludes some common directories like /tmp, /proc, ~/.cache
-* Add wizard for restoring, with better error reporting if certain files can't
+• New SSH backend
+• Uses ionice if available to not fight with user for disk access
+• Automatically excludes some common directories like /tmp, /proc, ~/.cache
+• Add wizard for restoring, with better error reporting if certain files can't
   be restored.
-* Fix crash when saving password in keyring
-* Fix bug where cleaning up the backend actually kicked off another backup
+• Fix crash when saving password in keyring
+• Fix bug where cleaning up the backend actually kicked off another backup
   instead.
-* Added Spanish translation
-* Updated French translation
+• Added Spanish translation
+• Updated French translation
 
 Déjà Dup 3.0
 ------------
-* Added ability to set a regular backup schedule (daily, weekly, biweekly, or
+• Added ability to set a regular backup schedule (daily, weekly, biweekly, or
   monthly).
-* Added --version
-* Added French translation
+• Added --version
+• Added French translation
 
 Déjà Dup 2.1
 ------------
-* Finish reading all output from duplicity before closing -- this fixes the
+• Finish reading all output from duplicity before closing -- this fixes the
   'silent failure' problem if an error occurs
 
 Déjà Dup 2.0
 ------------
-* Fix typo that caused encryption preference to default to off
-* Fix menu icon
-* Show S3 ID field in preferences
-* Cleanup backend if a backup is cancelled
-* Use new duplicity output to present more accurate/precise errors
-* Require duplicity 0.5.03
-* New Hebrew and Lithuanian translations
+• Fix typo that caused encryption preference to default to off
+• Fix menu icon
+• Show S3 ID field in preferences
+• Cleanup backend if a backup is cancelled
+• Use new duplicity output to present more accurate/precise errors
+• Require duplicity 0.5.03
+• New Hebrew and Lithuanian translations
 
 Déjà Dup 1.0
 ------------
-* Initial release
-* Supports backing up to Amazon S3 or a local directory
+• Initial release
+• Supports backing up to Amazon S3 or a local directory
 

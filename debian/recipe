@@ -47,6 +47,6 @@ run tar xj -C $EXTRACTDIR -f *.tar.bz2 && cp -r debian $EXTRACTDIR/*/
 run rm -r * && mv $EXTRACTDIR/*/* ."
   echo "$recipetext" > "$RECIPE"
   mkdir "$EXTRACTDIR"
-  bzr dailydeb "$RECIPE" "$BUILDDIR" --key-id=$KEY --distribution=$distro --dput=ppa:deja-dup-team/testing >/dev/null 2>/dev/null
+  bzr dailydeb "$RECIPE" "$BUILDDIR" --key-id=$KEY --distribution=$distro --dput=ppa:deja-dup-team/testing >/dev/null
   rm -r "$EXTRACTDIR"
 done
