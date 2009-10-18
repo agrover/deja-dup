@@ -26,6 +26,7 @@ VALA_CFLAGS = \
 	--pkg gconf-2.0 \
 	--pkg unique-1.0 \
 	--pkg libdeja-dup \
+	--pkg dbus-glib-1 \
 	--pkg unix \
 	--pkg config
 
