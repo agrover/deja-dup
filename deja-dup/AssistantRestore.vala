@@ -450,7 +450,7 @@ public class AssistantRestore : AssistantOperation
       }
     }
     else if (page == progress_page) {
-      set_page_title(page, _("Restoring..."));
+      set_page_title(page, _("Restoring…"));
     }
     else if (page == query_progress_page) {
       query_progress_bar.fraction = 0;

@@ -48,11 +48,11 @@ public abstract class Operation : Object
   {
     switch (mode) {
     case Operation.Mode.BACKUP:
-      return _("Backing up...");
+      return _("Backing up…");
     case Operation.Mode.RESTORE:
-      return _("Restoring...");
+      return _("Restoring…");
     case Operation.Mode.STATUS:
-      return _("Checking for backups...");
+      return _("Checking for backups…");
     default:
       return "";
     }
@@ -92,7 +92,7 @@ public abstract class Operation : Object
   
   public virtual void start() throws Error
   {
-    action_desc_changed(_("Preparing..."));
+    action_desc_changed(_("Preparing…"));
 
     if (backend == null) {
       done(false, false);

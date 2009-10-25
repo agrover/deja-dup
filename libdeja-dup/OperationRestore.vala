@@ -57,7 +57,7 @@ public class OperationRestore : Operation
   
   public override void start() throws Error
   {
-    action_desc_changed(_("Restoring files..."));
+    action_desc_changed(_("Restoring files…"));
     base.start();
   }
   

@@ -132,7 +132,7 @@ public abstract class AssistantOperation : Assistant
     }
     else {
       prefix = _("Scanning:");
-      progress_label.label = _("Scanning...");
+      progress_label.label = _("Scanning…");
       progress_file_label.label = "";
     }
 

@@ -25,7 +25,7 @@ public class ButtonConnect : Gtk.Button
 {
   construct {
     set("use-underline", true,
-        "label", _("Connect to _Server..."));
+        "label", _("Connect to _Server…"));
     clicked.connect((b) => {run_connect_server_dialog(get_topwindow(this));});
   }
   

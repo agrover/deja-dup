@@ -214,15 +214,15 @@ public class MainWindow : Gtk.Window
     action.activate.connect(on_contents);
     action_group.add_action_with_accel (action, "F1");
     
-    action = new Gtk.Action ("GetHelpAction", _("Get Help _Online..."), null, null);
+    action = new Gtk.Action ("GetHelpAction", _("Get Help _Online…"), null, null);
     action.activate.connect(on_get_help);
     action_group.add_action (action);
     
-    action = new Gtk.Action ("TranslateAction", _("_Translate This Application..."), null, null);
+    action = new Gtk.Action ("TranslateAction", _("_Translate This Application…"), null, null);
     action.activate.connect(on_translate);
     action_group.add_action (action);
     
-    action = new Gtk.Action ("ReportAction", _("_Report a Problem..."), null, null);
+    action = new Gtk.Action ("ReportAction", _("_Report a Problem…"), null, null);
     action.activate.connect(on_report);
     action_group.add_action (action);
     

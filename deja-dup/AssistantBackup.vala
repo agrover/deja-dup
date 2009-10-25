@@ -245,7 +245,7 @@ public class AssistantBackup : AssistantOperation
       }
     }
     else if (page == progress_page) {
-      set_page_title(page, _("Backing up..."));
+      set_page_title(page, _("Backing up…"));
     }
   }
 }

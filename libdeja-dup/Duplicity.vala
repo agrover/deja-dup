@@ -240,7 +240,7 @@ public class Duplicity : Object
           DuplicityInfo.get_default().has_collection_status) {
         mode = Operation.Mode.STATUS;
         state = State.STATUS;
-        action_desc = _("Preparing...");
+        action_desc = _("Preparing…");
       }
       // If we're backing up, and the version of duplicity supports it, we should
       // first run using --dry-run to get the total size of the backup, to make
@@ -248,7 +248,7 @@ public class Duplicity : Object
       else if (!has_progress_total &&
                DuplicityInfo.get_default().has_backup_progress) {
         state = State.DRY_RUN;
-        action_desc = _("Preparing...");
+        action_desc = _("Preparing…");
         extra_argv.append("--dry-run");
       }
       else {
@@ -320,7 +320,7 @@ public class Duplicity : Object
     cleanup_argv.append("--force");
     cleanup_argv.append(this.remote);
     
-    set_status(_("Cleaning up..."));
+    set_status(_("Cleaning up…"));
     connect_and_start(null, null, cleanup_argv);
     
     return true;
@@ -337,7 +337,7 @@ public class Duplicity : Object
     argv.append("--force");
     argv.append(this.remote);
     
-    set_status(_("Cleaning up..."));
+    set_status(_("Cleaning up…"));
     connect_and_start(null, null, argv);
     
     return true;
@@ -593,7 +593,7 @@ public class Duplicity : Object
         // duplicity gives something like "home/blah/blah not found in archive,
         // no files restored".
         if (restore_files != null)
-          text = _("Could not restore '%s': File not found in backup").printf(
+          text = _("Could not restore ‘%s’: File not found in backup").printf(
                    restore_files.data.get_parse_name());
         break;
       case ERROR_GPG:
@@ -601,7 +601,7 @@ public class Duplicity : Object
         break;
       case ERROR_HOSTNAME_CHANGED:
         if (firstline.length >= 4) {
-          if (!ask_question(_("Computer name changed"), _("The existing backup is of a computer named %s, but the current computer's name is %s.  If this is unexpected, you should backup to a different location.").printf(firstline[2], firstline[3])))
+          if (!ask_question(_("Computer name changed"), _("The existing backup is of a computer named %s, but the current computer’s name is %s.  If this is unexpected, you should backup to a different location.").printf(firstline[2], firstline[3])))
             return;
         }
         // Else just assume that user wants to allow the mismatch...
@@ -643,9 +643,9 @@ public class Duplicity : Object
       else if (text.str("[Errno 5]") != null && // I/O Error
                last_touched_file != null) {
         if (mode == Operation.Mode.BACKUP)
-          show_error(_("Error reading file '%s'.").printf(last_touched_file.get_parse_name()));
+          show_error(_("Error reading file ‘%s’.").printf(last_touched_file.get_parse_name()));
         else
-          show_error(_("Error writing file '%s'.").printf(last_touched_file.get_parse_name()));
+          show_error(_("Error writing file ‘%s’.").printf(last_touched_file.get_parse_name()));
       }
       else if (text.str("[Errno 28]") != null) { // No space left on device
         string where;
@@ -709,7 +709,7 @@ public class Duplicity : Object
       case INFO_SYNCHRONOUS_UPLOAD_BEGIN:
       case INFO_ASYNCHRONOUS_UPLOAD_BEGIN:
         if (!backend.is_native())
-          set_status(_("Uploading..."));
+          set_status(_("Uploading…"));
         break;
       }
     }
