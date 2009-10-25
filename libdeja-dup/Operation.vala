@@ -30,6 +30,7 @@ public abstract class Operation : Object
   public signal void progress(double percent);
   public signal void passphrase_required();
   public signal void question(string title, string msg);
+  public signal void secondary_desc_changed(string msg);
   
   public Gtk.Window toplevel {get; construct;}
   public uint uppermost_xid {get; construct;}
@@ -134,6 +135,7 @@ public abstract class Operation : Object
     dup.action_file_changed.connect((d, f, b) => {action_file_changed(f, b);});
     dup.progress.connect((d, p) => {progress(p);});
     dup.question.connect((d, t, m) => {question(t, m);});
+    dup.secondary_desc_changed.connect((d, t) => {secondary_desc_changed(t);});
     backend.envp_ready.connect(continue_with_envp);
   }
   

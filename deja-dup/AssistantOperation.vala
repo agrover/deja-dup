@@ -37,6 +37,7 @@ public abstract class AssistantOperation : Assistant
 
   Gtk.Label progress_label;
   Gtk.Label progress_file_label;
+  Gtk.Label secondary_label;
   Gtk.ProgressBar progress_bar;
   Gtk.TextView progress_text;
   Gtk.ScrolledWindow progress_scroll;
@@ -162,6 +163,20 @@ public abstract class AssistantOperation : Assistant
       adjust.value = adjust.upper;
   }
   
+  void set_secondary_label(DejaDup.Operation op, string text)
+  {
+    Gtk.VBox page = (Gtk.VBox)progress_page;
+    if (text != null && text != "") {
+      secondary_label.label = "<i>" + text + "</i>";
+      secondary_label.show();
+      page.add(secondary_label);
+      page.reorder_child(secondary_label, 1);
+      page.child_set(secondary_label, "expand", false);
+    }
+    else
+      page.remove(secondary_label);
+  }
+
   protected virtual Gtk.Widget make_progress_page()
   {
     progress_label = new Gtk.Label("");
@@ -178,13 +193,18 @@ public abstract class AssistantOperation : Assistant
     
     progress_bar = new Gtk.ProgressBar();
     
+    secondary_label = new Gtk.Label("");
+    secondary_label.set("xalign", 0.0f,
+                        "wrap", true,
+                        "use-markup", true);
+    
     progress_text = new Gtk.TextView();
     progress_text.editable = false;
     progress_scroll = new Gtk.ScrolledWindow(null, null);
     progress_scroll.set("child", progress_text,
                         "hscrollbar-policy", Gtk.PolicyType.AUTOMATIC,
                         "vscrollbar-policy", Gtk.PolicyType.AUTOMATIC,
-                        "border-width", 6);
+                        "border-width", 0);
     progress_expander = new Gtk.Expander.with_mnemonic(_("_Details"));
     progress_expander.set("child", progress_scroll);
     
@@ -380,6 +400,7 @@ public abstract class AssistantOperation : Assistant
     op.action_file_changed.connect(set_progress_label_file);
     op.progress.connect(show_progress);
     op.question.connect(show_question);
+    op.secondary_desc_changed.connect(set_secondary_label);
     op.backend.mount_op = mount_op;
     
     status_icon = new StatusIcon(op, automatic);

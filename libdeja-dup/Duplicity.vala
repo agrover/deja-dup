@@ -31,6 +31,7 @@ public class Duplicity : Object
   public signal void progress(double percent);
   public signal void collection_dates(List<string>? dates);
   public signal void question(string title, string msg);
+  public signal void secondary_desc_changed(string msg);
   
   public Gtk.Window toplevel {get; construct;}
   public Operation.Mode original_mode {get; construct;}
@@ -263,8 +264,10 @@ public class Duplicity : Object
             if (info.full)
               full_backup.set_time_val(info.time);
           }
-          if (!full_backup.valid() || threshold.compare(full_backup) > 0)
+          if (!full_backup.valid() || threshold.compare(full_backup) > 0) {
             is_full_backup = true;
+            secondary_desc_changed(_("Creating a fresh backup.  This will take longer than normal."));
+          }
         }
       }
       
