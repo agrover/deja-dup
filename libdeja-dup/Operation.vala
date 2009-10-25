@@ -23,7 +23,7 @@ namespace DejaDup {
 
 public abstract class Operation : Object
 {
-  public signal void done(bool success);
+  public signal void done(bool success, bool cancelled);
   public signal void raise_error(string errstr, string? detail);
   public signal void action_desc_changed(string action);
   public signal void action_file_changed(File file, bool actual);
@@ -95,14 +95,14 @@ public abstract class Operation : Object
     action_desc_changed(_("Preparing..."));
 
     if (backend == null) {
-      done(false);
+      done(false, false);
       return;
     }
     
     connect_to_dup();
     
     if (!claim_bus(true)) {
-      done(false);
+      done(false, false);
       return;
     }
     set_session_inhibited(true);
@@ -148,7 +148,7 @@ public abstract class Operation : Object
     }
     catch (Error e) {
       raise_error(e.message, null);
-      done(false);
+      done(false, false);
     }
   }
   
@@ -156,7 +156,7 @@ public abstract class Operation : Object
     if (!success) {
       if (error != null)
         raise_error(error, null);
-      done(false);
+      done(false, false);
       return;
     }
     
@@ -174,7 +174,7 @@ public abstract class Operation : Object
     }
     catch (Error e) {
       raise_error(e.message, null);
-      done(false);
+      done(false, false);
       return;
     }
   }
@@ -195,7 +195,7 @@ public abstract class Operation : Object
       }
     }
     
-    done(success);
+    done(success, cancelled);
   }
   
   protected virtual List<string>? make_argv() throws Error

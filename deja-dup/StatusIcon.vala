@@ -22,6 +22,7 @@ using GLib;
 public class StatusIcon : Gtk.StatusIcon
 {
   public signal void activated(uint time);
+  public signal void hide_all();
   public DejaDup.Operation op {get; construct;}
   public bool automatic {get; construct; default = false;}
 
@@ -72,11 +73,14 @@ public class StatusIcon : Gtk.StatusIcon
 
   void later()
   {
+    hide_all();
     op.stop();
   }
 
   void skip()
   {
+    hide_all();
+
     // Fake a run by setting today's timestamp as the 'last-run' gconf key
     try {
       DejaDup.update_last_run_timestamp();

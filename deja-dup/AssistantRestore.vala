@@ -325,18 +325,16 @@ public class AssistantRestore : AssistantOperation
       show_error(_("No backups to restore"), null);
   }
   
-  protected void query_finished(DejaDup.Operation op, bool success)
+  protected void query_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
     this.op_state = op.get_state();
     this.query_op = null;
     this.op = null;
     
-    if (!error_occurred) {
-      if (success)
-        go_forward();
-      else // cancelled
-        do_close();
-    }
+    if (cancelled)
+      do_close();
+    else if (success)
+      go_forward();
   }
   
   bool query_pulse()
@@ -364,7 +362,7 @@ public class AssistantRestore : AssistantOperation
     catch (Error e) {
       warning("%s\n", e.message);
       show_error(e.message, null); // not really user-friendly text, but ideally this won't happen
-      query_finished(query_op, false);
+      query_finished(query_op, false, false);
     }
   }
   

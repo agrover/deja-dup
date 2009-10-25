@@ -369,20 +369,23 @@ public abstract class AssistantOperation : Assistant
     summary_page = page;
   }
   
-  void apply_finished(DejaDup.Operation op, bool success)
+  void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
     status_icon = null;
     this.op = null;
 
-    if (!success && !error_occurred)
-      // was cancelled...  Close dialog
-      do_close();
+    if (cancelled) {
+      if (success) // stop (resume later) vs cancel
+        Gtk.main_quit();
+      else
+        do_close();
+    }
     else {
       if (success) {
         succeeded = true;
         go_to_page(summary_page);
       }
-      else
+      else // show error
         force_visible(false);
     }
   }
@@ -405,6 +408,7 @@ public abstract class AssistantOperation : Assistant
     
     status_icon = new StatusIcon(op, automatic);
     status_icon.activated.connect((s, t) => {toggle_window(t, true);});
+    status_icon.hide_all.connect((s) => {hide_everything();});
 
     try {
       op.start();
@@ -412,7 +416,7 @@ public abstract class AssistantOperation : Assistant
     catch (Error e) {
       warning("%s\n", e.message);
       show_error(e.message, null); // not really user-friendly text, but ideally this won't happen
-      apply_finished(op, false);
+      apply_finished(op, false, false);
     }
   }
 
@@ -444,9 +448,15 @@ public abstract class AssistantOperation : Assistant
       set_header_icon(Gtk.STOCK_DIALOG_AUTHENTICATION);
   }
   
-  void do_cancel()
+  public void hide_everything()
   {
     hide();
+    status_icon = null; // hide immediately to seem responsive
+  }
+
+  void do_cancel()
+  {
+    hide_everything();
     if (op != null)
       op.cancel(); // do_close will happen in done() callback
     else

@@ -169,7 +169,7 @@ public class AssistantBackup : AssistantOperation
   
   void do_resume()
   {
-    hide();
+    hide_everything();
     if (op != null)
       op.stop();
     else {
