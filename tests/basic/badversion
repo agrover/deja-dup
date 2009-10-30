@@ -28,7 +28,6 @@ def test():
   base.setup(start=False)
   base.start_deja_dup(waitfor='dlgError')
   rv = ldtp.guiexist('dlgError', "lblDuplicity’sversionistooold")
-  ldtp.wait(1000)
   ldtp.click('dlgError', 'btnOK')
   return rv
 
