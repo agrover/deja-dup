@@ -237,24 +237,22 @@ public class DuplicityInstance : Object
   
   static string validated_string(string s)
   {
-    string rv = "";
+    var rv = new StringBuilder();
     weak string p = s;
-    char[] charstr = new char[6];
     
     while (p[0] != 0) {
       unichar ch = p.get_char_validated();
       if (ch == (uint)(-1) || ch == (uint)(-2)) {
-        rv += "\xef\xbf\xbd"; // the 'unknown character' character in utf-8
+        rv.append("�"); // the 'replacement character' in unicode
         p = p.offset(1);
       }
       else {
-        ch.to_utf8((string)charstr);
-        rv += (string)charstr;
+        rv.append_unichar(ch);
         p = p.next_char();
       }
     }
     
-    return rv;
+    return rv.str;
   }
   
   static string compress_string(string s_in)
