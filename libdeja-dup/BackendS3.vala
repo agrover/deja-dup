@@ -29,12 +29,8 @@ const string S3_SERVER = "s3.amazonaws.com";
 
 public class BackendS3 : Backend
 {
-  public BackendS3(Gtk.Window? win) {
-    toplevel = win;
-  }
-  
   public override Backend clone() {
-    return new BackendS3(toplevel);
+    return new BackendS3();
   }
   
   public override void add_argv(Operation.Mode mode, ref List<string> argv) {

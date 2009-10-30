@@ -25,12 +25,8 @@ public const string FILE_PATH_KEY = "/apps/deja-dup/file/path";
 
 public class BackendFile : Backend
 {
-  public BackendFile(Gtk.Window? win) {
-    toplevel = win;
-  }
-  
   public override Backend clone() {
-    return new BackendFile(toplevel);
+    return new BackendFile();
   }
 
   string? get_location_from_gconf() throws Error

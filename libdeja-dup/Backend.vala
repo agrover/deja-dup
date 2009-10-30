@@ -26,8 +26,6 @@ public abstract class Backend : Object
   public signal void envp_ready(bool success, List<string>? envp, string? error = null);
 
   public MountOperation mount_op {get; set;}
-  
-  public Gtk.Window toplevel {get; construct;}
 
   public abstract bool is_native();
 
@@ -44,14 +42,14 @@ public abstract class Backend : Object
   
   public abstract Backend clone();
   
-  public static Backend? get_default(Gtk.Window? win) throws Error
+  public static Backend? get_default() throws Error
   {
     var client = get_gconf_client();
     var backend_name = client.get_string(BACKEND_KEY);
     if (backend_name == "s3")
-      return new BackendS3(win);
+      return new BackendS3();
     else if (backend_name == "file")
-      return new BackendFile(win);
+      return new BackendFile();
     else
       return null;
   }

@@ -43,12 +43,11 @@ public class OperationRestore : Operation
     }
   }
   
-  public OperationRestore(Gtk.Window? win, string dest_in,
+  public OperationRestore(string dest_in,
                           string? time_in = null,
                           List<File>? files_in = null,
                           uint xid = 0) {
-    toplevel = win;
-    uppermost_xid = xid;
+    this.xid = xid;
     dest = dest_in;
     time = time_in;
     restore_files = files_in;

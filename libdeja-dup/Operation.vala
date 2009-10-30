@@ -32,8 +32,7 @@ public abstract class Operation : Object
   public signal void question(string title, string msg);
   public signal void secondary_desc_changed(string msg);
   
-  public Gtk.Window toplevel {get; construct;}
-  public uint uppermost_xid {get; construct;}
+  public uint xid {get; construct;}
   public bool needs_password {get; private set;}
   
   public enum Mode {
@@ -80,10 +79,10 @@ public abstract class Operation : Object
   protected string passphrase;
   construct
   {
-    dup = new Duplicity(mode, toplevel);
+    dup = new Duplicity(mode);
 
     try {
-      backend = Backend.get_default(toplevel);
+      backend = Backend.get_default();
     }
     catch (Error e) {
       warning("%s\n", e.message);    
@@ -228,12 +227,6 @@ public abstract class Operation : Object
       if (inhibit) {
         if (inhibit_cookie > 0)
           return; // already inhibited
-        
-        uint xid = uppermost_xid;
-        if (xid == 0 && toplevel != null) {
-          toplevel.realize();
-          xid = Gdk.x11_drawable_get_xid(toplevel.window);
-        }
         
         obj.Inhibit(Config.PACKAGE,
                     xid,

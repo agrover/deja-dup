@@ -76,7 +76,7 @@ public class DuplicityInstance : Object
       catch (IOError.EXISTS e) {
         add_dir = true; // ignore
       }
-      catch (IOError e) {
+      catch (Error e) {
         warning("%s\n", e.message);
       }
       if (add_dir)

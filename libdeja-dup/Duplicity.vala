@@ -33,7 +33,6 @@ public class Duplicity : Object
   public signal void question(string title, string msg);
   public signal void secondary_desc_changed(string msg);
   
-  public Gtk.Window toplevel {get; construct;}
   public Operation.Mode original_mode {get; construct;}
   public Operation.Mode mode {get; private set; default = Operation.Mode.INVALID;}
   public bool error_issued {get; private set; default = false;}
@@ -124,9 +123,8 @@ public class Duplicity : Object
       pause();
   }
 
-  public Duplicity(Operation.Mode mode, Gtk.Window? win) {
+  public Duplicity(Operation.Mode mode) {
     this.original_mode = mode;
-    toplevel = win;
   }
   
   public virtual void start(Backend backend, bool encrypted,

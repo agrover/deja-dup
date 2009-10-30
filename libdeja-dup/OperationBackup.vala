@@ -27,9 +27,8 @@ public errordomain BackupError {
 
 public class OperationBackup : Operation
 {
-  public OperationBackup(Gtk.Window? win, uint xid = 0) {
-    toplevel = win;
-    uppermost_xid = xid;
+  public OperationBackup(uint xid = 0) {
+    this.xid = xid;
     mode = Mode.BACKUP;
   }
   

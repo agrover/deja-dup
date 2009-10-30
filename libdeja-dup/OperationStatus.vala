@@ -25,9 +25,8 @@ public class OperationStatus : Operation
 {
   public signal void collection_dates(List<string>? dates);
   
-  public OperationStatus(Gtk.Window? win, uint xid = 0) {
-    toplevel = win;
-    uppermost_xid = xid;
+  public OperationStatus(uint xid = 0) {
+    this.xid = xid;
     mode = Mode.STATUS;
   }
   

@@ -281,9 +281,12 @@ public class AssistantRestore : AssistantOperation
       if (date_combo.get_active_iter(out iter))
         date_store.get(iter, 1, out date);
     }
-    
-    var rest_op = new DejaDup.OperationRestore(this, restore_location, date,
-                                               restore_files);
+
+    realize();
+    var xid = Gdk.x11_drawable_get_xid(this.window);
+
+    var rest_op = new DejaDup.OperationRestore(restore_location, date,
+                                               restore_files, xid);
     if (this.op_state != null)
       rest_op.set_state(this.op_state);
 
@@ -348,7 +351,10 @@ public class AssistantRestore : AssistantOperation
     if (mount_op == null)
       mount_op = new MountOperationAssistant(this);
 
-    query_op = new DejaDup.OperationStatus(this);
+    realize();
+    var xid = Gdk.x11_drawable_get_xid(this.window);
+
+    query_op = new DejaDup.OperationStatus(xid);
     query_op.collection_dates.connect(handle_collection_dates);
     query_op.done.connect(query_finished);
     op = query_op;
