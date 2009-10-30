@@ -1,4 +1,4 @@
-/* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
+/* -*- Mode: C; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
     © 2008 Michael Terry <mike@mterry.name>
@@ -17,19 +17,14 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-[CCode (cprefix = "", lower_case_cprefix = "", cheader_filename = "PassphraseSchema.h")]
-public GnomeKeyring.PasswordSchema PASSPHRASE_SCHEMA;
+/* This file is for whatever we can't currently do in Vala. */
+#ifndef __HACKS_H__
+#define __HACKS_H__
 
-[CCode (cheader_filename = "hacks.h")]
-void hacks_status_icon_set_tooltip_text (Gtk.StatusIcon icon, string text);
+#include <gtk/gtk.h>
 
-[CCode (cheader_filename = "hacks.h")]
-Gtk.Label hacks_make_link_label (string text);
+extern void hacks_status_icon_set_tooltip_text (GtkStatusIcon *icon, const gchar *text);
+extern GtkLabel *hacks_make_link_label (const gchar *text);
 
-[CCode (cprefix = "G", lower_case_cprefix = "g_", cheader_filename = "glib.h")]
-namespace GLib {
-	public class ParamSpecString : ParamSpec {
-		[CCode (cname = "g_param_spec_string")]
-		public ParamSpecString (string name, string nick, string blurb, string default_value, ParamFlags flags);
-	}
-}
+#endif
+

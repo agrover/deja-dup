@@ -27,7 +27,8 @@ def test():
   os.environ['DEJA_DUP_TEST_VERSION'] = '0.5.02'
   base.setup(start=False)
   base.start_deja_dup(waitfor='dlgError')
-  rv = ldtp.guiexist('dlgError', "lblDuplicity'sversionistooold")
+  rv = ldtp.guiexist('dlgError', "lblDuplicity’sversionistooold")
+  ldtp.wait(1000)
   ldtp.click('dlgError', 'btnOK')
   return rv
 

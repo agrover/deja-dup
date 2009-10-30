@@ -84,16 +84,19 @@ PKG_CHECK_MODULES(PREF,
 AC_SUBST(PREF_CFLAGS)
 AC_SUBST(PREF_LIBS)
 
-PKG_CHECK_MODULES(LIBRARY,
-                  gtk+-2.0 >= $GTK_REQ_VER
+PKG_CHECK_MODULES(COMMON,
                   gio-2.0 >= $GIO_REQ_VER
-                  gio-unix-2.0
                   gconf-2.0
-                  unique-1.0
                   dbus-glib-1
                   gnome-keyring-1)
-AC_SUBST(LIBRARY_CFLAGS)
-AC_SUBST(LIBRARY_LIBS)
+AC_SUBST(COMMON_CFLAGS)
+AC_SUBST(COMMON_LIBS)
+
+PKG_CHECK_MODULES(WIDGETS,
+                  gtk+-2.0 >= $GTK_REQ_VER
+                  gconf-2.0)
+AC_SUBST(WIDGETS_CFLAGS)
+AC_SUBST(WIDGETS_LIBS)
 
 PKG_CHECK_MODULES(MONITOR,
                   gconf-2.0
@@ -114,15 +117,15 @@ AC_SUBST(NAUTILUS_EXTENSION_DIR)
 
 # Sets up output files.
 AC_CONFIG_FILES([Makefile
+                 common/Makefile
                  data/Makefile
-                 libdeja-dup/Makefile
-                 monitor/Makefile
                  deja-dup/Makefile
                  help/Makefile
+                 monitor/Makefile
                  nautilus/Makefile
                  po/Makefile.in
                  preferences/Makefile
                  tests/Makefile
-                 vapi/Makefile])
+                 vapi/Makefile
+                 widgets/Makefile])
 AC_OUTPUT
-

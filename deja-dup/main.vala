@@ -91,7 +91,7 @@ class DejaDupApp : Object
 
     /* First, check duplicity version info */
     Idle.add(() => {
-      valid_duplicity = DejaDup.DuplicityInfo.get_default().check_duplicity_version(toplevel);
+      valid_duplicity = DejaDup.init_duplicity(toplevel);
       Gtk.main_quit();
       return false;
     });

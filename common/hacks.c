@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008 Michael Terry <mike@mterry.name>
+    © 2008, 2009 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,19 +17,15 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* This file is for whatever we can't currently do in Vala. */
-#ifndef __HACKS_H__
-#define __HACKS_H__
+#include "hacks.h"
 
-#include <gnome-keyring.h>
-#include <gtk/gtk.h>
-#include <gio/gio.h>
+static const GnomeKeyringPasswordSchema PASSPHRASE_SCHEMA_DEF = {
+  GNOME_KEYRING_ITEM_GENERIC_SECRET,
+  {
+    {"owner", GNOME_KEYRING_ATTRIBUTE_TYPE_STRING},
+    {"type", GNOME_KEYRING_ATTRIBUTE_TYPE_STRING},
+    {NULL, 0}
+  }
+};
 
-extern const GnomeKeyringPasswordSchema *PASSPHRASE_SCHEMA;
-
-extern gchar *hacks_unix_mount_get_fs_type (const gchar *file);
-extern void hacks_status_icon_set_tooltip_text (GtkStatusIcon *icon, const gchar *text);
-extern GtkLabel *hacks_make_link_label (const gchar *text);
-
-#endif
-
+const GnomeKeyringPasswordSchema *PASSPHRASE_SCHEMA = &PASSPHRASE_SCHEMA_DEF;

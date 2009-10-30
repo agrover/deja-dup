@@ -1,7 +1,7 @@
-/* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
+/* -*- Mode: C; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008 Michael Terry <mike@mterry.name>
+    © 2008, 2009 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,27 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-[CCode (cprefix = "", lower_case_cprefix = "", cheader_filename = "PassphraseSchema.h")]
-public GnomeKeyring.PasswordSchema PASSPHRASE_SCHEMA;
+#include "hacks.h"
 
+void
+hacks_status_icon_set_tooltip_text (GtkStatusIcon *icon, const gchar *text)
+{
+#if GTK_CHECK_VERSION(2, 16, 0)
+  return gtk_status_icon_set_tooltip_text (icon, text);
+#else
+  return gtk_status_icon_set_tooltip (icon, text);
+#endif
+}
+
+GtkLabel *
+hacks_make_link_label (const gchar *text)
+{
+#if GTK_CHECK_VERSION(2, 18, 0)
+  GtkLabel *label = GTK_LABEL (g_object_ref_sink (gtk_label_new ("")));
+  gtk_label_set_markup (label, text);
+  gtk_label_set_track_visited_links (label, FALSE);
+  return label;
+#else
+  return NULL;
+#endif
+}

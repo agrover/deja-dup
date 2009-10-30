@@ -16,46 +16,28 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-noinst_LTLIBRARIES = libdeja-dup.la
+noinst_LTLIBRARIES = libcommon.la
 
 VALA_CFLAGS = \
-	--library=libdeja-dup \
+	--library=libcommon \
 	--vapidir $(top_srcdir)/vapi \
-	--pkg gtk+-2.0 \
-	--pkg gio-2.0 \
-	--pkg gconf-2.0 \
-	--pkg gnome-keyring-1 \
 	--pkg dbus-glib-1 \
-	--pkg unique-1.0 \
+	--pkg gconf-2.0 \
+	--pkg gio-2.0 \
+	--pkg gnome-keyring-1 \
 	--pkg posix \
-	--pkg hacks \
-	--pkg PassphraseSchema \
-	--pkg unix \
 	--pkg config
 
 AM_CFLAGS = \
-	$(LIBRARY_CFLAGS) \
+	$(COMMON_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
-libdeja_dup_la_VALASOURCES = \
+libcommon_la_VALASOURCES = \
 	Backend.vala \
 	BackendFile.vala \
 	BackendS3.vala \
-	ButtonConnect.vala \
-	ConfigBool.vala \
-	ConfigChoice.vala \
-	ConfigDelete.vala \
-	ConfigEntry.vala \
-	ConfigLabel.vala \
-	ConfigLabelBool.vala \
-	ConfigLabelList.vala \
-	ConfigLabelLocation.vala \
-	ConfigList.vala \
-	ConfigLocation.vala \
-	ConfigNumber.vala \
-	ConfigPeriod.vala \
-	ConfigWidget.vala \
+	CommonUtils.vala \
 	Duplicity.vala \
 	DuplicityInfo.vala \
 	DuplicityInstance.vala \
@@ -65,28 +47,26 @@ libdeja_dup_la_VALASOURCES = \
 	OperationStatus.vala \
 	RecursiveDelete.vala \
 	RecursiveMove.vala \
-	RecursiveOp.vala \
-	ToggleGroup.vala \
-	libdeja-dup.vala
+	RecursiveOp.vala
 
 BUILT_SOURCES = \
 	vala.stamp
 
-libdeja_dup_la_SOURCES = \
+libcommon_la_SOURCES = \
 	hacks.c hacks.h \
 	PassphraseSchema.c PassphraseSchema.h \
-	deja-dup.h \
-	$(libdeja_dup_la_VALASOURCES:.vala=.c)
+	common.h \
+	$(libcommon_la_VALASOURCES:.vala=.c)
 
-vala.stamp: $(libdeja_dup_la_VALASOURCES)
+vala.stamp: $(libcommon_la_VALASOURCES)
 if USE_VALAC
-	$(AM_V_GEN)$(VALAC) -C -H deja-dup.h $(VALA_CFLAGS) $^
+	$(AM_V_GEN)$(VALAC) -C -H common.h $(VALA_CFLAGS) $^
 	@touch $@
 else
 	@echo "ERROR: Valac compilation is disabled, but the C sources are out-of-date."
 	@exit 1
 endif
 
-libdeja_dup_la_LIBADD = $(LIBRARY_LIBS) @INTLLIBS@
+libcommon_la_LIBADD = $(COMMON_LIBS) @INTLLIBS@
 
-EXTRA_DIST = vala.stamp $(libdeja_dup_la_VALASOURCES)
+EXTRA_DIST = vala.stamp $(libcommon_la_VALASOURCES)

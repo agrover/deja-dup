@@ -47,8 +47,9 @@ public abstract class RecursiveOp : Object
   public void start()
   {
     Idle.add(idle_action);
-    done.connect((m) => {Gtk.main_quit();});
-    Gtk.main();
+    var loop = new MainLoop(null, false);
+    done.connect((m) => {loop.quit();});
+    loop.run();
   }
   
   public void start_async()

@@ -19,19 +19,22 @@
 bin_PROGRAMS = deja-dup-preferences
 
 VALA_CFLAGS = \
-	--vapidir $(top_srcdir)/libdeja-dup \
+	--vapidir $(top_srcdir)/common \
+	--vapidir $(top_srcdir)/widgets \
 	--vapidir $(top_srcdir)/vapi \
 	--pkg gtk+-2.0 \
 	--pkg gio-2.0 \
 	--pkg gconf-2.0 \
 	--pkg unique-1.0 \
-	--pkg libdeja-dup \
+	--pkg libcommon \
+	--pkg libwidgets \
 	--pkg dbus-glib-1 \
 	--pkg unix \
 	--pkg config
 
 AM_CFLAGS = \
-	-I$(top_srcdir)/libdeja-dup \
+	-I$(top_srcdir)/common \
+	-I$(top_srcdir)/widgets \
 	$(PREF_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
@@ -55,6 +58,6 @@ else
 	@exit 1
 endif
 
-deja_dup_preferences_LDADD = $(PREF_LIBS) @INTLLIBS@ $(top_builddir)/libdeja-dup/libdeja-dup.la
+deja_dup_preferences_LDADD = $(PREF_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la $(top_builddir)/widgets/libwidgets.la
 
 EXTRA_DIST = vala.stamp $(deja_dup_preferences_VALASOURCES)

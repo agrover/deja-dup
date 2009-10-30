@@ -45,20 +45,20 @@ public class DuplicityInfo : Object
   
   // Returns true if everything is OK.  If false, program will close.  A dialog
   // will already have been thrown up.
-  public bool check_duplicity_version(Gtk.Window? parent) {
+  public bool check_duplicity_version(out string header, out string msg) {
     string output;
     
     try {
       Process.spawn_command_line_sync("duplicity --version", out output, null, null);
     }
     catch (Error e) {
-      show_missing_duplicity_error(parent, e.message);
+      set_missing_duplicity_error(out header, out msg, e.message);
       return false;
     }
     
     var tokens = output.split(" ", 2);
     if (tokens == null || tokens[0] == null || tokens[1] == null) {
-      show_missing_duplicity_error(parent, null);
+      set_missing_duplicity_error(out header, out msg, null);
       return false;
     }
     
@@ -66,7 +66,7 @@ public class DuplicityInfo : Object
     version_string = tokens[1].strip();
     var ver_tokens = version_string.split(".");
     if (ver_tokens == null || ver_tokens[0] == null) {
-      show_missing_duplicity_error(parent, null);
+      set_missing_duplicity_error(out header, out msg, null);
       return false;
     }
     major = ver_tokens[0].to_int();
@@ -79,7 +79,7 @@ public class DuplicityInfo : Object
     
     var good_enough = meets_requirements();
     if (!good_enough) {
-      show_bad_version_error(parent);
+      set_bad_version_error(out header, out msg);
       return false;
     }
     
@@ -123,14 +123,9 @@ public class DuplicityInfo : Object
     return meets_version(REQUIRED_MAJOR, REQUIRED_MINOR, REQUIRED_MICRO);
   }
   
-  void show_missing_duplicity_error(Gtk.Window parent, string? msg_in) {
-    Gtk.MessageDialog dlg = new Gtk.MessageDialog (parent,
-        Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL,
-        Gtk.MessageType.ERROR,
-        Gtk.ButtonsType.OK,
-        _("Could not run duplicity"));
-
-    string msg = msg_in;
+  void set_missing_duplicity_error(out string header, out string msg, string? msg_in) {
+    header = _("Could not run duplicity");
+    msg = msg_in;
     if (msg != null)
       msg = msg.chomp() + "\n\n";
     else if (version_string == null)
@@ -138,20 +133,12 @@ public class DuplicityInfo : Object
     else
         msg = _("Could not understand duplicity version ‘%s’.\n\n").printf(version_string);
 
-    dlg.format_secondary_text("%s%s", msg, _("Without duplicity, Déjà Dup cannot function.  It will close now."));
-    dlg.run();
-    dlg.destroy();
+    msg += _("Without duplicity, Déjà Dup cannot function.  It will close now.");
   }
   
-  void show_bad_version_error(Gtk.Window? parent) {
-    Gtk.MessageDialog dlg = new Gtk.MessageDialog (parent,
-        Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL,
-        Gtk.MessageType.ERROR,
-        Gtk.ButtonsType.OK,
-        _("Duplicity’s version is too old"));
-    dlg.format_secondary_text(_("Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found version %d.%d.%.2d"), REQUIRED_MAJOR, REQUIRED_MINOR, REQUIRED_MICRO, major, minor, micro);
-    dlg.run();
-    dlg.destroy();
+  void set_bad_version_error(out string header, out string msg) {
+    header = _("Duplicity’s version is too old");
+    msg = _("Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found version %d.%d.%.2d").printf(REQUIRED_MAJOR, REQUIRED_MINOR, REQUIRED_MICRO, major, minor, micro);
   }
 }
 
