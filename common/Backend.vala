@@ -32,7 +32,7 @@ public abstract class Backend : Object
   public abstract string? get_location() throws Error;
   public abstract string? get_location_pretty() throws Error; // short description for user
   
-  public virtual void get_envp() throws Error {
+  public virtual async void get_envp() throws Error {
     envp_ready(true, new List<string>());
   }
   

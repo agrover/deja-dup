@@ -101,6 +101,25 @@ class DejaDupApp : Object
     if (!valid_duplicity)
       return 1;
 
+    var mon = VolumeMonitor.get();
+    unowned List<Drive> ds = mon.get_connected_drives();
+    foreach (Drive d in ds) {
+      print("drive: %s\n", d.get_name());
+    }
+    unowned List<Mount> ms = mon.get_mounts();
+    foreach (Mount m in ms) {
+      print("mount: %s, %s\n", m.get_name(), m.get_uuid());
+    }
+    unowned List<Volume> vs = mon.get_volumes();
+    foreach (Volume v in vs) {
+      print("volume: %s, %s\n", v.get_name(), v.get_activation_root().get_uri());
+      print(" %s\n", v.get_identifier(VOLUME_IDENTIFIER_KIND_HAL_UDI));
+      print(" %s\n", v.get_identifier(VOLUME_IDENTIFIER_KIND_LABEL));
+      print(" %s\n", v.get_identifier(VOLUME_IDENTIFIER_KIND_NFS_MOUNT));
+      print(" %s\n", v.get_identifier(VOLUME_IDENTIFIER_KIND_UNIX_DEVICE));
+      print(" %s\n", v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID));
+    }
+
     /* Now proceed with main program */
 
     if (restore_mode) {

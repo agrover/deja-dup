@@ -125,7 +125,7 @@ public class BackendS3 : Backend
   string gconf_id;
   string id;
   string secret_key;
-  public override void get_envp() throws Error
+  public override async void get_envp() throws Error
   {
     var client = get_gconf_client();
     gconf_id = client.get_string(S3_ID_KEY);

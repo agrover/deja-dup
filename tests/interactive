@@ -36,6 +36,8 @@ def test():
   size = None
   back = 'file'
   prog = None
+  hasrun = False
+  encrypt = True
   cmd = ''
   for arg in sys.argv[1:]:
     if prog == 'cmd':
@@ -47,6 +49,10 @@ def test():
       mtype = arg
     elif arg in ('applet', 'shell', 'cmd'):
       prog = arg
+    elif arg == 'hasrun':
+      hasrun = True
+    elif arg == 'nocrypto':
+      encrypt = False
     elif arg.startswith('id='):
       tmpid = arg.split('=', 1)[-1]
     elif arg.startswith('dup='):
@@ -72,7 +78,9 @@ def test():
   if mtype is not None or size is not None:
     dest = base.create_mount(mtype=mtype, size=size)
   
-  base.setup(backend=back, dest=dest, sources=sources, start=False, encrypt=True)
+  base.setup(backend=back, dest=dest, sources=sources, start=False, encrypt=encrypt)
+  if hasrun:
+    base.set_gconf_value("last-run", "fake")
   
   if prog is None:
     base.start_deja_dup()

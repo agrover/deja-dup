@@ -93,6 +93,8 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
     create_local_config(dest)
   elif backend == 'ssh':
     create_ssh_config(dest)
+  elif backend == 'vol':
+    create_vol_config(dest)
   set_includes_excludes(includes=sources)
   
   if encrypt is not None:
@@ -159,6 +161,16 @@ def create_local_config(dest='/'):
     dest = os.getcwd()+'/'+dest
   set_gconf_value("backend", "file")
   set_gconf_value("file/path", dest)
+
+def create_vol_config(dest='/'):
+  if dest is None:
+    raise 'Must specify dest=, using uuid:path syntax'
+  uuid, path = dest.split(':', 1)
+  set_gconf_value("backend", "file")
+  set_gconf_value("file/type", "volume")
+  set_gconf_value("file/name", "Test Volume")
+  set_gconf_value("file/uuid", uuid)
+  set_gconf_value("file/path", path)
 
 def create_ssh_config(dest='/'):
   if dest is None:

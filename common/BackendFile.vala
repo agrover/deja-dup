@@ -21,7 +21,10 @@ using GLib;
 
 namespace DejaDup {
 
+public const string FILE_TYPE_KEY = "/apps/deja-dup/file/type";
 public const string FILE_PATH_KEY = "/apps/deja-dup/file/path";
+public const string FILE_UUID_KEY = "/apps/deja-dup/file/uuid";
+public const string FILE_NAME_KEY = "/apps/deja-dup/file/name";
 
 public class BackendFile : Backend
 {
@@ -35,7 +38,7 @@ public class BackendFile : Backend
     var path = client.get_string(FILE_PATH_KEY);
     return path;
   }
-  
+
   public override string? get_location() throws Error
   {
     var path = get_location_from_gconf();
@@ -89,42 +92,112 @@ public class BackendFile : Backend
       argv.prepend("--gio");
   }
   
+  void fill_mount_info(File file)
+  {
+    try {
+    }
+    catch (Error e) {
+    }
+  }
+
   // This doesn't *really* worry about envp, it just is a convenient point to
   // hook into the operation steps to mount the file.
-  public override void get_envp() throws Error
+  public override async void get_envp() throws Error
   {
     var path = get_location_from_gconf();
     var file = File.parse_name(path);
-    Mount mount = null;
-    if (!file.is_native()) {
-      // Check if it's mounted
-      try {
-        mount = file.find_enclosing_mount(null);
-      }
-      catch (Error e) {}
-      
-      if (mount == null) {
-        mount_file(file);
-        return;
-      }
+    try {
+      yield mount_file(file);
     }
-    
-    envp_ready(true, new List<string>());
+    catch (Error e) {
+      envp_ready(false, new List<string>(), e.message);
+    }
   }
   
-  void mount_file(File file)
+  async void mount_file(File file) throws Error
   {
     this.ref();
-    file.mount_enclosing_volume(MountMountFlags.NONE, mount_op, null, (o, r) => {
-      try {
-        var success = ((File)o).mount_enclosing_volume_finish(r);
-        envp_ready(success, new List<string>());
-      }
-      catch (Error e) {
-        envp_ready(false, new List<string>(), e.message);
-      }
-      this.unref();
+
+    var success = true;
+    var client = get_gconf_client();
+    var type = client.get_string(FILE_TYPE_KEY);
+    if (type == "volume")
+      success = yield mount_volume(file);
+    else if (!file.is_native())
+      success = yield mount_remote(file);
+
+    if (success)
+      fill_mount_info(file);
+    envp_ready(success, new List<string>());
+
+    this.unref();
+  }
+
+  async bool mount_remote(File file) throws Error
+  {
+    try {
+      // Check if it's already mounted
+      var mount = yield file.find_enclosing_mount_async(Priority.DEFAULT, null);
+      if (mount != null)
+        return true;
+    }
+    catch (Error e) {}
+
+    return yield file.mount_enclosing_volume(MountMountFlags.NONE, mount_op, null);
+  }
+
+  async bool mount_volume(File file) throws Error
+  {
+    var client = get_gconf_client();
+    var uuid = client.get_string(FILE_UUID_KEY);
+    print("getting vol: %s\n", uuid);
+
+    var vol = yield wait_for_volume(uuid);
+
+    var mount = vol.get_mount();
+    if (mount != null)
+      return true;
+
+    var loop = new MainLoop(null, false);
+    var rv = false;
+
+    print("volume: %s\n", vol.get_name());
+
+    vol.mount(MountMountFlags.NONE, mount_op, null, (o, r) => {
+      loop.quit();
+      rv = ((Volume)o).mount_finish(r);
     });
+    loop.run();
+    return rv;
+  }
+
+  async Volume wait_for_volume(string uuid) throws Error
+  {
+    // For some reason, when I last tested this (glib 2.22.2), Volume.get_uuid
+    // always returned null.
+    // Looping and asking for the identifier is more reliable.
+    var mon = VolumeMonitor.get();
+    unowned List<Volume> vols = mon.get_volumes();
+    Volume vol = null;
+    foreach (Volume v in vols) {
+      if (v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID) == uuid) {
+        vol = v;
+        break;
+      }
+    }
+
+    if (vol == null) {
+      var name = client.get_string(FILE_NAME_KEY);
+      print("Backup location not available.  Waiting for ‘%s’ to become connected…\n", name);
+      var loop = new MainLoop(null, false);
+      mon.volume_added.connect((m, v) => {
+        loop.quit();
+      });
+      loop.run();
+      return yield wait_for_volume(uuid);
+    }
+
+    return vol;
   }
 }
 
