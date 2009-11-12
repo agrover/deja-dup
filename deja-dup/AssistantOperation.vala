@@ -405,6 +405,7 @@ public abstract class AssistantOperation : Assistant
     op.question.connect(show_question);
     op.secondary_desc_changed.connect(set_secondary_label);
     op.backend.mount_op = mount_op;
+    op.backend.pause_op.connect(pause_op);
     
     status_icon = new StatusIcon(op, automatic);
     status_icon.activated.connect((s, t) => {toggle_window(t, true);});
@@ -581,6 +582,15 @@ public abstract class AssistantOperation : Assistant
     force_visible(false);
     response.connect(stop_question);
     Gtk.main();
+  }
+
+  void pause_op(DejaDup.Backend back, string header, string msg)
+  {
+    // Basically a question without a response expected
+    set_page_title(question_page, header);
+    question_label.label = msg;
+    interrupt(question_page, false);
+    force_visible(false);
   }
 }
 

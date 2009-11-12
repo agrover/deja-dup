@@ -119,7 +119,8 @@ public class BackendS3 : Backend
     if (folder == null || folder == "")
       folder = "/";
     
-    return _("Folder %s on Amazon S3").printf(folder);
+    // Translators: %s is a folder.
+    return _("%s on Amazon S3").printf(folder);
   }
   
   string gconf_id;

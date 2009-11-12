@@ -170,7 +170,7 @@ def create_vol_config(dest='/'):
   set_gconf_value("file/type", "volume")
   set_gconf_value("file/name", "Test Volume")
   set_gconf_value("file/uuid", uuid)
-  set_gconf_value("file/path", path)
+  set_gconf_value("file/relpath", path)
 
 def create_ssh_config(dest='/'):
   if dest is None:

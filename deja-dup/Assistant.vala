@@ -57,6 +57,7 @@ public abstract class Assistant : Gtk.Dialog
     public Type type;
   }
 
+  bool interrupt_can_continue = true;
   bool interrupted_from_hidden = false;
   weak List<PageInfo> interrupted;
 
@@ -201,9 +202,10 @@ public abstract class Assistant : Gtk.Dialog
     }
   }
 
-  public void interrupt(Gtk.Widget page)
+  public void interrupt(Gtk.Widget page, bool can_continue = true)
   {
     weak List<PageInfo> was = current;
+    interrupt_can_continue = can_continue;
     go_to_page(page);
     if (!visible) { // If we are interrupting from a hidden mode
       interrupted_from_hidden = true;
@@ -274,8 +276,10 @@ public abstract class Assistant : Gtk.Dialog
       break;
     case Type.INTERRUPT:
       show_cancel = true;
-      show_forward = true;
-      forward_text = _("Co_ntinue");
+      if (interrupt_can_continue) {
+        show_forward = true;
+        forward_text = _("Co_ntinue");
+      }
       break;
     case Type.PROGRESS:
       show_cancel = true;
