@@ -139,7 +139,11 @@ public class BackendFile : Backend
     if (!file.query_exists(null))
       return; // doesn't tell us anything
 
-    var mount = yield file.find_enclosing_mount_async(Priority.DEFAULT, null);
+    Mount mount = null;
+    try {
+      mount = yield file.find_enclosing_mount_async(Priority.DEFAULT, null);
+    }
+    catch (Error e) {}
     if (mount == null) {
       client.set_string(FILE_TYPE_KEY, "normal");
       return;
