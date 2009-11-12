@@ -168,9 +168,11 @@ def create_vol_config(dest='/'):
   uuid, path = dest.split(':', 1)
   set_gconf_value("backend", "file")
   set_gconf_value("file/type", "volume")
-  set_gconf_value("file/name", "Test Volume")
+  set_gconf_value("file/name", "USB Drive: Test Volume")
+  set_gconf_value("file/short_name", "Test Volume")
   set_gconf_value("file/uuid", uuid)
   set_gconf_value("file/relpath", path)
+  set_gconf_value("file/icon", "drive-removable-media-usb")
 
 def create_ssh_config(dest='/'):
   if dest is None:

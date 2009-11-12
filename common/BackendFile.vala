@@ -27,6 +27,7 @@ public const string FILE_RELPATH_KEY = "/apps/deja-dup/file/relpath";
 public const string FILE_UUID_KEY = "/apps/deja-dup/file/uuid";
 public const string FILE_NAME_KEY = "/apps/deja-dup/file/name";
 public const string FILE_SHORT_NAME_KEY = "/apps/deja-dup/file/short_name";
+public const string FILE_ICON_KEY = "/apps/deja-dup/file/icon";
 
 public class BackendFile : Backend
 {
@@ -148,30 +149,17 @@ public class BackendFile : Backend
     if (volume == null)
       return;
 
-    var drive = volume.get_drive();
-
     var uuid = volume.get_identifier(VOLUME_IDENTIFIER_KIND_UUID);
     if (uuid == null || uuid == "")
       return;
 
-    var name = volume.get_name();
-    if (name == null || name == "")
-      return;
-    var short_name = name;
-
-    if (drive != null) {
-      var drive_name = drive.get_name();
-      if (drive_name != null && drive_name != "")
-        name = "%s: %s".printf(drive_name, name);
-    }
-
-    var path = mount.get_root().get_relative_path(file);
+    var relpath = mount.get_root().get_relative_path(file);
 
     client.set_string(FILE_UUID_KEY, uuid);
-    client.set_string(FILE_NAME_KEY, name);
-    client.set_string(FILE_SHORT_NAME_KEY, short_name);
-    client.set_string(FILE_PATH_KEY, file.get_parse_name());
-    client.set_string(FILE_RELPATH_KEY, path);
+    client.set_string(FILE_RELPATH_KEY, relpath);
+
+    update_volume_info(volume);
+
     client.set_string(FILE_TYPE_KEY, "volume");
   }
 
@@ -191,8 +179,14 @@ public class BackendFile : Backend
         name = "%s: %s".printf(drive_name, name);
     }
 
+    var icon = volume.get_icon();
+    string icon_str = null;
+    if (icon != null)
+      icon_str = icon.to_string();
+
     client.set_string(FILE_NAME_KEY, name);
     client.set_string(FILE_SHORT_NAME_KEY, short_name);
+    client.set_string(FILE_ICON_KEY, icon_str);
 
     // Also update full path just in case (useful if downgrading to old version?)
     var mount = volume.get_mount();
