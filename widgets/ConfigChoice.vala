@@ -23,7 +23,7 @@ namespace DejaDup {
 
 public class ConfigChoice : ConfigWidget
 {
-  public signal void changed(string val);
+  public signal void choice_changed(string val);
   
   protected Gtk.ComboBox combo;
   protected string default_val = null;
@@ -67,7 +67,7 @@ public class ConfigChoice : ConfigWidget
       warning("%s\n", e.message);
     }
     
-    changed(strval);
+    choice_changed(strval);
   }
   
   protected override void set_from_config()

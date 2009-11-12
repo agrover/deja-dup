@@ -56,7 +56,7 @@ public class ConfigPeriod : ConfigChoice
       warning("%s\n", e.message);
     }
     
-    changed(intval.to_string());
+    choice_changed(intval.to_string());
   }
   
   protected override void set_from_config()

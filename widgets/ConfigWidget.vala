@@ -23,6 +23,8 @@ namespace DejaDup {
 
 public abstract class ConfigWidget : Gtk.EventBox
 {
+  public signal void changed();
+
   public string key {get; construct;}
   
   List<string> dirs = null;
@@ -54,7 +56,7 @@ public abstract class ConfigWidget : Gtk.EventBox
       dir = dir.substring(0, dir.length - end.length);
     try {
       client.add_dir(dir, GConf.ClientPreloadType.NONE);
-      client.notify_add(key, set_from_config);
+      client.notify_add(key, key_changed);
       dirs.prepend(dir);
     }
     catch (Error e) {
@@ -62,6 +64,12 @@ public abstract class ConfigWidget : Gtk.EventBox
     }
   }
   
+  void key_changed()
+  {
+    set_from_config();
+    changed();
+  }
+
   protected abstract void set_from_config();
 }
 

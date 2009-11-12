@@ -23,6 +23,8 @@ namespace DejaDup {
 
 public class ConfigLabelLocation : ConfigLabel
 {
+  public bool is_s3 {get; private set;}
+
   public ConfigLabelLocation()
   {
     base(null);
@@ -36,6 +38,12 @@ public class ConfigLabelLocation : ConfigLabel
   protected override void set_from_config()
   {
     label.label = get_location_desc();
+
+    is_s3 = false;
+    try {
+      is_s3 = client.get_string(BACKEND_KEY) == "s3";
+    }
+    catch (Error e) {warning("%s\n", e.message);}
   }
 }
 

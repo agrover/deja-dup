@@ -26,7 +26,12 @@ public class PreferencesDialog : Gtk.Dialog
   List<Gtk.Widget>[] backend_widgets;
   
   Gtk.SizeGroup label_sizes;
+  Gtk.SizeGroup button_sizes;
   DejaDup.ToggleGroup periodic_toggle;
+
+  Gtk.HBox location_hbox;
+  DejaDup.ConfigLabelLocation location_label_noedit;
+  Gtk.Button location_label_button;
   
   public PreferencesDialog(Gtk.Window? parent = null) {
     transient_for = parent;
@@ -48,17 +53,45 @@ public class PreferencesDialog : Gtk.Dialog
     
     backend_widgets = new List<Gtk.Widget>[NUM_LISTS];
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
-    
-    var location = new DejaDup.ConfigLocation();
-    location.changed.connect(handle_location_changed);
+    button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
+
+    // We can't start by showing a ConfigLocation, because many locations
+    // will not be immediately available (remote URIs that aren't yet mounted,
+    // removable drives that aren't connected).  No need to immediately prompt
+    // for them, just so we can show.  Instead, start with a label, and allow
+    // user to change to edit widget.  Of course, if the user has never backed
+    // anything up, they want to start in edit mode.
+    string last_run = null;
+    try {
+      var client = DejaDup.get_gconf_client();
+      last_run = client.get_string(DejaDup.LAST_RUN_KEY);
+    }
+    catch (Error e) {warning("%s\n", e.message);}
+
+    if (last_run != null && last_run != "") {
+      location_label_noedit = new DejaDup.ConfigLabelLocation();
+      location_label_noedit.changed.connect(handle_location_label_changed);
+      location_label_button = new Gtk.Button.from_stock(Gtk.STOCK_EDIT);
+      location_label_button.clicked.connect(handle_edit_location);
+      button_sizes.add_widget(location_label_button);
+    }
+    else
+      handle_edit_location();
+
+    location_hbox = new Gtk.HBox(false, 6);
+    location_hbox.set("border-width", 0);
+    location_hbox.pack_start(location_label_noedit, true, true, 0);
+    location_hbox.pack_start(location_label_button, false, false, 0);
+
     label = new Gtk.Label(_("_Backup location:"));
-    label.set("mnemonic-widget", location,
+    label.set("mnemonic-widget", location_hbox,
               "use-underline", true,
               "xalign", 0.0f);
     label_sizes.add_widget(label);
+
     table.attach(label, 0, 1, row, row + 1,
                  0, Gtk.AttachOptions.FILL, 3, 3);
-    table.attach(location, 1, 2, row, row + 1,
+    table.attach(location_hbox, 1, 2, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL, 3, 3);
     ++row;
@@ -94,7 +127,7 @@ public class PreferencesDialog : Gtk.Dialog
     backend_widgets[S3_LIST].append(s3_table);
     ++row;
     
-    w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY);
+    w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY, button_sizes);
     w.set_size_request(250, 80);
     label = new Gtk.Label(_("I_nclude files in folders:"));
     label.set("mnemonic-widget", w,
@@ -113,7 +146,7 @@ public class PreferencesDialog : Gtk.Dialog
                  3, 3);
     ++row;
     
-    w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY);
+    w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY, button_sizes);
     w.set_size_request(250, 120);
     label = new Gtk.Label(_("E_xcept files in folders:"));
     label.set("mnemonic-widget", w,
@@ -176,15 +209,49 @@ public class PreferencesDialog : Gtk.Dialog
                  3, 3);
     ++row;
     
-    handle_location_changed(location);
+    handle_location_label_changed(location_label_noedit);
     vbox.add(table);
   }
   
-  void handle_location_changed(DejaDup.ConfigLocation location)
+  void handle_edit_location()
+  {
+    if (location_label_noedit != null) {
+      location_label_noedit.destroy();
+      location_label_noedit = null;
+    }
+    if (location_label_button != null) {
+      location_label_button.destroy();
+      location_label_button = null;
+    }
+
+    var location = new DejaDup.ConfigLocation();
+    location.show_all();
+    location.changed.connect(handle_location_changed);
+    location_hbox.add(location);
+  }
+
+  void handle_location_label_changed(DejaDup.ConfigWidget location)
   {
     for (int i = 0; i < NUM_LISTS; ++i) {
       bool show = false;
-      if (i == S3_LIST && location.is_s3)
+      if (i == S3_LIST && ((DejaDup.ConfigLabelLocation)location).is_s3)
+        show = true;
+      
+      foreach (Gtk.Widget w in backend_widgets[i]) {
+        w.no_show_all = !show;
+        if (show)
+          w.show_all();
+        else
+          w.hide();
+      }
+    }
+  }
+
+  void handle_location_changed(DejaDup.ConfigWidget location)
+  {
+    for (int i = 0; i < NUM_LISTS; ++i) {
+      bool show = false;
+      if (i == S3_LIST && ((DejaDup.ConfigLocation)location).is_s3)
         show = true;
       
       foreach (Gtk.Widget w in backend_widgets[i]) {

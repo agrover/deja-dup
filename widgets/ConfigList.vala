@@ -23,8 +23,11 @@ namespace DejaDup {
 
 public class ConfigList : ConfigWidget
 {
-  public ConfigList(string key)
+  public Gtk.SizeGroup? size_group {get; construct;}
+  
+  public ConfigList(string key, Gtk.SizeGroup? sg = null)
   {
+    this.size_group = sg;
     this.key = key;
   }
   
@@ -49,7 +52,12 @@ public class ConfigList : ConfigWidget
     
     remove_button = new Gtk.Button.from_stock(Gtk.STOCK_REMOVE);
     remove_button.clicked.connect(handle_remove);
-    
+
+    if (size_group != null) {
+      size_group.add_widget(add_button);
+      size_group.add_widget(remove_button);
+    }
+
     var scroll = new Gtk.ScrolledWindow(null, null);
     scroll.hscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
     scroll.vscrollbar_policy = Gtk.PolicyType.AUTOMATIC;

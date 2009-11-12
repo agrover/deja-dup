@@ -23,8 +23,6 @@ namespace DejaDup {
 
 public class ConfigLocation : ConfigWidget
 {
-  public signal void changed();
-  
   public bool is_s3 {get; private set;}
   
   static const int CONNECT_ID = 1;
