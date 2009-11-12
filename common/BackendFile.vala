@@ -81,8 +81,8 @@ public class BackendFile : Backend
       return _("%1$s on %2$s").printf(path, name);
     }
     else {
-      var path = client.get_string(FILE_PATH_KEY);
-      return path; // is a "parse name"
+      var file = get_file_from_gconf();
+      return get_file_desc(file);
     }
   }
   
