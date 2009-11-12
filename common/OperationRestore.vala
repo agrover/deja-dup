@@ -38,8 +38,6 @@ public class OperationRestore : Operation
       this._restore_files = value.copy();
       foreach (File f in this._restore_files)
         f.ref();
-      if (dup != null)
-        dup.restore_files = restore_files;
     }
   }
   
@@ -54,6 +52,7 @@ public class OperationRestore : Operation
   public override void start() throws Error
   {
     action_desc_changed(_("Restoring files…"));
+    dup.restore_files = restore_files;
     base.start();
   }
   
