@@ -26,8 +26,7 @@ public class OperationStatus : Operation
   public signal void collection_dates(List<string>? dates);
   
   public OperationStatus(uint xid = 0) {
-    this.xid = xid;
-    mode = Mode.STATUS;
+    Object(xid: xid, mode: Mode.STATUS);
   }
   
   protected override void connect_to_dup()

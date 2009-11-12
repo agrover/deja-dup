@@ -24,7 +24,7 @@ namespace DejaDup {
 public class ConfigPeriod : ConfigChoice
 {
   public ConfigPeriod(string key) {
-    this.key = key;
+    Object(key: key);
   }
   
   construct {

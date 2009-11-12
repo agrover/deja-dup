@@ -53,8 +53,7 @@ BUILT_SOURCES = \
 	vala.stamp
 
 libcommon_la_SOURCES = \
-	hacks.c hacks.h \
-	PassphraseSchema.c PassphraseSchema.h \
+	chacks.c chacks.h \
 	common.h \
 	$(libcommon_la_VALASOURCES:.vala=.c)
 

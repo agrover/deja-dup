@@ -25,7 +25,7 @@ public class RecursiveDelete : RecursiveOp
 {
   public RecursiveDelete(File source)
   {
-    this.src = source;
+    Object(src: source);
   }
   
   protected override void handle_file()

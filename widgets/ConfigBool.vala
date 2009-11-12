@@ -27,8 +27,7 @@ public class ConfigBool : ConfigWidget, Togglable
   
   public ConfigBool(string key, string label)
   {
-    this.key = key;
-    this.label = label;
+    Object(key: key, label: label);
   }
   
   public bool get_active() {return button.get_active();}

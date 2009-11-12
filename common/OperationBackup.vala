@@ -28,8 +28,7 @@ public errordomain BackupError {
 public class OperationBackup : Operation
 {
   public OperationBackup(uint xid = 0) {
-    this.xid = xid;
-    mode = Mode.BACKUP;
+    Object(xid: xid, mode: Mode.BACKUP);
   }
   
   protected override void operation_finished(Duplicity dup, bool success, bool cancelled)

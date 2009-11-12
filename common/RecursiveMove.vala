@@ -33,8 +33,7 @@ public class RecursiveMove : RecursiveOp
 {
   public RecursiveMove(File source, File dest)
   {
-    this.src = source;
-    this.dst = dest;
+    Object(src: source, dst: dest);
   }
   
   void progress_callback(int64 current_num_bytes, int64 total_num_bytes)

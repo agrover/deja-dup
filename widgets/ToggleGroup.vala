@@ -32,7 +32,7 @@ public class ToggleGroup : Object
   public Togglable toggle {get; construct;}
   
   public ToggleGroup(Togglable toggle) {
-    this.toggle = toggle;
+    Object(toggle: toggle);
   }
   
   List<Gtk.Widget> dependents;

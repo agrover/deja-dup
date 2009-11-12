@@ -25,7 +25,7 @@ public class ConfigEntry : ConfigWidget
 {
   public ConfigEntry(string key)
   {
-    this.key = key;
+    Object(key: key);
   }
   
   Gtk.Entry entry;

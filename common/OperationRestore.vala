@@ -47,11 +47,8 @@ public class OperationRestore : Operation
                           string? time_in = null,
                           List<File>? files_in = null,
                           uint xid = 0) {
-    this.xid = xid;
-    dest = dest_in;
-    time = time_in;
-    restore_files = files_in;
-    mode = Mode.RESTORE;
+    Object(xid: xid, dest: dest_in, time: time_in, restore_files: files_in,
+           mode: Mode.RESTORE);
   }
   
   public override void start() throws Error

@@ -25,7 +25,7 @@ public class AssistantBackup : AssistantOperation
   
   public AssistantBackup(bool automatic)
   {
-    this.automatic = automatic;
+    Object(automatic: automatic);
   }
 
   construct

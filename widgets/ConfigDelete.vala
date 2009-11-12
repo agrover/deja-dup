@@ -24,7 +24,7 @@ namespace DejaDup {
 public class ConfigDelete : ConfigChoice
 {
   public ConfigDelete(string key) {
-    this.key = key;
+    Object(key: key);
   }
   
   construct {

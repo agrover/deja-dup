@@ -27,8 +27,7 @@ public class ConfigList : ConfigWidget
   
   public ConfigList(string key, Gtk.SizeGroup? sg = null)
   {
-    this.size_group = sg;
-    this.key = key;
+    Object(size_group: sg, key: key);
   }
   
   Gtk.TreeView tree;

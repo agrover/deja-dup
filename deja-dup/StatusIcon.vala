@@ -30,8 +30,7 @@ public class StatusIcon : Gtk.StatusIcon
   double progress;
   public StatusIcon(DejaDup.Operation op, bool automatic)
   {
-    this.op = op;
-    this.automatic = automatic;
+    Object(op: op, automatic: automatic);
   }
 
   construct {

@@ -35,7 +35,7 @@ public class MountOperationAssistant : MountOperation
 
   public MountOperationAssistant(AssistantOperation assist)
   {
-    this.assist = assist;
+    Object(assist: assist);
     assist.prepare.connect(do_prepare);
     assist.backward.connect(do_backward);
     assist.forward.connect(do_forward);

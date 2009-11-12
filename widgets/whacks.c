@@ -17,15 +17,27 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "hacks.h"
+#include "whacks.h"
 
-static const GnomeKeyringPasswordSchema PASSPHRASE_SCHEMA_DEF = {
-  GNOME_KEYRING_ITEM_GENERIC_SECRET,
-  {
-    {"owner", GNOME_KEYRING_ATTRIBUTE_TYPE_STRING},
-    {"type", GNOME_KEYRING_ATTRIBUTE_TYPE_STRING},
-    {NULL, 0}
-  }
-};
+void
+hacks_status_icon_set_tooltip_text (GtkStatusIcon *icon, const gchar *text)
+{
+#if GTK_CHECK_VERSION(2, 16, 0)
+  return gtk_status_icon_set_tooltip_text (icon, text);
+#else
+  return gtk_status_icon_set_tooltip (icon, text);
+#endif
+}
 
-const GnomeKeyringPasswordSchema *PASSPHRASE_SCHEMA = &PASSPHRASE_SCHEMA_DEF;
+GtkLabel *
+hacks_make_link_label (const gchar *text)
+{
+#if GTK_CHECK_VERSION(2, 18, 0)
+  GtkLabel *label = GTK_LABEL (g_object_ref_sink (gtk_label_new ("")));
+  gtk_label_set_markup (label, text);
+  gtk_label_set_track_visited_links (label, FALSE);
+  return label;
+#else
+  return NULL;
+#endif
+}

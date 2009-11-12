@@ -25,7 +25,7 @@ public class ConfigLabelList : ConfigLabel
 {
   public ConfigLabelList(string key)
   {
-    this.key = key;
+    Object(key: key);
   }
   
   construct {

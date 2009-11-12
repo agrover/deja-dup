@@ -17,13 +17,13 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-[CCode (cprefix = "", lower_case_cprefix = "", cheader_filename = "PassphraseSchema.h")]
+[CCode (cprefix = "", lower_case_cprefix = "", cheader_filename = "chacks.h")]
 public GnomeKeyring.PasswordSchema PASSPHRASE_SCHEMA;
 
-[CCode (cheader_filename = "hacks.h")]
+[CCode (cheader_filename = "whacks.h")]
 void hacks_status_icon_set_tooltip_text (Gtk.StatusIcon icon, string text);
 
-[CCode (cheader_filename = "hacks.h")]
+[CCode (cheader_filename = "whacks.h")]
 Gtk.Label hacks_make_link_label (string text);
 
 [CCode (cprefix = "G", lower_case_cprefix = "g_", cheader_filename = "glib.h")]

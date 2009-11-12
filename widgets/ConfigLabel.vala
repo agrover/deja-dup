@@ -25,7 +25,7 @@ public class ConfigLabel : ConfigWidget
 {
   public ConfigLabel(string? key)
   {
-    this.key = key;
+    Object(key: key);
   }
   
   protected Gtk.Label label;

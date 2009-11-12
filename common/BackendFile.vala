@@ -262,14 +262,23 @@ public class BackendFile : Backend
 
     var loop = new MainLoop(null, false);
     var rv = false;
+    Error error = null;
 
     vol.mount(MountMountFlags.NONE, mount_op, null, (o, r) => {
       loop.quit();
-      rv = ((Volume)o).mount_finish(r);
+      try {
+        rv = ((Volume)o).mount_finish(r);
+      }
+      catch (Error e) {
+        error = e;
+      }
     });
     loop.run();
 
-    update_volume_info(vol);
+    if (rv)
+      update_volume_info(vol);
+    else
+      throw error;
 
     return rv;
   }

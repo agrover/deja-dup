@@ -124,7 +124,7 @@ public class Duplicity : Object
   }
 
   public Duplicity(Operation.Mode mode) {
-    this.original_mode = mode;
+    Object(original_mode: mode);
   }
   
   public virtual void start(Backend backend, bool encrypted,

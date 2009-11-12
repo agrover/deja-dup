@@ -25,7 +25,7 @@ public class ConfigLabelBool : ConfigLabel
 {
   public ConfigLabelBool(string key)
   {
-    this.key = key;
+    Object(key: key);
   }
   
   protected override void set_from_config()
