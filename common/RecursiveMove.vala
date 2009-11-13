@@ -70,6 +70,21 @@ public class RecursiveMove : RecursiveOp
                null,
                progress_callback);
     }
+    catch (IOError.PERMISSION_DENIED e) {
+      // Try just copying it (in case we didn't have write access to src's
+      // parent directory).
+      try {
+        src.copy(dst,
+                 FileCopyFlags.ALL_METADATA |
+                 FileCopyFlags.NOFOLLOW_SYMLINKS |
+                 FileCopyFlags.OVERWRITE,
+                 null,
+                 progress_callback);
+      }
+      catch (Error e) {
+        raise_error(src, dst, e.message);
+      }
+    }
     catch (Error e) {
       raise_error(src, dst, e.message);
     }
@@ -111,8 +126,13 @@ public class RecursiveMove : RecursiveOp
         return;
       }
     }
-    
-    // Now, we'll try to change it's settings to match our restore copy
+  }
+  
+  protected override void finish_dir()
+  {
+    // Now, we'll try to change it's settings to match our restore copy.
+    // If we tried to do this first, we may remove write access before trying
+    // to copy subfiles.
     try {
       src.copy_attributes(dst,
                           FileCopyFlags.NOFOLLOW_SYMLINKS |
@@ -123,10 +143,7 @@ public class RecursiveMove : RecursiveOp
       // If we fail, no big deal.  There'll often be stuff like /home that we
       // can't change and don't care about changing.
     }
-  }
-  
-  protected override void finish_dir()
-  {
+
     try {
       src.@delete(null); // will only be deleted if empty, so we won't
                          // accidentally toss files left over from a failed
