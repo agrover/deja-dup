@@ -105,6 +105,27 @@ public class BackendFile : Backend
     return true; // default to yes?
   }
 
+  public override Icon? get_icon() {
+    try {
+      var client = get_gconf_client();
+      var type = client.get_string(FILE_TYPE_KEY);
+      if (type == "volume") {
+        var icon_str = client.get_string(FILE_ICON_KEY);
+        return Icon.new_for_string(icon_str);
+      }
+      else {
+        var file = get_file_from_gconf();
+        var info = file.query_info(FILE_ATTRIBUTE_STANDARD_ICON,
+                                   FileQueryInfoFlags.NONE, null);
+        return info.get_icon();
+      }
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      return null;
+    }
+  }
+
   // will be mounted by this time
   public override void add_argv(Operation.Mode mode, ref List<string> argv)
   {

@@ -24,6 +24,7 @@ namespace DejaDup {
 public class ConfigLabelLocation : ConfigLabel
 {
   public bool is_s3 {get; private set;}
+  Gtk.Image img;
 
   public ConfigLabelLocation()
   {
@@ -33,11 +34,27 @@ public class ConfigLabelLocation : ConfigLabel
   construct {
     watch_key(BACKEND_KEY);
     watch_key(FILE_PATH_KEY);
+    img = new Gtk.Image.from_icon_name("folder", Gtk.IconSize.MENU);
+    hbox.pack_start(img, false, false, 0);
+    hbox.reorder_child(img, 0);
+    set_from_config();
   }
   
   protected override void set_from_config()
   {
     label.label = get_location_desc();
+
+    if (img != null) {
+      Icon icon = null;
+      try {
+        icon = Backend.get_default().get_icon();
+      }
+      catch (Error e) {}
+      if (icon == null)
+        img.set_from_icon_name("folder", Gtk.IconSize.MENU);
+      else
+        img.set_from_gicon(icon, Gtk.IconSize.MENU);
+    }
 
     is_s3 = false;
     try {

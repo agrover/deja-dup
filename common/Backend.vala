@@ -29,10 +29,11 @@ public abstract class Backend : Object
   public MountOperation mount_op {get; set;}
 
   public abstract bool is_native();
+  public virtual Icon? get_icon() {return null;}
 
   public abstract string? get_location() throws Error;
   public abstract string? get_location_pretty() throws Error; // short description for user
-  
+
   public virtual async void get_envp() throws Error {
     envp_ready(true, new List<string>());
   }

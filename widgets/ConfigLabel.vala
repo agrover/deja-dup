@@ -28,11 +28,14 @@ public class ConfigLabel : ConfigWidget
     Object(key: key);
   }
   
+  protected Gtk.HBox hbox;
   protected Gtk.Label label;
   construct {
     label = new Gtk.Label("");
     label.set("xalign", 0.0f);
-    add(label);
+    hbox = new Gtk.HBox(false, 0);
+    hbox.pack_start(label, true, true, 6);
+    add(hbox);
     set_from_config();
   }
   
