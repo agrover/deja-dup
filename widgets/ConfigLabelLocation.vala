@@ -32,11 +32,12 @@ public class ConfigLabelLocation : ConfigLabel
   }
   
   construct {
-    watch_key(BACKEND_KEY);
-    watch_key(FILE_PATH_KEY);
     img = new Gtk.Image.from_icon_name("folder", Gtk.IconSize.MENU);
     hbox.pack_start(img, false, false, 0);
     hbox.reorder_child(img, 0);
+    watch_key(BACKEND_KEY);
+    watch_key(FILE_ROOT_KEY);
+    watch_key(S3_ROOT_KEY);
     set_from_config();
   }
   

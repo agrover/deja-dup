@@ -21,6 +21,7 @@ using GLib;
 
 namespace DejaDup {
 
+public const string S3_ROOT_KEY = "/apps/deja-dup/s3";
 public const string S3_ID_KEY = "/apps/deja-dup/s3/id";
 public const string S3_BUCKET_KEY = "/apps/deja-dup/s3/bucket";
 public const string S3_FOLDER_KEY = "/apps/deja-dup/s3/folder";

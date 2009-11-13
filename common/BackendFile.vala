@@ -21,6 +21,7 @@ using GLib;
 
 namespace DejaDup {
 
+public const string FILE_ROOT_KEY = "/apps/deja-dup/file";
 public const string FILE_TYPE_KEY = "/apps/deja-dup/file/type";
 public const string FILE_PATH_KEY = "/apps/deja-dup/file/path";
 public const string FILE_RELPATH_KEY = "/apps/deja-dup/file/relpath";
@@ -182,10 +183,9 @@ public class BackendFile : Backend
 
     client.set_string(FILE_UUID_KEY, uuid);
     client.set_string(FILE_RELPATH_KEY, relpath);
+    client.set_string(FILE_TYPE_KEY, "volume");
 
     update_volume_info(volume);
-
-    client.set_string(FILE_TYPE_KEY, "volume");
   }
 
   void update_volume_info(Volume volume) throws Error

@@ -68,20 +68,18 @@ public class PreferencesDialog : Gtk.Dialog
     }
     catch (Error e) {warning("%s\n", e.message);}
 
+    location_hbox = new Gtk.HBox(false, 6);
+    location_hbox.set("border-width", 0);
+
     if (last_run != null && last_run != "") {
       location_label_noedit = new DejaDup.ConfigLabelLocation();
       location_label_noedit.changed.connect(handle_location_label_changed);
       location_label_button = new Gtk.Button.from_stock(Gtk.STOCK_EDIT);
       location_label_button.clicked.connect(handle_edit_location);
       button_sizes.add_widget(location_label_button);
+      location_hbox.pack_start(location_label_noedit, true, true, 0);
+      location_hbox.pack_start(location_label_button, false, false, 0);
     }
-    else
-      handle_edit_location();
-
-    location_hbox = new Gtk.HBox(false, 6);
-    location_hbox.set("border-width", 0);
-    location_hbox.pack_start(location_label_noedit, true, true, 0);
-    location_hbox.pack_start(location_label_button, false, false, 0);
 
     label = new Gtk.Label(_("_Backup location:"));
     label.set("mnemonic-widget", location_hbox,
@@ -209,7 +207,11 @@ public class PreferencesDialog : Gtk.Dialog
                  3, 3);
     ++row;
     
-    handle_location_label_changed(location_label_noedit);
+    if (location_label_noedit != null)
+      handle_location_label_changed(location_label_noedit);
+    else
+      handle_edit_location();
+
     vbox.add(table);
   }
   
@@ -228,6 +230,7 @@ public class PreferencesDialog : Gtk.Dialog
     location.show_all();
     location.changed.connect(handle_location_changed);
     location_hbox.add(location);
+    handle_location_changed(location);
   }
 
   void handle_location_label_changed(DejaDup.ConfigWidget location)
