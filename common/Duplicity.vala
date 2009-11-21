@@ -90,36 +90,14 @@ public class Duplicity : Object
   int delete_age = 0;
   
   File last_touched_file = null;
-  
-  protected dynamic DBus.Object network_manager;
-  protected bool connected = true;
-  protected const uint32 NM_STATE_CONNECTED = 3;
 
-  protected void init_dbus_to_network_manager() throws DBus.Error, GLib.Error
+  NetworkManager network_manager;
+
+  void network_changed(NetworkManager nm, bool connected)
   {
-    //Set up the DBus connection to network manager
-    DBus.Connection conn = DBus.Bus.get(DBus.BusType.SYSTEM);
-    network_manager = conn.get_object(
-      "org.freedesktop.NetworkManager",
-      "/org/freedesktop/NetworkManager",
-      "org.freedesktop.NetworkManager");
-
-    //Retrieve the network manager connection state.
-    uint32 network_manager_state = network_manager.State;
-    connected = network_manager_state == NM_STATE_CONNECTED;
-
-    //Dbus signal when the state of the connection is changed.
-    network_manager.StateChanged += network_manager_state_changed;
-  }
-
-  protected void network_manager_state_changed(DBus.Object obj, uint32 new_state)
-  {
-    bool was_connected = connected;
-    connected = new_state == NM_STATE_CONNECTED;
-
     if (connected)
       resume();
-    else if (was_connected)
+    else
       pause();
   }
 
@@ -155,18 +133,15 @@ public class Duplicity : Object
     }
     catch (Error e) {warning("%s\n", e.message);}
 
-    try {
-      if (!backend.is_native())
-        init_dbus_to_network_manager();
-    }
-    catch (Error e) {
-      warning("%s\n\n%s", e.message, "Failed to initialize DBus\n");
+    if (!backend.is_native()) {
+      network_manager = new NetworkManager();
+      network_manager.changed.connect(network_changed);
     }
 
     if (!restart())
       done(false, false);
 
-    if (!connected) {
+    if (network_manager != null && !network_manager.connected) {
       debug("No connection found. Postponing the backup.");
       pause();
     }

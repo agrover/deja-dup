@@ -21,6 +21,7 @@ using GLib;
 
 namespace DejaDup {
 
+public const string GCONF_DIR = "/apps/deja-dup";
 public const string INCLUDE_LIST_KEY = "/apps/deja-dup/include-list";
 public const string EXCLUDE_LIST_KEY = "/apps/deja-dup/exclude-list";
 public const string BACKEND_KEY = "/apps/deja-dup/backend";

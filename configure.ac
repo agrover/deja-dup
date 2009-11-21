@@ -101,7 +101,8 @@ AC_SUBST(WIDGETS_LIBS)
 PKG_CHECK_MODULES(MONITOR,
                   gconf-2.0
                   gio-2.0 >= $GIO_REQ_VER
-                  dbus-glib-1)
+                  dbus-glib-1
+                  libnotify)
 AC_SUBST(MONITOR_CFLAGS)
 AC_SUBST(MONITOR_LIBS)
 

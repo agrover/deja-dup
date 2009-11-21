@@ -41,6 +41,7 @@ libcommon_la_VALASOURCES = \
 	Duplicity.vala \
 	DuplicityInfo.vala \
 	DuplicityInstance.vala \
+	NetworkManager.vala \
 	Operation.vala \
 	OperationBackup.vala \
 	OperationRestore.vala \

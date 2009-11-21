@@ -22,18 +22,9 @@ using GLib;
 
 class Monitor : Object {
 
-static const string GCONF_DIR = "/apps/deja-dup";
-static const string LAST_RUN_KEY = "/apps/deja-dup/last-run";
-static const string PERIODIC_KEY = "/apps/deja-dup/periodic";
-static const string PERIODIC_PERIOD_KEY = "/apps/deja-dup/periodic-period";
-static const string BACKEND_KEY = "/apps/deja-dup/backend";
-static const string FILE_PATH_KEY = "/apps/deja-dup/file/path";
-static const uint32 NM_STATE_CONNECTED = 3;
-
 static MainLoop loop;
 static uint timeout_id;
 static Pid pid;
-static bool connected = true;
 static bool testing;
 
 static bool show_version = false;
@@ -43,55 +34,23 @@ static const OptionEntry[] options = {
   {null}
 };
 
-static dynamic DBus.Object network_manager;
+static Notify.Notification note;
+static DejaDup.NetworkManager network_manager;
 
-static void init_dbus_to_network_manager() throws DBus.Error, GLib.Error
-{ 
-  //Set up the DBus connection to network manager
-  DBus.Connection conn = DBus.Bus.get(DBus.BusType.SYSTEM);
-  network_manager = conn.get_object(
-    "org.freedesktop.NetworkManager",
-    "/org/freedesktop/NetworkManager",
-    "org.freedesktop.NetworkManager");
-
-  //Retrieve the network manager connection state.
-  uint32 network_manager_state = network_manager.State;
-  connected = network_manager_state == NM_STATE_CONNECTED;
-
-  //Dbus signal when the state of the connection is changed.
-  network_manager.StateChanged += network_manager_state_changed;
-}
-
-static void network_manager_state_changed(DBus.Object obj, uint32 new_state)
+static void network_changed(DejaDup.NetworkManager nm, bool connected)
 {
-  connected = new_state == NM_STATE_CONNECTED;
-
   if (connected)
       prepare_next_run();
 }
 
 static bool is_native()
 {
-  //Detect a remote backend such as Amazon S3 or SSH.
-  bool native_path = true;
   try {
-    var client = GConf.Client.get_default();
-    string backend_name = client.get_string(BACKEND_KEY);
-
-    if (backend_name == "s3")
-      native_path = false;
-    else if (backend_name == "file")
-    {
-      string path = client.get_string(FILE_PATH_KEY);
-      var backend_file = File.parse_name(path);
-      native_path = backend_file.is_native();
-    }
+    return DejaDup.Backend.get_default().is_native();
   }
-  catch (GLib.Error e) {
-    warning("%s", e.message);
+  catch (Error e) {
+    return true;
   }
-
-  return native_path;
 }
 
 static bool handle_options(out int status)
@@ -141,9 +100,9 @@ static Date next_run_date()
   int period_days;
   
   try {
-    periodic = client.get_bool(PERIODIC_KEY);
-    last_run_string = client.get_string(LAST_RUN_KEY);
-    period_days = client.get_int(PERIODIC_PERIOD_KEY);
+    periodic = client.get_bool(DejaDup.PERIODIC_KEY);
+    last_run_string = client.get_string(DejaDup.LAST_RUN_KEY);
+    period_days = client.get_int(DejaDup.PERIODIC_PERIOD_KEY);
   }
   catch (Error e) {
     error("%s", e.message);
@@ -216,6 +175,24 @@ static void close_pid(Pid child_pid, int status)
   pid = (Pid)0;
 }
 
+static void notify_delay(string header, string reason)
+{
+  if (note == null) {
+    note = new Notify.Notification(header, reason,
+                                   "deja-dup-backup", null);
+    note.closed.connect((n) => {note = null;});
+  }
+  else
+    note.update(header, reason, "deja-dup-backup");
+
+  try {
+    note.show();
+  }
+  catch (Error e) {
+    warning("%s\n", e.message);
+  }
+}
+
 static bool kickoff()
 {
   long wait_time;
@@ -234,8 +211,9 @@ static bool kickoff()
   // get rescheduled anyway.
   prepare_tomorrow();
 
-  if (!is_native() && !connected) {
+  if (!is_native() && !network_manager.connected) {
       debug("No connection found. Postponing the backup.");
+      notify_delay(_("No network connection available"), _("Your scheduled backup will begin when a connection becomes available."));
       return false;
   }
 
@@ -314,10 +292,10 @@ static void watch_gconf()
   var client = GConf.Client.get_default();
   
   try {
-    client.add_dir(GCONF_DIR, GConf.ClientPreloadType.NONE);
-    client.notify_add(LAST_RUN_KEY, prepare_next_run);
-    client.notify_add(PERIODIC_KEY, prepare_next_run);
-    client.notify_add(PERIODIC_PERIOD_KEY, prepare_next_run);
+    client.add_dir(DejaDup.GCONF_DIR, GConf.ClientPreloadType.NONE);
+    client.notify_add(DejaDup.LAST_RUN_KEY, prepare_next_run);
+    client.notify_add(DejaDup.PERIODIC_KEY, prepare_next_run);
+    client.notify_add(DejaDup.PERIODIC_PERIOD_KEY, prepare_next_run);
   }
   catch (Error e) {
     warning("%s\n", e.message);
@@ -326,13 +304,6 @@ static void watch_gconf()
 
 static int main(string[] args)
 {
-  try {
-    init_dbus_to_network_manager();
-  }
-  catch (Error e) {
-    warning("%s\n\n%s", e.message, "Failed to initialize DBus\n");
-  }
-
   GLib.Intl.textdomain(Config.GETTEXT_PACKAGE);
   GLib.Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
   GLib.Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
@@ -354,6 +325,9 @@ static int main(string[] args)
   int status;
   if (!handle_options(out status))
     return status;
+
+  network_manager = new DejaDup.NetworkManager();
+  network_manager.changed.connect(network_changed);
 
   loop = new MainLoop(null, false);
   
