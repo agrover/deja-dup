@@ -36,7 +36,7 @@ public class BackendFile : Backend
     return new BackendFile();
   }
 
-  File? get_file_from_gconf() throws Error
+  static File? get_file_from_gconf() throws Error
   {
     var client = get_gconf_client();
     var type = client.get_string(FILE_TYPE_KEY);
@@ -50,7 +50,10 @@ public class BackendFile : Backend
       if (mount == null)
         return null;
       var root = mount.get_root();
-      return root.get_child(path);
+      if (path != null)
+        return root.get_child(path);
+      else
+        return root;
     }
     else {
       var path = client.get_string(FILE_PATH_KEY);
@@ -145,10 +148,8 @@ public class BackendFile : Backend
       argv.prepend("--gio");
   }
   
-  // Checks if file is secretly a
-  // volume file and fills out gconf data if so.  For backwards
-  // compatibility (from before Deja Dup specially treated volumes).
-  async void check_for_volume_info() throws Error
+  // Checks if file is secretly a volume file and fills out gconf data if so.
+  public async static void check_for_volume_info() throws Error
   {
     var client = get_gconf_client();
     var file = get_file_from_gconf();
@@ -180,6 +181,8 @@ public class BackendFile : Backend
       return;
 
     var relpath = mount.get_root().get_relative_path(file);
+    if (relpath == null)
+      relpath = "";
 
     client.set_string(FILE_UUID_KEY, uuid);
     client.set_string(FILE_RELPATH_KEY, relpath);
@@ -188,7 +191,7 @@ public class BackendFile : Backend
     update_volume_info(volume);
   }
 
-  void update_volume_info(Volume volume) throws Error
+  static void update_volume_info(Volume volume) throws Error
   {
     var client = get_gconf_client();
 
@@ -216,9 +219,10 @@ public class BackendFile : Backend
     // Also update full path just in case (useful if downgrading to old version?)
     var mount = volume.get_mount();
     if (mount != null) {
-      var relpath = client.get_string(FILE_RELPATH_KEY);
-      var full_file = mount.get_root().get_child(relpath);
-      client.set_string(FILE_PATH_KEY, full_file.get_parse_name());
+      var path = client.get_string(FILE_RELPATH_KEY);
+      if (path != null)
+        path = mount.get_root().get_child(path).get_parse_name();
+      client.set_string(FILE_PATH_KEY, path);
     }
   }
 
@@ -308,7 +312,7 @@ public class BackendFile : Backend
     return rv;
   }
 
-  Volume? find_volume_by_uuid(string uuid)
+  static Volume? find_volume_by_uuid(string uuid)
   {
     var mon = VolumeMonitor.get();
     unowned List<Volume> vols = mon.get_volumes();

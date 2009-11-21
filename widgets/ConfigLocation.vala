@@ -120,11 +120,16 @@ public class ConfigLocation : ConfigWidget
   
   void handle_selection_changed()
   {
+    set_file_info();
+  }
+
+  async void set_file_info()
+  {
     File gconf_file = null;
     try {
       gconf_file = get_file_from_gconf();
     }
-    catch (Error e) {} // ignore
+    catch (Error err) {} // ignore
     
     var uri = button.get_uri();
     var file = uri == null ? null : File.new_for_uri(uri);
@@ -134,11 +139,12 @@ public class ConfigLocation : ConfigWidget
     is_s3 = tmpdir != null && file.equal(tmpdir);
     
     try {
-      if (tmpdir != null && file.equal(tmpdir))
+      if (is_s3)
         client.set_string(BACKEND_KEY, "s3");
       else {
         client.set_string(BACKEND_KEY, "file");
         client.set_string(FILE_PATH_KEY, file.get_parse_name());
+        yield BackendFile.check_for_volume_info();
       }
     }
     catch (Error e) {
