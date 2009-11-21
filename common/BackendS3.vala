@@ -47,6 +47,11 @@ public class BackendS3 : Backend
     return false;
   }
   
+  public override bool is_ready(out string when) {
+    when = _("Backup will begin when a network connection becomes available.");
+    return NetworkManager.get().connected;
+  }
+
   public override string? get_location() throws Error
   {
     var client = get_gconf_client();

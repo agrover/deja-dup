@@ -91,8 +91,6 @@ public class Duplicity : Object
   
   File last_touched_file = null;
 
-  NetworkManager network_manager;
-
   void network_changed(NetworkManager nm, bool connected)
   {
     if (connected)
@@ -133,17 +131,15 @@ public class Duplicity : Object
     }
     catch (Error e) {warning("%s\n", e.message);}
 
-    if (!backend.is_native()) {
-      network_manager = new NetworkManager();
-      network_manager.changed.connect(network_changed);
-    }
-
     if (!restart())
       done(false, false);
 
-    if (network_manager != null && !network_manager.connected) {
-      debug("No connection found. Postponing the backup.");
-      pause();
+    if (!backend.is_native()) {
+      NetworkManager.get().changed.connect(network_changed);
+      if (!NetworkManager.get().connected) {
+        debug("No connection found. Postponing the backup.");
+        pause();
+      }
     }
   }
   

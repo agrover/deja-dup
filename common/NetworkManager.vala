@@ -27,8 +27,17 @@ public class NetworkManager : Object
   public bool connected {get; set; default = true;}
   public signal void changed(bool connected);
 
+  public new static NetworkManager get() {
+    if (singleton == null)
+      singleton = new NetworkManager();
+    return singleton;
+  }
+
+  static NetworkManager singleton;
   static const uint32 NM_STATE_CONNECTED = 3;
   dynamic DBus.Object nm;
+
+  protected NetworkManager() {}
 
   construct {
     try {

@@ -36,6 +36,7 @@ public class BackendFile : Backend
     return new BackendFile();
   }
 
+  // Will return null if volume isn't ready
   static File? get_file_from_gconf() throws Error
   {
     var client = get_gconf_client();
@@ -101,6 +102,30 @@ public class BackendFile : Backend
       var file = get_file_from_gconf();
       if (file != null)
         return file.is_native();
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
+
+    return true; // default to yes?
+  }
+
+  public override bool is_ready(out string when) {
+    when = null;
+    try {
+      var file = get_file_from_gconf();
+      if (file == null) {
+        var client = get_gconf_client();
+        var name = client.get_string(FILE_SHORT_NAME_KEY);
+        when = _("Backup will begin when %s becomes connected.").printf(name);
+        return false;
+      }
+      else if (file.is_native())
+        return true;
+      else {
+        when = _("Backup will begin when a network connection becomes available.");
+        return NetworkManager.get().connected;
+      }
     }
     catch (Error e) {
       warning("%s\n", e.message);

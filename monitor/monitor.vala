@@ -35,7 +35,6 @@ static const OptionEntry[] options = {
 };
 
 static Notify.Notification note;
-static DejaDup.NetworkManager network_manager;
 
 static void network_changed(DejaDup.NetworkManager nm, bool connected)
 {
@@ -43,10 +42,10 @@ static void network_changed(DejaDup.NetworkManager nm, bool connected)
       prepare_next_run();
 }
 
-static bool is_native()
+static bool is_ready(out string when)
 {
   try {
-    return DejaDup.Backend.get_default().is_native();
+    return DejaDup.Backend.get_default().is_ready(out when);
   }
   catch (Error e) {
     return true;
@@ -164,7 +163,7 @@ static long seconds_until(Date date)
   TimeVal next_time = date_to_timeval(date);
   
   if (testing)
-    return 10;
+    return 5;
   else
     return next_time.tv_sec - cur_time.tv_sec;
 }
@@ -211,10 +210,11 @@ static bool kickoff()
   // get rescheduled anyway.
   prepare_tomorrow();
 
-  if (!is_native() && !network_manager.connected) {
-      debug("No connection found. Postponing the backup.");
-      notify_delay(_("No network connection available"), _("Your scheduled backup will begin when a connection becomes available."));
-      return false;
+  string when;
+  if (!is_ready(out when)) {
+    debug("Postponing the backup.");
+    notify_delay(_("Scheduled backup delayed"), when);
+    return false;
   }
 
   // Don't run right now if an applet is already running
@@ -326,8 +326,8 @@ static int main(string[] args)
   if (!handle_options(out status))
     return status;
 
-  network_manager = new DejaDup.NetworkManager();
-  network_manager.changed.connect(network_changed);
+  DejaDup.initialize();
+  DejaDup.NetworkManager.get().changed.connect(network_changed);
 
   loop = new MainLoop(null, false);
   
