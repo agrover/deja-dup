@@ -309,7 +309,7 @@ static int main(string[] args)
   GLib.Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
   
   // Translators: Monitor in this sense means something akin to 'watcher', not
-  // a computer monitor.  This program acts like a daemon that kicks off
+  // a computer screen.  This program acts like a daemon that kicks off
   // backups at scheduled times.
   GLib.Environment.set_application_name(_("Déjà Dup Monitor"));
   
