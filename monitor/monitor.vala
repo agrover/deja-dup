@@ -25,6 +25,7 @@ class Monitor : Object {
 static MainLoop loop;
 static uint timeout_id;
 static Pid pid;
+static bool waiting;
 static bool testing;
 
 static bool show_version = false;
@@ -38,8 +39,14 @@ static Notify.Notification note;
 
 static void network_changed(DejaDup.NetworkManager nm, bool connected)
 {
-  if (connected)
-      prepare_next_run();
+  if (waiting && connected)
+    prepare_next_run(); // in case network manager was blocking us
+}
+
+static void volume_added(VolumeMonitor vm, Volume vol)
+{
+  if (waiting)
+    prepare_next_run(); // in case missing volume was blocking us
 }
 
 static bool is_ready(out string when)
@@ -57,7 +64,7 @@ static bool handle_options(out int status)
   status = 0;
   
   if (show_version) {
-    print("%s %s\n", _("Déjà Dup Monitor"), Config.VERSION);
+    print("%s %s\n", Environment.get_application_name(), Config.VERSION);
     return false;
   }
   
@@ -214,9 +221,13 @@ static bool kickoff()
   string when;
   if (!is_ready(out when)) {
     debug("Postponing the backup.");
-    notify_delay(_("Scheduled backup delayed"), when);
+    if (!waiting)
+      notify_delay(_("Scheduled backup delayed"), when);
+    waiting = true;
     return false;
   }
+
+  waiting = false;
 
   // Don't run right now if an applet is already running
   if (pid == (Pid)0) {
@@ -329,6 +340,7 @@ static int main(string[] args)
 
   DejaDup.initialize();
   DejaDup.NetworkManager.get().changed.connect(network_changed);
+  VolumeMonitor.get().volume_added.connect(volume_added);
 
   loop = new MainLoop(null, false);
   
