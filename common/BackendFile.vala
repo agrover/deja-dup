@@ -114,11 +114,17 @@ public class BackendFile : Backend
     when = null;
     try {
       var file = get_file_from_gconf();
-      if (file == null) {
-        var client = get_gconf_client();
-        var name = client.get_string(FILE_SHORT_NAME_KEY);
-        when = _("Backup will begin when %s becomes connected.").printf(name);
-        return false;
+      if (file == null) { // must be a volume that isn't yet mounted. See if volume is connected
+        var uuid = client.get_string(FILE_UUID_KEY);
+        var vol = find_volume_by_uuid(uuid);
+        if (vol != null)
+          return true;
+        else {
+          var client = get_gconf_client();
+          var name = client.get_string(FILE_SHORT_NAME_KEY);
+          when = _("Backup will begin when %s becomes connected.").printf(name);
+          return false;
+        }
       }
       else if (file.is_native())
         return true;
