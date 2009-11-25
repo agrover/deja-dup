@@ -25,7 +25,7 @@ class Monitor : Object {
 static MainLoop loop;
 static uint timeout_id;
 static Pid pid;
-static bool waiting;
+static bool reactive_check;
 static bool testing;
 
 static bool show_version = false;
@@ -39,14 +39,17 @@ static Notify.Notification note;
 
 static void network_changed(DejaDup.NetworkManager nm, bool connected)
 {
-  if (waiting && connected)
+  reactive_check = true;
+  if (connected)
     prepare_next_run(); // in case network manager was blocking us
+  reactive_check = false;
 }
 
 static void volume_added(VolumeMonitor vm, Volume vol)
 {
-  if (waiting)
-    prepare_next_run(); // in case missing volume was blocking us
+  reactive_check = true;
+  prepare_next_run(); // in case missing volume was blocking us
+  reactive_check = false;
 }
 
 static bool is_ready(out string when)
@@ -212,22 +215,21 @@ static bool kickoff()
     return false;
   }
 
-  // Now we secretly schedule another kickoff tomorrow, in case something
-  // goes wrong with this run (or user chooses to ignore for now)
-  // If this run is successful, it will change 'last-run' key and this will
-  // get rescheduled anyway.
-  prepare_tomorrow();
+  if (!reactive_check) {
+    // Now we secretly schedule another kickoff tomorrow, in case something
+    // goes wrong with this run (or user chooses to ignore for now)
+    // If this run is successful, it will change 'last-run' key and this will
+    // get rescheduled anyway.
+    prepare_tomorrow();
+  }
 
   string when;
   if (!is_ready(out when)) {
     debug("Postponing the backup.");
-    if (!waiting)
+    if (!reactive_check)
       notify_delay(_("Scheduled backup delayed"), when);
-    waiting = true;
     return false;
   }
-
-  waiting = false;
 
   // Don't run right now if an applet is already running
   if (pid == (Pid)0) {
