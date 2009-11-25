@@ -89,6 +89,23 @@ public File[] parse_dir_list(SList<string>? dirs)
   return rv;
 }
 
+public bool test_bus_claimed(string busname)
+{
+  try {
+    var conn = DBus.Bus.@get(DBus.BusType.SESSION);
+
+    dynamic DBus.Object bus = conn.get_object ("org.freedesktop.DBus",
+                                               "/org/freedesktop/DBus",
+                                               "org.freedesktop.DBus");
+
+    string result = bus.get_name_owner("net.launchpad.deja-dup." + busname);
+    return result != null && result != "";
+  }
+  catch (Error e) {
+    return false;
+  }
+}
+
 public bool set_bus_claimed(string busname, bool claim)
 {
   try {

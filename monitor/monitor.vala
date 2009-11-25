@@ -231,8 +231,8 @@ static bool kickoff()
     return false;
   }
 
-  // Don't run right now if an applet is already running
-  if (pid == (Pid)0) {
+  // Don't run right now if an instance is already running
+  if (pid == (Pid)0 && !DejaDup.test_bus_claimed("operation")) {
     try {
       string[] argv = new string[3];
       argv[0] = "deja-dup";
