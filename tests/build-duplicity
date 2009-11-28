@@ -46,7 +46,7 @@ install_tgz()
   
   TGZ="$SRCDIR/duplicity-$1.tar.gz"
   
-  if [ "$1" != "bzr" ] && [ -d "$INSTDIR/duplicity-$1" ]; then
+  if [ "$1" != "bzr" -a "$1" != "bzr-stable" ] && [ -d "$INSTDIR/duplicity-$1" ]; then
     return
   fi
   
@@ -85,7 +85,7 @@ install_bzr()
     cd "$SRCDIR/duplicity-$1"
   fi
   if [ "$1" = "bzr-stable" ]; then
-    ver="0.5.999"
+    ver="0.6.999"
   else
     ver="999"
   fi
