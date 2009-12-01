@@ -11,7 +11,7 @@ REQUIRED_GETTEXT_VERSION=0.17
 REQUIRED_INTLTOOL_VERSION=0.37
 
 (test -f $srcdir/configure.ac \
-  && test -d $srcdir/libdeja-dup) || {
+  && test -d $srcdir/deja-dup) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
     echo " top-level $PKG_NAME directory"
     exit 1
