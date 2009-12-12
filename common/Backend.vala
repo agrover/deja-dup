@@ -55,7 +55,7 @@ public abstract class Backend : Object
     else if (backend_name == "file")
       return new BackendFile();
     else
-      return null;
+      return new BackendS3(); // default to S3 (easy to crash if we return null)
   }
 }
 
