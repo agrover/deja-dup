@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-10-25 00:07-0400\n"
-"PO-Revision-Date: 2009-11-07 09:56+0000\n"
+"POT-Creation-Date: 2009-11-25 12:51-0500\n"
+"PO-Revision-Date: 2009-12-16 10:20+0000\n"
 "Last-Translator: Sergey Sedov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2009-11-08 04:40+0000\n"
+"X-Launchpad-Export-Date: 2009-12-17 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../deja-dup/AssistantRestore.vala:264
@@ -38,7 +38,7 @@ msgstr "Резервное копирование ваших файлов"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:39
+#: ../deja-dup/StatusIcon.vala:38
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
@@ -47,10 +47,9 @@ msgid "Déjà Dup Backup Tool"
 msgstr "Инструмент резервного копирования Déjà Dup"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
-#. a computer monitor.  This program acts like a daemon that kicks off
+#. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.h:1 ../monitor/monitor.vala:102
-#: ../monitor/monitor.vala:343
+#: ../data/deja-dup-monitor.desktop.in.h:1 ../monitor/monitor.vala:328
 msgid "Déjà Dup Monitor"
 msgstr "Монитор Déjà Dup"
 
@@ -174,11 +173,11 @@ msgstr ""
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 
-#: ../deja-dup/Assistant.vala:278
+#: ../deja-dup/Assistant.vala:281
 msgid "Co_ntinue"
 msgstr "_Продолжить"
 
-#: ../deja-dup/Assistant.vala:311 ../deja-dup/StatusIcon.vala:102
+#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:101
 msgid "_Resume Later"
 msgstr "_Продолжить Позже"
 
@@ -194,22 +193,22 @@ msgid "_Backup"
 msgstr "_Резервное копирование"
 
 #: ../deja-dup/AssistantBackup.vala:50 ../deja-dup/AssistantRestore.vala:93
-#: ../preferences/PreferencesDialog.vala:54
+#: ../preferences/PreferencesDialog.vala:84
 msgid "_Backup location:"
 msgstr "_Местоположение резервной копии:"
 
 #: ../deja-dup/AssistantBackup.vala:57
-#: ../preferences/PreferencesDialog.vala:135
+#: ../preferences/PreferencesDialog.vala:166
 msgid "_Encrypt backup files"
 msgstr "_Зашифровать копируемые файлы"
 
 #: ../deja-dup/AssistantBackup.vala:78
-#: ../preferences/PreferencesDialog.vala:99
+#: ../preferences/PreferencesDialog.vala:130
 msgid "I_nclude files in folders:"
 msgstr "Что с_охранять в резервной копии:"
 
 #: ../deja-dup/AssistantBackup.vala:91
-#: ../preferences/PreferencesDialog.vala:118
+#: ../preferences/PreferencesDialog.vala:149
 msgid "E_xcept files in folders:"
 msgstr "Что и_сключить из резервной копии:"
 
@@ -236,36 +235,36 @@ msgstr "Исключаемые каталоги:"
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:185
+#: ../deja-dup/AssistantBackup.vala:187
 msgid "Backing up:"
 msgstr "Архивируется:"
 
-#: ../deja-dup/AssistantBackup.vala:195
-#: ../preferences/PreferencesDialog.vala:141
+#: ../deja-dup/AssistantBackup.vala:197
+#: ../preferences/PreferencesDialog.vala:172
 msgid "_Automatically backup on a regular schedule"
 msgstr "_Автоматическое резервное копирование по расписанию"
 
-#: ../deja-dup/AssistantBackup.vala:198
-#: ../preferences/PreferencesDialog.vala:148
+#: ../deja-dup/AssistantBackup.vala:200
+#: ../preferences/PreferencesDialog.vala:179
 #, c-format
 msgid "How _often to backup:"
 msgstr "Как _часто выполнять копирование:"
 
-#: ../deja-dup/AssistantBackup.vala:225
+#: ../deja-dup/AssistantBackup.vala:227
 msgid "Backup Failed"
 msgstr "Резервное копирование не удалось"
 
-#: ../deja-dup/AssistantBackup.vala:228
+#: ../deja-dup/AssistantBackup.vala:230
 msgid "Backup Finished"
 msgstr "Резервное копирование завершено"
 
-#: ../deja-dup/AssistantBackup.vala:229
+#: ../deja-dup/AssistantBackup.vala:231
 msgid "Your files were successfully backed up."
 msgstr "Успешно создана резервная копия ваших файлов."
 
-#: ../deja-dup/AssistantBackup.vala:248 ../libdeja-dup/Operation.vala:51
+#: ../deja-dup/AssistantBackup.vala:250 ../common/Operation.vala:50
 msgid "Backing up…"
-msgstr ""
+msgstr "Резервное копирование..."
 
 #: ../deja-dup/AssistantOperation.vala:134
 msgid "Scanning:"
@@ -273,7 +272,7 @@ msgstr "Сканируется:"
 
 #: ../deja-dup/AssistantOperation.vala:135
 msgid "Scanning…"
-msgstr ""
+msgstr "Сканирование..."
 
 #: ../deja-dup/AssistantOperation.vala:208
 msgid "_Details"
@@ -296,7 +295,7 @@ msgstr "Сводная информация"
 msgid "Password needed"
 msgstr "Необходим пароль"
 
-#: ../deja-dup/AssistantOperation.vala:560
+#: ../deja-dup/AssistantOperation.vala:561
 msgid "Déjà Dup backup passphrase"
 msgstr ""
 
@@ -351,42 +350,42 @@ msgstr "Куда восстановить файлы?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:297
+#: ../deja-dup/AssistantRestore.vala:300
 msgid "Restoring:"
 msgstr "Востанавливается:"
 
-#: ../deja-dup/AssistantRestore.vala:325
+#: ../deja-dup/AssistantRestore.vala:328
 msgid "No backups to restore"
 msgstr "Нет резервных копий для восстановления"
 
-#: ../deja-dup/AssistantRestore.vala:411
+#: ../deja-dup/AssistantRestore.vala:417
 msgid "Original location"
 msgstr "Первоначальное местоположение"
 
-#: ../deja-dup/AssistantRestore.vala:424
+#: ../deja-dup/AssistantRestore.vala:430
 msgid "File to restore:"
 msgid_plural "Files to restore:"
 msgstr[0] "Файл для восстановления:"
 msgstr[1] "Файлы для восстановления:"
 msgstr[2] "Файлы для восстановления:"
 
-#: ../deja-dup/AssistantRestore.vala:446
+#: ../deja-dup/AssistantRestore.vala:452
 msgid "Restore Failed"
 msgstr "Восстановление не удалось"
 
-#: ../deja-dup/AssistantRestore.vala:448
+#: ../deja-dup/AssistantRestore.vala:454
 msgid "Restore Finished"
 msgstr "Восстановление завершено"
 
-#: ../deja-dup/AssistantRestore.vala:449
+#: ../deja-dup/AssistantRestore.vala:455
 msgid "Your files were successfully restored."
 msgstr "Ваши файлы были успешно восстановлены"
 
-#: ../deja-dup/AssistantRestore.vala:453 ../libdeja-dup/Operation.vala:53
+#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:52
 msgid "Restoring…"
-msgstr ""
+msgstr "Восстановление..."
 
-#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:41
+#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:33
 #: ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr "Показать версию"
@@ -426,15 +425,15 @@ msgstr "_Содержание"
 
 #: ../deja-dup/MainWindow.vala:217
 msgid "Get Help _Online…"
-msgstr ""
+msgstr "Получить помощь в Интернете..."
 
 #: ../deja-dup/MainWindow.vala:221
 msgid "_Translate This Application…"
-msgstr ""
+msgstr "_Перевести это приложение"
 
 #: ../deja-dup/MainWindow.vala:225
 msgid "_Report a Problem…"
-msgstr ""
+msgstr "_Сообщить о проблеме"
 
 #: ../deja-dup/MountOperationAssistant.vala:54
 msgid "Location not available"
@@ -482,138 +481,71 @@ msgstr "_Пароль:"
 msgid "_Remember secret access key"
 msgstr "_Запомнить секретный ключ доступа"
 
-#: ../deja-dup/StatusIcon.vala:70
+#: ../deja-dup/StatusIcon.vala:69
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% завершено"
 
-#: ../deja-dup/StatusIcon.vala:104
+#: ../deja-dup/StatusIcon.vala:103
 msgid "_Delay Backup"
 msgstr "_Отложить резервное копирование"
 
-#: ../deja-dup/StatusIcon.vala:109
+#: ../deja-dup/StatusIcon.vala:108
 msgid "_Skip Backup"
 msgstr "_Пропустить резервное копирование"
 
-#: ../libdeja-dup/BackendFile.vala:51
+#: ../common/BackendFile.vala:73
 msgid "GVFS FUSE is not installed"
 msgstr "Не установлен GVFS FUSE"
 
-#: ../libdeja-dup/BackendS3.vala:126
+#. Translators: %2$s is the name of a removable drive, %1$s is a folder
+#. on that removable drive.
+#: ../common/BackendFile.vala:87
 #, c-format
-msgid "Folder %s on Amazon S3"
-msgstr "Каталог %s на Amazon S3"
+msgid "%1$s on %2$s"
+msgstr "%1$s в %2$s"
 
-#: ../libdeja-dup/BackendS3.vala:172
+#: ../common/BackendFile.vala:125
+#, c-format
+msgid "Backup will begin when %s becomes connected."
+msgstr "Резервное копирование будет начато при подключении %s"
+
+#: ../common/BackendFile.vala:132 ../common/BackendS3.vala:51
+msgid "Backup will begin when a network connection becomes available."
+msgstr "Резервное копирование будет начато при подключении к сети."
+
+#: ../common/BackendFile.vala:365
+msgid "Backup location not available"
+msgstr "Место хранения резервных копий сейчас недоступно"
+
+#: ../common/BackendFile.vala:365
+#, c-format
+msgid "Waiting for ‘%s’ to become connected…"
+msgstr "Жду подключения  ‘%s’ ..."
+
+#. Translators: %s is a folder.
+#: ../common/BackendS3.vala:129
+#, c-format
+msgid "%s on Amazon S3"
+msgstr "%s на сервисе  Amazon S3"
+
+#: ../common/BackendS3.vala:175
 msgid "Permission denied"
 msgstr "Отказано в доступе"
 
-#: ../libdeja-dup/BackendS3.vala:195
+#: ../common/BackendS3.vala:198
 msgid "Enter Amazon S3 access key"
 msgstr "Введите ключ доступа Amazon S3"
 
-#: ../libdeja-dup/ButtonConnect.vala:28
-msgid "Connect to _Server…"
-msgstr ""
+#: ../common/CommonUtils.vala:239
+msgid "Unknown"
+msgstr "Неизвестно"
 
-#: ../libdeja-dup/ButtonConnect.vala:37
-msgid "Could not open connection dialog"
-msgstr "Не удалось открыть диалог соединения"
-
-#: ../libdeja-dup/ConfigDelete.vala:36
-msgid "At least a week"
-msgstr "Минимум неделю"
-
-#: ../libdeja-dup/ConfigDelete.vala:37
-msgid "At least a month"
-msgstr "Минимум месяц"
-
-#: ../libdeja-dup/ConfigDelete.vala:38
-msgid "At least two months"
-msgstr "Минимум два месяца"
-
-#: ../libdeja-dup/ConfigDelete.vala:39
-msgid "At least three months"
-msgstr "Минимум три месяца"
-
-#: ../libdeja-dup/ConfigDelete.vala:40
-msgid "At least six months"
-msgstr "Минимум шесть месяцев"
-
-#: ../libdeja-dup/ConfigDelete.vala:41
-msgid "At least a year"
-msgstr "Минимум год"
-
-#: ../libdeja-dup/ConfigDelete.vala:42
-msgid "Forever"
-msgstr "Вечно"
-
-#: ../libdeja-dup/ConfigDelete.vala:100
-#, c-format
-msgid "At least %d day"
-msgid_plural "At least %d days"
-msgstr[0] "Минимум %d день"
-msgstr[1] "Минимум %d дня"
-msgstr[2] "Минимум %d дней"
-
-#: ../libdeja-dup/ConfigLabelBool.vala:36
-msgid "Yes"
-msgstr "Да"
-
-#: ../libdeja-dup/ConfigLabelBool.vala:36
-msgid "No"
-msgstr "Нет"
-
-#: ../libdeja-dup/ConfigLabelList.vala:56 ../libdeja-dup/ConfigList.vala:111
-msgid "Home Folder"
-msgstr "Домашний каталог"
-
-#: ../libdeja-dup/ConfigLabelList.vala:58 ../libdeja-dup/ConfigList.vala:113
-msgid "Trash"
-msgstr "Корзина"
-
-#: ../libdeja-dup/ConfigList.vala:152
-msgid "Choose folders"
-msgstr "Выберите каталоги"
-
-#: ../libdeja-dup/ConfigLocation.vala:41
-msgid "Select Backup Location"
-msgstr "Выберите местоположение резервной копии"
-
-#: ../libdeja-dup/ConfigLocation.vala:68 ../libdeja-dup/libdeja-dup.vala:304
-msgid "Amazon S3"
-msgstr "Amazon S3"
-
-#: ../libdeja-dup/ConfigPeriod.vala:36
-msgid "Daily"
-msgstr "Ежедневно"
-
-#: ../libdeja-dup/ConfigPeriod.vala:37
-msgid "Weekly"
-msgstr "Еженедельно"
-
-#. Translators: Biweekly is every two weeks
-#: ../libdeja-dup/ConfigPeriod.vala:39
-msgid "Biweekly"
-msgstr "Каждые две недели"
-
-#: ../libdeja-dup/ConfigPeriod.vala:40
-msgid "Monthly"
-msgstr "Ежемесячно"
-
-#: ../libdeja-dup/ConfigPeriod.vala:96
-#, c-format
-msgid "Every %d day"
-msgid_plural "Every %d days"
-msgstr[0] "Каждый %d день"
-msgstr[1] "Каждые %d дня"
-msgstr[2] "Каждые %d дней"
-
-#: ../libdeja-dup/DuplicityInfo.vala:131
+#: ../common/DuplicityInfo.vala:127
 msgid "Could not run duplicity"
 msgstr "Не могу запустить duplicity"
 
-#: ../libdeja-dup/DuplicityInfo.vala:137
+#: ../common/DuplicityInfo.vala:132
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -621,22 +553,24 @@ msgstr ""
 "Не смог распознать версию duplicity.\n"
 "\n"
 
-#: ../libdeja-dup/DuplicityInfo.vala:139
+#: ../common/DuplicityInfo.vala:134
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
 "\n"
 msgstr ""
+"Не удалось распознать версию duplicity ‘%s’.\n"
+"\n"
 
-#: ../libdeja-dup/DuplicityInfo.vala:141
+#: ../common/DuplicityInfo.vala:136
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr "Déjà Dup не может работать без duplicity. Завершение программы."
 
-#: ../libdeja-dup/DuplicityInfo.vala:151
+#: ../common/DuplicityInfo.vala:140
 msgid "Duplicity’s version is too old"
-msgstr ""
+msgstr "Версия duplicity слишком старая"
 
-#: ../libdeja-dup/DuplicityInfo.vala:152
+#: ../common/DuplicityInfo.vala:141
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -645,41 +579,41 @@ msgstr ""
 "Déjà Dup требуется по меньшей мере версия %d.%d.%.2d duplicity, но найдена "
 "только версия %d.%d.%.2d"
 
-#: ../libdeja-dup/Duplicity.vala:203
+#: ../common/Duplicity.vala:172
 msgid "Paused (no network)"
-msgstr ""
+msgstr "Приостановлено (нет сети)"
 
-#: ../libdeja-dup/Duplicity.vala:243 ../libdeja-dup/Duplicity.vala:251
-#: ../libdeja-dup/Operation.vala:95
+#: ../common/Duplicity.vala:212 ../common/Duplicity.vala:220
+#: ../common/Operation.vala:94
 msgid "Preparing…"
-msgstr ""
+msgstr "Подготовка..."
 
-#: ../libdeja-dup/Duplicity.vala:269
+#: ../common/Duplicity.vala:238
 msgid "Creating a fresh backup.  This will take longer than normal."
-msgstr ""
+msgstr "Создаётся \"свежая\" резервная копия. Подождите..."
 
-#: ../libdeja-dup/Duplicity.vala:323 ../libdeja-dup/Duplicity.vala:340
+#: ../common/Duplicity.vala:292 ../common/Duplicity.vala:309
 msgid "Cleaning up…"
-msgstr ""
+msgstr "Очистка..."
 
-#: ../libdeja-dup/Duplicity.vala:414 ../libdeja-dup/Duplicity.vala:684
+#: ../common/Duplicity.vala:383 ../common/Duplicity.vala:653
 msgid "Failed with an unknown error."
 msgstr "Не удалось (неизвестная ошибка)"
 
-#: ../libdeja-dup/Duplicity.vala:596
+#: ../common/Duplicity.vala:565
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
-msgstr ""
+msgstr "Не удалось восстановить  ‘%s’: файл не найден в резервной копии"
 
-#: ../libdeja-dup/Duplicity.vala:600 ../libdeja-dup/Duplicity.vala:642
+#: ../common/Duplicity.vala:569 ../common/Duplicity.vala:611
 msgid "Bad encryption password."
 msgstr "Не правильный пароль шифрования"
 
-#: ../libdeja-dup/Duplicity.vala:604
+#: ../common/Duplicity.vala:573
 msgid "Computer name changed"
 msgstr "Изменилось название компьютера"
 
-#: ../libdeja-dup/Duplicity.vala:604
+#: ../common/Duplicity.vala:573
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -687,55 +621,216 @@ msgid ""
 "location."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:624
+#: ../common/Duplicity.vala:593
 msgid "Invalid ID."
 msgstr "Неправильный ID."
 
-#: ../libdeja-dup/Duplicity.vala:626
+#: ../common/Duplicity.vala:595
 msgid "Invalid secret key."
 msgstr "Не правильный секретный ключ."
 
-#: ../libdeja-dup/Duplicity.vala:628
+#: ../common/Duplicity.vala:597
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Ваш аккаунт на службе Amazon не имеет подписки на сервис S3."
 
-#: ../libdeja-dup/Duplicity.vala:637
+#: ../common/Duplicity.vala:606
 msgid "S3 bucket name is not available."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:646
+#: ../common/Duplicity.vala:615
 #, c-format
 msgid "Error reading file ‘%s’."
-msgstr ""
+msgstr "Ошибка чтения файла ‘%s’."
 
-#: ../libdeja-dup/Duplicity.vala:648
+#: ../common/Duplicity.vala:617
 #, c-format
 msgid "Error writing file ‘%s’."
-msgstr ""
+msgstr "Ошибка записи файла ‘%s’."
 
-#: ../libdeja-dup/Duplicity.vala:656
+#: ../common/Duplicity.vala:625
 #, c-format
 msgid "No space left in %s"
 msgstr "Не осталось места в %s"
 
-#: ../libdeja-dup/Duplicity.vala:676
+#: ../common/Duplicity.vala:645
 msgid "No backup files found"
 msgstr "Резервных копий не обнаружено"
 
-#: ../libdeja-dup/Duplicity.vala:712
+#: ../common/Duplicity.vala:681
 msgid "Uploading…"
-msgstr ""
+msgstr "Загрузка..."
 
-#: ../libdeja-dup/libdeja-dup.vala:97
+#: ../common/OperationRestore.vala:54
+msgid "Restoring files…"
+msgstr "Восстановление файлов..."
+
+#: ../common/OperationRestore.vala:168
+#, c-format
+msgid ""
+"Not all files could be restored. Any files that could not be restored may "
+"still be found in %s."
+msgstr ""
+"Не все файлы могут быть восстановлены. Любые файлы, которые не удалось "
+"восстановить могут быть найдены в %s."
+
+#: ../common/OperationRestore.vala:177
+#, c-format
+msgid "Could not restore %s: %s"
+msgstr "Не смог восстановить %s: %s"
+
+#: ../common/Operation.vala:54
+msgid "Checking for backups…"
+msgstr "Проверка резервных копий..."
+
+#: ../common/Operation.vala:209
+msgid "Another Déjà Dup is already running"
+msgstr "Уже запущена одна копия Déjà Dup"
+
+#: ../monitor/monitor.vala:230
+msgid "Scheduled backup delayed"
+msgstr "Отложено создание резервной копии по расписанию"
+
+#: ../nautilus/NautilusExtension.c:95
+msgid "Revert to Previous Version…"
+msgid_plural "Revert to Previous Versions…"
+msgstr[0] "Вернуться к предыдущей версии..."
+msgstr[1] "Вернуться к предыдущим версиям..."
+msgstr[2] "Вернуться к предыдущим версиям..."
+
+#: ../nautilus/NautilusExtension.c:99
+msgid "Restore file from backup"
+msgid_plural "Restore files from backup"
+msgstr[0] "Восстановить файл из резервной копии"
+msgstr[1] "Восстановить файлы из резервной копии"
+msgstr[2] "Восстановить файлы из резервной копии"
+
+#: ../preferences/PreferencesDialog.vala:41 ../preferences/preferences.vala:35
+#: ../preferences/preferences.vala:66
+msgid "Déjà Dup Preferences"
+msgstr "Настройки Déjà Dup"
+
+#: ../preferences/PreferencesDialog.vala:99
+#, c-format
+msgid "S3 Access Key I_D:"
+msgstr "Ключ доступа I_D S3:"
+
+#: ../preferences/PreferencesDialog.vala:111
+#, c-format
+msgid "_Folder:"
+msgstr "_Каталог:"
+
+#: ../preferences/PreferencesDialog.vala:197
+#, c-format
+msgid "_Keep backups:"
+msgstr "_Сохранять резервные копии:"
+
+#: ../widgets/ButtonConnect.vala:28
+msgid "Connect to _Server…"
+msgstr "Подключиться к _серверу..."
+
+#: ../widgets/ButtonConnect.vala:37
+msgid "Could not open connection dialog"
+msgstr "Не удалось открыть диалог соединения"
+
+#: ../widgets/ConfigDelete.vala:36
+msgid "At least a week"
+msgstr "Минимум неделю"
+
+#: ../widgets/ConfigDelete.vala:37
+msgid "At least a month"
+msgstr "Минимум месяц"
+
+#: ../widgets/ConfigDelete.vala:38
+msgid "At least two months"
+msgstr "Минимум два месяца"
+
+#: ../widgets/ConfigDelete.vala:39
+msgid "At least three months"
+msgstr "Минимум три месяца"
+
+#: ../widgets/ConfigDelete.vala:40
+msgid "At least six months"
+msgstr "Минимум шесть месяцев"
+
+#: ../widgets/ConfigDelete.vala:41
+msgid "At least a year"
+msgstr "Минимум год"
+
+#: ../widgets/ConfigDelete.vala:42
+msgid "Forever"
+msgstr "Вечно"
+
+#: ../widgets/ConfigDelete.vala:100
+#, c-format
+msgid "At least %d day"
+msgid_plural "At least %d days"
+msgstr[0] "Минимум %d день"
+msgstr[1] "Минимум %d дня"
+msgstr[2] "Минимум %d дней"
+
+#: ../widgets/ConfigLabelBool.vala:36
+msgid "Yes"
+msgstr "Да"
+
+#: ../widgets/ConfigLabelBool.vala:36
+msgid "No"
+msgstr "Нет"
+
+#: ../widgets/ConfigLabelList.vala:56 ../widgets/ConfigList.vala:118
+msgid "Home Folder"
+msgstr "Домашний каталог"
+
+#: ../widgets/ConfigLabelList.vala:58 ../widgets/ConfigList.vala:120
+msgid "Trash"
+msgstr "Корзина"
+
+#: ../widgets/ConfigList.vala:159
+msgid "Choose folders"
+msgstr "Выберите каталоги"
+
+#: ../widgets/ConfigLocation.vala:39
+msgid "Select Backup Location"
+msgstr "Выберите местоположение резервной копии"
+
+#: ../widgets/ConfigLocation.vala:66
+msgid "Amazon S3"
+msgstr "Amazon S3"
+
+#: ../widgets/ConfigPeriod.vala:36
+msgid "Daily"
+msgstr "Ежедневно"
+
+#: ../widgets/ConfigPeriod.vala:37
+msgid "Weekly"
+msgstr "Еженедельно"
+
+#. Translators: Biweekly is every two weeks
+#: ../widgets/ConfigPeriod.vala:39
+msgid "Biweekly"
+msgstr "Каждые две недели"
+
+#: ../widgets/ConfigPeriod.vala:40
+msgid "Monthly"
+msgstr "Ежемесячно"
+
+#: ../widgets/ConfigPeriod.vala:96
+#, c-format
+msgid "Every %d day"
+msgid_plural "Every %d days"
+msgstr[0] "Каждый %d день"
+msgstr[1] "Каждые %d дня"
+msgstr[2] "Каждые %d дней"
+
+#: ../widgets/WidgetUtils.vala:30
 #, c-format
 msgid "Could not display %s"
 msgstr "Не могу отобразить %s"
 
-#: ../libdeja-dup/libdeja-dup.vala:141
+#: ../widgets/WidgetUtils.vala:73
 msgid "About Déjà Dup"
 msgstr "О Déjà Dup"
 
-#: ../libdeja-dup/libdeja-dup.vala:145
+#: ../widgets/WidgetUtils.vala:77
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -743,7 +838,7 @@ msgstr ""
 "  Sergey Sedov https://launchpad.net/~serg-sedov\n"
 "  Vladimir Yakovlev https://launchpad.net/~nagos"
 
-#: ../libdeja-dup/libdeja-dup.vala:150
+#: ../widgets/WidgetUtils.vala:82
 #, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
@@ -756,7 +851,7 @@ msgstr ""
 "3 или, на ваш выбор, более поздней как она публикуется фондом свободного  "
 "программного обеспечения FSF;"
 
-#: ../libdeja-dup/libdeja-dup.vala:151
+#: ../widgets/WidgetUtils.vala:83
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -768,76 +863,13 @@ msgstr ""
 "или ПРИГОДНОСТИ ДЛЯ КОНКРЕТНОЙ ЦЕЛИ. Для дополнительной информации "
 "обратитесь к лицензии GNU General Public License."
 
-#: ../libdeja-dup/libdeja-dup.vala:152
+#: ../widgets/WidgetUtils.vala:84
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see http://www.gnu.org/licenses/."
 msgstr ""
 "Вы должны были получить копию лицензии GNU General Public с этой программой. "
 "Вы также можете найти её здесь: http://www.gnu.org/licenses/."
-
-#: ../libdeja-dup/libdeja-dup.vala:316
-msgid "Unknown"
-msgstr "Неизвестно"
-
-#: ../libdeja-dup/OperationRestore.vala:60
-msgid "Restoring files…"
-msgstr ""
-
-#: ../libdeja-dup/OperationRestore.vala:173
-#, c-format
-msgid ""
-"Not all files could be restored. Any files that could not be restored may "
-"still be found in %s."
-msgstr ""
-"Не все файлы могут быть восстановлены. Любые файлы, которые не удалось "
-"восстановить могут быть найдены в %s."
-
-#: ../libdeja-dup/OperationRestore.vala:182
-#, c-format
-msgid "Could not restore %s: %s"
-msgstr "Не смог восстановить %s: %s"
-
-#: ../libdeja-dup/Operation.vala:55
-msgid "Checking for backups…"
-msgstr ""
-
-#: ../libdeja-dup/Operation.vala:210
-msgid "Another Déjà Dup is already running"
-msgstr "Уже запущена одна копия Déjà Dup"
-
-#: ../nautilus/NautilusExtension.c:95
-msgid "Revert to Previous Version…"
-msgid_plural "Revert to Previous Versions…"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../nautilus/NautilusExtension.c:99
-msgid "Restore file from backup"
-msgid_plural "Restore files from backup"
-msgstr[0] "Восстановить файл из резервной копии"
-msgstr[1] "Восстановить файлы из резервной копии"
-msgstr[2] "Восстановить файлы из резервной копии"
-
-#: ../preferences/PreferencesDialog.vala:36 ../preferences/preferences.vala:35
-#: ../preferences/preferences.vala:66
-msgid "Déjà Dup Preferences"
-msgstr "Настройки Déjà Dup"
-
-#: ../preferences/PreferencesDialog.vala:68
-#, c-format
-msgid "S3 Access Key I_D:"
-msgstr "Ключ доступа I_D S3:"
-
-#: ../preferences/PreferencesDialog.vala:80
-#, c-format
-msgid "_Folder:"
-msgstr "_Каталог:"
-
-#: ../preferences/PreferencesDialog.vala:166
-#, c-format
-msgid "_Keep backups:"
-msgstr "_Сохранять резервные копии:"
 
 #~ msgid "Déjà Dup Backup Utility"
 #~ msgstr "Утилита резервного копирования Déjà Dup"
@@ -941,6 +973,10 @@ msgstr "_Сохранять резервные копии:"
 
 #~ msgid "Amazon S3 Password"
 #~ msgstr "Пароль  на Amazon S3"
+
+#, c-format
+#~ msgid "Folder %s on Amazon S3"
+#~ msgstr "Каталог %s на Amazon S3"
 
 #~ msgid "Restoring files..."
 #~ msgstr "Восстановление файлов..."

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-10-25 00:07-0400\n"
-"PO-Revision-Date: 2009-11-19 09:27+0000\n"
+"POT-Creation-Date: 2009-11-25 12:51-0500\n"
+"PO-Revision-Date: 2009-11-29 01:30+0000\n"
 "Last-Translator: Luca Ferretti <elle.uca@ubuntu-it.org>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-11-20 04:42+0000\n"
+"X-Launchpad-Export-Date: 2009-11-30 04:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "Effettua il backup dei propri file"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:39
+#: ../deja-dup/StatusIcon.vala:38
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
@@ -42,10 +42,9 @@ msgid "Déjà Dup Backup Tool"
 msgstr "Strumento di backup Déjà Dup"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
-#. a computer monitor.  This program acts like a daemon that kicks off
+#. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.h:1 ../monitor/monitor.vala:102
-#: ../monitor/monitor.vala:343
+#: ../data/deja-dup-monitor.desktop.in.h:1 ../monitor/monitor.vala:328
 msgid "Déjà Dup Monitor"
 msgstr "Monitor di Déjà Dup"
 
@@ -173,11 +172,11 @@ msgstr ""
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 
-#: ../deja-dup/Assistant.vala:278
+#: ../deja-dup/Assistant.vala:281
 msgid "Co_ntinue"
 msgstr ""
 
-#: ../deja-dup/Assistant.vala:311 ../deja-dup/StatusIcon.vala:102
+#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:101
 msgid "_Resume Later"
 msgstr ""
 
@@ -193,22 +192,22 @@ msgid "_Backup"
 msgstr ""
 
 #: ../deja-dup/AssistantBackup.vala:50 ../deja-dup/AssistantRestore.vala:93
-#: ../preferences/PreferencesDialog.vala:54
+#: ../preferences/PreferencesDialog.vala:84
 msgid "_Backup location:"
 msgstr ""
 
 #: ../deja-dup/AssistantBackup.vala:57
-#: ../preferences/PreferencesDialog.vala:135
+#: ../preferences/PreferencesDialog.vala:166
 msgid "_Encrypt backup files"
 msgstr ""
 
 #: ../deja-dup/AssistantBackup.vala:78
-#: ../preferences/PreferencesDialog.vala:99
+#: ../preferences/PreferencesDialog.vala:130
 msgid "I_nclude files in folders:"
 msgstr ""
 
 #: ../deja-dup/AssistantBackup.vala:91
-#: ../preferences/PreferencesDialog.vala:118
+#: ../preferences/PreferencesDialog.vala:149
 msgid "E_xcept files in folders:"
 msgstr ""
 
@@ -235,34 +234,34 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:185
+#: ../deja-dup/AssistantBackup.vala:187
 msgid "Backing up:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:195
-#: ../preferences/PreferencesDialog.vala:141
+#: ../deja-dup/AssistantBackup.vala:197
+#: ../preferences/PreferencesDialog.vala:172
 msgid "_Automatically backup on a regular schedule"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:198
-#: ../preferences/PreferencesDialog.vala:148
+#: ../deja-dup/AssistantBackup.vala:200
+#: ../preferences/PreferencesDialog.vala:179
 #, c-format
 msgid "How _often to backup:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:225
+#: ../deja-dup/AssistantBackup.vala:227
 msgid "Backup Failed"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:228
+#: ../deja-dup/AssistantBackup.vala:230
 msgid "Backup Finished"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:229
+#: ../deja-dup/AssistantBackup.vala:231
 msgid "Your files were successfully backed up."
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:248 ../libdeja-dup/Operation.vala:51
+#: ../deja-dup/AssistantBackup.vala:250 ../common/Operation.vala:50
 msgid "Backing up…"
 msgstr ""
 
@@ -295,7 +294,7 @@ msgstr ""
 msgid "Password needed"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:560
+#: ../deja-dup/AssistantOperation.vala:561
 msgid "Déjà Dup backup passphrase"
 msgstr ""
 
@@ -354,41 +353,41 @@ msgstr ""
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:297
+#: ../deja-dup/AssistantRestore.vala:300
 msgid "Restoring:"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:325
+#: ../deja-dup/AssistantRestore.vala:328
 msgid "No backups to restore"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:411
+#: ../deja-dup/AssistantRestore.vala:417
 msgid "Original location"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:424
+#: ../deja-dup/AssistantRestore.vala:430
 msgid "File to restore:"
 msgid_plural "Files to restore:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../deja-dup/AssistantRestore.vala:446
+#: ../deja-dup/AssistantRestore.vala:452
 msgid "Restore Failed"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:448
+#: ../deja-dup/AssistantRestore.vala:454
 msgid "Restore Finished"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:449
+#: ../deja-dup/AssistantRestore.vala:455
 msgid "Your files were successfully restored."
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:453 ../libdeja-dup/Operation.vala:53
+#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:52
 msgid "Restoring…"
 msgstr ""
 
-#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:41
+#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:33
 #: ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr ""
@@ -483,198 +482,133 @@ msgstr ""
 msgid "_Remember secret access key"
 msgstr ""
 
-#: ../deja-dup/StatusIcon.vala:70
+#: ../deja-dup/StatusIcon.vala:69
 #, c-format
 msgid "%.1f%% complete"
 msgstr ""
 
-#: ../deja-dup/StatusIcon.vala:104
+#: ../deja-dup/StatusIcon.vala:103
 msgid "_Delay Backup"
 msgstr ""
 
-#: ../deja-dup/StatusIcon.vala:109
+#: ../deja-dup/StatusIcon.vala:108
 msgid "_Skip Backup"
 msgstr ""
 
-#: ../libdeja-dup/BackendFile.vala:51
+#: ../common/BackendFile.vala:73
 msgid "GVFS FUSE is not installed"
 msgstr ""
 
-#: ../libdeja-dup/BackendS3.vala:126
+#. Translators: %2$s is the name of a removable drive, %1$s is a folder
+#. on that removable drive.
+#: ../common/BackendFile.vala:87
 #, c-format
-msgid "Folder %s on Amazon S3"
+msgid "%1$s on %2$s"
 msgstr ""
 
-#: ../libdeja-dup/BackendS3.vala:172
+#: ../common/BackendFile.vala:125
+#, c-format
+msgid "Backup will begin when %s becomes connected."
+msgstr ""
+
+#: ../common/BackendFile.vala:132 ../common/BackendS3.vala:51
+msgid "Backup will begin when a network connection becomes available."
+msgstr ""
+
+#: ../common/BackendFile.vala:365
+msgid "Backup location not available"
+msgstr ""
+
+#: ../common/BackendFile.vala:365
+#, c-format
+msgid "Waiting for ‘%s’ to become connected…"
+msgstr ""
+
+#. Translators: %s is a folder.
+#: ../common/BackendS3.vala:129
+#, c-format
+msgid "%s on Amazon S3"
+msgstr ""
+
+#: ../common/BackendS3.vala:175
 msgid "Permission denied"
 msgstr ""
 
-#: ../libdeja-dup/BackendS3.vala:195
+#: ../common/BackendS3.vala:198
 msgid "Enter Amazon S3 access key"
 msgstr ""
 
-#: ../libdeja-dup/ButtonConnect.vala:28
-msgid "Connect to _Server…"
+#: ../common/CommonUtils.vala:239
+msgid "Unknown"
 msgstr ""
 
-#: ../libdeja-dup/ButtonConnect.vala:37
-msgid "Could not open connection dialog"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:36
-msgid "At least a week"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:37
-msgid "At least a month"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:38
-msgid "At least two months"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:39
-msgid "At least three months"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:40
-msgid "At least six months"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:41
-msgid "At least a year"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:42
-msgid "Forever"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:100
-#, c-format
-msgid "At least %d day"
-msgid_plural "At least %d days"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../libdeja-dup/ConfigLabelBool.vala:36
-msgid "Yes"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLabelBool.vala:36
-msgid "No"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLabelList.vala:56 ../libdeja-dup/ConfigList.vala:111
-msgid "Home Folder"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLabelList.vala:58 ../libdeja-dup/ConfigList.vala:113
-msgid "Trash"
-msgstr ""
-
-#: ../libdeja-dup/ConfigList.vala:152
-msgid "Choose folders"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLocation.vala:41
-msgid "Select Backup Location"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLocation.vala:68 ../libdeja-dup/libdeja-dup.vala:304
-msgid "Amazon S3"
-msgstr ""
-
-#: ../libdeja-dup/ConfigPeriod.vala:36
-msgid "Daily"
-msgstr ""
-
-#: ../libdeja-dup/ConfigPeriod.vala:37
-msgid "Weekly"
-msgstr ""
-
-#. Translators: Biweekly is every two weeks
-#: ../libdeja-dup/ConfigPeriod.vala:39
-msgid "Biweekly"
-msgstr ""
-
-#: ../libdeja-dup/ConfigPeriod.vala:40
-msgid "Monthly"
-msgstr ""
-
-#: ../libdeja-dup/ConfigPeriod.vala:96
-#, c-format
-msgid "Every %d day"
-msgid_plural "Every %d days"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../libdeja-dup/DuplicityInfo.vala:131
+#: ../common/DuplicityInfo.vala:127
 msgid "Could not run duplicity"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:137
+#: ../common/DuplicityInfo.vala:132
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:139
+#: ../common/DuplicityInfo.vala:134
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
 "\n"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:141
+#: ../common/DuplicityInfo.vala:136
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:151
+#: ../common/DuplicityInfo.vala:140
 msgid "Duplicity’s version is too old"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:152
+#: ../common/DuplicityInfo.vala:141
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
 "version %d.%d.%.2d"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:203
+#: ../common/Duplicity.vala:172
 msgid "Paused (no network)"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:243 ../libdeja-dup/Duplicity.vala:251
-#: ../libdeja-dup/Operation.vala:95
+#: ../common/Duplicity.vala:212 ../common/Duplicity.vala:220
+#: ../common/Operation.vala:94
 msgid "Preparing…"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:269
+#: ../common/Duplicity.vala:238
 msgid "Creating a fresh backup.  This will take longer than normal."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:323 ../libdeja-dup/Duplicity.vala:340
+#: ../common/Duplicity.vala:292 ../common/Duplicity.vala:309
 msgid "Cleaning up…"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:414 ../libdeja-dup/Duplicity.vala:684
+#: ../common/Duplicity.vala:383 ../common/Duplicity.vala:653
 msgid "Failed with an unknown error."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:596
+#: ../common/Duplicity.vala:565
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:600 ../libdeja-dup/Duplicity.vala:642
+#: ../common/Duplicity.vala:569 ../common/Duplicity.vala:611
 msgid "Bad encryption password."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:604
+#: ../common/Duplicity.vala:573
 msgid "Computer name changed"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:604
+#: ../common/Duplicity.vala:573
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -682,112 +616,71 @@ msgid ""
 "location."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:624
+#: ../common/Duplicity.vala:593
 msgid "Invalid ID."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:626
+#: ../common/Duplicity.vala:595
 msgid "Invalid secret key."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:628
+#: ../common/Duplicity.vala:597
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:637
+#: ../common/Duplicity.vala:606
 msgid "S3 bucket name is not available."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:646
+#: ../common/Duplicity.vala:615
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:648
+#: ../common/Duplicity.vala:617
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:656
+#: ../common/Duplicity.vala:625
 #, c-format
 msgid "No space left in %s"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:676
+#: ../common/Duplicity.vala:645
 msgid "No backup files found"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:712
+#: ../common/Duplicity.vala:681
 msgid "Uploading…"
 msgstr ""
 
-#: ../libdeja-dup/libdeja-dup.vala:97
-#, c-format
-msgid "Could not display %s"
-msgstr ""
-
-#: ../libdeja-dup/libdeja-dup.vala:141
-msgid "About Déjà Dup"
-msgstr ""
-
-#: ../libdeja-dup/libdeja-dup.vala:145
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  Cristian Marchi https://launchpad.net/~cri79\n"
-"  Luca Ferretti https://launchpad.net/~elle.uca\n"
-"  Michael Terry https://launchpad.net/~mterry\n"
-"  captive https://launchpad.net/~salvo-schifani"
-
-#: ../libdeja-dup/libdeja-dup.vala:150
-#, c-format
-msgid ""
-"This program is free software; you can redistribute it and/or modify it "
-"under the terms of the GNU General Public License as published by the Free "
-"Software Foundation; either version 3 of the License, or (at your option) "
-"any later version."
-msgstr ""
-
-#: ../libdeja-dup/libdeja-dup.vala:151
-msgid ""
-"This program is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-"more details."
-msgstr ""
-
-#: ../libdeja-dup/libdeja-dup.vala:152
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program.  If not, see http://www.gnu.org/licenses/."
-msgstr ""
-
-#: ../libdeja-dup/libdeja-dup.vala:316
-msgid "Unknown"
-msgstr ""
-
-#: ../libdeja-dup/OperationRestore.vala:60
+#: ../common/OperationRestore.vala:54
 msgid "Restoring files…"
 msgstr ""
 
-#: ../libdeja-dup/OperationRestore.vala:173
+#: ../common/OperationRestore.vala:168
 #, c-format
 msgid ""
 "Not all files could be restored. Any files that could not be restored may "
 "still be found in %s."
 msgstr ""
 
-#: ../libdeja-dup/OperationRestore.vala:182
+#: ../common/OperationRestore.vala:177
 #, c-format
 msgid "Could not restore %s: %s"
 msgstr ""
 
-#: ../libdeja-dup/Operation.vala:55
+#: ../common/Operation.vala:54
 msgid "Checking for backups…"
 msgstr ""
 
-#: ../libdeja-dup/Operation.vala:210
+#: ../common/Operation.vala:209
 msgid "Another Déjà Dup is already running"
+msgstr ""
+
+#: ../monitor/monitor.vala:230
+msgid "Scheduled backup delayed"
 msgstr ""
 
 #: ../nautilus/NautilusExtension.c:95
@@ -802,22 +695,158 @@ msgid_plural "Restore files from backup"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../preferences/PreferencesDialog.vala:36 ../preferences/preferences.vala:35
+#: ../preferences/PreferencesDialog.vala:41 ../preferences/preferences.vala:35
 #: ../preferences/preferences.vala:66
 msgid "Déjà Dup Preferences"
 msgstr ""
 
-#: ../preferences/PreferencesDialog.vala:68
+#: ../preferences/PreferencesDialog.vala:99
 #, c-format
 msgid "S3 Access Key I_D:"
 msgstr ""
 
-#: ../preferences/PreferencesDialog.vala:80
+#: ../preferences/PreferencesDialog.vala:111
 #, c-format
 msgid "_Folder:"
 msgstr ""
 
-#: ../preferences/PreferencesDialog.vala:166
+#: ../preferences/PreferencesDialog.vala:197
 #, c-format
 msgid "_Keep backups:"
+msgstr ""
+
+#: ../widgets/ButtonConnect.vala:28
+msgid "Connect to _Server…"
+msgstr ""
+
+#: ../widgets/ButtonConnect.vala:37
+msgid "Could not open connection dialog"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:36
+msgid "At least a week"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:37
+msgid "At least a month"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:38
+msgid "At least two months"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:39
+msgid "At least three months"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:40
+msgid "At least six months"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:41
+msgid "At least a year"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:42
+msgid "Forever"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:100
+#, c-format
+msgid "At least %d day"
+msgid_plural "At least %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../widgets/ConfigLabelBool.vala:36
+msgid "Yes"
+msgstr ""
+
+#: ../widgets/ConfigLabelBool.vala:36
+msgid "No"
+msgstr ""
+
+#: ../widgets/ConfigLabelList.vala:56 ../widgets/ConfigList.vala:118
+msgid "Home Folder"
+msgstr ""
+
+#: ../widgets/ConfigLabelList.vala:58 ../widgets/ConfigList.vala:120
+msgid "Trash"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:159
+msgid "Choose folders"
+msgstr ""
+
+#: ../widgets/ConfigLocation.vala:39
+msgid "Select Backup Location"
+msgstr ""
+
+#: ../widgets/ConfigLocation.vala:66
+msgid "Amazon S3"
+msgstr ""
+
+#: ../widgets/ConfigPeriod.vala:36
+msgid "Daily"
+msgstr ""
+
+#: ../widgets/ConfigPeriod.vala:37
+msgid "Weekly"
+msgstr ""
+
+#. Translators: Biweekly is every two weeks
+#: ../widgets/ConfigPeriod.vala:39
+msgid "Biweekly"
+msgstr ""
+
+#: ../widgets/ConfigPeriod.vala:40
+msgid "Monthly"
+msgstr ""
+
+#: ../widgets/ConfigPeriod.vala:96
+#, c-format
+msgid "Every %d day"
+msgid_plural "Every %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../widgets/WidgetUtils.vala:30
+#, c-format
+msgid "Could not display %s"
+msgstr ""
+
+#: ../widgets/WidgetUtils.vala:73
+msgid "About Déjà Dup"
+msgstr ""
+
+#: ../widgets/WidgetUtils.vala:77
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Cristian Marchi https://launchpad.net/~cri79\n"
+"  Luca Ferretti https://launchpad.net/~elle.uca\n"
+"  Michael Terry https://launchpad.net/~mterry\n"
+"  captive https://launchpad.net/~salvo-schifani"
+
+#: ../widgets/WidgetUtils.vala:82
+#, c-format
+msgid ""
+"This program is free software; you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation; either version 3 of the License, or (at your option) "
+"any later version."
+msgstr ""
+
+#: ../widgets/WidgetUtils.vala:83
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details."
+msgstr ""
+
+#: ../widgets/WidgetUtils.vala:84
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program.  If not, see http://www.gnu.org/licenses/."
 msgstr ""
