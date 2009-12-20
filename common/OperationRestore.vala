@@ -58,8 +58,12 @@ public class OperationRestore : Operation
   
   protected override List<string>? make_argv() throws Error
   {
-    source = Path.build_filename(Environment.get_tmp_dir(), "deja-dup-XXXXXX");
-    source = DirUtils.mkdtemp(source);
+    if (DuplicityInfo.get_default().has_rename_arg)
+      source = dest;
+    else {
+      source = Path.build_filename(Environment.get_tmp_dir(), "deja-dup-XXXXXX");
+      source = DirUtils.mkdtemp(source);
+    }
     
     List<string> argv = new List<string>();
     if (time != null)
@@ -73,13 +77,11 @@ public class OperationRestore : Operation
   protected override void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
     if (success) {
-    }
-    
-    if (success) {
       fixup_home_dir();
       if (!mv_source_to_dest())
         success = false;
       else {
+        cleanup_source();
         try {DejaDup.update_last_run_timestamp();}
         catch (Error e) {warning("%s\n", e.message);}
       }
@@ -106,6 +108,9 @@ public class OperationRestore : Operation
    */
   void fixup_home_dir()
   {
+    if (DuplicityInfo.get_default().has_rename_arg)
+      return; // skip it, duplicity is doing this for us
+
     string ideal_home = Path.build_filename(source, Environment.get_home_dir());
     if (FileUtils.test(ideal_home, FileTest.EXISTS | FileTest.IS_DIR))
       return;
@@ -189,6 +194,9 @@ public class OperationRestore : Operation
   
   bool mv_source_to_dest()
   {
+    if (DuplicityInfo.get_default().has_rename_arg)
+      return true; // skip it, duplicity is doing this for us
+
     errors = new List<string>();
     
     var destf = File.new_for_path(dest);
@@ -232,6 +240,9 @@ public class OperationRestore : Operation
   
   void cleanup_source()
   {
+    if (DuplicityInfo.get_default().has_rename_arg)
+      return; // skip it, source=dest
+
     File sourcef = File.new_for_path(source);
     var move = new RecursiveDelete(sourcef);
     move.start();

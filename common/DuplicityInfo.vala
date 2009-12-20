@@ -35,6 +35,7 @@ public class DuplicityInfo : Object
   public bool can_read_short_filenames {get; private set; default = false; }
   public bool has_native_gio {get; private set; default = false; }
   public bool can_resume {get; private set; default = false; }
+  public bool has_rename_arg {get; private set; default = false; }
   
   static DuplicityInfo info = null;
   public static DuplicityInfo get_default() {
@@ -99,6 +100,8 @@ public class DuplicityInfo : Object
       has_native_gio = true; // had it in 0.6.1, but didn't work on restore
       can_resume = true; // had it in 0.6.0, but didn't quite work right
     }
+    if (false) // hasn't landed yet
+      has_rename_arg = true;
     
     return true;
   }

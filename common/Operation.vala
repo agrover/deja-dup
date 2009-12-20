@@ -40,6 +40,7 @@ public abstract class Operation : Object
     BACKUP,
     RESTORE,
     STATUS,
+    LIST,
   }
   public Mode mode {get; construct; default = Mode.INVALID;}
   

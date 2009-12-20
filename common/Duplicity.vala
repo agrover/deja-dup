@@ -59,6 +59,7 @@ public class Duplicity : Object
     NORMAL,
     DRY_RUN, // used when backing up, and we need to first get time estimate
     STATUS, // used when backing up, and we need to first get collection info
+    CHECK_HOME, // used when restoring, and we need to list /home
     CLEANUP,
     DELETE,
   }
@@ -76,6 +77,13 @@ public class Duplicity : Object
   bool has_progress_total = false;
   double progress_total; // zero, unless we already know limit
   double progress_count; // count of how far we are along in the current instance
+  
+  static File slash;
+  static File slash_root;
+  static File slash_home;
+  
+  bool has_checked_home = false;
+  List<File> homes = new List<File>();
   
   bool checked_collection_info = false;
   bool got_collection_info = false;
@@ -101,6 +109,14 @@ public class Duplicity : Object
 
   public Duplicity(Operation.Mode mode) {
     Object(original_mode: mode);
+  }
+  
+  construct {
+    if (slash == null) {
+      slash = File.new_for_path("/");
+      slash_root = File.new_for_path("/root");
+      slash_home = File.new_for_path("/home");
+    }
   }
   
   public virtual void start(Backend backend, bool encrypted,
@@ -242,29 +258,47 @@ public class Duplicity : Object
       
       break;
     case Operation.Mode.RESTORE:
-      if (restore_files != null) {
-        // Just do first one.  Others will come when we're done
-        
-        // make path to specific restore file, since duplicity will just 
-        // drop the file exactly where you ask it
-        File local_file = File.new_for_path(local);
-        File root = File.new_for_path("/");
-        string rel_file_path = root.get_relative_path(restore_files.data);
-        local_file = local_file.resolve_relative_path(rel_file_path);
-        
-        try {
-          // won't have correct permissions...
-          local_file.make_directory_with_parents(null);
-        }
-        catch (Error e) {
-          show_error(e.message);
-          return false;
-        }
-        custom_local = local_file.get_path();
-        extra_argv.append("--file-to-restore=%s".printf(rel_file_path));
+      if (!has_checked_home && DuplicityInfo.get_default().has_rename_arg) {
+        mode = Operation.Mode.LIST;
+        state = State.CHECK_HOME;
+        action_desc = _("Preparing…");
       }
-      if (DuplicityInfo.get_default().has_restore_progress)
-        progress(0f);
+      else {
+        // OK, do we have multiple, one, or no home dirs?
+        // Only want to bother doing anything if one.  If one, we rename it's
+        // home dir to the current user's home dir (i.e. they backed up on one
+        // machine as 'alice' and restored on a machine as 'bob').
+        if (homes.length() == 1) {
+          var old_home = homes.data;
+          var new_home = File.new_for_path(Environment.get_home_dir());
+          extra_argv.append("--rename");
+          extra_argv.append(slash.get_relative_path(old_home));
+          extra_argv.append(slash.get_relative_path(new_home));
+        }
+        
+        if (restore_files != null) {
+          // Just do first one.  Others will come when we're done
+          
+          // make path to specific restore file, since duplicity will just
+          // drop the file exactly where you ask it
+          var local_file = make_local_rel_path(restore_files.data);
+          
+          try {
+            // won't have correct permissions...
+            local_file.make_directory_with_parents(null);
+          }
+          catch (Error e) {
+            show_error(e.message);
+            return false;
+          }
+          custom_local = local_file.get_path();
+          
+          var rel_file_path = slash.get_relative_path(restore_files.data);
+          extra_argv.append("--file-to-restore=%s".printf(rel_file_path));
+        }
+        if (DuplicityInfo.get_default().has_restore_progress)
+          progress(0f);
+      }
       break;
     }
     
@@ -276,6 +310,13 @@ public class Duplicity : Object
     
     connect_and_start(extra_argv, null, null, custom_local);
     return true;
+  }
+  
+  File make_local_rel_path(File file)
+  {
+    File local_file = File.new_for_path(local);
+    string rel_file_path = slash.get_relative_path(file);
+    return local_file.resolve_relative_path(rel_file_path);
   }
   
   bool cleanup() {
@@ -350,6 +391,18 @@ public class Duplicity : Object
                 backend_argv.remove(s);
             }
           }
+          
+          if (restart())
+            return;
+          else
+            success = false;
+        }
+        break;
+      
+      case State.CHECK_HOME:
+        if (success) {
+          has_checked_home = true;
+          mode = Operation.Mode.RESTORE;
           
           if (restart())
             return;
@@ -499,6 +552,7 @@ public class Duplicity : Object
   protected static const int INFO_DIFF_FILE_DELETED = 6;
   protected static const int INFO_PATCH_FILE_WRITING = 7;
   protected static const int INFO_PATCH_FILE_PATCHING = 8;
+  protected static const int INFO_FILE_STAT = 10;
   protected static const int INFO_SYNCHRONOUS_UPLOAD_BEGIN = 11;
   protected static const int INFO_ASYNCHRONOUS_UPLOAD_BEGIN = 12;
   protected static const int INFO_SYNCHRONOUS_UPLOAD_DONE = 13;
@@ -680,7 +734,22 @@ public class Duplicity : Object
         if (!backend.is_native())
           set_status(_("Uploading…"));
         break;
+      case INFO_FILE_STAT:
+        process_file_stat(firstline[2], firstline[3]);
+        break;
       }
+    }
+  }
+  
+  void process_file_stat(string date, string file)
+  {
+    if (mode != Operation.Mode.LIST)
+      return;
+    if (state == State.CHECK_HOME) {
+      var gfile = make_file_obj(file);
+      if (gfile.equal(slash_root) ||
+          (gfile.get_parent() != null && gfile.get_parent().equal(slash_home)))
+        homes.append(gfile);
     }
   }
   
@@ -726,14 +795,10 @@ public class Duplicity : Object
     progress(percent);
   }
   
-  static File root;
   File make_file_obj(string file)
   {
     // All files are relative to root.
-    if (root == null)
-      root = File.new_for_path("/");
-    
-    return root.resolve_relative_path(file);
+    return slash.resolve_relative_path(file);
   }
   
   void process_collection_status(List<string>? lines)
@@ -884,6 +949,10 @@ public class Duplicity : Object
         break;
       case Operation.Mode.STATUS:
         argv.prepend("collection-status");
+        argv.append(remote);
+        break;
+      case Operation.Mode.LIST:
+        argv.prepend("list-current-files");
         argv.append(remote);
         break;
       }

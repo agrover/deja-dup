@@ -28,6 +28,7 @@ TESTS = \
 	prefs/ssh-to-file \
 	restore/cycle \
 	restore/full \
+	restore/rename \
 	restore/two
 
 test:
