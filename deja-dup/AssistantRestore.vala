@@ -209,8 +209,8 @@ public class AssistantRestore : AssistantOperation
     label = new Gtk.Label(_("Backup location:"));
     label.set("xalign", 0.0f);
     w = new DejaDup.ConfigLabelLocation();
-    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
+    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
     ++rows;
     
     label = new Gtk.Label(_("Encrypted:"));
@@ -225,7 +225,7 @@ public class AssistantRestore : AssistantOperation
     confirm_date = new Gtk.Label("");
     confirm_date.set("xalign", 0.0f);
     confirm_date_row = rows;
-    page.attach(confirm_date_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(confirm_date_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
     page.attach(confirm_date, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
     ++rows;
     
@@ -234,7 +234,7 @@ public class AssistantRestore : AssistantOperation
     confirm_location = new Gtk.Label("");
     confirm_location.set("xalign", 0.0f);
     confirm_location_row = rows;
-    page.attach(confirm_location_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(confirm_location_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
     page.attach(confirm_location, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
     ++rows;
     
@@ -242,7 +242,7 @@ public class AssistantRestore : AssistantOperation
     confirm_files_label.set("xalign", 0.0f, "yalign", 0.0f);
     confirm_files = new Gtk.VBox(true, 6);
     confirm_files_row = rows;
-    page.attach(confirm_files_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(confirm_files_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
     page.attach(confirm_files, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
     ++rows;
     

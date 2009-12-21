@@ -33,8 +33,8 @@ public class ConfigLabel : ConfigWidget
   construct {
     label = new Gtk.Label("");
     label.set("xalign", 0.0f);
-    hbox = new Gtk.HBox(false, 0);
-    hbox.pack_start(label, true, true, 6);
+    hbox = new Gtk.HBox(false, 6);
+    hbox.pack_start(label, true, true, 0);
     add(hbox);
     set_from_config();
   }
