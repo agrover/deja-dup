@@ -31,6 +31,7 @@ VALA_CFLAGS = \
 AM_CFLAGS = \
 	-I$(top_srcdir)/common \
 	$(WIDGETS_CFLAGS) \
+	$(APPINDICATOR_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
@@ -69,6 +70,6 @@ else
 	@exit 1
 endif
 
-libwidgets_la_LIBADD = $(WIDGETS_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la
+libwidgets_la_LIBADD = $(WIDGETS_LIBS) $(APPINDICATOR_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la
 
 EXTRA_DIST = vala.stamp $(libwidgets_la_VALASOURCES)

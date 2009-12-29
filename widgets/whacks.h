@@ -24,6 +24,8 @@
 #include <gtk/gtk.h>
 
 extern void hacks_status_icon_set_tooltip_text (GtkStatusIcon *icon, const gchar *text);
+extern GObject *hacks_status_icon_make_app_indicator (GtkMenu *menu);
+extern void hacks_status_icon_close_app_indicator (GObject *icon);
 extern GtkLabel *hacks_make_link_label (const gchar *text);
 
 #endif

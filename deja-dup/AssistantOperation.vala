@@ -407,8 +407,8 @@ public abstract class AssistantOperation : Assistant
     op.backend.mount_op = mount_op;
     op.backend.pause_op.connect(pause_op);
     
-    status_icon = new StatusIcon(op, automatic);
-    status_icon.activated.connect((s, t) => {toggle_window(t, true);});
+    status_icon = new StatusIcon(this, op, automatic);
+    status_icon.toggle_window.connect((s) => {toggle_window(0, true);});
     status_icon.hide_all.connect((s) => {hide_everything();});
 
     try {

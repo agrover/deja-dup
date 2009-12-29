@@ -116,6 +116,25 @@ dnl Get nautilus extensions directory
 NAUTILUS_EXTENSION_DIR="${libdir}/nautilus/extensions-2.0"
 AC_SUBST(NAUTILUS_EXTENSION_DIR)
 
+AH_TEMPLATE([HAVE_APPINDICATOR], [whether libappindicator is available])
+AC_ARG_WITH([appindicator],
+  [AS_HELP_STRING([--with-appindicator],
+    [use libappindicator for notification icons @<:@default=check@:>@])],
+  [],
+  [with_appindicator=check])
+AS_IF([test "x$with_appindicator" != xno],
+  [PKG_CHECK_MODULES(APPINDICATOR, appindicator-0.1,
+    [AC_DEFINE(HAVE_APPINDICATOR)
+     AC_SUBST(APPINDICATOR_CFLAGS)
+     AC_SUBST(APPINDICATOR_LIBS)],
+    [if test "x$with_appindicator" != xcheck; then
+        AC_MSG_FAILURE(
+          [--with-appindicator was given, but test for appindicator failed])
+      fi
+    ]
+  )]
+)
+
 # Sets up output files.
 AC_CONFIG_FILES([Makefile
                  common/Makefile

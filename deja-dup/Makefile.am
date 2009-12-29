@@ -38,6 +38,7 @@ AM_CFLAGS = \
 	-I$(top_srcdir)/common \
 	-I$(top_srcdir)/widgets \
 	$(DUP_CFLAGS) \
+	$(APPINDICATOR_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
@@ -66,6 +67,6 @@ else
 	@exit 1
 endif
 
-deja_dup_LDADD = $(DUP_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la $(top_builddir)/widgets/libwidgets.la
+deja_dup_LDADD = $(DUP_LIBS) $(APPINDICATOR_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la $(top_builddir)/widgets/libwidgets.la
 
 EXTRA_DIST = vala.stamp $(deja_dup_VALASOURCES)

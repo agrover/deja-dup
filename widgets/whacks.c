@@ -17,6 +17,12 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
+
+#ifdef HAVE_APPINDICATOR
+#include <libappindicator/app-indicator.h>
+#endif
+
 #include "whacks.h"
 
 void
@@ -26,6 +32,30 @@ hacks_status_icon_set_tooltip_text (GtkStatusIcon *icon, const gchar *text)
   return gtk_status_icon_set_tooltip_text (icon, text);
 #else
   return gtk_status_icon_set_tooltip (icon, text);
+#endif
+}
+
+/* This is done in whacks, because we can't encode the #ifdef HAVE_APPINDICATOR
+   in vala (we can... but not have it carry through to the compiled C). */
+GObject *
+hacks_status_icon_make_app_indicator (GtkMenu *menu)
+{
+#ifdef HAVE_APPINDICATOR
+  AppIndicator *icon = app_indicator_new(PACKAGE, "deja-dup-applet", 
+                                         APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+  app_indicator_set_status(icon, APP_INDICATOR_STATUS_ACTIVE);
+  app_indicator_set_menu(icon, menu);
+  return G_OBJECT(icon);
+#else
+  return NULL;
+#endif
+}
+
+void
+hacks_status_icon_close_app_indicator (GObject *icon)
+{
+#ifdef HAVE_APPINDICATOR
+  app_indicator_set_status(APP_INDICATOR(icon), APP_INDICATOR_STATUS_PASSIVE);
 #endif
 }
 
