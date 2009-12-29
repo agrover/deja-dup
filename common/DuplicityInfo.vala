@@ -100,7 +100,7 @@ public class DuplicityInfo : Object
       has_native_gio = true; // had it in 0.6.1, but didn't work on restore
       can_resume = true; // had it in 0.6.0, but didn't quite work right
     }
-    if (false) // hasn't landed yet
+    if (meets_version(0, 6, 7))
       has_rename_arg = true;
     
     return true;
