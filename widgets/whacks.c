@@ -41,7 +41,7 @@ GObject *
 hacks_status_icon_make_app_indicator (GtkMenu *menu)
 {
 #ifdef HAVE_APPINDICATOR
-  AppIndicator *icon = app_indicator_new(PACKAGE, "deja-dup-applet", 
+  AppIndicator *icon = app_indicator_new(PACKAGE, "deja-dup-symbolic", 
                                          APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
   app_indicator_set_status(icon, APP_INDICATOR_STATUS_ACTIVE);
   app_indicator_set_menu(icon, menu);

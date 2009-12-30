@@ -54,7 +54,7 @@ public class StatusIcon : Object
     
     if (iconobj == null) {
       var gtkicon = new Gtk.StatusIcon();
-      gtkicon.set("icon-name", "deja-dup-applet",
+      gtkicon.set("icon-name", "deja-dup-symbolic",
                   "title", _("Déjà Dup")); // Only in GTK+ 2.18
       
       if (op.mode == DejaDup.Operation.Mode.BACKUP)
