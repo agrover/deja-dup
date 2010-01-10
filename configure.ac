@@ -1,7 +1,7 @@
 # -*- Mode: m4; indent-tabs-mode: nil; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008,2009 Michael Terry <mike@mterry.name>,
+# © 2008,2009,2010 Michael Terry <mike@mterry.name>,
 # © 2009 Andrew Fister <temposs@gmail.com>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
@@ -18,7 +18,7 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 # Sets up autoconf.
-AC_INIT([Déjà Dup],[13.5],[deja-dup-team@lists.launchpad.net],[deja-dup])
+AC_INIT([Déjà Dup],[13.6],[deja-dup-team@lists.launchpad.net],[deja-dup])
 AC_PREREQ([2.53])
 AC_CONFIG_SRCDIR(deja-dup/main.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
