@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-11-25 12:51-0500\n"
-"PO-Revision-Date: 2009-12-06 21:15+0000\n"
-"Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
+"POT-Creation-Date: 2009-12-29 09:55-0500\n"
+"PO-Revision-Date: 2009-12-30 08:17+0000\n"
+"Last-Translator: Bognár András <bognarandras.mail@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-12-07 04:43+0000\n"
+"X-Launchpad-Export-Date: 2009-12-31 04:58+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "Fájlok biztonsági mentése"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:38
+#: ../deja-dup/StatusIcon.vala:58
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Co_ntinue"
 msgstr "_Folytatás"
 
-#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:101
+#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:141
 msgid "_Resume Later"
 msgstr "Folytatás _később"
 
@@ -282,7 +282,7 @@ msgstr "Biztonsági mentés befejeződött"
 msgid "Your files were successfully backed up."
 msgstr "A fájljai sikeresen mentésre kerültek."
 
-#: ../deja-dup/AssistantBackup.vala:250 ../common/Operation.vala:50
+#: ../deja-dup/AssistantBackup.vala:250 ../common/Operation.vala:51
 msgid "Backing up…"
 msgstr "Biztonsági mentés…"
 
@@ -404,7 +404,7 @@ msgstr "Helyreállítás befejeződött"
 msgid "Your files were successfully restored."
 msgstr "A fájljai sikeresen helyreállításra kerültek."
 
-#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:52
+#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:53
 msgid "Restoring…"
 msgstr "Helyreállítás…"
 
@@ -503,16 +503,24 @@ msgstr "_Jelszó:"
 msgid "_Remember secret access key"
 msgstr "_Emlékezzen a titkos azonosító kulcsra"
 
-#: ../deja-dup/StatusIcon.vala:69
+#: ../deja-dup/StatusIcon.vala:48 ../deja-dup/StatusIcon.vala:133
+msgid "Hide _Progress"
+msgstr "Folyamat _megjelenítése"
+
+#: ../deja-dup/StatusIcon.vala:51 ../deja-dup/StatusIcon.vala:135
+msgid "Show _Progress"
+msgstr "Folyamat _rejtése"
+
+#: ../deja-dup/StatusIcon.vala:98
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% kész"
 
-#: ../deja-dup/StatusIcon.vala:103
+#: ../deja-dup/StatusIcon.vala:143
 msgid "_Delay Backup"
 msgstr "Biztonsági mentés _késleltetése"
 
-#: ../deja-dup/StatusIcon.vala:108
+#: ../deja-dup/StatusIcon.vala:148
 msgid "_Skip Backup"
 msgstr "Biztonsági mentés kiha_gyása"
 
@@ -565,11 +573,11 @@ msgstr "Amazon S3"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../common/DuplicityInfo.vala:127
+#: ../common/DuplicityInfo.vala:130
 msgid "Could not run duplicity"
 msgstr "A duplicity futtatása sikertelen"
 
-#: ../common/DuplicityInfo.vala:132
+#: ../common/DuplicityInfo.vala:135
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -577,7 +585,7 @@ msgstr ""
 "Ismeretlen duplicity verzió.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:134
+#: ../common/DuplicityInfo.vala:137
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -586,15 +594,15 @@ msgstr ""
 "Ismeretlen duplicity verzió ‘%s’.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:136
+#: ../common/DuplicityInfo.vala:139
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr "A duplicity nélkül a Déjà Dup működésképtelen.  Be fog zárulni."
 
-#: ../common/DuplicityInfo.vala:140
+#: ../common/DuplicityInfo.vala:143
 msgid "Duplicity’s version is too old"
 msgstr "A duplicity túl régi verziójú"
 
-#: ../common/DuplicityInfo.vala:141
+#: ../common/DuplicityInfo.vala:144
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -603,43 +611,43 @@ msgstr ""
 "A Déjà Dup-nak legalább a(z) %d.%d.%.2d verziójú duplicity-re van szüksége, "
 "de csak a(z) %d.%d.%.2d verziójú található meg"
 
-#: ../common/Duplicity.vala:172
+#: ../common/Duplicity.vala:188
 msgid "Paused (no network)"
 msgstr "Szüneteltetve (nincs hálózat)"
 
-#: ../common/Duplicity.vala:212 ../common/Duplicity.vala:220
-#: ../common/Operation.vala:94
+#: ../common/Duplicity.vala:228 ../common/Duplicity.vala:236
+#: ../common/Duplicity.vala:264 ../common/Operation.vala:95
 msgid "Preparing…"
 msgstr "Előkészítés…"
 
-#: ../common/Duplicity.vala:238
+#: ../common/Duplicity.vala:254
 msgid "Creating a fresh backup.  This will take longer than normal."
 msgstr ""
 "Friss biztonsági mentés készítése.  Ez tovább tarthat, mint a normál."
 
-#: ../common/Duplicity.vala:292 ../common/Duplicity.vala:309
+#: ../common/Duplicity.vala:333 ../common/Duplicity.vala:350
 msgid "Cleaning up…"
 msgstr "Tisztítás…"
 
-#: ../common/Duplicity.vala:383 ../common/Duplicity.vala:653
+#: ../common/Duplicity.vala:436 ../common/Duplicity.vala:707
 msgid "Failed with an unknown error."
 msgstr "Ismeretlen hiba lépett fel."
 
-#: ../common/Duplicity.vala:565
+#: ../common/Duplicity.vala:619
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
 "A ‘%s’ helyreállítása sikertelen: A fájl nem található a biztonsági mentésben"
 
-#: ../common/Duplicity.vala:569 ../common/Duplicity.vala:611
+#: ../common/Duplicity.vala:623 ../common/Duplicity.vala:665
 msgid "Bad encryption password."
 msgstr "Rossz titkosítási jelszó."
 
-#: ../common/Duplicity.vala:573
+#: ../common/Duplicity.vala:627
 msgid "Computer name changed"
 msgstr "A számítógép neve megváltozott"
 
-#: ../common/Duplicity.vala:573
+#: ../common/Duplicity.vala:627
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -650,44 +658,44 @@ msgstr ""
 "jelenlegi számítógép neve: %s. Ha ez egy váratlan hiba, akkor mentsen egy "
 "másik helyre."
 
-#: ../common/Duplicity.vala:593
+#: ../common/Duplicity.vala:647
 msgid "Invalid ID."
 msgstr "Érvénytelen azonosító."
 
-#: ../common/Duplicity.vala:595
+#: ../common/Duplicity.vala:649
 msgid "Invalid secret key."
 msgstr "Érvénytelen titkosítási kulcs."
 
-#: ../common/Duplicity.vala:597
+#: ../common/Duplicity.vala:651
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Az Ön Amazon Webszolgáltatás fiókja nincs csatlakoztatva az S3 "
 "szolgáltatáshoz."
 
-#: ../common/Duplicity.vala:606
+#: ../common/Duplicity.vala:660
 msgid "S3 bucket name is not available."
 msgstr "Az S3 bucket név nem áll rendelkezésre."
 
-#: ../common/Duplicity.vala:615
+#: ../common/Duplicity.vala:669
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "A(z) ‘%s’ fájl olvasása sikertelen."
 
-#: ../common/Duplicity.vala:617
+#: ../common/Duplicity.vala:671
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "A(z) ‘%s’ fájl írása sikertelen."
 
-#: ../common/Duplicity.vala:625
+#: ../common/Duplicity.vala:679
 #, c-format
 msgid "No space left in %s"
 msgstr "Nincs több szabad hely a %s -n"
 
-#: ../common/Duplicity.vala:645
+#: ../common/Duplicity.vala:699
 msgid "No backup files found"
 msgstr "Nem találhatóak biztonsági mentési fájlok"
 
-#: ../common/Duplicity.vala:681
+#: ../common/Duplicity.vala:735
 msgid "Uploading…"
 msgstr "Feltöltés…"
 
@@ -695,7 +703,7 @@ msgstr "Feltöltés…"
 msgid "Restoring files…"
 msgstr "Fájlok helyreállítása…"
 
-#: ../common/OperationRestore.vala:168
+#: ../common/OperationRestore.vala:173
 #, c-format
 msgid ""
 "Not all files could be restored. Any files that could not be restored may "
@@ -704,16 +712,16 @@ msgstr ""
 "Nem lehetséges az összes fájl helyreállítása. Azok a fájlok, amelyek nem "
 "állíthatóak vissza, továbbra is megtalálhatóak itt: %s."
 
-#: ../common/OperationRestore.vala:177
+#: ../common/OperationRestore.vala:182
 #, c-format
 msgid "Could not restore %s: %s"
 msgstr "Helyreállítás sikertelen: %s: %s"
 
-#: ../common/Operation.vala:54
+#: ../common/Operation.vala:55
 msgid "Checking for backups…"
 msgstr "Biztonsági mentések ellenőrzése…"
 
-#: ../common/Operation.vala:209
+#: ../common/Operation.vala:210
 msgid "Another Déjà Dup is already running"
 msgstr "Egy másik Déjà Dup már fut"
 
