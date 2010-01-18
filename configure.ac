@@ -86,6 +86,7 @@ AC_SUBST(PREF_LIBS)
 
 PKG_CHECK_MODULES(COMMON,
                   gio-2.0 >= $GIO_REQ_VER
+                  gio-unix-2.0 >= $GIO_REQ_VER
                   gconf-2.0
                   dbus-glib-1
                   gnome-keyring-1)

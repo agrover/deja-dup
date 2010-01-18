@@ -36,12 +36,6 @@ public class DuplicityInstance : Object
     if (verbose_str != null && verbose_str.to_int() > 0)
       verbose = true;
     
-    // Open pipes to communicate with subprocess
-    if (Posix.pipe(pipes) != 0) {
-      done(false, false);
-      return;
-    }
-    
     // Copy current environment, add custom variables
     var myenv = Environment.list_variables();
     int myenv_len = 0;
@@ -83,8 +77,34 @@ public class DuplicityInstance : Object
         argv.append("--archive-dir=" + cache_file.get_path());
     }
     
-    // Add always-there arguments
-    argv.append("--log-fd=%d".printf(pipes[1]));
+    // Add logging argument
+    if (DuplicityInfo.get_default().has_fixed_log_file) {
+      // Make log file
+      int logfd = 0;
+      try {
+        string logname;
+        logfd = FileUtils.open_tmp(Config.PACKAGE + "-XXXXXX", out logname);
+        logfile = File.new_for_path(logname);
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+        done(false, false);
+        return;
+      }
+      
+      argv.append("--log-file=%s".printf(logfile.get_path()));
+    }
+    else {
+      // Open pipes to communicate with subprocess
+      if (Posix.pipe(pipes) != 0) {
+        done(false, false);
+        return;
+      }
+
+      argv.append("--log-fd=%d".printf(pipes[1]));
+    }
+    
+    // Finally, actual duplicity command
     argv.prepend("duplicity");
     
     // Check for ionice to be a good disk citizen
@@ -117,16 +137,12 @@ public class DuplicityInstance : Object
     
     debug("Running the following duplicity (%i) command: %s\n", (int)child_pid, cmd);
     
-    reader = new IOChannel.unix_new(pipes[0]);
-    try {
-      // Don't use an encoding, filenames may have any old bytes in them
-      reader.set_encoding(null);
-    }
-    catch (IOChannelError e) {} // ignore
-    stanza_id = reader.add_watch(IOCondition.IN, read_stanza);
-    Posix.close(pipes[1]);
-    
     watch_id = ChildWatch.add(child_pid, spawn_finished);
+    
+    if (pipes[1] != -1)
+      Posix.close(pipes[1]);
+    
+    read_log();
   }
   
   public bool is_started()
@@ -154,22 +170,21 @@ public class DuplicityInstance : Object
       cont_child();
   }
   
-  uint stanza_id;
   uint watch_id;
   Pid child_pid;
   int[] pipes;
-  IOChannel reader;
+  DataInputStream reader;
+  File logfile;
+  bool process_done;
+  int status;
   construct {
-    reader = null;
     pipes = new int[2];
     pipes[0] = pipes[1] = -1;
   }
+
   
   ~DuplicityInstance()
   {
-    if (stanza_id != 0)
-      Source.remove(stanza_id);
-    
     if (watch_id != 0)
       Source.remove(watch_id);
     
@@ -191,33 +206,67 @@ public class DuplicityInstance : Object
     Posix.kill((Posix.pid_t)child_pid, Posix.SIGCONT);
   }
   
-  bool read_stanza(IOChannel channel, IOCondition cond)
+  async void read_log()
   {
-    string line;
     try {
-      IOStatus status;
-      List<string> stanza = new List<string>();
-      while (true) {
-        status = channel.read_line(out line, null, null);
-        if (status == IOStatus.NORMAL && line != "\n") {
-          if (verbose)
-            print("DUPLICITY: %s", line); // line has line ending
-          stanza.append(line);
-        }
-        else
-          break;
-      }
+      InputStream stream;
       
-      if (verbose)
-        print("\n"); // breather
+      if (logfile != null)
+        stream = yield logfile.read_async(Priority.DEFAULT, null);
+      else
+        stream = new UnixInputStream(pipes[0], true);
       
-      process_stanza(stanza);
+      reader = new DataInputStream(stream);
     }
     catch (Error e) {
       warning("%s\n", e.message);
+      done(false, false);
+      return;
     }
     
-    return true;
+    // This loop goes on while rest of class is doing its work.  We ref
+    // it to make sure that the rest of the class doesn't drop from under us.
+    ref();
+    List<string> stanza = new List<string>();
+    while (reader != null) {
+      try {
+        var line = yield reader.read_line_async(Priority.DEFAULT, null, null);
+        if (line == null) { // EOF
+          if (process_done) {
+            send_done_for_status();
+            break;
+          }
+          else
+            continue;
+        }
+        if (line != "") {
+          if (verbose)
+            print("DUPLICITY: %s\n", line);
+          stanza.append(line);
+        }
+        else if (stanza != null) {
+          if (verbose)
+            print("\n"); // breather
+          
+          process_stanza(stanza);
+          stanza = new List<string>();
+        }
+      }
+      catch (Error err) {
+        warning("%s\n", err.message);
+        break;
+      }
+    }
+    
+    reader = null;
+    if (logfile != null) {
+      try {
+        logfile.delete(null);
+      }
+      catch (Error e2) {warning("%s\n", e2.message);}
+    }
+    
+    unref();
   }
   
   // If start is < 0, starts at word.size() - 1.
@@ -418,51 +467,30 @@ public class DuplicityInstance : Object
   
   void spawn_finished(Pid pid, int status)
   {
-    // Reference ourselves, because when processing stanza we have not
-    // yet gotten to below, whoever owns us might unref us in the middle of
-    // this function, and we don't want to die immediately.  Wait until the
-    // end.
-    ref();
+    this.status = status;
     
-    if (stanza_id != 0)
-      Source.remove(stanza_id);
-    stanza_id = 0;
-    watch_id = 0;
-    
-    bool success = Process.if_exited(status) && Process.exit_status(status) == 0;
-    bool cancelled = !Process.if_exited(status);
-    
-    if (reader != null) {
-      // Get last reads in before we shut down (needed sometimes, not sure why)
-      while (true) {
-        IOCondition cond = reader.get_buffer_condition();
-        if (cond == IOCondition.IN)
-          read_stanza(reader, cond);
-        else
-          break;
-      }
-      
-      if (Process.if_exited(status)) {
-        var exitval = Process.exit_status(status);
-        debug("duplicity (%i) exited with value %i\n", (int)pid, exitval);
-      }
-      else {
-        debug("duplicity (%i) process killed\n", (int)pid);
-      }
-      
-      try {
-        reader.shutdown(false);
-      } catch (Error e) {
-        warning("%s\n", e.message);
-      }
-      reader = null;
+    if (Process.if_exited(status)) {
+      var exitval = Process.exit_status(status);
+      debug("duplicity (%i) exited with value %i\n", (int)pid, exitval);
+    }
+    else {
+      debug("duplicity (%i) process killed\n", (int)pid);
     }
     
+    watch_id = 0;
     Process.close_pid(pid);
-    child_pid = (Pid)0;
     
+    process_done = true;
+    if (reader == null)
+      send_done_for_status();
+  }
+  
+  void send_done_for_status()
+  {
+    bool success = Process.if_exited(status) && Process.exit_status(status) == 0;
+    bool cancelled = !Process.if_exited(status);
+    child_pid = (Pid)0;
     done(success, cancelled);
-    unref();
   }
 }
 

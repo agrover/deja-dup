@@ -36,6 +36,7 @@ public class DuplicityInfo : Object
   public bool has_native_gio {get; private set; default = false; }
   public bool can_resume {get; private set; default = false; }
   public bool has_rename_arg {get; private set; default = false; }
+  public bool has_fixed_log_file {get; private set; default = false; }
   
   static DuplicityInfo info = null;
   public static DuplicityInfo get_default() {
@@ -100,8 +101,10 @@ public class DuplicityInfo : Object
       has_native_gio = true; // had it in 0.6.1, but didn't work on restore
       can_resume = true; // had it in 0.6.0, but didn't quite work right
     }
-    if (meets_version(0, 6, 7))
+    if (meets_version(0, 6, 7)) {
       has_rename_arg = true;
+      has_fixed_log_file = true; // had it since forever, but was buggy
+    }
     
     return true;
   }
