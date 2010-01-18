@@ -38,8 +38,10 @@ public class Duplicity : Object
   public bool error_issued {get; private set; default = false;}
   public bool was_stopped {get; private set; default = false;}
   
-  public string local {get; set;}
+  public File local {get; set;}
   public Backend backend {get; set;}
+  public List<File> includes;
+  public List<File> excludes;
   
   private List<File> _restore_files;
   public List<File> restore_files {
@@ -59,7 +61,7 @@ public class Duplicity : Object
     NORMAL,
     DRY_RUN, // used when backing up, and we need to first get time estimate
     STATUS, // used when backing up, and we need to first get collection info
-    CHECK_HOME, // used when restoring, and we need to list /home
+    CHECK_CONTENTS, // used when restoring, and we need to list /home
     CLEANUP,
     DELETE,
   }
@@ -73,6 +75,7 @@ public class Duplicity : Object
   List<string> saved_envp;
   bool cleaned_up_once = false;
   bool is_full_backup = false;
+  bool needs_root = false;
   
   bool has_progress_total = false;
   double progress_total; // zero, unless we already know limit
@@ -81,8 +84,10 @@ public class Duplicity : Object
   static File slash;
   static File slash_root;
   static File slash_home;
+  static File slash_home_me;
   
-  bool has_checked_home = false;
+  bool has_checked_contents = false;
+  bool has_non_home_contents = false;
   List<File> homes = new List<File>();
   
   bool checked_collection_info = false;
@@ -116,6 +121,7 @@ public class Duplicity : Object
       slash = File.new_for_path("/");
       slash_root = File.new_for_path("/root");
       slash_home = File.new_for_path("/home");
+      slash_home_me = File.new_for_path(Environment.get_home_dir());
     }
   }
   
@@ -141,6 +147,22 @@ public class Duplicity : Object
     backend.add_argv(Operation.Mode.INVALID, ref backend_argv);
     if (!encrypted)
       backend_argv.append("--no-encryption");
+    
+    // Add all exclude and include arguments
+    if (mode == Operation.Mode.BACKUP) {
+      if (excludes != null) {
+        foreach (File f in excludes)
+          saved_argv.append("--exclude=" + f.get_path());
+      }
+      if (includes != null) {
+        foreach (File f in includes) {
+          saved_argv.append("--include=" + f.get_path());
+          //if (!f.has_prefix(slash_home_me))
+          //  needs_root = true;
+        }
+      }
+      saved_argv.append("--exclude=**");
+    }
     
     try {
       delete_age = client.get_int(DELETE_AFTER_KEY);
@@ -214,7 +236,7 @@ public class Duplicity : Object
     
     var extra_argv = new List<string>();
     string action_desc = null;
-    string custom_local = null;
+    File custom_local = null;
     
     switch (original_mode) {
     case Operation.Mode.BACKUP:
@@ -258,9 +280,9 @@ public class Duplicity : Object
       
       break;
     case Operation.Mode.RESTORE:
-      if (!has_checked_home && DuplicityInfo.get_default().has_rename_arg) {
+      if (!has_checked_contents) {
         mode = Operation.Mode.LIST;
-        state = State.CHECK_HOME;
+        state = State.CHECK_CONTENTS;
         action_desc = _("Preparing…");
       }
       else {
@@ -268,12 +290,18 @@ public class Duplicity : Object
         // Only want to bother doing anything if one.  If one, we rename it's
         // home dir to the current user's home dir (i.e. they backed up on one
         // machine as 'alice' and restored on a machine as 'bob').
-        if (homes.length() == 1) {
-          var old_home = homes.data;
-          var new_home = File.new_for_path(Environment.get_home_dir());
-          extra_argv.append("--rename");
-          extra_argv.append(slash.get_relative_path(old_home));
-          extra_argv.append(slash.get_relative_path(new_home));
+        if (homes.length() > 1)
+          has_non_home_contents = true;
+        else if (homes.length() == 1) {
+          if (DuplicityInfo.get_default().has_rename_arg) {
+            var old_home = homes.data;
+            var new_home = slash_home_me;
+            extra_argv.append("--rename");
+            extra_argv.append(slash.get_relative_path(old_home));
+            extra_argv.append(slash.get_relative_path(new_home));
+          }
+          else if (!homes.data.has_prefix(slash_home_me))
+            has_non_home_contents = true;
         }
         
         if (restore_files != null) {
@@ -282,6 +310,8 @@ public class Duplicity : Object
           // make path to specific restore file, since duplicity will just
           // drop the file exactly where you ask it
           var local_file = make_local_rel_path(restore_files.data);
+          if (!local_file.has_prefix(slash_home_me))
+            needs_root = true;
           
           try {
             // won't have correct permissions...
@@ -291,11 +321,16 @@ public class Duplicity : Object
             show_error(e.message);
             return false;
           }
-          custom_local = local_file.get_path();
+          custom_local = local_file;
           
           var rel_file_path = slash.get_relative_path(restore_files.data);
           extra_argv.append("--file-to-restore=%s".printf(rel_file_path));
         }
+        else {
+          if (has_non_home_contents && !this.local.has_prefix(slash_home_me))
+            needs_root = true;
+        }
+        
         if (DuplicityInfo.get_default().has_restore_progress)
           progress(0f);
       }
@@ -314,9 +349,8 @@ public class Duplicity : Object
   
   File make_local_rel_path(File file)
   {
-    File local_file = File.new_for_path(local);
     string rel_file_path = slash.get_relative_path(file);
-    return local_file.resolve_relative_path(rel_file_path);
+    return local.resolve_relative_path(rel_file_path);
   }
   
   bool cleanup() {
@@ -399,9 +433,9 @@ public class Duplicity : Object
         }
         break;
       
-      case State.CHECK_HOME:
+      case State.CHECK_CONTENTS:
         if (success) {
-          has_checked_home = true;
+          has_checked_contents = true;
           mode = Operation.Mode.RESTORE;
           
           if (restart())
@@ -675,7 +709,7 @@ public class Duplicity : Object
         if (mode == Operation.Mode.BACKUP)
           where = backend.get_location_pretty();
         else
-          where = local;
+          where = local.get_path();
         show_error(_("No space left in %s").printf(where));
       }
       else {
@@ -745,11 +779,15 @@ public class Duplicity : Object
   {
     if (mode != Operation.Mode.LIST)
       return;
-    if (state == State.CHECK_HOME) {
+    if (state == State.CHECK_CONTENTS) {
       var gfile = make_file_obj(file);
       if (gfile.equal(slash_root) ||
           (gfile.get_parent() != null && gfile.get_parent().equal(slash_home)))
         homes.append(gfile);
+      if (!has_non_home_contents &&
+          !gfile.equal(slash) &&
+          !gfile.has_prefix(slash_home))
+        has_non_home_contents = true;
     }
   }
   
@@ -916,7 +954,7 @@ public class Duplicity : Object
   void connect_and_start(List<string>? argv_extra = null,
                          List<string>? envp_extra = null,
                          List<string>? argv_entire = null,
-                         string? custom_local = null)
+                         File? custom_local = null)
   {
     disconnect_inst();
 
@@ -925,7 +963,7 @@ public class Duplicity : Object
     inst.message.connect(handle_message);
     
     weak List<string> master_argv = argv_entire == null ? saved_argv : argv_entire;
-    weak string local_arg = custom_local == null ? local : custom_local;
+    weak File local_arg = custom_local == null ? local : custom_local;
     
     var argv = new List<string>();
     foreach (string s in master_argv) argv.append(s);
@@ -939,13 +977,13 @@ public class Duplicity : Object
         if (is_full_backup)
           argv.prepend("full");
         argv.append("--volsize=%d".printf(get_volsize()));
-        argv.append(local_arg);
+        argv.append(local_arg.get_path());
         argv.append(remote);
         break;
       case Operation.Mode.RESTORE:
         argv.prepend("restore");
         argv.append(remote);
-        argv.append(local_arg);
+        argv.append(local_arg.get_path());
         break;
       case Operation.Mode.STATUS:
         argv.prepend("collection-status");
@@ -963,7 +1001,7 @@ public class Duplicity : Object
     foreach (string s in envp_extra) envp.append(s);
     
     try {
-      inst.start(argv, envp);
+      inst.start(argv, envp, needs_root);
     }
     catch (Error e) {
       show_error(e.message);

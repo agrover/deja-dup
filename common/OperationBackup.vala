@@ -55,16 +55,14 @@ public class OperationBackup : Operation
     // Exclude directories no one wants to backup
     var always_excluded = get_always_excluded_dirs();
     foreach (string dir in always_excluded)
-      rv.append("--exclude=%s".printf(dir));
+      dup.excludes.prepend(File.new_for_path(dir));
     
     foreach (File s in exclude_list)
-      rv.append("--exclude=%s".printf(s.get_path()));
+      dup.excludes.prepend(s);
     foreach (File s in include_list)
-      rv.append("--include=%s".printf(s.get_path()));
+      dup.excludes.prepend(s);
     
-    rv.append("--exclude=**");
-    
-    dup.local = "/";
+    dup.local = File.new_for_path("/");
     
     return rv;
   }

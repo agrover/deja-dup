@@ -30,11 +30,15 @@ public class DuplicityInstance : Object
   
   public bool verbose {get; private set; default = false;}
   
-  public virtual void start(List<string> argv_in, List<string>? envp_in) throws SpawnError
+  public virtual void start(List<string> argv_in, List<string>? envp_in,
+                            bool as_root = false) throws SpawnError
   {
     var verbose_str = Environment.get_variable("DEJA_DUP_DEBUG");
     if (verbose_str != null && verbose_str.to_int() > 0)
       verbose = true;
+    
+    if (!DuplicityInfo.get_default().has_fixed_log_file)
+      as_root = false; // without a log file, we can't use gksu
     
     // Copy current environment, add custom variables
     var myenv = Environment.list_variables();
@@ -107,6 +111,66 @@ public class DuplicityInstance : Object
     // Finally, actual duplicity command
     argv.prepend("duplicity");
     
+    // Grab version of command line to show user
+    string user_cmd = null;
+    foreach(string a in argv) {
+      if (a == null)
+        break;
+      if (user_cmd == null)
+        user_cmd = a;
+      else
+        user_cmd = "%s %s".printf(user_cmd, a);
+    }
+    
+    if (as_root) {
+      try {
+        var client = get_gconf_client();
+        if (!client.get_bool(ROOT_PROMPT_KEY))
+          as_root = false;
+      }
+      catch (Error e) {warning("%s\n", e.message);}
+    }
+    
+    // Run as root if needed
+    if (as_root &&
+        Environment.find_program_in_path("gksu") != null &&
+        Environment.find_program_in_path("sh") != null) {
+      // gksu has a restrictive command line maximum length.  To work around
+      // that, we stick the duplicity command inside a temporary script.
+      
+      try {
+        string scriptname;
+        var scriptfd = FileUtils.open_tmp(Config.PACKAGE + "-XXXXXX", out scriptname);
+        scriptfile = File.new_for_path(scriptname);
+        Posix.close(scriptfd);
+        
+        // We have to wrap all current args into one string.
+        StringBuilder args = new StringBuilder();
+        foreach(string a in argv) {
+          if (a == null)
+            break;
+          if (args.len == 0)
+            args.append(Shell.quote(a));
+          else
+            args.append(" " + Shell.quote(a));
+        }
+        scriptfile.replace_contents(args.str, args.len, null, false,
+                                    FileCreateFlags.NONE, null, null);
+        
+        argv = new List<string>(); // reset
+        
+        // gksu command must be one string
+        argv.prepend("sh %s".printf(Shell.quote(scriptfile.get_path())));
+        
+        argv.prepend(Environment.get_application_name());
+        argv.prepend("--description");
+        argv.prepend("gksu");
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
+    }
+    
     // Check for ionice to be a good disk citizen
     if (Environment.find_program_in_path("ionice") != null) {
       argv.prepend("-n7"); // lowest priority
@@ -116,16 +180,10 @@ public class DuplicityInstance : Object
     if (Environment.find_program_in_path("nice") != null)
       argv.prepend("nice");
     
-    string cmd = null;
     string[] real_argv = new string[argv.length()];
     i = 0;
-    foreach(string a in argv) {
+    foreach(string a in argv)
       real_argv[i++] = a;
-      if (cmd == null)
-        cmd = a;
-      else if (a != null)
-        cmd = "%s %s".printf(cmd, a);
-    }
     
     Process.spawn_async_with_pipes(null, real_argv, real_envp,
                         SpawnFlags.SEARCH_PATH |
@@ -135,7 +193,7 @@ public class DuplicityInstance : Object
                         SpawnFlags.STDERR_TO_DEV_NULL,
                         null, out child_pid, null, null, null);
     
-    debug("Running the following duplicity (%i) command: %s\n", (int)child_pid, cmd);
+    debug("Running the following duplicity (%i) command: %s\n", (int)child_pid, user_cmd);
     
     watch_id = ChildWatch.add(child_pid, spawn_finished);
     
@@ -175,13 +233,14 @@ public class DuplicityInstance : Object
   int[] pipes;
   DataInputStream reader;
   File logfile;
+  File scriptfile;
   bool process_done;
   int status;
+  bool processed_a_message;
   construct {
     pipes = new int[2];
     pipes[0] = pipes[1] = -1;
   }
-
   
   ~DuplicityInstance()
   {
@@ -192,6 +251,12 @@ public class DuplicityInstance : Object
       debug("duplicity (%i) process killed\n", (int)child_pid);
       kill_child();
     }
+    
+    try {
+      if (scriptfile != null)
+        scriptfile.delete(null);
+    }
+    catch (Error e) {warning("%s\n", e.message);}
   }
   
   void kill_child() {
@@ -439,6 +504,7 @@ public class DuplicityInstance : Object
     
     var text = grab_stanza_text(stanza);
     
+    processed_a_message = true;
     message(control_line, data, text);
   }
   
@@ -489,6 +555,12 @@ public class DuplicityInstance : Object
   {
     bool success = Process.if_exited(status) && Process.exit_status(status) == 0;
     bool cancelled = !Process.if_exited(status);
+    
+    if (Process.if_exited(status) && !processed_a_message &&
+        (Process.exit_status(status) == 255 || // gksu returns 255 on cancel
+         Process.exit_status(status) == 3)) // and 3 on bad password
+      cancelled = true;
+    
     child_pid = (Pid)0;
     done(success, cancelled);
   }

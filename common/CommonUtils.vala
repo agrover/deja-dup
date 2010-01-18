@@ -25,6 +25,7 @@ public const string GCONF_DIR = "/apps/deja-dup";
 public const string INCLUDE_LIST_KEY = "/apps/deja-dup/include-list";
 public const string EXCLUDE_LIST_KEY = "/apps/deja-dup/exclude-list";
 public const string BACKEND_KEY = "/apps/deja-dup/backend";
+public const string ROOT_PROMPT_KEY = "/apps/deja-dup/root-prompt";
 public const string ENCRYPT_KEY = "/apps/deja-dup/encrypt";
 public const string LAST_RUN_KEY = "/apps/deja-dup/last-run";
 public const string PERIODIC_KEY = "/apps/deja-dup/periodic";

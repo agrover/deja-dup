@@ -69,7 +69,7 @@ public class OperationRestore : Operation
     if (time != null)
       argv.append("--restore-time=%s".printf(time));
     
-    dup.local = source;
+    dup.local = File.new_for_path(source);
     
     return argv;
   }
