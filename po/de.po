@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-11-25 12:51-0500\n"
-"PO-Revision-Date: 2009-11-29 00:33+0000\n"
-"Last-Translator: MixCool <lars.thoms@mixcool.de>\n"
+"POT-Creation-Date: 2009-12-29 09:55-0500\n"
+"PO-Revision-Date: 2010-01-10 23:06+0000\n"
+"Last-Translator: Severin Heiniger <severinheiniger@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-11-30 04:39+0000\n"
+"X-Launchpad-Export-Date: 2010-01-12 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "Datensicherung durchführen"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:38
+#: ../deja-dup/StatusIcon.vala:58
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
@@ -188,7 +188,7 @@ msgstr ""
 msgid "Co_ntinue"
 msgstr "_Fortfahren"
 
-#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:101
+#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:141
 msgid "_Resume Later"
 msgstr "_Später fortsetzen"
 
@@ -273,7 +273,7 @@ msgstr "Datensicherung beendet"
 msgid "Your files were successfully backed up."
 msgstr "Ihre Daten wurden erfolgreich gesichert."
 
-#: ../deja-dup/AssistantBackup.vala:250 ../common/Operation.vala:50
+#: ../deja-dup/AssistantBackup.vala:250 ../common/Operation.vala:51
 msgid "Backing up…"
 msgstr "Sichere..."
 
@@ -395,7 +395,7 @@ msgstr "Wiederherstellung abgeschlossen"
 msgid "Your files were successfully restored."
 msgstr "Ihre Dateien wurden erfolgreich wiederhergestellt."
 
-#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:52
+#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:53
 msgid "Restoring…"
 msgstr "Datenwiederherstellung..."
 
@@ -495,16 +495,24 @@ msgstr "_Passwort:"
 msgid "_Remember secret access key"
 msgstr "An geheimen Zugriffsschlüssel e_rinnern"
 
-#: ../deja-dup/StatusIcon.vala:69
+#: ../deja-dup/StatusIcon.vala:48 ../deja-dup/StatusIcon.vala:133
+msgid "Hide _Progress"
+msgstr ""
+
+#: ../deja-dup/StatusIcon.vala:51 ../deja-dup/StatusIcon.vala:135
+msgid "Show _Progress"
+msgstr ""
+
+#: ../deja-dup/StatusIcon.vala:98
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% abgeschlossen"
 
-#: ../deja-dup/StatusIcon.vala:103
+#: ../deja-dup/StatusIcon.vala:143
 msgid "_Delay Backup"
 msgstr ""
 
-#: ../deja-dup/StatusIcon.vala:108
+#: ../deja-dup/StatusIcon.vala:148
 msgid "_Skip Backup"
 msgstr "Datensicherung überspringen"
 
@@ -527,6 +535,8 @@ msgstr ""
 #: ../common/BackendFile.vala:132 ../common/BackendS3.vala:51
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
+"Die Datensicherung wird durchgeführt, sobald eine Internet-Verbindung "
+"besteht."
 
 #: ../common/BackendFile.vala:365
 msgid "Backup location not available"
@@ -555,11 +565,11 @@ msgstr "Amazon S3-Zugriffsschlüssel eingeben"
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: ../common/DuplicityInfo.vala:127
+#: ../common/DuplicityInfo.vala:130
 msgid "Could not run duplicity"
 msgstr "Duplicity konnte nicht ausgeführt werden"
 
-#: ../common/DuplicityInfo.vala:132
+#: ../common/DuplicityInfo.vala:135
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -567,22 +577,22 @@ msgstr ""
 "Version von Duplicity konnte nicht ausgelesen werden.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:134
+#: ../common/DuplicityInfo.vala:137
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
 "\n"
 msgstr ""
 
-#: ../common/DuplicityInfo.vala:136
+#: ../common/DuplicityInfo.vala:139
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr "Déjà Dup funktioniert ohne Duplicity nicht und wird nun beendet."
 
-#: ../common/DuplicityInfo.vala:140
+#: ../common/DuplicityInfo.vala:143
 msgid "Duplicity’s version is too old"
 msgstr "Die Duplicity Version ist veraltet."
 
-#: ../common/DuplicityInfo.vala:141
+#: ../common/DuplicityInfo.vala:144
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -591,42 +601,42 @@ msgstr ""
 "Déjà Dup benötigt mindestens Duplicity Version %d.%d.%.2d, es konnte aber "
 "nur Duplicity Version %d.%d.%.2d gefunden werden."
 
-#: ../common/Duplicity.vala:172
+#: ../common/Duplicity.vala:188
 msgid "Paused (no network)"
 msgstr "Angehalten (keine Netzwerkverbindung)"
 
-#: ../common/Duplicity.vala:212 ../common/Duplicity.vala:220
-#: ../common/Operation.vala:94
+#: ../common/Duplicity.vala:228 ../common/Duplicity.vala:236
+#: ../common/Duplicity.vala:264 ../common/Operation.vala:95
 msgid "Preparing…"
 msgstr "Bereite vor..."
 
-#: ../common/Duplicity.vala:238
+#: ../common/Duplicity.vala:254
 msgid "Creating a fresh backup.  This will take longer than normal."
 msgstr ""
 "Lege eine neue Sicherung an. Dies wird länger als die gewohnte Zeit dauern."
 
-#: ../common/Duplicity.vala:292 ../common/Duplicity.vala:309
+#: ../common/Duplicity.vala:333 ../common/Duplicity.vala:350
 msgid "Cleaning up…"
 msgstr "Räume auf..."
 
-#: ../common/Duplicity.vala:383 ../common/Duplicity.vala:653
+#: ../common/Duplicity.vala:436 ../common/Duplicity.vala:707
 msgid "Failed with an unknown error."
 msgstr "Mit unbekanntem Fehler fehlgeschlagen"
 
-#: ../common/Duplicity.vala:565
+#: ../common/Duplicity.vala:619
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
 
-#: ../common/Duplicity.vala:569 ../common/Duplicity.vala:611
+#: ../common/Duplicity.vala:623 ../common/Duplicity.vala:665
 msgid "Bad encryption password."
 msgstr "Falsches Passwort zum Verschlüsseln."
 
-#: ../common/Duplicity.vala:573
+#: ../common/Duplicity.vala:627
 msgid "Computer name changed"
 msgstr "Rechnername wurde geändert"
 
-#: ../common/Duplicity.vala:573
+#: ../common/Duplicity.vala:627
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -634,44 +644,44 @@ msgid ""
 "location."
 msgstr ""
 
-#: ../common/Duplicity.vala:593
+#: ../common/Duplicity.vala:647
 msgid "Invalid ID."
 msgstr "Ungültige Kennung."
 
-#: ../common/Duplicity.vala:595
+#: ../common/Duplicity.vala:649
 msgid "Invalid secret key."
 msgstr "Ungültiger geheimer Schlüssel."
 
-#: ../common/Duplicity.vala:597
+#: ../common/Duplicity.vala:651
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Das angegebene Amazon Web-Services-Konto ist nicht für den S3-Dienst "
 "eingetragen."
 
-#: ../common/Duplicity.vala:606
+#: ../common/Duplicity.vala:660
 msgid "S3 bucket name is not available."
 msgstr "S3 Bucket-Name ist nicht verfügbar."
 
-#: ../common/Duplicity.vala:615
+#: ../common/Duplicity.vala:669
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Fehler beim Lesen der Datei '%s'."
 
-#: ../common/Duplicity.vala:617
+#: ../common/Duplicity.vala:671
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Fehler beim Schreiben der Datei '%s'."
 
-#: ../common/Duplicity.vala:625
+#: ../common/Duplicity.vala:679
 #, c-format
 msgid "No space left in %s"
 msgstr "Nicht genügend Speicherplatz unter %s verfügbar"
 
-#: ../common/Duplicity.vala:645
+#: ../common/Duplicity.vala:699
 msgid "No backup files found"
 msgstr "Keine Datensicherungsdateien gefunden"
 
-#: ../common/Duplicity.vala:681
+#: ../common/Duplicity.vala:735
 msgid "Uploading…"
 msgstr ""
 
@@ -679,7 +689,7 @@ msgstr ""
 msgid "Restoring files…"
 msgstr "Stelle Dateien wieder her..."
 
-#: ../common/OperationRestore.vala:168
+#: ../common/OperationRestore.vala:173
 #, c-format
 msgid ""
 "Not all files could be restored. Any files that could not be restored may "
@@ -688,16 +698,16 @@ msgstr ""
 "Nicht alle Dateien konnten wiederhergestellt werden. Die Dateien, die nicht "
 "wiederhergestellt werden konnten, befinden sich möglicherweise noch in %s."
 
-#: ../common/OperationRestore.vala:177
+#: ../common/OperationRestore.vala:182
 #, c-format
 msgid "Could not restore %s: %s"
 msgstr "%s: %s konnte nicht wiederhergestellt werden"
 
-#: ../common/Operation.vala:54
+#: ../common/Operation.vala:55
 msgid "Checking for backups…"
 msgstr "Suche nach Sicherungen..."
 
-#: ../common/Operation.vala:209
+#: ../common/Operation.vala:210
 msgid "Another Déjà Dup is already running"
 msgstr "Déjà Dup wird bereits ausgeführt"
 
@@ -708,8 +718,8 @@ msgstr ""
 #: ../nautilus/NautilusExtension.c:95
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Auf frühere Version zurücksetzen..."
+msgstr[1] "Auf frühere Versionen zurücksetzen..."
 
 #: ../nautilus/NautilusExtension.c:99
 msgid "Restore file from backup"
@@ -853,7 +863,9 @@ msgstr ""
 "  Maximilian Blömer https://launchpad.net/~maxbloemer\n"
 "  Michael Terry https://launchpad.net/~mterry\n"
 "  MixCool https://launchpad.net/~mixcool\n"
-"  Philipp Wolfer https://launchpad.net/~phw"
+"  Philipp Wolfer https://launchpad.net/~phw\n"
+"  Severin Heiniger https://launchpad.net/~lantash\n"
+"  Tobias Baldauf https://launchpad.net/~technopagan"
 
 #: ../widgets/WidgetUtils.vala:82
 #, c-format
