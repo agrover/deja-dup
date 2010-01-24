@@ -60,7 +60,7 @@ public class OperationBackup : Operation
     foreach (File s in exclude_list)
       dup.excludes.prepend(s);
     foreach (File s in include_list)
-      dup.excludes.prepend(s);
+      dup.includes.prepend(s);
     
     dup.local = File.new_for_path("/");
     
