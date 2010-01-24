@@ -253,8 +253,7 @@ public int get_full_backup_threshold()
     // 3) The longer we wait, the less annoying we are, since full backups 
     //    take a long time.
     // So we try to do them at reasonable times.  But almost nobody should be
-    // going longer than 6 months without a full backup, and nobody should
-    // really be making full backups shorter than 2 weeks.  Further, we want
+    // going longer than 6 months without a full backup.  Further, we want
     // to try to keep at least 2 full backups around, so also don't allow a
     // longer full threshold than half the delete age.
     // 
@@ -263,7 +262,7 @@ public int get_full_backup_threshold()
     // 'biweekly' gets 6 months: 14 * 12
     // 'monthly' gets 6 months: 28 * 12 => 24 * 7
     var max = 24 * 7; // 6 months
-    var min = 2 * 7; // 2 weeks
+    var min = 4 * 7; // 4 weeks
     var scale = 12;
     var min_fulls = 2;
     
