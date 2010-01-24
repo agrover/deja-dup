@@ -273,7 +273,10 @@ public class Duplicity : Object
           }
           if (!full_backup.valid() || threshold.compare(full_backup) > 0) {
             is_full_backup = true;
-            secondary_desc_changed(_("Creating a fresh backup.  This will take longer than normal."));
+            if (!full_backup.valid())
+              secondary_desc_changed(_("Creating the first backup.  This may take a while."));
+            else
+              secondary_desc_changed(_("Creating a fresh backup to protect against backup corruption.  This will take longer than normal."));
           }
         }
       }
