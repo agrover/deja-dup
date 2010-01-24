@@ -24,6 +24,9 @@ update-pot:
 	$(MAKE) -C help update-pot
 dist-hook: update-pot
 
+release: dist
+	gpg --armor --sign --detach-sig deja-dup-$(PACKAGE_VERSION).tar.bz2
+
 ACLOCAL_AMFLAGS = -I m4
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
