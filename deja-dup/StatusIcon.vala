@@ -31,7 +31,7 @@ public class StatusIcon : Object
   double progress;
 
   Gtk.Menu menu;
-  Gtk.MenuItem toggle_item;
+  Gtk.CheckMenuItem toggle_item;
   Object iconobj;
   
   public StatusIcon(Gtk.Window? window, DejaDup.Operation op, bool automatic)
@@ -45,10 +45,10 @@ public class StatusIcon : Object
     
     if (window != null) {
       window.show.connect((w) => {
-        toggle_item.label = _("Hide _Progress");
+        toggle_item.active = true;
       });
       window.hide.connect((w) => {
-        toggle_item.label = _("Show _Progress");
+        toggle_item.active = false;
       });
     }
     
@@ -129,13 +129,11 @@ public class StatusIcon : Object
 
     Gtk.MenuItem item;
 
-    if (window.visible)
-      item = new Gtk.MenuItem.with_mnemonic(_("Hide _Progress"));
-    else
-      item = new Gtk.MenuItem.with_mnemonic(_("Show _Progress"));
-    item.activate.connect((i) => {toggle_window();});
-    menu.append(item);
-    toggle_item = item;
+    var check = new Gtk.CheckMenuItem.with_mnemonic(_("Show _Progress"));
+    check.active = window.visible;
+    check.toggled.connect((i) => {toggle_window();});
+    menu.append(check);
+    toggle_item = check;
 
     if (DejaDup.DuplicityInfo.get_default().can_resume)
       item = new Gtk.MenuItem.with_mnemonic(_("_Resume Later"));
