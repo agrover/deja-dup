@@ -18,14 +18,14 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 # Sets up autoconf.
-AC_INIT([Déjà Dup],[13.6],[deja-dup-team@lists.launchpad.net],[deja-dup])
-AC_PREREQ([2.53])
+AC_INIT([Déjà Dup],[13.6],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup], [https://launchpad.net/deja-dup])
+AC_PREREQ(2.64)
 AC_CONFIG_SRCDIR(deja-dup/main.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
 AC_CONFIG_MACRO_DIR([m4])
 
 # Sets up automake.
-AM_INIT_AUTOMAKE([1.9 foreign dist-bzip2])
+AM_INIT_AUTOMAKE([1.10 foreign dist-bzip2])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 GNOME_DOC_INIT
@@ -34,7 +34,9 @@ GNOME_DOC_INIT
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
-AC_PROG_LIBTOOL
+
+LT_PREREQ([2.2.6])
+LT_INIT
 
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 AM_GCONF_SOURCE_2
@@ -50,7 +52,7 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext domain])
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.17])
-AC_PROG_INTLTOOL([0.37])
+IT_PROG_INTLTOOL([0.40])
 
 # Sets up a few prefix-relative directories
 if test "x${prefix}" = "xNONE"; then
