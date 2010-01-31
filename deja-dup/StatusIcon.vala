@@ -57,12 +57,8 @@ public class StatusIcon : Object
       gtkicon.set("icon-name", "deja-dup-symbolic",
                   "title", _("Déjà Dup")); // Only in GTK+ 2.18
       
-      if (op.mode == DejaDup.Operation.Mode.BACKUP)
-        gtkicon.popup_menu.connect(show_menu);
-
-      gtkicon.activate.connect((s) => {
-        toggle_window();
-      });
+      gtkicon.popup_menu.connect(show_menu);
+      gtkicon.activate.connect((s) => {show_menu(s, 0, Gtk.get_current_event_time());});
 
       op.action_desc_changed.connect(set_action_desc);
       op.progress.connect(note_progress);
@@ -127,25 +123,27 @@ public class StatusIcon : Object
     
     menu = new Gtk.Menu();
 
-    Gtk.MenuItem item;
-
     var check = new Gtk.CheckMenuItem.with_mnemonic(_("Show _Progress"));
     check.active = window.visible;
     check.toggled.connect((i) => {toggle_window();});
     menu.append(check);
     toggle_item = check;
 
-    if (DejaDup.DuplicityInfo.get_default().can_resume)
-      item = new Gtk.MenuItem.with_mnemonic(_("_Resume Later"));
-    else
-      item = new Gtk.MenuItem.with_mnemonic(_("_Delay Backup"));
-    item.activate.connect((i) => {later();});
-    menu.append(item);
+    if (op.mode == DejaDup.Operation.Mode.BACKUP) {
+      Gtk.MenuItem item;
 
-    if (automatic) {
-      item = new Gtk.MenuItem.with_mnemonic(_("_Skip Backup"));
-      item.activate.connect((i) => {skip();});
+      if (DejaDup.DuplicityInfo.get_default().can_resume)
+        item = new Gtk.MenuItem.with_mnemonic(_("_Resume Later"));
+      else
+        item = new Gtk.MenuItem.with_mnemonic(_("_Delay Backup"));
+      item.activate.connect((i) => {later();});
       menu.append(item);
+
+      if (automatic) {
+        item = new Gtk.MenuItem.with_mnemonic(_("_Skip Backup"));
+        item.activate.connect((i) => {skip();});
+        menu.append(item);
+      }
     }
     
     menu.show_all();
