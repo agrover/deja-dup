@@ -525,7 +525,7 @@ public class DuplicityInstance : Object
     foreach (string line in stanza) {
       if (line.has_prefix(". ")) {
         var split = line.split(". ", 2);
-        text = "%s%s".printf(text, validated_string(split[1]));
+        text = "%s%s\n".printf(text, validated_string(split[1]));
       }
     }
     return text.chomp();
