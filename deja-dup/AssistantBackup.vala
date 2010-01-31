@@ -244,6 +244,8 @@ public class AssistantBackup : AssistantOperation
 
         if (automatic)
           Idle.add(() => {do_close(); return false;});
+        else
+          Idle.add(() => {force_visible(false); return false;});
       }
     }
     else if (page == progress_page) {
