@@ -242,7 +242,7 @@ public class AssistantRestore : AssistantOperation
     confirm_files_label.set("xalign", 0.0f, "yalign", 0.0f);
     confirm_files = new Gtk.VBox(true, 6);
     confirm_files_row = rows;
-    page.attach(confirm_files_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(confirm_files_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     page.attach(confirm_files, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
     ++rows;
     
