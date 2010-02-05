@@ -94,7 +94,7 @@ public class ConfigList : ConfigWidget
   
   protected override void set_from_config()
   {
-    weak SList<string> slist;
+    SList<string> slist;
     try {
       slist = client.get_list(key, GConf.ValueType.STRING);
     }
@@ -171,7 +171,7 @@ public class ConfigList : ConfigWidget
     SList<string> files = dlg.get_filenames();
     dlg.destroy();
     
-    weak SList<string> slist;
+    SList<string> slist;
     try {
       slist = client.get_list(key, GConf.ValueType.STRING);
       
@@ -192,7 +192,7 @@ public class ConfigList : ConfigWidget
     }
     catch (Error e) {
       warning("%s\n", e.message);
-      slist = files;
+      slist = files.copy();
     }
     
     try {
@@ -210,7 +210,7 @@ public class ConfigList : ConfigWidget
     if (paths == null)
       return;
     
-    weak SList<string> slist;
+    SList<string> slist;
     try {
       slist = client.get_list(key, GConf.ValueType.STRING);
     }

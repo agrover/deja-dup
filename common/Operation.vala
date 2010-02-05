@@ -34,6 +34,7 @@ public abstract class Operation : Object
   
   public uint xid {get; construct;}
   public bool needs_password {get; private set;}
+  public Backend backend {get; private set;}
   
   public enum Mode {
     INVALID,
@@ -76,7 +77,6 @@ public abstract class Operation : Object
   }
 
   protected Duplicity dup;
-  protected Backend backend;
   protected string passphrase;
   construct
   {

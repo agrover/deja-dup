@@ -31,11 +31,3 @@ void hacks_status_icon_close_app_indicator (GLib.Object icon);
 
 [CCode (cheader_filename = "whacks.h")]
 Gtk.Label hacks_make_link_label (string text);
-
-[CCode (cprefix = "G", lower_case_cprefix = "g_", cheader_filename = "glib.h")]
-namespace GLib {
-	public class ParamSpecString : ParamSpec {
-		[CCode (cname = "g_param_spec_string")]
-		public ParamSpecString (string name, string nick, string blurb, string default_value, ParamFlags flags);
-	}
-}

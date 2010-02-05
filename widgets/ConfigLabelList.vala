@@ -36,7 +36,7 @@ public class ConfigLabelList : ConfigLabel
   protected override void set_from_config()
   {
     string val = "";
-    weak SList<string> slist;
+    SList<string> slist;
     try {
       slist = client.get_list(key, GConf.ValueType.STRING);
     }
