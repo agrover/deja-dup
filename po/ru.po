@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-12-29 09:55-0500\n"
-"PO-Revision-Date: 2010-01-10 09:01+0000\n"
-"Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
+"POT-Creation-Date: 2010-01-24 09:28-0500\n"
+"PO-Revision-Date: 2010-01-24 18:26+0000\n"
+"Last-Translator: Sergey Sedov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-01-11 04:56+0000\n"
+"X-Launchpad-Export-Date: 2010-01-25 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../deja-dup/AssistantRestore.vala:264
@@ -180,6 +180,16 @@ msgid "Whether to periodically backup"
 msgstr "Выполнять ли периодическое резервное копирование"
 
 #: ../data/deja-dup.schemas.in.h:23
+msgid "Whether to request the root password"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:24
+msgid ""
+"Whether to request the root password when backing up from or retoring to "
+"system folders."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:25
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -187,7 +197,7 @@ msgstr ""
 "В каком наборе (bucket) Amazon S3 хранить файлы. Он не обязательно должен "
 "существовать. Только действительное имя хоста допустимо."
 
-#: ../data/deja-dup.schemas.in.h:24
+#: ../data/deja-dup.schemas.in.h:26
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Ваш S3 Access Key Identifier. Выступает в роли вашего имени пользователя на "
@@ -565,15 +575,15 @@ msgstr "Отказано в доступе"
 msgid "Enter Amazon S3 access key"
 msgstr "Введите ключ доступа Amazon S3"
 
-#: ../common/CommonUtils.vala:239
+#: ../common/CommonUtils.vala:240
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: ../common/DuplicityInfo.vala:130
+#: ../common/DuplicityInfo.vala:133
 msgid "Could not run duplicity"
 msgstr "Не могу запустить duplicity"
 
-#: ../common/DuplicityInfo.vala:135
+#: ../common/DuplicityInfo.vala:138
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -581,7 +591,7 @@ msgstr ""
 "Не смог распознать версию duplicity.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:137
+#: ../common/DuplicityInfo.vala:140
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -590,15 +600,15 @@ msgstr ""
 "Не удалось распознать версию duplicity ‘%s’.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:139
+#: ../common/DuplicityInfo.vala:142
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr "Déjà Dup не может работать без duplicity. Завершение программы."
 
-#: ../common/DuplicityInfo.vala:143
+#: ../common/DuplicityInfo.vala:146
 msgid "Duplicity’s version is too old"
 msgstr "Версия duplicity слишком старая"
 
-#: ../common/DuplicityInfo.vala:144
+#: ../common/DuplicityInfo.vala:147
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -607,41 +617,50 @@ msgstr ""
 "Déjà Dup требуется по меньшей мере версия %d.%d.%.2d duplicity, но найдена "
 "только версия %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:188
+#: ../common/Duplicity.vala:210
 msgid "Paused (no network)"
 msgstr "Приостановлено (нет сети)"
 
-#: ../common/Duplicity.vala:228 ../common/Duplicity.vala:236
-#: ../common/Duplicity.vala:264 ../common/Operation.vala:95
+#: ../common/Duplicity.vala:250 ../common/Duplicity.vala:258
+#: ../common/Duplicity.vala:289 ../common/Operation.vala:95
 msgid "Preparing…"
 msgstr "Подготовка..."
 
-#: ../common/Duplicity.vala:254
-msgid "Creating a fresh backup.  This will take longer than normal."
-msgstr "Создаётся \"свежая\" резервная копия. Подождите..."
+#: ../common/Duplicity.vala:277
+msgid "Creating the first backup.  This may take a while."
+msgstr ""
+"Резервная копия создаётся первый раз. Это может занять некоторое время."
 
-#: ../common/Duplicity.vala:333 ../common/Duplicity.vala:350
+#: ../common/Duplicity.vala:279
+msgid ""
+"Creating a fresh backup to protect against backup corruption.  This will "
+"take longer than normal."
+msgstr ""
+"Создаётся полная копия для защиты от возможных повреждений. Это может занять "
+"времени больше, чем обычно."
+
+#: ../common/Duplicity.vala:370 ../common/Duplicity.vala:387
 msgid "Cleaning up…"
 msgstr "Очистка..."
 
-#: ../common/Duplicity.vala:436 ../common/Duplicity.vala:707
+#: ../common/Duplicity.vala:473 ../common/Duplicity.vala:744
 msgid "Failed with an unknown error."
 msgstr "Не удалось (неизвестная ошибка)"
 
-#: ../common/Duplicity.vala:619
+#: ../common/Duplicity.vala:656
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Не удалось восстановить  ‘%s’: файл не найден в резервной копии"
 
-#: ../common/Duplicity.vala:623 ../common/Duplicity.vala:665
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:702
 msgid "Bad encryption password."
 msgstr "Не правильный пароль шифрования"
 
-#: ../common/Duplicity.vala:627
+#: ../common/Duplicity.vala:664
 msgid "Computer name changed"
 msgstr "Изменилось название компьютера"
 
-#: ../common/Duplicity.vala:627
+#: ../common/Duplicity.vala:664
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -651,42 +670,42 @@ msgstr ""
 "Существующая копия относится к компьютеру %s, но имя текущего компьютера %s. "
 "Возможно вы должны востановить копию в другое место."
 
-#: ../common/Duplicity.vala:647
+#: ../common/Duplicity.vala:684
 msgid "Invalid ID."
 msgstr "Неправильный ID."
 
-#: ../common/Duplicity.vala:649
+#: ../common/Duplicity.vala:686
 msgid "Invalid secret key."
 msgstr "Не правильный секретный ключ."
 
-#: ../common/Duplicity.vala:651
+#: ../common/Duplicity.vala:688
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Ваш аккаунт на службе Amazon не имеет подписки на сервис S3."
 
-#: ../common/Duplicity.vala:660
+#: ../common/Duplicity.vala:697
 msgid "S3 bucket name is not available."
 msgstr "Имя набора (bucket) S3 недоступно."
 
-#: ../common/Duplicity.vala:669
+#: ../common/Duplicity.vala:706
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Ошибка чтения файла ‘%s’."
 
-#: ../common/Duplicity.vala:671
+#: ../common/Duplicity.vala:708
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Ошибка записи файла ‘%s’."
 
-#: ../common/Duplicity.vala:679
+#: ../common/Duplicity.vala:716
 #, c-format
 msgid "No space left in %s"
 msgstr "Не осталось места в %s"
 
-#: ../common/Duplicity.vala:699
+#: ../common/Duplicity.vala:736
 msgid "No backup files found"
 msgstr "Резервных копий не обнаружено"
 
-#: ../common/Duplicity.vala:735
+#: ../common/Duplicity.vala:772
 msgid "Uploading…"
 msgstr "Загрузка..."
 
@@ -1630,3 +1649,6 @@ msgstr ""
 #~ msgstr[0] "Вернуться к предыдущей версии..."
 #~ msgstr[1] "Вернуться к предыдущим версиям..."
 #~ msgstr[2] "Вернуться к предыдущим версиям..."
+
+#~ msgid "Creating a fresh backup.  This will take longer than normal."
+#~ msgstr "Создаётся \"свежая\" резервная копия. Подождите..."
