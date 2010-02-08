@@ -33,6 +33,7 @@ public class StatusIcon : Object
   Gtk.Menu menu;
   Gtk.CheckMenuItem toggle_item;
   Object iconobj;
+  Gtk.StatusIcon gtkicon;
   
   public StatusIcon(Gtk.Window? window, DejaDup.Operation op, bool automatic)
   {
@@ -53,18 +54,18 @@ public class StatusIcon : Object
     }
     
     if (iconobj == null) {
-      var gtkicon = new Gtk.StatusIcon();
+      gtkicon = new Gtk.StatusIcon();
       gtkicon.set("icon-name", "deja-dup-symbolic",
                   "title", _("Déjà Dup")); // Only in GTK+ 2.18
       
       gtkicon.popup_menu.connect(show_menu);
       gtkicon.activate.connect((s) => {show_menu(s, 0, Gtk.get_current_event_time());});
 
-      op.action_desc_changed.connect(set_action_desc);
-      op.progress.connect(note_progress);
-      
       iconobj = gtkicon;
     }
+
+    op.action_desc_changed.connect(set_action_desc);
+    op.progress.connect(note_progress);
   }
 
   ~StatusIcon()
@@ -76,23 +77,30 @@ public class StatusIcon : Object
   void set_action_desc(DejaDup.Operation op, string action)
   {
     this.action = action;
-    update_tooltip();
+    update_progress();
   }
 
   void note_progress(DejaDup.Operation op, double progress)
   {
     this.progress = progress;
-    update_tooltip();
+    update_progress();
   }
 
-  void update_tooltip()
+  void update_progress()
   {
-    var tooltip = "";
-    if (this.action != null)
-      tooltip = this.action;
+    if (gtkicon != null) {
+      var tooltip = "";
+      if (this.action != null)
+        tooltip = this.action;
+      if (this.progress > 0)
+        tooltip = tooltip + "\n" + _("%.1f%% complete").printf(this.progress * 100);
+      hacks_status_icon_set_tooltip_text(gtkicon, tooltip);
+    }
+
     if (this.progress > 0)
-      tooltip = tooltip + "\n" + _("%.1f%% complete").printf(this.progress * 100);
-    hacks_status_icon_set_tooltip_text((Gtk.StatusIcon)iconobj, tooltip);
+      toggle_item.label = _("Show _Progress (%.1f%%)").printf(this.progress * 100);
+    else
+      toggle_item.label = _("Show _Progress");
   }
 
   void later()
@@ -123,11 +131,13 @@ public class StatusIcon : Object
     
     menu = new Gtk.Menu();
 
-    var check = new Gtk.CheckMenuItem.with_mnemonic(_("Show _Progress"));
+    var check = new Gtk.CheckMenuItem();
     check.active = window.visible;
+    check.use_underline = true;
     check.toggled.connect((i) => {toggle_window();});
     menu.append(check);
     toggle_item = check;
+    update_progress();
 
     if (op.mode == DejaDup.Operation.Mode.BACKUP) {
       Gtk.MenuItem item;
