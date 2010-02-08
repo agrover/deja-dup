@@ -83,7 +83,7 @@ def test():
     base.set_gconf_value("last-run", "fake")
   
   if prog is None:
-    base.start_deja_dup()
+    base.start_deja_dup(waitfor=None)
     base.wait_for_quit()
   elif prog == 'applet':
     base.start_deja_dup_applet()
