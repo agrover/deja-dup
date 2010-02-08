@@ -24,7 +24,7 @@ update-pot:
 	$(MAKE) -C help update-pot
 dist-hook: update-pot
 
-release: dist
+release: distcheck
 	gpg --armor --sign --detach-sig deja-dup-$(PACKAGE_VERSION).tar.bz2
 
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
