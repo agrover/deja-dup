@@ -205,6 +205,13 @@ public class MountOperationAssistant : MountOperation
     else
       password_w = null;
 
+    var w = new Gtk.CheckButton.with_mnemonic(s3_mode ? _("S_how secret access key") :
+                                                        _("S_how password"));
+    ((Gtk.CheckButton)w).toggled.connect((button) => {
+      password_w.visibility = button.get_active();
+    });
+    layout.pack_start(w, false, false, 0);
+
     if ((flags & AskPasswordFlags.SAVING_SUPPORTED) != 0) {
       var label_txt = s3_mode ? _("_Remember secret access key") : _("_Remember password");
       remember_w = new Gtk.CheckButton.with_mnemonic(label_txt);

@@ -261,6 +261,13 @@ public abstract class AssistantOperation : Assistant
     ++rows;
     encrypt_entry = (Gtk.Entry)w;
 
+    w = new Gtk.CheckButton.with_mnemonic(_("_Show password"));
+    ((Gtk.CheckButton)w).toggled.connect((button) => {
+      encrypt_entry.visibility = button.get_active();
+    });
+    page.attach(w, 0, 2, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    ++rows;
+
     w = new Gtk.CheckButton.with_mnemonic(_("_Remember password"));
     page.attach(w, 0, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
     ++rows;
