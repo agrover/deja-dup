@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-18 19:36-0500\n"
-"PO-Revision-Date: 2010-01-19 01:27+0000\n"
+"POT-Creation-Date: 2010-02-08 16:46-0500\n"
+"PO-Revision-Date: 2010-02-10 19:39+0000\n"
 "Last-Translator: Marián Bača <majoobaca@gmail.com>\n"
 "Language-Team: Slovak <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2010-01-20 04:36+0000\n"
+"X-Launchpad-Export-Date: 2010-02-11 05:03+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "Zálohovať vaše súbory"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:58
+#: ../deja-dup/StatusIcon.vala:59
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
@@ -175,13 +175,15 @@ msgstr "Ako často pravidelne zálohovať"
 
 #: ../data/deja-dup.schemas.in.h:23
 msgid "Whether to request the root password"
-msgstr ""
+msgstr "Požadovať root heslo"
 
 #: ../data/deja-dup.schemas.in.h:24
 msgid ""
-"Whether to request the root password when backing up from or restoring to "
+"Whether to request the root password when backing up from or retoring to "
 "system folders."
 msgstr ""
+"Požadovať root heslo pri zálohovaní alebo obnovovaní do systémových "
+"priečinkov."
 
 #: ../data/deja-dup.schemas.in.h:25
 msgid ""
@@ -199,7 +201,7 @@ msgstr "Vaše Amazon S3 identifikačné číslo. Ide o vaše prihlasovacie meno.
 msgid "Co_ntinue"
 msgstr "_Pokračovať"
 
-#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:141
+#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:146
 msgid "_Resume Later"
 msgstr "Po_kračovať neskôr"
 
@@ -284,7 +286,7 @@ msgstr "Záloha dokončená"
 msgid "Your files were successfully backed up."
 msgstr "Vaše súbory boli úspešne zálohované."
 
-#: ../deja-dup/AssistantBackup.vala:250 ../common/Operation.vala:51
+#: ../deja-dup/AssistantBackup.vala:252 ../common/Operation.vala:52
 msgid "Backing up…"
 msgstr "Zálohuje sa..."
 
@@ -407,7 +409,7 @@ msgstr "Obnova dokončená"
 msgid "Your files were successfully restored."
 msgstr "Vaše súbory boli úspešne obnovené."
 
-#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:53
+#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:54
 msgid "Restoring…"
 msgstr "Obnovuje sa..."
 
@@ -506,24 +508,25 @@ msgstr "_Heslo:"
 msgid "_Remember secret access key"
 msgstr "_Zapamätať si tajný prístupový kľúč"
 
-#: ../deja-dup/StatusIcon.vala:48 ../deja-dup/StatusIcon.vala:133
-msgid "Hide _Progress"
-msgstr "_Skryť postup"
-
-#: ../deja-dup/StatusIcon.vala:51 ../deja-dup/StatusIcon.vala:135
-msgid "Show _Progress"
-msgstr "_Zobraziť postup"
-
-#: ../deja-dup/StatusIcon.vala:98
+#: ../deja-dup/StatusIcon.vala:96
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% je hotové"
 
-#: ../deja-dup/StatusIcon.vala:143
+#: ../deja-dup/StatusIcon.vala:101
+#, c-format
+msgid "Show _Progress (%.1f%%)"
+msgstr "_Zobraziť postup (%.1f%%)"
+
+#: ../deja-dup/StatusIcon.vala:103
+msgid "Show _Progress"
+msgstr "_Zobraziť postup"
+
+#: ../deja-dup/StatusIcon.vala:148
 msgid "_Delay Backup"
 msgstr "_Odložiť zálohovanie"
 
-#: ../deja-dup/StatusIcon.vala:148
+#: ../deja-dup/StatusIcon.vala:153
 msgid "_Skip Backup"
 msgstr "Z_rušiť zálohovanie"
 
@@ -617,36 +620,44 @@ msgid "Paused (no network)"
 msgstr "Pozastavené (žiadna sieť)"
 
 #: ../common/Duplicity.vala:250 ../common/Duplicity.vala:258
-#: ../common/Duplicity.vala:286 ../common/Operation.vala:95
+#: ../common/Duplicity.vala:289 ../common/Operation.vala:95
 msgid "Preparing…"
 msgstr "Pripravuje sa..."
 
-#: ../common/Duplicity.vala:276
-msgid "Creating a fresh backup.  This will take longer than normal."
-msgstr "Vytvára sa nová záloha. Bude to trvať dlhšie, ako normálne."
+#: ../common/Duplicity.vala:277
+msgid "Creating the first backup.  This may take a while."
+msgstr "Vytvára sa prvá záloha. Môže to chvíľu trvať."
 
-#: ../common/Duplicity.vala:367 ../common/Duplicity.vala:384
+#: ../common/Duplicity.vala:279
+msgid ""
+"Creating a fresh backup to protect against backup corruption.  This will "
+"take longer than normal."
+msgstr ""
+"Vytvára sa nová záloha na ochranu pred poškodením zálohy. Bude to trvať "
+"dlhšie ako zvyčajne."
+
+#: ../common/Duplicity.vala:370 ../common/Duplicity.vala:387
 msgid "Cleaning up…"
 msgstr "Čistí sa..."
 
-#: ../common/Duplicity.vala:470 ../common/Duplicity.vala:741
+#: ../common/Duplicity.vala:473 ../common/Duplicity.vala:744
 msgid "Failed with an unknown error."
 msgstr "Zlyhanie neznámou chybou."
 
-#: ../common/Duplicity.vala:653
+#: ../common/Duplicity.vala:656
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Nepodarilo sa obnoviť ‘%s’: Súbor nebol nájdený v zálohe"
 
-#: ../common/Duplicity.vala:657 ../common/Duplicity.vala:699
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:702
 msgid "Bad encryption password."
 msgstr "Nesprávne šifrovacie heslo."
 
-#: ../common/Duplicity.vala:661
+#: ../common/Duplicity.vala:664
 msgid "Computer name changed"
 msgstr "Názov počítača bol zmenený"
 
-#: ../common/Duplicity.vala:661
+#: ../common/Duplicity.vala:664
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -656,42 +667,42 @@ msgstr ""
 "Aktuálna záloha je z počítača s názvom %s, ale aktuálny názov počítača je "
 "%s. Ak ste si nie je istý, mali by ste zálohovať na iné miesto."
 
-#: ../common/Duplicity.vala:681
+#: ../common/Duplicity.vala:684
 msgid "Invalid ID."
 msgstr "Neplatné identifikačné číslo."
 
-#: ../common/Duplicity.vala:683
+#: ../common/Duplicity.vala:686
 msgid "Invalid secret key."
 msgstr "Neplatný prístupový kľúč."
 
-#: ../common/Duplicity.vala:685
+#: ../common/Duplicity.vala:688
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Váš účet na Amazone nie je registrovaný pre službu S3."
 
-#: ../common/Duplicity.vala:694
+#: ../common/Duplicity.vala:697
 msgid "S3 bucket name is not available."
 msgstr "Názov S3 oblasti nie je k dispozícii."
 
-#: ../common/Duplicity.vala:703
+#: ../common/Duplicity.vala:706
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Chyba pri čítaní súboru ‘%s’."
 
-#: ../common/Duplicity.vala:705
+#: ../common/Duplicity.vala:708
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Chyba pri zapisovaní do súboru ‘%s’."
 
-#: ../common/Duplicity.vala:713
+#: ../common/Duplicity.vala:716
 #, c-format
 msgid "No space left in %s"
 msgstr "Nie je voľné miesto v %s"
 
-#: ../common/Duplicity.vala:733
+#: ../common/Duplicity.vala:736
 msgid "No backup files found"
 msgstr "Záložné súbory neboli nájdené"
 
-#: ../common/Duplicity.vala:769
+#: ../common/Duplicity.vala:772
 msgid "Uploading…"
 msgstr "Nahráva sa..."
 
@@ -713,7 +724,7 @@ msgstr ""
 msgid "Could not restore %s: %s"
 msgstr "Nemôžem obnoviť %s: %s"
 
-#: ../common/Operation.vala:55
+#: ../common/Operation.vala:56
 msgid "Checking for backups…"
 msgstr "Hľadajú sa zálohy..."
 
@@ -870,7 +881,6 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Marián Bača https://launchpad.net/~majoobaca\n"
-"  Marián Bača https://launchpad.net/~majoobaca-gmail\n"
 "  Michael Terry https://launchpad.net/~mterry\n"
 "  vadimo https://launchpad.net/~michalgejdos-azet"
 
@@ -950,3 +960,9 @@ msgstr ""
 
 #~ msgid "Checking for backups..."
 #~ msgstr "Kontrolujem zálohy..."
+
+#~ msgid "Hide _Progress"
+#~ msgstr "_Skryť postup"
+
+#~ msgid "Creating a fresh backup.  This will take longer than normal."
+#~ msgstr "Vytvára sa nová záloha. Bude to trvať dlhšie, ako normálne."

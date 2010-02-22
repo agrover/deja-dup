@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-12-29 09:55-0500\n"
-"PO-Revision-Date: 2010-01-10 07:08+0000\n"
+"POT-Creation-Date: 2010-02-08 16:46-0500\n"
+"PO-Revision-Date: 2010-02-14 05:03+0000\n"
 "Last-Translator: Nobuto MURATA <pores.n@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-01-11 04:56+0000\n"
+"X-Launchpad-Export-Date: 2010-02-15 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "あなたのファイルをバックアップ"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:58
+#: ../deja-dup/StatusIcon.vala:59
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
@@ -166,13 +166,23 @@ msgid "Whether to periodically backup"
 msgstr "定期的にバックアップを行うか"
 
 #: ../data/deja-dup.schemas.in.h:23
+msgid "Whether to request the root password"
+msgstr "ルートパスワードを要求するかどうか"
+
+#: ../data/deja-dup.schemas.in.h:24
+msgid ""
+"Whether to request the root password when backing up from or retoring to "
+"system folders."
+msgstr "システムフォルダからバックアップまたは復元する際にルートパスワードを要求するかどうか"
+
+#: ../data/deja-dup.schemas.in.h:25
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr ""
 "どの Amazon S3 バケットにファイルを保存するか。保存先はまだ存在していなくてもよい。基準を満たしたホスト名の文字列のみ有効です。"
 
-#: ../data/deja-dup.schemas.in.h:24
+#: ../data/deja-dup.schemas.in.h:26
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr "Amazon S3 Access Key の識別子。S3のユーザ名のようなものです。"
 
@@ -180,7 +190,7 @@ msgstr "Amazon S3 Access Key の識別子。S3のユーザ名のようなもの�
 msgid "Co_ntinue"
 msgstr "続行する(_N)"
 
-#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:141
+#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:146
 msgid "_Resume Later"
 msgstr "後で再開する(_R)"
 
@@ -265,7 +275,7 @@ msgstr "バックアップが終了しました"
 msgid "Your files were successfully backed up."
 msgstr "バックアップは成功しました。"
 
-#: ../deja-dup/AssistantBackup.vala:250 ../common/Operation.vala:51
+#: ../deja-dup/AssistantBackup.vala:252 ../common/Operation.vala:52
 msgid "Backing up…"
 msgstr "バックアップしています..."
 
@@ -386,7 +396,7 @@ msgstr "復元が終了しました"
 msgid "Your files were successfully restored."
 msgstr "復元に成功しました。"
 
-#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:53
+#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:54
 msgid "Restoring…"
 msgstr "復元しています..."
 
@@ -485,24 +495,25 @@ msgstr "パスワード(_P):"
 msgid "_Remember secret access key"
 msgstr "secret access key を記憶する(_R)"
 
-#: ../deja-dup/StatusIcon.vala:48 ../deja-dup/StatusIcon.vala:133
-msgid "Hide _Progress"
-msgstr "進歩状況を隠す"
-
-#: ../deja-dup/StatusIcon.vala:51 ../deja-dup/StatusIcon.vala:135
-msgid "Show _Progress"
-msgstr "進歩状況を表示"
-
-#: ../deja-dup/StatusIcon.vala:98
+#: ../deja-dup/StatusIcon.vala:96
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% 完了"
 
-#: ../deja-dup/StatusIcon.vala:143
+#: ../deja-dup/StatusIcon.vala:101
+#, c-format
+msgid "Show _Progress (%.1f%%)"
+msgstr "進歩を表示(_P) (%.1f%%)"
+
+#: ../deja-dup/StatusIcon.vala:103
+msgid "Show _Progress"
+msgstr "進歩状況を表示"
+
+#: ../deja-dup/StatusIcon.vala:148
 msgid "_Delay Backup"
 msgstr "バックアップの延期(_D)"
 
-#: ../deja-dup/StatusIcon.vala:148
+#: ../deja-dup/StatusIcon.vala:153
 msgid "_Skip Backup"
 msgstr "バックアップの中止(_S)"
 
@@ -549,15 +560,15 @@ msgstr "認証に失敗しました"
 msgid "Enter Amazon S3 access key"
 msgstr "Amazon S3 access key の入力"
 
-#: ../common/CommonUtils.vala:239
+#: ../common/CommonUtils.vala:240
 msgid "Unknown"
 msgstr "不明"
 
-#: ../common/DuplicityInfo.vala:130
+#: ../common/DuplicityInfo.vala:133
 msgid "Could not run duplicity"
 msgstr "duplicity を実行できません"
 
-#: ../common/DuplicityInfo.vala:135
+#: ../common/DuplicityInfo.vala:138
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -565,7 +576,7 @@ msgstr ""
 "duplicity のバージョンを認識できません\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:137
+#: ../common/DuplicityInfo.vala:140
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -574,56 +585,62 @@ msgstr ""
 "duplicity のバージョン ‘%s’ を解釈できません。\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:139
+#: ../common/DuplicityInfo.vala:142
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr "duplicity なしでは Déjà Dup は機能しません。終了します。"
 
-#: ../common/DuplicityInfo.vala:143
+#: ../common/DuplicityInfo.vala:146
 msgid "Duplicity’s version is too old"
 msgstr "Duplicity のバージョンが古いです"
 
-#: ../common/DuplicityInfo.vala:144
+#: ../common/DuplicityInfo.vala:147
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
 "version %d.%d.%.2d"
 msgstr "Déjà Dup にはバージョン %d.%d.%.2d が必要ですが、%d.%d.%.2d しか見つかりません。"
 
-#: ../common/Duplicity.vala:188
+#: ../common/Duplicity.vala:210
 msgid "Paused (no network)"
 msgstr "中断（ネットワークが使用できません）"
 
-#: ../common/Duplicity.vala:228 ../common/Duplicity.vala:236
-#: ../common/Duplicity.vala:264 ../common/Operation.vala:95
+#: ../common/Duplicity.vala:250 ../common/Duplicity.vala:258
+#: ../common/Duplicity.vala:289 ../common/Operation.vala:95
 msgid "Preparing…"
 msgstr "準備しています..."
 
-#: ../common/Duplicity.vala:254
-msgid "Creating a fresh backup.  This will take longer than normal."
-msgstr "初回のバックアップを作成しています。通常より時間がかかります。"
+#: ../common/Duplicity.vala:277
+msgid "Creating the first backup.  This may take a while."
+msgstr "はじめのバックアップを作成しています。しばらく時間がかかります。"
 
-#: ../common/Duplicity.vala:333 ../common/Duplicity.vala:350
+#: ../common/Duplicity.vala:279
+msgid ""
+"Creating a fresh backup to protect against backup corruption.  This will "
+"take longer than normal."
+msgstr "バックアップの破損を防ぐために新しいバックアップを作成しています。通常より時間がかかります。"
+
+#: ../common/Duplicity.vala:370 ../common/Duplicity.vala:387
 msgid "Cleaning up…"
 msgstr "クリーンアップしています..."
 
-#: ../common/Duplicity.vala:436 ../common/Duplicity.vala:707
+#: ../common/Duplicity.vala:473 ../common/Duplicity.vala:744
 msgid "Failed with an unknown error."
 msgstr "不明なエラーで失敗しました"
 
-#: ../common/Duplicity.vala:619
+#: ../common/Duplicity.vala:656
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "‘%s’ を復元できません: ファイルがバックアップ内に見つかりません"
 
-#: ../common/Duplicity.vala:623 ../common/Duplicity.vala:665
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:702
 msgid "Bad encryption password."
 msgstr "暗号化パスワードが違います。"
 
-#: ../common/Duplicity.vala:627
+#: ../common/Duplicity.vala:664
 msgid "Computer name changed"
 msgstr "コンピュータ名が変更されました"
 
-#: ../common/Duplicity.vala:627
+#: ../common/Duplicity.vala:664
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -632,42 +649,42 @@ msgid ""
 msgstr ""
 "コンピュータ名 %s のバックアップが存在していますが、現在のコンピュータ名は %s です。覚えがない場合は、別のバックアップ先を選択すべきです。"
 
-#: ../common/Duplicity.vala:647
+#: ../common/Duplicity.vala:684
 msgid "Invalid ID."
 msgstr "不正な ID です。"
 
-#: ../common/Duplicity.vala:649
+#: ../common/Duplicity.vala:686
 msgid "Invalid secret key."
 msgstr "不正な secret key です。"
 
-#: ../common/Duplicity.vala:651
+#: ../common/Duplicity.vala:688
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "あなたのAmazon Web サービスアカウントは S3 サービスにサインアップされていません。"
 
-#: ../common/Duplicity.vala:660
+#: ../common/Duplicity.vala:697
 msgid "S3 bucket name is not available."
 msgstr "S3 バケット名が使用できません。"
 
-#: ../common/Duplicity.vala:669
+#: ../common/Duplicity.vala:706
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "ファイル ‘%s’ を読み込み中にエラー"
 
-#: ../common/Duplicity.vala:671
+#: ../common/Duplicity.vala:708
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "ファイル ‘%s’ を書き込み中にエラー"
 
-#: ../common/Duplicity.vala:679
+#: ../common/Duplicity.vala:716
 #, c-format
 msgid "No space left in %s"
 msgstr "%s にスペースがありません"
 
-#: ../common/Duplicity.vala:699
+#: ../common/Duplicity.vala:736
 msgid "No backup files found"
 msgstr "バックアップファイルが見つかりません"
 
-#: ../common/Duplicity.vala:735
+#: ../common/Duplicity.vala:772
 msgid "Uploading…"
 msgstr "アップロードしています..."
 
@@ -687,7 +704,7 @@ msgstr "一部のファイルが復元できませんでした。復元できな
 msgid "Could not restore %s: %s"
 msgstr "%s が復元できませんでした: %s"
 
-#: ../common/Operation.vala:55
+#: ../common/Operation.vala:56
 msgid "Checking for backups…"
 msgstr "バックアップを照合しています..."
 
@@ -869,3 +886,9 @@ msgid ""
 msgstr ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see http://www.gnu.org/licenses/."
+
+#~ msgid "Creating a fresh backup.  This will take longer than normal."
+#~ msgstr "初回のバックアップを作成しています。通常より時間がかかります。"
+
+#~ msgid "Hide _Progress"
+#~ msgstr "進歩状況を隠す"

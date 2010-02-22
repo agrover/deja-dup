@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-10-09 10:43-0400\n"
-"PO-Revision-Date: 2009-10-17 13:57+0000\n"
+"POT-Creation-Date: 2010-02-20 22:36-0500\n"
+"PO-Revision-Date: 2010-02-20 22:27+0000\n"
 "Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-10-18 07:05+0000\n"
+"X-Launchpad-Export-Date: 2010-02-21 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
 msgid "Backup Tool"
-msgstr ""
+msgstr "Säkerhetskopiering"
 
 #: ../data/deja-dup.desktop.in.h:2
 msgid "Backup your files"
@@ -33,19 +33,18 @@ msgstr "Säkerhetskopiera dina filer"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:38
+#: ../deja-dup/StatusIcon.vala:59
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
 #: ../data/deja-dup.desktop.in.h:4
 msgid "Déjà Dup Backup Tool"
-msgstr ""
+msgstr "Déjà Dup Säkerhetskopiering"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
-#. a computer monitor.  This program acts like a daemon that kicks off
+#. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.h:1 ../monitor/monitor.vala:102
-#: ../monitor/monitor.vala:343
+#: ../data/deja-dup-monitor.desktop.in.h:1 ../monitor/monitor.vala:328
 msgid "Déjà Dup Monitor"
 msgstr "Övervaka Déjà Dup"
 
@@ -78,40 +77,89 @@ msgid "Directories to backup"
 msgstr "Kataloger att säkerhetskopiera"
 
 #: ../data/deja-dup.schemas.in.h:6
+msgid "Folder type"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:7
+msgid "Full name of the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:8
 msgid "How long to keep backup files"
 msgstr "Hur länge säkerhetskopior ska behållas"
 
-#: ../data/deja-dup.schemas.in.h:7
+#: ../data/deja-dup.schemas.in.h:9
 msgid "How often to periodically backup"
 msgstr "Hur ofta periodiska säkerhetskopior ska tas"
 
-#: ../data/deja-dup.schemas.in.h:8
+#: ../data/deja-dup.schemas.in.h:10
+msgid "Icon of the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:11
+msgid ""
+"If the backup location is on an external volume, this is its unique "
+"filesystem identifier."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:12
+msgid ""
+"If the backup location is on an external volume, this is the path of the "
+"folder on that volume."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:13
+msgid ""
+"If the backup location is on an external volume, this is the volume’s icon."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:14
+msgid ""
+"If the backup location is on an external volume, this is the volume’s longer "
+"descriptive name."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:15
+msgid ""
+"If the backup location is on an external volume, this is the volume’s "
+"shorter name."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:16
 msgid "Location in which to hold the backup files."
 msgstr "Plats i vilken säkerhetskopiorna ska lagras."
 
-#: ../data/deja-dup.schemas.in.h:9
+#: ../data/deja-dup.schemas.in.h:17
+msgid "Relative path under the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:18
+msgid "Short name of the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:19
 msgid "The Amazon S3 bucket name to use"
 msgstr "Namn på Amazon S3-bucket att använda"
 
-#: ../data/deja-dup.schemas.in.h:10
+#: ../data/deja-dup.schemas.in.h:20
 msgid "The Amazon S3 folder"
 msgstr "Amazon S3-mappen"
 
-#: ../data/deja-dup.schemas.in.h:11
+#: ../data/deja-dup.schemas.in.h:21
 msgid "The last time Déjà Dup was run"
 msgstr "Senaste gången som Déjà Dup kördes"
 
-#: ../data/deja-dup.schemas.in.h:12
+#: ../data/deja-dup.schemas.in.h:22
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
 msgstr ""
 
-#: ../data/deja-dup.schemas.in.h:13
+#: ../data/deja-dup.schemas.in.h:23
 msgid "The number of days between backups."
 msgstr "Antalet dagar mellan säkerhetskopieringar."
 
-#: ../data/deja-dup.schemas.in.h:14
+#: ../data/deja-dup.schemas.in.h:24
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
@@ -121,62 +169,70 @@ msgstr ""
 "värde på 0 betyder för alltid. Detta är det minsta antalet dagar; filerna "
 "kan behållas längre."
 
-#: ../data/deja-dup.schemas.in.h:15
-msgid "The type of backup location. Valid values are 's3' or 'file'."
+#: ../data/deja-dup.schemas.in.h:25
+msgid "The type of backup location. Valid values are ‘s3’ or ‘file’."
 msgstr ""
-"Typ av plats för säkerhetskopior. Giltiga värden är \"s3\" eller \"file\"."
 
-#: ../data/deja-dup.schemas.in.h:16
+#: ../data/deja-dup.schemas.in.h:26
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-"and $VIDEO are recognized as the user's special directories. Relative "
-"entries are relative to the user's home directory."
+"and $VIDEO are recognized as the user’s special directories. Relative "
+"entries are relative to the user’s home directory."
 msgstr ""
-"Denna lista över kataloger som kommer att säkerhetskopieras. Reserverade "
-"värdena $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, "
-"$PUBLIC_SHARE, $TEMPLATES, $TRASH och $VIDEO känns igen som användarens "
-"specialkataloger. Relativa poster är relativa till användarens hemkatalog."
 
-#: ../data/deja-dup.schemas.in.h:17
+#: ../data/deja-dup.schemas.in.h:27
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user's special "
-"directories. Relative entries are relative to the user's home directory. "
+"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
+"directories. Relative entries are relative to the user’s home directory. "
 "This list takes precedence over the include list."
 msgstr ""
-"Denna lista över kataloger som inte kommer att säkerhetskopieras. "
-"Reserverade värdena $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, "
-"$PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH och $VIDEO känns igen som "
-"användarens specialkataloger. Relativa poster är relativa till användarens "
-"hemkatalog. Denna lista åsidosätter inkluderingslistan."
 
-#: ../data/deja-dup.schemas.in.h:18
+#: ../data/deja-dup.schemas.in.h:28
 msgid "Type of location to store backup"
 msgstr "Typ av plats för att lagra säkerhetskopior"
 
-#: ../data/deja-dup.schemas.in.h:19
+#: ../data/deja-dup.schemas.in.h:29
+msgid "Unique ID of the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:30
+msgid ""
+"Whether the backup location is a mounted external volume or a normal folder. "
+"Possible values are ‘volume’ or ‘normal’."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:31
 msgid "Whether to automatically backup on a regular schedule."
 msgstr "Huruvida automatiska säkerhetskopior ska tas vid fasta tidpunkter."
 
-#: ../data/deja-dup.schemas.in.h:20
+#: ../data/deja-dup.schemas.in.h:32
 msgid "Whether to encrypt your backup"
 msgstr "Huruvida din säkerhetskopia ska krypteras"
 
-#: ../data/deja-dup.schemas.in.h:21
+#: ../data/deja-dup.schemas.in.h:33
 msgid ""
-"Whether to encrypt your backup files in the storage location. It's strongly "
-"recommended to leave this as 'true'."
+"Whether to encrypt your backup files in the storage location. It’s strongly "
+"recommended to leave this as ‘true’."
 msgstr ""
-"Huruvida dina säkerhetskopior i lagringsplatsen ska krypteras. Det "
-"rekommenderas starkt att lämna kvar värdet som \"sant\"."
 
-#: ../data/deja-dup.schemas.in.h:22
+#: ../data/deja-dup.schemas.in.h:34
 msgid "Whether to periodically backup"
 msgstr "Huruvida periodiska säkerhetskopior ska tas"
 
-#: ../data/deja-dup.schemas.in.h:23
+#: ../data/deja-dup.schemas.in.h:35
+msgid "Whether to request the root password"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:36
+msgid ""
+"Whether to request the root password when backing up from or restoring to "
+"system folders."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:37
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -184,48 +240,48 @@ msgstr ""
 "Vilken Amazon S3-bucket att lagra filer i. Denna måste inte redan finnas. "
 "Endast giltiga värdnamnssträngar är giltiga."
 
-#: ../data/deja-dup.schemas.in.h:24
+#: ../data/deja-dup.schemas.in.h:38
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Din Amazon S3 Access Key-identifierare. Detta fungerar som ditt S3-"
 "användarnamn."
 
-#: ../deja-dup/Assistant.vala:278
+#: ../deja-dup/Assistant.vala:281
 msgid "Co_ntinue"
-msgstr ""
+msgstr "_Fortsätt"
 
-#: ../deja-dup/Assistant.vala:311 ../deja-dup/StatusIcon.vala:98
+#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:146
 msgid "_Resume Later"
-msgstr ""
+msgstr "Återuppta _senare"
 
 #: ../deja-dup/AssistantBackup.vala:33
 msgctxt "backup is verb"
 msgid "Backup"
-msgstr ""
+msgstr "Säkerhetskopiera"
 
 #: ../deja-dup/AssistantBackup.vala:34 ../deja-dup/MainWindow.vala:73
 #: ../deja-dup/MainWindow.vala:187
 msgctxt "backup is verb"
 msgid "_Backup"
-msgstr ""
+msgstr "_Säkerhetskopiera"
 
 #: ../deja-dup/AssistantBackup.vala:50 ../deja-dup/AssistantRestore.vala:93
-#: ../preferences/PreferencesDialog.vala:54
+#: ../preferences/PreferencesDialog.vala:84
 msgid "_Backup location:"
 msgstr "_Plats för säkerhetskopia:"
 
 #: ../deja-dup/AssistantBackup.vala:57
-#: ../preferences/PreferencesDialog.vala:135
+#: ../preferences/PreferencesDialog.vala:166
 msgid "_Encrypt backup files"
 msgstr "_Kryptera säkerhetskopior"
 
 #: ../deja-dup/AssistantBackup.vala:78
-#: ../preferences/PreferencesDialog.vala:99
+#: ../preferences/PreferencesDialog.vala:130
 msgid "I_nclude files in folders:"
 msgstr "I_nkludera filer i mappar:"
 
 #: ../deja-dup/AssistantBackup.vala:91
-#: ../preferences/PreferencesDialog.vala:118
+#: ../preferences/PreferencesDialog.vala:149
 msgid "E_xcept files in folders:"
 msgstr "Un_danta filer i mappar:"
 
@@ -252,67 +308,71 @@ msgstr "Undantag för:"
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:185
+#: ../deja-dup/AssistantBackup.vala:187
 msgid "Backing up:"
 msgstr "Säkerhetskopierar:"
 
-#: ../deja-dup/AssistantBackup.vala:195
-#: ../preferences/PreferencesDialog.vala:141
+#: ../deja-dup/AssistantBackup.vala:197
+#: ../preferences/PreferencesDialog.vala:172
 msgid "_Automatically backup on a regular schedule"
 msgstr "Säkerhetskopiera _automatiskt vid fasta tidspunkter"
 
-#: ../deja-dup/AssistantBackup.vala:198
-#: ../preferences/PreferencesDialog.vala:148
+#: ../deja-dup/AssistantBackup.vala:200
+#: ../preferences/PreferencesDialog.vala:179
 #, c-format
 msgid "How _often to backup:"
 msgstr "Hur _ofta säkerhetskopior ska tas:"
 
-#: ../deja-dup/AssistantBackup.vala:225
+#: ../deja-dup/AssistantBackup.vala:227
 msgid "Backup Failed"
 msgstr "Säkerhetskopiering misslyckades"
 
-#: ../deja-dup/AssistantBackup.vala:228
+#: ../deja-dup/AssistantBackup.vala:230
 msgid "Backup Finished"
 msgstr "Säkerhetskopieringen är färdig"
 
-#: ../deja-dup/AssistantBackup.vala:229
+#: ../deja-dup/AssistantBackup.vala:231
 msgid "Your files were successfully backed up."
 msgstr "Dina filer har nu säkerhetskopierats."
 
-#: ../deja-dup/AssistantBackup.vala:248 ../libdeja-dup/Operation.vala:50
-msgid "Backing up..."
+#: ../deja-dup/AssistantBackup.vala:252 ../common/Operation.vala:52
+msgid "Backing up…"
 msgstr "Säkerhetskopierar..."
 
-#: ../deja-dup/AssistantOperation.vala:133
+#: ../deja-dup/AssistantOperation.vala:134
 msgid "Scanning:"
 msgstr "Söker av:"
 
-#: ../deja-dup/AssistantOperation.vala:134
-msgid "Scanning..."
-msgstr "Söker av..."
+#: ../deja-dup/AssistantOperation.vala:135
+msgid "Scanning…"
+msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:188
+#: ../deja-dup/AssistantOperation.vala:208
 msgid "_Details"
 msgstr "_Detaljer"
 
-#: ../deja-dup/AssistantOperation.vala:235
+#: ../deja-dup/AssistantOperation.vala:255
 msgid "E_ncryption password:"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:244
-#: ../deja-dup/MountOperationAssistant.vala:209
-msgid "_Remember password"
-msgstr ""
+#: ../deja-dup/AssistantOperation.vala:264
+msgid "_Show password"
+msgstr "_Visa lösenord"
 
-#: ../deja-dup/AssistantOperation.vala:319
+#: ../deja-dup/AssistantOperation.vala:271
+#: ../deja-dup/MountOperationAssistant.vala:216
+msgid "_Remember password"
+msgstr "_Kom ihåg lösenord"
+
+#: ../deja-dup/AssistantOperation.vala:346
 msgid "Summary"
 msgstr "Sammandrag"
 
-#: ../deja-dup/AssistantOperation.vala:334
+#: ../deja-dup/AssistantOperation.vala:361
 msgid "Password needed"
-msgstr ""
+msgstr "Lösenord krävs"
 
-#: ../deja-dup/AssistantOperation.vala:529
+#: ../deja-dup/AssistantOperation.vala:568
 msgid "Déjà Dup backup passphrase"
 msgstr "Lösenfras för Déjà Dup-säkerhetskopia"
 
@@ -371,41 +431,41 @@ msgstr "Återskapa till vilken plats?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:297
+#: ../deja-dup/AssistantRestore.vala:300
 msgid "Restoring:"
 msgstr "Återställer:"
 
-#: ../deja-dup/AssistantRestore.vala:325
+#: ../deja-dup/AssistantRestore.vala:328
 msgid "No backups to restore"
 msgstr "Inga säkerhetskopior att återskapa"
 
-#: ../deja-dup/AssistantRestore.vala:413
+#: ../deja-dup/AssistantRestore.vala:417
 msgid "Original location"
 msgstr "Ursprunglig plats"
 
-#: ../deja-dup/AssistantRestore.vala:426
+#: ../deja-dup/AssistantRestore.vala:430
 msgid "File to restore:"
 msgid_plural "Files to restore:"
 msgstr[0] "Fil att återskapa:"
 msgstr[1] "Filer att återskapa:"
 
-#: ../deja-dup/AssistantRestore.vala:448
+#: ../deja-dup/AssistantRestore.vala:452
 msgid "Restore Failed"
 msgstr "Återställning misslyckades"
 
-#: ../deja-dup/AssistantRestore.vala:450
+#: ../deja-dup/AssistantRestore.vala:454
 msgid "Restore Finished"
 msgstr "Återställning färdig"
 
-#: ../deja-dup/AssistantRestore.vala:451
+#: ../deja-dup/AssistantRestore.vala:455
 msgid "Your files were successfully restored."
 msgstr "Dina filer har nu återskapats."
 
-#: ../deja-dup/AssistantRestore.vala:455 ../libdeja-dup/Operation.vala:52
-msgid "Restoring..."
-msgstr "Återställer..."
+#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:54
+msgid "Restoring…"
+msgstr "Återskapar..."
 
-#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:41
+#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:33
 #: ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr "Visa version"
@@ -444,16 +504,16 @@ msgid "_Contents"
 msgstr "_Innehåll"
 
 #: ../deja-dup/MainWindow.vala:217
-msgid "Get Help _Online..."
-msgstr "Få hjälp på _nätet..."
+msgid "Get Help _Online…"
+msgstr ""
 
 #: ../deja-dup/MainWindow.vala:221
-msgid "_Translate This Application..."
-msgstr "_Översätt det här programmet..."
+msgid "_Translate This Application…"
+msgstr "_Översätt detta program..."
 
 #: ../deja-dup/MainWindow.vala:225
-msgid "_Report a Problem..."
-msgstr "_Rapportera ett fel..."
+msgid "_Report a Problem…"
+msgstr "_Rapportera ett problem..."
 
 #: ../deja-dup/MountOperationAssistant.vala:54
 msgid "Location not available"
@@ -496,140 +556,92 @@ msgstr ""
 msgid "_Password:"
 msgstr "_Lösenord:"
 
+#: ../deja-dup/MountOperationAssistant.vala:208
+msgid "S_how secret access key"
+msgstr ""
+
 #: ../deja-dup/MountOperationAssistant.vala:209
+msgid "S_how password"
+msgstr "V_isa lösenord"
+
+#: ../deja-dup/MountOperationAssistant.vala:216
 msgid "_Remember secret access key"
 msgstr ""
 
-#: ../deja-dup/StatusIcon.vala:69
+#: ../deja-dup/StatusIcon.vala:96
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% färdigt"
 
-#: ../deja-dup/StatusIcon.vala:100
+#: ../deja-dup/StatusIcon.vala:101
+#, c-format
+msgid "Show _Progress (%.1f%%)"
+msgstr "Visa fö_rlopp (%.1f%%)"
+
+#: ../deja-dup/StatusIcon.vala:103
+msgid "Show _Progress"
+msgstr "Visa fö_rlopp"
+
+#: ../deja-dup/StatusIcon.vala:148
 msgid "_Delay Backup"
 msgstr ""
 
-#: ../deja-dup/StatusIcon.vala:105
+#: ../deja-dup/StatusIcon.vala:153
 msgid "_Skip Backup"
 msgstr "_Hoppa över säkerhetskopiering"
 
-#: ../libdeja-dup/BackendFile.vala:51
+#: ../common/BackendFile.vala:73
 msgid "GVFS FUSE is not installed"
 msgstr "GVFS FUSE är inte installerad"
 
-#: ../libdeja-dup/BackendS3.vala:126
+#. Translators: %2$s is the name of a removable drive, %1$s is a folder
+#. on that removable drive.
+#: ../common/BackendFile.vala:87
 #, c-format
-msgid "Folder %s on Amazon S3"
-msgstr "Mappen %s på Amazon S3"
+msgid "%1$s on %2$s"
+msgstr "%1$s på %2$s"
 
-#: ../libdeja-dup/BackendS3.vala:172
-msgid "Permission denied"
+#: ../common/BackendFile.vala:125
+#, c-format
+msgid "Backup will begin when %s becomes connected."
 msgstr ""
 
-#: ../libdeja-dup/BackendS3.vala:195
+#: ../common/BackendFile.vala:132 ../common/BackendS3.vala:51
+msgid "Backup will begin when a network connection becomes available."
+msgstr ""
+
+#: ../common/BackendFile.vala:365
+msgid "Backup location not available"
+msgstr ""
+
+#: ../common/BackendFile.vala:365
+#, c-format
+msgid "Waiting for ‘%s’ to become connected…"
+msgstr "Väntar på att \"%s\" ska anslutas…"
+
+#. Translators: %s is a folder.
+#: ../common/BackendS3.vala:129
+#, c-format
+msgid "%s on Amazon S3"
+msgstr "%s på Amazon S3"
+
+#: ../common/BackendS3.vala:175
+msgid "Permission denied"
+msgstr "Åtkomst nekas"
+
+#: ../common/BackendS3.vala:198
 msgid "Enter Amazon S3 access key"
 msgstr ""
 
-#: ../libdeja-dup/ButtonConnect.vala:28
-msgid "Connect to _Server..."
-msgstr "Anslut till _server..."
+#: ../common/CommonUtils.vala:240
+msgid "Unknown"
+msgstr "Okänt"
 
-#: ../libdeja-dup/ButtonConnect.vala:37
-msgid "Could not open connection dialog"
-msgstr "Kunde inte öppna anslutningsdialogen"
-
-#: ../libdeja-dup/ConfigDelete.vala:36
-msgid "At least a week"
-msgstr "Minst en vecka"
-
-#: ../libdeja-dup/ConfigDelete.vala:37
-msgid "At least a month"
-msgstr "Minst en månad"
-
-#: ../libdeja-dup/ConfigDelete.vala:38
-msgid "At least two months"
-msgstr "Minst två månader"
-
-#: ../libdeja-dup/ConfigDelete.vala:39
-msgid "At least three months"
-msgstr "Minst tre månader"
-
-#: ../libdeja-dup/ConfigDelete.vala:40
-msgid "At least six months"
-msgstr "Minst sex månader"
-
-#: ../libdeja-dup/ConfigDelete.vala:41
-msgid "At least a year"
-msgstr "Minst ett år"
-
-#: ../libdeja-dup/ConfigDelete.vala:42
-msgid "Forever"
-msgstr "För alltid"
-
-#: ../libdeja-dup/ConfigDelete.vala:100
-#, c-format
-msgid "At least %d day"
-msgid_plural "At least %d days"
-msgstr[0] "Minst %d dag"
-msgstr[1] "Minst %d dagar"
-
-#: ../libdeja-dup/ConfigLabelBool.vala:36
-msgid "Yes"
-msgstr "Ja"
-
-#: ../libdeja-dup/ConfigLabelBool.vala:36
-msgid "No"
-msgstr "Nej"
-
-#: ../libdeja-dup/ConfigLabelList.vala:56 ../libdeja-dup/ConfigList.vala:111
-msgid "Home Folder"
-msgstr "Hemmapp"
-
-#: ../libdeja-dup/ConfigLabelList.vala:58 ../libdeja-dup/ConfigList.vala:113
-msgid "Trash"
-msgstr "Papperskorg"
-
-#: ../libdeja-dup/ConfigList.vala:152
-msgid "Choose folders"
-msgstr "Välj mappar"
-
-#: ../libdeja-dup/ConfigLocation.vala:41
-msgid "Select Backup Location"
-msgstr "Välj plats för säkerhetskopior"
-
-#: ../libdeja-dup/ConfigLocation.vala:68 ../libdeja-dup/libdeja-dup.vala:304
-msgid "Amazon S3"
-msgstr "Amazon S3"
-
-#: ../libdeja-dup/ConfigPeriod.vala:36
-msgid "Daily"
-msgstr "Dagligen"
-
-#: ../libdeja-dup/ConfigPeriod.vala:37
-msgid "Weekly"
-msgstr "Varje vecka"
-
-#. Translators: Biweekly is every two weeks
-#: ../libdeja-dup/ConfigPeriod.vala:39
-msgid "Biweekly"
-msgstr "Varannan vecka"
-
-#: ../libdeja-dup/ConfigPeriod.vala:40
-msgid "Monthly"
-msgstr "Varje månad"
-
-#: ../libdeja-dup/ConfigPeriod.vala:96
-#, c-format
-msgid "Every %d day"
-msgid_plural "Every %d days"
-msgstr[0] "%d dags intervall"
-msgstr[1] "%d dagars intervall"
-
-#: ../libdeja-dup/DuplicityInfo.vala:131
+#: ../common/DuplicityInfo.vala:133
 msgid "Could not run duplicity"
 msgstr "Kunde inte köra duplicity"
 
-#: ../libdeja-dup/DuplicityInfo.vala:137
+#: ../common/DuplicityInfo.vala:138
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -637,25 +649,25 @@ msgstr ""
 "Kunde inte förstå duplicitys versionsnummer.\n"
 "\n"
 
-#: ../libdeja-dup/DuplicityInfo.vala:139
+#: ../common/DuplicityInfo.vala:140
 #, c-format
 msgid ""
-"Could not understand duplicity version '%s'.\n"
+"Could not understand duplicity version ‘%s’.\n"
 "\n"
 msgstr ""
-"Kunde inte förstå duplicitys versionsnummer \"%s\".\n"
+"Kunde inte förstå duplicity version \"%s\".\n"
 "\n"
 
-#: ../libdeja-dup/DuplicityInfo.vala:141
+#: ../common/DuplicityInfo.vala:142
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr ""
 "Utan duplicity kan inte Déjà Dup fungera.  Det kommer nu att stängas."
 
-#: ../libdeja-dup/DuplicityInfo.vala:151
-msgid "Duplicity's version is too old"
-msgstr "Duplicitys version är för gammal"
+#: ../common/DuplicityInfo.vala:146
+msgid "Duplicity’s version is too old"
+msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:152
+#: ../common/DuplicityInfo.vala:147
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -664,90 +676,261 @@ msgstr ""
 "Déjà Dup kräver minst version %d.%d.%.2d av duplicity, men hittade endast "
 "version %d.%d.%.2d"
 
-#: ../libdeja-dup/Duplicity.vala:180 ../libdeja-dup/Duplicity.vala:188
-#: ../libdeja-dup/Operation.vala:94
-msgid "Preparing..."
+#: ../common/Duplicity.vala:210
+msgid "Paused (no network)"
+msgstr "Pausad (inget nätverk)"
+
+#: ../common/Duplicity.vala:250 ../common/Duplicity.vala:258
+#: ../common/Duplicity.vala:289 ../common/Operation.vala:95
+msgid "Preparing…"
 msgstr "Förbereder..."
 
-#: ../libdeja-dup/Duplicity.vala:258 ../libdeja-dup/Duplicity.vala:275
-msgid "Cleaning up..."
+#: ../common/Duplicity.vala:277
+msgid "Creating the first backup.  This may take a while."
+msgstr "Skapar första säkerhetskopian. Detta kan ta en stund."
+
+#: ../common/Duplicity.vala:279
+msgid ""
+"Creating a fresh backup to protect against backup corruption.  This will "
+"take longer than normal."
+msgstr ""
+
+#: ../common/Duplicity.vala:370 ../common/Duplicity.vala:387
+msgid "Cleaning up…"
 msgstr "Rensar upp..."
 
-#: ../libdeja-dup/Duplicity.vala:349 ../libdeja-dup/Duplicity.vala:589
+#: ../common/Duplicity.vala:473 ../common/Duplicity.vala:744
 msgid "Failed with an unknown error."
 msgstr "Misslyckades med ett okänt fel."
 
-#: ../libdeja-dup/Duplicity.vala:501
+#: ../common/Duplicity.vala:656
 #, c-format
-msgid "Could not restore '%s': File not found in backup"
-msgstr "Kunde inte återskapa \"%s\": Filen hittades inte i säkerhetskopia"
+msgid "Could not restore ‘%s’: File not found in backup"
+msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:505 ../libdeja-dup/Duplicity.vala:547
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:702
 msgid "Bad encryption password."
 msgstr "Krypterat lösenord är felaktigt."
 
-#: ../libdeja-dup/Duplicity.vala:509
+#: ../common/Duplicity.vala:664
 msgid "Computer name changed"
-msgstr ""
+msgstr "Datornamnet har ändrats"
 
-#: ../libdeja-dup/Duplicity.vala:509
+#: ../common/Duplicity.vala:664
 #, c-format
 msgid ""
-"The existing backup is of a computer named %s, but the current computer's "
+"The existing backup is of a computer named %s, but the current computer’s "
 "name is %s.  If this is unexpected, you should backup to a different "
 "location."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:529
+#: ../common/Duplicity.vala:684
 msgid "Invalid ID."
 msgstr "Ogiltigt id."
 
-#: ../libdeja-dup/Duplicity.vala:531
+#: ../common/Duplicity.vala:686
 msgid "Invalid secret key."
 msgstr "Ogiltig hemlig nyckel."
 
-#: ../libdeja-dup/Duplicity.vala:533
+#: ../common/Duplicity.vala:688
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Ditt konto för Amazon Web Services är inte registrerat för S3-tjänsten."
 
-#: ../libdeja-dup/Duplicity.vala:542
+#: ../common/Duplicity.vala:697
 msgid "S3 bucket name is not available."
 msgstr "S3 bucket-namnet är inte tillgängligt."
 
-#: ../libdeja-dup/Duplicity.vala:551
+#: ../common/Duplicity.vala:706
 #, c-format
-msgid "Error reading file '%s'."
+msgid "Error reading file ‘%s’."
 msgstr "Fel vid läsning av filen \"%s\"."
 
-#: ../libdeja-dup/Duplicity.vala:553
+#: ../common/Duplicity.vala:708
 #, c-format
-msgid "Error writing file '%s'."
+msgid "Error writing file ‘%s’."
 msgstr "Fel vid skrivning av filen \"%s\"."
 
-#: ../libdeja-dup/Duplicity.vala:561
+#: ../common/Duplicity.vala:716
 #, c-format
 msgid "No space left in %s"
 msgstr "Inget ledigt utrymme kvar i %s"
 
-#: ../libdeja-dup/Duplicity.vala:581
+#: ../common/Duplicity.vala:736
 msgid "No backup files found"
 msgstr "Inga säkerhetskopior hittades"
 
-#: ../libdeja-dup/Duplicity.vala:617
-msgid "Uploading..."
+#: ../common/Duplicity.vala:772
+msgid "Uploading…"
+msgstr "Skickar upp..."
+
+#: ../common/OperationRestore.vala:54
+msgid "Restoring files…"
+msgstr "Återskapar filer..."
+
+#: ../common/OperationRestore.vala:173
+#, c-format
+msgid ""
+"Not all files could be restored. Any files that could not be restored may "
+"still be found in %s."
+msgstr ""
+"Alla filer kunde inte återskapas. Filer som inte kunde återskapas kan hittas "
+"i %s."
+
+#: ../common/OperationRestore.vala:182
+#, c-format
+msgid "Could not restore %s: %s"
+msgstr "Kunde inte återskapa %s: %s"
+
+#: ../common/Operation.vala:56
+msgid "Checking for backups…"
+msgstr "Letar efter säkerhetskopior..."
+
+#: ../common/Operation.vala:210
+msgid "Another Déjà Dup is already running"
+msgstr "En annan Déjà Dup är redan igång"
+
+#: ../monitor/monitor.vala:230
+msgid "Scheduled backup delayed"
 msgstr ""
 
-#: ../libdeja-dup/libdeja-dup.vala:97
+#: ../nautilus/NautilusExtension.c:95
+msgid "Revert to Previous Version…"
+msgid_plural "Revert to Previous Versions…"
+msgstr[0] "Återgå till tidigare version..."
+msgstr[1] "Återgå till tidigare versioner..."
+
+#: ../nautilus/NautilusExtension.c:99
+msgid "Restore file from backup"
+msgid_plural "Restore files from backup"
+msgstr[0] "Återskapa fil från säkerhetskopia"
+msgstr[1] "Återskapa filer från säkerhetskopia"
+
+#: ../preferences/PreferencesDialog.vala:41 ../preferences/preferences.vala:35
+#: ../preferences/preferences.vala:66
+msgid "Déjà Dup Preferences"
+msgstr "Inställningar för Déjà Dup"
+
+#: ../preferences/PreferencesDialog.vala:99
+#, c-format
+msgid "S3 Access Key I_D:"
+msgstr "I_d för S3 Access Key:"
+
+#: ../preferences/PreferencesDialog.vala:111
+#, c-format
+msgid "_Folder:"
+msgstr "_Mapp:"
+
+#: ../preferences/PreferencesDialog.vala:197
+#, c-format
+msgid "_Keep backups:"
+msgstr "_Behåll säkerhetskopior:"
+
+#: ../widgets/ButtonConnect.vala:28
+msgid "Connect to _Server…"
+msgstr "Anslut till _server…"
+
+#: ../widgets/ButtonConnect.vala:37
+msgid "Could not open connection dialog"
+msgstr "Kunde inte öppna anslutningsdialogen"
+
+#: ../widgets/ConfigDelete.vala:36
+msgid "At least a week"
+msgstr "Minst en vecka"
+
+#: ../widgets/ConfigDelete.vala:37
+msgid "At least a month"
+msgstr "Minst en månad"
+
+#: ../widgets/ConfigDelete.vala:38
+msgid "At least two months"
+msgstr "Minst två månader"
+
+#: ../widgets/ConfigDelete.vala:39
+msgid "At least three months"
+msgstr "Minst tre månader"
+
+#: ../widgets/ConfigDelete.vala:40
+msgid "At least six months"
+msgstr "Minst sex månader"
+
+#: ../widgets/ConfigDelete.vala:41
+msgid "At least a year"
+msgstr "Minst ett år"
+
+#: ../widgets/ConfigDelete.vala:42
+msgid "Forever"
+msgstr "För alltid"
+
+#: ../widgets/ConfigDelete.vala:100
+#, c-format
+msgid "At least %d day"
+msgid_plural "At least %d days"
+msgstr[0] "Minst %d dag"
+msgstr[1] "Minst %d dagar"
+
+#: ../widgets/ConfigLabelBool.vala:36
+msgid "Yes"
+msgstr "Ja"
+
+#: ../widgets/ConfigLabelBool.vala:36
+msgid "No"
+msgstr "Nej"
+
+#: ../widgets/ConfigLabelList.vala:56 ../widgets/ConfigList.vala:118
+msgid "Home Folder"
+msgstr "Hemmapp"
+
+#: ../widgets/ConfigLabelList.vala:58 ../widgets/ConfigList.vala:120
+msgid "Trash"
+msgstr "Papperskorg"
+
+#: ../widgets/ConfigList.vala:159
+msgid "Choose folders"
+msgstr "Välj mappar"
+
+#: ../widgets/ConfigLocation.vala:39
+msgid "Select Backup Location"
+msgstr "Välj plats för säkerhetskopior"
+
+#: ../widgets/ConfigLocation.vala:66
+msgid "Amazon S3"
+msgstr "Amazon S3"
+
+#: ../widgets/ConfigPeriod.vala:36
+msgid "Daily"
+msgstr "Dagligen"
+
+#: ../widgets/ConfigPeriod.vala:37
+msgid "Weekly"
+msgstr "Varje vecka"
+
+#. Translators: Biweekly is every two weeks
+#: ../widgets/ConfigPeriod.vala:39
+msgid "Biweekly"
+msgstr "Varannan vecka"
+
+#: ../widgets/ConfigPeriod.vala:40
+msgid "Monthly"
+msgstr "Varje månad"
+
+#: ../widgets/ConfigPeriod.vala:96
+#, c-format
+msgid "Every %d day"
+msgid_plural "Every %d days"
+msgstr[0] "%d dags intervall"
+msgstr[1] "%d dagars intervall"
+
+#: ../widgets/WidgetUtils.vala:30
 #, c-format
 msgid "Could not display %s"
 msgstr "Kunde inte visa %s"
 
-#: ../libdeja-dup/libdeja-dup.vala:141
+#: ../widgets/WidgetUtils.vala:73
 msgid "About Déjà Dup"
 msgstr "Om Déjà Dup"
 
-#: ../libdeja-dup/libdeja-dup.vala:145
+#: ../widgets/WidgetUtils.vala:77
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -755,7 +938,7 @@ msgstr ""
 "  Daniel Nylander https://launchpad.net/~yeager\n"
 "  Paul Sundvall https://launchpad.net/~slask-paulsundvall"
 
-#: ../libdeja-dup/libdeja-dup.vala:150
+#: ../widgets/WidgetUtils.vala:82
 #, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
@@ -768,7 +951,7 @@ msgstr ""
 "Software Foundation; antingen version 3 av licensen, eller (enligt dig "
 "själv) någon senare version."
 
-#: ../libdeja-dup/libdeja-dup.vala:151
+#: ../widgets/WidgetUtils.vala:83
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -780,75 +963,13 @@ msgstr ""
 "LÄMPLIGHET FÖR NÅGOT SPECIELLT ÄNDAMÅL. Se GNU General Public License för "
 "ytterligare information."
 
-#: ../libdeja-dup/libdeja-dup.vala:152
+#: ../widgets/WidgetUtils.vala:84
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see http://www.gnu.org/licenses/."
 msgstr ""
 "Du bör ha fått en kopia av GNU General Public License tillsammans med detta "
 "program.  Om inte, se http://www.gnu.org/licenses/."
-
-#: ../libdeja-dup/libdeja-dup.vala:316
-msgid "Unknown"
-msgstr "Okänt"
-
-#: ../libdeja-dup/OperationRestore.vala:60
-msgid "Restoring files..."
-msgstr "Återskapar filer..."
-
-#: ../libdeja-dup/OperationRestore.vala:173
-#, c-format
-msgid ""
-"Not all files could be restored. Any files that could not be restored may "
-"still be found in %s."
-msgstr ""
-"Alla filer kunde inte återskapas. Filer som inte kunde återskapas kan hittas "
-"i %s."
-
-#: ../libdeja-dup/OperationRestore.vala:182
-#, c-format
-msgid "Could not restore %s: %s"
-msgstr "Kunde inte återskapa %s: %s"
-
-#: ../libdeja-dup/Operation.vala:54
-msgid "Checking for backups..."
-msgstr "Letar efter säkerhetskopior..."
-
-#: ../libdeja-dup/Operation.vala:208
-msgid "Another Déjà Dup is already running"
-msgstr "En annan Déjà Dup är redan igång"
-
-#: ../nautilus/NautilusExtension.c:95
-msgid "Revert to Previous Version..."
-msgid_plural "Revert to Previous Versions..."
-msgstr[0] "Återgå till tidigare version..."
-msgstr[1] "Återgå till tidigare versioner..."
-
-#: ../nautilus/NautilusExtension.c:99
-msgid "Restore file from backup"
-msgid_plural "Restore files from backup"
-msgstr[0] "Återskapa fil från säkerhetskopia"
-msgstr[1] "Återskapa filer från säkerhetskopia"
-
-#: ../preferences/PreferencesDialog.vala:36 ../preferences/preferences.vala:35
-#: ../preferences/preferences.vala:66
-msgid "Déjà Dup Preferences"
-msgstr "Inställningar för Déjà Dup"
-
-#: ../preferences/PreferencesDialog.vala:68
-#, c-format
-msgid "S3 Access Key I_D:"
-msgstr "I_d för S3 Access Key:"
-
-#: ../preferences/PreferencesDialog.vala:80
-#, c-format
-msgid "_Folder:"
-msgstr "_Mapp:"
-
-#: ../preferences/PreferencesDialog.vala:166
-#, c-format
-msgid "_Keep backups:"
-msgstr "_Behåll säkerhetskopior:"
 
 #~ msgid "Déjà Dup Backup Utility"
 #~ msgstr "Säkerhetskopieringsverktyget Déjà Dup"
@@ -902,6 +1023,12 @@ msgstr "_Behåll säkerhetskopior:"
 #~ "program; om inte, skriv till Free Software Foundation, Inc., 59 Temple Place "
 #~ "- Suite 330, Boston, MA  02111-1307, USA."
 
+#~ msgid "Cleaning up..."
+#~ msgstr "Rensar upp..."
+
+#~ msgid "Restoring files..."
+#~ msgstr "Återskapar filer..."
+
 #~ msgid "Enter the password used to encrypt your backup files."
 #~ msgstr ""
 #~ "Ange lösenordet som du använde för att kryptera dina säkerhetskopierade "
@@ -946,6 +1073,9 @@ msgstr "_Behåll säkerhetskopior:"
 #~ msgid "Backup error occurred"
 #~ msgstr "Fel vid säkerhetskopiering inträffade"
 
+#~ msgid "Duplicity's version is too old"
+#~ msgstr "Duplicitys version är för gammal"
+
 #~ msgid "Enter"
 #~ msgstr "Ange"
 
@@ -958,6 +1088,40 @@ msgstr "_Behåll säkerhetskopior:"
 #~ msgstr ""
 #~ "Ange ditt användarid och hemliga nyckel för Amazons webbtjänster.  Detta är "
 #~ "inte samma som ditt användarnamn och lösenord för amazon.com."
+
+#~ msgid ""
+#~ "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
+#~ "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+#~ "and $VIDEO are recognized as the user's special directories. Relative "
+#~ "entries are relative to the user's home directory."
+#~ msgstr ""
+#~ "Denna lista över kataloger som kommer att säkerhetskopieras. Reserverade "
+#~ "värdena $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, "
+#~ "$PUBLIC_SHARE, $TEMPLATES, $TRASH och $VIDEO känns igen som användarens "
+#~ "specialkataloger. Relativa poster är relativa till användarens hemkatalog."
+
+#~ msgid ""
+#~ "Whether to encrypt your backup files in the storage location. It's strongly "
+#~ "recommended to leave this as 'true'."
+#~ msgstr ""
+#~ "Huruvida dina säkerhetskopior i lagringsplatsen ska krypteras. Det "
+#~ "rekommenderas starkt att lämna kvar värdet som \"sant\"."
+
+#~ msgid ""
+#~ "This list of directories will not be backed up. Reserved values $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user's special "
+#~ "directories. Relative entries are relative to the user's home directory. "
+#~ "This list takes precedence over the include list."
+#~ msgstr ""
+#~ "Denna lista över kataloger som inte kommer att säkerhetskopieras. "
+#~ "Reserverade värdena $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, "
+#~ "$PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH och $VIDEO känns igen som "
+#~ "användarens specialkataloger. Relativa poster är relativa till användarens "
+#~ "hemkatalog. Denna lista åsidosätter inkluderingslistan."
+
+#~ msgid "_Translate This Application..."
+#~ msgstr "_Översätt det här programmet..."
 
 #~ msgid "No username specified"
 #~ msgstr "Inget användarnamn angivet"
@@ -1018,6 +1182,9 @@ msgstr "_Behåll säkerhetskopior:"
 #~ msgid "SSH server"
 #~ msgstr "SSH-server"
 
+#~ msgid "Get Help _Online..."
+#~ msgstr "Få hjälp på _nätet..."
+
 #~ msgid "SSH Password"
 #~ msgstr "SSH-lösenord"
 
@@ -1025,14 +1192,50 @@ msgstr "_Behåll säkerhetskopior:"
 #~ msgid "Enter your SSH username and password for server %s."
 #~ msgstr "Ange ditt SSH-användarnamn och lösenord för servern %s."
 
+#, c-format
+#~ msgid ""
+#~ "Could not understand duplicity version '%s'.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Kunde inte förstå duplicitys versionsnummer \"%s\".\n"
+#~ "\n"
+
 #~ msgid "Backing up"
 #~ msgstr "Säkerhetskopierar"
 
 #~ msgid "Backup"
 #~ msgstr "Säkerhetskopiera"
 
+#~ msgid "Preparing..."
+#~ msgstr "Förbereder..."
+
+#~ msgid "Backing up..."
+#~ msgstr "Säkerhetskopierar..."
+
+#~ msgid "Restoring..."
+#~ msgstr "Återställer..."
+
 #~ msgid "Contents"
 #~ msgstr "Innehåll"
+
+#~ msgid "_Report a Problem..."
+#~ msgstr "_Rapportera ett fel..."
+
+#~ msgid "Checking for backups..."
+#~ msgstr "Letar efter säkerhetskopior..."
+
+#~ msgid "Revert to Previous Version..."
+#~ msgid_plural "Revert to Previous Versions..."
+#~ msgstr[0] "Återgå till tidigare version..."
+#~ msgstr[1] "Återgå till tidigare versioner..."
+
+#, c-format
+#~ msgid "Could not restore '%s': File not found in backup"
+#~ msgstr "Kunde inte återskapa \"%s\": Filen hittades inte i säkerhetskopia"
+
+#, c-format
+#~ msgid "Folder %s on Amazon S3"
+#~ msgstr "Mappen %s på Amazon S3"
 
 #~ msgid "Amazon S3 Key ID"
 #~ msgstr "Nyckel-id för Amazon S3"
@@ -1073,6 +1276,17 @@ msgstr "_Behåll säkerhetskopior:"
 
 #~ msgid "_Directory:"
 #~ msgstr "_Katalog:"
+
+#, c-format
+#~ msgid "Error writing file '%s'."
+#~ msgstr "Fel vid skrivning av filen \"%s\"."
+
+#, c-format
+#~ msgid "Error reading file '%s'."
+#~ msgstr "Fel vid läsning av filen \"%s\"."
+
+#~ msgid "Connect to _Server..."
+#~ msgstr "Anslut till _server..."
 
 #~ msgid "Co_nnect"
 #~ msgstr "Ans_lut"
@@ -1341,6 +1555,10 @@ msgstr "_Behåll säkerhetskopior:"
 #~ "säkerhetskopieringar.  Det startas vanligtvis automatiskt av B<deja-dup-"
 #~ "monitor>(1)."
 
+#~ msgid "The type of backup location. Valid values are 's3' or 'file'."
+#~ msgstr ""
+#~ "Typ av plats för säkerhetskopior. Giltiga värden är \"s3\" eller \"file\"."
+
 #~ msgid ""
 #~ "deja-dup is a graphical frontend to B<duplicity>(1).  It can backup and "
 #~ "restore using a local folder or a remote server, including Amazon S3, as "
@@ -1349,3 +1567,6 @@ msgstr "_Behåll säkerhetskopior:"
 #~ "deja-dup är en grafisk klient för B<duplicity>(1).  Det kan säkerhetskopiera "
 #~ "och återställa med en lokal mapp eller en fjärrserver, inklusive Amazon S3, "
 #~ "såväl som schemalagda säkerhetskopieringar med jämna mellanrum."
+
+#~ msgid "Scanning..."
+#~ msgstr "Söker av..."

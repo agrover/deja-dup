@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-01-18 19:36-0500\n"
-"PO-Revision-Date: 2010-01-19 02:36+0000\n"
-"Last-Translator: Severin Heiniger <severinheiniger@gmail.com>\n"
+"POT-Creation-Date: 2010-02-08 16:46-0500\n"
+"PO-Revision-Date: 2010-02-16 19:50+0000\n"
+"Last-Translator: Aljosha Papsch <joschi.papsch@yahoo.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-01-20 04:36+0000\n"
+"X-Launchpad-Export-Date: 2010-02-17 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "Datensicherung durchführen"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:58
+#: ../deja-dup/StatusIcon.vala:59
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
@@ -147,6 +147,12 @@ msgid ""
 "directories. Relative entries are relative to the user’s home directory. "
 "This list takes precedence over the include list."
 msgstr ""
+"Die Verzeichnisse in dieser Liste werden nicht gesichert. Die reservierten "
+"Werte $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, "
+"$PUBLIC_SHARE, $TEMPLATES, $TRASH und $VIDEO werden als besondere "
+"Benutzerverzeichnisse erkannt. Releative Pfadangaben sind relativ zum "
+"Benutzerverzeichnis. Diese Liste hat Vorrang vor der Liste einzubeziehender "
+"Verzeichnisse."
 
 #: ../data/deja-dup.schemas.in.h:18
 msgid "Type of location to store backup"
@@ -166,6 +172,8 @@ msgid ""
 "Whether to encrypt your backup files in the storage location. It’s strongly "
 "recommended to leave this as ‘true’."
 msgstr ""
+"Ob die Datensicherung auf dem Zieldatenträger verschlüsselt werden soll. Es "
+"wird sehr stark empfohlen diese Option aktiviert zu lassen"
 
 #: ../data/deja-dup.schemas.in.h:22
 msgid "Whether to periodically backup"
@@ -173,7 +181,7 @@ msgstr "Huruvida periodiska säkerhetskopior ska tas"
 
 #: ../data/deja-dup.schemas.in.h:23
 msgid "Whether to request the root password"
-msgstr ""
+msgstr "Ob nach dem Administratorpassword gefragt werden soll"
 
 #: ../data/deja-dup.schemas.in.h:24
 msgid ""
@@ -198,7 +206,7 @@ msgstr ""
 msgid "Co_ntinue"
 msgstr "_Fortfahren"
 
-#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:141
+#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:146
 msgid "_Resume Later"
 msgstr "_Später fortsetzen"
 
@@ -283,7 +291,7 @@ msgstr "Datensicherung beendet"
 msgid "Your files were successfully backed up."
 msgstr "Ihre Daten wurden erfolgreich gesichert."
 
-#: ../deja-dup/AssistantBackup.vala:250 ../common/Operation.vala:51
+#: ../deja-dup/AssistantBackup.vala:252 ../common/Operation.vala:52
 msgid "Backing up…"
 msgstr "Sichere..."
 
@@ -405,7 +413,7 @@ msgstr "Wiederherstellung abgeschlossen"
 msgid "Your files were successfully restored."
 msgstr "Ihre Dateien wurden erfolgreich wiederhergestellt."
 
-#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:53
+#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:54
 msgid "Restoring…"
 msgstr "Datenwiederherstellung..."
 
@@ -449,7 +457,7 @@ msgstr "_Inhalt"
 
 #: ../deja-dup/MainWindow.vala:217
 msgid "Get Help _Online…"
-msgstr ""
+msgstr "_Online Hilfe"
 
 #: ../deja-dup/MainWindow.vala:221
 msgid "_Translate This Application…"
@@ -505,24 +513,25 @@ msgstr "_Passwort:"
 msgid "_Remember secret access key"
 msgstr "An geheimen Zugriffsschlüssel e_rinnern"
 
-#: ../deja-dup/StatusIcon.vala:48 ../deja-dup/StatusIcon.vala:133
-msgid "Hide _Progress"
-msgstr ""
-
-#: ../deja-dup/StatusIcon.vala:51 ../deja-dup/StatusIcon.vala:135
-msgid "Show _Progress"
-msgstr ""
-
-#: ../deja-dup/StatusIcon.vala:98
+#: ../deja-dup/StatusIcon.vala:96
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% abgeschlossen"
 
-#: ../deja-dup/StatusIcon.vala:143
-msgid "_Delay Backup"
-msgstr ""
+#: ../deja-dup/StatusIcon.vala:101
+#, c-format
+msgid "Show _Progress (%.1f%%)"
+msgstr "Zeige _Fortschritt (%.1f%%)"
+
+#: ../deja-dup/StatusIcon.vala:103
+msgid "Show _Progress"
+msgstr "Zeige _Fortschritt"
 
 #: ../deja-dup/StatusIcon.vala:148
+msgid "_Delay Backup"
+msgstr "_Datensicherung verschieben"
+
+#: ../deja-dup/StatusIcon.vala:153
 msgid "_Skip Backup"
 msgstr "Datensicherung überspringen"
 
@@ -540,7 +549,7 @@ msgstr "%1$s auf %2$s"
 #: ../common/BackendFile.vala:125
 #, c-format
 msgid "Backup will begin when %s becomes connected."
-msgstr ""
+msgstr "Datensicherung wird beginnen wenn '%s' verbunden ist."
 
 #: ../common/BackendFile.vala:132 ../common/BackendS3.vala:51
 msgid "Backup will begin when a network connection becomes available."
@@ -593,6 +602,8 @@ msgid ""
 "Could not understand duplicity version ‘%s’.\n"
 "\n"
 msgstr ""
+"Konnte duplicity Version '%s' nicht verstehen\n"
+"\n"
 
 #: ../common/DuplicityInfo.vala:142
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
@@ -616,84 +627,96 @@ msgid "Paused (no network)"
 msgstr "Angehalten (keine Netzwerkverbindung)"
 
 #: ../common/Duplicity.vala:250 ../common/Duplicity.vala:258
-#: ../common/Duplicity.vala:286 ../common/Operation.vala:95
+#: ../common/Duplicity.vala:289 ../common/Operation.vala:95
 msgid "Preparing…"
 msgstr "Bereite vor..."
 
-#: ../common/Duplicity.vala:276
-msgid "Creating a fresh backup.  This will take longer than normal."
-msgstr ""
-"Lege eine neue Sicherung an. Dies wird länger als die gewohnte Zeit dauern."
+#: ../common/Duplicity.vala:277
+msgid "Creating the first backup.  This may take a while."
+msgstr "Erstelle die erste Sicherung. Das kann eine Weile dauern."
 
-#: ../common/Duplicity.vala:367 ../common/Duplicity.vala:384
+#: ../common/Duplicity.vala:279
+msgid ""
+"Creating a fresh backup to protect against backup corruption.  This will "
+"take longer than normal."
+msgstr ""
+"Erstelle eine aktuelle Sicherung, um Datenverlust vorzubeugen. Das wird "
+"etwas länger als normal dauern."
+
+#: ../common/Duplicity.vala:370 ../common/Duplicity.vala:387
 msgid "Cleaning up…"
 msgstr "Räume auf..."
 
-#: ../common/Duplicity.vala:470 ../common/Duplicity.vala:741
+#: ../common/Duplicity.vala:473 ../common/Duplicity.vala:744
 msgid "Failed with an unknown error."
 msgstr "Mit unbekanntem Fehler fehlgeschlagen"
 
-#: ../common/Duplicity.vala:653
+#: ../common/Duplicity.vala:656
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
+"Konnte '%s' nicht wiederherstellen: Datei wurde in der Sicherung nicht "
+"gefunden."
 
-#: ../common/Duplicity.vala:657 ../common/Duplicity.vala:699
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:702
 msgid "Bad encryption password."
 msgstr "Falsches Passwort zum Verschlüsseln."
 
-#: ../common/Duplicity.vala:661
+#: ../common/Duplicity.vala:664
 msgid "Computer name changed"
 msgstr "Rechnername wurde geändert"
 
-#: ../common/Duplicity.vala:661
+#: ../common/Duplicity.vala:664
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
 "name is %s.  If this is unexpected, you should backup to a different "
 "location."
 msgstr ""
+"Die vorhandene Sicherung stammt von einem Computer namens %s, der Name "
+"dieses Computers lautet jedoch %s. Wenn dies unerwartet ist, sollte an einen "
+"anderen Ort gesichert werden."
 
-#: ../common/Duplicity.vala:681
+#: ../common/Duplicity.vala:684
 msgid "Invalid ID."
 msgstr "Ungültige Kennung."
 
-#: ../common/Duplicity.vala:683
+#: ../common/Duplicity.vala:686
 msgid "Invalid secret key."
 msgstr "Ungültiger geheimer Schlüssel."
 
-#: ../common/Duplicity.vala:685
+#: ../common/Duplicity.vala:688
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Das angegebene Amazon Web-Services-Konto ist nicht für den S3-Dienst "
 "eingetragen."
 
-#: ../common/Duplicity.vala:694
+#: ../common/Duplicity.vala:697
 msgid "S3 bucket name is not available."
 msgstr "S3 Bucket-Name ist nicht verfügbar."
 
-#: ../common/Duplicity.vala:703
+#: ../common/Duplicity.vala:706
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Fehler beim Lesen der Datei '%s'."
 
-#: ../common/Duplicity.vala:705
+#: ../common/Duplicity.vala:708
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Fehler beim Schreiben der Datei '%s'."
 
-#: ../common/Duplicity.vala:713
+#: ../common/Duplicity.vala:716
 #, c-format
 msgid "No space left in %s"
 msgstr "Nicht genügend Speicherplatz unter %s verfügbar"
 
-#: ../common/Duplicity.vala:733
+#: ../common/Duplicity.vala:736
 msgid "No backup files found"
 msgstr "Keine Datensicherungsdateien gefunden"
 
-#: ../common/Duplicity.vala:769
+#: ../common/Duplicity.vala:772
 msgid "Uploading…"
-msgstr ""
+msgstr "Lade hoch..."
 
 #: ../common/OperationRestore.vala:54
 msgid "Restoring files…"
@@ -713,7 +736,7 @@ msgstr ""
 msgid "Could not restore %s: %s"
 msgstr "%s: %s konnte nicht wiederhergestellt werden"
 
-#: ../common/Operation.vala:55
+#: ../common/Operation.vala:56
 msgid "Checking for backups…"
 msgstr "Suche nach Sicherungen..."
 
@@ -723,7 +746,7 @@ msgstr "Déjà Dup wird bereits ausgeführt"
 
 #: ../monitor/monitor.vala:230
 msgid "Scheduled backup delayed"
-msgstr ""
+msgstr "Geplante Sicherung wird verschoben."
 
 #: ../nautilus/NautilusExtension.c:95
 msgid "Revert to Previous Version…"
@@ -759,7 +782,7 @@ msgstr "Sicherungen _behalten:"
 
 #: ../widgets/ButtonConnect.vala:28
 msgid "Connect to _Server…"
-msgstr ""
+msgstr "Verbinde mit _Server..."
 
 #: ../widgets/ButtonConnect.vala:37
 msgid "Could not open connection dialog"
@@ -868,14 +891,17 @@ msgstr ""
 "  Cephinux https://launchpad.net/~schneider-d\n"
 "  Daniel Nylander https://launchpad.net/~yeager\n"
 "  Fabian Affolter https://launchpad.net/~fab-fedoraproject\n"
+"  Funky Future https://launchpad.net/~funky-future\n"
 "  JohnnyRep https://launchpad.net/~steffen894\n"
 "  Mario Blättermann https://launchpad.net/~mariobl-freenet\n"
+"  Mathias Brodala https://launchpad.net/~mathbr\n"
 "  Maximilian Blömer https://launchpad.net/~maxbloemer\n"
 "  Michael Terry https://launchpad.net/~mterry\n"
 "  MixCool https://launchpad.net/~mixcool\n"
 "  Philipp Wolfer https://launchpad.net/~phw\n"
 "  Severin Heiniger https://launchpad.net/~lantash\n"
-"  Tobias Baldauf https://launchpad.net/~technopagan"
+"  Tobias Baldauf https://launchpad.net/~technopagan\n"
+"  benste https://launchpad.net/~benste"
 
 #: ../widgets/WidgetUtils.vala:82
 #, c-format
@@ -1282,6 +1308,10 @@ msgstr ""
 
 #~ msgid "Restoring"
 #~ msgstr "Wiederherstellung"
+
+#~ msgid "Creating a fresh backup.  This will take longer than normal."
+#~ msgstr ""
+#~ "Lege eine neue Sicherung an. Dies wird länger als die gewohnte Zeit dauern."
 
 #~ msgid "No network connection available"
 #~ msgstr "Keine Netzwerkverbindung verfügbar."

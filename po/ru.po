@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-01-24 09:28-0500\n"
-"PO-Revision-Date: 2010-01-24 18:26+0000\n"
+"POT-Creation-Date: 2010-02-17 21:26-0500\n"
+"PO-Revision-Date: 2010-02-19 19:10+0000\n"
 "Last-Translator: Sergey Sedov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-01-25 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-02-20 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../deja-dup/AssistantRestore.vala:264
@@ -38,7 +38,7 @@ msgstr "Резервное копирование ваших файлов"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:58
+#: ../deja-dup/StatusIcon.vala:59
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
@@ -207,7 +207,7 @@ msgstr ""
 msgid "Co_ntinue"
 msgstr "_Продолжить"
 
-#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:141
+#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:146
 msgid "_Resume Later"
 msgstr "_Продолжить Позже"
 
@@ -292,7 +292,7 @@ msgstr "Резервное копирование завершено"
 msgid "Your files were successfully backed up."
 msgstr "Успешно создана резервная копия ваших файлов."
 
-#: ../deja-dup/AssistantBackup.vala:250 ../common/Operation.vala:51
+#: ../deja-dup/AssistantBackup.vala:252 ../common/Operation.vala:52
 msgid "Backing up…"
 msgstr "Резервное копирование..."
 
@@ -313,19 +313,23 @@ msgid "E_ncryption password:"
 msgstr "Пароль шифрования:"
 
 #: ../deja-dup/AssistantOperation.vala:264
-#: ../deja-dup/MountOperationAssistant.vala:209
+msgid "_Show password"
+msgstr "Пок_азать пароль"
+
+#: ../deja-dup/AssistantOperation.vala:271
+#: ../deja-dup/MountOperationAssistant.vala:216
 msgid "_Remember password"
 msgstr "_Запомнить пароль"
 
-#: ../deja-dup/AssistantOperation.vala:339
+#: ../deja-dup/AssistantOperation.vala:346
 msgid "Summary"
 msgstr "Сводная информация"
 
-#: ../deja-dup/AssistantOperation.vala:354
+#: ../deja-dup/AssistantOperation.vala:361
 msgid "Password needed"
 msgstr "Необходим пароль"
 
-#: ../deja-dup/AssistantOperation.vala:561
+#: ../deja-dup/AssistantOperation.vala:568
 msgid "Déjà Dup backup passphrase"
 msgstr "Пароль для резервных копий Déjà Dup"
 
@@ -411,7 +415,7 @@ msgstr "Восстановление завершено"
 msgid "Your files were successfully restored."
 msgstr "Ваши файлы были успешно восстановлены"
 
-#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:53
+#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:54
 msgid "Restoring…"
 msgstr "Восстановление..."
 
@@ -507,28 +511,37 @@ msgstr "_Секретный ключ доступа:"
 msgid "_Password:"
 msgstr "_Пароль:"
 
+#: ../deja-dup/MountOperationAssistant.vala:208
+msgid "S_how secret access key"
+msgstr ""
+
 #: ../deja-dup/MountOperationAssistant.vala:209
+msgid "S_how password"
+msgstr "_Показать пароль"
+
+#: ../deja-dup/MountOperationAssistant.vala:216
 msgid "_Remember secret access key"
 msgstr "_Запомнить секретный ключ доступа"
 
-#: ../deja-dup/StatusIcon.vala:48 ../deja-dup/StatusIcon.vala:133
-msgid "Hide _Progress"
-msgstr "Скрыть Прогресс"
-
-#: ../deja-dup/StatusIcon.vala:51 ../deja-dup/StatusIcon.vala:135
-msgid "Show _Progress"
-msgstr "Показать Прогресс"
-
-#: ../deja-dup/StatusIcon.vala:98
+#: ../deja-dup/StatusIcon.vala:96
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% завершено"
 
-#: ../deja-dup/StatusIcon.vala:143
+#: ../deja-dup/StatusIcon.vala:101
+#, c-format
+msgid "Show _Progress (%.1f%%)"
+msgstr "Показывать _ход выполнения (%.1f%%)"
+
+#: ../deja-dup/StatusIcon.vala:103
+msgid "Show _Progress"
+msgstr "Показать Прогресс"
+
+#: ../deja-dup/StatusIcon.vala:148
 msgid "_Delay Backup"
 msgstr "_Отложить резервное копирование"
 
-#: ../deja-dup/StatusIcon.vala:148
+#: ../deja-dup/StatusIcon.vala:153
 msgid "_Skip Backup"
 msgstr "_Пропустить резервное копирование"
 
@@ -727,7 +740,7 @@ msgstr ""
 msgid "Could not restore %s: %s"
 msgstr "Не смог восстановить %s: %s"
 
-#: ../common/Operation.vala:55
+#: ../common/Operation.vala:56
 msgid "Checking for backups…"
 msgstr "Проверка резервных копий..."
 
@@ -1652,3 +1665,6 @@ msgstr ""
 
 #~ msgid "Creating a fresh backup.  This will take longer than normal."
 #~ msgstr "Создаётся \"свежая\" резервная копия. Подождите..."
+
+#~ msgid "Hide _Progress"
+#~ msgstr "Скрыть Прогресс"

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-11-25 12:51-0500\n"
-"PO-Revision-Date: 2009-12-19 15:46+0000\n"
-"Last-Translator: Jonjo <beefkidney@googlemail.com>\n"
+"POT-Creation-Date: 2010-02-17 21:26-0500\n"
+"PO-Revision-Date: 2010-02-19 09:21+0000\n"
+"Last-Translator: Nick Trew <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-12-20 04:36+0000\n"
+"X-Launchpad-Export-Date: 2010-02-20 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "Backup your files"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:38
+#: ../deja-dup/StatusIcon.vala:59
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
@@ -177,6 +177,18 @@ msgid "Whether to periodically backup"
 msgstr "Whether to periodically backup"
 
 #: ../data/deja-dup.schemas.in.h:23
+msgid "Whether to request the root password"
+msgstr "Whether to request the root password"
+
+#: ../data/deja-dup.schemas.in.h:24
+msgid ""
+"Whether to request the root password when backing up from or restoring to "
+"system folders."
+msgstr ""
+"Whether to request the root password when backing up from or restoring to "
+"system folders."
+
+#: ../data/deja-dup.schemas.in.h:25
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -184,7 +196,7 @@ msgstr ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 
-#: ../data/deja-dup.schemas.in.h:24
+#: ../data/deja-dup.schemas.in.h:26
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 
@@ -192,7 +204,7 @@ msgstr "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgid "Co_ntinue"
 msgstr "Co_ntinue"
 
-#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:101
+#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:146
 msgid "_Resume Later"
 msgstr "_Resume Later"
 
@@ -277,7 +289,7 @@ msgstr "Backup Finished"
 msgid "Your files were successfully backed up."
 msgstr "Your files were successfully backed up."
 
-#: ../deja-dup/AssistantBackup.vala:250 ../common/Operation.vala:50
+#: ../deja-dup/AssistantBackup.vala:252 ../common/Operation.vala:52
 msgid "Backing up…"
 msgstr "Backing up…"
 
@@ -298,19 +310,23 @@ msgid "E_ncryption password:"
 msgstr "E_ncryption password:"
 
 #: ../deja-dup/AssistantOperation.vala:264
-#: ../deja-dup/MountOperationAssistant.vala:209
+msgid "_Show password"
+msgstr "_Show password"
+
+#: ../deja-dup/AssistantOperation.vala:271
+#: ../deja-dup/MountOperationAssistant.vala:216
 msgid "_Remember password"
 msgstr "_Remember password"
 
-#: ../deja-dup/AssistantOperation.vala:339
+#: ../deja-dup/AssistantOperation.vala:346
 msgid "Summary"
 msgstr "Summary"
 
-#: ../deja-dup/AssistantOperation.vala:354
+#: ../deja-dup/AssistantOperation.vala:361
 msgid "Password needed"
 msgstr "Password needed"
 
-#: ../deja-dup/AssistantOperation.vala:561
+#: ../deja-dup/AssistantOperation.vala:568
 msgid "Déjà Dup backup passphrase"
 msgstr "Déjà Dup backup passphrase"
 
@@ -399,7 +415,7 @@ msgstr "Restore Finished"
 msgid "Your files were successfully restored."
 msgstr "Your files were successfully restored."
 
-#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:52
+#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:54
 msgid "Restoring…"
 msgstr "Restoring…"
 
@@ -494,20 +510,37 @@ msgstr "_Secret access key:"
 msgid "_Password:"
 msgstr "_Password:"
 
+#: ../deja-dup/MountOperationAssistant.vala:208
+msgid "S_how secret access key"
+msgstr "S_how secret access key"
+
 #: ../deja-dup/MountOperationAssistant.vala:209
+msgid "S_how password"
+msgstr "S_how password"
+
+#: ../deja-dup/MountOperationAssistant.vala:216
 msgid "_Remember secret access key"
 msgstr "_Remember secret access key"
 
-#: ../deja-dup/StatusIcon.vala:69
+#: ../deja-dup/StatusIcon.vala:96
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% complete"
 
+#: ../deja-dup/StatusIcon.vala:101
+#, c-format
+msgid "Show _Progress (%.1f%%)"
+msgstr "Show _Progress (%.1f%%)"
+
 #: ../deja-dup/StatusIcon.vala:103
+msgid "Show _Progress"
+msgstr "Show _Progress"
+
+#: ../deja-dup/StatusIcon.vala:148
 msgid "_Delay Backup"
 msgstr "_Delay Backup"
 
-#: ../deja-dup/StatusIcon.vala:108
+#: ../deja-dup/StatusIcon.vala:153
 msgid "_Skip Backup"
 msgstr "_Skip Backup"
 
@@ -554,15 +587,15 @@ msgstr "Permission denied"
 msgid "Enter Amazon S3 access key"
 msgstr "Enter Amazon S3 access key"
 
-#: ../common/CommonUtils.vala:239
+#: ../common/CommonUtils.vala:240
 msgid "Unknown"
 msgstr "Unknown"
 
-#: ../common/DuplicityInfo.vala:127
+#: ../common/DuplicityInfo.vala:133
 msgid "Could not run duplicity"
 msgstr "Could not run duplicity"
 
-#: ../common/DuplicityInfo.vala:132
+#: ../common/DuplicityInfo.vala:138
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -570,7 +603,7 @@ msgstr ""
 "Could not understand duplicity version.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:134
+#: ../common/DuplicityInfo.vala:140
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -579,15 +612,15 @@ msgstr ""
 "Could not understand duplicity version ‘%s’.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:136
+#: ../common/DuplicityInfo.vala:142
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr "Without duplicity, Déjà Dup cannot function.  It will close now."
 
-#: ../common/DuplicityInfo.vala:140
+#: ../common/DuplicityInfo.vala:146
 msgid "Duplicity’s version is too old"
 msgstr "Duplicity’s version is too old"
 
-#: ../common/DuplicityInfo.vala:141
+#: ../common/DuplicityInfo.vala:147
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -596,41 +629,49 @@ msgstr ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
 "version %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:172
+#: ../common/Duplicity.vala:210
 msgid "Paused (no network)"
 msgstr "Paused (no network)"
 
-#: ../common/Duplicity.vala:212 ../common/Duplicity.vala:220
-#: ../common/Operation.vala:94
+#: ../common/Duplicity.vala:250 ../common/Duplicity.vala:258
+#: ../common/Duplicity.vala:289 ../common/Operation.vala:95
 msgid "Preparing…"
 msgstr "Preparing…"
 
-#: ../common/Duplicity.vala:238
-msgid "Creating a fresh backup.  This will take longer than normal."
-msgstr "Creating a fresh backup. This will take longer than normal."
+#: ../common/Duplicity.vala:277
+msgid "Creating the first backup.  This may take a while."
+msgstr "Creating the first backup.  This may take a while."
 
-#: ../common/Duplicity.vala:292 ../common/Duplicity.vala:309
+#: ../common/Duplicity.vala:279
+msgid ""
+"Creating a fresh backup to protect against backup corruption.  This will "
+"take longer than normal."
+msgstr ""
+"Creating a fresh backup to protect against backup corruption.  This will "
+"take longer than normal."
+
+#: ../common/Duplicity.vala:370 ../common/Duplicity.vala:387
 msgid "Cleaning up…"
 msgstr "Cleaning up…"
 
-#: ../common/Duplicity.vala:383 ../common/Duplicity.vala:653
+#: ../common/Duplicity.vala:473 ../common/Duplicity.vala:744
 msgid "Failed with an unknown error."
 msgstr "Failed with an unknown error."
 
-#: ../common/Duplicity.vala:565
+#: ../common/Duplicity.vala:656
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Could not restore ‘%s’: File not found in backup"
 
-#: ../common/Duplicity.vala:569 ../common/Duplicity.vala:611
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:702
 msgid "Bad encryption password."
 msgstr "Bad encryption password."
 
-#: ../common/Duplicity.vala:573
+#: ../common/Duplicity.vala:664
 msgid "Computer name changed"
 msgstr "Computer name changed"
 
-#: ../common/Duplicity.vala:573
+#: ../common/Duplicity.vala:664
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -640,43 +681,43 @@ msgstr ""
 "The existing backup is of a computer named %s, but the current computer’s "
 "name is %s. If this is unexpected, you should backup to a different location."
 
-#: ../common/Duplicity.vala:593
+#: ../common/Duplicity.vala:684
 msgid "Invalid ID."
 msgstr "Invalid ID."
 
-#: ../common/Duplicity.vala:595
+#: ../common/Duplicity.vala:686
 msgid "Invalid secret key."
 msgstr "Invalid secret key."
 
-#: ../common/Duplicity.vala:597
+#: ../common/Duplicity.vala:688
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Your Amazon Web Services account is not signed up for the S3 service."
 
-#: ../common/Duplicity.vala:606
+#: ../common/Duplicity.vala:697
 msgid "S3 bucket name is not available."
 msgstr "S3 bucket name is not available."
 
-#: ../common/Duplicity.vala:615
+#: ../common/Duplicity.vala:706
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Error reading file ‘%s’."
 
-#: ../common/Duplicity.vala:617
+#: ../common/Duplicity.vala:708
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Error writing file ‘%s’."
 
-#: ../common/Duplicity.vala:625
+#: ../common/Duplicity.vala:716
 #, c-format
 msgid "No space left in %s"
 msgstr "No space left in %s"
 
-#: ../common/Duplicity.vala:645
+#: ../common/Duplicity.vala:736
 msgid "No backup files found"
 msgstr "No backup files found"
 
-#: ../common/Duplicity.vala:681
+#: ../common/Duplicity.vala:772
 msgid "Uploading…"
 msgstr "Uploading…"
 
@@ -684,7 +725,7 @@ msgstr "Uploading…"
 msgid "Restoring files…"
 msgstr "Restoring files…"
 
-#: ../common/OperationRestore.vala:168
+#: ../common/OperationRestore.vala:173
 #, c-format
 msgid ""
 "Not all files could be restored. Any files that could not be restored may "
@@ -693,16 +734,16 @@ msgstr ""
 "Not all files could be restored. Any files that could not be restored may "
 "still be found in %s."
 
-#: ../common/OperationRestore.vala:177
+#: ../common/OperationRestore.vala:182
 #, c-format
 msgid "Could not restore %s: %s"
 msgstr "Could not restore %s: %s"
 
-#: ../common/Operation.vala:54
+#: ../common/Operation.vala:56
 msgid "Checking for backups…"
 msgstr "Checking for backups…"
 
-#: ../common/Operation.vala:209
+#: ../common/Operation.vala:210
 msgid "Another Déjà Dup is already running"
 msgstr "Another Déjà Dup is already running"
 
@@ -853,7 +894,8 @@ msgstr ""
 "  Huygens https://launchpad.net/~huygens-25\n"
 "  Jonjo https://launchpad.net/~jonjo\n"
 "  Mathieu Divaret https://launchpad.net/~joots\n"
-"  Michael Terry https://launchpad.net/~mterry"
+"  Michael Terry https://launchpad.net/~mterry\n"
+"  Nick Trew https://launchpad.net/~vxnick"
 
 #: ../widgets/WidgetUtils.vala:82
 #, c-format
@@ -1839,3 +1881,6 @@ msgstr ""
 
 #~ msgid "<author> <firstname>Michael</firstname> <surname>Terry</surname>"
 #~ msgstr "<author> <firstname>Michael</firstname> <surname>Terry</surname>"
+
+#~ msgid "Creating a fresh backup.  This will take longer than normal."
+#~ msgstr "Creating a fresh backup. This will take longer than normal."
