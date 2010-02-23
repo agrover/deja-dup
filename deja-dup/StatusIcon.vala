@@ -46,10 +46,14 @@ public class StatusIcon : Object
     
     if (window != null) {
       window.show.connect((w) => {
+        toggle_item.toggled.disconnect(toggle);
         toggle_item.active = true;
+        toggle_item.toggled.connect(toggle);
       });
       window.hide.connect((w) => {
+        toggle_item.toggled.disconnect(toggle);
         toggle_item.active = false;
+        toggle_item.toggled.connect(toggle);
       });
     }
     
@@ -123,6 +127,11 @@ public class StatusIcon : Object
 
     op.cancel();
   }
+
+  void toggle()
+  {
+    toggle_window();
+  }
   
   Gtk.Menu ensure_menu()
   {
@@ -134,7 +143,7 @@ public class StatusIcon : Object
     var check = new Gtk.CheckMenuItem();
     check.active = window.visible;
     check.use_underline = true;
-    check.toggled.connect((i) => {toggle_window();});
+    check.toggled.connect(toggle);
     menu.append(check);
     toggle_item = check;
     update_progress();
