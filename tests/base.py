@@ -87,7 +87,8 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
   environ['GCONF_CONFIG_SOURCE'] = 'xml:readwrite:' + gconf_dir
   
   # Now install default rules into our temporary config dir
-  os.system('gconftool-2 --makefile-install-rule %s > /dev/null' % ('%s/../data/deja-dup.schemas.in' % srcdir))
+  if os.system('gconftool-2 --makefile-install-rule %s > /dev/null' % ('%s/../data/deja-dup.schemas.in' % srcdir)):
+    raise Exception('Could not install gconf schema')
   
   if backend == 'file':
     create_local_config(dest)
@@ -132,6 +133,8 @@ def set_gconf_value(key, value, key_type = "string", list_type = None):
     cmd += ["--list-type=%s" % list_type]
   sp = subprocess.Popen(cmd, stdout=subprocess.PIPE)
   sp.communicate()
+  if sp.returncode:
+    raise Exception('Could not set gconf key %s to %s' % (key, value))
 
 def get_gconf_value(key):
   cmd = ['gconftool-2', '--config-source=xml:readwrite:%s' % gconf_dir,
@@ -141,19 +144,16 @@ def get_gconf_value(key):
   return pout.strip()
 
 def start_deja_dup(args=[''], waitfor='frmDéjàDup'):
-  ldtp.launchapp('deja-dup', arg=args, delay=0)
-  ldtp.appundertest('deja-dup')
+  ldtp.launchapp('deja-dup', args, delay=0)
   if waitfor is not None:
     ldtp.waittillguiexist(waitfor)
 
 def start_deja_dup_prefs():
   ldtp.launchapp('deja-dup-preferences', delay=0)
-  ldtp.appundertest('deja-dup-preferences')
   ldtp.waittillguiexist('frmDéjàDupPreferences')
 
 def start_deja_dup_applet():
-  ldtp.launchapp('deja-dup', arg=['--backup'], delay=0)
-  ldtp.appundertest('deja-dup')
+  ldtp.launchapp('deja-dup', ['--backup'], delay=0)
 
 def create_local_config(dest='/'):
   if dest is None:
