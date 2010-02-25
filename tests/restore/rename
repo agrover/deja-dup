@@ -25,7 +25,7 @@ import ldtp
 
 def test():
   restoredir = base.get_temp_name('restore')
-  base.setup('file', dest=(sys.path[0]+'/../vols/home'))
+  base.setup('file', dest=(sys.path[0]+'/vols/home'))
   base.restore_simple(restoredir)
   assert base.file_equals(restoredir+os.environ['HOME']+'/test', 'test\n')
   return True

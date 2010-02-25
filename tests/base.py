@@ -51,6 +51,7 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
     srcdir = '.'
   
   environ['LANG'] = 'C'
+  environ['DEJA_DUP_TESTING'] = '1'
   
   extra_paths = '../deja-dup:../preferences:../applet:../monitor:'
   extra_pythonpaths = ''
@@ -144,16 +145,16 @@ def get_gconf_value(key):
   return pout.strip()
 
 def start_deja_dup(args=[''], waitfor='frmDéjàDup'):
-  ldtp.launchapp('deja-dup', args, delay=0)
+  subprocess.Popen(['deja-dup'] + args)
   if waitfor is not None:
     ldtp.waittillguiexist(waitfor)
 
 def start_deja_dup_prefs():
-  ldtp.launchapp('deja-dup-preferences', delay=0)
+  subprocess.Popen(['deja-dup-preferences'])
   ldtp.waittillguiexist('frmDéjàDupPreferences')
 
 def start_deja_dup_applet():
-  ldtp.launchapp('deja-dup', ['--backup'], delay=0)
+  subprocess.Popen(['deja-dup', '--backup'])
 
 def create_local_config(dest='/'):
   if dest is None:
@@ -315,23 +316,27 @@ def wait_for_encryption(dlg, obj, max_count):
     count += 1
   assert guivisible(dlg, obj)
 
+def remap(frm):
+  ldtp.wait(1) # sometimes (only for newer versions?) ldtp needs a second to catch its breath
+  ldtp.remap(frm) # in case this is second time we've run it
+
 def backup_simple(finish=True):
   ldtp.click('frmDéjàDup', 'btnBackup')
   ldtp.waittillguiexist('dlgBackup')
-  ldtp.remap('dlgBackup') # in case this is second time we've run it
+  remap('dlgBackup')
   if guivisible('dlgBackup', 'lblPreferences'):
     ldtp.click('dlgBackup', 'btnForward')
     ldtp.click('dlgBackup', 'btnForward')
   ldtp.click('dlgBackup', 'btnBackup')
   if finish:
-    wait_for_encryption('dlgBackup', 'lblYourfilesweresuccessfullybackedup.', 400)
+    wait_for_encryption('dlgBackup', 'lblYourfilesweresuccessfullybackedup', 400)
     ldtp.click('dlgBackup', 'btnClose')
     ldtp.waittillguinotexist('dlgBackup')
 
 def restore_simple(path, date=None):
   ldtp.click('frmDéjàDup', 'btnRestore')
   assert ldtp.waittillguiexist('dlgRestore')
-  ldtp.remap('dlgRestore') # in case this is second time we've run it
+  remap('dlgRestore')
   if ldtp.guiexist('dlgRestore', 'lblPreferences'):
     ldtp.click('dlgRestore', 'btnForward')
   wait_for_encryption('dlgRestore', 'lblRestorefromWhen?', 200)
@@ -343,14 +348,16 @@ def restore_simple(path, date=None):
   assert ldtp.waittillguiexist('dlgChoosedestinationforrestoredfiles')
   ldtp.settextvalue('dlgChoosedestinationforrestoredfiles', 'txtLocation', path)
   ldtp.click('dlgChoosedestinationforrestoredfiles', 'btnOpen')
+  ldtp.wait(1) # give the combo a second to settle
   ldtp.click('dlgRestore', 'btnForward')
   ldtp.click('dlgRestore', 'btnRestore')
-  assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored.', 400)
-  assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
+  assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored', 400)
+  assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored')
   ldtp.click('dlgRestore', 'btnClose')
   ldtp.waittillguinotexist('dlgRestore')
 
 def restore_specific(path, date=None):
+  remap('dlgRestore')
   if ldtp.guiexist('dlgRestore', 'lblPreferences'):
     ldtp.click('dlgRestore', 'btnForward')
   wait_for_encryption('dlgRestore', 'lblRestorefromWhen?', 200)
@@ -358,8 +365,8 @@ def restore_specific(path, date=None):
     ldtp.comboselect('dlgRestore', 'cboDate', date)
   ldtp.click('dlgRestore', 'btnForward')
   ldtp.click('dlgRestore', 'btnRestore')
-  assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
-  assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored.')
+  assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored')
+  assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored')
   ldtp.click('dlgRestore', 'btnClose')
 
 def file_equals(path, contents):

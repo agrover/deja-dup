@@ -39,7 +39,7 @@ def check_dir(path, oneval):
 
 def test():
   restoredir = base.get_temp_name('restore')
-  base.setup('file', dest=(sys.path[0]+'/../vols/simple'), encrypt=False)
+  base.setup('file', dest=(sys.path[0]+'/vols/simple'), encrypt=False)
   base.restore_simple(restoredir, DATE1)
   check_dir(restoredir, 'one\n')
   os.system("rm -r %s" % restoredir)

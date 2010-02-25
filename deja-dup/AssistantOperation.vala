@@ -538,11 +538,19 @@ public abstract class AssistantOperation : Assistant
 
   protected void get_passphrase()
   {
-    // First, try user's keyring
-    GnomeKeyring.find_password(PASSPHRASE_SCHEMA,
-                               found_passphrase,
-                               "owner", Config.PACKAGE,
-                               "type", "passphrase");
+    // DEJA_DUP_TESTING only set when we are in test suite
+    var testing = Environment.get_variable("DEJA_DUP_TESTING");
+    if (testing == null || testing == "") {
+      // First, try user's keyring
+      GnomeKeyring.find_password(PASSPHRASE_SCHEMA,
+                                 found_passphrase,
+                                 "owner", Config.PACKAGE,
+                                 "type", "passphrase");
+    }
+    else {
+      // just jump straight to asking user
+      ask_passphrase();
+    }
   }
 
   void save_password_callback(GnomeKeyring.Result result)
