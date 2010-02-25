@@ -345,8 +345,13 @@ static int main(string[] args)
   VolumeMonitor.get().volume_added.connect(volume_added);
 
   loop = new MainLoop(null, false);
-  
-  prepare_next_run();
+
+  // Delay first check to give NetworkManager a chance to start up.
+  if (testing)
+    prepare_next_run();
+  else
+    Timeout.add_seconds(120, () => {prepare_next_run(); return false;});
+
   watch_gconf();
   loop.run();
   
