@@ -42,7 +42,7 @@ cleanup_mounts = []
 # if we're running inside a distcheck for example.  So note that we check for
 # srcdir and use it if available.  Else, default to current directory.
 
-def setup(backend = None, encrypt = None, start = True, dest = None, sources = [], args=['']):
+def setup(backend = None, encrypt = None, start = True, dest = None, sources = [], excludes = [], args=['']):
   global gconf_dir, cleanup_dirs, latest_duplicity
   
   if 'srcdir' in environ:
@@ -97,7 +97,7 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
     create_ssh_config(dest)
   elif backend == 'vol':
     create_vol_config(dest)
-  set_includes_excludes(includes=sources)
+  set_includes_excludes(includes=sources, excludes=excludes)
   
   if encrypt is not None:
     set_gconf_value("encrypt", 'true' if encrypt else 'false', 'bool')

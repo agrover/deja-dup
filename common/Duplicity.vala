@@ -148,21 +148,8 @@ public class Duplicity : Object
     if (!encrypted)
       backend_argv.append("--no-encryption");
     
-    // Add all exclude and include arguments
-    if (mode == Operation.Mode.BACKUP) {
-      if (excludes != null) {
-        foreach (File f in excludes)
-          saved_argv.append("--exclude=" + f.get_path());
-      }
-      if (includes != null) {
-        foreach (File f in includes) {
-          saved_argv.append("--include=" + f.get_path());
-          //if (!f.has_prefix(slash_home_me))
-          //  needs_root = true;
-        }
-      }
-      saved_argv.append("--exclude=**");
-    }
+    if (mode == Operation.Mode.BACKUP)
+      process_include_excludes();
     
     try {
       delete_age = client.get_int(DELETE_AFTER_KEY);
@@ -179,6 +166,43 @@ public class Duplicity : Object
         pause();
       }
     }
+  }
+
+  int cmp_prefix(File a, File b)
+  {
+    if (a.has_prefix(b))
+      return -1;
+    else if (b.has_prefix(a))
+      return 1;
+    else
+      return 0;
+  }
+
+  void process_include_excludes()
+  {
+    // We need to make sure that the most specific includes/excludes will
+    // be first in the list (duplicity uses only first matched dir).  Includes
+    // will be preferred if the same dir is present in both lists.
+    includes.sort((CompareFunc)cmp_prefix);
+    excludes.sort((CompareFunc)cmp_prefix);
+
+    foreach (File i in includes) {
+      var excludes2 = excludes.copy();
+      foreach (File e in excludes2) {
+        if (e.has_prefix(i)) {
+          saved_argv.append("--exclude=" + e.get_path());
+          excludes.remove(e);
+        }
+      }
+      saved_argv.append("--include=" + i.get_path());
+      //if (!i.has_prefix(slash_home_me))
+      //  needs_root = true;
+    }
+    foreach (File e in excludes) {
+      saved_argv.append("--exclude=" + e.get_path());
+    }
+    
+    saved_argv.append("--exclude=**");
   }
   
   public void cancel() {
