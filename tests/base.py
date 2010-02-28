@@ -31,7 +31,7 @@ import glob
 import re
 import traceback
 
-latest_duplicity = '0.6.06'
+latest_duplicity = '0.6.07'
 
 temp_dir = None
 gconf_dir = None
