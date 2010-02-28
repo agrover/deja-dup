@@ -24,6 +24,7 @@ TESTS = \
 	backup/continue \
 	backup/full \
 	backup/delete \
+	backup/exclude \
 	basic/badversion \
 	prefs/ssh-to-file \
 	restore/cycle \
