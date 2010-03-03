@@ -49,6 +49,9 @@ all-local: all-local-@USE_NLS@
 all-local-no:
 all-local-yes: po4a.stamp
 
+# This makes 'make -j2' work.  _DOC_LC_DOCS is defined in gnome-doc-util.make
+$(_DOC_LC_DOCS) : po4a.stamp
+
 # Put LINGUAS list into po4a.cfg, but only if needed (else we'll update
 # timestamp on the cfg file unnecessarily.  Also copy all the po files from the
 # real po directory into the sub language directories in help where po4a looks
