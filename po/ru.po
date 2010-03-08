@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-02-17 21:26-0500\n"
-"PO-Revision-Date: 2010-02-19 19:10+0000\n"
+"POT-Creation-Date: 2010-02-20 22:36-0500\n"
+"PO-Revision-Date: 2010-02-22 04:56+0000\n"
 "Last-Translator: Sergey Sedov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-02-20 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-02-23 05:07+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../deja-dup/AssistantRestore.vala:264
@@ -82,30 +82,79 @@ msgid "Directories to backup"
 msgstr "Каталоги, которые надо сохранить"
 
 #: ../data/deja-dup.schemas.in.h:6
+msgid "Folder type"
+msgstr "Тип каталога"
+
+#: ../data/deja-dup.schemas.in.h:7
+msgid "Full name of the external volume"
+msgstr "Полное название внешнего съёмного носителя"
+
+#: ../data/deja-dup.schemas.in.h:8
 msgid "How long to keep backup files"
 msgstr "Как долго хранить резервные копии"
 
-#: ../data/deja-dup.schemas.in.h:7
+#: ../data/deja-dup.schemas.in.h:9
 msgid "How often to periodically backup"
 msgstr "С какой периодичностью делать резервные копии"
 
-#: ../data/deja-dup.schemas.in.h:8
+#: ../data/deja-dup.schemas.in.h:10
+msgid "Icon of the external volume"
+msgstr "Значок съёмного носителя"
+
+#: ../data/deja-dup.schemas.in.h:11
+msgid ""
+"If the backup location is on an external volume, this is its unique "
+"filesystem identifier."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:12
+msgid ""
+"If the backup location is on an external volume, this is the path of the "
+"folder on that volume."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:13
+msgid ""
+"If the backup location is on an external volume, this is the volume’s icon."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:14
+msgid ""
+"If the backup location is on an external volume, this is the volume’s longer "
+"descriptive name."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:15
+msgid ""
+"If the backup location is on an external volume, this is the volume’s "
+"shorter name."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:16
 msgid "Location in which to hold the backup files."
 msgstr "Местоположение в котором хранятся файлы резервных копий"
 
-#: ../data/deja-dup.schemas.in.h:9
+#: ../data/deja-dup.schemas.in.h:17
+msgid "Relative path under the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:18
+msgid "Short name of the external volume"
+msgstr "Краткое название внешнего съёмного носителя"
+
+#: ../data/deja-dup.schemas.in.h:19
 msgid "The Amazon S3 bucket name to use"
 msgstr "Имя набора (bucket) Amazon S3"
 
-#: ../data/deja-dup.schemas.in.h:10
+#: ../data/deja-dup.schemas.in.h:20
 msgid "The Amazon S3 folder"
 msgstr "Каталог на Amazon S3"
 
-#: ../data/deja-dup.schemas.in.h:11
+#: ../data/deja-dup.schemas.in.h:21
 msgid "The last time Déjà Dup was run"
 msgstr "Время, когда Déjà Dup запускалось в последний раз"
 
-#: ../data/deja-dup.schemas.in.h:12
+#: ../data/deja-dup.schemas.in.h:22
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
@@ -113,11 +162,11 @@ msgstr ""
 "Когда последний раз Déjà Dup была успешно запущено. Время должно быть в "
 "формате ISO 8601"
 
-#: ../data/deja-dup.schemas.in.h:13
+#: ../data/deja-dup.schemas.in.h:23
 msgid "The number of days between backups."
 msgstr "Количество дней между резервными копиями"
 
-#: ../data/deja-dup.schemas.in.h:14
+#: ../data/deja-dup.schemas.in.h:24
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
@@ -126,12 +175,12 @@ msgstr ""
 "Количество дней хранения резервной копии. Значение 0 - вечно. Это "
 "минимальное значение, файлы могут храниться дольше."
 
-#: ../data/deja-dup.schemas.in.h:15
+#: ../data/deja-dup.schemas.in.h:25
 msgid "The type of backup location. Valid values are ‘s3’ or ‘file’."
 msgstr ""
 "Тип места хранения резервных копий. Допустимые значения 's3' или 'file'."
 
-#: ../data/deja-dup.schemas.in.h:16
+#: ../data/deja-dup.schemas.in.h:26
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
@@ -143,7 +192,7 @@ msgstr ""
 "$TEMPLATES, $TRASH, и $VIDEO распознаются как специальные папки "
 "пользователя. Относительные пути указываются относительно домашней папки."
 
-#: ../data/deja-dup.schemas.in.h:17
+#: ../data/deja-dup.schemas.in.h:27
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
@@ -157,39 +206,49 @@ msgstr ""
 "пользователя. Относительные пути указываются относительно домашней папки. "
 "Этот список имеет больший приоритет, чем список включенных папок."
 
-#: ../data/deja-dup.schemas.in.h:18
+#: ../data/deja-dup.schemas.in.h:28
 msgid "Type of location to store backup"
 msgstr "Тип места хранения копий"
 
-#: ../data/deja-dup.schemas.in.h:19
+#: ../data/deja-dup.schemas.in.h:29
+msgid "Unique ID of the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:30
+msgid ""
+"Whether the backup location is a mounted external volume or a normal folder. "
+"Possible values are ‘volume’ or ‘normal’."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:31
 msgid "Whether to automatically backup on a regular schedule."
 msgstr "Следует ли автоматически создавать резервные копии по расписанию."
 
-#: ../data/deja-dup.schemas.in.h:20
+#: ../data/deja-dup.schemas.in.h:32
 msgid "Whether to encrypt your backup"
 msgstr "Следует ли шифровать резервную копию"
 
-#: ../data/deja-dup.schemas.in.h:21
+#: ../data/deja-dup.schemas.in.h:33
 msgid ""
 "Whether to encrypt your backup files in the storage location. It’s strongly "
 "recommended to leave this as ‘true’."
 msgstr "Шифровать резервные копии. Очень рекомендуется включить."
 
-#: ../data/deja-dup.schemas.in.h:22
+#: ../data/deja-dup.schemas.in.h:34
 msgid "Whether to periodically backup"
 msgstr "Выполнять ли периодическое резервное копирование"
 
-#: ../data/deja-dup.schemas.in.h:23
+#: ../data/deja-dup.schemas.in.h:35
 msgid "Whether to request the root password"
 msgstr ""
 
-#: ../data/deja-dup.schemas.in.h:24
+#: ../data/deja-dup.schemas.in.h:36
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
 msgstr ""
 
-#: ../data/deja-dup.schemas.in.h:25
+#: ../data/deja-dup.schemas.in.h:37
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -197,7 +256,7 @@ msgstr ""
 "В каком наборе (bucket) Amazon S3 хранить файлы. Он не обязательно должен "
 "существовать. Только действительное имя хоста допустимо."
 
-#: ../data/deja-dup.schemas.in.h:26
+#: ../data/deja-dup.schemas.in.h:38
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Ваш S3 Access Key Identifier. Выступает в роли вашего имени пользователя на "
