@@ -61,6 +61,9 @@ public class DuplicityInstance : Object
     
     argv.append("--verbosity=9");
     
+    if (DuplicityInfo.get_default().use_empty_gpg_options)
+      argv.append("--gpg-options= "); // one space character
+
     // Cache signature files
     var cache_dir = Environment.get_user_cache_dir();
     if (cache_dir != null) {

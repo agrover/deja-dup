@@ -37,6 +37,7 @@ public class DuplicityInfo : Object
   public bool can_resume {get; private set; default = false; }
   public bool has_rename_arg {get; private set; default = false; }
   public bool has_fixed_log_file {get; private set; default = false; }
+  public bool use_empty_gpg_options {get; private set; default = false; }
   
   static DuplicityInfo info = null;
   public static DuplicityInfo get_default() {
@@ -105,6 +106,8 @@ public class DuplicityInfo : Object
       has_rename_arg = true;
       has_fixed_log_file = true; // had it since forever, but was buggy
     }
+    if (equals_version(0, 6, 8))
+      use_empty_gpg_options = true; // workaround a duplicity bug
     
     return true;
   }
