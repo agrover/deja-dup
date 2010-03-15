@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
+if HAVE_NAUTILUS
 nautilusdir = $(NAUTILUS_EXTENSION_DIR)
 
 nautilus_LTLIBRARIES = libnautilus-deja-dup.la
@@ -29,4 +30,4 @@ libnautilus_deja_dup_la_SOURCES = \
 
 libnautilus_deja_dup_la_LDFLAGS = -module -avoid-version
 libnautilus_deja_dup_la_LIBADD = $(NAUTILUS_LIBS) @INTLLIBS@
-
+endif

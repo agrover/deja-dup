@@ -26,6 +26,7 @@ public class MainWindow : Gtk.Window
     Gtk.VBox vb = new Gtk.VBox (false, 0);
     
     this.title = _("Déjà Dup");
+    this.resizable = false;
     
     var restore_align = new Gtk.Alignment(0.5f, 0.5f, 0.0f, 0.0f);
     
