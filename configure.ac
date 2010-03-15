@@ -109,15 +109,27 @@ PKG_CHECK_MODULES(MONITOR,
 AC_SUBST(MONITOR_CFLAGS)
 AC_SUBST(MONITOR_LIBS)
 
-PKG_CHECK_MODULES(NAUTILUS,
-                  libnautilus-extension
-                  glib-2.0 >= $GLIB_REQ_VER)
-AC_SUBST(NAUTILUS_CFLAGS)
-AC_SUBST(NAUTILUS_LIBS)
-
-dnl Get nautilus extensions directory
-NAUTILUS_EXTENSION_DIR="${libdir}/nautilus/extensions-2.0"
-AC_SUBST(NAUTILUS_EXTENSION_DIR)
+AC_ARG_WITH([nautilus],
+  [AS_HELP_STRING([--with-nautilus],
+    [build nautilus plugin @<:@default=check@:>@])],
+  [],
+  [with_nautilus=check])
+AS_IF([test "x$with_nautilus" != xno],
+  [PKG_CHECK_MODULES(NAUTILUS, libnautilus-extension 
+                               glib-2.0 >= $GLIB_REQ_VER,
+    [AC_SUBST(NAUTILUS_CFLAGS)
+     AC_SUBST(NAUTILUS_LIBS)]
+     dnl Get nautilus extensions directory
+     NAUTILUS_EXTENSION_DIR="${libdir}/nautilus/extensions-2.0"
+     AC_SUBST(NAUTILUS_EXTENSION_DIR),
+    [if test "x$with_nautilus" != xcheck; then
+        AC_MSG_FAILURE(
+          [--with-nautilus was given, but test for libnautilus-extension failed])
+      fi
+    ]
+  )]
+)
+AM_CONDITIONAL([HAVE_NAUTILUS], [test -n "$NAUTILUS_LIBS"])
 
 AH_TEMPLATE([HAVE_APPINDICATOR], [whether libappindicator is available])
 AC_ARG_WITH([appindicator],
