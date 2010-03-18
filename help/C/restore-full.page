@@ -1,0 +1,33 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="restore-full">
+<info>
+  <desc>Recover from total system failure.</desc>
+  <link type="guide" xref="restore"/>
+</info>
+<title>Full System Restore</title>
+<section id="setup">
+<title>Setup</title>
+<steps>
+  <item><p>Get your system to a fresh state. For example, a fresh install or a new account on an old computer. Don’t worry about getting comfortable and customizing settings yet. Wait until after you restore your previous settings to change anything, as any customizations you make now may get overridden once you restore.</p></item>
+  <item><p>Next, you need to install <app>Déjà Dup</app>. Your distribution vendor may package it for you. Otherwise, download and compile it.</p></item>
+</steps>
+</section>
+<section id="restore">
+<title>Restore</title>
+<steps>
+  <item><p>Run <app>Déjà Dup</app>.</p></item>
+  <item><p>Click on the big <gui style="button">Restore</gui> button.</p></item>
+  <item><p>A <gui>Restore</gui> dialog will appear asking where your backup files are stored (your <gui>Backup location</gui>). Choose it from the dropdown or choose <gui>Other…</gui>. On this same screen, select whether you encrypted the backup or not.</p></item>
+  <item><p>Click <gui style="button">Forward</gui>.</p></item>
+  <item><p>Choose the date you want to restore from. Usually you can just leave this alone, as the default is the most recent backup.</p></item>
+  <item><p>Click <gui style="button">Forward</gui>.</p></item>
+  <item><p>Choose where to restore. Since this is a full system backup, leave it as the default (which restores over your current install).</p></item>
+  <item><p>Click <gui style="button">Forward</gui>.</p></item>
+  <item><p>Review your selections and click <gui style="button">Restore</gui>.</p></item>
+  <item><p>Wait. It may take a long time to finish restoring.</p></item>
+  <item><p>Finally, reinstall any programs that you enjoyed in your previous install.</p></item>
+</steps>
+<note style="tip"><p>If for whatever reason, you have a problem after trying to restore with the <gui style="checkbox">Restore files to original locations</gui> option, try restoring instead to a temporary directory and moving your files to where they belong.</p></note>
+</section>
+</page>

@@ -144,6 +144,7 @@ AC_CONFIG_FILES([Makefile
                  data/Makefile
                  deja-dup/Makefile
                  help/Makefile
+                 man/Makefile
                  monitor/Makefile
                  nautilus/Makefile
                  po/Makefile.in

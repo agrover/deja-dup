@@ -1,0 +1,21 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="restore-lost">
+<info>
+  <desc>Restore a file that is no longer present.</desc>
+  <link type="guide" xref="restore"/>
+</info>
+<title>Restoring a Lost File</title>
+<p>There's currently no convenient user interface for this. But you can do it with the command line.</p>
+<steps>
+  <item><p>Open a terminal.</p></item>
+  <item><p>Run <app>Déjà Dup</app> on the lost file with the <cmd>--restore</cmd> argument. For example, to restore the lost file <file>test.txt</file> in your <file>Documents</file> folder:</p>
+        <screen>deja-dup --restore Documents/test.txt</screen>
+        <p>You must remember what the filename was, since it’s no longer there to remind you.</p></item>
+  <item><p>When the <gui>Restore</gui> dialog appears, choose the date from which to restore.</p></item>
+  <item><p>Click <gui style="button">Forward</gui>.</p></item>
+  <item><p>Review your selections and click <gui style="button">Restore</gui>.</p></item>
+</steps>
+<note style="advanced"><p>You can restore multiple lost files at once:</p>
+  		                 <screen>deja-dup --restore FILE1 FILE2</screen></note>
+</page>
