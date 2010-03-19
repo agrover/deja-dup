@@ -16,12 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-SUBDIRS = data po vapi common widgets monitor preferences deja-dup nautilus help tests
+SUBDIRS = data po vapi common widgets monitor preferences deja-dup nautilus help man tests
 
 # Distribute pot file
 update-pot:
 	$(MAKE) -C po "$(GETTEXT_PACKAGE).pot"
 	$(MAKE) -C help update-pot
+	$(MAKE) -C man update-pot
 dist-hook: update-pot
 
 release: distcheck
