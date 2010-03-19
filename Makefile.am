@@ -21,6 +21,7 @@ SUBDIRS = data po vapi common widgets monitor preferences deja-dup nautilus help
 # Distribute pot file
 update-pot:
 	$(MAKE) -C po "$(GETTEXT_PACKAGE).pot"
+	$(MAKE) -C help update-pot
 	$(MAKE) -C man update-pot
 dist-hook: update-pot
 

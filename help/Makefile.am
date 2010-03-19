@@ -31,6 +31,19 @@ DOC_PAGES = \
 	restore.page \
 	restore-revert.page
 
-DOC_LINGUAS = ar cs da de en_GB es fi fr gl he hu id ja lt nb nl ps ru sv tr
+REAL_LINGUAS = ar cs da de en_GB es fi fr gl he hu id ja lt nb nl ps ru sv tr
+DOC_LINGUAS = POT $(REAL_LINGUAS)
+
+$(_DOC_LC_DOCS) : po.stamp
+
+po.stamp: $(wildcard translations/*.po)
+	for p in $?; do cp -a $$p $$(basename $$p .po)/; done
+	touch $@
+
+update-pot: translations/deja-dup-help.pot
+translations/deja-dup-help.pot: POT/POT.po
+	cp -a $^ $@
 
 dist-hook: doc-dist-hook
+
+EXTRA_DIST = translations po.stamp
