@@ -23,12 +23,10 @@ DOC_ID = deja-dup
 DOC_PAGES = \
 	backup-auto.page \
 	backup-first.page \
-	backup.page \
 	index.page \
 	prefs.page \
 	restore-full.page \
 	restore-lost.page \
-	restore.page \
 	restore-revert.page
 
 REAL_LINGUAS = ar cs da de en_GB es fi fr gl he hu id ja lt nb nl ps ru sv tr
@@ -41,6 +39,7 @@ po.stamp: $(wildcard translations/*.po)
 	touch $@
 
 update-pot: translations/deja-dup-help.pot
+POT/POT.po: $(foreach page,$(DOC_PAGES),C/$(page))
 translations/deja-dup-help.pot: POT/POT.po
 	cp -a $^ $@
 
