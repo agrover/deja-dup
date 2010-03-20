@@ -41,7 +41,7 @@ po.stamp: $(wildcard translations/*.po)
 update-pot: translations/deja-dup-help.pot
 POT/POT.po: $(foreach page,$(DOC_PAGES),C/$(page))
 translations/deja-dup-help.pot: POT/POT.po
-	cp -a $^ $@
+	sed 's|^#: /.*/\(.*\)|#: \1|g' $^ > $@
 
 dist-hook: doc-dist-hook
 
