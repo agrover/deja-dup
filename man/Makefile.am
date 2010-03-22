@@ -18,7 +18,6 @@
 
 dist_man1_MANS = \
 	C/deja-dup.1 \
-	C/deja-dup-monitor.1 \
 	C/deja-dup-preferences.1
 
 # Here's a bunch of translation support.  It's largely stolen from dpkg

@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS = deja-dup-monitor
+pkglib_PROGRAMS = deja-dup-monitor
 
 VALA_CFLAGS = \
 	--vapidir $(top_srcdir)/common \
