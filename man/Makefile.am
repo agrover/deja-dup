@@ -92,10 +92,10 @@ uninstall-local-yes:
 dist-hook: po4a.stamp
 	for lang in $(PO4A_LINGUAS); do \
 		$(mkdir_p) $(distdir)/$$lang; \
-		cp -r $(srcdir)/$$lang/*.xml $(srcdir)/$$lang/*.1 $(distdir)/$$lang; \
+		cp -r $(srcdir)/$$lang/*.1 $(distdir)/$$lang; \
 	done
 	for lang in C $(PO4A_LINGUAS); do \
-		! test -e $(distdir)/$$lang/deja-dup.xml || sed -i "s/%VERSION%/$(VERSION)/g;s/%DATE%/`date --utc +%F`/g;s/lang=\"C\"/lang=\"$$lang\"/g" $(distdir)/$$lang/*.xml $(distdir)/$$lang/*.1; \
+		! test -e $(distdir)/$$lang/deja-dup.1 || sed -i "s/%VERSION%/$(VERSION)/g;s/%DATE%/`date --utc +%F`/g;s/lang=\"C\"/lang=\"$$lang\"/g" $(distdir)/$$lang/*.1; \
 	done
 	touch $(distdir)/no-po4a
 
