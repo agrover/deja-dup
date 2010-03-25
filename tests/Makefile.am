@@ -32,6 +32,12 @@ TESTS = \
 	restore/rename \
 	restore/two
 
+# Tests that must be run manually
+MANUAL_TESTS = \
+	backup/disk-full
+
+ALL_TESTS = $(TESTS) $(MANUAL_TESTS)
+
 test:
 	@for t in $(TESTS); do \
 		echo -n "Testing $$t..."; \

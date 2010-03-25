@@ -51,14 +51,15 @@ libcommon_la_VALASOURCES = \
 	RecursiveMove.vala \
 	RecursiveOp.vala
 
-BUILT_SOURCES = \
-	vala.stamp
-
-libcommon_la_SOURCES = \
-	chacks.c chacks.h \
+libcommon_la_BUILTSOURCES = \
 	common.h \
 	$(libcommon_la_VALASOURCES:.vala=.c)
 
+libcommon_la_SOURCES = \
+	chacks.c chacks.h \
+	$(libcommon_la_BUILTSOURCES)
+
+$(libcommon_la_BUILTSOURCES): vala.stamp
 vala.stamp: $(libcommon_la_VALASOURCES)
 if USE_VALAC
 	$(AM_V_GEN)$(VALAC) -C -H common.h $(VALA_CFLAGS) $^

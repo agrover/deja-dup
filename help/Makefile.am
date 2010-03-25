@@ -35,7 +35,8 @@ DOC_LINGUAS = POT $(REAL_LINGUAS)
 $(_DOC_LC_DOCS) : po.stamp
 
 po.stamp: $(wildcard translations/*.po)
-	for p in $?; do cp -a $$p $$(basename $$p .po)/; done
+	for p in $?; do mkdir -p $$(basename $$p .po)/; \
+                  cp -a $$p $$(basename $$p .po)/; done
 	touch $@
 
 update-pot: translations/deja-dup-help.pot

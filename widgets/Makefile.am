@@ -53,14 +53,15 @@ libwidgets_la_VALASOURCES = \
 	ToggleGroup.vala \
 	WidgetUtils.vala
 
-BUILT_SOURCES = \
-	vala.stamp
-
-libwidgets_la_SOURCES = \
-	whacks.c whacks.h \
+libwidgets_la_BUILTSOURCES = \
 	widgets.h \
 	$(libwidgets_la_VALASOURCES:.vala=.c)
 
+libwidgets_la_SOURCES = \
+	whacks.c whacks.h \
+	$(libwidgets_la_BUILTSOURCES)
+
+$(libwidgets_la_BUILTSOURCES): vala.stamp
 vala.stamp: $(libwidgets_la_VALASOURCES)
 if USE_VALAC
 	$(AM_V_GEN)$(VALAC) -C -H widgets.h -o $(top_srcdir)/vapi $(VALA_CFLAGS) $^

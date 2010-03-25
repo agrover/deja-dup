@@ -52,12 +52,13 @@ deja_dup_VALASOURCES = \
 	StatusIcon.vala \
 	main.vala
 
-BUILT_SOURCES = \
-	vala.stamp
-
-deja_dup_SOURCES = \
+deja_dup_BUILTSOURCES = \
 	$(deja_dup_VALASOURCES:.vala=.c)
 
+deja_dup_SOURCES = \
+	$(deja_dup_BUILTSOURCES)
+
+$(deja_dup_BUILTSOURCES): vala.stamp
 vala.stamp: $(deja_dup_VALASOURCES)
 if USE_VALAC
 	$(AM_V_GEN)$(VALAC) -C $(VALA_CFLAGS) $^

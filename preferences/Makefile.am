@@ -43,12 +43,13 @@ deja_dup_preferences_VALASOURCES = \
 	PreferencesDialog.vala \
 	preferences.vala
 
-BUILT_SOURCES = \
-	vala.stamp
-
-deja_dup_preferences_SOURCES = \
+deja_dup_preferences_BUILTSOURCES = \
 	$(deja_dup_preferences_VALASOURCES:.vala=.c)
 
+deja_dup_preferences_SOURCES = \
+	$(deja_dup_preferences_BUILTSOURCES)
+
+$(deja_dup_preferences_BUILTSOURCES): vala.stamp
 vala.stamp: $(deja_dup_preferences_VALASOURCES)
 if USE_VALAC
 	$(AM_V_GEN)$(VALAC) -C $(VALA_CFLAGS) $^
