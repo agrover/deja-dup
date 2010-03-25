@@ -35,15 +35,19 @@ DOC_LINGUAS = POT $(REAL_LINGUAS)
 $(_DOC_LC_DOCS) : po.stamp
 
 po.stamp: $(wildcard translations/*.po)
-	for p in $?; do mkdir -p $$(basename $$p .po)/; \
-                  cp -a $$p $$(basename $$p .po)/; done
+	for p in $?; do $(mkdir_p) $$(basename $$p .po)/; \
+	                cp -a $$p $$(basename $$p .po)/; done
 	touch $@
 
 update-pot: translations/deja-dup-help.pot
 POT/POT.po: $(foreach page,$(DOC_PAGES),C/$(page))
 translations/deja-dup-help.pot: POT/POT.po
+	$(mkdir_p) $(dir $@)
 	sed 's|^#: /.*/\(.*\)|#: \1|g' $^ > $@
 
 dist-hook: doc-dist-hook
 
 EXTRA_DIST = translations po.stamp
+DISTCLEANFILES = translations/deja-dup-help.pot
+
+.PHONY: update-pot
