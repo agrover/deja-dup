@@ -193,7 +193,11 @@ public class BackendS3 : Backend
   }
 
   void ask_password() {
-    mount_op.set("s3_mode", true);
+    mount_op.set("label_help", _("You can sign up for an Amazon S3 account <a href=\"%s\">online</a>.").printf("http://aws.amazon.com/s3/"));
+    mount_op.set("label_username", _("_Access key ID:"));
+    mount_op.set("label_password", _("_Secret access key:"));
+    mount_op.set("label_show_password", _("S_how secret access key"));
+    mount_op.set("label_remember_password", _("_Remember secret access key"));
     mount_op.reply.connect(got_password_reply);
     mount_op.ask_password(_("Enter Amazon S3 access key"), id, "",
                           AskPasswordFlags.NEED_PASSWORD |
