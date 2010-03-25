@@ -274,6 +274,54 @@ public class DuplicityInstance : Object
     Posix.kill((Posix.pid_t)child_pid, Posix.SIGCONT);
   }
   
+  async void read_log_lines()
+  {
+    List<string> stanza = new List<string>();
+    while (reader != null) {
+      try {
+        var line = yield reader.read_line_async(Priority.DEFAULT, null, null);
+        if (line == null) { // EOF
+          if (process_done) {
+            send_done_for_status();
+            break;
+          }
+          else {
+            // We're reading faster than duplicity can provide.  Wait a bit
+            // before trying again.
+            Timeout.add_seconds(1, () => {read_log_lines(); return false;});
+            return; // skip cleanup at bottom of this function
+          }
+        }
+        if (line != "") {
+          if (verbose)
+            print("DUPLICITY: %s\n", line);
+          stanza.append(line);
+        }
+        else if (stanza != null) {
+          if (verbose)
+            print("\n"); // breather
+          
+          process_stanza(stanza);
+          stanza = new List<string>();
+        }
+      }
+      catch (Error err) {
+        warning("%s\n", err.message);
+        break;
+      }
+    }
+
+    reader = null;
+    if (logfile != null) {
+      try {
+        logfile.delete(null);
+      }
+      catch (Error e2) {warning("%s\n", e2.message);}
+    }
+    
+    unref();
+  }
+
   async void read_log()
   {
     try {
@@ -295,46 +343,7 @@ public class DuplicityInstance : Object
     // This loop goes on while rest of class is doing its work.  We ref
     // it to make sure that the rest of the class doesn't drop from under us.
     ref();
-    List<string> stanza = new List<string>();
-    while (reader != null) {
-      try {
-        var line = yield reader.read_line_async(Priority.DEFAULT, null, null);
-        if (line == null) { // EOF
-          if (process_done) {
-            send_done_for_status();
-            break;
-          }
-          else
-            continue;
-        }
-        if (line != "") {
-          if (verbose)
-            print("DUPLICITY: %s\n", line);
-          stanza.append(line);
-        }
-        else if (stanza != null) {
-          if (verbose)
-            print("\n"); // breather
-          
-          process_stanza(stanza);
-          stanza = new List<string>();
-        }
-      }
-      catch (Error err) {
-        warning("%s\n", err.message);
-        break;
-      }
-    }
-    
-    reader = null;
-    if (logfile != null) {
-      try {
-        logfile.delete(null);
-      }
-      catch (Error e2) {warning("%s\n", e2.message);}
-    }
-    
-    unref();
+    read_log_lines();
   }
   
   // If start is < 0, starts at word.size() - 1.
