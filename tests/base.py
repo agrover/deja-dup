@@ -211,15 +211,15 @@ def get_temp_name(extra):
   create_temp_dir()
   return temp_dir + '/' + extra
 
-def create_mount(path=None, mtype='ext3', size=20):
+def create_mount(path=None, mtype='ext', size=20):
   global cleanup_mounts
-  if mtype is None: mtype = 'ext3'
+  if mtype is None or mtype == 'ext': mtype = 'ext4'
   if size is None: size = 20
   if path is None:
     path = get_temp_name('blob')
     if not os.path.exists(path):
       os.system('dd if=/dev/zero of=%s bs=1 count=0 seek=%dM' % (path, size))
-      if mtype == 'ext3':
+      if mtype.startswith('ext'):
         args = '-F'
       else:
         args = ''
@@ -243,6 +243,8 @@ def run(method):
   success = False
   try:
     success = method()
+    if success is None:
+      success = True # for tests that use exceptions as errors and return nothing
   except:
     traceback.print_exc()
   finally:
@@ -321,7 +323,7 @@ def remap(frm):
   ldtp.remap(frm) # in case this is second time we've run it
 
 def backup_simple(finish=True):
-  ldtp.click('frmDéjàDup', 'btnBackup')
+  ldtp.click('frmDéjàDup', 'btnBackup…')
   ldtp.waittillguiexist('dlgBackup')
   remap('dlgBackup')
   if guivisible('dlgBackup', 'lblPreferences'):
@@ -334,7 +336,7 @@ def backup_simple(finish=True):
     ldtp.waittillguinotexist('dlgBackup')
 
 def restore_simple(path, date=None):
-  ldtp.click('frmDéjàDup', 'btnRestore')
+  ldtp.click('frmDéjàDup', 'btnRestore…')
   assert ldtp.waittillguiexist('dlgRestore')
   remap('dlgRestore')
   if ldtp.guiexist('dlgRestore', 'lblPreferences'):
