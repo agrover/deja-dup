@@ -160,7 +160,7 @@ def create_local_config(dest='/'):
   if dest is None:
     dest = get_temp_name('local')
     os.system('mkdir -p %s' % dest)
-  elif dest[0] != '/':
+  elif dest[0] != '/' and dest.find(':') == -1:
     dest = os.getcwd()+'/'+dest
   set_gconf_value("backend", "file")
   set_gconf_value("file/path", dest)
