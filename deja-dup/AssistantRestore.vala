@@ -286,7 +286,7 @@ public class AssistantRestore : AssistantOperation
     var xid = Gdk.x11_drawable_get_xid(this.window);
 
     var rest_op = new DejaDup.OperationRestore(restore_location, date,
-                                               restore_files, xid);
+                                               restore_files, (uint)xid);
     if (this.op_state != null)
       rest_op.set_state(this.op_state);
 

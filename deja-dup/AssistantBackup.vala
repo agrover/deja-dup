@@ -166,7 +166,7 @@ public class AssistantBackup : AssistantOperation
   {
     realize();
     var xid = Gdk.x11_drawable_get_xid(this.window);
-    return new DejaDup.OperationBackup(xid);
+    return new DejaDup.OperationBackup((uint)xid);
   }
   
   void do_resume()
