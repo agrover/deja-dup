@@ -1,18 +1,18 @@
-download latest translations from LP, integrate
-update help documentation (new arguments, new gui labels)
-make distcheck
-debuild, install
-update LP (new release, download)
-push source deb to PPA
-update homepage (new screenshots if needed)
-announce on LP
-mark bugs fix released on LP
-update gnomefiles.org and freshmeat.net
+Steps:
+ • Grab latest translations from LP, integrate
+ • Update help documentation (new arguments, new gui labels)
+ • make distcheck
+ • debuild, install (to catch any foolish errors that distcheck missed)
+ • Update configure.ac version
+ • Tag bzr with new release number (4.0 for 4.0)
+ • Update LP (new release, new download)
+ • DEV: Push source deb to testing PPA
+ • STABLE: Push source deb to stable PPA
+ • STABLE: New screenshots if needed for wiki [1]
+ • Announce on LP
+ • Mark bugs fix released on LP
+ • STABLE: Update gnomefiles.org and freshmeat.net
 
-bzr tasks:
-tag with new release number (4.0 for 4.0)
-update configure.ac with next version
-
-screenshots:
-remember to take them with the Clearlooks theme
-Alt+PrntScreen to get just the current window
+[1] Screenshots:
+ • Take them with the Clearlooks theme
+ • Alt+PrntScreen to get just the current window
