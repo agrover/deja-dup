@@ -354,7 +354,7 @@ public class AssistantRestore : AssistantOperation
     realize();
     var xid = Gdk.x11_drawable_get_xid(this.window);
 
-    query_op = new DejaDup.OperationStatus(xid);
+    query_op = new DejaDup.OperationStatus((uint)xid);
     query_op.collection_dates.connect(handle_collection_dates);
     query_op.done.connect(query_finished);
     op = query_op;
