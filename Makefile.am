@@ -30,8 +30,6 @@ release: distcheck
 
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
-DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
-
 EXTRA_DIST = \
 	autogen.sh \
 	intltool-extract.in \
