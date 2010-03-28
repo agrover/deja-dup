@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-12-29 09:55-0500\n"
-"PO-Revision-Date: 2010-01-10 06:25+0000\n"
+"POT-Creation-Date: 2010-02-20 22:36-0500\n"
+"PO-Revision-Date: 2010-03-09 16:39+0000\n"
 "Last-Translator: Paco Molinero <paco@byasl.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-01-11 04:56+0000\n"
+"X-Launchpad-Export-Date: 2010-03-10 05:19+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "Respalde sus archivos"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:58
+#: ../deja-dup/StatusIcon.vala:59
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
@@ -77,30 +77,79 @@ msgid "Directories to backup"
 msgstr "Directorios a ser respaldados"
 
 #: ../data/deja-dup.schemas.in.h:6
+msgid "Folder type"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:7
+msgid "Full name of the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:8
 msgid "How long to keep backup files"
 msgstr "Cuanto tiempo mantener las copias de seguridad"
 
-#: ../data/deja-dup.schemas.in.h:7
+#: ../data/deja-dup.schemas.in.h:9
 msgid "How often to periodically backup"
 msgstr "Con qué frecuencia hacer copias de seguridad"
 
-#: ../data/deja-dup.schemas.in.h:8
+#: ../data/deja-dup.schemas.in.h:10
+msgid "Icon of the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:11
+msgid ""
+"If the backup location is on an external volume, this is its unique "
+"filesystem identifier."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:12
+msgid ""
+"If the backup location is on an external volume, this is the path of the "
+"folder on that volume."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:13
+msgid ""
+"If the backup location is on an external volume, this is the volume’s icon."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:14
+msgid ""
+"If the backup location is on an external volume, this is the volume’s longer "
+"descriptive name."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:15
+msgid ""
+"If the backup location is on an external volume, this is the volume’s "
+"shorter name."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:16
 msgid "Location in which to hold the backup files."
 msgstr "Ubicación en la cual guardar los archivos de la copia de seguridad"
 
-#: ../data/deja-dup.schemas.in.h:9
+#: ../data/deja-dup.schemas.in.h:17
+msgid "Relative path under the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:18
+msgid "Short name of the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:19
 msgid "The Amazon S3 bucket name to use"
 msgstr "Nombre cubo para usar el Amazon S3"
 
-#: ../data/deja-dup.schemas.in.h:10
+#: ../data/deja-dup.schemas.in.h:20
 msgid "The Amazon S3 folder"
 msgstr "Carpeta de Amazon S3"
 
-#: ../data/deja-dup.schemas.in.h:11
+#: ../data/deja-dup.schemas.in.h:21
 msgid "The last time Déjà Dup was run"
 msgstr "La última vez que se ejecutó Déjà Dup"
 
-#: ../data/deja-dup.schemas.in.h:12
+#: ../data/deja-dup.schemas.in.h:22
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
@@ -108,11 +157,11 @@ msgstr ""
 "La última vez que Déjà Dup se ejecutó con éxito. La fecha debe reflejarse en "
 "formato ISO 8601."
 
-#: ../data/deja-dup.schemas.in.h:13
+#: ../data/deja-dup.schemas.in.h:23
 msgid "The number of days between backups."
 msgstr "Intervalo de días entre las copias de seguridad"
 
-#: ../data/deja-dup.schemas.in.h:14
+#: ../data/deja-dup.schemas.in.h:24
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
@@ -122,12 +171,12 @@ msgstr ""
 "del respaldo El valor 0 significa para siempre. Se trata de un número mínimo "
 "de días; los archivos pueden guardarse más tiempo"
 
-#: ../data/deja-dup.schemas.in.h:15
+#: ../data/deja-dup.schemas.in.h:25
 msgid "The type of backup location. Valid values are ‘s3’ or ‘file’."
 msgstr ""
 "El tipo de ubicación del respaldo. Los valores válidos son «s3» o «file»."
 
-#: ../data/deja-dup.schemas.in.h:16
+#: ../data/deja-dup.schemas.in.h:26
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
@@ -140,7 +189,7 @@ msgstr ""
 "del usuario. Entradas relativas son relativas al directorio de inicio del "
 "usuario."
 
-#: ../data/deja-dup.schemas.in.h:17
+#: ../data/deja-dup.schemas.in.h:27
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
@@ -154,20 +203,30 @@ msgstr ""
 "del usuario. Entradas relativas son relativas al directorio de inicio del "
 "usuario. Esta lista tiene prioridad sobre la lista include."
 
-#: ../data/deja-dup.schemas.in.h:18
+#: ../data/deja-dup.schemas.in.h:28
 msgid "Type of location to store backup"
 msgstr "Tipo de lugar donde almacenar su copia de seguridad"
 
-#: ../data/deja-dup.schemas.in.h:19
+#: ../data/deja-dup.schemas.in.h:29
+msgid "Unique ID of the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:30
+msgid ""
+"Whether the backup location is a mounted external volume or a normal folder. "
+"Possible values are ‘volume’ or ‘normal’."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:31
 msgid "Whether to automatically backup on a regular schedule."
 msgstr ""
 "Si realizar copias de seguridad automáticamente o en un programa regular"
 
-#: ../data/deja-dup.schemas.in.h:20
+#: ../data/deja-dup.schemas.in.h:32
 msgid "Whether to encrypt your backup"
 msgstr "Si cifrar su copia de seguridad"
 
-#: ../data/deja-dup.schemas.in.h:21
+#: ../data/deja-dup.schemas.in.h:33
 msgid ""
 "Whether to encrypt your backup files in the storage location. It’s strongly "
 "recommended to leave this as ‘true’."
@@ -175,11 +234,21 @@ msgstr ""
 "Si se cifrarán los archivos de respaldo en la ubicación de almacenamiento. "
 "Es altamente recomendable dejar este valor como «true»."
 
-#: ../data/deja-dup.schemas.in.h:22
+#: ../data/deja-dup.schemas.in.h:34
 msgid "Whether to periodically backup"
 msgstr "Si realizar copias de seguridad periódicamente"
 
-#: ../data/deja-dup.schemas.in.h:23
+#: ../data/deja-dup.schemas.in.h:35
+msgid "Whether to request the root password"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:36
+msgid ""
+"Whether to request the root password when backing up from or restoring to "
+"system folders."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:37
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -187,7 +256,7 @@ msgstr ""
 "En qué cubo de Amazon S3 serán almacenados los archivos. Esto aún no existe. "
 "Sólo se permiten cadenas válidas para el nombre de almacenamiento."
 
-#: ../data/deja-dup.schemas.in.h:24
+#: ../data/deja-dup.schemas.in.h:38
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Clave de acceso de Amazon S3. Esto actúa como su nombre de usuario de S3"
@@ -196,7 +265,7 @@ msgstr ""
 msgid "Co_ntinue"
 msgstr "Co_ntinuar"
 
-#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:141
+#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:146
 msgid "_Resume Later"
 msgstr "_Resumir después"
 
@@ -281,7 +350,7 @@ msgstr "Copia de seguridad finalizada"
 msgid "Your files were successfully backed up."
 msgstr "Sus archivos se respaldaron satisfactoriamente."
 
-#: ../deja-dup/AssistantBackup.vala:250 ../common/Operation.vala:51
+#: ../deja-dup/AssistantBackup.vala:252 ../common/Operation.vala:52
 msgid "Backing up…"
 msgstr "Respaldando..."
 
@@ -302,19 +371,23 @@ msgid "E_ncryption password:"
 msgstr "_Contraseña cifrada"
 
 #: ../deja-dup/AssistantOperation.vala:264
-#: ../deja-dup/MountOperationAssistant.vala:209
+msgid "_Show password"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:271
+#: ../deja-dup/MountOperationAssistant.vala:216
 msgid "_Remember password"
 msgstr "_Recordar contraseña"
 
-#: ../deja-dup/AssistantOperation.vala:339
+#: ../deja-dup/AssistantOperation.vala:346
 msgid "Summary"
 msgstr "Resumen"
 
-#: ../deja-dup/AssistantOperation.vala:354
+#: ../deja-dup/AssistantOperation.vala:361
 msgid "Password needed"
 msgstr "Se necesita contraseña"
 
-#: ../deja-dup/AssistantOperation.vala:561
+#: ../deja-dup/AssistantOperation.vala:568
 msgid "Déjà Dup backup passphrase"
 msgstr "Frase de contraseña de la copia de seguridad de Déjà Dup"
 
@@ -403,7 +476,7 @@ msgstr "Restauración finalizada"
 msgid "Your files were successfully restored."
 msgstr "Sus archivos fueron restaurados satisfactoriamente."
 
-#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:53
+#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:54
 msgid "Restoring…"
 msgstr "Restaurando..."
 
@@ -498,28 +571,37 @@ msgstr "_Clave secreta de acceso"
 msgid "_Password:"
 msgstr "_Contraseña:"
 
+#: ../deja-dup/MountOperationAssistant.vala:208
+msgid "S_how secret access key"
+msgstr ""
+
 #: ../deja-dup/MountOperationAssistant.vala:209
+msgid "S_how password"
+msgstr ""
+
+#: ../deja-dup/MountOperationAssistant.vala:216
 msgid "_Remember secret access key"
 msgstr "_Recordar clave secreta de acceso"
 
-#: ../deja-dup/StatusIcon.vala:48 ../deja-dup/StatusIcon.vala:133
-msgid "Hide _Progress"
-msgstr "Ocultar el _progreso"
-
-#: ../deja-dup/StatusIcon.vala:51 ../deja-dup/StatusIcon.vala:135
-msgid "Show _Progress"
-msgstr "Mostrar el _progreso"
-
-#: ../deja-dup/StatusIcon.vala:98
+#: ../deja-dup/StatusIcon.vala:96
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% completo"
 
-#: ../deja-dup/StatusIcon.vala:143
+#: ../deja-dup/StatusIcon.vala:101
+#, c-format
+msgid "Show _Progress (%.1f%%)"
+msgstr ""
+
+#: ../deja-dup/StatusIcon.vala:103
+msgid "Show _Progress"
+msgstr "Mostrar el _progreso"
+
+#: ../deja-dup/StatusIcon.vala:148
 msgid "_Delay Backup"
 msgstr "_Aplazar la copia de seguridad"
 
-#: ../deja-dup/StatusIcon.vala:148
+#: ../deja-dup/StatusIcon.vala:153
 msgid "_Skip Backup"
 msgstr "Omitir la copia de _seguridad"
 
@@ -567,15 +649,15 @@ msgstr "Permiso denegado"
 msgid "Enter Amazon S3 access key"
 msgstr "Introduzca la clave de acceso Amazon S3"
 
-#: ../common/CommonUtils.vala:239
+#: ../common/CommonUtils.vala:240
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: ../common/DuplicityInfo.vala:130
+#: ../common/DuplicityInfo.vala:133
 msgid "Could not run duplicity"
 msgstr "No se pudo ejecutar duplicity"
 
-#: ../common/DuplicityInfo.vala:135
+#: ../common/DuplicityInfo.vala:138
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -583,7 +665,7 @@ msgstr ""
 "No pudo entenderse la versión de duplicity instalada.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:137
+#: ../common/DuplicityInfo.vala:140
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -592,16 +674,16 @@ msgstr ""
 "No se pudo interpretar la versión de duplicity «%s».\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:139
+#: ../common/DuplicityInfo.vala:142
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr ""
 "Sin el programa duplicity, Déjà Dup no puede ejecutarse. Se cerrará ahora."
 
-#: ../common/DuplicityInfo.vala:143
+#: ../common/DuplicityInfo.vala:146
 msgid "Duplicity’s version is too old"
 msgstr "La versión de Duplicity es demasiado antigua"
 
-#: ../common/DuplicityInfo.vala:144
+#: ../common/DuplicityInfo.vala:147
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -610,44 +692,49 @@ msgstr ""
 "Déjà Dup requiere al menos la versión %d.%d.%.2d de duplicity, pero se "
 "encontró sólo la versión %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:188
+#: ../common/Duplicity.vala:210
 msgid "Paused (no network)"
 msgstr "Pausado (sin red)"
 
-#: ../common/Duplicity.vala:228 ../common/Duplicity.vala:236
-#: ../common/Duplicity.vala:264 ../common/Operation.vala:95
+#: ../common/Duplicity.vala:250 ../common/Duplicity.vala:258
+#: ../common/Duplicity.vala:289 ../common/Operation.vala:95
 msgid "Preparing…"
 msgstr "Preparando..."
 
-#: ../common/Duplicity.vala:254
-msgid "Creating a fresh backup.  This will take longer than normal."
+#: ../common/Duplicity.vala:277
+msgid "Creating the first backup.  This may take a while."
 msgstr ""
-"Crear una copia de seguridad nueva. Esto tomará más tiempo de lo normal."
 
-#: ../common/Duplicity.vala:333 ../common/Duplicity.vala:350
+#: ../common/Duplicity.vala:279
+msgid ""
+"Creating a fresh backup to protect against backup corruption.  This will "
+"take longer than normal."
+msgstr ""
+
+#: ../common/Duplicity.vala:370 ../common/Duplicity.vala:387
 msgid "Cleaning up…"
 msgstr "Limpiando..."
 
-#: ../common/Duplicity.vala:436 ../common/Duplicity.vala:707
+#: ../common/Duplicity.vala:473 ../common/Duplicity.vala:744
 msgid "Failed with an unknown error."
 msgstr "Falló con un error desconocido."
 
-#: ../common/Duplicity.vala:619
+#: ../common/Duplicity.vala:656
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
 "No se puede restaurar «%s»: El archivo no se encuentra en la copia de "
 "seguirdad"
 
-#: ../common/Duplicity.vala:623 ../common/Duplicity.vala:665
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:702
 msgid "Bad encryption password."
 msgstr "Contraseña de cifrado errónea."
 
-#: ../common/Duplicity.vala:627
+#: ../common/Duplicity.vala:664
 msgid "Computer name changed"
 msgstr "El nombre del equipo ha cambiado"
 
-#: ../common/Duplicity.vala:627
+#: ../common/Duplicity.vala:664
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -658,43 +745,43 @@ msgstr ""
 "nombre del equipo actual es %s. Si esto es algo inesperado, debería hacer la "
 "copia de seguidad en una ubicación diferente."
 
-#: ../common/Duplicity.vala:647
+#: ../common/Duplicity.vala:684
 msgid "Invalid ID."
 msgstr "ID inválido"
 
-#: ../common/Duplicity.vala:649
+#: ../common/Duplicity.vala:686
 msgid "Invalid secret key."
 msgstr "Clave secreta inválida."
 
-#: ../common/Duplicity.vala:651
+#: ../common/Duplicity.vala:688
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Su cuenta de «Amazon Web Services» no esta firmada para el servicio S3"
 
-#: ../common/Duplicity.vala:660
+#: ../common/Duplicity.vala:697
 msgid "S3 bucket name is not available."
 msgstr "El nombre del cubo S3 no está disponible."
 
-#: ../common/Duplicity.vala:669
+#: ../common/Duplicity.vala:706
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Error al leer el archivo «%s»"
 
-#: ../common/Duplicity.vala:671
+#: ../common/Duplicity.vala:708
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Error escribiendo el archivo «%s»."
 
-#: ../common/Duplicity.vala:679
+#: ../common/Duplicity.vala:716
 #, c-format
 msgid "No space left in %s"
 msgstr "No hay espacio suficiente en %s"
 
-#: ../common/Duplicity.vala:699
+#: ../common/Duplicity.vala:736
 msgid "No backup files found"
 msgstr "No se han encontrado archivos de copia de seguridad"
 
-#: ../common/Duplicity.vala:735
+#: ../common/Duplicity.vala:772
 msgid "Uploading…"
 msgstr "Cargando..."
 
@@ -716,7 +803,7 @@ msgstr ""
 msgid "Could not restore %s: %s"
 msgstr "No pudo restaurarse %s: %s"
 
-#: ../common/Operation.vala:55
+#: ../common/Operation.vala:56
 msgid "Checking for backups…"
 msgstr "Comprobando copias de seguridad..."
 
@@ -919,228 +1006,3 @@ msgstr ""
 "Debería de haber recibido una copia de la licencia GNU General Public "
 "License, con este programa. de lo contrario, por favor vea "
 "http://www.gnu.org/licenses/."
-
-#~ msgid "Folder on your system in which to hold the backup files."
-#~ msgstr "Carpeta en su sistema en donde mantener los archivos de respaldo."
-
-#~ msgid ""
-#~ "Whether to encrypt your backup files in the storage location. It's strongly "
-#~ "recommended to leave this as 'true'."
-#~ msgstr ""
-#~ "Si cifrar sus archivos respaldados en el lugar de almacenamiento. Es "
-#~ "altamente recomendado dejar esto como 'verdadero'."
-
-#~ msgid "The last time Déjà Dup was run, in ISO 8601 format."
-#~ msgstr "La última vez que Déjà Dup fue ejecutado, en formato ISO 8601."
-
-#~ msgid "Please enter the server password for your backup."
-#~ msgstr "Por favor ingrese la contraseña del servidor para su respaldo."
-
-#~ msgid "Enter"
-#~ msgstr "Ingrese"
-
-#~ msgid "Server password needed"
-#~ msgstr "Se necesita contraseña del servidor"
-
-#~ msgid "Rerun"
-#~ msgstr "Volver a ejecutar"
-
-#~ msgid "Please enter the encryption password for your backup files."
-#~ msgstr ""
-#~ "Por favor ingrese la contraseña de cifrado para los archivos de respaldo."
-
-#~ msgid "Amazon S3 Password"
-#~ msgstr "Contraseña de Amazon S3"
-
-#~ msgid "Choose backup destination"
-#~ msgstr "Eliga el destino de respaldo"
-
-#~ msgid "Restoring files..."
-#~ msgstr "Restaurando archivos..."
-
-#~ msgid "Cleaning up..."
-#~ msgstr "Limpiando..."
-
-#~ msgid "Enter the password used to encrypt your backup files."
-#~ msgstr "Ingrese la contraseña usada para cifrar sus archivos de respaldo."
-
-#~ msgid "Choose folder"
-#~ msgstr "Elegir carpeta"
-
-#~ msgid "Local Folder"
-#~ msgstr "Carpeta local"
-
-#~ msgid "Select Folder"
-#~ msgstr "Seleccionar carpeta"
-
-#~ msgid "Encryption Password"
-#~ msgstr "Contraseña de Cifrado"
-
-#~ msgid "Could not add the folder"
-#~ msgstr "No se pudo agregar la carpeta"
-
-#~ msgid "Local backup location"
-#~ msgstr "Lugar de respaldo local"
-
-#~ msgid "SSH port"
-#~ msgstr "Puerto SSH"
-
-#~ msgid "SSH directory"
-#~ msgstr "Directorio SSH"
-
-#~ msgid "SSH username"
-#~ msgstr "Nombre de usuario SSH"
-
-#~ msgid "SSH server"
-#~ msgstr "Servidor SSH"
-
-#~ msgid "The user used for SSH connections."
-#~ msgstr "El usuario empleado para conexiones SSH"
-
-#~ msgid "Get Help _Online..."
-#~ msgstr "Obtenga ayuda _en línea..."
-
-#~ msgid "_Translate This Application..."
-#~ msgstr "_Traducir esta aplicación..."
-
-#~ msgid "_File"
-#~ msgstr "_Archivo"
-
-#, c-format
-#~ msgid ""
-#~ "Could not understand duplicity version '%s'.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "No pudo entenderse la versión de duplicity instalada '%s'.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
-#~ "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-#~ "and $VIDEO are recognized as the user's special directories. Relative "
-#~ "entries are relative to the user's home directory."
-#~ msgstr ""
-#~ "Esta lista de directorios será respaldada. Los valores reservados $HOME, "
-#~ "$ESCRITORIO, $DOCUMENTOS, $DESCARGAS, $MÚSICA, $IMÁGENES, $CARPETA_PÚBLICA, "
-#~ "$PLANTILLAS, $PAPELERA y $VÍDEO son reconocidas como directorios especiales "
-#~ "del usuario. Entradas relativas son relacionadas con el directorio del "
-#~ "usuario."
-
-#~ msgid ""
-#~ "This list of directories will not be backed up. Reserved values $HOME, "
-#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-#~ "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user's special "
-#~ "directories. Relative entries are relative to the user's home directory. "
-#~ "This list takes precedence over the include list."
-#~ msgstr ""
-#~ "Esta lista de directorios no será respaldada. Los valores reservados $HOME, "
-#~ "$ESCRITORIO, $DOCUMENTOS, $DESCARGAS, $MÚSICA, $IMÁGENES, $CARPETA_PÚBLICA, "
-#~ "$PLANTILLAS, $PAPELERA y $VÍDEO son reconocidas como directorios especiales "
-#~ "del usuario. Entradas relativas son relacionadas con el directorio del "
-#~ "usuario. Esta lista toma precedencia sobre la lista incluida."
-
-#~ msgid "The server used for SSH connections."
-#~ msgstr "El servidor utilizado para conexiones SSH"
-
-#~ msgid "The directory used for SSH connections."
-#~ msgstr "El directorio usado para conexiones SSH"
-
-#~ msgid "The port used for SSH connections."
-#~ msgstr "Puerto usado para conexiones SSH"
-
-#~ msgid ""
-#~ "The protocol used for the backup location. Valid values are 's3', 'file', or "
-#~ "'ssh'."
-#~ msgstr ""
-#~ "Protocolo usado por el servicio de copias de seguridad. Los valores "
-#~ "correctos son 's3', 'archivo' o 'ssh'"
-
-#~ msgid ""
-#~ "A scheduled backup will shortly begin.  You can instead choose to backup "
-#~ "later or not at all."
-#~ msgstr ""
-#~ "Una copia de seguridad programada comenzará en breve. Puede elegir "
-#~ "posponerla o cancelarla."
-
-#~ msgid "Backup about to start"
-#~ msgstr "Copia de seguridad a punto de comenzar"
-
-#~ msgid "Backup"
-#~ msgstr "Copia de seguridad"
-
-#~ msgid "Backing up..."
-#~ msgstr "Creando copia de seguridad"
-
-#~ msgid "_Backup"
-#~ msgstr "_Copia de seguridad"
-
-#~ msgid ""
-#~ "Enter your Amazon Web Services user ID and secret key.  This is not the same "
-#~ "as your amazon.com username and password."
-#~ msgstr ""
-#~ "Introduzca su ID de usuario y su clave de Amazon Web Services. Estos datos "
-#~ "no son los mismos que su nombre de usuario y contraseña para amazon.com."
-
-#, c-format
-#~ msgid "Could not restore '%s': File not found in backup"
-#~ msgstr "No se puede restaurar '%s': Archivo no encontrado en el respaldo"
-
-#~ msgid "Déjà Dup Applet"
-#~ msgstr "Aplicación Déjà Dup"
-
-#~ msgid "Skip Backup"
-#~ msgstr "Omitir copia de seguridad"
-
-#, c-format
-#~ msgid "Folder %s on Amazon S3"
-#~ msgstr "Carpeta %s en Amazon S3"
-
-#~ msgid "Preparing..."
-#~ msgstr "Preparando..."
-
-#~ msgid "Duplicity's version is too old"
-#~ msgstr "La versión del programa duplicity es demasiado antigua"
-
-#~ msgid "Revert to Previous Version..."
-#~ msgid_plural "Revert to Previous Versions..."
-#~ msgstr[0] "Volver a una versión anterior..."
-#~ msgstr[1] "Volvier a versiones anteriores..."
-
-#~ msgid ""
-#~ "The protocol used for the backup location. Valid values are 's3' or 'file'."
-#~ msgstr ""
-#~ "El protocolo utilizado para el lugar de respaldo. Valores validos son 's3' o "
-#~ "'archivo'."
-
-#~ msgid "Backing up files..."
-#~ msgstr "Respaldando archivos..."
-
-#~ msgid "Could not connect to backup location"
-#~ msgstr "No se pudo conectar a lugar de respaldo"
-
-#~ msgid "Error occurred"
-#~ msgstr "Ocurrió un error"
-
-#~ msgid "Backup finished"
-#~ msgstr "Respaldo terminado"
-
-#~ msgid "Restore finished"
-#~ msgstr "Restauración terminada"
-
-#~ msgid "Backup _Later"
-#~ msgstr "Respaldar _luego"
-
-#~ msgid "_Report a Problem..."
-#~ msgstr "_Informar de un problema"
-
-#~ msgid "Checking for backups..."
-#~ msgstr "Buscando copias de seguridad..."
-
-#~ msgid "Restoring..."
-#~ msgstr "Restaurando..."
-
-#~ msgid "Scanning..."
-#~ msgstr "Explorando..."
-
-#~ msgid "Connect to _Server..."
-#~ msgstr "Conectar con el _servidor…"

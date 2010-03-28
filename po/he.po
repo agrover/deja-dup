@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-10-09 10:43-0400\n"
-"PO-Revision-Date: 2009-10-17 13:57+0000\n"
+"POT-Creation-Date: 2010-02-20 22:36-0500\n"
+"PO-Revision-Date: 2010-03-09 17:11+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-10-18 07:05+0000\n"
+"X-Launchpad-Export-Date: 2010-03-10 05:18+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "גיבוי הקבצים שלך"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:38
+#: ../deja-dup/StatusIcon.vala:59
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
@@ -42,10 +42,9 @@ msgid "Déjà Dup Backup Tool"
 msgstr ""
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
-#. a computer monitor.  This program acts like a daemon that kicks off
+#. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.h:1 ../monitor/monitor.vala:102
-#: ../monitor/monitor.vala:343
+#: ../data/deja-dup-monitor.desktop.in.h:1 ../monitor/monitor.vala:328
 msgid "Déjà Dup Monitor"
 msgstr "צג המעקב של Déjà Dup"
 
@@ -76,100 +75,159 @@ msgid "Directories to backup"
 msgstr "תיקיות לגיבוי"
 
 #: ../data/deja-dup.schemas.in.h:6
-msgid "How long to keep backup files"
+msgid "Folder type"
 msgstr ""
 
 #: ../data/deja-dup.schemas.in.h:7
-msgid "How often to periodically backup"
-msgstr "באיזו תדירות תקופתית יש לערוך גיבוי"
+msgid "Full name of the external volume"
+msgstr ""
 
 #: ../data/deja-dup.schemas.in.h:8
-msgid "Location in which to hold the backup files."
+msgid "How long to keep backup files"
 msgstr ""
 
 #: ../data/deja-dup.schemas.in.h:9
-msgid "The Amazon S3 bucket name to use"
-msgstr "שם דלי ה־Amazon S3 לשימוש"
+msgid "How often to periodically backup"
+msgstr "באיזו תדירות תקופתית יש לערוך גיבוי"
 
 #: ../data/deja-dup.schemas.in.h:10
-msgid "The Amazon S3 folder"
+msgid "Icon of the external volume"
 msgstr ""
 
 #: ../data/deja-dup.schemas.in.h:11
+msgid ""
+"If the backup location is on an external volume, this is its unique "
+"filesystem identifier."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:12
+msgid ""
+"If the backup location is on an external volume, this is the path of the "
+"folder on that volume."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:13
+msgid ""
+"If the backup location is on an external volume, this is the volume’s icon."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:14
+msgid ""
+"If the backup location is on an external volume, this is the volume’s longer "
+"descriptive name."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:15
+msgid ""
+"If the backup location is on an external volume, this is the volume’s "
+"shorter name."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:16
+msgid "Location in which to hold the backup files."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:17
+msgid "Relative path under the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:18
+msgid "Short name of the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:19
+msgid "The Amazon S3 bucket name to use"
+msgstr "שם דלי ה־Amazon S3 לשימוש"
+
+#: ../data/deja-dup.schemas.in.h:20
+msgid "The Amazon S3 folder"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:21
 msgid "The last time Déjà Dup was run"
 msgstr "הפעם האחרונה בה הופעל Déjà Dup"
 
-#: ../data/deja-dup.schemas.in.h:12
+#: ../data/deja-dup.schemas.in.h:22
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
 msgstr ""
 
-#: ../data/deja-dup.schemas.in.h:13
+#: ../data/deja-dup.schemas.in.h:23
 msgid "The number of days between backups."
 msgstr "מספר הימים בין הגיבויים."
 
-#: ../data/deja-dup.schemas.in.h:14
+#: ../data/deja-dup.schemas.in.h:24
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
 "longer."
 msgstr ""
 
-#: ../data/deja-dup.schemas.in.h:15
-msgid "The type of backup location. Valid values are 's3' or 'file'."
+#: ../data/deja-dup.schemas.in.h:25
+msgid "The type of backup location. Valid values are ‘s3’ or ‘file’."
 msgstr ""
 
-#: ../data/deja-dup.schemas.in.h:16
+#: ../data/deja-dup.schemas.in.h:26
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-"and $VIDEO are recognized as the user's special directories. Relative "
-"entries are relative to the user's home directory."
+"and $VIDEO are recognized as the user’s special directories. Relative "
+"entries are relative to the user’s home directory."
 msgstr ""
-"רשימת תיקיות זו לא תגובה. הערכים השמורים $HOME, $DESKTOP, $DOCUMENTS, "
-"$DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, ו־$VIDEO "
-"הינם מזוהים כתיקיות משתמש מיוחדות. רשומות יחסיות הינן ביחס לתיקיית הבית של "
-"המשתמש."
 
-#: ../data/deja-dup.schemas.in.h:17
+#: ../data/deja-dup.schemas.in.h:27
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user's special "
-"directories. Relative entries are relative to the user's home directory. "
+"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
+"directories. Relative entries are relative to the user’s home directory. "
 "This list takes precedence over the include list."
 msgstr ""
-"התיקיות ברשימה זו לא יגובו. הערכים השמורים הינם $HOME, $DESKTOP, $DOCUMENTS, "
-"$DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, ו־$VIDEO "
-"הינם מזוהים כתיקיות המשתמש המיוחדות. רשומות יחסיות הינן יחסיות לתיקיית הבית "
-"של המשתמש. רשימה זו מועדפת על פני רשימת ההכללה."
 
-#: ../data/deja-dup.schemas.in.h:18
+#: ../data/deja-dup.schemas.in.h:28
 msgid "Type of location to store backup"
 msgstr "סוג המיקום לשמירת גיבוי"
 
-#: ../data/deja-dup.schemas.in.h:19
+#: ../data/deja-dup.schemas.in.h:29
+msgid "Unique ID of the external volume"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:30
+msgid ""
+"Whether the backup location is a mounted external volume or a normal folder. "
+"Possible values are ‘volume’ or ‘normal’."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:31
 msgid "Whether to automatically backup on a regular schedule."
 msgstr "האם לגבות באופן בתדירות קבועה באופן אוטומטי."
 
-#: ../data/deja-dup.schemas.in.h:20
+#: ../data/deja-dup.schemas.in.h:32
 msgid "Whether to encrypt your backup"
 msgstr "האם להצפין את הגיבוי"
 
-#: ../data/deja-dup.schemas.in.h:21
+#: ../data/deja-dup.schemas.in.h:33
 msgid ""
-"Whether to encrypt your backup files in the storage location. It's strongly "
-"recommended to leave this as 'true'."
+"Whether to encrypt your backup files in the storage location. It’s strongly "
+"recommended to leave this as ‘true’."
 msgstr ""
-"האם יש להצפין את קבצי הגיבוי שלך במיקום האיחסון. מומלץ בחום להשאיר ערך זה "
-"כ־'אמת'."
 
-#: ../data/deja-dup.schemas.in.h:22
+#: ../data/deja-dup.schemas.in.h:34
 msgid "Whether to periodically backup"
 msgstr "האם לגבות בתדירות קבועה"
 
-#: ../data/deja-dup.schemas.in.h:23
+#: ../data/deja-dup.schemas.in.h:35
+msgid "Whether to request the root password"
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:36
+msgid ""
+"Whether to request the root password when backing up from or restoring to "
+"system folders."
+msgstr ""
+
+#: ../data/deja-dup.schemas.in.h:37
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -177,15 +235,15 @@ msgstr ""
 "באיזה דלי של Amazon S3 יש לאחסן את הקבצים. הדלי לא חייב להיות מבעוד מועד. רק "
 "מחרוזות שם מארח חוקיות הן תקניות."
 
-#: ../data/deja-dup.schemas.in.h:24
+#: ../data/deja-dup.schemas.in.h:38
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 
-#: ../deja-dup/Assistant.vala:278
+#: ../deja-dup/Assistant.vala:281
 msgid "Co_ntinue"
 msgstr ""
 
-#: ../deja-dup/Assistant.vala:311 ../deja-dup/StatusIcon.vala:98
+#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:146
 msgid "_Resume Later"
 msgstr ""
 
@@ -201,22 +259,22 @@ msgid "_Backup"
 msgstr ""
 
 #: ../deja-dup/AssistantBackup.vala:50 ../deja-dup/AssistantRestore.vala:93
-#: ../preferences/PreferencesDialog.vala:54
+#: ../preferences/PreferencesDialog.vala:84
 msgid "_Backup location:"
 msgstr "_מיקום הגיבוי:"
 
 #: ../deja-dup/AssistantBackup.vala:57
-#: ../preferences/PreferencesDialog.vala:135
+#: ../preferences/PreferencesDialog.vala:166
 msgid "_Encrypt backup files"
 msgstr "ה_צפן קבצי גיבוי"
 
 #: ../deja-dup/AssistantBackup.vala:78
-#: ../preferences/PreferencesDialog.vala:99
+#: ../preferences/PreferencesDialog.vala:130
 msgid "I_nclude files in folders:"
 msgstr ""
 
 #: ../deja-dup/AssistantBackup.vala:91
-#: ../preferences/PreferencesDialog.vala:118
+#: ../preferences/PreferencesDialog.vala:149
 msgid "E_xcept files in folders:"
 msgstr ""
 
@@ -243,67 +301,71 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:185
+#: ../deja-dup/AssistantBackup.vala:187
 msgid "Backing up:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:195
-#: ../preferences/PreferencesDialog.vala:141
+#: ../deja-dup/AssistantBackup.vala:197
+#: ../preferences/PreferencesDialog.vala:172
 msgid "_Automatically backup on a regular schedule"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:198
-#: ../preferences/PreferencesDialog.vala:148
+#: ../deja-dup/AssistantBackup.vala:200
+#: ../preferences/PreferencesDialog.vala:179
 #, c-format
 msgid "How _often to backup:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:225
+#: ../deja-dup/AssistantBackup.vala:227
 msgid "Backup Failed"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:228
+#: ../deja-dup/AssistantBackup.vala:230
 msgid "Backup Finished"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:229
+#: ../deja-dup/AssistantBackup.vala:231
 msgid "Your files were successfully backed up."
 msgstr "הקבצים שלך גובו בהצלחה."
 
-#: ../deja-dup/AssistantBackup.vala:248 ../libdeja-dup/Operation.vala:50
-msgid "Backing up..."
-msgstr ""
-
-#: ../deja-dup/AssistantOperation.vala:133
-msgid "Scanning:"
+#: ../deja-dup/AssistantBackup.vala:252 ../common/Operation.vala:52
+msgid "Backing up…"
 msgstr ""
 
 #: ../deja-dup/AssistantOperation.vala:134
-msgid "Scanning..."
+msgid "Scanning:"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:188
+#: ../deja-dup/AssistantOperation.vala:135
+msgid "Scanning…"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:208
 msgid "_Details"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:235
+#: ../deja-dup/AssistantOperation.vala:255
 msgid "E_ncryption password:"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:244
-#: ../deja-dup/MountOperationAssistant.vala:209
+#: ../deja-dup/AssistantOperation.vala:264
+msgid "_Show password"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:271
+#: ../deja-dup/MountOperationAssistant.vala:216
 msgid "_Remember password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:319
+#: ../deja-dup/AssistantOperation.vala:346
 msgid "Summary"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:334
+#: ../deja-dup/AssistantOperation.vala:361
 msgid "Password needed"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:529
+#: ../deja-dup/AssistantOperation.vala:568
 msgid "Déjà Dup backup passphrase"
 msgstr "מילת הצופן של גיבוי ה־Déjà Dup"
 
@@ -362,41 +424,41 @@ msgstr ""
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:297
+#: ../deja-dup/AssistantRestore.vala:300
 msgid "Restoring:"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:325
+#: ../deja-dup/AssistantRestore.vala:328
 msgid "No backups to restore"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:413
+#: ../deja-dup/AssistantRestore.vala:417
 msgid "Original location"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:426
+#: ../deja-dup/AssistantRestore.vala:430
 msgid "File to restore:"
 msgid_plural "Files to restore:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../deja-dup/AssistantRestore.vala:448
+#: ../deja-dup/AssistantRestore.vala:452
 msgid "Restore Failed"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:450
+#: ../deja-dup/AssistantRestore.vala:454
 msgid "Restore Finished"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:451
+#: ../deja-dup/AssistantRestore.vala:455
 msgid "Your files were successfully restored."
 msgstr "הקבצים שלך שוחזרו בהצלחה."
 
-#: ../deja-dup/AssistantRestore.vala:455 ../libdeja-dup/Operation.vala:52
-msgid "Restoring..."
+#: ../deja-dup/AssistantRestore.vala:459 ../common/Operation.vala:54
+msgid "Restoring…"
 msgstr ""
 
-#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:41
+#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:33
 #: ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr "הצגת הגירסה"
@@ -435,15 +497,15 @@ msgid "_Contents"
 msgstr ""
 
 #: ../deja-dup/MainWindow.vala:217
-msgid "Get Help _Online..."
+msgid "Get Help _Online…"
 msgstr ""
 
 #: ../deja-dup/MainWindow.vala:221
-msgid "_Translate This Application..."
+msgid "_Translate This Application…"
 msgstr ""
 
 #: ../deja-dup/MainWindow.vala:225
-msgid "_Report a Problem..."
+msgid "_Report a Problem…"
 msgstr ""
 
 #: ../deja-dup/MountOperationAssistant.vala:54
@@ -487,256 +549,377 @@ msgstr ""
 msgid "_Password:"
 msgstr ""
 
+#: ../deja-dup/MountOperationAssistant.vala:208
+msgid "S_how secret access key"
+msgstr ""
+
 #: ../deja-dup/MountOperationAssistant.vala:209
+msgid "S_how password"
+msgstr ""
+
+#: ../deja-dup/MountOperationAssistant.vala:216
 msgid "_Remember secret access key"
 msgstr ""
 
-#: ../deja-dup/StatusIcon.vala:69
+#: ../deja-dup/StatusIcon.vala:96
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% הושלמו"
 
-#: ../deja-dup/StatusIcon.vala:100
+#: ../deja-dup/StatusIcon.vala:101
+#, c-format
+msgid "Show _Progress (%.1f%%)"
+msgstr ""
+
+#: ../deja-dup/StatusIcon.vala:103
+msgid "Show _Progress"
+msgstr ""
+
+#: ../deja-dup/StatusIcon.vala:148
 msgid "_Delay Backup"
 msgstr ""
 
-#: ../deja-dup/StatusIcon.vala:105
+#: ../deja-dup/StatusIcon.vala:153
 msgid "_Skip Backup"
 msgstr ""
 
-#: ../libdeja-dup/BackendFile.vala:51
+#: ../common/BackendFile.vala:73
 msgid "GVFS FUSE is not installed"
 msgstr ""
 
-#: ../libdeja-dup/BackendS3.vala:126
+#. Translators: %2$s is the name of a removable drive, %1$s is a folder
+#. on that removable drive.
+#: ../common/BackendFile.vala:87
 #, c-format
-msgid "Folder %s on Amazon S3"
+msgid "%1$s on %2$s"
 msgstr ""
 
-#: ../libdeja-dup/BackendS3.vala:172
+#: ../common/BackendFile.vala:125
+#, c-format
+msgid "Backup will begin when %s becomes connected."
+msgstr ""
+
+#: ../common/BackendFile.vala:132 ../common/BackendS3.vala:51
+msgid "Backup will begin when a network connection becomes available."
+msgstr ""
+
+#: ../common/BackendFile.vala:365
+msgid "Backup location not available"
+msgstr ""
+
+#: ../common/BackendFile.vala:365
+#, c-format
+msgid "Waiting for ‘%s’ to become connected…"
+msgstr ""
+
+#. Translators: %s is a folder.
+#: ../common/BackendS3.vala:129
+#, c-format
+msgid "%s on Amazon S3"
+msgstr ""
+
+#: ../common/BackendS3.vala:175
 msgid "Permission denied"
 msgstr ""
 
-#: ../libdeja-dup/BackendS3.vala:195
+#: ../common/BackendS3.vala:198
 msgid "Enter Amazon S3 access key"
 msgstr ""
 
-#: ../libdeja-dup/ButtonConnect.vala:28
-msgid "Connect to _Server..."
+#: ../common/CommonUtils.vala:240
+msgid "Unknown"
 msgstr ""
 
-#: ../libdeja-dup/ButtonConnect.vala:37
-msgid "Could not open connection dialog"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:36
-msgid "At least a week"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:37
-msgid "At least a month"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:38
-msgid "At least two months"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:39
-msgid "At least three months"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:40
-msgid "At least six months"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:41
-msgid "At least a year"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:42
-msgid "Forever"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:100
-#, c-format
-msgid "At least %d day"
-msgid_plural "At least %d days"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../libdeja-dup/ConfigLabelBool.vala:36
-msgid "Yes"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLabelBool.vala:36
-msgid "No"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLabelList.vala:56 ../libdeja-dup/ConfigList.vala:111
-msgid "Home Folder"
-msgstr "תיקיית הבית"
-
-#: ../libdeja-dup/ConfigLabelList.vala:58 ../libdeja-dup/ConfigList.vala:113
-msgid "Trash"
-msgstr "אשפה"
-
-#: ../libdeja-dup/ConfigList.vala:152
-msgid "Choose folders"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLocation.vala:41
-msgid "Select Backup Location"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLocation.vala:68 ../libdeja-dup/libdeja-dup.vala:304
-msgid "Amazon S3"
-msgstr "Amazon S3"
-
-#: ../libdeja-dup/ConfigPeriod.vala:36
-msgid "Daily"
-msgstr ""
-
-#: ../libdeja-dup/ConfigPeriod.vala:37
-msgid "Weekly"
-msgstr ""
-
-#. Translators: Biweekly is every two weeks
-#: ../libdeja-dup/ConfigPeriod.vala:39
-msgid "Biweekly"
-msgstr ""
-
-#: ../libdeja-dup/ConfigPeriod.vala:40
-msgid "Monthly"
-msgstr ""
-
-#: ../libdeja-dup/ConfigPeriod.vala:96
-#, c-format
-msgid "Every %d day"
-msgid_plural "Every %d days"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../libdeja-dup/DuplicityInfo.vala:131
+#: ../common/DuplicityInfo.vala:133
 msgid "Could not run duplicity"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:137
+#: ../common/DuplicityInfo.vala:138
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:139
+#: ../common/DuplicityInfo.vala:140
 #, c-format
 msgid ""
-"Could not understand duplicity version '%s'.\n"
+"Could not understand duplicity version ‘%s’.\n"
 "\n"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:141
+#: ../common/DuplicityInfo.vala:142
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:151
-msgid "Duplicity's version is too old"
+#: ../common/DuplicityInfo.vala:146
+msgid "Duplicity’s version is too old"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:152
+#: ../common/DuplicityInfo.vala:147
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
 "version %d.%d.%.2d"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:180 ../libdeja-dup/Duplicity.vala:188
-#: ../libdeja-dup/Operation.vala:94
-msgid "Preparing..."
+#: ../common/Duplicity.vala:210
+msgid "Paused (no network)"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:258 ../libdeja-dup/Duplicity.vala:275
-msgid "Cleaning up..."
+#: ../common/Duplicity.vala:250 ../common/Duplicity.vala:258
+#: ../common/Duplicity.vala:289 ../common/Operation.vala:95
+msgid "Preparing…"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:349 ../libdeja-dup/Duplicity.vala:589
+#: ../common/Duplicity.vala:277
+msgid "Creating the first backup.  This may take a while."
+msgstr ""
+
+#: ../common/Duplicity.vala:279
+msgid ""
+"Creating a fresh backup to protect against backup corruption.  This will "
+"take longer than normal."
+msgstr ""
+
+#: ../common/Duplicity.vala:370 ../common/Duplicity.vala:387
+msgid "Cleaning up…"
+msgstr ""
+
+#: ../common/Duplicity.vala:473 ../common/Duplicity.vala:744
 msgid "Failed with an unknown error."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:501
+#: ../common/Duplicity.vala:656
 #, c-format
-msgid "Could not restore '%s': File not found in backup"
+msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:505 ../libdeja-dup/Duplicity.vala:547
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:702
 msgid "Bad encryption password."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:509
+#: ../common/Duplicity.vala:664
 msgid "Computer name changed"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:509
+#: ../common/Duplicity.vala:664
 #, c-format
 msgid ""
-"The existing backup is of a computer named %s, but the current computer's "
+"The existing backup is of a computer named %s, but the current computer’s "
 "name is %s.  If this is unexpected, you should backup to a different "
 "location."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:529
+#: ../common/Duplicity.vala:684
 msgid "Invalid ID."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:531
+#: ../common/Duplicity.vala:686
 msgid "Invalid secret key."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:533
+#: ../common/Duplicity.vala:688
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:542
+#: ../common/Duplicity.vala:697
 msgid "S3 bucket name is not available."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:551
+#: ../common/Duplicity.vala:706
 #, c-format
-msgid "Error reading file '%s'."
+msgid "Error reading file ‘%s’."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:553
+#: ../common/Duplicity.vala:708
 #, c-format
-msgid "Error writing file '%s'."
+msgid "Error writing file ‘%s’."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:561
+#: ../common/Duplicity.vala:716
 #, c-format
 msgid "No space left in %s"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:581
+#: ../common/Duplicity.vala:736
 msgid "No backup files found"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:617
-msgid "Uploading..."
+#: ../common/Duplicity.vala:772
+msgid "Uploading…"
 msgstr ""
 
-#: ../libdeja-dup/libdeja-dup.vala:97
+#: ../common/OperationRestore.vala:54
+msgid "Restoring files…"
+msgstr ""
+
+#: ../common/OperationRestore.vala:173
+#, c-format
+msgid ""
+"Not all files could be restored. Any files that could not be restored may "
+"still be found in %s."
+msgstr ""
+
+#: ../common/OperationRestore.vala:182
+#, c-format
+msgid "Could not restore %s: %s"
+msgstr ""
+
+#: ../common/Operation.vala:56
+msgid "Checking for backups…"
+msgstr ""
+
+#: ../common/Operation.vala:210
+msgid "Another Déjà Dup is already running"
+msgstr ""
+
+#: ../monitor/monitor.vala:230
+msgid "Scheduled backup delayed"
+msgstr ""
+
+#: ../nautilus/NautilusExtension.c:95
+msgid "Revert to Previous Version…"
+msgid_plural "Revert to Previous Versions…"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../nautilus/NautilusExtension.c:99
+msgid "Restore file from backup"
+msgid_plural "Restore files from backup"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../preferences/PreferencesDialog.vala:41 ../preferences/preferences.vala:35
+#: ../preferences/preferences.vala:66
+msgid "Déjà Dup Preferences"
+msgstr "העדפות Déjà Dup"
+
+#: ../preferences/PreferencesDialog.vala:99
+#, c-format
+msgid "S3 Access Key I_D:"
+msgstr ""
+
+#: ../preferences/PreferencesDialog.vala:111
+#, c-format
+msgid "_Folder:"
+msgstr ""
+
+#: ../preferences/PreferencesDialog.vala:197
+#, c-format
+msgid "_Keep backups:"
+msgstr ""
+
+#: ../widgets/ButtonConnect.vala:28
+msgid "Connect to _Server…"
+msgstr ""
+
+#: ../widgets/ButtonConnect.vala:37
+msgid "Could not open connection dialog"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:36
+msgid "At least a week"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:37
+msgid "At least a month"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:38
+msgid "At least two months"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:39
+msgid "At least three months"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:40
+msgid "At least six months"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:41
+msgid "At least a year"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:42
+msgid "Forever"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:100
+#, c-format
+msgid "At least %d day"
+msgid_plural "At least %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../widgets/ConfigLabelBool.vala:36
+msgid "Yes"
+msgstr ""
+
+#: ../widgets/ConfigLabelBool.vala:36
+msgid "No"
+msgstr ""
+
+#: ../widgets/ConfigLabelList.vala:56 ../widgets/ConfigList.vala:118
+msgid "Home Folder"
+msgstr "תיקיית הבית"
+
+#: ../widgets/ConfigLabelList.vala:58 ../widgets/ConfigList.vala:120
+msgid "Trash"
+msgstr "אשפה"
+
+#: ../widgets/ConfigList.vala:159
+msgid "Choose folders"
+msgstr ""
+
+#: ../widgets/ConfigLocation.vala:39
+msgid "Select Backup Location"
+msgstr ""
+
+#: ../widgets/ConfigLocation.vala:66
+msgid "Amazon S3"
+msgstr "Amazon S3"
+
+#: ../widgets/ConfigPeriod.vala:36
+msgid "Daily"
+msgstr ""
+
+#: ../widgets/ConfigPeriod.vala:37
+msgid "Weekly"
+msgstr ""
+
+#. Translators: Biweekly is every two weeks
+#: ../widgets/ConfigPeriod.vala:39
+msgid "Biweekly"
+msgstr ""
+
+#: ../widgets/ConfigPeriod.vala:40
+msgid "Monthly"
+msgstr ""
+
+#: ../widgets/ConfigPeriod.vala:96
+#, c-format
+msgid "Every %d day"
+msgid_plural "Every %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../widgets/WidgetUtils.vala:30
 #, c-format
 msgid "Could not display %s"
 msgstr "לא ניתן להציג את %s"
 
-#: ../libdeja-dup/libdeja-dup.vala:141
+#: ../widgets/WidgetUtils.vala:73
 msgid "About Déjà Dup"
 msgstr "אודות Déjà Dup"
 
-#: ../libdeja-dup/libdeja-dup.vala:145
+#: ../widgets/WidgetUtils.vala:77
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Yaron https://launchpad.net/~sh-yaron"
 
-#: ../libdeja-dup/libdeja-dup.vala:150
+#: ../widgets/WidgetUtils.vala:82
 #, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
@@ -748,7 +931,7 @@ msgstr ""
 "הציבורי הכללי של GNU כפי שפורסם על ידי קרן התוכנה החופשית; ניתן לפעול לפי "
 "גירסה 3, או (לבחירתך) בכל גירסה מאוחרת יותר."
 
-#: ../libdeja-dup/libdeja-dup.vala:151
+#: ../widgets/WidgetUtils.vala:83
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -759,231 +942,8 @@ msgstr ""
 "מרומזת למסחר או התאמה לצרכים מסויימים. אנא פנה לרשיון הציבורי הכללי של GNU "
 "לפרטים נוספים."
 
-#: ../libdeja-dup/libdeja-dup.vala:152
+#: ../widgets/WidgetUtils.vala:84
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see http://www.gnu.org/licenses/."
 msgstr ""
-
-#: ../libdeja-dup/libdeja-dup.vala:316
-msgid "Unknown"
-msgstr ""
-
-#: ../libdeja-dup/OperationRestore.vala:60
-msgid "Restoring files..."
-msgstr "משחזר קבצים..."
-
-#: ../libdeja-dup/OperationRestore.vala:173
-#, c-format
-msgid ""
-"Not all files could be restored. Any files that could not be restored may "
-"still be found in %s."
-msgstr ""
-
-#: ../libdeja-dup/OperationRestore.vala:182
-#, c-format
-msgid "Could not restore %s: %s"
-msgstr ""
-
-#: ../libdeja-dup/Operation.vala:54
-msgid "Checking for backups..."
-msgstr ""
-
-#: ../libdeja-dup/Operation.vala:208
-msgid "Another Déjà Dup is already running"
-msgstr ""
-
-#: ../nautilus/NautilusExtension.c:95
-msgid "Revert to Previous Version..."
-msgid_plural "Revert to Previous Versions..."
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../nautilus/NautilusExtension.c:99
-msgid "Restore file from backup"
-msgid_plural "Restore files from backup"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../preferences/PreferencesDialog.vala:36 ../preferences/preferences.vala:35
-#: ../preferences/preferences.vala:66
-msgid "Déjà Dup Preferences"
-msgstr "העדפות Déjà Dup"
-
-#: ../preferences/PreferencesDialog.vala:68
-#, c-format
-msgid "S3 Access Key I_D:"
-msgstr ""
-
-#: ../preferences/PreferencesDialog.vala:80
-#, c-format
-msgid "_Folder:"
-msgstr ""
-
-#: ../preferences/PreferencesDialog.vala:166
-#, c-format
-msgid "_Keep backups:"
-msgstr ""
-
-#~ msgid "Local backup location"
-#~ msgstr "מיקום הגיבוי המקומי"
-
-#~ msgid "Déjà Dup Backup Utility"
-#~ msgstr "כלי הגיבוי Déjà Dup"
-
-#~ msgid "Folder on your system in which to hold the backup files."
-#~ msgstr "תיקייה במערכת שלך בה ישמרו קבצי הגיבוי."
-
-#~ msgid ""
-#~ "Enter your Amazon Web Services user ID and secret key.  This is not the same "
-#~ "as your amazon.com username and password."
-#~ msgstr ""
-#~ "הזן את מזהה המשתמש שלך והמפתח הסודי בשירותים המקוונים של Amazon. אלו אינם "
-#~ "הפרטים בהם אתה משתמש להתחברות לאתר amazon.com."
-
-#~ msgid "Amazon S3 Password"
-#~ msgstr "סיסמת Amazon S3"
-
-#~ msgid "Choose backup destination"
-#~ msgstr "בחר את יעד הגיבוי"
-
-#~ msgid "Choose folder"
-#~ msgstr "בחר תיקייה"
-
-#~ msgid "Could not add the folder"
-#~ msgstr "לא ניתן להוסיף את התיקייה"
-
-#~ msgid "Select Folder"
-#~ msgstr "בחר תיקייה"
-
-#~ msgid "Local Folder"
-#~ msgstr "תיקייה מקומית"
-
-#~ msgid ""
-#~ "You should have received a copy of the GNU General Public License along with "
-#~ "this program; if not, write to the Free Software Foundation, Inc., 59 Temple "
-#~ "Place - Suite 330, Boston, MA  02111-1307, USA."
-#~ msgstr ""
-#~ "יחד עם תוכנית זו היית אמור לקבל עותק של הרישיון הציבורי הכללי של GNU; במידה "
-#~ "ולא, כתוב אל Free Software Foundation, Inc., 59 Temple Place, Suite 330, "
-#~ "Boston, , MA 02111-1307, USA."
-
-#~ msgid "Enter the password used to encrypt your backup files."
-#~ msgstr "הזן את הסיסמה המשמשת להצפנת קבצי הגיבוי שלך."
-
-#~ msgid "_Backup"
-#~ msgstr "_גיבוי"
-
-#~ msgid "_File"
-#~ msgstr "_קובץ"
-
-#~ msgid "Encryption Password"
-#~ msgstr "סיסמת הצפנה"
-
-#~ msgid "E_xclude:"
-#~ msgstr "הוצאה מה_כלל:"
-
-#~ msgid "I_nclude:"
-#~ msgstr "ה_כללה:"
-
-#~ msgid "The last time Déjà Dup was run, in ISO 8601 format."
-#~ msgstr "הפעם האחרונה בה הופעל Déjà Dup, במבנה ISO 8601."
-
-#~ msgid "The directory used for SSH connections."
-#~ msgstr "התיקייה המשמשת לחיבורי SSH."
-
-#~ msgid "SSH port"
-#~ msgstr "פתחת ה־SSH"
-
-#~ msgid "SSH directory"
-#~ msgstr "תיקיית ה־SSH"
-
-#~ msgid "SSH username"
-#~ msgstr "שם המשתמש ב־SSH"
-
-#~ msgid "SSH server"
-#~ msgstr "שרת ה־SSH"
-
-#~ msgid "The port used for SSH connections."
-#~ msgstr "הפתחה המשמשת להתחברויות SSH."
-
-#~ msgid "The server used for SSH connections."
-#~ msgstr "השרת המשמש להתחברויות SSH."
-
-#~ msgid ""
-#~ "The protocol used for the backup location. Valid values are 's3', 'file', or "
-#~ "'ssh'."
-#~ msgstr ""
-#~ "הפרוטוקול המשמש למיקום הגיבוי. הערכים התקפים הם 's3', 'file', או 'ssh'."
-
-#~ msgid "Déjà Dup Applet"
-#~ msgstr "יישומון Déjà Dup"
-
-#~ msgid "The user used for SSH connections."
-#~ msgstr "שם המשתמש המשמש להתחברויות SSH."
-
-#~ msgid "Backup error occurred"
-#~ msgstr "ארעה שגיאת גיבוי"
-
-#~ msgid "Please enter the server password for your backup."
-#~ msgstr "נא הזן את סיסמת השרת עבור הגיבוי שלך."
-
-#~ msgid "Enter"
-#~ msgstr "הזנה"
-
-#~ msgid "Server password needed"
-#~ msgstr "סיסמת השרת נדרשת"
-
-#~ msgid "Please enter the encryption password for your backup files."
-#~ msgstr "אנא הזן את סיסמת ההצפנה לקבצי הגיבוי שלך."
-
-#~ msgid ""
-#~ "A scheduled backup will shortly begin.  You can instead choose to backup "
-#~ "later or not at all."
-#~ msgstr ""
-#~ "גיבוי מתוזמן יתחיל בעוד זמן קצר. תוכל במקום זאת לבחור לגבות מאוחר יותר או לא "
-#~ "לגבות כלל."
-
-#~ msgid "Backup about to start"
-#~ msgstr "הגיבוי עומד להתחיל"
-
-#~ msgid "Backup Later"
-#~ msgstr "גיבוי מאוחר יותר"
-
-#~ msgid "Skip Backup"
-#~ msgstr "דילוג על הגיבוי"
-
-#~ msgid "Encryption password needed"
-#~ msgstr "נדרשת סיסמת הצפנה"
-
-#~ msgid "Amazon S3 Key ID"
-#~ msgstr "מזהה מפתח Amazon S3"
-
-#~ msgid "Your Amazon S3 Key identifier. This acts as your S3 username."
-#~ msgstr "מזהה מפתח ה־Amazon S3. המזהה מהווה שם המשתמש שלך ב־S3"
-
-#~ msgid ""
-#~ "The protocol used for the backup location. Valid values are 's3' or 'file'."
-#~ msgstr ""
-#~ "הפרוטוקול המשמש למיקום הגיבוי. ערכים מורשים לדוגמה הינם 's3' או 'file'."
-
-#~ msgid "Backing up files..."
-#~ msgstr "מגבה קבצים..."
-
-#~ msgid "Could not connect to backup location"
-#~ msgstr "לא ניתן להתחבר אל מיקום הגיבוי"
-
-#~ msgid "Error occurred"
-#~ msgstr "ארעה שגיאה"
-
-#~ msgid "Backup finished"
-#~ msgstr "הגיבוי הסתיים"
-
-#~ msgid "Restore finished"
-#~ msgstr "השיחזור הושלם"
-
-#~ msgid "S3 b_ucket:"
-#~ msgstr "_דלי S3:"
-
-#~ msgid "Folder:"
-#~ msgstr "תיקייה:"
