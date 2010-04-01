@@ -130,7 +130,8 @@ public bool set_bus_claimed(string busname, bool claim)
       // We have to assign reply to a variable because it is a dynamic binding
       // and otherwise, generated code will expect no return value.
       uint32 result = bus.release_name("net.launchpad.deja-dup." + busname);
-      result = result; // to silence warning about not using it.
+      if (result != 1)
+        warning("Unexpected reply of %u when releasing busname %s\n", result, busname);
     }
   }
   catch (Error e) {

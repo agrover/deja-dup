@@ -18,4 +18,4 @@
 */
 
 [CCode (cheader_filename = "glib.h,glib/gi18n-lib.h")]
-weak string C_(string context, string msgid);
+unowned string C_(string context, string msgid);

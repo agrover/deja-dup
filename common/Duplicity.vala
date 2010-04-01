@@ -714,11 +714,15 @@ public class Duplicity : Object
     case "S3CreateError":
       if (text.str("<Code>BucketAlreadyExists</Code>") != null) {
         if (((BackendS3)backend).bump_bucket()) {
-          remote = backend.get_location();
-          restart();
+          try {
+            remote = backend.get_location();
+            if (restart())
+              return;
+          }
+          catch (Error e) {warning("%s\n", e.message);}
         }
-        else
-          show_error(_("S3 bucket name is not available."));
+        
+        show_error(_("S3 bucket name is not available."));
       }
       break;
     case "IOError":
@@ -732,12 +736,19 @@ public class Duplicity : Object
           show_error(_("Error writing file ‘%s’.").printf(last_touched_file.get_parse_name()));
       }
       else if (text.str("[Errno 28]") != null) { // No space left on device
-        string where;
-        if (mode == Operation.Mode.BACKUP)
-          where = backend.get_location_pretty();
+        string where = null;
+        if (mode == Operation.Mode.BACKUP) {
+          try {
+            where = backend.get_location_pretty();
+          }
+          catch (Error e) {warning("%s\n", e.message);}
+        }
         else
           where = local.get_path();
-        show_error(_("No space left in %s").printf(where));
+        if (where == null)
+          show_error(_("No space left"));
+        else
+          show_error(_("No space left in %s").printf(where));
       }
       else {
         // Very possibly a FAT file system that can't handle the colons that 

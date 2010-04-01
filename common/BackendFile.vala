@@ -346,7 +346,7 @@ public class BackendFile : Backend
   static Volume? find_volume_by_uuid(string uuid)
   {
     var mon = VolumeMonitor.get();
-    unowned List<Volume> vols = mon.get_volumes();
+    List<Volume> vols = mon.get_volumes();
     foreach (Volume v in vols) {
       // For some reason, when I last tested this (glib 2.22.2), 
       // Volume.get_uuid always returned null.
