@@ -180,10 +180,9 @@ public class BackendFile : Backend
   }
   
   // Checks if file is secretly a volume file and fills out gconf data if so.
-  public async static void check_for_volume_info() throws Error
+  public async static void check_for_volume_info(File file) throws Error
   {
     var client = get_gconf_client();
-    var file = get_file_from_gconf();
 
     if (!file.is_native()) {
       client.set_string(FILE_TYPE_KEY, "normal");
@@ -285,8 +284,10 @@ public class BackendFile : Backend
     }
 
     // If we don't know what type this is, look up volume data
-    if (type != "volume" && type != "normal" && success)
-      yield check_for_volume_info();
+    if (type != "volume" && type != "normal" && success) {
+      var gfile = get_file_from_gconf();
+      yield check_for_volume_info(gfile);
+    }
 
     envp_ready(success, new List<string>());
 

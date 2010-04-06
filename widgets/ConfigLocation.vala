@@ -144,7 +144,7 @@ public class ConfigLocation : ConfigWidget
       else {
         client.set_string(BACKEND_KEY, "file");
         client.set_string(FILE_PATH_KEY, file.get_parse_name());
-        yield BackendFile.check_for_volume_info();
+        yield BackendFile.check_for_volume_info(file);
       }
     }
     catch (Error e) {
