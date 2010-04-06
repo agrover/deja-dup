@@ -18,7 +18,7 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 # Sets up autoconf.
-AC_INIT([Déjà Dup],[14.0.1],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup], [https://launchpad.net/deja-dup])
+AC_INIT([Déjà Dup],[14.0.2],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup], [https://launchpad.net/deja-dup])
 AC_PREREQ(2.64)
 AC_CONFIG_SRCDIR(deja-dup/main.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
@@ -64,7 +64,7 @@ AC_DEFINE_UNQUOTED(LOCALE_DIR, "${PREFIX}/${DATADIRNAME}/locale",[Locale directo
 AC_DEFINE_UNQUOTED(THEME_DIR, "${PREFIX}/${DATADIRNAME}/icons",[Icon directory])
 AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package data directory])
 
-GTK_REQ_VER=2.14
+GTK_REQ_VER=2.18
 GLIB_REQ_VER=2.20
 GIO_REQ_VER=$GLIB_REQ_VER
 
