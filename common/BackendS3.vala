@@ -154,10 +154,11 @@ public class BackendS3 : Backend
       ask_password();
   }
   
-  void found_password(GnomeKeyring.Result result, GLib.List? list)
+  void found_password(GnomeKeyring.Result result,
+                      GLib.List<GnomeKeyring.NetworkPasswordData>? list)
   {
     if (result == GnomeKeyring.Result.OK && list != null) {
-      secret_key = ((GnomeKeyring.NetworkPasswordData)list.data).password;
+      secret_key = list.data.password;
       got_secret_key();
     }
     else {

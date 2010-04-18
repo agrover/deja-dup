@@ -59,7 +59,7 @@ const string[] documenters = {"Michael Terry <mike@mterry.name>",
 
 public void show_about(Object owner, Gtk.Window? parent)
 {
-  Gtk.AboutDialog about = (Gtk.AboutDialog)owner.get_data("about-dlg");
+  Gtk.AboutDialog about = (Gtk.AboutDialog)owner.get_data<Gtk.AboutDialog>("about-dlg");
   
   if (about != null)
   {
@@ -89,7 +89,7 @@ public void show_about(Object owner, Gtk.Window? parent)
   
   about.set_transient_for(parent);
   about.response.connect((dlg, resp) => {
-    Object about_owner = (Object)dlg.get_data("owner");
+    Object about_owner = (Object)dlg.get_data<Object>("owner");
     about_owner.set_data("about-dlg", null);
     dlg.destroy();
   });
