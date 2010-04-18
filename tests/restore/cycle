@@ -30,6 +30,9 @@ def test():
   base.backup_simple()
   base.start_deja_dup()
   base.restore_simple(restoredir)
+  # Test restoring on top of previous restored files
+  base.start_deja_dup()
+  base.restore_simple(restoredir)
   return True
 
 base.run(test)

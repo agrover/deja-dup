@@ -1020,6 +1020,7 @@ public class Duplicity : Object
         break;
       case Operation.Mode.RESTORE:
         argv.prepend("restore");
+        argv.append("--force");
         argv.append(remote);
         argv.append(local_arg.get_path());
         break;
