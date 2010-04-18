@@ -145,9 +145,14 @@ def get_gconf_value(key):
   return pout.strip()
 
 def start_deja_dup(args=[''], waitfor='frmDéjàDup'):
+  #(fd, path) = tempfile.mkstemp()
+  #os.write(fd, 'run\n')
+  #os.close(fd)
+  #subprocess.Popen(['gdb', '-nx', '-x', path, '--args', 'deja-dup', ' '.join(args)])
   subprocess.Popen(['deja-dup'] + args)
   if waitfor is not None:
     ldtp.waittillguiexist(waitfor)
+  #os.remove(path)
 
 def start_deja_dup_prefs():
   subprocess.Popen(['deja-dup-preferences'])
@@ -346,10 +351,14 @@ def restore_simple(path, date=None):
   ldtp.click('dlgRestore', 'rbtnRestoretospecificfolder')
   ldtp.comboselect('dlgRestore', 'cboRestorefolder', 'Other...')
   assert ldtp.waittillguiexist('dlgChoosedestinationforrestoredfiles')
+  # Make sure path ends in '/'
+  if path[-1] != '/':
+    path += '/'
   ldtp.settextvalue('dlgChoosedestinationforrestoredfiles', 'txtLocation', path)
   ldtp.click('dlgChoosedestinationforrestoredfiles', 'btnOpen')
   ldtp.wait(1) # give the combo a second to settle
   ldtp.click('dlgRestore', 'btnForward')
+  ldtp.wait(1) # give the dlg a second to settle
   ldtp.click('dlgRestore', 'btnRestore')
   assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored', 400)
   assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored')
