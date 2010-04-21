@@ -30,8 +30,8 @@ public class AssistantBackup : AssistantOperation
 
   construct
   {
-    title = C_("backup is verb", "Backup");
-    apply_text = C_("backup is verb", "_Backup");
+    title = C_("back up is verb", "Back Up");
+    apply_text = C_("back up is verb", "_Back Up");
     resume_supported = DejaDup.DuplicityInfo.get_default().can_resume;
     resumed.connect(do_resume);
   }
@@ -194,10 +194,10 @@ public class AssistantBackup : AssistantOperation
   
   void add_periodic_widgets(Gtk.VBox page)
   {
-    var check = new DejaDup.ConfigBool(DejaDup.PERIODIC_KEY, _("_Automatically backup on a regular schedule"));
+    var check = new DejaDup.ConfigBool(DejaDup.PERIODIC_KEY, _("_Automatically back up on a regular schedule"));
     
     var combo = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
-    var label = new Gtk.Label("    %s".printf(_("How _often to backup:")));
+    var label = new Gtk.Label("    %s".printf(_("How _often to back up:")));
     label.set("mnemonic-widget", combo,
               "use-underline", true,
               "xalign", 0.0f);

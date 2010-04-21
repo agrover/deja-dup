@@ -36,8 +36,8 @@ def test():
   base.backup_simple(finish=False)
   destdir = base.get_temp_name('local')
   wait_for_volume(destdir)
-  ldtp.click('dlgBackup', 'btnResumeLater')
-  ldtp.waittillguinotexist('dlgBackup')
+  ldtp.click('dlgBackUp', 'btnResumeLater')
+  ldtp.waittillguinotexist('dlgBackUp')
   vols_before = os.listdir(destdir)
   assert vols_before != []
   base.start_deja_dup()

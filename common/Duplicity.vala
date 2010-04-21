@@ -685,7 +685,7 @@ public class Duplicity : Object
         break;
       case ERROR_HOSTNAME_CHANGED:
         if (firstline.length >= 4) {
-          if (!ask_question(_("Computer name changed"), _("The existing backup is of a computer named %s, but the current computer’s name is %s.  If this is unexpected, you should backup to a different location.").printf(firstline[2], firstline[3])))
+          if (!ask_question(_("Computer name changed"), _("The existing backup is of a computer named %s, but the current computer’s name is %s.  If this is unexpected, you should back up to a different location.").printf(firstline[2], firstline[3])))
             return;
         }
         // Else just assume that user wants to allow the mismatch...

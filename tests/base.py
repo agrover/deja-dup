@@ -328,17 +328,17 @@ def remap(frm):
   ldtp.remap(frm) # in case this is second time we've run it
 
 def backup_simple(finish=True):
-  ldtp.click('frmDéjàDup', 'btnBackup…')
-  ldtp.waittillguiexist('dlgBackup')
-  remap('dlgBackup')
-  if guivisible('dlgBackup', 'lblPreferences'):
-    ldtp.click('dlgBackup', 'btnForward')
-    ldtp.click('dlgBackup', 'btnForward')
-  ldtp.click('dlgBackup', 'btnBackup')
+  ldtp.click('frmDéjàDup', 'btnBackUp…')
+  ldtp.waittillguiexist('dlgBackUp')
+  remap('dlgBackUp')
+  if guivisible('dlgBackUp', 'lblPreferences'):
+    ldtp.click('dlgBackUp', 'btnForward')
+    ldtp.click('dlgBackUp', 'btnForward')
+  ldtp.click('dlgBackUp', 'btnBackUp')
   if finish:
-    wait_for_encryption('dlgBackup', 'lblYourfilesweresuccessfullybackedup', 400)
-    ldtp.click('dlgBackup', 'btnClose')
-    ldtp.waittillguinotexist('dlgBackup')
+    wait_for_encryption('dlgBackUp', 'lblYourfilesweresuccessfullybackedup', 400)
+    ldtp.click('dlgBackUp', 'btnClose')
+    ldtp.waittillguinotexist('dlgBackUp')
 
 def restore_simple(path, date=None):
   ldtp.click('frmDéjàDup', 'btnRestore…')

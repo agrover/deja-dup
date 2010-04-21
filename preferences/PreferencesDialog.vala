@@ -169,14 +169,14 @@ public class PreferencesDialog : Gtk.Dialog
                  Gtk.AttachOptions.FILL, 3, 3);
     ++row;
     
-    DejaDup.ConfigBool periodic_check = new DejaDup.ConfigBool(DejaDup.PERIODIC_KEY, _("_Automatically backup on a regular schedule"));
+    DejaDup.ConfigBool periodic_check = new DejaDup.ConfigBool(DejaDup.PERIODIC_KEY, _("_Automatically back up on a regular schedule"));
     table.attach(periodic_check, 0, 3, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL, 3, 3);
     ++row;
     
     w = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
-    label = new Gtk.Label("    %s".printf(_("How _often to backup:")));
+    label = new Gtk.Label("    %s".printf(_("How _often to back up:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "xalign", 0.0f);
