@@ -302,7 +302,7 @@ def last_date_change(to_date):
         os.rename(f, newname)
 
 def guivisible(frm, obj):
-  if obj not in ldtp.getobjectlist(frm):
+  if not ldtp.guiexist(frm, obj):
     return False
   states = ldtp.getallstates(frm, obj)
   return ldtp.state.VISIBLE in states
@@ -327,7 +327,7 @@ def remap(frm):
 
 def backup_simple(finish=True):
   ldtp.click('frmDéjàDup', 'btnBackup')
-  ldtp.waittillguiexist('dlgBackup')
+  assert ldtp.waittillguiexist('dlgBackup')
   remap('dlgBackup')
   if guivisible('dlgBackup', 'lblPreferences'):
     ldtp.click('dlgBackup', 'btnForward')
@@ -365,7 +365,9 @@ def restore_simple(path, date=None):
   ldtp.click('dlgRestore', 'btnClose')
   ldtp.waittillguinotexist('dlgRestore')
 
-def restore_specific(path, date=None):
+def restore_specific(files, path, date=None):
+  args = ['--restore'] + files
+  start_deja_dup(args=args, waitfor='dlgRestore')
   remap('dlgRestore')
   if ldtp.guiexist('dlgRestore', 'lblPreferences'):
     ldtp.click('dlgRestore', 'btnForward')
