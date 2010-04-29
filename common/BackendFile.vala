@@ -347,6 +347,7 @@ public class BackendFile : Backend
   static Volume? find_volume_by_uuid(string uuid)
   {
     var mon = VolumeMonitor.get();
+    mon.ref(); // bug 569418; bad things happen when VM goes away
     List<Volume> vols = mon.get_volumes();
     foreach (Volume v in vols) {
       // For some reason, when I last tested this (glib 2.22.2), 
@@ -366,6 +367,7 @@ public class BackendFile : Backend
       pause_op(_("Backup location not available"), _("Waiting for ‘%s’ to become connected…").printf(name));
       var loop = new MainLoop(null, false);
       var mon = VolumeMonitor.get();
+      mon.ref(); // bug 569418; bad things happen when VM goes away
       mon.volume_added.connect((m, v) => {
         loop.quit();
       });

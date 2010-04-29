@@ -342,7 +342,10 @@ static int main(string[] args)
 
   DejaDup.initialize();
   DejaDup.NetworkManager.get().changed.connect(network_changed);
-  VolumeMonitor.get().volume_added.connect(volume_added);
+
+  var mon = VolumeMonitor.get();
+  mon.ref(); // bug 569418; bad things happen when VM goes away
+  mon.volume_added.connect(volume_added);
 
   loop = new MainLoop(null, false);
 
