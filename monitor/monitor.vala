@@ -114,7 +114,7 @@ static Date next_run_date()
     period_days = client.get_int(DejaDup.PERIODIC_PERIOD_KEY);
   }
   catch (Error e) {
-    error("%s", e.message);
+    warning("%s", e.message);
     return Date();
   }
   
