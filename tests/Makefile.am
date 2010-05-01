@@ -30,6 +30,7 @@ TESTS = \
 	restore/cycle \
 	restore/full \
 	restore/rename \
+	restore/overdir \
 	restore/two
 
 # Tests that must be run manually

@@ -344,6 +344,9 @@ public class Duplicity : Object
             // won't have correct permissions...
             local_file.make_directory_with_parents(null);
           }
+          catch (IOError.EXISTS e) {
+            // ignore
+          }
           catch (Error e) {
             show_error(e.message);
             return false;

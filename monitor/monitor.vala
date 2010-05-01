@@ -114,7 +114,7 @@ static Date next_run_date()
     period_days = client.get_int(DejaDup.PERIODIC_PERIOD_KEY);
   }
   catch (Error e) {
-    error("%s", e.message);
+    warning("%s", e.message);
     return Date();
   }
   
@@ -342,7 +342,10 @@ static int main(string[] args)
 
   DejaDup.initialize();
   DejaDup.NetworkManager.get().changed.connect(network_changed);
-  VolumeMonitor.get().volume_added.connect(volume_added);
+
+  var mon = VolumeMonitor.get();
+  mon.ref(); // bug 569418; bad things happen when VM goes away
+  mon.volume_added.connect(volume_added);
 
   loop = new MainLoop(null, false);
 
