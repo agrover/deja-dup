@@ -331,8 +331,10 @@ def backup_simple(finish=True):
   remap('dlgBackup')
   if guivisible('dlgBackup', 'lblPreferences'):
     ldtp.click('dlgBackup', 'btnForward')
+    ldtp.wait(1) # give ldtp a second
     ldtp.click('dlgBackup', 'btnForward')
   ldtp.click('dlgBackup', 'btnBackup')
+  remap('dlgBackup')
   if finish:
     wait_for_encryption('dlgBackup', 'lblYourfilesweresuccessfullybackedup', 400)
     ldtp.click('dlgBackup', 'btnClose')
