@@ -25,8 +25,18 @@ update-pot:
 	$(MAKE) -C man update-pot
 dist-hook: update-pot
 
-release: distcheck
+# call like 'make copy-po TD=path-to-translation-dir'
+copy-po:
+	test -d $(TD)
+	cp -a $(TD)/po/*.po po && bzr add po/*.po
+	cp -a $(TD)/help/translations/*.po help/translations && bzr add help/translations/*.po
+	cp -a $(TD)/man/translations/*.po man/translations && bzr add man/translations/*.po
+
+sign:
 	gpg --armor --sign --detach-sig deja-dup-$(PACKAGE_VERSION).tar.bz2
+
+releasecheck: distcheck sign
+release: dist sign
 
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
