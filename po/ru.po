@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-02-20 22:36-0500\n"
-"PO-Revision-Date: 2010-02-22 04:56+0000\n"
+"POT-Creation-Date: 2010-03-26 08:10-0400\n"
+"PO-Revision-Date: 2010-04-03 05:06+0000\n"
 "Last-Translator: Sergey Sedov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-02-23 05:07+0000\n"
+"X-Launchpad-Export-Date: 2010-04-04 03:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../deja-dup/AssistantRestore.vala:264
@@ -38,7 +38,7 @@ msgstr "Резервное копирование ваших файлов"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:59
+#: ../deja-dup/StatusIcon.vala:63
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
@@ -106,17 +106,22 @@ msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
 msgstr ""
+"Если резервные копии хранятся на внешнем носителе, то это уникальный "
+"идентификатор раздела."
 
 #: ../data/deja-dup.schemas.in.h:12
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
 msgstr ""
+"Если резервные копии хранятся на внешнем носителе, то это путь каталога на "
+"этом разделе."
 
 #: ../data/deja-dup.schemas.in.h:13
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
+"Если резервные копии хранятся на внешнем носителе, то  это значок носителя."
 
 #: ../data/deja-dup.schemas.in.h:14
 msgid ""
@@ -212,7 +217,7 @@ msgstr "Тип места хранения копий"
 
 #: ../data/deja-dup.schemas.in.h:29
 msgid "Unique ID of the external volume"
-msgstr ""
+msgstr "Уникальный ID внешнего тома."
 
 #: ../data/deja-dup.schemas.in.h:30
 msgid ""
@@ -266,7 +271,7 @@ msgstr ""
 msgid "Co_ntinue"
 msgstr "_Продолжить"
 
-#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:146
+#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:155
 msgid "_Resume Later"
 msgstr "_Продолжить Позже"
 
@@ -275,8 +280,8 @@ msgctxt "backup is verb"
 msgid "Backup"
 msgstr "Резервная копия"
 
-#: ../deja-dup/AssistantBackup.vala:34 ../deja-dup/MainWindow.vala:73
-#: ../deja-dup/MainWindow.vala:187
+#: ../deja-dup/AssistantBackup.vala:34 ../deja-dup/MainWindow.vala:74
+#: ../deja-dup/MainWindow.vala:188
 msgctxt "backup is verb"
 msgid "_Backup"
 msgstr "_Резервное копирование"
@@ -388,7 +393,7 @@ msgstr "Сводная информация"
 msgid "Password needed"
 msgstr "Необходим пароль"
 
-#: ../deja-dup/AssistantOperation.vala:568
+#: ../deja-dup/AssistantOperation.vala:576
 msgid "Déjà Dup backup passphrase"
 msgstr "Пароль для резервных копий Déjà Dup"
 
@@ -396,8 +401,8 @@ msgstr "Пароль для резервных копий Déjà Dup"
 msgid "Restore"
 msgstr "Восстановить"
 
-#: ../deja-dup/AssistantRestore.vala:72 ../deja-dup/MainWindow.vala:46
-#: ../deja-dup/MainWindow.vala:193
+#: ../deja-dup/AssistantRestore.vala:72 ../deja-dup/MainWindow.vala:47
+#: ../deja-dup/MainWindow.vala:194
 msgid "_Restore"
 msgstr "_Восстановление"
 
@@ -495,38 +500,59 @@ msgstr "Немедлено начать архивирование"
 msgid "No filenames provided"
 msgstr "Не указаны имена файлов"
 
-#: ../deja-dup/MainWindow.vala:171
+#: ../deja-dup/MainWindow.vala:47 ../deja-dup/MainWindow.vala:194
+msgid "_Restore…"
+msgstr "_Восстановить..."
+
+#: ../deja-dup/MainWindow.vala:74 ../deja-dup/MainWindow.vala:188
+msgctxt "backup is verb"
+msgid "_Backup…"
+msgstr "_Резервное копирование..."
+
+#: ../deja-dup/MainWindow.vala:172
 msgid "Could not open preferences"
 msgstr "Не могу открыть настройки"
 
-#: ../deja-dup/MainWindow.vala:184
+#: ../deja-dup/MainWindow.vala:185
 msgctxt "backup is noun"
 msgid "_Backup"
 msgstr "_Резервное копирование"
 
-#: ../deja-dup/MainWindow.vala:203
+#: ../deja-dup/MainWindow.vala:204
 msgid "_Edit"
 msgstr "_Настройки"
 
-#: ../deja-dup/MainWindow.vala:210
+#: ../deja-dup/MainWindow.vala:211
 msgid "_Help"
 msgstr "_Помощь"
 
-#: ../deja-dup/MainWindow.vala:213
+#: ../deja-dup/MainWindow.vala:214
 msgid "_Contents"
 msgstr "_Содержание"
 
-#: ../deja-dup/MainWindow.vala:217
+#: ../deja-dup/MainWindow.vala:218
 msgid "Get Help _Online…"
 msgstr "Получить помощь в Интернете..."
 
-#: ../deja-dup/MainWindow.vala:221
+#: ../deja-dup/MainWindow.vala:222
 msgid "_Translate This Application…"
 msgstr "_Перевести это приложение"
 
-#: ../deja-dup/MainWindow.vala:225
+#: ../deja-dup/MainWindow.vala:226
 msgid "_Report a Problem…"
 msgstr "_Сообщить о проблеме"
+
+#: ../deja-dup/MountOperationAssistant.vala:164
+msgid "_Username:"
+msgstr "_Имя пользователя:"
+
+#: ../deja-dup/MountOperationAssistant.vala:196
+msgid "_Password:"
+msgstr "_Пароль:"
+
+#: ../deja-dup/MountOperationAssistant.vala:209
+msgid "S_how password"
+msgstr "_Показать пароль"
 
 #: ../deja-dup/MountOperationAssistant.vala:54
 msgid "Location not available"
@@ -536,12 +562,6 @@ msgstr "Местоположение не доступно"
 msgid "This backup location requires authentication."
 msgstr "Требуется аутентификация для доступа к месту хранения копий"
 
-#: ../deja-dup/MountOperationAssistant.vala:124
-#, c-format
-msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
-msgstr ""
-"Вы можете зарегистрироваться на сервисе Amazon S3 <a href=\"%s\">онлайн</a>."
-
 #: ../deja-dup/MountOperationAssistant.vala:136
 msgid "Connect _anonymously"
 msgstr "Подключиться _анонимно"
@@ -550,57 +570,29 @@ msgstr "Подключиться _анонимно"
 msgid "Connect as u_ser:"
 msgstr "Подключиться как п_ользователь:"
 
-#: ../deja-dup/MountOperationAssistant.vala:164
-msgid "_Access key ID:"
-msgstr "_Ключ доступа ID:"
-
-#: ../deja-dup/MountOperationAssistant.vala:164
-msgid "_Username:"
-msgstr "_Имя пользователя:"
-
 #: ../deja-dup/MountOperationAssistant.vala:181
 msgid "_Domain:"
 msgstr "_Домен:"
 
-#: ../deja-dup/MountOperationAssistant.vala:196
-msgid "_Secret access key:"
-msgstr "_Секретный ключ доступа:"
-
-#: ../deja-dup/MountOperationAssistant.vala:196
-msgid "_Password:"
-msgstr "_Пароль:"
-
-#: ../deja-dup/MountOperationAssistant.vala:208
-msgid "S_how secret access key"
-msgstr ""
-
-#: ../deja-dup/MountOperationAssistant.vala:209
-msgid "S_how password"
-msgstr "_Показать пароль"
-
-#: ../deja-dup/MountOperationAssistant.vala:216
-msgid "_Remember secret access key"
-msgstr "_Запомнить секретный ключ доступа"
-
-#: ../deja-dup/StatusIcon.vala:96
+#: ../deja-dup/StatusIcon.vala:100
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% завершено"
 
-#: ../deja-dup/StatusIcon.vala:101
+#: ../deja-dup/StatusIcon.vala:105
 #, c-format
 msgid "Show _Progress (%.1f%%)"
 msgstr "Показывать _ход выполнения (%.1f%%)"
 
-#: ../deja-dup/StatusIcon.vala:103
+#: ../deja-dup/StatusIcon.vala:107
 msgid "Show _Progress"
 msgstr "Показать Прогресс"
 
-#: ../deja-dup/StatusIcon.vala:148
+#: ../deja-dup/StatusIcon.vala:157
 msgid "_Delay Backup"
 msgstr "_Отложить резервное копирование"
 
-#: ../deja-dup/StatusIcon.vala:153
+#: ../deja-dup/StatusIcon.vala:162
 msgid "_Skip Backup"
 msgstr "_Пропустить резервное копирование"
 
@@ -643,6 +635,28 @@ msgstr "%s на сервисе  Amazon S3"
 msgid "Permission denied"
 msgstr "Отказано в доступе"
 
+#: ../deja-dup/MountOperationAssistant.vala:124
+#, c-format
+msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
+msgstr ""
+"Вы можете зарегистрироваться на сервисе Amazon S3 <a href=\"%s\">онлайн</a>."
+
+#: ../deja-dup/MountOperationAssistant.vala:164
+msgid "_Access key ID:"
+msgstr "_Ключ доступа ID:"
+
+#: ../deja-dup/MountOperationAssistant.vala:196
+msgid "_Secret access key:"
+msgstr "_Секретный ключ доступа:"
+
+#: ../deja-dup/MountOperationAssistant.vala:208
+msgid "S_how secret access key"
+msgstr "_Показать секретный ключ доступа"
+
+#: ../deja-dup/MountOperationAssistant.vala:216
+msgid "_Remember secret access key"
+msgstr "_Запомнить секретный ключ доступа"
+
 #: ../common/BackendS3.vala:198
 msgid "Enter Amazon S3 access key"
 msgstr "Введите ключ доступа Amazon S3"
@@ -651,11 +665,11 @@ msgstr "Введите ключ доступа Amazon S3"
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: ../common/DuplicityInfo.vala:133
+#: ../common/DuplicityInfo.vala:136
 msgid "Could not run duplicity"
 msgstr "Не могу запустить duplicity"
 
-#: ../common/DuplicityInfo.vala:138
+#: ../common/DuplicityInfo.vala:141
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -663,7 +677,7 @@ msgstr ""
 "Не смог распознать версию duplicity.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:140
+#: ../common/DuplicityInfo.vala:143
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -672,15 +686,15 @@ msgstr ""
 "Не удалось распознать версию duplicity ‘%s’.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:142
+#: ../common/DuplicityInfo.vala:145
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr "Déjà Dup не может работать без duplicity. Завершение программы."
 
-#: ../common/DuplicityInfo.vala:146
+#: ../common/DuplicityInfo.vala:149
 msgid "Duplicity’s version is too old"
 msgstr "Версия duplicity слишком старая"
 
-#: ../common/DuplicityInfo.vala:147
+#: ../common/DuplicityInfo.vala:150
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -689,21 +703,21 @@ msgstr ""
 "Déjà Dup требуется по меньшей мере версия %d.%d.%.2d duplicity, но найдена "
 "только версия %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:210
+#: ../common/Duplicity.vala:234
 msgid "Paused (no network)"
 msgstr "Приостановлено (нет сети)"
 
-#: ../common/Duplicity.vala:250 ../common/Duplicity.vala:258
-#: ../common/Duplicity.vala:289 ../common/Operation.vala:95
+#: ../common/Duplicity.vala:274 ../common/Duplicity.vala:282
+#: ../common/Duplicity.vala:313 ../common/Operation.vala:95
 msgid "Preparing…"
 msgstr "Подготовка..."
 
-#: ../common/Duplicity.vala:277
+#: ../common/Duplicity.vala:301
 msgid "Creating the first backup.  This may take a while."
 msgstr ""
 "Резервная копия создаётся первый раз. Это может занять некоторое время."
 
-#: ../common/Duplicity.vala:279
+#: ../common/Duplicity.vala:303
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -711,28 +725,28 @@ msgstr ""
 "Создаётся полная копия для защиты от возможных повреждений. Это может занять "
 "времени больше, чем обычно."
 
-#: ../common/Duplicity.vala:370 ../common/Duplicity.vala:387
+#: ../common/Duplicity.vala:394 ../common/Duplicity.vala:411
 msgid "Cleaning up…"
 msgstr "Очистка..."
 
-#: ../common/Duplicity.vala:473 ../common/Duplicity.vala:744
+#: ../common/Duplicity.vala:497 ../common/Duplicity.vala:768
 msgid "Failed with an unknown error."
 msgstr "Не удалось (неизвестная ошибка)"
 
-#: ../common/Duplicity.vala:656
+#: ../common/Duplicity.vala:680
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Не удалось восстановить  ‘%s’: файл не найден в резервной копии"
 
-#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:702
+#: ../common/Duplicity.vala:684 ../common/Duplicity.vala:726
 msgid "Bad encryption password."
 msgstr "Не правильный пароль шифрования"
 
-#: ../common/Duplicity.vala:664
+#: ../common/Duplicity.vala:688
 msgid "Computer name changed"
 msgstr "Изменилось название компьютера"
 
-#: ../common/Duplicity.vala:664
+#: ../common/Duplicity.vala:688
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -742,42 +756,42 @@ msgstr ""
 "Существующая копия относится к компьютеру %s, но имя текущего компьютера %s. "
 "Возможно вы должны востановить копию в другое место."
 
-#: ../common/Duplicity.vala:684
+#: ../common/Duplicity.vala:708
 msgid "Invalid ID."
 msgstr "Неправильный ID."
 
-#: ../common/Duplicity.vala:686
+#: ../common/Duplicity.vala:710
 msgid "Invalid secret key."
 msgstr "Не правильный секретный ключ."
 
-#: ../common/Duplicity.vala:688
+#: ../common/Duplicity.vala:712
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Ваш аккаунт на службе Amazon не имеет подписки на сервис S3."
 
-#: ../common/Duplicity.vala:697
+#: ../common/Duplicity.vala:721
 msgid "S3 bucket name is not available."
 msgstr "Имя набора (bucket) S3 недоступно."
 
-#: ../common/Duplicity.vala:706
+#: ../common/Duplicity.vala:730
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Ошибка чтения файла ‘%s’."
 
-#: ../common/Duplicity.vala:708
+#: ../common/Duplicity.vala:732
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Ошибка записи файла ‘%s’."
 
-#: ../common/Duplicity.vala:716
+#: ../common/Duplicity.vala:740
 #, c-format
 msgid "No space left in %s"
 msgstr "Не осталось места в %s"
 
-#: ../common/Duplicity.vala:736
+#: ../common/Duplicity.vala:760
 msgid "No backup files found"
 msgstr "Резервных копий не обнаружено"
 
-#: ../common/Duplicity.vala:772
+#: ../common/Duplicity.vala:796
 msgid "Uploading…"
 msgstr "Загрузка..."
 
@@ -956,6 +970,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Michael Terry https://launchpad.net/~mterry\n"
+"  Norrius https://launchpad.net/~norrius\n"
 "  Sergey Sedov https://launchpad.net/~serg-sedov\n"
 "  Vladimir Yakovlev https://launchpad.net/~nagos"
 

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 22:36-0500\n"
-"PO-Revision-Date: 2010-02-22 02:55+0000\n"
+"POT-Creation-Date: 2010-03-26 08:10-0400\n"
+"PO-Revision-Date: 2010-04-10 11:11+0000\n"
 "Last-Translator: Marián Bača <majoobaca@gmail.com>\n"
 "Language-Team: Slovak <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2010-02-23 05:07+0000\n"
+"X-Launchpad-Export-Date: 2010-04-11 04:14+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "Zálohovať vaše súbory"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:59
+#: ../deja-dup/StatusIcon.vala:63
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
@@ -78,11 +78,11 @@ msgstr "Adresáre na zálohovanie"
 
 #: ../data/deja-dup.schemas.in.h:6
 msgid "Folder type"
-msgstr ""
+msgstr "Typ priečinku"
 
 #: ../data/deja-dup.schemas.in.h:7
 msgid "Full name of the external volume"
-msgstr ""
+msgstr "Celý názov externej jednotky"
 
 #: ../data/deja-dup.schemas.in.h:8
 msgid "How long to keep backup files"
@@ -94,36 +94,41 @@ msgstr "Ako často pravidelne zálohovať"
 
 #: ../data/deja-dup.schemas.in.h:10
 msgid "Icon of the external volume"
-msgstr ""
+msgstr "Ikona externého zariadenia"
 
 #: ../data/deja-dup.schemas.in.h:11
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
 msgstr ""
+"Ak je umiestnenie záloh na externej jednotke, toto je jej jedinečný "
+"identifikátor."
 
 #: ../data/deja-dup.schemas.in.h:12
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
 msgstr ""
+"Ak je umiestnenie záloh na externej jednotke, toto je cesta k priečinku na "
+"danej jednotke."
 
 #: ../data/deja-dup.schemas.in.h:13
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
-msgstr ""
+msgstr "Ak je umiestnenie záloh na externej jednotke, toto je jej ikona."
 
 #: ../data/deja-dup.schemas.in.h:14
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
 msgstr ""
+"Ak je umiestnenie záloh na externej jednotke, toto je jej dlhší popis."
 
 #: ../data/deja-dup.schemas.in.h:15
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
-msgstr ""
+msgstr "Ak je umiestnenie záloh na externej jednotke, toto je kratší názov."
 
 #: ../data/deja-dup.schemas.in.h:16
 msgid "Location in which to hold the backup files."
@@ -131,11 +136,11 @@ msgstr "Umiestnenie, na ktoré sa bude zálohovať."
 
 #: ../data/deja-dup.schemas.in.h:17
 msgid "Relative path under the external volume"
-msgstr ""
+msgstr "Relatívna cesta na externej jednotke"
 
 #: ../data/deja-dup.schemas.in.h:18
 msgid "Short name of the external volume"
-msgstr ""
+msgstr "Krátky nźov externej jednotky"
 
 #: ../data/deja-dup.schemas.in.h:19
 msgid "The Amazon S3 bucket name to use"
@@ -204,13 +209,15 @@ msgstr "Napísať umiestnenie, kde budú uložené zálohy"
 
 #: ../data/deja-dup.schemas.in.h:29
 msgid "Unique ID of the external volume"
-msgstr ""
+msgstr "Jedinečné identifikačné číslo externej jednotky"
 
 #: ../data/deja-dup.schemas.in.h:30
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder. "
 "Possible values are ‘volume’ or ‘normal’."
 msgstr ""
+"Či je umiestnenie záloh pripojená externá jednotka alebo normálny priečinok. "
+"Možné hodnoty sú ‘volume’ alebo ‘normal’."
 
 #: ../data/deja-dup.schemas.in.h:31
 msgid "Whether to automatically backup on a regular schedule."
@@ -241,6 +248,8 @@ msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
 msgstr ""
+"Či požadovať správcovské heslo počas zálohovania alebo obnovovania "
+"systémových priečinkov."
 
 #: ../data/deja-dup.schemas.in.h:37
 msgid ""
@@ -258,7 +267,7 @@ msgstr "Vaše Amazon S3 identifikačné číslo. Ide o vaše prihlasovacie meno.
 msgid "Co_ntinue"
 msgstr "_Pokračovať"
 
-#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:146
+#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:155
 msgid "_Resume Later"
 msgstr "Po_kračovať neskôr"
 
@@ -267,8 +276,8 @@ msgctxt "backup is verb"
 msgid "Backup"
 msgstr "Zálohovať"
 
-#: ../deja-dup/AssistantBackup.vala:34 ../deja-dup/MainWindow.vala:73
-#: ../deja-dup/MainWindow.vala:187
+#: ../deja-dup/AssistantBackup.vala:34 ../deja-dup/MainWindow.vala:74
+#: ../deja-dup/MainWindow.vala:188
 msgctxt "backup is verb"
 msgid "_Backup"
 msgstr "Zá_lohovať"
@@ -365,7 +374,7 @@ msgstr "Šifrovacie _heslo:"
 
 #: ../deja-dup/AssistantOperation.vala:264
 msgid "_Show password"
-msgstr ""
+msgstr "_Zobraziť heslo:"
 
 #: ../deja-dup/AssistantOperation.vala:271
 #: ../deja-dup/MountOperationAssistant.vala:216
@@ -380,7 +389,7 @@ msgstr "Súhrn"
 msgid "Password needed"
 msgstr "Operácia vyžaduje heslo"
 
-#: ../deja-dup/AssistantOperation.vala:568
+#: ../deja-dup/AssistantOperation.vala:576
 msgid "Déjà Dup backup passphrase"
 msgstr "Déjà Dup heslo na zálohovanie"
 
@@ -388,8 +397,8 @@ msgstr "Déjà Dup heslo na zálohovanie"
 msgid "Restore"
 msgstr "Obnoviť"
 
-#: ../deja-dup/AssistantRestore.vala:72 ../deja-dup/MainWindow.vala:46
-#: ../deja-dup/MainWindow.vala:193
+#: ../deja-dup/AssistantRestore.vala:72 ../deja-dup/MainWindow.vala:47
+#: ../deja-dup/MainWindow.vala:194
 msgid "_Restore"
 msgstr "O_bnoviť"
 
@@ -491,38 +500,59 @@ msgstr "Okamžite začať zálohovať"
 msgid "No filenames provided"
 msgstr "Názvy súborov nie sú určené"
 
-#: ../deja-dup/MainWindow.vala:171
+#: ../deja-dup/MainWindow.vala:47 ../deja-dup/MainWindow.vala:194
+msgid "_Restore…"
+msgstr "_Obnoviť..."
+
+#: ../deja-dup/MainWindow.vala:74 ../deja-dup/MainWindow.vala:188
+msgctxt "backup is verb"
+msgid "_Backup…"
+msgstr "_Zálohovať..."
+
+#: ../deja-dup/MainWindow.vala:172
 msgid "Could not open preferences"
 msgstr "Nepodarilo sa otvoriť predvoľby"
 
-#: ../deja-dup/MainWindow.vala:184
+#: ../deja-dup/MainWindow.vala:185
 msgctxt "backup is noun"
 msgid "_Backup"
 msgstr "_Zálohovanie"
 
-#: ../deja-dup/MainWindow.vala:203
+#: ../deja-dup/MainWindow.vala:204
 msgid "_Edit"
 msgstr "_Upraviť"
 
-#: ../deja-dup/MainWindow.vala:210
+#: ../deja-dup/MainWindow.vala:211
 msgid "_Help"
 msgstr "_Pomocník"
 
-#: ../deja-dup/MainWindow.vala:213
+#: ../deja-dup/MainWindow.vala:214
 msgid "_Contents"
 msgstr "Ob_sah"
 
-#: ../deja-dup/MainWindow.vala:217
+#: ../deja-dup/MainWindow.vala:218
 msgid "Get Help _Online…"
 msgstr "O_nline pomocník…"
 
-#: ../deja-dup/MainWindow.vala:221
+#: ../deja-dup/MainWindow.vala:222
 msgid "_Translate This Application…"
 msgstr "_Preložiť túto aplikáciu…"
 
-#: ../deja-dup/MainWindow.vala:225
+#: ../deja-dup/MainWindow.vala:226
 msgid "_Report a Problem…"
 msgstr "_Nahlásiť problém…"
+
+#: ../deja-dup/MountOperationAssistant.vala:164
+msgid "_Username:"
+msgstr "_Používateľské meno:"
+
+#: ../deja-dup/MountOperationAssistant.vala:196
+msgid "_Password:"
+msgstr "_Heslo:"
+
+#: ../deja-dup/MountOperationAssistant.vala:209
+msgid "S_how password"
+msgstr "_Zobraziť"
 
 #: ../deja-dup/MountOperationAssistant.vala:54
 msgid "Location not available"
@@ -532,11 +562,6 @@ msgstr "Umiestnenie je nedostupné"
 msgid "This backup location requires authentication."
 msgstr "Toto umiestnenie vyžaduje prihlásenie."
 
-#: ../deja-dup/MountOperationAssistant.vala:124
-#, c-format
-msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
-msgstr "Môžete si zaregistrovať Amazon S3 účet <a href=\"%s\">online</a>."
-
 #: ../deja-dup/MountOperationAssistant.vala:136
 msgid "Connect _anonymously"
 msgstr "_Anonymné prihlásenie"
@@ -545,57 +570,29 @@ msgstr "_Anonymné prihlásenie"
 msgid "Connect as u_ser:"
 msgstr "P_ripojiť sa ako používateľ:"
 
-#: ../deja-dup/MountOperationAssistant.vala:164
-msgid "_Access key ID:"
-msgstr "Prí_stupový kľúč:"
-
-#: ../deja-dup/MountOperationAssistant.vala:164
-msgid "_Username:"
-msgstr "_Používateľské meno:"
-
 #: ../deja-dup/MountOperationAssistant.vala:181
 msgid "_Domain:"
 msgstr "_Doména:"
 
-#: ../deja-dup/MountOperationAssistant.vala:196
-msgid "_Secret access key:"
-msgstr "_Tajný prístupový kľúč:"
-
-#: ../deja-dup/MountOperationAssistant.vala:196
-msgid "_Password:"
-msgstr "_Heslo:"
-
-#: ../deja-dup/MountOperationAssistant.vala:208
-msgid "S_how secret access key"
-msgstr ""
-
-#: ../deja-dup/MountOperationAssistant.vala:209
-msgid "S_how password"
-msgstr ""
-
-#: ../deja-dup/MountOperationAssistant.vala:216
-msgid "_Remember secret access key"
-msgstr "_Zapamätať si tajný prístupový kľúč"
-
-#: ../deja-dup/StatusIcon.vala:96
+#: ../deja-dup/StatusIcon.vala:100
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% je hotové"
 
-#: ../deja-dup/StatusIcon.vala:101
+#: ../deja-dup/StatusIcon.vala:105
 #, c-format
 msgid "Show _Progress (%.1f%%)"
 msgstr "_Zobraziť postup (%.1f%%)"
 
-#: ../deja-dup/StatusIcon.vala:103
+#: ../deja-dup/StatusIcon.vala:107
 msgid "Show _Progress"
 msgstr "_Zobraziť postup"
 
-#: ../deja-dup/StatusIcon.vala:148
+#: ../deja-dup/StatusIcon.vala:157
 msgid "_Delay Backup"
 msgstr "_Odložiť zálohovanie"
 
-#: ../deja-dup/StatusIcon.vala:153
+#: ../deja-dup/StatusIcon.vala:162
 msgid "_Skip Backup"
 msgstr "Z_rušiť zálohovanie"
 
@@ -638,6 +635,27 @@ msgstr "%s na Amazon S3"
 msgid "Permission denied"
 msgstr "Prístup zamietnutý"
 
+#: ../deja-dup/MountOperationAssistant.vala:124
+#, c-format
+msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
+msgstr "Môžete si zaregistrovať Amazon S3 účet <a href=\"%s\">online</a>."
+
+#: ../deja-dup/MountOperationAssistant.vala:164
+msgid "_Access key ID:"
+msgstr "Prí_stupový kľúč:"
+
+#: ../deja-dup/MountOperationAssistant.vala:196
+msgid "_Secret access key:"
+msgstr "_Tajný prístupový kľúč:"
+
+#: ../deja-dup/MountOperationAssistant.vala:208
+msgid "S_how secret access key"
+msgstr "_Zobraziť tajný prístupový kľúč"
+
+#: ../deja-dup/MountOperationAssistant.vala:216
+msgid "_Remember secret access key"
+msgstr "_Zapamätať si tajný prístupový kľúč"
+
 #: ../common/BackendS3.vala:198
 msgid "Enter Amazon S3 access key"
 msgstr "Vložiť Amazon S3 prístupový kľúč"
@@ -646,11 +664,11 @@ msgstr "Vložiť Amazon S3 prístupový kľúč"
 msgid "Unknown"
 msgstr "Neznámy"
 
-#: ../common/DuplicityInfo.vala:133
+#: ../common/DuplicityInfo.vala:136
 msgid "Could not run duplicity"
 msgstr "Nemožno spustiť duplicity"
 
-#: ../common/DuplicityInfo.vala:138
+#: ../common/DuplicityInfo.vala:141
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -658,7 +676,7 @@ msgstr ""
 "Nemožno rozumieť verzii duplicity.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:140
+#: ../common/DuplicityInfo.vala:143
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -667,15 +685,15 @@ msgstr ""
 "Nemožno rozumieť verzii duplicity ‘%s’.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:142
+#: ../common/DuplicityInfo.vala:145
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr "Bez balíka duplicity Déjà Dup nemôže fungovať. Program sa ukončí."
 
-#: ../common/DuplicityInfo.vala:146
+#: ../common/DuplicityInfo.vala:149
 msgid "Duplicity’s version is too old"
 msgstr "Verzia balíka duplicity je príliš stará."
 
-#: ../common/DuplicityInfo.vala:147
+#: ../common/DuplicityInfo.vala:150
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -684,20 +702,20 @@ msgstr ""
 "Déjà Dup vyžaduje najmenej verziu %d.%d.%.2d balíka duplicity, ale našla sa "
 "iba verzia %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:210
+#: ../common/Duplicity.vala:234
 msgid "Paused (no network)"
 msgstr "Pozastavené (žiadna sieť)"
 
-#: ../common/Duplicity.vala:250 ../common/Duplicity.vala:258
-#: ../common/Duplicity.vala:289 ../common/Operation.vala:95
+#: ../common/Duplicity.vala:274 ../common/Duplicity.vala:282
+#: ../common/Duplicity.vala:313 ../common/Operation.vala:95
 msgid "Preparing…"
 msgstr "Pripravuje sa..."
 
-#: ../common/Duplicity.vala:277
+#: ../common/Duplicity.vala:301
 msgid "Creating the first backup.  This may take a while."
 msgstr "Vytvára sa prvá záloha. Môže to chvíľu trvať."
 
-#: ../common/Duplicity.vala:279
+#: ../common/Duplicity.vala:303
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -705,28 +723,28 @@ msgstr ""
 "Vytvára sa nová záloha na ochranu pred poškodením zálohy. Bude to trvať "
 "dlhšie ako zvyčajne."
 
-#: ../common/Duplicity.vala:370 ../common/Duplicity.vala:387
+#: ../common/Duplicity.vala:394 ../common/Duplicity.vala:411
 msgid "Cleaning up…"
 msgstr "Čistí sa..."
 
-#: ../common/Duplicity.vala:473 ../common/Duplicity.vala:744
+#: ../common/Duplicity.vala:497 ../common/Duplicity.vala:768
 msgid "Failed with an unknown error."
 msgstr "Zlyhanie neznámou chybou."
 
-#: ../common/Duplicity.vala:656
+#: ../common/Duplicity.vala:680
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Nepodarilo sa obnoviť ‘%s’: Súbor nebol nájdený v zálohe"
 
-#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:702
+#: ../common/Duplicity.vala:684 ../common/Duplicity.vala:726
 msgid "Bad encryption password."
 msgstr "Nesprávne šifrovacie heslo."
 
-#: ../common/Duplicity.vala:664
+#: ../common/Duplicity.vala:688
 msgid "Computer name changed"
 msgstr "Názov počítača bol zmenený"
 
-#: ../common/Duplicity.vala:664
+#: ../common/Duplicity.vala:688
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -736,42 +754,42 @@ msgstr ""
 "Aktuálna záloha je z počítača s názvom %s, ale aktuálny názov počítača je "
 "%s. Ak ste si nie je istý, mali by ste zálohovať na iné miesto."
 
-#: ../common/Duplicity.vala:684
+#: ../common/Duplicity.vala:708
 msgid "Invalid ID."
 msgstr "Neplatné identifikačné číslo."
 
-#: ../common/Duplicity.vala:686
+#: ../common/Duplicity.vala:710
 msgid "Invalid secret key."
 msgstr "Neplatný prístupový kľúč."
 
-#: ../common/Duplicity.vala:688
+#: ../common/Duplicity.vala:712
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Váš účet na Amazone nie je registrovaný pre službu S3."
 
-#: ../common/Duplicity.vala:697
+#: ../common/Duplicity.vala:721
 msgid "S3 bucket name is not available."
 msgstr "Názov S3 oblasti nie je k dispozícii."
 
-#: ../common/Duplicity.vala:706
+#: ../common/Duplicity.vala:730
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Chyba pri čítaní súboru ‘%s’."
 
-#: ../common/Duplicity.vala:708
+#: ../common/Duplicity.vala:732
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Chyba pri zapisovaní do súboru ‘%s’."
 
-#: ../common/Duplicity.vala:716
+#: ../common/Duplicity.vala:740
 #, c-format
 msgid "No space left in %s"
 msgstr "Nie je voľné miesto v %s"
 
-#: ../common/Duplicity.vala:736
+#: ../common/Duplicity.vala:760
 msgid "No backup files found"
 msgstr "Záložné súbory neboli nájdené"
 
-#: ../common/Duplicity.vala:772
+#: ../common/Duplicity.vala:796
 msgid "Uploading…"
 msgstr "Nahráva sa..."
 
