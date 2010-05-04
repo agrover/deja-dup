@@ -82,8 +82,8 @@ class DejaDupPreferences : Object
     DejaDup.initialize();
     Gtk.init(ref args); // to open display ('cause we passed false above)
     
-    // We don't have a solid domain for Déjà Dup...
-    var app = new Unique.App("net.launchpad.deja-dup.preferences", null);
+    // We don't have a solid domain for Déjà Dup...  But we're GNOME-ish
+    var app = new Unique.App("org.gnome.deja-dup.preferences", null);
     
     if (app.is_running)
       app.send_message(Unique.Command.ACTIVATE, null);
