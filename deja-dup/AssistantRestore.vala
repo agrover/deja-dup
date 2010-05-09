@@ -452,7 +452,12 @@ public class AssistantRestore : AssistantOperation
         set_page_title(page, _("Restore Failed"));
       else {
         set_page_title(page, _("Restore Finished"));
-        summary_label.label = _("Your files were successfully restored.");
+        if (restore_files == null)
+          summary_label.label = _("Your files were successfully restored.");
+        else
+          summary_label.label = ngettext("Your file was successfully restored.",
+                                         "Your files were successfully restored.",
+                                         restore_files.length());
       }
     }
     else if (page == progress_page) {
