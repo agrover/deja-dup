@@ -215,6 +215,8 @@ public abstract class AssistantOperation : Assistant
              "border-width", 12);
     page.child_set(progress_hbox, "expand", false);
     page.child_set(progress_bar, "expand", false);
+    // Reserve space for details + labels
+    page.set_size_request(-1, 200);
     
     return page;
   }
