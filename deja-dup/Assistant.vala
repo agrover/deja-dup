@@ -91,11 +91,11 @@ public abstract class Assistant : Gtk.Dialog
     evbox.pack_start(ehbox, false, false, 0);
 
     page_box = new Gtk.EventBox();
-    page_box.border_width = 1;
     evbox.pack_start(page_box, true, true, 0);
 
-    vbox.add(ebox);
-    vbox.show_all();
+    var content_area = (Gtk.VBox)get_content_area();
+    content_area.add(ebox);
+    content_area.show_all();
 
     ebox.ensure_style();
     ebox.modify_bg(Gtk.StateType.NORMAL, ebox.style.bg[Gtk.StateType.SELECTED]);
