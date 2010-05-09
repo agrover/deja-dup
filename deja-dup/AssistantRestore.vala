@@ -305,8 +305,17 @@ public class AssistantRestore : AssistantOperation
     icon_name = "deja-dup-restore";
   }
   
+  bool is_same_day(TimeVal one, TimeVal two)
+  {
+    Date day1 = Date(), day2 = Date();
+    day1.set_time_val(one);
+    day2.set_time_val(two);
+    return day1.compare(day2) == 0;
+  }
+
   protected void handle_collection_dates(DejaDup.OperationStatus op, List<string>? dates)
   {
+    var timevals = new List<TimeVal?>();
     TimeVal tv = TimeVal();
     
     got_dates = true;
@@ -314,13 +323,24 @@ public class AssistantRestore : AssistantOperation
     
     foreach (string date in dates) {
       if (tv.from_iso8601(date)) {
-        Time t = Time.local(tv.tv_sec);
-        string user_str = t.format("%c");
-        Gtk.TreeIter iter;
-        date_store.prepend(out iter);
-        date_store.@set(iter, 0, user_str, 1, date);
-        date_combo.set_active_iter(iter);
+        timevals.append(tv);
       }
+    }
+
+    for (unowned List<TimeVal?>? i = timevals; i != null; i = i.next) {
+      tv = i.data;
+
+      string format = "%x";
+      if ((i.prev != null && is_same_day(i.prev.data, tv)) ||
+          (i.next != null && is_same_day(i.next.data, tv)))
+        format = "%c";
+
+      Time t = Time.local(tv.tv_sec);
+      string user_str = t.format(format);
+      Gtk.TreeIter iter;
+      date_store.prepend(out iter);
+      date_store.@set(iter, 0, user_str, 1, tv.to_iso8601());
+      date_combo.set_active_iter(iter);
     }
     
     // If we didn't see any dates...  Must not be any backups on the backend
