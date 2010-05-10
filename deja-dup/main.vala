@@ -90,14 +90,7 @@ class DejaDupApp : Object
     Gtk.Window.set_default_icon_name(Config.PACKAGE);
 
     /* First, check duplicity version info */
-    Idle.add(() => {
-      valid_duplicity = DejaDup.init_duplicity(toplevel);
-      Gtk.main_quit();
-      return false;
-    });
-
-    Gtk.main();
-
+    valid_duplicity = DejaDup.init_duplicity(null);
     if (!valid_duplicity)
       return 1;
 
