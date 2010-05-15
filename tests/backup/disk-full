@@ -18,16 +18,17 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 # Test whether we correctly handle full backup destinations
-# FIXME INPROGRESS
 
 import sys
+import os
 sys.path.insert(0, sys.path[0]+'/..')
 import base
 import ldtp
 
-def test():
+def full():
   dest = base.create_mount(size=1)
   base.setup('file', sources=['/bin'], dest=dest)
-  base.backup_simple()
+  if not base.dup_meets_version(99, 99, 99): return
+  base.backup_simple(error='lblNospaceleft')
 
-base.run(test)
+base.run(full)

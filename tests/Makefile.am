@@ -26,6 +26,7 @@ TESTS = \
 	backup/delete \
 	backup/exclude \
 	backup/spaces \
+	backup/permissions \
 	basic/badversion \
 	prefs/ssh-to-file \
 	restore/cycle \
@@ -41,7 +42,7 @@ MANUAL_TESTS = \
 ALL_TESTS = $(TESTS) $(MANUAL_TESTS)
 
 test:
-	@for t in $(TESTS); do \
+	@for t in $(ALL_TESTS); do \
 		echo -n "Testing $$t..."; \
 		if ./$$t >/dev/null 2>&1; then \
 			echo -e " \e[32mPASSED\e[0m"; \
