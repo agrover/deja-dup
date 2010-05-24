@@ -16,10 +16,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-# This special name 'TESTS' will trigger an automatically-created 'check'
-# target used during distcheck, for example.  This is nice.
+# Don't use special name 'TESTS', as it will trigger an automatically-created
+# 'check' target used during distcheck.
 
-TESTS = \
+AUTO_TESTS = \
 	backup/cancel-clean \
 	backup/continue \
 	backup/full \
@@ -38,10 +38,10 @@ TESTS = \
 MANUAL_TESTS = \
 	backup/disk-full
 
-ALL_TESTS = $(TESTS) $(MANUAL_TESTS)
+ALL_TESTS = $(AUTO_TESTS) $(MANUAL_TESTS)
 
 test:
-	@for t in $(TESTS); do \
+	@for t in $(ALL_TESTS); do \
 		echo -n "Testing $$t..."; \
 		if ./$$t >/dev/null 2>&1; then \
 			echo -e " \e[32mPASSED\e[0m"; \
@@ -51,7 +51,7 @@ test:
 	done
 
 EXTRA_DIST = \
-	$(TESTS) \
+	$(ALL_TESTS) \
 	base.py \
 	build-duplicity \
 	interactive \

@@ -380,8 +380,12 @@ def restore_specific(files, path, date=None):
     ldtp.comboselect('dlgRestore', 'cboDate', date)
   ldtp.click('dlgRestore', 'btnForward')
   ldtp.click('dlgRestore', 'btnRestore')
-  assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored')
-  assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored')
+  if len(files) == 1:
+    lbl = 'lblYourfilewassuccessfullyrestored'
+  else:
+    lbl = 'lblYourfilesweresuccessfullyrestored'
+  assert ldtp.waittillguiexist('dlgRestore', lbl)
+  assert guivisible('dlgRestore', lbl)
   ldtp.click('dlgRestore', 'btnClose')
 
 def file_equals(path, contents):
