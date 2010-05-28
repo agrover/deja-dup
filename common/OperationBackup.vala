@@ -59,9 +59,18 @@ public class OperationBackup : Operation
     
     foreach (File s in exclude_list)
       dup.excludes.prepend(s);
-    foreach (File s in include_list)
-      dup.includes.prepend(s);
-    
+    foreach (File s in include_list) {
+      FileInfo finfo = s.query_info("standard::*", 
+                                    GLib.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, 
+                                    null);
+      if (finfo.get_is_symlink()) {
+        string symlink_target = finfo.get_symlink_target();
+        File parent_dir = s.get_parent();
+        dup.includes.prepend(parent_dir.resolve_relative_path(symlink_target));
+      } else {
+        dup.includes.prepend(s);
+      }
+    }
     dup.local = File.new_for_path("/");
     
     return rv;
