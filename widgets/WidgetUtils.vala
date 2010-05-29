@@ -47,6 +47,7 @@ void handle_about_mail(Gtk.AboutDialog about, string link)
 // These need to be namespace-wide to prevent an odd compiler syntax error.
 const string[] authors = {"Andrew Fister <temposs@gmail.com>",
                           "Michael Terry <mike@mterry.name>",
+                          "Michael Vogt <michael.vogt@ubuntu.com>",
                           null};
 
 const string[] artists = {"Andreas Nilsson <nisses.mail@home.se>",
