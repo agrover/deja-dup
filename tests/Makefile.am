@@ -26,6 +26,7 @@ AUTO_TESTS = \
 	backup/delete \
 	backup/exclude \
 	backup/spaces \
+	backup/symlinks \
 	basic/badversion \
 	prefs/ssh-to-file \
 	restore/cycle \
