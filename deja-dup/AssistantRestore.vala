@@ -401,20 +401,19 @@ public class AssistantRestore : AssistantOperation
       query_timeout_id = 0;
     }
     
-
     if (page == date_page) {
       // Hmm, we never got a date from querying the backend, but we also
       // didn't hit an error (since we're about to show this page, and not
       // the summary/error page).  Skip the date portion, since the backend
       // must not be capable of giving us dates (duplicity < 0.5.04 couldn't).
       if (!got_dates)
-        go_forward();
+        skip();
     }
     else if (page == restore_dest_page) {
       // If we're doing a known-file-set restore, assume user wants same-location
       // restore.
       if (restore_files != null)
-        go_forward();
+        skip();
     }
     else if (page == confirm_page) {
       // When we restore from
