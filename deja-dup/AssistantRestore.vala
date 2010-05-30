@@ -449,6 +449,8 @@ public class AssistantRestore : AssistantOperation
         confirm_files_label.label = ngettext("File to restore:",
                                              "Files to restore:",
                                              restore_files.length());
+
+        confirm_files.foreach((w) => {w.destroy();});
         foreach (File f in restore_files) {
           var parse_name = f.get_parse_name();
           var file_label = new Gtk.Label(Path.get_basename(parse_name));
