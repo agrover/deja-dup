@@ -1,8 +1,8 @@
 /* -*- Mode: C; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2004, 2005 Free Software Foundation, Inc.
-    © 2009 Michael Terry <mike@mterry.name>
+    © 2004–2005 Free Software Foundation, Inc.
+    © 2009–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,21 +26,22 @@
 static void
 make_file_list(NautilusFileInfo *info, GString *str)
 {
-  GFile *file = nautilus_file_info_get_location(info);
-  gchar *uri = g_file_get_uri(file);
+  gchar *uri = nautilus_file_info_get_uri(info);
   if (!str->len)
     g_string_assign(str, uri);
   else
     g_string_append_printf(str, " %s", uri);
   g_free(uri);
-  g_object_unref(file);
 }
 
 static void
-restore_files_callback(NautilusMenuItem *item, GList *files)
+restore_files_callback(NautilusMenuItem *item)
 {
   GString *str = g_string_new("");
   gchar *cmd;
+  GList *files;
+
+  files = g_object_get_data(G_OBJECT(item), "deja_dup_extension_files");
 
   g_list_foreach(files, (GFunc)make_file_list, str);
   cmd = g_strdup_printf("deja-dup --restore %s", str->str);
@@ -49,8 +50,6 @@ restore_files_callback(NautilusMenuItem *item, GList *files)
 
   g_free(cmd);
   g_string_free(str, TRUE);
-  g_list_foreach(files, (GFunc)g_object_unref, NULL);
-  g_list_free(files);
 }
 
 static GList *
@@ -101,9 +100,10 @@ deja_dup_nautilus_extension_get_file_items(NautilusMenuProvider *provider,
                                           length),
                                 "document-revert");
 
-  file_copies = g_list_copy(files);
-  g_list_foreach(file_copies, (GFunc)g_object_ref, NULL);
-  g_signal_connect(item, "activate", G_CALLBACK (restore_files_callback), file_copies);
+  g_signal_connect(item, "activate", G_CALLBACK(restore_files_callback), NULL);
+  g_object_set_data_full (G_OBJECT(item), "deja_dup_extension_files", 
+                          nautilus_file_info_list_copy(files),
+                          (GDestroyNotify)nautilus_file_info_list_free);
 
   return g_list_append(NULL, item);
 }
