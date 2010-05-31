@@ -256,6 +256,21 @@ def run(method):
     quit()
     cleanup(success)
 
+def dup_meets_version(major, minor, micro):
+  # replicates logic in DuplicityInfo a bit
+  dupver = subprocess.Popen(['duplicity', '--version'], stdout=subprocess.PIPE).communicate()[0].strip().split()[1]
+  if dupver == 'bzr': return True
+  dupmajor, dupminor, dupmicro = dupver.split('.')
+  dupmajor = int(dupmajor)
+  dupminor = int(dupminor)
+  # dupmicro = int(dupmicro) # sometimes micro has weird characters like 'b' in it
+  if dupmajor > major:  return True
+  if dupmajor < major:  return False
+  if dupminor > minor:  return True
+  if dupminor < minor:  return False
+  if dupmicro >= micro: return True
+  else:                 return False
+
 def get_manifest_date(filename):
   return re.sub('.*\.([0-9TZ]+)\.manifest.*', '\\1', filename)
 
@@ -303,16 +318,25 @@ def last_date_change(to_date):
         newname = re.sub(olddate, newdate, f)
         os.rename(f, newname)
 
-def guivisible(frm, obj):
-  if not ldtp.guiexist(frm, obj):
+def guiexist(frm, obj, prefix=False):
+  if not prefix:
+    return obj if ldtp.guiexist(frm, obj) else None
+  else:
+    objs = ldtp.getobjectlist(frm)
+    objs = filter(lambda x: x.startswith(obj), objs)
+    return objs[0] if objs else None
+
+def guivisible(frm, obj, prefix=False):
+  obj = guiexist(frm, obj, prefix)
+  if not obj:
     return False
   states = ldtp.getallstates(frm, obj)
   return ldtp.state.VISIBLE in states
 
-def wait_for_encryption(dlg, obj, max_count):
+def wait_for_encryption(dlg, obj, max_count, prefix=False):
   count = 0
   while count < max_count:
-    if ldtp.guiexist(dlg, obj):
+    if guiexist(dlg, obj, prefix):
       break
     if ldtp.guiexist('dlgAllowaccess'):
       ldtp.click('dlgAllowaccess', 'btnDeny')
@@ -321,13 +345,13 @@ def wait_for_encryption(dlg, obj, max_count):
       ldtp.click(dlg, 'btnContinue')
     ldtp.wait(1)
     count += 1
-  assert guivisible(dlg, obj)
+  assert guivisible(dlg, obj, prefix)
 
 def remap(frm):
   ldtp.wait(1) # sometimes (only for newer versions?) ldtp needs a second to catch its breath
   ldtp.remap(frm) # in case this is second time we've run it
 
-def backup_simple(finish=True):
+def backup_simple(finish=True, error=None, timeout=400):
   ldtp.click('frmDéjàDup', 'btnBackUp…')
   assert ldtp.waittillguiexist('dlgBackUp')
   remap('dlgBackUp')
@@ -338,7 +362,11 @@ def backup_simple(finish=True):
   ldtp.click('dlgBackUp', 'btnBackUp')
   remap('dlgBackUp')
   if finish:
-    wait_for_encryption('dlgBackUp', 'lblYourfilesweresuccessfullybackedup', 400)
+    if not error:
+      error = 'lblYourfilesweresuccessfullybackedup'
+      wait_for_encryption('dlgBackUp', error, timeout)
+    else:
+      wait_for_encryption('dlgBackUp', error, timeout, prefix=True)
     ldtp.click('dlgBackUp', 'btnClose')
     ldtp.waittillguinotexist('dlgBackUp')
 

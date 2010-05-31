@@ -609,6 +609,10 @@ public class Duplicity : Object
   protected static const int ERROR_RESTORE_DIR_NOT_FOUND = 19;
   protected static const int ERROR_EXCEPTION = 30;
   protected static const int ERROR_GPG = 31;
+  protected static const int ERROR_BACKEND = 50;
+  protected static const int ERROR_BACKEND_PERMISSION_DENIED = 51;
+  protected static const int ERROR_BACKEND_NOT_FOUND = 52;
+  protected static const int ERROR_BACKEND_NO_SPACE = 53;
   protected static const int INFO_PROGRESS = 2;
   protected static const int INFO_COLLECTION_STATUS = 3;
   protected static const int INFO_DIFF_FILE_NEW = 4;
@@ -675,6 +679,7 @@ public class Duplicity : Object
       case ERROR_EXCEPTION: // exception
         process_exception(firstline.length > 2 ? firstline[2] : "", text);
         return;
+
       case ERROR_RESTORE_DIR_NOT_FOUND:
         // make text a little nicer than duplicity gives
         // duplicity gives something like "home/blah/blah not found in archive,
@@ -683,9 +688,11 @@ public class Duplicity : Object
           text = _("Could not restore ‘%s’: File not found in backup").printf(
                    restore_files.data.get_parse_name());
         break;
+
       case ERROR_GPG:
         text = _("Bad encryption password.");
         break;
+
       case ERROR_HOSTNAME_CHANGED:
         if (firstline.length >= 4) {
           if (!ask_question(_("Computer name changed"), _("The existing backup is of a computer named %s, but the current computer’s name is %s.  If this is unexpected, you should back up to a different location.").printf(firstline[2], firstline[3])))
@@ -696,6 +703,38 @@ public class Duplicity : Object
         saved_argv.append("--allow-source-mismatch");
         if (restart())
           return;
+        break;
+
+      case ERROR_BACKEND_PERMISSION_DENIED:
+        if (firstline.length >= 5 && firstline[2] == "put") {
+          var file = make_file_obj(firstline[4]);
+          text = _("Permission denied when trying to create ‘%s’.").printf(file.get_parse_name());
+        }
+        if (firstline.length >= 5 && firstline[2] == "get") {
+          var file = make_file_obj(firstline[3]); // assume error is on backend side
+          text = _("Permission denied when trying to read ‘%s’.").printf(file.get_parse_name());
+        }
+        else if (firstline.length >= 4 && firstline[2] == "list") {
+          var file = make_file_obj(firstline[3]);
+          text = _("Permission denied when trying to read ‘%s’.").printf(file.get_parse_name());
+        }
+        else if (firstline.length >= 4 && firstline[2] == "delete") {
+          var file = make_file_obj(firstline[3]);
+          text = _("Permission denied when trying to delete ‘%s’.").printf(file.get_parse_name());
+        }
+        break;
+
+      case ERROR_BACKEND_NOT_FOUND:
+        if (firstline.length >= 4) {
+          var file = make_file_obj(firstline[3]);
+          text = _("Backup location ‘%s’ does not exist.").printf(file.get_parse_name());
+        }
+        break;
+
+      case ERROR_BACKEND_NO_SPACE:
+        if (firstline.length >= 5) {
+          text = _("No space left.");
+        }
         break;
       }
     }
@@ -749,9 +788,9 @@ public class Duplicity : Object
         else
           where = local.get_path();
         if (where == null)
-          show_error(_("No space left"));
+          show_error(_("No space left."));
         else
-          show_error(_("No space left in %s").printf(where));
+          show_error(_("No space left in ‘%s’.").printf(where));
       }
       else {
         // Very possibly a FAT file system that can't handle the colons that 

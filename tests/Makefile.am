@@ -25,6 +25,7 @@ AUTO_TESTS = \
 	backup/full \
 	backup/delete \
 	backup/exclude \
+	backup/permissions \
 	backup/spaces \
 	backup/symlinks \
 	basic/badversion \
