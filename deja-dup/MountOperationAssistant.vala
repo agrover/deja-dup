@@ -48,19 +48,13 @@ public class MountOperationAssistant : MountOperation
     add_password_page();
   }
 
-  construct {
-    aborted.connect(do_abort);
-    ask_password.connect(do_ask_password);
-    ask_question.connect(do_ask_question);
-  }
-
-  void do_abort()
+  public override void aborted()
   {
     assist.show_error(_("Location not available"), null);
   }
 
-  void do_ask_password(MountOperation op, string message, string default_user,
-                       string default_domain, AskPasswordFlags flags)
+  public override void ask_password(string message, string default_user,
+                                    string default_domain, AskPasswordFlags flags)
   {
     flesh_out_password_page(message, default_user, default_domain, flags);
     assist.interrupt(password_page);
@@ -71,7 +65,8 @@ public class MountOperationAssistant : MountOperation
     Gtk.main(); // enter new loop so that we don't return until user hits next
   }
 
-  void do_ask_question(MountOperation op, string message, string[] choices)
+  public override void ask_question(string message,
+                                    [CCode (array_length = false)] string[] choices)
   {
     // Rather than implement this code right now (not sure if/when it's ever
     // called to mount something), we just outsource to normal GtkMountOp.
