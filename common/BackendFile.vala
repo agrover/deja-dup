@@ -377,6 +377,24 @@ public class BackendFile : Backend
 
     return vol;
   }
+
+  public override async uint64 get_space(bool free = true)
+  {
+    var attr = free ? FILE_ATTRIBUTE_FILESYSTEM_FREE : FILE_ATTRIBUTE_FILESYSTEM_SIZE;
+    try {
+      var file = get_file_from_gconf();
+      var info = yield file.query_filesystem_info_async(attr, Priority.DEFAULT, null);
+      var space = info.get_attribute_uint64(attr);
+      if (space == INFINITE_SPACE)
+        return space - 1; // avoid accidentally reporting infinite
+      else
+        return space;
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      return INFINITE_SPACE;
+    }
+  }
 }
 
 } // end namespace

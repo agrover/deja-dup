@@ -78,8 +78,8 @@ public class Duplicity : Object
   bool needs_root = false;
   
   bool has_progress_total = false;
-  double progress_total; // zero, unless we already know limit
-  double progress_count; // count of how far we are along in the current instance
+  uint64 progress_total; // zero, unless we already know limit
+  uint64 progress_count; // count of how far we are along in the current instance
   
   static File slash;
   static File slash_root;
@@ -98,6 +98,8 @@ public class Duplicity : Object
   }
   List<DateInfo?> collection_info = null;
   
+  bool checked_backup_space = false;
+
   static const int MINIMUM_FULL = 2;
   bool deleted_files = false;
   int delete_age = 0;
@@ -109,7 +111,7 @@ public class Duplicity : Object
     if (connected)
       resume();
     else
-      pause();
+      pause(_("Paused (no network)"));
   }
 
   public Duplicity(Operation.Mode mode) {
@@ -163,7 +165,7 @@ public class Duplicity : Object
       NetworkManager.get().changed.connect(network_changed);
       if (!NetworkManager.get().connected) {
         debug("No connection found. Postponing the backup.");
-        pause();
+        pause(_("Paused (no network)"));
       }
     }
   }
@@ -227,11 +229,12 @@ public class Duplicity : Object
     }
   }
 
-  public void pause()
+  public void pause(string? reason)
   {
     if (inst != null) {
       inst.pause();
-      set_status(_("Paused (no network)"), false);
+      if (reason != null)
+        set_status(reason, false);
     }
   }
 
@@ -281,6 +284,10 @@ public class Duplicity : Object
         state = State.DRY_RUN;
         action_desc = _("Preparing…");
         extra_argv.append("--dry-run");
+      }
+      else if (!checked_backup_space) {
+        check_backup_space();
+        return true;
       }
       else {
         if (DuplicityInfo.get_default().has_backup_progress)
@@ -383,6 +390,44 @@ public class Duplicity : Object
     return local.resolve_relative_path(rel_file_path);
   }
   
+  async void check_backup_space()
+  {
+    checked_backup_space = true;
+
+    if (!has_progress_total)
+      return;
+
+    var free = yield backend.get_space();
+    var total = yield backend.get_space(false);
+    if (total < progress_total) {
+        // Tiny backup location.  Try anyway, but don't be surprised if it fails.
+        return;
+    }
+
+    if (free < progress_total) {
+      if (got_collection_info) {
+        // Alright, let's look at collection data
+        int full_dates = 0;
+        foreach (DateInfo info in collection_info) {
+          if (info.full)
+            ++full_dates;
+        }
+        if (full_dates > 0) {
+          delete_excess(full_dates - 1);
+          // don't set checked_backup_space, we want to be able to do this again if needed
+          checked_backup_space = false;
+          if (!restart())
+            done(false, false);
+          return; 
+        }
+      }
+      else {
+        if (!ask_question(_("Low on available space"), _("The backup location is getting full.  You may not have enough space.")))
+          return;
+      }
+    }
+  }
+
   bool cleanup() {
     if (DuplicityInfo.get_default().has_broken_cleanup ||
         state == State.CLEANUP)
@@ -400,10 +445,7 @@ public class Duplicity : Object
     return true;
   }
   
-  bool delete_excess(int cutoff) {
-    if (cutoff < MINIMUM_FULL)
-      return false;
-
+  void delete_excess(int cutoff) {
     state = State.DELETE;
     var argv = new List<string>();
     argv.append("remove-all-but-n-full");
@@ -414,7 +456,7 @@ public class Duplicity : Object
     set_status(_("Cleaning up…"));
     connect_and_start(null, null, argv);
     
-    return true;
+    return;
   }
   
   void handle_done(DuplicityInstance? inst, bool success, bool cancelled)
@@ -594,7 +636,8 @@ public class Duplicity : Object
       if (too_old > 0 && full_dates > MINIMUM_FULL) {
         // Alright, let's delete those ancient files!
         int cutoff = int.max(MINIMUM_FULL, full_dates - too_old);
-        return delete_excess(cutoff);
+        delete_excess(cutoff);
+        return true;
       }
       
       // If we don't need to delete, pretend we did and move on.
@@ -894,7 +937,7 @@ public class Duplicity : Object
     double total;
     
     if (firstline.length > 2)
-      this.progress_count = firstline[2].to_double();
+      this.progress_count = firstline[2].to_uint64();
     else
       return;
     
@@ -905,7 +948,7 @@ public class Duplicity : Object
     else
       return; // can't do progress without a total
     
-    double percent = this.progress_count / (double)total;
+    double percent = (double)this.progress_count / total;
     if (percent > 1)
       percent = 1;
     if (percent < 0) // ???

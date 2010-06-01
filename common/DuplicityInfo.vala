@@ -38,6 +38,7 @@ public class DuplicityInfo : Object
   public bool has_rename_arg {get; private set; default = false; }
   public bool has_fixed_log_file {get; private set; default = false; }
   public bool use_empty_gpg_options {get; private set; default = false; }
+  public bool can_recycle_space {get; private set; default = false; }
   
   static DuplicityInfo info = null;
   public static DuplicityInfo get_default() {
@@ -108,7 +109,11 @@ public class DuplicityInfo : Object
     }
     if (equals_version(0, 6, 8))
       use_empty_gpg_options = true; // workaround a duplicity bug
-    
+
+    // A composite capability (whether we have enough information to tell
+    // if we can delete items to make enough room)
+    can_recycle_space = has_collection_status && has_backup_progress;
+
     return true;
   }
   

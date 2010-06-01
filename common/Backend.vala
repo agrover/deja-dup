@@ -39,6 +39,9 @@ public abstract class Backend : Object
   public virtual async void get_envp() throws Error {
     envp_ready(true, new List<string>());
   }
+
+  public static const uint64 INFINITE_SPACE = uint64.MAX;
+  public virtual async uint64 get_space(bool free = true) {return INFINITE_SPACE;}
   
   // Arguments needed only when the particular mode is active
   // If mode == INVALID, arguments needed any time the backup is referenced.

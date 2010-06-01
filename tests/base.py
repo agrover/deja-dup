@@ -259,7 +259,7 @@ def run(method):
 def dup_meets_version(major, minor, micro):
   # replicates logic in DuplicityInfo a bit
   dupver = subprocess.Popen(['duplicity', '--version'], stdout=subprocess.PIPE).communicate()[0].strip().split()[1]
-  if dupver == 'bzr': return True
+  if dupver == '999': return True
   dupmajor, dupminor, dupmicro = dupver.split('.')
   dupmajor = int(dupmajor)
   dupminor = int(dupminor)
