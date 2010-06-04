@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -44,17 +44,20 @@ public class PreferencesDialog : Gtk.Dialog
                 Gtk.STOCK_HELP, Gtk.ResponseType.HELP);
     response.connect(handle_response);
     
-    var table = new Gtk.Table(0, 3, false);
-    table.set("border-width", 3);
-    int row = 0;
-    
+    Gtk.Notebook notebook = new Gtk.Notebook();
     Gtk.Widget w;
     Gtk.Label label;
+    Gtk.Table table;
+    int row;
     
-    backend_widgets = new List<Gtk.Widget>[NUM_LISTS];
+    table = new Gtk.Table(0, 3, false);
+    table.set("border-width", 3);
+    row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
 
+    backend_widgets = new List<Gtk.Widget>[NUM_LISTS];
+    
     // We can't start by showing a ConfigLocation, because many locations
     // will not be immediately available (remote URIs that aren't yet mounted,
     // removable drives that aren't connected).  No need to immediately prompt
@@ -125,8 +128,23 @@ public class PreferencesDialog : Gtk.Dialog
     backend_widgets[S3_LIST].append(s3_table);
     ++row;
     
+    w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
+    table.attach(w, 0, 3, row, row + 1,
+                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
+                 Gtk.AttachOptions.FILL, 3, 3);
+    ++row;
+    
+    // Reset page
+    notebook.append_page(table, null);
+    notebook.set_tab_label_text(table, _("Storage"));
+    table = new Gtk.Table(0, 3, false);
+    table.set("border-width", 3);
+    row = 0;
+    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
+    button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
+    
     w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY, button_sizes);
-    w.set_size_request(250, 80);
+    w.set_size_request(300, 80);
     label = new Gtk.Label(_("I_nclude files in folders:"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -145,7 +163,7 @@ public class PreferencesDialog : Gtk.Dialog
     ++row;
     
     w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY, button_sizes);
-    w.set_size_request(250, 120);
+    w.set_size_request(300, 120);
     label = new Gtk.Label(_("E_xcept files in folders:"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -163,11 +181,14 @@ public class PreferencesDialog : Gtk.Dialog
                  3, 3);
     ++row;
     
-    w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
-    table.attach(w, 0, 3, row, row + 1,
-                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 Gtk.AttachOptions.FILL, 3, 3);
-    ++row;
+    // Reset page
+    notebook.append_page(table, null);
+    notebook.set_tab_label_text(table, _("Files"));
+    table = new Gtk.Table(0, 3, false);
+    table.set("border-width", 3);
+    row = 0;
+    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
+    button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
     DejaDup.ConfigBool periodic_check = new DejaDup.ConfigBool(DejaDup.PERIODIC_KEY, _("_Automatically back up on a regular schedule"));
     table.attach(periodic_check, 0, 3, row, row + 1,
@@ -207,12 +228,15 @@ public class PreferencesDialog : Gtk.Dialog
                  3, 3);
     ++row;
     
+    notebook.append_page(table, null);
+    notebook.set_tab_label_text(table, _("Schedule"));
+    
     if (location_label_noedit != null)
       handle_location_label_changed(location_label_noedit);
     else
       handle_edit_location();
 
-    vbox.add(table);
+    vbox.add(notebook);
   }
   
   void handle_edit_location()
