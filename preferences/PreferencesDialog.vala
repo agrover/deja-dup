@@ -294,7 +294,7 @@ public class PreferencesDialog : Gtk.Dialog
   void handle_response(Gtk.Dialog dlg, int response) {
     switch (response) {
     case Gtk.ResponseType.HELP:
-      DejaDup.show_uri(dlg, "ghelp:deja-dup#deja-dup-prefs");
+      DejaDup.show_uri(dlg, "ghelp:deja-dup#prefs");
       break;
     default:
       Gtk.main_quit();
