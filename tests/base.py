@@ -344,6 +344,7 @@ def wait_for_encryption(dlg, obj, max_count, prefix=False):
       ldtp.settextvalue(dlg, 'txtEncryptionpassword', 'test')
       ldtp.click(dlg, 'btnContinue')
     ldtp.wait(1)
+    remap(dlg)
     count += 1
   assert guivisible(dlg, obj, prefix)
 
