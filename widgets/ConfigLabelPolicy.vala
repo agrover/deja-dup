@@ -63,29 +63,29 @@ public class ConfigLabelPolicy : ConfigLabel
     
     switch (delete_after) {
     case ConfigDelete.WEEKLY:
-      policy = _("Backups will be kept for at least a week or until the backup location is low on space.");
+      policy = _("Older Older backups will be kept for at least a week or until the backup location is low on space.");
       break;
     case ConfigDelete.MONTHLY:
-      policy = _("Backups will be kept for at least a month or until the backup location is low on space.");
+      policy = _("Older backups will be kept for at least a month or until the backup location is low on space.");
       break;
     case ConfigDelete.BIMONTHLY:
-      policy = _("Backups will be kept for at least two months or until the backup location is low on space.");
+      policy = _("Older backups will be kept for at least two months or until the backup location is low on space.");
       break;
     case ConfigDelete.TRIMONTHLY:
-      policy = _("Backups will be kept for at least three months or until the backup location is low on space.");
+      policy = _("Older backups will be kept for at least three months or until the backup location is low on space.");
       break;
     case ConfigDelete.SEMIANNUALLY:
-      policy = _("Backups will be kept for at least six months or until the backup location is low on space.");
+      policy = _("Older backups will be kept for at least six months or until the backup location is low on space.");
       break;
     case ConfigDelete.ANNUALLY:
-      policy = _("Backups will be kept for at least a year or until the backup location is low on space.");
+      policy = _("Older backups will be kept for at least a year or until the backup location is low on space.");
       break;
     case ConfigDelete.FOREVER:
-      policy = _("Backups will be kept until the backup location is low on space.");
+      policy = _("Older backups will be kept until the backup location is low on space.");
       break;
     default:
-      policy = ngettext("Backups will be kept at least %d day or until the backup location is low on space.",
-                        "Backups will be kept at least %d days or until the backup location is low on space.",
+      policy = ngettext("Older backups will be kept at least %d day or until the backup location is low on space.",
+                        "Older backups will be kept at least %d days or until the backup location is low on space.",
                         delete_after);
       break;
     }

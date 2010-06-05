@@ -394,13 +394,17 @@ public class Duplicity : Object
   {
     checked_backup_space = true;
 
-    if (!has_progress_total)
+    if (!has_progress_total) {
+      if (!restart())
+        done(false, false);
       return;
+    }
 
     var free = yield backend.get_space();
     var total = yield backend.get_space(false);
     if (total < progress_total) {
-        // Tiny backup location.  Try anyway, but don't be surprised if it fails.
+        // Tiny backup location.  Suggest they get a larger one.
+        show_error(_("Backup location is too small.  Try using one with more space."));
         return;
     }
 
@@ -416,16 +420,18 @@ public class Duplicity : Object
           delete_excess(full_dates - 1);
           // don't set checked_backup_space, we want to be able to do this again if needed
           checked_backup_space = false;
-          if (!restart())
-            done(false, false);
-          return; 
+          checked_collection_info = false; // get info again
+          return;
         }
       }
       else {
-        if (!ask_question(_("Low on available space"), _("The backup location is getting full.  You may not have enough space.")))
-          return;
+        show_error(_("Backup location does not have enough free space."));
+        return;
       }
     }
+    
+    if (!restart())
+      done(false, false);
   }
 
   bool cleanup() {
@@ -470,6 +476,11 @@ public class Duplicity : Object
           if (restart())
             return;
         }
+        break;
+      
+      case State.DELETE:
+        if (restart()) // In case we were interrupting normal flow
+          return;
         break;
       
       case State.CLEANUP:
@@ -597,6 +608,11 @@ public class Duplicity : Object
   // Should only be called *after* a successful backup
   bool delete_files_if_needed()
   {
+    if (delete_age == 0) {
+      deleted_files = true;
+      return false;
+    }
+    
     // Check if we need to delete any backups
     // If we got collection info, examine it to see if we should delete old
     // files.
