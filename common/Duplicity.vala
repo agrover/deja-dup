@@ -537,6 +537,7 @@ public class Duplicity : Object
           }
         }
         else if (success && mode == Operation.Mode.BACKUP) {
+          mode = Operation.Mode.INVALID; // mark 'done' so when we delete, we don't restart
           if (delete_files_if_needed())
             return;
         }
