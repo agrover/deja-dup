@@ -86,7 +86,7 @@ public class ConfigLabelPolicy : ConfigLabel
     default:
       policy = ngettext("Older backups will be kept at least %d day or until the backup location is low on space.",
                         "Older backups will be kept at least %d days or until the backup location is low on space.",
-                        delete_after);
+                        delete_after).printf(delete_after);
       break;
     }
     
