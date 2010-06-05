@@ -555,6 +555,11 @@ public class Duplicity : Object
   // Should only be called *after* a successful backup
   bool delete_files_if_needed()
   {
+    if (delete_age == 0) {
+      deleted_files = true;
+      return false;
+    }
+    
     // Check if we need to delete any backups
     // If we got collection info, examine it to see if we should delete old
     // files.
