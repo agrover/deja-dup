@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2009 Michael Terry <mike@mterry.name>
+    © 2009–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,6 +23,14 @@ namespace DejaDup {
 
 public class ConfigDelete : ConfigChoice
 {
+  public static const int WEEKLY = 7;
+  public static const int MONTHLY = 28;
+  public static const int BIMONTHLY = 28*2;
+  public static const int TRIMONTHLY = 28*3;
+  public static const int SEMIANNUALLY = 365/2;
+  public static const int ANNUALLY = 365;
+  public static const int FOREVER = int.MAX;
+
   public ConfigDelete(string key) {
     Object(key: key);
   }
@@ -33,13 +41,13 @@ public class ConfigDelete : ConfigChoice
     Gtk.TreeIter iter;
     int i = 0;
     
-    store.insert_with_values(out iter, i++, 0, _("At least a week"), 1, 7);
-    store.insert_with_values(out iter, i++, 0, _("At least a month"), 1, 28);
-    store.insert_with_values(out iter, i++, 0, _("At least two months"), 1, 28*2);
-    store.insert_with_values(out iter, i++, 0, _("At least three months"), 1, 28*3);
-    store.insert_with_values(out iter, i++, 0, _("At least six months"), 1, 365/2);
-    store.insert_with_values(out iter, i++, 0, _("At least a year"), 1, 365);
-    store.insert_with_values(out iter, i++, 0, _("Forever"), 1, int.MAX);
+    store.insert_with_values(out iter, i++, 0, _("At least a week"), 1, WEEKLY);
+    store.insert_with_values(out iter, i++, 0, _("At least a month"), 1, MONTHLY);
+    store.insert_with_values(out iter, i++, 0, _("At least two months"), 1, BIMONTHLY);
+    store.insert_with_values(out iter, i++, 0, _("At least three months"), 1, TRIMONTHLY);
+    store.insert_with_values(out iter, i++, 0, _("At least six months"), 1, SEMIANNUALLY);
+    store.insert_with_values(out iter, i++, 0, _("At least a year"), 1, ANNUALLY);
+    store.insert_with_values(out iter, i++, 0, _("Forever"), 1, FOREVER);
     
     store.set_sort_column_id(1, Gtk.SortType.ASCENDING);
     
@@ -63,7 +71,7 @@ public class ConfigDelete : ConfigChoice
     choice_changed(intval.to_string());
   }
   
-  protected override void set_from_config()
+  protected override async void set_from_config()
   {
     int confval;
     try {

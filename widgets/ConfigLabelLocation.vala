@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2009 Michael Terry <mike@mterry.name>
+    © 2009–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ public class ConfigLabelLocation : ConfigLabel
     set_from_config();
   }
   
-  protected override void set_from_config()
+  protected override async void set_from_config()
   {
     label.label = get_location_desc();
 
@@ -61,7 +61,7 @@ public class ConfigLabelLocation : ConfigLabel
     try {
       is_s3 = client.get_string(BACKEND_KEY) == "s3";
     }
-    catch (Error e) {warning("%s\n", e.message);}
+    catch (Error err) {warning("%s\n", err.message);}
   }
 }
 

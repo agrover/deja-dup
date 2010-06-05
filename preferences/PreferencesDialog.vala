@@ -46,12 +46,15 @@ public class PreferencesDialog : Gtk.Dialog
     
     Gtk.Notebook notebook = new Gtk.Notebook();
     Gtk.Widget w;
+    Gtk.VBox page_box;
+    Gtk.HBox hbox;
     Gtk.Label label;
     Gtk.Table table;
     int row;
     
+    page_box = new Gtk.VBox(false, 0);
+    page_box.set("border-width", 3);
     table = new Gtk.Table(0, 3, false);
-    table.set("border-width", 3);
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
@@ -134,11 +137,20 @@ public class PreferencesDialog : Gtk.Dialog
                  Gtk.AttachOptions.FILL, 3, 3);
     ++row;
     
+    w = new DejaDup.ConfigLabelPolicy();
+    hbox = new Gtk.HBox(false, 0);
+    hbox.border_width = 3;
+    hbox.add(w);
+    
+    page_box.pack_start(table, true, true, 0);
+    page_box.pack_end(hbox, false, false, 0);
+    notebook.append_page(page_box, null);
+    notebook.set_tab_label_text(page_box, _("Storage"));
+    
     // Reset page
-    notebook.append_page(table, null);
-    notebook.set_tab_label_text(table, _("Storage"));
+    page_box = new Gtk.VBox(false, 0);
+    page_box.set("border-width", 3);
     table = new Gtk.Table(0, 3, false);
-    table.set("border-width", 3);
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
@@ -181,11 +193,14 @@ public class PreferencesDialog : Gtk.Dialog
                  3, 3);
     ++row;
     
+    page_box.pack_start(table, true, true, 0);
+    notebook.append_page(page_box, null);
+    notebook.set_tab_label_text(page_box, _("Files"));
+    
     // Reset page
-    notebook.append_page(table, null);
-    notebook.set_tab_label_text(table, _("Files"));
+    page_box = new Gtk.VBox(false, 0);
+    page_box.set("border-width", 3);
     table = new Gtk.Table(0, 3, false);
-    table.set("border-width", 3);
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
@@ -228,8 +243,15 @@ public class PreferencesDialog : Gtk.Dialog
                  3, 3);
     ++row;
     
-    notebook.append_page(table, null);
-    notebook.set_tab_label_text(table, _("Schedule"));
+    w = new DejaDup.ConfigLabelPolicy();
+    hbox = new Gtk.HBox(false, 0);
+    hbox.border_width = 3;
+    hbox.add(w);
+    
+    page_box.pack_start(table, true, true, 0);
+    page_box.pack_end(hbox, false, false, 0);
+    notebook.append_page(page_box, null);
+    notebook.set_tab_label_text(page_box, _("Schedule"));
     
     if (location_label_noedit != null)
       handle_location_label_changed(location_label_noedit);

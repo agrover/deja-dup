@@ -259,7 +259,7 @@ def run(method):
 def dup_meets_version(major, minor, micro):
   # replicates logic in DuplicityInfo a bit
   dupver = subprocess.Popen(['duplicity', '--version'], stdout=subprocess.PIPE).communicate()[0].strip().split()[1]
-  if dupver == 'bzr': return True
+  if dupver == '999': return True
   dupmajor, dupminor, dupmicro = dupver.split('.')
   dupmajor = int(dupmajor)
   dupminor = int(dupminor)
@@ -274,23 +274,23 @@ def dup_meets_version(major, minor, micro):
 def get_manifest_date(filename):
   return re.sub('.*\.([0-9TZ]+)\.manifest.*', '\\1', filename)
 
-def list_manifests():
-  destdir = get_temp_name('local')
+def list_manifests(dest='local'):
+  destdir = get_temp_name(dest)
   files = sorted(glob.glob('%s/*.manifest*' % destdir), key=get_manifest_date)
   if not files:
     raise Exception("Expected manifest, found none")
   files = filter(lambda x: x.count('duplicity-full') == 0 or x.count('.to.') == 0, files) # don't get the in-between manifests
   return (destdir, files)
 
-def num_manifests(mtype=None):
-  destdir, files = list_manifests()
+def num_manifests(mtype=None, dest='local'):
+  destdir, files = list_manifests(dest)
   if mtype:
     files = filter(lambda x: manifest_type(x) == mtype, files)
   return len(files)
 
-def last_manifest():
+def last_manifest(dest='local'):
   '''Returns last backup manifest (directory, filename) pair'''
-  destdir, files = list_manifests()
+  destdir, files = list_manifests(dest)
   latest = files[-1]
   return (destdir, latest)
 
@@ -298,15 +298,15 @@ def manifest_type(fn):
   # fn looks like duplicity-TYPE.DATES.manifest
   return fn.split('.')[0].split('-')[1]
 
-def last_type():
+def last_type(dest='local'):
   '''Returns last backup type, inc or full'''
-  filename = last_manifest()[1]
+  filename = last_manifest(dest)[1]
   return manifest_type(filename)
 
-def last_date_change(to_date):
+def last_date_change(to_date, dest='local'):
   '''Changes the most recent set of duplicity files to look like they were
      from to_date's timestamp'''
-  destdir, latest = last_manifest()
+  destdir, latest = last_manifest(dest)
   olddate = get_manifest_date(latest)
   newdate = subprocess.Popen(['date', '-d', to_date, '+%Y%m%dT%H%M%SZ'], stdout=subprocess.PIPE).communicate()[0].strip()
   cachedir = environ['XDG_CACHE_HOME'] + '/deja-dup/'
@@ -344,6 +344,7 @@ def wait_for_encryption(dlg, obj, max_count, prefix=False):
       ldtp.settextvalue(dlg, 'txtEncryptionpassword', 'test')
       ldtp.click(dlg, 'btnContinue')
     ldtp.wait(1)
+    remap(dlg)
     count += 1
   assert guivisible(dlg, obj, prefix)
 
