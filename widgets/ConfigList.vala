@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -92,7 +92,7 @@ public class ConfigList : ConfigWidget
     selection.changed.connect(handle_selection_change);
   }
   
-  protected override void set_from_config()
+  protected override async void set_from_config()
   {
     SList<string> slist;
     try {
@@ -139,9 +139,7 @@ public class ConfigList : ConfigWidget
           FileInfo info = f.query_info(FILE_ATTRIBUTE_STANDARD_ICON, FileQueryInfoFlags.NONE, null);
           icon = info.get_icon();
         }
-        catch (Error e) {
-          warning("%s\n", e.message);
-        }
+        catch (Error err) {warning("%s\n", err.message);}
       }
       if (icon != null)
         model.set(iter, 2, icon);
