@@ -27,12 +27,14 @@ class DejaDupApp : Object
   static bool show_version = false;
   static bool restore_mode = false;
   static bool backup_mode = false;
+  static bool dirhistory_mode = false;
   static string[] filenames = null;
   static const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
     {"restore", 0, 0, OptionArg.NONE, ref restore_mode, N_("Restore given files"), null},
     {"backup", 0, 0, OptionArg.NONE, ref backup_mode, N_("Immediately start a backup"), null},
-    {"", 0, 0, OptionArg.FILENAME_ARRAY, ref filenames, null, null}, // remaining
+    {"dir-history", 0, 0, OptionArg.NONE, ref dirhistory_mode, N_("Directory history"), null},
+    {"", 0, 0, OptionArg.FILENAME_ARRAY, ref filenames, null, null}, // remaining    
     {null}
   };
   
@@ -109,6 +111,24 @@ class DejaDupApp : Object
       toplevel = new AssistantBackup(true);
       toplevel.destroy.connect((t) => {Gtk.main_quit();});
       // specifically don't show
+    }
+    else if (dirhistory_mode){
+      try {
+        //toplevel = new AssistantDirectoryHistory();
+        /*var assdirhist = new AssistantDirectoryHistory();
+        var intdirhist = new InterfaceDirectoryHistory();
+        var builder = new Gtk.Builder();
+        builder.add_from_file("/home/urbans/Documents/dev/deja-dup.nautilus/interface/sample.ui");
+        builder.connect_signals(assdirhist);
+        //builder.connect_signals(null);
+        var window = builder.get_object("window") as Gtk.Window;*/
+        
+        toplevel = new AssistantDirectoryHistory();
+        toplevel.destroy.connect((t) => {Gtk.main_quit();});
+        toplevel.show_all();
+      } catch (Error e) {
+        stderr.printf("ni ni interfejsa: %s\n", e.message);
+      }
     }
     else {
       toplevel = new MainWindow();

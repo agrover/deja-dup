@@ -24,6 +24,12 @@ namespace DejaDup {
 
 public class Duplicity : Object
 {
+  /*
+   * Vala implementation of various methods for accessing duplicity
+   *
+   * Vala implementation of various methods for accessing duplicity from
+   * vala withot the need of manually running duplicity command.
+   */
   public signal void done(bool success, bool cancelled);
   public signal void raise_error(string errstr, string? detail);
   public signal void action_desc_changed(string action);

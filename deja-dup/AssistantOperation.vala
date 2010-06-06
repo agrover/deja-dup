@@ -21,6 +21,14 @@ using GLib;
 
 public abstract class AssistantOperation : Assistant
 {
+  /*
+   * Abstract class for implementation of various common pages in assistant
+   *
+   * Abstract class that provides various methods that serve as pages in
+   * assistant. Required methods that all classes that inherit from this
+   * class must implement are create_op, make_confirm_page and
+   * get_progress_file_prefix.
+   */
   protected Gtk.Widget confirm_page {get; private set;}
   public signal void closing(bool success);
   
@@ -79,10 +87,23 @@ public abstract class AssistantOperation : Assistant
     closed.connect(do_close);
     prepare.connect(do_prepare);
   }
-  
+
+  /*
+   * Creates confirmation page for particular assistant
+   *
+   * Creates confirmation page that should create confirm_page widget that
+   * is presented for final confirmation.
+   */
   protected abstract Gtk.Widget? make_confirm_page();
   protected virtual void add_setup_pages() {}
-  protected virtual void add_custom_config_pages() {}
+  protected virtual void add_custom_config_pages(){}
+  /*
+   * Creates and calls appropriate operation
+   *
+   * Creates and calls appropriate operation (Backup, Restore, Status, Files)
+   * that is then used to perform various defined tasks on backend. It is
+   * also later connected to various signals.
+   */
   protected abstract DejaDup.Operation create_op();
   protected abstract string get_progress_file_prefix();
   protected virtual void set_op_icon_name() {}
@@ -111,6 +132,11 @@ public abstract class AssistantOperation : Assistant
   
   void show_progress(DejaDup.Operation op, double percent)
   {
+    /*
+     * Updates prograss bar
+     *
+     * Updates progress bar with percet provided.
+     */
     progress_bar.fraction = percent;
     gives_progress = true;
   }
@@ -324,6 +350,11 @@ public abstract class AssistantOperation : Assistant
   
   void add_config_pages_if_needed()
   {
+    /*
+     * Creates configure pages if required
+     *
+     * 
+     */
     var client = DejaDup.get_gconf_client();
     string val;
     try {
@@ -341,6 +372,11 @@ public abstract class AssistantOperation : Assistant
   
   void add_confirm_page()
   {
+    /*
+     * Adds confirm page to the sequence of pages
+     *
+     * Adds confirm_page widget to the sequence of pages in assistant.
+     */
     var page = make_confirm_page();
     if (page == null)
       return;
@@ -401,6 +437,7 @@ public abstract class AssistantOperation : Assistant
   
   void do_apply()
   {
+    
     if (mount_op == null)
       mount_op = new MountOperationAssistant(this);
 
