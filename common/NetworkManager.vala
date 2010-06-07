@@ -61,7 +61,7 @@ public class NetworkManager : Object
     connected = network_manager_state == NM_STATE_CONNECTED;
 
     //Dbus signal when the state of the connection is changed.
-    nm.StateChanged += nm_state_changed;
+    nm.StateChanged.connect(nm_state_changed);
   }
 
   protected void nm_state_changed(DBus.Object obj, uint32 new_state)
