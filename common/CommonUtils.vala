@@ -21,16 +21,15 @@ using GLib;
 
 namespace DejaDup {
 
-public const string GCONF_DIR = "/apps/deja-dup";
-public const string INCLUDE_LIST_KEY = "/apps/deja-dup/include-list";
-public const string EXCLUDE_LIST_KEY = "/apps/deja-dup/exclude-list";
-public const string BACKEND_KEY = "/apps/deja-dup/backend";
-public const string ROOT_PROMPT_KEY = "/apps/deja-dup/root-prompt";
-public const string ENCRYPT_KEY = "/apps/deja-dup/encrypt";
-public const string LAST_RUN_KEY = "/apps/deja-dup/last-run";
-public const string PERIODIC_KEY = "/apps/deja-dup/periodic";
-public const string PERIODIC_PERIOD_KEY = "/apps/deja-dup/periodic-period";
-public const string DELETE_AFTER_KEY = "/apps/deja-dup/delete-after";
+public const string INCLUDE_LIST_KEY = "include-list";
+public const string EXCLUDE_LIST_KEY = "exclude-list";
+public const string BACKEND_KEY = "backend";
+public const string ROOT_PROMPT_KEY = "root-prompt";
+public const string ENCRYPT_KEY = "encrypt";
+public const string LAST_RUN_KEY = "last-run";
+public const string PERIODIC_KEY = "periodic";
+public const string PERIODIC_PERIOD_KEY = "periodic-period";
+public const string DELETE_AFTER_KEY = "delete-after";
 
 public void update_last_run_timestamp() throws Error
 {
@@ -163,6 +162,14 @@ public GConf.Client get_gconf_client()
   return client;
 }
 
+public Settings get_settings(string? subdir = null)
+{
+  string schema = "org.gnome.deja-dup";
+  if (subdir != null)
+    schema += "." + subdir;
+  return new Settings(schema);
+}
+
 const string SSH_USERNAME_KEY = "/apps/deja-dup/ssh/username";
 const string SSH_SERVER_KEY = "/apps/deja-dup/ssh/server";
 const string SSH_PORT_KEY = "/apps/deja-dup/ssh/port";
@@ -208,6 +215,7 @@ void convert_ssh_to_file()
 
 public void initialize()
 {
+  Environment.set_variable("GSETTINGS_BACKEND", "gconf", true);
   set_gconf_client();
   convert_ssh_to_file();
 }

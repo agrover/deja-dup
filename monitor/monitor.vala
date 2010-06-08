@@ -102,16 +102,16 @@ static Date most_recent_scheduled_date(int period)
 
 static Date next_run_date()
 {
-  var client = GConf.Client.get_default();
+  var settings = DejaDup.get_settings();
   
   bool periodic;
   string last_run_string;
   int period_days;
   
   try {
-    periodic = client.get_bool(DejaDup.PERIODIC_KEY);
-    last_run_string = client.get_string(DejaDup.LAST_RUN_KEY);
-    period_days = client.get_int(DejaDup.PERIODIC_PERIOD_KEY);
+    periodic = settings.get_value(DejaDup.PERIODIC_KEY).get_boolean();
+    last_run_string = settings.get_value(DejaDup.LAST_RUN_KEY).get_string();
+    period_days = settings.get_value(DejaDup.PERIODIC_PERIOD_KEY).get_int32();
   }
   catch (Error e) {
     warning("%s", e.message);
@@ -303,7 +303,7 @@ static void prepare_next_run()
 
 static void watch_gconf()
 {
-  var client = GConf.Client.get_default();
+  var client = DejaDup.get_gconf_client();
   
   try {
     client.add_dir(DejaDup.GCONF_DIR, GConf.ClientPreloadType.NONE);
