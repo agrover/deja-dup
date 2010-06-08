@@ -54,18 +54,18 @@ public class BackendS3 : Backend
 
   public override string? get_location() throws Error
   {
-    var client = get_gconf_client();
+    var settings = get_settings();
     
-    var bucket = client.get_string(S3_BUCKET_KEY);
+    var bucket = settings.get_value(S3_BUCKET_KEY).get_string();
     var default_bucket = get_default_bucket();
     if (bucket == null || bucket == "" ||
         (bucket.has_prefix("deja-dup-auto-") &&
          !bucket.has_prefix(default_bucket))) {
       bucket = default_bucket;
-      client.set_string(S3_BUCKET_KEY, bucket);
+      settings.set_value(S3_BUCKET_KEY, new Variant.string(bucket));
     }
     
-    var folder = client.get_string(S3_FOLDER_KEY);
+    var folder = settings.get_value(S3_FOLDER_KEY).get_string();
     if (folder != null && folder != "") {
       if (folder[0] != '/')
         bucket = "%s/%s".printf(bucket, folder);
@@ -80,9 +80,9 @@ public class BackendS3 : Backend
     // OK, the bucket we tried must already exist, so let's use a different
     // one.  We'll take previous bucket name and increment it.
     try {
-      var client = GConf.Client.get_default();
+      var settings = get_settings();
       
-      var bucket = client.get_string(S3_BUCKET_KEY);
+      var bucket = settings.get_value(S3_BUCKET_KEY).get_string();
       if (bucket == "deja-dup") {
         // Until 7.4, we exposed the bucket name and defaulted to deja-dup.
         // Since buckets are S3-global, everyone was unable to use that bucket,
@@ -90,7 +90,7 @@ public class BackendS3 : Backend
         // we should default to the generic bucket name rather than assume the
         // user chose this bucket and error out.
         bucket = get_default_bucket();
-        client.set_string(S3_BUCKET_KEY, bucket);
+        settings.set_value(S3_BUCKET_KEY, new Variant.string(bucket));
         return true;
       }
       
@@ -110,7 +110,7 @@ public class BackendS3 : Backend
         bucket = string.joinv("-", bits);
       }
       
-      client.set_string(S3_BUCKET_KEY, bucket);
+      settings.set_value(S3_BUCKET_KEY, new Variant.string(bucket));
       return true;
     }
     catch (Error e) {
@@ -120,8 +120,8 @@ public class BackendS3 : Backend
   
   public override string? get_location_pretty() throws Error
   {
-    var client = get_gconf_client();
-    var folder = client.get_string(S3_FOLDER_KEY);
+    var settings = get_settings();
+    var folder = settings.get_value(S3_FOLDER_KEY).get_string();
     if (folder == null || folder == "")
       folder = "/";
     
@@ -129,14 +129,14 @@ public class BackendS3 : Backend
     return _("%s on Amazon S3").printf(folder);
   }
   
-  string gconf_id;
+  string settings_id;
   string id;
   string secret_key;
   public override async void get_envp() throws Error
   {
-    var client = get_gconf_client();
-    gconf_id = client.get_string(S3_ID_KEY);
-    id = gconf_id == null ? "" : gconf_id;
+    var settings = get_settings();
+    settings_id = settings.get_value(S3_ID_KEY).get_string();
+    id = settings_id == null ? "" : settings_id;
     
     if (id != "" && secret_key != null) {
       // We've already been run before and got the key
@@ -207,13 +207,9 @@ public class BackendS3 : Backend
   }
   
   void got_secret_key() {
-    var client = get_gconf_client();
-    if (id != gconf_id) {
-      try {
-        client.set_string(S3_ID_KEY, id);
-      }
-      catch (Error e) {warning("%s\n", e.message);}
-    }
+    var settings = get_settings();
+    if (id != settings_id)
+      settings.set_value(S3_ID_KEY, new Variant.string(id));
     
     List<string> envp = new List<string>();
     envp.append("AWS_ACCESS_KEY_ID=%s".printf(id));

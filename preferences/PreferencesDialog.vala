@@ -69,8 +69,8 @@ public class PreferencesDialog : Gtk.Dialog
     // anything up, they want to start in edit mode.
     string last_run = null;
     try {
-      var client = DejaDup.get_gconf_client();
-      last_run = client.get_string(DejaDup.LAST_RUN_KEY);
+      var settings = DejaDup.get_settings();
+      last_run = settings.get_value(DejaDup.LAST_RUN_KEY).get_string();
     }
     catch (Error e) {warning("%s\n", e.message);}
 

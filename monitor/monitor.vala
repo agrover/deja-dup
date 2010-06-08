@@ -306,7 +306,7 @@ static void watch_gconf()
   var client = DejaDup.get_gconf_client();
   
   try {
-    client.add_dir(DejaDup.GCONF_DIR, GConf.ClientPreloadType.NONE);
+    //client.add_dir(DejaDup.GCONF_DIR, GConf.ClientPreloadType.NONE);
     client.notify_add(DejaDup.LAST_RUN_KEY, prepare_next_run);
     client.notify_add(DejaDup.PERIODIC_KEY, prepare_next_run);
     client.notify_add(DejaDup.PERIODIC_PERIOD_KEY, prepare_next_run);
