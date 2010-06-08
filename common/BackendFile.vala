@@ -27,7 +27,7 @@ public const string FILE_PATH_KEY = "/apps/deja-dup/file/path";
 public const string FILE_RELPATH_KEY = "/apps/deja-dup/file/relpath";
 public const string FILE_UUID_KEY = "/apps/deja-dup/file/uuid";
 public const string FILE_NAME_KEY = "/apps/deja-dup/file/name";
-public const string FILE_SHORT_NAME_KEY = "/apps/deja-dup/file/short_name";
+public const string FILE_SHORT_NAME_KEY = "/apps/deja-dup/file/short-name";
 public const string FILE_ICON_KEY = "/apps/deja-dup/file/icon";
 
 public class BackendFile : Backend

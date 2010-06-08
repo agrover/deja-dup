@@ -27,6 +27,11 @@ schemadir = $(sysconfdir)/gconf/schemas
 schema_in_file = deja-dup.schemas.in
 dist_schema_DATA = $(schema_in_file:.schemas.in=.schemas)
 
+@INTLTOOL_XML_NOMERGE_RULE@
+
+gsettings_SCHEMAS = org.gnome.deja-dup.gschema.xml
+@GSETTINGS_RULES@
+
 @INTLTOOL_DESKTOP_RULE@
 desktopdir = $(datadir)/applications
 dist_desktop_DATA = deja-dup.desktop
@@ -36,8 +41,8 @@ deja-dup-monitor.desktop.in: deja-dup-monitor.desktop.in.in
 autostartdir = $(sysconfdir)/xdg/autostart
 dist_autostart_DATA = deja-dup-monitor.desktop
 
-EXTRA_DIST = deja-dup.schemas.in deja-dup.desktop.in deja-dup-monitor.desktop.in.in
-DISTCLEANFILES = deja-dup.schemas deja-dup.desktop deja-dup-monitor.desktop deja-dup-monitor.desktop.in
+EXTRA_DIST = deja-dup.schemas.in deja-dup.desktop.in deja-dup-monitor.desktop.in.in org.gnome.deja-dup.gschema.xml
+DISTCLEANFILES = deja-dup.schemas deja-dup.desktop deja-dup-monitor.desktop deja-dup-monitor.desktop.in $(gsettings_SCHEMAS)
 
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
