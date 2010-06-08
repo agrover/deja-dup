@@ -31,11 +31,8 @@ public class ConfigLabelBool : ConfigLabel
   protected override async void set_from_config()
   {
     bool val;
-    try {
-      val = client.get_bool(key);
-      label.label = val ? _("Yes") : _("No");
-    }
-    catch (Error e) {warning("%s\n", e.message);}
+    val = settings.get_value(key).get_boolean();
+    label.label = val ? _("Yes") : _("No");
   }
 }
 

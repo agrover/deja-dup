@@ -117,7 +117,7 @@ public class StatusIcon : Object
   {
     hide_all();
 
-    // Fake a run by setting today's timestamp as the 'last-run' gconf key
+    // Fake a run by setting today's timestamp as the 'last-run' setting
     try {
       DejaDup.update_last_run_timestamp();
     }

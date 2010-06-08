@@ -179,7 +179,7 @@ public class BackendFile : Backend
       argv.prepend("--gio");
   }
   
-  // Checks if file is secretly a volume file and fills out gconf data if so.
+  // Checks if file is secretly a volume file and fills out settings data if so.
   public async static void check_for_volume_info(File file) throws Error
   {
     var settings = get_settings();

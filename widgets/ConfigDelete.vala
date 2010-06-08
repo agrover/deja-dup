@@ -62,7 +62,7 @@ public class ConfigDelete : ConfigChoice
       intval = 0; // forever
     
     try {
-        client.set_int(key, intval);
+        settings.set_value(key, new Variant.int32(intval));
     }
     catch (Error e) {
       warning("%s\n", e.message);
@@ -75,7 +75,7 @@ public class ConfigDelete : ConfigChoice
   {
     int confval;
     try {
-        confval = client.get_int(key);
+        confval = settings.get_value(key).get_int32();
     }
     catch (Error e) {
       warning("%s\n", e.message);
@@ -90,7 +90,7 @@ public class ConfigDelete : ConfigChoice
     
     while (valid) {
       Value val;
-      combo.model.get_value(iter, gconf_col, out val);
+      combo.model.get_value(iter, settings_col, out val);
       int intval = val.get_int();
       
       if (intval == confval) {

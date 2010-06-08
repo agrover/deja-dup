@@ -84,15 +84,15 @@ public class ConfigLocation : ConfigWidget
     }
   }
   
-  File get_file_from_gconf() throws Error
+  File get_file_from_settings() throws Error
   {
     // Check the backend type, then GIO uri if needed
     File file = null;
-    var val = client.get_string(BACKEND_KEY);
+    var val = settings.get_value(BACKEND_KEY).get_string();
     if (val == "s3" && tmpdir != null)
       file = tmpdir;
     else {
-      val = client.get_string(FILE_PATH_KEY);
+      val = settings.get_value(FILE_PATH_KEY).get_string();
       if (val == null)
         val = ""; // current directory
       file = File.parse_name(val);
@@ -107,7 +107,7 @@ public class ConfigLocation : ConfigWidget
     try {
       var uri = button.get_uri();
       var button_file = uri == null ? null : File.new_for_uri(uri);
-      file = get_file_from_gconf();
+      file = get_file_from_settings();
       if (button_file == null || !file.equal(button_file)) {
         button.set_current_folder_uri(file.get_uri());
         is_s3 = tmpdir != null && file.equal(tmpdir);
@@ -125,25 +125,25 @@ public class ConfigLocation : ConfigWidget
 
   async void set_file_info()
   {
-    File gconf_file = null;
+    File settings_file = null;
     try {
-      gconf_file = get_file_from_gconf();
+      settings_file = get_file_from_settings();
     }
     catch (Error err) {} // ignore
     
     var uri = button.get_uri();
     var file = uri == null ? null : File.new_for_uri(uri);
-    if (file == null || file.equal(gconf_file))
+    if (file == null || file.equal(settings_file))
       return; // we sometimes get several selection changed notices in a row...
     
     is_s3 = tmpdir != null && file.equal(tmpdir);
     
     try {
       if (is_s3)
-        client.set_string(BACKEND_KEY, "s3");
+        settings.set_value(BACKEND_KEY, new Variant.string("s3"));
       else {
-        client.set_string(BACKEND_KEY, "file");
-        client.set_string(FILE_PATH_KEY, file.get_parse_name());
+        settings.set_value(BACKEND_KEY, new Variant.string("file"));
+        settings.set_value(FILE_PATH_KEY, new Variant.string(file.get_parse_name()));
         yield BackendFile.check_for_volume_info(file);
       }
     }

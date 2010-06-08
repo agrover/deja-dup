@@ -324,17 +324,11 @@ public abstract class AssistantOperation : Assistant
   
   void add_config_pages_if_needed()
   {
-    var client = DejaDup.get_gconf_client();
+    var settings = DejaDup.get_settings();
     string val;
-    try {
-      val = client.get_string(DejaDup.LAST_RUN_KEY);
-      if (val != null && val != "")
-        return;
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
+    val = settings.get_value(DejaDup.LAST_RUN_KEY).get_string();
+    if (val != null && val != "")
       return;
-    }
     
     add_custom_config_pages();
   }

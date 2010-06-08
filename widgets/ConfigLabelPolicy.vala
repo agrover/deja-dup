@@ -40,7 +40,7 @@ public class ConfigLabelPolicy : ConfigLabel
     int delete_after = 0;
     try {
       backend = Backend.get_default();
-      delete_after = client.get_int(DELETE_AFTER_KEY);
+      delete_after = settings.get_value(DELETE_AFTER_KEY).get_int32();
     }
     catch (Error e) {
       warning("%s\n", e.message);

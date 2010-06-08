@@ -42,23 +42,13 @@ public class ConfigNumber : ConfigWidget
   
   protected override async void set_from_config()
   {
-    try {
-      var val = client.get_int(key);
-      spin.@value = val;
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    var val = settings.get_value(key).get_int32();
+    spin.@value = val;
   }
   
   void handle_value_changed()
   {
-    try {
-      client.set_int(key, (int)spin.@value);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    settings.set_value(key, new Variant.int32((int)spin.@value));
   }
 }
 

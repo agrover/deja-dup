@@ -57,11 +57,7 @@ public class ConfigLabelLocation : ConfigLabel
         img.set_from_gicon(icon, Gtk.IconSize.MENU);
     }
 
-    is_s3 = false;
-    try {
-      is_s3 = client.get_string(BACKEND_KEY) == "s3";
-    }
-    catch (Error err) {warning("%s\n", err.message);}
+    is_s3 = settings.get_value(BACKEND_KEY).get_string() == "s3";
   }
 }
 

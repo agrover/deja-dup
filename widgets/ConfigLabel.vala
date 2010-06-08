@@ -42,11 +42,8 @@ public class ConfigLabel : ConfigWidget
   protected override async void set_from_config()
   {
     string val;
-    try {
-      val = client.get_string(key);
-      label.label = val;
-    }
-    catch (Error e) {warning("%s\n", e.message);}
+    val = settings.get_value(key).get_string();
+    label.label = val;
   }
 }
 

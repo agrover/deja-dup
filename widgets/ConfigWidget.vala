@@ -29,8 +29,10 @@ public abstract class ConfigWidget : Gtk.EventBox
   
   List<string> dirs = null;
   protected GConf.Client client;
+  protected Settings settings;
   construct {
     client = DejaDup.get_gconf_client();
+    settings = DejaDup.get_settings();
     
     if (key != null)
       watch_key(key);

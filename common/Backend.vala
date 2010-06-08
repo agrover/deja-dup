@@ -51,8 +51,8 @@ public abstract class Backend : Object
   
   public static Backend? get_default() throws Error
   {
-    var client = get_gconf_client();
-    var backend_name = client.get_string(BACKEND_KEY);
+    var settings = get_settings();
+    var backend_name = settings.get_value(BACKEND_KEY).get_string();
     if (backend_name == "s3")
       return new BackendS3();
     else if (backend_name == "file")
