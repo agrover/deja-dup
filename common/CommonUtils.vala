@@ -75,12 +75,9 @@ public File parse_dir(string dir)
   return File.new_for_path(s);
 }
 
-public File[] parse_dir_list(SList<string>? dirs)
+public File[] parse_dir_list(string*[] dirs)
 {
-  if (dirs == null)
-    return new File[0];
-  
-  File[] rv = new File[dirs.length()];
+  File[] rv = new File[dirs.length];
   
   int i = 0;
   foreach (string s in dirs)

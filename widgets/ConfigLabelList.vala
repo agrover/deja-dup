@@ -36,9 +36,9 @@ public class ConfigLabelList : ConfigLabel
   protected override async void set_from_config()
   {
     string val = "";
-    SList<string> slist;
+    string*[] slist;
     try {
-      slist = client.get_list(key, GConf.ValueType.STRING);
+      slist = settings.get_value(key).get_strv();
     }
     catch (Error e) {
       warning("%s\n", e.message);
