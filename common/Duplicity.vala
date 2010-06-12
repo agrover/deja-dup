@@ -416,7 +416,7 @@ public class Duplicity : Object
           if (info.full)
             ++full_dates;
         }
-        if (full_dates > 0) {
+        if (full_dates > 1) {
           delete_excess(full_dates - 1);
           // don't set checked_backup_space, we want to be able to do this again if needed
           checked_backup_space = false;
