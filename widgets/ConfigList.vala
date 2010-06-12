@@ -169,34 +169,24 @@ public class ConfigList : ConfigWidget
     SList<string> files = dlg.get_filenames();
     dlg.destroy();
     
-    SList<string> slist;
-    try {
-      slist = client.get_list(key, GConf.ValueType.STRING);
-      
-      foreach (string file in files) {
-        var folder = File.new_for_path(file);
-        bool found = false;
-        foreach (string s in slist) {
-          var sfile = File.new_for_path(s);
-          if (sfile.equal(folder)) {
-            found = true;
-            break;
-          }
+    string[] slist = settings.get_value(key).get_strv();
+    
+    foreach (string file in files) {
+      var folder = File.new_for_path(file);
+      bool found = false;
+      foreach (string s in slist) {
+        var sfile = File.new_for_path(s);
+        if (sfile.equal(folder)) {
+          found = true;
+          break;
         }
-        
-        if (!found)
-          slist.append(file);
       }
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      slist = files.copy();
+      
+      if (!found)
+        slist += file;
     }
     
-    try {
-      client.set_list(key, GConf.ValueType.STRING, slist);
-    }
-    catch (Error e) {warning("%s\n", e.message);}
+    settings.set_value(key, new Variant.strv(slist));
   }
   
   void handle_remove()
@@ -208,14 +198,8 @@ public class ConfigList : ConfigWidget
     if (paths == null)
       return;
     
-    SList<string> slist;
-    try {
-      slist = client.get_list(key, GConf.ValueType.STRING);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      return;
-    }
+    string[] before = settings.get_value(key).get_strv();
+    string[] after = new string[0];
     
     foreach (Gtk.TreePath path in paths) {
       Gtk.TreeIter iter;
@@ -226,24 +210,14 @@ public class ConfigList : ConfigWidget
       model.get(iter, 0, out current);
       var current_file = File.new_for_path(current);
       
-      weak SList<string> siter = slist, snext;
-      while (siter != null) {
-        snext = siter.next;
-        var sfile = DejaDup.parse_dir(siter.data);
-        if (sfile.equal(current_file)) {
-          slist.remove_link(siter);
-          break;
-        }
-        siter = snext;
+      foreach (string file in before) {
+        var sfile = DejaDup.parse_dir(file);
+        if (!sfile.equal(current_file))
+          after += file;
       }
     }
     
-    try {
-      client.set_list(key, GConf.ValueType.STRING, slist);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    settings.set_value(key, new Variant.strv(after));
   }
 }
 

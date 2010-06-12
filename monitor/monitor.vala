@@ -301,19 +301,18 @@ static void prepare_next_run()
   prepare_run(wait_time);
 }
 
-static void watch_gconf()
+static void prepare_if_necessary(string key)
 {
-  var client = DejaDup.get_gconf_client();
-  
-  try {
-    //client.add_dir(DejaDup.GCONF_DIR, GConf.ClientPreloadType.NONE);
-    client.notify_add(DejaDup.LAST_RUN_KEY, prepare_next_run);
-    client.notify_add(DejaDup.PERIODIC_KEY, prepare_next_run);
-    client.notify_add(DejaDup.PERIODIC_PERIOD_KEY, prepare_next_run);
-  }
-  catch (Error e) {
-    warning("%s\n", e.message);
-  }
+  if (key == DejaDup.LAST_RUN_KEY ||
+      key == DejaDup.PERIODIC_KEY ||
+      key == DejaDup.PERIODIC_PERIOD_KEY)
+    prepare_next_run();
+}
+
+static void watch_settings()
+{
+  var settings = DejaDup.get_settings();
+  settings.changed.connect(prepare_if_necessary);
 }
 
 static int main(string[] args)
@@ -355,7 +354,7 @@ static int main(string[] args)
   else
     Timeout.add_seconds(120, () => {prepare_next_run(); return false;});
 
-  watch_gconf();
+  watch_settings();
   loop.run();
   
   return 0;
