@@ -167,26 +167,27 @@ public Settings get_settings(string? subdir = null)
   return new Settings(schema);
 }
 
-const string SSH_USERNAME_KEY = "/apps/deja-dup/ssh/username";
-const string SSH_SERVER_KEY = "/apps/deja-dup/ssh/server";
-const string SSH_PORT_KEY = "/apps/deja-dup/ssh/port";
-const string SSH_DIRECTORY_KEY = "/apps/deja-dup/ssh/directory";
+const string SSH_USERNAME_KEY = "username";
+const string SSH_SERVER_KEY = "server";
+const string SSH_PORT_KEY = "port";
+const string SSH_DIRECTORY_KEY = "directory";
 
 // Once, we didn't use GIO, but had a special SSH backend for duplicity that
 // would tell duplicity to use its own SSH handling.  We convert those gconf
 // values to the new ones here.
 void convert_ssh_to_file()
 {
-  var client = get_gconf_client();
+  var settings = get_settings();
   try {
-    var backend = client.get_string(BACKEND_KEY);
+    var backend = settings.get_value(BACKEND_KEY).get_string();
     if (backend == "ssh") {
-      client.set_string(BACKEND_KEY, "file");
-      var server = client.get_string(SSH_SERVER_KEY);
+      settings.set_value(BACKEND_KEY, new Variant.string("file"));
+      var ssh_settings = get_settings("ssh");
+      var server = ssh_settings.get_value(SSH_SERVER_KEY).get_string();
       if (server != null && server != "") {
-        var username = client.get_string(SSH_USERNAME_KEY);
-        var port = client.get_int(SSH_PORT_KEY);
-        var directory = client.get_string(SSH_DIRECTORY_KEY);
+        var username = ssh_settings.get_value(SSH_USERNAME_KEY).get_string();
+        var port = ssh_settings.get_value(SSH_PORT_KEY).get_int32();
+        var directory = ssh_settings.get_value(SSH_DIRECTORY_KEY).get_string();
         
         var gio_uri = "ssh://";
         if (username != null && username != "")
@@ -201,7 +202,8 @@ void convert_ssh_to_file()
         else
           gio_uri += directory;
         
-        client.set_string(FILE_PATH_KEY, gio_uri);
+        var file_settings = get_settings("file");
+        file_settings.set_value(FILE_PATH_KEY, new Variant.string(gio_uri));
       }
     }
   }
