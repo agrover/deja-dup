@@ -122,7 +122,7 @@ public class DuplicityInstance : Object
       if (user_cmd == null)
         user_cmd = a;
       else
-        user_cmd = "%s %s".printf(user_cmd, a);
+        user_cmd = "%s %s".printf(user_cmd, Shell.quote(a));
     }
     
     if (as_root) {
