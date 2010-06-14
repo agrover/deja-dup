@@ -43,7 +43,7 @@ public class ConfigLocation : ConfigWidget
     var has_connect_prog = Environment.find_program_in_path("nautilus-connect-server") != null;
     if (has_connect_prog) {
       var button = new ButtonConnect();
-      var action_area = (Gtk.Box)dialog.action_area;
+      var action_area = (Gtk.Box)dialog.get_action_area();
       action_area.pack_end(button, false, false, 0);
       button.show_all();
     }

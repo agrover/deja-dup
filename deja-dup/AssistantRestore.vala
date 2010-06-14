@@ -283,7 +283,7 @@ public class AssistantRestore : AssistantOperation
     }
 
     realize();
-    var xid = Gdk.x11_drawable_get_xid(this.window);
+    var xid = Gdk.x11_drawable_get_xid(this.get_window());
 
     var rest_op = new DejaDup.OperationRestore(restore_location, date,
                                                restore_files, (uint)xid);
@@ -372,7 +372,7 @@ public class AssistantRestore : AssistantOperation
       mount_op = new MountOperationAssistant(this);
 
     realize();
-    var xid = Gdk.x11_drawable_get_xid(this.window);
+    var xid = Gdk.x11_drawable_get_xid(this.get_window());
 
     query_op = new DejaDup.OperationStatus((uint)xid);
     query_op.collection_dates.connect(handle_collection_dates);

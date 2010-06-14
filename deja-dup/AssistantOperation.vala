@@ -139,7 +139,7 @@ public abstract class AssistantOperation : Assistant
     string log_line = prefix + " " + parse_name;
 
     bool adjustment_at_end = false;
-    Gtk.Adjustment adjust = progress_text.vadjustment;
+    Gtk.Adjustment adjust = progress_scroll.get_vadjustment();
     if (adjust.value >= adjust.upper - adjust.page_size ||
         adjust.page_size == 0 || // means never been set, means not realized
         !progress_expander.expanded)

@@ -258,7 +258,8 @@ public class PreferencesDialog : Gtk.Dialog
     else
       handle_edit_location();
 
-    vbox.add(notebook);
+    var area = (Gtk.VBox)get_content_area();
+    area.add(notebook);
   }
   
   void handle_edit_location()

@@ -172,7 +172,7 @@ public class AssistantBackup : AssistantOperation
   protected override DejaDup.Operation create_op()
   {
     realize();
-    var xid = Gdk.x11_drawable_get_xid(this.window);
+    var xid = Gdk.x11_drawable_get_xid(this.get_window());
     return new DejaDup.OperationBackup((uint)xid);
   }
   
