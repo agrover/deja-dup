@@ -85,6 +85,9 @@ class DejaDupApp : Object
     
     DejaDup.initialize();
     var app = new Gtk.Application("org.gnome.DejaDup.Interface", ref args);
+
+    if (app.is_remote)
+      return 0;
     
     Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
     Gtk.Window.set_default_icon_name(Config.PACKAGE);
@@ -114,6 +117,12 @@ class DejaDupApp : Object
     }
 
     toplevel.destroy.connect((w) => {app.quit();});
+
+    app.add_window(toplevel);
+    app.activated.connect(() => {
+      var curtime = Gtk.get_current_event_time();
+      app.get_window().present_with_time(curtime);
+    });
 
     app.run();
 
