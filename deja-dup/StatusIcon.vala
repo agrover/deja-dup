@@ -98,7 +98,7 @@ public class StatusIcon : Object
         tooltip = this.action;
       if (this.progress > 0)
         tooltip = tooltip + "\n" + _("%.1f%% complete").printf(this.progress * 100);
-      hacks_status_icon_set_tooltip_text(gtkicon, tooltip);
+      gtkicon.set_tooltip_text(tooltip);
     }
 
     if (this.progress > 0)

@@ -25,16 +25,6 @@
 
 #include "whacks.h"
 
-void
-hacks_status_icon_set_tooltip_text (GtkStatusIcon *icon, const gchar *text)
-{
-#if GTK_CHECK_VERSION(2, 16, 0)
-  return gtk_status_icon_set_tooltip_text (icon, text);
-#else
-  return gtk_status_icon_set_tooltip (icon, text);
-#endif
-}
-
 /* This is done in whacks, because we can't encode the #ifdef HAVE_APPINDICATOR
    in vala (we can... but not have it carry through to the compiled C). */
 GObject *
@@ -56,18 +46,5 @@ hacks_status_icon_close_app_indicator (GObject *icon)
 {
 #ifdef HAVE_APPINDICATOR
   app_indicator_set_status(APP_INDICATOR(icon), APP_INDICATOR_STATUS_PASSIVE);
-#endif
-}
-
-GtkLabel *
-hacks_make_link_label (const gchar *text)
-{
-#if GTK_CHECK_VERSION(2, 18, 0)
-  GtkLabel *label = GTK_LABEL (g_object_ref_sink (gtk_label_new ("")));
-  gtk_label_set_markup (label, text);
-  gtk_label_set_track_visited_links (label, FALSE);
-  return label;
-#else
-  return NULL;
 #endif
 }

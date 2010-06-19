@@ -44,7 +44,7 @@ AM_GCONF_SOURCE_2
 AC_PATH_PROG(PO4A, po4a)
 
 # Checks for vala
-AC_PROG_VALAC([0.8.0])
+AC_PROG_VALAC([0.9.1.34])
 
 # Sets up gettext.
 GETTEXT_PACKAGE="$PACKAGE"
@@ -64,13 +64,13 @@ AC_DEFINE_UNQUOTED(LOCALE_DIR, "${PREFIX}/${DATADIRNAME}/locale",[Locale directo
 AC_DEFINE_UNQUOTED(THEME_DIR, "${PREFIX}/${DATADIRNAME}/icons",[Icon directory])
 AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package data directory])
 
-GTK_REQ_VER=2.18
-GLIB_REQ_VER=2.20
+GTK_REQ_VER=2.90
+GLIB_REQ_VER=2.25
 GIO_REQ_VER=$GLIB_REQ_VER
 
 # Check dependencies
 PKG_CHECK_MODULES(DUP,
-                  gtk+-2.0 >= $GTK_REQ_VER
+                  gtk+-3.0 >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
                   gconf-2.0
                   dbus-glib-1
@@ -79,10 +79,9 @@ AC_SUBST(DUP_CFLAGS)
 AC_SUBST(DUP_LIBS)
 
 PKG_CHECK_MODULES(PREF,
-                  gtk+-2.0 >= $GTK_REQ_VER
+                  gtk+-3.0 >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
-                  gconf-2.0
-                  unique-1.0)
+                  gconf-2.0)
 AC_SUBST(PREF_CFLAGS)
 AC_SUBST(PREF_LIBS)
 
@@ -96,7 +95,7 @@ AC_SUBST(COMMON_CFLAGS)
 AC_SUBST(COMMON_LIBS)
 
 PKG_CHECK_MODULES(WIDGETS,
-                  gtk+-2.0 >= $GTK_REQ_VER
+                  gtk+-3.0 >= $GTK_REQ_VER
                   gconf-2.0)
 AC_SUBST(WIDGETS_CFLAGS)
 AC_SUBST(WIDGETS_LIBS)
@@ -138,13 +137,13 @@ AC_ARG_WITH([appindicator],
   [],
   [with_appindicator=check])
 AS_IF([test "x$with_appindicator" != xno],
-  [PKG_CHECK_MODULES(APPINDICATOR, appindicator-0.1,
+  [PKG_CHECK_MODULES(APPINDICATOR, appindicator3-0.1,
     [AC_DEFINE(HAVE_APPINDICATOR)
      AC_SUBST(APPINDICATOR_CFLAGS)
      AC_SUBST(APPINDICATOR_LIBS)],
     [if test "x$with_appindicator" != xcheck; then
         AC_MSG_FAILURE(
-          [--with-appindicator was given, but test for appindicator failed])
+          [--with-appindicator was given, but test for appindicator3 failed])
       fi
     ]
   )]

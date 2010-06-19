@@ -58,16 +58,16 @@ class DejaDupApp : Object
 
   public static int main(string [] args)
   {
-    GLib.Intl.textdomain(Config.GETTEXT_PACKAGE);
-    GLib.Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
-    GLib.Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
+    Intl.textdomain(Config.GETTEXT_PACKAGE);
+    Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
+    Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
     
     // Translators: The name is a play on the French phrase "déjà vu" meaning
     // "already seen", but with the "vu" replaced with "dup".  "Dup" in this
     // context is itself a reference to both the underlying command line tool
     // "duplicity" and the act of duplicating data for backup.  As a whole, it
     // may not be very translatable.
-    GLib.Environment.set_application_name(_("Déjà Dup"));
+    Environment.set_application_name(_("Déjà Dup"));
     
     OptionContext context = new OptionContext("");
     context.add_main_entries(options, Config.GETTEXT_PACKAGE);
@@ -84,7 +84,7 @@ class DejaDupApp : Object
       return status;
     
     DejaDup.initialize();
-    Gtk.init(ref args); // to open display ('cause we passed false above)
+    var app = new Gtk.Application("org.gnome.DejaDup.Interface", ref args);
     
     Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
     Gtk.Window.set_default_icon_name(Config.PACKAGE);
@@ -102,12 +102,10 @@ class DejaDupApp : Object
       while (filenames[i] != null)
         file_list.append(File.new_for_commandline_arg(filenames[i++]));
       toplevel = new AssistantRestore.with_files(file_list);
-      toplevel.destroy.connect((t) => {Gtk.main_quit();});
       toplevel.show_all();
     }
     else if (backup_mode) {
       toplevel = new AssistantBackup(true);
-      toplevel.destroy.connect((t) => {Gtk.main_quit();});
       // specifically don't show
     }
     else {
@@ -115,9 +113,9 @@ class DejaDupApp : Object
       toplevel.show_all();
     }
 
-    toplevel.destroy.connect((w) => {Gtk.main_quit();});
+    toplevel.destroy.connect((w) => {app.quit();});
 
-    Gtk.main();
+    app.run();
 
     return 0;
   }

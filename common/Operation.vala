@@ -205,7 +205,7 @@ public abstract class Operation : Object
   
   bool claim_bus(bool claimed)
   {
-    bool rv = set_bus_claimed("operation", claimed);
+    bool rv = set_bus_claimed("Operation", claimed);
     if (claimed && !rv)
       raise_error(_("Another Déjà Dup is already running"), null);
     return rv;

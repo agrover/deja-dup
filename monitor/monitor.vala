@@ -232,7 +232,7 @@ static bool kickoff()
   }
 
   // Don't run right now if an instance is already running
-  if (pid == (Pid)0 && !DejaDup.test_bus_claimed("operation")) {
+  if (pid == (Pid)0 && !DejaDup.test_bus_claimed("Operation")) {
     try {
       string[] argv = new string[3];
       argv[0] = "deja-dup";
