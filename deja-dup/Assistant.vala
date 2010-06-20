@@ -21,7 +21,7 @@ using GLib;
 
 /**
  * Yes, this is a silly reimplementation of Gtk.Assistant.
- * But Gtk.Assistant has some rediculous map/unmap logic that resets the page
+ * But Gtk.Assistant has some ridiculous map/unmap logic that resets the page
  * history when unmapped and generally doesn't work when unmapped.  Since
  * continuing to work when hidden is important for us, this is a
  * reimplementation of just the bits we use.

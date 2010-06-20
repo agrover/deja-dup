@@ -74,14 +74,9 @@ class DejaDupPreferences : Object
       Gtk.Window.set_default_icon_name(Config.PACKAGE);
       
       pref_window = new PreferencesDialog();
+      pref_window.show_all();
       
       app.add_window(pref_window);
-      app.activated.connect(() => {
-        var curtime = Gtk.get_current_event_time();
-        app.get_window().present_with_time(curtime);
-      });
-      
-      pref_window.show_all();
       app.run();
     }
     

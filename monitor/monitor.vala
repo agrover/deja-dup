@@ -22,7 +22,6 @@ using GLib;
 
 class Monitor : Object {
 
-static MainLoop loop;
 static uint timeout_id;
 static Pid pid;
 static bool reactive_check;
@@ -318,14 +317,14 @@ static void watch_gconf()
 
 static int main(string[] args)
 {
-  GLib.Intl.textdomain(Config.GETTEXT_PACKAGE);
-  GLib.Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
-  GLib.Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
+  Intl.textdomain(Config.GETTEXT_PACKAGE);
+  Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
+  Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
   
   // Translators: Monitor in this sense means something akin to 'watcher', not
   // a computer screen.  This program acts like a daemon that kicks off
   // backups at scheduled times.
-  GLib.Environment.set_application_name(_("Déjà Dup Monitor"));
+  Environment.set_application_name(_("Déjà Dup Monitor"));
   
   OptionContext context = new OptionContext("");
   context.add_main_entries(options, Config.GETTEXT_PACKAGE);
@@ -347,7 +346,7 @@ static int main(string[] args)
   mon.ref(); // bug 569418; bad things happen when VM goes away
   mon.volume_added.connect(volume_added);
 
-  loop = new MainLoop(null, false);
+  var loop = new MainLoop(null, false);
 
   // Delay first check to give NetworkManager a chance to start up.
   if (testing)

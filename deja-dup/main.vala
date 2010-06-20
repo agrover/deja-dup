@@ -112,18 +112,11 @@ class DejaDupApp : Object
       // specifically don't show
     }
     else {
-      toplevel = new MainWindow();
+      toplevel = new MainWindow(app);
       toplevel.show_all();
     }
 
-    toplevel.destroy.connect((w) => {app.quit();});
-
     app.add_window(toplevel);
-    app.activated.connect(() => {
-      var curtime = Gtk.get_current_event_time();
-      app.get_window().present_with_time(curtime);
-    });
-
     app.run();
 
     return 0;
