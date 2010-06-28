@@ -282,6 +282,25 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			}
 			this.backups_queue.clear();
 		}
+		else if (page == summary_page) {
+			if (error_occurred)
+        set_page_title(page, _("Restore Failed"));
+      else {
+        set_page_title(page, _("Restore Finished"));
+
+				/* Count the number of files that had to be restored */
+				var numdels = 0; // Number of deleted files
+				foreach(var delfile in this.file_status) {
+					if (delfile.restore) {
+						numdels++;
+					}
+				}
+
+				summary_label.label = ngettext("Your file was successfully restored.",
+                                         "Your files were successfully restored.",
+                                         numdels);
+			}
+		}
 	}
 
 	protected void handle_listed_files(DejaDup.OperationFiles op, string date, string file) {
