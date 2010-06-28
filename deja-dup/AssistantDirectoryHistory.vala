@@ -247,7 +247,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
 
 	protected override void do_prepare(Assistant assist, Gtk.Widget page) {
 		stdout.printf("do_prepare");
-		//base.do_prepare(assist, page);
+		base.do_prepare(assist, page);
 
 		if (page == listfiles_page) {
 			stdout.printf("listfiles_page");
@@ -615,17 +615,12 @@ public class AssistantDirectoryHistory : AssistantOperation {
 		//restore_file.deleted.format("%FT%T%z"))
 		//stdout.printf("name:%s time: %s", restore_file, restore_file.deleted.format("%FT%T%z"));
 		//restore_file.split(" ")[1]]
+		
 		var rest_op = new DejaDup.OperationRestore("/", 
 		    																			 restore_file.deleted.format("%s"),
 		    																			 restore_files,
 		    																			 (uint)xid);
-		/*rest_op.done.connect((op)=>{
-			if (this.restore_queue.size != 0) {
-				this.create_op();
-			}
-		});*/
 		return rest_op;
-    //return new DejaDup.OperationBackup((uint)xid);
   }
 		
 	protected override string get_progress_file_prefix(){
