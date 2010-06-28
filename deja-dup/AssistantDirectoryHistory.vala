@@ -64,6 +64,19 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	Gtk.TreeIter restoreiter;
 	Gtk.ListStore listmodel;
 	Gtk.ListStore restoremodel;
+
+	/* List files page */
+	Gtk.Label current_scan_date = new Gtk.Label("");
+	Gtk.Spinner spinner = new Gtk.Spinner();
+	
+	/* Confirmation page related widgets */
+	Gtk.Label label;
+	Gtk.Table restore_files_table;
+	/*
+		Gtk.Table in Glade needs to be set at least to 1 at start. When we update
+		our table we start from 0 because we first resize table.
+	 */
+	int restore_files_table_rows = 0;
 	
 	public AssistantDirectoryHistory(File list_dir) {
 			list_directory = list_dir;
@@ -102,10 +115,24 @@ public class AssistantDirectoryHistory : AssistantOperation {
 				var window = builder.get_object("viewport") as Gtk.Widget;
 					//var treeview = builder.get_object("treeview") as Gtk.TreeView;
 				var filelistwindow = builder.get_object("filelistwindow") as Gtk.ScrolledWindow;
+				var status_table = builder.get_object("backup_table") as Gtk.Table;
+				var progress_table = builder.get_object("progress_table") as Gtk.Table;
+
+				/* Add backup and scan information */
+				/* Backup source */
+				Gtk.Widget w = new DejaDup.ConfigLabelLocation();
+				status_table.attach(w, 1, 2, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+
+				/* Spinner */
+				this.spinner.start();
+				progress_table.attach(this.spinner, 1, 2, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+
+				/* Current date of scan */
+				progress_table.attach(this.current_scan_date, 2, 3, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
 				
 				this.listmodel = new Gtk.ListStore (3, typeof (bool), typeof (string), typeof (string));
 				var treeview = new Gtk.TreeView.with_model (this.listmodel);
-				//treeview.set_model(this.listmodel);					
+				//treeview.set_model(this.listmodel);
 
 				var toggle = new Gtk.CellRendererToggle();
 				toggle.toggled.connect ((toggle, path) => {
@@ -156,7 +183,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
 						}
 						this.backups_queue.clear();
 					}
-				});*/				
+				});*/						
 				window.reparent(page);
 				return page;
 			} catch (Error err) {
@@ -206,7 +233,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	void add_listfiles_page() {
 		var page = make_listfiles_page();
 		append_page(page);
-		set_page_title(page, _("List Files"));
+		set_page_title(page, _("Deleted Files"));
 		listfiles_page = page;
 		//selectfiles_page = page;
 	}
@@ -231,16 +258,26 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			//do_query();
 		}
 		else if (page == confirm_page) {
-			stdout.printf("confirm page\n");
+			stdout.printf("\nconfirm page\n");
+			
 			foreach(var delfile in this.file_status) {
 				if (delfile.restore)
 				{
 					stdout.printf("OFFERING: %s\n\n", delfile.name);
+					//stdout.printf("number of relevent rows: %u", this.restore_files_table.nrows);
 					//this.restore_queue.push_tail(delfile.queue_format());
 					this.restore_queue.offer(delfile);
-
-					this.restoremodel.append (out this.restoreiter);
-        	this.restoremodel.set(this.restoreiter, 0, delfile.name);
+					stdout.printf("rowz: %u\n", this.restore_files_table.nrows);
+					//stdout.printf(restore_files_table);
+					this.restore_files_table_rows++;
+					this.restore_files_table.resize(this.restore_files_table_rows, 1);
+					
+					label = new Gtk.Label(delfile.filename());
+					label.set("xalign", 0.0f);
+					label.show();
+					this.restore_files_table.attach(label, 0, 1, this.restore_files_table_rows-1, this.restore_files_table_rows, Gtk.AttachOptions.FILL, 0, 0, 0);
+					/*this.restoremodel.append (out this.restoreiter);
+        	this.restoremodel.set(this.restoreiter, 0, delfile.name);*/
 				}
 			}
 			this.backups_queue.clear();
@@ -348,6 +385,10 @@ public class AssistantDirectoryHistory : AssistantOperation {
 		
 	protected void do_query_files_at_date(){			
 		Time etime = backups_queue.poll();
+
+		/* Update progress */
+		this.current_scan_date.set_text(etime.format("%c"));
+		
 		stdout.printf("ADH do query, at epoch time: %s\n", etime.format("%c"));
 		if (mount_op == null)
       mount_op = new MountOperationAssistant(this);
@@ -462,7 +503,9 @@ public class AssistantDirectoryHistory : AssistantOperation {
     this.op = null;
 		
 		if (backups_queue.size == 0) {
-			query_wrapup();
+			this.spinner.stop();
+			this.spinner.destroy();
+			this.current_scan_date.set_text("Done!");
 		}
 		else {
 			do_query_files_at_date();
@@ -481,14 +524,46 @@ public class AssistantDirectoryHistory : AssistantOperation {
 		page.name = "confirm_page";
 		var builder = new Gtk.Builder();
 		try {
-			builder.add_from_file("interface/restorefiles.glade");
-			//builder.add_from_file("interface/listfiles-crt-out.ui");
-			builder.connect_signals(this);
+			//builder.add_from_file("interface/restorefiles.glade");
+			builder.add_from_file("interface/directory_history_summary.glade");
+			//builder.connect_signals(this);
 			
 			var window = builder.get_object("viewport") as Gtk.Widget;
+			var backup_source_properties = builder.get_object("backup_properties") as Gtk.Table;
+			restore_files_table = builder.get_object("restore_files") as Gtk.Table;
+			Gtk.Widget w;
 
-			//restorefileswindow
-			var restorefiles = builder.get_object("restorefileswindow") as Gtk.ScrolledWindow;
+			w = new DejaDup.ConfigLabelLocation();
+			backup_source_properties.attach(w, 1, 2, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+
+			w = new DejaDup.ConfigLabelBool(DejaDup.ENCRYPT_KEY);
+			backup_source_properties.attach(w, 1, 2, 1, 2, Gtk.AttachOptions.FILL, 0, 0, 0);
+
+			//var label = new Gtk.Label("make_confirm_page");
+			//label.set("xalign", 0.0f);
+			//restore_files_table.attach(label, 0, 1, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+			/*label = new Gtk.Label("meh 2");
+			label.set("xalign", 0.0f);
+			restore_files_table.attach(label, 0, 1, 1, 2, Gtk.AttachOptions.FILL, 0, 0, 0);*/
+
+			//int rows = 2;
+			/*for (var i=0; i<50; i++){
+				label = new Gtk.Label("row %d".printf(rows));
+				label.set("xalign", 0.0f);
+				rows++;
+				restore_files_table.resize(rows, 1);
+				restore_files_table.attach(label, 0, 1, rows, rows+1, Gtk.AttachOptions.FILL, 0, 0, 0);
+			}*/
+    	
+			//stdout.printf(restore_files_table);
+			
+    	//label.set("xalign", 0.0f);
+			//restore_files_table.attach(label, 0, 1, 1, 2, Gtk.AttachOptions.FILL, 0, 0, 0);
+			//int rows = 0;
+			//confirm_table = new Gtk.Table(rows, 1, false);
+			
+
+			/*var restorefiles = builder.get_object("restorefileswindow") as Gtk.ScrolledWindow;
 			
 			this.restoremodel = new Gtk.ListStore(1, typeof(string));
 			var _tree_view = new Gtk.TreeView.with_model(this.restoremodel);
@@ -496,10 +571,9 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			_tree_view.insert_column_with_attributes(-1, "File name", new Gtk.CellRendererText(), "text", 0);
 
 			_tree_view.set_headers_visible (true);	
-			restorefiles.add_with_viewport(_tree_view);
+			restorefiles.add_with_viewport(_tree_view);*/
 
 			window.reparent(page);
-			//this.page = page;
 			return page;
 		} catch (Error err) {
 			warning("Error: %s", err.message);
