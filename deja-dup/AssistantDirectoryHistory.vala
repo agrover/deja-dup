@@ -408,7 +408,32 @@ public class AssistantDirectoryHistory : AssistantOperation {
 		Time etime = backups_queue.poll();
 
 		/* Update progress */
-		this.current_scan_date.set_text(etime.format("%c"));
+		int tepoch = etime.format("%s").to_int();
+		TimeVal ttoday = TimeVal();
+		ttoday.get_current_time();
+		int ttodayi = (int) ttoday.tv_sec;
+
+		string worddiff;
+		int tdiff =  (ttodayi - tepoch)/60/60; // Hours
+		if (tdiff / 24 == 0 ) {
+			worddiff = _("Last day");
+		}
+		else if (tdiff / 24 / 7 == 0) {
+			worddiff = _("Last week");
+		}
+		else if (tdiff / 24 / 30 == 0) {
+			worddiff = _("Last month");
+		}
+		else if (tdiff / 24 / 30 > 1 && tdiff / 24 / 30 < 12) {
+			int n = tdiff / 24 / 30;
+			worddiff = _(@"About $n months ago");
+		}
+		else {
+			int n = tdiff / 24 / 30 / 12;
+			worddiff = _(@"About $n years ago");
+		}
+		//stdout.printf("\n\ntepch: %i, ttodayi: %i, tdiff: %i\n\n", tepoch, ttodayi, tdiff);
+		this.current_scan_date.set_text(worddiff);
 		
 		stdout.printf("ADH do query, at epoch time: %s\n", etime.format("%c"));
 		if (mount_op == null)
