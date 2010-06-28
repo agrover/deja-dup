@@ -14,8 +14,6 @@ public class DeletedFile {
 		public string filename() {
 			var splited_fn = this.name.split("/");
 			stdout.printf("filename: %s\n", splited_fn[splited_fn.length-1]);
-			//return this.name.split("/")[-1];
-			//return this.name;
 			return splited_fn[splited_fn.length-1];
 		}
 
@@ -66,7 +64,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	Gtk.ListStore restoremodel;
 
 	/* List files page */
-	Gtk.Label current_scan_date = new Gtk.Label("");
+	Gtk.Label current_scan_date = new Gtk.Label(_("Starting..."));
 	Gtk.Spinner spinner = new Gtk.Spinner();
 	
 	/* Confirmation page related widgets */
@@ -124,7 +122,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
 				status_table.attach(w, 1, 2, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
 
 				/* Spinner */
-				this.spinner.start();
 				progress_table.attach(this.spinner, 1, 2, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
 
 				/* Current date of scan */
@@ -134,6 +131,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
 				var treeview = new Gtk.TreeView.with_model (this.listmodel);
 				//treeview.set_model(this.listmodel);
 
+				/* Toggle code for checkbox */
 				var toggle = new Gtk.CellRendererToggle();
 				toggle.toggled.connect ((toggle, path) => {
 					stdout.printf("%s\n",this.file_status[path.to_int()].name);
@@ -251,12 +249,14 @@ public class AssistantDirectoryHistory : AssistantOperation {
 
 		if (page == listfiles_page) {
 			stdout.printf("listfiles_page");
-			do_query_collection_dates();
+			
 			if (op != null && op.needs_password){
 				provide_password();
 			}
+			do_query_collection_dates();
 			//do_query();
 		}
+		
 		else if (page == confirm_page) {
 			stdout.printf("\nconfirm page\n");
 			
@@ -371,6 +371,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
 
 		this.allfiles_prev = files_in_directory();
 		this.backups_queue_filled = true;
+
+		this.spinner.start();
 		do_query_files_at_date();
 	}
 
