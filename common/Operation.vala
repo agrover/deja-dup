@@ -98,7 +98,6 @@ public abstract class Operation : Object
   construct
   {
     dup = new Duplicity(mode);
-
     try {
       backend = Backend.get_default();
     }
@@ -109,8 +108,8 @@ public abstract class Operation : Object
   
   public virtual void start() throws Error
   {
-    action_desc_changed(_("Preparing…"));
-
+    stdout.printf("\nbase Operation.start()\n\n");
+    action_desc_changed(_("Preparing…"));    
     if (backend == null) {
       done(false, false);
       return;
@@ -122,16 +121,19 @@ public abstract class Operation : Object
       done(false, false);
       return;
     }
+    stdout.printf("setting session, encryption needed?\n");
     set_session_inhibited(true);
-    
     // Get encryption passphrase if needed
     var client = get_gconf_client();
     if (client.get_bool(ENCRYPT_KEY) && passphrase == null) {
+      stdout.printf("nimam passa, lets get it!\n");
       needs_password = true;
       passphrase_required(); // will call continue_with_passphrase when ready
     }
-    else
+    else {
+      stdout.printf("nadaljujemo z continue_with_passphrase");
       continue_with_passphrase(passphrase);
+    }
   }
   
   public void cancel()
@@ -146,6 +148,9 @@ public abstract class Operation : Object
   
   protected virtual void connect_to_dup()
   {
+    /*
+     * Connect Deja Dup to signals
+     */
     dup.done.connect(operation_finished);
     dup.raise_error.connect((d, s, detail) => {raise_error(s, detail);});
     dup.action_desc_changed.connect((d, s) => {action_desc_changed(s);});
@@ -158,6 +163,7 @@ public abstract class Operation : Object
   
   public void continue_with_passphrase(string? passphrase)
   {
+    stdout.printf("\ncontinue_with_passphrase\n");
     needs_password = false;
     this.passphrase = passphrase;
     try {
@@ -170,6 +176,12 @@ public abstract class Operation : Object
   }
   
   void continue_with_envp(DejaDup.Backend b, bool success, List<string>? envp, string? error) {
+    /*
+     * Starts Duplicity backup with added enviroment variables
+     * 
+     * Start Duplicity backup process with costum values for enviroment variables.
+     */
+    stdout.printf("continue_with_envp\n");
     if (!success) {
       if (error != null)
         raise_error(error, null);

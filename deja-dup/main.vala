@@ -54,6 +54,19 @@ class DejaDupApp : Object
         return false;
       }
     }
+
+    if (dirhistory_mode) {
+      if (filenames == null) {
+        printerr("%s\n", _("No directory provided"));
+        status = 1;
+        return false;
+      }
+      else if (filenames.length > 1) {
+        printerr("%s\n", _("Only one directory can be shown at once"));
+        status = 1;
+        return false;
+      }
+    }
     
     return true;
   }
@@ -113,7 +126,7 @@ class DejaDupApp : Object
       // specifically don't show
     }
     else if (dirhistory_mode){
-      try {
+      //try {
         //toplevel = new AssistantDirectoryHistory();
         /*var assdirhist = new AssistantDirectoryHistory();
         var intdirhist = new InterfaceDirectoryHistory();
@@ -123,12 +136,18 @@ class DejaDupApp : Object
         //builder.connect_signals(null);
         var window = builder.get_object("window") as Gtk.Window;*/
         
-        toplevel = new AssistantDirectoryHistory();
+        //List<File> file_list = new List<File>();
+        
+        //file_list.append(File.new_for_commandline_arg(filenames[i++]));
+        File list_directory = File.new_for_commandline_arg(filenames[0]);
+
+        //return 1;
+        toplevel = new AssistantDirectoryHistory(list_directory);
         toplevel.destroy.connect((t) => {Gtk.main_quit();});
         toplevel.show_all();
-      } catch (Error e) {
+      /*} catch (Error e) {
         stderr.printf("ni ni interfejsa: %s\n", e.message);
-      }
+      }*/
     }
     else {
       toplevel = new MainWindow();

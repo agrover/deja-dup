@@ -315,6 +315,13 @@ public class AssistantRestore : AssistantOperation
 
   protected void handle_collection_dates(DejaDup.OperationStatus op, List<string>? dates)
   {
+    /*
+     * Receives list of dates of backups and shows them to user
+     *
+     * After receiving list of dates at which backups were performed function
+     * converts dates to TimeVal structures and later converts them to Time to
+     * time to show them in nicely formate local form.
+     */
     var timevals = new List<TimeVal?>();
     TimeVal tv = TimeVal();
     

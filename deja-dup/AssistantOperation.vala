@@ -28,6 +28,15 @@ public abstract class AssistantOperation : Assistant
    * assistant. Required methods that all classes that inherit from this
    * class must implement are create_op, make_confirm_page and
    * get_progress_file_prefix.
+   *
+   * Pages are shown in the following order:
+   * 1. (Optional) Custom configuration pages
+   * 2. Setup pages
+   * 3. Confirmation page
+   * 4. Password page
+   * 5. Question page
+   * 6. (Required) Progress page
+   * 7. Summary
    */
   protected Gtk.Widget confirm_page {get; private set;}
   public signal void closing(bool success);
@@ -414,7 +423,7 @@ public abstract class AssistantOperation : Assistant
     summary_page = page;
   }
   
-  void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
+  protected virtual void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
     status_icon = null;
     this.op = null;
@@ -435,9 +444,15 @@ public abstract class AssistantOperation : Assistant
     }
   }
   
-  void do_apply()
+  protected void do_apply()
   {
-    
+    /*
+     * Applies/starts operation that was configured during assistant process and
+     * connect appropriate signals
+     *
+     * Mounts appropriate backend, creates child operation, connects signals to
+     * handler functions and starts operation.
+     */
     if (mount_op == null)
       mount_op = new MountOperationAssistant(this);
 
@@ -469,6 +484,17 @@ public abstract class AssistantOperation : Assistant
 
   protected virtual void do_prepare(Assistant assist, Gtk.Widget page)
   {
+    /*
+     * Prepare page in assistant
+     *
+     * Prepares every page in assistant for various operations. For example, if 
+     * user returns to confirmation page from progress page, it is necessary
+     * to kill running operation. If user advances to progress page, it runs
+     * do_apply and runs the needed operation.
+     *
+     * do_prepare is run when user switches pages and not when pages are built.
+     */
+
     if (timeout_id > 0) {
       Source.remove(timeout_id);
       timeout_id = 0;
@@ -569,24 +595,32 @@ public abstract class AssistantOperation : Assistant
 
   void found_passphrase(GnomeKeyring.Result result, string? str)
   {
-    if (str != null)
+    stdout.printf("found_passphrase\n");
+    if (str != null) {
+      stdout.printf("mam passphrase\n");
       op.continue_with_passphrase(str);
-    else
+    }
+    else {
+      stdout.printf("sprasujem za passphrase\n");
       ask_passphrase();
+    }
   }
 
   protected void get_passphrase()
   {
+    stdout.printf("\nget_passphrase\n");
     // DEJA_DUP_TESTING only set when we are in test suite
     var testing = Environment.get_variable("DEJA_DUP_TESTING");
     if (testing == null || testing == "") {
       // First, try user's keyring
+      stdout.printf("pass v keyringu\n");
       GnomeKeyring.find_password(PASSPHRASE_SCHEMA,
                                  found_passphrase,
                                  "owner", Config.PACKAGE,
                                  "type", "passphrase");
     }
     else {
+      stdout.printf("\nasking user\n");
       // just jump straight to asking user
       ask_passphrase();
     }
@@ -619,7 +653,7 @@ public abstract class AssistantOperation : Assistant
       }
     }
     
-    op.continue_with_passphrase(passphrase);
+    //op.continue_with_passphrase(passphrase);
   }
 
   void stop_question(Gtk.Dialog dlg, int resp)

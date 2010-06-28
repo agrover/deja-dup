@@ -276,6 +276,12 @@ public class DuplicityInstance : Object
   
   async void read_log_lines()
   {
+    /*
+     * Process data from stream that is returned by read_log
+     *
+     * As reader returns lines that are outputed by duplicity, read_log_lines makes sure
+     * that data is processed at right speed and passes that data along the chain of functions. 
+     */
     List<string> stanza = new List<string>();
     while (reader != null) {
       try {
@@ -324,6 +330,11 @@ public class DuplicityInstance : Object
 
   async void read_log()
   {
+   /*
+    * Asynchronous reading of duplicity's log via stream
+    *
+    * Stream initiated either from log file or pipe
+    */
     try {
       InputStream stream;
       
@@ -509,6 +520,10 @@ public class DuplicityInstance : Object
   
   void process_stanza(List<string> stanza)
   {
+    /*
+     * Split the line/stanza that was echoed by stream and pass it forward in a 
+     * more structured way via a signal.
+     */
     string[] control_line;
     split_line(stanza.data, out control_line);
     
@@ -522,6 +537,9 @@ public class DuplicityInstance : Object
   
   List<string> grab_stanza_data(List<string> stanza)
   {
+    /*
+     * Return only data from stanza that was returned by stream
+     */
     var list = new List<string>();
     stanza = stanza.next; // skip first control line
     foreach (string line in stanza) {

@@ -261,6 +261,7 @@ public class BackendFile : Backend
   public override async void get_envp() throws Error
   {
     try {
+      stdout.printf("get_envp mount file\n");
       yield mount_file();
     }
     catch (Error e) {

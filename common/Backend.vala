@@ -37,6 +37,7 @@ public abstract class Backend : Object
   public virtual bool is_ready(out string when) {when = null; return true;} // must be callable when nothing is mounted, nothing is prepared
 
   public virtual async void get_envp() throws Error {
+    stdout.printf("get_envp\n");
     envp_ready(true, new List<string>());
   }
   
