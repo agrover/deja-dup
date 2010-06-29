@@ -108,7 +108,6 @@ public abstract class Operation : Object
   
   public virtual void start() throws Error
   {
-    stdout.printf("\nbase Operation.start()\n\n");
     action_desc_changed(_("Preparing…"));    
     if (backend == null) {
       done(false, false);
@@ -121,17 +120,14 @@ public abstract class Operation : Object
       done(false, false);
       return;
     }
-    stdout.printf("setting session, encryption needed?\n");
     set_session_inhibited(true);
     // Get encryption passphrase if needed
     var client = get_gconf_client();
     if (client.get_bool(ENCRYPT_KEY) && passphrase == null) {
-      stdout.printf("nimam passa, lets get it!\n");
       needs_password = true;
       passphrase_required(); // will call continue_with_passphrase when ready
     }
     else {
-      stdout.printf("nadaljujemo z continue_with_passphrase");
       continue_with_passphrase(passphrase);
     }
   }
@@ -166,7 +162,6 @@ public abstract class Operation : Object
    /*
     * Continues with operation after passphrase has been acquired.
     */
-    stdout.printf("\ncontinue_with_passphrase\n");
     needs_password = false;
     this.passphrase = passphrase;
     try {
@@ -184,7 +179,6 @@ public abstract class Operation : Object
      * 
      * Start Duplicity backup process with costum values for enviroment variables.
      */
-    stdout.printf("continue_with_envp\n");
     if (!success) {
       if (error != null)
         raise_error(error, null);

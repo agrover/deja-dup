@@ -217,7 +217,6 @@ public class Duplicity : Object
   }
   
   public void cancel() {
-    stdout.printf("\n\nCanceling duplicity\n\n");
     var prev_mode = mode;
     mode = Operation.Mode.INVALID;
     
@@ -901,7 +900,6 @@ public class Duplicity : Object
   
   void process_collection_status(List<string>? lines)
   {
-    stdout.printf("duplicity.process_collection_status\n");
     /*
      * Collect output of collection status and return list of dates as strings via a signal
      *

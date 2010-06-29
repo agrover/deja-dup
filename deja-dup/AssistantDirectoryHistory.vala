@@ -22,7 +22,6 @@ public class DeletedFile {
 
 		public string filename() {
 			var splited_fn = this.name.split("/");
-			stdout.printf("filename: %s\n", splited_fn[splited_fn.length-1]);
 			return splited_fn[splited_fn.length-1];
 		}
 
@@ -185,12 +184,11 @@ public class AssistantDirectoryHistory : AssistantOperation {
 				this.listmodel = new Gtk.ListStore (3, typeof (bool), typeof (string), typeof (string));
 				var treeview = new Gtk.TreeView.with_model (this.listmodel);
 				//treeview.set_model(this.listmodel);
-
-				/* Toggle code for checkbox */
 				var toggle = new Gtk.CellRendererToggle();
 				toggle.toggled.connect ((toggle, path) => {
-					stdout.printf("%s\n",this.file_status[path.to_int()].name);
-					
+					  /*
+						 * Function for toggling state of checkbox
+						 */
 					if (!this.file_status[path.to_int()].restore)
 						this.file_status[path.to_int()].restore = true;
 					else
@@ -299,11 +297,9 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	}*/
 
 	protected override void do_prepare(Assistant assist, Gtk.Widget page) {
-		stdout.printf("do_prepare");
 		base.do_prepare(assist, page);
 
 		if (page == listfiles_page) {
-			stdout.printf("listfiles_page");
 
 			if (!scan_queue) {
 				do_query_files_at_date();
@@ -320,17 +316,14 @@ public class AssistantDirectoryHistory : AssistantOperation {
 		}
 		
 		else if (page == confirm_page) {
-			stdout.printf("\nconfirm page\n");
 			scan_queue = false;
 			
 			foreach(var delfile in this.file_status) {
 				if (delfile.restore)
 				{
-					stdout.printf("OFFERING: %s\n\n", delfile.name);
 					//stdout.printf("number of relevent rows: %u", this.restore_files_table.nrows);
 					//this.restore_queue.push_tail(delfile.queue_format());
 					this.restore_queue.offer(delfile);
-					stdout.printf("rowz: %u\n", this.restore_files_table.nrows);
 					//stdout.printf(restore_files_table);
 					this.restore_files_table_rows++;
 					this.restore_files_table.resize(this.restore_files_table_rows, 1);
@@ -439,7 +432,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			 * @param //DejaDup.OperationStatus// ''op'' Operation currently being run
 			 * @param //GLib.List<string>?// ''dates'' ISO 8601 dates of backups.
 			 */
-		stdout.printf("\nhandle collection_dates\n");
     TimeVal tv = TimeVal();
 
 		if (!this.backups_queue_filled) {
@@ -447,7 +439,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			for(var i=dates.length()-1;i > 0;i--){
 				if (tv.from_iso8601(dates.nth(i).data)) {
 					Time t = Time.local(tv.tv_sec);
-					stdout.printf("time of backup: d: %s, tse: %s, cd: %s\n", dates.nth(i).data, t.format("%s"), t.format("%c"));
 					this.backups_queue.offer(t);
 				}
 			}
@@ -467,7 +458,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			 * Initializes query operation and links appropriate signals for when operation
 			 * finishes and when it receives duplicity's output.
 			 */
-		stdout.printf("\ndo_query_collection_dates\n");
 		realize();
     var xid = Gdk.x11_drawable_get_xid(this.window);
 			
@@ -484,7 +474,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
 
 		try {
-			stdout.printf("query_collection_dates start\n");
       query_op_collection_dates.start();
     }
     catch (Error e) {
@@ -532,10 +521,9 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			int n = tdiff / 24 / 30 / 12;
 			worddiff = _(@"About $n years ago");
 		}
-		//stdout.printf("\n\ntepch: %i, ttodayi: %i, tdiff: %i\n\n", tepoch, ttodayi, tdiff);
+
 		this.current_scan_date.set_text(worddiff);
 		
-		stdout.printf("ADH do query, at epoch time: %s\n", etime.format("%c"));
 		if (mount_op == null)
       mount_op = new MountOperationAssistant(this);
 
@@ -569,17 +557,14 @@ public class AssistantDirectoryHistory : AssistantOperation {
 		query_op_collection_dates = null;
     op = null;
     
-    if (cancelled) {
+    if (cancelled)
       do_close();
-			//stdout.printf("fail\n");
-		}
-    else if (success)
+    //else if (success)
       //go_forward();
-			stdout.printf("success\n");
+		//	stdout.printf("success\n");
 	}
 
 	protected void query_wrapup() {
-		stdout.printf("\nQUERY WRAPUP\n");
 		//var deleted = new ArrayList<string>();
 
 		/*var iterator = files_at_epoch.map_iterator();
@@ -638,26 +623,19 @@ public class AssistantDirectoryHistory : AssistantOperation {
     //status_icon = null; PRIV PARAMETER - FIXIT!
     op = null;
 
-		stdout.printf("\n\napply_finished\n\n");
-
     if (cancelled) {
       if (success) // stop (resume later) vs cancel
         Gtk.main_quit();
       else {
-				stdout.printf("do close!\n");
 				do_close();
 			}
     }
     else {
       if (success) {
         succeeded = true;
-				stdout.printf("restore queue size: %u", this.restore_queue.size);
-				stdout.printf("what to restore: %s\n", this.restore_queue.peek().name);
 				if (this.restore_queue.size > 0) {
-					stdout.printf("apply finished v ADH; we need more restoring!");
 					base.do_apply();
 				} else {
-					stdout.printf("no more files to restore");
 					go_to_page(summary_page);
 				}
       }
@@ -684,13 +662,11 @@ public class AssistantDirectoryHistory : AssistantOperation {
 				do_query_files_at_date();
 		}
     
-    if (cancelled) {
+    if (cancelled)
       do_close();
-			stdout.printf("fail\n");
-		}
-    else if (success)
+    //else if (success)
       //go_forward();
-			stdout.printf("success\n");
+			//stdout.printf("success\n");					
   }
 
 	protected override Gtk.Widget? make_confirm_page(){
@@ -758,27 +734,17 @@ public class AssistantDirectoryHistory : AssistantOperation {
 		}
 	}
 
-	/*protected override DejaDup.Operation create_op() {
-		realize();
-		stdout.printf("create_op");
-		var xid = Gdk.x11_drawable_get_xid(this.window);
-		return new DejaDup.OperationFiles((uint)xid);
-	}*/
 	protected override DejaDup.Operation create_op()
   {
 			/*
 			 * Creates operation that is then called by do_apply.
 			 */
-		stdout.printf("create_op\n");
     realize();
     var xid = Gdk.x11_drawable_get_xid(this.window);
 		/*	var rest_op = new DejaDup.OperationRestore(restore_location, date,
                                                restore_files, (uint)xid);*/
 
-		stdout.printf("resture queue before length: %x\n", this.restore_queue.size);
-
 		var restore_file = this.restore_queue.poll();
-		stdout.printf("resture queue before after: %x\n", this.restore_queue.size);
 		//var restore_file = restore_queue.nth(0);
 		//var restore_file = restore_queue.pop_head();
 		//restore_queue.remove(restore_file);

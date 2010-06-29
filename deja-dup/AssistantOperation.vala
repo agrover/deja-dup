@@ -529,10 +529,8 @@ public abstract class AssistantOperation : Assistant
 
   protected virtual void do_cancel()
   {
-    stdout.printf("\n\ndo_cancel\n\n");
     hide_everything();
     if (op != null) {
-      stdout.printf("\nop != null => op.cancel\n");
       op.cancel(); // do_close will happen in done() callback
     }
     else
@@ -598,32 +596,26 @@ public abstract class AssistantOperation : Assistant
 
   void found_passphrase(GnomeKeyring.Result result, string? str)
   {
-    stdout.printf("found_passphrase\n");
     if (str != null) {
-      stdout.printf("mam passphrase\n");
       op.continue_with_passphrase(str);
     }
     else {
-      stdout.printf("sprasujem za passphrase\n");
       ask_passphrase();
     }
   }
 
   protected void get_passphrase()
   {
-    stdout.printf("\nget_passphrase\n");
     // DEJA_DUP_TESTING only set when we are in test suite
     var testing = Environment.get_variable("DEJA_DUP_TESTING");
     if (testing == null || testing == "") {
       // First, try user's keyring
-      stdout.printf("pass v keyringu\n");
       GnomeKeyring.find_password(PASSPHRASE_SCHEMA,
                                  found_passphrase,
                                  "owner", Config.PACKAGE,
                                  "type", "passphrase");
     }
     else {
-      stdout.printf("\nasking user\n");
       // just jump straight to asking user
       ask_passphrase();
     }

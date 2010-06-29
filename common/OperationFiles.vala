@@ -33,8 +33,6 @@ public class OperationFiles : Operation {
 
 	public override void start() throws Error
   {
-		//stdout.printf("operation files.start() with epoch time %s\n", time.format("%c"));
-		stdout.printf("operation files start()\n");
 		base.start();
   }
 

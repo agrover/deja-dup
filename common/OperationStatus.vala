@@ -32,14 +32,10 @@ public class OperationStatus : Operation
   protected override void connect_to_dup()
   {
     dup.collection_dates.connect((d, dates) => {collection_dates(dates);});
-    dup.collection_dates.connect((d, dates) => {
-      stdout.printf("collection_dates was called\n");
-    });
     base.connect_to_dup();
   }
 
   protected override void operation_finished(Duplicity dup, bool success, bool cancelled) {
-    stdout.printf("Operation status.operation_finished\n");
     base.operation_finished(dup, success, cancelled);
   }
 }
