@@ -426,7 +426,7 @@ public abstract class AssistantOperation : Assistant
   protected virtual void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
     status_icon = null;
-    this.op = null;
+    op = null;
 
     if (cancelled) {
       if (success) // stop (resume later) vs cancel
@@ -527,11 +527,14 @@ public abstract class AssistantOperation : Assistant
     status_icon = null; // hide immediately to seem responsive
   }
 
-  void do_cancel()
+  protected virtual void do_cancel()
   {
+    stdout.printf("\n\ndo_cancel\n\n");
     hide_everything();
-    if (op != null)
+    if (op != null) {
+      stdout.printf("\nop != null => op.cancel\n");
       op.cancel(); // do_close will happen in done() callback
+    }
     else
       do_close();
   }

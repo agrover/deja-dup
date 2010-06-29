@@ -163,6 +163,9 @@ public abstract class Operation : Object
   
   public void continue_with_passphrase(string? passphrase)
   {
+   /*
+    * Continues with operation after passphrase has been acquired.
+    */
     stdout.printf("\ncontinue_with_passphrase\n");
     needs_password = false;
     this.passphrase = passphrase;

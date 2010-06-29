@@ -217,6 +217,7 @@ public class Duplicity : Object
   }
   
   public void cancel() {
+    stdout.printf("\n\nCanceling duplicity\n\n");
     var prev_mode = mode;
     mode = Operation.Mode.INVALID;
     

@@ -25,6 +25,9 @@ public class DeletedFile {
 }
 
 public class AssistantDirectoryHistory : AssistantOperation {
+	/*
+	 * Assistant for searching through 
+	 */
 	private File list_directory;
 
 	private bool backups_queue_filled = false;
@@ -47,6 +50,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	}
 
 	private bool scan_queue = true;
+	private bool cancel_assistant = false;
 	private PriorityQueue<Time?> backups_queue = new PriorityQueue<Time?>((CompareFunc) compare_time);
 	private PriorityQueue<DeletedFile?> restore_queue = new PriorityQueue<DeletedFile?>();
 
@@ -426,7 +430,14 @@ public class AssistantDirectoryHistory : AssistantOperation {
     }
 	}
 		
-	protected void do_query_files_at_date(){			
+	protected void do_query_files_at_date(){
+		/*
+		 * 
+		 */
+		if (cancel_assistant) {
+			do_close();
+			return;
+		}
 		Time etime = backups_queue.poll();
 
 		/* Update progress */
@@ -486,14 +497,15 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	}
 
 	protected void query_collection_dates_finished(DejaDup.Operation op, bool success, bool cancelled) {
-    this.op_state = op.get_state();
+    op_state = op.get_state();
     //this.query_op_files = null;
-		this.query_op_collection_dates = null;
-    this.op = null;
+		query_op_collection_dates = null;
+    op = null;
     
-    if (cancelled)
-      //do_close();
-			stdout.printf("fail\n");
+    if (cancelled) {
+      do_close();
+			//stdout.printf("fail\n");
+		}
     else if (success)
       //go_forward();
 			stdout.printf("success\n");
@@ -534,16 +546,25 @@ public class AssistantDirectoryHistory : AssistantOperation {
 		//}
 	}
 
+	protected override void do_cancel() {
+		cancel_assistant = true;
+		base.do_cancel();
+	}
+
 	protected override void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
     //status_icon = null; PRIV PARAMETER - FIXIT!
-    this.op = null;
+    op = null;
+
+		stdout.printf("\n\napply_finished\n\n");
 
     if (cancelled) {
       if (success) // stop (resume later) vs cancel
         Gtk.main_quit();
-      else
-        do_close();
+      else {
+				stdout.printf("do close!\n");
+				do_close();
+			}
     }
     else {
       if (success) {
@@ -565,10 +586,10 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	
 	protected void query_files_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
-		this.op_state = op.get_state();
-    this.query_op_files = null;
+		op_state = op.get_state();
+    query_op_files = null;
 		//this.query_op_collection_dates = null;
-    this.op = null;
+    op = null;
 		
 		if (backups_queue.size == 0) {
 			this.spinner.stop();
@@ -581,9 +602,10 @@ public class AssistantDirectoryHistory : AssistantOperation {
 				do_query_files_at_date();
 		}
     
-    if (cancelled)
-      //do_close();
+    if (cancelled) {
+      do_close();
 			stdout.printf("fail\n");
+		}
     else if (success)
       //go_forward();
 			stdout.printf("success\n");
