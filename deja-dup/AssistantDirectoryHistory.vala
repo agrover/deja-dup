@@ -2,6 +2,15 @@ using GLib;
 using Gee;
 
 public class DeletedFile {
+		/*
+		 * Class whose instances hold information and track status of deleted file.
+		 *
+		 * After providing full file path and time of when was file last seen, instances
+		 * can access pretty file name and mark file for restore.
+		 * 
+		 * @param //string// ''name'' Full path name of file
+		 * @param //Time// ''deleted'' Information when was file deleted
+		 */
 		public string name {get; set;}
 		public Time deleted {get; set;}
 		public bool restore {get; set; default = false;}
@@ -26,7 +35,26 @@ public class DeletedFile {
 
 public class AssistantDirectoryHistory : AssistantOperation {
 	/*
-	 * Assistant for searching through 
+	 * Assistant for showing deleted files
+	 *
+	 * Assistant for showing deleted files. Execution flow goes as follows:
+	 * 
+	 * 1. AssistantDirectoryHistory is called with //File// ''list_dir'' directory
+	 * 2. //void// do_prepare prepares listfiles_page and runs do_query_collection_dates that initializes query operation for collections dates. Results of query operation are returned to handle_collection_dates in one batch.
+	 * 3. handle_collection_dates fills the //PriorityQueue// ''backups_queue'' with //Time// values of backup dates, scans provided //File// ''list_dir'' with files that are currently located in directory and runs do_query_files_at_date
+	 * 4. do_query_files_at_date begins query operation for list-current-files at specific times and returns the results to handle_listed_files.  
+	 * 5. handle_listed_files appends files to the list of deleted files with appropriate controls.
+	 * 6. When OperationFiles finishes, query_files_finished releases variables and, if required, calls do_query_files_at_date. 
+	 * 7. After user selects files that he wishes to restore, he moves to confirmation page and starts the restore operation
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @param //File// ''list_dir'' Directory whose deleted files will be shown.
 	 */
 	private File list_directory;
 
@@ -37,7 +65,9 @@ public class AssistantDirectoryHistory : AssistantOperation {
 		 *
 		 * Default comparing for queue goes from oldest to newest so we use our own
 		 * compare function to reverse that ordering and proceed from newest to oldest
-		 * since it is far more likely that user deleted file in near past.
+		 * since it is far more likely that user deleted file in recent history.
+		 *
+		 * @param //Time// ''a'', ''b'' Time objects
 		 */
 		var a_epoch = a.format("%s").to_int();
 		var b_epoch = b.format("%s").to_int();
@@ -49,6 +79,11 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			return -1;
 	}
 
+	/*
+		If user moves forward while OperationFiles is runing, code cleanup stops the current operation
+		and stops recursive loop without the need to clear backups_queue. If user decides to go back, 
+		OperationFiles will continue with NEXT item in backups_queue.
+	*/
 	private bool scan_queue = true;
 	private bool cancel_assistant = false;
 	private PriorityQueue<Time?> backups_queue = new PriorityQueue<Time?>((CompareFunc) compare_time);
@@ -77,7 +112,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	Gtk.Table restore_files_table;
 	/*
 		Gtk.Table in Glade needs to be set at least to 1 at start. When we update
-		our table we start from 0 because we first resize table.
+		our table we start from 0 so that we always resize table to correct size without the need for special case.
 	 */
 	int restore_files_table_rows = 0;
 	
@@ -109,19 +144,21 @@ public class AssistantDirectoryHistory : AssistantOperation {
 		}
 	}
 
-	[CCode (instance_pos = -1)]
+	/*[CCode (instance_pos = -1)]
 	public void on_restoretoggle(Gtk.CellRendererToggle checkbox, int path) {
 		checkbox.set_active(true);
-	}
+	}*/
 
 	Gtk.Widget? make_listfiles_page() {
 			/*
-			 * Build list files (introduction) page which shows deleted files
+			 * Build list files (introduction) page which shows deleted files.
 			 *
 			 * Build list files page from a Glade template and attach various dynamic
 			 * components to it. Deleted files are dynamically added on-the-fly by
 			 * applicable functions.
 			 */
+
+			// Hack; we need ''page'' because window needs to be reparented to be shown.
 			var page = new Gtk.Table(1, 1, false);
 			page.name = "listfiles_page";
 			var builder = new Gtk.Builder();
@@ -330,6 +367,17 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	}
 
 	protected void handle_listed_files(DejaDup.OperationFiles op, string date, string file) {
+		  /*
+			 * Handler for each line returned by duplicity individually
+			 *
+			 * Duplicity returns each file as a separate line that has to be handled individually.
+			 * We therefore check if file in path of directory, if it exists and whether or not it has not been seen before
+			 * and attach it to our TreeView model if all conditions are met.
+			 *
+			 * @param //DejaDup.OperationFiles// ''op'' Operation that is currently running
+			 * @param //string// ''date'' Time of last change of file 
+			 * @param //string// ''file'' Full path of file 
+			 */
 		string filestr = @"/$file";
 		if (this.list_directory.get_path() in filestr && this.list_directory.get_path() != filestr) {
 			var fileobj = File.new_for_path(filestr);
@@ -381,6 +429,16 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	}
 
 	protected void handle_collection_dates(DejaDup.OperationStatus op, GLib.List<string>? dates){
+			/*
+			 * Handle collection dates
+			 *
+			 * Collection dates are returned as a single list of strings file timestamps of backup.
+			 * Timestamps are in ISO 8601 format and are first read and converted to //Time// objects and then
+			 * added to backups_queue.
+			 *
+			 * @param //DejaDup.OperationStatus// ''op'' Operation currently being run
+			 * @param //GLib.List<string>?// ''dates'' ISO 8601 dates of backups.
+			 */
 		stdout.printf("\nhandle collection_dates\n");
     TimeVal tv = TimeVal();
 
@@ -403,6 +461,12 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	}
 
 	protected void do_query_collection_dates() {
+			/*
+			 * Initialize query operation for collection dates.
+			 *
+			 * Initializes query operation and links appropriate signals for when operation
+			 * finishes and when it receives duplicity's output.
+			 */
 		stdout.printf("\ndo_query_collection_dates\n");
 		realize();
     var xid = Gdk.x11_drawable_get_xid(this.window);
@@ -431,9 +495,12 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	}
 		
 	protected void do_query_files_at_date(){
-		/*
-		 * 
-		 */
+		  /*
+		   * Initializes query operation for list-current-files at specific date 
+			 *
+			 * Initializes query operation, updates list files page with current date of scan
+			 * in human semi-friendly form and connect appropriate signals. 
+		   */
 		if (cancel_assistant) {
 			do_close();
 			return;
@@ -547,12 +614,27 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	}
 
 	protected override void do_cancel() {
+			/*
+			 * Mark cancel_assistant as true so that all other operations are blocked.
+			 *
+			 * do_cancel kills current operation but because we are still running recursion
+			 * and at the end of each operation still check if we have anything to deleted,
+			 * we need to manually mark entire assistant as canceled so that no further
+			 * operations are called.
+			 */
 		cancel_assistant = true;
 		base.do_cancel();
 	}
 
 	protected override void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
+			/*
+			 * Ran after assistant finishes applying restore operation.
+			 *
+			 * After assistant finishes with initial OperationRestore, apply_finished is called. Afterwards we
+			 * check if restore_queue is empty and if not, rerun apply function. If it is, we move to
+			 * summary page.
+			 */
     //status_icon = null; PRIV PARAMETER - FIXIT!
     op = null;
 
@@ -612,12 +694,15 @@ public class AssistantDirectoryHistory : AssistantOperation {
   }
 
 	protected override Gtk.Widget? make_confirm_page(){
+			/*
+			 * Build confirmation page and add various dynamic elements to Glade template
+			 */
 		var page = new Gtk.Table(1, 1, false);
 		page.name = "confirm_page";
 		var builder = new Gtk.Builder();
 		try {
 			//builder.add_from_file("interface/restorefiles.glade");
-			builder.add_from_file("interface/directory_history_summary.glade");
+			builder.add_from_file("interface/directory_history_confirmation_page.glade");
 			//builder.connect_signals(this);
 			
 			var window = builder.get_object("viewport") as Gtk.Widget;
@@ -681,6 +766,9 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	}*/
 	protected override DejaDup.Operation create_op()
   {
+			/*
+			 * Creates operation that is then called by do_apply.
+			 */
 		stdout.printf("create_op\n");
     realize();
     var xid = Gdk.x11_drawable_get_xid(this.window);
@@ -716,6 +804,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
   }
 		
 	protected override string get_progress_file_prefix(){
-		return _("Directory history");
+		return _("Restoring");
 	}
 }
