@@ -62,7 +62,6 @@ public class OperationRestore : Operation
   
   public override void start() throws Error
   {
-    //stdout.printf("mode: %s", this.mode);
     action_desc_changed(_("Restoring files…"));
     dup.restore_files = restore_files;
     base.start();
