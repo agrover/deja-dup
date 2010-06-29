@@ -945,7 +945,7 @@ public class Duplicity : Object
     collection_info = new List<DateInfo?>();
     foreach (DateInfo s in infos)
       collection_info.append(s); // we want to keep our own copy too
-    
+
     collection_dates(dates);
   }
   

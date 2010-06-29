@@ -46,6 +46,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			return -1;
 	}
 
+	private bool scan_queue = true;
 	private PriorityQueue<Time?> backups_queue = new PriorityQueue<Time?>((CompareFunc) compare_time);
 	private PriorityQueue<DeletedFile?> restore_queue = new PriorityQueue<DeletedFile?>();
 
@@ -81,6 +82,13 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	}
 
 	private ArrayList<string>? files_in_directory() {
+		/*
+		 * Function lists all files that are currently located in the directory.
+		 *
+		 * Function scans directory that was provided to it through
+		 * command line children and returns an array of strings populated
+		 * by file names of folder and files.
+		 */
 		//File directory = File.new_for_path(dirlocation);
 		var file_list = new ArrayList<string> ();
 
@@ -103,6 +111,13 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	}
 
 	Gtk.Widget? make_listfiles_page() {
+			/*
+			 * Build list files (introduction) page which shows deleted files
+			 *
+			 * Build list files page from a Glade template and attach various dynamic
+			 * components to it. Deleted files are dynamically added on-the-fly by
+			 * applicable functions.
+			 */
 			var page = new Gtk.Table(1, 1, false);
 			page.name = "listfiles_page";
 			var builder = new Gtk.Builder();
@@ -111,7 +126,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
 				builder.connect_signals(this);
 				
 				var window = builder.get_object("viewport") as Gtk.Widget;
-					//var treeview = builder.get_object("treeview") as Gtk.TreeView;
 				var filelistwindow = builder.get_object("filelistwindow") as Gtk.ScrolledWindow;
 				var status_table = builder.get_object("backup_table") as Gtk.Table;
 				var progress_table = builder.get_object("progress_table") as Gtk.Table;
@@ -190,6 +204,14 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			}
 	}
 
+	void add_listfiles_page() {
+		var page = make_listfiles_page();
+		append_page(page);
+		set_page_title(page, _("Deleted Files"));
+		listfiles_page = page;
+		//selectfiles_page = page;
+	}		
+
 	//private void deleted_files(Gtk.ListStore listmodel) {
 	//	stdout.printf("\n\ndeleted files\n\n");
 
@@ -227,14 +249,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
 		add_listfiles_page();
 		//add_restorefiles_page();
 	}
-	
-	void add_listfiles_page() {
-		var page = make_listfiles_page();
-		append_page(page);
-		set_page_title(page, _("Deleted Files"));
-		listfiles_page = page;
-		//selectfiles_page = page;
-	}
 
 	/*void add_restorefiles_page() {
 		var page = make_restorefiles_page();
@@ -249,16 +263,24 @@ public class AssistantDirectoryHistory : AssistantOperation {
 
 		if (page == listfiles_page) {
 			stdout.printf("listfiles_page");
-			
-			if (op != null && op.needs_password){
-				provide_password();
+
+			if (!scan_queue) {
+				do_query_files_at_date();
+				scan_queue = true;
 			}
-			do_query_collection_dates();
-			//do_query();
+			else {
+				if (op != null && op.needs_password){
+					provide_password();
+				}	
+				else if (op == null) {
+					do_query_collection_dates();
+				}
+			}
 		}
 		
 		else if (page == confirm_page) {
 			stdout.printf("\nconfirm page\n");
+			scan_queue = false;
 			
 			foreach(var delfile in this.file_status) {
 				if (delfile.restore)
@@ -280,7 +302,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
         	this.restoremodel.set(this.restoreiter, 0, delfile.name);*/
 				}
 			}
-			this.backups_queue.clear();
+			//this.backups_queue.clear();
 		}
 		else if (page == summary_page) {
 			if (error_occurred)
@@ -552,9 +574,11 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			this.spinner.stop();
 			this.spinner.destroy();
 			this.current_scan_date.set_text("Done!");
+			scan_queue = false;
 		}
 		else {
-			do_query_files_at_date();
+			if (scan_queue)
+				do_query_files_at_date();
 		}
     
     if (cancelled)
