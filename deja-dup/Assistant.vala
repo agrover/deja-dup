@@ -128,6 +128,7 @@ public abstract class Assistant : Gtk.Dialog
   void handle_response(int resp)
   {
     switch (resp) {
+    case Gtk.ResponseType.DELETE_EVENT: break;
     case BACK: go_back(); break;
     case APPLY:
     case FORWARD: go_forward(); break;

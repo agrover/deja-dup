@@ -78,6 +78,7 @@ public abstract class AssistantOperation : Assistant
     canceled.connect(do_cancel);
     closed.connect(do_close);
     prepare.connect(do_prepare);
+    delete_event.connect(do_minimize_to_tray);
   }
   
   protected abstract Gtk.Widget? make_confirm_page();
@@ -471,6 +472,16 @@ public abstract class AssistantOperation : Assistant
       op.cancel(); // do_close will happen in done() callback
     else
       do_close();
+  }
+
+  bool do_minimize_to_tray(Gdk.Event event)
+  {
+    if (op != null)
+      hide_on_delete(); // minimize to tray when operation is in progress
+    else
+      do_close(); // otherwise, do the normal close operation
+
+    return true;
   }
   
   protected virtual void do_close()
