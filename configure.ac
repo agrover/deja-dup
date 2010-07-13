@@ -18,7 +18,7 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 # Sets up autoconf.
-AC_INIT([Déjà Dup],[15.3],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup], [https://launchpad.net/deja-dup])
+AC_INIT([Déjà Dup],[15.5],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup], [https://launchpad.net/deja-dup])
 AC_PREREQ(2.64)
 AC_CONFIG_SRCDIR(deja-dup/main.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
@@ -67,7 +67,7 @@ AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package 
 GTK_MODULE=gtk+-2.0
 GTK_REQ_VER=2.18
 GDK_X11_MODULE=gdk-x11-2.0
-GLIB_REQ_VER=2.25
+GLIB_REQ_VER=2.20
 GIO_REQ_VER=$GLIB_REQ_VER
 UNIQUE_MODULE=unique-1.0
 APPINDICATOR_MODULE=appindicator-0.1
@@ -79,9 +79,9 @@ AC_ARG_WITH([gtk3],
   [],
   [with_gtk3=check])
 AS_IF([test "x$with_gtk3" != xno],
-  [PKG_CHECK_EXISTS($GTK_MODULE >= $GTK_REQ_VER
-                    $GDK_X11_MODULE
-                    $UNIQUE_MODULE,
+  [PKG_CHECK_EXISTS(gtk+-3.0 >= 2.90
+                    gdk-x11-3.0
+                    unique-3.0,
     [GTK_MODULE=gtk+-3.0
      GTK_REQ_VER=2.90
      GDK_X11_MODULE=gdk-x11-3.0
