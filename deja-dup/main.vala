@@ -84,10 +84,7 @@ class DejaDupApp : Object
       return status;
     
     DejaDup.initialize();
-    var app = new Gtk.Application("org.gnome.DejaDup.Interface", ref args);
-
-    if (app.is_remote)
-      return 0;
+    Gtk.init(ref args); // to open display ('cause we passed false above)
     
     Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
     Gtk.Window.set_default_icon_name(Config.PACKAGE);
@@ -112,12 +109,13 @@ class DejaDupApp : Object
       // specifically don't show
     }
     else {
-      toplevel = new MainWindow(app);
+      toplevel = new MainWindow();
       toplevel.show_all();
     }
 
-    app.add_window(toplevel);
-    app.run();
+    toplevel.destroy.connect((w) => {Gtk.main_quit();});
+
+    Gtk.main();
 
     return 0;
   }

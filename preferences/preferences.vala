@@ -41,6 +41,22 @@ class DejaDupPreferences : Object
   
   static PreferencesDialog pref_window;
   
+  static Unique.Response message_received(Unique.App app,
+                                          int command,
+                                          Unique.MessageData message_data,
+                                          uint time_)
+  {
+    var res = Unique.Response.OK;
+    
+    switch (command) {
+    case Unique.Command.ACTIVATE:
+      pref_window.present_with_time(time_);
+      break;
+    }
+    
+    return res;
+  }
+  
   public static int main(string [] args)
   {
     Intl.textdomain(Config.GETTEXT_PACKAGE);
@@ -64,20 +80,25 @@ class DejaDupPreferences : Object
       return status;
     
     DejaDup.initialize();
+    Gtk.init(ref args); // to open display ('cause we passed false above)
     
     // We don't have a solid domain for Déjà Dup...  But we're GNOME-ish
-    var app = new Gtk.Application("org.gnome.DejaDup.Preferences", ref args);
+    var app = new Unique.App("org.gnome.DejaDup.Preferences", null);
     
-    if (!app.is_remote) {
-      // We're first instance.  Yay!
+    if (app.is_running)
+      app.send_message(Unique.Command.ACTIVATE, null);
+    else {
+      // We're first instance.  Yay!    
       Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
       Gtk.Window.set_default_icon_name(Config.PACKAGE);
       
       pref_window = new PreferencesDialog();
-      pref_window.show_all();
       
-      app.add_window(pref_window);
-      app.run();
+      app.message_received.connect(message_received);
+      app.watch_window(pref_window);
+      
+      pref_window.show_all();
+      Gtk.main();
     }
     
     return 0;

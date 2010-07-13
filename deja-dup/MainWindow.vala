@@ -21,23 +21,10 @@ using GLib;
 
 public class MainWindow : Gtk.Window
 {
-  public Gtk.Application app {get; construct;}
-
-  public Gtk.Window active_window {get; private set;}
-
-  public MainWindow(Gtk.Application app)
-  {
-    Object(app: app);
-  }
-
   construct
   {
-    if (app == null)
-      error("Must set a Gtk.Application");
-
     Gtk.VBox vb = new Gtk.VBox (false, 0);
     
-    this.active_window = this;
     this.title = _("Déjà Dup");
     this.resizable = false;
     
@@ -139,9 +126,7 @@ public class MainWindow : Gtk.Window
     win.show();
     this.hide();
     win.present();
-    this.active_window = win;
     win.closing.connect((w, succeeded) => {
-      this.active_window = this;
       if (succeeded)
         this.destroy();
       else {
