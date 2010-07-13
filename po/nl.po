@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-05 14:31-0400\n"
-"PO-Revision-Date: 2010-06-05 18:26+0000\n"
-"Last-Translator: Jacob Kiers <develop@jacobkiers.net>\n"
+"POT-Creation-Date: 2010-06-13 20:17-0400\n"
+"PO-Revision-Date: 2010-07-06 20:55+0000\n"
+"Last-Translator: Daniel van Eeden <launchpad@myname.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-06-06 03:35+0000\n"
+"X-Launchpad-Export-Date: 2010-07-07 03:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -402,7 +402,7 @@ msgstr "Wachtwoord Noodzakelijk"
 
 #: ../deja-dup/AssistantOperation.vala:578
 msgid "Déjà Dup backup passphrase"
-msgstr ""
+msgstr "Déjà Dup reservekopie wachtwoord"
 
 #: ../deja-dup/AssistantRestore.vala:71
 msgid "Restore"
@@ -491,8 +491,8 @@ msgstr "Uw bestanden zijn succesvol hersteld."
 #: ../deja-dup/AssistantRestore.vala:479
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Je bestanden zijn succesvol hersteld."
+msgstr[1] "Je bestanden zijn succesvol hersteld."
 
 #: ../deja-dup/AssistantRestore.vala:485 ../common/Operation.vala:54
 msgid "Restoring…"
@@ -575,7 +575,7 @@ msgstr "Locatie niet beschikbaar"
 
 #: ../deja-dup/MountOperationAssistant.vala:113
 msgid "This backup location requires authentication."
-msgstr ""
+msgstr "Deze reservekopielocatie vereist authenticatie."
 
 #: ../deja-dup/MountOperationAssistant.vala:136
 msgid "Connect _anonymously"
@@ -698,6 +698,8 @@ msgid ""
 "Could not understand duplicity version ‘%s’.\n"
 "\n"
 msgstr ""
+"Kon de versie '%s' van duplicity niet begrijpen.\n"
+"\n"
 
 #: ../common/DuplicityInfo.vala:150
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
@@ -705,7 +707,7 @@ msgstr "Zonder duplicity kan Déjà Dup niet werken. Déjà Dup zal nu sluiten."
 
 #: ../common/DuplicityInfo.vala:154
 msgid "Duplicity’s version is too old"
-msgstr ""
+msgstr "Te oude duplicity versie"
 
 #: ../common/DuplicityInfo.vala:155
 #, c-format
@@ -713,10 +715,12 @@ msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
 "version %d.%d.%.2d"
 msgstr ""
+"Déjà Dup vereist tenminste versie %d.%d.%.2d van duplicity, maar enkel "
+"versie %d.%d.%.2d is gevonden."
 
 #: ../common/Duplicity.vala:114 ../common/Duplicity.vala:168
 msgid "Paused (no network)"
-msgstr ""
+msgstr "Gepauzeerd (geen netwerk)"
 
 #: ../common/Duplicity.vala:277 ../common/Duplicity.vala:285
 #: ../common/Duplicity.vala:320 ../common/Operation.vala:95
@@ -725,26 +729,29 @@ msgstr "Bezig met voorbereiden…"
 
 #: ../common/Duplicity.vala:308
 msgid "Creating the first backup.  This may take a while."
-msgstr ""
+msgstr "Bezig met get maken van de eerste backup. Dit kan een tijdje duren."
 
 #: ../common/Duplicity.vala:310
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
 msgstr ""
+"Bezig met het maken van een nieuwe backup om te beschermen tegen backup "
+"beschadiging. Dit zal langer duren dan normaal."
 
 #. Tiny backup location.  Suggest they get a larger one.
 #: ../common/Duplicity.vala:407
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
+"De backup locatie is te klein. Probeer er een te kiezen met meer ruimte."
 
 #: ../common/Duplicity.vala:428
 msgid "Backup location does not have enough free space."
-msgstr ""
+msgstr "De backup locatie heeft niet genoeg vrije ruimte."
 
 #: ../common/Duplicity.vala:448 ../common/Duplicity.vala:462
 msgid "Cleaning up…"
-msgstr ""
+msgstr "Opruimen..."
 
 #: ../common/Duplicity.vala:554 ../common/Duplicity.vala:881
 msgid "Failed with an unknown error."
@@ -753,11 +760,11 @@ msgstr "Onderbroken met een onbekende fout."
 #: ../common/Duplicity.vala:748
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
-msgstr ""
+msgstr "Kon ‘%s’ niet herstellen: Bestand niet gevonden in de backup"
 
 #: ../common/Duplicity.vala:753 ../common/Duplicity.vala:832
 msgid "Bad encryption password."
-msgstr ""
+msgstr "Encryptie wachtwoord is verkeerd"
 
 #: ../common/Duplicity.vala:758
 msgid "Computer name changed"
@@ -770,31 +777,34 @@ msgid ""
 "name is %s.  If this is unexpected, you should back up to a different "
 "location."
 msgstr ""
+"De huidige backup is van een computer genaamd %s, maar de naam van deze "
+"computer is %s. Als dit onverwacht is dient er naar een andere lokatie "
+"gebackuped te worden."
 
 #: ../common/Duplicity.vala:771
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
-msgstr ""
+msgstr "Toegang geweigerd bij het aanmaken van ‘%s’."
 
 #. assume error is on backend side
 #: ../common/Duplicity.vala:775 ../common/Duplicity.vala:779
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
-msgstr ""
+msgstr "Toegang geweigerd bij het lezen van ‘%s’."
 
 #: ../common/Duplicity.vala:783
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
-msgstr ""
+msgstr "Toegang geweigerd bij het verwijderen van ‘%s’."
 
 #: ../common/Duplicity.vala:790
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
-msgstr ""
+msgstr "Backup lokatie ‘%s’ bestaat niet."
 
 #: ../common/Duplicity.vala:796 ../common/Duplicity.vala:851
 msgid "No space left."
-msgstr ""
+msgstr "Geen vrije ruimte."
 
 #: ../common/Duplicity.vala:810
 msgid "Invalid ID."
@@ -815,17 +825,17 @@ msgstr "S3 emmernaam is niet beschikbaar."
 #: ../common/Duplicity.vala:836
 #, c-format
 msgid "Error reading file ‘%s’."
-msgstr ""
+msgstr "Fout bij het lezen van ‘%s’."
 
 #: ../common/Duplicity.vala:838
 #, c-format
 msgid "Error writing file ‘%s’."
-msgstr ""
+msgstr "Fout bij het schrijven van ‘%s’."
 
 #: ../common/Duplicity.vala:853
 #, c-format
 msgid "No space left in ‘%s’."
-msgstr ""
+msgstr "Geen vrije ruimte over in ‘%s’."
 
 #: ../common/Duplicity.vala:873
 msgid "No backup files found"
@@ -837,7 +847,7 @@ msgstr ""
 
 #: ../common/OperationRestore.vala:54
 msgid "Restoring files…"
-msgstr ""
+msgstr "Herstellen van bestanden…"
 
 #: ../common/OperationRestore.vala:173
 #, c-format
@@ -857,7 +867,7 @@ msgstr ""
 
 #: ../common/Operation.vala:210
 msgid "Another Déjà Dup is already running"
-msgstr ""
+msgstr "Er is reeds een Déjà Dup actief"
 
 #: ../monitor/monitor.vala:230
 msgid "Scheduled backup delayed"
@@ -866,8 +876,8 @@ msgstr ""
 #: ../nautilus/NautilusExtension.c:94
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Herstellen naar vorige versie…"
+msgstr[1] "Herstellen naar vorige versies…"
 
 #: ../nautilus/NautilusExtension.c:98
 msgid "Restore file from backup"
@@ -883,7 +893,7 @@ msgstr "Déjà Dup voorkeuren"
 #: ../preferences/PreferencesDialog.vala:105
 #, c-format
 msgid "S3 Access Key I_D:"
-msgstr ""
+msgstr "S3 Togangs Sleutel I_D:"
 
 #: ../preferences/PreferencesDialog.vala:117
 #, c-format
@@ -892,11 +902,11 @@ msgstr "_Map:"
 
 #: ../preferences/PreferencesDialog.vala:148
 msgid "Storage"
-msgstr ""
+msgstr "Opslag"
 
 #: ../preferences/PreferencesDialog.vala:198
 msgid "Files"
-msgstr ""
+msgstr "Bestanden"
 
 #: ../preferences/PreferencesDialog.vala:233
 #, c-format
@@ -909,7 +919,7 @@ msgstr ""
 
 #: ../widgets/ButtonConnect.vala:28
 msgid "Connect to _Server…"
-msgstr ""
+msgstr "Met _server verbinden…"
 
 #: ../widgets/ButtonConnect.vala:37
 msgid "Could not open connection dialog"
@@ -917,27 +927,27 @@ msgstr ""
 
 #: ../widgets/ConfigDelete.vala:44
 msgid "At least a week"
-msgstr ""
+msgstr "Tenminste een week"
 
 #: ../widgets/ConfigDelete.vala:45
 msgid "At least a month"
-msgstr ""
+msgstr "Tenminste een maand"
 
 #: ../widgets/ConfigDelete.vala:46
 msgid "At least two months"
-msgstr ""
+msgstr "Tenminste twee maanden"
 
 #: ../widgets/ConfigDelete.vala:47
 msgid "At least three months"
-msgstr ""
+msgstr "Tenminste drie maanden"
 
 #: ../widgets/ConfigDelete.vala:48
 msgid "At least six months"
-msgstr ""
+msgstr "Tenminste zes maanden"
 
 #: ../widgets/ConfigDelete.vala:49
 msgid "At least a year"
-msgstr ""
+msgstr "Tenminste een jaar"
 
 #: ../widgets/ConfigDelete.vala:50
 msgid "Forever"
@@ -947,8 +957,8 @@ msgstr "Eeuwig"
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tenminste %d dag"
+msgstr[1] "Tenminste %d dagen"
 
 #: ../widgets/ConfigLabelBool.vala:36
 msgid "Yes"
@@ -968,51 +978,51 @@ msgstr "Prullenbak"
 
 #: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
-"Older Older backups will be kept for at least a week or until the backup "
-"location is low on space."
+"Old backups will be kept for at least a week or until the backup location is "
+"low on space."
 msgstr ""
 
 #: ../widgets/ConfigLabelPolicy.vala:69
 msgid ""
-"Older backups will be kept for at least a month or until the backup location "
+"Old backups will be kept for at least a month or until the backup location "
 "is low on space."
 msgstr ""
 
 #: ../widgets/ConfigLabelPolicy.vala:72
 msgid ""
-"Older backups will be kept for at least two months or until the backup "
+"Old backups will be kept for at least two months or until the backup "
 "location is low on space."
 msgstr ""
 
 #: ../widgets/ConfigLabelPolicy.vala:75
 msgid ""
-"Older backups will be kept for at least three months or until the backup "
+"Old backups will be kept for at least three months or until the backup "
 "location is low on space."
 msgstr ""
 
 #: ../widgets/ConfigLabelPolicy.vala:78
 msgid ""
-"Older backups will be kept for at least six months or until the backup "
+"Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
 
 #: ../widgets/ConfigLabelPolicy.vala:81
 msgid ""
-"Older backups will be kept for at least a year or until the backup location "
-"is low on space."
+"Old backups will be kept for at least a year or until the backup location is "
+"low on space."
 msgstr ""
 
 #: ../widgets/ConfigLabelPolicy.vala:84
-msgid "Older backups will be kept until the backup location is low on space."
+msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 
 #: ../widgets/ConfigLabelPolicy.vala:87
 #, c-format
 msgid ""
-"Older backups will be kept at least %d day or until the backup location is "
-"low on space."
+"Old backups will be kept at least %d day or until the backup location is low "
+"on space."
 msgid_plural ""
-"Older backups will be kept at least %d days or until the backup location is "
+"Old backups will be kept at least %d days or until the backup location is "
 "low on space."
 msgstr[0] ""
 msgstr[1] ""
@@ -1066,7 +1076,9 @@ msgstr "Over Déjà Dup"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Daniel van Eeden https://launchpad.net/~launchpad-myname\n"
 "  Flor https://launchpad.net/~flortje\n"
+"  Ivo Reumkens https://launchpad.net/~van-hoi\n"
 "  Jacob Kiers https://launchpad.net/~jacobkiers\n"
 "  Michael Terry https://launchpad.net/~mterry\n"
 "  Ruben Verweij https://launchpad.net/~ruben-verweij\n"
