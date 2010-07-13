@@ -70,6 +70,7 @@ GDK_X11_MODULE=gdk-x11-2.0
 GLIB_REQ_VER=2.25
 GIO_REQ_VER=$GLIB_REQ_VER
 UNIQUE_MODULE=unique-1.0
+APPINDICATOR_MODULE=appindicator-0.1
 
 AH_TEMPLATE([HAVE_GTK3], [whether gtk3 is available])
 AC_ARG_WITH([gtk3],
@@ -81,10 +82,11 @@ AS_IF([test "x$with_gtk3" != xno],
   [PKG_CHECK_EXISTS($GTK_MODULE >= $GTK_REQ_VER
                     $GDK_X11_MODULE
                     $UNIQUE_MODULE,
-    GTK_MODULE=gtk+-3.0
-    GTK_REQ_VER=2.90
-    GDK_X11_MODULE=gdk-x11-3.0
-    UNIQUE_MODULE=unique-3.0,
+    [GTK_MODULE=gtk+-3.0
+     GTK_REQ_VER=2.90
+     GDK_X11_MODULE=gdk-x11-3.0
+     UNIQUE_MODULE=unique-3.0
+     APPINDICATOR_MODULE=appindicator3-0.1],
     [if test "x$with_gtk3" != xcheck; then
        AC_MSG_FAILURE(
          [--with-gtk3 was given, but test for $GTK_MODULE GDK_X11_MODULE $UNIQUE_MODULE failed])
@@ -169,13 +171,13 @@ AC_ARG_WITH([appindicator],
   [],
   [with_appindicator=check])
 AS_IF([test "x$with_appindicator" != xno],
-  [PKG_CHECK_MODULES(APPINDICATOR, appindicator3-0.1,
+  [PKG_CHECK_MODULES(APPINDICATOR, $APPINDICATOR_MODULE,
     [AC_DEFINE(HAVE_APPINDICATOR)
      AC_SUBST(APPINDICATOR_CFLAGS)
      AC_SUBST(APPINDICATOR_LIBS)],
     [if test "x$with_appindicator" != xcheck; then
         AC_MSG_FAILURE(
-          [--with-appindicator was given, but test for appindicator3 failed])
+          [--with-appindicator was given, but test for $APPINDICATOR_MODULE failed])
       fi
     ]
   )]
