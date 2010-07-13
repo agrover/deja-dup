@@ -121,7 +121,9 @@ public class MountOperationAssistant : MountOperation
     }
 
     if (label_help != null) {
-      label = hacks_make_link_label(label_help);
+      label = new Gtk.Label(label_help);
+      label.use_markup = true;
+      label.track_visited_links = false;
       if (label != null) {
         label.set("xalign", 0f);
         layout.pack_start(label, false, false, 0);

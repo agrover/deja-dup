@@ -58,16 +58,16 @@ class DejaDupApp : Object
 
   public static int main(string [] args)
   {
-    GLib.Intl.textdomain(Config.GETTEXT_PACKAGE);
-    GLib.Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
-    GLib.Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
+    Intl.textdomain(Config.GETTEXT_PACKAGE);
+    Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
+    Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
     
     // Translators: The name is a play on the French phrase "déjà vu" meaning
     // "already seen", but with the "vu" replaced with "dup".  "Dup" in this
     // context is itself a reference to both the underlying command line tool
     // "duplicity" and the act of duplicating data for backup.  As a whole, it
     // may not be very translatable.
-    GLib.Environment.set_application_name(_("Déjà Dup"));
+    Environment.set_application_name(_("Déjà Dup"));
     
     OptionContext context = new OptionContext("");
     context.add_main_entries(options, Config.GETTEXT_PACKAGE);

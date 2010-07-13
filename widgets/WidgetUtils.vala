@@ -101,7 +101,7 @@ public void show_about(Object owner, Gtk.Window? parent)
 public Gtk.Window? get_topwindow(Gtk.Widget w)
 {
   w = w.get_toplevel();
-  if (w != null /*&& w.is_toplevel()*/) // FIXME When we port to gtk+-3.0, we can use this again
+  if (w != null && w.is_toplevel())
     return (Gtk.Window)w;
   else
     return null;

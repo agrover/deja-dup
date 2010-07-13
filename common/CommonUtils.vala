@@ -99,7 +99,7 @@ public bool test_bus_claimed(string busname)
                                                "/org/freedesktop/DBus",
                                                "org.freedesktop.DBus");
 
-    string result = bus.get_name_owner("org.gnome.deja-dup." + busname);
+    string result = bus.get_name_owner("org.gnome.DejaDup." + busname);
     return result != null && result != "";
   }
   catch (Error e) {
@@ -120,7 +120,7 @@ public bool set_bus_claimed(string busname, bool claim)
       // Try to register service in session bus.
       // The flag '4' means do not add ourselves to the queue of applications
       // wanting the name, if this request fails.
-      uint32 result = bus.request_name("org.gnome.deja-dup." + busname,
+      uint32 result = bus.request_name("org.gnome.DejaDup." + busname,
                                        (uint32)4);
       
       if (result == DBus.RequestNameReply.EXISTS)
@@ -129,7 +129,7 @@ public bool set_bus_claimed(string busname, bool claim)
     else {
       // We have to assign reply to a variable because it is a dynamic binding
       // and otherwise, generated code will expect no return value.
-      uint32 result = bus.release_name("org.gnome.deja-dup." + busname);
+      uint32 result = bus.release_name("org.gnome.DejaDup." + busname);
       if (result != 1)
         warning("Unexpected reply of %u when releasing busname %s\n", result, busname);
     }

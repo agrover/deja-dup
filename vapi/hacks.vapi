@@ -21,13 +21,7 @@
 public GnomeKeyring.PasswordSchema PASSPHRASE_SCHEMA;
 
 [CCode (cheader_filename = "whacks.h")]
-void hacks_status_icon_set_tooltip_text (Gtk.StatusIcon icon, string text);
-
-[CCode (cheader_filename = "whacks.h")]
 GLib.Object hacks_status_icon_make_app_indicator (Gtk.Menu menu);
 
 [CCode (cheader_filename = "whacks.h")]
 void hacks_status_icon_close_app_indicator (GLib.Object icon);
-
-[CCode (cheader_filename = "whacks.h")]
-Gtk.Label hacks_make_link_label (string text);

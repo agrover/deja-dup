@@ -23,7 +23,7 @@ VALA_CFLAGS = \
 	--vapidir $(top_srcdir)/common \
 	--vapidir $(top_srcdir)/vapi \
 	--pkg libcommon \
-	--pkg gtk+-2.0 \
+	--pkg @GTK_MODULE@ \
 	--pkg gconf-2.0 \
 	--pkg dbus-glib-1 \
 	--pkg config
