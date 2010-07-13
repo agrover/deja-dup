@@ -2,6 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2010 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -78,6 +79,7 @@ public abstract class AssistantOperation : Assistant
     canceled.connect(do_cancel);
     closed.connect(do_close);
     prepare.connect(do_prepare);
+    delete_event.connect(do_minimize_to_tray);
   }
   
   protected abstract Gtk.Widget? make_confirm_page();
@@ -471,6 +473,16 @@ public abstract class AssistantOperation : Assistant
       op.cancel(); // do_close will happen in done() callback
     else
       do_close();
+  }
+
+  bool do_minimize_to_tray(Gdk.Event event)
+  {
+    if (op != null)
+      hide(); // minimize to tray when operation is in progress
+    else
+      do_cancel(); // otherwise, do the normal cancel operation
+
+    return true;
   }
   
   protected virtual void do_close()
