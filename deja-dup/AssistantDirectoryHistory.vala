@@ -297,10 +297,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	}*/
 
 	protected override void do_prepare(Assistant assist, Gtk.Widget page) {
-		base.do_prepare(assist, page);
-
 		if (page == listfiles_page) {
-
+			//forward_button.set_label("Confirm");
 			if (!scan_queue) {
 				do_query_files_at_date();
 				scan_queue = true;
@@ -357,6 +355,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
                                          numdels);
 			}
 		}
+		base.do_prepare(assist, page);
 	}
 
 	protected void handle_listed_files(DejaDup.OperationFiles op, string date, string file) {
@@ -495,7 +494,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			return;
 		}
 		Time etime = backups_queue.poll();
-
+		stdout.printf("\n\ndelamo iz backupa: %s\n\n", etime.format("%c"));
 		/* Update progress */
 		int tepoch = etime.format("%s").to_int();
 		TimeVal ttoday = TimeVal();
@@ -511,11 +510,15 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			worddiff = _("Last week");
 		}
 		else if (tdiff / 24 / 30 == 0) {
+			stdout.printf("last month");
 			worddiff = _("Last month");
 		}
-		else if (tdiff / 24 / 30 > 1 && tdiff / 24 / 30 < 12) {
+		else if (tdiff / 24 / 30 >= 1 && tdiff / 24 / 30 <= 12) {
 			int n = tdiff / 24 / 30;
-			worddiff = _(@"About $n months ago");
+			if (n == 1)
+				worddiff = _("About a month ago");
+			else
+				worddiff = _(@"About $n months ago");
 		}
 		else {
 			int n = tdiff / 24 / 30 / 12;
