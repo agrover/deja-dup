@@ -101,6 +101,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
 	Gtk.TreeIter restoreiter;
 	Gtk.ListStore listmodel;
 	Gtk.ListStore restoremodel;
+	Gtk.ScrolledWindow sw_restore_files;
 
 	/* List files page */
 	Gtk.Label current_scan_date = new Gtk.Label(_("Starting..."));
@@ -314,26 +315,35 @@ public class AssistantDirectoryHistory : AssistantOperation {
 		}
 		
 		else if (page == confirm_page) {
+				/*
+				 * We need to destroy the existing table and redraw current one to draw
+				 * the confirmation page.
+				 */
 			scan_queue = false;
+
+			restore_files_table.destroy();
+			restore_files_table = new Gtk.Table(1, 1, false);
+			restore_files_table_rows = 0;
 			
-			foreach(var delfile in this.file_status) {
+			foreach(var delfile in file_status) {
 				if (delfile.restore)
 				{
-					//stdout.printf("number of relevent rows: %u", this.restore_files_table.nrows);
-					//this.restore_queue.push_tail(delfile.queue_format());
-					this.restore_queue.offer(delfile);
-					//stdout.printf(restore_files_table);
-					this.restore_files_table_rows++;
-					this.restore_files_table.resize(this.restore_files_table_rows, 1);
+					if (!restore_queue.contains(delfile))
+						restore_queue.offer(delfile);
+
+					restore_files_table_rows++;
+					restore_files_table.resize(restore_files_table_rows, 1);
 					
 					label = new Gtk.Label(delfile.filename());
 					label.set("xalign", 0.0f);
-					label.show();
-					this.restore_files_table.attach(label, 0, 1, this.restore_files_table_rows-1, this.restore_files_table_rows, Gtk.AttachOptions.FILL, 0, 0, 0);
+					label.show(); // By default, labels are hidden, therefore we show it.
+					restore_files_table.attach(label, 0, 1, this.restore_files_table_rows-1, this.restore_files_table_rows, Gtk.AttachOptions.FILL, 0, 0, 0);
 					/*this.restoremodel.append (out this.restoreiter);
         	this.restoremodel.set(this.restoreiter, 0, delfile.name);*/
 				}
 			}
+			restore_files_table.show();
+			sw_restore_files.add_with_viewport(restore_files_table);
 			//this.backups_queue.clear();
 		}
 		else if (page == summary_page) {
@@ -494,7 +504,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			return;
 		}
 		Time etime = backups_queue.poll();
-		stdout.printf("\n\ndelamo iz backupa: %s\n\n", etime.format("%c"));
 		/* Update progress */
 		int tepoch = etime.format("%s").to_int();
 		TimeVal ttoday = TimeVal();
@@ -510,7 +519,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			worddiff = _("Last week");
 		}
 		else if (tdiff / 24 / 30 == 0) {
-			stdout.printf("last month");
 			worddiff = _("Last month");
 		}
 		else if (tdiff / 24 / 30 >= 1 && tdiff / 24 / 30 <= 12) {
@@ -665,11 +673,15 @@ public class AssistantDirectoryHistory : AssistantOperation {
 				do_query_files_at_date();
 		}
     
-    if (cancelled)
-      do_close();
-    //else if (success)
+    /*if (cancelled) {
+			stdout.printf("canceled");
+			// we can't run do_close, otherwise it closes when user moves to the next page in assistant.
+			//do_close();
+		}
+    else if (success)
       //go_forward();
-			//stdout.printf("success\n");					
+			//stdout.printf("success\n");
+		*/
   }
 
 	protected override Gtk.Widget? make_confirm_page(){
@@ -686,7 +698,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			
 			var window = builder.get_object("viewport") as Gtk.Widget;
 			var backup_source_properties = builder.get_object("backup_properties") as Gtk.Table;
-			restore_files_table = builder.get_object("restore_files") as Gtk.Table;
+			sw_restore_files = builder.get_object("sw-restore-files") as Gtk.ScrolledWindow;
+			//restore_files_table = builder.get_object("restore_files") as Gtk.Table;
 			Gtk.Widget w;
 
 			w = new DejaDup.ConfigLabelLocation();
@@ -695,7 +708,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
 			w = new DejaDup.ConfigLabelBool(DejaDup.ENCRYPT_KEY);
 			backup_source_properties.attach(w, 1, 2, 1, 2, Gtk.AttachOptions.FILL, 0, 0, 0);
 
-			//var label = new Gtk.Label("make_confirm_page");
+			//label = new Gtk.Label("make_confirm_page");
 			//label.set("xalign", 0.0f);
 			//restore_files_table.attach(label, 0, 1, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
 			/*label = new Gtk.Label("meh 2");
