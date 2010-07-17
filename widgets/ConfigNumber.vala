@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,9 +26,9 @@ public class ConfigNumber : ConfigWidget
   public int lower_bound {get; construct;}
   public int upper_bound {get; construct;}
   
-  public ConfigNumber(string key, int lower_bound, int upper_bound)
+  public ConfigNumber(string key, int lower_bound, int upper_bound, string ns="")
   {
-    Object(key: key, lower_bound: lower_bound, upper_bound: upper_bound);
+    Object(key: key, lower_bound: lower_bound, upper_bound: upper_bound, ns: ns);
   }
   
   Gtk.SpinButton spin;
@@ -40,25 +40,14 @@ public class ConfigNumber : ConfigWidget
     spin.value_changed.connect(handle_value_changed);
   }
   
-  protected override void set_from_config()
+  protected override async void set_from_config()
   {
-    try {
-      var val = client.get_int(key);
-      spin.@value = val;
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    spin.value = settings.get_int(key);
   }
   
   void handle_value_changed()
   {
-    try {
-      client.set_int(key, (int)spin.@value);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    settings.set_int(key, (int)spin.value);
   }
 }
 

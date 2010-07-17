@@ -18,7 +18,7 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 # Sets up autoconf.
-AC_INIT([Déjà Dup],[15.1],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup], [https://launchpad.net/deja-dup])
+AC_INIT([Déjà Dup],[15.5],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup], [https://launchpad.net/deja-dup])
 AC_PREREQ(2.64)
 AC_CONFIG_SRCDIR(deja-dup/main.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
@@ -29,6 +29,7 @@ AM_INIT_AUTOMAKE([1.10 foreign dist-bzip2])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 GNOME_DOC_INIT
+GLIB_GSETTINGS
 
 # Checks for programs.
 AC_PROG_CC
@@ -38,13 +39,10 @@ AC_PROG_MAKE_SET
 LT_PREREQ([2.2.6])
 LT_INIT
 
-AC_PATH_PROG(GCONFTOOL, gconftool-2)
-AM_GCONF_SOURCE_2
-
 AC_PATH_PROG(PO4A, po4a)
 
 # Checks for vala
-AC_PROG_VALAC([0.8.0])
+AC_PROG_VALAC([0.9.2])
 
 # Sets up gettext.
 GETTEXT_PACKAGE="$PACKAGE"
@@ -64,15 +62,47 @@ AC_DEFINE_UNQUOTED(LOCALE_DIR, "${PREFIX}/${DATADIRNAME}/locale",[Locale directo
 AC_DEFINE_UNQUOTED(THEME_DIR, "${PREFIX}/${DATADIRNAME}/icons",[Icon directory])
 AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package data directory])
 
+GTK_MODULE=gtk+-2.0
 GTK_REQ_VER=2.18
-GLIB_REQ_VER=2.20
+GDK_X11_MODULE=gdk-x11-2.0
+GLIB_REQ_VER=2.25.3
 GIO_REQ_VER=$GLIB_REQ_VER
+UNIQUE_MODULE=unique-1.0
+APPINDICATOR_MODULE=appindicator-0.1
+
+AH_TEMPLATE([HAVE_GTK3], [whether gtk3 is available])
+AC_ARG_WITH([gtk3],
+  [AS_HELP_STRING([--with-gtk3],
+    [use gtk3 instead of gtk2 @<:@default=check@:>@])],
+  [],
+  [with_gtk3=check])
+AS_IF([test "x$with_gtk3" != xno],
+  [PKG_CHECK_EXISTS(gtk+-3.0 >= 2.90
+                    gdk-x11-3.0
+                    unique-3.0,
+    [GTK_MODULE=gtk+-3.0
+     GTK_REQ_VER=2.90
+     GDK_X11_MODULE=gdk-x11-3.0
+     UNIQUE_MODULE=unique-3.0
+     APPINDICATOR_MODULE=appindicator3-0.1],
+    [if test "x$with_gtk3" != xcheck; then
+       AC_MSG_FAILURE(
+         [--with-gtk3 was given, but test for $GTK_MODULE GDK_X11_MODULE $UNIQUE_MODULE failed])
+     else
+       AC_MSG_NOTICE([GTK+ 3 stack is not available so using GTK+ 2])
+     fi
+    ]
+  )]
+)
+
+AC_SUBST(GTK_MODULE)
+AC_SUBST(GDK_X11_MODULE)
+AC_SUBST(UNIQUE_MODULE)
 
 # Check dependencies
 PKG_CHECK_MODULES(DUP,
-                  gtk+-2.0 >= $GTK_REQ_VER
+                  $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
-                  gconf-2.0
                   dbus-glib-1
                   gnome-keyring-1
                   gmodule-2.0 >= $GLIB_REQ_VER
@@ -81,18 +111,17 @@ AC_SUBST(DUP_CFLAGS)
 AC_SUBST(DUP_LIBS)
 
 PKG_CHECK_MODULES(PREF,
-                  gtk+-2.0 >= $GTK_REQ_VER
+                  $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
-                  gconf-2.0
-                  unique-1.0
-                  gmodule-2.0 >= $GLIB_REQ_VER)
+                  gmodule-2.0 >= $GLIB_REQ_VER
+                  dbus-glib-1
+                  $UNIQUE_MODULE)
 AC_SUBST(PREF_CFLAGS)
 AC_SUBST(PREF_LIBS)
 
 PKG_CHECK_MODULES(COMMON,
                   gio-2.0 >= $GIO_REQ_VER
                   gio-unix-2.0 >= $GIO_REQ_VER
-                  gconf-2.0
                   dbus-glib-1
                   gnome-keyring-1
                   gmodule-2.0 >= $GLIB_REQ_VER)
@@ -100,14 +129,13 @@ AC_SUBST(COMMON_CFLAGS)
 AC_SUBST(COMMON_LIBS)
 
 PKG_CHECK_MODULES(WIDGETS,
-                  gtk+-2.0 >= $GTK_REQ_VER
                   gconf-2.0
-                  gmodule-2.0 >= $GLIB_REQ_VER)
+                  gmodule-2.0 >= $GLIB_REQ_VER
+                  $GTK_MODULE >= $GTK_REQ_VER)
 AC_SUBST(WIDGETS_CFLAGS)
 AC_SUBST(WIDGETS_LIBS)
 
 PKG_CHECK_MODULES(MONITOR,
-                  gconf-2.0
                   gio-2.0 >= $GIO_REQ_VER
                   dbus-glib-1
                   libnotify)
@@ -143,16 +171,25 @@ AC_ARG_WITH([appindicator],
   [],
   [with_appindicator=check])
 AS_IF([test "x$with_appindicator" != xno],
-  [PKG_CHECK_MODULES(APPINDICATOR, appindicator-0.1,
+  [PKG_CHECK_MODULES(APPINDICATOR, $APPINDICATOR_MODULE,
     [AC_DEFINE(HAVE_APPINDICATOR)
      AC_SUBST(APPINDICATOR_CFLAGS)
      AC_SUBST(APPINDICATOR_LIBS)],
     [if test "x$with_appindicator" != xcheck; then
         AC_MSG_FAILURE(
-          [--with-appindicator was given, but test for appindicator failed])
+          [--with-appindicator was given, but test for $APPINDICATOR_MODULE failed])
       fi
     ]
   )]
+)
+
+AC_ARG_ENABLE([deprecations],
+  [AS_HELP_STRING([--enable-deprecations],
+    [allow deprecated API usage @<:@default=yes@:>@])],
+  [],
+  [enable_deprecations=yes])
+AS_IF([test "x$enable_deprecations" = xno],
+  [CFLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGSEAL_ENABLE"]
 )
 
 # Sets up output files.

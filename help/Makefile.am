@@ -29,7 +29,7 @@ DOC_PAGES = \
 	restore-lost.page \
 	restore-revert.page
 
-REAL_LINGUAS = ar cs da de en_GB es fi fr gl he hu id it ja lt nb nl ps ru sv tr
+REAL_LINGUAS = ar cs da de en_GB es fi fr gl he hu id it ja lt nb nl pl ps ru sv th tr
 DOC_LINGUAS = POT $(REAL_LINGUAS)
 
 $(_DOC_LC_DOCS) : po.stamp

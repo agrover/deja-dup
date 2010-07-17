@@ -2,6 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2009 Michael Terry <mike@mterry.name>
+    © 2010 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,7 +22,7 @@ using GLib;
 
 /**
  * Yes, this is a silly reimplementation of Gtk.Assistant.
- * But Gtk.Assistant has some rediculous map/unmap logic that resets the page
+ * But Gtk.Assistant has some ridiculous map/unmap logic that resets the page
  * history when unmapped and generally doesn't work when unmapped.  Since
  * continuing to work when hidden is important for us, this is a
  * reimplementation of just the bits we use.
@@ -128,6 +129,7 @@ public abstract class Assistant : Gtk.Dialog
   void handle_response(int resp)
   {
     switch (resp) {
+    case Gtk.ResponseType.DELETE_EVENT: break;
     case BACK: go_back(); break;
     case APPLY:
     case FORWARD: go_forward(); break;
@@ -237,9 +239,10 @@ public abstract class Assistant : Gtk.Dialog
       use_title(info);
       set_buttons();
 
-      if (page_box.child != null) {
-        page_box.child.hide();
-        page_box.remove(page_box.child);
+      var child = page_box.get_child();
+      if (child != null) {
+        child.hide();
+        page_box.remove(child);
       }
       page_box.add(info.page);
       info.page.show();
@@ -290,18 +293,19 @@ public abstract class Assistant : Gtk.Dialog
       break;
     }
 
+    var area = (Gtk.HButtonBox)get_action_area();
     if (cancel_button != null) {
-      action_area.remove(cancel_button); cancel_button = null;}
+      area.remove(cancel_button); cancel_button = null;}
     if (close_button != null) {
-      action_area.remove(close_button); close_button = null;}
+      area.remove(close_button); close_button = null;}
     if (back_button != null) {
-      action_area.remove(back_button); back_button = null;}
+      area.remove(back_button); back_button = null;}
     if (resume_button != null) {
-      action_area.remove(resume_button); resume_button = null;}
+      area.remove(resume_button); resume_button = null;}
     if (forward_button != null) {
-      action_area.remove(forward_button); forward_button = null;}
+      area.remove(forward_button); forward_button = null;}
     if (apply_button != null) {
-      action_area.remove(apply_button); apply_button = null;}
+      area.remove(apply_button); apply_button = null;}
 
     if (show_cancel)
       cancel_button = add_button(Gtk.STOCK_CANCEL, CANCEL);

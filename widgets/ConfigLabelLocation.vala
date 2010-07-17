@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2009 Michael Terry <mike@mterry.name>
+    © 2009–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,32 +36,24 @@ public class ConfigLabelLocation : ConfigLabel
     hbox.pack_start(img, false, false, 0);
     hbox.reorder_child(img, 0);
     watch_key(BACKEND_KEY);
-    watch_key(FILE_ROOT_KEY);
-    watch_key(S3_ROOT_KEY);
+    watch_key(null, DejaDup.get_settings(FILE_ROOT));
+    watch_key(null, DejaDup.get_settings(S3_ROOT));
     set_from_config();
   }
   
-  protected override void set_from_config()
+  protected override async void set_from_config()
   {
     label.label = get_location_desc();
 
     if (img != null) {
-      Icon icon = null;
-      try {
-        icon = Backend.get_default().get_icon();
-      }
-      catch (Error e) {}
+      Icon icon = Backend.get_default().get_icon();
       if (icon == null)
         img.set_from_icon_name("folder", Gtk.IconSize.MENU);
       else
         img.set_from_gicon(icon, Gtk.IconSize.MENU);
     }
 
-    is_s3 = false;
-    try {
-      is_s3 = client.get_string(BACKEND_KEY) == "s3";
-    }
-    catch (Error e) {warning("%s\n", e.message);}
+    is_s3 = settings.get_string(BACKEND_KEY) == "s3";
   }
 }
 

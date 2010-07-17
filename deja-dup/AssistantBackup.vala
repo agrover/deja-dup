@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -41,10 +41,12 @@ public class AssistantBackup : AssistantOperation
     int rows = 0;
     Gtk.Widget w, label;
     
+    var vbox = new Gtk.VBox(false, 0);
+    vbox.border_width = 12;
+    
     var page = new Gtk.Table(rows, 2, false);
     page.set("row-spacing", 6,
-             "column-spacing", 6,
-             "border-width", 12);
+             "column-spacing", 6);
     
     w = new DejaDup.ConfigLocation();
     label = new Gtk.Label.with_mnemonic(_("_Backup location:"));
@@ -60,7 +62,12 @@ public class AssistantBackup : AssistantOperation
                 Gtk.AttachOptions.FILL, 0, 0);
     ++rows;
     
-    return page;
+    w = new DejaDup.ConfigLabelPolicy();
+    
+    vbox.pack_start(page, true, true, 0);
+    vbox.pack_end(w, false, false, 0);
+    
+    return vbox;
   }
   
   Gtk.Widget make_include_exclude_page()
@@ -165,7 +172,7 @@ public class AssistantBackup : AssistantOperation
   protected override DejaDup.Operation create_op()
   {
     realize();
-    var xid = Gdk.x11_drawable_get_xid(this.window);
+    var xid = Gdk.x11_drawable_get_xid(this.get_window());
     return new DejaDup.OperationBackup((uint)xid);
   }
   
@@ -233,12 +240,9 @@ public class AssistantBackup : AssistantOperation
         // Summary page is a vbox, let's add some widgets here to allow user to
         // make this backup on a regular basis.  But only show if user isn't
         // already automatically backing up.
-        var client = DejaDup.get_gconf_client();
+        var settings = DejaDup.get_settings();
         bool val = false;
-        try {
-          val = client.get_bool(DejaDup.PERIODIC_KEY);
-        }
-        catch (Error e) {warning("%s\n", e.message);}
+        val = settings.get_boolean(DejaDup.PERIODIC_KEY);
         if (!val)
           add_periodic_widgets((Gtk.VBox)page);
 

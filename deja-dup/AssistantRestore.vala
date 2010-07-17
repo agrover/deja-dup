@@ -283,7 +283,7 @@ public class AssistantRestore : AssistantOperation
     }
 
     realize();
-    var xid = Gdk.x11_drawable_get_xid(this.window);
+    var xid = Gdk.x11_drawable_get_xid(this.get_window());
 
     var rest_op = new DejaDup.OperationRestore(restore_location, date,
                                                restore_files, (uint)xid);
@@ -379,7 +379,7 @@ public class AssistantRestore : AssistantOperation
       mount_op = new MountOperationAssistant(this);
 
     realize();
-    var xid = Gdk.x11_drawable_get_xid(this.window);
+    var xid = Gdk.x11_drawable_get_xid(this.get_window());
 
     query_op = new DejaDup.OperationStatus((uint)xid);
     query_op.collection_dates.connect(handle_collection_dates);
@@ -408,20 +408,19 @@ public class AssistantRestore : AssistantOperation
       query_timeout_id = 0;
     }
     
-
     if (page == date_page) {
       // Hmm, we never got a date from querying the backend, but we also
       // didn't hit an error (since we're about to show this page, and not
       // the summary/error page).  Skip the date portion, since the backend
       // must not be capable of giving us dates (duplicity < 0.5.04 couldn't).
       if (!got_dates)
-        go_forward();
+        skip();
     }
     else if (page == restore_dest_page) {
       // If we're doing a known-file-set restore, assume user wants same-location
       // restore.
       if (restore_files != null)
-        go_forward();
+        skip();
     }
     else if (page == confirm_page) {
       // When we restore from
@@ -457,6 +456,8 @@ public class AssistantRestore : AssistantOperation
         confirm_files_label.label = ngettext("File to restore:",
                                              "Files to restore:",
                                              restore_files.length());
+
+        confirm_files.foreach((w) => {w.destroy();});
         foreach (File f in restore_files) {
           var parse_name = f.get_parse_name();
           var file_label = new Gtk.Label(Path.get_basename(parse_name));

@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,42 +26,30 @@ public abstract class ConfigWidget : Gtk.EventBox
   public signal void changed();
 
   public string key {get; construct;}
+  public string ns {get; construct; default = "";}
   
-  List<string> dirs = null;
-  protected GConf.Client client;
+  protected Settings settings;
   construct {
-    client = DejaDup.get_gconf_client();
+    settings = DejaDup.get_settings(ns);
     
     if (key != null)
       watch_key(key);
   }
   
-  ~ConfigWidget()
+  // If you pass in a special settings object, make sure it survives the
+  // lifetime of this widget.
+  protected void watch_key(string? key, Settings? s = null)
   {
-    foreach (string dir in dirs) {
-      try {
-        client.remove_dir(dir);
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
-    }
-  }
-  
-  protected void watch_key(string key)
-  {
-    string dir = key;
-    weak string end = dir.rchr(-1, '/');
-    if (end != null)
-      dir = dir.substring(0, dir.length - end.length);
-    try {
-      client.add_dir(dir, GConf.ClientPreloadType.NONE);
-      client.notify_add(key, key_changed);
-      dirs.prepend(dir);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    if (s == null)
+      s = settings;
+
+    // Wish we could use changed[key].connect to take advantage of detailed
+    // signals, but vala doesn't support that yet.  It only supports static
+    // detailed signals (changed['my-specific-key']).
+    s.changed.connect((k) => {
+      if (key == null || key == k)
+        key_changed();
+    });
   }
   
   void key_changed()
@@ -70,7 +58,7 @@ public abstract class ConfigWidget : Gtk.EventBox
     changed();
   }
 
-  protected abstract void set_from_config();
+  protected abstract async void set_from_config();
 }
 
 }

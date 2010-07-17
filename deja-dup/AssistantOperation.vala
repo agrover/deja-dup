@@ -2,6 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2010 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -95,6 +96,7 @@ public abstract class AssistantOperation : Assistant
     canceled.connect(do_cancel);
     closed.connect(do_close);
     prepare.connect(do_prepare);
+    delete_event.connect(do_minimize_to_tray);
   }
 
   /*
@@ -174,7 +176,7 @@ public abstract class AssistantOperation : Assistant
     string log_line = prefix + " " + parse_name;
 
     bool adjustment_at_end = false;
-    Gtk.Adjustment adjust = progress_text.vadjustment;
+    Gtk.Adjustment adjust = progress_scroll.get_vadjustment();
     if (adjust.value >= adjust.upper - adjust.page_size ||
         adjust.page_size == 0 || // means never been set, means not realized
         !progress_expander.expanded)
@@ -364,17 +366,11 @@ public abstract class AssistantOperation : Assistant
      *
      * 
      */
-    var client = DejaDup.get_gconf_client();
+    var settings = DejaDup.get_settings();
     string val;
-    try {
-      val = client.get_string(DejaDup.LAST_RUN_KEY);
-      if (val != null && val != "")
-        return;
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
+    val = settings.get_string(DejaDup.LAST_RUN_KEY);
+    if (val != null && val != "")
       return;
-    }
     
     add_custom_config_pages();
   }
@@ -535,6 +531,16 @@ public abstract class AssistantOperation : Assistant
     }
     else
       do_close();
+  }
+
+  bool do_minimize_to_tray(Gdk.Event event)
+  {
+    if (op != null)
+      hide(); // minimize to tray when operation is in progress
+    else
+      do_cancel(); // otherwise, do the normal cancel operation
+
+    return true;
   }
   
   protected virtual void do_close()

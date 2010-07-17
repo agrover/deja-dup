@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ public class ConfigLocation : ConfigWidget
     var has_connect_prog = Environment.find_program_in_path("nautilus-connect-server") != null;
     if (has_connect_prog) {
       var button = new ButtonConnect();
-      var action_area = (Gtk.Box)dialog.action_area;
+      var action_area = (Gtk.Box)dialog.get_action_area();
       action_area.pack_end(button, false, false, 0);
       button.show_all();
     }
@@ -70,7 +70,7 @@ public class ConfigLocation : ConfigWidget
     button.selection_changed.connect(handle_selection_changed);
     
     watch_key(BACKEND_KEY);
-    watch_key(FILE_PATH_KEY);
+    watch_key(FILE_PATH_KEY, DejaDup.get_settings(FILE_ROOT));
   }
   
   ~ConfigLocation()
@@ -84,15 +84,15 @@ public class ConfigLocation : ConfigWidget
     }
   }
   
-  File get_file_from_gconf() throws Error
+  File get_file_from_settings() throws Error
   {
     // Check the backend type, then GIO uri if needed
     File file = null;
-    var val = client.get_string(BACKEND_KEY);
+    var val = settings.get_string(BACKEND_KEY);
     if (val == "s3" && tmpdir != null)
       file = tmpdir;
     else {
-      val = client.get_string(FILE_PATH_KEY);
+      val = DejaDup.get_settings(FILE_ROOT).get_string(FILE_PATH_KEY);
       if (val == null)
         val = ""; // current directory
       file = File.parse_name(val);
@@ -100,14 +100,14 @@ public class ConfigLocation : ConfigWidget
     return file;
   }
   
-  protected override void set_from_config()
+  protected override async void set_from_config()
   {
     // Check the backend type, then GIO uri if needed
     File file = null;
     try {
       var uri = button.get_uri();
       var button_file = uri == null ? null : File.new_for_uri(uri);
-      file = get_file_from_gconf();
+      file = get_file_from_settings();
       if (button_file == null || !file.equal(button_file)) {
         button.set_current_folder_uri(file.get_uri());
         is_s3 = tmpdir != null && file.equal(tmpdir);
@@ -125,25 +125,27 @@ public class ConfigLocation : ConfigWidget
 
   async void set_file_info()
   {
-    File gconf_file = null;
+    File settings_file = null;
     try {
-      gconf_file = get_file_from_gconf();
+      settings_file = get_file_from_settings();
     }
     catch (Error err) {} // ignore
     
     var uri = button.get_uri();
     var file = uri == null ? null : File.new_for_uri(uri);
-    if (file == null || file.equal(gconf_file))
+    if (file == null || file.equal(settings_file))
       return; // we sometimes get several selection changed notices in a row...
     
     is_s3 = tmpdir != null && file.equal(tmpdir);
     
     try {
       if (is_s3)
-        client.set_string(BACKEND_KEY, "s3");
+        settings.set_string(BACKEND_KEY, "s3");
       else {
-        client.set_string(BACKEND_KEY, "file");
-        client.set_string(FILE_PATH_KEY, file.get_parse_name());
+        settings.delay();
+        settings.set_string(BACKEND_KEY, "file");
+        settings.set_string(FILE_PATH_KEY, file.get_parse_name());
+        settings.apply();
         yield BackendFile.check_for_volume_info(file);
       }
     }

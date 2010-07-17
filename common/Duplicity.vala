@@ -89,8 +89,8 @@ public class Duplicity : Object
   bool needs_root = false;
   
   bool has_progress_total = false;
-  double progress_total; // zero, unless we already know limit
-  double progress_count; // count of how far we are along in the current instance
+  uint64 progress_total; // zero, unless we already know limit
+  uint64 progress_count; // count of how far we are along in the current instance
   
   static File slash;
   static File slash_root;
@@ -109,6 +109,8 @@ public class Duplicity : Object
   }
   List<DateInfo?> collection_info = null;
   
+  bool checked_backup_space = false;
+
   static const int MINIMUM_FULL = 2;
   bool deleted_files = false;
   int delete_age = 0;
@@ -120,7 +122,7 @@ public class Duplicity : Object
     if (connected)
       resume();
     else
-      pause();
+      pause(_("Paused (no network)"));
   }
 
   public Duplicity(Operation.Mode mode) {
@@ -162,10 +164,8 @@ public class Duplicity : Object
     if (mode == Operation.Mode.BACKUP)
       process_include_excludes();
     
-    try {
-      delete_age = client.get_int(DELETE_AFTER_KEY);
-    }
-    catch (Error e) {warning("%s\n", e.message);}
+    var settings = get_settings();
+    delete_age = settings.get_int(DELETE_AFTER_KEY);
 
     if (!restart())
       done(false, false);
@@ -174,7 +174,7 @@ public class Duplicity : Object
       NetworkManager.get().changed.connect(network_changed);
       if (!NetworkManager.get().connected) {
         debug("No connection found. Postponing the backup.");
-        pause();
+        pause(_("Paused (no network)"));
       }
     }
   }
@@ -238,11 +238,12 @@ public class Duplicity : Object
     }
   }
 
-  public void pause()
+  public void pause(string? reason)
   {
     if (inst != null) {
       inst.pause();
-      set_status(_("Paused (no network)"), false);
+      if (reason != null)
+        set_status(reason, false);
     }
   }
 
@@ -292,6 +293,10 @@ public class Duplicity : Object
         state = State.DRY_RUN;
         action_desc = _("Preparing…");
         extra_argv.append("--dry-run");
+      }
+      else if (!checked_backup_space) {
+        check_backup_space();
+        return true;
       }
       else {
         if (DuplicityInfo.get_default().has_backup_progress)
@@ -394,6 +399,50 @@ public class Duplicity : Object
     return local.resolve_relative_path(rel_file_path);
   }
   
+  async void check_backup_space()
+  {
+    checked_backup_space = true;
+
+    if (!has_progress_total) {
+      if (!restart())
+        done(false, false);
+      return;
+    }
+
+    var free = yield backend.get_space();
+    var total = yield backend.get_space(false);
+    if (total < progress_total) {
+        // Tiny backup location.  Suggest they get a larger one.
+        show_error(_("Backup location is too small.  Try using one with more space."));
+        return;
+    }
+
+    if (free < progress_total) {
+      if (got_collection_info) {
+        // Alright, let's look at collection data
+        int full_dates = 0;
+        foreach (DateInfo info in collection_info) {
+          if (info.full)
+            ++full_dates;
+        }
+        if (full_dates > 1) {
+          delete_excess(full_dates - 1);
+          // don't set checked_backup_space, we want to be able to do this again if needed
+          checked_backup_space = false;
+          checked_collection_info = false; // get info again
+          return;
+        }
+      }
+      else {
+        show_error(_("Backup location does not have enough free space."));
+        return;
+      }
+    }
+    
+    if (!restart())
+      done(false, false);
+  }
+
   bool cleanup() {
     if (DuplicityInfo.get_default().has_broken_cleanup ||
         state == State.CLEANUP)
@@ -411,10 +460,7 @@ public class Duplicity : Object
     return true;
   }
   
-  bool delete_excess(int cutoff) {
-    if (cutoff < MINIMUM_FULL)
-      return false;
-
+  void delete_excess(int cutoff) {
     state = State.DELETE;
     var argv = new List<string>();
     argv.append("remove-all-but-n-full");
@@ -425,7 +471,7 @@ public class Duplicity : Object
     set_status(_("Cleaning up…"));
     connect_and_start(null, null, argv);
     
-    return true;
+    return;
   }
   
   void handle_done(DuplicityInstance? inst, bool success, bool cancelled)
@@ -439,6 +485,11 @@ public class Duplicity : Object
           if (restart())
             return;
         }
+        break;
+      
+      case State.DELETE:
+        if (restart()) // In case we were interrupting normal flow
+          return;
         break;
       
       case State.CLEANUP:
@@ -495,6 +546,7 @@ public class Duplicity : Object
           }
         }
         else if (success && mode == Operation.Mode.BACKUP) {
+          mode = Operation.Mode.INVALID; // mark 'done' so when we delete, we don't restart
           if (delete_files_if_needed())
             return;
         }
@@ -566,6 +618,11 @@ public class Duplicity : Object
   // Should only be called *after* a successful backup
   bool delete_files_if_needed()
   {
+    if (delete_age == 0) {
+      deleted_files = true;
+      return false;
+    }
+    
     // Check if we need to delete any backups
     // If we got collection info, examine it to see if we should delete old
     // files.
@@ -605,7 +662,8 @@ public class Duplicity : Object
       if (too_old > 0 && full_dates > MINIMUM_FULL) {
         // Alright, let's delete those ancient files!
         int cutoff = int.max(MINIMUM_FULL, full_dates - too_old);
-        return delete_excess(cutoff);
+        delete_excess(cutoff);
+        return true;
       }
       
       // If we don't need to delete, pretend we did and move on.
@@ -620,6 +678,10 @@ public class Duplicity : Object
   protected static const int ERROR_RESTORE_DIR_NOT_FOUND = 19;
   protected static const int ERROR_EXCEPTION = 30;
   protected static const int ERROR_GPG = 31;
+  protected static const int ERROR_BACKEND = 50;
+  protected static const int ERROR_BACKEND_PERMISSION_DENIED = 51;
+  protected static const int ERROR_BACKEND_NOT_FOUND = 52;
+  protected static const int ERROR_BACKEND_NO_SPACE = 53;
   protected static const int INFO_PROGRESS = 2;
   protected static const int INFO_COLLECTION_STATUS = 3;
   protected static const int INFO_DIFF_FILE_NEW = 4;
@@ -689,6 +751,7 @@ public class Duplicity : Object
       case ERROR_EXCEPTION: // exception
         process_exception(firstline.length > 2 ? firstline[2] : "", text);
         return;
+
       case ERROR_RESTORE_DIR_NOT_FOUND:
         // make text a little nicer than duplicity gives
         // duplicity gives something like "home/blah/blah not found in archive,
@@ -697,9 +760,11 @@ public class Duplicity : Object
           text = _("Could not restore ‘%s’: File not found in backup").printf(
                    restore_files.data.get_parse_name());
         break;
+
       case ERROR_GPG:
         text = _("Bad encryption password.");
         break;
+
       case ERROR_HOSTNAME_CHANGED:
         if (firstline.length >= 4) {
           if (!ask_question(_("Computer name changed"), _("The existing backup is of a computer named %s, but the current computer’s name is %s.  If this is unexpected, you should back up to a different location.").printf(firstline[2], firstline[3])))
@@ -710,6 +775,38 @@ public class Duplicity : Object
         saved_argv.append("--allow-source-mismatch");
         if (restart())
           return;
+        break;
+
+      case ERROR_BACKEND_PERMISSION_DENIED:
+        if (firstline.length >= 5 && firstline[2] == "put") {
+          var file = make_file_obj(firstline[4]);
+          text = _("Permission denied when trying to create ‘%s’.").printf(file.get_parse_name());
+        }
+        if (firstline.length >= 5 && firstline[2] == "get") {
+          var file = make_file_obj(firstline[3]); // assume error is on backend side
+          text = _("Permission denied when trying to read ‘%s’.").printf(file.get_parse_name());
+        }
+        else if (firstline.length >= 4 && firstline[2] == "list") {
+          var file = make_file_obj(firstline[3]);
+          text = _("Permission denied when trying to read ‘%s’.").printf(file.get_parse_name());
+        }
+        else if (firstline.length >= 4 && firstline[2] == "delete") {
+          var file = make_file_obj(firstline[3]);
+          text = _("Permission denied when trying to delete ‘%s’.").printf(file.get_parse_name());
+        }
+        break;
+
+      case ERROR_BACKEND_NOT_FOUND:
+        if (firstline.length >= 4) {
+          var file = make_file_obj(firstline[3]);
+          text = _("Backup location ‘%s’ does not exist.").printf(file.get_parse_name());
+        }
+        break;
+
+      case ERROR_BACKEND_NO_SPACE:
+        if (firstline.length >= 5) {
+          text = _("No space left.");
+        }
         break;
       }
     }
@@ -763,9 +860,9 @@ public class Duplicity : Object
         else
           where = local.get_path();
         if (where == null)
-          show_error(_("No space left"));
+          show_error(_("No space left."));
         else
-          show_error(_("No space left in %s").printf(where));
+          show_error(_("No space left in ‘%s’.").printf(where));
       }
       else {
         // Very possibly a FAT file system that can't handle the colons that 
@@ -873,7 +970,7 @@ public class Duplicity : Object
     double total;
     
     if (firstline.length > 2)
-      this.progress_count = firstline[2].to_double();
+      this.progress_count = firstline[2].to_uint64();
     else
       return;
     
@@ -884,7 +981,7 @@ public class Duplicity : Object
     else
       return; // can't do progress without a total
     
-    double percent = this.progress_count / (double)total;
+    double percent = (double)this.progress_count / total;
     if (percent > 1)
       percent = 1;
     if (percent < 0) // ???

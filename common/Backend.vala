@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -39,6 +39,9 @@ public abstract class Backend : Object
   public virtual async void get_envp() throws Error {
     envp_ready(true, new List<string>());
   }
+
+  public static const uint64 INFINITE_SPACE = uint64.MAX;
+  public virtual async uint64 get_space(bool free = true) {return INFINITE_SPACE;}
   
   // Arguments needed only when the particular mode is active
   // If mode == INVALID, arguments needed any time the backup is referenced.
@@ -46,10 +49,10 @@ public abstract class Backend : Object
   
   public abstract Backend clone();
   
-  public static Backend? get_default() throws Error
+  public static Backend? get_default()
   {
-    var client = get_gconf_client();
-    var backend_name = client.get_string(BACKEND_KEY);
+    var settings = get_settings();
+    var backend_name = settings.get_string(BACKEND_KEY);
     if (backend_name == "s3")
       return new BackendS3();
     else if (backend_name == "file")

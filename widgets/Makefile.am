@@ -1,7 +1,7 @@
 # -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008,2009 Michael Terry <mike@mterry.name>
+# © 2008–2010 Michael Terry <mike@mterry.name>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,8 +23,7 @@ VALA_CFLAGS = \
 	--vapidir $(top_srcdir)/common \
 	--vapidir $(top_srcdir)/vapi \
 	--pkg libcommon \
-	--pkg gtk+-2.0 \
-	--pkg gconf-2.0 \
+	--pkg @GTK_MODULE@ \
 	--pkg dbus-glib-1 \
 	--pkg config
 
@@ -45,6 +44,7 @@ libwidgets_la_VALASOURCES = \
 	ConfigLabelBool.vala \
 	ConfigLabelList.vala \
 	ConfigLabelLocation.vala \
+	ConfigLabelPolicy.vala \
 	ConfigList.vala \
 	ConfigLocation.vala \
 	ConfigNumber.vala \

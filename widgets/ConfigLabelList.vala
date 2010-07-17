@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2009 Michael Terry <mike@mterry.name>
+    © 2009–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,9 +23,9 @@ namespace DejaDup {
 
 public class ConfigLabelList : ConfigLabel
 {
-  public ConfigLabelList(string key)
+  public ConfigLabelList(string key, string ns="")
   {
-    Object(key: key);
+    Object(key: key, ns: ns);
   }
   
   construct {
@@ -33,17 +33,11 @@ public class ConfigLabelList : ConfigLabel
     size_allocate.connect((a) => {label.set("width-request", a.width);});
   }
   
-  protected override void set_from_config()
+  protected override async void set_from_config()
   {
     string val = "";
-    SList<string> slist;
-    try {
-      slist = client.get_list(key, GConf.ValueType.STRING);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      return;
-    }
+    var slist_val = settings.get_value(key);
+    string*[] slist = slist_val.get_strv();
     
     var list = DejaDup.parse_dir_list(slist);
     
@@ -59,7 +53,7 @@ public class ConfigLabelList : ConfigLabel
       else if (f.has_prefix(home))
         s = home.get_relative_path(f);
       else
-        s = f.get_path();
+        s = f.get_parse_name();
       
       if (i > 0)
         val += ", ";

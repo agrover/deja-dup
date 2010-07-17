@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,9 +23,9 @@ namespace DejaDup {
 
 public class ConfigEntry : ConfigWidget
 {
-  public ConfigEntry(string key)
+  public ConfigEntry(string key, string ns="")
   {
-    Object(key: key);
+    Object(key: key, ns: ns);
   }
   
   Gtk.Entry entry;
@@ -37,27 +37,17 @@ public class ConfigEntry : ConfigWidget
     entry.focus_out_event.connect(handle_focus_out);
   }
   
-  protected override void set_from_config()
+  protected override async void set_from_config()
   {
-    try {
-      var val = client.get_string(key);
-      if (val == null)
-        val = "";
-      entry.set_text(val);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    var val = settings.get_string(key);
+    if (val == null)
+      val = "";
+    entry.set_text(val);
   }
   
   bool handle_focus_out()
   {
-    try {
-      client.set_string(key, entry.get_text());
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    settings.set_string(key, entry.get_text());
     return false;
   }
 }

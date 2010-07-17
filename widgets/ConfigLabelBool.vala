@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2009 Michael Terry <mike@mterry.name>
+    © 2009–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,19 +23,15 @@ namespace DejaDup {
 
 public class ConfigLabelBool : ConfigLabel
 {
-  public ConfigLabelBool(string key)
+  public ConfigLabelBool(string key, string ns="")
   {
-    Object(key: key);
+    Object(key: key, ns: ns);
   }
   
-  protected override void set_from_config()
+  protected override async void set_from_config()
   {
-    bool val;
-    try {
-      val = client.get_bool(key);
-      label.label = val ? _("Yes") : _("No");
-    }
-    catch (Error e) {warning("%s\n", e.message);}
+    var val = settings.get_boolean(key);
+    label.label = val ? _("Yes") : _("No");
   }
 }
 

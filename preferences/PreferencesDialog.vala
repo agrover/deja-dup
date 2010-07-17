@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -44,17 +44,23 @@ public class PreferencesDialog : Gtk.Dialog
                 Gtk.STOCK_HELP, Gtk.ResponseType.HELP);
     response.connect(handle_response);
     
-    var table = new Gtk.Table(0, 3, false);
-    table.set("border-width", 3);
-    int row = 0;
-    
+    Gtk.Notebook notebook = new Gtk.Notebook();
     Gtk.Widget w;
+    Gtk.VBox page_box;
+    Gtk.HBox hbox;
     Gtk.Label label;
+    Gtk.Table table;
+    int row;
     
-    backend_widgets = new List<Gtk.Widget>[NUM_LISTS];
+    page_box = new Gtk.VBox(false, 0);
+    page_box.set("border-width", 3);
+    table = new Gtk.Table(0, 3, false);
+    row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
 
+    backend_widgets = new List<Gtk.Widget>[NUM_LISTS];
+    
     // We can't start by showing a ConfigLocation, because many locations
     // will not be immediately available (remote URIs that aren't yet mounted,
     // removable drives that aren't connected).  No need to immediately prompt
@@ -63,8 +69,8 @@ public class PreferencesDialog : Gtk.Dialog
     // anything up, they want to start in edit mode.
     string last_run = null;
     try {
-      var client = DejaDup.get_gconf_client();
-      last_run = client.get_string(DejaDup.LAST_RUN_KEY);
+      var settings = DejaDup.get_settings();
+      last_run = settings.get_string(DejaDup.LAST_RUN_KEY);
     }
     catch (Error e) {warning("%s\n", e.message);}
 
@@ -95,7 +101,7 @@ public class PreferencesDialog : Gtk.Dialog
     ++row;
     
     var s3_table = new Gtk.Table(1, 3, false);
-    w = new DejaDup.ConfigEntry(DejaDup.S3_ID_KEY);
+    w = new DejaDup.ConfigEntry(DejaDup.S3_ID_KEY, DejaDup.S3_ROOT);
     label = new Gtk.Label("    %s".printf(_("S3 Access Key I_D:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -107,7 +113,7 @@ public class PreferencesDialog : Gtk.Dialog
                     Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                     Gtk.AttachOptions.FILL, 3, 3);
     
-    w = new DejaDup.ConfigEntry(DejaDup.S3_FOLDER_KEY);
+    w = new DejaDup.ConfigEntry(DejaDup.S3_FOLDER_KEY, DejaDup.S3_ROOT);
     label = new Gtk.Label("    %s".printf(_("_Folder:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -125,8 +131,32 @@ public class PreferencesDialog : Gtk.Dialog
     backend_widgets[S3_LIST].append(s3_table);
     ++row;
     
+    w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
+    table.attach(w, 0, 3, row, row + 1,
+                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
+                 Gtk.AttachOptions.FILL, 3, 3);
+    ++row;
+    
+    w = new DejaDup.ConfigLabelPolicy();
+    hbox = new Gtk.HBox(false, 0);
+    hbox.border_width = 3;
+    hbox.add(w);
+    
+    page_box.pack_start(table, true, true, 0);
+    page_box.pack_end(hbox, false, false, 0);
+    notebook.append_page(page_box, null);
+    notebook.set_tab_label_text(page_box, _("Storage"));
+    
+    // Reset page
+    page_box = new Gtk.VBox(false, 0);
+    page_box.set("border-width", 3);
+    table = new Gtk.Table(0, 3, false);
+    row = 0;
+    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
+    button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
+    
     w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY, button_sizes);
-    w.set_size_request(250, 80);
+    w.set_size_request(300, 80);
     label = new Gtk.Label(_("I_nclude files in folders:"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -145,7 +175,7 @@ public class PreferencesDialog : Gtk.Dialog
     ++row;
     
     w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY, button_sizes);
-    w.set_size_request(250, 120);
+    w.set_size_request(300, 120);
     label = new Gtk.Label(_("E_xcept files in folders:"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -163,11 +193,17 @@ public class PreferencesDialog : Gtk.Dialog
                  3, 3);
     ++row;
     
-    w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
-    table.attach(w, 0, 3, row, row + 1,
-                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 Gtk.AttachOptions.FILL, 3, 3);
-    ++row;
+    page_box.pack_start(table, true, true, 0);
+    notebook.append_page(page_box, null);
+    notebook.set_tab_label_text(page_box, _("Files"));
+    
+    // Reset page
+    page_box = new Gtk.VBox(false, 0);
+    page_box.set("border-width", 3);
+    table = new Gtk.Table(0, 3, false);
+    row = 0;
+    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
+    button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
     DejaDup.ConfigBool periodic_check = new DejaDup.ConfigBool(DejaDup.PERIODIC_KEY, _("_Automatically back up on a regular schedule"));
     table.attach(periodic_check, 0, 3, row, row + 1,
@@ -207,12 +243,23 @@ public class PreferencesDialog : Gtk.Dialog
                  3, 3);
     ++row;
     
+    w = new DejaDup.ConfigLabelPolicy();
+    hbox = new Gtk.HBox(false, 0);
+    hbox.border_width = 3;
+    hbox.add(w);
+    
+    page_box.pack_start(table, true, true, 0);
+    page_box.pack_end(hbox, false, false, 0);
+    notebook.append_page(page_box, null);
+    notebook.set_tab_label_text(page_box, _("Schedule"));
+    
     if (location_label_noedit != null)
       handle_location_label_changed(location_label_noedit);
     else
       handle_edit_location();
 
-    vbox.add(table);
+    var area = (Gtk.VBox)get_content_area();
+    area.add(notebook);
   }
   
   void handle_edit_location()
@@ -270,7 +317,7 @@ public class PreferencesDialog : Gtk.Dialog
   void handle_response(Gtk.Dialog dlg, int response) {
     switch (response) {
     case Gtk.ResponseType.HELP:
-      DejaDup.show_uri(dlg, "ghelp:deja-dup#deja-dup-prefs");
+      DejaDup.show_uri(dlg, "ghelp:deja-dup#prefs");
       break;
     default:
       Gtk.main_quit();

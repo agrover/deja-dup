@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2009 Michael Terry <mike@mterry.name>
+    © 2009–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,9 +23,9 @@ namespace DejaDup {
 
 public class ConfigLabel : ConfigWidget
 {
-  public ConfigLabel(string? key)
+  public ConfigLabel(string? key, string ns="")
   {
-    Object(key: key);
+    Object(key: key, ns: ns);
   }
   
   protected Gtk.HBox hbox;
@@ -39,14 +39,9 @@ public class ConfigLabel : ConfigWidget
     set_from_config();
   }
   
-  protected override void set_from_config()
+  protected override async void set_from_config()
   {
-    string val;
-    try {
-      val = client.get_string(key);
-      label.label = val;
-    }
-    catch (Error e) {warning("%s\n", e.message);}
+    label.label = settings.get_string(key);
   }
 }
 

@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,8 +23,8 @@ namespace DejaDup {
 
 public class ConfigPeriod : ConfigChoice
 {
-  public ConfigPeriod(string key) {
-    Object(key: key);
+  public ConfigPeriod(string key, string ns="") {
+    Object(key: key, ns: ns);
   }
   
   construct {
@@ -49,26 +49,14 @@ public class ConfigPeriod : ConfigChoice
     Value? val = get_current_value();
     int intval = val == null ? 1 : val.get_int();
     
-    try {
-        client.set_int(key, intval);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    settings.set_int(key, intval);
     
     choice_changed(intval.to_string());
   }
   
-  protected override void set_from_config()
+  protected override async void set_from_config()
   {
-    int confval;
-    try {
-        confval = client.get_int(key);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      return;
-    }
+    var confval = settings.get_int(key);
     if (confval < 1)
       confval = 1;
     
@@ -78,7 +66,7 @@ public class ConfigPeriod : ConfigChoice
     
     while (valid) {
       Value val;
-      combo.model.get_value(iter, gconf_col, out val);
+      combo.model.get_value(iter, settings_col, out val);
       int intval = val.get_int();
       
       if (intval == confval) {

@@ -122,16 +122,13 @@ public class DuplicityInstance : Object
       if (user_cmd == null)
         user_cmd = a;
       else
-        user_cmd = "%s %s".printf(user_cmd, a);
+        user_cmd = "%s %s".printf(user_cmd, Shell.quote(a));
     }
     
     if (as_root) {
-      try {
-        var client = get_gconf_client();
-        if (!client.get_bool(ROOT_PROMPT_KEY))
-          as_root = false;
-      }
-      catch (Error e) {warning("%s\n", e.message);}
+      var settings = get_settings();
+      if (!settings.get_boolean(ROOT_PROMPT_KEY))
+        as_root = false;
     }
     
     // Run as root if needed

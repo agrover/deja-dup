@@ -98,7 +98,7 @@ public class StatusIcon : Object
         tooltip = this.action;
       if (this.progress > 0)
         tooltip = tooltip + "\n" + _("%.1f%% complete").printf(this.progress * 100);
-      hacks_status_icon_set_tooltip_text(gtkicon, tooltip);
+      gtkicon.set_tooltip_text(tooltip);
     }
 
     if (this.progress > 0)
@@ -117,7 +117,7 @@ public class StatusIcon : Object
   {
     hide_all();
 
-    // Fake a run by setting today's timestamp as the 'last-run' gconf key
+    // Fake a run by setting today's timestamp as the 'last-run' setting
     try {
       DejaDup.update_last_run_timestamp();
     }
