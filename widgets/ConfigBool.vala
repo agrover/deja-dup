@@ -25,9 +25,9 @@ public class ConfigBool : ConfigWidget, Togglable
 {
   public string label {get; construct;}
   
-  public ConfigBool(string key, string label)
+  public ConfigBool(string key, string label, string ns="")
   {
-    Object(key: key, label: label);
+    Object(key: key, label: label, ns: ns);
   }
   
   public bool get_active() {return button.get_active();}

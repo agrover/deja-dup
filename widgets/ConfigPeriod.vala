@@ -23,8 +23,8 @@ namespace DejaDup {
 
 public class ConfigPeriod : ConfigChoice
 {
-  public ConfigPeriod(string key) {
-    Object(key: key);
+  public ConfigPeriod(string key, string ns="") {
+    Object(key: key, ns: ns);
   }
   
   construct {

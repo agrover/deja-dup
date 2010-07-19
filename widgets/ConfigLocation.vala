@@ -70,7 +70,7 @@ public class ConfigLocation : ConfigWidget
     button.selection_changed.connect(handle_selection_changed);
     
     watch_key(BACKEND_KEY);
-    watch_key(FILE_PATH_KEY);
+    // FIXME watch_key(FILE_PATH_KEY);
   }
   
   ~ConfigLocation()
@@ -88,11 +88,11 @@ public class ConfigLocation : ConfigWidget
   {
     // Check the backend type, then GIO uri if needed
     File file = null;
-    var val = settings.get_value(BACKEND_KEY).get_string();
+    var val = settings.get_string(BACKEND_KEY);
     if (val == "s3" && tmpdir != null)
       file = tmpdir;
     else {
-      val = settings.get_value(FILE_PATH_KEY).get_string();
+      val = DejaDup.get_settings(FILE_ROOT).get_string(FILE_PATH_KEY);
       if (val == null)
         val = ""; // current directory
       file = File.parse_name(val);

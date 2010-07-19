@@ -31,8 +31,8 @@ public class ConfigDelete : ConfigChoice
   public static const int ANNUALLY = 365;
   public static const int FOREVER = int.MAX;
 
-  public ConfigDelete(string key) {
-    Object(key: key);
+  public ConfigDelete(string key, string ns="") {
+    Object(key: key, ns: ns);
   }
   
   construct {

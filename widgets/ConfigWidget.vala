@@ -26,11 +26,12 @@ public abstract class ConfigWidget : Gtk.EventBox
   public signal void changed();
 
   public string key {get; construct;}
+  public string ns {get; construct; default = "";}
   
   List<string> watched_keys = null;
   protected Settings settings;
   construct {
-    settings = DejaDup.get_settings();
+    settings = DejaDup.get_settings(ns);
     
     if (key != null)
       watch_key(key);

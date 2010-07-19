@@ -23,9 +23,9 @@ namespace DejaDup {
 
 public class ConfigLabelList : ConfigLabel
 {
-  public ConfigLabelList(string key)
+  public ConfigLabelList(string key, string ns="")
   {
-    Object(key: key);
+    Object(key: key, ns: ns);
   }
   
   construct {
@@ -36,14 +36,8 @@ public class ConfigLabelList : ConfigLabel
   protected override async void set_from_config()
   {
     string val = "";
-    string*[] slist;
-    try {
-      slist = settings.get_value(key).get_strv();
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      return;
-    }
+    var slist_val = settings.get_value(key);
+    string*[] slist = slist_val.get_strv();
     
     var list = DejaDup.parse_dir_list(slist);
     

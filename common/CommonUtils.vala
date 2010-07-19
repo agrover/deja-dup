@@ -161,8 +161,8 @@ public GConf.Client get_gconf_client()
 
 public Settings get_settings(string? subdir = null)
 {
-  string schema = "org.gnome.deja-dup";
-  if (subdir != null)
+  string schema = "org.gnome.DejaDup";
+  if (subdir != null && subdir != "")
     schema += "." + subdir;
   return new Settings(schema);
 }
@@ -182,7 +182,7 @@ void convert_ssh_to_file()
     var backend = settings.get_value(BACKEND_KEY).get_string();
     if (backend == "ssh") {
       settings.set_value(BACKEND_KEY, new Variant.string("file"));
-      var ssh_settings = get_settings("ssh");
+      var ssh_settings = get_settings("SSH");
       var server = ssh_settings.get_value(SSH_SERVER_KEY).get_string();
       if (server != null && server != "") {
         var username = ssh_settings.get_value(SSH_USERNAME_KEY).get_string();
@@ -202,7 +202,7 @@ void convert_ssh_to_file()
         else
           gio_uri += directory;
         
-        var file_settings = get_settings("file");
+        var file_settings = get_settings(FILE_ROOT);
         file_settings.set_value(FILE_PATH_KEY, new Variant.string(gio_uri));
       }
     }
@@ -214,7 +214,6 @@ void convert_ssh_to_file()
 
 public void initialize()
 {
-  Environment.set_variable("GSETTINGS_BACKEND", "gconf", true);
   set_gconf_client();
   convert_ssh_to_file();
 }

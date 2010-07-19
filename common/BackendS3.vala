@@ -21,10 +21,10 @@ using GLib;
 
 namespace DejaDup {
 
-public const string S3_ROOT_KEY = "/apps/deja-dup/s3";
-public const string S3_ID_KEY = "/apps/deja-dup/s3/id";
-public const string S3_BUCKET_KEY = "/apps/deja-dup/s3/bucket";
-public const string S3_FOLDER_KEY = "/apps/deja-dup/s3/folder";
+public const string S3_ROOT = "S3";
+public const string S3_ID_KEY = "id";
+public const string S3_BUCKET_KEY = "bucket";
+public const string S3_FOLDER_KEY = "folder";
 
 const string S3_SERVER = "s3.amazonaws.com";
 
@@ -54,7 +54,7 @@ public class BackendS3 : Backend
 
   public override string? get_location() throws Error
   {
-    var settings = get_settings();
+    var settings = get_settings(S3_ROOT);
     
     var bucket = settings.get_value(S3_BUCKET_KEY).get_string();
     var default_bucket = get_default_bucket();
@@ -80,7 +80,7 @@ public class BackendS3 : Backend
     // OK, the bucket we tried must already exist, so let's use a different
     // one.  We'll take previous bucket name and increment it.
     try {
-      var settings = get_settings();
+      var settings = get_settings(S3_ROOT);
       
       var bucket = settings.get_value(S3_BUCKET_KEY).get_string();
       if (bucket == "deja-dup") {
@@ -120,7 +120,7 @@ public class BackendS3 : Backend
   
   public override string? get_location_pretty() throws Error
   {
-    var settings = get_settings();
+    var settings = get_settings(S3_ROOT);
     var folder = settings.get_value(S3_FOLDER_KEY).get_string();
     if (folder == null || folder == "")
       folder = "/";
@@ -134,7 +134,7 @@ public class BackendS3 : Backend
   string secret_key;
   public override async void get_envp() throws Error
   {
-    var settings = get_settings();
+    var settings = get_settings(S3_ROOT);
     settings_id = settings.get_value(S3_ID_KEY).get_string();
     id = settings_id == null ? "" : settings_id;
     
@@ -207,7 +207,7 @@ public class BackendS3 : Backend
   }
   
   void got_secret_key() {
-    var settings = get_settings();
+    var settings = get_settings(S3_ROOT);
     if (id != settings_id)
       settings.set_value(S3_ID_KEY, new Variant.string(id));
     

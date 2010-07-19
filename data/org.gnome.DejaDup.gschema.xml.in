@@ -1,5 +1,5 @@
 <schemalist gettext-domain="deja-dup">
-  <schema id="org.gnome.deja-dup" path="/apps/deja-dup/">
+  <schema id="org.gnome.DejaDup" path="/apps/deja-dup/">
     <key name="include-list" type="as">
       <default>[ '$HOME' ]</default>
       <_summary>Directories to back up</_summary>
@@ -45,10 +45,10 @@
       <_summary>Type of location to store backup</_summary>
       <_description>The type of backup location.  Valid values are ‘s3’ or ‘file’.</_description>
     </key>
-    <child name="s3" schema="org.gnome.deja-dup.s3"/>
-    <child name="file" schema="org.gnome.deja-dup.file"/>
+    <child name="s3" schema="org.gnome.DejaDup.S3"/>
+    <child name="file" schema="org.gnome.DejaDup.File"/>
   </schema>
-  <schema id="org.gnome.deja-dup.s3" path="/apps/deja-dup/s3/">
+  <schema id="org.gnome.DejaDup.S3" path="/apps/deja-dup/s3/">
     <key name="id" type="s">
       <default>''</default>
       <_summary>Amazon S3 Access Key ID</_summary>
@@ -65,7 +65,7 @@
       <_description>An optional folder name to store files in.  This folder will be created in the chosen bucket.</_description>
     </key>
   </schema>
-  <schema id="org.gnome.deja-dup.file" path="/apps/deja-dup/file/">
+  <schema id="org.gnome.DejaDup.File" path="/apps/deja-dup/file/">
     <key name="path" type="s">
       <default>''</default>
       <_summary>Backup location</_summary>

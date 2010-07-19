@@ -21,14 +21,14 @@ using GLib;
 
 namespace DejaDup {
 
-public const string FILE_ROOT_KEY = "/apps/deja-dup/file";
-public const string FILE_TYPE_KEY = "/apps/deja-dup/file/type";
-public const string FILE_PATH_KEY = "/apps/deja-dup/file/path";
-public const string FILE_RELPATH_KEY = "/apps/deja-dup/file/relpath";
-public const string FILE_UUID_KEY = "/apps/deja-dup/file/uuid";
-public const string FILE_NAME_KEY = "/apps/deja-dup/file/name";
-public const string FILE_SHORT_NAME_KEY = "/apps/deja-dup/file/short-name";
-public const string FILE_ICON_KEY = "/apps/deja-dup/file/icon";
+public const string FILE_ROOT = "File";
+public const string FILE_TYPE_KEY = "type";
+public const string FILE_PATH_KEY = "path";
+public const string FILE_RELPATH_KEY = "relpath";
+public const string FILE_UUID_KEY = "uuid";
+public const string FILE_NAME_KEY = "name";
+public const string FILE_SHORT_NAME_KEY = "short-name";
+public const string FILE_ICON_KEY = "icon";
 
 public class BackendFile : Backend
 {
@@ -39,11 +39,11 @@ public class BackendFile : Backend
   // Will return null if volume isn't ready
   static File? get_file_from_settings() throws Error
   {
-    var settings = get_settings();
-    var type = settings.get_value(FILE_TYPE_KEY).get_string();
+    var settings = get_settings(FILE_ROOT);
+    var type = settings.get_string(FILE_TYPE_KEY);
     if (type == "volume") {
-      var path = settings.get_value(FILE_RELPATH_KEY).get_string();
-      var uuid = settings.get_value(FILE_UUID_KEY).get_string();
+      var path = settings.get_string(FILE_RELPATH_KEY);
+      var uuid = settings.get_string(FILE_UUID_KEY);
       var vol = find_volume_by_uuid(uuid);
       if (vol == null)
         return null;
@@ -57,7 +57,7 @@ public class BackendFile : Backend
         return root;
     }
     else {
-      var path = settings.get_value(FILE_PATH_KEY).get_string();
+      var path = settings.get_string(FILE_PATH_KEY);
       return File.parse_name(path);
     }
   }
@@ -77,7 +77,7 @@ public class BackendFile : Backend
 
   public override string? get_location_pretty() throws Error
   {
-    var settings = get_settings();
+    var settings = get_settings(FILE_ROOT);
     var type = settings.get_value(FILE_TYPE_KEY).get_string();
     if (type == "volume") {
       var path = settings.get_value(FILE_RELPATH_KEY).get_string();
@@ -94,7 +94,7 @@ public class BackendFile : Backend
   
   public override bool is_native() {
     try {
-      var settings = get_settings();
+      var settings = get_settings(FILE_ROOT);
       var type = settings.get_value(FILE_TYPE_KEY).get_string();
       if (type == "volume")
         return true;
@@ -115,7 +115,7 @@ public class BackendFile : Backend
     try {
       var file = get_file_from_settings();
       if (file == null) { // must be a volume that isn't yet mounted. See if volume is connected
-        var settings = get_settings();
+        var settings = get_settings(FILE_ROOT);
         var uuid = settings.get_value(FILE_UUID_KEY).get_string();
         var vol = find_volume_by_uuid(uuid);
         if (vol != null)
@@ -142,7 +142,7 @@ public class BackendFile : Backend
 
   public override Icon? get_icon() {
     try {
-      var settings = get_settings();
+      var settings = get_settings(FILE_ROOT);
       var type = settings.get_value(FILE_TYPE_KEY).get_string();
       if (type == "volume") {
         var icon_str = settings.get_value(FILE_ICON_KEY).get_string();
@@ -182,7 +182,7 @@ public class BackendFile : Backend
   // Checks if file is secretly a volume file and fills out settings data if so.
   public async static void check_for_volume_info(File file) throws Error
   {
-    var settings = get_settings();
+    var settings = get_settings(FILE_ROOT);
 
     if (!file.is_native()) {
       settings.set_value(FILE_TYPE_KEY, new Variant.string("normal"));
@@ -223,7 +223,7 @@ public class BackendFile : Backend
 
   static void update_volume_info(Volume volume) throws Error
   {
-    var settings = get_settings();
+    var settings = get_settings(FILE_ROOT);
 
     var name = volume.get_name();
     if (name == null || name == "")
@@ -273,7 +273,7 @@ public class BackendFile : Backend
     this.ref();
 
     var success = true;
-    var settings = get_settings();
+    var settings = get_settings(FILE_ROOT);
     var type = settings.get_value(FILE_TYPE_KEY).get_string();
     if (type == "volume")
       success = yield mount_volume();
@@ -310,7 +310,7 @@ public class BackendFile : Backend
 
   async bool mount_volume() throws Error
   {
-    var settings = get_settings();
+    var settings = get_settings(FILE_ROOT);
     var uuid = settings.get_value(FILE_UUID_KEY).get_string();
 
     var vol = yield wait_for_volume(uuid);
@@ -321,25 +321,9 @@ public class BackendFile : Backend
       return true;
     }
 
-    var loop = new MainLoop(null, false);
-    var rv = false;
-    Error error = null;
-
-    vol.mount(MountMountFlags.NONE, mount_op, null, (o, r) => {
-      loop.quit();
-      try {
-        rv = ((Volume)o).mount_finish(r);
-      }
-      catch (Error e) {
-        error = e;
-      }
-    });
-    loop.run();
-
+    var rv = yield vol.mount(MountMountFlags.NONE, mount_op, null);
     if (rv)
       update_volume_info(vol);
-    else
-      throw error;
 
     return rv;
   }
@@ -363,7 +347,7 @@ public class BackendFile : Backend
   {
     var vol = find_volume_by_uuid(uuid);
     if (vol == null) {
-      var settings = get_settings();
+      var settings = get_settings(FILE_ROOT);
       var name = settings.get_value(FILE_NAME_KEY).get_string();
       pause_op(_("Backup location not available"), _("Waiting for ‘%s’ to become connected…").printf(name));
       var loop = new MainLoop(null, false);

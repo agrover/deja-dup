@@ -26,9 +26,9 @@ public class ConfigNumber : ConfigWidget
   public int lower_bound {get; construct;}
   public int upper_bound {get; construct;}
   
-  public ConfigNumber(string key, int lower_bound, int upper_bound)
+  public ConfigNumber(string key, int lower_bound, int upper_bound, string ns="")
   {
-    Object(key: key, lower_bound: lower_bound, upper_bound: upper_bound);
+    Object(key: key, lower_bound: lower_bound, upper_bound: upper_bound, ns: ns);
   }
   
   Gtk.SpinButton spin;

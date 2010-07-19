@@ -71,8 +71,10 @@ public class OperationBackup : Operation
   {
     var settings = get_settings();
     
-    var include_list = parse_dir_list(settings.get_value(INCLUDE_LIST_KEY).get_strv());
-    var exclude_list = parse_dir_list(settings.get_value(EXCLUDE_LIST_KEY).get_strv());
+    var include_val = settings.get_value(INCLUDE_LIST_KEY);
+    var include_list = parse_dir_list(include_val.get_strv());
+    var exclude_val = settings.get_value(EXCLUDE_LIST_KEY);
+    var exclude_list = parse_dir_list(exclude_val.get_strv());
     
     List<string> rv = new List<string>();
     

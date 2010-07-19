@@ -26,32 +26,32 @@ import ldtp
 # First we test how things work when there's no valid ssh info
 def no_values():
 	base.setup(start = False)
-	base.set_gconf_value('backend', 'ssh')
+	base.set_settings_value('backend', "'ssh'")
 	base.start_deja_dup()
-	rv = base.get_gconf_value('backend') == 'file'
+	rv = base.get_settings_value('backend') == 'file'
 	return rv
 
 # Now test bits and pieces missing
 def some_values():
 	base.setup(start = False)
-	base.set_gconf_value('backend', 'ssh')
-	base.set_gconf_value('ssh/server', 'localhost')
+	base.set_settings_value('backend', "'ssh'")
+	base.set_settings_value('server', "'localhost'", schema="SSH")
 	base.start_deja_dup()
-	rv = base.get_gconf_value('backend') == 'file' and \
-	     base.get_gconf_value('file/path') == 'ssh://localhost/'
+	rv = base.get_settings_value('backend') == 'file' and \
+	     base.get_settings_value('path', schema="File") == 'ssh://localhost/'
 	return rv
 
 # Now test everything together
 def all_values():
 	base.setup(start = False)
-	base.set_gconf_value('backend', 'ssh')
-	base.set_gconf_value('ssh/server', 'localhost')
-	base.set_gconf_value('ssh/port', '42', key_type = 'int')
-	base.set_gconf_value('ssh/username', 'goober')
-	base.set_gconf_value('ssh/directory', '/hello')
+	base.set_settings_value('backend', "'ssh'")
+	base.set_settings_value('server', "'localhost'", schema="SSH")
+	base.set_settings_value('port', '42', schema="SSH")
+	base.set_settings_value('username', "'goober'", schema="SSH")
+	base.set_settings_value('directory', "'/hello'", schema="SSH")
 	base.start_deja_dup()
-	rv = base.get_gconf_value('backend') == 'file' and \
-       base.get_gconf_value('file/path') == 'ssh://goober@localhost:42/hello'
+	rv = base.get_settings_value('backend') == 'file' and \
+       base.get_settings_value('path', schema="File") == 'ssh://goober@localhost:42/hello'
 	return rv
 
 base.run(no_values)

@@ -23,9 +23,9 @@ namespace DejaDup {
 
 public class ConfigEntry : ConfigWidget
 {
-  public ConfigEntry(string key)
+  public ConfigEntry(string key, string ns="")
   {
-    Object(key: key);
+    Object(key: key, ns: ns);
   }
   
   Gtk.Entry entry;

@@ -25,9 +25,9 @@ public class ConfigList : ConfigWidget
 {
   public Gtk.SizeGroup? size_group {get; construct;}
   
-  public ConfigList(string key, Gtk.SizeGroup? sg = null)
+  public ConfigList(string key, Gtk.SizeGroup? sg = null, string ns="")
   {
-    Object(size_group: sg, key: key);
+    Object(size_group: sg, key: key, ns: ns);
   }
   
   Gtk.TreeView tree;
@@ -94,14 +94,8 @@ public class ConfigList : ConfigWidget
   
   protected override async void set_from_config()
   {
-    string*[] slist;
-    try {
-      slist = settings.get_value(key).get_strv();
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      return;
-    }
+    var slist_val = settings.get_value(key);
+    string*[] slist = slist_val.get_strv();
     
     var list = DejaDup.parse_dir_list(slist);
     
@@ -169,7 +163,8 @@ public class ConfigList : ConfigWidget
     SList<string> files = dlg.get_filenames();
     dlg.destroy();
     
-    string[] slist = settings.get_value(key).get_strv();
+    var slist_val = settings.get_value(key);
+    string*[] slist = slist_val.get_strv();
     
     foreach (string file in files) {
       var folder = File.new_for_path(file);
@@ -198,7 +193,8 @@ public class ConfigList : ConfigWidget
     if (paths == null)
       return;
     
-    string[] before = settings.get_value(key).get_strv();
+    var slist_val = settings.get_value(key);
+    string*[] before = slist_val.get_strv();
     string[] after = new string[0];
     
     foreach (Gtk.TreePath path in paths) {
@@ -217,7 +213,7 @@ public class ConfigList : ConfigWidget
       }
     }
     
-    settings.set_value(key, new Variant.strv(after));
+    settings.set_value(key, new Variant.strv((string*[])after));
   }
 }
 

@@ -23,9 +23,9 @@ namespace DejaDup {
 
 public class ConfigLabel : ConfigWidget
 {
-  public ConfigLabel(string? key)
+  public ConfigLabel(string? key, string ns="")
   {
-    Object(key: key);
+    Object(key: key, ns: ns);
   }
   
   protected Gtk.HBox hbox;

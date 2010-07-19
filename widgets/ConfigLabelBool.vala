@@ -23,9 +23,9 @@ namespace DejaDup {
 
 public class ConfigLabelBool : ConfigLabel
 {
-  public ConfigLabelBool(string key)
+  public ConfigLabelBool(string key, string ns="")
   {
-    Object(key: key);
+    Object(key: key, ns: ns);
   }
   
   protected override async void set_from_config()
