@@ -41,6 +41,11 @@
       <_description>The number of days to keep backup files on the backup location.  A value of 0 means forever.  This is a minimum number of days; the files may be kept longer.</_description>
     </key>
     <key name="backend" type="s">
+      <choices>
+        <choice value='file'/>
+        <choice value='s3'/>
+        <choice value='ssh'/>
+      </choices>
       <default>'s3'</default>
       <_summary>Type of location to store backup</_summary>
       <_description>The type of backup location.  Valid values are ‘s3’ or ‘file’.</_description>
@@ -72,7 +77,11 @@
       <_description>Location in which to hold the backup files.</_description>
     </key>
     <key name="type" type="s">
-      <default>''</default>
+      <choices>
+        <choice value='normal'/>
+        <choice value='volume'/>
+      </choices>
+      <default>'normal'</default>
       <_summary>Folder type</_summary>
       <_description>Whether the backup location is a mounted external volume or a normal folder.  Possible values are ‘volume’ or ‘normal’.</_description>
     </key>
@@ -100,6 +109,24 @@
       <default>''</default>
       <_summary>Icon of the external volume</_summary>
       <_description>If the backup location is on an external volume, this is the volume’s icon.</_description>
+    </key>
+  </schema>
+  <schema path="/apps/deja-dup/ssh/" id="org.gnome.DejaDup.SSH">
+    <key type="s" name="server">
+      <default>''</default>
+      <_summary>Obsolete</_summary>
+    </key>
+    <key type="i" name="port">
+      <default>0</default>
+      <_summary>Obsolete</_summary>
+    </key>
+    <key type="s" name="username">
+      <default>''</default>
+      <_summary>Obsolete</_summary>
+    </key>
+    <key type="s" name="directory">
+      <default>''</default>
+      <_summary>Obsolete</_summary>
     </key>
   </schema>
 </schemalist>
