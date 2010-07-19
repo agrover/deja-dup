@@ -41,9 +41,7 @@ public class ConfigLabel : ConfigWidget
   
   protected override async void set_from_config()
   {
-    string val;
-    val = settings.get_value(key).get_string();
-    label.label = val;
+    label.label = settings.get_string(key);
   }
 }
 

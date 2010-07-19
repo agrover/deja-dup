@@ -30,8 +30,7 @@ public class ConfigLabelBool : ConfigLabel
   
   protected override async void set_from_config()
   {
-    bool val;
-    val = settings.get_value(key).get_boolean();
+    var val = settings.get_boolean(key);
     label.label = val ? _("Yes") : _("No");
   }
 }

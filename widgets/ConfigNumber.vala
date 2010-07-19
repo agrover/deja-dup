@@ -42,13 +42,12 @@ public class ConfigNumber : ConfigWidget
   
   protected override async void set_from_config()
   {
-    var val = settings.get_value(key).get_int32();
-    spin.@value = val;
+    spin.value = settings.get_int(key);
   }
   
   void handle_value_changed()
   {
-    settings.set_value(key, new Variant.int32((int)spin.@value));
+    settings.set_int(key, (int)spin.value);
   }
 }
 

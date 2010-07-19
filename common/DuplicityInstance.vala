@@ -127,7 +127,7 @@ public class DuplicityInstance : Object
     
     if (as_root) {
       var settings = get_settings();
-      if (!settings.get_value(ROOT_PROMPT_KEY).get_boolean())
+      if (!settings.get_boolean(ROOT_PROMPT_KEY))
         as_root = false;
     }
     

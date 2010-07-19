@@ -57,7 +57,7 @@ public class ConfigLabelLocation : ConfigLabel
         img.set_from_gicon(icon, Gtk.IconSize.MENU);
     }
 
-    is_s3 = settings.get_value(BACKEND_KEY).get_string() == "s3";
+    is_s3 = settings.get_string(BACKEND_KEY) == "s3";
   }
 }
 

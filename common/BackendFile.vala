@@ -79,10 +79,10 @@ public class BackendFile : Backend
   public override string? get_location_pretty() throws Error
   {
     var settings = get_settings(FILE_ROOT);
-    var type = settings.get_value(FILE_TYPE_KEY).get_string();
+    var type = settings.get_string(FILE_TYPE_KEY);
     if (type == "volume") {
-      var path = settings.get_value(FILE_RELPATH_KEY).get_string();
-      var name = settings.get_value(FILE_SHORT_NAME_KEY).get_string();
+      var path = settings.get_string(FILE_RELPATH_KEY);
+      var name = settings.get_string(FILE_SHORT_NAME_KEY);
       // Translators: %2$s is the name of a removable drive, %1$s is a folder
       // on that removable drive.
       return _("%1$s on %2$s").printf(path, name);
@@ -96,7 +96,7 @@ public class BackendFile : Backend
   public override bool is_native() {
     try {
       var settings = get_settings(FILE_ROOT);
-      var type = settings.get_value(FILE_TYPE_KEY).get_string();
+      var type = settings.get_string(FILE_TYPE_KEY);
       if (type == "volume")
         return true;
 
@@ -117,12 +117,12 @@ public class BackendFile : Backend
       var file = get_file_from_settings();
       if (file == null) { // must be a volume that isn't yet mounted. See if volume is connected
         var settings = get_settings(FILE_ROOT);
-        var uuid = settings.get_value(FILE_UUID_KEY).get_string();
+        var uuid = settings.get_string(FILE_UUID_KEY);
         var vol = find_volume_by_uuid(uuid);
         if (vol != null)
           return true;
         else {
-          var name = settings.get_value(FILE_SHORT_NAME_KEY).get_string();
+          var name = settings.get_string(FILE_SHORT_NAME_KEY);
           when = _("Backup will begin when %s becomes connected.").printf(name);
           return false;
         }
@@ -144,9 +144,9 @@ public class BackendFile : Backend
   public override Icon? get_icon() {
     try {
       var settings = get_settings(FILE_ROOT);
-      var type = settings.get_value(FILE_TYPE_KEY).get_string();
+      var type = settings.get_string(FILE_TYPE_KEY);
       if (type == "volume") {
-        var icon_str = settings.get_value(FILE_ICON_KEY).get_string();
+        var icon_str = settings.get_string(FILE_ICON_KEY);
         return Icon.new_for_string(icon_str);
       }
       else {
@@ -186,7 +186,7 @@ public class BackendFile : Backend
     var settings = get_settings(FILE_ROOT);
 
     if (!file.is_native()) {
-      settings.set_value(FILE_TYPE_KEY, new Variant.string("normal"));
+      settings.set_string(FILE_TYPE_KEY, "normal");
       return;
     }
 
@@ -199,7 +199,7 @@ public class BackendFile : Backend
     }
     catch (Error e) {}
     if (mount == null) {
-      settings.set_value(FILE_TYPE_KEY, new Variant.string("normal"));
+      settings.set_string(FILE_TYPE_KEY, "normal");
       return;
     }
 
@@ -215,9 +215,9 @@ public class BackendFile : Backend
     if (relpath == null)
       relpath = "";
 
-    settings.set_value(FILE_UUID_KEY, new Variant.string(uuid));
-    settings.set_value(FILE_RELPATH_KEY, new Variant.string(relpath));
-    settings.set_value(FILE_TYPE_KEY, new Variant.string("volume"));
+    settings.set_string(FILE_UUID_KEY, uuid);
+    settings.set_string(FILE_RELPATH_KEY, relpath);
+    settings.set_string(FILE_TYPE_KEY, "volume");
 
     update_volume_info(volume);
   }
@@ -243,17 +243,17 @@ public class BackendFile : Backend
     if (icon != null)
       icon_str = icon.to_string();
 
-    settings.set_value(FILE_NAME_KEY, new Variant.string(name));
-    settings.set_value(FILE_SHORT_NAME_KEY, new Variant.string(short_name));
-    settings.set_value(FILE_ICON_KEY, new Variant.string(icon_str));
+    settings.set_string(FILE_NAME_KEY, name);
+    settings.set_string(FILE_SHORT_NAME_KEY, short_name);
+    settings.set_string(FILE_ICON_KEY, icon_str);
 
     // Also update full path just in case (useful if downgrading to old version?)
     var mount = volume.get_mount();
     if (mount != null) {
-      var path = settings.get_value(FILE_RELPATH_KEY).get_string();
+      var path = settings.get_string(FILE_RELPATH_KEY);
       if (path != null)
         path = mount.get_root().get_child(path).get_parse_name();
-      settings.set_value(FILE_PATH_KEY, new Variant.string(path));
+      settings.set_string(FILE_PATH_KEY, path);
     }
   }
 
@@ -275,7 +275,7 @@ public class BackendFile : Backend
 
     var success = true;
     var settings = get_settings(FILE_ROOT);
-    var type = settings.get_value(FILE_TYPE_KEY).get_string();
+    var type = settings.get_string(FILE_TYPE_KEY);
     if (type == "volume")
       success = yield mount_volume();
     else if (type == "normal") {
@@ -312,7 +312,7 @@ public class BackendFile : Backend
   async bool mount_volume() throws Error
   {
     var settings = get_settings(FILE_ROOT);
-    var uuid = settings.get_value(FILE_UUID_KEY).get_string();
+    var uuid = settings.get_string(FILE_UUID_KEY);
 
     var vol = yield wait_for_volume(uuid);
 
@@ -349,7 +349,7 @@ public class BackendFile : Backend
     var vol = find_volume_by_uuid(uuid);
     if (vol == null) {
       var settings = get_settings(FILE_ROOT);
-      var name = settings.get_value(FILE_NAME_KEY).get_string();
+      var name = settings.get_string(FILE_NAME_KEY);
       pause_op(_("Backup location not available"), _("Waiting for ‘%s’ to become connected…").printf(name));
       var loop = new MainLoop(null, false);
       var mon = VolumeMonitor.get();

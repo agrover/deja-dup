@@ -326,7 +326,7 @@ public abstract class AssistantOperation : Assistant
   {
     var settings = DejaDup.get_settings();
     string val;
-    val = settings.get_value(DejaDup.LAST_RUN_KEY).get_string();
+    val = settings.get_string(DejaDup.LAST_RUN_KEY);
     if (val != null && val != "")
       return;
     

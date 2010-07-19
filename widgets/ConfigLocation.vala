@@ -140,10 +140,10 @@ public class ConfigLocation : ConfigWidget
     
     try {
       if (is_s3)
-        settings.set_value(BACKEND_KEY, new Variant.string("s3"));
+        settings.set_string(BACKEND_KEY, "s3");
       else {
-        settings.set_value(BACKEND_KEY, new Variant.string("file"));
-        settings.set_value(FILE_PATH_KEY, new Variant.string(file.get_parse_name()));
+        settings.set_string(BACKEND_KEY, "file");
+        settings.set_string(FILE_PATH_KEY, file.get_parse_name());
         yield BackendFile.check_for_volume_info(file);
       }
     }

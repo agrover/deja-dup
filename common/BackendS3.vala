@@ -116,7 +116,7 @@ public class BackendS3 : Backend
   public override string? get_location_pretty() throws Error
   {
     var settings = get_settings(S3_ROOT);
-    var folder = settings.get_value(S3_FOLDER_KEY).get_string();
+    var folder = settings.get_string(S3_FOLDER_KEY);
     if (folder == null || folder == "")
       folder = "/";
     
@@ -130,7 +130,7 @@ public class BackendS3 : Backend
   public override async void get_envp() throws Error
   {
     var settings = get_settings(S3_ROOT);
-    settings_id = settings.get_value(S3_ID_KEY).get_string();
+    settings_id = settings.get_string(S3_ID_KEY);
     id = settings_id == null ? "" : settings_id;
     
     if (id != "" && secret_key != null) {
@@ -204,7 +204,7 @@ public class BackendS3 : Backend
   void got_secret_key() {
     var settings = get_settings(S3_ROOT);
     if (id != settings_id)
-      settings.set_value(S3_ID_KEY, new Variant.string(id));
+      settings.set_string(S3_ID_KEY, id);
     
     List<string> envp = new List<string>();
     envp.append("AWS_ACCESS_KEY_ID=%s".printf(id));

@@ -242,7 +242,7 @@ public class AssistantBackup : AssistantOperation
         // already automatically backing up.
         var settings = DejaDup.get_settings();
         bool val = false;
-        val = settings.get_value(DejaDup.PERIODIC_KEY).get_boolean();
+        val = settings.get_boolean(DejaDup.PERIODIC_KEY);
         if (!val)
           add_periodic_widgets((Gtk.VBox)page);
 

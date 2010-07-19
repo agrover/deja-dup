@@ -70,7 +70,7 @@ public class PreferencesDialog : Gtk.Dialog
     string last_run = null;
     try {
       var settings = DejaDup.get_settings();
-      last_run = settings.get_value(DejaDup.LAST_RUN_KEY).get_string();
+      last_run = settings.get_string(DejaDup.LAST_RUN_KEY);
     }
     catch (Error e) {warning("%s\n", e.message);}
 

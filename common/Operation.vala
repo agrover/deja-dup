@@ -109,7 +109,7 @@ public abstract class Operation : Object
     
     // Get encryption passphrase if needed
     var settings = get_settings();
-    if (settings.get_value(ENCRYPT_KEY).get_boolean() && passphrase == null) {
+    if (settings.get_boolean(ENCRYPT_KEY) && passphrase == null) {
       needs_password = true;
       passphrase_required(); // will call continue_with_passphrase when ready
     }
@@ -187,7 +187,7 @@ public abstract class Operation : Object
     if (success && passphrase == "") {
       // User entered no password.  Turn off encryption
       var settings = get_settings();
-      settings.set_value(ENCRYPT_KEY, new Variant.boolean(false));
+      settings.set_boolean(ENCRYPT_KEY, false);
     }
     
     done(success, cancelled);
