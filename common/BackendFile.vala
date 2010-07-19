@@ -24,6 +24,7 @@ namespace DejaDup {
 public const string FILE_ROOT = "File";
 public const string FILE_TYPE_KEY = "type";
 public const string FILE_PATH_KEY = "path";
+// FIXME: should above be ay or s?
 public const string FILE_RELPATH_KEY = "relpath";
 public const string FILE_UUID_KEY = "uuid";
 public const string FILE_NAME_KEY = "name";

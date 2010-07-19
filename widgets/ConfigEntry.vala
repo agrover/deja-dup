@@ -39,25 +39,15 @@ public class ConfigEntry : ConfigWidget
   
   protected override async void set_from_config()
   {
-    try {
-      var val = settings.get_value(key).get_string();
-      if (val == null)
-        val = "";
-      entry.set_text(val);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    var val = settings.get_string(key);
+    if (val == null)
+      val = "";
+    entry.set_text(val);
   }
   
   bool handle_focus_out()
   {
-    try {
-      settings.set_value(key, new Variant.string(entry.get_text()));
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    settings.set_string(key, entry.get_text());
     return false;
   }
 }

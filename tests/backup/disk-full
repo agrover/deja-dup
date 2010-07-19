@@ -82,12 +82,12 @@ def deleteold():
 
   # Now there should be just two full backups left: 3M and 10M (the last two)
   f = os.statvfs(dest)
-  free = f.f_bsize * f.f_bavail # should be roughly 7M
+  free = f.f_bsize * f.f_bavail
   assert base.num_manifests(dest='mount') == 2
   assert base.num_manifests('full', dest='mount') == 2
   # In practice, the two previous backups 3M+10M tends to take about 14M and
   # the free space tends to be closer to 4M because the mount ends up being 18M
-  assert 4*1000*1000 - 50*1000 <= free and free <= 4*1000*1000 + 50*1000
+  assert 4*1000*1000 - 100*1000 <= free and free <= 4*1000*1000 + 100*1000, "Free is %i" % free
 
 base.run(full)
 base.run(deleteold)

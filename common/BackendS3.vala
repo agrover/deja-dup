@@ -56,16 +56,16 @@ public class BackendS3 : Backend
   {
     var settings = get_settings(S3_ROOT);
     
-    var bucket = settings.get_value(S3_BUCKET_KEY).get_string();
+    var bucket = settings.get_string(S3_BUCKET_KEY);
     var default_bucket = get_default_bucket();
     if (bucket == null || bucket == "" ||
         (bucket.has_prefix("deja-dup-auto-") &&
          !bucket.has_prefix(default_bucket))) {
       bucket = default_bucket;
-      settings.set_value(S3_BUCKET_KEY, new Variant.string(bucket));
+      settings.set_string(S3_BUCKET_KEY, bucket);
     }
     
-    var folder = settings.get_value(S3_FOLDER_KEY).get_string();
+    var folder = settings.get_string(S3_FOLDER_KEY);
     if (folder != null && folder != "") {
       if (folder[0] != '/')
         bucket = "%s/%s".printf(bucket, folder);
@@ -79,43 +79,38 @@ public class BackendS3 : Backend
   public bool bump_bucket() {
     // OK, the bucket we tried must already exist, so let's use a different
     // one.  We'll take previous bucket name and increment it.
-    try {
-      var settings = get_settings(S3_ROOT);
-      
-      var bucket = settings.get_value(S3_BUCKET_KEY).get_string();
-      if (bucket == "deja-dup") {
-        // Until 7.4, we exposed the bucket name and defaulted to deja-dup.
-        // Since buckets are S3-global, everyone was unable to use that bucket,
-        // since I (Mike Terry) owned that bucket.  If we see this setting,
-        // we should default to the generic bucket name rather than assume the
-        // user chose this bucket and error out.
-        bucket = get_default_bucket();
-        settings.set_value(S3_BUCKET_KEY, new Variant.string(bucket));
-        return true;
-      }
-      
-      if (!bucket.has_prefix("deja-dup-auto-"))
-        return false;
-      
-      var bits = bucket.split("-");
-      if (bits == null || bits[0] == null || bits[1] == null ||
-          bits[2] == null || bits[3] == null)
-        return false;
-      
-      if (bits[4] == null)
-        bucket += "-2";
-      else {
-        var num = bits[4].to_long();
-        bits[4] = (num + 1).to_string();
-        bucket = string.joinv("-", bits);
-      }
-      
-      settings.set_value(S3_BUCKET_KEY, new Variant.string(bucket));
+    var settings = get_settings(S3_ROOT);
+    
+    var bucket = settings.get_string(S3_BUCKET_KEY);
+    if (bucket == "deja-dup") {
+      // Until 7.4, we exposed the bucket name and defaulted to deja-dup.
+      // Since buckets are S3-global, everyone was unable to use that bucket,
+      // since I (Mike Terry) owned that bucket.  If we see this setting,
+      // we should default to the generic bucket name rather than assume the
+      // user chose this bucket and error out.
+      bucket = get_default_bucket();
+      settings.set_string(S3_BUCKET_KEY, bucket);
       return true;
     }
-    catch (Error e) {
+    
+    if (!bucket.has_prefix("deja-dup-auto-"))
       return false;
+    
+    var bits = bucket.split("-");
+    if (bits == null || bits[0] == null || bits[1] == null ||
+        bits[2] == null || bits[3] == null)
+      return false;
+    
+    if (bits[4] == null)
+      bucket += "-2";
+    else {
+      var num = bits[4].to_long();
+      bits[4] = (num + 1).to_string();
+      bucket = string.joinv("-", bits);
     }
+    
+    settings.set_string(S3_BUCKET_KEY, bucket);
+    return true;
   }
   
   public override string? get_location_pretty() throws Error

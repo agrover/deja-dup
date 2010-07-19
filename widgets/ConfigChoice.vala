@@ -60,25 +60,14 @@ public class ConfigChoice : ConfigWidget
     Value? val = get_current_value();
     string strval = val == null ? "" : val.get_string();
     
-    try {
-        settings.set_value(key, new Variant.string(strval));
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    settings.set_string(key, strval);
     
     choice_changed(strval);
   }
   
   protected override async void set_from_config()
   {
-    string confval = null;
-    try {
-      confval = settings.get_value(key).get_string();
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    string confval = settings.get_string(key);
     if (confval == null || confval == "")
       confval = default_val;
     if (confval == null)

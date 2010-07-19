@@ -43,24 +43,13 @@ public class ConfigBool : ConfigWidget, Togglable
   
   protected override async void set_from_config()
   {
-    try {
-      var val = settings.get_value(key).get_boolean();
-      button.set_active(val);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    var val = settings.get_boolean(key);
+    button.set_active(val);
   }
   
   void handle_toggled()
   {
-    try {
-      settings.set_value(key, new Variant.boolean(button.get_active()));
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
-    
+    settings.set_boolean(key, button.get_active());
     toggled();
   }
 }

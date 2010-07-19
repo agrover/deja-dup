@@ -24,7 +24,6 @@ VALA_CFLAGS = \
 	--vapidir $(top_srcdir)/vapi \
 	--pkg libcommon \
 	--pkg gtk+-2.0 \
-	--pkg gconf-2.0 \
 	--pkg dbus-glib-1 \
 	--pkg config
 

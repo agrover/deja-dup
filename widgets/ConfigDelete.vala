@@ -61,26 +61,14 @@ public class ConfigDelete : ConfigChoice
     if (intval == int.MAX)
       intval = 0; // forever
     
-    try {
-        settings.set_value(key, new Variant.int32(intval));
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    settings.set_int(key, intval);
     
     choice_changed(intval.to_string());
   }
   
   protected override async void set_from_config()
   {
-    int confval;
-    try {
-        confval = settings.get_value(key).get_int32();
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      return;
-    }
+    var confval = settings.get_int(key);
     if (confval <= 0)
       confval = int.MAX;
     

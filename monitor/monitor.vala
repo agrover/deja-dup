@@ -103,20 +103,9 @@ static Date most_recent_scheduled_date(int period)
 static Date next_run_date()
 {
   var settings = DejaDup.get_settings();
-  
-  bool periodic;
-  string last_run_string;
-  int period_days;
-  
-  try {
-    periodic = settings.get_value(DejaDup.PERIODIC_KEY).get_boolean();
-    last_run_string = settings.get_value(DejaDup.LAST_RUN_KEY).get_string();
-    period_days = settings.get_value(DejaDup.PERIODIC_PERIOD_KEY).get_int32();
-  }
-  catch (Error e) {
-    warning("%s", e.message);
-    return Date();
-  }
+  var periodic = settings.get_boolean(DejaDup.PERIODIC_KEY);
+  var last_run_string = settings.get_string(DejaDup.LAST_RUN_KEY);
+  var period_days = settings.get_int(DejaDup.PERIODIC_PERIOD_KEY);
   
   if (!periodic)
     return Date();

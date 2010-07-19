@@ -37,8 +37,8 @@ public void update_last_run_timestamp() throws Error
   cur_time.get_current_time();
   var cur_time_str = cur_time.to_iso8601();
   
-  var client = get_gconf_client();
-  client.set_string(DejaDup.LAST_RUN_KEY, cur_time_str);
+  var settings = get_settings();
+  settings.set_string(LAST_RUN_KEY, cur_time_str);
 }
 
 public string get_trash_path()
@@ -137,28 +137,6 @@ public bool set_bus_claimed(string busname, bool claim)
   return true;
 }
 
-GConf.Client client;
-void set_gconf_client()
-{
-  var source_str = Environment.get_variable("GCONF_CONFIG_SOURCE");
-  if (source_str != null) {
-    try {
-      var engine = GConf.Engine.get_for_address(source_str);
-      client = GConf.Client.get_for_engine(engine);
-    }
-    catch (Error e) {
-      printerr("%s\n", e.message);
-    }
-  }
-}
-
-public GConf.Client get_gconf_client()
-{
-  if (client == null)
-    client = GConf.Client.get_default();
-  return client;
-}
-
 public Settings get_settings(string? subdir = null)
 {
   string schema = "org.gnome.DejaDup";
@@ -173,48 +151,42 @@ const string SSH_PORT_KEY = "port";
 const string SSH_DIRECTORY_KEY = "directory";
 
 // Once, we didn't use GIO, but had a special SSH backend for duplicity that
-// would tell duplicity to use its own SSH handling.  We convert those gconf
+// would tell duplicity to use its own SSH handling.  We convert those gsettings
 // values to the new ones here.
 void convert_ssh_to_file()
 {
   var settings = get_settings();
-  try {
-    var backend = settings.get_value(BACKEND_KEY).get_string();
-    if (backend == "ssh") {
-      settings.set_value(BACKEND_KEY, new Variant.string("file"));
-      var ssh_settings = get_settings("SSH");
-      var server = ssh_settings.get_value(SSH_SERVER_KEY).get_string();
-      if (server != null && server != "") {
-        var username = ssh_settings.get_value(SSH_USERNAME_KEY).get_string();
-        var port = ssh_settings.get_value(SSH_PORT_KEY).get_int32();
-        var directory = ssh_settings.get_value(SSH_DIRECTORY_KEY).get_string();
-        
-        var gio_uri = "ssh://";
-        if (username != null && username != "")
-          gio_uri += username + "@";
-        gio_uri += server;
-        if (port > 0)
-          gio_uri += ":" + port.to_string();
-        if (directory == null || directory == "")
-          gio_uri += "/";
-        else if (directory[0] != '/')
-          gio_uri += "/" + directory;
-        else
-          gio_uri += directory;
-        
-        var file_settings = get_settings(FILE_ROOT);
-        file_settings.set_value(FILE_PATH_KEY, new Variant.string(gio_uri));
-      }
+  var backend = settings.get_string(BACKEND_KEY);
+  if (backend == "ssh") {
+    settings.set_string(BACKEND_KEY, "file");
+    var ssh_settings = get_settings("SSH");
+    var server = ssh_settings.get_string(SSH_SERVER_KEY);
+    if (server != null && server != "") {
+      var username = ssh_settings.get_string(SSH_USERNAME_KEY);
+      var port = ssh_settings.get_int(SSH_PORT_KEY);
+      var directory = ssh_settings.get_string(SSH_DIRECTORY_KEY);
+      
+      var gio_uri = "ssh://";
+      if (username != null && username != "")
+        gio_uri += username + "@";
+      gio_uri += server;
+      if (port > 0)
+        gio_uri += ":" + port.to_string();
+      if (directory == null || directory == "")
+        gio_uri += "/";
+      else if (directory[0] != '/')
+        gio_uri += "/" + directory;
+      else
+        gio_uri += directory;
+      
+      var file_settings = get_settings(FILE_ROOT);
+      file_settings.set_string(FILE_PATH_KEY, gio_uri);
     }
-  }
-  catch (Error e) {
-    warning("%s\n", e.message);
   }
 }
 
 public void initialize()
 {
-  set_gconf_client();
   convert_ssh_to_file();
 }
 
@@ -250,43 +222,41 @@ public string get_location_desc()
 public int get_full_backup_threshold()
 {
   int threshold = 7 * 6; // default to 6 weeks
-  try {
-    // So, there are a few factors affecting how often to make a fresh full
-    // backup:
-    // 1) The longer we wait, the more we're filling up the backend with 
-    //    iterations on the same crap.
-    // 2) The longer we wait, there's a higher risk that some bit will flip
-    //    and the whole backup is toast.
-    // 3) The longer we wait, the less annoying we are, since full backups 
-    //    take a long time.
-    // So we try to do them at reasonable times.  But almost nobody should be
-    // going longer than 6 months without a full backup.  Further, we want
-    // to try to keep at least 2 full backups around, so also don't allow a
-    // longer full threshold than half the delete age.
-    // 
-    // 'daily' gets 2 weeks: 1 * 12 => 2 * 7
-    // 'weekly' gets 3 months: 7 * 12
-    // 'biweekly' gets 6 months: 14 * 12
-    // 'monthly' gets 6 months: 28 * 12 => 24 * 7
-    var max = 24 * 7; // 6 months
-    var min = 4 * 7; // 4 weeks
-    var scale = 12;
-    var min_fulls = 2;
-    
-    var delete_age = client.get_int(DELETE_AFTER_KEY);
-    if (delete_age > 0)
-      max = int.min(delete_age/min_fulls, max);
-    
-    var periodic = client.get_bool(PERIODIC_KEY);
-    if (periodic) {
-      var period = client.get_int(PERIODIC_PERIOD_KEY);
-      threshold = period * scale;
-      threshold.clamp(min, max);
-    }
-    else
-      threshold = max;
+  // So, there are a few factors affecting how often to make a fresh full
+  // backup:
+  // 1) The longer we wait, the more we're filling up the backend with 
+  //    iterations on the same crap.
+  // 2) The longer we wait, there's a higher risk that some bit will flip
+  //    and the whole backup is toast.
+  // 3) The longer we wait, the less annoying we are, since full backups 
+  //    take a long time.
+  // So we try to do them at reasonable times.  But almost nobody should be
+  // going longer than 6 months without a full backup.  Further, we want
+  // to try to keep at least 2 full backups around, so also don't allow a
+  // longer full threshold than half the delete age.
+  // 
+  // 'daily' gets 2 weeks: 1 * 12 => 2 * 7
+  // 'weekly' gets 3 months: 7 * 12
+  // 'biweekly' gets 6 months: 14 * 12
+  // 'monthly' gets 6 months: 28 * 12 => 24 * 7
+  var max = 24 * 7; // 6 months
+  var min = 4 * 7; // 4 weeks
+  var scale = 12;
+  var min_fulls = 2;
+  
+  var settings = get_settings();
+  var delete_age = settings.get_int(DELETE_AFTER_KEY);
+  if (delete_age > 0)
+    max = int.min(delete_age/min_fulls, max);
+  
+  var periodic = settings.get_boolean(PERIODIC_KEY);
+  if (periodic) {
+    var period = settings.get_int(PERIODIC_PERIOD_KEY);
+    threshold = period * scale;
+    threshold.clamp(min, max);
   }
-  catch (Error e) {warning("%s\n", e.message);}
+  else
+    threshold = max;
   
   return threshold;
 }
