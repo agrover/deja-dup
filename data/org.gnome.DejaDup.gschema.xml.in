@@ -1,11 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="deja-dup">
   <schema id="org.gnome.DejaDup" path="/apps/deja-dup/">
-    <key name="include-list" type="as">
+    <key name="include-list" type="aay">
       <default>[ '$HOME' ]</default>
       <_summary>Directories to back up</_summary>
       <_description>This list of directories will be backed up.  Reserved values $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special directories.  Relative entries are relative to the user’s home directory.</_description>
     </key>
-    <key name="exclude-list" type="as">
+    <key name="exclude-list" type="aay">
       <default>[ '$TRASH' ]</default>
       <_summary>Directories not to back up</_summary>
       <_description>This list of directories will not be backed up.  Reserved values $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special directories.  Relative entries are relative to the user’s home directory.  This list takes precedence over the include list.</_description>
@@ -85,7 +86,7 @@
       <_summary>Folder type</_summary>
       <_description>Whether the backup location is a mounted external volume or a normal folder.  Possible values are ‘volume’ or ‘normal’.</_description>
     </key>
-    <key name="relpath" type="s">
+    <key name="relpath" type="ay">
       <default>''</default>
       <_summary>Relative path under the external volume</_summary>
       <_description>If the backup location is on an external volume, this is the path of the folder on that volume.</_description>
