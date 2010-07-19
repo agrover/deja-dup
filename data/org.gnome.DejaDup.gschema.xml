@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="deja-dup">
+  <schema path="/apps/deja-dup/" id="org.gnome.DejaDup">
+    <key type="as" name="include-list">
+      <default>[ '$HOME' ]</default>
+      <summary>Directories to back up</summary>
+      <description>This list of directories will be backed up. Reserved values $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special directories. Relative entries are relative to the user’s home directory.</description>
+    </key>
+    <key type="as" name="exclude-list">
+      <default>[ '$TRASH' ]</default>
+      <summary>Directories not to back up</summary>
+      <description>This list of directories will not be backed up. Reserved values $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special directories. Relative entries are relative to the user’s home directory. This list takes precedence over the include list.</description>
+    </key>
+    <key type="b" name="root-prompt">
+      <default>true</default>
+      <summary>Whether to request the root password</summary>
+      <description>Whether to request the root password when backing up from or restoring to system folders.</description>
+    </key>
+    <key type="b" name="encrypt">
+      <default>true</default>
+      <summary>Whether to encrypt your backup</summary>
+      <description>Whether to encrypt your backup files in the storage location. It’s strongly recommended to leave this as ‘true’.</description>
+    </key>
+    <key type="s" name="last-run">
+      <default>''</default>
+      <summary>The last time Déjà Dup was run</summary>
+      <description>The last time Déjà Dup was successfully run. This time should be in ISO 8601 format.</description>
+    </key>
+    <key type="b" name="periodic">
+      <default>false</default>
+      <summary>Whether to periodically back up</summary>
+      <description>Whether to automatically back up on a regular schedule.</description>
+    </key>
+    <key type="i" name="periodic-period">
+      <default>7</default>
+      <summary>How often to periodically back up</summary>
+      <description>The number of days between backups.</description>
+    </key>
+    <key type="i" name="delete-after">
+      <default>0</default>
+      <summary>How long to keep backup files</summary>
+      <description>The number of days to keep backup files on the backup location. A value of 0 means forever. This is a minimum number of days; the files may be kept longer.</description>
+    </key>
+    <key type="s" name="backend">
+      <default>'s3'</default>
+      <summary>Type of location to store backup</summary>
+      <description>The type of backup location. Valid values are ‘s3’ or ‘file’.</description>
+    </key>
+    <child schema="org.gnome.DejaDup.S3" name="s3"/>
+    <child schema="org.gnome.DejaDup.File" name="file"/>
+  </schema>
+  <schema path="/apps/deja-dup/s3/" id="org.gnome.DejaDup.S3">
+    <key type="s" name="id">
+      <default>''</default>
+      <summary>Amazon S3 Access Key ID</summary>
+      <description>Your Amazon S3 Access Key Identifier. This acts as your S3 username.</description>
+    </key>
+    <key type="s" name="bucket">
+      <default>''</default>
+      <summary>The Amazon S3 bucket name to use</summary>
+      <description>Which Amazon S3 bucket to store files in. This does not need to exist already. Only legal hostname strings are valid.</description>
+    </key>
+    <key type="s" name="folder">
+      <default>'/'</default>
+      <summary>The Amazon S3 folder</summary>
+      <description>An optional folder name to store files in. This folder will be created in the chosen bucket.</description>
+    </key>
+  </schema>
+  <schema path="/apps/deja-dup/file/" id="org.gnome.DejaDup.File">
+    <key type="s" name="path">
+      <default>''</default>
+      <summary>Backup location</summary>
+      <description>Location in which to hold the backup files.</description>
+    </key>
+    <key type="s" name="type">
+      <choices>
+        <choice value='volume'/>
+        <choice value='normal'/>
+      </choices>
+      <default>''</default>
+      <summary>Folder type</summary>
+      <description>Whether the backup location is a mounted external volume or a normal folder.</description>
+    </key>
+    <key type="s" name="relpath">
+      <default>''</default>
+      <summary>Relative path under the external volume</summary>
+      <description>If the backup location is on an external volume, this is the path of the folder on that volume.</description>
+    </key>
+    <key type="s" name="uuid">
+      <default>''</default>
+      <summary>Unique ID of the external volume</summary>
+      <description>If the backup location is on an external volume, this is its unique filesystem identifier.</description>
+    </key>
+    <key type="s" name="name">
+      <default>''</default>
+      <summary>Full name of the external volume</summary>
+      <description>If the backup location is on an external volume, this is the volume’s longer descriptive name.</description>
+    </key>
+    <key type="s" name="short-name">
+      <default>''</default>
+      <summary>Short name of the external volume</summary>
+      <description>If the backup location is on an external volume, this is the volume’s shorter name.</description>
+    </key>
+    <key type="s" name="icon">
+      <default>''</default>
+      <summary>Icon of the external volume</summary>
+      <description>If the backup location is on an external volume, this is the volume’s icon.</description>
+    </key>
+  </schema>
+  <schema path="/apps/deja-dup/ssh/" id="org.gnome.DejaDup.SSH">
+    <key type="s" name="server">
+      <default>''</default>
+      <summary>Obsolete</summary>
+    </key>
+    <key type="i" name="port">
+      <default>0</default>
+      <summary>Obsolete</summary>
+    </key>
+    <key type="s" name="username">
+      <default>''</default>
+      <summary>Obsolete</summary>
+    </key>
+    <key type="s" name="directory">
+      <default>''</default>
+      <summary>Obsolete</summary>
+    </key>
+  </schema>
+</schemalist>
