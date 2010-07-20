@@ -170,7 +170,7 @@ public class ConfigList : ConfigWidget
       var folder = File.new_for_path(file);
       bool found = false;
       foreach (string s in slist) {
-        var sfile = File.new_for_path(s);
+        var sfile = DejaDup.parse_dir(s);
         if (sfile.equal(folder)) {
           found = true;
           break;
@@ -178,7 +178,7 @@ public class ConfigList : ConfigWidget
       }
       
       if (!found)
-        slist += file;
+        slist += folder.get_parse_name();
     }
     
     settings.set_value(key, new Variant.strv(slist));

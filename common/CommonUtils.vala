@@ -69,8 +69,10 @@ public File parse_dir(string dir)
     s = get_trash_path();
   else if (s == "$VIDEOS")
     s = Environment.get_user_special_dir(UserDirectory.VIDEOS);
-  else if (!Path.is_absolute(s))
+  else if (Uri.parse_scheme(s) == null && !Path.is_absolute(s))
     s = Path.build_filename(Environment.get_home_dir(), s);
+  else
+    return File.parse_name(s);
   
   return File.new_for_path(s);
 }
