@@ -24,7 +24,6 @@ namespace DejaDup {
 public const string FILE_ROOT = "File";
 public const string FILE_TYPE_KEY = "type";
 public const string FILE_PATH_KEY = "path";
-// FIXME: should above be ay or s?
 public const string FILE_RELPATH_KEY = "relpath";
 public const string FILE_UUID_KEY = "uuid";
 public const string FILE_NAME_KEY = "name";
@@ -215,9 +214,11 @@ public class BackendFile : Backend
     if (relpath == null)
       relpath = "";
 
+    settings.delay();
     settings.set_string(FILE_UUID_KEY, uuid);
     settings.set_string(FILE_RELPATH_KEY, relpath);
     settings.set_string(FILE_TYPE_KEY, "volume");
+    settings.apply();
 
     update_volume_info(volume);
   }
@@ -243,6 +244,8 @@ public class BackendFile : Backend
     if (icon != null)
       icon_str = icon.to_string();
 
+    settings.delay();
+
     settings.set_string(FILE_NAME_KEY, name);
     settings.set_string(FILE_SHORT_NAME_KEY, short_name);
     settings.set_string(FILE_ICON_KEY, icon_str);
@@ -255,6 +258,8 @@ public class BackendFile : Backend
         path = mount.get_root().get_child(path).get_parse_name();
       settings.set_string(FILE_PATH_KEY, path);
     }
+
+    settings.apply();
   }
 
   // This doesn't *really* worry about envp, it just is a convenient point to

@@ -70,7 +70,7 @@ public class ConfigLocation : ConfigWidget
     button.selection_changed.connect(handle_selection_changed);
     
     watch_key(BACKEND_KEY);
-    // FIXME watch_key(FILE_PATH_KEY);
+    watch_key(FILE_PATH_KEY, DejaDup.get_settings(FILE_ROOT));
   }
   
   ~ConfigLocation()
@@ -142,8 +142,10 @@ public class ConfigLocation : ConfigWidget
       if (is_s3)
         settings.set_string(BACKEND_KEY, "s3");
       else {
+        settings.delay();
         settings.set_string(BACKEND_KEY, "file");
         settings.set_string(FILE_PATH_KEY, file.get_parse_name());
+        settings.apply();
         yield BackendFile.check_for_volume_info(file);
       }
     }

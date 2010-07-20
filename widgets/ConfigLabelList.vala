@@ -53,7 +53,7 @@ public class ConfigLabelList : ConfigLabel
       else if (f.has_prefix(home))
         s = home.get_relative_path(f);
       else
-        s = f.get_path();
+        s = f.get_parse_name();
       
       if (i > 0)
         val += ", ";

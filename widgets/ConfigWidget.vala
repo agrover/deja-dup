@@ -28,7 +28,6 @@ public abstract class ConfigWidget : Gtk.EventBox
   public string key {get; construct;}
   public string ns {get; construct; default = "";}
   
-  List<string> watched_keys = null;
   protected Settings settings;
   construct {
     settings = DejaDup.get_settings(ns);
@@ -37,23 +36,20 @@ public abstract class ConfigWidget : Gtk.EventBox
       watch_key(key);
   }
   
-  protected void watch_key(string key)
+  // If you pass in a special settings object, make sure it survives the
+  // lifetime of this widget.
+  protected void watch_key(string? key, Settings? s = null)
   {
+    if (s == null)
+      s = settings;
+
     // Wish we could use changed[key].connect to take advantage of detailed
     // signals, but vala doesn't support that yet.  It only supports static
     // detailed signals (changed['my-specific-key']).
-    if (watched_keys == null)
-      settings.changed.connect(settings_changed);
-    
-    watched_keys.prepend(key);
-  }
-  
-  void settings_changed(string key)
-  {
-    foreach (string k in watched_keys) {
-      if (k == key)
+    s.changed.connect((k) => {
+      if (key == null || key == k)
         key_changed();
-    }
+    });
   }
   
   void key_changed()

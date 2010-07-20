@@ -36,8 +36,8 @@ public class ConfigLabelLocation : ConfigLabel
     hbox.pack_start(img, false, false, 0);
     hbox.reorder_child(img, 0);
     watch_key(BACKEND_KEY);
-    //FIXME watch_key(FILE_ROOT_KEY);
-    //FIXME watch_key(S3_ROOT_KEY);
+    watch_key(null, DejaDup.get_settings(FILE_ROOT));
+    watch_key(null, DejaDup.get_settings(S3_ROOT));
     set_from_config();
   }
   
