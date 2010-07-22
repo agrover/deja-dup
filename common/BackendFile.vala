@@ -42,7 +42,8 @@ public class BackendFile : Backend
     var settings = get_settings(FILE_ROOT);
     var type = settings.get_string(FILE_TYPE_KEY);
     if (type == "volume") {
-      var path = settings.get_string(FILE_RELPATH_KEY);
+      var path_val = settings.get_value(FILE_RELPATH_KEY);
+      var path = path_val.get_bytestring();
       var uuid = settings.get_string(FILE_UUID_KEY);
       var vol = find_volume_by_uuid(uuid);
       if (vol == null)
@@ -80,7 +81,8 @@ public class BackendFile : Backend
     var settings = get_settings(FILE_ROOT);
     var type = settings.get_string(FILE_TYPE_KEY);
     if (type == "volume") {
-      var path = settings.get_string(FILE_RELPATH_KEY);
+      var path_val = settings.get_value(FILE_RELPATH_KEY);
+      var path = Filename.to_utf8(path_val.get_bytestring(), -1, null, null);
       var name = settings.get_string(FILE_SHORT_NAME_KEY);
       // Translators: %2$s is the name of a removable drive, %1$s is a folder
       // on that removable drive.
@@ -216,7 +218,7 @@ public class BackendFile : Backend
 
     settings.delay();
     settings.set_string(FILE_UUID_KEY, uuid);
-    settings.set_string(FILE_RELPATH_KEY, relpath);
+    settings.set_value(FILE_RELPATH_KEY, new Variant.bytestring(relpath));
     settings.set_string(FILE_TYPE_KEY, "volume");
     settings.apply();
 
@@ -253,7 +255,8 @@ public class BackendFile : Backend
     // Also update full path just in case (useful if downgrading to old version?)
     var mount = volume.get_mount();
     if (mount != null) {
-      var path = settings.get_string(FILE_RELPATH_KEY);
+      var path_val = settings.get_value(FILE_RELPATH_KEY);
+      var path = path_val.get_bytestring();
       if (path != null)
         path = mount.get_root().get_child(path).get_parse_name();
       settings.set_string(FILE_PATH_KEY, path);
