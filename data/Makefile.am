@@ -43,8 +43,9 @@ EXTRA_DIST = deja-dup.desktop.in deja-dup-monitor.desktop.in.in org.gnome.DejaDu
 DISTCLEANFILES = deja-dup.desktop deja-dup-monitor.desktop deja-dup-monitor.desktop.in org.gnome.DejaDup.gschema.xml
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t
-install-data-hook: update-icon-cache
+install-data-hook: update-icon-cache convert-gconf
 uninstall-hook: update-icon-cache
+
 update-icon-cache:
 	@-if test -z "$(DESTDIR)"; then \
 		echo "Updating Gtk icon cache."; \
@@ -54,3 +55,8 @@ update-icon-cache:
 		echo "***   $(gtk_update_icon_cache) $(datadir)/icons/hicolor"; \
 	fi
 
+convert-gconf:
+	@-if which gsettings-data-convert > /dev/null; then \
+		echo "Converting gconf data to gsettings"; \
+		gsettings-data-convert; \
+	fi
