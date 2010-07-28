@@ -28,7 +28,7 @@ def no_values():
 	base.setup(start = False)
 	base.set_settings_value('backend', "'ssh'")
 	base.start_deja_dup()
-	assert base.get_settings_value('backend') == "'file'"
+	assert base.get_settings_value('backend') == "'file'", base.get_settings_value('backend')
 
 # Now test bits and pieces missing
 def some_values():
@@ -37,7 +37,8 @@ def some_values():
 	base.set_settings_value('server', "'localhost'", schema="SSH")
 	base.start_deja_dup()
 	assert base.get_settings_value('backend') == "'file'" and \
-	       base.get_settings_value('path', schema="File") == "'ssh://localhost/'"
+	       base.get_settings_value('path', schema="File") == "'ssh://localhost/'", \
+	       "%s and %s" % (base.get_settings_value('backend'), base.get_settings_value('path', schema="File"))
 
 # Now test everything together
 def all_values():
@@ -49,7 +50,8 @@ def all_values():
 	base.set_settings_value('directory', "'/hello'", schema="SSH")
 	base.start_deja_dup()
 	assert base.get_settings_value('backend') == "'file'" and \
-         base.get_settings_value('path', schema="File") == "'ssh://goober@localhost:42/hello'"
+         base.get_settings_value('path', schema="File") == "'ssh://goober@localhost:42/hello'", \
+	       "%s and %s" % (base.get_settings_value('backend'), base.get_settings_value('path', schema="File"))
 
 base.run(no_values)
 base.run(some_values)
