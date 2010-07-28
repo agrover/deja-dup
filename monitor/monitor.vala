@@ -53,12 +53,7 @@ static void volume_added(VolumeMonitor vm, Volume vol)
 
 static bool is_ready(out string when)
 {
-  try {
-    return DejaDup.Backend.get_default().is_ready(out when);
-  }
-  catch (Error e) {
-    return true;
-  }
+  return DejaDup.Backend.get_default().is_ready(out when);
 }
 
 static bool handle_options(out int status)
@@ -101,21 +96,10 @@ static Date most_recent_scheduled_date(int period)
 
 static Date next_run_date()
 {
-  var client = GConf.Client.get_default();
-  
-  bool periodic;
-  string last_run_string;
-  int period_days;
-  
-  try {
-    periodic = client.get_bool(DejaDup.PERIODIC_KEY);
-    last_run_string = client.get_string(DejaDup.LAST_RUN_KEY);
-    period_days = client.get_int(DejaDup.PERIODIC_PERIOD_KEY);
-  }
-  catch (Error e) {
-    warning("%s", e.message);
-    return Date();
-  }
+  var settings = DejaDup.get_settings();
+  var periodic = settings.get_boolean(DejaDup.PERIODIC_KEY);
+  var last_run_string = settings.get_string(DejaDup.LAST_RUN_KEY);
+  var period_days = settings.get_int(DejaDup.PERIODIC_PERIOD_KEY);
   
   if (!periodic)
     return Date();
@@ -300,19 +284,18 @@ static void prepare_next_run()
   prepare_run(wait_time);
 }
 
-static void watch_gconf()
+static void prepare_if_necessary(string key)
 {
-  var client = GConf.Client.get_default();
-  
-  try {
-    client.add_dir(DejaDup.GCONF_DIR, GConf.ClientPreloadType.NONE);
-    client.notify_add(DejaDup.LAST_RUN_KEY, prepare_next_run);
-    client.notify_add(DejaDup.PERIODIC_KEY, prepare_next_run);
-    client.notify_add(DejaDup.PERIODIC_PERIOD_KEY, prepare_next_run);
-  }
-  catch (Error e) {
-    warning("%s\n", e.message);
-  }
+  if (key == DejaDup.LAST_RUN_KEY ||
+      key == DejaDup.PERIODIC_KEY ||
+      key == DejaDup.PERIODIC_PERIOD_KEY)
+    prepare_next_run();
+}
+
+static void watch_settings()
+{
+  var settings = DejaDup.get_settings();
+  settings.changed.connect(prepare_if_necessary);
 }
 
 static int main(string[] args)
@@ -354,7 +337,7 @@ static int main(string[] args)
   else
     Timeout.add_seconds(120, () => {prepare_next_run(); return false;});
 
-  watch_gconf();
+  watch_settings();
   loop.run();
   
   return 0;

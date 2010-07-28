@@ -108,8 +108,8 @@ public abstract class Operation : Object
     set_session_inhibited(true);
     
     // Get encryption passphrase if needed
-    var client = get_gconf_client();
-    if (client.get_bool(ENCRYPT_KEY) && passphrase == null) {
+    var settings = get_settings();
+    if (settings.get_boolean(ENCRYPT_KEY) && passphrase == null) {
       needs_password = true;
       passphrase_required(); // will call continue_with_passphrase when ready
     }
@@ -186,13 +186,8 @@ public abstract class Operation : Object
     
     if (success && passphrase == "") {
       // User entered no password.  Turn off encryption
-      try {
-        var client = GConf.Client.get_default();
-        client.set_bool(ENCRYPT_KEY, false);
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
+      var settings = get_settings();
+      settings.set_boolean(ENCRYPT_KEY, false);
     }
     
     done(success, cancelled);

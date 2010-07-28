@@ -21,16 +21,15 @@ using GLib;
 
 namespace DejaDup {
 
-public const string GCONF_DIR = "/apps/deja-dup";
-public const string INCLUDE_LIST_KEY = "/apps/deja-dup/include-list";
-public const string EXCLUDE_LIST_KEY = "/apps/deja-dup/exclude-list";
-public const string BACKEND_KEY = "/apps/deja-dup/backend";
-public const string ROOT_PROMPT_KEY = "/apps/deja-dup/root-prompt";
-public const string ENCRYPT_KEY = "/apps/deja-dup/encrypt";
-public const string LAST_RUN_KEY = "/apps/deja-dup/last-run";
-public const string PERIODIC_KEY = "/apps/deja-dup/periodic";
-public const string PERIODIC_PERIOD_KEY = "/apps/deja-dup/periodic-period";
-public const string DELETE_AFTER_KEY = "/apps/deja-dup/delete-after";
+public const string INCLUDE_LIST_KEY = "include-list";
+public const string EXCLUDE_LIST_KEY = "exclude-list";
+public const string BACKEND_KEY = "backend";
+public const string ROOT_PROMPT_KEY = "root-prompt";
+public const string ENCRYPT_KEY = "encrypt";
+public const string LAST_RUN_KEY = "last-run";
+public const string PERIODIC_KEY = "periodic";
+public const string PERIODIC_PERIOD_KEY = "periodic-period";
+public const string DELETE_AFTER_KEY = "delete-after";
 
 public void update_last_run_timestamp() throws Error
 {
@@ -38,8 +37,8 @@ public void update_last_run_timestamp() throws Error
   cur_time.get_current_time();
   var cur_time_str = cur_time.to_iso8601();
   
-  var client = get_gconf_client();
-  client.set_string(DejaDup.LAST_RUN_KEY, cur_time_str);
+  var settings = get_settings();
+  settings.set_string(LAST_RUN_KEY, cur_time_str);
 }
 
 public string get_trash_path()
@@ -70,18 +69,17 @@ public File parse_dir(string dir)
     s = get_trash_path();
   else if (s == "$VIDEOS")
     s = Environment.get_user_special_dir(UserDirectory.VIDEOS);
-  else if (!Path.is_absolute(s))
+  else if (Uri.parse_scheme(s) == null && !Path.is_absolute(s))
     s = Path.build_filename(Environment.get_home_dir(), s);
+  else
+    return File.parse_name(s);
   
   return File.new_for_path(s);
 }
 
-public File[] parse_dir_list(SList<string>? dirs)
+public File[] parse_dir_list(string*[] dirs)
 {
-  if (dirs == null)
-    return new File[0];
-  
-  File[] rv = new File[dirs.length()];
+  File[] rv = new File[dirs.length];
   
   int i = 0;
   foreach (string s in dirs)
@@ -141,74 +139,57 @@ public bool set_bus_claimed(string busname, bool claim)
   return true;
 }
 
-GConf.Client client;
-void set_gconf_client()
+public Settings get_settings(string? subdir = null)
 {
-  var source_str = Environment.get_variable("GCONF_CONFIG_SOURCE");
-  if (source_str != null) {
-    try {
-      var engine = GConf.Engine.get_for_address(source_str);
-      client = GConf.Client.get_for_engine(engine);
-    }
-    catch (Error e) {
-      printerr("%s\n", e.message);
-    }
-  }
+  string schema = "org.gnome.DejaDup";
+  if (subdir != null && subdir != "")
+    schema += "." + subdir;
+  return new Settings(schema);
 }
 
-public GConf.Client get_gconf_client()
-{
-  if (client == null)
-    client = GConf.Client.get_default();
-  return client;
-}
-
-const string SSH_USERNAME_KEY = "/apps/deja-dup/ssh/username";
-const string SSH_SERVER_KEY = "/apps/deja-dup/ssh/server";
-const string SSH_PORT_KEY = "/apps/deja-dup/ssh/port";
-const string SSH_DIRECTORY_KEY = "/apps/deja-dup/ssh/directory";
+const string SSH_ROOT = "SSH";
+const string SSH_USERNAME_KEY = "username";
+const string SSH_SERVER_KEY = "server";
+const string SSH_PORT_KEY = "port";
+const string SSH_DIRECTORY_KEY = "directory";
 
 // Once, we didn't use GIO, but had a special SSH backend for duplicity that
-// would tell duplicity to use its own SSH handling.  We convert those gconf
+// would tell duplicity to use its own SSH handling.  We convert those gsettings
 // values to the new ones here.
 void convert_ssh_to_file()
 {
-  var client = get_gconf_client();
-  try {
-    var backend = client.get_string(BACKEND_KEY);
-    if (backend == "ssh") {
-      client.set_string(BACKEND_KEY, "file");
-      var server = client.get_string(SSH_SERVER_KEY);
-      if (server != null && server != "") {
-        var username = client.get_string(SSH_USERNAME_KEY);
-        var port = client.get_int(SSH_PORT_KEY);
-        var directory = client.get_string(SSH_DIRECTORY_KEY);
-        
-        var gio_uri = "ssh://";
-        if (username != null && username != "")
-          gio_uri += username + "@";
-        gio_uri += server;
-        if (port > 0)
-          gio_uri += ":" + port.to_string();
-        if (directory == null || directory == "")
-          gio_uri += "/";
-        else if (directory[0] != '/')
-          gio_uri += "/" + directory;
-        else
-          gio_uri += directory;
-        
-        client.set_string(FILE_PATH_KEY, gio_uri);
-      }
+  var settings = get_settings();
+  var backend = settings.get_string(BACKEND_KEY);
+  if (backend == "ssh") {
+    settings.set_string(BACKEND_KEY, "file");
+    var ssh_settings = get_settings(SSH_ROOT);
+    var server = ssh_settings.get_string(SSH_SERVER_KEY);
+    if (server != null && server != "") {
+      var username = ssh_settings.get_string(SSH_USERNAME_KEY);
+      var port = ssh_settings.get_int(SSH_PORT_KEY);
+      var directory = ssh_settings.get_string(SSH_DIRECTORY_KEY);
+      
+      var gio_uri = "ssh://";
+      if (username != null && username != "")
+        gio_uri += username + "@";
+      gio_uri += server;
+      if (port > 0)
+        gio_uri += ":" + port.to_string();
+      if (directory == null || directory == "")
+        gio_uri += "/";
+      else if (directory[0] != '/')
+        gio_uri += "/" + directory;
+      else
+        gio_uri += directory;
+      
+      var file_settings = get_settings(FILE_ROOT);
+      file_settings.set_string(FILE_PATH_KEY, gio_uri);
     }
-  }
-  catch (Error e) {
-    warning("%s\n", e.message);
   }
 }
 
 public void initialize()
 {
-  set_gconf_client();
   convert_ssh_to_file();
 }
 
@@ -244,43 +225,41 @@ public string get_location_desc()
 public int get_full_backup_threshold()
 {
   int threshold = 7 * 6; // default to 6 weeks
-  try {
-    // So, there are a few factors affecting how often to make a fresh full
-    // backup:
-    // 1) The longer we wait, the more we're filling up the backend with 
-    //    iterations on the same crap.
-    // 2) The longer we wait, there's a higher risk that some bit will flip
-    //    and the whole backup is toast.
-    // 3) The longer we wait, the less annoying we are, since full backups 
-    //    take a long time.
-    // So we try to do them at reasonable times.  But almost nobody should be
-    // going longer than 6 months without a full backup.  Further, we want
-    // to try to keep at least 2 full backups around, so also don't allow a
-    // longer full threshold than half the delete age.
-    // 
-    // 'daily' gets 2 weeks: 1 * 12 => 2 * 7
-    // 'weekly' gets 3 months: 7 * 12
-    // 'biweekly' gets 6 months: 14 * 12
-    // 'monthly' gets 6 months: 28 * 12 => 24 * 7
-    var max = 24 * 7; // 6 months
-    var min = 4 * 7; // 4 weeks
-    var scale = 12;
-    var min_fulls = 2;
-    
-    var delete_age = client.get_int(DELETE_AFTER_KEY);
-    if (delete_age > 0)
-      max = int.min(delete_age/min_fulls, max);
-    
-    var periodic = client.get_bool(PERIODIC_KEY);
-    if (periodic) {
-      var period = client.get_int(PERIODIC_PERIOD_KEY);
-      threshold = period * scale;
-      threshold.clamp(min, max);
-    }
-    else
-      threshold = max;
+  // So, there are a few factors affecting how often to make a fresh full
+  // backup:
+  // 1) The longer we wait, the more we're filling up the backend with 
+  //    iterations on the same crap.
+  // 2) The longer we wait, there's a higher risk that some bit will flip
+  //    and the whole backup is toast.
+  // 3) The longer we wait, the less annoying we are, since full backups 
+  //    take a long time.
+  // So we try to do them at reasonable times.  But almost nobody should be
+  // going longer than 6 months without a full backup.  Further, we want
+  // to try to keep at least 2 full backups around, so also don't allow a
+  // longer full threshold than half the delete age.
+  // 
+  // 'daily' gets 2 weeks: 1 * 12 => 2 * 7
+  // 'weekly' gets 3 months: 7 * 12
+  // 'biweekly' gets 6 months: 14 * 12
+  // 'monthly' gets 6 months: 28 * 12 => 24 * 7
+  var max = 24 * 7; // 6 months
+  var min = 4 * 7; // 4 weeks
+  var scale = 12;
+  var min_fulls = 2;
+  
+  var settings = get_settings();
+  var delete_age = settings.get_int(DELETE_AFTER_KEY);
+  if (delete_age > 0)
+    max = int.min(delete_age/min_fulls, max);
+  
+  var periodic = settings.get_boolean(PERIODIC_KEY);
+  if (periodic) {
+    var period = settings.get_int(PERIODIC_PERIOD_KEY);
+    threshold = period * scale;
+    threshold.clamp(min, max);
   }
-  catch (Error e) {warning("%s\n", e.message);}
+  else
+    threshold = max;
   
   return threshold;
 }

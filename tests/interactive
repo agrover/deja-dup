@@ -19,7 +19,7 @@
 #
 # Setup a local backend, but just show the UI.  The user will interact with
 # it and test manually.  Good for playing with the UI as you make changes,
-# without futzing up your own gconf settings.
+# without futzing up your own settings.
 
 import base
 import ldtp
@@ -37,7 +37,7 @@ def test():
   back = 'file'
   prog = None
   hasrun = False
-  encrypt = True
+  encrypt = None
   cmd = ''
   for arg in sys.argv[1:]:
     if prog == 'cmd':
@@ -80,7 +80,7 @@ def test():
   
   base.setup(backend=back, dest=dest, sources=sources, start=False, encrypt=encrypt)
   if hasrun:
-    base.set_gconf_value("last-run", "fake")
+    base.set_settings_value("last-run", "'fake'")
   
   if prog is None:
     base.start_deja_dup(waitfor=None)

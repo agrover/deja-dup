@@ -49,10 +49,10 @@ public abstract class Backend : Object
   
   public abstract Backend clone();
   
-  public static Backend? get_default() throws Error
+  public static Backend? get_default()
   {
-    var client = get_gconf_client();
-    var backend_name = client.get_string(BACKEND_KEY);
+    var settings = get_settings();
+    var backend_name = settings.get_string(BACKEND_KEY);
     if (backend_name == "s3")
       return new BackendS3();
     else if (backend_name == "file")

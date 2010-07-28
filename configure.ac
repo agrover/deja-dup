@@ -29,6 +29,7 @@ AM_INIT_AUTOMAKE([1.10 foreign dist-bzip2])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 GNOME_DOC_INIT
+GLIB_GSETTINGS
 
 # Checks for programs.
 AC_PROG_CC
@@ -37,9 +38,6 @@ AC_PROG_MAKE_SET
 
 LT_PREREQ([2.2.6])
 LT_INIT
-
-AC_PATH_PROG(GCONFTOOL, gconftool-2)
-AM_GCONF_SOURCE_2
 
 AC_PATH_PROG(PO4A, po4a)
 
@@ -67,7 +65,7 @@ AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package 
 GTK_MODULE=gtk+-2.0
 GTK_REQ_VER=2.18
 GDK_X11_MODULE=gdk-x11-2.0
-GLIB_REQ_VER=2.20
+GLIB_REQ_VER=2.25.3
 GIO_REQ_VER=$GLIB_REQ_VER
 UNIQUE_MODULE=unique-1.0
 APPINDICATOR_MODULE=appindicator-0.1
@@ -105,7 +103,6 @@ AC_SUBST(UNIQUE_MODULE)
 PKG_CHECK_MODULES(DUP,
                   $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
-                  gconf-2.0
                   dbus-glib-1
                   gnome-keyring-1)
 AC_SUBST(DUP_CFLAGS)
@@ -114,7 +111,7 @@ AC_SUBST(DUP_LIBS)
 PKG_CHECK_MODULES(PREF,
                   $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
-                  gconf-2.0
+                  dbus-glib-1
                   $UNIQUE_MODULE)
 AC_SUBST(PREF_CFLAGS)
 AC_SUBST(PREF_LIBS)
@@ -122,20 +119,17 @@ AC_SUBST(PREF_LIBS)
 PKG_CHECK_MODULES(COMMON,
                   gio-2.0 >= $GIO_REQ_VER
                   gio-unix-2.0 >= $GIO_REQ_VER
-                  gconf-2.0
                   dbus-glib-1
                   gnome-keyring-1)
 AC_SUBST(COMMON_CFLAGS)
 AC_SUBST(COMMON_LIBS)
 
 PKG_CHECK_MODULES(WIDGETS,
-                  $GTK_MODULE >= $GTK_REQ_VER
-                  gconf-2.0)
+                  $GTK_MODULE >= $GTK_REQ_VER)
 AC_SUBST(WIDGETS_CFLAGS)
 AC_SUBST(WIDGETS_LIBS)
 
 PKG_CHECK_MODULES(MONITOR,
-                  gconf-2.0
                   gio-2.0 >= $GIO_REQ_VER
                   dbus-glib-1
                   libnotify)
