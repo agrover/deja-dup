@@ -345,8 +345,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
           }
         }
 
-        summary_label.label = ngettext("Your file was successfully restored.",
-                                         "Your files were successfully restored.",
+        summary_label.label = ngettext(_("Your file was successfully restored."),
+                                         _("Your files were successfully restored."),
                                          numdels);
       }
     }
@@ -650,7 +650,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
     if (backups_queue.size == 0) {
       this.spinner.stop();
       this.spinner.destroy();
-      this.current_scan_date.set_text("Done!");
+      this.current_scan_date.set_text(_("Done!"));
       scan_queue = false;
     }
     else {
