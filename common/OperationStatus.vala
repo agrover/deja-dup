@@ -34,10 +34,6 @@ public class OperationStatus : Operation
     dup.collection_dates.connect((d, dates) => {collection_dates(dates);});
     base.connect_to_dup();
   }
-
-  protected override void operation_finished(Duplicity dup, bool success, bool cancelled) {
-    base.operation_finished(dup, success, cancelled);
-  }
 }
 
 } // end namespace

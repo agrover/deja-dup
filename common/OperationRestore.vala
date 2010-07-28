@@ -25,14 +25,6 @@ public class OperationRestore : Operation
 {
   public string dest {get; construct;} // Directory user wants to put files in
   public string time {get; construct;} // Date user wants to restore to
-
-  /*public Queue<string> restore_queue {
-      get {
-        return this.restore_queue;
-      }
-      set construct {
-        this.restore_queue = value.copy();
-      }}*/
   
   string source; // Directory duplicity puts files in
   List<string> errors;
@@ -50,8 +42,6 @@ public class OperationRestore : Operation
     }
   }
 
-  //Queue<string>? queue_in = null
-  //, restore_queue: queue_in.copy()
   public OperationRestore(string dest_in,
                           string? time_in = null,
                           List<File>? files_in = null,
@@ -85,26 +75,7 @@ public class OperationRestore : Operation
   }
   
   protected override void operation_finished(Duplicity dup, bool success, bool cancelled)
-  {
-    /*if (this.restore_queue.get_length() > 0) {
-      var restore_file = this.restore_queue.pop_head();
-      
-      //var _restore_files = new GLib.List<File>(); 
-		  //restore_files.append(File.new_for_path(restore_file.split(" ")[0]));
-      //this.restore_files.remove(this.restore_files.nth_data(0));
-      var _restore_files = new GLib.List<File>();
-      _restore_files.append(File.new_for_path(restore_file.split(" ")[0]));
-        
-      //this.restore_files = _restore_files.copy();
-      dup.restore_files = _restore_files;
-      
-      //this.restore_files.append(File.new_for_path(restore_file.split(" ")[0]));
-      this.time = restore_file.split(" ")[1];
-      base.start();
-      return;
-    }*/      
-      
-      
+  {     
     if (success) {
       fixup_home_dir();
       if (!mv_source_to_dest())
