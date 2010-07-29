@@ -126,6 +126,7 @@ class DejaDupApp : Object
       // specifically don't show
     }
     else if (dirhistory_mode){
+        stdout.printf("\n\ndirhistmode\n\n");
       //try {
         //toplevel = new AssistantDirectoryHistory();
         /*var assdirhist = new AssistantDirectoryHistory();

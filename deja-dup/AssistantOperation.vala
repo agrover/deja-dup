@@ -422,7 +422,7 @@ public abstract class AssistantOperation : Assistant
   protected virtual void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
     status_icon = null;
-    op = null;
+    this.op = null;
 
     if (cancelled) {
       if (success) // stop (resume later) vs cancel
@@ -500,7 +500,7 @@ public abstract class AssistantOperation : Assistant
       if (op != null) {
         op.done.disconnect(apply_finished);
         op.cancel(); // in case we just went back from progress page
-        op = null;
+        this.op = null;
       }
     }
     else if (page == progress_page) {

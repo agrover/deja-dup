@@ -41,11 +41,11 @@ public class OperationFiles : Operation {
 
   protected override List<string>? make_argv() throws Error
   {
-      List<string> argv = new List<string>();
-      //if (time != null) - no need, we don't allow null anyway
-      argv.append("--time=%s".printf(time.format("%s")));
+    List<string> argv = new List<string>();
+    //if (time != null) //- no need, we don't allow null anyway
+    argv.append("--time=%s".printf(time.format("%s")));
 
-      dup.local = source;
+    dup.local = source;
       
       return argv;
   }

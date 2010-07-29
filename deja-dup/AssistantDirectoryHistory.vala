@@ -220,8 +220,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
         });
 
         treeview.insert_column_with_attributes(-1, "", toggle, "active", 0);
-        treeview.insert_column_with_attributes(-1, "File name", new Gtk.CellRendererText(), "text", 1);
-        treeview.insert_column_with_attributes(-1, "Deleted", new Gtk.CellRendererText(), "text", 2);
+        treeview.insert_column_with_attributes(-1, _("File"), new Gtk.CellRendererText(), "text", 1);
+        treeview.insert_column_with_attributes(-1, _("Last seen"), new Gtk.CellRendererText(), "text", 2);
  
         treeview.set_headers_visible (true);
 
@@ -266,7 +266,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
   void add_listfiles_page() {
     var page = make_listfiles_page();
     append_page(page);
-    set_page_title(page, _("Deleted Files"));
+    set_page_title(page, _("Restore missing files"));
     listfiles_page = page;
     //selectfiles_page = page;
   }
@@ -294,7 +294,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
           provide_password();
         }  
         else if (op == null) {
-          do_query_collection_dates();
+          //do_query_collection_dates();
+          do_query_files_at_date_r();
         }
       }
     }
@@ -498,7 +499,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
   string worddiff;
   int tdiff =  (ttodayi - tepoch)/60/60; // Hours
   if (tdiff / 24 == 0 ) {
-    worddiff = _("Last day");
+    worddiff = _("Yesterday");
   }
   else if (tdiff / 24 / 7 == 0) {
     worddiff = _("Last week");
@@ -529,6 +530,40 @@ public class AssistantDirectoryHistory : AssistantOperation {
   /* Time object does not support GObject-style construction */
   query_op_files = new DejaDup.OperationFiles((uint)xid, etime, list_directory);
   //query_op_files.time = etime;
+  query_op_files.listed_current_files.connect(handle_listed_files);
+  query_op_files.done.connect(query_files_finished);
+    
+  op = query_op_files;
+  op.backend.mount_op = mount_op;
+  op.passphrase_required.connect(get_passphrase);
+  op.raise_error.connect((o, e, d) => {show_error(e, d);});
+  
+    try {
+    query_op_files.start();
+    }
+    catch (Error e) {
+    warning("%s\n", e.message);
+    show_error(e.message, null); // not really user-friendly text, but ideally this won't happen
+    query_files_finished(query_op_files, false, false);
+  }
+  }
+  
+  protected void do_query_files_at_date_r () {
+  /*
+   * Initializes query operation for list-current-files at specific date 
+   *
+   * Initializes query operation, updates list files page with current date of scan
+   * in human semi-friendly form and connect appropriate signals. 
+   */
+    
+  if (mount_op == null)
+    mount_op = new MountOperationAssistant(this);
+
+  realize();
+  var xid = Gdk.x11_drawable_get_xid(this.window);
+  
+  /* Time object does not support GObject-style construction */
+  query_op_files = new DejaDup.OperationFiles((uint)xid, null, list_directory);
   query_op_files.listed_current_files.connect(handle_listed_files);
   query_op_files.done.connect(query_files_finished);
     
