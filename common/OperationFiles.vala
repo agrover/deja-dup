@@ -26,7 +26,7 @@ public class OperationFiles : Operation {
   public File source {get; construct;}
     
   public OperationFiles(uint xid = 0,
-                        Time? time_in,
+                        Time time_in,
                         File source)
   {
     Object(xid: xid, mode: Mode.LIST, source: source);
@@ -47,7 +47,7 @@ public class OperationFiles : Operation {
 
     dup.local = source;
       
-      return argv;
+    return argv;
   }
 }
 }

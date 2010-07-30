@@ -294,8 +294,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
           provide_password();
         }  
         else if (op == null) {
-          //do_query_collection_dates();
-          do_query_files_at_date_r();
+          do_query_collection_dates();
         }
       }
     }
@@ -548,40 +547,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
   }
   }
   
-  protected void do_query_files_at_date_r () {
-  /*
-   * Initializes query operation for list-current-files at specific date 
-   *
-   * Initializes query operation, updates list files page with current date of scan
-   * in human semi-friendly form and connect appropriate signals. 
-   */
-    
-  if (mount_op == null)
-    mount_op = new MountOperationAssistant(this);
-
-  realize();
-  var xid = Gdk.x11_drawable_get_xid(this.window);
-  
-  /* Time object does not support GObject-style construction */
-  query_op_files = new DejaDup.OperationFiles((uint)xid, null, list_directory);
-  query_op_files.listed_current_files.connect(handle_listed_files);
-  query_op_files.done.connect(query_files_finished);
-    
-  op = query_op_files;
-  op.backend.mount_op = mount_op;
-  op.passphrase_required.connect(get_passphrase);
-  op.raise_error.connect((o, e, d) => {show_error(e, d);});
-  
-    try {
-    query_op_files.start();
-    }
-    catch (Error e) {
-    warning("%s\n", e.message);
-    show_error(e.message, null); // not really user-friendly text, but ideally this won't happen
-    query_files_finished(query_op_files, false, false);
-  }
-  }
-
   protected void query_collection_dates_finished(DejaDup.Operation op, bool success, bool cancelled) {
     op_state = op.get_state();
     //this.query_op_files = null;
