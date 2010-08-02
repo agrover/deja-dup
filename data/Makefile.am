@@ -25,7 +25,7 @@ nobase_dist_data_DATA = \
 @INTLTOOL_XML_NOMERGE_RULE@
 
 @GSETTINGS_RULES@
-dist_gsettings_SCHEMAS = org.gnome.DejaDup.gschema.xml
+gsettings_SCHEMAS = org.gnome.DejaDup.gschema.xml
 
 @INTLTOOL_DESKTOP_RULE@
 desktopdir = $(datadir)/applications
@@ -39,8 +39,8 @@ dist_autostart_DATA = deja-dup-monitor.desktop
 convertdir = $(datadir)/GConf/gsettings
 dist_convert_DATA = deja-dup.convert
 
-EXTRA_DIST = deja-dup.desktop.in deja-dup-monitor.desktop.in.in org.gnome.DejaDup.gschema.xml.in
-DISTCLEANFILES = deja-dup.desktop deja-dup-monitor.desktop deja-dup-monitor.desktop.in org.gnome.DejaDup.gschema.xml
+EXTRA_DIST = deja-dup.desktop.in deja-dup-monitor.desktop.in.in org.gnome.DejaDup.gschema.xml org.gnome.DejaDup.gschema.xml.in
+DISTCLEANFILES = deja-dup.desktop deja-dup-monitor.desktop deja-dup-monitor.desktop.in org.gnome.DejaDup.gschema.xml org.gnome.DejaDup.gschema.xml
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t
 install-data-hook: update-icon-cache convert-gconf

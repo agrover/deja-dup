@@ -172,7 +172,7 @@ void convert_ssh_to_file()
       if (username != null && username != "")
         gio_uri += username + "@";
       gio_uri += server;
-      if (port > 0)
+      if (port > 0 && port != 22)
         gio_uri += ":" + port.to_string();
       if (directory == null || directory == "")
         gio_uri += "/";
