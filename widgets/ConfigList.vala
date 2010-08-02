@@ -25,9 +25,9 @@ public class ConfigList : ConfigWidget
 {
   public Gtk.SizeGroup? size_group {get; construct;}
   
-  public ConfigList(string key, Gtk.SizeGroup? sg = null, string ns="")
+  public ConfigList(string key, Gtk.SizeGroup? sg = null)
   {
-    Object(size_group: sg, key: key, ns: ns);
+    Object(size_group: sg, key: key);
   }
   
   Gtk.TreeView tree;
@@ -94,8 +94,14 @@ public class ConfigList : ConfigWidget
   
   protected override async void set_from_config()
   {
-    var slist_val = settings.get_value(key);
-    string*[] slist = slist_val.get_strv();
+    SList<string> slist;
+    try {
+      slist = client.get_list(key, GConf.ValueType.STRING);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      return;
+    }
     
     var list = DejaDup.parse_dir_list(slist);
     
@@ -163,25 +169,34 @@ public class ConfigList : ConfigWidget
     SList<string> files = dlg.get_filenames();
     dlg.destroy();
     
-    var slist_val = settings.get_value(key);
-    string*[] slist = slist_val.get_strv();
-    
-    foreach (string file in files) {
-      var folder = File.new_for_path(file);
-      bool found = false;
-      foreach (string s in slist) {
-        var sfile = DejaDup.parse_dir(s);
-        if (sfile.equal(folder)) {
-          found = true;
-          break;
-        }
-      }
+    SList<string> slist;
+    try {
+      slist = client.get_list(key, GConf.ValueType.STRING);
       
-      if (!found)
-        slist += folder.get_parse_name();
+      foreach (string file in files) {
+        var folder = File.new_for_path(file);
+        bool found = false;
+        foreach (string s in slist) {
+          var sfile = File.new_for_path(s);
+          if (sfile.equal(folder)) {
+            found = true;
+            break;
+          }
+        }
+        
+        if (!found)
+          slist.append(file);
+      }
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      slist = files.copy();
     }
     
-    settings.set_value(key, new Variant.strv(slist));
+    try {
+      client.set_list(key, GConf.ValueType.STRING, slist);
+    }
+    catch (Error e) {warning("%s\n", e.message);}
   }
   
   void handle_remove()
@@ -193,9 +208,14 @@ public class ConfigList : ConfigWidget
     if (paths == null)
       return;
     
-    var slist_val = settings.get_value(key);
-    string*[] before = slist_val.get_strv();
-    string[] after = new string[0];
+    SList<string> slist;
+    try {
+      slist = client.get_list(key, GConf.ValueType.STRING);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      return;
+    }
     
     foreach (Gtk.TreePath path in paths) {
       Gtk.TreeIter iter;
@@ -206,14 +226,24 @@ public class ConfigList : ConfigWidget
       model.get(iter, 0, out current);
       var current_file = File.new_for_path(current);
       
-      foreach (string file in before) {
-        var sfile = DejaDup.parse_dir(file);
-        if (!sfile.equal(current_file))
-          after += file;
+      weak SList<string> siter = slist, snext;
+      while (siter != null) {
+        snext = siter.next;
+        var sfile = DejaDup.parse_dir(siter.data);
+        if (sfile.equal(current_file)) {
+          slist.remove_link(siter);
+          break;
+        }
+        siter = snext;
       }
     }
     
-    settings.set_value(key, new Variant.strv((string*[])after));
+    try {
+      client.set_list(key, GConf.ValueType.STRING, slist);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
   }
 }
 

@@ -36,8 +36,17 @@ public class ConfigLabelPolicy : ConfigLabel
   
   protected override async void set_from_config()
   {
-    Backend backend = Backend.get_default();
-    int delete_after = settings.get_int(DELETE_AFTER_KEY);
+    Backend backend = null;
+    int delete_after = 0;
+    try {
+      backend = Backend.get_default();
+      delete_after = client.get_int(DELETE_AFTER_KEY);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      label.label = "";
+      return;
+    }
     
     bool infinite = (yield backend.get_space(false)) == Backend.INFINITE_SPACE;
     if (infinite) {

@@ -10,9 +10,9 @@ Given these desired traits, what can we do?
 
 (c) suggests that we need a constantly-running program in the user's session that waits for the scheduled backup and displays an icon.  This is unavoidable.  It should have as small a footprint as possible.
 
-(b) suggests we need to run a scheduler as root, most naturally as part of a cron job.  Since we can't drop a file in that says 'add this job to each user's crontab' (like we can do with /etc/xdg/autostart for autostart tasks), we'd need to drop in a /etc/cron.d file that runs at the minimum period we allow the user to set (probably a day), checks *all* users' settings to see if they are due for a backup, and kicks off a backup for/as them if needed.  But we're not guaranteed to satisfy (a.2) unless user is running anacron.
+(b) suggests we need to run a scheduler as root, most naturally as part of a cron job.  Since we can't drop a file in that says 'add this job to each user's crontab' (like we can do with /etc/xdg/autostart for autostart tasks), we'd need to drop in a /etc/cron.d file that runs at the minimum period we allow the user to set (probably a day), checks *all* users' gconf settings to see if they are due for a backup, and kicks off a backup for/as them if needed.  But we're not guaranteed to satisfy (a.2) unless user is running anacron.
 
-We could avoid the hackery of 'one root task that checks all users' by, when keys that control periodic settings are changed (watched by (c) daemon), doing "crontab -l | cronttab -" goofiness.  That would correctly install into the user's crontab and allow nice system cron permission control and such.  I'm not sure if that's a bonus or not (the silent refusal to run might confuse user, but surely that's a corner case).
+We could avoid the hackery of 'one root task that checks all users' by, when gconf keys that control periodic settings are changed (watched by (c) daemon), doing "crontab -l | cronttab -" goofiness.  That would correctly install into the user's crontab and allow nice system cron permission control and such.  I'm not sure if that's a bonus or not (the silent refusal to run might confuse user, but surely that's a corner case).
 
 The above points about (b) assumes that the user has a properly set up cron.  These days that's probably true, but none-the-less, it would be nice if we could avoid that.
 

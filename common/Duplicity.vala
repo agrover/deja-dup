@@ -153,8 +153,10 @@ public class Duplicity : Object
     if (mode == Operation.Mode.BACKUP)
       process_include_excludes();
     
-    var settings = get_settings();
-    delete_age = settings.get_int(DELETE_AFTER_KEY);
+    try {
+      delete_age = client.get_int(DELETE_AFTER_KEY);
+    }
+    catch (Error e) {warning("%s\n", e.message);}
 
     if (!restart())
       done(false, false);

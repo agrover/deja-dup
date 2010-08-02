@@ -70,7 +70,7 @@ public class ConfigLocation : ConfigWidget
     button.selection_changed.connect(handle_selection_changed);
     
     watch_key(BACKEND_KEY);
-    watch_key(FILE_PATH_KEY, DejaDup.get_settings(FILE_ROOT));
+    watch_key(FILE_PATH_KEY);
   }
   
   ~ConfigLocation()
@@ -84,15 +84,15 @@ public class ConfigLocation : ConfigWidget
     }
   }
   
-  File get_file_from_settings() throws Error
+  File get_file_from_gconf() throws Error
   {
     // Check the backend type, then GIO uri if needed
     File file = null;
-    var val = settings.get_string(BACKEND_KEY);
+    var val = client.get_string(BACKEND_KEY);
     if (val == "s3" && tmpdir != null)
       file = tmpdir;
     else {
-      val = DejaDup.get_settings(FILE_ROOT).get_string(FILE_PATH_KEY);
+      val = client.get_string(FILE_PATH_KEY);
       if (val == null)
         val = ""; // current directory
       file = File.parse_name(val);
@@ -107,7 +107,7 @@ public class ConfigLocation : ConfigWidget
     try {
       var uri = button.get_uri();
       var button_file = uri == null ? null : File.new_for_uri(uri);
-      file = get_file_from_settings();
+      file = get_file_from_gconf();
       if (button_file == null || !file.equal(button_file)) {
         button.set_current_folder_uri(file.get_uri());
         is_s3 = tmpdir != null && file.equal(tmpdir);
@@ -125,27 +125,25 @@ public class ConfigLocation : ConfigWidget
 
   async void set_file_info()
   {
-    File settings_file = null;
+    File gconf_file = null;
     try {
-      settings_file = get_file_from_settings();
+      gconf_file = get_file_from_gconf();
     }
     catch (Error err) {} // ignore
     
     var uri = button.get_uri();
     var file = uri == null ? null : File.new_for_uri(uri);
-    if (file == null || file.equal(settings_file))
+    if (file == null || file.equal(gconf_file))
       return; // we sometimes get several selection changed notices in a row...
     
     is_s3 = tmpdir != null && file.equal(tmpdir);
     
     try {
       if (is_s3)
-        settings.set_string(BACKEND_KEY, "s3");
+        client.set_string(BACKEND_KEY, "s3");
       else {
-        settings.delay();
-        settings.set_string(BACKEND_KEY, "file");
-        settings.set_string(FILE_PATH_KEY, file.get_parse_name());
-        settings.apply();
+        client.set_string(BACKEND_KEY, "file");
+        client.set_string(FILE_PATH_KEY, file.get_parse_name());
         yield BackendFile.check_for_volume_info(file);
       }
     }

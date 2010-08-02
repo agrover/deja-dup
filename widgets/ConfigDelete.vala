@@ -31,8 +31,8 @@ public class ConfigDelete : ConfigChoice
   public static const int ANNUALLY = 365;
   public static const int FOREVER = int.MAX;
 
-  public ConfigDelete(string key, string ns="") {
-    Object(key: key, ns: ns);
+  public ConfigDelete(string key) {
+    Object(key: key);
   }
   
   construct {
@@ -61,14 +61,26 @@ public class ConfigDelete : ConfigChoice
     if (intval == int.MAX)
       intval = 0; // forever
     
-    settings.set_int(key, intval);
+    try {
+        client.set_int(key, intval);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
     
     choice_changed(intval.to_string());
   }
   
   protected override async void set_from_config()
   {
-    var confval = settings.get_int(key);
+    int confval;
+    try {
+        confval = client.get_int(key);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      return;
+    }
     if (confval <= 0)
       confval = int.MAX;
     
@@ -78,7 +90,7 @@ public class ConfigDelete : ConfigChoice
     
     while (valid) {
       Value val;
-      combo.model.get_value(iter, settings_col, out val);
+      combo.model.get_value(iter, gconf_col, out val);
       int intval = val.get_int();
       
       if (intval == confval) {

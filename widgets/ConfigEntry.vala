@@ -23,9 +23,9 @@ namespace DejaDup {
 
 public class ConfigEntry : ConfigWidget
 {
-  public ConfigEntry(string key, string ns="")
+  public ConfigEntry(string key)
   {
-    Object(key: key, ns: ns);
+    Object(key: key);
   }
   
   Gtk.Entry entry;
@@ -39,15 +39,25 @@ public class ConfigEntry : ConfigWidget
   
   protected override async void set_from_config()
   {
-    var val = settings.get_string(key);
-    if (val == null)
-      val = "";
-    entry.set_text(val);
+    try {
+      var val = client.get_string(key);
+      if (val == null)
+        val = "";
+      entry.set_text(val);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
   }
   
   bool handle_focus_out()
   {
-    settings.set_string(key, entry.get_text());
+    try {
+      client.set_string(key, entry.get_text());
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
     return false;
   }
 }
