@@ -65,13 +65,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
    * 6. When OperationFiles finishes, query_files_finished releases variables and, if required, calls do_query_files_at_date. 
    * 7. After user selects files that he wishes to restore, he moves to confirmation page and starts the restore operation
    * 
-   * 
-   * 
-   * 
-   * 
-   * 
-   * 
-   * 
    * @param //File// ''list_dir'' Directory whose deleted files will be shown.
    */
   private File list_directory;
@@ -123,11 +116,13 @@ public class AssistantDirectoryHistory : AssistantOperation {
   Gtk.ScrolledWindow sw_restore_files;
 
   /* List files page */
-  Gtk.Label current_scan_date = new Gtk.Label(_("Starting..."));
+  //Gtk.Label current_scan_date = new Gtk.Label(_("Starting..."));
+  Gtk.Label current_scan_date;
   Gtk.Spinner spinner = new Gtk.Spinner();
   
   /* Confirmation page related widgets */
   Gtk.Label label;
+  Gtk.Label restore_files_label;
   Gtk.Table restore_files_table;
   /*
     Gtk.Table in Glade needs to be set at least to 1 at start. When we update
@@ -163,11 +158,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
     }
   }
 
-  /*[CCode (instance_pos = -1)]
-  public void on_restoretoggle(Gtk.CellRendererToggle checkbox, int path) {
-    checkbox.set_active(true);
-  }*/
-
   Gtk.Widget? make_listfiles_page() {
     /*
      * Build list files (introduction) page which shows deleted files.
@@ -188,7 +178,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
         var window = builder.get_object("viewport") as Gtk.Widget;
         var filelistwindow = builder.get_object("filelistwindow") as Gtk.ScrolledWindow;
         var status_table = builder.get_object("backup_table") as Gtk.Table;
-        var progress_table = builder.get_object("progress_table") as Gtk.Table;
+        var progress_table = builder.get_object("status_box") as Gtk.Table;
+        current_scan_date = builder.get_object("status_word") as Gtk.Label;
 
         /* Add backup and scan information */
         /* Backup source */
@@ -196,15 +187,13 @@ public class AssistantDirectoryHistory : AssistantOperation {
         status_table.attach(w, 1, 2, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
 
         /* Spinner */
-        progress_table.attach(this.spinner, 1, 2, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-
-        /* Current date of scan */
-        progress_table.attach(this.current_scan_date, 2, 3, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-        
+        progress_table.attach(this.spinner, 0, 1, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+        this.spinner.set_size_request(20, 20);
+       
         this.listmodel = new Gtk.ListStore (3, typeof (bool), typeof (string), typeof (string));
         var treeview = new Gtk.TreeView.with_model (this.listmodel);
-        //treeview.set_model(this.listmodel);
         var toggle = new Gtk.CellRendererToggle();
+        
         toggle.toggled.connect ((toggle, path) => {
           /*
            * Function for toggling state of checkbox
@@ -219,42 +208,13 @@ public class AssistantDirectoryHistory : AssistantOperation {
           this.listmodel.set(this.deleted_iter, 0, !toggle.active);
         });
 
-        treeview.insert_column_with_attributes(-1, "", toggle, "active", 0);
+        treeview.insert_column_with_attributes(-1, "    ", toggle, "active", 0);
         treeview.insert_column_with_attributes(-1, _("File"), new Gtk.CellRendererText(), "text", 1);
         treeview.insert_column_with_attributes(-1, _("Last seen"), new Gtk.CellRendererText(), "text", 2);
  
         treeview.set_headers_visible (true);
 
         filelistwindow.add_with_viewport(treeview);
-
-        /*
-          we have do_prepare, stupid!
-          this.forward.connect((assist) => {
-          uint pathlenght;
-          string path;
-          string pathr;
-          uint pathlenght2;
-          string path2;
-          string pathr2;
-          assist.current.data.page.path(out pathlenght, out path, out pathr);
-          listfiles_page.path(out pathlenght2, out path2, out pathr2);
-          //stdout.printf("\nFORWARD! name: %s\n %s \n %s\n\n", assist.current.data.page.name, path, path2);
-          if (assist.current.data.page.name == "confirm_page") {
-            stdout.printf("\n\n\nlistfilespage mamo! do magic misko!\n");
-            foreach(var delfile in this.file_status) {
-              if (delfile.restore)
-              {
-                stdout.printf("OFFERING: %s\n\n", delfile.name);
-                //this.restore_queue.push_tail(delfile.queue_format());
-                this.restore_queue.offer(delfile);
-                
-                this.restoremodel.append (out this.restoreiter);
-                this.restoremodel.set(this.restoreiter, 0, delfile.name);
-              }
-            }
-            this.backups_queue.clear();
-          }
-        });*/            
         window.reparent(page);
         return page;
       } catch (Error err) {
@@ -268,42 +228,34 @@ public class AssistantDirectoryHistory : AssistantOperation {
     append_page(page);
     set_page_title(page, _("Restore missing files"));
     listfiles_page = page;
-    //selectfiles_page = page;
   }
 
   protected override void add_setup_pages() {
     add_listfiles_page();
   }
 
-  /*void add_restorefiles_page() {
-    var page = make_restorefiles_page();
-    append_page(page);
-    set_page_title(page, _("About to restore"));
-    //selectfiles_page = page;
-  }*/
-
   protected override void do_prepare(Assistant assist, Gtk.Widget page) {
     if (page == listfiles_page) {
-      //forward_button.set_label("Confirm");
       if (!scan_queue) {
         do_query_files_at_date();
         scan_queue = true;
       }
       else {
-        if (op != null && op.needs_password){
+        //if (this.op != null && this.op.needs_password) {
+        if (query_op_collection_dates != null && query_op_collection_dates.needs_password) {
           provide_password();
         }  
-        else if (op == null) {
+        else if (query_op_collection_dates == null) {
           do_query_collection_dates();
         }
       }
     }
     
     else if (page == confirm_page) {
-        /*
-         * We need to destroy the existing table and redraw current one to draw
-         * the confirmation page.
-         */
+    /*
+     * We need to destroy the existing table and redraw current one to draw
+     * the confirmation page.
+     */
       scan_queue = false;
 
       restore_files_table.destroy();
@@ -323,13 +275,18 @@ public class AssistantDirectoryHistory : AssistantOperation {
           label.set("xalign", 0.0f);
           label.show(); // By default, labels are hidden, therefore we show it.
           restore_files_table.attach(label, 0, 1, this.restore_files_table_rows-1, this.restore_files_table_rows, Gtk.AttachOptions.FILL, 0, 0, 0);
-          /*this.restoremodel.append (out this.restoreiter);
-          this.restoremodel.set(this.restoreiter, 0, delfile.name);*/
         }
       }
+
+      // Use appropriate form
+      restore_files_label.set_text(ngettext("File to restore:",
+                                            "Files to restore:",
+                                            restore_files_table_rows));
       restore_files_table.show();
       sw_restore_files.add_with_viewport(restore_files_table);
-      //this.backups_queue.clear();
+    }
+    else if (page == progress_page) {
+      set_page_title(page, _("Restoring…"));
     }
     else if (page == summary_page) {
       if (error_occurred)
@@ -374,48 +331,18 @@ public class AssistantDirectoryHistory : AssistantOperation {
           var fs = new DeletedFile(filestr, op.time);
 
           this.file_status.add(fs);
-          //var fileinfoobj = fileobj.query_info("standard::*", FileQueryInfoFlags.NONE, null);
-          //stdout.printf("basename: %s", fileinfoobj.get_display_name());
           
           this.listmodel.append (out this.deleted_iter);
           this.listmodel.set (this.deleted_iter, 0, false, 1, fs.filename(), 2, op.time.format("%c"));
         
           this.allfiles_prev.add(filestr);
         }
-        /*if (file.query_file_type(0, null) == FileType.DIRECTORY) {
-
-        }
-        else if {
-          
-        }*/
       }
-
-      /*if (!this.allfiles_prev.contains(filestr)) {
-        //[this.list_directory.get_path().length:filestr.length]]
-        
-        var fs = new DeletedFile(filestr, op.time);
-        this.file_status.add(fs);
-          
-        this.listmodel.append (out this.deleted_iter);
-        this.listmodel.set (this.deleted_iter, 0, false, 1, fs.filename(), 2, op.time.format("%c"));
-        
-        this.allfiles_prev.add(filestr);
-      }*/
     }
-
-    /*if (this.files_at_epoch.has_key(op.time)) {
-        //stdout.printf("%d", this.files_at_epoch.get(op.time));
-        var flist = this.files_at_epoch.get(op.time);
-        flist.add(datefilestr);
-        //this.files_at_epoch.set(op.time, flist);
-    } else {
-      var nlist = new ArrayList<string>();
-      nlist.add(datefilestr);
-      this.files_at_epoch.set(op.time, nlist);
-    }*/
   }
 
-  protected void handle_collection_dates(DejaDup.OperationStatus op, GLib.List<string>? dates){
+  protected void handle_collection_dates(DejaDup.OperationStatus op, GLib.List<string>? dates)
+  {
     /*
      * Handle collection dates
      *
@@ -429,7 +356,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
     TimeVal tv = TimeVal();
 
     if (!this.backups_queue_filled) {
-      //foreach(string date in dates){
       for(var i=dates.length()-1;i > 0;i--){
         if (tv.from_iso8601(dates.nth(i).data)) {
           Time t = Time.local(tv.tv_sec);
@@ -445,7 +371,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
     do_query_files_at_date();
   }
 
-  protected void do_query_collection_dates() {
+  protected void do_query_collection_dates()
+  {
     /*
      * Initialize query operation for collection dates.
      *
@@ -476,7 +403,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
     }
   }
     
-  protected void do_query_files_at_date(){
+  protected void do_query_files_at_date()
+  {
   /*
    * Initializes query operation for list-current-files at specific date 
    *
@@ -487,6 +415,10 @@ public class AssistantDirectoryHistory : AssistantOperation {
     do_close();
     return;
   }
+
+  // Don't start if queue is empty.
+  if (backups_queue.size == 0)
+    return;
   
   Time etime = backups_queue.poll();
   /* Update progress */
@@ -498,24 +430,24 @@ public class AssistantDirectoryHistory : AssistantOperation {
   string worddiff;
   int tdiff =  (ttodayi - tepoch)/60/60; // Hours
   if (tdiff / 24 == 0 ) {
-    worddiff = _("Yesterday");
+    worddiff = _("Scanning for files from yesterday...");
   }
   else if (tdiff / 24 / 7 == 0) {
-    worddiff = _("Last week");
+    worddiff = _("Scanning for files from last week...");
   }
   else if (tdiff / 24 / 30 == 0) {
-  worddiff = _("Last month");
+  worddiff = _("Scanning for files from last month...");
   }
   else if (tdiff / 24 / 30 >= 1 && tdiff / 24 / 30 <= 12) {
     int n = tdiff / 24 / 30;
     if (n == 1)
-      worddiff = _("About a month ago");
+      worddiff = _("Scanning for files from about a month ago...");
     else
-      worddiff = _(@"About $n months ago");
+      worddiff = _(@"Scanning for files from about $n months ago...");
   }
   else {
     int n = tdiff / 24 / 30 / 12;
-    worddiff = _(@"About $n years ago");
+    worddiff = _(@"Scanning for files from about $n years ago...");
   }
 
   this.current_scan_date.set_text(worddiff);
@@ -528,7 +460,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
   
   /* Time object does not support GObject-style construction */
   query_op_files = new DejaDup.OperationFiles((uint)xid, etime, list_directory);
-  //query_op_files.time = etime;
   query_op_files.listed_current_files.connect(handle_listed_files);
   query_op_files.done.connect(query_files_finished);
     
@@ -549,49 +480,14 @@ public class AssistantDirectoryHistory : AssistantOperation {
   
   protected void query_collection_dates_finished(DejaDup.Operation op, bool success, bool cancelled) {
     op_state = op.get_state();
-    //this.query_op_files = null;
     query_op_collection_dates = null;
-    op = null;
+    this.op = null;
     
     if (cancelled)
       do_close();
     //else if (success)
       //go_forward();
       //  stdout.printf("success\n");
-  }
-
-  protected void query_wrapup() {
-    //var deleted = new ArrayList<string>();
-
-    /*var iterator = files_at_epoch.map_iterator();
-    var has_next = iterator.first();
-
-    allfiles_prev = iterator.get_value();
-    has_next = iterator.next();
-    while (has_next == true) {
-      allfiles_cur = iterator.get_value();
-      foreach(string pfile in allfiles_prev) {
-        if (!allfiles_cur.contains(pfile)) {
-          deleted.add(pfile);
-        }
-      }
-      allfiles_prev = allfiles_cur;
-      has_next = iterator.next();
-    }
-
-    foreach(var elem in deleted) {
-      stdout.printf("%s", elem);
-    }*/
-    //printlist(deleted);
-    //foreach(var edate in files_at_epoch){
-      //stdout.printf("%s %s\n", edate.key,edate.value[3]);
-
-      
-      
-      /*foreach(string file in edate.value) {
-        stdout.printf("%s %s\n", edate.key,file);
-      }*/
-    //}
   }
 
   protected override void do_cancel() {
@@ -609,15 +505,15 @@ public class AssistantDirectoryHistory : AssistantOperation {
 
   protected override void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
-      /*
-       * Ran after assistant finishes applying restore operation.
-       *
-       * After assistant finishes with initial OperationRestore, apply_finished is called. Afterwards we
-       * check if restore_queue is empty and if not, rerun apply function. If it is, we move to
-       * summary page.
-       */
+    /*
+     * Ran after assistant finishes applying restore operation.
+     *
+     * After assistant finishes with initial OperationRestore, apply_finished is called. Afterwards we
+     * check if restore_queue is empty and if not, rerun apply function. If it is, we move to
+     * summary page.
+     */
     //status_icon = null; PRIV PARAMETER - FIXIT!
-    op = null;
+    this.op = null;
 
     if (cancelled) {
       if (success) // stop (resume later) vs cancel
@@ -644,8 +540,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
   {
     op_state = op.get_state();
     query_op_files = null;
-    //this.query_op_collection_dates = null;
-    op = null;
+    this.op = null;
     
     if (backups_queue.size == 0) {
       this.spinner.stop();
@@ -657,16 +552,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
       if (scan_queue)
         do_query_files_at_date();
     }
-    
-    /*if (cancelled) {
-      stdout.printf("canceled");
-      // we can't run do_close, otherwise it closes when user moves to the next page in assistant.
-      //do_close();
-    }
-    else if (success)
-      //go_forward();
-      //stdout.printf("success\n");
-    */
   }
 
   protected override Gtk.Widget? make_confirm_page(){
@@ -677,14 +562,13 @@ public class AssistantDirectoryHistory : AssistantOperation {
     page.name = "confirm_page";
     var builder = new Gtk.Builder();
     try {
-      //builder.add_from_file("interface/restorefiles.glade");
       builder.add_from_file("interface/directory_history_confirmation_page.glade");
-      //builder.connect_signals(this);
       
       var window = builder.get_object("viewport") as Gtk.Widget;
       var backup_source_properties = builder.get_object("backup_properties") as Gtk.Table;
       sw_restore_files = builder.get_object("sw-restore-files") as Gtk.ScrolledWindow;
-      //restore_files_table = builder.get_object("restore_files") as Gtk.Table;
+      restore_files_label = builder.get_object("restore_files_label") as Gtk.Label;
+      
       Gtk.Widget w;
 
       w = new DejaDup.ConfigLabelLocation();
@@ -692,40 +576,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
 
       w = new DejaDup.ConfigLabelBool(DejaDup.ENCRYPT_KEY);
       backup_source_properties.attach(w, 1, 2, 1, 2, Gtk.AttachOptions.FILL, 0, 0, 0);
-
-      //label = new Gtk.Label("make_confirm_page");
-      //label.set("xalign", 0.0f);
-      //restore_files_table.attach(label, 0, 1, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-      /*label = new Gtk.Label("meh 2");
-      label.set("xalign", 0.0f);
-      restore_files_table.attach(label, 0, 1, 1, 2, Gtk.AttachOptions.FILL, 0, 0, 0);*/
-
-      //int rows = 2;
-      /*for (var i=0; i<50; i++){
-        label = new Gtk.Label("row %d".printf(rows));
-        label.set("xalign", 0.0f);
-        rows++;
-        restore_files_table.resize(rows, 1);
-        restore_files_table.attach(label, 0, 1, rows, rows+1, Gtk.AttachOptions.FILL, 0, 0, 0);
-      }*/
-      
-      //stdout.printf(restore_files_table);
-      
-      //label.set("xalign", 0.0f);
-      //restore_files_table.attach(label, 0, 1, 1, 2, Gtk.AttachOptions.FILL, 0, 0, 0);
-      //int rows = 0;
-      //confirm_table = new Gtk.Table(rows, 1, false);
-      
-
-      /*var restorefiles = builder.get_object("restorefileswindow") as Gtk.ScrolledWindow;
-      
-      this.restoremodel = new Gtk.ListStore(1, typeof(string));
-      var _tree_view = new Gtk.TreeView.with_model(this.restoremodel);
-      
-      _tree_view.insert_column_with_attributes(-1, "File name", new Gtk.CellRendererText(), "text", 0);
-
-      _tree_view.set_headers_visible (true);  
-      restorefiles.add_with_viewport(_tree_view);*/
 
       window.reparent(page);
       return page;
@@ -737,18 +587,13 @@ public class AssistantDirectoryHistory : AssistantOperation {
 
   protected override DejaDup.Operation create_op()
   {
-      /*
-       * Creates operation that is then called by do_apply.
-       */
+    /*
+     * Creates operation that is then called by do_apply.
+     */
     realize();
     var xid = Gdk.x11_drawable_get_xid(this.window);
-    /*  var rest_op = new DejaDup.OperationRestore(restore_location, date,
-                                               restore_files, (uint)xid);*/
 
     var restore_file = this.restore_queue.poll();
-    //var restore_file = restore_queue.nth(0);
-    //var restore_file = restore_queue.pop_head();
-    //restore_queue.remove(restore_file);
     /*
     OperationRestore usually takes list of file so restore. Since it is high 
     probability that if we will restore multiple files, they will be from different dates,
@@ -756,12 +601,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
     */
     
     var restore_files = new GLib.List<File>(); 
-    //restore_files.append(File.new_for_path(restore_file.split(" ")[0]));
     restore_files.append(File.new_for_path(restore_file.name));
-    //2001-07-15T04:09:38-07:00
-    //restore_file.deleted.format("%FT%T%z"))
-    //stdout.printf("name:%s time: %s", restore_file, restore_file.deleted.format("%FT%T%z"));
-    //restore_file.split(" ")[1]]
     
     var rest_op = new DejaDup.OperationRestore("/", 
                                                restore_file.deleted.format("%s"),
