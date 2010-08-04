@@ -366,17 +366,11 @@ public abstract class AssistantOperation : Assistant
      *
      * 
      */
-    var client = DejaDup.get_gconf_client();
+    var settings = DejaDup.get_settings();
     string val;
-    try {
-      val = client.get_string(DejaDup.LAST_RUN_KEY);
-      if (val != null && val != "")
-        return;
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
+    val = settings.get_string(DejaDup.LAST_RUN_KEY);
+    if (val != null && val != "")
       return;
-    }
     
     add_custom_config_pages();
   }
@@ -660,7 +654,7 @@ public abstract class AssistantOperation : Assistant
       }
     }
     
-    //op.continue_with_passphrase(passphrase);
+    op.continue_with_passphrase(passphrase);
   }
 
   void stop_question(Gtk.Dialog dlg, int resp)
