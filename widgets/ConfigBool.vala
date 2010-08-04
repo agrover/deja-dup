@@ -25,9 +25,9 @@ public class ConfigBool : ConfigWidget, Togglable
 {
   public string label {get; construct;}
   
-  public ConfigBool(string key, string label, string ns="")
+  public ConfigBool(string key, string label)
   {
-    Object(key: key, label: label, ns: ns);
+    Object(key: key, label: label);
   }
   
   public bool get_active() {return button.get_active();}
@@ -43,13 +43,24 @@ public class ConfigBool : ConfigWidget, Togglable
   
   protected override async void set_from_config()
   {
-    var val = settings.get_boolean(key);
-    button.set_active(val);
+    try {
+      var val = client.get_bool(key);
+      button.set_active(val);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
   }
   
   void handle_toggled()
   {
-    settings.set_boolean(key, button.get_active());
+    try {
+      client.set_bool(key, button.get_active());
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
+    
     toggled();
   }
 }

@@ -240,9 +240,12 @@ public class AssistantBackup : AssistantOperation
         // Summary page is a vbox, let's add some widgets here to allow user to
         // make this backup on a regular basis.  But only show if user isn't
         // already automatically backing up.
-        var settings = DejaDup.get_settings();
+        var client = DejaDup.get_gconf_client();
         bool val = false;
-        val = settings.get_boolean(DejaDup.PERIODIC_KEY);
+        try {
+          val = client.get_bool(DejaDup.PERIODIC_KEY);
+        }
+        catch (Error e) {warning("%s\n", e.message);}
         if (!val)
           add_periodic_widgets((Gtk.VBox)page);
 

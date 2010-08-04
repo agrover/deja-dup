@@ -23,8 +23,8 @@ namespace DejaDup {
 
 public class ConfigPeriod : ConfigChoice
 {
-  public ConfigPeriod(string key, string ns="") {
-    Object(key: key, ns: ns);
+  public ConfigPeriod(string key) {
+    Object(key: key);
   }
   
   construct {
@@ -49,14 +49,26 @@ public class ConfigPeriod : ConfigChoice
     Value? val = get_current_value();
     int intval = val == null ? 1 : val.get_int();
     
-    settings.set_int(key, intval);
+    try {
+        client.set_int(key, intval);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
     
     choice_changed(intval.to_string());
   }
   
   protected override async void set_from_config()
   {
-    var confval = settings.get_int(key);
+    int confval;
+    try {
+        confval = client.get_int(key);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      return;
+    }
     if (confval < 1)
       confval = 1;
     
@@ -66,7 +78,7 @@ public class ConfigPeriod : ConfigChoice
     
     while (valid) {
       Value val;
-      combo.model.get_value(iter, settings_col, out val);
+      combo.model.get_value(iter, gconf_col, out val);
       int intval = val.get_int();
       
       if (intval == confval) {

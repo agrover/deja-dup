@@ -23,61 +23,28 @@ if not os.environ.get('DISPLAY'):
   os.system('bash -c "echo -e \'\e[32mSKIPPED\e[0m\'"')
   sys.exit(0)
 
-import signal
-import atexit
-import subprocess
 from os import environ, path, remove
 import tempfile
+import ldtp
+import subprocess
+import glob
+import re
+import traceback
 
 latest_duplicity = '0.6.09'
 
 temp_dir = None
+gconf_dir = None
 cleanup_dirs = []
 cleanup_mounts = []
-
-def create_temp_dir():
-  global temp_dir, cleanup_dirs
-  if temp_dir is not None:
-    return
-  if 'DEJA_DUP_TEST_TMP' in environ:
-    temp_dir = environ['DEJA_DUP_TEST_TMP']
-    os.system('mkdir -p %s' % temp_dir)
-    # Don't automatically clean it
-  else:
-    temp_dir = tempfile.mkdtemp()
-    cleanup_dirs += [temp_dir]
-
-def get_temp_name(extra):
-  global temp_dir
-  create_temp_dir()
-  return temp_dir + '/' + extra
-
-# launch new dbus before we import ldtp
-environ['XDG_CACHE_HOME'] = get_temp_name('cache')
-environ['XDG_CONFIG_HOME'] = get_temp_name('config')
-environ['XDG_DATA_HOME'] = get_temp_name('share')
-environ['XDG_DATA_DIRS'] = "%s:%s" % (environ['XDG_DATA_HOME'], environ['XDG_DATA_DIRS'])
-output = subprocess.Popen(['dbus-launch'], stdout=subprocess.PIPE).communicate()[0]
-lines = output.split('\n')
-for line in lines:
-    parts = line.split('=', 1)
-    if len(parts) == 2:
-        if parts[0] == 'DBUS_SESSION_BUS_PID': # cleanup at end
-            atexit.register(os.kill, int(parts[1]), signal.SIGTERM)
-        os.environ[parts[0]] = parts[1]
-
-import ldtp
-import glob
-import re
-import traceback
 
 # The current directory is always the 'distdir'.  But 'srcdir' may be different
 # if we're running inside a distcheck for example.  So note that we check for
 # srcdir and use it if available.  Else, default to current directory.
 
 def setup(backend = None, encrypt = None, start = True, dest = None, sources = [], excludes = [], args=['']):
-  global cleanup_dirs, latest_duplicity
-
+  global gconf_dir, cleanup_dirs, latest_duplicity
+  
   if 'srcdir' in environ:
     srcdir = environ['srcdir']
   else:
@@ -114,20 +81,16 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
   environ['PYTHONPATH'] = extra_pythonpaths + (environ['PYTHONPATH'] if 'PYTHONPATH' in environ else '')
   environ['PATH'] = extra_paths + environ['PATH']
   
-  #environ['G_DEBUG'] = 'fatal_warnings'
+  environ['XDG_CACHE_HOME'] = get_temp_name('cache')
   
-  os.system('mkdir -p %s' % environ['XDG_CONFIG_HOME'])
-  os.system('mkdir -p %s/glib-2.0/schemas/' % environ['XDG_DATA_HOME'])
+  gconf_dir = get_temp_name('gconf')
+  os.system('mkdir -p %s' % gconf_dir)
+  environ['GCONF_CONFIG_SOURCE'] = 'xml:readwrite:' + gconf_dir
   
-  # Make sure file chooser has txtLocation
-  os.system('mkdir -p %s/gtk-2.0' % environ['XDG_CONFIG_HOME'])
-  os.system('echo [Filechooser Settings] > "%s/gtk-2.0/gtkfilechooser.ini"' % environ['XDG_CONFIG_HOME'])
-  os.system('echo LocationMode=filename-entry >> "%s/gtk-2.0/gtkfilechooser.ini"' % environ['XDG_CONFIG_HOME'])
-
-  # Now install default schema into our temporary config dir
-  if os.system('cp %s/../data/org.gnome.DejaDup.gschema.xml %s/glib-2.0/schemas/ && glib-compile-schemas %s/glib-2.0/schemas/' % (srcdir, environ['XDG_DATA_HOME'], environ['XDG_DATA_HOME'])):
-    raise Exception('Could not install settings schema')
-
+  # Now install default rules into our temporary config dir
+  if os.system('gconftool-2 --makefile-install-rule %s > /dev/null' % ('%s/../data/deja-dup.schemas.in' % srcdir)):
+    raise Exception('Could not install gconf schema')
+  
   if backend == 'file':
     create_local_config(dest)
   elif backend == 'ssh':
@@ -137,9 +100,9 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
   set_includes_excludes(includes=sources, excludes=excludes)
   
   if encrypt is not None:
-    set_settings_value("encrypt", 'true' if encrypt else 'false')
+    set_gconf_value("encrypt", 'true' if encrypt else 'false', 'bool')
   
-  set_settings_value("root-prompt", 'false')
+  set_gconf_value("root-prompt", 'false', 'bool')
 
   #daemon_env = subprocess.Popen(['gnome-keyring-daemon'], stdout=subprocess.PIPE).communicate()[0].strip()
   #daemon_env = daemon_env.split('\n')
@@ -164,23 +127,19 @@ def cleanup(success):
     os.system('bash -c "echo -e \'\e[31mFAILED\e[0m\'"')
     sys.exit(1)
 
-def set_settings_value(key, value, schema = None):
-  if schema:
-    schema = 'org.gnome.DejaDup.' + schema
-  else:
-    schema = 'org.gnome.DejaDup'
-  cmd = ['gsettings', 'set', schema, key, value]
+def set_gconf_value(key, value, key_type = "string", list_type = None):
+  cmd = ['gconftool-2', '--config-source=xml:readwrite:%s' % gconf_dir, '-t',
+         key_type, '-s', '/apps/deja-dup/%s' % key, value]
+  if key_type == "list" and list_type:
+    cmd += ["--list-type=%s" % list_type]
   sp = subprocess.Popen(cmd, stdout=subprocess.PIPE)
   sp.communicate()
   if sp.returncode:
-    raise Exception('Could not set key %s to %s' % (key, value))
+    raise Exception('Could not set gconf key %s to %s' % (key, value))
 
-def get_settings_value(key, schema = None):
-  if schema:
-    schema = 'org.gnome.DejaDup.' + schema
-  else:
-    schema = 'org.gnome.DejaDup'
-  cmd = ['gsettings', 'get', schema, key]
+def get_gconf_value(key):
+  cmd = ['gconftool-2', '--config-source=xml:readwrite:%s' % gconf_dir,
+         '-g', '/apps/deja-dup/%s' % key]
   sp = subprocess.Popen(cmd, stdout=subprocess.PIPE)
   pout = sp.communicate()[0]
   return pout.strip()
@@ -208,37 +167,54 @@ def create_local_config(dest='/'):
     os.system('mkdir -p %s' % dest)
   elif dest[0] != '/' and dest.find(':') == -1:
     dest = os.getcwd()+'/'+dest
-  set_settings_value("backend", "'file'")
-  set_settings_value("path", "'%s'" % dest, schema="File")
+  set_gconf_value("backend", "file")
+  set_gconf_value("file/path", dest)
 
 def create_vol_config(dest='/'):
   if dest is None:
     raise 'Must specify dest=, using uuid:path syntax'
   uuid, path = dest.split(':', 1)
-  set_settings_value("backend", "'file'")
-  set_settings_value("type", "'volume'", schema="File")
-  set_settings_value("name", "'USB Drive: Test Volume'", schema="File")
-  set_settings_value("short-name", "'Test Volume'", schema="File")
-  set_settings_value("uuid", "'%s'" % uuid, schema="File")
-  set_settings_value("relpath", "'%s'" % path, schema="File")
-  set_settings_value("icon", "'drive-removable-media-usb'", schema="File")
+  set_gconf_value("backend", "file")
+  set_gconf_value("file/type", "volume")
+  set_gconf_value("file/name", "USB Drive: Test Volume")
+  set_gconf_value("file/short_name", "Test Volume")
+  set_gconf_value("file/uuid", uuid)
+  set_gconf_value("file/relpath", path)
+  set_gconf_value("file/icon", "drive-removable-media-usb")
 
 def create_ssh_config(dest='/'):
   if dest is None:
     dest = get_temp_name('local')
     os.system('mkdir -p %s' % dest)
-  set_settings_value("backend", "'file'")
-  set_settings_value("path", "'ssh://localhost'" + dest, schema="File")
+  set_gconf_value("backend", "file")
+  set_gconf_value("file/path", "ssh://localhost" + dest)
 
 def set_includes_excludes(includes=None, excludes=None):
   includes = includes and [os.getcwd()+'/'+x if x[0] != '/' else x for x in includes]
   excludes = excludes and [os.getcwd()+'/'+x if x[0] != '/' else x for x in excludes]
   if includes:
-    includes = '[' + ','.join(["'%s'" % x for x in includes]) + ']'
-    set_settings_value("include-list", includes)
+    includes = '[' + ','.join(includes) + ']'
+    set_gconf_value("include-list", includes, "list", "string")
   if excludes:
-    excludes = '[' + ','.join(["'%s'" % x for x in excludes]) + ']'
-    set_settings_value("exclude-list", excludes)
+    excludes = '[' + ','.join(excludes) + ']'
+    set_gconf_value("exclude-list", excludes, "list", "string")
+
+def create_temp_dir():
+  global temp_dir, cleanup_dirs
+  if temp_dir is not None:
+    return
+  if 'DEJA_DUP_TEST_TMP' in environ:
+    temp_dir = environ['DEJA_DUP_TEST_TMP']
+    os.system('mkdir -p %s' % temp_dir)
+    # Don't automatically clean it
+  else:
+    temp_dir = tempfile.mkdtemp()
+    cleanup_dirs += [temp_dir]
+
+def get_temp_name(extra):
+  global temp_dir
+  create_temp_dir()
+  return temp_dir + '/' + extra
 
 def create_mount(path=None, mtype='ext', size=20):
   global cleanup_mounts

@@ -126,9 +126,12 @@ public class DuplicityInstance : Object
     }
     
     if (as_root) {
-      var settings = get_settings();
-      if (!settings.get_boolean(ROOT_PROMPT_KEY))
-        as_root = false;
+      try {
+        var client = get_gconf_client();
+        if (!client.get_bool(ROOT_PROMPT_KEY))
+          as_root = false;
+      }
+      catch (Error e) {warning("%s\n", e.message);}
     }
     
     // Run as root if needed

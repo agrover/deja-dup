@@ -19,22 +19,16 @@
 
 using GLib;
 
-/* Temporary definitions until vala catches up */
-[CCode (cheader_filename = "glib.h")]
-extern unowned string g_variant_get_bytestring (GLib.Variant value);
-[CCode (cheader_filename = "glib.h")]
-extern Variant g_variant_new_bytestring (string value);
-
 namespace DejaDup {
 
-public const string FILE_ROOT = "File";
-public const string FILE_TYPE_KEY = "type";
-public const string FILE_PATH_KEY = "path";
-public const string FILE_RELPATH_KEY = "relpath";
-public const string FILE_UUID_KEY = "uuid";
-public const string FILE_NAME_KEY = "name";
-public const string FILE_SHORT_NAME_KEY = "short-name";
-public const string FILE_ICON_KEY = "icon";
+public const string FILE_ROOT_KEY = "/apps/deja-dup/file";
+public const string FILE_TYPE_KEY = "/apps/deja-dup/file/type";
+public const string FILE_PATH_KEY = "/apps/deja-dup/file/path";
+public const string FILE_RELPATH_KEY = "/apps/deja-dup/file/relpath";
+public const string FILE_UUID_KEY = "/apps/deja-dup/file/uuid";
+public const string FILE_NAME_KEY = "/apps/deja-dup/file/name";
+public const string FILE_SHORT_NAME_KEY = "/apps/deja-dup/file/short_name";
+public const string FILE_ICON_KEY = "/apps/deja-dup/file/icon";
 
 public class BackendFile : Backend
 {
@@ -43,14 +37,13 @@ public class BackendFile : Backend
   }
 
   // Will return null if volume isn't ready
-  static File? get_file_from_settings() throws Error
+  static File? get_file_from_gconf() throws Error
   {
-    var settings = get_settings(FILE_ROOT);
-    var type = settings.get_string(FILE_TYPE_KEY);
+    var client = get_gconf_client();
+    var type = client.get_string(FILE_TYPE_KEY);
     if (type == "volume") {
-      var path_val = settings.get_value(FILE_RELPATH_KEY);
-      var path = g_variant_get_bytestring(path_val);
-      var uuid = settings.get_string(FILE_UUID_KEY);
+      var path = client.get_string(FILE_RELPATH_KEY);
+      var uuid = client.get_string(FILE_UUID_KEY);
       var vol = find_volume_by_uuid(uuid);
       if (vol == null)
         return null;
@@ -64,7 +57,7 @@ public class BackendFile : Backend
         return root;
     }
     else {
-      var path = settings.get_string(FILE_PATH_KEY);
+      var path = client.get_string(FILE_PATH_KEY);
       return File.parse_name(path);
     }
   }
@@ -72,7 +65,7 @@ public class BackendFile : Backend
   // Location will be mounted by this time
   public override string? get_location() throws Error
   {
-    var file = get_file_from_settings();
+    var file = get_file_from_gconf();
     if (DuplicityInfo.get_default().has_native_gio)
       return file.get_uri();
     else {
@@ -84,30 +77,29 @@ public class BackendFile : Backend
 
   public override string? get_location_pretty() throws Error
   {
-    var settings = get_settings(FILE_ROOT);
-    var type = settings.get_string(FILE_TYPE_KEY);
+    var client = get_gconf_client();
+    var type = client.get_string(FILE_TYPE_KEY);
     if (type == "volume") {
-      var path_val = settings.get_value(FILE_RELPATH_KEY);
-      var path = Filename.to_utf8(g_variant_get_bytestring(path_val), -1, null, null);
-      var name = settings.get_string(FILE_SHORT_NAME_KEY);
+      var path = client.get_string(FILE_RELPATH_KEY);
+      var name = client.get_string(FILE_SHORT_NAME_KEY);
       // Translators: %2$s is the name of a removable drive, %1$s is a folder
       // on that removable drive.
       return _("%1$s on %2$s").printf(path, name);
     }
     else {
-      var file = get_file_from_settings();
+      var file = get_file_from_gconf();
       return get_file_desc(file);
     }
   }
   
   public override bool is_native() {
     try {
-      var settings = get_settings(FILE_ROOT);
-      var type = settings.get_string(FILE_TYPE_KEY);
+      var client = get_gconf_client();
+      var type = client.get_string(FILE_TYPE_KEY);
       if (type == "volume")
         return true;
 
-      var file = get_file_from_settings();
+      var file = get_file_from_gconf();
       if (file != null)
         return file.is_native();
     }
@@ -121,15 +113,15 @@ public class BackendFile : Backend
   public override bool is_ready(out string when) {
     when = null;
     try {
-      var file = get_file_from_settings();
+      var file = get_file_from_gconf();
       if (file == null) { // must be a volume that isn't yet mounted. See if volume is connected
-        var settings = get_settings(FILE_ROOT);
-        var uuid = settings.get_string(FILE_UUID_KEY);
+        var uuid = client.get_string(FILE_UUID_KEY);
         var vol = find_volume_by_uuid(uuid);
         if (vol != null)
           return true;
         else {
-          var name = settings.get_string(FILE_SHORT_NAME_KEY);
+          var client = get_gconf_client();
+          var name = client.get_string(FILE_SHORT_NAME_KEY);
           when = _("Backup will begin when %s becomes connected.").printf(name);
           return false;
         }
@@ -150,14 +142,14 @@ public class BackendFile : Backend
 
   public override Icon? get_icon() {
     try {
-      var settings = get_settings(FILE_ROOT);
-      var type = settings.get_string(FILE_TYPE_KEY);
+      var client = get_gconf_client();
+      var type = client.get_string(FILE_TYPE_KEY);
       if (type == "volume") {
-        var icon_str = settings.get_string(FILE_ICON_KEY);
+        var icon_str = client.get_string(FILE_ICON_KEY);
         return Icon.new_for_string(icon_str);
       }
       else {
-        var file = get_file_from_settings();
+        var file = get_file_from_gconf();
         var info = file.query_info(FILE_ATTRIBUTE_STANDARD_ICON,
                                    FileQueryInfoFlags.NONE, null);
         return info.get_icon();
@@ -174,7 +166,7 @@ public class BackendFile : Backend
   {
     if (mode == Operation.Mode.BACKUP) {
       try {
-        var file = get_file_from_settings();
+        var file = get_file_from_gconf();
         if (file != null && file.is_native())
           argv.prepend("--exclude=%s".printf(file.get_path()));
       }
@@ -187,13 +179,13 @@ public class BackendFile : Backend
       argv.prepend("--gio");
   }
   
-  // Checks if file is secretly a volume file and fills out settings data if so.
+  // Checks if file is secretly a volume file and fills out gconf data if so.
   public async static void check_for_volume_info(File file) throws Error
   {
-    var settings = get_settings(FILE_ROOT);
+    var client = get_gconf_client();
 
     if (!file.is_native()) {
-      settings.set_string(FILE_TYPE_KEY, "normal");
+      client.set_string(FILE_TYPE_KEY, "normal");
       return;
     }
 
@@ -206,7 +198,7 @@ public class BackendFile : Backend
     }
     catch (Error e) {}
     if (mount == null) {
-      settings.set_string(FILE_TYPE_KEY, "normal");
+      client.set_string(FILE_TYPE_KEY, "normal");
       return;
     }
 
@@ -222,18 +214,16 @@ public class BackendFile : Backend
     if (relpath == null)
       relpath = "";
 
-    settings.delay();
-    settings.set_string(FILE_UUID_KEY, uuid);
-    settings.set_value(FILE_RELPATH_KEY, g_variant_new_bytestring(relpath));
-    settings.set_string(FILE_TYPE_KEY, "volume");
-    settings.apply();
+    client.set_string(FILE_UUID_KEY, uuid);
+    client.set_string(FILE_RELPATH_KEY, relpath);
+    client.set_string(FILE_TYPE_KEY, "volume");
 
     update_volume_info(volume);
   }
 
   static void update_volume_info(Volume volume) throws Error
   {
-    var settings = get_settings(FILE_ROOT);
+    var client = get_gconf_client();
 
     var name = volume.get_name();
     if (name == null || name == "")
@@ -252,23 +242,18 @@ public class BackendFile : Backend
     if (icon != null)
       icon_str = icon.to_string();
 
-    settings.delay();
-
-    settings.set_string(FILE_NAME_KEY, name);
-    settings.set_string(FILE_SHORT_NAME_KEY, short_name);
-    settings.set_string(FILE_ICON_KEY, icon_str);
+    client.set_string(FILE_NAME_KEY, name);
+    client.set_string(FILE_SHORT_NAME_KEY, short_name);
+    client.set_string(FILE_ICON_KEY, icon_str);
 
     // Also update full path just in case (useful if downgrading to old version?)
     var mount = volume.get_mount();
     if (mount != null) {
-      var path_val = settings.get_value(FILE_RELPATH_KEY);
-      var path = g_variant_get_bytestring(path_val);
+      var path = client.get_string(FILE_RELPATH_KEY);
       if (path != null)
         path = mount.get_root().get_child(path).get_parse_name();
-      settings.set_string(FILE_PATH_KEY, path);
+      client.set_string(FILE_PATH_KEY, path);
     }
-
-    settings.apply();
   }
 
   // This doesn't *really* worry about envp, it just is a convenient point to
@@ -288,19 +273,19 @@ public class BackendFile : Backend
     this.ref();
 
     var success = true;
-    var settings = get_settings(FILE_ROOT);
-    var type = settings.get_string(FILE_TYPE_KEY);
+    var client = get_gconf_client();
+    var type = client.get_string(FILE_TYPE_KEY);
     if (type == "volume")
       success = yield mount_volume();
     else if (type == "normal") {
-      var file = get_file_from_settings();
+      var file = get_file_from_gconf();
       if (!file.is_native())
         success = yield mount_remote();
     }
 
     // If we don't know what type this is, look up volume data
     if (type != "volume" && type != "normal" && success) {
-      var gfile = get_file_from_settings();
+      var gfile = get_file_from_gconf();
       yield check_for_volume_info(gfile);
     }
 
@@ -311,7 +296,7 @@ public class BackendFile : Backend
 
   async bool mount_remote() throws Error
   {
-    var file = get_file_from_settings();
+    var file = get_file_from_gconf();
     try {
       // Check if it's already mounted
       var mount = yield file.find_enclosing_mount_async(Priority.DEFAULT, null);
@@ -325,8 +310,8 @@ public class BackendFile : Backend
 
   async bool mount_volume() throws Error
   {
-    var settings = get_settings(FILE_ROOT);
-    var uuid = settings.get_string(FILE_UUID_KEY);
+    var client = get_gconf_client();
+    var uuid = client.get_string(FILE_UUID_KEY);
 
     var vol = yield wait_for_volume(uuid);
 
@@ -362,8 +347,7 @@ public class BackendFile : Backend
   {
     var vol = find_volume_by_uuid(uuid);
     if (vol == null) {
-      var settings = get_settings(FILE_ROOT);
-      var name = settings.get_string(FILE_NAME_KEY);
+      var name = client.get_string(FILE_NAME_KEY);
       pause_op(_("Backup location not available"), _("Waiting for ‘%s’ to become connected…").printf(name));
       var loop = new MainLoop(null, false);
       var mon = VolumeMonitor.get();
@@ -382,7 +366,7 @@ public class BackendFile : Backend
   {
     var attr = free ? FILE_ATTRIBUTE_FILESYSTEM_FREE : FILE_ATTRIBUTE_FILESYSTEM_SIZE;
     try {
-      var file = get_file_from_settings();
+      var file = get_file_from_gconf();
       var info = yield file.query_filesystem_info_async(attr, Priority.DEFAULT, null);
       var space = info.get_attribute_uint64(attr);
       if (space == INFINITE_SPACE)

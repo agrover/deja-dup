@@ -36,8 +36,8 @@ public class ConfigLabelLocation : ConfigLabel
     hbox.pack_start(img, false, false, 0);
     hbox.reorder_child(img, 0);
     watch_key(BACKEND_KEY);
-    watch_key(null, DejaDup.get_settings(FILE_ROOT));
-    watch_key(null, DejaDup.get_settings(S3_ROOT));
+    watch_key(FILE_ROOT_KEY);
+    watch_key(S3_ROOT_KEY);
     set_from_config();
   }
   
@@ -46,14 +46,22 @@ public class ConfigLabelLocation : ConfigLabel
     label.label = get_location_desc();
 
     if (img != null) {
-      Icon icon = Backend.get_default().get_icon();
+      Icon icon = null;
+      try {
+        icon = Backend.get_default().get_icon();
+      }
+      catch (Error e) {}
       if (icon == null)
         img.set_from_icon_name("folder", Gtk.IconSize.MENU);
       else
         img.set_from_gicon(icon, Gtk.IconSize.MENU);
     }
 
-    is_s3 = settings.get_string(BACKEND_KEY) == "s3";
+    is_s3 = false;
+    try {
+      is_s3 = client.get_string(BACKEND_KEY) == "s3";
+    }
+    catch (Error err) {warning("%s\n", err.message);}
   }
 }
 

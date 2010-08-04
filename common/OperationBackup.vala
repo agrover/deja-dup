@@ -70,12 +70,12 @@ public class OperationBackup : Operation
   
   protected override List<string>? make_argv() throws Error
   {
-    var settings = get_settings();
+    var client = get_gconf_client();
     
-    var include_val = settings.get_value(INCLUDE_LIST_KEY);
-    var include_list = parse_dir_list(include_val.get_strv());
-    var exclude_val = settings.get_value(EXCLUDE_LIST_KEY);
-    var exclude_list = parse_dir_list(exclude_val.get_strv());
+    var include_list = parse_dir_list(client.get_list(INCLUDE_LIST_KEY,
+                                                      GConf.ValueType.STRING));
+    var exclude_list = parse_dir_list(client.get_list(EXCLUDE_LIST_KEY,
+                                                      GConf.ValueType.STRING));
     
     List<string> rv = new List<string>();
     

@@ -33,11 +33,11 @@ public class ConfigChoice : ConfigWidget
   }
   
   // Subclasses use this to setup the choice list
-  protected int settings_col;
-  public void init(Gtk.TreeModel model, int settings_col)
+  protected int gconf_col;
+  public void init(Gtk.TreeModel model, int gconf_col)
   {
     combo.model = model;
-    this.settings_col = settings_col;
+    this.gconf_col = gconf_col;
     
     combo.changed.connect(handle_changed);
     
@@ -49,7 +49,7 @@ public class ConfigChoice : ConfigWidget
     Gtk.TreeIter iter;
     if (combo.get_active_iter(out iter)) {
       Value val;
-      combo.model.get_value(iter, settings_col, out val);
+      combo.model.get_value(iter, gconf_col, out val);
       return val;
     }
     return null;
@@ -60,14 +60,25 @@ public class ConfigChoice : ConfigWidget
     Value? val = get_current_value();
     string strval = val == null ? "" : val.get_string();
     
-    settings.set_string(key, strval);
+    try {
+        client.set_string(key, strval);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
     
     choice_changed(strval);
   }
   
   protected override async void set_from_config()
   {
-    string confval = settings.get_string(key);
+    string confval = null;
+    try {
+      confval = client.get_string(key);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
     if (confval == null || confval == "")
       confval = default_val;
     if (confval == null)
@@ -79,7 +90,7 @@ public class ConfigChoice : ConfigWidget
     
     while (valid) {
       Value val;
-      combo.model.get_value(iter, settings_col, out val);
+      combo.model.get_value(iter, gconf_col, out val);
       string strval = val.get_string();
       
       if (strval == confval) {

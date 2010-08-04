@@ -26,7 +26,7 @@ import ldtp
 
 def delete():
   base.setup('file', sources=['data/simple'])
-  base.set_settings_value('delete-after', '30')
+  base.set_gconf_value('delete-after', '30', 'int')
   base.backup_simple()
   base.last_date_change('%d days ago' % 100)
   base.start_deja_dup()
