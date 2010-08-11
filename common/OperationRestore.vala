@@ -75,7 +75,7 @@ public class OperationRestore : Operation
   }
   
   protected override void operation_finished(Duplicity dup, bool success, bool cancelled)
-  {     
+  {
     if (success) {
       fixup_home_dir();
       if (!mv_source_to_dest())

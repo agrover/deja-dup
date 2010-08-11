@@ -27,13 +27,13 @@ class DejaDupApp : Object
   static bool show_version = false;
   static bool restore_mode = false;
   static bool backup_mode = false;
-  static bool dirhistory_mode = false;
+  static bool restoremissing_mode = false;
   static string[] filenames = null;
   static const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
     {"restore", 0, 0, OptionArg.NONE, ref restore_mode, N_("Restore given files"), null},
     {"backup", 0, 0, OptionArg.NONE, ref backup_mode, N_("Immediately start a backup"), null},
-    {"dir-history", 0, 0, OptionArg.NONE, ref dirhistory_mode, N_("Directory history"), null},
+    {"restore-missing", 0, 0, OptionArg.NONE, ref restoremissing_mode, N_("Restore deleted files"), null},
     {"", 0, 0, OptionArg.FILENAME_ARRAY, ref filenames, null, null}, // remaining    
     {null}
   };
@@ -55,7 +55,7 @@ class DejaDupApp : Object
       }
     }
 
-    if (dirhistory_mode) {
+    if (restoremissing_mode) {
       if (filenames == null) {
         printerr("%s\n", _("No directory provided"));
         status = 1;
@@ -125,24 +125,16 @@ class DejaDupApp : Object
       toplevel.destroy.connect((t) => {Gtk.main_quit();});
       // specifically don't show
     }
-    else if (dirhistory_mode){
-        stdout.printf("\n\ndirhistmode\n\n");
-      //try {
-        //toplevel = new AssistantDirectoryHistory();
-        /*var assdirhist = new AssistantDirectoryHistory();
-        var intdirhist = new InterfaceDirectoryHistory();
-        var builder = new Gtk.Builder();
-        builder.add_from_file("/home/urbans/Documents/dev/deja-dup.nautilus/interface/sample.ui");
-        builder.connect_signals(assdirhist);
-        //builder.connect_signals(null);
-        var window = builder.get_object("window") as Gtk.Window;*/
-        
-        //List<File> file_list = new List<File>();
-        
-        //file_list.append(File.new_for_commandline_arg(filenames[i++]));
+    else if (restoremissing_mode){
         File list_directory = File.new_for_commandline_arg(filenames[0]);
-
-        //return 1;
+        if (!list_directory.query_exists(null)) {
+          printerr("%s\n", _("Directory does not exists"));
+          return 1;
+        }
+        if (list_directory.query_file_type (0, null) != FileType.DIRECTORY) {
+          printerr("%s\n", _("You must provide a directory, not a file"));
+          return 1;
+        }
         toplevel = new AssistantDirectoryHistory(list_directory);
         toplevel.destroy.connect((t) => {Gtk.main_quit();});
         toplevel.show_all();

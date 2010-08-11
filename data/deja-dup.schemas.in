@@ -1,0 +1,226 @@
+<gconfschemafile>
+  <schemalist>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/include-list</key>
+      <applyto>/apps/deja-dup/include-list</applyto>
+      <owner>deja-dup</owner>
+      <type>list</type>
+      <list_type>string</list_type>
+      <default>[$HOME]</default>
+      <locale name="C">
+        <short>Directories to back up</short>
+        <long>This list of directories will be backed up.  Reserved values $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special directories.  Relative entries are relative to the user’s home directory.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/exclude-list</key>
+      <applyto>/apps/deja-dup/exclude-list</applyto>
+      <owner>deja-dup</owner>
+      <type>list</type>
+      <list_type>string</list_type>
+      <default>[$TRASH]</default>
+      <locale name="C">
+        <short>Directories not to back up</short>
+        <long>This list of directories will not be backed up.  Reserved values $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special directories.  Relative entries are relative to the user’s home directory.  This list takes precedence over the include list.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/root-prompt</key>
+      <applyto>/apps/deja-dup/root-prompt</applyto>
+      <owner>deja-dup</owner>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Whether to request the root password</short>
+        <long>Whether to request the root password when backing up from or restoring to system folders.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/encrypt</key>
+      <applyto>/apps/deja-dup/encrypt</applyto>
+      <owner>deja-dup</owner>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Whether to encrypt your backup</short>
+        <long>Whether to encrypt your backup files in the storage location.  It’s strongly recommended to leave this as ‘true’.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/last-run</key>
+      <applyto>/apps/deja-dup/last-run</applyto>
+      <owner>deja-dup</owner>
+      <type>string</type>
+      <locale name="C">
+        <short>The last time Déjà Dup was run</short>
+        <long>The last time Déjà Dup was successfully run.  This time should be in ISO 8601 format.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/periodic</key>
+      <applyto>/apps/deja-dup/periodic</applyto>
+      <owner>deja-dup</owner>
+      <type>bool</type>
+      <default>false</default>
+      <locale name="C">
+        <short>Whether to periodically back up</short>
+        <long>Whether to automatically back up on a regular schedule.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/periodic-period</key>
+      <applyto>/apps/deja-dup/periodic-period</applyto>
+      <owner>deja-dup</owner>
+      <type>int</type>
+      <default>7</default>
+      <locale name="C">
+        <short>How often to periodically back up</short>
+        <long>The number of days between backups.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/delete-after</key>
+      <applyto>/apps/deja-dup/delete-after</applyto>
+      <owner>deja-dup</owner>
+      <type>int</type>
+      <default>0</default>
+      <locale name="C">
+        <short>How long to keep backup files</short>
+        <long>The number of days to keep backup files on the backup location.  A value of 0 means forever.  This is a minimum number of days; the files may be kept longer.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/backend</key>
+      <applyto>/apps/deja-dup/backend</applyto>
+      <owner>deja-dup</owner>
+      <type>string</type>
+      <default>s3</default>
+      <locale name="C">
+        <short>Type of location to store backup</short>
+        <long>The type of backup location.  Valid values are ‘s3’ or ‘file’.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/s3/id</key>
+      <applyto>/apps/deja-dup/s3/id</applyto>
+      <owner>deja-dup</owner>
+      <type>string</type>
+      <locale name="C">
+        <short>Amazon S3 Access Key ID</short>
+        <long>Your Amazon S3 Access Key Identifier.  This acts as your S3 username.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/s3/bucket</key>
+      <applyto>/apps/deja-dup/s3/bucket</applyto>
+      <owner>deja-dup</owner>
+      <type>string</type>
+      <locale name="C">
+        <short>The Amazon S3 bucket name to use</short>
+        <long>Which Amazon S3 bucket to store files in.  This does not need to exist already.  Only legal hostname strings are valid.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/s3/folder</key>
+      <applyto>/apps/deja-dup/s3/folder</applyto>
+      <owner>deja-dup</owner>
+      <type>string</type>
+      <default>/</default>
+      <locale name="C">
+        <short>The Amazon S3 folder</short>
+        <long>An optional folder name to store files in.  This folder will be created in the chosen bucket.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/file/path</key>
+      <applyto>/apps/deja-dup/file/path</applyto>
+      <owner>deja-dup</owner>
+      <type>string</type>
+      <locale name="C">
+        <short>Backup location</short>
+        <long>Location in which to hold the backup files.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/file/type</key>
+      <applyto>/apps/deja-dup/file/type</applyto>
+      <owner>deja-dup</owner>
+      <type>string</type>
+      <locale name="C">
+        <short>Folder type</short>
+        <long>Whether the backup location is a mounted external volume or a normal folder.  Possible values are ‘volume’ or ‘normal’.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/file/relpath</key>
+      <applyto>/apps/deja-dup/file/relpath</applyto>
+      <owner>deja-dup</owner>
+      <type>string</type>
+      <locale name="C">
+        <short>Relative path under the external volume</short>
+        <long>If the backup location is on an external volume, this is the path of the folder on that volume.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/file/uuid</key>
+      <applyto>/apps/deja-dup/file/uuid</applyto>
+      <owner>deja-dup</owner>
+      <type>string</type>
+      <locale name="C">
+        <short>Unique ID of the external volume</short>
+        <long>If the backup location is on an external volume, this is its unique filesystem identifier.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/file/name</key>
+      <applyto>/apps/deja-dup/file/name</applyto>
+      <owner>deja-dup</owner>
+      <type>string</type>
+      <locale name="C">
+        <short>Full name of the external volume</short>
+        <long>If the backup location is on an external volume, this is the volume’s longer descriptive name.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/file/short_name</key>
+      <applyto>/apps/deja-dup/file/short_name</applyto>
+      <owner>deja-dup</owner>
+      <type>string</type>
+      <locale name="C">
+        <short>Short name of the external volume</short>
+        <long>If the backup location is on an external volume, this is the volume’s shorter name.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/deja-dup/file/icon</key>
+      <applyto>/apps/deja-dup/file/icon</applyto>
+      <owner>deja-dup</owner>
+      <type>string</type>
+      <locale name="C">
+        <short>Icon of the external volume</short>
+        <long>If the backup location is on an external volume, this is the volume’s icon.</long>
+      </locale>
+    </schema>
+
+  </schemalist>
+</gconfschemafile>
+

@@ -22,15 +22,15 @@ using GLib;
 namespace DejaDup {
 public class OperationFiles : Operation {
   public signal void listed_current_files(string date, string file);
-  public Time time {get; set;}
+  public Time time {get; set;} // Default value is 1900-01-00 00:00:00; since epoch hasn't happened yet, its default %s value is -1
   public File source {get; construct;}
     
   public OperationFiles(uint xid = 0,
-                        Time time_in,
-                        File source)
-  {
+                        Time? time_in,
+                        File source) {
     Object(xid: xid, mode: Mode.LIST, source: source);
-    time = time_in;
+    if (time_in != null)
+        time = time_in;
   }
 
   protected override void connect_to_dup()
@@ -42,9 +42,11 @@ public class OperationFiles : Operation {
   protected override List<string>? make_argv() throws Error
   {
     List<string> argv = new List<string>();
-    //if (time != null) //- no need, we don't allow null anyway
-    argv.append("--time=%s".printf(time.format("%s")));
-
+    //if (time != null) - no need, we don't allow null anyway
+    //stdout.printf("timedefault: %i", time.year);
+    if (time.format("%s") != "-1")
+        argv.append("--time=%s".printf(time.format("%s")));
+    
     dup.local = source;
       
     return argv;

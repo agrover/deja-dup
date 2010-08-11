@@ -107,12 +107,9 @@ public class AssistantDirectoryHistory : AssistantOperation {
   DejaDup.OperationStatus query_op_collection_dates;
   DejaDup.Operation.State op_state;
 
-  Gtk.Widget page;
   Gtk.Widget listfiles_page;
   Gtk.TreeIter deleted_iter;
-  Gtk.TreeIter restoreiter;
   Gtk.ListStore listmodel;
-  Gtk.ListStore restoremodel;
   Gtk.ScrolledWindow sw_restore_files;
 
   /* List files page */
@@ -132,6 +129,18 @@ public class AssistantDirectoryHistory : AssistantOperation {
   
   public AssistantDirectoryHistory(File list_dir) {
     list_directory = list_dir;
+  }
+
+  private string? get_glade_file(string glade_file) {
+    var sysdatadirs = GLib.Environment.get_system_data_dirs();
+    foreach(var sysdir in sysdatadirs) {
+      var p = Path.build_filename("/", sysdir, "deja-dup", "interfaces", glade_file);
+      var file = File.new_for_path(p);
+      if (file.query_exists(null))
+        return p;
+      //stdout.printf("app dir: %s\n", Path.build_filename("/", sysdir, "deja-dup"));
+    }
+    return null;
   }
 
   private ArrayList<string>? files_in_directory() {
@@ -172,7 +181,12 @@ public class AssistantDirectoryHistory : AssistantOperation {
       page.name = "listfiles_page";
       var builder = new Gtk.Builder();
       try {
-        builder.add_from_file("interface/listfiles-crt-out.ui");
+        string gf = get_glade_file("listfiles-crt-out.glade");
+        if (gf == null) {
+          warning("Error: Could not find interface file.");
+          return null;
+        }
+        builder.add_from_file(gf);
         builder.connect_signals(this);
         
         var window = builder.get_object("viewport") as Gtk.Widget;
@@ -241,7 +255,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
         scan_queue = true;
       }
       else {
-        //if (this.op != null && this.op.needs_password) {
         if (query_op_collection_dates != null && query_op_collection_dates.needs_password) {
           provide_password();
         }  
@@ -362,13 +375,13 @@ public class AssistantDirectoryHistory : AssistantOperation {
           this.backups_queue.offer(t);
         }
       }
-    }
 
-    this.allfiles_prev = files_in_directory();
-    this.backups_queue_filled = true;
+      this.allfiles_prev = files_in_directory();
+      this.backups_queue_filled = true;
     
-    this.spinner.start();
-    do_query_files_at_date();
+      this.spinner.start();
+      do_query_files_at_date();
+    }
   }
 
   protected void do_query_collection_dates()
@@ -503,6 +516,11 @@ public class AssistantDirectoryHistory : AssistantOperation {
     base.do_cancel();
   }
 
+  protected override void set_op_icon_name()
+  {
+    icon_name = "deja-dup-restore";
+  }
+
   protected override void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
     /*
@@ -545,7 +563,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
     if (backups_queue.size == 0) {
       this.spinner.stop();
       this.spinner.destroy();
-      this.current_scan_date.set_text(_("Done!"));
+      this.current_scan_date.set_text(_("Scanning finished"));
       scan_queue = false;
     }
     else {
@@ -562,8 +580,12 @@ public class AssistantDirectoryHistory : AssistantOperation {
     page.name = "confirm_page";
     var builder = new Gtk.Builder();
     try {
-      builder.add_from_file("interface/directory_history_confirmation_page.glade");
-      
+      string gf = get_glade_file("directory_history_confirmation_page.glade");
+      if (gf == null) {
+        warning("Error: Could not find interface file.");
+        return null;
+      }
+      builder.add_from_file(gf);      
       var window = builder.get_object("viewport") as Gtk.Widget;
       var backup_source_properties = builder.get_object("backup_properties") as Gtk.Table;
       sw_restore_files = builder.get_object("sw-restore-files") as Gtk.ScrolledWindow;

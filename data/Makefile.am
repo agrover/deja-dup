@@ -24,7 +24,7 @@ nobase_dist_data_DATA = \
 
 nobase_dist_pkgdata_DATA = \
 	interfaces/directory_history_confirmation_page.glade \
-	interfaces/listfiles-crt-out.ui
+	interfaces/listfiles-crt-out.glade
 
 @INTLTOOL_SCHEMAS_RULE@
 schemadir = $(sysconfdir)/gconf/schemas
