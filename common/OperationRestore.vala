@@ -25,7 +25,6 @@ public class OperationRestore : Operation
 {
   public string dest {get; construct;} // Directory user wants to put files in
   public string time {get; construct;} // Date user wants to restore to
-  
   string source; // Directory duplicity puts files in
   List<string> errors;
   private List<File> _restore_files;
@@ -33,7 +32,7 @@ public class OperationRestore : Operation
     get {
       return this._restore_files;
     }
-    set construct {
+    construct {
       foreach (File f in this._restore_files)
         f.unref();
       this._restore_files = value.copy();
@@ -41,7 +40,7 @@ public class OperationRestore : Operation
         f.ref();
     }
   }
-
+  
   public OperationRestore(string dest_in,
                           string? time_in = null,
                           List<File>? files_in = null,
@@ -71,6 +70,7 @@ public class OperationRestore : Operation
       argv.append("--restore-time=%s".printf(time));
     
     dup.local = File.new_for_path(source);
+    
     return argv;
   }
   

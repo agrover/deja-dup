@@ -506,7 +506,7 @@ public abstract class AssistantOperation : Assistant
       if (op != null) {
         op.done.disconnect(apply_finished);
         op.cancel(); // in case we just went back from progress page
-        this.op = null;
+        op = null;
       }
     }
     else if (page == progress_page) {

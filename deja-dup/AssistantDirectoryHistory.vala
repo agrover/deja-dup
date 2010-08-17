@@ -105,7 +105,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
 
   DejaDup.OperationFiles query_op_files;
   DejaDup.OperationStatus query_op_collection_dates;
-  DejaDup.Operation.State op_state;
 
   Gtk.Widget listfiles_page;
   Gtk.TreeIter deleted_iter;
@@ -133,12 +132,11 @@ public class AssistantDirectoryHistory : AssistantOperation {
 
   private string? get_glade_file(string glade_file) {
     var sysdatadirs = GLib.Environment.get_system_data_dirs();
-    foreach(var sysdir in sysdatadirs) {
+    foreach (var sysdir in sysdatadirs) {
       var p = Path.build_filename("/", sysdir, "deja-dup", "interfaces", glade_file);
       var file = File.new_for_path(p);
       if (file.query_exists(null))
         return p;
-      //stdout.printf("app dir: %s\n", Path.build_filename("/", sysdir, "deja-dup"));
     }
     return null;
   }
@@ -369,8 +367,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
     TimeVal tv = TimeVal();
 
     if (!this.backups_queue_filled) {
-      for(var i=dates.length()-1;i > 0;i--){
-        if (tv.from_iso8601(dates.nth(i).data)) {
+      foreach(var date in dates) {
+        if (tv.from_iso8601(date)) {
           Time t = Time.local(tv.tv_sec);
           this.backups_queue.offer(t);
         }
@@ -418,89 +416,87 @@ public class AssistantDirectoryHistory : AssistantOperation {
     
   protected void do_query_files_at_date()
   {
-  /*
-   * Initializes query operation for list-current-files at specific date 
-   *
-   * Initializes query operation, updates list files page with current date of scan
-   * in human semi-friendly form and connect appropriate signals. 
-   */
-  if (cancel_assistant) {
-    do_close();
-    return;
-  }
+    /*
+     * Initializes query operation for list-current-files at specific date 
+     *
+     * Initializes query operation, updates list files page with current date of scan
+     * in human semi-friendly form and connect appropriate signals. 
+     */
+    if (cancel_assistant) {
+      do_close();
+      return;
+    }
 
-  // Don't start if queue is empty.
-  if (backups_queue.size == 0)
-    return;
-  
-  Time etime = backups_queue.poll();
-  /* Update progress */
-  int tepoch = etime.format("%s").to_int();
-  TimeVal ttoday = TimeVal();
-  ttoday.get_current_time();
-  int ttodayi = (int) ttoday.tv_sec;
-  
-  string worddiff;
-  int tdiff =  (ttodayi - tepoch)/60/60; // Hours
-  if (tdiff / 24 == 0 ) {
-    worddiff = _("Scanning for files from yesterday...");
-  }
-  else if (tdiff / 24 / 7 == 0) {
-    worddiff = _("Scanning for files from last week...");
-  }
-  else if (tdiff / 24 / 30 == 0) {
-  worddiff = _("Scanning for files from last month...");
-  }
-  else if (tdiff / 24 / 30 >= 1 && tdiff / 24 / 30 <= 12) {
-    int n = tdiff / 24 / 30;
-    if (n == 1)
-      worddiff = _("Scanning for files from about a month ago...");
-    else
-      worddiff = _(@"Scanning for files from about $n months ago...");
-  }
-  else {
-    int n = tdiff / 24 / 30 / 12;
-    worddiff = _(@"Scanning for files from about $n years ago...");
-  }
-
-  this.current_scan_date.set_text(worddiff);
+    // Don't start if queue is empty.
+    if (backups_queue.size == 0) {
+      query_files_finished(query_op_files, true, false);
+      return;
+    }
     
-  if (mount_op == null)
-    mount_op = new MountOperationAssistant(this);
-
-  realize();
-  var xid = Gdk.x11_drawable_get_xid(this.window);
-  
-  /* Time object does not support GObject-style construction */
-  query_op_files = new DejaDup.OperationFiles((uint)xid, etime, list_directory);
-  query_op_files.listed_current_files.connect(handle_listed_files);
-  query_op_files.done.connect(query_files_finished);
+    Time etime = backups_queue.poll();
+    /* Update progress */
+    int tepoch = etime.format("%s").to_int();
+    TimeVal ttoday = TimeVal();
+    ttoday.get_current_time();
+    int ttodayi = (int) ttoday.tv_sec;
     
-  op = query_op_files;
-  op.backend.mount_op = mount_op;
-  op.passphrase_required.connect(get_passphrase);
-  op.raise_error.connect((o, e, d) => {show_error(e, d);});
-  
+    string worddiff;
+    int tdiff =  (ttodayi - tepoch)/60/60; // Hours
+    if (tdiff / 24 == 0 ) {
+      worddiff = _("Scanning for files from yesterday...");
+    }
+    else if (tdiff / 24 / 7 == 0) {
+      worddiff = _("Scanning for files from last week...");
+    }
+    else if (tdiff / 24 / 30 == 0) {
+    worddiff = _("Scanning for files from last month...");
+    }
+    else if (tdiff / 24 / 30 >= 1 && tdiff / 24 / 30 <= 12) {
+      int n = tdiff / 24 / 30;
+      if (n == 1)
+        worddiff = _("Scanning for files from about a month ago...");
+      else
+        worddiff = _(@"Scanning for files from about $n months ago...");
+    }
+    else {
+      int n = tdiff / 24 / 30 / 12;
+      worddiff = _(@"Scanning for files from about $n years ago...");
+    }
+
+    this.current_scan_date.set_text(worddiff);
+      
+    if (mount_op == null)
+      mount_op = new MountOperationAssistant(this);
+
+    realize();
+    var xid = Gdk.x11_drawable_get_xid(this.window);
+    
+    /* Time object does not support GObject-style construction */
+    query_op_files = new DejaDup.OperationFiles((uint)xid, etime, list_directory);
+    query_op_files.listed_current_files.connect(handle_listed_files);
+    query_op_files.done.connect(query_files_finished);
+      
+    op = query_op_files;
+    op.backend.mount_op = mount_op;
+    op.passphrase_required.connect(get_passphrase);
+    op.raise_error.connect((o, e, d) => {show_error(e, d);});
+    
     try {
-    query_op_files.start();
+      query_op_files.start();
     }
     catch (Error e) {
-    warning("%s\n", e.message);
-    show_error(e.message, null); // not really user-friendly text, but ideally this won't happen
-    query_files_finished(query_op_files, false, false);
-  }
+      warning("%s\n", e.message);
+      show_error(e.message, null); // not really user-friendly text, but ideally this won't happen
+      query_files_finished(query_op_files, false, false);
+    }
   }
   
   protected void query_collection_dates_finished(DejaDup.Operation op, bool success, bool cancelled) {
-    op_state = op.get_state();
     query_op_collection_dates = null;
     this.op = null;
     
     if (cancelled)
       do_close();
-    //else if (success)
-      //go_forward();
-      //  stdout.printf("success\n");
   }
 
   protected override void do_cancel() {
@@ -554,9 +550,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
     }
   }
   
-  protected void query_files_finished(DejaDup.Operation op, bool success, bool cancelled)
+  protected void query_files_finished(DejaDup.Operation? op, bool success, bool cancelled)
   {
-    op_state = op.get_state();
     query_op_files = null;
     this.op = null;
     

@@ -34,7 +34,7 @@ class DejaDupApp : Object
     {"restore", 0, 0, OptionArg.NONE, ref restore_mode, N_("Restore given files"), null},
     {"backup", 0, 0, OptionArg.NONE, ref backup_mode, N_("Immediately start a backup"), null},
     {"restore-missing", 0, 0, OptionArg.NONE, ref restoremissing_mode, N_("Restore deleted files"), null},
-    {"", 0, 0, OptionArg.FILENAME_ARRAY, ref filenames, null, null}, // remaining    
+    {"", 0, 0, OptionArg.FILENAME_ARRAY, ref filenames, null, null}, // remaining
     {null}
   };
   
@@ -138,9 +138,6 @@ class DejaDupApp : Object
         toplevel = new AssistantDirectoryHistory(list_directory);
         toplevel.destroy.connect((t) => {Gtk.main_quit();});
         toplevel.show_all();
-      /*} catch (Error e) {
-        stderr.printf("ni ni interfejsa: %s\n", e.message);
-      }*/
     }
     else {
       toplevel = new MainWindow();
