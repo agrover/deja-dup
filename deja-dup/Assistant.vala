@@ -62,7 +62,7 @@ public abstract class Assistant : Gtk.Dialog
   bool interrupted_from_hidden = false;
   weak List<PageInfo> interrupted;
 
-  weak List<PageInfo> current;
+  public weak List<PageInfo> current;
   List<PageInfo> infos;
 
   static const int APPLY = 1;

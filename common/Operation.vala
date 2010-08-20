@@ -23,6 +23,15 @@ namespace DejaDup {
 
 public abstract class Operation : Object
 {
+  /**
+   * Abstract class that abstracts low level operations of duplicity
+   * with specific classes for specific operations
+   *
+   * Abstract class that defines methods and properties that have to be defined
+   * by classes that abstract operations from duplicity. It is generally unnecessary
+   * but it is provided to provide easier development and an abstraction layer
+   * in case Deja Dup project ever replaces its backend.
+   */
   public signal void done(bool success, bool cancelled);
   public signal void raise_error(string errstr, string? detail);
   public signal void action_desc_changed(string action);
@@ -35,13 +44,21 @@ public abstract class Operation : Object
   public uint xid {get; construct;}
   public bool needs_password {get; private set;}
   public Backend backend {get; private set;}
-  
+    
   public enum Mode {
+    /*
+   * Mode of operation of instance
+   *
+   * Every instance of class that inherit its methods and properties from
+   * this class must define in which mode it operates. Based on this Duplicity
+   * attaches appropriate argument.
+   */
     INVALID,
     BACKUP,
     RESTORE,
     STATUS,
     LIST,
+    FILEHISTORY
   }
   public Mode mode {get; construct; default = Mode.INVALID;}
   
@@ -81,7 +98,6 @@ public abstract class Operation : Object
   construct
   {
     dup = new Duplicity(mode);
-
     try {
       backend = Backend.get_default();
     }
@@ -92,8 +108,7 @@ public abstract class Operation : Object
   
   public virtual void start() throws Error
   {
-    action_desc_changed(_("Preparing…"));
-
+    action_desc_changed(_("Preparing…"));    
     if (backend == null) {
       done(false, false);
       return;
@@ -106,15 +121,15 @@ public abstract class Operation : Object
       return;
     }
     set_session_inhibited(true);
-    
     // Get encryption passphrase if needed
     var client = get_gconf_client();
     if (client.get_bool(ENCRYPT_KEY) && passphrase == null) {
       needs_password = true;
       passphrase_required(); // will call continue_with_passphrase when ready
     }
-    else
+    else {
       continue_with_passphrase(passphrase);
+    }
   }
   
   public void cancel()
@@ -129,6 +144,9 @@ public abstract class Operation : Object
   
   protected virtual void connect_to_dup()
   {
+    /*
+     * Connect Deja Dup to signals
+     */
     dup.done.connect(operation_finished);
     dup.raise_error.connect((d, s, detail) => {raise_error(s, detail);});
     dup.action_desc_changed.connect((d, s) => {action_desc_changed(s);});
@@ -141,6 +159,9 @@ public abstract class Operation : Object
   
   public void continue_with_passphrase(string? passphrase)
   {
+   /*
+    * Continues with operation after passphrase has been acquired.
+    */
     needs_password = false;
     this.passphrase = passphrase;
     try {
@@ -153,6 +174,11 @@ public abstract class Operation : Object
   }
   
   void continue_with_envp(DejaDup.Backend b, bool success, List<string>? envp, string? error) {
+    /*
+     * Starts Duplicity backup with added enviroment variables
+     * 
+     * Start Duplicity backup process with costum values for enviroment variables.
+     */
     if (!success) {
       if (error != null)
         raise_error(error, null);
@@ -200,6 +226,12 @@ public abstract class Operation : Object
   
   protected virtual List<string>? make_argv() throws Error
   {
+  /**
+   * Abstract method that prepares arguments that will be sent to duplicity
+   *
+   * Abstract method that will prepare arguments that will be sent to duplicity
+   * and return a list of those arguments.
+   */
     return null;
   }
   

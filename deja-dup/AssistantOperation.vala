@@ -22,6 +22,23 @@ using GLib;
 
 public abstract class AssistantOperation : Assistant
 {
+  /*
+   * Abstract class for implementation of various common pages in assistant
+   *
+   * Abstract class that provides various methods that serve as pages in
+   * assistant. Required methods that all classes that inherit from this
+   * class must implement are create_op, make_confirm_page and
+   * get_progress_file_prefix.
+   *
+   * Pages are shown in the following order:
+   * 1. (Optional) Custom configuration pages
+   * 2. Setup pages
+   * 3. Confirmation page
+   * 4. Password page
+   * 5. Question page
+   * 6. (Required) Progress page
+   * 7. Summary
+   */
   protected Gtk.Widget confirm_page {get; private set;}
   public signal void closing(bool success);
   
@@ -81,10 +98,23 @@ public abstract class AssistantOperation : Assistant
     prepare.connect(do_prepare);
     delete_event.connect(do_minimize_to_tray);
   }
-  
+
+  /*
+   * Creates confirmation page for particular assistant
+   *
+   * Creates confirmation page that should create confirm_page widget that
+   * is presented for final confirmation.
+   */
   protected abstract Gtk.Widget? make_confirm_page();
   protected virtual void add_setup_pages() {}
-  protected virtual void add_custom_config_pages() {}
+  protected virtual void add_custom_config_pages(){}
+  /*
+   * Creates and calls appropriate operation
+   *
+   * Creates and calls appropriate operation (Backup, Restore, Status, Files)
+   * that is then used to perform various defined tasks on backend. It is
+   * also later connected to various signals.
+   */
   protected abstract DejaDup.Operation create_op();
   protected abstract string get_progress_file_prefix();
   protected virtual void set_op_icon_name() {}
@@ -113,6 +143,11 @@ public abstract class AssistantOperation : Assistant
   
   void show_progress(DejaDup.Operation op, double percent)
   {
+    /*
+     * Updates prograss bar
+     *
+     * Updates progress bar with percet provided.
+     */
     progress_bar.fraction = percent;
     gives_progress = true;
   }
@@ -326,6 +361,11 @@ public abstract class AssistantOperation : Assistant
   
   void add_config_pages_if_needed()
   {
+    /*
+     * Creates configure pages if required
+     *
+     * 
+     */
     var client = DejaDup.get_gconf_client();
     string val;
     try {
@@ -343,6 +383,11 @@ public abstract class AssistantOperation : Assistant
   
   void add_confirm_page()
   {
+    /*
+     * Adds confirm page to the sequence of pages
+     *
+     * Adds confirm_page widget to the sequence of pages in assistant.
+     */
     var page = make_confirm_page();
     if (page == null)
       return;
@@ -380,7 +425,7 @@ public abstract class AssistantOperation : Assistant
     summary_page = page;
   }
   
-  void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
+  protected virtual void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
     status_icon = null;
     this.op = null;
@@ -401,8 +446,15 @@ public abstract class AssistantOperation : Assistant
     }
   }
   
-  void do_apply()
+  protected void do_apply()
   {
+    /*
+     * Applies/starts operation that was configured during assistant process and
+     * connect appropriate signals
+     *
+     * Mounts appropriate backend, creates child operation, connects signals to
+     * handler functions and starts operation.
+     */
     if (mount_op == null)
       mount_op = new MountOperationAssistant(this);
 
@@ -434,6 +486,17 @@ public abstract class AssistantOperation : Assistant
 
   protected virtual void do_prepare(Assistant assist, Gtk.Widget page)
   {
+    /*
+     * Prepare page in assistant
+     *
+     * Prepares every page in assistant for various operations. For example, if 
+     * user returns to confirmation page from progress page, it is necessary
+     * to kill running operation. If user advances to progress page, it runs
+     * do_apply and runs the needed operation.
+     *
+     * do_prepare is run when user switches pages and not when pages are built.
+     */
+
     if (timeout_id > 0) {
       Source.remove(timeout_id);
       timeout_id = 0;
@@ -466,11 +529,12 @@ public abstract class AssistantOperation : Assistant
     status_icon = null; // hide immediately to seem responsive
   }
 
-  void do_cancel()
+  protected virtual void do_cancel()
   {
     hide_everything();
-    if (op != null)
+    if (op != null) {
       op.cancel(); // do_close will happen in done() callback
+    }
     else
       do_close();
   }
@@ -544,10 +608,12 @@ public abstract class AssistantOperation : Assistant
 
   void found_passphrase(GnomeKeyring.Result result, string? str)
   {
-    if (str != null)
+    if (str != null) {
       op.continue_with_passphrase(str);
-    else
+    }
+    else {
       ask_passphrase();
+    }
   }
 
   protected void get_passphrase()

@@ -22,6 +22,10 @@ nobase_dist_data_DATA = \
 	icons/hicolor/scalable/actions/deja-dup-backup.svg \
 	icons/hicolor/scalable/actions/deja-dup-restore.svg
 
+nobase_dist_pkgdata_DATA = \
+	interfaces/directory_history_confirmation_page.glade \
+	interfaces/listfiles-crt-out.glade
+
 @INTLTOOL_SCHEMAS_RULE@
 schemadir = $(sysconfdir)/gconf/schemas
 schema_in_file = deja-dup.schemas.in

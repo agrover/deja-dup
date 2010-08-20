@@ -82,6 +82,8 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
   environ['PATH'] = extra_paths + environ['PATH']
   
   environ['XDG_CACHE_HOME'] = get_temp_name('cache')
+  environ['XDG_DATA_HOME'] = get_temp_name('share')
+  environ['XDG_DATA_DIRS'] = "%s:%s" % (environ['XDG_DATA_HOME'], environ['XDG_DATA_DIRS'])
   
   gconf_dir = get_temp_name('gconf')
   os.system('mkdir -p %s' % gconf_dir)
@@ -91,6 +93,10 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
   if os.system('gconftool-2 --makefile-install-rule %s > /dev/null' % ('%s/../data/deja-dup.schemas.in' % srcdir)):
     raise Exception('Could not install gconf schema')
   
+  # Copy interface files into place as well
+  os.system("mkdir -p %s/deja-dup/interfaces" % environ['XDG_DATA_HOME'])
+  os.system("cp ../data/interfaces/* %s/deja-dup/interfaces" % environ['XDG_DATA_HOME'])
+
   if backend == 'file':
     create_local_config(dest)
   elif backend == 'ssh':

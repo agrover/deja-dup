@@ -27,11 +27,13 @@ class DejaDupApp : Object
   static bool show_version = false;
   static bool restore_mode = false;
   static bool backup_mode = false;
+  static bool restoremissing_mode = false;
   static string[] filenames = null;
   static const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
     {"restore", 0, 0, OptionArg.NONE, ref restore_mode, N_("Restore given files"), null},
     {"backup", 0, 0, OptionArg.NONE, ref backup_mode, N_("Immediately start a backup"), null},
+    {"restore-missing", 0, 0, OptionArg.NONE, ref restoremissing_mode, N_("Restore deleted files"), null},
     {"", 0, 0, OptionArg.FILENAME_ARRAY, ref filenames, null, null}, // remaining
     {null}
   };
@@ -48,6 +50,19 @@ class DejaDupApp : Object
     if (restore_mode) {
       if (filenames == null) {
         printerr("%s\n", _("No filenames provided"));
+        status = 1;
+        return false;
+      }
+    }
+
+    if (restoremissing_mode) {
+      if (filenames == null) {
+        printerr("%s\n", _("No directory provided"));
+        status = 1;
+        return false;
+      }
+      else if (filenames.length > 1) {
+        printerr("%s\n", _("Only one directory can be shown at once"));
         status = 1;
         return false;
       }
@@ -109,6 +124,20 @@ class DejaDupApp : Object
       toplevel = new AssistantBackup(true);
       toplevel.destroy.connect((t) => {Gtk.main_quit();});
       // specifically don't show
+    }
+    else if (restoremissing_mode){
+        File list_directory = File.new_for_commandline_arg(filenames[0]);
+        if (!list_directory.query_exists(null)) {
+          printerr("%s\n", _("Directory does not exists"));
+          return 1;
+        }
+        if (list_directory.query_file_type (0, null) != FileType.DIRECTORY) {
+          printerr("%s\n", _("You must provide a directory, not a file"));
+          return 1;
+        }
+        toplevel = new AssistantDirectoryHistory(list_directory);
+        toplevel.destroy.connect((t) => {Gtk.main_quit();});
+        toplevel.show_all();
     }
     else {
       toplevel = new MainWindow();

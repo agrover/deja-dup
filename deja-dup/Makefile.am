@@ -22,6 +22,8 @@ VALA_CFLAGS = \
 	--vapidir $(top_srcdir)/common \
 	--vapidir $(top_srcdir)/widgets \
 	--vapidir $(top_srcdir)/vapi \
+	--pkg gee-1.0 \
+	--pkg gmodule-2.0 \
 	--pkg @GTK_MODULE@ \
 	--pkg @GDK_X11_MODULE@ \
 	--pkg gio-2.0 \
@@ -46,6 +48,7 @@ deja_dup_VALASOURCES = \
 	Assistant.vala \
 	AssistantBackup.vala \
 	AssistantOperation.vala \
+	AssistantDirectoryHistory.vala \
 	AssistantRestore.vala \
 	MainWindow.vala \
 	MountOperationAssistant.vala \
