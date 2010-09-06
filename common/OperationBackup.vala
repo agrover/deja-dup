@@ -57,7 +57,7 @@ public class OperationBackup : Operation
       if (info.get_is_symlink()) {
         string symlink_target = info.get_symlink_target();
         File parent_dir = file.get_parent();
-        dup.includes.prepend(parent_dir.resolve_relative_path(symlink_target));
+        list.prepend(parent_dir.resolve_relative_path(symlink_target));
       }
     }
     catch (Error e) {
