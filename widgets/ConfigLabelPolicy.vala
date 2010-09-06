@@ -23,6 +23,11 @@ namespace DejaDup {
 
 public class ConfigLabelPolicy : ConfigLabel
 {
+  public ConfigLabelPolicy()
+  {
+    Object(key: null);
+  }
+
   construct {
     watch_key(BACKEND_KEY);
     watch_key(FILE_PATH_KEY);

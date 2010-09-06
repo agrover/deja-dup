@@ -391,14 +391,15 @@ public class DuplicityInstance : Object
       if (s[i] == '\\' && s[i+1] != 0) {
         bool bare_escape = false;
         
+        // http://docs.python.org/reference/lexical_analysis.html
         switch (s[i+1]) {
-        case 'b': rv[j++] = '\b'; i += 2; break;
-        case 'f': rv[j++] = '\014'; i += 2; break;
-        case 't': rv[j++] = '\t'; i += 2; break;
-        case 'n': rv[j++] = '\n'; i += 2; break;
-        case 'r': rv[j++] = '\r'; i += 2; break;
-        case 'v': rv[j++] = '\013'; i += 2; break;
-        case 'a': rv[j++] = '\007'; i += 2; break;
+        case 'b': rv[j++] = '\b'; i += 2; break; // backspace
+        case 'f': rv[j++] = '\f'; i += 2; break; // form feed
+        case 't': rv[j++] = '\t'; i += 2; break; // tab
+        case 'n': rv[j++] = '\n'; i += 2; break; // line feed
+        case 'r': rv[j++] = '\r'; i += 2; break; // carriage return
+        case 'v': rv[j++] = '\xb'; i += 2; break; // vertical tab
+        case 'a': rv[j++] = '\x7'; i += 2; break; // bell
         case 'x':
           // start of a hex number
           if (s[i+2] != 0 && s[i+3] != 0) {
@@ -479,7 +480,7 @@ public class DuplicityInstance : Object
         // supposed to be for the space.  So just drop it.
         else if (num_suffix(word, '\\') % 2 == 1)
           // Chop off last backslash.
-          word = word.substring(0, word.len() - 2);
+          word = word.substring(0, word.length - 2);
         
         // get rid of any other escaping backslashes and translate octals
         word = compress_string(word);
@@ -492,7 +493,7 @@ public class DuplicityInstance : Object
         
         if (!in_group) {
           // add to list, but drop single quotes
-          splitlist.append(group_word.substring(1, group_word.len() - 2));
+          splitlist.append(group_word.substring(1, group_word.length - 2));
           group_word = "";
         }
       }
