@@ -24,6 +24,7 @@ class Monitor : Object {
 
 static uint timeout_id;
 static Pid pid;
+static bool op_active = false;
 static bool reactive_check;
 static bool testing;
 
@@ -35,6 +36,16 @@ static const OptionEntry[] options = {
 };
 
 static Notify.Notification note;
+
+static void op_started(DBusConnection conn, string name, string name_owner)
+{
+  op_active = true;
+}
+
+static void op_ended(DBusConnection conn, string name)
+{
+  op_active = false;
+}
 
 static void network_changed(DejaDup.NetworkManager nm, bool connected)
 {
@@ -231,7 +242,7 @@ static bool kickoff()
   }
 
   // Don't run right now if an instance is already running
-  if (pid == (Pid)0 && !DejaDup.test_bus_claimed("Operation")) {
+  if (pid == (Pid)0 && !op_active) {
     try {
       string[] argv = new string[3];
       argv[0] = "deja-dup";
@@ -341,6 +352,9 @@ static int main(string[] args)
 
   DejaDup.initialize();
   DejaDup.NetworkManager.get().changed.connect(network_changed);
+
+  Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
+                 BusNameWatcherFlags.NONE, op_started, op_ended);
 
   var mon = VolumeMonitor.get();
   mon.ref(); // bug 569418; bad things happen when VM goes away

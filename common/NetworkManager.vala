@@ -35,7 +35,7 @@ public class NetworkManager : Object
 
   static NetworkManager singleton;
   static const uint32 NM_STATE_CONNECTED = 3;
-  dynamic DBus.Object nm;
+  DBusProxy nm;
 
   protected NetworkManager() {}
 
@@ -50,24 +50,27 @@ public class NetworkManager : Object
 
   void init_dbus_to_network_manager() throws Error
   {
-    //Set up the DBus connection to network manager
-    DBus.Connection conn = DBus.Bus.get(DBus.BusType.SYSTEM);
-    nm = conn.get_object("org.freedesktop.NetworkManager",
-                         "/org/freedesktop/NetworkManager",
-                         "org.freedesktop.NetworkManager");
+    // Set up the DBus connection to network manager
+    // FIXME: use async version when I figure out the syntax
+    nm = new DBusProxy.for_bus_sync(BusType.SYSTEM, DBusProxyFlags.NONE, null, 
+                                    "org.freedesktop.NetworkManager",
+                                    "/org/freedesktop/NetworkManager",
+                                    "org.freedesktop.NetworkManager", null);
 
-    //Retrieve the network manager connection state.
-    uint32 network_manager_state = nm.State;
-    connected = network_manager_state == NM_STATE_CONNECTED;
+    // Retrieve the network manager connection state.
+    uint32 nm_state = nm.get_cached_property("State").get_uint32();
+    connected = nm_state == NM_STATE_CONNECTED;
 
-    //Dbus signal when the state of the connection is changed.
-    nm.StateChanged.connect(nm_state_changed);
+    // Dbus signal when the state of the connection is changed.
+    nm.g_properties_changed.connect(nm_prop_changed);
   }
 
-  protected void nm_state_changed(DBus.Object obj, uint32 new_state)
+  void nm_prop_changed(GLib.Variant changed_properties,
+                       string[] invalidated_properties)
   {
     bool was_connected = connected;
-    connected = new_state == NM_STATE_CONNECTED;
+    uint32 nm_state = nm.get_cached_property("State").get_uint32();
+    connected = nm_state == NM_STATE_CONNECTED;
 
     if (was_connected != connected)
       changed(connected);

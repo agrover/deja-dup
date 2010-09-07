@@ -25,7 +25,6 @@ VALA_CFLAGS = \
 	--pkg libcommon \
 	--pkg @GTK_MODULE@ \
 	--pkg gconf-2.0 \
-	--pkg dbus-glib-1 \
 	--pkg config
 
 AM_CFLAGS = \

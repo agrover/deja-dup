@@ -203,40 +203,57 @@ public abstract class Operation : Object
     return null;
   }
   
+  uint bus_id = 0;
   bool claim_bus(bool claimed)
   {
-    bool rv = set_bus_claimed("Operation", claimed);
-    if (claimed && !rv)
-      raise_error(_("Another Déjà Dup is already running"), null);
-    return rv;
+    if (claimed) {
+      bus_id = Bus.own_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
+                            BusNameOwnerFlags.NONE, ()=>{}, ()=>{}, ()=>{});
+      if (bus_id == 0) {
+        raise_error(_("Another Déjà Dup is already running"), null);
+        return false;
+      }
+    }
+    else {
+      Bus.unown_name(bus_id);
+    }
+    
+    return true;
   }
   
   uint inhibit_cookie = 0;
-  void set_session_inhibited(bool inhibit)
+  async void set_session_inhibited(bool inhibit)
   {
     // Don't inhibit if we can resume safely
     if (DuplicityInfo.get_default().can_resume)
       return;
 
     try {
-      var conn = DBus.Bus.@get(DBus.BusType.SESSION);
-      
-      dynamic DBus.Object obj = conn.get_object ("org.gnome.SessionManager",
+      // FIXME: use async version when I figure out the syntax
+      DBusProxy obj = new DBusProxy.for_bus_sync(BusType.SESSION,
+                                                 DBusProxyFlags.NONE, null, 
+                                                 "org.gnome.SessionManager",
                                                  "/org/gnome/SessionManager",
-                                                 "org.gnome.SessionManager");
+                                                 "org.gnome.SessionManager",
+                                                 null);
       
       if (inhibit) {
         if (inhibit_cookie > 0)
           return; // already inhibited
         
-        obj.Inhibit(Config.PACKAGE,
-                    xid,
-                    mode_to_string(dup.mode),
-                    (uint) (1 | 4), // logout and suspend, but not switch user
-                    out inhibit_cookie);
+        var cookie_val = yield obj.call("Inhibit",
+                                        // logout and suspend, but not switch user
+                                        new Variant("(susu)",
+                                                    Config.PACKAGE,
+                                                    xid,
+                                                    mode_to_string(dup.mode),
+                                                    (uint) (1 | 4)),
+                                        DBusCallFlags.NONE, -1, null);
+        cookie_val.get("(u)", out inhibit_cookie);
       }
       else if (inhibit_cookie > 0) {
-        obj.Uninhibit(inhibit_cookie);
+        yield obj.call("Uninhibit", new Variant("(u)", inhibit_cookie),
+                       DBusCallFlags.NONE, -1, null);
         inhibit_cookie = 0;
       }
     }

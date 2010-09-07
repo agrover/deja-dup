@@ -67,7 +67,7 @@ AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package 
 GTK_MODULE=gtk+-2.0
 GTK_REQ_VER=2.18
 GDK_X11_MODULE=gdk-x11-2.0
-GLIB_REQ_VER=2.20
+GLIB_REQ_VER=2.25.15
 GIO_REQ_VER=$GLIB_REQ_VER
 UNIQUE_MODULE=unique-1.0
 APPINDICATOR_MODULE=appindicator-0.1
@@ -106,7 +106,6 @@ PKG_CHECK_MODULES(DUP,
                   $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
                   gconf-2.0
-                  dbus-glib-1
                   gnome-keyring-1)
 AC_SUBST(DUP_CFLAGS)
 AC_SUBST(DUP_LIBS)
@@ -115,7 +114,6 @@ PKG_CHECK_MODULES(PREF,
                   $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
                   gconf-2.0
-                  dbus-glib-1
                   $UNIQUE_MODULE)
 AC_SUBST(PREF_CFLAGS)
 AC_SUBST(PREF_LIBS)
@@ -124,7 +122,6 @@ PKG_CHECK_MODULES(COMMON,
                   gio-2.0 >= $GIO_REQ_VER
                   gio-unix-2.0 >= $GIO_REQ_VER
                   gconf-2.0
-                  dbus-glib-1
                   gnome-keyring-1)
 AC_SUBST(COMMON_CFLAGS)
 AC_SUBST(COMMON_LIBS)
@@ -138,7 +135,6 @@ AC_SUBST(WIDGETS_LIBS)
 PKG_CHECK_MODULES(MONITOR,
                   gconf-2.0
                   gio-2.0 >= $GIO_REQ_VER
-                  dbus-glib-1
                   libnotify)
 AC_SUBST(MONITOR_CFLAGS)
 AC_SUBST(MONITOR_LIBS)

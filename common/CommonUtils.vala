@@ -90,57 +90,6 @@ public File[] parse_dir_list(SList<string>? dirs)
   return rv;
 }
 
-public bool test_bus_claimed(string busname)
-{
-  try {
-    var conn = DBus.Bus.@get(DBus.BusType.SESSION);
-
-    dynamic DBus.Object bus = conn.get_object ("org.freedesktop.DBus",
-                                               "/org/freedesktop/DBus",
-                                               "org.freedesktop.DBus");
-
-    string result = bus.get_name_owner("org.gnome.DejaDup." + busname);
-    return result != null && result != "";
-  }
-  catch (Error e) {
-    return false;
-  }
-}
-
-public bool set_bus_claimed(string busname, bool claim)
-{
-  try {
-    var conn = DBus.Bus.@get(DBus.BusType.SESSION);
-    
-    dynamic DBus.Object bus = conn.get_object ("org.freedesktop.DBus",
-                                               "/org/freedesktop/DBus",
-                                               "org.freedesktop.DBus");
-    
-    if (claim) {
-      // Try to register service in session bus.
-      // The flag '4' means do not add ourselves to the queue of applications
-      // wanting the name, if this request fails.
-      uint32 result = bus.request_name("org.gnome.DejaDup." + busname,
-                                       (uint32)4);
-      
-      if (result == DBus.RequestNameReply.EXISTS)
-        return false;
-    }
-    else {
-      // We have to assign reply to a variable because it is a dynamic binding
-      // and otherwise, generated code will expect no return value.
-      uint32 result = bus.release_name("org.gnome.DejaDup." + busname);
-      if (result != 1)
-        warning("Unexpected reply of %u when releasing busname %s\n", result, busname);
-    }
-  }
-  catch (Error e) {
-    warning("%s\n", e.message);
-  }
-  
-  return true;
-}
-
 GConf.Client client;
 void set_gconf_client()
 {

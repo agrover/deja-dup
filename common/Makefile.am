@@ -21,7 +21,6 @@ noinst_LTLIBRARIES = libcommon.la
 VALA_CFLAGS = \
 	--library=libcommon \
 	--vapidir $(top_srcdir)/vapi \
-	--pkg dbus-glib-1 \
 	--pkg gconf-2.0 \
 	--pkg gio-2.0 \
 	--pkg gio-unix-2.0 \
