@@ -54,8 +54,10 @@ public abstract class Operation : Object
       return _("Restoring…");
     case Operation.Mode.STATUS:
       return _("Checking for backups…");
+    case Operation.Mode.LIST:
+      return _("Listing files…");
     default:
-      return "";
+      return _("Preparing…");
     }
   }
   
