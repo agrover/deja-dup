@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-13 20:17-0400\n"
-"PO-Revision-Date: 2010-06-20 17:39+0000\n"
+"POT-Creation-Date: 2010-07-27 21:24-0400\n"
+"PO-Revision-Date: 2010-07-29 17:56+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-06-21 03:43+0000\n"
+"X-Launchpad-Export-Date: 2010-07-30 03:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -45,7 +45,7 @@ msgstr "Program do tworzenia kopii zapasowych Déjà Dup"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:328
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:310
 msgid "Déjà Dup Monitor"
 msgstr "Monitor programu Déjà Dup"
 
@@ -53,11 +53,29 @@ msgstr "Monitor programu Déjà Dup"
 msgid "Schedule backups at regular intervals"
 msgstr "Planowanie kopii zapasowych w regularnych odstępach czasu"
 
-#: ../data/deja-dup.schemas.in.h:1
+#: ../data/deja-dup-preferences.desktop.in.h:1
+msgid "Backup Preferences"
+msgstr "Preferencje kopii zapasowych"
+
+#: ../data/deja-dup-preferences.desktop.in.h:2
+msgid "Change your backup settings"
+msgstr "Zmiana ustawień kopii zapasowych"
+
+#: ../data/deja-dup-preferences.desktop.in.h:3
+msgid "Déjà Dup Backup Preferences"
+msgstr "Preferencje kopii zapasowych Déjà Dup"
+
+#: ../data/deja-dup-preferences.desktop.in.h:4
+#: ../preferences/PreferencesDialog.vala:41 ../preferences/preferences.vala:35
+#: ../preferences/preferences.vala:66
+msgid "Déjà Dup Preferences"
+msgstr "Preferencje programu Déjà Dup"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 msgid "Amazon S3 Access Key ID"
 msgstr "Identyfikator klucza dostępu do serwisu Amazon S3"
 
-#: ../data/deja-dup.schemas.in.h:2
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:2
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
@@ -65,39 +83,39 @@ msgstr ""
 "Opcjonalna nazwa katalogu, w którym przechowywać pliki. Zostanie on "
 "utworzony w wybranym koszu."
 
-#: ../data/deja-dup.schemas.in.h:3
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
 msgid "Backup location"
 msgstr "Położenie kopii zapasowej"
 
-#: ../data/deja-dup.schemas.in.h:4
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:4
 msgid "Directories not to back up"
 msgstr "Katalogi, dla których nie tworzyć kopii zapasowych"
 
-#: ../data/deja-dup.schemas.in.h:5
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
 msgid "Directories to back up"
 msgstr "Katalogi, dla których tworzyć kopie zapasowe"
 
-#: ../data/deja-dup.schemas.in.h:6
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
 msgid "Folder type"
 msgstr "Typ katalogu"
 
-#: ../data/deja-dup.schemas.in.h:7
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:7
 msgid "Full name of the external volume"
 msgstr "Pełna nazwa zewnętrznego woluminu"
 
-#: ../data/deja-dup.schemas.in.h:8
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:8
 msgid "How long to keep backup files"
 msgstr "Jak długo trzymać kopie zapasowe"
 
-#: ../data/deja-dup.schemas.in.h:9
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:9
 msgid "How often to periodically back up"
 msgstr "Jak często tworzyć kopie zapasowe"
 
-#: ../data/deja-dup.schemas.in.h:10
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:10
 msgid "Icon of the external volume"
 msgstr "Ikona zewnętrznego woluminu"
 
-#: ../data/deja-dup.schemas.in.h:11
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:11
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -105,7 +123,7 @@ msgstr ""
 "Jeśli położenie kopii zapasowej znajduje się na zewnętrznym woluminie, to "
 "jest jego unikalny identyfikator systemu plików."
 
-#: ../data/deja-dup.schemas.in.h:12
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:12
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -113,14 +131,14 @@ msgstr ""
 "Jeśli położenie kopii zapasowej znajduje się na zewnętrznym woluminie, to "
 "jest ścieżka do katalogu na nim."
 
-#: ../data/deja-dup.schemas.in.h:13
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:13
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
 "Jeśli położenie kopii zapasowej znajduje się na zewnętrznym woluminie, to "
 "jest jego ikona."
 
-#: ../data/deja-dup.schemas.in.h:14
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:14
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -128,7 +146,7 @@ msgstr ""
 "Jeśli położenie kopii zapasowej znajduje się na zewnętrznym woluminie, to "
 "jest jego dłuższy opis."
 
-#: ../data/deja-dup.schemas.in.h:15
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:15
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
@@ -136,31 +154,35 @@ msgstr ""
 "Jeśli położenie kopii zapasowej znajduje się na zewnętrznym woluminie, to "
 "jest jego krótszy opis."
 
-#: ../data/deja-dup.schemas.in.h:16
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:16
 msgid "Location in which to hold the backup files."
 msgstr "Położenie, w którym przechowywać pliki kopii zapasowych."
 
-#: ../data/deja-dup.schemas.in.h:17
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:17
+msgid "Obsolete"
+msgstr "Przestarzałe"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:18
 msgid "Relative path under the external volume"
 msgstr "Względna ścieżka woluminu zewnętrznego"
 
-#: ../data/deja-dup.schemas.in.h:18
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:19
 msgid "Short name of the external volume"
 msgstr "Krótka nazwa woluminu zewnętrznego"
 
-#: ../data/deja-dup.schemas.in.h:19
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:20
 msgid "The Amazon S3 bucket name to use"
 msgstr "Nazwa używanego kosza serwisu Amazon S3"
 
-#: ../data/deja-dup.schemas.in.h:20
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:21
 msgid "The Amazon S3 folder"
 msgstr "Katalog serwisu Amazon S3"
 
-#: ../data/deja-dup.schemas.in.h:21
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
 msgid "The last time Déjà Dup was run"
 msgstr "Czas ostatniego uruchomienia programu Déjà Dup"
 
-#: ../data/deja-dup.schemas.in.h:22
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
@@ -168,11 +190,11 @@ msgstr ""
 "Czas ostatniego pomyślnego uruchomienia programu Déjà Dup. Powinien być w "
 "formacie ISO 8601."
 
-#: ../data/deja-dup.schemas.in.h:23
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "The number of days between backups."
 msgstr "Dni między kopiami zapasowymi"
 
-#: ../data/deja-dup.schemas.in.h:24
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
@@ -181,12 +203,11 @@ msgstr ""
 "Liczba dni, ile trzymać pliki kopii zapasowej. Wartość 0 oznacza zawsze. To "
 "jest minimalna liczba dni, pliki mogą być trzymane dłużej."
 
-#: ../data/deja-dup.schemas.in.h:25
-msgid "The type of backup location. Valid values are ‘s3’ or ‘file’."
-msgstr ""
-"Typ położenia kopii zapasowej. Prawidłowe wartości to \"s3\" lub \"file\"."
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+msgid "The type of backup location."
+msgstr "Typ położenia kopii zapasowej."
 
-#: ../data/deja-dup.schemas.in.h:26
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
@@ -198,47 +219,44 @@ msgstr ""
 "$PUBLIC_SHARE, $TEMPLATES, $TRASH i $VIDEO są rozpoznawane jako specjalne "
 "katalogi użytkownika. Ścieżki są względne do katalogu domowego użytkownika."
 
-#: ../data/deja-dup.schemas.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
 "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
-"directories. Relative entries are relative to the user’s home directory. "
-"This list takes precedence over the include list."
+"directories. Relative entries are relative to the user’s home directory."
 msgstr ""
-"Lista katalogów, których kopie zapasowe nie będą wykonywane. Zastrzeżone "
-"wartości $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, "
-"$PUBLIC_SHARE, $TEMPLATES, $TRASH i $VIDEO są rozpoznawane jako specjalne "
-"katalogi użytkownika. Ścieżki są względne do katalogu domowego użytkownika. "
-"Ta lista jest przetwarzana przed listą dołączanych."
+"To jest lista katalogów, których kopie zapasowe nie będą tworzone. "
+"Zastrzeżone wartości $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, "
+"$PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH i $VIDEO są rozpoznawane jako "
+"specjalne katalogi użytkownika. Wpisy względne odnoszą się do katalogu "
+"domowego użytkownika."
 
-#: ../data/deja-dup.schemas.in.h:28
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid "Type of location to store backup"
 msgstr "Typ położenia, w którym przechowywać kopie zapasowe"
 
-#: ../data/deja-dup.schemas.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
 msgid "Unique ID of the external volume"
 msgstr "Unikalny identyfikator woluminu zewnętrznego"
 
-#: ../data/deja-dup.schemas.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid ""
-"Whether the backup location is a mounted external volume or a normal folder. "
-"Possible values are ‘volume’ or ‘normal’."
+"Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
-"Określa, czy położenie kopii zapasowych jest zamontowanym woluminem "
-"zewnętrznym, czy zwykłym katalogiem. Możliwe wartości to \"volume\" lub "
-"\"normal\"."
+"Określa, czy położenie kopii zapasowej znajduje się na zamontowanym "
+"woluminie zewnętrznym czy w normalnym katalogu."
 
-#: ../data/deja-dup.schemas.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid "Whether to automatically back up on a regular schedule."
 msgstr ""
 "Określa, czy kopie zapasowe będą tworzone w oparciu o regularny harmonogram."
 
-#: ../data/deja-dup.schemas.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "Whether to encrypt your backup"
 msgstr "Określa, czy szyfrować kopie zapasowe"
 
-#: ../data/deja-dup.schemas.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
 "Whether to encrypt your backup files in the storage location. It’s strongly "
 "recommended to leave this as ‘true’."
@@ -246,15 +264,15 @@ msgstr ""
 "Określa, czy szyfrować pliki kopii zapasowych w położeniu pamięci masowej. "
 "Mocno zalecane jest pozostawienie wartości \"True\"."
 
-#: ../data/deja-dup.schemas.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "Whether to periodically back up"
 msgstr "Określa, czy okresowo tworzyć kopie zapasowe"
 
-#: ../data/deja-dup.schemas.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "Whether to request the root password"
 msgstr "Określa, czy żądać podania hasło roota"
 
-#: ../data/deja-dup.schemas.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
@@ -262,7 +280,7 @@ msgstr ""
 "Określa, czy żądać podania hasło roota podczas wykonywania kopii zapasowej "
 "katalogów systemu lub ich przywracania."
 
-#: ../data/deja-dup.schemas.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -271,16 +289,16 @@ msgstr ""
 "istnieje, to zostanie utworzony. Tylko dozwolone ciągi nazw komputerów są "
 "prawidłowe."
 
-#: ../data/deja-dup.schemas.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Identyfikator klucza dostępu serwisu Amazon S3. Działa jak nazwa użytkownika."
 
-#: ../deja-dup/Assistant.vala:281
+#: ../deja-dup/Assistant.vala:284
 msgid "Co_ntinue"
 msgstr "Ko_ntynuuj"
 
-#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:155
+#: ../deja-dup/Assistant.vala:319 ../deja-dup/StatusIcon.vala:155
 msgid "_Resume Later"
 msgstr "_Wznów później"
 
@@ -365,44 +383,44 @@ msgstr "Ukończono wykonywanie kopii zapasowej"
 msgid "Your files were successfully backed up."
 msgstr "Pomyślnie wykonano kopię zapasową plików."
 
-#: ../deja-dup/AssistantBackup.vala:259 ../common/Operation.vala:52
+#: ../deja-dup/AssistantBackup.vala:256 ../common/Operation.vala:52
 msgid "Backing up…"
 msgstr "Wykonywanie kopii zapasowej…"
 
-#: ../deja-dup/AssistantOperation.vala:134
+#: ../deja-dup/AssistantOperation.vala:136
 msgid "Scanning:"
 msgstr "Skanowanie:"
 
-#: ../deja-dup/AssistantOperation.vala:135
+#: ../deja-dup/AssistantOperation.vala:137
 msgid "Scanning…"
 msgstr "Skanowanie…"
 
-#: ../deja-dup/AssistantOperation.vala:208
+#: ../deja-dup/AssistantOperation.vala:210
 msgid "_Details"
 msgstr "_Szczegóły"
 
-#: ../deja-dup/AssistantOperation.vala:257
+#: ../deja-dup/AssistantOperation.vala:259
 msgid "E_ncryption password:"
 msgstr "Hasło szyfrowa_nia:"
 
-#: ../deja-dup/AssistantOperation.vala:266
+#: ../deja-dup/AssistantOperation.vala:268
 msgid "_Show password"
 msgstr "_Wyświetlanie hasła"
 
-#: ../deja-dup/AssistantOperation.vala:273
+#: ../deja-dup/AssistantOperation.vala:275
 #: ../deja-dup/MountOperationAssistant.vala:28
 msgid "_Remember password"
 msgstr "_Zapamiętanie hasła"
 
-#: ../deja-dup/AssistantOperation.vala:348
+#: ../deja-dup/AssistantOperation.vala:344
 msgid "Summary"
 msgstr "Podsumowanie"
 
-#: ../deja-dup/AssistantOperation.vala:363
+#: ../deja-dup/AssistantOperation.vala:359
 msgid "Password needed"
 msgstr "Hasło jest wymagane"
 
-#: ../deja-dup/AssistantOperation.vala:578
+#: ../deja-dup/AssistantOperation.vala:584
 msgid "Déjà Dup backup passphrase"
 msgstr "Hasło kopii zapasowej programu Déjà Dup"
 
@@ -502,7 +520,7 @@ msgstr[2] "Pliki zostały pomyślnie przywrócone."
 msgid "Restoring…"
 msgstr "Przywracanie…"
 
-#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:33
+#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:32
 #: ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr "Wyświetla wersję"
@@ -581,15 +599,15 @@ msgstr "Położenie jest niedostępne"
 msgid "This backup location requires authentication."
 msgstr "Położenie kopii zapasowej wymaga uwierzytelnienia."
 
-#: ../deja-dup/MountOperationAssistant.vala:136
+#: ../deja-dup/MountOperationAssistant.vala:138
 msgid "Connect _anonymously"
 msgstr "Połącz _anonimowo"
 
-#: ../deja-dup/MountOperationAssistant.vala:140
+#: ../deja-dup/MountOperationAssistant.vala:142
 msgid "Connect as u_ser:"
 msgstr "Połączenie jako _użytkownik:"
 
-#: ../deja-dup/MountOperationAssistant.vala:180
+#: ../deja-dup/MountOperationAssistant.vala:182
 msgid "_Domain:"
 msgstr "_Domena:"
 
@@ -615,23 +633,23 @@ msgstr "Opóźnij wykonanie _kopii zapasowej"
 msgid "_Skip Backup"
 msgstr "Pomiń wykonanie kopii zapa_sowej"
 
-#: ../common/BackendFile.vala:73
+#: ../common/BackendFile.vala:80
 msgid "GVFS FUSE is not installed"
 msgstr "FUSE dla biblioteki GVFS nie jest zainstalowane"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:87
+#: ../common/BackendFile.vala:95
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s w %2$s"
 
-#: ../common/BackendFile.vala:125
+#: ../common/BackendFile.vala:133
 #, c-format
 msgid "Backup will begin when %s becomes connected."
 msgstr "Wykonanie kopii zapasowej zostanie rozpoczęte po podłączeniu %s."
 
-#: ../common/BackendFile.vala:132 ../common/BackendS3.vala:51
+#: ../common/BackendFile.vala:140 ../common/BackendS3.vala:51
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "Wykonanie kopii zapasowej zostanie rozpoczęte po uzyskaniu dostępu do sieci."
@@ -646,42 +664,42 @@ msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Oczekiwanie na podłączenie \"%s\"…"
 
 #. Translators: %s is a folder.
-#: ../common/BackendS3.vala:129
+#: ../common/BackendS3.vala:124
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "%s w serwisie Amazon S3"
 
-#: ../common/BackendS3.vala:176
+#: ../common/BackendS3.vala:171
 msgid "Permission denied"
 msgstr "Brak uprawnień"
 
-#: ../common/BackendS3.vala:197
+#: ../common/BackendS3.vala:192
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr ""
 "Można zalogować się na konto serwisu Amazon S3 <a href=\"%s\">w sieci</a>."
 
-#: ../common/BackendS3.vala:198
+#: ../common/BackendS3.vala:193
 msgid "_Access key ID:"
 msgstr "Identyfik_ator klucza dostępu:"
 
-#: ../common/BackendS3.vala:199
+#: ../common/BackendS3.vala:194
 msgid "_Secret access key:"
 msgstr "Tajny klucz do_stępu:"
 
-#: ../common/BackendS3.vala:200
+#: ../common/BackendS3.vala:195
 msgid "S_how secret access key"
 msgstr "_Wyświetlanie tajnego hasła dostępu"
 
-#: ../common/BackendS3.vala:201
+#: ../common/BackendS3.vala:196
 msgid "_Remember secret access key"
 msgstr "_Zapamiętanie tajnego hasła dostępu"
 
-#: ../common/BackendS3.vala:203
+#: ../common/BackendS3.vala:198
 msgid "Enter Amazon S3 access key"
 msgstr "Proszę wprowadzić klucz dostępu serwisu Amazon S3"
 
-#: ../common/CommonUtils.vala:241
+#: ../common/CommonUtils.vala:222
 msgid "Unknown"
 msgstr "Nieznane"
 
@@ -725,20 +743,20 @@ msgstr ""
 "Program Déjà Dup wymaga co najmniej wersji %d.%d.%.2d programu duplicity, "
 "ale odnaleziono tylko wersję %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:114 ../common/Duplicity.vala:168
+#: ../common/Duplicity.vala:114 ../common/Duplicity.vala:166
 msgid "Paused (no network)"
 msgstr "Wstrzymano (brak sieci)"
 
-#: ../common/Duplicity.vala:277 ../common/Duplicity.vala:285
-#: ../common/Duplicity.vala:320 ../common/Operation.vala:95
+#: ../common/Duplicity.vala:275 ../common/Duplicity.vala:283
+#: ../common/Duplicity.vala:318 ../common/Operation.vala:95
 msgid "Preparing…"
 msgstr "Przygotowywanie…"
 
-#: ../common/Duplicity.vala:308
+#: ../common/Duplicity.vala:306
 msgid "Creating the first backup.  This may take a while."
 msgstr "Tworzenie pierwszej kopii zapasowej. Może to chwilę zająć."
 
-#: ../common/Duplicity.vala:310
+#: ../common/Duplicity.vala:308
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -747,40 +765,40 @@ msgstr ""
 "dłużej niż zwykle."
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:407
+#: ../common/Duplicity.vala:405
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Położenie dla kopii zapasowej jest za małe. Proszę spróbować użyć położenia "
 "z większą ilością miejsca."
 
-#: ../common/Duplicity.vala:428
+#: ../common/Duplicity.vala:426
 msgid "Backup location does not have enough free space."
 msgstr ""
 "Położenie dla kopii zapasowej nie posiada wystarczającej ilości wolnego "
 "miejsca."
 
-#: ../common/Duplicity.vala:448 ../common/Duplicity.vala:462
+#: ../common/Duplicity.vala:446 ../common/Duplicity.vala:460
 msgid "Cleaning up…"
 msgstr "Czyszczenie…"
 
-#: ../common/Duplicity.vala:554 ../common/Duplicity.vala:881
+#: ../common/Duplicity.vala:552 ../common/Duplicity.vala:879
 msgid "Failed with an unknown error."
 msgstr "Niepowodzenie, wystąpił nieznany błąd."
 
-#: ../common/Duplicity.vala:748
+#: ../common/Duplicity.vala:746
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Nie można przywrócić \"%s\": nie odnaleziono pliki w kopii zapasowej"
 
-#: ../common/Duplicity.vala:753 ../common/Duplicity.vala:832
+#: ../common/Duplicity.vala:751 ../common/Duplicity.vala:830
 msgid "Bad encryption password."
 msgstr "Błędne hasło szyfrowania."
 
-#: ../common/Duplicity.vala:758
+#: ../common/Duplicity.vala:756
 msgid "Computer name changed"
 msgstr "Zmieniono nazwę komputera"
 
-#: ../common/Duplicity.vala:758
+#: ../common/Duplicity.vala:756
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -791,68 +809,68 @@ msgstr ""
 "bieżąca nazwa komputera to %s. Jeśli tak nie powinno być, należy utworzyć "
 "kopię zapasową w innym położeniu."
 
-#: ../common/Duplicity.vala:771
+#: ../common/Duplicity.vala:769
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Odmówiono uprawnienia podczas próby utworzenia \"%s\"."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:775 ../common/Duplicity.vala:779
+#: ../common/Duplicity.vala:773 ../common/Duplicity.vala:777
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Odmówiono uprawnienia podczas próby odczytania \"%s\"."
 
-#: ../common/Duplicity.vala:783
+#: ../common/Duplicity.vala:781
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Odmówiono uprawnienia podczas próby usunięcia \"%s\"."
 
-#: ../common/Duplicity.vala:790
+#: ../common/Duplicity.vala:788
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Położenie kopii zapasowej \"%s\" nie istnieje."
 
-#: ../common/Duplicity.vala:796 ../common/Duplicity.vala:851
+#: ../common/Duplicity.vala:794 ../common/Duplicity.vala:849
 msgid "No space left."
 msgstr "Brak miejsca."
 
-#: ../common/Duplicity.vala:810
+#: ../common/Duplicity.vala:808
 msgid "Invalid ID."
 msgstr "Nieprawidłowy identyfikator."
 
-#: ../common/Duplicity.vala:812
+#: ../common/Duplicity.vala:810
 msgid "Invalid secret key."
 msgstr "Nieprawidłowy tajny klucz."
 
-#: ../common/Duplicity.vala:814
+#: ../common/Duplicity.vala:812
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Konto serwisu Amazon Web Services nie ma możliwości używania serwisu S3."
 
-#: ../common/Duplicity.vala:827
+#: ../common/Duplicity.vala:825
 msgid "S3 bucket name is not available."
 msgstr "Nazwa kosza serwisu S3 jest niedostępna."
 
-#: ../common/Duplicity.vala:836
+#: ../common/Duplicity.vala:834
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Błąd podczas odczytywania pliku \"%s\"."
 
-#: ../common/Duplicity.vala:838
+#: ../common/Duplicity.vala:836
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Błąd podczas zapisywania pliku \"%s\"."
 
-#: ../common/Duplicity.vala:853
+#: ../common/Duplicity.vala:851
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Brak miejsca w \"%s\"."
 
-#: ../common/Duplicity.vala:873
+#: ../common/Duplicity.vala:871
 msgid "No backup files found"
 msgstr "Nie odnaleziono żadnych plików kopii zapasowych"
 
-#: ../common/Duplicity.vala:909
+#: ../common/Duplicity.vala:907
 msgid "Uploading…"
 msgstr "Wysyłanie…"
 
@@ -878,11 +896,11 @@ msgstr "Nie można przywrócić %s: %s"
 msgid "Checking for backups…"
 msgstr "Sprawdzanie kopii zapasowych…"
 
-#: ../common/Operation.vala:210
+#: ../common/Operation.vala:205
 msgid "Another Déjà Dup is already running"
 msgstr "Inna kopia programu Déjà Dup jest już włączona"
 
-#: ../monitor/monitor.vala:230
+#: ../monitor/monitor.vala:213
 msgid "Scheduled backup delayed"
 msgstr "Opóźniono zaplanowane wykonanie kopii zapasowej"
 
@@ -899,11 +917,6 @@ msgid_plural "Restore files from backup"
 msgstr[0] "Przywróć plik z kopii zapasowej"
 msgstr[1] "Przywróć pliki z kopii zapasowej"
 msgstr[2] "Przywróć pliki z kopii zapasowej"
-
-#: ../preferences/PreferencesDialog.vala:41 ../preferences/preferences.vala:35
-#: ../preferences/preferences.vala:66
-msgid "Déjà Dup Preferences"
-msgstr "Preferencje programu Déjà Dup"
 
 #: ../preferences/PreferencesDialog.vala:105
 #, c-format
@@ -968,7 +981,7 @@ msgstr "Co najmniej rok"
 msgid "Forever"
 msgstr "Zawsze"
 
-#: ../widgets/ConfigDelete.vala:108
+#: ../widgets/ConfigDelete.vala:96
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -976,23 +989,23 @@ msgstr[0] "Co najmniej %d dzień"
 msgstr[1] "Co najmniej %d dni"
 msgstr[2] "Co najmniej %d dni"
 
-#: ../widgets/ConfigLabelBool.vala:36
+#: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
 msgstr "Tak"
 
-#: ../widgets/ConfigLabelBool.vala:36
+#: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
 msgstr "Nie"
 
-#: ../widgets/ConfigLabelList.vala:56 ../widgets/ConfigList.vala:118
+#: ../widgets/ConfigLabelList.vala:50 ../widgets/ConfigList.vala:112
 msgid "Home Folder"
 msgstr "Katalog domowy"
 
-#: ../widgets/ConfigLabelList.vala:58 ../widgets/ConfigList.vala:120
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:114
 msgid "Trash"
 msgstr "Kosz"
 
-#: ../widgets/ConfigLabelPolicy.vala:66
+#: ../widgets/ConfigLabelPolicy.vala:57
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
@@ -1000,7 +1013,7 @@ msgstr ""
 "Poprzednie kopie zapasowe będą trzymane co najmniej tydzień lub do czasu "
 "wyczerpania miejsca."
 
-#: ../widgets/ConfigLabelPolicy.vala:69
+#: ../widgets/ConfigLabelPolicy.vala:60
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
@@ -1008,7 +1021,7 @@ msgstr ""
 "Poprzednie kopie zapasowe będą trzymane co najmniej miesiąc lub do czasu "
 "wyczerpania miejsca."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:63
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
@@ -1016,7 +1029,7 @@ msgstr ""
 "Poprzednie kopie zapasowe będą trzymane co najmniej dwa miesiące lub do "
 "czasu wyczerpania miejsca."
 
-#: ../widgets/ConfigLabelPolicy.vala:75
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
@@ -1024,7 +1037,7 @@ msgstr ""
 "Poprzednie kopie zapasowe będą trzymane co najmniej kwartał lub do czasu "
 "wyczerpania miejsca."
 
-#: ../widgets/ConfigLabelPolicy.vala:78
+#: ../widgets/ConfigLabelPolicy.vala:69
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
@@ -1032,7 +1045,7 @@ msgstr ""
 "Poprzednie kopie zapasowe będą trzymane co najmniej pół roku lub do czasu "
 "wyczerpania miejsca."
 
-#: ../widgets/ConfigLabelPolicy.vala:81
+#: ../widgets/ConfigLabelPolicy.vala:72
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1040,12 +1053,12 @@ msgstr ""
 "Poprzednie kopie zapasowe będą trzymane co najmniej rok lub do czasu "
 "wyczerpania miejsca."
 
-#: ../widgets/ConfigLabelPolicy.vala:84
+#: ../widgets/ConfigLabelPolicy.vala:75
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Poprzednie kopie zapasowe będą trzymane do czasu wyczerpania miejsca."
 
-#: ../widgets/ConfigLabelPolicy.vala:87
+#: ../widgets/ConfigLabelPolicy.vala:78
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1063,7 +1076,7 @@ msgstr[2] ""
 "Poprzednie kopie zapasowe będą trzymane co najmniej %d dni lub do czasu "
 "wyczerpania miejsca."
 
-#: ../widgets/ConfigList.vala:157
+#: ../widgets/ConfigList.vala:151
 msgid "Choose folders"
 msgstr "Wybór katalogów"
 
@@ -1092,7 +1105,7 @@ msgstr "Co dwa tygodnie"
 msgid "Monthly"
 msgstr "Co miesiąc"
 
-#: ../widgets/ConfigPeriod.vala:96
+#: ../widgets/ConfigPeriod.vala:84
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1163,6 +1176,23 @@ msgstr ""
 #~ msgid "Directories to backup"
 #~ msgstr "Katalogi do kopiowania"
 
+#~ msgid "The type of backup location. Valid values are ‘s3’ or ‘file’."
+#~ msgstr ""
+#~ "Typ położenia kopii zapasowej. Prawidłowe wartości to \"s3\" lub \"file\"."
+
+#~ msgid ""
+#~ "This list of directories will not be backed up. Reserved values $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
+#~ "directories. Relative entries are relative to the user’s home directory. "
+#~ "This list takes precedence over the include list."
+#~ msgstr ""
+#~ "Lista katalogów, których kopie zapasowe nie będą wykonywane. Zastrzeżone "
+#~ "wartości $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, "
+#~ "$PUBLIC_SHARE, $TEMPLATES, $TRASH i $VIDEO są rozpoznawane jako specjalne "
+#~ "katalogi użytkownika. Ścieżki są względne do katalogu domowego użytkownika. "
+#~ "Ta lista jest przetwarzana przed listą dołączanych."
+
 #~ msgid "Whether to periodically backup"
 #~ msgstr "Określa, czy wykonywać kopię zapasową co określony czas"
 
@@ -1170,6 +1200,14 @@ msgstr ""
 #~ msgstr ""
 #~ "Określa, czy automatycznie wykonywać kopie zapasowe w regularnych odstępach "
 #~ "czasu."
+
+#~ msgid ""
+#~ "Whether the backup location is a mounted external volume or a normal folder. "
+#~ "Possible values are ‘volume’ or ‘normal’."
+#~ msgstr ""
+#~ "Określa, czy położenie kopii zapasowych jest zamontowanym woluminem "
+#~ "zewnętrznym, czy zwykłym katalogiem. Możliwe wartości to \"volume\" lub "
+#~ "\"normal\"."
 
 #~ msgctxt "backup is verb"
 #~ msgid "_Backup"

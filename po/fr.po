@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-13 20:17-0400\n"
-"PO-Revision-Date: 2010-07-07 08:45+0000\n"
-"Last-Translator: Ptitphysik <amalpeyre@gmail.com>\n"
+"POT-Creation-Date: 2010-07-23 20:57-0400\n"
+"PO-Revision-Date: 2010-07-25 17:17+0000\n"
+"Last-Translator: Emilien Klein <emilien+ubuntu@klein.st>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-07-08 03:51+0000\n"
+"X-Launchpad-Export-Date: 2010-07-26 04:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -44,13 +44,31 @@ msgstr "Outil de sauvegarde Déjà Dup"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:328
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:327
 msgid "Déjà Dup Monitor"
 msgstr "Planificateur Déjà Dup"
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
 msgid "Schedule backups at regular intervals"
 msgstr "Planifier des sauvegardes à intervalles réguliers"
+
+#: ../data/deja-dup-preferences.desktop.in.h:1
+msgid "Backup Preferences"
+msgstr "Préférences de sauvegarde"
+
+#: ../data/deja-dup-preferences.desktop.in.h:2
+msgid "Change your backup settings"
+msgstr "Modifiez votre configuration de sauvegarde"
+
+#: ../data/deja-dup-preferences.desktop.in.h:3
+msgid "Déjà Dup Backup Preferences"
+msgstr "Préférences de sauvegarde de Déjà Dup"
+
+#: ../data/deja-dup-preferences.desktop.in.h:4
+#: ../preferences/PreferencesDialog.vala:41 ../preferences/preferences.vala:35
+#: ../preferences/preferences.vala:66
+msgid "Déjà Dup Preferences"
+msgstr "Préférences de Déjà Dup"
 
 #: ../data/deja-dup.schemas.in.h:1
 msgid "Amazon S3 Access Key ID"
@@ -193,10 +211,10 @@ msgid ""
 "and $VIDEO are recognized as the user’s special directories. Relative "
 "entries are relative to the user’s home directory."
 msgstr ""
-"Cette liste de répertoire sera sauvegardée. Les répertoires $HOME, $DESKTOP, "
-"$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-"and $VIDEO sont reconnus comme les répertoires personnels de l'utilisateur. "
-"Ces répertoires sont relatifs au dossier home de l'utilisateur."
+"Les dossiers de cette liste seront sauvegardés. Les valeurs $HOME, $DESKTOP, "
+"$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH "
+"et $VIDEO sont reconnues en tant que dossiers personnels de l'utilisateur. "
+"Les chemins relatifs le sont par rapport au dossier racine de l'utilisateur."
 
 #: ../data/deja-dup.schemas.in.h:27
 msgid ""
@@ -206,6 +224,11 @@ msgid ""
 "directories. Relative entries are relative to the user’s home directory. "
 "This list takes precedence over the include list."
 msgstr ""
+"Les dossiers de cette liste ne seront pas sauvegardés. Les valeurs $HOME, "
+"$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+"$TEMPLATES, $TRASH et $VIDEO sont reconnues en tant que dossiers personnels "
+"de l'utilisateur. Les chemins relatifs le sont par rapport au dossier racine "
+"de l'utilisateur. Cette liste a priorité sur la liste d'inclusion."
 
 #: ../data/deja-dup.schemas.in.h:28
 msgid "Type of location to store backup"
@@ -220,10 +243,12 @@ msgid ""
 "Whether the backup location is a mounted external volume or a normal folder. "
 "Possible values are ‘volume’ or ‘normal’."
 msgstr ""
+"Si l'endroit de stockage de la sauvegarde est un volume externe monté ou un "
+"dossier normal. Les valeurs possibles sont ‘volume’ ou ‘normal’."
 
 #: ../data/deja-dup.schemas.in.h:31
 msgid "Whether to automatically back up on a regular schedule."
-msgstr ""
+msgstr "Si une sauvegarde automatique à intervalle régulier doit avoir lieu."
 
 #: ../data/deja-dup.schemas.in.h:32
 msgid "Whether to encrypt your backup"
@@ -234,20 +259,24 @@ msgid ""
 "Whether to encrypt your backup files in the storage location. It’s strongly "
 "recommended to leave this as ‘true’."
 msgstr ""
+"Si les fichiers de sauvegarde doivent être chiffrés dans l'endroit de "
+"stockage. Il est fortement recommandé de laisser ceci à ‘true’."
 
 #: ../data/deja-dup.schemas.in.h:34
 msgid "Whether to periodically back up"
-msgstr ""
+msgstr "Si une sauvegarde à intervalle régulier doit avoir lieu."
 
 #: ../data/deja-dup.schemas.in.h:35
 msgid "Whether to request the root password"
-msgstr ""
+msgstr "Si le mot de passe d'administrateur doit être requis"
 
 #: ../data/deja-dup.schemas.in.h:36
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
 msgstr ""
+"Si le mot de passe d'administrateur doit être requis lors de la sauvegarde "
+"ou de la restauration vers des dossiers système."
 
 #: ../data/deja-dup.schemas.in.h:37
 msgid ""
@@ -263,11 +292,11 @@ msgstr ""
 "Votre identifiant Access Key d'Amazon S3. Il fait office de nom "
 "d'utilisateur S3."
 
-#: ../deja-dup/Assistant.vala:281
+#: ../deja-dup/Assistant.vala:284
 msgid "Co_ntinue"
 msgstr "Co_ntinuer"
 
-#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:155
+#: ../deja-dup/Assistant.vala:319 ../deja-dup/StatusIcon.vala:155
 msgid "_Resume Later"
 msgstr "_Reprendre plus tard"
 
@@ -355,40 +384,40 @@ msgstr "Vos fichiers ont été sauvegardés avec succès."
 msgid "Backing up…"
 msgstr "Sauvegarde en cours…"
 
-#: ../deja-dup/AssistantOperation.vala:134
+#: ../deja-dup/AssistantOperation.vala:136
 msgid "Scanning:"
 msgstr "Analyse :"
 
-#: ../deja-dup/AssistantOperation.vala:135
+#: ../deja-dup/AssistantOperation.vala:137
 msgid "Scanning…"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:208
+#: ../deja-dup/AssistantOperation.vala:210
 msgid "_Details"
 msgstr "_Détails"
 
-#: ../deja-dup/AssistantOperation.vala:257
+#: ../deja-dup/AssistantOperation.vala:259
 msgid "E_ncryption password:"
 msgstr "_Mot de passe de chiffrement :"
 
-#: ../deja-dup/AssistantOperation.vala:266
+#: ../deja-dup/AssistantOperation.vala:268
 msgid "_Show password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:273
+#: ../deja-dup/AssistantOperation.vala:275
 #: ../deja-dup/MountOperationAssistant.vala:28
 msgid "_Remember password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:348
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Summary"
 msgstr "Résumé"
 
-#: ../deja-dup/AssistantOperation.vala:363
+#: ../deja-dup/AssistantOperation.vala:365
 msgid "Password needed"
 msgstr "Mot de passe requis"
 
-#: ../deja-dup/AssistantOperation.vala:578
+#: ../deja-dup/AssistantOperation.vala:590
 msgid "Déjà Dup backup passphrase"
 msgstr "Phrase secrète de la sauvegarde Déjà Dup"
 
@@ -486,7 +515,7 @@ msgstr[1] "Vos fichiers ont été récupérés avec succès."
 msgid "Restoring…"
 msgstr ""
 
-#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:33
+#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:32
 #: ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr "Afficher la version"
@@ -565,15 +594,15 @@ msgstr "Emplacement non disponible"
 msgid "This backup location requires authentication."
 msgstr "Cet emplacement de sauvegarde requiert une authentification."
 
-#: ../deja-dup/MountOperationAssistant.vala:136
+#: ../deja-dup/MountOperationAssistant.vala:138
 msgid "Connect _anonymously"
 msgstr "Se connecter _annonynement"
 
-#: ../deja-dup/MountOperationAssistant.vala:140
+#: ../deja-dup/MountOperationAssistant.vala:142
 msgid "Connect as u_ser:"
 msgstr "Se connecter en tant qu' _utilisateur;"
 
-#: ../deja-dup/MountOperationAssistant.vala:180
+#: ../deja-dup/MountOperationAssistant.vala:182
 msgid "_Domain:"
 msgstr "_Domaine :"
 
@@ -608,7 +637,7 @@ msgstr "GVFS FUSE n'est pas installé"
 #: ../common/BackendFile.vala:87
 #, c-format
 msgid "%1$s on %2$s"
-msgstr ""
+msgstr "%1$s dans %2$s"
 
 #: ../common/BackendFile.vala:125
 #, c-format
@@ -620,11 +649,11 @@ msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "La sauvegarde commencera lorsqu'une connexion réseau sera disponible."
 
-#: ../common/BackendFile.vala:367
+#: ../common/BackendFile.vala:351
 msgid "Backup location not available"
 msgstr "Destination de sauvegarde indisponible"
 
-#: ../common/BackendFile.vala:367
+#: ../common/BackendFile.vala:351
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr ""
@@ -725,15 +754,22 @@ msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
 msgstr ""
+"En train de créer une nouvelle sauvegarde afin de se protéger contre une "
+"éventuelle corruption de sauvegarde. Ceci prendra plus de temps que "
+"d'habitude."
 
 #. Tiny backup location.  Suggest they get a larger one.
 #: ../common/Duplicity.vala:407
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
+"L'endroit de stockage de la sauvegarde n'a pas assez d'espace. Veuillez "
+"utiliser un endroit avec plus d'espace disponible."
 
 #: ../common/Duplicity.vala:428
 msgid "Backup location does not have enough free space."
 msgstr ""
+"L'endroit de stockage de la sauvegarde n'a pas assez d'espace libre "
+"disponible."
 
 #: ../common/Duplicity.vala:448 ../common/Duplicity.vala:462
 msgid "Cleaning up…"
@@ -764,31 +800,34 @@ msgid ""
 "name is %s.  If this is unexpected, you should back up to a different "
 "location."
 msgstr ""
+"La sauvegarde existante a été faite pour un ordinateur appelé %s, mais le "
+"nom de l'ordinateur actuel est %s. Si vous ne vous attendiez pas à ceci, "
+"vous devriez enregistrer les sauvegardes à un autre endroit."
 
 #: ../common/Duplicity.vala:771
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
-msgstr ""
+msgstr "Permission refusée lors de la tentative de création de \"%s\"."
 
 #. assume error is on backend side
 #: ../common/Duplicity.vala:775 ../common/Duplicity.vala:779
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
-msgstr ""
+msgstr "Permission refusée lors de la tentative de lecture de \"%s\"."
 
 #: ../common/Duplicity.vala:783
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
-msgstr ""
+msgstr "Permission refusée lors de la tentative de suppression de \"%s\"."
 
 #: ../common/Duplicity.vala:790
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
-msgstr ""
+msgstr "L'endroit de stockage de la sauvegarde \"%s\" n'existe pas."
 
 #: ../common/Duplicity.vala:796 ../common/Duplicity.vala:851
 msgid "No space left."
-msgstr ""
+msgstr "Pas d'espace libre restant."
 
 #: ../common/Duplicity.vala:810
 msgid "Invalid ID."
@@ -820,7 +859,7 @@ msgstr "Erreur lors de l'écriture du fichier '%s'."
 #: ../common/Duplicity.vala:853
 #, c-format
 msgid "No space left in ‘%s’."
-msgstr ""
+msgstr "Pas d'espace libre restant dans \"%s\"."
 
 #: ../common/Duplicity.vala:873
 msgid "No backup files found"
@@ -856,9 +895,9 @@ msgstr "Recherche de sauvegardes…"
 msgid "Another Déjà Dup is already running"
 msgstr "Une autre instance de Déjà Dup est déjà en cours"
 
-#: ../monitor/monitor.vala:230
+#: ../monitor/monitor.vala:229
 msgid "Scheduled backup delayed"
-msgstr ""
+msgstr "Sauvegarde automatique planifiée retardée"
 
 #: ../nautilus/NautilusExtension.c:94
 msgid "Revert to Previous Version…"
@@ -872,11 +911,6 @@ msgid_plural "Restore files from backup"
 msgstr[0] "Restaurer le fichier de la sauvegarde"
 msgstr[1] "Restaurer les fichiers de la sauvegarde"
 
-#: ../preferences/PreferencesDialog.vala:41 ../preferences/preferences.vala:35
-#: ../preferences/preferences.vala:66
-msgid "Déjà Dup Preferences"
-msgstr "Préférences de Déjà Dup"
-
 #: ../preferences/PreferencesDialog.vala:105
 #, c-format
 msgid "S3 Access Key I_D:"
@@ -889,11 +923,11 @@ msgstr "_Dossier:"
 
 #: ../preferences/PreferencesDialog.vala:148
 msgid "Storage"
-msgstr ""
+msgstr "Stockage"
 
 #: ../preferences/PreferencesDialog.vala:198
 msgid "Files"
-msgstr ""
+msgstr "Fichiers"
 
 #: ../preferences/PreferencesDialog.vala:233
 #, c-format
@@ -902,7 +936,7 @@ msgstr "_Conserver les sauvegardes :"
 
 #: ../preferences/PreferencesDialog.vala:254
 msgid "Schedule"
-msgstr ""
+msgstr "Planification"
 
 #: ../widgets/ButtonConnect.vala:28
 msgid "Connect to _Server…"
@@ -968,40 +1002,56 @@ msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
 msgstr ""
+"Les anciennes sauvegardes seront gardées pour au moins une semaine, ou "
+"jusqu'à ce que l'endroit de stockage des sauvegardes ait peu d'espace libre "
+"restant."
 
 #: ../widgets/ConfigLabelPolicy.vala:69
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
 msgstr ""
+"Les anciennes sauvegardes seront gardées pour au moins un mois, ou jusqu'à "
+"ce que l'endroit de stockage des sauvegardes ait peu d'espace libre restant."
 
 #: ../widgets/ConfigLabelPolicy.vala:72
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
 msgstr ""
+"Les anciennes sauvegardes seront gardées pour au moins deux mois, ou jusqu'à "
+"ce que l'endroit de stockage des sauvegardes ait peu d'espace libre restant."
 
 #: ../widgets/ConfigLabelPolicy.vala:75
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
 msgstr ""
+"Les anciennes sauvegardes seront gardées pour au moins trois mois, ou "
+"jusqu'à ce que l'endroit de stockage des sauvegardes ait peu d'espace libre "
+"restant."
 
 #: ../widgets/ConfigLabelPolicy.vala:78
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
+"Les anciennes sauvegardes seront gardées pour au moins six mois, ou jusqu'à "
+"ce que l'endroit de stockage des sauvegardes ait peu d'espace libre restant."
 
 #: ../widgets/ConfigLabelPolicy.vala:81
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 msgstr ""
+"Les anciennes sauvegardes seront gardées pour au moins un an, ou jusqu'à ce "
+"que l'endroit de stockage des sauvegardes ait peu d'espace libre restant."
 
 #: ../widgets/ConfigLabelPolicy.vala:84
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
+"Les anciennes sauvegardes seront gardées jusqu'à ce que l'endroit de "
+"stockage des sauvegardes ait peu d'espace libre restant."
 
 #: ../widgets/ConfigLabelPolicy.vala:87
 #, c-format
@@ -1012,7 +1062,11 @@ msgid_plural ""
 "Old backups will be kept at least %d days or until the backup location is "
 "low on space."
 msgstr[0] ""
+"Les anciennes sauvegardes seront gardées pour au moins %d jour, ou jusqu'à "
+"ce que l'endroit de stockage des sauvegardes ait peu d'espace libre restant."
 msgstr[1] ""
+"Les anciennes sauvegardes seront gardées pour au moins %d jours, ou jusqu'à "
+"ce que l'endroit de stockage des sauvegardes ait peu d'espace libre restant."
 
 #: ../widgets/ConfigList.vala:157
 msgid "Choose folders"
@@ -1065,6 +1119,7 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Anthony Guéchoum https://launchpad.net/~athael\n"
 "  Arnaud Bonatti https://launchpad.net/~arnaud.bonatti\n"
+"  Emilien Klein https://launchpad.net/~emilien-klein\n"
 "  François Blondel https://launchpad.net/~francoisblondel\n"
 "  Georges Dubus https://launchpad.net/~madjar\n"
 "  Guillaume Lanquepin https://launchpad.net/~guyomel\n"
