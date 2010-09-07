@@ -49,7 +49,7 @@ public class OperationRestore : Operation
            mode: Mode.RESTORE);
   }
   
-  public override void start() throws Error
+  public async override void start() throws Error
   {
     action_desc_changed(_("Restoring files…"));
     dup.restore_files = restore_files;
@@ -74,7 +74,7 @@ public class OperationRestore : Operation
     return argv;
   }
   
-  protected override void operation_finished(Duplicity dup, bool success, bool cancelled)
+  protected async override void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
     if (success) {
       fixup_home_dir();

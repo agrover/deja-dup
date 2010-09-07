@@ -32,6 +32,11 @@ public const string PERIODIC_KEY = "/apps/deja-dup/periodic";
 public const string PERIODIC_PERIOD_KEY = "/apps/deja-dup/periodic-period";
 public const string DELETE_AFTER_KEY = "/apps/deja-dup/delete-after";
 
+public errordomain BackupError {
+  BAD_CONFIG,
+  ALREADY_RUNNING
+}
+
 public void update_last_run_timestamp() throws Error
 {
   TimeVal cur_time = TimeVal();

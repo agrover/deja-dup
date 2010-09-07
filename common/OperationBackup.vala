@@ -22,17 +22,13 @@ using GLib;
 
 namespace DejaDup {
 
-public errordomain BackupError {
-  BAD_CONFIG
-}
-
 public class OperationBackup : Operation
 {
   public OperationBackup(uint xid = 0) {
     Object(xid: xid, mode: Mode.BACKUP);
   }
   
-  protected override void operation_finished(Duplicity dup, bool success, bool cancelled)
+  protected async override void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
     if (success) {
       try {DejaDup.update_last_run_timestamp();}

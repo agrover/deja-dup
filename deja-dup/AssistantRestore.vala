@@ -366,7 +366,7 @@ public class AssistantRestore : AssistantOperation
     return true;
   }
   
-  protected void do_query()
+  protected async void do_query()
   {
     if (mount_op == null)
       mount_op = new MountOperationAssistant(this);
@@ -383,7 +383,7 @@ public class AssistantRestore : AssistantOperation
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
     
     try {
-      query_op.start();
+      yield query_op.start();
     }
     catch (Error e) {
       warning("%s\n", e.message);

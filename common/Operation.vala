@@ -92,7 +92,7 @@ public abstract class Operation : Object
     }
   }
   
-  public virtual void start() throws Error
+  public async virtual void start() throws Error
   {
     action_desc_changed(_("Preparing…"));
 
@@ -103,11 +103,8 @@ public abstract class Operation : Object
     
     connect_to_dup();
     
-    if (!claim_bus(true)) {
-      done(false, false);
-      return;
-    }
-    set_session_inhibited(true);
+    claim_bus();
+    yield set_session_inhibited(true);
     
     // Get encryption passphrase if needed
     var client = get_gconf_client();
@@ -131,7 +128,7 @@ public abstract class Operation : Object
   
   protected virtual void connect_to_dup()
   {
-    dup.done.connect(operation_finished);
+    dup.done.connect((d, o, c) => {operation_finished(d, o, c);});
     dup.raise_error.connect((d, s, detail) => {raise_error(s, detail);});
     dup.action_desc_changed.connect((d, s) => {action_desc_changed(s);});
     dup.action_file_changed.connect((d, f, b) => {action_file_changed(f, b);});
@@ -181,10 +178,10 @@ public abstract class Operation : Object
     }
   }
   
-  protected virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
+  protected async virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
-    set_session_inhibited(false);
-    claim_bus(false);
+    yield set_session_inhibited(false);
+    unclaim_bus();
     
     if (success && passphrase == "") {
       // User entered no password.  Turn off encryption
@@ -206,21 +203,22 @@ public abstract class Operation : Object
   }
   
   uint bus_id = 0;
-  bool claim_bus(bool claimed)
+  void claim_bus() throws BackupError
   {
-    if (claimed) {
-      bus_id = Bus.own_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
-                            BusNameOwnerFlags.NONE, ()=>{}, ()=>{}, ()=>{});
-      if (bus_id == 0) {
-        raise_error(_("Another Déjà Dup is already running"), null);
-        return false;
-      }
-    }
-    else {
-      Bus.unown_name(bus_id);
-    }
-    
-    return true;
+    bool rv = false;
+    var loop = new MainLoop();
+    bus_id = Bus.own_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
+                          BusNameOwnerFlags.NONE, ()=>{},
+                          ()=>{rv = true; loop.quit();},
+                          ()=>{rv = false; loop.quit();});
+    loop.run();
+    if (bus_id == 0 || rv == false)
+      throw new BackupError.ALREADY_RUNNING(_("Another Déjà Dup is already running"));
+  }
+
+  void unclaim_bus()
+  {
+    Bus.unown_name(bus_id);
   }
   
   uint inhibit_cookie = 0;

@@ -401,7 +401,7 @@ public abstract class AssistantOperation : Assistant
     }
   }
   
-  void do_apply()
+  async void do_apply()
   {
     if (mount_op == null)
       mount_op = new MountOperationAssistant(this);
@@ -423,7 +423,7 @@ public abstract class AssistantOperation : Assistant
     status_icon.hide_all.connect((s) => {hide_everything();});
 
     try {
-      op.start();
+      yield op.start();
     }
     catch (Error e) {
       warning("%s\n", e.message);
