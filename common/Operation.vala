@@ -138,12 +138,12 @@ public abstract class Operation : Object
     backend.envp_ready.connect(continue_with_envp);
   }
   
-  public void continue_with_passphrase(string? passphrase)
+  public async void continue_with_passphrase(string? passphrase)
   {
     needs_password = false;
     this.passphrase = passphrase;
     try {
-      backend.get_envp();
+      yield backend.get_envp();
     }
     catch (Error e) {
       raise_error(e.message, null);
