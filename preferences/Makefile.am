@@ -28,7 +28,6 @@ VALA_CFLAGS = \
 	--pkg gconf-2.0 \
 	--pkg libcommon \
 	--pkg libwidgets \
-	--pkg dbus-glib-1 \
 	--pkg unix \
 	--pkg config
 
