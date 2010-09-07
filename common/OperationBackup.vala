@@ -60,6 +60,10 @@ public class OperationBackup : Operation
         list.prepend(parent_dir.resolve_relative_path(symlink_target));
       }
     }
+    catch (IOError.NOT_FOUND e) {
+      // Don't bother adding this file to any list
+      return;
+    }
     catch (Error e) {
       warning("%s\n", e.message);
     }

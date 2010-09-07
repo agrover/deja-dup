@@ -170,11 +170,13 @@ public class Duplicity : Object
     }
   }
 
-  int cmp_prefix(File a, File b)
+  int cmp_prefix(File? a, File? b)
   {
-    if (a.has_prefix(b))
+    if (a == null && b == null)
+      return 0;
+    else if (b == null || a.has_prefix(b))
       return -1;
-    else if (b.has_prefix(a))
+    else if (a == null || b.has_prefix(a))
       return 1;
     else
       return 0;
