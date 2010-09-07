@@ -133,6 +133,7 @@ AC_SUBST(WIDGETS_CFLAGS)
 AC_SUBST(WIDGETS_LIBS)
 
 PKG_CHECK_MODULES(MONITOR,
+                  $GTK_MODULE >= $GTK_REQ_VER
                   gconf-2.0
                   gio-2.0 >= $GIO_REQ_VER
                   libnotify)
