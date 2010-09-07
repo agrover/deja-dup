@@ -58,22 +58,32 @@ public class NetworkManager : Object
                                     "org.freedesktop.NetworkManager", null);
 
     // Retrieve the network manager connection state.
-    uint32 nm_state = nm.get_cached_property("State").get_uint32();
+    Variant state_val = nm.get_cached_property("State");
+    if (!state_val.is_of_type(VariantType.UINT32)) {
+      // Proxy seems invalid; maybe no NM running?
+      return;
+    }
+
+    uint32 nm_state = state_val.get_uint32();
     connected = nm_state == NM_STATE_CONNECTED;
 
     // Dbus signal when the state of the connection is changed.
-    nm.g_properties_changed.connect(nm_prop_changed);
+    nm.g_signal.connect(nm_signal);
   }
 
-  void nm_prop_changed(GLib.Variant changed_properties,
-                       string[] invalidated_properties)
+  void nm_signal(string sender_name, string signal_name, GLib.Variant parameters)
   {
-    bool was_connected = connected;
-    uint32 nm_state = nm.get_cached_property("State").get_uint32();
-    connected = nm_state == NM_STATE_CONNECTED;
+    if (signal_name == "StateChanged") {
+      bool was_connected = connected;
 
-    if (was_connected != connected)
-      changed(connected);
+      uint32 nm_state;
+      parameters.get("(u)", out nm_state);
+
+      connected = nm_state == NM_STATE_CONNECTED;
+
+      if (was_connected != connected)
+        changed(connected);
+    }
   }
 }
 
