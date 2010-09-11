@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>,
+    © 2008–2010 Michael Terry <mike@mterry.name>,
     © 2009 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
@@ -106,9 +106,9 @@ public class Duplicity : Object
   
   File last_touched_file = null;
 
-  void network_changed(NetworkManager nm, bool connected)
+  void network_changed()
   {
-    if (connected)
+    if (Network.get().connected)
       resume();
     else
       pause(_("Paused (no network)"));
@@ -162,8 +162,8 @@ public class Duplicity : Object
       done(false, false);
 
     if (!backend.is_native()) {
-      NetworkManager.get().changed.connect(network_changed);
-      if (!NetworkManager.get().connected) {
+      Network.get().notify["connected"].connect(network_changed);
+      if (!Network.get().connected) {
         debug("No connection found. Postponing the backup.");
         pause(_("Paused (no network)"));
       }

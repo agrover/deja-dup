@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>,
+    © 2008–2010 Michael Terry <mike@mterry.name>,
     © 2009 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
@@ -47,10 +47,10 @@ static void op_ended(DBusConnection conn, string name)
   op_active = false;
 }
 
-static void network_changed(DejaDup.NetworkManager nm, bool connected)
+static void network_changed()
 {
   reactive_check = true;
-  if (connected)
+  if (DejaDup.Network.get().connected)
     prepare_next_run(); // in case network manager was blocking us
   reactive_check = false;
 }
@@ -351,7 +351,7 @@ static int main(string[] args)
     return status;
 
   DejaDup.initialize();
-  DejaDup.NetworkManager.get().changed.connect(network_changed);
+  DejaDup.Network.get().notify["connected"].connect(network_changed);
 
   Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
                  BusNameWatcherFlags.NONE, op_started, op_ended);
@@ -362,7 +362,7 @@ static int main(string[] args)
 
   var loop = new MainLoop(null, false);
 
-  // Delay first check to give NetworkManager a chance to start up.
+  // Delay first check to give the network a chance to start up.
   if (testing)
     prepare_next_run();
   else

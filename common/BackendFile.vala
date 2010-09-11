@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -130,7 +130,7 @@ public class BackendFile : Backend
         return true;
       else {
         when = _("Backup will begin when a network connection becomes available.");
-        return NetworkManager.get().connected;
+        return Network.get().connected;
       }
     }
     catch (Error e) {
