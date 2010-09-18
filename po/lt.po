@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-07-23 20:57-0400\n"
-"PO-Revision-Date: 2010-08-04 16:07+0000\n"
+"POT-Creation-Date: 2010-09-11 14:50-0400\n"
+"PO-Revision-Date: 2010-09-11 19:47+0000\n"
 "Last-Translator: Aurimas Fišeras <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-08-05 03:36+0000\n"
+"X-Launchpad-Export-Date: 2010-09-12 05:01+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -45,7 +45,7 @@ msgstr "Déjà Dup atsarginių kopijų įrankis"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:327
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:338
 msgid "Déjà Dup Monitor"
 msgstr "Déjà Dup monitorius"
 
@@ -513,7 +513,7 @@ msgstr[2] "Jūsų failai sėkmingai atkurti."
 msgid "Restoring…"
 msgstr "Atkuriama..."
 
-#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:32
+#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:33
 #: ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr "Rodyti versiją"
@@ -690,15 +690,15 @@ msgstr "Įsi_minti slaptą prieigos raktą"
 msgid "Enter Amazon S3 access key"
 msgstr "Įveskite Amazon S3 prieigos raktą"
 
-#: ../common/CommonUtils.vala:241
+#: ../common/CommonUtils.vala:195
 msgid "Unknown"
 msgstr "Nežinoma"
 
-#: ../common/DuplicityInfo.vala:141
+#: ../common/DuplicityInfo.vala:143
 msgid "Could not run duplicity"
 msgstr "Nepavyko paleisiti duplicity"
 
-#: ../common/DuplicityInfo.vala:146
+#: ../common/DuplicityInfo.vala:148
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -706,7 +706,7 @@ msgstr ""
 "Nepavyko suprasti duplicity versijos.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:148
+#: ../common/DuplicityInfo.vala:150
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -715,15 +715,15 @@ msgstr ""
 "Nepavyko suprasti duplicity versijos „%s“.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:150
+#: ../common/DuplicityInfo.vala:152
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr "Déjà Dup negali funkcionuoti be duplicity. Déjà Dup užsidarys."
 
-#: ../common/DuplicityInfo.vala:154
+#: ../common/DuplicityInfo.vala:156
 msgid "Duplicity’s version is too old"
 msgstr "Duplicity versija yra per sena"
 
-#: ../common/DuplicityInfo.vala:155
+#: ../common/DuplicityInfo.vala:157
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -736,16 +736,17 @@ msgstr ""
 msgid "Paused (no network)"
 msgstr "Pristabdyta (nėra tinklo)"
 
-#: ../common/Duplicity.vala:277 ../common/Duplicity.vala:285
-#: ../common/Duplicity.vala:320 ../common/Operation.vala:95
+#: ../common/Duplicity.vala:279 ../common/Duplicity.vala:287
+#: ../common/Duplicity.vala:322 ../common/Operation.vala:60
+#: ../common/Operation.vala:97
 msgid "Preparing…"
 msgstr "Ruošiamasi..."
 
-#: ../common/Duplicity.vala:308
+#: ../common/Duplicity.vala:310
 msgid "Creating the first backup.  This may take a while."
 msgstr "Kuriama pirma atsarginė kopija. Tai gali užtrukti."
 
-#: ../common/Duplicity.vala:310
+#: ../common/Duplicity.vala:312
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -754,36 +755,36 @@ msgstr ""
 "sugadinimo. Tai užtruks ilgiau nei paprastai."
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:407
+#: ../common/Duplicity.vala:409
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "Atsarginės kopijos vieta per maža. Mėginkite naudoti kitą vietą."
 
-#: ../common/Duplicity.vala:428
+#: ../common/Duplicity.vala:430
 msgid "Backup location does not have enough free space."
 msgstr "Atsarginės kopijos vieta turi nepakankamai laisvos vietos."
 
-#: ../common/Duplicity.vala:448 ../common/Duplicity.vala:462
+#: ../common/Duplicity.vala:450 ../common/Duplicity.vala:464
 msgid "Cleaning up…"
 msgstr "Tvarkomasi..."
 
-#: ../common/Duplicity.vala:554 ../common/Duplicity.vala:881
+#: ../common/Duplicity.vala:556 ../common/Duplicity.vala:883
 msgid "Failed with an unknown error."
 msgstr "Nepavyko su nežinoma klaida."
 
-#: ../common/Duplicity.vala:748
+#: ../common/Duplicity.vala:750
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Nepavyko atkurti „%s“: failas nerastas atsarginėje kopijoje"
 
-#: ../common/Duplicity.vala:753 ../common/Duplicity.vala:832
+#: ../common/Duplicity.vala:755 ../common/Duplicity.vala:834
 msgid "Bad encryption password."
 msgstr "Blogas užšifravimo slaptažodis."
 
-#: ../common/Duplicity.vala:758
+#: ../common/Duplicity.vala:760
 msgid "Computer name changed"
 msgstr "Kompiuterio vardas pasikeitė"
 
-#: ../common/Duplicity.vala:758
+#: ../common/Duplicity.vala:760
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -794,67 +795,67 @@ msgstr ""
 "kompiuterio vardas yra %s. Jei tai yra netikėta, turėtumėte daryti atsarginę "
 "kopiją į kitą vietą."
 
-#: ../common/Duplicity.vala:771
+#: ../common/Duplicity.vala:773
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Leidimas nesuteiktas mėginant sukurti „%s“."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:775 ../common/Duplicity.vala:779
+#: ../common/Duplicity.vala:777 ../common/Duplicity.vala:781
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Leidimas nesuteiktas mėginant perskaityti „%s“."
 
-#: ../common/Duplicity.vala:783
+#: ../common/Duplicity.vala:785
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Leidimas nesuteiktas mėginant pašalinti „%s“."
 
-#: ../common/Duplicity.vala:790
+#: ../common/Duplicity.vala:792
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Atsarginės kopijos vieta „%s“ neegzistuoja."
 
-#: ../common/Duplicity.vala:796 ../common/Duplicity.vala:851
+#: ../common/Duplicity.vala:798 ../common/Duplicity.vala:853
 msgid "No space left."
 msgstr "Neliko vietos."
 
-#: ../common/Duplicity.vala:810
+#: ../common/Duplicity.vala:812
 msgid "Invalid ID."
 msgstr "Neteisingas identifikatorius."
 
-#: ../common/Duplicity.vala:812
+#: ../common/Duplicity.vala:814
 msgid "Invalid secret key."
 msgstr "Neteisingas slaptas raktas."
 
-#: ../common/Duplicity.vala:814
+#: ../common/Duplicity.vala:816
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Jūsų Amazon Web Services paskyroje nėra užregistruota S3 paslauga."
 
-#: ../common/Duplicity.vala:827
+#: ../common/Duplicity.vala:829
 msgid "S3 bucket name is not available."
 msgstr "S3 kaušo vardas neprieinamas."
 
-#: ../common/Duplicity.vala:836
+#: ../common/Duplicity.vala:838
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Klaida skaitant failą „%s“."
 
-#: ../common/Duplicity.vala:838
+#: ../common/Duplicity.vala:840
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Klaida rašant failą „%s“."
 
-#: ../common/Duplicity.vala:853
+#: ../common/Duplicity.vala:855
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Neliko vietos „%s“."
 
-#: ../common/Duplicity.vala:873
+#: ../common/Duplicity.vala:875
 msgid "No backup files found"
 msgstr "Nerastas nė vienas atsarginės kopijos failas"
 
-#: ../common/Duplicity.vala:909
+#: ../common/Duplicity.vala:911
 msgid "Uploading…"
 msgstr "Išsiunčiama..."
 
@@ -880,11 +881,15 @@ msgstr "Nepavyko atkurti %s: %s"
 msgid "Checking for backups…"
 msgstr "Ieškoma atsarginių kopijų..."
 
-#: ../common/Operation.vala:210
+#: ../common/Operation.vala:58
+msgid "Listing files…"
+msgstr "Gaunamas failų sąrašas..."
+
+#: ../common/Operation.vala:216
 msgid "Another Déjà Dup is already running"
 msgstr "Déjà Dup jau paleistas"
 
-#: ../monitor/monitor.vala:229
+#: ../monitor/monitor.vala:240
 msgid "Scheduled backup delayed"
 msgstr "Suplanuotas atsarginės kopijos darymas uždelstas"
 
@@ -989,7 +994,7 @@ msgstr "Asmeninis aplankas"
 msgid "Trash"
 msgstr "Šiukšlinė"
 
-#: ../widgets/ConfigLabelPolicy.vala:66
+#: ../widgets/ConfigLabelPolicy.vala:71
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
@@ -997,7 +1002,7 @@ msgstr ""
 "Senos atsarginės kopijos bus saugomos mažiausiai savaitę arba kol atsarginės "
 "kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigLabelPolicy.vala:69
+#: ../widgets/ConfigLabelPolicy.vala:74
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
@@ -1005,7 +1010,7 @@ msgstr ""
 "Senos atsarginės kopijos bus saugomos mažiausiai mėnesį arba kol atsarginės "
 "kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:77
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
@@ -1013,7 +1018,7 @@ msgstr ""
 "Senos atsarginės kopijos bus saugomos mažiausiai du mėnesius arba kol "
 "atsarginės kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigLabelPolicy.vala:75
+#: ../widgets/ConfigLabelPolicy.vala:80
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
@@ -1021,7 +1026,7 @@ msgstr ""
 "Senos atsarginės kopijos bus saugomos mažiausiai tris mėnesius arba kol "
 "atsarginės kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigLabelPolicy.vala:78
+#: ../widgets/ConfigLabelPolicy.vala:83
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
@@ -1029,7 +1034,7 @@ msgstr ""
 "Senos atsarginės kopijos bus saugomos mažiausiai šešis mėnesius arba kol "
 "atsarginės kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigLabelPolicy.vala:81
+#: ../widgets/ConfigLabelPolicy.vala:86
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1037,13 +1042,13 @@ msgstr ""
 "Senos atsarginės kopijos bus saugomos mažiausiai metus arba kol atsarginės "
 "kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigLabelPolicy.vala:84
+#: ../widgets/ConfigLabelPolicy.vala:89
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Senos atsarginės kopijos bus saugomos kol atsarginės kopijos vietoje liks "
 "mažai vietos."
 
-#: ../widgets/ConfigLabelPolicy.vala:87
+#: ../widgets/ConfigLabelPolicy.vala:92
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
