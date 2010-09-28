@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-07-23 20:57-0400\n"
-"PO-Revision-Date: 2010-09-08 02:46+0000\n"
+"POT-Creation-Date: 2010-09-11 14:50-0400\n"
+"PO-Revision-Date: 2010-09-18 18:03+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Traditional Chinese <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-09-09 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-09-19 05:29+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -44,7 +44,7 @@ msgstr "Déjà Dup 備份工具"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:327
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:338
 msgid "Déjà Dup Monitor"
 msgstr "Déjà Dup 守護者"
 
@@ -482,7 +482,7 @@ msgstr[0] "您的檔案已成功還原。"
 msgid "Restoring…"
 msgstr "正在還原..."
 
-#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:32
+#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:33
 #: ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr "顯示版本"
@@ -659,15 +659,15 @@ msgstr "記住秘密存取金鑰(_R)"
 msgid "Enter Amazon S3 access key"
 msgstr "輸入 Amazon S3 存取金鑰"
 
-#: ../common/CommonUtils.vala:241
+#: ../common/CommonUtils.vala:195
 msgid "Unknown"
 msgstr "未知"
 
-#: ../common/DuplicityInfo.vala:141
+#: ../common/DuplicityInfo.vala:143
 msgid "Could not run duplicity"
 msgstr "無法執行 duplicity"
 
-#: ../common/DuplicityInfo.vala:146
+#: ../common/DuplicityInfo.vala:148
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -675,7 +675,7 @@ msgstr ""
 "無法得知 duplicity 版本。\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:148
+#: ../common/DuplicityInfo.vala:150
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -684,15 +684,15 @@ msgstr ""
 "無法得知 duplicity 版本「%s」。\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:150
+#: ../common/DuplicityInfo.vala:152
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr "若沒有 duplicity，Déjà Dup 則無法運作。現在將關閉。"
 
-#: ../common/DuplicityInfo.vala:154
+#: ../common/DuplicityInfo.vala:156
 msgid "Duplicity’s version is too old"
 msgstr "Duplicity 的版本過舊"
 
-#: ../common/DuplicityInfo.vala:155
+#: ../common/DuplicityInfo.vala:157
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -703,52 +703,53 @@ msgstr "Déjà Dup 需要至少 %d.%d.%.2d 版的 duplicity，但只找到 %d.%d
 msgid "Paused (no network)"
 msgstr "已暫停 (無網路)"
 
-#: ../common/Duplicity.vala:277 ../common/Duplicity.vala:285
-#: ../common/Duplicity.vala:320 ../common/Operation.vala:95
+#: ../common/Duplicity.vala:279 ../common/Duplicity.vala:287
+#: ../common/Duplicity.vala:322 ../common/Operation.vala:60
+#: ../common/Operation.vala:97
 msgid "Preparing…"
 msgstr "正在準備..."
 
-#: ../common/Duplicity.vala:308
+#: ../common/Duplicity.vala:310
 msgid "Creating the first backup.  This may take a while."
 msgstr "正在建立第一份備份。這會花上一些時間。"
 
-#: ../common/Duplicity.vala:310
+#: ../common/Duplicity.vala:312
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
 msgstr "正在建立新鮮備份以保護備份免於損壞。這會比一般情況花上更多時間。"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:407
+#: ../common/Duplicity.vala:409
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "備份位置空間太小。請嘗試使用有更多空間的位置。"
 
-#: ../common/Duplicity.vala:428
+#: ../common/Duplicity.vala:430
 msgid "Backup location does not have enough free space."
 msgstr "備份位置沒有足夠可用空間。"
 
-#: ../common/Duplicity.vala:448 ../common/Duplicity.vala:462
+#: ../common/Duplicity.vala:450 ../common/Duplicity.vala:464
 msgid "Cleaning up…"
 msgstr "正在清理..."
 
-#: ../common/Duplicity.vala:554 ../common/Duplicity.vala:881
+#: ../common/Duplicity.vala:556 ../common/Duplicity.vala:883
 msgid "Failed with an unknown error."
 msgstr "失敗伴隨未知錯誤。"
 
-#: ../common/Duplicity.vala:748
+#: ../common/Duplicity.vala:750
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "無法還原「%s」：在備份內找不到檔案"
 
-#: ../common/Duplicity.vala:753 ../common/Duplicity.vala:832
+#: ../common/Duplicity.vala:755 ../common/Duplicity.vala:834
 msgid "Bad encryption password."
 msgstr "不良的加密密碼。"
 
-#: ../common/Duplicity.vala:758
+#: ../common/Duplicity.vala:760
 msgid "Computer name changed"
 msgstr "電腦名稱已變更"
 
-#: ../common/Duplicity.vala:758
+#: ../common/Duplicity.vala:760
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -756,67 +757,67 @@ msgid ""
 "location."
 msgstr "現存的備份其電腦名稱為 %s，但是目前的電腦名稱為 %s。若這是您未預期的問題，建議您應該備份至不同位置。"
 
-#: ../common/Duplicity.vala:771
+#: ../common/Duplicity.vala:773
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "當嘗試建立「%s」時不被許可。"
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:775 ../common/Duplicity.vala:779
+#: ../common/Duplicity.vala:777 ../common/Duplicity.vala:781
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "當嘗試讀取「%s」時不被許可。"
 
-#: ../common/Duplicity.vala:783
+#: ../common/Duplicity.vala:785
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "當嘗試刪除「%s」時不被許可。"
 
-#: ../common/Duplicity.vala:790
+#: ../common/Duplicity.vala:792
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "備份位置「%s」不存在。"
 
-#: ../common/Duplicity.vala:796 ../common/Duplicity.vala:851
+#: ../common/Duplicity.vala:798 ../common/Duplicity.vala:853
 msgid "No space left."
 msgstr "沒有剩餘空間。"
 
-#: ../common/Duplicity.vala:810
+#: ../common/Duplicity.vala:812
 msgid "Invalid ID."
 msgstr "無效的 ID。"
 
-#: ../common/Duplicity.vala:812
+#: ../common/Duplicity.vala:814
 msgid "Invalid secret key."
 msgstr "無效的秘密金鑰。"
 
-#: ../common/Duplicity.vala:814
+#: ../common/Duplicity.vala:816
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "您的 Amazon 網路服務帳號未登入 S3 服務。"
 
-#: ../common/Duplicity.vala:827
+#: ../common/Duplicity.vala:829
 msgid "S3 bucket name is not available."
 msgstr "S3 bucket 名稱不可用。"
 
-#: ../common/Duplicity.vala:836
+#: ../common/Duplicity.vala:838
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "讀取檔案發生錯誤「%s」。"
 
-#: ../common/Duplicity.vala:838
+#: ../common/Duplicity.vala:840
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "寫入檔案「%s」發生錯誤。"
 
-#: ../common/Duplicity.vala:853
+#: ../common/Duplicity.vala:855
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "「%s」內沒有剩餘空間。"
 
-#: ../common/Duplicity.vala:873
+#: ../common/Duplicity.vala:875
 msgid "No backup files found"
 msgstr "找不到備份檔案"
 
-#: ../common/Duplicity.vala:909
+#: ../common/Duplicity.vala:911
 msgid "Uploading…"
 msgstr "正在上傳..."
 
@@ -840,11 +841,15 @@ msgstr "無法還原 %s：%s"
 msgid "Checking for backups…"
 msgstr "正在檢查備份..."
 
-#: ../common/Operation.vala:210
+#: ../common/Operation.vala:58
+msgid "Listing files…"
+msgstr ""
+
+#: ../common/Operation.vala:216
 msgid "Another Déjà Dup is already running"
 msgstr "另一個 Déjà Dup 已經在執行中"
 
-#: ../monitor/monitor.vala:229
+#: ../monitor/monitor.vala:240
 msgid "Scheduled backup delayed"
 msgstr "排定的備份已延遲"
 
@@ -943,47 +948,47 @@ msgstr "家資料夾"
 msgid "Trash"
 msgstr "回收筒"
 
-#: ../widgets/ConfigLabelPolicy.vala:66
+#: ../widgets/ConfigLabelPolicy.vala:71
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
 msgstr "陳舊的備份將保留至少一週，或是直到備份位置空間低落為止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:69
+#: ../widgets/ConfigLabelPolicy.vala:74
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
 msgstr "陳舊的備份將保留至少一個月，或是直到備份位置空間低落為止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:77
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
 msgstr "陳舊的備份將保留至少兩個月，或是直到備份位置空間低落為止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:75
+#: ../widgets/ConfigLabelPolicy.vala:80
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
 msgstr "陳舊的備份將保留至少三個月，或是直到備份位置空間低落為止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:78
+#: ../widgets/ConfigLabelPolicy.vala:83
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr "陳舊的備份將保留至少六個月，或是直到備份位置空間低落為止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:81
+#: ../widgets/ConfigLabelPolicy.vala:86
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 msgstr "陳舊的備份將保留至少一年，或是直到備份位置空間低落為止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:84
+#: ../widgets/ConfigLabelPolicy.vala:89
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr "陳舊的備份將保留到備份位置空間低落為止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:87
+#: ../widgets/ConfigLabelPolicy.vala:92
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "

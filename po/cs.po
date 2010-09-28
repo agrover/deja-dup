@@ -7,24 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2009-10-09 10:43-0400\n"
-"PO-Revision-Date: 2009-10-17 13:54+0000\n"
-"Last-Translator: Roman Horník <roman.hornik@gmail.com>\n"
+"POT-Creation-Date: 2010-09-11 14:50-0400\n"
+"PO-Revision-Date: 2010-09-25 18:42+0000\n"
+"Last-Translator: Roman Horník <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2009-10-18 07:05+0000\n"
+"X-Launchpad-Export-Date: 2010-09-26 05:22+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
-msgid "Backup Tool"
-msgstr ""
+msgid "Back up your files"
+msgstr "Zálohujte svá data"
 
 #: ../data/deja-dup.desktop.in.h:2
-msgid "Backup your files"
-msgstr "Zálohujte své soubory"
+msgid "Backup Tool"
+msgstr "Nástroj k zálohování"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
@@ -33,25 +33,42 @@ msgstr "Zálohujte své soubory"
 #. may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
 #: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:38
+#: ../deja-dup/StatusIcon.vala:63
 msgid "Déjà Dup"
-msgstr ""
+msgstr "Déjà Dup"
 
 #: ../data/deja-dup.desktop.in.h:4
 msgid "Déjà Dup Backup Tool"
-msgstr ""
+msgstr "Nástroj k zálohování Déjà Dup"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
-#. a computer monitor.  This program acts like a daemon that kicks off
+#. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.h:1 ../monitor/monitor.vala:102
-#: ../monitor/monitor.vala:343
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:338
 msgid "Déjà Dup Monitor"
 msgstr "Déjà Dup sledovač"
 
-#: ../data/deja-dup-monitor.desktop.in.h:2
+#: ../data/deja-dup-monitor.desktop.in.in.h:2
 msgid "Schedule backups at regular intervals"
 msgstr "Rozvrh zálohování v pravidelných intervalech"
+
+#: ../data/deja-dup-preferences.desktop.in.h:1
+msgid "Backup Preferences"
+msgstr "Možnosti zálohování"
+
+#: ../data/deja-dup-preferences.desktop.in.h:2
+msgid "Change your backup settings"
+msgstr "Změnit nastavení zálohování"
+
+#: ../data/deja-dup-preferences.desktop.in.h:3
+msgid "Déjà Dup Backup Preferences"
+msgstr "Déjà Dup možnosti zálohování"
+
+#: ../data/deja-dup-preferences.desktop.in.h:4
+#: ../preferences/PreferencesDialog.vala:41 ../preferences/preferences.vala:35
+#: ../preferences/preferences.vala:66
+msgid "Déjà Dup Preferences"
+msgstr "Déjà Dup možnosti"
 
 #: ../data/deja-dup.schemas.in.h:1
 msgid "Amazon S3 Access Key ID"
@@ -70,241 +87,336 @@ msgid "Backup location"
 msgstr "Umístění zálohy"
 
 #: ../data/deja-dup.schemas.in.h:4
-msgid "Directories not to backup"
-msgstr "Složky neurčené k zálohování"
+msgid "Directories not to back up"
+msgstr "Adresáře se nesynchronizovaly"
 
 #: ../data/deja-dup.schemas.in.h:5
-msgid "Directories to backup"
-msgstr "Složky určené k zálohování"
+msgid "Directories to back up"
+msgstr "Adresáře k zálohování"
 
 #: ../data/deja-dup.schemas.in.h:6
-msgid "How long to keep backup files"
-msgstr ""
+msgid "Folder type"
+msgstr "Typ adresáře"
 
 #: ../data/deja-dup.schemas.in.h:7
-msgid "How often to periodically backup"
-msgstr "Jak často periodicky zálohovat"
+msgid "Full name of the external volume"
+msgstr "Celý název externího svazku"
 
 #: ../data/deja-dup.schemas.in.h:8
+msgid "How long to keep backup files"
+msgstr "Jak dlouho uchovávat zálohované soubory?"
+
+#: ../data/deja-dup.schemas.in.h:9
+msgid "How often to periodically back up"
+msgstr "Jak často pravidelně zálohovat?"
+
+#: ../data/deja-dup.schemas.in.h:10
+msgid "Icon of the external volume"
+msgstr "Ikona externího svazku"
+
+#: ../data/deja-dup.schemas.in.h:11
+msgid ""
+"If the backup location is on an external volume, this is its unique "
+"filesystem identifier."
+msgstr ""
+"Jestli je záložní místo na externím svazku, toto je jeho jedinečný "
+"identifikátor souborového systému."
+
+#: ../data/deja-dup.schemas.in.h:12
+msgid ""
+"If the backup location is on an external volume, this is the path of the "
+"folder on that volume."
+msgstr ""
+"Je-li záložní místo na externím svazku, toto je cesta ke složce na tomto "
+"zařízení."
+
+#: ../data/deja-dup.schemas.in.h:13
+msgid ""
+"If the backup location is on an external volume, this is the volume’s icon."
+msgstr "Je-li záložní místo na externím svazku, toto je ikona zařízení."
+
+#: ../data/deja-dup.schemas.in.h:14
+msgid ""
+"If the backup location is on an external volume, this is the volume’s longer "
+"descriptive name."
+msgstr ""
+"Je-li záložní místo na externím svazku, toto je delší popisné jméno svazku."
+
+#: ../data/deja-dup.schemas.in.h:15
+msgid ""
+"If the backup location is on an external volume, this is the volume’s "
+"shorter name."
+msgstr ""
+"Je-li záložní místo na externím svazku, toto je kratší jméno zařízení."
+
+#: ../data/deja-dup.schemas.in.h:16
 msgid "Location in which to hold the backup files."
 msgstr "Místo, ve kterém uchovávat záložní soubory."
 
-#: ../data/deja-dup.schemas.in.h:9
+#: ../data/deja-dup.schemas.in.h:17
+msgid "Relative path under the external volume"
+msgstr "Relativní umístění na externím svazku."
+
+#: ../data/deja-dup.schemas.in.h:18
+msgid "Short name of the external volume"
+msgstr "Krátký název externího svazku"
+
+#: ../data/deja-dup.schemas.in.h:19
 msgid "The Amazon S3 bucket name to use"
 msgstr ""
 
-#: ../data/deja-dup.schemas.in.h:10
+#: ../data/deja-dup.schemas.in.h:20
 msgid "The Amazon S3 folder"
 msgstr "Složka Amazon S3"
 
-#: ../data/deja-dup.schemas.in.h:11
+#: ../data/deja-dup.schemas.in.h:21
 msgid "The last time Déjà Dup was run"
 msgstr "Čas, kdy naposledy Déjà Dup běžel"
 
-#: ../data/deja-dup.schemas.in.h:12
+#: ../data/deja-dup.schemas.in.h:22
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
 msgstr ""
+"Čas, kdy naposledy Déjà Dup úspěšně běžel. Tentokrát by to mělo být ve "
+"formátu ISO 8601."
 
-#: ../data/deja-dup.schemas.in.h:13
+#: ../data/deja-dup.schemas.in.h:23
 msgid "The number of days between backups."
 msgstr "Počet dnů mezi zálohami"
 
-#: ../data/deja-dup.schemas.in.h:14
+#: ../data/deja-dup.schemas.in.h:24
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
 "longer."
 msgstr ""
+"Počet dní, po které budou zálohované soubory na záložním místě. Hodnota 0 "
+"znamená navždy. Toto je minimální počet dnů, soubory mohou být uchovávány "
+"déle."
 
-#: ../data/deja-dup.schemas.in.h:15
-msgid "The type of backup location. Valid values are 's3' or 'file'."
-msgstr "Typ záložního umístění. Platné jsou hodnoty 's3' nebo 'file'."
+#: ../data/deja-dup.schemas.in.h:25
+msgid "The type of backup location. Valid values are ‘s3’ or ‘file’."
+msgstr "Typ zálohy. Platné hodnoty jsou 's3' nebo 'soubor'."
 
-#: ../data/deja-dup.schemas.in.h:16
+#: ../data/deja-dup.schemas.in.h:26
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-"and $VIDEO are recognized as the user's special directories. Relative "
-"entries are relative to the user's home directory."
+"and $VIDEO are recognized as the user’s special directories. Relative "
+"entries are relative to the user’s home directory."
 msgstr ""
+"Tento seznam adresářů bude zálohován. Chráněné hodnoty $ home, $ Pracovní "
+"plocha, $ Dokumenty, $ Stažené, $ Hudba, $ Obrázky, $ Veřejné, $ Šablony, $ "
+"Koš, a $ Video jsou rozpoznány jako speciální adresáře uživatele. Relativní "
+"údaje jsou vztaženy k domovskému adresáři."
 
-#: ../data/deja-dup.schemas.in.h:17
+#: ../data/deja-dup.schemas.in.h:27
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user's special "
-"directories. Relative entries are relative to the user's home directory. "
+"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
+"directories. Relative entries are relative to the user’s home directory. "
 "This list takes precedence over the include list."
 msgstr ""
+"Tento seznam adresářů nebude zálohován. Chráněné hodnoty $HOME, $DESKTOP, "
+"$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+"a $VIDEO jsou rozpoznány jako speciální adresáře uživatele. Relativní údaje "
+"jsou vztaženy k domovskému adresáři. Tento seznam má přednost před "
+"přiloženým seznamem."
 
-#: ../data/deja-dup.schemas.in.h:18
+#: ../data/deja-dup.schemas.in.h:28
 msgid "Type of location to store backup"
-msgstr ""
+msgstr "Typ umístění pro ukládání záloh"
 
-#: ../data/deja-dup.schemas.in.h:19
-msgid "Whether to automatically backup on a regular schedule."
-msgstr ""
+#: ../data/deja-dup.schemas.in.h:29
+msgid "Unique ID of the external volume"
+msgstr "Jedinečné ID externího svazku"
 
-#: ../data/deja-dup.schemas.in.h:20
-msgid "Whether to encrypt your backup"
-msgstr ""
-
-#: ../data/deja-dup.schemas.in.h:21
+#: ../data/deja-dup.schemas.in.h:30
 msgid ""
-"Whether to encrypt your backup files in the storage location. It's strongly "
-"recommended to leave this as 'true'."
+"Whether the backup location is a mounted external volume or a normal folder. "
+"Possible values are ‘volume’ or ‘normal’."
 msgstr ""
+"Umístění zálohy na připojeném externím svazku nebo v normální složce. Možné "
+"hodnoty jsou 'svazek nebo 'normální'."
 
-#: ../data/deja-dup.schemas.in.h:22
-msgid "Whether to periodically backup"
+#: ../data/deja-dup.schemas.in.h:31
+msgid "Whether to automatically back up on a regular schedule."
+msgstr "Automaticky zálohovat podle pravidelného plánu."
+
+#: ../data/deja-dup.schemas.in.h:32
+msgid "Whether to encrypt your backup"
+msgstr "Zašifrovat zálohu"
+
+#: ../data/deja-dup.schemas.in.h:33
+msgid ""
+"Whether to encrypt your backup files in the storage location. It’s strongly "
+"recommended to leave this as ‘true’."
 msgstr ""
+"Zašifrovat zálohované soubory v místě uložení. Je velmi doporučeno ponechat "
+"'ano'."
 
-#: ../data/deja-dup.schemas.in.h:23
+#: ../data/deja-dup.schemas.in.h:34
+msgid "Whether to periodically back up"
+msgstr "Zálohovat pravidelně"
+
+#: ../data/deja-dup.schemas.in.h:35
+msgid "Whether to request the root password"
+msgstr "Vyžadovat heslo roota"
+
+#: ../data/deja-dup.schemas.in.h:36
+msgid ""
+"Whether to request the root password when backing up from or restoring to "
+"system folders."
+msgstr "Vyžadovat heslo roota při zálohování nebo obnovení ze zálohy."
+
+#: ../data/deja-dup.schemas.in.h:37
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr ""
 
-#: ../data/deja-dup.schemas.in.h:24
+#: ../data/deja-dup.schemas.in.h:38
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 
-#: ../deja-dup/Assistant.vala:278
+#: ../deja-dup/Assistant.vala:284
 msgid "Co_ntinue"
-msgstr ""
+msgstr "Pokračo_vat"
 
-#: ../deja-dup/Assistant.vala:311 ../deja-dup/StatusIcon.vala:98
+#: ../deja-dup/Assistant.vala:319 ../deja-dup/StatusIcon.vala:155
 msgid "_Resume Later"
-msgstr ""
+msgstr "_Pokračovat později"
 
 #: ../deja-dup/AssistantBackup.vala:33
-msgctxt "backup is verb"
-msgid "Backup"
-msgstr ""
+msgctxt "back up is verb"
+msgid "Back Up"
+msgstr "Zálohovat"
 
-#: ../deja-dup/AssistantBackup.vala:34 ../deja-dup/MainWindow.vala:73
-#: ../deja-dup/MainWindow.vala:187
-msgctxt "backup is verb"
-msgid "_Backup"
-msgstr ""
+#: ../deja-dup/AssistantBackup.vala:34
+msgctxt "back up is verb"
+msgid "_Back Up"
+msgstr "_Zálohovat"
 
-#: ../deja-dup/AssistantBackup.vala:50 ../deja-dup/AssistantRestore.vala:93
-#: ../preferences/PreferencesDialog.vala:54
+#: ../deja-dup/AssistantBackup.vala:52 ../deja-dup/AssistantRestore.vala:93
+#: ../preferences/PreferencesDialog.vala:90
 msgid "_Backup location:"
-msgstr ""
+msgstr "_Umístění zálohy:"
 
-#: ../deja-dup/AssistantBackup.vala:57
-#: ../preferences/PreferencesDialog.vala:135
+#: ../deja-dup/AssistantBackup.vala:59
+#: ../preferences/PreferencesDialog.vala:134
 msgid "_Encrypt backup files"
-msgstr ""
+msgstr "_Zašifrovat zálohované soubory"
 
-#: ../deja-dup/AssistantBackup.vala:78
-#: ../preferences/PreferencesDialog.vala:99
+#: ../deja-dup/AssistantBackup.vala:85
+#: ../preferences/PreferencesDialog.vala:160
 msgid "I_nclude files in folders:"
-msgstr ""
+msgstr "V_ložit soubory ze složek:"
 
-#: ../deja-dup/AssistantBackup.vala:91
-#: ../preferences/PreferencesDialog.vala:118
+#: ../deja-dup/AssistantBackup.vala:98
+#: ../preferences/PreferencesDialog.vala:179
 msgid "E_xcept files in folders:"
-msgstr ""
+msgstr "V_yřadit soubory v adresářích:"
 
-#: ../deja-dup/AssistantBackup.vala:112 ../deja-dup/AssistantBackup.vala:116
+#: ../deja-dup/AssistantBackup.vala:119 ../deja-dup/AssistantBackup.vala:123
 #: ../deja-dup/AssistantRestore.vala:113
 msgid "Preferences"
-msgstr ""
+msgstr "Nastavení"
 
-#: ../deja-dup/AssistantBackup.vala:132 ../deja-dup/AssistantRestore.vala:209
+#: ../deja-dup/AssistantBackup.vala:139 ../deja-dup/AssistantRestore.vala:209
 msgid "Backup location:"
-msgstr ""
+msgstr "Umístění zálohy:"
 
-#: ../deja-dup/AssistantBackup.vala:139 ../deja-dup/AssistantRestore.vala:216
+#: ../deja-dup/AssistantBackup.vala:146 ../deja-dup/AssistantRestore.vala:216
 msgid "Encrypted:"
-msgstr ""
+msgstr "Zašifrováno:"
 
-#: ../deja-dup/AssistantBackup.vala:146
+#: ../deja-dup/AssistantBackup.vala:153
 msgid "Include from:"
-msgstr ""
+msgstr "Vložit z:"
 
-#: ../deja-dup/AssistantBackup.vala:154
+#: ../deja-dup/AssistantBackup.vala:161
 msgid "Except for:"
-msgstr ""
+msgstr "Vyřadit z:"
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:185
+#: ../deja-dup/AssistantBackup.vala:194
 msgid "Backing up:"
-msgstr ""
+msgstr "Zálohování:"
 
-#: ../deja-dup/AssistantBackup.vala:195
-#: ../preferences/PreferencesDialog.vala:141
-msgid "_Automatically backup on a regular schedule"
-msgstr ""
+#: ../deja-dup/AssistantBackup.vala:204
+#: ../preferences/PreferencesDialog.vala:208
+msgid "_Automatically back up on a regular schedule"
+msgstr "_Automaticky zálohovat podle plánu"
 
-#: ../deja-dup/AssistantBackup.vala:198
-#: ../preferences/PreferencesDialog.vala:148
+#: ../deja-dup/AssistantBackup.vala:207
+#: ../preferences/PreferencesDialog.vala:215
 #, c-format
-msgid "How _often to backup:"
-msgstr ""
+msgid "How _often to back up:"
+msgstr "Jak _často zálohovat:"
 
-#: ../deja-dup/AssistantBackup.vala:225
+#: ../deja-dup/AssistantBackup.vala:234
 msgid "Backup Failed"
-msgstr ""
+msgstr "Zálohování selhalo"
 
-#: ../deja-dup/AssistantBackup.vala:228
+#: ../deja-dup/AssistantBackup.vala:237
 msgid "Backup Finished"
-msgstr ""
+msgstr "Zálohování bylo dokončeno"
 
-#: ../deja-dup/AssistantBackup.vala:229
+#: ../deja-dup/AssistantBackup.vala:238
 msgid "Your files were successfully backed up."
-msgstr ""
+msgstr "Vaše soubory byly úspěšně zazálohovány."
 
-#: ../deja-dup/AssistantBackup.vala:248 ../libdeja-dup/Operation.vala:50
-msgid "Backing up..."
-msgstr ""
+#: ../deja-dup/AssistantBackup.vala:259 ../common/Operation.vala:52
+msgid "Backing up…"
+msgstr "Zálohování…"
 
-#: ../deja-dup/AssistantOperation.vala:133
+#: ../deja-dup/AssistantOperation.vala:136
 msgid "Scanning:"
-msgstr ""
+msgstr "Skenování:"
 
-#: ../deja-dup/AssistantOperation.vala:134
-msgid "Scanning..."
-msgstr ""
+#: ../deja-dup/AssistantOperation.vala:137
+msgid "Scanning…"
+msgstr "Skenování…"
 
-#: ../deja-dup/AssistantOperation.vala:188
+#: ../deja-dup/AssistantOperation.vala:210
 msgid "_Details"
-msgstr ""
+msgstr "_Detaily"
 
-#: ../deja-dup/AssistantOperation.vala:235
+#: ../deja-dup/AssistantOperation.vala:259
 msgid "E_ncryption password:"
-msgstr ""
+msgstr "_Heslo k zašifrování:"
 
-#: ../deja-dup/AssistantOperation.vala:244
-#: ../deja-dup/MountOperationAssistant.vala:209
+#: ../deja-dup/AssistantOperation.vala:268
+msgid "_Show password"
+msgstr "_Zobrazit heslo"
+
+#: ../deja-dup/AssistantOperation.vala:275
+#: ../deja-dup/MountOperationAssistant.vala:28
 msgid "_Remember password"
-msgstr ""
+msgstr "_Zapamatovat heslo"
 
-#: ../deja-dup/AssistantOperation.vala:319
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Summary"
-msgstr ""
+msgstr "Souhrn"
 
-#: ../deja-dup/AssistantOperation.vala:334
+#: ../deja-dup/AssistantOperation.vala:365
 msgid "Password needed"
-msgstr ""
+msgstr "Vyžadováno heslo"
 
-#: ../deja-dup/AssistantOperation.vala:529
+#: ../deja-dup/AssistantOperation.vala:590
 msgid "Déjà Dup backup passphrase"
 msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:71
 msgid "Restore"
-msgstr ""
+msgstr "Obnovit"
 
-#: ../deja-dup/AssistantRestore.vala:72 ../deja-dup/MainWindow.vala:46
-#: ../deja-dup/MainWindow.vala:193
+#: ../deja-dup/AssistantRestore.vala:72
 msgid "_Restore"
-msgstr ""
+msgstr "_Obnovit"
 
 #: ../deja-dup/AssistantRestore.vala:100
 msgid "Backup files are _encrypted"
@@ -312,7 +424,7 @@ msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:134
 msgid "_Date:"
-msgstr ""
+msgstr "_Datum:"
 
 #: ../deja-dup/AssistantRestore.vala:157
 msgid "Restore files to _original locations"
@@ -324,7 +436,7 @@ msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:172
 msgid "Choose destination for restored files"
-msgstr ""
+msgstr "Vybrat umístění pro obnovené soubory"
 
 #: ../deja-dup/AssistantRestore.vala:176
 msgid "Restore _folder:"
@@ -336,7 +448,7 @@ msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:232
 msgid "Restore folder:"
-msgstr ""
+msgstr "Adresář pro obnovení:"
 
 #: ../deja-dup/AssistantRestore.vala:256
 msgid "Checking for Backups"
@@ -344,49 +456,55 @@ msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:264
 msgid "Restore from When?"
-msgstr ""
+msgstr "Obnovit odkdy?"
 
 #: ../deja-dup/AssistantRestore.vala:272
 msgid "Restore to Where?"
-msgstr ""
+msgstr "Obnovit kam?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:297
+#: ../deja-dup/AssistantRestore.vala:300
 msgid "Restoring:"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:325
+#: ../deja-dup/AssistantRestore.vala:348
 msgid "No backups to restore"
-msgstr ""
+msgstr "Žádné zálohy k obnově"
 
-#: ../deja-dup/AssistantRestore.vala:413
+#: ../deja-dup/AssistantRestore.vala:436
 msgid "Original location"
-msgstr ""
+msgstr "Původní umístění"
 
-#: ../deja-dup/AssistantRestore.vala:426
+#: ../deja-dup/AssistantRestore.vala:449
 msgid "File to restore:"
 msgid_plural "Files to restore:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Soubor k obnovení:"
+msgstr[1] "Soubory k obnovení:"
 
-#: ../deja-dup/AssistantRestore.vala:448
+#: ../deja-dup/AssistantRestore.vala:473
 msgid "Restore Failed"
-msgstr ""
+msgstr "Obnovení selhalo"
 
-#: ../deja-dup/AssistantRestore.vala:450
+#: ../deja-dup/AssistantRestore.vala:475
 msgid "Restore Finished"
-msgstr ""
+msgstr "Obnovení dokončeno"
 
-#: ../deja-dup/AssistantRestore.vala:451
+#: ../deja-dup/AssistantRestore.vala:477
 msgid "Your files were successfully restored."
-msgstr ""
+msgstr "Soubory byly úspěšně obnoveny."
 
-#: ../deja-dup/AssistantRestore.vala:455 ../libdeja-dup/Operation.vala:52
-msgid "Restoring..."
-msgstr ""
+#: ../deja-dup/AssistantRestore.vala:479
+msgid "Your file was successfully restored."
+msgid_plural "Your files were successfully restored."
+msgstr[0] "Soubor byl úspěšně obnoven."
+msgstr[1] "Soubory byly úspěšně obnoveny."
 
-#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:41
+#: ../deja-dup/AssistantRestore.vala:485 ../common/Operation.vala:54
+msgid "Restoring…"
+msgstr "Obnovování..."
+
+#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:33
 #: ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr ""
@@ -403,40 +521,61 @@ msgstr ""
 msgid "No filenames provided"
 msgstr ""
 
-#: ../deja-dup/MainWindow.vala:171
+#: ../deja-dup/MainWindow.vala:47 ../deja-dup/MainWindow.vala:194
+msgid "_Restore…"
+msgstr ""
+
+#: ../deja-dup/MainWindow.vala:74 ../deja-dup/MainWindow.vala:188
+msgctxt "back up is verb"
+msgid "_Back Up…"
+msgstr ""
+
+#: ../deja-dup/MainWindow.vala:172
 msgid "Could not open preferences"
 msgstr ""
 
-#: ../deja-dup/MainWindow.vala:184
+#: ../deja-dup/MainWindow.vala:185
 msgctxt "backup is noun"
 msgid "_Backup"
-msgstr ""
+msgstr "_Zálohovat"
 
-#: ../deja-dup/MainWindow.vala:203
+#: ../deja-dup/MainWindow.vala:204
 msgid "_Edit"
-msgstr ""
+msgstr "_Upravit"
 
-#: ../deja-dup/MainWindow.vala:210
+#: ../deja-dup/MainWindow.vala:211
 msgid "_Help"
-msgstr ""
+msgstr "_Nápověda"
 
-#: ../deja-dup/MainWindow.vala:213
+#: ../deja-dup/MainWindow.vala:214
 msgid "_Contents"
+msgstr "_Obsah"
+
+#: ../deja-dup/MainWindow.vala:218
+msgid "Get Help _Online…"
+msgstr "_Získat pomoc online..."
+
+#: ../deja-dup/MainWindow.vala:222
+msgid "_Translate This Application…"
+msgstr "_Přeložit tuto aplikaci..."
+
+#: ../deja-dup/MainWindow.vala:226
+msgid "_Report a Problem…"
+msgstr "_Nahlásit problém..."
+
+#: ../deja-dup/MountOperationAssistant.vala:25
+msgid "_Username:"
 msgstr ""
 
-#: ../deja-dup/MainWindow.vala:217
-msgid "Get Help _Online..."
+#: ../deja-dup/MountOperationAssistant.vala:26
+msgid "_Password:"
 msgstr ""
 
-#: ../deja-dup/MainWindow.vala:221
-msgid "_Translate This Application..."
+#: ../deja-dup/MountOperationAssistant.vala:27
+msgid "S_how password"
 msgstr ""
 
-#: ../deja-dup/MainWindow.vala:225
-msgid "_Report a Problem..."
-msgstr ""
-
-#: ../deja-dup/MountOperationAssistant.vala:54
+#: ../deja-dup/MountOperationAssistant.vala:53
 msgid "Location not available"
 msgstr ""
 
@@ -444,289 +583,515 @@ msgstr ""
 msgid "This backup location requires authentication."
 msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:124
-#, c-format
-msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
-msgstr ""
-
-#: ../deja-dup/MountOperationAssistant.vala:136
+#: ../deja-dup/MountOperationAssistant.vala:138
 msgid "Connect _anonymously"
 msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:140
+#: ../deja-dup/MountOperationAssistant.vala:142
 msgid "Connect as u_ser:"
 msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:164
-msgid "_Access key ID:"
-msgstr ""
-
-#: ../deja-dup/MountOperationAssistant.vala:164
-msgid "_Username:"
-msgstr ""
-
-#: ../deja-dup/MountOperationAssistant.vala:181
+#: ../deja-dup/MountOperationAssistant.vala:182
 msgid "_Domain:"
 msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:196
-msgid "_Secret access key:"
-msgstr ""
-
-#: ../deja-dup/MountOperationAssistant.vala:196
-msgid "_Password:"
-msgstr ""
-
-#: ../deja-dup/MountOperationAssistant.vala:209
-msgid "_Remember secret access key"
-msgstr ""
-
-#: ../deja-dup/StatusIcon.vala:69
+#: ../deja-dup/StatusIcon.vala:100
 #, c-format
 msgid "%.1f%% complete"
 msgstr ""
 
-#: ../deja-dup/StatusIcon.vala:100
+#: ../deja-dup/StatusIcon.vala:105
+#, c-format
+msgid "Show _Progress (%.1f%%)"
+msgstr ""
+
+#: ../deja-dup/StatusIcon.vala:107
+msgid "Show _Progress"
+msgstr ""
+
+#: ../deja-dup/StatusIcon.vala:157
 msgid "_Delay Backup"
 msgstr ""
 
-#: ../deja-dup/StatusIcon.vala:105
+#: ../deja-dup/StatusIcon.vala:162
 msgid "_Skip Backup"
 msgstr ""
 
-#: ../libdeja-dup/BackendFile.vala:51
+#: ../common/BackendFile.vala:73
 msgid "GVFS FUSE is not installed"
 msgstr ""
 
-#: ../libdeja-dup/BackendS3.vala:126
+#. Translators: %2$s is the name of a removable drive, %1$s is a folder
+#. on that removable drive.
+#: ../common/BackendFile.vala:87
 #, c-format
-msgid "Folder %s on Amazon S3"
+msgid "%1$s on %2$s"
 msgstr ""
 
-#: ../libdeja-dup/BackendS3.vala:172
+#: ../common/BackendFile.vala:125
+#, c-format
+msgid "Backup will begin when %s becomes connected."
+msgstr ""
+
+#: ../common/BackendFile.vala:132 ../common/BackendS3.vala:51
+msgid "Backup will begin when a network connection becomes available."
+msgstr ""
+
+#: ../common/BackendFile.vala:351
+msgid "Backup location not available"
+msgstr ""
+
+#: ../common/BackendFile.vala:351
+#, c-format
+msgid "Waiting for ‘%s’ to become connected…"
+msgstr ""
+
+#. Translators: %s is a folder.
+#: ../common/BackendS3.vala:129
+#, c-format
+msgid "%s on Amazon S3"
+msgstr ""
+
+#: ../common/BackendS3.vala:176
 msgid "Permission denied"
 msgstr ""
 
-#: ../libdeja-dup/BackendS3.vala:195
+#: ../common/BackendS3.vala:197
+#, c-format
+msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
+msgstr ""
+
+#: ../common/BackendS3.vala:198
+msgid "_Access key ID:"
+msgstr ""
+
+#: ../common/BackendS3.vala:199
+msgid "_Secret access key:"
+msgstr ""
+
+#: ../common/BackendS3.vala:200
+msgid "S_how secret access key"
+msgstr ""
+
+#: ../common/BackendS3.vala:201
+msgid "_Remember secret access key"
+msgstr ""
+
+#: ../common/BackendS3.vala:203
 msgid "Enter Amazon S3 access key"
 msgstr ""
 
-#: ../libdeja-dup/ButtonConnect.vala:28
-msgid "Connect to _Server..."
+#: ../common/CommonUtils.vala:195
+msgid "Unknown"
 msgstr ""
 
-#: ../libdeja-dup/ButtonConnect.vala:37
-msgid "Could not open connection dialog"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:36
-msgid "At least a week"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:37
-msgid "At least a month"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:38
-msgid "At least two months"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:39
-msgid "At least three months"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:40
-msgid "At least six months"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:41
-msgid "At least a year"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:42
-msgid "Forever"
-msgstr ""
-
-#: ../libdeja-dup/ConfigDelete.vala:100
-#, c-format
-msgid "At least %d day"
-msgid_plural "At least %d days"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../libdeja-dup/ConfigLabelBool.vala:36
-msgid "Yes"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLabelBool.vala:36
-msgid "No"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLabelList.vala:56 ../libdeja-dup/ConfigList.vala:111
-msgid "Home Folder"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLabelList.vala:58 ../libdeja-dup/ConfigList.vala:113
-msgid "Trash"
-msgstr ""
-
-#: ../libdeja-dup/ConfigList.vala:152
-msgid "Choose folders"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLocation.vala:41
-msgid "Select Backup Location"
-msgstr ""
-
-#: ../libdeja-dup/ConfigLocation.vala:68 ../libdeja-dup/libdeja-dup.vala:304
-msgid "Amazon S3"
-msgstr ""
-
-#: ../libdeja-dup/ConfigPeriod.vala:36
-msgid "Daily"
-msgstr ""
-
-#: ../libdeja-dup/ConfigPeriod.vala:37
-msgid "Weekly"
-msgstr ""
-
-#. Translators: Biweekly is every two weeks
-#: ../libdeja-dup/ConfigPeriod.vala:39
-msgid "Biweekly"
-msgstr ""
-
-#: ../libdeja-dup/ConfigPeriod.vala:40
-msgid "Monthly"
-msgstr ""
-
-#: ../libdeja-dup/ConfigPeriod.vala:96
-#, c-format
-msgid "Every %d day"
-msgid_plural "Every %d days"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../libdeja-dup/DuplicityInfo.vala:131
+#: ../common/DuplicityInfo.vala:143
 msgid "Could not run duplicity"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:137
+#: ../common/DuplicityInfo.vala:148
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:139
+#: ../common/DuplicityInfo.vala:150
 #, c-format
 msgid ""
-"Could not understand duplicity version '%s'.\n"
+"Could not understand duplicity version ‘%s’.\n"
 "\n"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:141
+#: ../common/DuplicityInfo.vala:152
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:151
-msgid "Duplicity's version is too old"
+#: ../common/DuplicityInfo.vala:156
+msgid "Duplicity’s version is too old"
 msgstr ""
 
-#: ../libdeja-dup/DuplicityInfo.vala:152
+#: ../common/DuplicityInfo.vala:157
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
 "version %d.%d.%.2d"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:180 ../libdeja-dup/Duplicity.vala:188
-#: ../libdeja-dup/Operation.vala:94
-msgid "Preparing..."
+#: ../common/Duplicity.vala:114 ../common/Duplicity.vala:168
+msgid "Paused (no network)"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:258 ../libdeja-dup/Duplicity.vala:275
-msgid "Cleaning up..."
+#: ../common/Duplicity.vala:279 ../common/Duplicity.vala:287
+#: ../common/Duplicity.vala:322 ../common/Operation.vala:60
+#: ../common/Operation.vala:97
+msgid "Preparing…"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:349 ../libdeja-dup/Duplicity.vala:589
+#: ../common/Duplicity.vala:310
+msgid "Creating the first backup.  This may take a while."
+msgstr ""
+
+#: ../common/Duplicity.vala:312
+msgid ""
+"Creating a fresh backup to protect against backup corruption.  This will "
+"take longer than normal."
+msgstr ""
+
+#. Tiny backup location.  Suggest they get a larger one.
+#: ../common/Duplicity.vala:409
+msgid "Backup location is too small.  Try using one with more space."
+msgstr ""
+
+#: ../common/Duplicity.vala:430
+msgid "Backup location does not have enough free space."
+msgstr ""
+
+#: ../common/Duplicity.vala:450 ../common/Duplicity.vala:464
+msgid "Cleaning up…"
+msgstr ""
+
+#: ../common/Duplicity.vala:556 ../common/Duplicity.vala:883
 msgid "Failed with an unknown error."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:501
+#: ../common/Duplicity.vala:750
 #, c-format
-msgid "Could not restore '%s': File not found in backup"
+msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:505 ../libdeja-dup/Duplicity.vala:547
+#: ../common/Duplicity.vala:755 ../common/Duplicity.vala:834
 msgid "Bad encryption password."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:509
+#: ../common/Duplicity.vala:760
 msgid "Computer name changed"
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:509
+#: ../common/Duplicity.vala:760
 #, c-format
 msgid ""
-"The existing backup is of a computer named %s, but the current computer's "
-"name is %s.  If this is unexpected, you should backup to a different "
+"The existing backup is of a computer named %s, but the current computer’s "
+"name is %s.  If this is unexpected, you should back up to a different "
 "location."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:529
+#: ../common/Duplicity.vala:773
+#, c-format
+msgid "Permission denied when trying to create ‘%s’."
+msgstr ""
+
+#. assume error is on backend side
+#: ../common/Duplicity.vala:777 ../common/Duplicity.vala:781
+#, c-format
+msgid "Permission denied when trying to read ‘%s’."
+msgstr ""
+
+#: ../common/Duplicity.vala:785
+#, c-format
+msgid "Permission denied when trying to delete ‘%s’."
+msgstr ""
+
+#: ../common/Duplicity.vala:792
+#, c-format
+msgid "Backup location ‘%s’ does not exist."
+msgstr ""
+
+#: ../common/Duplicity.vala:798 ../common/Duplicity.vala:853
+msgid "No space left."
+msgstr ""
+
+#: ../common/Duplicity.vala:812
 msgid "Invalid ID."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:531
+#: ../common/Duplicity.vala:814
 msgid "Invalid secret key."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:533
+#: ../common/Duplicity.vala:816
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:542
+#: ../common/Duplicity.vala:829
 msgid "S3 bucket name is not available."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:551
+#: ../common/Duplicity.vala:838
 #, c-format
-msgid "Error reading file '%s'."
+msgid "Error reading file ‘%s’."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:553
+#: ../common/Duplicity.vala:840
 #, c-format
-msgid "Error writing file '%s'."
-msgstr ""
+msgid "Error writing file ‘%s’."
+msgstr "Chyba při zapisování souboru ‘%s’."
 
-#: ../libdeja-dup/Duplicity.vala:561
+#: ../common/Duplicity.vala:855
 #, c-format
-msgid "No space left in %s"
-msgstr ""
+msgid "No space left in ‘%s’."
+msgstr "Žádné volné místo v ‘%s’."
 
-#: ../libdeja-dup/Duplicity.vala:581
+#: ../common/Duplicity.vala:875
 msgid "No backup files found"
+msgstr "Nenalezeny záložní soubory"
+
+#: ../common/Duplicity.vala:911
+msgid "Uploading…"
+msgstr "Nahrávání..."
+
+#: ../common/OperationRestore.vala:54
+msgid "Restoring files…"
+msgstr "Obnovování souborů..."
+
+#: ../common/OperationRestore.vala:173
+#, c-format
+msgid ""
+"Not all files could be restored. Any files that could not be restored may "
+"still be found in %s."
 msgstr ""
 
-#: ../libdeja-dup/Duplicity.vala:617
-msgid "Uploading..."
+#: ../common/OperationRestore.vala:182
+#, c-format
+msgid "Could not restore %s: %s"
+msgstr "Není možné obnovit %s: %s"
+
+#: ../common/Operation.vala:56
+msgid "Checking for backups…"
 msgstr ""
 
-#: ../libdeja-dup/libdeja-dup.vala:97
+#: ../common/Operation.vala:58
+msgid "Listing files…"
+msgstr ""
+
+#: ../common/Operation.vala:216
+msgid "Another Déjà Dup is already running"
+msgstr "Déjà Dup již běží"
+
+#: ../monitor/monitor.vala:240
+msgid "Scheduled backup delayed"
+msgstr "Naplánovaná záloha byla odložena"
+
+#: ../nautilus/NautilusExtension.c:94
+msgid "Revert to Previous Version…"
+msgid_plural "Revert to Previous Versions…"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../nautilus/NautilusExtension.c:98
+msgid "Restore file from backup"
+msgid_plural "Restore files from backup"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../preferences/PreferencesDialog.vala:105
+#, c-format
+msgid "S3 Access Key I_D:"
+msgstr ""
+
+#: ../preferences/PreferencesDialog.vala:117
+#, c-format
+msgid "_Folder:"
+msgstr ""
+
+#: ../preferences/PreferencesDialog.vala:148
+msgid "Storage"
+msgstr ""
+
+#: ../preferences/PreferencesDialog.vala:198
+msgid "Files"
+msgstr ""
+
+#: ../preferences/PreferencesDialog.vala:233
+#, c-format
+msgid "_Keep backups:"
+msgstr ""
+
+#: ../preferences/PreferencesDialog.vala:254
+msgid "Schedule"
+msgstr ""
+
+#: ../widgets/ButtonConnect.vala:28
+msgid "Connect to _Server…"
+msgstr ""
+
+#: ../widgets/ButtonConnect.vala:37
+msgid "Could not open connection dialog"
+msgstr "Dialog připojení nemohl být otevřen"
+
+#: ../widgets/ConfigDelete.vala:44
+msgid "At least a week"
+msgstr "Nejméně týden"
+
+#: ../widgets/ConfigDelete.vala:45
+msgid "At least a month"
+msgstr "Nejméně měsíc"
+
+#: ../widgets/ConfigDelete.vala:46
+msgid "At least two months"
+msgstr "Nejméně dva měsíce"
+
+#: ../widgets/ConfigDelete.vala:47
+msgid "At least three months"
+msgstr "Nejméně tři měsíce"
+
+#: ../widgets/ConfigDelete.vala:48
+msgid "At least six months"
+msgstr "Nejméně půl roku"
+
+#: ../widgets/ConfigDelete.vala:49
+msgid "At least a year"
+msgstr "Nejméně rok"
+
+#: ../widgets/ConfigDelete.vala:50
+msgid "Forever"
+msgstr ""
+
+#: ../widgets/ConfigDelete.vala:108
+#, c-format
+msgid "At least %d day"
+msgid_plural "At least %d days"
+msgstr[0] "Nejméně %d den"
+msgstr[1] "Nejméně %d dny"
+
+#: ../widgets/ConfigLabelBool.vala:36
+msgid "Yes"
+msgstr ""
+
+#: ../widgets/ConfigLabelBool.vala:36
+msgid "No"
+msgstr ""
+
+#: ../widgets/ConfigLabelList.vala:56 ../widgets/ConfigList.vala:118
+msgid "Home Folder"
+msgstr "Domovský adresář"
+
+#: ../widgets/ConfigLabelList.vala:58 ../widgets/ConfigList.vala:120
+msgid "Trash"
+msgstr "Koš"
+
+#: ../widgets/ConfigLabelPolicy.vala:71
+msgid ""
+"Old backups will be kept for at least a week or until the backup location is "
+"low on space."
+msgstr ""
+"Staré zálohy budou uchovány nejméně týden, nebo než dojde k nedostatku "
+"prostoru na místě určeném pro zálohy."
+
+#: ../widgets/ConfigLabelPolicy.vala:74
+msgid ""
+"Old backups will be kept for at least a month or until the backup location "
+"is low on space."
+msgstr ""
+"Staré zálohy budou uchovány nejméně měsíc, nebo než dojde k nedostatku "
+"prostoru na místě určeném pro zálohy."
+
+#: ../widgets/ConfigLabelPolicy.vala:77
+msgid ""
+"Old backups will be kept for at least two months or until the backup "
+"location is low on space."
+msgstr ""
+"Staré zálohy budou uchovány nejméně dva měsíce, nebo než dojde k nedostatku "
+"prostoru na místě určeném pro zálohy."
+
+#: ../widgets/ConfigLabelPolicy.vala:80
+msgid ""
+"Old backups will be kept for at least three months or until the backup "
+"location is low on space."
+msgstr ""
+"Staré zálohy budou uchovány nejméně tři měsíce, nebo než dojde k nedostatku "
+"prostoru na místě určeném pro zálohy."
+
+#: ../widgets/ConfigLabelPolicy.vala:83
+msgid ""
+"Old backups will be kept for at least six months or until the backup "
+"location is low on space."
+msgstr ""
+"Staré zálohy budou uchovány nejméně půl roku, nebo než dojde k nedostatku "
+"prostoru na místě určeném pro zálohy."
+
+#: ../widgets/ConfigLabelPolicy.vala:86
+msgid ""
+"Old backups will be kept for at least a year or until the backup location is "
+"low on space."
+msgstr ""
+"Staré zálohy budou uchovány nejméně rok, nebo než dojde k nedostatku "
+"prostoru na místě určeném pro zálohy."
+
+#: ../widgets/ConfigLabelPolicy.vala:89
+msgid "Old backups will be kept until the backup location is low on space."
+msgstr ""
+"Staré zálohy budou uchovány dokud nedojde k nedostatku prostoru na místě "
+"určeném pro zálohy."
+
+#: ../widgets/ConfigLabelPolicy.vala:92
+#, c-format
+msgid ""
+"Old backups will be kept at least %d day or until the backup location is low "
+"on space."
+msgid_plural ""
+"Old backups will be kept at least %d days or until the backup location is "
+"low on space."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../widgets/ConfigList.vala:157
+msgid "Choose folders"
+msgstr "Vybrat adresáře"
+
+#: ../widgets/ConfigLocation.vala:39
+msgid "Select Backup Location"
+msgstr "Zvolit umístění zálohy"
+
+#: ../widgets/ConfigLocation.vala:66
+msgid "Amazon S3"
+msgstr ""
+
+#: ../widgets/ConfigPeriod.vala:36
+msgid "Daily"
+msgstr "Denně"
+
+#: ../widgets/ConfigPeriod.vala:37
+msgid "Weekly"
+msgstr "Týdně"
+
+#. Translators: Biweekly is every two weeks
+#: ../widgets/ConfigPeriod.vala:39
+msgid "Biweekly"
+msgstr "Každé dva týdny"
+
+#: ../widgets/ConfigPeriod.vala:40
+msgid "Monthly"
+msgstr "Měsíčně"
+
+#: ../widgets/ConfigPeriod.vala:96
+#, c-format
+msgid "Every %d day"
+msgid_plural "Every %d days"
+msgstr[0] "Každý %d den"
+msgstr[1] ""
+msgstr[2] "Každých %d dní"
+
+#: ../widgets/WidgetUtils.vala:30
 #, c-format
 msgid "Could not display %s"
-msgstr ""
+msgstr "Nelze zobrazit %s"
 
-#: ../libdeja-dup/libdeja-dup.vala:141
+#: ../widgets/WidgetUtils.vala:74
 msgid "About Déjà Dup"
-msgstr ""
+msgstr "O Déjà Dup"
 
-#: ../libdeja-dup/libdeja-dup.vala:145
+#: ../widgets/WidgetUtils.vala:78
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Roman Horník https://launchpad.net/~roman.hornik"
+"  Jiri Machala https://launchpad.net/~jirka-machala\n"
+"  Konki https://launchpad.net/~pavel-konkol\n"
+"  Petr R. https://launchpad.net/~ateps-r\n"
+"  Petr Šimáček https://launchpad.net/~petr-simacek\n"
+"  Roman Horník https://launchpad.net/~roman.hornik\n"
+"  luisah https://launchpad.net/~luisah"
 
-#: ../libdeja-dup/libdeja-dup.vala:150
+#: ../widgets/WidgetUtils.vala:83
 #, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
@@ -734,8 +1099,12 @@ msgid ""
 "Software Foundation; either version 3 of the License, or (at your option) "
 "any later version."
 msgstr ""
+"Tento program je svobodný software; můžete ho šířit a/nebo modifikovat za "
+"podmínek GNU General Public License publikované Nadací pro svobodný software "
+"(Free Software Foundation); verze 3 nebo (podle vašeho zvážení) libovolné "
+"pozdější verze."
 
-#: ../libdeja-dup/libdeja-dup.vala:151
+#: ../widgets/WidgetUtils.vala:84
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -743,68 +1112,31 @@ msgid ""
 "more details."
 msgstr ""
 
-#: ../libdeja-dup/libdeja-dup.vala:152
+#: ../widgets/WidgetUtils.vala:85
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see http://www.gnu.org/licenses/."
 msgstr ""
+"Společně s tímto programem jste měli obdržet i kopii GNU General Public "
+"License. V opačném případě viz. http://www.gnu.org/licenses/"
 
-#: ../libdeja-dup/libdeja-dup.vala:316
-msgid "Unknown"
-msgstr ""
+#~ msgid "Directories not to backup"
+#~ msgstr "Složky neurčené k zálohování"
 
-#: ../libdeja-dup/OperationRestore.vala:60
-msgid "Restoring files..."
-msgstr ""
+#~ msgid "How often to periodically backup"
+#~ msgstr "Jak často periodicky zálohovat"
 
-#: ../libdeja-dup/OperationRestore.vala:173
-#, c-format
-msgid ""
-"Not all files could be restored. Any files that could not be restored may "
-"still be found in %s."
-msgstr ""
+#~ msgid "Déjà Dup Backup Utility"
+#~ msgstr "Zálohovací utilita Déjà Dup"
 
-#: ../libdeja-dup/OperationRestore.vala:182
-#, c-format
-msgid "Could not restore %s: %s"
-msgstr ""
+#~ msgid "Backup your files"
+#~ msgstr "Zálohujte své soubory"
 
-#: ../libdeja-dup/Operation.vala:54
-msgid "Checking for backups..."
-msgstr ""
+#~ msgid "Directories to backup"
+#~ msgstr "Složky určené k zálohování"
 
-#: ../libdeja-dup/Operation.vala:208
-msgid "Another Déjà Dup is already running"
-msgstr ""
+#~ msgid "The last time Déjà Dup was run, in ISO 8601 format."
+#~ msgstr "Čas, kdy naposledy Déjà Dup běžel, ve formátu ISO 8601"
 
-#: ../nautilus/NautilusExtension.c:95
-msgid "Revert to Previous Version..."
-msgid_plural "Revert to Previous Versions..."
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../nautilus/NautilusExtension.c:99
-msgid "Restore file from backup"
-msgid_plural "Restore files from backup"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../preferences/PreferencesDialog.vala:36 ../preferences/preferences.vala:35
-#: ../preferences/preferences.vala:66
-msgid "Déjà Dup Preferences"
-msgstr ""
-
-#: ../preferences/PreferencesDialog.vala:68
-#, c-format
-msgid "S3 Access Key I_D:"
-msgstr ""
-
-#: ../preferences/PreferencesDialog.vala:80
-#, c-format
-msgid "_Folder:"
-msgstr ""
-
-#: ../preferences/PreferencesDialog.vala:166
-#, c-format
-msgid "_Keep backups:"
-msgstr ""
+#~ msgid "The type of backup location. Valid values are 's3' or 'file'."
+#~ msgstr "Typ záložního umístění. Platné jsou hodnoty 's3' nebo 'file'."
