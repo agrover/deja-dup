@@ -63,17 +63,17 @@ abstract class StatusProvider : Object
     }
   }
 
-  abstract DBusProxy create_proxy() throws Error;
-  abstract Status query_status() throws Error;
-  abstract void handle_signal(string sender_name, string signal_name,
-                              GLib.Variant parameters);
+  protected abstract DBusProxy create_proxy() throws Error;
+  protected abstract Status query_status() throws Error;
+  protected abstract void handle_signal(string sender_name, string signal_name,
+                                        GLib.Variant parameters);
 }
 
 class StatusNetworkManager : StatusProvider
 {
   static const uint32 NM_STATE_CONNECTED = 3;
 
-  override DBusProxy create_proxy() throws Error
+  protected override DBusProxy create_proxy() throws Error
   {
     // FIXME: use async version when I figure out the syntax
     return new DBusProxy.for_bus_sync(BusType.SYSTEM, DBusProxyFlags.NONE, null, 
@@ -82,7 +82,7 @@ class StatusNetworkManager : StatusProvider
                                       "org.freedesktop.NetworkManager", null);
   }
 
-  override StatusProvider.Status query_status() throws Error
+  protected override StatusProvider.Status query_status() throws Error
   {
     Variant state_val = proxy.get_cached_property("State");
     if (state_val == null || !state_val.is_of_type(VariantType.UINT32))
@@ -95,8 +95,8 @@ class StatusNetworkManager : StatusProvider
       return Status.OFFLINE;
   }
 
-  override void handle_signal(string sender_name, string signal_name,
-                              GLib.Variant parameters)
+  protected override void handle_signal(string sender_name, string signal_name,
+                                        GLib.Variant parameters)
   {
     if (signal_name == "StateChanged") {
       uint32 state;
@@ -110,7 +110,7 @@ class StatusConnectionManager : StatusProvider
 {
   static const string CM_STATE_CONNECTED = "online";
 
-  override DBusProxy create_proxy() throws Error
+  protected override DBusProxy create_proxy() throws Error
   {
     // FIXME: use async version when I figure out the syntax
     return new DBusProxy.for_bus_sync(BusType.SYSTEM, DBusProxyFlags.NONE, null, 
@@ -118,7 +118,7 @@ class StatusConnectionManager : StatusProvider
                                       "org.moblin.connman.Manager", null);
   }
 
-  override StatusProvider.Status query_status() throws Error
+  protected override StatusProvider.Status query_status() throws Error
   {
     Variant state_val = proxy.call_sync("GetState", null,
                                         DBusCallFlags.NONE, -1, null);
@@ -135,8 +135,8 @@ class StatusConnectionManager : StatusProvider
       return Status.UNKNOWN;
   }
 
-  override void handle_signal(string sender_name, string signal_name,
-                              GLib.Variant parameters)
+  protected override void handle_signal(string sender_name, string signal_name,
+                                        GLib.Variant parameters)
   {
     if (signal_name == "StateChanged") {
       string state;

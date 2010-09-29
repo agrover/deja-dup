@@ -346,13 +346,13 @@ public class DuplicityInstance : Object
     read_log_lines();
   }
   
-  // If start is < 0, starts at word.size() - 1.
+  // If start is < 0, starts at word.length - 1.
   static int num_suffix(string word, char ch, long start = -1)
   {
     int rv = 0;
     
     if (start < 0)
-      start = (long)word.size() - 1;
+      start = (long)word.length - 1;
     
     for (long i = start; i >= 0; --i, ++rv)
       if (word[i] != ch)
@@ -383,7 +383,7 @@ public class DuplicityInstance : Object
   
   static string compress_string(string s_in)
   {
-    char[] rv = new char[s_in.size()+1];
+    char[] rv = new char[s_in.length+1];
     weak char[] s = (char[])s_in;
     
     int i = 0, j = 0;
@@ -474,7 +474,7 @@ public class DuplicityInstance : Object
             // OK, word ends with '...  But is it a *real* ' or a fake one?
             // i.e. is it escaped or not?  Test this by seeing if it has an even
             // number of backslashes before it.
-            num_suffix(word, '\\', (long)word.size() - 2) % 2 == 0)
+            num_suffix(word, '\\', (long)word.length - 2) % 2 == 0)
           in_group = false;
         // Else...  If it ends with just a backslash, the backslash was
         // supposed to be for the space.  So just drop it.
