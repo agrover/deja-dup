@@ -23,19 +23,15 @@ namespace DejaDup {
 
 public class ConfigLabelBool : ConfigLabel
 {
-  public ConfigLabelBool(string key)
+  public ConfigLabelBool(string key, string ns="")
   {
-    Object(key: key);
+    Object(key: key, ns: ns);
   }
   
   protected override async void set_from_config()
   {
-    bool val;
-    try {
-      val = client.get_bool(key);
-      label.label = val ? _("Yes") : _("No");
-    }
-    catch (Error e) {warning("%s\n", e.message);}
+    var val = settings.get_boolean(key);
+    label.label = val ? _("Yes") : _("No");
   }
 }
 

@@ -26,9 +26,9 @@ public class ConfigNumber : ConfigWidget
   public int lower_bound {get; construct;}
   public int upper_bound {get; construct;}
   
-  public ConfigNumber(string key, int lower_bound, int upper_bound)
+  public ConfigNumber(string key, int lower_bound, int upper_bound, string ns="")
   {
-    Object(key: key, lower_bound: lower_bound, upper_bound: upper_bound);
+    Object(key: key, lower_bound: lower_bound, upper_bound: upper_bound, ns: ns);
   }
   
   Gtk.SpinButton spin;
@@ -42,23 +42,12 @@ public class ConfigNumber : ConfigWidget
   
   protected override async void set_from_config()
   {
-    try {
-      var val = client.get_int(key);
-      spin.@value = val;
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    spin.value = settings.get_int(key);
   }
   
   void handle_value_changed()
   {
-    try {
-      client.set_int(key, (int)spin.@value);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    settings.set_int(key, (int)spin.value);
   }
 }
 

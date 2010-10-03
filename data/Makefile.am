@@ -22,10 +22,10 @@ nobase_dist_data_DATA = \
 	icons/hicolor/scalable/actions/deja-dup-backup.svg \
 	icons/hicolor/scalable/actions/deja-dup-restore.svg
 
-@INTLTOOL_SCHEMAS_RULE@
-schemadir = $(sysconfdir)/gconf/schemas
-schema_in_file = deja-dup.schemas.in
-dist_schema_DATA = $(schema_in_file:.schemas.in=.schemas)
+@INTLTOOL_XML_NOMERGE_RULE@
+
+@GSETTINGS_RULES@
+gsettings_SCHEMAS = org.gnome.DejaDup.gschema.xml
 
 @INTLTOOL_DESKTOP_RULE@
 desktopdir = $(datadir)/applications
@@ -36,24 +36,16 @@ deja-dup-monitor.desktop.in: deja-dup-monitor.desktop.in.in
 autostartdir = $(sysconfdir)/xdg/autostart
 dist_autostart_DATA = deja-dup-monitor.desktop
 
-EXTRA_DIST = deja-dup.schemas.in deja-dup.desktop.in deja-dup-monitor.desktop.in.in deja-dup-preferences.desktop.in
-DISTCLEANFILES = deja-dup.schemas deja-dup.desktop deja-dup-monitor.desktop deja-dup-monitor.desktop.in  deja-dup-preferences.desktop
+convertdir = $(datadir)/GConf/gsettings
+dist_convert_DATA = deja-dup.convert
 
-if GCONF_SCHEMAS_INSTALL
-install-data-local:
-	-GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) \
-	$(GCONFTOOL) --makefile-install-rule $(dist_schema_DATA)
-endif
-
-if GCONF_SCHEMAS_INSTALL
-uninstall-local:
-	-GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) \
-	$(GCONFTOOL) --makefile-uninstall-rule $(dist_schema_DATA)
-endif
+EXTRA_DIST = deja-dup.desktop.in deja-dup-monitor.desktop.in.in deja-dup-preferences.desktop.in org.gnome.DejaDup.gschema.xml.in
+DISTCLEANFILES = deja-dup.desktop deja-dup-monitor.desktop deja-dup-monitor.desktop.in deja-dup-preferences.desktop org.gnome.DejaDup.gschema.xml
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t
 install-data-hook: update-icon-cache
 uninstall-hook: update-icon-cache
+
 update-icon-cache:
 	@-if test -z "$(DESTDIR)"; then \
 		echo "Updating Gtk icon cache."; \
@@ -62,4 +54,3 @@ update-icon-cache:
 		echo "*** Icon cache not updated.  After (un)install, run these:"; \
 		echo "***   $(gtk_update_icon_cache) $(datadir)/icons/hicolor"; \
 	fi
-
