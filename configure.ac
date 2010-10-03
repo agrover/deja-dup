@@ -42,7 +42,7 @@ LT_INIT
 AC_PATH_PROG(PO4A, po4a)
 
 # Checks for vala
-AC_PROG_VALAC([0.9.2])
+AC_PROG_VALAC([0.9.5])
 
 # Sets up gettext.
 GETTEXT_PACKAGE="$PACKAGE"
