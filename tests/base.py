@@ -308,7 +308,7 @@ def last_date_change(to_date, dest='local'):
      from to_date's timestamp'''
   destdir, latest = last_manifest(dest)
   olddate = get_manifest_date(latest)
-  newdate = subprocess.Popen(['date', '-d', to_date, '+%Y%m%dT%H%M%SZ'], stdout=subprocess.PIPE).communicate()[0].strip()
+  newdate = subprocess.Popen(['date', '--utc', '-d', to_date, '+%Y%m%dT%H%M%SZ'], stdout=subprocess.PIPE).communicate()[0].strip()
   cachedir = environ['XDG_CACHE_HOME'] + '/deja-dup/'
   cachedir += os.listdir(cachedir)[0]
   for d in (destdir, cachedir):
