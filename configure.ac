@@ -18,7 +18,7 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 # Sets up autoconf.
-AC_INIT([Déjà Dup],[17.1],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup], [https://launchpad.net/deja-dup])
+AC_INIT([Déjà Dup],[17.0],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup], [https://launchpad.net/deja-dup])
 AC_PREREQ(2.64)
 AC_CONFIG_SRCDIR(deja-dup/main.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
@@ -87,7 +87,7 @@ AS_IF([test "x$with_gtk3" != xno],
      APPINDICATOR_MODULE=appindicator3-0.1],
     [if test "x$with_gtk3" != xcheck; then
        AC_MSG_FAILURE(
-         [--with-gtk3 was given, but test for $GTK_MODULE GDK_X11_MODULE $UNIQUE_MODULE failed])
+         [--with-gtk3 was given, but test for gtk+-3.0 >= 2.90 gdk-x11-3.0 unique-3.0 failed])
      else
        AC_MSG_NOTICE([GTK+ 3 stack is not available so using GTK+ 2])
      fi
