@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-07-23 20:57-0400\n"
-"PO-Revision-Date: 2010-09-08 02:49+0000\n"
+"POT-Creation-Date: 2010-09-11 14:50-0400\n"
+"PO-Revision-Date: 2010-09-27 17:23+0000\n"
 "Last-Translator: Nobuto MURATA <nobuto@nobuto-murata.org>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2010-09-09 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-09-28 05:20+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -44,7 +44,7 @@ msgstr "Déjà Dup バックアップツール"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:327
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:338
 msgid "Déjà Dup Monitor"
 msgstr "Déjà Dup モニタ"
 
@@ -484,7 +484,7 @@ msgstr[0] "ファイルが正常に復元されました。"
 msgid "Restoring…"
 msgstr "復元しています…"
 
-#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:32
+#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:33
 #: ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr "バージョンを表示する"
@@ -661,15 +661,15 @@ msgstr "secret access key を記憶する(_R)"
 msgid "Enter Amazon S3 access key"
 msgstr "Amazon S3 access key の入力"
 
-#: ../common/CommonUtils.vala:241
+#: ../common/CommonUtils.vala:195
 msgid "Unknown"
 msgstr "不明"
 
-#: ../common/DuplicityInfo.vala:141
+#: ../common/DuplicityInfo.vala:143
 msgid "Could not run duplicity"
 msgstr "duplicity を実行できません"
 
-#: ../common/DuplicityInfo.vala:146
+#: ../common/DuplicityInfo.vala:148
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -677,7 +677,7 @@ msgstr ""
 "duplicity のバージョンを認識できません\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:148
+#: ../common/DuplicityInfo.vala:150
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -686,15 +686,15 @@ msgstr ""
 "duplicity のバージョン ‘%s’ を解釈できません。\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:150
+#: ../common/DuplicityInfo.vala:152
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr "duplicity なしでは Déjà Dup は機能しません。終了します。"
 
-#: ../common/DuplicityInfo.vala:154
+#: ../common/DuplicityInfo.vala:156
 msgid "Duplicity’s version is too old"
 msgstr "Duplicity のバージョンが古いです"
 
-#: ../common/DuplicityInfo.vala:155
+#: ../common/DuplicityInfo.vala:157
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -705,52 +705,53 @@ msgstr "Déjà Dup にはバージョン %d.%d.%.2d の duplicity が必要で�
 msgid "Paused (no network)"
 msgstr "中断（ネットワークが使用できません）"
 
-#: ../common/Duplicity.vala:277 ../common/Duplicity.vala:285
-#: ../common/Duplicity.vala:320 ../common/Operation.vala:95
+#: ../common/Duplicity.vala:279 ../common/Duplicity.vala:287
+#: ../common/Duplicity.vala:322 ../common/Operation.vala:60
+#: ../common/Operation.vala:97
 msgid "Preparing…"
 msgstr "準備しています…"
 
-#: ../common/Duplicity.vala:308
+#: ../common/Duplicity.vala:310
 msgid "Creating the first backup.  This may take a while."
 msgstr "最初のバックアップを作成しています。しばらく時間がかかります。"
 
-#: ../common/Duplicity.vala:310
+#: ../common/Duplicity.vala:312
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
 msgstr "バックアップの破損を防ぐために完全なバックアップを作成しています。通常より時間がかかります。"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:407
+#: ../common/Duplicity.vala:409
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "バックアップ保存場所の空き容量が足りません。もっと空き容量の大きいもので試してください。"
 
-#: ../common/Duplicity.vala:428
+#: ../common/Duplicity.vala:430
 msgid "Backup location does not have enough free space."
 msgstr "バックアップの保存場所に十分な空き容量がありません。"
 
-#: ../common/Duplicity.vala:448 ../common/Duplicity.vala:462
+#: ../common/Duplicity.vala:450 ../common/Duplicity.vala:464
 msgid "Cleaning up…"
 msgstr "クリーンアップしています…"
 
-#: ../common/Duplicity.vala:554 ../common/Duplicity.vala:881
+#: ../common/Duplicity.vala:556 ../common/Duplicity.vala:883
 msgid "Failed with an unknown error."
 msgstr "不明なエラーで失敗しました"
 
-#: ../common/Duplicity.vala:748
+#: ../common/Duplicity.vala:750
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "‘%s’ を復元できません: ファイルがバックアップ内に見つかりません"
 
-#: ../common/Duplicity.vala:753 ../common/Duplicity.vala:832
+#: ../common/Duplicity.vala:755 ../common/Duplicity.vala:834
 msgid "Bad encryption password."
 msgstr "暗号化パスワードが違います。"
 
-#: ../common/Duplicity.vala:758
+#: ../common/Duplicity.vala:760
 msgid "Computer name changed"
 msgstr "コンピュータ名が変更されました"
 
-#: ../common/Duplicity.vala:758
+#: ../common/Duplicity.vala:760
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -759,67 +760,67 @@ msgid ""
 msgstr ""
 "見つかったバックアップのコンピュータ名は %s ですが、現在のコンピュータ名は %s です。意図していない場合は、別の場所にバックアップしてください。"
 
-#: ../common/Duplicity.vala:771
+#: ../common/Duplicity.vala:773
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "'%s' を作成しようとしましたが権限がありません。"
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:775 ../common/Duplicity.vala:779
+#: ../common/Duplicity.vala:777 ../common/Duplicity.vala:781
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "'%s' を読み込もうとしましたが権限がありません。"
 
-#: ../common/Duplicity.vala:783
+#: ../common/Duplicity.vala:785
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "'%s' を削除しようとしましたが権限がありません。"
 
-#: ../common/Duplicity.vala:790
+#: ../common/Duplicity.vala:792
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "バックアップの保存場所 '%s' が存在しません。"
 
-#: ../common/Duplicity.vala:796 ../common/Duplicity.vala:851
+#: ../common/Duplicity.vala:798 ../common/Duplicity.vala:853
 msgid "No space left."
 msgstr "空き容量がありません。"
 
-#: ../common/Duplicity.vala:810
+#: ../common/Duplicity.vala:812
 msgid "Invalid ID."
 msgstr "不正な ID です。"
 
-#: ../common/Duplicity.vala:812
+#: ../common/Duplicity.vala:814
 msgid "Invalid secret key."
 msgstr "不正な secret key です。"
 
-#: ../common/Duplicity.vala:814
+#: ../common/Duplicity.vala:816
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "あなたのAmazon Web サービスアカウントは S3 サービスにサインアップされていません。"
 
-#: ../common/Duplicity.vala:827
+#: ../common/Duplicity.vala:829
 msgid "S3 bucket name is not available."
 msgstr "S3 バケット名が使用できません。"
 
-#: ../common/Duplicity.vala:836
+#: ../common/Duplicity.vala:838
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "ファイル ‘%s’ を読み込み中にエラー。"
 
-#: ../common/Duplicity.vala:838
+#: ../common/Duplicity.vala:840
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "ファイル ‘%s’ を書き込み中にエラー。"
 
-#: ../common/Duplicity.vala:853
+#: ../common/Duplicity.vala:855
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "'%s' に空き容量がありません。"
 
-#: ../common/Duplicity.vala:873
+#: ../common/Duplicity.vala:875
 msgid "No backup files found"
 msgstr "バックアップファイルが見つかりません"
 
-#: ../common/Duplicity.vala:909
+#: ../common/Duplicity.vala:911
 msgid "Uploading…"
 msgstr "アップロードしています…"
 
@@ -843,11 +844,15 @@ msgstr "%s を復元できませんでした: %s"
 msgid "Checking for backups…"
 msgstr "バックアップを照合しています…"
 
-#: ../common/Operation.vala:210
+#: ../common/Operation.vala:58
+msgid "Listing files…"
+msgstr "ファイルをリストアップしています…"
+
+#: ../common/Operation.vala:216
 msgid "Another Déjà Dup is already running"
 msgstr "Déjà Dup はすでに起動しています"
 
-#: ../monitor/monitor.vala:229
+#: ../monitor/monitor.vala:240
 msgid "Scheduled backup delayed"
 msgstr "スケジュールされたバックアップが延期されました"
 
@@ -946,47 +951,47 @@ msgstr "ホーム・フォルダ"
 msgid "Trash"
 msgstr "ゴミ箱"
 
-#: ../widgets/ConfigLabelPolicy.vala:66
+#: ../widgets/ConfigLabelPolicy.vala:71
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
 msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低1週間保存されます。"
 
-#: ../widgets/ConfigLabelPolicy.vala:69
+#: ../widgets/ConfigLabelPolicy.vala:74
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
 msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低1ヶ月間保存されます。"
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:77
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
 msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低2ヶ月間保存されます。"
 
-#: ../widgets/ConfigLabelPolicy.vala:75
+#: ../widgets/ConfigLabelPolicy.vala:80
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
 msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低3ヶ月間保存されます。"
 
-#: ../widgets/ConfigLabelPolicy.vala:78
+#: ../widgets/ConfigLabelPolicy.vala:83
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低6ヶ月間保存されます。"
 
-#: ../widgets/ConfigLabelPolicy.vala:81
+#: ../widgets/ConfigLabelPolicy.vala:86
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低1年間保存されます。"
 
-#: ../widgets/ConfigLabelPolicy.vala:84
+#: ../widgets/ConfigLabelPolicy.vala:89
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは保存され続けます。"
 
-#: ../widgets/ConfigLabelPolicy.vala:87
+#: ../widgets/ConfigLabelPolicy.vala:92
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
