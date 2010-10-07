@@ -160,7 +160,7 @@ public abstract class AssistantOperation : Assistant
     
     Gtk.TextIter iter;
     buffer.get_end_iter(out iter);
-    buffer.insert_text(iter, log_line, (int)log_line.size());
+    buffer.insert_text(iter, log_line, (int)log_line.length);
     if (adjustment_at_end)
       adjust.value = adjust.upper;
   }
@@ -239,7 +239,7 @@ public abstract class AssistantOperation : Assistant
     }
     
     go_to_page(summary_page);
-    set_header_icon(Gtk.STOCK_DIALOG_ERROR);
+    set_header_icon(Gtk.Stock.DIALOG_ERROR);
     page_box.queue_resize();
   }
 
@@ -451,7 +451,7 @@ public abstract class AssistantOperation : Assistant
         do_apply();
     }
     else if (page == password_page)
-      set_header_icon(Gtk.STOCK_DIALOG_AUTHENTICATION);
+      set_header_icon(Gtk.Stock.DIALOG_AUTHENTICATION);
   }
   
   public void hide_everything()

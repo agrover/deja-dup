@@ -23,7 +23,7 @@ VALA_CFLAGS = \
 	--vapidir $(top_srcdir)/common \
 	--vapidir $(top_srcdir)/vapi \
 	--pkg libcommon \
-	--pkg @GTK_MODULE@ \
+	--pkg $(GTK_MODULE) \
 	--pkg config
 
 AM_CFLAGS = \

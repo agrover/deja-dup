@@ -35,7 +35,7 @@ public abstract class Assistant : Gtk.Dialog
   public signal void prepare(Gtk.Widget page);
   public signal void forward();
   public signal void backward();
-  public string apply_text {get; set; default = Gtk.STOCK_APPLY;}
+  public string apply_text {get; set; default = Gtk.Stock.APPLY;}
   public bool resume_supported {get; set; default = false;}
 
   public enum Type {
@@ -74,8 +74,6 @@ public abstract class Assistant : Gtk.Dialog
 
   construct
   {
-    has_separator = false;
-
     infos = new List<PageInfo>();
 
     var ebox = new Gtk.EventBox();
@@ -263,7 +261,7 @@ public abstract class Assistant : Gtk.Dialog
 
     bool show_cancel = false, show_back = false, show_forward = false,
          show_apply = false, show_close = false, show_resume = false;
-    string forward_text = Gtk.STOCK_GO_FORWARD;
+    string forward_text = Gtk.Stock.GO_FORWARD;
 
     switch (info.type) {
     default:
@@ -308,13 +306,13 @@ public abstract class Assistant : Gtk.Dialog
       area.remove(apply_button); apply_button = null;}
 
     if (show_cancel)
-      cancel_button = add_button(Gtk.STOCK_CANCEL, CANCEL);
+      cancel_button = add_button(Gtk.Stock.CANCEL, CANCEL);
     if (show_close) {
-      close_button = add_button(Gtk.STOCK_CLOSE, CLOSE);
+      close_button = add_button(Gtk.Stock.CLOSE, CLOSE);
       close_button.grab_default();
     }
     if (show_back)
-      back_button = add_button(Gtk.STOCK_GO_BACK, BACK);
+      back_button = add_button(Gtk.Stock.GO_BACK, BACK);
     if (show_resume) {
       resume_button = add_button(_("_Resume Later"), RESUME);
       resume_button.grab_default();

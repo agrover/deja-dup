@@ -40,8 +40,8 @@ public class PreferencesDialog : Gtk.Dialog
   construct {
     set("title", _("Déjà Dup Preferences"),
         "has-separator", false);
-    add_buttons(Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE,
-                Gtk.STOCK_HELP, Gtk.ResponseType.HELP);
+    add_buttons(Gtk.Stock.CLOSE, Gtk.ResponseType.CLOSE,
+                Gtk.Stock.HELP, Gtk.ResponseType.HELP);
     response.connect(handle_response);
     
     Gtk.Notebook notebook = new Gtk.Notebook();
@@ -80,7 +80,7 @@ public class PreferencesDialog : Gtk.Dialog
     if (last_run != null && last_run != "") {
       location_label_noedit = new DejaDup.ConfigLabelLocation();
       location_label_noedit.changed.connect(handle_location_label_changed);
-      location_label_button = new Gtk.Button.from_stock(Gtk.STOCK_EDIT);
+      location_label_button = new Gtk.Button.from_stock(Gtk.Stock.EDIT);
       location_label_button.clicked.connect(handle_edit_location);
       button_sizes.add_widget(location_label_button);
       location_hbox.pack_start(location_label_noedit, true, true, 0);

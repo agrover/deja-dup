@@ -48,8 +48,8 @@ public class ConfigLocation : ConfigWidget
       button.show_all();
     }
     
-    dialog.add_buttons(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                       Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT);
+    dialog.add_buttons(Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL,
+                       Gtk.Stock.OPEN, Gtk.ResponseType.ACCEPT);
     dialog.set_default_response(Gtk.ResponseType.ACCEPT);
     
     button = new Gtk.FileChooserButton.with_dialog(dialog);

@@ -32,10 +32,11 @@ public class MainWindow : Gtk.Window
     
     var restore_button = new Gtk.Button();
     restore_button.set("child", restore_align);
-    
+
+    var theme = Gtk.IconTheme.get_for_screen(get_screen());
+
     var restore_icon = new Gtk.Image();
     try {
-      var theme = Gtk.IconTheme.get_for_screen(get_screen());
       var restore_pix = theme.load_icon("deja-dup-restore", 128,
                                         Gtk.IconLookupFlags.FORCE_SIZE);
       restore_icon.set("pixbuf", restore_pix);
@@ -62,7 +63,6 @@ public class MainWindow : Gtk.Window
     
     var backup_icon = new Gtk.Image();
     try {
-      var theme = Gtk.IconTheme.get_for_screen(get_screen());
       var backup_pix = theme.load_icon("deja-dup-backup", 128,
                                        Gtk.IconLookupFlags.FORCE_SIZE);
       backup_icon.set("pixbuf", backup_pix);
@@ -197,21 +197,21 @@ public class MainWindow : Gtk.Window
     action_group.add_action_with_accel (action, "<control>R");
     this.restore_action = action;
     
-    action = new Gtk.Action ("QuitAction", null, null, Gtk.STOCK_QUIT);
+    action = new Gtk.Action ("QuitAction", null, null, Gtk.Stock.QUIT);
     action.activate.connect(Gtk.main_quit);
     action_group.add_action_with_accel (action, "<control>Q");
     
     action = new Gtk.Action ("EditMenuAction", _("_Edit"), null, null);
     action_group.add_action (action);
     
-    action = new Gtk.Action ("PreferencesAction", null, null, Gtk.STOCK_PREFERENCES);
+    action = new Gtk.Action ("PreferencesAction", null, null, Gtk.Stock.PREFERENCES);
     action.activate.connect(on_preferences);
     action_group.add_action (action);
     
     action = new Gtk.Action ("HelpMenuAction", _("_Help"), null, null);
     action_group.add_action (action);
     
-    action = new Gtk.Action ("ContentsAction", _("_Contents"), null, Gtk.STOCK_HELP);
+    action = new Gtk.Action ("ContentsAction", _("_Contents"), null, Gtk.Stock.HELP);
     action.activate.connect(on_contents);
     action_group.add_action_with_accel (action, "F1");
     
@@ -227,7 +227,7 @@ public class MainWindow : Gtk.Window
     action.activate.connect(on_report);
     action_group.add_action (action);
     
-    action = new Gtk.Action ("AboutAction", null, null, Gtk.STOCK_ABOUT);
+    action = new Gtk.Action ("AboutAction", null, null, Gtk.Stock.ABOUT);
     action.activate.connect(on_about);
     action_group.add_action (action);
     
@@ -257,7 +257,7 @@ public class MainWindow : Gtk.Window
 
     var manager = new Gtk.UIManager ();
     try {
-    manager.add_ui_from_string (ui, (ssize_t)ui.size ());
+    manager.add_ui_from_string (ui, (ssize_t)ui.length);
     } catch (Error e)  {
       error ("Internal error: bad ui string.\n");
     }
