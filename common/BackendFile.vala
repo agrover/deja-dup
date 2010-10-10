@@ -378,6 +378,8 @@ public class BackendFile : Backend
     try {
       var file = get_file_from_settings();
       var info = yield file.query_filesystem_info_async(attr, Priority.DEFAULT, null);
+      if (!info.has_attribute(attr))
+        return INFINITE_SPACE;
       var space = info.get_attribute_uint64(attr);
       if (space == INFINITE_SPACE)
         return space - 1; // avoid accidentally reporting infinite
