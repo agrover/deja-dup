@@ -150,7 +150,7 @@ public class DuplicityInstance : Object
         // Set environment variables for subprocess here because sudo reserves
         // the right to strip them.
         foreach (string env in envp_in)
-          args.append("export %s\n".printf(env));
+          args.append("export '%s'\n".printf(env));
 
         foreach (string a in argv) {
           if (a == null)
