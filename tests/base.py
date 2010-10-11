@@ -52,16 +52,18 @@ def create_temp_dir():
     temp_dir = tempfile.mkdtemp()
     cleanup_dirs += [temp_dir]
 
-def get_temp_name(extra):
+def get_temp_name(extra, make=False):
   global temp_dir
   create_temp_dir()
+  if make:
+    os.makedirs(temp_dir + '/' + extra)
   return temp_dir + '/' + extra
 
 # The current directory is always the 'distdir'.  But 'srcdir' may be different
 # if we're running inside a distcheck for example.  So note that we check for
 # srcdir and use it if available.  Else, default to current directory.
 
-def setup(backend = None, encrypt = None, start = True, dest = None, sources = [], excludes = [], args=['']):
+def setup(backend = None, encrypt = None, start = True, dest = None, sources = [], excludes = [], args=[''], root_prompt = False):
   global cleanup_dirs, cleanup_pids, ldtp, latest_duplicity
 
   if 'srcdir' in environ:
@@ -116,6 +118,7 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
 
   environ['PYTHONPATH'] = extra_pythonpaths + (environ['PYTHONPATH'] if 'PYTHONPATH' in environ else '')
   environ['PATH'] = extra_paths + environ['PATH']
+  environ['GNUPGHOME'] = get_temp_name('gnupg', True)
   
   #environ['G_DEBUG'] = 'fatal_warnings'
   
@@ -141,8 +144,9 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
   
   if encrypt is not None:
     set_settings_value("encrypt", 'true' if encrypt else 'false')
-  
-  set_settings_value("root-prompt", 'false')
+
+  if not root_prompt:
+    set_settings_value("root-prompt", 'false')
 
   #daemon_env = subprocess.Popen(['gnome-keyring-daemon'], stdout=subprocess.PIPE).communicate()[0].strip()
   #daemon_env = daemon_env.split('\n')

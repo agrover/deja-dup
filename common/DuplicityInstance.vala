@@ -146,7 +146,13 @@ public class DuplicityInstance : Object
         
         // We have to wrap all current args into one string.
         StringBuilder args = new StringBuilder();
-        foreach(string a in argv) {
+
+        // Set environment variables for subprocess here because sudo reserves
+        // the right to strip them.
+        foreach (string env in envp_in)
+          args.append("export %s\n".printf(env));
+
+        foreach (string a in argv) {
           if (a == null)
             break;
           if (args.len == 0)
