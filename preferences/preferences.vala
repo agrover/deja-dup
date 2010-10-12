@@ -32,29 +32,11 @@ class DejaDupPreferences : Object
     status = 0;
     
     if (show_version) {
-      print("%s %s\n", _("Déjà Dup Preferences"), Config.VERSION);
+      print("%s %s\n", Environment.get_application_name(), Config.VERSION);
       return false;
     }
     
     return true;
-  }
-  
-  static PreferencesDialog pref_window;
-  
-  static Unique.Response message_received(Unique.App app,
-                                          int command,
-                                          Unique.MessageData message_data,
-                                          uint time_)
-  {
-    var res = Unique.Response.OK;
-    
-    switch (command) {
-    case Unique.Command.ACTIVATE:
-      pref_window.present_with_time(time_);
-      break;
-    }
-    
-    return res;
   }
   
   public static int main(string [] args)
@@ -62,9 +44,9 @@ class DejaDupPreferences : Object
     Intl.textdomain(Config.GETTEXT_PACKAGE);
     Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
     Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
-    
+
     Environment.set_application_name(_("Déjà Dup Preferences"));
-    
+
     OptionContext context = new OptionContext("");
     context.add_main_entries(options, Config.GETTEXT_PACKAGE);
     context.add_group(Gtk.get_option_group(false)); // allow console use
@@ -74,33 +56,23 @@ class DejaDupPreferences : Object
       printerr("%s\n\n%s", e.message, context.get_help(true, null));
       return 1;
     }
-    
+
     int status;
     if (!handle_console_options(out status))
       return status;
-    
+
     DejaDup.initialize();
-    Gtk.init(ref args); // to open display ('cause we passed false above)
-    
-    // We don't have a solid domain for Déjà Dup...  But we're GNOME-ish
-    var app = new Unique.App("org.gnome.DejaDup.Preferences", null);
-    
-    if (app.is_running)
-      app.send_message(Unique.Command.ACTIVATE, null);
-    else {
-      // We're first instance.  Yay!    
-      Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
-      Gtk.Window.set_default_icon_name(Config.PACKAGE);
-      
-      pref_window = new PreferencesDialog();
-      
-      app.message_received.connect(message_received);
-      app.watch_window(pref_window);
-      
-      pref_window.show_all();
-      Gtk.main();
-    }
-    
+
+    var app = new Gtk.Application("org.gnome.DejaDup.Preferences", ref args);
+    Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
+    Gtk.Window.set_default_icon_name(Config.PACKAGE);
+
+    var prefs = new PreferencesDialog();
+    app.add_window(prefs);
+    prefs.show_all();
+
+    app.run();
+
     return 0;
   }
 }

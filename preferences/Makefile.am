@@ -23,7 +23,6 @@ VALA_CFLAGS = \
 	--vapidir $(top_srcdir)/widgets \
 	--vapidir $(top_srcdir)/vapi \
 	--pkg @GTK_MODULE@ \
-	--pkg @UNIQUE_MODULE@ \
 	--pkg gio-2.0 \
 	--pkg libcommon \
 	--pkg libwidgets \

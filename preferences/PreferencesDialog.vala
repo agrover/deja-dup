@@ -38,8 +38,7 @@ public class PreferencesDialog : Gtk.Dialog
   }
   
   construct {
-    set("title", _("Déjà Dup Preferences"),
-        "has-separator", false);
+    set("title", _("Déjà Dup Preferences"));
     add_buttons(Gtk.Stock.CLOSE, Gtk.ResponseType.CLOSE,
                 Gtk.Stock.HELP, Gtk.ResponseType.HELP);
     response.connect(handle_response);
@@ -320,7 +319,8 @@ public class PreferencesDialog : Gtk.Dialog
       DejaDup.show_uri(dlg, "ghelp:deja-dup#prefs");
       break;
     default:
-      Gtk.main_quit();
+      hide();
+      Idle.add(() => {destroy(); return false;});
       break;
     }
   }
