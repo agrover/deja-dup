@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>,
+    © 2008–2010 Michael Terry <mike@mterry.name>,
     © 2009 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
@@ -24,6 +24,7 @@ class Monitor : Object {
 
 static uint timeout_id;
 static Pid pid;
+static bool op_active = false;
 static bool reactive_check;
 static bool testing;
 
@@ -36,10 +37,20 @@ static const OptionEntry[] options = {
 
 static Notify.Notification note;
 
-static void network_changed(DejaDup.NetworkManager nm, bool connected)
+static void op_started(DBusConnection conn, string name, string name_owner)
+{
+  op_active = true;
+}
+
+static void op_ended(DBusConnection conn, string name)
+{
+  op_active = false;
+}
+
+static void network_changed()
 {
   reactive_check = true;
-  if (connected)
+  if (DejaDup.Network.get().connected)
     prepare_next_run(); // in case network manager was blocking us
   reactive_check = false;
 }
@@ -101,21 +112,10 @@ static Date most_recent_scheduled_date(int period)
 
 static Date next_run_date()
 {
-  var client = GConf.Client.get_default();
-  
-  bool periodic;
-  string last_run_string;
-  int period_days;
-  
-  try {
-    periodic = client.get_bool(DejaDup.PERIODIC_KEY);
-    last_run_string = client.get_string(DejaDup.LAST_RUN_KEY);
-    period_days = client.get_int(DejaDup.PERIODIC_PERIOD_KEY);
-  }
-  catch (Error e) {
-    warning("%s", e.message);
-    return Date();
-  }
+  var settings = DejaDup.get_settings();
+  var periodic = settings.get_boolean(DejaDup.PERIODIC_KEY);
+  var last_run_string = settings.get_string(DejaDup.LAST_RUN_KEY);
+  var period_days = settings.get_int(DejaDup.PERIODIC_PERIOD_KEY);
   
   if (!periodic)
     return Date();
@@ -231,7 +231,7 @@ static bool kickoff()
   }
 
   // Don't run right now if an instance is already running
-  if (pid == (Pid)0 && !DejaDup.test_bus_claimed("Operation")) {
+  if (pid == (Pid)0 && !op_active) {
     try {
       string[] argv = new string[3];
       argv[0] = "deja-dup";
@@ -300,19 +300,18 @@ static void prepare_next_run()
   prepare_run(wait_time);
 }
 
-static void watch_gconf()
+static void prepare_if_necessary(string key)
 {
-  var client = GConf.Client.get_default();
-  
-  try {
-    client.add_dir(DejaDup.GCONF_DIR, GConf.ClientPreloadType.NONE);
-    client.notify_add(DejaDup.LAST_RUN_KEY, prepare_next_run);
-    client.notify_add(DejaDup.PERIODIC_KEY, prepare_next_run);
-    client.notify_add(DejaDup.PERIODIC_PERIOD_KEY, prepare_next_run);
-  }
-  catch (Error e) {
-    warning("%s\n", e.message);
-  }
+  if (key == DejaDup.LAST_RUN_KEY ||
+      key == DejaDup.PERIODIC_KEY ||
+      key == DejaDup.PERIODIC_PERIOD_KEY)
+    prepare_next_run();
+}
+
+static void watch_settings()
+{
+  var settings = DejaDup.get_settings();
+  settings.changed.connect(prepare_if_necessary);
 }
 
 static int main(string[] args)
@@ -340,7 +339,10 @@ static int main(string[] args)
     return status;
 
   DejaDup.initialize();
-  DejaDup.NetworkManager.get().changed.connect(network_changed);
+  DejaDup.Network.get().notify["connected"].connect(network_changed);
+
+  Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
+                 BusNameWatcherFlags.NONE, op_started, op_ended);
 
   var mon = VolumeMonitor.get();
   mon.ref(); // bug 569418; bad things happen when VM goes away
@@ -348,13 +350,13 @@ static int main(string[] args)
 
   var loop = new MainLoop(null, false);
 
-  // Delay first check to give NetworkManager a chance to start up.
+  // Delay first check to give the network a chance to start up.
   if (testing)
     prepare_next_run();
   else
     Timeout.add_seconds(120, () => {prepare_next_run(); return false;});
 
-  watch_gconf();
+  watch_settings();
   loop.run();
   
   return 0;

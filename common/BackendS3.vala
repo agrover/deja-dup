@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,10 +21,10 @@ using GLib;
 
 namespace DejaDup {
 
-public const string S3_ROOT_KEY = "/apps/deja-dup/s3";
-public const string S3_ID_KEY = "/apps/deja-dup/s3/id";
-public const string S3_BUCKET_KEY = "/apps/deja-dup/s3/bucket";
-public const string S3_FOLDER_KEY = "/apps/deja-dup/s3/folder";
+public const string S3_ROOT = "S3";
+public const string S3_ID_KEY = "id";
+public const string S3_BUCKET_KEY = "bucket";
+public const string S3_FOLDER_KEY = "folder";
 
 const string S3_SERVER = "s3.amazonaws.com";
 
@@ -49,23 +49,23 @@ public class BackendS3 : Backend
   
   public override bool is_ready(out string when) {
     when = _("Backup will begin when a network connection becomes available.");
-    return NetworkManager.get().connected;
+    return Network.get().connected;
   }
 
   public override string? get_location() throws Error
   {
-    var client = get_gconf_client();
+    var settings = get_settings(S3_ROOT);
     
-    var bucket = client.get_string(S3_BUCKET_KEY);
+    var bucket = settings.get_string(S3_BUCKET_KEY);
     var default_bucket = get_default_bucket();
     if (bucket == null || bucket == "" ||
         (bucket.has_prefix("deja-dup-auto-") &&
          !bucket.has_prefix(default_bucket))) {
       bucket = default_bucket;
-      client.set_string(S3_BUCKET_KEY, bucket);
+      settings.set_string(S3_BUCKET_KEY, bucket);
     }
     
-    var folder = client.get_string(S3_FOLDER_KEY);
+    var folder = settings.get_string(S3_FOLDER_KEY);
     if (folder != null && folder != "") {
       if (folder[0] != '/')
         bucket = "%s/%s".printf(bucket, folder);
@@ -79,49 +79,44 @@ public class BackendS3 : Backend
   public bool bump_bucket() {
     // OK, the bucket we tried must already exist, so let's use a different
     // one.  We'll take previous bucket name and increment it.
-    try {
-      var client = GConf.Client.get_default();
-      
-      var bucket = client.get_string(S3_BUCKET_KEY);
-      if (bucket == "deja-dup") {
-        // Until 7.4, we exposed the bucket name and defaulted to deja-dup.
-        // Since buckets are S3-global, everyone was unable to use that bucket,
-        // since I (Mike Terry) owned that bucket.  If we see this setting,
-        // we should default to the generic bucket name rather than assume the
-        // user chose this bucket and error out.
-        bucket = get_default_bucket();
-        client.set_string(S3_BUCKET_KEY, bucket);
-        return true;
-      }
-      
-      if (!bucket.has_prefix("deja-dup-auto-"))
-        return false;
-      
-      var bits = bucket.split("-");
-      if (bits == null || bits[0] == null || bits[1] == null ||
-          bits[2] == null || bits[3] == null)
-        return false;
-      
-      if (bits[4] == null)
-        bucket += "-2";
-      else {
-        var num = bits[4].to_long();
-        bits[4] = (num + 1).to_string();
-        bucket = string.joinv("-", bits);
-      }
-      
-      client.set_string(S3_BUCKET_KEY, bucket);
+    var settings = get_settings(S3_ROOT);
+    
+    var bucket = settings.get_string(S3_BUCKET_KEY);
+    if (bucket == "deja-dup") {
+      // Until 7.4, we exposed the bucket name and defaulted to deja-dup.
+      // Since buckets are S3-global, everyone was unable to use that bucket,
+      // since I (Mike Terry) owned that bucket.  If we see this setting,
+      // we should default to the generic bucket name rather than assume the
+      // user chose this bucket and error out.
+      bucket = get_default_bucket();
+      settings.set_string(S3_BUCKET_KEY, bucket);
       return true;
     }
-    catch (Error e) {
+    
+    if (!bucket.has_prefix("deja-dup-auto-"))
       return false;
+    
+    var bits = bucket.split("-");
+    if (bits == null || bits[0] == null || bits[1] == null ||
+        bits[2] == null || bits[3] == null)
+      return false;
+    
+    if (bits[4] == null)
+      bucket += "-2";
+    else {
+      var num = bits[4].to_long();
+      bits[4] = (num + 1).to_string();
+      bucket = string.joinv("-", bits);
     }
+    
+    settings.set_string(S3_BUCKET_KEY, bucket);
+    return true;
   }
   
   public override string? get_location_pretty() throws Error
   {
-    var client = get_gconf_client();
-    var folder = client.get_string(S3_FOLDER_KEY);
+    var settings = get_settings(S3_ROOT);
+    var folder = settings.get_string(S3_FOLDER_KEY);
     if (folder == null || folder == "")
       folder = "/";
     
@@ -129,14 +124,14 @@ public class BackendS3 : Backend
     return _("%s on Amazon S3").printf(folder);
   }
   
-  string gconf_id;
+  string settings_id;
   string id;
   string secret_key;
   public override async void get_envp() throws Error
   {
-    var client = get_gconf_client();
-    gconf_id = client.get_string(S3_ID_KEY);
-    id = gconf_id == null ? "" : gconf_id;
+    var settings = get_settings(S3_ROOT);
+    settings_id = settings.get_string(S3_ID_KEY);
+    id = settings_id == null ? "" : settings_id;
     
     if (id != "" && secret_key != null) {
       // We've already been run before and got the key
@@ -207,13 +202,9 @@ public class BackendS3 : Backend
   }
   
   void got_secret_key() {
-    var client = get_gconf_client();
-    if (id != gconf_id) {
-      try {
-        client.set_string(S3_ID_KEY, id);
-      }
-      catch (Error e) {warning("%s\n", e.message);}
-    }
+    var settings = get_settings(S3_ROOT);
+    if (id != settings_id)
+      settings.set_string(S3_ID_KEY, id);
     
     List<string> envp = new List<string>();
     envp.append("AWS_ACCESS_KEY_ID=%s".printf(id));

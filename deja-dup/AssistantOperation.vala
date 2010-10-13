@@ -363,20 +363,12 @@ public abstract class AssistantOperation : Assistant
   {
     /*
      * Creates configure pages if required
-     *
-     * 
      */
-    var client = DejaDup.get_gconf_client();
+    var settings = DejaDup.get_settings();
     string val;
-    try {
-      val = client.get_string(DejaDup.LAST_RUN_KEY);
-      if (val != null && val != "")
-        return;
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
+    val = settings.get_string(DejaDup.LAST_RUN_KEY);
+    if (val != null && val != "")
       return;
-    }
     
     add_custom_config_pages();
   }
@@ -446,7 +438,7 @@ public abstract class AssistantOperation : Assistant
     }
   }
   
-  protected void do_apply()
+  protected async void do_apply()
   {
     /*
      * Applies/starts operation that was configured during assistant process and
@@ -475,7 +467,7 @@ public abstract class AssistantOperation : Assistant
     status_icon.hide_all.connect((s) => {hide_everything();});
 
     try {
-      op.start();
+      yield op.start();
     }
     catch (Error e) {
       warning("%s\n", e.message);

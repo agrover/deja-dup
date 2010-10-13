@@ -71,8 +71,10 @@ public abstract class Operation : Object
       return _("Restoring…");
     case Operation.Mode.STATUS:
       return _("Checking for backups…");
+    case Operation.Mode.LIST:
+      return _("Listing files…");
     default:
-      return "";
+      return _("Preparing…");
     }
   }
   
@@ -106,7 +108,7 @@ public abstract class Operation : Object
     }
   }
   
-  public virtual void start() throws Error
+  public async virtual void start() throws Error
   {
     action_desc_changed(_("Preparing…"));    
     if (backend == null) {
@@ -116,14 +118,12 @@ public abstract class Operation : Object
     
     connect_to_dup();
     
-    if (!claim_bus(true)) {
-      done(false, false);
-      return;
-    }
-    set_session_inhibited(true);
+    claim_bus();
+    yield set_session_inhibited(true);
+    
     // Get encryption passphrase if needed
-    var client = get_gconf_client();
-    if (client.get_bool(ENCRYPT_KEY) && passphrase == null) {
+    var settings = get_settings();
+    if (settings.get_boolean(ENCRYPT_KEY) && passphrase == null) {
       needs_password = true;
       passphrase_required(); // will call continue_with_passphrase when ready
     }
@@ -157,7 +157,7 @@ public abstract class Operation : Object
     backend.envp_ready.connect(continue_with_envp);
   }
   
-  public void continue_with_passphrase(string? passphrase)
+  public async void continue_with_passphrase(string? passphrase)
   {
    /*
     * Continues with operation after passphrase has been acquired.
@@ -165,7 +165,7 @@ public abstract class Operation : Object
     needs_password = false;
     this.passphrase = passphrase;
     try {
-      backend.get_envp();
+      yield backend.get_envp();
     }
     catch (Error e) {
       raise_error(e.message, null);
@@ -205,20 +205,15 @@ public abstract class Operation : Object
     }
   }
   
-  protected virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
+  protected async virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
-    set_session_inhibited(false);
-    claim_bus(false);
+    yield set_session_inhibited(false);
+    unclaim_bus();
     
     if (success && passphrase == "") {
       // User entered no password.  Turn off encryption
-      try {
-        var client = GConf.Client.get_default();
-        client.set_bool(ENCRYPT_KEY, false);
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
+      var settings = get_settings();
+      settings.set_boolean(ENCRYPT_KEY, false);
     }
     
     done(success, cancelled);
@@ -235,40 +230,58 @@ public abstract class Operation : Object
     return null;
   }
   
-  bool claim_bus(bool claimed)
+  uint bus_id = 0;
+  void claim_bus() throws BackupError
   {
-    bool rv = set_bus_claimed("Operation", claimed);
-    if (claimed && !rv)
-      raise_error(_("Another Déjà Dup is already running"), null);
-    return rv;
+    bool rv = false;
+    var loop = new MainLoop();
+    bus_id = Bus.own_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
+                          BusNameOwnerFlags.NONE, ()=>{},
+                          ()=>{rv = true; loop.quit();},
+                          ()=>{rv = false; loop.quit();});
+    loop.run();
+    if (bus_id == 0 || rv == false)
+      throw new BackupError.ALREADY_RUNNING(_("Another Déjà Dup is already running"));
+  }
+
+  void unclaim_bus()
+  {
+    Bus.unown_name(bus_id);
   }
   
   uint inhibit_cookie = 0;
-  void set_session_inhibited(bool inhibit)
+  async void set_session_inhibited(bool inhibit)
   {
     // Don't inhibit if we can resume safely
     if (DuplicityInfo.get_default().can_resume)
       return;
 
     try {
-      var conn = DBus.Bus.@get(DBus.BusType.SESSION);
-      
-      dynamic DBus.Object obj = conn.get_object ("org.gnome.SessionManager",
+      // FIXME: use async version when I figure out the syntax
+      DBusProxy obj = new DBusProxy.for_bus_sync(BusType.SESSION,
+                                                 DBusProxyFlags.NONE, null, 
+                                                 "org.gnome.SessionManager",
                                                  "/org/gnome/SessionManager",
-                                                 "org.gnome.SessionManager");
+                                                 "org.gnome.SessionManager",
+                                                 null);
       
       if (inhibit) {
         if (inhibit_cookie > 0)
           return; // already inhibited
         
-        obj.Inhibit(Config.PACKAGE,
-                    xid,
-                    mode_to_string(dup.mode),
-                    (uint) (1 | 4), // logout and suspend, but not switch user
-                    out inhibit_cookie);
+        var cookie_val = yield obj.call("Inhibit",
+                                        // logout and suspend, but not switch user
+                                        new Variant("(susu)",
+                                                    Config.PACKAGE,
+                                                    xid,
+                                                    mode_to_string(dup.mode),
+                                                    (uint) (1 | 4)),
+                                        DBusCallFlags.NONE, -1, null);
+        cookie_val.get("(u)", out inhibit_cookie);
       }
       else if (inhibit_cookie > 0) {
-        obj.Uninhibit(inhibit_cookie);
+        yield obj.call("Uninhibit", new Variant("(u)", inhibit_cookie),
+                       DBusCallFlags.NONE, -1, null);
         inhibit_cookie = 0;
       }
     }

@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>,
+    © 2008–2010 Michael Terry <mike@mterry.name>,
     © 2009 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
@@ -117,9 +117,9 @@ public class Duplicity : Object
   
   File last_touched_file = null;
 
-  void network_changed(NetworkManager nm, bool connected)
+  void network_changed()
   {
-    if (connected)
+    if (Network.get().connected)
       resume();
     else
       pause(_("Paused (no network)"));
@@ -164,28 +164,28 @@ public class Duplicity : Object
     if (mode == Operation.Mode.BACKUP)
       process_include_excludes();
     
-    try {
-      delete_age = client.get_int(DELETE_AFTER_KEY);
-    }
-    catch (Error e) {warning("%s\n", e.message);}
+    var settings = get_settings();
+    delete_age = settings.get_int(DELETE_AFTER_KEY);
 
     if (!restart())
       done(false, false);
 
     if (!backend.is_native()) {
-      NetworkManager.get().changed.connect(network_changed);
-      if (!NetworkManager.get().connected) {
+      Network.get().notify["connected"].connect(network_changed);
+      if (!Network.get().connected) {
         debug("No connection found. Postponing the backup.");
         pause(_("Paused (no network)"));
       }
     }
   }
 
-  int cmp_prefix(File a, File b)
+  int cmp_prefix(File? a, File? b)
   {
-    if (a.has_prefix(b))
+    if (a == null && b == null)
+      return 0;
+    else if (b == null || a.has_prefix(b))
       return -1;
-    else if (b.has_prefix(a))
+    else if (a == null || b.has_prefix(a))
       return 1;
     else
       return 0;

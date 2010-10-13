@@ -22,12 +22,10 @@ pkglib_PROGRAMS = deja-dup-monitor
 VALA_CFLAGS = \
 	--vapidir $(top_srcdir)/common \
 	--vapidir $(top_srcdir)/vapi \
-	--pkg gconf-2.0 \
 	--pkg config \
 	--pkg gio-2.0 \
-  --pkg libcommon \
-	--pkg libnotify \
-	--pkg dbus-glib-1
+	--pkg libcommon \
+	--pkg libnotify
 
 AM_CFLAGS = \
 	-I$(top_srcdir)/common \

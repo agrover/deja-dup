@@ -1,7 +1,7 @@
 # -*- Mode: m4; indent-tabs-mode: nil; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008,2009,2010 Michael Terry <mike@mterry.name>,
+# © 2008–2010 Michael Terry <mike@mterry.name>,
 # © 2009 Andrew Fister <temposs@gmail.com>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
@@ -18,17 +18,18 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 # Sets up autoconf.
-AC_INIT([Déjà Dup],[15.5],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup], [https://launchpad.net/deja-dup])
+AC_INIT([Déjà Dup],[17.0],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup], [https://launchpad.net/deja-dup])
 AC_PREREQ(2.64)
 AC_CONFIG_SRCDIR(deja-dup/main.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
 AC_CONFIG_MACRO_DIR([m4])
 
 # Sets up automake.
-AM_INIT_AUTOMAKE([1.10 foreign dist-bzip2])
+AM_INIT_AUTOMAKE([1.10 foreign dist-bzip2 no-dist-gzip])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 GNOME_DOC_INIT
+GLIB_GSETTINGS
 
 # Checks for programs.
 AC_PROG_CC
@@ -38,13 +39,10 @@ AC_PROG_MAKE_SET
 LT_PREREQ([2.2.6])
 LT_INIT
 
-AC_PATH_PROG(GCONFTOOL, gconftool-2)
-AM_GCONF_SOURCE_2
-
 AC_PATH_PROG(PO4A, po4a)
 
 # Checks for vala
-AC_PROG_VALAC([0.9.2])
+AC_PROG_VALAC([0.9.5])
 
 # Sets up gettext.
 GETTEXT_PACKAGE="$PACKAGE"
@@ -67,7 +65,7 @@ AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package 
 GTK_MODULE=gtk+-2.0
 GTK_REQ_VER=2.18
 GDK_X11_MODULE=gdk-x11-2.0
-GLIB_REQ_VER=2.20
+GLIB_REQ_VER=2.26
 GIO_REQ_VER=$GLIB_REQ_VER
 UNIQUE_MODULE=unique-1.0
 APPINDICATOR_MODULE=appindicator-0.1
@@ -89,7 +87,7 @@ AS_IF([test "x$with_gtk3" != xno],
      APPINDICATOR_MODULE=appindicator3-0.1],
     [if test "x$with_gtk3" != xcheck; then
        AC_MSG_FAILURE(
-         [--with-gtk3 was given, but test for $GTK_MODULE GDK_X11_MODULE $UNIQUE_MODULE failed])
+         [--with-gtk3 was given, but test for gtk+-3.0 >= 2.90 gdk-x11-3.0 unique-3.0 failed])
      else
        AC_MSG_NOTICE([GTK+ 3 stack is not available so using GTK+ 2])
      fi
@@ -105,8 +103,6 @@ AC_SUBST(UNIQUE_MODULE)
 PKG_CHECK_MODULES(DUP,
                   $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
-                  gconf-2.0
-                  dbus-glib-1
                   gnome-keyring-1
                   gmodule-2.0 >= $GLIB_REQ_VER
                   gee-1.0)
@@ -117,7 +113,6 @@ PKG_CHECK_MODULES(PREF,
                   $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
                   gmodule-2.0 >= $GLIB_REQ_VER
-                  gconf-2.0
                   $UNIQUE_MODULE)
 AC_SUBST(PREF_CFLAGS)
 AC_SUBST(PREF_LIBS)
@@ -125,15 +120,12 @@ AC_SUBST(PREF_LIBS)
 PKG_CHECK_MODULES(COMMON,
                   gio-2.0 >= $GIO_REQ_VER
                   gio-unix-2.0 >= $GIO_REQ_VER
-                  gconf-2.0
-                  dbus-glib-1
                   gnome-keyring-1
                   gmodule-2.0 >= $GLIB_REQ_VER)
 AC_SUBST(COMMON_CFLAGS)
 AC_SUBST(COMMON_LIBS)
 
 PKG_CHECK_MODULES(WIDGETS,
-                  gconf-2.0
                   gmodule-2.0 >= $GLIB_REQ_VER
                   $GTK_MODULE >= $GTK_REQ_VER
                   gconf-2.0)
@@ -141,9 +133,8 @@ AC_SUBST(WIDGETS_CFLAGS)
 AC_SUBST(WIDGETS_LIBS)
 
 PKG_CHECK_MODULES(MONITOR,
-                  gconf-2.0
+                  $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
-                  dbus-glib-1
                   libnotify)
 AC_SUBST(MONITOR_CFLAGS)
 AC_SUBST(MONITOR_LIBS)

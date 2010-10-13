@@ -38,7 +38,7 @@ def noread():
   os.makedirs(backupdir)
   os.system('chmod a-r %s' % backupdir)
   base.setup('file', sources=['data/simple'], dest=backupdir)
-  base.set_gconf_value("last-run", "fake") # to avoid error when setting backup dir
+  base.set_settings_value("last-run", "'fake'") # to avoid error when setting backup dir
   if not base.dup_meets_version(0, 7, 0): return
   base.backup_simple(error=u'lblPermissiondeniedwhentryingtoread\u2018%s\u2019' % backupdir)
 
@@ -63,7 +63,7 @@ def noget():
 def noexist():
   backupdir = base.get_temp_name('backup')
   base.setup('file', sources=['data/simple'], dest=backupdir)
-  base.set_gconf_value("last-run", "fake") # to avoid losing missing dir name when using UI
+  base.set_settings_value("last-run", "'fake'") # to avoid losing missing dir name when using UI
   if not base.dup_meets_version(0, 7, 0): return
   base.backup_simple(error=u'lblBackuplocation\u2018%s\u2019doesnotexist' % backupdir)
 

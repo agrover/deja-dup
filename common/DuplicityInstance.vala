@@ -126,12 +126,9 @@ public class DuplicityInstance : Object
     }
     
     if (as_root) {
-      try {
-        var client = get_gconf_client();
-        if (!client.get_bool(ROOT_PROMPT_KEY))
-          as_root = false;
-      }
-      catch (Error e) {warning("%s\n", e.message);}
+      var settings = get_settings();
+      if (!settings.get_boolean(ROOT_PROMPT_KEY))
+        as_root = false;
     }
     
     // Run as root if needed
@@ -149,7 +146,13 @@ public class DuplicityInstance : Object
         
         // We have to wrap all current args into one string.
         StringBuilder args = new StringBuilder();
-        foreach(string a in argv) {
+
+        // Set environment variables for subprocess here because sudo reserves
+        // the right to strip them.
+        foreach (string env in envp_in)
+          args.append("export '%s'\n".printf(env));
+
+        foreach (string a in argv) {
           if (a == null)
             break;
           if (args.len == 0)
@@ -357,13 +360,13 @@ public class DuplicityInstance : Object
     read_log_lines();
   }
   
-  // If start is < 0, starts at word.size() - 1.
+  // If start is < 0, starts at word.length - 1.
   static int num_suffix(string word, char ch, long start = -1)
   {
     int rv = 0;
     
     if (start < 0)
-      start = (long)word.size() - 1;
+      start = (long)word.length - 1;
     
     for (long i = start; i >= 0; --i, ++rv)
       if (word[i] != ch)
@@ -394,7 +397,7 @@ public class DuplicityInstance : Object
   
   static string compress_string(string s_in)
   {
-    char[] rv = new char[s_in.size()+1];
+    char[] rv = new char[s_in.length+1];
     weak char[] s = (char[])s_in;
     
     int i = 0, j = 0;
@@ -402,14 +405,15 @@ public class DuplicityInstance : Object
       if (s[i] == '\\' && s[i+1] != 0) {
         bool bare_escape = false;
         
+        // http://docs.python.org/reference/lexical_analysis.html
         switch (s[i+1]) {
-        case 'b': rv[j++] = '\b'; i += 2; break;
-        case 'f': rv[j++] = '\014'; i += 2; break;
-        case 't': rv[j++] = '\t'; i += 2; break;
-        case 'n': rv[j++] = '\n'; i += 2; break;
-        case 'r': rv[j++] = '\r'; i += 2; break;
-        case 'v': rv[j++] = '\013'; i += 2; break;
-        case 'a': rv[j++] = '\007'; i += 2; break;
+        case 'b': rv[j++] = '\b'; i += 2; break; // backspace
+        case 'f': rv[j++] = '\f'; i += 2; break; // form feed
+        case 't': rv[j++] = '\t'; i += 2; break; // tab
+        case 'n': rv[j++] = '\n'; i += 2; break; // line feed
+        case 'r': rv[j++] = '\r'; i += 2; break; // carriage return
+        case 'v': rv[j++] = '\xb'; i += 2; break; // vertical tab
+        case 'a': rv[j++] = '\x7'; i += 2; break; // bell
         case 'x':
           // start of a hex number
           if (s[i+2] != 0 && s[i+3] != 0) {
@@ -484,13 +488,13 @@ public class DuplicityInstance : Object
             // OK, word ends with '...  But is it a *real* ' or a fake one?
             // i.e. is it escaped or not?  Test this by seeing if it has an even
             // number of backslashes before it.
-            num_suffix(word, '\\', (long)word.size() - 2) % 2 == 0)
+            num_suffix(word, '\\', (long)word.length - 2) % 2 == 0)
           in_group = false;
         // Else...  If it ends with just a backslash, the backslash was
         // supposed to be for the space.  So just drop it.
         else if (num_suffix(word, '\\') % 2 == 1)
           // Chop off last backslash.
-          word = word.substring(0, word.len() - 2);
+          word = word.substring(0, word.length - 2);
         
         // get rid of any other escaping backslashes and translate octals
         word = compress_string(word);
@@ -503,7 +507,7 @@ public class DuplicityInstance : Object
         
         if (!in_group) {
           // add to list, but drop single quotes
-          splitlist.append(group_word.substring(1, group_word.len() - 2));
+          splitlist.append(group_word.substring(1, group_word.length - 2));
           group_word = "";
         }
       }

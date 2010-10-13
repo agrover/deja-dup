@@ -19,9 +19,9 @@
 # Don't use special name 'TESTS', as it will trigger an automatically-created
 # 'check' target used during distcheck.
 
+# backup/continue # disabled until continue support is back in
 AUTO_TESTS = \
 	backup/cancel-clean \
-	backup/continue \
 	backup/full \
 	backup/delete \
 	backup/exclude \
@@ -38,7 +38,8 @@ AUTO_TESTS = \
 
 # Tests that must be run manually
 MANUAL_TESTS = \
-	backup/disk-full
+	backup/disk-full \
+	restore/gpg
 
 ALL_TESTS = $(AUTO_TESTS) $(MANUAL_TESTS)
 

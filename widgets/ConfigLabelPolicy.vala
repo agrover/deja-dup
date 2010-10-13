@@ -23,6 +23,11 @@ namespace DejaDup {
 
 public class ConfigLabelPolicy : ConfigLabel
 {
+  public ConfigLabelPolicy()
+  {
+    Object(key: null);
+  }
+
   construct {
     watch_key(BACKEND_KEY);
     watch_key(FILE_PATH_KEY);
@@ -40,7 +45,7 @@ public class ConfigLabelPolicy : ConfigLabel
     int delete_after = 0;
     try {
       backend = Backend.get_default();
-      delete_after = client.get_int(DELETE_AFTER_KEY);
+      delete_after = settings.get_int(DELETE_AFTER_KEY);
     }
     catch (Error e) {
       warning("%s\n", e.message);

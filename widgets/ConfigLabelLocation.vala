@@ -36,8 +36,8 @@ public class ConfigLabelLocation : ConfigLabel
     hbox.pack_start(img, false, false, 0);
     hbox.reorder_child(img, 0);
     watch_key(BACKEND_KEY);
-    watch_key(FILE_ROOT_KEY);
-    watch_key(S3_ROOT_KEY);
+    watch_key(null, DejaDup.get_settings(FILE_ROOT));
+    watch_key(null, DejaDup.get_settings(S3_ROOT));
     set_from_config();
   }
   
@@ -57,11 +57,7 @@ public class ConfigLabelLocation : ConfigLabel
         img.set_from_gicon(icon, Gtk.IconSize.MENU);
     }
 
-    is_s3 = false;
-    try {
-      is_s3 = client.get_string(BACKEND_KEY) == "s3";
-    }
-    catch (Error err) {warning("%s\n", err.message);}
+    is_s3 = settings.get_string(BACKEND_KEY) == "s3";
   }
 }
 

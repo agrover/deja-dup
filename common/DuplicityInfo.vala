@@ -101,7 +101,9 @@ public class DuplicityInfo : Object
       can_read_short_filenames = true;
     if (meets_version(0, 6, 5)) {
       has_native_gio = true; // had it in 0.6.1, but didn't work on restore
-      can_resume = true; // had it in 0.6.0, but didn't quite work right
+      // Don't allow resuming yet; there are still bugs:
+      // https://bugs.launchpad.net/duplicity/+bug/613244
+      //can_resume = true; // had it in 0.6.0, but didn't quite work right
     }
     if (meets_version(0, 6, 7)) {
       has_rename_arg = true;

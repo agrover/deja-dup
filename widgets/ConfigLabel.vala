@@ -23,9 +23,9 @@ namespace DejaDup {
 
 public class ConfigLabel : ConfigWidget
 {
-  public ConfigLabel(string? key)
+  public ConfigLabel(string? key, string ns="")
   {
-    Object(key: key);
+    Object(key: key, ns: ns);
   }
   
   protected Gtk.HBox hbox;
@@ -41,12 +41,7 @@ public class ConfigLabel : ConfigWidget
   
   protected override async void set_from_config()
   {
-    string val;
-    try {
-      val = client.get_string(key);
-      label.label = val;
-    }
-    catch (Error e) {warning("%s\n", e.message);}
+    label.label = settings.get_string(key);
   }
 }
 

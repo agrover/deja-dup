@@ -22,17 +22,13 @@ using GLib;
 
 namespace DejaDup {
 
-public errordomain BackupError {
-  BAD_CONFIG
-}
-
 public class OperationBackup : Operation
 {
   public OperationBackup(uint xid = 0) {
     Object(xid: xid, mode: Mode.BACKUP);
   }
   
-  protected override void operation_finished(Duplicity dup, bool success, bool cancelled)
+  protected async override void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
     /* If successfully completed, update time of last backup and run base operation_finished */
     if (success) {
@@ -58,8 +54,12 @@ public class OperationBackup : Operation
       if (info.get_is_symlink()) {
         string symlink_target = info.get_symlink_target();
         File parent_dir = file.get_parent();
-        dup.includes.prepend(parent_dir.resolve_relative_path(symlink_target));
+        list.prepend(parent_dir.resolve_relative_path(symlink_target));
       }
+    }
+    catch (IOError.NOT_FOUND e) {
+      // Don't bother adding this file to any list
+      return;
     }
     catch (Error e) {
       warning("%s\n", e.message);
@@ -70,12 +70,12 @@ public class OperationBackup : Operation
   
   protected override List<string>? make_argv() throws Error
   {
-    var client = get_gconf_client();
+    var settings = get_settings();
     
-    var include_list = parse_dir_list(client.get_list(INCLUDE_LIST_KEY,
-                                                      GConf.ValueType.STRING));
-    var exclude_list = parse_dir_list(client.get_list(EXCLUDE_LIST_KEY,
-                                                      GConf.ValueType.STRING));
+    var include_val = settings.get_value(INCLUDE_LIST_KEY);
+    var include_list = parse_dir_list(include_val.get_strv());
+    var exclude_val = settings.get_value(EXCLUDE_LIST_KEY);
+    var exclude_list = parse_dir_list(exclude_val.get_strv());
     
     List<string> rv = new List<string>();
     

@@ -69,8 +69,8 @@ public class PreferencesDialog : Gtk.Dialog
     // anything up, they want to start in edit mode.
     string last_run = null;
     try {
-      var client = DejaDup.get_gconf_client();
-      last_run = client.get_string(DejaDup.LAST_RUN_KEY);
+      var settings = DejaDup.get_settings();
+      last_run = settings.get_string(DejaDup.LAST_RUN_KEY);
     }
     catch (Error e) {warning("%s\n", e.message);}
 
@@ -101,7 +101,7 @@ public class PreferencesDialog : Gtk.Dialog
     ++row;
     
     var s3_table = new Gtk.Table(1, 3, false);
-    w = new DejaDup.ConfigEntry(DejaDup.S3_ID_KEY);
+    w = new DejaDup.ConfigEntry(DejaDup.S3_ID_KEY, DejaDup.S3_ROOT);
     label = new Gtk.Label("    %s".printf(_("S3 Access Key I_D:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -113,7 +113,7 @@ public class PreferencesDialog : Gtk.Dialog
                     Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                     Gtk.AttachOptions.FILL, 3, 3);
     
-    w = new DejaDup.ConfigEntry(DejaDup.S3_FOLDER_KEY);
+    w = new DejaDup.ConfigEntry(DejaDup.S3_FOLDER_KEY, DejaDup.S3_ROOT);
     label = new Gtk.Label("    %s".printf(_("_Folder:")));
     label.set("mnemonic-widget", w,
               "use-underline", true,

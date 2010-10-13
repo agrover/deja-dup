@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-13 20:17-0400\n"
-"PO-Revision-Date: 2010-07-01 14:15+0000\n"
-"Last-Translator: Paco Molinero <paco@byasl.com>\n"
+"POT-Creation-Date: 2010-07-23 20:57-0400\n"
+"PO-Revision-Date: 2010-09-08 02:49+0000\n"
+"Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-07-02 03:33+0000\n"
+"X-Launchpad-Export-Date: 2010-09-09 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -44,13 +44,31 @@ msgstr "Herramienta de respaldo Déjà Dup"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:328
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:327
 msgid "Déjà Dup Monitor"
 msgstr "Monitor Déjà Dup"
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
 msgid "Schedule backups at regular intervals"
 msgstr "Programe sus copias de seguridad en intervalos regulares"
+
+#: ../data/deja-dup-preferences.desktop.in.h:1
+msgid "Backup Preferences"
+msgstr "Preferencias de respaldo"
+
+#: ../data/deja-dup-preferences.desktop.in.h:2
+msgid "Change your backup settings"
+msgstr "Cambie las configuraciones del respaldo"
+
+#: ../data/deja-dup-preferences.desktop.in.h:3
+msgid "Déjà Dup Backup Preferences"
+msgstr "Preferencias del respaldo de Déjà Dup"
+
+#: ../data/deja-dup-preferences.desktop.in.h:4
+#: ../preferences/PreferencesDialog.vala:41 ../preferences/preferences.vala:35
+#: ../preferences/preferences.vala:66
+msgid "Déjà Dup Preferences"
+msgstr "Preferencias de Déjà Dup"
 
 #: ../data/deja-dup.schemas.in.h:1
 msgid "Amazon S3 Access Key ID"
@@ -274,11 +292,11 @@ msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Clave de acceso de Amazon S3. Esto actúa como su nombre de usuario de S3"
 
-#: ../deja-dup/Assistant.vala:281
+#: ../deja-dup/Assistant.vala:284
 msgid "Co_ntinue"
 msgstr "Co_ntinuar"
 
-#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:155
+#: ../deja-dup/Assistant.vala:319 ../deja-dup/StatusIcon.vala:155
 msgid "_Resume Later"
 msgstr "_Resumir después"
 
@@ -366,40 +384,40 @@ msgstr "Sus archivos se respaldaron satisfactoriamente."
 msgid "Backing up…"
 msgstr "Respaldando..."
 
-#: ../deja-dup/AssistantOperation.vala:134
+#: ../deja-dup/AssistantOperation.vala:136
 msgid "Scanning:"
 msgstr "Explorando:"
 
-#: ../deja-dup/AssistantOperation.vala:135
+#: ../deja-dup/AssistantOperation.vala:137
 msgid "Scanning…"
 msgstr "Explorando"
 
-#: ../deja-dup/AssistantOperation.vala:208
+#: ../deja-dup/AssistantOperation.vala:210
 msgid "_Details"
 msgstr "_Detalles"
 
-#: ../deja-dup/AssistantOperation.vala:257
+#: ../deja-dup/AssistantOperation.vala:259
 msgid "E_ncryption password:"
 msgstr "_Contraseña cifrada"
 
-#: ../deja-dup/AssistantOperation.vala:266
+#: ../deja-dup/AssistantOperation.vala:268
 msgid "_Show password"
 msgstr "_Mostrar contraseña"
 
-#: ../deja-dup/AssistantOperation.vala:273
+#: ../deja-dup/AssistantOperation.vala:275
 #: ../deja-dup/MountOperationAssistant.vala:28
 msgid "_Remember password"
 msgstr "_Recordar contraseña"
 
-#: ../deja-dup/AssistantOperation.vala:348
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Summary"
 msgstr "Resumen"
 
-#: ../deja-dup/AssistantOperation.vala:363
+#: ../deja-dup/AssistantOperation.vala:365
 msgid "Password needed"
 msgstr "Se necesita contraseña"
 
-#: ../deja-dup/AssistantOperation.vala:578
+#: ../deja-dup/AssistantOperation.vala:590
 msgid "Déjà Dup backup passphrase"
 msgstr "Frase de contraseña de la copia de seguridad de Déjà Dup"
 
@@ -497,7 +515,7 @@ msgstr[1] "Sus archivo se han restaurado correctamente."
 msgid "Restoring…"
 msgstr "Restaurando..."
 
-#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:33
+#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:32
 #: ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr "Mostrar versión"
@@ -576,15 +594,15 @@ msgstr "La ubicación no está disponible"
 msgid "This backup location requires authentication."
 msgstr "Esta ubicación de la copia de seguridad requiere autenticación."
 
-#: ../deja-dup/MountOperationAssistant.vala:136
+#: ../deja-dup/MountOperationAssistant.vala:138
 msgid "Connect _anonymously"
 msgstr "Conectar de forma _anónima"
 
-#: ../deja-dup/MountOperationAssistant.vala:140
+#: ../deja-dup/MountOperationAssistant.vala:142
 msgid "Connect as u_ser:"
 msgstr "Conectar como u_suario:"
 
-#: ../deja-dup/MountOperationAssistant.vala:180
+#: ../deja-dup/MountOperationAssistant.vala:182
 msgid "_Domain:"
 msgstr "_Dominio"
 
@@ -631,11 +649,11 @@ msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "La copia de seguridad se iniciará cuando esté disponible una conexión de red."
 
-#: ../common/BackendFile.vala:367
+#: ../common/BackendFile.vala:351
 msgid "Backup location not available"
 msgstr "La ubicación de la copia de seguridad no está disponible."
 
-#: ../common/BackendFile.vala:367
+#: ../common/BackendFile.vala:351
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Esperando que «%s» se conecte..."
@@ -875,7 +893,7 @@ msgstr "Comprobando copias de seguridad..."
 msgid "Another Déjà Dup is already running"
 msgstr "Otro programa Déjà Dup está abierto"
 
-#: ../monitor/monitor.vala:230
+#: ../monitor/monitor.vala:229
 msgid "Scheduled backup delayed"
 msgstr "Copia de seguirdad programada retrasada"
 
@@ -890,11 +908,6 @@ msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Restaurar archivo de la copia de seguridad"
 msgstr[1] "Restaurar archivos del respaldo"
-
-#: ../preferences/PreferencesDialog.vala:41 ../preferences/preferences.vala:35
-#: ../preferences/preferences.vala:66
-msgid "Déjà Dup Preferences"
-msgstr "Preferencias de Déjà Dup"
 
 #: ../preferences/PreferencesDialog.vala:105
 #, c-format
@@ -1435,3 +1448,27 @@ msgstr ""
 
 #~ msgid "No space left"
 #~ msgstr "No queda espacio"
+
+#~ msgid ""
+#~ "This list of directories will not be backed up. Reserved values $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
+#~ "directories. Relative entries are relative to the user’s home directory."
+#~ msgstr ""
+#~ "Esta lista de directorios no se respaldará. Los valores reservados $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, y $VIDEO se reconocen como directorios especiales del "
+#~ "usuario. Las entradas relativas son relativas al directorio de inicio del "
+#~ "usuario."
+
+#~ msgid "Obsolete"
+#~ msgstr "Obsoleto"
+
+#~ msgid ""
+#~ "Whether the backup location is a mounted external volume or a normal folder."
+#~ msgstr ""
+#~ "Si la ubicación de respaldo está montada en un volumen externo o en una "
+#~ "carpeta normal."
+
+#~ msgid "The type of backup location."
+#~ msgstr "El tipo de la ubicación de respaldo."
