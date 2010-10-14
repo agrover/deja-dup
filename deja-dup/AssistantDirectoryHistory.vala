@@ -18,37 +18,36 @@
 */
 
 using GLib;
-using Gee;
 
 public class DeletedFile {
-    /*
-     * Class whose instances hold information and track status of deleted file.
-     *
-     * After providing full file path and time of when was file last seen, instances
-     * can access pretty file name and mark file for restore.
-     * 
-     * @param //string// ''name'' Full path name of file
-     * @param //Time// ''deleted'' Information when was file deleted
-     */
-    public string name {get; set;}
-    public Time deleted {get; set;}
-    public bool restore {get; set; default = false;}
+  /*
+   * Class whose instances hold information and track status of deleted file.
+   *
+   * After providing full file path and time of when was file last seen, instances
+   * can access pretty file name and mark file for restore.
+   * 
+   * @param //string// ''name'' Full path name of file
+   * @param //Time// ''deleted'' Information when was file deleted
+   */
+  public string name {get; set;}
+  public Time deleted {get; set;}
+  public bool restore {get; set; default = false;}
 
-    public DeletedFile(string name, Time deleted) {
-      this.name = name;
-      this.deleted = deleted;
-    }
+  public DeletedFile(string name, Time deleted) {
+    this.name = name;
+    this.deleted = deleted;
+  }
 
-    public string filename() {
-      var splited_fn = this.name.split("/");
-      return splited_fn[splited_fn.length-1];
-    }
+  public string filename() {
+    var splited_fn = this.name.split("/");
+    return splited_fn[splited_fn.length-1];
+  }
 
-    public string queue_format() {
-      var file = this.name;
-      var time = this.deleted.format("%s");
-      return @"$file $time";
-    }
+  public string queue_format() {
+    var file = this.name;
+    var time = this.deleted.format("%s");
+    return @"$file $time";
+  }
 }
 
 public class AssistantDirectoryHistory : AssistantOperation {
@@ -97,11 +96,11 @@ public class AssistantDirectoryHistory : AssistantOperation {
   */
   private bool scan_queue = true;
   private bool cancel_assistant = false;
-  private PriorityQueue<Time?> backups_queue = new PriorityQueue<Time?>((CompareFunc) compare_time);
-  private PriorityQueue<DeletedFile?> restore_queue = new PriorityQueue<DeletedFile?>();
+  private Sequence<Time?> backups_queue = new Sequence<Time?>(g_free);
+  private HashTable<string, DeletedFile> restore_queue = new HashTable<string, DeletedFile>(str_hash, str_equal);
 
-  private ArrayList<string> allfiles_prev = new ArrayList<string>();
-  private ArrayList<DeletedFile?>  file_status = new ArrayList<DeletedFile?>();
+  private HashTable<string, string> allfiles_prev;
+  private GenericArray<DeletedFile> file_status = new GenericArray<DeletedFile>();
 
   DejaDup.OperationFiles query_op_files;
   DejaDup.OperationStatus query_op_collection_dates;
@@ -133,7 +132,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
   private string? get_glade_file(string glade_file) {
     var sysdatadirs = GLib.Environment.get_system_data_dirs();
     foreach (var sysdir in sysdatadirs) {
-      var p = Path.build_filename("/", sysdir, "deja-dup", "interfaces", glade_file);
+      var p = Path.build_filename("/", sysdir, Config.PACKAGE, "interfaces", glade_file);
       var file = File.new_for_path(p);
       if (file.query_exists(null))
         return p;
@@ -141,7 +140,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
     return null;
   }
 
-  private ArrayList<string>? files_in_directory() {
+  private HashTable<string, string> files_in_directory() {
     /*
      * Function lists all files that are currently located in the directory.
      *
@@ -149,20 +148,18 @@ public class AssistantDirectoryHistory : AssistantOperation {
      * command line children and returns an array of strings populated
      * by file names of folder and files.
      */
-    //File directory = File.new_for_path(dirlocation);
-    var file_list = new ArrayList<string> ();
+    var files = new HashTable<string, string> (str_hash, str_equal);
 
     try {
-      var enumerator = this.list_directory.enumerate_children(FILE_ATTRIBUTE_STANDARD_NAME, 0, null);
+      var enumerator = list_directory.enumerate_children(FILE_ATTRIBUTE_STANDARD_NAME, 0, null);
       FileInfo fileinfo;
-      while ((fileinfo = enumerator.next_file(null)) != null){
-        file_list.add(this.list_directory.get_path() + "/" + fileinfo.get_name());
-      }
-      return file_list;
-    } catch(Error err){
-      warning("Error: %s\n", err.message);
-      return null;
+      while ((fileinfo = enumerator.next_file(null)) != null)
+        files.insert(list_directory.get_path() + "/" + fileinfo.get_name(), null);
     }
+    catch (Error e){
+      warning("%s\n", e.message);
+    }
+    return files;
   }
 
   Gtk.Widget? make_listfiles_page() {
@@ -210,10 +207,10 @@ public class AssistantDirectoryHistory : AssistantOperation {
           /*
            * Function for toggling state of checkbox
            */
-          if (!this.file_status[path.to_int()].restore)
-            this.file_status[path.to_int()].restore = true;
+          if (!this.file_status.get(path.to_int()).restore)
+            this.file_status.get(path.to_int()).restore = true;
           else
-            this.file_status[path.to_int()].restore = false;
+            this.file_status.get(path.to_int()).restore = false;
           
           var tree_path = new Gtk.TreePath.from_string (path);
           this.listmodel.get_iter (out this.deleted_iter, tree_path);
@@ -273,11 +270,11 @@ public class AssistantDirectoryHistory : AssistantOperation {
       restore_files_table = new Gtk.Table(1, 1, false);
       restore_files_table_rows = 0;
       
-      foreach(var delfile in file_status) {
+      for (int i = 0; i < file_status.length; ++i) {
+        var delfile = file_status[i];
         if (delfile.restore)
         {
-          if (!restore_queue.contains(delfile))
-            restore_queue.offer(delfile);
+          restore_queue.insert(delfile.name, delfile);
 
           restore_files_table_rows++;
           restore_files_table.resize(restore_files_table_rows, 1);
@@ -307,7 +304,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
 
         /* Count the number of files that had to be restored */
         var numdels = 0; // Number of deleted files
-        foreach(var delfile in this.file_status) {
+        for (int i = 0; i < file_status.length; ++i) {
+          var delfile = file_status[i];
           if (delfile.restore) {
             numdels++;
           }
@@ -337,16 +335,16 @@ public class AssistantDirectoryHistory : AssistantOperation {
     if (this.list_directory.get_path() in filestr && this.list_directory.get_path() != filestr) {
       var fileobj = File.new_for_path(filestr);
 
-      if (!fileobj.query_exists(null) && !this.allfiles_prev.contains(filestr)) {
+      if (!fileobj.query_exists(null) && !this.allfiles_prev.lookup_extended(filestr, null, null)) {
         if(fileobj.has_parent(this.list_directory)) {
           var fs = new DeletedFile(filestr, op.time);
 
           this.file_status.add(fs);
-          
+
           this.listmodel.append (out this.deleted_iter);
           this.listmodel.set (this.deleted_iter, 0, false, 1, fs.filename(), 2, op.time.format("%c"));
-        
-          this.allfiles_prev.add(filestr);
+
+          this.allfiles_prev.insert(filestr, null);
         }
       }
     }
@@ -370,7 +368,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
       foreach(var date in dates) {
         if (tv.from_iso8601(date)) {
           Time t = Time.local(tv.tv_sec);
-          this.backups_queue.offer(t);
+          this.backups_queue.insert_sorted(t, (CompareDataFunc)compare_time);
         }
       }
 
@@ -405,13 +403,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
     op.passphrase_required.connect(get_passphrase);
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
 
-    try {
-      query_op_collection_dates.start();
-    } catch (Error e) {
-      warning("%s\n", e.message);
-      show_error(e.message, null); // not really user-friendly text, but ideally this won't happen
-      query_collection_dates_finished(query_op_collection_dates, false, false);
-    }
+    query_op_collection_dates.start();
   }
     
   protected void do_query_files_at_date()
@@ -428,12 +420,15 @@ public class AssistantDirectoryHistory : AssistantOperation {
     }
 
     // Don't start if queue is empty.
-    if (backups_queue.size == 0) {
+    if (backups_queue.get_length() == 0) {
       query_files_finished(query_op_files, true, false);
       return;
     }
     
-    Time etime = backups_queue.poll();
+    var begin = backups_queue.get_begin_iter();
+    var etime = begin.get();
+    backups_queue.remove(begin);
+
     /* Update progress */
     int tepoch = etime.format("%s").to_int();
     TimeVal ttoday = TimeVal();
@@ -481,14 +476,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
     op.passphrase_required.connect(get_passphrase);
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
     
-    try {
-      query_op_files.start();
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      show_error(e.message, null); // not really user-friendly text, but ideally this won't happen
-      query_files_finished(query_op_files, false, false);
-    }
+    query_op_files.start();
   }
   
   protected void query_collection_dates_finished(DejaDup.Operation op, bool success, bool cancelled) {
@@ -539,7 +527,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
     else {
       if (success) {
         succeeded = true;
-        if (this.restore_queue.size > 0) {
+        if (this.restore_queue.size() > 0) {
           base.do_apply();
         } else {
           go_to_page(summary_page);
@@ -555,7 +543,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
     query_op_files = null;
     this.op = null;
     
-    if (backups_queue.size == 0) {
+    if (backups_queue.get_length() == 0) {
       this.spinner.stop();
       this.spinner.destroy();
       this.current_scan_date.set_text(_("Scanning finished"));
@@ -610,11 +598,15 @@ public class AssistantDirectoryHistory : AssistantOperation {
     realize();
     var xid = Gdk.x11_drawable_get_xid(this.window);
 
-    var restore_file = this.restore_queue.poll();
+    var begin = HashTableIter<string, DeletedFile>(restore_queue);
+    DeletedFile restore_file;
+    begin.next(null, out restore_file);
+    begin.remove();
+
     /*
     OperationRestore usually takes list of file so restore. Since it is high 
     probability that if we will restore multiple files, they will be from different dates,
-    we simply call OperationRestore multiple times with singel date and file.
+    we simply call OperationRestore multiple times with single date and file.
     */
     
     var restore_files = new GLib.List<File>(); 
