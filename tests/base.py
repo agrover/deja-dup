@@ -55,7 +55,7 @@ def create_temp_dir():
 def get_temp_name(extra, make=False):
   global temp_dir
   create_temp_dir()
-  if make:
+  if make and not os.path.exists(temp_dir + '/' + extra):
     os.makedirs(temp_dir + '/' + extra)
   return temp_dir + '/' + extra
 
