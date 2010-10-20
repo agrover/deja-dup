@@ -330,9 +330,11 @@ public class Duplicity : Object
           if (DuplicityInfo.get_default().has_rename_arg) {
             var old_home = homes.data;
             var new_home = slash_home_me;
-            extra_argv.append("--rename");
-            extra_argv.append(slash.get_relative_path(old_home));
-            extra_argv.append(slash.get_relative_path(new_home));
+            if (!old_home.equal(new_home)) {
+              extra_argv.append("--rename");
+              extra_argv.append(slash.get_relative_path(old_home));
+              extra_argv.append(slash.get_relative_path(new_home));
+            }
           }
           else if (!homes.data.has_prefix(slash_home_me))
             has_non_home_contents = true;
@@ -926,6 +928,7 @@ public class Duplicity : Object
         homes.append(gfile);
       if (!has_non_home_contents &&
           !gfile.equal(slash) &&
+          !gfile.equal(slash_home) &&
           !gfile.has_prefix(slash_home))
         has_non_home_contents = true;
     }

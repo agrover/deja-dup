@@ -145,8 +145,7 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
   if encrypt is not None:
     set_settings_value("encrypt", 'true' if encrypt else 'false')
 
-  if not root_prompt:
-    set_settings_value("root-prompt", 'false')
+  set_settings_value("root-prompt", 'true' if root_prompt else 'false')
 
   #daemon_env = subprocess.Popen(['gnome-keyring-daemon'], stdout=subprocess.PIPE).communicate()[0].strip()
   #daemon_env = daemon_env.split('\n')

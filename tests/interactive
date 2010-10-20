@@ -78,7 +78,7 @@ def test():
   if mtype is not None or size is not None:
     dest = base.create_mount(mtype=mtype, size=size)
   
-  base.setup(backend=back, dest=dest, sources=sources, start=False, encrypt=encrypt)
+  base.setup(backend=back, dest=dest, sources=sources, start=False, encrypt=encrypt, root_prompt=True)
   if hasrun:
     base.set_settings_value("last-run", "'fake'")
   
