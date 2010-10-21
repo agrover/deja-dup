@@ -129,6 +129,12 @@ public class AssistantDirectoryHistory : AssistantOperation {
     list_directory = list_dir;
   }
 
+  construct
+  {
+    title = _("Restore");
+    apply_text = _("_Restore");
+  }
+
   private string? get_glade_file(string glade_file) {
     var sysdatadirs = GLib.Environment.get_system_data_dirs();
     foreach (var sysdir in sysdatadirs) {
@@ -376,7 +382,6 @@ public class AssistantDirectoryHistory : AssistantOperation {
       this.backups_queue_filled = true;
     
       this.spinner.start();
-      do_query_files_at_date();
     }
   }
 
@@ -462,7 +467,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
       
     if (mount_op == null)
       mount_op = new MountOperationAssistant(this);
-
+ 
     realize();
     var xid = Gdk.x11_drawable_get_xid(this.window);
     
@@ -470,7 +475,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
     query_op_files = new DejaDup.OperationFiles((uint)xid, etime, list_directory);
     query_op_files.listed_current_files.connect(handle_listed_files);
     query_op_files.done.connect(query_files_finished);
-      
+    
     op = query_op_files;
     op.backend.mount_op = mount_op;
     op.passphrase_required.connect(get_passphrase);
@@ -485,6 +490,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
     
     if (cancelled)
       do_close();
+    else
+      do_query_files_at_date();
   }
 
   protected override void do_cancel() {

@@ -108,7 +108,7 @@ public abstract class Operation : Object
     }
   }
   
-  public async virtual void start() throws Error
+  public async virtual void start()
   {
     action_desc_changed(_("Preparing…"));    
     if (backend == null) {
@@ -118,7 +118,14 @@ public abstract class Operation : Object
     
     connect_to_dup();
     
-    claim_bus();
+    try {
+      claim_bus();
+    }
+    catch (Error e) {
+      raise_error(e.message, null);
+      done(false, false);
+      return;
+    }
     yield set_session_inhibited(true);
     
     // Get encryption passphrase if needed
@@ -169,7 +176,7 @@ public abstract class Operation : Object
     }
     catch (Error e) {
       raise_error(e.message, null);
-      done(false, false);
+      operation_finished(dup, false, false);
     }
   }
   
@@ -182,7 +189,7 @@ public abstract class Operation : Object
     if (!success) {
       if (error != null)
         raise_error(error, null);
-      done(false, false);
+      operation_finished(dup, false, false);
       return;
     }
     
@@ -200,7 +207,7 @@ public abstract class Operation : Object
     }
     catch (Error e) {
       raise_error(e.message, null);
-      done(false, false);
+      operation_finished(dup, false, false);
       return;
     }
   }

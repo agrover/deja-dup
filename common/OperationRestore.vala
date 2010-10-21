@@ -49,7 +49,7 @@ public class OperationRestore : Operation
            mode: Mode.RESTORE);
   }
   
-  public async override void start() throws Error
+  public async override void start()
   {
     action_desc_changed(_("Restoring files…"));
     dup.restore_files = restore_files;
