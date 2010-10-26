@@ -55,7 +55,7 @@ def create_temp_dir():
 def get_temp_name(extra, make=False):
   global temp_dir
   create_temp_dir()
-  if make:
+  if make and not os.path.exists(temp_dir + '/' + extra):
     os.makedirs(temp_dir + '/' + extra)
   return temp_dir + '/' + extra
 
@@ -135,8 +135,8 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
     raise Exception('Could not install settings schema')
 
   # Copy interface files into place as well
-  os.system("mkdir -p %s/deja-dup/interfaces" % environ['XDG_DATA_HOME'])
-  os.system("cp ../data/interfaces/* %s/deja-dup/interfaces" % environ['XDG_DATA_HOME'])
+  os.system("mkdir -p %s/deja-dup/ui" % environ['XDG_DATA_HOME'])
+  os.system("cp ../data/ui/* %s/deja-dup/ui" % environ['XDG_DATA_HOME'])
 
   if backend == 'file':
     create_local_config(dest)
@@ -205,14 +205,18 @@ def get_settings_value(key, schema = None):
   return pout.strip()
 
 def start_deja_dup(args=[''], waitfor='frmDéjàDup'):
-  #(fd, path) = tempfile.mkstemp()
-  #os.write(fd, 'run\n')
-  #os.close(fd)
-  #subprocess.Popen(['gdb', '-nx', '-x', path, '--args', 'deja-dup', ' '.join(args)])
-  subprocess.Popen(['deja-dup'] + args)
+  debug = False
+  if debug:
+    (fd, path) = tempfile.mkstemp()
+    os.write(fd, 'run\n')
+    os.close(fd)
+    subprocess.Popen(['gdb', '-nx', '-x', path, '--args', 'deja-dup'] + args)
+  else:
+    subprocess.Popen(['deja-dup'] + args)
   if waitfor is not None:
     ldtp.waittillguiexist(waitfor)
-  #os.remove(path)
+  if debug:
+    os.remove(path)
 
 def start_deja_dup_prefs():
   subprocess.Popen(['deja-dup-preferences'])
@@ -450,6 +454,25 @@ def restore_specific(files, path, date=None):
   wait_for_encryption('dlgRestore', 'lblRestorefromWhen?', 200)
   if date:
     ldtp.comboselect('dlgRestore', 'cboDate', date)
+  ldtp.click('dlgRestore', 'btnForward')
+  ldtp.click('dlgRestore', 'btnRestore')
+  if len(files) == 1:
+    lbl = 'lblYourfilewassuccessfullyrestored'
+  else:
+    lbl = 'lblYourfilesweresuccessfullyrestored'
+  assert ldtp.waittillguiexist('dlgRestore', lbl)
+  assert guivisible('dlgRestore', lbl)
+  ldtp.click('dlgRestore', 'btnClose')
+
+def restore_missing(files, path):
+  args = ['--restore-missing', path]
+  start_deja_dup(args=args, waitfor='dlgRestore')
+  remap('dlgRestore')
+  wait_for_encryption('dlgRestore', 'lblScanningfinished', 200)
+  for f in files:
+    index = ldtp.gettablerowindex('dlgRestore', 'tbl0', f)
+    if index != -1:
+      ldtp.checkrow('dlgRestore', 'tbl0', index)
   ldtp.click('dlgRestore', 'btnForward')
   ldtp.click('dlgRestore', 'btnRestore')
   if len(files) == 1:

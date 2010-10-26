@@ -462,18 +462,13 @@ public abstract class AssistantOperation : Assistant
     op.backend.mount_op = mount_op;
     op.backend.pause_op.connect(pause_op);
     
-    status_icon = new StatusIcon(this, op, automatic);
-    status_icon.toggle_window.connect((s) => {toggle_window(0, true);});
-    status_icon.hide_all.connect((s) => {hide_everything();});
+    if (status_icon == null) {
+      status_icon = new StatusIcon(this, op, automatic);
+      status_icon.toggle_window.connect((s) => {toggle_window(0, true);});
+      status_icon.hide_all.connect((s) => {hide_everything();});
+    }
 
-    try {
-      yield op.start();
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      show_error(e.message, null); // not really user-friendly text, but ideally this won't happen
-      apply_finished(op, false, false);
-    }
+    op.start();
   }
 
   protected virtual void do_prepare(Assistant assist, Gtk.Widget page)

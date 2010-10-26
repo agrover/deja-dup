@@ -107,7 +107,8 @@ public abstract class Assistant : Gtk.Dialog
 
   public void allow_forward(bool allow)
   {
-    forward_button.sensitive = allow;
+    if (current != null && current.data.type != Type.INTERRUPT)
+      forward_button.sensitive = allow;
   }
 
   public void set_header_icon(string? name)

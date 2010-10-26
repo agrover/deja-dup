@@ -135,7 +135,7 @@ class DejaDupApp : Object
           printerr("%s\n", _("You must provide a directory, not a file"));
           return 1;
         }
-        toplevel = new AssistantDirectoryHistory(list_directory);
+        toplevel = new AssistantRestoreMissing(list_directory);
         toplevel.destroy.connect((t) => {Gtk.main_quit();});
         toplevel.show_all();
     }

@@ -161,7 +161,6 @@ public abstract class Operation : Object
     dup.progress.connect((d, p) => {progress(p);});
     dup.question.connect((d, t, m) => {question(t, m);});
     dup.secondary_desc_changed.connect((d, t) => {secondary_desc_changed(t);});
-    backend.envp_ready.connect(continue_with_envp);
   }
   
   public async void continue_with_passphrase(string? passphrase)
@@ -172,6 +171,7 @@ public abstract class Operation : Object
     needs_password = false;
     this.passphrase = passphrase;
     try {
+      backend.envp_ready.connect(continue_with_envp);
       yield backend.get_envp();
     }
     catch (Error e) {
@@ -180,12 +180,15 @@ public abstract class Operation : Object
     }
   }
   
-  void continue_with_envp(DejaDup.Backend b, bool success, List<string>? envp, string? error) {
+  void continue_with_envp(DejaDup.Backend b, bool success, List<string>? envp, string? error)
+  {
     /*
      * Starts Duplicity backup with added enviroment variables
      * 
      * Start Duplicity backup process with costum values for enviroment variables.
      */
+    backend.envp_ready.disconnect(continue_with_envp);
+
     if (!success) {
       if (error != null)
         raise_error(error, null);

@@ -388,15 +388,8 @@ public class AssistantRestore : AssistantOperation
     op.backend.mount_op = mount_op;
     op.passphrase_required.connect(get_passphrase);
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
-    
-    try {
-      yield query_op.start();
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      show_error(e.message, null); // not really user-friendly text, but ideally this won't happen
-      query_finished(query_op, false, false);
-    }
+
+    query_op.start();
   }
   
   protected override void do_prepare(Assistant assist, Gtk.Widget page)

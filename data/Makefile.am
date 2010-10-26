@@ -23,8 +23,8 @@ nobase_dist_data_DATA = \
 	icons/hicolor/scalable/actions/deja-dup-restore.svg
 
 nobase_dist_pkgdata_DATA = \
-	interfaces/directory_history_confirmation_page.glade \
-	interfaces/listfiles-crt-out.glade
+	ui/restore-missing.ui \
+	ui/restore-missing-confirm.ui
 
 @INTLTOOL_XML_NOMERGE_RULE@
 

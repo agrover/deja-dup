@@ -45,8 +45,8 @@ deja_dup_VALASOURCES = \
 	Assistant.vala \
 	AssistantBackup.vala \
 	AssistantOperation.vala \
-	AssistantDirectoryHistory.vala \
 	AssistantRestore.vala \
+	AssistantRestoreMissing.vala \
 	MainWindow.vala \
 	MountOperationAssistant.vala \
 	StatusIcon.vala \

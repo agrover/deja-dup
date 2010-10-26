@@ -50,13 +50,13 @@ public class DeletedFile {
   }
 }
 
-public class AssistantDirectoryHistory : AssistantOperation {
+public class AssistantRestoreMissing : AssistantOperation {
   /*
    * Assistant for showing deleted files
    *
    * Assistant for showing deleted files. Execution flow goes as follows:
    * 
-   * 1. AssistantDirectoryHistory is called with //File// ''list_dir'' directory
+   * 1. AssistantRestoreMissing is called with //File// ''list_dir'' directory
    * 2. //void// do_prepare prepares listfiles_page and runs do_query_collection_dates that initializes query operation for collections dates. Results of query operation are returned to handle_collection_dates in one batch.
    * 3. handle_collection_dates fills the //PriorityQueue// ''backups_queue'' with //Time// values of backup dates, scans provided //File// ''list_dir'' with files that are currently located in directory and runs do_query_files_at_date
    * 4. do_query_files_at_date begins query operation for list-current-files at specific times and returns the results to handle_listed_files.  
@@ -104,11 +104,13 @@ public class AssistantDirectoryHistory : AssistantOperation {
 
   DejaDup.OperationFiles query_op_files;
   DejaDup.OperationStatus query_op_collection_dates;
+  DejaDup.Operation.State op_state; // Shared between operations
 
   Gtk.Widget listfiles_page;
   Gtk.TreeIter deleted_iter;
   Gtk.ListStore listmodel;
   Gtk.ScrolledWindow sw_restore_files;
+  Gtk.Label list_dir_label;
 
   /* List files page */
   //Gtk.Label current_scan_date = new Gtk.Label(_("Starting..."));
@@ -125,7 +127,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
    */
   int restore_files_table_rows = 0;
   
-  public AssistantDirectoryHistory(File list_dir) {
+  public AssistantRestoreMissing(File list_dir) {
     list_directory = list_dir;
   }
 
@@ -135,10 +137,10 @@ public class AssistantDirectoryHistory : AssistantOperation {
     apply_text = _("_Restore");
   }
 
-  private string? get_glade_file(string glade_file) {
+  private string? get_ui_file(string ui_file) {
     var sysdatadirs = GLib.Environment.get_system_data_dirs();
     foreach (var sysdir in sysdatadirs) {
-      var p = Path.build_filename("/", sysdir, Config.PACKAGE, "interfaces", glade_file);
+      var p = Path.build_filename(sysdir, Config.PACKAGE, "ui", ui_file);
       var file = File.new_for_path(p);
       if (file.query_exists(null))
         return p;
@@ -182,7 +184,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
       page.name = "listfiles_page";
       var builder = new Gtk.Builder();
       try {
-        string gf = get_glade_file("listfiles-crt-out.glade");
+        string gf = get_ui_file("restore-missing.ui");
         if (gf == null) {
           warning("Error: Could not find interface file.");
           return null;
@@ -197,9 +199,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
         current_scan_date = builder.get_object("status_word") as Gtk.Label;
 
         /* Add backup and scan information */
-        /* Backup source */
-        Gtk.Widget w = new DejaDup.ConfigLabelLocation();
-        status_table.attach(w, 1, 2, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+        this.list_dir_label = new Gtk.Label("");
+        status_table.attach(this.list_dir_label, 1, 2, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
 
         /* Spinner */
         progress_table.attach(this.spinner, 0, 1, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
@@ -217,6 +218,8 @@ public class AssistantDirectoryHistory : AssistantOperation {
             this.file_status.get(path.to_int()).restore = true;
           else
             this.file_status.get(path.to_int()).restore = false;
+
+          allow_forward_if_any_selected();
           
           var tree_path = new Gtk.TreePath.from_string (path);
           this.listmodel.get_iter (out this.deleted_iter, tree_path);
@@ -238,10 +241,21 @@ public class AssistantDirectoryHistory : AssistantOperation {
       }
   }
 
+  void allow_forward_if_any_selected()
+  {
+    for (int i = 0; i < file_status.length; ++i) {
+      if (file_status[i].restore) {
+        allow_forward(true);
+        return;
+      }
+    }
+    allow_forward(false);
+  }
+
   void add_listfiles_page() {
     var page = make_listfiles_page();
     append_page(page);
-    set_page_title(page, _("Restore missing files"));
+    set_page_title(page, _("Restore Missing Files"));
     listfiles_page = page;
   }
 
@@ -251,6 +265,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
 
   protected override void do_prepare(Assistant assist, Gtk.Widget page) {
     if (page == listfiles_page) {
+      list_dir_label.label = list_directory.get_parse_name();
       if (!scan_queue) {
         do_query_files_at_date();
         scan_queue = true;
@@ -258,11 +273,18 @@ public class AssistantDirectoryHistory : AssistantOperation {
       else {
         if (query_op_collection_dates != null && query_op_collection_dates.needs_password) {
           provide_password();
-        }  
-        else if (query_op_collection_dates == null) {
+        }
+        else if (query_op_files != null && query_op_files.needs_password) {
+          provide_password();
+        }
+        else if (!backups_queue_filled) {
           do_query_collection_dates();
         }
       }
+
+      // Doing this in idle is a bit of a hack.  We do this because Assistant
+      // doesn't add the buttons until after this prepare call.
+      Idle.add(() => {allow_forward_if_any_selected(); return false;});
     }
     
     else if (page == confirm_page) {
@@ -453,21 +475,19 @@ public class AssistantDirectoryHistory : AssistantOperation {
     }
     else if (tdiff / 24 / 30 >= 1 && tdiff / 24 / 30 <= 12) {
       int n = tdiff / 24 / 30;
-      if (n == 1)
-        worddiff = _("Scanning for files from about a month ago...");
-      else
-        worddiff = _(@"Scanning for files from about $n months ago...");
+      worddiff = ngettext("Scanning for files from about a month ago...",
+                          "Scanning for files from about %d months ago...".printf(n),
+                          n);
     }
     else {
       int n = tdiff / 24 / 30 / 12;
-      worddiff = _(@"Scanning for files from about $n years ago...");
+      worddiff = ngettext("Scanning for files from about a years ago...",
+                          "Scanning for files from about %d years ago...".printf(n),
+                          n);
     }
 
     this.current_scan_date.set_text(worddiff);
-      
-    if (mount_op == null)
-      mount_op = new MountOperationAssistant(this);
- 
+
     realize();
     var xid = Gdk.x11_drawable_get_xid(this.window);
     
@@ -477,15 +497,17 @@ public class AssistantDirectoryHistory : AssistantOperation {
     query_op_files.done.connect(query_files_finished);
     
     op = query_op_files;
-    op.backend.mount_op = mount_op;
     op.passphrase_required.connect(get_passphrase);
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
+
+    op.set_state(op_state); // share state between ops
     
     query_op_files.start();
   }
   
   protected void query_collection_dates_finished(DejaDup.Operation op, bool success, bool cancelled) {
     query_op_collection_dates = null;
+    op_state = this.op.get_state();
     this.op = null;
     
     if (cancelled)
@@ -570,7 +592,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
     page.name = "confirm_page";
     var builder = new Gtk.Builder();
     try {
-      string gf = get_glade_file("directory_history_confirmation_page.glade");
+      string gf = get_ui_file("restore-missing-confirm.ui");
       if (gf == null) {
         warning("Error: Could not find interface file.");
         return null;
@@ -623,6 +645,7 @@ public class AssistantDirectoryHistory : AssistantOperation {
                                                restore_file.deleted.format("%s"),
                                                restore_files,
                                                (uint)xid);
+    rest_op.set_state(op_state);
     return rest_op;
   }
     
