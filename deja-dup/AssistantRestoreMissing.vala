@@ -149,17 +149,18 @@ public class AssistantRestoreMissing : AssistantRestore {
         builder.connect_signals(this);
         
         var page = builder.get_object("restore-missing-files") as Gtk.Widget;
-        var filelistwindow = builder.get_object("filelistwindow") as Gtk.ScrolledWindow;
-        var status_table = builder.get_object("backup_table") as Gtk.Table;
-        var progress_table = builder.get_object("status_box") as Gtk.Table;
-        current_scan_date = builder.get_object("status_word") as Gtk.Label;
+        var filelistwindow = builder.get_object("file-list-window") as Gtk.ScrolledWindow;
+        var status_table = builder.get_object("folder-box") as Gtk.Box;
+        var progress_table = builder.get_object("status-box") as Gtk.Box;
+        current_scan_date = builder.get_object("status-label") as Gtk.Label;
 
         /* Add backup and scan information */
         this.list_dir_label = new Gtk.Label("");
-        status_table.attach(this.list_dir_label, 1, 2, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+        this.list_dir_label.set("xalign", 0.0f);
+        status_table.pack_start(this.list_dir_label, true, true, 0);
 
         /* Spinner */
-        progress_table.attach(this.spinner, 0, 1, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+        progress_table.pack_end(this.spinner, false, false, 0);
         this.spinner.set_size_request(20, 20);
        
         this.listmodel = new Gtk.ListStore (3, typeof (bool), typeof (string), typeof (string));
