@@ -399,7 +399,7 @@ public abstract class AssistantOperation : Assistant
   {
     var page = make_password_page();
     append_page(page, Type.INTERRUPT);
-    set_page_title(page, _("Password needed"));
+    set_page_title(page, _("Password Needed"));
     password_page = page;
   }
 

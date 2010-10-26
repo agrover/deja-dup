@@ -2,6 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2010 Urban Skudnik <urban.skudnik@gmail.com>
+    © 2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -50,7 +51,7 @@ public class DeletedFile {
   }
 }
 
-public class AssistantRestoreMissing : AssistantOperation {
+public class AssistantRestoreMissing : AssistantRestore {
   /*
    * Assistant for showing deleted files
    *
@@ -97,44 +98,25 @@ public class AssistantRestoreMissing : AssistantOperation {
   private bool scan_queue = true;
   private bool cancel_assistant = false;
   private Sequence<Time?> backups_queue = new Sequence<Time?>(g_free);
-  private HashTable<string, DeletedFile> restore_queue = new HashTable<string, DeletedFile>(str_hash, str_equal);
 
-  private HashTable<string, string> allfiles_prev;
-  private GenericArray<DeletedFile> file_status = new GenericArray<DeletedFile>();
+  private HashTable<string, DeletedFile> allfiles_prev;
+  private List<File> restore_files_remaining;
 
   DejaDup.OperationFiles query_op_files;
-  DejaDup.OperationStatus query_op_collection_dates;
-  DejaDup.Operation.State op_state; // Shared between operations
 
   Gtk.Widget listfiles_page;
   Gtk.TreeIter deleted_iter;
   Gtk.ListStore listmodel;
-  Gtk.ScrolledWindow sw_restore_files;
   Gtk.Label list_dir_label;
 
   /* List files page */
-  //Gtk.Label current_scan_date = new Gtk.Label(_("Starting..."));
+  //Gtk.Label current_scan_date = new Gtk.Label(_("Starting…"));
   Gtk.Label current_scan_date;
   Gtk.Spinner spinner = new Gtk.Spinner();
-  
-  /* Confirmation page related widgets */
-  Gtk.Label label;
-  Gtk.Label restore_files_label;
-  Gtk.Table restore_files_table;
-  /*
-    Gtk.Table in Glade needs to be set at least to 1 at start. When we update
-    our table we start from 0 so that we always resize table to correct size without the need for special case.
-   */
-  int restore_files_table_rows = 0;
-  
-  public AssistantRestoreMissing(File list_dir) {
-    list_directory = list_dir;
-  }
 
-  construct
+  public AssistantRestoreMissing(File list_dir)
   {
-    title = _("Restore");
-    apply_text = _("_Restore");
+    list_directory = list_dir;
   }
 
   private string? get_ui_file(string ui_file) {
@@ -148,28 +130,6 @@ public class AssistantRestoreMissing : AssistantOperation {
     return null;
   }
 
-  private HashTable<string, string> files_in_directory() {
-    /*
-     * Function lists all files that are currently located in the directory.
-     *
-     * Function scans directory that was provided to it through
-     * command line children and returns an array of strings populated
-     * by file names of folder and files.
-     */
-    var files = new HashTable<string, string> (str_hash, str_equal);
-
-    try {
-      var enumerator = list_directory.enumerate_children(FILE_ATTRIBUTE_STANDARD_NAME, 0, null);
-      FileInfo fileinfo;
-      while ((fileinfo = enumerator.next_file(null)) != null)
-        files.insert(list_directory.get_path() + "/" + fileinfo.get_name(), null);
-    }
-    catch (Error e){
-      warning("%s\n", e.message);
-    }
-    return files;
-  }
-
   Gtk.Widget? make_listfiles_page() {
     /*
      * Build list files (introduction) page which shows deleted files.
@@ -178,10 +138,6 @@ public class AssistantRestoreMissing : AssistantOperation {
      * components to it. Deleted files are dynamically added on-the-fly by
      * applicable functions.
      */
-
-      // Hack; we need ''page'' because window needs to be reparented to be shown.
-      var page = new Gtk.Table(1, 1, false);
-      page.name = "listfiles_page";
       var builder = new Gtk.Builder();
       try {
         string gf = get_ui_file("restore-missing.ui");
@@ -192,7 +148,7 @@ public class AssistantRestoreMissing : AssistantOperation {
         builder.add_from_file(gf);
         builder.connect_signals(this);
         
-        var window = builder.get_object("viewport") as Gtk.Widget;
+        var page = builder.get_object("restore-missing-files") as Gtk.Widget;
         var filelistwindow = builder.get_object("filelistwindow") as Gtk.ScrolledWindow;
         var status_table = builder.get_object("backup_table") as Gtk.Table;
         var progress_table = builder.get_object("status_box") as Gtk.Table;
@@ -211,19 +167,21 @@ public class AssistantRestoreMissing : AssistantOperation {
         var toggle = new Gtk.CellRendererToggle();
         
         toggle.toggled.connect ((toggle, path) => {
-          /*
-           * Function for toggling state of checkbox
-           */
-          if (!this.file_status.get(path.to_int()).restore)
-            this.file_status.get(path.to_int()).restore = true;
-          else
-            this.file_status.get(path.to_int()).restore = false;
-
-          allow_forward_if_any_selected();
-          
           var tree_path = new Gtk.TreePath.from_string (path);
           this.listmodel.get_iter (out this.deleted_iter, tree_path);
           this.listmodel.set(this.deleted_iter, 0, !toggle.active);
+
+          string name;
+          this.listmodel.get(this.deleted_iter, 1, out name);
+          File file = list_directory.get_child(name);
+
+          if (toggle.active)
+            _restore_files.prepend(file);
+          else
+            _restore_files.remove_link(_restore_files.find_custom(file, (f) => {
+              if (file.equal(f as File)) return 0; else return 1;}));
+
+          allow_forward(restore_files != null);
         });
 
         treeview.insert_column_with_attributes(-1, "    ", toggle, "active", 0);
@@ -233,29 +191,17 @@ public class AssistantRestoreMissing : AssistantOperation {
         treeview.set_headers_visible (true);
 
         filelistwindow.add_with_viewport(treeview);
-        window.reparent(page);
         return page;
       } catch (Error err) {
-        warning("Error: %s", err.message);
+        warning("%s", err.message);
         return null;
       }
-  }
-
-  void allow_forward_if_any_selected()
-  {
-    for (int i = 0; i < file_status.length; ++i) {
-      if (file_status[i].restore) {
-        allow_forward(true);
-        return;
-      }
-    }
-    allow_forward(false);
   }
 
   void add_listfiles_page() {
     var page = make_listfiles_page();
     append_page(page);
-    set_page_title(page, _("Restore Missing Files"));
+    set_page_title(page, _("Restore which Files?"));
     listfiles_page = page;
   }
 
@@ -263,91 +209,40 @@ public class AssistantRestoreMissing : AssistantOperation {
     add_listfiles_page();
   }
 
-  protected override void do_prepare(Assistant assist, Gtk.Widget page) {
-    if (page == listfiles_page) {
+  protected override void do_prepare(Assistant assist, Gtk.Widget page)
+  {
+    if (page == confirm_page) {
+      scan_queue = false;
+      restore_files_remaining = restore_files.copy();
+    }
+    else if (page == listfiles_page) {
       list_dir_label.label = list_directory.get_parse_name();
       if (!scan_queue) {
         do_query_files_at_date();
         scan_queue = true;
       }
       else {
-        if (query_op_collection_dates != null && query_op_collection_dates.needs_password) {
+        if (query_op != null && query_op.needs_password) {
           provide_password();
         }
         else if (query_op_files != null && query_op_files.needs_password) {
           provide_password();
         }
         else if (!backups_queue_filled) {
-          do_query_collection_dates();
+          do_query();
         }
       }
 
       // Doing this in idle is a bit of a hack.  We do this because Assistant
       // doesn't add the buttons until after this prepare call.
-      Idle.add(() => {allow_forward_if_any_selected(); return false;});
+      Idle.add(() => {allow_forward(restore_files != null); return false;});
     }
-    
-    else if (page == confirm_page) {
-    /*
-     * We need to destroy the existing table and redraw current one to draw
-     * the confirmation page.
-     */
-      scan_queue = false;
 
-      restore_files_table.destroy();
-      restore_files_table = new Gtk.Table(1, 1, false);
-      restore_files_table_rows = 0;
-      
-      for (int i = 0; i < file_status.length; ++i) {
-        var delfile = file_status[i];
-        if (delfile.restore)
-        {
-          restore_queue.insert(delfile.name, delfile);
-
-          restore_files_table_rows++;
-          restore_files_table.resize(restore_files_table_rows, 1);
-          
-          label = new Gtk.Label(delfile.filename());
-          label.set("xalign", 0.0f);
-          label.show(); // By default, labels are hidden, therefore we show it.
-          restore_files_table.attach(label, 0, 1, this.restore_files_table_rows-1, this.restore_files_table_rows, Gtk.AttachOptions.FILL, 0, 0, 0);
-        }
-      }
-
-      // Use appropriate form
-      restore_files_label.set_text(ngettext("File to restore:",
-                                            "Files to restore:",
-                                            restore_files_table_rows));
-      restore_files_table.show();
-      sw_restore_files.add_with_viewport(restore_files_table);
-    }
-    else if (page == progress_page) {
-      set_page_title(page, _("Restoring…"));
-    }
-    else if (page == summary_page) {
-      if (error_occurred)
-        set_page_title(page, _("Restore Failed"));
-      else {
-        set_page_title(page, _("Restore Finished"));
-
-        /* Count the number of files that had to be restored */
-        var numdels = 0; // Number of deleted files
-        for (int i = 0; i < file_status.length; ++i) {
-          var delfile = file_status[i];
-          if (delfile.restore) {
-            numdels++;
-          }
-        }
-
-        summary_label.label = ngettext(_("Your file was successfully restored."),
-                                         _("Your files were successfully restored."),
-                                         numdels);
-      }
-    }
     base.do_prepare(assist, page);
   }
 
-  protected void handle_listed_files(DejaDup.OperationFiles op, string date, string file) {
+  protected void handle_listed_files(DejaDup.OperationFiles op, string date, string file)
+  {
       /*
        * Handler for each line returned by duplicity individually
        *
@@ -367,18 +262,16 @@ public class AssistantRestoreMissing : AssistantOperation {
         if(fileobj.has_parent(this.list_directory)) {
           var fs = new DeletedFile(filestr, op.time);
 
-          this.file_status.add(fs);
-
           this.listmodel.append (out this.deleted_iter);
           this.listmodel.set (this.deleted_iter, 0, false, 1, fs.filename(), 2, op.time.format("%c"));
 
-          this.allfiles_prev.insert(filestr, null);
+          this.allfiles_prev.insert(fileobj.get_path(), fs);
         }
       }
     }
   }
 
-  protected void handle_collection_dates(DejaDup.OperationStatus op, GLib.List<string>? dates)
+  protected override void handle_collection_dates(DejaDup.OperationStatus op, GLib.List<string>? dates)
   {
     /*
      * Handle collection dates
@@ -400,39 +293,13 @@ public class AssistantRestoreMissing : AssistantOperation {
         }
       }
 
-      this.allfiles_prev = files_in_directory();
+      this.allfiles_prev = new HashTable<string, DeletedFile>(str_hash, str_equal);
       this.backups_queue_filled = true;
     
       this.spinner.start();
     }
   }
 
-  protected void do_query_collection_dates()
-  {
-    /*
-     * Initialize query operation for collection dates.
-     *
-     * Initializes query operation and links appropriate signals for when operation
-     * finishes and when it receives duplicity's output.
-     */
-    realize();
-    var xid = Gdk.x11_drawable_get_xid(this.window);
-      
-    query_op_collection_dates = new DejaDup.OperationStatus((uint)xid);
-    query_op_collection_dates.collection_dates.connect(handle_collection_dates);
-    query_op_collection_dates.done.connect(query_collection_dates_finished);
-    
-    if (mount_op == null)
-      mount_op = new MountOperationAssistant(this);
-
-    op = query_op_collection_dates;
-    op.backend.mount_op = mount_op;
-    op.passphrase_required.connect(get_passphrase);
-    op.raise_error.connect((o, e, d) => {show_error(e, d);});
-
-    query_op_collection_dates.start();
-  }
-    
   protected void do_query_files_at_date()
   {
     /*
@@ -465,24 +332,24 @@ public class AssistantRestoreMissing : AssistantOperation {
     string worddiff;
     int tdiff =  (ttodayi - tepoch)/60/60; // Hours
     if (tdiff / 24 == 0 ) {
-      worddiff = _("Scanning for files from yesterday...");
+      worddiff = _("Scanning for files from yesterday…");
     }
     else if (tdiff / 24 / 7 == 0) {
-      worddiff = _("Scanning for files from last week...");
+      worddiff = _("Scanning for files from last week…");
     }
     else if (tdiff / 24 / 30 == 0) {
-    worddiff = _("Scanning for files from last month...");
+    worddiff = _("Scanning for files from last month…");
     }
     else if (tdiff / 24 / 30 >= 1 && tdiff / 24 / 30 <= 12) {
       int n = tdiff / 24 / 30;
-      worddiff = ngettext("Scanning for files from about a month ago...",
-                          "Scanning for files from about %d months ago...".printf(n),
+      worddiff = ngettext("Scanning for files from about a month ago…",
+                          "Scanning for files from about %d months ago…".printf(n),
                           n);
     }
     else {
       int n = tdiff / 24 / 30 / 12;
-      worddiff = ngettext("Scanning for files from about a years ago...",
-                          "Scanning for files from about %d years ago...".printf(n),
+      worddiff = ngettext("Scanning for files from about a year ago…",
+                          "Scanning for files from about %d years ago…".printf(n),
                           n);
     }
 
@@ -505,14 +372,15 @@ public class AssistantRestoreMissing : AssistantOperation {
     query_op_files.start();
   }
   
-  protected void query_collection_dates_finished(DejaDup.Operation op, bool success, bool cancelled) {
-    query_op_collection_dates = null;
+  protected override void query_finished(DejaDup.Operation op, bool success, bool cancelled)
+  {
+    query_op = null;
     op_state = this.op.get_state();
     this.op = null;
     
     if (cancelled)
       do_close();
-    else
+    else if (success)
       do_query_files_at_date();
   }
 
@@ -529,18 +397,13 @@ public class AssistantRestoreMissing : AssistantOperation {
     base.do_cancel();
   }
 
-  protected override void set_op_icon_name()
-  {
-    icon_name = "deja-dup-restore";
-  }
-
   protected override void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
     /*
      * Ran after assistant finishes applying restore operation.
      *
      * After assistant finishes with initial OperationRestore, apply_finished is called. Afterwards we
-     * check if restore_queue is empty and if not, rerun apply function. If it is, we move to
+     * check if restore_files is empty and if not, rerun apply function. If it is, we move to
      * summary page.
      */
     //status_icon = null; PRIV PARAMETER - FIXIT!
@@ -556,7 +419,7 @@ public class AssistantRestoreMissing : AssistantOperation {
     else {
       if (success) {
         succeeded = true;
-        if (this.restore_queue.size() > 0) {
+        if (this.restore_files_remaining != null) {
           base.do_apply();
         } else {
           go_to_page(summary_page);
@@ -584,41 +447,6 @@ public class AssistantRestoreMissing : AssistantOperation {
     }
   }
 
-  protected override Gtk.Widget? make_confirm_page(){
-      /*
-       * Build confirmation page and add various dynamic elements to Glade template
-       */
-    var page = new Gtk.Table(1, 1, false);
-    page.name = "confirm_page";
-    var builder = new Gtk.Builder();
-    try {
-      string gf = get_ui_file("restore-missing-confirm.ui");
-      if (gf == null) {
-        warning("Error: Could not find interface file.");
-        return null;
-      }
-      builder.add_from_file(gf);      
-      var window = builder.get_object("viewport") as Gtk.Widget;
-      var backup_source_properties = builder.get_object("backup_properties") as Gtk.Table;
-      sw_restore_files = builder.get_object("sw-restore-files") as Gtk.ScrolledWindow;
-      restore_files_label = builder.get_object("restore_files_label") as Gtk.Label;
-      
-      Gtk.Widget w;
-
-      w = new DejaDup.ConfigLabelLocation();
-      backup_source_properties.attach(w, 1, 2, 0, 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-
-      w = new DejaDup.ConfigLabelBool(DejaDup.ENCRYPT_KEY);
-      backup_source_properties.attach(w, 1, 2, 1, 2, Gtk.AttachOptions.FILL, 0, 0, 0);
-
-      window.reparent(page);
-      return page;
-    } catch (Error err) {
-      warning("Error: %s", err.message);
-      return null;
-    }
-  }
-
   protected override DejaDup.Operation create_op()
   {
     /*
@@ -627,10 +455,8 @@ public class AssistantRestoreMissing : AssistantOperation {
     realize();
     var xid = Gdk.x11_drawable_get_xid(this.window);
 
-    var begin = HashTableIter<string, DeletedFile>(restore_queue);
-    DeletedFile restore_file;
-    begin.next(null, out restore_file);
-    begin.remove();
+    DeletedFile restore_file = allfiles_prev.lookup(restore_files_remaining.data.get_path());
+    restore_files_remaining.remove_link(restore_files_remaining);
 
     /*
     OperationRestore usually takes list of file so restore. Since it is high 
@@ -638,18 +464,14 @@ public class AssistantRestoreMissing : AssistantOperation {
     we simply call OperationRestore multiple times with single date and file.
     */
     
-    var restore_files = new GLib.List<File>(); 
-    restore_files.append(File.new_for_path(restore_file.name));
+    var file_list = new GLib.List<File>();
+    file_list.append(File.new_for_path(restore_file.name));
     
     var rest_op = new DejaDup.OperationRestore("/", 
                                                restore_file.deleted.format("%s"),
-                                               restore_files,
+                                               file_list,
                                                (uint)xid);
     rest_op.set_state(op_state);
     return rest_op;
-  }
-    
-  protected override string get_progress_file_prefix(){
-    return _("Restoring");
   }
 }

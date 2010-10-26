@@ -23,7 +23,7 @@ public class AssistantRestore : AssistantOperation
 {
   public string restore_location {get; protected set; default = "/";}
   
-  private List<File> _restore_files;
+  protected List<File> _restore_files;
   public List<File> restore_files {
     get {
       return this._restore_files;
@@ -44,8 +44,8 @@ public class AssistantRestore : AssistantOperation
     restore_files = files;
   }
   
-  DejaDup.OperationStatus query_op;
-  DejaDup.Operation.State op_state;
+  protected DejaDup.OperationStatus query_op;
+  protected DejaDup.Operation.State op_state;
   Gtk.ProgressBar query_progress_bar;
   uint query_timeout_id;
   Gtk.ComboBox date_combo;
@@ -253,7 +253,7 @@ public class AssistantRestore : AssistantOperation
   {
     var page = make_query_backend_page();
     append_page(page, Type.PROGRESS);
-    set_page_title(page, _("Checking for Backups"));
+    set_page_title(page, _("Checking for Backups…"));
     query_progress_page = page;
   }
   
@@ -313,7 +313,7 @@ public class AssistantRestore : AssistantOperation
     return day1.compare(day2) == 0;
   }
 
-  protected void handle_collection_dates(DejaDup.OperationStatus op, List<string>? dates)
+  protected virtual void handle_collection_dates(DejaDup.OperationStatus op, List<string>? dates)
   {
     /*
      * Receives list of dates of backups and shows them to user
@@ -355,7 +355,7 @@ public class AssistantRestore : AssistantOperation
       show_error(_("No backups to restore"), null);
   }
   
-  protected void query_finished(DejaDup.Operation op, bool success, bool cancelled)
+  protected virtual void query_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
     this.op_state = op.get_state();
     this.query_op = null;
