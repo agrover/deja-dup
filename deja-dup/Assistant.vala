@@ -62,7 +62,7 @@ public abstract class Assistant : Gtk.Dialog
   bool interrupted_from_hidden = false;
   weak List<PageInfo> interrupted;
 
-  weak List<PageInfo> current;
+  public weak List<PageInfo> current;
   List<PageInfo> infos;
 
   static const int APPLY = 1;
@@ -107,7 +107,8 @@ public abstract class Assistant : Gtk.Dialog
 
   public void allow_forward(bool allow)
   {
-    forward_button.sensitive = allow;
+    if (current != null && current.data.type != Type.INTERRUPT)
+      forward_button.sensitive = allow;
   }
 
   public void set_header_icon(string? name)

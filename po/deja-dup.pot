@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: mike@mterry.name\n"
-"POT-Creation-Date: 2010-10-20 16:50-0400\n"
+"POT-Creation-Date: 2010-10-26 08:47-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,8 +31,8 @@ msgstr ""
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, it
 #. may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
-#: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
+#: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:46
+#: ../deja-dup/main.vala:85 ../deja-dup/MainWindow.vala:28
 #: ../deja-dup/StatusIcon.vala:63
 msgid "Déjà Dup"
 msgstr ""
@@ -257,11 +257,19 @@ msgstr ""
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 
-#: ../deja-dup/Assistant.vala:284
+#: ../data/ui/restore-missing.ui.h:1
+msgid "Folder:"
+msgstr ""
+
+#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:172
+msgid "Scanning…"
+msgstr ""
+
+#: ../deja-dup/Assistant.vala:285
 msgid "Co_ntinue"
 msgstr ""
 
-#: ../deja-dup/Assistant.vala:319 ../deja-dup/StatusIcon.vala:155
+#: ../deja-dup/Assistant.vala:320 ../deja-dup/StatusIcon.vala:155
 msgid "_Resume Later"
 msgstr ""
 
@@ -345,44 +353,40 @@ msgstr ""
 msgid "Your files were successfully backed up."
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:256 ../common/Operation.vala:52
-msgid "Backing up…"
+#: ../deja-dup/AssistantBackup.vala:256
+msgid "Backing Up…"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:136
+#: ../deja-dup/AssistantOperation.vala:171
 msgid "Scanning:"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:137
-msgid "Scanning…"
-msgstr ""
-
-#: ../deja-dup/AssistantOperation.vala:210
+#: ../deja-dup/AssistantOperation.vala:245
 msgid "_Details"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:259
+#: ../deja-dup/AssistantOperation.vala:294
 msgid "E_ncryption password:"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:268
+#: ../deja-dup/AssistantOperation.vala:303
 msgid "_Show password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:275
+#: ../deja-dup/AssistantOperation.vala:310
 #: ../deja-dup/MountOperationAssistant.vala:28
 msgid "_Remember password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:344
+#: ../deja-dup/AssistantOperation.vala:387
 msgid "Summary"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:359
-msgid "Password needed"
+#: ../deja-dup/AssistantOperation.vala:402
+msgid "Password Needed"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:584
+#: ../deja-dup/AssistantOperation.vala:643
 msgid "Déjà Dup backup passphrase"
 msgstr ""
 
@@ -427,7 +431,7 @@ msgid "Restore folder:"
 msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:256
-msgid "Checking for Backups"
+msgid "Checking for Backups…"
 msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:264
@@ -444,7 +448,7 @@ msgstr ""
 msgid "Restoring:"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:348
+#: ../deja-dup/AssistantRestore.vala:355
 msgid "No backups to restore"
 msgstr ""
 
@@ -476,25 +480,87 @@ msgid_plural "Your files were successfully restored."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../deja-dup/AssistantRestore.vala:485 ../common/Operation.vala:54
+#: ../deja-dup/AssistantRestore.vala:485 ../common/Operation.vala:71
 msgid "Restoring…"
 msgstr ""
 
-#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:33
+#: ../deja-dup/AssistantRestoreMissing.vala:189
+msgid "File"
+msgstr ""
+
+#: ../deja-dup/AssistantRestoreMissing.vala:190
+msgid "Last seen"
+msgstr ""
+
+#: ../deja-dup/AssistantRestoreMissing.vala:205
+msgid "Restore which Files?"
+msgstr ""
+
+#: ../deja-dup/AssistantRestoreMissing.vala:336
+msgid "Scanning for files from yesterday…"
+msgstr ""
+
+#: ../deja-dup/AssistantRestoreMissing.vala:339
+msgid "Scanning for files from last week…"
+msgstr ""
+
+#: ../deja-dup/AssistantRestoreMissing.vala:342
+msgid "Scanning for files from last month…"
+msgstr ""
+
+#: ../deja-dup/AssistantRestoreMissing.vala:346
+#, c-format
+msgid "Scanning for files from about a month ago…"
+msgid_plural "Scanning for files from about %d months ago…"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../deja-dup/AssistantRestoreMissing.vala:352
+#, c-format
+msgid "Scanning for files from about a year ago…"
+msgid_plural "Scanning for files from about %d years ago…"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../deja-dup/AssistantRestoreMissing.vala:442
+msgid "Scanning finished"
+msgstr ""
+
+#: ../deja-dup/main.vala:33 ../monitor/monitor.vala:33
 #: ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr ""
 
-#: ../deja-dup/main.vala:33
+#: ../deja-dup/main.vala:34
 msgid "Restore given files"
 msgstr ""
 
-#: ../deja-dup/main.vala:34
+#: ../deja-dup/main.vala:35
 msgid "Immediately start a backup"
 msgstr ""
 
-#: ../deja-dup/main.vala:50
+#: ../deja-dup/main.vala:36
+msgid "Restore deleted files"
+msgstr ""
+
+#: ../deja-dup/main.vala:52
 msgid "No filenames provided"
+msgstr ""
+
+#: ../deja-dup/main.vala:60
+msgid "No directory provided"
+msgstr ""
+
+#: ../deja-dup/main.vala:65
+msgid "Only one directory can be shown at once"
+msgstr ""
+
+#: ../deja-dup/main.vala:131
+msgid "Directory does not exists"
+msgstr ""
+
+#: ../deja-dup/main.vala:135
+msgid "You must provide a directory, not a file"
 msgstr ""
 
 #: ../deja-dup/MainWindow.vala:47 ../deja-dup/MainWindow.vala:194
@@ -693,57 +759,57 @@ msgid ""
 "version %d.%d.%.2d"
 msgstr ""
 
-#: ../common/Duplicity.vala:114 ../common/Duplicity.vala:166
+#: ../common/Duplicity.vala:125 ../common/Duplicity.vala:177
 msgid "Paused (no network)"
 msgstr ""
 
-#: ../common/Duplicity.vala:277 ../common/Duplicity.vala:285
-#: ../common/Duplicity.vala:320 ../common/Operation.vala:60
-#: ../common/Operation.vala:97
+#: ../common/Duplicity.vala:288 ../common/Duplicity.vala:296
+#: ../common/Duplicity.vala:331 ../common/Operation.vala:77
+#: ../common/Operation.vala:113
 msgid "Preparing…"
 msgstr ""
 
-#: ../common/Duplicity.vala:308
+#: ../common/Duplicity.vala:319
 msgid "Creating the first backup.  This may take a while."
 msgstr ""
 
-#: ../common/Duplicity.vala:310
+#: ../common/Duplicity.vala:321
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
 msgstr ""
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:409
+#: ../common/Duplicity.vala:420
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 
-#: ../common/Duplicity.vala:430
+#: ../common/Duplicity.vala:441
 msgid "Backup location does not have enough free space."
 msgstr ""
 
-#: ../common/Duplicity.vala:450 ../common/Duplicity.vala:464
+#: ../common/Duplicity.vala:461 ../common/Duplicity.vala:475
 msgid "Cleaning up…"
 msgstr ""
 
-#: ../common/Duplicity.vala:556 ../common/Duplicity.vala:883
+#: ../common/Duplicity.vala:567 ../common/Duplicity.vala:897
 msgid "Failed with an unknown error."
 msgstr ""
 
-#: ../common/Duplicity.vala:750
+#: ../common/Duplicity.vala:764
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
 
-#: ../common/Duplicity.vala:755 ../common/Duplicity.vala:834
+#: ../common/Duplicity.vala:769 ../common/Duplicity.vala:848
 msgid "Bad encryption password."
 msgstr ""
 
-#: ../common/Duplicity.vala:760
+#: ../common/Duplicity.vala:774
 msgid "Computer name changed"
 msgstr ""
 
-#: ../common/Duplicity.vala:760
+#: ../common/Duplicity.vala:774
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -751,67 +817,67 @@ msgid ""
 "location."
 msgstr ""
 
-#: ../common/Duplicity.vala:773
+#: ../common/Duplicity.vala:787
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr ""
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:777 ../common/Duplicity.vala:781
+#: ../common/Duplicity.vala:791 ../common/Duplicity.vala:795
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr ""
 
-#: ../common/Duplicity.vala:785
+#: ../common/Duplicity.vala:799
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr ""
 
-#: ../common/Duplicity.vala:792
+#: ../common/Duplicity.vala:806
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr ""
 
-#: ../common/Duplicity.vala:798 ../common/Duplicity.vala:853
+#: ../common/Duplicity.vala:812 ../common/Duplicity.vala:867
 msgid "No space left."
 msgstr ""
 
-#: ../common/Duplicity.vala:812
+#: ../common/Duplicity.vala:826
 msgid "Invalid ID."
 msgstr ""
 
-#: ../common/Duplicity.vala:814
+#: ../common/Duplicity.vala:828
 msgid "Invalid secret key."
 msgstr ""
 
-#: ../common/Duplicity.vala:816
+#: ../common/Duplicity.vala:830
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 
-#: ../common/Duplicity.vala:829
+#: ../common/Duplicity.vala:843
 msgid "S3 bucket name is not available."
 msgstr ""
 
-#: ../common/Duplicity.vala:838
+#: ../common/Duplicity.vala:852
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr ""
 
-#: ../common/Duplicity.vala:840
+#: ../common/Duplicity.vala:854
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr ""
 
-#: ../common/Duplicity.vala:855
+#: ../common/Duplicity.vala:869
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr ""
 
-#: ../common/Duplicity.vala:875
+#: ../common/Duplicity.vala:889
 msgid "No backup files found"
 msgstr ""
 
-#: ../common/Duplicity.vala:911
+#: ../common/Duplicity.vala:928
 msgid "Uploading…"
 msgstr ""
 
@@ -831,15 +897,19 @@ msgstr ""
 msgid "Could not restore %s: %s"
 msgstr ""
 
-#: ../common/Operation.vala:56
+#: ../common/Operation.vala:69
+msgid "Backing up…"
+msgstr ""
+
+#: ../common/Operation.vala:73
 msgid "Checking for backups…"
 msgstr ""
 
-#: ../common/Operation.vala:58
+#: ../common/Operation.vala:75
 msgid "Listing files…"
 msgstr ""
 
-#: ../common/Operation.vala:211
+#: ../common/Operation.vala:254
 msgid "Another Déjà Dup is already running"
 msgstr ""
 
@@ -847,13 +917,21 @@ msgstr ""
 msgid "Scheduled backup delayed"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:94
+#: ../nautilus/NautilusExtension.c:90
+msgid "Restore missing files…"
+msgstr ""
+
+#: ../nautilus/NautilusExtension.c:91
+msgid "Restore deleted files from backup"
+msgstr ""
+
+#: ../nautilus/NautilusExtension.c:123
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../nautilus/NautilusExtension.c:98
+#: ../nautilus/NautilusExtension.c:127
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] ""
@@ -1037,15 +1115,15 @@ msgstr[1] ""
 msgid "Could not display %s"
 msgstr ""
 
-#: ../widgets/WidgetUtils.vala:74
+#: ../widgets/WidgetUtils.vala:75
 msgid "About Déjà Dup"
 msgstr ""
 
-#: ../widgets/WidgetUtils.vala:78
+#: ../widgets/WidgetUtils.vala:79
 msgid "translator-credits"
 msgstr ""
 
-#: ../widgets/WidgetUtils.vala:83
+#: ../widgets/WidgetUtils.vala:84
 #, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
@@ -1054,7 +1132,7 @@ msgid ""
 "any later version."
 msgstr ""
 
-#: ../widgets/WidgetUtils.vala:84
+#: ../widgets/WidgetUtils.vala:85
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -1062,7 +1140,7 @@ msgid ""
 "more details."
 msgstr ""
 
-#: ../widgets/WidgetUtils.vala:85
+#: ../widgets/WidgetUtils.vala:86
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see http://www.gnu.org/licenses/."

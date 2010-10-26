@@ -32,6 +32,7 @@ AUTO_TESTS = \
 	prefs/ssh-to-file \
 	restore/cycle \
 	restore/full \
+	restore/missing \
 	restore/rename \
 	restore/overdir \
 	restore/two

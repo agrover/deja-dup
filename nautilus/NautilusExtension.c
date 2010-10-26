@@ -35,6 +35,22 @@ make_file_list(NautilusFileInfo *info, GString *str)
 }
 
 static void
+restore_missing_files_callback(NautilusMenuItem *item)
+{
+  gchar *cmd;
+  NautilusFileInfo *info;
+
+  info = g_object_get_data(G_OBJECT(item), "deja_dup_extension_file");
+
+  cmd = g_strdup_printf("deja-dup --restore-missing %s",
+                        nautilus_file_info_get_uri(info));
+
+  g_spawn_command_line_async(cmd, NULL);
+
+  g_free(cmd);
+}
+
+static void
 restore_files_callback(NautilusMenuItem *item)
 {
   GString *str = g_string_new("");
@@ -57,6 +73,9 @@ deja_dup_nautilus_extension_get_background_items(NautilusMenuProvider *provider,
                                                  GtkWidget *window,
                                                  NautilusFileInfo *file)
 {
+  NautilusMenuItem *item;
+  guint length;
+  GList *file_copies;
   gchar *path;
 
   if (file == NULL)
@@ -67,7 +86,17 @@ deja_dup_nautilus_extension_get_background_items(NautilusMenuProvider *provider,
     return NULL;
   g_free(path);
 
-  return NULL;
+  item = nautilus_menu_item_new("DejaDupNautilusExtension::restore_missing_item",
+                                dgettext(GETTEXT_PACKAGE, "Restore missing files…"),
+                                dgettext(GETTEXT_PACKAGE, "Restore deleted files from backup"),
+                                "document-revert");
+
+  g_signal_connect(item, "activate", G_CALLBACK(restore_missing_files_callback), NULL);
+  g_object_set_data_full (G_OBJECT(item), "deja_dup_extension_file",
+                          g_object_ref(file),
+                          (GDestroyNotify)g_object_unref);
+
+  return g_list_append(NULL, item);
 }
 
 static GList *

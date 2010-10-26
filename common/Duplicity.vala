@@ -24,12 +24,23 @@ namespace DejaDup {
 
 public class Duplicity : Object
 {
+  /*
+   * Vala implementation of various methods for accessing duplicity
+   *
+   * Vala implementation of various methods for accessing duplicity from
+   * vala withot the need of manually running duplicity command.
+   */
+
   public signal void done(bool success, bool cancelled);
   public signal void raise_error(string errstr, string? detail);
   public signal void action_desc_changed(string action);
   public signal void action_file_changed(File file, bool actual);
   public signal void progress(double percent);
+  /*
+   * Signal emmited when collection dates are retrieved from duplicity
+   */
   public signal void collection_dates(List<string>? dates);
+  public signal void listed_current_files(string date, string file);
   public signal void question(string title, string msg);
   public signal void secondary_desc_changed(string msg);
   
@@ -696,6 +707,9 @@ public class Duplicity : Object
   void handle_message(DuplicityInstance inst, string[] control_line,
                       List<string>? data_lines, string user_text)
   {
+    /*
+     * Based on duplicity's output handle message as either process data as error, info or warning
+     */
     if (control_line.length == 0)
       return;
     
@@ -886,6 +900,9 @@ public class Duplicity : Object
   protected virtual void process_info(string[] firstline, List<string>? data,
                                       string text)
   {
+    /*
+     * Pass message to appropriate function considering the type of output
+     */
     if (firstline.length > 1) {
       switch (firstline[1].to_int()) {
       case INFO_DIFF_FILE_NEW:
@@ -911,13 +928,13 @@ public class Duplicity : Object
           set_status(_("Uploading…"));
         break;
       case INFO_FILE_STAT:
-        process_file_stat(firstline[2], firstline[3]);
+        process_file_stat(firstline[2], firstline[3], data, text);
         break;
       }
     }
   }
   
-  void process_file_stat(string date, string file)
+  void process_file_stat(string date, string file, List<string> data, string text)
   {
     if (mode != Operation.Mode.LIST)
       return;
@@ -932,6 +949,7 @@ public class Duplicity : Object
           !gfile.has_prefix(slash_home))
         has_non_home_contents = true;
     }
+    listed_current_files(date, file);
   }
   
   void process_diff_file(string file) {
@@ -984,11 +1002,14 @@ public class Duplicity : Object
   
   void process_collection_status(List<string>? lines)
   {
-    // Collection status is a bunch of lines, some of which are indented,
-    // which contain information about specific chains.  We gather this all up
-    // and report back to caller via a signal.
-    // We're really only interested in the list of entries in the complete chain,
-    // though.
+    /*
+     * Collect output of collection status and return list of dates as strings via a signal
+     *
+     * Duplicity returns collection status as a bunch of lines, some of which are
+     * indented which contain information about specific chains. We gather
+     * this all up and report back to caller via a signal.
+     * We're really only interested in the list of entries in the complete chain.
+     */
     
     var timeval = TimeVal();
     var dates = new List<string>();
@@ -1025,7 +1046,7 @@ public class Duplicity : Object
     collection_info = new List<DateInfo?>();
     foreach (DateInfo s in infos)
       collection_info.append(s); // we want to keep our own copy too
-    
+
     collection_dates(dates);
   }
   
@@ -1086,6 +1107,7 @@ public class Duplicity : Object
 
   void disconnect_inst()
   {
+    /* Disconnect signals and cancel call to duplicity instance */
     if (inst != null) {
       inst.done.disconnect(handle_done);
       inst.message.disconnect(handle_message);
@@ -1098,13 +1120,21 @@ public class Duplicity : Object
                          List<string>? envp_extra = null,
                          List<string>? argv_entire = null,
                          File? custom_local = null)
-  {
+  { 
+    /*
+     * For passed arguments start a new duplicity instance, set duplicity in the right mode and execute command
+     */
+    /* Disconnect instance */
     disconnect_inst();
-
+    
+    /* Start new duplicity instance */
     inst = new DuplicityInstance();
     inst.done.connect(handle_done);
+
+    /* As duplicity's data is returned via a signal, handle_message begins post-raw stream processing*/
     inst.message.connect(handle_message);
-    
+
+    /* Set arguments for call to duplicity */
     weak List<string> master_argv = argv_entire == null ? saved_argv : argv_entire;
     weak File local_arg = custom_local == null ? local : custom_local;
     
@@ -1112,7 +1142,8 @@ public class Duplicity : Object
     foreach (string s in master_argv) argv.append(s);
     foreach (string s in argv_extra) argv.append(s);
     foreach (string s in this.backend_argv) argv.append(s);
-    
+
+    /* Set duplicity into right mode */
     if (argv_entire == null) {
       // add operation, local, and remote args
       switch (mode) {
@@ -1139,11 +1170,13 @@ public class Duplicity : Object
         break;
       }
     }
-    
+
+    /* Set enviormental parameters */
     var envp = new List<string>();
     foreach (string s in saved_envp) envp.append(s);
     foreach (string s in envp_extra) envp.append(s);
-    
+
+    /* Start duplicity instance */
     try {
       inst.start(argv, envp, needs_root);
     }

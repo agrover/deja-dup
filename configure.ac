@@ -103,13 +103,15 @@ AC_SUBST(UNIQUE_MODULE)
 PKG_CHECK_MODULES(DUP,
                   $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
-                  gnome-keyring-1)
+                  gnome-keyring-1
+                  gmodule-2.0 >= $GLIB_REQ_VER)
 AC_SUBST(DUP_CFLAGS)
 AC_SUBST(DUP_LIBS)
 
 PKG_CHECK_MODULES(PREF,
                   $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
+                  gmodule-2.0 >= $GLIB_REQ_VER
                   $UNIQUE_MODULE)
 AC_SUBST(PREF_CFLAGS)
 AC_SUBST(PREF_LIBS)
@@ -117,12 +119,15 @@ AC_SUBST(PREF_LIBS)
 PKG_CHECK_MODULES(COMMON,
                   gio-2.0 >= $GIO_REQ_VER
                   gio-unix-2.0 >= $GIO_REQ_VER
-                  gnome-keyring-1)
+                  gnome-keyring-1
+                  gmodule-2.0 >= $GLIB_REQ_VER)
 AC_SUBST(COMMON_CFLAGS)
 AC_SUBST(COMMON_LIBS)
 
 PKG_CHECK_MODULES(WIDGETS,
-                  $GTK_MODULE >= $GTK_REQ_VER)
+                  gmodule-2.0 >= $GLIB_REQ_VER
+                  $GTK_MODULE >= $GTK_REQ_VER
+                  gconf-2.0)
 AC_SUBST(WIDGETS_CFLAGS)
 AC_SUBST(WIDGETS_LIBS)
 
