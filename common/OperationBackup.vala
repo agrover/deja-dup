@@ -100,9 +100,13 @@ public class OperationBackup : Operation
     
     // User doesn't care about cache
     string dir = Environment.get_user_cache_dir();
-    if (dir != null)
+    if (dir != null) {
       rv.append(dir);
-    
+      // We also add our special cache dir because if the user still especially
+      // includes the cache dir, we still won't backup our own metadata.
+      rv.append(Path.build_filename(dir, Config.PACKAGE));
+    }
+
     // Likewise, user doesn't care about cache-like thumbnail directory
     dir = Environment.get_home_dir();
     if (dir != null) {
