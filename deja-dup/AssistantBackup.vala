@@ -173,7 +173,13 @@ public class AssistantBackup : AssistantOperation
   {
     realize();
     var xid = Gdk.x11_drawable_get_xid(this.get_window());
-    return new DejaDup.OperationBackup((uint)xid);
+    var rv = new DejaDup.OperationBackup((uint)xid);
+    if (automatic) {
+      // If in automatic mode, only use progress if it's a full backup
+      rv.use_progress = false;
+      rv.is_full.connect((op) => {op.use_progress = true;});
+    }
+    return rv;
   }
   
   void do_resume()

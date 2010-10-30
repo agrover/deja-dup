@@ -43,6 +43,7 @@ public class Duplicity : Object
   public signal void listed_current_files(string date, string file);
   public signal void question(string title, string msg);
   public signal void secondary_desc_changed(string msg);
+  public signal void is_full();
   
   public Operation.Mode original_mode {get; construct;}
   public Operation.Mode mode {get; private set; default = Operation.Mode.INVALID;}
@@ -53,6 +54,7 @@ public class Duplicity : Object
   public Backend backend {get; set;}
   public List<File> includes;
   public List<File> excludes;
+  public bool use_progress {get; set; default = true;}
   
   private List<File> _restore_files;
   public List<File> restore_files {
@@ -84,8 +86,8 @@ public class Duplicity : Object
   List<string> backend_argv;
   List<string> saved_argv;
   List<string> saved_envp;
-  bool cleaned_up_once = false;
   bool is_full_backup = false;
+  bool cleaned_up_once = false;
   bool needs_root = false;
   
   bool has_progress_total = false;
@@ -290,7 +292,7 @@ public class Duplicity : Object
       // If we're backing up, and the version of duplicity supports it, we should
       // first run using --dry-run to get the total size of the backup, to make
       // accurate progress bars.
-      else if (!has_progress_total &&
+      else if (use_progress && !has_progress_total &&
                DuplicityInfo.get_default().has_backup_progress) {
         state = State.DRY_RUN;
         action_desc = _("Preparing…");
@@ -301,26 +303,8 @@ public class Duplicity : Object
         return true;
       }
       else {
-        if (DuplicityInfo.get_default().has_backup_progress)
+        if (has_progress_total)
           progress(0f);
-
-        /* Set full backup threshold and determine whether we should trigger
-           a full backup. */
-        if (got_collection_info) {
-          Date threshold = DejaDup.get_full_backup_threshold_date();
-          Date full_backup = Date();
-          foreach (DateInfo info in collection_info) {
-            if (info.full)
-              full_backup.set_time_val(info.time);
-          }
-          if (!full_backup.valid() || threshold.compare(full_backup) > 0) {
-            is_full_backup = true;
-            if (!full_backup.valid())
-              secondary_desc_changed(_("Creating the first backup.  This may take a while."));
-            else
-              secondary_desc_changed(_("Creating a fresh backup to protect against backup corruption.  This will take longer than normal."));
-          }
-        }
       }
       
       break;
@@ -521,7 +505,28 @@ public class Duplicity : Object
                 backend_argv.remove(s);
             }
           }
-          
+
+          /* Set full backup threshold and determine whether we should trigger
+             a full backup. */
+          if (got_collection_info) {
+            Date threshold = DejaDup.get_full_backup_threshold_date();
+            Date full_backup = Date();
+            foreach (DateInfo info in collection_info) {
+              if (info.full)
+                full_backup.set_time_val(info.time);
+            }
+            if (!full_backup.valid() || threshold.compare(full_backup) > 0) {
+              is_full_backup = true;
+              if (!full_backup.valid())
+                secondary_desc_changed(_("Creating the first backup.  This may take a while."));
+              else
+                secondary_desc_changed(_("Creating a fresh backup to protect against backup corruption.  This will take longer than normal."));
+            }
+          }
+
+          if (is_full_backup)
+            is_full();
+
           if (restart())
             return;
           else

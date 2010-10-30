@@ -46,9 +46,9 @@ public abstract class StatusIcon : Object
   {
     StatusIcon instance;
     instance = new ShellStatusIcon(window, op, automatic);
-    if (!instance.is_valid())
+    if (!instance.is_valid)
       instance = new IndicatorStatusIcon(window, op, automatic);
-    if (!instance.is_valid())
+    if (!instance.is_valid)
       instance = new LegacyStatusIcon(window, op, automatic);
     return instance;
   }
@@ -59,6 +59,7 @@ public abstract class StatusIcon : Object
   public DejaDup.Operation op {get; construct;}
   public bool automatic {get; construct; default = false;}
 
+  protected bool is_valid = true;
   protected string action;
   protected double progress;
 
@@ -150,8 +151,6 @@ public abstract class StatusIcon : Object
     menu.show_all();
     return menu;
   }
-
-  protected virtual bool is_valid() {return true;}
 }
 
 class IndicatorStatusIcon : StatusIcon
@@ -164,6 +163,7 @@ class IndicatorStatusIcon : StatusIcon
   Object indicator;
   construct {
     indicator = hacks_status_icon_make_app_indicator(ensure_menu());
+    is_valid = indicator != null;
   }
 
   ~IndicatorStatusIcon()
@@ -171,11 +171,6 @@ class IndicatorStatusIcon : StatusIcon
     // FIXME: icon won't die, even with this call
     if (indicator != null)
       hacks_status_icon_close_app_indicator(indicator);
-  }
-
-  protected override bool is_valid()
-  {
-    return indicator != null;
   }
 }
 
@@ -197,19 +192,20 @@ class ShellStatusIcon : StatusIcon
         actions = true;
     }
 
-    if (is_valid() && automatic && op.mode == DejaDup.Operation.Mode.BACKUP) {
+    is_valid = persistence && actions;
+
+    if (is_valid && automatic && op.mode == DejaDup.Operation.Mode.BACKUP) {
       Notify.init(Environment.get_application_name());
       var note = new Notify.Notification(_("Starting scheduled backup"), null,
                                          "deja-dup-backup", null);
       note.add_action("later", later_label, () => {later();});
       note.add_action("skip", skip_label, () => {skip();});
       note.show();
-    }
-  }
 
-  protected override bool is_valid()
-  {
-    return persistence && actions;
+      // Since we aren't using a status icon, no UI at all for this run, so no
+      // need to calculate progress.
+      op.use_progress = false;
+    }
   }
 }
 

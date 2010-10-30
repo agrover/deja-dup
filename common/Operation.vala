@@ -40,11 +40,14 @@ public abstract class Operation : Object
   public signal void passphrase_required();
   public signal void question(string title, string msg);
   public signal void secondary_desc_changed(string msg);
-  
+  public signal void is_full();
+
   public uint xid {get; construct;}
   public bool needs_password {get; private set;}
   public Backend backend {get; private set;}
-    
+  public bool use_progress {get {return dup.use_progress;}
+                            set {dup.use_progress = value;}}
+
   public enum Mode {
     /*
    * Mode of operation of instance
@@ -161,6 +164,7 @@ public abstract class Operation : Object
     dup.progress.connect((d, p) => {progress(p);});
     dup.question.connect((d, t, m) => {question(t, m);});
     dup.secondary_desc_changed.connect((d, t) => {secondary_desc_changed(t);});
+    dup.is_full.connect(() => {is_full();});
   }
   
   public async void continue_with_passphrase(string? passphrase)
