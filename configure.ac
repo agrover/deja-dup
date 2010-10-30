@@ -104,7 +104,8 @@ PKG_CHECK_MODULES(DUP,
                   $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
                   gnome-keyring-1
-                  gmodule-2.0 >= $GLIB_REQ_VER)
+                  gmodule-2.0 >= $GLIB_REQ_VER
+                  libnotify)
 AC_SUBST(DUP_CFLAGS)
 AC_SUBST(DUP_LIBS)
 

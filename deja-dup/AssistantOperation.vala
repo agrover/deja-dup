@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
     © 2010 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
@@ -463,8 +463,8 @@ public abstract class AssistantOperation : Assistant
     op.backend.pause_op.connect(pause_op);
     
     if (status_icon == null) {
-      status_icon = new StatusIcon(this, op, automatic);
-      status_icon.toggle_window.connect((s) => {toggle_window(0, true);});
+      status_icon = StatusIcon.create(this, op, automatic);
+      status_icon.show_window.connect((s) => {force_visible(true);});
       status_icon.hide_all.connect((s) => {hide_everything();});
     }
 
@@ -550,10 +550,7 @@ public abstract class AssistantOperation : Assistant
 
   public void force_visible(bool user_click)
   {
-    if (!visible)
-      toggle_window(0, user_click);
-    else
-      show_to_user(this, 0, user_click);
+    show_to_user(this, Gtk.get_current_event_time(), user_click);
   }
 
   bool user_focused(Gtk.Widget win, Gdk.EventFocus e)

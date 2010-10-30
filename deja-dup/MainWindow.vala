@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,9 +33,11 @@ public class MainWindow : Gtk.Window
     var restore_button = new Gtk.Button();
     restore_button.set("child", restore_align);
     
+    Gtk.IconTheme theme;
+
     var restore_icon = new Gtk.Image();
     try {
-      var theme = Gtk.IconTheme.get_for_screen(get_screen());
+      theme = Gtk.IconTheme.get_for_screen(get_screen());
       var restore_pix = theme.load_icon("deja-dup-restore", 128,
                                         Gtk.IconLookupFlags.FORCE_SIZE);
       restore_icon.set("pixbuf", restore_pix);
@@ -62,7 +64,7 @@ public class MainWindow : Gtk.Window
     
     var backup_icon = new Gtk.Image();
     try {
-      var theme = Gtk.IconTheme.get_for_screen(get_screen());
+      theme = Gtk.IconTheme.get_for_screen(get_screen());
       var backup_pix = theme.load_icon("deja-dup-backup", 128,
                                        Gtk.IconLookupFlags.FORCE_SIZE);
       backup_icon.set("pixbuf", backup_pix);

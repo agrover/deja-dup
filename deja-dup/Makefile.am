@@ -27,6 +27,7 @@ VALA_CFLAGS = \
 	--pkg @GDK_X11_MODULE@ \
 	--pkg gio-2.0 \
 	--pkg gnome-keyring-1 \
+	--pkg libnotify \
 	--pkg libcommon \
 	--pkg libwidgets \
 	--pkg unix \
