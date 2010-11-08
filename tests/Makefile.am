@@ -22,6 +22,7 @@
 # backup/continue # disabled until continue support is back in
 AUTO_TESTS = \
 	backup/cancel-clean \
+	backup/clear-cache \
 	backup/full \
 	backup/delete \
 	backup/exclude \

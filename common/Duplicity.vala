@@ -683,6 +683,7 @@ public class Duplicity : Object
       return false;
   }
 
+  protected static const int ERROR_GENERIC = 1;
   protected static const int ERROR_HOSTNAME_CHANGED = 3;
   protected static const int ERROR_RESTORE_DIR_NOT_FOUND = 19;
   protected static const int ERROR_EXCEPTION = 30;
@@ -708,7 +709,29 @@ public class Duplicity : Object
   protected static const int WARNING_UNMATCHED_SIG = 4;
   protected static const int WARNING_INCOMPLETE_BACKUP = 5;
   protected static const int WARNING_ORPHANED_BACKUP = 6;
-  
+
+  bool restarted_without_cache = false;
+  void handle_exit(int code)
+  {
+    // Duplicity has a habit of dying and returning 1 without sending an error
+    // if there was some unexpected issue with its cached metadata.  It often
+    // goes away if you delete ~/.cache/deja-dup and try again.  This issue
+    // happens often enough that we do that for the user here.  It should be
+    // safe to do this, as the cache is not necessary for operation, only
+    // a performance improvement.
+    if (DuplicityInfo.get_default().guarantees_error_codes &&
+        code == ERROR_GENERIC && !error_issued && !restarted_without_cache) {
+      string dir = Environment.get_user_cache_dir();
+      if (dir != null) {
+        restarted_without_cache = true;
+        var cachedir = Path.build_filename(dir, Config.PACKAGE);
+        var del = new RecursiveDelete(File.new_for_path(cachedir));
+        del.start();
+        restart();
+      }
+    }
+  }
+
   void handle_message(DuplicityInstance inst, string[] control_line,
                       List<string>? data_lines, string user_text)
   {
@@ -1116,6 +1139,7 @@ public class Duplicity : Object
     if (inst != null) {
       inst.done.disconnect(handle_done);
       inst.message.disconnect(handle_message);
+      inst.exited.disconnect(handle_exit);
       inst.cancel();
       inst = null;
     }
@@ -1136,8 +1160,11 @@ public class Duplicity : Object
     inst = new DuplicityInstance();
     inst.done.connect(handle_done);
 
-    /* As duplicity's data is returned via a signal, handle_message begins post-raw stream processing*/
+    /* As duplicity's data is returned via a signal, handle_message begins post-raw stream processing */
     inst.message.connect(handle_message);
+
+    /* When duplicity exits, we may be also interested in its return code */
+    inst.exited.connect(handle_exit);
 
     /* Set arguments for call to duplicity */
     weak List<string> master_argv = argv_entire == null ? saved_argv : argv_entire;

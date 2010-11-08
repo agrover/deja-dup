@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>,
+    © 2008–2010 Michael Terry <mike@mterry.name>,
     © 2009 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
@@ -25,6 +25,7 @@ namespace DejaDup {
 public class DuplicityInstance : Object
 {
   public signal void done(bool success, bool cancelled);
+  public signal void exited(int code);
   public signal void message(string[] control_line, List<string>? data_lines,
                              string user_text);
   
@@ -594,7 +595,10 @@ public class DuplicityInstance : Object
         (Process.exit_status(status) == 255 || // gksu returns 255 on cancel
          Process.exit_status(status) == 3)) // and 3 on bad password
       cancelled = true;
-    
+
+    if (Process.if_exited(status))
+      exited(Process.exit_status(status));
+
     child_pid = (Pid)0;
     done(success, cancelled);
   }
