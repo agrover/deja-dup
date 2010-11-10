@@ -61,7 +61,7 @@ public class ConfigLocation : ConfigWidget
       hbox.add(connect_button);
     }
     
-    mnemonic_activate.connect((w, g) => {return button.mnemonic_activate(g);});
+    mnemonic_activate.connect(on_mnemonic_activate);
     
     s3_name = _("Amazon S3");
     add_special_location();
@@ -84,6 +84,11 @@ public class ConfigLocation : ConfigWidget
     }
   }
   
+  bool on_mnemonic_activate(Gtk.Widget w, bool g)
+  {
+    return button.mnemonic_activate(g);
+  }
+
   File get_file_from_settings() throws Error
   {
     // Check the backend type, then GIO uri if needed

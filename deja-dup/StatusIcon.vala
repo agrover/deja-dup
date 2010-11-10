@@ -200,7 +200,12 @@ class ShellStatusIcon : StatusIcon
                                          "deja-dup-backup", null);
       note.add_action("later", later_label, () => {later();});
       note.add_action("skip", skip_label, () => {skip();});
-      note.show();
+      try {
+        note.show();
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
 
       // Since we aren't using a status icon, no UI at all for this run, so no
       // need to calculate progress.
