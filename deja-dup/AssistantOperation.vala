@@ -574,22 +574,6 @@ public abstract class AssistantOperation : Assistant
     }
   }
 
-  void toggle_window(uint time, bool user_click)
-  {
-    var will_hide = this.visible;
-
-    if (time == 0)
-      time = Gtk.get_current_event_time();
-
-    if (will_hide) {
-      saved_pos = true;
-      get_position(out saved_x, out saved_y);
-      hide();
-    }
-    else
-      show_to_user(this, time, user_click);
-  }
-
   void found_passphrase(GnomeKeyring.Result result, string? str)
   {
     if (str != null) {

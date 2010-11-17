@@ -25,7 +25,7 @@ public void show_uri(Gtk.Window parent, string link)
 {
   try {
     Gdk.Screen screen = parent.get_screen();
-    Gtk.show_uri(screen, link, Gdk.CURRENT_TIME);
+    Gtk.show_uri(screen, link, Gtk.get_current_event_time());
   } catch (Error e) {
     Gtk.MessageDialog dlg = new Gtk.MessageDialog(parent, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not display %s"), link);
     dlg.format_secondary_text("%s", e.message);
