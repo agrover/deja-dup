@@ -340,7 +340,7 @@ public class AssistantRestore : AssistantOperation
       string format = "%x";
       if ((i.prev != null && is_same_day(i.prev.data, tv)) ||
           (i.next != null && is_same_day(i.next.data, tv)))
-        format = "%c";
+        format = "%x %X";
 
       Time t = Time.local(tv.tv_sec);
       string user_str = t.format(format);
