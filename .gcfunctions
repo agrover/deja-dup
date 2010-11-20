@@ -1,0 +1,12 @@
+run_tests:
+  name: Run Test Suite
+  command: make -C tests test
+  depends: python-ldtp
+run:
+  name: Run
+  command: sh -c "cd tests && ./interactive"
+  depends: python-ldtp
+build:
+  name: Build
+  command: sh -c "if test ! -e Makefile.in; then ./autogen.sh; fi; make"
+  depends: gnome-common,autopoint,valac,po4a
