@@ -30,7 +30,7 @@ public class ConfigLabelPolicy : ConfigLabel
 
   construct {
     watch_key(BACKEND_KEY);
-    watch_key(FILE_PATH_KEY);
+    watch_key(FILE_PATH_KEY), DejaDup.get_settings(FILE_ROOT);
     watch_key(DELETE_AFTER_KEY);
     
     var attrs = new Pango.AttrList();

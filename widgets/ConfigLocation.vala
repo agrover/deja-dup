@@ -147,10 +147,8 @@ public class ConfigLocation : ConfigWidget
       if (is_s3)
         settings.set_string(BACKEND_KEY, "s3");
       else {
-        settings.delay();
+        DejaDup.get_settings(FILE_ROOT).set_string(FILE_PATH_KEY, file.get_parse_name());
         settings.set_string(BACKEND_KEY, "file");
-        settings.set_string(FILE_PATH_KEY, file.get_parse_name());
-        settings.apply();
         yield BackendFile.check_for_volume_info(file);
       }
     }
