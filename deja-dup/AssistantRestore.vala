@@ -2,6 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2010 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -339,8 +340,13 @@ public class AssistantRestore : AssistantOperation
 
       string format = "%x";
       if ((i.prev != null && is_same_day(i.prev.data, tv)) ||
-          (i.next != null && is_same_day(i.next.data, tv)))
-        format = "%c";
+          (i.next != null && is_same_day(i.next.data, tv))) {
+        // Translators: %x is the current date, %X is the current time.
+        // This will be in a list with other strings that just have %x (the
+        // current date).  So make sure if you change this, it still makes
+        // sense in that context.
+        format = _("%x %X");
+      }
 
       Time t = Time.local(tv.tv_sec);
       string user_str = t.format(format);
