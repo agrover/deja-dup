@@ -39,8 +39,6 @@ AC_PROG_MAKE_SET
 LT_PREREQ([2.2.6])
 LT_INIT
 
-AC_PATH_PROG(PO4A, po4a)
-
 # Checks for vala
 AC_PROG_VALAC([0.9.5])
 

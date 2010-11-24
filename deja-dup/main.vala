@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ class DejaDupApp : Object
     status = 0;
     
     if (show_version) {
-      print("%s %s\n", _("Déjà Dup"), Config.VERSION);
+      print("%s %s\n", "deja-dup", Config.VERSION);
       return false;
     }
     
@@ -73,10 +73,8 @@ class DejaDupApp : Object
 
   public static int main(string [] args)
   {
-    Intl.textdomain(Config.GETTEXT_PACKAGE);
-    Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
-    Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
-    
+    DejaDup.i18n_setup();
+
     // Translators: The name is a play on the French phrase "déjà vu" meaning
     // "already seen", but with the "vu" replaced with "dup".  "Dup" in this
     // context is itself a reference to both the underlying command line tool
@@ -84,7 +82,13 @@ class DejaDupApp : Object
     // may not be very translatable.
     Environment.set_application_name(_("Déjà Dup"));
     
-    OptionContext context = new OptionContext("");
+    var modes = "\n  %s --backup\n  %s --restore %s\n  %s --restore-missing %s"
+                .printf(Config.PACKAGE, Config.PACKAGE, _("FILES"),
+                        Config.PACKAGE, _("DIRECTORY"));
+    OptionContext context = new OptionContext(modes);
+
+    // Translators: Wrap this to 80 characters per line if you can, as I have for English
+    context.set_summary(_("Déjà Dup is a simple backup tool.  It hides the complexity of backing up\nthe 'right way' (encrypted, off-site, and regular) and uses duplicity as\nthe backend."));
     context.add_main_entries(options, Config.GETTEXT_PACKAGE);
     context.add_group(Gtk.get_option_group(false)); // allow console use
     try {

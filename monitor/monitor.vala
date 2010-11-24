@@ -77,7 +77,7 @@ static bool handle_options(out int status)
   status = 0;
   
   if (show_version) {
-    print("%s %s\n", Environment.get_application_name(), Config.VERSION);
+    print("%s %s\n", "deja-dup-monitor", Config.VERSION);
     return false;
   }
   
@@ -316,10 +316,8 @@ static void watch_settings()
 
 static int main(string[] args)
 {
-  Intl.textdomain(Config.GETTEXT_PACKAGE);
-  Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
-  Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
-  
+  DejaDup.i18n_setup();
+
   // Translators: Monitor in this sense means something akin to 'watcher', not
   // a computer screen.  This program acts like a daemon that kicks off
   // backups at scheduled times.
