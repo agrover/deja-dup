@@ -25,9 +25,9 @@ import base
 import ldtp
 
 BASEPATH = '/tmp/deja-dup-test/'
-DATE1 = datetime.datetime.strptime('8 1 21:14:21 2009', '%m %d %H:%M:%S %Y').strftime('%c')
-DATE2 = datetime.datetime.strptime('8 1 21:14:34 2009', '%m %d %H:%M:%S %Y').strftime('%c')
-DATE3 = datetime.datetime.strptime('8 1 21:14:41 2009', '%m %d %H:%M:%S %Y').strftime('%c')
+DATE1 = datetime.datetime.strptime('8 1 21:14:21 2009', '%m %d %H:%M:%S %Y').strftime('%x %X')
+DATE2 = datetime.datetime.strptime('8 1 21:14:34 2009', '%m %d %H:%M:%S %Y').strftime('%x %X')
+DATE3 = datetime.datetime.strptime('8 1 21:14:41 2009', '%m %d %H:%M:%S %Y').strftime('%x %X')
 
 def check_dir(path, oneval):
   root = path+BASEPATH
@@ -50,6 +50,5 @@ def test():
   base.start_deja_dup()
   base.restore_simple(restoredir, DATE3)
   check_dir(restoredir, 'one1!\n')
-  return True
 
 base.run(test)
