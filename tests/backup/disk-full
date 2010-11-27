@@ -50,44 +50,44 @@ def deleteold():
   dest = base.create_mount(size=20)
   backupdir = base.get_temp_name('backup')
   os.makedirs(backupdir)
+  manifests = []
   
   # backup of 1M
   makerandom(os.path.join(backupdir, 'one'), 1024*1024)
   base.setup('file', sources=[backupdir], dest=dest)
   base.backup_simple()
+  base.last_date_change('%d days ago' % (365), dest='mount') # force full
+  manifests.append(base.last_manifest(dest='mount')[1])
 
   # backup of 2M
-  base.last_date_change('%d days ago' % (365), dest='mount') # force full
   makerandom(os.path.join(backupdir, 'one'), 2*1024*1024)
   base.start_deja_dup()
   base.backup_simple()
+  base.last_date_change('%d days ago' % (365), dest='mount') # force full
+  manifests.append(base.last_manifest(dest='mount')[1])
 
   # backup of 10M
-  base.last_date_change('%d days ago' % (365), dest='mount') # force full
   makerandom(os.path.join(backupdir, 'one'), 10*1024*1024)
   base.start_deja_dup()
   base.backup_simple()
+  base.last_date_change('%d days ago' % (365), dest='mount') # force full
+  manifests.append(base.last_manifest(dest='mount')[1])
 
   # backup of 3M
-  base.last_date_change('%d days ago' % (365), dest='mount') # force full
   makerandom(os.path.join(backupdir, 'one'), 3*1024*1024)
   base.start_deja_dup()
   base.backup_simple()
+  base.last_date_change('%d days ago' % (365), dest='mount') # force full
+  manifests.append(base.last_manifest(dest='mount')[1])
 
   # backup of 10M
-  base.last_date_change('%d days ago' % (365), dest='mount') # force full
   makerandom(os.path.join(backupdir, 'one'), 10*1024*1024)
   base.start_deja_dup()
   base.backup_simple()
+  manifests.append(base.last_manifest(dest='mount')[1])
 
   # Now there should be just two full backups left: 3M and 10M (the last two)
-  f = os.statvfs(dest)
-  free = f.f_bsize * f.f_bavail
-  assert base.num_manifests(dest='mount') == 2
-  assert base.num_manifests('full', dest='mount') == 2
-  # In practice, the two previous backups 3M+10M tends to take about 14M and
-  # the free space tends to be closer to 4M because the mount ends up being 18M
-  assert 4*1000*1000 - 100*1000 <= free and free <= 4*1000*1000 + 100*1000, "Free is %i" % free
+  assert manifests[-2:] == base.list_manifests(dest='mount')[1], "%s vs %s" % (str(manifests), str(base.list_manifests(dest='mount')[1]))
 
 base.run(full)
 base.run(deleteold)
