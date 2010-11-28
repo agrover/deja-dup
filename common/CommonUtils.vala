@@ -146,6 +146,19 @@ public void initialize()
   convert_ssh_to_file();
 }
 
+public void i18n_setup()
+{
+  var localedir = Environment.get_variable("DEJA_DUP_LOCALEDIR");
+  if (localedir == null || localedir == "")
+    localedir = Config.LOCALE_DIR;
+  var language = Environment.get_variable("DEJA_DUP_LANGUAGE");
+  if (language != null && language != "")
+    Environment.set_variable("LANGUAGE", language, true);
+  Intl.textdomain(Config.GETTEXT_PACKAGE);
+  Intl.bindtextdomain(Config.GETTEXT_PACKAGE, localedir);
+  Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
+}
+
 public string get_file_desc(File file)
 {
   // First try to get the DESCRIPTION.  Else get the DISPLAY_NAME

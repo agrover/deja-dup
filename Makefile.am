@@ -22,7 +22,6 @@ SUBDIRS = data po vapi common widgets monitor preferences deja-dup nautilus help
 update-pot:
 	$(MAKE) -C po "$(GETTEXT_PACKAGE).pot"
 	$(MAKE) -C help update-pot
-	$(MAKE) -C man update-pot
 dist-hook: update-pot
 
 # call like 'make copy-po TD=path-to-translation-dir'
@@ -30,7 +29,6 @@ copy-po:
 	test -d $(TD)
 	cp -a $(TD)/po/*.po po && bzr add po/*.po
 	cp -a $(TD)/help/translations/*.po help/translations && bzr add help/translations/*.po
-	cp -a $(TD)/man/translations/*.po man/translations && bzr add man/translations/*.po
 
 sign:
 	gpg --armor --sign --detach-sig deja-dup-$(PACKAGE_VERSION).tar.bz2

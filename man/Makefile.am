@@ -1,7 +1,7 @@
 # -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008,2009,2010 Michael Terry <mike@mterry.name>
+# © 2008–2010 Michael Terry <mike@mterry.name>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,34 +16,25 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-dist_man1_MANS = \
-	C/deja-dup.1 \
-	C/deja-dup-preferences.1
+# Here's a bunch of translation support.  Some stolen from dpkg
 
-# Here's a bunch of translation support.  It's largely stolen from dpkg
+LINGUAS = C $(shell grep -v "^\#" $(top_srcdir)/po/LINGUAS)
 
-# Extract the list of languages from the po4a config.
-PO4A_LINGUAS = $(shell sed -ne 's/^.*\[po4a_langs\] \(.*\)$$/\1/p' $(srcdir)/po4a.cfg)
+C/stamp: include.main include.pref $(top_builddir)/deja-dup/deja-dup $(top_builddir)/preferences/deja-dup-preferences
+	@$(mkdir_p) C
+	@./help2man -N -i include.main -L en_US.UTF-8 $(top_builddir)/deja-dup/deja-dup > C/deja-dup.1
+	@./help2man -N -i include.pref -L en_US.UTF-8 $(top_builddir)/preferences/deja-dup-preferences > C/deja-dup-preferences.1
+	$(AM_V_GEN)touch $@
 
-all-local: all-local-@USE_NLS@
-all-local-no:
-all-local-yes: po4a.stamp
+%/stamp: $(top_builddir)/po/%.gmo include.main include.pref $(top_builddir)/deja-dup/deja-dup $(top_builddir)/preferences/deja-dup-preferences
+	@$(mkdir_p) locales/$*/LC_MESSAGES
+	@$(mkdir_p) $*
+	@cp $(top_builddir)/po/$*.gmo locales/$*/LC_MESSAGES/deja-dup.mo
+	@DEJA_DUP_LOCALEDIR=$(abs_builddir)/locales DEJA_DUP_LANGUAGE=$* ./help2man -N -i include.main -L en_US.UTF-8 $(top_builddir)/deja-dup/deja-dup > $*/deja-dup.1
+	@DEJA_DUP_LOCALEDIR=$(abs_builddir)/locales DEJA_DUP_LANGUAGE=$* ./help2man -N -i include.pref -L en_US.UTF-8 $(top_builddir)/preferences/deja-dup-preferences > $*/deja-dup-preferences.1
+	$(AM_V_GEN)touch $@
 
-# Put LINGUAS list into po4a.cfg, but only if needed (else we'll update
-# timestamp on the cfg file unnecessarily.  Also copy all the po files from the
-# real po directory into the sub language directories in help where po4a looks
-# for them.  po4a modifies those po files, so we don't want it to access the
-# real ones.
-prepare.stamp: po4a.cfg
-	for lang in C $(PO4A_LINGUAS); do \
-		$(mkdir_p) $$lang; \
-		test "$(srcdir)" = "." || cp -ar $(srcdir)/$$lang/* $$lang; \
-	done
-	touch $@
-
-po4a.stamp: po4a.cfg $(dist_man1_MANS) prepare.stamp $(srcdir)/translations/*.po
-	test -e $(srcdir)/no-po4a || $(PO4A) --no-backups --variable srcdir=$(srcdir) $(srcdir)/po4a.cfg
-	touch $@
+man: $(patsubst %,%/stamp,$(LINGUAS))
 
 clean-local: clean-local-@USE_NLS@
 distclean-local: clean-local-@USE_NLS@
@@ -51,24 +42,14 @@ mostlyclean-local: clean-local-@USE_NLS@
 maintainer-clean-local: clean-local-@USE_NLS@
 clean-local-no:
 clean-local-yes:
-	for lang in $(PO4A_LINGUAS); do \
-		if [ -d $$lang ]; then \
-			rm -f $$(echo "$(dist_man1_MANS)" | sed "s|C/|$$lang/|g"); \
-		fi \
-	done
-	test "$(srcdir)" = "." || rm -fr C
-	test -e $(srcdir)/no-po4a || $(PO4A) --rm-backups --rm-translations --variable top_srcdir=$(top_srcdir) --variable srcdir=$(srcdir) $(srcdir)/po4a.cfg
-	rm -f po4a.stamp prepare.stamp
-
-update-pot: prepare.stamp
-	test -e $(srcdir)/no-po4a || $(PO4A) --no-backups --force --no-translations --variable srcdir=$(srcdir) $(srcdir)/po4a.cfg
+	rm -fr $(LINGUAS) locales
 
 install-data-local: install-data-local-@USE_NLS@
 install-data-local-no:
 install-data-local-yes:
-	for lang in $(PO4A_LINGUAS); do \
+	for lang in $(LINGUAS); do \
 		if [ -d $$lang ]; then \
-			files=$$(echo "$(dist_man1_MANS)" | sed "s|C/|$$lang/|g"); \
+			files=$$(ls $$lang/*.1); \
 			$(MAKE) install-man \
 				mandir="$(mandir)/$$lang" \
 				man_MANS="" \
@@ -79,9 +60,9 @@ install-data-local-yes:
 uninstall-local: uninstall-local-@USE_NLS@
 uninstall-local-no:
 uninstall-local-yes:
-	for lang in $(PO4A_LINGUAS); do \
+	for lang in $(LINGUAS); do \
 		if [ -d $$lang ]; then \
-			files=$$(echo "$(dist_man1_MANS)" | sed "s|C/|$$lang/|g"); \
+			files=$$(ls $$lang/*.1); \
 			$(MAKE) uninstall-man \
 				mandir="$(mandir)/$$lang" \
 				man_MANS="" \
@@ -89,16 +70,4 @@ uninstall-local-yes:
 		fi \
 	done
 
-dist-hook: po4a.stamp
-	for lang in $(PO4A_LINGUAS); do \
-		$(mkdir_p) $(distdir)/$$lang; \
-		cp -r $(srcdir)/$$lang/*.1 $(distdir)/$$lang; \
-	done
-	for lang in C $(PO4A_LINGUAS); do \
-		! test -e $(distdir)/$$lang/deja-dup.1 || sed -i "s/%VERSION%/$(VERSION)/g;s/%DATE%/`date --utc +%F`/g;s/lang=\"C\"/lang=\"$$lang\"/g" $(distdir)/$$lang/*.1; \
-	done
-	touch $(distdir)/no-po4a
-
-EXTRA_DIST = po4a.cfg po4a.stamp translations
-
-.PHONY: update-pot
+dist-hook: man
