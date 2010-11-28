@@ -5,7 +5,7 @@ namespace Notify {
 	[CCode (cheader_filename = "libnotify/notify.h")]
 	public class Notification : GLib.Object {
 		[CCode (has_construct_function = false)]
-		public Notification (string summary, string? body, string? icon, Gtk.Widget? attach);
+		public Notification (string summary, string? body, string? icon);
 		public void add_action (string action, string label, owned Notify.ActionCallback callback);
 		public void clear_actions ();
 		public void clear_hints ();

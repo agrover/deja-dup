@@ -188,7 +188,7 @@ static void notify_delay(string header, string reason)
   if (note == null) {
     Notify.init(Environment.get_application_name());
     note = new Notify.Notification(header, reason,
-                                   "deja-dup-backup", null);
+                                   "deja-dup-backup");
     note.closed.connect((n) => {note = null;});
   }
   else

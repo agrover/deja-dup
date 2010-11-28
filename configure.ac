@@ -66,6 +66,7 @@ GDK_X11_MODULE=gdk-x11-2.0
 GLIB_REQ_VER=2.26
 GIO_REQ_VER=$GLIB_REQ_VER
 UNIQUE_MODULE=unique-1.0
+NOTIFY_REQ_VER=0.7
 APPINDICATOR_MODULE=appindicator-0.1
 
 AH_TEMPLATE([HAVE_GTK3], [whether gtk3 is available])
@@ -103,7 +104,7 @@ PKG_CHECK_MODULES(DUP,
                   gio-2.0 >= $GIO_REQ_VER
                   gnome-keyring-1
                   gmodule-2.0 >= $GLIB_REQ_VER
-                  libnotify)
+                  libnotify >= $NOTIFY_REQ_VER)
 AC_SUBST(DUP_CFLAGS)
 AC_SUBST(DUP_LIBS)
 
@@ -130,9 +131,8 @@ AC_SUBST(WIDGETS_CFLAGS)
 AC_SUBST(WIDGETS_LIBS)
 
 PKG_CHECK_MODULES(MONITOR,
-                  $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
-                  libnotify)
+                  libnotify >= NOTIFY_REQ_VER)
 AC_SUBST(MONITOR_CFLAGS)
 AC_SUBST(MONITOR_LIBS)
 
