@@ -24,14 +24,15 @@ namespace DejaDup {
 public class ConfigLocation : ConfigWidget
 {
   public bool is_s3 {get; private set;}
+  public bool is_u1 {get; private set;}
   
   static const int CONNECT_ID = 1;
   
   Gtk.FileChooserDialog dialog;
   Gtk.FileChooserButton button;
   File top_tmpdir;
-  File tmpdir;
-  string s3_name;
+  File s3_dir;
+  File u1_dir;
   construct {
     var hbox = new Gtk.HBox(false, 6);
     add(hbox);
@@ -51,6 +52,8 @@ public class ConfigLocation : ConfigWidget
     dialog.add_buttons(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
                        Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT);
     dialog.set_default_response(Gtk.ResponseType.ACCEPT);
+    dialog.show.connect(handle_dialog_show);
+    dialog.hide.connect(handle_dialog_hide);
     
     button = new Gtk.FileChooserButton.with_dialog(dialog);
     button.local_only = false;
@@ -62,9 +65,13 @@ public class ConfigLocation : ConfigWidget
     }
     
     mnemonic_activate.connect(on_mnemonic_activate);
-    
-    s3_name = _("Amazon S3");
-    add_special_location();
+
+    var template = Path.build_filename(Environment.get_tmp_dir(), "deja-dup-XXXXXX");
+    top_tmpdir = File.new_for_path(DirUtils.mkdtemp(template));
+
+    s3_dir = add_special_location(_("Amazon S3"));
+    if (BackendUbuntuOne.is_available())
+      u1_dir = add_special_location(_("Ubuntu One"));
     
     set_from_config();
     button.selection_changed.connect(handle_selection_changed);
@@ -75,15 +82,10 @@ public class ConfigLocation : ConfigWidget
   
   ~ConfigLocation()
   {
-    try {
-      tmpdir.delete(null);
-      top_tmpdir.delete(null);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    var del = new RecursiveDelete(top_tmpdir);
+    del.start();
   }
-  
+
   bool on_mnemonic_activate(Gtk.Widget w, bool g)
   {
     return button.mnemonic_activate(g);
@@ -93,9 +95,11 @@ public class ConfigLocation : ConfigWidget
   {
     // Check the backend type, then GIO uri if needed
     File file = null;
-    var val = settings.get_string(BACKEND_KEY);
-    if (val == "s3" && tmpdir != null)
-      file = tmpdir;
+    var val = Backend.get_default_type();
+    if (val == "s3" && s3_dir != null)
+      file = s3_dir;
+    else if (val == "u1" && u1_dir != null)
+      file = u1_dir;
     else {
       val = DejaDup.get_settings(FILE_ROOT).get_string(FILE_PATH_KEY);
       if (val == null)
@@ -115,7 +119,8 @@ public class ConfigLocation : ConfigWidget
       file = get_file_from_settings();
       if (button_file == null || !file.equal(button_file)) {
         button.set_current_folder_uri(file.get_uri());
-        is_s3 = tmpdir != null && file.equal(tmpdir);
+        is_s3 = s3_dir != null && file.equal(s3_dir);
+        is_u1 = u1_dir != null && file.equal(u1_dir);
       }
     }
     catch (Error e) {
@@ -141,11 +146,14 @@ public class ConfigLocation : ConfigWidget
     if (file == null || file.equal(settings_file))
       return; // we sometimes get several selection changed notices in a row...
     
-    is_s3 = tmpdir != null && file.equal(tmpdir);
+    is_s3 = s3_dir != null && file.equal(s3_dir);
+    is_u1 = u1_dir != null && file.equal(u1_dir);
     
     try {
       if (is_s3)
         settings.set_string(BACKEND_KEY, "s3");
+      else if (is_u1)
+        settings.set_string(BACKEND_KEY, "u1");
       else {
         DejaDup.get_settings(FILE_ROOT).set_string(FILE_PATH_KEY, file.get_parse_name());
         settings.set_string(BACKEND_KEY, "file");
@@ -159,35 +167,34 @@ public class ConfigLocation : ConfigWidget
     changed();
   }
   
-  void add_special_location()
+  File? add_special_location(string name)
   {
     // This is a big ol' hack to show a custom, non-GIO name as a location,
     // Should try to get S3 in as a patch to GIO someday...
-    var template = Path.build_filename(Environment.get_tmp_dir(), "deja-dup-XXXXXX");
-    top_tmpdir = File.new_for_path(DirUtils.mkdtemp(template));
-    tmpdir = top_tmpdir.get_child(s3_name);
+    var tmpdir = top_tmpdir.get_child(name);
     
     try {
       tmpdir.make_directory(null);
       button.add_shortcut_folder_uri(tmpdir.get_uri());
-      dialog.show.connect(handle_dialog_show);
-      dialog.hide.connect(handle_dialog_hide);
+      return tmpdir;
     }
     catch (Error e) {
       warning("%s\n", e.message);
+      return null;
     }
   }
   
   void handle_dialog_show(Gtk.Widget w)
   {
-    if (is_s3) {
+    if (is_s3 || is_u1) {
       // We need to reset the current folder, because we don't want to expose
       // the temporary folder used for s3.  So go to $HOME.
       button.set_current_folder(Environment.get_home_dir());
     }
     
     try {
-      button.remove_shortcut_folder_uri(tmpdir.get_uri());
+      button.remove_shortcut_folder_uri(s3_dir.get_uri());
+      button.remove_shortcut_folder_uri(u1_dir.get_uri());
     }
     catch (Error e) {
       warning("%s\n", e.message);
@@ -197,7 +204,8 @@ public class ConfigLocation : ConfigWidget
   void handle_dialog_hide(Gtk.Widget w)
   {
     try {
-      button.add_shortcut_folder_uri(tmpdir.get_uri());
+      button.add_shortcut_folder_uri(s3_dir.get_uri());
+      button.add_shortcut_folder_uri(u1_dir.get_uri());
     }
     catch (Error e) {
       warning("%s\n", e.message);

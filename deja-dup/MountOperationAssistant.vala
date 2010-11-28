@@ -21,11 +21,15 @@ using GLib;
 
 public class MountOperationAssistant : MountOperation
 {
+  public string label_button {get; set;}
   public string label_help {get; set;}
   public string label_username {get; set; default = _("_Username:");}
   public string label_password {get; set; default = _("_Password:");}
   public string label_show_password {get; set; default = _("S_how password");}
   public string label_remember_password {get; set; default = _("_Remember password");}
+  public uint xid {get; private set;}
+
+  signal void button_clicked();
 
   public AssistantOperation assist {get; construct;}
   Gtk.Bin password_page;
@@ -46,6 +50,9 @@ public class MountOperationAssistant : MountOperation
     assist.forward.connect(do_forward);
     assist.closing.connect(do_close);
     add_password_page();
+
+    assist.realize();
+    xid = (uint)Gdk.x11_drawable_get_xid(assist.get_window());
   }
 
   public override void aborted()
@@ -124,15 +131,21 @@ public class MountOperationAssistant : MountOperation
       label = new Gtk.Label(label_help);
       label.use_markup = true;
       label.track_visited_links = false;
-      if (label != null) {
-        label.set("xalign", 0f);
-        layout.pack_start(label, false, false, 0);
-      }
+      label.set("xalign", 0f);
+      layout.pack_start(label, false, false, 0);
     }
 
     // Buffer
     label = new Gtk.Label("");
     layout.pack_start(label, false, false, 0);
+
+    if (label_button != null) {
+      var alignment = new Gtk.Alignment(0.5f, 0.5f, 0, 0);
+      var button = new Gtk.Button.with_mnemonic(label_button);
+      button.clicked.connect(() => {button_clicked();});
+      alignment.add(button);
+      layout.pack_start(alignment, false, false, 0);
+    }
 
     if ((flags & AskPasswordFlags.ANONYMOUS_SUPPORTED) != 0) {
       anonymous_w = new Gtk.RadioButton.with_mnemonic(null, _("Connect _anonymously"));
@@ -201,15 +214,15 @@ public class MountOperationAssistant : MountOperation
       table.attach(label, ucol, ucol+1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
       table.attach(password_w, ucol+1, 3, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
       ++rows;
+
+      var w = new Gtk.CheckButton.with_mnemonic(label_show_password);
+      ((Gtk.CheckButton)w).toggled.connect((button) => {
+        password_w.visibility = button.get_active();
+      });
+      layout.pack_start(w, false, false, 0);
     }
     else
       password_w = null;
-
-    var w = new Gtk.CheckButton.with_mnemonic(label_show_password);
-    ((Gtk.CheckButton)w).toggled.connect((button) => {
-      password_w.visibility = button.get_active();
-    });
-    layout.pack_start(w, false, false, 0);
 
     if ((flags & AskPasswordFlags.SAVING_SUPPORTED) != 0) {
       remember_w = new Gtk.CheckButton.with_mnemonic(label_remember_password);

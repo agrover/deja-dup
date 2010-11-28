@@ -24,6 +24,7 @@ namespace DejaDup {
 public class ConfigLabelLocation : ConfigLabel
 {
   public bool is_s3 {get; private set;}
+  public bool is_u1 {get; private set;}
   Gtk.Image img;
 
   public ConfigLabelLocation()
@@ -57,7 +58,9 @@ public class ConfigLabelLocation : ConfigLabel
         img.set_from_gicon(icon, Gtk.IconSize.MENU);
     }
 
-    is_s3 = settings.get_string(BACKEND_KEY) == "s3";
+    string backend = Backend.get_default_type();
+    is_s3 = backend == "s3";
+    is_u1 = backend == "u1";
   }
 }
 
