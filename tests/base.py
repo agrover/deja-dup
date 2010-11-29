@@ -33,7 +33,7 @@ import glob
 import re
 import traceback
 
-latest_duplicity = '0.6.10'
+latest_duplicity = '0.6.11'
 
 temp_dir = None
 cleanup_dirs = []
@@ -52,16 +52,18 @@ def create_temp_dir():
     temp_dir = tempfile.mkdtemp()
     cleanup_dirs += [temp_dir]
 
-def get_temp_name(extra):
+def get_temp_name(extra, make=False):
   global temp_dir
   create_temp_dir()
+  if make and not os.path.exists(temp_dir + '/' + extra):
+    os.makedirs(temp_dir + '/' + extra)
   return temp_dir + '/' + extra
 
 # The current directory is always the 'distdir'.  But 'srcdir' may be different
 # if we're running inside a distcheck for example.  So note that we check for
 # srcdir and use it if available.  Else, default to current directory.
 
-def setup(backend = None, encrypt = None, start = True, dest = None, sources = [], excludes = [], args=['']):
+def setup(backend = None, encrypt = None, start = True, dest = None, sources = [], excludes = [], args=[''], root_prompt = False):
   global cleanup_dirs, cleanup_pids, ldtp, latest_duplicity
 
   if 'srcdir' in environ:
@@ -116,6 +118,7 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
 
   environ['PYTHONPATH'] = extra_pythonpaths + (environ['PYTHONPATH'] if 'PYTHONPATH' in environ else '')
   environ['PATH'] = extra_paths + environ['PATH']
+  environ['GNUPGHOME'] = get_temp_name('gnupg', True)
   
   #environ['G_DEBUG'] = 'fatal_warnings'
   
@@ -131,6 +134,10 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
   if os.system('cp %s/../data/org.gnome.DejaDup.gschema.xml %s/glib-2.0/schemas/ && glib-compile-schemas %s/glib-2.0/schemas/' % (srcdir, environ['XDG_DATA_HOME'], environ['XDG_DATA_HOME'])):
     raise Exception('Could not install settings schema')
 
+  # Copy interface files into place as well
+  os.system("mkdir -p %s/deja-dup/ui" % environ['XDG_DATA_HOME'])
+  os.system("cp ../data/ui/* %s/deja-dup/ui" % environ['XDG_DATA_HOME'])
+
   if backend == 'file':
     create_local_config(dest)
   elif backend == 'ssh':
@@ -141,8 +148,8 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
   
   if encrypt is not None:
     set_settings_value("encrypt", 'true' if encrypt else 'false')
-  
-  set_settings_value("root-prompt", 'false')
+
+  set_settings_value("root-prompt", 'true' if root_prompt else 'false')
 
   #daemon_env = subprocess.Popen(['gnome-keyring-daemon'], stdout=subprocess.PIPE).communicate()[0].strip()
   #daemon_env = daemon_env.split('\n')
@@ -197,14 +204,18 @@ def get_settings_value(key, schema = None):
   return pout.strip()
 
 def start_deja_dup(args=[''], waitfor='frmDéjàDup'):
-  #(fd, path) = tempfile.mkstemp()
-  #os.write(fd, 'run\n')
-  #os.close(fd)
-  #subprocess.Popen(['gdb', '-nx', '-x', path, '--args', 'deja-dup', ' '.join(args)])
-  subprocess.Popen(['deja-dup'] + args)
+  debug = False
+  if debug:
+    (fd, path) = tempfile.mkstemp()
+    os.write(fd, 'run\n')
+    os.close(fd)
+    subprocess.Popen(['gdb', '-nx', '-x', path, '--args', 'deja-dup'] + args)
+  else:
+    subprocess.Popen(['deja-dup'] + args)
   if waitfor is not None:
     ldtp.waittillguiexist(waitfor)
-  #os.remove(path)
+  if debug:
+    os.remove(path)
 
 def start_deja_dup_prefs():
   subprocess.Popen(['deja-dup-preferences'])
@@ -442,6 +453,25 @@ def restore_specific(files, path, date=None):
   wait_for_encryption('dlgRestore', 'lblRestorefromWhen?', 200)
   if date:
     ldtp.comboselect('dlgRestore', 'cboDate', date)
+  ldtp.click('dlgRestore', 'btnForward')
+  ldtp.click('dlgRestore', 'btnRestore')
+  if len(files) == 1:
+    lbl = 'lblYourfilewassuccessfullyrestored'
+  else:
+    lbl = 'lblYourfilesweresuccessfullyrestored'
+  assert ldtp.waittillguiexist('dlgRestore', lbl)
+  assert guivisible('dlgRestore', lbl)
+  ldtp.click('dlgRestore', 'btnClose')
+
+def restore_missing(files, path):
+  args = ['--restore-missing', path]
+  start_deja_dup(args=args, waitfor='dlgRestore')
+  remap('dlgRestore')
+  wait_for_encryption('dlgRestore', 'lblScanningfinished', 200)
+  for f in files:
+    index = ldtp.gettablerowindex('dlgRestore', 'tbl0', f)
+    if index != -1:
+      ldtp.checkrow('dlgRestore', 'tbl0', index)
   ldtp.click('dlgRestore', 'btnForward')
   ldtp.click('dlgRestore', 'btnRestore')
   if len(files) == 1:

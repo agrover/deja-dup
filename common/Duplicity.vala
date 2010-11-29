@@ -24,14 +24,26 @@ namespace DejaDup {
 
 public class Duplicity : Object
 {
+  /*
+   * Vala implementation of various methods for accessing duplicity
+   *
+   * Vala implementation of various methods for accessing duplicity from
+   * vala withot the need of manually running duplicity command.
+   */
+
   public signal void done(bool success, bool cancelled);
   public signal void raise_error(string errstr, string? detail);
   public signal void action_desc_changed(string action);
   public signal void action_file_changed(File file, bool actual);
   public signal void progress(double percent);
+  /*
+   * Signal emmited when collection dates are retrieved from duplicity
+   */
   public signal void collection_dates(List<string>? dates);
+  public signal void listed_current_files(string date, string file);
   public signal void question(string title, string msg);
   public signal void secondary_desc_changed(string msg);
+  public signal void is_full();
   
   public Operation.Mode original_mode {get; construct;}
   public Operation.Mode mode {get; private set; default = Operation.Mode.INVALID;}
@@ -42,6 +54,7 @@ public class Duplicity : Object
   public Backend backend {get; set;}
   public List<File> includes;
   public List<File> excludes;
+  public bool use_progress {get; set; default = true;}
   
   private List<File> _restore_files;
   public List<File> restore_files {
@@ -73,8 +86,8 @@ public class Duplicity : Object
   List<string> backend_argv;
   List<string> saved_argv;
   List<string> saved_envp;
-  bool cleaned_up_once = false;
   bool is_full_backup = false;
+  bool cleaned_up_once = false;
   bool needs_root = false;
   
   bool has_progress_total = false;
@@ -279,7 +292,7 @@ public class Duplicity : Object
       // If we're backing up, and the version of duplicity supports it, we should
       // first run using --dry-run to get the total size of the backup, to make
       // accurate progress bars.
-      else if (!has_progress_total &&
+      else if (use_progress && !has_progress_total &&
                DuplicityInfo.get_default().has_backup_progress) {
         state = State.DRY_RUN;
         action_desc = _("Preparing…");
@@ -290,26 +303,8 @@ public class Duplicity : Object
         return true;
       }
       else {
-        if (DuplicityInfo.get_default().has_backup_progress)
+        if (has_progress_total)
           progress(0f);
-
-        /* Set full backup threshold and determine whether we should trigger
-           a full backup. */
-        if (got_collection_info) {
-          Date threshold = DejaDup.get_full_backup_threshold_date();
-          Date full_backup = Date();
-          foreach (DateInfo info in collection_info) {
-            if (info.full)
-              full_backup.set_time_val(info.time);
-          }
-          if (!full_backup.valid() || threshold.compare(full_backup) > 0) {
-            is_full_backup = true;
-            if (!full_backup.valid())
-              secondary_desc_changed(_("Creating the first backup.  This may take a while."));
-            else
-              secondary_desc_changed(_("Creating a fresh backup to protect against backup corruption.  This will take longer than normal."));
-          }
-        }
       }
       
       break;
@@ -330,9 +325,11 @@ public class Duplicity : Object
           if (DuplicityInfo.get_default().has_rename_arg) {
             var old_home = homes.data;
             var new_home = slash_home_me;
-            extra_argv.append("--rename");
-            extra_argv.append(slash.get_relative_path(old_home));
-            extra_argv.append(slash.get_relative_path(new_home));
+            if (!old_home.equal(new_home)) {
+              extra_argv.append("--rename");
+              extra_argv.append(slash.get_relative_path(old_home));
+              extra_argv.append(slash.get_relative_path(new_home));
+            }
           }
           else if (!homes.data.has_prefix(slash_home_me))
             has_non_home_contents = true;
@@ -508,7 +505,28 @@ public class Duplicity : Object
                 backend_argv.remove(s);
             }
           }
-          
+
+          /* Set full backup threshold and determine whether we should trigger
+             a full backup. */
+          if (got_collection_info) {
+            Date threshold = DejaDup.get_full_backup_threshold_date();
+            Date full_backup = Date();
+            foreach (DateInfo info in collection_info) {
+              if (info.full)
+                full_backup.set_time_val(info.time);
+            }
+            if (!full_backup.valid() || threshold.compare(full_backup) > 0) {
+              is_full_backup = true;
+              if (!full_backup.valid())
+                secondary_desc_changed(_("Creating the first backup.  This may take a while."));
+              else
+                secondary_desc_changed(_("Creating a fresh backup to protect against backup corruption.  This will take longer than normal."));
+            }
+          }
+
+          if (is_full_backup)
+            is_full();
+
           if (restart())
             return;
           else
@@ -665,6 +683,7 @@ public class Duplicity : Object
       return false;
   }
 
+  protected static const int ERROR_GENERIC = 1;
   protected static const int ERROR_HOSTNAME_CHANGED = 3;
   protected static const int ERROR_RESTORE_DIR_NOT_FOUND = 19;
   protected static const int ERROR_EXCEPTION = 30;
@@ -690,10 +709,35 @@ public class Duplicity : Object
   protected static const int WARNING_UNMATCHED_SIG = 4;
   protected static const int WARNING_INCOMPLETE_BACKUP = 5;
   protected static const int WARNING_ORPHANED_BACKUP = 6;
-  
+
+  bool restarted_without_cache = false;
+  void handle_exit(int code)
+  {
+    // Duplicity has a habit of dying and returning 1 without sending an error
+    // if there was some unexpected issue with its cached metadata.  It often
+    // goes away if you delete ~/.cache/deja-dup and try again.  This issue
+    // happens often enough that we do that for the user here.  It should be
+    // safe to do this, as the cache is not necessary for operation, only
+    // a performance improvement.
+    if (DuplicityInfo.get_default().guarantees_error_codes &&
+        code == ERROR_GENERIC && !error_issued && !restarted_without_cache) {
+      string dir = Environment.get_user_cache_dir();
+      if (dir != null) {
+        restarted_without_cache = true;
+        var cachedir = Path.build_filename(dir, Config.PACKAGE);
+        var del = new RecursiveDelete(File.new_for_path(cachedir));
+        del.start();
+        restart();
+      }
+    }
+  }
+
   void handle_message(DuplicityInstance inst, string[] control_line,
                       List<string>? data_lines, string user_text)
   {
+    /*
+     * Based on duplicity's output handle message as either process data as error, info or warning
+     */
     if (control_line.length == 0)
       return;
     
@@ -884,6 +928,9 @@ public class Duplicity : Object
   protected virtual void process_info(string[] firstline, List<string>? data,
                                       string text)
   {
+    /*
+     * Pass message to appropriate function considering the type of output
+     */
     if (firstline.length > 1) {
       switch (firstline[1].to_int()) {
       case INFO_DIFF_FILE_NEW:
@@ -909,13 +956,13 @@ public class Duplicity : Object
           set_status(_("Uploading…"));
         break;
       case INFO_FILE_STAT:
-        process_file_stat(firstline[2], firstline[3]);
+        process_file_stat(firstline[2], firstline[3], data, text);
         break;
       }
     }
   }
   
-  void process_file_stat(string date, string file)
+  void process_file_stat(string date, string file, List<string> data, string text)
   {
     if (mode != Operation.Mode.LIST)
       return;
@@ -926,9 +973,11 @@ public class Duplicity : Object
         homes.append(gfile);
       if (!has_non_home_contents &&
           !gfile.equal(slash) &&
+          !gfile.equal(slash_home) &&
           !gfile.has_prefix(slash_home))
         has_non_home_contents = true;
     }
+    listed_current_files(date, file);
   }
   
   void process_diff_file(string file) {
@@ -981,11 +1030,14 @@ public class Duplicity : Object
   
   void process_collection_status(List<string>? lines)
   {
-    // Collection status is a bunch of lines, some of which are indented,
-    // which contain information about specific chains.  We gather this all up
-    // and report back to caller via a signal.
-    // We're really only interested in the list of entries in the complete chain,
-    // though.
+    /*
+     * Collect output of collection status and return list of dates as strings via a signal
+     *
+     * Duplicity returns collection status as a bunch of lines, some of which are
+     * indented which contain information about specific chains. We gather
+     * this all up and report back to caller via a signal.
+     * We're really only interested in the list of entries in the complete chain.
+     */
     
     var timeval = TimeVal();
     var dates = new List<string>();
@@ -1022,7 +1074,7 @@ public class Duplicity : Object
     collection_info = new List<DateInfo?>();
     foreach (DateInfo s in infos)
       collection_info.append(s); // we want to keep our own copy too
-    
+
     collection_dates(dates);
   }
   
@@ -1083,9 +1135,11 @@ public class Duplicity : Object
 
   void disconnect_inst()
   {
+    /* Disconnect signals and cancel call to duplicity instance */
     if (inst != null) {
       inst.done.disconnect(handle_done);
       inst.message.disconnect(handle_message);
+      inst.exited.disconnect(handle_exit);
       inst.cancel();
       inst = null;
     }
@@ -1095,13 +1149,24 @@ public class Duplicity : Object
                          List<string>? envp_extra = null,
                          List<string>? argv_entire = null,
                          File? custom_local = null)
-  {
+  { 
+    /*
+     * For passed arguments start a new duplicity instance, set duplicity in the right mode and execute command
+     */
+    /* Disconnect instance */
     disconnect_inst();
-
+    
+    /* Start new duplicity instance */
     inst = new DuplicityInstance();
     inst.done.connect(handle_done);
+
+    /* As duplicity's data is returned via a signal, handle_message begins post-raw stream processing */
     inst.message.connect(handle_message);
-    
+
+    /* When duplicity exits, we may be also interested in its return code */
+    inst.exited.connect(handle_exit);
+
+    /* Set arguments for call to duplicity */
     weak List<string> master_argv = argv_entire == null ? saved_argv : argv_entire;
     weak File local_arg = custom_local == null ? local : custom_local;
     
@@ -1109,7 +1174,8 @@ public class Duplicity : Object
     foreach (string s in master_argv) argv.append(s);
     foreach (string s in argv_extra) argv.append(s);
     foreach (string s in this.backend_argv) argv.append(s);
-    
+
+    /* Set duplicity into right mode */
     if (argv_entire == null) {
       // add operation, local, and remote args
       switch (mode) {
@@ -1136,11 +1202,13 @@ public class Duplicity : Object
         break;
       }
     }
-    
+
+    /* Set enviormental parameters */
     var envp = new List<string>();
     foreach (string s in saved_envp) envp.append(s);
     foreach (string s in envp_extra) envp.append(s);
-    
+
+    /* Start duplicity instance */
     try {
       inst.start(argv, envp, needs_root);
     }

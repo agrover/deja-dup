@@ -24,7 +24,7 @@ import base
 import ldtp
 
 BASEPATH = '/tmp/deja-dup-test/'
-DATE = 'Sat Aug  1 21:14:34 2009'
+DATE = '08/01/09 21:14:34'
 
 def test():
   restoredir = base.get_temp_name('restore')
@@ -34,6 +34,5 @@ def test():
   base.restore_specific(files, restoredir, DATE)
   assert base.file_equals(BASEPATH+'one', 'one1\n')
   assert base.file_equals(BASEPATH+'top/one', 'one\n')
-  return True
 
 base.run(test)

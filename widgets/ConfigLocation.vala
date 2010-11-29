@@ -61,7 +61,7 @@ public class ConfigLocation : ConfigWidget
       hbox.add(connect_button);
     }
     
-    mnemonic_activate.connect((w, g) => {return button.mnemonic_activate(g);});
+    mnemonic_activate.connect(on_mnemonic_activate);
     
     s3_name = _("Amazon S3");
     add_special_location();
@@ -84,6 +84,11 @@ public class ConfigLocation : ConfigWidget
     }
   }
   
+  bool on_mnemonic_activate(Gtk.Widget w, bool g)
+  {
+    return button.mnemonic_activate(g);
+  }
+
   File get_file_from_settings() throws Error
   {
     // Check the backend type, then GIO uri if needed
@@ -142,10 +147,8 @@ public class ConfigLocation : ConfigWidget
       if (is_s3)
         settings.set_string(BACKEND_KEY, "s3");
       else {
-        settings.delay();
+        DejaDup.get_settings(FILE_ROOT).set_string(FILE_PATH_KEY, file.get_parse_name());
         settings.set_string(BACKEND_KEY, "file");
-        settings.set_string(FILE_PATH_KEY, file.get_parse_name());
-        settings.apply();
         yield BackendFile.check_for_volume_info(file);
       }
     }

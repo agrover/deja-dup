@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2009 Michael Terry <mike@mterry.name>
+    © 2009–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,63 +19,66 @@
 
 using GLib;
 
-public class StatusIcon : Object
+/**
+ * There are three modes for 'shell' integration:
+ * 1) GNOME Shell
+ * 2) Indicator
+ * 3) Legacy
+ * 
+ * GNOME Shell:
+ * No status icon at all.
+ * Actions on persistent notifications.
+ * Detected by 'persistent' capability of notification server.
+ * 
+ * Indicator:
+ * Register as an application indicator, which falls back to standard GTK+ status icon.
+ * No notifications.
+ * Detected by presence of application indicator host (usually on Ubuntu).
+ * 
+ * Legacy:
+ * Standard GTK+ status icon.
+ * No notifications.
+ */
+
+public abstract class StatusIcon : Object
 {
-  public signal void toggle_window();
+  public static StatusIcon create(Gtk.Window window, DejaDup.Operation op, bool automatic)
+  {
+    StatusIcon instance;
+    instance = new ShellStatusIcon(window, op, automatic);
+    if (!instance.is_valid)
+      instance = new IndicatorStatusIcon(window, op, automatic);
+    if (!instance.is_valid)
+      instance = new LegacyStatusIcon(window, op, automatic);
+    return instance;
+  }
+
+  public signal void show_window();
   public signal void hide_all();
   public Gtk.Window? window {get; construct;}
   public DejaDup.Operation op {get; construct;}
   public bool automatic {get; construct; default = false;}
 
-  string action;
-  double progress;
+  protected bool is_valid = true;
+  protected string action;
+  protected double progress;
 
-  Gtk.Menu menu;
-  Gtk.CheckMenuItem toggle_item;
-  Object iconobj;
-  Gtk.StatusIcon gtkicon;
-  
-  public StatusIcon(Gtk.Window? window, DejaDup.Operation op, bool automatic)
-  {
-    Object(window: window, op: op, automatic: automatic);
-  }
+  protected string later_label;
+  protected string skip_label;
+
+  protected Gtk.Menu menu;
 
   construct {
-    ensure_menu();
-    iconobj = hacks_status_icon_make_app_indicator(menu);
-    
-    if (window != null) {
-      window.show.connect((w) => {
-        toggle_item.toggled.disconnect(toggle);
-        toggle_item.active = true;
-        toggle_item.toggled.connect(toggle);
-      });
-      window.hide.connect((w) => {
-        toggle_item.toggled.disconnect(toggle);
-        toggle_item.active = false;
-        toggle_item.toggled.connect(toggle);
-      });
-    }
-    
-    if (iconobj == null) {
-      gtkicon = new Gtk.StatusIcon();
-      gtkicon.set("icon-name", "deja-dup-symbolic",
-                  "title", _("Déjà Dup")); // Only in GTK+ 2.18
-      
-      gtkicon.popup_menu.connect(show_menu);
-      gtkicon.activate.connect((s) => {show_menu(s, 0, Gtk.get_current_event_time());});
-
-      iconobj = gtkicon;
-    }
+    if (DejaDup.DuplicityInfo.get_default().can_resume)
+      later_label = _("_Resume Later");
+    else if (automatic)
+      later_label = _("_Delay Backup");
+    else
+      later_label = _("_Cancel Backup");
+    skip_label = _("_Skip Backup");
 
     op.action_desc_changed.connect(set_action_desc);
     op.progress.connect(note_progress);
-  }
-
-  ~StatusIcon()
-  {
-    // FIXME: icon won't die, even with this call
-    hacks_status_icon_close_app_indicator(iconobj);
   }
 
   void set_action_desc(DejaDup.Operation op, string action)
@@ -90,30 +93,15 @@ public class StatusIcon : Object
     update_progress();
   }
 
-  void update_progress()
-  {
-    if (gtkicon != null) {
-      var tooltip = "";
-      if (this.action != null)
-        tooltip = this.action;
-      if (this.progress > 0)
-        tooltip = tooltip + "\n" + _("%.1f%% complete").printf(this.progress * 100);
-      gtkicon.set_tooltip_text(tooltip);
-    }
+  protected virtual void update_progress() {}
 
-    if (this.progress > 0)
-      toggle_item.label = _("Show _Progress (%.1f%%)").printf(this.progress * 100);
-    else
-      toggle_item.label = _("Show _Progress");
-  }
-
-  void later()
+  protected void later()
   {
     hide_all();
     op.stop();
   }
 
-  void skip()
+  protected void skip()
   {
     hide_all();
 
@@ -128,47 +116,132 @@ public class StatusIcon : Object
     op.cancel();
   }
 
-  void toggle()
-  {
-    toggle_window();
-  }
-  
-  Gtk.Menu ensure_menu()
+  protected Gtk.Menu ensure_menu()
   {
     if (menu != null)
       return menu;
-    
+
     menu = new Gtk.Menu();
 
-    var check = new Gtk.CheckMenuItem();
-    check.active = window.visible;
-    check.use_underline = true;
-    check.toggled.connect(toggle);
-    menu.append(check);
-    toggle_item = check;
-    update_progress();
+    Gtk.ImageMenuItem imageitem;
+    imageitem = new Gtk.ImageMenuItem.with_mnemonic(_("Déjà Du_p"));
+    imageitem.image = new Gtk.Image.from_icon_name("deja-dup-symbolic", Gtk.IconSize.MENU);
+    imageitem.always_show_image = true;
+    imageitem.activate.connect((i) => {show_window();});
+    menu.append(imageitem);
 
     if (op.mode == DejaDup.Operation.Mode.BACKUP) {
       Gtk.MenuItem item;
 
-      if (DejaDup.DuplicityInfo.get_default().can_resume)
-        item = new Gtk.MenuItem.with_mnemonic(_("_Resume Later"));
-      else
-        item = new Gtk.MenuItem.with_mnemonic(_("_Delay Backup"));
+      menu.append(new Gtk.SeparatorMenuItem());
+
+      item = new Gtk.MenuItem.with_mnemonic(later_label);
       item.activate.connect((i) => {later();});
       menu.append(item);
 
       if (automatic) {
-        item = new Gtk.MenuItem.with_mnemonic(_("_Skip Backup"));
+        item = new Gtk.MenuItem.with_mnemonic(skip_label);
         item.activate.connect((i) => {skip();});
         menu.append(item);
       }
     }
-    
+
+    update_progress();
+
     menu.show_all();
     return menu;
   }
-  
+}
+
+class IndicatorStatusIcon : StatusIcon
+{
+  public IndicatorStatusIcon(Gtk.Window window, DejaDup.Operation op, bool automatic)
+  {
+    Object(window: window, op: op, automatic: automatic);
+  }
+
+  Object indicator;
+  construct {
+    indicator = hacks_status_icon_make_app_indicator(ensure_menu());
+    is_valid = indicator != null;
+  }
+
+  ~IndicatorStatusIcon()
+  {
+    // FIXME: icon won't die, even with this call
+    if (indicator != null)
+      hacks_status_icon_close_app_indicator(indicator);
+  }
+}
+
+class ShellStatusIcon : StatusIcon
+{
+  public ShellStatusIcon(Gtk.Window window, DejaDup.Operation op, bool automatic)
+  {
+    Object(window: window, op: op, automatic: automatic);
+  }
+
+  bool persistence = false;
+  bool actions = false;
+  construct {
+    unowned List<string> caps = Notify.get_server_caps();
+    foreach (string cap in caps) {
+      if (cap == "persistence")
+        persistence = true;
+      else if (cap == "actions")
+        actions = true;
+    }
+
+    is_valid = persistence && actions;
+
+    if (is_valid && automatic && op.mode == DejaDup.Operation.Mode.BACKUP) {
+      Notify.init(Environment.get_application_name());
+      var note = new Notify.Notification(_("Starting scheduled backup"), null,
+                                         "deja-dup-backup");
+      note.add_action("later", later_label, () => {later();});
+      note.add_action("skip", skip_label, () => {skip();});
+      try {
+        note.show();
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
+
+      // Since we aren't using a status icon, no UI at all for this run, so no
+      // need to calculate progress.
+      op.use_progress = false;
+    }
+  }
+}
+
+class LegacyStatusIcon : StatusIcon
+{
+  public LegacyStatusIcon(Gtk.Window window, DejaDup.Operation op, bool automatic)
+  {
+    Object(window: window, op: op, automatic: automatic);
+  }
+
+  Gtk.StatusIcon icon;
+  construct {
+    icon = new Gtk.StatusIcon();
+    icon.set("icon-name", "deja-dup-symbolic",
+             "title", Environment.get_application_name());
+
+    ensure_menu();
+    icon.popup_menu.connect(show_menu);
+    icon.activate.connect((s) => {show_menu(s, 0, Gtk.get_current_event_time());});
+  }
+
+  protected override void update_progress()
+  {
+    var tooltip = "";
+    if (this.action != null)
+      tooltip = this.action;
+    if (this.progress > 0)
+      tooltip = tooltip + "\n" + _("%.1f%% complete").printf(this.progress * 100);
+    icon.set_tooltip_text(tooltip);
+  }
+
   void show_menu(Gtk.StatusIcon status_icon, uint button, uint activate_time)
   {
     menu.popup(null, null, status_icon.position_menu, button, activate_time);

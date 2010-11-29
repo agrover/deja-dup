@@ -28,6 +28,5 @@ def test():
   base.setup('file', dest=(sys.path[0]+'/vols/home'))
   base.restore_simple(restoredir)
   assert base.file_equals(restoredir+os.environ['HOME']+'/test', 'test\n')
-  return True
 
 base.run(test)

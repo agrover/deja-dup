@@ -22,6 +22,7 @@
 # backup/continue # disabled until continue support is back in
 AUTO_TESTS = \
 	backup/cancel-clean \
+	backup/clear-cache \
 	backup/full \
 	backup/delete \
 	backup/exclude \
@@ -32,13 +33,15 @@ AUTO_TESTS = \
 	prefs/ssh-to-file \
 	restore/cycle \
 	restore/full \
+	restore/missing \
 	restore/rename \
 	restore/overdir \
 	restore/two
 
 # Tests that must be run manually
 MANUAL_TESTS = \
-	backup/disk-full
+	backup/disk-full \
+	restore/gpg
 
 ALL_TESTS = $(AUTO_TESTS) $(MANUAL_TESTS)
 

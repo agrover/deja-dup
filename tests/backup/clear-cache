@@ -17,24 +17,19 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-# Test whether we correctly handle folders with spaces
-
 import sys
-import os
-sys.path.insert(0, sys.path[0]+'/..')
+scriptdir=sys.path[0]
+sys.path.insert(0, scriptdir+'/..')
 import base
 import ldtp
+import os
 
 def test():
-  restoredir = os.path.join(base.get_temp_name('restore'), 'spa ces')
-  backupdir = os.path.join(base.get_temp_name('backup'), 'spa ces')
-  os.makedirs(backupdir)
-  base.setup('file', dest=backupdir, sources=['data/spa [ ces'], excludes=['data/spa [ ces/bad one'])
+  base.setup('file', sources=['data/simple'])
   base.backup_simple()
+  # Set up our duplicity wrapper to be called by deja-dup
+  os.environ['PATH'] = os.path.join(scriptdir, 'clear-cache-bin') + ":" + os.environ['PATH']
   base.start_deja_dup()
-  base.restore_simple(restoredir)
-  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], 'data/spa [ ces')
-  assert base.file_equals(os.path.join(root, 'one space/file.txt'), 'space\n')
-  assert not os.path.exists(os.path.join(root, 'bad one'))
+  base.backup_simple()
 
 base.run(test)

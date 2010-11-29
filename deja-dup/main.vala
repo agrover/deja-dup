@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,11 +27,13 @@ class DejaDupApp : Object
   static bool show_version = false;
   static bool restore_mode = false;
   static bool backup_mode = false;
+  static bool restoremissing_mode = false;
   static string[] filenames = null;
   static const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
     {"restore", 0, 0, OptionArg.NONE, ref restore_mode, N_("Restore given files"), null},
     {"backup", 0, 0, OptionArg.NONE, ref backup_mode, N_("Immediately start a backup"), null},
+    {"restore-missing", 0, 0, OptionArg.NONE, ref restoremissing_mode, N_("Restore deleted files"), null},
     {"", 0, 0, OptionArg.FILENAME_ARRAY, ref filenames, null, null}, // remaining
     {null}
   };
@@ -41,7 +43,7 @@ class DejaDupApp : Object
     status = 0;
     
     if (show_version) {
-      print("%s %s\n", _("Déjà Dup"), Config.VERSION);
+      print("%s %s\n", "deja-dup", Config.VERSION);
       return false;
     }
     
@@ -52,16 +54,27 @@ class DejaDupApp : Object
         return false;
       }
     }
+
+    if (restoremissing_mode) {
+      if (filenames == null) {
+        printerr("%s\n", _("No directory provided"));
+        status = 1;
+        return false;
+      }
+      else if (filenames.length > 1) {
+        printerr("%s\n", _("Only one directory can be shown at once"));
+        status = 1;
+        return false;
+      }
+    }
     
     return true;
   }
 
   public static int main(string [] args)
   {
-    Intl.textdomain(Config.GETTEXT_PACKAGE);
-    Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
-    Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
-    
+    DejaDup.i18n_setup();
+
     // Translators: The name is a play on the French phrase "déjà vu" meaning
     // "already seen", but with the "vu" replaced with "dup".  "Dup" in this
     // context is itself a reference to both the underlying command line tool
@@ -69,7 +82,13 @@ class DejaDupApp : Object
     // may not be very translatable.
     Environment.set_application_name(_("Déjà Dup"));
     
-    OptionContext context = new OptionContext("");
+    var modes = "\n  %s --backup\n  %s --restore %s\n  %s --restore-missing %s"
+                .printf(Config.PACKAGE, Config.PACKAGE, _("FILES"),
+                        Config.PACKAGE, _("DIRECTORY"));
+    OptionContext context = new OptionContext(modes);
+
+    // Translators: Wrap this to 80 characters per line if you can, as I have for English
+    context.set_summary(_("Déjà Dup is a simple backup tool.  It hides the complexity of backing up\nthe 'right way' (encrypted, off-site, and regular) and uses duplicity as\nthe backend."));
     context.add_main_entries(options, Config.GETTEXT_PACKAGE);
     context.add_group(Gtk.get_option_group(false)); // allow console use
     try {
@@ -109,6 +128,20 @@ class DejaDupApp : Object
       toplevel = new AssistantBackup(true);
       toplevel.destroy.connect((t) => {Gtk.main_quit();});
       // specifically don't show
+    }
+    else if (restoremissing_mode){
+        File list_directory = File.new_for_commandline_arg(filenames[0]);
+        if (!list_directory.query_exists(null)) {
+          printerr("%s\n", _("Directory does not exists"));
+          return 1;
+        }
+        if (list_directory.query_file_type (0, null) != FileType.DIRECTORY) {
+          printerr("%s\n", _("You must provide a directory, not a file"));
+          return 1;
+        }
+        toplevel = new AssistantRestoreMissing(list_directory);
+        toplevel.destroy.connect((t) => {Gtk.main_quit();});
+        toplevel.show_all();
     }
     else {
       toplevel = new MainWindow();

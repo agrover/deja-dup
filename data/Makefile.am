@@ -22,6 +22,9 @@ nobase_dist_data_DATA = \
 	icons/hicolor/scalable/actions/deja-dup-backup.svg \
 	icons/hicolor/scalable/actions/deja-dup-restore.svg
 
+nobase_dist_pkgdata_DATA = \
+	ui/restore-missing.ui
+
 @INTLTOOL_XML_NOMERGE_RULE@
 
 @GSETTINGS_RULES@

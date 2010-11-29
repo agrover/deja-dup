@@ -2,6 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2010 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,7 +24,7 @@ public class AssistantRestore : AssistantOperation
 {
   public string restore_location {get; protected set; default = "/";}
   
-  private List<File> _restore_files;
+  protected List<File> _restore_files;
   public List<File> restore_files {
     get {
       return this._restore_files;
@@ -44,8 +45,8 @@ public class AssistantRestore : AssistantOperation
     restore_files = files;
   }
   
-  DejaDup.OperationStatus query_op;
-  DejaDup.Operation.State op_state;
+  protected DejaDup.OperationStatus query_op;
+  protected DejaDup.Operation.State op_state;
   Gtk.ProgressBar query_progress_bar;
   uint query_timeout_id;
   Gtk.ComboBoxText date_combo;
@@ -253,7 +254,7 @@ public class AssistantRestore : AssistantOperation
   {
     var page = make_query_backend_page();
     append_page(page, Type.PROGRESS);
-    set_page_title(page, _("Checking for Backups"));
+    set_page_title(page, _("Checking for Backups…"));
     query_progress_page = page;
   }
   
@@ -313,8 +314,15 @@ public class AssistantRestore : AssistantOperation
     return day1.compare(day2) == 0;
   }
 
-  protected void handle_collection_dates(DejaDup.OperationStatus op, List<string>? dates)
+  protected virtual void handle_collection_dates(DejaDup.OperationStatus op, List<string>? dates)
   {
+    /*
+     * Receives list of dates of backups and shows them to user
+     *
+     * After receiving list of dates at which backups were performed function
+     * converts dates to TimeVal structures and later converts them to Time to
+     * time to show them in nicely formate local form.
+     */
     var timevals = new List<TimeVal?>();
     TimeVal tv = TimeVal();
     
@@ -332,8 +340,13 @@ public class AssistantRestore : AssistantOperation
 
       string format = "%x";
       if ((i.prev != null && is_same_day(i.prev.data, tv)) ||
-          (i.next != null && is_same_day(i.next.data, tv)))
-        format = "%c";
+          (i.next != null && is_same_day(i.next.data, tv))) {
+        // Translators: %x is the current date, %X is the current time.
+        // This will be in a list with other strings that just have %x (the
+        // current date).  So make sure if you change this, it still makes
+        // sense in that context.
+        format = _("%x %X");
+      }
 
       Time t = Time.local(tv.tv_sec);
       string user_str = t.format(format);
@@ -348,7 +361,7 @@ public class AssistantRestore : AssistantOperation
       show_error(_("No backups to restore"), null);
   }
   
-  protected void query_finished(DejaDup.Operation op, bool success, bool cancelled)
+  protected virtual void query_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
     this.op_state = op.get_state();
     this.query_op = null;
@@ -381,15 +394,8 @@ public class AssistantRestore : AssistantOperation
     op.backend.mount_op = mount_op;
     op.passphrase_required.connect(get_passphrase);
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
-    
-    try {
-      yield query_op.start();
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      show_error(e.message, null); // not really user-friendly text, but ideally this won't happen
-      query_finished(query_op, false, false);
-    }
+
+    query_op.start();
   }
   
   protected override void do_prepare(Assistant assist, Gtk.Widget page)

@@ -45,6 +45,7 @@ libcommon_la_VALASOURCES = \
 	OperationBackup.vala \
 	OperationRestore.vala \
 	OperationStatus.vala \
+	OperationFiles.vala \
 	RecursiveDelete.vala \
 	RecursiveMove.vala \
 	RecursiveOp.vala

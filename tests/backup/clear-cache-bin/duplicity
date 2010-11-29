@@ -17,24 +17,20 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-# Test whether we correctly handle folders with spaces
+# This file acts like a duplicity wrapper.
+# It returns 1 as long as cache files exist.
 
-import sys
 import os
-sys.path.insert(0, sys.path[0]+'/..')
-import base
-import ldtp
+import sys
+import subprocess
 
-def test():
-  restoredir = os.path.join(base.get_temp_name('restore'), 'spa ces')
-  backupdir = os.path.join(base.get_temp_name('backup'), 'spa ces')
-  os.makedirs(backupdir)
-  base.setup('file', dest=backupdir, sources=['data/spa [ ces'], excludes=['data/spa [ ces/bad one'])
-  base.backup_simple()
-  base.start_deja_dup()
-  base.restore_simple(restoredir)
-  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], 'data/spa [ ces')
-  assert base.file_equals(os.path.join(root, 'one space/file.txt'), 'space\n')
-  assert not os.path.exists(os.path.join(root, 'bad one'))
+os.environ['PATH'] = os.environ['PATH'].split(':', 1)[-1] # Drop the PATH override that pointed to this script
 
-base.run(test)
+# Check if this is a 'real' incremental call (not --version or collection-status)
+if sys.argv[1].startswith('--exclude') and '--dry-run' not in sys.argv:
+  # Only return 1 if the cache directory has contents.  Thus, if deja-dup
+  # doesn't delete it for us, we'll keep returning 1
+  if os.listdir(os.environ['XDG_CACHE_HOME'] + '/deja-dup'):
+    sys.exit(1)
+
+subprocess.call(['duplicity'] + sys.argv[1:])

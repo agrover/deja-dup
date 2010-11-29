@@ -17,8 +17,6 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-# Test whether we correctly handle folders with spaces
-
 import sys
 import os
 sys.path.insert(0, sys.path[0]+'/..')
@@ -26,15 +24,24 @@ import base
 import ldtp
 
 def test():
-  restoredir = os.path.join(base.get_temp_name('restore'), 'spa ces')
-  backupdir = os.path.join(base.get_temp_name('backup'), 'spa ces')
-  os.makedirs(backupdir)
-  base.setup('file', dest=backupdir, sources=['data/spa [ ces'], excludes=['data/spa [ ces/bad one'])
+  sourcedir = base.get_temp_name('source', True)
+  os.system('cp -r data/simple/* %s' % sourcedir)
+  base.setup('file', sources=[sourcedir])
   base.backup_simple()
+  os.system('echo bar > %s/foo' % sourcedir)
+  os.system('rm %s/one %s/two' % (sourcedir, sourcedir))
   base.start_deja_dup()
-  base.restore_simple(restoredir)
-  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], 'data/spa [ ces')
-  assert base.file_equals(os.path.join(root, 'one space/file.txt'), 'space\n')
-  assert not os.path.exists(os.path.join(root, 'bad one'))
+  base.backup_simple()
+  os.system('echo 1 > %s/one' % sourcedir)
+  base.start_deja_dup()
+  base.backup_simple()
+
+  files = ['one', 'two', 'three']
+  os.system('rm -f %s' % ' '.join([sourcedir+'/'+f for f in files]))
+  base.restore_missing(files, sourcedir)
+
+  assert base.file_equals(sourcedir+'/one', '1\n')
+  assert base.file_equals(sourcedir+'/two', 'two\n')
+  assert base.file_equals(sourcedir+'/three', 'three\n')
 
 base.run(test)

@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ class DejaDupPreferences : Object
     status = 0;
     
     if (show_version) {
-      print("%s %s\n", Environment.get_application_name(), Config.VERSION);
+      print("%s %s\n", "deja-dup-preferences", Config.VERSION);
       return false;
     }
     
@@ -41,9 +41,7 @@ class DejaDupPreferences : Object
   
   public static int main(string [] args)
   {
-    Intl.textdomain(Config.GETTEXT_PACKAGE);
-    Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALE_DIR);
-    Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
+    DejaDup.i18n_setup();
 
     Environment.set_application_name(_("Déjà Dup Preferences"));
 

@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>,
+    © 2008–2010 Michael Terry <mike@mterry.name>,
     © 2009 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
@@ -25,6 +25,7 @@ namespace DejaDup {
 public class DuplicityInstance : Object
 {
   public signal void done(bool success, bool cancelled);
+  public signal void exited(int code);
   public signal void message(string[] control_line, List<string>? data_lines,
                              string user_text);
   
@@ -146,7 +147,13 @@ public class DuplicityInstance : Object
         
         // We have to wrap all current args into one string.
         StringBuilder args = new StringBuilder();
-        foreach(string a in argv) {
+
+        // Set environment variables for subprocess here because sudo reserves
+        // the right to strip them.
+        foreach (string env in envp_in)
+          args.append("export '%s'\n".printf(env));
+
+        foreach (string a in argv) {
           if (a == null)
             break;
           if (args.len == 0)
@@ -273,6 +280,12 @@ public class DuplicityInstance : Object
   
   async void read_log_lines()
   {
+    /*
+     * Process data from stream that is returned by read_log
+     *
+     * As reader returns lines that are outputed by duplicity, read_log_lines makes sure
+     * that data is processed at right speed and passes that data along the chain of functions. 
+     */
     List<string> stanza = new List<string>();
     while (reader != null) {
       try {
@@ -321,6 +334,11 @@ public class DuplicityInstance : Object
 
   async void read_log()
   {
+   /*
+    * Asynchronous reading of duplicity's log via stream
+    *
+    * Stream initiated either from log file or pipe
+    */
     try {
       InputStream stream;
       
@@ -507,6 +525,10 @@ public class DuplicityInstance : Object
   
   void process_stanza(List<string> stanza)
   {
+    /*
+     * Split the line/stanza that was echoed by stream and pass it forward in a 
+     * more structured way via a signal.
+     */
     string[] control_line;
     split_line(stanza.data, out control_line);
     
@@ -520,6 +542,9 @@ public class DuplicityInstance : Object
   
   List<string> grab_stanza_data(List<string> stanza)
   {
+    /*
+     * Return only data from stanza that was returned by stream
+     */
     var list = new List<string>();
     stanza = stanza.next; // skip first control line
     foreach (string line in stanza) {
@@ -570,7 +595,10 @@ public class DuplicityInstance : Object
         (Process.exit_status(status) == 255 || // gksu returns 255 on cancel
          Process.exit_status(status) == 3)) // and 3 on bad password
       cancelled = true;
-    
+
+    if (Process.if_exited(status))
+      exited(Process.exit_status(status));
+
     child_pid = (Pid)0;
     done(success, cancelled);
   }

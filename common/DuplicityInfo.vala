@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ public class DuplicityInfo : Object
   public bool has_rename_arg {get; private set; default = false; }
   public bool has_fixed_log_file {get; private set; default = false; }
   public bool use_empty_gpg_options {get; private set; default = false; }
-  public bool can_recycle_space {get; private set; default = false; }
+  public bool guarantees_error_codes {get; private set; default = false; }
   
   static DuplicityInfo info = null;
   public static DuplicityInfo get_default() {
@@ -90,6 +90,7 @@ public class DuplicityInfo : Object
     if (meets_version(0, 5, 4)) {
       has_backup_progress = true;
       has_collection_status = true;
+      guarantees_error_codes = true;
     }
     if (equals_version(0, 5, 4) || equals_version(0, 5, 5))
       has_broken_cleanup = true;
@@ -111,10 +112,6 @@ public class DuplicityInfo : Object
     }
     if (equals_version(0, 6, 8))
       use_empty_gpg_options = true; // workaround a duplicity bug
-
-    // A composite capability (whether we have enough information to tell
-    // if we can delete items to make enough room)
-    can_recycle_space = has_collection_status && has_backup_progress;
 
     return true;
   }

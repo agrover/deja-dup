@@ -18,7 +18,7 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 # Sets up autoconf.
-AC_INIT([Déjà Dup],[17.0],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup], [https://launchpad.net/deja-dup])
+AC_INIT([Déjà Dup],[17.2],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup],[https://launchpad.net/deja-dup])
 AC_PREREQ(2.64)
 AC_CONFIG_SRCDIR(deja-dup/main.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
@@ -38,8 +38,6 @@ AC_PROG_MAKE_SET
 
 LT_PREREQ([2.2.6])
 LT_INIT
-
-AC_PATH_PROG(PO4A, po4a)
 
 # Checks for vala
 AC_PROG_VALAC([0.11.0])
@@ -67,6 +65,7 @@ GTK_REQ_VER=2.91
 GDK_X11_MODULE=gdk-x11-3.0
 GLIB_REQ_VER=2.26
 GIO_REQ_VER=$GLIB_REQ_VER
+NOTIFY_REQ_VER=0.7
 APPINDICATOR_MODULE=appindicator3-0.1
 
 AC_SUBST(GTK_MODULE)
@@ -76,7 +75,9 @@ AC_SUBST(GDK_X11_MODULE)
 PKG_CHECK_MODULES(DUP,
                   $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
-                  gnome-keyring-1)
+                  gnome-keyring-1
+                  gmodule-2.0 >= $GLIB_REQ_VER
+                  libnotify >= $NOTIFY_REQ_VER)
 AC_SUBST(DUP_CFLAGS)
 AC_SUBST(DUP_LIBS)
 
@@ -89,19 +90,20 @@ AC_SUBST(PREF_LIBS)
 PKG_CHECK_MODULES(COMMON,
                   gio-2.0 >= $GIO_REQ_VER
                   gio-unix-2.0 >= $GIO_REQ_VER
-                  gnome-keyring-1)
+                  gnome-keyring-1
+                  gmodule-2.0 >= $GLIB_REQ_VER)
 AC_SUBST(COMMON_CFLAGS)
 AC_SUBST(COMMON_LIBS)
 
 PKG_CHECK_MODULES(WIDGETS,
+                  gmodule-2.0 >= $GLIB_REQ_VER
                   $GTK_MODULE >= $GTK_REQ_VER)
 AC_SUBST(WIDGETS_CFLAGS)
 AC_SUBST(WIDGETS_LIBS)
 
 PKG_CHECK_MODULES(MONITOR,
-                  $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
-                  libnotify)
+                  libnotify >= NOTIFY_REQ_VER)
 AC_SUBST(MONITOR_CFLAGS)
 AC_SUBST(MONITOR_LIBS)
 

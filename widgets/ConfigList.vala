@@ -74,24 +74,32 @@ public class ConfigList : ConfigWidget
     var selection = tree.get_selection();
     selection.set_mode(Gtk.SelectionMode.MULTIPLE);
     
-    mnemonic_activate.connect((w, g) => {return tree.mnemonic_activate(g);});
-    key_press_event.connect((w, e) => {
-      uint modifiers = Gtk.accelerator_get_default_mod_mask();
-      
-      // Vala keysym bindings would be nice.  Check for delete or kp_delete
-      if ((e.keyval == 0xffff || e.keyval == 0xff9f) && modifiers == 0) {
-        handle_remove();
-        return true;
-      }
-      else
-        return false;
-    });
+    mnemonic_activate.connect(on_mnemonic_activate);
+    key_press_event.connect(on_key_press_event);
     
     set_from_config();
     handle_selection_change(selection);
     selection.changed.connect(handle_selection_change);
   }
   
+  bool on_mnemonic_activate(Gtk.Widget w, bool g)
+  {
+    return tree.mnemonic_activate(g);
+  }
+
+  bool on_key_press_event(Gtk.Widget w, Gdk.EventKey e)
+  {
+    uint modifiers = Gtk.accelerator_get_default_mod_mask();
+    
+    // Vala keysym bindings would be nice.  Check for delete or kp_delete
+    if ((e.keyval == 0xffff || e.keyval == 0xff9f) && modifiers == 0) {
+      handle_remove();
+      return true;
+    }
+    else
+      return false;
+  }
+
   protected override async void set_from_config()
   {
     var slist_val = settings.get_value(key);

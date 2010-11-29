@@ -30,6 +30,7 @@ public class OperationBackup : Operation
   
   protected async override void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
+    /* If successfully completed, update time of last backup and run base operation_finished */
     if (success) {
       try {DejaDup.update_last_run_timestamp();}
       catch (Error e) {warning("%s\n", e.message);}
@@ -99,9 +100,13 @@ public class OperationBackup : Operation
     
     // User doesn't care about cache
     string dir = Environment.get_user_cache_dir();
-    if (dir != null)
+    if (dir != null) {
       rv.append(dir);
-    
+      // We also add our special cache dir because if the user still especially
+      // includes the cache dir, we still won't backup our own metadata.
+      rv.append(Path.build_filename(dir, Config.PACKAGE));
+    }
+
     // Likewise, user doesn't care about cache-like thumbnail directory
     dir = Environment.get_home_dir();
     if (dir != null) {
