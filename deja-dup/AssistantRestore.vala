@@ -48,7 +48,7 @@ public class AssistantRestore : AssistantOperation
   DejaDup.Operation.State op_state;
   Gtk.ProgressBar query_progress_bar;
   uint query_timeout_id;
-  Gtk.ComboBox date_combo;
+  Gtk.ComboBoxText date_combo;
   Gtk.ListStore date_store;
   Gtk.HBox cust_box;
   Gtk.FileChooserButton cust_button;
@@ -128,7 +128,7 @@ public class AssistantRestore : AssistantOperation
   Gtk.Widget make_date_page()
   {
     date_store = new Gtk.ListStore(2, typeof(string), typeof(string));
-    date_combo = new Gtk.ComboBox.text();
+    date_combo = new Gtk.ComboBoxText();
     date_combo.model = date_store;
     
     var date_label = new Gtk.Label(_("_Date:"));

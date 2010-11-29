@@ -63,15 +63,16 @@ class DejaDupPreferences : Object
 
     DejaDup.initialize();
 
-    var app = new Gtk.Application("org.gnome.DejaDup.Preferences", ref args);
+    //var app = new Gtk.Application("org.gnome.DejaDup.Preferences", ref args);
     Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
     Gtk.Window.set_default_icon_name(Config.PACKAGE);
 
     var prefs = new PreferencesDialog();
-    app.add_window(prefs);
+    //app.add_window(prefs);
     prefs.show_all();
 
-    app.run();
+    //app.run();
+    Gtk.main();
 
     return 0;
   }
