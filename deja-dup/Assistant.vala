@@ -92,7 +92,7 @@ public abstract class Assistant : Gtk.Dialog
     page_box = new Gtk.EventBox();
     evbox.pack_start(page_box, true, true, 0);
 
-    var content_area = (Gtk.VBox)get_content_area();
+    var content_area = (Gtk.Box)get_content_area();
     content_area.add(ebox);
     content_area.show_all();
 
@@ -292,7 +292,7 @@ public abstract class Assistant : Gtk.Dialog
       break;
     }
 
-    var area = (Gtk.HButtonBox)get_action_area();
+    var area = (Gtk.ButtonBox)get_action_area();
     if (cancel_button != null) {
       area.remove(cancel_button); cancel_button = null;}
     if (close_button != null) {
