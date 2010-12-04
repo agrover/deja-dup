@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-13 20:17-0400\n"
-"PO-Revision-Date: 2010-06-20 17:37+0000\n"
-"Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
+"POT-Creation-Date: 2010-11-23 20:38-0500\n"
+"PO-Revision-Date: 2010-10-31 13:36+0000\n"
+"Last-Translator: Kwpolska <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-06-21 03:43+0000\n"
+"X-Launchpad-Export-Date: 2010-12-02 01:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -31,9 +31,8 @@ msgstr "Backup Tool"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, it
 #. may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:44
-#: ../deja-dup/main.vala:70 ../deja-dup/MainWindow.vala:28
-#: ../deja-dup/StatusIcon.vala:63
+#: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:83
+#: ../deja-dup/MainWindow.vala:28
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
 
@@ -44,7 +43,7 @@ msgstr "Déjà Dup Backup Tool"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:328
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:324
 msgid "Déjà Dup Monitor"
 msgstr "Déjà Dup Monitor"
 
@@ -52,11 +51,28 @@ msgstr "Déjà Dup Monitor"
 msgid "Schedule backups at regular intervals"
 msgstr "Schedule backups at regular intervals"
 
-#: ../data/deja-dup.schemas.in.h:1
+#: ../data/deja-dup-preferences.desktop.in.h:1
+msgid "Backup Preferences"
+msgstr "Backup Preferences"
+
+#: ../data/deja-dup-preferences.desktop.in.h:2
+msgid "Change your backup settings"
+msgstr "Change your backup settings"
+
+#: ../data/deja-dup-preferences.desktop.in.h:3
+msgid "Déjà Dup Backup Preferences"
+msgstr "Déjà Dup Backup Preferences"
+
+#: ../data/deja-dup-preferences.desktop.in.h:4
+#: ../preferences/PreferencesDialog.vala:41 ../preferences/preferences.vala:64
+msgid "Déjà Dup Preferences"
+msgstr "Déjà Dup Preferences"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 msgid "Amazon S3 Access Key ID"
 msgstr "Amazon S3 Access Key ID"
 
-#: ../data/deja-dup.schemas.in.h:2
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:2
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
@@ -64,39 +80,39 @@ msgstr ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
 
-#: ../data/deja-dup.schemas.in.h:3
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
 msgid "Backup location"
 msgstr "Backup location"
 
-#: ../data/deja-dup.schemas.in.h:4
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:4
 msgid "Directories not to back up"
 msgstr "Directories not to back up"
 
-#: ../data/deja-dup.schemas.in.h:5
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
 msgid "Directories to back up"
 msgstr "Directories to back up"
 
-#: ../data/deja-dup.schemas.in.h:6
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
 msgid "Folder type"
 msgstr "Folder type"
 
-#: ../data/deja-dup.schemas.in.h:7
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:7
 msgid "Full name of the external volume"
 msgstr "Full name of the external volume"
 
-#: ../data/deja-dup.schemas.in.h:8
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:8
 msgid "How long to keep backup files"
 msgstr "How long to keep backup files"
 
-#: ../data/deja-dup.schemas.in.h:9
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:9
 msgid "How often to periodically back up"
 msgstr "How often to periodically back up"
 
-#: ../data/deja-dup.schemas.in.h:10
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:10
 msgid "Icon of the external volume"
 msgstr "Icon of the external volume"
 
-#: ../data/deja-dup.schemas.in.h:11
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:11
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -104,7 +120,7 @@ msgstr ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
 
-#: ../data/deja-dup.schemas.in.h:12
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:12
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -112,13 +128,13 @@ msgstr ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
 
-#: ../data/deja-dup.schemas.in.h:13
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:13
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
 "If the backup location is on an external volume, this is the volume’s icon."
 
-#: ../data/deja-dup.schemas.in.h:14
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:14
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -126,7 +142,7 @@ msgstr ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
 
-#: ../data/deja-dup.schemas.in.h:15
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:15
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
@@ -134,31 +150,35 @@ msgstr ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
 
-#: ../data/deja-dup.schemas.in.h:16
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:16
 msgid "Location in which to hold the backup files."
 msgstr "Location in which to hold the backup files."
 
-#: ../data/deja-dup.schemas.in.h:17
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:17
+msgid "Obsolete"
+msgstr "Obsolete"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:18
 msgid "Relative path under the external volume"
 msgstr "Relative path under the external volume"
 
-#: ../data/deja-dup.schemas.in.h:18
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:19
 msgid "Short name of the external volume"
 msgstr "Short name of the external volume"
 
-#: ../data/deja-dup.schemas.in.h:19
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:20
 msgid "The Amazon S3 bucket name to use"
 msgstr "The Amazon S3 bucket name to use"
 
-#: ../data/deja-dup.schemas.in.h:20
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:21
 msgid "The Amazon S3 folder"
 msgstr "The Amazon S3 folder"
 
-#: ../data/deja-dup.schemas.in.h:21
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
 msgid "The last time Déjà Dup was run"
 msgstr "The last time Déjà Dup was run"
 
-#: ../data/deja-dup.schemas.in.h:22
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
@@ -166,11 +186,11 @@ msgstr ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
 
-#: ../data/deja-dup.schemas.in.h:23
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "The number of days between backups."
 msgstr "The number of days between backups."
 
-#: ../data/deja-dup.schemas.in.h:24
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
@@ -180,11 +200,11 @@ msgstr ""
 "means forever. This is a minimum number of days; the files may be kept "
 "longer."
 
-#: ../data/deja-dup.schemas.in.h:25
-msgid "The type of backup location. Valid values are ‘s3’ or ‘file’."
-msgstr "The type of backup location. Valid values are ‘s3’ or ‘file’."
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+msgid "The type of backup location."
+msgstr "The type of backup location."
 
-#: ../data/deja-dup.schemas.in.h:26
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
@@ -196,45 +216,41 @@ msgstr ""
 "and $VIDEO are recognised as the user’s special directories. Relative "
 "entries are relative to the user’s home directory."
 
-#: ../data/deja-dup.schemas.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
 "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
-"directories. Relative entries are relative to the user’s home directory. "
-"This list takes precedence over the include list."
+"directories. Relative entries are relative to the user’s home directory."
 msgstr ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
 "$TEMPLATES, $TRASH, and $VIDEO are recognised as the user’s special "
-"directories. Relative entries are relative to the user’s home directory. "
-"This list takes precedence over the include list."
+"directories. Relative entries are relative to the user’s home directory."
 
-#: ../data/deja-dup.schemas.in.h:28
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid "Type of location to store backup"
 msgstr "Type of location to store backup"
 
-#: ../data/deja-dup.schemas.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
 msgid "Unique ID of the external volume"
 msgstr "Unique ID of the external volume"
 
-#: ../data/deja-dup.schemas.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid ""
-"Whether the backup location is a mounted external volume or a normal folder. "
-"Possible values are ‘volume’ or ‘normal’."
+"Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
-"Whether the backup location is a mounted external volume or a normal folder. "
-"Possible values are ‘volume’ or ‘normal’."
+"Whether the backup location is a mounted external volume or a normal folder."
 
-#: ../data/deja-dup.schemas.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid "Whether to automatically back up on a regular schedule."
 msgstr "Whether to automatically back up on a regular schedule."
 
-#: ../data/deja-dup.schemas.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "Whether to encrypt your backup"
 msgstr "Whether to encrypt your backup"
 
-#: ../data/deja-dup.schemas.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
 "Whether to encrypt your backup files in the storage location. It’s strongly "
 "recommended to leave this as ‘true’."
@@ -242,15 +258,15 @@ msgstr ""
 "Whether to encrypt your backup files in the storage location. It’s strongly "
 "recommended to leave this as ‘true’."
 
-#: ../data/deja-dup.schemas.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "Whether to periodically back up"
 msgstr "Whether to periodically back up"
 
-#: ../data/deja-dup.schemas.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "Whether to request the root password"
 msgstr "Whether to request the root password"
 
-#: ../data/deja-dup.schemas.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
@@ -258,7 +274,7 @@ msgstr ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
 
-#: ../data/deja-dup.schemas.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -266,15 +282,23 @@ msgstr ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 
-#: ../data/deja-dup.schemas.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 
-#: ../deja-dup/Assistant.vala:281
+#: ../data/ui/restore-missing.ui.h:1
+msgid "Folder:"
+msgstr "Folder:"
+
+#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:172
+msgid "Scanning…"
+msgstr "Scanning…"
+
+#: ../deja-dup/Assistant.vala:285
 msgid "Co_ntinue"
 msgstr "Co_ntinue"
 
-#: ../deja-dup/Assistant.vala:315 ../deja-dup/StatusIcon.vala:155
+#: ../deja-dup/Assistant.vala:320 ../deja-dup/StatusIcon.vala:73
 msgid "_Resume Later"
 msgstr "_Resume Later"
 
@@ -288,7 +312,7 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "_Back Up"
 
-#: ../deja-dup/AssistantBackup.vala:52 ../deja-dup/AssistantRestore.vala:93
+#: ../deja-dup/AssistantBackup.vala:52 ../deja-dup/AssistantRestore.vala:94
 #: ../preferences/PreferencesDialog.vala:90
 msgid "_Backup location:"
 msgstr "_Backup location:"
@@ -309,15 +333,15 @@ msgid "E_xcept files in folders:"
 msgstr "E_xcept files in folders:"
 
 #: ../deja-dup/AssistantBackup.vala:119 ../deja-dup/AssistantBackup.vala:123
-#: ../deja-dup/AssistantRestore.vala:113
+#: ../deja-dup/AssistantRestore.vala:114
 msgid "Preferences"
 msgstr "Preferences"
 
-#: ../deja-dup/AssistantBackup.vala:139 ../deja-dup/AssistantRestore.vala:209
+#: ../deja-dup/AssistantBackup.vala:139 ../deja-dup/AssistantRestore.vala:210
 msgid "Backup location:"
 msgstr "Backup location:"
 
-#: ../deja-dup/AssistantBackup.vala:146 ../deja-dup/AssistantRestore.vala:216
+#: ../deja-dup/AssistantBackup.vala:146 ../deja-dup/AssistantRestore.vala:217
 msgid "Encrypted:"
 msgstr "Encrypted:"
 
@@ -331,224 +355,307 @@ msgstr "Except for:"
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:194
+#: ../deja-dup/AssistantBackup.vala:200
 msgid "Backing up:"
 msgstr "Backing up:"
 
-#: ../deja-dup/AssistantBackup.vala:204
+#: ../deja-dup/AssistantBackup.vala:210
 #: ../preferences/PreferencesDialog.vala:208
 msgid "_Automatically back up on a regular schedule"
 msgstr "_Automatically back up on a regular schedule"
 
-#: ../deja-dup/AssistantBackup.vala:207
+#: ../deja-dup/AssistantBackup.vala:213
 #: ../preferences/PreferencesDialog.vala:215
 #, c-format
 msgid "How _often to back up:"
 msgstr "How _often to back up:"
 
-#: ../deja-dup/AssistantBackup.vala:234
+#: ../deja-dup/AssistantBackup.vala:240
 msgid "Backup Failed"
 msgstr "Backup Failed"
 
-#: ../deja-dup/AssistantBackup.vala:237
+#: ../deja-dup/AssistantBackup.vala:243
 msgid "Backup Finished"
 msgstr "Backup Finished"
 
-#: ../deja-dup/AssistantBackup.vala:238
+#: ../deja-dup/AssistantBackup.vala:244
 msgid "Your files were successfully backed up."
 msgstr "Your files were successfully backed up."
 
-#: ../deja-dup/AssistantBackup.vala:259 ../common/Operation.vala:52
-msgid "Backing up…"
-msgstr "Backing up…"
+#: ../deja-dup/AssistantBackup.vala:262
+msgid "Backing Up…"
+msgstr "Backing Up..."
 
-#: ../deja-dup/AssistantOperation.vala:134
+#: ../deja-dup/AssistantOperation.vala:171
 msgid "Scanning:"
 msgstr "Scanning:"
 
-#: ../deja-dup/AssistantOperation.vala:135
-msgid "Scanning…"
-msgstr "Scanning…"
-
-#: ../deja-dup/AssistantOperation.vala:208
+#: ../deja-dup/AssistantOperation.vala:245
 msgid "_Details"
 msgstr "_Details"
 
-#: ../deja-dup/AssistantOperation.vala:257
+#: ../deja-dup/AssistantOperation.vala:294
 msgid "E_ncryption password:"
 msgstr "E_ncryption password:"
 
-#: ../deja-dup/AssistantOperation.vala:266
+#: ../deja-dup/AssistantOperation.vala:303
 msgid "_Show password"
 msgstr "_Show password"
 
-#: ../deja-dup/AssistantOperation.vala:273
+#: ../deja-dup/AssistantOperation.vala:310
 #: ../deja-dup/MountOperationAssistant.vala:28
 msgid "_Remember password"
 msgstr "_Remember password"
 
-#: ../deja-dup/AssistantOperation.vala:348
+#: ../deja-dup/AssistantOperation.vala:387
 msgid "Summary"
 msgstr "Summary"
 
-#: ../deja-dup/AssistantOperation.vala:363
-msgid "Password needed"
-msgstr "Password needed"
+#: ../deja-dup/AssistantOperation.vala:402
+msgid "Password Needed"
+msgstr "Password Needed"
 
-#: ../deja-dup/AssistantOperation.vala:578
+#: ../deja-dup/AssistantOperation.vala:624
 msgid "Déjà Dup backup passphrase"
 msgstr "Déjà Dup backup passphrase"
 
-#: ../deja-dup/AssistantRestore.vala:71
+#: ../deja-dup/AssistantRestore.vala:72
 msgid "Restore"
 msgstr "Restore"
 
-#: ../deja-dup/AssistantRestore.vala:72
+#: ../deja-dup/AssistantRestore.vala:73
 msgid "_Restore"
 msgstr "_Restore"
 
-#: ../deja-dup/AssistantRestore.vala:100
+#: ../deja-dup/AssistantRestore.vala:101
 msgid "Backup files are _encrypted"
 msgstr "Backup files are _encrypted"
 
-#: ../deja-dup/AssistantRestore.vala:134
+#: ../deja-dup/AssistantRestore.vala:135
 msgid "_Date:"
 msgstr "_Date:"
 
-#: ../deja-dup/AssistantRestore.vala:157
+#: ../deja-dup/AssistantRestore.vala:158
 msgid "Restore files to _original locations"
 msgstr "Restore files to _original locations"
 
-#: ../deja-dup/AssistantRestore.vala:162
+#: ../deja-dup/AssistantRestore.vala:163
 msgid "Restore to _specific folder"
 msgstr "Restore to _specific folder"
 
-#: ../deja-dup/AssistantRestore.vala:172
+#: ../deja-dup/AssistantRestore.vala:173
 msgid "Choose destination for restored files"
 msgstr "Choose destination for restored files"
 
-#: ../deja-dup/AssistantRestore.vala:176
+#: ../deja-dup/AssistantRestore.vala:177
 msgid "Restore _folder:"
 msgstr "Restore _folder:"
 
-#: ../deja-dup/AssistantRestore.vala:223
+#: ../deja-dup/AssistantRestore.vala:224
 msgid "Restore date:"
 msgstr "Restore date:"
 
-#: ../deja-dup/AssistantRestore.vala:232
+#: ../deja-dup/AssistantRestore.vala:233
 msgid "Restore folder:"
 msgstr "Restore folder:"
 
-#: ../deja-dup/AssistantRestore.vala:256
-msgid "Checking for Backups"
-msgstr "Checking for Backups"
+#: ../deja-dup/AssistantRestore.vala:257
+msgid "Checking for Backups…"
+msgstr "Checking for Backups…"
 
-#: ../deja-dup/AssistantRestore.vala:264
+#: ../deja-dup/AssistantRestore.vala:265
 msgid "Restore from When?"
 msgstr "Restore from When?"
 
-#: ../deja-dup/AssistantRestore.vala:272
+#: ../deja-dup/AssistantRestore.vala:273
 msgid "Restore to Where?"
 msgstr "Restore to Where?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:300
+#: ../deja-dup/AssistantRestore.vala:301
 msgid "Restoring:"
 msgstr "Restoring:"
 
+#. Translators: %x is the current date, %X is the current time.
+#. This will be in a list with other strings that just have %x (the
+#. current date).  So make sure if you change this, it still makes
+#. sense in that context.
 #: ../deja-dup/AssistantRestore.vala:348
+#, c-format
+msgid "%x %X"
+msgstr ""
+
+#: ../deja-dup/AssistantRestore.vala:361
 msgid "No backups to restore"
 msgstr "No backups to restore"
 
-#: ../deja-dup/AssistantRestore.vala:436
+#: ../deja-dup/AssistantRestore.vala:442
 msgid "Original location"
 msgstr "Original location"
 
-#: ../deja-dup/AssistantRestore.vala:449
+#: ../deja-dup/AssistantRestore.vala:455
 msgid "File to restore:"
 msgid_plural "Files to restore:"
 msgstr[0] "File to restore:"
 msgstr[1] "Files to restore:"
 
-#: ../deja-dup/AssistantRestore.vala:473
+#: ../deja-dup/AssistantRestore.vala:479
 msgid "Restore Failed"
 msgstr "Restore Failed"
 
-#: ../deja-dup/AssistantRestore.vala:475
+#: ../deja-dup/AssistantRestore.vala:481
 msgid "Restore Finished"
 msgstr "Restore Finished"
 
-#: ../deja-dup/AssistantRestore.vala:477
+#: ../deja-dup/AssistantRestore.vala:483
 msgid "Your files were successfully restored."
 msgstr "Your files were successfully restored."
 
-#: ../deja-dup/AssistantRestore.vala:479
+#: ../deja-dup/AssistantRestore.vala:485
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Your file was successfully restored."
 msgstr[1] "Your files were successfully restored."
 
-#: ../deja-dup/AssistantRestore.vala:485 ../common/Operation.vala:54
+#: ../deja-dup/AssistantRestore.vala:491 ../common/Operation.vala:74
 msgid "Restoring…"
 msgstr "Restoring…"
 
-#: ../deja-dup/main.vala:32 ../monitor/monitor.vala:33
+#: ../deja-dup/AssistantRestoreMissing.vala:189
+msgid "File"
+msgstr "File"
+
+#: ../deja-dup/AssistantRestoreMissing.vala:190
+msgid "Last seen"
+msgstr "Last seen"
+
+#: ../deja-dup/AssistantRestoreMissing.vala:205
+msgid "Restore which Files?"
+msgstr "Restore which Files?"
+
+#: ../deja-dup/AssistantRestoreMissing.vala:336
+msgid "Scanning for files from yesterday…"
+msgstr "Scanning for files from yesterday…"
+
+#: ../deja-dup/AssistantRestoreMissing.vala:339
+msgid "Scanning for files from last week…"
+msgstr "Scanning for files from last week…"
+
+#: ../deja-dup/AssistantRestoreMissing.vala:342
+msgid "Scanning for files from last month…"
+msgstr "Scanning for files from last month…"
+
+#: ../deja-dup/AssistantRestoreMissing.vala:346
+#, c-format
+msgid "Scanning for files from about a month ago…"
+msgid_plural "Scanning for files from about %d months ago…"
+msgstr[0] "Scanning for files from about a month ago…"
+msgstr[1] "Scanning for files from about %d months ago…"
+
+#: ../deja-dup/AssistantRestoreMissing.vala:352
+#, c-format
+msgid "Scanning for files from about a year ago…"
+msgid_plural "Scanning for files from about %d years ago…"
+msgstr[0] "Scanning for files from about a year ago…"
+msgstr[1] "Scanning for files from about %d years ago…"
+
+#: ../deja-dup/AssistantRestoreMissing.vala:442
+msgid "Scanning finished"
+msgstr "Scanning finished"
+
+#: ../deja-dup/main.vala:33 ../monitor/monitor.vala:33
 #: ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr "Show version"
 
-#: ../deja-dup/main.vala:33
+#: ../deja-dup/main.vala:34
 msgid "Restore given files"
 msgstr "Restore given files"
 
-#: ../deja-dup/main.vala:34
+#: ../deja-dup/main.vala:35
 msgid "Immediately start a backup"
 msgstr "Immediately start a backup"
 
-#: ../deja-dup/main.vala:50
+#: ../deja-dup/main.vala:36
+msgid "Restore deleted files"
+msgstr "Restore deleted files"
+
+#: ../deja-dup/main.vala:52
 msgid "No filenames provided"
 msgstr "No filenames provided"
 
-#: ../deja-dup/MainWindow.vala:47 ../deja-dup/MainWindow.vala:194
+#: ../deja-dup/main.vala:60
+msgid "No directory provided"
+msgstr "No directory provided"
+
+#: ../deja-dup/main.vala:65
+msgid "Only one directory can be shown at once"
+msgstr "Only one directory can be shown at once"
+
+#: ../deja-dup/main.vala:86
+msgid "FILES"
+msgstr ""
+
+#: ../deja-dup/main.vala:87
+msgid "DIRECTORY"
+msgstr ""
+
+#. Translators: Wrap this to 80 characters per line if you can, as I have for English
+#: ../deja-dup/main.vala:91
+msgid ""
+"Déjà Dup is a simple backup tool.  It hides the complexity of backing up\n"
+"the 'right way' (encrypted, off-site, and regular) and uses duplicity as\n"
+"the backend."
+msgstr ""
+
+#: ../deja-dup/main.vala:135
+msgid "Directory does not exists"
+msgstr "Directory does not exists"
+
+#: ../deja-dup/main.vala:139
+msgid "You must provide a directory, not a file"
+msgstr "You must provide a directory, not a file"
+
+#: ../deja-dup/MainWindow.vala:49 ../deja-dup/MainWindow.vala:196
 msgid "_Restore…"
 msgstr "_Restore…"
 
-#: ../deja-dup/MainWindow.vala:74 ../deja-dup/MainWindow.vala:188
+#: ../deja-dup/MainWindow.vala:76 ../deja-dup/MainWindow.vala:190
 msgctxt "back up is verb"
 msgid "_Back Up…"
 msgstr "_Back Up…"
 
-#: ../deja-dup/MainWindow.vala:172
+#: ../deja-dup/MainWindow.vala:174
 msgid "Could not open preferences"
 msgstr "Could not open preferences"
 
-#: ../deja-dup/MainWindow.vala:185
+#: ../deja-dup/MainWindow.vala:187
 msgctxt "backup is noun"
 msgid "_Backup"
 msgstr "_Backup"
 
-#: ../deja-dup/MainWindow.vala:204
+#: ../deja-dup/MainWindow.vala:206
 msgid "_Edit"
 msgstr "_Edit"
 
-#: ../deja-dup/MainWindow.vala:211
+#: ../deja-dup/MainWindow.vala:213
 msgid "_Help"
 msgstr "_Help"
 
-#: ../deja-dup/MainWindow.vala:214
+#: ../deja-dup/MainWindow.vala:216
 msgid "_Contents"
 msgstr "_Contents"
 
-#: ../deja-dup/MainWindow.vala:218
+#: ../deja-dup/MainWindow.vala:220
 msgid "Get Help _Online…"
 msgstr "Get Help _Online…"
 
-#: ../deja-dup/MainWindow.vala:222
+#: ../deja-dup/MainWindow.vala:224
 msgid "_Translate This Application…"
 msgstr "_Translate This Application…"
 
-#: ../deja-dup/MainWindow.vala:226
+#: ../deja-dup/MainWindow.vala:228
 msgid "_Report a Problem…"
 msgstr "_Report a Problem…"
 
@@ -572,113 +679,116 @@ msgstr "Location not available"
 msgid "This backup location requires authentication."
 msgstr "This backup location requires authentication."
 
-#: ../deja-dup/MountOperationAssistant.vala:136
+#: ../deja-dup/MountOperationAssistant.vala:138
 msgid "Connect _anonymously"
 msgstr "Connect _anonymously"
 
-#: ../deja-dup/MountOperationAssistant.vala:140
+#: ../deja-dup/MountOperationAssistant.vala:142
 msgid "Connect as u_ser:"
 msgstr "Connect as u_ser:"
 
-#: ../deja-dup/MountOperationAssistant.vala:180
+#: ../deja-dup/MountOperationAssistant.vala:182
 msgid "_Domain:"
 msgstr "_Domain:"
 
-#: ../deja-dup/StatusIcon.vala:100
+#: ../deja-dup/StatusIcon.vala:75
+msgid "_Delay Backup"
+msgstr "_Delay Backup"
+
+#: ../deja-dup/StatusIcon.vala:77
+msgid "_Cancel Backup"
+msgstr "_Cancel Backup"
+
+#: ../deja-dup/StatusIcon.vala:78
+msgid "_Skip Backup"
+msgstr "_Skip Backup"
+
+#: ../deja-dup/StatusIcon.vala:127
+msgid "Déjà Du_p"
+msgstr "Déjà Du_p"
+
+#: ../deja-dup/StatusIcon.vala:199
+msgid "Starting scheduled backup"
+msgstr "Starting scheduled backup"
+
+#: ../deja-dup/StatusIcon.vala:241
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% complete"
 
-#: ../deja-dup/StatusIcon.vala:105
-#, c-format
-msgid "Show _Progress (%.1f%%)"
-msgstr "Show _Progress (%.1f%%)"
-
-#: ../deja-dup/StatusIcon.vala:107
-msgid "Show _Progress"
-msgstr "Show _Progress"
-
-#: ../deja-dup/StatusIcon.vala:157
-msgid "_Delay Backup"
-msgstr "_Delay Backup"
-
-#: ../deja-dup/StatusIcon.vala:162
-msgid "_Skip Backup"
-msgstr "_Skip Backup"
-
-#: ../common/BackendFile.vala:73
+#: ../common/BackendFile.vala:74
 msgid "GVFS FUSE is not installed"
 msgstr "GVFS FUSE is not installed"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:87
+#: ../common/BackendFile.vala:89
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s on %2$s"
 
-#: ../common/BackendFile.vala:125
+#: ../common/BackendFile.vala:127
 #, c-format
 msgid "Backup will begin when %s becomes connected."
 msgstr "Backup will begin when %s becomes connected."
 
-#: ../common/BackendFile.vala:132 ../common/BackendS3.vala:51
+#: ../common/BackendFile.vala:134 ../common/BackendS3.vala:51
 msgid "Backup will begin when a network connection becomes available."
 msgstr "Backup will begin when a network connection becomes available."
 
-#: ../common/BackendFile.vala:367
+#: ../common/BackendFile.vala:361
 msgid "Backup location not available"
 msgstr "Backup location not available"
 
-#: ../common/BackendFile.vala:367
+#: ../common/BackendFile.vala:361
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Waiting for ‘%s’ to become connected…"
 
 #. Translators: %s is a folder.
-#: ../common/BackendS3.vala:129
+#: ../common/BackendS3.vala:124
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "%s on Amazon S3"
 
-#: ../common/BackendS3.vala:176
+#: ../common/BackendS3.vala:171
 msgid "Permission denied"
 msgstr "Permission denied"
 
-#: ../common/BackendS3.vala:197
+#: ../common/BackendS3.vala:192
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 
-#: ../common/BackendS3.vala:198
+#: ../common/BackendS3.vala:193
 msgid "_Access key ID:"
 msgstr "_Access key ID:"
 
-#: ../common/BackendS3.vala:199
+#: ../common/BackendS3.vala:194
 msgid "_Secret access key:"
 msgstr "_Secret access key:"
 
-#: ../common/BackendS3.vala:200
+#: ../common/BackendS3.vala:195
 msgid "S_how secret access key"
 msgstr "S_how secret access key"
 
-#: ../common/BackendS3.vala:201
+#: ../common/BackendS3.vala:196
 msgid "_Remember secret access key"
 msgstr "_Remember secret access key"
 
-#: ../common/BackendS3.vala:203
+#: ../common/BackendS3.vala:198
 msgid "Enter Amazon S3 access key"
 msgstr "Enter Amazon S3 access key"
 
-#: ../common/CommonUtils.vala:241
+#: ../common/CommonUtils.vala:188
 msgid "Unknown"
 msgstr "Unknown"
 
-#: ../common/DuplicityInfo.vala:141
+#: ../common/DuplicityInfo.vala:140
 msgid "Could not run duplicity"
 msgstr "Could not run duplicity"
 
-#: ../common/DuplicityInfo.vala:146
+#: ../common/DuplicityInfo.vala:145
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -686,7 +796,7 @@ msgstr ""
 "Could not understand duplicity version.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:148
+#: ../common/DuplicityInfo.vala:147
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -695,15 +805,15 @@ msgstr ""
 "Could not understand duplicity version ‘%s’.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:150
+#: ../common/DuplicityInfo.vala:149
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr "Without duplicity, Déjà Dup cannot function.  It will close now."
 
-#: ../common/DuplicityInfo.vala:154
+#: ../common/DuplicityInfo.vala:153
 msgid "Duplicity’s version is too old"
 msgstr "Duplicity’s version is too old"
 
-#: ../common/DuplicityInfo.vala:155
+#: ../common/DuplicityInfo.vala:154
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -712,20 +822,34 @@ msgstr ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
 "version %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:114 ../common/Duplicity.vala:168
+#: ../common/Duplicity.vala:127 ../common/Duplicity.vala:179
 msgid "Paused (no network)"
 msgstr "Paused (no network)"
 
-#: ../common/Duplicity.vala:277 ../common/Duplicity.vala:285
-#: ../common/Duplicity.vala:320 ../common/Operation.vala:95
+#: ../common/Duplicity.vala:290 ../common/Duplicity.vala:298
+#: ../common/Duplicity.vala:315 ../common/Operation.vala:80
+#: ../common/Operation.vala:116
 msgid "Preparing…"
 msgstr "Preparing…"
 
-#: ../common/Duplicity.vala:308
+#. Tiny backup location.  Suggest they get a larger one.
+#: ../common/Duplicity.vala:404
+msgid "Backup location is too small.  Try using one with more space."
+msgstr "Backup location is too small.  Try using one with more space."
+
+#: ../common/Duplicity.vala:425
+msgid "Backup location does not have enough free space."
+msgstr "Backup location does not have enough free space."
+
+#: ../common/Duplicity.vala:445 ../common/Duplicity.vala:459
+msgid "Cleaning up…"
+msgstr "Cleaning up…"
+
+#: ../common/Duplicity.vala:521
 msgid "Creating the first backup.  This may take a while."
 msgstr "Creating the first backup.  This may take a while."
 
-#: ../common/Duplicity.vala:310
+#: ../common/Duplicity.vala:523
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -733,37 +857,24 @@ msgstr ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
 
-#. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:407
-msgid "Backup location is too small.  Try using one with more space."
-msgstr "Backup location is too small.  Try using one with more space."
-
-#: ../common/Duplicity.vala:428
-msgid "Backup location does not have enough free space."
-msgstr "Backup location does not have enough free space."
-
-#: ../common/Duplicity.vala:448 ../common/Duplicity.vala:462
-msgid "Cleaning up…"
-msgstr "Cleaning up…"
-
-#: ../common/Duplicity.vala:554 ../common/Duplicity.vala:881
+#: ../common/Duplicity.vala:572 ../common/Duplicity.vala:925
 msgid "Failed with an unknown error."
 msgstr "Failed with an unknown error."
 
-#: ../common/Duplicity.vala:748
+#: ../common/Duplicity.vala:792
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Could not restore ‘%s’: File not found in backup"
 
-#: ../common/Duplicity.vala:753 ../common/Duplicity.vala:832
+#: ../common/Duplicity.vala:797 ../common/Duplicity.vala:876
 msgid "Bad encryption password."
 msgstr "Bad encryption password."
 
-#: ../common/Duplicity.vala:758
+#: ../common/Duplicity.vala:802
 msgid "Computer name changed"
 msgstr "Computer name changed"
 
-#: ../common/Duplicity.vala:758
+#: ../common/Duplicity.vala:802
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -774,68 +885,68 @@ msgstr ""
 "name is %s.  If this is unexpected, you should back up to a different "
 "location."
 
-#: ../common/Duplicity.vala:771
+#: ../common/Duplicity.vala:815
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Permission denied when trying to create ‘%s’."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:775 ../common/Duplicity.vala:779
+#: ../common/Duplicity.vala:819 ../common/Duplicity.vala:823
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Permission denied when trying to read ‘%s’."
 
-#: ../common/Duplicity.vala:783
+#: ../common/Duplicity.vala:827
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Permission denied when trying to delete ‘%s’."
 
-#: ../common/Duplicity.vala:790
+#: ../common/Duplicity.vala:834
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Backup location ‘%s’ does not exist."
 
-#: ../common/Duplicity.vala:796 ../common/Duplicity.vala:851
+#: ../common/Duplicity.vala:840 ../common/Duplicity.vala:895
 msgid "No space left."
 msgstr "No space left."
 
-#: ../common/Duplicity.vala:810
+#: ../common/Duplicity.vala:854
 msgid "Invalid ID."
 msgstr "Invalid ID."
 
-#: ../common/Duplicity.vala:812
+#: ../common/Duplicity.vala:856
 msgid "Invalid secret key."
 msgstr "Invalid secret key."
 
-#: ../common/Duplicity.vala:814
+#: ../common/Duplicity.vala:858
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Your Amazon Web Services account is not signed up for the S3 service."
 
-#: ../common/Duplicity.vala:827
+#: ../common/Duplicity.vala:871
 msgid "S3 bucket name is not available."
 msgstr "S3 bucket name is not available."
 
-#: ../common/Duplicity.vala:836
+#: ../common/Duplicity.vala:880
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Error reading file ‘%s’."
 
-#: ../common/Duplicity.vala:838
+#: ../common/Duplicity.vala:882
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Error writing file ‘%s’."
 
-#: ../common/Duplicity.vala:853
+#: ../common/Duplicity.vala:897
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "No space left in ‘%s’."
 
-#: ../common/Duplicity.vala:873
+#: ../common/Duplicity.vala:917
 msgid "No backup files found"
 msgstr "No backup files found"
 
-#: ../common/Duplicity.vala:909
+#: ../common/Duplicity.vala:956
 msgid "Uploading…"
 msgstr "Uploading…"
 
@@ -857,34 +968,45 @@ msgstr ""
 msgid "Could not restore %s: %s"
 msgstr "Could not restore %s: %s"
 
-#: ../common/Operation.vala:56
+#: ../common/Operation.vala:72
+msgid "Backing up…"
+msgstr "Backing up…"
+
+#: ../common/Operation.vala:76
 msgid "Checking for backups…"
 msgstr "Checking for backups…"
 
-#: ../common/Operation.vala:210
+#: ../common/Operation.vala:78
+msgid "Listing files…"
+msgstr "Listing files…"
+
+#: ../common/Operation.vala:258
 msgid "Another Déjà Dup is already running"
 msgstr "Another Déjà Dup is already running"
 
-#: ../monitor/monitor.vala:230
+#: ../monitor/monitor.vala:229
 msgid "Scheduled backup delayed"
 msgstr "Scheduled backup delayed"
 
-#: ../nautilus/NautilusExtension.c:94
+#: ../nautilus/NautilusExtension.c:90
+msgid "Restore missing files…"
+msgstr "Restore missing files…"
+
+#: ../nautilus/NautilusExtension.c:91
+msgid "Restore deleted files from backup"
+msgstr "Restore deleted files from backup"
+
+#: ../nautilus/NautilusExtension.c:123
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Revert to Previous Version…"
 msgstr[1] "Revert to Previous Versions…"
 
-#: ../nautilus/NautilusExtension.c:98
+#: ../nautilus/NautilusExtension.c:127
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Restore file from backup"
 msgstr[1] "Restore files from backup"
-
-#: ../preferences/PreferencesDialog.vala:41 ../preferences/preferences.vala:35
-#: ../preferences/preferences.vala:66
-msgid "Déjà Dup Preferences"
-msgstr "Déjà Dup Preferences"
 
 #: ../preferences/PreferencesDialog.vala:105
 #, c-format
@@ -949,70 +1071,82 @@ msgstr "At least a year"
 msgid "Forever"
 msgstr "Forever"
 
-#: ../widgets/ConfigDelete.vala:108
+#: ../widgets/ConfigDelete.vala:96
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
 msgstr[0] "At least %d day"
 msgstr[1] "At least %d days"
 
-#: ../widgets/ConfigLabelBool.vala:36
+#: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
 msgstr "Yes"
 
-#: ../widgets/ConfigLabelBool.vala:36
+#: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
 msgstr "No"
 
-#: ../widgets/ConfigLabelList.vala:56 ../widgets/ConfigList.vala:118
+#: ../widgets/ConfigLabelList.vala:50 ../widgets/ConfigList.vala:120
 msgid "Home Folder"
 msgstr "Home Folder"
 
-#: ../widgets/ConfigLabelList.vala:58 ../widgets/ConfigList.vala:120
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:122
 msgid "Trash"
 msgstr "Wastebasket"
 
-#: ../widgets/ConfigLabelPolicy.vala:66
+#: ../widgets/ConfigLabelPolicy.vala:71
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
 msgstr ""
+"Old backups will be kept for at least a week or until the backup location is "
+"low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:69
+#: ../widgets/ConfigLabelPolicy.vala:74
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
 msgstr ""
+"Old backups will be kept for at least a month or until the backup location "
+"is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:77
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
 msgstr ""
+"Old backups will be kept for at least two months or until the backup "
+"location is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:75
+#: ../widgets/ConfigLabelPolicy.vala:80
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
 msgstr ""
+"Old backups will be kept for at least three months or until the backup "
+"location is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:78
+#: ../widgets/ConfigLabelPolicy.vala:83
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
+"Old backups will be kept for at least six months or until the backup "
+"location is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:81
+#: ../widgets/ConfigLabelPolicy.vala:86
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 msgstr ""
+"Old backups will be kept for at least a year or until the backup location is "
+"low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:84
+#: ../widgets/ConfigLabelPolicy.vala:89
 msgid "Old backups will be kept until the backup location is low on space."
-msgstr ""
+msgstr "Old backups will be kept until the backup location is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:87
+#: ../widgets/ConfigLabelPolicy.vala:92
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1021,9 +1155,13 @@ msgid_plural ""
 "Old backups will be kept at least %d days or until the backup location is "
 "low on space."
 msgstr[0] ""
+"Old backups will be kept at least %d day or until the backup location is low "
+"on space."
 msgstr[1] ""
+"Old backups will be kept at least %d days or until the backup location is "
+"low on space."
 
-#: ../widgets/ConfigList.vala:157
+#: ../widgets/ConfigList.vala:159
 msgid "Choose folders"
 msgstr "Choose folders"
 
@@ -1052,7 +1190,7 @@ msgstr "Fortnightly"
 msgid "Monthly"
 msgstr "Monthly"
 
-#: ../widgets/ConfigPeriod.vala:96
+#: ../widgets/ConfigPeriod.vala:84
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1064,11 +1202,11 @@ msgstr[1] "Every %d days"
 msgid "Could not display %s"
 msgstr "Could not display %s"
 
-#: ../widgets/WidgetUtils.vala:74
+#: ../widgets/WidgetUtils.vala:75
 msgid "About Déjà Dup"
 msgstr "About Déjà Dup"
 
-#: ../widgets/WidgetUtils.vala:78
+#: ../widgets/WidgetUtils.vala:79
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -1078,11 +1216,12 @@ msgstr ""
 "  Huygens https://launchpad.net/~huygens-25\n"
 "  Jonathon Hodges https://launchpad.net/~jonblondie\n"
 "  Jonjo https://launchpad.net/~jonjo\n"
+"  Kwpolska https://launchpad.net/~kwpolska\n"
 "  Mathieu Divaret https://launchpad.net/~joots\n"
 "  Michael Terry https://launchpad.net/~mterry\n"
 "  Nick Trew https://launchpad.net/~vxnick"
 
-#: ../widgets/WidgetUtils.vala:83
+#: ../widgets/WidgetUtils.vala:84
 #, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
@@ -1095,7 +1234,7 @@ msgstr ""
 "Software Foundation; either version 3 of the Licence, or (at your option) "
 "any later version."
 
-#: ../widgets/WidgetUtils.vala:84
+#: ../widgets/WidgetUtils.vala:85
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -1107,7 +1246,7 @@ msgstr ""
 "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public Licence for "
 "more details."
 
-#: ../widgets/WidgetUtils.vala:85
+#: ../widgets/WidgetUtils.vala:86
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see http://www.gnu.org/licenses/."
@@ -1258,6 +1397,9 @@ msgstr ""
 
 #~ msgid "Backing up..."
 #~ msgstr "Backing up..."
+
+#~ msgid "Checking for Backups"
+#~ msgstr "Checking for Backups"
 
 #~ msgid "Restoring"
 #~ msgstr "Restoring"
@@ -2096,6 +2238,9 @@ msgstr ""
 #~ msgid "<author> <firstname>Michael</firstname> <surname>Terry</surname>"
 #~ msgstr "<author> <firstname>Michael</firstname> <surname>Terry</surname>"
 
+#~ msgid "The type of backup location. Valid values are ‘s3’ or ‘file’."
+#~ msgstr "The type of backup location. Valid values are ‘s3’ or ‘file’."
+
 #~ msgctxt "backup is verb"
 #~ msgid "_Backup"
 #~ msgstr "_Backup"
@@ -2103,6 +2248,9 @@ msgstr ""
 #~ msgctxt "backup is verb"
 #~ msgid "Backup"
 #~ msgstr "Backup"
+
+#~ msgid "Password needed"
+#~ msgstr "Password needed"
 
 #~ msgid "Creating a fresh backup.  This will take longer than normal."
 #~ msgstr "Creating a fresh backup. This will take longer than normal."
@@ -2115,6 +2263,33 @@ msgstr ""
 #~ msgstr ""
 #~ "The existing backup is of a computer named %s, but the current computer’s "
 #~ "name is %s. If this is unexpected, you should backup to a different location."
+
+#, c-format
+#~ msgid "Show _Progress (%.1f%%)"
+#~ msgstr "Show _Progress (%.1f%%)"
+
+#~ msgid "Show _Progress"
+#~ msgstr "Show _Progress"
+
+#~ msgid ""
+#~ "Whether the backup location is a mounted external volume or a normal folder. "
+#~ "Possible values are ‘volume’ or ‘normal’."
+#~ msgstr ""
+#~ "Whether the backup location is a mounted external volume or a normal folder. "
+#~ "Possible values are ‘volume’ or ‘normal’."
+
+#~ msgid ""
+#~ "This list of directories will not be backed up. Reserved values $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
+#~ "directories. Relative entries are relative to the user’s home directory. "
+#~ "This list takes precedence over the include list."
+#~ msgstr ""
+#~ "This list of directories will not be backed up. Reserved values $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, and $VIDEO are recognised as the user’s special "
+#~ "directories. Relative entries are relative to the user’s home directory. "
+#~ "This list takes precedence over the include list."
 
 #~ msgid "No space left"
 #~ msgstr "No space left"
