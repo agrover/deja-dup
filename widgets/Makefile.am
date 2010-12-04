@@ -18,20 +18,14 @@
 
 noinst_LTLIBRARIES = libwidgets.la
 
-VALA_CFLAGS = \
-	--library=libwidgets \
-	--vapidir $(top_srcdir)/common \
-	--vapidir $(top_srcdir)/vapi \
-	--pkg libcommon \
-	--pkg @GTK_MODULE@ \
-	--pkg config
-
-AM_CFLAGS = \
+libwidgets_la_CFLAGS = \
 	-I$(top_srcdir)/common \
 	$(WIDGETS_CFLAGS) \
 	$(APPINDICATOR_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
+
+libwidgets_la_LIBADD = $(WIDGETS_LIBS) $(APPINDICATOR_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la
 
 libwidgets_la_VALASOURCES = \
 	ButtonConnect.vala \
@@ -52,24 +46,27 @@ libwidgets_la_VALASOURCES = \
 	ToggleGroup.vala \
 	WidgetUtils.vala
 
-libwidgets_la_BUILTSOURCES = \
+libwidgets_la_VALABUILTSOURCES = \
 	widgets.h \
 	$(libwidgets_la_VALASOURCES:.vala=.c)
 
 libwidgets_la_SOURCES = \
 	whacks.c whacks.h \
-	$(libwidgets_la_BUILTSOURCES)
+	$(libwidgets_la_VALABUILTSOURCES)
 
-$(libwidgets_la_BUILTSOURCES): vala.stamp
+if MAINTAINER_MODE
+PACKAGES = \
+	--pkg libcommon \
+	--pkg @GTK_MODULE@ \
+	--pkg config
+BUILT_SOURCES = vala.stamp
 vala.stamp: $(libwidgets_la_VALASOURCES)
-if USE_VALAC
-	$(AM_V_GEN)$(VALAC) -C -H widgets.h -o $(top_srcdir)/vapi $(VALA_CFLAGS) $^
-	@touch $@
-else
-	@echo "ERROR: Valac compilation is disabled, but the C sources are out-of-date."
-	@exit 1
+	$(AM_V_GEN)$(VALAC) --library=libwidgets -H widgets.h --vapidir=$(top_srcdir)/vapi \
+	                    --vapidir=$(top_srcdir)/common $(PACKAGES) $^ -C
+	touch $@
 endif
 
-libwidgets_la_LIBADD = $(WIDGETS_LIBS) $(APPINDICATOR_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la
-
-EXTRA_DIST = vala.stamp $(libwidgets_la_VALASOURCES)
+EXTRA_DIST = $(libwidgets_la_VALASOURCES)
+if MAINTAINER_MODE
+CLEANFILES = $(BUILT_SOURCES) $(libwidgets_la_VALABUILTSOURCES)
+endif
