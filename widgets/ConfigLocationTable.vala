@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,39 +21,28 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigEntry : ConfigWidget
+public class ConfigLocationTable : Gtk.Table
 {
-  public ConfigEntry(string key, string ns="")
-  {
-    Object(key: key, ns: ns);
-  }
-  
-  protected Gtk.Entry entry;
-  construct {
-    entry = new Gtk.Entry();
-    add(entry);
-    
-    set_from_config();
-    entry.focus_out_event.connect(handle_focus_out);
-  }
-  
-  protected override async void set_from_config()
-  {
-    var val = settings.get_string(key);
-    if (val == null)
-      val = "";
-    entry.set_text(val);
+  public Gtk.SizeGroup label_sizes {get; construct;}
+
+  int row = 0;
+  public ConfigLocationTable(Gtk.SizeGroup sg) {
+    Object(label_sizes: sg);
   }
 
-  protected virtual void write_to_config()
+  protected void add_widget(string msg, Gtk.Widget w)
   {
-    settings.set_string(key, entry.get_text());
-  }
-
-  bool handle_focus_out()
-  {
-    write_to_config();
-    return false;
+    var label = new Gtk.Label("    %s".printf(msg));
+    label.set("mnemonic-widget", w,
+              "use-underline", true,
+              "xalign", 0.0f);
+    label_sizes.add_widget(label);
+    this.attach(label, 0, 1, row, row+1,
+                0, Gtk.AttachOptions.FILL, 3, 3);
+    this.attach(w, 1, 3, row, row+1,
+                Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
+                Gtk.AttachOptions.FILL, 3, 3);
+    ++row;
   }
 }
 

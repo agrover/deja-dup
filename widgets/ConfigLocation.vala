@@ -23,88 +23,102 @@ namespace DejaDup {
 
 public class ConfigLocation : ConfigWidget
 {
-  public bool is_s3 {get; private set;}
-  
-  static const int CONNECT_ID = 1;
-  
-  Gtk.FileChooserDialog dialog;
-  Gtk.FileChooserButton button;
-  File top_tmpdir;
-  File tmpdir;
-  string s3_name;
+  static const int COL_ICON = 0;
+  static const int COL_TEXT = 1;
+  static const int COL_SORT = 2;
+  static const int COL_VOL = 3;
+
+  int index_s3;
+  int index_ssh;
+  int index_smb;
+  int index_vol_base;
+  int index_local;
+
+  Gtk.ComboBox button;
+  Gtk.ListStore store;
+  Gtk.Notebook notebook;
+  Gtk.SizeGroup label_sizes;
   construct {
+    var vbox = new Gtk.VBox(false, 6);
     var hbox = new Gtk.HBox(false, 6);
     add(hbox);
     
-    dialog = new Gtk.FileChooserDialog (_("Select Backup Location"), null,
-                          						  Gtk.FileChooserAction.SELECT_FOLDER,
-                                        null);
-    
-    var has_connect_prog = Environment.find_program_in_path("nautilus-connect-server") != null;
-    if (has_connect_prog) {
-      var button = new ButtonConnect();
-      var action_area = (Gtk.Box)dialog.get_action_area();
-      action_area.pack_end(button, false, false, 0);
-      button.show_all();
-    }
-    
-    dialog.add_buttons(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                       Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT);
-    dialog.set_default_response(Gtk.ResponseType.ACCEPT);
-    
-    button = new Gtk.FileChooserButton.with_dialog(dialog);
-    button.local_only = false;
+    store = new Gtk.ListStore(3, typeof(Icon), typeof(string), typeof(string), typeof(Volume));
+    button = new Gtk.ComboBox.with_model(store);
     hbox.add(button);
-    
-    if (has_connect_prog) {
-      var connect_button = new ButtonConnect();
-      hbox.add(connect_button);
+
+    Gtk.TreeIter iter;
+    int i = 0;
+
+    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
+
+    notebook = new Gtk.Notebook();
+    notebook.show_tabs = false;
+    notebook.show_border = false;
+
+    // Insert cloud providers
+    index_s3 = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
+                         _("Amazon S3"), 0, new ConfigLocationS3(label_sizes));
+
+    // Now insert remote servers
+    index_ssh = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
+                          _("SSH Server"), 1, new ConfigLocationSSH(label_sizes));
+    index_smb = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
+                          _("Windows Share"), 1);
+
+    // Now insert removable drives
+    index_vol_base = i;
+    var mon = VolumeMonitor.get();
+    mon.ref(); // bug 569418; bad things happen when VM goes away
+    List<Volume> vols = mon.get_volumes();
+    foreach (Volume v in vols) {
+      add_entry(i++, v.get_icon(), v.get_name(), 2, null, v);
     }
-    
+
+    // And finally, a local folder option
+    index_local = add_entry(i++, new ThemedIcon("folder"), _("Local Folder"), 3);
+
+    store.set_sort_column_id(COL_SORT, Gtk.SortType.ASCENDING);
+
+    var pixrenderer = new Gtk.CellRendererPixbuf();
+    button.pack_start(pixrenderer, false);
+    button.add_attribute(pixrenderer, "gicon", COL_ICON);
+
+    var textrenderer = new Gtk.CellRendererText();
+    button.pack_start(textrenderer, true);
+    button.add_attribute(textrenderer, "text", COL_TEXT);
+
+    // End of location combo
+
     mnemonic_activate.connect(on_mnemonic_activate);
-    
-    s3_name = _("Amazon S3");
-    add_special_location();
-    
+
     set_from_config();
-    button.selection_changed.connect(handle_selection_changed);
-    
+    button.changed.connect(handle_changed);
+
     watch_key(BACKEND_KEY);
     watch_key(FILE_PATH_KEY, DejaDup.get_settings(FILE_ROOT));
   }
   
-  ~ConfigLocation()
+  int add_entry(int index, Icon? icon, string label, int category,
+                Gtk.Widget? page = null, Volume? volume = null)
   {
-    try {
-      tmpdir.delete(null);
-      top_tmpdir.delete(null);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
-  }
-  
-  bool on_mnemonic_activate(Gtk.Widget w, bool g)
-  {
-    return button.mnemonic_activate(g);
+    Gtk.TreeIter iter;
+    store.insert_with_values(out iter, index, COL_ICON, icon, COL_TEXT, label,
+                             COL_SORT, "%d%s".printf(category, label),
+                             COL_VOL, volume);
+    notebook.insert_page(page, null, index);
+    return index;
   }
 
-  File get_file_from_settings() throws Error
+  bool on_mnemonic_activate(Gtk.Widget w, bool g)
   {
-    // Check the backend type, then GIO uri if needed
-    File file = null;
-    var val = settings.get_string(BACKEND_KEY);
-    if (val == "s3" && tmpdir != null)
-      file = tmpdir;
-    else {
-      val = DejaDup.get_settings(FILE_ROOT).get_string(FILE_PATH_KEY);
-      if (val == null)
-        val = ""; // current directory
-      file = File.parse_name(val);
-    }
-    return file;
+    return true;//button.mnemonic_activate(g);
   }
-  
+
+  protected override async void set_from_config()
+  {
+  }
+/*
   protected override async void set_from_config()
   {
     // Check the backend type, then GIO uri if needed
@@ -122,86 +136,69 @@ public class ConfigLocation : ConfigWidget
       warning("%s\n", e.message);
     }
   }
-  
-  void handle_selection_changed()
+  */
+  void handle_changed()
   {
-    set_file_info();
+    set_location_info();
+    notebook.set_current_page(button.get_active());
   }
 
-  async void set_file_info()
+  async void set_location_info()
   {
-    File settings_file = null;
-    try {
-      settings_file = get_file_from_settings();
+    var index = button.get_active();
+
+    if (index == index_s3) {
+      settings.set_string(BACKEND_KEY, "s3");
     }
-    catch (Error err) {} // ignore
-    
-    var uri = button.get_uri();
-    var file = uri == null ? null : File.new_for_uri(uri);
-    if (file == null || file.equal(settings_file))
-      return; // we sometimes get several selection changed notices in a row...
-    
-    is_s3 = tmpdir != null && file.equal(tmpdir);
-    
-    try {
-      if (is_s3)
-        settings.set_string(BACKEND_KEY, "s3");
-      else {
-        DejaDup.get_settings(FILE_ROOT).set_string(FILE_PATH_KEY, file.get_parse_name());
-        settings.set_string(BACKEND_KEY, "file");
-        yield BackendFile.check_for_volume_info(file);
+    else if (index == index_ssh) {
+      settings.set_string(BACKEND_KEY, "file");
+      DejaDup.get_settings(FILE_ROOT).set_string(FILE_TYPE_KEY, "normal");
+      
+    }
+    else if (index == index_smb) {
+      settings.set_string(BACKEND_KEY, "file");
+      DejaDup.get_settings(FILE_ROOT).set_string(FILE_TYPE_KEY, "normal");
+    }
+    else if (index >= index_vol_base && index < index_local) {
+      // Grab volume from model
+      Gtk.TreeIter iter;
+      Variant vol_var;
+      if (!store.get_iter_from_string(out iter, "%i".printf(index - index_vol_base))) {
+        warning("Invalid volume location index %i\n", index);
+        return;
       }
+      store.get_value(iter, COL_VOL, out vol_var);
+      Volume vol = vol_var.get_data() as Volume;
+      if (vol == null) {
+        warning("Invalid volume location index %i\n", index);
+        return;
+      }
+//      set_file_info(new File.
     }
-    catch (Error e) {
-      warning("%s\n", e.message);
+    else if (index == index_local) {
     }
-    
+    else {
+      warning("Unknown location index %i\n", index);
+      return;
+    }
+
     changed();
   }
-  
-  void add_special_location()
+
+  async void set_local_info(File file)
   {
-    // This is a big ol' hack to show a custom, non-GIO name as a location,
-    // Should try to get S3 in as a patch to GIO someday...
-    var template = Path.build_filename(Environment.get_tmp_dir(), "deja-dup-XXXXXX");
-    top_tmpdir = File.new_for_path(DirUtils.mkdtemp(template));
-    tmpdir = top_tmpdir.get_child(s3_name);
-    
     try {
-      tmpdir.make_directory(null);
-      button.add_shortcut_folder_uri(tmpdir.get_uri());
-      dialog.show.connect(handle_dialog_show);
-      dialog.hide.connect(handle_dialog_hide);
+      DejaDup.get_settings(FILE_ROOT).set_string(FILE_PATH_KEY, file.get_parse_name());
+      settings.set_string(BACKEND_KEY, "file");
+      yield BackendFile.check_for_volume_info(file);
     }
     catch (Error e) {
       warning("%s\n", e.message);
     }
   }
-  
-  void handle_dialog_show(Gtk.Widget w)
+
+  async void set_remote_file(string schema)
   {
-    if (is_s3) {
-      // We need to reset the current folder, because we don't want to expose
-      // the temporary folder used for s3.  So go to $HOME.
-      button.set_current_folder(Environment.get_home_dir());
-    }
-    
-    try {
-      button.remove_shortcut_folder_uri(tmpdir.get_uri());
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
-  }
-  
-  void handle_dialog_hide(Gtk.Widget w)
-  {
-    try {
-      button.add_shortcut_folder_uri(tmpdir.get_uri());
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
   }
 }
 

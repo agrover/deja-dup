@@ -56,6 +56,7 @@ libcommon_la_BUILTSOURCES = \
 
 libcommon_la_SOURCES = \
 	chacks.c chacks.h \
+	uriutils.c uriutils.h \
 	$(libcommon_la_BUILTSOURCES)
 
 $(libcommon_la_BUILTSOURCES): vala.stamp

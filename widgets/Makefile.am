@@ -24,6 +24,7 @@ VALA_CFLAGS = \
 	--vapidir $(top_srcdir)/vapi \
 	--pkg libcommon \
 	--pkg @GTK_MODULE@ \
+	--pkg uriutils \
 	--pkg config
 
 AM_CFLAGS = \
@@ -46,8 +47,12 @@ libwidgets_la_VALASOURCES = \
 	ConfigLabelPolicy.vala \
 	ConfigList.vala \
 	ConfigLocation.vala \
+	ConfigLocationS3.vala \
+	ConfigLocationSSH.vala \
+	ConfigLocationTable.vala \
 	ConfigNumber.vala \
 	ConfigPeriod.vala \
+	ConfigURLPart.vala \
 	ConfigWidget.vala \
 	ToggleGroup.vala \
 	WidgetUtils.vala

@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,45 +17,21 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using GLib;
-
-namespace DejaDup {
-
-public class ConfigEntry : ConfigWidget
-{
-  public ConfigEntry(string key, string ns="")
-  {
-    Object(key: key, ns: ns);
-  }
-  
-  protected Gtk.Entry entry;
-  construct {
-    entry = new Gtk.Entry();
-    add(entry);
-    
-    set_from_config();
-    entry.focus_out_event.connect(handle_focus_out);
-  }
-  
-  protected override async void set_from_config()
-  {
-    var val = settings.get_string(key);
-    if (val == null)
-      val = "";
-    entry.set_text(val);
-  }
-
-  protected virtual void write_to_config()
-  {
-    settings.set_string(key, entry.get_text());
-  }
-
-  bool handle_focus_out()
-  {
-    write_to_config();
-    return false;
-  }
+[CCode (cheader_filename = "uriutils.h", destroy_function = "deja_dup_decoded_uri_free")]
+struct DejaDupDecodedUri {
+  public DejaDupDecodedUri();
+  public string scheme;
+  public string userinfo;
+  public string host;
+  public int port; /* -1 => not in uri */
+  public string path;
+  public string query;
+  public string fragment;
 }
 
-}
+[CCode (cheader_filename = "uriutils.h")]
+string deja_dup_encode_uri(DejaDupDecodedUri decoded, bool allow_utf8);
+
+[CCode (cheader_filename = "uriutils.h")]
+DejaDupDecodedUri deja_dup_decode_uri(string uri);
 
