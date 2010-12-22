@@ -282,7 +282,7 @@ public class PreferencesDialog : Gtk.Dialog
 
   void handle_location_label_changed(DejaDup.ConfigWidget location)
   {
-    for (int i = 0; i < NUM_LISTS; ++i) {
+/*    for (int i = 0; i < NUM_LISTS; ++i) {
       bool show = false;
       if (i == S3_LIST && ((DejaDup.ConfigLabelLocation)location).is_s3)
         show = true;
@@ -294,12 +294,12 @@ public class PreferencesDialog : Gtk.Dialog
         else
           w.hide();
       }
-    }
+    }*/
   }
 
   void handle_location_changed(DejaDup.ConfigWidget location)
   {
-    for (int i = 0; i < NUM_LISTS; ++i) {
+/*    for (int i = 0; i < NUM_LISTS; ++i) {
       bool show = false;
       if (i == S3_LIST && ((DejaDup.ConfigLocation)location).is_s3)
         show = true;
@@ -311,7 +311,7 @@ public class PreferencesDialog : Gtk.Dialog
         else
           w.hide();
       }
-    }
+    }*/
   }
   
   void handle_response(Gtk.Dialog dlg, int response) {

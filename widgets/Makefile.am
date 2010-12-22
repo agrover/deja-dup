@@ -40,12 +40,19 @@ libwidgets_la_VALASOURCES = \
 	ConfigLabelPolicy.vala \
 	ConfigList.vala \
 	ConfigLocation.vala \
+	ConfigLocationDAV.vala \
+	ConfigLocationFile.vala \
+	ConfigLocationFTP.vala \
 	ConfigLocationS3.vala \
 	ConfigLocationSSH.vala \
+	ConfigLocationSMB.vala \
 	ConfigLocationTable.vala \
+	ConfigLocationVolume.vala \
 	ConfigNumber.vala \
 	ConfigPeriod.vala \
+	ConfigRelPath.vala \
 	ConfigURLPart.vala \
+	ConfigURLPartBool.vala \
 	ConfigWidget.vala \
 	ToggleGroup.vala \
 	WidgetUtils.vala

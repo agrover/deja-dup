@@ -28,6 +28,7 @@ public class ConfigLocationS3 : ConfigLocationTable
   }
 
   construct {
+    add_optional_label();
     add_widget(_("S3 Access Key I_D:"),
                new ConfigEntry(DejaDup.S3_ID_KEY, DejaDup.S3_ROOT));
     add_widget(_("_Folder:"),

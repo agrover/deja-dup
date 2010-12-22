@@ -21,39 +21,32 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigEntry : ConfigWidget
+public class ConfigRelPath : ConfigEntry
 {
-  public ConfigEntry(string key, string ns="")
+  public ConfigRelPath(string key, string ns="")
   {
     Object(key: key, ns: ns);
   }
-  
-  protected Gtk.Entry entry;
-  construct {
-    entry = new Gtk.Entry();
-    add(entry);
-    
-    set_from_config();
-    entry.focus_out_event.connect(handle_focus_out);
-  }
-  
+
   protected override async void set_from_config()
   {
-    var val = settings.get_string(key);
+    var byte_val = settings.get_value(key);
+    string val = null;
+    try {
+      val = Filename.to_utf8(byte_val.get_bytestring(), -1, null, null);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
     if (val == null)
       val = "";
     entry.set_text(val);
   }
 
-  public virtual void write_to_config()
+  public override void write_to_config()
   {
-    settings.set_string(key, entry.get_text());
-  }
-
-  bool handle_focus_out()
-  {
-    write_to_config();
-    return false;
+    var val = new Variant.bytestring(entry.get_text());
+    settings.set_value(key, val);
   }
 }
 

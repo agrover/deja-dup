@@ -26,45 +26,86 @@ public class ConfigLocation : ConfigWidget
   static const int COL_ICON = 0;
   static const int COL_TEXT = 1;
   static const int COL_SORT = 2;
-  static const int COL_VOL = 3;
+  static const int COL_UUID = 3;
+  static const int COL_PAGE = 4;
+  static const int COL_INDEX = 5;
 
+  public Gtk.EventBox extras {get; private set;}
+  public Gtk.SizeGroup label_sizes {get; construct;}
+
+  public Gtk.Requisition hidden_size()
+  {
+    Gtk.Requisition pagereq;
+    extras.size_request(out pagereq);
+    pagereq.width = extras_max_width - pagereq.width + 20;
+    pagereq.height = extras_max_height - pagereq.height + 20;
+    return pagereq;
+  }
+
+  public ConfigLocation(Gtk.SizeGroup? sg = null)
+  {
+    Object(label_sizes: sg);
+  }
+
+  int index_ftp;
+  int index_dav;
   int index_s3;
   int index_ssh;
   int index_smb;
   int index_vol_base;
+  int index_vol_end;
+  int index_vol_saved = -1;
   int index_local;
+
+  int extras_max_width = 0;
+  int extras_max_height = 0;
 
   Gtk.ComboBox button;
   Gtk.ListStore store;
-  Gtk.Notebook notebook;
-  Gtk.SizeGroup label_sizes;
+  Gtk.TreeModelSort sort_model;
   construct {
     var vbox = new Gtk.VBox(false, 6);
-    var hbox = new Gtk.HBox(false, 6);
-    add(hbox);
-    
-    store = new Gtk.ListStore(3, typeof(Icon), typeof(string), typeof(string), typeof(Volume));
-    button = new Gtk.ComboBox.with_model(store);
-    hbox.add(button);
+    add(vbox);
+
+    // Here we have a model wrapped inside a sortable model.  This is so we
+    // can keep indices around for the inner model while the outer model appears
+    // nice and sorted to users.
+    store = new Gtk.ListStore(6, typeof(Icon), typeof(string), typeof(string),
+                              typeof(string), typeof(ConfigLocationTable),
+                              typeof(int));
+    sort_model = new Gtk.TreeModelSort.with_model(store);
+    sort_model.set_sort_column_id(COL_SORT, Gtk.SortType.ASCENDING);
+    button = new Gtk.ComboBox.with_model(sort_model);
+    button.set_row_separator_func(is_separator);
+    vbox.add(button);
 
     Gtk.TreeIter iter;
     int i = 0;
 
-    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
+    if (label_sizes == null)
+      label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
 
-    notebook = new Gtk.Notebook();
-    notebook.show_tabs = false;
-    notebook.show_border = false;
+    extras = new Gtk.EventBox();
+    extras.border_width = 0;
+    extras.show();
 
     // Insert cloud providers
     index_s3 = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
                          _("Amazon S3"), 0, new ConfigLocationS3(label_sizes));
 
+    add_separator(i++, 1);
+
     // Now insert remote servers
     index_ssh = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
-                          _("SSH Server"), 1, new ConfigLocationSSH(label_sizes));
+                          _("SSH"), 1, new ConfigLocationSSH(label_sizes));
     index_smb = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
-                          _("Windows Share"), 1);
+                          _("Windows Share"), 1, new ConfigLocationSMB(label_sizes));
+    index_ftp = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
+                          _("FTP"), 1, new ConfigLocationFTP(label_sizes));
+    index_dav = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
+                          _("WebDAV"), 1, new ConfigLocationDAV(label_sizes));
+
+    add_separator(i++, 2);
 
     // Now insert removable drives
     index_vol_base = i;
@@ -72,13 +113,21 @@ public class ConfigLocation : ConfigWidget
     mon.ref(); // bug 569418; bad things happen when VM goes away
     List<Volume> vols = mon.get_volumes();
     foreach (Volume v in vols) {
-      add_entry(i++, v.get_icon(), v.get_name(), 2, null, v);
+      add_entry(i++, v.get_icon(), v.get_name(), 2,
+                new ConfigLocationVolume(label_sizes),
+                v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID));
     }
+    index_vol_end = i;
 
-    // And finally, a local folder option
-    index_local = add_entry(i++, new ThemedIcon("folder"), _("Local Folder"), 3);
+    if (index_vol_base != index_vol_end)
+      add_separator(i++, 3);
 
-    store.set_sort_column_id(COL_SORT, Gtk.SortType.ASCENDING);
+    // And a local folder option
+    index_local = add_entry(i++, new ThemedIcon("folder"), _("Local Folder"),
+                            3, new ConfigLocationFile(label_sizes));
+
+    // And finally a saved volume, if one exists (must be after index_local)
+    update_saved_volume();
 
     var pixrenderer = new Gtk.CellRendererPixbuf();
     button.pack_start(pixrenderer, false);
@@ -92,21 +141,48 @@ public class ConfigLocation : ConfigWidget
 
     mnemonic_activate.connect(on_mnemonic_activate);
 
+    button.set_active(0); // worst case, activate first entry
     set_from_config();
+
+    handle_changed();
     button.changed.connect(handle_changed);
 
     watch_key(BACKEND_KEY);
     watch_key(FILE_PATH_KEY, DejaDup.get_settings(FILE_ROOT));
   }
   
+  bool is_separator(Gtk.TreeModel model, Gtk.TreeIter iter)
+  {
+    Value text_var;
+    model.get_value(iter, COL_TEXT, out text_var);
+    weak string text = text_var.get_string();
+    return text == null;
+  }
+
   int add_entry(int index, Icon? icon, string label, int category,
-                Gtk.Widget? page = null, Volume? volume = null)
+                Gtk.Widget? page = null, string? uuid = null)
   {
     Gtk.TreeIter iter;
     store.insert_with_values(out iter, index, COL_ICON, icon, COL_TEXT, label,
                              COL_SORT, "%d%s".printf(category, label),
-                             COL_VOL, volume);
-    notebook.insert_page(page, null, index);
+                             COL_UUID, uuid, COL_PAGE, page, COL_INDEX, index);
+
+    if (page != null) {
+      Gtk.Requisition pagereq;
+      page.show_all();
+      page.size_request(out pagereq);
+      extras_max_width = int.max(extras_max_width, pagereq.width);
+      extras_max_height = int.max(extras_max_height, pagereq.height);
+    }
+
+    return index;
+  }
+
+  int add_separator(int index, int category)
+  {
+    Gtk.TreeIter iter;
+    store.insert_with_values(out iter, index, COL_SORT, "%d".printf(category),
+                             COL_TEXT, null, COL_INDEX, index);
     return index;
   }
 
@@ -115,68 +191,125 @@ public class ConfigLocation : ConfigWidget
     return true;//button.mnemonic_activate(g);
   }
 
-  protected override async void set_from_config()
+  bool update_saved_volume()
   {
+    // And add an entry for any saved volume
+    var fsettings = DejaDup.get_settings(FILE_ROOT);
+    var vol_uuid = fsettings.get_string(FILE_UUID_KEY);
+    if (vol_uuid != "") {
+      Gtk.TreeIter iter;
+
+      Icon vol_icon = null;
+      try {
+        vol_icon = Icon.new_for_string(fsettings.get_string(FILE_ICON_KEY));
+      }
+      catch (Error e) {warning("%s\n", e.message);}
+      var vol_name = fsettings.get_string(FILE_SHORT_NAME_KEY);
+
+      // If this is the first time, add a new entry
+      if (index_vol_saved == -1)
+        index_vol_saved = add_entry(index_local+1, vol_icon, vol_name, 2,
+                          new ConfigLocationVolume(label_sizes), vol_uuid);
+      else if (store.get_iter_from_string(out iter, index_vol_saved.to_string()))
+        store.set(iter, COL_ICON, vol_icon, COL_TEXT, vol_name, COL_UUID, vol_uuid);
+
+      return true;
+    }
+    else
+      return false;
   }
-/*
+
   protected override async void set_from_config()
   {
+    int index = -1;
+
     // Check the backend type, then GIO uri if needed
-    File file = null;
-    try {
-      var uri = button.get_uri();
-      var button_file = uri == null ? null : File.new_for_uri(uri);
-      file = get_file_from_settings();
-      if (button_file == null || !file.equal(button_file)) {
-        button.set_current_folder_uri(file.get_uri());
-        is_s3 = tmpdir != null && file.equal(tmpdir);
+    var backend = settings.get_string(BACKEND_KEY);
+    if (backend == "s3")
+      index = index_s3;
+    else if (backend == "file") {
+      var fsettings = DejaDup.get_settings(FILE_ROOT);
+
+      if (fsettings.get_string(FILE_TYPE_KEY) == "volume") {
+        if (update_saved_volume())
+          index = index_vol_saved;
+      }
+      else { // normal
+        var scheme = ConfigURLPart.read_uri_part(fsettings, FILE_PATH_KEY,
+                                                 ConfigURLPart.Part.SCHEME);
+        switch (scheme) {
+        case "dav":
+        case "davs": index = index_dav;   break;
+        case "sftp":
+        case "ssh":  index = index_ssh;   break;
+        case "ftp":  index = index_ftp;   break;
+        case "smb":  index = index_smb;   break;
+        case "file": index = index_local; break;
+        }
       }
     }
-    catch (Error e) {
-      warning("%s\n", e.message);
+
+    if (index >= 0) {
+      Gtk.TreeIter iter, iter0;
+      if (store.get_iter_from_string(out iter, index.to_string())) {
+        sort_model.convert_child_iter_to_iter(out iter0, iter);
+        button.set_active_iter(iter0);
+      }
     }
   }
-  */
+
   void handle_changed()
   {
     set_location_info();
-    notebook.set_current_page(button.get_active());
+
+    var current = extras.get_child();
+    if (current != null)
+      extras.remove(current);
+
+    Gtk.TreeIter iter0, iter;
+    Value page_var;
+    if (button.get_active_iter(out iter0)) {
+      sort_model.convert_iter_to_child_iter(out iter, iter0);
+      store.get_value(iter, COL_PAGE, out page_var);
+      ConfigLocationTable page = page_var.get_object() as ConfigLocationTable;
+      if (page != null)
+        extras.add(page);
+    }
   }
 
   async void set_location_info()
   {
-    var index = button.get_active();
+    Gtk.TreeIter iter0, iter;
+    if (!button.get_active_iter(out iter0))
+      return;
+    sort_model.convert_iter_to_child_iter(out iter, iter0);
 
-    if (index == index_s3) {
+    Value index_var;
+    store.get_value(iter, COL_INDEX, out index_var);
+    var index = index_var.get_int();
+
+    if (index == index_s3)
       settings.set_string(BACKEND_KEY, "s3");
+    else if (index == index_ssh)
+      set_remote_info("sftp");
+    else if (index == index_ftp)
+      set_remote_info("ftp");
+    else if (index == index_dav) {
+      // Support not overriding davs with dav by checking current value
+      var fsettings = DejaDup.get_settings(FILE_ROOT);
+      var scheme = ConfigURLPart.read_uri_part(fsettings, FILE_PATH_KEY,
+                                               ConfigURLPart.Part.SCHEME);
+      if (scheme != "dav" && scheme != "davs")
+        scheme = "dav"; // default to non-https, since we do default to encrypted backups
+      set_remote_info(scheme);
     }
-    else if (index == index_ssh) {
-      settings.set_string(BACKEND_KEY, "file");
-      DejaDup.get_settings(FILE_ROOT).set_string(FILE_TYPE_KEY, "normal");
-      
-    }
-    else if (index == index_smb) {
-      settings.set_string(BACKEND_KEY, "file");
-      DejaDup.get_settings(FILE_ROOT).set_string(FILE_TYPE_KEY, "normal");
-    }
-    else if (index >= index_vol_base && index < index_local) {
-      // Grab volume from model
-      Gtk.TreeIter iter;
-      Variant vol_var;
-      if (!store.get_iter_from_string(out iter, "%i".printf(index - index_vol_base))) {
-        warning("Invalid volume location index %i\n", index);
-        return;
-      }
-      store.get_value(iter, COL_VOL, out vol_var);
-      Volume vol = vol_var.get_data() as Volume;
-      if (vol == null) {
-        warning("Invalid volume location index %i\n", index);
-        return;
-      }
-//      set_file_info(new File.
-    }
-    else if (index == index_local) {
-    }
+    else if (index == index_smb)
+      set_remote_info("smb");
+    else if ((index >= index_vol_base && index < index_vol_end) ||
+             index == index_vol_saved)
+      set_volume_info(index);
+    else if (index == index_local)
+      set_remote_info("file");
     else {
       warning("Unknown location index %i\n", index);
       return;
@@ -185,20 +318,39 @@ public class ConfigLocation : ConfigWidget
     changed();
   }
 
-  async void set_local_info(File file)
+  async void set_volume_info(int index)
   {
-    try {
-      DejaDup.get_settings(FILE_ROOT).set_string(FILE_PATH_KEY, file.get_parse_name());
-      settings.set_string(BACKEND_KEY, "file");
-      yield BackendFile.check_for_volume_info(file);
+    // Grab volume from model
+    Gtk.TreeIter iter;
+    Value vol_var;
+    if (!store.get_iter_from_string(out iter, index.to_string())) {
+      warning("Invalid volume location index %i\n", index);
+      return;
     }
-    catch (Error e) {
-      warning("%s\n", e.message);
+
+    store.get_value(iter, COL_UUID, out vol_var);
+    var uuid = vol_var.get_string();
+    if (uuid == null) {
+      warning("Invalid volume location index %i\n", index);
+      return;
     }
+
+    var vol = BackendFile.find_volume_by_uuid(uuid);
+    if (vol == null) {
+      // Not an error, it's just not plugged in right now
+      return;
+    }
+
+    yield BackendFile.set_volume_info(vol);
   }
 
-  async void set_remote_file(string schema)
+  void set_remote_info(string scheme)
   {
+    var fsettings = DejaDup.get_settings(FILE_ROOT);
+    fsettings.set_string(FILE_TYPE_KEY, "normal");
+    ConfigURLPart.write_uri_part(fsettings, FILE_PATH_KEY,
+                                 ConfigURLPart.Part.SCHEME, scheme);
+    settings.set_string(BACKEND_KEY, "file");
   }
 }
 

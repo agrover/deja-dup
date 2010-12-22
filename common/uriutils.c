@@ -75,13 +75,13 @@ deja_dup_decode_uri (const char *uri)
       c = *p++;
 
       if (c == ':')
-	break;
+        break;
       
       if (!(g_ascii_isalnum(c) ||
-	    c == '+' ||
-	    c == '-' ||
-	    c == '.'))
-	return NULL;
+            c == '+' ||
+            c == '-' ||
+            c == '.'))
+        return NULL;
     }
 
   decoded = deja_dup_decoded_uri_new ();
@@ -100,15 +100,15 @@ deja_dup_decode_uri (const char *uri)
       hier_part_end = query_start++;
       fragment_start = strchr (query_start, '#');
       if (fragment_start)
-	{
-	  decoded->query = g_strndup (query_start, fragment_start - query_start);
-	  decoded->fragment = g_strdup (fragment_start+1);
-	}
+        {
+          decoded->query = g_strndup (query_start, fragment_start - query_start);
+          decoded->fragment = g_strdup (fragment_start+1);
+        }
       else
-	{
-	  decoded->query = g_strdup (query_start);
-	  decoded->fragment = NULL;
-	}
+        {
+          decoded->query = g_strdup (query_start);
+          decoded->fragment = NULL;
+        }
     }
   else
     {
@@ -116,15 +116,15 @@ deja_dup_decode_uri (const char *uri)
       decoded->query = NULL;
       fragment_start = strchr (p, '#');
       if (fragment_start)
-	{
-	  hier_part_end = fragment_start++;
-	  decoded->fragment = g_strdup (fragment_start);
-	}
+        {
+          hier_part_end = fragment_start++;
+          decoded->fragment = g_strdup (fragment_start);
+        }
       else
-	{
-	  hier_part_end = p + strlen (p);
-	  decoded->fragment = NULL;
-	}
+        {
+          hier_part_end = p + strlen (p);
+          decoded->fragment = NULL;
+        }
     }
 
   /*  3:
@@ -147,30 +147,30 @@ deja_dup_decode_uri (const char *uri)
       /* authority is always followed by / or nothing */
       authority_end = memchr (authority_start, '/', hier_part_end - authority_start);
       if (authority_end == NULL)
-	authority_end = hier_part_end;
+        authority_end = hier_part_end;
 
       /* 3.2:
-	      authority   = [ userinfo "@" ] host [ ":" port ]
+              authority   = [ userinfo "@" ] host [ ":" port ]
       */
 
       /* Look for the last so that any multiple @ signs are put in the username part.
        * This is not quite correct, as @ should be escaped here, but this happens
        * in practice, so lets handle it the "nicer" way at least. */
       userinfo_end = g_strrstr_len (authority_start,
-				    authority_end - authority_start, "@");
+                                    authority_end - authority_start, "@");
       if (userinfo_end)
-	{
-	  userinfo_start = authority_start;
-	  decoded->userinfo = g_uri_unescape_segment (userinfo_start, userinfo_end, NULL);
-	  if (decoded->userinfo == NULL)
-	    {
-	      deja_dup_decoded_uri_free (decoded);
-	      return NULL;
-	    }
-	  host_start = userinfo_end + 1;
-	}
+        {
+          userinfo_start = authority_start;
+          decoded->userinfo = g_uri_unescape_segment (userinfo_start, userinfo_end, NULL);
+          if (decoded->userinfo == NULL)
+            {
+              deja_dup_decoded_uri_free (decoded);
+              return NULL;
+            }
+          host_start = userinfo_end + 1;
+        }
       else
-	host_start = authority_start;
+        host_start = authority_start;
 
       /* We should handle hostnames in brackets, as those are used by IPv6 URIs
        * See http://tools.ietf.org/html/rfc2732 */
@@ -179,53 +179,53 @@ deja_dup_decode_uri (const char *uri)
           char *s;
 
           port_start = NULL;
-	  host_end = memchr (host_start, ']', authority_end - host_start);
-	  if (host_end == NULL)
-	    {
-	      deja_dup_decoded_uri_free (decoded);
-	      return NULL;
-	    }
+          host_end = memchr (host_start, ']', authority_end - host_start);
+          if (host_end == NULL)
+            {
+              deja_dup_decoded_uri_free (decoded);
+              return NULL;
+            }
 
-	  /* Look for the start of the port,
-	   * And we sure we don't have it start somewhere
-	   * in the path section */
-	  s = (char *) host_end;
-	  while (1)
-	    {
-	      if (*s == '/')
-	        {
-	          port_start = NULL;
-	          break;
-		}
-	      else if (*s == ':')
-	        {
-	          port_start = s;
-	          break;
-		}
-	      else if (*s == '\0')
-	        {
-	          break;
-		}
+          /* Look for the start of the port,
+           * And we sure we don't have it start somewhere
+           * in the path section */
+          s = (char *) host_end;
+          while (1)
+            {
+              if (*s == '/')
+                {
+                  port_start = NULL;
+                  break;
+                }
+              else if (*s == ':')
+                {
+                  port_start = s;
+                  break;
+                }
+              else if (*s == '\0')
+                {
+                  break;
+                }
 
-	      s++;
-	    }
+              s++;
+            }
         }
       else
         {
-	  port_start = memchr (host_start, ':', authority_end - host_start);
-	}
+          port_start = memchr (host_start, ':', authority_end - host_start);
+        }
 
       if (port_start)
-	{
-	  host_end = port_start++;
+        {
+          host_end = port_start++;
 
-	  decoded->port = atoi(port_start);
-	}
+          decoded->port = atoi(port_start);
+        }
       else
-	{
-	  host_end = authority_end;
-	  decoded->port = -1;
-	}
+        {
+          host_end = authority_end;
+          decoded->port = -1;
+        }
 
       decoded->host = g_uri_unescape_segment (host_start, host_end, NULL);
 
@@ -256,23 +256,23 @@ deja_dup_encode_uri (DejaDupDecodedUri *decoded, gboolean allow_utf8)
   if (decoded->host != NULL)
     {
       if (decoded->userinfo)
-	{
-	  /* userinfo    = *( unreserved / pct-encoded / sub-delims / ":" ) */
-	  g_string_append_uri_escaped (uri, decoded->userinfo,
-				       G_URI_RESERVED_CHARS_ALLOWED_IN_USERINFO, allow_utf8);
-	  g_string_append_c (uri, '@');
-	}
+        {
+          /* userinfo    = *( unreserved / pct-encoded / sub-delims / ":" ) */
+          g_string_append_uri_escaped (uri, decoded->userinfo,
+                                       G_URI_RESERVED_CHARS_ALLOWED_IN_USERINFO, allow_utf8);
+          g_string_append_c (uri, '@');
+        }
       
       g_string_append_uri_escaped (uri, decoded->host,
-				   /* Allowed unescaped in hostname / ip address */
-				   G_URI_RESERVED_CHARS_SUBCOMPONENT_DELIMITERS ":[]" ,
-				   allow_utf8);
+                                   /* Allowed unescaped in hostname / ip address */
+                                   G_URI_RESERVED_CHARS_SUBCOMPONENT_DELIMITERS ":[]" ,
+                                   allow_utf8);
       
       if (decoded->port != -1)
-	{
-	  g_string_append_c (uri, ':');
-	  g_string_append_printf (uri, "%d", decoded->port);
-	}
+        {
+          g_string_append_c (uri, ':');
+          g_string_append_printf (uri, "%d", decoded->port);
+        }
     }
 
   g_string_append_uri_escaped (uri, decoded->path, G_URI_RESERVED_CHARS_ALLOWED_IN_PATH, allow_utf8);

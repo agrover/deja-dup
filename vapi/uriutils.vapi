@@ -17,9 +17,12 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-[CCode (cheader_filename = "uriutils.h", destroy_function = "deja_dup_decoded_uri_free")]
-struct DejaDupDecodedUri {
+[Compact]
+[CCode (cheader_filename = "uriutils.h", cprefix = "deja_dup_", free_function = "deja_dup_decoded_uri_free")]
+class DejaDupDecodedUri {
   public DejaDupDecodedUri();
+  public static DejaDupDecodedUri decode_uri(string uri);
+  public string encode_uri(bool allow_utf8);
   public string scheme;
   public string userinfo;
   public string host;
@@ -28,10 +31,3 @@ struct DejaDupDecodedUri {
   public string query;
   public string fragment;
 }
-
-[CCode (cheader_filename = "uriutils.h")]
-string deja_dup_encode_uri(DejaDupDecodedUri decoded, bool allow_utf8);
-
-[CCode (cheader_filename = "uriutils.h")]
-DejaDupDecodedUri deja_dup_decode_uri(string uri);
-

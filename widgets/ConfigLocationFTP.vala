@@ -21,12 +21,13 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigLocationSSH : ConfigLocationTable
+public class ConfigLocationFTP : ConfigLocationTable
 {
-  public ConfigLocationSSH(Gtk.SizeGroup sg) {
+  public ConfigLocationFTP(Gtk.SizeGroup sg) {
     Object(label_sizes: sg);
   }
 
+  ConfigURLPart user;
   construct {
     add_widget(_("_Server:"), new ConfigURLPart(ConfigURLPart.Part.SERVER,
                                                 DejaDup.FILE_PATH_KEY,
@@ -38,9 +39,32 @@ public class ConfigLocationSSH : ConfigLocationTable
     add_widget(_("_Folder:"), new ConfigURLPart(ConfigURLPart.Part.FOLDER,
                                                 DejaDup.FILE_PATH_KEY,
                                                 DejaDup.FILE_ROOT));
-    add_widget(_("_Username:"), new ConfigURLPart(ConfigURLPart.Part.USER,
-                                                  DejaDup.FILE_PATH_KEY,
-                                                  DejaDup.FILE_ROOT));
+
+    var w = new ConfigURLPartBool(ConfigURLPart.Part.USER,
+                                  DejaDup.FILE_PATH_KEY,
+                                  DejaDup.FILE_ROOT,
+                                  _("_Log in with a username"));
+    w.test_active = is_not_anon;
+    w.toggled.connect(username_toggled);
+    add_wide_widget(w);
+
+    user = new ConfigURLPart(ConfigURLPart.Part.USER,
+                             DejaDup.FILE_PATH_KEY,
+                             DejaDup.FILE_ROOT);
+    add_widget(_("_Username:"), user, w);
+  }
+
+  bool is_not_anon(string val)
+  {
+    return (val != "anonymous");
+  }
+
+  void username_toggled(Togglable check, bool user)
+  {
+    if (!check.get_active())
+      ConfigURLPart.write_uri_part(DejaDup.get_settings(DejaDup.FILE_ROOT),
+                                   DejaDup.FILE_PATH_KEY,
+                                   ConfigURLPart.Part.USER, "anonymous");
   }
 }
 

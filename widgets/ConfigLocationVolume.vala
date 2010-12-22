@@ -21,26 +21,15 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigLocationSSH : ConfigLocationTable
+public class ConfigLocationVolume : ConfigLocationTable
 {
-  public ConfigLocationSSH(Gtk.SizeGroup sg) {
+  public ConfigLocationVolume(Gtk.SizeGroup sg) {
     Object(label_sizes: sg);
   }
 
   construct {
-    add_widget(_("_Server:"), new ConfigURLPart(ConfigURLPart.Part.SERVER,
-                                                DejaDup.FILE_PATH_KEY,
+    add_widget(_("_Folder:"), new ConfigRelPath(DejaDup.FILE_RELPATH_KEY,
                                                 DejaDup.FILE_ROOT));
-    add_optional_label();
-    add_widget(_("_Port:"), new ConfigURLPart(ConfigURLPart.Part.PORT,
-                                              DejaDup.FILE_PATH_KEY,
-                                              DejaDup.FILE_ROOT));
-    add_widget(_("_Folder:"), new ConfigURLPart(ConfigURLPart.Part.FOLDER,
-                                                DejaDup.FILE_PATH_KEY,
-                                                DejaDup.FILE_ROOT));
-    add_widget(_("_Username:"), new ConfigURLPart(ConfigURLPart.Part.USER,
-                                                  DejaDup.FILE_PATH_KEY,
-                                                  DejaDup.FILE_ROOT));
   }
 }
 

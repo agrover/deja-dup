@@ -21,9 +21,9 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigLocationSSH : ConfigLocationTable
+public class ConfigLocationDAV : ConfigLocationTable
 {
-  public ConfigLocationSSH(Gtk.SizeGroup sg) {
+  public ConfigLocationDAV(Gtk.SizeGroup sg) {
     Object(label_sizes: sg);
   }
 
@@ -31,6 +31,15 @@ public class ConfigLocationSSH : ConfigLocationTable
     add_widget(_("_Server:"), new ConfigURLPart(ConfigURLPart.Part.SERVER,
                                                 DejaDup.FILE_PATH_KEY,
                                                 DejaDup.FILE_ROOT));
+
+    var w = new ConfigURLPartBool(ConfigURLPart.Part.SCHEME,
+                                  DejaDup.FILE_PATH_KEY,
+                                  DejaDup.FILE_ROOT,
+                                  _("Use secure connection (_HTTPS)"));
+    w.test_active = is_https_active;
+    w.toggled.connect(https_toggled);
+    add_wide_widget(w);
+
     add_optional_label();
     add_widget(_("_Port:"), new ConfigURLPart(ConfigURLPart.Part.PORT,
                                               DejaDup.FILE_PATH_KEY,
@@ -41,6 +50,27 @@ public class ConfigLocationSSH : ConfigLocationTable
     add_widget(_("_Username:"), new ConfigURLPart(ConfigURLPart.Part.USER,
                                                   DejaDup.FILE_PATH_KEY,
                                                   DejaDup.FILE_ROOT));
+  }
+
+  bool is_https_active(string val)
+  {
+    return val == "davs";
+  }
+
+  void https_toggled(Togglable toggle, bool user)
+  {
+    if (!user)
+      return;
+
+    string scheme;
+    if (toggle.get_active())
+      scheme = "davs";
+    else
+      scheme = "dav";
+
+    ConfigURLPart.write_uri_part(DejaDup.get_settings(DejaDup.FILE_ROOT),
+                                 DejaDup.FILE_PATH_KEY,
+                                 ConfigURLPart.Part.SCHEME, scheme);
   }
 }
 

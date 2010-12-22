@@ -40,6 +40,7 @@ public class AssistantBackup : AssistantOperation
   {
     int rows = 0;
     Gtk.Widget w, label;
+    Gtk.SizeGroup label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
     var vbox = new Gtk.VBox(false, 0);
     vbox.border_width = 12;
@@ -48,12 +49,16 @@ public class AssistantBackup : AssistantOperation
     page.set("row-spacing", 6,
              "column-spacing", 6);
     
-    w = new DejaDup.ConfigLocation();
+    var location = new DejaDup.ConfigLocation(label_sizes);
     label = new Gtk.Label.with_mnemonic(_("_Backup location:"));
     label.set("xalign", 0.0f,
-              "mnemonic-widget", w);
+              "mnemonic-widget", location);
+    label_sizes.add_widget(label);
     page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
+    page.attach(location, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
+    ++rows;
+
+    page.attach(location.extras, 0, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
     ++rows;
     
     w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
@@ -66,7 +71,18 @@ public class AssistantBackup : AssistantOperation
     
     vbox.pack_start(page, true, true, 0);
     vbox.pack_end(w, false, false, 0);
-    
+
+    vbox.show_all();
+
+    // Now make sure to reserve the excess space that the hidden bits of
+    // ConfigLocation will need.
+    Gtk.Requisition req, hidden;
+    vbox.size_request(out req);
+    hidden = location.hidden_size();
+    req.width = req.width + hidden.width;
+    req.height = req.height + hidden.height;
+    vbox.set_size_request(req.width, req.height);
+
     return vbox;
   }
   
