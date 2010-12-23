@@ -53,7 +53,7 @@ public class ConfigLabelPolicy : ConfigLabel
       return;
     }
     
-    bool infinite = (yield backend.get_space(false)) == Backend.INFINITE_SPACE;
+    bool infinite = backend.space_can_be_infinite();
     if (infinite) {
       // Don't bother showing anything because the policy is just the same
       // as the delete_after setting.  So the user can just look at that.

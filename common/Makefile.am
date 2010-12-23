@@ -49,6 +49,7 @@ libcommon_la_VALABUILTSOURCES = \
 
 libcommon_la_SOURCES = \
 	chacks.c chacks.h \
+	uriutils.c uriutils.h \
 	$(libcommon_la_VALABUILTSOURCES)
 
 if MAINTAINER_MODE

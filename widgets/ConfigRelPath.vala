@@ -21,40 +21,32 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigBool : ConfigWidget, Togglable
+public class ConfigRelPath : ConfigEntry
 {
-  public string label {get; construct;}
-  
-  public ConfigBool(string key, string label, string ns="")
+  public ConfigRelPath(string key, string ns="")
   {
-    Object(key: key, label: label, ns: ns);
+    Object(key: key, ns: ns);
   }
-  
-  public bool get_active() {return button.get_active();}
-  
-  protected Gtk.CheckButton button;
-  protected bool user_driven = true;
-  construct {
-    button = new Gtk.CheckButton.with_mnemonic(label);
-    add(button);
-    
-    set_from_config();
-    button.toggled.connect(handle_toggled);
-  }
-  
+
   protected override async void set_from_config()
   {
-    var val = settings.get_boolean(key);
-    var prev = user_driven;
-    user_driven = false;
-    button.set_active(val);
-    user_driven = prev;
+    var byte_val = settings.get_value(key);
+    string val = null;
+    try {
+      val = Filename.to_utf8(byte_val.get_bytestring(), -1, null, null);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
+    if (val == null)
+      val = "";
+    entry.set_text(val);
   }
-  
-  protected virtual void handle_toggled()
+
+  public override void write_to_config()
   {
-    settings.set_boolean(key, button.get_active());
-    toggled(this, user_driven);
+    var val = new Variant.bytestring(entry.get_text());
+    settings.set_value(key, val);
   }
 }
 

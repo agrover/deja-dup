@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,39 +21,38 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigBool : ConfigWidget, Togglable
+public class ConfigURLPartBool : ConfigBool
 {
-  public string label {get; construct;}
-  
-  public ConfigBool(string key, string label, string ns="")
-  {
-    Object(key: key, label: label, ns: ns);
+  public delegate bool TestActive(string val);
+  public ConfigURLPart.Part part {get; construct;}
+
+  TestActive _test_active;
+  public TestActive test_active {
+    get {return _test_active;}
+    set {
+      _test_active = value;
+      set_from_config();
+    }
   }
-  
-  public bool get_active() {return button.get_active();}
-  
-  protected Gtk.CheckButton button;
-  protected bool user_driven = true;
-  construct {
-    button = new Gtk.CheckButton.with_mnemonic(label);
-    add(button);
-    
-    set_from_config();
-    button.toggled.connect(handle_toggled);
+
+  public ConfigURLPartBool(ConfigURLPart.Part part, string key, string ns,
+                           string label) {
+    Object(key: key, ns: ns, part: part, label: label);
   }
-  
+
   protected override async void set_from_config()
   {
-    var val = settings.get_boolean(key);
-    var prev = user_driven;
-    user_driven = false;
-    button.set_active(val);
-    user_driven = prev;
+    if (test_active != null) {
+      var userval = ConfigURLPart.read_uri_part(settings, key, part);
+      var prev = user_driven;
+      user_driven = false;
+      button.active = test_active(userval);
+      user_driven = prev;
+    }
   }
-  
-  protected virtual void handle_toggled()
+
+  protected override void handle_toggled()
   {
-    settings.set_boolean(key, button.get_active());
     toggled(this, user_driven);
   }
 }

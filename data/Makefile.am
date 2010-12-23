@@ -20,7 +20,8 @@ nobase_dist_data_DATA = \
 	icons/hicolor/scalable/apps/deja-dup.svg \
 	icons/hicolor/scalable/apps/deja-dup-symbolic.svg \
 	icons/hicolor/scalable/actions/deja-dup-backup.svg \
-	icons/hicolor/scalable/actions/deja-dup-restore.svg
+	icons/hicolor/scalable/actions/deja-dup-restore.svg \
+	icons/hicolor/scalable/devices/deja-dup-cloud.svg
 
 nobase_dist_pkgdata_DATA = \
 	ui/restore-missing.ui

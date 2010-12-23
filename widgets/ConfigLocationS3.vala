@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,39 +21,18 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigEntry : ConfigWidget
+public class ConfigLocationS3 : ConfigLocationTable
 {
-  public ConfigEntry(string key, string ns="")
-  {
-    Object(key: key, ns: ns);
+  public ConfigLocationS3(Gtk.SizeGroup sg) {
+    Object(label_sizes: sg);
   }
-  
-  protected Gtk.Entry entry;
+
   construct {
-    entry = new Gtk.Entry();
-    add(entry);
-    
-    set_from_config();
-    entry.focus_out_event.connect(handle_focus_out);
-  }
-  
-  protected override async void set_from_config()
-  {
-    var val = settings.get_string(key);
-    if (val == null)
-      val = "";
-    entry.set_text(val);
-  }
-
-  public virtual void write_to_config()
-  {
-    settings.set_string(key, entry.get_text());
-  }
-
-  bool handle_focus_out()
-  {
-    write_to_config();
-    return false;
+    add_optional_label();
+    add_widget(_("S3 Access Key I_D:"),
+               new ConfigEntry(DejaDup.S3_ID_KEY, DejaDup.S3_ROOT));
+    add_widget(_("_Folder:"),
+               new ConfigEntry(DejaDup.S3_FOLDER_KEY, DejaDup.S3_ROOT));
   }
 }
 
