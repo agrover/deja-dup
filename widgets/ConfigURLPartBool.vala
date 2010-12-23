@@ -44,16 +44,16 @@ public class ConfigURLPartBool : ConfigBool
   {
     if (test_active != null) {
       var userval = ConfigURLPart.read_uri_part(settings, key, part);
-      button.disconnect(toggle_id);
+      var prev = user_driven;
+      user_driven = false;
       button.active = test_active(userval);
-      toggled(this, false);
-      toggle_id = button.toggled.connect(handle_toggled);
+      user_driven = prev;
     }
   }
 
   protected override void handle_toggled()
   {
-    toggled(this, true);
+    toggled(this, user_driven);
   }
 }
 

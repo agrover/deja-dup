@@ -21,18 +21,10 @@ using GLib;
 
 public class PreferencesDialog : Gtk.Dialog
 {
-  static const int S3_LIST = 0;
-  static const int NUM_LISTS = 1;
-  List<Gtk.Widget>[] backend_widgets;
-  
   Gtk.SizeGroup label_sizes;
   Gtk.SizeGroup button_sizes;
   DejaDup.ToggleGroup periodic_toggle;
 
-  Gtk.HBox location_hbox;
-  DejaDup.ConfigLabelLocation location_label_noedit;
-  Gtk.Button location_label_button;
-  
   public PreferencesDialog(Gtk.Window? parent = null) {
     transient_for = parent;
   }
@@ -53,88 +45,37 @@ public class PreferencesDialog : Gtk.Dialog
     int row;
     
     page_box = new Gtk.VBox(false, 0);
-    page_box.set("border-width", 3);
-    table = new Gtk.Table(0, 3, false);
+    page_box.border_width = 6;
+    table = new Gtk.Table(0, 0, false);
+    table.row_spacing = 6;
+    table.column_spacing = 6;
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
 
-    backend_widgets = new List<Gtk.Widget>[NUM_LISTS];
-    
-    // We can't start by showing a ConfigLocation, because many locations
-    // will not be immediately available (remote URIs that aren't yet mounted,
-    // removable drives that aren't connected).  No need to immediately prompt
-    // for them, just so we can show.  Instead, start with a label, and allow
-    // user to change to edit widget.  Of course, if the user has never backed
-    // anything up, they want to start in edit mode.
-    string last_run = null;
-    try {
-      var settings = DejaDup.get_settings();
-      last_run = settings.get_string(DejaDup.LAST_RUN_KEY);
-    }
-    catch (Error e) {warning("%s\n", e.message);}
-
-    location_hbox = new Gtk.HBox(false, 6);
-    location_hbox.set("border-width", 0);
-
-    if (last_run != null && last_run != "") {
-      location_label_noedit = new DejaDup.ConfigLabelLocation();
-      location_label_noedit.changed.connect(handle_location_label_changed);
-      location_label_button = new Gtk.Button.from_stock(Gtk.STOCK_EDIT);
-      location_label_button.clicked.connect(handle_edit_location);
-      button_sizes.add_widget(location_label_button);
-      location_hbox.pack_start(location_label_noedit, true, true, 0);
-      location_hbox.pack_start(location_label_button, false, false, 0);
-    }
-
+    var location = new DejaDup.ConfigLocation(label_sizes);
     label = new Gtk.Label(_("_Backup location:"));
-    label.set("mnemonic-widget", location_hbox,
+    label.set("mnemonic-widget", location,
               "use-underline", true,
               "xalign", 0.0f);
     label_sizes.add_widget(label);
 
     table.attach(label, 0, 1, row, row + 1,
-                 0, Gtk.AttachOptions.FILL, 3, 3);
-    table.attach(location_hbox, 1, 2, row, row + 1,
+                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    table.attach(location, 1, 2, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 Gtk.AttachOptions.FILL, 3, 3);
+                 Gtk.AttachOptions.FILL, 0, 0);
     ++row;
-    
-    var s3_table = new Gtk.Table(1, 3, false);
-    w = new DejaDup.ConfigEntry(DejaDup.S3_ID_KEY, DejaDup.S3_ROOT);
-    label = new Gtk.Label("    %s".printf(_("S3 Access Key I_D:")));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "xalign", 0.0f);
-    label_sizes.add_widget(label);
-    s3_table.attach(label, 0, 1, 0, 1,
-                    0, Gtk.AttachOptions.FILL, 3, 3);
-    s3_table.attach(w, 1, 3, 0, 1,
-                    Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                    Gtk.AttachOptions.FILL, 3, 3);
-    
-    w = new DejaDup.ConfigEntry(DejaDup.S3_FOLDER_KEY, DejaDup.S3_ROOT);
-    label = new Gtk.Label("    %s".printf(_("_Folder:")));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "xalign", 0.0f);
-    label_sizes.add_widget(label);
-    s3_table.attach(label, 0, 1, 1, 2,
-                    0, Gtk.AttachOptions.FILL, 3, 3);
-    s3_table.attach(w, 1, 3, 1, 2,
-                    Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                    Gtk.AttachOptions.FILL, 3, 3);
-    
-    table.attach(s3_table, 0, 3, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL,
-                 0, 0);
-    backend_widgets[S3_LIST].append(s3_table);
+
+    table.attach(location.extras, 0, 2, row, row + 1,
+                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
+                 Gtk.AttachOptions.FILL, 0, 0);
     ++row;
-    
+
     w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
     table.attach(w, 0, 3, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 Gtk.AttachOptions.FILL, 3, 3);
+                 Gtk.AttachOptions.FILL, 0, 0);
     ++row;
     
     w = new DejaDup.ConfigLabelPolicy();
@@ -146,7 +87,17 @@ public class PreferencesDialog : Gtk.Dialog
     page_box.pack_end(hbox, false, false, 0);
     notebook.append_page(page_box, null);
     notebook.set_tab_label_text(page_box, _("Storage"));
-    
+
+    // Now make sure to reserve the excess space that the hidden bits of
+    // ConfigLocation will need.
+    Gtk.Requisition req, hidden;
+    page_box.show_all();
+    page_box.size_request(out req);
+    hidden = location.hidden_size();
+    req.width = req.width + hidden.width;
+    req.height = req.height + hidden.height;
+    page_box.set_size_request(req.width, req.height);
+
     // Reset page
     page_box = new Gtk.VBox(false, 0);
     page_box.set("border-width", 3);
@@ -252,68 +203,11 @@ public class PreferencesDialog : Gtk.Dialog
     page_box.pack_end(hbox, false, false, 0);
     notebook.append_page(page_box, null);
     notebook.set_tab_label_text(page_box, _("Schedule"));
-    
-    if (location_label_noedit != null)
-      handle_location_label_changed(location_label_noedit);
-    else
-      handle_edit_location();
 
     var area = (Gtk.VBox)get_content_area();
     area.add(notebook);
   }
-  
-  void handle_edit_location()
-  {
-    if (location_label_noedit != null) {
-      location_label_noedit.destroy();
-      location_label_noedit = null;
-    }
-    if (location_label_button != null) {
-      location_label_button.destroy();
-      location_label_button = null;
-    }
 
-    var location = new DejaDup.ConfigLocation();
-    location.show_all();
-    location.changed.connect(handle_location_changed);
-    location_hbox.add(location);
-    handle_location_changed(location);
-  }
-
-  void handle_location_label_changed(DejaDup.ConfigWidget location)
-  {
-/*    for (int i = 0; i < NUM_LISTS; ++i) {
-      bool show = false;
-      if (i == S3_LIST && ((DejaDup.ConfigLabelLocation)location).is_s3)
-        show = true;
-      
-      foreach (Gtk.Widget w in backend_widgets[i]) {
-        w.no_show_all = !show;
-        if (show)
-          w.show_all();
-        else
-          w.hide();
-      }
-    }*/
-  }
-
-  void handle_location_changed(DejaDup.ConfigWidget location)
-  {
-/*    for (int i = 0; i < NUM_LISTS; ++i) {
-      bool show = false;
-      if (i == S3_LIST && ((DejaDup.ConfigLocation)location).is_s3)
-        show = true;
-      
-      foreach (Gtk.Widget w in backend_widgets[i]) {
-        w.no_show_all = !show;
-        if (show)
-          w.show_all();
-        else
-          w.hide();
-      }
-    }*/
-  }
-  
   void handle_response(Gtk.Dialog dlg, int response) {
     switch (response) {
     case Gtk.ResponseType.HELP:

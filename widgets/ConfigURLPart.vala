@@ -110,7 +110,6 @@ public class ConfigURLPart : ConfigEntry
     scrub_uri(uri);
 
     var val = uri.encode_uri(true);
-    print("setting file: %s\n", val);
     settings.set_string(key, val);
   }
 

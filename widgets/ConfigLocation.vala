@@ -60,6 +60,8 @@ public class ConfigLocation : ConfigWidget
   int extras_max_width = 0;
   int extras_max_height = 0;
 
+  bool internal_set = false;
+
   Gtk.ComboBox button;
   Gtk.ListStore store;
   Gtk.TreeModelSort sort_model;
@@ -90,7 +92,7 @@ public class ConfigLocation : ConfigWidget
     extras.show();
 
     // Insert cloud providers
-    index_s3 = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
+    index_s3 = add_entry(i++, new ThemedIcon("deja-dup-cloud"),
                          _("Amazon S3"), 0, new ConfigLocationS3(label_sizes));
 
     add_separator(i++, 1);
@@ -107,6 +109,10 @@ public class ConfigLocation : ConfigWidget
 
     add_separator(i++, 2);
 
+    // And a local folder option
+    index_local = add_entry(i++, new ThemedIcon("folder"), _("Local Folder"),
+                            3, new ConfigLocationFile(label_sizes));
+
     // Now insert removable drives
     index_vol_base = i;
     var mon = VolumeMonitor.get();
@@ -122,11 +128,7 @@ public class ConfigLocation : ConfigWidget
     if (index_vol_base != index_vol_end)
       add_separator(i++, 3);
 
-    // And a local folder option
-    index_local = add_entry(i++, new ThemedIcon("folder"), _("Local Folder"),
-                            3, new ConfigLocationFile(label_sizes));
-
-    // And finally a saved volume, if one exists (must be after index_local)
+    // And finally a saved volume, if one exists (must be last)
     update_saved_volume();
 
     var pixrenderer = new Gtk.CellRendererPixbuf();
@@ -207,9 +209,13 @@ public class ConfigLocation : ConfigWidget
       var vol_name = fsettings.get_string(FILE_SHORT_NAME_KEY);
 
       // If this is the first time, add a new entry
-      if (index_vol_saved == -1)
-        index_vol_saved = add_entry(index_local+1, vol_icon, vol_name, 2,
+      if (index_vol_saved == -1) {
+        index_vol_saved = add_entry(index_vol_end+1, vol_icon, vol_name, 2,
                           new ConfigLocationVolume(label_sizes), vol_uuid);
+
+        if (index_vol_base == index_vol_end)
+          add_separator(index_vol_end+2, 3); // this hadn't been added yet, so add it now
+      }
       else if (store.get_iter_from_string(out iter, index_vol_saved.to_string()))
         store.set(iter, COL_ICON, vol_icon, COL_TEXT, vol_name, COL_UUID, vol_uuid);
 
@@ -221,6 +227,9 @@ public class ConfigLocation : ConfigWidget
 
   protected override async void set_from_config()
   {
+    if (internal_set)
+      return;
+
     int index = -1;
 
     // Check the backend type, then GIO uri if needed
@@ -288,6 +297,9 @@ public class ConfigLocation : ConfigWidget
     store.get_value(iter, COL_INDEX, out index_var);
     var index = index_var.get_int();
 
+    var prev = internal_set;
+    internal_set = true;
+
     if (index == index_s3)
       settings.set_string(BACKEND_KEY, "s3");
     else if (index == index_ssh)
@@ -307,15 +319,16 @@ public class ConfigLocation : ConfigWidget
       set_remote_info("smb");
     else if ((index >= index_vol_base && index < index_vol_end) ||
              index == index_vol_saved)
-      set_volume_info(index);
+      yield set_volume_info(index);
     else if (index == index_local)
       set_remote_info("file");
     else {
       warning("Unknown location index %i\n", index);
-      return;
     }
 
     changed();
+
+    internal_set = prev;
   }
 
   async void set_volume_info(int index)
