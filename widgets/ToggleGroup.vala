@@ -23,7 +23,7 @@ namespace DejaDup {
 
 public interface Togglable : Object
 {
-  public signal void toggled();
+  public signal void toggled(Togglable t, bool user);
   public abstract bool get_active();
 }
 
@@ -48,7 +48,7 @@ public class ToggleGroup : Object
   }
   
   construct {
-    toggle.toggled.connect((t) => {check();});
+    toggle.toggled.connect(() => {check();});
   }
 }
 

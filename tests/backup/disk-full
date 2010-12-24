@@ -35,7 +35,7 @@ def makerandom(name, size):
   
   while size > 0:
     num = int(random.getrandbits(32))
-    string = struct.pack('<i', num)
+    string = struct.pack('<I', num)
     f.write(string)
     size = size - 4
   

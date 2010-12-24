@@ -25,3 +25,23 @@ GLib.Object hacks_status_icon_make_app_indicator (Gtk.Menu menu);
 
 [CCode (cheader_filename = "whacks.h")]
 void hacks_status_icon_close_app_indicator (GLib.Object icon);
+
+[CCode (cheader_filename = "uriutils.h", destroy_function = "deja_dup_decoded_uri_free")]
+struct DejaDupDecodedUri {
+  public DejaDupDecodedUri();
+  public string scheme;
+  public string userinfo;
+  public string host;
+  public int port; /* -1 => not in uri */
+  public string path;
+  public string query;
+  public string fragment;
+}
+
+[CCode (cheader_filename = "uriutils.h")]
+string       deja_dup_encode_uri                (DejaDupDecodedUri decoded,
+                                                 bool allow_utf8);
+
+[CCode (cheader_filename = "uriutils.h")]
+DejaDupDecodedUri deja_dup_decode_uri          (string uri);
+

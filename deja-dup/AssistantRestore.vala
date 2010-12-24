@@ -84,18 +84,23 @@ public class AssistantRestore : AssistantOperation
   {
     int rows = 0;
     Gtk.Widget w, label;
+    Gtk.SizeGroup label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
     var page = new Gtk.Table(rows, 2, false);
     page.set("row-spacing", 6,
              "column-spacing", 6,
              "border-width", 12);
     
-    w = new DejaDup.ConfigLocation();
+    var location = new DejaDup.ConfigLocation(label_sizes);
     label = new Gtk.Label.with_mnemonic(_("_Backup location:"));
     label.set("xalign", 0.0f,
-              "mnemonic-widget", w);
+              "mnemonic-widget", location);
+    label_sizes.add_widget(label);
     page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
+    page.attach(location, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
+    ++rows;
+    
+    page.attach(location.extras, 0, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
     ++rows;
     
     w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("Backup files are _encrypted"));
@@ -104,6 +109,17 @@ public class AssistantRestore : AssistantOperation
                 Gtk.AttachOptions.FILL, 0, 0);
     ++rows;
     
+    page.show_all();
+
+    // Now make sure to reserve the excess space that the hidden bits of
+    // ConfigLocation will need.
+    Gtk.Requisition req, hidden;
+    page.size_request(out req);
+    hidden = location.hidden_size();
+    req.width = req.width + hidden.width;
+    req.height = req.height + hidden.height;
+    page.set_size_request(req.width, req.height);
+
     return page;
   }
   

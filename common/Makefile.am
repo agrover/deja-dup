@@ -18,19 +18,12 @@
 
 noinst_LTLIBRARIES = libcommon.la
 
-VALA_CFLAGS = \
-	--library=libcommon \
-	--vapidir $(top_srcdir)/vapi \
-	--pkg gio-2.0 \
-	--pkg gio-unix-2.0 \
-	--pkg gnome-keyring-1 \
-	--pkg posix \
-	--pkg config
-
-AM_CFLAGS = \
+libcommon_la_CFLAGS = \
 	$(COMMON_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
+
+libcommon_la_LIBADD = $(COMMON_LIBS) @INTLLIBS@
 
 libcommon_la_VALASOURCES = \
 	Backend.vala \
@@ -51,24 +44,29 @@ libcommon_la_VALASOURCES = \
 	RecursiveMove.vala \
 	RecursiveOp.vala
 
-libcommon_la_BUILTSOURCES = \
+libcommon_la_VALABUILTSOURCES = \
 	common.h \
 	$(libcommon_la_VALASOURCES:.vala=.c)
 
 libcommon_la_SOURCES = \
 	chacks.c chacks.h \
-	$(libcommon_la_BUILTSOURCES)
+	uriutils.c uriutils.h \
+	$(libcommon_la_VALABUILTSOURCES)
 
-$(libcommon_la_BUILTSOURCES): vala.stamp
+if MAINTAINER_MODE
+PACKAGES = \
+	--pkg gio-2.0 \
+	--pkg gio-unix-2.0 \
+	--pkg gnome-keyring-1 \
+	--pkg posix \
+	--pkg config
+BUILT_SOURCES = vala.stamp
 vala.stamp: $(libcommon_la_VALASOURCES)
-if USE_VALAC
-	$(AM_V_GEN)$(VALAC) -C -H common.h $(VALA_CFLAGS) $^
-	@touch $@
-else
-	@echo "ERROR: Valac compilation is disabled, but the C sources are out-of-date."
-	@exit 1
+	$(AM_V_GEN)$(VALAC) --library=libcommon -H common.h --vapidir=$(top_srcdir)/vapi $(PACKAGES) $^ -C
+	touch $@
 endif
 
-libcommon_la_LIBADD = $(COMMON_LIBS) @INTLLIBS@
-
-EXTRA_DIST = vala.stamp $(libcommon_la_VALASOURCES)
+EXTRA_DIST = $(libcommon_la_VALASOURCES)
+if MAINTAINER_MODE
+CLEANFILES = $(BUILT_SOURCES) $(libcommon_la_VALABUILTSOURCES)
+endif

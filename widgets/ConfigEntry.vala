@@ -28,7 +28,7 @@ public class ConfigEntry : ConfigWidget
     Object(key: key, ns: ns);
   }
   
-  Gtk.Entry entry;
+  protected Gtk.Entry entry;
   construct {
     entry = new Gtk.Entry();
     add(entry);
@@ -44,10 +44,15 @@ public class ConfigEntry : ConfigWidget
       val = "";
     entry.set_text(val);
   }
-  
-  bool handle_focus_out()
+
+  public virtual void write_to_config()
   {
     settings.set_string(key, entry.get_text());
+  }
+
+  bool handle_focus_out()
+  {
+    write_to_config();
     return false;
   }
 }

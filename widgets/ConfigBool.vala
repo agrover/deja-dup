@@ -32,7 +32,8 @@ public class ConfigBool : ConfigWidget, Togglable
   
   public bool get_active() {return button.get_active();}
   
-  Gtk.CheckButton button;
+  protected Gtk.CheckButton button;
+  protected bool user_driven = true;
   construct {
     button = new Gtk.CheckButton.with_mnemonic(label);
     add(button);
@@ -44,13 +45,16 @@ public class ConfigBool : ConfigWidget, Togglable
   protected override async void set_from_config()
   {
     var val = settings.get_boolean(key);
+    var prev = user_driven;
+    user_driven = false;
     button.set_active(val);
+    user_driven = prev;
   }
   
-  void handle_toggled()
+  protected virtual void handle_toggled()
   {
     settings.set_boolean(key, button.get_active());
-    toggled();
+    toggled(this, user_driven);
   }
 }
 

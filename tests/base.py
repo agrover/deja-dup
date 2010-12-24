@@ -214,8 +214,8 @@ def start_deja_dup(args=[''], waitfor='frmDéjàDup'):
     subprocess.Popen(['deja-dup'] + args)
   if waitfor is not None:
     ldtp.waittillguiexist(waitfor)
-  if debug:
-    os.remove(path)
+  #if debug:
+  #  os.remove(path)
 
 def start_deja_dup_prefs():
   subprocess.Popen(['deja-dup-preferences'])

@@ -20,21 +20,23 @@
 
 LINGUAS = C $(shell grep -v "^\#" $(top_srcdir)/po/LINGUAS)
 
-C/stamp: include.main include.pref $(top_builddir)/deja-dup/deja-dup $(top_builddir)/preferences/deja-dup-preferences
+C/stamp: $(srcdir)/include.main $(srcdir)/include.pref $(top_builddir)/deja-dup/deja-dup $(top_builddir)/preferences/deja-dup-preferences
 	@$(mkdir_p) C
-	@./help2man -N -i include.main -L en_US.UTF-8 $(top_builddir)/deja-dup/deja-dup > C/deja-dup.1
-	@./help2man -N -i include.pref -L en_US.UTF-8 $(top_builddir)/preferences/deja-dup-preferences > C/deja-dup-preferences.1
+	@$(srcdir)/help2man -N -i $(srcdir)/include.main -L en_US.UTF-8 $(top_builddir)/deja-dup/deja-dup > C/deja-dup.1
+	@$(srcdir)/help2man -N -i $(srcdir)/include.pref -L en_US.UTF-8 $(top_builddir)/preferences/deja-dup-preferences > C/deja-dup-preferences.1
 	$(AM_V_GEN)touch $@
 
-%/stamp: $(top_builddir)/po/%.gmo include.main include.pref $(top_builddir)/deja-dup/deja-dup $(top_builddir)/preferences/deja-dup-preferences
+%/stamp: $(top_builddir)/po/%.gmo $(srcdir)/include.main $(srcdir)/include.pref $(top_builddir)/deja-dup/deja-dup $(top_builddir)/preferences/deja-dup-preferences
 	@$(mkdir_p) locales/$*/LC_MESSAGES
 	@$(mkdir_p) $*
 	@cp $(top_builddir)/po/$*.gmo locales/$*/LC_MESSAGES/deja-dup.mo
-	@DEJA_DUP_LOCALEDIR=$(abs_builddir)/locales DEJA_DUP_LANGUAGE=$* ./help2man -N -i include.main -L en_US.UTF-8 $(top_builddir)/deja-dup/deja-dup > $*/deja-dup.1
-	@DEJA_DUP_LOCALEDIR=$(abs_builddir)/locales DEJA_DUP_LANGUAGE=$* ./help2man -N -i include.pref -L en_US.UTF-8 $(top_builddir)/preferences/deja-dup-preferences > $*/deja-dup-preferences.1
+	@DEJA_DUP_LOCALEDIR=$(abs_builddir)/locales DEJA_DUP_LANGUAGE=$* $(srcdir)/help2man -N -i $(srcdir)/include.main -L en_US.UTF-8 $(top_builddir)/deja-dup/deja-dup > $*/deja-dup.1
+	@DEJA_DUP_LOCALEDIR=$(abs_builddir)/locales DEJA_DUP_LANGUAGE=$* $(srcdir)/help2man -N -i $(srcdir)/include.pref -L en_US.UTF-8 $(top_builddir)/preferences/deja-dup-preferences > $*/deja-dup-preferences.1
 	$(AM_V_GEN)touch $@
 
 man: $(patsubst %,%/stamp,$(LINGUAS))
+
+EXTRA_DIST = help2man include.main include.pref
 
 clean-local: clean-local-@USE_NLS@
 distclean-local: clean-local-@USE_NLS@

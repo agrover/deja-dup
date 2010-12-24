@@ -143,19 +143,26 @@ public class BackendFile : Backend
   }
 
   public override Icon? get_icon() {
-    try {
-      var settings = get_settings(FILE_ROOT);
-      var type = settings.get_string(FILE_TYPE_KEY);
-      if (type == "volume") {
-        var icon_str = settings.get_string(FILE_ICON_KEY);
-        return Icon.new_for_string(icon_str);
-      }
-      else {
+    var settings = get_settings(FILE_ROOT);
+    var type = settings.get_string(FILE_TYPE_KEY);
+    string icon_name;
+    if (type == "volume")
+      icon_name = settings.get_string(FILE_ICON_KEY);
+    else {
+      try {
         var file = get_file_from_settings();
         var info = file.query_info(FILE_ATTRIBUTE_STANDARD_ICON,
                                    FileQueryInfoFlags.NONE, null);
         return info.get_icon();
       }
+      catch (Error e) {
+        // Likely a remote server that is not mounted
+        icon_name = "folder-remote";
+      }
+    }
+
+    try {
+      return Icon.new_for_string(icon_name);
     }
     catch (Error e) {
       warning("%s\n", e.message);
@@ -186,6 +193,8 @@ public class BackendFile : Backend
   {
     var settings = get_settings(FILE_ROOT);
 
+    get_settings().set_string(BACKEND_KEY, "file");
+
     if (!file.is_native()) {
       settings.set_string(FILE_TYPE_KEY, "normal");
       return;
@@ -208,24 +217,36 @@ public class BackendFile : Backend
     if (volume == null)
       return;
 
+    string relpath = null;
+    if (file != null) {
+      relpath = mount.get_root().get_relative_path(file);
+      if (relpath == null)
+        relpath = "";
+    }
+
+    set_volume_info(volume, relpath);
+  }
+
+  public async static void set_volume_info(Volume volume, string? relpath = null)
+  {
+    get_settings().set_string(BACKEND_KEY, "file");
+
     var uuid = volume.get_identifier(VOLUME_IDENTIFIER_KIND_UUID);
     if (uuid == null || uuid == "")
       return;
 
-    var relpath = mount.get_root().get_relative_path(file);
-    if (relpath == null)
-      relpath = "";
-
+    var settings = get_settings(FILE_ROOT);
     settings.delay();
-    settings.set_string(FILE_UUID_KEY, uuid);
-    settings.set_value(FILE_RELPATH_KEY, new Variant.bytestring(relpath));
     settings.set_string(FILE_TYPE_KEY, "volume");
+    settings.set_string(FILE_UUID_KEY, uuid);
+    if (relpath != null)
+      settings.set_value(FILE_RELPATH_KEY, new Variant.bytestring(relpath));
     settings.apply();
 
     update_volume_info(volume);
   }
 
-  static void update_volume_info(Volume volume) throws Error
+  static void update_volume_info(Volume volume)
   {
     var settings = get_settings(FILE_ROOT);
 
@@ -251,16 +272,6 @@ public class BackendFile : Backend
     settings.set_string(FILE_NAME_KEY, name);
     settings.set_string(FILE_SHORT_NAME_KEY, short_name);
     settings.set_string(FILE_ICON_KEY, icon_str);
-
-    // Also update full path just in case (useful if downgrading to old version?)
-    var mount = volume.get_mount();
-    if (mount != null) {
-      var path_val = settings.get_value(FILE_RELPATH_KEY);
-      var path = path_val.get_bytestring();
-      if (path != null)
-        path = mount.get_root().get_child(path).get_parse_name();
-      settings.set_string(FILE_PATH_KEY, path);
-    }
 
     settings.apply();
   }
@@ -337,7 +348,7 @@ public class BackendFile : Backend
     return rv;
   }
 
-  static Volume? find_volume_by_uuid(string uuid)
+  public static Volume? find_volume_by_uuid(string uuid)
   {
     var mon = VolumeMonitor.get();
     mon.ref(); // bug 569418; bad things happen when VM goes away
@@ -391,6 +402,8 @@ public class BackendFile : Backend
       return INFINITE_SPACE;
     }
   }
+
+  public override bool space_can_be_infinite() {return false;}
 }
 
 } // end namespace

@@ -1,7 +1,7 @@
 # -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008,2009 Michael Terry <mike@mterry.name>
+# © 2008–2010 Michael Terry <mike@mterry.name>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,8 @@ nobase_dist_data_DATA = \
 	icons/hicolor/scalable/apps/deja-dup.svg \
 	icons/hicolor/scalable/apps/deja-dup-symbolic.svg \
 	icons/hicolor/scalable/actions/deja-dup-backup.svg \
-	icons/hicolor/scalable/actions/deja-dup-restore.svg
+	icons/hicolor/scalable/actions/deja-dup-restore.svg \
+	icons/hicolor/scalable/devices/deja-dup-cloud.svg
 
 nobase_dist_pkgdata_DATA = \
 	ui/restore-missing.ui
