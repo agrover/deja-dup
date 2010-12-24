@@ -29,7 +29,7 @@ libcommon_la_VALASOURCES = \
 	Backend.vala \
 	BackendFile.vala \
 	BackendS3.vala \
-	BackendUbuntuOne.vala \
+	BackendU1.vala \
 	CommonUtils.vala \
 	Duplicity.vala \
 	DuplicityInfo.vala \

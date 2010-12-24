@@ -21,18 +21,17 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigLocationS3 : ConfigLocationTable
+public class ConfigFolder : ConfigEntry
 {
-  public ConfigLocationS3(Gtk.SizeGroup sg) {
-    Object(label_sizes: sg);
+  public ConfigFolder(string key, string ns="")
+  {
+    Object(key: key, ns: ns);
   }
 
-  construct {
-    add_optional_label();
-    add_widget(_("S3 Access Key I_D:"),
-               new ConfigEntry(DejaDup.S3_ID_KEY, DejaDup.S3_ROOT));
-    add_widget(_("_Folder:"),
-               new ConfigFolder(DejaDup.S3_FOLDER_KEY, DejaDup.S3_ROOT));
+  protected override async void set_from_config()
+  {
+    var val = DejaDup.get_folder_key(settings, key);
+    entry.set_text(val);
   }
 }
 

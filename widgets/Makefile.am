@@ -33,6 +33,7 @@ libwidgets_la_VALASOURCES = \
 	ConfigChoice.vala \
 	ConfigDelete.vala \
 	ConfigEntry.vala \
+	ConfigFolder.vala \
 	ConfigLabel.vala \
 	ConfigLabelBool.vala \
 	ConfigLabelList.vala \
@@ -47,6 +48,7 @@ libwidgets_la_VALASOURCES = \
 	ConfigLocationSSH.vala \
 	ConfigLocationSMB.vala \
 	ConfigLocationTable.vala \
+	ConfigLocationU1.vala \
 	ConfigLocationVolume.vala \
 	ConfigNumber.vala \
 	ConfigPeriod.vala \

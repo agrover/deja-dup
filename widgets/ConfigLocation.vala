@@ -98,9 +98,9 @@ public class ConfigLocation : ConfigWidget
     index_s3 = add_entry(i++, new ThemedIcon("deja-dup-cloud"),
                          _("Amazon S3"), 0, new ConfigLocationS3(label_sizes));
 
-    //if (backend == "u1" || DejaDup.BackendUbuntuOne.is_available())
-    //  index_u1 = add_entry(i++, new ThemedIcon("ubuntuone"),
-    //                       _("Ubuntu One"), 0, new ConfigLocationU1(label_sizes));
+    if (backend == "u1" || DejaDup.BackendU1.is_available())
+      index_u1 = add_entry(i++, new ThemedIcon("ubuntuone"),
+                           _("Ubuntu One"), 0, new ConfigLocationU1(label_sizes));
 
     add_separator(i++, 1);
 

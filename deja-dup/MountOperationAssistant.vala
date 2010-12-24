@@ -19,6 +19,16 @@
 
 using GLib;
 
+/**
+ * This class can be used by backends in one of two ways:
+ * 1) Traditional way, by having this ask the user for info and then sending
+ *    a reply signal.
+ * 2) Or by driving the authentication themselves in some secret way.  If so,
+ *    they will ask for a button to be shown to start the authentication.
+ *    When they are done, they will set the 'go_forward' property to true.
+ *    This is used by the U1 backend.
+ */
+
 public class MountOperationAssistant : MountOperation
 {
   public string label_button {get; set;}
@@ -28,6 +38,7 @@ public class MountOperationAssistant : MountOperation
   public string label_show_password {get; set; default = _("S_how password");}
   public string label_remember_password {get; set; default = _("_Remember password");}
   public uint xid {get; private set;}
+  public bool go_forward {get; set; default = false;} // set by backends if they want to move on
 
   signal void button_clicked();
 
@@ -53,6 +64,16 @@ public class MountOperationAssistant : MountOperation
 
     assist.realize();
     xid = (uint)Gdk.x11_drawable_get_xid(assist.get_window());
+  }
+
+  construct {
+    connect("notify::go-forward", go_forward_changed, null);
+  }
+
+  void go_forward_changed()
+  {
+    if (go_forward)
+      assist.go_forward();      
   }
 
   public override void aborted()
@@ -249,6 +270,8 @@ public class MountOperationAssistant : MountOperation
     var valid = is_anonymous() ||
                 (is_valid_entry(username_w) &&
                  is_valid_entry(domain_w));
+    if (label_button != null)
+      valid = false; // buttons are used for backend-driven authentication
     assist.allow_forward(valid);
   }
 

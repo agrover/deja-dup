@@ -62,7 +62,7 @@ public abstract class Backend : Object
       backend = "auto"; // default to auto if string is not known
 
     if (backend == "auto") {
-      if (BackendUbuntuOne.is_available())
+      if (BackendU1.is_available())
         backend = "u1";
       else
         backend = "s3";
@@ -78,7 +78,7 @@ public abstract class Backend : Object
     if (backend_name == "s3")
       return new BackendS3();
     else if (backend_name == "u1")
-      return new BackendUbuntuOne();
+      return new BackendU1();
     else if (backend_name == "file")
       return new BackendFile();
     else

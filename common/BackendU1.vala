@@ -21,10 +21,18 @@ using GLib;
 
 namespace DejaDup {
 
-public class BackendUbuntuOne : Backend
+public const string U1_ROOT = "U1";
+public const string U1_FOLDER_KEY = "folder";
+
+public class BackendU1 : Backend
 {
+  string app_name = "Ubuntu One";
+
   public static bool is_available()
   {
+    if (!DuplicityInfo.get_default().has_u1)
+      return false;
+
     try {
       var obj = get_proxy();
       return obj.get_name_owner() != null;
@@ -36,11 +44,15 @@ public class BackendUbuntuOne : Backend
   }
 
   public override Backend clone() {
-    return new BackendUbuntuOne();
+    return new BackendU1();
   }
 
   public override bool is_native() {
     return false;
+  }
+
+  public override Icon? get_icon() {
+    return new ThemedIcon("ubuntuone");
   }
 
   public override bool is_ready(out string when) {
@@ -58,16 +70,44 @@ public class BackendUbuntuOne : Backend
     return _("Ubuntu One");
   }
 
-  public override async void get_envp() throws Error
+  // FIXME: just for testing
+  async void clear() throws Error
   {
     var obj = get_proxy();
-    print("about to call find_credentials\n");
     var builder = new VariantBuilder(new VariantType("a{ss}"));
-    var creds = yield obj.call("find_credentials",
-                               new Variant("(sa{ss})", "Ubuntu One", builder),
-                               DBusCallFlags.NONE, -1, null);
-    print("called find_credentials\n");
-    if (false) // TODO
+    yield obj.call("clear_credentials", new Variant("(sa{ss})", app_name, builder),
+             DBusCallFlags.NONE, -1, null);
+  }
+
+  public override async void get_envp() throws Error
+  {
+    //clear(); // FIXME
+    var obj = get_proxy();
+
+    Idle.add(() => {
+      var builder = new VariantBuilder(new VariantType("a{ss}"));
+      obj.call("find_credentials",
+               new Variant("(sa{ss})", app_name, builder),
+               DBusCallFlags.NONE, -1, null);
+      return false;
+    });
+
+    bool found = false;
+
+    var loop = new MainLoop(null, false);
+    obj.g_signal.connect((obj, sender, signal_name, args) => {
+      if (signal_name == "CredentialsFound") {
+        string appname;
+        var builder = new VariantBuilder(new VariantType("a{ss}"));
+        args.get("(sa{ss})", out appname, out builder);
+        if (appname == app_name)
+          found = true;
+      }
+      loop.quit();
+    });
+    loop.run();
+
+    if (found)
       envp_ready(true, null);
     else
       ask_password();
@@ -76,7 +116,6 @@ public class BackendUbuntuOne : Backend
   void ask_password() {
     mount_op.set("label_button", _("Sign into Ubuntu One"));
     mount_op.connect("signal::button-clicked", sign_in, null);
-    //mount_op.reply.connect(got_password_reply);
     mount_op.ask_password(_("Connect to Ubuntu One"), "", "", 0);
   }
 
@@ -84,15 +123,31 @@ public class BackendUbuntuOne : Backend
   {
     try {
       var obj = get_proxy();
-      print("signing in!\n");
-      var builder = new VariantBuilder(new VariantType("a{ss}"));
-      builder.add("{ss}", "tc_url", "https://one.ubuntu.com/terms/");
-      builder.add("{ss}", "ping_url", "https://one.ubuntu.com/oauth/sso-finished-so-get-tokens/");
-      builder.add("{ss}", "help_text", _("Ubuntu One requires an Ubuntu Single Sign On (SSO) account. This process will allow you to create a new account, if you do not yet have one."));
-      var creds = yield obj.call("register",
-                                 new Variant("(sa{ss})", "Ubuntu One", builder),
-                                 DBusCallFlags.NONE, -1, null);
-      print("done signing in\n");
+
+      Idle.add(() => {
+        var builder = new VariantBuilder(new VariantType("a{ss}"));
+        builder.add("{ss}", "tc_url", "https://one.ubuntu.com/terms/");
+        builder.add("{ss}", "ping_url", "https://one.ubuntu.com/oauth/sso-finished-so-get-tokens/");
+        builder.add("{ss}", "help_text", _("Ubuntu One requires an Ubuntu Single Sign On (SSO) account. This process will allow you to create a new account, if you do not yet have one."));
+        obj.call("register", new Variant("(sa{ss})", app_name, builder),
+                 DBusCallFlags.NONE, -1, null);
+        return false;
+      });
+
+      var loop = new MainLoop(null, false);
+      obj.g_signal.connect((obj, sender, signal_name, args) => {
+        if (signal_name == "CredentialsFound") {
+          string appname;
+          var builder = new VariantBuilder(new VariantType("a{ss}"));
+          args.get("(sa{ss})", out appname, out builder);
+          if (appname == app_name) {
+            mount_op.set("go_forward", true);
+            envp_ready(true, null);
+          }
+        }
+        loop.quit();
+      });
+      loop.run();
     }
     catch (Error e) {
       warning("%s\n", e.message);
