@@ -26,12 +26,7 @@ public class BackendUbuntuOne : Backend
   public static bool is_available()
   {
     try {
-      DBusProxy obj = new DBusProxy.for_bus_sync(BusType.SESSION,
-                                                 DBusProxyFlags.NONE, null,
-                                                 "com.ubuntu.sso",
-                                                 "/com/ubuntu/sso/credentials",
-                                                 "com.ubuntu.sso.CredentialsManagement",
-                                                 null);
+      var obj = get_proxy();
       return obj.get_name_owner() != null;
     }
     catch (Error e) {
@@ -65,16 +60,13 @@ public class BackendUbuntuOne : Backend
 
   public override async void get_envp() throws Error
   {
-    DBusProxy obj = new DBusProxy.for_bus_sync(BusType.SESSION,
-                                               DBusProxyFlags.NONE, null, 
-                                               "com.ubuntu.sso",
-                                               "/com/ubuntu/sso/credentials",
-                                               "com.ubuntu.sso.CredentialsManagement",
-                                               null);
-
+    var obj = get_proxy();
+    print("about to call find_credentials\n");
+    var builder = new VariantBuilder(new VariantType("a{ss}"));
     var creds = yield obj.call("find_credentials",
-                               new Variant("(s{ss})", "Ubuntu One", TODO),
+                               new Variant("(sa{ss})", "Ubuntu One", builder),
                                DBusCallFlags.NONE, -1, null);
+    print("called find_credentials\n");
     if (false) // TODO
       envp_ready(true, null);
     else
@@ -91,23 +83,31 @@ public class BackendUbuntuOne : Backend
   async void sign_in()
   {
     try {
-      DBusProxy obj = new DBusProxy.for_bus_sync(BusType.SESSION,
-                                                 DBusProxyFlags.NONE, null, 
-                                                 "com.ubuntu.sso",
-                                                 "/com/ubuntu/sso/credentials",
-                                                 "com.ubuntu.sso.CredentialsManagement",
-                                                 null);
-
-      uint xid;
-      mount_op.get("xid", out xid);
-      var creds = yield obj.call("login",
-                                 new Variant("(s{ss})", "Ubuntu One",
-                                             {'tc_url': "https://one.ubuntu.com/terms/", 'ping_url': "https://one.ubuntu.com/oauth/sso-finished-so-get-tokens/", 'help_text': "Ubuntu One requires an Ubuntu Single Sign On (SSO) account. This process will allow you to create a new account, if you do not yet have one."}),
+      var obj = get_proxy();
+      print("signing in!\n");
+      var builder = new VariantBuilder(new VariantType("a{ss}"));
+      builder.add("{ss}", "tc_url", "https://one.ubuntu.com/terms/");
+      builder.add("{ss}", "ping_url", "https://one.ubuntu.com/oauth/sso-finished-so-get-tokens/");
+      builder.add("{ss}", "help_text", _("Ubuntu One requires an Ubuntu Single Sign On (SSO) account. This process will allow you to create a new account, if you do not yet have one."));
+      var creds = yield obj.call("register",
+                                 new Variant("(sa{ss})", "Ubuntu One", builder),
                                  DBusCallFlags.NONE, -1, null);
+      print("done signing in\n");
     }
     catch (Error e) {
       warning("%s\n", e.message);
+      envp_ready(false, null);
     }
+  }
+
+  static DBusProxy get_proxy() throws Error
+  {
+    return new DBusProxy.for_bus_sync(BusType.SESSION,
+                                      DBusProxyFlags.NONE, null, 
+                                      "com.ubuntu.sso",
+                                      "/com/ubuntu/sso/credentials",
+                                      "com.ubuntu.sso.CredentialsManagement",
+                                      null);
   }
 }
 
