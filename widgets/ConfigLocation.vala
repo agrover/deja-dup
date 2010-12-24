@@ -50,11 +50,12 @@ public class ConfigLocation : ConfigWidget
   int index_ftp;
   int index_dav;
   int index_s3;
+  int index_u1 = -2;
   int index_ssh;
   int index_smb;
   int index_vol_base;
   int index_vol_end;
-  int index_vol_saved = -1;
+  int index_vol_saved = -2;
   int index_local;
 
   int extras_max_width = 0;
@@ -91,9 +92,15 @@ public class ConfigLocation : ConfigWidget
     extras.border_width = 0;
     extras.show();
 
+    var backend = settings.get_string(BACKEND_KEY);
+
     // Insert cloud providers
     index_s3 = add_entry(i++, new ThemedIcon("deja-dup-cloud"),
                          _("Amazon S3"), 0, new ConfigLocationS3(label_sizes));
+
+    if (backend == "u1" || DejaDup.BackendU1.is_available())
+      index_u1 = add_entry(i++, new ThemedIcon("ubuntuone"),
+                           _("Ubuntu One"), 0, new ConfigLocationU1(label_sizes));
 
     add_separator(i++, 1);
 
@@ -209,7 +216,7 @@ public class ConfigLocation : ConfigWidget
       var vol_name = fsettings.get_string(FILE_SHORT_NAME_KEY);
 
       // If this is the first time, add a new entry
-      if (index_vol_saved == -1) {
+      if (index_vol_saved == -2) {
         index_vol_saved = add_entry(index_vol_end+1, vol_icon, vol_name, 2,
                           new ConfigLocationVolume(label_sizes), vol_uuid);
 
@@ -236,6 +243,8 @@ public class ConfigLocation : ConfigWidget
     var backend = settings.get_string(BACKEND_KEY);
     if (backend == "s3")
       index = index_s3;
+    else if (backend == "u1")
+      index = index_u1;
     else if (backend == "file") {
       var fsettings = DejaDup.get_settings(FILE_ROOT);
 
@@ -302,6 +311,8 @@ public class ConfigLocation : ConfigWidget
 
     if (index == index_s3)
       settings.set_string(BACKEND_KEY, "s3");
+    else if (index == index_u1)
+      settings.set_string(BACKEND_KEY, "u1");
     else if (index == index_ssh)
       set_remote_info("sftp");
     else if (index == index_ftp)

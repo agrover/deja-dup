@@ -50,16 +50,39 @@ public abstract class Backend : Object
   
   public abstract Backend clone();
   
-  public static Backend? get_default() throws Error
+  public static string get_default_type()
   {
     var settings = get_settings();
-    var backend_name = settings.get_string(BACKEND_KEY);
+    var backend = settings.get_string(BACKEND_KEY);
+
+    if (backend != "auto" &&
+        backend != "s3" &&
+        backend != "u1" &&
+        backend != "file")
+      backend = "auto"; // default to auto if string is not known
+
+    if (backend == "auto") {
+      if (BackendU1.is_available())
+        backend = "u1";
+      else
+        backend = "s3";
+      settings.set_string(BACKEND_KEY, backend);
+    }
+
+    return backend;
+  }
+
+  public static Backend? get_default() throws Error
+  {
+    var backend_name = get_default_type();
     if (backend_name == "s3")
       return new BackendS3();
+    else if (backend_name == "u1")
+      return new BackendU1();
     else if (backend_name == "file")
       return new BackendFile();
     else
-      return new BackendS3(); // default to S3 (easy to crash if we return null)
+      return new BackendS3();
   }
 }
 

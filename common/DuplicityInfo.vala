@@ -39,6 +39,7 @@ public class DuplicityInfo : Object
   public bool has_fixed_log_file {get; private set; default = false; }
   public bool use_empty_gpg_options {get; private set; default = false; }
   public bool guarantees_error_codes {get; private set; default = false; }
+  public bool has_u1 {get; private set; default = false;}
   
   static DuplicityInfo info = null;
   public static DuplicityInfo get_default() {

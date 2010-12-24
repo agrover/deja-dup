@@ -51,6 +51,16 @@ public string get_trash_path()
   return Path.build_filename(Environment.get_user_data_dir(), "Trash");
 }
 
+public string get_folder_key(Settings settings, string key)
+{
+  string folder = settings.get_string(key);
+  if (folder.contains("$HOSTNAME")) {
+    folder = folder.replace("$HOSTNAME", Environment.get_host_name());
+    settings.set_string(key, folder);
+  }
+  return folder;
+}
+
 public File parse_dir(string dir)
 {
   string s = dir;

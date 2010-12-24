@@ -47,6 +47,10 @@ public class BackendS3 : Backend
     return false;
   }
   
+  public override Icon? get_icon() {
+    return new ThemedIcon("deja-dup-cloud");
+  }
+
   public override bool is_ready(out string when) {
     when = _("Backup will begin when a network connection becomes available.");
     return Network.get().connected;
@@ -65,7 +69,7 @@ public class BackendS3 : Backend
       settings.set_string(S3_BUCKET_KEY, bucket);
     }
     
-    var folder = settings.get_string(S3_FOLDER_KEY);
+    var folder = get_folder_key(settings, S3_FOLDER_KEY);
     if (folder != null && folder != "") {
       if (folder[0] != '/')
         bucket = "%s/%s".printf(bucket, folder);
@@ -116,7 +120,7 @@ public class BackendS3 : Backend
   public override string? get_location_pretty() throws Error
   {
     var settings = get_settings(S3_ROOT);
-    var folder = settings.get_string(S3_FOLDER_KEY);
+    var folder = get_folder_key(settings, S3_FOLDER_KEY);
     if (folder == null || folder == "")
       folder = "/";
     
