@@ -45,14 +45,16 @@
       <choices>
         <choice value='auto'/>
         <choice value='file'/>
+        <choice value='rackspace'/>
         <choice value='s3'/>
-        <choice value='u1'/>
         <choice value='ssh'/>
+        <choice value='u1'/>
       </choices>
       <default>'auto'</default>
       <_summary>Type of location to store backup</_summary>
       <_description>The type of backup location.  If 'auto', a default will be chosen based on what is available.</_description>
     </key>
+    <child name="rackspace" schema="org.gnome.DejaDup.Rackspace"/>
     <child name="s3" schema="org.gnome.DejaDup.S3"/>
     <child name="u1" schema="org.gnome.DejaDup.U1"/>
     <child name="file" schema="org.gnome.DejaDup.File"/>
@@ -72,6 +74,18 @@
       <default>'/'</default>
       <_summary>The Amazon S3 folder</_summary>
       <_description>An optional folder name to store files in.  This folder will be created in the chosen bucket.</_description>
+    </key>
+  </schema>
+  <schema id="org.gnome.DejaDup.Rackspace" path="/org/gnome/deja-dup/rackspace/">
+    <key name="container" type="s">
+      <default>'$HOSTNAME'</default>
+      <_summary>The Rackspace Cloud Files container</_summary>
+      <_description>Which Rackspace Cloud Files container to store files in.  This does not need to exist already.  Only legal hostname strings are valid.</_description>
+    </key>
+    <key name="username" type="s">
+      <default>''</default>
+      <_summary>Your Rackspace username</_summary>
+      <_description>This is your username for the Rackspace Cloud Files service.</_description>
     </key>
   </schema>
   <schema id="org.gnome.DejaDup.U1" path="/org/gnome/deja-dup/u1/">

@@ -122,7 +122,7 @@ const string SSH_DIRECTORY_KEY = "directory";
 void convert_ssh_to_file()
 {
   var settings = get_settings();
-  var backend = settings.get_string(BACKEND_KEY);
+  var backend = Backend.get_default_type();
   if (backend == "ssh") {
     settings.set_string(BACKEND_KEY, "file");
     var ssh_settings = get_settings("SSH");

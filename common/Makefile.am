@@ -28,6 +28,7 @@ libcommon_la_LIBADD = $(COMMON_LIBS) @INTLLIBS@
 libcommon_la_VALASOURCES = \
 	Backend.vala \
 	BackendFile.vala \
+	BackendRackspace.vala \
 	BackendS3.vala \
 	BackendU1.vala \
 	CommonUtils.vala \

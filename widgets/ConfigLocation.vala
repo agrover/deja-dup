@@ -50,6 +50,7 @@ public class ConfigLocation : ConfigWidget
   int index_ftp;
   int index_dav;
   int index_s3;
+  int index_rackspace;
   int index_u1 = -2;
   int index_ssh;
   int index_smb;
@@ -92,11 +93,14 @@ public class ConfigLocation : ConfigWidget
     extras.border_width = 0;
     extras.show();
 
-    var backend = settings.get_string(BACKEND_KEY);
+    var backend = Backend.get_default_type();
 
     // Insert cloud providers
     index_s3 = add_entry(i++, new ThemedIcon("deja-dup-cloud"),
                          _("Amazon S3"), 0, new ConfigLocationS3(label_sizes));
+    index_rackspace = add_entry(i++, new ThemedIcon("deja-dup-cloud"),
+                                _("Rackspace Cloud Files"), 0,
+                                new ConfigLocationRackspace(label_sizes));
 
     if (backend == "u1" || DejaDup.BackendU1.is_available())
       index_u1 = add_entry(i++, new ThemedIcon("ubuntuone"),
@@ -240,9 +244,11 @@ public class ConfigLocation : ConfigWidget
     int index = -1;
 
     // Check the backend type, then GIO uri if needed
-    var backend = settings.get_string(BACKEND_KEY);
+    var backend = Backend.get_default_type();
     if (backend == "s3")
       index = index_s3;
+    else if (backend == "rackspace")
+      index = index_rackspace;
     else if (backend == "u1")
       index = index_u1;
     else if (backend == "file") {
@@ -311,6 +317,8 @@ public class ConfigLocation : ConfigWidget
 
     if (index == index_s3)
       settings.set_string(BACKEND_KEY, "s3");
+    else if (index == index_rackspace)
+      settings.set_string(BACKEND_KEY, "rackspace");
     else if (index == index_u1)
       settings.set_string(BACKEND_KEY, "u1");
     else if (index == index_ssh)

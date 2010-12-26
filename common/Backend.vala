@@ -57,6 +57,7 @@ public abstract class Backend : Object
 
     if (backend != "auto" &&
         backend != "s3" &&
+        backend != "rackspace" &&
         backend != "u1" &&
         backend != "file")
       backend = "auto"; // default to auto if string is not known
@@ -79,6 +80,8 @@ public abstract class Backend : Object
       return new BackendS3();
     else if (backend_name == "u1")
       return new BackendU1();
+    else if (backend_name == "rackspace")
+      return new BackendRackspace();
     else if (backend_name == "file")
       return new BackendFile();
     else
