@@ -51,6 +51,10 @@ public class BackendU1 : Backend
     return false;
   }
 
+  public override bool space_can_be_infinite() {
+    return false;
+  }
+
   public override Icon? get_icon() {
     return new ThemedIcon("ubuntuone");
   }
@@ -70,18 +74,8 @@ public class BackendU1 : Backend
     return _("Ubuntu One");
   }
 
-  // FIXME: just for testing
-  async void clear() throws Error
-  {
-    var obj = get_proxy();
-    var builder = new VariantBuilder(new VariantType("a{ss}"));
-    yield obj.call("clear_credentials", new Variant("(sa{ss})", app_name, builder),
-             DBusCallFlags.NONE, -1, null);
-  }
-
   public override async void get_envp() throws Error
   {
-    //clear(); // FIXME
     var obj = get_proxy();
 
     Idle.add(() => {
