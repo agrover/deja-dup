@@ -312,7 +312,7 @@ def dup_meets_version(major, minor, micro):
   dupmajor, dupminor, dupmicro = dupver.split('.')
   dupmajor = int(dupmajor)
   dupminor = int(dupminor)
-  # dupmicro = int(dupmicro) # sometimes micro has weird characters like 'b' in it
+  dupmicro = int(dupmicro) # sometimes micro has weird characters like 'b' in it...
   if dupmajor > major:  return True
   if dupmajor < major:  return False
   if dupminor > minor:  return True
