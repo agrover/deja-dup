@@ -25,12 +25,14 @@ sys.path.insert(0, sys.path[0]+'/..')
 import base
 import ldtp
 
+if not base.dup_meets_version(0, 6, 12):
+  base.skip()
+
 def nowrite():
   backupdir = base.get_temp_name('backup')
   os.makedirs(backupdir)
   os.system('chmod a-w %s' % backupdir)
   base.setup('file', sources=['data/simple'], dest=backupdir)
-  if not base.dup_meets_version(0, 7, 0): return
   base.backup_simple(error='lblPermissiondeniedwhentryingtocreate')
 
 def noread():
@@ -39,7 +41,6 @@ def noread():
   os.system('chmod a-r %s' % backupdir)
   base.setup('file', sources=['data/simple'], dest=backupdir)
   base.set_settings_value("last-run", "'fake'") # to avoid error when setting backup dir
-  if not base.dup_meets_version(0, 7, 0): return
   base.backup_simple(error=u'lblPermissiondeniedwhentryingtoread\u2018%s\u2019' % backupdir)
 
 def noexec():
@@ -47,7 +48,6 @@ def noexec():
   os.makedirs(backupdir)
   os.system('chmod a-x %s' % backupdir)
   base.setup('file', sources=['data/simple'], dest=backupdir)
-  if not base.dup_meets_version(0, 7, 0): return
   base.backup_simple(error='lblPermissiondeniedwhentryingtocreate')
 
 def noget():
@@ -56,7 +56,6 @@ def noget():
   os.system('cp %s/* %s' % (sys.path[0]+'/vols/simple', backupdir))
   os.system('chmod a-r %s/*' % backupdir)
   base.setup('file', sources=['data/simple'], dest=backupdir, encrypt=False)
-  if not base.dup_meets_version(0, 7, 0): return
   base.backup_simple(error=u'lblPermissiondeniedwhentryingtoread\u2018%s\u2019' %
                            (backupdir+'/duplicity-full-signatures20090802T011441Zsigtargz'))
 
@@ -64,7 +63,6 @@ def noexist():
   backupdir = base.get_temp_name('backup')
   base.setup('file', sources=['data/simple'], dest=backupdir)
   base.set_settings_value("last-run", "'fake'") # to avoid losing missing dir name when using UI
-  if not base.dup_meets_version(0, 7, 0): return
   base.backup_simple(error=u'lblBackuplocation\u2018%s\u2019doesnotexist' % backupdir)
 
 base.run(nowrite)

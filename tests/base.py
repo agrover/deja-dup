@@ -19,10 +19,6 @@
 
 import os
 import sys
-if not os.environ.get('DISPLAY'):
-  os.system('bash -c "echo -e \'\e[32mSKIPPED\e[0m\'"')
-  sys.exit(0)
-
 import signal
 import atexit
 import subprocess
@@ -39,6 +35,13 @@ temp_dir = None
 cleanup_dirs = []
 cleanup_mounts = []
 cleanup_pids = []
+
+def skip():
+  os.system('bash -c "echo -e \'\e[32mSKIPPED\e[0m\'"')
+  sys.exit(0)
+
+if not os.environ.get('DISPLAY'):
+  skip()
 
 def create_temp_dir():
   global temp_dir, cleanup_dirs
