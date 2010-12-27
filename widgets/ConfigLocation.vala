@@ -57,6 +57,7 @@ public class ConfigLocation : ConfigWidget
   int index_vol_base;
   int index_vol_end;
   int index_vol_saved = -2;
+  int index_custom;
   int index_local;
 
   int extras_max_width = 0;
@@ -118,11 +119,14 @@ public class ConfigLocation : ConfigWidget
     index_dav = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
                           _("WebDAV"), 1, new ConfigLocationDAV(label_sizes));
 
-    add_separator(i++, 2);
+    index_custom = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
+                             _("Custom Location"), 2, new ConfigLocationCustom(label_sizes));
+
+    add_separator(i++, 3);
 
     // And a local folder option
     index_local = add_entry(i++, new ThemedIcon("folder"), _("Local Folder"),
-                            3, new ConfigLocationFile(label_sizes));
+                            4, new ConfigLocationFile(label_sizes));
 
     // Now insert removable drives
     index_vol_base = i;
@@ -130,7 +134,7 @@ public class ConfigLocation : ConfigWidget
     mon.ref(); // bug 569418; bad things happen when VM goes away
     List<Volume> vols = mon.get_volumes();
     foreach (Volume v in vols) {
-      add_entry(i++, v.get_icon(), v.get_name(), 2,
+      add_entry(i++, v.get_icon(), v.get_name(), 3,
                 new ConfigLocationVolume(label_sizes),
                 v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID));
     }
@@ -221,11 +225,11 @@ public class ConfigLocation : ConfigWidget
 
       // If this is the first time, add a new entry
       if (index_vol_saved == -2) {
-        index_vol_saved = add_entry(index_vol_end+1, vol_icon, vol_name, 2,
+        index_vol_saved = add_entry(index_vol_end+1, vol_icon, vol_name, 3,
                           new ConfigLocationVolume(label_sizes), vol_uuid);
 
         if (index_vol_base == index_vol_end)
-          add_separator(index_vol_end+2, 3); // this hadn't been added yet, so add it now
+          add_separator(index_vol_end+2, 4); // this hadn't been added yet, so add it now
       }
       else if (store.get_iter_from_string(out iter, index_vol_saved.to_string()))
         store.set(iter, COL_ICON, vol_icon, COL_TEXT, vol_name, COL_UUID, vol_uuid);
@@ -263,12 +267,13 @@ public class ConfigLocation : ConfigWidget
                                                  ConfigURLPart.Part.SCHEME);
         switch (scheme) {
         case "dav":
-        case "davs": index = index_dav;   break;
+        case "davs": index = index_dav;    break;
         case "sftp":
-        case "ssh":  index = index_ssh;   break;
-        case "ftp":  index = index_ftp;   break;
-        case "smb":  index = index_smb;   break;
-        case "file": index = index_local; break;
+        case "ssh":  index = index_ssh;    break;
+        case "ftp":  index = index_ftp;    break;
+        case "smb":  index = index_smb;    break;
+        case "file": index = index_local;  break;
+        default:     index = index_custom; break;
         }
       }
     }
@@ -339,7 +344,8 @@ public class ConfigLocation : ConfigWidget
     else if ((index >= index_vol_base && index < index_vol_end) ||
              index == index_vol_saved)
       yield set_volume_info(index);
-    else if (index == index_local)
+    else if (index == index_local ||
+             index == index_custom)
       set_remote_info("file");
     else {
       warning("Unknown location index %i\n", index);
