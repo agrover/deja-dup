@@ -28,7 +28,6 @@ libwidgets_la_CFLAGS = \
 libwidgets_la_LIBADD = $(WIDGETS_LIBS) $(APPINDICATOR_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la
 
 libwidgets_la_VALASOURCES = \
-	ButtonConnect.vala \
 	ConfigBool.vala \
 	ConfigChoice.vala \
 	ConfigDelete.vala \
