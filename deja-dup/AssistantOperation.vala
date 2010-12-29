@@ -274,7 +274,7 @@ public abstract class AssistantOperation : Assistant
     }
     
     go_to_page(summary_page);
-    set_header_icon(Gtk.STOCK_DIALOG_ERROR);
+    set_header_icon(Gtk.Stock.DIALOG_ERROR);
     page_box.queue_resize();
   }
 
@@ -507,7 +507,7 @@ public abstract class AssistantOperation : Assistant
         do_apply();
     }
     else if (page == password_page)
-      set_header_icon(Gtk.STOCK_DIALOG_AUTHENTICATION);
+      set_header_icon(Gtk.Stock.DIALOG_AUTHENTICATION);
   }
   
   public void hide_everything()

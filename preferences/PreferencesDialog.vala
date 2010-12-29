@@ -32,8 +32,8 @@ public class PreferencesDialog : Gtk.Dialog
   construct {
     set("title", _("Déjà Dup Preferences"),
         "has-separator", false);
-    add_buttons(Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE,
-                Gtk.STOCK_HELP, Gtk.ResponseType.HELP);
+    add_buttons(Gtk.Stock.CLOSE, Gtk.ResponseType.CLOSE,
+                Gtk.Stock.HELP, Gtk.ResponseType.HELP);
     response.connect(handle_response);
     
     Gtk.Notebook notebook = new Gtk.Notebook();

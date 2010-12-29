@@ -46,10 +46,10 @@ public class ConfigList : ConfigWidget
     tree.insert_column_with_attributes(-1, null, renderer,
                                        "text", 1);
     
-    add_button = new Gtk.Button.from_stock(Gtk.STOCK_ADD);
+    add_button = new Gtk.Button.from_stock(Gtk.Stock.ADD);
     add_button.clicked.connect(handle_add);
     
-    remove_button = new Gtk.Button.from_stock(Gtk.STOCK_REMOVE);
+    remove_button = new Gtk.Button.from_stock(Gtk.Stock.REMOVE);
     remove_button.clicked.connect(handle_remove);
 
     if (size_group != null) {
@@ -159,8 +159,8 @@ public class ConfigList : ConfigWidget
     var dlg = new Gtk.FileChooserDialog(_("Choose folders"),
                                         (Gtk.Window)get_toplevel(),
                                         Gtk.FileChooserAction.SELECT_FOLDER,
-                                        Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                          				      Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT);
+                                        Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL,
+                          				      Gtk.Stock.OPEN, Gtk.ResponseType.ACCEPT);
     dlg.select_multiple = true;
     
     if (dlg.run() != Gtk.ResponseType.ACCEPT) {

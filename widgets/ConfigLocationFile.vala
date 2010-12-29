@@ -48,8 +48,8 @@ public class ConfigLocationFile : ConfigLocationTable
     var dlg = new Gtk.FileChooserDialog(_("Choose Folder"),
                                         get_toplevel() as Gtk.Window,
                                         Gtk.FileChooserAction.SELECT_FOLDER,
-                                        Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                          				      Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT);
+                                        Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL,
+                          				      Gtk.Stock.OK, Gtk.ResponseType.ACCEPT);
 
     if (dlg.run() == Gtk.ResponseType.ACCEPT) {
       var settings = DejaDup.get_settings(DejaDup.FILE_ROOT);
