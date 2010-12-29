@@ -187,7 +187,7 @@ public class PreferencesDialog : Gtk.Dialog
               "xalign", 0.0f);
     label_sizes.add_widget(label);
     table.attach(label, 0, 1, row, row + 1,
-                 0, Gtk.AttachOptions.FILL, 3, 3);
+                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 3, 3);
     table.attach(w, 1, 3, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL,
@@ -204,7 +204,7 @@ public class PreferencesDialog : Gtk.Dialog
     notebook.append_page(page_box, null);
     notebook.set_tab_label_text(page_box, _("Schedule"));
 
-    var area = (Gtk.VBox)get_content_area();
+    var area = (Gtk.Box)get_content_area();
     area.add(notebook);
   }
 

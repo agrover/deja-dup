@@ -54,7 +54,7 @@ public class ConfigLocationFTP : ConfigLocationTable
     add_widget(_("_Username:"), user, w);
   }
 
-  bool is_not_anon(string val)
+  static bool is_not_anon(string val)
   {
     return (val != "anonymous");
   }

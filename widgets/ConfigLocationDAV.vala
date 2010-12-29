@@ -52,7 +52,7 @@ public class ConfigLocationDAV : ConfigLocationTable
                                                   DejaDup.FILE_ROOT));
   }
 
-  bool is_https_active(string val)
+  static bool is_https_active(string val)
   {
     return val == "davs";
   }
