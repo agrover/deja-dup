@@ -74,6 +74,7 @@ PACKAGES = \
 	--pkg libcommon \
 	--pkg @GTK_MODULE@ \
 	--pkg uriutils \
+	--pkg hacks \
 	--pkg config
 BUILT_SOURCES = vala.stamp
 vala.stamp: $(libwidgets_la_VALASOURCES)

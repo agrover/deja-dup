@@ -195,7 +195,7 @@ public abstract class AssistantOperation : Assistant
     
     Gtk.TextIter iter;
     buffer.get_end_iter(out iter);
-    buffer.insert_text(iter, log_line, (int)log_line.size());
+    buffer.insert_text(iter, log_line, (int)log_line.length);
     if (adjustment_at_end)
       adjust.value = adjust.upper;
   }

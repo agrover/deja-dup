@@ -34,16 +34,6 @@ public void show_uri(Gtk.Window parent, string link)
   }
 }
 
-void handle_about_uri(Gtk.AboutDialog about, string link)
-{
-  show_uri(about, link);
-}
-
-void handle_about_mail(Gtk.AboutDialog about, string link)
-{
-  show_uri(about, "mailto:%s".printf(link));
-}
-
 // These need to be namespace-wide to prevent an odd compiler syntax error.
 const string[] authors = {"Andrew Fister <temposs@gmail.com>",
                           "Michael Terry <mike@mterry.name>",
@@ -70,8 +60,6 @@ public void show_about(Object owner, Gtk.Window? parent)
   }
   
   about = new Gtk.AboutDialog ();
-  about.set_email_hook (handle_about_mail);
-  about.set_url_hook (handle_about_uri);
   about.title = _("About Déjà Dup");
   about.authors = authors;
   about.artists = artists;

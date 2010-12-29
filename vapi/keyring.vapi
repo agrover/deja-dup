@@ -17,20 +17,5 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-[CCode (cheader_filename = "whacks.h")]
-GLib.Object hacks_status_icon_make_app_indicator (Gtk.Menu menu);
-
-[CCode (cheader_filename = "whacks.h")]
-void hacks_status_icon_close_app_indicator (GLib.Object icon);
-
-[CCode (cheader_filename = "whacks.h")]
-Gtk.ComboBox hacks_combo_box_text_new();
-
-[CCode (cheader_filename = "whacks.h")]
-string hacks_combo_box_get_text(Gtk.ComboBox box);
-
-[CCode (cheader_filename = "whacks.h")]
-long hacks_window_get_xid(Gdk.Window win);
-
-[CCode (cheader_filename = "whacks.h")]
-int hacks_widget_get_allocated_width(Gtk.Widget w);
+[CCode (cprefix = "", lower_case_cprefix = "", cheader_filename = "chacks.h")]
+public GnomeKeyring.PasswordSchema PASSPHRASE_SCHEMA;

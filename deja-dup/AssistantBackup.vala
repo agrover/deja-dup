@@ -188,7 +188,7 @@ public class AssistantBackup : AssistantOperation
   protected override DejaDup.Operation create_op()
   {
     realize();
-    var xid = Gdk.x11_drawable_get_xid(this.get_window());
+    var xid = hacks_window_get_xid(this.get_window());
     var rv = new DejaDup.OperationBackup((uint)xid);
     if (automatic) {
       // If in automatic mode, only use progress if it's a full backup

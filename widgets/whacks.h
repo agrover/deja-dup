@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,10 +23,12 @@
 
 #include <gtk/gtk.h>
 
-extern void hacks_status_icon_set_tooltip_text (GtkStatusIcon *icon, const gchar *text);
 extern GObject *hacks_status_icon_make_app_indicator (GtkMenu *menu);
 extern void hacks_status_icon_close_app_indicator (GObject *icon);
-extern GtkLabel *hacks_make_link_label (const gchar *text);
+extern GtkComboBox *hacks_combo_box_text_new();
+extern char *hacks_combo_box_get_text(GtkComboBox *box);
+extern long hacks_window_get_xid(GdkWindow *win);
+extern int hacks_widget_get_allocated_width(GtkWidget *w);
 
 #endif
 

@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008, 2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -46,5 +46,47 @@ hacks_status_icon_close_app_indicator (GObject *icon)
 {
 #ifdef HAVE_APPINDICATOR
   app_indicator_set_status(APP_INDICATOR(icon), APP_INDICATOR_STATUS_PASSIVE);
+#endif
+}
+
+GtkComboBox *
+hacks_combo_box_text_new()
+{
+#if GTK_CHECK_VERSION(2, 91, 0)
+  return (GtkComboBox*)gtk_combo_box_text_new();
+#else
+  return (GtkComboBox*)gtk_combo_box_new_text();
+#endif
+}
+
+char *
+hacks_combo_box_get_text(GtkComboBox *box)
+{
+#if GTK_CHECK_VERSION(2, 91, 0)
+  return gtk_combo_box_text_get_active_text((GtkComboBoxText*)box);
+#else
+  return gtk_combo_box_get_active_text(box);
+#endif
+}
+
+long
+hacks_window_get_xid(GdkWindow *window)
+{
+#if GTK_CHECK_VERSION(2, 91, 0)
+  return gdk_x11_window_get_xid(window);
+#else
+  return gdk_x11_drawable_get_xid(window);
+#endif
+}
+
+int
+hacks_widget_get_allocated_width(GtkWidget *w)
+{
+#if GTK_CHECK_VERSION(2, 91, 0)
+  return gtk_widget_get_allocated_width(w);
+#else
+  GtkAllocation a;
+  gtk_widget_get_allocation(w, &a);
+  return a.width;
 #endif
 }

@@ -56,6 +56,7 @@ PACKAGES = \
 	--pkg libcommon \
 	--pkg libwidgets \
 	--pkg unix \
+	--pkg keyring \
 	--pkg hacks \
 	--pkg config
 BUILT_SOURCES = vala.stamp
