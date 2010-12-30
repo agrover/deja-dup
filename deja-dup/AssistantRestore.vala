@@ -472,7 +472,7 @@ public class AssistantRestore : AssistantOperation
                                              "Files to restore:",
                                              restore_files.length());
 
-        confirm_files.foreach((w) => {w.destroy();});
+        confirm_files.foreach((w) => {hacks_widget_destroy(w);});
         foreach (File f in restore_files) {
           var parse_name = f.get_parse_name();
           var file_label = new Gtk.Label(Path.get_basename(parse_name));

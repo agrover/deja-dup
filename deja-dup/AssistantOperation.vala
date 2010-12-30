@@ -545,7 +545,7 @@ public abstract class AssistantOperation : Assistant
 
     closing(succeeded);
 
-    Idle.add(() => {destroy(); return false;});
+    Idle.add(() => {hacks_widget_destroy(this); return false;});
   }
 
   public void force_visible(bool user_click)

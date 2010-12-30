@@ -119,7 +119,7 @@ public class MountOperationAssistant : MountOperation
                                string default_domain, AskPasswordFlags flags)
   {
     if (layout != null)
-      layout.destroy();
+      hacks_widget_destroy(layout);
 
     layout = new Gtk.VBox(false, 6);
     layout.set("border-width", 12);

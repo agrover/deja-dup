@@ -90,3 +90,21 @@ hacks_widget_get_allocated_width(GtkWidget *w)
   return a.width;
 #endif
 }
+
+void
+hacks_widget_destroy(GtkWidget *w)
+{
+#if GTK_CHECK_VERSION(2, 91, 0)
+  gtk_widget_destroy(w);
+#else
+  gtk_object_destroy((GtkObject*)w);
+#endif
+}
+
+void
+hacks_quit_on_destroy(GtkWidget *w)
+{
+  // Done as a hack because 2.0 and 3.0 have the signal on different classes,
+  // so vala generates code that can't compile with both
+  g_signal_connect (w, "destroy", (GCallback)gtk_main_quit, NULL);
+}

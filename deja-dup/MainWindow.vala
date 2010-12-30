@@ -128,7 +128,7 @@ public class MainWindow : Gtk.Window
     win.present();
     win.closing.connect((w, succeeded) => {
       if (succeeded)
-        this.destroy();
+        hacks_widget_destroy(this);
       else {
         int x2, y2;
         w.get_position(out x2, out y2);
@@ -172,7 +172,7 @@ public class MainWindow : Gtk.Window
       Gtk.MessageDialog dlg = new Gtk.MessageDialog (this, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not open preferences"));
       dlg.format_secondary_text("%s", e.message);
       dlg.run();
-      dlg.destroy();
+      hacks_widget_destroy(dlg);
     }
   }
   

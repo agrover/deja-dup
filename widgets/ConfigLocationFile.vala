@@ -46,7 +46,7 @@ public class ConfigLocationFile : ConfigLocationTable
   void browse_clicked()
   {
     var dlg = new Gtk.FileChooserDialog(_("Choose Folder"),
-                                        get_toplevel() as Gtk.Window,
+                                        get_ancestor(typeof(Gtk.Window)) as Gtk.Window,
                                         Gtk.FileChooserAction.SELECT_FOLDER,
                                         Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL,
                           				      Gtk.Stock.OK, Gtk.ResponseType.ACCEPT);
@@ -56,7 +56,7 @@ public class ConfigLocationFile : ConfigLocationTable
       settings.set_string(DejaDup.FILE_PATH_KEY, dlg.get_uri());
     }
 
-    dlg.destroy();
+    hacks_widget_destroy(dlg);
   }
 }
 

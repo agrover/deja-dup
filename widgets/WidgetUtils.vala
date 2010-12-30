@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008–2010 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ public void show_uri(Gtk.Window parent, string link)
     Gtk.MessageDialog dlg = new Gtk.MessageDialog(parent, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not display %s"), link);
     dlg.format_secondary_text("%s", e.message);
     dlg.run();
-    dlg.destroy();
+    hacks_widget_destroy(dlg);
   }
 }
 
@@ -81,19 +81,10 @@ public void show_about(Object owner, Gtk.Window? parent)
   about.response.connect((dlg, resp) => {
     Object about_owner = (Object)dlg.get_data<Object>("owner");
     about_owner.set_data("about-dlg", null);
-    dlg.destroy();
+    hacks_widget_destroy(dlg);
   });
   
   about.show();
-}
-
-public Gtk.Window? get_topwindow(Gtk.Widget w)
-{
-  w = w.get_toplevel();
-  if (w != null && w.is_toplevel())
-    return (Gtk.Window)w;
-  else
-    return null;
 }
 
 public bool init_duplicity(Gtk.Window? parent)
@@ -110,7 +101,7 @@ public bool init_duplicity(Gtk.Window? parent)
         "%s", header);
     dlg.format_secondary_text("%s", msg);
     dlg.run();
-    dlg.destroy();
+    hacks_widget_destroy(dlg);
   }
 
   return rv;

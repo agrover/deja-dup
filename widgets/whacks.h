@@ -18,17 +18,20 @@
 */
 
 /* This file is for whatever we can't currently do in Vala. */
-#ifndef __HACKS_H__
-#define __HACKS_H__
+#ifndef __WHACKS_H__
+#define __WHACKS_H__
 
 #include <gtk/gtk.h>
 
 extern GObject *hacks_status_icon_make_app_indicator (GtkMenu *menu);
 extern void hacks_status_icon_close_app_indicator (GObject *icon);
+
 extern GtkComboBox *hacks_combo_box_text_new();
 extern char *hacks_combo_box_get_text(GtkComboBox *box);
 extern long hacks_window_get_xid(GdkWindow *win);
 extern int hacks_widget_get_allocated_width(GtkWidget *w);
+extern void hacks_widget_destroy(GtkWidget *w);
+extern void hacks_quit_on_destroy(GtkWidget *w);
 
 #endif
 

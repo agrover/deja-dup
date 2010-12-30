@@ -18,8 +18,8 @@
 */
 
 /* This file is for whatever we can't currently do in Vala. */
-#ifndef __HACKS_H__
-#define __HACKS_H__
+#ifndef __CHACKS_H__
+#define __CHACKS_H__
 
 #include <gnome-keyring.h>
 

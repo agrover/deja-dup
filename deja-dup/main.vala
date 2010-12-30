@@ -121,34 +121,31 @@ class DejaDupApp : Object
       while (filenames[i] != null)
         file_list.append(File.new_for_commandline_arg(filenames[i++]));
       toplevel = new AssistantRestore.with_files(file_list);
-      toplevel.destroy.connect((t) => {Gtk.main_quit();});
       toplevel.show_all();
     }
     else if (backup_mode) {
       toplevel = new AssistantBackup(true);
-      toplevel.destroy.connect((t) => {Gtk.main_quit();});
       // specifically don't show
     }
     else if (restoremissing_mode){
-        File list_directory = File.new_for_commandline_arg(filenames[0]);
-        if (!list_directory.query_exists(null)) {
-          printerr("%s\n", _("Directory does not exists"));
-          return 1;
-        }
-        if (list_directory.query_file_type (0, null) != FileType.DIRECTORY) {
-          printerr("%s\n", _("You must provide a directory, not a file"));
-          return 1;
-        }
-        toplevel = new AssistantRestoreMissing(list_directory);
-        toplevel.destroy.connect((t) => {Gtk.main_quit();});
-        toplevel.show_all();
+      File list_directory = File.new_for_commandline_arg(filenames[0]);
+      if (!list_directory.query_exists(null)) {
+        printerr("%s\n", _("Directory does not exists"));
+        return 1;
+      }
+      if (list_directory.query_file_type (0, null) != FileType.DIRECTORY) {
+        printerr("%s\n", _("You must provide a directory, not a file"));
+        return 1;
+      }
+      toplevel = new AssistantRestoreMissing(list_directory);
+      toplevel.show_all();
     }
     else {
       toplevel = new MainWindow();
       toplevel.show_all();
     }
 
-    toplevel.destroy.connect((w) => {Gtk.main_quit();});
+    hacks_quit_on_destroy(toplevel);
 
     Gtk.main();
 

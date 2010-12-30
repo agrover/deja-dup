@@ -438,7 +438,7 @@ public class AssistantRestoreMissing : AssistantRestore {
     
     if (backups_queue.get_length() == 0) {
       this.spinner.stop();
-      this.spinner.destroy();
+      hacks_widget_destroy(this.spinner);
       this.current_scan_date.set_text(_("Scanning finished"));
       scan_queue = false;
     }

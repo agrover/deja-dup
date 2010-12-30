@@ -157,19 +157,19 @@ public class ConfigList : ConfigWidget
   void handle_add()
   {
     var dlg = new Gtk.FileChooserDialog(_("Choose folders"),
-                                        (Gtk.Window)get_toplevel(),
+                                        get_ancestor(typeof(Gtk.Window)) as Gtk.Window,
                                         Gtk.FileChooserAction.SELECT_FOLDER,
                                         Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL,
                           				      Gtk.Stock.OPEN, Gtk.ResponseType.ACCEPT);
     dlg.select_multiple = true;
     
     if (dlg.run() != Gtk.ResponseType.ACCEPT) {
-      dlg.destroy();
+      hacks_widget_destroy(dlg);
       return;
     }
     
     SList<string> files = dlg.get_filenames();
-    dlg.destroy();
+    hacks_widget_destroy(dlg);
     
     var slist_val = settings.get_value(key);
     string*[] slist = slist_val.get_strv();

@@ -34,3 +34,9 @@ long hacks_window_get_xid(Gdk.Window win);
 
 [CCode (cheader_filename = "whacks.h")]
 int hacks_widget_get_allocated_width(Gtk.Widget w);
+
+[CCode (cheader_filename = "whacks.h")]
+void hacks_widget_destroy(Gtk.Widget w);
+
+[CCode (cheader_filename = "whacks.h")]
+void hacks_quit_on_destroy(Gtk.Widget w);
