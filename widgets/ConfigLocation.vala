@@ -225,11 +225,12 @@ public class ConfigLocation : ConfigWidget
 
       // If this is the first time, add a new entry
       if (index_vol_saved == -2) {
-        index_vol_saved = add_entry(index_vol_end+1, vol_icon, vol_name, 3,
-                          new ConfigLocationVolume(label_sizes), vol_uuid);
-
         if (index_vol_base == index_vol_end)
           add_separator(index_vol_end+2, 4); // this hadn't been added yet, so add it now
+
+        index_vol_saved = add_entry(index_vol_end+1, vol_icon, vol_name, 3,
+                                    new ConfigLocationVolume(label_sizes),
+                                    vol_uuid);
       }
       else if (store.get_iter_from_string(out iter, index_vol_saved.to_string()))
         store.set(iter, COL_ICON, vol_icon, COL_TEXT, vol_name, COL_UUID, vol_uuid);
@@ -343,7 +344,7 @@ public class ConfigLocation : ConfigWidget
       set_remote_info("smb");
     else if ((index >= index_vol_base && index < index_vol_end) ||
              index == index_vol_saved)
-      yield set_volume_info(index);
+      yield set_volume_info(iter);
     else if (index == index_local ||
              index == index_custom)
       set_remote_info("file");
@@ -356,22 +357,21 @@ public class ConfigLocation : ConfigWidget
     internal_set = prev;
   }
 
-  async void set_volume_info(int index)
+  async void set_volume_info(Gtk.TreeIter iter)
   {
     // Grab volume from model
-    Gtk.TreeIter iter;
     Value vol_var;
-    if (!store.get_iter_from_string(out iter, index.to_string())) {
-      warning("Invalid volume location index %i\n", index);
-      return;
-    }
-
     store.get_value(iter, COL_UUID, out vol_var);
     var uuid = vol_var.get_string();
     if (uuid == null) {
-      warning("Invalid volume location index %i\n", index);
+      warning("Invalid volume location at iter %s\n", store.get_string_from_iter(iter));
       return;
     }
+
+    // First things first, we must remember that we set a volume
+    var fsettings = DejaDup.get_settings(FILE_ROOT);
+    fsettings.set_string(FILE_TYPE_KEY, "volume");
+    settings.set_string(BACKEND_KEY, "file");
 
     var vol = BackendFile.find_volume_by_uuid(uuid);
     if (vol == null) {
