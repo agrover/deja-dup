@@ -151,9 +151,27 @@ void convert_ssh_to_file()
   }
 }
 
+void convert_s3_folder_to_hostname()
+{
+  // So historically, the default S3 folder was '/'.  But in keeping with other
+  // cloud backends, the desire to use a hostname in the default folder would
+  // make one want to change that default.  But since the user might not have
+  // actually changed the default, we don't want to upgrade the folder default
+  // in such a case.  So we check here if the user has ever backed up before
+  // and if not (or not using S3), then we update the field.
+  var settings = get_settings();
+  var s3_settings = get_settings(S3_ROOT);
+  if (s3_settings.get_string(S3_FOLDER_KEY) == "/" &&
+      (Backend.get_default_type() != "s3" ||
+       settings.get_string(LAST_RUN_KEY) == "")) {
+    s3_settings.set_string(S3_FOLDER_KEY, "/$HOSTNAME");
+  }
+}
+
 public void initialize()
 {
   convert_ssh_to_file();
+  convert_s3_folder_to_hostname();
 }
 
 public void i18n_setup()

@@ -30,6 +30,7 @@ AUTO_TESTS = \
 	backup/spaces \
 	backup/symlinks \
 	basic/badversion \
+	prefs/s3-folder \
 	prefs/ssh-to-file \
 	restore/cycle \
 	restore/full \
