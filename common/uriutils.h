@@ -36,12 +36,11 @@ typedef struct {
   char *fragment;
 } DejaDupDecodedUri;
 
-char *       deja_dup_encode_uri                (DejaDupDecodedUri *decoded,
-                                                 gboolean     allow_utf8);
-void         deja_dup_decoded_uri_free          (DejaDupDecodedUri *decoded);
-DejaDupDecodedUri *deja_dup_decode_uri          (const char  *uri);
-DejaDupDecodedUri *deja_dup_decoded_uri_new     (void);
-
+char *       deja_dup_decoded_uri_encode_uri       (DejaDupDecodedUri *decoded,
+                                                    gboolean     allow_utf8);
+void         deja_dup_decoded_uri_free             (DejaDupDecodedUri *decoded);
+DejaDupDecodedUri *deja_dup_decoded_uri_decode_uri (const char  *uri);
+DejaDupDecodedUri *deja_dup_decoded_uri_new        (void);
 
 G_END_DECLS
 

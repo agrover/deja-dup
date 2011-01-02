@@ -50,7 +50,7 @@ deja_dup_decoded_uri_new (void)
 }
 
 DejaDupDecodedUri *
-deja_dup_decode_uri (const char *uri)
+deja_dup_decoded_uri_decode_uri (const char *uri)
 {
   DejaDupDecodedUri *decoded;
   const char *p, *in, *hier_part_start, *hier_part_end, *query_start, *fragment_start;
@@ -244,7 +244,7 @@ deja_dup_decode_uri (const char *uri)
 }
 
 char *
-deja_dup_encode_uri (DejaDupDecodedUri *decoded, gboolean allow_utf8)
+deja_dup_decoded_uri_encode_uri (DejaDupDecodedUri *decoded, gboolean allow_utf8)
 {
   GString *uri;
 

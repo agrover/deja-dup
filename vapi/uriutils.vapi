@@ -18,7 +18,7 @@
 */
 
 [Compact]
-[CCode (cheader_filename = "uriutils.h", cprefix = "deja_dup_", free_function = "deja_dup_decoded_uri_free")]
+[CCode (cheader_filename = "uriutils.h", cprefix = "deja_dup_decoded_uri_", free_function = "deja_dup_decoded_uri_free")]
 class DejaDupDecodedUri {
   public DejaDupDecodedUri();
   public static DejaDupDecodedUri decode_uri(string uri);

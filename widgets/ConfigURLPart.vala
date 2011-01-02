@@ -50,28 +50,26 @@ public class ConfigURLPart : ConfigEntry
 
     string text = null;
 
-    if (uri != null) {
-      switch (part) {
-      case Part.SCHEME:
-        text = uri.scheme;
-        break;
-      case Part.SERVER:
-        text = uri.host;
-        break;
-      case Part.PORT:
-        if (uri.port >= 0)
-          text = uri.port.to_string();
-        break;
-      case Part.FOLDER:
-        text = uri.path;
-        break;
-      case Part.USER:
-        text = userinfo_get_user(uri.scheme, uri.userinfo);
-        break;
-      case Part.DOMAIN:
-        text = userinfo_get_domain(uri.scheme, uri.userinfo);
-        break;
-      }
+    switch (part) {
+    case Part.SCHEME:
+      text = uri.scheme;
+      break;
+    case Part.SERVER:
+      text = uri.host;
+      break;
+    case Part.PORT:
+      if (uri.port >= 0)
+        text = uri.port.to_string();
+      break;
+    case Part.FOLDER:
+      text = uri.path;
+      break;
+    case Part.USER:
+      text = userinfo_get_user(uri.scheme, uri.userinfo);
+      break;
+    case Part.DOMAIN:
+      text = userinfo_get_domain(uri.scheme, uri.userinfo);
+      break;
     }
 
     if (text == null)
@@ -113,7 +111,7 @@ public class ConfigURLPart : ConfigEntry
     settings.set_string(key, val);
   }
 
-  static DejaDupDecodedUri? get_current_uri(Settings settings, string key)
+  static DejaDupDecodedUri get_current_uri(Settings settings, string key)
   {
     var val = settings.get_string(key);
     if (val == null)
@@ -128,10 +126,12 @@ public class ConfigURLPart : ConfigEntry
       var file = File.parse_name(val);
       uri = DejaDupDecodedUri.decode_uri(file.get_uri());
     }
+    if (uri == null)
+      uri = new DejaDupDecodedUri();
     return uri;
   }
 
-  static string? userinfo_get_user(string scheme, string? userinfo)
+  static string? userinfo_get_user(string? scheme, string? userinfo)
   {
     if (userinfo == null)
       return null;
@@ -140,7 +140,7 @@ public class ConfigURLPart : ConfigEntry
     return userinfo;
   }
 
-  static string? userinfo_get_domain(string scheme, string? userinfo)
+  static string? userinfo_get_domain(string? scheme, string? userinfo)
   {
     if (userinfo == null)
       return null;
@@ -149,7 +149,7 @@ public class ConfigURLPart : ConfigEntry
     return null;
   }
 
-  static string userinfo_set_user(string scheme, string? userinfo, string user)
+  static string userinfo_set_user(string? scheme, string? userinfo, string user)
   {
     var domain = userinfo_get_domain(scheme, userinfo);
     if (domain != null)
@@ -157,7 +157,7 @@ public class ConfigURLPart : ConfigEntry
     return user;
   }
 
-  static string userinfo_set_domain(string scheme, string? userinfo, string domain)
+  static string userinfo_set_domain(string? scheme, string? userinfo, string domain)
   {
     var user = userinfo_get_user(scheme, userinfo);
     if (user == null)
