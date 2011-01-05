@@ -27,12 +27,13 @@ public class ConfigLocationFile : ConfigLocationTable
     Object(label_sizes: sg);
   }
 
+  ConfigURLPart entry;
   construct {
     var hbox = new Gtk.HBox(false, 6);
 
-    var entry = new ConfigURLPart(ConfigURLPart.Part.FOLDER,
-                                  DejaDup.FILE_PATH_KEY,
-                                  DejaDup.FILE_ROOT);
+    entry = new ConfigURLPart(ConfigURLPart.Part.FOLDER,
+                              DejaDup.FILE_PATH_KEY,
+                              DejaDup.FILE_ROOT);
 
     var browse = new Gtk.Button.with_mnemonic(_("_Browse…"));
     browse.clicked.connect(browse_clicked);
@@ -49,7 +50,9 @@ public class ConfigLocationFile : ConfigLocationTable
                                         get_ancestor(typeof(Gtk.Window)) as Gtk.Window,
                                         Gtk.FileChooserAction.SELECT_FOLDER,
                                         Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL,
-                          				      Gtk.Stock.OK, Gtk.ResponseType.ACCEPT);
+                                        Gtk.Stock.OK, Gtk.ResponseType.ACCEPT);
+    var dir = entry.get_text();
+    dlg.set_current_folder(dir); // empty string will be current dir
 
     if (dlg.run() == Gtk.ResponseType.ACCEPT) {
       var settings = DejaDup.get_settings(DejaDup.FILE_ROOT);

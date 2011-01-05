@@ -28,6 +28,11 @@ public class ConfigEntry : ConfigWidget
     Object(key: key, ns: ns);
   }
   
+  public string get_text()
+  {
+    return entry.get_text();
+  }
+
   protected Gtk.Entry entry;
   construct {
     entry = new Gtk.Entry();
