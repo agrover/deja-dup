@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-12-22 20:32-0500\n"
-"PO-Revision-Date: 2010-12-04 20:58+0000\n"
+"POT-Creation-Date: 2010-12-29 13:28-0500\n"
+"PO-Revision-Date: 2011-01-01 23:50+0000\n"
 "Last-Translator: Mario Blättermann <mariobl@freenet.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-12-29 02:00+0000\n"
-"X-Generator: Launchpad (build 12138)\n"
+"X-Launchpad-Export-Date: 2011-01-05 04:47+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
 msgid "Back up your files"
@@ -176,10 +176,27 @@ msgid "The Amazon S3 folder"
 msgstr "Ordner auf Amazon S3"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
+msgid "The Rackspace Cloud Files container"
+msgstr "Der Rackspace Cloud Files Container"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+msgid "The Ubuntu One folder"
+msgstr "Der Ordner »Ubuntu One«"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+msgid ""
+"The folder name to store files in. If '$HOSTNAME', it will default to a "
+"folder based on the name of the computer."
+msgstr ""
+"Der Name des Ordners, in dem Dateien gespeichert werden sollen. »$HOSTNAME« "
+"zeigt dabei auf einen Ordner, dessen Name vom Namen des Rechners abgeleitet "
+"ist."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid "The last time Déjà Dup was run"
 msgstr "Déjà Dup wurde zuletzt ausgeführt am"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
@@ -187,11 +204,11 @@ msgstr ""
 "Der letzte Zeitpunkt, zu dem Déjà Dup erfolgreich ausgeführt wurde. Dieser "
 "Wert sollte im ISO-8601-Format vorliegen."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "The number of days between backups."
 msgstr "Anzahl der Tage zwischen den Datensicherungen"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
@@ -201,11 +218,19 @@ msgstr ""
 "Falls der Wert 0 ist, bedeutet das unbegrenzt. Dies ist die minimale Anzahl "
 "der Tage, die Dateien können auch länger behalten werden."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
-msgid "The type of backup location."
-msgstr "Der Typ des Sicherungsortes."
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+msgid ""
+"The type of backup location. If 'auto', a default will be chosen based on "
+"what is available."
+msgstr ""
+"Der Typ des Sicherungsortes. Falls »auto«, wird ein Standardort aus den "
+"verfügbaren Orten ausgewählt."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+msgid "This is your username for the Rackspace Cloud Files service."
+msgstr "Dies ist ihr Benutzername für den Rackspace Cloud Files-Dienst."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
@@ -217,7 +242,7 @@ msgstr ""
 "werden als besonders wichtige Verzeichnisse des Benutzers vermerkt.\r\n"
 "Relative Angaben sind relativ zum Home-Verzeichnis des Benutzers."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
@@ -230,30 +255,30 @@ msgstr ""
 "die speziellen Benutzerverzeichnisse erkannt. Relative Pfade gehen immer vom "
 "Home-Verzeichnis des Benutzers aus."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "Type of location to store backup"
 msgstr "Art des Datensicherungzieles"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid "Unique ID of the external volume"
 msgstr "Eindeutige ID des externen Datenträgers"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Ob die Sicherung sich auf einem externen Datenträger befindet oder in einem "
 "normalen Ordner."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "Whether to automatically back up on a regular schedule."
 msgstr "Ob automatisch nach einem festgelegten Plan gesichert werden soll"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "Whether to encrypt your backup"
 msgstr "Huruvida din säkerhetskopia ska krypteras"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
 "Whether to encrypt your backup files in the storage location. It’s strongly "
 "recommended to leave this as ‘true’."
@@ -261,15 +286,15 @@ msgstr ""
 "Ob die Datensicherung auf dem Zieldatenträger verschlüsselt werden soll. Es "
 "wird sehr stark empfohlen diese Option aktiviert zu lassen"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 msgid "Whether to periodically back up"
 msgstr "Ob regelmäßig gesichert werden soll"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "Whether to request the root password"
 msgstr "Ob nach dem Administratorpassword gefragt werden soll"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
@@ -277,7 +302,7 @@ msgstr ""
 "Legt fest, ob das Root-Passwort beim Sichern oder Wiederherstellen von "
 "Systemordner abgefragt werden soll."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -285,10 +310,22 @@ msgstr ""
 "In welchem Amazon S3 bucket die Dateien gespeichert werden sollen. Der "
 "Ordner muss nicht bereits existieren. Nur korrekte Servernamen sind gültig."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+msgid ""
+"Which Rackspace Cloud Files container to store files in. This does not need "
+"to exist already. Only legal hostname strings are valid."
+msgstr ""
+"Legt fest, welcher Rackspace Cloud Files-Container zum Speichern von Dateien "
+"verwendet werden soll. Nur gültige Rechnername-Zeichenketten sind zulässig."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Die Amazon S3-Zugangsschlüsselkennung. Dies fungiert als S3-Benutzername."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+msgid "Your Rackspace username"
+msgstr "Ihr Rackspace Benutzername"
 
 #: ../data/ui/restore-missing.ui.h:1
 msgid "Folder:"
@@ -297,6 +334,26 @@ msgstr "Ordner:"
 #: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:172
 msgid "Scanning…"
 msgstr "Durchsuche..."
+
+#: ../nautilus/NautilusExtension.c:90
+msgid "Restore missing files…"
+msgstr "Fehlende Dateien werden wiederhergestellt …"
+
+#: ../nautilus/NautilusExtension.c:91
+msgid "Restore deleted files from backup"
+msgstr "Gelöschte Dateien aus Sicherung wiederherstellen"
+
+#: ../nautilus/NautilusExtension.c:123
+msgid "Revert to Previous Version…"
+msgid_plural "Revert to Previous Versions…"
+msgstr[0] "Auf frühere Version zurücksetzen …"
+msgstr[1] "Auf frühere Versionen zurücksetzen …"
+
+#: ../nautilus/NautilusExtension.c:127
+msgid "Restore file from backup"
+msgid_plural "Restore files from backup"
+msgstr[0] "Datei aus Datensicherung wiederherstellen"
+msgstr[1] "Dateien aus Datensicherung wiederherstellen"
 
 #: ../common/BackendFile.vala:74
 msgid "GVFS FUSE is not installed"
@@ -314,7 +371,8 @@ msgstr "%1$s auf %2$s"
 msgid "Backup will begin when %s becomes connected."
 msgstr "Datensicherung wird beginnen wenn '%s' verbunden ist."
 
-#: ../common/BackendFile.vala:134 ../common/BackendS3.vala:51
+#: ../common/BackendFile.vala:134 ../common/BackendRackspace.vala:45
+#: ../common/BackendS3.vala:55 ../common/BackendU1.vala:63
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "Die Datensicherung wird durchgeführt, sobald eine Internet-Verbindung "
@@ -330,50 +388,102 @@ msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Warte, dass '%s' angeschlossen wird..."
 
 #. Translators: %s is a folder.
-#: ../common/BackendS3.vala:124
+#: ../common/BackendRackspace.vala:64
+#, c-format
+msgid "%s on Rackspace Cloud Files"
+msgstr "%s auf Rackspace Cloud Files"
+
+#: ../common/BackendRackspace.vala:111 ../common/BackendS3.vala:175
+msgid "Permission denied"
+msgstr "Zugriff verweigert"
+
+#: ../common/BackendRackspace.vala:132
+#, c-format
+msgid ""
+"You can sign up for a Rackspace Cloud Files account <a "
+"href=\"%s\">online</a>."
+msgstr ""
+"Sie können sich für ein Konto bei Rackspace Cloud Files <a "
+"href=\"%s\">online</a> anmelden."
+
+#: ../common/BackendRackspace.vala:133
+msgid "_API access key:"
+msgstr "_API-Zugangsschlüssel:"
+
+#: ../common/BackendRackspace.vala:134
+msgid "S_how API access key"
+msgstr "API-Zugang_sschlüssel zeigen"
+
+#: ../common/BackendRackspace.vala:135
+msgid "_Remember API access key"
+msgstr "API-Zugangsschlüssel me_rken"
+
+#: ../common/BackendRackspace.vala:137
+msgid "Enter Rackspace Cloud Files API key"
+msgstr "Zugangsschlüssel für Rackspace Cloud Files eingeben"
+
+#. Translators: %s is a folder.
+#: ../common/BackendS3.vala:128
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "%s auf Amazon S3"
 
-#: ../common/BackendS3.vala:171
-msgid "Permission denied"
-msgstr "Zugriff verweigert"
-
-#: ../common/BackendS3.vala:192
+#: ../common/BackendS3.vala:196
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr ""
 "Sie können ein Amazon S3-Konto <a href=\"%s\">online</a> registrieren."
 
-#: ../common/BackendS3.vala:193
+#: ../common/BackendS3.vala:197
 msgid "_Access key ID:"
 msgstr "_Kennung des Zugriffsschlüssels:"
 
-#: ../common/BackendS3.vala:194
+#: ../common/BackendS3.vala:198
 msgid "_Secret access key:"
 msgstr "_Geheimer Zugriffsschlüssel:"
 
-#: ../common/BackendS3.vala:195
+#: ../common/BackendS3.vala:199
 msgid "S_how secret access key"
 msgstr "Ge_heimen Zugriffschlüssel anzeigen"
 
-#: ../common/BackendS3.vala:196
+#: ../common/BackendS3.vala:200
 msgid "_Remember secret access key"
 msgstr "An geheimen Zugriffsschlüssel e_rinnern"
 
-#: ../common/BackendS3.vala:198
+#: ../common/BackendS3.vala:202
 msgid "Enter Amazon S3 access key"
 msgstr "Amazon S3-Zugriffsschlüssel eingeben"
 
-#: ../common/CommonUtils.vala:188
+#: ../common/BackendU1.vala:74 ../widgets/ConfigLocation.vala:108
+msgid "Ubuntu One"
+msgstr "Ubuntu One"
+
+#: ../common/BackendU1.vala:111
+msgid "Sign into Ubuntu One"
+msgstr ""
+
+#: ../common/BackendU1.vala:113
+msgid "Connect to Ubuntu One"
+msgstr "Mit Ubuntu One verbinden"
+
+#: ../common/BackendU1.vala:125
+msgid ""
+"Ubuntu One requires an Ubuntu Single Sign On (SSO) account. This process "
+"will allow you to create a new account, if you do not yet have one."
+msgstr ""
+"Ubuntu One erfordert ein »Ubuntu Single Sign On« (SSO)-Benutzerkonto. Wenn "
+"Sie noch keines haben, können Sie innerhalb dieses Dialogs solch ein "
+"Benutzerkonto anlegen."
+
+#: ../common/CommonUtils.vala:198
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: ../common/DuplicityInfo.vala:140
+#: ../common/DuplicityInfo.vala:141
 msgid "Could not run duplicity"
 msgstr "Duplicity konnte nicht ausgeführt werden"
 
-#: ../common/DuplicityInfo.vala:145
+#: ../common/DuplicityInfo.vala:146
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -381,7 +491,7 @@ msgstr ""
 "Version von Duplicity konnte nicht ausgelesen werden.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:147
+#: ../common/DuplicityInfo.vala:148
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -390,15 +500,15 @@ msgstr ""
 "Konnte duplicity Version '%s' nicht verstehen\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:149
+#: ../common/DuplicityInfo.vala:150
 msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 msgstr "Déjà Dup funktioniert ohne Duplicity nicht und wird nun beendet."
 
-#: ../common/DuplicityInfo.vala:153
+#: ../common/DuplicityInfo.vala:154
 msgid "Duplicity’s version is too old"
 msgstr "Die Duplicity Version ist veraltet."
 
-#: ../common/DuplicityInfo.vala:154
+#: ../common/DuplicityInfo.vala:155
 #, c-format
 msgid ""
 "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
@@ -679,7 +789,7 @@ msgid "_Show password"
 msgstr "Passwort an_zeigen"
 
 #: ../deja-dup/AssistantOperation.vala:310
-#: ../deja-dup/MountOperationAssistant.vala:28
+#: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "An Passwort _erinnern"
 
@@ -804,7 +914,7 @@ msgstr "Zuletzt gesehen"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:205
 msgid "Restore which Files?"
-msgstr ""
+msgstr "Welche Dateien wiederherstellen?"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:336
 msgid "Scanning for files from yesterday…"
@@ -897,79 +1007,81 @@ msgstr "Ordner existiert nicht"
 msgid "You must provide a directory, not a file"
 msgstr "Sie müssen einen Ordner angeben, keine Datei"
 
-#: ../deja-dup/MainWindow.vala:49 ../deja-dup/MainWindow.vala:196
+#: ../deja-dup/MainWindow.vala:48 ../deja-dup/MainWindow.vala:194
 msgid "_Restore…"
 msgstr "_Wiederherstellen …"
 
-#: ../deja-dup/MainWindow.vala:76 ../deja-dup/MainWindow.vala:190
+#: ../deja-dup/MainWindow.vala:74 ../deja-dup/MainWindow.vala:188
 msgctxt "back up is verb"
 msgid "_Back Up…"
 msgstr "_Sichern …"
 
-#: ../deja-dup/MainWindow.vala:174
+#: ../deja-dup/MainWindow.vala:172
 msgid "Could not open preferences"
 msgstr "Einstellungen konnten nicht aufgerufen werden"
 
-#: ../deja-dup/MainWindow.vala:187
+#: ../deja-dup/MainWindow.vala:185
 msgctxt "backup is noun"
 msgid "_Backup"
 msgstr "_Datensicherung"
 
-#: ../deja-dup/MainWindow.vala:206
+#: ../deja-dup/MainWindow.vala:204
 msgid "_Edit"
 msgstr "_Bearbeiten"
 
-#: ../deja-dup/MainWindow.vala:213
+#: ../deja-dup/MainWindow.vala:211
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: ../deja-dup/MainWindow.vala:216
+#: ../deja-dup/MainWindow.vala:214
 msgid "_Contents"
 msgstr "_Inhalt"
 
-#: ../deja-dup/MainWindow.vala:220
+#: ../deja-dup/MainWindow.vala:218
 msgid "Get Help _Online…"
 msgstr "_Online Hilfe"
 
-#: ../deja-dup/MainWindow.vala:224
+#: ../deja-dup/MainWindow.vala:222
 msgid "_Translate This Application…"
 msgstr "Diese Anwendung _übersetzen..."
 
-#: ../deja-dup/MainWindow.vala:228
+#: ../deja-dup/MainWindow.vala:226
 msgid "_Report a Problem…"
 msgstr "Ein Problem _melden..."
 
-#: ../deja-dup/MountOperationAssistant.vala:25
+#. add_optional_label();
+#: ../deja-dup/MountOperationAssistant.vala:36
 #: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
+#: ../widgets/ConfigLocationRackspace.vala:32
 #: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
 msgid "_Username:"
 msgstr "_Benutzername:"
 
-#: ../deja-dup/MountOperationAssistant.vala:26
+#: ../deja-dup/MountOperationAssistant.vala:37
 msgid "_Password:"
 msgstr "_Passwort:"
 
-#: ../deja-dup/MountOperationAssistant.vala:27
+#: ../deja-dup/MountOperationAssistant.vala:38
 msgid "S_how password"
 msgstr "_Zeige Passwort"
 
-#: ../deja-dup/MountOperationAssistant.vala:53
+#: ../deja-dup/MountOperationAssistant.vala:81
 msgid "Location not available"
 msgstr "Ort nicht verfügbar"
 
-#: ../deja-dup/MountOperationAssistant.vala:113
+#: ../deja-dup/MountOperationAssistant.vala:141
 msgid "This backup location requires authentication."
 msgstr "Dieser Sicherungsort erfordert eine Legitimation."
 
-#: ../deja-dup/MountOperationAssistant.vala:138
+#: ../deja-dup/MountOperationAssistant.vala:172
 msgid "Connect _anonymously"
 msgstr "_Anonym verbinden"
 
-#: ../deja-dup/MountOperationAssistant.vala:142
+#: ../deja-dup/MountOperationAssistant.vala:176
 msgid "Connect as u_ser:"
 msgstr "Als _Benutzer verbinden:"
 
-#: ../deja-dup/MountOperationAssistant.vala:182
+#: ../deja-dup/MountOperationAssistant.vala:216
 msgid "_Domain:"
 msgstr "_Domäne:"
 
@@ -1019,14 +1131,6 @@ msgstr "Sicherungen _behalten:"
 msgid "Schedule"
 msgstr "Zeitplan"
 
-#: ../widgets/ButtonConnect.vala:28
-msgid "Connect to _Server…"
-msgstr "Verbinde mit _Server..."
-
-#: ../widgets/ButtonConnect.vala:37
-msgid "Could not open connection dialog"
-msgstr "Verbindungsdialog konnte nicht geöffnet werden"
-
 #: ../widgets/ConfigDelete.vala:44
 msgid "At least a week"
 msgstr "Mindestens eine Woche"
@@ -1070,11 +1174,11 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nein"
 
-#: ../widgets/ConfigLabelList.vala:50 ../widgets/ConfigList.vala:120
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:120
 msgid "Home Folder"
 msgstr "Persönlicher Ordner"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:122
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:122
 msgid "Trash"
 msgstr "Mülleimer"
 
@@ -1151,30 +1255,42 @@ msgstr[1] ""
 msgid "Choose folders"
 msgstr "Ordner wählen"
 
-#: ../widgets/ConfigLocation.vala:96
+#: ../widgets/ConfigLocation.vala:101
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: ../widgets/ConfigLocation.vala:102
+#: ../widgets/ConfigLocation.vala:103
+msgid "Rackspace Cloud Files"
+msgstr "Rackspace Cloud Files"
+
+#: ../widgets/ConfigLocation.vala:114
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:104
+#: ../widgets/ConfigLocation.vala:116
 msgid "Windows Share"
-msgstr ""
+msgstr "Windows-Freigabe"
 
-#: ../widgets/ConfigLocation.vala:106
+#: ../widgets/ConfigLocation.vala:118
 msgid "FTP"
-msgstr ""
+msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:108
+#: ../widgets/ConfigLocation.vala:120
 msgid "WebDAV"
-msgstr ""
+msgstr "WebDAV"
+
+#: ../widgets/ConfigLocation.vala:123
+msgid "Custom Location"
+msgstr "Benutzerdefinierter Ort"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:113
+#: ../widgets/ConfigLocation.vala:128
 msgid "Local Folder"
 msgstr "Lokaler Ordner"
+
+#: ../widgets/ConfigLocationCustom.vala:31
+msgid "_URI:"
+msgstr "_Adresse:"
 
 #: ../widgets/ConfigLocationDAV.vala:31 ../widgets/ConfigLocationFTP.vala:32
 #: ../widgets/ConfigLocationSMB.vala:31 ../widgets/ConfigLocationSSH.vala:31
@@ -1183,7 +1299,7 @@ msgstr "_Server:"
 
 #: ../widgets/ConfigLocationDAV.vala:38
 msgid "Use secure connection (_HTTPS)"
-msgstr ""
+msgstr "Sichere Verbindung verwenden (_HTTPS)"
 
 #: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
 #: ../widgets/ConfigLocationSSH.vala:35
@@ -1193,21 +1309,25 @@ msgstr "_Port:"
 #: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
 #: ../widgets/ConfigLocationFile.vala:43 ../widgets/ConfigLocationS3.vala:34
 #: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
-#: ../widgets/ConfigLocationVolume.vala:31
+#: ../widgets/ConfigLocationU1.vala:32 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder:"
 msgstr "_Ordner:"
 
 #: ../widgets/ConfigLocationFTP.vala:46
 msgid "_Log in with a username"
-msgstr ""
+msgstr "Mit einem Benutzernamen anme_lden"
 
 #: ../widgets/ConfigLocationFile.vala:37
 msgid "_Browse…"
-msgstr ""
+msgstr "_Durchsuchen …"
 
 #: ../widgets/ConfigLocationFile.vala:48
 msgid "Choose Folder"
-msgstr ""
+msgstr "Ordner wählen"
+
+#: ../widgets/ConfigLocationRackspace.vala:34
+msgid "_Container:"
+msgstr "_Container:"
 
 #: ../widgets/ConfigLocationS3.vala:32
 msgid "S3 Access Key I_D:"
@@ -1215,11 +1335,11 @@ msgstr "S3 _Zugangsschlüssel-Kennung:"
 
 #: ../widgets/ConfigLocationSMB.vala:41
 msgid "_Domain Name:"
-msgstr ""
+msgstr "_Domänenname:"
 
 #: ../widgets/ConfigLocationTable.vala:98
 msgid "Optional information:"
-msgstr ""
+msgstr "Optionale Informationen:"
 
 #: ../widgets/ConfigPeriod.vala:36
 msgid "Daily"
@@ -1250,11 +1370,11 @@ msgstr[1] "Alle %d Tage"
 msgid "Could not display %s"
 msgstr "%s konnte nicht angezeigt werden"
 
-#: ../widgets/WidgetUtils.vala:75
+#: ../widgets/WidgetUtils.vala:63
 msgid "About Déjà Dup"
 msgstr "Über Déjà Dup"
 
-#: ../widgets/WidgetUtils.vala:79
+#: ../widgets/WidgetUtils.vala:67
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -1274,16 +1394,17 @@ msgstr ""
 "  Mathias Brodala https://launchpad.net/~mathbr\n"
 "  Maximilian Blömer https://launchpad.net/~maxbloemer\n"
 "  Michael Terry https://launchpad.net/~mterry\n"
-"  MixCool https://launchpad.net/~mixcool\n"
 "  Philipp Wolfer https://launchpad.net/~phw\n"
 "  Severin Heiniger https://launchpad.net/~lantash\n"
+"  SpaceCafé https://launchpad.net/~spacecafe\n"
 "  Stefan Reichel https://launchpad.net/~bomret\n"
 "  Tobias Baldauf https://launchpad.net/~technopagan\n"
+"  Vinzenz Vietzke https://launchpad.net/~vinzv\n"
 "  benste https://launchpad.net/~benste\n"
 "  nurio https://launchpad.net/~spammtmichzu\n"
 "  siziwi https://launchpad.net/~siziwi"
 
-#: ../widgets/WidgetUtils.vala:84
+#: ../widgets/WidgetUtils.vala:72
 #, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
@@ -1297,7 +1418,7 @@ msgstr ""
 "entweder in Version 3 der Lizenz oder (nach Ihrem Ermessen) in jeder "
 "folgenden Lizenz."
 
-#: ../widgets/WidgetUtils.vala:85
+#: ../widgets/WidgetUtils.vala:73
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -1309,7 +1430,7 @@ msgstr ""
 "implizierte Garantie der MARKTREIFE oder der VERWENDBARKEIT FÜR EINEN "
 "BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License."
 
-#: ../widgets/WidgetUtils.vala:86
+#: ../widgets/WidgetUtils.vala:74
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see http://www.gnu.org/licenses/."
@@ -1519,11 +1640,6 @@ msgstr ""
 #~ msgid "Duplicity's version is too old"
 #~ msgstr "Die Version von duplicity ist zu alt."
 
-#~ msgid "Restore file from backup"
-#~ msgid_plural "Restore files from backup"
-#~ msgstr[0] "Datei aus Datensicherung wiederherstellen"
-#~ msgstr[1] "Dateien aus Datensicherung wiederherstellen"
-
 #~ msgid ""
 #~ "Enter your Amazon Web Services user ID and secret key.  This is not the same "
 #~ "as your amazon.com username and password."
@@ -1618,6 +1734,9 @@ msgstr ""
 #, c-format
 #~ msgid "Folder %s on Amazon S3"
 #~ msgstr "Ordner %s auf Amazon S3"
+
+#~ msgid "Could not open connection dialog"
+#~ msgstr "Verbindungsdialog konnte nicht geöffnet werden"
 
 #~ msgctxt "backup is verb"
 #~ msgid "_Backup"
@@ -1759,6 +1878,9 @@ msgstr ""
 #~ "Ob nach dem Administratorpassword gefragt werden soll wenn, "
 #~ "Systemverzeichnisse gesichert oder wiederhergestellt werden sollen."
 
+#~ msgid "Connect to _Server…"
+#~ msgstr "Verbinde mit _Server..."
+
 #, c-format
 #~ msgid "Show _Progress (%.1f%%)"
 #~ msgstr "Zeige _Fortschritt (%.1f%%)"
@@ -1788,16 +1910,8 @@ msgstr ""
 #~ msgid "_Backup…"
 #~ msgstr "_Sichern …"
 
-#~ msgid "Revert to Previous Version…"
-#~ msgid_plural "Revert to Previous Versions…"
-#~ msgstr[0] "Auf frühere Version zurücksetzen …"
-#~ msgstr[1] "Auf frühere Versionen zurücksetzen …"
-
 #~ msgid "No space left"
 #~ msgstr "Kein freier Speicherplatz mehr vorhanden"
 
-#~ msgid "Restore missing files…"
-#~ msgstr "Fehlende Dateien werden wiederhergestellt …"
-
-#~ msgid "Restore deleted files from backup"
-#~ msgstr "Gelöschte Dateien aus Sicherung wiederherstellen"
+#~ msgid "The type of backup location."
+#~ msgstr "Der Typ des Sicherungsortes."
