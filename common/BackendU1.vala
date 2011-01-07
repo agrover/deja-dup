@@ -26,8 +26,6 @@ public const string U1_FOLDER_KEY = "folder";
 
 public class BackendU1 : Backend
 {
-  string app_name = "Ubuntu One";
-
   public static bool is_available()
   {
     if (!DuplicityInfo.get_default().has_u1)
@@ -79,10 +77,7 @@ public class BackendU1 : Backend
     var obj = get_proxy();
 
     Idle.add(() => {
-      var builder = new VariantBuilder(new VariantType("a{ss}"));
-      obj.call("find_credentials",
-               new Variant("(sa{ss})", app_name, builder),
-               DBusCallFlags.NONE, -1, null);
+      obj.call("find_credentials", null, DBusCallFlags.NONE, -1, null);
       return false;
     });
 
@@ -90,13 +85,8 @@ public class BackendU1 : Backend
 
     var loop = new MainLoop(null, false);
     obj.g_signal.connect((obj, sender, signal_name, args) => {
-      if (signal_name == "CredentialsFound") {
-        string appname;
-        var builder = new VariantBuilder(new VariantType("a{ss}"));
-        args.get("(sa{ss})", out appname, out builder);
-        if (appname == app_name)
-          found = true;
-      }
+      if (signal_name == "CredentialsFound")
+        found = true;
       loop.quit();
     });
     loop.run();
@@ -119,25 +109,15 @@ public class BackendU1 : Backend
       var obj = get_proxy();
 
       Idle.add(() => {
-        var builder = new VariantBuilder(new VariantType("a{ss}"));
-        builder.add("{ss}", "tc_url", "https://one.ubuntu.com/terms/");
-        builder.add("{ss}", "ping_url", "https://one.ubuntu.com/oauth/sso-finished-so-get-tokens/");
-        builder.add("{ss}", "help_text", _("Ubuntu One requires an Ubuntu Single Sign On (SSO) account. This process will allow you to create a new account, if you do not yet have one."));
-        obj.call("register", new Variant("(sa{ss})", app_name, builder),
-                 DBusCallFlags.NONE, -1, null);
+        obj.call("register", null, DBusCallFlags.NONE, -1, null);
         return false;
       });
 
       var loop = new MainLoop(null, false);
       obj.g_signal.connect((obj, sender, signal_name, args) => {
         if (signal_name == "CredentialsFound") {
-          string appname;
-          var builder = new VariantBuilder(new VariantType("a{ss}"));
-          args.get("(sa{ss})", out appname, out builder);
-          if (appname == app_name) {
-            mount_op.set("go_forward", true);
-            envp_ready(true, null);
-          }
+          mount_op.set("go_forward", true);
+          envp_ready(true, null);
         }
         loop.quit();
       });
@@ -153,9 +133,9 @@ public class BackendU1 : Backend
   {
     return new DBusProxy.for_bus_sync(BusType.SESSION,
                                       DBusProxyFlags.NONE, null, 
-                                      "com.ubuntu.sso",
-                                      "/com/ubuntu/sso/credentials",
-                                      "com.ubuntu.sso.CredentialsManagement",
+                                      "com.ubuntuone.Credentials",
+                                      "/credentials",
+                                      "com.ubuntunone.CredentialsManagement",
                                       null);
   }
 }
