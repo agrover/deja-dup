@@ -64,7 +64,9 @@ public class BackendU1 : Backend
 
   public override string? get_location() throws Error
   {
-    return "http://example.com/";
+    var settings = get_settings(U1_ROOT);
+    var folder = get_folder_key(settings, U1_FOLDER_KEY);
+    return "u1://%s".printf(folder);
   }
 
   public override string? get_location_pretty() throws Error
@@ -72,23 +74,34 @@ public class BackendU1 : Backend
     return _("Ubuntu One");
   }
 
+  async void call_but_quit_on_fail(DBusProxy obj, string method, MainLoop loop)
+  {
+    try {
+      yield obj.call(method, null, DBusCallFlags.NONE, -1, null);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      loop.quit();
+    }
+  }
+
   public override async void get_envp() throws Error
   {
+    bool found = false;
     var obj = get_proxy();
+    var loop = new MainLoop(null, false);
 
     Idle.add(() => {
-      obj.call("find_credentials", null, DBusCallFlags.NONE, -1, null);
+      call_but_quit_on_fail(obj, "find_credentials", loop);
       return false;
     });
 
-    bool found = false;
-
-    var loop = new MainLoop(null, false);
     obj.g_signal.connect((obj, sender, signal_name, args) => {
       if (signal_name == "CredentialsFound")
         found = true;
       loop.quit();
     });
+
     loop.run();
 
     if (found)
@@ -107,13 +120,13 @@ public class BackendU1 : Backend
   {
     try {
       var obj = get_proxy();
+      var loop = new MainLoop(null, false);
 
       Idle.add(() => {
-        obj.call("register", null, DBusCallFlags.NONE, -1, null);
+        call_but_quit_on_fail(obj, "register", loop);
         return false;
       });
 
-      var loop = new MainLoop(null, false);
       obj.g_signal.connect((obj, sender, signal_name, args) => {
         if (signal_name == "CredentialsFound") {
           mount_op.set("go_forward", true);
@@ -135,7 +148,7 @@ public class BackendU1 : Backend
                                       DBusProxyFlags.NONE, null, 
                                       "com.ubuntuone.Credentials",
                                       "/credentials",
-                                      "com.ubuntunone.CredentialsManagement",
+                                      "com.ubuntuone.CredentialsManagement",
                                       null);
   }
 }

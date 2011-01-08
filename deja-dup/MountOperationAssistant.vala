@@ -67,13 +67,13 @@ public class MountOperationAssistant : MountOperation
   }
 
   construct {
-    connect("notify::go-forward", go_forward_changed, null);
+    Signal.connect(this, "notify::go-forward", (Callback)go_forward_changed, this);
   }
 
-  void go_forward_changed()
+  static void go_forward_changed(MountOperationAssistant mop)
   {
-    if (go_forward)
-      assist.go_forward();      
+    if (mop.go_forward)
+      mop.assist.go_forward();      
   }
 
   public override void aborted()

@@ -70,14 +70,7 @@ public class BackendS3 : Backend
     }
     
     var folder = get_folder_key(settings, S3_FOLDER_KEY);
-    if (folder != null && folder != "") {
-      if (folder[0] != '/')
-        bucket = "%s/%s".printf(bucket, folder);
-      else
-        bucket = "%s%s".printf(bucket, folder);
-    }
-    
-    return "s3+http://%s".printf(bucket);
+    return "s3+http://%s/%s".printf(bucket, folder);
   }
   
   public bool bump_bucket() {
@@ -121,9 +114,9 @@ public class BackendS3 : Backend
   {
     var settings = get_settings(S3_ROOT);
     var folder = get_folder_key(settings, S3_FOLDER_KEY);
-    if (folder == null || folder == "")
+    if (folder == "")
       folder = "/";
-    
+
     // Translators: %s is a folder.
     return _("%s on Amazon S3").printf(folder);
   }

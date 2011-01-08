@@ -58,6 +58,8 @@ public string get_folder_key(Settings settings, string key)
     folder = folder.replace("$HOSTNAME", Environment.get_host_name());
     settings.set_string(key, folder);
   }
+  if (folder.has_prefix("/"))
+    folder = folder.substring(1);
   return folder;
 }
 

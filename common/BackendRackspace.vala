@@ -49,7 +49,7 @@ public class BackendRackspace : Backend
   public override string? get_location() throws Error
   {
     var settings = get_settings(RACKSPACE_ROOT);
-    var container = settings.get_string(RACKSPACE_CONTAINER_KEY);
+    var container = get_folder_key(settings, RACKSPACE_CONTAINER_KEY);
     return "cf+http://%s".printf(container);
   }
 
