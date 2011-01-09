@@ -81,7 +81,7 @@ AC_ARG_WITH([gtk3],
   [AS_HELP_STRING([--with-gtk3],
     [use gtk3 instead of gtk2 @<:@default=check@:>@])],
   [],
-  [with_gtk3=no])
+  [with_gtk3=check])
 AS_IF([test "x$with_gtk3" != xno],
   [PKG_CHECK_EXISTS(gtk+-3.0 >= 2.91
                     unique-3.0,
