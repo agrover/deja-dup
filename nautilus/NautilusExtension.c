@@ -87,7 +87,7 @@ deja_dup_nautilus_extension_get_background_items(NautilusMenuProvider *provider,
   g_free(path);
 
   item = nautilus_menu_item_new("DejaDupNautilusExtension::restore_missing_item",
-                                dgettext(GETTEXT_PACKAGE, "Restore missing files…"),
+                                dgettext(GETTEXT_PACKAGE, "Restore Missing Files…"),
                                 dgettext(GETTEXT_PACKAGE, "Restore deleted files from backup"),
                                 "document-revert");
 

@@ -9,40 +9,34 @@
 <title>Preferences</title>
   <p>To configure <app>Déjà Dup</app>, choose <guiseq><gui style="menu">Edit</gui><gui style="menuitem">Preferences</gui></guiseq>.</p>
   <terms>
-  	<item>
+    <item>
       <title><gui>Backup location</gui></title>
       <p>Use this drop-down list box to specify the backup location that <app>Déjà Dup</app> uses when backing up or restoring:</p>
       <terms>
         <item>
-          <title>Amazon S3</title>
-          <p>This backup location uses the S3 storage service from Amazon. For a small fee per gigabyte, they hold your data for you. This is the recommended default because it is an easy way to keep your data offsite (meaning out of your home: in case of disaster or theft, your data will still be safe). You can sign up <link href="http://aws.amazon.com/s3/">online</link>.</p>
-      		<note><p>This is the default setting.</p></note>
-          <note style="warning"><p>This service costs money.  Read their rates carefully before using it.</p></note>
+          <title>Cloud Services</title>
+          <p>The first few backup locations are cloud storage services provided by various companies. For a small fee per gigabyte, they hold your data for you. A cloud service like this is recommended because it is an easy way to keep your data offsite (meaning out of your home: in case of disaster or theft, your data will still be safe). You can choose from Amazon S3, Rackspace Cloud Files, and Ubuntu One.</p>
+          <note style="warning"><p>These services costs money.  Read their rates carefully before using it.</p></note>
         </item>
         <item>
           <title>Removable Media</title>
           <p>You may see removable media like external hard drives or thumb drives listed.</p>
         </item>
         <item>
-          <title>Connected Servers</title>
-          <p>If you have connected to any servers, they will appear.  To connect to a server not listed, click <gui style="button">Connect to Server…</gui>.  This will let you enter the server information.</p>
-      		<note style="bug"><p>After you connect to a server, make sure to go back to the <gui>Preferences</gui> dialog and choose the folder on that server to which you want to back up.  This is not currently automatically selected after you connect.</p></note>
+          <title>Remote Servers</title>
+          <p>Choose the type of remote server to which you want to connect. Then you can enter the server information.  Alternatively, if you know your server's URL, choose <gui>Custom Location</gui> and enter it.</p>
         </item>
         <item>
-          <title>Local Folders</title>
+          <title>Local Folder</title>
           <p>You may also want to choose a local folder as a backup location.  Note that backups can be quite large, so make sure you have enough free disk space.</p>
         </item>
       </terms>
     </item>
-		<item>
-		  <title><gui style="input">S3 Access Key ID</gui></title>
-	    <p>This is your Access Key ID that Amazon gave you when you signed up for S3. It is like a username for logging into S3. If left empty, you will be prompted for it as you backup or restore.</p>
-	    <note><p>This option only appears if the <gui>Amazon S3</gui> backup location has been selected.</p></note>
-		</item>
     <item>
-      <title><gui style="input">Folder</gui></title>
-      <p>If you have multiple backups, you may want to keep them separated in multiple folders.  Use this option to enter a path on the S3 service in which to put your files.</p>
-      <note><p>This option only appears if the <gui>Amazon S3</gui> backup location has been selected.</p></note>
+      <title><gui style="checkbox">Encrypt backup files</gui></title>
+      <p>Encrypting your backup files is recommended to keep your data safe. If you don’t have exclusive physical control of your backup location, or if it is stolen, an encrypted backup prevents others from looking at your personal data.</p>
+      <p>If on, you will be prompted for a password. Keep this password safe, you will need it to restore your data.</p>
+      <note><p>Encryption is enabled by default.</p></note>
     </item>
     <item>
       <title><gui>Include files in folders</gui></title>
@@ -53,7 +47,7 @@
       <p>Select a list of directories to not backup. Press the <gui style="button">Add </gui> or <gui style="button">Remove</gui> buttons to modify the list.</p>
       <p>Some of your data may be large and not very important to you.  In that case, you can save yourself some time and space by not backing them up.</p>
       <note style="advanced">
-        <p>Some locations are excluded by default:</p>
+        <p>Some locations are always excluded by default:</p>
         <list>
           <item><p><file><span its:translate="no">~/.cache</span></file></p></item>
           <item><p><file><span its:translate="no">~/.thumbnails</span></file></p></item>
@@ -66,13 +60,7 @@
           <item><p><file><span its:translate="no">/tmp</span></file></p></item>
           <item><p><file><span its:translate="no">/sys</span></file></p></item>
         </list>
-     	</note>
-    </item>
-    <item>
-      <title><gui style="checkbox">Encrypt backup files</gui></title>
-      <p>Encrypting your backup files is recommended to keep your data safe. If you don’t have exclusive physical control of your backup location, or if it is stolen, an encrypted backup prevents others from looking at your personal data.</p>
-      <p>If on, you will be prompted for a password. Keep this password safe, you will need it to restore your data.</p>
-      <note><p>Encryption is enabled by default.</p></note>
+       </note>
     </item>
     <item>
       <title><gui style="checkbox">Automatically backup on a regular schedule</gui></title>
@@ -87,7 +75,7 @@
     <item>
       <title><gui>Keep backups</gui></title>
       <p>Choose the minimum amount of time to keep backup files.  If you find that the backup files are taking up too much space, you may want to decrease this duration.  Due to implementation details, files may be kept a bit longer than the chosen time.  But no files will be deleted early.</p>
-      <note><p>Backups are kept forever by default.</p></note>
+      <note><p>Backups are kept forever by default, but still may be deleted earlier if the backup location begins to run out of space.</p></note>
     </item>
- 	</terms>
+   </terms>
 </page>
