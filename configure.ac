@@ -26,8 +26,7 @@ AC_CONFIG_MACRO_DIR([m4])
 
 # Sets up automake.
 AM_INIT_AUTOMAKE([1.11 foreign dist-bzip2 no-dist-gzip])
-m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
-
+AM_SILENT_RULES([yes])
 AM_MAINTAINER_MODE()
 
 GNOME_DOC_INIT
@@ -47,6 +46,7 @@ if test "x$USE_MAINTAINER_MODE" = "xyes" ; then
   if test "x$VALAC" = "x" ; then
       AC_MSG_ERROR([Cannot find the "valac" compiler in your PATH])
   fi
+  CFLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGSEAL_ENABLE"
 fi
 
 # Sets up gettext.
@@ -180,15 +180,6 @@ AS_IF([test "x$with_appindicator" != xno],
       fi
     ]
   )]
-)
-
-AC_ARG_ENABLE([deprecations],
-  [AS_HELP_STRING([--enable-deprecations],
-    [allow deprecated API usage @<:@default=yes@:>@])],
-  [],
-  [enable_deprecations=yes])
-AS_IF([test "x$enable_deprecations" = xno],
-  [CFLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGSEAL_ENABLE"]
 )
 
 # Sets up output files.

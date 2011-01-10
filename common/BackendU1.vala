@@ -71,7 +71,13 @@ public class BackendU1 : Backend
 
   public override string? get_location_pretty() throws Error
   {
-    return _("Ubuntu One");
+    var settings = get_settings(U1_ROOT);
+    var folder = get_folder_key(settings, U1_FOLDER_KEY);
+    if (folder == "")
+      return _("Ubuntu One");
+    else
+      // Translators: %s is a folder.
+      return _("%s on Ubuntu One").printf(folder);
   }
 
   async void call_but_quit_on_fail(DBusProxy obj, string method, MainLoop loop)
@@ -111,7 +117,7 @@ public class BackendU1 : Backend
   }
 
   void ask_password() {
-    mount_op.set("label_button", _("Sign into Ubuntu One"));
+    mount_op.set("label_button", _("Sign into Ubuntu One…"));
     mount_op.connect("signal::button-clicked", sign_in, null);
     mount_op.ask_password(_("Connect to Ubuntu One"), "", "", 0);
   }

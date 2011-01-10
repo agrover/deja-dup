@@ -115,10 +115,10 @@ public class BackendS3 : Backend
     var settings = get_settings(S3_ROOT);
     var folder = get_folder_key(settings, S3_FOLDER_KEY);
     if (folder == "")
-      folder = "/";
-
-    // Translators: %s is a folder.
-    return _("%s on Amazon S3").printf(folder);
+      return _("Amazon S3");
+    else
+      // Translators: %s is a folder.
+      return _("%s on Amazon S3").printf(folder);
   }
   
   string settings_id;

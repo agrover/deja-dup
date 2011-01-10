@@ -57,11 +57,11 @@ public class BackendRackspace : Backend
   {
     var settings = get_settings(RACKSPACE_ROOT);
     var container = settings.get_string(RACKSPACE_CONTAINER_KEY);
-    if (container == null || container == "")
-      container = "/";
-    
-    // Translators: %s is a folder.
-    return _("%s on Rackspace Cloud Files").printf(container);
+    if (container == "")
+      return _("Rackspace Cloud Files");
+    else
+      // Translators: %s is a folder.
+      return _("%s on Rackspace Cloud Files").printf(container);
   }
 
   string settings_id;
