@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-12-29 13:28-0500\n"
+"POT-Creation-Date: 2011-01-09 14:16-0500\n"
 "PO-Revision-Date: 2010-12-29 22:18+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:48+0000\n"
+"X-Launchpad-Export-Date: 2011-01-10 05:25+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -172,19 +172,20 @@ msgstr "Krótka nazwa woluminu zewnętrznego"
 msgid "The Amazon S3 bucket name to use"
 msgstr "Nazwa używanego kosza serwisu Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:21
+#. Left this way for historical reasons, should be '/$HOSTNAME'.  See convert_s3_folder_to_hostname()
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
 msgid "The Amazon S3 folder"
 msgstr "Katalog serwisu Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
 msgid "The Rackspace Cloud Files container"
 msgstr "Kontener Rackspace Cloud Files"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "The Ubuntu One folder"
 msgstr "Katalog usługi Ubuntu One"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "The folder name to store files in. If '$HOSTNAME', it will default to a "
 "folder based on the name of the computer."
@@ -192,11 +193,11 @@ msgstr ""
 "Nazwa katalogu do przechowywania plików. Jeśli wpisane zostanie "
 "\"$HOSTNAME\", to zostanie użyty domyślny katalog oparty na nazwie komputera."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid "The last time Déjà Dup was run"
 msgstr "Czas ostatniego uruchomienia programu Déjà Dup"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
@@ -204,11 +205,11 @@ msgstr ""
 "Czas ostatniego pomyślnego uruchomienia programu Déjà Dup. Powinien być w "
 "formacie ISO 8601."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "The number of days between backups."
 msgstr "Dni między kopiami zapasowymi"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
@@ -217,7 +218,7 @@ msgstr ""
 "Liczba dni, ile trzymać pliki kopii zapasowej. Wartość 0 oznacza zawsze. To "
 "jest minimalna liczba dni, pliki mogą być trzymane dłużej."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
 msgid ""
 "The type of backup location. If 'auto', a default will be chosen based on "
 "what is available."
@@ -225,11 +226,11 @@ msgstr ""
 "Typ położenia kopii zapasowej. Jeśli wpisane zostanie \"auto\", to zostanie "
 "wybrane domyślne położenie w oparciu o dostępność."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "To jest nazwa użytkownika usługi Rackspace Cloud Files."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
@@ -241,7 +242,7 @@ msgstr ""
 "$PUBLIC_SHARE, $TEMPLATES, $TRASH i $VIDEO są rozpoznawane jako specjalne "
 "katalogi użytkownika. Ścieżki są względne do katalogu domowego użytkownika."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
@@ -254,31 +255,31 @@ msgstr ""
 "specjalne katalogi użytkownika. Wpisy względne odnoszą się do katalogu "
 "domowego użytkownika."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid "Type of location to store backup"
 msgstr "Typ położenia, w którym przechowywać kopie zapasowe"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "Unique ID of the external volume"
 msgstr "Unikalny identyfikator woluminu zewnętrznego"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Określa, czy położenie kopii zapasowej znajduje się na zamontowanym "
 "woluminie zewnętrznym czy w normalnym katalogu."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "Whether to automatically back up on a regular schedule."
 msgstr ""
 "Określa, czy kopie zapasowe będą tworzone w oparciu o regularny harmonogram."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid "Whether to encrypt your backup"
 msgstr "Określa, czy szyfrować kopie zapasowe"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 msgid ""
 "Whether to encrypt your backup files in the storage location. It’s strongly "
 "recommended to leave this as ‘true’."
@@ -286,15 +287,15 @@ msgstr ""
 "Określa, czy szyfrować pliki kopii zapasowych w położeniu pamięci masowej. "
 "Mocno zalecane jest pozostawienie wartości \"True\"."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "Whether to periodically back up"
 msgstr "Określa, czy okresowo tworzyć kopie zapasowe"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid "Whether to request the root password"
 msgstr "Określa, czy żądać podania hasło roota"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
@@ -302,7 +303,7 @@ msgstr ""
 "Określa, czy żądać podania hasła roota podczas wykonywania kopii zapasowej "
 "katalogów systemu lub ich przywracania."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -311,7 +312,7 @@ msgstr ""
 "istnieje, to zostanie utworzony. Tylko dozwolone ciągi nazw komputerów są "
 "prawidłowe."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -319,12 +320,12 @@ msgstr ""
 "W którym kontenerze Rackspace Cloud Files przechowywać pliki. Kontener nie "
 "musi już istnieć. Tylko dozwolone ciągi nazw komputera są dozwolone."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Identyfikator klucza dostępu serwisu Amazon S3. Działa jak nazwa użytkownika."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid "Your Rackspace username"
 msgstr "Nazwa użytkownika usługi Rackspace"
 
@@ -375,7 +376,7 @@ msgid "Backup will begin when %s becomes connected."
 msgstr "Wykonanie kopii zapasowej zostanie rozpoczęte po podłączeniu %s."
 
 #: ../common/BackendFile.vala:134 ../common/BackendRackspace.vala:45
-#: ../common/BackendS3.vala:55 ../common/BackendU1.vala:63
+#: ../common/BackendS3.vala:55 ../common/BackendU1.vala:61
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "Wykonanie kopii zapasowej zostanie rozpoczęte po uzyskaniu dostępu do sieci."
@@ -389,13 +390,17 @@ msgstr "Położenie kopii zapasowych jest niedostępne"
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Oczekiwanie na podłączenie \"%s\"…"
 
+#: ../common/BackendRackspace.vala:61 ../widgets/ConfigLocation.vala:103
+msgid "Rackspace Cloud Files"
+msgstr "Rackspace Cloud Files"
+
 #. Translators: %s is a folder.
 #: ../common/BackendRackspace.vala:64
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "%s w usłudze Rackspace Cloud Files"
 
-#: ../common/BackendRackspace.vala:111 ../common/BackendS3.vala:175
+#: ../common/BackendRackspace.vala:111 ../common/BackendS3.vala:168
 msgid "Permission denied"
 msgstr "Brak uprawnień"
 
@@ -424,59 +429,61 @@ msgstr "_Zapamiętanie klucza dostępu API"
 msgid "Enter Rackspace Cloud Files API key"
 msgstr "Wpisanie klucza API usługi Rackspace Cloud Files"
 
+#: ../common/BackendS3.vala:118 ../widgets/ConfigLocation.vala:101
+msgid "Amazon S3"
+msgstr "Amazon S3"
+
 #. Translators: %s is a folder.
-#: ../common/BackendS3.vala:128
+#: ../common/BackendS3.vala:121
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "%s w serwisie Amazon S3"
 
-#: ../common/BackendS3.vala:196
+#: ../common/BackendS3.vala:189
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr ""
 "Można zalogować się na konto serwisu Amazon S3 <a href=\"%s\">w sieci</a>."
 
-#: ../common/BackendS3.vala:197
+#: ../common/BackendS3.vala:190
 msgid "_Access key ID:"
 msgstr "Identyfik_ator klucza dostępu:"
 
-#: ../common/BackendS3.vala:198
+#: ../common/BackendS3.vala:191
 msgid "_Secret access key:"
 msgstr "Tajny klucz do_stępu:"
 
-#: ../common/BackendS3.vala:199
+#: ../common/BackendS3.vala:192
 msgid "S_how secret access key"
 msgstr "_Wyświetlanie tajnego hasła dostępu"
 
-#: ../common/BackendS3.vala:200
+#: ../common/BackendS3.vala:193
 msgid "_Remember secret access key"
 msgstr "_Zapamiętanie tajnego hasła dostępu"
 
-#: ../common/BackendS3.vala:202
+#: ../common/BackendS3.vala:195
 msgid "Enter Amazon S3 access key"
 msgstr "Proszę wprowadzić klucz dostępu serwisu Amazon S3"
 
-#: ../common/BackendU1.vala:74 ../widgets/ConfigLocation.vala:108
+#: ../common/BackendU1.vala:77 ../widgets/ConfigLocation.vala:108
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: ../common/BackendU1.vala:111
-msgid "Sign into Ubuntu One"
-msgstr "Zalogowanie w usłudze Ubuntu One"
+#. Translators: %s is a folder.
+#: ../common/BackendU1.vala:80
+#, c-format
+msgid "%s on Ubuntu One"
+msgstr ""
 
-#: ../common/BackendU1.vala:113
+#: ../common/BackendU1.vala:120
+msgid "Sign into Ubuntu One…"
+msgstr ""
+
+#: ../common/BackendU1.vala:122
 msgid "Connect to Ubuntu One"
 msgstr "Połączenie z usługą Ubuntu One"
 
-#: ../common/BackendU1.vala:125
-msgid ""
-"Ubuntu One requires an Ubuntu Single Sign On (SSO) account. This process "
-"will allow you to create a new account, if you do not yet have one."
-msgstr ""
-"Usługa Ubuntu One wymaga konta Ubuntu Single Sign On (SSO). Jeśli użytkownik "
-"jeszcze go nie posiada, to ten proces pozwoli na jego utworzenie."
-
-#: ../common/CommonUtils.vala:198
+#: ../common/CommonUtils.vala:218
 msgid "Unknown"
 msgstr "Nieznane"
 
@@ -1012,11 +1019,11 @@ msgstr ""
 "jest wykonywane regularnie). Używa programu duplicity jako mechanizmu\n"
 "wykonywania kopii zapasowej."
 
-#: ../deja-dup/main.vala:135
+#: ../deja-dup/main.vala:133
 msgid "Directory does not exists"
 msgstr "Katalog nie istnieje"
 
-#: ../deja-dup/main.vala:139
+#: ../deja-dup/main.vala:137
 msgid "You must provide a directory, not a file"
 msgstr "Należy podać katalog, a nie plik"
 
@@ -1271,14 +1278,6 @@ msgstr[2] ""
 msgid "Choose folders"
 msgstr "Wybór katalogów"
 
-#: ../widgets/ConfigLocation.vala:101
-msgid "Amazon S3"
-msgstr "Amazon S3"
-
-#: ../widgets/ConfigLocation.vala:103
-msgid "Rackspace Cloud Files"
-msgstr "Rackspace Cloud Files"
-
 #: ../widgets/ConfigLocation.vala:114
 msgid "SSH"
 msgstr "SSH"
@@ -1323,7 +1322,7 @@ msgid "_Port:"
 msgstr "_Port:"
 
 #: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
-#: ../widgets/ConfigLocationFile.vala:43 ../widgets/ConfigLocationS3.vala:34
+#: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:34
 #: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
 #: ../widgets/ConfigLocationU1.vala:32 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder:"
@@ -1333,11 +1332,11 @@ msgstr "_Katalog:"
 msgid "_Log in with a username"
 msgstr "_Logowanie za pomocą nazwy użytkownika"
 
-#: ../widgets/ConfigLocationFile.vala:37
+#: ../widgets/ConfigLocationFile.vala:38
 msgid "_Browse…"
 msgstr "_Przeglądaj…"
 
-#: ../widgets/ConfigLocationFile.vala:48
+#: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
 msgstr "Wybór katalogu"
 
