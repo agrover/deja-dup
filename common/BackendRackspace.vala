@@ -50,6 +50,8 @@ public class BackendRackspace : Backend
   {
     var settings = get_settings(RACKSPACE_ROOT);
     var container = get_folder_key(settings, RACKSPACE_CONTAINER_KEY);
+    if (container == "")
+      throw new BackupError.BAD_CONFIG(_("You must specify a Rackspace container in your preferences."));
     return "cf+http://%s".printf(container);
   }
 
