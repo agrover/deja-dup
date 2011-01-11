@@ -34,7 +34,7 @@ abstract class StatusProvider : Object
       proxy = create_proxy();
       proxy.notify["g-name-owner"].connect(owner_changed);
       proxy.g_signal.connect(handle_signal);
-      owner_changed();
+      check_owner_status();
     }
     catch (Error e) {
       warning("%s\n", e.message);
@@ -49,12 +49,17 @@ abstract class StatusProvider : Object
 
   private void owner_changed()
   {
+    check_owner_status();
+  }
+
+  private async void check_owner_status()
+  {
     if (proxy.g_name_owner == null)
       update_status(Status.UNKNOWN);
     else {
       Status status = Status.UNKNOWN;
       try {
-        status = query_status();
+        status = yield query_status();
       }
       catch (Error e) {
         warning("%s\n", e.message);
@@ -64,7 +69,7 @@ abstract class StatusProvider : Object
   }
 
   protected abstract DBusProxy create_proxy() throws Error;
-  protected abstract Status query_status() throws Error;
+  protected abstract async Status query_status() throws Error;
   protected abstract void handle_signal(string sender_name, string signal_name,
                                         GLib.Variant parameters);
 }
@@ -82,7 +87,7 @@ class StatusNetworkManager : StatusProvider
                                       "org.freedesktop.NetworkManager", null);
   }
 
-  protected override StatusProvider.Status query_status() throws Error
+  protected override async StatusProvider.Status query_status() throws Error
   {
     Variant state_val = proxy.get_cached_property("State");
     if (state_val == null || !state_val.is_of_type(VariantType.UINT32))
@@ -118,10 +123,10 @@ class StatusConnectionManager : StatusProvider
                                       "org.moblin.connman.Manager", null);
   }
 
-  protected override StatusProvider.Status query_status() throws Error
+  protected override async StatusProvider.Status query_status() throws Error
   {
-    Variant state_val = proxy.call_sync("GetState", null,
-                                        DBusCallFlags.NONE, -1, null);
+    Variant state_val = yield proxy.call("GetState", null,
+                                         DBusCallFlags.NONE, -1, null);
     if (state_val == null)
       return Status.UNKNOWN;
 
