@@ -84,9 +84,12 @@ public class BackendFile : Backend
       var path_val = settings.get_value(FILE_RELPATH_KEY);
       var path = Filename.to_utf8(path_val.get_bytestring(), -1, null, null);
       var name = settings.get_string(FILE_SHORT_NAME_KEY);
-      // Translators: %2$s is the name of a removable drive, %1$s is a folder
-      // on that removable drive.
-      return _("%1$s on %2$s").printf(path, name);
+      if (path == "")
+        return name;
+      else
+        // Translators: %2$s is the name of a removable drive, %1$s is a folder
+        // on that removable drive.
+        return _("%1$s on %2$s").printf(path, name);
     }
     else {
       var file = get_file_from_settings();
