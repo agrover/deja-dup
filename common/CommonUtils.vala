@@ -63,7 +63,7 @@ public string get_folder_key(Settings settings, string key)
   return folder;
 }
 
-public File parse_dir(string dir)
+public File? parse_dir(string dir)
 {
   string s = dir;
   if (s == "$HOME")
@@ -90,17 +90,22 @@ public File parse_dir(string dir)
     s = Path.build_filename(Environment.get_home_dir(), s);
   else
     return File.parse_name(s);
-  
-  return File.new_for_path(s);
+
+  if (s != null)
+    return File.new_for_path(s);
+  else
+    return null;
 }
 
 public File[] parse_dir_list(string*[] dirs)
 {
-  File[] rv = new File[dirs.length];
+  File[] rv = new File[0];
   
-  int i = 0;
-  foreach (string s in dirs)
-    rv[i++] = parse_dir(s);
+  foreach (string s in dirs) {
+    var f = parse_dir(s);
+    if (f != null)
+      rv += f;
+  }
   
   return rv;
 }
@@ -124,7 +129,7 @@ const string SSH_DIRECTORY_KEY = "directory";
 void convert_ssh_to_file()
 {
   var settings = get_settings();
-  var backend = Backend.get_default_type();
+  var backend = settings.get_string(BACKEND_KEY);
   if (backend == "ssh") {
     settings.set_string(BACKEND_KEY, "file");
     var ssh_settings = get_settings("SSH");
@@ -166,7 +171,7 @@ void convert_s3_folder_to_hostname()
   if (s3_settings.get_string(S3_FOLDER_KEY) == "/" &&
       (Backend.get_default_type() != "s3" ||
        settings.get_string(LAST_RUN_KEY) == "")) {
-    s3_settings.set_string(S3_FOLDER_KEY, "/$HOSTNAME");
+    s3_settings.set_string(S3_FOLDER_KEY, "$HOSTNAME");
   }
 }
 
