@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-05-23 20:18-0400\n"
+"POT-Creation-Date: 2011-01-09 21:51-0500\n"
 "PO-Revision-Date: 2010-07-13 03:15+0000\n"
 "Last-Translator: Xabier Villar <xabier.villar@gmail.com>\n"
 "Language-Team: Proxecto trasno <proxecto@trasno.net>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-07-14 03:38+0000\n"
+"X-Launchpad-Export-Date: 2011-01-11 05:05+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: restore-revert.page:6(desc)
@@ -38,7 +38,7 @@ msgstr "Faga clic co botón dereito no ficheiro que queira reverter."
 msgid "Choose <gui style=\"menuitem\">Revert to Previous Version…</gui>."
 msgstr "Escolla <gui style=\"menuitem\">Reverter á versión previa...</gui>."
 
-#: restore-lost.page:16(p)
+#: restore-revert.page:14(p)
 msgid ""
 "When the <gui>Restore</gui> dialog appears, choose the date from which to "
 "restore."
@@ -46,6 +46,11 @@ msgstr ""
 "Cando apareza o diálogo <gui>Restaurar</gui>, escolla a data da que "
 "restaurar."
 
+#: restore-revert.page:15(p)
+#: restore-full.page:23(p)
+#: restore-full.page:25(p)
+#: restore-full.page:27(p)
+#: backup-first.page:14(p)
 #: backup-first.page:16(p)
 msgid "Click <gui style=\"button\">Forward</gui>."
 msgstr "Faga clic en <gui style=\"button\">Adiante</gui>."
@@ -67,7 +72,8 @@ msgstr ""
 msgid "You can also revert files on the command line:"
 msgstr "Tamén pode reverter ficheiros dende a liña de ordes:"
 
-#: restore-lost.page:21(screen)
+#: restore-revert.page:20(screen)
+#: restore-lost.page:19(screen)
 #, no-wrap
 msgid "deja-dup --restore FILE1 FILE2"
 msgstr "deja-dup --restore FICHEIRO1 FICHEIRO2"
@@ -80,47 +86,41 @@ msgstr "Restaurar un ficheiro que que xa non existe."
 msgid "Restoring a Lost File"
 msgstr "Restaurando un ficheiro perdido"
 
-#: restore-lost.page:10(p)
-msgid ""
-"There’s currently no convenient user interface for this. But you can do it "
-"with the command line."
+#: restore-lost.page:11(p)
+msgid "Browse to the folder containing the file you lost."
 msgstr ""
-"Aínda non hai interface de usuario adecuada para iso. Pero pode facelo coa "
-"liña de ordes."
 
 #: restore-lost.page:12(p)
-msgid "Open a terminal."
-msgstr "Abrir unha terminal."
+msgid "Right click on the background of the folder."
+msgstr ""
 
 #: restore-lost.page:13(p)
-msgid ""
-"Run <app>Déjà Dup</app> on the lost file with the <cmd>--restore</cmd> "
-"argument. For example, to restore the lost file <file>test.txt</file> in "
-"your <file>Documents</file> folder:"
+msgid "Choose <gui style=\"menuitem\">Restore Missing Files…</gui>."
 msgstr ""
-"Executar <app>Déjà Dup</app> no ficheiro perdido co argumento <cmd>--"
-"restore</cmd>. Por exemplo, para restaurar o ficheiro perdido "
-"<file>test.txt</file> no seu cartafol <file>Documentos</file>:"
 
-#: restore-lost.page:14(screen)
-#, no-wrap
-msgid "deja-dup --restore Documents/test.txt"
-msgstr "deja-dup --restore Documentos/test.txt"
+#: restore-lost.page:14(p)
+msgid ""
+"When the <gui>Restore</gui> dialog appears, it will scan for files that are "
+"in the backup but no longer in the folder."
+msgstr ""
 
 #: restore-lost.page:15(p)
 msgid ""
-"You must remember what the filename was, since it’s no longer there to "
-"remind you."
-msgstr "Ten que lembrar o nome do ficheiro, posto que xa non existe."
+"When you see the file you want to restore appear, select it and click <gui "
+"style=\"button\">Forward</gui>."
+msgstr ""
 
+#: restore-lost.page:16(p)
 #: restore-full.page:28(p)
 msgid "Review your selections and click <gui style=\"button\">Restore</gui>."
 msgstr ""
 "Revise as súas opcións e faga clic en <gui style=\"button\">Restaurar</gui>."
 
-#: restore-lost.page:20(p)
-msgid "You can restore multiple lost files at once:"
-msgstr "Pode restaurar varios ficheiros perdidos dunha vez:"
+#: restore-lost.page:18(p)
+msgid ""
+"You can restore lost files from the command line as well, if you remember "
+"what their filenames were:"
+msgstr ""
 
 #: restore-full.page:6(desc)
 msgid "Recover from total system failure."
@@ -160,6 +160,8 @@ msgstr ""
 msgid "Restore"
 msgstr "Restaurar"
 
+#: restore-full.page:20(p)
+#: backup-first.page:11(p)
 #: backup-auto.page:12(p)
 msgid "Run <app>Déjà Dup</app>."
 msgstr "Executar <app>Déjà Dup</app>."
@@ -225,8 +227,7 @@ msgstr ""
 msgid "Adjust your backup settings."
 msgstr "Axuste a súa configuración de copia de seguranza."
 
-#. type: Content of: <article><sect1><title>
-#: ./C/deja-dup.xml:105
+#: prefs.page:9(title)
 msgid "Preferences"
 msgstr "Preferencias"
 
@@ -252,79 +253,51 @@ msgstr ""
 "<app>Déjà Dup</app> cando crea ou restaura unha copia de seguranza:"
 
 #: prefs.page:17(title)
-msgid "Amazon S3"
-msgstr "Amazon S3"
+msgid "Cloud Services"
+msgstr ""
 
 #: prefs.page:18(p)
 msgid ""
-"This backup location uses the S3 storage service from Amazon. For a small "
-"fee per gigabyte, they hold your data for you. This is the recommended "
-"default because it is an easy way to keep your data offsite (meaning out of "
-"your home: in case of disaster or theft, your data will still be safe). You "
-"can sign up <link href=\"http://aws.amazon.com/s3/\">online</link>."
+"The first few backup locations are cloud storage services provided by "
+"various companies. For a small fee per gigabyte, they hold your data for "
+"you. A cloud service like this is recommended because it is an easy way to "
+"keep your data offsite (meaning out of your home: in case of disaster or "
+"theft, your data will still be safe). You can choose from Amazon S3, "
+"Rackspace Cloud Files, and Ubuntu One."
 msgstr ""
-"Esta localización de copia de seguranza emprega o servizo de almacenaxe S3 "
-"de Amazon. Por unha pequena taxa por gigabyte, almacenan os seus datos. É a "
-"opción predefinida recomendada posto que é unha forma sinxela de manter os "
-"seus datos nunha localización remota (é dicir, fora da súa casa: en caso de "
-"desastre ou roubo, os seus datos permanecerán seguros) Pode rexistarse en "
-"<link href=\"http://aws.amazon.com/s3/\">online</link>."
 
 #: prefs.page:19(p)
-msgid "This is the default setting."
-msgstr "Esta é a opción predefinida."
-
-#: prefs.page:20(p)
-msgid "This service costs money. Read their rates carefully before using it."
+msgid ""
+"These services costs money. Read their rates carefully before using it."
 msgstr ""
-"Este servizo custa diñeiro. Lea atentamente as súas taxas antes de usalo."
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:119
+#: prefs.page:22(title)
 msgid "Removable Media"
 msgstr "Soportes extraíbeis"
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:120
+#: prefs.page:23(p)
 msgid ""
 "You may see removable media like external hard drives or thumb drives listed."
 msgstr ""
 "Pode ver listados soportes extraíbeis como discos duros externos ou memorias "
 "flash."
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:123
-msgid "Connected Servers"
-msgstr "Servidores conectados"
-
-#: prefs.page:28(p)
-msgid ""
-"If you have connected to any servers, they will appear. To connect to a "
-"server not listed, click <gui style=\"button\">Connect to Server…</gui>. "
-"This will let you enter the server information."
+#: prefs.page:26(title)
+msgid "Remote Servers"
 msgstr ""
-"Aparecerán os servidores se se conectou a algún. Para conectarse a un "
-"servidor non listado, prema en <gui style=\"button\">Conectar ó "
-"servidor...</gui>. Isto permitirá que insira a información do servidor."
 
-#: prefs.page:29(p)
+#: prefs.page:27(p)
 msgid ""
-"After you connect to a server, make sure to go back to the "
-"<gui>Preferences</gui> dialog and choose the folder on that server to which "
-"you want to back up. This is not currently automatically selected after you "
-"connect."
+"Choose the type of remote server to which you want to connect. Then you can "
+"enter the server information. Alternatively, if you know your server's URL, "
+"choose <gui>Custom Location</gui> and enter it."
 msgstr ""
-"Despois de conectarse a un servidor, asegúrese de volver ao diálogo "
-"<gui>Preferencias</gui> e escolla o cartafol dese servidor no que quere "
-"almacenar a copia de seguranza. Isto non se selecciona automaticamente unha "
-"vez conectado."
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:127
-msgid "Local Folders"
-msgstr "Cartafoles locais"
+#: prefs.page:30(title)
+msgid "Local Folder"
+msgstr ""
 
-#: prefs.page:33(p)
+#: prefs.page:31(p)
 msgid ""
 "You may also want to choose a local folder as a backup location. Note that "
 "backups can be quite large, so make sure you have enough free disk space."
@@ -333,48 +306,39 @@ msgstr ""
 "seguranza. Teña en conta que as copias de seguranza poden ser bastante "
 "grandes, así que asegúrese de ter suficiente espazo libre en disco."
 
-#: prefs.page:38(gui)
-msgid "S3 Access Key ID"
-msgstr "ID da chave de acceso S3"
+#: prefs.page:36(gui)
+msgid "Encrypt backup files"
+msgstr "Cifrar os ficheiros de copia de seguranza"
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para>
-#: ./C/deja-dup.xml:139
+#: prefs.page:37(p)
 msgid ""
-"This is your Access Key ID that Amazon gave you when you signed up for S3. "
-"It is like a username for logging into S3. If left empty, you will be "
-"prompted for it as you backup or restore."
+"Encrypting your backup files is recommended to keep your data safe. If you "
+"don’t have exclusive physical control of your backup location, or if it is "
+"stolen, an encrypted backup prevents others from looking at your personal "
+"data."
 msgstr ""
-"Esta é a ID da chave de acceso que Amazon lle deu cando se rexistrou para o "
-"S3. É coma un nome de usuario para identificarse en S3. Se o deixa baleiro, "
-"pediráselle cando faga a copia de seguranza ou restaure."
+"É recomendábel cifrar os ficheiros de copia de seguranza para manter os seus "
+"datos seguros. Se non ten o control físico en exclusiva da localización da "
+"súa copia de seguranza, ou se é roubada, unha copia de seguranza cifrada "
+"impide que outros poidan ver os seus datos persoais."
 
-#: prefs.page:45(p)
+#: prefs.page:38(p)
 msgid ""
-"This option only appears if the <gui>Amazon S3</gui> backup location has "
-"been selected."
+"If on, you will be prompted for a password. Keep this password safe, you "
+"will need it to restore your data."
 msgstr ""
-"Esta opción só aparece se se seleccionou unha localización da copia de "
-"seguranza <gui>Amazon S3</gui>."
+"Se está activado, pediráselle un contrasinal. Manteña este contrasinal a "
+"salvo, pois precisarao para restaurar os seus datos."
 
-#: prefs.page:43(gui)
-msgid "Folder"
-msgstr "Cartafol"
+#: prefs.page:39(p)
+msgid "Encryption is enabled by default."
+msgstr "O cifrado esta activado por omisión."
 
-#: prefs.page:44(p)
-msgid ""
-"If you have multiple backups, you may want to keep them separated in "
-"multiple folders. Use this option to enter a path on the S3 service in which "
-"to put your files."
-msgstr ""
-"Se ten varias copias de seguranza pode querer mantelas separadas en "
-"distintos cartafoles. Use esta opción para indicar un camiño no servizo S3 "
-"no cal almacenar os seus ficheiros."
-
-#: prefs.page:48(gui)
+#: prefs.page:42(gui)
 msgid "Include files in folders"
 msgstr "Incluír os ficheiros nos cartafoles"
 
-#: prefs.page:49(p)
+#: prefs.page:43(p)
 msgid ""
 "Select a list of directories to backup. Press the <gui "
 "style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
@@ -387,11 +351,11 @@ msgstr ""
 "copia de seguranza dos seus datos, a opción predefinida <gui>Cartafol "
 "persoal</gui> é suficiente."
 
-#: prefs.page:52(gui)
+#: prefs.page:46(gui)
 msgid "Except files in folders"
 msgstr "Excluír os ficheiros nos cartafoles"
 
-#: prefs.page:53(p)
+#: prefs.page:47(p)
 msgid ""
 "Select a list of directories to not backup. Press the <gui "
 "style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
@@ -401,7 +365,7 @@ msgstr ""
 "botón <gui style=\"button\">Engadir</gui> ou <gui "
 "style=\"button\">Eliminar</gui> para modificar a lista."
 
-#: prefs.page:54(p)
+#: prefs.page:48(p)
 msgid ""
 "Some of your data may be large and not very important to you. In that case, "
 "you can save yourself some time and space by not backing them up."
@@ -410,94 +374,55 @@ msgstr ""
 "vostede. Nese caso, pódese aforrar algún tempo e espazo non incluíndoos na "
 "copia de seguranza."
 
-#: prefs.page:56(p)
-msgid "Some locations are excluded by default:"
-msgstr "Algunhas localizacións son excluídas por omisión."
+#: prefs.page:50(p)
+msgid "Some locations are always excluded by default:"
+msgstr ""
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:162
+#: prefs.page:52(span)
 msgid "~/.cache"
 msgstr "~/.cache"
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:163
+#: prefs.page:53(span)
 msgid "~/.thumbnails"
 msgstr "~/.thumbnails"
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:164
+#: prefs.page:54(span)
 msgid "~/.gvfs"
 msgstr "~/.gvfs"
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:165
+#: prefs.page:55(span)
 msgid "~/.xsession-errors"
 msgstr "~/.xsession-errors"
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:166
+#: prefs.page:56(span)
 msgid "~/.recently-used.xbel"
 msgstr "~/.recently-used.xbel"
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:167
+#: prefs.page:57(span)
 msgid "~/.recent-applications.xbel"
 msgstr "~/.recent-applications.xbel"
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:168
+#: prefs.page:58(span)
 msgid "~/.Private"
 msgstr "~/.Private"
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:169
+#: prefs.page:59(span)
 msgid "/proc"
 msgstr "/proc"
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:170
+#: prefs.page:60(span)
 msgid "/tmp"
 msgstr "/tmp"
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:171
+#: prefs.page:61(span)
 msgid "/sys"
 msgstr "/sys"
 
-#: prefs.page:72(gui)
-msgid "Encrypt backup files"
-msgstr "Cifrar os ficheiros de copia de seguranza"
-
-#: prefs.page:73(p)
-msgid ""
-"Encrypting your backup files is recommended to keep your data safe. If you "
-"don’t have exclusive physical control of your backup location, or if it is "
-"stolen, an encrypted backup prevents others from looking at your personal "
-"data."
-msgstr ""
-"É recomendábel cifrar os ficheiros de copia de seguranza para manter os seus "
-"datos seguros. Se non ten o control físico en exclusiva da localización da "
-"súa copia de seguranza, ou se é roubada, unha copia de seguranza cifrada "
-"impide que outros poidan ver os seus datos persoais."
-
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para>
-#: ./C/deja-dup.xml:180
-msgid ""
-"If on, you will be prompted for a password. Keep this password safe, you "
-"will need it to restore your data."
-msgstr ""
-"Se está activado, pediráselle un contrasinal. Manteña este contrasinal a "
-"salvo, pois precisarao para restaurar os seus datos."
-
-#: prefs.page:75(p)
-msgid "Encryption is enabled by default."
-msgstr "O cifrado esta activado por omisión."
-
-#: prefs.page:78(gui)
+#: prefs.page:66(gui)
 msgid "Automatically backup on a regular schedule"
 msgstr "Facer copia de seguranza automaticamente de xeito regular"
 
-#: prefs.page:79(p)
+#: prefs.page:67(p)
 msgid ""
 "Turn this option on to have <app>Déjà Dup</app> automatically backup for "
 "you. This is recommended so that you don’t forget to do it yourself. Backups "
@@ -509,29 +434,28 @@ msgstr ""
 "esqueza facelo. As copias de seguranza son mais útiles canto mais recentes "
 "sexan, de xeito que é importante facelas regularmente."
 
-#: prefs.page:80(p)
+#: prefs.page:68(p)
 msgid "Automatic backups are disabled by default."
 msgstr "As copias de seguranza automáticas están desactivadas por omisión."
 
-#: prefs.page:83(gui)
+#: prefs.page:71(gui)
 msgid "How often to backup"
 msgstr "Con que frecuencia facer a copia de seguranza"
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para>
-#: ./C/deja-dup.xml:194
+#: prefs.page:72(p)
 msgid "Choose a schedule for automatic backups."
 msgstr "Escolla un horario para as copias de seguranza automáticas."
 
-#: prefs.page:85(p)
+#: prefs.page:73(p)
 msgid "Automatic backups are scheduled weekly by default."
 msgstr ""
 "As copias de seguranza automáticas prográmanse semanalmente por omisión."
 
-#: prefs.page:88(gui)
+#: prefs.page:76(gui)
 msgid "Keep backups"
 msgstr "Conservar as copias de seguranza"
 
-#: prefs.page:89(p)
+#: prefs.page:77(p)
 msgid ""
 "Choose the minimum amount of time to keep backup files. If you find that the "
 "backup files are taking up too much space, you may want to decrease this "
@@ -544,9 +468,11 @@ msgstr ""
 "pode ser que os ficheiros se manteñan algún tempo mais do escollido. Pero "
 "non se borrarán ficheiros antes de tempo."
 
-#: prefs.page:90(p)
-msgid "Backups are kept forever by default."
-msgstr "As copias de seguranza mantéñense indefinidamente por omisión."
+#: prefs.page:78(p)
+msgid ""
+"Backups are kept forever by default, but still may be deleted earlier if the "
+"backup location begins to run out of space."
+msgstr ""
 
 #: index.page:8(span)
 msgid "Michael Terry"
@@ -568,8 +494,7 @@ msgstr "Creative Commons Attribution-Share Alike 3.0 Unported License"
 msgid "<app>Déjà Dup</app> Help"
 msgstr "Axuda do <app>Déjà Dup</app>"
 
-#. type: Content of: <article><sect1><title>
-#: ./C/deja-dup.xml:92
+#: index.page:18(title)
 msgid "Backing Up"
 msgstr "Facendo a copia de seguranza"
 
@@ -592,17 +517,10 @@ msgstr "Prema sobre o botón grande <gui style=\"button\">Backup...</gui>."
 #: backup-first.page:13(p)
 msgid ""
 "A <gui>Backup</gui> dialog will appear asking where you want to keep the "
-"backup files (your <gui>Backup location</gui>). Either choose an external "
-"drive from the dropdown, choose <gui>Other…</gui> and navigate to a folder, "
-"or click on <gui style=\"button\">Connect to Server…</gui>. On this same "
+"backup files (your <gui>Backup location</gui>). If you have an external hard "
+"drive you want to use, make sure it is plugged in first. On this same "
 "screen, select whether you would like to encrypt the backup files."
 msgstr ""
-"Aparecerá un diálogo <gui>Copia de seguranza</gui> preguntando onde gardar "
-"os ficheiros da copia de seguranza (a súa <gui>Localización da copia de "
-"seguranza</gui>). Escolla unha unidade externa da lista despregable, escolla "
-"<gui>Outros...</gui> e navegue ata un cartafol, ou prema en <gui "
-"style=\"button\">Conectar ó servidor...</gui>. Nesta mesma pantalla, "
-"seleccione se quere cifrar ps ficheiros da copia de seguranza."
 
 #: backup-first.page:15(p)
 msgid ""
@@ -752,3 +670,135 @@ msgstr ""
 
 #~ msgid "The user used for SSH connections."
 #~ msgstr "Nome de usuario para conexións SSH"
+
+#~ msgid ""
+#~ "There’s currently no convenient user interface for this. But you can do it "
+#~ "with the command line."
+#~ msgstr ""
+#~ "Aínda non hai interface de usuario adecuada para iso. Pero pode facelo coa "
+#~ "liña de ordes."
+
+#~ msgid "Open a terminal."
+#~ msgstr "Abrir unha terminal."
+
+#~ msgid ""
+#~ "Run <app>Déjà Dup</app> on the lost file with the <cmd>--restore</cmd> "
+#~ "argument. For example, to restore the lost file <file>test.txt</file> in "
+#~ "your <file>Documents</file> folder:"
+#~ msgstr ""
+#~ "Executar <app>Déjà Dup</app> no ficheiro perdido co argumento <cmd>--"
+#~ "restore</cmd>. Por exemplo, para restaurar o ficheiro perdido "
+#~ "<file>test.txt</file> no seu cartafol <file>Documentos</file>:"
+
+#, no-wrap
+#~ msgid "deja-dup --restore Documents/test.txt"
+#~ msgstr "deja-dup --restore Documentos/test.txt"
+
+#~ msgid ""
+#~ "You must remember what the filename was, since it’s no longer there to "
+#~ "remind you."
+#~ msgstr "Ten que lembrar o nome do ficheiro, posto que xa non existe."
+
+#~ msgid "You can restore multiple lost files at once:"
+#~ msgstr "Pode restaurar varios ficheiros perdidos dunha vez:"
+
+#~ msgid "Amazon S3"
+#~ msgstr "Amazon S3"
+
+#~ msgid ""
+#~ "This backup location uses the S3 storage service from Amazon. For a small "
+#~ "fee per gigabyte, they hold your data for you. This is the recommended "
+#~ "default because it is an easy way to keep your data offsite (meaning out of "
+#~ "your home: in case of disaster or theft, your data will still be safe). You "
+#~ "can sign up <link href=\"http://aws.amazon.com/s3/\">online</link>."
+#~ msgstr ""
+#~ "Esta localización de copia de seguranza emprega o servizo de almacenaxe S3 "
+#~ "de Amazon. Por unha pequena taxa por gigabyte, almacenan os seus datos. É a "
+#~ "opción predefinida recomendada posto que é unha forma sinxela de manter os "
+#~ "seus datos nunha localización remota (é dicir, fora da súa casa: en caso de "
+#~ "desastre ou roubo, os seus datos permanecerán seguros) Pode rexistarse en "
+#~ "<link href=\"http://aws.amazon.com/s3/\">online</link>."
+
+#~ msgid "This is the default setting."
+#~ msgstr "Esta é a opción predefinida."
+
+#~ msgid "This service costs money. Read their rates carefully before using it."
+#~ msgstr ""
+#~ "Este servizo custa diñeiro. Lea atentamente as súas taxas antes de usalo."
+
+#~ msgid "Connected Servers"
+#~ msgstr "Servidores conectados"
+
+#~ msgid ""
+#~ "If you have connected to any servers, they will appear. To connect to a "
+#~ "server not listed, click <gui style=\"button\">Connect to Server…</gui>. "
+#~ "This will let you enter the server information."
+#~ msgstr ""
+#~ "Aparecerán os servidores se se conectou a algún. Para conectarse a un "
+#~ "servidor non listado, prema en <gui style=\"button\">Conectar ó "
+#~ "servidor...</gui>. Isto permitirá que insira a información do servidor."
+
+#~ msgid ""
+#~ "After you connect to a server, make sure to go back to the "
+#~ "<gui>Preferences</gui> dialog and choose the folder on that server to which "
+#~ "you want to back up. This is not currently automatically selected after you "
+#~ "connect."
+#~ msgstr ""
+#~ "Despois de conectarse a un servidor, asegúrese de volver ao diálogo "
+#~ "<gui>Preferencias</gui> e escolla o cartafol dese servidor no que quere "
+#~ "almacenar a copia de seguranza. Isto non se selecciona automaticamente unha "
+#~ "vez conectado."
+
+#~ msgid "Local Folders"
+#~ msgstr "Cartafoles locais"
+
+#~ msgid "S3 Access Key ID"
+#~ msgstr "ID da chave de acceso S3"
+
+#~ msgid ""
+#~ "This is your Access Key ID that Amazon gave you when you signed up for S3. "
+#~ "It is like a username for logging into S3. If left empty, you will be "
+#~ "prompted for it as you backup or restore."
+#~ msgstr ""
+#~ "Esta é a ID da chave de acceso que Amazon lle deu cando se rexistrou para o "
+#~ "S3. É coma un nome de usuario para identificarse en S3. Se o deixa baleiro, "
+#~ "pediráselle cando faga a copia de seguranza ou restaure."
+
+#~ msgid ""
+#~ "This option only appears if the <gui>Amazon S3</gui> backup location has "
+#~ "been selected."
+#~ msgstr ""
+#~ "Esta opción só aparece se se seleccionou unha localización da copia de "
+#~ "seguranza <gui>Amazon S3</gui>."
+
+#~ msgid "Folder"
+#~ msgstr "Cartafol"
+
+#~ msgid ""
+#~ "If you have multiple backups, you may want to keep them separated in "
+#~ "multiple folders. Use this option to enter a path on the S3 service in which "
+#~ "to put your files."
+#~ msgstr ""
+#~ "Se ten varias copias de seguranza pode querer mantelas separadas en "
+#~ "distintos cartafoles. Use esta opción para indicar un camiño no servizo S3 "
+#~ "no cal almacenar os seus ficheiros."
+
+#~ msgid "Some locations are excluded by default:"
+#~ msgstr "Algunhas localizacións son excluídas por omisión."
+
+#~ msgid "Backups are kept forever by default."
+#~ msgstr "As copias de seguranza mantéñense indefinidamente por omisión."
+
+#~ msgid ""
+#~ "A <gui>Backup</gui> dialog will appear asking where you want to keep the "
+#~ "backup files (your <gui>Backup location</gui>). Either choose an external "
+#~ "drive from the dropdown, choose <gui>Other…</gui> and navigate to a folder, "
+#~ "or click on <gui style=\"button\">Connect to Server…</gui>. On this same "
+#~ "screen, select whether you would like to encrypt the backup files."
+#~ msgstr ""
+#~ "Aparecerá un diálogo <gui>Copia de seguranza</gui> preguntando onde gardar "
+#~ "os ficheiros da copia de seguranza (a súa <gui>Localización da copia de "
+#~ "seguranza</gui>). Escolla unha unidade externa da lista despregable, escolla "
+#~ "<gui>Outros...</gui> e navegue ata un cartafol, ou prema en <gui "
+#~ "style=\"button\">Conectar ó servidor...</gui>. Nesta mesma pantalla, "
+#~ "seleccione se quere cifrar ps ficheiros da copia de seguranza."

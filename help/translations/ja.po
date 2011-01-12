@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-05-23 20:18-0400\n"
-"PO-Revision-Date: 2010-12-30 17:57+0000\n"
+"POT-Creation-Date: 2011-01-09 21:51-0500\n"
+"PO-Revision-Date: 2011-01-10 22:22+0000\n"
 "Last-Translator: Nobuto MURATA <nobuto@nobuto-murata.org>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:48+0000\n"
+"X-Launchpad-Export-Date: 2011-01-11 05:05+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: restore-revert.page:6(desc)
@@ -39,12 +39,17 @@ msgstr "元に戻したいファイルを右クリックします。"
 msgid "Choose <gui style=\"menuitem\">Revert to Previous Version…</gui>."
 msgstr "<gui style=\"menuitem\">以前のバージョンに戻す…</gui> を選択します。"
 
-#: restore-lost.page:16(p)
+#: restore-revert.page:14(p)
 msgid ""
 "When the <gui>Restore</gui> dialog appears, choose the date from which to "
 "restore."
 msgstr "<gui>復元</gui> ダイアログが表示されるので、復元に使う日付を選択します。"
 
+#: restore-revert.page:15(p)
+#: restore-full.page:23(p)
+#: restore-full.page:25(p)
+#: restore-full.page:27(p)
+#: backup-first.page:14(p)
 #: backup-first.page:16(p)
 msgid "Click <gui style=\"button\">Forward</gui>."
 msgstr "<gui style=\"button\">進む</gui> をクリックします。"
@@ -65,7 +70,8 @@ msgstr "右クリックする前に、複数のファイルを選択できます
 msgid "You can also revert files on the command line:"
 msgstr "コマンドラインからもファイルを元のバージョンに戻せます:"
 
-#: restore-lost.page:21(screen)
+#: restore-revert.page:20(screen)
+#: restore-lost.page:19(screen)
 #, no-wrap
 msgid "deja-dup --restore FILE1 FILE2"
 msgstr "deja-dup --restore ファイル1 ファイル2"
@@ -78,44 +84,40 @@ msgstr "もう存在しないファイルを復元します。"
 msgid "Restoring a Lost File"
 msgstr "失ったファイルの復元"
 
-#: restore-lost.page:10(p)
-msgid ""
-"There’s currently no convenient user interface for this. But you can do it "
-"with the command line."
-msgstr "現在この操作には便利なユーザインターフェースがありません。ですがコマンドラインからなら実行できます。"
+#: restore-lost.page:11(p)
+msgid "Browse to the folder containing the file you lost."
+msgstr ""
 
 #: restore-lost.page:12(p)
-msgid "Open a terminal."
-msgstr "端末を開きます。"
+msgid "Right click on the background of the folder."
+msgstr ""
 
 #: restore-lost.page:13(p)
-msgid ""
-"Run <app>Déjà Dup</app> on the lost file with the <cmd>--restore</cmd> "
-"argument. For example, to restore the lost file <file>test.txt</file> in "
-"your <file>Documents</file> folder:"
+msgid "Choose <gui style=\"menuitem\">Restore Missing Files…</gui>."
 msgstr ""
-"<app>Déjà Dup</app> を <cmd>--restore</cmd> "
-"オプションをつけて、失ったファイルに対して実行します。<file>ドキュメント</file> フォルダ内の <file>テスト.txt</file> "
-"という失ったファイルを復元したい場合の例:"
 
-#: restore-lost.page:14(screen)
-#, no-wrap
-msgid "deja-dup --restore Documents/test.txt"
-msgstr "deja-dup --restore ドキュメント/テスト.txt"
+#: restore-lost.page:14(p)
+msgid ""
+"When the <gui>Restore</gui> dialog appears, it will scan for files that are "
+"in the backup but no longer in the folder."
+msgstr ""
 
 #: restore-lost.page:15(p)
 msgid ""
-"You must remember what the filename was, since it’s no longer there to "
-"remind you."
-msgstr "すでに存在しておらずファイル名を確認できないので、ファイル名が何だったか記憶していなければいけません。"
+"When you see the file you want to restore appear, select it and click <gui "
+"style=\"button\">Forward</gui>."
+msgstr ""
 
+#: restore-lost.page:16(p)
 #: restore-full.page:28(p)
 msgid "Review your selections and click <gui style=\"button\">Restore</gui>."
 msgstr "選択した項目を確認して <gui style=\"button\">復元</gui> をクリックします。"
 
-#: restore-lost.page:20(p)
-msgid "You can restore multiple lost files at once:"
-msgstr "一度に複数のファイルを復元できます:"
+#: restore-lost.page:18(p)
+msgid ""
+"You can restore lost files from the command line as well, if you remember "
+"what their filenames were:"
+msgstr ""
 
 #: restore-full.page:6(desc)
 msgid "Recover from total system failure."
@@ -154,6 +156,8 @@ msgstr ""
 msgid "Restore"
 msgstr "復元"
 
+#: restore-full.page:20(p)
+#: backup-first.page:11(p)
 #: backup-auto.page:12(p)
 msgid "Run <app>Déjà Dup</app>."
 msgstr "<app>Déjà Dup</app> を起動します。"
@@ -233,109 +237,84 @@ msgstr ""
 "ドロップダウンリストで、バックアップの保存場所を指定します。これは <app>Déjà Dup</app> がバックアップや復元に使用します。"
 
 #: prefs.page:17(title)
-msgid "Amazon S3"
-msgstr "Amazon S3"
+msgid "Cloud Services"
+msgstr ""
 
 #: prefs.page:18(p)
 msgid ""
-"This backup location uses the S3 storage service from Amazon. For a small "
-"fee per gigabyte, they hold your data for you. This is the recommended "
-"default because it is an easy way to keep your data offsite (meaning out of "
-"your home: in case of disaster or theft, your data will still be safe). You "
-"can sign up <link href=\"http://aws.amazon.com/s3/\">online</link>."
+"The first few backup locations are cloud storage services provided by "
+"various companies. For a small fee per gigabyte, they hold your data for "
+"you. A cloud service like this is recommended because it is an easy way to "
+"keep your data offsite (meaning out of your home: in case of disaster or "
+"theft, your data will still be safe). You can choose from Amazon S3, "
+"Rackspace Cloud Files, and Ubuntu One."
 msgstr ""
-"このバックアップの保存場所は Amazon が提供する S3 storage service "
-"を使用します。少額のギガバイト単価で、あなたのデータを保存してくれます。離れた場所にデータを保存できる簡単な方法なので、これが推奨するデフォルトの値となっ"
-"ています（離れた場所とはあなたの家の外のことで、災害や盗難にあった場合でもデータの安全が保たれます）。<link "
-"href=\"http://aws.amazon.com/s3/\">オンライン</link> でサインアップできます。"
 
 #: prefs.page:19(p)
-msgid "This is the default setting."
-msgstr "これがデフォルトの設定です。"
+msgid ""
+"These services costs money. Read their rates carefully before using it."
+msgstr ""
 
-#: prefs.page:20(p)
-msgid "This service costs money. Read their rates carefully before using it."
-msgstr "このサービスは有償です。使用する前に、料金表を確認してください。"
-
-#: prefs.page:23(title)
+#: prefs.page:22(title)
 msgid "Removable Media"
 msgstr "リムーバブルメディア"
 
-#: prefs.page:24(p)
+#: prefs.page:23(p)
 msgid ""
 "You may see removable media like external hard drives or thumb drives listed."
 msgstr "外付ハードディスクやUSBドライブなどのリムーバブルメディアが表示されます。"
 
-#: prefs.page:27(title)
-msgid "Connected Servers"
-msgstr "接続されているサーバ"
-
-#: prefs.page:28(p)
-msgid ""
-"If you have connected to any servers, they will appear. To connect to a "
-"server not listed, click <gui style=\"button\">Connect to Server…</gui>. "
-"This will let you enter the server information."
+#: prefs.page:26(title)
+msgid "Remote Servers"
 msgstr ""
-"すでに接続しているサーバがある場合はそのサーバが表示されます。リストにないサーバに接続するには、<gui "
-"style=\"button\">サーバへ接続…</gui> をクリックします。その後、サーバの情報を入力します。"
 
-#: prefs.page:29(p)
+#: prefs.page:27(p)
 msgid ""
-"After you connect to a server, make sure to go back to the "
-"<gui>Preferences</gui> dialog and choose the folder on that server to which "
-"you want to back up. This is not currently automatically selected after you "
-"connect."
+"Choose the type of remote server to which you want to connect. Then you can "
+"enter the server information. Alternatively, if you know your server's URL, "
+"choose <gui>Custom Location</gui> and enter it."
 msgstr ""
-"サーバに接続したら、<gui>設定</gui> "
-"ダイアログに戻り、バックアップを保存したいサーバ上のフォルダを選択するのを忘れないでください。現在のところ、接続後に自動で選択するようにはなっていません。"
 
-#: prefs.page:32(title)
-msgid "Local Folders"
-msgstr "ローカルフォルダ"
+#: prefs.page:30(title)
+msgid "Local Folder"
+msgstr ""
 
-#: prefs.page:33(p)
+#: prefs.page:31(p)
 msgid ""
 "You may also want to choose a local folder as a backup location. Note that "
 "backups can be quite large, so make sure you have enough free disk space."
 msgstr ""
 "ローカルフォルダもバックアップの保存場所として選べます。バックアップのサイズはとても大きいので、ディスクの空き容量が十分にあることを確認してください。"
 
-#: prefs.page:38(gui)
-msgid "S3 Access Key ID"
-msgstr "S3 Access Key ID"
+#: prefs.page:36(gui)
+msgid "Encrypt backup files"
+msgstr "バックアップファイルを暗号化する"
+
+#: prefs.page:37(p)
+msgid ""
+"Encrypting your backup files is recommended to keep your data safe. If you "
+"don’t have exclusive physical control of your backup location, or if it is "
+"stolen, an encrypted backup prevents others from looking at your personal "
+"data."
+msgstr ""
+"バックアップファイルの暗号化は、データを安全に保つために推奨されています。バックアップの保存場所が、物理的に独占的な管理ができない場所だったり、盗難にあっ"
+"たりした場合でも、暗号化されたバックアップは、他人があなたの個人的なデータを閲覧するのを阻止してくれます。"
+
+#: prefs.page:38(p)
+msgid ""
+"If on, you will be prompted for a password. Keep this password safe, you "
+"will need it to restore your data."
+msgstr "有効にすると、パスワードを求められます。パスワードは厳重に保管しておいてください。データを復元する際に必要になります。"
 
 #: prefs.page:39(p)
-msgid ""
-"This is your Access Key ID that Amazon gave you when you signed up for S3. "
-"It is like a username for logging into S3. If left empty, you will be "
-"prompted for it as you backup or restore."
-msgstr ""
-"これは、S3 にサインアップしたときに Amazon から割り当てられる Access Key ID "
-"です。空白にすると、バックアップや復元時に入力を促されます。"
+msgid "Encryption is enabled by default."
+msgstr "暗号化はデフォルトで有効に設定されています。"
 
-#: prefs.page:45(p)
-msgid ""
-"This option only appears if the <gui>Amazon S3</gui> backup location has "
-"been selected."
-msgstr "このオプションは <gui>Amazon S3</gui> をバックアップの保存場所として選択した場合のみ表示されます。"
-
-#: prefs.page:43(gui)
-msgid "Folder"
-msgstr "フォルダ"
-
-#: prefs.page:44(p)
-msgid ""
-"If you have multiple backups, you may want to keep them separated in "
-"multiple folders. Use this option to enter a path on the S3 service in which "
-"to put your files."
-msgstr ""
-"複数のバックアップがある場合、複数のフォルダに別々に保存したいでしょう。このオプションで、ファイルを置く S3 サービスのパスを入力します。"
-
-#: prefs.page:48(gui)
+#: prefs.page:42(gui)
 msgid "Include files in folders"
 msgstr "フォルダ内のファイルを含める"
 
-#: prefs.page:49(p)
+#: prefs.page:43(p)
 msgid ""
 "Select a list of directories to backup. Press the <gui "
 "style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
@@ -346,11 +325,11 @@ msgstr ""
 "style=\"button\">削除</gui> ボタンでリストを変更します。あなた自身のデータだけをバックアップしたければ、デフォルトの "
 "<gui>ホーム・フォルダ</gui> で十分です。"
 
-#: prefs.page:52(gui)
+#: prefs.page:46(gui)
 msgid "Except files in folders"
 msgstr "フォルダ内のファイルを除外する"
 
-#: prefs.page:53(p)
+#: prefs.page:47(p)
 msgid ""
 "Select a list of directories to not backup. Press the <gui "
 "style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
@@ -359,86 +338,62 @@ msgstr ""
 "バックアップから除外するディレクトリのリストを選択します。<gui style=\"button\">追加</gui>、<gui "
 "style=\"button\">削除</gui> ボタンでリストを変更します。"
 
-#: prefs.page:54(p)
+#: prefs.page:48(p)
 msgid ""
 "Some of your data may be large and not very important to you. In that case, "
 "you can save yourself some time and space by not backing them up."
 msgstr ""
 "データによっては、大きすぎたり、あまり重要ではなかったりするものがあります。それらをバックアップから除外すると、時間や容量を節約できます。"
 
-#: prefs.page:56(p)
-msgid "Some locations are excluded by default:"
-msgstr "デフォルトで、除外される場所です:"
+#: prefs.page:50(p)
+msgid "Some locations are always excluded by default:"
+msgstr ""
 
-#: prefs.page:58(span)
+#: prefs.page:52(span)
 msgid "~/.cache"
 msgstr "~/.cache"
 
-#: prefs.page:59(span)
+#: prefs.page:53(span)
 msgid "~/.thumbnails"
 msgstr "~/.thumbnails"
 
-#: prefs.page:60(span)
+#: prefs.page:54(span)
 msgid "~/.gvfs"
 msgstr "~/.gvfs"
 
-#: prefs.page:61(span)
+#: prefs.page:55(span)
 msgid "~/.xsession-errors"
 msgstr "~/.xsession-errors"
 
-#: prefs.page:62(span)
+#: prefs.page:56(span)
 msgid "~/.recently-used.xbel"
 msgstr "~/.recently-used.xbel"
 
-#: prefs.page:63(span)
+#: prefs.page:57(span)
 msgid "~/.recent-applications.xbel"
 msgstr "~/.recent-applications.xbel"
 
-#: prefs.page:64(span)
+#: prefs.page:58(span)
 msgid "~/.Private"
 msgstr "~/.Private"
 
-#: prefs.page:65(span)
+#: prefs.page:59(span)
 msgid "/proc"
 msgstr "/proc"
 
-#: prefs.page:66(span)
+#: prefs.page:60(span)
 msgid "/tmp"
 msgstr "/tmp"
 
-#: prefs.page:67(span)
+#: prefs.page:61(span)
 msgid "/sys"
 msgstr "/sys"
 
-#: prefs.page:72(gui)
-msgid "Encrypt backup files"
-msgstr "バックアップファイルを暗号化する"
-
-#: prefs.page:73(p)
-msgid ""
-"Encrypting your backup files is recommended to keep your data safe. If you "
-"don’t have exclusive physical control of your backup location, or if it is "
-"stolen, an encrypted backup prevents others from looking at your personal "
-"data."
-msgstr ""
-"バックアップファイルの暗号化は、データを安全に保つために推奨されています。バックアップの保存場所が、物理的に独占的な管理ができない場所だったり、盗難にあっ"
-"たりした場合でも、暗号化されたバックアップは、他人があなたの個人的なデータを閲覧するのを阻止してくれます。"
-
-#: prefs.page:74(p)
-msgid ""
-"If on, you will be prompted for a password. Keep this password safe, you "
-"will need it to restore your data."
-msgstr "有効にすると、パスワードを求められます。パスワードは厳重に保管しておいてください。データを復元する際に必要になります。"
-
-#: prefs.page:75(p)
-msgid "Encryption is enabled by default."
-msgstr "暗号化はデフォルトで有効に設定されています。"
-
-#: prefs.page:78(gui)
+#: prefs.page:66(gui)
 msgid "Automatically backup on a regular schedule"
 msgstr "定期的なスケジュールに従って自動的にバックアップする"
 
-#: prefs.page:79(p)
+#: prefs.page:67(p)
 msgid ""
 "Turn this option on to have <app>Déjà Dup</app> automatically backup for "
 "you. This is recommended so that you don’t forget to do it yourself. Backups "
@@ -449,27 +404,27 @@ msgstr ""
 "は自動でバックアップします。あなたがバックアップを忘れないように、このオプションが推奨されています。作成したバックアップは最近であればあるほど役立つので、"
 "定期的に実行するのが重要です。"
 
-#: prefs.page:80(p)
+#: prefs.page:68(p)
 msgid "Automatic backups are disabled by default."
 msgstr "自動的なバックアップはデフォルトで無効に設定されています。"
 
-#: prefs.page:83(gui)
+#: prefs.page:71(gui)
 msgid "How often to backup"
 msgstr "バックアップする頻度"
 
-#: prefs.page:84(p)
+#: prefs.page:72(p)
 msgid "Choose a schedule for automatic backups."
 msgstr "自動でバックアップするスケジュールを選びます。"
 
-#: prefs.page:85(p)
+#: prefs.page:73(p)
 msgid "Automatic backups are scheduled weekly by default."
 msgstr "自動的なバックアップはデフォルトで毎週に設定されています。"
 
-#: prefs.page:88(gui)
+#: prefs.page:76(gui)
 msgid "Keep backups"
 msgstr "バックアップの保存期間"
 
-#: prefs.page:89(p)
+#: prefs.page:77(p)
 msgid ""
 "Choose the minimum amount of time to keep backup files. If you find that the "
 "backup files are taking up too much space, you may want to decrease this "
@@ -480,9 +435,11 @@ msgstr ""
 "装上の理由から、選択された期間に対して、少しだけ長くファイルが保存されることがあります。ですが、ファイルが設定された期日より早く削除されることはありません"
 "。"
 
-#: prefs.page:90(p)
-msgid "Backups are kept forever by default."
-msgstr "バックアップはデフォルトで期限なく保持されるように設定されています。"
+#: prefs.page:78(p)
+msgid ""
+"Backups are kept forever by default, but still may be deleted earlier if the "
+"backup location begins to run out of space."
+msgstr ""
 
 #: index.page:8(span)
 msgid "Michael Terry"
@@ -527,15 +484,10 @@ msgstr "大きな <gui style=\"button\">バックアップ…</gui> ボタンを
 #: backup-first.page:13(p)
 msgid ""
 "A <gui>Backup</gui> dialog will appear asking where you want to keep the "
-"backup files (your <gui>Backup location</gui>). Either choose an external "
-"drive from the dropdown, choose <gui>Other…</gui> and navigate to a folder, "
-"or click on <gui style=\"button\">Connect to Server…</gui>. On this same "
+"backup files (your <gui>Backup location</gui>). If you have an external hard "
+"drive you want to use, make sure it is plugged in first. On this same "
 "screen, select whether you would like to encrypt the backup files."
 msgstr ""
-"<gui>バックアップ</gui> "
-"ダイアログが表示され、どこにバックアップファイルを保存するか（<gui>バックアップの保存場所</gui>）を聞いてきます。ドロップダウンから外部のドライ"
-"ブを選ぶか、<gui>その他…</gui> を選んでフォルダを開いていきます。または、<gui "
-"style=\"button\">サーバーへ接続…</gui> をクリックします。同じ画面で、バックアップファイルを暗号化するかどうかを選択します。"
 
 #: backup-first.page:15(p)
 msgid ""
@@ -969,6 +921,14 @@ msgstr ""
 #~ "location has been selected."
 #~ msgstr "このオプションは <guilabel>Amazon S3</guilabel> を選択したときだけ表示されます。"
 
+#~ msgid ""
+#~ "This is your Access Key ID that Amazon gave you when you signed up for S3. "
+#~ "It is like a username for logging into S3. If left empty, you will be "
+#~ "prompted for it as you backup or restore."
+#~ msgstr ""
+#~ "これは、S3 にサインアップしたときに Amazon から割り当てられる Access Key ID "
+#~ "です。空白にすると、バックアップや復元時に入力を促されます。"
+
 #~ msgid "Default: <guilabel>Amazon S3</guilabel>."
 #~ msgstr "デフォルト: <guilabel>Amazon S3</guilabel>."
 
@@ -981,6 +941,9 @@ msgstr ""
 #~ msgstr ""
 #~ "ローカルフォルダをバックアップ先として指定できます。ですが、バックアップのデータは非常に大きく、十分な空き容量がなければならないことに注意してください。"
 
+#~ msgid "Local Folders"
+#~ msgstr "ローカルフォルダ"
+
 #~ msgid ""
 #~ "If you have connected to any servers, they will appear.  To connect to a "
 #~ "server not listed, select <guilabel>Other...</guilabel> and click "
@@ -989,6 +952,9 @@ msgstr ""
 #~ msgstr ""
 #~ "サーバに接続している場合は表示されます。表示されていないサーバに接続するには、<guilabel>その他...</guilabel> を選択して "
 #~ "<guibutton>サーバに接続...</guibutton> をクリックします。続いて、サーバの情報を入力します。"
+
+#~ msgid "Connected Servers"
+#~ msgstr "接続されているサーバ"
 
 #~ msgid "<guilabel>Folder</guilabel>"
 #~ msgstr "<guilabel>フォルダ</guilabel>"
@@ -1114,3 +1080,106 @@ msgstr ""
 #~ msgstr ""
 #~ "<menuchoice><guisubmenu>アクセサリ</guisubmenu><guimenuitem>Déjà Dup "
 #~ "バックアップツール</guimenuitem></menuchoice> を選択します。"
+
+#~ msgid "Open a terminal."
+#~ msgstr "端末を開きます。"
+
+#~ msgid "Amazon S3"
+#~ msgstr "Amazon S3"
+
+#~ msgid ""
+#~ "This backup location uses the S3 storage service from Amazon. For a small "
+#~ "fee per gigabyte, they hold your data for you. This is the recommended "
+#~ "default because it is an easy way to keep your data offsite (meaning out of "
+#~ "your home: in case of disaster or theft, your data will still be safe). You "
+#~ "can sign up <link href=\"http://aws.amazon.com/s3/\">online</link>."
+#~ msgstr ""
+#~ "このバックアップの保存場所は Amazon が提供する S3 storage service "
+#~ "を使用します。少額のギガバイト単価で、あなたのデータを保存してくれます。離れた場所にデータを保存できる簡単な方法なので、これが推奨するデフォルトの値となっ"
+#~ "ています（離れた場所とはあなたの家の外のことで、災害や盗難にあった場合でもデータの安全が保たれます）。<link "
+#~ "href=\"http://aws.amazon.com/s3/\">オンライン</link> でサインアップできます。"
+
+#~ msgid "This is the default setting."
+#~ msgstr "これがデフォルトの設定です。"
+
+#~ msgid "This service costs money. Read their rates carefully before using it."
+#~ msgstr "このサービスは有償です。使用する前に、料金表を確認してください。"
+
+#~ msgid ""
+#~ "If you have connected to any servers, they will appear. To connect to a "
+#~ "server not listed, click <gui style=\"button\">Connect to Server…</gui>. "
+#~ "This will let you enter the server information."
+#~ msgstr ""
+#~ "すでに接続しているサーバがある場合はそのサーバが表示されます。リストにないサーバに接続するには、<gui "
+#~ "style=\"button\">サーバへ接続…</gui> をクリックします。その後、サーバの情報を入力します。"
+
+#~ msgid ""
+#~ "After you connect to a server, make sure to go back to the "
+#~ "<gui>Preferences</gui> dialog and choose the folder on that server to which "
+#~ "you want to back up. This is not currently automatically selected after you "
+#~ "connect."
+#~ msgstr ""
+#~ "サーバに接続したら、<gui>設定</gui> "
+#~ "ダイアログに戻り、バックアップを保存したいサーバ上のフォルダを選択するのを忘れないでください。現在のところ、接続後に自動で選択するようにはなっていません。"
+
+#~ msgid "S3 Access Key ID"
+#~ msgstr "S3 Access Key ID"
+
+#~ msgid ""
+#~ "This option only appears if the <gui>Amazon S3</gui> backup location has "
+#~ "been selected."
+#~ msgstr "このオプションは <gui>Amazon S3</gui> をバックアップの保存場所として選択した場合のみ表示されます。"
+
+#~ msgid "Folder"
+#~ msgstr "フォルダ"
+
+#~ msgid ""
+#~ "If you have multiple backups, you may want to keep them separated in "
+#~ "multiple folders. Use this option to enter a path on the S3 service in which "
+#~ "to put your files."
+#~ msgstr ""
+#~ "複数のバックアップがある場合、複数のフォルダに別々に保存したいでしょう。このオプションで、ファイルを置く S3 サービスのパスを入力します。"
+
+#~ msgid "Some locations are excluded by default:"
+#~ msgstr "デフォルトで、除外される場所です:"
+
+#~ msgid "Backups are kept forever by default."
+#~ msgstr "バックアップはデフォルトで期限なく保持されるように設定されています。"
+
+#~ msgid ""
+#~ "A <gui>Backup</gui> dialog will appear asking where you want to keep the "
+#~ "backup files (your <gui>Backup location</gui>). Either choose an external "
+#~ "drive from the dropdown, choose <gui>Other…</gui> and navigate to a folder, "
+#~ "or click on <gui style=\"button\">Connect to Server…</gui>. On this same "
+#~ "screen, select whether you would like to encrypt the backup files."
+#~ msgstr ""
+#~ "<gui>バックアップ</gui> "
+#~ "ダイアログが表示され、どこにバックアップファイルを保存するか（<gui>バックアップの保存場所</gui>）を聞いてきます。ドロップダウンから外部のドライ"
+#~ "ブを選ぶか、<gui>その他…</gui> を選んでフォルダを開いていきます。または、<gui "
+#~ "style=\"button\">サーバーへ接続…</gui> をクリックします。同じ画面で、バックアップファイルを暗号化するかどうかを選択します。"
+
+#~ msgid ""
+#~ "There’s currently no convenient user interface for this. But you can do it "
+#~ "with the command line."
+#~ msgstr "現在この操作には便利なユーザインターフェースがありません。ですがコマンドラインからなら実行できます。"
+
+#~ msgid ""
+#~ "Run <app>Déjà Dup</app> on the lost file with the <cmd>--restore</cmd> "
+#~ "argument. For example, to restore the lost file <file>test.txt</file> in "
+#~ "your <file>Documents</file> folder:"
+#~ msgstr ""
+#~ "<app>Déjà Dup</app> を <cmd>--restore</cmd> "
+#~ "オプションをつけて、失ったファイルに対して実行します。<file>ドキュメント</file> フォルダ内の <file>テスト.txt</file> "
+#~ "という失ったファイルを復元したい場合の例:"
+
+#, no-wrap
+#~ msgid "deja-dup --restore Documents/test.txt"
+#~ msgstr "deja-dup --restore ドキュメント/テスト.txt"
+
+#~ msgid ""
+#~ "You must remember what the filename was, since it’s no longer there to "
+#~ "remind you."
+#~ msgstr "すでに存在しておらずファイル名を確認できないので、ファイル名が何だったか記憶していなければいけません。"
+
+#~ msgid "You can restore multiple lost files at once:"
+#~ msgstr "一度に複数のファイルを復元できます:"

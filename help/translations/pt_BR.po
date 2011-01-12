@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-05-23 20:18-0400\n"
+"POT-Creation-Date: 2011-01-09 21:51-0500\n"
 "PO-Revision-Date: 2010-12-23 08:30+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:49+0000\n"
+"X-Launchpad-Export-Date: 2011-01-11 05:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: restore-revert.page:6(desc)
@@ -40,7 +40,7 @@ msgid "Choose <gui style=\"menuitem\">Revert to Previous Version…</gui>."
 msgstr ""
 "Escolha <gui style=\"menuitem\">Reverter para a versão anterior…</gui>."
 
-#: restore-lost.page:16(p)
+#: restore-revert.page:14(p)
 msgid ""
 "When the <gui>Restore</gui> dialog appears, choose the date from which to "
 "restore."
@@ -48,6 +48,11 @@ msgstr ""
 "Quando o diálogo <gui>Restaurar</gui> aparecer, escolha de que data você "
 "quer restaurar."
 
+#: restore-revert.page:15(p)
+#: restore-full.page:23(p)
+#: restore-full.page:25(p)
+#: restore-full.page:27(p)
+#: backup-first.page:14(p)
 #: backup-first.page:16(p)
 msgid "Click <gui style=\"button\">Forward</gui>."
 msgstr "Clique <gui style=\"button\">Seguinte</gui>."
@@ -70,7 +75,8 @@ msgstr ""
 msgid "You can also revert files on the command line:"
 msgstr "Você também pode reverter os arquivos na linha de comando:"
 
-#: restore-lost.page:21(screen)
+#: restore-revert.page:20(screen)
+#: restore-lost.page:19(screen)
 #, no-wrap
 msgid "deja-dup --restore FILE1 FILE2"
 msgstr "deja-dup --restore ARQUIVO1 ARQUIVO2"
@@ -83,49 +89,41 @@ msgstr "Restaurar um arquivo que não está mais presente."
 msgid "Restoring a Lost File"
 msgstr "Restaurando um arquivo perdido"
 
-#: restore-lost.page:10(p)
-msgid ""
-"There’s currently no convenient user interface for this. But you can do it "
-"with the command line."
+#: restore-lost.page:11(p)
+msgid "Browse to the folder containing the file you lost."
 msgstr ""
-"Não há atualmente uma interface de usuário conveniente para isso. Mas você "
-"pode fazê-lo com a linha de comando."
 
 #: restore-lost.page:12(p)
-msgid "Open a terminal."
-msgstr "Abrir um terminal"
+msgid "Right click on the background of the folder."
+msgstr ""
 
 #: restore-lost.page:13(p)
-msgid ""
-"Run <app>Déjà Dup</app> on the lost file with the <cmd>--restore</cmd> "
-"argument. For example, to restore the lost file <file>test.txt</file> in "
-"your <file>Documents</file> folder:"
+msgid "Choose <gui style=\"menuitem\">Restore Missing Files…</gui>."
 msgstr ""
-"Execute <app>Déjà Dup</app> no arquivo perdido com o argumento <cmd>--"
-"restore</cmd> . Por exemplo, para restaurar o arquivo perdido "
-"<file>test.txt</file> em sua pasta <file>Documents</file> :"
 
-#: restore-lost.page:14(screen)
-#, no-wrap
-msgid "deja-dup --restore Documents/test.txt"
-msgstr "deja-dup --restore Documentos/teste.txt"
+#: restore-lost.page:14(p)
+msgid ""
+"When the <gui>Restore</gui> dialog appears, it will scan for files that are "
+"in the backup but no longer in the folder."
+msgstr ""
 
 #: restore-lost.page:15(p)
 msgid ""
-"You must remember what the filename was, since it’s no longer there to "
-"remind you."
+"When you see the file you want to restore appear, select it and click <gui "
+"style=\"button\">Forward</gui>."
 msgstr ""
-"Você precisa lembrar com que nome o arquivo estava, uma vez que não há como "
-"lembrarmos você."
 
+#: restore-lost.page:16(p)
 #: restore-full.page:28(p)
 msgid "Review your selections and click <gui style=\"button\">Restore</gui>."
 msgstr ""
 "Verifique suas escolhas e clique <gui style=\"button\">Restaurar</gui>."
 
-#: restore-lost.page:20(p)
-msgid "You can restore multiple lost files at once:"
-msgstr "Você pode restaurar vários arquivos perdidos de uma única vez:"
+#: restore-lost.page:18(p)
+msgid ""
+"You can restore lost files from the command line as well, if you remember "
+"what their filenames were:"
+msgstr ""
 
 #: restore-full.page:6(desc)
 msgid "Recover from total system failure."
@@ -165,6 +163,8 @@ msgstr ""
 msgid "Restore"
 msgstr "Restaurar"
 
+#: restore-full.page:20(p)
+#: backup-first.page:11(p)
 #: backup-auto.page:12(p)
 msgid "Run <app>Déjà Dup</app>."
 msgstr "Execute <app>Déjà Dup</app>."
@@ -253,75 +253,51 @@ msgstr ""
 "Dup</app> usará quando estiver fazendo o backup ou restaurando:"
 
 #: prefs.page:17(title)
-msgid "Amazon S3"
-msgstr "Amazon S3"
+msgid "Cloud Services"
+msgstr ""
 
 #: prefs.page:18(p)
 msgid ""
-"This backup location uses the S3 storage service from Amazon. For a small "
-"fee per gigabyte, they hold your data for you. This is the recommended "
-"default because it is an easy way to keep your data offsite (meaning out of "
-"your home: in case of disaster or theft, your data will still be safe). You "
-"can sign up <link href=\"http://aws.amazon.com/s3/\">online</link>."
+"The first few backup locations are cloud storage services provided by "
+"various companies. For a small fee per gigabyte, they hold your data for "
+"you. A cloud service like this is recommended because it is an easy way to "
+"keep your data offsite (meaning out of your home: in case of disaster or "
+"theft, your data will still be safe). You can choose from Amazon S3, "
+"Rackspace Cloud Files, and Ubuntu One."
 msgstr ""
-"Essa localização de backup usa o serviço de armazenamento Amazon S3. Por uma "
-"pequena taxa a cada gigabyte, eles guardam seus dados. Esta é a recomendação "
-"padrão, pois é um modo fácil de manter seus dados em local distante (ou "
-"seja, fora de seu computador: em caso de desastre ou roubo, seus dados "
-"continuarão seguros). Você pode cadastrar-se <link "
-"href=\"http://aws.amazon.com/s3/\">online</link>."
 
 #: prefs.page:19(p)
-msgid "This is the default setting."
-msgstr "Essa é a configuração padrão."
-
-#: prefs.page:20(p)
-msgid "This service costs money. Read their rates carefully before using it."
+msgid ""
+"These services costs money. Read their rates carefully before using it."
 msgstr ""
-"Esse serviço custa dinheiro. Leia a tarifação cuidadosamente antes de usar."
 
-#: prefs.page:23(title)
+#: prefs.page:22(title)
 msgid "Removable Media"
 msgstr "Mídia removível"
 
-#: prefs.page:24(p)
+#: prefs.page:23(p)
 msgid ""
 "You may see removable media like external hard drives or thumb drives listed."
 msgstr ""
 "Você pode ver as mídias removíveis como discos rígidos externos ou unidades "
 "portáteis."
 
-#: prefs.page:27(title)
-msgid "Connected Servers"
-msgstr "Servidores conectados"
-
-#: prefs.page:28(p)
-msgid ""
-"If you have connected to any servers, they will appear. To connect to a "
-"server not listed, click <gui style=\"button\">Connect to Server…</gui>. "
-"This will let you enter the server information."
+#: prefs.page:26(title)
+msgid "Remote Servers"
 msgstr ""
-"Se você estiver conectado a quaisquer servidores, eles aparecerão. Para "
-"conectar a um servidor não listado, clique <gui style=\"button\">Conectar ao "
-"Servidor…</gui>. Isso permitirá que você digite as informações do servidor."
 
-#: prefs.page:29(p)
+#: prefs.page:27(p)
 msgid ""
-"After you connect to a server, make sure to go back to the "
-"<gui>Preferences</gui> dialog and choose the folder on that server to which "
-"you want to back up. This is not currently automatically selected after you "
-"connect."
+"Choose the type of remote server to which you want to connect. Then you can "
+"enter the server information. Alternatively, if you know your server's URL, "
+"choose <gui>Custom Location</gui> and enter it."
 msgstr ""
-"Após conectar-se a um servidor, certifique-se de voltar para "
-"<gui>Preferências</gui> e escolher a pasta daquele servidor para qual você "
-"quer fazer o backup. Atualmente isto não é automaticamente selecionado após "
-"você conectar-se."
 
-#: prefs.page:32(title)
-msgid "Local Folders"
-msgstr "Pastas Locais"
+#: prefs.page:30(title)
+msgid "Local Folder"
+msgstr ""
 
-#: prefs.page:33(p)
+#: prefs.page:31(p)
 msgid ""
 "You may also want to choose a local folder as a backup location. Note that "
 "backups can be quite large, so make sure you have enough free disk space."
@@ -330,129 +306,11 @@ msgstr ""
 "Note que os backups podem ser relativamente grandes, então certifique-se de "
 "que tenha espaço livre suficiente."
 
-#: prefs.page:38(gui)
-msgid "S3 Access Key ID"
-msgstr "ID da Chave de Acesso S3"
-
-#: prefs.page:39(p)
-msgid ""
-"This is your Access Key ID that Amazon gave you when you signed up for S3. "
-"It is like a username for logging into S3. If left empty, you will be "
-"prompted for it as you backup or restore."
-msgstr ""
-"Essa é a ID da sua Chave de Acesso fornecida pela Amazon quando você se "
-"cadastrou no S3. É como um nome de usuário para no S3. Se deixar em branco, "
-"você será perguntado sobre isso como backup ou restauração."
-
-#: prefs.page:45(p)
-msgid ""
-"This option only appears if the <gui>Amazon S3</gui> backup location has "
-"been selected."
-msgstr ""
-"Essa opção só aparece se a localização de backup <gui>Amazon S3</gui> for "
-"selecionada."
-
-#: prefs.page:43(gui)
-msgid "Folder"
-msgstr "Pasta"
-
-#: prefs.page:44(p)
-msgid ""
-"If you have multiple backups, you may want to keep them separated in "
-"multiple folders. Use this option to enter a path on the S3 service in which "
-"to put your files."
-msgstr ""
-"Se você tem vários backups, Você pode mantê-los separados em múltiplas "
-"pastas. Use essa opção para digitar um caminho no serviço S3 para colocar os "
-"arquivos."
-
-#: prefs.page:48(gui)
-msgid "Include files in folders"
-msgstr "Incluir arquivos em pastas"
-
-#: prefs.page:49(p)
-msgid ""
-"Select a list of directories to backup. Press the <gui "
-"style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
-"modify the list. If you are only interested in backing up your own data, the "
-"default of <gui>Home Folder</gui> is sufficient."
-msgstr ""
-"Selecione uma lista de diretórios para copiar. Pressione os botões <gui "
-"style=\"button\">Adicionar</gui> ou <gui style=\"button\">Remover</gui> para "
-"alterar a lista. Se você está interessado em copiar somente seus próprios "
-"dados, o padrão <gui>Pasta Pessoal</gui> é o suficiente."
-
-#: prefs.page:52(gui)
-msgid "Except files in folders"
-msgstr "Exceto arquivos em pastas"
-
-#: prefs.page:53(p)
-msgid ""
-"Select a list of directories to not backup. Press the <gui "
-"style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
-"modify the list."
-msgstr ""
-"Selecione uma lista de diretórios para não copiar. Pressione os botões <gui "
-"style=\"button\">Adicionar </gui> ou <gui style=\"button\">Remover</gui> "
-"para alterar a lista."
-
-#: prefs.page:54(p)
-msgid ""
-"Some of your data may be large and not very important to you. In that case, "
-"you can save yourself some time and space by not backing them up."
-msgstr ""
-"Alguns dos seus dados podem ser grandes e não muito importantes para você. "
-"Nesse caso, você mesmo pode salvar tempo e espaço não fazendo a cópia deles."
-
-#: prefs.page:56(p)
-msgid "Some locations are excluded by default:"
-msgstr "Algumas localizações são excluídas por padrão:"
-
-#: prefs.page:58(span)
-msgid "~/.cache"
-msgstr "~/.cache"
-
-#: prefs.page:59(span)
-msgid "~/.thumbnails"
-msgstr "~/.thumbnails"
-
-#: prefs.page:60(span)
-msgid "~/.gvfs"
-msgstr "~/.gvfs"
-
-#: prefs.page:61(span)
-msgid "~/.xsession-errors"
-msgstr "~/.xsession-errors"
-
-#: prefs.page:62(span)
-msgid "~/.recently-used.xbel"
-msgstr "~/.recently-used.xbel"
-
-#: prefs.page:63(span)
-msgid "~/.recent-applications.xbel"
-msgstr "~/.recent-applications.xbel"
-
-#: prefs.page:64(span)
-msgid "~/.Private"
-msgstr "~/.Private"
-
-#: prefs.page:65(span)
-msgid "/proc"
-msgstr "/proc"
-
-#: prefs.page:66(span)
-msgid "/tmp"
-msgstr "/tmp"
-
-#: prefs.page:67(span)
-msgid "/sys"
-msgstr "/sys"
-
-#: prefs.page:72(gui)
+#: prefs.page:36(gui)
 msgid "Encrypt backup files"
 msgstr "Criptografar arquivos de backup"
 
-#: prefs.page:73(p)
+#: prefs.page:37(p)
 msgid ""
 "Encrypting your backup files is recommended to keep your data safe. If you "
 "don’t have exclusive physical control of your backup location, or if it is "
@@ -464,7 +322,7 @@ msgstr ""
 "backup, ou se for roubado, um backup criptografado previne que outros vejam "
 "seus dados pessoais."
 
-#: prefs.page:74(p)
+#: prefs.page:38(p)
 msgid ""
 "If on, you will be prompted for a password. Keep this password safe, you "
 "will need it to restore your data."
@@ -472,15 +330,97 @@ msgstr ""
 "Se ativado, será solicitado a você uma senha. Mantenha essa senha segura, "
 "você precisará dela para restaurar seus dados."
 
-#: prefs.page:75(p)
+#: prefs.page:39(p)
 msgid "Encryption is enabled by default."
 msgstr "Criptografia é ativada por padrão."
 
-#: prefs.page:78(gui)
+#: prefs.page:42(gui)
+msgid "Include files in folders"
+msgstr "Incluir arquivos em pastas"
+
+#: prefs.page:43(p)
+msgid ""
+"Select a list of directories to backup. Press the <gui "
+"style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
+"modify the list. If you are only interested in backing up your own data, the "
+"default of <gui>Home Folder</gui> is sufficient."
+msgstr ""
+"Selecione uma lista de diretórios para copiar. Pressione os botões <gui "
+"style=\"button\">Adicionar</gui> ou <gui style=\"button\">Remover</gui> para "
+"alterar a lista. Se você está interessado em copiar somente seus próprios "
+"dados, o padrão <gui>Pasta Pessoal</gui> é o suficiente."
+
+#: prefs.page:46(gui)
+msgid "Except files in folders"
+msgstr "Exceto arquivos em pastas"
+
+#: prefs.page:47(p)
+msgid ""
+"Select a list of directories to not backup. Press the <gui "
+"style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
+"modify the list."
+msgstr ""
+"Selecione uma lista de diretórios para não copiar. Pressione os botões <gui "
+"style=\"button\">Adicionar </gui> ou <gui style=\"button\">Remover</gui> "
+"para alterar a lista."
+
+#: prefs.page:48(p)
+msgid ""
+"Some of your data may be large and not very important to you. In that case, "
+"you can save yourself some time and space by not backing them up."
+msgstr ""
+"Alguns dos seus dados podem ser grandes e não muito importantes para você. "
+"Nesse caso, você mesmo pode salvar tempo e espaço não fazendo a cópia deles."
+
+#: prefs.page:50(p)
+msgid "Some locations are always excluded by default:"
+msgstr ""
+
+#: prefs.page:52(span)
+msgid "~/.cache"
+msgstr "~/.cache"
+
+#: prefs.page:53(span)
+msgid "~/.thumbnails"
+msgstr "~/.thumbnails"
+
+#: prefs.page:54(span)
+msgid "~/.gvfs"
+msgstr "~/.gvfs"
+
+#: prefs.page:55(span)
+msgid "~/.xsession-errors"
+msgstr "~/.xsession-errors"
+
+#: prefs.page:56(span)
+msgid "~/.recently-used.xbel"
+msgstr "~/.recently-used.xbel"
+
+#: prefs.page:57(span)
+msgid "~/.recent-applications.xbel"
+msgstr "~/.recent-applications.xbel"
+
+#: prefs.page:58(span)
+msgid "~/.Private"
+msgstr "~/.Private"
+
+#: prefs.page:59(span)
+msgid "/proc"
+msgstr "/proc"
+
+#: prefs.page:60(span)
+msgid "/tmp"
+msgstr "/tmp"
+
+#: prefs.page:61(span)
+msgid "/sys"
+msgstr "/sys"
+
+#: prefs.page:66(gui)
 msgid "Automatically backup on a regular schedule"
 msgstr "Fazer backup em intervalos regulares"
 
-#: prefs.page:79(p)
+#: prefs.page:67(p)
 msgid ""
 "Turn this option on to have <app>Déjà Dup</app> automatically backup for "
 "you. This is recommended so that you don’t forget to do it yourself. Backups "
@@ -492,27 +432,27 @@ msgstr ""
 "úteis se tiverem sido  feitos recentemente, então é importante realizá-los "
 "regularmente."
 
-#: prefs.page:80(p)
+#: prefs.page:68(p)
 msgid "Automatic backups are disabled by default."
 msgstr "Backups automáticos estão desativados por padrão."
 
-#: prefs.page:83(gui)
+#: prefs.page:71(gui)
 msgid "How often to backup"
 msgstr "Com que frequência fazer o backup"
 
-#: prefs.page:84(p)
+#: prefs.page:72(p)
 msgid "Choose a schedule for automatic backups."
 msgstr "Escolha um agendamento para os backups automáticos."
 
-#: prefs.page:85(p)
+#: prefs.page:73(p)
 msgid "Automatic backups are scheduled weekly by default."
 msgstr "Backups automáticos são agendados semanalmente por padrão."
 
-#: prefs.page:88(gui)
+#: prefs.page:76(gui)
 msgid "Keep backups"
 msgstr "Manter backups"
 
-#: prefs.page:89(p)
+#: prefs.page:77(p)
 msgid ""
 "Choose the minimum amount of time to keep backup files. If you find that the "
 "backup files are taking up too much space, you may want to decrease this "
@@ -525,9 +465,11 @@ msgstr ""
 "ser mantidos por mais tempo que o escolhido. Mas os arquivos não serão "
 "deletados em breve."
 
-#: prefs.page:90(p)
-msgid "Backups are kept forever by default."
-msgstr "Backups são mantidos eternamente por padrão."
+#: prefs.page:78(p)
+msgid ""
+"Backups are kept forever by default, but still may be deleted earlier if the "
+"backup location begins to run out of space."
+msgstr ""
 
 #: index.page:8(span)
 msgid "Michael Terry"
@@ -572,16 +514,10 @@ msgstr "Clique no botão grande <gui style=\"button\">Backup…</gui>."
 #: backup-first.page:13(p)
 msgid ""
 "A <gui>Backup</gui> dialog will appear asking where you want to keep the "
-"backup files (your <gui>Backup location</gui>). Either choose an external "
-"drive from the dropdown, choose <gui>Other…</gui> and navigate to a folder, "
-"or click on <gui style=\"button\">Connect to Server…</gui>. On this same "
+"backup files (your <gui>Backup location</gui>). If you have an external hard "
+"drive you want to use, make sure it is plugged in first. On this same "
 "screen, select whether you would like to encrypt the backup files."
 msgstr ""
-"Um diálogo <gui>Backup</gui> aparecerá perguntando onde você quer manter os "
-"arquivos de backup (sua <gui>Localização de backup</gui>). Escolha um drive "
-"externo do menu suspenso, escolha <gui>Outro…</gui> e navegue até a pasta, "
-"ou clique <gui style=\"button\">Conectar ao Servidor…</gui>. Nessa mesma "
-"tela, selecione se você gostaria de criptografar os arquivos de backup."
 
 #: backup-first.page:15(p)
 msgid ""
@@ -677,3 +613,136 @@ msgstr ""
 "  Matheus de Araújo https://launchpad.net/~suetamac\n"
 "  Michael Terry https://launchpad.net/~mterry\n"
 "  Teylo Laundos Aguiar https://launchpad.net/~teylo.aguiar"
+
+#~ msgid ""
+#~ "You must remember what the filename was, since it’s no longer there to "
+#~ "remind you."
+#~ msgstr ""
+#~ "Você precisa lembrar com que nome o arquivo estava, uma vez que não há como "
+#~ "lembrarmos você."
+
+#~ msgid ""
+#~ "Run <app>Déjà Dup</app> on the lost file with the <cmd>--restore</cmd> "
+#~ "argument. For example, to restore the lost file <file>test.txt</file> in "
+#~ "your <file>Documents</file> folder:"
+#~ msgstr ""
+#~ "Execute <app>Déjà Dup</app> no arquivo perdido com o argumento <cmd>--"
+#~ "restore</cmd> . Por exemplo, para restaurar o arquivo perdido "
+#~ "<file>test.txt</file> em sua pasta <file>Documents</file> :"
+
+#~ msgid "Open a terminal."
+#~ msgstr "Abrir um terminal"
+
+#~ msgid "You can restore multiple lost files at once:"
+#~ msgstr "Você pode restaurar vários arquivos perdidos de uma única vez:"
+
+#~ msgid ""
+#~ "There’s currently no convenient user interface for this. But you can do it "
+#~ "with the command line."
+#~ msgstr ""
+#~ "Não há atualmente uma interface de usuário conveniente para isso. Mas você "
+#~ "pode fazê-lo com a linha de comando."
+
+#, no-wrap
+#~ msgid "deja-dup --restore Documents/test.txt"
+#~ msgstr "deja-dup --restore Documentos/teste.txt"
+
+#~ msgid "Amazon S3"
+#~ msgstr "Amazon S3"
+
+#~ msgid ""
+#~ "This backup location uses the S3 storage service from Amazon. For a small "
+#~ "fee per gigabyte, they hold your data for you. This is the recommended "
+#~ "default because it is an easy way to keep your data offsite (meaning out of "
+#~ "your home: in case of disaster or theft, your data will still be safe). You "
+#~ "can sign up <link href=\"http://aws.amazon.com/s3/\">online</link>."
+#~ msgstr ""
+#~ "Essa localização de backup usa o serviço de armazenamento Amazon S3. Por uma "
+#~ "pequena taxa a cada gigabyte, eles guardam seus dados. Esta é a recomendação "
+#~ "padrão, pois é um modo fácil de manter seus dados em local distante (ou "
+#~ "seja, fora de seu computador: em caso de desastre ou roubo, seus dados "
+#~ "continuarão seguros). Você pode cadastrar-se <link "
+#~ "href=\"http://aws.amazon.com/s3/\">online</link>."
+
+#~ msgid "This is the default setting."
+#~ msgstr "Essa é a configuração padrão."
+
+#~ msgid "This service costs money. Read their rates carefully before using it."
+#~ msgstr ""
+#~ "Esse serviço custa dinheiro. Leia a tarifação cuidadosamente antes de usar."
+
+#~ msgid "Folder"
+#~ msgstr "Pasta"
+
+#~ msgid ""
+#~ "This option only appears if the <gui>Amazon S3</gui> backup location has "
+#~ "been selected."
+#~ msgstr ""
+#~ "Essa opção só aparece se a localização de backup <gui>Amazon S3</gui> for "
+#~ "selecionada."
+
+#~ msgid "S3 Access Key ID"
+#~ msgstr "ID da Chave de Acesso S3"
+
+#~ msgid ""
+#~ "After you connect to a server, make sure to go back to the "
+#~ "<gui>Preferences</gui> dialog and choose the folder on that server to which "
+#~ "you want to back up. This is not currently automatically selected after you "
+#~ "connect."
+#~ msgstr ""
+#~ "Após conectar-se a um servidor, certifique-se de voltar para "
+#~ "<gui>Preferências</gui> e escolher a pasta daquele servidor para qual você "
+#~ "quer fazer o backup. Atualmente isto não é automaticamente selecionado após "
+#~ "você conectar-se."
+
+#~ msgid ""
+#~ "If you have connected to any servers, they will appear. To connect to a "
+#~ "server not listed, click <gui style=\"button\">Connect to Server…</gui>. "
+#~ "This will let you enter the server information."
+#~ msgstr ""
+#~ "Se você estiver conectado a quaisquer servidores, eles aparecerão. Para "
+#~ "conectar a um servidor não listado, clique <gui style=\"button\">Conectar ao "
+#~ "Servidor…</gui>. Isso permitirá que você digite as informações do servidor."
+
+#~ msgid ""
+#~ "This is your Access Key ID that Amazon gave you when you signed up for S3. "
+#~ "It is like a username for logging into S3. If left empty, you will be "
+#~ "prompted for it as you backup or restore."
+#~ msgstr ""
+#~ "Essa é a ID da sua Chave de Acesso fornecida pela Amazon quando você se "
+#~ "cadastrou no S3. É como um nome de usuário para no S3. Se deixar em branco, "
+#~ "você será perguntado sobre isso como backup ou restauração."
+
+#~ msgid "Local Folders"
+#~ msgstr "Pastas Locais"
+
+#~ msgid ""
+#~ "If you have multiple backups, you may want to keep them separated in "
+#~ "multiple folders. Use this option to enter a path on the S3 service in which "
+#~ "to put your files."
+#~ msgstr ""
+#~ "Se você tem vários backups, Você pode mantê-los separados em múltiplas "
+#~ "pastas. Use essa opção para digitar um caminho no serviço S3 para colocar os "
+#~ "arquivos."
+
+#~ msgid "Some locations are excluded by default:"
+#~ msgstr "Algumas localizações são excluídas por padrão:"
+
+#~ msgid "Connected Servers"
+#~ msgstr "Servidores conectados"
+
+#~ msgid "Backups are kept forever by default."
+#~ msgstr "Backups são mantidos eternamente por padrão."
+
+#~ msgid ""
+#~ "A <gui>Backup</gui> dialog will appear asking where you want to keep the "
+#~ "backup files (your <gui>Backup location</gui>). Either choose an external "
+#~ "drive from the dropdown, choose <gui>Other…</gui> and navigate to a folder, "
+#~ "or click on <gui style=\"button\">Connect to Server…</gui>. On this same "
+#~ "screen, select whether you would like to encrypt the backup files."
+#~ msgstr ""
+#~ "Um diálogo <gui>Backup</gui> aparecerá perguntando onde você quer manter os "
+#~ "arquivos de backup (sua <gui>Localização de backup</gui>). Escolha um drive "
+#~ "externo do menu suspenso, escolha <gui>Outro…</gui> e navegue até a pasta, "
+#~ "ou clique <gui style=\"button\">Conectar ao Servidor…</gui>. Nessa mesma "
+#~ "tela, selecione se você gostaria de criptografar os arquivos de backup."

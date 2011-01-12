@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-05-23 20:18-0400\n"
+"POT-Creation-Date: 2011-01-09 21:51-0500\n"
 "PO-Revision-Date: 2010-09-08 02:49+0000\n"
-"Last-Translator: Jussi Aalto <jta_l10n@dnainternet.net>\n"
+"Last-Translator: Jussi Aalto <jta_l10n@saunalahti.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-09-09 04:50+0000\n"
+"X-Launchpad-Export-Date: 2011-01-11 05:05+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: restore-revert.page:6(desc)
@@ -39,7 +39,7 @@ msgstr "Napsauta hiiren oikealla napilla tiedostoa jonka haluat palauttaa."
 msgid "Choose <gui style=\"menuitem\">Revert to Previous Version…</gui>."
 msgstr "Valitse <gui style=\"menuitem\">Palauta aiempi versio…</gui>."
 
-#: restore-lost.page:16(p)
+#: restore-revert.page:14(p)
 msgid ""
 "When the <gui>Restore</gui> dialog appears, choose the date from which to "
 "restore."
@@ -47,6 +47,11 @@ msgstr ""
 "Kun <gui>Palauta</gui>-valintaikkuna avautuu, valitse päivämäärä josta "
 "palautus suoritetaan."
 
+#: restore-revert.page:15(p)
+#: restore-full.page:23(p)
+#: restore-full.page:25(p)
+#: restore-full.page:27(p)
+#: backup-first.page:14(p)
 #: backup-first.page:16(p)
 msgid "Click <gui style=\"button\">Forward</gui>."
 msgstr "Napsauta <gui style=\"button\">Seuraava</gui>."
@@ -68,7 +73,8 @@ msgstr ""
 msgid "You can also revert files on the command line:"
 msgstr "Voit palauttaa tiedostoja myös komentoriviltä:"
 
-#: restore-lost.page:21(screen)
+#: restore-revert.page:20(screen)
+#: restore-lost.page:19(screen)
 #, no-wrap
 msgid "deja-dup --restore FILE1 FILE2"
 msgstr "deja-dup --restore TIEDOSTO1 TIEDOSTO2"
@@ -81,47 +87,41 @@ msgstr ""
 msgid "Restoring a Lost File"
 msgstr "Kadonneen tiedoston palautus"
 
-#: restore-lost.page:10(p)
-msgid ""
-"There’s currently no convenient user interface for this. But you can do it "
-"with the command line."
+#: restore-lost.page:11(p)
+msgid "Browse to the folder containing the file you lost."
 msgstr ""
-"Tällä hetkellä tälle toiminnolle ei ole mukavaa käyttöliittymää, mutta voit "
-"suorittaa toimenpiteen komentoriviltä."
 
 #: restore-lost.page:12(p)
-msgid "Open a terminal."
+msgid "Right click on the background of the folder."
 msgstr ""
 
 #: restore-lost.page:13(p)
-msgid ""
-"Run <app>Déjà Dup</app> on the lost file with the <cmd>--restore</cmd> "
-"argument. For example, to restore the lost file <file>test.txt</file> in "
-"your <file>Documents</file> folder:"
+msgid "Choose <gui style=\"menuitem\">Restore Missing Files…</gui>."
 msgstr ""
-"Suorita <app>Déjà Dup</app> kadonneelle tiedostolle <cmd>--restore</cmd>-"
-"valitsimella. Esimerkiksi hukassa oleva <file>testi.txt</file>-tiedosto "
-"palautetaan <file>Asiakirjat</file>-kansioon näin:"
 
-#: restore-lost.page:14(screen)
-#, no-wrap
-msgid "deja-dup --restore Documents/test.txt"
-msgstr "deja-dup --restore Asiakirjat/testi.txt"
+#: restore-lost.page:14(p)
+msgid ""
+"When the <gui>Restore</gui> dialog appears, it will scan for files that are "
+"in the backup but no longer in the folder."
+msgstr ""
 
 #: restore-lost.page:15(p)
 msgid ""
-"You must remember what the filename was, since it’s no longer there to "
-"remind you."
+"When you see the file you want to restore appear, select it and click <gui "
+"style=\"button\">Forward</gui>."
 msgstr ""
 
+#: restore-lost.page:16(p)
 #: restore-full.page:28(p)
 msgid "Review your selections and click <gui style=\"button\">Restore</gui>."
 msgstr ""
 "Tarkista tekemäsi valinnat ja napsauta <gui style=\"button\">Palauta</gui>."
 
-#: restore-lost.page:20(p)
-msgid "You can restore multiple lost files at once:"
-msgstr "Voit palauttaa useampia kadonneita tiedostoja kerralla:"
+#: restore-lost.page:18(p)
+msgid ""
+"You can restore lost files from the command line as well, if you remember "
+"what their filenames were:"
+msgstr ""
 
 #: restore-full.page:6(desc)
 msgid "Recover from total system failure."
@@ -154,6 +154,8 @@ msgstr ""
 msgid "Restore"
 msgstr "Palauta"
 
+#: restore-full.page:20(p)
+#: backup-first.page:11(p)
 #: backup-auto.page:12(p)
 msgid "Run <app>Déjà Dup</app>."
 msgstr ""
@@ -203,8 +205,7 @@ msgstr ""
 msgid "Adjust your backup settings."
 msgstr ""
 
-#. type: Content of: <article><sect1><title>
-#: ./C/deja-dup.xml:105
+#: prefs.page:9(title)
 msgid "Preferences"
 msgstr "Asetukset"
 
@@ -225,191 +226,61 @@ msgid ""
 msgstr ""
 
 #: prefs.page:17(title)
-msgid "Amazon S3"
-msgstr "Amazon S3"
+msgid "Cloud Services"
+msgstr ""
 
 #: prefs.page:18(p)
 msgid ""
-"This backup location uses the S3 storage service from Amazon. For a small "
-"fee per gigabyte, they hold your data for you. This is the recommended "
-"default because it is an easy way to keep your data offsite (meaning out of "
-"your home: in case of disaster or theft, your data will still be safe). You "
-"can sign up <link href=\"http://aws.amazon.com/s3/\">online</link>."
+"The first few backup locations are cloud storage services provided by "
+"various companies. For a small fee per gigabyte, they hold your data for "
+"you. A cloud service like this is recommended because it is an easy way to "
+"keep your data offsite (meaning out of your home: in case of disaster or "
+"theft, your data will still be safe). You can choose from Amazon S3, "
+"Rackspace Cloud Files, and Ubuntu One."
 msgstr ""
 
 #: prefs.page:19(p)
-msgid "This is the default setting."
+msgid ""
+"These services costs money. Read their rates carefully before using it."
 msgstr ""
 
-#: prefs.page:20(p)
-msgid "This service costs money. Read their rates carefully before using it."
-msgstr ""
-
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:119
+#: prefs.page:22(title)
 msgid "Removable Media"
 msgstr "Irrotettavat tallennusvälineet"
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:120
+#: prefs.page:23(p)
 msgid ""
 "You may see removable media like external hard drives or thumb drives listed."
 msgstr ""
 "Voit nähdä irrotettavia tallennusvälineitä kuten ulkoisia kiintolevyjä tai "
 "muistitikkuja listattuna."
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:123
-msgid "Connected Servers"
-msgstr "Yhdistetyt palvelimet"
-
-#: prefs.page:28(p)
-msgid ""
-"If you have connected to any servers, they will appear. To connect to a "
-"server not listed, click <gui style=\"button\">Connect to Server…</gui>. "
-"This will let you enter the server information."
+#: prefs.page:26(title)
+msgid "Remote Servers"
 msgstr ""
 
-#: prefs.page:29(p)
+#: prefs.page:27(p)
 msgid ""
-"After you connect to a server, make sure to go back to the "
-"<gui>Preferences</gui> dialog and choose the folder on that server to which "
-"you want to back up. This is not currently automatically selected after you "
-"connect."
+"Choose the type of remote server to which you want to connect. Then you can "
+"enter the server information. Alternatively, if you know your server's URL, "
+"choose <gui>Custom Location</gui> and enter it."
 msgstr ""
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:127
-msgid "Local Folders"
-msgstr "Paikalliset kansiot"
+#: prefs.page:30(title)
+msgid "Local Folder"
+msgstr "Paikallinen kansio"
 
-#: prefs.page:33(p)
+#: prefs.page:31(p)
 msgid ""
 "You may also want to choose a local folder as a backup location. Note that "
 "backups can be quite large, so make sure you have enough free disk space."
 msgstr ""
 
-#: prefs.page:38(gui)
-msgid "S3 Access Key ID"
-msgstr ""
-
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para>
-#: ./C/deja-dup.xml:139
-msgid ""
-"This is your Access Key ID that Amazon gave you when you signed up for S3. "
-"It is like a username for logging into S3. If left empty, you will be "
-"prompted for it as you backup or restore."
-msgstr ""
-"Tämä on käyttöavaimesi tunnus, jonka Amazon antoi sinulle luodessasi "
-"käyttäjätilisi S3:lle. Se on kuin käyttäjätunnus S3:een kirjauduttaessa. Jos "
-"se jätetään tyhjäksi, sitä pyydetään sinulta varmuuskopioinnin ja "
-"tiedostojen palautuksen yhteydessä."
-
-#: prefs.page:45(p)
-msgid ""
-"This option only appears if the <gui>Amazon S3</gui> backup location has "
-"been selected."
-msgstr ""
-
-#: prefs.page:43(gui)
-msgid "Folder"
-msgstr ""
-
-#: prefs.page:44(p)
-msgid ""
-"If you have multiple backups, you may want to keep them separated in "
-"multiple folders. Use this option to enter a path on the S3 service in which "
-"to put your files."
-msgstr ""
-
-#: prefs.page:48(gui)
-msgid "Include files in folders"
-msgstr ""
-
-#: prefs.page:49(p)
-msgid ""
-"Select a list of directories to backup. Press the <gui "
-"style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
-"modify the list. If you are only interested in backing up your own data, the "
-"default of <gui>Home Folder</gui> is sufficient."
-msgstr ""
-
-#: prefs.page:52(gui)
-msgid "Except files in folders"
-msgstr ""
-
-#: prefs.page:53(p)
-msgid ""
-"Select a list of directories to not backup. Press the <gui "
-"style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
-"modify the list."
-msgstr ""
-
-#: prefs.page:54(p)
-msgid ""
-"Some of your data may be large and not very important to you. In that case, "
-"you can save yourself some time and space by not backing them up."
-msgstr ""
-
-#: prefs.page:56(p)
-msgid "Some locations are excluded by default:"
-msgstr ""
-
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:162
-msgid "~/.cache"
-msgstr "~/.cache"
-
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:163
-msgid "~/.thumbnails"
-msgstr "~/.thumbnails"
-
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:164
-msgid "~/.gvfs"
-msgstr "~/.gvfs"
-
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:165
-msgid "~/.xsession-errors"
-msgstr "~/.xsession-errors"
-
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:166
-msgid "~/.recently-used.xbel"
-msgstr "~/.recently-used.xbel"
-
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:167
-msgid "~/.recent-applications.xbel"
-msgstr "~/.recent-applications.xbel"
-
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:168
-msgid "~/.Private"
-msgstr "~/.Private"
-
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:169
-msgid "/proc"
-msgstr "/proc"
-
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:170
-msgid "/tmp"
-msgstr "/tmp"
-
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para><itemizedlist><listitem><para>
-#: ./C/deja-dup.xml:171
-msgid "/sys"
-msgstr "/sys"
-
-#: prefs.page:72(gui)
+#: prefs.page:36(gui)
 msgid "Encrypt backup files"
 msgstr ""
 
-#: prefs.page:73(p)
+#: prefs.page:37(p)
 msgid ""
 "Encrypting your backup files is recommended to keep your data safe. If you "
 "don’t have exclusive physical control of your backup location, or if it is "
@@ -417,8 +288,7 @@ msgid ""
 "data."
 msgstr ""
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para>
-#: ./C/deja-dup.xml:180
+#: prefs.page:38(p)
 msgid ""
 "If on, you will be prompted for a password. Keep this password safe, you "
 "will need it to restore your data."
@@ -426,15 +296,88 @@ msgstr ""
 "Jos tämä asetus on käytössä, sinulta pyydetään salasana. Pidä tämä salasana "
 "turvassa, tarvitset sitä palauttaaksesi tiedostosi."
 
-#: prefs.page:75(p)
+#: prefs.page:39(p)
 msgid "Encryption is enabled by default."
 msgstr ""
 
-#: prefs.page:78(gui)
+#: prefs.page:42(gui)
+msgid "Include files in folders"
+msgstr ""
+
+#: prefs.page:43(p)
+msgid ""
+"Select a list of directories to backup. Press the <gui "
+"style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
+"modify the list. If you are only interested in backing up your own data, the "
+"default of <gui>Home Folder</gui> is sufficient."
+msgstr ""
+
+#: prefs.page:46(gui)
+msgid "Except files in folders"
+msgstr ""
+
+#: prefs.page:47(p)
+msgid ""
+"Select a list of directories to not backup. Press the <gui "
+"style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
+"modify the list."
+msgstr ""
+
+#: prefs.page:48(p)
+msgid ""
+"Some of your data may be large and not very important to you. In that case, "
+"you can save yourself some time and space by not backing them up."
+msgstr ""
+
+#: prefs.page:50(p)
+msgid "Some locations are always excluded by default:"
+msgstr ""
+
+#: prefs.page:52(span)
+msgid "~/.cache"
+msgstr "~/.cache"
+
+#: prefs.page:53(span)
+msgid "~/.thumbnails"
+msgstr "~/.thumbnails"
+
+#: prefs.page:54(span)
+msgid "~/.gvfs"
+msgstr "~/.gvfs"
+
+#: prefs.page:55(span)
+msgid "~/.xsession-errors"
+msgstr "~/.xsession-errors"
+
+#: prefs.page:56(span)
+msgid "~/.recently-used.xbel"
+msgstr "~/.recently-used.xbel"
+
+#: prefs.page:57(span)
+msgid "~/.recent-applications.xbel"
+msgstr "~/.recent-applications.xbel"
+
+#: prefs.page:58(span)
+msgid "~/.Private"
+msgstr "~/.Private"
+
+#: prefs.page:59(span)
+msgid "/proc"
+msgstr "/proc"
+
+#: prefs.page:60(span)
+msgid "/tmp"
+msgstr "/tmp"
+
+#: prefs.page:61(span)
+msgid "/sys"
+msgstr "/sys"
+
+#: prefs.page:66(gui)
 msgid "Automatically backup on a regular schedule"
 msgstr ""
 
-#: prefs.page:79(p)
+#: prefs.page:67(p)
 msgid ""
 "Turn this option on to have <app>Déjà Dup</app> automatically backup for "
 "you. This is recommended so that you don’t forget to do it yourself. Backups "
@@ -442,28 +385,27 @@ msgid ""
 "regularly do so."
 msgstr ""
 
-#: prefs.page:80(p)
+#: prefs.page:68(p)
 msgid "Automatic backups are disabled by default."
 msgstr ""
 
-#: prefs.page:83(gui)
+#: prefs.page:71(gui)
 msgid "How often to backup"
 msgstr ""
 
-#. type: Content of: <article><sect1><variablelist><varlistentry><listitem><para>
-#: ./C/deja-dup.xml:194
+#: prefs.page:72(p)
 msgid "Choose a schedule for automatic backups."
 msgstr "Valitse aikataulu automaattisille varmuuskopioinneille."
 
-#: prefs.page:85(p)
+#: prefs.page:73(p)
 msgid "Automatic backups are scheduled weekly by default."
 msgstr ""
 
-#: prefs.page:88(gui)
+#: prefs.page:76(gui)
 msgid "Keep backups"
 msgstr ""
 
-#: prefs.page:89(p)
+#: prefs.page:77(p)
 msgid ""
 "Choose the minimum amount of time to keep backup files. If you find that the "
 "backup files are taking up too much space, you may want to decrease this "
@@ -471,8 +413,10 @@ msgid ""
 "the chosen time. But no files will be deleted early."
 msgstr ""
 
-#: prefs.page:90(p)
-msgid "Backups are kept forever by default."
+#: prefs.page:78(p)
+msgid ""
+"Backups are kept forever by default, but still may be deleted earlier if the "
+"backup location begins to run out of space."
 msgstr ""
 
 #: index.page:8(span)
@@ -495,8 +439,7 @@ msgstr ""
 msgid "<app>Déjà Dup</app> Help"
 msgstr "<app>Déjà Dup</app> -ohje"
 
-#. type: Content of: <article><sect1><title>
-#: ./C/deja-dup.xml:92
+#: index.page:18(title)
 msgid "Backing Up"
 msgstr "Varmuuskopion tekeminen"
 
@@ -519,9 +462,8 @@ msgstr "Napsauta isoa <gui style=\"button\">Varmuuskopioi…</gui>-painiketta."
 #: backup-first.page:13(p)
 msgid ""
 "A <gui>Backup</gui> dialog will appear asking where you want to keep the "
-"backup files (your <gui>Backup location</gui>). Either choose an external "
-"drive from the dropdown, choose <gui>Other…</gui> and navigate to a folder, "
-"or click on <gui style=\"button\">Connect to Server…</gui>. On this same "
+"backup files (your <gui>Backup location</gui>). If you have an external hard "
+"drive you want to use, make sure it is plugged in first. On this same "
 "screen, select whether you would like to encrypt the backup files."
 msgstr ""
 
@@ -905,6 +847,9 @@ msgstr ""
 #~ msgid "Trash"
 #~ msgstr "Roskakori"
 
+#~ msgid "Amazon S3"
+#~ msgstr "Amazon S3"
+
 #~ msgid "Daily"
 #~ msgstr "Päivittäin"
 
@@ -1075,9 +1020,6 @@ msgstr ""
 
 #~ msgid "Choose backup destination"
 #~ msgstr "Valitse kohde varmuuskopioille"
-
-#~ msgid "Local Folder"
-#~ msgstr "Paikallinen kansio"
 
 #~ msgid "Select Folder"
 #~ msgstr "Valitse kansio"
@@ -1304,12 +1246,25 @@ msgstr ""
 #~ "<guilabel>Amazon S3</guilabel>."
 
 #~ msgid ""
+#~ "This is your Access Key ID that Amazon gave you when you signed up for S3. "
+#~ "It is like a username for logging into S3. If left empty, you will be "
+#~ "prompted for it as you backup or restore."
+#~ msgstr ""
+#~ "Tämä on käyttöavaimesi tunnus, jonka Amazon antoi sinulle luodessasi "
+#~ "käyttäjätilisi S3:lle. Se on kuin käyttäjätunnus S3:een kirjauduttaessa. Jos "
+#~ "se jätetään tyhjäksi, sitä pyydetään sinulta varmuuskopioinnin ja "
+#~ "tiedostojen palautuksen yhteydessä."
+
+#~ msgid ""
 #~ "You may also want to choose a local folder as a backup location.  Note that "
 #~ "backups can be quite large, so make sure you have enough free disk space."
 #~ msgstr ""
 #~ "Voit myös halutessasi valita paikallisen kansion varmuuskopion sijainniksi. "
 #~ "Huomaa, että varmuuskopiot voivat olla suuria, joten varmista, että sinulla "
 #~ "on riittävästi tyhjää levytilaa."
+
+#~ msgid "Local Folders"
+#~ msgstr "Paikalliset kansiot"
 
 #~ msgid "<guilabel>Folder</guilabel>"
 #~ msgstr "<guilabel>Kansio</guilabel>"
@@ -1670,3 +1625,29 @@ msgstr ""
 
 #~ msgid "<guilabel>Include files in folders</guilabel>"
 #~ msgstr "<guilabel>Varmuuskopioi tiedostot kansioista</guilabel>"
+
+#~ msgid "Connected Servers"
+#~ msgstr "Yhdistetyt palvelimet"
+
+#, no-wrap
+#~ msgid "deja-dup --restore Documents/test.txt"
+#~ msgstr "deja-dup --restore Asiakirjat/testi.txt"
+
+#~ msgid ""
+#~ "Run <app>Déjà Dup</app> on the lost file with the <cmd>--restore</cmd> "
+#~ "argument. For example, to restore the lost file <file>test.txt</file> in "
+#~ "your <file>Documents</file> folder:"
+#~ msgstr ""
+#~ "Suorita <app>Déjà Dup</app> kadonneelle tiedostolle <cmd>--restore</cmd>-"
+#~ "valitsimella. Esimerkiksi hukassa oleva <file>testi.txt</file>-tiedosto "
+#~ "palautetaan <file>Asiakirjat</file>-kansioon näin:"
+
+#~ msgid ""
+#~ "There’s currently no convenient user interface for this. But you can do it "
+#~ "with the command line."
+#~ msgstr ""
+#~ "Tällä hetkellä tälle toiminnolle ei ole mukavaa käyttöliittymää, mutta voit "
+#~ "suorittaa toimenpiteen komentoriviltä."
+
+#~ msgid "You can restore multiple lost files at once:"
+#~ msgstr "Voit palauttaa useampia kadonneita tiedostoja kerralla:"

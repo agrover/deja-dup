@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-05-23 20:18-0400\n"
+"POT-Creation-Date: 2011-01-09 21:51-0500\n"
 "PO-Revision-Date: 2010-12-04 20:43+0000\n"
 "Last-Translator: rob <linuxned@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:48+0000\n"
+"X-Launchpad-Export-Date: 2011-01-11 05:05+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: restore-revert.page:6(desc)
@@ -39,7 +39,7 @@ msgid "Choose <gui style=\"menuitem\">Revert to Previous Version…</gui>."
 msgstr ""
 "Selecteer <gui style=\"menuitem\">Herstellen naar vorige versie…</gui>."
 
-#: restore-lost.page:16(p)
+#: restore-revert.page:14(p)
 msgid ""
 "When the <gui>Restore</gui> dialog appears, choose the date from which to "
 "restore."
@@ -47,6 +47,11 @@ msgstr ""
 "Wanneer de <gui>Herstellen</gui>-dialoog verschijnt, kunt u de datum "
 "selecteren waar u van wilt herstellen."
 
+#: restore-revert.page:15(p)
+#: restore-full.page:23(p)
+#: restore-full.page:25(p)
+#: restore-full.page:27(p)
+#: backup-first.page:14(p)
 #: backup-first.page:16(p)
 msgid "Click <gui style=\"button\">Forward</gui>."
 msgstr "Klik op <gui style=\"button\">Volgende</gui>."
@@ -68,7 +73,8 @@ msgstr ""
 msgid "You can also revert files on the command line:"
 msgstr "U kunt bestanden ook herstellen met de opdrachtregel:"
 
-#: restore-lost.page:21(screen)
+#: restore-revert.page:20(screen)
+#: restore-lost.page:19(screen)
 #, no-wrap
 msgid "deja-dup --restore FILE1 FILE2"
 msgstr "deja-dup --restore BESTAND1 BESTAND2"
@@ -81,49 +87,41 @@ msgstr "Een bestand herstellen dat niet langer aanwezig is."
 msgid "Restoring a Lost File"
 msgstr "Een verloren bestand herstellen"
 
-#: restore-lost.page:10(p)
-msgid ""
-"There’s currently no convenient user interface for this. But you can do it "
-"with the command line."
+#: restore-lost.page:11(p)
+msgid "Browse to the folder containing the file you lost."
 msgstr ""
-"Er is momenteel geen bruikbare gebruikersinterface hiervoor beschikbaar, "
-"maar u kunt dit ook doen met de opdrachtregel."
 
 #: restore-lost.page:12(p)
-msgid "Open a terminal."
-msgstr "Open een terminalvenster."
+msgid "Right click on the background of the folder."
+msgstr ""
 
 #: restore-lost.page:13(p)
-msgid ""
-"Run <app>Déjà Dup</app> on the lost file with the <cmd>--restore</cmd> "
-"argument. For example, to restore the lost file <file>test.txt</file> in "
-"your <file>Documents</file> folder:"
+msgid "Choose <gui style=\"menuitem\">Restore Missing Files…</gui>."
 msgstr ""
-"U kunt <app>Déjà Dup</app> uitvoeren voor een verloren bestand met het "
-"argument <cmd>--restore</cmd>. Bijvoorbeeld als u het verloren bestand "
-"<file>test.txt</file> in uw map <file>Documenten</file> wilt herstellen:"
 
-#: restore-lost.page:14(screen)
-#, no-wrap
-msgid "deja-dup --restore Documents/test.txt"
-msgstr "deja-dup --restore Documents/test.txt"
+#: restore-lost.page:14(p)
+msgid ""
+"When the <gui>Restore</gui> dialog appears, it will scan for files that are "
+"in the backup but no longer in the folder."
+msgstr ""
 
 #: restore-lost.page:15(p)
 msgid ""
-"You must remember what the filename was, since it’s no longer there to "
-"remind you."
+"When you see the file you want to restore appear, select it and click <gui "
+"style=\"button\">Forward</gui>."
 msgstr ""
-"U moet de bestandsnaam onthouden, omdat het bestand niet langer aanwezig is "
-"om u te kunnen helpen herinneren."
 
+#: restore-lost.page:16(p)
 #: restore-full.page:28(p)
 msgid "Review your selections and click <gui style=\"button\">Restore</gui>."
 msgstr ""
 "Controleer uw keuzes en klik dan op <gui style=\"button\">Herstellen</gui>."
 
-#: restore-lost.page:20(p)
-msgid "You can restore multiple lost files at once:"
-msgstr "U kunt meerdere verloren bestanden tegelijkertijd herstellen:"
+#: restore-lost.page:18(p)
+msgid ""
+"You can restore lost files from the command line as well, if you remember "
+"what their filenames were:"
+msgstr ""
 
 #: restore-full.page:6(desc)
 msgid "Recover from total system failure."
@@ -163,6 +161,8 @@ msgstr ""
 msgid "Restore"
 msgstr "Herstellen"
 
+#: restore-full.page:20(p)
+#: backup-first.page:11(p)
 #: backup-auto.page:12(p)
 msgid "Run <app>Déjà Dup</app>."
 msgstr "<app>Déjà Dup</app> uitvoeren."
@@ -252,76 +252,51 @@ msgstr ""
 "Dup</app> gebruikt bij het herstellen of het maken van een back-up:"
 
 #: prefs.page:17(title)
-msgid "Amazon S3"
-msgstr "Amazon S3"
+msgid "Cloud Services"
+msgstr ""
 
 #: prefs.page:18(p)
 msgid ""
-"This backup location uses the S3 storage service from Amazon. For a small "
-"fee per gigabyte, they hold your data for you. This is the recommended "
-"default because it is an easy way to keep your data offsite (meaning out of "
-"your home: in case of disaster or theft, your data will still be safe). You "
-"can sign up <link href=\"http://aws.amazon.com/s3/\">online</link>."
+"The first few backup locations are cloud storage services provided by "
+"various companies. For a small fee per gigabyte, they hold your data for "
+"you. A cloud service like this is recommended because it is an easy way to "
+"keep your data offsite (meaning out of your home: in case of disaster or "
+"theft, your data will still be safe). You can choose from Amazon S3, "
+"Rackspace Cloud Files, and Ubuntu One."
 msgstr ""
-"Deze back-uplocatie gebruikt de S3-opslagdienst van Amazon. Voor een kleine "
-"vergoeding per gigabyte kunt u er uw data opslaan. Dit is de aanbevolen "
-"standaardkeuze, omdat dit een makkelijke manier is om uw data buiten uw huis "
-"op te slaan (buiten uw huis, omdat in geval van een ramp of van een diefstal "
-"uw data toch veilig zal zijn). U kunt zich registreren op <link "
-"href=\"http://aws.amazon.com/s3/\">online</link>."
 
 #: prefs.page:19(p)
-msgid "This is the default setting."
-msgstr "Dit is de standaardinstelling"
-
-#: prefs.page:20(p)
-msgid "This service costs money. Read their rates carefully before using it."
+msgid ""
+"These services costs money. Read their rates carefully before using it."
 msgstr ""
-"Deze dienst kost geld. Lees eerst hun tarieven voordat u het gaat gebruiken."
 
-#: prefs.page:23(title)
+#: prefs.page:22(title)
 msgid "Removable Media"
 msgstr "Verwijderbare media"
 
-#: prefs.page:24(p)
+#: prefs.page:23(p)
 msgid ""
 "You may see removable media like external hard drives or thumb drives listed."
 msgstr ""
 "U ziet mogelijk verwijderbare media zoals externe harde schijven of USB-"
 "sticks."
 
-#: prefs.page:27(title)
-msgid "Connected Servers"
-msgstr "Verbonden servers"
-
-#: prefs.page:28(p)
-msgid ""
-"If you have connected to any servers, they will appear. To connect to a "
-"server not listed, click <gui style=\"button\">Connect to Server…</gui>. "
-"This will let you enter the server information."
+#: prefs.page:26(title)
+msgid "Remote Servers"
 msgstr ""
-"Wanneer u verbondem bent met servers, zullen deze getoond worden. Om "
-"verbinding te maken met een andere server, klikt u op <gui "
-"style=\"button\">Verbinden met server…</gui>. Hierna kunt u de "
-"serverinformatie invoeren."
 
-#: prefs.page:29(p)
+#: prefs.page:27(p)
 msgid ""
-"After you connect to a server, make sure to go back to the "
-"<gui>Preferences</gui> dialog and choose the folder on that server to which "
-"you want to back up. This is not currently automatically selected after you "
-"connect."
+"Choose the type of remote server to which you want to connect. Then you can "
+"enter the server information. Alternatively, if you know your server's URL, "
+"choose <gui>Custom Location</gui> and enter it."
 msgstr ""
-"Nadat u verbonden bent met een server, vergeet dan niet om terug te gaan "
-"naar de <gui>Voorkeuren</gui>-dialoog en om de back-uplocatie op de server "
-"te selecteren die u wilt gebruiken. Dit wordt momenteel niet automatisch "
-"geselecteerd na de verbinding."
 
-#: prefs.page:32(title)
-msgid "Local Folders"
-msgstr "Lokale mappen"
+#: prefs.page:30(title)
+msgid "Local Folder"
+msgstr "Lokale map"
 
-#: prefs.page:33(p)
+#: prefs.page:31(p)
 msgid ""
 "You may also want to choose a local folder as a backup location. Note that "
 "backups can be quite large, so make sure you have enough free disk space."
@@ -330,48 +305,40 @@ msgstr ""
 "een grote omvang kunnen hebben, zorg er daarom voor dat er genoeg vrije "
 "schijfruimte beschikbaar is."
 
-#: prefs.page:38(gui)
-msgid "S3 Access Key ID"
-msgstr "S3-toegangssleutel-ID"
+#: prefs.page:36(gui)
+msgid "Encrypt backup files"
+msgstr "Back-upbestanden versleutelen"
+
+#: prefs.page:37(p)
+msgid ""
+"Encrypting your backup files is recommended to keep your data safe. If you "
+"don’t have exclusive physical control of your backup location, or if it is "
+"stolen, an encrypted backup prevents others from looking at your personal "
+"data."
+msgstr ""
+"Het wordt aanbevolen om uw back-upbestanden te versleutelen om uw data goed "
+"te beveiligen. Als de back-uplocatie bijvoorbeeld niet alleen voor uw "
+"toegankelijk is of als deze gestolen wordt, dan zorgt de versleuteling "
+"ervoor dat anderen niet uw persoonlijke data kunnen zien."
+
+#: prefs.page:38(p)
+msgid ""
+"If on, you will be prompted for a password. Keep this password safe, you "
+"will need it to restore your data."
+msgstr ""
+"Indien ingeschakeld, zal u gevraagd worden om een wachtwoord in te voeren. "
+"Berg dit wachtwoord veilig op, want u zult het nodig hebben wanneer u uw "
+"data wilt herstellen."
 
 #: prefs.page:39(p)
-msgid ""
-"This is your Access Key ID that Amazon gave you when you signed up for S3. "
-"It is like a username for logging into S3. If left empty, you will be "
-"prompted for it as you backup or restore."
-msgstr ""
-"Dit is uw toegangssleutel-ID, die u van Amazon heeft gekregen toen u een S3-"
-"account heeft aangemaakt. Deze fungeert als een soort gebruikersnaam om in "
-"te loggen bij S3. Indien u dit leeg laat, zal u erom gevraagd worden bij het "
-"herstellen of het maken van een back-up."
+msgid "Encryption is enabled by default."
+msgstr "Versleuteling is standaard ingeschakeld."
 
-#: prefs.page:45(p)
-msgid ""
-"This option only appears if the <gui>Amazon S3</gui> backup location has "
-"been selected."
-msgstr ""
-"Deze optie is alleen beschikbaar wanneer de<gui>Amazon S3</gui> back-"
-"uplocatie geselecteerd is."
-
-#: prefs.page:43(gui)
-msgid "Folder"
-msgstr "Map"
-
-#: prefs.page:44(p)
-msgid ""
-"If you have multiple backups, you may want to keep them separated in "
-"multiple folders. Use this option to enter a path on the S3 service in which "
-"to put your files."
-msgstr ""
-"Indien u meerdere back-ups heeft, wilt u ze waarschijnlijk gescheiden houden "
-"in aparte mappen. Gebruik deze optie om een pad op de S3-dienst in te voeren "
-"waar u uw bestanden in wilt plaatsen."
-
-#: prefs.page:48(gui)
+#: prefs.page:42(gui)
 msgid "Include files in folders"
 msgstr "Bestanden en mappen opnemen"
 
-#: prefs.page:49(p)
+#: prefs.page:43(p)
 msgid ""
 "Select a list of directories to backup. Press the <gui "
 "style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
@@ -384,11 +351,11 @@ msgstr ""
 "een back-up wilt maken van uw eigen data, dan is de standaardkeuze "
 "<gui>Persoonlijke map</gui> genoeg."
 
-#: prefs.page:52(gui)
+#: prefs.page:46(gui)
 msgid "Except files in folders"
 msgstr "Bestanden en mappen uitsluiten"
 
-#: prefs.page:53(p)
+#: prefs.page:47(p)
 msgid ""
 "Select a list of directories to not backup. Press the <gui "
 "style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
@@ -398,7 +365,7 @@ msgstr ""
 "Druk op de knop <gui style =\"button\">Toevoegen</gui> of <gui "
 "style=\"button\">Verwijderen</gui> om de lijst aan te passen."
 
-#: prefs.page:54(p)
+#: prefs.page:48(p)
 msgid ""
 "Some of your data may be large and not very important to you. In that case, "
 "you can save yourself some time and space by not backing them up."
@@ -407,84 +374,55 @@ msgstr ""
 "geval kunt u tijd en ruimte besparen door geen back-up van deze data te "
 "maken."
 
-#: prefs.page:56(p)
-msgid "Some locations are excluded by default:"
-msgstr "Sommige locaties worden standaard uitgesloten:"
+#: prefs.page:50(p)
+msgid "Some locations are always excluded by default:"
+msgstr ""
 
-#: prefs.page:58(span)
+#: prefs.page:52(span)
 msgid "~/.cache"
 msgstr "~/.cache"
 
-#: prefs.page:59(span)
+#: prefs.page:53(span)
 msgid "~/.thumbnails"
 msgstr "~/.thumbnails"
 
-#: prefs.page:60(span)
+#: prefs.page:54(span)
 msgid "~/.gvfs"
 msgstr "~/.gvfs"
 
-#: prefs.page:61(span)
+#: prefs.page:55(span)
 msgid "~/.xsession-errors"
 msgstr "~/.xsession-errors"
 
-#: prefs.page:62(span)
+#: prefs.page:56(span)
 msgid "~/.recently-used.xbel"
 msgstr "~/.recently-used.xbel"
 
-#: prefs.page:63(span)
+#: prefs.page:57(span)
 msgid "~/.recent-applications.xbel"
 msgstr "~/.recent-applications.xbel"
 
-#: prefs.page:64(span)
+#: prefs.page:58(span)
 msgid "~/.Private"
 msgstr "~/.Private"
 
-#: prefs.page:65(span)
+#: prefs.page:59(span)
 msgid "/proc"
 msgstr "/proc"
 
-#: prefs.page:66(span)
+#: prefs.page:60(span)
 msgid "/tmp"
 msgstr "/tmp"
 
-#: prefs.page:67(span)
+#: prefs.page:61(span)
 msgid "/sys"
 msgstr "/sys"
 
-#: prefs.page:72(gui)
-msgid "Encrypt backup files"
-msgstr "Back-upbestanden versleutelen"
-
-#: prefs.page:73(p)
-msgid ""
-"Encrypting your backup files is recommended to keep your data safe. If you "
-"don’t have exclusive physical control of your backup location, or if it is "
-"stolen, an encrypted backup prevents others from looking at your personal "
-"data."
-msgstr ""
-"Het wordt aanbevolen om uw back-upbestanden te versleutelen om uw data goed "
-"te beveiligen. Als de back-uplocatie bijvoorbeeld niet alleen voor uw "
-"toegankelijk is of als deze gestolen wordt, dan zorgt de versleuteling "
-"ervoor dat anderen niet uw persoonlijke data kunnen zien."
-
-#: prefs.page:74(p)
-msgid ""
-"If on, you will be prompted for a password. Keep this password safe, you "
-"will need it to restore your data."
-msgstr ""
-"Indien ingeschakeld, zal u gevraagd worden om een wachtwoord in te voeren. "
-"Berg dit wachtwoord veilig op, want u zult het nodig hebben wanneer u uw "
-"data wilt herstellen."
-
-#: prefs.page:75(p)
-msgid "Encryption is enabled by default."
-msgstr "Versleuteling is standaard ingeschakeld."
-
-#: prefs.page:78(gui)
+#: prefs.page:66(gui)
 msgid "Automatically backup on a regular schedule"
 msgstr "Geplande back-ups automatisch aanmaken"
 
-#: prefs.page:79(p)
+#: prefs.page:67(p)
 msgid ""
 "Turn this option on to have <app>Déjà Dup</app> automatically backup for "
 "you. This is recommended so that you don’t forget to do it yourself. Backups "
@@ -496,27 +434,27 @@ msgstr ""
 "doen. Back-ups zijn beter bruikbaar als ze recent gemaakt zijn, daarom is "
 "het belangrijk om dit regelmatig te doen."
 
-#: prefs.page:80(p)
+#: prefs.page:68(p)
 msgid "Automatic backups are disabled by default."
 msgstr "Automatisch back-ups maken is standaard uitgeschakeld."
 
-#: prefs.page:83(gui)
+#: prefs.page:71(gui)
 msgid "How often to backup"
 msgstr "Hoe vaak back-up maken"
 
-#: prefs.page:84(p)
+#: prefs.page:72(p)
 msgid "Choose a schedule for automatic backups."
 msgstr "Selecteer een tijd om automatische back-ups te maken."
 
-#: prefs.page:85(p)
+#: prefs.page:73(p)
 msgid "Automatic backups are scheduled weekly by default."
 msgstr "Automatisch back-ups maken is standaard ingesteld op wekelijks."
 
-#: prefs.page:88(gui)
+#: prefs.page:76(gui)
 msgid "Keep backups"
 msgstr "Back-ups bewaren"
 
-#: prefs.page:89(p)
+#: prefs.page:77(p)
 msgid ""
 "Choose the minimum amount of time to keep backup files. If you find that the "
 "backup files are taking up too much space, you may want to decrease this "
@@ -529,9 +467,11 @@ msgstr ""
 "langer bewaard worden dan aangegeven, maar er zullen geen bestanden "
 "vervroegd verwijderd worden."
 
-#: prefs.page:90(p)
-msgid "Backups are kept forever by default."
-msgstr "Back-ups worden standaard voor altijd bewaard."
+#: prefs.page:78(p)
+msgid ""
+"Backups are kept forever by default, but still may be deleted earlier if the "
+"backup location begins to run out of space."
+msgstr ""
 
 #: index.page:8(span)
 msgid "Michael Terry"
@@ -576,17 +516,10 @@ msgstr "Klik op de grote knop <gui style=\"button\">Back-up maken…</gui>."
 #: backup-first.page:13(p)
 msgid ""
 "A <gui>Backup</gui> dialog will appear asking where you want to keep the "
-"backup files (your <gui>Backup location</gui>). Either choose an external "
-"drive from the dropdown, choose <gui>Other…</gui> and navigate to a folder, "
-"or click on <gui style=\"button\">Connect to Server…</gui>. On this same "
+"backup files (your <gui>Backup location</gui>). If you have an external hard "
+"drive you want to use, make sure it is plugged in first. On this same "
 "screen, select whether you would like to encrypt the backup files."
 msgstr ""
-"Er zal een <gui>Back-up maken</gui>-dialoog verschijnen met de vraag waar u "
-"uw back-upbestanden wilt opslaan (uw <gui>Back-uplocatie</gui>). Selecteer "
-"een externe schijf in het keuzemenu of selecteer <gui>Andere…</gui> en "
-"navigeer naar een map of klik op <gui style=\"button\">Verbinden met "
-"server…</gui>. In hetzelfde scherm kunt u ook aangeven of u uw back-up wilt "
-"versleutelen of niet."
 
 #: backup-first.page:15(p)
 msgid ""
@@ -849,6 +782,9 @@ msgstr ""
 #~ msgid "Trash"
 #~ msgstr "Prullenbak"
 
+#~ msgid "Amazon S3"
+#~ msgstr "Amazon S3"
+
 #~ msgid "Daily"
 #~ msgstr "Dagelijks"
 
@@ -935,9 +871,6 @@ msgstr ""
 
 #~ msgid "Choose backup destination"
 #~ msgstr "Kies backup bestemming"
-
-#~ msgid "Local Folder"
-#~ msgstr "Lokale map"
 
 #~ msgid "Select Folder"
 #~ msgstr "Selecteer map"
@@ -1029,6 +962,9 @@ msgstr ""
 
 #~ msgid "Getting Started"
 #~ msgstr "Om te beginnen"
+
+#~ msgid "Local Folders"
+#~ msgstr "Lokale mappen"
 
 #~ msgid "Default: <guilabel>Weekly</guilabel>."
 #~ msgstr "Standaard: <guilabel>Wekelijks</guilabel>."
@@ -1278,6 +1214,136 @@ msgstr ""
 
 #~ msgid "<guilabel>How often to backup</guilabel>"
 #~ msgstr "<guilabel>Hoe vaak te backuppen</guilabel>"
+
+#~ msgid ""
+#~ "There’s currently no convenient user interface for this. But you can do it "
+#~ "with the command line."
+#~ msgstr ""
+#~ "Er is momenteel geen bruikbare gebruikersinterface hiervoor beschikbaar, "
+#~ "maar u kunt dit ook doen met de opdrachtregel."
+
+#~ msgid "Open a terminal."
+#~ msgstr "Open een terminalvenster."
+
+#~ msgid ""
+#~ "Run <app>Déjà Dup</app> on the lost file with the <cmd>--restore</cmd> "
+#~ "argument. For example, to restore the lost file <file>test.txt</file> in "
+#~ "your <file>Documents</file> folder:"
+#~ msgstr ""
+#~ "U kunt <app>Déjà Dup</app> uitvoeren voor een verloren bestand met het "
+#~ "argument <cmd>--restore</cmd>. Bijvoorbeeld als u het verloren bestand "
+#~ "<file>test.txt</file> in uw map <file>Documenten</file> wilt herstellen:"
+
+#, no-wrap
+#~ msgid "deja-dup --restore Documents/test.txt"
+#~ msgstr "deja-dup --restore Documents/test.txt"
+
+#~ msgid ""
+#~ "You must remember what the filename was, since it’s no longer there to "
+#~ "remind you."
+#~ msgstr ""
+#~ "U moet de bestandsnaam onthouden, omdat het bestand niet langer aanwezig is "
+#~ "om u te kunnen helpen herinneren."
+
+#~ msgid "You can restore multiple lost files at once:"
+#~ msgstr "U kunt meerdere verloren bestanden tegelijkertijd herstellen:"
+
+#~ msgid "This is the default setting."
+#~ msgstr "Dit is de standaardinstelling"
+
+#~ msgid "This service costs money. Read their rates carefully before using it."
+#~ msgstr ""
+#~ "Deze dienst kost geld. Lees eerst hun tarieven voordat u het gaat gebruiken."
+
+#~ msgid "Connected Servers"
+#~ msgstr "Verbonden servers"
+
+#~ msgid ""
+#~ "If you have connected to any servers, they will appear. To connect to a "
+#~ "server not listed, click <gui style=\"button\">Connect to Server…</gui>. "
+#~ "This will let you enter the server information."
+#~ msgstr ""
+#~ "Wanneer u verbondem bent met servers, zullen deze getoond worden. Om "
+#~ "verbinding te maken met een andere server, klikt u op <gui "
+#~ "style=\"button\">Verbinden met server…</gui>. Hierna kunt u de "
+#~ "serverinformatie invoeren."
+
+#~ msgid ""
+#~ "After you connect to a server, make sure to go back to the "
+#~ "<gui>Preferences</gui> dialog and choose the folder on that server to which "
+#~ "you want to back up. This is not currently automatically selected after you "
+#~ "connect."
+#~ msgstr ""
+#~ "Nadat u verbonden bent met een server, vergeet dan niet om terug te gaan "
+#~ "naar de <gui>Voorkeuren</gui>-dialoog en om de back-uplocatie op de server "
+#~ "te selecteren die u wilt gebruiken. Dit wordt momenteel niet automatisch "
+#~ "geselecteerd na de verbinding."
+
+#~ msgid "S3 Access Key ID"
+#~ msgstr "S3-toegangssleutel-ID"
+
+#~ msgid ""
+#~ "This is your Access Key ID that Amazon gave you when you signed up for S3. "
+#~ "It is like a username for logging into S3. If left empty, you will be "
+#~ "prompted for it as you backup or restore."
+#~ msgstr ""
+#~ "Dit is uw toegangssleutel-ID, die u van Amazon heeft gekregen toen u een S3-"
+#~ "account heeft aangemaakt. Deze fungeert als een soort gebruikersnaam om in "
+#~ "te loggen bij S3. Indien u dit leeg laat, zal u erom gevraagd worden bij het "
+#~ "herstellen of het maken van een back-up."
+
+#~ msgid ""
+#~ "This option only appears if the <gui>Amazon S3</gui> backup location has "
+#~ "been selected."
+#~ msgstr ""
+#~ "Deze optie is alleen beschikbaar wanneer de<gui>Amazon S3</gui> back-"
+#~ "uplocatie geselecteerd is."
+
+#~ msgid "Folder"
+#~ msgstr "Map"
+
+#~ msgid ""
+#~ "If you have multiple backups, you may want to keep them separated in "
+#~ "multiple folders. Use this option to enter a path on the S3 service in which "
+#~ "to put your files."
+#~ msgstr ""
+#~ "Indien u meerdere back-ups heeft, wilt u ze waarschijnlijk gescheiden houden "
+#~ "in aparte mappen. Gebruik deze optie om een pad op de S3-dienst in te voeren "
+#~ "waar u uw bestanden in wilt plaatsen."
+
+#~ msgid "Some locations are excluded by default:"
+#~ msgstr "Sommige locaties worden standaard uitgesloten:"
+
+#~ msgid "Backups are kept forever by default."
+#~ msgstr "Back-ups worden standaard voor altijd bewaard."
+
+#~ msgid ""
+#~ "A <gui>Backup</gui> dialog will appear asking where you want to keep the "
+#~ "backup files (your <gui>Backup location</gui>). Either choose an external "
+#~ "drive from the dropdown, choose <gui>Other…</gui> and navigate to a folder, "
+#~ "or click on <gui style=\"button\">Connect to Server…</gui>. On this same "
+#~ "screen, select whether you would like to encrypt the backup files."
+#~ msgstr ""
+#~ "Er zal een <gui>Back-up maken</gui>-dialoog verschijnen met de vraag waar u "
+#~ "uw back-upbestanden wilt opslaan (uw <gui>Back-uplocatie</gui>). Selecteer "
+#~ "een externe schijf in het keuzemenu of selecteer <gui>Andere…</gui> en "
+#~ "navigeer naar een map of klik op <gui style=\"button\">Verbinden met "
+#~ "server…</gui>. In hetzelfde scherm kunt u ook aangeven of u uw back-up wilt "
+#~ "versleutelen of niet."
+
+#~ msgid ""
+#~ "This backup location uses the S3 storage service from Amazon. For a small "
+#~ "fee per gigabyte, they hold your data for you. This is the recommended "
+#~ "default because it is an easy way to keep your data offsite (meaning out of "
+#~ "your home: in case of disaster or theft, your data will still be safe). You "
+#~ "can sign up <link href=\"http://aws.amazon.com/s3/\">online</link>."
+#~ msgstr ""
+#~ "Deze back-uplocatie gebruikt de S3-opslagdienst van Amazon. Voor een kleine "
+#~ "vergoeding per gigabyte kunt u er uw data opslaan. Dit is de aanbevolen "
+#~ "standaardkeuze, omdat dit een makkelijke manier is om uw data buiten uw huis "
+#~ "op te slaan (buiten uw huis, omdat in geval van een ramp of van een diefstal "
+#~ "uw data toch veilig zal zijn). U kunt zich registreren op <link "
+#~ "href=\"http://aws.amazon.com/s3/\">online</link>."
 
 #~ msgid ""
 #~ "<application>Déjà Dup</application> is a simple backup tool. It hides the "

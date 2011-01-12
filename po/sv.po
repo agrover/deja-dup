@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-01-09 14:16-0500\n"
-"PO-Revision-Date: 2011-01-01 22:58+0000\n"
+"POT-Creation-Date: 2011-01-10 07:34-0600\n"
+"PO-Revision-Date: 2011-01-10 19:14+0000\n"
 "Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-01-10 05:26+0000\n"
+"X-Launchpad-Export-Date: 2011-01-11 05:05+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -293,7 +293,7 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid "Your Rackspace username"
-msgstr ""
+msgstr "Ditt användarnamn på Rackspace"
 
 #: ../data/ui/restore-missing.ui.h:1
 msgid "Folder:"
@@ -304,8 +304,8 @@ msgid "Scanning…"
 msgstr "Söker av…"
 
 #: ../nautilus/NautilusExtension.c:90
-msgid "Restore missing files…"
-msgstr "Återskapa saknade filer..."
+msgid "Restore Missing Files…"
+msgstr ""
 
 #: ../nautilus/NautilusExtension.c:91
 msgid "Restore deleted files from backup"
@@ -343,6 +343,8 @@ msgstr "Säkerhetskopieringen kommer att påbörjas när %s ansluts."
 #: ../common/BackendS3.vala:55 ../common/BackendU1.vala:61
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
+"Säkerhetskopieringen kommer att påbörjas när en nätverksanslutning blir "
+"tillgänglig."
 
 #: ../common/BackendFile.vala:372
 msgid "Backup location not available"
@@ -353,40 +355,45 @@ msgstr ""
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Väntar på att \"%s\" ska anslutas…"
 
-#: ../common/BackendRackspace.vala:61 ../widgets/ConfigLocation.vala:103
-msgid "Rackspace Cloud Files"
+#: ../common/BackendRackspace.vala:54
+msgid "You must specify a Rackspace container in your preferences."
 msgstr ""
+
+#: ../common/BackendRackspace.vala:63 ../widgets/ConfigLocation.vala:103
+msgid "Rackspace Cloud Files"
+msgstr "Rackspace Cloud Files"
 
 #. Translators: %s is a folder.
-#: ../common/BackendRackspace.vala:64
+#: ../common/BackendRackspace.vala:66
 #, c-format
 msgid "%s on Rackspace Cloud Files"
-msgstr ""
+msgstr "%s på Rackspace Cloud Files"
 
-#: ../common/BackendRackspace.vala:111 ../common/BackendS3.vala:168
+#: ../common/BackendRackspace.vala:113 ../common/BackendS3.vala:168
 msgid "Permission denied"
 msgstr "Åtkomst nekas"
 
-#: ../common/BackendRackspace.vala:132
+#: ../common/BackendRackspace.vala:134
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
 "href=\"%s\">online</a>."
 msgstr ""
+"Du kan registrera ett Rackspace Cloud Files-konto <a href=\"%s\">här</a>."
 
-#: ../common/BackendRackspace.vala:133
+#: ../common/BackendRackspace.vala:135
 msgid "_API access key:"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:134
+#: ../common/BackendRackspace.vala:136
 msgid "S_how API access key"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:135
+#: ../common/BackendRackspace.vala:137
 msgid "_Remember API access key"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:137
+#: ../common/BackendRackspace.vala:139
 msgid "Enter Rackspace Cloud Files API key"
 msgstr ""
 
@@ -403,7 +410,7 @@ msgstr "%s på Amazon S3"
 #: ../common/BackendS3.vala:189
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
-msgstr ""
+msgstr "Du kan registrera ett Amazon S3-konto <a href=\"%s\">här</a>."
 
 #: ../common/BackendS3.vala:190
 msgid "_Access key ID:"
@@ -411,11 +418,11 @@ msgstr ""
 
 #: ../common/BackendS3.vala:191
 msgid "_Secret access key:"
-msgstr ""
+msgstr "_Hemlig åtkomstnyckel:"
 
 #: ../common/BackendS3.vala:192
 msgid "S_how secret access key"
-msgstr ""
+msgstr "V_isa hemlig åtkomstnyckel"
 
 #: ../common/BackendS3.vala:193
 msgid "_Remember secret access key"
@@ -433,11 +440,11 @@ msgstr "Ubuntu One"
 #: ../common/BackendU1.vala:80
 #, c-format
 msgid "%s on Ubuntu One"
-msgstr ""
+msgstr "%s på Ubuntu One"
 
 #: ../common/BackendU1.vala:120
 msgid "Sign into Ubuntu One…"
-msgstr ""
+msgstr "Logga in på Ubuntu One…"
 
 #: ../common/BackendU1.vala:122
 msgid "Connect to Ubuntu One"
@@ -526,7 +533,7 @@ msgstr "Misslyckades med ett okänt fel."
 #: ../common/Duplicity.vala:792
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
-msgstr ""
+msgstr "Kunde inte återskapa \"%s\": Filen hittades inte i säkerhetskopian"
 
 #: ../common/Duplicity.vala:797 ../common/Duplicity.vala:876
 msgid "Bad encryption password."
@@ -543,6 +550,9 @@ msgid ""
 "name is %s.  If this is unexpected, you should back up to a different "
 "location."
 msgstr ""
+"Den befintliga säkerhetskopian är av en dator med namnet %s men namnet för "
+"den aktuella datorn är %s.  Om detta inte var väntat så bör du "
+"säkerhetskopiera till en annan plats."
 
 #: ../common/Duplicity.vala:815
 #, c-format
@@ -563,7 +573,7 @@ msgstr "Åtkomst nekades vid försök att ta bort \"%s\"."
 #: ../common/Duplicity.vala:834
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
-msgstr ""
+msgstr "Platsen för säkerhetskopior \"%s\" finns inte."
 
 #: ../common/Duplicity.vala:840 ../common/Duplicity.vala:895
 msgid "No space left."
@@ -707,13 +717,13 @@ msgstr "Säkerhetskopierar:"
 #: ../deja-dup/AssistantBackup.vala:226
 #: ../preferences/PreferencesDialog.vala:159
 msgid "_Automatically back up on a regular schedule"
-msgstr ""
+msgstr "Säkerhetskopiera au_tomatiskt med jämna intervall"
 
 #: ../deja-dup/AssistantBackup.vala:229
 #: ../preferences/PreferencesDialog.vala:166
 #, c-format
 msgid "How _often to back up:"
-msgstr ""
+msgstr "Hur _ofta säkerhetskopiering ska ske:"
 
 #: ../deja-dup/AssistantBackup.vala:256
 msgid "Backup Failed"
@@ -903,7 +913,7 @@ msgstr[1] "Letar efter filer från ungefär %d år sedan..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:442
 msgid "Scanning finished"
-msgstr ""
+msgstr "Avsökningen är färdig"
 
 #: ../deja-dup/Assistant.vala:285
 msgid "Co_ntinue"
@@ -957,6 +967,11 @@ msgid ""
 "the 'right way' (encrypted, off-site, and regular) and uses duplicity as\n"
 "the backend."
 msgstr ""
+"Déjà Dup är ett enkelt verktyg för säkerhetskopiering.  Det tar bort "
+"komplexiteten\n"
+"med säkerhetskopiering på \"det rätta sättet\" (krypterat, på en annan plats "
+"och\n"
+"med jämna intervall) och använder duplicity som bakgrundsprogram."
 
 #: ../deja-dup/main.vala:133
 msgid "Directory does not exists"
@@ -1146,40 +1161,54 @@ msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
 msgstr ""
+"Äldre säkerhetskopior kommer att sparas minst en vecka eller tills "
+"lagringsutrymmet börjar ta slut."
 
 #: ../widgets/ConfigLabelPolicy.vala:74
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
 msgstr ""
+"Äldre säkerhetskopior kommer att sparas minst en månad eller tills "
+"lagringsutrymmet börjar ta slut."
 
 #: ../widgets/ConfigLabelPolicy.vala:77
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
 msgstr ""
+"Äldre säkerhetskopior kommer att sparas minst två månader eller tills "
+"lagringsutrymmet börjar ta slut."
 
 #: ../widgets/ConfigLabelPolicy.vala:80
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
 msgstr ""
+"Äldre säkerhetskopior kommer att sparas minst tre månader eller tills "
+"lagringsutrymmet börjar ta slut."
 
 #: ../widgets/ConfigLabelPolicy.vala:83
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
+"Äldre säkerhetskopior kommer att sparas minst sex månader eller tills "
+"lagringsutrymmet börjar ta slut."
 
 #: ../widgets/ConfigLabelPolicy.vala:86
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 msgstr ""
+"Äldre säkerhetskopior kommer att sparas minst ett år eller tills "
+"lagringsutrymmet börjar ta slut."
 
 #: ../widgets/ConfigLabelPolicy.vala:89
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
+"Äldre säkerhetskopior kommer att sparas tills lagringsutrymmet börjar ta "
+"slut."
 
 #: ../widgets/ConfigLabelPolicy.vala:92
 #, c-format
@@ -1190,7 +1219,11 @@ msgid_plural ""
 "Old backups will be kept at least %d days or until the backup location is "
 "low on space."
 msgstr[0] ""
+"Äldre säkerhetskopior kommer att sparas minst %d dag eller tills "
+"lagringsutrymmet börjar ta slut."
 msgstr[1] ""
+"Äldre säkerhetskopior kommer att sparas minst %d dagar eller tills "
+"lagringsutrymmet börjar ta slut."
 
 #: ../widgets/ConfigList.vala:159
 msgid "Choose folders"
@@ -1992,3 +2025,16 @@ msgstr ""
 
 #~ msgid "Connect to _Server…"
 #~ msgstr "Anslut till _server…"
+
+#~ msgid "Restore missing files…"
+#~ msgstr "Återskapa saknade filer..."
+
+#~ msgid "Sign into Ubuntu One"
+#~ msgstr "Logga in på Ubuntu One"
+
+#~ msgid ""
+#~ "Ubuntu One requires an Ubuntu Single Sign On (SSO) account. This process "
+#~ "will allow you to create a new account, if you do not yet have one."
+#~ msgstr ""
+#~ "Ubuntu One kräver ett Ubuntu Single Sign On-konto (SSO). Denna process låter "
+#~ "dig skapa ett nytt konto, om du inte redan har ett."

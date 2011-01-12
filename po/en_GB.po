@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-01-09 14:16-0500\n"
-"PO-Revision-Date: 2011-01-07 01:21+0000\n"
-"Last-Translator: Andi Chandler <Unknown>\n"
+"POT-Creation-Date: 2011-01-10 07:34-0600\n"
+"PO-Revision-Date: 2011-01-10 20:20+0000\n"
+"Last-Translator: gareth <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-01-10 05:26+0000\n"
+"X-Launchpad-Export-Date: 2011-01-11 05:05+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
@@ -188,6 +188,8 @@ msgid ""
 "The folder name to store files in. If '$HOSTNAME', it will default to a "
 "folder based on the name of the computer."
 msgstr ""
+"The folder name to store files in. If '$HOSTNAME', it will default to a "
+"folder based on the name of the computer."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid "The last time Déjà Dup was run"
@@ -220,10 +222,12 @@ msgid ""
 "The type of backup location. If 'auto', a default will be chosen based on "
 "what is available."
 msgstr ""
+"The type of backup location. If 'auto', a default will be chosen based on "
+"what is available."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "This is your username for the Rackspace Cloud Files service."
-msgstr ""
+msgstr "This is your username for the Rackspace Cloud Files service."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
@@ -308,6 +312,8 @@ msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr ""
+"Which Rackspace Cloud Files container to store files in. This does not need "
+"to exist already. Only legal hostname strings are valid."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
@@ -315,7 +321,7 @@ msgstr "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid "Your Rackspace username"
-msgstr ""
+msgstr "Your Rackspace username"
 
 #: ../data/ui/restore-missing.ui.h:1
 msgid "Folder:"
@@ -326,8 +332,8 @@ msgid "Scanning…"
 msgstr "Scanning…"
 
 #: ../nautilus/NautilusExtension.c:90
-msgid "Restore missing files…"
-msgstr "Restore missing files…"
+msgid "Restore Missing Files…"
+msgstr ""
 
 #: ../nautilus/NautilusExtension.c:91
 msgid "Restore deleted files from backup"
@@ -375,42 +381,48 @@ msgstr "Backup location not available"
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Waiting for ‘%s’ to become connected…"
 
-#: ../common/BackendRackspace.vala:61 ../widgets/ConfigLocation.vala:103
-msgid "Rackspace Cloud Files"
+#: ../common/BackendRackspace.vala:54
+msgid "You must specify a Rackspace container in your preferences."
 msgstr ""
+
+#: ../common/BackendRackspace.vala:63 ../widgets/ConfigLocation.vala:103
+msgid "Rackspace Cloud Files"
+msgstr "Rackspace Cloud Files"
 
 #. Translators: %s is a folder.
-#: ../common/BackendRackspace.vala:64
+#: ../common/BackendRackspace.vala:66
 #, c-format
 msgid "%s on Rackspace Cloud Files"
-msgstr ""
+msgstr "%s on Rackspace Cloud Files"
 
-#: ../common/BackendRackspace.vala:111 ../common/BackendS3.vala:168
+#: ../common/BackendRackspace.vala:113 ../common/BackendS3.vala:168
 msgid "Permission denied"
 msgstr "Permission denied"
 
-#: ../common/BackendRackspace.vala:132
+#: ../common/BackendRackspace.vala:134
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
 "href=\"%s\">online</a>."
 msgstr ""
-
-#: ../common/BackendRackspace.vala:133
-msgid "_API access key:"
-msgstr ""
-
-#: ../common/BackendRackspace.vala:134
-msgid "S_how API access key"
-msgstr ""
+"You can sign up for a Rackspace Cloud Files account <a "
+"href=\"%s\">online</a>."
 
 #: ../common/BackendRackspace.vala:135
-msgid "_Remember API access key"
-msgstr ""
+msgid "_API access key:"
+msgstr "_API access key:"
+
+#: ../common/BackendRackspace.vala:136
+msgid "S_how API access key"
+msgstr "S_how API access key"
 
 #: ../common/BackendRackspace.vala:137
+msgid "_Remember API access key"
+msgstr "_Remember API access key"
+
+#: ../common/BackendRackspace.vala:139
 msgid "Enter Rackspace Cloud Files API key"
-msgstr ""
+msgstr "Enter Rackspace Cloud Files API key"
 
 #: ../common/BackendS3.vala:118 ../widgets/ConfigLocation.vala:101
 msgid "Amazon S3"
@@ -449,13 +461,13 @@ msgstr "Enter Amazon S3 access key"
 
 #: ../common/BackendU1.vala:77 ../widgets/ConfigLocation.vala:108
 msgid "Ubuntu One"
-msgstr ""
+msgstr "Ubuntu One"
 
 #. Translators: %s is a folder.
 #: ../common/BackendU1.vala:80
 #, c-format
 msgid "%s on Ubuntu One"
-msgstr ""
+msgstr "%s on Ubuntu One"
 
 #: ../common/BackendU1.vala:120
 msgid "Sign into Ubuntu One…"
@@ -463,7 +475,7 @@ msgstr ""
 
 #: ../common/BackendU1.vala:122
 msgid "Connect to Ubuntu One"
-msgstr ""
+msgstr "Connect to Ubuntu One"
 
 #: ../common/CommonUtils.vala:218
 msgid "Unknown"
@@ -855,7 +867,7 @@ msgstr "Restoring:"
 #: ../deja-dup/AssistantRestore.vala:364
 #, c-format
 msgid "%x %X"
-msgstr ""
+msgstr "%x %X"
 
 #: ../deja-dup/AssistantRestore.vala:377
 msgid "No backups to restore"
@@ -970,11 +982,11 @@ msgstr "Only one directory can be shown at once"
 
 #: ../deja-dup/main.vala:86
 msgid "FILES"
-msgstr ""
+msgstr "FILES"
 
 #: ../deja-dup/main.vala:87
 msgid "DIRECTORY"
-msgstr ""
+msgstr "DIRECTORY"
 
 #. Translators: Wrap this to 80 characters per line if you can, as I have for English
 #: ../deja-dup/main.vala:91
@@ -1244,19 +1256,19 @@ msgstr "SSH"
 
 #: ../widgets/ConfigLocation.vala:116
 msgid "Windows Share"
-msgstr ""
+msgstr "Windows Share"
 
 #: ../widgets/ConfigLocation.vala:118
 msgid "FTP"
-msgstr ""
+msgstr "FTP"
 
 #: ../widgets/ConfigLocation.vala:120
 msgid "WebDAV"
-msgstr ""
+msgstr "WebDAV"
 
 #: ../widgets/ConfigLocation.vala:123
 msgid "Custom Location"
-msgstr ""
+msgstr "Custom Location"
 
 #. And a local folder option
 #: ../widgets/ConfigLocation.vala:128
@@ -1265,7 +1277,7 @@ msgstr "Local Folder"
 
 #: ../widgets/ConfigLocationCustom.vala:31
 msgid "_URI:"
-msgstr ""
+msgstr "_URI:"
 
 #: ../widgets/ConfigLocationDAV.vala:31 ../widgets/ConfigLocationFTP.vala:32
 #: ../widgets/ConfigLocationSMB.vala:31 ../widgets/ConfigLocationSSH.vala:31
@@ -1274,7 +1286,7 @@ msgstr "_Server:"
 
 #: ../widgets/ConfigLocationDAV.vala:38
 msgid "Use secure connection (_HTTPS)"
-msgstr ""
+msgstr "Use secure connection (_HTTPS)"
 
 #: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
 #: ../widgets/ConfigLocationSSH.vala:35
@@ -1290,19 +1302,19 @@ msgstr "_Folder:"
 
 #: ../widgets/ConfigLocationFTP.vala:46
 msgid "_Log in with a username"
-msgstr ""
+msgstr "_Log in with a username"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Browse…"
-msgstr ""
+msgstr "_Browse…"
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
-msgstr ""
+msgstr "Choose Folder"
 
 #: ../widgets/ConfigLocationRackspace.vala:34
 msgid "_Container:"
-msgstr ""
+msgstr "_Container:"
 
 #: ../widgets/ConfigLocationS3.vala:32
 msgid "S3 Access Key I_D:"
@@ -1363,7 +1375,8 @@ msgstr ""
 "  Kwpolska https://launchpad.net/~kwpolska\n"
 "  Mathieu Divaret https://launchpad.net/~joots\n"
 "  Michael Terry https://launchpad.net/~mterry\n"
-"  Nick Trew https://launchpad.net/~vxnick"
+"  Nick Trew https://launchpad.net/~vxnick\n"
+"  gareth https://launchpad.net/~garethbaxter"
 
 #: ../widgets/WidgetUtils.vala:72
 #, c-format
@@ -2651,3 +2664,6 @@ msgstr ""
 
 #~ msgid "The type of backup location."
 #~ msgstr "The type of backup location."
+
+#~ msgid "Restore missing files…"
+#~ msgstr "Restore missing files…"

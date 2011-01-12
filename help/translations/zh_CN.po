@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-23 20:18-0400\n"
+"POT-Creation-Date: 2011-01-09 21:51-0500\n"
 "PO-Revision-Date: 2010-12-23 08:13+0000\n"
 "Last-Translator: Kyle Nitzsche <kyle.nitzsche@canonical.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:49+0000\n"
+"X-Launchpad-Export-Date: 2011-01-11 05:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: restore-revert.page:6(desc)
@@ -33,12 +33,17 @@ msgstr "右键单击您想恢复的文件。"
 msgid "Choose <gui style=\"menuitem\">Revert to Previous Version…</gui>."
 msgstr "选择<gui style=\"menuitem\">恢复到上一版本...</gui>。"
 
-#: restore-lost.page:16(p)
+#: restore-revert.page:14(p)
 msgid ""
 "When the <gui>Restore</gui> dialog appears, choose the date from which to "
 "restore."
 msgstr "出现<gui>恢复</gui>对话框时，选择恢复的起始日期。"
 
+#: restore-revert.page:15(p)
+#: restore-full.page:23(p)
+#: restore-full.page:25(p)
+#: restore-full.page:27(p)
+#: backup-first.page:14(p)
 #: backup-first.page:16(p)
 msgid "Click <gui style=\"button\">Forward</gui>."
 msgstr "单击<gui style=\"button\">前进</gui>。"
@@ -57,7 +62,8 @@ msgstr "您可以在右键单击前一次选择多个文件。"
 msgid "You can also revert files on the command line:"
 msgstr "您还可以通过命令行来恢复文件："
 
-#: restore-lost.page:21(screen)
+#: restore-revert.page:20(screen)
+#: restore-lost.page:19(screen)
 #, no-wrap
 msgid "deja-dup --restore FILE1 FILE2"
 msgstr "deja-dup --restore 文件 1 文件 2"
@@ -70,43 +76,40 @@ msgstr "恢复不再存在的文件。"
 msgid "Restoring a Lost File"
 msgstr "恢复丢失的文件"
 
-#: restore-lost.page:10(p)
-msgid ""
-"There’s currently no convenient user interface for this. But you can do it "
-"with the command line."
-msgstr "目前尚无用于该功能的方便用户界面。但您可以使用命令行来执行该功能。"
+#: restore-lost.page:11(p)
+msgid "Browse to the folder containing the file you lost."
+msgstr ""
 
 #: restore-lost.page:12(p)
-msgid "Open a terminal."
-msgstr "打开一个终端。"
+msgid "Right click on the background of the folder."
+msgstr ""
 
 #: restore-lost.page:13(p)
-msgid ""
-"Run <app>Déjà Dup</app> on the lost file with the <cmd>--restore</cmd> "
-"argument. For example, to restore the lost file <file>test.txt</file> in "
-"your <file>Documents</file> folder:"
+msgid "Choose <gui style=\"menuitem\">Restore Missing Files…</gui>."
 msgstr ""
-"对丢失的文件运行 <app>Déjà Dup</app>（带 <cmd>--restore</cmd> 参数）。例如，要恢复丢失的文件 "
-"<file>test.txt</file>（位于您的 <file>Documents</file> 文件夹中）："
 
-#: restore-lost.page:14(screen)
-#, no-wrap
-msgid "deja-dup --restore Documents/test.txt"
-msgstr "deja-dup --restore Documents/test.txt"
+#: restore-lost.page:14(p)
+msgid ""
+"When the <gui>Restore</gui> dialog appears, it will scan for files that are "
+"in the backup but no longer in the folder."
+msgstr ""
 
 #: restore-lost.page:15(p)
 msgid ""
-"You must remember what the filename was, since it’s no longer there to "
-"remind you."
-msgstr "您必须记住文件名是什么，因为该处已没有那个文件可给您提醒。"
+"When you see the file you want to restore appear, select it and click <gui "
+"style=\"button\">Forward</gui>."
+msgstr ""
 
+#: restore-lost.page:16(p)
 #: restore-full.page:28(p)
 msgid "Review your selections and click <gui style=\"button\">Restore</gui>."
 msgstr "检查所做选择，并单击<gui style=\"button\">恢复</gui>。"
 
-#: restore-lost.page:20(p)
-msgid "You can restore multiple lost files at once:"
-msgstr "您一次可以恢复多个丢失的文件："
+#: restore-lost.page:18(p)
+msgid ""
+"You can restore lost files from the command line as well, if you remember "
+"what their filenames were:"
+msgstr ""
 
 #: restore-full.page:6(desc)
 msgid "Recover from total system failure."
@@ -141,6 +144,8 @@ msgstr "接下来，您需要安装 <app>Déjà Dup</app>。您的发布供应�
 msgid "Restore"
 msgstr "恢复"
 
+#: restore-full.page:20(p)
+#: backup-first.page:11(p)
 #: backup-auto.page:12(p)
 msgid "Run <app>Déjà Dup</app>."
 msgstr "运行 <app>Déjà Dup</app>。"
@@ -218,105 +223,81 @@ msgid ""
 msgstr "使用此下拉列表框来指定 <app>Déjà Dup</app> 在备份或恢复时使用的备份位置："
 
 #: prefs.page:17(title)
-msgid "Amazon S3"
-msgstr "Amazon S3"
+msgid "Cloud Services"
+msgstr ""
 
 #: prefs.page:18(p)
 msgid ""
-"This backup location uses the S3 storage service from Amazon. For a small "
-"fee per gigabyte, they hold your data for you. This is the recommended "
-"default because it is an easy way to keep your data offsite (meaning out of "
-"your home: in case of disaster or theft, your data will still be safe). You "
-"can sign up <link href=\"http://aws.amazon.com/s3/\">online</link>."
+"The first few backup locations are cloud storage services provided by "
+"various companies. For a small fee per gigabyte, they hold your data for "
+"you. A cloud service like this is recommended because it is an easy way to "
+"keep your data offsite (meaning out of your home: in case of disaster or "
+"theft, your data will still be safe). You can choose from Amazon S3, "
+"Rackspace Cloud Files, and Ubuntu One."
 msgstr ""
-"此备份位置使用 Amazon 提供的 S3 存储服务。您只需为按 G "
-"字节支付少量费用，便可享用他们的数据存储服务。这是推荐的默认值，因为这是一种简易的场外（意指家以外：遭受灾难或偷窃时，您的数据仍将安然无恙）数据存储方式。"
-"您可以<link href=\"http://aws.amazon.com/s3/\">在线</link>注册。"
 
 #: prefs.page:19(p)
-msgid "This is the default setting."
-msgstr "这是默认设置。"
+msgid ""
+"These services costs money. Read their rates carefully before using it."
+msgstr ""
 
-#: prefs.page:20(p)
-msgid "This service costs money. Read their rates carefully before using it."
-msgstr "此服务是收费服务。请在使用前仔细阅读他们的费率。"
-
-#: prefs.page:23(title)
+#: prefs.page:22(title)
 msgid "Removable Media"
 msgstr "可移动媒体"
 
-#: prefs.page:24(p)
+#: prefs.page:23(p)
 msgid ""
 "You may see removable media like external hard drives or thumb drives listed."
 msgstr "您可能会在列表中看到外置硬盘或闪盘之类的可移动媒体。"
 
-#: prefs.page:27(title)
-msgid "Connected Servers"
-msgstr "连接的服务器"
-
-#: prefs.page:28(p)
-msgid ""
-"If you have connected to any servers, they will appear. To connect to a "
-"server not listed, click <gui style=\"button\">Connect to Server…</gui>. "
-"This will let you enter the server information."
+#: prefs.page:26(title)
+msgid "Remote Servers"
 msgstr ""
-"如果您连接到了任何服务器，它们会出现在列表中。要连接到未列出的服务器，请单击<gui "
-"style=\"button\">连接到服务器...</gui>。这样您就可以输入服务器信息。"
 
-#: prefs.page:29(p)
+#: prefs.page:27(p)
 msgid ""
-"After you connect to a server, make sure to go back to the "
-"<gui>Preferences</gui> dialog and choose the folder on that server to which "
-"you want to back up. This is not currently automatically selected after you "
-"connect."
+"Choose the type of remote server to which you want to connect. Then you can "
+"enter the server information. Alternatively, if you know your server's URL, "
+"choose <gui>Custom Location</gui> and enter it."
 msgstr ""
-"当您连接到服务器后，请务必返回<gui>首选项</gui>对话框，并选择该服务器上想要作为备份目的地的文件夹。在您连接服务器后，目前并不能自动选择该文件夹"
-"。"
 
-#: prefs.page:32(title)
-msgid "Local Folders"
-msgstr "本地文件夹"
+#: prefs.page:30(title)
+msgid "Local Folder"
+msgstr ""
 
-#: prefs.page:33(p)
+#: prefs.page:31(p)
 msgid ""
 "You may also want to choose a local folder as a backup location. Note that "
 "backups can be quite large, so make sure you have enough free disk space."
 msgstr "您可能还想选择一个本地文件夹作为备份位置。请注意，备份的体积可能相当大，因此请确保您拥有足够的可用磁盘空间。"
 
-#: prefs.page:38(gui)
-msgid "S3 Access Key ID"
-msgstr "S3 访问密钥 ID"
+#: prefs.page:36(gui)
+msgid "Encrypt backup files"
+msgstr "加密备份文件"
+
+#: prefs.page:37(p)
+msgid ""
+"Encrypting your backup files is recommended to keep your data safe. If you "
+"don’t have exclusive physical control of your backup location, or if it is "
+"stolen, an encrypted backup prevents others from looking at your personal "
+"data."
+msgstr "建议加密您的备份文件以保护数据的安全。如果您对备份位置不享有独占物理控制权，或备份位置被盗，加密的备份便可防止他人查看您的个人数据。"
+
+#: prefs.page:38(p)
+msgid ""
+"If on, you will be prompted for a password. Keep this password safe, you "
+"will need it to restore your data."
+msgstr "启用时，系统会提示您输入密码。请保护好这个密码，您需要使用它来恢复数据。"
 
 #: prefs.page:39(p)
-msgid ""
-"This is your Access Key ID that Amazon gave you when you signed up for S3. "
-"It is like a username for logging into S3. If left empty, you will be "
-"prompted for it as you backup or restore."
-msgstr ""
-"这是在您注册 S3 时 Amazon 提供给您的访问密钥 ID。 它类似于用来登录 S3 的用户名。如果留空，系统会在您备份或恢复时提示您输入。"
+msgid "Encryption is enabled by default."
+msgstr "加密在默认情况下处于启用状态。"
 
-#: prefs.page:45(p)
-msgid ""
-"This option only appears if the <gui>Amazon S3</gui> backup location has "
-"been selected."
-msgstr "仅当已选择 <gui>Amazon S3</gui> 备份位置时，才会出现此选项。"
-
-#: prefs.page:43(gui)
-msgid "Folder"
-msgstr "文件夹"
-
-#: prefs.page:44(p)
-msgid ""
-"If you have multiple backups, you may want to keep them separated in "
-"multiple folders. Use this option to enter a path on the S3 service in which "
-"to put your files."
-msgstr "如果您有多个备份，可能想把它们分别存放在多个文件夹中。使用此选项可输入 S3 服务上文件存放位置的路径。"
-
-#: prefs.page:48(gui)
+#: prefs.page:42(gui)
 msgid "Include files in folders"
 msgstr "包括文件夹中的文件"
 
-#: prefs.page:49(p)
+#: prefs.page:43(p)
 msgid ""
 "Select a list of directories to backup. Press the <gui "
 "style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
@@ -326,11 +307,11 @@ msgstr ""
 "选择一系列要备份的目录。按<gui style=\"button\">添加</gui>或<gui "
 "style=\"button\">删除</gui>按钮来修改列表。如果您只对备份自己的个人数据感兴趣，<gui>主文件夹</gui>便足够了。"
 
-#: prefs.page:52(gui)
+#: prefs.page:46(gui)
 msgid "Except files in folders"
 msgstr "不包括文件夹中的文件"
 
-#: prefs.page:53(p)
+#: prefs.page:47(p)
 msgid ""
 "Select a list of directories to not backup. Press the <gui "
 "style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
@@ -339,83 +320,61 @@ msgstr ""
 "选择一系列不备份的目录。按<gui style=\"button\">添加</gui>或<gui "
 "style=\"button\">删除</gui>按钮来修改列表。"
 
-#: prefs.page:54(p)
+#: prefs.page:48(p)
 msgid ""
 "Some of your data may be large and not very important to you. In that case, "
 "you can save yourself some time and space by not backing them up."
 msgstr "您的一些数据可能体积庞大，并且对您而言不是非常重要。如果是这样，不备份它们可以为自己节省一些时间和空间。"
 
-#: prefs.page:56(p)
-msgid "Some locations are excluded by default:"
-msgstr "在默认情况下，一些位置会被排除在外："
+#: prefs.page:50(p)
+msgid "Some locations are always excluded by default:"
+msgstr ""
 
-#: prefs.page:58(span)
+#: prefs.page:52(span)
 msgid "~/.cache"
 msgstr "~/.cache"
 
-#: prefs.page:59(span)
+#: prefs.page:53(span)
 msgid "~/.thumbnails"
 msgstr "~/.thumbnails"
 
-#: prefs.page:60(span)
+#: prefs.page:54(span)
 msgid "~/.gvfs"
 msgstr "~/.gvfs"
 
-#: prefs.page:61(span)
+#: prefs.page:55(span)
 msgid "~/.xsession-errors"
 msgstr "~/.xsession-errors"
 
-#: prefs.page:62(span)
+#: prefs.page:56(span)
 msgid "~/.recently-used.xbel"
 msgstr "~/.recently-used.xbel"
 
-#: prefs.page:63(span)
+#: prefs.page:57(span)
 msgid "~/.recent-applications.xbel"
 msgstr "~/.recent-applications.xbel"
 
-#: prefs.page:64(span)
+#: prefs.page:58(span)
 msgid "~/.Private"
 msgstr "~/.Private"
 
-#: prefs.page:65(span)
+#: prefs.page:59(span)
 msgid "/proc"
 msgstr "/proc"
 
-#: prefs.page:66(span)
+#: prefs.page:60(span)
 msgid "/tmp"
 msgstr "/tmp"
 
-#: prefs.page:67(span)
+#: prefs.page:61(span)
 msgid "/sys"
 msgstr "/sys"
 
-#: prefs.page:72(gui)
-msgid "Encrypt backup files"
-msgstr "加密备份文件"
-
-#: prefs.page:73(p)
-msgid ""
-"Encrypting your backup files is recommended to keep your data safe. If you "
-"don’t have exclusive physical control of your backup location, or if it is "
-"stolen, an encrypted backup prevents others from looking at your personal "
-"data."
-msgstr "建议加密您的备份文件以保护数据的安全。如果您对备份位置不享有独占物理控制权，或备份位置被盗，加密的备份便可防止他人查看您的个人数据。"
-
-#: prefs.page:74(p)
-msgid ""
-"If on, you will be prompted for a password. Keep this password safe, you "
-"will need it to restore your data."
-msgstr "启用时，系统会提示您输入密码。请保护好这个密码，您需要使用它来恢复数据。"
-
-#: prefs.page:75(p)
-msgid "Encryption is enabled by default."
-msgstr "加密在默认情况下处于启用状态。"
-
-#: prefs.page:78(gui)
+#: prefs.page:66(gui)
 msgid "Automatically backup on a regular schedule"
 msgstr "按照定期时间表自动备份"
 
-#: prefs.page:79(p)
+#: prefs.page:67(p)
 msgid ""
 "Turn this option on to have <app>Déjà Dup</app> automatically backup for "
 "you. This is recommended so that you don’t forget to do it yourself. Backups "
@@ -425,27 +384,27 @@ msgstr ""
 "启用此选项可让 <app>Déjà Dup</app> "
 "自动为您执行备份操作。建议启用此选项，这样您就不会忘记自行执行备份了。您备份的日期越近，备份的用处就越大，因此定期进行备份很重要。"
 
-#: prefs.page:80(p)
+#: prefs.page:68(p)
 msgid "Automatic backups are disabled by default."
 msgstr "默认情况下自动备份处于禁用状态。"
 
-#: prefs.page:83(gui)
+#: prefs.page:71(gui)
 msgid "How often to backup"
 msgstr "备份频率"
 
-#: prefs.page:84(p)
+#: prefs.page:72(p)
 msgid "Choose a schedule for automatic backups."
 msgstr "为自动备份选择时间表。"
 
-#: prefs.page:85(p)
+#: prefs.page:73(p)
 msgid "Automatic backups are scheduled weekly by default."
 msgstr "自动备份默认情况下以周为单位进行计划。"
 
-#: prefs.page:88(gui)
+#: prefs.page:76(gui)
 msgid "Keep backups"
 msgstr "保留备份"
 
-#: prefs.page:89(p)
+#: prefs.page:77(p)
 msgid ""
 "Choose the minimum amount of time to keep backup files. If you find that the "
 "backup files are taking up too much space, you may want to decrease this "
@@ -455,9 +414,11 @@ msgstr ""
 "选择备份文件的最短保留时间。如果您发现备份文件占用的空间过多，可能想缩短这段时间。由于实现细节上的缘故，文件的保留期可能比选择的时间略长。但不会有任何文件"
 "被提前删除。"
 
-#: prefs.page:90(p)
-msgid "Backups are kept forever by default."
-msgstr "默认情况下备份将永久保留。"
+#: prefs.page:78(p)
+msgid ""
+"Backups are kept forever by default, but still may be deleted earlier if the "
+"backup location begins to run out of space."
+msgstr ""
 
 #: index.page:8(span)
 msgid "Michael Terry"
@@ -502,14 +463,10 @@ msgstr "单击<gui style=\"button\">恢复...</gui>大按钮。"
 #: backup-first.page:13(p)
 msgid ""
 "A <gui>Backup</gui> dialog will appear asking where you want to keep the "
-"backup files (your <gui>Backup location</gui>). Either choose an external "
-"drive from the dropdown, choose <gui>Other…</gui> and navigate to a folder, "
-"or click on <gui style=\"button\">Connect to Server…</gui>. On this same "
+"backup files (your <gui>Backup location</gui>). If you have an external hard "
+"drive you want to use, make sure it is plugged in first. On this same "
 "screen, select whether you would like to encrypt the backup files."
 msgstr ""
-"随即出现一个<gui>备份</gui>对话框，询问您想将备份文件存放在何处（您的<gui>备份位置</gui>）。从下拉列表中选择一个外置驱动器，选择<g"
-"ui>其它...</gui>并导航到某个文件夹，或单击<gui "
-"style=\"button\">连接到服务器...</gui>。在这同一屏幕上，选择您是否想加密备份文件。"
 
 #: backup-first.page:15(p)
 msgid ""
@@ -585,3 +542,115 @@ msgstr ""
 "\n"
 "Launchpad Contributions:\n"
 "  Kyle Nitzsche https://launchpad.net/~knitzsche"
+
+#~ msgid ""
+#~ "There’s currently no convenient user interface for this. But you can do it "
+#~ "with the command line."
+#~ msgstr "目前尚无用于该功能的方便用户界面。但您可以使用命令行来执行该功能。"
+
+#~ msgid "Open a terminal."
+#~ msgstr "打开一个终端。"
+
+#~ msgid ""
+#~ "Run <app>Déjà Dup</app> on the lost file with the <cmd>--restore</cmd> "
+#~ "argument. For example, to restore the lost file <file>test.txt</file> in "
+#~ "your <file>Documents</file> folder:"
+#~ msgstr ""
+#~ "对丢失的文件运行 <app>Déjà Dup</app>（带 <cmd>--restore</cmd> 参数）。例如，要恢复丢失的文件 "
+#~ "<file>test.txt</file>（位于您的 <file>Documents</file> 文件夹中）："
+
+#, no-wrap
+#~ msgid "deja-dup --restore Documents/test.txt"
+#~ msgstr "deja-dup --restore Documents/test.txt"
+
+#~ msgid ""
+#~ "You must remember what the filename was, since it’s no longer there to "
+#~ "remind you."
+#~ msgstr "您必须记住文件名是什么，因为该处已没有那个文件可给您提醒。"
+
+#~ msgid "You can restore multiple lost files at once:"
+#~ msgstr "您一次可以恢复多个丢失的文件："
+
+#~ msgid "Amazon S3"
+#~ msgstr "Amazon S3"
+
+#~ msgid ""
+#~ "This backup location uses the S3 storage service from Amazon. For a small "
+#~ "fee per gigabyte, they hold your data for you. This is the recommended "
+#~ "default because it is an easy way to keep your data offsite (meaning out of "
+#~ "your home: in case of disaster or theft, your data will still be safe). You "
+#~ "can sign up <link href=\"http://aws.amazon.com/s3/\">online</link>."
+#~ msgstr ""
+#~ "此备份位置使用 Amazon 提供的 S3 存储服务。您只需为按 G "
+#~ "字节支付少量费用，便可享用他们的数据存储服务。这是推荐的默认值，因为这是一种简易的场外（意指家以外：遭受灾难或偷窃时，您的数据仍将安然无恙）数据存储方式。"
+#~ "您可以<link href=\"http://aws.amazon.com/s3/\">在线</link>注册。"
+
+#~ msgid "This is the default setting."
+#~ msgstr "这是默认设置。"
+
+#~ msgid "This service costs money. Read their rates carefully before using it."
+#~ msgstr "此服务是收费服务。请在使用前仔细阅读他们的费率。"
+
+#~ msgid "Connected Servers"
+#~ msgstr "连接的服务器"
+
+#~ msgid ""
+#~ "If you have connected to any servers, they will appear. To connect to a "
+#~ "server not listed, click <gui style=\"button\">Connect to Server…</gui>. "
+#~ "This will let you enter the server information."
+#~ msgstr ""
+#~ "如果您连接到了任何服务器，它们会出现在列表中。要连接到未列出的服务器，请单击<gui "
+#~ "style=\"button\">连接到服务器...</gui>。这样您就可以输入服务器信息。"
+
+#~ msgid ""
+#~ "After you connect to a server, make sure to go back to the "
+#~ "<gui>Preferences</gui> dialog and choose the folder on that server to which "
+#~ "you want to back up. This is not currently automatically selected after you "
+#~ "connect."
+#~ msgstr ""
+#~ "当您连接到服务器后，请务必返回<gui>首选项</gui>对话框，并选择该服务器上想要作为备份目的地的文件夹。在您连接服务器后，目前并不能自动选择该文件夹"
+#~ "。"
+
+#~ msgid "Local Folders"
+#~ msgstr "本地文件夹"
+
+#~ msgid "S3 Access Key ID"
+#~ msgstr "S3 访问密钥 ID"
+
+#~ msgid ""
+#~ "This is your Access Key ID that Amazon gave you when you signed up for S3. "
+#~ "It is like a username for logging into S3. If left empty, you will be "
+#~ "prompted for it as you backup or restore."
+#~ msgstr ""
+#~ "这是在您注册 S3 时 Amazon 提供给您的访问密钥 ID。 它类似于用来登录 S3 的用户名。如果留空，系统会在您备份或恢复时提示您输入。"
+
+#~ msgid ""
+#~ "This option only appears if the <gui>Amazon S3</gui> backup location has "
+#~ "been selected."
+#~ msgstr "仅当已选择 <gui>Amazon S3</gui> 备份位置时，才会出现此选项。"
+
+#~ msgid "Folder"
+#~ msgstr "文件夹"
+
+#~ msgid ""
+#~ "If you have multiple backups, you may want to keep them separated in "
+#~ "multiple folders. Use this option to enter a path on the S3 service in which "
+#~ "to put your files."
+#~ msgstr "如果您有多个备份，可能想把它们分别存放在多个文件夹中。使用此选项可输入 S3 服务上文件存放位置的路径。"
+
+#~ msgid "Some locations are excluded by default:"
+#~ msgstr "在默认情况下，一些位置会被排除在外："
+
+#~ msgid "Backups are kept forever by default."
+#~ msgstr "默认情况下备份将永久保留。"
+
+#~ msgid ""
+#~ "A <gui>Backup</gui> dialog will appear asking where you want to keep the "
+#~ "backup files (your <gui>Backup location</gui>). Either choose an external "
+#~ "drive from the dropdown, choose <gui>Other…</gui> and navigate to a folder, "
+#~ "or click on <gui style=\"button\">Connect to Server…</gui>. On this same "
+#~ "screen, select whether you would like to encrypt the backup files."
+#~ msgstr ""
+#~ "随即出现一个<gui>备份</gui>对话框，询问您想将备份文件存放在何处（您的<gui>备份位置</gui>）。从下拉列表中选择一个外置驱动器，选择<g"
+#~ "ui>其它...</gui>并导航到某个文件夹，或单击<gui "
+#~ "style=\"button\">连接到服务器...</gui>。在这同一屏幕上，选择您是否想加密备份文件。"
