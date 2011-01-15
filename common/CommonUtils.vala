@@ -168,7 +168,8 @@ void convert_s3_folder_to_hostname()
   // and if not (or not using S3), then we update the field.
   var settings = get_settings();
   var s3_settings = get_settings(S3_ROOT);
-  if (s3_settings.get_string(S3_FOLDER_KEY) == "/" &&
+  if ((s3_settings.get_string(S3_FOLDER_KEY) == "" ||
+       s3_settings.get_string(S3_FOLDER_KEY) == "/") &&
       (Backend.get_default_type() != "s3" ||
        settings.get_string(LAST_RUN_KEY) == "")) {
     s3_settings.set_string(S3_FOLDER_KEY, "$HOSTNAME");

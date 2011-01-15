@@ -18,35 +18,35 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys
+import ldtp
 sys.path.insert(0, sys.path[0]+'/..')
 import base
 
 # First we test how things work with defaults, never used
 def defaults():
-	base.setup(start = False)
-	base.start_deja_dup()
-	assert base.get_settings_value('folder', schema="S3") == "'/$HOSTNAME'", base.get_settings_value('folder', schema="S3")
+	base.setup()
+	assert base.get_settings_value('folder', schema="S3") == "'$HOSTNAME'", base.get_settings_value('folder', schema="S3")
 
 # Now test when there has been a run
 def has_run():
 	base.setup(start = False)
 	base.set_settings_value('last-run', "'foo'")
 	base.start_deja_dup()
-	assert base.get_settings_value('folder', schema="S3") == "'/'", base.get_settings_value('folder', schema="S3")
+	assert base.get_settings_value('folder', schema="S3") == "''", base.get_settings_value('folder', schema="S3")
 
 # Now test when backend isn't s3
 def is_not_s3():
 	base.setup(start = False)
 	base.set_settings_value('backend', "'rackspace'")
 	base.start_deja_dup()
-	assert base.get_settings_value('folder', schema="S3") == "'/$HOSTNAME'", base.get_settings_value('folder', schema="S3")
+	assert base.get_settings_value('folder', schema="S3") == "'$HOSTNAME'", base.get_settings_value('folder', schema="S3")
 
 # Now test when folder isn't '/'
 def custom_folder():
 	base.setup(start = False)
-	base.set_settings_value('folder', "'/foo'", schema="S3")
+	base.set_settings_value('folder', "'foo'", schema="S3")
 	base.start_deja_dup()
-	assert base.get_settings_value('folder', schema="S3") == "'/foo'", base.get_settings_value('folder', schema="S3")
+	assert base.get_settings_value('folder', schema="S3") == "'foo'", base.get_settings_value('folder', schema="S3")
 
 base.run(defaults)
 base.run(has_run)
