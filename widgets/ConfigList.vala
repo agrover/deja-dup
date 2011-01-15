@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -179,7 +179,7 @@ public class ConfigList : ConfigWidget
       bool found = false;
       foreach (string s in slist) {
         var sfile = DejaDup.parse_dir(s);
-        if (sfile.equal(folder)) {
+        if (sfile != null && sfile.equal(folder)) {
           found = true;
           break;
         }
@@ -205,20 +205,27 @@ public class ConfigList : ConfigWidget
     string*[] before = slist_val.get_strv();
     string[] after = new string[0];
     
-    foreach (Gtk.TreePath path in paths) {
-      Gtk.TreeIter iter;
-      if (!model.get_iter(out iter, path))
+    foreach (string file in before) {
+      var sfile = DejaDup.parse_dir(file);
+      if (sfile == null)
         continue;
-      
-      string current;
-      model.get(iter, 0, out current);
-      var current_file = File.new_for_path(current);
-      
-      foreach (string file in before) {
-        var sfile = DejaDup.parse_dir(file);
-        if (!sfile.equal(current_file))
-          after += file;
+
+      bool to_remove = false;
+      foreach (Gtk.TreePath path in paths) {
+        Gtk.TreeIter iter;
+        if (!model.get_iter(out iter, path))
+          continue;
+        
+        string current;
+        model.get(iter, 0, out current);
+        var current_file = File.new_for_path(current);
+        
+        if (sfile.equal(current_file))
+          to_remove = true;
       }
+
+      if (!to_remove)
+        after += file;
     }
     
     settings.set_value(key, new Variant.strv((string*[])after));
