@@ -2,7 +2,7 @@
 # -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
 #
 # This file is part of Déjà Dup.
-# © 2010 Michael Terry <mike@mterry.name>
+# © 2010,2011 Michael Terry <mike@mterry.name>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,8 +29,8 @@ def test():
   restoredir = os.path.join(base.get_temp_name('restore'), 'spa ces')
   backupdir = os.path.join(base.get_temp_name('backup'), 'spa ces')
   os.makedirs(backupdir)
-  base.setup('file', dest=backupdir, sources=['data/spa [ ces'], excludes=['data/spa [ ces/bad one'])
-  base.backup_simple()
+  base.setup()
+  base.backup_simple(backend='file', dest=backupdir, includes=['data/spa [ ces'], excludes=['data/spa [ ces/bad one'])
   base.start_deja_dup()
   base.restore_simple(restoredir)
   root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], 'data/spa [ ces')

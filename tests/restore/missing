@@ -2,7 +2,7 @@
 # -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
 #
 # This file is part of Déjà Dup.
-# © 2010 Michael Terry <mike@mterry.name>
+# © 2010,2011 Michael Terry <mike@mterry.name>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,8 +26,8 @@ import ldtp
 def test():
   sourcedir = base.get_temp_name('source', True)
   os.system('cp -r data/simple/* %s' % sourcedir)
-  base.setup('file', sources=[sourcedir])
-  base.backup_simple()
+  base.setup()
+  base.backup_simple(backend='file', includes=[sourcedir])
   os.system('echo bar > %s/foo' % sourcedir)
   os.system('rm %s/one %s/two' % (sourcedir, sourcedir))
   base.start_deja_dup()

@@ -2,7 +2,7 @@
 # -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008,2009 Michael Terry <mike@mterry.name>
+# © 2008,2009,2011 Michael Terry <mike@mterry.name>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,19 +28,18 @@ max_allowed = 24 * 7
 scale = 12
 
 def max_inc():
-  base.setup('file', encrypt=False, sources=['data/simple'])
-  base.backup_simple()
+  base.setup()
+  base.backup_simple(backend='file', encrypt=False, includes=['data/simple'])
   # Change date to maximum allowed incremental, confirm next is incremental
   base.last_date_change('%d days ago' % (max_allowed))
   base.start_deja_dup()
   base.backup_simple()
   rv = base.last_type() == 'inc'
-  print 'done!', rv
   return rv
 
 def max_full():
-  base.setup('file', encrypt=False, sources=['data/simple'])
-  base.backup_simple()
+  base.setup()
+  base.backup_simple(backend='file', encrypt=False, includes=['data/simple'])
   # Change date to maximum allowed incremental+1, confirm next is full
   base.last_date_change('%d days ago' % (max_allowed+1))
   base.start_deja_dup()
@@ -49,9 +48,9 @@ def max_full():
   return rv
 
 def half_inc():
-  base.setup('file', encrypt=False, sources=['data/simple'])
+  base.setup()
   base.set_settings_value("delete-after", '20')
-  base.backup_simple()
+  base.backup_simple(backend='file', encrypt=False, includes=['data/simple'])
   # Change date to maximum allowed incremental, confirm next is inc
   base.last_date_change('%d days ago' % (10))
   base.start_deja_dup()
@@ -60,9 +59,9 @@ def half_inc():
   return rv
 
 def half_full():
-  base.setup('file', encrypt=False, sources=['data/simple'])
+  base.setup()
   base.set_settings_value("delete-after", '20')
-  base.backup_simple()
+  base.backup_simple(backend='file', encrypt=False, includes=['data/simple'])
   # Change date to maximum allowed incremental+1, confirm next is full
   base.last_date_change('%d days ago' % (11))
   base.start_deja_dup()
@@ -71,10 +70,10 @@ def half_full():
   return rv
 
 def period_inc():
-  base.setup('file', encrypt=False, sources=['data/simple'])
+  base.setup()
   base.set_settings_value("periodic", 'true')
   base.set_settings_value("periodic-period", '7')
-  base.backup_simple()
+  base.backup_simple(backend='file', encrypt=False, includes=['data/simple'])
   # Change date to maximum allowed incremental, confirm next is inc
   base.last_date_change('%d days ago' % (7*scale))
   base.start_deja_dup()
@@ -83,10 +82,10 @@ def period_inc():
   return rv
 
 def period_full():
-  base.setup('file', encrypt=False, sources=['data/simple'])
+  base.setup()
   base.set_settings_value("periodic", 'true')
   base.set_settings_value("periodic-period", '7')
-  base.backup_simple()
+  base.backup_simple(backend='file', encrypt=False, includes=['data/simple'])
   # Change date to maximum allowed incremental+1, confirm next is full
   base.last_date_change('%d days ago' % ((7*scale)+1))
   base.start_deja_dup()

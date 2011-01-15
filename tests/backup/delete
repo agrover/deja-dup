@@ -2,7 +2,7 @@
 # -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
 #
 # This file is part of Déjà Dup.
-# © 2009 Michael Terry <mike@mterry.name>
+# © 2009,2011 Michael Terry <mike@mterry.name>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,9 +25,9 @@ import base
 import ldtp
 
 def delete():
-  base.setup('file', sources=['data/simple'])
+  base.setup()
   base.set_settings_value('delete-after', '30')
-  base.backup_simple()
+  base.backup_simple(backend='file', includes=['data/simple'])
   base.last_date_change('%d days ago' % 100)
   base.start_deja_dup()
   base.backup_simple()
@@ -52,8 +52,8 @@ def delete():
 
 # Make sure that we don't delete backups when we aren't supposed to!
 def forever():
-  base.setup('file', sources=['data/simple'])
-  base.backup_simple()
+  base.setup()
+  base.backup_simple(backend='file', includes=['data/simple'])
   base.last_date_change('%d days ago' % 1000)
   base.start_deja_dup()
   base.backup_simple()

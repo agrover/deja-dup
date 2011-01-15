@@ -2,7 +2,7 @@
 # -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008,2009 Michael Terry <mike@mterry.name>
+# © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -66,7 +66,7 @@ def get_temp_name(extra, make=False):
 # if we're running inside a distcheck for example.  So note that we check for
 # srcdir and use it if available.  Else, default to current directory.
 
-def setup(backend = None, encrypt = None, start = True, dest = None, sources = [], excludes = [], args=[''], root_prompt = False):
+def setup(start = True, args=[''], root_prompt = False):
   global cleanup_dirs, cleanup_pids, ldtp, latest_duplicity
 
   if 'srcdir' in environ:
@@ -141,17 +141,6 @@ def setup(backend = None, encrypt = None, start = True, dest = None, sources = [
   os.system("mkdir -p %s/deja-dup/ui" % environ['XDG_DATA_HOME'])
   os.system("cp ../data/ui/* %s/deja-dup/ui" % environ['XDG_DATA_HOME'])
 
-  if backend == 'file':
-    create_local_config(dest)
-  elif backend == 'ssh':
-    create_ssh_config(dest)
-  elif backend == 'vol':
-    create_vol_config(dest)
-  set_includes_excludes(includes=sources, excludes=excludes)
-  
-  if encrypt is not None:
-    set_settings_value("encrypt", 'true' if encrypt else 'false')
-
   set_settings_value("root-prompt", 'true' if root_prompt else 'false')
 
   #daemon_env = subprocess.Popen(['gnome-keyring-daemon'], stdout=subprocess.PIPE).communicate()[0].strip()
@@ -206,19 +195,15 @@ def get_settings_value(key, schema = None):
   pout = sp.communicate()[0]
   return pout.strip()
 
-def start_deja_dup(args=[''], waitfor='frmDéjàDup'):
-  debug = False
+def start_deja_dup(args=[''], waitfor='frmDéjàDup', debug = False):
+  # Rather than running debug, it's sometimes more effective to run
+  # "./interactive shell" and then run gdb directly
   if debug:
-    (fd, path) = tempfile.mkstemp()
-    os.write(fd, 'run\n')
-    os.close(fd)
-    subprocess.Popen(['gdb', '-nx', '-x', path, '--args', 'deja-dup'] + args)
+    subprocess.Popen(['gnome-terminal', '-x', 'gdb', '-ex', 'run', 'deja-dup'] + args)
   else:
     subprocess.Popen(['deja-dup'] + args)
   if waitfor is not None:
     ldtp.waittillguiexist(waitfor)
-  #if debug:
-  #  os.remove(path)
 
 def start_deja_dup_prefs():
   subprocess.Popen(['deja-dup-preferences'])
@@ -226,15 +211,6 @@ def start_deja_dup_prefs():
 
 def start_deja_dup_applet():
   subprocess.Popen(['deja-dup', '--backup'])
-
-def create_local_config(dest='/'):
-  if dest is None:
-    dest = get_temp_name('local')
-    os.system('mkdir -p %s' % dest)
-  elif dest[0] != '/' and dest.find(':') == -1:
-    dest = os.getcwd()+'/'+dest
-  set_settings_value("backend", "'file'")
-  set_settings_value("path", "'%s'" % dest, schema="File")
 
 def create_vol_config(dest='/'):
   if dest is None:
@@ -247,23 +223,6 @@ def create_vol_config(dest='/'):
   set_settings_value("uuid", "'%s'" % uuid, schema="File")
   set_settings_value("relpath", "'%s'" % path, schema="File")
   set_settings_value("icon", "'drive-removable-media-usb'", schema="File")
-
-def create_ssh_config(dest='/'):
-  if dest is None:
-    dest = get_temp_name('local')
-    os.system('mkdir -p %s' % dest)
-  set_settings_value("backend", "'file'")
-  set_settings_value("path", "'ssh://localhost'" + dest, schema="File")
-
-def set_includes_excludes(includes=None, excludes=None):
-  includes = includes and [os.getcwd()+'/'+x if x[0] != '/' else x for x in includes]
-  excludes = excludes and [os.getcwd()+'/'+x if x[0] != '/' else x for x in excludes]
-  if includes:
-    includes = '[' + ','.join(["'%s'" % x for x in includes]) + ']'
-    set_settings_value("include-list", includes)
-  if excludes:
-    excludes = '[' + ','.join(["'%s'" % x for x in excludes]) + ']'
-    set_settings_value("exclude-list", excludes)
 
 def create_mount(path=None, mtype='ext', size=20):
   global cleanup_mounts
@@ -392,7 +351,7 @@ def wait_for_encryption(dlg, obj, max_count, prefix=False):
     if ldtp.guiexist(dlg, 'txtEncryptionpassword'):
       ldtp.settextvalue(dlg, 'txtEncryptionpassword', 'test')
       ldtp.click(dlg, 'btnContinue')
-    ldtp.wait(1)
+    ldtp.wait(2)
     remap(dlg)
     count += 1
   assert guivisible(dlg, obj, prefix)
@@ -401,14 +360,66 @@ def remap(frm):
   ldtp.wait(1) # sometimes (only for newer versions?) ldtp needs a second to catch its breath
   ldtp.remap(frm) # in case this is second time we've run it
 
-def backup_simple(finish=True, error=None, timeout=400):
+def set_file_list(dlg, obj, addObj, removeObj, files):
+  # Clear existing items
+  while (True):
+    try:
+      ldtp.selectrowindex(dlg, obj, 0)
+      ldtp.click(dlg, removeObj)
+    except:
+      break
+
+  # Add new items
+  for f in files:
+    ldtp.click(dlg, addObj)
+    assert ldtp.waittillguiexist('dlgChoosefolders')
+    # Make sure path ends in '/'
+    if f[-1] != '/':
+      f += '/'
+    ldtp.settextvalue('dlgChoosefolders', 'txtLocation', f)
+    ldtp.click('dlgChoosefolders', 'btnOpen')
+    ldtp.wait(1) # let dialog close
+
+def walk_restore_prefs(dlg, backend = None, encrypt = None, dest = None):
+  if backend == 'file':
+    if dest is None:
+      dest = get_temp_name('local')
+      os.system('mkdir -p %s' % dest)
+    elif dest[0] != '/' and dest.find(':') == -1:
+      dest = os.getcwd()+'/'+dest
+
+    ldtp.comboselect(dlg, 'cboAmazonS3', 'Local Folder')
+    remap(dlg)
+    ldtp.settextvalue(dlg, 'txt0', dest) # FIXME txt0 is bad name
+
+  if encrypt is not None:
+    chklabel = 'chkEncryptbackupfiles'
+    if not ldtp.guiexist(dlg, chklabel):
+      chklabel = 'chkBackupfilesareencrypted'
+    if encrypt:
+      ldtp.check(dlg, chklabel)
+    else:
+      ldtp.uncheck(dlg, chklabel)
+
+  ldtp.click(dlg, 'btnForward')
+  remap(dlg)
+
+def walk_backup_prefs(dlg, backend = None, encrypt = None, dest = None, includes = [], excludes = []):
+  walk_restore_prefs(dlg, backend, encrypt, dest)
+  ldtp.wait(1) # give ldtp a second
+
+  # FIXME: bad names
+  set_file_list(dlg, 'tbl1', 'btnAdd1', 'btnRemove1', includes)
+  set_file_list(dlg, 'tbl0', 'btnAdd', 'btnRemove', excludes)
+  ldtp.click(dlg, 'btnForward')
+  remap(dlg)
+
+def backup_simple(finish=True, error=None, timeout=400, backend = None, encrypt = None, dest = None, includes = [], excludes = []):
   ldtp.click('frmDéjàDup', 'btnBackUp…')
   assert ldtp.waittillguiexist('dlgBackUp')
   remap('dlgBackUp')
   if guivisible('dlgBackUp', 'lblPreferences'):
-    ldtp.click('dlgBackUp', 'btnForward')
-    ldtp.wait(1) # give ldtp a second
-    ldtp.click('dlgBackUp', 'btnForward')
+    walk_backup_prefs('dlgBackUp', backend=backend, encrypt=encrypt, dest=dest, includes=includes, excludes=excludes)
   ldtp.click('dlgBackUp', 'btnBackUp')
   remap('dlgBackUp')
   if finish:
@@ -420,12 +431,12 @@ def backup_simple(finish=True, error=None, timeout=400):
     ldtp.click('dlgBackUp', 'btnClose')
     ldtp.waittillguinotexist('dlgBackUp')
 
-def restore_simple(path, date=None):
+def restore_simple(path, date=None, backend = None, encrypt = None, dest = None):
   ldtp.click('frmDéjàDup', 'btnRestore…')
   assert ldtp.waittillguiexist('dlgRestore')
   remap('dlgRestore')
   if ldtp.guiexist('dlgRestore', 'lblPreferences'):
-    ldtp.click('dlgRestore', 'btnForward')
+    walk_restore_prefs('dlgRestore', backend=backend, encrypt=encrypt, dest=dest)
   wait_for_encryption('dlgRestore', 'lblRestorefromWhen?', 200)
   if date:
     ldtp.comboselect('dlgRestore', 'cboDate', date)
@@ -447,12 +458,12 @@ def restore_simple(path, date=None):
   ldtp.click('dlgRestore', 'btnClose')
   ldtp.waittillguinotexist('dlgRestore')
 
-def restore_specific(files, path, date=None):
+def restore_specific(files, path, date=None, backend = None, encrypt = None, dest = None):
   args = ['--restore'] + files
   start_deja_dup(args=args, waitfor='dlgRestore')
   remap('dlgRestore')
   if ldtp.guiexist('dlgRestore', 'lblPreferences'):
-    ldtp.click('dlgRestore', 'btnForward')
+    walk_restore_prefs('dlgRestore', backend=backend, encrypt=encrypt, dest=dest)
   wait_for_encryption('dlgRestore', 'lblRestorefromWhen?', 200)
   if date:
     ldtp.comboselect('dlgRestore', 'cboDate', date)
