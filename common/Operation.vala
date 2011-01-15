@@ -300,7 +300,7 @@ public abstract class Operation : Object
       }
     }
     catch (Error e) {
-      warning("%s\n", e.message);
+      // Ignore.  We may not be allowed to inhibit or it may not be running
     }
   }
 }
