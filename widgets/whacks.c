@@ -53,9 +53,9 @@ GtkComboBox *
 hacks_combo_box_text_new()
 {
 #if GTK_CHECK_VERSION(2, 91, 0)
-  return (GtkComboBox*)gtk_combo_box_text_new();
+  return (GtkComboBox*)g_object_ref_sink(gtk_combo_box_text_new());
 #else
-  return (GtkComboBox*)gtk_combo_box_new_text();
+  return (GtkComboBox*)g_object_ref_sink(gtk_combo_box_new_text());
 #endif
 }
 

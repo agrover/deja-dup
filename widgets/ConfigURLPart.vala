@@ -183,6 +183,8 @@ public class ConfigURLPart : ConfigEntry
 
     if (uri.userinfo == "")
       uri.userinfo = null;
+    if (uri.path == null)
+      uri.path = "";
   }
 }
 

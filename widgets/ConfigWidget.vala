@@ -42,16 +42,16 @@ public abstract class ConfigWidget : Gtk.EventBox
   {
     if (s == null)
       s = settings;
-
-    // Wish we could use changed[key].connect to take advantage of detailed
-    // signals, but vala doesn't support that yet.  It only supports static
-    // detailed signals (changed['my-specific-key']).
-    s.changed.connect((k) => {
-      if (key == null || key == k)
-        key_changed();
-    });
+    var signal_name = (key == null) ? "change-event" : "changed::%s".printf(key);
+    Signal.connect_swapped(s, signal_name, (Callback)key_changed_wrapper, this);
   }
-  
+
+  static bool key_changed_wrapper(ConfigWidget w)
+  {
+    w.key_changed();
+    return false;
+  }
+
   void key_changed()
   {
     set_from_config();
