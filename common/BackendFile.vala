@@ -283,27 +283,57 @@ public class BackendFile : Backend
   // hook into the operation steps to mount the file.
   public override async void get_envp() throws Error
   {
+    this.ref();
     try {
       yield mount_file();
     }
     catch (Error e) {
       envp_ready(false, new List<string>(), e.message);
     }
+    this.unref();
   }
   
+  bool is_being_mounted_error(Error e)
+  {
+    return e.message.has_prefix("DBus error org.gtk.Private.RemoteVolumeMonitor.Failed:");
+  }
+
+  async void delay(uint secs)
+  {
+    var loop = new MainLoop(null);
+    Timeout.add_seconds(secs, () => {
+      loop.quit();
+      return false;
+    });
+    loop.run();
+  }
+
   async void mount_file() throws Error
   {
-    this.ref();
-
     var success = true;
     var settings = get_settings(FILE_ROOT);
     var type = settings.get_string(FILE_TYPE_KEY);
-    if (type == "volume")
-      success = yield mount_volume();
-    else if (type == "normal") {
-      var file = get_file_from_settings();
-      if (!file.is_native())
-        success = yield mount_remote();
+
+    try {
+      if (type == "volume")
+        success = yield mount_volume();
+      else if (type == "normal") {
+        var file = get_file_from_settings();
+        if (!file.is_native())
+          success = yield mount_remote();
+      }
+    }
+    catch (IOError.FAILED err) {
+      // So, this is odd, and not very descriptive, but IOError.FAILED is the
+      // error given when someone else is mounting at the same time.  Sometimes
+      // happens when a USB stick is inserted and nautilus is fighting us.
+      if (is_being_mounted_error(err)) {
+        yield delay(1); // Try again in a second
+        yield mount_file();
+        return;
+      }
+      else
+        throw err; // continue error on
     }
 
     // If we don't know what type this is, look up volume data
@@ -313,8 +343,6 @@ public class BackendFile : Backend
     }
 
     envp_ready(success, new List<string>());
-
-    this.unref();
   }
 
   async bool mount_remote() throws Error
