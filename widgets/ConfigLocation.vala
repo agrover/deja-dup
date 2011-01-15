@@ -205,7 +205,7 @@ public class ConfigLocation : ConfigWidget
 
   bool on_mnemonic_activate(Gtk.Widget w, bool g)
   {
-    return true;//button.mnemonic_activate(g);
+    return button.mnemonic_activate(g);
   }
 
   bool update_saved_volume()

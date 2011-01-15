@@ -40,8 +40,15 @@ public class ConfigEntry : ConfigWidget
     
     set_from_config();
     entry.focus_out_event.connect(handle_focus_out);
+
+    mnemonic_activate.connect(on_mnemonic_activate);
   }
   
+  bool on_mnemonic_activate(Gtk.Widget w, bool g)
+  {
+    return entry.mnemonic_activate(g);
+  }
+
   protected override async void set_from_config()
   {
     var val = settings.get_string(key);

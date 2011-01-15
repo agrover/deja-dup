@@ -40,8 +40,14 @@ public class ConfigLocationFile : ConfigLocationTable
 
     hbox.pack_start(entry, true, true, 0);
     hbox.pack_start(browse, false, false, 0);
+    hbox.mnemonic_activate.connect(on_mnemonic_activate);
 
     add_widget(_("_Folder:"), hbox);
+  }
+
+  bool on_mnemonic_activate(Gtk.Widget w, bool g)
+  {
+    return entry.mnemonic_activate(g);
   }
 
   void browse_clicked()
