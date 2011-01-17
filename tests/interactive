@@ -86,7 +86,7 @@ def test():
     base.start_deja_dup(waitfor=None)
     base.wait_for_quit()
   elif prog == 'applet':
-    base.start_deja_dup_applet()
+    base.start_deja_dup(args=['--backup'])
     base.wait_for_quit()
   elif prog == 'shell':
     os.system('bash')

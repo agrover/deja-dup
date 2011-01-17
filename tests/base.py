@@ -35,6 +35,7 @@ temp_dir = None
 cleanup_dirs = []
 cleanup_mounts = []
 cleanup_pids = []
+have_run = False
 
 def skip():
   os.system('bash -c "echo -e \'\e[32mSKIPPED\e[0m\'"')
@@ -195,22 +196,23 @@ def get_settings_value(key, schema = None):
   pout = sp.communicate()[0]
   return pout.strip()
 
-def start_deja_dup(args=[''], waitfor='frmDéjàDup', debug = False):
+def start_deja_dup(args=[], executable='deja-dup', waitfor='frmDéjàDup', debug=False):
   # Rather than running debug, it's sometimes more effective to run
   # "./interactive shell" and then run gdb directly
+  cmd = [executable] + args
+  if os.environ.get('DEJA_DUP_TEST_VALGRIND') == "1":
+    global have_run
+    if have_run:
+      ldtp.wait(5) # pause between runs for valgrind to finish up
+    have_run = True
+    cmd = ['valgrind', '--gen-suppressions=all', '--leak-check=full',
+           '--track-origins=yes', '--show-possibly-lost=no',
+           '--error-exitcode=1', '--suppressions=valgrind.sup'] + cmd
   if debug:
-    subprocess.Popen(['gnome-terminal', '-x', 'gdb', '-ex', 'run', 'deja-dup'] + args)
-  else:
-    subprocess.Popen(['deja-dup'] + args)
+    cmd = ['gnome-terminal', '-x', 'gdb', '-ex', 'run'] + cmd
+  subprocess.Popen(cmd)
   if waitfor is not None:
     ldtp.waittillguiexist(waitfor)
-
-def start_deja_dup_prefs():
-  subprocess.Popen(['deja-dup-preferences'])
-  ldtp.waittillguiexist('frmDéjàDupPreferences')
-
-def start_deja_dup_applet():
-  subprocess.Popen(['deja-dup', '--backup'])
 
 def create_vol_config(dest='/'):
   if dest is None:

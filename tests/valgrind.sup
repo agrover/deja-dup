@@ -1,0 +1,140 @@
+{
+   DBus Signal Leak
+   Memcheck:Leak
+   fun:malloc
+   fun:g_malloc
+   fun:g_strdup
+   fun:g_dbus_connection_signal_subscribe
+   obj:/usr/lib/gio/modules/libdconfsettings.so
+   obj:/usr/lib/gio/modules/libdconfsettings.so
+   fun:g_main_context_dispatch
+   fun:g_main_context_iterate.clone.6
+   fun:g_main_loop_run
+   obj:/usr/lib/gio/modules/libdconfsettings.so
+   fun:g_thread_create_proxy
+   fun:start_thread
+}
+
+{
+   Param Spec Leak
+   Memcheck:Leak
+   fun:malloc
+   fun:g_malloc
+   fun:g_strdup
+   fun:g_param_spec_string
+}
+
+{
+   Set Title Leak
+   Memcheck:Leak
+   fun:malloc
+   fun:g_malloc
+   fun:g_strdup
+   fun:gtk_window_set_title
+}
+
+{
+   ATK Buffer Lost up
+   Memcheck:Leak
+   fun:calloc
+   fun:g_malloc0
+   fun:giop_send_buffer_use
+   fun:giop_send_buffer_use_request
+   obj:/usr/lib/libORBit-2.so.0.1.0
+   fun:ORBit_small_invoke_stub
+   fun:Accessibility_Registry_registerApplication
+}
+
+{
+   ATK Buffer Lost down
+   Memcheck:Leak
+   fun:calloc
+   fun:g_malloc0
+   fun:ORBit_alloc_by_tc
+   fun:CORBA_exception_set_system
+   fun:ORBit_small_invoke_stub
+   fun:Accessibility_Registry_deregisterApplication
+}
+
+{
+   Pango Leak
+   Memcheck:Leak
+   fun:realloc
+   ...
+   fun:pango_itemize_with_base_dir
+}
+
+{
+   FontConfig Leak
+   Memcheck:Leak
+   fun:malloc
+   ...
+   fun:FcConfigParseAndLoad
+}
+
+{
+   FontConfig Render Leak
+   Memcheck:Leak
+   fun:realloc
+   ...
+   fun:FcFontRenderPrepare
+}
+
+{
+   FontConfig Default Sub Leak
+   Memcheck:Leak
+   fun:realloc
+   ...
+   fun:FcDefaultSubstitute
+}
+
+{
+   GInit Leak
+   Memcheck:Leak
+   fun:malloc
+   fun:nss_parse_service_list
+   ...
+   fun:g_get_any_init_do
+}
+
+{
+   Theme Leak
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/gtk-*/*/engines/libmurrine.so
+}
+
+{
+   Bindings bug: https://bugzilla.gnome.org/show_bug.cgi?id=639743
+   Memcheck:Leak
+   fun:malloc
+   fun:g_malloc
+   fun:g_strdup
+   fun:g_settings_get_string
+}
+
+{
+   DBus Init Leak
+   Memcheck:Leak
+   fun:malloc
+   fun:realloc
+   fun:g_realloc
+   fun:g_ptr_array_maybe_expand
+   ...
+   fun:g_dbus_node_info_new_for_xml
+}
+
+{
+   LibAppMenu Leak
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/gtk-*/*/menuproxies/libappmenu.so
+}
+
+{
+   Ubuntu Menu Proxy Leak
+   Memcheck:Leak
+   ...
+   fun:ubuntu_menu_proxy_get
+}
+
