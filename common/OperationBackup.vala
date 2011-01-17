@@ -44,17 +44,20 @@ public class OperationBackup : Operation
     // For the common case, we just add the file directly to the list.
     // For symlinks, we want to add the link and its target to the list.
     // Normally, duplicity ignores targets, and this is fine and expected
-    // behavior.  But if the user explicitly requested a symlink, they expect
-    // a follow-through, I believe.
+    // behavior.  But if the user explicitly requested a directory with a 
+    // symlink in it's path, they expect a follow-through.
     try {
-      FileInfo info = file.query_info(FILE_ATTRIBUTE_STANDARD_IS_SYMLINK + "," +
-                                      FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET,
-                                      FileQueryInfoFlags.NOFOLLOW_SYMLINKS, 
-                                      null);
-      if (info.get_is_symlink()) {
-        string symlink_target = info.get_symlink_target();
-        File parent_dir = file.get_parent();
-        list.prepend(parent_dir.resolve_relative_path(symlink_target));
+      File parent, prev = file;
+      while ((parent = prev.get_parent()) != null) {
+        FileInfo info = prev.query_info(FILE_ATTRIBUTE_STANDARD_IS_SYMLINK + "," +
+                                        FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET,
+                                        FileQueryInfoFlags.NOFOLLOW_SYMLINKS, 
+                                        null);
+        if (info.get_is_symlink()) {
+          string symlink_target = info.get_symlink_target();
+          list.prepend(parent.resolve_relative_path(symlink_target));
+        }
+        prev = parent;
       }
     }
     catch (IOError.NOT_FOUND e) {

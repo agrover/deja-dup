@@ -24,14 +24,32 @@ import os
 sys.path.insert(0, sys.path[0]+'/..')
 import base
 
-def test():
+def direct():
   restoredir = base.get_temp_name('restore')
   base.setup()
-  base.backup_simple(backend='file', includes=['data/symlink'])
+  base.backup_simple(backend='file', includes=['data/symlink/simple'])
   base.start_deja_dup()
   base.restore_simple(restoredir)
-  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], 'data/symlink')
+  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], 'data/symlink/simple')
   assert os.path.islink(root)
   assert os.path.exists(root)
 
-base.run(test)
+def subdir():
+  restoredir = base.get_temp_name('restore')
+  base.setup()
+  base.backup_simple(backend='file', includes=['data/symlink/one/two/fourreal'])
+  base.start_deja_dup()
+  base.restore_simple(restoredir)
+  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], 'data/symlink')
+  assert os.path.islink(root+'/one')
+  assert os.path.exists(root+'/one')
+  assert os.path.islink(root+'/one/two')
+  assert os.path.exists(root+'/one/two')
+  assert os.path.islink(root+'/one/two/three')
+  assert os.path.exists(root+'/one/two/three')
+  assert base.file_equals(root+'/onereal/tworeal/threereal', 'three\n')
+  assert base.file_equals(root+'/onereal/tworeal/fourreal/four.txt', 'four\n')
+  assert base.file_equals(root+'/one/two/fourreal/four.txt', 'four\n')
+
+base.run(direct)
+base.run(subdir)
