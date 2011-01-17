@@ -118,8 +118,8 @@ public class OperationBackup : Operation
       rv.append(Path.build_filename(dir, ".gvfs"));
       rv.append(Path.build_filename(dir, ".Private")); // encrypted copies of stuff in $HOME
       rv.append(Path.build_filename(dir, ".recent-applications.xbel"));
-      rv.append(Path.build_filename(dir, ".recently-used.xbel"
-      rv.append(Path.build_filename(dir, ".thumbnails"));));
+      rv.append(Path.build_filename(dir, ".recently-used.xbel"));
+      rv.append(Path.build_filename(dir, ".thumbnails"));
       rv.append(Path.build_filename(dir, ".xsession-errors"));
     }
     
