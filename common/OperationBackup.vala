@@ -107,15 +107,20 @@ public class OperationBackup : Operation
       rv.append(Path.build_filename(dir, Config.PACKAGE));
     }
 
-    // Likewise, user doesn't care about cache-like thumbnail directory
+    // Likewise, user doesn't care about cache-like directories in $HOME.
+    // In an ideal world, all of these would be under ~/.cache.  But for
+    // historical reasons or for those apps that are both popular enough to
+    // warrant special attention, we add some useful exclusions here.
+    // When changing this list, remember to update the help documentation too.
     dir = Environment.get_home_dir();
     if (dir != null) {
-      rv.append(Path.build_filename(dir, ".thumbnails"));
+      rv.append(Path.build_filename(dir, ".adobe/Flash_Player/AssetCache"));
       rv.append(Path.build_filename(dir, ".gvfs"));
-      rv.append(Path.build_filename(dir, ".xsession-errors"));
-      rv.append(Path.build_filename(dir, ".recently-used.xbel"));
-      rv.append(Path.build_filename(dir, ".recent-applications.xbel"));
       rv.append(Path.build_filename(dir, ".Private")); // encrypted copies of stuff in $HOME
+      rv.append(Path.build_filename(dir, ".recent-applications.xbel"));
+      rv.append(Path.build_filename(dir, ".recently-used.xbel"
+      rv.append(Path.build_filename(dir, ".thumbnails"));));
+      rv.append(Path.build_filename(dir, ".xsession-errors"));
     }
     
     // Some problematic directories like /tmp and /proc should be left alone
