@@ -113,8 +113,8 @@ void
 hacks_get_natural_size(GtkWidget *w, GtkRequisition *req)
 {
 #if GTK_CHECK_VERSION(2, 91, 0)
-  gtk_widget_size_request(w, req);
-#else
   gtk_widget_get_preferred_size(w, NULL, req);
+#else
+  gtk_widget_size_request(w, req);
 #endif
 }
