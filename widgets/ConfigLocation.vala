@@ -36,7 +36,7 @@ public class ConfigLocation : ConfigWidget
   public Gtk.Requisition hidden_size()
   {
     Gtk.Requisition pagereq;
-    extras.size_request(out pagereq);
+    hacks_get_natural_size(extras, out pagereq);
     pagereq.width = extras_max_width - pagereq.width + 20;
     pagereq.height = extras_max_height - pagereq.height + 20;
     return pagereq;
@@ -187,7 +187,7 @@ public class ConfigLocation : ConfigWidget
     if (page != null) {
       Gtk.Requisition pagereq;
       page.show_all();
-      page.size_request(out pagereq);
+      hacks_get_natural_size(page, out pagereq);
       extras_max_width = int.max(extras_max_width, pagereq.width);
       extras_max_height = int.max(extras_max_height, pagereq.height);
     }

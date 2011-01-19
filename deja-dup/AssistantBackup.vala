@@ -77,7 +77,7 @@ public class AssistantBackup : AssistantOperation
     // Now make sure to reserve the excess space that the hidden bits of
     // ConfigLocation will need.
     Gtk.Requisition req, hidden;
-    vbox.size_request(out req);
+    hacks_get_natural_size(vbox, out req);
     hidden = location.hidden_size();
     req.width = req.width + hidden.width;
     req.height = req.height + hidden.height;

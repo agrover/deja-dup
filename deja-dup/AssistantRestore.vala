@@ -114,7 +114,7 @@ public class AssistantRestore : AssistantOperation
     // Now make sure to reserve the excess space that the hidden bits of
     // ConfigLocation will need.
     Gtk.Requisition req, hidden;
-    page.size_request(out req);
+    hacks_get_natural_size(page, out req);
     hidden = location.hidden_size();
     req.width = req.width + hidden.width;
     req.height = req.height + hidden.height;

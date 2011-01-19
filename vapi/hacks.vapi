@@ -40,3 +40,6 @@ void hacks_widget_destroy(Gtk.Widget w);
 
 [CCode (cheader_filename = "whacks.h")]
 void hacks_quit_on_destroy(Gtk.Widget w);
+
+[CCode (cheader_filename = "whacks.h")]
+void hacks_get_natural_size(Gtk.Widget w, out Gtk.Requisition req);

@@ -351,7 +351,7 @@ public abstract class Assistant : Gtk.Dialog
     page.show_all();
 
     if (was_empty)
-      page_box.size_request(out page_box_req);
+      hacks_get_natural_size(page_box, out page_box_req);
 
     reset_size(page);
 
@@ -364,7 +364,7 @@ public abstract class Assistant : Gtk.Dialog
     Gtk.Requisition pagereq;
     int boxw, boxh;
     page_box.get_size_request(out boxw, out boxh);
-    page.size_request(out pagereq);
+    hacks_get_natural_size(page, out pagereq);
     page_box.set_size_request(int.max(boxw, pagereq.width+page_box_req.width), int.max(boxh, pagereq.height+page_box_req.height));
   }
 

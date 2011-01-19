@@ -383,9 +383,9 @@ public class DuplicityInstance : Object
     
     while (p[0] != 0) {
       unichar ch = p.get_char_validated();
-      if (ch == (uint)(-1) || ch == (uint)(-2)) {
+      if (ch == (unichar)(-1) || ch == (unichar)(-2)) {
         rv.append("�"); // the 'replacement character' in unicode
-        p = p.offset(1);
+        p = (string)((char*)p + 1);
       }
       else {
         rv.append_unichar(ch);

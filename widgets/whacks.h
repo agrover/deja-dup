@@ -32,6 +32,7 @@ extern long hacks_window_get_xid(GdkWindow *win);
 extern int hacks_widget_get_allocated_width(GtkWidget *w);
 extern void hacks_widget_destroy(GtkWidget *w);
 extern void hacks_quit_on_destroy(GtkWidget *w);
+extern void hacks_get_natural_size(GtkWidget *w, GtkRequisition *req);
 
 #endif
 

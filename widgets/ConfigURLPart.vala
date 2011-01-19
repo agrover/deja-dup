@@ -135,7 +135,7 @@ public class ConfigURLPart : ConfigEntry
   {
     if (userinfo == null)
       return null;
-    if (scheme == "smb" && userinfo.str(";") != null)
+    if (scheme == "smb" && userinfo.contains(";"))
       return userinfo.split(";", 2)[1];
     return userinfo;
   }
@@ -144,7 +144,7 @@ public class ConfigURLPart : ConfigEntry
   {
     if (userinfo == null)
       return null;
-    if (scheme == "smb" && userinfo.str(";") != null)
+    if (scheme == "smb" && userinfo.contains(";"))
       return userinfo.split(";", 2)[0];
     return null;
   }

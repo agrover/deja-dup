@@ -92,7 +92,7 @@ public class PreferencesDialog : Gtk.Dialog
     // ConfigLocation will need.
     Gtk.Requisition req, hidden;
     page_box.show_all();
-    page_box.size_request(out req);
+    hacks_get_natural_size(page_box, out req);
     hidden = location.hidden_size();
     req.width = req.width + hidden.width;
     req.height = req.height + hidden.height;

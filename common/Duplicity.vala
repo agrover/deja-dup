@@ -850,15 +850,15 @@ public class Duplicity : Object
   {
     switch (exception) {
     case "S3ResponseError":
-      if (text.str("<Code>InvalidAccessKeyId</Code>") != null)
+      if (text.contains("<Code>InvalidAccessKeyId</Code>"))
         show_error(_("Invalid ID."));
-      else if (text.str("<Code>SignatureDoesNotMatch</Code>") != null)
+      else if (text.contains("<Code>SignatureDoesNotMatch</Code>"))
         show_error(_("Invalid secret key."));
-      else if (text.str("<Code>NotSignedUp</Code>") != null)
+      else if (text.contains("<Code>NotSignedUp</Code>"))
         show_error(_("Your Amazon Web Services account is not signed up for the S3 service."));
       break;
     case "S3CreateError":
-      if (text.str("<Code>BucketAlreadyExists</Code>") != null) {
+      if (text.contains("<Code>BucketAlreadyExists</Code>")) {
         if (((BackendS3)backend).bump_bucket()) {
           try {
             remote = backend.get_location();
@@ -872,16 +872,16 @@ public class Duplicity : Object
       }
       break;
     case "IOError":
-      if (text.str("GnuPG") != null)
+      if (text.contains("GnuPG"))
         show_error(_("Bad encryption password."));
-      else if (text.str("[Errno 5]") != null && // I/O Error
+      else if (text.contains("[Errno 5]") && // I/O Error
                last_touched_file != null) {
         if (mode == Operation.Mode.BACKUP)
           show_error(_("Error reading file ‘%s’.").printf(last_touched_file.get_parse_name()));
         else
           show_error(_("Error writing file ‘%s’.").printf(last_touched_file.get_parse_name()));
       }
-      else if (text.str("[Errno 28]") != null) { // No space left on device
+      else if (text.contains("[Errno 28]")) { // No space left on device
         string where = null;
         if (mode == Operation.Mode.BACKUP) {
           try {
@@ -1044,7 +1044,7 @@ public class Duplicity : Object
     var infos = new List<DateInfo?>();
     bool in_chain = false;
     foreach (string line in lines) {
-      if (line == "chain-complete" || line.str("chain-no-sig") == line)
+      if (line == "chain-complete" || line.index_of("chain-no-sig") == 0)
         in_chain = true;
       else if (in_chain && line.length > 0 && line[0] == ' ') {
         // OK, appears to be a date line.  Try to parse.  Should look like:

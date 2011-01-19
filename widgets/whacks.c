@@ -108,3 +108,13 @@ hacks_quit_on_destroy(GtkWidget *w)
   // so vala generates code that can't compile with both
   g_signal_connect (w, "destroy", (GCallback)gtk_main_quit, NULL);
 }
+
+void
+hacks_get_natural_size(GtkWidget *w, GtkRequisition *req)
+{
+#if GTK_CHECK_VERSION(2, 91, 0)
+  gtk_widget_size_request(w, req);
+#else
+  gtk_widget_get_preferred_size(w, NULL, req);
+#endif
+}
