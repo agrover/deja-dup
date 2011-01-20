@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
     © 2010 Michael Vogt <michael.vogt@ubuntu.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
@@ -39,38 +39,6 @@ public class OperationBackup : Operation
     base.operation_finished(dup, success, cancelled);
   }
   
-  void add_to_file_list(ref List<File> list, File file)
-  {
-    // For the common case, we just add the file directly to the list.
-    // For symlinks, we want to add the link and its target to the list.
-    // Normally, duplicity ignores targets, and this is fine and expected
-    // behavior.  But if the user explicitly requested a directory with a 
-    // symlink in it's path, they expect a follow-through.
-    try {
-      File parent, prev = file;
-      while ((parent = prev.get_parent()) != null) {
-        FileInfo info = prev.query_info(FILE_ATTRIBUTE_STANDARD_IS_SYMLINK + "," +
-                                        FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET,
-                                        FileQueryInfoFlags.NOFOLLOW_SYMLINKS, 
-                                        null);
-        if (info.get_is_symlink()) {
-          string symlink_target = info.get_symlink_target();
-          list.prepend(parent.resolve_relative_path(symlink_target));
-        }
-        prev = parent;
-      }
-    }
-    catch (IOError.NOT_FOUND e) {
-      // Don't bother adding this file to any list
-      return;
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
-    
-    list.prepend(file);
-  }
-  
   protected override List<string>? make_argv() throws Error
   {
     var settings = get_settings();
@@ -85,12 +53,12 @@ public class OperationBackup : Operation
     // Exclude directories no one wants to backup
     var always_excluded = get_always_excluded_dirs();
     foreach (string dir in always_excluded)
-      add_to_file_list(ref dup.excludes, File.new_for_path(dir));
+      dup.excludes.prepend(File.new_for_path(dir));
     
     foreach (File s in exclude_list)
-      add_to_file_list(ref dup.excludes, s);
+      dup.excludes.prepend(s);
     foreach (File s in include_list)
-      add_to_file_list(ref dup.includes, s);
+      dup.includes.prepend(s);
     
     dup.local = File.new_for_path("/");
     

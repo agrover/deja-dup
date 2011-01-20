@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>,
+    © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>,
     © 2009 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
@@ -181,6 +181,7 @@ public class Duplicity : Object
     }
   }
 
+  // This will treat a < b iff a is 'lower' in the file tree than b
   int cmp_prefix(File? a, File? b)
   {
     if (a == null && b == null)
@@ -193,8 +194,97 @@ public class Duplicity : Object
       return 0;
   }
 
+  void expand_links_in_file(File file, ref List<File> all, bool include, List<File>? seen = null)
+  {
+    // For symlinks, we want to add the link and its target to the list.
+    // Normally, duplicity ignores targets, and this is fine and expected
+    // behavior.  But if the user explicitly requested a directory with a 
+    // symlink in it's path, they expect a follow-through.
+    // If a symlink is anywhere above the directory specified by the user,
+    // duplicity will stop at that symlink and only backup the broken link.
+    // So we try to work around that behavior by checking for symlinks and only
+    // passing duplicity symlinks as leaf elements.
+    //
+    // This will be much easier if we approach it from the root down.  So
+    // walk back towards root, keeping track of each piece as we go.
+    List<string> pieces = new List<string>();
+    File iter = file, parent;
+    while ((parent = iter.get_parent()) != null) {
+      pieces.prepend(parent.get_relative_path(iter));
+      iter = parent;
+    }
+
+    try {
+      File so_far = slash;
+      foreach (weak string piece in pieces) {
+        parent = so_far;
+        so_far = parent.resolve_relative_path(piece);
+        var info = so_far.query_info(FILE_ATTRIBUTE_STANDARD_IS_SYMLINK + "," +
+                                     FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET,
+                                     FileQueryInfoFlags.NOFOLLOW_SYMLINKS, 
+                                     null);
+        if (info.get_is_symlink()) {
+          // Check if we've seen this before (i.e. are we in a loop?)
+          if (seen.find_custom(so_far, (a, b) => {
+                return (a != null && b != null && a.equal(b)) ? 0 : 1;}) != null)
+            return; // stop here
+
+          if (include)
+            all.prepend(so_far); // back up symlink as a leaf element of its path
+
+          // Recurse on the new file (since it could point at a completely
+          // new place, which has its own symlinks in its hierarchy, so we need
+          // to check the whole thing over again).
+
+          var symlink_target = info.get_symlink_target();
+          File full_target;
+          if (Path.is_absolute(symlink_target))
+            full_target = File.new_for_path(symlink_target);
+          else
+            full_target = parent.resolve_relative_path(symlink_target);
+
+          // Now add the rest of the undone pieces
+          var remaining = so_far.get_relative_path(file);
+          if (remaining != null)
+            full_target = full_target.resolve_relative_path(remaining);
+          warning("%s, %s, %s, %s, %s, %s\n", file.get_path(), so_far.get_path(), parent.get_path(), symlink_target, remaining, full_target.get_path());
+
+          if (include)
+            all.remove(file); // may fail if it's not there, which is fine
+
+          seen.prepend(so_far);
+
+          expand_links_in_file(full_target, ref all, include, seen);
+          return;
+        }
+      }
+
+      // Survived symlink gauntlet, add it to list if this is not the original
+      // request (i.e. if this is the final target of a symlink chain)
+      if (seen != null)
+        all.prepend(file);
+    }
+    catch (IOError.NOT_FOUND e) {
+      // Don't bother keeping this file in the list
+      all.remove(file);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
+  }
+
+  void expand_links_in_list(ref List<File> all, bool include)
+  {
+    var all2 = all.copy();
+    foreach (File file in all2)
+      expand_links_in_file(file, ref all, include);
+  }
+
   void process_include_excludes()
   {
+    expand_links_in_list(ref includes, true);
+    expand_links_in_list(ref excludes, false);
+
     // We need to make sure that the most specific includes/excludes will
     // be first in the list (duplicity uses only first matched dir).  Includes
     // will be preferred if the same dir is present in both lists.
@@ -216,7 +306,7 @@ public class Duplicity : Object
     foreach (File e in excludes) {
       saved_argv.append("--exclude=" + e.get_path());
     }
-    
+
     saved_argv.append("--exclude=**");
   }
   
