@@ -52,7 +52,7 @@ hacks_status_icon_close_app_indicator (GObject *icon)
 GtkComboBox *
 hacks_combo_box_text_new()
 {
-#if GTK_CHECK_VERSION(2, 91, 0)
+#if GTK_CHECK_VERSION(2, 23, 90)
   return (GtkComboBox*)g_object_ref_sink(gtk_combo_box_text_new());
 #else
   return (GtkComboBox*)g_object_ref_sink(gtk_combo_box_new_text());
@@ -62,7 +62,7 @@ hacks_combo_box_text_new()
 char *
 hacks_combo_box_get_text(GtkComboBox *box)
 {
-#if GTK_CHECK_VERSION(2, 91, 0)
+#if GTK_CHECK_VERSION(2, 23, 90)
   return gtk_combo_box_text_get_active_text((GtkComboBoxText*)box);
 #else
   return gtk_combo_box_get_active_text(box);
