@@ -18,7 +18,8 @@
 
 # Here's a bunch of translation support.  Some stolen from dpkg
 
-LINGUAS = C $(shell grep -v "^\#" $(top_srcdir)/po/LINGUAS)
+POLINGUAS = $(shell grep -v "^\#" $(top_srcdir)/po/LINGUAS)
+LINGUAS = C $(POLINGUAS)
 
 C/stamp: $(srcdir)/include.main $(srcdir)/include.pref $(top_builddir)/deja-dup/deja-dup $(top_builddir)/preferences/deja-dup-preferences
 	@$(mkdir_p) C
@@ -48,28 +49,32 @@ clean-local-yes:
 
 install-data-local: install-data-local-@USE_NLS@
 install-data-local-no:
-install-data-local-yes:
-	for lang in $(LINGUAS); do \
+install-data-local-yes: man
+	for lang in $(POLINGUAS); do \
 		if [ -d $$lang ]; then \
-			files=$$(ls $$lang/*.1); \
-			$(MAKE) install-man \
-				mandir="$(mandir)/$$lang" \
-				man_MANS="" \
-				dist_man1_MANS="$$files"; \
+			$(mkinstalldirs) "$(DESTDIR)$(mandir)/$$lang/man1"; \
+			$(INSTALL_DATA) $$lang/*.1 "$(DESTDIR)$(mandir)/$$lang/man1"; \
 		fi \
 	done
+	if [ -d C ]; then \
+		$(mkinstalldirs) "$(DESTDIR)$(mandir)/man1"; \
+		$(INSTALL_DATA) C/*.1 "$(DESTDIR)$(mandir)/man1"; \
+	fi
 
 uninstall-local: uninstall-local-@USE_NLS@
 uninstall-local-no:
-uninstall-local-yes:
-	for lang in $(LINGUAS); do \
+uninstall-local-yes: man
+	for lang in $(POLINGUAS); do \
 		if [ -d $$lang ]; then \
-			files=$$(ls $$lang/*.1); \
-			$(MAKE) uninstall-man \
-				mandir="$(mandir)/$$lang" \
-				man_MANS="" \
-				dist_man1_MANS="$$files"; \
+			for file in $$(ls $$lang/*.1); do \
+				rm -f "$(DESTDIR)$(mandir)/$$lang/man1/$$file"; \
+			done \
 		fi \
 	done
+	if [ -d C ]; then \
+		for file in $$(ls C/*.1); do \
+			rm -f "$(DESTDIR)$(mandir)/man1/$$file"; \
+		done \
+	fi
 
 dist-hook: man
