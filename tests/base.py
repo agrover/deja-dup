@@ -35,14 +35,12 @@ temp_dir = None
 cleanup_dirs = []
 cleanup_mounts = []
 cleanup_pids = []
+cleanup_envs = []
 have_run = False
 
 def skip():
   os.system('bash -c "echo -e \'\e[32mSKIPPED\e[0m\'"')
   sys.exit(0)
-
-if not os.environ.get('DISPLAY'):
-  skip()
 
 def create_temp_dir():
   global temp_dir, cleanup_dirs
@@ -68,7 +66,15 @@ def get_temp_name(extra, make=False):
 # srcdir and use it if available.  Else, default to current directory.
 
 def setup(start = True, args=[''], root_prompt = False):
-  global cleanup_dirs, cleanup_pids, ldtp, latest_duplicity
+  global cleanup_dirs, cleanup_pids, cleanup_envs, ldtp, latest_duplicity
+
+  if not os.environ.get('DISPLAY'):
+    # Run a Xvfb session to allow running the test suite without a monitor
+    proc = subprocess.Popen(['Xvfb', ':5'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    ldtp.wait(1)
+    cleanup_pids.append(proc.pid)
+    os.environ['DISPLAY'] = ':5'
+    cleanup_envs.append('DISPLAY')
 
   if 'srcdir' in environ:
     srcdir = environ['srcdir']
@@ -154,9 +160,9 @@ def setup(start = True, args=[''], root_prompt = False):
     start_deja_dup(args)
 
 def cleanup(success):
-  global temp_dir, cleanup_dirs, cleanup_mounts, cleanup_pids
+  global temp_dir, cleanup_dirs, cleanup_mounts, cleanup_pids, cleanup_envs
   for d in cleanup_mounts:
-    os.system('gksud\o "umount %s"' % d)
+    os.system('gksudo "umount %s"' % d)
   for d in cleanup_dirs:
     os.system("rm -rf %s" % d)
   for p in cleanup_pids:
@@ -164,9 +170,12 @@ def cleanup(success):
       os.kill(p, signal.SIGTERM)
     except:
       pass
+  for e in cleanup_envs:
+    os.environ[e] = ''
   cleanup_mounts = []
   cleanup_dirs = []
   cleanup_pids = []
+  cleanup_envs = []
   #os.system('kill %s' % os.environ['GNOME_KEYRING_PID'])
   temp_dir = None
   if success:

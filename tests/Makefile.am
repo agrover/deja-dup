@@ -46,6 +46,8 @@ MANUAL_TESTS = \
 
 ALL_TESTS = $(AUTO_TESTS) $(MANUAL_TESTS)
 
+# This is for 'interactive' running of all the tests.  See 'check' target for
+# a target more suitable for automated testing.
 test:
 	@for t in $(ALL_TESTS); do \
 		echo -n "Testing $$t..."; \
@@ -55,6 +57,21 @@ test:
 			echo -e " \e[31mFAILED\e[0m"; \
 		fi; \
 	done
+
+# This is run automatically by distcheck and some build tools.  Needs to error
+# out if a test fails and needs to be runnable with no DISPLAY.
+check:
+	export TESTS_PASSED=true; \
+	for t in $(AUTO_TESTS); do \
+		echo -n "Testing $$t..."; \
+		if env DISPLAY= ./$$t >/dev/null 2>&1; then \
+			echo -e " \e[32mPASSED\e[0m"; \
+		else \
+			echo -e " \e[31mFAILED\e[0m"; \
+			export TESTS_PASSED=false ; \
+		fi; \
+	done; \
+	$${TESTS_PASSED}
 
 EXTRA_DIST = \
 	$(ALL_TESTS) \
