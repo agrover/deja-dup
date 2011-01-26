@@ -34,6 +34,7 @@ AUTO_TESTS = \
 	prefs/ssh-to-file \
 	restore/cycle \
 	restore/full \
+	restore/gpg \
 	restore/missing \
 	restore/rename \
 	restore/overdir \
@@ -41,8 +42,7 @@ AUTO_TESTS = \
 
 # Tests that must be run manually
 MANUAL_TESTS = \
-	backup/disk-full \
-	restore/gpg
+	backup/disk-full
 
 ALL_TESTS = $(AUTO_TESTS) $(MANUAL_TESTS)
 
