@@ -351,10 +351,8 @@ public class Duplicity : Object
 
   void cancel_inst()
   {
-    if (inst == null)
-      handle_done(null, false, true);
-    else
-      inst.cancel();
+    disconnect_inst();
+    handle_done(null, false, true);
   }
 
   bool restart()
