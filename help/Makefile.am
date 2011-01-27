@@ -27,7 +27,8 @@ DOC_PAGES = \
 	prefs.page \
 	restore-full.page \
 	restore-lost.page \
-	restore-revert.page
+	restore-revert.page \
+	restore-worst-case.page
 
 REAL_LINGUAS = ar cs da de en_GB es eu fi fr gl he hu id it ja lt nb nl pl ps pt_BR ru sv th tr zh_CN
 DOC_LINGUAS = POT $(REAL_LINGUAS)

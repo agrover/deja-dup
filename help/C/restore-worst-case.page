@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="restore-worst-case">
+<info>
+  <desc>What to do if you can't restore your files.</desc>
+  <link type="guide" xref="index#restore"/>
+</info>
+
+<title>When Everything Goes Wrong</title>
+
+<p><app>Déjà Dup</app> may fail.  Maybe it crashes or gives you an error when you try to restore.  When you really need your data back, the last thing you want do deal with is a bug.  Consider filing a <link href="https://launchpad.net/deja-dup/+filebug">bug report</link> but in the meantime, here are some approaches to workaround a misbehaving <app>Déjà Dup</app> and get your data back.</p>
+
+<note><p>This is going to get technical.  If none of this makes sense to you, don't be afraid to <link href="https://answers.launchpad.net/deja-dup">ask for help</link>.</p></note>
+
+<steps>
+  <item><p>Open a <app>Terminal</app> window by pressing <keyseq><key>Ctrl</key><key>Alt</key><key>T</key></keyseq>.</p></item>
+  <item><p>Create the directory in which you will place your restored files.  This guide will use <file>/tmp/restore</file>:</p>
+<screen>mkdir -p /tmp/restore</screen></item>
+</steps>
+
+<section id="setup">
+<title>Restoring with Duplicity</title>
+
+<p>On the assumption that <app>Déjà Dup</app> is just not working for you right now, you're going to use the command line tool <app>duplicity</app> that is used by <app>Déjà Dup</app> behind the scenes to back up and restore your files.</p>
+
+<note style="advanced"><p>If you want more information about <app>duplicity</app> than presented here, run <cmd>man duplicity</cmd>.</p></note>
+
+<p>The first thing we'll try is a simple restore of all your data.  Assuming your files are on an external drive mounted as <file>/media/backup</file> and you chose to encrypt the backup, try this:</p>
+<screen>duplicity --gio file:///media/backup /tmp/restore</screen>
+
+<p>If you didn't encrypt the backup, add <cmd>--no-encryption</cmd> to the command.</p>
+
+<section>
+<title>Other Backup Locations</title>
+<p>If you backed up to a remote or cloud server, the syntax you use with <app>duplicity</app> will be different than the external drive example above.  See below for how to connect to your chosen backup location.</p>
+<note><p>Remember to add <cmd>--no-encryption</cmd> to any example commands if you're backup is not encrypted.</p></note>
+<p>If <app>duplicity</app> appears to be having trouble connecting to your server, try downloading all the <app>duplicity</app> files yourself to a local folder and following the simpler example above.</p>
+<terms>
+  <item>
+    <title>Amazon S3</title>
+    <p>Look up your Amazon S3 access key ID and secret access key and replace instances of <var>ID</var> and <var>SECRET</var> in the example below with those respective values.</p>
+    <p>You may have specified a folder in which to put the backup files.  In the example below, replace any instance of <var>FOLDER</var> with that path.</p>
+    <screen>
+export AWS_ACCESS_KEY_ID=<var>ID</var>
+export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>
+duplicity s3+http://deja-dup-auto-<var>ID</var>/<var>FOLDER</var> /tmp/restore</screen>
+  </item>
+  <item>
+    <title>Rackspace Cloud Files</title>
+    <p>Look up your Rackspace username and API key and replace instances of <var>USERNAME</var> and <var>KEY</var> in the example below with those respective values.</p>
+    <p>You may have specified a container in which to put the backup files.  In the example below, replace any instance of <var>CONTAINER</var> with that name.</p>
+    <screen>
+export CLOUDFILES_USERNAME=<var>USERNAME</var>
+export CLOUDFILES_APIKEY=<var>KEY</var>
+duplicity cf+http://<var>CONTAINER</var> /tmp/restore</screen>
+  </item>
+  <item>
+    <title>FTP</title>
+    <p>Look up your server address, port, username, and password and replace instances of <var>SERVER</var>, <var>PORT</var>, <var>USERNAME</var>, and <var>PASSWORD</var> in the example below with those respective values.</p>
+    <p>You may have specified a folder in which to put the backup files.  In the example below, replace any instance of <var>FOLDER</var> with that path.</p>
+    <p>If you chose to not log in with a username, use <var>anonymous</var> as your <var>USERNAME</var> below.</p>
+    <screen>
+gvfs-mount ftp://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>
+duplicity --gio ftp://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var> /tmp/restore</screen>
+  </item>
+  <item>
+    <title>SSH</title>
+    <p>Look up your server address, port, username, and password and replace instances of <var>SERVER</var>, <var>PORT</var>, <var>USERNAME</var>, and <var>PASSWORD</var> in the example below with those respective values.</p>
+    <p>You may have specified a folder in which to put the backup files.  In the example below, replace any instance of <var>FOLDER</var> with that path.</p>
+    <screen>
+gvfs-mount ssh://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>
+duplicity --gio ssh://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var> /tmp/restore</screen>
+  </item>
+  <item>
+    <title>WebDAV</title>
+    <p>Look up your server address, port, username, and password and replace instances of <var>SERVER</var>, <var>PORT</var>, <var>USERNAME</var>, and <var>PASSWORD</var> in the example below with those respective values.</p>
+    <p>You may have specified a folder in which to put the backup files.  In the example below, replace any instance of <var>FOLDER</var> with that path.</p>
+    <p>If you chose to use a secure connection (HTTPS) when backing up, use <var>davs://</var> instead of <var>dav://</var> in the example below.</p>
+    <screen>
+gvfs-mount dav://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>
+duplicity --gio dav://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var> /tmp/restore</screen>
+  </item>
+  <item>
+    <title>Windows Share</title>
+    <p>Look up your server address, username, and password and replace instances of <var>SERVER</var>, <var>USERNAME</var>, and <var>PASSWORD</var> in the example below with those respective values.</p>
+    <p>You may have specified a folder in which to put the backup files.  In the example below, replace any instance of <var>FOLDER</var> with that path.</p>
+    <p>If you specified a domain for your Windows server, add it to the beginning of <var>USERNAME</var> with a semicolon between them.  For example, <var>domain;username</var>.</p>
+    <screen>
+gvfs-mount smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var>
+duplicity --gio smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var> /tmp/restore</screen>
+  </item>
+</terms>
+</section>
+
+</section>
+
+<section id="setup">
+<title>Restoring by Hand</title>
+
+<p>If even <app>duplicity</app> isn't working for you, there may be little hope.  The backup file format is complicated and not easily manipulated.  But if you're desperate, it's worth a try.</p>
+
+<p>If you used a remote or cloud server to store your backup, first download all the <app>duplicity</app> files and place them in a folder on your computer.  Then enter that folder in your terminal.</p>
+
+<p><app>Duplicity</app> stores your data in small chunks called volumes.  Some volumes belong to the periodic 'full' or fresh backups and others to the 'inc' or incremental backups.  Starting with a full backup set of volumes at volume 1, you'll need to restore files volume by volume.</p>
+
+<p>If you encrypted your backup, first you must decrypt the volume with <cmd>gpg</cmd>.  Say you have <file>duplicity-full.20110127T131352Z.vol1.difftar.gpg</file>:</p>
+<screen>gpg --output duplicity-full.20110127T131352Z.vol1.difftar --decrypt duplicity-full.20110127T131352Z.vol1.difftar.gpg</screen>
+
+<p>Now you have either a <file>.difftar</file> or a <file>.difftar.gz</file> volume (depending on whether you had to decrypt it or not).  Use <cmd>tar</cmd> on whichever one you have to extract the individual patch files:</p>
+<screen>tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz</screen>
+
+<p>Now the patch files will be in <file>multivolume_snapshot</file> and <file>snapshot</file> folders.  Use <cmd>rdiff</cmd> to stitch the files together.  See <cmd>man rdiff</cmd> for usage.</p>
+
+</section>
+
+</page>
