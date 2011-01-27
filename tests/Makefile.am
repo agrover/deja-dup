@@ -29,7 +29,6 @@ AUTO_TESTS = \
 	backup/permissions \
 	backup/spaces \
 	backup/symlinks \
-	basic/badversion \
 	prefs/s3-folder \
 	prefs/ssh-to-file \
 	restore/cycle \
@@ -41,8 +40,11 @@ AUTO_TESTS = \
 	restore/two
 
 # Tests that must be run manually
+# disk-full because it prompts for root password
+# badversion because it must download an old duplicity
 MANUAL_TESTS = \
-	backup/disk-full
+	backup/disk-full \
+	basic/badversion
 
 ALL_TESTS = $(AUTO_TESTS) $(MANUAL_TESTS)
 
@@ -58,13 +60,17 @@ test:
 		fi; \
 	done
 
-# This is run automatically by distcheck and some build tools.  Needs to error
-# out if a test fails and needs to be runnable with no DISPLAY.
+# This is run automatically by distcheck and some build tools.
+# Needs to error out if a test fails and needs to be runnable with no DISPLAY.
+# Use system duplicity to avoid downloading on the fly and to facilitate
+# testing against a distro's potentially patched version of duplicity.
 check:
-	export TESTS_PASSED=true; \
+	export TESTS_PASSED=true ; \
+	export DEJA_DUP_TEST_VERSION=system ; \
+	export DISPLAY= ; \
 	for t in $(AUTO_TESTS); do \
 		echo -n "Testing $$t..."; \
-		if env DISPLAY= ./$$t >/dev/null 2>&1; then \
+		if ./$$t >/dev/null 2>&1; then \
 			echo -e " \e[32mPASSED\e[0m"; \
 		else \
 			echo -e " \e[31mFAILED\e[0m"; \
