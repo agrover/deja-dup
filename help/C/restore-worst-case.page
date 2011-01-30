@@ -19,7 +19,7 @@
 <screen>mkdir -p /tmp/restore</screen></item>
 </steps>
 
-<section id="setup">
+<section id="duplicity">
 <title>Restoring with Duplicity</title>
 
 <p>On the assumption that <app>Déjà Dup</app> is just not working for you right now, you're going to use the command line tool <app>duplicity</app> that is used by <app>Déjà Dup</app> behind the scenes to back up and restore your files.</p>
@@ -31,7 +31,7 @@
 
 <p>If you didn't encrypt the backup, add <cmd>--no-encryption</cmd> to the command.</p>
 
-<section>
+<section id="locations">
 <title>Other Backup Locations</title>
 <p>If you backed up to a remote or cloud server, the syntax you use with <app>duplicity</app> will be different than the external drive example above.  See below for how to connect to your chosen backup location.</p>
 <note><p>Remember to add <cmd>--no-encryption</cmd> to any example commands if you're backup is not encrypted.</p></note>
@@ -95,7 +95,7 @@ duplicity --gio smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var> /t
 
 </section>
 
-<section id="setup">
+<section id="by-hand">
 <title>Restoring by Hand</title>
 
 <p>If even <app>duplicity</app> isn't working for you, there may be little hope.  The backup file format is complicated and not easily manipulated.  But if you're desperate, it's worth a try.</p>
