@@ -1,7 +1,7 @@
 # -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008–2010 Michael Terry <mike@mterry.name>
+# © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -48,12 +48,27 @@ MANUAL_TESTS = \
 
 ALL_TESTS = $(AUTO_TESTS) $(MANUAL_TESTS)
 
+prep: data/symlink
+
+data/symlink: $(srcdir)/data/symlink.tar.gz
+	@echo "Expanding symlink.tar.gz"
+	@rm -rf $(builddir)/data/symlink
+	@mkdir -p $(builddir)/data
+	@tar xf $(srcdir)/data/symlink.tar.gz -C $(builddir)/data
+
+symtar:
+	@echo "Making symlink.tar.gz"
+	@rm -f $(builddir)/data/symlink.tar.gz
+	@mkdir -p $(builddir)/data
+	@(cd $(srcdir)/data; tar -cf ../$(builddir)/data/symlink.tar symlink; gzip ../$(builddir)/data/symlink.tar)
+$(builddir)/data/symlink.tar.gz: symtar
+
 # This is for 'interactive' running of all the tests.  See 'check' target for
 # a target more suitable for automated testing.
-test:
+test: prep
 	@for t in $(ALL_TESTS); do \
 		echo -n "Testing $$t..."; \
-		if ./$$t >/dev/null 2>&1; then \
+		if $(srcdir)/$$t >/dev/null 2>&1; then \
 			echo -e " \e[32mPASSED\e[0m"; \
 		else \
 			echo -e " \e[31mFAILED\e[0m"; \
@@ -64,16 +79,15 @@ test:
 # Needs to error out if a test fails and needs to be runnable with no DISPLAY.
 # Use system duplicity to avoid downloading on the fly and to facilitate
 # testing against a distro's potentially patched version of duplicity.
-check:
+check: prep
 	export TESTS_PASSED=true ; \
 	export DEJA_DUP_TEST_VERSION=system ; \
 	export DISPLAY= ; \
+	export srcdir=$(srcdir) ; \
+	export distdir=$(distdir) ; \
 	for t in $(AUTO_TESTS); do \
 		echo -n "Testing $$t..."; \
-		if ./$$t >/dev/null 2>&1; then \
-			echo -e " \e[32mPASSED\e[0m"; \
-		else \
-			echo -e " \e[31mFAILED\e[0m"; \
+		if ! $(srcdir)/$$t; then \
 			export TESTS_PASSED=false ; \
 		fi; \
 	done; \
@@ -90,3 +104,7 @@ EXTRA_DIST = \
 
 distclean-local:
 	rm -rf duplicity duplicity-src
+
+dist-hook: symtar
+	@rm -r $(distdir)/data/symlink
+	@cp $(builddir)/data/symlink.tar.gz $(distdir)/data

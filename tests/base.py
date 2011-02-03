@@ -76,15 +76,18 @@ def setup(start = True, args=[''], root_prompt = False):
     os.environ['DISPLAY'] = ':5'
     cleanup_envs.append('DISPLAY')
 
-  if 'srcdir' in environ:
-    srcdir = environ['srcdir']
-  else:
+  srcdir = environ.get('srcdir')
+  if not srcdir:
     srcdir = '.'
+  
+  distdir = environ.get('distdir')
+  if not distdir:
+    distdir = '.'
   
   environ['LANG'] = 'C'
   environ['DEJA_DUP_TESTING'] = '1'
-  
-  extra_paths = '../deja-dup:../preferences:../applet:../monitor:'
+
+  extra_paths = ':'.join(['%s/../%s' % (distdir, x) for x in ['deja-dup', 'preferences', 'applet', 'monitor']]) + ':'
   extra_pythonpaths = ''
   
   version = None
@@ -94,7 +97,7 @@ def setup(start = True, args=[''], root_prompt = False):
     version = latest_duplicity
   if version != 'system':
     os.system('%s/build-duplicity %s' % (srcdir, version))
-    duproot = './duplicity/duplicity-%s' % (version)
+    duproot = '%s/duplicity/duplicity-%s' % (srcdir, version)
     if not os.path.exists(duproot):
       print 'Could not find duplicity %s' % version
       sys.exit(1)
@@ -141,12 +144,12 @@ def setup(start = True, args=[''], root_prompt = False):
   os.system('echo LocationMode=filename-entry >> "%s/gtk-2.0/gtkfilechooser.ini"' % environ['XDG_CONFIG_HOME'])
 
   # Now install default schema into our temporary config dir
-  if os.system('cp %s/../data/org.gnome.DejaDup.gschema.xml %s/glib-2.0/schemas/ && glib-compile-schemas %s/glib-2.0/schemas/' % (srcdir, environ['XDG_DATA_HOME'], environ['XDG_DATA_HOME'])):
+  if os.system('cp %s/../data/org.gnome.DejaDup.gschema.xml %s/glib-2.0/schemas/ && glib-compile-schemas %s/glib-2.0/schemas/' % (distdir, environ['XDG_DATA_HOME'], environ['XDG_DATA_HOME'])):
     raise Exception('Could not install settings schema')
 
   # Copy interface files into place as well
   os.system("mkdir -p %s/deja-dup/ui" % environ['XDG_DATA_HOME'])
-  os.system("cp ../data/ui/* %s/deja-dup/ui" % environ['XDG_DATA_HOME'])
+  os.system("cp %s/../data/ui/* %s/deja-dup/ui" % (srcdir, environ['XDG_DATA_HOME']))
 
   set_settings_value("root-prompt", 'true' if root_prompt else 'false')
 
