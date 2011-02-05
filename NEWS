@@ -1,5 +1,17 @@
 Déjà Dup 17.6 (GNOME 2.91.6)
 ----------------------------
+Bug Fixes:
+ • Don't show error if both Déjà Dup and nautilus are trying to mount a volume at the same time
+ • Allow removing multiple folders from the preferences at the same time
+ • Handle more odd symlink-in-include-path situations
+ • Fix odd behavior (possibly a crash) when cancelling a backup or restore
+Polish:
+ • Exclude Adobe flash cache directory by default
+ • Add documentation for how to get your data back even if Déjà Dup isn't working
+Packaging:
+ • Have 'make check' run some tests inside of Xvfb.  This may not work 100% yet, if it doesn't, just don't run tests as part of the build
+ • If building in maintainer mode (and thus using valac), the minimum valac version is now 0.11.4
+ • Support libnautilus-extension-3.0
 
 Déjà Dup 17.5 (GNOME 2.91.5)
 ----------------------------
