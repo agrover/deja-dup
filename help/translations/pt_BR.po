@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-01-09 21:51-0500\n"
+"POT-Creation-Date: 2011-01-30 09:53-0500\n"
 "PO-Revision-Date: 2010-12-23 08:30+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
@@ -15,8 +15,323 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-01-11 05:06+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-31 05:04+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
+
+#: restore-worst-case.page:6(desc)
+msgid "What to do if you can't restore your files."
+msgstr ""
+
+#: restore-worst-case.page:10(title)
+msgid "When Everything Goes Wrong"
+msgstr ""
+
+#: restore-worst-case.page:12(p)
+msgid ""
+"<app>Déjà Dup</app> may fail. Maybe it crashes or gives you an error when "
+"you try to restore. When you really need your data back, the last thing you "
+"want do deal with is a bug. Consider filing a <link "
+"href=\"https://launchpad.net/deja-dup/+filebug\">bug report</link> but in "
+"the meantime, here are some approaches to workaround a misbehaving <app>Déjà "
+"Dup</app> and get your data back."
+msgstr ""
+
+#: restore-worst-case.page:14(p)
+msgid ""
+"This is going to get technical. If none of this makes sense to you, don't be "
+"afraid to <link href=\"https://answers.launchpad.net/deja-dup\">ask for "
+"help</link>."
+msgstr ""
+
+#: restore-worst-case.page:17(p)
+msgid ""
+"Open a <app>Terminal</app> window by pressing "
+"<keyseq><key>Ctrl</key><key>Alt</key><key>T</key></keyseq>."
+msgstr ""
+
+#: restore-worst-case.page:18(p)
+msgid ""
+"Create the directory in which you will place your restored files. This guide "
+"will use <file>/tmp/restore</file>:"
+msgstr ""
+
+#: restore-worst-case.page:19(screen)
+#, no-wrap
+msgid "mkdir -p /tmp/restore"
+msgstr ""
+
+#: restore-worst-case.page:23(title)
+msgid "Restoring with Duplicity"
+msgstr ""
+
+#: restore-worst-case.page:25(p)
+msgid ""
+"On the assumption that <app>Déjà Dup</app> is just not working for you right "
+"now, you're going to use the command line tool <app>duplicity</app> that is "
+"used by <app>Déjà Dup</app> behind the scenes to back up and restore your "
+"files."
+msgstr ""
+
+#: restore-worst-case.page:27(p)
+msgid ""
+"If you want more information about <app>duplicity</app> than presented here, "
+"run <cmd>man duplicity</cmd>."
+msgstr ""
+
+#: restore-worst-case.page:29(p)
+msgid ""
+"The first thing we'll try is a simple restore of all your data. Assuming "
+"your files are on an external drive mounted as <file>/media/backup</file> "
+"and you chose to encrypt the backup, try this:"
+msgstr ""
+
+#: restore-worst-case.page:30(screen)
+#, no-wrap
+msgid "duplicity --gio file:///media/backup /tmp/restore"
+msgstr ""
+
+#: restore-worst-case.page:32(p)
+msgid ""
+"If you didn't encrypt the backup, add <cmd>--no-encryption</cmd> to the "
+"command."
+msgstr ""
+
+#: restore-worst-case.page:35(title)
+msgid "Other Backup Locations"
+msgstr ""
+
+#: restore-worst-case.page:36(p)
+msgid ""
+"If you backed up to a remote or cloud server, the syntax you use with "
+"<app>duplicity</app> will be different than the external drive example "
+"above. See below for how to connect to your chosen backup location."
+msgstr ""
+
+#: restore-worst-case.page:37(p)
+msgid ""
+"Remember to add <cmd>--no-encryption</cmd> to any example commands if you're "
+"backup is not encrypted."
+msgstr ""
+
+#: restore-worst-case.page:38(p)
+msgid ""
+"If <app>duplicity</app> appears to be having trouble connecting to your "
+"server, try downloading all the <app>duplicity</app> files yourself to a "
+"local folder and following the simpler example above."
+msgstr ""
+
+#: restore-worst-case.page:41(title)
+msgid "Amazon S3"
+msgstr "Amazon S3"
+
+#: restore-worst-case.page:42(p)
+msgid ""
+"Look up your Amazon S3 access key ID and secret access key and replace "
+"instances of <var>ID</var> and <var>SECRET</var> in the example below with "
+"those respective values."
+msgstr ""
+
+#: restore-worst-case.page:43(p)
+#: restore-worst-case.page:61(p)
+#: restore-worst-case.page:70(p)
+#: restore-worst-case.page:78(p)
+#: restore-worst-case.page:87(p)
+msgid ""
+"You may have specified a folder in which to put the backup files. In the "
+"example below, replace any instance of <var>FOLDER</var> with that path."
+msgstr ""
+
+#: restore-worst-case.page:44(screen)
+#, no-wrap
+msgid ""
+"\n"
+"export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
+"export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
+"duplicity s3+http://deja-dup-auto-<var>ID</var>/<var>FOLDER</var> "
+"/tmp/restore"
+msgstr ""
+
+#: restore-worst-case.page:50(title)
+msgid "Rackspace Cloud Files"
+msgstr ""
+
+#: restore-worst-case.page:51(p)
+msgid ""
+"Look up your Rackspace username and API key and replace instances of "
+"<var>USERNAME</var> and <var>KEY</var> in the example below with those "
+"respective values."
+msgstr ""
+
+#: restore-worst-case.page:52(p)
+msgid ""
+"You may have specified a container in which to put the backup files. In the "
+"example below, replace any instance of <var>CONTAINER</var> with that name."
+msgstr ""
+
+#: restore-worst-case.page:53(screen)
+#, no-wrap
+msgid ""
+"\n"
+"export CLOUDFILES_USERNAME=<var>USERNAME</var>\n"
+"export CLOUDFILES_APIKEY=<var>KEY</var>\n"
+"duplicity cf+http://<var>CONTAINER</var> /tmp/restore"
+msgstr ""
+
+#: restore-worst-case.page:59(title)
+msgid "FTP"
+msgstr ""
+
+#: restore-worst-case.page:60(p)
+#: restore-worst-case.page:69(p)
+#: restore-worst-case.page:77(p)
+msgid ""
+"Look up your server address, port, username, and password and replace "
+"instances of <var>SERVER</var>, <var>PORT</var>, <var>USERNAME</var>, and "
+"<var>PASSWORD</var> in the example below with those respective values."
+msgstr ""
+
+#: restore-worst-case.page:62(p)
+msgid ""
+"If you chose to not log in with a username, use <var>anonymous</var> as your "
+"<var>USERNAME</var> below."
+msgstr ""
+
+#: restore-worst-case.page:63(screen)
+#, no-wrap
+msgid ""
+"\n"
+"gvfs-mount "
+"ftp://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+"\n"
+"duplicity --gio "
+"ftp://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+" /tmp/restore"
+msgstr ""
+
+#: restore-worst-case.page:68(title)
+msgid "SSH"
+msgstr ""
+
+#: restore-worst-case.page:71(screen)
+#, no-wrap
+msgid ""
+"\n"
+"gvfs-mount "
+"ssh://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+"\n"
+"duplicity --gio "
+"ssh://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+" /tmp/restore"
+msgstr ""
+
+#: restore-worst-case.page:76(title)
+msgid "WebDAV"
+msgstr ""
+
+#: restore-worst-case.page:79(p)
+msgid ""
+"If you chose to use a secure connection (HTTPS) when backing up, use "
+"<var>davs://</var> instead of <var>dav://</var> in the example below."
+msgstr ""
+
+#: restore-worst-case.page:80(screen)
+#, no-wrap
+msgid ""
+"\n"
+"gvfs-mount "
+"dav://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+"\n"
+"duplicity --gio "
+"dav://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+" /tmp/restore"
+msgstr ""
+
+#: restore-worst-case.page:85(title)
+msgid "Windows Share"
+msgstr ""
+
+#: restore-worst-case.page:86(p)
+msgid ""
+"Look up your server address, username, and password and replace instances of "
+"<var>SERVER</var>, <var>USERNAME</var>, and <var>PASSWORD</var> in the "
+"example below with those respective values."
+msgstr ""
+
+#: restore-worst-case.page:88(p)
+msgid ""
+"If you specified a domain for your Windows server, add it to the beginning "
+"of <var>USERNAME</var> with a semicolon between them. For example, "
+"<var>domain;username</var>."
+msgstr ""
+
+#: restore-worst-case.page:89(screen)
+#, no-wrap
+msgid ""
+"\n"
+"gvfs-mount smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var>\n"
+"duplicity --gio "
+"smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var> /tmp/restore"
+msgstr ""
+
+#: restore-worst-case.page:99(title)
+msgid "Restoring by Hand"
+msgstr ""
+
+#: restore-worst-case.page:101(p)
+msgid ""
+"If even <app>duplicity</app> isn't working for you, there may be little "
+"hope. The backup file format is complicated and not easily manipulated. But "
+"if you're desperate, it's worth a try."
+msgstr ""
+
+#: restore-worst-case.page:103(p)
+msgid ""
+"If you used a remote or cloud server to store your backup, first download "
+"all the <app>duplicity</app> files and place them in a folder on your "
+"computer. Then enter that folder in your terminal."
+msgstr ""
+
+#: restore-worst-case.page:105(p)
+msgid ""
+"<app>Duplicity</app> stores your data in small chunks called volumes. Some "
+"volumes belong to the periodic 'full' or fresh backups and others to the "
+"'inc' or incremental backups. Starting with a full backup set of volumes at "
+"volume 1, you'll need to restore files volume by volume."
+msgstr ""
+
+#: restore-worst-case.page:107(p)
+msgid ""
+"If you encrypted your backup, first you must decrypt the volume with "
+"<cmd>gpg</cmd>. Say you have <file>duplicity-"
+"full.20110127T131352Z.vol1.difftar.gpg</file>:"
+msgstr ""
+
+#: restore-worst-case.page:108(screen)
+#, no-wrap
+msgid ""
+"gpg --output duplicity-full.20110127T131352Z.vol1.difftar --decrypt "
+"duplicity-full.20110127T131352Z.vol1.difftar.gpg"
+msgstr ""
+
+#: restore-worst-case.page:110(p)
+msgid ""
+"Now you have either a <file>.difftar</file> or a <file>.difftar.gz</file> "
+"volume (depending on whether you had to decrypt it or not). Use "
+"<cmd>tar</cmd> on whichever one you have to extract the individual patch "
+"files:"
+msgstr ""
+
+#: restore-worst-case.page:111(screen)
+#, no-wrap
+msgid "tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz"
+msgstr ""
+
+#: restore-worst-case.page:113(p)
+msgid ""
+"Now the patch files will be in <file>multivolume_snapshot</file> and "
+"<file>snapshot</file> folders. Use <cmd>rdiff</cmd> to stitch the files "
+"together. See <cmd>man rdiff</cmd> for usage."
+msgstr ""
 
 #: restore-revert.page:6(desc)
 msgid "Restore a previous version of a file."
@@ -224,15 +539,15 @@ msgstr ""
 "localizações as originais</gui>, tente uma restauração alternativa para uma "
 "pasta temporária e mova seus arquivos para o lugar que lhes pertence."
 
-#: prefs.page:6(desc)
+#: prefs.page:7(desc)
 msgid "Adjust your backup settings."
 msgstr "Ajustar as configurações de seu backup."
 
-#: prefs.page:9(title)
+#: prefs.page:10(title)
 msgid "Preferences"
 msgstr "Preferências"
 
-#: prefs.page:10(p)
+#: prefs.page:11(p)
 msgid ""
 "To configure <app>Déjà Dup</app>, choose <guiseq><gui "
 "style=\"menu\">Edit</gui><gui style=\"menuitem\">Preferences</gui></guiseq>."
@@ -240,11 +555,11 @@ msgstr ""
 "Para configurar <app>Déjà Dup</app>, escolha <guiseq><gui "
 "style=\"menu\">Edit</gui><gui style=\"menuitem\">Preferências</gui></guiseq>."
 
-#: prefs.page:13(gui)
+#: prefs.page:14(gui)
 msgid "Backup location"
 msgstr "Localização do backup"
 
-#: prefs.page:14(p)
+#: prefs.page:15(p)
 msgid ""
 "Use this drop-down list box to specify the backup location that <app>Déjà "
 "Dup</app> uses when backing up or restoring:"
@@ -252,11 +567,11 @@ msgstr ""
 "Use este menu suspenso para especificar o local do backup que <app>Déjà "
 "Dup</app> usará quando estiver fazendo o backup ou restaurando:"
 
-#: prefs.page:17(title)
+#: prefs.page:18(title)
 msgid "Cloud Services"
 msgstr ""
 
-#: prefs.page:18(p)
+#: prefs.page:19(p)
 msgid ""
 "The first few backup locations are cloud storage services provided by "
 "various companies. For a small fee per gigabyte, they hold your data for "
@@ -266,38 +581,38 @@ msgid ""
 "Rackspace Cloud Files, and Ubuntu One."
 msgstr ""
 
-#: prefs.page:19(p)
+#: prefs.page:20(p)
 msgid ""
 "These services costs money. Read their rates carefully before using it."
 msgstr ""
 
-#: prefs.page:22(title)
+#: prefs.page:23(title)
 msgid "Removable Media"
 msgstr "Mídia removível"
 
-#: prefs.page:23(p)
+#: prefs.page:24(p)
 msgid ""
 "You may see removable media like external hard drives or thumb drives listed."
 msgstr ""
 "Você pode ver as mídias removíveis como discos rígidos externos ou unidades "
 "portáteis."
 
-#: prefs.page:26(title)
+#: prefs.page:27(title)
 msgid "Remote Servers"
 msgstr ""
 
-#: prefs.page:27(p)
+#: prefs.page:28(p)
 msgid ""
 "Choose the type of remote server to which you want to connect. Then you can "
 "enter the server information. Alternatively, if you know your server's URL, "
 "choose <gui>Custom Location</gui> and enter it."
 msgstr ""
 
-#: prefs.page:30(title)
+#: prefs.page:31(title)
 msgid "Local Folder"
 msgstr ""
 
-#: prefs.page:31(p)
+#: prefs.page:32(p)
 msgid ""
 "You may also want to choose a local folder as a backup location. Note that "
 "backups can be quite large, so make sure you have enough free disk space."
@@ -306,11 +621,11 @@ msgstr ""
 "Note que os backups podem ser relativamente grandes, então certifique-se de "
 "que tenha espaço livre suficiente."
 
-#: prefs.page:36(gui)
+#: prefs.page:37(gui)
 msgid "Encrypt backup files"
 msgstr "Criptografar arquivos de backup"
 
-#: prefs.page:37(p)
+#: prefs.page:38(p)
 msgid ""
 "Encrypting your backup files is recommended to keep your data safe. If you "
 "don’t have exclusive physical control of your backup location, or if it is "
@@ -322,7 +637,7 @@ msgstr ""
 "backup, ou se for roubado, um backup criptografado previne que outros vejam "
 "seus dados pessoais."
 
-#: prefs.page:38(p)
+#: prefs.page:39(p)
 msgid ""
 "If on, you will be prompted for a password. Keep this password safe, you "
 "will need it to restore your data."
@@ -330,15 +645,15 @@ msgstr ""
 "Se ativado, será solicitado a você uma senha. Mantenha essa senha segura, "
 "você precisará dela para restaurar seus dados."
 
-#: prefs.page:39(p)
+#: prefs.page:40(p)
 msgid "Encryption is enabled by default."
 msgstr "Criptografia é ativada por padrão."
 
-#: prefs.page:42(gui)
+#: prefs.page:43(gui)
 msgid "Include files in folders"
 msgstr "Incluir arquivos em pastas"
 
-#: prefs.page:43(p)
+#: prefs.page:44(p)
 msgid ""
 "Select a list of directories to backup. Press the <gui "
 "style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
@@ -350,11 +665,11 @@ msgstr ""
 "alterar a lista. Se você está interessado em copiar somente seus próprios "
 "dados, o padrão <gui>Pasta Pessoal</gui> é o suficiente."
 
-#: prefs.page:46(gui)
+#: prefs.page:47(gui)
 msgid "Except files in folders"
 msgstr "Exceto arquivos em pastas"
 
-#: prefs.page:47(p)
+#: prefs.page:48(p)
 msgid ""
 "Select a list of directories to not backup. Press the <gui "
 "style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
@@ -364,7 +679,7 @@ msgstr ""
 "style=\"button\">Adicionar </gui> ou <gui style=\"button\">Remover</gui> "
 "para alterar a lista."
 
-#: prefs.page:48(p)
+#: prefs.page:49(p)
 msgid ""
 "Some of your data may be large and not very important to you. In that case, "
 "you can save yourself some time and space by not backing them up."
@@ -372,55 +687,59 @@ msgstr ""
 "Alguns dos seus dados podem ser grandes e não muito importantes para você. "
 "Nesse caso, você mesmo pode salvar tempo e espaço não fazendo a cópia deles."
 
-#: prefs.page:50(p)
+#: prefs.page:51(p)
 msgid "Some locations are always excluded by default:"
 msgstr ""
 
-#: prefs.page:52(span)
+#: prefs.page:53(file)
+msgid "~/.adobe/Flash_Player/AssetCache"
+msgstr ""
+
+#: prefs.page:54(file)
 msgid "~/.cache"
 msgstr "~/.cache"
 
-#: prefs.page:53(span)
-msgid "~/.thumbnails"
-msgstr "~/.thumbnails"
-
-#: prefs.page:54(span)
+#: prefs.page:55(file)
 msgid "~/.gvfs"
 msgstr "~/.gvfs"
 
-#: prefs.page:55(span)
-msgid "~/.xsession-errors"
-msgstr "~/.xsession-errors"
-
-#: prefs.page:56(span)
-msgid "~/.recently-used.xbel"
-msgstr "~/.recently-used.xbel"
-
-#: prefs.page:57(span)
-msgid "~/.recent-applications.xbel"
-msgstr "~/.recent-applications.xbel"
-
-#: prefs.page:58(span)
+#: prefs.page:56(file)
 msgid "~/.Private"
 msgstr "~/.Private"
 
-#: prefs.page:59(span)
+#: prefs.page:57(file)
+msgid "~/.recent-applications.xbel"
+msgstr "~/.recent-applications.xbel"
+
+#: prefs.page:58(file)
+msgid "~/.recently-used.xbel"
+msgstr "~/.recently-used.xbel"
+
+#: prefs.page:59(file)
+msgid "~/.thumbnails"
+msgstr "~/.thumbnails"
+
+#: prefs.page:60(file)
+msgid "~/.xsession-errors"
+msgstr "~/.xsession-errors"
+
+#: prefs.page:61(file)
 msgid "/proc"
 msgstr "/proc"
 
-#: prefs.page:60(span)
-msgid "/tmp"
-msgstr "/tmp"
-
-#: prefs.page:61(span)
+#: prefs.page:62(file)
 msgid "/sys"
 msgstr "/sys"
 
-#: prefs.page:66(gui)
+#: prefs.page:63(file)
+msgid "/tmp"
+msgstr "/tmp"
+
+#: prefs.page:68(gui)
 msgid "Automatically backup on a regular schedule"
 msgstr "Fazer backup em intervalos regulares"
 
-#: prefs.page:67(p)
+#: prefs.page:69(p)
 msgid ""
 "Turn this option on to have <app>Déjà Dup</app> automatically backup for "
 "you. This is recommended so that you don’t forget to do it yourself. Backups "
@@ -432,27 +751,27 @@ msgstr ""
 "úteis se tiverem sido  feitos recentemente, então é importante realizá-los "
 "regularmente."
 
-#: prefs.page:68(p)
+#: prefs.page:70(p)
 msgid "Automatic backups are disabled by default."
 msgstr "Backups automáticos estão desativados por padrão."
 
-#: prefs.page:71(gui)
+#: prefs.page:73(gui)
 msgid "How often to backup"
 msgstr "Com que frequência fazer o backup"
 
-#: prefs.page:72(p)
+#: prefs.page:74(p)
 msgid "Choose a schedule for automatic backups."
 msgstr "Escolha um agendamento para os backups automáticos."
 
-#: prefs.page:73(p)
+#: prefs.page:75(p)
 msgid "Automatic backups are scheduled weekly by default."
 msgstr "Backups automáticos são agendados semanalmente por padrão."
 
-#: prefs.page:76(gui)
+#: prefs.page:78(gui)
 msgid "Keep backups"
 msgstr "Manter backups"
 
-#: prefs.page:77(p)
+#: prefs.page:79(p)
 msgid ""
 "Choose the minimum amount of time to keep backup files. If you find that the "
 "backup files are taking up too much space, you may want to decrease this "
@@ -465,37 +784,37 @@ msgstr ""
 "ser mantidos por mais tempo que o escolhido. Mas os arquivos não serão "
 "deletados em breve."
 
-#: prefs.page:78(p)
+#: prefs.page:80(p)
 msgid ""
 "Backups are kept forever by default, but still may be deleted earlier if the "
 "backup location begins to run out of space."
 msgstr ""
 
-#: index.page:8(span)
+#: index.page:9(name)
 msgid "Michael Terry"
 msgstr "Michael Terry"
 
-#: index.page:9(span)
+#: index.page:10(email)
 msgid "mike@mterry.name"
 msgstr "mike@mterry.name"
 
-#: index.page:10(span)
+#: index.page:11(years)
 msgid "2010"
 msgstr "2010"
 
-#: index.page:12(p)
+#: index.page:13(p)
 msgid "Creative Commons Attribution-Share Alike 3.0 Unported License"
 msgstr "Creative Commons Attribution-Share Alike 3.0 Unported License"
 
-#: index.page:15(title)
+#: index.page:16(title)
 msgid "<app>Déjà Dup</app> Help"
 msgstr "Ajuda <app>Déjà Dup</app>"
 
-#: index.page:18(title)
+#: index.page:19(title)
 msgid "Backing Up"
 msgstr "Fazendo Backup"
 
-#: index.page:22(title)
+#: index.page:23(title)
 msgid "Restoring Files"
 msgstr "Restaurando arquivos"
 
@@ -646,9 +965,6 @@ msgstr ""
 #, no-wrap
 #~ msgid "deja-dup --restore Documents/test.txt"
 #~ msgstr "deja-dup --restore Documentos/teste.txt"
-
-#~ msgid "Amazon S3"
-#~ msgstr "Amazon S3"
 
 #~ msgid ""
 #~ "This backup location uses the S3 storage service from Amazon. For a small "

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-01-10 07:34-0600\n"
-"PO-Revision-Date: 2011-01-10 22:10+0000\n"
+"POT-Creation-Date: 2011-01-16 21:41-0500\n"
+"PO-Revision-Date: 2011-01-11 11:29+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-01-11 05:04+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-18 04:53+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 
 #: ../data/deja-dup.desktop.in.h:1
 msgid "Back up your files"
@@ -172,7 +172,7 @@ msgstr "Krótka nazwa woluminu zewnętrznego"
 msgid "The Amazon S3 bucket name to use"
 msgstr "Nazwa używanego kosza serwisu Amazon S3"
 
-#. Left this way for historical reasons, should be '/$HOSTNAME'.  See convert_s3_folder_to_hostname()
+#. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
 msgid "The Amazon S3 folder"
 msgstr "Katalog serwisu Amazon S3"
@@ -339,7 +339,7 @@ msgstr "Skanowanie…"
 
 #: ../nautilus/NautilusExtension.c:90
 msgid "Restore Missing Files…"
-msgstr ""
+msgstr "Przywróć brakujące pliki…"
 
 #: ../nautilus/NautilusExtension.c:91
 msgid "Restore deleted files from backup"
@@ -365,34 +365,34 @@ msgstr "FUSE dla biblioteki GVFS nie jest zainstalowane"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:89
+#: ../common/BackendFile.vala:92
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s w %2$s"
 
-#: ../common/BackendFile.vala:127
+#: ../common/BackendFile.vala:130
 #, c-format
 msgid "Backup will begin when %s becomes connected."
 msgstr "Wykonanie kopii zapasowej zostanie rozpoczęte po podłączeniu %s."
 
-#: ../common/BackendFile.vala:134 ../common/BackendRackspace.vala:45
-#: ../common/BackendS3.vala:55 ../common/BackendU1.vala:61
+#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:45
+#: ../common/BackendS3.vala:55 ../common/BackendU1.vala:109
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "Wykonanie kopii zapasowej zostanie rozpoczęte po uzyskaniu dostępu do sieci."
 
-#: ../common/BackendFile.vala:372
+#: ../common/BackendFile.vala:403
 msgid "Backup location not available"
 msgstr "Położenie kopii zapasowych jest niedostępne"
 
-#: ../common/BackendFile.vala:372
+#: ../common/BackendFile.vala:403
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Oczekiwanie na podłączenie \"%s\"…"
 
 #: ../common/BackendRackspace.vala:54
 msgid "You must specify a Rackspace container in your preferences."
-msgstr ""
+msgstr "Należy podać kontener usługi Rackspace w preferencjach."
 
 #: ../common/BackendRackspace.vala:63 ../widgets/ConfigLocation.vala:103
 msgid "Rackspace Cloud Files"
@@ -469,25 +469,25 @@ msgstr "_Zapamiętanie tajnego hasła dostępu"
 msgid "Enter Amazon S3 access key"
 msgstr "Proszę wprowadzić klucz dostępu serwisu Amazon S3"
 
-#: ../common/BackendU1.vala:77 ../widgets/ConfigLocation.vala:108
+#: ../common/BackendU1.vala:125 ../widgets/ConfigLocation.vala:108
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
 #. Translators: %s is a folder.
-#: ../common/BackendU1.vala:80
+#: ../common/BackendU1.vala:128
 #, c-format
 msgid "%s on Ubuntu One"
 msgstr "%s w usłudze Ubuntu One"
 
-#: ../common/BackendU1.vala:120
+#: ../common/BackendU1.vala:183
 msgid "Sign into Ubuntu One…"
 msgstr "Zaloguj do usługi Ubuntu One…"
 
-#: ../common/BackendU1.vala:122
+#: ../common/BackendU1.vala:185
 msgid "Connect to Ubuntu One"
 msgstr "Połączenie z usługą Ubuntu One"
 
-#: ../common/CommonUtils.vala:218
+#: ../common/CommonUtils.vala:224
 msgid "Unknown"
 msgstr "Nieznane"
 
@@ -1326,7 +1326,7 @@ msgid "_Port:"
 msgstr "_Port:"
 
 #: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
-#: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:34
+#: ../widgets/ConfigLocationFile.vala:45 ../widgets/ConfigLocationS3.vala:34
 #: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
 #: ../widgets/ConfigLocationU1.vala:32 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder:"
@@ -1340,7 +1340,7 @@ msgstr "_Logowanie za pomocą nazwy użytkownika"
 msgid "_Browse…"
 msgstr "_Przeglądaj…"
 
-#: ../widgets/ConfigLocationFile.vala:49
+#: ../widgets/ConfigLocationFile.vala:55
 msgid "Choose Folder"
 msgstr "Wybór katalogu"
 
