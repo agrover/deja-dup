@@ -152,7 +152,7 @@ AS_IF([test "x$with_nautilus" != xno],
     [AC_SUBST(NAUTILUS_CFLAGS)
      AC_SUBST(NAUTILUS_LIBS)]
      dnl Get nautilus extensions directory
-     NAUTILUS_EXTENSION_DIR="${libdir}/nautilus/extensions-2.0"
+     NAUTILUS_EXTENSION_DIR=`$PKG_CONFIG --variable=extensiondir libnautilus-extension`
      AC_SUBST(NAUTILUS_EXTENSION_DIR),
     [if test "x$with_nautilus" != xcheck; then
         AC_MSG_FAILURE(
