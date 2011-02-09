@@ -20,6 +20,7 @@
 import sys
 import os
 import datetime
+import stat
 sys.path.insert(0, sys.path[0]+'/..')
 import base
 import ldtp
@@ -38,9 +39,22 @@ def check_dir(path, oneval):
   assert os.path.isdir(root+'top/next')
 
 def test():
-  restoredir = base.get_temp_name('restore')
+  restoredir = base.get_temp_name('restore', make=True)
+  os.chmod(restoredir, stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO) # give new root all permissions
+  os.chmod(base.temp_dir, stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO) # and parent of new root
+  before = os.stat(restoredir)
+  beforeparent = os.stat(base.temp_dir)
   base.setup()
   base.restore_simple(restoredir, DATE1, backend='file', dest=(sys.path[0]+'/vols/simple'), encrypt=False)
+  # A concern is that DD will overwrite the permissions of the restore directory or its parents, so check that here
+  after = os.stat(restoredir)
+  assert before.st_mode == after.st_mode, after.st_mode
+  assert before.st_uid == after.st_uid, after.st_uid
+  assert before.st_gid == after.st_gid, after.st_gid
+  afterparent = os.stat(base.temp_dir)
+  assert beforeparent.st_mode == afterparent.st_mode, afterparent.st_mode
+  assert beforeparent.st_uid == afterparent.st_uid, afterparent.st_uid
+  assert beforeparent.st_gid == afterparent.st_gid, afterparent.st_gid
   check_dir(restoredir, 'one\n')
   os.system("rm -r %s" % restoredir)
   base.start_deja_dup()
