@@ -247,7 +247,6 @@ public class Duplicity : Object
           var remaining = so_far.get_relative_path(file);
           if (remaining != null)
             full_target = full_target.resolve_relative_path(remaining);
-          warning("%s, %s, %s, %s, %s, %s\n", file.get_path(), so_far.get_path(), parent.get_path(), symlink_target, remaining, full_target.get_path());
 
           if (include)
             all.remove(file); // may fail if it's not there, which is fine
