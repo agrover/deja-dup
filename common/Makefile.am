@@ -43,7 +43,8 @@ libcommon_la_VALASOURCES = \
 	OperationFiles.vala \
 	RecursiveDelete.vala \
 	RecursiveMove.vala \
-	RecursiveOp.vala
+	RecursiveOp.vala \
+	SimpleSettings.vala
 
 libcommon_la_VALABUILTSOURCES = \
 	common.h \

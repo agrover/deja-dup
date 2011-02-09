@@ -28,7 +28,7 @@ public abstract class ConfigWidget : Gtk.EventBox
   public string key {get; construct;}
   public string ns {get; construct; default = "";}
   
-  protected Settings settings;
+  protected SimpleSettings settings;
   construct {
     settings = DejaDup.get_settings(ns);
     

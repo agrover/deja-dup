@@ -51,7 +51,7 @@ public string get_trash_path()
   return Path.build_filename(Environment.get_user_data_dir(), "Trash");
 }
 
-public string get_folder_key(Settings settings, string key)
+public string get_folder_key(SimpleSettings settings, string key)
 {
   string folder = settings.get_string(key);
   if (folder.contains("$HOSTNAME")) {
@@ -110,12 +110,12 @@ public File[] parse_dir_list(string*[] dirs)
   return rv;
 }
 
-public Settings get_settings(string? subdir = null)
+public SimpleSettings get_settings(string? subdir = null)
 {
   string schema = "org.gnome.DejaDup";
   if (subdir != null && subdir != "")
     schema += "." + subdir;
-  return new Settings(schema);
+  return new SimpleSettings(schema);
 }
 
 const string SSH_USERNAME_KEY = "username";
