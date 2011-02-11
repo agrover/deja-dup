@@ -67,7 +67,18 @@ $(builddir)/data/symlink.tar.gz: symtar
 # This is for 'interactive' running of all the tests.  See 'check' target for
 # a target more suitable for automated testing.
 test: prep
-	@for t in $(ALL_TESTS); do \
+	@export OLD_DISPLAY=$$DISPLAY ; \
+	export DISPLAY= ; \
+	for t in $(AUTO_TESTS); do \
+		echo -n "Testing $$t..."; \
+		if $(srcdir)/$$t >/dev/null 2>&1; then \
+			echo -e " \e[32mPASSED\e[0m"; \
+		else \
+			echo -e " \e[31mFAILED\e[0m"; \
+		fi; \
+	done \
+	export DISPLAY=$$OLD_DISPLAY ; \
+	for t in $(MANUAL_TESTS); do \
 		echo -n "Testing $$t..."; \
 		if $(srcdir)/$$t >/dev/null 2>&1; then \
 			echo -e " \e[32mPASSED\e[0m"; \
@@ -81,7 +92,7 @@ test: prep
 # Use system duplicity to avoid downloading on the fly and to facilitate
 # testing against a distro's potentially patched version of duplicity.
 check: prep
-	export TESTS_PASSED=true ; \
+	@export TESTS_PASSED=true ; \
 	export DEJA_DUP_TEST_VERSION=system ; \
 	export DISPLAY= ; \
 	export srcdir=$(srcdir) ; \

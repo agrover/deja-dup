@@ -216,12 +216,15 @@ def start_deja_dup(args=[], executable='deja-dup', waitfor='frmDéjàDup', debug
     global have_run
     if have_run:
       ldtp.wait(5) # pause between runs for valgrind to finish up
-    have_run = True
+    else:
+      have_run = True
     cmd = ['valgrind', '--gen-suppressions=all', '--leak-check=full',
            '--track-origins=yes', '--show-possibly-lost=no',
            '--error-exitcode=1', '--suppressions=valgrind.sup'] + cmd
   if debug:
     cmd = ['gnome-terminal', '-x', 'gdb', '-ex', 'run'] + cmd
+  environ['G_SLICE'] = 'always-malloc,debug-blocks'
+  environ['G_DEBUG'] = 'gc-friendly' if not environ.get('G_DEBUG') else environ['G_DEBUG'] + ',gc-friendly'
   subprocess.Popen(cmd)
   if waitfor is not None:
     ldtp.waittillguiexist(waitfor)

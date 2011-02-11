@@ -294,19 +294,22 @@ public abstract class Assistant : Gtk.Dialog
       break;
     }
 
+    // We call destroy on each so that they are destroyed in the idle loop.
+    // GailButton does weird things with queued events during the idle loop,
+    // so if we wait until then to destroy them, we avoid colliding with it.
     var area = (Gtk.ButtonBox)get_action_area();
     if (cancel_button != null) {
-      area.remove(cancel_button); cancel_button = null;}
+      area.remove(cancel_button); hacks_widget_destroy(cancel_button); cancel_button = null;}
     if (close_button != null) {
-      area.remove(close_button); close_button = null;}
+      area.remove(close_button); hacks_widget_destroy(close_button); close_button = null;}
     if (back_button != null) {
-      area.remove(back_button); back_button = null;}
+      area.remove(back_button); hacks_widget_destroy(back_button); back_button = null;}
     if (resume_button != null) {
-      area.remove(resume_button); resume_button = null;}
+      area.remove(resume_button); hacks_widget_destroy(resume_button); resume_button = null;}
     if (forward_button != null) {
-      area.remove(forward_button); forward_button = null;}
+      area.remove(forward_button); hacks_widget_destroy(forward_button); forward_button = null;}
     if (apply_button != null) {
-      area.remove(apply_button); apply_button = null;}
+      area.remove(apply_button); hacks_widget_destroy(apply_button); apply_button = null;}
 
     if (show_cancel)
       cancel_button = add_button(Gtk.Stock.CANCEL, CANCEL);

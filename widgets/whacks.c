@@ -91,14 +91,30 @@ hacks_widget_get_allocated_width(GtkWidget *w)
 #endif
 }
 
-void
-hacks_widget_destroy(GtkWidget *w)
+static gboolean
+destroy_in_idle(gpointer data)
 {
+  GtkWidget * w = GTK_WIDGET(data);
 #if GTK_CHECK_VERSION(2, 91, 0)
   gtk_widget_destroy(w);
 #else
-  gtk_object_destroy((GtkObject*)w);
+  gtk_object_destroy(GTK_OBJECT(w));
 #endif
+  return FALSE;
+}
+
+void
+hacks_widget_destroy(GtkWidget *w)
+{
+  // We destroy in the idle loop for two reasons:
+  // 1) Vala likes to unref local dialogs (like file choosers) after we call
+  //    destroy, which is odd.  This avoids issues that arise from that.
+  // 2) When running in accessiblity mode (as we do during test suites),
+  //    GailButtons tend to do odd things with queued events during idle calls.
+  //    This avoids destroying objects before gail is done with them, which led
+  //    to crashes.
+  gtk_widget_hide(w);
+  g_idle_add(destroy_in_idle, g_object_ref(w));
 }
 
 void
