@@ -867,7 +867,7 @@ public class Duplicity : Object
       return;
     
     if (firstline.length > 1) {
-      switch (firstline[1].to_int()) {
+      switch (int.parse(firstline[1])) {
       case ERROR_EXCEPTION: // exception
         process_exception(firstline.length > 2 ? firstline[2] : "", text);
         return;
@@ -1020,7 +1020,7 @@ public class Duplicity : Object
      * Pass message to appropriate function considering the type of output
      */
     if (firstline.length > 1) {
-      switch (firstline[1].to_int()) {
+      switch (int.parse(firstline[1])) {
       case INFO_DIFF_FILE_NEW:
       case INFO_DIFF_FILE_CHANGED:
       case INFO_DIFF_FILE_DELETED:
@@ -1091,12 +1091,12 @@ public class Duplicity : Object
     double total;
     
     if (firstline.length > 2)
-      this.progress_count = firstline[2].to_uint64();
+      this.progress_count = uint64.parse(firstline[2]);
     else
       return;
     
     if (firstline.length > 3)
-      total = firstline[3].to_double();
+      total = double.parse(firstline[3]);
     else if (this.progress_total > 0)
       total = this.progress_total;
     else
@@ -1170,7 +1170,7 @@ public class Duplicity : Object
                                          string text)
   {
     if (firstline.length > 1) {
-      switch (firstline[1].to_int()) {
+      switch (int.parse(firstline[1])) {
       case WARNING_ORPHANED_SIG:
       case WARNING_UNNECESSARY_SIG:
       case WARNING_UNMATCHED_SIG:

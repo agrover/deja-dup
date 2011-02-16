@@ -101,7 +101,7 @@ public class BackendS3 : Backend
     if (bits[4] == null)
       bucket += "-2";
     else {
-      var num = bits[4].to_long();
+      var num = long.parse(bits[4]);
       bits[4] = (num + 1).to_string();
       bucket = string.joinv("-", bits);
     }

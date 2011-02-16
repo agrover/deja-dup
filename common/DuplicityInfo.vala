@@ -74,12 +74,12 @@ public class DuplicityInfo : Object
       set_missing_duplicity_error(out header, out msg, null);
       return false;
     }
-    major = ver_tokens[0].to_int();
+    major = int.parse(ver_tokens[0]);
     // Don't error out if no minor or micro.  Duplicity might not have them?
     if (ver_tokens[1] != null) {
-      minor = ver_tokens[1].to_int();
+      minor = int.parse(ver_tokens[1]);
       if (ver_tokens[2] != null)
-        micro = ver_tokens[2].to_int();
+        micro = int.parse(ver_tokens[2]);
     }
     
     var good_enough = meets_requirements();

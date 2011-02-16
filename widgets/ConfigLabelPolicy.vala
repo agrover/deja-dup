@@ -64,36 +64,26 @@ public class ConfigLabelPolicy : ConfigLabel
     string policy;
     
     if (delete_after <= 0)
-      delete_after = int.MAX;
+      delete_after = ConfigDelete.FOREVER;
     
-    switch (delete_after) {
-    case ConfigDelete.WEEKLY:
+    if (delete_after == ConfigDelete.WEEKLY)
       policy = _("Old backups will be kept for at least a week or until the backup location is low on space.");
-      break;
-    case ConfigDelete.MONTHLY:
+    else if (delete_after == ConfigDelete.MONTHLY)
       policy = _("Old backups will be kept for at least a month or until the backup location is low on space.");
-      break;
-    case ConfigDelete.BIMONTHLY:
+    else if (delete_after == ConfigDelete.BIMONTHLY)
       policy = _("Old backups will be kept for at least two months or until the backup location is low on space.");
-      break;
-    case ConfigDelete.TRIMONTHLY:
+    else if (delete_after == ConfigDelete.TRIMONTHLY)
       policy = _("Old backups will be kept for at least three months or until the backup location is low on space.");
-      break;
-    case ConfigDelete.SEMIANNUALLY:
+    else if (delete_after == ConfigDelete.SEMIANNUALLY)
       policy = _("Old backups will be kept for at least six months or until the backup location is low on space.");
-      break;
-    case ConfigDelete.ANNUALLY:
+    else if (delete_after == ConfigDelete.ANNUALLY)
       policy = _("Old backups will be kept for at least a year or until the backup location is low on space.");
-      break;
-    case ConfigDelete.FOREVER:
+    else if (delete_after == ConfigDelete.FOREVER)
       policy = _("Old backups will be kept until the backup location is low on space.");
-      break;
-    default:
+    else
       policy = ngettext("Old backups will be kept at least %d day or until the backup location is low on space.",
                         "Old backups will be kept at least %d days or until the backup location is low on space.",
                         delete_after).printf(delete_after);
-      break;
-    }
     
     label.label = policy;
   }

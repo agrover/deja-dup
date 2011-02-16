@@ -148,9 +148,9 @@ public class BackendU1 : Backend
         string key, val;
         while (iter.next("{ss}", out key, out val)) {
           if (key == "quota_total")
-            total = val.to_uint64();
+            total = uint64.parse(val);
           else if (key == "quota_used")
-            used = val.to_uint64();
+            used = uint64.parse(val);
         }
       }
     });

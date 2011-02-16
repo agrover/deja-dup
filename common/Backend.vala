@@ -40,7 +40,7 @@ public abstract class Backend : Object
     envp_ready(true, new List<string>());
   }
 
-  public static const uint64 INFINITE_SPACE = uint64.MAX;
+  public static uint64 INFINITE_SPACE = uint64.MAX;
   public virtual async uint64 get_space(bool free = true) {return INFINITE_SPACE;}
   public virtual bool space_can_be_infinite() {return true;}
   

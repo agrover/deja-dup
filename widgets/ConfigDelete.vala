@@ -29,7 +29,7 @@ public class ConfigDelete : ConfigChoice
   public static const int TRIMONTHLY = 28*3;
   public static const int SEMIANNUALLY = 365/2;
   public static const int ANNUALLY = 365;
-  public static const int FOREVER = int.MAX;
+  public static int FOREVER = int.MAX;
 
   public ConfigDelete(string key, string ns="") {
     Object(key: key, ns: ns);

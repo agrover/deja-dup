@@ -80,8 +80,8 @@ public class AssistantRestoreMissing : AssistantRestore {
      *
      * @param //Time// ''a'', ''b'' Time objects
      */
-    var a_epoch = a.format("%s").to_int();
-    var b_epoch = b.format("%s").to_int();
+    var a_epoch = int.parse(a.format("%s"));
+    var b_epoch = int.parse(b.format("%s"));
     if (a_epoch < b_epoch)
       return 1;
     else if (a_epoch == b_epoch)
@@ -325,7 +325,7 @@ public class AssistantRestoreMissing : AssistantRestore {
     backups_queue.remove(begin);
 
     /* Update progress */
-    int tepoch = etime.format("%s").to_int();
+    int tepoch = int.parse(etime.format("%s"));
     TimeVal ttoday = TimeVal();
     ttoday.get_current_time();
     int ttodayi = (int) ttoday.tv_sec;

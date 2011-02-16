@@ -35,7 +35,7 @@ public class DuplicityInstance : Object
                             bool as_root = false) throws SpawnError
   {
     var verbose_str = Environment.get_variable("DEJA_DUP_DEBUG");
-    if (verbose_str != null && verbose_str.to_int() > 0)
+    if (verbose_str != null && int.parse(verbose_str) > 0)
       verbose = true;
     
     if (!DuplicityInfo.get_default().has_fixed_log_file)

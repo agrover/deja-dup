@@ -42,7 +42,7 @@ LT_INIT
 
 # Checks for valac
 if test "x$USE_MAINTAINER_MODE" = "xyes" ; then
-  DEJA_PROG_VALAC([0.11.4])
+  DEJA_PROG_VALAC([0.11.6])
   if test "x$VALAC" = "x" ; then
       AC_MSG_ERROR([Cannot find the "valac" compiler in your PATH])
   fi

@@ -90,7 +90,7 @@ public class ConfigURLPart : ConfigEntry
       uri.host = userval;
       break;
     case Part.PORT:
-      uri.port = userval.to_int();
+      uri.port = int.parse(userval);
       if (uri.port == 0) // no one would really want 0, right?
         uri.port = -1;
       break;
