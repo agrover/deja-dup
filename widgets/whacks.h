@@ -34,5 +34,10 @@ extern void hacks_widget_destroy(GtkWidget *w);
 extern void hacks_quit_on_destroy(GtkWidget *w);
 extern void hacks_get_natural_size(GtkWidget *w, GtkRequisition *req);
 
+extern GObject *hacks_unity_get_entry(void);
+extern void hacks_unity_entry_show_progress(GObject *entry, gboolean show);
+extern void hacks_unity_entry_set_progress(GObject *entry, gdouble percent);
+extern void hacks_unity_entry_set_menu(GObject *entry, GtkMenu *menu);
+
 #endif
 

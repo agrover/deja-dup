@@ -528,8 +528,13 @@ public abstract class AssistantOperation : Assistant
 
   bool do_minimize_to_tray(Gdk.Event event)
   {
-    if (op != null)
-      hide(); // minimize to tray when operation is in progress
+    if (op != null) {
+      // minimize or hide when operation is in progress
+      if (status_icon != null && status_icon.close_action == StatusIcon.CloseAction.MINIMIZE)
+        iconify();
+      else
+        hide();
+    }
     else
       do_cancel(); // otherwise, do the normal cancel operation
 

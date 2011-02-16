@@ -26,7 +26,7 @@ deja_dup_CFLAGS = \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
-deja_dup_LDADD = $(DUP_LIBS) $(APPINDICATOR_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la $(top_builddir)/widgets/libwidgets.la
+deja_dup_LDADD = $(DUP_LIBS) $(APPINDICATOR_LIBS) $(UNITY_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la $(top_builddir)/widgets/libwidgets.la
 
 deja_dup_VALASOURCES = \
 	Assistant.vala \
@@ -58,6 +58,7 @@ PACKAGES = \
 	--pkg unix \
 	--pkg keyring \
 	--pkg hacks \
+	--pkg hacks-unity \
 	--pkg config
 BUILT_SOURCES = vala.stamp
 vala.stamp: $(deja_dup_VALASOURCES)

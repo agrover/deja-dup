@@ -23,6 +23,11 @@
 #include <libappindicator/app-indicator.h>
 #endif
 
+#if HAVE_UNITY
+#include <unity.h>
+#include <libdbusmenu-gtk/parser.h>
+#endif
+
 #include "whacks.h"
 
 /* This is done in whacks, because we can't encode the #ifdef HAVE_APPINDICATOR
@@ -118,3 +123,44 @@ hacks_get_natural_size(GtkWidget *w, GtkRequisition *req)
   gtk_widget_size_request(w, req);
 #endif
 }
+
+GObject *hacks_unity_get_entry(void)
+{
+#if HAVE_UNITY
+  if (unity_inspector_get_unity_running(unity_inspector_get_default()))
+    return G_OBJECT(unity_launcher_entry_get_for_desktop_id("deja-dup.desktop"));
+  else
+    return NULL;
+#else
+  return NULL;
+#endif
+}
+
+void hacks_unity_entry_show_progress(GObject *entry, gboolean show)
+{
+#if HAVE_UNITY
+  if (UNITY_IS_LAUNCHER_ENTRY(entry))
+    unity_launcher_entry_set_progress_visible(UNITY_LAUNCHER_ENTRY(entry), show);
+#endif
+}
+
+void hacks_unity_entry_set_progress(GObject *entry, gdouble percent)
+{
+#if HAVE_UNITY
+  if (UNITY_IS_LAUNCHER_ENTRY(entry))
+    unity_launcher_entry_set_progress(UNITY_LAUNCHER_ENTRY(entry), percent);
+#endif
+}
+
+void hacks_unity_entry_set_menu(GObject *entry, GtkMenu *menu)
+{
+#if HAVE_UNITY
+  if (UNITY_IS_LAUNCHER_ENTRY(entry)) {
+    DbusmenuMenuitem *dbusmenu = (menu != NULL) ? dbusmenu_gtk_parse_menu_structure(GTK_WIDGET(menu)) : NULL;
+    unity_launcher_entry_set_quicklist(UNITY_LAUNCHER_ENTRY(entry), dbusmenu);
+  }
+#else
+  return NULL;
+#endif
+}
+

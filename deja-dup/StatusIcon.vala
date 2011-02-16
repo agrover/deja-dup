@@ -20,15 +20,22 @@
 using GLib;
 
 /**
- * There are three modes for 'shell' integration:
+ * There are four modes for 'shell' integration:
  * 1) GNOME Shell
- * 2) Indicator
- * 3) Legacy
+ * 2) Unity
+ * 3) Indicator
+ * 4) Legacy
  * 
  * GNOME Shell:
  * No status icon at all.
  * Actions on persistent notifications.
  * Detected by 'persistent' capability of notification server.
+ * 
+ * Unity:
+ * Register as a launcher entry.
+ * Always shows progress.
+ * No notifications.
+ * Detected by presence of Unity (usually on Ubuntu).
  * 
  * Indicator:
  * Register as an application indicator, which falls back to standard GTK+ status icon.
@@ -47,10 +54,17 @@ public abstract class StatusIcon : Object
     StatusIcon instance;
     instance = new ShellStatusIcon(window, op, automatic);
     if (!instance.is_valid)
+      instance = new UnityStatusIcon(window, op, automatic);
+    if (!instance.is_valid)
       instance = new IndicatorStatusIcon(window, op, automatic);
     if (!instance.is_valid)
       instance = new LegacyStatusIcon(window, op, automatic);
     return instance;
+  }
+
+  public enum CloseAction {
+    HIDE,
+    MINIMIZE,
   }
 
   public signal void show_window();
@@ -58,6 +72,9 @@ public abstract class StatusIcon : Object
   public Gtk.Window? window {get; construct;}
   public DejaDup.Operation op {get; construct;}
   public bool automatic {get; construct; default = false;}
+
+  public CloseAction close_action {get; protected set; default = CloseAction.HIDE;}
+  public bool show_automatic_progress {get; protected set; default = false;}
 
   protected bool is_valid = true;
   protected string action;
@@ -116,24 +133,27 @@ public abstract class StatusIcon : Object
     op.cancel();
   }
 
-  protected Gtk.Menu ensure_menu()
+  protected Gtk.Menu ensure_menu(bool show_self = true)
   {
     if (menu != null)
       return menu;
 
     menu = new Gtk.Menu();
 
-    Gtk.ImageMenuItem imageitem;
-    imageitem = new Gtk.ImageMenuItem.with_mnemonic(_("Déjà Du_p"));
-    imageitem.image = new Gtk.Image.from_icon_name("deja-dup-symbolic", Gtk.IconSize.MENU);
-    imageitem.always_show_image = true;
-    imageitem.activate.connect((i) => {show_window();});
-    menu.append(imageitem);
+    if (show_self) {
+      Gtk.ImageMenuItem imageitem;
+      imageitem = new Gtk.ImageMenuItem.with_mnemonic(_("Déjà Du_p"));
+      imageitem.image = new Gtk.Image.from_icon_name("deja-dup-symbolic", Gtk.IconSize.MENU);
+      imageitem.always_show_image = true;
+      imageitem.activate.connect((i) => {show_window();});
+      menu.append(imageitem);
+    }
 
     if (op.mode == DejaDup.Operation.Mode.BACKUP) {
       Gtk.MenuItem item;
 
-      menu.append(new Gtk.SeparatorMenuItem());
+      if (show_self)
+        menu.append(new Gtk.SeparatorMenuItem());
 
       item = new Gtk.MenuItem.with_mnemonic(later_label);
       item.activate.connect((i) => {later();});
@@ -150,6 +170,38 @@ public abstract class StatusIcon : Object
 
     menu.show_all();
     return menu;
+  }
+}
+
+class UnityStatusIcon : StatusIcon
+{
+  public UnityStatusIcon(Gtk.Window window, DejaDup.Operation op, bool automatic)
+  {
+    Object(window: window, op: op, automatic: automatic);
+  }
+
+  Object entry;
+  construct {
+    entry = hacks_unity_get_entry();
+    is_valid = entry != null;
+    close_action = CloseAction.MINIMIZE;
+    show_automatic_progress = true;
+    if (is_valid)
+      hacks_unity_entry_set_menu(entry, ensure_menu(false));
+  }
+
+  ~UnityStatusIcon()
+  {
+    if (entry != null) {
+      hacks_unity_entry_show_progress(entry, false);
+      hacks_unity_entry_set_menu(entry, null);
+    }
+  }
+
+  protected override void update_progress()
+  {
+    hacks_unity_entry_set_progress(entry, this.progress);
+    hacks_unity_entry_show_progress(entry, true);
   }
 }
 

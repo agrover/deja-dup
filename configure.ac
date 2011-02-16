@@ -182,6 +182,25 @@ AS_IF([test "x$with_appindicator" != xno],
   )]
 )
 
+AH_TEMPLATE([HAVE_UNITY], [whether libunity is available])
+AC_ARG_WITH([unity],
+  [AS_HELP_STRING([--with-unity],
+    [support libunity @<:@default=check@:>@])],
+  [],
+  [with_unity=check])
+AS_IF([test "x$with_unity" != xno],
+  [PKG_CHECK_MODULES(UNITY, dbusmenu-gtk-0.4 >= 0.3.94 unity >= 3.4.2,
+    [AC_DEFINE(HAVE_UNITY)
+     AC_SUBST(UNITY_CFLAGS)
+     AC_SUBST(UNITY_LIBS)],
+    [if test "x$with_unity" != xcheck; then
+        AC_MSG_FAILURE(
+          [--with-unity was given, but test for unity failed])
+      fi
+    ]
+  )]
+)
+
 # Sets up output files.
 AC_CONFIG_FILES([Makefile
                  common/Makefile

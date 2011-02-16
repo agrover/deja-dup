@@ -22,10 +22,11 @@ libwidgets_la_CFLAGS = \
 	-I$(top_srcdir)/common \
 	$(WIDGETS_CFLAGS) \
 	$(APPINDICATOR_CFLAGS) \
+	$(UNITY_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
-libwidgets_la_LIBADD = $(WIDGETS_LIBS) $(APPINDICATOR_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la
+libwidgets_la_LIBADD = $(WIDGETS_LIBS) $(APPINDICATOR_LIBS) $(UNITY_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la
 
 libwidgets_la_VALASOURCES = \
 	ConfigBool.vala \
