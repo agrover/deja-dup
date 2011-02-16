@@ -75,6 +75,7 @@ GIO_REQ_VER=$GLIB_REQ_VER
 UNIQUE_MODULE=unique-1.0
 NOTIFY_REQ_VER=0.7
 APPINDICATOR_MODULE=appindicator-0.1
+DBUSMENU_GTK_MODULE=dbusmenu-gtk-0.4
 
 AH_TEMPLATE([HAVE_GTK3], [whether gtk3 is available])
 AC_ARG_WITH([gtk3],
@@ -83,16 +84,17 @@ AC_ARG_WITH([gtk3],
   [],
   [with_gtk3=check])
 AS_IF([test "x$with_gtk3" != xno],
-  [PKG_CHECK_EXISTS(gtk+-3.0 >= 2.91
+  [PKG_CHECK_EXISTS(gtk+-3.0 >= 3.0
                     unique-3.0,
     [GTK_MODULE=gtk+-3.0
-     GTK_REQ_VER=2.91
+     GTK_REQ_VER=3.0
      GDK_X11_MODULE=gdk-x11-3.0
      UNIQUE_MODULE=unique-3.0
-     APPINDICATOR_MODULE=appindicator3-0.1],
+     APPINDICATOR_MODULE=appindicator3-0.1
+     DBUSMENU_GTK_MODULE=dbusmenu-gtk3-0.4],
     [if test "x$with_gtk3" != xcheck; then
        AC_MSG_FAILURE(
-         [--with-gtk3 was given, but test for gtk+-3.0 >= 2.91 unique-3.0 failed])
+         [--with-gtk3 was given, but test for gtk+-3.0 >= 3.0 unique-3.0 failed])
      else
        AC_MSG_NOTICE([GTK+ 3 stack is not available so using GTK+ 2])
      fi
@@ -189,7 +191,7 @@ AC_ARG_WITH([unity],
   [],
   [with_unity=check])
 AS_IF([test "x$with_unity" != xno],
-  [PKG_CHECK_MODULES(UNITY, dbusmenu-gtk-0.4 >= 0.3.94 unity >= 3.4.2,
+  [PKG_CHECK_MODULES(UNITY, $DBUSMENU_GTK_MODULE >= 0.3.94 unity >= 3.4.2,
     [AC_DEFINE(HAVE_UNITY)
      AC_SUBST(UNITY_CFLAGS)
      AC_SUBST(UNITY_LIBS)],
