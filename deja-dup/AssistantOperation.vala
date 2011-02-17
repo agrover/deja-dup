@@ -43,10 +43,11 @@ public abstract class AssistantOperation : Assistant
   public signal void closing(bool success);
   
   public bool automatic {get; construct; default = false;}
-  StatusIcon status_icon;
+  protected StatusIcon status_icon;
   protected bool succeeded = false;
 
   Gtk.Entry encrypt_entry;
+  Gtk.Entry encrypt_confirm_entry;
   Gtk.CheckButton encrypt_remember;
   protected Gtk.Widget password_page {get; private set;}
 
@@ -291,6 +292,7 @@ public abstract class AssistantOperation : Assistant
     w = new Gtk.Entry();
     w.set("visibility", false,
           "activates-default", true);
+    ((Gtk.Entry)w).changed.connect(() => {check_password_validity();});
     label = new Gtk.Label(_("E_ncryption password:"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -300,9 +302,27 @@ public abstract class AssistantOperation : Assistant
     ++rows;
     encrypt_entry = (Gtk.Entry)w;
 
+    // Add a confirmation entry if this is user's first time
+    if (is_first_time()) {
+      w = new Gtk.Entry();
+      w.set("visibility", false,
+            "activates-default", true);
+      ((Gtk.Entry)w).changed.connect(() => {check_password_validity();});
+      label = new Gtk.Label(_("Confir_m password:"));
+      label.set("mnemonic-widget", w,
+                "use-underline", true,
+                "xalign", 0.0f);
+      page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+      page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
+      ++rows;
+      encrypt_confirm_entry = (Gtk.Entry)w;
+    }
+
     w = new Gtk.CheckButton.with_mnemonic(_("_Show password"));
     ((Gtk.CheckButton)w).toggled.connect((button) => {
       encrypt_entry.visibility = button.get_active();
+      if (encrypt_confirm_entry != null)
+        encrypt_confirm_entry.visibility = button.get_active();
     });
     page.attach(w, 0, 2, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     ++rows;
@@ -358,19 +378,21 @@ public abstract class AssistantOperation : Assistant
     
     return page;
   }
-  
+
+  bool is_first_time()
+  {
+    var settings = DejaDup.get_settings();
+    var val = settings.get_string(DejaDup.LAST_RUN_KEY);
+    return val == "";
+  }
+
   void add_config_pages_if_needed()
   {
     /*
      * Creates configure pages if required
      */
-    var settings = DejaDup.get_settings();
-    string val;
-    val = settings.get_string(DejaDup.LAST_RUN_KEY);
-    if (val != null && val != "")
-      return;
-    
-    add_custom_config_pages();
+    if (is_first_time())
+      add_custom_config_pages();
   }
   
   void add_confirm_page()
@@ -610,9 +632,20 @@ public abstract class AssistantOperation : Assistant
   {
   }
 
+  void check_password_validity()
+  {
+    if (encrypt_confirm_entry != null) {
+      var passphrase = encrypt_entry.get_text();
+      var passphrase2 = encrypt_confirm_entry.get_text();
+      var valid = (passphrase == passphrase2);
+      allow_forward(valid);
+    }
+  }
+
   void ask_passphrase()
   {
     interrupt(password_page);
+    check_password_validity();
     force_visible(false);
   }
 

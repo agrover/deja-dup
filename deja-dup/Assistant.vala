@@ -107,7 +107,7 @@ public abstract class Assistant : Gtk.Dialog
 
   public void allow_forward(bool allow)
   {
-    if (current != null && current.data.type != Type.INTERRUPT)
+    if (current != null && forward_button != null)
       forward_button.sensitive = allow;
   }
 
