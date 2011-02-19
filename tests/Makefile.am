@@ -76,7 +76,7 @@ test: prep
 		else \
 			echo -e " \e[31mFAILED\e[0m"; \
 		fi; \
-	done \
+	done; \
 	export DISPLAY=$$OLD_DISPLAY ; \
 	for t in $(MANUAL_TESTS); do \
 		echo -n "Testing $$t..."; \
