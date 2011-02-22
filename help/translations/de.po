@@ -8,23 +8,24 @@ msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-30 09:53-0500\n"
-"PO-Revision-Date: 2011-01-27 20:12+0000\n"
+"PO-Revision-Date: 2011-02-20 19:29+0000\n"
 "Last-Translator: Leo Unglaub <leo@leo-unglaub.net>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-01-31 05:04+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-02-21 04:52+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: restore-worst-case.page:6(desc)
 msgid "What to do if you can't restore your files."
 msgstr ""
+"Was soll passieren falls eine Wiederherstellung der Datei nicht möglich ist."
 
 #: restore-worst-case.page:10(title)
 msgid "When Everything Goes Wrong"
-msgstr ""
+msgstr "wenn etwas nicht wie gewünscht funktioniert"
 
 #: restore-worst-case.page:12(p)
 msgid ""
@@ -42,27 +43,35 @@ msgid ""
 "afraid to <link href=\"https://answers.launchpad.net/deja-dup\">ask for "
 "help</link>."
 msgstr ""
+"Jetzt wird es technisch. Wenn Sie nicht weiter wissen, zögern Sie nicht "
+"<link href=\"https://answers.launchpad.net/deja-dup\">hier</link> nach Hilfe "
+"zu fragen."
 
 #: restore-worst-case.page:17(p)
 msgid ""
 "Open a <app>Terminal</app> window by pressing "
 "<keyseq><key>Ctrl</key><key>Alt</key><key>T</key></keyseq>."
 msgstr ""
+"Öffnen Sie eine <app>Konsole</app> (Terminal) durch das Drücken der Tasten "
+"<keyseq><key>Strg</key><key>Alt</key><key>T</key></keyseq>."
 
 #: restore-worst-case.page:18(p)
 msgid ""
 "Create the directory in which you will place your restored files. This guide "
 "will use <file>/tmp/restore</file>:"
 msgstr ""
+"Erstellen Sie das Verzeichnis in welches Sie die Dateien wiederherstellen "
+"wollen. In dieser anleitung wird das Verzeichnis <file>/tmp/restore</file> "
+"verwendet."
 
 #: restore-worst-case.page:19(screen)
 #, no-wrap
 msgid "mkdir -p /tmp/restore"
-msgstr ""
+msgstr "mkdir -p /tmp/restore"
 
 #: restore-worst-case.page:23(title)
 msgid "Restoring with Duplicity"
-msgstr ""
+msgstr "Wiederherstellen mit Duplicity"
 
 #: restore-worst-case.page:25(p)
 msgid ""
@@ -71,12 +80,18 @@ msgid ""
 "used by <app>Déjà Dup</app> behind the scenes to back up and restore your "
 "files."
 msgstr ""
+"Wenn <app>Déjà Dup</app> bei Ihnen einmal nicht funktioniert, können Sie das "
+"Kommandozeilen-Programm <app>duplicity</app> verwenden. <app>Déjà Dup</app> "
+"basiert nämlich auf <app>duplicity</app>."
 
 #: restore-worst-case.page:27(p)
 msgid ""
 "If you want more information about <app>duplicity</app> than presented here, "
 "run <cmd>man duplicity</cmd>."
 msgstr ""
+"Wenn Sie mehr Informationen über <app>duplicity</app> haben möchten, werfen "
+"Sie einen Blick in die man-page von <app>duplicity</app> in dem Sie den "
+"Befehl <cmd>man duplicity</cmd> in einer Konsole/Terminal ausführen."
 
 #: restore-worst-case.page:29(p)
 msgid ""
@@ -84,21 +99,27 @@ msgid ""
 "your files are on an external drive mounted as <file>/media/backup</file> "
 "and you chose to encrypt the backup, try this:"
 msgstr ""
+"Als erstes Versuchen wir ein einfaches Wiederherstellen der Daten. "
+"Angenommen ihre Date befinden sich auf einer externen Festplatte welche "
+"unter <file>/media/backup</file> eingehängt ist und Sie die Verschlüsselung "
+"der Backup-Dateien aktiviert haben, versuchen Sie folgendes:"
 
 #: restore-worst-case.page:30(screen)
 #, no-wrap
 msgid "duplicity --gio file:///media/backup /tmp/restore"
-msgstr ""
+msgstr "duplicity --gio file:///media/backup /tmp/restore"
 
 #: restore-worst-case.page:32(p)
 msgid ""
 "If you didn't encrypt the backup, add <cmd>--no-encryption</cmd> to the "
 "command."
 msgstr ""
+"Wenn Sie ihre Sicherungen nicht verschlüsselt haben, hängen Sie an den "
+"Befehl folgenden Parameter dran: <cmd>--no-encryption</cmd>."
 
 #: restore-worst-case.page:35(title)
 msgid "Other Backup Locations"
-msgstr ""
+msgstr "andere Sicherungs-Datenquellen"
 
 #: restore-worst-case.page:36(p)
 msgid ""
@@ -106,12 +127,18 @@ msgid ""
 "<app>duplicity</app> will be different than the external drive example "
 "above. See below for how to connect to your chosen backup location."
 msgstr ""
+"Wenn Sie Ihre Daten auf einen entfernten Server oder einen Cloud Dienst "
+"gesichert haben, unterscheidet sich die Syntax von <app>duplicity</app> von "
+"dem vorherigen Beispiel mit der externen Festplatte. Folgen Sie der "
+"Anleitung weiter unten um sich mit einer entfernten Datenquelle zu verbinden."
 
 #: restore-worst-case.page:37(p)
 msgid ""
 "Remember to add <cmd>--no-encryption</cmd> to any example commands if you're "
 "backup is not encrypted."
 msgstr ""
+"Vergessen Sie nicht <cmd>--no-encription</cmd> an jedes Code-Beispiel "
+"anzuhängen wenn Sie Ihre Sicherung nicht verschlüsselt haben."
 
 #: restore-worst-case.page:38(p)
 msgid ""
@@ -119,6 +146,11 @@ msgid ""
 "server, try downloading all the <app>duplicity</app> files yourself to a "
 "local folder and following the simpler example above."
 msgstr ""
+"Wenn <app>duplicity</app> nicht in der Lage ist sich mit der entfernten "
+"Datenquelle zu verbinden, versuche Sie alle <app>duplicity</app> Dateien per "
+"Hand (FTP, wget, ... ) in einen lokalen Ordner zu speichern und stellen Sie "
+"die Daten anhand des oberen einfachen Wiederherstellungsverfahrens wieder "
+"her."
 
 #: restore-worst-case.page:41(title)
 msgid "Amazon S3"
@@ -130,6 +162,8 @@ msgid ""
 "instances of <var>ID</var> and <var>SECRET</var> in the example below with "
 "those respective values."
 msgstr ""
+"Ersetzen Sie die Platzhalter <var>ID</var> und <var>SECRET</var> in dem "
+"folgenden Code-Beispiel."
 
 #: restore-worst-case.page:43(p)
 #: restore-worst-case.page:61(p)
@@ -140,6 +174,8 @@ msgid ""
 "You may have specified a folder in which to put the backup files. In the "
 "example below, replace any instance of <var>FOLDER</var> with that path."
 msgstr ""
+"Wenn Sie bereits einen Ordner für Ihre Backup-Dateien erstellt haben, "
+"ersetzen Sie den Platzhalter <var>FOLDER</var> mit dem Pfad."
 
 #: restore-worst-case.page:44(screen)
 #, no-wrap
@@ -150,10 +186,15 @@ msgid ""
 "duplicity s3+http://deja-dup-auto-<var>ID</var>/<var>FOLDER</var> "
 "/tmp/restore"
 msgstr ""
+"\n"
+"export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
+"export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
+"duplicity s3+http://deja-dup-auto-<var>ID</var>/<var>FOLDER</var> "
+"/tmp/restore"
 
 #: restore-worst-case.page:50(title)
 msgid "Rackspace Cloud Files"
-msgstr ""
+msgstr "Rackspace Cloud Dateien"
 
 #: restore-worst-case.page:51(p)
 msgid ""
@@ -179,7 +220,7 @@ msgstr ""
 
 #: restore-worst-case.page:59(title)
 msgid "FTP"
-msgstr ""
+msgstr "FTP"
 
 #: restore-worst-case.page:60(p)
 #: restore-worst-case.page:69(p)
@@ -970,7 +1011,7 @@ msgstr ""
 "  Jens Maucher https://launchpad.net/~jensmaucher\n"
 "  JohnnyRep https://launchpad.net/~steffen894\n"
 "  Leo Unglaub https://launchpad.net/~leo-leo-unglaub\n"
-"  Mario Blättermann https://launchpad.net/~mariobl-freenet\n"
+"  Mario Blättermann https://launchpad.net/~mario.blaettermann\n"
 "  Michael Terry https://launchpad.net/~mterry\n"
 "  PsychoKim https://launchpad.net/~psychokim\n"
 "  Richy https://launchpad.net/~klemmster\n"

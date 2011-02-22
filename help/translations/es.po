@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-30 09:53-0500\n"
-"PO-Revision-Date: 2011-01-28 15:33+0000\n"
-"Last-Translator: Monkey <monkey.libre@gmail.com>\n"
+"PO-Revision-Date: 2011-02-18 10:24+0000\n"
+"Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-01-31 05:04+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-02-19 05:07+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: restore-worst-case.page:6(desc)
 msgid "What to do if you can't restore your files."
@@ -35,6 +35,12 @@ msgid ""
 "the meantime, here are some approaches to workaround a misbehaving <app>Déjà "
 "Dup</app> and get your data back."
 msgstr ""
+"<app>Déjà Dup</app> puede fallar. Quizás se cuelgue o le de un error al "
+"tratar de restaurar. Cuando en verdad necesite restaurar sus archivos, lo "
+"último que necesita es un error. Considere informar de <link "
+"href=\"https://launchpad.net/deja-dup/+filebug\">un error</link> pero "
+"mientras tanto, aquí tiene algunos medios para solucionar un mal "
+"comportamiento de <app>Déjà Dup</app> y recuperar sus archivos."
 
 #: restore-worst-case.page:14(p)
 msgid ""
@@ -42,27 +48,33 @@ msgid ""
 "afraid to <link href=\"https://answers.launchpad.net/deja-dup\">ask for "
 "help</link>."
 msgstr ""
+"Esto se está volviendo técnico. Si no entiende nada de esto, no dude en "
+"<link href=\"https://answers.launchpad.net/deja-dup\">pedir ayuda</link>."
 
 #: restore-worst-case.page:17(p)
 msgid ""
 "Open a <app>Terminal</app> window by pressing "
 "<keyseq><key>Ctrl</key><key>Alt</key><key>T</key></keyseq>."
 msgstr ""
+"Abra una ventana de <app>terminal</app> pulsando "
+"<keyseq><key>Ctrl</key><key>Alt</key><key>T</key></keyseq>."
 
 #: restore-worst-case.page:18(p)
 msgid ""
 "Create the directory in which you will place your restored files. This guide "
 "will use <file>/tmp/restore</file>:"
 msgstr ""
+"Cree el directorio en el que pondrá sus archivos restaurados. Esta guía "
+"usará <file>/tmp/restore</file>:"
 
 #: restore-worst-case.page:19(screen)
 #, no-wrap
 msgid "mkdir -p /tmp/restore"
-msgstr ""
+msgstr "mkdir -p /tmp/restore"
 
 #: restore-worst-case.page:23(title)
 msgid "Restoring with Duplicity"
-msgstr ""
+msgstr "Restaurar con Duplicity"
 
 #: restore-worst-case.page:25(p)
 msgid ""
@@ -71,12 +83,18 @@ msgid ""
 "used by <app>Déjà Dup</app> behind the scenes to back up and restore your "
 "files."
 msgstr ""
+"Asumiendo que <app>Déjà Dup</app> no le funciona ahora, utilizará la "
+"herramienta de línea de órdenes <app>duplicity</app> que es usada por "
+"<app>Déjà Dup</app> «detrás del telón» para respaldar y restaurar sus "
+"archivos."
 
 #: restore-worst-case.page:27(p)
 msgid ""
 "If you want more information about <app>duplicity</app> than presented here, "
 "run <cmd>man duplicity</cmd>."
 msgstr ""
+"Si quiere más información sobre <app>duplicity</app> que la que hay aquí, "
+"ejecute <cmd>man duplicity</cmd>."
 
 #: restore-worst-case.page:29(p)
 msgid ""
@@ -84,21 +102,25 @@ msgid ""
 "your files are on an external drive mounted as <file>/media/backup</file> "
 "and you chose to encrypt the backup, try this:"
 msgstr ""
+"Lo primero que vamos a intentar es una sencilla restauración de toda su "
+"información. Asumiendo que sus archivos estén en un disco externo montado "
+"como <file>/media/backup</file> y que elige cifrar el respaldo, pruebe esto:"
 
 #: restore-worst-case.page:30(screen)
 #, no-wrap
 msgid "duplicity --gio file:///media/backup /tmp/restore"
-msgstr ""
+msgstr "duplicity --gio file:///media/backup /tmp/restore"
 
 #: restore-worst-case.page:32(p)
 msgid ""
 "If you didn't encrypt the backup, add <cmd>--no-encryption</cmd> to the "
 "command."
 msgstr ""
+"Si no cifraste el respaldo, añada <cmd>--no-encryption</cmd> a la orden."
 
 #: restore-worst-case.page:35(title)
 msgid "Other Backup Locations"
-msgstr ""
+msgstr "Otras ubicaciones de la copia de seguridad"
 
 #: restore-worst-case.page:36(p)
 msgid ""
@@ -112,6 +134,8 @@ msgid ""
 "Remember to add <cmd>--no-encryption</cmd> to any example commands if you're "
 "backup is not encrypted."
 msgstr ""
+"Recuerde añadir <cmd>--no-encryption</cmd> a cualquier orden del ejemplo si "
+"su respaldo no está cifrado."
 
 #: restore-worst-case.page:38(p)
 msgid ""
@@ -150,10 +174,15 @@ msgid ""
 "duplicity s3+http://deja-dup-auto-<var>ID</var>/<var>FOLDER</var> "
 "/tmp/restore"
 msgstr ""
+"\n"
+"export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
+"export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
+"duplicity s3+http://deja-dup-auto-<var>ID</var>/<var>FOLDER</var> "
+"/tmp/restore"
 
 #: restore-worst-case.page:50(title)
 msgid "Rackspace Cloud Files"
-msgstr ""
+msgstr "Archivos en la nube de Rackspace"
 
 #: restore-worst-case.page:51(p)
 msgid ""
@@ -161,6 +190,9 @@ msgid ""
 "<var>USERNAME</var> and <var>KEY</var> in the example below with those "
 "respective values."
 msgstr ""
+"Busque su nombre de usuario y clave API de Rackspace y cambie los valores de "
+"<var>USERNAME</var> y <var>KEY</var> en el ejemplo de abajo con sus "
+"respectivos valores."
 
 #: restore-worst-case.page:52(p)
 msgid ""
@@ -176,6 +208,10 @@ msgid ""
 "export CLOUDFILES_APIKEY=<var>KEY</var>\n"
 "duplicity cf+http://<var>CONTAINER</var> /tmp/restore"
 msgstr ""
+"\n"
+"export CLOUDFILES_USERNAME=<var>USERNAME</var>\n"
+"export CLOUDFILES_APIKEY=<var>KEY</var>\n"
+"duplicity cf+http://<var>CONTAINER</var> /tmp/restore"
 
 #: restore-worst-case.page:59(title)
 msgid "FTP"
@@ -195,6 +231,8 @@ msgid ""
 "If you chose to not log in with a username, use <var>anonymous</var> as your "
 "<var>USERNAME</var> below."
 msgstr ""
+"Si elige no entrar con un nombre de usuario, use <var>anonymous</var> como "
+"su <var>USERNAME</var> debajo."
 
 #: restore-worst-case.page:63(screen)
 #, no-wrap
@@ -207,6 +245,13 @@ msgid ""
 "ftp://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
 " /tmp/restore"
 msgstr ""
+"\n"
+"gvfs-mount "
+"ftp://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+"\n"
+"duplicity --gio "
+"ftp://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+" /tmp/restore"
 
 #: restore-worst-case.page:68(title)
 msgid "SSH"
@@ -223,6 +268,13 @@ msgid ""
 "ssh://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
 " /tmp/restore"
 msgstr ""
+"\n"
+"gvfs-mount "
+"ssh://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+"\n"
+"duplicity --gio "
+"ssh://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+" /tmp/restore"
 
 #: restore-worst-case.page:76(title)
 msgid "WebDAV"
@@ -245,10 +297,17 @@ msgid ""
 "dav://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
 " /tmp/restore"
 msgstr ""
+"\n"
+"gvfs-mount "
+"dav://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+"\n"
+"duplicity --gio "
+"dav://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+" /tmp/restore"
 
 #: restore-worst-case.page:85(title)
 msgid "Windows Share"
-msgstr ""
+msgstr "Compartido por Windows"
 
 #: restore-worst-case.page:86(p)
 msgid ""
@@ -275,7 +334,7 @@ msgstr ""
 
 #: restore-worst-case.page:99(title)
 msgid "Restoring by Hand"
-msgstr ""
+msgstr "Restaurar a mano"
 
 #: restore-worst-case.page:101(p)
 msgid ""
@@ -312,6 +371,8 @@ msgid ""
 "gpg --output duplicity-full.20110127T131352Z.vol1.difftar --decrypt "
 "duplicity-full.20110127T131352Z.vol1.difftar.gpg"
 msgstr ""
+"gpg --output duplicity-full.20110127T131352Z.vol1.difftar --decrypt "
+"duplicity-full.20110127T131352Z.vol1.difftar.gpg"
 
 #: restore-worst-case.page:110(p)
 msgid ""
@@ -324,7 +385,7 @@ msgstr ""
 #: restore-worst-case.page:111(screen)
 #, no-wrap
 msgid "tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz"
-msgstr ""
+msgstr "tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz"
 
 #: restore-worst-case.page:113(p)
 msgid ""
@@ -568,7 +629,7 @@ msgstr ""
 
 #: prefs.page:18(title)
 msgid "Cloud Services"
-msgstr ""
+msgstr "Servicios en nuble"
 
 #: prefs.page:19(p)
 msgid ""
@@ -937,6 +998,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Clsh1 https://launchpad.net/~omarloren\n"
+"  Fitoschido https://launchpad.net/~fitoschido\n"
 "  Ignacio Quezada https://launchpad.net/~dreamer86\n"
 "  José Edgardo López Vásquez https://launchpad.net/~magjogui\n"
 "  Monkey https://launchpad.net/~monkey-libre\n"
@@ -944,6 +1006,7 @@ msgstr ""
 "  Teodoro Vargas Cortés https://launchpad.net/~teovc\n"
 "  carmyman https://launchpad.net/~manuel-rubio-p\n"
 "  emilinz https://launchpad.net/~emilinz\n"
+"  fgp https://launchpad.net/~komakino\n"
 "  nerjamartin https://launchpad.net/~nerjamartin"
 
 #~ msgid "Déjà Dup"
