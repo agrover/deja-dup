@@ -640,6 +640,8 @@ public abstract class AssistantOperation : Assistant
       var valid = (passphrase == passphrase2);
       allow_forward(valid);
     }
+    else
+      allow_forward(true);
   }
 
   void ask_passphrase()

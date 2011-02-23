@@ -367,6 +367,8 @@ def wait_for_encryption(dlg, obj, max_count, prefix=False):
       ldtp.click('dlgAllowaccess', 'btnDeny')
     if ldtp.guiexist(dlg, 'txtEncryptionpassword'):
       ldtp.settextvalue(dlg, 'txtEncryptionpassword', 'test')
+      if ldtp.guiexist(dlg, 'txtConfirmpassword'):
+        ldtp.settextvalue(dlg, 'txtConfirmpassword', 'test')
       ldtp.click(dlg, 'btnContinue')
     ldtp.wait(2)
     remap(dlg)
