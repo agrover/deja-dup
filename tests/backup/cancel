@@ -41,7 +41,6 @@ def wait_until_visible(frm='frmDéjàDup', count=50):
   while count > 0 and not is_visible(frm):
     ldtp.wait(1)
     count -= 1
-  print is_visible(frm)
   base.remap(frm)
 
 def test():
