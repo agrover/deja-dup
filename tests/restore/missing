@@ -24,12 +24,12 @@ import base
 import ldtp
 
 def test():
-  sourcedir = base.get_temp_name('source', True)
-  os.system('cp -r data/simple/* %s' % sourcedir)
   base.setup()
-  base.backup_simple(backend='file', includes=[sourcedir])
+  sourcedir = base.get_temp_name('source', True)
+  os.system('cp -r %s/data/simple/* %s' % (base.srcdir, sourcedir))
+  base.backup_simple(backend='file', includes=[sourcedir], add_srcdir=False)
   os.system('echo bar > %s/foo' % sourcedir)
-  os.system('rm %s/one %s/two' % (sourcedir, sourcedir))
+  os.system('rm -f %s/one %s/two' % (sourcedir, sourcedir))
   base.start_deja_dup()
   base.backup_simple()
   os.system('echo 1 > %s/one' % sourcedir)

@@ -21,6 +21,8 @@
 POLINGUAS = $(shell grep -v "^\#" $(top_srcdir)/po/LINGUAS)
 LINGUAS = C $(POLINGUAS)
 
+PAGES = deja-dup.1 deja-dup-preferences.1
+
 C/stamp: $(srcdir)/include.main $(srcdir)/include.pref $(top_builddir)/deja-dup/deja-dup $(top_builddir)/preferences/deja-dup-preferences
 	@$(mkdir_p) C
 	@$(srcdir)/help2man -N -i $(srcdir)/include.main -L en_US.UTF-8 $(top_builddir)/deja-dup/deja-dup > C/deja-dup.1
@@ -51,30 +53,22 @@ install-data-local: install-data-local-@USE_NLS@
 install-data-local-no:
 install-data-local-yes: man
 	for lang in $(POLINGUAS); do \
-		if [ -d $$lang ]; then \
-			$(mkinstalldirs) "$(DESTDIR)$(mandir)/$$lang/man1"; \
-			$(INSTALL_DATA) $$lang/*.1 "$(DESTDIR)$(mandir)/$$lang/man1"; \
-		fi \
+		$(mkinstalldirs) "$(DESTDIR)$(mandir)/$$lang/man1"; \
+		$(INSTALL_DATA) $$lang/*.1 "$(DESTDIR)$(mandir)/$$lang/man1"; \
 	done
-	if [ -d C ]; then \
-		$(mkinstalldirs) "$(DESTDIR)$(mandir)/man1"; \
-		$(INSTALL_DATA) C/*.1 "$(DESTDIR)$(mandir)/man1"; \
-	fi
+	$(mkinstalldirs) "$(DESTDIR)$(mandir)/man1"; \
+	$(INSTALL_DATA) C/*.1 "$(DESTDIR)$(mandir)/man1";
 
 uninstall-local: uninstall-local-@USE_NLS@
 uninstall-local-no:
 uninstall-local-yes: man
 	for lang in $(POLINGUAS); do \
-		if [ -d $$lang ]; then \
-			for file in $$(ls $$lang/*.1); do \
-				rm -f "$(DESTDIR)$(mandir)/$$lang/man1/$$file"; \
-			done \
-		fi \
-	done
-	if [ -d C ]; then \
-		for file in $$(ls C/*.1); do \
-			rm -f "$(DESTDIR)$(mandir)/man1/$$file"; \
+		for file in $(PAGES); do \
+			rm -f "$(DESTDIR)$(mandir)/$$lang/man1/$$file"; \
 		done \
-	fi
+	done
+	for file in $(PAGES); do \
+		rm -f "$(DESTDIR)$(mandir)/man1/$$file"; \
+	done
 
 dist-hook: man

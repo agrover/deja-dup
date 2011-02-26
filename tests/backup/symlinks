@@ -26,29 +26,29 @@ import base
 
 # symlinks are expanded at build time from a tarball, so look for them in
 # the builddir, not the default of srcdir
-if 'distdir' in os.environ:
-  distdir = os.environ['distdir']
+if 'builddir' in os.environ:
+  builddir = os.environ['builddir']
 else:
-  distdir = '.'
-datadir = os.path.join(distdir, 'data', 'symlink')
+  builddir = '.'
+datadir = os.path.join(builddir, 'data', 'symlink')
 
 def direct():
   restoredir = base.get_temp_name('restore')
   base.setup()
-  base.backup_simple(backend='file', includes=['%s/simple' % datadir])
+  base.backup_simple(backend='file', includes=['%s/one' % datadir], add_srcdir=False)
   base.start_deja_dup()
   base.restore_simple(restoredir)
-  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], '%s/simple' % datadir)
-  assert os.path.islink(root)
-  assert os.path.exists(root)
+  root = os.path.join(restoredir, os.path.abspath('%s/one' % datadir)[1:])
+  assert os.path.islink(root), root
+  assert os.path.exists(root), root
 
 def subdir():
   restoredir = base.get_temp_name('restore')
   base.setup()
-  base.backup_simple(backend='file', includes=['%s/one/two/fourreal' % datadir])
+  base.backup_simple(backend='file', includes=['%s/one/two/fourreal' % datadir], add_srcdir=False)
   base.start_deja_dup()
   base.restore_simple(restoredir)
-  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], datadir)
+  root = os.path.join(restoredir, os.path.abspath(datadir)[1:])
   assert os.path.islink(root+'/one')
   assert os.path.exists(root+'/one')
   assert os.path.islink(root+'/one/two')
@@ -63,10 +63,10 @@ def exclude():
   base.setup()
   base.backup_simple(backend='file',
                      includes=[datadir],
-                     excludes=['%s/one/two/fourreal' % datadir])
+                     excludes=['%s/one/two/fourreal' % datadir], add_srcdir=False)
   base.start_deja_dup()
   base.restore_simple(restoredir)
-  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], datadir)
+  root = os.path.join(restoredir, os.path.abspath(datadir)[1:])
   assert os.path.islink(root+'/one')
   assert os.path.exists(root+'/one')
   assert os.path.islink(root+'/one/two')
@@ -82,10 +82,10 @@ def exclude2():
   base.setup()
   base.backup_simple(backend='file',
                      includes=['%s/one/tworeal' % datadir],
-                     excludes=['%s/onereal/tworeal/fourreal' % datadir])
+                     excludes=['%s/onereal/tworeal/fourreal' % datadir], add_srcdir=False)
   base.start_deja_dup()
   base.restore_simple(restoredir)
-  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], datadir)
+  root = os.path.join(restoredir, os.path.abspath(datadir)[1:])
   assert os.path.islink(root+'/one')
   assert os.path.exists(root+'/one')
   assert not os.path.islink(root+'/one/two')
@@ -103,10 +103,10 @@ def recursive():
   base.setup()
   base.backup_simple(backend='file',
                      includes=['%s/tree' % datadir],
-                     excludes=['%s/tree/sub/symtotree' % datadir])
+                     excludes=['%s/tree/sub/symtotree' % datadir], add_srcdir=False)
   base.start_deja_dup()
   base.restore_simple(restoredir)
-  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], datadir)
+  root = os.path.join(restoredir, os.path.abspath(datadir)[1:])
   assert not os.path.islink(root+'/tree')
   assert os.path.exists(root+'/tree')
   assert not os.path.islink(root+'/tree/sub')
@@ -121,10 +121,10 @@ def trickshot():
   base.setup()
   base.backup_simple(backend='file',
                      includes=['%s/x' % datadir, '%s/x/y' % datadir],
-                     excludes=['%s/a/b/c' % datadir])
+                     excludes=['%s/a/b/c' % datadir], add_srcdir=False)
   base.start_deja_dup()
   base.restore_simple(restoredir)
-  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], datadir)
+  root = os.path.join(restoredir, os.path.abspath(datadir)[1:])
   assert os.path.islink(root+'/x')
   assert os.path.exists(root+'/x')
   assert os.path.islink(root+'/x/y')
@@ -146,20 +146,20 @@ def loop():
   # Just make sure DD doesn't go off the rails
   restoredir = base.get_temp_name('restore')
   base.setup()
-  base.backup_simple(backend='file', includes=['%s/loop' % datadir])
+  base.backup_simple(backend='file', includes=['%s/loop' % datadir], add_srcdir=False)
   base.start_deja_dup()
   base.restore_simple(restoredir)
-  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], datadir)
+  root = os.path.join(restoredir, os.path.abspath(datadir)[1:])
   assert os.path.islink(root+'/loop')
   assert not os.path.exists(root+'/loop')
 
 def follow():
   restoredir = base.get_temp_name('restore')
   base.setup()
-  base.backup_simple(backend='file', includes=['%s/follow/follow' % datadir])
+  base.backup_simple(backend='file', includes=['%s/follow/follow' % datadir], add_srcdir=False)
   base.start_deja_dup()
   base.restore_simple(restoredir)
-  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], datadir)
+  root = os.path.join(restoredir, os.path.abspath(datadir)[1:])
   assert not os.path.islink(root+'/follow')
   assert os.path.exists(root+'/follow')
   assert os.path.islink(root+'/follow/follow')
@@ -180,10 +180,10 @@ def follow():
 def follow_dir():
   restoredir = base.get_temp_name('restore')
   base.setup()
-  base.backup_simple(backend='file', includes=['%s/follow/follow/sub' % datadir])
+  base.backup_simple(backend='file', includes=['%s/follow/follow/sub' % datadir], add_srcdir=False)
   base.start_deja_dup()
   base.restore_simple(restoredir)
-  root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], datadir)
+  root = os.path.join(restoredir, os.path.abspath(datadir)[1:])
   assert not os.path.islink(root+'/follow')
   assert os.path.exists(root+'/follow')
   assert os.path.islink(root+'/follow/follow')

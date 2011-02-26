@@ -61,7 +61,11 @@ symtar:
 	@echo "Making symlink.tar.gz"
 	@rm -f $(builddir)/data/symlink.tar.gz
 	@mkdir -p $(builddir)/data
-	@(cd $(srcdir)/data; tar -cf ../$(builddir)/data/symlink.tar symlink; gzip ../$(builddir)/data/symlink.tar)
+	if [ -e $(srcdir)/data/symlink.tar.gz ]; then \
+		cp $(srcdir)/data/symlink.tar.gz $(builddir)/data/symlink.tar.gz; \
+	else \
+		tar -cf $(builddir)/data/symlink.tar -C $(srcdir)/data symlink && gzip $(builddir)/data/symlink.tar; \
+	fi
 $(builddir)/data/symlink.tar.gz: symtar
 
 # This is for 'interactive' running of all the tests.  See 'check' target for
@@ -97,6 +101,7 @@ check: prep
 	export DISPLAY= ; \
 	export srcdir=$(srcdir) ; \
 	export distdir=$(distdir) ; \
+	export builddir=$(builddir) ; \
 	for t in $(AUTO_TESTS); do \
 		echo -n "Testing $$t..."; \
 		if ! $(srcdir)/$$t; then \
@@ -116,7 +121,12 @@ EXTRA_DIST = \
 
 distclean-local:
 	rm -rf duplicity duplicity-src
+	rm -f data/symlink.tar.gz
+	rm -rf $(builddir)/data/symlink
 
 dist-hook: symtar
-	@rm -r $(distdir)/data/symlink
-	@cp $(builddir)/data/symlink.tar.gz $(distdir)/data
+	@rm -rf $(distdir)/data/symlink
+	if ! [ -e $(distdir)/data/symlink.tar.gz ]; then \
+		mkdir -p $(distdir)/data; \
+		cp -p $(builddir)/data/symlink.tar.gz $(distdir)/data; \
+	fi

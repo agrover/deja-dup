@@ -31,6 +31,7 @@ import traceback
 
 latest_duplicity = '0.6.11'
 
+srcdir = "."
 temp_dir = None
 cleanup_dirs = []
 cleanup_mounts = []
@@ -61,12 +62,12 @@ def get_temp_name(extra, make=False):
     os.makedirs(temp_dir + '/' + extra)
   return temp_dir + '/' + extra
 
-# The current directory is always the 'distdir'.  But 'srcdir' may be different
+# The current directory is always the 'builddir'.  But 'srcdir' may be different
 # if we're running inside a distcheck for example.  So note that we check for
 # srcdir and use it if available.  Else, default to current directory.
 
 def setup(start = True, args=[''], root_prompt = False):
-  global cleanup_dirs, cleanup_pids, cleanup_envs, ldtp, latest_duplicity
+  global cleanup_dirs, cleanup_pids, cleanup_envs, ldtp, latest_duplicity, srcdir
 
   if not os.environ.get('DISPLAY'):
     # Run a Xvfb session to allow running the test suite without a monitor
@@ -80,14 +81,14 @@ def setup(start = True, args=[''], root_prompt = False):
   if not srcdir:
     srcdir = '.'
   
-  distdir = environ.get('distdir')
-  if not distdir:
-    distdir = '.'
+  builddir = environ.get('builddir')
+  if not builddir:
+    builddir = '.'
   
   environ['LANG'] = 'C'
   environ['DEJA_DUP_TESTING'] = '1'
 
-  extra_paths = ':'.join(['%s/../%s' % (distdir, x) for x in ['deja-dup', 'preferences', 'applet', 'monitor']]) + ':'
+  extra_paths = ':'.join(['%s/../%s' % (builddir, x) for x in ['deja-dup', 'preferences', 'applet', 'monitor']]) + ':'
   extra_pythonpaths = ''
   
   version = None
@@ -144,7 +145,7 @@ def setup(start = True, args=[''], root_prompt = False):
   os.system('echo LocationMode=filename-entry >> "%s/gtk-2.0/gtkfilechooser.ini"' % environ['XDG_CONFIG_HOME'])
 
   # Now install default schema into our temporary config dir
-  if os.system('cp %s/../data/org.gnome.DejaDup.gschema.xml %s/glib-2.0/schemas/ && glib-compile-schemas %s/glib-2.0/schemas/' % (distdir, environ['XDG_DATA_HOME'], environ['XDG_DATA_HOME'])):
+  if os.system('cp %s/../data/org.gnome.DejaDup.gschema.xml %s/glib-2.0/schemas/ && glib-compile-schemas %s/glib-2.0/schemas/' % (builddir, environ['XDG_DATA_HOME'], environ['XDG_DATA_HOME'])):
     raise Exception('Could not install settings schema')
 
   # Copy interface files into place as well
@@ -433,7 +434,12 @@ def walk_backup_prefs(dlg, backend = None, encrypt = None, dest = None, includes
   ldtp.click(dlg, 'btnForward')
   remap(dlg)
 
-def backup_simple(finish=True, error=None, timeout=400, backend = None, encrypt = None, dest = None, includes = [], excludes = []):
+def backup_simple(finish=True, error=None, timeout=400, backend = None, encrypt = None, dest = None, includes = [], excludes = [], add_srcdir=True):
+  global srcdir
+  if add_srcdir:
+    includes = [os.path.join(srcdir, f) for f in includes]
+    excludes = [os.path.join(srcdir, f) for f in excludes]
+
   ldtp.click('frmDéjàDup', 'btnBackUp…')
   assert ldtp.waittillguiexist('dlgBackUp')
   remap('dlgBackUp')
@@ -478,6 +484,8 @@ def restore_simple(path, date=None, backend = None, encrypt = None, dest = None)
   ldtp.waittillguinotexist('dlgRestore')
 
 def restore_specific(files, path, date=None, backend = None, encrypt = None, dest = None):
+  global srcdir
+  files = [os.path.join(srcdir, f) for f in files]
   args = ['--restore'] + files
   start_deja_dup(args=args, waitfor='dlgRestore')
   remap('dlgRestore')
