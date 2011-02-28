@@ -141,7 +141,7 @@ public class ConfigLocation : ConfigWidget
     index_vol_end = i;
 
     if (index_vol_base != index_vol_end)
-      add_separator(i++, 3);
+      add_separator(i++, 4);
 
     // And finally a saved volume, if one exists (must be last)
     update_saved_volume();
