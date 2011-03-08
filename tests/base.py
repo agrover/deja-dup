@@ -268,7 +268,7 @@ def create_mount(path=None, mtype='ext', size=20):
 
 def quit():
   if ldtp.guiexist('frmDéjàDup'):
-    ldtp.selectmenuitem('frmDéjàDup', 'mnuBackup;mnuQuit')
+    ldtp.selectmenuitem('frmDéjàDup', 'mnuBackup;mnuClose')
 
 def run(method):
   success = False

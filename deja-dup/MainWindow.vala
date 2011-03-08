@@ -197,9 +197,9 @@ public class MainWindow : Gtk.Window
     action_group.add_action_with_accel (action, "<control>R");
     this.restore_action = action;
     
-    action = new Gtk.Action ("QuitAction", null, null, Gtk.Stock.QUIT);
+    action = new Gtk.Action ("CloseAction", null, null, Gtk.Stock.CLOSE);
     action.activate.connect(Gtk.main_quit);
-    action_group.add_action_with_accel (action, "<control>Q");
+    action_group.add_action_with_accel (action, "<control>W");
     
     action = new Gtk.Action ("EditMenuAction", _("_Edit"), null, null);
     action_group.add_action (action);
@@ -238,7 +238,7 @@ public class MainWindow : Gtk.Window
       <menuitem name="Backup" action="BackupAction" />
       <menuitem name="Restore" action="RestoreAction" />
       <separator />
-      <menuitem name="Quit" action="QuitAction" />
+      <menuitem name="Close" action="CloseAction" />
     </menu>
     <menu name="EditMenu" action="EditMenuAction">
       <menuitem name="Preferences" action="PreferencesAction"/>
