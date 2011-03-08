@@ -141,6 +141,11 @@ public abstract class Assistant : Gtk.Dialog
     }
   }
 
+  public virtual void hide_for_now()
+  {
+    hide();
+  }
+
   bool last_op_was_back = false;
   public void skip()
   {
@@ -176,7 +181,7 @@ public abstract class Assistant : Gtk.Dialog
     if (interrupted != null) {
       next = interrupted;
       if (interrupted_from_hidden)
-        hide();
+        hide_for_now();
     }
     else {
       next = (current == null) ? infos : current.next;

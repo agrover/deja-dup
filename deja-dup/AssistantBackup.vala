@@ -190,7 +190,7 @@ public class AssistantBackup : AssistantOperation
     realize();
     var xid = hacks_window_get_xid(this.get_window());
     var rv = new DejaDup.OperationBackup((uint)xid);
-    if (automatic && !status_icon.show_automatic_progress) {
+    if (automatic && (status_icon == null || !status_icon.show_automatic_progress)) {
       // If in automatic mode, only use progress if it's a full backup
       rv.use_progress = false;
       rv.is_full.connect((op) => {op.use_progress = true;});

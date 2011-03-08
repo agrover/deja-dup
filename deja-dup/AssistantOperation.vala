@@ -472,6 +472,12 @@ public abstract class AssistantOperation : Assistant
     if (mount_op == null)
       mount_op = new MountOperationAssistant(this);
 
+    if (status_icon == null) {
+      status_icon = StatusIcon.create(this, op, automatic);
+      status_icon.show_window.connect((s) => {force_visible(true);});
+      status_icon.hide_all.connect((s) => {hide_everything();});
+    }
+
     op = create_op();
     op.done.connect(apply_finished);
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
@@ -483,12 +489,6 @@ public abstract class AssistantOperation : Assistant
     op.secondary_desc_changed.connect(set_secondary_label);
     op.backend.mount_op = mount_op;
     op.backend.pause_op.connect(pause_op);
-    
-    if (status_icon == null) {
-      status_icon = StatusIcon.create(this, op, automatic);
-      status_icon.show_window.connect((s) => {force_visible(true);});
-      status_icon.hide_all.connect((s) => {hide_everything();});
-    }
 
     op.start();
   }
@@ -532,6 +532,17 @@ public abstract class AssistantOperation : Assistant
       set_header_icon(Gtk.Stock.DIALOG_AUTHENTICATION);
   }
   
+  // Minimize or hide when operation is in progress.  Used when user closes
+  // window or after a password interruption.
+  public override void hide_for_now()
+  {
+    if (status_icon != null && status_icon.close_action == StatusIcon.CloseAction.MINIMIZE)
+      iconify();
+    else
+      hide();
+  }
+
+  // Make Deja Dup invisible, used when we are shutting down or some such.
   public void hide_everything()
   {
     hide();
@@ -550,13 +561,8 @@ public abstract class AssistantOperation : Assistant
 
   bool do_minimize_to_tray(Gdk.Event event)
   {
-    if (op != null) {
-      // minimize or hide when operation is in progress
-      if (status_icon != null && status_icon.close_action == StatusIcon.CloseAction.MINIMIZE)
-        iconify();
-      else
-        hide();
-    }
+    if (op != null)
+      hide_for_now ();
     else
       do_cancel(); // otherwise, do the normal cancel operation
 
