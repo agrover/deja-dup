@@ -25,6 +25,7 @@ public abstract class ConfigWidget : Gtk.EventBox
 {
   public signal void changed();
 
+  public Gtk.Widget mnemonic_widget {get; protected set;}
   public string key {get; construct;}
   public string ns {get; construct; default = "";}
   
@@ -34,6 +35,8 @@ public abstract class ConfigWidget : Gtk.EventBox
     
     if (key != null)
       watch_key(key);
+
+    mnemonic_activate.connect(on_mnemonic_activate);
   }
   
   // If you pass in a special settings object, make sure it survives the
@@ -59,6 +62,14 @@ public abstract class ConfigWidget : Gtk.EventBox
   }
 
   protected abstract async void set_from_config();
+
+  bool on_mnemonic_activate(Gtk.Widget w, bool g)
+  {
+    if (mnemonic_widget != null)
+      return mnemonic_widget.mnemonic_activate(g);
+    else
+      return false;
+  }
 }
 
 }

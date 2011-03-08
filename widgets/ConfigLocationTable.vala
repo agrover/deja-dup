@@ -36,7 +36,8 @@ public class ConfigLocationTable : Gtk.Table
   }
 
   protected void add_widget(string msg, Gtk.Widget w,
-                            Togglable? check = null)
+                            Togglable? check = null,
+                            Gtk.Widget? mnemonic = null)
   {
     string indent;
     if (check == null)
@@ -45,7 +46,7 @@ public class ConfigLocationTable : Gtk.Table
       indent = "        ";
 
     var label = new Gtk.Label("%s%s".printf(indent, msg));
-    label.set("mnemonic-widget", w,
+    label.set("mnemonic-widget", (mnemonic != null) ? mnemonic : w,
               "use-underline", true,
               "xalign", 0.0f);
     label_sizes.add_widget(label);

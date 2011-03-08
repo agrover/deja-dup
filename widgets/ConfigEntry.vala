@@ -37,16 +37,10 @@ public class ConfigEntry : ConfigWidget
   construct {
     entry = new Gtk.Entry();
     add(entry);
+    mnemonic_widget = entry;
     
     set_from_config();
     entry.focus_out_event.connect(handle_focus_out);
-
-    mnemonic_activate.connect(on_mnemonic_activate);
-  }
-  
-  bool on_mnemonic_activate(Gtk.Widget w, bool g)
-  {
-    return entry.mnemonic_activate(g);
   }
 
   protected override async void set_from_config()

@@ -156,7 +156,7 @@ public class ConfigLocation : ConfigWidget
 
     // End of location combo
 
-    mnemonic_activate.connect(on_mnemonic_activate);
+    mnemonic_widget = button;
 
     button.set_active(0); // worst case, activate first entry
     set_from_config();
@@ -201,11 +201,6 @@ public class ConfigLocation : ConfigWidget
     store.insert_with_values(out iter, index, COL_SORT, "%d".printf(category),
                              COL_TEXT, null, COL_INDEX, index);
     return index;
-  }
-
-  bool on_mnemonic_activate(Gtk.Widget w, bool g)
-  {
-    return button.mnemonic_activate(g);
   }
 
   bool update_saved_volume()

@@ -38,6 +38,7 @@ public class ConfigList : ConfigWidget
     tree = new Gtk.TreeView();
     tree.set("model", model,
              "headers-visible", false);
+    mnemonic_widget = tree;
     
     tree.insert_column_with_attributes(-1, null, new Gtk.CellRendererPixbuf(),
                                        "gicon", 2);
@@ -74,7 +75,6 @@ public class ConfigList : ConfigWidget
     var selection = tree.get_selection();
     selection.set_mode(Gtk.SelectionMode.MULTIPLE);
     
-    mnemonic_activate.connect(on_mnemonic_activate);
     key_press_event.connect(on_key_press_event);
     
     set_from_config();
@@ -82,11 +82,6 @@ public class ConfigList : ConfigWidget
     selection.changed.connect(handle_selection_change);
   }
   
-  bool on_mnemonic_activate(Gtk.Widget w, bool g)
-  {
-    return tree.mnemonic_activate(g);
-  }
-
   bool on_key_press_event(Gtk.Widget w, Gdk.EventKey e)
   {
     uint modifiers = Gtk.accelerator_get_default_mod_mask();
