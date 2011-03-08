@@ -320,7 +320,7 @@ public class BackendFile : Backend
       else if (type == "normal") {
         var file = get_file_from_settings();
         if (!file.is_native())
-          success = yield mount_remote();
+          success = yield mount_remote(file);
       }
     }
     catch (IOError.FAILED err) {
@@ -345,9 +345,8 @@ public class BackendFile : Backend
     envp_ready(success, new List<string>());
   }
 
-  async bool mount_remote() throws Error
+  async bool mount_remote(File file) throws Error
   {
-    var file = get_file_from_settings();
     try {
       // Check if it's already mounted
       var mount = yield file.find_enclosing_mount_async(Priority.DEFAULT, null);
