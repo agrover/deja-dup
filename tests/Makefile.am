@@ -30,6 +30,7 @@ AUTO_TESTS = \
 	backup/permissions \
 	backup/spaces \
 	backup/symlinks \
+	basic/badversion \
 	prefs/s3-folder \
 	prefs/ssh-to-file \
 	restore/cycle \
@@ -42,10 +43,8 @@ AUTO_TESTS = \
 
 # Tests that must be run manually
 # disk-full because it prompts for root password
-# badversion because it must download an old duplicity
 MANUAL_TESTS = \
-	backup/disk-full \
-	basic/badversion
+	backup/disk-full
 
 ALL_TESTS = $(AUTO_TESTS) $(MANUAL_TESTS)
 
