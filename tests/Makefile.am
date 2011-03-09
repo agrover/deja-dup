@@ -104,7 +104,7 @@ check: prep
 	export builddir=$(builddir) ; \
 	for t in $(AUTO_TESTS); do \
 		echo -n "Testing $$t..."; \
-		if ! $(srcdir)/$$t; then \
+		if ! dbus-launch $(srcdir)/$$t; then \
 			export TESTS_PASSED=false ; \
 		fi; \
 	done; \
