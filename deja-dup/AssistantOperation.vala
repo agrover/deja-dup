@@ -459,7 +459,16 @@ public abstract class AssistantOperation : Assistant
         force_visible(false);
     }
   }
-  
+
+  protected void ensure_status_icon(DejaDup.Operation o)
+  {
+    if (status_icon == null) {
+      status_icon = StatusIcon.create(this, o, automatic);
+      status_icon.show_window.connect((s) => {force_visible(true);});
+      status_icon.hide_all.connect((s) => {hide_everything();});
+    }
+  }
+
   protected async void do_apply()
   {
     /*
@@ -472,12 +481,6 @@ public abstract class AssistantOperation : Assistant
     if (mount_op == null)
       mount_op = new MountOperationAssistant(this);
 
-    if (status_icon == null) {
-      status_icon = StatusIcon.create(this, op, automatic);
-      status_icon.show_window.connect((s) => {force_visible(true);});
-      status_icon.hide_all.connect((s) => {hide_everything();});
-    }
-
     op = create_op();
     op.done.connect(apply_finished);
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
@@ -489,6 +492,8 @@ public abstract class AssistantOperation : Assistant
     op.secondary_desc_changed.connect(set_secondary_label);
     op.backend.mount_op = mount_op;
     op.backend.pause_op.connect(pause_op);
+
+    ensure_status_icon(op);
 
     op.start();
   }
@@ -536,8 +541,15 @@ public abstract class AssistantOperation : Assistant
   // window or after a password interruption.
   public override void hide_for_now()
   {
-    if (status_icon != null && status_icon.close_action == StatusIcon.CloseAction.MINIMIZE)
+    if (status_icon != null && status_icon.close_action == StatusIcon.CloseAction.MINIMIZE) {
+      // We show in case we are just starting up (like in automatic mode) and
+      // haven't been shown yet.  Ideally we'd just iconify then show, but
+      // window managers are dumb and don't start iconified in that situation,
+      // so to help them, we iconify again.
       iconify();
+      show();
+      iconify();
+    }
     else
       hide();
   }
