@@ -72,9 +72,10 @@ $(builddir)/data/symlink.tar.gz: symtar
 test: prep
 	@export OLD_DISPLAY=$$DISPLAY ; \
 	export DISPLAY= ; \
+	rm -f test.log ; \
 	for t in $(AUTO_TESTS); do \
 		echo -n "Testing $$t..."; \
-		if $(srcdir)/$$t >/dev/null 2>&1; then \
+		if $(srcdir)/wrap $(srcdir)/$$t >>test.log 2>&1; then \
 			echo -e " \e[32mPASSED\e[0m"; \
 		else \
 			echo -e " \e[31mFAILED\e[0m"; \
@@ -83,7 +84,7 @@ test: prep
 	export DISPLAY=$$OLD_DISPLAY ; \
 	for t in $(MANUAL_TESTS); do \
 		echo -n "Testing $$t..."; \
-		if $(srcdir)/$$t >/dev/null 2>&1; then \
+		if $(srcdir)/wrap $(srcdir)/$$t >>test.log 2>&1; then \
 			echo -e " \e[32mPASSED\e[0m"; \
 		else \
 			echo -e " \e[31mFAILED\e[0m"; \
@@ -103,7 +104,7 @@ check: prep
 	export builddir=$(builddir) ; \
 	for t in $(AUTO_TESTS); do \
 		echo -n "Testing $$t..."; \
-		if ! dbus-launch $(srcdir)/$$t; then \
+		if ! $(srcdir)/wrap $(srcdir)/$$t; then \
 			export TESTS_PASSED=false ; \
 		fi; \
 	done; \

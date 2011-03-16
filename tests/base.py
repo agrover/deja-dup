@@ -69,14 +69,6 @@ def get_temp_name(extra, make=False):
 def setup(start = True, args=[''], root_prompt = False):
   global cleanup_dirs, cleanup_pids, cleanup_envs, ldtp, latest_duplicity, srcdir
 
-  if not os.environ.get('DISPLAY'):
-    # Run a Xvfb session to allow running the test suite without a monitor
-    proc = subprocess.Popen(['Xvfb', ':5'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    ldtp.wait(1)
-    cleanup_pids.append(proc.pid)
-    os.environ['DISPLAY'] = ':5'
-    cleanup_envs.append('DISPLAY')
-
   srcdir = environ.get('srcdir')
   if not srcdir:
     srcdir = '.'
