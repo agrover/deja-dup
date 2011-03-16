@@ -29,30 +29,25 @@ if not base.dup_meets_version(0, 6, 12):
   base.skip()
 
 def nowrite():
-  backupdir = base.get_temp_name('backup')
-  os.makedirs(backupdir)
+  backupdir = base.get_temp_name('backup', True)
   os.system('chmod a-w %s' % backupdir)
   base.setup()
   base.backup_simple(error='lblPermissiondeniedwhentryingtocreate', backend='file', includes=['data/simple'], dest=backupdir)
 
 def noread():
-  backupdir = base.get_temp_name('backup')
-  os.makedirs(backupdir)
+  backupdir = base.get_temp_name('backup', True)
   os.system('chmod a-r %s' % backupdir)
   base.setup()
-  base.set_settings_value("last-run", "'fake'") # to avoid error when setting backup dir
   base.backup_simple(error=u'lblPermissiondeniedwhentryingtoread\u2018%s\u2019' % backupdir, backend='file', includes=['data/simple'], dest=backupdir)
 
 def noexec():
-  backupdir = base.get_temp_name('backup')
-  os.makedirs(backupdir)
+  backupdir = base.get_temp_name('backup', True)
   os.system('chmod a-x %s' % backupdir)
   base.setup()
   base.backup_simple(error='lblPermissiondeniedwhentryingtocreate', backend='file', includes=['data/simple'], dest=backupdir)
 
 def noget():
-  backupdir = base.get_temp_name('backup')
-  os.makedirs(backupdir)
+  backupdir = base.get_temp_name('backup', True)
   os.system('cp %s/* %s' % (sys.path[0]+'/vols/simple', backupdir))
   os.system('chmod a-r %s/*' % backupdir)
   base.setup()
@@ -63,7 +58,6 @@ def noget():
 def noexist():
   backupdir = base.get_temp_name('backup')
   base.setup()
-  base.set_settings_value("last-run", "'fake'") # to avoid losing missing dir name when using UI
   base.backup_simple(error=u'lblBackuplocation\u2018%s\u2019doesnotexist' % backupdir,
                      backend='file', includes=['data/simple'], dest=backupdir)
 
