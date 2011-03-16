@@ -176,6 +176,13 @@ public class ConfigURLPart : ConfigEntry
   static void scrub_uri(DejaDupDecodedUri uri)
   {
     // Scrub local URIs of invalid information
+    if (uri.scheme == null)
+      uri.scheme = "file";
+    if (uri.userinfo == "")
+      uri.userinfo = null;
+    if (uri.path == null)
+      uri.path = "";
+
     switch (uri.scheme) {
     case "file":
       uri.port = -1;
@@ -186,11 +193,6 @@ public class ConfigURLPart : ConfigEntry
       uri.port = -1;
       break;
     }
-
-    if (uri.userinfo == "")
-      uri.userinfo = null;
-    if (uri.path == null)
-      uri.path = "";
   }
 }
 
