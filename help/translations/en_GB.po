@@ -8,23 +8,23 @@ msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-30 09:53-0500\n"
-"PO-Revision-Date: 2010-12-04 20:26+0000\n"
-"Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
+"PO-Revision-Date: 2011-03-08 13:34+0000\n"
+"Last-Translator: nodata <lsof@nodata.co.uk>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-01-31 05:04+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-09 04:41+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: restore-worst-case.page:6(desc)
 msgid "What to do if you can't restore your files."
-msgstr ""
+msgstr "What to do if you can't restore your files."
 
 #: restore-worst-case.page:10(title)
 msgid "When Everything Goes Wrong"
-msgstr ""
+msgstr "What to do if you can't restore your files."
 
 #: restore-worst-case.page:12(p)
 msgid ""
@@ -35,6 +35,12 @@ msgid ""
 "the meantime, here are some approaches to workaround a misbehaving <app>Déjà "
 "Dup</app> and get your data back."
 msgstr ""
+"<app>Déjà Dup</app> may fail. Maybe it crashes or gives you an error when "
+"you try to restore. When you really need your data back, the last thing you "
+"want do deal with is a bug. Consider filing a <link "
+"href=\"https://launchpad.net/deja-dup/+filebug\">bug report</link> but in "
+"the meantime, here are some approaches to workaround a misbehaving <app>Déjà "
+"Dup</app> and get your data back."
 
 #: restore-worst-case.page:14(p)
 msgid ""
@@ -42,27 +48,34 @@ msgid ""
 "afraid to <link href=\"https://answers.launchpad.net/deja-dup\">ask for "
 "help</link>."
 msgstr ""
+"This is going to get technical. If none of this makes sense to you, don't be "
+"afraid to <link href=\"https://answers.launchpad.net/deja-dup\">ask for "
+"help</link>."
 
 #: restore-worst-case.page:17(p)
 msgid ""
 "Open a <app>Terminal</app> window by pressing "
 "<keyseq><key>Ctrl</key><key>Alt</key><key>T</key></keyseq>."
 msgstr ""
+"Open a <app>Terminal</app> window by pressing "
+"<keyseq><key>Ctrl</key><key>Alt</key><key>T</key></keyseq>."
 
 #: restore-worst-case.page:18(p)
 msgid ""
 "Create the directory in which you will place your restored files. This guide "
 "will use <file>/tmp/restore</file>:"
 msgstr ""
+"Create the directory in which you will place your restored files. This guide "
+"will use <file>/tmp/restore</file>:"
 
 #: restore-worst-case.page:19(screen)
 #, no-wrap
 msgid "mkdir -p /tmp/restore"
-msgstr ""
+msgstr "mkdir -p /tmp/restore"
 
 #: restore-worst-case.page:23(title)
 msgid "Restoring with Duplicity"
-msgstr ""
+msgstr "Restoring with Duplicity"
 
 #: restore-worst-case.page:25(p)
 msgid ""
@@ -71,12 +84,18 @@ msgid ""
 "used by <app>Déjà Dup</app> behind the scenes to back up and restore your "
 "files."
 msgstr ""
+"On the assumption that <app>Déjà Dup</app> is just not working for you right "
+"now, you're going to use the command line tool <app>duplicity</app> that is "
+"used by <app>Déjà Dup</app> behind the scenes to back up and restore your "
+"files."
 
 #: restore-worst-case.page:27(p)
 msgid ""
 "If you want more information about <app>duplicity</app> than presented here, "
 "run <cmd>man duplicity</cmd>."
 msgstr ""
+"If you want more information about <app>duplicity</app> than presented here, "
+"run <cmd>man duplicity</cmd>."
 
 #: restore-worst-case.page:29(p)
 msgid ""
@@ -84,21 +103,26 @@ msgid ""
 "your files are on an external drive mounted as <file>/media/backup</file> "
 "and you chose to encrypt the backup, try this:"
 msgstr ""
+"The first thing we'll try is a simple restore of all your data. Assuming "
+"your files are on an external drive mounted as <file>/media/backup</file> "
+"and you chose to encrypt the backup, try this:"
 
 #: restore-worst-case.page:30(screen)
 #, no-wrap
 msgid "duplicity --gio file:///media/backup /tmp/restore"
-msgstr ""
+msgstr "duplicity --gio file:///media/backup /tmp/restore"
 
 #: restore-worst-case.page:32(p)
 msgid ""
 "If you didn't encrypt the backup, add <cmd>--no-encryption</cmd> to the "
 "command."
 msgstr ""
+"If you didn't encrypt the backup, add <cmd>--no-encryption</cmd> to the "
+"command."
 
 #: restore-worst-case.page:35(title)
 msgid "Other Backup Locations"
-msgstr ""
+msgstr "Other Backup Locations"
 
 #: restore-worst-case.page:36(p)
 msgid ""
@@ -106,12 +130,17 @@ msgid ""
 "<app>duplicity</app> will be different than the external drive example "
 "above. See below for how to connect to your chosen backup location."
 msgstr ""
+"If you backed up to a remote or cloud server, the syntax you use with "
+"<app>duplicity</app> will be different than the external drive example "
+"above. See below for how to connect to your chosen backup location."
 
 #: restore-worst-case.page:37(p)
 msgid ""
 "Remember to add <cmd>--no-encryption</cmd> to any example commands if you're "
 "backup is not encrypted."
 msgstr ""
+"Remember to add <cmd>--no-encryption</cmd> to any example commands if you're "
+"backup is not encrypted."
 
 #: restore-worst-case.page:38(p)
 msgid ""
@@ -119,6 +148,9 @@ msgid ""
 "server, try downloading all the <app>duplicity</app> files yourself to a "
 "local folder and following the simpler example above."
 msgstr ""
+"If <app>duplicity</app> appears to be having trouble connecting to your "
+"server, try downloading all the <app>duplicity</app> files yourself to a "
+"local folder and following the simpler example above."
 
 #: restore-worst-case.page:41(title)
 msgid "Amazon S3"
@@ -130,6 +162,9 @@ msgid ""
 "instances of <var>ID</var> and <var>SECRET</var> in the example below with "
 "those respective values."
 msgstr ""
+"Look up your Amazon S3 access key ID and secret access key and replace "
+"instances of <var>ID</var> and <var>SECRET</var> in the example below with "
+"those respective values."
 
 #: restore-worst-case.page:43(p)
 #: restore-worst-case.page:61(p)
@@ -140,6 +175,8 @@ msgid ""
 "You may have specified a folder in which to put the backup files. In the "
 "example below, replace any instance of <var>FOLDER</var> with that path."
 msgstr ""
+"You may have specified a folder in which to put the backup files. In the "
+"example below, replace any instance of <var>FOLDER</var> with that path."
 
 #: restore-worst-case.page:44(screen)
 #, no-wrap
@@ -150,10 +187,15 @@ msgid ""
 "duplicity s3+http://deja-dup-auto-<var>ID</var>/<var>FOLDER</var> "
 "/tmp/restore"
 msgstr ""
+"\n"
+"export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
+"export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
+"duplicity s3+http://deja-dup-auto-<var>ID</var>/<var>FOLDER</var> "
+"/tmp/restore"
 
 #: restore-worst-case.page:50(title)
 msgid "Rackspace Cloud Files"
-msgstr ""
+msgstr "Rackspace Cloud Files"
 
 #: restore-worst-case.page:51(p)
 msgid ""
@@ -161,12 +203,17 @@ msgid ""
 "<var>USERNAME</var> and <var>KEY</var> in the example below with those "
 "respective values."
 msgstr ""
+"Look up your Rackspace username and API key and replace instances of "
+"<var>USERNAME</var> and <var>KEY</var> in the example below with those "
+"respective values."
 
 #: restore-worst-case.page:52(p)
 msgid ""
 "You may have specified a container in which to put the backup files. In the "
 "example below, replace any instance of <var>CONTAINER</var> with that name."
 msgstr ""
+"You may have specified a container in which to put the backup files. In the "
+"example below, replace any instance of <var>CONTAINER</var> with that name."
 
 #: restore-worst-case.page:53(screen)
 #, no-wrap
@@ -176,10 +223,14 @@ msgid ""
 "export CLOUDFILES_APIKEY=<var>KEY</var>\n"
 "duplicity cf+http://<var>CONTAINER</var> /tmp/restore"
 msgstr ""
+"\n"
+"export CLOUDFILES_USERNAME=<var>USERNAME</var>\n"
+"export CLOUDFILES_APIKEY=<var>KEY</var>\n"
+"duplicity cf+http://<var>CONTAINER</var> /tmp/restore"
 
 #: restore-worst-case.page:59(title)
 msgid "FTP"
-msgstr ""
+msgstr "FTP"
 
 #: restore-worst-case.page:60(p)
 #: restore-worst-case.page:69(p)
@@ -189,12 +240,17 @@ msgid ""
 "instances of <var>SERVER</var>, <var>PORT</var>, <var>USERNAME</var>, and "
 "<var>PASSWORD</var> in the example below with those respective values."
 msgstr ""
+"Look up your server address, port, username, and password and replace "
+"instances of <var>SERVER</var>, <var>PORT</var>, <var>USERNAME</var>, and "
+"<var>PASSWORD</var> in the example below with those respective values."
 
 #: restore-worst-case.page:62(p)
 msgid ""
 "If you chose to not log in with a username, use <var>anonymous</var> as your "
 "<var>USERNAME</var> below."
 msgstr ""
+"If you chose to not log in with a username, use <var>anonymous</var> as your "
+"<var>USERNAME</var> below."
 
 #: restore-worst-case.page:63(screen)
 #, no-wrap
@@ -207,6 +263,13 @@ msgid ""
 "ftp://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
 " /tmp/restore"
 msgstr ""
+"\n"
+"gvfs-mount "
+"ftp://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+"\n"
+"duplicity --gio "
+"ftp://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+" /tmp/restore"
 
 #: restore-worst-case.page:68(title)
 msgid "SSH"
@@ -223,16 +286,25 @@ msgid ""
 "ssh://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
 " /tmp/restore"
 msgstr ""
+"\n"
+"gvfs-mount "
+"ssh://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+"\n"
+"duplicity --gio "
+"ssh://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+" /tmp/restore"
 
 #: restore-worst-case.page:76(title)
 msgid "WebDAV"
-msgstr ""
+msgstr "WebDAV"
 
 #: restore-worst-case.page:79(p)
 msgid ""
 "If you chose to use a secure connection (HTTPS) when backing up, use "
 "<var>davs://</var> instead of <var>dav://</var> in the example below."
 msgstr ""
+"If you chose to use a secure connection (HTTPS) when backing up, use "
+"<var>davs://</var> instead of <var>dav://</var> in the example below."
 
 #: restore-worst-case.page:80(screen)
 #, no-wrap
@@ -245,10 +317,17 @@ msgid ""
 "dav://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
 " /tmp/restore"
 msgstr ""
+"\n"
+"gvfs-mount "
+"dav://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+"\n"
+"duplicity --gio "
+"dav://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+" /tmp/restore"
 
 #: restore-worst-case.page:85(title)
 msgid "Windows Share"
-msgstr ""
+msgstr "Windows Share"
 
 #: restore-worst-case.page:86(p)
 msgid ""
@@ -256,6 +335,9 @@ msgid ""
 "<var>SERVER</var>, <var>USERNAME</var>, and <var>PASSWORD</var> in the "
 "example below with those respective values."
 msgstr ""
+"Look up your server address, username, and password and replace instances of "
+"<var>SERVER</var>, <var>USERNAME</var>, and <var>PASSWORD</var> in the "
+"example below with those respective values."
 
 #: restore-worst-case.page:88(p)
 msgid ""
@@ -263,6 +345,9 @@ msgid ""
 "of <var>USERNAME</var> with a semicolon between them. For example, "
 "<var>domain;username</var>."
 msgstr ""
+"If you specified a domain for your Windows server, add it to the beginning "
+"of <var>USERNAME</var> with a semicolon between them. For example, "
+"<var>domain;username</var>."
 
 #: restore-worst-case.page:89(screen)
 #, no-wrap
@@ -272,10 +357,14 @@ msgid ""
 "duplicity --gio "
 "smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var> /tmp/restore"
 msgstr ""
+"\n"
+"gvfs-mount smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var>\n"
+"duplicity --gio "
+"smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var> /tmp/restore"
 
 #: restore-worst-case.page:99(title)
 msgid "Restoring by Hand"
-msgstr ""
+msgstr "Restoring by Hand"
 
 #: restore-worst-case.page:101(p)
 msgid ""
@@ -283,6 +372,9 @@ msgid ""
 "hope. The backup file format is complicated and not easily manipulated. But "
 "if you're desperate, it's worth a try."
 msgstr ""
+"If even <app>duplicity</app> isn't working for you, there may be little "
+"hope. The backup file format is complicated and not easily manipulated. But "
+"if you're desperate, it's worth a try."
 
 #: restore-worst-case.page:103(p)
 msgid ""
@@ -290,6 +382,9 @@ msgid ""
 "all the <app>duplicity</app> files and place them in a folder on your "
 "computer. Then enter that folder in your terminal."
 msgstr ""
+"If you used a remote or cloud server to store your backup, first download "
+"all the <app>duplicity</app> files and place them in a folder on your "
+"computer. Then enter that folder in your terminal."
 
 #: restore-worst-case.page:105(p)
 msgid ""
@@ -298,6 +393,10 @@ msgid ""
 "'inc' or incremental backups. Starting with a full backup set of volumes at "
 "volume 1, you'll need to restore files volume by volume."
 msgstr ""
+"<app>Duplicity</app> stores your data in small chunks called volumes. Some "
+"volumes belong to the periodic 'full' or fresh backups and others to the "
+"'inc' or incremental backups. Starting with a full backup set of volumes at "
+"volume 1, you'll need to restore files volume by volume."
 
 #: restore-worst-case.page:107(p)
 msgid ""
@@ -305,6 +404,9 @@ msgid ""
 "<cmd>gpg</cmd>. Say you have <file>duplicity-"
 "full.20110127T131352Z.vol1.difftar.gpg</file>:"
 msgstr ""
+"If you encrypted your backup, first you must decrypt the volume with "
+"<cmd>gpg</cmd>. Say you have <file>duplicity-"
+"full.20110127T131352Z.vol1.difftar.gpg</file>:"
 
 #: restore-worst-case.page:108(screen)
 #, no-wrap
@@ -312,6 +414,8 @@ msgid ""
 "gpg --output duplicity-full.20110127T131352Z.vol1.difftar --decrypt "
 "duplicity-full.20110127T131352Z.vol1.difftar.gpg"
 msgstr ""
+"gpg --output duplicity-full.20110127T131352Z.vol1.difftar --decrypt "
+"duplicity-full.20110127T131352Z.vol1.difftar.gpg"
 
 #: restore-worst-case.page:110(p)
 msgid ""
@@ -320,18 +424,22 @@ msgid ""
 "<cmd>tar</cmd> on whichever one you have to extract the individual patch "
 "files:"
 msgstr ""
+"Now you have either a <file>.difftar</file> or a <file>.difftar.gz</file> "
+"volume (depending on whether you had to decrypt it or not). Use "
+"<cmd>tar</cmd> on whichever one you have to extract the individual patch "
+"files:"
 
 #: restore-worst-case.page:111(screen)
 #, no-wrap
 msgid "tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz"
-msgstr ""
+msgstr "tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz"
 
 #: restore-worst-case.page:113(p)
 msgid ""
 "Now the patch files will be in <file>multivolume_snapshot</file> and "
 "<file>snapshot</file> folders. Use <cmd>rdiff</cmd> to stitch the files "
 "together. See <cmd>man rdiff</cmd> for usage."
-msgstr ""
+msgstr "tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz"
 
 #: restore-revert.page:6(desc)
 msgid "Restore a previous version of a file."
@@ -402,27 +510,31 @@ msgstr "Restoring a Lost File"
 
 #: restore-lost.page:11(p)
 msgid "Browse to the folder containing the file you lost."
-msgstr ""
+msgstr "Browse to the folder containing the file you lost."
 
 #: restore-lost.page:12(p)
 msgid "Right click on the background of the folder."
-msgstr ""
+msgstr "Right click on the background of the folder."
 
 #: restore-lost.page:13(p)
 msgid "Choose <gui style=\"menuitem\">Restore Missing Files…</gui>."
-msgstr ""
+msgstr "Choose <gui style=\"menuitem\">Restore Missing Files…</gui>."
 
 #: restore-lost.page:14(p)
 msgid ""
 "When the <gui>Restore</gui> dialog appears, it will scan for files that are "
 "in the backup but no longer in the folder."
 msgstr ""
+"When the <gui>Restore</gui> dialog appears, it will scan for files that are "
+"in the backup but no longer in the folder."
 
 #: restore-lost.page:15(p)
 msgid ""
 "When you see the file you want to restore appear, select it and click <gui "
 "style=\"button\">Forward</gui>."
 msgstr ""
+"When you see the file you want to restore appear, select it and click <gui "
+"style=\"button\">Forward</gui>."
 
 #: restore-lost.page:16(p)
 #: restore-full.page:28(p)
@@ -435,6 +547,8 @@ msgid ""
 "You can restore lost files from the command line as well, if you remember "
 "what their filenames were:"
 msgstr ""
+"You can restore lost files from the command line as well, if you remember "
+"what their filenames were:"
 
 #: restore-full.page:6(desc)
 msgid "Recover from total system failure."
@@ -564,7 +678,7 @@ msgstr ""
 
 #: prefs.page:18(title)
 msgid "Cloud Services"
-msgstr ""
+msgstr "Cloud Services"
 
 #: prefs.page:19(p)
 msgid ""
@@ -575,11 +689,18 @@ msgid ""
 "theft, your data will still be safe). You can choose from Amazon S3, "
 "Rackspace Cloud Files, and Ubuntu One."
 msgstr ""
+"The first few backup locations are cloud storage services provided by "
+"various companies. For a small fee per gigabyte, they hold your data for "
+"you. A cloud service like this is recommended because it is an easy way to "
+"keep your data offsite (meaning out of your home: in case of disaster or "
+"theft, your data will still be safe). You can choose from Amazon S3, "
+"Rackspace Cloud Files, and Ubuntu One."
 
 #: prefs.page:20(p)
 msgid ""
 "These services costs money. Read their rates carefully before using it."
 msgstr ""
+"These services costs money. Read their rates carefully before using it."
 
 #: prefs.page:23(title)
 msgid "Removable Media"
@@ -593,7 +714,7 @@ msgstr ""
 
 #: prefs.page:27(title)
 msgid "Remote Servers"
-msgstr ""
+msgstr "Remote Servers"
 
 #: prefs.page:28(p)
 msgid ""
@@ -601,6 +722,9 @@ msgid ""
 "enter the server information. Alternatively, if you know your server's URL, "
 "choose <gui>Custom Location</gui> and enter it."
 msgstr ""
+"Choose the type of remote server to which you want to connect. Then you can "
+"enter the server information. Alternatively, if you know your server's URL, "
+"choose <gui>Custom Location</gui> and enter it."
 
 #: prefs.page:31(title)
 msgid "Local Folder"
@@ -682,11 +806,11 @@ msgstr ""
 
 #: prefs.page:51(p)
 msgid "Some locations are always excluded by default:"
-msgstr ""
+msgstr "Some locations are always excluded by default:"
 
 #: prefs.page:53(file)
 msgid "~/.adobe/Flash_Player/AssetCache"
-msgstr ""
+msgstr "~/.adobe/Flash_Player/AssetCache"
 
 #: prefs.page:54(file)
 msgid "~/.cache"
@@ -781,6 +905,8 @@ msgid ""
 "Backups are kept forever by default, but still may be deleted earlier if the "
 "backup location begins to run out of space."
 msgstr ""
+"Backups are kept forever by default, but still may be deleted earlier if the "
+"backup location begins to run out of space."
 
 #: index.page:9(name)
 msgid "Michael Terry"
@@ -829,6 +955,10 @@ msgid ""
 "drive you want to use, make sure it is plugged in first. On this same "
 "screen, select whether you would like to encrypt the backup files."
 msgstr ""
+"A <gui>Backup</gui> dialogue will appear asking where you want to keep the "
+"backup files (your <gui>Backup location</gui>). If you have an external hard "
+"drive you want to use, make sure it is plugged in first. On this same "
+"screen, select whether you would like to encrypt the backup files."
 
 #: backup-first.page:15(p)
 msgid ""
@@ -920,7 +1050,8 @@ msgstr ""
 "  Jonathon Hodges https://launchpad.net/~jonblondie\n"
 "  Matthew Gall https://launchpad.net/~matthewgall2005\n"
 "  Michael Terry https://launchpad.net/~mterry\n"
-"  Philipp Kleinhenz https://launchpad.net/~lopho"
+"  Philipp Kleinhenz https://launchpad.net/~lopho\n"
+"  nodata https://launchpad.net/~ubuntu-nodata"
 
 #, no-wrap
 #~ msgid "deja-dup"
