@@ -111,10 +111,14 @@ check: prep
 	$${TESTS_PASSED}
 
 EXTRA_DIST = \
-	$(ALL_TESTS) \
+	backup \
+	basic \
+	prefs \
+	restore \
 	base.py \
 	build-duplicity \
 	interactive \
+	wrap \
 	data \
 	vols \
 	README
@@ -123,6 +127,7 @@ distclean-local:
 	rm -rf duplicity duplicity-src
 	rm -f data/symlink.tar.gz
 	rm -rf $(builddir)/data/symlink
+	rm -f test.log
 
 dist-hook: symtar
 	@rm -rf $(distdir)/data/symlink
