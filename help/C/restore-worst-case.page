@@ -44,7 +44,7 @@
     <screen>
 export AWS_ACCESS_KEY_ID=<var>ID</var>
 export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>
-duplicity s3+http://deja-dup-auto-<var>ID</var>/<var>FOLDER</var> /tmp/restore</screen>
+duplicity s3+http://deja-dup-auto-<var>LOWERCASE_ID</var>/<var>FOLDER</var> /tmp/restore</screen>
   </item>
   <item>
     <title>Rackspace Cloud Files</title>
@@ -107,10 +107,20 @@ duplicity --gio smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var> /t
 <p>If you encrypted your backup, first you must decrypt the volume with <cmd>gpg</cmd>.  Say you have <file>duplicity-full.20110127T131352Z.vol1.difftar.gpg</file>:</p>
 <screen>gpg --output duplicity-full.20110127T131352Z.vol1.difftar --decrypt duplicity-full.20110127T131352Z.vol1.difftar.gpg</screen>
 
-<p>Now you have either a <file>.difftar</file> or a <file>.difftar.gz</file> volume (depending on whether you had to decrypt it or not).  Use <cmd>tar</cmd> on whichever one you have to extract the individual patch files:</p>
-<screen>tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz</screen>
+<p>Or to do all at once (make sure you have plenty of space!):</p>
+<screen>gpg --multifile --decrypt duplicity-full.20110127T131352Z.*.difftar.gpg</screen>
 
-<p>Now the patch files will be in <file>multivolume_snapshot</file> and <file>snapshot</file> folders.  Use <cmd>rdiff</cmd> to stitch the files together.  See <cmd>man rdiff</cmd> for usage.</p>
+<p>Now you have either a <file>.difftar</file> or a <file>.difftar.gz</file> volume (depending on whether you had to decrypt it or not).  Use <cmd>tar</cmd> on whichever one you have to extract the individual patch files:</p>
+<screen>tar xf duplicity-full.20110127T131352Z.vol1.difftar</screen>
+
+<p>Or again, to do all at once:</p>
+<screen>for t in duplicity-full.20110127T131352Z.*.difftar; do tar xf $t; done</screen>
+
+<p>Now the patch files will be in <file>multivolume_snapshot</file> and <file>snapshot</file> folders.  Each file that spanned multiple volumes will be in <file>multivolume_snapshot</file>. Let's say you backed up <file>/home/jane/essay.txt</file>:</p>
+<screen>cd multivolume_snapshot/home/jane/essay.txt
+cat * > essay.txt</screen>
+
+<p>To recover data from incremental backups, use <cmd>rdiff</cmd> to stitch the files together. See <cmd>man rdiff</cmd> for usage.</p>
 
 </section>
 
