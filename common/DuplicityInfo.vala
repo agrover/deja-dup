@@ -102,17 +102,16 @@ public class DuplicityInfo : Object
     if (meets_version(0, 5, 16))
       can_read_short_filenames = true;
     if (meets_version(0, 6, 5)) {
-      has_native_gio = true; // had it in 0.6.1, but didn't work on restore
-      // Don't allow resuming yet; there are still bugs:
-      // https://bugs.launchpad.net/duplicity/+bug/613244
-      //can_resume = true; // had it in 0.6.0, but didn't quite work right
+      has_native_gio = true; // had it since 0.6.1, but didn't work on restore
     }
     if (meets_version(0, 6, 7)) {
       has_rename_arg = true;
-      has_fixed_log_file = true; // had it since forever, but was buggy
+      has_fixed_log_file = true; // had it since 0.5.3, but was buggy
     }
     if (equals_version(0, 6, 8))
       use_empty_gpg_options = true; // workaround a duplicity bug
+    if (equals_version(0, 6, 13))
+      can_resume = true; // had it since 0.6.0, but had data corruption bugs
 
     return true;
   }
