@@ -17,7 +17,12 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 nobase_dist_data_DATA = \
-	icons/hicolor/scalable/apps/deja-dup.svg \
+	icons/hicolor/16x16/apps/deja-dup.png \
+	icons/hicolor/22x22/apps/deja-dup.png \
+	icons/hicolor/24x24/apps/deja-dup.png \
+	icons/hicolor/32x32/apps/deja-dup.png \
+	icons/hicolor/48x48/apps/deja-dup.png \
+	icons/hicolor/256x256/apps/deja-dup.png \
 	icons/hicolor/scalable/apps/deja-dup-symbolic.svg \
 	icons/hicolor/scalable/actions/deja-dup-backup.svg \
 	icons/hicolor/scalable/actions/deja-dup-restore.svg \
