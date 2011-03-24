@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-01-30 09:53-0500\n"
+"POT-Creation-Date: 2011-03-20 20:43-0400\n"
 "PO-Revision-Date: 2011-01-28 15:04+0000\n"
 "Last-Translator: rob <linuxned@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-01-31 05:04+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-24 04:53+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 
 #: restore-worst-case.page:6(desc)
 msgid "What to do if you can't restore your files."
@@ -188,14 +188,9 @@ msgid ""
 "\n"
 "export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
 "export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
-"duplicity s3+http://deja-dup-auto-<var>ID</var>/<var>FOLDER</var> "
+"duplicity s3+http://deja-dup-auto-<var>LOWERCASE_ID</var>/<var>FOLDER</var> "
 "/tmp/restore"
 msgstr ""
-"\n"
-"export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
-"export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
-"duplicity s3+http://deja-dup-auto-<var>ID</var>/<var>FOLDER</var> "
-"/tmp/restore"
 
 #: restore-worst-case.page:50(title)
 msgid "Rackspace Cloud Files"
@@ -425,6 +420,16 @@ msgstr ""
 "duplicity-full.20110127T131352Z.vol1.difftar.gpg"
 
 #: restore-worst-case.page:110(p)
+msgid "Or to do all at once (make sure you have plenty of space!):"
+msgstr ""
+
+#: restore-worst-case.page:111(screen)
+#, no-wrap
+msgid ""
+"gpg --multifile --decrypt duplicity-full.20110127T131352Z.*.difftar.gpg"
+msgstr ""
+
+#: restore-worst-case.page:113(p)
 msgid ""
 "Now you have either a <file>.difftar</file> or a <file>.difftar.gz</file> "
 "volume (depending on whether you had to decrypt it or not). Use "
@@ -436,21 +441,41 @@ msgstr ""
 "of niet). Gebruik <cmd>tar</cmd> bij het volume waaruit u de individuele "
 "patch-bestanden moet halen:"
 
-#: restore-worst-case.page:111(screen)
+#: restore-worst-case.page:114(screen)
 #, no-wrap
-msgid "tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz"
-msgstr "tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz"
+msgid "tar xf duplicity-full.20110127T131352Z.vol1.difftar"
+msgstr ""
 
-#: restore-worst-case.page:113(p)
+#: restore-worst-case.page:116(p)
+msgid "Or again, to do all at once:"
+msgstr ""
+
+#: restore-worst-case.page:117(screen)
+#, no-wrap
+msgid ""
+"for t in duplicity-full.20110127T131352Z.*.difftar; do tar xf $t; done"
+msgstr ""
+
+#: restore-worst-case.page:119(p)
 msgid ""
 "Now the patch files will be in <file>multivolume_snapshot</file> and "
-"<file>snapshot</file> folders. Use <cmd>rdiff</cmd> to stitch the files "
-"together. See <cmd>man rdiff</cmd> for usage."
+"<file>snapshot</file> folders. Each file that spanned multiple volumes will "
+"be in <file>multivolume_snapshot</file>. Let's say you backed up "
+"<file>/home/jane/essay.txt</file>:"
 msgstr ""
-"Nu zullen de patch-bestanden zich bevinden in "
-"<file>multivolume_snapshot</file> en <file>snapshot</file>-mappen. Gebruik "
-"<cmd>rdiff</cmd> om de bestanden samen te voegen. Zie <cmd>man rdiff</cmd> "
-"voor het gebruik."
+
+#: restore-worst-case.page:120(screen)
+#, no-wrap
+msgid ""
+"cd multivolume_snapshot/home/jane/essay.txt\n"
+"cat * &gt; essay.txt"
+msgstr ""
+
+#: restore-worst-case.page:123(p)
+msgid ""
+"To recover data from incremental backups, use <cmd>rdiff</cmd> to stitch the "
+"files together. See <cmd>man rdiff</cmd> for usage."
+msgstr ""
 
 #: restore-revert.page:6(desc)
 msgid "Restore a previous version of a file."
@@ -703,15 +728,9 @@ msgid ""
 "various companies. For a small fee per gigabyte, they hold your data for "
 "you. A cloud service like this is recommended because it is an easy way to "
 "keep your data offsite (meaning out of your home: in case of disaster or "
-"theft, your data will still be safe). You can choose from Amazon S3, "
-"Rackspace Cloud Files, and Ubuntu One."
+"theft, your data will still be safe). You can choose from Amazon S3 and "
+"Rackspace Cloud Files."
 msgstr ""
-"De eerste paar back-uplocaties zijn cloud-opslagdiensten van verschillende "
-"bedrijven. Voor een kleine vergoeding per gigabyte, wordt uw data voor u "
-"bewaard. Cloud-diensten zoals deze worden aanbevolen omdat het een "
-"gemakkelijke manier is om data buitenshuis (hiermee wordt bedoeld buiten uw "
-"huis, in geval van een ramp of diefstal zal uw data toch veilig zijn) te "
-"bewaren. U kunt kiezen uit Amazon S3, Rackspace Cloud Files en Ubuntu One."
 
 #: prefs.page:20(p)
 msgid ""
@@ -1873,3 +1892,46 @@ msgstr ""
 #~ "Gebruik deze selectie lijst om de backup locatie te kiezen die "
 #~ "<application>Déjà Dup</application> zal gebruiken bij het maken van een "
 #~ "backup of bij het herstellen:"
+
+#~ msgid ""
+#~ "The first few backup locations are cloud storage services provided by "
+#~ "various companies. For a small fee per gigabyte, they hold your data for "
+#~ "you. A cloud service like this is recommended because it is an easy way to "
+#~ "keep your data offsite (meaning out of your home: in case of disaster or "
+#~ "theft, your data will still be safe). You can choose from Amazon S3, "
+#~ "Rackspace Cloud Files, and Ubuntu One."
+#~ msgstr ""
+#~ "De eerste paar back-uplocaties zijn cloud-opslagdiensten van verschillende "
+#~ "bedrijven. Voor een kleine vergoeding per gigabyte, wordt uw data voor u "
+#~ "bewaard. Cloud-diensten zoals deze worden aanbevolen omdat het een "
+#~ "gemakkelijke manier is om data buitenshuis (hiermee wordt bedoeld buiten uw "
+#~ "huis, in geval van een ramp of diefstal zal uw data toch veilig zijn) te "
+#~ "bewaren. U kunt kiezen uit Amazon S3, Rackspace Cloud Files en Ubuntu One."
+
+#, no-wrap
+#~ msgid ""
+#~ "\n"
+#~ "export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
+#~ "export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
+#~ "duplicity s3+http://deja-dup-auto-<var>ID</var>/<var>FOLDER</var> "
+#~ "/tmp/restore"
+#~ msgstr ""
+#~ "\n"
+#~ "export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
+#~ "export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
+#~ "duplicity s3+http://deja-dup-auto-<var>ID</var>/<var>FOLDER</var> "
+#~ "/tmp/restore"
+
+#, no-wrap
+#~ msgid "tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz"
+#~ msgstr "tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz"
+
+#~ msgid ""
+#~ "Now the patch files will be in <file>multivolume_snapshot</file> and "
+#~ "<file>snapshot</file> folders. Use <cmd>rdiff</cmd> to stitch the files "
+#~ "together. See <cmd>man rdiff</cmd> for usage."
+#~ msgstr ""
+#~ "Nu zullen de patch-bestanden zich bevinden in "
+#~ "<file>multivolume_snapshot</file> en <file>snapshot</file>-mappen. Gebruik "
+#~ "<cmd>rdiff</cmd> om de bestanden samen te voegen. Zie <cmd>man rdiff</cmd> "
+#~ "voor het gebruik."

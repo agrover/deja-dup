@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-01-30 09:53-0500\n"
+"POT-Creation-Date: 2011-03-20 20:43-0400\n"
 "PO-Revision-Date: 2010-09-28 04:03+0000\n"
 "Last-Translator: Piotr Strębski <strebski@o2.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-01-31 05:04+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-24 04:53+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 
 #: restore-worst-case.page:6(desc)
 msgid "What to do if you can't restore your files."
@@ -148,7 +148,7 @@ msgid ""
 "\n"
 "export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
 "export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
-"duplicity s3+http://deja-dup-auto-<var>ID</var>/<var>FOLDER</var> "
+"duplicity s3+http://deja-dup-auto-<var>LOWERCASE_ID</var>/<var>FOLDER</var> "
 "/tmp/restore"
 msgstr ""
 
@@ -315,6 +315,16 @@ msgid ""
 msgstr ""
 
 #: restore-worst-case.page:110(p)
+msgid "Or to do all at once (make sure you have plenty of space!):"
+msgstr ""
+
+#: restore-worst-case.page:111(screen)
+#, no-wrap
+msgid ""
+"gpg --multifile --decrypt duplicity-full.20110127T131352Z.*.difftar.gpg"
+msgstr ""
+
+#: restore-worst-case.page:113(p)
 msgid ""
 "Now you have either a <file>.difftar</file> or a <file>.difftar.gz</file> "
 "volume (depending on whether you had to decrypt it or not). Use "
@@ -322,16 +332,40 @@ msgid ""
 "files:"
 msgstr ""
 
-#: restore-worst-case.page:111(screen)
+#: restore-worst-case.page:114(screen)
 #, no-wrap
-msgid "tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz"
+msgid "tar xf duplicity-full.20110127T131352Z.vol1.difftar"
 msgstr ""
 
-#: restore-worst-case.page:113(p)
+#: restore-worst-case.page:116(p)
+msgid "Or again, to do all at once:"
+msgstr ""
+
+#: restore-worst-case.page:117(screen)
+#, no-wrap
+msgid ""
+"for t in duplicity-full.20110127T131352Z.*.difftar; do tar xf $t; done"
+msgstr ""
+
+#: restore-worst-case.page:119(p)
 msgid ""
 "Now the patch files will be in <file>multivolume_snapshot</file> and "
-"<file>snapshot</file> folders. Use <cmd>rdiff</cmd> to stitch the files "
-"together. See <cmd>man rdiff</cmd> for usage."
+"<file>snapshot</file> folders. Each file that spanned multiple volumes will "
+"be in <file>multivolume_snapshot</file>. Let's say you backed up "
+"<file>/home/jane/essay.txt</file>:"
+msgstr ""
+
+#: restore-worst-case.page:120(screen)
+#, no-wrap
+msgid ""
+"cd multivolume_snapshot/home/jane/essay.txt\n"
+"cat * &gt; essay.txt"
+msgstr ""
+
+#: restore-worst-case.page:123(p)
+msgid ""
+"To recover data from incremental backups, use <cmd>rdiff</cmd> to stitch the "
+"files together. See <cmd>man rdiff</cmd> for usage."
 msgstr ""
 
 #: restore-revert.page:6(desc)
@@ -552,8 +586,8 @@ msgid ""
 "various companies. For a small fee per gigabyte, they hold your data for "
 "you. A cloud service like this is recommended because it is an easy way to "
 "keep your data offsite (meaning out of your home: in case of disaster or "
-"theft, your data will still be safe). You can choose from Amazon S3, "
-"Rackspace Cloud Files, and Ubuntu One."
+"theft, your data will still be safe). You can choose from Amazon S3 and "
+"Rackspace Cloud Files."
 msgstr ""
 
 #: prefs.page:20(p)
@@ -855,6 +889,8 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
+"  Antoni Sperka https://launchpad.net/~antek1004-gmail\n"
+"  Arkadiusz Błasiak https://launchpad.net/~ares1112\n"
 "  Mateusz Pogorzelski https://launchpad.net/~pogoma\n"
 "  Michael Terry https://launchpad.net/~mterry\n"
 "  Piotr Strębski https://launchpad.net/~strebski"
@@ -889,3 +925,56 @@ msgstr ""
 
 #~ msgid "Folder"
 #~ msgstr "Katalog"
+
+#~ msgid "<guilabel>Automatically backup on a regular schedule</guilabel>"
+#~ msgstr ""
+#~ "<guilabel>Automatyczne tworzenie kopii zapasowej w oparciu o regularny "
+#~ "harmonogram</guilabel>"
+
+#~ msgid "<guilabel>Encrypt backup files</guilabel>"
+#~ msgstr "<guilabel>Szyfrowanie plików kopii zapasowych</guilabel>"
+
+#~ msgid "<guilabel>S3 Access Key ID</guilabel>"
+#~ msgstr "<guilabel>Identyfikator klucza dostępu S3</guilabel>"
+
+#, no-wrap
+#~ msgid "deja-dup"
+#~ msgstr "deja-dup"
+
+#, no-wrap
+#~ msgid "%DATE%"
+#~ msgstr "%DATE%"
+
+#, no-wrap
+#~ msgid "DESCRIPTION"
+#~ msgstr "OPIS"
+
+#~ msgid "Restores only the specified files"
+#~ msgstr "Przywraca tylko wybrane pliki"
+
+#~ msgid ""
+#~ "deja-dup is a graphical frontend to B<duplicity>(1).  It can backup and "
+#~ "restore using a local folder or a remote server, including Amazon S3, as "
+#~ "well as schedule backups at regular intervals."
+#~ msgstr ""
+#~ "Program deja-dup jest graficzną nakładką dla programu B<duplicity>(1). "
+#~ "Pozwala na tworzenie i przywracanie kopii zapasowych do lokalnych katalogów "
+#~ "lub zdalnych serwerów, takich jak Amazon S3. Potrafi także tworzyć kopie "
+#~ "zapasowe w regularnych odstępach czasu."
+
+#, no-wrap
+#~ msgid "--restore"
+#~ msgstr "--restore"
+
+#, no-wrap
+#~ msgid "--backup"
+#~ msgstr "--backup"
+
+#~ msgid "Immediately starts a backup"
+#~ msgstr "Natychmiastowe rozpoczęcie tworzenia kopi zapasowej"
+
+#~ msgid "Prints program name and version"
+#~ msgstr "Wyświetla nazwę i wersję programu"
+
+#~ msgid "<application>Déjà Dup</application> Manual"
+#~ msgstr "Instrukcja <application>Déjà Dup</application>"
