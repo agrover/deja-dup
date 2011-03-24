@@ -19,11 +19,11 @@
 # Don't use special name 'TESTS', as it will trigger an automatically-created
 # 'check' target used during distcheck.
 
-# backup/continue # disabled until continue support is back in
 AUTO_TESTS = \
 	backup/cancel \
 	backup/cancel-clean \
 	backup/clear-cache \
+	backup/continue \
 	backup/full \
 	backup/delete \
 	backup/exclude \

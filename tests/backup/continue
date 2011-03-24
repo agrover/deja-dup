@@ -25,6 +25,9 @@ sys.path.insert(0, sys.path[0]+'/..')
 import base
 import ldtp
 
+if not base.dup_meets_version(0, 6, 13):
+  base.skip()
+
 def wait_for_volume(destdir):
   count = 0
   while os.listdir(destdir) == [] and count < 200:
@@ -45,6 +48,5 @@ def test():
   vols_after = os.listdir(destdir)
   assert base.num_manifests() == 1
   assert vols_before[0] in vols_after
-  return True
 
 base.run(test)
