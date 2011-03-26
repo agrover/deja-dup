@@ -53,8 +53,9 @@ public abstract class StatusIcon : Object
   {
     StatusIcon instance;
     instance = new ShellStatusIcon(window, op, automatic);
-    if (!instance.is_valid)
-      instance = new UnityStatusIcon(window, op, automatic);
+    // Unity does not yet support custom menus.  Should re-activate for 20.0
+    //if (!instance.is_valid)
+    //  instance = new UnityStatusIcon(window, op, automatic);
     if (!instance.is_valid)
       instance = new IndicatorStatusIcon(window, op, automatic);
     if (!instance.is_valid)
