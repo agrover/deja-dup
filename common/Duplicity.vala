@@ -798,6 +798,23 @@ public class Duplicity : Object
   protected static const int WARNING_ORPHANED_BACKUP = 6;
 
   bool restarted_without_cache = false;
+  bool restart_without_cache()
+  {
+    if (restarted_without_cache)
+      return false;
+
+    restarted_without_cache = true;
+
+    string dir = Environment.get_user_cache_dir();
+    if (dir == null)
+      return false;
+
+    var cachedir = Path.build_filename(dir, Config.PACKAGE);
+    var del = new RecursiveDelete(File.new_for_path(cachedir));
+    del.start();
+    return restart();
+  }
+
   void handle_exit(int code)
   {
     // Duplicity has a habit of dying and returning 1 without sending an error
@@ -807,15 +824,8 @@ public class Duplicity : Object
     // safe to do this, as the cache is not necessary for operation, only
     // a performance improvement.
     if (DuplicityInfo.get_default().guarantees_error_codes &&
-        code == ERROR_GENERIC && !error_issued && !restarted_without_cache) {
-      string dir = Environment.get_user_cache_dir();
-      if (dir != null) {
-        restarted_without_cache = true;
-        var cachedir = Path.build_filename(dir, Config.PACKAGE);
-        var del = new RecursiveDelete(File.new_for_path(cachedir));
-        del.start();
-        restart();
-      }
+        code == ERROR_GENERIC && !error_issued) {
+      restart_without_cache();
     }
   }
 
@@ -1002,6 +1012,15 @@ public class Duplicity : Object
       // --short-filenames to argv then.
       if (restart_with_short_filenames_if_needed())
         show_error(_("No backup files found"));
+      break;
+    case "AssertionError":
+      // Sometimes if an incremental backup is cancelled then tried again,
+      // duplicity will emit an "time not moving forward" assertion.  Clearing
+      // the cache will solve it.  This message is not localized in duplicity.
+      if (text.contains("time not moving forward at appropriate pace")) {
+        if (restart_without_cache())
+          return;
+      }
       break;
     }
     
