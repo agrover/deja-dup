@@ -336,10 +336,19 @@ public class BackendFile : Backend
         throw err; // continue error on
     }
 
+    var gfile = get_file_from_settings();
+
     // If we don't know what type this is, look up volume data
     if (type != "volume" && type != "normal" && success) {
-      var gfile = get_file_from_settings();
       yield check_for_volume_info(gfile);
+    }
+
+    // Ensure directory exists
+    try {
+      gfile.make_directory_with_parents (null);
+    }
+    catch (IOError.EXISTS err2) {
+      // ignore
     }
 
     envp_ready(success, new List<string>());

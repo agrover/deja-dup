@@ -27,6 +27,7 @@ AUTO_TESTS = \
 	backup/full \
 	backup/delete \
 	backup/exclude \
+	backup/mkdir \
 	backup/permissions \
 	backup/spaces \
 	backup/symlinks \
