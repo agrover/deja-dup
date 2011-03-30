@@ -51,11 +51,13 @@ public abstract class StatusIcon : Object
 {
   public static StatusIcon create(Gtk.Window window, DejaDup.Operation op, bool automatic)
   {
+    // Check unity first, since it is most direct.  Then try to guess shell
+    // based on notification capabilities.  Then just see whether we were built
+    // for indicators or not.
     StatusIcon instance;
-    instance = new ShellStatusIcon(window, op, automatic);
-    // Unity does not yet support custom menus.  Should re-activate for 20.0
-    //if (!instance.is_valid)
-    //  instance = new UnityStatusIcon(window, op, automatic);
+    instance = new UnityStatusIcon(window, op, automatic);
+    if (!instance.is_valid)
+      instance = new ShellStatusIcon(window, op, automatic);
     if (!instance.is_valid)
       instance = new IndicatorStatusIcon(window, op, automatic);
     if (!instance.is_valid)
