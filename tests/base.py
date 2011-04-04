@@ -462,6 +462,7 @@ def restore_simple(path, date=None, backend = None, encrypt = None, dest = None)
   if date:
     ldtp.comboselect('dlgRestore', 'cboDate', date)
   ldtp.click('dlgRestore', 'btnForward')
+  remap('dlgRestore')
   ldtp.click('dlgRestore', 'rbtnRestoretospecificfolder')
   ldtp.comboselect('dlgRestore', 'cboRestorefolder', 'Other...')
   assert ldtp.waittillguiexist('dlgChoosedestinationforrestoredfiles')
