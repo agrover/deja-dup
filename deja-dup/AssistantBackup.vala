@@ -171,7 +171,7 @@ public class AssistantBackup : AssistantOperation
     w = new DejaDup.ConfigLabelList(DejaDup.INCLUDE_LIST_KEY);
     w.set("width-request", 250);
     page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, 0, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     ++rows;
     
     label = new Gtk.Label(_("Except for:"));
@@ -179,7 +179,7 @@ public class AssistantBackup : AssistantOperation
     w = new DejaDup.ConfigLabelList(DejaDup.EXCLUDE_LIST_KEY);
     w.set("width-request", 250);
     page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, 0, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     ++rows;
     
     return page;
