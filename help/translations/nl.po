@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-20 20:43-0400\n"
-"PO-Revision-Date: 2011-01-28 15:04+0000\n"
+"PO-Revision-Date: 2011-03-29 07:59+0000\n"
 "Last-Translator: rob <linuxned@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-24 04:53+0000\n"
+"X-Launchpad-Export-Date: 2011-03-30 04:38+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 
 #: restore-worst-case.page:6(desc)
@@ -191,6 +191,11 @@ msgid ""
 "duplicity s3+http://deja-dup-auto-<var>LOWERCASE_ID</var>/<var>FOLDER</var> "
 "/tmp/restore"
 msgstr ""
+"\n"
+"export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
+"export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
+"duplicity s3+http://deja-dup-auto-<var>LOWERCASE_ID</var>/<var>FOLDER</var> "
+"/tmp/restore"
 
 #: restore-worst-case.page:50(title)
 msgid "Rackspace Cloud Files"
@@ -422,12 +427,14 @@ msgstr ""
 #: restore-worst-case.page:110(p)
 msgid "Or to do all at once (make sure you have plenty of space!):"
 msgstr ""
+"Of, om alles tegelijk te doen (controleer of u genoeg ruimte heeft!):"
 
 #: restore-worst-case.page:111(screen)
 #, no-wrap
 msgid ""
 "gpg --multifile --decrypt duplicity-full.20110127T131352Z.*.difftar.gpg"
 msgstr ""
+"gpg --multifile --decrypt duplicity-full.20110127T131352Z.*.difftar.gpg"
 
 #: restore-worst-case.page:113(p)
 msgid ""
@@ -444,17 +451,18 @@ msgstr ""
 #: restore-worst-case.page:114(screen)
 #, no-wrap
 msgid "tar xf duplicity-full.20110127T131352Z.vol1.difftar"
-msgstr ""
+msgstr "tar xf duplicity-full.20110127T131352Z.vol1.difftar"
 
 #: restore-worst-case.page:116(p)
 msgid "Or again, to do all at once:"
-msgstr ""
+msgstr "Of opnieuw, om alles tegelijk te doen:"
 
 #: restore-worst-case.page:117(screen)
 #, no-wrap
 msgid ""
 "for t in duplicity-full.20110127T131352Z.*.difftar; do tar xf $t; done"
 msgstr ""
+"for t in duplicity-full.20110127T131352Z.*.difftar; do tar xf $t; done"
 
 #: restore-worst-case.page:119(p)
 msgid ""
@@ -463,6 +471,11 @@ msgid ""
 "be in <file>multivolume_snapshot</file>. Let's say you backed up "
 "<file>/home/jane/essay.txt</file>:"
 msgstr ""
+"Nu zullen de patch-bestanden zich bevinden in "
+"<file>multivolume_snapshot</file> en <file>snapshot</file>-mappen. Elk "
+"bestand dat over meerdere volumes verdeeld is, zal zich bevinden in "
+"<file>multivolume_snapshot</file>. Laten we zeggen dat u een back-up heeft "
+"gemaakt van <file>/home/jane/essay.txt</file>:"
 
 #: restore-worst-case.page:120(screen)
 #, no-wrap
@@ -470,12 +483,17 @@ msgid ""
 "cd multivolume_snapshot/home/jane/essay.txt\n"
 "cat * &gt; essay.txt"
 msgstr ""
+"cd multivolume_snapshot/home/jane/essay.txt\n"
+"cat * &gt; essay.txt"
 
 #: restore-worst-case.page:123(p)
 msgid ""
 "To recover data from incremental backups, use <cmd>rdiff</cmd> to stitch the "
 "files together. See <cmd>man rdiff</cmd> for usage."
 msgstr ""
+"Om data te herstellen vanaf incrementele back-ups, kunt u <cmd>rdiff</cmd> "
+"gebruiken om de bestanden samen te voegen. Zie <cmd>man rdiff</cmd> voor "
+"meer uitleg hierover."
 
 #: restore-revert.page:6(desc)
 msgid "Restore a previous version of a file."
@@ -632,7 +650,7 @@ msgstr "Herstellen"
 #: backup-first.page:11(p)
 #: backup-auto.page:12(p)
 msgid "Run <app>Déjà Dup</app>."
-msgstr "<app>Déjà Dup</app> uitvoeren."
+msgstr "<app>Déjà Dup</app> starten."
 
 #: restore-full.page:21(p)
 msgid "Click on the big <gui style=\"button\">Restore…</gui> button."
@@ -731,6 +749,12 @@ msgid ""
 "theft, your data will still be safe). You can choose from Amazon S3 and "
 "Rackspace Cloud Files."
 msgstr ""
+"De eerste paar back-uplocaties zijn cloud-opslagdiensten van verschillende "
+"bedrijven. Voor een kleine vergoeding per gigabyte, wordt uw data voor u "
+"bewaard. Cloud-diensten zoals deze worden aanbevolen omdat het een "
+"gemakkelijke manier is om data buitenshuis (hiermee wordt bedoeld buiten uw "
+"huis, in geval van een ramp of diefstal zal uw data toch veilig zijn) te "
+"bewaren. U kunt kiezen uit Amazon S3, Rackspace Cloud Files en Ubuntu One."
 
 #: prefs.page:20(p)
 msgid ""
