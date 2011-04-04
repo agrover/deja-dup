@@ -29,7 +29,7 @@ import glob
 import re
 import traceback
 
-latest_duplicity = '0.6.12'
+latest_duplicity = '0.6.13'
 
 srcdir = "."
 temp_dir = None
