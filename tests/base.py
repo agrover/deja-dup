@@ -426,6 +426,9 @@ def walk_backup_prefs(dlg, backend = None, encrypt = None, dest = None, includes
   ldtp.click(dlg, 'btnForward')
   remap(dlg)
 
+def strip_obj_name(obj):
+  return obj.replace("_", "").replace(".", "")
+
 def backup_simple(finish=True, error=None, timeout=400, backend = None, encrypt = None, dest = None, includes = [], excludes = [], add_srcdir=True):
   global srcdir
   if add_srcdir:
@@ -444,6 +447,7 @@ def backup_simple(finish=True, error=None, timeout=400, backend = None, encrypt 
       error = 'lblYourfilesweresuccessfullybackedup'
       wait_for_encryption('dlgBackUp', error, timeout)
     else:
+      error = strip_obj_name(error)
       wait_for_encryption('dlgBackUp', error, timeout, prefix=True)
     ldtp.click('dlgBackUp', 'btnClose')
     ldtp.waittillguinotexist('dlgBackUp')
