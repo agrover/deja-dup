@@ -62,10 +62,7 @@ public class ConfigURLPart : ConfigEntry
         text = uri.port.to_string();
       break;
     case Part.FOLDER:
-      if (uri.scheme != "file" && uri.path != null && uri.path.has_prefix("/"))
-        text = uri.path.substring(1);
-      else
-        text = uri.path;
+      text = uri.path;
       break;
     case Part.USER:
       text = userinfo_get_user(uri.scheme, uri.userinfo);
