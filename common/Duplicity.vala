@@ -428,6 +428,13 @@ public class Duplicity : Object
           // make path to specific restore file, since duplicity will just
           // drop the file exactly where you ask it
           var local_file = make_local_rel_path(restore_files.data);
+          if (local_file == null) {
+            // Was not even a file path (maybe something goofy like computer://)
+            show_error(_("Could not restore ‘%s’: Not a valid file location").printf(
+                         (restore_files.data as File).get_parse_name()));
+            return false;
+          }
+
           if (!local_file.has_prefix(slash_home_me))
             needs_root = true;
           
@@ -468,9 +475,11 @@ public class Duplicity : Object
     return true;
   }
   
-  File make_local_rel_path(File file)
+  File? make_local_rel_path(File file)
   {
     string rel_file_path = slash.get_relative_path(file);
+    if (rel_file_path == null)
+      return null;
     return local.resolve_relative_path(rel_file_path);
   }
   
