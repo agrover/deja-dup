@@ -211,6 +211,18 @@ public class ConfigLocation : ConfigWidget
     if (vol_uuid != "") {
       Gtk.TreeIter iter;
 
+      // First, check if it's already in UI because it's in the volume list
+      if (index_vol_saved == -2) {
+        for (int i = index_vol_base; i < index_vol_end; i++) {
+          if (!store.get_iter_from_string(out iter, i.to_string()))
+            continue;
+          string uuid;
+          store.get(iter, COL_UUID, out uuid);
+          if (vol_uuid == uuid)
+            return false;
+        }
+      }
+
       Icon vol_icon = null;
       try {
         vol_icon = Icon.new_for_string(fsettings.get_string(FILE_ICON_KEY));
