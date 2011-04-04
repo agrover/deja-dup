@@ -55,14 +55,7 @@ def noget():
                            (backupdir+'/duplicity-full-signatures20090802T011441Zsigtargz'),
                      backend='file', includes=['data/simple'], dest=backupdir, encrypt=False)
 
-def noexist():
-  backupdir = base.get_temp_name('backup')
-  base.setup()
-  base.backup_simple(error=u'lblBackuplocation\u2018%s\u2019doesnotexist' % backupdir,
-                     backend='file', includes=['data/simple'], dest=backupdir)
-
 base.run(nowrite)
 base.run(noread)
 base.run(noexec)
 base.run(noget)
-base.run(noexist)
