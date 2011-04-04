@@ -78,8 +78,6 @@ public abstract class AssistantOperation : Assistant
   int saved_x;
   int saved_y;
 
-  protected MountOperation mount_op;
-  
   construct
   {
     set_op_icon_name();
@@ -478,9 +476,6 @@ public abstract class AssistantOperation : Assistant
      * Mounts appropriate backend, creates child operation, connects signals to
      * handler functions and starts operation.
      */
-    if (mount_op == null)
-      mount_op = new MountOperationAssistant(this);
-
     op = create_op();
     op.done.connect(apply_finished);
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
@@ -490,7 +485,7 @@ public abstract class AssistantOperation : Assistant
     op.progress.connect(show_progress);
     op.question.connect(show_question);
     op.secondary_desc_changed.connect(set_secondary_label);
-    op.backend.mount_op = mount_op;
+    op.backend.mount_op = new MountOperationAssistant(this);
     op.backend.pause_op.connect(pause_op);
 
     ensure_status_icon(op);

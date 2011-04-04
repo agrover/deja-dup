@@ -397,9 +397,6 @@ public class AssistantRestore : AssistantOperation
   
   protected async void do_query()
   {
-    if (mount_op == null)
-      mount_op = new MountOperationAssistant(this);
-
     realize();
     var xid = hacks_window_get_xid(this.get_window());
 
@@ -407,7 +404,7 @@ public class AssistantRestore : AssistantOperation
     query_op.collection_dates.connect(handle_collection_dates);
     query_op.done.connect(query_finished);
     op = query_op;
-    op.backend.mount_op = mount_op;
+    op.backend.mount_op = new MountOperationAssistant(this);
     op.passphrase_required.connect(get_passphrase);
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
 
