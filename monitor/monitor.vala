@@ -27,6 +27,7 @@ static Pid pid;
 static bool op_active = false;
 static bool reactive_check;
 static bool testing;
+static bool first_check = false;
 
 static bool show_version = false;
 static const OptionEntry[] options = {
@@ -293,6 +294,9 @@ static void prepare_tomorrow()
 
 static void prepare_next_run()
 {
+  if (!first_check) // wait until first official check has happened
+    return;
+
   long wait_time;
   if (!seconds_until_next_run(out wait_time))
     return;
@@ -306,6 +310,12 @@ static void prepare_if_necessary(string key)
       key == DejaDup.PERIODIC_KEY ||
       key == DejaDup.PERIODIC_PERIOD_KEY)
     prepare_next_run();
+}
+
+static void make_first_check()
+{
+  first_check = true;
+  prepare_next_run();
 }
 
 static void watch_settings()
@@ -348,11 +358,11 @@ static int main(string[] args)
 
   var loop = new MainLoop(null, false);
 
-  // Delay first check to give the network a chance to start up.
+  // Delay first check to give the network and desktop environment a chance to start up.
   if (testing)
-    prepare_next_run();
+    make_first_check();
   else
-    Timeout.add_seconds(120, () => {prepare_next_run(); return false;});
+    Timeout.add_seconds(120, () => {make_first_check(); return false;});
 
   watch_settings();
   loop.run();
