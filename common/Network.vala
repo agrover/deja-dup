@@ -76,7 +76,10 @@ abstract class StatusProvider : Object
 
 class StatusNetworkManager : StatusProvider
 {
-  static const uint32 NM_STATE_CONNECTED = 3;
+  static const uint32 NM_OLD_STATE_CONNECTED = 3;
+  static const uint32 NM_STATE_CONNECTED_LOCAL = 50;
+  static const uint32 NM_STATE_CONNECTED_SITE = 60;
+  static const uint32 NM_STATE_CONNECTED_GLOBAL = 70;
 
   protected override DBusProxy create_proxy() throws Error
   {
@@ -94,7 +97,10 @@ class StatusNetworkManager : StatusProvider
       return Status.UNKNOWN;
 
     uint32 state = state_val.get_uint32();
-    if (state == NM_STATE_CONNECTED)
+    if (state == NM_OLD_STATE_CONNECTED ||
+        state == NM_STATE_CONNECTED_LOCAL ||
+        state == NM_STATE_CONNECTED_SITE ||
+        state == NM_STATE_CONNECTED_GLOBAL)
       return Status.ONLINE;
     else
       return Status.OFFLINE;
