@@ -70,7 +70,7 @@ public void show_about(Object owner, Gtk.Window? parent)
   
   if (about != null)
   {
-    about.present ();
+    about.present_with_time(Gtk.get_current_event_time());
     return;
   }
   
