@@ -111,7 +111,7 @@ AC_SUBST(WIDGETS_LIBS)
 
 PKG_CHECK_MODULES(MONITOR,
                   gio-2.0 >= $GIO_REQ_VER
-                  libnotify >= NOTIFY_REQ_VER)
+                  libnotify >= $NOTIFY_REQ_VER)
 AC_SUBST(MONITOR_CFLAGS)
 AC_SUBST(MONITOR_LIBS)
 
