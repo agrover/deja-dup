@@ -112,7 +112,14 @@ class StatusNetworkManager : StatusProvider
     if (signal_name == "StateChanged") {
       uint32 state;
       parameters.get("(u)", out state);
-      update_status(state == NM_STATE_CONNECTED ? Status.ONLINE : Status.OFFLINE);
+
+      if (state == NM_OLD_STATE_CONNECTED ||
+          state == NM_STATE_CONNECTED_LOCAL ||
+          state == NM_STATE_CONNECTED_SITE ||
+          state == NM_STATE_CONNECTED_GLOBAL)
+        update_status(Status.ONLINE);
+      else
+        update_status(Status.OFFLINE);
     }
   }  
 }
