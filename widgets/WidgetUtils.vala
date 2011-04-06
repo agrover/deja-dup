@@ -57,6 +57,7 @@ const string[] authors = {"Andrew Fister <temposs@gmail.com>",
 
 const string[] artists = {"Andreas Nilsson <nisses.mail@home.se>",
                           "Jakub Steiner <jimmac@novell.com>",
+                          "Lapo Calamandrei <calamandrei@gmail.com>",
                           "Michael Terry <mike@mterry.name>",
                           null};
 
