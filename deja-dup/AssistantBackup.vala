@@ -77,7 +77,7 @@ public class AssistantBackup : AssistantOperation
     // Now make sure to reserve the excess space that the hidden bits of
     // ConfigLocation will need.
     Gtk.Requisition req, hidden;
-    hacks_get_natural_size(vbox, out req);
+    vbox.get_preferred_size(null, out req);
     hidden = location.hidden_size();
     req.width = req.width + hidden.width;
     req.height = req.height + hidden.height;
@@ -188,7 +188,7 @@ public class AssistantBackup : AssistantOperation
   protected override DejaDup.Operation create_op()
   {
     realize();
-    var xid = hacks_window_get_xid(this.get_window());
+    var xid = Gdk.X11Window.get_xid(this.get_window());
     var rv = new DejaDup.OperationBackup((uint)xid);
 
     ensure_status_icon(rv);

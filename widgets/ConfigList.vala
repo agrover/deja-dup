@@ -159,12 +159,12 @@ public class ConfigList : ConfigWidget
     dlg.select_multiple = true;
     
     if (dlg.run() != Gtk.ResponseType.ACCEPT) {
-      hacks_widget_destroy(dlg);
+      destroy_widget(dlg);
       return;
     }
     
     SList<string> files = dlg.get_filenames();
-    hacks_widget_destroy(dlg);
+    destroy_widget(dlg);
     
     var slist_val = settings.get_value(key);
     string*[] slist = slist_val.get_strv();

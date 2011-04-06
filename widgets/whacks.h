@@ -26,14 +26,6 @@
 extern GObject *hacks_status_icon_make_app_indicator (GtkMenu *menu);
 extern void hacks_status_icon_close_app_indicator (GObject *icon);
 
-extern GtkComboBox *hacks_combo_box_text_new();
-extern char *hacks_combo_box_get_text(GtkComboBox *box);
-extern long hacks_window_get_xid(GdkWindow *win);
-extern int hacks_widget_get_allocated_width(GtkWidget *w);
-extern void hacks_widget_destroy(GtkWidget *w);
-extern void hacks_quit_on_destroy(GtkWidget *w);
-extern void hacks_get_natural_size(GtkWidget *w, GtkRequisition *req);
-
 extern GObject *hacks_unity_get_entry(void);
 extern void hacks_unity_entry_show_progress(GObject *entry, gboolean show);
 extern void hacks_unity_entry_set_progress(GObject *entry, gdouble percent);

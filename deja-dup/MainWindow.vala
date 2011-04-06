@@ -125,10 +125,10 @@ public class MainWindow : Gtk.Window
     win.move(x, y);
     win.show();
     this.hide();
-    win.present();
+    win.present_with_time(Gtk.get_current_event_time());
     win.closing.connect((w, succeeded) => {
       if (succeeded)
-        hacks_widget_destroy(this);
+        DejaDup.destroy_widget(this);
       else {
         int x2, y2;
         w.get_position(out x2, out y2);
@@ -172,7 +172,7 @@ public class MainWindow : Gtk.Window
       Gtk.MessageDialog dlg = new Gtk.MessageDialog (this, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not open preferences"));
       dlg.format_secondary_text("%s", e.message);
       dlg.run();
-      hacks_widget_destroy(dlg);
+      DejaDup.destroy_widget(dlg);
     }
   }
   

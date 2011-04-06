@@ -28,7 +28,7 @@ public class ConfigChoice : ConfigWidget
   protected Gtk.ComboBox combo;
   protected string default_val = null;
   construct {
-    combo = hacks_combo_box_text_new();
+    combo = new Gtk.ComboBoxText();
     add(combo);
   }
   

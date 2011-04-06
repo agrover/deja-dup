@@ -40,7 +40,6 @@ deja_dup_preferences_SOURCES = \
 if MAINTAINER_MODE
 PACKAGES = \
 	--pkg @GTK_MODULE@ \
-	--pkg @UNIQUE_MODULE@ \
 	--pkg gio-2.0 \
 	--pkg libcommon \
 	--pkg libwidgets \

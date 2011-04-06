@@ -585,7 +585,7 @@ public abstract class AssistantOperation : Assistant
 
     closing(succeeded);
 
-    Idle.add(() => {hacks_widget_destroy(this); return false;});
+    DejaDup.destroy_widget(this);
   }
 
   public void force_visible(bool user_click)

@@ -145,7 +145,7 @@ class DejaDupApp : Object
       toplevel.show_all();
     }
 
-    hacks_quit_on_destroy(toplevel);
+    toplevel.destroy.connect(Gtk.main_quit);
 
     Gtk.main();
 

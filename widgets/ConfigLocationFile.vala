@@ -59,7 +59,7 @@ public class ConfigLocationFile : ConfigLocationTable
       settings.set_string(DejaDup.FILE_PATH_KEY, dlg.get_uri());
     }
 
-    hacks_widget_destroy(dlg);
+    destroy_widget(dlg);
   }
 }
 

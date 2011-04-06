@@ -22,24 +22,3 @@ GLib.Object hacks_status_icon_make_app_indicator (Gtk.Menu menu);
 
 [CCode (cheader_filename = "whacks.h")]
 void hacks_status_icon_close_app_indicator (GLib.Object icon);
-
-[CCode (cheader_filename = "whacks.h")]
-Gtk.ComboBox hacks_combo_box_text_new();
-
-[CCode (cheader_filename = "whacks.h")]
-string hacks_combo_box_get_text(Gtk.ComboBox box);
-
-[CCode (cheader_filename = "whacks.h")]
-long hacks_window_get_xid(Gdk.Window win);
-
-[CCode (cheader_filename = "whacks.h")]
-int hacks_widget_get_allocated_width(Gtk.Widget w);
-
-[CCode (cheader_filename = "whacks.h")]
-void hacks_widget_destroy(Gtk.Widget w);
-
-[CCode (cheader_filename = "whacks.h")]
-void hacks_quit_on_destroy(Gtk.Widget w);
-
-[CCode (cheader_filename = "whacks.h")]
-void hacks_get_natural_size(Gtk.Widget w, out Gtk.Requisition req);

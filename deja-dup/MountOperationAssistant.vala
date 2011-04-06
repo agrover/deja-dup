@@ -37,7 +37,7 @@ public class MountOperationAssistant : MountOperation
   public string label_password {get; set; default = _("_Password:");}
   public string label_show_password {get; set; default = _("S_how password");}
   public string label_remember_password {get; set; default = _("_Remember password");}
-  public long xid {get; private set;}
+  public X.Window xid {get; private set;}
   public bool go_forward {get; set; default = false;} // set by backends if they want to move on
 
   signal void button_clicked();
@@ -63,7 +63,7 @@ public class MountOperationAssistant : MountOperation
     add_password_page();
 
     assist.realize();
-    xid = hacks_window_get_xid(assist.get_window());
+    xid = Gdk.X11Window.get_xid(assist.get_window());
   }
 
   construct {
@@ -119,7 +119,7 @@ public class MountOperationAssistant : MountOperation
                                string default_domain, AskPasswordFlags flags)
   {
     if (layout != null)
-      hacks_widget_destroy(layout);
+      DejaDup.destroy_widget(layout);
 
     layout = new Gtk.VBox(false, 6);
     layout.set("border-width", 12);

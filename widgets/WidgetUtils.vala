@@ -30,8 +30,22 @@ public void show_uri(Gtk.Window parent, string link)
     Gtk.MessageDialog dlg = new Gtk.MessageDialog(parent, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not display %s"), link);
     dlg.format_secondary_text("%s", e.message);
     dlg.run();
-    hacks_widget_destroy(dlg);
+    destroy_widget(dlg);
   }
+}
+
+public void destroy_widget(Gtk.Widget w)
+{
+  // We destroy in the idle loop for two reasons:
+  // 1) Vala likes to unref local dialogs (like file choosers) after we call
+  //    destroy, which is odd.  This avoids issues that arise from that.
+  // 2) When running in accessiblity mode (as we do during test suites),
+  //    GailButtons tend to do odd things with queued events during idle calls.
+  //    This avoids destroying objects before gail is done with them, which led
+  //    to crashes.
+  w.hide();
+  w.ref();
+  Idle.add(() => {w.destroy(); return false;});
 }
 
 // These need to be namespace-wide to prevent an odd compiler syntax error.
@@ -82,7 +96,7 @@ public void show_about(Object owner, Gtk.Window? parent)
   about.response.connect((dlg, resp) => {
     Object about_owner = (Object)dlg.get_data<Object>("owner");
     about_owner.set_data("about-dlg", null);
-    hacks_widget_destroy(dlg);
+    destroy_widget(dlg);
   });
   
   about.show();
@@ -102,7 +116,7 @@ public bool init_duplicity(Gtk.Window? parent)
         "%s", header);
     dlg.format_secondary_text("%s", msg);
     dlg.run();
-    hacks_widget_destroy(dlg);
+    destroy_widget(dlg);
   }
 
   return rv;

@@ -30,8 +30,7 @@ public class PreferencesDialog : Gtk.Dialog
   }
   
   construct {
-    set("title", _("Déjà Dup Preferences"),
-        "has-separator", false);
+    set("title", _("Déjà Dup Preferences"));
     add_buttons(Gtk.Stock.CLOSE, Gtk.ResponseType.CLOSE,
                 Gtk.Stock.HELP, Gtk.ResponseType.HELP);
     response.connect(handle_response);
@@ -92,7 +91,7 @@ public class PreferencesDialog : Gtk.Dialog
     // ConfigLocation will need.
     Gtk.Requisition req, hidden;
     page_box.show_all();
-    hacks_get_natural_size(page_box, out req);
+    page_box.get_preferred_size(null, out req);
     hidden = location.hidden_size();
     req.width = req.width + hidden.width;
     req.height = req.height + hidden.height;

@@ -49,7 +49,7 @@ public class AssistantRestore : AssistantOperation
   protected DejaDup.Operation.State op_state;
   Gtk.ProgressBar query_progress_bar;
   uint query_timeout_id;
-  Gtk.ComboBox date_combo;
+  Gtk.ComboBoxText date_combo;
   Gtk.ListStore date_store;
   Gtk.HBox cust_box;
   Gtk.FileChooserButton cust_button;
@@ -114,7 +114,7 @@ public class AssistantRestore : AssistantOperation
     // Now make sure to reserve the excess space that the hidden bits of
     // ConfigLocation will need.
     Gtk.Requisition req, hidden;
-    hacks_get_natural_size(page, out req);
+    page.get_preferred_size(null, out req);
     hidden = location.hidden_size();
     req.width = req.width + hidden.width;
     req.height = req.height + hidden.height;
@@ -145,7 +145,7 @@ public class AssistantRestore : AssistantOperation
   Gtk.Widget make_date_page()
   {
     date_store = new Gtk.ListStore(2, typeof(string), typeof(string));
-    date_combo = hacks_combo_box_text_new();
+    date_combo = new Gtk.ComboBoxText();
     date_combo.model = date_store;
     
     var date_label = new Gtk.Label(_("_Date:"));
@@ -300,7 +300,7 @@ public class AssistantRestore : AssistantOperation
     }
 
     realize();
-    var xid = hacks_window_get_xid(this.get_window());
+    var xid = Gdk.X11Window.get_xid(this.get_window());
 
     var rest_op = new DejaDup.OperationRestore(restore_location, date,
                                                restore_files, (uint)xid);
@@ -398,7 +398,7 @@ public class AssistantRestore : AssistantOperation
   protected async void do_query()
   {
     realize();
-    var xid = hacks_window_get_xid(this.get_window());
+    var xid = Gdk.X11Window.get_xid(this.get_window());
 
     query_op = new DejaDup.OperationStatus((uint)xid);
     query_op.collection_dates.connect(handle_collection_dates);
@@ -437,7 +437,7 @@ public class AssistantRestore : AssistantOperation
     else if (page == confirm_page) {
       // When we restore from
       if (got_dates) {
-        confirm_date.label = hacks_combo_box_get_text(date_combo);
+        confirm_date.label = date_combo.get_active_text();
         confirm_date_label.show();
         confirm_date.show();
         confirm_table.set_row_spacing(confirm_date_row,
@@ -469,7 +469,7 @@ public class AssistantRestore : AssistantOperation
                                              "Files to restore:",
                                              restore_files.length());
 
-        confirm_files.foreach((w) => {hacks_widget_destroy(w);});
+        confirm_files.foreach((w) => {DejaDup.destroy_widget(w);});
         foreach (File f in restore_files) {
           var parse_name = f.get_parse_name();
           var file_label = new Gtk.Label(Path.get_basename(parse_name));

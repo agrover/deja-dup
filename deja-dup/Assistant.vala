@@ -74,8 +74,6 @@ public abstract class Assistant : Gtk.Dialog
 
   construct
   {
-    set("has-separator", false);
-
     infos = new List<PageInfo>();
 
     var ebox = new Gtk.EventBox();
@@ -304,17 +302,17 @@ public abstract class Assistant : Gtk.Dialog
     // so if we wait until then to destroy them, we avoid colliding with it.
     var area = (Gtk.ButtonBox)get_action_area();
     if (cancel_button != null) {
-      area.remove(cancel_button); hacks_widget_destroy(cancel_button); cancel_button = null;}
+      area.remove(cancel_button); DejaDup.destroy_widget(cancel_button); cancel_button = null;}
     if (close_button != null) {
-      area.remove(close_button); hacks_widget_destroy(close_button); close_button = null;}
+      area.remove(close_button); DejaDup.destroy_widget(close_button); close_button = null;}
     if (back_button != null) {
-      area.remove(back_button); hacks_widget_destroy(back_button); back_button = null;}
+      area.remove(back_button); DejaDup.destroy_widget(back_button); back_button = null;}
     if (resume_button != null) {
-      area.remove(resume_button); hacks_widget_destroy(resume_button); resume_button = null;}
+      area.remove(resume_button); DejaDup.destroy_widget(resume_button); resume_button = null;}
     if (forward_button != null) {
-      area.remove(forward_button); hacks_widget_destroy(forward_button); forward_button = null;}
+      area.remove(forward_button); DejaDup.destroy_widget(forward_button); forward_button = null;}
     if (apply_button != null) {
-      area.remove(apply_button); hacks_widget_destroy(apply_button); apply_button = null;}
+      area.remove(apply_button); DejaDup.destroy_widget(apply_button); apply_button = null;}
 
     if (show_cancel)
       cancel_button = add_button(Gtk.Stock.CANCEL, CANCEL);
@@ -359,7 +357,7 @@ public abstract class Assistant : Gtk.Dialog
     page.show_all();
 
     if (was_empty)
-      hacks_get_natural_size(page_box, out page_box_req);
+      page_box.get_preferred_size(null, out page_box_req);
 
     reset_size(page);
 
@@ -372,7 +370,7 @@ public abstract class Assistant : Gtk.Dialog
     Gtk.Requisition pagereq;
     int boxw, boxh;
     page_box.get_size_request(out boxw, out boxh);
-    hacks_get_natural_size(page, out pagereq);
+    page.get_preferred_size(null, out pagereq);
     page_box.set_size_request(int.max(boxw, pagereq.width+page_box_req.width), int.max(boxh, pagereq.height+page_box_req.height));
   }
 

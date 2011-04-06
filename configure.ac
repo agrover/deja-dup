@@ -18,7 +18,7 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 # Sets up autoconf.
-AC_INIT([Déjà Dup],[18.0],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup],[https://launchpad.net/deja-dup])
+AC_INIT([Déjà Dup],[19.0],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup],[https://launchpad.net/deja-dup])
 AC_PREREQ(2.64)
 AC_CONFIG_SRCDIR(deja-dup/main.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
@@ -67,44 +67,17 @@ AC_DEFINE_UNQUOTED(LOCALE_DIR, "${PREFIX}/${DATADIRNAME}/locale",[Locale directo
 AC_DEFINE_UNQUOTED(THEME_DIR, "${PREFIX}/${DATADIRNAME}/icons",[Icon directory])
 AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package data directory])
 
-GTK_MODULE=gtk+-2.0
-GTK_REQ_VER=2.18
-GDK_X11_MODULE=gdk-x11-2.0
+GTK_MODULE=gtk+-3.0
+GTK_REQ_VER=3.0
+GDK_X11_MODULE=gdk-x11-3.0
 GLIB_REQ_VER=2.26
 GIO_REQ_VER=$GLIB_REQ_VER
-UNIQUE_MODULE=unique-1.0
 NOTIFY_REQ_VER=0.7
-APPINDICATOR_MODULE=appindicator-0.1
-DBUSMENU_GTK_MODULE=dbusmenu-gtk-0.4
-
-AH_TEMPLATE([HAVE_GTK3], [whether gtk3 is available])
-AC_ARG_WITH([gtk3],
-  [AS_HELP_STRING([--with-gtk3],
-    [use gtk3 instead of gtk2 @<:@default=check@:>@])],
-  [],
-  [with_gtk3=check])
-AS_IF([test "x$with_gtk3" != xno],
-  [PKG_CHECK_EXISTS(gtk+-3.0 >= 3.0
-                    unique-3.0,
-    [GTK_MODULE=gtk+-3.0
-     GTK_REQ_VER=3.0
-     GDK_X11_MODULE=gdk-x11-3.0
-     UNIQUE_MODULE=unique-3.0
-     APPINDICATOR_MODULE=appindicator3-0.1
-     DBUSMENU_GTK_MODULE=dbusmenu-gtk3-0.4],
-    [if test "x$with_gtk3" != xcheck; then
-       AC_MSG_FAILURE(
-         [--with-gtk3 was given, but test for gtk+-3.0 >= 3.0 unique-3.0 failed])
-     else
-       AC_MSG_NOTICE([GTK+ 3 stack is not available so using GTK+ 2])
-     fi
-    ]
-  )]
-)
+APPINDICATOR_MODULE=appindicator3-0.1
+DBUSMENU_GTK_MODULE=dbusmenu-gtk3-0.4
 
 AC_SUBST(GTK_MODULE)
 AC_SUBST(GDK_X11_MODULE)
-AC_SUBST(UNIQUE_MODULE)
 
 # Check dependencies
 PKG_CHECK_MODULES(DUP,
@@ -118,8 +91,7 @@ AC_SUBST(DUP_LIBS)
 
 PKG_CHECK_MODULES(PREF,
                   $GTK_MODULE >= $GTK_REQ_VER
-                  gio-2.0 >= $GIO_REQ_VER
-                  $UNIQUE_MODULE)
+                  gio-2.0 >= $GIO_REQ_VER)
 AC_SUBST(PREF_CFLAGS)
 AC_SUBST(PREF_LIBS)
 

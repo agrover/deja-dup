@@ -31,7 +31,7 @@ public class ConfigLabelList : ConfigLabel
   construct {
     label.set("wrap", true, "wrap-mode", Pango.WrapMode.WORD);
     size_allocate.connect(() => {
-      label.set("width-request", hacks_widget_get_allocated_width(this));
+      label.set("width-request", this.get_allocated_width());
     });
   }
   

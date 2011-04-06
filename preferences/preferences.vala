@@ -38,25 +38,21 @@ class DejaDupPreferences : Object
     
     return true;
   }
-  
-  static PreferencesDialog pref_window;
-  
-  static Unique.Response message_received(Unique.App app,
-                                          int command,
-                                          Unique.MessageData message_data,
-                                          uint time_)
+
+  static void activated (Gtk.Application app)
   {
-    var res = Unique.Response.OK;
-    
-    switch (command) {
-    case Unique.Command.ACTIVATE:
-      pref_window.present_with_time(time_);
-      break;
+    unowned List<Gtk.Window> list = app.get_windows();
+
+    if (list != null)
+      list.data.present_with_time(Gtk.get_current_event_time());
+    else {
+      // We're first instance.  Yay!
+      var dlg = new PreferencesDialog();
+      dlg.set_application(app);
+      dlg.show_all();
     }
-    
-    return res;
   }
-  
+
   public static int main(string [] args)
   {
     DejaDup.i18n_setup();
@@ -79,27 +75,12 @@ class DejaDupPreferences : Object
     
     DejaDup.initialize();
     Gtk.init(ref args); // to open display ('cause we passed false above)
-    
-    // We don't have a solid domain for Déjà Dup...  But we're GNOME-ish
-    var app = new Unique.App("org.gnome.DejaDup.Preferences", null);
-    
-    if (app.is_running)
-      app.send_message(Unique.Command.ACTIVATE, null);
-    else {
-      // We're first instance.  Yay!    
-      Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
-      Gtk.Window.set_default_icon_name(Config.PACKAGE);
-      
-      pref_window = new PreferencesDialog();
-      
-      app.message_received.connect(message_received);
-      app.watch_window(pref_window);
-      
-      pref_window.show_all();
-      Gtk.main();
-    }
-    
-    return 0;
+    Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
+    Gtk.Window.set_default_icon_name(Config.PACKAGE);
+
+    var app = new Gtk.Application("org.gnome.DejaDup.Preferences", 0);
+    app.activate.connect((app) => {activated(app as Gtk.Application);});
+    return app.run();
   }
 }
 
