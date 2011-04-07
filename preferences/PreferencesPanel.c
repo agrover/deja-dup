@@ -28,35 +28,12 @@
 
 #define DEJA_DUP_TYPE_PREFERENCES_PANEL deja_dup_preferences_panel_get_type()
 
-#define DEJA_DUP_PREFERENCES_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  DEJA_DUP_TYPE_PREFERENCES_PANEL, DejaDupPreferencesPanel))
-
-#define DEJA_DUP_PREFERENCES_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  DEJA_DUP_TYPE_PREFERENCES_PANEL, DejaDupPreferencesPanelClass))
-
-#define CC_IS_MOUSE_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  DEJA_DUP_TYPE_PREFERENCES_PANEL))
-
-#define CC_IS_MOUSE_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  DEJA_DUP_TYPE_PREFERENCES_PANEL))
-
-#define DEJA_DUP_PREFERENCES_PANEL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  DEJA_DUP_TYPE_PREFERENCES_PANEL, DejaDupPreferencesPanelClass))
-
 typedef struct _DejaDupPreferencesPanel DejaDupPreferencesPanel;
 typedef struct _DejaDupPreferencesPanelClass DejaDupPreferencesPanelClass;
-typedef struct _DejaDupPreferencesPanelPrivate DejaDupPreferencesPanelPrivate;
 
 struct _DejaDupPreferencesPanel
 {
   CcPanel parent;
-
-  DejaDupPreferencesPanelPrivate *priv;
 };
 
 struct _DejaDupPreferencesPanelClass
@@ -66,28 +43,6 @@ struct _DejaDupPreferencesPanelClass
 
 G_DEFINE_DYNAMIC_TYPE (DejaDupPreferencesPanel, deja_dup_preferences_panel, CC_TYPE_PANEL)
 
-#define PREFERENCES_PANEL_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), DEJA_DUP_TYPE_PREFERENCES_PANEL, DejaDupPreferencesPanelPrivate))
-
-struct _DejaDupPreferencesPanelPrivate
-{
-  GtkWidget  *widget;
-};
-
-static void
-deja_dup_preferences_panel_dispose (GObject *object)
-{
-  DejaDupPreferencesPanelPrivate *priv = DEJA_DUP_PREFERENCES_PANEL (object)->priv;
-
-  if (priv->widget)
-    {
-      g_object_unref (priv->widget);
-      priv->widget = NULL;
-    }
-
-  G_OBJECT_CLASS (deja_dup_preferences_panel_parent_class)->dispose (object);
-}
-
 static void
 deja_dup_preferences_panel_class_finalize (DejaDupPreferencesPanelClass *klass)
 {
@@ -96,23 +51,14 @@ deja_dup_preferences_panel_class_finalize (DejaDupPreferencesPanelClass *klass)
 static void
 deja_dup_preferences_panel_class_init (DejaDupPreferencesPanelClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (DejaDupPreferencesPanelPrivate));
-
-  object_class->dispose = deja_dup_preferences_panel_dispose;
 }
 
 static void
 deja_dup_preferences_panel_init (DejaDupPreferencesPanel *self)
 {
-  DejaDupPreferencesPanelPrivate *priv;
-
-  priv = self->priv = PREFERENCES_PANEL_PRIVATE (self);
-
-  priv->widget = GTK_WIDGET (deja_dup_preferences_new ());
-
-  gtk_container_add (GTK_CONTAINER (self), priv->widget);
+  GtkWidget *widget = GTK_WIDGET (deja_dup_preferences_new ());
+  gtk_widget_show_all (widget);
+  gtk_container_add (GTK_CONTAINER (self), widget);
 }
 
 void
