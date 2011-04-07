@@ -89,8 +89,6 @@ void hacks_unity_entry_set_menu(GObject *entry, GtkMenu *menu)
     DbusmenuMenuitem *dbusmenu = (menu != NULL) ? dbusmenu_gtk_parse_menu_structure(GTK_WIDGET(menu)) : NULL;
     unity_launcher_entry_set_quicklist(UNITY_LAUNCHER_ENTRY(entry), dbusmenu);
   }
-#else
-  return NULL;
 #endif
 }
 
