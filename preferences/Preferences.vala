@@ -19,22 +19,15 @@
 
 using GLib;
 
-public class PreferencesDialog : Gtk.Dialog
+namespace DejaDup {
+
+public class Preferences : Gtk.VBox
 {
   Gtk.SizeGroup label_sizes;
   Gtk.SizeGroup button_sizes;
   DejaDup.ToggleGroup periodic_toggle;
 
-  public PreferencesDialog(Gtk.Window? parent = null) {
-    transient_for = parent;
-  }
-  
   construct {
-    set("title", _("Déjà Dup Preferences"));
-    add_buttons(Gtk.Stock.CLOSE, Gtk.ResponseType.CLOSE,
-                Gtk.Stock.HELP, Gtk.ResponseType.HELP);
-    response.connect(handle_response);
-    
     Gtk.Notebook notebook = new Gtk.Notebook();
     Gtk.Widget w;
     Gtk.VBox page_box;
@@ -203,19 +196,8 @@ public class PreferencesDialog : Gtk.Dialog
     notebook.append_page(page_box, null);
     notebook.set_tab_label_text(page_box, _("Schedule"));
 
-    var area = (Gtk.Box)get_content_area();
-    area.add(notebook);
-  }
-
-  void handle_response(Gtk.Dialog dlg, int response) {
-    switch (response) {
-    case Gtk.ResponseType.HELP:
-      DejaDup.show_uri(dlg, "ghelp:deja-dup#prefs");
-      break;
-    default:
-      Gtk.main_quit();
-      break;
-    }
+    add(notebook);
   }
 }
 
+}

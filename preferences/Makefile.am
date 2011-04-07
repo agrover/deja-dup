@@ -16,26 +16,27 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS = deja-dup-preferences
+ccpaneldir = $(CCPANEL_DIR)
+ccpanel_LTLIBRARIES = libdeja-dup.la
 
-deja_dup_preferences_CFLAGS = \
+libdeja_dup_la_CFLAGS = \
 	-I$(top_srcdir)/common \
 	-I$(top_srcdir)/widgets \
 	$(PREF_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
-deja_dup_preferences_LDADD = $(PREF_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la $(top_builddir)/widgets/libwidgets.la
+libdeja_dup_la_LIBADD = $(PREF_LIBS) @INTLLIBS@ $(top_builddir)/widgets/libwidgets.la
 
-deja_dup_preferences_VALASOURCES = \
-	PreferencesDialog.vala \
-	preferences.vala
+libdeja_dup_la_VALASOURCES = \
+	Preferences.vala
 
-deja_dup_preferences_VALABUILTSOURCES = \
-	$(deja_dup_preferences_VALASOURCES:.vala=.c)
+libdeja_dup_la_VALABUILTSOURCES = \
+	$(libdeja_dup_la_VALASOURCES:.vala=.c)
 
-deja_dup_preferences_SOURCES = \
-	$(deja_dup_preferences_VALABUILTSOURCES)
+libdeja_dup_la_SOURCES = \
+	$(libdeja_dup_la_VALABUILTSOURCES) \
+	PreferencesPanel.c
 
 if MAINTAINER_MODE
 PACKAGES = \
@@ -47,13 +48,13 @@ PACKAGES = \
 	--pkg unix \
 	--pkg config
 BUILT_SOURCES = vala.stamp
-vala.stamp: $(deja_dup_preferences_VALASOURCES)
-	$(AM_V_GEN)$(VALAC) --vapidir $(top_srcdir)/common --vapidir $(top_srcdir)/widgets \
+vala.stamp: $(libdeja_dup_la_VALASOURCES)
+	$(AM_V_GEN)$(VALAC) --vapidir $(top_srcdir)/common -H preferences.h --vapidir $(top_srcdir)/widgets \
 	                    --vapidir $(top_srcdir)/vapi $(PACKAGES) $^ -C
 	touch $@
 endif
 
-EXTRA_DIST = $(deja_dup_preferences_VALASOURCES)
+EXTRA_DIST = $(libdeja_dup_la_VALASOURCES)
 if MAINTAINER_MODE
-CLEANFILES = $(BUILT_SOURCES) $(deja_dup_preferences_VALABUILTSOURCES)
+CLEANFILES = $(BUILT_SOURCES) $(libdeja_dup_la_VALABUILTSOURCES)
 endif
