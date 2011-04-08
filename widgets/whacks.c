@@ -25,7 +25,7 @@
 
 #if HAVE_UNITY
 #include <unity.h>
-#include <libdbusmenu-gtk/parser.h>
+#include <libdbusmenu-gtk3/parser.h>
 #endif
 
 #include "whacks.h"
