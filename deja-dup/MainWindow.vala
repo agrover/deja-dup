@@ -166,7 +166,7 @@ public class MainWindow : Gtk.Window
   void on_preferences(Gtk.Action action)
   {
     try {
-      Process.spawn_command_line_async("deja-dup-preferences");
+      Process.spawn_command_line_async("gnome-control-center deja-dup");
     }
     catch (Error e) {
       Gtk.MessageDialog dlg = new Gtk.MessageDialog (this, Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL, Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, _("Could not open preferences"));

@@ -91,7 +91,8 @@ AC_SUBST(DUP_LIBS)
 
 PKG_CHECK_MODULES(PREF,
                   $GTK_MODULE >= $GTK_REQ_VER
-                  gio-2.0 >= $GIO_REQ_VER)
+                  gio-2.0 >= $GIO_REQ_VER
+                  libgnome-control-center)
 AC_SUBST(PREF_CFLAGS)
 AC_SUBST(PREF_LIBS)
 
@@ -114,6 +115,9 @@ PKG_CHECK_MODULES(MONITOR,
                   libnotify >= $NOTIFY_REQ_VER)
 AC_SUBST(MONITOR_CFLAGS)
 AC_SUBST(MONITOR_LIBS)
+
+CCPANEL_DIR=`$PKG_CONFIG --variable=extensiondir libgnome-control-center`
+AC_SUBST(CCPANEL_DIR)
 
 AC_ARG_WITH([nautilus],
   [AS_HELP_STRING([--with-nautilus],
