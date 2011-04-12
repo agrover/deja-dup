@@ -19,7 +19,7 @@
 # Here's a bunch of translation support.  Some stolen from dpkg
 
 POLINGUAS = $(shell grep -v "^\#" $(top_srcdir)/po/LINGUAS)
-LINGUAS = C $(POLINGUAS)
+MAN_LINGUAS = C $(POLINGUAS)
 
 PAGES = deja-dup.1 deja-dup-preferences.1
 
@@ -37,7 +37,7 @@ C/stamp: $(srcdir)/include.main $(srcdir)/include.pref $(top_builddir)/deja-dup/
 	@DEJA_DUP_LOCALEDIR=$(abs_builddir)/locales DEJA_DUP_LANGUAGE=$* $(srcdir)/help2man -N -i $(srcdir)/include.pref -L en_US.UTF-8 $(top_builddir)/preferences/deja-dup-preferences > $*/deja-dup-preferences.1
 	$(AM_V_GEN)touch $@
 
-man: $(patsubst %,%/stamp,$(LINGUAS))
+man: $(patsubst %,%/stamp,$(MAN_LINGUAS))
 
 EXTRA_DIST = help2man include.main include.pref
 
@@ -47,7 +47,7 @@ mostlyclean-local: clean-local-@USE_NLS@
 maintainer-clean-local: clean-local-@USE_NLS@
 clean-local-no:
 clean-local-yes:
-	rm -fr $(LINGUAS) locales
+	rm -fr $(MAN_LINGUAS) locales
 
 install-data-local: install-data-local-@USE_NLS@
 install-data-local-no:
