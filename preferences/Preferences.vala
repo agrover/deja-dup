@@ -25,7 +25,6 @@ public class Preferences : Gtk.HBox
 {
   Gtk.SizeGroup label_sizes;
   Gtk.SizeGroup button_sizes;
-  DejaDup.ToggleGroup periodic_toggle;
 
   construct {
     Gtk.Notebook notebook = new Gtk.Notebook();
@@ -57,6 +56,48 @@ public class Preferences : Gtk.HBox
     });
     pack_start(tree, false, false);
 
+    page_box = new Gtk.VBox(false, 0);
+    page_box.border_width = 6;
+    table = new Gtk.Table(0, 0, false);
+    table.row_spacing = 6;
+    table.column_spacing = 6;
+    row = 0;
+    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
+
+    w = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
+    (w as Gtk.Bin).add(new DejaDup.ConfigSwitch(DejaDup.PERIODIC_KEY));
+    label = new Gtk.Label(_("_Automatic backups:"));
+    label.set("mnemonic-widget", (w as Gtk.Bin).get_child(),
+              "use-underline", true,
+              "xalign", 0.0f);
+    label_sizes.add_widget(label);
+
+    table.attach(label, 0, 1, row, row + 1,
+                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    table.attach(w, 1, 2, row, row + 1, 
+                 Gtk.AttachOptions.FILL,
+                 Gtk.AttachOptions.FILL, 0, 0);
+    ++row;
+
+    w = new DejaDup.ConfigLabelLocation();
+    label = new Gtk.Label(_("Where:"));
+    label.set("xalign", 0.0f);
+    label_sizes.add_widget(label);
+
+    table.attach(label, 0, 1, row, row + 1,
+                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    table.attach(w, 1, 2, row, row + 1,
+                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
+                 Gtk.AttachOptions.FILL, 0, 0);
+    ++row;
+
+    page_box.pack_start(table, true, true, 0);
+    page_box.pack_end(hbox, false, false, 0);
+    notebook.append_page(page_box, null);
+    cat_model.insert_with_values(out iter, i, 0, _("Overview"), 1, i);
+    ++i;
+
+    // Reset page
     page_box = new Gtk.VBox(false, 0);
     page_box.border_width = 6;
     table = new Gtk.Table(0, 0, false);
@@ -171,14 +212,8 @@ public class Preferences : Gtk.HBox
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
-    DejaDup.ConfigBool periodic_check = new DejaDup.ConfigBool(DejaDup.PERIODIC_KEY, _("_Automatically back up on a regular schedule"));
-    table.attach(periodic_check, 0, 3, row, row + 1,
-                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 Gtk.AttachOptions.FILL, 3, 3);
-    ++row;
-    
     w = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
-    label = new Gtk.Label("    %s".printf(_("How _often to back up:")));
+    label = new Gtk.Label(_("How _often to back up:"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "xalign", 0.0f);
@@ -189,10 +224,6 @@ public class Preferences : Gtk.HBox
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL,
                  3, 3);
-    periodic_toggle = new DejaDup.ToggleGroup(periodic_check);
-    periodic_toggle.add_dependent(label);
-    periodic_toggle.add_dependent(w);
-    periodic_toggle.check();
     ++row;
     
     w = new DejaDup.ConfigDelete(DejaDup.DELETE_AFTER_KEY);
