@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ using GLib;
 
 namespace DejaDup {
 
-public class Preferences : Gtk.VBox
+public class Preferences : Gtk.HBox
 {
   Gtk.SizeGroup label_sizes;
   Gtk.SizeGroup button_sizes;
@@ -35,7 +35,28 @@ public class Preferences : Gtk.VBox
     Gtk.Label label;
     Gtk.Table table;
     int row;
-    
+    Gtk.TreeIter iter;
+    int i = 0;
+
+    spacing = 12;
+    border_width = 12;
+
+    var cat_model = new Gtk.ListStore(2, typeof(string), typeof(int));
+    var tree = new Gtk.TreeView.with_model(cat_model);
+    tree.headers_visible = false;
+    tree.insert_column_with_attributes(-1, null, new Gtk.CellRendererText(),
+                                       "text", 0);
+    tree.get_selection().set_mode(Gtk.SelectionMode.SINGLE);
+    tree.get_selection().changed.connect(() => {
+      Gtk.TreeIter sel_iter;
+      int page;
+      if (tree.get_selection().get_selected(null, out sel_iter)) {
+        cat_model.get(sel_iter, 1, out page);
+        notebook.page = page;
+      }
+    });
+    pack_start(tree, false, false);
+
     page_box = new Gtk.VBox(false, 0);
     page_box.border_width = 6;
     table = new Gtk.Table(0, 0, false);
@@ -78,7 +99,8 @@ public class Preferences : Gtk.VBox
     page_box.pack_start(table, true, true, 0);
     page_box.pack_end(hbox, false, false, 0);
     notebook.append_page(page_box, null);
-    notebook.set_tab_label_text(page_box, _("Storage"));
+    cat_model.insert_with_values(out iter, i, 0, _("Storage"), 1, i);
+    ++i;
 
     // Now make sure to reserve the excess space that the hidden bits of
     // ConfigLocation will need.
@@ -138,7 +160,8 @@ public class Preferences : Gtk.VBox
     
     page_box.pack_start(table, true, true, 0);
     notebook.append_page(page_box, null);
-    notebook.set_tab_label_text(page_box, _("Files"));
+    cat_model.insert_with_values(out iter, i, 0, _("Files"), 1, i);
+    ++i;
     
     // Reset page
     page_box = new Gtk.VBox(false, 0);
@@ -194,9 +217,16 @@ public class Preferences : Gtk.VBox
     page_box.pack_start(table, true, true, 0);
     page_box.pack_end(hbox, false, false, 0);
     notebook.append_page(page_box, null);
-    notebook.set_tab_label_text(page_box, _("Schedule"));
+    cat_model.insert_with_values(out iter, i, 0, _("Schedule"), 1, i);
+    ++i;
 
-    add(notebook);
+    // Select first one by deault
+    cat_model.get_iter_first(out iter);
+    tree.get_selection().select_iter(iter);
+
+    notebook.show_tabs = false;
+    notebook.show_border = false;
+    pack_start(notebook, true, true);
   }
 }
 
