@@ -1,7 +1,7 @@
 # -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008–2010 Michael Terry <mike@mterry.name>
+# © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ gsettings_SCHEMAS = org.gnome.DejaDup.gschema.xml
 
 @INTLTOOL_DESKTOP_RULE@
 desktopdir = $(datadir)/applications
-dist_desktop_DATA = deja-dup.desktop deja-dup-preferences.desktop
+dist_desktop_DATA = deja-dup.desktop
 deja-dup-monitor.desktop.in: deja-dup-monitor.desktop.in.in
 	sed "s|@pkglibdir@|$(pkglibdir)|g" $^ > $@
 
@@ -50,8 +50,8 @@ dist_autostart_DATA = deja-dup-monitor.desktop
 convertdir = $(datadir)/GConf/gsettings
 dist_convert_DATA = deja-dup.convert
 
-EXTRA_DIST = deja-dup.desktop.in deja-dup-monitor.desktop.in.in deja-dup-preferences.desktop.in org.gnome.DejaDup.gschema.xml.in
-DISTCLEANFILES = deja-dup.desktop deja-dup-monitor.desktop deja-dup-monitor.desktop.in deja-dup-preferences.desktop org.gnome.DejaDup.gschema.xml
+EXTRA_DIST = deja-dup.desktop.in deja-dup-monitor.desktop.in.in org.gnome.DejaDup.gschema.xml.in
+DISTCLEANFILES = deja-dup.desktop deja-dup-monitor.desktop deja-dup-monitor.desktop.in org.gnome.DejaDup.gschema.xml
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t
 install-data-hook: update-icon-cache
