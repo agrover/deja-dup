@@ -30,7 +30,7 @@ public class Preferences : Gtk.HBox
     Gtk.Notebook notebook = new Gtk.Notebook();
     Gtk.Widget w;
     Gtk.VBox page_box;
-    Gtk.HBox hbox;
+    Gtk.Box hbox;
     Gtk.Label label;
     Gtk.Table table;
     int row;
@@ -66,7 +66,7 @@ public class Preferences : Gtk.HBox
 
     w = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
     (w as Gtk.Bin).add(new DejaDup.ConfigSwitch(DejaDup.PERIODIC_KEY));
-    label = new Gtk.Label(_("_Automatic backups:"));
+    label = new Gtk.Label(_("Automatic _backups:"));
     label.set("mnemonic-widget", (w as Gtk.Bin).get_child(),
               "use-underline", true,
               "xalign", 0.0f);
@@ -90,6 +90,37 @@ public class Preferences : Gtk.HBox
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL, 0, 0);
     ++row;
+
+    hbox = new Gtk.HButtonBox();
+    hbox.border_width = 3;
+    hbox.spacing = 12;
+    (hbox as Gtk.HButtonBox).layout_style = Gtk.ButtonBoxStyle.END;
+    w = new Gtk.Button.with_mnemonic(_("_Restore…"));
+    (w as Gtk.Button).clicked.connect(() => {
+      try {
+        Process.spawn_command_line_async("deja-dup --restore");
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
+    });
+    hbox.add(w);
+    w = new Gtk.Button.with_mnemonic(_("Back Up _Now"));
+    (w as Gtk.Button).clicked.connect(() => {
+      try {
+        Process.spawn_command_line_async("deja-dup --backup");
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
+    });
+    hbox.add(w);
+    w = new Gtk.Button.from_stock(Gtk.Stock.HELP);
+    (w as Gtk.Button).clicked.connect(() => {
+      DejaDup.show_uri(this.get_toplevel() as Gtk.Window, "ghelp:deja-dup");
+    });
+    hbox.add(w);
+    (hbox as Gtk.HButtonBox).set_child_secondary(w, true);
 
     page_box.pack_start(table, true, true, 0);
     page_box.pack_end(hbox, false, false, 0);

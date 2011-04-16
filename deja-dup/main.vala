@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -47,14 +47,6 @@ class DejaDupApp : Object
       return false;
     }
     
-    if (restore_mode) {
-      if (filenames == null) {
-        printerr("%s\n", _("No filenames provided"));
-        status = 1;
-        return false;
-      }
-    }
-
     if (restoremissing_mode) {
       if (filenames == null) {
         printerr("%s\n", _("No directory provided"));
@@ -83,12 +75,12 @@ class DejaDupApp : Object
     Environment.set_application_name(_("Déjà Dup"));
     
     var modes = "\n  %s --backup\n  %s --restore %s\n  %s --restore-missing %s"
-                .printf(Config.PACKAGE, Config.PACKAGE, _("FILES"),
+                .printf(Config.PACKAGE, Config.PACKAGE, _("[FILES…]"),
                         Config.PACKAGE, _("DIRECTORY"));
     OptionContext context = new OptionContext(modes);
 
     // Translators: Wrap this to 80 characters per line if you can, as I have for English
-    context.set_summary(_("Déjà Dup is a simple backup tool.  It hides the complexity of backing up\nthe 'right way' (encrypted, off-site, and regular) and uses duplicity as\nthe backend."));
+    context.set_summary(_("Déjà Dup is a simple backup tool.  It hides the complexity of backing up\nthe Right Way (encrypted, off-site, and regular) and uses duplicity as\nthe backend."));
     context.add_main_entries(options, Config.GETTEXT_PACKAGE);
     context.add_group(Gtk.get_option_group(false)); // allow console use
     try {
@@ -117,9 +109,11 @@ class DejaDupApp : Object
 
     if (restore_mode) {
       List<File> file_list = new List<File>();
-      int i = 0;
-      while (filenames[i] != null)
-        file_list.append(File.new_for_commandline_arg(filenames[i++]));
+      if (filenames != null) {
+        int i = 0;
+        while (filenames[i] != null)
+          file_list.append(File.new_for_commandline_arg(filenames[i++]));
+      }
       toplevel = new AssistantRestore.with_files(file_list);
       toplevel.show_all();
     }
@@ -141,8 +135,8 @@ class DejaDupApp : Object
       toplevel.show_all();
     }
     else {
-      toplevel = new MainWindow();
-      toplevel.show_all();
+        printerr("%s\n\n%s", _("You must specify a mode"), context.get_help(true, null));
+        return 1;
     }
 
     toplevel.destroy.connect(Gtk.main_quit);
