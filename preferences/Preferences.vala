@@ -30,7 +30,7 @@ public class Preferences : Gtk.HBox
     var restore_button = new Gtk.Button();
     restore_button.clicked.connect(() => {
       try {
-        Process.spawn_command_line_async("deja-dup --restore");
+        Process.spawn_command_line_async("%s --restore".printf(Path.build_filename(Config.PKG_LIBEXEC_DIR, "deja-dup")));
       }
       catch (Error e) {
         warning("%s\n", e.message);
@@ -181,7 +181,7 @@ public class Preferences : Gtk.HBox
     w = new Gtk.Button.with_mnemonic(_("_Restore…"));
     (w as Gtk.Button).clicked.connect(() => {
       try {
-        Process.spawn_command_line_async("deja-dup --restore");
+        Process.spawn_command_line_async("%s --restore".printf(Path.build_filename(Config.PKG_LIBEXEC_DIR, "deja-dup")));
       }
       catch (Error e) {
         warning("%s\n", e.message);
@@ -191,7 +191,7 @@ public class Preferences : Gtk.HBox
     w = new Gtk.Button.with_mnemonic(_("Back Up _Now"));
     (w as Gtk.Button).clicked.connect(() => {
       try {
-        Process.spawn_command_line_async("deja-dup --backup");
+        Process.spawn_command_line_async("%s --backup".printf(Path.build_filename(Config.PKG_LIBEXEC_DIR, "deja-dup")));
       }
       catch (Error e) {
         warning("%s\n", e.message);

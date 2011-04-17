@@ -17,12 +17,13 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-pkglib_PROGRAMS = deja-dup-monitor
+pkglibexec_PROGRAMS = deja-dup-monitor
 
 deja_dup_monitor_CFLAGS = \
 	-I$(top_srcdir)/common \
 	$(MONITOR_CFLAGS) \
 	$(DEBUG_CFLAGS) \
+	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 deja_dup_monitor_LDADD = $(MONITOR_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la

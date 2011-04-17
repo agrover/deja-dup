@@ -235,7 +235,7 @@ static bool kickoff()
   if (pid == (Pid)0 && !op_active) {
     try {
       string[] argv = new string[3];
-      argv[0] = "deja-dup";
+      argv[0] = Path.build_filename(Config.PKG_LIBEXEC_DIR, "deja-dup");
       argv[1] = "--backup";
       argv[2] = null;
       Process.spawn_async(null, argv, null,

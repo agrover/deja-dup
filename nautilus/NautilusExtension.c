@@ -2,7 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2004–2005 Free Software Foundation, Inc.
-    © 2009–2010 Michael Terry <mike@mterry.name>
+    © 2009,2010,2011 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -42,7 +42,8 @@ restore_missing_files_callback(NautilusMenuItem *item)
 
   info = g_object_get_data(G_OBJECT(item), "deja_dup_extension_file");
 
-  cmd = g_strdup_printf("deja-dup --restore-missing %s",
+  cmd = g_strdup_printf("%s --restore-missing %s",
+                        g_build_filename(PKG_LIBEXEC_DIR, "deja-dup", NULL),
                         nautilus_file_info_get_uri(info));
 
   g_spawn_command_line_async(cmd, NULL);
@@ -60,7 +61,9 @@ restore_files_callback(NautilusMenuItem *item)
   files = g_object_get_data(G_OBJECT(item), "deja_dup_extension_files");
 
   g_list_foreach(files, (GFunc)make_file_list, str);
-  cmd = g_strdup_printf("deja-dup --restore %s", str->str);
+  cmd = g_strdup_printf("%s --restore %s", 
+                        g_build_filename(PKG_LIBEXEC_DIR, "deja-dup", NULL),
+                        str->str);
 
   g_spawn_command_line_async(cmd, NULL);
 
@@ -76,15 +79,13 @@ deja_dup_nautilus_extension_get_background_items(NautilusMenuProvider *provider,
   NautilusMenuItem *item;
   guint length;
   GList *file_copies;
-  gchar *path;
 
   if (file == NULL)
     return NULL;
 
-  path = g_find_program_in_path("deja-dup");
-  if (!path)
+  if (!g_file_test(g_build_filename(PKG_LIBEXEC_DIR, "deja-dup", NULL),
+                   G_FILE_TEST_IS_EXECUTABLE))
     return NULL;
-  g_free(path);
 
   item = nautilus_menu_item_new("DejaDupNautilusExtension::restore_missing_item",
                                 dgettext(GETTEXT_PACKAGE, "Restore Missing Files…"),
@@ -107,15 +108,13 @@ deja_dup_nautilus_extension_get_file_items(NautilusMenuProvider *provider,
   NautilusMenuItem *item;
   guint length;
   GList *file_copies;
-  gchar *path;
 
   if (files == NULL)
     return NULL;
 
-  path = g_find_program_in_path("deja-dup");
-  if (!path)
+  if (!g_file_test(g_build_filename(PKG_LIBEXEC_DIR, "deja-dup", NULL),
+                   G_FILE_TEST_IS_EXECUTABLE))
     return NULL;
-  g_free(path);
 
   length = g_list_length(files);
   item = nautilus_menu_item_new("DejaDupNautilusExtension::restore_item",

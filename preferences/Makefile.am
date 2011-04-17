@@ -1,7 +1,7 @@
 # -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008–2010 Michael Terry <mike@mterry.name>
+# © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@ libdeja_dup_la_CFLAGS = \
 	-I$(top_srcdir)/widgets \
 	$(PREF_CFLAGS) \
 	$(DEBUG_CFLAGS) \
+	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 libdeja_dup_la_LIBADD = $(PREF_LIBS) @INTLLIBS@ $(top_builddir)/widgets/libwidgets.la

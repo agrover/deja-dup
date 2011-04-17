@@ -40,7 +40,7 @@ gsettings_SCHEMAS = org.gnome.DejaDup.gschema.xml
 desktopdir = $(datadir)/applications
 dist_desktop_DATA = deja-dup.desktop
 deja-dup-monitor.desktop.in: deja-dup-monitor.desktop.in.in
-	sed "s|@pkglibdir@|$(pkglibdir)|g" $^ > $@
+	sed "s|@pkglibexecdir@|$(pkglibexecdir)|g" $^ > $@
 
 autostartdir = $(sysconfdir)/xdg/autostart
 dist_autostart_DATA = deja-dup-monitor.desktop

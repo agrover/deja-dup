@@ -1,7 +1,7 @@
 # -*- Mode: m4; indent-tabs-mode: nil; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008–2010 Michael Terry <mike@mterry.name>,
+# © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>,
 # © 2009 Andrew Fister <temposs@gmail.com>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
@@ -185,7 +185,6 @@ AC_CONFIG_FILES([Makefile
                  data/Makefile
                  deja-dup/Makefile
                  help/Makefile
-                 man/Makefile
                  monitor/Makefile
                  nautilus/Makefile
                  po/Makefile.in
