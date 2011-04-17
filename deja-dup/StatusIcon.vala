@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2009–2010 Michael Terry <mike@mterry.name>
+    © 2009,2010,2011 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -127,7 +127,7 @@ public abstract class StatusIcon : Object
 
     // Fake a run by setting today's timestamp as the 'last-run' setting
     try {
-      DejaDup.update_last_run_timestamp();
+      DejaDup.update_last_run_timestamp(DejaDup.TimestampType.NONE);
     }
     catch (Error e) {
       warning("%s\n", e.message);

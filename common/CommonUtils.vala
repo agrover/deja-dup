@@ -25,8 +25,11 @@ public const string INCLUDE_LIST_KEY = "include-list";
 public const string EXCLUDE_LIST_KEY = "exclude-list";
 public const string BACKEND_KEY = "backend";
 public const string ROOT_PROMPT_KEY = "root-prompt";
+public const string WELCOMED_KEY = "welcomed";
 public const string ENCRYPT_KEY = "encrypt";
 public const string LAST_RUN_KEY = "last-run";
+public const string LAST_BACKUP_KEY = "last-backup";
+public const string LAST_RESTORE_KEY = "last-restore";
 public const string PERIODIC_KEY = "periodic";
 public const string PERIODIC_PERIOD_KEY = "periodic-period";
 public const string DELETE_AFTER_KEY = "delete-after";
@@ -36,7 +39,13 @@ public errordomain BackupError {
   ALREADY_RUNNING
 }
 
-public void update_last_run_timestamp() throws Error
+public enum TimestampType {
+  NONE,
+  BACKUP,
+  RESTORE
+}
+
+public void update_last_run_timestamp(TimestampType type) throws Error
 {
   TimeVal cur_time = TimeVal();
   cur_time.get_current_time();
@@ -44,6 +53,10 @@ public void update_last_run_timestamp() throws Error
   
   var settings = get_settings();
   settings.set_string(LAST_RUN_KEY, cur_time_str);
+  if (type == TimestampType.BACKUP)
+    settings.set_string(LAST_BACKUP_KEY, cur_time_str);
+  else if (type == TimestampType.RESTORE)
+    settings.set_string(LAST_RESTORE_KEY, cur_time_str);
 }
 
 public string get_trash_path()

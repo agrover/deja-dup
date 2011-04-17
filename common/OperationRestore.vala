@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -82,7 +82,7 @@ public class OperationRestore : Operation
         success = false;
       else {
         cleanup_source();
-        try {DejaDup.update_last_run_timestamp();}
+        try {DejaDup.update_last_run_timestamp(DejaDup.TimestampType.RESTORE);}
         catch (Error e) {warning("%s\n", e.message);}
       }
     }

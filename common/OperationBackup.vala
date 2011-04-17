@@ -32,7 +32,7 @@ public class OperationBackup : Operation
   {
     /* If successfully completed, update time of last backup and run base operation_finished */
     if (success) {
-      try {DejaDup.update_last_run_timestamp();}
+      try {DejaDup.update_last_run_timestamp(DejaDup.TimestampType.BACKUP);}
       catch (Error e) {warning("%s\n", e.message);}
     }
     

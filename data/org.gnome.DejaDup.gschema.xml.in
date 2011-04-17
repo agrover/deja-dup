@@ -11,6 +11,10 @@
       <_summary>Directories not to back up</_summary>
       <_description>This list of directories will not be backed up.  Reserved values $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special directories.  Relative entries are relative to the user’s home directory.</_description>
     </key>
+    <key name="welcomed" type="b">
+      <default>false</default>
+      <_summary>Whether the welcome screen has been dismissed</_summary>
+    </key>
     <key name="root-prompt" type="b">
       <default>true</default>
       <_summary>Whether to request the root password</_summary>
@@ -25,6 +29,16 @@
       <default>''</default>
       <_summary>The last time Déjà Dup was run</_summary>
       <_description>The last time Déjà Dup was successfully run.  This time should be in ISO 8601 format.</_description>
+    </key>
+    <key name="last-backup" type="s">
+      <default>''</default>
+      <_summary>The last time Déjà Dup backed up</_summary>
+      <_description>The last time Déjà Dup successfully completed a backup.  This time should be in ISO 8601 format.</_description>
+    </key>
+    <key name="last-restore" type="s">
+      <default>''</default>
+      <_summary>The last time Déjà Dup restored</_summary>
+      <_description>The last time Déjà Dup successfully completed a restore.  This time should be in ISO 8601 format.</_description>
     </key>
     <key name="periodic" type="b">
       <default>false</default>

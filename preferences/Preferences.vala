@@ -23,10 +23,73 @@ namespace DejaDup {
 
 public class Preferences : Gtk.HBox
 {
-  Gtk.SizeGroup label_sizes;
-  Gtk.SizeGroup button_sizes;
+  Gtk.Notebook top_notebook;
 
-  construct {
+  Gtk.Widget make_welcome_page()
+  {
+    var restore_button = new Gtk.Button();
+    restore_button.clicked.connect(() => {
+      try {
+        Process.spawn_command_line_async("deja-dup --restore");
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
+    });
+    var restore_label = new Gtk.Label(_("I want to _restore files from a previous backup…"));
+    restore_label.set("mnemonic-widget", restore_button,
+                      "wrap", true,
+                      "justify", Gtk.Justification.CENTER,
+                      "xalign", 0.0f,
+                      "xpad", 6,
+                      "ypad", 6,
+                      "use-underline", true);
+    restore_button.add(restore_label);
+
+    var continue_button = new Gtk.Button();
+    continue_button.clicked.connect(() => {
+      var settings = DejaDup.get_settings();
+      settings.set_boolean(DejaDup.WELCOMED_KEY, true);
+      top_notebook.page = 1;
+    });
+    var continue_label = new Gtk.Label(_("Just show me my backup _settings"));
+    continue_label.set("mnemonic-widget", continue_button,
+                       "wrap", true,
+                       "justify", Gtk.Justification.CENTER,
+                       "xalign", 0.0f,
+                       "xpad", 6,
+                       "ypad", 6,
+                       "has-default", true,
+                       "has-focus", true,
+                       "use-underline", true);
+    continue_button.add(continue_label);
+
+    var bbox = new Gtk.VButtonBox();
+    bbox.spacing = 24;
+    bbox.layout_style = Gtk.ButtonBoxStyle.CENTER;
+    bbox.add(restore_button);
+    bbox.add(continue_button);
+
+    var balign = new Gtk.Alignment(0.5f, 0.5f, 0.0f, 0.0f);
+    balign.add(bbox);
+
+    var icon = new Gtk.Image();
+    icon.set("icon-name", "deja-dup",
+             "pixel-size", 256);
+
+    var hbox = new Gtk.HBox(false, 12);
+    hbox.pack_start(icon, false, false);
+    hbox.pack_start(balign, true, true);
+
+    var page = new Gtk.Alignment(0.0f, 0.5f, 1.0f, 0.0f);
+    page.add(hbox);
+
+    page.show();
+    return page;
+  }
+
+  Gtk.Widget make_settings_page() {
+    var settings_page = new Gtk.HBox(false, 0);
     Gtk.Notebook notebook = new Gtk.Notebook();
     Gtk.Widget w;
     Gtk.VBox page_box;
@@ -36,9 +99,10 @@ public class Preferences : Gtk.HBox
     int row;
     Gtk.TreeIter iter;
     int i = 0;
+    Gtk.SizeGroup label_sizes;
+    Gtk.SizeGroup button_sizes;
 
-    spacing = 12;
-    border_width = 12;
+    settings_page.spacing = 12;
 
     var cat_model = new Gtk.ListStore(2, typeof(string), typeof(int));
     var tree = new Gtk.TreeView.with_model(cat_model);
@@ -54,7 +118,7 @@ public class Preferences : Gtk.HBox
         notebook.page = page;
       }
     });
-    pack_start(tree, false, false);
+    settings_page.pack_start(tree, false, false);
 
     page_box = new Gtk.VBox(false, 0);
     table = new Gtk.Table(0, 0, false);
@@ -275,7 +339,31 @@ public class Preferences : Gtk.HBox
 
     notebook.show_tabs = false;
     notebook.show_border = false;
-    pack_start(notebook, true, true);
+    settings_page.pack_start(notebook, true, true);
+
+    settings_page.show();
+    return settings_page;
+  }
+
+  bool should_show_welcome()
+  {
+    var settings = DejaDup.get_settings();
+
+    var last_run = settings.get_string(DejaDup.LAST_RUN_KEY);
+    var welcomed = settings.get_boolean(DejaDup.WELCOMED_KEY);
+
+    return !welcomed && last_run == "";
+  }
+
+  construct {
+    top_notebook = new Gtk.Notebook();
+    top_notebook.append_page(make_welcome_page(), null);
+    top_notebook.append_page(make_settings_page(), null);
+    top_notebook.show_tabs = false;
+    top_notebook.show_border = false;
+    top_notebook.border_width = 12;
+    top_notebook.page = should_show_welcome() ? 0 : 1;
+    add(top_notebook);
   }
 }
 
