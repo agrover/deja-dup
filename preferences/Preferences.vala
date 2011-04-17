@@ -36,13 +36,13 @@ public class Preferences : Gtk.HBox
         warning("%s\n", e.message);
       }
     });
-    var restore_label = new Gtk.Label(_("I want to _restore files from a previous backup…"));
+    var restore_label = new Gtk.Label("<big>%s</big>".printf(_("I want to _restore files from a previous backup…")));
     restore_label.set("mnemonic-widget", restore_button,
                       "wrap", true,
                       "justify", Gtk.Justification.CENTER,
                       "xalign", 0.0f,
                       "xpad", 6,
-                      "ypad", 6,
+                      "use-markup", true,
                       "use-underline", true);
     restore_button.add(restore_label);
 
@@ -52,16 +52,16 @@ public class Preferences : Gtk.HBox
       settings.set_boolean(DejaDup.WELCOMED_KEY, true);
       top_notebook.page = 1;
     });
-    var continue_label = new Gtk.Label(_("Just show me my backup _settings"));
+    var continue_label = new Gtk.Label("<big>%s</big>".printf(_("Just show me my backup _settings")));
     continue_label.set("mnemonic-widget", continue_button,
                        "wrap", true,
                        "justify", Gtk.Justification.CENTER,
                        "xalign", 0.0f,
                        "xpad", 6,
-                       "ypad", 6,
                        "can-default", true,
                        "has-default", true,
                        "has-focus", true,
+                       "use-markup", true,
                        "use-underline", true);
     continue_button.add(continue_label);
 
@@ -78,9 +78,9 @@ public class Preferences : Gtk.HBox
     icon.set("icon-name", "deja-dup",
              "pixel-size", 256);
 
-    var hbox = new Gtk.HBox(false, 12);
-    hbox.pack_start(icon, false, false);
-    hbox.pack_start(balign, true, true);
+    var hbox = new Gtk.HBox(true, 0);
+    hbox.pack_start(icon, true, false);
+    hbox.pack_start(balign, true, false);
 
     var page = new Gtk.Alignment(0.0f, 0.5f, 1.0f, 0.0f);
     page.add(hbox);
