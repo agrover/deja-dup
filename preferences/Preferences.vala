@@ -93,6 +93,7 @@ public class Preferences : Gtk.HBox
     Gtk.Notebook notebook = new Gtk.Notebook();
     Gtk.Widget w;
     Gtk.VBox page_box;
+    Gtk.VBox vbox;
     Gtk.Box hbox;
     Gtk.Label label;
     Gtk.Table table;
@@ -121,6 +122,7 @@ public class Preferences : Gtk.HBox
     settings_page.pack_start(tree, false, false);
 
     page_box = new Gtk.VBox(false, 0);
+    vbox = new Gtk.VBox(false, 24);
     table = new Gtk.Table(0, 0, false);
     table.row_spacing = 6;
     table.column_spacing = 6;
@@ -135,12 +137,10 @@ public class Preferences : Gtk.HBox
               "xalign", 0.0f);
     label_sizes.add_widget(label);
 
-    table.attach(label, 0, 1, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    table.attach(w, 1, 2, row, row + 1, 
-                 Gtk.AttachOptions.FILL,
-                 Gtk.AttachOptions.FILL, 0, 0);
-    ++row;
+    hbox = new Gtk.HBox(false, 6);
+    hbox.pack_start(label, false, false);
+    hbox.pack_start(w, false, false);
+    vbox.pack_start(hbox, false, false);
 
     w = new DejaDup.ConfigLabelLocation();
     label = new Gtk.Label(_("Where:"));
@@ -153,6 +153,26 @@ public class Preferences : Gtk.HBox
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL, 0, 0);
     ++row;
+
+    label = new Gtk.Label(_("Include files from:"));
+    label.set("xalign", 0.0f, "yalign", 0.0f);
+    w = new DejaDup.ConfigLabelList(DejaDup.INCLUDE_LIST_KEY);
+    table.attach(label, 0, 1, row, row + 1,
+                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    table.attach(w, 1, 2, row, row + 1,
+                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    ++row;
+    
+    label = new Gtk.Label(_("Except for:"));
+    label.set("xalign", 0.0f, "yalign", 0.0f);
+    w = new DejaDup.ConfigLabelList(DejaDup.EXCLUDE_LIST_KEY);
+    table.attach(label, 0, 1, row, row + 1,
+                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    table.attach(w, 1, 2, row, row + 1,
+                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    ++row;
+
+    vbox.pack_start(table, true, true);
 
     hbox = new Gtk.HButtonBox();
     hbox.spacing = 12;
@@ -184,7 +204,7 @@ public class Preferences : Gtk.HBox
     hbox.add(w);
     (hbox as Gtk.HButtonBox).set_child_secondary(w, true);
 
-    page_box.pack_start(table, true, true, 0);
+    page_box.pack_start(vbox, true, true);
     page_box.pack_end(hbox, false, false, 0);
     notebook.append_page(page_box, null);
     cat_model.insert_with_values(out iter, i, 0, _("Overview"), 1, i);
