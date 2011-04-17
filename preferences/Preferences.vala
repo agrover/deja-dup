@@ -156,13 +156,27 @@ public class Preferences : Gtk.HBox
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL, 0, 0);
     ++row;
+    
+    w = new DejaDup.ConfigDelete(DejaDup.DELETE_AFTER_KEY);
+    label = new Gtk.Label("%s".printf(_("_Keep backups:")));
+    label.set("mnemonic-widget", w,
+              "use-underline", true,
+              "xalign", 0.0f);
+    label_sizes.add_widget(label);
+    table.attach(label, 0, 1, row, row + 1,
+                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    table.attach(w, 1, 3, row, row + 1,
+                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
+                 Gtk.AttachOptions.FILL,
+                 0, 0);
+    ++row;
 
     w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
     table.attach(w, 0, 3, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL, 0, 0);
     ++row;
-    
+
     w = new DejaDup.ConfigLabelPolicy();
     hbox = new Gtk.HBox(false, 0);
     hbox.border_width = 3;
@@ -241,7 +255,6 @@ public class Preferences : Gtk.HBox
     table = new Gtk.Table(0, 3, false);
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
-    button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
     w = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
     label = new Gtk.Label(_("How _often to back up:"));
@@ -256,28 +269,8 @@ public class Preferences : Gtk.HBox
                  Gtk.AttachOptions.FILL,
                  3, 3);
     ++row;
-    
-    w = new DejaDup.ConfigDelete(DejaDup.DELETE_AFTER_KEY);
-    label = new Gtk.Label("%s".printf(_("_Keep backups:")));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "xalign", 0.0f);
-    label_sizes.add_widget(label);
-    table.attach(label, 0, 1, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 3, 3);
-    table.attach(w, 1, 3, row, row + 1,
-                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 Gtk.AttachOptions.FILL,
-                 3, 3);
-    ++row;
-    
-    w = new DejaDup.ConfigLabelPolicy();
-    hbox = new Gtk.HBox(false, 0);
-    hbox.border_width = 3;
-    hbox.add(w);
-    
+
     page_box.pack_start(table, true, true, 0);
-    page_box.pack_end(hbox, false, false, 0);
     notebook.append_page(page_box, null);
     cat_model.insert_with_values(out iter, i, 0, _("Schedule"), 1, i);
     ++i;
