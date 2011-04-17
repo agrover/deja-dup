@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -208,8 +208,14 @@ public string get_file_desc(File file)
       return info.get_attribute_string(FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME);
   }
   catch (Error e) {}
-  
-  return Path.get_basename(file.get_parse_name());
+
+  var desc = Path.get_basename(file.get_parse_name());
+  if (!file.is_native()) {
+    var uri = DejaDupDecodedUri.decode_uri(file.get_uri());
+    if (uri.host != null && uri.host != "")
+      desc = _("%1$s on %2$s").printf(desc, uri.host);
+  }
+  return desc;
 }
 
 public string get_location_desc()
