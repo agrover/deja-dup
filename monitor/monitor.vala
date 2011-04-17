@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>,
+    © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>,
     © 2009 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
@@ -189,11 +189,11 @@ static void notify_delay(string header, string reason)
   if (note == null) {
     Notify.init(Environment.get_application_name());
     note = new Notify.Notification(header, reason,
-                                   "deja-dup-backup");
+                                   "deja-dup");
     note.closed.connect((n) => {note = null;});
   }
   else
-    note.update(header, reason, "deja-dup-backup");
+    note.update(header, reason, "deja-dup");
 
   try {
     note.show();

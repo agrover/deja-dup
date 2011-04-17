@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008,2009 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
     © 2010 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
@@ -319,7 +319,7 @@ public class AssistantRestore : AssistantOperation
   
   protected override void set_op_icon_name()
   {
-    icon_name = "deja-dup-restore";
+    icon_name = "deja-dup";
   }
   
   bool is_same_day(TimeVal one, TimeVal two)

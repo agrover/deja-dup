@@ -252,7 +252,7 @@ class ShellStatusIcon : StatusIcon
     if (is_valid && automatic && op.mode == DejaDup.Operation.Mode.BACKUP) {
       Notify.init(Environment.get_application_name());
       var note = new Notify.Notification(_("Starting scheduled backup"), null,
-                                         "deja-dup-backup");
+                                         "deja-dup");
       note.add_action("later", later_label, () => {later();});
       note.add_action("skip", skip_label, () => {skip();});
       try {

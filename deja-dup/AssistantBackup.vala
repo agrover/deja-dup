@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -227,7 +227,7 @@ public class AssistantBackup : AssistantOperation
   
   protected override void set_op_icon_name()
   {
-    icon_name = "deja-dup-backup";
+    icon_name = "deja-dup";
   }
   
   void add_periodic_widgets(Gtk.VBox page)
