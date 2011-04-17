@@ -57,7 +57,6 @@ public class Preferences : Gtk.HBox
     pack_start(tree, false, false);
 
     page_box = new Gtk.VBox(false, 0);
-    page_box.border_width = 6;
     table = new Gtk.Table(0, 0, false);
     table.row_spacing = 6;
     table.column_spacing = 6;
@@ -92,7 +91,6 @@ public class Preferences : Gtk.HBox
     ++row;
 
     hbox = new Gtk.HButtonBox();
-    hbox.border_width = 3;
     hbox.spacing = 12;
     (hbox as Gtk.HButtonBox).layout_style = Gtk.ButtonBoxStyle.END;
     w = new Gtk.Button.with_mnemonic(_("_Restore…"));
@@ -130,7 +128,6 @@ public class Preferences : Gtk.HBox
 
     // Reset page
     page_box = new Gtk.VBox(false, 0);
-    page_box.border_width = 6;
     table = new Gtk.Table(0, 0, false);
     table.row_spacing = 6;
     table.column_spacing = 6;
@@ -179,7 +176,6 @@ public class Preferences : Gtk.HBox
 
     w = new DejaDup.ConfigLabelPolicy();
     hbox = new Gtk.HBox(false, 0);
-    hbox.border_width = 3;
     hbox.add(w);
     
     page_box.pack_start(table, true, true, 0);
@@ -200,7 +196,6 @@ public class Preferences : Gtk.HBox
 
     // Reset page
     page_box = new Gtk.VBox(false, 0);
-    page_box.set("border-width", 3);
     table = new Gtk.Table(0, 3, false);
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
@@ -251,7 +246,6 @@ public class Preferences : Gtk.HBox
     
     // Reset page
     page_box = new Gtk.VBox(false, 0);
-    page_box.set("border-width", 3);
     table = new Gtk.Table(0, 3, false);
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
