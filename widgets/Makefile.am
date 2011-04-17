@@ -35,6 +35,7 @@ libwidgets_la_VALASOURCES = \
 	ConfigEntry.vala \
 	ConfigFolder.vala \
 	ConfigLabel.vala \
+	ConfigLabelBackupDate.vala \
 	ConfigLabelBool.vala \
 	ConfigLabelList.vala \
 	ConfigLabelLocation.vala \

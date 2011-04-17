@@ -157,19 +157,43 @@ public class Preferences : Gtk.HBox
 
     label = new Gtk.Label(_("Include files from:"));
     label.set("xalign", 0.0f, "yalign", 0.0f);
+    label_sizes.add_widget(label);
     w = new DejaDup.ConfigLabelList(DejaDup.INCLUDE_LIST_KEY);
     table.attach(label, 0, 1, row, row + 1,
                  Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     table.attach(w, 1, 2, row, row + 1,
                  Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     ++row;
-    
+
     label = new Gtk.Label(_("Except for:"));
     label.set("xalign", 0.0f, "yalign", 0.0f);
+    label_sizes.add_widget(label);
     w = new DejaDup.ConfigLabelList(DejaDup.EXCLUDE_LIST_KEY);
     table.attach(label, 0, 1, row, row + 1,
                  Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     table.attach(w, 1, 2, row, row + 1,
+                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    ++row;
+
+    var bdate_label = new Gtk.Label(_("Most recent backup:"));
+    bdate_label.xalign = 0.0f;
+    label_sizes.add_widget(bdate_label);
+    var bdate = new DejaDup.ConfigLabelBackupDate();
+
+    bdate_label.show_all();
+    bdate.show_all();
+    bdate_label.no_show_all = true;
+    bdate.no_show_all = true;
+    bdate_label.visible = !bdate.empty;
+    bdate.visible = !bdate.empty;
+    bdate.notify["empty"].connect(() => {
+      bdate_label.visible = !bdate.empty;
+      bdate.visible = !bdate.empty;
+    });
+
+    table.attach(bdate_label, 0, 1, row, row + 1,
+                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    table.attach(bdate, 1, 2, row, row + 1,
                  Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     ++row;
 
