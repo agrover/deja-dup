@@ -59,6 +59,7 @@ public class Preferences : Gtk.HBox
                        "xalign", 0.0f,
                        "xpad", 6,
                        "ypad", 6,
+                       "can-default", true,
                        "has-default", true,
                        "has-focus", true,
                        "use-underline", true);
