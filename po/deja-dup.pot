@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: mike@mterry.name\n"
-"POT-Creation-Date: 2011-04-06 17:48-0400\n"
+"POT-Creation-Date: 2011-04-20 16:41-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,25 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: ../data/deja-dup.desktop.in.h:1
-msgid "Back up your files"
+msgid "Backup"
 msgstr ""
 
 #: ../data/deja-dup.desktop.in.h:2
-msgid "Backup Tool"
-msgstr ""
-
-#. Translators: The name is a play on the French phrase "déjà vu" meaning
-#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
-#. context is itself a reference to both the underlying command line tool
-#. "duplicity" and the act of duplicating data for backup.  As a whole, it
-#. may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:3 ../deja-dup/main.vala:83
-#: ../deja-dup/MainWindow.vala:28
-msgid "Déjà Dup"
-msgstr ""
-
-#: ../data/deja-dup.desktop.in.h:4
-msgid "Déjà Dup Backup Tool"
+msgid "Change your backup settings"
 msgstr ""
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
@@ -49,23 +35,6 @@ msgstr ""
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
 msgid "Schedule backups at regular intervals"
-msgstr ""
-
-#: ../data/deja-dup-preferences.desktop.in.h:1
-msgid "Backup Preferences"
-msgstr ""
-
-#: ../data/deja-dup-preferences.desktop.in.h:2
-msgid "Change your backup settings"
-msgstr ""
-
-#: ../data/deja-dup-preferences.desktop.in.h:3
-msgid "Déjà Dup Backup Preferences"
-msgstr ""
-
-#: ../data/deja-dup-preferences.desktop.in.h:4
-#: ../preferences/PreferencesDialog.vala:33 ../preferences/preferences.vala:60
-msgid "Déjà Dup Preferences"
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
@@ -179,37 +148,57 @@ msgid ""
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
-msgid "The last time Déjà Dup was run"
+msgid "The last time Déjà Dup backed up"
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+msgid "The last time Déjà Dup restored"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
+msgid ""
+"The last time Déjà Dup successfully completed a backup. This time should be "
+"in ISO 8601 format."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+msgid ""
+"The last time Déjà Dup successfully completed a restore. This time should be "
+"in ISO 8601 format."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+msgid "The last time Déjà Dup was run"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid "The number of days between backups."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
 "longer."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
 "The type of backup location. If 'auto', a default will be chosen based on "
 "what is available."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
@@ -217,7 +206,7 @@ msgid ""
 "entries are relative to the user’s home directory."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
@@ -225,64 +214,68 @@ msgid ""
 "directories. Relative entries are relative to the user’s home directory."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid "Type of location to store backup"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 msgid "Unique ID of the external volume"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+msgid "Whether the welcome screen has been dismissed"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid "Whether to automatically back up on a regular schedule."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Whether to encrypt your backup"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid ""
 "Whether to encrypt your backup files in the storage location. It’s strongly "
 "recommended to leave this as ‘true’."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Whether to periodically back up"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid "Whether to request the root password"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Your Rackspace username"
 msgstr ""
 
@@ -294,21 +287,21 @@ msgstr ""
 msgid "Scanning…"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:90
+#: ../nautilus/NautilusExtension.c:91
 msgid "Restore Missing Files…"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:91
+#: ../nautilus/NautilusExtension.c:92
 msgid "Restore deleted files from backup"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:123
+#: ../nautilus/NautilusExtension.c:122
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../nautilus/NautilusExtension.c:127
+#: ../nautilus/NautilusExtension.c:126
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] ""
@@ -320,7 +313,7 @@ msgstr ""
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92
+#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:229
 #, c-format
 msgid "%1$s on %2$s"
 msgstr ""
@@ -438,7 +431,7 @@ msgstr ""
 msgid "Connect to Ubuntu One"
 msgstr ""
 
-#: ../common/CommonUtils.vala:224
+#: ../common/CommonUtils.vala:243
 msgid "Unknown"
 msgstr ""
 
@@ -649,22 +642,19 @@ msgid "_Back Up"
 msgstr ""
 
 #: ../deja-dup/AssistantBackup.vala:53 ../deja-dup/AssistantRestore.vala:95
-#: ../preferences/PreferencesDialog.vala:56
+#: ../preferences/Preferences.vala:249
 msgid "_Backup location:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:64
-#: ../preferences/PreferencesDialog.vala:74
+#: ../deja-dup/AssistantBackup.vala:64 ../preferences/Preferences.vala:281
 msgid "_Encrypt backup files"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:101
-#: ../preferences/PreferencesDialog.vala:110
+#: ../deja-dup/AssistantBackup.vala:101 ../preferences/Preferences.vala:316
 msgid "I_nclude files in folders:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:114
-#: ../preferences/PreferencesDialog.vala:129
+#: ../deja-dup/AssistantBackup.vala:114 ../preferences/Preferences.vala:335
 msgid "E_xcept files in folders:"
 msgstr ""
 
@@ -685,7 +675,7 @@ msgstr ""
 msgid "Include from:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:177
+#: ../deja-dup/AssistantBackup.vala:177 ../preferences/Preferences.vala:169
 msgid "Except for:"
 msgstr ""
 
@@ -696,12 +686,10 @@ msgid "Backing up:"
 msgstr ""
 
 #: ../deja-dup/AssistantBackup.vala:235
-#: ../preferences/PreferencesDialog.vala:158
 msgid "_Automatically back up on a regular schedule"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:238
-#: ../preferences/PreferencesDialog.vala:165
+#: ../deja-dup/AssistantBackup.vala:238 ../preferences/Preferences.vala:364
 #, c-format
 msgid "How _often to back up:"
 msgstr ""
@@ -909,7 +897,6 @@ msgid "_Resume Later"
 msgstr ""
 
 #: ../deja-dup/main.vala:33 ../monitor/monitor.vala:34
-#: ../preferences/preferences.vala:26
 msgid "Show version"
 msgstr ""
 
@@ -926,81 +913,48 @@ msgid "Restore deleted files"
 msgstr ""
 
 #: ../deja-dup/main.vala:52
-msgid "No filenames provided"
-msgstr ""
-
-#: ../deja-dup/main.vala:60
 msgid "No directory provided"
 msgstr ""
 
-#: ../deja-dup/main.vala:65
+#: ../deja-dup/main.vala:57
 msgid "Only one directory can be shown at once"
 msgstr ""
 
-#: ../deja-dup/main.vala:86
-msgid "FILES"
+#. Translators: The name is a play on the French phrase "déjà vu" meaning
+#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
+#. context is itself a reference to both the underlying command line tool
+#. "duplicity" and the act of duplicating data for backup.  As a whole, it
+#. may not be very translatable.
+#: ../deja-dup/main.vala:75
+msgid "Déjà Dup"
 msgstr ""
 
-#: ../deja-dup/main.vala:87
+#: ../deja-dup/main.vala:78
+msgid "[FILES…]"
+msgstr ""
+
+#: ../deja-dup/main.vala:79
 msgid "DIRECTORY"
 msgstr ""
 
 #. Translators: Wrap this to 80 characters per line if you can, as I have for English
-#: ../deja-dup/main.vala:91
+#: ../deja-dup/main.vala:83
 msgid ""
 "Déjà Dup is a simple backup tool.  It hides the complexity of backing up\n"
-"the 'right way' (encrypted, off-site, and regular) and uses duplicity as\n"
+"the Right Way (encrypted, off-site, and regular) and uses duplicity as\n"
 "the backend."
 msgstr ""
 
-#: ../deja-dup/main.vala:133
+#: ../deja-dup/main.vala:127
 msgid "Directory does not exists"
 msgstr ""
 
-#: ../deja-dup/main.vala:137
+#: ../deja-dup/main.vala:131
 msgid "You must provide a directory, not a file"
 msgstr ""
 
-#: ../deja-dup/MainWindow.vala:48 ../deja-dup/MainWindow.vala:194
-msgid "_Restore…"
-msgstr ""
-
-#: ../deja-dup/MainWindow.vala:74 ../deja-dup/MainWindow.vala:188
-msgctxt "back up is verb"
-msgid "_Back Up…"
-msgstr ""
-
-#: ../deja-dup/MainWindow.vala:172
-msgid "Could not open preferences"
-msgstr ""
-
-#: ../deja-dup/MainWindow.vala:185
-msgctxt "backup is noun"
-msgid "_Backup"
-msgstr ""
-
-#: ../deja-dup/MainWindow.vala:204
-msgid "_Edit"
-msgstr ""
-
-#: ../deja-dup/MainWindow.vala:211
-msgid "_Help"
-msgstr ""
-
-#: ../deja-dup/MainWindow.vala:214
-msgid "_Contents"
-msgstr ""
-
-#: ../deja-dup/MainWindow.vala:218
-msgid "Get Help _Online…"
-msgstr ""
-
-#: ../deja-dup/MainWindow.vala:222
-msgid "_Translate This Application…"
-msgstr ""
-
-#: ../deja-dup/MainWindow.vala:226
-msgid "_Report a Problem…"
+#: ../deja-dup/main.vala:138
+msgid "You must specify a mode"
 msgstr ""
 
 #. add_optional_label();
@@ -1068,20 +1022,58 @@ msgstr ""
 msgid "Scheduled backup delayed"
 msgstr ""
 
-#: ../preferences/PreferencesDialog.vala:88
-msgid "Storage"
+#: ../preferences/Preferences.vala:39
+#, c-format
+msgid "I want to _restore files from a previous backup…"
 msgstr ""
 
-#: ../preferences/PreferencesDialog.vala:148
-msgid "Files"
+#: ../preferences/Preferences.vala:55
+#, c-format
+msgid "Just show my backup _settings"
 msgstr ""
 
-#: ../preferences/PreferencesDialog.vala:183
+#: ../preferences/Preferences.vala:136
+msgid "Automatic _backups:"
+msgstr ""
+
+#: ../preferences/Preferences.vala:148
+msgid "Where:"
+msgstr ""
+
+#: ../preferences/Preferences.vala:159
+msgid "Include files from:"
+msgstr ""
+
+#: ../preferences/Preferences.vala:179
+msgid "Most recent backup:"
+msgstr ""
+
+#: ../preferences/Preferences.vala:206
+msgid "_Restore…"
+msgstr ""
+
+#: ../preferences/Preferences.vala:216
+msgid "Back Up _Now"
+msgstr ""
+
+#: ../preferences/Preferences.vala:236
+msgid "Overview"
+msgstr ""
+
+#: ../preferences/Preferences.vala:268
 #, c-format
 msgid "_Keep backups:"
 msgstr ""
 
-#: ../preferences/PreferencesDialog.vala:204
+#: ../preferences/Preferences.vala:294
+msgid "Storage"
+msgstr ""
+
+#: ../preferences/Preferences.vala:354
+msgid "Files"
+msgstr ""
+
+#: ../preferences/Preferences.vala:379
 msgid "Schedule"
 msgstr ""
 
@@ -1119,6 +1111,14 @@ msgid "At least %d day"
 msgid_plural "At least %d days"
 msgstr[0] ""
 msgstr[1] ""
+
+#: ../widgets/ConfigLabelBackupDate.vala:58
+msgid "Today"
+msgstr ""
+
+#: ../widgets/ConfigLabelBackupDate.vala:60
+msgid "Yesterday"
+msgstr ""
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1298,10 +1298,10 @@ msgstr[1] ""
 msgid "Could not display %s"
 msgstr ""
 
-#: ../widgets/WidgetUtils.vala:77
+#: ../widgets/WidgetUtils.vala:78
 msgid "About Déjà Dup"
 msgstr ""
 
-#: ../widgets/WidgetUtils.vala:81
+#: ../widgets/WidgetUtils.vala:82
 msgid "translator-credits"
 msgstr ""

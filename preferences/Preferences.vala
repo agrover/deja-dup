@@ -52,7 +52,7 @@ public class Preferences : Gtk.HBox
       settings.set_boolean(DejaDup.WELCOMED_KEY, true);
       top_notebook.page = 1;
     });
-    var continue_label = new Gtk.Label("<big>%s</big>".printf(_("Just show me my backup _settings")));
+    var continue_label = new Gtk.Label("<big>%s</big>".printf(_("Just show my backup _settings")));
     continue_label.set("mnemonic-widget", continue_button,
                        "wrap", true,
                        "justify", Gtk.Justification.CENTER,
