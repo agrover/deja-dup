@@ -234,10 +234,11 @@ static bool kickoff()
   // Don't run right now if an instance is already running
   if (pid == (Pid)0 && !op_active) {
     try {
-      string[] argv = new string[3];
+      string[] argv = new string[4];
       argv[0] = Path.build_filename(Config.PKG_LIBEXEC_DIR, "deja-dup");
       argv[1] = "--backup";
-      argv[2] = null;
+      argv[2] = "--auto";
+      argv[3] = null;
       Process.spawn_async(null, argv, null,
                           SpawnFlags.SEARCH_PATH |
                           SpawnFlags.DO_NOT_REAP_CHILD |

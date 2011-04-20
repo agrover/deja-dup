@@ -36,155 +36,6 @@ public class AssistantBackup : AssistantOperation
     resumed.connect(do_resume);
   }
   
-  Gtk.Widget make_backup_location_page()
-  {
-    int rows = 0;
-    Gtk.Widget w, label;
-    Gtk.SizeGroup label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
-    
-    var vbox = new Gtk.VBox(false, 0);
-    vbox.border_width = 12;
-    
-    var page = new Gtk.Table(rows, 2, false);
-    page.set("row-spacing", 6,
-             "column-spacing", 6);
-    
-    var location = new DejaDup.ConfigLocation(label_sizes);
-    label = new Gtk.Label.with_mnemonic(_("_Backup location:"));
-    label.set("xalign", 0.0f,
-              "mnemonic-widget", location);
-    label_sizes.add_widget(label);
-    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-    page.attach(location, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
-    ++rows;
-
-    page.attach(location.extras, 0, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
-    ++rows;
-    
-    w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
-    page.attach(w, 0, 2, rows, rows + 1,
-                Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                Gtk.AttachOptions.FILL, 0, 0);
-    ++rows;
-    
-    w = new DejaDup.ConfigLabelPolicy();
-    
-    vbox.pack_start(page, true, true, 0);
-    vbox.pack_end(w, false, false, 0);
-
-    vbox.show_all();
-
-    // Now make sure to reserve the excess space that the hidden bits of
-    // ConfigLocation will need.
-    Gtk.Requisition req, hidden;
-    vbox.get_preferred_size(null, out req);
-    hidden = location.hidden_size();
-    req.width = req.width + hidden.width;
-    req.height = req.height + hidden.height;
-    vbox.set_size_request(req.width, req.height);
-
-    return vbox;
-  }
-  
-  Gtk.Widget make_include_exclude_page()
-  {
-    int rows = 0;
-    Gtk.Widget w, label;
-    
-    var page = new Gtk.Table(rows, 2, false);
-    page.set("row-spacing", 6,
-             "column-spacing", 6,
-             "border-width", 12);
-    
-    w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY);
-    w.set_size_request(250, 100);
-    label = new Gtk.Label(_("I_nclude files in folders:"));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "wrap", true,
-              "width-request", 100,
-              "xalign", 0.0f,
-              "yalign", 0.0f);
-    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
-    ++rows;
-    
-    w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY);
-    w.set_size_request(250, 70);
-    label = new Gtk.Label(_("E_xcept files in folders:"));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "wrap", true,
-              "width-request", 100,
-              "xalign", 0.0f,
-              "yalign", 0.0f);
-    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0);
-    ++rows;
-    
-    return page;
-  }
-  
-  protected override void add_custom_config_pages()
-  {
-    if (automatic)
-      return;
-
-    var page = make_backup_location_page();
-    append_page(page);
-    set_page_title(page, _("Preferences"));
-    
-    page = make_include_exclude_page();
-    append_page(page);
-    set_page_title(page, _("Preferences"));
-  }
-  
-  protected override Gtk.Widget? make_confirm_page()
-  {
-    if (automatic)
-      return null;
-
-    int rows = 0;
-    Gtk.Widget label, w;
-    
-    var page = new Gtk.Table(rows, 2, false);
-    page.set("row-spacing", 6,
-             "column-spacing", 6,
-             "border-width", 12);
-    
-    label = new Gtk.Label(_("Backup location:"));
-    label.set("xalign", 0.0f);
-    w = new DejaDup.ConfigLabelLocation();
-    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-    ++rows;
-    
-    label = new Gtk.Label(_("Encrypted:"));
-    label.set("xalign", 0.0f);
-    w = new DejaDup.ConfigLabelBool(DejaDup.ENCRYPT_KEY);
-    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-    ++rows;
-    
-    label = new Gtk.Label(_("Include from:"));
-    label.set("xalign", 0.0f, "yalign", 0.0f);
-    w = new DejaDup.ConfigLabelList(DejaDup.INCLUDE_LIST_KEY);
-    w.set("width-request", 250);
-    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    ++rows;
-    
-    label = new Gtk.Label(_("Except for:"));
-    label.set("xalign", 0.0f, "yalign", 0.0f);
-    w = new DejaDup.ConfigLabelList(DejaDup.EXCLUDE_LIST_KEY);
-    w.set("width-request", 250);
-    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    ++rows;
-    
-    return page;
-  }
-  
   protected override DejaDup.Operation create_op()
   {
     realize();
@@ -198,11 +49,8 @@ public class AssistantBackup : AssistantOperation
       rv.is_full.connect((op) => {op.use_progress = true;});
     }
 
-    if (automatic) {
-      // If this was an automatic start, we should go into 'hide for now' mode,
-      // either showing minimized, or remain hidden
-      hide_for_now();
-    }
+    // Enter 'hide for now' mode, either showing minimized or remaining hidden
+    hide_for_now();
 
     return rv;
   }
@@ -230,32 +78,6 @@ public class AssistantBackup : AssistantOperation
     icon_name = "deja-dup";
   }
   
-  void add_periodic_widgets(Gtk.VBox page)
-  {
-    var check = new DejaDup.ConfigBool(DejaDup.PERIODIC_KEY, _("_Automatically back up on a regular schedule"));
-    
-    var combo = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
-    var label = new Gtk.Label("    %s".printf(_("How _often to back up:")));
-    label.set("mnemonic-widget", combo,
-              "use-underline", true,
-              "xalign", 0.0f);
-    
-    var hbox = new Gtk.HBox(false, 6);
-    hbox.set("child", label,
-             "child", combo);
-    
-    page.pack_end(hbox, false, false, 0);
-    page.pack_end(check, false, false, 0);
-    
-    periodic_toggle = new DejaDup.ToggleGroup(check);
-    periodic_toggle.add_dependent(label);
-    periodic_toggle.add_dependent(combo);
-    periodic_toggle.check();
-    
-    check.show_all();
-    hbox.show_all();
-  }
-  
   protected override void do_prepare(Assistant assist, Gtk.Widget page)
   {
     base.do_prepare(assist, page);
@@ -265,22 +87,7 @@ public class AssistantBackup : AssistantOperation
         set_page_title(page, _("Backup Failed"));
       }
       else {
-        set_page_title(page, _("Backup Finished"));
-        summary_label.label = _("Your files were successfully backed up.");
-
-        // Summary page is a vbox, let's add some widgets here to allow user to
-        // make this backup on a regular basis.  But only show if user isn't
-        // already automatically backing up.
-        var settings = DejaDup.get_settings();
-        bool val = false;
-        val = settings.get_boolean(DejaDup.PERIODIC_KEY);
-        if (!val)
-          add_periodic_widgets((Gtk.VBox)page);
-
-        if (automatic)
-          Idle.add(() => {do_close(); return false;});
-        else
-          Idle.add(() => {force_visible(false); return false;});
+        Idle.add(() => {do_close(); return false;});
       }
     }
     else if (page == progress_page) {

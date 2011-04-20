@@ -27,12 +27,14 @@ class DejaDupApp : Object
   static bool show_version = false;
   static bool restore_mode = false;
   static bool backup_mode = false;
+  static bool automatic = false;
   static bool restoremissing_mode = false;
   static string[] filenames = null;
   static const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
     {"restore", 0, 0, OptionArg.NONE, ref restore_mode, N_("Restore given files"), null},
     {"backup", 0, 0, OptionArg.NONE, ref backup_mode, N_("Immediately start a backup"), null},
+    {"auto", 0, 0, OptionArg.NONE, ref automatic, N_("Indicates this backup was scheduled"), null},
     {"restore-missing", 0, 0, OptionArg.NONE, ref restoremissing_mode, N_("Restore deleted files"), null},
     {"", 0, 0, OptionArg.FILENAME_ARRAY, ref filenames, null, null}, // remaining
     {null}
@@ -118,7 +120,7 @@ class DejaDupApp : Object
       toplevel.show_all();
     }
     else if (backup_mode) {
-      toplevel = new AssistantBackup(true);
+      toplevel = new AssistantBackup(automatic);
       // specifically don't show
     }
     else if (restoremissing_mode){
