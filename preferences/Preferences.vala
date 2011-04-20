@@ -109,6 +109,7 @@ public class Preferences : Gtk.HBox
     var cat_model = new Gtk.ListStore(2, typeof(string), typeof(int));
     var tree = new Gtk.TreeView.with_model(cat_model);
     tree.headers_visible = false;
+    tree.set_size_request(150, -1);
     tree.insert_column_with_attributes(-1, null, new Gtk.CellRendererText(),
                                        "text", 0);
     tree.get_selection().set_mode(Gtk.SelectionMode.SINGLE);
