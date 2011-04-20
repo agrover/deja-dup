@@ -24,6 +24,16 @@ namespace DejaDup {
 public class Preferences : Gtk.HBox
 {
   Gtk.Notebook top_notebook;
+  Gtk.Widget backup_button;
+  Gtk.Widget restore_button;
+  uint bus_watch_id = 0;
+
+  ~Preferences() {
+    if (bus_watch_id > 0) {
+      Bus.unwatch_name(bus_watch_id);
+      bus_watch_id = 0;
+    }
+  }
 
   Gtk.Widget make_welcome_page()
   {
@@ -212,6 +222,7 @@ public class Preferences : Gtk.HBox
         warning("%s\n", e.message);
       }
     });
+    restore_button = w;
     hbox.add(w);
     w = new Gtk.Button.with_mnemonic(_("Back Up _Now"));
     (w as Gtk.Button).clicked.connect(() => {
@@ -222,6 +233,7 @@ public class Preferences : Gtk.HBox
         warning("%s\n", e.message);
       }
     });
+    backup_button = w;
     hbox.add(w);
     w = new Gtk.Button.from_stock(Gtk.Stock.HELP);
     (w as Gtk.Button).clicked.connect(() => {
@@ -229,6 +241,13 @@ public class Preferences : Gtk.HBox
     });
     hbox.add(w);
     (hbox as Gtk.HButtonBox).set_child_secondary(w, true);
+
+    bus_watch_id = Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
+                                  BusNameWatcherFlags.NONE,
+                                  () => {restore_button.sensitive = false;
+                                         backup_button.sensitive = false;},
+                                  () => {restore_button.sensitive = true;
+                                         backup_button.sensitive = true;});
 
     page_box.pack_start(vbox, true, true);
     page_box.pack_end(hbox, false, false, 0);
@@ -379,7 +398,7 @@ public class Preferences : Gtk.HBox
     cat_model.insert_with_values(out iter, i, 0, _("Schedule"), 1, i);
     ++i;
 
-    // Select first one by deault
+    // Select first one by default
     cat_model.get_iter_first(out iter);
     tree.get_selection().select_iter(iter);
 
