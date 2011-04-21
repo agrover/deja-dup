@@ -21,8 +21,6 @@ using GLib;
 
 public class AssistantBackup : AssistantOperation
 {
-  DejaDup.ToggleGroup periodic_toggle;
-  
   public AssistantBackup(bool automatic)
   {
     Object(automatic: automatic);
@@ -72,12 +70,7 @@ public class AssistantBackup : AssistantOperation
     // "Backing up '%s'".  %s is a filename.
     return _("Backing up:");
   }
-  
-  protected override void set_op_icon_name()
-  {
-    icon_name = "deja-dup";
-  }
-  
+
   protected override void do_prepare(Assistant assist, Gtk.Widget page)
   {
     base.do_prepare(assist, page);

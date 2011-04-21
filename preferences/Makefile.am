@@ -24,7 +24,6 @@ libdeja_dup_la_CFLAGS = \
 	-I$(top_srcdir)/widgets \
 	$(PREF_CFLAGS) \
 	$(DEBUG_CFLAGS) \
-	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 libdeja_dup_la_LIBADD = $(PREF_LIBS) @INTLLIBS@ $(top_builddir)/widgets/libwidgets.la

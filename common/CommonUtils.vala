@@ -59,6 +59,21 @@ public void update_last_run_timestamp(TimestampType type) throws Error
     settings.set_string(LAST_RESTORE_KEY, cur_time_str);
 }
 
+public void run_deja_dup(string args, AppLaunchContext? ctx = null,
+                         List<File>? files = null)
+{
+  var cmd = "'%s' %s".printf(Path.build_filename(Config.PKG_LIBEXEC_DIR, "deja-dup"), args);
+  var flags = AppInfoCreateFlags.SUPPORTS_STARTUP_NOTIFICATION |
+              AppInfoCreateFlags.SUPPORTS_URIS;
+  try {
+    var app = AppInfo.create_from_commandline(cmd, _("Déjà Dup"), flags);
+    app.launch(files, ctx);
+  }
+  catch (Error e) {
+    warning("%s\n", e.message);
+  }
+}
+
 public string get_trash_path()
 {
   return Path.build_filename(Environment.get_user_data_dir(), "Trash");

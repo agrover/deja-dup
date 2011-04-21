@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
     © 2010 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
@@ -80,7 +80,7 @@ public abstract class AssistantOperation : Assistant
 
   construct
   {
-    set_op_icon_name();
+    icon_name = "deja-dup";
     op_icon = make_op_icon();
     header_icon.pixbuf = op_icon;
 
@@ -104,7 +104,7 @@ public abstract class AssistantOperation : Assistant
    * Creates confirmation page that should create confirm_page widget that
    * is presented for final confirmation.
    */
-  protected abstract Gtk.Widget? make_confirm_page();
+  protected virtual Gtk.Widget? make_confirm_page() {return null;}
   protected virtual void add_setup_pages() {}
   protected virtual void add_custom_config_pages(){}
   /*
@@ -116,7 +116,6 @@ public abstract class AssistantOperation : Assistant
    */
   protected abstract DejaDup.Operation create_op();
   protected abstract string get_progress_file_prefix();
-  protected virtual void set_op_icon_name() {}
 
   protected Gdk.Pixbuf? make_op_icon()
   {

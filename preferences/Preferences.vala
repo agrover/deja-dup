@@ -38,13 +38,8 @@ public class Preferences : Gtk.HBox
   Gtk.Widget make_welcome_page()
   {
     var restore_button = new Gtk.Button();
-    restore_button.clicked.connect(() => {
-      try {
-        Process.spawn_command_line_async("%s --restore".printf(Path.build_filename(Config.PKG_LIBEXEC_DIR, "deja-dup")));
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
+    restore_button.clicked.connect((b) => {
+      run_deja_dup("--restore", b.get_display().get_app_launch_context());
     });
     var restore_label = new Gtk.Label("<big>%s</big>".printf(_("I want to _restore files from a previous backup…")));
     restore_label.set("mnemonic-widget", restore_button,
@@ -214,24 +209,14 @@ public class Preferences : Gtk.HBox
     hbox.spacing = 12;
     (hbox as Gtk.HButtonBox).layout_style = Gtk.ButtonBoxStyle.END;
     w = new Gtk.Button.with_mnemonic(_("_Restore…"));
-    (w as Gtk.Button).clicked.connect(() => {
-      try {
-        Process.spawn_command_line_async("%s --restore".printf(Path.build_filename(Config.PKG_LIBEXEC_DIR, "deja-dup")));
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
+    (w as Gtk.Button).clicked.connect((b) => {
+      run_deja_dup("--restore", b.get_display().get_app_launch_context());
     });
     restore_button = w;
     hbox.add(w);
     w = new Gtk.Button.with_mnemonic(_("Back Up _Now"));
-    (w as Gtk.Button).clicked.connect(() => {
-      try {
-        Process.spawn_command_line_async("%s --backup".printf(Path.build_filename(Config.PKG_LIBEXEC_DIR, "deja-dup")));
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
+    (w as Gtk.Button).clicked.connect((b) => {
+      run_deja_dup("--backup", b.get_display().get_app_launch_context());
     });
     backup_button = w;
     hbox.add(w);

@@ -21,6 +21,7 @@ noinst_LTLIBRARIES = libcommon.la
 libcommon_la_CFLAGS = \
 	$(COMMON_CFLAGS) \
 	$(DEBUG_CFLAGS) \
+	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 libcommon_la_LIBADD = $(COMMON_LIBS) @INTLLIBS@

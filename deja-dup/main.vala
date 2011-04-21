@@ -121,7 +121,8 @@ class DejaDupApp : Object
     }
     else if (backup_mode) {
       toplevel = new AssistantBackup(automatic);
-      // specifically don't show
+      // specifically don't show, but do notify that we're up
+      Gdk.notify_startup_complete();
     }
     else if (restoremissing_mode){
       File list_directory = File.new_for_commandline_arg(filenames[0]);

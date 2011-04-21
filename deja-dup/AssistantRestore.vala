@@ -316,12 +316,7 @@ public class AssistantRestore : AssistantOperation
     // "Restoring '%s'".  %s is a filename.
     return _("Restoring:");
   }
-  
-  protected override void set_op_icon_name()
-  {
-    icon_name = "deja-dup";
-  }
-  
+
   bool is_same_day(TimeVal one, TimeVal two)
   {
     Date day1 = Date(), day2 = Date();
