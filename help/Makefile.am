@@ -23,7 +23,10 @@ DOC_ID = deja-dup
 DOC_PAGES = \
 	backup-auto.page \
 	backup-first.page \
+	credits.page \
+	contribute.page \
 	index.page \
+	license.page \
 	prefs.page \
 	restore-full.page \
 	restore-lost.page \
@@ -47,6 +50,9 @@ translations/deja-dup-help.pot: POT/POT.po
 	sed 's|^#: /.*/\(.*\)|#: \1|g' $^ > $@
 
 dist-hook: doc-dist-hook
+	for p in $(REAL_LINGUAS); do \
+		sed -i 's|<list><title>.*</title><item><p>translator-credits</p></item></list>||' "$(distdir)/$$p/credits.page"; \
+	done
 
 EXTRA_DIST = translations po.stamp
 DISTCLEANFILES = translations/deja-dup-help.pot
