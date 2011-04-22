@@ -85,63 +85,6 @@ static bool handle_options(out int status)
   return true;
 }
 
-static Date today()
-{
-  TimeVal cur_time = TimeVal();
-  cur_time.get_current_time();
-  Date cur_date = Date();
-  cur_date.set_time_val(cur_time);
-  return cur_date;
-}
-
-static Date most_recent_scheduled_date(int period)
-{
-  // Compare days between epoch and current days.  Mod by period to find
-  // scheduled dates.
-  
-  Date epoch = Date();
-  epoch.set_dmy(1, 1, 1970);
-  
-  Date cur_date = today();
-  
-  int between = epoch.days_between(cur_date);
-  int mod = between % period;
-  
-  cur_date.subtract_days(mod);
-  return cur_date;
-}
-
-static Date next_run_date()
-{
-  var settings = DejaDup.get_settings();
-  var periodic = settings.get_boolean(DejaDup.PERIODIC_KEY);
-  var last_run_string = settings.get_string(DejaDup.LAST_RUN_KEY);
-  var period_days = settings.get_int(DejaDup.PERIODIC_PERIOD_KEY);
-  
-  if (!periodic)
-    return Date();
-  if (last_run_string == null)
-    return today();
-  if (period_days <= 0)
-    period_days = 1;
-  
-  Date last_run = Date();
-  TimeVal last_run_tval = TimeVal();
-  if (!last_run_tval.from_iso8601(last_run_string))
-    return today();
-  
-  last_run.set_time_val(last_run_tval);
-  if (!last_run.valid())
-    return today();
-  
-  Date last_scheduled = most_recent_scheduled_date(period_days);
-  
-  if (last_scheduled.compare(last_run) <= 0)
-    last_scheduled.add_days(period_days);
-  
-  return last_scheduled;
-}
-
 // This is slightly more tortuous than I'd like.  API allows us to convert Date
 // to Time.  We can then convert Time to seconds-since-epoch and stuffs that
 // into a TimeVal.
@@ -259,7 +202,7 @@ static bool kickoff()
 
 static bool seconds_until_next_run(out long secs)
 {
-  var next_date = next_run_date();
+  var next_date = DejaDup.next_run_date();
   if (!next_date.valid()) {
     debug("Invalid next run date.  Not scheduling a backup.");
     return false;
@@ -287,7 +230,7 @@ static void prepare_run(long wait_time)
 
 static void prepare_tomorrow()
 {
-  Date tomorrow = today();
+  Date tomorrow = DejaDup.today();
   tomorrow.add_days(1);
   var secs = seconds_until(tomorrow);
   prepare_run(secs);

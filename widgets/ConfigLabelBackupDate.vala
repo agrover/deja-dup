@@ -23,19 +23,48 @@ namespace DejaDup {
 
 public class ConfigLabelBackupDate : ConfigLabel
 {
+  public enum Kind {LAST, NEXT}
+  public Kind kind {get; construct;}
   public bool empty {get; protected set; default = true;}
 
-  public ConfigLabelBackupDate()
+  public ConfigLabelBackupDate(Kind kind)
   {
-    Object();
+    Object(kind: kind);
   }
 
   construct {
     watch_key(DejaDup.LAST_BACKUP_KEY);
     watch_key(DejaDup.LAST_RUN_KEY);
+    if (kind == Kind.NEXT) {
+      watch_key(DejaDup.PERIODIC_KEY);
+      watch_key(DejaDup.PERIODIC_PERIOD_KEY);
+    }
   }
 
-  protected override async void set_from_config()
+  bool is_same_day(DateTime one, DateTime two)
+  {
+    int ny, nm, nd, dy, dm, dd;
+    one.get_ymd(out ny, out nm, out nd);
+    two.get_ymd(out dy, out dm, out dd);
+    return (ny == dy && nm == dm && nd == dd);
+  }
+
+  string pretty_date_name(DateTime date)
+  {
+      var now = new DateTime.now_local();
+
+      // Check for some really simple/common friendly names
+      if (is_same_day(date, now))
+        return _("Today");
+      else if (is_same_day(date, now.add_days(-1)))
+        return _("Yesterday");
+      else if (is_same_day(date, now.add_days(1)))
+        return _("Tomorrow");
+      else
+        return date.format("%x");
+  }
+
+  protected void set_from_config_last()
   {
     var val = settings.get_string(DejaDup.LAST_BACKUP_KEY);
     if (val == "")
@@ -47,22 +76,34 @@ public class ConfigLabelBackupDate : ConfigLabel
       empty = true;
     }
     else {
-      var now = new DateTime.now_local();
-      var date = new DateTime.from_timeval_local(time);
-
-      // Check for some really simple/common friendly names
-      int ny, nm, nd, dy, dm, dd;
-      now.get_ymd(out ny, out nm, out nd);
-      date.get_ymd(out dy, out dm, out dd);
-      if (ny == dy && nm == dm && nd == dd)
-        label.label = _("Today");
-      else if (ny == dy && nm == dm && nd - 1 == dd)
-        label.label = _("Yesterday");
-      else
-        label.label = date.format("%x");
-
+      label.label = pretty_date_name(new DateTime.from_timeval_local(time));
       empty = false;
     }
+  }
+
+  protected void set_from_config_next()
+  {
+    var next = DejaDup.next_run_date();
+    if (next.valid()) {
+      var nextd = new DateTime.local(next.get_year(),
+                                     next.get_month(),
+                                     next.get_day(),
+                                     0, 0, 0.0);
+      label.label = pretty_date_name(nextd);
+      empty = false;
+    }
+    else {
+      label.label = "";
+      empty = true;
+    }
+  }
+
+  protected override async void set_from_config()
+  {
+    if (kind == Kind.LAST)
+      set_from_config_last();
+    else
+      set_from_config_next();
   }
 }
 

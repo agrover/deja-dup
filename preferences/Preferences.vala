@@ -181,10 +181,17 @@ public class Preferences : Gtk.HBox
                  Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     ++row;
 
+    vbox.pack_start(table, false, true);
+
+    table = new Gtk.Table(0, 0, false);
+    table.row_spacing = 6;
+    table.column_spacing = 6;
+    row = 0;
+
     var bdate_label = new Gtk.Label(_("Most recent backup:"));
     bdate_label.xalign = 0.0f;
     label_sizes.add_widget(bdate_label);
-    var bdate = new DejaDup.ConfigLabelBackupDate();
+    var bdate = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.LAST);
 
     bdate_label.show_all();
     bdate.show_all();
@@ -200,6 +207,28 @@ public class Preferences : Gtk.HBox
     table.attach(bdate_label, 0, 1, row, row + 1,
                  Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     table.attach(bdate, 1, 2, row, row + 1,
+                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    ++row;
+
+    var ndate_label = new Gtk.Label(_("Next automatic backup:"));
+    ndate_label.xalign = 0.0f;
+    label_sizes.add_widget(ndate_label);
+    var ndate = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.NEXT);
+
+    ndate_label.show_all();
+    ndate.show_all();
+    ndate_label.no_show_all = true;
+    ndate.no_show_all = true;
+    ndate_label.visible = !ndate.empty;
+    ndate.visible = !ndate.empty;
+    ndate.notify["empty"].connect(() => {
+      ndate_label.visible = !ndate.empty;
+      ndate.visible = !ndate.empty;
+    });
+
+    table.attach(ndate_label, 0, 1, row, row + 1,
+                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    table.attach(ndate, 1, 2, row, row + 1,
                  Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     ++row;
 
