@@ -83,8 +83,20 @@ public class Preferences : Gtk.HBox
     icon.set("icon-name", "deja-dup",
              "pixel-size", 256);
 
+    var label = new Gtk.Label("<b><big>%s</big></b>".printf(_("Déjà Dup Backup Tool")));
+    label.set("wrap", true,
+              "justify", Gtk.Justification.CENTER,
+              "use-markup", true);
+
+    var ibox = new Gtk.VBox(false, 6);
+    ibox.pack_start(icon, false, false);
+    ibox.pack_start(label, false, false);
+
+    var ialign = new Gtk.Alignment(0.5f, 0.5f, 0.0f, 0.0f);
+    ialign.add(ibox);
+
     var hbox = new Gtk.HBox(true, 0);
-    hbox.pack_start(icon, true, false);
+    hbox.pack_start(ialign, true, false);
     hbox.pack_start(balign, true, false);
 
     var page = new Gtk.Alignment(0.0f, 0.5f, 1.0f, 0.0f);
