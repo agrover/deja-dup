@@ -60,8 +60,24 @@ public class ConfigLabelBackupDate : ConfigLabel
         return _("Yesterday");
       else if (is_same_day(date, now.add_days(1)))
         return _("Tomorrow");
-      else
-        return date.format("%x");
+      else if (now.compare(date) < 0) {
+        // date is in future
+        now = new DateTime.local(now.get_year(),
+                                 now.get_month(),
+                                 now.get_day_of_month(),
+                                 0, 0, 0.0);
+        var diff = date.difference(now) / TimeSpan.DAY;
+        return ngettext("%d day from now", "%d days from now", diff).printf(diff);
+      }
+      else {
+        // date is in past
+        now = new DateTime.local(now.get_year(),
+                                 now.get_month(),
+                                 now.get_day_of_month(),
+                                 0, 0, 0.0);
+        var diff = now.difference(date) / TimeSpan.DAY + 1;
+        return ngettext("%d day ago", "%d days ago", diff).printf(diff);
+      }
   }
 
   protected void set_from_config_last()

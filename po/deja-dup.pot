@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: mike@mterry.name\n"
-"POT-Creation-Date: 2011-04-20 16:41-0400\n"
+"POT-Creation-Date: 2011-04-25 21:42-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:334
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:278
 msgid "Déjà Dup Monitor"
 msgstr ""
 
@@ -283,7 +283,7 @@ msgstr ""
 msgid "Folder:"
 msgstr ""
 
-#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:171
+#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:170
 msgid "Scanning…"
 msgstr ""
 
@@ -313,7 +313,7 @@ msgstr ""
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:229
+#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:304
 #, c-format
 msgid "%1$s on %2$s"
 msgstr ""
@@ -431,7 +431,16 @@ msgstr ""
 msgid "Connect to Ubuntu One"
 msgstr ""
 
-#: ../common/CommonUtils.vala:243
+#. Translators: The name is a play on the French phrase "déjà vu" meaning
+#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
+#. context is itself a reference to both the underlying command line tool
+#. "duplicity" and the act of duplicating data for backup.  As a whole, it
+#. may not be very translatable.
+#: ../common/CommonUtils.vala:69 ../deja-dup/main.vala:77
+msgid "Déjà Dup"
+msgstr ""
+
+#: ../common/CommonUtils.vala:318
 msgid "Unknown"
 msgstr ""
 
@@ -615,7 +624,7 @@ msgstr ""
 msgid "Backing up…"
 msgstr ""
 
-#: ../common/Operation.vala:74 ../deja-dup/AssistantRestore.vala:504
+#: ../common/Operation.vala:74 ../deja-dup/AssistantRestore.vala:499
 msgid "Restoring…"
 msgstr ""
 
@@ -631,119 +640,64 @@ msgstr ""
 msgid "Another Déjà Dup is already running"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:33
+#: ../deja-dup/AssistantBackup.vala:31
 msgctxt "back up is verb"
 msgid "Back Up"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:34
+#: ../deja-dup/AssistantBackup.vala:32
 msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:53 ../deja-dup/AssistantRestore.vala:95
-#: ../preferences/Preferences.vala:249
-msgid "_Backup location:"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:64 ../preferences/Preferences.vala:281
-msgid "_Encrypt backup files"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:101 ../preferences/Preferences.vala:316
-msgid "I_nclude files in folders:"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:114 ../preferences/Preferences.vala:335
-msgid "E_xcept files in folders:"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:135 ../deja-dup/AssistantBackup.vala:139
-#: ../deja-dup/AssistantRestore.vala:130
-msgid "Preferences"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:155 ../deja-dup/AssistantRestore.vala:226
-msgid "Backup location:"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:162 ../deja-dup/AssistantRestore.vala:233
-msgid "Encrypted:"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:169
-msgid "Include from:"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:177 ../preferences/Preferences.vala:169
-msgid "Except for:"
-msgstr ""
-
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:225
+#: ../deja-dup/AssistantBackup.vala:71
 msgid "Backing up:"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:235
-msgid "_Automatically back up on a regular schedule"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:238 ../preferences/Preferences.vala:364
-#, c-format
-msgid "How _often to back up:"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:265
+#: ../deja-dup/AssistantBackup.vala:80
 msgid "Backup Failed"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:268
-msgid "Backup Finished"
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:269
-msgid "Your files were successfully backed up."
-msgstr ""
-
-#: ../deja-dup/AssistantBackup.vala:287
+#: ../deja-dup/AssistantBackup.vala:87
 msgid "Backing Up…"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:170
+#: ../deja-dup/AssistantOperation.vala:169
 msgid "Scanning:"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:244
+#: ../deja-dup/AssistantOperation.vala:243
 msgid "_Details"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:294
+#: ../deja-dup/AssistantOperation.vala:293
 msgid "E_ncryption password:"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:309
+#: ../deja-dup/AssistantOperation.vala:308
 msgid "Confir_m password:"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:319
+#: ../deja-dup/AssistantOperation.vala:318
 msgid "_Show password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:328
+#: ../deja-dup/AssistantOperation.vala:327
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:407
+#: ../deja-dup/AssistantOperation.vala:406
 msgid "Summary"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:422
+#: ../deja-dup/AssistantOperation.vala:421
 msgid "Password Needed"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:677
+#: ../deja-dup/AssistantOperation.vala:676
 msgid "Déjà Dup backup passphrase"
 msgstr ""
 
@@ -755,8 +709,16 @@ msgstr ""
 msgid "_Restore"
 msgstr ""
 
+#: ../deja-dup/AssistantRestore.vala:95 ../preferences/Preferences.vala:294
+msgid "_Backup location:"
+msgstr ""
+
 #: ../deja-dup/AssistantRestore.vala:106
 msgid "Backup files are _encrypted"
+msgstr ""
+
+#: ../deja-dup/AssistantRestore.vala:130
+msgid "Preferences"
 msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:151
@@ -777,6 +739,14 @@ msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:193
 msgid "Restore _folder:"
+msgstr ""
+
+#: ../deja-dup/AssistantRestore.vala:226
+msgid "Backup location:"
+msgstr ""
+
+#: ../deja-dup/AssistantRestore.vala:233
+msgid "Encrypted:"
 msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:240
@@ -809,38 +779,38 @@ msgstr ""
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: ../deja-dup/AssistantRestore.vala:364
+#: ../deja-dup/AssistantRestore.vala:359
 #, c-format
 msgid "%x %X"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:377
+#: ../deja-dup/AssistantRestore.vala:372
 msgid "No backups to restore"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:455
+#: ../deja-dup/AssistantRestore.vala:450
 msgid "Original location"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:468
+#: ../deja-dup/AssistantRestore.vala:463
 msgid "File to restore:"
 msgid_plural "Files to restore:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../deja-dup/AssistantRestore.vala:492
+#: ../deja-dup/AssistantRestore.vala:487
 msgid "Restore Failed"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:494
+#: ../deja-dup/AssistantRestore.vala:489
 msgid "Restore Finished"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:496
+#: ../deja-dup/AssistantRestore.vala:491
 msgid "Your files were successfully restored."
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:498
+#: ../deja-dup/AssistantRestore.vala:493
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] ""
@@ -896,64 +866,59 @@ msgstr ""
 msgid "_Resume Later"
 msgstr ""
 
-#: ../deja-dup/main.vala:33 ../monitor/monitor.vala:34
+#: ../deja-dup/main.vala:34 ../monitor/monitor.vala:34
 msgid "Show version"
 msgstr ""
 
-#: ../deja-dup/main.vala:34
+#: ../deja-dup/main.vala:35
 msgid "Restore given files"
 msgstr ""
 
-#: ../deja-dup/main.vala:35
+#: ../deja-dup/main.vala:36
 msgid "Immediately start a backup"
 msgstr ""
 
-#: ../deja-dup/main.vala:36
+#: ../deja-dup/main.vala:37
+msgid "Indicates this backup was scheduled"
+msgstr ""
+
+#: ../deja-dup/main.vala:38
 msgid "Restore deleted files"
 msgstr ""
 
-#: ../deja-dup/main.vala:52
+#: ../deja-dup/main.vala:54
 msgid "No directory provided"
 msgstr ""
 
-#: ../deja-dup/main.vala:57
+#: ../deja-dup/main.vala:59
 msgid "Only one directory can be shown at once"
 msgstr ""
 
-#. Translators: The name is a play on the French phrase "déjà vu" meaning
-#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
-#. context is itself a reference to both the underlying command line tool
-#. "duplicity" and the act of duplicating data for backup.  As a whole, it
-#. may not be very translatable.
-#: ../deja-dup/main.vala:75
-msgid "Déjà Dup"
-msgstr ""
-
-#: ../deja-dup/main.vala:78
+#: ../deja-dup/main.vala:80
 msgid "[FILES…]"
 msgstr ""
 
-#: ../deja-dup/main.vala:79
+#: ../deja-dup/main.vala:81
 msgid "DIRECTORY"
 msgstr ""
 
 #. Translators: Wrap this to 80 characters per line if you can, as I have for English
-#: ../deja-dup/main.vala:83
+#: ../deja-dup/main.vala:85
 msgid ""
 "Déjà Dup is a simple backup tool.  It hides the complexity of backing up\n"
 "the Right Way (encrypted, off-site, and regular) and uses duplicity as\n"
 "the backend."
 msgstr ""
 
-#: ../deja-dup/main.vala:127
+#: ../deja-dup/main.vala:130
 msgid "Directory does not exists"
 msgstr ""
 
-#: ../deja-dup/main.vala:131
+#: ../deja-dup/main.vala:134
 msgid "You must provide a directory, not a file"
 msgstr ""
 
-#: ../deja-dup/main.vala:138
+#: ../deja-dup/main.vala:141
 msgid "You must specify a mode"
 msgstr ""
 
@@ -1018,62 +983,91 @@ msgstr ""
 msgid "%.1f%% complete"
 msgstr ""
 
-#: ../monitor/monitor.vala:230
+#: ../monitor/monitor.vala:173
 msgid "Scheduled backup delayed"
 msgstr ""
 
-#: ../preferences/Preferences.vala:39
+#: ../preferences/Preferences.vala:44
 #, c-format
 msgid "I want to _restore files from a previous backup…"
 msgstr ""
 
-#: ../preferences/Preferences.vala:55
+#: ../preferences/Preferences.vala:60
 #, c-format
 msgid "Just show my backup _settings"
 msgstr ""
 
-#: ../preferences/Preferences.vala:136
+#: ../preferences/Preferences.vala:86
+#, c-format
+msgid "Déjà Dup Backup Tool"
+msgstr ""
+
+#: ../preferences/Preferences.vala:153
 msgid "Automatic _backups:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:148
+#: ../preferences/Preferences.vala:165
 msgid "Where:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:176
 msgid "Include files from:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:179
+#: ../preferences/Preferences.vala:186
+msgid "Except for:"
+msgstr ""
+
+#: ../preferences/Preferences.vala:203
 msgid "Most recent backup:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:225
+msgid "Next automatic backup:"
+msgstr ""
+
+#: ../preferences/Preferences.vala:252
 msgid "_Restore…"
 msgstr ""
 
-#: ../preferences/Preferences.vala:216
+#: ../preferences/Preferences.vala:258
 msgid "Back Up _Now"
 msgstr ""
 
-#: ../preferences/Preferences.vala:236
+#: ../preferences/Preferences.vala:281
 msgid "Overview"
 msgstr ""
 
-#: ../preferences/Preferences.vala:268
+#: ../preferences/Preferences.vala:313
 #, c-format
 msgid "_Keep backups:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:326
+msgid "_Encrypt backup files"
+msgstr ""
+
+#: ../preferences/Preferences.vala:339
 msgid "Storage"
 msgstr ""
 
-#: ../preferences/Preferences.vala:354
+#: ../preferences/Preferences.vala:361
+msgid "I_nclude files in folders:"
+msgstr ""
+
+#: ../preferences/Preferences.vala:380
+msgid "E_xcept files in folders:"
+msgstr ""
+
+#: ../preferences/Preferences.vala:399
 msgid "Files"
 msgstr ""
 
-#: ../preferences/Preferences.vala:379
+#: ../preferences/Preferences.vala:409
+msgid "How _often to back up:"
+msgstr ""
+
+#: ../preferences/Preferences.vala:424
 msgid "Schedule"
 msgstr ""
 
@@ -1119,6 +1113,24 @@ msgstr ""
 #: ../widgets/ConfigLabelBackupDate.vala:60
 msgid "Yesterday"
 msgstr ""
+
+#: ../widgets/ConfigLabelBackupDate.vala:62
+msgid "Tomorrow"
+msgstr ""
+
+#: ../widgets/ConfigLabelBackupDate.vala:70
+#, c-format
+msgid "%d day from now"
+msgid_plural "%d days from now"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../widgets/ConfigLabelBackupDate.vala:79
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
