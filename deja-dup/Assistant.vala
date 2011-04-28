@@ -144,6 +144,11 @@ public abstract class Assistant : Gtk.Dialog
     hide();
   }
 
+  public bool is_interrupted()
+  {
+    return interrupted != null;
+  }
+
   bool last_op_was_back = false;
   public void skip()
   {

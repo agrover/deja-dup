@@ -567,10 +567,10 @@ public abstract class AssistantOperation : Assistant
 
   bool do_minimize_to_tray(Gdk.Event event)
   {
-    if (op != null)
-      hide_for_now ();
+    if (is_interrupted() || op == null)
+      do_cancel(); // instead, do the normal cancel operation
     else
-      do_cancel(); // otherwise, do the normal cancel operation
+      hide_for_now ();
 
     return true;
   }
