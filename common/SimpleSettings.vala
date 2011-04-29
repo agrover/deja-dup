@@ -33,10 +33,14 @@ namespace DejaDup {
 
 public class SimpleSettings : Settings
 {
-  public SimpleSettings(string schema)
+  public bool read_only {get; set;}
+
+  public SimpleSettings(string schema, bool ro)
   {
-    Object(schema: schema);
+    Object(schema: schema, read_only: ro);
   }
+
+  public new void apply() {if (!read_only) base.apply();}
 
   public new void set_string(string k, string v) {if (get_string(k) != v) base.set_string(k, v);}
   public new void set_boolean(string k, bool v) {if (get_boolean(k) != v) base.set_boolean(k, v);}

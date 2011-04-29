@@ -84,7 +84,7 @@ public abstract class AssistantOperation : Assistant
     op_icon = make_op_icon();
     header_icon.pixbuf = op_icon;
 
-    add_config_pages_if_needed();
+    add_custom_config_pages();
     add_setup_pages();
     add_confirm_page();
     add_password_page();
@@ -383,15 +383,6 @@ public abstract class AssistantOperation : Assistant
     return val == "";
   }
 
-  void add_config_pages_if_needed()
-  {
-    /*
-     * Creates configure pages if required
-     */
-    if (is_first_time())
-      add_custom_config_pages();
-  }
-  
   void add_confirm_page()
   {
     /*

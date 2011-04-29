@@ -116,6 +116,15 @@ class DejaDupApp : Object
         while (filenames[i] != null)
           file_list.append(File.new_for_commandline_arg(filenames[i++]));
       }
+      else {
+        /* Determine if we should be in read-only mode.  This is done when
+           we're asked to do a generic restore and the user has backed up
+           before.  We do this because they may want to restore from a
+           different backup without adjusting their own settings. */
+        var last_run = DejaDup.last_run_date(DejaDup.TimestampType.BACKUP);
+        if (last_run != "")
+          DejaDup.set_settings_read_only(true);
+      }
       toplevel = new AssistantRestore.with_files(file_list);
       toplevel.show_all();
     }

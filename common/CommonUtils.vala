@@ -100,15 +100,26 @@ public Date today()
   return cur_date;
 }
 
+public string last_run_date(TimestampType type)
+{
+  var settings = DejaDup.get_settings();
+  string last_run_string = null;
+  if (type == TimestampType.BACKUP)
+    last_run_string = settings.get_string(DejaDup.LAST_BACKUP_KEY);
+  else if (type == TimestampType.RESTORE)
+    last_run_string = settings.get_string(DejaDup.LAST_RESTORE_KEY);
+  if (last_run_string == null || last_run_string == "")
+    last_run_string = settings.get_string(DejaDup.LAST_RUN_KEY);
+  return last_run_string;
+}
+
 public Date next_run_date()
 {
   var settings = DejaDup.get_settings();
   var periodic = settings.get_boolean(DejaDup.PERIODIC_KEY);
   var period_days = settings.get_int(DejaDup.PERIODIC_PERIOD_KEY);
 
-  var last_run_string = settings.get_string(DejaDup.LAST_BACKUP_KEY);
-  if (last_run_string == "")
-    last_run_string = settings.get_string(DejaDup.LAST_RUN_KEY);
+  var last_run_string = last_run_date(TimestampType.BACKUP);
 
   if (!periodic)
     return Date();
@@ -198,12 +209,43 @@ public File[] parse_dir_list(string*[] dirs)
   return rv;
 }
 
+bool settings_read_only = false;
+HashTable<string, SimpleSettings> settings_table = null;
+public void set_settings_read_only(bool ro)
+{
+  settings_read_only = ro;
+  if (settings_read_only) {
+    // When read only, we also need to make sure everyone shares the same
+    // settings object.  Otherwise, they will not notice the changes other
+    // parts of the code make.
+    settings_table = new HashTable<string, SimpleSettings>.full(str_hash,
+                                                                str_equal,
+                                                                g_free,
+                                                                g_object_unref);
+  }
+  else {
+    settings_table = null;
+  }
+}
+
 public SimpleSettings get_settings(string? subdir = null)
 {
   string schema = "org.gnome.DejaDup";
   if (subdir != null && subdir != "")
     schema += "." + subdir;
-  return new SimpleSettings(schema);
+  SimpleSettings rv;
+  if (settings_read_only) {
+    rv = settings_table.lookup(schema);
+    if (rv == null) {
+      rv = new SimpleSettings(schema, true);
+      rv.delay(); // never to be apply()'d again
+      settings_table.insert(schema, rv);
+    }
+  }
+  else {
+    rv = new SimpleSettings(schema, false);
+  }
+  return rv;
 }
 
 const string SSH_USERNAME_KEY = "username";

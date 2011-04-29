@@ -41,7 +41,7 @@ public abstract class ConfigWidget : Gtk.EventBox
   
   // If you pass in a special settings object, make sure it survives the
   // lifetime of this widget.
-  protected void watch_key(string? key, Settings? s = null)
+  protected void watch_key(string? key, SimpleSettings? s = null)
   {
     if (s == null)
       s = settings;

@@ -44,7 +44,7 @@ public class ConfigURLPart : ConfigEntry
     write_uri_part(settings, key, part, userval);
   }
 
-  public static string read_uri_part(Settings settings, string key, Part part)
+  public static string read_uri_part(SimpleSettings settings, string key, Part part)
   {
     var uri = get_current_uri(settings, key);
 
@@ -78,7 +78,7 @@ public class ConfigURLPart : ConfigEntry
     return text;
   }
 
-  public static void write_uri_part(Settings settings, string key, Part part, string userval)
+  public static void write_uri_part(SimpleSettings settings, string key, Part part, string userval)
   {
     var uri = get_current_uri(settings, key);
 
@@ -114,7 +114,7 @@ public class ConfigURLPart : ConfigEntry
     settings.set_string(key, val);
   }
 
-  static DejaDupDecodedUri get_current_uri(Settings settings, string key)
+  static DejaDupDecodedUri get_current_uri(SimpleSettings settings, string key)
   {
     var val = settings.get_string(key);
     if (val == null)
