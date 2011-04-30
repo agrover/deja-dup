@@ -37,13 +37,14 @@ public class Duplicity : Object
   public signal void action_file_changed(File file, bool actual);
   public signal void progress(double percent);
   /*
-   * Signal emmited when collection dates are retrieved from duplicity
+   * Signal emitted when collection dates are retrieved from duplicity
    */
   public signal void collection_dates(List<string>? dates);
   public signal void listed_current_files(string date, string file);
   public signal void question(string title, string msg);
   public signal void secondary_desc_changed(string msg);
   public signal void is_full();
+  public signal void bad_encryption_password();
   
   public Operation.Mode original_mode {get; construct;}
   public Operation.Mode mode {get; private set; default = Operation.Mode.INVALID;}
@@ -900,6 +901,7 @@ public class Duplicity : Object
         break;
 
       case ERROR_GPG:
+        bad_encryption_password(); // notify upper layers, if they want to do anything
         text = _("Bad encryption password.");
         break;
 

@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -102,7 +102,6 @@ public abstract class Operation : Object
   protected string passphrase;
   construct
   {
-    dup = new Duplicity(mode);
     try {
       backend = Backend.get_default();
     }
@@ -119,8 +118,6 @@ public abstract class Operation : Object
       return;
     }
     
-    connect_to_dup();
-    
     try {
       claim_bus();
     }
@@ -130,7 +127,23 @@ public abstract class Operation : Object
       return;
     }
     yield set_session_inhibited(true);
-    
+
+    restart();
+  }
+
+  void restart()
+  {
+    if (dup != null) {
+      SignalHandler.disconnect_matched(dup, SignalMatchType.DATA,
+                                       0, 0, null, null, this);
+      dup.cancel();
+      dup = null;
+    }
+
+    dup = new Duplicity(mode);
+
+    connect_to_dup();
+
     // Get encryption passphrase if needed
     var settings = get_settings();
     if (settings.get_boolean(ENCRYPT_KEY) && passphrase == null) {
@@ -141,7 +154,7 @@ public abstract class Operation : Object
       continue_with_passphrase(passphrase);
     }
   }
-  
+
   public void cancel()
   {
     dup.cancel();
@@ -165,8 +178,9 @@ public abstract class Operation : Object
     dup.question.connect((d, t, m) => {question(t, m);});
     dup.secondary_desc_changed.connect((d, t) => {secondary_desc_changed(t);});
     dup.is_full.connect(() => {is_full();});
+    dup.bad_encryption_password.connect(() => {passphrase = null; restart();});
   }
-  
+
   public async void continue_with_passphrase(string? passphrase)
   {
    /*

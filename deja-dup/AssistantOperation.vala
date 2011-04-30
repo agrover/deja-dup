@@ -74,6 +74,8 @@ public abstract class AssistantOperation : Assistant
   protected bool error_occurred {get; private set;}
   bool gives_progress;
 
+  bool searched_for_passphrase = false;
+
   bool saved_pos;
   int saved_x;
   int saved_y;
@@ -618,12 +620,16 @@ public abstract class AssistantOperation : Assistant
   {
     // DEJA_DUP_TESTING only set when we are in test suite
     var testing = Environment.get_variable("DEJA_DUP_TESTING");
-    if (testing == null || testing == "") {
+    if (!searched_for_passphrase && (testing == null || testing == "")) {
       // First, try user's keyring
       GnomeKeyring.find_password(PASSPHRASE_SCHEMA,
                                  found_passphrase,
                                  "owner", Config.PACKAGE,
                                  "type", "passphrase");
+      // If we get asked for passphrase again, it is because a
+      // saved or entered passphrase didn't work.  So don't bother
+      // searching a second time.
+      searched_for_passphrase = true;
     }
     else {
       // just jump straight to asking user
