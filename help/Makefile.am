@@ -1,7 +1,7 @@
 # -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008,2009,2010 Michael Terry <mike@mterry.name>
+# © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -31,7 +31,8 @@ DOC_PAGES = \
 	restore-full.page \
 	restore-lost.page \
 	restore-revert.page \
-	restore-worst-case.page
+	restore-worst-case.page \
+	support.page
 
 REAL_LINGUAS = ar cs da de en_GB es eu fi fr gl he hu id it ja lt nb nl pl ps pt_BR ru sv th tr zh_CN
 DOC_LINGUAS = POT $(REAL_LINGUAS)

@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2009 Michael Terry <mike@mterry.name>
+    © 2009,2010,2011 Michael Terry <mike@mterry.name>
     © 2010 Andrew Fister <temposs@gmail.com>
 
     Déjà Dup is free software: you can redistribute it and/or modify
