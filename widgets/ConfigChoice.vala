@@ -38,10 +38,9 @@ public class ConfigChoice : ConfigWidget
   {
     combo.model = model;
     this.settings_col = settings_col;
-    
-    combo.changed.connect(handle_changed);
-    
+
     set_from_config();
+    combo.changed.connect(handle_changed);
   }
   
   public Value? get_current_value()
