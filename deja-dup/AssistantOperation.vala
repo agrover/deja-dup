@@ -302,7 +302,7 @@ public abstract class AssistantOperation : Assistant
     encrypt_entry = (Gtk.Entry)w;
 
     // Add a confirmation entry if this is user's first time
-    if (is_first_time()) {
+    if (has_password_confirm()) {
       w = new Gtk.Entry();
       w.set("visibility", false,
             "activates-default", true);
@@ -378,12 +378,7 @@ public abstract class AssistantOperation : Assistant
     return page;
   }
 
-  bool is_first_time()
-  {
-    var settings = DejaDup.get_settings();
-    var val = settings.get_string(DejaDup.LAST_RUN_KEY);
-    return val == "";
-  }
+  protected virtual bool has_password_confirm() {return false;}
 
   void add_confirm_page()
   {

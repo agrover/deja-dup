@@ -71,6 +71,14 @@ public class AssistantBackup : AssistantOperation
     return _("Backing up:");
   }
 
+  protected override bool has_password_confirm()
+  {
+    // Confirm password if this is the user's first backup
+    // (TODO: confirm if there is no backup already in the backup location)
+    var val = DejaDup.last_run_date(DejaDup.TimestampType.BACKUP);
+    return val == "";
+  }
+
   protected override void do_prepare(Assistant assist, Gtk.Widget page)
   {
     base.do_prepare(assist, page);
