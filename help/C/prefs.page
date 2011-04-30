@@ -8,15 +8,18 @@
   <link type="guide" xref="index#backup"/>
 </info>
 <title>Preferences</title>
-  <p>To configure <app>Déjà Dup</app>, choose <guiseq><gui style="menu">Edit</gui><gui style="menuitem">Preferences</gui></guiseq>.</p>
   <terms>
     <item>
+      <title><gui>Automatic backups</gui></title>
+      <p>Turn this option on to have <app>Déjà Dup</app> automatically back up for you. This is recommended so that you don’t forget to do it yourself. Backups are more useful the more recent they are, so it is important to regularly back up.</p>
+    </item>
+    <item>
       <title><gui>Backup location</gui></title>
-      <p>Use this drop-down list box to specify the backup location that <app>Déjà Dup</app> uses when backing up or restoring:</p>
+      <p>Use these options to specify the backup location that <app>Déjà Dup</app> will use when backing up or restoring:</p>
       <terms>
         <item>
           <title>Cloud Services</title>
-          <p>The first few backup locations are cloud storage services provided by various companies. For a small fee per gigabyte, they hold your data for you. A cloud service like this is recommended because it is an easy way to keep your data offsite (meaning out of your home: in case of disaster or theft, your data will still be safe). You can choose from Amazon S3 and Rackspace Cloud Files.</p>
+          <p>The first few backup locations are cloud storage services provided by various companies. For a small fee, they hold your data for you. A cloud service like this is recommended because it is an easy way to keep your data offsite (meaning out of your home: in case of disaster or theft, your data will still be safe).</p>
           <note style="warning"><p>These services costs money.  Read their rates carefully before using it.</p></note>
         </item>
         <item>
@@ -25,27 +28,33 @@
         </item>
         <item>
           <title>Remote Servers</title>
-          <p>Choose the type of remote server to which you want to connect. Then you can enter the server information.  Alternatively, if you know your server's URL, choose <gui>Custom Location</gui> and enter it.</p>
+          <p>Choose the type of remote server to which you want to connect. Then you can enter the server information.  Alternatively, if you know your server’s URL, choose <gui>Custom Location</gui> and enter it.</p>
         </item>
         <item>
           <title>Local Folder</title>
           <p>You may also want to choose a local folder as a backup location.  Note that backups can be quite large, so make sure you have enough free disk space.</p>
+          <note style="warning"><p>This is not recommended, because if your hardware fails, you will lose both your original data and your backups.</p></note>
         </item>
       </terms>
     </item>
     <item>
+      <title><gui>Keep backups</gui></title>
+      <p>Choose the minimum amount of time to keep backup files.  If you find that the backup files are taking up too much space, you may want to decrease this duration.  Due to implementation details, files may be kept a bit longer than the chosen time.  But no files will be deleted early.</p>
+      <note><p>Backups are kept forever by default, but still may be deleted earlier if the backup location begins to run out of space.</p></note>
+    </item>
+    <item>
       <title><gui style="checkbox">Encrypt backup files</gui></title>
-      <p>Encrypting your backup files is recommended to keep your data safe. If you don’t have exclusive physical control of your backup location, or if it is stolen, an encrypted backup prevents others from looking at your personal data.</p>
-      <p>If on, you will be prompted for a password. Keep this password safe, you will need it to restore your data.</p>
-      <note><p>Encryption is enabled by default.</p></note>
+      <p>Encrypting your backup files is recommended to keep your data safe. If you don’t have exclusive physical control of your backup location or if it is stolen, an encrypted backup prevents others from looking at your personal data.</p>
+      <p>If enabled, you will be prompted for an encryption password when backing up.</p>
+      <note><p>Keep this encryption password safe, you will need it to restore your data.  You may want to write it down or use one you know you will remember.</p></note>
     </item>
     <item>
       <title><gui>Include files in folders</gui></title>
-      <p>Select a list of directories to backup. Press the <gui style="button">Add</gui> or <gui style="button">Remove</gui> buttons to modify the list. If you are only interested in backing up your own data, the default of <gui>Home Folder</gui> is sufficient.</p>
+      <p>Choose a list of directories to back up. Press the <gui style="button">Add</gui> or <gui style="button">Remove</gui> buttons to modify the list. If you are only interested in backing up your own data, the default of <gui>Home Folder</gui> is sufficient.</p>
     </item>
     <item>
       <title><gui>Except files in folders</gui></title>
-      <p>Select a list of directories to not backup. Press the <gui style="button">Add </gui> or <gui style="button">Remove</gui> buttons to modify the list.</p>
+      <p>Choose a list of directories to not back up. Press the <gui style="button">Add </gui> or <gui style="button">Remove</gui> buttons to modify the list.</p>
       <p>Some of your data may be large and not very important to you.  In that case, you can save yourself some time and space by not backing them up.</p>
       <note style="advanced">
         <p>Some locations are always excluded by default:</p>
@@ -63,21 +72,6 @@
           <item><p><file>/tmp</file></p></item>
         </list>
        </note>
-    </item>
-    <item>
-      <title><gui style="checkbox">Automatically backup on a regular schedule</gui></title>
-      <p>Turn this option on to have <app>Déjà Dup</app> automatically backup for you. This is recommended so that you don’t forget to do it yourself. Backups are more useful the more recently you have made them, so it is important to regularly do so.</p>
-      <note><p>Automatic backups are disabled by default.</p></note>
-    </item>
-    <item>
-      <title><gui>How often to backup</gui></title>
-      <p>Choose a schedule for automatic backups.</p>
-      <note><p>Automatic backups are scheduled weekly by default.</p></note>
-    </item>
-    <item>
-      <title><gui>Keep backups</gui></title>
-      <p>Choose the minimum amount of time to keep backup files.  If you find that the backup files are taking up too much space, you may want to decrease this duration.  Due to implementation details, files may be kept a bit longer than the chosen time.  But no files will be deleted early.</p>
-      <note><p>Backups are kept forever by default, but still may be deleted earlier if the backup location begins to run out of space.</p></note>
     </item>
    </terms>
 </page>
