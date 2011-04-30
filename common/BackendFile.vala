@@ -1,7 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -148,19 +148,27 @@ public class BackendFile : Backend
   public override Icon? get_icon() {
     var settings = get_settings(FILE_ROOT);
     var type = settings.get_string(FILE_TYPE_KEY);
-    string icon_name;
+    string icon_name = "folder-remote";
     if (type == "volume")
       icon_name = settings.get_string(FILE_ICON_KEY);
     else {
+      File file = null;
       try {
-        var file = get_file_from_settings();
-        var info = file.query_info(FILE_ATTRIBUTE_STANDARD_ICON,
-                                   FileQueryInfoFlags.NONE, null);
-        return info.get_icon();
+        file = get_file_from_settings();
       }
       catch (Error e) {
-        // Likely a remote server that is not mounted
-        icon_name = "folder-remote";
+        // ignore, icon will be folder-remote
+      }
+      if (file != null) {
+        try {
+          var info = file.query_info(FILE_ATTRIBUTE_STANDARD_ICON,
+                                     FileQueryInfoFlags.NONE, null);
+          return info.get_icon();
+        }
+        catch (Error e) {
+          if (file.is_native())
+            icon_name = "folder";
+        }
       }
     }
 
