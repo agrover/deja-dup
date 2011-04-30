@@ -3,7 +3,7 @@
       type="topic"
       id="restore-worst-case">
 <info>
-  <desc>What to do if you can't restore your files</desc>
+  <desc>What to do if you can’t restore your files</desc>
   <link type="guide" xref="index#restore"/>
 </info>
 
@@ -11,7 +11,7 @@
 
 <p><app>Déjà Dup</app> may fail.  Maybe it crashes or gives you an error when you try to restore.  When you really need your data back, the last thing you want do deal with is a bug.  Consider filing a <link href="https://launchpad.net/deja-dup/+filebug">bug report</link> but in the meantime, here are some approaches to workaround a misbehaving <app>Déjà Dup</app> and get your data back.</p>
 
-<note><p>This is going to get technical.  If none of this makes sense to you, don't be afraid to <link type="guide" xref="support">ask for help</link>.</p></note>
+<note><p>This is going to get technical.  If none of this makes sense to you, don’t be afraid to <link type="guide" xref="support">ask for help</link>.</p></note>
 
 <steps>
   <item><p>Open a <app>Terminal</app> window by pressing <keyseq><key>Ctrl</key><key>Alt</key><key>T</key></keyseq>.</p></item>
@@ -22,19 +22,19 @@
 <section id="duplicity">
 <title>Restoring with Duplicity</title>
 
-<p>On the assumption that <app>Déjà Dup</app> is just not working for you right now, you're going to use the command line tool <app>duplicity</app> that is used by <app>Déjà Dup</app> behind the scenes to back up and restore your files.</p>
+<p>On the assumption that <app>Déjà Dup</app> is just not working for you right now, you’re going to use the command line tool <app>duplicity</app> that is used by <app>Déjà Dup</app> behind the scenes to back up and restore your files.</p>
 
 <note style="advanced"><p>If you want more information about <app>duplicity</app> than presented here, run <cmd>man duplicity</cmd>.</p></note>
 
-<p>The first thing we'll try is a simple restore of all your data.  Assuming your files are on an external drive mounted as <file>/media/backup</file> and you chose to encrypt the backup, try this:</p>
+<p>The first thing we’ll try is a simple restore of all your data.  Assuming your files are on an external drive mounted as <file>/media/backup</file> and you chose to encrypt the backup, try this:</p>
 <screen>duplicity --gio file:///media/backup /tmp/restore</screen>
 
-<p>If you didn't encrypt the backup, add <cmd>--no-encryption</cmd> to the command.</p>
+<p>If you didn’t encrypt the backup, add <cmd>--no-encryption</cmd> to the command.</p>
 
 <section id="locations">
 <title>Other Backup Locations</title>
 <p>If you backed up to a remote or cloud server, the syntax you use with <app>duplicity</app> will be different than the external drive example above.  See below for how to connect to your chosen backup location.</p>
-<note><p>Remember to add <cmd>--no-encryption</cmd> to any example commands if you're backup is not encrypted.</p></note>
+<note><p>Remember to add <cmd>--no-encryption</cmd> to any example commands if you’re backup is not encrypted.</p></note>
 <p>If <app>duplicity</app> appears to be having trouble connecting to your server, try downloading all the <app>duplicity</app> files yourself to a local folder and following the simpler example above.</p>
 <terms>
   <item>
@@ -98,11 +98,11 @@ duplicity --gio smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var> /t
 <section id="by-hand">
 <title>Restoring by Hand</title>
 
-<p>If even <app>duplicity</app> isn't working for you, there may be little hope.  The backup file format is complicated and not easily manipulated.  But if you're desperate, it's worth a try.</p>
+<p>If even <app>duplicity</app> isn’t working for you, there may be little hope.  The backup file format is complicated and not easily manipulated.  But if you’re desperate, it’s worth a try.</p>
 
 <p>If you used a remote or cloud server to store your backup, first download all the <app>duplicity</app> files and place them in a folder on your computer.  Then enter that folder in your terminal.</p>
 
-<p><app>Duplicity</app> stores your data in small chunks called volumes.  Some volumes belong to the periodic 'full' or fresh backups and others to the 'inc' or incremental backups.  Starting with a full backup set of volumes at volume 1, you'll need to restore files volume by volume.</p>
+<p><app>Duplicity</app> stores your data in small chunks called volumes.  Some volumes belong to the periodic ‘full’ or fresh backups and others to the ‘inc’ or incremental backups.  Starting with a full backup set of volumes at volume 1, you’ll need to restore files volume by volume.</p>
 
 <p>If you encrypted your backup, first you must decrypt the volume with <cmd>gpg</cmd>.  Say you have <file>duplicity-full.20110127T131352Z.vol1.difftar.gpg</file>:</p>
 <screen>gpg --output duplicity-full.20110127T131352Z.vol1.difftar --decrypt duplicity-full.20110127T131352Z.vol1.difftar.gpg</screen>
@@ -116,7 +116,7 @@ duplicity --gio smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var> /t
 <p>Or again, to do all at once:</p>
 <screen>for t in duplicity-full.20110127T131352Z.*.difftar; do tar xf $t; done</screen>
 
-<p>Now the patch files will be in <file>multivolume_snapshot</file> and <file>snapshot</file> folders.  Each file that spanned multiple volumes will be in <file>multivolume_snapshot</file>. Let's say you backed up <file>/home/jane/essay.txt</file>:</p>
+<p>Now the patch files will be in <file>multivolume_snapshot</file> and <file>snapshot</file> folders.  Each file that spanned multiple volumes will be in <file>multivolume_snapshot</file>. Let’s say you backed up <file>/home/jane/essay.txt</file>:</p>
 <screen>cd multivolume_snapshot/home/jane/essay.txt
 cat * > essay.txt</screen>
 
