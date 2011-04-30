@@ -411,7 +411,7 @@ public abstract class AssistantOperation : Assistant
   {
     var page = make_password_page();
     append_page(page, Type.INTERRUPT);
-    set_page_title(page, _("Password Needed"));
+    set_page_title(page, _("Encryption Password Needed"));
     password_page = page;
   }
 
@@ -670,7 +670,7 @@ public abstract class AssistantOperation : Assistant
       if (encrypt_remember.active) {
         GnomeKeyring.store_password(PASSPHRASE_SCHEMA,
                                     GnomeKeyring.DEFAULT,
-                                    _("Déjà Dup backup passphrase"),
+                                    _("Déjà Dup encryption password"),
                                     passphrase, save_password_callback,
                                     "owner", Config.PACKAGE,
                                     "type", "passphrase");
