@@ -33,8 +33,8 @@ copy-po:
 sign:
 	gpg --armor --sign --detach-sig deja-dup-$(PACKAGE_VERSION).tar.bz2
 
-releasecheck: distcheck sign
-release: dist sign
+releasecheck: all distcheck sign
+release: all dist sign
 
 # distcheck complains if we try to install into /usr, so respect prefix
 DISTCHECK_CONFIGURE_FLAGS = --without-extensiondir
