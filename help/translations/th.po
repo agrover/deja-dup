@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-20 20:43-0400\n"
+"POT-Creation-Date: 2011-04-29 23:11-0400\n"
 "PO-Revision-Date: 2010-09-08 02:46+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Thai <th@li.org>\n"
@@ -15,11 +15,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-03-24 04:53+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-05-01 04:56+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
+
+#: support.page:8(desc)
+msgid "Get more help"
+msgstr ""
+
+#: support.page:11(title)
+#: contribute.page:40(title)
+msgid "Support"
+msgstr ""
+
+#: support.page:13(p)
+msgid ""
+"If you have unanswered questions or a problem you don’t understand, please "
+"<link href=\"https://answers.launchpad.net/deja-dup\">ask about it</link> it "
+"in the support forum."
+msgstr ""
+
+#: support.page:15(p)
+msgid ""
+"Keep in mind that the people answering your questions are volunteers and "
+"that while <app>Déjà Dup</app> is intended to work well, it <link "
+"type=\"guide\" xref=\"license\">comes with no warranty</link>. So please be "
+"polite and patient."
+msgstr ""
 
 #: restore-worst-case.page:6(desc)
-msgid "What to do if you can't restore your files."
+msgid "What to do if you can’t restore your files"
 msgstr ""
 
 #: restore-worst-case.page:10(title)
@@ -38,9 +62,8 @@ msgstr ""
 
 #: restore-worst-case.page:14(p)
 msgid ""
-"This is going to get technical. If none of this makes sense to you, don't be "
-"afraid to <link href=\"https://answers.launchpad.net/deja-dup\">ask for "
-"help</link>."
+"This is going to get technical. If none of this makes sense to you, don’t be "
+"afraid to <link type=\"guide\" xref=\"support\">ask for help</link>."
 msgstr ""
 
 #: restore-worst-case.page:17(p)
@@ -67,7 +90,7 @@ msgstr ""
 #: restore-worst-case.page:25(p)
 msgid ""
 "On the assumption that <app>Déjà Dup</app> is just not working for you right "
-"now, you're going to use the command line tool <app>duplicity</app> that is "
+"now, you’re going to use the command line tool <app>duplicity</app> that is "
 "used by <app>Déjà Dup</app> behind the scenes to back up and restore your "
 "files."
 msgstr ""
@@ -80,7 +103,7 @@ msgstr ""
 
 #: restore-worst-case.page:29(p)
 msgid ""
-"The first thing we'll try is a simple restore of all your data. Assuming "
+"The first thing we’ll try is a simple restore of all your data. Assuming "
 "your files are on an external drive mounted as <file>/media/backup</file> "
 "and you chose to encrypt the backup, try this:"
 msgstr ""
@@ -92,7 +115,7 @@ msgstr ""
 
 #: restore-worst-case.page:32(p)
 msgid ""
-"If you didn't encrypt the backup, add <cmd>--no-encryption</cmd> to the "
+"If you didn’t encrypt the backup, add <cmd>--no-encryption</cmd> to the "
 "command."
 msgstr ""
 
@@ -109,7 +132,7 @@ msgstr ""
 
 #: restore-worst-case.page:37(p)
 msgid ""
-"Remember to add <cmd>--no-encryption</cmd> to any example commands if you're "
+"Remember to add <cmd>--no-encryption</cmd> to any example commands if you’re "
 "backup is not encrypted."
 msgstr ""
 
@@ -279,9 +302,9 @@ msgstr ""
 
 #: restore-worst-case.page:101(p)
 msgid ""
-"If even <app>duplicity</app> isn't working for you, there may be little "
+"If even <app>duplicity</app> isn’t working for you, there may be little "
 "hope. The backup file format is complicated and not easily manipulated. But "
-"if you're desperate, it's worth a try."
+"if you’re desperate, it’s worth a try."
 msgstr ""
 
 #: restore-worst-case.page:103(p)
@@ -294,9 +317,9 @@ msgstr ""
 #: restore-worst-case.page:105(p)
 msgid ""
 "<app>Duplicity</app> stores your data in small chunks called volumes. Some "
-"volumes belong to the periodic 'full' or fresh backups and others to the "
-"'inc' or incremental backups. Starting with a full backup set of volumes at "
-"volume 1, you'll need to restore files volume by volume."
+"volumes belong to the periodic ‘full’ or fresh backups and others to the "
+"‘inc’ or incremental backups. Starting with a full backup set of volumes at "
+"volume 1, you’ll need to restore files volume by volume."
 msgstr ""
 
 #: restore-worst-case.page:107(p)
@@ -350,7 +373,7 @@ msgstr ""
 msgid ""
 "Now the patch files will be in <file>multivolume_snapshot</file> and "
 "<file>snapshot</file> folders. Each file that spanned multiple volumes will "
-"be in <file>multivolume_snapshot</file>. Let's say you backed up "
+"be in <file>multivolume_snapshot</file>. Let’s say you backed up "
 "<file>/home/jane/essay.txt</file>:"
 msgstr ""
 
@@ -368,8 +391,8 @@ msgid ""
 msgstr ""
 
 #: restore-revert.page:6(desc)
-msgid "Restore a previous version of a file."
-msgstr "คืนค่ารุ่นก่อนหน้าของไฟล์ระบบ"
+msgid "Restore a previous version of a file"
+msgstr ""
 
 #: restore-revert.page:9(title)
 msgid "Reverting a File"
@@ -397,11 +420,8 @@ msgstr ""
 "ะบบ"
 
 #: restore-revert.page:15(p)
-#: restore-full.page:23(p)
 #: restore-full.page:25(p)
 #: restore-full.page:27(p)
-#: backup-first.page:14(p)
-#: backup-first.page:16(p)
 msgid "Click <gui style=\"button\">Forward</gui>."
 msgstr "เลือก <gui style=\"button\">ย้อนกลับ</gui>."
 
@@ -426,7 +446,7 @@ msgid "deja-dup --restore FILE1 FILE2"
 msgstr ""
 
 #: restore-lost.page:6(desc)
-msgid "Restore a file that is no longer present."
+msgid "Restore a file that is no longer present"
 msgstr ""
 
 #: restore-lost.page:9(title)
@@ -469,7 +489,7 @@ msgid ""
 msgstr ""
 
 #: restore-full.page:6(desc)
-msgid "Recover from total system failure."
+msgid "Recover from total system failure"
 msgstr ""
 
 #: restore-full.page:9(title)
@@ -502,19 +522,26 @@ msgstr ""
 #: restore-full.page:20(p)
 #: backup-first.page:11(p)
 #: backup-auto.page:12(p)
-msgid "Run <app>Déjà Dup</app>."
+msgid "Open your <gui>Backup</gui> settings."
 msgstr ""
 
 #: restore-full.page:21(p)
-msgid "Click on the big <gui style=\"button\">Restore…</gui> button."
+msgid ""
+"Click on the <gui style=\"button\">Restore…</gui> button on the "
+"<gui>Overview</gui> page."
 msgstr ""
 
 #: restore-full.page:22(p)
 msgid ""
 "A <gui>Restore</gui> dialog will appear asking where your backup files are "
-"stored (your <gui>Backup location</gui>). Choose it from the dropdown or "
-"choose <gui>Other…</gui>. On this same screen, select whether you encrypted "
-"the backup or not."
+"stored (your <gui>Backup location</gui>). On this same screen, select "
+"whether you encrypted the backup or not."
+msgstr ""
+
+#: restore-full.page:23(p)
+msgid ""
+"Click <gui style=\"button\">Forward</gui> and wait for <app>Déjà Dup</app> "
+"to scan the backup location."
 msgstr ""
 
 #: restore-full.page:24(p)
@@ -540,217 +567,107 @@ msgstr ""
 
 #: restore-full.page:32(p)
 msgid ""
-"If for whatever reason, you have a problem after trying to restore with the "
+"If for whatever reason you have a problem after trying to restore with the "
 "<gui style=\"checkbox\">Restore files to original locations</gui> option, "
 "try restoring instead to a temporary directory and moving your files to "
 "where they belong."
 msgstr ""
 
+#: restore-full.page:33(p)
+msgid ""
+"If that still doesn’t work, there are <link type=\"guide\" xref=\"restore-"
+"worst-case\">more drastic things</link> you can try."
+msgstr ""
+
 #: prefs.page:7(desc)
-msgid "Adjust your backup settings."
+msgid "Adjust your backup settings"
 msgstr ""
 
 #: prefs.page:10(title)
 msgid "Preferences"
 msgstr ""
 
-#: prefs.page:11(p)
-msgid ""
-"To configure <app>Déjà Dup</app>, choose <guiseq><gui "
-"style=\"menu\">Edit</gui><gui style=\"menuitem\">Preferences</gui></guiseq>."
+#: prefs.page:13(gui)
+msgid "Automatic backups"
 msgstr ""
 
-#: prefs.page:14(gui)
+#: prefs.page:14(p)
+msgid ""
+"Turn this option on to have <app>Déjà Dup</app> automatically back up for "
+"you. This is recommended so that you don’t forget to do it yourself. Backups "
+"are more useful the more recent they are, so it is important to regularly "
+"back up."
+msgstr ""
+
+#: prefs.page:17(gui)
 msgid "Backup location"
 msgstr ""
 
-#: prefs.page:15(p)
+#: prefs.page:18(p)
 msgid ""
-"Use this drop-down list box to specify the backup location that <app>Déjà "
-"Dup</app> uses when backing up or restoring:"
+"Use these options to specify the backup location that <app>Déjà Dup</app> "
+"will use when backing up or restoring:"
 msgstr ""
 
-#: prefs.page:18(title)
+#: prefs.page:21(title)
 msgid "Cloud Services"
 msgstr ""
 
-#: prefs.page:19(p)
+#: prefs.page:22(p)
 msgid ""
 "The first few backup locations are cloud storage services provided by "
-"various companies. For a small fee per gigabyte, they hold your data for "
-"you. A cloud service like this is recommended because it is an easy way to "
-"keep your data offsite (meaning out of your home: in case of disaster or "
-"theft, your data will still be safe). You can choose from Amazon S3 and "
-"Rackspace Cloud Files."
+"various companies. For a small fee, they hold your data for you. A cloud "
+"service like this is recommended because it is an easy way to keep your data "
+"offsite (meaning out of your home: in case of disaster or theft, your data "
+"will still be safe)."
 msgstr ""
 
-#: prefs.page:20(p)
+#: prefs.page:23(p)
 msgid ""
 "These services costs money. Read their rates carefully before using it."
 msgstr ""
 
-#: prefs.page:23(title)
+#: prefs.page:26(title)
 msgid "Removable Media"
 msgstr ""
 
-#: prefs.page:24(p)
+#: prefs.page:27(p)
 msgid ""
 "You may see removable media like external hard drives or thumb drives listed."
 msgstr ""
 
-#: prefs.page:27(title)
+#: prefs.page:30(title)
 msgid "Remote Servers"
 msgstr ""
 
-#: prefs.page:28(p)
+#: prefs.page:31(p)
 msgid ""
 "Choose the type of remote server to which you want to connect. Then you can "
-"enter the server information. Alternatively, if you know your server's URL, "
+"enter the server information. Alternatively, if you know your server’s URL, "
 "choose <gui>Custom Location</gui> and enter it."
 msgstr ""
 
-#: prefs.page:31(title)
+#: prefs.page:34(title)
 msgid "Local Folder"
 msgstr ""
 
-#: prefs.page:32(p)
+#: prefs.page:35(p)
 msgid ""
 "You may also want to choose a local folder as a backup location. Note that "
 "backups can be quite large, so make sure you have enough free disk space."
 msgstr ""
 
-#: prefs.page:37(gui)
-msgid "Encrypt backup files"
-msgstr ""
-
-#: prefs.page:38(p)
+#: prefs.page:36(p)
 msgid ""
-"Encrypting your backup files is recommended to keep your data safe. If you "
-"don’t have exclusive physical control of your backup location, or if it is "
-"stolen, an encrypted backup prevents others from looking at your personal "
-"data."
+"This is not recommended, because if your hardware fails, you will lose both "
+"your original data and your backups."
 msgstr ""
 
-#: prefs.page:39(p)
-msgid ""
-"If on, you will be prompted for a password. Keep this password safe, you "
-"will need it to restore your data."
-msgstr ""
-
-#: prefs.page:40(p)
-msgid "Encryption is enabled by default."
-msgstr ""
-
-#: prefs.page:43(gui)
-msgid "Include files in folders"
-msgstr ""
-
-#: prefs.page:44(p)
-msgid ""
-"Select a list of directories to backup. Press the <gui "
-"style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
-"modify the list. If you are only interested in backing up your own data, the "
-"default of <gui>Home Folder</gui> is sufficient."
-msgstr ""
-
-#: prefs.page:47(gui)
-msgid "Except files in folders"
-msgstr ""
-
-#: prefs.page:48(p)
-msgid ""
-"Select a list of directories to not backup. Press the <gui "
-"style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
-"modify the list."
-msgstr ""
-
-#: prefs.page:49(p)
-msgid ""
-"Some of your data may be large and not very important to you. In that case, "
-"you can save yourself some time and space by not backing them up."
-msgstr ""
-
-#: prefs.page:51(p)
-msgid "Some locations are always excluded by default:"
-msgstr ""
-
-#: prefs.page:53(file)
-msgid "~/.adobe/Flash_Player/AssetCache"
-msgstr ""
-
-#: prefs.page:54(file)
-msgid "~/.cache"
-msgstr ""
-
-#: prefs.page:55(file)
-msgid "~/.gvfs"
-msgstr ""
-
-#: prefs.page:56(file)
-msgid "~/.Private"
-msgstr ""
-
-#: prefs.page:57(file)
-msgid "~/.recent-applications.xbel"
-msgstr ""
-
-#: prefs.page:58(file)
-msgid "~/.recently-used.xbel"
-msgstr ""
-
-#: prefs.page:59(file)
-msgid "~/.thumbnails"
-msgstr ""
-
-#: prefs.page:60(file)
-msgid "~/.xsession-errors"
-msgstr ""
-
-#: prefs.page:61(file)
-msgid "/proc"
-msgstr ""
-
-#: prefs.page:62(file)
-msgid "/sys"
-msgstr ""
-
-#: prefs.page:63(file)
-msgid "/tmp"
-msgstr ""
-
-#: prefs.page:68(gui)
-msgid "Automatically backup on a regular schedule"
-msgstr ""
-
-#: prefs.page:69(p)
-msgid ""
-"Turn this option on to have <app>Déjà Dup</app> automatically backup for "
-"you. This is recommended so that you don’t forget to do it yourself. Backups "
-"are more useful the more recently you have made them, so it is important to "
-"regularly do so."
-msgstr ""
-
-#: prefs.page:70(p)
-msgid "Automatic backups are disabled by default."
-msgstr ""
-
-#: prefs.page:73(gui)
-msgid "How often to backup"
-msgstr ""
-
-#: prefs.page:74(p)
-msgid "Choose a schedule for automatic backups."
-msgstr ""
-
-#: prefs.page:75(p)
-msgid "Automatic backups are scheduled weekly by default."
-msgstr ""
-
-#: prefs.page:78(gui)
+#: prefs.page:41(gui)
 msgid "Keep backups"
 msgstr ""
 
-#: prefs.page:79(p)
+#: prefs.page:42(p)
 msgid ""
 "Choose the minimum amount of time to keep backup files. If you find that the "
 "backup files are taking up too much space, you may want to decrease this "
@@ -758,13 +675,147 @@ msgid ""
 "the chosen time. But no files will be deleted early."
 msgstr ""
 
-#: prefs.page:80(p)
+#: prefs.page:43(p)
 msgid ""
 "Backups are kept forever by default, but still may be deleted earlier if the "
 "backup location begins to run out of space."
 msgstr ""
 
+#: prefs.page:46(gui)
+msgid "Encrypt backup files"
+msgstr ""
+
+#: prefs.page:47(p)
+msgid ""
+"Encrypting your backup files is recommended to keep your data safe. If you "
+"don’t have exclusive physical control of your backup location or if it is "
+"stolen, an encrypted backup prevents others from looking at your personal "
+"data."
+msgstr ""
+
+#: prefs.page:48(p)
+msgid ""
+"If enabled, you will be prompted for an encryption password when backing up."
+msgstr ""
+
+#: prefs.page:49(p)
+msgid ""
+"Keep this encryption password safe, you will need it to restore your data. "
+"You may want to write it down or use one you know you will remember."
+msgstr ""
+
+#: prefs.page:52(gui)
+msgid "Include files in folders"
+msgstr ""
+
+#: prefs.page:53(p)
+msgid ""
+"Choose a list of directories to back up. Press the <gui "
+"style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
+"modify the list. If you are only interested in backing up your own data, the "
+"default of <gui>Home Folder</gui> is sufficient."
+msgstr ""
+
+#: prefs.page:56(gui)
+msgid "Except files in folders"
+msgstr ""
+
+#: prefs.page:57(p)
+msgid ""
+"Choose a list of directories to not back up. Press the <gui "
+"style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
+"modify the list."
+msgstr ""
+
+#: prefs.page:58(p)
+msgid ""
+"Some of your data may be large and not very important to you. In that case, "
+"you can save yourself some time and space by not backing them up."
+msgstr ""
+
+#: prefs.page:60(p)
+msgid "Some locations are always excluded by default:"
+msgstr ""
+
+#: prefs.page:62(file)
+msgid "~/.adobe/Flash_Player/AssetCache"
+msgstr ""
+
+#: prefs.page:63(file)
+msgid "~/.cache"
+msgstr ""
+
+#: prefs.page:64(file)
+msgid "~/.gvfs"
+msgstr ""
+
+#: prefs.page:65(file)
+msgid "~/.Private"
+msgstr ""
+
+#: prefs.page:66(file)
+msgid "~/.recent-applications.xbel"
+msgstr ""
+
+#: prefs.page:67(file)
+msgid "~/.recently-used.xbel"
+msgstr ""
+
+#: prefs.page:68(file)
+msgid "~/.thumbnails"
+msgstr ""
+
+#: prefs.page:69(file)
+msgid "~/.xsession-errors"
+msgstr ""
+
+#: prefs.page:70(file)
+msgid "/proc"
+msgstr ""
+
+#: prefs.page:71(file)
+msgid "/sys"
+msgstr ""
+
+#: prefs.page:72(file)
+msgid "/tmp"
+msgstr ""
+
+#: license.page:6(desc)
+msgid "Know your rights"
+msgstr ""
+
+#: license.page:9(title)
+msgid "License"
+msgstr ""
+
+#: license.page:10(p)
+msgid ""
+"This program is free software; you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation; either version 3 of the License, or (at your option) "
+"any later version."
+msgstr ""
+
+#: license.page:11(p)
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for "
+"more details."
+msgstr ""
+
+#: license.page:12(p)
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <link "
+"href=\"http://www.gnu.org/licenses/\">http://www.gnu.org/licenses/</link>."
+msgstr ""
+
 #: index.page:9(name)
+#: credits.page:15(link)
+#: credits.page:22(link)
+#: credits.page:30(link)
 msgid "Michael Terry"
 msgstr ""
 
@@ -773,7 +824,7 @@ msgid "mike@mterry.name"
 msgstr ""
 
 #: index.page:11(years)
-msgid "2010"
+msgid "2010,2011"
 msgstr ""
 
 #: index.page:13(p)
@@ -781,7 +832,7 @@ msgid "Creative Commons Attribution-Share Alike 3.0 Unported License"
 msgstr ""
 
 #: index.page:16(title)
-msgid "<app>Déjà Dup</app> Help"
+msgid "Backup Help"
 msgstr ""
 
 #: index.page:19(title)
@@ -792,8 +843,153 @@ msgstr ""
 msgid "Restoring Files"
 msgstr ""
 
+#: index.page:27(title)
+msgid "About <app>Déjà Dup Backup Tool</app>"
+msgstr ""
+
+#: contribute.page:8(desc)
+msgid "Help make <app>Déjà Dup</app> better"
+msgstr ""
+
+#: contribute.page:11(title)
+msgid "Getting Involved"
+msgstr ""
+
+#: contribute.page:13(p)
+msgid ""
+"So you want to help make <app>Déjà Dup</app> even better? Excellent! Here "
+"are some suggestions."
+msgstr ""
+
+#: contribute.page:16(title)
+msgid "Report Issues"
+msgstr ""
+
+#: contribute.page:18(p)
+msgid ""
+"Did you see a flaw? Do you have an idea for a new feature? Simply <link "
+"href=\"https://bugs.launchpad.net/deja-dup/+filebug\">report it as a "
+"bug</link>. Be patient for a reply."
+msgstr ""
+
+#: contribute.page:20(p)
+msgid "Note that bug reports should be in English only."
+msgstr ""
+
+#: contribute.page:24(title)
+msgid "Talk to Us"
+msgstr ""
+
+#: contribute.page:26(p)
+msgid ""
+"We don’t bite. Send an email to the <link href=\"mailto:deja-dup-"
+"hackers@lists.launchpad.net\">mailing list</link>."
+msgstr ""
+
+#: contribute.page:28(p)
+msgid ""
+"Or join the <link href=\"https://launchpad.net/~deja-dup-"
+"hackers\">team</link> to subscribe to the list. It’s easy and automatic (no "
+"approval is necessary). Feel free to lurk; the list is very low traffic."
+msgstr ""
+
+#: contribute.page:30(p)
+msgid "Note that the list is English only."
+msgstr ""
+
+#: contribute.page:34(title)
+msgid "Translating"
+msgstr ""
+
+#: contribute.page:36(p)
+msgid ""
+"Do you speak both English and another language? Good! You can help translate "
+"<app>Déjà Dup</app> through <link "
+"href=\"https://translations.launchpad.net/deja-dup\">a web interface</link>. "
+"It’s really quite easy and is very appreciated."
+msgstr ""
+
+#: contribute.page:42(p)
+msgid ""
+"Do you like helping people? <link href=\"https://answers.launchpad.net/deja-"
+"dup\">Answer user questions</link> and support requests."
+msgstr ""
+
+#: contribute.page:44(p)
+msgid ""
+"This is another great way for non-English speakers to get involved, as you "
+"can answer questions posted in your language."
+msgstr ""
+
+#: contribute.page:48(title)
+msgid "Coding"
+msgstr ""
+
+#: contribute.page:50(p)
+msgid ""
+"There are always more bugs to fix. If you want to find out what needs doing, "
+"talk to us on the mailing list as described above."
+msgstr ""
+
+#: credits.page:8(desc)
+msgid "Meet the team"
+msgstr ""
+
+#: credits.page:11(title)
+msgid "Credits"
+msgstr ""
+
+#: credits.page:13(title)
+msgid "Developers"
+msgstr ""
+
+#: credits.page:14(link)
+msgid "Andrew Fister"
+msgstr ""
+
+#: credits.page:16(link)
+msgid "Michael Vogt"
+msgstr ""
+
+#: credits.page:17(link)
+msgid "Urban Skudnik"
+msgstr ""
+
+#: credits.page:21(title)
+msgid "Documenters"
+msgstr ""
+
+#: credits.page:26(title)
+msgid "Artists"
+msgstr ""
+
+#: credits.page:27(link)
+msgid "Andreas Nilsson"
+msgstr ""
+
+#: credits.page:28(link)
+msgid "Jakub Steiner"
+msgstr ""
+
+#: credits.page:29(link)
+msgid "Lapo Calamandrei"
+msgstr ""
+
+#: credits.page:33(title)
+msgid "Translators"
+msgstr ""
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
+#: credits.page:33(p)
+#: backup-auto.page:0(None)
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Alis https://launchpad.net/~animenagi\n"
+"  Michael Terry https://launchpad.net/~mterry"
+
 #: backup-first.page:6(desc)
-msgid "Start now."
+msgid "Start now"
 msgstr ""
 
 #: backup-first.page:9(title)
@@ -801,36 +997,19 @@ msgid "Your First Backup"
 msgstr ""
 
 #: backup-first.page:12(p)
-msgid "Click on the big <gui style=\"button\">Backup…</gui> button."
+#: backup-auto.page:13(p)
+msgid ""
+"Review your <link type=\"guide\" xref=\"prefs\">backup settings</link>, to "
+"confirm they are what you want."
 msgstr ""
 
 #: backup-first.page:13(p)
 msgid ""
-"A <gui>Backup</gui> dialog will appear asking where you want to keep the "
-"backup files (your <gui>Backup location</gui>). If you have an external hard "
-"drive you want to use, make sure it is plugged in first. On this same "
-"screen, select whether you would like to encrypt the backup files."
+"Click on the <gui style=\"button\">Back Up Now</gui> button on the "
+"<gui>Overview</gui> page."
 msgstr ""
 
-#: backup-first.page:15(p)
-msgid ""
-"Now you can choose exactly which folders to include in the backup. If you "
-"are not sure, stick with the default. Backing up your entire home folder "
-"will preserve all your data and your settings."
-msgstr ""
-
-#: backup-first.page:17(p)
-msgid "Review your selections and click <gui style=\"button\">Backup</gui>."
-msgstr ""
-
-#: backup-first.page:18(p)
-msgid ""
-"If you chose to encrypt your backup, you will be prompted here for an "
-"encryption password. Enter one (and write it down somewhere) and click <gui "
-"style=\"button\">Continue</gui>."
-msgstr ""
-
-#: backup-first.page:19(p)
+#: backup-first.page:14(p)
 msgid ""
 "Wait. It may take a long time to backup, especially if you are backing up to "
 "a remote server. Just let it run in the background while you do something "
@@ -838,7 +1017,7 @@ msgid ""
 msgstr ""
 
 #: backup-auto.page:6(desc)
-msgid "Give yourself peace of mind."
+msgid "Give yourself peace of mind"
 msgstr ""
 
 #: backup-auto.page:9(title)
@@ -847,37 +1026,22 @@ msgstr ""
 
 #: backup-auto.page:10(p)
 msgid ""
-"If you only backup when you remember to do so, you’re not backing up often "
+"If you only back up when you remember to do so, you’re not backing up often "
 "enough. Fortunately, it’s easy to set up automatic backups."
-msgstr ""
-
-#: backup-auto.page:13(p)
-msgid ""
-"Click on <guiseq><gui style=\"menu\">Edit</gui><gui "
-"style=\"menuitem\">Preferences</gui></guiseq>."
 msgstr ""
 
 #: backup-auto.page:14(p)
 msgid ""
-"Make sure the <gui style=\"checkbox\">Automatically backup on a regular "
-"schedule</gui> option is enabled."
+"Turn on the <gui>Automatic backups</gui> option on the <gui>Overview</gui> "
+"page."
 msgstr ""
 
-#: backup-auto.page:15(p)
-msgid "Right below that option, select how often you want a backup to occur."
-msgstr ""
-
-#: backup-auto.page:17(p)
+#: backup-auto.page:16(p)
 msgid ""
-"You may want to choose to only save your backups for a certain length of "
-"time, using the <gui>Keep backups</gui> option. Otherwise, they may end up "
-"consuming a lot of space while you’re not paying attention."
+"Consider only saving your backups for a certain length of time, using the "
+"<gui>Keep backups</gui> option on the <gui>Storage</gui> page. Otherwise, "
+"they may end up consuming a lot of space while you’re not paying attention."
 msgstr ""
 
-#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
-#: backup-auto.page:0(None)
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  Alis https://launchpad.net/~animenagi\n"
-"  Michael Terry https://launchpad.net/~mterry"
+#~ msgid "Restore a previous version of a file."
+#~ msgstr "คืนค่ารุ่นก่อนหน้าของไฟล์ระบบ"

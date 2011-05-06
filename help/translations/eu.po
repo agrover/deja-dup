@@ -7,20 +7,44 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-20 20:43-0400\n"
-"PO-Revision-Date: 2011-01-28 14:33+0000\n"
+"POT-Creation-Date: 2011-04-29 23:11-0400\n"
+"PO-Revision-Date: 2011-04-24 11:23+0000\n"
 "Last-Translator: Asier Sarasua Garmendia <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-24 04:53+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-05-01 04:56+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
+
+#: support.page:8(desc)
+msgid "Get more help"
+msgstr ""
+
+#: support.page:11(title)
+#: contribute.page:40(title)
+msgid "Support"
+msgstr "Sostengua"
+
+#: support.page:13(p)
+msgid ""
+"If you have unanswered questions or a problem you don’t understand, please "
+"<link href=\"https://answers.launchpad.net/deja-dup\">ask about it</link> it "
+"in the support forum."
+msgstr ""
+
+#: support.page:15(p)
+msgid ""
+"Keep in mind that the people answering your questions are volunteers and "
+"that while <app>Déjà Dup</app> is intended to work well, it <link "
+"type=\"guide\" xref=\"license\">comes with no warranty</link>. So please be "
+"polite and patient."
+msgstr ""
 
 #: restore-worst-case.page:6(desc)
-msgid "What to do if you can't restore your files."
-msgstr "Zer egin fitxategiak leheneratu ezin badituzu."
+msgid "What to do if you can’t restore your files"
+msgstr ""
 
 #: restore-worst-case.page:10(title)
 msgid "When Everything Goes Wrong"
@@ -44,12 +68,9 @@ msgstr ""
 
 #: restore-worst-case.page:14(p)
 msgid ""
-"This is going to get technical. If none of this makes sense to you, don't be "
-"afraid to <link href=\"https://answers.launchpad.net/deja-dup\">ask for "
-"help</link>."
+"This is going to get technical. If none of this makes sense to you, don’t be "
+"afraid to <link type=\"guide\" xref=\"support\">ask for help</link>."
 msgstr ""
-"Hurrengoa oso teknikoa da. Ez badu zentzurik zuretzat, ez izan beldur <link "
-"href=\"https://answers.launchpad.net/deja-dup\">laguntza eskatzeko</link>."
 
 #: restore-worst-case.page:17(p)
 msgid ""
@@ -79,14 +100,10 @@ msgstr "Duplicity bidez leheneratzen"
 #: restore-worst-case.page:25(p)
 msgid ""
 "On the assumption that <app>Déjà Dup</app> is just not working for you right "
-"now, you're going to use the command line tool <app>duplicity</app> that is "
+"now, you’re going to use the command line tool <app>duplicity</app> that is "
 "used by <app>Déjà Dup</app> behind the scenes to back up and restore your "
 "files."
 msgstr ""
-"Une honetan <app>Déjà Dup</app>-ek ez duela funtzionatzen ikusita, komando-"
-"lerroko <app>duplicity</app> tresna erabili beharko duzu. Hain zuzen, "
-"<app>Déjà Dup</app>-ek atzetik <app>duplicity</app> erabiltzen du "
-"fitxategien babeskopia egin eta haiek leheneratzeko."
 
 #: restore-worst-case.page:27(p)
 msgid ""
@@ -98,13 +115,10 @@ msgstr ""
 
 #: restore-worst-case.page:29(p)
 msgid ""
-"The first thing we'll try is a simple restore of all your data. Assuming "
+"The first thing we’ll try is a simple restore of all your data. Assuming "
 "your files are on an external drive mounted as <file>/media/backup</file> "
 "and you chose to encrypt the backup, try this:"
 msgstr ""
-"Saiatu behar den lehen gauza dauen leheneratze sinple bat da. Fitxategiak "
-"<file>/media/backup</file> bezala muntatu den kanpo-gailu batean daudela eta "
-"babeskopia zifratzea hautatu zenuela suposatzen badugu, saiatu hau:"
 
 #: restore-worst-case.page:30(screen)
 #, no-wrap
@@ -113,10 +127,9 @@ msgstr "duplicity --gio file:///media/backup /tmp/restore"
 
 #: restore-worst-case.page:32(p)
 msgid ""
-"If you didn't encrypt the backup, add <cmd>--no-encryption</cmd> to the "
+"If you didn’t encrypt the backup, add <cmd>--no-encryption</cmd> to the "
 "command."
 msgstr ""
-"Babeskopia zifratu ez bazenuen, gehitu <cmd>--no-encryption</cmd> komandoari."
 
 #: restore-worst-case.page:35(title)
 msgid "Other Backup Locations"
@@ -135,11 +148,9 @@ msgstr ""
 
 #: restore-worst-case.page:37(p)
 msgid ""
-"Remember to add <cmd>--no-encryption</cmd> to any example commands if you're "
+"Remember to add <cmd>--no-encryption</cmd> to any example commands if you’re "
 "backup is not encrypted."
 msgstr ""
-"Gogoan izan <cmd>--no-encryption</cmd> gehitu behar duzula adibide modura "
-"ematen diren komandoei, zure babeskopia zifratuta ez badago."
 
 #: restore-worst-case.page:38(p)
 msgid ""
@@ -187,6 +198,11 @@ msgid ""
 "duplicity s3+http://deja-dup-auto-<var>LOWERCASE_ID</var>/<var>FOLDER</var> "
 "/tmp/restore"
 msgstr ""
+"\n"
+"export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
+"export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
+"duplicity s3+http://deja-dup-auto-<var>LOWERCASE_ID</var>/<var>FOLDER</var> "
+"/tmp/restore"
 
 #: restore-worst-case.page:50(title)
 msgid "Rackspace Cloud Files"
@@ -364,13 +380,10 @@ msgstr "Eskuz leheneratzea"
 
 #: restore-worst-case.page:101(p)
 msgid ""
-"If even <app>duplicity</app> isn't working for you, there may be little "
+"If even <app>duplicity</app> isn’t working for you, there may be little "
 "hope. The backup file format is complicated and not easily manipulated. But "
-"if you're desperate, it's worth a try."
+"if you’re desperate, it’s worth a try."
 msgstr ""
-"Nahiz eta <app>duplicity</app> aplikazioak ez funtzionatu zure kasuan, "
-"itxaropen-izpi bat egon daiteke. Babeskopiaren fitxategi-formatua konplexua "
-"da eta ez da erraz manipulatzen. Baina etsita bazaude, merezi du saiatzeak."
 
 #: restore-worst-case.page:103(p)
 msgid ""
@@ -385,14 +398,10 @@ msgstr ""
 #: restore-worst-case.page:105(p)
 msgid ""
 "<app>Duplicity</app> stores your data in small chunks called volumes. Some "
-"volumes belong to the periodic 'full' or fresh backups and others to the "
-"'inc' or incremental backups. Starting with a full backup set of volumes at "
-"volume 1, you'll need to restore files volume by volume."
+"volumes belong to the periodic ‘full’ or fresh backups and others to the "
+"‘inc’ or incremental backups. Starting with a full backup set of volumes at "
+"volume 1, you’ll need to restore files volume by volume."
 msgstr ""
-"<app>Duplicity</app>-k bolumen izeneko puska txikietan gordetzen ditu "
-"datuak. Bolumen batzuk aldizkako babeskopia osoei dagozkie eta beste batzuk "
-"babeskopia inkrementalenak dira. Lehen bolumena babeskopia oso baten bolumen-"
-"multzoa izanik, fitxategiak bolumenez bolumen leheneratu beharko dituzu."
 
 #: restore-worst-case.page:107(p)
 msgid ""
@@ -415,13 +424,14 @@ msgstr ""
 
 #: restore-worst-case.page:110(p)
 msgid "Or to do all at once (make sure you have plenty of space!):"
-msgstr ""
+msgstr "Edo dena batera egin (segurtatu nahiko espazio daukazula!):"
 
 #: restore-worst-case.page:111(screen)
 #, no-wrap
 msgid ""
 "gpg --multifile --decrypt duplicity-full.20110127T131352Z.*.difftar.gpg"
 msgstr ""
+"gpg --multifile --decrypt duplicity-full.20110127T131352Z.*.difftar.gpg"
 
 #: restore-worst-case.page:113(p)
 msgid ""
@@ -437,23 +447,24 @@ msgstr ""
 #: restore-worst-case.page:114(screen)
 #, no-wrap
 msgid "tar xf duplicity-full.20110127T131352Z.vol1.difftar"
-msgstr ""
+msgstr "tar xf duplicity-full.20110127T131352Z.vol1.difftar"
 
 #: restore-worst-case.page:116(p)
 msgid "Or again, to do all at once:"
-msgstr ""
+msgstr "Edo berriro, egin dena batera:"
 
 #: restore-worst-case.page:117(screen)
 #, no-wrap
 msgid ""
 "for t in duplicity-full.20110127T131352Z.*.difftar; do tar xf $t; done"
 msgstr ""
+"for t in duplicity-full.20110127T131352Z.*.difftar; do tar xf $t; done"
 
 #: restore-worst-case.page:119(p)
 msgid ""
 "Now the patch files will be in <file>multivolume_snapshot</file> and "
 "<file>snapshot</file> folders. Each file that spanned multiple volumes will "
-"be in <file>multivolume_snapshot</file>. Let's say you backed up "
+"be in <file>multivolume_snapshot</file>. Let’s say you backed up "
 "<file>/home/jane/essay.txt</file>:"
 msgstr ""
 
@@ -463,16 +474,21 @@ msgid ""
 "cd multivolume_snapshot/home/jane/essay.txt\n"
 "cat * &gt; essay.txt"
 msgstr ""
+"cd multivolume_snapshot/home/jane/essay.txt\n"
+"cat * &gt; essay.txt"
 
 #: restore-worst-case.page:123(p)
 msgid ""
 "To recover data from incremental backups, use <cmd>rdiff</cmd> to stitch the "
 "files together. See <cmd>man rdiff</cmd> for usage."
 msgstr ""
+"Babeskopia inkrementaletako datuak leheneratzeko, erabili <cmd>rdiff</cmd> "
+"fitxategiak elkarri itsasteko. Begiratu <cmd>man rdiff</cmd> bere erabilera "
+"ikasteko."
 
 #: restore-revert.page:6(desc)
-msgid "Restore a previous version of a file."
-msgstr "Leheneratu fitxategi baten aurreko bertsio bat."
+msgid "Restore a previous version of a file"
+msgstr ""
 
 #: restore-revert.page:9(title)
 msgid "Reverting a File"
@@ -499,11 +515,8 @@ msgstr ""
 "leheneratu nahi duzun."
 
 #: restore-revert.page:15(p)
-#: restore-full.page:23(p)
 #: restore-full.page:25(p)
 #: restore-full.page:27(p)
-#: backup-first.page:14(p)
-#: backup-first.page:16(p)
 msgid "Click <gui style=\"button\">Forward</gui>."
 msgstr "Egin klik <gui style=\"button\">Aurrera</gui> botoian."
 
@@ -533,8 +546,8 @@ msgid "deja-dup --restore FILE1 FILE2"
 msgstr "deja-dup --restore FITXATEGI1 FITXATEGI2"
 
 #: restore-lost.page:6(desc)
-msgid "Restore a file that is no longer present."
-msgstr "Jadanik ez dagoen fitxategi bat leheneratu."
+msgid "Restore a file that is no longer present"
+msgstr ""
 
 #: restore-lost.page:9(title)
 msgid "Restoring a Lost File"
@@ -585,8 +598,8 @@ msgstr ""
 "fitxategi-izenak gogoratzen badituzu:"
 
 #: restore-full.page:6(desc)
-msgid "Recover from total system failure."
-msgstr "Berreskuratu sistemaren hutsegite osotik."
+msgid "Recover from total system failure"
+msgstr ""
 
 #: restore-full.page:9(title)
 msgid "Full System Restore"
@@ -626,24 +639,27 @@ msgstr "Leheneratu"
 #: restore-full.page:20(p)
 #: backup-first.page:11(p)
 #: backup-auto.page:12(p)
-msgid "Run <app>Déjà Dup</app>."
-msgstr "Exekutatu <app>Déjà Dup</app>."
+msgid "Open your <gui>Backup</gui> settings."
+msgstr ""
 
 #: restore-full.page:21(p)
-msgid "Click on the big <gui style=\"button\">Restore…</gui> button."
-msgstr "Egin klik <gui style=\"button\">Leheneratu…</gui> botoi handian."
+msgid ""
+"Click on the <gui style=\"button\">Restore…</gui> button on the "
+"<gui>Overview</gui> page."
+msgstr ""
 
 #: restore-full.page:22(p)
 msgid ""
 "A <gui>Restore</gui> dialog will appear asking where your backup files are "
-"stored (your <gui>Backup location</gui>). Choose it from the dropdown or "
-"choose <gui>Other…</gui>. On this same screen, select whether you encrypted "
-"the backup or not."
+"stored (your <gui>Backup location</gui>). On this same screen, select "
+"whether you encrypted the backup or not."
 msgstr ""
-"<gui>Leheneratu</gui> koadroa agertuko da eta zure babeskopia non dagoen "
-"gordeta (zure <gui>Babeskopiaren kokapena</gui>) galdetuko dizu. Hautatu "
-"hura goitibeherako koadroan edo hautatu <gui>Beste bat...</gui>. Pantaila "
-"horretan bertan, hautatu babeskopia zifratuta dagoen ala ez."
+
+#: restore-full.page:23(p)
+msgid ""
+"Click <gui style=\"button\">Forward</gui> and wait for <app>Déjà Dup</app> "
+"to scan the backup location."
+msgstr ""
 
 #: restore-full.page:24(p)
 msgid ""
@@ -674,98 +690,95 @@ msgstr ""
 
 #: restore-full.page:32(p)
 msgid ""
-"If for whatever reason, you have a problem after trying to restore with the "
+"If for whatever reason you have a problem after trying to restore with the "
 "<gui style=\"checkbox\">Restore files to original locations</gui> option, "
 "try restoring instead to a temporary directory and moving your files to "
 "where they belong."
 msgstr ""
-"Edozein arrazoirengatik arazoren bat badaukazu <gui "
-"style=\"checkbox\">Leheneratu fitxategiak jatorrizko kokapenetara</gui> "
-"aukerarekin leheneratzea egiteko, saiatu behin-behineko direktorio batera "
-"leheneratzen eta ondoren mugitu fitxategiak bere lekura."
+
+#: restore-full.page:33(p)
+msgid ""
+"If that still doesn’t work, there are <link type=\"guide\" xref=\"restore-"
+"worst-case\">more drastic things</link> you can try."
+msgstr ""
 
 #: prefs.page:7(desc)
-msgid "Adjust your backup settings."
-msgstr "Doitu zure babeskopiaren ezarpenak."
+msgid "Adjust your backup settings"
+msgstr ""
 
 #: prefs.page:10(title)
 msgid "Preferences"
 msgstr "Hobespenak"
 
-#: prefs.page:11(p)
-msgid ""
-"To configure <app>Déjà Dup</app>, choose <guiseq><gui "
-"style=\"menu\">Edit</gui><gui style=\"menuitem\">Preferences</gui></guiseq>."
+#: prefs.page:13(gui)
+msgid "Automatic backups"
 msgstr ""
-"<app>Déjà Dup</app> konfiguratzeko, hautatu <guiseq><gui "
-"style=\"menu\">Editatu</gui><gui "
-"style=\"menuitem\">hobespenak</gui></guiseq>."
 
-#: prefs.page:14(gui)
+#: prefs.page:14(p)
+msgid ""
+"Turn this option on to have <app>Déjà Dup</app> automatically back up for "
+"you. This is recommended so that you don’t forget to do it yourself. Backups "
+"are more useful the more recent they are, so it is important to regularly "
+"back up."
+msgstr ""
+
+#: prefs.page:17(gui)
 msgid "Backup location"
 msgstr "Babeskopiaren kokapena"
 
-#: prefs.page:15(p)
+#: prefs.page:18(p)
 msgid ""
-"Use this drop-down list box to specify the backup location that <app>Déjà "
-"Dup</app> uses when backing up or restoring:"
+"Use these options to specify the backup location that <app>Déjà Dup</app> "
+"will use when backing up or restoring:"
 msgstr ""
-"Erabili goitibeherako zerrenda hau <app>Déjà Dup</app> aplikazioak "
-"babeskopia egiten edo leheneratzen duenean erabiliko duen babeskopiaren "
-"kokapena zehazteko:"
 
-#: prefs.page:18(title)
+#: prefs.page:21(title)
 msgid "Cloud Services"
 msgstr "Hodei-zerbitzuak"
 
-#: prefs.page:19(p)
+#: prefs.page:22(p)
 msgid ""
 "The first few backup locations are cloud storage services provided by "
-"various companies. For a small fee per gigabyte, they hold your data for "
-"you. A cloud service like this is recommended because it is an easy way to "
-"keep your data offsite (meaning out of your home: in case of disaster or "
-"theft, your data will still be safe). You can choose from Amazon S3 and "
-"Rackspace Cloud Files."
+"various companies. For a small fee, they hold your data for you. A cloud "
+"service like this is recommended because it is an easy way to keep your data "
+"offsite (meaning out of your home: in case of disaster or theft, your data "
+"will still be safe)."
 msgstr ""
 
-#: prefs.page:20(p)
+#: prefs.page:23(p)
 msgid ""
 "These services costs money. Read their rates carefully before using it."
 msgstr ""
 "Zerbitzu hauek dirua kostatzen dute. Irakurri haien tasak arretaz erabiltzen "
 "hasi baino lehen."
 
-#: prefs.page:23(title)
+#: prefs.page:26(title)
 msgid "Removable Media"
 msgstr "Euskarri aldagarria"
 
-#: prefs.page:24(p)
+#: prefs.page:27(p)
 msgid ""
 "You may see removable media like external hard drives or thumb drives listed."
 msgstr ""
 "Euskarri aldagarriak ikusi ahal izango dituzu zerrendan, esaterako kanpoko "
 "disko zurrunak edo flash-unitateak."
 
-#: prefs.page:27(title)
+#: prefs.page:30(title)
 msgid "Remote Servers"
 msgstr "Urruneko zerbitzariak"
 
-#: prefs.page:28(p)
+#: prefs.page:31(p)
 msgid ""
 "Choose the type of remote server to which you want to connect. Then you can "
-"enter the server information. Alternatively, if you know your server's URL, "
+"enter the server information. Alternatively, if you know your server’s URL, "
 "choose <gui>Custom Location</gui> and enter it."
 msgstr ""
-"Hautatu urruneko zein zerbitzari-motara konektatu nahi duzun. Ondoren "
-"zerbitzari-informazioa sartu ahal izango duzu. Bestela, zure zerbitzariaren "
-"URLa ezagutzen baduzu, hautatu <gui>Kokapen pertsonalizatua</gui> eta sar "
-"ezazu hura."
 
-#: prefs.page:31(title)
+#: prefs.page:34(title)
 msgid "Local Folder"
 msgstr "Karpeta lokala"
 
-#: prefs.page:32(p)
+#: prefs.page:35(p)
 msgid ""
 "You may also want to choose a local folder as a backup location. Note that "
 "backups can be quite large, so make sure you have enough free disk space."
@@ -774,158 +787,17 @@ msgstr ""
 "kokapenerako. Kontuan izan babeskopiak nahiko handiak izan daitezkeela, "
 "beraz segurtatu nahiko leku libre daukazula."
 
-#: prefs.page:37(gui)
-msgid "Encrypt backup files"
-msgstr "Zifratu babeskopiaren fitxategiak"
-
-#: prefs.page:38(p)
+#: prefs.page:36(p)
 msgid ""
-"Encrypting your backup files is recommended to keep your data safe. If you "
-"don’t have exclusive physical control of your backup location, or if it is "
-"stolen, an encrypted backup prevents others from looking at your personal "
-"data."
+"This is not recommended, because if your hardware fails, you will lose both "
+"your original data and your backups."
 msgstr ""
-"Gomendagarria da zure datuak zifratzea datuak seguru egon daitezen. Zure "
-"babeskopiaren kokapenaren kontrol fisiko esklusiboa ez badaukazu, edo "
-"lapurtzen badizute, zifratutako babeskopiari esker besteek ezingo dute zure "
-"datuak begiratu."
 
-#: prefs.page:39(p)
-msgid ""
-"If on, you will be prompted for a password. Keep this password safe, you "
-"will need it to restore your data."
-msgstr ""
-"Aktibatuta badago, pasahitza eskatuko dizu. Mantendu pasahitz hau toki "
-"seguruan, zure datuak leheneratzeko beharrezkoa izango baituzu."
-
-#: prefs.page:40(p)
-msgid "Encryption is enabled by default."
-msgstr "Zifratzea gaituta dago modu lehenetsian."
-
-#: prefs.page:43(gui)
-msgid "Include files in folders"
-msgstr "Sartu karpetetako fitxategiak"
-
-#: prefs.page:44(p)
-msgid ""
-"Select a list of directories to backup. Press the <gui "
-"style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
-"modify the list. If you are only interested in backing up your own data, the "
-"default of <gui>Home Folder</gui> is sufficient."
-msgstr ""
-"Hautatu babeskopia egingo diren direktorioen zerrenda. Sakatu <gui "
-"style=\"button\">Gehitu</gui> edo <gui style=\"button\">Kendu</gui> botoiak "
-"zerrenda moldatzeko. Zure datu propioak soilik babestu nahi badituzu, balio "
-"lehenetsia (<gui>Karpeta nagusia</gui>) aski da."
-
-#: prefs.page:47(gui)
-msgid "Except files in folders"
-msgstr "Ez sartu karpetetako fitxategiak"
-
-#: prefs.page:48(p)
-msgid ""
-"Select a list of directories to not backup. Press the <gui "
-"style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
-"modify the list."
-msgstr ""
-"Hautatu babeskopiarik egingo ez diren direktorioen zerrenda bat. Sakatu <gui "
-"style=\"button\">Gehitu</gui> edo <gui style=\"button\">Kendu</gui> botoiak "
-"zerrenda moldatzeko."
-
-#: prefs.page:49(p)
-msgid ""
-"Some of your data may be large and not very important to you. In that case, "
-"you can save yourself some time and space by not backing them up."
-msgstr ""
-"Zure datuetako batzuk oso handiak eta ez hain garrantzizkoak izan daitezke. "
-"Kasu horretan, denbora eta espazioa irabaziko duzu horien babeskopia egiten "
-"ez baduzu."
-
-#: prefs.page:51(p)
-msgid "Some locations are always excluded by default:"
-msgstr "Kokapen batzuk modu lehenetsian kanpoan geratzen dira:"
-
-#: prefs.page:53(file)
-msgid "~/.adobe/Flash_Player/AssetCache"
-msgstr "~/.adobe/Flash_Player/AssetCache"
-
-#: prefs.page:54(file)
-msgid "~/.cache"
-msgstr "~/.cache"
-
-#: prefs.page:55(file)
-msgid "~/.gvfs"
-msgstr "~/.gvfs"
-
-#: prefs.page:56(file)
-msgid "~/.Private"
-msgstr "~/.Private"
-
-#: prefs.page:57(file)
-msgid "~/.recent-applications.xbel"
-msgstr "~/.recent-applications.xbel"
-
-#: prefs.page:58(file)
-msgid "~/.recently-used.xbel"
-msgstr "~/.recently-used.xbel"
-
-#: prefs.page:59(file)
-msgid "~/.thumbnails"
-msgstr "~/.thumbnails"
-
-#: prefs.page:60(file)
-msgid "~/.xsession-errors"
-msgstr "~/.xsession-errors"
-
-#: prefs.page:61(file)
-msgid "/proc"
-msgstr "/proc"
-
-#: prefs.page:62(file)
-msgid "/sys"
-msgstr "/sys"
-
-#: prefs.page:63(file)
-msgid "/tmp"
-msgstr "/tmp"
-
-#: prefs.page:68(gui)
-msgid "Automatically backup on a regular schedule"
-msgstr "Egin babeskopia automatikoak denbora-tarte finkoetan"
-
-#: prefs.page:69(p)
-msgid ""
-"Turn this option on to have <app>Déjà Dup</app> automatically backup for "
-"you. This is recommended so that you don’t forget to do it yourself. Backups "
-"are more useful the more recently you have made them, so it is important to "
-"regularly do so."
-msgstr ""
-"Aktibatu aukera hau <app>Déjà Dup</app>-ek babeskopia automatikoak egin "
-"ditzan. Hau gomendagarria da, horrela ez baitzaizu ahaztuko babeskopiak "
-"egitea. Babeskopiak erabilgarriagoak dira berriagoak direnean, beraz "
-"garrantzitsua da aldian-aldian egitea."
-
-#: prefs.page:70(p)
-msgid "Automatic backups are disabled by default."
-msgstr "Babeskopia automatikoak desgaituta daude modu lehenetsian."
-
-#: prefs.page:73(gui)
-msgid "How often to backup"
-msgstr "Zenbatero egin babeskopia"
-
-#: prefs.page:74(p)
-msgid "Choose a schedule for automatic backups."
-msgstr "Hautatu babeskopia automatikoetarako programaketa bat."
-
-#: prefs.page:75(p)
-msgid "Automatic backups are scheduled weekly by default."
-msgstr "Babeskopia automatikoak astero programatuta daude modu lehenetsian."
-
-#: prefs.page:78(gui)
+#: prefs.page:41(gui)
 msgid "Keep backups"
 msgstr "Mantendu babeskopiak"
 
-#: prefs.page:79(p)
+#: prefs.page:42(p)
 msgid ""
 "Choose the minimum amount of time to keep backup files. If you find that the "
 "backup files are taking up too much space, you may want to decrease this "
@@ -938,7 +810,7 @@ msgstr ""
 "hautatutako denbora baino pixka bat luzeago manten daitezke. Ez da "
 "fitxategirik ezabatuko garaia baino lehen."
 
-#: prefs.page:80(p)
+#: prefs.page:43(p)
 msgid ""
 "Backups are kept forever by default, but still may be deleted earlier if the "
 "backup location begins to run out of space."
@@ -946,7 +818,148 @@ msgstr ""
 "Babeskopiak betiko gordetzen dira modu lehenetsian, baina hala ere lehenago "
 "ezaba daitezke babeskopiaren kokapena espaziorik gabe geratzen bada."
 
+#: prefs.page:46(gui)
+msgid "Encrypt backup files"
+msgstr "Zifratu babeskopiaren fitxategiak"
+
+#: prefs.page:47(p)
+msgid ""
+"Encrypting your backup files is recommended to keep your data safe. If you "
+"don’t have exclusive physical control of your backup location or if it is "
+"stolen, an encrypted backup prevents others from looking at your personal "
+"data."
+msgstr ""
+
+#: prefs.page:48(p)
+msgid ""
+"If enabled, you will be prompted for an encryption password when backing up."
+msgstr ""
+
+#: prefs.page:49(p)
+msgid ""
+"Keep this encryption password safe, you will need it to restore your data. "
+"You may want to write it down or use one you know you will remember."
+msgstr ""
+
+#: prefs.page:52(gui)
+msgid "Include files in folders"
+msgstr "Sartu karpetetako fitxategiak"
+
+#: prefs.page:53(p)
+msgid ""
+"Choose a list of directories to back up. Press the <gui "
+"style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
+"modify the list. If you are only interested in backing up your own data, the "
+"default of <gui>Home Folder</gui> is sufficient."
+msgstr ""
+
+#: prefs.page:56(gui)
+msgid "Except files in folders"
+msgstr "Ez sartu karpetetako fitxategiak"
+
+#: prefs.page:57(p)
+msgid ""
+"Choose a list of directories to not back up. Press the <gui "
+"style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
+"modify the list."
+msgstr ""
+
+#: prefs.page:58(p)
+msgid ""
+"Some of your data may be large and not very important to you. In that case, "
+"you can save yourself some time and space by not backing them up."
+msgstr ""
+"Zure datuetako batzuk oso handiak eta ez hain garrantzizkoak izan daitezke. "
+"Kasu horretan, denbora eta espazioa irabaziko duzu horien babeskopia egiten "
+"ez baduzu."
+
+#: prefs.page:60(p)
+msgid "Some locations are always excluded by default:"
+msgstr "Kokapen batzuk modu lehenetsian kanpoan geratzen dira:"
+
+#: prefs.page:62(file)
+msgid "~/.adobe/Flash_Player/AssetCache"
+msgstr "~/.adobe/Flash_Player/AssetCache"
+
+#: prefs.page:63(file)
+msgid "~/.cache"
+msgstr "~/.cache"
+
+#: prefs.page:64(file)
+msgid "~/.gvfs"
+msgstr "~/.gvfs"
+
+#: prefs.page:65(file)
+msgid "~/.Private"
+msgstr "~/.Private"
+
+#: prefs.page:66(file)
+msgid "~/.recent-applications.xbel"
+msgstr "~/.recent-applications.xbel"
+
+#: prefs.page:67(file)
+msgid "~/.recently-used.xbel"
+msgstr "~/.recently-used.xbel"
+
+#: prefs.page:68(file)
+msgid "~/.thumbnails"
+msgstr "~/.thumbnails"
+
+#: prefs.page:69(file)
+msgid "~/.xsession-errors"
+msgstr "~/.xsession-errors"
+
+#: prefs.page:70(file)
+msgid "/proc"
+msgstr "/proc"
+
+#: prefs.page:71(file)
+msgid "/sys"
+msgstr "/sys"
+
+#: prefs.page:72(file)
+msgid "/tmp"
+msgstr "/tmp"
+
+#: license.page:6(desc)
+msgid "Know your rights"
+msgstr ""
+
+#: license.page:9(title)
+msgid "License"
+msgstr "Lizentzia"
+
+#: license.page:10(p)
+msgid ""
+"This program is free software; you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation; either version 3 of the License, or (at your option) "
+"any later version."
+msgstr ""
+
+#: license.page:11(p)
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for "
+"more details."
+msgstr ""
+"Programa hau erabilgarria izango delakoan banatzen da, baina, INOLAKO "
+"BERMERIK GABE; era berean, ez da bermatzen beraren EGOKITASUNA "
+"MERKATURATZEKO edo HELBURU PARTIKULARRETARAKO ERABILTZEKO. Argibide gehiago "
+"nahi izanez gero, ikus GNU Lizentzia Publiko Orokorra."
+
+#: license.page:12(p)
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <link "
+"href=\"http://www.gnu.org/licenses/\">http://www.gnu.org/licenses/</link>."
+msgstr ""
+
 #: index.page:9(name)
+#: credits.page:15(link)
+#: credits.page:22(link)
+#: credits.page:30(link)
 msgid "Michael Terry"
 msgstr "Michael Terry"
 
@@ -955,16 +968,16 @@ msgid "mike@mterry.name"
 msgstr "mike@mterry.name"
 
 #: index.page:11(years)
-msgid "2010"
-msgstr "2010"
+msgid "2010,2011"
+msgstr "2010,2011"
 
 #: index.page:13(p)
 msgid "Creative Commons Attribution-Share Alike 3.0 Unported License"
 msgstr "Creative Commons Attribution-Share Alike 3.0 Unported License"
 
 #: index.page:16(title)
-msgid "<app>Déjà Dup</app> Help"
-msgstr "<app>Déjà Dup</app> laguntza"
+msgid "Backup Help"
+msgstr "Babeskopiarako laguntza"
 
 #: index.page:19(title)
 msgid "Backing Up"
@@ -974,58 +987,177 @@ msgstr "Babeskopia egiten"
 msgid "Restoring Files"
 msgstr "Fitxategiak leheneratzen"
 
+#: index.page:27(title)
+msgid "About <app>Déjà Dup Backup Tool</app>"
+msgstr "<app>Déjà Dup Backup Tool</app>-i buruz"
+
+#: contribute.page:8(desc)
+msgid "Help make <app>Déjà Dup</app> better"
+msgstr ""
+
+#: contribute.page:11(title)
+msgid "Getting Involved"
+msgstr ""
+
+#: contribute.page:13(p)
+msgid ""
+"So you want to help make <app>Déjà Dup</app> even better? Excellent! Here "
+"are some suggestions."
+msgstr ""
+
+#: contribute.page:16(title)
+msgid "Report Issues"
+msgstr "Jakinarazi akatsak"
+
+#: contribute.page:18(p)
+msgid ""
+"Did you see a flaw? Do you have an idea for a new feature? Simply <link "
+"href=\"https://bugs.launchpad.net/deja-dup/+filebug\">report it as a "
+"bug</link>. Be patient for a reply."
+msgstr ""
+
+#: contribute.page:20(p)
+msgid "Note that bug reports should be in English only."
+msgstr ""
+
+#: contribute.page:24(title)
+msgid "Talk to Us"
+msgstr "Hitz egin gurekin"
+
+#: contribute.page:26(p)
+msgid ""
+"We don’t bite. Send an email to the <link href=\"mailto:deja-dup-"
+"hackers@lists.launchpad.net\">mailing list</link>."
+msgstr ""
+"Ez dugu hozka egiten. Bidali posta bat <link href=\"mailto:deja-dup-"
+"hackers@lists.launchpad.net\">posta-zerrendara</link>."
+
+#: contribute.page:28(p)
+msgid ""
+"Or join the <link href=\"https://launchpad.net/~deja-dup-"
+"hackers\">team</link> to subscribe to the list. It’s easy and automatic (no "
+"approval is necessary). Feel free to lurk; the list is very low traffic."
+msgstr ""
+
+#: contribute.page:30(p)
+msgid "Note that the list is English only."
+msgstr "Kontuan izan zerrenda ingelesez soilik dela."
+
+#: contribute.page:34(title)
+msgid "Translating"
+msgstr "Itzulpena"
+
+#: contribute.page:36(p)
+msgid ""
+"Do you speak both English and another language? Good! You can help translate "
+"<app>Déjà Dup</app> through <link "
+"href=\"https://translations.launchpad.net/deja-dup\">a web interface</link>. "
+"It’s really quite easy and is very appreciated."
+msgstr ""
+
+#: contribute.page:42(p)
+msgid ""
+"Do you like helping people? <link href=\"https://answers.launchpad.net/deja-"
+"dup\">Answer user questions</link> and support requests."
+msgstr ""
+
+#: contribute.page:44(p)
+msgid ""
+"This is another great way for non-English speakers to get involved, as you "
+"can answer questions posted in your language."
+msgstr ""
+
+#: contribute.page:48(title)
+msgid "Coding"
+msgstr "Garapena"
+
+#: contribute.page:50(p)
+msgid ""
+"There are always more bugs to fix. If you want to find out what needs doing, "
+"talk to us on the mailing list as described above."
+msgstr ""
+"Beti daude konpondu behar diren akatsak. Zer egin behar den jakin nahi "
+"baduzu, hitz egin gurekin posta-zerrendaren bidez, goian aipatu den bezala."
+
+#: credits.page:8(desc)
+msgid "Meet the team"
+msgstr ""
+
+#: credits.page:11(title)
+msgid "Credits"
+msgstr "Kredituak"
+
+#: credits.page:13(title)
+msgid "Developers"
+msgstr "Garatzaileak"
+
+#: credits.page:14(link)
+msgid "Andrew Fister"
+msgstr "Andrew Fister"
+
+#: credits.page:16(link)
+msgid "Michael Vogt"
+msgstr "Michael Vogt"
+
+#: credits.page:17(link)
+msgid "Urban Skudnik"
+msgstr "Urban Skudnik"
+
+#: credits.page:21(title)
+msgid "Documenters"
+msgstr "Dokumentazio-egileak"
+
+#: credits.page:26(title)
+msgid "Artists"
+msgstr "Artistak"
+
+#: credits.page:27(link)
+msgid "Andreas Nilsson"
+msgstr "Andreas Nilsson"
+
+#: credits.page:28(link)
+msgid "Jakub Steiner"
+msgstr "Jakub Steiner"
+
+#: credits.page:29(link)
+msgid "Lapo Calamandrei"
+msgstr "Lapo Calamandrei"
+
+#: credits.page:33(title)
+msgid "Translators"
+msgstr "Itzultzaileak"
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
+#: credits.page:33(p)
+#: backup-auto.page:0(None)
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Asier Sarasua Garmendia https://launchpad.net/~asarasuagarmendia\n"
+"  Michael Terry https://launchpad.net/~mterry"
+
 #: backup-first.page:6(desc)
-msgid "Start now."
-msgstr "Hasi orain."
+msgid "Start now"
+msgstr ""
 
 #: backup-first.page:9(title)
 msgid "Your First Backup"
 msgstr "Zure lehen babeskopia"
 
 #: backup-first.page:12(p)
-msgid "Click on the big <gui style=\"button\">Backup…</gui> button."
-msgstr "Sakatu <gui style=\"button\">Babeskopia…</gui> botoi handian."
+#: backup-auto.page:13(p)
+msgid ""
+"Review your <link type=\"guide\" xref=\"prefs\">backup settings</link>, to "
+"confirm they are what you want."
+msgstr ""
 
 #: backup-first.page:13(p)
 msgid ""
-"A <gui>Backup</gui> dialog will appear asking where you want to keep the "
-"backup files (your <gui>Backup location</gui>). If you have an external hard "
-"drive you want to use, make sure it is plugged in first. On this same "
-"screen, select whether you would like to encrypt the backup files."
+"Click on the <gui style=\"button\">Back Up Now</gui> button on the "
+"<gui>Overview</gui> page."
 msgstr ""
-"<gui>Babeskopia</gui> koadroa agertuko da zure babeskopiaren fitxategiak non "
-"mantendu nahi dituzun (zure <gui>Babeskopiaren kokapena</gui>) eskatuz. "
-"Kanpoko disko gogor bat erabili nahi baduzu, segurtatu lehenengo hura "
-"konektatuta dagoela. Pantaila honetan bertan, hautatu babeskopiaren "
-"fitxategiak zifratu nahi dituzun ala ez."
 
-#: backup-first.page:15(p)
-msgid ""
-"Now you can choose exactly which folders to include in the backup. If you "
-"are not sure, stick with the default. Backing up your entire home folder "
-"will preserve all your data and your settings."
-msgstr ""
-"Orain zehatz-mehatz hauta dezakezu zein karpeten babeskopia egin nahi duzun. "
-"Seguru ez bazaude, erabili balio lehenetsia. Zure karpeta nagusia osorik "
-"kopiatzen baduzu, zure datu eta ezarpen guztiak gordeko dituzu."
-
-#: backup-first.page:17(p)
-msgid "Review your selections and click <gui style=\"button\">Backup</gui>."
-msgstr ""
-"Berraztertu zure hautapenak eta egin klik <gui "
-"style=\"button\">Babeskopia</gui> botoian."
-
-#: backup-first.page:18(p)
-msgid ""
-"If you chose to encrypt your backup, you will be prompted here for an "
-"encryption password. Enter one (and write it down somewhere) and click <gui "
-"style=\"button\">Continue</gui>."
-msgstr ""
-"Zure babeskopia zifratzea hautatzen baduzu, zifratzerako pasahitza eskatuko "
-"zaizu. Sartu bat (eta gorde idatzita beste nonbait) eta egin klik <gui "
-"style=\"button\">Jarraitu</gui> botoian."
-
-#: backup-first.page:19(p)
+#: backup-first.page:14(p)
 msgid ""
 "Wait. It may take a long time to backup, especially if you are backing up to "
 "a remote server. Just let it run in the background while you do something "
@@ -1036,8 +1168,8 @@ msgstr ""
 "egiten duzun bitartean."
 
 #: backup-auto.page:6(desc)
-msgid "Give yourself peace of mind."
-msgstr "Eskaini bakea zeure buruari."
+msgid "Give yourself peace of mind"
+msgstr ""
 
 #: backup-auto.page:9(title)
 msgid "Automatic Backups"
@@ -1045,49 +1177,25 @@ msgstr "Babeskopia automatikoak"
 
 #: backup-auto.page:10(p)
 msgid ""
-"If you only backup when you remember to do so, you’re not backing up often "
+"If you only back up when you remember to do so, you’re not backing up often "
 "enough. Fortunately, it’s easy to set up automatic backups."
 msgstr ""
-"Gogoratzen duzunean soilik egiten badituzu babeskopiak, ez dituzu aski "
-"babeskopia egiten. Zorionez, erraza da babeskopia automatikoak konfiguratzea."
-
-#: backup-auto.page:13(p)
-msgid ""
-"Click on <guiseq><gui style=\"menu\">Edit</gui><gui "
-"style=\"menuitem\">Preferences</gui></guiseq>."
-msgstr ""
-"Sakatu <guiseq><gui style=\"menu\">Editatu</gui><gui "
-"style=\"menuitem\">Hobespenak</gui></guiseq>."
 
 #: backup-auto.page:14(p)
 msgid ""
-"Make sure the <gui style=\"checkbox\">Automatically backup on a regular "
-"schedule</gui> option is enabled."
+"Turn on the <gui>Automatic backups</gui> option on the <gui>Overview</gui> "
+"page."
 msgstr ""
-"Segurtatu <gui style=\"checkbox\">Egin babeskopia automatikoak denbora-tarte "
-"finkoetan</gui> aukera gaituta dagoela."
 
-#: backup-auto.page:15(p)
-msgid "Right below that option, select how often you want a backup to occur."
-msgstr "Aukera horren azpian, hautatu zenbatero egin nahi duzun babeskopia."
-
-#: backup-auto.page:17(p)
+#: backup-auto.page:16(p)
 msgid ""
-"You may want to choose to only save your backups for a certain length of "
-"time, using the <gui>Keep backups</gui> option. Otherwise, they may end up "
-"consuming a lot of space while you’re not paying attention."
+"Consider only saving your backups for a certain length of time, using the "
+"<gui>Keep backups</gui> option on the <gui>Storage</gui> page. Otherwise, "
+"they may end up consuming a lot of space while you’re not paying attention."
 msgstr ""
-"Zure babeskopiak denbora-tarte jakin batez soilik gordetzea hauta dezakezu, "
-"<gui>Mantendu babeskopiak</gui> erabiliz. Bestela, espazio asko kontsumi "
-"daiteke arreta jartzen ez baduzu."
 
-#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
-#: backup-auto.page:0(None)
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  Asier Sarasua Garmendia https://launchpad.net/~asarasuagarmendia\n"
-"  Michael Terry https://launchpad.net/~mterry"
+#~ msgid "Restore a previous version of a file."
+#~ msgstr "Leheneratu fitxategi baten aurreko bertsio bat."
 
 #, no-wrap
 #~ msgid "deja-dup --restore Documents/test.txt"
@@ -1103,6 +1211,9 @@ msgstr ""
 #~ "Fitxategi-izena gogoratu behar duzu, jadanik ez baita existitzen eta ezingo "
 #~ "duzu bere izena begiratu."
 
+#~ msgid "Restore a file that is no longer present."
+#~ msgstr "Jadanik ez dagoen fitxategi bat leheneratu."
+
 #~ msgid ""
 #~ "There’s currently no convenient user interface for this. But you can do it "
 #~ "with the command line."
@@ -1112,6 +1223,23 @@ msgstr ""
 
 #~ msgid "You can restore multiple lost files at once:"
 #~ msgstr "Galdutako fitxategi anitz lehenera dezakezu aldi berean:"
+
+#~ msgid "Run <app>Déjà Dup</app>."
+#~ msgstr "Exekutatu <app>Déjà Dup</app>."
+
+#~ msgid "Click on the big <gui style=\"button\">Restore…</gui> button."
+#~ msgstr "Egin klik <gui style=\"button\">Leheneratu…</gui> botoi handian."
+
+#~ msgid "Adjust your backup settings."
+#~ msgstr "Doitu zure babeskopiaren ezarpenak."
+
+#~ msgid ""
+#~ "To configure <app>Déjà Dup</app>, choose <guiseq><gui "
+#~ "style=\"menu\">Edit</gui><gui style=\"menuitem\">Preferences</gui></guiseq>."
+#~ msgstr ""
+#~ "<app>Déjà Dup</app> konfiguratzeko, hautatu <guiseq><gui "
+#~ "style=\"menu\">Editatu</gui><gui "
+#~ "style=\"menuitem\">hobespenak</gui></guiseq>."
 
 #~ msgid "Local Folders"
 #~ msgstr "Karpeta lokalak"
@@ -1130,6 +1258,9 @@ msgstr ""
 #~ msgid "Folder"
 #~ msgstr "Karpeta"
 
+#~ msgid "Recover from total system failure."
+#~ msgstr "Berreskuratu sistemaren hutsegite osotik."
+
 #~ msgid ""
 #~ "Run <app>Déjà Dup</app> on the lost file with the <cmd>--restore</cmd> "
 #~ "argument. For example, to restore the lost file <file>test.txt</file> in "
@@ -1138,6 +1269,25 @@ msgstr ""
 #~ "Exekutatu <app>Déjà Dup</app> galdutako fitxategian <cmd>--restore</cmd> "
 #~ "argumentuarekin. Esaterako, galdutako <file>test.txt</file> fitxategia zure "
 #~ "<file>Dokumentuak</file> karpetan leheneratzeko:"
+
+#~ msgid ""
+#~ "If for whatever reason, you have a problem after trying to restore with the "
+#~ "<gui style=\"checkbox\">Restore files to original locations</gui> option, "
+#~ "try restoring instead to a temporary directory and moving your files to "
+#~ "where they belong."
+#~ msgstr ""
+#~ "Edozein arrazoirengatik arazoren bat badaukazu <gui "
+#~ "style=\"checkbox\">Leheneratu fitxategiak jatorrizko kokapenetara</gui> "
+#~ "aukerarekin leheneratzea egiteko, saiatu behin-behineko direktorio batera "
+#~ "leheneratzen eta ondoren mugitu fitxategiak bere lekura."
+
+#~ msgid ""
+#~ "Use this drop-down list box to specify the backup location that <app>Déjà "
+#~ "Dup</app> uses when backing up or restoring:"
+#~ msgstr ""
+#~ "Erabili goitibeherako zerrenda hau <app>Déjà Dup</app> aplikazioak "
+#~ "babeskopia egiten edo leheneratzen duenean erabiliko duen babeskopiaren "
+#~ "kokapena zehazteko:"
 
 #~ msgid ""
 #~ "After you connect to a server, make sure to go back to the "
@@ -1166,6 +1316,18 @@ msgstr ""
 #~ msgid "Some locations are excluded by default:"
 #~ msgstr "Kokapen batzuk kanpoan geratzen dira modu lehenetsian:"
 
+#~ msgid "Choose a schedule for automatic backups."
+#~ msgstr "Hautatu babeskopia automatikoetarako programaketa bat."
+
+#~ msgid "Automatic backups are disabled by default."
+#~ msgstr "Babeskopia automatikoak desgaituta daude modu lehenetsian."
+
+#~ msgid "Automatically backup on a regular schedule"
+#~ msgstr "Egin babeskopia automatikoak denbora-tarte finkoetan"
+
+#~ msgid "How often to backup"
+#~ msgstr "Zenbatero egin babeskopia"
+
 #~ msgid ""
 #~ "If you have multiple backups, you may want to keep them separated in "
 #~ "multiple folders. Use this option to enter a path on the S3 service in which "
@@ -1191,8 +1353,82 @@ msgstr ""
 #~ "da. S3n saioa hasteko erabiltzaile-izena da. Hutsik uzten baduzu, eskatu "
 #~ "egingo zaizu babeskopia egitean edo leheneratzean."
 
+#~ msgid ""
+#~ "Select a list of directories to not backup. Press the <gui "
+#~ "style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
+#~ "modify the list."
+#~ msgstr ""
+#~ "Hautatu babeskopiarik egingo ez diren direktorioen zerrenda bat. Sakatu <gui "
+#~ "style=\"button\">Gehitu</gui> edo <gui style=\"button\">Kendu</gui> botoiak "
+#~ "zerrenda moldatzeko."
+
+#~ msgid "<app>Déjà Dup</app> Help"
+#~ msgstr "<app>Déjà Dup</app> laguntza"
+
 #~ msgid "Backups are kept forever by default."
 #~ msgstr "Babeskopiak betiko mantentzen dira modu lehenetsian."
+
+#~ msgid "2010"
+#~ msgstr "2010"
+
+#~ msgid "Automatic backups are scheduled weekly by default."
+#~ msgstr "Babeskopia automatikoak astero programatuta daude modu lehenetsian."
+
+#~ msgid "Click on the big <gui style=\"button\">Backup…</gui> button."
+#~ msgstr "Sakatu <gui style=\"button\">Babeskopia…</gui> botoi handian."
+
+#~ msgid "Review your selections and click <gui style=\"button\">Backup</gui>."
+#~ msgstr ""
+#~ "Berraztertu zure hautapenak eta egin klik <gui "
+#~ "style=\"button\">Babeskopia</gui> botoian."
+
+#~ msgid "Start now."
+#~ msgstr "Hasi orain."
+
+#~ msgid "Give yourself peace of mind."
+#~ msgstr "Eskaini bakea zeure buruari."
+
+#~ msgid ""
+#~ "If on, you will be prompted for a password. Keep this password safe, you "
+#~ "will need it to restore your data."
+#~ msgstr ""
+#~ "Aktibatuta badago, pasahitza eskatuko dizu. Mantendu pasahitz hau toki "
+#~ "seguruan, zure datuak leheneratzeko beharrezkoa izango baituzu."
+
+#~ msgid ""
+#~ "Make sure the <gui style=\"checkbox\">Automatically backup on a regular "
+#~ "schedule</gui> option is enabled."
+#~ msgstr ""
+#~ "Segurtatu <gui style=\"checkbox\">Egin babeskopia automatikoak denbora-tarte "
+#~ "finkoetan</gui> aukera gaituta dagoela."
+
+#~ msgid "Right below that option, select how often you want a backup to occur."
+#~ msgstr "Aukera horren azpian, hautatu zenbatero egin nahi duzun babeskopia."
+
+#~ msgid ""
+#~ "Click on <guiseq><gui style=\"menu\">Edit</gui><gui "
+#~ "style=\"menuitem\">Preferences</gui></guiseq>."
+#~ msgstr ""
+#~ "Sakatu <guiseq><gui style=\"menu\">Editatu</gui><gui "
+#~ "style=\"menuitem\">Hobespenak</gui></guiseq>."
+
+#~ msgid ""
+#~ "If you only backup when you remember to do so, you’re not backing up often "
+#~ "enough. Fortunately, it’s easy to set up automatic backups."
+#~ msgstr ""
+#~ "Gogoratzen duzunean soilik egiten badituzu babeskopiak, ez dituzu aski "
+#~ "babeskopia egiten. Zorionez, erraza da babeskopia automatikoak konfiguratzea."
+
+#~ msgid ""
+#~ "Select a list of directories to backup. Press the <gui "
+#~ "style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
+#~ "modify the list. If you are only interested in backing up your own data, the "
+#~ "default of <gui>Home Folder</gui> is sufficient."
+#~ msgstr ""
+#~ "Hautatu babeskopia egingo diren direktorioen zerrenda. Sakatu <gui "
+#~ "style=\"button\">Gehitu</gui> edo <gui style=\"button\">Kendu</gui> botoiak "
+#~ "zerrenda moldatzeko. Zure datu propioak soilik babestu nahi badituzu, balio "
+#~ "lehenetsia (<gui>Karpeta nagusia</gui>) aski da."
 
 #~ msgid ""
 #~ "This backup location uses the S3 storage service from Amazon. For a small "
@@ -1209,6 +1445,49 @@ msgstr ""
 #~ "eman dezakezu."
 
 #~ msgid ""
+#~ "Encrypting your backup files is recommended to keep your data safe. If you "
+#~ "don’t have exclusive physical control of your backup location, or if it is "
+#~ "stolen, an encrypted backup prevents others from looking at your personal "
+#~ "data."
+#~ msgstr ""
+#~ "Gomendagarria da zure datuak zifratzea datuak seguru egon daitezen. Zure "
+#~ "babeskopiaren kokapenaren kontrol fisiko esklusiboa ez badaukazu, edo "
+#~ "lapurtzen badizute, zifratutako babeskopiari esker besteek ezingo dute zure "
+#~ "datuak begiratu."
+
+#~ msgid ""
+#~ "A <gui>Restore</gui> dialog will appear asking where your backup files are "
+#~ "stored (your <gui>Backup location</gui>). Choose it from the dropdown or "
+#~ "choose <gui>Other…</gui>. On this same screen, select whether you encrypted "
+#~ "the backup or not."
+#~ msgstr ""
+#~ "<gui>Leheneratu</gui> koadroa agertuko da eta zure babeskopia non dagoen "
+#~ "gordeta (zure <gui>Babeskopiaren kokapena</gui>) galdetuko dizu. Hautatu "
+#~ "hura goitibeherako koadroan edo hautatu <gui>Beste bat...</gui>. Pantaila "
+#~ "horretan bertan, hautatu babeskopia zifratuta dagoen ala ez."
+
+#~ msgid "Encryption is enabled by default."
+#~ msgstr "Zifratzea gaituta dago modu lehenetsian."
+
+#~ msgid ""
+#~ "You may want to choose to only save your backups for a certain length of "
+#~ "time, using the <gui>Keep backups</gui> option. Otherwise, they may end up "
+#~ "consuming a lot of space while you’re not paying attention."
+#~ msgstr ""
+#~ "Zure babeskopiak denbora-tarte jakin batez soilik gordetzea hauta dezakezu, "
+#~ "<gui>Mantendu babeskopiak</gui> erabiliz. Bestela, espazio asko kontsumi "
+#~ "daiteke arreta jartzen ez baduzu."
+
+#~ msgid ""
+#~ "Now you can choose exactly which folders to include in the backup. If you "
+#~ "are not sure, stick with the default. Backing up your entire home folder "
+#~ "will preserve all your data and your settings."
+#~ msgstr ""
+#~ "Orain zehatz-mehatz hauta dezakezu zein karpeten babeskopia egin nahi duzun. "
+#~ "Seguru ez bazaude, erabili balio lehenetsia. Zure karpeta nagusia osorik "
+#~ "kopiatzen baduzu, zure datu eta ezarpen guztiak gordeko dituzu."
+
+#~ msgid ""
 #~ "A <gui>Backup</gui> dialog will appear asking where you want to keep the "
 #~ "backup files (your <gui>Backup location</gui>). Either choose an external "
 #~ "drive from the dropdown, choose <gui>Other…</gui> and navigate to a folder, "
@@ -1221,6 +1500,48 @@ msgstr ""
 #~ "bat...</gui> eta joan karpeta batera, edo egin klik <gui "
 #~ "style=\"button\">Konektatu zerbitzarira…</gui> botoian. Pantaila berean, "
 #~ "hautatu ea babeskopia zifratu nahi duzun ala ez."
+
+#~ msgid ""
+#~ "If you chose to encrypt your backup, you will be prompted here for an "
+#~ "encryption password. Enter one (and write it down somewhere) and click <gui "
+#~ "style=\"button\">Continue</gui>."
+#~ msgstr ""
+#~ "Zure babeskopia zifratzea hautatzen baduzu, zifratzerako pasahitza eskatuko "
+#~ "zaizu. Sartu bat (eta gorde idatzita beste nonbait) eta egin klik <gui "
+#~ "style=\"button\">Jarraitu</gui> botoian."
+
+#~ msgid ""
+#~ "Turn this option on to have <app>Déjà Dup</app> automatically backup for "
+#~ "you. This is recommended so that you don’t forget to do it yourself. Backups "
+#~ "are more useful the more recently you have made them, so it is important to "
+#~ "regularly do so."
+#~ msgstr ""
+#~ "Aktibatu aukera hau <app>Déjà Dup</app>-ek babeskopia automatikoak egin "
+#~ "ditzan. Hau gomendagarria da, horrela ez baitzaizu ahaztuko babeskopiak "
+#~ "egitea. Babeskopiak erabilgarriagoak dira berriagoak direnean, beraz "
+#~ "garrantzitsua da aldian-aldian egitea."
+
+#~ msgid ""
+#~ "Choose the type of remote server to which you want to connect. Then you can "
+#~ "enter the server information. Alternatively, if you know your server's URL, "
+#~ "choose <gui>Custom Location</gui> and enter it."
+#~ msgstr ""
+#~ "Hautatu urruneko zein zerbitzari-motara konektatu nahi duzun. Ondoren "
+#~ "zerbitzari-informazioa sartu ahal izango duzu. Bestela, zure zerbitzariaren "
+#~ "URLa ezagutzen baduzu, hautatu <gui>Kokapen pertsonalizatua</gui> eta sar "
+#~ "ezazu hura."
+
+#~ msgid ""
+#~ "A <gui>Backup</gui> dialog will appear asking where you want to keep the "
+#~ "backup files (your <gui>Backup location</gui>). If you have an external hard "
+#~ "drive you want to use, make sure it is plugged in first. On this same "
+#~ "screen, select whether you would like to encrypt the backup files."
+#~ msgstr ""
+#~ "<gui>Babeskopia</gui> koadroa agertuko da zure babeskopiaren fitxategiak non "
+#~ "mantendu nahi dituzun (zure <gui>Babeskopiaren kokapena</gui>) eskatuz. "
+#~ "Kanpoko disko gogor bat erabili nahi baduzu, segurtatu lehenengo hura "
+#~ "konektatuta dagoela. Pantaila honetan bertan, hautatu babeskopiaren "
+#~ "fitxategiak zifratu nahi dituzun ala ez."
 
 #~ msgid ""
 #~ "The first few backup locations are cloud storage services provided by "
@@ -1237,6 +1558,30 @@ msgstr ""
 #~ "mantentzeko modu erraza baita (alegia, etxetik kanpo: hondamendia edo "
 #~ "lapurreta gertatuz gero, zure datuak seguru egongo dira). Amazon S3, "
 #~ "Rackspace Cloud Files eta Ubuntu One artean aukera dezakezu."
+
+#~ msgid ""
+#~ "This is going to get technical. If none of this makes sense to you, don't be "
+#~ "afraid to <link href=\"https://answers.launchpad.net/deja-dup\">ask for "
+#~ "help</link>."
+#~ msgstr ""
+#~ "Hurrengoa oso teknikoa da. Ez badu zentzurik zuretzat, ez izan beldur <link "
+#~ "href=\"https://answers.launchpad.net/deja-dup\">laguntza eskatzeko</link>."
+
+#~ msgid "What to do if you can't restore your files."
+#~ msgstr "Zer egin fitxategiak leheneratu ezin badituzu."
+
+#~ msgid ""
+#~ "Remember to add <cmd>--no-encryption</cmd> to any example commands if you're "
+#~ "backup is not encrypted."
+#~ msgstr ""
+#~ "Gogoan izan <cmd>--no-encryption</cmd> gehitu behar duzula adibide modura "
+#~ "ematen diren komandoei, zure babeskopia zifratuta ez badago."
+
+#~ msgid ""
+#~ "If you didn't encrypt the backup, add <cmd>--no-encryption</cmd> to the "
+#~ "command."
+#~ msgstr ""
+#~ "Babeskopia zifratu ez bazenuen, gehitu <cmd>--no-encryption</cmd> komandoari."
 
 #, no-wrap
 #~ msgid ""
@@ -1265,3 +1610,79 @@ msgstr ""
 #, no-wrap
 #~ msgid "tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz"
 #~ msgstr "tar xf duplicity-full.20110127T131352Z.vol1.difftar.gz"
+
+#~ msgid ""
+#~ "The first thing we'll try is a simple restore of all your data. Assuming "
+#~ "your files are on an external drive mounted as <file>/media/backup</file> "
+#~ "and you chose to encrypt the backup, try this:"
+#~ msgstr ""
+#~ "Saiatu behar den lehen gauza dauen leheneratze sinple bat da. Fitxategiak "
+#~ "<file>/media/backup</file> bezala muntatu den kanpo-gailu batean daudela eta "
+#~ "babeskopia zifratzea hautatu zenuela suposatzen badugu, saiatu hau:"
+
+#~ msgid ""
+#~ "If even <app>duplicity</app> isn't working for you, there may be little "
+#~ "hope. The backup file format is complicated and not easily manipulated. But "
+#~ "if you're desperate, it's worth a try."
+#~ msgstr ""
+#~ "Nahiz eta <app>duplicity</app> aplikazioak ez funtzionatu zure kasuan, "
+#~ "itxaropen-izpi bat egon daiteke. Babeskopiaren fitxategi-formatua konplexua "
+#~ "da eta ez da erraz manipulatzen. Baina etsita bazaude, merezi du saiatzeak."
+
+#~ msgid ""
+#~ "<app>Duplicity</app> stores your data in small chunks called volumes. Some "
+#~ "volumes belong to the periodic 'full' or fresh backups and others to the "
+#~ "'inc' or incremental backups. Starting with a full backup set of volumes at "
+#~ "volume 1, you'll need to restore files volume by volume."
+#~ msgstr ""
+#~ "<app>Duplicity</app>-k bolumen izeneko puska txikietan gordetzen ditu "
+#~ "datuak. Bolumen batzuk aldizkako babeskopia osoei dagozkie eta beste batzuk "
+#~ "babeskopia inkrementalenak dira. Lehen bolumena babeskopia oso baten bolumen-"
+#~ "multzoa izanik, fitxategiak bolumenez bolumen leheneratu beharko dituzu."
+
+#~ msgid ""
+#~ "On the assumption that <app>Déjà Dup</app> is just not working for you right "
+#~ "now, you're going to use the command line tool <app>duplicity</app> that is "
+#~ "used by <app>Déjà Dup</app> behind the scenes to back up and restore your "
+#~ "files."
+#~ msgstr ""
+#~ "Une honetan <app>Déjà Dup</app>-ek ez duela funtzionatzen ikusita, komando-"
+#~ "lerroko <app>duplicity</app> tresna erabili beharko duzu. Hain zuzen, "
+#~ "<app>Déjà Dup</app>-ek atzetik <app>duplicity</app> erabiltzen du "
+#~ "fitxategien babeskopia egin eta haiek leheneratzeko."
+
+#~ msgid ""
+#~ "Now the patch files will be in <file>multivolume_snapshot</file> and "
+#~ "<file>snapshot</file> folders. Each file that spanned multiple volumes will "
+#~ "be in <file>multivolume_snapshot</file>. Let's say you backed up "
+#~ "<file>/home/jane/essay.txt</file>:"
+#~ msgstr ""
+#~ "Orain adabaki-fitxategiak <file>multivolume_snapshot</file> eta "
+#~ "<file>snapshot</file> karpetetan egongo dira. Hainbat bolumen hartu dituen "
+#~ "fitxategi bakoitza <file>multivolume_snapshot</file> fitxategian egongo da. "
+#~ "Demagun <file>/home/jane/essay.txt</file> fitxategiaren babeskopia egin "
+#~ "duzula:"
+
+#~ msgid ""
+#~ "The first few backup locations are cloud storage services provided by "
+#~ "various companies. For a small fee per gigabyte, they hold your data for "
+#~ "you. A cloud service like this is recommended because it is an easy way to "
+#~ "keep your data offsite (meaning out of your home: in case of disaster or "
+#~ "theft, your data will still be safe). You can choose from Amazon S3 and "
+#~ "Rackspace Cloud Files."
+#~ msgstr ""
+#~ "Hasierako babeskopia-kokapenak hainbat enpresak eskaintzen dituzten hodeiko "
+#~ "biltegi-zerbitzuak dira. Gigabyte bakoitzeko kuota txiki bat ordainduz, zure "
+#~ "datuak gordetzen dituzte. Mota honetako hodeiko zerbitzu bat gomendagarria "
+#~ "da, zure datuak tokiz kanpo (etxetik kanpo: hondamendia edo lapurrreta "
+#~ "gertatuz gero, zure datuak salbu egongo dira) gordetzeko modu erraza baita. "
+#~ "Bi aukera dituzu: Amazon S3 eta Rackspace Cloud Files."
+
+#~ msgid "Know your rights."
+#~ msgstr "Ezagutu zure eskubideak."
+
+#~ msgid "Help make <app>Déjà Dup</app> better."
+#~ msgstr "Lagundu <app>Déjà Dup</app> hobetzen."
+
+#~ msgid "Meet the team."
+#~ msgstr "Ezagutu taldea."
