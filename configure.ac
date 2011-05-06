@@ -116,7 +116,16 @@ PKG_CHECK_MODULES(MONITOR,
 AC_SUBST(MONITOR_CFLAGS)
 AC_SUBST(MONITOR_LIBS)
 
-CCPANEL_DIR=`$PKG_CONFIG --variable=extensiondir libgnome-control-center`
+AC_ARG_WITH([extensiondir],
+  [AS_HELP_STRING([--with-extensiondir],
+    [use pkg-config extensiondir instead of PREFIX for plugins @<:@default=yes@:>@])],
+  [],
+  [with_extensiondir=yes])
+
+AS_IF([test "x$with_extensiondir" != xno],
+  [CCPANEL_DIR=`$PKG_CONFIG --variable=extensiondir libgnome-control-center`],
+  [CCPANEL_DIR="${PREFIX}/lib/control-center-1/panels"])
+
 AC_SUBST(CCPANEL_DIR)
 
 AC_ARG_WITH([nautilus],
@@ -130,7 +139,9 @@ AS_IF([test "x$with_nautilus" != xno],
     [AC_SUBST(NAUTILUS_CFLAGS)
      AC_SUBST(NAUTILUS_LIBS)]
      dnl Get nautilus extensions directory
-     NAUTILUS_EXTENSION_DIR=`$PKG_CONFIG --variable=extensiondir libnautilus-extension`
+     AS_IF([test "x$with_extensiondir" != xno],
+       [NAUTILUS_EXTENSION_DIR=`$PKG_CONFIG --variable=extensiondir libnautilus-extension`],
+       [NAUTILUS_EXTENSION_DIR="${PREFIX}/lib/nautilus/extensions-3.0"])
      AC_SUBST(NAUTILUS_EXTENSION_DIR),
     [if test "x$with_nautilus" != xcheck; then
         AC_MSG_FAILURE(

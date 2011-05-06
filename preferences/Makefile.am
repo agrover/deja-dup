@@ -36,6 +36,7 @@ libdeja_dup_la_VALABUILTSOURCES = \
 
 libdeja_dup_la_SOURCES = \
 	$(libdeja_dup_la_VALABUILTSOURCES) \
+	preferences.h \
 	PreferencesPanel.c
 
 if MAINTAINER_MODE
@@ -49,8 +50,8 @@ PACKAGES = \
 	--pkg config
 BUILT_SOURCES = vala.stamp
 vala.stamp: $(libdeja_dup_la_VALASOURCES)
-	$(AM_V_GEN)$(VALAC) --vapidir $(top_srcdir)/common -H preferences.h --vapidir $(top_srcdir)/widgets \
-	                    --vapidir $(top_srcdir)/vapi $(PACKAGES) $^ -C
+	$(AM_V_GEN)$(VALAC) --vapidir $(top_srcdir)/common --vapidir $(top_srcdir)/widgets \
+	                    --vapidir $(top_srcdir)/vapi -H preferences.h $(PACKAGES) $^ -C
 	touch $@
 endif
 

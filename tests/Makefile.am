@@ -96,7 +96,7 @@ test: prep
 # Needs to error out if a test fails and needs to be runnable with no DISPLAY.
 # Use system duplicity to avoid downloading on the fly and to facilitate
 # testing against a distro's potentially patched version of duplicity.
-check: prep
+XXXcheck: prep
 	@export TESTS_PASSED=true ; \
 	export DEJA_DUP_TEST_VERSION=system ; \
 	export DISPLAY= ; \

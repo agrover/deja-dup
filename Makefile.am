@@ -36,8 +36,8 @@ sign:
 releasecheck: distcheck sign
 release: dist sign
 
-# gtk3 and ldtp aren't best friends yet; nautilus likes to install to system directories (due to pkgconfig)
-DISTCHECK_CONFIGURE_FLAGS = --without-gtk3 --without-nautilus
+# distcheck complains if we try to install into /usr, so respect prefix
+DISTCHECK_CONFIGURE_FLAGS = --without-extensiondir
 
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
