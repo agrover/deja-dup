@@ -19,16 +19,17 @@
 if HAVE_NAUTILUS
 nautilusdir = $(NAUTILUS_EXTENSION_DIR)
 
-nautilus_LTLIBRARIES = libnautilus-deja-dup.la
+nautilus_LTLIBRARIES = libdeja-dup.la
 
-libnautilus_deja_dup_la_CFLAGS = \
+libdeja_dup_la_CFLAGS = \
+	-I$(top_srcdir)/common \
 	$(NAUTILUS_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\"
 
-libnautilus_deja_dup_la_SOURCES = \
+libdeja_dup_la_SOURCES = \
 	NautilusExtension.c NautilusExtension.h
 
-libnautilus_deja_dup_la_LDFLAGS = -module -avoid-version
-libnautilus_deja_dup_la_LIBADD = $(NAUTILUS_LIBS) @INTLLIBS@
+libdeja_dup_la_LDFLAGS = -module -avoid-version
+libdeja_dup_la_LIBADD = $(NAUTILUS_LIBS) @INTLLIBS@
 endif

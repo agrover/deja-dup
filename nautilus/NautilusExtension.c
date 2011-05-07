@@ -18,10 +18,81 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "CommonUtils.c"
+
 #include "NautilusExtension.h"
 #include "config.h"
 #include <libnautilus-extension/nautilus-menu-provider.h>
 #include <glib/gi18n-lib.h>
+
+GList *dirs = NULL;
+GSettings *settings = NULL;
+
+// This will treat a < b iff a is 'lower' in the file tree than b
+static int
+cmp_prefix(GFile *a, GFile *b)
+{
+  if (a == NULL && b == NULL)
+    return 0;
+  else if (b == NULL || g_file_has_prefix(a, b))
+    return -1;
+  else if (a == NULL || g_file_has_prefix(b, a))
+    return 1;
+  else
+    return 0;
+}
+
+/* Do the include/exclude processing up front so that when
+   we query to see if a file is included, it will be fast. */
+static void
+update_include_excludes ()
+{
+  /* Clear any existing dirs */
+  if (dirs != NULL) {
+    g_list_foreach(dirs, (GFunc)g_object_unref, NULL);
+    g_list_free(dirs);
+    dirs = NULL;
+  }
+
+  if (settings == NULL)
+    return;
+
+  gchar **includes_strv = g_settings_get_strv(settings,
+                                              DEJA_DUP_INCLUDE_LIST_KEY);
+  gchar **excludes_strv = g_settings_get_strv(settings,
+                                              DEJA_DUP_EXCLUDE_LIST_KEY);
+
+  gchar **p;
+  for (p = includes_strv; *p; p++) {
+    GFile *file = deja_dup_parse_dir(*p);
+    g_object_set_data(G_OBJECT(file), "included", GINT_TO_POINTER(TRUE));
+    dirs = g_list_insert_sorted(dirs, file, (GCompareFunc)cmp_prefix);
+  }
+  for (p = excludes_strv; *p; p++) {
+    GFile *file = deja_dup_parse_dir(*p);
+    g_object_set_data(G_OBJECT(file), "included", GINT_TO_POINTER(FALSE));
+    dirs = g_list_insert_sorted(dirs, file, (GCompareFunc)cmp_prefix);
+  }
+
+
+  g_strfreev(includes_strv);
+  g_strfreev(excludes_strv);
+}
+
+static gboolean
+is_dir_included(GFile *file)
+{
+  GList *p;
+  for (p = dirs; p; p = p->next) {
+    if (g_file_equal(file, (GFile *)p->data) ||
+        g_file_has_prefix(file, (GFile *)p->data)) {
+      gboolean included;
+      included = GPOINTER_TO_INT(g_object_get_data(p->data, "included"));
+      return included;
+    }
+  }
+  return FALSE;
+}
 
 static void
 make_file_list(NautilusFileInfo *info, GString *str)
@@ -87,10 +158,13 @@ deja_dup_nautilus_extension_get_background_items(NautilusMenuProvider *provider,
                    G_FILE_TEST_IS_EXECUTABLE))
     return NULL;
 
+  if (!is_dir_included(nautilus_file_info_get_location(file)))
+    return NULL;
+
   item = nautilus_menu_item_new("DejaDupNautilusExtension::restore_missing_item",
                                 dgettext(GETTEXT_PACKAGE, "Restore Missing Files…"),
                                 dgettext(GETTEXT_PACKAGE, "Restore deleted files from backup"),
-                                "document-revert");
+                                "deja-dup");
 
   g_signal_connect(item, "activate", G_CALLBACK(restore_missing_files_callback), NULL);
   g_object_set_data_full (G_OBJECT(item), "deja_dup_extension_file",
@@ -116,6 +190,16 @@ deja_dup_nautilus_extension_get_file_items(NautilusMenuProvider *provider,
                    G_FILE_TEST_IS_EXECUTABLE))
     return NULL;
 
+  gboolean is_one_included = FALSE;
+  GList *p;
+  for (p = files; p; p = p->next) {
+    GFile *gfile = nautilus_file_info_get_location((NautilusFileInfo *)p->data);
+    if (is_dir_included(gfile))
+      is_one_included = TRUE;
+  }
+  if (!is_one_included)
+    return NULL;
+
   length = g_list_length(files);
   item = nautilus_menu_item_new("DejaDupNautilusExtension::restore_item",
                                 dngettext(GETTEXT_PACKAGE,
@@ -126,7 +210,7 @@ deja_dup_nautilus_extension_get_file_items(NautilusMenuProvider *provider,
                                           "Restore file from backup",
                                           "Restore files from backup",
                                           length),
-                                "document-revert");
+                                "deja-dup");
 
   g_signal_connect(item, "activate", G_CALLBACK(restore_files_callback), NULL);
   g_object_set_data_full (G_OBJECT(item), "deja_dup_extension_files", 
@@ -219,6 +303,13 @@ void nautilus_module_initialize(GTypeModule *module)
 
   bindtextdomain(GETTEXT_PACKAGE, LOCALE_DIR);
   bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+
+  settings = g_settings_new("org.gnome.DejaDup");
+  g_signal_connect(settings, "changed::" DEJA_DUP_INCLUDE_LIST_KEY,
+                   update_include_excludes, NULL);
+  g_signal_connect(settings, "changed::" DEJA_DUP_EXCLUDE_LIST_KEY,
+                   update_include_excludes, NULL);
+  update_include_excludes();
 }
 
 void nautilus_module_list_types (const GType **types, int *num_types)
@@ -229,6 +320,9 @@ void nautilus_module_list_types (const GType **types, int *num_types)
 
 void nautilus_module_shutdown(void)
 {
-  /*g_print("Shutting down Déjà Dup extension\n");*/
+  g_object_unref(settings);
+  settings = NULL;
+
+  update_include_excludes(); /* will clear it now that settings is NULL */
 }
 
