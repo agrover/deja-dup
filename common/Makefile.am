@@ -2,6 +2,7 @@
 #
 # This file is part of Déjà Dup.
 # © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
+# © 2011 Canonical Ltd
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,11 +28,14 @@ libcommon_la_CFLAGS = \
 libcommon_la_LIBADD = $(COMMON_LIBS) @INTLLIBS@
 
 libcommon_la_VALASOURCES = \
+	AsyncCommand.vala \
 	Backend.vala \
+	BackendAuto.vala \
 	BackendFile.vala \
 	BackendRackspace.vala \
 	BackendS3.vala \
 	BackendU1.vala \
+	Checker.vala \
 	CommonUtils.vala \
 	Duplicity.vala \
 	DuplicityInfo.vala \
@@ -42,6 +46,7 @@ libcommon_la_VALASOURCES = \
 	OperationRestore.vala \
 	OperationStatus.vala \
 	OperationFiles.vala \
+	PythonChecker.vala \
 	RecursiveDelete.vala \
 	RecursiveMove.vala \
 	RecursiveOp.vala \

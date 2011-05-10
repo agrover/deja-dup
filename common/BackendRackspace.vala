@@ -1,7 +1,8 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,6 +30,10 @@ const string RACKSPACE_SERVER = "auth.api.rackspacecloud.com";
 
 public class BackendRackspace : Backend
 {
+  public static Checker get_checker() {
+    return PythonChecker.get_checker("cloudfiles");
+  }
+
   public override Backend clone() {
     return new BackendRackspace();
   }

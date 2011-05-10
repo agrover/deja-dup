@@ -2,6 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2010 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -41,17 +42,8 @@ public class ConfigLabelPolicy : ConfigLabel
   
   protected override async void set_from_config()
   {
-    Backend backend = null;
-    int delete_after = 0;
-    try {
-      backend = Backend.get_default();
-      delete_after = settings.get_int(DELETE_AFTER_KEY);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      label.label = "";
-      return;
-    }
+    Backend backend = Backend.get_default();
+    int delete_after = settings.get_int(DELETE_AFTER_KEY);
     
     bool infinite = backend.space_can_be_infinite();
     if (infinite) {

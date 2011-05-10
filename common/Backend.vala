@@ -1,7 +1,8 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -62,18 +63,10 @@ public abstract class Backend : Object
         backend != "file")
       backend = "auto"; // default to auto if string is not known
 
-    if (backend == "auto") {
-      if (BackendU1.is_available())
-        backend = "u1";
-      else
-        backend = "s3";
-      settings.set_string(BACKEND_KEY, backend);
-    }
-
     return backend;
   }
 
-  public static Backend? get_default() throws Error
+  public static Backend? get_default()
   {
     var backend_name = get_default_type();
     if (backend_name == "s3")
@@ -85,7 +78,7 @@ public abstract class Backend : Object
     else if (backend_name == "file")
       return new BackendFile();
     else
-      return new BackendS3();
+      return new BackendAuto();
   }
 }
 

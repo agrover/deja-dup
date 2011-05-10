@@ -2,6 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -346,18 +347,6 @@ public string get_file_desc(File file)
       desc = _("%1$s on %2$s").printf(desc, uri.host);
   }
   return desc;
-}
-
-public string get_location_desc()
-{
-  try {
-    var desc = Backend.get_default().get_location_pretty();
-    if (desc != null && desc != "")
-      return desc;
-  }
-  catch (Error e) {}
-
-  return _("Unknown");
 }
 
 public int get_full_backup_threshold()

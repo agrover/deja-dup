@@ -1,7 +1,8 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,6 +31,10 @@ const string S3_SERVER = "s3.amazonaws.com";
 
 public class BackendS3 : Backend
 {
+  public static Checker get_checker() {
+    return PythonChecker.get_checker("boto");
+  }
+
   public override Backend clone() {
     return new BackendS3();
   }

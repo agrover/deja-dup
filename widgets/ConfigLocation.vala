@@ -1,7 +1,8 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -49,9 +50,10 @@ public class ConfigLocation : ConfigWidget
 
   int index_ftp;
   int index_dav;
-  int index_s3;
-  int index_rackspace;
+  int index_s3 = -2;
+  int index_rackspace = -2;
   int index_u1 = -2;
+  int index_cloud_sep = -2;
   int index_ssh;
   int index_smb;
   int index_vol_base;
@@ -94,38 +96,28 @@ public class ConfigLocation : ConfigWidget
     extras.border_width = 0;
     extras.show();
 
-    var backend = Backend.get_default_type();
-
     // Insert cloud providers
-    index_s3 = add_entry(i++, new ThemedIcon("deja-dup-cloud"),
-                         _("Amazon S3"), 0, new ConfigLocationS3(label_sizes));
-    index_rackspace = add_entry(i++, new ThemedIcon("deja-dup-cloud"),
-                                _("Rackspace Cloud Files"), 0,
-                                new ConfigLocationRackspace(label_sizes));
-
-    if (backend == "u1" || DejaDup.BackendU1.is_available())
-      index_u1 = add_entry(i++, new ThemedIcon("ubuntuone"),
-                           _("Ubuntu One"), 0, new ConfigLocationU1(label_sizes));
-
-    add_separator(i++, 1);
+    insert_u1();
+    insert_s3();
+    insert_rackspace();
 
     // Now insert remote servers
-    index_ssh = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
+    index_ssh = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
                           _("SSH"), 1, new ConfigLocationSSH(label_sizes));
-    index_smb = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
+    index_smb = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
                           _("Windows Share"), 1, new ConfigLocationSMB(label_sizes));
-    index_ftp = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
+    index_ftp = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
                           _("FTP"), 1, new ConfigLocationFTP(label_sizes));
-    index_dav = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
+    index_dav = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
                           _("WebDAV"), 1, new ConfigLocationDAV(label_sizes));
 
-    index_custom = add_entry(i++, new ThemedIcon.with_default_fallbacks("folder-remote"),
+    index_custom = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
                              _("Custom Location"), 2, new ConfigLocationCustom(label_sizes));
 
-    add_separator(i++, 3);
+    add_separator(3);
 
     // And a local folder option
-    index_local = add_entry(i++, new ThemedIcon("folder"), _("Local Folder"),
+    index_local = add_entry(new ThemedIcon("folder"), _("Local Folder"),
                             4, new ConfigLocationFile(label_sizes));
 
     // Now insert removable drives
@@ -134,14 +126,14 @@ public class ConfigLocation : ConfigWidget
     mon.ref(); // bug 569418; bad things happen when VM goes away
     List<Volume> vols = mon.get_volumes();
     foreach (Volume v in vols) {
-      add_entry(i++, v.get_icon(), v.get_name(), 3,
+      add_entry(v.get_icon(), v.get_name(), 3,
                 new ConfigLocationVolume(label_sizes),
                 v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID));
     }
     index_vol_end = i;
 
     if (index_vol_base != index_vol_end)
-      add_separator(i++, 4);
+      add_separator(4);
 
     // And finally a saved volume, if one exists (must be last)
     update_saved_volume();
@@ -161,13 +153,55 @@ public class ConfigLocation : ConfigWidget
     button.set_active(0); // worst case, activate first entry
     set_from_config();
 
-    handle_changed();
+    set_location_widgets();
     button.changed.connect(handle_changed);
 
     watch_key(BACKEND_KEY);
     watch_key(FILE_PATH_KEY, DejaDup.get_settings(FILE_ROOT));
   }
-  
+
+  delegate void CloudCallback();
+
+  void insert_s3() {
+    insert_cloud_if_available("s3", BackendS3.get_checker(),
+                              new ThemedIcon("deja-dup-cloud"),
+                              _("Amazon S3"),
+                              new ConfigLocationS3(label_sizes),
+                              ref index_s3, insert_s3);
+  }
+
+  void insert_u1() {
+    insert_cloud_if_available("u1", BackendU1.get_checker(),
+                              new ThemedIcon("ubuntuone"),
+                              _("Ubuntu One"),
+                              new ConfigLocationU1(label_sizes),
+                              ref index_u1, insert_u1);
+  }
+
+  void insert_rackspace() {
+    insert_cloud_if_available("rackspace", BackendRackspace.get_checker(),
+                              new ThemedIcon("deja-dup-cloud"),
+                              _("Rackspace Cloud Files"),
+                              new ConfigLocationRackspace(label_sizes),
+                              ref index_rackspace, insert_rackspace);
+  }
+
+  void insert_cloud_if_available(string id, Checker checker,
+                                 Icon icon, string name,
+                                 Gtk.Widget w, ref int index,
+                                 CloudCallback cb)
+  {
+    var backend = Backend.get_default_type();
+    if (backend == id || (checker.complete && checker.available)) {
+      index = add_entry(icon, name, 0, w);
+      if (index_cloud_sep == -2)
+        index_cloud_sep = add_separator(1);
+    }
+    else if (!checker.complete) {
+      checker.notify["complete"].connect(() => {cb();});
+    }
+  }
+
   bool is_separator(Gtk.TreeModel model, Gtk.TreeIter iter)
   {
     Value text_var;
@@ -176,9 +210,11 @@ public class ConfigLocation : ConfigWidget
     return text == null;
   }
 
-  int add_entry(int index, Icon? icon, string label, int category,
+  int add_entry(Icon? icon, string label, int category,
                 Gtk.Widget? page = null, string? uuid = null)
   {
+    var index = store.iter_n_children(null);
+
     Gtk.TreeIter iter;
     store.insert_with_values(out iter, index, COL_ICON, icon, COL_TEXT, label,
                              COL_SORT, "%d%s".printf(category, label),
@@ -195,8 +231,10 @@ public class ConfigLocation : ConfigWidget
     return index;
   }
 
-  int add_separator(int index, int category)
+  int add_separator(int category)
   {
+    var index = store.iter_n_children(null);
+
     Gtk.TreeIter iter;
     store.insert_with_values(out iter, index, COL_SORT, "%d".printf(category),
                              COL_TEXT, null, COL_INDEX, index);
@@ -233,9 +271,9 @@ public class ConfigLocation : ConfigWidget
       // If this is the first time, add a new entry
       if (index_vol_saved == -2) {
         if (index_vol_base == index_vol_end)
-          add_separator(index_vol_end+2, 4); // this hadn't been added yet, so add it now
+          add_separator(4); // this hadn't been added yet, so add it now
 
-        index_vol_saved = add_entry(index_vol_end+1, vol_icon, vol_name, 3,
+        index_vol_saved = add_entry(vol_icon, vol_name, 3,
                                     new ConfigLocationVolume(label_sizes),
                                     vol_uuid);
       }
@@ -295,10 +333,8 @@ public class ConfigLocation : ConfigWidget
     }
   }
 
-  void handle_changed()
+  void set_location_widgets()
   {
-    set_location_info();
-
     var current = extras.get_child();
     if (current != null)
       extras.remove(current);
@@ -312,6 +348,12 @@ public class ConfigLocation : ConfigWidget
       if (page != null)
         extras.add(page);
     }
+  }
+
+  void handle_changed()
+  {
+    set_location_info();
+    set_location_widgets();
   }
 
   async void set_location_info()

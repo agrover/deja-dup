@@ -1,7 +1,8 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2009–2010 Michael Terry <mike@mterry.name>
+    © 2009,2010 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -49,14 +50,21 @@ public class ConfigLabelLocation : ConfigLabel
   
   protected override async void set_from_config()
   {
-    label.label = get_location_desc();
+    var backend = Backend.get_default();
+
+    string desc = null;
+    try {
+      desc = backend.get_location_pretty();
+    }
+    catch (Error e) {}
+    if (desc != null && desc != "")
+      label.label = desc;
+    else
+      label.label = _("Unknown");
+    label.label = desc;
 
     if (img != null) {
-      Icon icon = null;
-      try {
-        icon = Backend.get_default().get_icon();
-      }
-      catch (Error e) {}
+      Icon icon = backend.get_icon();
       if (icon == null)
         img.set_from_icon_name("folder", Gtk.IconSize.MENU);
       else

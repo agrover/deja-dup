@@ -2,6 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2010 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -72,21 +73,48 @@ class Listener : Object
   }
 }
 
-public class BackendU1 : Backend
+class U1Checker : Checker
 {
-  public static bool is_available()
-  {
-    if (!DuplicityInfo.get_default().has_u1)
-      return false;
+  PythonChecker pyu1;
+  construct {
+    if (!DuplicityInfo.get_default().has_u1) {
+      available = false;
+      complete = true;
+      return;
+    }
 
     try {
-      var obj = get_creds_proxy();
-      return obj.get_name_owner() != null;
+      var proxy = BackendU1.get_creds_proxy();
+      available = proxy.get_name_owner() != null;
     }
     catch (Error e) {
       warning("%s\n", e.message);
-      return false;
+      available = false;
+      complete = true;
     }
+
+    if (!complete) {
+      pyu1 = PythonChecker.get_checker("ubuntuone");
+      if (pyu1.complete) {
+        available = pyu1.available;
+        complete = pyu1.complete;
+      }
+      else {
+        pyu1.notify["complete"].connect(() => {
+          available = pyu1.available;
+          complete = pyu1.complete;
+          pyu1 = null;
+        });
+      }
+    }
+  }
+}
+
+public class BackendU1 : Backend
+{
+  public static Checker get_checker()
+  {
+    return new U1Checker();
   }
 
   public override Backend clone() {
@@ -204,7 +232,7 @@ public class BackendU1 : Backend
     }
   }
 
-  static DBusProxy get_creds_proxy() throws Error
+  public static DBusProxy get_creds_proxy() throws Error
   {
     DBusProxy creds_proxy;
     creds_proxy = new DBusProxy.for_bus_sync(BusType.SESSION,
@@ -216,7 +244,7 @@ public class BackendU1 : Backend
     return creds_proxy;
   }
 
-  static DBusProxy get_prefs_proxy() throws Error
+  public static DBusProxy get_prefs_proxy() throws Error
   {
     DBusProxy prefs_proxy;
     prefs_proxy = new DBusProxy.for_bus_sync(BusType.SESSION,

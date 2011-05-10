@@ -2,6 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -98,25 +99,17 @@ public abstract class Operation : Object
     passphrase = state.passphrase;
   }
 
+  SimpleSettings settings;
   protected Duplicity dup;
   protected string passphrase;
   construct
   {
-    try {
-      backend = Backend.get_default();
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);    
-    }
+    backend = Backend.get_default();
   }
   
   public async virtual void start()
   {
-    action_desc_changed(_("Preparing…"));    
-    if (backend == null) {
-      done(false, false);
-      return;
-    }
+    action_desc_changed(_("Preparing…"));  
     
     try {
       claim_bus();
@@ -128,11 +121,22 @@ public abstract class Operation : Object
     }
     yield set_session_inhibited(true);
 
-    restart();
+    if (backend is BackendAuto) {
+      // OK, we're not ready yet.  Let's hold off until we are
+      settings = get_settings();
+      settings.notify["backend"].connect(restart);
+    }
+    else
+      restart();
   }
 
   void restart()
   {
+    if (settings != null) {
+      settings.notify["backend"].disconnect(restart);
+      settings = null;
+    }
+
     if (dup != null) {
       SignalHandler.disconnect_matched(dup, SignalMatchType.DATA,
                                        0, 0, null, null, this);

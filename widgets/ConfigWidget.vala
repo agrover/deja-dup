@@ -1,7 +1,8 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,6 +31,7 @@ public abstract class ConfigWidget : Gtk.EventBox
   public string ns {get; construct; default = "";}
   
   protected SimpleSettings settings;
+  protected List<SimpleSettings> all_settings;
   construct {
     settings = DejaDup.get_settings(ns);
     
@@ -38,13 +40,22 @@ public abstract class ConfigWidget : Gtk.EventBox
 
     mnemonic_activate.connect(on_mnemonic_activate);
   }
-  
-  // If you pass in a special settings object, make sure it survives the
-  // lifetime of this widget.
+
+  ~ConfigWidget() {
+    foreach (SimpleSettings s in all_settings) {
+      s.unref();
+    }
+  }
+
   protected void watch_key(string? key, SimpleSettings? s = null)
   {
-    if (s == null)
+    if (s == null) {
       s = settings;
+    }
+    else {
+      s.ref();
+      all_settings.prepend(s);
+    }
     var signal_name = (key == null) ? "change-event" : "changed::%s".printf(key);
     Signal.connect_swapped(s, signal_name, (Callback)key_changed_wrapper, this);
   }

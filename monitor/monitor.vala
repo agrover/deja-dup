@@ -3,6 +3,7 @@
     This file is part of Déjà Dup.
     © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>,
     © 2009 Andrew Fister <temposs@gmail.com>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -65,12 +66,7 @@ static void volume_added(VolumeMonitor vm, Volume vol)
 
 static bool is_ready(out string when)
 {
-  try {
-    return DejaDup.Backend.get_default().is_ready(out when);
-  }
-  catch (Error e) {
-    return true;
-  }
+  return DejaDup.Backend.get_default().is_ready(out when);
 }
 
 static bool handle_options(out int status)
@@ -169,7 +165,7 @@ static bool kickoff()
   string when;
   if (!is_ready(out when)) {
     debug("Postponing the backup.");
-    if (!reactive_check)
+    if (!reactive_check && when != null)
       notify_delay(_("Scheduled backup delayed"), when);
     return false;
   }
@@ -259,6 +255,15 @@ static void prepare_if_necessary(string key)
 static void make_first_check()
 {
   first_check = true;
+
+  /* We do a little trick here.  BackendAuto -- which is the default
+     backend on a fresh install of deja-dup -- will do some work to
+     automatically suss out which backend should be used instead of it.
+     So we request the current backend then drop it just to get that
+     ball rolling in case this is the first time. */
+  var unused_backend = DejaDup.Backend.get_default();
+  unused_backend = null;
+
   prepare_next_run();
 }
 
