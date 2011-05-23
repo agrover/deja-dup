@@ -2,6 +2,7 @@
 #
 # This file is part of Déjà Dup.
 # © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
+# © 2011 Canonical Ltd
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -53,7 +54,6 @@ translations/deja-dup-help.pot: POT/POT.po
 dist-hook: doc-dist-hook
 	for p in $(REAL_LINGUAS); do \
 		sed -i "s|<list><title>.*</title><item><p>translator-credits</p></item></list>||" "$(distdir)/$$p/credits.page"; \
-		sed -i "s|<screen>deja-dup|<screen>$(pkglibexecdir)/deja-dup|g" "$(distdir)/$$p/"*.page; \
 	done
 
 EXTRA_DIST = translations po.stamp

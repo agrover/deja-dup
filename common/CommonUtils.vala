@@ -63,7 +63,7 @@ public void update_last_run_timestamp(TimestampType type) throws Error
 public void run_deja_dup(string args, AppLaunchContext? ctx = null,
                          List<File>? files = null)
 {
-  var cmd = "'%s' %s".printf(Path.build_filename(Config.PKG_LIBEXEC_DIR, "deja-dup"), args);
+  var cmd = "deja-dup %s".printf(args);
   var flags = AppInfoCreateFlags.SUPPORTS_STARTUP_NOTIFICATION |
               AppInfoCreateFlags.SUPPORTS_URIS;
   try {

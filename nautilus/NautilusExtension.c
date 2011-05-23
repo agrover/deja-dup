@@ -113,8 +113,7 @@ restore_missing_files_callback(NautilusMenuItem *item)
 
   info = g_object_get_data(G_OBJECT(item), "deja_dup_extension_file");
 
-  cmd = g_strdup_printf("%s --restore-missing %s",
-                        g_build_filename(PKG_LIBEXEC_DIR, "deja-dup", NULL),
+  cmd = g_strdup_printf("deja-dup --restore-missing %s",
                         nautilus_file_info_get_uri(info));
 
   g_spawn_command_line_async(cmd, NULL);
@@ -132,8 +131,7 @@ restore_files_callback(NautilusMenuItem *item)
   files = g_object_get_data(G_OBJECT(item), "deja_dup_extension_files");
 
   g_list_foreach(files, (GFunc)make_file_list, str);
-  cmd = g_strdup_printf("%s --restore %s", 
-                        g_build_filename(PKG_LIBEXEC_DIR, "deja-dup", NULL),
+  cmd = g_strdup_printf("deja-dup --restore %s", 
                         str->str);
 
   g_spawn_command_line_async(cmd, NULL);
@@ -150,13 +148,15 @@ deja_dup_nautilus_extension_get_background_items(NautilusMenuProvider *provider,
   NautilusMenuItem *item;
   guint length;
   GList *file_copies;
+  gchar *path;
 
   if (file == NULL)
     return NULL;
 
-  if (!g_file_test(g_build_filename(PKG_LIBEXEC_DIR, "deja-dup", NULL),
-                   G_FILE_TEST_IS_EXECUTABLE))
+  path = g_find_program_in_path("deja-dup")
+  if (!path)
     return NULL;
+  g_free(path);
 
   if (!is_dir_included(nautilus_file_info_get_location(file)))
     return NULL;
@@ -182,13 +182,15 @@ deja_dup_nautilus_extension_get_file_items(NautilusMenuProvider *provider,
   NautilusMenuItem *item;
   guint length;
   GList *file_copies;
+  gchar *path;
 
   if (files == NULL)
     return NULL;
 
-  if (!g_file_test(g_build_filename(PKG_LIBEXEC_DIR, "deja-dup", NULL),
-                   G_FILE_TEST_IS_EXECUTABLE))
+  path = g_find_program_in_path("deja-dup")
+  if (!path)
     return NULL;
+  g_free(path);
 
   gboolean is_one_included = FALSE;
   GList *p;

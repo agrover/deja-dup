@@ -174,7 +174,7 @@ static bool kickoff()
   if (pid == (Pid)0 && !op_active) {
     try {
       string[] argv = new string[4];
-      argv[0] = Path.build_filename(Config.PKG_LIBEXEC_DIR, "deja-dup");
+      argv[0] = "deja-dup";
       argv[1] = "--backup";
       argv[2] = "--auto";
       argv[3] = null;
