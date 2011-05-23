@@ -38,7 +38,13 @@ gsettings_SCHEMAS = org.gnome.DejaDup.gschema.xml
 
 @INTLTOOL_DESKTOP_RULE@
 desktopdir = $(datadir)/applications
-dist_desktop_DATA = deja-dup.desktop
+dist_desktop_DATA = deja-dup.desktop deja-dup-preferences.desktop
+deja-dup-preferences.desktop.in: deja-dup-preferences.desktop.in.in
+	cp $^ $@
+if HAVE_CCPANEL
+	echo -n NotShowIn= >> $@
+	grep OnlyShowIn deja-dup.desktop.in | cut -d= -f2 >> $@
+endif
 deja-dup-monitor.desktop.in: deja-dup-monitor.desktop.in.in
 	sed "s|@pkglibexecdir@|$(pkglibexecdir)|g" $^ > $@
 
@@ -48,8 +54,8 @@ dist_autostart_DATA = deja-dup-monitor.desktop
 convertdir = $(datadir)/GConf/gsettings
 dist_convert_DATA = deja-dup.convert
 
-EXTRA_DIST = deja-dup.desktop.in deja-dup-monitor.desktop.in.in org.gnome.DejaDup.gschema.xml.in
-DISTCLEANFILES = deja-dup.desktop deja-dup-monitor.desktop deja-dup-monitor.desktop.in org.gnome.DejaDup.gschema.xml
+EXTRA_DIST = deja-dup.desktop.in deja-dup-preferences.desktop.in.in deja-dup-monitor.desktop.in.in org.gnome.DejaDup.gschema.xml.in
+DISTCLEANFILES = deja-dup.desktop deja-dup-preferences.desktop deja-dup-preferences.desktop.in deja-dup-monitor.desktop deja-dup-monitor.desktop.in org.gnome.DejaDup.gschema.xml
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t
 install-data-hook: update-icon-cache

@@ -1,8 +1,9 @@
 # -*- Mode: m4; indent-tabs-mode: nil; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>,
+# © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
 # © 2009 Andrew Fister <temposs@gmail.com>
+# © 2011 Canonical Ltd
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -91,8 +92,7 @@ AC_SUBST(DUP_LIBS)
 
 PKG_CHECK_MODULES(PREF,
                   $GTK_MODULE >= $GTK_REQ_VER
-                  gio-2.0 >= $GIO_REQ_VER
-                  libgnome-control-center)
+                  gio-2.0 >= $GIO_REQ_VER)
 AC_SUBST(PREF_CFLAGS)
 AC_SUBST(PREF_LIBS)
 
@@ -122,11 +122,28 @@ AC_ARG_WITH([extensiondir],
   [],
   [with_extensiondir=yes])
 
-AS_IF([test "x$with_extensiondir" != xno],
-  [CCPANEL_DIR=`$PKG_CONFIG --variable=extensiondir libgnome-control-center`],
-  [CCPANEL_DIR="${PREFIX}/lib/control-center-1/panels"])
-
-AC_SUBST(CCPANEL_DIR)
+AC_ARG_WITH([ccpanel],
+  [AS_HELP_STRING([--with-ccpanel],
+    [build control-center plugin @<:@default=check@:>@])],
+  [],
+  [with_ccpanel=check])
+AS_IF([test "x$with_ccpanel" != xno],
+  [PKG_CHECK_MODULES(CCPANEL, libgnome-control-center,
+    [AC_SUBST(CCPANEL_CFLAGS)
+     AC_SUBST(CCPANEL_LIBS)]
+     dnl Get control center extensions directory
+     AS_IF([test "x$with_extensiondir" != xno],
+       [CCPANEL_DIR=`$PKG_CONFIG --variable=extensiondir libgnome-control-center`],
+       [CCPANEL_DIR="${PREFIX}/lib/control-center-1/panels"])
+     AC_SUBST(CCPANEL_DIR),
+    [if test "x$with_ccpanel" != xcheck; then
+        AC_MSG_FAILURE(
+          [--with-ccpanel was given, but test for libgnome-control-center failed])
+      fi
+    ]
+  )]
+)
+AM_CONDITIONAL([HAVE_CCPANEL], [test -n "$CCPANEL_LIBS"])
 
 AC_ARG_WITH([nautilus],
   [AS_HELP_STRING([--with-nautilus],
