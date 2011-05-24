@@ -29,11 +29,11 @@ SHARED_CFLAGS = \
 	$(PREF_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
-libdeja_dup_la_CFLAGS = $(SHARED_CFLAGS)
+libdeja_dup_la_CFLAGS = $(SHARED_CFLAGS) $(CCPANEL_CFLAGS)
 deja_dup_preferences_CFLAGS = $(SHARED_CFLAGS)
 
 SHARED_LIBS = $(PREF_LIBS) @INTLLIBS@ $(top_builddir)/widgets/libwidgets.la
-libdeja_dup_la_LIBADD = $(SHARED_LIBS)
+libdeja_dup_la_LIBADD = $(SHARED_LIBS) $(CCPANEL_LIBS)
 deja_dup_preferences_LDADD = $(SHARED_LIBS)
 
 SHARED_VALASOURCES = \
