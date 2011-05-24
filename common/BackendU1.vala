@@ -30,11 +30,12 @@ class Listener : Object
   public delegate void Handler(string name, Variant args);
   public DBusProxy proxy {get; construct;}
   public string method {get; construct;}
+  public Variant args {get; construct;}
   public Handler handler {get; set;}
 
-  public Listener(DBusProxy proxy, string method, Handler handler)
+  public Listener(DBusProxy proxy, string method, Variant? args, Handler handler)
   {
-    Object(proxy: proxy, method: method);
+    Object(proxy: proxy, method: method, args: args);
     this.handler = handler;
   }
 
@@ -57,7 +58,7 @@ class Listener : Object
   async void call_but_quit_on_fail()
   {
     try {
-      yield proxy.call(method, null, DBusCallFlags.NONE, -1, null);
+      yield proxy.call(method, args, DBusCallFlags.NONE, -1, null);
     }
     catch (Error e) {
       warning("%s\n", e.message);
@@ -85,7 +86,10 @@ class U1Checker : Checker
 
     try {
       var proxy = BackendU1.get_creds_proxy();
-      available = proxy.get_name_owner() != null;
+      if (proxy.get_name_owner() == null) {
+        available = false;
+        complete = true;
+      }
     }
     catch (Error e) {
       warning("%s\n", e.message);
@@ -112,9 +116,12 @@ class U1Checker : Checker
 
 public class BackendU1 : Backend
 {
+  static Checker checker_instance = null;
   public static Checker get_checker()
   {
-    return new U1Checker();
+    if (checker_instance == null)
+      checker_instance = new U1Checker();
+    return checker_instance;
   }
 
   public override Backend clone() {
@@ -142,7 +149,7 @@ public class BackendU1 : Backend
   {
     var settings = get_settings(U1_ROOT);
     var folder = get_folder_key(settings, U1_FOLDER_KEY);
-    return "u1://%s".printf(folder);
+    return "u1+http://%s".printf(folder);
   }
 
   public override string? get_location_pretty() throws Error
@@ -169,7 +176,7 @@ public class BackendU1 : Backend
 
     uint64 total = INFINITE_SPACE;
     uint64 used = 0;
-    var listener = new Listener(obj, "account_info", (name, args) => {
+    var listener = new Listener(obj, "account_info", null, (name, args) => {
       if (name == "AccountInfoReady") {
         VariantIter iter;
         args.get("(a{ss})", out iter);
@@ -195,7 +202,7 @@ public class BackendU1 : Backend
     bool found = false;
     var obj = get_creds_proxy();
 
-    var listener = new Listener(obj, "find_credentials", (name, args) => {
+    var listener = new Listener(obj, "find_credentials", null, (name, args) => {
       if (name == "CredentialsFound")
         found = true;
     });
@@ -218,7 +225,8 @@ public class BackendU1 : Backend
     try {
       var obj = get_creds_proxy();
 
-      var listener = new Listener(obj, "register", (name, args) => {
+      var listener = new Listener(obj, "login", new Variant("(a{ss})", null),
+                                  (name, args) => {
         if (name == "CredentialsFound") {
           mount_op.set("go_forward", true);
           envp_ready(true, null);
