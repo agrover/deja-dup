@@ -1245,9 +1245,9 @@ public class Duplicity : Object
     // For local filesystems, we'll choose large volsize.
     // For remote FSs, we'll go smaller.
     if (backend.is_native())
-      return 30;
+      return 50;
     else
-      return 10;
+      return 25;
   }
 
   void disconnect_inst()
