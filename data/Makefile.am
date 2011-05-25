@@ -45,10 +45,10 @@ dist_desktop_DATA += deja-dup-ccpanel.desktop
 endif
 
 deja-dup-preferences.desktop.in: deja-dup-preferences.desktop.in.in
-	cp $^ $@
+	$(install_sh_DATA) $^ $@
 if HAVE_CCPANEL
 	echo -n NotShowIn= >> $@
-	grep OnlyShowIn deja-dup-ccpanel.desktop.in | cut -d= -f2 >> $@
+	grep OnlyShowIn $(srcdir)/deja-dup-ccpanel.desktop.in | cut -d= -f2 >> $@
 endif
 
 deja-dup-monitor.desktop.in: deja-dup-monitor.desktop.in.in
