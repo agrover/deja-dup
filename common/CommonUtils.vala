@@ -343,7 +343,7 @@ public string get_file_desc(File file)
   var desc = Path.get_basename(file.get_parse_name());
   if (!file.is_native()) {
     var uri = DejaDupDecodedUri.decode_uri(file.get_uri());
-    if (uri.host != null && uri.host != "")
+    if (uri != null && uri.host != null && uri.host != "")
       desc = _("%1$s on %2$s").printf(desc, uri.host);
   }
   return desc;
