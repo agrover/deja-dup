@@ -98,7 +98,6 @@ public class ConfigLocation : ConfigWidget
     vbox.add(button);
 
     Gtk.TreeIter iter;
-    int i = 0;
 
     if (label_sizes == null)
       label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
@@ -133,16 +132,16 @@ public class ConfigLocation : ConfigWidget
                             Group.LOCAL, new ConfigLocationFile(label_sizes));
 
     // Now insert removable drives
-    index_vol_base = i;
+    index_vol_base = next_index();
     var mon = VolumeMonitor.get();
     mon.ref(); // bug 569418; bad things happen when VM goes away
     List<Volume> vols = mon.get_volumes();
     foreach (Volume v in vols) {
-      i = add_entry(v.get_icon(), v.get_name(), Group.VOLUMES,
-                    new ConfigLocationVolume(label_sizes),
-                    v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID));
+      add_entry(v.get_icon(), v.get_name(), Group.VOLUMES,
+                new ConfigLocationVolume(label_sizes),
+                v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID));
     }
-    index_vol_end = i;
+    index_vol_end = next_index();
 
     if (index_vol_base != index_vol_end)
       add_separator(Group.VOLUMES_SEP);
@@ -165,6 +164,7 @@ public class ConfigLocation : ConfigWidget
     button.set_active(0); // worst case, activate first entry
     set_from_config();
 
+warning("local index is %d, %d, %d, %d", index_local, index_vol_base, index_vol_end, index_vol_saved);
     set_location_widgets();
     button.changed.connect(handle_changed);
 
@@ -222,10 +222,15 @@ public class ConfigLocation : ConfigWidget
     return text == null;
   }
 
+  int next_index()
+  {
+    return store.iter_n_children(null);
+  }
+
   int add_entry(Icon? icon, string label, Group category,
                 Gtk.Widget? page = null, string? uuid = null)
   {
-    var index = store.iter_n_children(null);
+    var index = next_index();
 
     Gtk.TreeIter iter;
     store.insert_with_values(out iter, index, COL_ICON, icon, COL_TEXT, label,
