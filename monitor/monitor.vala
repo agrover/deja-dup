@@ -66,6 +66,10 @@ static void volume_added(VolumeMonitor vm, Volume vol)
 
 static bool is_ready(out string when)
 {
+  if (testing && note == null) {
+    when = "Testing";
+    return false;
+  }
   return DejaDup.Backend.get_default().is_ready(out when);
 }
 
@@ -170,11 +174,23 @@ static bool kickoff()
     return false;
   }
 
+  if (note != null) {
+    try {
+      note.close(); // no need to continue talking about the delay
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
+    note = null;
+  }
+
   // Don't run right now if an instance is already running
   if (pid == (Pid)0 && !op_active) {
     try {
       string[] argv = new string[8];
       int i = 0;
+
+      debug("Running automatic backup.");
 
       if (Environment.find_program_in_path("nice") != null)
         argv[i++] = "nice";
