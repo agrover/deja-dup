@@ -138,9 +138,9 @@ public class ConfigLocation : ConfigWidget
     mon.ref(); // bug 569418; bad things happen when VM goes away
     List<Volume> vols = mon.get_volumes();
     foreach (Volume v in vols) {
-      add_entry(v.get_icon(), v.get_name(), Group.VOLUMES,
-                new ConfigLocationVolume(label_sizes),
-                v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID));
+      i = add_entry(v.get_icon(), v.get_name(), Group.VOLUMES,
+                    new ConfigLocationVolume(label_sizes),
+                    v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID));
     }
     index_vol_end = i;
 
