@@ -164,7 +164,6 @@ public class ConfigLocation : ConfigWidget
     button.set_active(0); // worst case, activate first entry
     set_from_config();
 
-warning("local index is %d, %d, %d, %d", index_local, index_vol_base, index_vol_end, index_vol_saved);
     set_location_widgets();
     button.changed.connect(handle_changed);
 
@@ -273,8 +272,10 @@ warning("local index is %d, %d, %d, %d", index_local, index_vol_base, index_vol_
             continue;
           string uuid;
           store.get(iter, COL_UUID, out uuid);
-          if (vol_uuid == uuid)
-            return false;
+          if (vol_uuid == uuid) {
+            index_vol_saved = i;
+            return true;
+          }
         }
       }
 
