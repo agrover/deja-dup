@@ -41,6 +41,12 @@ public class DuplicityInstance : Object
     if (!DuplicityInfo.get_default().has_fixed_log_file)
       as_root = false; // without a log file, we can't use gksu
     
+    if (as_root) {
+      var settings = get_settings();
+      if (!settings.get_boolean(ROOT_PROMPT_KEY))
+        as_root = false;
+    }
+    
     // Copy current environment, add custom variables
     var myenv = Environment.list_variables();
     int myenv_len = 0;
@@ -86,7 +92,7 @@ public class DuplicityInstance : Object
     }
     
     // Add logging argument
-    if (DuplicityInfo.get_default().has_fixed_log_file) {
+    if (as_root) {
       // Make log file
       int logfd = 0;
       try {
@@ -124,12 +130,6 @@ public class DuplicityInstance : Object
         user_cmd = a;
       else
         user_cmd = "%s %s".printf(user_cmd, Shell.quote(a));
-    }
-    
-    if (as_root) {
-      var settings = get_settings();
-      if (!settings.get_boolean(ROOT_PROMPT_KEY))
-        as_root = false;
     }
     
     // Run as root if needed
