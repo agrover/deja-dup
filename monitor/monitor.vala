@@ -130,7 +130,7 @@ static void close_pid(Pid child_pid, int status)
 static void notify_delay(string header, string reason)
 {
   if (note == null) {
-    Notify.init(Environment.get_application_name());
+    Notify.init(_("Backup"));
     note = new Notify.Notification(header, reason,
                                    "deja-dup");
     note.closed.connect((n) => {note = null;});

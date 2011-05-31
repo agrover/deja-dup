@@ -31,21 +31,22 @@ using GLib;
  * No status icon at all.
  * Actions on persistent notifications.
  * Detected by 'persistent' capability of notification server.
+ * Automatic-start and success notifications.
  * 
  * Unity:
  * Register as a launcher entry.
  * Always shows progress.
- * No notifications.
+ * Success notification.
  * Detected by presence of Unity (usually on Ubuntu).
  * 
  * Indicator:
  * Register as an application indicator, which falls back to standard GTK+ status icon.
- * No notifications.
+ * Success notification.
  * Detected by presence of application indicator host (usually on Ubuntu).
  * 
  * Legacy:
  * Standard GTK+ status icon.
- * No notifications.
+ * Success notification.
  */
 
 public abstract class StatusIcon : Object
@@ -88,6 +89,7 @@ public abstract class StatusIcon : Object
   protected string skip_label;
 
   protected Gtk.Menu menu;
+  protected Notify.Notification note;
 
   construct {
     if (DejaDup.DuplicityInfo.get_default().can_resume)
@@ -112,6 +114,31 @@ public abstract class StatusIcon : Object
   {
     this.progress = progress;
     update_progress();
+  }
+
+  public virtual void done(bool success, bool cancelled)
+  {
+    if (note != null) {
+      try {
+        // We're done with this backup, no need to still talk about it
+        note.close();
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
+    }
+
+    if (success && !cancelled && op.mode == DejaDup.Operation.Mode.BACKUP) {
+      Notify.init(_("Backup"));
+      note = new Notify.Notification(_("Backup completed"), null,
+                                     "deja-dup");
+      try {
+        note.show();
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
+    }
   }
 
   protected virtual void update_progress() {}
@@ -251,9 +278,9 @@ class ShellStatusIcon : StatusIcon
     is_valid = persistence && actions;
 
     if (is_valid && automatic && op.mode == DejaDup.Operation.Mode.BACKUP) {
-      Notify.init(Environment.get_application_name());
-      var note = new Notify.Notification(_("Starting scheduled backup"), null,
-                                         "deja-dup");
+      Notify.init(_("Backup"));
+      note = new Notify.Notification(_("Starting scheduled backup"), null,
+                                     "deja-dup");
       note.add_action("later", later_label.replace("_", ""), () => {later();});
       note.add_action("skip", skip_label.replace("_", ""), () => {skip();});
       try {

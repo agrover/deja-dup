@@ -426,6 +426,7 @@ public abstract class AssistantOperation : Assistant
   
   protected virtual void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
+    status_icon.done(success, cancelled);
     status_icon = null;
     this.op = null;
 
