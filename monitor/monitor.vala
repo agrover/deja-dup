@@ -173,11 +173,24 @@ static bool kickoff()
   // Don't run right now if an instance is already running
   if (pid == (Pid)0 && !op_active) {
     try {
-      string[] argv = new string[4];
-      argv[0] = "deja-dup";
-      argv[1] = "--backup";
-      argv[2] = "--auto";
-      argv[3] = null;
+      string[] argv = new string[8];
+      int i = 0;
+
+      if (Environment.find_program_in_path("nice") != null)
+        argv[i++] = "nice";
+
+      if (Environment.find_program_in_path("ionice") != null) {
+        // lowest priority in best-effort class
+        // (can't use idle class as normal user on <2.6.25)
+        argv[i++] = "ionice";
+        argv[i++] = "-c2";
+        argv[i++] = "-n7";
+      }
+
+      argv[i++] = "deja-dup";
+      argv[i++] = "--backup";
+      argv[i++] = "--auto";
+      argv[i++] = null;
       Process.spawn_async(null, argv, null,
                           SpawnFlags.SEARCH_PATH |
                           SpawnFlags.DO_NOT_REAP_CHILD |

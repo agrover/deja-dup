@@ -178,15 +178,6 @@ public class DuplicityInstance : Object
       }
     }
     
-    // Check for ionice to be a good disk citizen
-    if (Environment.find_program_in_path("ionice") != null) {
-      argv.prepend("-n7"); // lowest priority
-      argv.prepend("-c2"); // best-effort class (can't use idle as normal user on <2.6.25)
-      argv.prepend("ionice");
-    }
-    if (Environment.find_program_in_path("nice") != null)
-      argv.prepend("nice");
-    
     string[] real_argv = new string[argv.length()];
     i = 0;
     foreach(string a in argv)
