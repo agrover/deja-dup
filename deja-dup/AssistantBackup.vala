@@ -47,9 +47,6 @@ public class AssistantBackup : AssistantOperation
       rv.is_full.connect((op) => {op.use_progress = true;});
     }
 
-    // Enter 'hide for now' mode, either showing minimized or remaining hidden
-    hide_for_now();
-
     return rv;
   }
   

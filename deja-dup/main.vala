@@ -130,8 +130,14 @@ class DejaDupApp : Object
     }
     else if (backup_mode) {
       toplevel = new AssistantBackup(automatic);
-      // specifically don't show, but do notify that we're up
-      Gdk.notify_startup_complete();
+      if (automatic) {
+        // Enter 'hide for now' mode, either showing minimized or remaining hidden
+        (toplevel as Assistant).hide_for_now();
+        Gdk.notify_startup_complete();
+      }
+      else {
+        toplevel.show_all();
+      }
     }
     else if (restoremissing_mode){
       File list_directory = File.new_for_commandline_arg(filenames[0]);
