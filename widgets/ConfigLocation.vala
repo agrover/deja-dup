@@ -31,6 +31,17 @@ public class ConfigLocation : ConfigWidget
   static const int COL_PAGE = 4;
   static const int COL_INDEX = 5;
 
+  enum Group {
+    CLOUD = 0,
+    CLOUD_SEP,
+    REMOTE,
+    REMOTE_CUSTOM,
+    REMOTE_SEP,
+    VOLUMES,
+    VOLUMES_SEP,
+    LOCAL
+  }
+
   public Gtk.EventBox extras {get; private set;}
   public Gtk.SizeGroup label_sizes {get; construct;}
 
@@ -103,22 +114,23 @@ public class ConfigLocation : ConfigWidget
 
     // Now insert remote servers
     index_ssh = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-                          _("SSH"), 1, new ConfigLocationSSH(label_sizes));
+                          _("SSH"), Group.REMOTE, new ConfigLocationSSH(label_sizes));
     index_smb = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-                          _("Windows Share"), 1, new ConfigLocationSMB(label_sizes));
+                          _("Windows Share"), Group.REMOTE, new ConfigLocationSMB(label_sizes));
     index_ftp = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-                          _("FTP"), 1, new ConfigLocationFTP(label_sizes));
+                          _("FTP"), Group.REMOTE, new ConfigLocationFTP(label_sizes));
     index_dav = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-                          _("WebDAV"), 1, new ConfigLocationDAV(label_sizes));
+                          _("WebDAV"), Group.REMOTE, new ConfigLocationDAV(label_sizes));
 
     index_custom = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-                             _("Custom Location"), 2, new ConfigLocationCustom(label_sizes));
+                             _("Custom Location"), Group.REMOTE_CUSTOM,
+                             new ConfigLocationCustom(label_sizes));
 
-    add_separator(3);
+    add_separator(Group.REMOTE_SEP);
 
     // And a local folder option
     index_local = add_entry(new ThemedIcon("folder"), _("Local Folder"),
-                            4, new ConfigLocationFile(label_sizes));
+                            Group.LOCAL, new ConfigLocationFile(label_sizes));
 
     // Now insert removable drives
     index_vol_base = i;
@@ -126,14 +138,14 @@ public class ConfigLocation : ConfigWidget
     mon.ref(); // bug 569418; bad things happen when VM goes away
     List<Volume> vols = mon.get_volumes();
     foreach (Volume v in vols) {
-      add_entry(v.get_icon(), v.get_name(), 3,
+      add_entry(v.get_icon(), v.get_name(), Group.VOLUMES,
                 new ConfigLocationVolume(label_sizes),
                 v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID));
     }
     index_vol_end = i;
 
     if (index_vol_base != index_vol_end)
-      add_separator(4);
+      add_separator(Group.VOLUMES_SEP);
 
     // And finally a saved volume, if one exists (must be last)
     update_saved_volume();
@@ -193,9 +205,9 @@ public class ConfigLocation : ConfigWidget
   {
     var backend = Backend.get_default_type();
     if (backend == id || (checker.complete && checker.available)) {
-      index = add_entry(icon, name, 0, w);
+      index = add_entry(icon, name, Group.CLOUD, w);
       if (index_cloud_sep == -2)
-        index_cloud_sep = add_separator(1);
+        index_cloud_sep = add_separator(Group.CLOUD_SEP);
     }
     else if (!checker.complete) {
       checker.notify["complete"].connect(() => {cb();});
@@ -210,14 +222,14 @@ public class ConfigLocation : ConfigWidget
     return text == null;
   }
 
-  int add_entry(Icon? icon, string label, int category,
+  int add_entry(Icon? icon, string label, Group category,
                 Gtk.Widget? page = null, string? uuid = null)
   {
     var index = store.iter_n_children(null);
 
     Gtk.TreeIter iter;
     store.insert_with_values(out iter, index, COL_ICON, icon, COL_TEXT, label,
-                             COL_SORT, "%d%s".printf(category, label),
+                             COL_SORT, "%d%s".printf((int)category, label),
                              COL_UUID, uuid, COL_PAGE, page, COL_INDEX, index);
 
     if (page != null) {
@@ -231,12 +243,12 @@ public class ConfigLocation : ConfigWidget
     return index;
   }
 
-  int add_separator(int category)
+  int add_separator(Group category)
   {
     var index = store.iter_n_children(null);
 
     Gtk.TreeIter iter;
-    store.insert_with_values(out iter, index, COL_SORT, "%d".printf(category),
+    store.insert_with_values(out iter, index, COL_SORT, "%d".printf((int)category),
                              COL_TEXT, null, COL_INDEX, index);
     return index;
   }
@@ -271,9 +283,9 @@ public class ConfigLocation : ConfigWidget
       // If this is the first time, add a new entry
       if (index_vol_saved == -2) {
         if (index_vol_base == index_vol_end)
-          add_separator(4); // this hadn't been added yet, so add it now
+          add_separator(Group.VOLUMES_SEP); // this hadn't been added yet, so add it now
 
-        index_vol_saved = add_entry(vol_icon, vol_name, 3,
+        index_vol_saved = add_entry(vol_icon, vol_name, Group.VOLUMES,
                                     new ConfigLocationVolume(label_sizes),
                                     vol_uuid);
       }
