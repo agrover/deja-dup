@@ -2,6 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2009,2010,2011 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -253,8 +254,8 @@ class ShellStatusIcon : StatusIcon
       Notify.init(Environment.get_application_name());
       var note = new Notify.Notification(_("Starting scheduled backup"), null,
                                          "deja-dup");
-      note.add_action("later", later_label, () => {later();});
-      note.add_action("skip", skip_label, () => {skip();});
+      note.add_action("later", later_label.replace("_", ""), () => {later();});
+      note.add_action("skip", skip_label.replace("_", ""), () => {skip();});
       try {
         note.show();
       }
