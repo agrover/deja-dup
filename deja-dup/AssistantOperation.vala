@@ -675,7 +675,7 @@ public abstract class AssistantOperation : Assistant
     op.continue_with_passphrase(passphrase);
   }
 
-  void stop_question(Gtk.Dialog dlg, int resp)
+  void stop_question(Assistant dlg, int resp)
   {
     Gtk.main_quit();
     response.disconnect(stop_question);

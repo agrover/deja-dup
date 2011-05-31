@@ -3,6 +3,7 @@
     This file is part of Déjà Dup.
     © 2009,2010,2011 Michael Terry <mike@mterry.name>
     © 2010 Andrew Fister <temposs@gmail.com>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,8 +28,9 @@ using GLib;
  * continuing to work when hidden is important for us, this is a
  * reimplementation of just the bits we use.
  */
-public abstract class Assistant : Gtk.Dialog
+public abstract class Assistant : Gtk.Window
 {
+  public signal void response(int response);
   public signal void canceled();
   public signal void closed();
   public signal void resumed();
@@ -44,6 +46,7 @@ public abstract class Assistant : Gtk.Dialog
 
   Gtk.Label header_title;
   protected Gtk.Image header_icon;
+  Gtk.HButtonBox button_box;
   Gtk.Widget back_button;
   Gtk.Widget forward_button;
   Gtk.Widget cancel_button;
@@ -92,9 +95,16 @@ public abstract class Assistant : Gtk.Dialog
     page_box = new Gtk.EventBox();
     evbox.pack_start(page_box, true, true, 0);
 
-    var content_area = (Gtk.Box)get_content_area();
-    content_area.add(ebox);
-    content_area.show_all();
+    button_box = new Gtk.HButtonBox();
+    button_box.set_layout(Gtk.ButtonBoxStyle.END);
+    button_box.border_width = 12;
+    button_box.spacing = 12;
+
+    var dlg_vbox = new Gtk.VBox(false, 6);
+    dlg_vbox.pack_start(ebox, true, true);
+    dlg_vbox.pack_end(button_box, false, true);
+    dlg_vbox.show_all();
+    add(dlg_vbox);
 
     ebox.ensure_style();
     ebox.modify_bg(Gtk.StateType.NORMAL, ebox.style.bg[Gtk.StateType.SELECTED]);
@@ -128,7 +138,6 @@ public abstract class Assistant : Gtk.Dialog
   void handle_response(int resp)
   {
     switch (resp) {
-    case Gtk.ResponseType.DELETE_EVENT: break;
     case BACK: go_back(); break;
     case APPLY:
     case FORWARD: go_forward(); break;
@@ -264,6 +273,16 @@ public abstract class Assistant : Gtk.Dialog
     }
   }
 
+  Gtk.Button add_button(string stock, int response)
+  {
+    var btn = new Gtk.Button.from_stock(stock);
+    btn.can_default = true;
+    btn.clicked.connect(() => {this.response(response);});
+    btn.show();
+    button_box.pack_end(btn, false, true, 0);
+    return btn;
+  }
+
   void set_buttons()
   {
     return_if_fail(current != null);
@@ -305,7 +324,7 @@ public abstract class Assistant : Gtk.Dialog
     // We call destroy on each so that they are destroyed in the idle loop.
     // GailButton does weird things with queued events during the idle loop,
     // so if we wait until then to destroy them, we avoid colliding with it.
-    var area = (Gtk.ButtonBox)get_action_area();
+    var area = button_box;
     if (cancel_button != null) {
       area.remove(cancel_button); DejaDup.destroy_widget(cancel_button); cancel_button = null;}
     if (close_button != null) {
