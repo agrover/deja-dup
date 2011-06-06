@@ -265,6 +265,7 @@ public abstract class AssistantOperation : Assistant
     summary_label.label = error;
     summary_label.wrap = true;
     summary_label.selectable = true;
+    summary_label.max_width_chars = 25;
     
     if (detail != null) {
       page_box.set_size_request(300, 200);
