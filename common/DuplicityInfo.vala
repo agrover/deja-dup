@@ -112,6 +112,8 @@ public class DuplicityInfo : Object
       use_empty_gpg_options = true; // workaround a duplicity bug
     if (equals_version(0, 6, 13))
       can_resume = true; // had it since 0.6.0, but had data corruption bugs
+    if (equals_version(0, 6, 14))
+      has_u1 = true;
 
     return true;
   }
