@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-04-29 23:13-0400\n"
+"POT-Creation-Date: 2011-05-25 11:35-0400\n"
 "PO-Revision-Date: 2011-01-17 10:38+0000\n"
 "Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -15,27 +15,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-01 04:55+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-05-26 04:38+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
-#: ../data/deja-dup.desktop.in.h:1
+#: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
+#: ../data/deja-dup-preferences.desktop.in.in.h:1
 msgid "Backup"
 msgstr "Säkerhetskopiera"
 
-#: ../data/deja-dup.desktop.in.h:2
+#: ../data/deja-dup-ccpanel.desktop.in.h:2
+#: ../data/deja-dup-preferences.desktop.in.in.h:2
 msgid "Change your backup settings"
 msgstr "Ändra inställningar för dina säkerhetskopior"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:278
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:283
 msgid "Déjà Dup Monitor"
 msgstr "Övervaka Déjà Dup"
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
-msgid "Schedule backups at regular intervals"
-msgstr "Schemalägg säkerhetskopieringar vid fasta intervaller"
+msgid "Schedules backups at regular intervals"
+msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 msgid "Amazon S3 Access Key ID"
@@ -306,21 +308,21 @@ msgstr "Mapp:"
 msgid "Scanning…"
 msgstr "Söker av…"
 
-#: ../nautilus/NautilusExtension.c:91
+#: ../nautilus/NautilusExtension.c:165
 msgid "Restore Missing Files…"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:92
+#: ../nautilus/NautilusExtension.c:166
 msgid "Restore deleted files from backup"
 msgstr "Återskapa borttagna filer från säkerhetskopia"
 
-#: ../nautilus/NautilusExtension.c:122
+#: ../nautilus/NautilusExtension.c:208
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Återgå till tidigare version..."
 msgstr[1] "Återgå till tidigare versioner..."
 
-#: ../nautilus/NautilusExtension.c:126
+#: ../nautilus/NautilusExtension.c:212
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Återskapa fil från säkerhetskopia"
@@ -332,7 +334,7 @@ msgstr "GVFS FUSE är inte installerad"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:346
+#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:347
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s på %2$s"
@@ -342,8 +344,8 @@ msgstr "%1$s på %2$s"
 msgid "Backup will begin when %s becomes connected."
 msgstr "Säkerhetskopieringen kommer att påbörjas när %s ansluts."
 
-#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:45
-#: ../common/BackendS3.vala:55 ../common/BackendU1.vala:109
+#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:50
+#: ../common/BackendS3.vala:60 ../common/BackendU1.vala:144
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "Säkerhetskopieringen kommer att påbörjas när en nätverksanslutning blir "
@@ -358,25 +360,25 @@ msgstr ""
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Väntar på att \"%s\" ska anslutas…"
 
-#: ../common/BackendRackspace.vala:54
+#: ../common/BackendRackspace.vala:59
 msgid "You must specify a Rackspace container in your preferences."
 msgstr ""
 
-#: ../common/BackendRackspace.vala:63 ../widgets/ConfigLocation.vala:103
+#: ../common/BackendRackspace.vala:68 ../widgets/ConfigLocation.vala:184
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
 #. Translators: %s is a folder.
-#: ../common/BackendRackspace.vala:66
+#: ../common/BackendRackspace.vala:71
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "%s på Rackspace Cloud Files"
 
-#: ../common/BackendRackspace.vala:113 ../common/BackendS3.vala:168
+#: ../common/BackendRackspace.vala:118 ../common/BackendS3.vala:173
 msgid "Permission denied"
 msgstr "Åtkomst nekas"
 
-#: ../common/BackendRackspace.vala:134
+#: ../common/BackendRackspace.vala:139
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
@@ -384,72 +386,72 @@ msgid ""
 msgstr ""
 "Du kan registrera ett Rackspace Cloud Files-konto <a href=\"%s\">här</a>."
 
-#: ../common/BackendRackspace.vala:135
+#: ../common/BackendRackspace.vala:140
 msgid "_API access key:"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:136
+#: ../common/BackendRackspace.vala:141
 msgid "S_how API access key"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:137
+#: ../common/BackendRackspace.vala:142
 msgid "_Remember API access key"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:139
+#: ../common/BackendRackspace.vala:144
 msgid "Enter Rackspace Cloud Files API key"
 msgstr ""
 
-#: ../common/BackendS3.vala:118 ../widgets/ConfigLocation.vala:101
+#: ../common/BackendS3.vala:123 ../widgets/ConfigLocation.vala:168
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
 #. Translators: %s is a folder.
-#: ../common/BackendS3.vala:121
+#: ../common/BackendS3.vala:126
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "%s på Amazon S3"
 
-#: ../common/BackendS3.vala:189
+#: ../common/BackendS3.vala:194
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr "Du kan registrera ett Amazon S3-konto <a href=\"%s\">här</a>."
 
-#: ../common/BackendS3.vala:190
+#: ../common/BackendS3.vala:195
 msgid "_Access key ID:"
 msgstr ""
 
-#: ../common/BackendS3.vala:191
+#: ../common/BackendS3.vala:196
 msgid "_Secret access key:"
 msgstr "_Hemlig åtkomstnyckel:"
 
-#: ../common/BackendS3.vala:192
+#: ../common/BackendS3.vala:197
 msgid "S_how secret access key"
 msgstr "V_isa hemlig åtkomstnyckel"
 
-#: ../common/BackendS3.vala:193
+#: ../common/BackendS3.vala:198
 msgid "_Remember secret access key"
 msgstr "_Kom ihåg hemlig åtkomstnyckel"
 
-#: ../common/BackendS3.vala:195
+#: ../common/BackendS3.vala:200
 msgid "Enter Amazon S3 access key"
 msgstr "Ange åtkomstnyckel för Amazon S3"
 
-#: ../common/BackendU1.vala:125 ../widgets/ConfigLocation.vala:108
+#: ../common/BackendU1.vala:160 ../widgets/ConfigLocation.vala:176
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
 #. Translators: %s is a folder.
-#: ../common/BackendU1.vala:128
+#: ../common/BackendU1.vala:163
 #, c-format
 msgid "%s on Ubuntu One"
 msgstr "%s på Ubuntu One"
 
-#: ../common/BackendU1.vala:183
+#: ../common/BackendU1.vala:218
 msgid "Sign into Ubuntu One…"
 msgstr "Logga in på Ubuntu One…"
 
-#: ../common/BackendU1.vala:185
+#: ../common/BackendU1.vala:220
 msgid "Connect to Ubuntu One"
 msgstr "Anslut till Ubuntu One"
 
@@ -458,13 +460,9 @@ msgstr "Anslut till Ubuntu One"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, it
 #. may not be very translatable.
-#: ../common/CommonUtils.vala:69 ../deja-dup/main.vala:77
+#: ../common/CommonUtils.vala:70 ../deja-dup/main.vala:77
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
-
-#: ../common/CommonUtils.vala:360
-msgid "Unknown"
-msgstr "Okänt"
 
 #: ../common/DuplicityInfo.vala:140
 msgid "Could not run duplicity"
@@ -510,8 +508,8 @@ msgid "Paused (no network)"
 msgstr "Pausad (inget nätverk)"
 
 #: ../common/Duplicity.vala:378 ../common/Duplicity.vala:386
-#: ../common/Duplicity.vala:403 ../common/Operation.vala:80
-#: ../common/Operation.vala:115
+#: ../common/Duplicity.vala:403 ../common/Operation.vala:81
+#: ../common/Operation.vala:112
 msgid "Preparing…"
 msgstr "Förbereder..."
 
@@ -656,23 +654,23 @@ msgstr ""
 msgid "Could not restore %s: %s"
 msgstr "Kunde inte återskapa %s: %s"
 
-#: ../common/Operation.vala:72
+#: ../common/Operation.vala:73
 msgid "Backing up…"
 msgstr "Säkerhetskopierar..."
 
-#: ../common/Operation.vala:74 ../deja-dup/AssistantRestore.vala:499
+#: ../common/Operation.vala:75 ../deja-dup/AssistantRestore.vala:499
 msgid "Restoring…"
 msgstr "Återskapar..."
 
-#: ../common/Operation.vala:76
+#: ../common/Operation.vala:77
 msgid "Checking for backups…"
 msgstr "Letar efter säkerhetskopior..."
 
-#: ../common/Operation.vala:78
+#: ../common/Operation.vala:79
 msgid "Listing files…"
 msgstr "Listar filer…"
 
-#: ../common/Operation.vala:272
+#: ../common/Operation.vala:276
 msgid "Another Déjà Dup is already running"
 msgstr "En annan Déjà Dup är redan igång"
 
@@ -902,7 +900,8 @@ msgstr "_Fortsätt"
 msgid "_Resume Later"
 msgstr "Återuppta _senare"
 
-#: ../deja-dup/main.vala:34 ../monitor/monitor.vala:34
+#: ../deja-dup/main.vala:34 ../monitor/monitor.vala:35
+#: ../preferences/preferences-main.vala:27
 msgid "Show version"
 msgstr "Visa version"
 
@@ -1019,7 +1018,7 @@ msgstr "Startar schemalagd säkerhetskopiering"
 msgid "%.1f%% complete"
 msgstr "%.1f%% färdigt"
 
-#: ../monitor/monitor.vala:173
+#: ../monitor/monitor.vala:169
 msgid "Scheduled backup delayed"
 msgstr "Schemalagd säkerhetskopiering har fördröjts"
 
@@ -1107,6 +1106,10 @@ msgstr "Hur _ofta säkerhetskopiering ska ske:"
 msgid "Schedule"
 msgstr "Schema"
 
+#: ../preferences/preferences-main.vala:63
+msgid "Déjà Dup Preferences"
+msgstr "Inställningar för Déjà Dup"
+
 #: ../widgets/ConfigDelete.vala:44
 msgid "At least a week"
 msgstr "Minst en vecka"
@@ -1184,7 +1187,11 @@ msgstr "Hemmapp"
 msgid "Trash"
 msgstr "Papperskorg"
 
-#: ../widgets/ConfigLabelPolicy.vala:70
+#: ../widgets/ConfigLabelLocation.vala:63
+msgid "Unknown"
+msgstr "Okänt"
+
+#: ../widgets/ConfigLabelPolicy.vala:62
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
@@ -1192,7 +1199,7 @@ msgstr ""
 "Äldre säkerhetskopior kommer att sparas minst en vecka eller tills "
 "lagringsutrymmet börjar ta slut."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
@@ -1200,7 +1207,7 @@ msgstr ""
 "Äldre säkerhetskopior kommer att sparas minst en månad eller tills "
 "lagringsutrymmet börjar ta slut."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
@@ -1208,7 +1215,7 @@ msgstr ""
 "Äldre säkerhetskopior kommer att sparas minst två månader eller tills "
 "lagringsutrymmet börjar ta slut."
 
-#: ../widgets/ConfigLabelPolicy.vala:76
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
@@ -1216,7 +1223,7 @@ msgstr ""
 "Äldre säkerhetskopior kommer att sparas minst tre månader eller tills "
 "lagringsutrymmet börjar ta slut."
 
-#: ../widgets/ConfigLabelPolicy.vala:78
+#: ../widgets/ConfigLabelPolicy.vala:70
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
@@ -1224,7 +1231,7 @@ msgstr ""
 "Äldre säkerhetskopior kommer att sparas minst sex månader eller tills "
 "lagringsutrymmet börjar ta slut."
 
-#: ../widgets/ConfigLabelPolicy.vala:80
+#: ../widgets/ConfigLabelPolicy.vala:72
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1232,13 +1239,13 @@ msgstr ""
 "Äldre säkerhetskopior kommer att sparas minst ett år eller tills "
 "lagringsutrymmet börjar ta slut."
 
-#: ../widgets/ConfigLabelPolicy.vala:82
+#: ../widgets/ConfigLabelPolicy.vala:74
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Äldre säkerhetskopior kommer att sparas tills lagringsutrymmet börjar ta "
 "slut."
 
-#: ../widgets/ConfigLabelPolicy.vala:84
+#: ../widgets/ConfigLabelPolicy.vala:76
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1257,28 +1264,28 @@ msgstr[1] ""
 msgid "Choose folders"
 msgstr "Välj mappar"
 
-#: ../widgets/ConfigLocation.vala:114
+#: ../widgets/ConfigLocation.vala:106
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:116
+#: ../widgets/ConfigLocation.vala:108
 msgid "Windows Share"
 msgstr "Windows-utdelning"
 
-#: ../widgets/ConfigLocation.vala:118
+#: ../widgets/ConfigLocation.vala:110
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:112
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:123
+#: ../widgets/ConfigLocation.vala:115
 msgid "Custom Location"
 msgstr "Anpassad plats"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:128
+#: ../widgets/ConfigLocation.vala:120
 msgid "Local Folder"
 msgstr "Lokal mapp"
 
@@ -1374,7 +1381,11 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Christian Widell https://launchpad.net/~christian.w\n"
 "  Daniel Nylander https://launchpad.net/~yeager\n"
+"  Erik Simmesgård https://launchpad.net/~ersi\n"
 "  Paul Sundvall https://launchpad.net/~slask-paulsundvall"
+
+#~ msgid "Schedule backups at regular intervals"
+#~ msgstr "Schemalägg säkerhetskopieringar vid fasta intervaller"
 
 #~ msgid "Directories not to backup"
 #~ msgstr "Kataloger att inte säkerhetskopiera"
@@ -1476,9 +1487,6 @@ msgstr ""
 
 #~ msgid "Encryption Password"
 #~ msgstr "Krypteringslösenord"
-
-#~ msgid "Déjà Dup Preferences"
-#~ msgstr "Inställningar för Déjà Dup"
 
 #~ msgid "Choose folder"
 #~ msgstr "Välj mapp"

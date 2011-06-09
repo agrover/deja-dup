@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-04-29 23:13-0400\n"
+"POT-Creation-Date: 2011-05-25 11:35-0400\n"
 "PO-Revision-Date: 2011-03-17 01:16+0000\n"
 "Last-Translator: 英华 <wantinghard@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-05-01 04:56+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-05-26 04:38+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:346
 #, c-format
@@ -30,24 +30,26 @@ msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
 msgstr[0] "正在扫描大约一年前的文件..."
 
-#: ../data/deja-dup.desktop.in.h:1
+#: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
+#: ../data/deja-dup-preferences.desktop.in.in.h:1
 msgid "Backup"
 msgstr ""
 
-#: ../data/deja-dup.desktop.in.h:2
+#: ../data/deja-dup-ccpanel.desktop.in.h:2
+#: ../data/deja-dup-preferences.desktop.in.in.h:2
 msgid "Change your backup settings"
 msgstr "更改您的备份设置"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:278
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:283
 msgid "Déjà Dup Monitor"
 msgstr "Déjà Dup 监控器"
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
-msgid "Schedule backups at regular intervals"
-msgstr "以固定间隔安排备份"
+msgid "Schedules backups at regular intervals"
+msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 msgid "Amazon S3 Access Key ID"
@@ -305,20 +307,20 @@ msgstr "文件夹："
 msgid "Scanning…"
 msgstr "正在扫描..."
 
-#: ../nautilus/NautilusExtension.c:91
+#: ../nautilus/NautilusExtension.c:165
 msgid "Restore Missing Files…"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:92
+#: ../nautilus/NautilusExtension.c:166
 msgid "Restore deleted files from backup"
 msgstr "从备份中恢复删除的文件"
 
-#: ../nautilus/NautilusExtension.c:122
+#: ../nautilus/NautilusExtension.c:208
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "恢复到上一版本..."
 
-#: ../nautilus/NautilusExtension.c:126
+#: ../nautilus/NautilusExtension.c:212
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "从备份中恢复文件"
@@ -329,7 +331,7 @@ msgstr "未安装 GVFS FUSE"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:346
+#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:347
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s，在 %2$s"
@@ -339,8 +341,8 @@ msgstr "%1$s，在 %2$s"
 msgid "Backup will begin when %s becomes connected."
 msgstr "备份将于 %s 建立连接时开始。"
 
-#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:45
-#: ../common/BackendS3.vala:55 ../common/BackendU1.vala:109
+#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:50
+#: ../common/BackendS3.vala:60 ../common/BackendU1.vala:144
 msgid "Backup will begin when a network connection becomes available."
 msgstr "备份将在网络连接可用时开始。"
 
@@ -353,97 +355,97 @@ msgstr "备份位置不可用"
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "正在等待“%s”建立连接..."
 
-#: ../common/BackendRackspace.vala:54
+#: ../common/BackendRackspace.vala:59
 msgid "You must specify a Rackspace container in your preferences."
 msgstr ""
 
-#: ../common/BackendRackspace.vala:63 ../widgets/ConfigLocation.vala:103
+#: ../common/BackendRackspace.vala:68 ../widgets/ConfigLocation.vala:184
 msgid "Rackspace Cloud Files"
 msgstr ""
 
 #. Translators: %s is a folder.
-#: ../common/BackendRackspace.vala:66
+#: ../common/BackendRackspace.vala:71
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:113 ../common/BackendS3.vala:168
+#: ../common/BackendRackspace.vala:118 ../common/BackendS3.vala:173
 msgid "Permission denied"
 msgstr "权限被拒绝"
 
-#: ../common/BackendRackspace.vala:134
+#: ../common/BackendRackspace.vala:139
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
 "href=\"%s\">online</a>."
 msgstr ""
 
-#: ../common/BackendRackspace.vala:135
+#: ../common/BackendRackspace.vala:140
 msgid "_API access key:"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:136
+#: ../common/BackendRackspace.vala:141
 msgid "S_how API access key"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:137
+#: ../common/BackendRackspace.vala:142
 msgid "_Remember API access key"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:139
+#: ../common/BackendRackspace.vala:144
 msgid "Enter Rackspace Cloud Files API key"
 msgstr ""
 
-#: ../common/BackendS3.vala:118 ../widgets/ConfigLocation.vala:101
+#: ../common/BackendS3.vala:123 ../widgets/ConfigLocation.vala:168
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
 #. Translators: %s is a folder.
-#: ../common/BackendS3.vala:121
+#: ../common/BackendS3.vala:126
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "Amazon S3 上的 %s"
 
-#: ../common/BackendS3.vala:189
+#: ../common/BackendS3.vala:194
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr "您可以<a href=\"%s\">在线</a>注册一个 Amazon S3 账户。"
 
-#: ../common/BackendS3.vala:190
+#: ../common/BackendS3.vala:195
 msgid "_Access key ID:"
 msgstr "_访问密钥 ID："
 
-#: ../common/BackendS3.vala:191
+#: ../common/BackendS3.vala:196
 msgid "_Secret access key:"
 msgstr "_访问密钥："
 
-#: ../common/BackendS3.vala:192
+#: ../common/BackendS3.vala:197
 msgid "S_how secret access key"
 msgstr "_显示访问密钥"
 
-#: ../common/BackendS3.vala:193
+#: ../common/BackendS3.vala:198
 msgid "_Remember secret access key"
 msgstr "_记住访问密钥"
 
-#: ../common/BackendS3.vala:195
+#: ../common/BackendS3.vala:200
 msgid "Enter Amazon S3 access key"
 msgstr "输入 Amazon S3 访问密钥"
 
-#: ../common/BackendU1.vala:125 ../widgets/ConfigLocation.vala:108
+#: ../common/BackendU1.vala:160 ../widgets/ConfigLocation.vala:176
 msgid "Ubuntu One"
 msgstr ""
 
 #. Translators: %s is a folder.
-#: ../common/BackendU1.vala:128
+#: ../common/BackendU1.vala:163
 #, c-format
 msgid "%s on Ubuntu One"
 msgstr ""
 
-#: ../common/BackendU1.vala:183
+#: ../common/BackendU1.vala:218
 msgid "Sign into Ubuntu One…"
 msgstr ""
 
-#: ../common/BackendU1.vala:185
+#: ../common/BackendU1.vala:220
 msgid "Connect to Ubuntu One"
 msgstr ""
 
@@ -452,13 +454,9 @@ msgstr ""
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, it
 #. may not be very translatable.
-#: ../common/CommonUtils.vala:69 ../deja-dup/main.vala:77
+#: ../common/CommonUtils.vala:70 ../deja-dup/main.vala:77
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
-
-#: ../common/CommonUtils.vala:360
-msgid "Unknown"
-msgstr "未知"
 
 #: ../common/DuplicityInfo.vala:140
 msgid "Could not run duplicity"
@@ -501,8 +499,8 @@ msgid "Paused (no network)"
 msgstr "已暂停（无网络）"
 
 #: ../common/Duplicity.vala:378 ../common/Duplicity.vala:386
-#: ../common/Duplicity.vala:403 ../common/Operation.vala:80
-#: ../common/Operation.vala:115
+#: ../common/Duplicity.vala:403 ../common/Operation.vala:81
+#: ../common/Operation.vala:112
 msgid "Preparing…"
 msgstr "正在准备..."
 
@@ -641,23 +639,23 @@ msgstr "并非所有文件都可以恢复。任何无法恢复的文件仍然可
 msgid "Could not restore %s: %s"
 msgstr "无法恢复 %s：%s"
 
-#: ../common/Operation.vala:72
+#: ../common/Operation.vala:73
 msgid "Backing up…"
 msgstr "正在备份..."
 
-#: ../common/Operation.vala:74 ../deja-dup/AssistantRestore.vala:499
+#: ../common/Operation.vala:75 ../deja-dup/AssistantRestore.vala:499
 msgid "Restoring…"
 msgstr "正在恢复..."
 
-#: ../common/Operation.vala:76
+#: ../common/Operation.vala:77
 msgid "Checking for backups…"
 msgstr "正在检查有无备份..."
 
-#: ../common/Operation.vala:78
+#: ../common/Operation.vala:79
 msgid "Listing files…"
 msgstr "正在列出文件..."
 
-#: ../common/Operation.vala:272
+#: ../common/Operation.vala:276
 msgid "Another Déjà Dup is already running"
 msgstr "已有另一个 Déjà Dup 在运行"
 
@@ -871,7 +869,8 @@ msgstr "继_续"
 msgid "_Resume Later"
 msgstr "_以后恢复"
 
-#: ../deja-dup/main.vala:34 ../monitor/monitor.vala:34
+#: ../deja-dup/main.vala:34 ../monitor/monitor.vala:35
+#: ../preferences/preferences-main.vala:27
 msgid "Show version"
 msgstr "显示版本"
 
@@ -988,7 +987,7 @@ msgstr "开始计划备份"
 msgid "%.1f%% complete"
 msgstr "已完成 %.1f%%"
 
-#: ../monitor/monitor.vala:173
+#: ../monitor/monitor.vala:169
 msgid "Scheduled backup delayed"
 msgstr "计划备份被延迟"
 
@@ -1076,6 +1075,10 @@ msgstr "_备份频率："
 msgid "Schedule"
 msgstr "计划"
 
+#: ../preferences/preferences-main.vala:63
+msgid "Déjà Dup Preferences"
+msgstr "Déjà Dup 首选项"
+
 #: ../widgets/ConfigDelete.vala:44
 msgid "At least a week"
 msgstr "至少一周"
@@ -1152,47 +1155,51 @@ msgstr "主文件夹"
 msgid "Trash"
 msgstr "垃圾桶"
 
-#: ../widgets/ConfigLabelPolicy.vala:70
+#: ../widgets/ConfigLabelLocation.vala:63
+msgid "Unknown"
+msgstr "未知"
+
+#: ../widgets/ConfigLabelPolicy.vala:62
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
 msgstr "旧备份将至少保留一周，或直至备份位置 空间不足。"
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
 msgstr "旧备份将至少保留一月，或直至备份位置 空间不足。"
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
 msgstr "旧备份将至少保留两月，或直至备份位置 空间不足。"
 
-#: ../widgets/ConfigLabelPolicy.vala:76
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
 msgstr "旧备份将至少保留三月，或直至备份位置 空间不足。"
 
-#: ../widgets/ConfigLabelPolicy.vala:78
+#: ../widgets/ConfigLabelPolicy.vala:70
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr "旧备份将至少保留六月，或直至备份位置 空间不足。"
 
-#: ../widgets/ConfigLabelPolicy.vala:80
+#: ../widgets/ConfigLabelPolicy.vala:72
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 msgstr "旧备份将至少保留一年，或直至备份位置 空间不足。"
 
-#: ../widgets/ConfigLabelPolicy.vala:82
+#: ../widgets/ConfigLabelPolicy.vala:74
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr "旧备份将一直保留到备份位置空间不足为止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:84
+#: ../widgets/ConfigLabelPolicy.vala:76
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1206,28 +1213,28 @@ msgstr[0] "旧备份将至少保留 %d 天，或直至备份位置 空间不足�
 msgid "Choose folders"
 msgstr "选择文件夹"
 
-#: ../widgets/ConfigLocation.vala:114
+#: ../widgets/ConfigLocation.vala:106
 msgid "SSH"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:116
+#: ../widgets/ConfigLocation.vala:108
 msgid "Windows Share"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:118
+#: ../widgets/ConfigLocation.vala:110
 msgid "FTP"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:112
 msgid "WebDAV"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:123
+#: ../widgets/ConfigLocation.vala:115
 msgid "Custom Location"
 msgstr ""
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:128
+#: ../widgets/ConfigLocation.vala:120
 msgid "Local Folder"
 msgstr ""
 
@@ -1335,14 +1342,14 @@ msgstr ""
 #~ msgid "Backup Tool"
 #~ msgstr "备份工具"
 
+#~ msgid "Schedule backups at regular intervals"
+#~ msgstr "以固定间隔安排备份"
+
 #~ msgid "Backup Preferences"
 #~ msgstr "备份首选项"
 
 #~ msgid "Déjà Dup Backup Preferences"
 #~ msgstr "Déjà Dup 备份首选项"
-
-#~ msgid "Déjà Dup Preferences"
-#~ msgstr "Déjà Dup 首选项"
 
 #~ msgid "The type of backup location."
 #~ msgstr "备份位置的类型。"

@@ -7,35 +7,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-04-29 23:13-0400\n"
-"PO-Revision-Date: 2011-05-02 18:36+0000\n"
+"POT-Creation-Date: 2011-05-25 11:35-0400\n"
+"PO-Revision-Date: 2011-05-24 12:19+0000\n"
 "Last-Translator: rob <linuxned@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-03 04:41+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-05-26 04:37+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
-#: ../data/deja-dup.desktop.in.h:1
+#: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
+#: ../data/deja-dup-preferences.desktop.in.in.h:1
 msgid "Backup"
 msgstr "Back-up"
 
-#: ../data/deja-dup.desktop.in.h:2
+#: ../data/deja-dup-ccpanel.desktop.in.h:2
+#: ../data/deja-dup-preferences.desktop.in.in.h:2
 msgid "Change your backup settings"
 msgstr "Uw back-upinstellingen veranderen"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:278
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:283
 msgid "Déjà Dup Monitor"
 msgstr "Déjà Dup-observatie"
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
-msgid "Schedule backups at regular intervals"
-msgstr "Back-ups op regelmatige tijden plannen"
+msgid "Schedules backups at regular intervals"
+msgstr "Plant back-ups op regelmatige tijden"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 msgid "Amazon S3 Access Key ID"
@@ -331,21 +333,21 @@ msgstr "Map:"
 msgid "Scanning…"
 msgstr "Zoeken…"
 
-#: ../nautilus/NautilusExtension.c:91
+#: ../nautilus/NautilusExtension.c:165
 msgid "Restore Missing Files…"
 msgstr "Ontbrekende bestanden herstellen…"
 
-#: ../nautilus/NautilusExtension.c:92
+#: ../nautilus/NautilusExtension.c:166
 msgid "Restore deleted files from backup"
 msgstr "Ontbrekende bestanden herstellen vanaf back-up"
 
-#: ../nautilus/NautilusExtension.c:122
+#: ../nautilus/NautilusExtension.c:208
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Herstellen naar vorige versie…"
 msgstr[1] "Herstellen naar vorige versies…"
 
-#: ../nautilus/NautilusExtension.c:126
+#: ../nautilus/NautilusExtension.c:212
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Herstel bestand vanaf back-up"
@@ -357,7 +359,7 @@ msgstr "GVFS FUSE is niet geïnstalleerd."
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:346
+#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:347
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s op %2$s"
@@ -367,8 +369,8 @@ msgstr "%1$s op %2$s"
 msgid "Backup will begin when %s becomes connected."
 msgstr "De back-up begint zodra %s verbonden is."
 
-#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:45
-#: ../common/BackendS3.vala:55 ../common/BackendU1.vala:109
+#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:50
+#: ../common/BackendS3.vala:60 ../common/BackendU1.vala:144
 msgid "Backup will begin when a network connection becomes available."
 msgstr "De back-up begint zodra er een netwerkverbinding beschikbaar is."
 
@@ -381,25 +383,25 @@ msgstr "Back-uplocatie is niet beschikbaar"
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Wachten todat '%s' verbonden is..."
 
-#: ../common/BackendRackspace.vala:54
+#: ../common/BackendRackspace.vala:59
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "U moet een Rackspace-opslaglocatie instellen in uw voorkeuren."
 
-#: ../common/BackendRackspace.vala:63 ../widgets/ConfigLocation.vala:103
+#: ../common/BackendRackspace.vala:68 ../widgets/ConfigLocation.vala:184
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
 #. Translators: %s is a folder.
-#: ../common/BackendRackspace.vala:66
+#: ../common/BackendRackspace.vala:71
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "%s op Rackspace Cloud Files"
 
-#: ../common/BackendRackspace.vala:113 ../common/BackendS3.vala:168
+#: ../common/BackendRackspace.vala:118 ../common/BackendS3.vala:173
 msgid "Permission denied"
 msgstr "Toegang geweigerd"
 
-#: ../common/BackendRackspace.vala:134
+#: ../common/BackendRackspace.vala:139
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
@@ -407,73 +409,73 @@ msgid ""
 msgstr ""
 "U kunt een Rackspace Cloud Files-account <a href=\"%s\">online</a> aanmaken."
 
-#: ../common/BackendRackspace.vala:135
+#: ../common/BackendRackspace.vala:140
 msgid "_API access key:"
 msgstr "_API-toegangssleutel:"
 
-#: ../common/BackendRackspace.vala:136
+#: ../common/BackendRackspace.vala:141
 msgid "S_how API access key"
 msgstr "API-toegangssleutel _tonen"
 
-#: ../common/BackendRackspace.vala:137
+#: ../common/BackendRackspace.vala:142
 msgid "_Remember API access key"
 msgstr "API-toegangssleutel _onthouden"
 
-#: ../common/BackendRackspace.vala:139
+#: ../common/BackendRackspace.vala:144
 msgid "Enter Rackspace Cloud Files API key"
 msgstr "Voer Rackspace Cloud Files API-sleutel in"
 
-#: ../common/BackendS3.vala:118 ../widgets/ConfigLocation.vala:101
+#: ../common/BackendS3.vala:123 ../widgets/ConfigLocation.vala:168
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
 #. Translators: %s is a folder.
-#: ../common/BackendS3.vala:121
+#: ../common/BackendS3.vala:126
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "%s op Amazon S3"
 
-#: ../common/BackendS3.vala:189
+#: ../common/BackendS3.vala:194
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr ""
 "U kunt zich <a href=\"%s\">online registreren</a> voor een Amazon S3-account."
 
-#: ../common/BackendS3.vala:190
+#: ../common/BackendS3.vala:195
 msgid "_Access key ID:"
 msgstr "Toeg_angssleutel-ID:"
 
-#: ../common/BackendS3.vala:191
+#: ../common/BackendS3.vala:196
 msgid "_Secret access key:"
 msgstr "Geheime toegang_ssleutel:"
 
-#: ../common/BackendS3.vala:192
+#: ../common/BackendS3.vala:197
 msgid "S_how secret access key"
 msgstr "Ge_heime toegangssleutel tonen"
 
-#: ../common/BackendS3.vala:193
+#: ../common/BackendS3.vala:198
 msgid "_Remember secret access key"
 msgstr "Geheime toegangssleutel _onthouden"
 
-#: ../common/BackendS3.vala:195
+#: ../common/BackendS3.vala:200
 msgid "Enter Amazon S3 access key"
 msgstr "Voer de Amazon S3-toegangssleutel in"
 
-#: ../common/BackendU1.vala:125 ../widgets/ConfigLocation.vala:108
+#: ../common/BackendU1.vala:160 ../widgets/ConfigLocation.vala:176
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
 #. Translators: %s is a folder.
-#: ../common/BackendU1.vala:128
+#: ../common/BackendU1.vala:163
 #, c-format
 msgid "%s on Ubuntu One"
 msgstr "%s op Ubuntu One"
 
-#: ../common/BackendU1.vala:183
+#: ../common/BackendU1.vala:218
 msgid "Sign into Ubuntu One…"
 msgstr "Aanmelden bij Ubuntu One…"
 
-#: ../common/BackendU1.vala:185
+#: ../common/BackendU1.vala:220
 msgid "Connect to Ubuntu One"
 msgstr "Verbinding maken met Ubuntu One"
 
@@ -482,13 +484,9 @@ msgstr "Verbinding maken met Ubuntu One"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, it
 #. may not be very translatable.
-#: ../common/CommonUtils.vala:69 ../deja-dup/main.vala:77
+#: ../common/CommonUtils.vala:70 ../deja-dup/main.vala:77
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
-
-#: ../common/CommonUtils.vala:360
-msgid "Unknown"
-msgstr "Onbekend"
 
 #: ../common/DuplicityInfo.vala:140
 msgid "Could not run duplicity"
@@ -533,8 +531,8 @@ msgid "Paused (no network)"
 msgstr "Gepauzeerd (geen netwerk)"
 
 #: ../common/Duplicity.vala:378 ../common/Duplicity.vala:386
-#: ../common/Duplicity.vala:403 ../common/Operation.vala:80
-#: ../common/Operation.vala:115
+#: ../common/Duplicity.vala:403 ../common/Operation.vala:81
+#: ../common/Operation.vala:112
 msgid "Preparing…"
 msgstr "Bezig met voorbereiden…"
 
@@ -682,23 +680,23 @@ msgstr ""
 msgid "Could not restore %s: %s"
 msgstr "Kan %s: %s niet herstellen"
 
-#: ../common/Operation.vala:72
+#: ../common/Operation.vala:73
 msgid "Backing up…"
 msgstr "Back-up wordt gemaakt..."
 
-#: ../common/Operation.vala:74 ../deja-dup/AssistantRestore.vala:499
+#: ../common/Operation.vala:75 ../deja-dup/AssistantRestore.vala:499
 msgid "Restoring…"
 msgstr "Herstellen..."
 
-#: ../common/Operation.vala:76
+#: ../common/Operation.vala:77
 msgid "Checking for backups…"
 msgstr "Zoeken naar back-ups…"
 
-#: ../common/Operation.vala:78
+#: ../common/Operation.vala:79
 msgid "Listing files…"
 msgstr "Bestandslijst maken..."
 
-#: ../common/Operation.vala:272
+#: ../common/Operation.vala:276
 msgid "Another Déjà Dup is already running"
 msgstr "Er is reeds een Déjà Dup actief"
 
@@ -928,7 +926,8 @@ msgstr "Doorgaa_n"
 msgid "_Resume Later"
 msgstr "Later he_rvatten"
 
-#: ../deja-dup/main.vala:34 ../monitor/monitor.vala:34
+#: ../deja-dup/main.vala:34 ../monitor/monitor.vala:35
+#: ../preferences/preferences-main.vala:27
 msgid "Show version"
 msgstr "Versie tonen"
 
@@ -1050,7 +1049,7 @@ msgstr "Geplande back-up wordt gestart"
 msgid "%.1f%% complete"
 msgstr "%.1f%% compleet"
 
-#: ../monitor/monitor.vala:173
+#: ../monitor/monitor.vala:169
 msgid "Scheduled backup delayed"
 msgstr "Geplande back-ups uitgesteld"
 
@@ -1138,6 +1137,10 @@ msgstr "H_oe vaak wilt u een back-up maken:"
 msgid "Schedule"
 msgstr "Planning"
 
+#: ../preferences/preferences-main.vala:63
+msgid "Déjà Dup Preferences"
+msgstr "Déjà Dup-voorkeuren"
+
 #: ../widgets/ConfigDelete.vala:44
 msgid "At least a week"
 msgstr "Tenminste één week"
@@ -1215,7 +1218,11 @@ msgstr "Persoonlijke map"
 msgid "Trash"
 msgstr "Prullenbak"
 
-#: ../widgets/ConfigLabelPolicy.vala:70
+#: ../widgets/ConfigLabelLocation.vala:63
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: ../widgets/ConfigLabelPolicy.vala:62
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
@@ -1223,7 +1230,7 @@ msgstr ""
 "Oude back-ups worden minimaal één week bewaard of totdat de back-uplocatie "
 "bijna vol is."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
@@ -1231,7 +1238,7 @@ msgstr ""
 "Oude back-ups worden minimaal één maand bewaard of totdat de back-uplocatie "
 "bijna vol is."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
@@ -1239,7 +1246,7 @@ msgstr ""
 "Oude back-ups worden minimaal twee maanden bewaard of totdat de back-"
 "uplocatie bijna vol is."
 
-#: ../widgets/ConfigLabelPolicy.vala:76
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
@@ -1247,7 +1254,7 @@ msgstr ""
 "Oude back-ups worden minimaal drie maanden bewaard of totdat de back-"
 "uplocatie bijna vol is."
 
-#: ../widgets/ConfigLabelPolicy.vala:78
+#: ../widgets/ConfigLabelPolicy.vala:70
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
@@ -1255,7 +1262,7 @@ msgstr ""
 "Oude back-ups worden minimaal zes maanden bewaard of totdat de back-"
 "uplocatie bijna vol is."
 
-#: ../widgets/ConfigLabelPolicy.vala:80
+#: ../widgets/ConfigLabelPolicy.vala:72
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1263,11 +1270,11 @@ msgstr ""
 "Oude back-ups worden minimaal één jaar bewaard of totdat de back-uplocatie "
 "bijna vol is."
 
-#: ../widgets/ConfigLabelPolicy.vala:82
+#: ../widgets/ConfigLabelPolicy.vala:74
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr "Oude back-ups worden bewaard totdat de back-uplocatie bijna vol is."
 
-#: ../widgets/ConfigLabelPolicy.vala:84
+#: ../widgets/ConfigLabelPolicy.vala:76
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1286,28 +1293,28 @@ msgstr[1] ""
 msgid "Choose folders"
 msgstr "Selecteer mappen"
 
-#: ../widgets/ConfigLocation.vala:114
+#: ../widgets/ConfigLocation.vala:106
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:116
+#: ../widgets/ConfigLocation.vala:108
 msgid "Windows Share"
 msgstr "Windows Share"
 
-#: ../widgets/ConfigLocation.vala:118
+#: ../widgets/ConfigLocation.vala:110
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:112
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:123
+#: ../widgets/ConfigLocation.vala:115
 msgid "Custom Location"
 msgstr "Aangepaste locatie"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:128
+#: ../widgets/ConfigLocation.vala:120
 msgid "Local Folder"
 msgstr "Lokale map"
 
@@ -1630,14 +1637,14 @@ msgstr ""
 #~ msgid "Back up your files"
 #~ msgstr "Back-up van uw bestanden maken"
 
+#~ msgid "Schedule backups at regular intervals"
+#~ msgstr "Back-ups op regelmatige tijden plannen"
+
 #~ msgid "Backup Preferences"
 #~ msgstr "Back-upvoorkeuren"
 
 #~ msgid "Déjà Dup Backup Preferences"
 #~ msgstr "Déjà Dup-back-upvoorkeuren"
-
-#~ msgid "Déjà Dup Preferences"
-#~ msgstr "Déjà Dup-voorkeuren"
 
 #~ msgid "The type of backup location. Valid values are ‘s3’ or ‘file’."
 #~ msgstr "Het type back-uplocatie. Toegestane waarden zijn 's3' of 'file'."

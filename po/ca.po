@@ -7,35 +7,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-04-29 23:13-0400\n"
-"PO-Revision-Date: 2011-02-23 18:13+0000\n"
-"Last-Translator: Joan Duran <jodufi@gmail.com>\n"
+"POT-Creation-Date: 2011-05-25 11:35-0400\n"
+"PO-Revision-Date: 2011-05-17 07:00+0000\n"
+"Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-01 04:54+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-05-26 04:37+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
-#: ../data/deja-dup.desktop.in.h:1
+#: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
+#: ../data/deja-dup-preferences.desktop.in.in.h:1
 msgid "Backup"
-msgstr ""
+msgstr "Còpia de seguretat"
 
-#: ../data/deja-dup.desktop.in.h:2
+#: ../data/deja-dup-ccpanel.desktop.in.h:2
+#: ../data/deja-dup-preferences.desktop.in.in.h:2
 msgid "Change your backup settings"
 msgstr "Canvia les preferències de les còpies de seguretat"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:278
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:283
 msgid "Déjà Dup Monitor"
 msgstr "Eina de seguiment del Déjà Dup"
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
-msgid "Schedule backups at regular intervals"
-msgstr "Planeja còpies de seguretat a intervals regulars"
+msgid "Schedules backups at regular intervals"
+msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 msgid "Amazon S3 Access Key ID"
@@ -112,11 +114,11 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:16
 msgid "Location in which to hold the backup files."
-msgstr ""
+msgstr "Ubicació on s'emmagatzemaran els fitxers de còpia de seguretat."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:17
 msgid "Obsolete"
-msgstr ""
+msgstr "Obsolet"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:18
 msgid "Relative path under the external volume"
@@ -283,153 +285,154 @@ msgstr ""
 
 #: ../data/ui/restore-missing.ui.h:1
 msgid "Folder:"
-msgstr ""
+msgstr "Carpeta:"
 
 #: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:172
 msgid "Scanning…"
-msgstr ""
+msgstr "S'està escanejant…"
 
-#: ../nautilus/NautilusExtension.c:91
+#: ../nautilus/NautilusExtension.c:165
 msgid "Restore Missing Files…"
-msgstr ""
+msgstr "Restaura els fitxers que manquen…"
 
-#: ../nautilus/NautilusExtension.c:92
+#: ../nautilus/NautilusExtension.c:166
 msgid "Restore deleted files from backup"
-msgstr ""
+msgstr "Restaura els fitxers suprimits a partir de la còpia de seguretat"
 
-#: ../nautilus/NautilusExtension.c:122
+#: ../nautilus/NautilusExtension.c:208
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Recupera la versió anterior…"
+msgstr[1] "Recupera les versions anteriors…"
 
-#: ../nautilus/NautilusExtension.c:126
+#: ../nautilus/NautilusExtension.c:212
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Restaura el fitxer des de la còpia de seguretat"
+msgstr[1] "Restaura els fitxers des de la còpia de seguretat"
 
 #: ../common/BackendFile.vala:74
 msgid "GVFS FUSE is not installed"
-msgstr ""
+msgstr "El GVFS FUSE no està instal·lat"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:346
+#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:347
 #, c-format
 msgid "%1$s on %2$s"
-msgstr ""
+msgstr "%1$s a %2$s"
 
 #: ../common/BackendFile.vala:130
 #, c-format
 msgid "Backup will begin when %s becomes connected."
 msgstr ""
+"La còpia de seguretat començarà quan s'estableixi la connexió amb %s."
 
-#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:45
-#: ../common/BackendS3.vala:55 ../common/BackendU1.vala:109
+#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:50
+#: ../common/BackendS3.vala:60 ../common/BackendU1.vala:144
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 
 #: ../common/BackendFile.vala:419
 msgid "Backup location not available"
-msgstr ""
+msgstr "La ubicació de la còpia de seguretat no està disponible"
 
 #: ../common/BackendFile.vala:419
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:54
+#: ../common/BackendRackspace.vala:59
 msgid "You must specify a Rackspace container in your preferences."
 msgstr ""
 
-#: ../common/BackendRackspace.vala:63 ../widgets/ConfigLocation.vala:103
+#: ../common/BackendRackspace.vala:68 ../widgets/ConfigLocation.vala:184
 msgid "Rackspace Cloud Files"
 msgstr ""
 
 #. Translators: %s is a folder.
-#: ../common/BackendRackspace.vala:66
+#: ../common/BackendRackspace.vala:71
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:113 ../common/BackendS3.vala:168
+#: ../common/BackendRackspace.vala:118 ../common/BackendS3.vala:173
 msgid "Permission denied"
-msgstr ""
+msgstr "S’ha denegat el permís"
 
-#: ../common/BackendRackspace.vala:134
+#: ../common/BackendRackspace.vala:139
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
 "href=\"%s\">online</a>."
 msgstr ""
 
-#: ../common/BackendRackspace.vala:135
+#: ../common/BackendRackspace.vala:140
 msgid "_API access key:"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:136
+#: ../common/BackendRackspace.vala:141
 msgid "S_how API access key"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:137
+#: ../common/BackendRackspace.vala:142
 msgid "_Remember API access key"
 msgstr ""
 
-#: ../common/BackendRackspace.vala:139
+#: ../common/BackendRackspace.vala:144
 msgid "Enter Rackspace Cloud Files API key"
 msgstr ""
 
-#: ../common/BackendS3.vala:118 ../widgets/ConfigLocation.vala:101
+#: ../common/BackendS3.vala:123 ../widgets/ConfigLocation.vala:168
 msgid "Amazon S3"
 msgstr ""
 
 #. Translators: %s is a folder.
-#: ../common/BackendS3.vala:121
+#: ../common/BackendS3.vala:126
 #, c-format
 msgid "%s on Amazon S3"
 msgstr ""
 
-#: ../common/BackendS3.vala:189
+#: ../common/BackendS3.vala:194
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr ""
 
-#: ../common/BackendS3.vala:190
+#: ../common/BackendS3.vala:195
 msgid "_Access key ID:"
 msgstr ""
 
-#: ../common/BackendS3.vala:191
+#: ../common/BackendS3.vala:196
 msgid "_Secret access key:"
 msgstr ""
 
-#: ../common/BackendS3.vala:192
+#: ../common/BackendS3.vala:197
 msgid "S_how secret access key"
 msgstr ""
 
-#: ../common/BackendS3.vala:193
+#: ../common/BackendS3.vala:198
 msgid "_Remember secret access key"
 msgstr ""
 
-#: ../common/BackendS3.vala:195
+#: ../common/BackendS3.vala:200
 msgid "Enter Amazon S3 access key"
 msgstr ""
 
-#: ../common/BackendU1.vala:125 ../widgets/ConfigLocation.vala:108
+#: ../common/BackendU1.vala:160 ../widgets/ConfigLocation.vala:176
 msgid "Ubuntu One"
 msgstr ""
 
 #. Translators: %s is a folder.
-#: ../common/BackendU1.vala:128
+#: ../common/BackendU1.vala:163
 #, c-format
 msgid "%s on Ubuntu One"
 msgstr ""
 
-#: ../common/BackendU1.vala:183
+#: ../common/BackendU1.vala:218
 msgid "Sign into Ubuntu One…"
 msgstr ""
 
-#: ../common/BackendU1.vala:185
+#: ../common/BackendU1.vala:220
 msgid "Connect to Ubuntu One"
 msgstr ""
 
@@ -438,13 +441,9 @@ msgstr ""
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, it
 #. may not be very translatable.
-#: ../common/CommonUtils.vala:69 ../deja-dup/main.vala:77
+#: ../common/CommonUtils.vala:70 ../deja-dup/main.vala:77
 msgid "Déjà Dup"
 msgstr "Déjà Dup"
-
-#: ../common/CommonUtils.vala:360
-msgid "Unknown"
-msgstr ""
 
 #: ../common/DuplicityInfo.vala:140
 msgid "Could not run duplicity"
@@ -483,8 +482,8 @@ msgid "Paused (no network)"
 msgstr ""
 
 #: ../common/Duplicity.vala:378 ../common/Duplicity.vala:386
-#: ../common/Duplicity.vala:403 ../common/Operation.vala:80
-#: ../common/Operation.vala:115
+#: ../common/Duplicity.vala:403 ../common/Operation.vala:81
+#: ../common/Operation.vala:112
 msgid "Preparing…"
 msgstr ""
 
@@ -510,6 +509,7 @@ msgstr ""
 #: ../common/Duplicity.vala:618
 msgid "Creating the first backup.  This may take a while."
 msgstr ""
+"S'està creant la primera còpia de seguretat. Això pot trigar una estona."
 
 #: ../common/Duplicity.vala:620
 msgid ""
@@ -623,23 +623,23 @@ msgstr ""
 msgid "Could not restore %s: %s"
 msgstr ""
 
-#: ../common/Operation.vala:72
+#: ../common/Operation.vala:73
 msgid "Backing up…"
-msgstr ""
+msgstr "S'està fent la còpia de seguretat…"
 
-#: ../common/Operation.vala:74 ../deja-dup/AssistantRestore.vala:499
+#: ../common/Operation.vala:75 ../deja-dup/AssistantRestore.vala:499
 msgid "Restoring…"
 msgstr ""
 
-#: ../common/Operation.vala:76
+#: ../common/Operation.vala:77
 msgid "Checking for backups…"
 msgstr ""
 
-#: ../common/Operation.vala:78
+#: ../common/Operation.vala:79
 msgid "Listing files…"
 msgstr ""
 
-#: ../common/Operation.vala:272
+#: ../common/Operation.vala:276
 msgid "Another Déjà Dup is already running"
 msgstr ""
 
@@ -657,7 +657,7 @@ msgstr ""
 #. "Backing up '%s'".  %s is a filename.
 #: ../deja-dup/AssistantBackup.vala:71
 msgid "Backing up:"
-msgstr ""
+msgstr "S'està fent la còpia de seguretat:"
 
 #: ../deja-dup/AssistantBackup.vala:88
 msgid "Backup Failed"
@@ -665,15 +665,15 @@ msgstr ""
 
 #: ../deja-dup/AssistantBackup.vala:95
 msgid "Backing Up…"
-msgstr ""
+msgstr "S'està fent la còpia de seguretat…"
 
 #: ../deja-dup/AssistantOperation.vala:171
 msgid "Scanning:"
-msgstr ""
+msgstr "S'està escanejant:"
 
 #: ../deja-dup/AssistantOperation.vala:245
 msgid "_Details"
-msgstr ""
+msgstr "_Detalls"
 
 #: ../deja-dup/AssistantOperation.vala:295
 msgid "E_ncryption password:"
@@ -714,7 +714,7 @@ msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:95 ../preferences/Preferences.vala:294
 msgid "_Backup location:"
-msgstr ""
+msgstr "_Ubicació de la còpia de seguretat:"
 
 #: ../deja-dup/AssistantRestore.vala:106
 msgid "Backup files are _encrypted"
@@ -746,7 +746,7 @@ msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:226
 msgid "Backup location:"
-msgstr ""
+msgstr "Ubicació de la còpia de seguretat:"
 
 #: ../deja-dup/AssistantRestore.vala:233
 msgid "Encrypted:"
@@ -798,8 +798,8 @@ msgstr ""
 #: ../deja-dup/AssistantRestore.vala:463
 msgid "File to restore:"
 msgid_plural "Files to restore:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Fitxer que es restaurarà:"
+msgstr[1] "Fitxers que es restauraran:"
 
 #: ../deja-dup/AssistantRestore.vala:487
 msgid "Restore Failed"
@@ -859,7 +859,7 @@ msgstr[1] ""
 
 #: ../deja-dup/AssistantRestoreMissing.vala:442
 msgid "Scanning finished"
-msgstr ""
+msgstr "Ha finalitzat l'escaneig"
 
 #: ../deja-dup/Assistant.vala:293
 msgid "Co_ntinue"
@@ -867,9 +867,10 @@ msgstr ""
 
 #: ../deja-dup/Assistant.vala:331 ../deja-dup/StatusIcon.vala:93
 msgid "_Resume Later"
-msgstr ""
+msgstr "_Reprèn més tard"
 
-#: ../deja-dup/main.vala:34 ../monitor/monitor.vala:34
+#: ../deja-dup/main.vala:34 ../monitor/monitor.vala:35
+#: ../preferences/preferences-main.vala:27
 msgid "Show version"
 msgstr ""
 
@@ -899,7 +900,7 @@ msgstr ""
 
 #: ../deja-dup/main.vala:80
 msgid "[FILES…]"
-msgstr ""
+msgstr "[FITXERS…]"
 
 #: ../deja-dup/main.vala:81
 msgid "DIRECTORY"
@@ -986,7 +987,7 @@ msgstr ""
 msgid "%.1f%% complete"
 msgstr ""
 
-#: ../monitor/monitor.vala:173
+#: ../monitor/monitor.vala:169
 msgid "Scheduled backup delayed"
 msgstr ""
 
@@ -1052,7 +1053,7 @@ msgstr ""
 
 #: ../preferences/Preferences.vala:339
 msgid "Storage"
-msgstr ""
+msgstr "Emmagatzematge"
 
 #: ../preferences/Preferences.vala:361
 msgid "I_nclude files in folders:"
@@ -1064,7 +1065,7 @@ msgstr ""
 
 #: ../preferences/Preferences.vala:399
 msgid "Files"
-msgstr ""
+msgstr "Fitxers"
 
 #: ../preferences/Preferences.vala:409
 msgid "How _often to back up:"
@@ -1073,6 +1074,10 @@ msgstr ""
 #: ../preferences/Preferences.vala:424
 msgid "Schedule"
 msgstr ""
+
+#: ../preferences/preferences-main.vala:63
+msgid "Déjà Dup Preferences"
+msgstr "Preferències del Déjà Dup"
 
 #: ../widgets/ConfigDelete.vala:44
 msgid "At least a week"
@@ -1151,47 +1156,51 @@ msgstr ""
 msgid "Trash"
 msgstr ""
 
-#: ../widgets/ConfigLabelPolicy.vala:70
+#: ../widgets/ConfigLabelLocation.vala:63
+msgid "Unknown"
+msgstr ""
+
+#: ../widgets/ConfigLabelPolicy.vala:62
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
 msgstr ""
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
 msgstr ""
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
 msgstr ""
 
-#: ../widgets/ConfigLabelPolicy.vala:76
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
 msgstr ""
 
-#: ../widgets/ConfigLabelPolicy.vala:78
+#: ../widgets/ConfigLabelPolicy.vala:70
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
 
-#: ../widgets/ConfigLabelPolicy.vala:80
+#: ../widgets/ConfigLabelPolicy.vala:72
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 msgstr ""
 
-#: ../widgets/ConfigLabelPolicy.vala:82
+#: ../widgets/ConfigLabelPolicy.vala:74
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 
-#: ../widgets/ConfigLabelPolicy.vala:84
+#: ../widgets/ConfigLabelPolicy.vala:76
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1206,30 +1215,30 @@ msgstr[1] ""
 msgid "Choose folders"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:114
+#: ../widgets/ConfigLocation.vala:106
 msgid "SSH"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:116
+#: ../widgets/ConfigLocation.vala:108
 msgid "Windows Share"
-msgstr ""
+msgstr "Recurs compartit del Windows"
 
-#: ../widgets/ConfigLocation.vala:118
+#: ../widgets/ConfigLocation.vala:110
 msgid "FTP"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:112
 msgid "WebDAV"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:123
+#: ../widgets/ConfigLocation.vala:115
 msgid "Custom Location"
-msgstr ""
+msgstr "Ubicació personalitzada"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:128
+#: ../widgets/ConfigLocation.vala:120
 msgid "Local Folder"
-msgstr ""
+msgstr "Carpeta local"
 
 #: ../widgets/ConfigLocationCustom.vala:31
 msgid "_URI:"
@@ -1238,7 +1247,7 @@ msgstr ""
 #: ../widgets/ConfigLocationDAV.vala:31 ../widgets/ConfigLocationFTP.vala:32
 #: ../widgets/ConfigLocationSMB.vala:31 ../widgets/ConfigLocationSSH.vala:31
 msgid "_Server:"
-msgstr ""
+msgstr "_Servidor:"
 
 #: ../widgets/ConfigLocationDAV.vala:38
 msgid "Use secure connection (_HTTPS)"
@@ -1331,8 +1340,8 @@ msgstr ""
 #~ msgid "Back up your files"
 #~ msgstr "Feu una còpia de seguretat dels vostres fitxers"
 
-#~ msgid "Déjà Dup Preferences"
-#~ msgstr "Preferències del Déjà Dup"
+#~ msgid "Schedule backups at regular intervals"
+#~ msgstr "Planeja còpies de seguretat a intervals regulars"
 
 #~ msgid "Backup Preferences"
 #~ msgstr "Preferències de les còpies de seguretat"
