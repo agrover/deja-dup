@@ -34,7 +34,6 @@ public class ConfigLabelBackupDate : ConfigLabel
 
   construct {
     watch_key(DejaDup.LAST_BACKUP_KEY);
-    watch_key(DejaDup.LAST_RUN_KEY);
     if (kind == Kind.NEXT) {
       watch_key(DejaDup.PERIODIC_KEY);
       watch_key(DejaDup.PERIODIC_PERIOD_KEY);
@@ -82,9 +81,7 @@ public class ConfigLabelBackupDate : ConfigLabel
 
   protected void set_from_config_last()
   {
-    var val = settings.get_string(DejaDup.LAST_BACKUP_KEY);
-    if (val == "")
-      val = settings.get_string(DejaDup.LAST_RUN_KEY);
+    var val = DejaDup.last_run_date(DejaDup.TimestampType.BACKUP);
 
     var time = TimeVal();
     if (val == "" || !time.from_iso8601(val)) {

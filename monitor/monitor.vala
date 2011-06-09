@@ -275,7 +275,7 @@ static void prepare_next_run()
 
 static void prepare_if_necessary(string key)
 {
-  if (key == DejaDup.LAST_RUN_KEY ||
+  if (key == DejaDup.LAST_BACKUP_KEY ||
       key == DejaDup.PERIODIC_KEY ||
       key == DejaDup.PERIODIC_PERIOD_KEY)
     prepare_next_run();
