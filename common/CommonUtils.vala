@@ -31,6 +31,7 @@ public const string ENCRYPT_KEY = "encrypt";
 public const string LAST_RUN_KEY = "last-run";
 public const string LAST_BACKUP_KEY = "last-backup";
 public const string LAST_RESTORE_KEY = "last-restore";
+public const string PROMPT_CHECK_KEY = "prompt-check";
 public const string PERIODIC_KEY = "periodic";
 public const string PERIODIC_PERIOD_KEY = "periodic-period";
 public const string DELETE_AFTER_KEY = "delete-after";
@@ -155,6 +156,48 @@ public Date next_run_date()
     last_scheduled.add_days(period_days);
 
   return last_scheduled;
+}
+
+// This makes the check of whether we should tell user about backing up.
+// For example, if a user has installed their OS and doesn't know about backing
+// up, we might notify them after a month.
+public void make_prompt_check()
+{
+  var settings = DejaDup.get_settings();
+  var prompt = settings.get_string(PROMPT_CHECK_KEY);
+
+  if (prompt == "disabled")
+    return;
+  else if (prompt == "") {
+    update_prompt_time();
+    return;
+  }
+  else if (last_run_date(TimestampType.NONE) != "")
+    return;
+
+  // OK, monitor has run before but user hasn't yet backed up or restored.
+  // Let's see whether we should prompt now.
+  TimeVal last_run_tval = TimeVal();
+  if (!last_run_tval.from_iso8601(prompt))
+    return;
+
+  Date last_run = Date();
+  last_run.set_time_val(last_run_tval);
+  if (!last_run.valid())
+    return;
+
+  last_run.add_months(1);
+
+  
+}
+
+public void update_prompt_time()
+{
+  var settings = DejaDup.get_settings();
+  TimeVal cur_time = TimeVal();
+  cur_time.get_current_time();
+  var cur_time_str = cur_time.to_iso8601();
+  settings.set_string(PROMPT_CHECK_KEY, cur_time_str);
 }
 
 public string get_trash_path()
