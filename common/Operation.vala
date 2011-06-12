@@ -273,7 +273,7 @@ public abstract class Operation : Object
                           ()=>{rv = false; loop.quit();});
     loop.run();
     if (bus_id == 0 || rv == false)
-      throw new BackupError.ALREADY_RUNNING(_("Another Déjà Dup is already running"));
+      throw new BackupError.ALREADY_RUNNING(_("Another Déjà Dup Backup Tool operation is already running"));
   }
 
   void unclaim_bus()

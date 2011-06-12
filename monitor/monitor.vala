@@ -313,7 +313,7 @@ static int main(string[] args)
   // Translators: Monitor in this sense means something akin to 'watcher', not
   // a computer screen.  This program acts like a daemon that kicks off
   // backups at scheduled times.
-  Environment.set_application_name(_("Déjà Dup Monitor"));
+  Environment.set_application_name(_("Backup Monitor"));
   
   OptionContext context = new OptionContext("");
   context.add_main_entries(options, Config.GETTEXT_PACKAGE);

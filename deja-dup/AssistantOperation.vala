@@ -3,6 +3,7 @@
     This file is part of Déjà Dup.
     © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
     © 2010 Andrew Fister <temposs@gmail.com>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -666,7 +667,7 @@ public abstract class AssistantOperation : Assistant
       if (encrypt_remember.active) {
         GnomeKeyring.store_password(PASSPHRASE_SCHEMA,
                                     GnomeKeyring.DEFAULT,
-                                    _("Déjà Dup encryption password"),
+                                    _("Backup encryption password"),
                                     passphrase, save_password_callback,
                                     "owner", Config.PACKAGE,
                                     "type", "passphrase");

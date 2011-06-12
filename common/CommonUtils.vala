@@ -85,7 +85,7 @@ public void run_deja_dup(string args, AppLaunchContext? ctx = null,
   var flags = AppInfoCreateFlags.SUPPORTS_STARTUP_NOTIFICATION |
               AppInfoCreateFlags.SUPPORTS_URIS;
   try {
-    var app = AppInfo.create_from_commandline(cmd, _("Déjà Dup"), flags);
+    var app = AppInfo.create_from_commandline(cmd, _("Déjà Dup Backup Tool"), flags);
     app.launch(files, ctx);
   }
   catch (Error e) {

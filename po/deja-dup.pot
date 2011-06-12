@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: mike@mterry.name\n"
-"POT-Creation-Date: 2011-06-12 01:26-0400\n"
+"POT-Creation-Date: 2011-06-12 01:36-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,7 +35,7 @@ msgstr ""
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
 #: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:316
-msgid "Déjà Dup Monitor"
+msgid "Backup Monitor"
 msgstr ""
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
@@ -301,7 +301,7 @@ msgstr ""
 msgid "Folder:"
 msgstr ""
 
-#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:172
+#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:173
 msgid "Scanning…"
 msgstr ""
 
@@ -452,10 +452,12 @@ msgstr ""
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
 #. context is itself a reference to both the underlying command line tool
-#. "duplicity" and the act of duplicating data for backup.  As a whole, it
-#. may not be very translatable.
+#. "duplicity" and the act of duplicating data for backup.  As a whole, the
+#. phrase "Déjà Dup" may not be very translatable.
 #: ../common/CommonUtils.vala:88 ../deja-dup/main.vala:80
-msgid "Déjà Dup"
+#: ../preferences/Preferences.vala:86
+#, c-format
+msgid "Déjà Dup Backup Tool"
 msgstr ""
 
 #: ../common/DuplicityInfo.vala:142
@@ -476,7 +478,8 @@ msgid ""
 msgstr ""
 
 #: ../common/DuplicityInfo.vala:151
-msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
+msgid ""
+"Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
 
 #: ../common/DuplicityInfo.vala:155
@@ -486,8 +489,8 @@ msgstr ""
 #: ../common/DuplicityInfo.vala:156
 #, c-format
 msgid ""
-"Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
-"version %d.%d.%.2d"
+"Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
+"only found version %d.%d.%.2d"
 msgstr ""
 
 #: ../common/Duplicity.vala:128 ../common/Duplicity.vala:180
@@ -652,7 +655,7 @@ msgid "Listing files…"
 msgstr ""
 
 #: ../common/Operation.vala:276
-msgid "Another Déjà Dup is already running"
+msgid "Another Déjà Dup Backup Tool operation is already running"
 msgstr ""
 
 #: ../deja-dup/AssistantBackup.vala:31
@@ -679,41 +682,41 @@ msgstr ""
 msgid "Backing Up…"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:171
+#: ../deja-dup/AssistantOperation.vala:172
 msgid "Scanning:"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:245
+#: ../deja-dup/AssistantOperation.vala:246
 msgid "_Details"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:296
+#: ../deja-dup/AssistantOperation.vala:297
 msgid "E_ncryption password:"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:311
+#: ../deja-dup/AssistantOperation.vala:312
 msgid "Confir_m password:"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:321
+#: ../deja-dup/AssistantOperation.vala:322
 msgid "_Show password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:330
+#: ../deja-dup/AssistantOperation.vala:331
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:395
+#: ../deja-dup/AssistantOperation.vala:396
 msgid "Summary"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:410
+#: ../deja-dup/AssistantOperation.vala:411
 msgid "Encryption Password Needed"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:669
-msgid "Déjà Dup encryption password"
+#: ../deja-dup/AssistantOperation.vala:670
+msgid "Backup encryption password"
 msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:72
@@ -1042,11 +1045,6 @@ msgstr ""
 #: ../preferences/Preferences.vala:60
 #, c-format
 msgid "Just show my backup _settings"
-msgstr ""
-
-#: ../preferences/Preferences.vala:86
-#, c-format
-msgid "Déjà Dup Backup Tool"
 msgstr ""
 
 #: ../preferences/Preferences.vala:153

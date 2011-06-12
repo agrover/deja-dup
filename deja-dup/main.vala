@@ -75,9 +75,9 @@ class DejaDupApp : Object
     // Translators: The name is a play on the French phrase "déjà vu" meaning
     // "already seen", but with the "vu" replaced with "dup".  "Dup" in this
     // context is itself a reference to both the underlying command line tool
-    // "duplicity" and the act of duplicating data for backup.  As a whole, it
-    // may not be very translatable.
-    Environment.set_application_name(_("Déjà Dup"));
+    // "duplicity" and the act of duplicating data for backup.  As a whole, the
+    // phrase "Déjà Dup" may not be very translatable.
+    Environment.set_application_name(_("Déjà Dup Backup Tool"));
     
     var modes = "\n  %s --backup\n  %s --restore %s\n  %s --restore-missing %s"
                 .printf(Config.PACKAGE, Config.PACKAGE, _("[FILES…]"),

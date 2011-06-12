@@ -148,12 +148,12 @@ public class DuplicityInfo : Object
     else
         msg = _("Could not understand duplicity version ‘%s’.\n\n").printf(version_string);
 
-    msg += _("Without duplicity, Déjà Dup cannot function.  It will close now.");
+    msg += _("Without duplicity, Déjà Dup Backup Tool cannot function. It will close now.");
   }
   
   void set_bad_version_error(out string header, out string msg) {
     header = _("Duplicity’s version is too old");
-    msg = _("Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found version %d.%d.%.2d").printf(REQUIRED_MAJOR, REQUIRED_MINOR, REQUIRED_MICRO, major, minor, micro);
+    msg = _("Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but only found version %d.%d.%.2d").printf(REQUIRED_MAJOR, REQUIRED_MINOR, REQUIRED_MICRO, major, minor, micro);
   }
 }
 
