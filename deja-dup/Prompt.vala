@@ -39,7 +39,7 @@ string get_header()
 
 string get_body()
 {
-  return _("Important documents, data, and settings can be protected by storing them in a backup. In the case of a disaster, they can be recovered from that backup.");
+  return _("Important documents, data, and settings can be protected by storing them in a backup. In the case of a disaster, you would be able to recover them from that backup.");
 }
 
 string get_cancel_button(bool mnemonics)
@@ -123,6 +123,8 @@ Gtk.Window show_prompt_dialog()
   var dlg = new Gtk.MessageDialog(null, 0, Gtk.MessageType.INFO,
                                   Gtk.ButtonsType.NONE, "%s", get_header());
   dlg.format_secondary_text("%s", get_body());
+  dlg.skip_taskbar_hint = false;
+  dlg.set_title(_("Backup"));
 
   var img = new Gtk.Image.from_icon_name("deja-dup", Gtk.IconSize.DIALOG);
   img.yalign = 0.0f;

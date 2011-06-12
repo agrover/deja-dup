@@ -47,6 +47,12 @@ public enum TimestampType {
   RESTORE
 }
 
+public bool in_testing_mode()
+{
+  var testing_str = Environment.get_variable("DEJA_DUP_TESTING");
+  return (testing_str != null && int.parse(testing_str) > 0);
+}
+
 public void update_last_run_timestamp(TimestampType type) throws Error
 {
   TimeVal cur_time = TimeVal();
@@ -70,11 +76,11 @@ public void run_deja_dup(string args, AppLaunchContext? ctx = null,
   if (Environment.find_program_in_path("ionice") != null) {
     // lowest priority in best-effort class
     // (can't use idle class as normal user on <2.6.25)
-    cmd = "ionice -c2 -n7" + cmd;
+    cmd = "ionice -c2 -n7 " + cmd;
   }
 
   if (Environment.find_program_in_path("nice") != null)
-    cmd = "nice" + cmd;
+    cmd = "nice " + cmd;
 
   var flags = AppInfoCreateFlags.SUPPORTS_STARTUP_NOTIFICATION |
               AppInfoCreateFlags.SUPPORTS_URIS;
@@ -158,10 +164,13 @@ public Date next_run_date()
   return last_scheduled;
 }
 
-// In days
+// In seconds
 public int get_prompt_delay()
 {
-  return 30;
+  if (DejaDup.in_testing_mode())
+    return 120;
+  else
+    return 30 * 24 * 60 * 60;
 }
 
 // This makes the check of whether we should tell user about backing up.
@@ -187,17 +196,12 @@ public void make_prompt_check()
   if (!last_run_tval.from_iso8601(prompt))
     return;
 
-  Date last_run = Date();
-  last_run.set_time_val(last_run_tval);
-  if (!last_run.valid())
-    return;
+  var last_run = new DateTime.from_timeval_local(last_run_tval);
+  last_run.add_seconds(get_prompt_delay());
 
-  last_run.add_days(get_prompt_delay());
-
-  var now = today();
-  if (last_run.compare(now) <= 0) {
+  var now = new DateTime.now_local();
+  if (last_run.compare(now) <= 0)
     run_deja_dup("--prompt");
-  }
 }
 
 public void update_prompt_time(bool cancel = false)
