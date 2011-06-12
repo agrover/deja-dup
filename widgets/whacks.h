@@ -1,7 +1,8 @@
 /* -*- Mode: C; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,6 +27,7 @@
 extern GObject *hacks_status_icon_make_app_indicator (GtkMenu *menu);
 extern void hacks_status_icon_close_app_indicator (GObject *icon);
 
+extern gboolean hacks_unity_present(void);
 extern GObject *hacks_unity_get_entry(void);
 extern void hacks_unity_entry_show_progress(GObject *entry, gboolean show);
 extern void hacks_unity_entry_set_progress(GObject *entry, gdouble percent);

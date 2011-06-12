@@ -1,7 +1,8 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +33,63 @@ public void show_uri(Gtk.Window parent, string link)
     dlg.run();
     destroy_widget(dlg);
   }
+}
+
+public enum ShellEnv {
+  NONE,
+  GNOME,
+  UNITY,
+  LEGACY
+}
+
+protected ShellEnv shell = ShellEnv.NONE;
+public ShellEnv get_shell()
+{
+  if (shell == ShellEnv.NONE) {
+    // Easiest check is Unity -- it tells us directly
+    if (hacks_unity_present())
+      shell = ShellEnv.UNITY;
+    else {
+      // Next check for Shell by notification capabilities
+      unowned List<string> caps = Notify.get_server_caps();
+      bool persistence = false, actions = false;
+      foreach (string cap in caps) {
+        if (cap == "persistence")
+          persistence = true;
+        else if (cap == "actions")
+          actions = true;
+      }
+      if (persistence && actions)
+        shell = ShellEnv.GNOME;
+      else
+        shell = ShellEnv.LEGACY;
+    }
+  }
+
+  return shell;
+}
+
+bool user_focused(Gtk.Widget win, Gdk.EventFocus e)
+{
+  ((Gtk.Window)win).urgency_hint = false;
+  win.focus_in_event.disconnect(user_focused);
+  return false;
+}
+
+public void show_background_window_for_shell(Gtk.Window win)
+{
+  win.focus_on_map = false;
+  win.urgency_hint = true;
+  win.focus_in_event.connect(user_focused);
+
+  if (get_shell() == ShellEnv.UNITY) {
+    // Show as a launcher icon instead of a window in the background
+    win.iconify();
+    win.show();
+    win.iconify(); // In case WM didn't respect first iconify
+  }
+
+  win.show();
 }
 
 public void destroy_widget(Gtk.Widget w)

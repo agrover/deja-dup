@@ -293,6 +293,12 @@ static void make_first_check()
   var unused_backend = DejaDup.Backend.get_default();
   unused_backend = null;
 
+  make_prompt_check();
+  Timeout.add_seconds(DejaDup.get_prompt_delay() * 24 * 60 * 60, () => {
+    make_prompt_check();
+    return true;
+  }
+
   prepare_next_run();
 }
 

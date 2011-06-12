@@ -158,6 +158,12 @@ public Date next_run_date()
   return last_scheduled;
 }
 
+// In days
+public int get_prompt_delay()
+{
+  return 30;
+}
+
 // This makes the check of whether we should tell user about backing up.
 // For example, if a user has installed their OS and doesn't know about backing
 // up, we might notify them after a month.
@@ -186,17 +192,31 @@ public void make_prompt_check()
   if (!last_run.valid())
     return;
 
-  last_run.add_months(1);
+  last_run.add_days(get_prompt_delay());
 
-  
+  var now = today();
+  if (last_run.compare(now) <= 0) {
+    run_deja_dup("--prompt");
+  }
 }
 
-public void update_prompt_time()
+public void update_prompt_time(bool cancel = false)
 {
   var settings = DejaDup.get_settings();
-  TimeVal cur_time = TimeVal();
-  cur_time.get_current_time();
-  var cur_time_str = cur_time.to_iso8601();
+
+  if (settings.get_string(PROMPT_CHECK_KEY) == "disabled")
+    return; // never re-enable
+
+  string cur_time_str;
+  if (cancel) {
+    cur_time_str = "disabled";
+  }
+  else {
+    TimeVal cur_time = TimeVal();
+    cur_time.get_current_time();
+    cur_time_str = cur_time.to_iso8601();
+  }
+
   settings.set_string(PROMPT_CHECK_KEY, cur_time_str);
 }
 

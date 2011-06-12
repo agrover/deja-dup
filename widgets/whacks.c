@@ -1,7 +1,8 @@
 /* -*- Mode: C; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2008–2010 Michael Terry <mike@mterry.name>
+    © 2008,2009,2010 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -54,10 +55,19 @@ hacks_status_icon_close_app_indicator (GObject *icon)
 #endif
 }
 
+gboolean hacks_unity_present(void)
+{
+#if HAVE_UNITY
+  return unity_inspector_get_unity_running(unity_inspector_get_default());
+#else
+  return FALSE;
+#endif
+}
+
 GObject *hacks_unity_get_entry(void)
 {
 #if HAVE_UNITY
-  if (unity_inspector_get_unity_running(unity_inspector_get_default()))
+  if (hacks_unity_present())
     return G_OBJECT(unity_launcher_entry_get_for_desktop_id("deja-dup.desktop"));
   else
     return NULL;
