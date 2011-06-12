@@ -69,11 +69,11 @@ public void run_deja_dup(string args, AppLaunchContext? ctx = null,
   if (Environment.find_program_in_path("ionice") != null) {
     // lowest priority in best-effort class
     // (can't use idle class as normal user on <2.6.25)
-    cmd = "ionice -c2 -n7" + cmd;
+    cmd = "ionice -c2 -n7 " + cmd;
   }
 
   if (Environment.find_program_in_path("nice") != null)
-    cmd = "nice" + cmd;
+    cmd = "nice " + cmd;
 
   var flags = AppInfoCreateFlags.SUPPORTS_STARTUP_NOTIFICATION |
               AppInfoCreateFlags.SUPPORTS_URIS;

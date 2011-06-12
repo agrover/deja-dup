@@ -153,7 +153,7 @@ def setup(start = True, args=[''], root_prompt = False):
   #  os.environ[bits[0]] = bits[1]
 
   if start:
-    start_deja_dup(args)
+    start_deja_dup(executable='deja-dup-preferences', args=args)
 
 def cleanup(success):
   global temp_dir, cleanup_dirs, cleanup_mounts, cleanup_pids, cleanup_envs
