@@ -106,58 +106,6 @@ public void destroy_widget(Gtk.Widget w)
   Idle.add(() => {w.destroy(); return false;});
 }
 
-// These need to be namespace-wide to prevent an odd compiler syntax error.
-const string[] authors = {"Andrew Fister <temposs@gmail.com>",
-                          "Michael Terry <mike@mterry.name>",
-                          "Michael Vogt <michael.vogt@ubuntu.com>",
-                          "Urban Skudnik <urban.skudnik@gmail.com>",
-                          null};
-
-const string[] artists = {"Andreas Nilsson <nisses.mail@home.se>",
-                          "Jakub Steiner <jimmac@novell.com>",
-                          "Lapo Calamandrei <calamandrei@gmail.com>",
-                          "Michael Terry <mike@mterry.name>",
-                          null};
-
-const string[] documenters = {"Michael Terry <mike@mterry.name>",
-                              null};
-
-public void show_about(Object owner, Gtk.Window? parent)
-{
-  Gtk.AboutDialog about = (Gtk.AboutDialog)owner.get_data<Gtk.AboutDialog>("about-dlg");
-  
-  if (about != null)
-  {
-    about.present_with_time(Gtk.get_current_event_time());
-    return;
-  }
-  
-  about = new Gtk.AboutDialog ();
-  about.title = _("About Déjà Dup");
-  about.authors = authors;
-  about.artists = artists;
-  about.documenters = documenters;
-  about.translator_credits = _("translator-credits");
-  about.logo_icon_name = Config.PACKAGE;
-  about.version = Config.VERSION;
-  about.website = "https://launchpad.net/deja-dup";
-  about.license_type = Gtk.License.GPL_3_0;
-  about.wrap_license = true;
-  
-  owner.set_data("about-dlg", about);
-  about.set_data("owner", owner);
-  
-  about.set_transient_for(parent);
-  about.set_modal(true);
-  about.response.connect((dlg, resp) => {
-    Object about_owner = (Object)dlg.get_data<Object>("owner");
-    about_owner.set_data("about-dlg", null);
-    destroy_widget(dlg);
-  });
-  
-  about.show();
-}
-
 public bool init_duplicity(Gtk.Window? parent)
 {
   string header;
