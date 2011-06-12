@@ -60,7 +60,7 @@ class PreferencesApp : Object
   {
     DejaDup.i18n_setup();
 
-    Environment.set_application_name(_("Déjà Dup Preferences"));
+    Environment.set_application_name(_("Backup"));
 
     OptionContext context = new OptionContext("");
     context.add_main_entries(options, Config.GETTEXT_PACKAGE);
