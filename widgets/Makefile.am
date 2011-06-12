@@ -2,6 +2,7 @@
 #
 # This file is part of Déjà Dup.
 # © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
+# © 2011 Canonical Ltd
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -77,6 +78,8 @@ PACKAGES = \
 	--pkg @GTK_MODULE@ \
 	--pkg uriutils \
 	--pkg hacks \
+	--pkg hacks-unity \
+	--pkg libnotify \
 	--pkg config
 BUILT_SOURCES = vala.stamp
 vala.stamp: $(libwidgets_la_VALASOURCES)

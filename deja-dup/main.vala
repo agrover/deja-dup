@@ -2,6 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,6 +30,7 @@ class DejaDupApp : Object
   static bool backup_mode = false;
   static bool automatic = false;
   static bool restoremissing_mode = false;
+  static bool prompt_mode = false;
   static string[] filenames = null;
   static const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
@@ -36,6 +38,7 @@ class DejaDupApp : Object
     {"backup", 0, 0, OptionArg.NONE, ref backup_mode, N_("Immediately start a backup"), null},
     {"auto", 0, 0, OptionArg.NONE, ref automatic, N_("Indicates this backup was scheduled"), null},
     {"restore-missing", 0, 0, OptionArg.NONE, ref restoremissing_mode, N_("Restore deleted files"), null},
+    {"prompt", 0, OptionFlags.HIDDEN, OptionArg.NONE, ref prompt_mode, null, null},
     {"", 0, 0, OptionArg.FILENAME_ARRAY, ref filenames, null, null}, // remaining
     {null}
   };
@@ -139,7 +142,7 @@ class DejaDupApp : Object
         toplevel.show_all();
       }
     }
-    else if (restoremissing_mode){
+    else if (restoremissing_mode) {
       File list_directory = File.new_for_commandline_arg(filenames[0]);
       if (!list_directory.query_exists(null)) {
         printerr("%s\n", _("Directory does not exists"));
@@ -151,6 +154,11 @@ class DejaDupApp : Object
       }
       toplevel = new AssistantRestoreMissing(list_directory);
       toplevel.show_all();
+    }
+    else if (prompt_mode) {
+      toplevel = prompt();
+      if (toplevel == null)
+        return 0; // we're already done
     }
     else {
         printerr("%s\n\n%s", _("You must specify a mode"), context.get_help(true, null));

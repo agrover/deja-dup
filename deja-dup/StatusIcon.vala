@@ -56,14 +56,22 @@ public abstract class StatusIcon : Object
     // Check unity first, since it is most direct.  Then try to guess shell
     // based on notification capabilities.  Then just see whether we were built
     // for indicators or not.
-    StatusIcon instance;
-    instance = new UnityStatusIcon(window, op, automatic);
-    if (!instance.is_valid)
+    StatusIcon instance = null;
+    switch (DejaDup.get_shell()) {
+    case DejaDup.ShellEnv.UNITY:
+      instance = new UnityStatusIcon(window, op, automatic);
+      break;
+
+    case DejaDup.ShellEnv.GNOME:
       instance = new ShellStatusIcon(window, op, automatic);
-    if (!instance.is_valid)
+      break;
+
+    default:
       instance = new IndicatorStatusIcon(window, op, automatic);
-    if (!instance.is_valid)
-      instance = new LegacyStatusIcon(window, op, automatic);
+      if (!instance.is_valid)
+        instance = new LegacyStatusIcon(window, op, automatic);
+      break;
+    }
     return instance;
   }
 

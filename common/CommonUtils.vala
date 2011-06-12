@@ -31,6 +31,7 @@ public const string ENCRYPT_KEY = "encrypt";
 public const string LAST_RUN_KEY = "last-run";
 public const string LAST_BACKUP_KEY = "last-backup";
 public const string LAST_RESTORE_KEY = "last-restore";
+public const string PROMPT_CHECK_KEY = "prompt-check";
 public const string PERIODIC_KEY = "periodic";
 public const string PERIODIC_PERIOD_KEY = "periodic-period";
 public const string DELETE_AFTER_KEY = "delete-after";
@@ -44,6 +45,12 @@ public enum TimestampType {
   NONE,
   BACKUP,
   RESTORE
+}
+
+public bool in_testing_mode()
+{
+  var testing_str = Environment.get_variable("DEJA_DUP_TESTING");
+  return (testing_str != null && int.parse(testing_str) > 0);
 }
 
 public void update_last_run_timestamp(TimestampType type) throws Error
@@ -155,6 +162,66 @@ public Date next_run_date()
     last_scheduled.add_days(period_days);
 
   return last_scheduled;
+}
+
+// In seconds
+public int get_prompt_delay()
+{
+  if (DejaDup.in_testing_mode())
+    return 120;
+  else
+    return 30 * 24 * 60 * 60;
+}
+
+// This makes the check of whether we should tell user about backing up.
+// For example, if a user has installed their OS and doesn't know about backing
+// up, we might notify them after a month.
+public void make_prompt_check()
+{
+  var settings = DejaDup.get_settings();
+  var prompt = settings.get_string(PROMPT_CHECK_KEY);
+
+  if (prompt == "disabled")
+    return;
+  else if (prompt == "") {
+    update_prompt_time();
+    return;
+  }
+  else if (last_run_date(TimestampType.NONE) != "")
+    return;
+
+  // OK, monitor has run before but user hasn't yet backed up or restored.
+  // Let's see whether we should prompt now.
+  TimeVal last_run_tval = TimeVal();
+  if (!last_run_tval.from_iso8601(prompt))
+    return;
+
+  var last_run = new DateTime.from_timeval_local(last_run_tval);
+  last_run.add_seconds(get_prompt_delay());
+
+  var now = new DateTime.now_local();
+  if (last_run.compare(now) <= 0)
+    run_deja_dup("--prompt");
+}
+
+public void update_prompt_time(bool cancel = false)
+{
+  var settings = DejaDup.get_settings();
+
+  if (settings.get_string(PROMPT_CHECK_KEY) == "disabled")
+    return; // never re-enable
+
+  string cur_time_str;
+  if (cancel) {
+    cur_time_str = "disabled";
+  }
+  else {
+    TimeVal cur_time = TimeVal();
+    cur_time.get_current_time();
+    cur_time_str = cur_time.to_iso8601();
+  }
+
+  settings.set_string(PROMPT_CHECK_KEY, cur_time_str);
 }
 
 public string get_trash_path()

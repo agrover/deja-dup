@@ -27,13 +27,11 @@ static uint timeout_id;
 static Pid pid;
 static bool op_active = false;
 static bool reactive_check;
-static bool testing;
 static bool first_check = false;
 
 static bool show_version = false;
 static const OptionEntry[] options = {
   {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
-  {"testing", 0, OptionFlags.HIDDEN, OptionArg.NONE, ref testing, null, null},
   {null}
 };
 
@@ -66,7 +64,7 @@ static void volume_added(VolumeMonitor vm, Volume vol)
 
 static bool is_ready(out string when)
 {
-  if (testing && note == null) {
+  if (DejaDup.in_testing_mode() && note == null) {
     when = "Testing";
     return false;
   }
@@ -115,7 +113,7 @@ static long seconds_until(Date date)
   
   TimeVal next_time = date_to_timeval(date);
   
-  if (testing)
+  if (DejaDup.in_testing_mode())
     return 5;
   else
     return next_time.tv_sec - cur_time.tv_sec;
@@ -152,7 +150,7 @@ static bool kickoff()
   if (!seconds_until_next_run(out wait_time))
     return false;
   
-  if (!testing && wait_time > 0) {
+  if (!DejaDup.in_testing_mode() && wait_time > 0) {
     // Huh?  Shouldn't have been called now.
     prepare_next_run();
     return false;
@@ -293,6 +291,12 @@ static void make_first_check()
   var unused_backend = DejaDup.Backend.get_default();
   unused_backend = null;
 
+  DejaDup.make_prompt_check();
+  Timeout.add_seconds(DejaDup.get_prompt_delay(), () => {
+    DejaDup.make_prompt_check();
+    return true;
+  });
+
   prepare_next_run();
 }
 
@@ -337,7 +341,7 @@ static int main(string[] args)
   var loop = new MainLoop(null, false);
 
   // Delay first check to give the network and desktop environment a chance to start up.
-  if (testing)
+  if (DejaDup.in_testing_mode())
     make_first_check();
   else
     Timeout.add_seconds(120, () => {make_first_check(); return false;});

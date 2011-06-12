@@ -106,7 +106,8 @@ AC_SUBST(COMMON_LIBS)
 
 PKG_CHECK_MODULES(WIDGETS,
                   gmodule-2.0 >= $GLIB_REQ_VER
-                  $GTK_MODULE >= $GTK_REQ_VER)
+                  $GTK_MODULE >= $GTK_REQ_VER
+                  libnotify >= $NOTIFY_REQ_VER)
 AC_SUBST(WIDGETS_CFLAGS)
 AC_SUBST(WIDGETS_LIBS)
 

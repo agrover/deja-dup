@@ -2,6 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2011 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,13 +20,16 @@
 
 using GLib;
 
-[CCode (cheader_filename = "chacks.h")]
+[CCode (cheader_filename = "whacks.h")]
+bool hacks_unity_present();
+
+[CCode (cheader_filename = "whacks.h")]
 Object hacks_unity_get_entry();
 
-[CCode (cheader_filename = "chacks.h")]
+[CCode (cheader_filename = "whacks.h")]
 void hacks_unity_entry_show_progress(Object entry, bool show);
 
-[CCode (cheader_filename = "chacks.h")]
+[CCode (cheader_filename = "whacks.h")]
 void hacks_unity_entry_set_progress(Object entry, double percent);
 
 [CCode (cheader_filename = "whacks.h")]

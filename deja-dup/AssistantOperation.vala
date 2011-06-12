@@ -616,8 +616,7 @@ public abstract class AssistantOperation : Assistant
   protected void get_passphrase()
   {
     // DEJA_DUP_TESTING only set when we are in test suite
-    var testing = Environment.get_variable("DEJA_DUP_TESTING");
-    if (!searched_for_passphrase && (testing == null || testing == "")) {
+    if (!searched_for_passphrase && !DejaDup.in_testing_mode()) {
       // First, try user's keyring
       GnomeKeyring.find_password(PASSPHRASE_SCHEMA,
                                  found_passphrase,
