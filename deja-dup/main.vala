@@ -36,7 +36,7 @@ class DejaDupApp : Object
     {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
     {"restore", 0, 0, OptionArg.NONE, ref restore_mode, N_("Restore given files"), null},
     {"backup", 0, 0, OptionArg.NONE, ref backup_mode, N_("Immediately start a backup"), null},
-    {"auto", 0, 0, OptionArg.NONE, ref automatic, N_("Indicates this backup was scheduled"), null},
+    {"auto", 0, OptionFlags.HIDDEN, OptionArg.NONE, ref automatic, N_("Indicates this backup was scheduled"), null},
     {"restore-missing", 0, 0, OptionArg.NONE, ref restoremissing_mode, N_("Restore deleted files"), null},
     {"prompt", 0, OptionFlags.HIDDEN, OptionArg.NONE, ref prompt_mode, null, null},
     {"", 0, 0, OptionArg.FILENAME_ARRAY, ref filenames, null, null}, // remaining
