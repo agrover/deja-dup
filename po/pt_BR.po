@@ -7,19 +7,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-05-25 11:35-0400\n"
-"PO-Revision-Date: 2011-05-31 19:29+0000\n"
+"POT-Creation-Date: 2011-06-12 01:38-0400\n"
+"PO-Revision-Date: 2011-06-10 14:34+0000\n"
 "Last-Translator: Rudinei Weschenfelder <rudinei.ti@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-06-01 04:38+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-06-13 04:39+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
-#: ../data/deja-dup-preferences.desktop.in.in.h:1
+#: ../data/deja-dup-preferences.desktop.in.in.h:1 ../deja-dup/Prompt.vala:93
+#: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:140
+#: ../deja-dup/StatusIcon.vala:289 ../monitor/monitor.vala:131
+#: ../preferences/preferences-main.vala:63
 msgid "Backup"
 msgstr "Cópia de segurança"
 
@@ -31,9 +34,9 @@ msgstr "Altere suas configurações de cópia de segurança"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:283
-msgid "Déjà Dup Monitor"
-msgstr "Monitoramento Déjà Dup"
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:316
+msgid "Backup Monitor"
+msgstr ""
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
 msgid "Schedules backups at regular intervals"
@@ -157,21 +160,26 @@ msgstr "A pasta do Ubuntu One"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
+"The first time Déjà Dup checked whether it should prompt about backing up"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
 msgstr ""
 "O nome da pasta para armazenar seus arquivos. Se o local for `$HOSTNAME´, "
 "vai ser a pasta padrão baseada no nome do seu computador."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "The last time Déjà Dup backed up"
 msgstr "A última vez que o Déjà Dup fez cópia de segurança"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "The last time Déjà Dup restored"
 msgstr "A última vez que o Déjà Dup foi restaurado"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid ""
 "The last time Déjà Dup successfully completed a backup. This time should be "
 "in ISO 8601 format."
@@ -179,7 +187,7 @@ msgstr ""
 "A última vez que o Déjà Dup completou com sucesso uma cópia de segurança. "
 "Esse hora deve estar no formato ISO 8601."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
 msgid ""
 "The last time Déjà Dup successfully completed a restore. This time should be "
 "in ISO 8601 format."
@@ -187,11 +195,11 @@ msgstr ""
 "A última vez que o Déjà Dup completou com sucesso uma restauração. Esse hora "
 "deve estar no formato ISO 8601."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The last time Déjà Dup was run"
 msgstr "A última vez que Déjà Dup foi executado"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
@@ -199,11 +207,11 @@ msgstr ""
 "Da última vez o Déjà Dup foi executado com sucesso. Esse tempo pode estar no "
 "formato ISO 8601."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "The number of days between backups."
 msgstr "O número de dias entre as cópias de segurança."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
@@ -213,7 +221,7 @@ msgstr ""
 "localização. Um valor 0 significa para sempre. Esse é o número mínimo de "
 "dias; os arquivos podem ser mantidos por mais tempo."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
@@ -221,11 +229,11 @@ msgstr ""
 "O tipo de cópia de segurança local. Se `automático´estiver selecionado, um "
 "local será escolhido de acordo com o que estiver disponível."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "Este é o seu usuário para o serviço Rackspace Clould Files."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
@@ -238,7 +246,7 @@ msgstr ""
 "diretórios especiais do usuário. Entradas relativas são relativas ao "
 "diretório pasta pessoal do usuário."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
@@ -250,34 +258,42 @@ msgstr ""
 "e $VIDEO são reconhecidos como pastas especiais do usuário. Elas são "
 "referentes a pasta pessoal do usuário."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 msgid "Type of location to store backup"
 msgstr "Tipo da localização para armazenar cópia de segurança"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "Unique ID of the external volume"
 msgstr "ID único do volume externo"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+msgid ""
+"When a user logs in, the Déjà Dup monitor checks whether it should prompt "
+"about backing up. This is used to increase discoverability for users that "
+"don’t know about backups. This time should be either ‘disabled’ to turn off "
+"this check or in ISO 8601 format."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Se o local da cópia de segurança está montado em um volume externo ou uma "
 "pasta normal."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Whether the welcome screen has been dismissed"
 msgstr "Se a tela de boas-vindas foi dispensada"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid "Whether to automatically back up on a regular schedule."
 msgstr "Fazer cópia de segurança em um agendamento regular."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Whether to encrypt your backup"
 msgstr "Criptografar sua cópia de segurança"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid ""
 "Whether to encrypt your backup files in the storage location. It’s strongly "
 "recommended to leave this as ‘true’."
@@ -285,15 +301,15 @@ msgstr ""
 "Criptografar seus arquivos da cópia de segurança no local de armazenamento. "
 "É fortemente recomendado deixar isso como 'verdadeiro'."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Whether to periodically back up"
 msgstr "Fazer cópia de segurança periodicamente."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid "Whether to request the root password"
 msgstr "Necessita da senha root"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
@@ -301,7 +317,7 @@ msgstr ""
 "Requisitar a senha root quando a cópia de segurança estiver em andamento ou "
 "restaurando para pastas do sistema."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -309,7 +325,7 @@ msgstr ""
 "Qual bucket do Amazon S3 para armazenar os arquivos. Isto não precisa "
 "existir. Somente valores hostname legais são válidos."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -318,13 +334,13 @@ msgstr ""
 "arquivos. Este não precisa existir. Apenas nomes de máquina existentes são "
 "válidas."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Seu Identificador de Chave de Acesso da Amazon S3. Esta ação como seu nome "
 "de usuário S3."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
 msgid "Your Rackspace username"
 msgstr "Seu nome de usuário no Rackspace"
 
@@ -332,7 +348,7 @@ msgstr "Seu nome de usuário no Rackspace"
 msgid "Folder:"
 msgstr "Pasta"
 
-#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:172
+#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:173
 msgid "Scanning…"
 msgstr "Verificando..."
 
@@ -362,7 +378,7 @@ msgstr "GVFS FUSE não está instalado"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:347
+#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:425
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s em %2$s"
@@ -392,7 +408,7 @@ msgstr "Aguardando ‘%s’ conectar-se…"
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Você precisa especificar uma pasta no Rackspace no menu preferências"
 
-#: ../common/BackendRackspace.vala:68 ../widgets/ConfigLocation.vala:184
+#: ../common/BackendRackspace.vala:68 ../widgets/ConfigLocation.vala:195
 msgid "Rackspace Cloud Files"
 msgstr "Arquivos nas nuvens do Rackspace"
 
@@ -431,7 +447,7 @@ msgstr "Lemb_rar tecla de atalho da API"
 msgid "Enter Rackspace Cloud Files API key"
 msgstr "Entre com a chave de API do arquivos nas nuvens Rackspace"
 
-#: ../common/BackendS3.vala:123 ../widgets/ConfigLocation.vala:168
+#: ../common/BackendS3.vala:123 ../widgets/ConfigLocation.vala:179
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -466,7 +482,7 @@ msgstr "Lembra_r da chave secreta de acesso"
 msgid "Enter Amazon S3 access key"
 msgstr "Digite a chave de acesso Amazon S3"
 
-#: ../common/BackendU1.vala:160 ../widgets/ConfigLocation.vala:176
+#: ../common/BackendU1.vala:160 ../widgets/ConfigLocation.vala:187
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -487,17 +503,19 @@ msgstr "Conectar no Ubuntu One"
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
 #. context is itself a reference to both the underlying command line tool
-#. "duplicity" and the act of duplicating data for backup.  As a whole, it
-#. may not be very translatable.
-#: ../common/CommonUtils.vala:70 ../deja-dup/main.vala:77
-msgid "Déjà Dup"
-msgstr "Déjà Dup"
+#. "duplicity" and the act of duplicating data for backup.  As a whole, the
+#. phrase "Déjà Dup" may not be very translatable.
+#: ../common/CommonUtils.vala:88 ../deja-dup/main.vala:80
+#: ../preferences/Preferences.vala:86
+#, c-format
+msgid "Déjà Dup Backup Tool"
+msgstr "Ferramenta de cópia de segurança Déjà Dup"
 
-#: ../common/DuplicityInfo.vala:140
+#: ../common/DuplicityInfo.vala:142
 msgid "Could not run duplicity"
 msgstr "Não foi possível executar o duplicity"
 
-#: ../common/DuplicityInfo.vala:145
+#: ../common/DuplicityInfo.vala:147
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -505,7 +523,7 @@ msgstr ""
 "Não foi possível compreender a versão do duplicity.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:147
+#: ../common/DuplicityInfo.vala:149
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -514,23 +532,21 @@ msgstr ""
 "Não foi possível compreender a versão do duplicity ‘%s’.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:149
-msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
+#: ../common/DuplicityInfo.vala:151
+msgid ""
+"Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
-"Sem duplicity, Déjà Dup não pode funcionar. O programa irá fechar agora."
 
-#: ../common/DuplicityInfo.vala:153
+#: ../common/DuplicityInfo.vala:155
 msgid "Duplicity’s version is too old"
 msgstr "Versão do duplicity é muito antiga"
 
-#: ../common/DuplicityInfo.vala:154
+#: ../common/DuplicityInfo.vala:156
 #, c-format
 msgid ""
-"Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
-"version %d.%d.%.2d"
+"Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
+"only found version %d.%d.%.2d"
 msgstr ""
-"Déjà Dup requer pelo menos a versão %d.%d.%.2d do duplicity, mas só foi "
-"encontrada a versão %d.%d.%.2d"
 
 #: ../common/Duplicity.vala:128 ../common/Duplicity.vala:180
 msgid "Paused (no network)"
@@ -703,8 +719,8 @@ msgid "Listing files…"
 msgstr "Listando arquivos…"
 
 #: ../common/Operation.vala:276
-msgid "Another Déjà Dup is already running"
-msgstr "Outro Déjà Dup já está em execução"
+msgid "Another Déjà Dup Backup Tool operation is already running"
+msgstr ""
 
 #: ../deja-dup/AssistantBackup.vala:31
 msgctxt "back up is verb"
@@ -718,54 +734,54 @@ msgstr "_Back Up"
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:71
+#: ../deja-dup/AssistantBackup.vala:68
 msgid "Backing up:"
 msgstr "Processo de cópia:"
 
-#: ../deja-dup/AssistantBackup.vala:88
+#: ../deja-dup/AssistantBackup.vala:85
 msgid "Backup Failed"
 msgstr "Falha na cópia de segurança"
 
-#: ../deja-dup/AssistantBackup.vala:95
+#: ../deja-dup/AssistantBackup.vala:92
 msgid "Backing Up…"
 msgstr "Fazendo cópia de segurança..."
 
-#: ../deja-dup/AssistantOperation.vala:171
+#: ../deja-dup/AssistantOperation.vala:172
 msgid "Scanning:"
 msgstr "Verificando:"
 
-#: ../deja-dup/AssistantOperation.vala:245
+#: ../deja-dup/AssistantOperation.vala:246
 msgid "_Details"
 msgstr "_Detalhes"
 
-#: ../deja-dup/AssistantOperation.vala:295
+#: ../deja-dup/AssistantOperation.vala:297
 msgid "E_ncryption password:"
 msgstr "Senha de criptografia:"
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:312
 msgid "Confir_m password:"
 msgstr "Confir_mar senha:"
 
-#: ../deja-dup/AssistantOperation.vala:320
+#: ../deja-dup/AssistantOperation.vala:322
 msgid "_Show password"
 msgstr "Mostrar _senha:"
 
-#: ../deja-dup/AssistantOperation.vala:329
+#: ../deja-dup/AssistantOperation.vala:331
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "Lemb_rar senha"
 
-#: ../deja-dup/AssistantOperation.vala:394
+#: ../deja-dup/AssistantOperation.vala:396
 msgid "Summary"
 msgstr "Resumo"
 
-#: ../deja-dup/AssistantOperation.vala:409
+#: ../deja-dup/AssistantOperation.vala:411
 msgid "Encryption Password Needed"
 msgstr "Senha criptografada necessária"
 
-#: ../deja-dup/AssistantOperation.vala:668
-msgid "Déjà Dup encryption password"
-msgstr "Déjà Dup senha criptografada"
+#: ../deja-dup/AssistantOperation.vala:670
+msgid "Backup encryption password"
+msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:72
 msgid "Restore"
@@ -924,53 +940,49 @@ msgstr[1] "Buscando por arquivos de aproximadamente %d anos..."
 msgid "Scanning finished"
 msgstr "Busca finalizada"
 
-#: ../deja-dup/Assistant.vala:293
+#: ../deja-dup/Assistant.vala:312
 msgid "Co_ntinue"
 msgstr "Co_ntinuar"
 
-#: ../deja-dup/Assistant.vala:331 ../deja-dup/StatusIcon.vala:93
+#: ../deja-dup/Assistant.vala:350 ../deja-dup/StatusIcon.vala:104
 msgid "_Resume Later"
 msgstr "_Retomar Depois"
 
-#: ../deja-dup/main.vala:34 ../monitor/monitor.vala:35
+#: ../deja-dup/main.vala:36 ../monitor/monitor.vala:34
 #: ../preferences/preferences-main.vala:27
 msgid "Show version"
 msgstr "Mostra a versão"
 
-#: ../deja-dup/main.vala:35
+#: ../deja-dup/main.vala:37
 msgid "Restore given files"
 msgstr "Restaurar arquivos dados"
 
-#: ../deja-dup/main.vala:36
+#: ../deja-dup/main.vala:38
 msgid "Immediately start a backup"
 msgstr "Iniciar uma cópia de segurança imediatamente"
 
-#: ../deja-dup/main.vala:37
-msgid "Indicates this backup was scheduled"
-msgstr "Indica que essa cópia de segurança foi agendada"
-
-#: ../deja-dup/main.vala:38
+#: ../deja-dup/main.vala:40
 msgid "Restore deleted files"
 msgstr "Restaurar arquivos apagados"
 
-#: ../deja-dup/main.vala:54
+#: ../deja-dup/main.vala:57
 msgid "No directory provided"
 msgstr "Nenhum diretório fornecido"
 
-#: ../deja-dup/main.vala:59
+#: ../deja-dup/main.vala:62
 msgid "Only one directory can be shown at once"
 msgstr "Apenas um diretório pode ser mostrado por vez"
 
-#: ../deja-dup/main.vala:80
+#: ../deja-dup/main.vala:83
 msgid "[FILES…]"
 msgstr "[ARQUIVOS...]"
 
-#: ../deja-dup/main.vala:81
+#: ../deja-dup/main.vala:84
 msgid "DIRECTORY"
 msgstr "DIRETÓRIO"
 
 #. Translators: Wrap this to 80 characters per line if you can, as I have for English
-#: ../deja-dup/main.vala:85
+#: ../deja-dup/main.vala:88
 msgid ""
 "Déjà Dup is a simple backup tool.  It hides the complexity of backing up\n"
 "the Right Way (encrypted, off-site, and regular) and uses duplicity as\n"
@@ -982,15 +994,15 @@ msgstr ""
 "usa duplicidade \n"
 "como garantia."
 
-#: ../deja-dup/main.vala:139
+#: ../deja-dup/main.vala:148
 msgid "Directory does not exists"
 msgstr "Diretório não existe"
 
-#: ../deja-dup/main.vala:143
+#: ../deja-dup/main.vala:152
 msgid "You must provide a directory, not a file"
 msgstr "Você precisa fornecer um diretório, não um arquivo"
 
-#: ../deja-dup/main.vala:150
+#: ../deja-dup/main.vala:164
 msgid "You must specify a mode"
 msgstr "Você precisa especifar um modo"
 
@@ -1030,32 +1042,63 @@ msgstr "Conectar como o u_suário:"
 msgid "_Domain:"
 msgstr "_Domínio:"
 
-#: ../deja-dup/StatusIcon.vala:95
+#: ../deja-dup/Prompt.vala:37
+msgid "Keep your files safe by backing up regularly"
+msgstr ""
+
+#: ../deja-dup/Prompt.vala:42
+msgid ""
+"Important documents, data, and settings can be protected by storing them in "
+"a backup. In the case of a disaster, you would be able to recover them from "
+"that backup."
+msgstr ""
+
+#: ../deja-dup/Prompt.vala:48
+msgid "_Don't Show Again"
+msgstr ""
+
+#: ../deja-dup/Prompt.vala:50
+msgid "Don't Show Again"
+msgstr ""
+
+#: ../deja-dup/Prompt.vala:56
+msgid "_Open Backup Settings"
+msgstr ""
+
+#: ../deja-dup/Prompt.vala:58
+msgid "Open Backup Settings"
+msgstr ""
+
+#: ../deja-dup/StatusIcon.vala:106
 msgid "_Delay Backup"
 msgstr "_Atraso da cópia de segurança"
 
-#: ../deja-dup/StatusIcon.vala:97
+#: ../deja-dup/StatusIcon.vala:108
 msgid "_Cancel Backup"
 msgstr "_Cancelar cópia de segurança"
 
-#: ../deja-dup/StatusIcon.vala:98
+#: ../deja-dup/StatusIcon.vala:109
 msgid "_Skip Backup"
 msgstr "P_ular cópia de segurança"
 
-#: ../deja-dup/StatusIcon.vala:148
+#: ../deja-dup/StatusIcon.vala:141
+msgid "Backup completed"
+msgstr ""
+
+#: ../deja-dup/StatusIcon.vala:184
 msgid "Déjà Du_p"
 msgstr "Déjà Du_p"
 
-#: ../deja-dup/StatusIcon.vala:254
+#: ../deja-dup/StatusIcon.vala:290
 msgid "Starting scheduled backup"
 msgstr "Iniciando cópia de segurança agendado"
 
-#: ../deja-dup/StatusIcon.vala:296
+#: ../deja-dup/StatusIcon.vala:332
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% completo"
 
-#: ../monitor/monitor.vala:169
+#: ../monitor/monitor.vala:171
 msgid "Scheduled backup delayed"
 msgstr "Cópia de segurança agendado atrasado"
 
@@ -1068,11 +1111,6 @@ msgstr "Eu quero _restaurar arquivos de uma cópia de segurança anterior"
 #, c-format
 msgid "Just show my backup _settings"
 msgstr "Apenas mostre minhas _configurações de cópia de segurança"
-
-#: ../preferences/Preferences.vala:86
-#, c-format
-msgid "Déjà Dup Backup Tool"
-msgstr "Ferramenta de cópia de segurança Déjà Dup"
 
 #: ../preferences/Preferences.vala:153
 msgid "Automatic _backups:"
@@ -1143,10 +1181,6 @@ msgstr "Frequência da c_ópia de segurança:"
 msgid "Schedule"
 msgstr "Agendar"
 
-#: ../preferences/preferences-main.vala:63
-msgid "Déjà Dup Preferences"
-msgstr "Preferências Déjà Dup"
-
 #: ../widgets/ConfigDelete.vala:44
 msgid "At least a week"
 msgstr "Pelo menos uma semana"
@@ -1182,26 +1216,26 @@ msgid_plural "At least %d days"
 msgstr[0] "Pelo menos %d dia"
 msgstr[1] "Pelo menos %d dias"
 
-#: ../widgets/ConfigLabelBackupDate.vala:58
+#: ../widgets/ConfigLabelBackupDate.vala:57
 msgid "Today"
 msgstr "Hoje"
 
-#: ../widgets/ConfigLabelBackupDate.vala:60
+#: ../widgets/ConfigLabelBackupDate.vala:59
 msgid "Yesterday"
 msgstr "Ontem"
 
-#: ../widgets/ConfigLabelBackupDate.vala:62
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Tomorrow"
 msgstr "Amanhã"
 
-#: ../widgets/ConfigLabelBackupDate.vala:70
+#: ../widgets/ConfigLabelBackupDate.vala:69
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] "em %d dia"
 msgstr[1] "em %d dias"
 
-#: ../widgets/ConfigLabelBackupDate.vala:79
+#: ../widgets/ConfigLabelBackupDate.vala:78
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -1301,28 +1335,28 @@ msgstr[1] ""
 msgid "Choose folders"
 msgstr "Escolha as pastas"
 
-#: ../widgets/ConfigLocation.vala:106
+#: ../widgets/ConfigLocation.vala:116
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:108
+#: ../widgets/ConfigLocation.vala:118
 msgid "Windows Share"
 msgstr "Compartilhamento Windows"
 
-#: ../widgets/ConfigLocation.vala:110
+#: ../widgets/ConfigLocation.vala:120
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:112
+#: ../widgets/ConfigLocation.vala:122
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:115
+#: ../widgets/ConfigLocation.vala:125
 msgid "Custom Location"
 msgstr "Localização personalizada"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:131
 msgid "Local Folder"
 msgstr "Pasta pessoal"
 
@@ -1403,35 +1437,16 @@ msgid_plural "Every %d days"
 msgstr[0] "Todo %d dia"
 msgstr[1] "Todos os %d dias"
 
-#: ../widgets/WidgetUtils.vala:30
+#: ../widgets/WidgetUtils.vala:31
 #, c-format
 msgid "Could not display %s"
 msgstr "Não foi possivel exibir %s"
 
-#: ../widgets/WidgetUtils.vala:78
-msgid "About Déjà Dup"
-msgstr "Sobre o Déjà Dup"
+#~ msgid "Déjà Dup Monitor"
+#~ msgstr "Monitoramento Déjà Dup"
 
-#: ../widgets/WidgetUtils.vala:82
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  André Gondim https://launchpad.net/~andregondim\n"
-"  Fábio Nogueira https://launchpad.net/~fnogueira\n"
-"  Hélio Márcio Filho https://launchpad.net/~heliommsfilho-gmail-"
-"deactivatedaccount\n"
-"  Hélio márcio https://launchpad.net/~heliommsfilho-deactivatedaccount\n"
-"  Kenzo Okamura https://launchpad.net/~oznekz\n"
-"  Leocello https://launchpad.net/~leocello\n"
-"  Robson https://launchpad.net/~robsonap-silva\n"
-"  Ronaldo Luiz Pedroso https://launchpad.net/~ronaldo-luiz-pedroso\n"
-"  Rudinei Weschenfelder https://launchpad.net/~rudineiw\n"
-"  Sam Samuels https://launchpad.net/~gemini-sam-samuels\n"
-"  Teylo Laundos Aguiar https://launchpad.net/~teylo.aguiar\n"
-"  Tiago Hillebrandt https://launchpad.net/~tiagohillebrandt\n"
-"  Willian Alberto da Cruz https://launchpad.net/~willianalberto\n"
-"  pm https://launchpad.net/~pmtrbr\n"
-"  roberto ruhena https://launchpad.net/~rrruhena"
+#~ msgid "Déjà Dup"
+#~ msgstr "Déjà Dup"
 
 #~ msgid "Back up your files"
 #~ msgstr "Fazer backup de seus arquivos"
@@ -1459,6 +1474,9 @@ msgstr ""
 #~ msgstr ""
 #~ "Se a pasta de localização é um volume externo montado ou uma pasta normal. "
 #~ "Valores possíveis são ‘volume’ ou ‘normal’."
+
+#~ msgid "Déjà Dup Preferences"
+#~ msgstr "Preferências Déjà Dup"
 
 #~ msgid "The type of backup location."
 #~ msgstr "O tipo da localização do backup"
@@ -1513,6 +1531,9 @@ msgstr ""
 #~ msgid "Show _Progress"
 #~ msgstr "Mostrar _Progresso"
 
+#~ msgid "About Déjà Dup"
+#~ msgstr "Sobre o Déjà Dup"
+
 #~ msgid ""
 #~ "This program is distributed in the hope that it will be useful, but WITHOUT "
 #~ "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -1536,6 +1557,18 @@ msgstr ""
 #~ "Software Foundation; tanto na versão 3 da Licença, ou (conforme deseje) "
 #~ "qualquer versão posterior."
 
+#~ msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
+#~ msgstr ""
+#~ "Sem duplicity, Déjà Dup não pode funcionar. O programa irá fechar agora."
+
+#, c-format
+#~ msgid ""
+#~ "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
+#~ "version %d.%d.%.2d"
+#~ msgstr ""
+#~ "Déjà Dup requer pelo menos a versão %d.%d.%.2d do duplicity, mas só foi "
+#~ "encontrada a versão %d.%d.%.2d"
+
 #~ msgid "Password needed"
 #~ msgstr "Senha é necessária"
 
@@ -1545,6 +1578,9 @@ msgstr ""
 
 #~ msgid "_Edit"
 #~ msgstr "_Editar"
+
+#~ msgid "Another Déjà Dup is already running"
+#~ msgstr "Outro Déjà Dup já está em execução"
 
 #~ msgid "Could not open connection dialog"
 #~ msgstr "Não foi possível abrir o diálogo de conexão"
@@ -1580,5 +1616,31 @@ msgstr ""
 #~ msgid "FILES"
 #~ msgstr "ARQUIVOS"
 
+#~ msgid "Déjà Dup encryption password"
+#~ msgstr "Déjà Dup senha criptografada"
+
+#~ msgid "Indicates this backup was scheduled"
+#~ msgstr "Indica que essa cópia de segurança foi agendada"
+
 #~ msgid "Schedule backups at regular intervals"
 #~ msgstr "Agendar cópias de segurança em intervalos regulares"
+
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "Launchpad Contributions:\n"
+#~ "  André Gondim https://launchpad.net/~andregondim\n"
+#~ "  Fábio Nogueira https://launchpad.net/~fnogueira\n"
+#~ "  Hélio Márcio Filho https://launchpad.net/~heliommsfilho-gmail-"
+#~ "deactivatedaccount\n"
+#~ "  Hélio márcio https://launchpad.net/~heliommsfilho-deactivatedaccount\n"
+#~ "  Kenzo Okamura https://launchpad.net/~oznekz\n"
+#~ "  Leocello https://launchpad.net/~leocello\n"
+#~ "  Robson https://launchpad.net/~robsonap-silva\n"
+#~ "  Ronaldo Luiz Pedroso https://launchpad.net/~ronaldo-luiz-pedroso\n"
+#~ "  Rudinei Weschenfelder https://launchpad.net/~rudineiw\n"
+#~ "  Sam Samuels https://launchpad.net/~gemini-sam-samuels\n"
+#~ "  Teylo Laundos Aguiar https://launchpad.net/~teylo.aguiar\n"
+#~ "  Tiago Hillebrandt https://launchpad.net/~tiagohillebrandt\n"
+#~ "  Willian Alberto da Cruz https://launchpad.net/~willianalberto\n"
+#~ "  pm https://launchpad.net/~pmtrbr\n"
+#~ "  roberto ruhena https://launchpad.net/~rrruhena"
