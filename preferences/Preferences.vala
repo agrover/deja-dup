@@ -178,9 +178,9 @@ public class Preferences : Gtk.HBox
     label_sizes.add_widget(label);
     w = new DejaDup.ConfigLabelList(DejaDup.INCLUDE_LIST_KEY);
     table.attach(label, 0, 1, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+                 Gtk.AttachOptions.FILL, 0, 0, 0);
     table.attach(w, 1, 2, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+                 Gtk.AttachOptions.FILL, 0, 0, 0);
     ++row;
 
     label = new Gtk.Label(_("Except for:"));
@@ -188,9 +188,9 @@ public class Preferences : Gtk.HBox
     label_sizes.add_widget(label);
     w = new DejaDup.ConfigLabelList(DejaDup.EXCLUDE_LIST_KEY);
     table.attach(label, 0, 1, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+                 Gtk.AttachOptions.FILL, 0, 0, 0);
     table.attach(w, 1, 2, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+                 Gtk.AttachOptions.FILL, 0, 0, 0);
     ++row;
 
     vbox.pack_start(table, false, true);
