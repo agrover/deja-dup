@@ -25,7 +25,8 @@ libdeja_dup_la_CFLAGS = \
 	-I$(top_srcdir)/common \
 	$(NAUTILUS_CFLAGS) \
 	$(DEBUG_CFLAGS) \
-	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\"
+	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
+	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 libdeja_dup_la_SOURCES = \
 	NautilusExtension.c NautilusExtension.h

@@ -153,7 +153,7 @@ deja_dup_nautilus_extension_get_background_items(NautilusMenuProvider *provider,
   if (file == NULL)
     return NULL;
 
-  path = g_find_program_in_path("deja-dup")
+  path = g_find_program_in_path("deja-dup");
   if (!path)
     return NULL;
   g_free(path);
@@ -187,7 +187,7 @@ deja_dup_nautilus_extension_get_file_items(NautilusMenuProvider *provider,
   if (files == NULL)
     return NULL;
 
-  path = g_find_program_in_path("deja-dup")
+  path = g_find_program_in_path("deja-dup");
   if (!path)
     return NULL;
   g_free(path);
