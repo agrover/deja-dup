@@ -75,7 +75,7 @@ public class ConfigLocationTable : Gtk.Table
     else
       indent = "        ";
 
-    var hbox = new Gtk.HBox(false, 0);
+    var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
     var label = new Gtk.Label(indent);
 
     hbox.pack_start(label, false, false, 0);

@@ -203,7 +203,7 @@ public abstract class AssistantOperation : Assistant
   
   void set_secondary_label(DejaDup.Operation op, string text)
   {
-    Gtk.VBox page = (Gtk.VBox)progress_page;
+    Gtk.Box page = (Gtk.Box)progress_page;
     if (text != null && text != "") {
       secondary_label.label = "<i>" + text + "</i>";
       secondary_label.show();
@@ -224,7 +224,7 @@ public abstract class AssistantOperation : Assistant
     progress_file_label.set("xalign", 0.0f,
                             "ellipsize", Pango.EllipsizeMode.MIDDLE);
     
-    var progress_hbox = new Gtk.HBox(false, 0);
+    var progress_hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
     progress_hbox.set("child", progress_label,
                       "child", progress_file_label);
     progress_hbox.child_set(progress_label, "expand", false);
@@ -246,7 +246,7 @@ public abstract class AssistantOperation : Assistant
     progress_expander = new Gtk.Expander.with_mnemonic(_("_Details"));
     progress_expander.set("child", progress_scroll);
     
-    var page = new Gtk.VBox(false, 6);
+    var page = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
     page.set("child", progress_hbox,
              "child", progress_bar,
              "child", progress_expander,
@@ -371,7 +371,7 @@ public abstract class AssistantOperation : Assistant
     scroll.no_show_all = true; // only will be shown if an error occurs
     error_widget = scroll;
     
-    var page = new Gtk.VBox(false, 6);
+    var page = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
     page.set("child", summary_label,
              "child", error_widget,
              "border-width", 12);

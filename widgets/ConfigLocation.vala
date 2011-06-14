@@ -82,7 +82,7 @@ public class ConfigLocation : ConfigWidget
   Gtk.ListStore store;
   Gtk.TreeModelSort sort_model;
   construct {
-    var vbox = new Gtk.VBox(false, 6);
+    var vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
     add(vbox);
 
     // Here we have a model wrapped inside a sortable model.  This is so we

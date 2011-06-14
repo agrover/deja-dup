@@ -62,8 +62,8 @@ public class ConfigList : ConfigWidget
     scroll.hscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
     scroll.vscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
     
-    var hbox = new Gtk.HBox(false, 6);
-    var vbox = new Gtk.VBox(false, 6);
+    var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
+    var vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
     
     vbox.pack_start(add_button, false, false, 0);
     vbox.pack_start(remove_button, false, false, 0);

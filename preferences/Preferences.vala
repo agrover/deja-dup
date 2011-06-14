@@ -21,7 +21,7 @@ using GLib;
 
 namespace DejaDup {
 
-public class Preferences : Gtk.HBox
+public class Preferences : Gtk.Box
 {
   Gtk.Notebook top_notebook;
   Gtk.Widget backup_button;
@@ -70,7 +70,7 @@ public class Preferences : Gtk.HBox
                        "use-underline", true);
     continue_button.add(continue_label);
 
-    var bbox = new Gtk.VButtonBox();
+    var bbox = new Gtk.ButtonBox(Gtk.Orientation.VERTICAL);
     bbox.spacing = 24;
     bbox.layout_style = Gtk.ButtonBoxStyle.CENTER;
     bbox.add(restore_button);
@@ -88,14 +88,15 @@ public class Preferences : Gtk.HBox
               "justify", Gtk.Justification.CENTER,
               "use-markup", true);
 
-    var ibox = new Gtk.VBox(false, 6);
+    var ibox = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
     ibox.pack_start(icon, false, false);
     ibox.pack_start(label, false, false);
 
     var ialign = new Gtk.Alignment(0.5f, 0.5f, 0.0f, 0.0f);
     ialign.add(ibox);
 
-    var hbox = new Gtk.HBox(true, 0);
+    var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
+    hbox.set("homogeneous", true);
     hbox.pack_start(ialign, true, false);
     hbox.pack_start(balign, true, false);
 
@@ -107,11 +108,11 @@ public class Preferences : Gtk.HBox
   }
 
   Gtk.Widget make_settings_page() {
-    var settings_page = new Gtk.HBox(false, 0);
+    var settings_page = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
     Gtk.Notebook notebook = new Gtk.Notebook();
     Gtk.Widget w;
-    Gtk.VBox page_box;
-    Gtk.VBox vbox;
+    Gtk.Box page_box;
+    Gtk.Box vbox;
     Gtk.Box hbox;
     Gtk.Label label;
     Gtk.Table table;
@@ -140,8 +141,8 @@ public class Preferences : Gtk.HBox
     });
     settings_page.pack_start(tree, false, false);
 
-    page_box = new Gtk.VBox(false, 0);
-    vbox = new Gtk.VBox(false, 24);
+    page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
+    vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 24);
     table = new Gtk.Table(0, 0, false);
     table.row_spacing = 6;
     table.column_spacing = 6;
@@ -156,7 +157,7 @@ public class Preferences : Gtk.HBox
               "xalign", 0.0f);
     label_sizes.add_widget(label);
 
-    hbox = new Gtk.HBox(false, 6);
+    hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
     hbox.pack_start(label, false, false);
     hbox.pack_start(w, false, false);
     vbox.pack_start(hbox, false, false);
@@ -246,9 +247,9 @@ public class Preferences : Gtk.HBox
 
     vbox.pack_start(table, true, true);
 
-    hbox = new Gtk.HButtonBox();
+    hbox = new Gtk.ButtonBox(Gtk.Orientation.HORIZONTAL);
     hbox.spacing = 12;
-    (hbox as Gtk.HButtonBox).layout_style = Gtk.ButtonBoxStyle.END;
+    (hbox as Gtk.ButtonBox).layout_style = Gtk.ButtonBoxStyle.END;
     w = new Gtk.Button.with_mnemonic(_("_Restore…"));
     (w as Gtk.Button).clicked.connect((b) => {
       run_deja_dup("--restore", b.get_display().get_app_launch_context());
@@ -266,7 +267,7 @@ public class Preferences : Gtk.HBox
       DejaDup.show_uri(this.get_toplevel() as Gtk.Window, "ghelp:deja-dup");
     });
     hbox.add(w);
-    (hbox as Gtk.HButtonBox).set_child_secondary(w, true);
+    (hbox as Gtk.ButtonBox).set_child_secondary(w, true);
 
     bus_watch_id = Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
                                   BusNameWatcherFlags.NONE,
@@ -282,7 +283,7 @@ public class Preferences : Gtk.HBox
     ++i;
 
     // Reset page
-    page_box = new Gtk.VBox(false, 0);
+    page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
     table = new Gtk.Table(0, 0, false);
     table.row_spacing = 6;
     table.column_spacing = 6;
@@ -330,7 +331,7 @@ public class Preferences : Gtk.HBox
     ++row;
 
     w = new DejaDup.ConfigLabelPolicy();
-    hbox = new Gtk.HBox(false, 0);
+    hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
     hbox.add(w);
     
     page_box.pack_start(table, true, true, 0);
@@ -350,7 +351,7 @@ public class Preferences : Gtk.HBox
     page_box.set_size_request(req.width, req.height);
 
     // Reset page
-    page_box = new Gtk.VBox(false, 0);
+    page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
     table = new Gtk.Table(0, 3, false);
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
@@ -400,7 +401,7 @@ public class Preferences : Gtk.HBox
     ++i;
     
     // Reset page
-    page_box = new Gtk.VBox(false, 0);
+    page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
     table = new Gtk.Table(0, 3, false);
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);

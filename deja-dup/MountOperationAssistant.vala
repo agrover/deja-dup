@@ -44,7 +44,7 @@ public class MountOperationAssistant : MountOperation
 
   public AssistantOperation assist {get; construct;}
   Gtk.Bin password_page;
-  Gtk.VBox layout;
+  Gtk.Box layout;
   Gtk.Table table;
   Gtk.RadioButton anonymous_w;
   Gtk.CheckButton remember_w;
@@ -121,7 +121,7 @@ public class MountOperationAssistant : MountOperation
     if (layout != null)
       DejaDup.destroy_widget(layout);
 
-    layout = new Gtk.VBox(false, 6);
+    layout = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
     layout.set("border-width", 12);
 
     table = new Gtk.Table(0, 2, false);
@@ -180,7 +180,7 @@ public class MountOperationAssistant : MountOperation
       table.sensitive = false; // starts inactive
       layout.pack_start(w, false, false, 0);
 
-      var hbox = new Gtk.HBox(false, 0);
+      var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
       hbox.pack_start(new Gtk.Label("    "), false, false, 0);
       hbox.pack_start(table, true, true, 0);
       layout.pack_start(hbox, false, false, 0);

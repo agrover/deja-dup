@@ -51,7 +51,7 @@ public class AssistantRestore : AssistantOperation
   uint query_timeout_id;
   Gtk.ComboBoxText date_combo;
   Gtk.ListStore date_store;
-  Gtk.HBox cust_box;
+  Gtk.Box cust_box;
   Gtk.FileChooserButton cust_button;
   Gtk.Table confirm_table;
   int confirm_location_row;
@@ -62,7 +62,7 @@ public class AssistantRestore : AssistantOperation
   Gtk.Label confirm_date;
   int confirm_files_row;
   Gtk.Label confirm_files_label;
-  Gtk.VBox confirm_files;
+  Gtk.Box confirm_files;
   Gtk.Widget query_progress_page;
   Gtk.Widget date_page;
   Gtk.Widget restore_dest_page;
@@ -134,7 +134,7 @@ public class AssistantRestore : AssistantOperation
   {
     query_progress_bar = new Gtk.ProgressBar();
     
-    var page = new Gtk.VBox(false, 6);
+    var page = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
     page.set("child", query_progress_bar,
              "border-width", 12);
     page.child_set(query_progress_bar, "expand", false);
@@ -153,11 +153,11 @@ public class AssistantRestore : AssistantOperation
                    "use-underline", true,
                    "xalign", 0.0f);
     
-    var hbox = new Gtk.HBox(false, 6);
+    var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
     hbox.set("child", date_label,
              "child", date_combo);
     
-    var page = new Gtk.VBox(false, 6);
+    var page = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
     page.set("child", hbox,
              "border-width", 12);
     
@@ -195,12 +195,12 @@ public class AssistantRestore : AssistantOperation
                    "use-underline", true,
                    "xalign", 0.0f);
     
-    cust_box = new Gtk.HBox(false, 6);
+    cust_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
     cust_box.set("child", cust_label,
                  "child", cust_button,
                  "sensitive", false);
     
-    var page = new Gtk.VBox(false, 6);
+    var page = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
     page.set("child", orig_radio,
              "child", cust_radio,
              "child", cust_box,
@@ -257,7 +257,8 @@ public class AssistantRestore : AssistantOperation
     
     confirm_files_label = new Gtk.Label("");
     confirm_files_label.set("xalign", 0.0f, "yalign", 0.0f);
-    confirm_files = new Gtk.VBox(true, 6);
+    confirm_files = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
+    confirm_files.set("homogeneous", true);
     confirm_files_row = rows;
     page.attach(confirm_files_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
     page.attach(confirm_files, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);

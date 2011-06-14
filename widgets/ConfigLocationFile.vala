@@ -29,7 +29,7 @@ public class ConfigLocationFile : ConfigLocationTable
 
   ConfigURLPart entry;
   construct {
-    var hbox = new Gtk.HBox(false, 6);
+    var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
 
     entry = new ConfigURLPart(ConfigURLPart.Part.FOLDER,
                               DejaDup.FILE_PATH_KEY,
