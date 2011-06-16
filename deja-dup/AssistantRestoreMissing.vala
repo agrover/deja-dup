@@ -168,19 +168,24 @@ public class AssistantRestoreMissing : AssistantRestore {
         var toggle = new Gtk.CellRendererToggle();
         
         toggle.toggled.connect ((toggle, path) => {
+          var active = !toggle.active;
           var tree_path = new Gtk.TreePath.from_string (path);
           this.listmodel.get_iter (out this.deleted_iter, tree_path);
-          this.listmodel.set(this.deleted_iter, 0, !toggle.active);
+          this.listmodel.set(this.deleted_iter, 0, active);
 
           string name;
           this.listmodel.get(this.deleted_iter, 1, out name);
           File file = list_directory.get_child(name);
 
-          if (toggle.active)
+          if (active)
             _restore_files.prepend(file);
           else
-            _restore_files.remove_link(_restore_files.find_custom(file, (f) => {
-              if (file.equal(f as File)) return 0; else return 1;}));
+            _restore_files.remove_link(_restore_files.find_custom(file, (a, b) => {
+              if (a != null && b != null && (a as File).equal(b as File))
+                return 0;
+              else
+                return 1;
+            }));
 
           allow_forward(restore_files != null);
         });
