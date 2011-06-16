@@ -45,8 +45,9 @@ public class Preferences : Gtk.Box
     restore_label.set("mnemonic-widget", restore_button,
                       "wrap", true,
                       "justify", Gtk.Justification.CENTER,
-                      "xalign", 0.0f,
                       "xpad", 6,
+                      "ypad", 6,
+                      "width-request", 300,
                       "use-markup", true,
                       "use-underline", true);
     restore_button.add(restore_label);
@@ -61,8 +62,9 @@ public class Preferences : Gtk.Box
     continue_label.set("mnemonic-widget", continue_button,
                        "wrap", true,
                        "justify", Gtk.Justification.CENTER,
-                       "xalign", 0.0f,
                        "xpad", 6,
+                       "ypad", 6,
+                       "width-request", 300,
                        "can-default", true,
                        "has-default", true,
                        "has-focus", true,
