@@ -67,9 +67,13 @@ public class DuplicityInstance : Object
       argv.append(arg);
     
     argv.append("--verbosity=9");
-    
-    if (DuplicityInfo.get_default().use_empty_gpg_options)
-      argv.append("--gpg-options= "); // one space character
+
+    // It's possible for --use-agent to be on by default (as it is in Ubuntu).
+    // But we never want an agent, and it's a possible point of failure (e.g.
+    // bug 681002), so just make sure it's disabled.  Adding this meets the
+    // requirements of use_gpg_options, so we no longer bother checking if that
+    // DuplicityInfo flag is active.
+    argv.append("--gpg-options=--no-use-agent");
 
     // Cache signature files
     var cache_dir = Environment.get_user_cache_dir();

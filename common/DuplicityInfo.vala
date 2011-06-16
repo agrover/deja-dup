@@ -37,7 +37,7 @@ public class DuplicityInfo : Object
   public bool can_resume {get; private set; default = false; }
   public bool has_rename_arg {get; private set; default = false; }
   public bool has_fixed_log_file {get; private set; default = false; }
-  public bool use_empty_gpg_options {get; private set; default = false; }
+  public bool use_gpg_options {get; private set; default = false; }
   public bool guarantees_error_codes {get; private set; default = false; }
   public bool has_u1 {get; private set; default = false;}
   
@@ -109,10 +109,10 @@ public class DuplicityInfo : Object
       has_fixed_log_file = true; // had it since 0.5.3, but was buggy
     }
     if (equals_version(0, 6, 8))
-      use_empty_gpg_options = true; // workaround a duplicity bug
-    if (equals_version(0, 6, 13))
+      use_gpg_options = true; // workaround a duplicity bug
+    if (meets_version(0, 6, 13))
       can_resume = true; // had it since 0.6.0, but had data corruption bugs
-    if (equals_version(0, 6, 14))
+    if (meets_version(0, 6, 14))
       has_u1 = true;
 
     return true;
