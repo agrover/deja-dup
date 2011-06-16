@@ -338,13 +338,13 @@ public class AssistantRestoreMissing : AssistantRestore {
     string worddiff;
     int tdiff =  (ttodayi - tepoch)/60/60; // Hours
     if (tdiff / 24 == 0 ) {
-      worddiff = _("Scanning for files from yesterday…");
+      worddiff = _("Scanning for files from up to a day ago…");
     }
     else if (tdiff / 24 / 7 == 0) {
-      worddiff = _("Scanning for files from last week…");
+      worddiff = _("Scanning for files from up to a week ago…");
     }
     else if (tdiff / 24 / 30 == 0) {
-    worddiff = _("Scanning for files from last month…");
+    worddiff = _("Scanning for files from up to a month ago…");
     }
     else if (tdiff / 24 / 30 >= 1 && tdiff / 24 / 30 <= 12) {
       int n = tdiff / 24 / 30;
