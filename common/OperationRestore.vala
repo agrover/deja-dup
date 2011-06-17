@@ -52,10 +52,15 @@ public class OperationRestore : Operation
   public async override void start()
   {
     action_desc_changed(_("Restoring files…"));
-    dup.restore_files = restore_files;
     base.start();
   }
-  
+
+  protected override void connect_to_dup()
+  {
+    base.connect_to_dup();
+    dup.restore_files = restore_files;
+  }
+
   protected override List<string>? make_argv() throws Error
   {
     if (DuplicityInfo.get_default().has_rename_arg)
