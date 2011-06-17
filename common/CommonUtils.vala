@@ -187,7 +187,8 @@ public void make_prompt_check()
     update_prompt_time();
     return;
   }
-  else if (last_run_date(TimestampType.NONE) != "")
+  else if (last_run_date(TimestampType.NONE) != "" ||
+           settings.get_boolean(WELCOMED_KEY))
     return;
 
   // OK, monitor has run before but user hasn't yet backed up or restored.
