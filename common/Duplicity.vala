@@ -1004,6 +1004,10 @@ public class Duplicity : Object
         else
           show_error(_("No space left in ‘%s’.").printf(where));
       }
+      else if (text.contains("CRC check failed")) { // bug 676767
+        if (restart_without_cache())
+          return;
+      }
       else {
         // Very possibly a FAT file system that can't handle the colons that 
         // duplicity likes to use.  Try again with --short-filenames
