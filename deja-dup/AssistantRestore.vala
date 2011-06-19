@@ -127,7 +127,7 @@ public class AssistantRestore : AssistantOperation
   {
     var page = make_backup_location_page();
     append_page(page);
-    set_page_title(page, _("Preferences"));
+    set_page_title(page, _("Settings"));
   }
   
   Gtk.Widget make_query_backend_page()
