@@ -39,6 +39,7 @@ public class ConfigLabelLocation : ConfigLabel
     label.set_line_wrap(true);
     label.width_chars = 30;
     img = new Gtk.Image.from_icon_name("folder", Gtk.IconSize.MENU);
+    img.set("yalign", 0.0f);
     hbox.pack_start(img, false, false, 0);
     hbox.reorder_child(img, 0);
     watch_key(BACKEND_KEY);

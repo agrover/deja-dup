@@ -166,7 +166,8 @@ public class Preferences : Gtk.Box
 
     w = new DejaDup.ConfigLabelLocation();
     label = new Gtk.Label(_("Where:"));
-    label.set("xalign", 0.0f);
+    label.set("xalign", 0.0f,
+              "yalign", 0.0f);
     label_sizes.add_widget(label);
 
     table.attach(label, 0, 1, row, row + 1,
@@ -320,14 +321,14 @@ public class Preferences : Gtk.Box
     label_sizes.add_widget(label);
     table.attach(label, 0, 1, row, row + 1,
                  Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    table.attach(w, 1, 3, row, row + 1,
+    table.attach(w, 1, 2, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL,
                  0, 0);
     ++row;
 
     w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
-    table.attach(w, 0, 3, row, row + 1,
+    table.attach(w, 0, 2, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL, 0, 0);
     ++row;
@@ -354,7 +355,7 @@ public class Preferences : Gtk.Box
 
     // Reset page
     page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
-    table = new Gtk.Table(0, 3, false);
+    table = new Gtk.Table(0, 2, false);
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
@@ -372,7 +373,7 @@ public class Preferences : Gtk.Box
     table.attach(label, 0, 1, row, row + 1,
                  Gtk.AttachOptions.FILL,
                  Gtk.AttachOptions.FILL, 3, 3);
-    table.attach(w, 1, 3, row, row + 1,
+    table.attach(w, 1, 2, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  3, 3);
@@ -391,7 +392,7 @@ public class Preferences : Gtk.Box
     table.attach(label, 0, 1, row, row + 1,
                  Gtk.AttachOptions.FILL,
                  Gtk.AttachOptions.FILL, 3, 3);
-    table.attach(w, 1, 3, row, row + 1,
+    table.attach(w, 1, 2, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  3, 3);
@@ -404,7 +405,7 @@ public class Preferences : Gtk.Box
     
     // Reset page
     page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
-    table = new Gtk.Table(0, 3, false);
+    table = new Gtk.Table(0, 2, false);
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
@@ -416,7 +417,7 @@ public class Preferences : Gtk.Box
     label_sizes.add_widget(label);
     table.attach(label, 0, 1, row, row + 1,
                  Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 3, 3);
-    table.attach(w, 1, 3, row, row + 1,
+    table.attach(w, 1, 2, row, row + 1,
                  Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
                  Gtk.AttachOptions.FILL,
                  3, 3);

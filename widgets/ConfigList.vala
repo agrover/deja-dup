@@ -68,7 +68,7 @@ public class ConfigList : ConfigWidget
     vbox.pack_start(add_button, false, false, 0);
     vbox.pack_start(remove_button, false, false, 0);
     scroll.add(tree);
-    hbox.add(scroll);
+    hbox.pack_start(scroll, true, true, 0);
     hbox.pack_start(vbox, false, false, 0);
     add(hbox);
     
