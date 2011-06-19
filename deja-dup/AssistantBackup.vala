@@ -47,6 +47,11 @@ public class AssistantBackup : AssistantOperation
       rv.is_full.connect((op) => {op.use_progress = true;});
     }
 
+    if (automatic)
+      hide_for_now();
+    else
+      show_all();
+
     return rv;
   }
   

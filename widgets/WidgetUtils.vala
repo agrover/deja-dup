@@ -88,8 +88,8 @@ public void show_background_window_for_shell(Gtk.Window win)
     win.show();
     win.iconify(); // In case WM didn't respect first iconify
   }
-
-  win.show();
+  else
+    win.show();
 }
 
 public void destroy_widget(Gtk.Widget w)
