@@ -97,6 +97,11 @@ public class ConfigLocation : ConfigWidget
     button.set_row_separator_func(is_separator);
     vbox.add(button);
 
+    var accessible = button.get_accessible();
+    if (accessible != null) {
+      accessible.name = _("Location");
+    }
+
     Gtk.TreeIter iter;
 
     if (label_sizes == null)

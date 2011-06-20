@@ -2,6 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
+    © 2011 Canonical Ltd
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -128,6 +129,11 @@ public class Preferences : Gtk.Box
 
     var cat_model = new Gtk.ListStore(2, typeof(string), typeof(int));
     var tree = new Gtk.TreeView.with_model(cat_model);
+    var accessible = tree.get_accessible();
+    if (accessible != null) {
+      accessible.name = _("Categories");
+      accessible.description = _("Categories");
+    }
     tree.headers_visible = false;
     tree.set_size_request(150, -1);
     tree.insert_column_with_attributes(-1, null, new Gtk.CellRendererText(),
