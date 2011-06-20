@@ -559,22 +559,35 @@ public class Duplicity : Object
     return;
   }
   
+  bool can_ignore_error()
+  {
+    // Ignore errors during cleanup.  If they're real, they'll repeat.
+    // They might be not-so-real, like the errors one gets when restoring
+    // from a backup when not all of the signature files are in your archive
+    // dir (which happens when you start using an archive dir in the middle
+    // of a backup chain).
+    return state == State.CLEANUP || state == State.DELETE;
+  }
+
   void handle_done(DuplicityInstance? inst, bool success, bool cancelled)
   {
-    if (!cancelled) {
+    if (can_ignore_error())
+      success = true;
+
+    if (!cancelled && success) {
       switch (state) {
       case State.DRY_RUN:
-        if (success) {
-          has_progress_total = true;
-          progress_total = progress_count; // save max progress for next run
-          if (restart())
-            return;
-        }
+        has_progress_total = true;
+        progress_total = progress_count; // save max progress for next run
+        if (restart())
+          return;
+        success = false;
         break;
       
       case State.DELETE:
         if (restart()) // In case we were interrupting normal flow
           return;
+        success = false;
         break;
       
       case State.CLEANUP:
@@ -589,69 +602,64 @@ public class Duplicity : Object
         break;
       
       case State.STATUS:
-        if (success) {
-          checked_collection_info = true;
-          mode = Operation.Mode.BACKUP;
-          
-          if (!got_collection_info || collection_info == null) {
-            // Checking for backup files added the short-filename parameter.
-            // If there were no files, we want to take it out again and
-            // proceed with a normal filename backup.
-            foreach (weak string s in backend_argv) {
-              if (s == "--short-filenames")
-                backend_argv.remove(s);
-            }
+        checked_collection_info = true;
+        mode = Operation.Mode.BACKUP;
+        
+        if (!got_collection_info || collection_info == null) {
+          // Checking for backup files added the short-filename parameter.
+          // If there were no files, we want to take it out again and
+          // proceed with a normal filename backup.
+          foreach (weak string s in backend_argv) {
+            if (s == "--short-filenames")
+              backend_argv.remove(s);
           }
-
-          /* Set full backup threshold and determine whether we should trigger
-             a full backup. */
-          if (got_collection_info) {
-            Date threshold = DejaDup.get_full_backup_threshold_date();
-            Date full_backup = Date();
-            foreach (DateInfo info in collection_info) {
-              if (info.full)
-                full_backup.set_time_val(info.time);
-            }
-            if (!full_backup.valid() || threshold.compare(full_backup) > 0) {
-              is_full_backup = true;
-              if (!full_backup.valid())
-                secondary_desc_changed(_("Creating the first backup.  This may take a while."));
-              else
-                secondary_desc_changed(_("Creating a fresh backup to protect against backup corruption.  This will take longer than normal."));
-            }
-          }
-
-          if (is_full_backup)
-            is_full();
-
-          if (restart())
-            return;
-          else
-            success = false;
         }
+
+        /* Set full backup threshold and determine whether we should trigger
+           a full backup. */
+        if (got_collection_info) {
+          Date threshold = DejaDup.get_full_backup_threshold_date();
+          Date full_backup = Date();
+          foreach (DateInfo info in collection_info) {
+            if (info.full)
+              full_backup.set_time_val(info.time);
+          }
+          if (!full_backup.valid() || threshold.compare(full_backup) > 0) {
+            is_full_backup = true;
+            if (!full_backup.valid())
+              secondary_desc_changed(_("Creating the first backup.  This may take a while."));
+            else
+              secondary_desc_changed(_("Creating a fresh backup to protect against backup corruption.  This will take longer than normal."));
+          }
+        }
+
+        if (is_full_backup)
+          is_full();
+
+        if (restart())
+          return;
+        success = false;
         break;
       
       case State.CHECK_CONTENTS:
-        if (success) {
-          has_checked_contents = true;
-          mode = Operation.Mode.RESTORE;
-          
-          if (restart())
-            return;
-          else
-            success = false;
-        }
+        has_checked_contents = true;
+        mode = Operation.Mode.RESTORE;
+        
+        if (restart())
+          return;
+        success = false;
         break;
       
       case State.NORMAL:
-        if (success && mode == Operation.Mode.RESTORE && restore_files != null) {
+        if (mode == Operation.Mode.RESTORE && restore_files != null) {
           _restore_files.delete_link(_restore_files);
           if (restore_files != null) {
             if (restart())
               return;
+            success = false;
           }
         }
-        else if (success && mode == Operation.Mode.BACKUP) {
+        else if (mode == Operation.Mode.BACKUP) {
           mode = Operation.Mode.INVALID; // mark 'done' so when we delete, we don't restart
           if (delete_files_if_needed())
             return;
@@ -877,12 +885,7 @@ public class Duplicity : Object
   {
     string text = text_in;
     
-    // Ignore errors during cleanup.  If they're real, they'll repeat.
-    // They might be not-so-real, like the errors one gets when restoring
-    // from a backup when not all of the signature files are in your archive
-    // dir (which happens when you start using an archive dir in the middle
-    // of a backup chain).
-    if (state == State.CLEANUP)
+    if (can_ignore_error())
       return;
     
     if (firstline.length > 1) {
