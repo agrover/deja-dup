@@ -119,6 +119,12 @@ public class AssistantRestoreMissing : AssistantRestore {
     list_directory = list_dir;
   }
 
+  protected override void add_custom_config_pages()
+  {
+    if (!DejaDup.has_seen_settings())
+      base.add_custom_config_pages();
+  }
+
   private string? get_ui_file(string ui_file) {
     var sysdatadirs = GLib.Environment.get_system_data_dirs();
     foreach (var sysdir in sysdatadirs) {

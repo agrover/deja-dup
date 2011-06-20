@@ -125,9 +125,12 @@ public class AssistantRestore : AssistantOperation
   
   protected override void add_custom_config_pages()
   {
-    var page = make_backup_location_page();
-    append_page(page);
-    set_page_title(page, _("Settings"));
+    // always show for a full restore or if user hasn't ever used us
+    if (restore_files == null || !DejaDup.has_seen_settings()) {
+      var page = make_backup_location_page();
+      append_page(page);
+      set_page_title(page, _("Settings"));
+    }
   }
   
   Gtk.Widget make_query_backend_page()

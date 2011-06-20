@@ -173,6 +173,13 @@ public int get_prompt_delay()
     return 30 * 24 * 60 * 60;
 }
 
+public bool has_seen_settings()
+{
+  var settings = DejaDup.get_settings();
+  return last_run_date(TimestampType.NONE) != "" ||
+         settings.get_boolean(WELCOMED_KEY);
+}
+
 // This makes the check of whether we should tell user about backing up.
 // For example, if a user has installed their OS and doesn't know about backing
 // up, we might notify them after a month.
@@ -187,8 +194,7 @@ public void make_prompt_check()
     update_prompt_time();
     return;
   }
-  else if (last_run_date(TimestampType.NONE) != "" ||
-           settings.get_boolean(WELCOMED_KEY))
+  else if (has_seen_settings())
     return;
 
   // OK, monitor has run before but user hasn't yet backed up or restored.
