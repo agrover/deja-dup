@@ -49,6 +49,7 @@ class PreferencesApp : Object
     else {
       // We're first instance.  Yay!
       var dlg = new Gtk.Window();
+      dlg.title = _("Backup");
       dlg.resizable = false;
       dlg.add(new DejaDup.Preferences());
       dlg.set_application(app);
