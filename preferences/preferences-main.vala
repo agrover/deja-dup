@@ -82,6 +82,9 @@ class PreferencesApp : Object
     Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
     Gtk.Window.set_default_icon_name(Config.PACKAGE);
 
+    if (!DejaDup.init_duplicity(null))
+      return 1;
+
     var app = new Gtk.Application("org.gnome.DejaDup.Preferences", 0);
     app.activate.connect((app) => {activated(app as Gtk.Application);});
     return app.run();

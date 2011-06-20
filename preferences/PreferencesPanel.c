@@ -71,6 +71,8 @@ g_io_module_load (GIOModule *module)
   gtk_icon_theme_append_search_path (theme, THEME_DIR);
 
   deja_dup_initialize();
+  if (!deja_dup_init_duplicity(NULL, FALSE))
+    return;
 
   deja_dup_preferences_panel_register_type (G_TYPE_MODULE (module));
   g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,

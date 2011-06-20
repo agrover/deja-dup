@@ -106,13 +106,13 @@ public void destroy_widget(Gtk.Widget w)
   Idle.add(() => {w.destroy(); return false;});
 }
 
-public bool init_duplicity(Gtk.Window? parent)
+public bool init_duplicity(Gtk.Window? parent, bool show_error = true)
 {
   string header;
   string msg;
   var rv = DejaDup.DuplicityInfo.get_default().check_duplicity_version(out header, out msg);
 
-  if (!rv) {
+  if (!rv && show_error) {
     Gtk.MessageDialog dlg = new Gtk.MessageDialog (parent,
         Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL,
         Gtk.MessageType.ERROR,
