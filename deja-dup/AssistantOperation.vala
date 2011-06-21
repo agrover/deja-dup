@@ -253,6 +253,7 @@ public abstract class AssistantOperation : Assistant
              "border-width", 12);
     page.child_set(progress_hbox, "expand", false);
     page.child_set(progress_bar, "expand", false);
+    page.child_set(progress_expander, "expand", true);
     // Reserve space for details + labels
     page.set_size_request(-1, 200);
     
@@ -376,6 +377,7 @@ public abstract class AssistantOperation : Assistant
              "child", error_widget,
              "border-width", 12);
     page.child_set(summary_label, "expand", false);
+    page.child_set(error_widget, "expand", true);
     
     return page;
   }
