@@ -428,8 +428,10 @@ public abstract class AssistantOperation : Assistant
   
   protected virtual void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
   {
-    status_icon.done(success, cancelled);
-    status_icon = null;
+    if (status_icon != null) {
+      status_icon.done(success, cancelled);
+      status_icon = null;
+    }
     this.op = null;
 
     if (cancelled) {
@@ -543,7 +545,10 @@ public abstract class AssistantOperation : Assistant
   public void hide_everything()
   {
     hide();
-    status_icon = null; // hide immediately to seem responsive
+    if (status_icon != null) {
+      status_icon.done(false, true);
+      status_icon = null; // hide immediately to seem responsive
+    }
   }
 
   protected virtual void do_cancel()
