@@ -3,6 +3,7 @@
 #
 # This file is part of Déjà Dup.
 # © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
+# © 2011 Canonical Ltd
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,8 +29,6 @@ import ldtp
 import glob
 import re
 import traceback
-
-latest_duplicity = '0.6.13'
 
 srcdir = "."
 temp_dir = None
@@ -80,14 +79,14 @@ def setup(start = True, args=[''], root_prompt = False):
   environ['LANG'] = 'C'
   environ['DEJA_DUP_TESTING'] = '1'
 
-  extra_paths = ':'.join(['%s/../%s' % (builddir, x) for x in ['deja-dup', 'preferences', 'applet', 'monitor']]) + ':'
+  extra_paths = ':'.join(['%s/../%s' % (builddir, x) for x in ['deja-dup', 'preferences', 'monitor']]) + ':'
   extra_pythonpaths = ''
   
   version = None
   if 'DEJA_DUP_TEST_VERSION' in environ:
     version = environ['DEJA_DUP_TEST_VERSION']
   if version is None:
-    version = latest_duplicity
+    version = 'system'
   if version != 'system':
     os.system('%s/build-duplicity %s' % (srcdir, version))
     duproot = '%s/duplicity/duplicity-%s' % (srcdir, version)
@@ -109,18 +108,18 @@ def setup(start = True, args=[''], root_prompt = False):
   environ['XDG_CONFIG_HOME'] = get_temp_name('config')
   environ['XDG_DATA_HOME'] = get_temp_name('share')
   environ['XDG_DATA_DIRS'] = "%s:%s" % (environ['XDG_DATA_HOME'], environ['XDG_DATA_DIRS'])
-  output = subprocess.Popen(['dbus-launch'], stdout=subprocess.PIPE).communicate()[0]
-  lines = output.split('\n')
-  for line in lines:
-      parts = line.split('=', 1)
-      if len(parts) == 2:
-          if parts[0] == 'DBUS_SESSION_BUS_PID': # cleanup at end
-              cleanup_pids += [int(parts[1])]
-          os.environ[parts[0]] = parts[1]
+  #output = subprocess.Popen(['dbus-launch'], stdout=subprocess.PIPE).communicate()[0]
+  #lines = output.split('\n')
+  #for line in lines:
+  #    parts = line.split('=', 1)
+  #    if len(parts) == 2:
+  #        if parts[0] == 'DBUS_SESSION_BUS_PID': # cleanup at end
+  #            cleanup_pids += [int(parts[1])]
+  #        os.environ[parts[0]] = parts[1]
 
   # Shutdown ldtpd so that it will restart and pick up new dbus environment
-  os.system('pkill -f ldtpd\\.main; sleep 1')
-  ldtp.getwindowlist()
+  #os.system('pkill -f ldtpd\\.main; sleep 1')
+  #ldtp.getwindowlist()
 
   environ['PYTHONPATH'] = extra_pythonpaths + (environ['PYTHONPATH'] if 'PYTHONPATH' in environ else '')
   environ['PATH'] = extra_paths + environ['PATH']
@@ -151,9 +150,6 @@ def setup(start = True, args=[''], root_prompt = False):
   #for line in daemon_env:
   #  bits = line.split('=')
   #  os.environ[bits[0]] = bits[1]
-
-  if start:
-    start_deja_dup(executable='deja-dup-preferences', args=args)
 
 def cleanup(success):
   global temp_dir, cleanup_dirs, cleanup_mounts, cleanup_pids, cleanup_envs
@@ -201,7 +197,7 @@ def get_settings_value(key, schema = None):
   pout = sp.communicate()[0]
   return pout.strip()
 
-def start_deja_dup(args=[], executable='deja-dup', waitfor='frmDéjàDup', debug=False):
+def start_deja_dup(args=[], executable='deja-dup', waitfor='frmBackup', debug=False):
   # Rather than running debug, it's sometimes more effective to run
   # "./interactive shell" and then run gdb directly
   cmd = [executable] + args
@@ -216,7 +212,9 @@ def start_deja_dup(args=[], executable='deja-dup', waitfor='frmDéjàDup', debug
            '--error-exitcode=1', '--suppressions=valgrind.sup'] + cmd
   if debug:
     cmd = ['gnome-terminal', '-x', 'gdb', '-ex', 'run'] + cmd
-  environ['G_SLICE'] = 'always-malloc,debug-blocks'
+  # gtk3/gail3 seem problematic with always-malloc
+  #environ['G_SLICE'] = 'always-malloc,debug-blocks'
+  environ['G_SLICE'] = 'debug-blocks'
   environ['G_DEBUG'] = 'gc-friendly' if not environ.get('G_DEBUG') else environ['G_DEBUG'] + ',gc-friendly'
   subprocess.Popen(cmd)
   if waitfor is not None:
@@ -259,8 +257,8 @@ def create_mount(path=None, mtype='ext', size=20):
   return mount_dir
 
 def quit():
-  if ldtp.guiexist('frmDéjàDup'):
-    ldtp.selectmenuitem('frmDéjàDup', 'mnuBackup;mnuClose')
+  if ldtp.guiexist('frmBackup'):
+    ldtp.closewindow('frmBackup')
 
 def run(method):
   success = False
@@ -392,39 +390,39 @@ def set_file_list(dlg, obj, addObj, removeObj, files):
     ldtp.click('dlgChoosefolders', 'btnOpen')
     ldtp.wait(1) # let dialog close
 
-def walk_restore_prefs(dlg, backend = None, encrypt = None, dest = None):
+def walk_prefs(backend = None, encrypt = None, dest = None, includes = [], excludes = []):
+  # FIXME: This doesn't seem to work with gtk3, so we set gsettings directly
+  # before launching the dialog
+  #remap('frmBackup')
+  #if guivisible('frmBackup', 'btnJustshowmybackupsettings'):
+  #  ldtp.click('frmBackup', 'btnJustshowmybackupsettings')
+
   if backend == 'file':
+    ldtp.selectrow('frmBackup', 'tblCategories', 'Storage')
+
     if dest is None:
       dest = get_temp_name('local')
       os.system('mkdir -p %s' % dest)
     elif dest[0] != '/' and dest.find(':') == -1:
       dest = os.getcwd()+'/'+dest
 
-    ldtp.comboselect(dlg, 'cboAmazonS3', 'Local Folder')
-    remap(dlg)
-    ldtp.settextvalue(dlg, 'txt0', dest) # FIXME txt0 is bad name
+    # FIXME: this doesn't seem to work with gtk3, so we set gsettings directly
+    #ldtp.comboselect('frmBackup', 'cboLocation', 'Local Folder')
+    set_settings_value('backend', 'file')
+    remap('frmBackup')
+    ldtp.settextvalue('frmBackup', 'txt0', dest) # FIXME txt0 is bad name
 
   if encrypt is not None:
+    ldtp.selectrow('frmBackup', 'tblCategories', 'Storage')
     chklabel = 'chkEncryptbackupfiles'
-    if not ldtp.guiexist(dlg, chklabel):
-      chklabel = 'chkBackupfilesareencrypted'
     if encrypt:
-      ldtp.check(dlg, chklabel)
+      ldtp.check('frmBackup', chklabel)
     else:
-      ldtp.uncheck(dlg, chklabel)
+      ldtp.uncheck('frmBackup', chklabel)
 
-  ldtp.click(dlg, 'btnForward')
-  remap(dlg)
-
-def walk_backup_prefs(dlg, backend = None, encrypt = None, dest = None, includes = [], excludes = []):
-  walk_restore_prefs(dlg, backend, encrypt, dest)
-  ldtp.wait(1) # give ldtp a second
-
-  # FIXME: bad names
-  set_file_list(dlg, 'tbl1', 'btnAdd1', 'btnRemove1', includes)
-  set_file_list(dlg, 'tbl0', 'btnAdd', 'btnRemove', excludes)
-  ldtp.click(dlg, 'btnForward')
-  remap(dlg)
+  ldtp.selectrow('frmBackup', 'tblCategories', 'Files')
+  set_file_list('frmBackup', 'tblIncludeList', 'btnIncludeListAdd', 'btnIncludeListRemove', includes)
+  set_file_list('frmBackup', 'tblExcludeList', 'btnExcludeListAdd', 'btnExcludeListRemove', excludes)
 
 def strip_obj_name(obj):
   return obj.replace("_", "").replace(".", "")
@@ -435,22 +433,30 @@ def backup_simple(finish=True, error=None, timeout=400, backend = None, encrypt 
     includes = [os.path.join(srcdir, f) for f in includes]
     excludes = [os.path.join(srcdir, f) for f in excludes]
 
-  ldtp.click('frmDéjàDup', 'btnBackUp…')
-  assert ldtp.waittillguiexist('dlgBackUp')
-  remap('dlgBackUp')
-  if guivisible('dlgBackUp', 'lblPreferences'):
-    walk_backup_prefs('dlgBackUp', backend=backend, encrypt=encrypt, dest=dest, includes=includes, excludes=excludes)
-  ldtp.click('dlgBackUp', 'btnBackUp')
-  remap('dlgBackUp')
+  # FIXME: see walk_prefs  
+  set_settings_value('welcomed', 'true')
+
+  start_deja_dup(executable='deja-dup-preferences')
+  remap('frmBackup')
+
+  if True: # FIXME see above get_settings_value('welcomed') == 'false':
+    walk_prefs(backend=backend, encrypt=encrypt, dest=dest,
+               includes=includes,
+               excludes=excludes)
+
+  ldtp.selectrow('frmBackup', 'tblCategories', 'Overview')
+  ldtp.click('frmBackup', 'btnBackUpNow')
+  ldtp.waittillguiexist('frmBackUp')
+
   if finish:
     if not error:
       error = 'lblYourfilesweresuccessfullybackedup'
-      wait_for_encryption('dlgBackUp', error, timeout)
+      wait_for_encryption('frmBackUp', error, timeout)
     else:
       error = strip_obj_name(error)
-      wait_for_encryption('dlgBackUp', error, timeout, prefix=True)
-    ldtp.click('dlgBackUp', 'btnClose')
-    ldtp.waittillguinotexist('dlgBackUp')
+      wait_for_encryption('frmBackUp', error, timeout, prefix=True)
+    ldtp.click('frmBackUp', 'btnClose')
+    ldtp.waittillguinotexist('frmBackUp')
 
 def restore_simple(path, date=None, backend = None, encrypt = None, dest = None):
   ldtp.click('frmDéjàDup', 'btnRestore…')
