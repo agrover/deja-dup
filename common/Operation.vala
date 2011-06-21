@@ -150,7 +150,8 @@ public abstract class Operation : Object
 
     // Get encryption passphrase if needed
     var settings = get_settings();
-    if (settings.get_boolean(ENCRYPT_KEY) && passphrase == null) {
+    if ((needs_password || settings.get_boolean(ENCRYPT_KEY)) &&
+        passphrase == null) {
       needs_password = true;
       passphrase_required(); // will call continue_with_passphrase when ready
     }
@@ -182,7 +183,13 @@ public abstract class Operation : Object
     dup.question.connect((d, t, m) => {question(t, m);});
     dup.secondary_desc_changed.connect((d, t) => {secondary_desc_changed(t);});
     dup.is_full.connect(() => {is_full();});
-    dup.bad_encryption_password.connect(() => {passphrase = null; restart();});
+    dup.bad_encryption_password.connect(() => {
+      // If duplicity gives us a gpg error, we set needs_password so that
+      // we will prompt for it regardless of ENCRYPT_KEY's value.
+      needs_password = true;
+      passphrase = null;
+      restart();
+    });
   }
 
   public async void continue_with_passphrase(string? passphrase)
@@ -242,10 +249,13 @@ public abstract class Operation : Object
     yield set_session_inhibited(false);
     unclaim_bus();
     
-    if (success && passphrase == "") {
-      // User entered no password.  Turn off encryption
+    if (success) {
+      // Update encryption preference as needed.
+      // User may have entered no password when prompted, thus we should blank
+      // out the pref.  Or, user may have had to enter a password when they
+      // didn't set the pref, so we should do it for them.
       var settings = get_settings();
-      settings.set_boolean(ENCRYPT_KEY, false);
+      settings.set_boolean(ENCRYPT_KEY, passphrase != "" && passphrase != null);
     }
     
     done(success, cancelled);
