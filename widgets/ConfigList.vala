@@ -29,7 +29,28 @@ public class ConfigList : ConfigWidget
   {
     Object(size_group: sg, key: key, ns: ns);
   }
-  
+
+  // Assumes key is simple ascii
+  static string convert_key_to_a11y_name(string key)
+  {
+    var name = new StringBuilder();
+    var next_upper = true;
+    int i = 0;
+    unichar ch;
+    while ((ch = key.get_char(i++)) != 0) {
+      if (ch == '-') {
+        next_upper = true;
+        continue;
+      }
+      if (next_upper) {
+        ch = ch.toupper();
+        next_upper = false;
+      }
+      name.append_unichar(ch);
+    }
+    return name.str;
+  }
+
   Gtk.TreeView tree;
   Gtk.Button add_button;
   Gtk.Button remove_button;
@@ -39,7 +60,13 @@ public class ConfigList : ConfigWidget
     tree.set("model", model,
              "headers-visible", false);
     mnemonic_widget = tree;
-    
+
+    var a11y_name = convert_key_to_a11y_name(key);
+
+    var accessible = tree.get_accessible();
+    if (accessible != null)
+      accessible.set_name(a11y_name);
+
     tree.insert_column_with_attributes(-1, null, new Gtk.CellRendererPixbuf(),
                                        "gicon", 2);
     
@@ -49,9 +76,15 @@ public class ConfigList : ConfigWidget
     
     add_button = new Gtk.Button.from_stock(Gtk.Stock.ADD);
     add_button.clicked.connect(handle_add);
-    
+    accessible = add_button.get_accessible();
+    if (accessible != null)
+      accessible.set_name(a11y_name + "Add");
+
     remove_button = new Gtk.Button.from_stock(Gtk.Stock.REMOVE);
     remove_button.clicked.connect(handle_remove);
+    accessible = remove_button.get_accessible();
+    if (accessible != null)
+      accessible.set_name(a11y_name + "Remove");
 
     if (size_group != null) {
       size_group.add_widget(add_button);
@@ -61,7 +94,7 @@ public class ConfigList : ConfigWidget
     var scroll = new Gtk.ScrolledWindow(null, null);
     scroll.hscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
     scroll.vscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
-    
+
     var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
     var vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
     

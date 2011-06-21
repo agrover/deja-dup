@@ -131,7 +131,7 @@ public class Preferences : Gtk.Box
     var tree = new Gtk.TreeView.with_model(cat_model);
     var accessible = tree.get_accessible();
     if (accessible != null) {
-      accessible.name = _("Categories");
+      accessible.name = "Categories";
       accessible.description = _("Categories");
     }
     tree.headers_visible = false;

@@ -99,7 +99,7 @@ public class ConfigLocation : ConfigWidget
 
     var accessible = button.get_accessible();
     if (accessible != null) {
-      accessible.name = _("Location");
+      accessible.name = "Location";
     }
 
     Gtk.TreeIter iter;
