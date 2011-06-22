@@ -400,14 +400,16 @@ public class AssistantRestore : AssistantOperation
     var xid = Gdk.X11Window.get_xid(this.get_window());
 
     query_op = new DejaDup.OperationStatus((uint)xid);
-    query_op.collection_dates.connect(handle_collection_dates);
-    query_op.done.connect(query_finished);
     op = query_op;
-    op.backend.mount_op = new MountOperationAssistant(this);
-    op.passphrase_required.connect(get_passphrase);
-    op.raise_error.connect((o, e, d) => {show_error(e, d);});
 
-    query_op.start();
+    op.done.connect(query_finished);
+    op.raise_error.connect((o, e, d) => {show_error(e, d);});
+    op.passphrase_required.connect(get_passphrase);
+    query_op.collection_dates.connect(handle_collection_dates);
+    op.backend.mount_op = new MountOperationAssistant(this);
+    op.backend.pause_op.connect(pause_op);
+
+    op.start();
   }
   
   protected override void do_prepare(Assistant assist, Gtk.Widget page)

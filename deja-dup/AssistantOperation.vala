@@ -700,7 +700,7 @@ public abstract class AssistantOperation : Assistant
     Gtk.main();
   }
 
-  void pause_op(DejaDup.Backend back, string header, string msg)
+  protected void pause_op(DejaDup.Backend back, string header, string msg)
   {
     // Basically a question without a response expected
     set_page_title(question_page, header);
