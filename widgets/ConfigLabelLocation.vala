@@ -40,8 +40,7 @@ public class ConfigLabelLocation : ConfigLabel
     label.width_chars = 30;
     img = new Gtk.Image.from_icon_name("folder", Gtk.IconSize.MENU);
     img.set("yalign", 0.0f);
-    hbox.pack_start(img, false, false, 0);
-    hbox.reorder_child(img, 0);
+    fill_box();
     watch_key(BACKEND_KEY);
     watch_key(null, (file_root = DejaDup.get_settings(FILE_ROOT)));
     watch_key(null, (s3_root = DejaDup.get_settings(S3_ROOT)));
@@ -49,9 +48,21 @@ public class ConfigLabelLocation : ConfigLabel
     watch_key(null, (rackspace_root = DejaDup.get_settings(RACKSPACE_ROOT)));
     set_from_config();
   }
-  
+
+  protected override void fill_box()
+  {
+    if (img == null)
+      return;
+
+    hbox.pack_start(img, false, false, 0);
+    hbox.pack_start(label, true, true, 0);
+  }
+
   protected override async void set_from_config()
   {
+    if (img == null)
+      return;
+
     var backend = Backend.get_default();
 
     string desc = null;
@@ -65,13 +76,11 @@ public class ConfigLabelLocation : ConfigLabel
       label.label = _("Unknown");
     label.label = desc;
 
-    if (img != null) {
-      Icon icon = backend.get_icon();
-      if (icon == null)
-        img.set_from_icon_name("folder", Gtk.IconSize.MENU);
-      else
-        img.set_from_gicon(icon, Gtk.IconSize.MENU);
-    }
+    Icon icon = backend.get_icon();
+    if (icon == null)
+      img.set_from_icon_name("folder", Gtk.IconSize.MENU);
+    else
+      img.set_from_gicon(icon, Gtk.IconSize.MENU);
   }
 }
 

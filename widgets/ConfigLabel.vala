@@ -34,11 +34,16 @@ public class ConfigLabel : ConfigWidget
     label = new Gtk.Label("");
     label.set("xalign", 0.0f);
     hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
-    hbox.pack_start(label, true, true, 0);
     add(hbox);
+    fill_box();
     set_from_config();
   }
-  
+
+  protected virtual void fill_box()
+  {
+    hbox.pack_start(label, true, true, 0);
+  }
+
   protected override async void set_from_config()
   {
     label.label = settings.get_string(key);
