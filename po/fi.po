@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-06-12 01:38-0400\n"
-"PO-Revision-Date: 2011-05-31 06:27+0000\n"
-"Last-Translator: Eero <Unknown>\n"
+"POT-Creation-Date: 2011-06-13 09:49-0400\n"
+"PO-Revision-Date: 2011-06-13 23:46+0000\n"
+"Last-Translator: Elias Julkunen <elias.julkunen@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-06-13 04:38+0000\n"
+"X-Launchpad-Export-Date: 2011-06-15 04:40+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -51,7 +51,7 @@ msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
 msgstr ""
-"Vapaaehtoinen nimi kansiolle johon tiedostot tallennetaan. Tämä kansio "
+"Vapaaehtoinen nimi kansiolle, jonne tiedostot tallennetaan. Tämä kansio "
 "luodaan valittuun sijaintiin."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
@@ -98,26 +98,28 @@ msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
 msgstr ""
-"Jos varmuuskopio tulee ulkoiselle medialle on tämä sen kansion polku."
+"Jos varmuuskopio tulee ulkoiselle medialle, tämä on kansion polku sillä "
+"medialla."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:13
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
-msgstr "Jos varmuuskopio tulee ulkoiselle medialle on tämä sen kuvake."
+msgstr "Jos varmuuskopio tulee ulkoiselle medialle, tämä on median kuvake."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:14
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
 msgstr ""
-"Jos varmuuskopio tulee ulkoiselle medialle on tämä sen pidempi kuvaavampi "
-"nimi."
+"Jos varmuuskopio tulee ulkoiselle medialle, tämä on median pidempi, "
+"kuvaavampi nimi."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:15
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
-msgstr "Jos varmuuskopio tulee ulkoiselle medialle on tämä sen lyhyt nimi."
+msgstr ""
+"Jos varmuuskopio tulee ulkoiselle medialle, tämä on median lyhyt nimi."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:16
 msgid "Location in which to hold the backup files."
@@ -176,24 +178,28 @@ msgid ""
 "The last time Déjà Dup successfully completed a backup. This time should be "
 "in ISO 8601 format."
 msgstr ""
+"Déjà Dupin viimeisin onnistunut varmuuskopiointikerta.  Ajan tulisi olla "
+"standardin ISO 8601 määräämässä muodossa."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
 msgid ""
 "The last time Déjà Dup successfully completed a restore. This time should be "
 "in ISO 8601 format."
 msgstr ""
+"Déjà Dupin viimeisin onnistunut palautuskerta. Ajan tulisi olla standardin "
+"ISO 8601 määräämässä muodossa."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The last time Déjà Dup was run"
-msgstr "Milloin Déjà Dupia käytettiin edellisen kerran"
+msgstr "Déjà Dupin viimeisin suorituskerta"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
 msgstr ""
-"Milloin Déjà Dupia käytettiin onnistuneesti edellisen kerran. Tämän ajan "
-"tulisi olla standardin ISO 8601 määräämässä muodossa."
+"Déjà Dupin viimeisin suorituskerta. Ajan tulisi olla standardin ISO 8601 "
+"määräämässä muodossa."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "The number of days between backups."
@@ -502,13 +508,15 @@ msgid ""
 "Could not understand duplicity version ‘%s’.\n"
 "\n"
 msgstr ""
-"Dublicityn version '%s' määritys epäonnistui.\n"
+"Dublicityn version \"%s\" määritys epäonnistui.\n"
 "\n"
 
 #: ../common/DuplicityInfo.vala:151
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
+"Déjà Dup -varmuuskopiointityökalu ei voi toimia ilman sovellusta duplicity, "
+"joten se suljetaan nyt."
 
 #: ../common/DuplicityInfo.vala:155
 msgid "Duplicity’s version is too old"
@@ -520,6 +528,8 @@ msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
 "only found version %d.%d.%.2d"
 msgstr ""
+"Déjà Dup -varmuuskopiointityökalu vaatii vähintään version %d.%d.%.2d "
+"sovelluksesta duplicity, mutta vain versio %d.%d.%.2d löydettiin."
 
 #: ../common/Duplicity.vala:128 ../common/Duplicity.vala:180
 msgid "Paused (no network)"
@@ -536,6 +546,7 @@ msgstr "Valmistellaan..."
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr ""
+"Varmuuskopiota \"%s\" ei voitu palauttaa: tiedostopolku oli epäkelpo."
 
 #. Tiny backup location.  Suggest they get a larger one.
 #: ../common/Duplicity.vala:501
@@ -689,7 +700,7 @@ msgstr "Listataan tiedostoja..."
 
 #: ../common/Operation.vala:276
 msgid "Another Déjà Dup Backup Tool operation is already running"
-msgstr ""
+msgstr "Toinen Déjà Dup -varmuuskopiointityökalun toiminto on jo käynnissä"
 
 #: ../deja-dup/AssistantBackup.vala:31
 msgctxt "back up is verb"
@@ -873,7 +884,7 @@ msgstr "Tiedosto"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:190
 msgid "Last seen"
-msgstr ""
+msgstr "Viimeksi nähty"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:205
 msgid "Restore which Files?"
@@ -936,7 +947,7 @@ msgstr "Palauta poistettuja tiedostoja"
 
 #: ../deja-dup/main.vala:57
 msgid "No directory provided"
-msgstr ""
+msgstr "Hakemistoa ei annettu"
 
 #: ../deja-dup/main.vala:62
 msgid "Only one directory can be shown at once"
@@ -944,7 +955,7 @@ msgstr "Vain yksi kansio on mahdollista näyttää kerralla"
 
 #: ../deja-dup/main.vala:83
 msgid "[FILES…]"
-msgstr ""
+msgstr "[TIEDOSTOT...]"
 
 #: ../deja-dup/main.vala:84
 msgid "DIRECTORY"
@@ -957,6 +968,9 @@ msgid ""
 "the Right Way (encrypted, off-site, and regular) and uses duplicity as\n"
 "the backend."
 msgstr ""
+"Déjà Dup on yksinkertainen varmuuskopiointityökalu. Se piilottaa\n"
+"oikein (salattu, ulkoistettu ja säännöllinen) varmuuskopioimisen\n"
+"monimutkaisuuden ja käyttää duplicitya taustaohjelmana."
 
 #: ../deja-dup/main.vala:148
 msgid "Directory does not exists"
@@ -964,11 +978,11 @@ msgstr "Kansiota ei ole olemassa"
 
 #: ../deja-dup/main.vala:152
 msgid "You must provide a directory, not a file"
-msgstr ""
+msgstr "Sinun täytyy antaa hakemisto, ei tiedostoa."
 
 #: ../deja-dup/main.vala:164
 msgid "You must specify a mode"
-msgstr ""
+msgstr "Sinun täytyy määrittää tila."
 
 #. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
@@ -1008,7 +1022,7 @@ msgstr "_Toimialue:"
 
 #: ../deja-dup/Prompt.vala:37
 msgid "Keep your files safe by backing up regularly"
-msgstr ""
+msgstr "Pidä tiedostosi turvassa varmuuskopioimalla ne säännöllisesti"
 
 #: ../deja-dup/Prompt.vala:42
 msgid ""
@@ -1016,22 +1030,24 @@ msgid ""
 "a backup. In the case of a disaster, you would be able to recover them from "
 "that backup."
 msgstr ""
+"Tärkeät dokumentit, tiedot ja asetukset voidaan suojata tekemällä niistä "
+"varmuuskopiot. Pahimman tapahtuessa voit palauttaa ne varmuuskopiosta."
 
 #: ../deja-dup/Prompt.vala:48
 msgid "_Don't Show Again"
-msgstr ""
+msgstr "_Älä näytä uudelleen"
 
 #: ../deja-dup/Prompt.vala:50
 msgid "Don't Show Again"
-msgstr ""
+msgstr "Älä näytä uudelleen"
 
 #: ../deja-dup/Prompt.vala:56
 msgid "_Open Backup Settings"
-msgstr ""
+msgstr "_Avaa varmuuskopioasetukset"
 
 #: ../deja-dup/Prompt.vala:58
 msgid "Open Backup Settings"
-msgstr ""
+msgstr "Avaa varmuuskopioasetukset"
 
 #: ../deja-dup/StatusIcon.vala:106
 msgid "_Delay Backup"
@@ -1047,7 +1063,7 @@ msgstr "_Ohita varmuuskopiointi"
 
 #: ../deja-dup/StatusIcon.vala:141
 msgid "Backup completed"
-msgstr ""
+msgstr "Varmuuskopionti valmistui"
 
 #: ../deja-dup/StatusIcon.vala:184
 msgid "Déjà Du_p"
@@ -1123,7 +1139,7 @@ msgstr "Sa_laa varmuuskopiotiedostot"
 
 #: ../preferences/Preferences.vala:339
 msgid "Storage"
-msgstr ""
+msgstr "Tallennus"
 
 #: ../preferences/Preferences.vala:361
 msgid "I_nclude files in folders:"
@@ -1914,6 +1930,7 @@ msgstr "Ei voinut näyttää %s"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
 #~ "  Eero https://launchpad.net/~eero+launchpad\n"
+#~ "  Elias Julkunen https://launchpad.net/~eliasj\n"
 #~ "  Heikki Kulhia https://launchpad.net/~hessuk\n"
 #~ "  Jiri Grönroos https://launchpad.net/~jiri-gronroos\n"
 #~ "  Jussi https://launchpad.net/~jussiphil\n"
