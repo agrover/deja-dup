@@ -167,10 +167,12 @@ public Date next_run_date()
 // In seconds
 public int get_prompt_delay()
 {
+  TimeSpan span = 0;
   if (DejaDup.in_testing_mode())
-    return 120;
+    span = TimeSpan.MINUTE * 2;
   else
-    return 30 * 24 * 60 * 60;
+    span = TimeSpan.DAY * 30;
+  return span / TimeSpan.SECOND;
 }
 
 public bool has_seen_settings()
@@ -204,7 +206,7 @@ public void make_prompt_check()
     return;
 
   var last_run = new DateTime.from_timeval_local(last_run_tval);
-  last_run.add_seconds(get_prompt_delay());
+  last_run = last_run.add_seconds(get_prompt_delay());
 
   var now = new DateTime.now_local();
   if (last_run.compare(now) <= 0)
