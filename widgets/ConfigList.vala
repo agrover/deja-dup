@@ -145,7 +145,7 @@ public class ConfigList : ConfigWidget
     foreach (File f in list) {
       string s;
       if (f.equal(home))
-        s = _("Home Folder");
+        s = _("Home");
       else if (f.equal(trash))
         s = _("Trash");
       else if (f.has_prefix(home))
