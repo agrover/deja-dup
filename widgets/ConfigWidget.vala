@@ -42,7 +42,9 @@ public abstract class ConfigWidget : Gtk.EventBox
   }
 
   ~ConfigWidget() {
-    foreach (SimpleSettings s in all_settings) {
+    SignalHandler.disconnect_by_func(settings, (void*)key_changed_wrapper, this);
+    foreach (weak SimpleSettings s in all_settings) {
+      SignalHandler.disconnect_by_func(s, (void*)key_changed_wrapper, this);
       s.unref();
     }
   }
