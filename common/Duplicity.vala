@@ -581,13 +581,11 @@ public class Duplicity : Object
         progress_total = progress_count; // save max progress for next run
         if (restart())
           return;
-        success = false;
         break;
       
       case State.DELETE:
         if (restart()) // In case we were interrupting normal flow
           return;
-        success = false;
         break;
       
       case State.CLEANUP:
@@ -596,8 +594,7 @@ public class Duplicity : Object
           return;
         
         // Else, we probably started cleaning up after a cancel.  Just continue
-        // that cancel
-        success = false;
+        // that cancels
         cancelled = true;
         break;
       
@@ -638,7 +635,6 @@ public class Duplicity : Object
 
         if (restart())
           return;
-        success = false;
         break;
       
       case State.CHECK_CONTENTS:
@@ -647,7 +643,6 @@ public class Duplicity : Object
         
         if (restart())
           return;
-        success = false;
         break;
       
       case State.NORMAL:
@@ -656,7 +651,6 @@ public class Duplicity : Object
           if (restore_files != null) {
             if (restart())
               return;
-            success = false;
           }
         }
         else if (mode == Operation.Mode.BACKUP) {
