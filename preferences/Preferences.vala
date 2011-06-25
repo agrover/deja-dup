@@ -66,9 +66,6 @@ public class Preferences : Gtk.Box
                        "xpad", 6,
                        "ypad", 6,
                        "width-request", 300,
-                       "can-default", true,
-                       "has-default", true,
-                       "has-focus", true,
                        "use-markup", true,
                        "use-underline", true);
     continue_button.add(continue_label);
@@ -105,6 +102,8 @@ public class Preferences : Gtk.Box
 
     var page = new Gtk.Alignment(0.0f, 0.5f, 1.0f, 0.0f);
     page.add(hbox);
+
+    continue_button.set("has-focus", true);
 
     page.show();
     return page;
