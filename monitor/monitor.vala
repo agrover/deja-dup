@@ -28,6 +28,7 @@ static Pid pid;
 static bool op_active = false;
 static bool reactive_check;
 static bool first_check = false;
+static DejaDup.SimpleSettings settings = null;
 
 static bool show_version = false;
 static const OptionEntry[] options = {
@@ -302,7 +303,7 @@ static void make_first_check()
 
 static void watch_settings()
 {
-  var settings = DejaDup.get_settings();
+  settings = DejaDup.get_settings();
   settings.changed.connect(prepare_if_necessary);
 }
 
