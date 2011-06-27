@@ -33,6 +33,7 @@ libdeja_dup_la_CFLAGS = $(SHARED_CFLAGS) $(CCPANEL_CFLAGS)
 deja_dup_preferences_CFLAGS = $(SHARED_CFLAGS)
 
 SHARED_LIBS = $(PREF_LIBS) @INTLLIBS@ $(top_builddir)/widgets/libwidgets.la
+libdeja_dup_la_LDFLAGS = -module -avoid-version
 libdeja_dup_la_LIBADD = $(SHARED_LIBS) $(CCPANEL_LIBS)
 deja_dup_preferences_LDADD = $(SHARED_LIBS)
 
