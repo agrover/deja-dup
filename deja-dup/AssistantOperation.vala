@@ -602,12 +602,16 @@ public abstract class AssistantOperation : Assistant
     win.focus_on_map = user_click;
     if (saved_pos)
       win.move(saved_x, saved_y);
+warning("showing: %d, %d, %d", (int)user_click, (int)win.is_active, (int)win.visible);
     if (user_click)
       win.present_with_time(time);
     else if (!win.is_active || !win.visible) {
       win.urgency_hint = true;
-      win.focus_in_event.connect(user_focused);
       win.show();
+      Idle.add(() => {
+        win.focus_in_event.connect(user_focused);
+        return false;
+      });
     }
   }
 
