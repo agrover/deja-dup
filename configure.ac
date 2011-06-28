@@ -30,7 +30,7 @@ AM_INIT_AUTOMAKE([1.11 foreign tar-ustar dist-bzip2 no-dist-gzip])
 AM_SILENT_RULES([yes])
 AM_MAINTAINER_MODE()
 
-GNOME_DOC_INIT
+YELP_HELP_INIT
 GLIB_GSETTINGS
 
 # Checks for programs.

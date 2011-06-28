@@ -17,11 +17,11 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-include $(top_srcdir)/gnome-doc-utils.make
+@YELP_HELP_RULES@
 
-DOC_ID = deja-dup
+HELP_ID = deja-dup
 
-DOC_PAGES = \
+HELP_FILES = \
 	backup-auto.page \
 	backup-first.page \
 	credits.page \
@@ -35,28 +35,10 @@ DOC_PAGES = \
 	restore-worst-case.page \
 	support.page
 
-REAL_LINGUAS = ar cs da de en_GB es eu fi fr gl he hu id it ja lt nb nl pl ps pt_BR ru sv th tr zh_CN zh_TW
-DOC_LINGUAS = POT $(REAL_LINGUAS)
+HELP_LINGUAS = ar cs da de en_GB es eu fi fr gl he hu id it ja lt nb nl pl ps pt_BR ru sv th tr zh_CN zh_TW
 
-$(_DOC_LC_DOCS) : po.stamp
+deja-dup-help.pot: deja-dup.pot
+	cp -a $^ $@
 
-po.stamp: $(wildcard translations/*.po)
-	for p in $?; do $(mkdir_p) $$(basename $$p .po)/; \
-	                cp -a $$p $$(basename $$p .po)/; done
-	touch $@
-
-update-pot: translations/deja-dup-help.pot
-POT/POT.po: $(foreach page,$(DOC_PAGES),C/$(page))
-translations/deja-dup-help.pot: POT/POT.po
-	$(mkdir_p) $(dir $@)
-	sed 's|^#: /.*/\(.*\)|#: \1|g' $^ > $@
-
-dist-hook: doc-dist-hook
-	for p in $(REAL_LINGUAS); do \
-		sed -i "s|<list><title>.*</title><item><p>translator-credits</p></item></list>||" "$(distdir)/$$p/credits.page"; \
-	done
-
-EXTRA_DIST = translations po.stamp
-DISTCLEANFILES = translations/deja-dup-help.pot
-
-.PHONY: update-pot
+pot: deja-dup-help.pot
+all: deja-dup-help.pot
