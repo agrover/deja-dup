@@ -97,7 +97,10 @@ class U1Checker : Checker
     }
 
     if (!complete) {
-      pyu1 = PythonChecker.get_checker("ubuntuone");
+      // A bit of abstraction leakage here; we have to keep these imports in
+      // line with what duplicity uses.  Maybe we should add to duplicity a way
+      // to ask 'can I use this backend?'
+      pyu1 = PythonChecker.get_checker("ubuntuone.platform.credentials, ubuntuone.couch.auth");
       if (pyu1.complete) {
         available = pyu1.available;
         complete = pyu1.complete;
