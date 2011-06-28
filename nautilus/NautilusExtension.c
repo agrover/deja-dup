@@ -2,7 +2,7 @@
 /*
     This file is part of Déjà Dup.
     © 2004–2005 Free Software Foundation, Inc.
-    © 2009,2010,2011 Michael Terry <mike@mterry.name>
+    © 2009–2011 Michael Terry <mike@mterry.name>
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

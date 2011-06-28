@@ -2,8 +2,7 @@
 # -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
 #
 # This file is part of Déjà Dup.
-# © 2008,2009,2010,2011 Michael Terry <mike@mterry.name>
-# © 2011 Canonical Ltd
+# For copyright information, see AUTHORS.
 #
 # Déjà Dup is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

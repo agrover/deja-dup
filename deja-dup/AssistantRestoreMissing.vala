@@ -1,8 +1,7 @@
 /* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
-    © 2010 Urban Skudnik <urban.skudnik@gmail.com>
-    © 2010 Michael Terry <mike@mterry.name>
+    For copyright information, see AUTHORS.
 
     Déjà Dup is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
