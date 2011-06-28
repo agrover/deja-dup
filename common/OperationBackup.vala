@@ -30,10 +30,8 @@ public class OperationBackup : Operation
   protected async override void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
     /* If successfully completed, update time of last backup and run base operation_finished */
-    if (success) {
-      try {DejaDup.update_last_run_timestamp(DejaDup.TimestampType.BACKUP);}
-      catch (Error e) {warning("%s\n", e.message);}
-    }
+    if (success)
+      DejaDup.update_last_run_timestamp(DejaDup.TimestampType.BACKUP);
     
     base.operation_finished(dup, success, cancelled);
   }

@@ -161,12 +161,7 @@ public abstract class StatusIcon : Object
     hide_all();
 
     // Fake a run by setting today's timestamp as the 'last-run' setting
-    try {
-      DejaDup.update_last_run_timestamp(DejaDup.TimestampType.NONE);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    DejaDup.update_last_run_timestamp(DejaDup.TimestampType.NONE);
 
     op.cancel();
   }

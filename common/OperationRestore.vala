@@ -87,8 +87,7 @@ public class OperationRestore : Operation
         success = false;
       else {
         cleanup_source();
-        try {DejaDup.update_last_run_timestamp(DejaDup.TimestampType.RESTORE);}
-        catch (Error e) {warning("%s\n", e.message);}
+        DejaDup.update_last_run_timestamp(DejaDup.TimestampType.RESTORE);
       }
     }
     else if (!cancelled) {
