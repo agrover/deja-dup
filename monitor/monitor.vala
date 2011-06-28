@@ -30,6 +30,8 @@ static bool reactive_check;
 static bool first_check = false;
 static DejaDup.SimpleSettings settings = null;
 
+static bool testing_delay = true;
+
 static bool show_version = false;
 static const OptionEntry[] options = {
   {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
@@ -65,7 +67,8 @@ static void volume_added(VolumeMonitor vm, Volume vol)
 
 static bool is_ready(out string when)
 {
-  if (DejaDup.in_testing_mode() && note == null) {
+  if (DejaDup.in_testing_mode() && testing_delay) {
+    testing_delay = false;
     when = "Testing";
     return false;
   }
@@ -84,40 +87,9 @@ static bool handle_options(out int status)
   return true;
 }
 
-// This is slightly more tortuous than I'd like.  API allows us to convert Date
-// to Time.  We can then convert Time to seconds-since-epoch and stuffs that
-// into a TimeVal.
-static TimeVal date_to_timeval(Date date)
+static TimeSpan time_until(DateTime date)
 {
-  Time time;
-  date.to_time(out time);
-  
-  // to_time says that sub-day values are sensible, but meaningless.  This
-  // presumably means 0, but we technically can't rely on that.
-  time.hour = 0;
-  time.minute = 0;
-  time.second = 0;
-  
-  time_t timet = time.mktime();
-  
-  TimeVal tval = TimeVal();
-  tval.tv_sec = (long)timet;
-  tval.tv_usec = 0;
-  
-  return tval;
-}
-
-static long seconds_until(Date date)
-{
-  TimeVal cur_time = TimeVal();
-  cur_time.get_current_time();
-  
-  TimeVal next_time = date_to_timeval(date);
-  
-  if (DejaDup.in_testing_mode())
-    return 5;
-  else
-    return next_time.tv_sec - cur_time.tv_sec;
+  return date.difference(new DateTime.now_local());
 }
 
 static void close_pid(Pid child_pid, int status)
@@ -147,11 +119,11 @@ static void notify_delay(string header, string reason)
 
 static bool kickoff()
 {
-  long wait_time;
-  if (!seconds_until_next_run(out wait_time))
+  TimeSpan wait_time;
+  if (!time_until_next_run(out wait_time))
     return false;
   
-  if (!DejaDup.in_testing_mode() && wait_time > 0) {
+  if (wait_time > 0) {
     // Huh?  Shouldn't have been called now.
     prepare_next_run();
     return false;
@@ -206,13 +178,20 @@ static bool kickoff()
       argv[i++] = "--backup";
       argv[i++] = "--auto";
       argv[i++] = null;
-      Process.spawn_async(null, argv, null,
-                          SpawnFlags.SEARCH_PATH |
-                          SpawnFlags.DO_NOT_REAP_CHILD |
-                          SpawnFlags.STDOUT_TO_DEV_NULL |
-                          SpawnFlags.STDERR_TO_DEV_NULL,
-                          null, out pid);
-      ChildWatch.add(pid, close_pid);
+
+      if (DejaDup.in_testing_mode()) {
+        // fake successful and schedule next run
+        DejaDup.update_last_run_timestamp(DejaDup.TimestampType.BACKUP);
+      }
+      else {
+        Process.spawn_async(null, argv, null,
+                            SpawnFlags.SEARCH_PATH |
+                            SpawnFlags.DO_NOT_REAP_CHILD |
+                            SpawnFlags.STDOUT_TO_DEV_NULL |
+                            SpawnFlags.STDERR_TO_DEV_NULL,
+                            null, out pid);
+        ChildWatch.add(pid, close_pid);
+      }
     }
     catch (Error e) {
       warning("%s\n", e.message);
@@ -224,40 +203,41 @@ static bool kickoff()
   return false;
 }
 
-static bool seconds_until_next_run(out long secs)
+static bool time_until_next_run(out TimeSpan time)
 {
   var next_date = DejaDup.next_run_date();
-  if (!next_date.valid()) {
-    debug("Invalid next run date.  Not scheduling a backup.");
+  if (next_date == null) {
+    debug("Automatic backups disabled.  Not scheduling a backup.");
     return false;
   }
   
-  secs = seconds_until(next_date);
+  time = time_until(next_date);
   return true;
 }
 
-static void prepare_run(long wait_time)
+static void prepare_run(TimeSpan wait_time)
 {
   // Stop previous run timeout
   if (timeout_id != 0)
     Source.remove(timeout_id);
-  
-  if (wait_time > 0) {
-    debug("Waiting %ld seconds until next backup.", wait_time);
-    timeout_id = Timeout.add_seconds((uint)wait_time, kickoff);
+
+  TimeSpan secs = wait_time / TimeSpan.SECOND + 1;
+  if (secs > 0) {
+    debug("Waiting %ld seconds until next backup.", secs);
+    timeout_id = Timeout.add_seconds((uint)secs, kickoff);
   }
   else {
-    debug("Late by %ld seconds.  Backing up now.", wait_time * -1);
+    debug("Late by %ld seconds.  Backing up now.", secs * -1);
     kickoff();
   }
 }
 
 static void prepare_tomorrow()
 {
-  Date tomorrow = DejaDup.today();
-  tomorrow.add_days(1);
-  var secs = seconds_until(tomorrow);
-  prepare_run(secs);
+  var now = new DateTime.now_local();
+  var tomorrow = now.add(DejaDup.get_day());
+  var time = time_until(tomorrow);
+  prepare_run(time);
 }
 
 static void prepare_next_run()
@@ -265,8 +245,8 @@ static void prepare_next_run()
   if (!first_check) // wait until first official check has happened
     return;
 
-  long wait_time;
-  if (!seconds_until_next_run(out wait_time))
+  TimeSpan wait_time;
+  if (!time_until_next_run(out wait_time))
     return;
   
   prepare_run(wait_time);

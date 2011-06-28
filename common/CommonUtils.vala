@@ -53,18 +53,20 @@ public bool in_testing_mode()
   return (testing_str != null && int.parse(testing_str) > 0);
 }
 
-public void update_last_run_timestamp(TimestampType type) throws Error
+public void update_last_run_timestamp(TimestampType type)
 {
   TimeVal cur_time = TimeVal();
   cur_time.get_current_time();
   var cur_time_str = cur_time.to_iso8601();
   
   var settings = get_settings();
+  settings.delay();
   settings.set_string(LAST_RUN_KEY, cur_time_str);
   if (type == TimestampType.BACKUP)
     settings.set_string(LAST_BACKUP_KEY, cur_time_str);
   else if (type == TimestampType.RESTORE)
     settings.set_string(LAST_RESTORE_KEY, cur_time_str);
+  settings.apply();
 }
 
 public void run_deja_dup(string args, AppLaunchContext? ctx = null,
@@ -93,30 +95,18 @@ public void run_deja_dup(string args, AppLaunchContext? ctx = null,
   }
 }
 
-Date most_recent_scheduled_date(int period)
+DateTime most_recent_scheduled_date(TimeSpan period)
 {
   // Compare days between epoch and current days.  Mod by period to find
   // scheduled dates.
 
-  Date epoch = Date();
-  epoch.set_dmy(1, 1, 1970);
+  var epoch = new DateTime.from_unix_local(0);
+  var cur_date = new DateTime.now_local();
 
-  Date cur_date = today();
+  var between = cur_date.difference(epoch);
+  var mod = between % period;
 
-  int between = epoch.days_between(cur_date);
-  int mod = between % period;
-
-  cur_date.subtract_days(mod);
-  return cur_date;
-}
-
-public Date today()
-{
-  TimeVal cur_time = TimeVal();
-  cur_time.get_current_time();
-  Date cur_date = Date();
-  cur_date.set_time_val(cur_time);
-  return cur_date;
+  return cur_date.add(-1 * mod);
 }
 
 public string last_run_date(TimestampType type)
@@ -132,7 +122,16 @@ public string last_run_date(TimestampType type)
   return last_run_string;
 }
 
-public Date next_run_date()
+/* Seems silly, but helpful for testing */
+public TimeSpan get_day()
+{
+  if (in_testing_mode())
+    return TimeSpan.SECOND * (TimeSpan)10; // a day is 10s when testing
+  else
+    return TimeSpan.DAY;
+}
+
+public DateTime? next_run_date()
 {
   var settings = DejaDup.get_settings();
   var periodic = settings.get_boolean(DejaDup.PERIODIC_KEY);
@@ -141,25 +140,23 @@ public Date next_run_date()
   var last_run_string = last_run_date(TimestampType.BACKUP);
 
   if (!periodic)
-    return Date();
+    return null;
   if (last_run_string == "")
-    return today();
+    return new DateTime.now_local();
   if (period_days <= 0)
     period_days = 1;
 
-  Date last_run = Date();
   TimeVal last_run_tval = TimeVal();
   if (!last_run_tval.from_iso8601(last_run_string))
-    return today();
+    return new DateTime.now_local();
 
-  last_run.set_time_val(last_run_tval);
-  if (!last_run.valid())
-    return today();
+  var period = (TimeSpan)period_days * get_day();
 
-  Date last_scheduled = most_recent_scheduled_date(period_days);
+  var last_run = new DateTime.from_timeval_local(last_run_tval);
+  var last_scheduled = most_recent_scheduled_date(period);
 
   if (last_scheduled.compare(last_run) <= 0)
-    last_scheduled.add_days(period_days);
+    last_scheduled = last_scheduled.add(period);
 
   return last_scheduled;
 }

@@ -97,12 +97,8 @@ public class ConfigLabelBackupDate : ConfigLabel
   protected void set_from_config_next()
   {
     var next = DejaDup.next_run_date();
-    if (next.valid()) {
-      var nextd = new DateTime.local(next.get_year(),
-                                     next.get_month(),
-                                     next.get_day(),
-                                     0, 0, 0.0);
-      label.label = pretty_date_name(nextd);
+    if (next != null) {
+      label.label = pretty_date_name(next);
       empty = false;
     }
     else {
