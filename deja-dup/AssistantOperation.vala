@@ -284,21 +284,32 @@ public abstract class AssistantOperation : Assistant
     int rows = 0;
     Gtk.Widget w, label;
 
-    var page = new Gtk.Table(rows, 2, false);
+    var page = new Gtk.Grid();
     page.set("row-spacing", 6,
              "column-spacing", 6,
              "border-width", 12);
 
+    if (has_password_confirm()) {
+      w = new Gtk.Label("<i>%s\n\n%s\n</i>".printf(_("You might want to write your password down. If you forget it, you will not be able to recover your files."), _("Leave the password blank to disable encryption.")));
+      w.set("xalign", 0.0f,
+            "use-markup", true,
+            "max-width-chars", 25,
+            "wrap", true);
+      page.attach(w, 0, rows, 2, 1);
+      ++rows;
+    }
+
     w = new Gtk.Entry();
     w.set("visibility", false,
+          "hexpand", true,
           "activates-default", true);
     ((Gtk.Entry)w).changed.connect(() => {check_password_validity();});
     label = new Gtk.Label(_("E_ncryption password:"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "xalign", 0.0f);
-    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(label, 0, rows, 1, 1);
+    page.attach(w, 1, rows, 1, 1);
     ++rows;
     encrypt_entry = (Gtk.Entry)w;
 
@@ -306,14 +317,15 @@ public abstract class AssistantOperation : Assistant
     if (has_password_confirm()) {
       w = new Gtk.Entry();
       w.set("visibility", false,
+            "hexpand", true,
             "activates-default", true);
       ((Gtk.Entry)w).changed.connect(() => {check_password_validity();});
       label = new Gtk.Label(_("Confir_m password:"));
       label.set("mnemonic-widget", w,
                 "use-underline", true,
                 "xalign", 0.0f);
-      page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-      page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
+      page.attach(label, 0, rows, 1, 1);
+      page.attach(w, 1, rows, 1, 1);
       ++rows;
       encrypt_confirm_entry = (Gtk.Entry)w;
     }
@@ -324,11 +336,11 @@ public abstract class AssistantOperation : Assistant
       if (encrypt_confirm_entry != null)
         encrypt_confirm_entry.visibility = button.get_active();
     });
-    page.attach(w, 0, 2, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(w, 0, rows, 2, 1);
     ++rows;
 
     w = new Gtk.CheckButton.with_mnemonic(_("_Remember password"));
-    page.attach(w, 0, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(w, 0, rows, 2, 1);
     ++rows;
     encrypt_remember = (Gtk.CheckButton)w;
 
