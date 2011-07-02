@@ -49,6 +49,9 @@ public abstract class AssistantOperation : Assistant
   Gtk.Entry encrypt_confirm_entry;
   Gtk.CheckButton encrypt_remember;
   protected Gtk.Widget password_page {get; private set;}
+  List<Gtk.Widget> first_password_widgets;
+  MainLoop password_ask_loop;
+  MainLoop password_find_loop;
 
   Gtk.Label question_label;
   protected Gtk.Widget question_page {get; private set;}
@@ -199,7 +202,7 @@ public abstract class AssistantOperation : Assistant
       adjust.value = adjust.upper;
   }
   
-  void set_secondary_label(DejaDup.Operation op, string text)
+  protected void set_secondary_label(string text)
   {
     Gtk.Box page = (Gtk.Box)progress_page;
     if (text != null && text != "") {
@@ -289,15 +292,14 @@ public abstract class AssistantOperation : Assistant
              "column-spacing", 6,
              "border-width", 12);
 
-    if (has_password_confirm()) {
-      w = new Gtk.Label("<i>%s\n\n%s\n</i>".printf(_("You might want to write your password down. If you forget it, you will not be able to recover your files."), _("Leave the password blank to disable encryption.")));
-      w.set("xalign", 0.0f,
-            "use-markup", true,
-            "max-width-chars", 25,
-            "wrap", true);
-      page.attach(w, 0, rows, 2, 1);
-      ++rows;
-    }
+    w = new Gtk.Label("<i>%s\n\n%s\n</i>".printf(_("You might want to write your password down. If you forget it, you will not be able to recover your files."), _("Leave the password blank to disable encryption.")));
+    w.set("xalign", 0.0f,
+          "use-markup", true,
+          "max-width-chars", 25,
+          "wrap", true);
+    page.attach(w, 0, rows, 2, 1);
+    first_password_widgets.append(w);
+    ++rows;
 
     w = new Gtk.Entry();
     w.set("visibility", false,
@@ -314,27 +316,26 @@ public abstract class AssistantOperation : Assistant
     encrypt_entry = (Gtk.Entry)w;
 
     // Add a confirmation entry if this is user's first time
-    if (has_password_confirm()) {
-      w = new Gtk.Entry();
-      w.set("visibility", false,
-            "hexpand", true,
-            "activates-default", true);
-      ((Gtk.Entry)w).changed.connect(() => {check_password_validity();});
-      label = new Gtk.Label(_("Confir_m password:"));
-      label.set("mnemonic-widget", w,
-                "use-underline", true,
-                "xalign", 0.0f);
-      page.attach(label, 0, rows, 1, 1);
-      page.attach(w, 1, rows, 1, 1);
-      ++rows;
-      encrypt_confirm_entry = (Gtk.Entry)w;
-    }
+    w = new Gtk.Entry();
+    w.set("visibility", false,
+          "hexpand", true,
+          "activates-default", true);
+    ((Gtk.Entry)w).changed.connect(() => {check_password_validity();});
+    label = new Gtk.Label(_("Confir_m password:"));
+    label.set("mnemonic-widget", w,
+              "use-underline", true,
+              "xalign", 0.0f);
+    page.attach(label, 0, rows, 1, 1);
+    page.attach(w, 1, rows, 1, 1);
+    ++rows;
+    encrypt_confirm_entry = (Gtk.Entry)w;
+    first_password_widgets.append(w);
+    first_password_widgets.append(label);
 
     w = new Gtk.CheckButton.with_mnemonic(_("_Show password"));
     ((Gtk.CheckButton)w).toggled.connect((button) => {
       encrypt_entry.visibility = button.get_active();
-      if (encrypt_confirm_entry != null)
-        encrypt_confirm_entry.visibility = button.get_active();
+      encrypt_confirm_entry.visibility = button.get_active();
     });
     page.attach(w, 0, rows, 2, 1);
     ++rows;
@@ -391,8 +392,6 @@ public abstract class AssistantOperation : Assistant
     
     return page;
   }
-
-  protected virtual bool has_password_confirm() {return false;}
 
   void add_confirm_page()
   {
@@ -488,7 +487,6 @@ public abstract class AssistantOperation : Assistant
     op.action_file_changed.connect(set_progress_label_file);
     op.progress.connect(show_progress);
     op.question.connect(show_question);
-    op.secondary_desc_changed.connect(set_secondary_label);
     op.backend.mount_op = new MountOperationAssistant(this);
     op.backend.pause_op.connect(pause_op);
 
@@ -612,7 +610,6 @@ public abstract class AssistantOperation : Assistant
     win.focus_on_map = user_click;
     if (saved_pos)
       win.move(saved_x, saved_y);
-warning("showing: %d, %d, %d", (int)user_click, (int)win.is_active, (int)win.visible);
     if (user_click)
       win.present_with_time(time);
     else if (!win.is_active || !win.visible) {
@@ -628,11 +625,13 @@ warning("showing: %d, %d, %d", (int)user_click, (int)win.is_active, (int)win.vis
   void found_passphrase(GnomeKeyring.Result result, string? str)
   {
     if (str != null) {
-      op.continue_with_passphrase(str);
+      op.set_passphrase(str);
     }
     else {
       ask_passphrase();
     }
+    password_find_loop.quit();
+    password_find_loop = null;
   }
 
   protected void get_passphrase()
@@ -648,6 +647,9 @@ warning("showing: %d, %d, %d", (int)user_click, (int)win.is_active, (int)win.vis
       // saved or entered passphrase didn't work.  So don't bother
       // searching a second time.
       searched_for_passphrase = true;
+      // block until found
+      password_find_loop = new MainLoop(null);
+      password_find_loop.run();
     }
     else {
       // just jump straight to asking user
@@ -661,7 +663,7 @@ warning("showing: %d, %d, %d", (int)user_click, (int)win.is_active, (int)win.vis
 
   void check_password_validity()
   {
-    if (encrypt_confirm_entry != null) {
+    if (encrypt_confirm_entry.visible) {
       var passphrase = encrypt_entry.get_text();
       var passphrase2 = encrypt_confirm_entry.get_text();
       var valid = (passphrase == passphrase2);
@@ -671,11 +673,36 @@ warning("showing: %d, %d, %d", (int)user_click, (int)win.is_active, (int)win.vis
       allow_forward(true);
   }
 
-  void ask_passphrase()
+  void configure_password_page(bool first)
   {
-    interrupt(password_page);
+    foreach (Gtk.Widget w in first_password_widgets) {
+      w.visible = first;
+    }
     check_password_validity();
+  }
+
+  void stop_password_loop(Assistant dlg, int resp)
+  {
+    Idle.add(() => {
+      password_ask_loop.quit();
+      password_ask_loop = null;
+      return false;
+    });
+    response.disconnect(stop_password_loop);
+  }
+
+  protected void ask_passphrase(bool first = false)
+  {
+    op.needs_password = true;
+    configure_password_page(first);
+    interrupt(password_page);
+    encrypt_entry.select_region(0, -1);
+    encrypt_entry.grab_focus();
     force_visible(false);
+    // pause until we can provide password by entering new main loop
+    password_ask_loop = new MainLoop(null);
+    response.connect(stop_password_loop);
+    password_ask_loop.run();
   }
 
   protected void provide_password()
@@ -694,8 +721,8 @@ warning("showing: %d, %d, %d", (int)user_click, (int)win.is_active, (int)win.vis
                                     "type", "passphrase");
       }
     }
-    
-    op.continue_with_passphrase(passphrase);
+
+    op.set_passphrase(passphrase);
   }
 
   void stop_question(Assistant dlg, int resp)

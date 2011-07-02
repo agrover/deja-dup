@@ -39,11 +39,10 @@ public abstract class Operation : Object
   public signal void progress(double percent);
   public signal void passphrase_required();
   public signal void question(string title, string msg);
-  public signal void secondary_desc_changed(string msg);
-  public signal void is_full();
+  public signal void is_full(bool first);
 
   public uint xid {get; construct;}
-  public bool needs_password {get; private set;}
+  public bool needs_password {get; set;}
   public Backend backend {get; private set;}
   public bool use_progress {get {return dup.use_progress;}
                             set {dup.use_progress = value;}}
@@ -101,6 +100,7 @@ public abstract class Operation : Object
   SimpleSettings settings;
   protected Duplicity dup;
   protected string passphrase;
+  bool finished = false;
   construct
   {
     backend = Backend.get_default();
@@ -147,16 +147,18 @@ public abstract class Operation : Object
 
     connect_to_dup();
 
+    ref(); // don't know what might happen in passphrase_required call
+
     // Get encryption passphrase if needed
-    var settings = get_settings();
-    if ((needs_password || settings.get_boolean(ENCRYPT_KEY)) &&
-        passphrase == null) {
+    if (needs_password && passphrase == null) {
       needs_password = true;
-      passphrase_required(); // will call continue_with_passphrase when ready
+      passphrase_required(); // will block and call set_passphrase when ready
     }
-    else {
-      continue_with_passphrase(passphrase);
-    }
+
+    if (!finished)
+      continue_with_passphrase();
+
+    unref();
   }
 
   public void cancel()
@@ -180,8 +182,7 @@ public abstract class Operation : Object
     dup.action_file_changed.connect((d, f, b) => {action_file_changed(f, b);});
     dup.progress.connect((d, p) => {progress(p);});
     dup.question.connect((d, t, m) => {question(t, m);});
-    dup.secondary_desc_changed.connect((d, t) => {secondary_desc_changed(t);});
-    dup.is_full.connect(() => {is_full();});
+    dup.is_full.connect((first) => {is_full(first);});
     dup.bad_encryption_password.connect(() => {
       // If duplicity gives us a gpg error, we set needs_password so that
       // we will prompt for it regardless of ENCRYPT_KEY's value.
@@ -191,13 +192,18 @@ public abstract class Operation : Object
     });
   }
 
-  public async void continue_with_passphrase(string? passphrase)
+  public void set_passphrase(string? passphrase)
+  {
+    needs_password = false;
+    this.passphrase = passphrase;
+    dup.encrypt_password = passphrase;
+  }
+
+  async void continue_with_passphrase()
   {
    /*
     * Continues with operation after passphrase has been acquired.
     */
-    needs_password = false;
-    this.passphrase = passphrase;
     try {
       backend.envp_ready.connect(continue_with_envp);
       yield backend.get_envp();
@@ -223,18 +229,12 @@ public abstract class Operation : Object
       operation_finished(dup, false, false);
       return;
     }
-    
-    bool encrypted = (passphrase != null && passphrase != "");
-    if (encrypted)
-      envp.append("PASSPHRASE=%s".printf(passphrase));
-    else
-      envp.append("PASSPHRASE="); // duplicity sometimes asks for a passphrase when it doesn't need it (during cleanup), so this stops it from prompting the user and us getting an exception as a result
-      
+
     try {
       List<string> argv = make_argv();
       backend.add_argv(mode, ref argv);
       
-      dup.start(backend, encrypted, argv, envp);
+      dup.start(backend, argv, envp);
     }
     catch (Error e) {
       raise_error(e.message, null);
@@ -245,6 +245,8 @@ public abstract class Operation : Object
   
   protected async virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
+    finished = true;
+
     yield set_session_inhibited(false);
     unclaim_bus();
     

@@ -41,8 +41,7 @@ public class Duplicity : Object
   public signal void collection_dates(List<string>? dates);
   public signal void listed_current_files(string date, string file);
   public signal void question(string title, string msg);
-  public signal void secondary_desc_changed(string msg);
-  public signal void is_full();
+  public signal void is_full(bool first);
   public signal void bad_encryption_password();
   
   public Operation.Mode original_mode {get; construct;}
@@ -55,6 +54,7 @@ public class Duplicity : Object
   public List<File> includes;
   public List<File> excludes;
   public bool use_progress {get; set; default = true;}
+  public string encrypt_password {private get; set;}
   
   private List<File> _restore_files;
   public List<File> restore_files {
@@ -140,7 +140,7 @@ public class Duplicity : Object
     }
   }
   
-  public virtual void start(Backend backend, bool encrypted,
+  public virtual void start(Backend backend,
                             List<string>? argv, List<string>? envp)
   {
     // save arguments for calling duplicity again later
@@ -160,8 +160,6 @@ public class Duplicity : Object
     foreach (string s in argv) saved_argv.append(s);
     foreach (string s in envp) saved_envp.append(s);
     backend.add_argv(Operation.Mode.INVALID, ref backend_argv);
-    if (!encrypted)
-      backend_argv.append("--no-encryption");
     
     if (mode == Operation.Mode.BACKUP)
       process_include_excludes();
@@ -622,15 +620,9 @@ public class Duplicity : Object
           }
           if (!full_backup.valid() || threshold.compare(full_backup) > 0) {
             is_full_backup = true;
-            if (!full_backup.valid())
-              secondary_desc_changed(_("Creating the first backup.  This may take a while."));
-            else
-              secondary_desc_changed(_("Creating a fresh backup to protect against backup corruption.  This will take longer than normal."));
+            is_full(!full_backup.valid());
           }
         }
-
-        if (is_full_backup)
-          is_full();
 
         if (restart())
           return;
@@ -1320,10 +1312,18 @@ public class Duplicity : Object
       }
     }
 
-    /* Set enviormental parameters */
+    /* Set environmental parameters */
     var envp = new List<string>();
     foreach (string s in saved_envp) envp.append(s);
     foreach (string s in envp_extra) envp.append(s);
+
+    if (encrypt_password == null || encrypt_password == "") {
+      argv.append("--no-encryption");
+      envp.append("PASSPHRASE="); // duplicity sometimes asks for a passphrase when it doesn't need it (during cleanup), so this stops it from prompting the user and us getting an exception as a result
+    }
+    else {
+      envp.append("PASSPHRASE=%s".printf(encrypt_password));
+    }
 
     /* Start duplicity instance */
     try {

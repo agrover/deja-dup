@@ -42,10 +42,21 @@ public class AssistantBackup : AssistantOperation
 
     ensure_status_icon(rv);
     if (automatic && (status_icon == null || !status_icon.show_automatic_progress)) {
-      // If in automatic mode, only use progress if it's a full backup
+      // If in automatic mode, only use progress if it's a full backup (see below)
       rv.use_progress = false;
-      rv.is_full.connect((op) => {op.use_progress = true;});
     }
+
+    rv.is_full.connect((op, first) => {
+      op.use_progress = true;
+      set_secondary_label(first ? _("Creating the first backup.  This may take a while.")
+                                : _("Creating a fresh backup to protect against backup corruption.  This will take longer than normal."));
+
+      // Ask user for password if first backup and encryption is requested
+      var settings = DejaDup.get_settings();
+      if (first && settings.get_boolean(DejaDup.ENCRYPT_KEY)) {
+        ask_passphrase(first);
+      }
+    });
 
     if (automatic)
       hide_for_now();
@@ -71,14 +82,6 @@ public class AssistantBackup : AssistantOperation
     // Translators:  This is the phrase 'Backing up' in the larger phrase
     // "Backing up '%s'".  %s is a filename.
     return _("Backing up:");
-  }
-
-  protected override bool has_password_confirm()
-  {
-    // Confirm password if this is the user's first backup
-    // (TODO: confirm if there is no backup already in the backup location)
-    var val = DejaDup.last_run_date(DejaDup.TimestampType.BACKUP);
-    return val == "";
   }
 
   protected override void do_prepare(Assistant assist, Gtk.Widget page)
