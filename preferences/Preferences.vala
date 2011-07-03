@@ -116,7 +116,7 @@ public class Preferences : Gtk.Box
     Gtk.Box vbox;
     Gtk.Box hbox;
     Gtk.Label label;
-    Gtk.Table table;
+    Gtk.Grid table;
     int row;
     Gtk.TreeIter iter;
     int i = 0;
@@ -149,7 +149,7 @@ public class Preferences : Gtk.Box
 
     page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
     vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 24);
-    table = new Gtk.Table(0, 0, false);
+    table = new Gtk.Grid();
     table.row_spacing = 6;
     table.column_spacing = 6;
     row = 0;
@@ -169,41 +169,35 @@ public class Preferences : Gtk.Box
     vbox.pack_start(hbox, false, false);
 
     w = new DejaDup.ConfigLabelLocation();
+    w.set("hexpand", true);
     label = new Gtk.Label(_("Where:"));
     label.set("xalign", 0.0f,
               "yalign", 0.0f);
     label_sizes.add_widget(label);
 
-    table.attach(label, 0, 1, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    table.attach(w, 1, 2, row, row + 1,
-                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 Gtk.AttachOptions.FILL, 0, 0);
+    table.attach(label, 0, row, 1, 1);
+    table.attach(w, 1, row, 1, 1);
     ++row;
 
     label = new Gtk.Label(_("Include files from:"));
     label.set("xalign", 0.0f, "yalign", 0.0f);
     label_sizes.add_widget(label);
     w = new DejaDup.ConfigLabelList(DejaDup.INCLUDE_LIST_KEY);
-    table.attach(label, 0, 1, row, row + 1,
-                 Gtk.AttachOptions.FILL, 0, 0, 0);
-    table.attach(w, 1, 2, row, row + 1,
-                 Gtk.AttachOptions.FILL, 0, 0, 0);
+    table.attach(label, 0, row, 1, 1);
+    table.attach(w, 1, row, 1, 1);
     ++row;
 
     label = new Gtk.Label(_("Except for:"));
     label.set("xalign", 0.0f, "yalign", 0.0f);
     label_sizes.add_widget(label);
     w = new DejaDup.ConfigLabelList(DejaDup.EXCLUDE_LIST_KEY);
-    table.attach(label, 0, 1, row, row + 1,
-                 Gtk.AttachOptions.FILL, 0, 0, 0);
-    table.attach(w, 1, 2, row, row + 1,
-                 Gtk.AttachOptions.FILL, 0, 0, 0);
+    table.attach(label, 0, row, 1, 1);
+    table.attach(w, 1, row, 1, 1);
     ++row;
 
     vbox.pack_start(table, false, true);
 
-    table = new Gtk.Table(0, 0, false);
+    table = new Gtk.Grid();
     table.row_spacing = 6;
     table.column_spacing = 6;
     row = 0;
@@ -224,10 +218,8 @@ public class Preferences : Gtk.Box
       bdate.visible = !bdate.empty;
     });
 
-    table.attach(bdate_label, 0, 1, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    table.attach(bdate, 1, 2, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    table.attach(bdate_label, 0, row, 1, 1);
+    table.attach(bdate, 1, row, 1, 1);
     ++row;
 
     var ndate_label = new Gtk.Label(_("Next automatic backup:"));
@@ -246,10 +238,8 @@ public class Preferences : Gtk.Box
       ndate.visible = !ndate.empty;
     });
 
-    table.attach(ndate_label, 0, 1, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    table.attach(ndate, 1, 2, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
+    table.attach(ndate_label, 0, row, 1, 1);
+    table.attach(ndate, 1, row, 1, 1);
     ++row;
 
     vbox.pack_start(table, true, true);
@@ -291,7 +281,7 @@ public class Preferences : Gtk.Box
 
     // Reset page
     page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
-    table = new Gtk.Table(0, 0, false);
+    table = new Gtk.Grid();
     table.row_spacing = 6;
     table.column_spacing = 6;
     row = 0;
@@ -305,16 +295,13 @@ public class Preferences : Gtk.Box
               "xalign", 0.0f);
     label_sizes.add_widget(label);
 
-    table.attach(label, 0, 1, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    table.attach(location, 1, 2, row, row + 1,
-                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 Gtk.AttachOptions.FILL, 0, 0);
+    table.attach(label, 0, row, 1, 1);
+    table.attach(location, 1, row, 1, 1);
+    location.set("hexpand", true);
     ++row;
 
-    table.attach(location.extras, 0, 2, row, row + 1,
-                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 Gtk.AttachOptions.FILL, 0, 0);
+    location.extras.set("hexpand", true);
+    table.attach(location.extras, 0, row, 2, 1);
     ++row;
     
     w = new DejaDup.ConfigDelete(DejaDup.DELETE_AFTER_KEY);
@@ -323,26 +310,20 @@ public class Preferences : Gtk.Box
               "use-underline", true,
               "xalign", 0.0f);
     label_sizes.add_widget(label);
-    table.attach(label, 0, 1, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    table.attach(w, 1, 2, row, row + 1,
-                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 Gtk.AttachOptions.FILL,
-                 0, 0);
+    table.attach(label, 0, row, 1, 1);
+    table.attach(w, 1, row, 1, 1);
     ++row;
 
     w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
-    table.attach(w, 0, 2, row, row + 1,
-                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 Gtk.AttachOptions.FILL, 0, 0);
+    table.attach(w, 0, row, 2, 1);
     ++row;
 
     w = new DejaDup.ConfigLabelPolicy();
-    hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
-    hbox.add(w);
+    w.set("expand", true);
+    table.attach(w, 0, row, 2, 1);
+    ++row;
     
     page_box.pack_start(table, true, true, 0);
-    page_box.pack_end(hbox, false, false, 0);
     notebook.append_page(page_box, null);
     cat_model.insert_with_values(out iter, i, 0, _("Storage"), 1, i);
     ++i;
@@ -359,47 +340,41 @@ public class Preferences : Gtk.Box
 
     // Reset page
     page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
-    table = new Gtk.Table(0, 2, false);
+    table = new Gtk.Grid();
+    table.row_spacing = 6;
+    table.column_spacing = 6;
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
     w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY, button_sizes);
     w.set_size_request(300, 80);
+    w.set("expand", true);
     label = new Gtk.Label(_("I_nclude files in folders:"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "wrap", true,
-              "width-request", 150,
+              "max-width-chars", 10,
               "xalign", 0.0f,
               "yalign", 0.0f);
     label_sizes.add_widget(label);
-    table.attach(label, 0, 1, row, row + 1,
-                 Gtk.AttachOptions.FILL,
-                 Gtk.AttachOptions.FILL, 3, 3);
-    table.attach(w, 1, 2, row, row + 1,
-                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 3, 3);
+    table.attach(label, 0, row, 1, 1);
+    table.attach(w, 1, row, 1, 1);
     ++row;
     
     w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY, button_sizes);
     w.set_size_request(300, 120);
+    w.set("expand", true);
     label = new Gtk.Label(_("E_xcept files in folders:"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "wrap", true,
-              "width-request", 150,
+              "max-width-chars", 10,
               "xalign", 0.0f,
               "yalign", 0.0f);
     label_sizes.add_widget(label);
-    table.attach(label, 0, 1, row, row + 1,
-                 Gtk.AttachOptions.FILL,
-                 Gtk.AttachOptions.FILL, 3, 3);
-    table.attach(w, 1, 2, row, row + 1,
-                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 3, 3);
+    table.attach(label, 0, row, 1, 1);
+    table.attach(w, 1, row, 1, 1);
     ++row;
     
     page_box.pack_start(table, true, true, 0);
@@ -409,7 +384,9 @@ public class Preferences : Gtk.Box
     
     // Reset page
     page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
-    table = new Gtk.Table(0, 2, false);
+    table = new Gtk.Grid();
+    table.row_spacing = 6;
+    table.column_spacing = 6;
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
@@ -419,12 +396,8 @@ public class Preferences : Gtk.Box
               "use-underline", true,
               "xalign", 0.0f);
     label_sizes.add_widget(label);
-    table.attach(label, 0, 1, row, row + 1,
-                 Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 3, 3);
-    table.attach(w, 1, 2, row, row + 1,
-                 Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                 Gtk.AttachOptions.FILL,
-                 3, 3);
+    table.attach(label, 0, row, 1, 1);
+    table.attach(w, 1, row, 1, 1);
     ++row;
 
     page_box.pack_start(table, true, true, 0);

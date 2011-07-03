@@ -352,7 +352,7 @@ public abstract class AssistantOperation : Assistant
   {
     int rows = 0;
 
-    var page = new Gtk.Table(rows, 2, false);
+    var page = new Gtk.Grid();
     page.set("row-spacing", 6,
              "column-spacing", 6,
              "border-width", 12);
@@ -360,8 +360,10 @@ public abstract class AssistantOperation : Assistant
     var label = new Gtk.Label("");
     label.set("use-underline", true,
               "wrap", true,
+              "max-width-chars", 25,
+              "hexpand", true,
               "xalign", 0.0f);
-    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(label, 0, rows, 1, 1);
     ++rows;
     question_label = label;
 

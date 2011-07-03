@@ -35,8 +35,8 @@ public class ConfigLabelLocation : ConfigLabel
   }
   
   construct {
-    label.set_line_wrap(true);
-    label.width_chars = 30;
+    label.wrap = true;
+    label.max_width_chars = 30;
     img = new Gtk.Image.from_icon_name("folder", Gtk.IconSize.MENU);
     img.set("yalign", 0.0f);
     fill_box();

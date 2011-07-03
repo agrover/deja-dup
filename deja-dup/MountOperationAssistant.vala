@@ -45,7 +45,7 @@ public class MountOperationAssistant : MountOperation
   public AssistantOperation assist {get; construct;}
   Gtk.Bin password_page;
   Gtk.Box layout;
-  Gtk.Table table;
+  Gtk.Grid table;
   Gtk.RadioButton anonymous_w;
   Gtk.CheckButton remember_w;
   Gtk.Entry username_w;
@@ -124,7 +124,7 @@ public class MountOperationAssistant : MountOperation
     layout = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
     layout.set("border-width", 12);
 
-    table = new Gtk.Table(0, 2, false);
+    table = new Gtk.Grid();
     table.set("row-spacing", 6,
               "column-spacing", 6);
 
@@ -201,8 +201,8 @@ public class MountOperationAssistant : MountOperation
       label.set("mnemonic-widget", username_w,
                 "use-underline", true,
                 "xalign", 0.0f);
-      table.attach(label, ucol, ucol+1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-      table.attach(username_w, ucol+1, 3, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
+      table.attach(label, ucol, rows, 1, 1);
+      table.attach(username_w, ucol+1, rows, 2-ucol, 1);
       ++rows;
     }
     else
@@ -217,8 +217,8 @@ public class MountOperationAssistant : MountOperation
       label.set("mnemonic-widget", domain_w,
                 "use-underline", true,
                 "xalign", 0.0f);
-      table.attach(label, ucol, ucol+1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-      table.attach(domain_w, ucol+1, 3, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
+      table.attach(label, ucol, rows, 1, 1);
+      table.attach(domain_w, ucol+1, rows, 2-ucol, 1);
       ++rows;
     }
     else
@@ -232,8 +232,8 @@ public class MountOperationAssistant : MountOperation
       label.set("mnemonic-widget", password_w,
                 "use-underline", true,
                 "xalign", 0.0f);
-      table.attach(label, ucol, ucol+1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-      table.attach(password_w, ucol+1, 3, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL, 0, 0);
+      table.attach(label, ucol, rows, 1, 1);
+      table.attach(password_w, ucol+1, rows, 2-ucol, 1);
       ++rows;
 
       var w = new Gtk.CheckButton.with_mnemonic(label_show_password);

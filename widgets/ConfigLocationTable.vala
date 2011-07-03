@@ -21,7 +21,7 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigLocationTable : Gtk.Table
+public class ConfigLocationTable : Gtk.Grid
 {
   public Gtk.SizeGroup label_sizes {get; construct;}
 
@@ -50,11 +50,10 @@ public class ConfigLocationTable : Gtk.Table
               "use-underline", true,
               "xalign", 0.0f);
     label_sizes.add_widget(label);
-    this.attach(label, 0, 1, row, row+1,
-                Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    this.attach(w, 1, 2, row, row+1,
-                Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                Gtk.AttachOptions.FILL, 0, 0);
+    this.attach(label, 0, row, 1, 1);
+
+    w.set("hexpand", true);
+    this.attach(w, 1, row, 1, 1);
     ++row;
 
     if (check != null) {
@@ -81,9 +80,8 @@ public class ConfigLocationTable : Gtk.Table
     hbox.pack_start(label, false, false, 0);
     hbox.pack_start(w, true, true, 0);
 
-    this.attach(hbox, 0, 2, row, row+1,
-                Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                Gtk.AttachOptions.FILL, 0, 0);
+    hbox.set("hexpand", true);
+    this.attach(hbox, 0, row, 2, 1);
     ++row;
 
     if (check != null) {

@@ -52,16 +52,13 @@ public class AssistantRestore : AssistantOperation
   Gtk.ListStore date_store;
   Gtk.Box cust_box;
   Gtk.FileChooserButton cust_button;
-  Gtk.Table confirm_table;
-  int confirm_location_row;
+  Gtk.Grid confirm_table;
   Gtk.Label confirm_location_label;
   Gtk.Label confirm_location;
-  int confirm_date_row;
   Gtk.Label confirm_date_label;
   Gtk.Label confirm_date;
-  int confirm_files_row;
   Gtk.Label confirm_files_label;
-  Gtk.Box confirm_files;
+  Gtk.Grid confirm_files;
   Gtk.Widget query_progress_page;
   Gtk.Widget date_page;
   Gtk.Widget restore_dest_page;
@@ -85,7 +82,7 @@ public class AssistantRestore : AssistantOperation
     Gtk.Widget w, label;
     Gtk.SizeGroup label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
-    var page = new Gtk.Table(rows, 2, false);
+    var page = new Gtk.Grid();
     page.set("row-spacing", 6,
              "column-spacing", 6,
              "border-width", 12);
@@ -95,17 +92,17 @@ public class AssistantRestore : AssistantOperation
     label.set("xalign", 0.0f,
               "mnemonic-widget", location);
     label_sizes.add_widget(label);
-    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-    page.attach(location, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
+    page.attach(label, 0, rows, 1, 1);
+    location.set("hexpand", true);
+    page.attach(location, 1, rows, 1, 1);
     ++rows;
     
-    page.attach(location.extras, 0, 2, rows, rows + 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0, 0, 0);
+    location.extras.set("hexpand", true);
+    page.attach(location.extras, 0, rows, 2, 1);
     ++rows;
     
     w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("Backup files are _encrypted"));
-    page.attach(w, 0, 2, rows, rows + 1,
-                Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND,
-                Gtk.AttachOptions.FILL, 0, 0);
+    page.attach(w, 0, rows, 2, 1);
     ++rows;
     
     page.show_all();
@@ -219,51 +216,65 @@ public class AssistantRestore : AssistantOperation
     int rows = 0;
     Gtk.Widget label, w;
     
-    confirm_table = new Gtk.Table(rows, 3, false);
+    confirm_table = new Gtk.Grid();
     var page = confirm_table;
     page.set("row-spacing", 6,
              "column-spacing", 6,
              "border-width", 12);
     
     label = new Gtk.Label(_("Backup location:"));
-    label.set("xalign", 0.0f);
+    label.set("xalign", 0.0f, "yalign", 0.0f);
     w = new DejaDup.ConfigLabelLocation();
-    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    w.set("hexpand", true);
+    page.attach(label, 0, rows, 1, 1);
+    page.attach(w, 1, rows, 1, 1);
     ++rows;
     
     label = new Gtk.Label(_("Encrypted:"));
     label.set("xalign", 0.0f);
     w = new DejaDup.ConfigLabelBool(DejaDup.ENCRYPT_KEY);
-    page.attach(label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-    page.attach(w, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(label, 0, rows, 1, 1);
+    page.attach(w, 1, rows, 1, 1);
+    ++rows;
+    
+    label = new Gtk.Label(_("Encrypted:"));
+    label.set("xalign", 0.0f);
+    w = new DejaDup.ConfigLabelBool(DejaDup.ENCRYPT_KEY);
+    page.attach(label, 0, rows, 1, 1);
+    page.attach(w, 1, rows, 1, 1);
+    ++rows;
+    
+    label = new Gtk.Label(_("Encrypted:"));
+    label.set("xalign", 0.0f);
+    w = new DejaDup.ConfigLabelBool(DejaDup.ENCRYPT_KEY);
+    page.attach(label, 0, rows, 1, 1);
+    page.attach(w, 1, rows, 1, 1);
     ++rows;
     
     confirm_date_label = new Gtk.Label(_("Restore date:"));
     confirm_date_label.set("xalign", 0.0f);
     confirm_date = new Gtk.Label("");
     confirm_date.set("xalign", 0.0f);
-    confirm_date_row = rows;
-    page.attach(confirm_date_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-    page.attach(confirm_date, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(confirm_date_label, 0, rows, 1, 1);
+    page.attach(confirm_date, 1, rows, 1, 1);
     ++rows;
     
     confirm_location_label = new Gtk.Label(_("Restore folder:"));
     confirm_location_label.set("xalign", 0.0f);
     confirm_location = new Gtk.Label("");
     confirm_location.set("xalign", 0.0f);
-    confirm_location_row = rows;
-    page.attach(confirm_location_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
-    page.attach(confirm_location, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    page.attach(confirm_location_label, 0, rows, 1, 1);
+    page.attach(confirm_location, 1, rows, 1, 1);
     ++rows;
     
     confirm_files_label = new Gtk.Label("");
     confirm_files_label.set("xalign", 0.0f, "yalign", 0.0f);
-    confirm_files = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
-    confirm_files.set("homogeneous", true);
-    confirm_files_row = rows;
-    page.attach(confirm_files_label, 0, 1, rows, rows + 1, Gtk.AttachOptions.FILL, Gtk.AttachOptions.FILL, 0, 0);
-    page.attach(confirm_files, 1, 2, rows, rows + 1, Gtk.AttachOptions.FILL, 0, 0, 0);
+    confirm_files = new Gtk.Grid();
+    confirm_files.orientation = Gtk.Orientation.VERTICAL;
+    confirm_files.row_spacing = 6;
+    confirm_files.row_homogeneous = true;
+    page.attach(confirm_files_label, 0, rows, 1, 1);
+    page.attach(confirm_files, 1, rows, 1, 1);
     ++rows;
     
     return page;
@@ -440,13 +451,10 @@ public class AssistantRestore : AssistantOperation
         confirm_date.label = date_combo.get_active_text();
         confirm_date_label.show();
         confirm_date.show();
-        confirm_table.set_row_spacing(confirm_date_row,
-                                      confirm_table.get_default_row_spacing());
       }
       else {
         confirm_date_label.hide();
         confirm_date.hide();
-        confirm_table.set_row_spacing(confirm_date_row, 0);
       }
       
       // Where we restore to
@@ -458,11 +466,8 @@ public class AssistantRestore : AssistantOperation
         
         confirm_location_label.show();
         confirm_location.show();
-        confirm_table.set_row_spacing(confirm_location_row,
-                                      confirm_table.get_default_row_spacing());
         confirm_files_label.hide();
         confirm_files.hide();
-        confirm_table.set_row_spacing(confirm_files_row, 0);
       }
       else {
         confirm_files_label.label = ngettext("File to restore:",
@@ -480,11 +485,8 @@ public class AssistantRestore : AssistantOperation
         
         confirm_location_label.hide();
         confirm_location.hide();
-        confirm_table.set_row_spacing(confirm_location_row, 0);
         confirm_files_label.show();
         confirm_files.show_all();
-        confirm_table.set_row_spacing(confirm_files_row,
-                                      confirm_table.get_default_row_spacing());
       }
     }
     else if (page == summary_page) {

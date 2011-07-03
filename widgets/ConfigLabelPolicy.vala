@@ -37,6 +37,8 @@ public class ConfigLabelPolicy : ConfigLabel
     attrs.insert(Pango.attr_style_new(Pango.Style.ITALIC));
     label.set_attributes(attrs);
     label.wrap = true;
+    label.max_width_chars = 25;
+    label.yalign = 1.0f;
   }
   
   protected override async void set_from_config()
