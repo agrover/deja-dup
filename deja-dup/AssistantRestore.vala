@@ -237,20 +237,6 @@ public class AssistantRestore : AssistantOperation
     page.attach(w, 1, rows, 1, 1);
     ++rows;
     
-    label = new Gtk.Label(_("Encrypted:"));
-    label.set("xalign", 0.0f);
-    w = new DejaDup.ConfigLabelBool(DejaDup.ENCRYPT_KEY);
-    page.attach(label, 0, rows, 1, 1);
-    page.attach(w, 1, rows, 1, 1);
-    ++rows;
-    
-    label = new Gtk.Label(_("Encrypted:"));
-    label.set("xalign", 0.0f);
-    w = new DejaDup.ConfigLabelBool(DejaDup.ENCRYPT_KEY);
-    page.attach(label, 0, rows, 1, 1);
-    page.attach(w, 1, rows, 1, 1);
-    ++rows;
-    
     confirm_date_label = new Gtk.Label(_("Restore date:"));
     confirm_date_label.set("xalign", 0.0f);
     confirm_date = new Gtk.Label("");
