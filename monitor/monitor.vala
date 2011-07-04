@@ -22,6 +22,7 @@ using GLib;
 class Monitor : Object {
 
 static uint timeout_id;
+static uint netcheck_id;
 static Pid pid;
 static bool op_active = false;
 static bool reactive_check;
@@ -48,12 +49,24 @@ static void op_ended(DBusConnection conn, string name)
   op_active = false;
 }
 
-static void network_changed()
+static bool network_check()
 {
   reactive_check = true;
   if (DejaDup.Network.get().connected)
     prepare_next_run(); // in case network manager was blocking us
   reactive_check = false;
+  return false;
+}
+
+static void network_changed()
+{
+  // Wait a bit so that (a) user isn't bombarded by notifications as soon as
+  // they connect and (b) if this is a transient connection (or a bug as with
+  // LP bug 805140) we don't error out too soon.
+  if (netcheck_id > 0)
+    Source.remove(netcheck_id);
+  if (DejaDup.Network.get().connected)
+    netcheck_id = Timeout.add_seconds(120, network_check);
 }
 
 static void volume_added(VolumeMonitor vm, Volume vol)
