@@ -7,34 +7,51 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-06-13 09:49-0400\n"
-"PO-Revision-Date: 2011-06-14 08:13+0000\n"
+"POT-Creation-Date: 2011-07-02 13:03+0100\n"
+"PO-Revision-Date: 2011-07-04 15:31+0000\n"
 "Last-Translator: Asier Sarasua Garmendia <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-06-15 04:40+0000\n"
+"X-Launchpad-Export-Date: 2011-07-05 04:33+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 
-#: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
-#: ../data/deja-dup-preferences.desktop.in.in.h:1 ../deja-dup/Prompt.vala:93
-#: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:140
-#: ../deja-dup/StatusIcon.vala:289 ../monitor/monitor.vala:131
+#: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
+#: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
+#: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:139
+#: ../deja-dup/StatusIcon.vala:283 ../monitor/monitor.vala:104
+#: ../preferences/preferences-main.vala:51
 #: ../preferences/preferences-main.vala:63
 msgid "Backup"
 msgstr "Babeskopia"
 
-#: ../data/deja-dup-ccpanel.desktop.in.h:2
-#: ../data/deja-dup-preferences.desktop.in.in.h:2
+#. Translators: The name is a play on the French phrase "déjà vu" meaning
+#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
+#. context is itself a reference to both the underlying command line tool
+#. "duplicity" and the act of duplicating data for backup.  As a whole, the
+#. phrase "Déjà Dup" may not be very translatable.
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
+#: ../deja-dup/main.vala:79 ../preferences/Preferences.vala:85
+#, c-format
+msgid "Déjà Dup Backup Tool"
+msgstr "Déjà Dup babeskopietarako tresna"
+
+#: ../data/deja-dup-ccpanel.desktop.in.h:1
+#: ../data/deja-dup-preferences.desktop.in.in.h:1
+msgid "Back Up Now"
+msgstr "Egin babeskopia orain"
+
+#: ../data/deja-dup-ccpanel.desktop.in.h:3
+#: ../data/deja-dup-preferences.desktop.in.in.h:3
 msgid "Change your backup settings"
 msgstr "Aldatu zure babeskopia-ezarpenak"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:316
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:297
 msgid "Backup Monitor"
 msgstr "Babeskopien monitorea"
 
@@ -352,7 +369,7 @@ msgstr "Rackspace zerbitzurako duzun erabiltzaile-izena"
 msgid "Folder:"
 msgstr "Karpeta:"
 
-#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:173
+#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:171
 msgid "Scanning…"
 msgstr "Eskaneatzen..."
 
@@ -382,7 +399,7 @@ msgstr "GVFS FUSE ez dago instalatuta"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:425
+#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:430
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s %2$s-(e)n"
@@ -392,8 +409,8 @@ msgstr "%1$s %2$s-(e)n"
 msgid "Backup will begin when %s becomes connected."
 msgstr "Babeskopia hasiko da %s konektatzen denean."
 
-#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:50
-#: ../common/BackendS3.vala:60 ../common/BackendU1.vala:144
+#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:49
+#: ../common/BackendS3.vala:59 ../common/BackendU1.vala:146
 msgid "Backup will begin when a network connection becomes available."
 msgstr "Babeskopia hasiko da sareko konexio bat eskuragarri dagoenean."
 
@@ -406,25 +423,25 @@ msgstr "Babeskopiaren kokapena ez dago eskuragarri"
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "‘%s’ konektatu dadin itxaroten..."
 
-#: ../common/BackendRackspace.vala:59
+#: ../common/BackendRackspace.vala:58
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Rackspace edukiontzi bat zehaztu behar duzu zure hobespenetan."
 
-#: ../common/BackendRackspace.vala:68 ../widgets/ConfigLocation.vala:195
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
 #. Translators: %s is a folder.
-#: ../common/BackendRackspace.vala:71
+#: ../common/BackendRackspace.vala:70
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "%s Rackspace Cloud Files zerbitzuan"
 
-#: ../common/BackendRackspace.vala:118 ../common/BackendS3.vala:173
+#: ../common/BackendRackspace.vala:117 ../common/BackendS3.vala:172
 msgid "Permission denied"
 msgstr "Baimena ukatu da"
 
-#: ../common/BackendRackspace.vala:139
+#: ../common/BackendRackspace.vala:138
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
@@ -432,86 +449,75 @@ msgid ""
 msgstr ""
 "Rackspace Cloud Files kontu bat sor dezakezu <a href=\"%s\">linean</a>."
 
-#: ../common/BackendRackspace.vala:140
+#: ../common/BackendRackspace.vala:139
 msgid "_API access key:"
 msgstr "_API atzitze-gakoa:"
 
-#: ../common/BackendRackspace.vala:141
+#: ../common/BackendRackspace.vala:140
 msgid "S_how API access key"
 msgstr "E_rakutsi API atzitze-gakoa"
 
-#: ../common/BackendRackspace.vala:142
+#: ../common/BackendRackspace.vala:141
 msgid "_Remember API access key"
 msgstr "Gogo_ratu API atzitze-gakoa"
 
-#: ../common/BackendRackspace.vala:144
+#: ../common/BackendRackspace.vala:143
 msgid "Enter Rackspace Cloud Files API key"
 msgstr "Sartu Rackspace Cloud Files zerbitzuaren API gakoa"
 
-#: ../common/BackendS3.vala:123 ../widgets/ConfigLocation.vala:179
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
 #. Translators: %s is a folder.
-#: ../common/BackendS3.vala:126
+#: ../common/BackendS3.vala:125
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "%s Amazon S3 zerbitzuan"
 
-#: ../common/BackendS3.vala:194
+#: ../common/BackendS3.vala:193
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr ""
 "Amazon S3 kontu bat lortzeko izena eman dezakezu <a href=\"%s\">linean</a>."
 
-#: ../common/BackendS3.vala:195
+#: ../common/BackendS3.vala:194
 msgid "_Access key ID:"
 msgstr "_Atzitze-gakoaren IDa:"
 
-#: ../common/BackendS3.vala:196
+#: ../common/BackendS3.vala:195
 msgid "_Secret access key:"
 msgstr "Atzitze-gako _sekretua:"
 
-#: ../common/BackendS3.vala:197
+#: ../common/BackendS3.vala:196
 msgid "S_how secret access key"
 msgstr "E_rakutsi atzitze-gako sekretua"
 
-#: ../common/BackendS3.vala:198
+#: ../common/BackendS3.vala:197
 msgid "_Remember secret access key"
 msgstr "_Gogoratu atzitze-gako sekretua"
 
-#: ../common/BackendS3.vala:200
+#: ../common/BackendS3.vala:199
 msgid "Enter Amazon S3 access key"
 msgstr "Sartu Amazon S3 zerbitzuaren atzitze-gakoa"
 
-#: ../common/BackendU1.vala:160 ../widgets/ConfigLocation.vala:187
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
 #. Translators: %s is a folder.
-#: ../common/BackendU1.vala:163
+#: ../common/BackendU1.vala:165
 #, c-format
 msgid "%s on Ubuntu One"
 msgstr "%s Ubuntu One zerbitzuan"
 
-#: ../common/BackendU1.vala:218
+#: ../common/BackendU1.vala:220
 msgid "Sign into Ubuntu One…"
 msgstr "Hasi saioa Ubuntu One zerbitzuan..."
 
-#: ../common/BackendU1.vala:220
+#: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr "Konektatu Ubuntu One zerbitzura"
-
-#. Translators: The name is a play on the French phrase "déjà vu" meaning
-#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
-#. context is itself a reference to both the underlying command line tool
-#. "duplicity" and the act of duplicating data for backup.  As a whole, the
-#. phrase "Déjà Dup" may not be very translatable.
-#: ../common/CommonUtils.vala:88 ../deja-dup/main.vala:80
-#: ../preferences/Preferences.vala:86
-#, c-format
-msgid "Déjà Dup Backup Tool"
-msgstr "Déjà Dup babeskopietarako tresna"
 
 #: ../common/DuplicityInfo.vala:142
 msgid "Could not run duplicity"
@@ -554,41 +560,41 @@ msgstr ""
 "Déjà Dup Backup Tool aplikazioak duplicity aplikazioaren %d.%d.%.2d bertsioa "
 "behar du gutxienez, eta %d.%d.%.2d bertsioa aurkitu da."
 
-#: ../common/Duplicity.vala:128 ../common/Duplicity.vala:180
+#: ../common/Duplicity.vala:127 ../common/Duplicity.vala:179
 msgid "Paused (no network)"
 msgstr "Pausatua (sarerik ez)"
 
-#: ../common/Duplicity.vala:378 ../common/Duplicity.vala:386
-#: ../common/Duplicity.vala:403 ../common/Operation.vala:81
-#: ../common/Operation.vala:112
+#: ../common/Duplicity.vala:377 ../common/Duplicity.vala:385
+#: ../common/Duplicity.vala:402 ../common/Operation.vala:80
+#: ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Prestatzen..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:434
+#: ../common/Duplicity.vala:433
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Ezin izan da ‘%s’ leheneratu: Fitxategiaren kokapena ez da zuzena"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:501
+#: ../common/Duplicity.vala:500
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Babeskopiaren kokapena txikiegia da. Saiatu toki gehiago duen bat erabiltzen."
 
-#: ../common/Duplicity.vala:522
+#: ../common/Duplicity.vala:521
 msgid "Backup location does not have enough free space."
 msgstr "Babeskopiaren kokapenak ez dauka nahiko toki librerik."
 
-#: ../common/Duplicity.vala:542 ../common/Duplicity.vala:556
+#: ../common/Duplicity.vala:541 ../common/Duplicity.vala:555
 msgid "Cleaning up…"
 msgstr "Garbitzen..."
 
-#: ../common/Duplicity.vala:618
+#: ../common/Duplicity.vala:626
 msgid "Creating the first backup.  This may take a while."
 msgstr "Lehen babeskopia sortzen. Honek denbora behar dezake."
 
-#: ../common/Duplicity.vala:620
+#: ../common/Duplicity.vala:628
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -596,25 +602,25 @@ msgstr ""
 "Babeskopia garbi bat sortzen babeskopiaren hondamenaren aurka babesteko. "
 "Honek normala dena baino denbora gehiago behar du."
 
-#: ../common/Duplicity.vala:669 ../common/Duplicity.vala:1042
+#: ../common/Duplicity.vala:670 ../common/Duplicity.vala:1042
 msgid "Failed with an unknown error."
 msgstr "Huts egin du errore ezezagunarengatik."
 
-#: ../common/Duplicity.vala:899
+#: ../common/Duplicity.vala:895
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Ezin izan da ‘%s’ leheneratu: Fitxategia ez da aurkitu babeskopian"
 
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:905 ../common/Duplicity.vala:984
+#: ../common/Duplicity.vala:901 ../common/Duplicity.vala:980
 msgid "Bad encryption password."
 msgstr "Zifratze-pasahitz okerra."
 
-#: ../common/Duplicity.vala:910
+#: ../common/Duplicity.vala:906
 msgid "Computer name changed"
 msgstr "Ordenagailuaren izena aldatu da"
 
-#: ../common/Duplicity.vala:910
+#: ../common/Duplicity.vala:906
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -625,59 +631,59 @@ msgstr ""
 "ordenagailuaren izena %s da. Hau espero ez bazenuen, beste kokapen batean "
 "egin beharko zenuke babeskopia."
 
-#: ../common/Duplicity.vala:923
+#: ../common/Duplicity.vala:919
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Baimena ukatu da ‘%s’ sortzen saiatzean."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:927 ../common/Duplicity.vala:931
+#: ../common/Duplicity.vala:923 ../common/Duplicity.vala:927
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Baimena ukatu da ‘%s’ irakurtzen saiatzean."
 
-#: ../common/Duplicity.vala:935
+#: ../common/Duplicity.vala:931
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Baimena ukatu da ‘%s’ ezabatzen saiatzean."
 
-#: ../common/Duplicity.vala:942
+#: ../common/Duplicity.vala:938
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Babeskopiaren ‘%s’ kokapena ez da existitzen."
 
-#: ../common/Duplicity.vala:948 ../common/Duplicity.vala:1003
+#: ../common/Duplicity.vala:944 ../common/Duplicity.vala:999
 msgid "No space left."
 msgstr "Ez dago espaziorik."
 
-#: ../common/Duplicity.vala:962
+#: ../common/Duplicity.vala:958
 msgid "Invalid ID."
 msgstr "ID baliogabea."
 
-#: ../common/Duplicity.vala:964
+#: ../common/Duplicity.vala:960
 msgid "Invalid secret key."
 msgstr "Gako sekretu baliogabea."
 
-#: ../common/Duplicity.vala:966
+#: ../common/Duplicity.vala:962
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Zure Amazon Web Services zerbitzuko kontua ez dago alta emanda S3 zerbitzuan."
 
-#: ../common/Duplicity.vala:979
+#: ../common/Duplicity.vala:975
 msgid "S3 bucket name is not available."
 msgstr "S3 ontzi-izena ezin da eskuratu."
 
-#: ../common/Duplicity.vala:988
+#: ../common/Duplicity.vala:984
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Errorea ‘%s’ fitxategia irakurtzean."
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:986
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Errorea ‘%s’ fitxategia idaztean."
 
-#: ../common/Duplicity.vala:1005
+#: ../common/Duplicity.vala:1001
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Ez dago lekurik ‘%s’-(e)n."
@@ -694,7 +700,7 @@ msgstr "Kargatzen..."
 msgid "Restoring files…"
 msgstr "Fitxategiak leheneratzen..."
 
-#: ../common/OperationRestore.vala:173
+#: ../common/OperationRestore.vala:177
 #, c-format
 msgid ""
 "Not all files could be restored. Any files that could not be restored may "
@@ -703,30 +709,30 @@ msgstr ""
 "Ezin izan dira fitxategi guztiak leheneratu. Leheneratu ezin izan diren "
 "fitxategiak oraindik %s-(e)n aurki daitezke."
 
-#: ../common/OperationRestore.vala:182
+#: ../common/OperationRestore.vala:186
 #, c-format
 msgid "Could not restore %s: %s"
 msgstr "Ezin izan da %s leheneratu: %s"
 
-#: ../common/Operation.vala:73
+#: ../common/Operation.vala:72
 msgid "Backing up…"
 msgstr "Babeskopia egiten..."
 
-#: ../common/Operation.vala:75 ../deja-dup/AssistantRestore.vala:499
+#: ../common/Operation.vala:74 ../deja-dup/AssistantRestore.vala:504
 msgid "Restoring…"
 msgstr "Leheneratzen..."
 
-#: ../common/Operation.vala:77
+#: ../common/Operation.vala:76
 msgid "Checking for backups…"
 msgstr "Babeskopiak egiaztatzen..."
 
-#: ../common/Operation.vala:79
+#: ../common/Operation.vala:78
 msgid "Listing files…"
 msgstr "Fitxategiak zerrendatzen..."
 
-#: ../common/Operation.vala:276
-msgid "Another Déjà Dup Backup Tool operation is already running"
-msgstr "Déjà Dup Backup Tool aplikazioaren beste eragiketa bat abian dago"
+#: ../common/Operation.vala:287
+msgid "Another backup operation is already running"
+msgstr "Beste babeskopia-eragiketa bat dago abian"
 
 #: ../deja-dup/AssistantBackup.vala:31
 msgctxt "back up is verb"
@@ -740,126 +746,139 @@ msgstr "Babes_kopia"
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:68
+#: ../deja-dup/AssistantBackup.vala:73
 msgid "Backing up:"
 msgstr "Babeskopia egiten:"
 
-#: ../deja-dup/AssistantBackup.vala:85
+#: ../deja-dup/AssistantBackup.vala:90
 msgid "Backup Failed"
 msgstr "Babeskopiak huts egin du"
 
-#: ../deja-dup/AssistantBackup.vala:92
+#: ../deja-dup/AssistantBackup.vala:97
 msgid "Backing Up…"
 msgstr "Babeskopia egiten..."
 
-#: ../deja-dup/AssistantOperation.vala:172
+#: ../deja-dup/AssistantOperation.vala:170
 msgid "Scanning:"
 msgstr "Eskaneatzen:"
 
-#: ../deja-dup/AssistantOperation.vala:246
+#: ../deja-dup/AssistantOperation.vala:244
 msgid "_Details"
 msgstr "_Xehetasunak"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:293
+#, c-format
+msgid ""
+"You might want to write your password down. If you forget it, you will not "
+"be able to recover your files."
+msgstr ""
+"Pasahitza nonbait gorde beharko zenuke. Ahazten baduzu, ezingo dituzu zure "
+"fitxategiak berreskuratu."
+
+#: ../deja-dup/AssistantOperation.vala:293
+msgid "Leave the password blank to disable encryption."
+msgstr "Utzi pasahitza bete gabe zifratzea desgaitzeko."
+
+#: ../deja-dup/AssistantOperation.vala:307
 msgid "E_ncryption password:"
 msgstr "Enkriptatze-pasahit_za:"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:323
 msgid "Confir_m password:"
 msgstr "Baie_ztatu pasahitza:"
 
-#: ../deja-dup/AssistantOperation.vala:322
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "_Show password"
 msgstr "Erakut_si pasahitza"
 
-#: ../deja-dup/AssistantOperation.vala:331
+#: ../deja-dup/AssistantOperation.vala:342
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "_Gogoratu pasahitza"
 
-#: ../deja-dup/AssistantOperation.vala:396
+#: ../deja-dup/AssistantOperation.vala:408
 msgid "Summary"
 msgstr "Laburpena"
 
-#: ../deja-dup/AssistantOperation.vala:411
+#: ../deja-dup/AssistantOperation.vala:423
 msgid "Encryption Password Needed"
 msgstr "Zifratze-pasahitza behar da"
 
-#: ../deja-dup/AssistantOperation.vala:670
+#: ../deja-dup/AssistantOperation.vala:691
 msgid "Backup encryption password"
 msgstr "Babeskopiaren zifratze-pasahitza"
 
-#: ../deja-dup/AssistantRestore.vala:72
+#: ../deja-dup/AssistantRestore.vala:71
 msgid "Restore"
 msgstr "Leheneratu"
 
-#: ../deja-dup/AssistantRestore.vala:73
+#: ../deja-dup/AssistantRestore.vala:72
 msgid "_Restore"
 msgstr "_Leheneratu"
 
-#: ../deja-dup/AssistantRestore.vala:95 ../preferences/Preferences.vala:294
+#: ../deja-dup/AssistantRestore.vala:94 ../preferences/Preferences.vala:302
 msgid "_Backup location:"
 msgstr "_Babeskopiaren kokapena:"
 
-#: ../deja-dup/AssistantRestore.vala:106
+#: ../deja-dup/AssistantRestore.vala:105
 msgid "Backup files are _encrypted"
 msgstr "Babeskopiaren fitxategiak _zifratuta daude"
 
-#: ../deja-dup/AssistantRestore.vala:130
-msgid "Preferences"
-msgstr "Hobespenak"
+#: ../deja-dup/AssistantRestore.vala:131
+msgid "Settings"
+msgstr "Ezarpenak"
 
-#: ../deja-dup/AssistantRestore.vala:151
+#: ../deja-dup/AssistantRestore.vala:153
 msgid "_Date:"
 msgstr "_Data:"
 
-#: ../deja-dup/AssistantRestore.vala:174
+#: ../deja-dup/AssistantRestore.vala:176
 msgid "Restore files to _original locations"
 msgstr "Leheneratu fitxategiak _jatorrizko kokapenetara"
 
-#: ../deja-dup/AssistantRestore.vala:179
+#: ../deja-dup/AssistantRestore.vala:181
 msgid "Restore to _specific folder"
 msgstr "Leheneratu karpeta ze_hatz batera"
 
-#: ../deja-dup/AssistantRestore.vala:189
+#: ../deja-dup/AssistantRestore.vala:191
 msgid "Choose destination for restored files"
 msgstr "Hautatu leheneratuko diren fitxategien helburua"
 
-#: ../deja-dup/AssistantRestore.vala:193
+#: ../deja-dup/AssistantRestore.vala:195
 msgid "Restore _folder:"
 msgstr "Leheneratze-_karpeta:"
 
-#: ../deja-dup/AssistantRestore.vala:226
+#: ../deja-dup/AssistantRestore.vala:228
 msgid "Backup location:"
 msgstr "Babeskopiaren kokapena:"
 
-#: ../deja-dup/AssistantRestore.vala:233
+#: ../deja-dup/AssistantRestore.vala:235
 msgid "Encrypted:"
 msgstr "Zifratua:"
 
-#: ../deja-dup/AssistantRestore.vala:240
+#: ../deja-dup/AssistantRestore.vala:242
 msgid "Restore date:"
 msgstr "Leheneratze-data:"
 
-#: ../deja-dup/AssistantRestore.vala:249
+#: ../deja-dup/AssistantRestore.vala:251
 msgid "Restore folder:"
 msgstr "Leheneratze-karpeta:"
 
-#: ../deja-dup/AssistantRestore.vala:273
+#: ../deja-dup/AssistantRestore.vala:276
 msgid "Checking for Backups…"
 msgstr "Babeskopiak bilatzen..."
 
-#: ../deja-dup/AssistantRestore.vala:281
+#: ../deja-dup/AssistantRestore.vala:284
 msgid "Restore from When?"
 msgstr "Noiztik leheneratu?"
 
-#: ../deja-dup/AssistantRestore.vala:289
+#: ../deja-dup/AssistantRestore.vala:292
 msgid "Restore to Where?"
 msgstr "Nora leheneratu?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:317
+#: ../deja-dup/AssistantRestore.vala:320
 msgid "Restoring:"
 msgstr "Leheneratzen:"
 
@@ -867,128 +886,128 @@ msgstr "Leheneratzen:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: ../deja-dup/AssistantRestore.vala:359
+#: ../deja-dup/AssistantRestore.vala:362
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
-#: ../deja-dup/AssistantRestore.vala:372
+#: ../deja-dup/AssistantRestore.vala:375
 msgid "No backups to restore"
 msgstr "Ez dago leheneratzeko babeskopiarik"
 
-#: ../deja-dup/AssistantRestore.vala:450
+#: ../deja-dup/AssistantRestore.vala:455
 msgid "Original location"
 msgstr "Jatorrizko kokapena"
 
-#: ../deja-dup/AssistantRestore.vala:463
+#: ../deja-dup/AssistantRestore.vala:468
 msgid "File to restore:"
 msgid_plural "Files to restore:"
 msgstr[0] "Leheneratuko den fitxategia:"
 msgstr[1] "Leheneratuko diren fitxategiak:"
 
-#: ../deja-dup/AssistantRestore.vala:487
+#: ../deja-dup/AssistantRestore.vala:492
 msgid "Restore Failed"
 msgstr "Leheneratzeak huts egin du"
 
-#: ../deja-dup/AssistantRestore.vala:489
+#: ../deja-dup/AssistantRestore.vala:494
 msgid "Restore Finished"
 msgstr "Leheneratzea amaitu da"
 
-#: ../deja-dup/AssistantRestore.vala:491
+#: ../deja-dup/AssistantRestore.vala:496
 msgid "Your files were successfully restored."
 msgstr "Zure fitxategiak ongi leheneratu dira"
 
-#: ../deja-dup/AssistantRestore.vala:493
+#: ../deja-dup/AssistantRestore.vala:498
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Zure fitxategia ongi leheneratu da."
 msgstr[1] "Zure fitxategiak ongi leheneratu dira."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:189
+#: ../deja-dup/AssistantRestoreMissing.vala:199
 msgid "File"
 msgstr "Fitxategia"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:190
+#: ../deja-dup/AssistantRestoreMissing.vala:200
 msgid "Last seen"
 msgstr "Azken aldiz ikusia"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:205
+#: ../deja-dup/AssistantRestoreMissing.vala:215
 msgid "Restore which Files?"
 msgstr "Zein fitxategi leheneratuko da?"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:336
-msgid "Scanning for files from yesterday…"
-msgstr "Atzoko fitxategiak eskaneatzen..."
-
-#: ../deja-dup/AssistantRestoreMissing.vala:339
-msgid "Scanning for files from last week…"
-msgstr "Azken asteko fitxategiak eskaneatzen..."
-
-#: ../deja-dup/AssistantRestoreMissing.vala:342
-msgid "Scanning for files from last month…"
-msgstr "Azken hileko fitxategiak eskaneatzen..."
-
 #: ../deja-dup/AssistantRestoreMissing.vala:346
+msgid "Scanning for files from up to a day ago…"
+msgstr "Duela egun batetik honako fitxategiak bilatzen..."
+
+#: ../deja-dup/AssistantRestoreMissing.vala:349
+msgid "Scanning for files from up to a week ago…"
+msgstr "Duela aste batetik honako fitxategiak bilatzen..."
+
+#: ../deja-dup/AssistantRestoreMissing.vala:352
+msgid "Scanning for files from up to a month ago…"
+msgstr "Duela hilabetetik honako fitxategiak bilatzen..."
+
+#: ../deja-dup/AssistantRestoreMissing.vala:356
 #, c-format
 msgid "Scanning for files from about a month ago…"
 msgid_plural "Scanning for files from about %d months ago…"
 msgstr[0] "Duela hilabete inguruko fitxategiak eskaneatzen..."
 msgstr[1] "Duela %d hilabete inguruko fitxategiak eskaneatzen..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:352
+#: ../deja-dup/AssistantRestoreMissing.vala:362
 #, c-format
 msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
 msgstr[0] "Duela urtebete inguruko fitxategiak eskaneatzen..."
 msgstr[1] "Duela %d urtebete inguruko fitxategiak eskaneatzen..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:442
+#: ../deja-dup/AssistantRestoreMissing.vala:452
 msgid "Scanning finished"
 msgstr "Eskaneatzea amaitu da"
 
-#: ../deja-dup/Assistant.vala:312
+#: ../deja-dup/Assistant.vala:310
 msgid "Co_ntinue"
 msgstr "_Jarraitu"
 
-#: ../deja-dup/Assistant.vala:350 ../deja-dup/StatusIcon.vala:104
+#: ../deja-dup/Assistant.vala:348 ../deja-dup/StatusIcon.vala:103
 msgid "_Resume Later"
 msgstr "_Berrekin geroago"
 
-#: ../deja-dup/main.vala:36 ../monitor/monitor.vala:34
-#: ../preferences/preferences-main.vala:27
+#: ../deja-dup/main.vala:35 ../monitor/monitor.vala:35
+#: ../preferences/preferences-main.vala:26
 msgid "Show version"
 msgstr "Erakutsi bertsioa"
 
-#: ../deja-dup/main.vala:37
+#: ../deja-dup/main.vala:36
 msgid "Restore given files"
 msgstr "Leheneratu esandako fitxategiak"
 
-#: ../deja-dup/main.vala:38
+#: ../deja-dup/main.vala:37
 msgid "Immediately start a backup"
 msgstr "Abiarazi babeskopia berehala"
 
-#: ../deja-dup/main.vala:40
+#: ../deja-dup/main.vala:39
 msgid "Restore deleted files"
 msgstr "Leheneratu adierazitako fitxategiak"
 
-#: ../deja-dup/main.vala:57
+#: ../deja-dup/main.vala:56
 msgid "No directory provided"
 msgstr "Ez da direktoriorik adierazi"
 
-#: ../deja-dup/main.vala:62
+#: ../deja-dup/main.vala:61
 msgid "Only one directory can be shown at once"
 msgstr "Direktorio bakarra erakuts daiteke aldi berean"
 
-#: ../deja-dup/main.vala:83
+#: ../deja-dup/main.vala:82
 msgid "[FILES…]"
 msgstr "[FITXATEGIAK…]"
 
-#: ../deja-dup/main.vala:84
+#: ../deja-dup/main.vala:83
 msgid "DIRECTORY"
 msgstr "DIREKTORIOA"
 
 #. Translators: Wrap this to 80 characters per line if you can, as I have for English
-#: ../deja-dup/main.vala:88
+#: ../deja-dup/main.vala:87
 msgid ""
 "Déjà Dup is a simple backup tool.  It hides the complexity of backing up\n"
 "the Right Way (encrypted, off-site, and regular) and uses duplicity as\n"
@@ -998,15 +1017,15 @@ msgstr ""
 "(zifratuta, ordenagailutik at eta aldizka) egiteko konplexutasunak "
 "ezkutatzen ditu eta duplicity darabil atzeko motor gisa."
 
-#: ../deja-dup/main.vala:148
+#: ../deja-dup/main.vala:141
 msgid "Directory does not exists"
 msgstr "Direktorioa ez da existitzen"
 
-#: ../deja-dup/main.vala:152
+#: ../deja-dup/main.vala:145
 msgid "You must provide a directory, not a file"
 msgstr "Direktorio bat adierazi behar duzu, ez fitxategi bat"
 
-#: ../deja-dup/main.vala:164
+#: ../deja-dup/main.vala:157
 msgid "You must specify a mode"
 msgstr "Modu bat adierazi behar duzu"
 
@@ -1075,36 +1094,36 @@ msgstr "_Ireki babeskopiaren ezarpenak"
 msgid "Open Backup Settings"
 msgstr "Ireki babeskopiaren ezarpenak"
 
-#: ../deja-dup/StatusIcon.vala:106
+#: ../deja-dup/StatusIcon.vala:105
 msgid "_Delay Backup"
 msgstr "A_tzeratu babeskopia"
 
-#: ../deja-dup/StatusIcon.vala:108
+#: ../deja-dup/StatusIcon.vala:107
 msgid "_Cancel Backup"
 msgstr "_Utzi babeskopia"
 
-#: ../deja-dup/StatusIcon.vala:109
+#: ../deja-dup/StatusIcon.vala:108
 msgid "_Skip Backup"
 msgstr "_Saltatu babeskopia"
 
-#: ../deja-dup/StatusIcon.vala:141
+#: ../deja-dup/StatusIcon.vala:140
 msgid "Backup completed"
 msgstr "Babeskopia osatu da"
 
-#: ../deja-dup/StatusIcon.vala:184
+#: ../deja-dup/StatusIcon.vala:178
 msgid "Déjà Du_p"
 msgstr "Déjà Du_p"
 
-#: ../deja-dup/StatusIcon.vala:290
+#: ../deja-dup/StatusIcon.vala:284
 msgid "Starting scheduled backup"
 msgstr "Programatutako babeskopia abiarazten"
 
-#: ../deja-dup/StatusIcon.vala:332
+#: ../deja-dup/StatusIcon.vala:326
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% osatua"
 
-#: ../monitor/monitor.vala:171
+#: ../monitor/monitor.vala:144
 msgid "Scheduled backup delayed"
 msgstr "Programatutako babeskopia atzeratu egin da"
 
@@ -1114,77 +1133,81 @@ msgid "I want to _restore files from a previous backup…"
 msgstr ""
 "Fitxategiak _leheneratu nahi ditut aurretiaz egindako babeskopia batetik..."
 
-#: ../preferences/Preferences.vala:60
+#: ../preferences/Preferences.vala:61
 #, c-format
 msgid "Just show my backup _settings"
 msgstr "Erakutsi nire babeskopia-_ezarpenak"
 
-#: ../preferences/Preferences.vala:153
+#: ../preferences/Preferences.vala:133
+msgid "Categories"
+msgstr "Kategoriak"
+
+#: ../preferences/Preferences.vala:160
 msgid "Automatic _backups:"
 msgstr "_Babeskopia automatikoak:"
 
-#: ../preferences/Preferences.vala:165
+#: ../preferences/Preferences.vala:172
 msgid "Where:"
 msgstr "Non:"
 
-#: ../preferences/Preferences.vala:176
+#: ../preferences/Preferences.vala:184
 msgid "Include files from:"
 msgstr "Sartu hemengo fitxategiak:"
 
-#: ../preferences/Preferences.vala:186
+#: ../preferences/Preferences.vala:194
 msgid "Except for:"
 msgstr "Ez sartu hauek:"
 
-#: ../preferences/Preferences.vala:203
+#: ../preferences/Preferences.vala:211
 msgid "Most recent backup:"
 msgstr "Babeskopiarik berriena:"
 
-#: ../preferences/Preferences.vala:225
+#: ../preferences/Preferences.vala:233
 msgid "Next automatic backup:"
 msgstr "Hurrengo babeskopia automatikoa:"
 
-#: ../preferences/Preferences.vala:252
+#: ../preferences/Preferences.vala:260
 msgid "_Restore…"
 msgstr "_Leheneratu..."
 
-#: ../preferences/Preferences.vala:258
+#: ../preferences/Preferences.vala:266
 msgid "Back Up _Now"
 msgstr "Babeskopia _orain"
 
-#: ../preferences/Preferences.vala:281
+#: ../preferences/Preferences.vala:289
 msgid "Overview"
 msgstr "Ikuspegi orokorra"
 
-#: ../preferences/Preferences.vala:313
+#: ../preferences/Preferences.vala:321
 #, c-format
 msgid "_Keep backups:"
 msgstr "_Mantendu babeskopiak"
 
-#: ../preferences/Preferences.vala:326
+#: ../preferences/Preferences.vala:334
 msgid "_Encrypt backup files"
 msgstr "_Zifratu babeskopiaren fitxategiak"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:347
 msgid "Storage"
 msgstr "Biltegia"
 
-#: ../preferences/Preferences.vala:361
+#: ../preferences/Preferences.vala:369
 msgid "I_nclude files in folders:"
 msgstr "_Sartu hurrengo karpetetako fitxategiak:"
 
-#: ../preferences/Preferences.vala:380
+#: ../preferences/Preferences.vala:388
 msgid "E_xcept files in folders:"
 msgstr "_Ez sartu hurrengo karpetetako fitxategiak:"
 
-#: ../preferences/Preferences.vala:399
+#: ../preferences/Preferences.vala:407
 msgid "Files"
 msgstr "Fitxategiak"
 
-#: ../preferences/Preferences.vala:409
+#: ../preferences/Preferences.vala:417
 msgid "How _often to back up:"
 msgstr "_Zenbatero egin babeskopia"
 
-#: ../preferences/Preferences.vala:424
+#: ../preferences/Preferences.vala:432
 msgid "Schedule"
 msgstr "Programaketa"
 
@@ -1257,19 +1280,19 @@ msgstr "Bai"
 msgid "No"
 msgstr "Ez"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:115
-msgid "Home Folder"
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+msgid "Home"
 msgstr "Karpeta nagusia"
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:117
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
 msgid "Trash"
 msgstr "Zakarrontzia"
 
-#: ../widgets/ConfigLabelLocation.vala:63
+#: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: ../widgets/ConfigLabelPolicy.vala:62
+#: ../widgets/ConfigLabelPolicy.vala:61
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
@@ -1277,7 +1300,7 @@ msgstr ""
 "Babeskopia zaharrak gutxienez astebetez edo babeskopiaren kokapena lekurik "
 "gabe geratu arte mantenduko dira."
 
-#: ../widgets/ConfigLabelPolicy.vala:64
+#: ../widgets/ConfigLabelPolicy.vala:63
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
@@ -1285,7 +1308,7 @@ msgstr ""
 "Babeskopia zaharrak gutxienez hilabetez edo babeskopiaren kokapena lekurik "
 "gabe geratu arte mantenduko dira."
 
-#: ../widgets/ConfigLabelPolicy.vala:66
+#: ../widgets/ConfigLabelPolicy.vala:65
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
@@ -1293,7 +1316,7 @@ msgstr ""
 "Babeskopia zaharrak gutxienez bi hilabetez edo babeskopiaren kokapena "
 "lekurik gabe geratu arte mantenduko dira."
 
-#: ../widgets/ConfigLabelPolicy.vala:68
+#: ../widgets/ConfigLabelPolicy.vala:67
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
@@ -1301,7 +1324,7 @@ msgstr ""
 "Babeskopia zaharrak gutxienez hiru hilabetez edo babeskopiaren kokapena "
 "lekurik gabe geratu arte mantenduko dira."
 
-#: ../widgets/ConfigLabelPolicy.vala:70
+#: ../widgets/ConfigLabelPolicy.vala:69
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
@@ -1309,7 +1332,7 @@ msgstr ""
 "Babeskopia zaharrak gutxienez sei hilabetez edo babeskopiaren kokapena "
 "lekurik gabe geratu arte mantenduko dira."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:71
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1317,13 +1340,13 @@ msgstr ""
 "Babeskopia zaharrak gutxienez urtebetez edo babeskopiaren kokapena lekurik "
 "gabe geratu arte mantenduko dira."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:73
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Babeskopia zaharrak babeskopiaren kokapena lekurik gabe geratu arte "
 "mantenduko dira."
 
-#: ../widgets/ConfigLabelPolicy.vala:76
+#: ../widgets/ConfigLabelPolicy.vala:75
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1338,32 +1361,32 @@ msgstr[1] ""
 "Babeskopia zaharrak gutxienez %d egun edo babeskopiaren kokapena lekurik "
 "gabe geratu arte mantenduko dira."
 
-#: ../widgets/ConfigList.vala:154
+#: ../widgets/ConfigList.vala:187
 msgid "Choose folders"
 msgstr "Hautatu karpetak"
 
-#: ../widgets/ConfigLocation.vala:116
+#: ../widgets/ConfigLocation.vala:120
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:118
+#: ../widgets/ConfigLocation.vala:122
 msgid "Windows Share"
 msgstr "Windows Share"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:124
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:126
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:125
+#: ../widgets/ConfigLocation.vala:129
 msgid "Custom Location"
 msgstr "Kokapen pertsonalizatua"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:131
+#: ../widgets/ConfigLocation.vala:135
 msgid "Local Folder"
 msgstr "Karpeta lokala"
 
@@ -1386,9 +1409,9 @@ msgid "_Port:"
 msgstr "_Ataka:"
 
 #: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
-#: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:34
+#: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
 #: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
-#: ../widgets/ConfigLocationU1.vala:32 ../widgets/ConfigLocationVolume.vala:31
+#: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder:"
 msgstr "_Karpeta:"
 
@@ -1408,7 +1431,7 @@ msgstr "Hautatu karpeta"
 msgid "_Container:"
 msgstr "Edu_kiontzia:"
 
-#: ../widgets/ConfigLocationS3.vala:32
+#: ../widgets/ConfigLocationS3.vala:31
 msgid "S3 Access Key I_D:"
 msgstr "S3 atzitze-gakoaren I_Da:"
 
@@ -1444,7 +1467,7 @@ msgid_plural "Every %d days"
 msgstr[0] "egun %detik behin"
 msgstr[1] "%d egunetik behin"
 
-#: ../widgets/WidgetUtils.vala:31
+#: ../widgets/WidgetUtils.vala:30
 #, c-format
 msgid "Could not display %s"
 msgstr "Ezin izan da %s erakutsi"
@@ -1476,6 +1499,9 @@ msgstr "Ezin izan da %s erakutsi"
 #~ msgid "The type of backup location."
 #~ msgstr "Babeskopiaren kokapen-mota."
 
+#~ msgid "Preferences"
+#~ msgstr "Hobespenak"
+
 #~ msgid "Include from:"
 #~ msgstr "Sartu hauek:"
 
@@ -1490,6 +1516,15 @@ msgstr "Ezin izan da %s erakutsi"
 
 #~ msgid "Password Needed"
 #~ msgstr "Pasahitza behar da"
+
+#~ msgid "Scanning for files from last month…"
+#~ msgstr "Azken hileko fitxategiak eskaneatzen..."
+
+#~ msgid "Scanning for files from yesterday…"
+#~ msgstr "Atzoko fitxategiak eskaneatzen..."
+
+#~ msgid "Scanning for files from last week…"
+#~ msgstr "Azken asteko fitxategiak eskaneatzen..."
 
 #~ msgid "No filenames provided"
 #~ msgstr "Ez da fitxategi-izenik adierazi"
@@ -1546,6 +1581,9 @@ msgstr "Ezin izan da %s erakutsi"
 
 #~ msgid "Could not open connection dialog"
 #~ msgstr "Ezin izan da konexio-koadroa ireki"
+
+#~ msgid "Home Folder"
+#~ msgstr "Karpeta nagusia"
 
 #~ msgid "Select Backup Location"
 #~ msgstr "Hautatu babeskopiaren kokapena"
@@ -1658,3 +1696,6 @@ msgstr "Ezin izan da %s erakutsi"
 
 #~ msgid "Indicates this backup was scheduled"
 #~ msgstr "Babeskopia hau aurrez programatu dela adierazten du"
+
+#~ msgid "Another Déjà Dup Backup Tool operation is already running"
+#~ msgstr "Déjà Dup Backup Tool aplikazioaren beste eragiketa bat abian dago"

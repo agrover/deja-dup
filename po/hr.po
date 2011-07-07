@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-06-13 09:49-0400\n"
-"PO-Revision-Date: 2011-06-13 21:48+0000\n"
+"POT-Creation-Date: 2011-07-02 13:03+0100\n"
+"PO-Revision-Date: 2011-07-04 10:52+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,26 +16,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-06-14 04:42+0000\n"
+"X-Launchpad-Export-Date: 2011-07-05 04:33+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 
-#: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
-#: ../data/deja-dup-preferences.desktop.in.in.h:1 ../deja-dup/Prompt.vala:93
-#: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:140
-#: ../deja-dup/StatusIcon.vala:289 ../monitor/monitor.vala:131
+#: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
+#: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
+#: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:139
+#: ../deja-dup/StatusIcon.vala:283 ../monitor/monitor.vala:104
+#: ../preferences/preferences-main.vala:51
 #: ../preferences/preferences-main.vala:63
 msgid "Backup"
-msgstr "Sigurnosna kopija"
+msgstr "Sigurnosno kopiranje"
 
-#: ../data/deja-dup-ccpanel.desktop.in.h:2
-#: ../data/deja-dup-preferences.desktop.in.in.h:2
+#. Translators: The name is a play on the French phrase "déjà vu" meaning
+#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
+#. context is itself a reference to both the underlying command line tool
+#. "duplicity" and the act of duplicating data for backup.  As a whole, the
+#. phrase "Déjà Dup" may not be very translatable.
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
+#: ../deja-dup/main.vala:79 ../preferences/Preferences.vala:85
+#, c-format
+msgid "Déjà Dup Backup Tool"
+msgstr "Déjà Dup alat sigurnosnog kopiranja"
+
+#: ../data/deja-dup-ccpanel.desktop.in.h:1
+#: ../data/deja-dup-preferences.desktop.in.in.h:1
+msgid "Back Up Now"
+msgstr "Izradi sigurnsnu kopiju odmah"
+
+#: ../data/deja-dup-ccpanel.desktop.in.h:3
+#: ../data/deja-dup-preferences.desktop.in.in.h:3
 msgid "Change your backup settings"
 msgstr "Promjenite vaše postavke sigurnosne kopije"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:316
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:297
 msgid "Backup Monitor"
 msgstr "Nadzor sigurnosne kopije"
 
@@ -52,6 +69,8 @@ msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
 msgstr ""
+"Dodatni naziv mape za spremanje datoteka. Ova mapa će biti izrađena u "
+"odabranom spremniku"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
 msgid "Backup location"
@@ -141,7 +160,7 @@ msgstr "Skraćeni naziv vanjskog uređaja"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:20
 msgid "The Amazon S3 bucket name to use"
-msgstr ""
+msgstr "Naziv Amazon S3 spremnika za korištenje"
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
@@ -160,6 +179,8 @@ msgstr "Ubuntu One mapa"
 msgid ""
 "The first time Déjà Dup checked whether it should prompt about backing up"
 msgstr ""
+"Prvi put kada je Déjà Dup provjerio treba li upozoriti o stvaranju "
+"sigurnosnih kopija"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid ""
@@ -238,6 +259,10 @@ msgid ""
 "and $VIDEO are recognized as the user’s special directories. Relative "
 "entries are relative to the user’s home directory."
 msgstr ""
+"Ovaj popis direktorija će biti sigurnosno kopiran. Rezervirano vrijednosti "
+"$HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+"$TEMPLATES, $TRASH, i $VIDEO su prepoznate kao korisnikovi posebni "
+"direktoriji. Srodne stavke su slične osobnom korisnikovu direktoriju."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
@@ -246,14 +271,18 @@ msgid ""
 "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
 "directories. Relative entries are relative to the user’s home directory."
 msgstr ""
+"Ovaj popis direktorija neće biti sigurnosno kopiran. Rezervirano vrijednosti "
+"$HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+"$TEMPLATES, $TRASH, i $VIDEO su prepoznate kao korisnikovi posebni "
+"direktoriji. Srodne stavke su slične osobnom korisnikovu direktoriju."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 msgid "Type of location to store backup"
-msgstr ""
+msgstr "Tip lokaciju za spremanje sigurnosne kopije"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "Unique ID of the external volume"
-msgstr ""
+msgstr "Jedinstveni ID vanjskog uređaja"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid ""
@@ -267,231 +296,238 @@ msgstr ""
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
+"Bilo da je lokacija sigurnosne kopije montirana na  vanjski uređaj ili "
+"normaln direktorij."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Whether the welcome screen has been dismissed"
-msgstr ""
+msgstr "Bilo da je zaslon dobrodošlice otpušten"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid "Whether to automatically back up on a regular schedule."
-msgstr ""
+msgstr "Bilo da automatsko sigurnosno kopiranje na redovitom rasporedu."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Whether to encrypt your backup"
-msgstr ""
+msgstr "Bilo za šifriranje vaše sigurnosne kopije"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid ""
 "Whether to encrypt your backup files in the storage location. It’s strongly "
 "recommended to leave this as ‘true’."
 msgstr ""
+"Bilo za šifriranje vaše sigurnosne kopije datoteka u lokaciji za pohranu. "
+"Preproručljivo je da ostavite ovo kao ‘true’."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Whether to periodically back up"
-msgstr ""
+msgstr "Bilo za povremeno sigurnosno kopiranje"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid "Whether to request the root password"
-msgstr ""
+msgstr "Bilo za zahtjev root lozinke"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
 msgstr ""
+"Bilo za zahtjev root lozinke kada sigurnosno kopirate ili vraćate sigurnosnu "
+"kopiju u sistemske direktorije"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr ""
+"U koji Amazon S3 spremnik da pohranim datoteke. To ne treba već postojati. "
+"Samo legalni hostname nizovi su valjani."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr ""
+"U koji Rackspace oblak datoteka spremnik da pohranim datoteke.  To ne treba "
+"već postojati. Samo legalni hostname nizovi su valjani."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
+"Vaš Amazon S3 identifikacijski pristupni ključ. Ovo važi kao vaše S3 "
+"korisničko ime."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
 msgid "Your Rackspace username"
-msgstr ""
+msgstr "Vaše Rackspace korisničko ime"
 
 #: ../data/ui/restore-missing.ui.h:1
 msgid "Folder:"
-msgstr ""
+msgstr "Direktorij:"
 
-#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:173
+#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:171
 msgid "Scanning…"
-msgstr ""
+msgstr "Pretraživanje..."
 
 #: ../nautilus/NautilusExtension.c:165
 msgid "Restore Missing Files…"
-msgstr ""
+msgstr "Vrati datoteke koje nedostaju..."
 
 #: ../nautilus/NautilusExtension.c:166
 msgid "Restore deleted files from backup"
-msgstr ""
+msgstr "Vrati izbrisane datoteke iz sigurnosne kopije"
 
 #: ../nautilus/NautilusExtension.c:208
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Vrati na prethodnu verziju..."
+msgstr[1] "Vrati na prethodnu verziju..."
+msgstr[2] "Vrati na prethodnu verziju..."
 
 #: ../nautilus/NautilusExtension.c:212
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Vrati datoteku iz sigurnosne kopije"
+msgstr[1] "Vrati datoteke iz sigurnosne kopije"
+msgstr[2] "Vrati datoteka iz sigurnosne kopije"
 
 #: ../common/BackendFile.vala:74
 msgid "GVFS FUSE is not installed"
-msgstr ""
+msgstr "GVFS FUSE nije instaliran"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:425
+#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:430
 #, c-format
 msgid "%1$s on %2$s"
-msgstr ""
+msgstr "%1$s na %2$s"
 
 #: ../common/BackendFile.vala:130
 #, c-format
 msgid "Backup will begin when %s becomes connected."
-msgstr ""
+msgstr "Sigurnosno kopiranje će početi kada % s postane povezano."
 
-#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:50
-#: ../common/BackendS3.vala:60 ../common/BackendU1.vala:144
+#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:49
+#: ../common/BackendS3.vala:59 ../common/BackendU1.vala:146
 msgid "Backup will begin when a network connection becomes available."
-msgstr ""
+msgstr "Sigurnosno kopiranje će početi kada mrežna veza postane dostupna."
 
 #: ../common/BackendFile.vala:419
 msgid "Backup location not available"
-msgstr ""
+msgstr "Lokacija sigurnosne kopije nije dostupna"
 
 #: ../common/BackendFile.vala:419
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
-msgstr ""
+msgstr "Čekanje '%s' da postane spojeno..."
 
-#: ../common/BackendRackspace.vala:59
+#: ../common/BackendRackspace.vala:58
 msgid "You must specify a Rackspace container in your preferences."
-msgstr ""
+msgstr "Morate navesti Rackspace spremnik u svojim postavkama."
 
-#: ../common/BackendRackspace.vala:68 ../widgets/ConfigLocation.vala:195
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
 msgid "Rackspace Cloud Files"
-msgstr ""
+msgstr "Rackspace oblak datoteke"
 
 #. Translators: %s is a folder.
-#: ../common/BackendRackspace.vala:71
+#: ../common/BackendRackspace.vala:70
 #, c-format
 msgid "%s on Rackspace Cloud Files"
-msgstr ""
+msgstr "%s na Rackspace oblak datoteke"
 
-#: ../common/BackendRackspace.vala:118 ../common/BackendS3.vala:173
+#: ../common/BackendRackspace.vala:117 ../common/BackendS3.vala:172
 msgid "Permission denied"
-msgstr ""
+msgstr "Dozvola odbijena"
 
-#: ../common/BackendRackspace.vala:139
+#: ../common/BackendRackspace.vala:138
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
 "href=\"%s\">online</a>."
 msgstr ""
+"Možete se prijaviti za Rackspace oblak datoteka račun <a "
+"href=\"%s\">online</a>."
+
+#: ../common/BackendRackspace.vala:139
+msgid "_API access key:"
+msgstr "_API pristupni ključ:"
 
 #: ../common/BackendRackspace.vala:140
-msgid "_API access key:"
-msgstr ""
+msgid "S_how API access key"
+msgstr "P_rikaži API pristupni ključ"
 
 #: ../common/BackendRackspace.vala:141
-msgid "S_how API access key"
-msgstr ""
-
-#: ../common/BackendRackspace.vala:142
 msgid "_Remember API access key"
-msgstr ""
+msgstr "_Zapamti  API pristupni ključ"
 
-#: ../common/BackendRackspace.vala:144
+#: ../common/BackendRackspace.vala:143
 msgid "Enter Rackspace Cloud Files API key"
-msgstr ""
+msgstr "Unesi Rackspace oblak datoteka API ključ"
 
-#: ../common/BackendS3.vala:123 ../widgets/ConfigLocation.vala:179
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
 msgid "Amazon S3"
-msgstr ""
+msgstr "Amazon S3"
 
 #. Translators: %s is a folder.
-#: ../common/BackendS3.vala:126
+#: ../common/BackendS3.vala:125
 #, c-format
 msgid "%s on Amazon S3"
-msgstr ""
+msgstr "%s na Amazon S3"
 
-#: ../common/BackendS3.vala:194
+#: ../common/BackendS3.vala:193
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
-msgstr ""
+msgstr "Možete se prijaviti za Amazon S3 račun  <a href=\"%s\">online</a>."
+
+#: ../common/BackendS3.vala:194
+msgid "_Access key ID:"
+msgstr "_ID pristupnog ključa:"
 
 #: ../common/BackendS3.vala:195
-msgid "_Access key ID:"
-msgstr ""
+msgid "_Secret access key:"
+msgstr "_Tajni pristupni ključ:"
 
 #: ../common/BackendS3.vala:196
-msgid "_Secret access key:"
-msgstr ""
+msgid "S_how secret access key"
+msgstr "P_rikaži tajni pristupni ključ"
 
 #: ../common/BackendS3.vala:197
-msgid "S_how secret access key"
-msgstr ""
-
-#: ../common/BackendS3.vala:198
 msgid "_Remember secret access key"
-msgstr ""
+msgstr "_Zapamti tajni pristupni ključ"
 
-#: ../common/BackendS3.vala:200
+#: ../common/BackendS3.vala:199
 msgid "Enter Amazon S3 access key"
-msgstr ""
+msgstr "Unesi Amazon S3 pristupni ključ"
 
-#: ../common/BackendU1.vala:160 ../widgets/ConfigLocation.vala:187
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
 msgid "Ubuntu One"
-msgstr ""
+msgstr "Ubuntu One"
 
 #. Translators: %s is a folder.
-#: ../common/BackendU1.vala:163
+#: ../common/BackendU1.vala:165
 #, c-format
 msgid "%s on Ubuntu One"
-msgstr ""
-
-#: ../common/BackendU1.vala:218
-msgid "Sign into Ubuntu One…"
-msgstr ""
+msgstr "%s na Ubuntu One"
 
 #: ../common/BackendU1.vala:220
-msgid "Connect to Ubuntu One"
-msgstr ""
+msgid "Sign into Ubuntu One…"
+msgstr "Prijavite se na Ubuntu One..."
 
-#. Translators: The name is a play on the French phrase "déjà vu" meaning
-#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
-#. context is itself a reference to both the underlying command line tool
-#. "duplicity" and the act of duplicating data for backup.  As a whole, the
-#. phrase "Déjà Dup" may not be very translatable.
-#: ../common/CommonUtils.vala:88 ../deja-dup/main.vala:80
-#: ../preferences/Preferences.vala:86
-#, c-format
-msgid "Déjà Dup Backup Tool"
-msgstr ""
+#: ../common/BackendU1.vala:222
+msgid "Connect to Ubuntu One"
+msgstr "Povezivanje sa Ubuntu One"
 
 #: ../common/DuplicityInfo.vala:142
 msgid "Could not run duplicity"
-msgstr ""
+msgstr "Nije moguće pokrenuti dvostruko"
 
 #: ../common/DuplicityInfo.vala:147
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
 msgstr ""
+"Nije moguće razumjeti dvostruku verziju.\n"
+"\n"
 
 #: ../common/DuplicityInfo.vala:149
 #, c-format
@@ -499,15 +535,19 @@ msgid ""
 "Could not understand duplicity version ‘%s’.\n"
 "\n"
 msgstr ""
+"Nije moguće razumjeti dvostruku verziju ‘%s’.\n"
+"\n"
 
 #: ../common/DuplicityInfo.vala:151
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
+"Bez dvostrukosti, Déjà Dup alat sigurnosnog kopiranja ne može funkcionirati. "
+"Sada će se zatvoriti."
 
 #: ../common/DuplicityInfo.vala:155
 msgid "Duplicity’s version is too old"
-msgstr ""
+msgstr "Verzija dvostrukosti je prestara"
 
 #: ../common/DuplicityInfo.vala:156
 #, c-format
@@ -515,450 +555,483 @@ msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
 "only found version %d.%d.%.2d"
 msgstr ""
+"Déjà Dup alat sigurnosnog kopiranja zahtjeva najmanje verziju %d.%d.%.2d "
+"dvostrukosti, pronađena verzija je %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:128 ../common/Duplicity.vala:180
+#: ../common/Duplicity.vala:127 ../common/Duplicity.vala:179
 msgid "Paused (no network)"
-msgstr ""
+msgstr "Pauzirano (nema mreže)"
 
-#: ../common/Duplicity.vala:378 ../common/Duplicity.vala:386
-#: ../common/Duplicity.vala:403 ../common/Operation.vala:81
-#: ../common/Operation.vala:112
+#: ../common/Duplicity.vala:377 ../common/Duplicity.vala:385
+#: ../common/Duplicity.vala:402 ../common/Operation.vala:80
+#: ../common/Operation.vala:111
 msgid "Preparing…"
-msgstr ""
+msgstr "Pripremanje..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:434
+#: ../common/Duplicity.vala:433
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
-msgstr ""
+msgstr "Nije moguće vratiti ‘%s’: nije valjana lokacija datoteke"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:501
+#: ../common/Duplicity.vala:500
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
+"Lokacija sigurnosne kopije je premala. Probajte odabrati lokaciju sa više "
+"slobodnog prostora."
 
-#: ../common/Duplicity.vala:522
+#: ../common/Duplicity.vala:521
 msgid "Backup location does not have enough free space."
-msgstr ""
+msgstr "Lokacija sigurnosne kopije nema dovoljno slobodnog prostora."
 
-#: ../common/Duplicity.vala:542 ../common/Duplicity.vala:556
+#: ../common/Duplicity.vala:541 ../common/Duplicity.vala:555
 msgid "Cleaning up…"
-msgstr ""
+msgstr "Čišćenje..."
 
-#: ../common/Duplicity.vala:618
+#: ../common/Duplicity.vala:626
 msgid "Creating the first backup.  This may take a while."
-msgstr ""
+msgstr "Stvaranje prve sigurnosne kopije. Ovo bi moglo potrajati."
 
-#: ../common/Duplicity.vala:620
+#: ../common/Duplicity.vala:628
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
 msgstr ""
+"Stvaranje svježe sigurnosne kopije radi zaštite protiv oštećenja sigurnosne "
+"kopije. To će trajati dulje nego normalno."
 
-#: ../common/Duplicity.vala:669 ../common/Duplicity.vala:1042
+#: ../common/Duplicity.vala:670 ../common/Duplicity.vala:1042
 msgid "Failed with an unknown error."
-msgstr ""
+msgstr "Neuspješno sa nepoznatom pogreškom."
 
-#: ../common/Duplicity.vala:899
+#: ../common/Duplicity.vala:895
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
+"Nije moguće vratiti ‘%s’: Datoteka nije pronađena u sigurnosnoj kopiji"
 
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:905 ../common/Duplicity.vala:984
+#: ../common/Duplicity.vala:901 ../common/Duplicity.vala:980
 msgid "Bad encryption password."
-msgstr ""
+msgstr "Loša lozinka šifriranja."
 
-#: ../common/Duplicity.vala:910
+#: ../common/Duplicity.vala:906
 msgid "Computer name changed"
-msgstr ""
+msgstr "Naziv računala je promijenjen"
 
-#: ../common/Duplicity.vala:910
+#: ../common/Duplicity.vala:906
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
 "name is %s.  If this is unexpected, you should back up to a different "
 "location."
 msgstr ""
+"Postojeća sigurnosna kopija je od računala koje se naziva %s; naziv "
+"trenutnog računala je %s. Ako je ovo neočekivano, trebali bi sigurnosno "
+"kopirati na drugu lokaciju."
 
-#: ../common/Duplicity.vala:923
+#: ../common/Duplicity.vala:919
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
-msgstr ""
+msgstr "Dozvola odbijena kada pokušavate stvoriti ‘%s’."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:927 ../common/Duplicity.vala:931
+#: ../common/Duplicity.vala:923 ../common/Duplicity.vala:927
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
-msgstr ""
+msgstr "Dozvola odbijena kada pokušavate čitati ‘%s’."
 
-#: ../common/Duplicity.vala:935
+#: ../common/Duplicity.vala:931
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
-msgstr ""
+msgstr "Dozvola odbijena kada pokušavate obrisati ‘%s’."
 
-#: ../common/Duplicity.vala:942
+#: ../common/Duplicity.vala:938
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
-msgstr ""
+msgstr "Lokacija sigurnosne ‘%s’ kopije ne postoji."
 
-#: ../common/Duplicity.vala:948 ../common/Duplicity.vala:1003
+#: ../common/Duplicity.vala:944 ../common/Duplicity.vala:999
 msgid "No space left."
-msgstr ""
+msgstr "Nema slobodnog prostora."
+
+#: ../common/Duplicity.vala:958
+msgid "Invalid ID."
+msgstr "Pogrešan ID."
+
+#: ../common/Duplicity.vala:960
+msgid "Invalid secret key."
+msgstr "Pogrešan tajni ključ."
 
 #: ../common/Duplicity.vala:962
-msgid "Invalid ID."
-msgstr ""
-
-#: ../common/Duplicity.vala:964
-msgid "Invalid secret key."
-msgstr ""
-
-#: ../common/Duplicity.vala:966
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
-msgstr ""
+msgstr "Vaš Amazon Web Servis račun nije prijavljen za S3 uslugu."
 
-#: ../common/Duplicity.vala:979
+#: ../common/Duplicity.vala:975
 msgid "S3 bucket name is not available."
-msgstr ""
+msgstr "S3 naziv spremnika nije dostupan."
 
-#: ../common/Duplicity.vala:988
+#: ../common/Duplicity.vala:984
 #, c-format
 msgid "Error reading file ‘%s’."
-msgstr ""
+msgstr "Pgreška pri čitanju datoteke ‘%s’."
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:986
 #, c-format
 msgid "Error writing file ‘%s’."
-msgstr ""
+msgstr "Pgreška pri pisanju datoteke ‘%s’."
 
-#: ../common/Duplicity.vala:1005
+#: ../common/Duplicity.vala:1001
 #, c-format
 msgid "No space left in ‘%s’."
-msgstr ""
+msgstr "Nema slobodnog prostora u ‘%s’."
 
 #: ../common/Duplicity.vala:1025
 msgid "No backup files found"
-msgstr ""
+msgstr "Nema pronađenih datoteka sigurnosne kopije"
 
 #: ../common/Duplicity.vala:1073
 msgid "Uploading…"
-msgstr ""
+msgstr "Prijenos..."
 
 #: ../common/OperationRestore.vala:54
 msgid "Restoring files…"
-msgstr ""
+msgstr "Vraćanje datoteka..."
 
-#: ../common/OperationRestore.vala:173
+#: ../common/OperationRestore.vala:177
 #, c-format
 msgid ""
 "Not all files could be restored. Any files that could not be restored may "
 "still be found in %s."
 msgstr ""
+"Nije moguće vratiti sve datoteke. Svaka datoteka koju nije moguće vratiti "
+"može se pronaći u %s."
 
-#: ../common/OperationRestore.vala:182
+#: ../common/OperationRestore.vala:186
 #, c-format
 msgid "Could not restore %s: %s"
-msgstr ""
+msgstr "Nije moguće vratit %s: %s"
 
-#: ../common/Operation.vala:73
+#: ../common/Operation.vala:72
 msgid "Backing up…"
-msgstr ""
+msgstr "Sigurnosno kopiranje..."
 
-#: ../common/Operation.vala:75 ../deja-dup/AssistantRestore.vala:499
+#: ../common/Operation.vala:74 ../deja-dup/AssistantRestore.vala:504
 msgid "Restoring…"
-msgstr ""
+msgstr "Vraćanje..."
 
-#: ../common/Operation.vala:77
+#: ../common/Operation.vala:76
 msgid "Checking for backups…"
-msgstr ""
+msgstr "Provjera sigurnosnih kopija..."
 
-#: ../common/Operation.vala:79
+#: ../common/Operation.vala:78
 msgid "Listing files…"
-msgstr ""
+msgstr "Popis datoteka..."
 
-#: ../common/Operation.vala:276
-msgid "Another Déjà Dup Backup Tool operation is already running"
-msgstr ""
+#: ../common/Operation.vala:287
+msgid "Another backup operation is already running"
+msgstr "Druga operacija sigurnosnog kopiranja je već pokrenuta"
 
 #: ../deja-dup/AssistantBackup.vala:31
 msgctxt "back up is verb"
 msgid "Back Up"
-msgstr ""
+msgstr "Sigurnosno kopiraj"
 
 #: ../deja-dup/AssistantBackup.vala:32
 msgctxt "back up is verb"
 msgid "_Back Up"
-msgstr ""
+msgstr "_Sigurnosno kopiraj"
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:68
+#: ../deja-dup/AssistantBackup.vala:73
 msgid "Backing up:"
-msgstr ""
+msgstr "Sigurnosno kopirnje:"
 
-#: ../deja-dup/AssistantBackup.vala:85
+#: ../deja-dup/AssistantBackup.vala:90
 msgid "Backup Failed"
-msgstr ""
+msgstr "Sigurnosno kopirnje nije uspjelo"
 
-#: ../deja-dup/AssistantBackup.vala:92
+#: ../deja-dup/AssistantBackup.vala:97
 msgid "Backing Up…"
-msgstr ""
+msgstr "Sigurnosno kopirnje..."
 
-#: ../deja-dup/AssistantOperation.vala:172
+#: ../deja-dup/AssistantOperation.vala:170
 msgid "Scanning:"
-msgstr ""
+msgstr "Pretraživanje:"
 
-#: ../deja-dup/AssistantOperation.vala:246
+#: ../deja-dup/AssistantOperation.vala:244
 msgid "_Details"
-msgstr ""
+msgstr "_Detalji"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:293
+#, c-format
+msgid ""
+"You might want to write your password down. If you forget it, you will not "
+"be able to recover your files."
+msgstr ""
+"Možda želite zapisati vašu lozinku. Ako je zaboravite, nećete moći vratiti "
+"svoje datoteke."
+
+#: ../deja-dup/AssistantOperation.vala:293
+msgid "Leave the password blank to disable encryption."
+msgstr "Ostavite praznu lozinku kako biste onemogućili šifriranje."
+
+#: ../deja-dup/AssistantOperation.vala:307
 msgid "E_ncryption password:"
-msgstr ""
+msgstr "Š_ifrirana lozinka:"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:323
 msgid "Confir_m password:"
-msgstr ""
+msgstr "Potvrd_i lozinku:"
 
-#: ../deja-dup/AssistantOperation.vala:322
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "_Show password"
-msgstr ""
+msgstr "_Prikaži lozinku"
 
-#: ../deja-dup/AssistantOperation.vala:331
+#: ../deja-dup/AssistantOperation.vala:342
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
-msgstr ""
+msgstr "_Zapamti lozinku"
 
-#: ../deja-dup/AssistantOperation.vala:396
+#: ../deja-dup/AssistantOperation.vala:408
 msgid "Summary"
-msgstr ""
+msgstr "Kratak pregled"
 
-#: ../deja-dup/AssistantOperation.vala:411
+#: ../deja-dup/AssistantOperation.vala:423
 msgid "Encryption Password Needed"
-msgstr ""
+msgstr "Potrebna je lozinka šifriranja"
 
-#: ../deja-dup/AssistantOperation.vala:670
+#: ../deja-dup/AssistantOperation.vala:691
 msgid "Backup encryption password"
-msgstr ""
+msgstr "Lozinka šifriranja sigurnosne kopije"
+
+#: ../deja-dup/AssistantRestore.vala:71
+msgid "Restore"
+msgstr "Vrati"
 
 #: ../deja-dup/AssistantRestore.vala:72
-msgid "Restore"
-msgstr ""
-
-#: ../deja-dup/AssistantRestore.vala:73
 msgid "_Restore"
-msgstr ""
+msgstr "_Vrati"
 
-#: ../deja-dup/AssistantRestore.vala:95 ../preferences/Preferences.vala:294
+#: ../deja-dup/AssistantRestore.vala:94 ../preferences/Preferences.vala:302
 msgid "_Backup location:"
-msgstr ""
+msgstr "_Lokacija sigurnosne kopije:"
 
-#: ../deja-dup/AssistantRestore.vala:106
+#: ../deja-dup/AssistantRestore.vala:105
 msgid "Backup files are _encrypted"
-msgstr ""
+msgstr "Datoteke sigurnosne kopije su _šifrirane"
 
-#: ../deja-dup/AssistantRestore.vala:130
-msgid "Preferences"
-msgstr ""
+#: ../deja-dup/AssistantRestore.vala:131
+msgid "Settings"
+msgstr "Postavke"
 
-#: ../deja-dup/AssistantRestore.vala:151
+#: ../deja-dup/AssistantRestore.vala:153
 msgid "_Date:"
-msgstr ""
+msgstr "_Datum:"
 
-#: ../deja-dup/AssistantRestore.vala:174
+#: ../deja-dup/AssistantRestore.vala:176
 msgid "Restore files to _original locations"
-msgstr ""
+msgstr "Vraćanje datoteka na _izvorne lokacije"
 
-#: ../deja-dup/AssistantRestore.vala:179
+#: ../deja-dup/AssistantRestore.vala:181
 msgid "Restore to _specific folder"
-msgstr ""
+msgstr "Vraćanje u _određeni direktorij"
 
-#: ../deja-dup/AssistantRestore.vala:189
+#: ../deja-dup/AssistantRestore.vala:191
 msgid "Choose destination for restored files"
-msgstr ""
+msgstr "Odaberite odredište za vraćene datoteke"
 
-#: ../deja-dup/AssistantRestore.vala:193
+#: ../deja-dup/AssistantRestore.vala:195
 msgid "Restore _folder:"
-msgstr ""
+msgstr "Direktorij _vraćanja:"
 
-#: ../deja-dup/AssistantRestore.vala:226
+#: ../deja-dup/AssistantRestore.vala:228
 msgid "Backup location:"
-msgstr ""
+msgstr "Lokacija sigurnosne kopije:"
 
-#: ../deja-dup/AssistantRestore.vala:233
+#: ../deja-dup/AssistantRestore.vala:235
 msgid "Encrypted:"
-msgstr ""
+msgstr "Šifrirano:"
 
-#: ../deja-dup/AssistantRestore.vala:240
+#: ../deja-dup/AssistantRestore.vala:242
 msgid "Restore date:"
-msgstr ""
+msgstr "Datum vraćanja:"
 
-#: ../deja-dup/AssistantRestore.vala:249
+#: ../deja-dup/AssistantRestore.vala:251
 msgid "Restore folder:"
-msgstr ""
+msgstr "Direktorij vraćanja:"
 
-#: ../deja-dup/AssistantRestore.vala:273
+#: ../deja-dup/AssistantRestore.vala:276
 msgid "Checking for Backups…"
-msgstr ""
+msgstr "Provjera sigurnosnih kopija..."
 
-#: ../deja-dup/AssistantRestore.vala:281
+#: ../deja-dup/AssistantRestore.vala:284
 msgid "Restore from When?"
-msgstr ""
+msgstr "Vrati od kada?"
 
-#: ../deja-dup/AssistantRestore.vala:289
+#: ../deja-dup/AssistantRestore.vala:292
 msgid "Restore to Where?"
-msgstr ""
+msgstr "Vrati gdje?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:317
+#: ../deja-dup/AssistantRestore.vala:320
 msgid "Restoring:"
-msgstr ""
+msgstr "Vraćanje:"
 
 #. Translators: %x is the current date, %X is the current time.
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: ../deja-dup/AssistantRestore.vala:359
+#: ../deja-dup/AssistantRestore.vala:362
 #, c-format
 msgid "%x %X"
-msgstr ""
+msgstr "%x %X"
 
-#: ../deja-dup/AssistantRestore.vala:372
+#: ../deja-dup/AssistantRestore.vala:375
 msgid "No backups to restore"
-msgstr ""
+msgstr "Nema sigurnosnih kopija za vraćanje"
 
-#: ../deja-dup/AssistantRestore.vala:450
+#: ../deja-dup/AssistantRestore.vala:455
 msgid "Original location"
-msgstr ""
+msgstr "Izvorna lokacija"
 
-#: ../deja-dup/AssistantRestore.vala:463
+#: ../deja-dup/AssistantRestore.vala:468
 msgid "File to restore:"
 msgid_plural "Files to restore:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Datoteka za vraćanje"
+msgstr[1] "Datoteke za vraćanje"
+msgstr[2] "Datoteka za vraćanje"
 
-#: ../deja-dup/AssistantRestore.vala:487
+#: ../deja-dup/AssistantRestore.vala:492
 msgid "Restore Failed"
-msgstr ""
+msgstr "Vraćanje nije uspjelo"
 
-#: ../deja-dup/AssistantRestore.vala:489
+#: ../deja-dup/AssistantRestore.vala:494
 msgid "Restore Finished"
-msgstr ""
+msgstr "Vraćanje završeno"
 
-#: ../deja-dup/AssistantRestore.vala:491
+#: ../deja-dup/AssistantRestore.vala:496
 msgid "Your files were successfully restored."
-msgstr ""
+msgstr "Vaše datoteke su uspješno vraćene."
 
-#: ../deja-dup/AssistantRestore.vala:493
+#: ../deja-dup/AssistantRestore.vala:498
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Vaša datoteka je uspješno vraćena."
+msgstr[1] "Vaše datoteke su uspješno vraćene."
+msgstr[2] "Vaših datoteka je uspješno vraćeno."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:189
+#: ../deja-dup/AssistantRestoreMissing.vala:199
 msgid "File"
-msgstr ""
+msgstr "Datoteka"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:190
+#: ../deja-dup/AssistantRestoreMissing.vala:200
 msgid "Last seen"
-msgstr ""
+msgstr "Zadnji put viđen"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:205
+#: ../deja-dup/AssistantRestoreMissing.vala:215
 msgid "Restore which Files?"
-msgstr ""
-
-#: ../deja-dup/AssistantRestoreMissing.vala:336
-msgid "Scanning for files from yesterday…"
-msgstr ""
-
-#: ../deja-dup/AssistantRestoreMissing.vala:339
-msgid "Scanning for files from last week…"
-msgstr ""
-
-#: ../deja-dup/AssistantRestoreMissing.vala:342
-msgid "Scanning for files from last month…"
-msgstr ""
+msgstr "Vrati koje datoteke?"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:346
+msgid "Scanning for files from up to a day ago…"
+msgstr "Pretraživanje datoteka do prije jednog dana..."
+
+#: ../deja-dup/AssistantRestoreMissing.vala:349
+msgid "Scanning for files from up to a week ago…"
+msgstr "Pretraživanje datoteka do prije tjedan dana..."
+
+#: ../deja-dup/AssistantRestoreMissing.vala:352
+msgid "Scanning for files from up to a month ago…"
+msgstr "Pretraživanje datoteka do prije mjesec dana..."
+
+#: ../deja-dup/AssistantRestoreMissing.vala:356
 #, c-format
 msgid "Scanning for files from about a month ago…"
 msgid_plural "Scanning for files from about %d months ago…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Pretraživanje datoteka otprilike od mjesec dana..."
+msgstr[1] "Pretraživanje datoteka otprilike od %d mjeseca..."
+msgstr[2] "Pretraživanje datoteka otprilike od %d mjeseci..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:352
+#: ../deja-dup/AssistantRestoreMissing.vala:362
 #, c-format
 msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Pretraživanje datoteka otprilike od prije godinu dana..."
+msgstr[1] "Pretraživanje datoteka otprilike od prije %d godine..."
+msgstr[2] "Pretraživanje datoteka otprilike od prije %d godina..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:442
+#: ../deja-dup/AssistantRestoreMissing.vala:452
 msgid "Scanning finished"
-msgstr ""
+msgstr "Pretraživanje završeno"
 
-#: ../deja-dup/Assistant.vala:312
+#: ../deja-dup/Assistant.vala:310
 msgid "Co_ntinue"
-msgstr ""
+msgstr "Na_stavi"
 
-#: ../deja-dup/Assistant.vala:350 ../deja-dup/StatusIcon.vala:104
+#: ../deja-dup/Assistant.vala:348 ../deja-dup/StatusIcon.vala:103
 msgid "_Resume Later"
-msgstr ""
+msgstr "_Nastavi kasnije"
 
-#: ../deja-dup/main.vala:36 ../monitor/monitor.vala:34
-#: ../preferences/preferences-main.vala:27
+#: ../deja-dup/main.vala:35 ../monitor/monitor.vala:35
+#: ../preferences/preferences-main.vala:26
 msgid "Show version"
-msgstr ""
+msgstr "Prikaži verziju"
+
+#: ../deja-dup/main.vala:36
+msgid "Restore given files"
+msgstr "Vrati zadane datoteke"
 
 #: ../deja-dup/main.vala:37
-msgid "Restore given files"
-msgstr ""
-
-#: ../deja-dup/main.vala:38
 msgid "Immediately start a backup"
-msgstr ""
+msgstr "Odmah započni sigurnosno kopiranje"
 
-#: ../deja-dup/main.vala:40
+#: ../deja-dup/main.vala:39
 msgid "Restore deleted files"
-msgstr ""
+msgstr "Vrati izbrisane datoteke"
 
-#: ../deja-dup/main.vala:57
+#: ../deja-dup/main.vala:56
 msgid "No directory provided"
-msgstr ""
+msgstr "Nema uvjetovanog direktorija"
 
-#: ../deja-dup/main.vala:62
+#: ../deja-dup/main.vala:61
 msgid "Only one directory can be shown at once"
-msgstr ""
+msgstr "Samo jedan direktorij može biti prikazan odjednom"
+
+#: ../deja-dup/main.vala:82
+msgid "[FILES…]"
+msgstr "[DATOTEKE...]"
 
 #: ../deja-dup/main.vala:83
-msgid "[FILES…]"
-msgstr ""
-
-#: ../deja-dup/main.vala:84
 msgid "DIRECTORY"
-msgstr ""
+msgstr "DIREKTORIJ"
 
 #. Translators: Wrap this to 80 characters per line if you can, as I have for English
-#: ../deja-dup/main.vala:88
+#: ../deja-dup/main.vala:87
 msgid ""
 "Déjà Dup is a simple backup tool.  It hides the complexity of backing up\n"
 "the Right Way (encrypted, off-site, and regular) and uses duplicity as\n"
 "the backend."
 msgstr ""
+"Déjà Dup je jednostavan alat za sigurnosno kopiranje.  Skriva kompleksnost "
+"sigurnosnih kopija\n"
+"na pravi način (šifrirane, off-site, i redovito) i koriste kao dvostrukost\n"
+"pozadinu."
 
-#: ../deja-dup/main.vala:148
+#: ../deja-dup/main.vala:141
 msgid "Directory does not exists"
-msgstr ""
+msgstr "Direktorij ne postoji"
 
-#: ../deja-dup/main.vala:152
+#: ../deja-dup/main.vala:145
 msgid "You must provide a directory, not a file"
-msgstr ""
+msgstr "Morate osigurati direktorij a ne datoteku"
 
-#: ../deja-dup/main.vala:164
+#: ../deja-dup/main.vala:157
 msgid "You must specify a mode"
-msgstr ""
+msgstr "Morate odrediti način"
 
 #. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
@@ -966,39 +1039,39 @@ msgstr ""
 #: ../widgets/ConfigLocationRackspace.vala:32
 #: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
 msgid "_Username:"
-msgstr ""
+msgstr "_Korisničko ime:"
 
 #: ../deja-dup/MountOperationAssistant.vala:37
 msgid "_Password:"
-msgstr ""
+msgstr "_Lozinaka:"
 
 #: ../deja-dup/MountOperationAssistant.vala:38
 msgid "S_how password"
-msgstr ""
+msgstr "P_rikaži lozinku"
 
 #: ../deja-dup/MountOperationAssistant.vala:81
 msgid "Location not available"
-msgstr ""
+msgstr "Lokacija nije dostupna"
 
 #: ../deja-dup/MountOperationAssistant.vala:141
 msgid "This backup location requires authentication."
-msgstr ""
+msgstr "Ova lokacija sigurnosne kopije zahtijeva provjeru autentičnosti."
 
 #: ../deja-dup/MountOperationAssistant.vala:172
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "Poveži se _anonimno"
 
 #: ../deja-dup/MountOperationAssistant.vala:176
 msgid "Connect as u_ser:"
-msgstr ""
+msgstr "Poveži se kao k_orisnik:"
 
 #: ../deja-dup/MountOperationAssistant.vala:216
 msgid "_Domain:"
-msgstr ""
+msgstr "_Domena"
 
 #: ../deja-dup/Prompt.vala:37
 msgid "Keep your files safe by backing up regularly"
-msgstr ""
+msgstr "Držite vaše datoteke sigurnim redovitim sigurnosnim kopiranjem"
 
 #: ../deja-dup/Prompt.vala:42
 msgid ""
@@ -1006,257 +1079,280 @@ msgid ""
 "a backup. In the case of a disaster, you would be able to recover them from "
 "that backup."
 msgstr ""
+"Važni dokumenti, podaci i postavke mogu se zaštititi pohranom u sigurnosnu "
+"kopiju. U slučaju katastrofe, moći će te ih vratiti iz te sigurnosne kopije."
 
 #: ../deja-dup/Prompt.vala:48
 msgid "_Don't Show Again"
-msgstr ""
+msgstr "_Ne prikazuj ponovno"
 
 #: ../deja-dup/Prompt.vala:50
 msgid "Don't Show Again"
-msgstr ""
+msgstr "Ne prikazuj ponovno"
 
 #: ../deja-dup/Prompt.vala:56
 msgid "_Open Backup Settings"
-msgstr ""
+msgstr "_Otvori postavke sigurnosnog kopiranja"
 
 #: ../deja-dup/Prompt.vala:58
 msgid "Open Backup Settings"
-msgstr ""
+msgstr "Otvori postavke sigurnosnog kopiranja"
 
-#: ../deja-dup/StatusIcon.vala:106
+#: ../deja-dup/StatusIcon.vala:105
 msgid "_Delay Backup"
-msgstr ""
+msgstr "_Odgoda sigurnosnog kopiranja"
+
+#: ../deja-dup/StatusIcon.vala:107
+msgid "_Cancel Backup"
+msgstr "_Poništi sigurnosno kopiranje"
 
 #: ../deja-dup/StatusIcon.vala:108
-msgid "_Cancel Backup"
-msgstr ""
-
-#: ../deja-dup/StatusIcon.vala:109
 msgid "_Skip Backup"
-msgstr ""
+msgstr "_Preskoči sigurnosno kopiranje"
 
-#: ../deja-dup/StatusIcon.vala:141
+#: ../deja-dup/StatusIcon.vala:140
 msgid "Backup completed"
-msgstr ""
+msgstr "Sigurnosno kopiranje završeno"
 
-#: ../deja-dup/StatusIcon.vala:184
+#: ../deja-dup/StatusIcon.vala:178
 msgid "Déjà Du_p"
-msgstr ""
+msgstr "Déjà Du_p"
 
-#: ../deja-dup/StatusIcon.vala:290
+#: ../deja-dup/StatusIcon.vala:284
 msgid "Starting scheduled backup"
-msgstr ""
+msgstr "Pokretanje planiranog sigurnosnog kopiranja"
 
-#: ../deja-dup/StatusIcon.vala:332
+#: ../deja-dup/StatusIcon.vala:326
 #, c-format
 msgid "%.1f%% complete"
-msgstr ""
+msgstr "%.1f%% dovršeno"
 
-#: ../monitor/monitor.vala:171
+#: ../monitor/monitor.vala:144
 msgid "Scheduled backup delayed"
-msgstr ""
+msgstr "Planirano sigurnosno kopiranje odgođeno"
 
 #: ../preferences/Preferences.vala:44
 #, c-format
 msgid "I want to _restore files from a previous backup…"
-msgstr ""
+msgstr "Želim vratiti datoteke iz prethodne sigurnosne kopije..."
 
-#: ../preferences/Preferences.vala:60
+#: ../preferences/Preferences.vala:61
 #, c-format
 msgid "Just show my backup _settings"
-msgstr ""
+msgstr "Samo prikaži postavke moje sigurnosne _kopije"
 
-#: ../preferences/Preferences.vala:153
+#: ../preferences/Preferences.vala:133
+msgid "Categories"
+msgstr "Kategorije"
+
+#: ../preferences/Preferences.vala:160
 msgid "Automatic _backups:"
-msgstr ""
+msgstr "Automatsko stvaranje sigurnosnih kopija:"
 
-#: ../preferences/Preferences.vala:165
+#: ../preferences/Preferences.vala:172
 msgid "Where:"
-msgstr ""
+msgstr "Gdje:"
 
-#: ../preferences/Preferences.vala:176
+#: ../preferences/Preferences.vala:184
 msgid "Include files from:"
-msgstr ""
+msgstr "Uključujući datoteke iz:"
 
-#: ../preferences/Preferences.vala:186
+#: ../preferences/Preferences.vala:194
 msgid "Except for:"
-msgstr ""
+msgstr "Osim za:"
 
-#: ../preferences/Preferences.vala:203
+#: ../preferences/Preferences.vala:211
 msgid "Most recent backup:"
-msgstr ""
+msgstr "Najnovija sigurnosne kopije:"
 
-#: ../preferences/Preferences.vala:225
+#: ../preferences/Preferences.vala:233
 msgid "Next automatic backup:"
-msgstr ""
+msgstr "Sljedeće automatsko sigurnosno kopiranje:"
 
-#: ../preferences/Preferences.vala:252
+#: ../preferences/Preferences.vala:260
 msgid "_Restore…"
-msgstr ""
+msgstr "_Vrati..."
 
-#: ../preferences/Preferences.vala:258
+#: ../preferences/Preferences.vala:266
 msgid "Back Up _Now"
-msgstr ""
+msgstr "Izradi sigurnosnu kopiju _odmah"
 
-#: ../preferences/Preferences.vala:281
+#: ../preferences/Preferences.vala:289
 msgid "Overview"
-msgstr ""
+msgstr "Pregled"
 
-#: ../preferences/Preferences.vala:313
+#: ../preferences/Preferences.vala:321
 #, c-format
 msgid "_Keep backups:"
-msgstr ""
+msgstr "_Čuvaj sigurnosne kopije:"
 
-#: ../preferences/Preferences.vala:326
+#: ../preferences/Preferences.vala:334
 msgid "_Encrypt backup files"
-msgstr ""
+msgstr "_Šifriranje datoteka sigurnosnih kopija"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:347
 msgid "Storage"
-msgstr ""
+msgstr "Pohrana"
 
-#: ../preferences/Preferences.vala:361
+#: ../preferences/Preferences.vala:369
 msgid "I_nclude files in folders:"
-msgstr ""
+msgstr "U_ključi datoteke u direktorijima:"
 
-#: ../preferences/Preferences.vala:380
+#: ../preferences/Preferences.vala:388
 msgid "E_xcept files in folders:"
-msgstr ""
+msgstr "O_sim datoteka u direktorijima:"
 
-#: ../preferences/Preferences.vala:399
+#: ../preferences/Preferences.vala:407
 msgid "Files"
-msgstr ""
+msgstr "Datoteke"
 
-#: ../preferences/Preferences.vala:409
+#: ../preferences/Preferences.vala:417
 msgid "How _often to back up:"
-msgstr ""
+msgstr "Kako često sigurnosno kopirati:"
 
-#: ../preferences/Preferences.vala:424
+#: ../preferences/Preferences.vala:432
 msgid "Schedule"
-msgstr ""
+msgstr "Planirano sigurnosno kopiranje"
 
 #: ../widgets/ConfigDelete.vala:44
 msgid "At least a week"
-msgstr ""
+msgstr "Barem tjedan dana"
 
 #: ../widgets/ConfigDelete.vala:45
 msgid "At least a month"
-msgstr ""
+msgstr "Barem mjesec dana"
 
 #: ../widgets/ConfigDelete.vala:46
 msgid "At least two months"
-msgstr ""
+msgstr "Barem dva mjeseca"
 
 #: ../widgets/ConfigDelete.vala:47
 msgid "At least three months"
-msgstr ""
+msgstr "Barem tri mjeseca"
 
 #: ../widgets/ConfigDelete.vala:48
 msgid "At least six months"
-msgstr ""
+msgstr "Barem šest mjeseca"
 
 #: ../widgets/ConfigDelete.vala:49
 msgid "At least a year"
-msgstr ""
+msgstr "Barem godinu dana"
 
 #: ../widgets/ConfigDelete.vala:50
 msgid "Forever"
-msgstr ""
+msgstr "Zauvijek"
 
 #: ../widgets/ConfigDelete.vala:96
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Barem %d dan"
+msgstr[1] "Barem %d dana"
+msgstr[2] "Barem %d dana"
 
 #: ../widgets/ConfigLabelBackupDate.vala:57
 msgid "Today"
-msgstr ""
+msgstr "Danas"
 
 #: ../widgets/ConfigLabelBackupDate.vala:59
 msgid "Yesterday"
-msgstr ""
+msgstr "Jučer"
 
 #: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Tomorrow"
-msgstr ""
+msgstr "Sutra"
 
 #: ../widgets/ConfigLabelBackupDate.vala:69
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d dan od sada"
+msgstr[1] "%d dana od sada"
+msgstr[2] "%d dana od sada"
 
 #: ../widgets/ConfigLabelBackupDate.vala:78
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d dan prije"
+msgstr[1] "%d dana prije"
+msgstr[2] "%d dana prije"
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
-msgstr ""
+msgstr "Da"
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:115
-msgid "Home Folder"
-msgstr ""
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+msgid "Home"
+msgstr "Osobna mapa"
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:117
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
 msgid "Trash"
-msgstr ""
+msgstr "Smeće"
 
-#: ../widgets/ConfigLabelLocation.vala:63
+#: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
-msgstr ""
+msgstr "Nepoznato"
 
-#: ../widgets/ConfigLabelPolicy.vala:62
+#: ../widgets/ConfigLabelPolicy.vala:61
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
 msgstr ""
+"Stare sigurnosne kopije će se čuvati najmanje tjedan dana ili dok ne "
+"ponestane slobodnog prostora na lokaciji sigurnosne kopije."
 
-#: ../widgets/ConfigLabelPolicy.vala:64
+#: ../widgets/ConfigLabelPolicy.vala:63
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
 msgstr ""
+"Stare sigurnosne kopije će se čuvati najmanje mjesec dana ili dok ne "
+"ponestane slobodnog prostora na lokaciji sigurnosne kopije."
 
-#: ../widgets/ConfigLabelPolicy.vala:66
+#: ../widgets/ConfigLabelPolicy.vala:65
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
 msgstr ""
+"Stare sigurnosne kopije će se čuvati najmanje dva mjeseca ili dok ne "
+"ponestane slobodnog prostora na lokaciji sigurnosne kopije."
 
-#: ../widgets/ConfigLabelPolicy.vala:68
+#: ../widgets/ConfigLabelPolicy.vala:67
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
 msgstr ""
+"Stare sigurnosne kopije će se čuvati najmanje tri mjeseca ili dok ne "
+"ponestane slobodnog prostora na lokaciji sigurnosne kopije."
 
-#: ../widgets/ConfigLabelPolicy.vala:70
+#: ../widgets/ConfigLabelPolicy.vala:69
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
+"Stare sigurnosne kopije će se čuvati najmanje šest mjeseca ili dok ne "
+"ponestane slobodnog prostora na lokaciji sigurnosne kopije."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:71
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 msgstr ""
+"Stare sigurnosne kopije će se čuvati najmanje godinu dana ili dok ne "
+"ponestane slobodnog prostora na lokaciji sigurnosne kopije."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:73
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
+"Stare sigurnosne kopije će se čuvati dok ne ponestane slobodnog prostora na "
+"lokaciji sigurnosne kopije."
 
-#: ../widgets/ConfigLabelPolicy.vala:76
+#: ../widgets/ConfigLabelPolicy.vala:75
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1265,118 +1361,126 @@ msgid_plural ""
 "Old backups will be kept at least %d days or until the backup location is "
 "low on space."
 msgstr[0] ""
+"Stare sigurnosne kopije će biti sačuvane barem %d dan ili dok ne ponestane "
+"slobodnog prostora na lokaciji sigurnosne kopije."
 msgstr[1] ""
+"Stare sigurnosne kopije će biti sačuvane barem %d dana ili dok ne ponestane "
+"slobodnog prostora na lokaciji sigurnosne kopije."
+msgstr[2] ""
+"Stare sigurnosne kopije će biti sačuvane barem %d dana ili dok ne ponestane "
+"slobodnog prostora na lokaciji sigurnosne kopije."
 
-#: ../widgets/ConfigList.vala:154
+#: ../widgets/ConfigList.vala:187
 msgid "Choose folders"
-msgstr ""
-
-#: ../widgets/ConfigLocation.vala:116
-msgid "SSH"
-msgstr ""
-
-#: ../widgets/ConfigLocation.vala:118
-msgid "Windows Share"
-msgstr ""
+msgstr "Odaberite direktorije"
 
 #: ../widgets/ConfigLocation.vala:120
-msgid "FTP"
-msgstr ""
+msgid "SSH"
+msgstr "SSH"
 
 #: ../widgets/ConfigLocation.vala:122
-msgid "WebDAV"
-msgstr ""
+msgid "Windows Share"
+msgstr "Windows dijeljenje"
 
-#: ../widgets/ConfigLocation.vala:125
+#: ../widgets/ConfigLocation.vala:124
+msgid "FTP"
+msgstr "FTP"
+
+#: ../widgets/ConfigLocation.vala:126
+msgid "WebDAV"
+msgstr "WebDAV"
+
+#: ../widgets/ConfigLocation.vala:129
 msgid "Custom Location"
-msgstr ""
+msgstr "Prilagođena lokacija"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:131
+#: ../widgets/ConfigLocation.vala:135
 msgid "Local Folder"
-msgstr ""
+msgstr "Lokalni direktorij"
 
 #: ../widgets/ConfigLocationCustom.vala:31
 msgid "_URI:"
-msgstr ""
+msgstr "_URI:"
 
 #: ../widgets/ConfigLocationDAV.vala:31 ../widgets/ConfigLocationFTP.vala:32
 #: ../widgets/ConfigLocationSMB.vala:31 ../widgets/ConfigLocationSSH.vala:31
 msgid "_Server:"
-msgstr ""
+msgstr "_Poslužitelj:"
 
 #: ../widgets/ConfigLocationDAV.vala:38
 msgid "Use secure connection (_HTTPS)"
-msgstr ""
+msgstr "Koristi sigurnu vezu (_HTTPS)"
 
 #: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
 #: ../widgets/ConfigLocationSSH.vala:35
 msgid "_Port:"
-msgstr ""
+msgstr "_Port:"
 
 #: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
-#: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:34
+#: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
 #: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
-#: ../widgets/ConfigLocationU1.vala:32 ../widgets/ConfigLocationVolume.vala:31
+#: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder:"
-msgstr ""
+msgstr "_Direktorij:"
 
 #: ../widgets/ConfigLocationFTP.vala:46
 msgid "_Log in with a username"
-msgstr ""
+msgstr "_Prijavi se sa korisničkim imenom"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Browse…"
-msgstr ""
+msgstr "_Pregledaj..."
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
-msgstr ""
+msgstr "Odaberite direktorij"
 
 #: ../widgets/ConfigLocationRackspace.vala:34
 msgid "_Container:"
-msgstr ""
+msgstr "_Spremnik:"
 
-#: ../widgets/ConfigLocationS3.vala:32
+#: ../widgets/ConfigLocationS3.vala:31
 msgid "S3 Access Key I_D:"
-msgstr ""
+msgstr "S3 I_D pristupni ključ:"
 
 #: ../widgets/ConfigLocationSMB.vala:41
 msgid "_Domain Name:"
-msgstr ""
+msgstr "_Nyziv domene:"
 
 #: ../widgets/ConfigLocationTable.vala:99
 msgid "Optional information:"
-msgstr ""
+msgstr "Dodatne informacije:"
 
 #: ../widgets/ConfigPeriod.vala:36
 msgid "Daily"
-msgstr ""
+msgstr "Dnevno"
 
 #: ../widgets/ConfigPeriod.vala:37
 msgid "Weekly"
-msgstr ""
+msgstr "Tjedno"
 
 #. Translators: Biweekly is every two weeks
 #: ../widgets/ConfigPeriod.vala:39
 msgid "Biweekly"
-msgstr ""
+msgstr "Dvotjedno"
 
 #: ../widgets/ConfigPeriod.vala:40
 msgid "Monthly"
-msgstr ""
+msgstr "Mjesečno"
 
 #: ../widgets/ConfigPeriod.vala:84
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Svaki %d dan"
+msgstr[1] "Svaka %d dana"
+msgstr[2] "Svakih %d dana"
 
-#: ../widgets/WidgetUtils.vala:31
+#: ../widgets/WidgetUtils.vala:30
 #, c-format
 msgid "Could not display %s"
-msgstr ""
+msgstr "Nije moguće prikazati %s"
 
 #~ msgid "Déjà Dup Monitor"
 #~ msgstr "Déjà Dup nadgledatelj"
@@ -1385,3 +1489,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
 #~ "  gogo https://launchpad.net/~trebelnik-stefina"
+
+#~ msgid "Another Déjà Dup Backup Tool operation is already running"
+#~ msgstr "Drugi Déjà Dup alat sigurnosnog kopiranja je već pokrenut"

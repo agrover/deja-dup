@@ -29,8 +29,8 @@ copy-po:
 	test -d $(TD)
 	cp -a $(TD)/po/*.po po
 	for po in $(TD)/help/*.po; do \
-		mkdir -p help/$(basename $(po) .po); \
-		cp -a $(po) help/$(basename $(po) .po)/; \
+		mkdir -p help/$$(basename $$po .po); \
+		cp -a $$po help/$$(basename $$po .po)/; \
 	done
 	bzr add po/*.po
 	bzr add help/*/*.po

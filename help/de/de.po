@@ -7,1188 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-06-20 11:14-0400\n"
-"PO-Revision-Date: 2011-06-14 07:04+0000\n"
-"Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
+"POT-Creation-Date: 2011-06-28 09:32-0400\n"
+"PO-Revision-Date: 2011-06-28 13:42+0000\n"
+"Last-Translator: Launchpad Translations Administrators "
+"<rosetta@launchpad.net>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-06-23 04:57+0000\n"
+"X-Launchpad-Export-Date: 2011-06-29 04:44+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 
-#: support.page:8(desc)
-msgid "Get more help"
-msgstr "Mehr Hilfe erhalten"
-
-#: support.page:11(title)
-#: contribute.page:40(title)
-msgid "Support"
-msgstr "Unterstützung"
-
-#: support.page:13(p)
-msgid ""
-"If you have unanswered questions or a problem you don’t understand, please "
-"<link href=\"https://answers.launchpad.net/deja-dup\">ask about it</link> it "
-"in the support forum."
-msgstr ""
-"Falls Fragen offen bleiben oder Sie ein Problem haben, das Sie nicht lösen "
-"können, dann <link href=\"https://answers.launchpad.net/deja-dup\">fragen "
-"Sie bitte</link> im Support-Forum."
-
-#: support.page:15(p)
-msgid ""
-"Keep in mind that the people answering your questions are volunteers and "
-"that while <app>Déjà Dup</app> is intended to work well, it <link "
-"xref=\"license\">comes with no warranty</link>. So please be polite and "
-"patient."
-msgstr ""
-"Bitte denken Sie daran, dass die Leute Freiwillige sind, die Ihre Fragen "
-"beantworten. Zwar sollte <app>Déjà Dup</app> korrekt funktionieren, aber es "
-"wird <link xref=\"license\">ohne jegliche Gewährleistung "
-"veröffentlicht</link>. Seien Sie daher höflich und haben Sie Geduld."
-
-#: restore-worst-case.page:6(desc)
-msgid "What to do if you can’t restore your files"
-msgstr "Was zu tun ist, wenn Ihre Daten nicht wiederhergstellt werden können"
-
-#: restore-worst-case.page:10(title)
-msgid "When Everything Goes Wrong"
-msgstr "Falls alles schiefgehen sollte"
-
-#: restore-worst-case.page:12(p)
-msgid ""
-"<app>Déjà Dup</app> may fail. Maybe it crashes or gives you an error when "
-"you try to restore. When you really need your data back, the last thing you "
-"want do deal with is a bug. Consider filing a <link "
-"href=\"https://launchpad.net/deja-dup/+filebug\">bug report</link> but in "
-"the meantime, here are some approaches to workaround a misbehaving <app>Déjà "
-"Dup</app> and get your data back."
-msgstr ""
-"Auch <app>Déjà Dup</app> ist nicht fehlerfrei. Es kann der Fall eintreten, "
-"dass ein Fehler beim Wiederherstellen auftritt. Wenn Ihnen die Daten sehr "
-"wichtig sind, ist ein Softwarefehler das letzte, was Sie in diesem Moment "
-"brauchen. Bitte schreiben Sie deshalb einen <link "
-"href=\"https://launchpad.net/deja-dup/+filebug\">Fehlerbericht</link>. Als "
-"Zwischenlösung finden Sie nachfolgend einige Lösungsansätze für etwaiges "
-"Fehlverhalten, um Ihre Daten wiederherzustellen."
-
-#: restore-worst-case.page:14(p)
-msgid ""
-"This is going to get technical. If none of this makes sense to you, don’t be "
-"afraid to <link xref=\"support\">ask for help</link>."
-msgstr ""
-"Es wird jetzt technisch. Wenn nichts von dem für Sie einen Sinn ergibt, "
-"scheue Sie sich nicht <link xref=\"support\">um Hilfe zu fragen</link>."
-
-#: restore-worst-case.page:17(p)
-msgid ""
-"Open a <app>Terminal</app> window by pressing "
-"<keyseq><key>Ctrl</key><key>Alt</key><key>T</key></keyseq>."
-msgstr ""
-"Öffnen Sie eine <app>Konsole</app> (Terminal) durch das Drücken der Tasten "
-"<keyseq><key>Strg</key><key>Alt</key><key>T</key></keyseq>."
-
-#: restore-worst-case.page:18(p)
-msgid ""
-"Create the directory in which you will place your restored files. This guide "
-"will use <file>/tmp/restore</file>:"
-msgstr ""
-"Erstellen Sie das Verzeichnis in welches Sie die Dateien wiederherstellen "
-"wollen. In dieser anleitung wird das Verzeichnis <file>/tmp/restore</file> "
-"verwendet."
-
-#: restore-worst-case.page:19(screen)
-#, no-wrap
-msgid "mkdir -p /tmp/restore"
-msgstr "mkdir -p /tmp/restore"
-
-#: restore-worst-case.page:23(title)
-msgid "Restoring with Duplicity"
-msgstr "Wiederherstellen mit Duplicity"
-
-#: restore-worst-case.page:25(p)
-msgid ""
-"On the assumption that <app>Déjà Dup</app> is just not working for you right "
-"now, you’re going to use the command line tool <app>duplicity</app> that is "
-"used by <app>Déjà Dup</app> behind the scenes to back up and restore your "
-"files."
-msgstr ""
-"Falls <app>Déjà Dup</app> bei Ihnen gerade noch nicht funktioniert, benutzen "
-"Sie das Kommandozeilen-Programm <app>duplicity</app>. Es wird von <app>Déjà "
-"Dup</app> hinter den Kulissen verwendet um Ihre Dateien wiederherzustellen."
-
-#: restore-worst-case.page:27(p)
-msgid ""
-"If you want more information about <app>duplicity</app> than presented here, "
-"run <cmd>man duplicity</cmd>."
-msgstr ""
-"Wenn Sie mehr Informationen über <app>duplicity</app> haben möchten, werfen "
-"Sie einen Blick in die man-page von <app>duplicity</app> in dem Sie den "
-"Befehl <cmd>man duplicity</cmd> in einer Konsole/Terminal ausführen."
-
-#: restore-worst-case.page:29(p)
-msgid ""
-"The first thing we’ll try is a simple restore of all your data. Assuming "
-"your files are on an external drive mounted as <file>/media/backup</file> "
-"and you chose to encrypt the backup, try this:"
-msgstr ""
-"Als erstes versuchen wir eine vollständige Wiederherstellung aller Daten. "
-"Sind die Dateien auf einem externen Laufwerk, wie z.B. "
-"<file>/media/backup</file> und Sie haben sich für eine Verschlüsselung des "
-"Backups entschieden, dann versuchen sie folgendes:"
-
-#: restore-worst-case.page:30(screen)
-#, no-wrap
-msgid "duplicity --gio file:///media/backup /tmp/restore"
-msgstr "duplicity --gio file:///media/backup /tmp/restore"
-
-#: restore-worst-case.page:32(p)
-msgid ""
-"If you didn’t encrypt the backup, add <cmd>--no-encryption</cmd> to the "
-"command."
-msgstr ""
-"Falls Sie Ihre Sicherung nicht verschlüsselt haben, füge Sie zur "
-"Befehlszeile <cmd>--no-encryption</cmd> hinzu."
-
-#: restore-worst-case.page:35(title)
-msgid "Other Backup Locations"
-msgstr "Andere Sicherungskopie-Datenquellen"
-
-#: restore-worst-case.page:36(p)
-msgid ""
-"If you backed up to a remote or cloud server, the syntax you use with "
-"<app>duplicity</app> will be different than the external drive example "
-"above. See below for how to connect to your chosen backup location."
-msgstr ""
-"Wenn Sie Ihre Daten auf einen entfernten Server oder einen Cloud Dienst "
-"gesichert haben, unterscheidet sich die Syntax von <app>duplicity</app> von "
-"dem vorherigen Beispiel mit der externen Festplatte. Folgen Sie der "
-"Anleitung weiter unten um sich mit einer entfernten Datenquelle zu verbinden."
-
-#: restore-worst-case.page:37(p)
-msgid ""
-"Remember to add <cmd>--no-encryption</cmd> to any example commands if you’re "
-"backup is not encrypted."
-msgstr ""
-"Denken Sie daran, zu jedem Beispielbefehl <cmd>--no-encryption</cmd> "
-"hinzuzufügen, falls Ihre Sicherung nicht verschlüsselt ist."
-
-#: restore-worst-case.page:38(p)
-msgid ""
-"If <app>duplicity</app> appears to be having trouble connecting to your "
-"server, try downloading all the <app>duplicity</app> files yourself to a "
-"local folder and following the simpler example above."
-msgstr ""
-"Wenn <app>duplicity</app> nicht in der Lage ist sich mit der entfernten "
-"Datenquelle zu verbinden, versuche Sie alle <app>duplicity</app> Dateien per "
-"Hand (FTP, wget, ... ) in einen lokalen Ordner zu speichern und stellen Sie "
-"die Daten anhand des oberen einfachen Wiederherstellungsverfahrens wieder "
-"her."
-
-#: restore-worst-case.page:41(title)
-msgid "Amazon S3"
-msgstr "Amazon S3"
-
-#: restore-worst-case.page:42(p)
-msgid ""
-"Look up your Amazon S3 access key ID and secret access key and replace "
-"instances of <var>ID</var> and <var>SECRET</var> in the example below with "
-"those respective values."
-msgstr ""
-"Sehen Sie nach ihrer Amazon S3 Zugriffsschlüssel-ID und ihrem geheimen "
-"Zugriffsschlüssel und ersetzen Sie die Platzhalter <var>ID</var> und "
-"<var>SECRET</var> in dem folgenden Beispiel mit ihren jeweiligen Werten."
-
-#: restore-worst-case.page:43(p)
-#: restore-worst-case.page:61(p)
-#: restore-worst-case.page:70(p)
-#: restore-worst-case.page:78(p)
-#: restore-worst-case.page:87(p)
-msgid ""
-"You may have specified a folder in which to put the backup files. In the "
-"example below, replace any instance of <var>FOLDER</var> with that path."
-msgstr ""
-"Wenn Sie bereits einen Ordner für Ihre Backup-Dateien erstellt haben, "
-"ersetzen Sie den Platzhalter <var>FOLDER</var> mit dem Pfad."
-
-#: restore-worst-case.page:44(screen)
-#, no-wrap
-msgid ""
-"\n"
-"export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
-"export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
-"duplicity s3+http://deja-dup-auto-<var>LOWERCASE_ID</var>/<var>FOLDER</var> "
-"/tmp/restore"
-msgstr ""
-"\n"
-"export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
-"export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
-"duplicity s3+http://deja-dup-auto-<var>LOWERCASE_ID</var>/<var>FOLDER</var> "
-"/tmp/restore"
-
-#: restore-worst-case.page:50(title)
-msgid "Rackspace Cloud Files"
-msgstr "Rackspace Cloud Dateien"
-
-#: restore-worst-case.page:51(p)
-msgid ""
-"Look up your Rackspace username and API key and replace instances of "
-"<var>USERNAME</var> and <var>KEY</var> in the example below with those "
-"respective values."
-msgstr ""
-"Ersetzen Sie die Stellen <var>USERNAME</var> und <var>KEY</var> im Beispiel "
-"mit Ihrem Rackspace-Benutzernamen und API-Schlüssel."
-
-#: restore-worst-case.page:52(p)
-msgid ""
-"You may have specified a container in which to put the backup files. In the "
-"example below, replace any instance of <var>CONTAINER</var> with that name."
-msgstr ""
-"Falls Sie einen Container zum Speichern ihrer Datensicherungen angegeben "
-"haben, ersetzen Sie im folgenden Beispiel alle Stellen <var>CONTAINER</var> "
-"mit dem Namen des Containers."
-
-#: restore-worst-case.page:53(screen)
-#, no-wrap
-msgid ""
-"\n"
-"export CLOUDFILES_USERNAME=<var>USERNAME</var>\n"
-"export CLOUDFILES_APIKEY=<var>KEY</var>\n"
-"duplicity cf+http://<var>CONTAINER</var> /tmp/restore"
-msgstr ""
-"\n"
-"export CLOUDFILES_USERNAME=<var>BENUTZERNAME</var>\n"
-"export CLOUDFILES_APIKEY=<var>SCHLÜSSEL</var>\n"
-"duplicity cf+http://<var>CONTAINER</var> /tmp/restore"
-
-#: restore-worst-case.page:59(title)
-msgid "FTP"
-msgstr "FTP"
-
-#: restore-worst-case.page:60(p)
-#: restore-worst-case.page:69(p)
-#: restore-worst-case.page:77(p)
-msgid ""
-"Look up your server address, port, username, and password and replace "
-"instances of <var>SERVER</var>, <var>PORT</var>, <var>USERNAME</var>, and "
-"<var>PASSWORD</var> in the example below with those respective values."
-msgstr ""
-"Ersetzen Sie im folgenden Beispiel alle Stellen <var>SERVER</var>, "
-"<var>PORT</var>, <var>BENUZTERNAME</var> und <var>PASSWORT</var> sowohl mit "
-"den Daten Ihres Servers als auch den zugehörigen Zugangsdaten."
-
-#: restore-worst-case.page:62(p)
-msgid ""
-"If you chose to not log in with a username, use <var>anonymous</var> as your "
-"<var>USERNAME</var> below."
-msgstr ""
-"Falls Sie sich ohne Benutzername anmelden möchten, tragen Sie "
-"<var>anonymous</var> bei <var>BENUTZERNAME</var> ein."
-
-#: restore-worst-case.page:63(screen)
-#, no-wrap
-msgid ""
-"\n"
-"gvfs-mount "
-"ftp://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
-"\n"
-"duplicity --gio "
-"ftp://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
-" /tmp/restore"
-msgstr ""
-"\n"
-"gvfs-mount "
-"ftp://<var>BENUTZERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>ORDNER</"
-"var>\n"
-"duplicity --gio "
-"ftp://<var>BENUTZERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>ORDNER</"
-"var> /tmp/restore"
-
-#: restore-worst-case.page:68(title)
-msgid "SSH"
-msgstr "SSH"
-
-#: restore-worst-case.page:71(screen)
-#, no-wrap
-msgid ""
-"\n"
-"gvfs-mount "
-"ssh://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
-"\n"
-"duplicity --gio "
-"ssh://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
-" /tmp/restore"
-msgstr ""
-"\n"
-"gvfs-mount "
-"ssh://<var>BENUTZERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>ORDNER</"
-"var>\n"
-"duplicity --gio "
-"ssh://<var>BENUTZERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>ORDNER</"
-"var> /tmp/restore"
-
-#: restore-worst-case.page:76(title)
-msgid "WebDAV"
-msgstr "WebDAV"
-
-#: restore-worst-case.page:79(p)
-msgid ""
-"If you chose to use a secure connection (HTTPS) when backing up, use "
-"<var>davs://</var> instead of <var>dav://</var> in the example below."
-msgstr ""
-"Wenn Sie eine sichere Verbindung (HTTPS) zum Sichern ihrer Daten verwenden "
-"möchten, benutzen Sie <var>davs://</var> anstelle von <var>dav://</var> im "
-"folgenden Beispiel."
-
-#: restore-worst-case.page:80(screen)
-#, no-wrap
-msgid ""
-"\n"
-"gvfs-mount "
-"dav://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
-"\n"
-"duplicity --gio "
-"dav://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
-" /tmp/restore"
-msgstr ""
-"\n"
-"gvfs-mount "
-"dav://<var>BENUTZERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>ORDNER</"
-"var>\n"
-"duplicity --gio "
-"dav://<var>BENUTZERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>ORDNER</"
-"var> /tmp/restore"
-
-#: restore-worst-case.page:85(title)
-msgid "Windows Share"
-msgstr "Windows-Freigabe"
-
-#: restore-worst-case.page:86(p)
-msgid ""
-"Look up your server address, username, and password and replace instances of "
-"<var>SERVER</var>, <var>USERNAME</var>, and <var>PASSWORD</var> in the "
-"example below with those respective values."
-msgstr ""
-
-#: restore-worst-case.page:88(p)
-msgid ""
-"If you specified a domain for your Windows server, add it to the beginning "
-"of <var>USERNAME</var> with a semicolon between them. For example, "
-"<var>domain;username</var>."
-msgstr ""
-"Wenn sie eine Domain für ihren Windows-Server angegeben haben, dann fügen "
-"sie diese am Anfang von <var>USERNAME</var> mit einem Semikolon getrennt an. "
-"Beispiel: <var>domain;username</var>"
-
-#: restore-worst-case.page:89(screen)
-#, no-wrap
-msgid ""
-"\n"
-"gvfs-mount smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var>\n"
-"duplicity --gio "
-"smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var> /tmp/restore"
-msgstr ""
-"\n"
-"gvfs-mount smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var>\n"
-"duplicity --gio "
-"smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var> /tmp/restore"
-
-#: restore-worst-case.page:99(title)
-msgid "Restoring by Hand"
-msgstr "Manuelles Wiederherstellen"
-
-#: restore-worst-case.page:101(p)
-msgid ""
-"If even <app>duplicity</app> isn’t working for you, there may be little "
-"hope. The backup file format is complicated and not easily manipulated. But "
-"if you’re desperate, it’s worth a try."
-msgstr ""
-"Falls auch <app>duplicity</app> scheitert, gibt es doch ein wenig Hoffnung. "
-"Das Format der Sicherungsdateien ist kompliziert, und es ist nicht einfach "
-"zu bearbeiten. Aber falls Sie etwas von einem Glücksritter haben, ist es "
-"doch einen Versuch wert."
-
-#: restore-worst-case.page:103(p)
-msgid ""
-"If you used a remote or cloud server to store your backup, first download "
-"all the <app>duplicity</app> files and place them in a folder on your "
-"computer. Then enter that folder in your terminal."
-msgstr ""
-"Sollten sie einen entfernten, oder Cloud-Server für ihre Datensicherung "
-"genutzt haben, laden sie alle  <app>duplicity</app>-Dateien herunter und "
-"speichern Sie sie in einem lokalen Ordner. Danach geben Sie den Pfad zu "
-"diesem Ordner in die Konsole ein."
-
-#: restore-worst-case.page:105(p)
-msgid ""
-"<app>Duplicity</app> stores your data in small chunks called volumes. Some "
-"volumes belong to the periodic ‘full’ or fresh backups and others to the "
-"‘inc’ or incremental backups. Starting with a full backup set of volumes at "
-"volume 1, you’ll need to restore files volume by volume."
-msgstr ""
-
-#: restore-worst-case.page:107(p)
-msgid ""
-"If you encrypted your backup, first you must decrypt the volume with "
-"<cmd>gpg</cmd>. Say you have <file>duplicity-"
-"full.20110127T131352Z.vol1.difftar.gpg</file>:"
-msgstr ""
-"Wenn Ihre Datensicherung verschlüsselt ist, müssen Sie sie zuerst mit "
-"<cmd>gpg</cmd> entschlüsseln. Nehmen wir an, Sie wollen das Archiv "
-"<file>duplicity-full.20110127T131352Z.vol1.difftar.gpg</file> entschlüsseln:"
-
-#: restore-worst-case.page:108(screen)
-#, no-wrap
-msgid ""
-"gpg --output duplicity-full.20110127T131352Z.vol1.difftar --decrypt "
-"duplicity-full.20110127T131352Z.vol1.difftar.gpg"
-msgstr ""
-"gpg --output duplicity-full.20110127T131352Z.vol1.difftar --decrypt "
-"duplicity-full.20110127T131352Z.vol1.difftar.gpg"
-
-#: restore-worst-case.page:110(p)
-msgid "Or to do all at once (make sure you have plenty of space!):"
-msgstr ""
-"Oder um alles auf ein Mal durchzuführen (Stellen Sie sicher, das genug "
-"Speicherplatz zur Verfügung steht!):"
-
-#: restore-worst-case.page:111(screen)
-#, no-wrap
-msgid ""
-"gpg --multifile --decrypt duplicity-full.20110127T131352Z.*.difftar.gpg"
-msgstr ""
-"gpg --multifile --decrypt duplicity-full.20110127T131352Z.*.difftar.gpg"
-
-#: restore-worst-case.page:113(p)
-msgid ""
-"Now you have either a <file>.difftar</file> or a <file>.difftar.gz</file> "
-"volume (depending on whether you had to decrypt it or not). Use "
-"<cmd>tar</cmd> on whichever one you have to extract the individual patch "
-"files:"
-msgstr ""
-"Sie erhalten nun entweder einen <file>.difftar</file>- oder einen "
-"<file>.difftar.gz</file>-Container (abhängig davon, ob Sie sie entschlüsseln "
-"mussten oder nicht). Benutzen Sie <cmd>tar</cmd>, um die Datei(en) zu "
-"entpacken."
-
-#: restore-worst-case.page:114(screen)
-#, no-wrap
-msgid "tar xf duplicity-full.20110127T131352Z.vol1.difftar"
-msgstr "tar xf duplicity-full.20110127T131352Z.vol1.difftar"
-
-#: restore-worst-case.page:116(p)
-msgid "Or again, to do all at once:"
-msgstr "Oder um wieder alles auf ein Mal durchzuführen:"
-
-#: restore-worst-case.page:117(screen)
-#, no-wrap
-msgid ""
-"for t in duplicity-full.20110127T131352Z.*.difftar; do tar xf $t; done"
-msgstr ""
-"for t in duplicity-full.20110127T131352Z.*.difftar; do tar xf $t; done"
-
-#: restore-worst-case.page:119(p)
-msgid ""
-"Now the patch files will be in <file>multivolume_snapshot</file> and "
-"<file>snapshot</file> folders. Each file that spanned multiple volumes will "
-"be in <file>multivolume_snapshot</file>. Let’s say you backed up "
-"<file>/home/jane/essay.txt</file>:"
-msgstr ""
-
-#: restore-worst-case.page:120(screen)
-#, no-wrap
-msgid ""
-"cd multivolume_snapshot/home/jane/essay.txt\n"
-"cat * &gt; essay.txt"
-msgstr ""
-"cd multivolume_snapshot/home/jane/essay.txt\n"
-"cat * &gt; essay.txt"
-
-#: restore-worst-case.page:123(p)
-msgid ""
-"To recover data from incremental backups, use <cmd>rdiff</cmd> to stitch the "
-"files together. See <cmd>man rdiff</cmd> for usage."
-msgstr ""
-"Um Daten von inkrementellen Datensicherungen wiederherzustellen, benutzen "
-"Sie <cmd>rdiff</cmd>. Informationen zur Benutzung finden Sie mit <cmd>man "
-"rdiff</cmd>."
-
-#: restore-revert.page:6(desc)
-msgid "Restore a previous version of a file"
-msgstr "Wiederherstellen einer vorherigen Version einer Datei"
-
-#: restore-revert.page:9(title)
-msgid "Reverting a File"
-msgstr "Eine Datei zurücksetzen"
-
-#: restore-revert.page:11(p)
-msgid "Browse to the folder containing the file you want to revert."
-msgstr ""
-"Öffnen Sie den Ordner, in dem sich die Datei befindet, die Sie zurücksetzen "
-"möchten."
-
-#: restore-revert.page:12(p)
-msgid "Right click on the file you want to revert."
-msgstr ""
-"Klicken Sie mit der rechten Maustaste auf die Datei, die Sie zurücksetzen "
-"möchten."
-
-#: restore-revert.page:13(p)
-msgid "Choose <gui style=\"menuitem\">Revert to Previous Version…</gui>."
-msgstr ""
-"Wählen Sie <gui style=\"menuitem\">Auf frühere Version zurücksetzen …</gui>."
-
-#: restore-revert.page:14(p)
-msgid ""
-"When the <gui>Restore</gui> dialog appears, choose the date from which to "
-"restore."
-msgstr ""
-"Wenn der <gui>Wiederherstellen</gui>-Dialog erscheint, wählen Sie bitte das "
-"Datum für die Wiederherstellung."
-
-#: restore-revert.page:15(p)
-#: restore-full.page:25(p)
-#: restore-full.page:27(p)
-msgid "Click <gui style=\"button\">Forward</gui>."
-msgstr "Klicken Sie <gui style=\"button\">Weiter</gui>."
-
-#: restore-revert.page:16(p)
-msgid ""
-"Review your selections and click <gui style=\"button\">Restore</gui>. Note "
-"that this will overwrite your current version of the file."
-msgstr ""
-"Überprüfen Sie Ihre Auswahl und klicken Sie <gui "
-"style=\"button\">Wiederherstellen</gui>. Beachten Sie bitte, dass dadurch "
-"die aktuelle Version der Datei überschrieben wird."
-
-#: restore-revert.page:18(p)
-msgid "You can select multiple files at once before right clicking."
-msgstr ""
-"Sie können mehrere Dateien auf einmal auswählen, bevor Sie rechtsklicken."
-
-#: restore-revert.page:19(p)
-msgid "You can also revert files on the command line:"
-msgstr "Sie können auch die Befehlszeile zur Wiederherstellung nutzen:"
-
-#: restore-revert.page:20(screen)
-#: restore-lost.page:19(screen)
-#, no-wrap
-msgid "deja-dup --restore FILE1 FILE2"
-msgstr "deja-dup --restore DATEI1 DATEI2"
-
-#: restore-lost.page:6(desc)
-msgid "Restore a file that is no longer present"
-msgstr "Wiederherstellen einer Datei, die nicht mehr vorhanden ist"
-
-#: restore-lost.page:9(title)
-msgid "Restoring a Lost File"
-msgstr "Wiederherstellung einer verlorenen Datei"
-
-#: restore-lost.page:11(p)
-msgid "Browse to the folder containing the file you lost."
-msgstr "Zu dem Ordner navigieren, der die verlorene Datei enthält."
-
-#: restore-lost.page:12(p)
-msgid "Right click on the background of the folder."
-msgstr "Rechtsklick auf eine leere Stelle im Ordner."
-
-#: restore-lost.page:13(p)
-msgid "Choose <gui style=\"menuitem\">Restore Missing Files…</gui>."
-msgstr "Wähle <gui style=\"menuitem\">Restore Missing Files…</gui>."
-
-#: restore-lost.page:14(p)
-msgid ""
-"When the <gui>Restore</gui> dialog appears, it will scan for files that are "
-"in the backup but no longer in the folder."
-msgstr ""
-"Wenn der <gui>Wiederherstellen</gui>-Dialog erscheint, wird <app>Déjà "
-"Dup</app> nach Dateien suchen, welche zwar in der Datensicherung vorhanden "
-"sind, nicht aber im Ordner."
-
-#: restore-lost.page:15(p)
-msgid ""
-"When you see the file you want to restore appear, select it and click <gui "
-"style=\"button\">Forward</gui>."
-msgstr ""
-"Wenn die wiederherzustellende Datei in der Liste erscheint, wählen Sie sie "
-"aus und klicken Sie auf <gui style=\"button\">Weiter</gui>."
-
-#: restore-lost.page:16(p)
-#: restore-full.page:28(p)
-msgid "Review your selections and click <gui style=\"button\">Restore</gui>."
-msgstr ""
-"Überprüfen Sie Ihre ausgewählten Dateien und klicken Sie auf <gui style="
-"\"button\">Wiederherstellen</gui>."
-
-#: restore-lost.page:18(p)
-msgid ""
-"You can restore lost files from the command line as well, if you remember "
-"what their filenames were:"
-msgstr ""
-"Sie können Dateien auch von der Kommandozeile wiederherstellen, solange Sie "
-"sich an den Dateinamen erinnern."
-
-#: restore-full.page:6(desc)
-msgid "Recover from total system failure"
-msgstr "Rettung nach totalem Systemausfall"
-
-#: restore-full.page:9(title)
-msgid "Full System Restore"
-msgstr "Vollständige Wiederherstellung des Systems"
-
-#: restore-full.page:11(title)
-msgid "Setup"
-msgstr "Einstellungen"
-
-#: restore-full.page:13(p)
-msgid ""
-"Get your system to a fresh state. For example, a fresh install or a new "
-"account on an old computer. Don’t worry about getting comfortable and "
-"customizing settings yet. Wait until after you restore your previous "
-"settings to change anything, as any customizations you make now may get "
-"overridden once you restore."
-msgstr ""
-"Bringen Sie Ihr System in einen frischen Zustand, beispielsweise durch eine "
-"Neuinstallation oder ein neues Benutzerkonto auf einem alten Rechner. Denken "
-"Sie zunächst nicht über Anpassungen oder sonstige Einstellungen nach, da "
-"jegliche von Ihnen vorgenommenen Änderungen durch die Wiederherstellung "
-"überschrieben werden."
-
-#: restore-full.page:14(p)
-msgid ""
-"Next, you need to install <app>Déjà Dup</app>. Your distribution vendor may "
-"package it for you. Otherwise, download and compile it."
-msgstr ""
-"Installieren Sie dann <app>Déjà Dup</app>. Der Anbieter Ihrer Distribution "
-"hält möglicherweise ein Paket für Sie bereit. Falls nicht, laden Sie "
-"<app>Déjà Dup</app> herunter und kompilieren Sie es."
-
-#: restore-full.page:18(title)
-msgid "Restore"
-msgstr "Wiederherstellen"
-
-#: restore-full.page:20(p)
-#: backup-first.page:11(p)
-#: backup-auto.page:12(p)
-msgid "Open your <gui>Backup</gui> settings."
-msgstr "Öffen Sie ihre \"<gui>Backup</gui>\"-Einstellungen"
-
-#: restore-full.page:21(p)
-msgid ""
-"Click on the <gui style=\"button\">Restore…</gui> button on the "
-"<gui>Overview</gui> page."
-msgstr ""
-"Klicken sie auf den Knopf \"<gui style=\"button\">Restore…</gui>\" der Seite "
-"\"<gui>Overview</gui>\"."
-
-#: restore-full.page:22(p)
-msgid ""
-"A <gui>Restore</gui> dialog will appear asking where your backup files are "
-"stored (your <gui>Backup location</gui>). On this same screen, select "
-"whether you encrypted the backup or not."
-msgstr ""
-
-#: restore-full.page:23(p)
-msgid ""
-"Click <gui style=\"button\">Forward</gui> and wait for <app>Déjà Dup</app> "
-"to scan the backup location."
-msgstr ""
-
-#: restore-full.page:24(p)
-msgid ""
-"Choose the date you want to restore from. Usually you can just leave this "
-"alone, as the default is the most recent backup."
-msgstr ""
-"Wählen Sie das Datum, für das Sie die Wiederherstellung ausführen wollen. In "
-"den meisten Fällen können Sie dies leer lassen, da als Vorgabe die neueste "
-"Sicherung verwendet wird."
-
-#: restore-full.page:26(p)
-msgid ""
-"Choose where to restore. Since this is a full system backup, leave it as the "
-"default (which restores over your current install)."
-msgstr ""
-"Wählen Sie den Ort der Wiederherstellung. Da es sich um eine vollständige "
-"Systemwiederherstellung handelt, belassen Sie hier die Vorgabe, die eine "
-"Wiederherstellung über Ihrer derzeitigen Installation vornimmt."
-
-#: restore-full.page:29(p)
-msgid "Wait. It may take a long time to finish restoring."
-msgstr ""
-"Bitte warten Sie. Es kann lange dauern, bis alle Daten wieder hergestellt "
-"sind."
-
-#: restore-full.page:30(p)
-msgid ""
-"Finally, reinstall any programs that you enjoyed in your previous install."
-msgstr ""
-"Zum Schluss installieren Sie die Programme, mit denen Sie in Ihrer "
-"vorherigen Installation gearbeitet haben."
-
-#: restore-full.page:32(p)
-msgid ""
-"If for whatever reason you have a problem after trying to restore with the "
-"<gui style=\"checkbox\">Restore files to original locations</gui> option, "
-"try restoring instead to a temporary directory and moving your files to "
-"where they belong."
-msgstr ""
-
-#: restore-full.page:33(p)
-msgid ""
-"If that still doesn’t work, there are <link xref=\"restore-worst-case\">more "
-"drastic things</link> you can try."
-msgstr ""
-"Falls das immer noch nicht funktioniert, gibt es <link xref=\"restore-worst-"
-"case\">drastischere Methoden</link>, die Sie probieren können."
-
-#: prefs.page:7(desc)
-msgid "Adjust your backup settings"
-msgstr "Passen Sie Ihre Sicherungseinstellungen an"
-
-#: prefs.page:10(title)
-msgid "Settings"
-msgstr ""
-
-#: prefs.page:13(gui)
-msgid "Automatic backups"
-msgstr "Automatische Sicherungen"
-
-#: prefs.page:14(p)
-msgid ""
-"Turn this option on to have <app>Déjà Dup</app> automatically back up for "
-"you. This is recommended so that you don’t forget to do it yourself. Backups "
-"are more useful the more recent they are, so it is important to regularly "
-"back up."
-msgstr ""
-
-#: prefs.page:17(gui)
-msgid "Backup location"
-msgstr "Ort der Datensicherung"
-
-#: prefs.page:18(p)
-msgid ""
-"Use these options to specify the backup location that <app>Déjà Dup</app> "
-"will use when backing up or restoring:"
-msgstr ""
-
-#: prefs.page:21(title)
-msgid "Cloud Services"
-msgstr "Cloud Dienst"
-
-#: prefs.page:22(p)
-msgid ""
-"The first few backup locations are cloud storage services provided by "
-"various companies. For a small fee, they hold your data for you. A cloud "
-"service like this is recommended because it is an easy way to keep your data "
-"offsite (meaning out of your home: in case of disaster or theft, your data "
-"will still be safe)."
-msgstr ""
-
-#: prefs.page:23(p)
-msgid ""
-"These services costs money. Read their rates carefully before using it."
-msgstr ""
-"Diese Dienste sind Kostenpflichtig. Informieren Sie sich über die "
-"anfallenden Kosten bevor Sie sie nutzen."
-
-#: prefs.page:26(title)
-msgid "Removable Media"
-msgstr "Wechseldatenträger"
-
-#: prefs.page:27(p)
-msgid ""
-"You may see removable media like external hard drives or thumb drives listed."
-msgstr ""
-"Eventuell werden Ihnen Wechseldatenträger, wie externe Festplatten oder USB-"
-"Sticks angezeigt."
-
-#: prefs.page:30(title)
-msgid "Remote Servers"
-msgstr "entfernte Server"
-
-#: prefs.page:31(p)
-msgid ""
-"Choose the type of remote server to which you want to connect. Then you can "
-"enter the server information. Alternatively, if you know your server’s URL, "
-"choose <gui>Custom Location</gui> and enter it."
-msgstr ""
-
-#: prefs.page:34(title)
-msgid "Local Folder"
-msgstr "Lokaler Ordner"
-
-#: prefs.page:35(p)
-msgid ""
-"You may also want to choose a local folder as a backup location. Note that "
-"backups can be quite large, so make sure you have enough free disk space."
-msgstr ""
-"Sie können auch einen lokalen Ordner als Sicherungsort wählen. Denken Sie "
-"daran, dass Sicherungen recht groß werden können. Stellen Sie also sicher, "
-"dass genug Plattenplatz zur Verfügung steht."
-
-#: prefs.page:36(p)
-msgid ""
-"This is not recommended, because if your hardware fails, you will lose both "
-"your original data and your backups."
-msgstr ""
-"Dies wird nicht empfohlen. Falls Ihre Hardware ausfällt, werden Sie sowohl "
-"Ihre Originaldaten als auch Ihre Sicherungen verlieren."
-
-#: prefs.page:41(gui)
-msgid "Keep backups"
-msgstr "Sicherungen behalten"
-
-#: prefs.page:42(p)
-msgid ""
-"Choose the minimum amount of time to keep backup files. If you find that the "
-"backup files are taking up too much space, you may want to decrease this "
-"duration. Due to implementation details, files may be kept a bit longer than "
-"the chosen time. But no files will be deleted early."
-msgstr ""
-"Wählen Sie die minimale Zeitspanne zum Aufbewahren der Sicherungsdateien. "
-"Falls Sie der Meinung sind, dass die Sicherungsdateien zu viel Platz "
-"verbrauchen, dann können Sie die Zeitspanne verringern. Im Zusammenhang mit "
-"Implementierungsdetails dieses Programms kann diese Zeitspanne tatsächlich "
-"geringfügig länger sein als die gewählte Zeit. In keinem Fall werden jedoch "
-"Dateien vorher gelöscht."
-
-#: prefs.page:43(p)
-msgid ""
-"Backups are kept forever by default, but still may be deleted earlier if the "
-"backup location begins to run out of space."
-msgstr ""
-"Standardmäßig werden Sicherungen für immer aufgehoben, erst wenn auf dem "
-"Ziel-Medium der Speicherplatz knapp wird, werden die Sicherungen beginnend "
-"bei der ältesten überschrieben."
-
-#: prefs.page:46(gui)
-msgid "Encrypt backup files"
-msgstr "Datensicherungsdateien verschlüsseln"
-
-#: prefs.page:47(p)
-msgid ""
-"Encrypting your backup files is recommended to keep your data safe. If you "
-"don’t have exclusive physical control of your backup location or if it is "
-"stolen, an encrypted backup prevents others from looking at your personal "
-"data."
-msgstr ""
-
-#: prefs.page:48(p)
-msgid ""
-"If enabled, you will be prompted for an encryption password when backing up."
-msgstr ""
-"Falls aktiviert, werden Sie beim Sichern nach einem Verschlüsselungspasswort "
-"gefragt."
-
-#: prefs.page:49(p)
-msgid ""
-"Keep this encryption password safe, you will need it to restore your data. "
-"You may want to write it down or use one you know you will remember."
-msgstr ""
-
-#: prefs.page:52(gui)
-msgid "Include files in folders"
-msgstr "Dateien in Ordnern einbeziehen"
-
-#: prefs.page:53(p)
-msgid ""
-"Choose a list of directories to back up. Press the <gui "
-"style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
-"modify the list. If you are only interested in backing up your own data, the "
-"default of <gui>Home Folder</gui> is sufficient."
-msgstr ""
-
-#: prefs.page:56(gui)
-msgid "Except files in folders"
-msgstr "Dateien in Ordnern ausschließen"
-
-#: prefs.page:57(p)
-msgid ""
-"Choose a list of directories to not back up. Press the <gui "
-"style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
-"modify the list."
-msgstr ""
-
-#: prefs.page:58(p)
-msgid ""
-"Some of your data may be large and not very important to you. In that case, "
-"you can save yourself some time and space by not backing them up."
-msgstr ""
-"Einige Ihrer Daten könnten recht groß oder für Sie eher unbedeutend sein. In "
-"solchen Fällen können Sie Zeit und Platz sparen, indem Sie diese nicht "
-"sichern."
-
-#: prefs.page:60(p)
-msgid "Some locations are always excluded by default:"
-msgstr "Manche Orte werden standardmäßig ausgeschlossen:"
-
-#: prefs.page:62(file)
-msgid "~/.adobe/Flash_Player/AssetCache"
-msgstr "~/.adobe/Flash_Player/AssetCache"
-
-#: prefs.page:63(file)
-msgid "~/.cache"
-msgstr "~/.cache"
-
-#: prefs.page:64(file)
-msgid "~/.gvfs"
-msgstr "~/.gvfs"
-
-#: prefs.page:65(file)
-msgid "~/.Private"
-msgstr "~/.Private"
-
-#: prefs.page:66(file)
-msgid "~/.recent-applications.xbel"
-msgstr "~/.recent-applications.xbel"
-
-#: prefs.page:67(file)
-msgid "~/.recently-used.xbel"
-msgstr "~/.recently-used.xbel"
-
-#: prefs.page:68(file)
-msgid "~/.thumbnails"
-msgstr "~/.thumbnails"
-
-#: prefs.page:69(file)
-msgid "~/.xsession-errors"
-msgstr "~/.xsession-errors"
-
-#: prefs.page:70(file)
-msgid "/proc"
-msgstr "/proc"
-
-#: prefs.page:71(file)
-msgid "/sys"
-msgstr "/sys"
-
-#: prefs.page:72(file)
-msgid "/tmp"
-msgstr "/tmp"
-
-#: license.page:6(desc)
-msgid "Know your rights"
-msgstr "Lernen Sie Ihre Rechte kennen"
-
-#: license.page:9(title)
-msgid "License"
-msgstr "Lizenz"
-
-#: license.page:10(p)
-msgid ""
-"This program is free software; you can redistribute it and/or modify it "
-"under the terms of the GNU General Public License as published by the Free "
-"Software Foundation; either version 3 of the License, or (at your option) "
-"any later version."
-msgstr ""
-"Dieses Programm ist freie Software, Sie können sie weitergeben und/oder "
-"verändern solange Sie sich an die Regeln der GNU General Public License "
-"halten, so wie sie von der Free Software Foundation festgelegt wurden; "
-"entweder in Version 3 der Lizenz oder (nach Ihrem Ermessen) in jeder "
-"folgenden Lizenz."
-
-#: license.page:11(p)
-msgid ""
-"This program is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for "
-"more details."
-msgstr ""
-"Die Veröffentlichung dieses Programms erfolgt in der Hoffnung, daß es Ihnen "
-"von Nutzen sein wird, aber OHNE JEDE GEWÄHRLEISTUNG - sogar ohne die "
-"implizite Gewährleistung der MARKTREIFE oder der EIGNUNG FÜR EINEN "
-"BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License."
-
-#: license.page:12(p)
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program. If not, see <link "
-"href=\"http://www.gnu.org/licenses/\">http://www.gnu.org/licenses/</link>."
-msgstr ""
-
-#: index.page:9(name)
-#: credits.page:15(link)
-#: credits.page:23(link)
-#: credits.page:32(link)
-msgid "Michael Terry"
-msgstr "Michael Terry"
-
-#: index.page:10(email)
-msgid "mike@mterry.name"
-msgstr "mike@mterry.name"
-
-#: index.page:11(years)
-msgid "2010,2011"
-msgstr "2010, 2011"
-
-#: index.page:13(p)
-msgid "Creative Commons Attribution-Share Alike 3.0 Unported License"
-msgstr "Creative Commons Attribution-Share Alike 3.0 Unported License"
-
-#: index.page:16(title)
-msgid "Backup Help"
-msgstr "Hilfe zu Datensicherungen"
-
-#: index.page:19(title)
-msgid "Backing Up"
-msgstr "Datensicherung"
-
-#: index.page:23(title)
-msgid "Restoring Files"
-msgstr "Wiederherstellen von Dateien"
-
-#: index.page:27(title)
-msgid "About <app>Déjà Dup Backup Tool</app>"
-msgstr "Info zum <app>Déjà Dup Datensicherungswerkzeug</app>"
-
-#: contribute.page:8(desc)
-msgid "Help make <app>Déjà Dup</app> better"
-msgstr "Helfen Sie mit, <app>Déjà Dup</app> zu verbessern"
-
-#: contribute.page:11(title)
-msgid "Getting Involved"
-msgstr "Mithelfen"
-
-#: contribute.page:13(p)
-msgid ""
-"So you want to help make <app>Déjà Dup</app> even better? Excellent! Here "
-"are some suggestions."
-msgstr ""
-"Sie möchten helfen, <app>Déjà Dup</app> weiter zu verbessern? Großartig! "
-"Hier sind einige Vorschläge."
-
-#: contribute.page:16(title)
-msgid "Report Issues"
-msgstr "Berichten Sie über Fehler"
-
-#: contribute.page:18(p)
-msgid ""
-"Did you see a flaw? Do you have an idea for a new feature? Simply <link "
-"href=\"https://bugs.launchpad.net/deja-dup/+filebug\">report it as a "
-"bug</link>. Be patient for a reply."
-msgstr ""
-"Haben Sie einen Fehler bemerkt? Sie haben eine Idee für ein neues "
-"Funktionsmerkmal? <link href=\"https://bugs.launchpad.net/deja-"
-"dup/+filebug\">Melden Sie es einfach</link> in einem Fehlerbericht. Haben "
-"Sie etwas Geduld."
-
-#: contribute.page:20(p)
-msgid "Note that bug reports should be in English only."
-msgstr ""
-"Beachten Sie, dass Fehlerberichte nur in Englisch verfasst werden sollten."
-
-#: contribute.page:24(title)
-msgid "Talk to Us"
-msgstr "Sprechen Sie mit uns"
-
-#: contribute.page:26(p)
-msgid ""
-"We don’t bite. Send an email to the <link href=\"mailto:deja-dup-"
-"list@gnome.org\">mailing list</link>."
-msgstr ""
-
-#: contribute.page:28(p)
-msgid ""
-"Or <link href=\"https://mail.gnome.org/mailman/listinfo/deja-dup-"
-"list\">subscribe to the list</link>. The list is very low traffic."
-msgstr ""
-
-#: contribute.page:30(p)
-msgid "Note that the list is English only."
-msgstr "Beachten Sie, dass die Sprache der Liste Englisch ist."
-
-#: contribute.page:34(title)
-msgid "Translating"
-msgstr "Übersetzen"
-
-#: contribute.page:36(p)
-msgid ""
-"Do you speak both English and another language? Good! You can help translate "
-"<app>Déjà Dup</app> through <link "
-"href=\"https://translations.launchpad.net/deja-dup\">a web interface</link>. "
-"It’s really quite easy and is very appreciated."
-msgstr ""
-
-#: contribute.page:42(p)
-msgid ""
-"Do you like helping people? <link href=\"https://answers.launchpad.net/deja-"
-"dup\">Answer user questions</link> and support requests."
-msgstr ""
-
-#: contribute.page:44(p)
-msgid ""
-"This is another great way for non-English speakers to get involved, as you "
-"can answer questions posted in your language."
-msgstr ""
-
-#: contribute.page:48(title)
-msgid "Coding"
-msgstr "Programmieren"
-
-#: contribute.page:50(p)
-msgid ""
-"There are always more bugs to fix. If you want to find out what needs doing, "
-"talk to us on the mailing list as described above."
-msgstr ""
-
-#: credits.page:8(desc)
-msgid "Meet the team"
-msgstr ""
-
-#: credits.page:11(title)
-msgid "Credits"
-msgstr "Mitwirkende"
-
-#: credits.page:13(title)
-msgid "Development"
-msgstr ""
-
-#: credits.page:14(link)
-msgid "Andrew Fister"
-msgstr "Andrew Fister"
-
-#: credits.page:16(link)
-msgid "Michael Vogt"
-msgstr "Michael Vogt"
-
-#: credits.page:17(link)
-msgid "Urban Skudnik"
-msgstr "Urban Skudnik"
-
-#: credits.page:18(link)
-#: credits.page:24(link)
-msgid "Canonical Ltd"
-msgstr ""
-
-#: credits.page:22(title)
-msgid "Documentation"
-msgstr ""
-
-#: credits.page:28(title)
-msgid "Art"
-msgstr ""
-
-#: credits.page:29(link)
-msgid "Andreas Nilsson"
-msgstr "Andreas Nilsson"
-
-#: credits.page:30(link)
-msgid "Jakub Steiner"
-msgstr "Jakub Steiner"
-
-#: credits.page:31(link)
-msgid "Lapo Calamandrei"
-msgstr "Lapo Calamandrei"
-
-#: credits.page:35(title)
-msgid "Translation"
-msgstr ""
-
-#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
-#: credits.page:35(p)
-#: backup-auto.page:0(None)
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -1215,28 +47,61 @@ msgstr ""
 "  siziwi https://launchpad.net/~siziwi\n"
 "  utnubu(k) https://launchpad.net/~shaddowy2"
 
-#: backup-first.page:6(desc)
-msgid "Start now"
-msgstr "Jetzt starten"
+#: C/backup-auto.page:6(info/desc)
+msgid "Give yourself peace of mind"
+msgstr "Beruhigen Sie Ihr Gewissen"
 
-#: backup-first.page:9(title)
-msgid "Your First Backup"
-msgstr "Ihre erste Sicherung"
+#: C/backup-auto.page:9(page/title)
+msgid "Automatic Backups"
+msgstr "Automatische Sicherungen"
 
-#: backup-first.page:12(p)
-#: backup-auto.page:13(p)
+#: C/backup-auto.page:10(page/p)
+msgid ""
+"If you only back up when you remember to do so, you’re not backing up often "
+"enough. Fortunately, it’s easy to set up automatic backups."
+msgstr ""
+
+#: C/backup-auto.page:12(item/p)
+#: C/backup-first.page:11(item/p)
+#: C/restore-full.page:20(item/p)
+msgid "Open your <gui>Backup</gui> settings."
+msgstr "Öffen Sie ihre \"<gui>Backup</gui>\"-Einstellungen"
+
+#: C/backup-auto.page:13(item/p)
+#: C/backup-first.page:12(item/p)
 msgid ""
 "Review your <link xref=\"prefs\">backup settings</link>, to confirm they are "
 "what you want."
 msgstr ""
 
-#: backup-first.page:13(p)
+#: C/backup-auto.page:14(item/p)
+msgid ""
+"Turn on the <gui>Automatic backups</gui> option on the <gui>Overview</gui> "
+"page."
+msgstr ""
+
+#: C/backup-auto.page:16(note/p)
+msgid ""
+"Consider only saving your backups for a certain length of time, using the "
+"<gui>Keep backups</gui> option on the <gui>Storage</gui> page. Otherwise, "
+"they may end up consuming a lot of space while you’re not paying attention."
+msgstr ""
+
+#: C/backup-first.page:6(info/desc)
+msgid "Start now"
+msgstr "Jetzt starten"
+
+#: C/backup-first.page:9(page/title)
+msgid "Your First Backup"
+msgstr "Ihre erste Sicherung"
+
+#: C/backup-first.page:13(item/p)
 msgid ""
 "Click on the <gui style=\"button\">Back Up Now</gui> button on the "
 "<gui>Overview</gui> page."
 msgstr ""
 
-#: backup-first.page:14(p)
+#: C/backup-first.page:14(item/p)
 msgid ""
 "Wait. It may take a long time to backup, especially if you are backing up to "
 "a remote server. Just let it run in the background while you do something "
@@ -1246,32 +111,1004 @@ msgstr ""
 "wenn Sie die Sicherung auf einem entfernten Server speichern. Schieben Sie "
 "sie einfach in den Hintergrund und tun Sie etwas anderes."
 
-#: backup-auto.page:6(desc)
-msgid "Give yourself peace of mind"
-msgstr "Beruhigen Sie Ihr Gewissen"
-
-#: backup-auto.page:9(title)
-msgid "Automatic Backups"
-msgstr "Automatische Sicherungen"
-
-#: backup-auto.page:10(p)
-msgid ""
-"If you only back up when you remember to do so, you’re not backing up often "
-"enough. Fortunately, it’s easy to set up automatic backups."
+#: C/credits.page:8(info/desc)
+msgid "Meet the team"
 msgstr ""
 
-#: backup-auto.page:14(p)
-msgid ""
-"Turn on the <gui>Automatic backups</gui> option on the <gui>Overview</gui> "
-"page."
+#: C/credits.page:11(page/title)
+msgid "Credits"
+msgstr "Mitwirkende"
+
+#: C/credits.page:14(section/title)
+msgid "Development"
 msgstr ""
 
-#: backup-auto.page:16(p)
-msgid ""
-"Consider only saving your backups for a certain length of time, using the "
-"<gui>Keep backups</gui> option on the <gui>Storage</gui> page. Otherwise, "
-"they may end up consuming a lot of space while you’re not paying attention."
+#: C/credits.page:25(section/title)
+msgid "Documentation"
 msgstr ""
+
+#: C/credits.page:33(section/title)
+msgid "Art"
+msgstr ""
+
+#: C/credits.page:43(section/title)
+msgid "Translation"
+msgstr ""
+
+#: C/credits.page:44(section/code)
+#, no-wrap
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Atalanttore https://launchpad.net/~atalanttore\n"
+"  Fabian Affolter https://launchpad.net/~fab-fedoraproject\n"
+"  Jan https://launchpad.net/~jcgb\n"
+"  Jan-Christoph Borchardt https://launchpad.net/~jancborchardt\n"
+"  Jannik Waschkau https://launchpad.net/~jannik-waschkau-bremen\n"
+"  Jens Maucher https://launchpad.net/~jensmaucher\n"
+"  JohnnyRep https://launchpad.net/~steffen894\n"
+"  Leo Unglaub https://launchpad.net/~leo-leo-unglaub\n"
+"  Mario Blättermann https://launchpad.net/~mario.blaettermann\n"
+"  Michael Terry https://launchpad.net/~mterry\n"
+"  PsychoKim https://launchpad.net/~psychokim\n"
+"  Richy https://launchpad.net/~klemmster\n"
+"  SpaceCafé https://launchpad.net/~spacecafe\n"
+"  bongo https://launchpad.net/~r-contact-juliankessel-de\n"
+"  cmdrhenner https://launchpad.net/~cmdrhenner\n"
+"  fs1929 https://launchpad.net/~fs\n"
+"  nurio https://launchpad.net/~spammtmichzu\n"
+"  road2ruin https://launchpad.net/~gerald-schmidhuber\n"
+"  rubinstein https://launchpad.net/~rubinstein\n"
+"  rupert angermeier https://launchpad.net/~r.anger\n"
+"  siziwi https://launchpad.net/~siziwi\n"
+"  utnubu(k) https://launchpad.net/~shaddowy2"
+
+#: C/contribute.page:8(info/desc)
+msgid "Help make <app>Déjà Dup</app> better"
+msgstr "Helfen Sie mit, <app>Déjà Dup</app> zu verbessern"
+
+#: C/contribute.page:11(page/title)
+msgid "Getting Involved"
+msgstr "Mithelfen"
+
+#: C/contribute.page:13(page/p)
+msgid ""
+"So you want to help make <app>Déjà Dup</app> even better? Excellent! Here "
+"are some suggestions."
+msgstr ""
+"Sie möchten helfen, <app>Déjà Dup</app> weiter zu verbessern? Großartig! "
+"Hier sind einige Vorschläge."
+
+#: C/contribute.page:16(section/title)
+msgid "Report Issues"
+msgstr "Berichten Sie über Fehler"
+
+#: C/contribute.page:18(section/p)
+msgid ""
+"Did you see a flaw? Do you have an idea for a new feature? Simply <link "
+"href=\"https://bugs.launchpad.net/deja-dup/+filebug\">report it as a "
+"bug</link>. Be patient for a reply."
+msgstr ""
+"Haben Sie einen Fehler bemerkt? Sie haben eine Idee für ein neues "
+"Funktionsmerkmal? <link href=\"https://bugs.launchpad.net/deja-"
+"dup/+filebug\">Melden Sie es einfach</link> in einem Fehlerbericht. Haben "
+"Sie etwas Geduld."
+
+#: C/contribute.page:20(section/p)
+msgid "Note that bug reports should be in English only."
+msgstr ""
+"Beachten Sie, dass Fehlerberichte nur in Englisch verfasst werden sollten."
+
+#: C/contribute.page:24(section/title)
+msgid "Talk to Us"
+msgstr "Sprechen Sie mit uns"
+
+#: C/contribute.page:26(section/p)
+msgid ""
+"We don’t bite. Send an email to the <link href=\"mailto:deja-dup-"
+"list@gnome.org\">mailing list</link>."
+msgstr ""
+
+#: C/contribute.page:28(section/p)
+msgid ""
+"Or <link href=\"https://mail.gnome.org/mailman/listinfo/deja-dup-"
+"list\">subscribe to the list</link>. The list is very low traffic."
+msgstr ""
+
+#: C/contribute.page:30(section/p)
+msgid "Note that the list is English only."
+msgstr "Beachten Sie, dass die Sprache der Liste Englisch ist."
+
+#: C/contribute.page:34(section/title)
+msgid "Translating"
+msgstr "Übersetzen"
+
+#: C/contribute.page:36(section/p)
+msgid ""
+"Do you speak both English and another language? Good! You can help translate "
+"<app>Déjà Dup</app> through <link "
+"href=\"https://translations.launchpad.net/deja-dup\">a web interface</link>. "
+"It’s really quite easy and is very appreciated."
+msgstr ""
+
+#: C/contribute.page:40(section/title)
+#: C/support.page:11(page/title)
+msgid "Support"
+msgstr "Unterstützung"
+
+#: C/contribute.page:42(section/p)
+msgid ""
+"Do you like helping people? <link href=\"https://answers.launchpad.net/deja-"
+"dup\">Answer user questions</link> and support requests."
+msgstr ""
+
+#: C/contribute.page:44(section/p)
+msgid ""
+"This is another great way for non-English speakers to get involved, as you "
+"can answer questions posted in your language."
+msgstr ""
+
+#: C/contribute.page:48(section/title)
+msgid "Coding"
+msgstr "Programmieren"
+
+#: C/contribute.page:50(section/p)
+msgid ""
+"There are always more bugs to fix. If you want to find out what needs doing, "
+"talk to us on the mailing list as described above."
+msgstr ""
+
+#: C/index.page:13(license/p)
+msgid "Creative Commons Attribution-Share Alike 3.0 Unported License"
+msgstr "Creative Commons Attribution-Share Alike 3.0 Unported License"
+
+#: C/index.page:16(page/title)
+msgid "Backup Help"
+msgstr "Hilfe zu Datensicherungen"
+
+#: C/index.page:19(section/title)
+msgid "Backing Up"
+msgstr "Datensicherung"
+
+#: C/index.page:23(section/title)
+msgid "Restoring Files"
+msgstr "Wiederherstellen von Dateien"
+
+#: C/index.page:27(section/title)
+msgid "About <app>Déjà Dup Backup Tool</app>"
+msgstr "Info zum <app>Déjà Dup Datensicherungswerkzeug</app>"
+
+#: C/license.page:6(info/desc)
+msgid "Know your rights"
+msgstr "Lernen Sie Ihre Rechte kennen"
+
+#: C/license.page:9(page/title)
+msgid "License"
+msgstr "Lizenz"
+
+#: C/license.page:10(page/p)
+msgid ""
+"This program is free software; you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation; either version 3 of the License, or (at your option) "
+"any later version."
+msgstr ""
+"Dieses Programm ist freie Software, Sie können sie weitergeben und/oder "
+"verändern solange Sie sich an die Regeln der GNU General Public License "
+"halten, so wie sie von der Free Software Foundation festgelegt wurden; "
+"entweder in Version 3 der Lizenz oder (nach Ihrem Ermessen) in jeder "
+"folgenden Lizenz."
+
+#: C/license.page:11(page/p)
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for "
+"more details."
+msgstr ""
+"Die Veröffentlichung dieses Programms erfolgt in der Hoffnung, daß es Ihnen "
+"von Nutzen sein wird, aber OHNE JEDE GEWÄHRLEISTUNG - sogar ohne die "
+"implizite Gewährleistung der MARKTREIFE oder der EIGNUNG FÜR EINEN "
+"BESTIMMTEN ZWECK. Details finden Sie in der GNU General Public License."
+
+#: C/license.page:12(page/p)
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program. If not, see <link "
+"href=\"http://www.gnu.org/licenses/\">http://www.gnu.org/licenses/</link>."
+msgstr ""
+
+#: C/prefs.page:7(info/desc)
+msgid "Adjust your backup settings"
+msgstr "Passen Sie Ihre Sicherungseinstellungen an"
+
+#: C/prefs.page:10(page/title)
+msgid "Settings"
+msgstr ""
+
+#: C/prefs.page:13(item/title)
+msgid "<gui>Automatic backups</gui>"
+msgstr ""
+
+#: C/prefs.page:14(item/p)
+msgid ""
+"Turn this option on to have <app>Déjà Dup</app> automatically back up for "
+"you. This is recommended so that you don’t forget to do it yourself. Backups "
+"are more useful the more recent they are, so it is important to regularly "
+"back up."
+msgstr ""
+
+#: C/prefs.page:17(item/title)
+msgid "<gui>Backup location</gui>"
+msgstr ""
+
+#: C/prefs.page:18(item/p)
+msgid ""
+"Use these options to specify the backup location that <app>Déjà Dup</app> "
+"will use when backing up or restoring:"
+msgstr ""
+
+#: C/prefs.page:21(item/title)
+msgid "Cloud Services"
+msgstr "Cloud Dienst"
+
+#: C/prefs.page:22(item/p)
+msgid ""
+"The first few backup locations are cloud storage services provided by "
+"various companies. For a small fee, they hold your data for you. A cloud "
+"service like this is recommended because it is an easy way to keep your data "
+"offsite (meaning out of your home: in case of disaster or theft, your data "
+"will still be safe)."
+msgstr ""
+
+#: C/prefs.page:23(note/p)
+msgid ""
+"These services costs money. Read their rates carefully before using it."
+msgstr ""
+"Diese Dienste sind Kostenpflichtig. Informieren Sie sich über die "
+"anfallenden Kosten bevor Sie sie nutzen."
+
+#: C/prefs.page:26(item/title)
+msgid "Removable Media"
+msgstr "Wechseldatenträger"
+
+#: C/prefs.page:27(item/p)
+msgid ""
+"You may see removable media like external hard drives or thumb drives listed."
+msgstr ""
+"Eventuell werden Ihnen Wechseldatenträger, wie externe Festplatten oder USB-"
+"Sticks angezeigt."
+
+#: C/prefs.page:30(item/title)
+msgid "Remote Servers"
+msgstr "entfernte Server"
+
+#: C/prefs.page:31(item/p)
+msgid ""
+"Choose the type of remote server to which you want to connect. Then you can "
+"enter the server information. Alternatively, if you know your server’s URL, "
+"choose <gui>Custom Location</gui> and enter it."
+msgstr ""
+
+#: C/prefs.page:34(item/title)
+msgid "Local Folder"
+msgstr "Lokaler Ordner"
+
+#: C/prefs.page:35(item/p)
+msgid ""
+"You may also want to choose a local folder as a backup location. Note that "
+"backups can be quite large, so make sure you have enough free disk space."
+msgstr ""
+"Sie können auch einen lokalen Ordner als Sicherungsort wählen. Denken Sie "
+"daran, dass Sicherungen recht groß werden können. Stellen Sie also sicher, "
+"dass genug Plattenplatz zur Verfügung steht."
+
+#: C/prefs.page:36(note/p)
+msgid ""
+"This is not recommended, because if your hardware fails, you will lose both "
+"your original data and your backups."
+msgstr ""
+"Dies wird nicht empfohlen. Falls Ihre Hardware ausfällt, werden Sie sowohl "
+"Ihre Originaldaten als auch Ihre Sicherungen verlieren."
+
+#: C/prefs.page:41(item/title)
+msgid "<gui>Keep backups</gui>"
+msgstr ""
+
+#: C/prefs.page:42(item/p)
+msgid ""
+"Choose the minimum amount of time to keep backup files. If you find that the "
+"backup files are taking up too much space, you may want to decrease this "
+"duration. Due to implementation details, files may be kept a bit longer than "
+"the chosen time. But no files will be deleted early."
+msgstr ""
+"Wählen Sie die minimale Zeitspanne zum Aufbewahren der Sicherungsdateien. "
+"Falls Sie der Meinung sind, dass die Sicherungsdateien zu viel Platz "
+"verbrauchen, dann können Sie die Zeitspanne verringern. Im Zusammenhang mit "
+"Implementierungsdetails dieses Programms kann diese Zeitspanne tatsächlich "
+"geringfügig länger sein als die gewählte Zeit. In keinem Fall werden jedoch "
+"Dateien vorher gelöscht."
+
+#: C/prefs.page:43(note/p)
+msgid ""
+"Backups are kept forever by default, but still may be deleted earlier if the "
+"backup location begins to run out of space."
+msgstr ""
+"Standardmäßig werden Sicherungen für immer aufgehoben, erst wenn auf dem "
+"Ziel-Medium der Speicherplatz knapp wird, werden die Sicherungen beginnend "
+"bei der ältesten überschrieben."
+
+#: C/prefs.page:46(item/title)
+msgid "<gui style=\"checkbox\">Encrypt backup files</gui>"
+msgstr ""
+
+#: C/prefs.page:47(item/p)
+msgid ""
+"Encrypting your backup files is recommended to keep your data safe. If you "
+"don’t have exclusive physical control of your backup location or if it is "
+"stolen, an encrypted backup prevents others from looking at your personal "
+"data."
+msgstr ""
+
+#: C/prefs.page:48(item/p)
+msgid ""
+"If enabled, you will be prompted for an encryption password when backing up."
+msgstr ""
+"Falls aktiviert, werden Sie beim Sichern nach einem Verschlüsselungspasswort "
+"gefragt."
+
+#: C/prefs.page:49(note/p)
+msgid ""
+"Keep this encryption password safe, you will need it to restore your data. "
+"You may want to write it down or use one you know you will remember."
+msgstr ""
+
+#: C/prefs.page:52(item/title)
+msgid "<gui>Include files in folders</gui>"
+msgstr ""
+
+#: C/prefs.page:53(item/p)
+msgid ""
+"Choose a list of directories to back up. Press the <gui "
+"style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
+"modify the list. If you are only interested in backing up your own data, the "
+"default of <gui>Home Folder</gui> is sufficient."
+msgstr ""
+
+#: C/prefs.page:56(item/title)
+msgid "<gui>Except files in folders</gui>"
+msgstr ""
+
+#: C/prefs.page:57(item/p)
+msgid ""
+"Choose a list of directories to not back up. Press the <gui "
+"style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
+"modify the list."
+msgstr ""
+
+#: C/prefs.page:58(item/p)
+msgid ""
+"Some of your data may be large and not very important to you. In that case, "
+"you can save yourself some time and space by not backing them up."
+msgstr ""
+"Einige Ihrer Daten könnten recht groß oder für Sie eher unbedeutend sein. In "
+"solchen Fällen können Sie Zeit und Platz sparen, indem Sie diese nicht "
+"sichern."
+
+#: C/prefs.page:60(note/p)
+msgid "Some locations are always excluded by default:"
+msgstr "Manche Orte werden standardmäßig ausgeschlossen:"
+
+#: C/restore-full.page:6(info/desc)
+msgid "Recover from total system failure"
+msgstr "Rettung nach totalem Systemausfall"
+
+#: C/restore-full.page:9(page/title)
+msgid "Full System Restore"
+msgstr "Vollständige Wiederherstellung des Systems"
+
+#: C/restore-full.page:11(section/title)
+msgid "Setup"
+msgstr "Einstellungen"
+
+#: C/restore-full.page:13(item/p)
+msgid ""
+"Get your system to a fresh state. For example, a fresh install or a new "
+"account on an old computer. Don’t worry about getting comfortable and "
+"customizing settings yet. Wait until after you restore your previous "
+"settings to change anything, as any customizations you make now may get "
+"overridden once you restore."
+msgstr ""
+"Bringen Sie Ihr System in einen frischen Zustand, beispielsweise durch eine "
+"Neuinstallation oder ein neues Benutzerkonto auf einem alten Rechner. Denken "
+"Sie zunächst nicht über Anpassungen oder sonstige Einstellungen nach, da "
+"jegliche von Ihnen vorgenommenen Änderungen durch die Wiederherstellung "
+"überschrieben werden."
+
+#: C/restore-full.page:14(item/p)
+msgid ""
+"Next, you need to install <app>Déjà Dup</app>. Your distribution vendor may "
+"package it for you. Otherwise, download and compile it."
+msgstr ""
+"Installieren Sie dann <app>Déjà Dup</app>. Der Anbieter Ihrer Distribution "
+"hält möglicherweise ein Paket für Sie bereit. Falls nicht, laden Sie "
+"<app>Déjà Dup</app> herunter und kompilieren Sie es."
+
+#: C/restore-full.page:18(section/title)
+msgid "Restore"
+msgstr "Wiederherstellen"
+
+#: C/restore-full.page:21(item/p)
+msgid ""
+"Click on the <gui style=\"button\">Restore…</gui> button on the "
+"<gui>Overview</gui> page."
+msgstr ""
+"Klicken sie auf den Knopf \"<gui style=\"button\">Restore…</gui>\" der Seite "
+"\"<gui>Overview</gui>\"."
+
+#: C/restore-full.page:22(item/p)
+msgid ""
+"A <gui>Restore</gui> dialog will appear asking where your backup files are "
+"stored (your <gui>Backup location</gui>). On this same screen, select "
+"whether you encrypted the backup or not."
+msgstr ""
+
+#: C/restore-full.page:23(item/p)
+msgid ""
+"Click <gui style=\"button\">Forward</gui> and wait for <app>Déjà Dup</app> "
+"to scan the backup location."
+msgstr ""
+
+#: C/restore-full.page:24(item/p)
+msgid ""
+"Choose the date you want to restore from. Usually you can just leave this "
+"alone, as the default is the most recent backup."
+msgstr ""
+"Wählen Sie das Datum, für das Sie die Wiederherstellung ausführen wollen. In "
+"den meisten Fällen können Sie dies leer lassen, da als Vorgabe die neueste "
+"Sicherung verwendet wird."
+
+#: C/restore-full.page:25(item/p)
+#: C/restore-full.page:27(item/p)
+#: C/restore-revert.page:17(item/p)
+msgid "Click <gui style=\"button\">Forward</gui>."
+msgstr "Klicken Sie <gui style=\"button\">Weiter</gui>."
+
+#: C/restore-full.page:26(item/p)
+msgid ""
+"Choose where to restore. Since this is a full system backup, leave it as the "
+"default (which restores over your current install)."
+msgstr ""
+"Wählen Sie den Ort der Wiederherstellung. Da es sich um eine vollständige "
+"Systemwiederherstellung handelt, belassen Sie hier die Vorgabe, die eine "
+"Wiederherstellung über Ihrer derzeitigen Installation vornimmt."
+
+#: C/restore-full.page:28(item/p)
+#: C/restore-lost.page:18(item/p)
+msgid "Review your selections and click <gui style=\"button\">Restore</gui>."
+msgstr ""
+"Überprüfen Sie Ihre ausgewählten Dateien und klicken Sie auf <gui style=\\"
+"\"button\\\">Wiederherstellen</gui>."
+
+#: C/restore-full.page:29(item/p)
+msgid "Wait. It may take a long time to finish restoring."
+msgstr ""
+"Bitte warten Sie. Es kann lange dauern, bis alle Daten wieder hergestellt "
+"sind."
+
+#: C/restore-full.page:30(item/p)
+msgid ""
+"Finally, reinstall any programs that you enjoyed in your previous install."
+msgstr ""
+"Zum Schluss installieren Sie die Programme, mit denen Sie in Ihrer "
+"vorherigen Installation gearbeitet haben."
+
+#: C/restore-full.page:32(note/p)
+msgid ""
+"If for whatever reason you have a problem after trying to restore with the "
+"<gui style=\"checkbox\">Restore files to original locations</gui> option, "
+"try restoring instead to a temporary directory and moving your files to "
+"where they belong."
+msgstr ""
+
+#: C/restore-full.page:33(note/p)
+msgid ""
+"If that still doesn’t work, there are <link xref=\"restore-worst-case\">more "
+"drastic things</link> you can try."
+msgstr ""
+"Falls das immer noch nicht funktioniert, gibt es <link xref=\"restore-worst-"
+"case\">drastischere Methoden</link>, die Sie probieren können."
+
+#: C/restore-lost.page:8(info/desc)
+msgid "Restore a file that is no longer present"
+msgstr "Wiederherstellen einer Datei, die nicht mehr vorhanden ist"
+
+#: C/restore-lost.page:11(page/title)
+msgid "Restoring a Lost File"
+msgstr "Wiederherstellung einer verlorenen Datei"
+
+#: C/restore-lost.page:13(item/p)
+msgid "Browse to the folder containing the file you lost."
+msgstr "Zu dem Ordner navigieren, der die verlorene Datei enthält."
+
+#: C/restore-lost.page:14(item/p)
+msgid "Right click on the background of the folder."
+msgstr "Rechtsklick auf eine leere Stelle im Ordner."
+
+#: C/restore-lost.page:15(item/p)
+msgid "Choose <gui style=\"menuitem\">Restore Missing Files…</gui>."
+msgstr "Wähle <gui style=\"menuitem\">Restore Missing Files…</gui>."
+
+#: C/restore-lost.page:16(item/p)
+msgid ""
+"When the <gui>Restore</gui> dialog appears, it will scan for files that are "
+"in the backup but no longer in the folder."
+msgstr ""
+"Wenn der <gui>Wiederherstellen</gui>-Dialog erscheint, wird <app>Déjà "
+"Dup</app> nach Dateien suchen, welche zwar in der Datensicherung vorhanden "
+"sind, nicht aber im Ordner."
+
+#: C/restore-lost.page:17(item/p)
+msgid ""
+"When you see the file you want to restore appear, select it and click <gui "
+"style=\"button\">Forward</gui>."
+msgstr ""
+"Wenn die wiederherzustellende Datei in der Liste erscheint, wählen Sie sie "
+"aus und klicken Sie auf <gui style=\"button\">Weiter</gui>."
+
+#: C/restore-lost.page:20(note/p)
+msgid ""
+"You can restore lost files from the command line as well, if you remember "
+"what their filenames were:"
+msgstr ""
+"Sie können Dateien auch von der Kommandozeile wiederherstellen, solange Sie "
+"sich an den Dateinamen erinnern."
+
+#: C/restore-lost.page:21(note/screen)
+#: C/restore-revert.page:22(note/screen)
+#, no-wrap
+msgid "<_:span-1/>FILE1 FILE2"
+msgstr ""
+
+#: C/restore-revert.page:8(info/desc)
+msgid "Restore a previous version of a file"
+msgstr "Wiederherstellen einer vorherigen Version einer Datei"
+
+#: C/restore-revert.page:11(page/title)
+msgid "Reverting a File"
+msgstr "Eine Datei zurücksetzen"
+
+#: C/restore-revert.page:13(item/p)
+msgid "Browse to the folder containing the file you want to revert."
+msgstr ""
+"Öffnen Sie den Ordner, in dem sich die Datei befindet, die Sie zurücksetzen "
+"möchten."
+
+#: C/restore-revert.page:14(item/p)
+msgid "Right click on the file you want to revert."
+msgstr ""
+"Klicken Sie mit der rechten Maustaste auf die Datei, die Sie zurücksetzen "
+"möchten."
+
+#: C/restore-revert.page:15(item/p)
+msgid "Choose <gui style=\"menuitem\">Revert to Previous Version…</gui>."
+msgstr ""
+"Wählen Sie <gui style=\"menuitem\">Auf frühere Version zurücksetzen …</gui>."
+
+#: C/restore-revert.page:16(item/p)
+msgid ""
+"When the <gui>Restore</gui> dialog appears, choose the date from which to "
+"restore."
+msgstr ""
+"Wenn der <gui>Wiederherstellen</gui>-Dialog erscheint, wählen Sie bitte das "
+"Datum für die Wiederherstellung."
+
+#: C/restore-revert.page:18(item/p)
+msgid ""
+"Review your selections and click <gui style=\"button\">Restore</gui>. Note "
+"that this will overwrite your current version of the file."
+msgstr ""
+"Überprüfen Sie Ihre Auswahl und klicken Sie <gui "
+"style=\"button\">Wiederherstellen</gui>. Beachten Sie bitte, dass dadurch "
+"die aktuelle Version der Datei überschrieben wird."
+
+#: C/restore-revert.page:20(note/p)
+msgid "You can select multiple files at once before right clicking."
+msgstr ""
+"Sie können mehrere Dateien auf einmal auswählen, bevor Sie rechtsklicken."
+
+#: C/restore-revert.page:21(note/p)
+msgid "You can also revert files on the command line:"
+msgstr "Sie können auch die Befehlszeile zur Wiederherstellung nutzen:"
+
+#: C/restore-worst-case.page:8(info/desc)
+msgid "What to do if you can’t restore your files"
+msgstr "Was zu tun ist, wenn Ihre Daten nicht wiederhergstellt werden können"
+
+#: C/restore-worst-case.page:12(page/title)
+msgid "When Everything Goes Wrong"
+msgstr "Falls alles schiefgehen sollte"
+
+#: C/restore-worst-case.page:14(page/p)
+msgid ""
+"<app>Déjà Dup</app> may fail. Maybe it crashes or gives you an error when "
+"you try to restore. When you really need your data back, the last thing you "
+"want do deal with is a bug. Consider filing a <link "
+"href=\"https://launchpad.net/deja-dup/+filebug\">bug report</link> but in "
+"the meantime, here are some approaches to workaround a misbehaving <app>Déjà "
+"Dup</app> and get your data back."
+msgstr ""
+"Auch <app>Déjà Dup</app> ist nicht fehlerfrei. Es kann der Fall eintreten, "
+"dass ein Fehler beim Wiederherstellen auftritt. Wenn Ihnen die Daten sehr "
+"wichtig sind, ist ein Softwarefehler das letzte, was Sie in diesem Moment "
+"brauchen. Bitte schreiben Sie deshalb einen <link "
+"href=\"https://launchpad.net/deja-dup/+filebug\">Fehlerbericht</link>. Als "
+"Zwischenlösung finden Sie nachfolgend einige Lösungsansätze für etwaiges "
+"Fehlverhalten, um Ihre Daten wiederherzustellen."
+
+#: C/restore-worst-case.page:16(note/p)
+msgid ""
+"This is going to get technical. If none of this makes sense to you, don’t be "
+"afraid to <link xref=\"support\">ask for help</link>."
+msgstr ""
+"Es wird jetzt technisch. Wenn nichts von dem für Sie einen Sinn ergibt, "
+"scheue Sie sich nicht <link xref=\"support\">um Hilfe zu fragen</link>."
+
+#: C/restore-worst-case.page:19(item/p)
+msgid ""
+"Open a <app>Terminal</app> window by pressing "
+"<keyseq><key>Ctrl</key><key>Alt</key><key>T</key></keyseq>."
+msgstr ""
+"Öffnen Sie eine <app>Konsole</app> (Terminal) durch das Drücken der Tasten "
+"<keyseq><key>Strg</key><key>Alt</key><key>T</key></keyseq>."
+
+#: C/restore-worst-case.page:20(item/p)
+msgid ""
+"Create the directory in which you will place your restored files. This guide "
+"will use <_:file-1/>:"
+msgstr ""
+
+#: C/restore-worst-case.page:25(section/title)
+msgid "Restoring with Duplicity"
+msgstr "Wiederherstellen mit Duplicity"
+
+#: C/restore-worst-case.page:27(section/p)
+msgid ""
+"On the assumption that <app>Déjà Dup</app> is just not working for you right "
+"now, you’re going to use the command line tool <app>duplicity</app> that is "
+"used by <app>Déjà Dup</app> behind the scenes to back up and restore your "
+"files."
+msgstr ""
+"Falls <app>Déjà Dup</app> bei Ihnen gerade noch nicht funktioniert, benutzen "
+"Sie das Kommandozeilen-Programm <app>duplicity</app>. Es wird von <app>Déjà "
+"Dup</app> hinter den Kulissen verwendet um Ihre Dateien wiederherzustellen."
+
+#: C/restore-worst-case.page:29(note/p)
+msgid ""
+"If you want more information about <app>duplicity</app> than presented here, "
+"run <cmd>man duplicity</cmd>."
+msgstr ""
+"Wenn Sie mehr Informationen über <app>duplicity</app> haben möchten, werfen "
+"Sie einen Blick in die man-page von <app>duplicity</app> in dem Sie den "
+"Befehl <cmd>man duplicity</cmd> in einer Konsole/Terminal ausführen."
+
+#: C/restore-worst-case.page:31(section/p)
+msgid ""
+"The first thing we’ll try is a simple restore of all your data. Assuming "
+"your files are on an external drive mounted as <_:file-1/> and you chose to "
+"encrypt the backup, try this:"
+msgstr ""
+
+#: C/restore-worst-case.page:34(section/p)
+msgid "If you didn’t encrypt the backup, add <_:cmd-1/> to the command."
+msgstr ""
+
+#: C/restore-worst-case.page:37(section/title)
+msgid "Other Backup Locations"
+msgstr "Andere Sicherungskopie-Datenquellen"
+
+#: C/restore-worst-case.page:38(section/p)
+msgid ""
+"If you backed up to a remote or cloud server, the syntax you use with "
+"<app>duplicity</app> will be different than the external drive example "
+"above. See below for how to connect to your chosen backup location."
+msgstr ""
+"Wenn Sie Ihre Daten auf einen entfernten Server oder einen Cloud Dienst "
+"gesichert haben, unterscheidet sich die Syntax von <app>duplicity</app> von "
+"dem vorherigen Beispiel mit der externen Festplatte. Folgen Sie der "
+"Anleitung weiter unten um sich mit einer entfernten Datenquelle zu verbinden."
+
+#: C/restore-worst-case.page:39(note/p)
+msgid ""
+"Remember to add <_:cmd-1/> to any example commands if your backup is not "
+"encrypted."
+msgstr ""
+
+#: C/restore-worst-case.page:40(section/p)
+msgid ""
+"If <app>duplicity</app> appears to be having trouble connecting to your "
+"server, try downloading all the <app>duplicity</app> files yourself to a "
+"local folder and following the simpler example above."
+msgstr ""
+"Wenn <app>duplicity</app> nicht in der Lage ist sich mit der entfernten "
+"Datenquelle zu verbinden, versuche Sie alle <app>duplicity</app> Dateien per "
+"Hand (FTP, wget, ... ) in einen lokalen Ordner zu speichern und stellen Sie "
+"die Daten anhand des oberen einfachen Wiederherstellungsverfahrens wieder "
+"her."
+
+#: C/restore-worst-case.page:43(item/title)
+msgid "Amazon S3"
+msgstr "Amazon S3"
+
+#: C/restore-worst-case.page:44(item/p)
+msgid ""
+"Look up your Amazon S3 access key ID and secret access key and replace "
+"instances of <var>ID</var> and <var>SECRET</var> in the example below with "
+"those respective values."
+msgstr ""
+"Sehen Sie nach ihrer Amazon S3 Zugriffsschlüssel-ID und ihrem geheimen "
+"Zugriffsschlüssel und ersetzen Sie die Platzhalter <var>ID</var> und "
+"<var>SECRET</var> in dem folgenden Beispiel mit ihren jeweiligen Werten."
+
+#: C/restore-worst-case.page:45(item/p)
+#: C/restore-worst-case.page:63(item/p)
+#: C/restore-worst-case.page:72(item/p)
+#: C/restore-worst-case.page:80(item/p)
+#: C/restore-worst-case.page:89(item/p)
+msgid ""
+"You may have specified a folder in which to put the backup files. In the "
+"example below, replace any instance of <var>FOLDER</var> with that path."
+msgstr ""
+"Wenn Sie bereits einen Ordner für Ihre Backup-Dateien erstellt haben, "
+"ersetzen Sie den Platzhalter <var>FOLDER</var> mit dem Pfad."
+
+#: C/restore-worst-case.page:47(screen/var)
+#, no-wrap
+msgid "ID"
+msgstr ""
+
+#: C/restore-worst-case.page:48(screen/var)
+#, no-wrap
+msgid "SECRET"
+msgstr ""
+
+#: C/restore-worst-case.page:49(screen/var)
+#, no-wrap
+msgid "LOWERCASE_ID"
+msgstr ""
+
+#: C/restore-worst-case.page:49(screen/var)
+#: C/restore-worst-case.page:66(screen/var)
+#: C/restore-worst-case.page:67(screen/var)
+#: C/restore-worst-case.page:74(screen/var)
+#: C/restore-worst-case.page:75(screen/var)
+#: C/restore-worst-case.page:83(screen/var)
+#: C/restore-worst-case.page:84(screen/var)
+#: C/restore-worst-case.page:92(screen/var)
+#: C/restore-worst-case.page:93(screen/var)
+#, no-wrap
+msgid "FOLDER"
+msgstr ""
+
+#: C/restore-worst-case.page:52(item/title)
+msgid "Rackspace Cloud Files"
+msgstr "Rackspace Cloud Dateien"
+
+#: C/restore-worst-case.page:53(item/p)
+msgid ""
+"Look up your Rackspace username and API key and replace instances of "
+"<var>USERNAME</var> and <var>KEY</var> in the example below with those "
+"respective values."
+msgstr ""
+"Ersetzen Sie die Stellen <var>USERNAME</var> und <var>KEY</var> im Beispiel "
+"mit Ihrem Rackspace-Benutzernamen und API-Schlüssel."
+
+#: C/restore-worst-case.page:54(item/p)
+msgid ""
+"You may have specified a container in which to put the backup files. In the "
+"example below, replace any instance of <var>CONTAINER</var> with that name."
+msgstr ""
+"Falls Sie einen Container zum Speichern ihrer Datensicherungen angegeben "
+"haben, ersetzen Sie im folgenden Beispiel alle Stellen <var>CONTAINER</var> "
+"mit dem Namen des Containers."
+
+#: C/restore-worst-case.page:56(screen/var)
+#: C/restore-worst-case.page:66(screen/var)
+#: C/restore-worst-case.page:67(screen/var)
+#: C/restore-worst-case.page:74(screen/var)
+#: C/restore-worst-case.page:75(screen/var)
+#: C/restore-worst-case.page:83(screen/var)
+#: C/restore-worst-case.page:84(screen/var)
+#: C/restore-worst-case.page:92(screen/var)
+#: C/restore-worst-case.page:93(screen/var)
+#, no-wrap
+msgid "USERNAME"
+msgstr ""
+
+#: C/restore-worst-case.page:57(screen/var)
+#, no-wrap
+msgid "KEY"
+msgstr ""
+
+#: C/restore-worst-case.page:58(screen/var)
+#, no-wrap
+msgid "CONTAINER"
+msgstr ""
+
+#: C/restore-worst-case.page:61(item/title)
+msgid "FTP"
+msgstr "FTP"
+
+#: C/restore-worst-case.page:62(item/p)
+#: C/restore-worst-case.page:71(item/p)
+#: C/restore-worst-case.page:79(item/p)
+msgid ""
+"Look up your server address, port, username, and password and replace "
+"instances of <var>SERVER</var>, <var>PORT</var>, <var>USERNAME</var>, and "
+"<var>PASSWORD</var> in the example below with those respective values."
+msgstr ""
+"Ersetzen Sie im folgenden Beispiel alle Stellen <var>SERVER</var>, "
+"<var>PORT</var>, <var>BENUZTERNAME</var> und <var>PASSWORT</var> sowohl mit "
+"den Daten Ihres Servers als auch den zugehörigen Zugangsdaten."
+
+#: C/restore-worst-case.page:64(item/p)
+msgid ""
+"If you chose to not log in with a username, use <_:var-1/> as your "
+"<var>USERNAME</var> below."
+msgstr ""
+
+#: C/restore-worst-case.page:66(screen/var)
+#: C/restore-worst-case.page:67(screen/var)
+#: C/restore-worst-case.page:74(screen/var)
+#: C/restore-worst-case.page:75(screen/var)
+#: C/restore-worst-case.page:83(screen/var)
+#: C/restore-worst-case.page:84(screen/var)
+#: C/restore-worst-case.page:92(screen/var)
+#: C/restore-worst-case.page:93(screen/var)
+#, no-wrap
+msgid "SERVER"
+msgstr ""
+
+#: C/restore-worst-case.page:66(screen/var)
+#: C/restore-worst-case.page:67(screen/var)
+#: C/restore-worst-case.page:74(screen/var)
+#: C/restore-worst-case.page:75(screen/var)
+#: C/restore-worst-case.page:83(screen/var)
+#: C/restore-worst-case.page:84(screen/var)
+#, no-wrap
+msgid "PORT"
+msgstr ""
+
+#: C/restore-worst-case.page:70(item/title)
+msgid "SSH"
+msgstr "SSH"
+
+#: C/restore-worst-case.page:78(item/title)
+msgid "WebDAV"
+msgstr "WebDAV"
+
+#: C/restore-worst-case.page:81(item/p)
+msgid ""
+"If you chose to use a secure connection (HTTPS) when backing up, use <_:var-"
+"1/> instead of <_:var-2/> in the example below."
+msgstr ""
+
+#: C/restore-worst-case.page:87(item/title)
+msgid "Windows Share"
+msgstr "Windows-Freigabe"
+
+#: C/restore-worst-case.page:88(item/p)
+msgid ""
+"Look up your server address, username, and password and replace instances of "
+"<var>SERVER</var>, <var>USERNAME</var>, and <var>PASSWORD</var> in the "
+"example below with those respective values."
+msgstr ""
+
+#: C/restore-worst-case.page:90(item/p)
+msgid ""
+"If you specified a domain for your Windows server, add it to the beginning "
+"of <var>USERNAME</var> with a semicolon between them. For example, "
+"<var>domain;username</var>."
+msgstr ""
+"Wenn sie eine Domain für ihren Windows-Server angegeben haben, dann fügen "
+"sie diese am Anfang von <var>USERNAME</var> mit einem Semikolon getrennt an. "
+"Beispiel: <var>domain;username</var>"
+
+#: C/restore-worst-case.page:101(section/title)
+msgid "Restoring by Hand"
+msgstr "Manuelles Wiederherstellen"
+
+#: C/restore-worst-case.page:103(section/p)
+msgid ""
+"If even <app>duplicity</app> isn’t working for you, there may be little "
+"hope. The backup file format is complicated and not easily manipulated. But "
+"if you’re desperate, it’s worth a try."
+msgstr ""
+"Falls auch <app>duplicity</app> scheitert, gibt es doch ein wenig Hoffnung. "
+"Das Format der Sicherungsdateien ist kompliziert, und es ist nicht einfach "
+"zu bearbeiten. Aber falls Sie etwas von einem Glücksritter haben, ist es "
+"doch einen Versuch wert."
+
+#: C/restore-worst-case.page:105(section/p)
+msgid ""
+"If you used a remote or cloud server to store your backup, first download "
+"all the <app>duplicity</app> files and place them in a folder on your "
+"computer. Then enter that folder in your terminal."
+msgstr ""
+"Sollten sie einen entfernten, oder Cloud-Server für ihre Datensicherung "
+"genutzt haben, laden sie alle  <app>duplicity</app>-Dateien herunter und "
+"speichern Sie sie in einem lokalen Ordner. Danach geben Sie den Pfad zu "
+"diesem Ordner in die Konsole ein."
+
+#: C/restore-worst-case.page:107(section/p)
+msgid ""
+"<app>Duplicity</app> stores your data in small chunks called volumes. Some "
+"volumes belong to the periodic ‘full’ or fresh backups and others to the "
+"‘inc’ or incremental backups. Starting with a full backup set of volumes at "
+"volume 1, you’ll need to restore files volume by volume."
+msgstr ""
+
+#: C/restore-worst-case.page:109(section/p)
+msgid ""
+"If you encrypted your backup, first you must decrypt the volume with <_:cmd-"
+"1/>. Say you have <_:file-2/>:"
+msgstr ""
+
+#: C/restore-worst-case.page:112(section/p)
+msgid "Or to do all at once (make sure you have plenty of space!):"
+msgstr ""
+"Oder um alles auf ein Mal durchzuführen (Stellen Sie sicher, das genug "
+"Speicherplatz zur Verfügung steht!):"
+
+#: C/restore-worst-case.page:115(section/p)
+msgid ""
+"Now you have either a <_:file-1/> or a <_:file-2/> volume (depending on "
+"whether you had to decrypt it or not). Use <_:cmd-3/> on whichever one you "
+"have to extract the individual patch files:"
+msgstr ""
+
+#: C/restore-worst-case.page:118(section/p)
+msgid "Or again, to do all at once:"
+msgstr "Oder um wieder alles auf ein Mal durchzuführen:"
+
+#: C/restore-worst-case.page:121(section/p)
+msgid ""
+"Now the patch files will be in <_:file-1/> and <_:file-2/> folders. Each "
+"file that spanned multiple volumes will be in <_:file-3/>. Let’s say you "
+"backed up <_:file-4/>:"
+msgstr ""
+
+#: C/restore-worst-case.page:125(section/p)
+msgid ""
+"To recover data from incremental backups, use <_:cmd-1/> to stitch the files "
+"together. See <_:cmd-2/> for usage."
+msgstr ""
+
+#: C/support.page:8(info/desc)
+msgid "Get more help"
+msgstr "Mehr Hilfe erhalten"
+
+#: C/support.page:13(page/p)
+msgid ""
+"If you have unanswered questions or a problem you don’t understand, please "
+"<link href=\"https://answers.launchpad.net/deja-dup\">ask about it</link> it "
+"in the support forum."
+msgstr ""
+"Falls Fragen offen bleiben oder Sie ein Problem haben, das Sie nicht lösen "
+"können, dann <link href=\"https://answers.launchpad.net/deja-dup\">fragen "
+"Sie bitte</link> im Support-Forum."
+
+#: C/support.page:15(page/p)
+msgid ""
+"Keep in mind that the people answering your questions are volunteers and "
+"that while <app>Déjà Dup</app> is intended to work well, it <link "
+"xref=\"license\">comes with no warranty</link>. So please be polite and "
+"patient."
+msgstr ""
+"Bitte denken Sie daran, dass die Leute Freiwillige sind, die Ihre Fragen "
+"beantworten. Zwar sollte <app>Déjà Dup</app> korrekt funktionieren, aber es "
+"wird <link xref=\"license\">ohne jegliche Gewährleistung "
+"veröffentlicht</link>. Seien Sie daher höflich und haben Sie Geduld."
 
 #, no-wrap
 #~ msgid "deja-dup"
@@ -1997,10 +1834,31 @@ msgstr ""
 #~ msgid "<guilabel>Folder</guilabel>"
 #~ msgstr "<guilabel>Ordner</guilabel>"
 
+#~ msgid "~/.thumbnails"
+#~ msgstr "~/.thumbnails"
+
+#~ msgid "~/.cache"
+#~ msgstr "~/.cache"
+
+#~ msgid "~/.xsession-errors"
+#~ msgstr "~/.xsession-errors"
+
+#~ msgid "~/.recently-used.xbel"
+#~ msgstr "~/.recently-used.xbel"
+
+#~ msgid "/proc"
+#~ msgstr "/proc"
+
+#~ msgid "/tmp"
+#~ msgstr "/tmp"
+
 #~ msgid "<guilabel>Automatically backup on a regular schedule</guilabel>"
 #~ msgstr ""
 #~ "<guilabel>Automatische Datensicherung zu einem regelmäßigen "
 #~ "Zeitpunkt</guilabel>"
+
+#~ msgid "/sys"
+#~ msgstr "/sys"
 
 #~ msgid "<guilabel>How often to backup</guilabel>"
 #~ msgstr "<guilabel>Wie häufig sichern</guilabel>"
@@ -2232,6 +2090,15 @@ msgstr ""
 #~ "Es gibt einige Orte, die <application>Déjà Dup</application> per Vorgabe von "
 #~ "der Sicherung ausschließt:"
 
+#~ msgid "~/.gvfs"
+#~ msgstr "~/.gvfs"
+
+#~ msgid "~/.recent-applications.xbel"
+#~ msgstr "~/.recent-applications.xbel"
+
+#~ msgid "~/.Private"
+#~ msgstr "~/.Private"
+
 #~ msgid ""
 #~ "Encrypting your backup files is recommended to keep your data safe. If you "
 #~ "don't have exclusive physical control of your backup location, or if it is "
@@ -2316,6 +2183,10 @@ msgstr ""
 
 #~ msgid "Restore a previous version of a file."
 #~ msgstr "Frühere Version einer Datei wiederherstellen."
+
+#, no-wrap
+#~ msgid "deja-dup --restore FILE1 FILE2"
+#~ msgstr "deja-dup --restore DATEI1 DATEI2"
 
 #~ msgid "Restore a file that is no longer present."
 #~ msgstr "Wiederherstellung einer Datei, die nicht länger existiert."
@@ -2427,6 +2298,12 @@ msgstr ""
 #~ "\"menu\\\">Bearbeiten</gui><gui style=\\\"menuitem\\"
 #~ "\">Einstellungen</gui></guiseq>."
 
+#~ msgid "Except files in folders"
+#~ msgstr "Dateien in Ordnern ausschließen"
+
+#~ msgid "Include files in folders"
+#~ msgstr "Dateien in Ordnern einbeziehen"
+
 #~ msgid ""
 #~ "If you have multiple backups, you may want to keep them separated in "
 #~ "multiple folders. Use this option to enter a path on the S3 service in which "
@@ -2473,6 +2350,9 @@ msgstr ""
 #~ msgid "Automatically backup on a regular schedule"
 #~ msgstr "Automatisch nach einem festgelegten Plan sichern"
 
+#~ msgid "Encrypt backup files"
+#~ msgstr "Datensicherungsdateien verschlüsseln"
+
 #~ msgid ""
 #~ "Select a list of directories to not backup. Press the <gui "
 #~ "style=\"button\">Add </gui> or <gui style=\"button\">Remove</gui> buttons to "
@@ -2482,8 +2362,17 @@ msgstr ""
 #~ "Klicken Sie auf <gui style=\\\"button\\\">Hinzufügen</gui> oder <gui style=\\"
 #~ "\"button\\\">Entfernen</gui>, um die Liste zu bearbeiten."
 
+#~ msgid "Michael Terry"
+#~ msgstr "Michael Terry"
+
 #~ msgid "2010"
 #~ msgstr "2010"
+
+#~ msgid "Keep backups"
+#~ msgstr "Sicherungen behalten"
+
+#~ msgid "mike@mterry.name"
+#~ msgstr "mike@mterry.name"
 
 #~ msgid "Backups are kept forever by default."
 #~ msgstr "Sicherungen werden standardmäßig unbegrenzt gespeichert."
@@ -2621,6 +2510,9 @@ msgstr ""
 #~ "sichern Sie nicht oft genug. Glücklicherweise ist es sehr einfach, "
 #~ "automatische Datensicherungen einzurichten."
 
+#~ msgid "Backup location"
+#~ msgstr "Ort der Datensicherung"
+
 #~ msgid ""
 #~ "There’s currently no convenient user interface for this. But you can do it "
 #~ "with the command line."
@@ -2635,6 +2527,9 @@ msgstr ""
 #~ msgstr ""
 #~ "Klicken Sie auf den großen <gui style=\"button\">Wiederherstellen</gui>-"
 #~ "Knopf."
+
+#~ msgid "~/.adobe/Flash_Player/AssetCache"
+#~ msgstr "~/.adobe/Flash_Player/AssetCache"
 
 #~ msgid ""
 #~ "Choose the type of remote server to which you want to connect. Then you can "
@@ -2654,6 +2549,18 @@ msgstr ""
 #~ "Jetzt wird es technisch. Wenn Sie nicht weiter wissen, zögern Sie nicht "
 #~ "<link href=\"https://answers.launchpad.net/deja-dup\">hier</link> nach Hilfe "
 #~ "zu fragen."
+
+#, no-wrap
+#~ msgid "mkdir -p /tmp/restore"
+#~ msgstr "mkdir -p /tmp/restore"
+
+#~ msgid ""
+#~ "Create the directory in which you will place your restored files. This guide "
+#~ "will use <file>/tmp/restore</file>:"
+#~ msgstr ""
+#~ "Erstellen Sie das Verzeichnis in welches Sie die Dateien wiederherstellen "
+#~ "wollen. In dieser anleitung wird das Verzeichnis <file>/tmp/restore</file> "
+#~ "verwendet."
 
 #~ msgid ""
 #~ "On the assumption that <app>Déjà Dup</app> is just not working for you right "
@@ -2682,6 +2589,10 @@ msgstr ""
 #~ "unter <file>/media/backup</file> eingehängt ist und Sie die Verschlüsselung "
 #~ "der Backup-Dateien aktiviert haben, versuchen Sie folgendes:"
 
+#, no-wrap
+#~ msgid "duplicity --gio file:///media/backup /tmp/restore"
+#~ msgstr "duplicity --gio file:///media/backup /tmp/restore"
+
 #~ msgid ""
 #~ "If you didn't encrypt the backup, add <cmd>--no-encryption</cmd> to the "
 #~ "command."
@@ -2707,6 +2618,78 @@ msgstr ""
 #~ msgstr ""
 #~ "Was soll getan werden, wenn Sie ihre Dateien nicht wiederherstellen können."
 
+#, no-wrap
+#~ msgid ""
+#~ "gpg --output duplicity-full.20110127T131352Z.vol1.difftar --decrypt "
+#~ "duplicity-full.20110127T131352Z.vol1.difftar.gpg"
+#~ msgstr ""
+#~ "gpg --output duplicity-full.20110127T131352Z.vol1.difftar --decrypt "
+#~ "duplicity-full.20110127T131352Z.vol1.difftar.gpg"
+
+#, no-wrap
+#~ msgid ""
+#~ "gpg --multifile --decrypt duplicity-full.20110127T131352Z.*.difftar.gpg"
+#~ msgstr ""
+#~ "gpg --multifile --decrypt duplicity-full.20110127T131352Z.*.difftar.gpg"
+
+#, no-wrap
+#~ msgid ""
+#~ "for t in duplicity-full.20110127T131352Z.*.difftar; do tar xf $t; done"
+#~ msgstr ""
+#~ "for t in duplicity-full.20110127T131352Z.*.difftar; do tar xf $t; done"
+
+#, no-wrap
+#~ msgid "tar xf duplicity-full.20110127T131352Z.vol1.difftar"
+#~ msgstr "tar xf duplicity-full.20110127T131352Z.vol1.difftar"
+
+#, no-wrap
+#~ msgid ""
+#~ "\n"
+#~ "gvfs-mount "
+#~ "ssh://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+#~ "\n"
+#~ "duplicity --gio "
+#~ "ssh://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+#~ " /tmp/restore"
+#~ msgstr ""
+#~ "\n"
+#~ "gvfs-mount "
+#~ "ssh://<var>BENUTZERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>ORDNER</"
+#~ "var>\n"
+#~ "duplicity --gio "
+#~ "ssh://<var>BENUTZERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>ORDNER</"
+#~ "var> /tmp/restore"
+
+#, no-wrap
+#~ msgid ""
+#~ "\n"
+#~ "export CLOUDFILES_USERNAME=<var>USERNAME</var>\n"
+#~ "export CLOUDFILES_APIKEY=<var>KEY</var>\n"
+#~ "duplicity cf+http://<var>CONTAINER</var> /tmp/restore"
+#~ msgstr ""
+#~ "\n"
+#~ "export CLOUDFILES_USERNAME=<var>BENUTZERNAME</var>\n"
+#~ "export CLOUDFILES_APIKEY=<var>SCHLÜSSEL</var>\n"
+#~ "duplicity cf+http://<var>CONTAINER</var> /tmp/restore"
+
+#, no-wrap
+#~ msgid ""
+#~ "\n"
+#~ "gvfs-mount "
+#~ "ftp://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+#~ "\n"
+#~ "duplicity --gio "
+#~ "ftp://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+#~ " /tmp/restore"
+#~ msgstr ""
+#~ "\n"
+#~ "gvfs-mount "
+#~ "ftp://<var>BENUTZERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>ORDNER</"
+#~ "var>\n"
+#~ "duplicity --gio "
+#~ "ftp://<var>BENUTZERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>ORDNER</"
+#~ "var> /tmp/restore"
+
 #~ msgid ""
 #~ "<app>Duplicity</app> stores your data in small chunks called volumes. Some "
 #~ "volumes belong to the periodic 'full' or fresh backups and others to the "
@@ -2730,6 +2713,99 @@ msgstr ""
 #~ "kompliziert und kann nicht einfach manipuliert werden. Sollten sie jedoch "
 #~ "Verzweifelt sein, ist es dennoch einen Versuch Wert."
 
+#~ msgid "Automatic backups"
+#~ msgstr "Automatische Sicherungen"
+
+#~ msgid "2010,2011"
+#~ msgstr "2010, 2011"
+
+#~ msgid "Michael Vogt"
+#~ msgstr "Michael Vogt"
+
+#~ msgid "Andrew Fister"
+#~ msgstr "Andrew Fister"
+
+#~ msgid "Andreas Nilsson"
+#~ msgstr "Andreas Nilsson"
+
+#~ msgid "Urban Skudnik"
+#~ msgstr "Urban Skudnik"
+
+#~ msgid ""
+#~ "If you didn’t encrypt the backup, add <cmd>--no-encryption</cmd> to the "
+#~ "command."
+#~ msgstr ""
+#~ "Falls Sie Ihre Sicherung nicht verschlüsselt haben, füge Sie zur "
+#~ "Befehlszeile <cmd>--no-encryption</cmd> hinzu."
+
+#~ msgid ""
+#~ "Remember to add <cmd>--no-encryption</cmd> to any example commands if you’re "
+#~ "backup is not encrypted."
+#~ msgstr ""
+#~ "Denken Sie daran, zu jedem Beispielbefehl <cmd>--no-encryption</cmd> "
+#~ "hinzuzufügen, falls Ihre Sicherung nicht verschlüsselt ist."
+
+#~ msgid ""
+#~ "If you chose to use a secure connection (HTTPS) when backing up, use "
+#~ "<var>davs://</var> instead of <var>dav://</var> in the example below."
+#~ msgstr ""
+#~ "Wenn Sie eine sichere Verbindung (HTTPS) zum Sichern ihrer Daten verwenden "
+#~ "möchten, benutzen Sie <var>davs://</var> anstelle von <var>dav://</var> im "
+#~ "folgenden Beispiel."
+
+#~ msgid ""
+#~ "Now you have either a <file>.difftar</file> or a <file>.difftar.gz</file> "
+#~ "volume (depending on whether you had to decrypt it or not). Use "
+#~ "<cmd>tar</cmd> on whichever one you have to extract the individual patch "
+#~ "files:"
+#~ msgstr ""
+#~ "Sie erhalten nun entweder einen <file>.difftar</file>- oder einen "
+#~ "<file>.difftar.gz</file>-Container (abhängig davon, ob Sie sie entschlüsseln "
+#~ "mussten oder nicht). Benutzen Sie <cmd>tar</cmd>, um die Datei(en) zu "
+#~ "entpacken."
+
+#~ msgid ""
+#~ "If you chose to not log in with a username, use <var>anonymous</var> as your "
+#~ "<var>USERNAME</var> below."
+#~ msgstr ""
+#~ "Falls Sie sich ohne Benutzername anmelden möchten, tragen Sie "
+#~ "<var>anonymous</var> bei <var>BENUTZERNAME</var> ein."
+
+#~ msgid ""
+#~ "To recover data from incremental backups, use <cmd>rdiff</cmd> to stitch the "
+#~ "files together. See <cmd>man rdiff</cmd> for usage."
+#~ msgstr ""
+#~ "Um Daten von inkrementellen Datensicherungen wiederherzustellen, benutzen "
+#~ "Sie <cmd>rdiff</cmd>. Informationen zur Benutzung finden Sie mit <cmd>man "
+#~ "rdiff</cmd>."
+
+#~ msgid ""
+#~ "If you encrypted your backup, first you must decrypt the volume with "
+#~ "<cmd>gpg</cmd>. Say you have <file>duplicity-"
+#~ "full.20110127T131352Z.vol1.difftar.gpg</file>:"
+#~ msgstr ""
+#~ "Wenn Ihre Datensicherung verschlüsselt ist, müssen Sie sie zuerst mit "
+#~ "<cmd>gpg</cmd> entschlüsseln. Nehmen wir an, Sie wollen das Archiv "
+#~ "<file>duplicity-full.20110127T131352Z.vol1.difftar.gpg</file> entschlüsseln:"
+
+#, no-wrap
+#~ msgid ""
+#~ "\n"
+#~ "gvfs-mount "
+#~ "dav://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+#~ "\n"
+#~ "duplicity --gio "
+#~ "dav://<var>USERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>FOLDER</var>"
+#~ " /tmp/restore"
+#~ msgstr ""
+#~ "\n"
+#~ "gvfs-mount "
+#~ "dav://<var>BENUTZERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>ORDNER</"
+#~ "var>\n"
+#~ "duplicity --gio "
+#~ "dav://<var>BENUTZERNAME</var>@<var>SERVER</var>:<var>PORT</var>/<var>ORDNER</"
+#~ "var> /tmp/restore"
+
 #~ msgid ""
 #~ "We don’t bite. Send an email to the <link href=\"mailto:deja-dup-"
 #~ "hackers@lists.launchpad.net\">mailing list</link>."
@@ -2743,8 +2819,58 @@ msgstr ""
 #~ msgid "Translators"
 #~ msgstr "Übersetzer"
 
+#~ msgid "Lapo Calamandrei"
+#~ msgstr "Lapo Calamandrei"
+
+#~ msgid "Jakub Steiner"
+#~ msgstr "Jakub Steiner"
+
 #~ msgid "Artists"
 #~ msgstr "Künstler"
 
 #~ msgid "Documenters"
 #~ msgstr "Dokumentatoren"
+
+#, no-wrap
+#~ msgid ""
+#~ "\n"
+#~ "gvfs-mount smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var>\n"
+#~ "duplicity --gio "
+#~ "smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var> /tmp/restore"
+#~ msgstr ""
+#~ "\n"
+#~ "gvfs-mount smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var>\n"
+#~ "duplicity --gio "
+#~ "smb://<var>USERNAME</var>@<var>SERVER</var>/<var>FOLDER</var> /tmp/restore"
+
+#, no-wrap
+#~ msgid ""
+#~ "\n"
+#~ "export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
+#~ "export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
+#~ "duplicity s3+http://deja-dup-auto-<var>LOWERCASE_ID</var>/<var>FOLDER</var> "
+#~ "/tmp/restore"
+#~ msgstr ""
+#~ "\n"
+#~ "export AWS_ACCESS_KEY_ID=<var>ID</var>\n"
+#~ "export AWS_SECRET_ACCESS_KEY=<var>SECRET</var>\n"
+#~ "duplicity s3+http://deja-dup-auto-<var>LOWERCASE_ID</var>/<var>FOLDER</var> "
+#~ "/tmp/restore"
+
+#, no-wrap
+#~ msgid ""
+#~ "cd multivolume_snapshot/home/jane/essay.txt\n"
+#~ "cat * &gt; essay.txt"
+#~ msgstr ""
+#~ "cd multivolume_snapshot/home/jane/essay.txt\n"
+#~ "cat * &gt; essay.txt"
+
+#~ msgid ""
+#~ "The first thing we’ll try is a simple restore of all your data. Assuming "
+#~ "your files are on an external drive mounted as <file>/media/backup</file> "
+#~ "and you chose to encrypt the backup, try this:"
+#~ msgstr ""
+#~ "Als erstes versuchen wir eine vollständige Wiederherstellung aller Daten. "
+#~ "Sind die Dateien auf einem externen Laufwerk, wie z.B. "
+#~ "<file>/media/backup</file> und Sie haben sich für eine Verschlüsselung des "
+#~ "Backups entschieden, dann versuchen sie folgendes:"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-06-13 09:49-0400\n"
-"PO-Revision-Date: 2011-06-18 08:47+0000\n"
+"POT-Creation-Date: 2011-07-02 13:03+0100\n"
+"PO-Revision-Date: 2011-07-03 12:21+0000\n"
 "Last-Translator: Aurimas Fišeras <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,32 +16,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-06-19 04:38+0000\n"
+"X-Launchpad-Export-Date: 2011-07-04 04:47+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 
-#: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
-#: ../data/deja-dup-preferences.desktop.in.in.h:1 ../deja-dup/Prompt.vala:93
-#: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:140
-#: ../deja-dup/StatusIcon.vala:289 ../monitor/monitor.vala:131
+#: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
+#: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
+#: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:139
+#: ../deja-dup/StatusIcon.vala:283 ../monitor/monitor.vala:104
+#: ../preferences/preferences-main.vala:51
 #: ../preferences/preferences-main.vala:63
 msgid "Backup"
 msgstr "Atsarginė kopija"
 
-#: ../data/deja-dup-ccpanel.desktop.in.h:2
-#: ../data/deja-dup-preferences.desktop.in.in.h:2
+#. Translators: The name is a play on the French phrase "déjà vu" meaning
+#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
+#. context is itself a reference to both the underlying command line tool
+#. "duplicity" and the act of duplicating data for backup.  As a whole, the
+#. phrase "Déjà Dup" may not be very translatable.
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
+#: ../deja-dup/main.vala:79 ../preferences/Preferences.vala:85
+#, c-format
+msgid "Déjà Dup Backup Tool"
+msgstr "Déjà Dup atsarginių kopijų įrankis"
+
+#: ../data/deja-dup-ccpanel.desktop.in.h:1
+#: ../data/deja-dup-preferences.desktop.in.in.h:1
+msgid "Back Up Now"
+msgstr "Daryti atsarginę kopiją dabar"
+
+#: ../data/deja-dup-ccpanel.desktop.in.h:3
+#: ../data/deja-dup-preferences.desktop.in.in.h:3
 msgid "Change your backup settings"
 msgstr "Keisti atsarginių kopijų nuostatas"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:316
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:297
 msgid "Backup Monitor"
 msgstr "Atsarginių kopijų prižiūryklė"
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
 msgid "Schedules backups at regular intervals"
-msgstr ""
+msgstr "Suplanuoja atsargines kopijas reguliariais intervalais"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 msgid "Amazon S3 Access Key ID"
@@ -161,6 +178,8 @@ msgstr "„Ubuntu One“ aplankas"
 msgid ""
 "The first time Déjà Dup checked whether it should prompt about backing up"
 msgstr ""
+"Pirmas kartas, kada Déjà Dup patikrino, ar turėtų raginti padaryti atsarginę "
+"kopiją"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid ""
@@ -270,6 +289,10 @@ msgid ""
 "don’t know about backups. This time should be either ‘disabled’ to turn off "
 "this check or in ISO 8601 format."
 msgstr ""
+"Kai naudotojas prisijungia, Déjà Dup prižiūryklė patikrina, ar turėtų "
+"raginti padaryti atsarginę kopiją. Tai naudojama pagerinti programos "
+"atradimą naudotojams, kurie nežino apie atsargines kopijas. Šis laikas turi "
+"būti arba „disabled“ šiam tikrinimui išjungti, arba ISO 8601 formatu."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
@@ -280,7 +303,7 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Whether the welcome screen has been dismissed"
-msgstr ""
+msgstr "Ar sveikinimo langas buvo atmestas"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid "Whether to automatically back up on a regular schedule."
@@ -327,6 +350,8 @@ msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr ""
+"Kuriame „Rackspace Cloud Files“ konteineryje laikyti failus. Jis dar neturi "
+"egzistuoti. Tinka tik leistinos serverio vardo eilutės."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
@@ -341,7 +366,7 @@ msgstr "Jūsų „Rackspace“ naudotojo vardas"
 msgid "Folder:"
 msgstr "Aplankas:"
 
-#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:173
+#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:171
 msgid "Scanning…"
 msgstr "Peržiūrima..."
 
@@ -373,7 +398,7 @@ msgstr "GVFS FUSE neįdiegtas"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:425
+#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:430
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s laikmenoje %2$s"
@@ -383,8 +408,8 @@ msgstr "%1$s laikmenoje %2$s"
 msgid "Backup will begin when %s becomes connected."
 msgstr "Atsarginės kopijos darymas prasidės, kai %s bus prijungtas."
 
-#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:50
-#: ../common/BackendS3.vala:60 ../common/BackendU1.vala:144
+#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:49
+#: ../common/BackendS3.vala:59 ../common/BackendU1.vala:146
 msgid "Backup will begin when a network connection becomes available."
 msgstr "Atsarginės kopijos darymas prasidės, kai atsiras tinklo ryšys."
 
@@ -397,110 +422,101 @@ msgstr "Atsarginės kopijos vieta neprieinama"
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Laukiama kol „%s“ bus prijungtas..."
 
-#: ../common/BackendRackspace.vala:59
+#: ../common/BackendRackspace.vala:58
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Jūs turite nurodyti „Rackspace“ konteinerį nuostatose."
 
-#: ../common/BackendRackspace.vala:68 ../widgets/ConfigLocation.vala:195
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
 msgid "Rackspace Cloud Files"
-msgstr ""
+msgstr "„Rackspace Cloud Files“"
 
 #. Translators: %s is a folder.
-#: ../common/BackendRackspace.vala:71
+#: ../common/BackendRackspace.vala:70
 #, c-format
 msgid "%s on Rackspace Cloud Files"
-msgstr ""
+msgstr "„Rackspace Cloud Files“ %s"
 
-#: ../common/BackendRackspace.vala:118 ../common/BackendS3.vala:173
+#: ../common/BackendRackspace.vala:117 ../common/BackendS3.vala:172
 msgid "Permission denied"
 msgstr "Leidimas nesuteiktas"
 
-#: ../common/BackendRackspace.vala:139
+#: ../common/BackendRackspace.vala:138
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
 "href=\"%s\">online</a>."
 msgstr ""
+"Jūs galite registruotis „Rackspace Cloud Files“ paskyrai <a "
+"href=\"%s\">internetu</a>."
 
-#: ../common/BackendRackspace.vala:140
+#: ../common/BackendRackspace.vala:139
 msgid "_API access key:"
 msgstr "_API prieigos raktas:"
 
-#: ../common/BackendRackspace.vala:141
+#: ../common/BackendRackspace.vala:140
 msgid "S_how API access key"
 msgstr "_Rodyti API prieigos raktą"
 
-#: ../common/BackendRackspace.vala:142
+#: ../common/BackendRackspace.vala:141
 msgid "_Remember API access key"
 msgstr "Įsi_minti API prieigos raktą"
 
-#: ../common/BackendRackspace.vala:144
+#: ../common/BackendRackspace.vala:143
 msgid "Enter Rackspace Cloud Files API key"
-msgstr ""
+msgstr "Įveskite „Rackspace Cloud Files“ API raktą"
 
-#: ../common/BackendS3.vala:123 ../widgets/ConfigLocation.vala:179
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
 #. Translators: %s is a folder.
-#: ../common/BackendS3.vala:126
+#: ../common/BackendS3.vala:125
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "Amazon S3 %s"
 
-#: ../common/BackendS3.vala:194
+#: ../common/BackendS3.vala:193
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr "Jūs galite susikurti Amazon S3 paskyrą <a href=\"%s\">internete</a>."
 
-#: ../common/BackendS3.vala:195
+#: ../common/BackendS3.vala:194
 msgid "_Access key ID:"
 msgstr "_Prieigos raktas:"
 
-#: ../common/BackendS3.vala:196
+#: ../common/BackendS3.vala:195
 msgid "_Secret access key:"
 msgstr "_Slaptas prieigos raktas:"
 
-#: ../common/BackendS3.vala:197
+#: ../common/BackendS3.vala:196
 msgid "S_how secret access key"
 msgstr "_Rodyti slaptą prieigos raktą"
 
-#: ../common/BackendS3.vala:198
+#: ../common/BackendS3.vala:197
 msgid "_Remember secret access key"
 msgstr "Įsi_minti slaptą prieigos raktą"
 
-#: ../common/BackendS3.vala:200
+#: ../common/BackendS3.vala:199
 msgid "Enter Amazon S3 access key"
 msgstr "Įveskite Amazon S3 prieigos raktą"
 
-#: ../common/BackendU1.vala:160 ../widgets/ConfigLocation.vala:187
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
 msgid "Ubuntu One"
 msgstr "„Ubuntu One“"
 
 #. Translators: %s is a folder.
-#: ../common/BackendU1.vala:163
+#: ../common/BackendU1.vala:165
 #, c-format
 msgid "%s on Ubuntu One"
-msgstr ""
-
-#: ../common/BackendU1.vala:218
-msgid "Sign into Ubuntu One…"
-msgstr ""
+msgstr "„Ubuntu One“ %s"
 
 #: ../common/BackendU1.vala:220
+msgid "Sign into Ubuntu One…"
+msgstr "Prisijungti prie „Ubuntu One“..."
+
+#: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr "Prisijungti prie „Ubuntu One“"
-
-#. Translators: The name is a play on the French phrase "déjà vu" meaning
-#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
-#. context is itself a reference to both the underlying command line tool
-#. "duplicity" and the act of duplicating data for backup.  As a whole, the
-#. phrase "Déjà Dup" may not be very translatable.
-#: ../common/CommonUtils.vala:88 ../deja-dup/main.vala:80
-#: ../preferences/Preferences.vala:86
-#, c-format
-msgid "Déjà Dup Backup Tool"
-msgstr "Déjà Dup atsarginių kopijų įrankis"
 
 #: ../common/DuplicityInfo.vala:142
 msgid "Could not run duplicity"
@@ -540,41 +556,43 @@ msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
 "only found version %d.%d.%.2d"
 msgstr ""
+"Déjà Dup atsarginių kopijų įrankiui reikalinga „duplicity“ programos versija "
+"%d.%d.%.2d ar naujasnė, bet rasta tik versija %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:128 ../common/Duplicity.vala:180
+#: ../common/Duplicity.vala:127 ../common/Duplicity.vala:179
 msgid "Paused (no network)"
 msgstr "Pristabdyta (nėra tinklo)"
 
-#: ../common/Duplicity.vala:378 ../common/Duplicity.vala:386
-#: ../common/Duplicity.vala:403 ../common/Operation.vala:81
-#: ../common/Operation.vala:112
+#: ../common/Duplicity.vala:377 ../common/Duplicity.vala:385
+#: ../common/Duplicity.vala:402 ../common/Operation.vala:80
+#: ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Ruošiamasi..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:434
+#: ../common/Duplicity.vala:433
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Nepavyko atkurti „%s“: neteisinga failo vieta"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:501
+#: ../common/Duplicity.vala:500
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "Atsarginės kopijos vieta per maža. Mėginkite naudoti kitą vietą."
 
-#: ../common/Duplicity.vala:522
+#: ../common/Duplicity.vala:521
 msgid "Backup location does not have enough free space."
 msgstr "Atsarginės kopijos vieta turi nepakankamai laisvos vietos."
 
-#: ../common/Duplicity.vala:542 ../common/Duplicity.vala:556
+#: ../common/Duplicity.vala:541 ../common/Duplicity.vala:555
 msgid "Cleaning up…"
 msgstr "Tvarkomasi..."
 
-#: ../common/Duplicity.vala:618
+#: ../common/Duplicity.vala:626
 msgid "Creating the first backup.  This may take a while."
 msgstr "Kuriama pirma atsarginė kopija. Tai gali užtrukti."
 
-#: ../common/Duplicity.vala:620
+#: ../common/Duplicity.vala:628
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -582,25 +600,25 @@ msgstr ""
 "Kuriama nauja atsarginė kopija, kad būtų išvengta atsarginės kopijos "
 "sugadinimo. Tai užtruks ilgiau nei paprastai."
 
-#: ../common/Duplicity.vala:669 ../common/Duplicity.vala:1042
+#: ../common/Duplicity.vala:670 ../common/Duplicity.vala:1042
 msgid "Failed with an unknown error."
 msgstr "Nepavyko su nežinoma klaida."
 
-#: ../common/Duplicity.vala:899
+#: ../common/Duplicity.vala:895
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Nepavyko atkurti „%s“: failas nerastas atsarginėje kopijoje"
 
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:905 ../common/Duplicity.vala:984
+#: ../common/Duplicity.vala:901 ../common/Duplicity.vala:980
 msgid "Bad encryption password."
 msgstr "Blogas užšifravimo slaptažodis."
 
-#: ../common/Duplicity.vala:910
+#: ../common/Duplicity.vala:906
 msgid "Computer name changed"
 msgstr "Kompiuterio vardas pasikeitė"
 
-#: ../common/Duplicity.vala:910
+#: ../common/Duplicity.vala:906
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -611,58 +629,58 @@ msgstr ""
 "kompiuterio vardas yra %s. Jei tai yra netikėta, turėtumėte daryti atsarginę "
 "kopiją į kitą vietą."
 
-#: ../common/Duplicity.vala:923
+#: ../common/Duplicity.vala:919
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Leidimas nesuteiktas mėginant sukurti „%s“."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:927 ../common/Duplicity.vala:931
+#: ../common/Duplicity.vala:923 ../common/Duplicity.vala:927
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Leidimas nesuteiktas mėginant perskaityti „%s“."
 
-#: ../common/Duplicity.vala:935
+#: ../common/Duplicity.vala:931
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Leidimas nesuteiktas mėginant pašalinti „%s“."
 
-#: ../common/Duplicity.vala:942
+#: ../common/Duplicity.vala:938
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Atsarginės kopijos vieta „%s“ neegzistuoja."
 
-#: ../common/Duplicity.vala:948 ../common/Duplicity.vala:1003
+#: ../common/Duplicity.vala:944 ../common/Duplicity.vala:999
 msgid "No space left."
 msgstr "Neliko vietos."
 
-#: ../common/Duplicity.vala:962
+#: ../common/Duplicity.vala:958
 msgid "Invalid ID."
 msgstr "Neteisingas identifikatorius."
 
-#: ../common/Duplicity.vala:964
+#: ../common/Duplicity.vala:960
 msgid "Invalid secret key."
 msgstr "Neteisingas slaptas raktas."
 
-#: ../common/Duplicity.vala:966
+#: ../common/Duplicity.vala:962
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Jūsų Amazon Web Services paskyroje nėra užregistruota S3 paslauga."
 
-#: ../common/Duplicity.vala:979
+#: ../common/Duplicity.vala:975
 msgid "S3 bucket name is not available."
 msgstr "S3 kaušo vardas neprieinamas."
 
-#: ../common/Duplicity.vala:988
+#: ../common/Duplicity.vala:984
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Klaida skaitant failą „%s“."
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:986
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Klaida rašant failą „%s“."
 
-#: ../common/Duplicity.vala:1005
+#: ../common/Duplicity.vala:1001
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Neliko vietos „%s“."
@@ -679,7 +697,7 @@ msgstr "Išsiunčiama..."
 msgid "Restoring files…"
 msgstr "Atkuriami failai..."
 
-#: ../common/OperationRestore.vala:173
+#: ../common/OperationRestore.vala:177
 #, c-format
 msgid ""
 "Not all files could be restored. Any files that could not be restored may "
@@ -688,29 +706,29 @@ msgstr ""
 "Ne visus failus pavyko atkurti. Failai, kurių nepavyko atkurti gali būti "
 "rasti %s."
 
-#: ../common/OperationRestore.vala:182
+#: ../common/OperationRestore.vala:186
 #, c-format
 msgid "Could not restore %s: %s"
 msgstr "Nepavyko atkurti %s: %s"
 
-#: ../common/Operation.vala:73
+#: ../common/Operation.vala:72
 msgid "Backing up…"
 msgstr "Daroma atsarginė kopija..."
 
-#: ../common/Operation.vala:75 ../deja-dup/AssistantRestore.vala:499
+#: ../common/Operation.vala:74 ../deja-dup/AssistantRestore.vala:504
 msgid "Restoring…"
 msgstr "Atkuriama..."
 
-#: ../common/Operation.vala:77
+#: ../common/Operation.vala:76
 msgid "Checking for backups…"
 msgstr "Ieškoma atsarginių kopijų..."
 
-#: ../common/Operation.vala:79
+#: ../common/Operation.vala:78
 msgid "Listing files…"
 msgstr "Gaunamas failų sąrašas..."
 
-#: ../common/Operation.vala:276
-msgid "Another Déjà Dup Backup Tool operation is already running"
+#: ../common/Operation.vala:287
+msgid "Another backup operation is already running"
 msgstr ""
 
 #: ../deja-dup/AssistantBackup.vala:31
@@ -725,126 +743,137 @@ msgstr "_Padaryti atsarginę kopiją"
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:68
+#: ../deja-dup/AssistantBackup.vala:73
 msgid "Backing up:"
 msgstr "Daroma atsarginė kopija:"
 
-#: ../deja-dup/AssistantBackup.vala:85
+#: ../deja-dup/AssistantBackup.vala:90
 msgid "Backup Failed"
 msgstr "Nepavyko padaryti atsarginės kopijos"
 
-#: ../deja-dup/AssistantBackup.vala:92
+#: ../deja-dup/AssistantBackup.vala:97
 msgid "Backing Up…"
 msgstr "Daroma atsarginė kopija..."
 
-#: ../deja-dup/AssistantOperation.vala:172
+#: ../deja-dup/AssistantOperation.vala:170
 msgid "Scanning:"
 msgstr "Peržiūrima:"
 
-#: ../deja-dup/AssistantOperation.vala:246
+#: ../deja-dup/AssistantOperation.vala:244
 msgid "_Details"
 msgstr "_Išsamiai"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:293
+#, c-format
+msgid ""
+"You might want to write your password down. If you forget it, you will not "
+"be able to recover your files."
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:293
+msgid "Leave the password blank to disable encryption."
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:307
 msgid "E_ncryption password:"
 msgstr "Užšifravimo _slaptažodis:"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:323
 msgid "Confir_m password:"
-msgstr ""
+msgstr "Pa_tvirtinkite slaptažodį:"
 
-#: ../deja-dup/AssistantOperation.vala:322
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "_Show password"
 msgstr "_Rodyti slaptažodį"
 
-#: ../deja-dup/AssistantOperation.vala:331
+#: ../deja-dup/AssistantOperation.vala:342
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "Įsi_minti slaptažodį"
 
-#: ../deja-dup/AssistantOperation.vala:396
+#: ../deja-dup/AssistantOperation.vala:408
 msgid "Summary"
 msgstr "Santrauka"
 
-#: ../deja-dup/AssistantOperation.vala:411
+#: ../deja-dup/AssistantOperation.vala:423
 msgid "Encryption Password Needed"
-msgstr ""
+msgstr "Reikalingas užšifravimo slaptažodis"
 
-#: ../deja-dup/AssistantOperation.vala:670
+#: ../deja-dup/AssistantOperation.vala:691
 msgid "Backup encryption password"
-msgstr ""
+msgstr "Atsarginės kopijos užšifravimo slaptažodis"
 
-#: ../deja-dup/AssistantRestore.vala:72
+#: ../deja-dup/AssistantRestore.vala:71
 msgid "Restore"
 msgstr "Atkurti"
 
-#: ../deja-dup/AssistantRestore.vala:73
+#: ../deja-dup/AssistantRestore.vala:72
 msgid "_Restore"
 msgstr "_Atkurti"
 
-#: ../deja-dup/AssistantRestore.vala:95 ../preferences/Preferences.vala:294
+#: ../deja-dup/AssistantRestore.vala:94 ../preferences/Preferences.vala:302
 msgid "_Backup location:"
 msgstr "_Atsarginės kopijos vieta:"
 
-#: ../deja-dup/AssistantRestore.vala:106
+#: ../deja-dup/AssistantRestore.vala:105
 msgid "Backup files are _encrypted"
 msgstr "Atsarginės kopijos failai yra užši_fruoti"
 
-#: ../deja-dup/AssistantRestore.vala:130
-msgid "Preferences"
+#: ../deja-dup/AssistantRestore.vala:131
+msgid "Settings"
 msgstr "Nuostatos"
 
-#: ../deja-dup/AssistantRestore.vala:151
+#: ../deja-dup/AssistantRestore.vala:153
 msgid "_Date:"
 msgstr "_Data:"
 
-#: ../deja-dup/AssistantRestore.vala:174
+#: ../deja-dup/AssistantRestore.vala:176
 msgid "Restore files to _original locations"
 msgstr "Atkurti failus _originaliose vietose"
 
-#: ../deja-dup/AssistantRestore.vala:179
+#: ../deja-dup/AssistantRestore.vala:181
 msgid "Restore to _specific folder"
 msgstr "Atkurti į _nurodytą aplanką"
 
-#: ../deja-dup/AssistantRestore.vala:189
+#: ../deja-dup/AssistantRestore.vala:191
 msgid "Choose destination for restored files"
 msgstr "Pasirinkite atkuriamų failų paskirtį"
 
-#: ../deja-dup/AssistantRestore.vala:193
+#: ../deja-dup/AssistantRestore.vala:195
 msgid "Restore _folder:"
 msgstr "Atkūrimo _aplankas:"
 
-#: ../deja-dup/AssistantRestore.vala:226
+#: ../deja-dup/AssistantRestore.vala:228
 msgid "Backup location:"
 msgstr "Atsarginių kopijų vieta:"
 
-#: ../deja-dup/AssistantRestore.vala:233
+#: ../deja-dup/AssistantRestore.vala:235
 msgid "Encrypted:"
 msgstr "Užšifruota:"
 
-#: ../deja-dup/AssistantRestore.vala:240
+#: ../deja-dup/AssistantRestore.vala:242
 msgid "Restore date:"
 msgstr "Atkūrimo data:"
 
-#: ../deja-dup/AssistantRestore.vala:249
+#: ../deja-dup/AssistantRestore.vala:251
 msgid "Restore folder:"
 msgstr "Atkūrimo aplankas:"
 
-#: ../deja-dup/AssistantRestore.vala:273
+#: ../deja-dup/AssistantRestore.vala:276
 msgid "Checking for Backups…"
-msgstr ""
+msgstr "Ieškoma atsarginių kopijų..."
 
-#: ../deja-dup/AssistantRestore.vala:281
+#: ../deja-dup/AssistantRestore.vala:284
 msgid "Restore from When?"
 msgstr "Iš kada atkurti?"
 
-#: ../deja-dup/AssistantRestore.vala:289
+#: ../deja-dup/AssistantRestore.vala:292
 msgid "Restore to Where?"
 msgstr "Į kur atkurti?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:317
+#: ../deja-dup/AssistantRestore.vala:320
 msgid "Restoring:"
 msgstr "Atkuriama:"
 
@@ -852,147 +881,150 @@ msgstr "Atkuriama:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: ../deja-dup/AssistantRestore.vala:359
+#: ../deja-dup/AssistantRestore.vala:362
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
-#: ../deja-dup/AssistantRestore.vala:372
+#: ../deja-dup/AssistantRestore.vala:375
 msgid "No backups to restore"
 msgstr "Nėra atsarginių kopijų atkūrimui"
 
-#: ../deja-dup/AssistantRestore.vala:450
+#: ../deja-dup/AssistantRestore.vala:455
 msgid "Original location"
 msgstr "Originali vieta"
 
-#: ../deja-dup/AssistantRestore.vala:463
+#: ../deja-dup/AssistantRestore.vala:468
 msgid "File to restore:"
 msgid_plural "Files to restore:"
 msgstr[0] "Failas atkūrimui:"
 msgstr[1] "Failai atkūrimui:"
 msgstr[2] "Failai atkūrimui:"
 
-#: ../deja-dup/AssistantRestore.vala:487
+#: ../deja-dup/AssistantRestore.vala:492
 msgid "Restore Failed"
 msgstr "Nepavyko atkurti"
 
-#: ../deja-dup/AssistantRestore.vala:489
+#: ../deja-dup/AssistantRestore.vala:494
 msgid "Restore Finished"
 msgstr "Atkūrimas baigtas"
 
-#: ../deja-dup/AssistantRestore.vala:491
+#: ../deja-dup/AssistantRestore.vala:496
 msgid "Your files were successfully restored."
 msgstr "Jūsų failai sėkmingai atkurti."
 
-#: ../deja-dup/AssistantRestore.vala:493
+#: ../deja-dup/AssistantRestore.vala:498
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Jūsų failas sėkmingai atkurtas."
 msgstr[1] "Jūsų failai sėkmingai atkurti."
 msgstr[2] "Jūsų failai sėkmingai atkurti."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:189
+#: ../deja-dup/AssistantRestoreMissing.vala:199
 msgid "File"
 msgstr "Failas"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:190
+#: ../deja-dup/AssistantRestoreMissing.vala:200
 msgid "Last seen"
-msgstr ""
+msgstr "Paskutinį kartą matytas"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:205
+#: ../deja-dup/AssistantRestoreMissing.vala:215
 msgid "Restore which Files?"
 msgstr "Kuriuos failus atkurti?"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:336
-msgid "Scanning for files from yesterday…"
-msgstr ""
-
-#: ../deja-dup/AssistantRestoreMissing.vala:339
-msgid "Scanning for files from last week…"
-msgstr ""
-
-#: ../deja-dup/AssistantRestoreMissing.vala:342
-msgid "Scanning for files from last month…"
-msgstr ""
-
 #: ../deja-dup/AssistantRestoreMissing.vala:346
+msgid "Scanning for files from up to a day ago…"
+msgstr ""
+
+#: ../deja-dup/AssistantRestoreMissing.vala:349
+msgid "Scanning for files from up to a week ago…"
+msgstr ""
+
+#: ../deja-dup/AssistantRestoreMissing.vala:352
+msgid "Scanning for files from up to a month ago…"
+msgstr ""
+
+#: ../deja-dup/AssistantRestoreMissing.vala:356
 #, c-format
 msgid "Scanning for files from about a month ago…"
 msgid_plural "Scanning for files from about %d months ago…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../deja-dup/AssistantRestoreMissing.vala:352
+#: ../deja-dup/AssistantRestoreMissing.vala:362
 #, c-format
 msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../deja-dup/AssistantRestoreMissing.vala:442
+#: ../deja-dup/AssistantRestoreMissing.vala:452
 msgid "Scanning finished"
-msgstr ""
+msgstr "Peržiūra baigta"
 
-#: ../deja-dup/Assistant.vala:312
+#: ../deja-dup/Assistant.vala:310
 msgid "Co_ntinue"
 msgstr "_Tęsti"
 
-#: ../deja-dup/Assistant.vala:350 ../deja-dup/StatusIcon.vala:104
+#: ../deja-dup/Assistant.vala:348 ../deja-dup/StatusIcon.vala:103
 msgid "_Resume Later"
 msgstr "P_ratęsti vėliau"
 
-#: ../deja-dup/main.vala:36 ../monitor/monitor.vala:34
-#: ../preferences/preferences-main.vala:27
+#: ../deja-dup/main.vala:35 ../monitor/monitor.vala:35
+#: ../preferences/preferences-main.vala:26
 msgid "Show version"
 msgstr "Rodyti versiją"
 
-#: ../deja-dup/main.vala:37
+#: ../deja-dup/main.vala:36
 msgid "Restore given files"
 msgstr "Atkurti nurodytus failus"
 
-#: ../deja-dup/main.vala:38
+#: ../deja-dup/main.vala:37
 msgid "Immediately start a backup"
 msgstr "Iš karto pradėti atsarginės kopijos darymą"
 
-#: ../deja-dup/main.vala:40
+#: ../deja-dup/main.vala:39
 msgid "Restore deleted files"
 msgstr "Atkurti ištrintus failus"
 
-#: ../deja-dup/main.vala:57
+#: ../deja-dup/main.vala:56
 msgid "No directory provided"
 msgstr "Nenurodytas katalogas"
 
-#: ../deja-dup/main.vala:62
+#: ../deja-dup/main.vala:61
 msgid "Only one directory can be shown at once"
 msgstr "Vienu metu gali būti rodomas tik vienas katalogas"
 
-#: ../deja-dup/main.vala:83
+#: ../deja-dup/main.vala:82
 msgid "[FILES…]"
-msgstr ""
+msgstr "[FAILAI…]"
 
-#: ../deja-dup/main.vala:84
+#: ../deja-dup/main.vala:83
 msgid "DIRECTORY"
 msgstr "KATALOGAS"
 
 #. Translators: Wrap this to 80 characters per line if you can, as I have for English
-#: ../deja-dup/main.vala:88
+#: ../deja-dup/main.vala:87
 msgid ""
 "Déjà Dup is a simple backup tool.  It hides the complexity of backing up\n"
 "the Right Way (encrypted, off-site, and regular) and uses duplicity as\n"
 "the backend."
 msgstr ""
+"Déjà Dup yra paprastas atsarginių kopijų įrankis. Jis paslepia „teisingai\n"
+"daromų“ (šifruotų, ne vietoje, reguliarių) atsarginių kopijų sudėtingumą\n"
+"ir naudoja duplicity."
 
-#: ../deja-dup/main.vala:148
+#: ../deja-dup/main.vala:141
 msgid "Directory does not exists"
 msgstr "Katalogas neegzistuoja"
 
-#: ../deja-dup/main.vala:152
+#: ../deja-dup/main.vala:145
 msgid "You must provide a directory, not a file"
-msgstr ""
+msgstr "Jūs privalote pateikti katalogą, ne failą"
 
-#: ../deja-dup/main.vala:164
+#: ../deja-dup/main.vala:157
 msgid "You must specify a mode"
-msgstr ""
+msgstr "Jūs privalote nurodyti veikseną"
 
 #. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
@@ -1032,7 +1064,7 @@ msgstr "_Sritis:"
 
 #: ../deja-dup/Prompt.vala:37
 msgid "Keep your files safe by backing up regularly"
-msgstr ""
+msgstr "Laikykite failus saugiai reguliariai darydami atsargines kopijas"
 
 #: ../deja-dup/Prompt.vala:42
 msgid ""
@@ -1040,132 +1072,139 @@ msgid ""
 "a backup. In the case of a disaster, you would be able to recover them from "
 "that backup."
 msgstr ""
+"Svarbūs dokumentai, duomenys ir nuostatos gali būti apsaugoti laikant juos "
+"atsarginėje kopijoje. Įvykus avarijai, jūs galėsite juos atkurti iš "
+"atsarginės kopijos."
 
 #: ../deja-dup/Prompt.vala:48
 msgid "_Don't Show Again"
-msgstr ""
+msgstr "_Nerodyti dar kartą"
 
 #: ../deja-dup/Prompt.vala:50
 msgid "Don't Show Again"
-msgstr ""
+msgstr "Nerodyti dar kartą"
 
 #: ../deja-dup/Prompt.vala:56
 msgid "_Open Backup Settings"
-msgstr ""
+msgstr "_Atverti atsarginių kopijų nuostatas"
 
 #: ../deja-dup/Prompt.vala:58
 msgid "Open Backup Settings"
-msgstr ""
+msgstr "Atverti atsarginių kopijų nuostatas"
 
-#: ../deja-dup/StatusIcon.vala:106
+#: ../deja-dup/StatusIcon.vala:105
 msgid "_Delay Backup"
 msgstr "_Uždelsti atsarginę kopiją"
 
-#: ../deja-dup/StatusIcon.vala:108
+#: ../deja-dup/StatusIcon.vala:107
 msgid "_Cancel Backup"
-msgstr ""
+msgstr "_Nutraukti atsarginę kopiją"
 
-#: ../deja-dup/StatusIcon.vala:109
+#: ../deja-dup/StatusIcon.vala:108
 msgid "_Skip Backup"
 msgstr "_Praleisti atsarginę kopiją"
 
-#: ../deja-dup/StatusIcon.vala:141
+#: ../deja-dup/StatusIcon.vala:140
 msgid "Backup completed"
-msgstr ""
+msgstr "Atsarginė kopija baigta"
 
-#: ../deja-dup/StatusIcon.vala:184
+#: ../deja-dup/StatusIcon.vala:178
 msgid "Déjà Du_p"
-msgstr ""
+msgstr "Déjà Du_p"
 
-#: ../deja-dup/StatusIcon.vala:290
+#: ../deja-dup/StatusIcon.vala:284
 msgid "Starting scheduled backup"
-msgstr ""
+msgstr "Pradedama suplanuota atsarginė kopija"
 
-#: ../deja-dup/StatusIcon.vala:332
+#: ../deja-dup/StatusIcon.vala:326
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f %% baigta"
 
-#: ../monitor/monitor.vala:171
+#: ../monitor/monitor.vala:144
 msgid "Scheduled backup delayed"
 msgstr "Suplanuotas atsarginės kopijos darymas uždelstas"
 
 #: ../preferences/Preferences.vala:44
 #, c-format
 msgid "I want to _restore files from a previous backup…"
-msgstr ""
+msgstr "Aš noriu _atkurti failus iš ankstesnės atsarginės kopijos..."
 
-#: ../preferences/Preferences.vala:60
+#: ../preferences/Preferences.vala:61
 #, c-format
 msgid "Just show my backup _settings"
-msgstr ""
+msgstr "Tik parodyti mano atsarginių kopijų _nuostatas"
 
-#: ../preferences/Preferences.vala:153
+#: ../preferences/Preferences.vala:133
+msgid "Categories"
+msgstr "Kategorijos"
+
+#: ../preferences/Preferences.vala:160
 msgid "Automatic _backups:"
-msgstr ""
+msgstr "Automatinės _atsarginės kopijos:"
 
-#: ../preferences/Preferences.vala:165
+#: ../preferences/Preferences.vala:172
 msgid "Where:"
-msgstr ""
+msgstr "Kur:"
 
-#: ../preferences/Preferences.vala:176
+#: ../preferences/Preferences.vala:184
 msgid "Include files from:"
-msgstr ""
+msgstr "Įtraukti failus iš:"
 
-#: ../preferences/Preferences.vala:186
+#: ../preferences/Preferences.vala:194
 msgid "Except for:"
 msgstr "Išskyrus:"
 
-#: ../preferences/Preferences.vala:203
+#: ../preferences/Preferences.vala:211
 msgid "Most recent backup:"
-msgstr ""
+msgstr "Naujausia atsarginė kopija:"
 
-#: ../preferences/Preferences.vala:225
+#: ../preferences/Preferences.vala:233
 msgid "Next automatic backup:"
-msgstr ""
+msgstr "Kita automatinė atsarginė kopija:"
 
-#: ../preferences/Preferences.vala:252
+#: ../preferences/Preferences.vala:260
 msgid "_Restore…"
 msgstr "_Atkurti..."
 
-#: ../preferences/Preferences.vala:258
+#: ../preferences/Preferences.vala:266
 msgid "Back Up _Now"
-msgstr ""
+msgstr "Daryti atsarginę kopiją _dabar"
 
-#: ../preferences/Preferences.vala:281
+#: ../preferences/Preferences.vala:289
 msgid "Overview"
-msgstr ""
+msgstr "Apžvalga"
 
-#: ../preferences/Preferences.vala:313
+#: ../preferences/Preferences.vala:321
 #, c-format
 msgid "_Keep backups:"
 msgstr "_Laikyti atsargines kopijas:"
 
-#: ../preferences/Preferences.vala:326
+#: ../preferences/Preferences.vala:334
 msgid "_Encrypt backup files"
 msgstr "Užši_fruoti atsarginės kopijos failus"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:347
 msgid "Storage"
 msgstr "Saugojimas"
 
-#: ../preferences/Preferences.vala:361
+#: ../preferences/Preferences.vala:369
 msgid "I_nclude files in folders:"
 msgstr "Į_traukti failus aplankuose:"
 
-#: ../preferences/Preferences.vala:380
+#: ../preferences/Preferences.vala:388
 msgid "E_xcept files in folders:"
 msgstr "Iš_skyrus failus aplankuose:"
 
-#: ../preferences/Preferences.vala:399
+#: ../preferences/Preferences.vala:407
 msgid "Files"
 msgstr "Failai"
 
-#: ../preferences/Preferences.vala:409
+#: ../preferences/Preferences.vala:417
 msgid "How _often to back up:"
 msgstr "Kaip _dažnai daryti atsargines kopijas:"
 
-#: ../preferences/Preferences.vala:424
+#: ../preferences/Preferences.vala:432
 msgid "Schedule"
 msgstr "Tvarkaraštis"
 
@@ -1207,29 +1246,31 @@ msgstr[2] "Mažiausiai %d dienų"
 
 #: ../widgets/ConfigLabelBackupDate.vala:57
 msgid "Today"
-msgstr ""
+msgstr "Šiandien"
 
 #: ../widgets/ConfigLabelBackupDate.vala:59
 msgid "Yesterday"
-msgstr ""
+msgstr "Vakar"
 
 #: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Tomorrow"
-msgstr ""
+msgstr "Rytoj"
 
 #: ../widgets/ConfigLabelBackupDate.vala:69
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "už %d dienos"
+msgstr[1] "už %d dienų"
+msgstr[2] "už %d dienų"
 
 #: ../widgets/ConfigLabelBackupDate.vala:78
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Prieš %d dieną"
+msgstr[1] "Prieš %d dienas"
+msgstr[2] "Prieš %d dienų"
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1239,19 +1280,19 @@ msgstr "Taip"
 msgid "No"
 msgstr "Ne"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:115
-msgid "Home Folder"
-msgstr "Asmeninis aplankas"
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+msgid "Home"
+msgstr ""
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:117
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
 msgid "Trash"
 msgstr "Šiukšlinė"
 
-#: ../widgets/ConfigLabelLocation.vala:63
+#: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
 msgstr "Nežinoma"
 
-#: ../widgets/ConfigLabelPolicy.vala:62
+#: ../widgets/ConfigLabelPolicy.vala:61
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
@@ -1259,7 +1300,7 @@ msgstr ""
 "Senos atsarginės kopijos bus saugomos mažiausiai savaitę arba kol atsarginės "
 "kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigLabelPolicy.vala:64
+#: ../widgets/ConfigLabelPolicy.vala:63
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
@@ -1267,7 +1308,7 @@ msgstr ""
 "Senos atsarginės kopijos bus saugomos mažiausiai mėnesį arba kol atsarginės "
 "kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigLabelPolicy.vala:66
+#: ../widgets/ConfigLabelPolicy.vala:65
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
@@ -1275,7 +1316,7 @@ msgstr ""
 "Senos atsarginės kopijos bus saugomos mažiausiai du mėnesius arba kol "
 "atsarginės kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigLabelPolicy.vala:68
+#: ../widgets/ConfigLabelPolicy.vala:67
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
@@ -1283,7 +1324,7 @@ msgstr ""
 "Senos atsarginės kopijos bus saugomos mažiausiai tris mėnesius arba kol "
 "atsarginės kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigLabelPolicy.vala:70
+#: ../widgets/ConfigLabelPolicy.vala:69
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
@@ -1291,7 +1332,7 @@ msgstr ""
 "Senos atsarginės kopijos bus saugomos mažiausiai šešis mėnesius arba kol "
 "atsarginės kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:71
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1299,13 +1340,13 @@ msgstr ""
 "Senos atsarginės kopijos bus saugomos mažiausiai metus arba kol atsarginės "
 "kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:73
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Senos atsarginės kopijos bus saugomos kol atsarginės kopijos vietoje liks "
 "mažai vietos."
 
-#: ../widgets/ConfigLabelPolicy.vala:76
+#: ../widgets/ConfigLabelPolicy.vala:75
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1323,77 +1364,77 @@ msgstr[2] ""
 "Senos atsarginės kopijos bus saugomos mažiausiai %d dienų arba kol "
 "atsarginės kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigList.vala:154
+#: ../widgets/ConfigList.vala:187
 msgid "Choose folders"
 msgstr "Pasirinkite aplankus"
 
-#: ../widgets/ConfigLocation.vala:116
+#: ../widgets/ConfigLocation.vala:120
 msgid "SSH"
-msgstr ""
+msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:118
+#: ../widgets/ConfigLocation.vala:122
 msgid "Windows Share"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:124
 msgid "FTP"
-msgstr ""
+msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:126
 msgid "WebDAV"
-msgstr ""
+msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:125
+#: ../widgets/ConfigLocation.vala:129
 msgid "Custom Location"
-msgstr ""
+msgstr "Pasirinktinė vieta"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:131
+#: ../widgets/ConfigLocation.vala:135
 msgid "Local Folder"
 msgstr "Vietinis aplankas"
 
 #: ../widgets/ConfigLocationCustom.vala:31
 msgid "_URI:"
-msgstr ""
+msgstr "_URI:"
 
 #: ../widgets/ConfigLocationDAV.vala:31 ../widgets/ConfigLocationFTP.vala:32
 #: ../widgets/ConfigLocationSMB.vala:31 ../widgets/ConfigLocationSSH.vala:31
 msgid "_Server:"
-msgstr ""
+msgstr "_Serveris:"
 
 #: ../widgets/ConfigLocationDAV.vala:38
 msgid "Use secure connection (_HTTPS)"
-msgstr ""
+msgstr "Naudoti saugų ryšį (_HTTPS)"
 
 #: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
 #: ../widgets/ConfigLocationSSH.vala:35
 msgid "_Port:"
-msgstr ""
+msgstr "_Prievadas:"
 
 #: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
-#: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:34
+#: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
 #: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
-#: ../widgets/ConfigLocationU1.vala:32 ../widgets/ConfigLocationVolume.vala:31
+#: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder:"
 msgstr "_Aplankas:"
 
 #: ../widgets/ConfigLocationFTP.vala:46
 msgid "_Log in with a username"
-msgstr ""
+msgstr "_Prisijungti naudojant naudotojo vardą"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Browse…"
-msgstr ""
+msgstr "_Naršyti..."
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
-msgstr ""
+msgstr "Pasirinkite aplanką"
 
 #: ../widgets/ConfigLocationRackspace.vala:34
 msgid "_Container:"
-msgstr ""
+msgstr "_Konteineris:"
 
-#: ../widgets/ConfigLocationS3.vala:32
+#: ../widgets/ConfigLocationS3.vala:31
 msgid "S3 Access Key I_D:"
 msgstr "S3 prieigos _raktas:"
 
@@ -1430,7 +1471,7 @@ msgstr[0] "Kas %d dieną"
 msgstr[1] "Kas %d dienas"
 msgstr[2] "Kas %d dienų"
 
-#: ../widgets/WidgetUtils.vala:31
+#: ../widgets/WidgetUtils.vala:30
 #, c-format
 msgid "Could not display %s"
 msgstr "Nepavyko parodyti %s"
@@ -1440,6 +1481,9 @@ msgstr "Nepavyko parodyti %s"
 
 #~ msgid "Choose folder"
 #~ msgstr "Pasirink aplanką"
+
+#~ msgid "Home Folder"
+#~ msgstr "Asmeninis aplankas"
 
 #~ msgid "Select Folder"
 #~ msgstr "Pasirinkite aplanką"
@@ -1491,6 +1535,9 @@ msgstr "Nepavyko parodyti %s"
 
 #~ msgid "The type of backup location."
 #~ msgstr "Atsarginių kopijų vietos tipas."
+
+#~ msgid "Preferences"
+#~ msgstr "Nuostatos"
 
 #~ msgid "_Automatically back up on a regular schedule"
 #~ msgstr "_Automatiškai daryti atsargines kopijas reguliariu grafiku"
@@ -1634,3 +1681,6 @@ msgstr "Nepavyko parodyti %s"
 
 #~ msgid "FILES"
 #~ msgstr "FAILAI"
+
+#~ msgid "Another Déjà Dup Backup Tool operation is already running"
+#~ msgstr "Jau vykdoma kita Déjà Dup atsarginių kopijų įrankio operacija"
