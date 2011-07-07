@@ -113,7 +113,6 @@ public class Preferences : Gtk.Box
     Gtk.Notebook notebook = new Gtk.Notebook();
     Gtk.Widget w;
     Gtk.Box page_box;
-    Gtk.Box vbox;
     Gtk.Box hbox;
     Gtk.Label label;
     Gtk.Grid table;
@@ -147,11 +146,11 @@ public class Preferences : Gtk.Box
     });
     settings_page.pack_start(tree, false, false);
 
-    page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
-    vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 24);
     table = new Gtk.Grid();
+    table.orientation = Gtk.Orientation.VERTICAL;
     table.row_spacing = 6;
     table.column_spacing = 6;
+
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
 
@@ -163,10 +162,14 @@ public class Preferences : Gtk.Box
               "xalign", 0.0f);
     label_sizes.add_widget(label);
 
-    hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
-    hbox.pack_start(label, false, false);
-    hbox.pack_start(w, false, false);
-    vbox.pack_start(hbox, false, false);
+    table.attach(label, 0, row, 1, 1);
+    table.attach(w, 1, row, 1, 1);
+    ++row;
+
+    w = new Gtk.EventBox(); // spacer
+    w.height_request = 12; // plus 6 pixels on either side
+    table.attach(w, 0, row, 2, 1);
+    ++row;
 
     w = new DejaDup.ConfigLabelLocation();
     w.set("hexpand", true);
@@ -195,12 +198,10 @@ public class Preferences : Gtk.Box
     table.attach(w, 1, row, 1, 1);
     ++row;
 
-    vbox.pack_start(table, false, true);
-
-    table = new Gtk.Grid();
-    table.row_spacing = 6;
-    table.column_spacing = 6;
-    row = 0;
+    w = new Gtk.EventBox(); // spacer
+    w.height_request = 12; // plus 6 pixels on either side
+    table.attach(w, 0, row, 2, 1);
+    ++row;
 
     var bdate_label = new Gtk.Label(_("Most recent backup:"));
     bdate_label.xalign = 0.0f;
@@ -242,10 +243,25 @@ public class Preferences : Gtk.Box
     table.attach(ndate, 1, row, 1, 1);
     ++row;
 
-    vbox.pack_start(table, true, true);
+    w = new Gtk.EventBox(); // spacer
+    w.height_request = 12; // plus 6 pixels on either side
+    table.attach(w, 0, row, 2, 1);
+    ++row;
+
+    w = new DejaDup.ConfigLabelPolicy();
+    w.expand = true;
+    w.valign = Gtk.Align.END;
+    table.attach(w, 0, row, 2, 1);
+    ++row;
+
+    w = new Gtk.EventBox(); // spacer
+    w.height_request = 12; // plus 6 pixels on either side
+    table.attach(w, 0, row, 2, 1);
+    ++row;
 
     hbox = new Gtk.ButtonBox(Gtk.Orientation.HORIZONTAL);
     hbox.spacing = 12;
+
     (hbox as Gtk.ButtonBox).layout_style = Gtk.ButtonBoxStyle.END;
     w = new Gtk.Button.with_mnemonic(_("_Restore…"));
     (w as Gtk.Button).clicked.connect((b) => {
@@ -273,9 +289,8 @@ public class Preferences : Gtk.Box
                                   () => {restore_button.sensitive = true;
                                          backup_button.sensitive = true;});
 
-    page_box.pack_start(vbox, true, true);
-    page_box.pack_end(hbox, false, false, 0);
-    notebook.append_page(page_box, null);
+    table.attach(hbox, 0, row, 2, 1);
+    notebook.append_page(table, null);
     cat_model.insert_with_values(out iter, i, 0, _("Overview"), 1, i);
     ++i;
 

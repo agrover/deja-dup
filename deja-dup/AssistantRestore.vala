@@ -247,6 +247,7 @@ public class AssistantRestore : AssistantOperation
     confirm_files = new Gtk.Grid();
     confirm_files.orientation = Gtk.Orientation.VERTICAL;
     confirm_files.row_spacing = 6;
+    confirm_files.column_spacing = 6;
     confirm_files.row_homogeneous = true;
     page.attach(confirm_files_label, 0, rows, 1, 1);
     page.attach(confirm_files, 1, rows, 1, 1);
