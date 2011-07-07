@@ -1001,8 +1001,9 @@ public class Duplicity : Object
         // duplicity likes to use.  Try again with --short-filenames
         // But first make sure we aren't already doing that.
         // Happens on backup only.
-        if (!DuplicityInfo.get_default().new_time_format)
-          restart_with_short_filenames_if_needed();
+        if (!DuplicityInfo.get_default().new_time_format &&
+            restart_with_short_filenames_if_needed())
+          return;
       }
       break;
     case "CollectionsError":
@@ -1014,7 +1015,8 @@ public class Duplicity : Object
       // because when we run collection-status and see no backups, we add
       // --short-filenames to argv then.
       if (restart_with_short_filenames_if_needed())
-        show_error(_("No backup files found"));
+        return;
+      show_error(_("No backup files found"));
       break;
     case "AssertionError":
       // Sometimes if an incremental backup is cancelled then tried again,
