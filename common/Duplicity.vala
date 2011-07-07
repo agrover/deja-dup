@@ -1030,7 +1030,10 @@ public class Duplicity : Object
     // For most, don't do anything special.  Show generic 'unknown error'
     // message, but provide the exception text for better bug reports.
     // Plus, sometimes it may clue the user in to what's wrong.
-    if (!error_issued)
+    // But first, try to restart without a cache, since that seems to quite
+    // frequently fix odd metadata errors with duplicity.  If we hit an error
+    // a second time, we'll show the unknown error message.
+    if (!error_issued && !restart_without_cache())
       show_error(_("Failed with an unknown error."), text);
   }
   
