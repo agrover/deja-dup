@@ -51,11 +51,9 @@ public class AssistantBackup : AssistantOperation
       set_secondary_label(first ? _("Creating the first backup.  This may take a while.")
                                 : _("Creating a fresh backup to protect against backup corruption.  This will take longer than normal."));
 
-      // Ask user for password if first backup and encryption is requested
-      var settings = DejaDup.get_settings();
-      if (first && settings.get_boolean(DejaDup.ENCRYPT_KEY)) {
+      // Ask user for password if first backup
+      if (first)
         ask_passphrase(first);
-      }
     });
 
     if (automatic)

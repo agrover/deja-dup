@@ -185,7 +185,7 @@ public abstract class Operation : Object
     dup.is_full.connect((first) => {is_full(first);});
     dup.bad_encryption_password.connect(() => {
       // If duplicity gives us a gpg error, we set needs_password so that
-      // we will prompt for it regardless of ENCRYPT_KEY's value.
+      // we will prompt for it.
       needs_password = true;
       passphrase = null;
       restart();
@@ -249,16 +249,7 @@ public abstract class Operation : Object
 
     yield set_session_inhibited(false);
     unclaim_bus();
-    
-    if (success) {
-      // Update encryption preference as needed.
-      // User may have entered no password when prompted, thus we should blank
-      // out the pref.  Or, user may have had to enter a password when they
-      // didn't set the pref, so we should do it for them.
-      var settings = get_settings();
-      settings.set_boolean(ENCRYPT_KEY, passphrase != "" && passphrase != null);
-    }
-    
+
     done(success, cancelled);
   }
   

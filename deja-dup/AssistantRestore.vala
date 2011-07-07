@@ -79,7 +79,7 @@ public class AssistantRestore : AssistantOperation
   Gtk.Widget make_backup_location_page()
   {
     int rows = 0;
-    Gtk.Widget w, label;
+    Gtk.Widget label;
     Gtk.SizeGroup label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
     var page = new Gtk.Grid();
@@ -100,11 +100,7 @@ public class AssistantRestore : AssistantOperation
     location.extras.set("hexpand", true);
     page.attach(location.extras, 0, rows, 2, 1);
     ++rows;
-    
-    w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("Backup files are _encrypted"));
-    page.attach(w, 0, rows, 2, 1);
-    ++rows;
-    
+
     page.show_all();
 
     // Now make sure to reserve the excess space that the hidden bits of
@@ -229,14 +225,7 @@ public class AssistantRestore : AssistantOperation
     page.attach(label, 0, rows, 1, 1);
     page.attach(w, 1, rows, 1, 1);
     ++rows;
-    
-    label = new Gtk.Label(_("Encrypted:"));
-    label.set("xalign", 0.0f);
-    w = new DejaDup.ConfigLabelBool(DejaDup.ENCRYPT_KEY);
-    page.attach(label, 0, rows, 1, 1);
-    page.attach(w, 1, rows, 1, 1);
-    ++rows;
-    
+
     confirm_date_label = new Gtk.Label(_("Restore date:"));
     confirm_date_label.set("xalign", 0.0f);
     confirm_date = new Gtk.Label("");

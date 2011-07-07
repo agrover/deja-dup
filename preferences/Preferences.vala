@@ -314,10 +314,6 @@ public class Preferences : Gtk.Box
     table.attach(w, 1, row, 1, 1);
     ++row;
 
-    w = new DejaDup.ConfigBool(DejaDup.ENCRYPT_KEY, _("_Encrypt backup files"));
-    table.attach(w, 0, row, 2, 1);
-    ++row;
-
     w = new DejaDup.ConfigLabelPolicy();
     w.set("expand", true);
     table.attach(w, 0, row, 2, 1);

@@ -26,7 +26,6 @@ public const string EXCLUDE_LIST_KEY = "exclude-list";
 public const string BACKEND_KEY = "backend";
 public const string ROOT_PROMPT_KEY = "root-prompt";
 public const string WELCOMED_KEY = "welcomed";
-public const string ENCRYPT_KEY = "encrypt";
 public const string LAST_RUN_KEY = "last-run";
 public const string LAST_BACKUP_KEY = "last-backup";
 public const string LAST_RESTORE_KEY = "last-restore";

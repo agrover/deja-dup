@@ -47,11 +47,13 @@ public abstract class AssistantOperation : Assistant
 
   Gtk.Entry encrypt_entry;
   Gtk.Entry encrypt_confirm_entry;
+  Gtk.RadioButton encrypt_enabled;
   Gtk.CheckButton encrypt_remember;
   protected Gtk.Widget password_page {get; private set;}
   List<Gtk.Widget> first_password_widgets;
   MainLoop password_ask_loop;
   MainLoop password_find_loop;
+  DejaDup.ToggleGroup password_toggles;
 
   Gtk.Label question_label;
   protected Gtk.Widget question_page {get; private set;}
@@ -292,12 +294,26 @@ public abstract class AssistantOperation : Assistant
              "column-spacing", 6,
              "border-width", 12);
 
-    w = new Gtk.Label("<i>%s\n\n%s\n</i>".printf(_("You might want to write your password down. If you forget it, you will not be able to recover your files."), _("Leave the password blank to disable encryption.")));
+    encrypt_enabled = new Gtk.RadioButton.with_mnemonic(null, _("_Password-protect your backup"));
+    page.attach(encrypt_enabled, 0, rows, 3, 1);
+    first_password_widgets.append(encrypt_enabled);
+    encrypt_enabled.toggled.connect(() => {check_password_validity();});
+    ++rows;
+
+    password_toggles = new DejaDup.ToggleGroup.with_button(encrypt_enabled);
+
+    w = new Gtk.Label("    "); // indent
+    page.attach(w, 0, rows, 1, 1);
+    first_password_widgets.append(w);
+
+    w = new Gtk.Label("<i>%s</i>".printf(
+      _("You will need your password to restore your files. You might want to write it down.")));
     w.set("xalign", 0.0f,
           "use-markup", true,
           "max-width-chars", 25,
           "wrap", true);
-    page.attach(w, 0, rows, 2, 1);
+    page.attach(w, 1, rows, 2, 1);
+    password_toggles.add_dependent(w);
     first_password_widgets.append(w);
     ++rows;
 
@@ -310,8 +326,10 @@ public abstract class AssistantOperation : Assistant
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "xalign", 0.0f);
-    page.attach(label, 0, rows, 1, 1);
-    page.attach(w, 1, rows, 1, 1);
+    page.attach(label, 1, rows, 1, 1);
+    page.attach(w, 2, rows, 1, 1);
+    password_toggles.add_dependent(label);
+    password_toggles.add_dependent(w);
     ++rows;
     encrypt_entry = (Gtk.Entry)w;
 
@@ -325,8 +343,10 @@ public abstract class AssistantOperation : Assistant
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "xalign", 0.0f);
-    page.attach(label, 0, rows, 1, 1);
-    page.attach(w, 1, rows, 1, 1);
+    page.attach(label, 1, rows, 1, 1);
+    page.attach(w, 2, rows, 1, 1);
+    password_toggles.add_dependent(w);
+    password_toggles.add_dependent(label);
     ++rows;
     encrypt_confirm_entry = (Gtk.Entry)w;
     first_password_widgets.append(w);
@@ -337,13 +357,22 @@ public abstract class AssistantOperation : Assistant
       encrypt_entry.visibility = button.get_active();
       encrypt_confirm_entry.visibility = button.get_active();
     });
-    page.attach(w, 0, rows, 2, 1);
+    page.attach(w, 1, rows, 2, 1);
+    password_toggles.add_dependent(w);
     ++rows;
 
     w = new Gtk.CheckButton.with_mnemonic(_("_Remember password"));
-    page.attach(w, 0, rows, 2, 1);
+    page.attach(w, 1, rows, 2, 1);
+    password_toggles.add_dependent(w);
     ++rows;
     encrypt_remember = (Gtk.CheckButton)w;
+
+    w = new Gtk.RadioButton.with_mnemonic_from_widget(encrypt_enabled,
+                                                      _("_Allow restoring without a password"));
+    w.margin_top = 6;
+    page.attach(w, 0, rows, 3, 1);
+    first_password_widgets.append(w);
+    ++rows;
 
     return page;
   }
@@ -421,7 +450,6 @@ public abstract class AssistantOperation : Assistant
   {
     var page = make_password_page();
     append_page(page, Type.INTERRUPT);
-    set_page_title(page, _("Encryption Password Needed"));
     password_page = page;
   }
 
@@ -665,8 +693,18 @@ public abstract class AssistantOperation : Assistant
 
   void check_password_validity()
   {
+    if (!encrypt_enabled.active) {
+      allow_forward(true);
+      return;
+    }
+
+    var passphrase = encrypt_entry.get_text();
+    if (passphrase == "") {
+      allow_forward(false);
+      return;
+    }
+
     if (encrypt_confirm_entry.visible) {
-      var passphrase = encrypt_entry.get_text();
       var passphrase2 = encrypt_confirm_entry.get_text();
       var valid = (passphrase == passphrase2);
       allow_forward(valid);
@@ -677,10 +715,16 @@ public abstract class AssistantOperation : Assistant
 
   void configure_password_page(bool first)
   {
+    if (first)
+      set_page_title(password_page, _("Require Password?"));
+    else
+      set_page_title(password_page, _("Encryption Password Needed"));
     foreach (Gtk.Widget w in first_password_widgets) {
       w.visible = first;
     }
     check_password_validity();
+    encrypt_entry.select_region(0, -1);
+    encrypt_entry.grab_focus();
   }
 
   void stop_password_loop(Assistant dlg, int resp)
@@ -696,10 +740,8 @@ public abstract class AssistantOperation : Assistant
   protected void ask_passphrase(bool first = false)
   {
     op.needs_password = true;
-    configure_password_page(first);
     interrupt(password_page);
-    encrypt_entry.select_region(0, -1);
-    encrypt_entry.grab_focus();
+    configure_password_page(first);
     force_visible(false);
     // pause until we can provide password by entering new main loop
     password_ask_loop = new MainLoop(null);
@@ -709,9 +751,11 @@ public abstract class AssistantOperation : Assistant
 
   protected void provide_password()
   {
-    var passphrase = encrypt_entry.get_text();
-    passphrase = passphrase.strip();
-    
+    var passphrase = "";
+
+    if (encrypt_enabled.active)
+      passphrase = encrypt_entry.get_text().strip();
+
     if (passphrase != "") {
       // Save it
       if (encrypt_remember.active) {
