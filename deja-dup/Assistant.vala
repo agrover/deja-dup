@@ -37,6 +37,7 @@ public abstract class Assistant : Gtk.Window
   public signal void backward();
   public string apply_text {get; set; default = Gtk.Stock.APPLY;}
   public bool resume_supported {get; set; default = false;}
+  public bool last_op_was_back {get; private set; default = false;}
 
   public enum Type {
     NORMAL, INTERRUPT, SUMMARY, PROGRESS, FINISH
@@ -156,7 +157,6 @@ public abstract class Assistant : Gtk.Window
     return interrupted != null;
   }
 
-  bool last_op_was_back = false;
   public void skip()
   {
     // During prepare, if a page wants to be skipped, it calls this.

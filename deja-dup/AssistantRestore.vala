@@ -482,14 +482,18 @@ public class AssistantRestore : AssistantOperation
       set_page_title(page, _("Restoring…"));
     }
     else if (page == query_progress_page) {
-      query_progress_bar.fraction = 0;
-      query_timeout_id = Timeout.add(250, query_pulse);
-      if (query_op != null && query_op.needs_password) {
-        // Operation is waiting for password
-        provide_password();
+      if (last_op_was_back)
+        skip();
+      else {
+        query_progress_bar.fraction = 0;
+        query_timeout_id = Timeout.add(250, query_pulse);
+        if (query_op != null && query_op.needs_password) {
+          // Operation is waiting for password
+          provide_password();
+        }
+        else if (query_op == null)
+          do_query();
       }
-      else if (query_op == null)
-        do_query();
     }
   }
   
