@@ -321,6 +321,7 @@ static int main(string[] args)
     return status;
 
   DejaDup.initialize();
+  DejaDup.Network.ensure_status();
   DejaDup.Network.get().notify["connected"].connect(network_changed);
 
   Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",

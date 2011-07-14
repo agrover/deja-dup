@@ -139,7 +139,11 @@ public class Duplicity : Object
       slash_home_me = File.new_for_path(Environment.get_home_dir());
     }
   }
-  
+
+  ~Duplicity() {
+    Network.get().notify["connected"].disconnect(network_changed);
+  }
+
   public virtual void start(Backend backend,
                             List<string>? argv, List<string>? envp)
   {

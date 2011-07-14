@@ -105,7 +105,7 @@ public abstract class Operation : Object
   {
     backend = Backend.get_default();
   }
-  
+
   public async virtual void start()
   {
     action_desc_changed(_("Preparing…"));  
@@ -119,6 +119,8 @@ public abstract class Operation : Object
       return;
     }
     yield set_session_inhibited(true);
+
+    yield DejaDup.Network.ensure_status();
 
     if (backend is BackendAuto) {
       // OK, we're not ready yet.  Let's hold off until we are

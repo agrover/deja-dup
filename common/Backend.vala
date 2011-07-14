@@ -24,7 +24,7 @@ namespace DejaDup {
 public abstract class Backend : Object
 {
   public signal void envp_ready(bool success, List<string>? envp, string? error = null);
-  public signal void pause_op(string header, string msg);
+  public signal void pause_op(string? header, string? msg);
 
   public MountOperation mount_op {get; set;}
 

@@ -364,6 +364,19 @@ public class BackendFile : Backend
 
   async bool mount_remote(File file) throws Error
   {
+    if (!Network.get().connected) {
+      pause_op(_("Backup location not available"),
+               _("Waiting for a network connection…"));
+      var loop = new MainLoop(null, false);
+      var sigid = Network.get().notify["connected"].connect(() => {
+        if (Network.get().connected)
+          loop.quit();
+      });
+      loop.run();
+      Network.get().disconnect(sigid);
+      pause_op(null, null);
+    }
+
     try {
       // Check if it's already mounted
       var mount = yield file.find_enclosing_mount_async(Priority.DEFAULT, null);
@@ -420,10 +433,12 @@ public class BackendFile : Backend
       var loop = new MainLoop(null, false);
       var mon = VolumeMonitor.get();
       mon.ref(); // bug 569418; bad things happen when VM goes away
-      mon.volume_added.connect((m, v) => {
+      var sigid = mon.volume_added.connect((m, v) => {
         loop.quit();
       });
       loop.run();
+      mon.disconnect(sigid);
+      pause_op(null, null);
       return yield wait_for_volume(uuid);
     }
 

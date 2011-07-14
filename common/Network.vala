@@ -23,8 +23,8 @@ namespace DejaDup {
 
 abstract class StatusProvider : Object
 {
-  public enum Status {ONLINE, OFFLINE, UNKNOWN}
-  public Status status {get; protected set; default = Status.UNKNOWN;}
+  public enum Status {ONLINE, OFFLINE, UNKNOWN, UNINITIALIZED}
+  public Status status {get; protected set; default = Status.UNINITIALIZED;}
 
   protected DBusProxy proxy {get; private set;}
 
@@ -33,7 +33,6 @@ abstract class StatusProvider : Object
       proxy = create_proxy();
       proxy.notify["g-name-owner"].connect(owner_changed);
       proxy.g_signal.connect(handle_signal);
-      check_owner_status();
     }
     catch (Error e) {
       warning("%s\n", e.message);
@@ -51,7 +50,7 @@ abstract class StatusProvider : Object
     check_owner_status();
   }
 
-  private async void check_owner_status()
+  public async void check_owner_status()
   {
     if (proxy.g_name_owner == null)
       update_status(Status.UNKNOWN);
@@ -171,6 +170,15 @@ public class Network : Object
     if (singleton == null)
       singleton = new Network();
     return singleton;
+  }
+
+  public async static void ensure_status()
+  {
+    var nm = Network.get(); // initialize singleton
+    foreach (StatusProvider p in nm.providers) {
+      if (p.status == StatusProvider.Status.UNINITIALIZED)
+        yield p.check_owner_status();
+    }
   }
 
   static Network singleton;

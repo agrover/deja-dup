@@ -787,13 +787,17 @@ public abstract class AssistantOperation : Assistant
     Gtk.main();
   }
 
-  protected void pause_op(DejaDup.Backend back, string header, string msg)
+  protected void pause_op(DejaDup.Backend back, string? header, string? msg)
   {
     // Basically a question without a response expected
-    set_page_title(question_page, header);
-    question_label.label = msg;
-    interrupt(question_page, false);
-    force_visible(false);
+    if (header == null) // unpause
+      go_forward();
+    else {
+      set_page_title(question_page, header);
+      question_label.label = msg;
+      interrupt(question_page, false);
+      force_visible(false);
+    }
   }
 }
 
