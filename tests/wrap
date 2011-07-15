@@ -27,6 +27,15 @@
 # But in tests themselves, we still run a separate nested dbus-launch
 # environment because that's the easiest way to get a fresh dconf session.
 
+# This dbus-launch is only for ldtp's benefit.  We still need a dbus-launch
+# run inside base.py to handle the dconf session
+if [ -z "$DISPLAY" ]; then
+  xvfb-run -a dbus-launch --exit-with-session $*
+else
+  $*
+fi
+exit
+
 XVFB_PID=
 ORIG_DBUS_PID="$DBUS_SESSION_BUS_PID"
 
@@ -50,7 +59,7 @@ if [ -z "$DISPLAY" ]; then
   export DISPLAY=:5
 fi
 
-eval `dbus-launch --sh-syntax`
+eval `dbus-launch --sh-syntax --exit-with-session`
 export DBUS_SESSION_BUS_PID
 export DBUS_SESSION_BUS_ADDRESS
 

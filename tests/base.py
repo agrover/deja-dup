@@ -64,7 +64,7 @@ def get_temp_name(extra, make=False):
 # if we're running inside a distcheck for example.  So note that we check for
 # srcdir and use it if available.  Else, default to current directory.
 
-def setup(start = True, args=[''], root_prompt = False):
+def setup(root_prompt = False):
   global cleanup_dirs, cleanup_pids, cleanup_envs, ldtp, latest_duplicity, srcdir
 
   srcdir = environ.get('srcdir')
@@ -106,19 +106,24 @@ def setup(start = True, args=[''], root_prompt = False):
   environ['XDG_CACHE_HOME'] = get_temp_name('cache')
   environ['XDG_CONFIG_HOME'] = get_temp_name('config')
   environ['XDG_DATA_HOME'] = get_temp_name('share')
-  environ['XDG_DATA_DIRS'] = "%s:%s" % (environ['XDG_DATA_HOME'], environ['XDG_DATA_DIRS'])
-  #output = subprocess.Popen(['dbus-launch'], stdout=subprocess.PIPE).communicate()[0]
-  #lines = output.split('\n')
-  #for line in lines:
-  #    parts = line.split('=', 1)
-  #    if len(parts) == 2:
-  #        if parts[0] == 'DBUS_SESSION_BUS_PID': # cleanup at end
-  #            cleanup_pids += [int(parts[1])]
-  #        os.environ[parts[0]] = parts[1]
+  if 'XDG_DATA_DIRS' in environ:
+    environ['XDG_DATA_DIRS'] = "%s:%s" % (environ['XDG_DATA_HOME'], environ['XDG_DATA_DIRS'])
+  else:
+    environ['XDG_DATA_DIRS'] = environ['XDG_DATA_HOME']
+  output = subprocess.Popen(['dbus-launch'], stdout=subprocess.PIPE).communicate()[0]
+  lines = output.split('\n')
+  for line in lines:
+      parts = line.split('=', 1)
+      if len(parts) == 2:
+          if parts[0] == 'DBUS_SESSION_BUS_PID': # cleanup at end
+              cleanup_pids += [int(parts[1])]
+          os.environ[parts[0]] = parts[1]
 
   # Shutdown ldtpd so that it will restart and pick up new dbus environment
   #os.system('pkill -f ldtpd\\.main; sleep 1')
   #ldtp.getwindowlist()
+
+  os.system('/usr/lib/d-conf/dconf-service &')
 
   environ['PYTHONPATH'] = extra_pythonpaths + (environ['PYTHONPATH'] if 'PYTHONPATH' in environ else '')
   environ['PATH'] = extra_paths + environ['PATH']
@@ -135,7 +140,9 @@ def setup(start = True, args=[''], root_prompt = False):
   os.system('echo LocationMode=filename-entry >> "%s/gtk-2.0/gtkfilechooser.ini"' % environ['XDG_CONFIG_HOME'])
 
   # Now install default schema into our temporary config dir
-  if os.system('cp %s/../data/org.gnome.DejaDup.gschema.xml %s/glib-2.0/schemas/ && glib-compile-schemas %s/glib-2.0/schemas/' % (builddir, environ['XDG_DATA_HOME'], environ['XDG_DATA_HOME'])):
+  schemas = glob.glob("/usr/share/glib-2.0/schemas/org.gtk.*")
+  schemas.append("%s/../data/org.gnome.DejaDup.gschema.xml" % builddir)
+  if os.system('cp %s %s/glib-2.0/schemas/ && glib-compile-schemas %s/glib-2.0/schemas/' % (' '.join(schemas), environ['XDG_DATA_HOME'], environ['XDG_DATA_HOME'])):
     raise Exception('Could not install settings schema')
 
   # Copy interface files into place as well
@@ -143,12 +150,6 @@ def setup(start = True, args=[''], root_prompt = False):
   os.system("cp %s/../data/ui/* %s/deja-dup/ui" % (srcdir, environ['XDG_DATA_HOME']))
 
   set_settings_value("root-prompt", 'true' if root_prompt else 'false')
-
-  #daemon_env = subprocess.Popen(['gnome-keyring-daemon'], stdout=subprocess.PIPE).communicate()[0].strip()
-  #daemon_env = daemon_env.split('\n')
-  #for line in daemon_env:
-  #  bits = line.split('=')
-  #  os.environ[bits[0]] = bits[1]
 
 def cleanup(success):
   global temp_dir, cleanup_dirs, cleanup_mounts, cleanup_pids, cleanup_envs
@@ -177,14 +178,17 @@ def cleanup(success):
 
 def set_settings_value(key, value, schema = None):
   if schema:
-    schema = 'org.gnome.DejaDup.' + schema
+    fullschema = 'org.gnome.DejaDup.' + schema
   else:
-    schema = 'org.gnome.DejaDup'
-  cmd = ['gsettings', 'set', schema, key, value]
+    fullschema = 'org.gnome.DejaDup'
+  cmd = ['gsettings', 'set', fullschema, key, value]
   sp = subprocess.Popen(cmd, stdout=subprocess.PIPE)
   sp.communicate()
   if sp.returncode:
     raise Exception('Could not set key %s to %s' % (key, value))
+  # make sure everything is set correctly
+  setval = get_settings_value(key, schema=schema)
+  assert setval == value, "%s != %s" % (setval, value)
 
 def get_settings_value(key, schema = None):
   if schema:
@@ -194,6 +198,8 @@ def get_settings_value(key, schema = None):
   cmd = ['gsettings', 'get', schema, key]
   sp = subprocess.Popen(cmd, stdout=subprocess.PIPE)
   pout = sp.communicate()[0]
+  if sp.returncode:
+    raise Exception('Could not get key %s' % (key))
   return pout.strip()
 
 def start_deja_dup(args=[], executable='deja-dup', waitfor='frmBackup', debug=False):
@@ -217,7 +223,7 @@ def start_deja_dup(args=[], executable='deja-dup', waitfor='frmBackup', debug=Fa
   environ['G_DEBUG'] = 'gc-friendly' if not environ.get('G_DEBUG') else environ['G_DEBUG'] + ',gc-friendly'
   subprocess.Popen(cmd)
   if waitfor is not None:
-    ldtp.waittillguiexist(waitfor)
+    waitforgui(waitfor)
 
 def create_vol_config(dest='/'):
   if dest is None:
@@ -258,6 +264,8 @@ def create_mount(path=None, mtype='ext', size=20):
 def quit():
   if ldtp.guiexist('frmBackup'):
     ldtp.closewindow('frmBackup')
+  if ldtp.guiexist('frmBackUp'):
+    ldtp.closewindow('frmBackUp')
 
 def run(method):
   success = False
@@ -365,6 +373,9 @@ def wait_for_encryption(dlg, obj, max_count, prefix=False):
     count += 1
   assert guivisible(dlg, obj, prefix)
 
+def waitforgui(frm):
+  assert ldtp.waittillguiexist(frm)
+
 def remap(frm):
   ldtp.wait(1) # sometimes (only for newer versions?) ldtp needs a second to catch its breath
   ldtp.remap(frm) # in case this is second time we've run it
@@ -381,20 +392,18 @@ def set_file_list(dlg, obj, addObj, removeObj, files):
   # Add new items
   for f in files:
     ldtp.click(dlg, addObj)
-    assert ldtp.waittillguiexist('dlgChoosefolders')
+    waitforgui('dlgChoosefolders')
     # Make sure path ends in '/'
     if f[-1] != '/':
       f += '/'
+    ldtp.selectlastrow('dlgChoosefolders', 'tblPlaces') # must switch away from Recent Files view to get txtLocation
     ldtp.settextvalue('dlgChoosefolders', 'txtLocation', f)
     ldtp.click('dlgChoosefolders', 'btnOpen')
     ldtp.wait(1) # let dialog close
 
-def walk_prefs(backend = None, encrypt = None, dest = None, includes = [], excludes = []):
-  # FIXME: This doesn't seem to work with gtk3, so we set gsettings directly
-  # before launching the dialog
-  #remap('frmBackup')
-  #if guivisible('frmBackup', 'btnJustshowmybackupsettings'):
-  #  ldtp.click('frmBackup', 'btnJustshowmybackupsettings')
+def walk_prefs(backend = None, dest = None, includes = [], excludes = []):
+  if guivisible('frmBackup', 'btnJustshowmybackupsettings'):
+    ldtp.click('frmBackup', 'btnJustshowmybackupsettings')
 
   if backend == 'file':
     ldtp.selectrow('frmBackup', 'tblCategories', 'Storage')
@@ -405,19 +414,8 @@ def walk_prefs(backend = None, encrypt = None, dest = None, includes = [], exclu
     elif dest[0] != '/' and dest.find(':') == -1:
       dest = os.getcwd()+'/'+dest
 
-    # FIXME: this doesn't seem to work with gtk3, so we set gsettings directly
-    #ldtp.comboselect('frmBackup', 'cboLocation', 'Local Folder')
-    set_settings_value('backend', 'file')
-    remap('frmBackup')
+    ldtp.comboselect('frmBackup', 'cboLocation', 'Local Folder')
     ldtp.settextvalue('frmBackup', 'txt0', dest) # FIXME txt0 is bad name
-
-  if encrypt is not None:
-    ldtp.selectrow('frmBackup', 'tblCategories', 'Storage')
-    chklabel = 'chkEncryptbackupfiles'
-    if encrypt:
-      ldtp.check('frmBackup', chklabel)
-    else:
-      ldtp.uncheck('frmBackup', chklabel)
 
   ldtp.selectrow('frmBackup', 'tblCategories', 'Files')
   set_file_list('frmBackup', 'tblIncludeList', 'btnIncludeListAdd', 'btnIncludeListRemove', includes)
@@ -432,20 +430,15 @@ def backup_simple(finish=True, error=None, timeout=400, backend = None, encrypt 
     includes = [os.path.join(srcdir, f) for f in includes]
     excludes = [os.path.join(srcdir, f) for f in excludes]
 
-  # FIXME: see walk_prefs  
-  set_settings_value('welcomed', 'true')
-
   start_deja_dup(executable='deja-dup-preferences')
   remap('frmBackup')
 
-  if True: # FIXME see above get_settings_value('welcomed') == 'false':
-    walk_prefs(backend=backend, encrypt=encrypt, dest=dest,
-               includes=includes,
-               excludes=excludes)
+  walk_prefs(backend=backend, dest=dest, includes=includes,
+             excludes=excludes)
 
   ldtp.selectrow('frmBackup', 'tblCategories', 'Overview')
   ldtp.click('frmBackup', 'btnBackUpNow')
-  ldtp.waittillguiexist('frmBackUp')
+  waitforgui('frmBackUp')
 
   if finish:
     if not error:
@@ -459,7 +452,7 @@ def backup_simple(finish=True, error=None, timeout=400, backend = None, encrypt 
 
 def restore_simple(path, date=None, backend = None, encrypt = None, dest = None):
   ldtp.click('frmDéjàDup', 'btnRestore…')
-  assert ldtp.waittillguiexist('dlgRestore')
+  waitforgui('dlgRestore')
   remap('dlgRestore')
   if ldtp.guiexist('dlgRestore', 'lblPreferences'):
     walk_restore_prefs('dlgRestore', backend=backend, encrypt=encrypt, dest=dest)
@@ -470,10 +463,11 @@ def restore_simple(path, date=None, backend = None, encrypt = None, dest = None)
   remap('dlgRestore')
   ldtp.click('dlgRestore', 'rbtnRestoretospecificfolder')
   ldtp.comboselect('dlgRestore', 'cboRestorefolder', 'Other...')
-  assert ldtp.waittillguiexist('dlgChoosedestinationforrestoredfiles')
+  waitforgui('dlgChoosedestinationforrestoredfiles')
   # Make sure path ends in '/'
   if path[-1] != '/':
     path += '/'
+  ldtp.selectlastrow('dlgChoosedestinationforrestoredfiles', 'tblPlaces') # must switch away from Recent Files view to get txtLocation
   ldtp.settextvalue('dlgChoosedestinationforrestoredfiles', 'txtLocation', path)
   ldtp.click('dlgChoosedestinationforrestoredfiles', 'btnOpen')
   ldtp.wait(1) # give the combo a second to settle
