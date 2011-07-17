@@ -200,6 +200,7 @@ def get_settings_value(key, schema = None):
   pout = sp.communicate()[0]
   if sp.returncode:
     raise Exception('Could not get key %s' % (key))
+  pout = pout.split('@as ', 1)[-1] # chop off leading @as if any (on empty arrays)
   return pout.strip()
 
 def start_deja_dup(args=[], executable='deja-dup', waitfor='frmBackup', debug=False):
@@ -217,7 +218,7 @@ def start_deja_dup(args=[], executable='deja-dup', waitfor='frmBackup', debug=Fa
            '--error-exitcode=1', '--suppressions=valgrind.sup'] + cmd
   if debug:
     cmd = ['gnome-terminal', '-x', 'gdb', '-ex', 'run'] + cmd
-  # gtk3/gail3 seem problematic with always-malloc
+  # FIXME gtk3/gail3 seem problematic with always-malloc
   #environ['G_SLICE'] = 'always-malloc,debug-blocks'
   environ['G_SLICE'] = 'debug-blocks'
   environ['G_DEBUG'] = 'gc-friendly' if not environ.get('G_DEBUG') else environ['G_DEBUG'] + ',gc-friendly'
@@ -356,22 +357,33 @@ def guivisible(frm, obj, prefix=False):
   states = ldtp.getallstates(frm, obj)
   return ldtp.state.VISIBLE in states
 
-def wait_for_encryption(dlg, obj, max_count, prefix=False):
+def wait_for_encryption(dlg, max_count, encrypt):
   count = 0
   while count < max_count:
-    if guiexist(dlg, obj, prefix):
-      break
-    if ldtp.guiexist('dlgAllowaccess'):
-      ldtp.click('dlgAllowaccess', 'btnDeny')
-    if ldtp.guiexist(dlg, 'txtEncryptionpassword'):
-      ldtp.settextvalue(dlg, 'txtEncryptionpassword', 'test')
-      if ldtp.guiexist(dlg, 'txtConfirmpassword'):
-        ldtp.settextvalue(dlg, 'txtConfirmpassword', 'test')
+    if guivisible(dlg, 'txtEncryptionpassword'):
+      if encrypt:
+        ldtp.settextvalue(dlg, 'txtEncryptionpassword', 'test')
+        if guivisible(dlg, 'txtConfirmpassword'):
+          ldtp.settextvalue(dlg, 'txtConfirmpassword', 'test')
+      else:
+        print ldtp.getobjectlist(dlg)
+        ldtp.click(dlg, 'rbtnAllowrestoringwithoutapassword')
       ldtp.click(dlg, 'btnContinue')
-    ldtp.wait(2)
-    remap(dlg)
+      break
+    ldtp.wait(1)
     count += 1
-  assert guivisible(dlg, obj, prefix)
+  assert count < max_count, max_count
+
+def wait_for_finish(dlg, obj, max_count, prefix=False):
+  count = 0
+  while count < max_count:
+    if obj is not None and guivisible(dlg, obj, prefix):
+      break
+    elif obj is None and not ldtp.guiexist(dlg):
+      break
+    ldtp.wait(1)
+    count += 1
+  assert count < max_count, max_count
 
 def waitforgui(frm):
   assert ldtp.waittillguiexist(frm)
@@ -388,6 +400,11 @@ def set_file_list(dlg, obj, addObj, removeObj, files):
       ldtp.click(dlg, removeObj)
     except:
       break
+
+  # FIXME compiz and modal windows tend to not work with ldtp
+  set_settings_value('include-list' if obj == 'tblIncludeList' else 'exclude-list',
+                     '[%s]' % ','.join(["'%s'" % os.path.abspath(x) for x in files]))
+  return
 
   # Add new items
   for f in files:
@@ -416,39 +433,39 @@ def walk_prefs(backend = None, dest = None, includes = [], excludes = []):
 
     ldtp.comboselect('frmBackup', 'cboLocation', 'Local Folder')
     ldtp.settextvalue('frmBackup', 'txt0', dest) # FIXME txt0 is bad name
+    ldtp.wait(1) # without this, sometimes ldtp moves so fast, deja-dup doesn't notice dest
 
   ldtp.selectrow('frmBackup', 'tblCategories', 'Files')
   set_file_list('frmBackup', 'tblIncludeList', 'btnIncludeListAdd', 'btnIncludeListRemove', includes)
   set_file_list('frmBackup', 'tblExcludeList', 'btnExcludeListAdd', 'btnExcludeListRemove', excludes)
 
 def strip_obj_name(obj):
-  return obj.replace("_", "").replace(".", "")
+  return obj.replace("_", "").replace(".", "") if obj is not None else None
 
-def backup_simple(finish=True, error=None, timeout=400, backend = None, encrypt = None, dest = None, includes = [], excludes = [], add_srcdir=True):
+def backup_simple(finish=True, error=None, timeout=400, backend = 'file',
+                  encrypt = True, dest = None, includes = [], excludes = [],
+                  add_srcdir = True, set_prefs = True):
   global srcdir
   if add_srcdir:
     includes = [os.path.join(srcdir, f) for f in includes]
     excludes = [os.path.join(srcdir, f) for f in excludes]
 
   start_deja_dup(executable='deja-dup-preferences')
-  remap('frmBackup')
 
-  walk_prefs(backend=backend, dest=dest, includes=includes,
-             excludes=excludes)
+  if set_prefs:
+    walk_prefs(backend=backend, dest=dest, includes=includes,
+               excludes=excludes)
 
   ldtp.selectrow('frmBackup', 'tblCategories', 'Overview')
   ldtp.click('frmBackup', 'btnBackUpNow')
   waitforgui('frmBackUp')
 
+  if encrypt is not None:
+    wait_for_encryption('frmBackUp', 2, encrypt)
+
   if finish:
-    if not error:
-      error = 'lblYourfilesweresuccessfullybackedup'
-      wait_for_encryption('frmBackUp', error, timeout)
-    else:
-      error = strip_obj_name(error)
-      wait_for_encryption('frmBackUp', error, timeout, prefix=True)
-    ldtp.click('frmBackUp', 'btnClose')
-    ldtp.waittillguinotexist('frmBackUp')
+    error = strip_obj_name(error)
+    wait_for_finish('frmBackUp', error, timeout, prefix=True)
 
 def restore_simple(path, date=None, backend = None, encrypt = None, dest = None):
   ldtp.click('frmDéjàDup', 'btnRestore…')

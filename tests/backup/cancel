@@ -25,46 +25,30 @@ sys.path.insert(0, sys.path[0]+'/..')
 import base
 import ldtp
 
-def wait_for_volume(destdir):
+def wait_for_volumes(destdir):
   count = 0
-  while os.listdir(destdir) == [] and count < 200:
+  while len(os.listdir(destdir)) == 2 and count < 200:
     ldtp.wait(1)
     count += 1
-
-def is_visible(frm):
-  if not ldtp.guiexist(frm, 'btnBackUp…'):
-    return False
-  states = ldtp.getallstates(frm, 'btnBackUp…')
-  return ldtp.state.VISIBLE in states
-
-def wait_until_visible(frm='frmDéjàDup', count=50):
-  while count > 0 and not is_visible(frm):
-    ldtp.wait(1)
-    count -= 1
-  base.remap(frm)
+  assert count < 200
 
 def test():
   base.setup()
   destdir = base.get_temp_name('local')
-  base.backup_simple(backend='file', finish=False, encrypt=False, includes=['/usr/bin'])
+  base.backup_simple(finish=False, encrypt=False, includes=['/usr/bin'])
   wait_for_volume(destdir)
-  ldtp.click('dlgBackUp', 'btnCancel')
-  wait_until_visible()
-  base.backup_simple(finish=False, includes=['/usr/bin'])
+  ldtp.click('frmBackUp', 'btnCancel')
+  base.backup_simple(finish=False, encrypt=False, set_prefs=False)
   ldtp.wait(5)
-  ldtp.click('dlgBackUp', 'btnCancel')
-  wait_until_visible()
-  base.backup_simple(finish=False, includes=['/usr/bin'])
+  ldtp.click('frmBackUp', 'btnCancel')
+  base.backup_simple(finish=False, encrypt=False, set_prefs=False)
   ldtp.wait(4)
-  ldtp.click('dlgBackUp', 'btnCancel')
-  wait_until_visible()
-  base.backup_simple(finish=False, includes=['/usr/bin'])
+  ldtp.click('frmBackUp', 'btnCancel')
+  base.backup_simple(finish=False, encrypt=False, set_prefs=False)
   wait_for_volume(destdir)
-  ldtp.click('dlgBackUp', 'btnCancel')
-  wait_until_visible()
-  base.backup_simple(finish=False, includes=['/usr/bin'])
+  ldtp.click('frmBackUp', 'btnCancel')
+  base.backup_simple(finish=False, encrypt=False, set_prefs=False)
   ldtp.wait(7)
-  ldtp.click('dlgBackUp', 'btnCancel')
-  wait_until_visible()
+  ldtp.click('frmBackUp', 'btnCancel')
 
 base.run(test)

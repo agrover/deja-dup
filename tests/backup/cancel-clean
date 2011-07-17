@@ -25,9 +25,9 @@ sys.path.insert(0, sys.path[0]+'/..')
 import base
 import ldtp
 
-def wait_for_volume(destdir):
+def wait_for_volumes(destdir):
   count = 0
-  while os.listdir(destdir) == [] and count < 200:
+  while len(os.listdir(destdir)) == 2 and count < 200:
     ldtp.wait(1)
     count += 1
 
@@ -36,8 +36,8 @@ def test():
   base.backup_simple(backend='file', finish=False, encrypt=False, includes=['/usr/bin'])
   destdir = base.get_temp_name('local')
   wait_for_volume(destdir)
-  ldtp.click('dlgBackUp', 'btnCancel')
-  ldtp.waittillguiexist('frmDéjàDup')
+  ldtp.click('frmBackUp', 'btnCancel')
+  ldtp.waittillguinotexist('frmBackUp')
   return os.listdir(destdir) == []
 
 base.run(test)

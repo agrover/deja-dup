@@ -25,7 +25,7 @@ import ldtp
 import os
 
 def test():
-  base.setup(start=False)
+  base.setup()
   # Set up our duplicity wrapper to be called by deja-dup
   os.environ['PATH'] = os.path.join(scriptdir, 'badversion-bin') + ":" + os.environ['PATH']
   base.start_deja_dup(waitfor='dlgError')
