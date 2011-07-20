@@ -29,6 +29,6 @@ def test():
   base.setup()
   # passing it in will prevent it from being created by base.py
   destdir = base.get_temp_name('local')
-  base.backup_simple(dest=destdir, includes=['data/simple'])
+  base.backup_simple(backend='file', dest=destdir, includes=['data/simple'])
 
 base.run(test)

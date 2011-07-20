@@ -25,9 +25,10 @@ sys.path.insert(0, sys.path[0]+'/..')
 import base
 import ldtp
 
-def wait_for_volumes(destdir):
+def wait_for_volume(destdir):
   count = 0
-  while len(os.listdir(destdir)) == 2 and count < 200:
+  while len(os.listdir(destdir)) < 2 and count < 200:
+    print count, os.listdir(destdir)
     ldtp.wait(1)
     count += 1
   assert count < 200
@@ -35,19 +36,19 @@ def wait_for_volumes(destdir):
 def test():
   base.setup()
   destdir = base.get_temp_name('local')
-  base.backup_simple(finish=False, encrypt=False, includes=['/usr/bin'])
+  base.backup_simple(backend='file', finish=False, encrypt=False, includes=['/usr/bin'])
   wait_for_volume(destdir)
   ldtp.click('frmBackUp', 'btnCancel')
-  base.backup_simple(finish=False, encrypt=False, set_prefs=False)
+  base.backup_simple(finish=False, encrypt=False)
   ldtp.wait(5)
   ldtp.click('frmBackUp', 'btnCancel')
-  base.backup_simple(finish=False, encrypt=False, set_prefs=False)
+  base.backup_simple(finish=False, encrypt=False)
   ldtp.wait(4)
   ldtp.click('frmBackUp', 'btnCancel')
-  base.backup_simple(finish=False, encrypt=False, set_prefs=False)
+  base.backup_simple(finish=False, encrypt=False)
   wait_for_volume(destdir)
   ldtp.click('frmBackUp', 'btnCancel')
-  base.backup_simple(finish=False, encrypt=False, set_prefs=False)
+  base.backup_simple(finish=False, encrypt=False)
   ldtp.wait(7)
   ldtp.click('frmBackUp', 'btnCancel')
 

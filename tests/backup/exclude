@@ -28,7 +28,8 @@ import os
 def test():
   # Backup the tree data set
   base.setup()
-  base.backup_simple(includes=['data/tree/a', 'data/tree/a/b/c', 'data/tree/one/two', 'data/tree/one/two/three/four'],
+  base.backup_simple(backend='file',
+                     includes=['data/tree/a', 'data/tree/a/b/c', 'data/tree/one/two', 'data/tree/one/two/three/four'],
                      excludes=['data/tree/a/b', 'data/tree/a/b/c/d', 'data/tree/one', 'data/tree/one/two/three'])
   # Restore it
   restoredir = base.get_temp_name('restore')
@@ -48,6 +49,5 @@ def test():
   absent('a/b/c/d/leaf')
   absent('one/leaf')
   absent('one/two/three/leaf')
-  return True
 
 base.run(test)

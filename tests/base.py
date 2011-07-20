@@ -301,8 +301,6 @@ def get_manifest_date(filename):
 def list_manifests(dest='local'):
   destdir = get_temp_name(dest)
   files = sorted(glob.glob('%s/*.manifest*' % destdir), key=get_manifest_date)
-  if not files:
-    raise Exception("Expected manifest, found none")
   files = filter(lambda x: x.count('duplicity-full') == 0 or x.count('.to.') == 0, files) # don't get the in-between manifests
   return (destdir, files)
 
@@ -315,6 +313,7 @@ def num_manifests(mtype=None, dest='local'):
 def last_manifest(dest='local'):
   '''Returns last backup manifest (directory, filename) pair'''
   destdir, files = list_manifests(dest)
+  assert len(files) > 0
   latest = files[-1]
   return (destdir, latest)
 
@@ -418,10 +417,7 @@ def set_file_list(dlg, obj, addObj, removeObj, files):
     ldtp.click('dlgChoosefolders', 'btnOpen')
     ldtp.wait(1) # let dialog close
 
-def walk_prefs(backend = None, dest = None, includes = [], excludes = []):
-  if guivisible('frmBackup', 'btnJustshowmybackupsettings'):
-    ldtp.click('frmBackup', 'btnJustshowmybackupsettings')
-
+def walk_prefs(backend, dest, includes, excludes):
   if backend == 'file':
     ldtp.selectrow('frmBackup', 'tblCategories', 'Storage')
 
@@ -436,23 +432,30 @@ def walk_prefs(backend = None, dest = None, includes = [], excludes = []):
     ldtp.wait(1) # without this, sometimes ldtp moves so fast, deja-dup doesn't notice dest
 
   ldtp.selectrow('frmBackup', 'tblCategories', 'Files')
-  set_file_list('frmBackup', 'tblIncludeList', 'btnIncludeListAdd', 'btnIncludeListRemove', includes)
-  set_file_list('frmBackup', 'tblExcludeList', 'btnExcludeListAdd', 'btnExcludeListRemove', excludes)
+  if includes is not None:
+    set_file_list('frmBackup', 'tblIncludeList', 'btnIncludeListAdd', 'btnIncludeListRemove', includes)
+  if excludes is not None:
+    set_file_list('frmBackup', 'tblExcludeList', 'btnExcludeListAdd', 'btnExcludeListRemove', excludes)
 
 def strip_obj_name(obj):
   return obj.replace("_", "").replace(".", "") if obj is not None else None
 
-def backup_simple(finish=True, error=None, timeout=400, backend = 'file',
-                  encrypt = True, dest = None, includes = [], excludes = [],
-                  add_srcdir = True, set_prefs = True):
+def backup_simple(finish=True, error=None, timeout=400, backend = None,
+                  encrypt = True, dest = None, includes = None, excludes = None,
+                  add_srcdir = True):
   global srcdir
   if add_srcdir:
-    includes = [os.path.join(srcdir, f) for f in includes]
-    excludes = [os.path.join(srcdir, f) for f in excludes]
+    if includes is not None:
+      includes = [os.path.join(srcdir, f) for f in includes]
+    if excludes is not None:
+      excludes = [os.path.join(srcdir, f) for f in excludes]
 
   start_deja_dup(executable='deja-dup-preferences')
 
-  if set_prefs:
+  if guivisible('frmBackup', 'btnJustshowmybackupsettings'):
+    ldtp.click('frmBackup', 'btnJustshowmybackupsettings')
+
+  if backend is not None or includes is not None or excludes is not None:
     walk_prefs(backend=backend, dest=dest, includes=includes,
                excludes=excludes)
 
@@ -461,7 +464,7 @@ def backup_simple(finish=True, error=None, timeout=400, backend = 'file',
   waitforgui('frmBackUp')
 
   if encrypt is not None:
-    wait_for_encryption('frmBackUp', 2, encrypt)
+    wait_for_encryption('frmBackUp', 3, encrypt)
 
   if finish:
     error = strip_obj_name(error)

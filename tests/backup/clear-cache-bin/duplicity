@@ -27,7 +27,7 @@ import subprocess
 os.environ['PATH'] = os.environ['PATH'].split(':', 1)[-1] # Drop the PATH override that pointed to this script
 
 # Check if this is a 'real' incremental call (not --version or collection-status)
-if sys.argv[1].startswith('--exclude') and '--dry-run' not in sys.argv:
+if '--version' not in sys.argv and 'collection-status' not in sys.argv and '--dry-run' not in sys.argv:
   # Only return 1 if the cache directory has contents.  Thus, if deja-dup
   # doesn't delete it for us, we'll keep returning 1
   if os.listdir(os.environ['XDG_CACHE_HOME'] + '/deja-dup'):

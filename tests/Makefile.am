@@ -30,7 +30,9 @@ AUTO_TESTS = \
 	backup/mkdir \
 	backup/permissions \
 	backup/spaces \
-	backup/symlinks \
+	backup/symlinks
+
+NIL_VAR = \
 	basic/badversion \
 	prefs/s3-folder \
 	prefs/ssh-to-file \

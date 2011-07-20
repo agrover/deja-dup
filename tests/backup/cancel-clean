@@ -25,9 +25,9 @@ sys.path.insert(0, sys.path[0]+'/..')
 import base
 import ldtp
 
-def wait_for_volumes(destdir):
+def wait_for_volume(destdir):
   count = 0
-  while len(os.listdir(destdir)) == 2 and count < 200:
+  while len(os.listdir(destdir)) < 2 and count < 200:
     ldtp.wait(1)
     count += 1
 

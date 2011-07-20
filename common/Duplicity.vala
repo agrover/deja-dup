@@ -1245,7 +1245,9 @@ public class Duplicity : Object
     //
     // For local filesystems, we'll choose large volsize.
     // For remote FSs, we'll go smaller.
-    if (backend.is_native())
+    if (in_testing_mode())
+      return 5;
+    else if (backend.is_native())
       return 50;
     else
       return 25;

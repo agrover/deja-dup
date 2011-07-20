@@ -30,21 +30,21 @@ if not base.dup_meets_version(0, 6, 13):
 
 def wait_for_volume(destdir):
   count = 0
-  while os.listdir(destdir) == [] and count < 200:
+  while len(os.listdir(destdir)) < 2 and count < 200:
     ldtp.wait(1)
     count += 1
 
 def test():
   base.setup()
-  base.backup_simple(finish=False, backend='file', encrypt=False, includes=['/usr/bin'])
+  base.backup_simple(backend='file', finish=False, encrypt=False, includes=['/usr/bin'])
   destdir = base.get_temp_name('local')
   wait_for_volume(destdir)
-  ldtp.click('dlgBackUp', 'btnResumeLater')
-  ldtp.waittillguinotexist('dlgBackUp')
+  ldtp.click('frmBackUp', 'btnResumeLater')
+  ldtp.waittillguinotexist('frmBackUp')
   vols_before = os.listdir(destdir)
   assert vols_before != []
-  base.start_deja_dup()
-  base.backup_simple()
+  assert base.num_manifests() == 0
+  base.backup_simple(encrypt=None)
   vols_after = os.listdir(destdir)
   assert base.num_manifests() == 1
   assert vols_before[0] in vols_after

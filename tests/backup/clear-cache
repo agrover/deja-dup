@@ -29,7 +29,6 @@ def test():
   base.backup_simple(backend='file', includes=['data/simple'])
   # Set up our duplicity wrapper to be called by deja-dup
   os.environ['PATH'] = os.path.join(scriptdir, 'clear-cache-bin') + ":" + os.environ['PATH']
-  base.start_deja_dup()
   base.backup_simple()
 
 base.run(test)
