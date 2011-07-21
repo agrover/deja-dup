@@ -61,28 +61,24 @@ def deleteold():
 
   # backup of 2M
   makerandom(os.path.join(backupdir, 'one'), 2*1024*1024)
-  base.start_deja_dup()
   base.backup_simple()
   base.last_date_change('%d days ago' % (365), dest='mount') # force full
   manifests.append(base.last_manifest(dest='mount')[1])
 
   # backup of 10M
   makerandom(os.path.join(backupdir, 'one'), 10*1024*1024)
-  base.start_deja_dup()
   base.backup_simple()
   base.last_date_change('%d days ago' % (365), dest='mount') # force full
   manifests.append(base.last_manifest(dest='mount')[1])
 
   # backup of 3M
   makerandom(os.path.join(backupdir, 'one'), 3*1024*1024)
-  base.start_deja_dup()
   base.backup_simple()
   base.last_date_change('%d days ago' % (365), dest='mount') # force full
   manifests.append(base.last_manifest(dest='mount')[1])
 
   # backup of 10M
   makerandom(os.path.join(backupdir, 'one'), 10*1024*1024)
-  base.start_deja_dup()
   base.backup_simple()
   manifests.append(base.last_manifest(dest='mount')[1])
 

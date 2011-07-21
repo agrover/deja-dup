@@ -562,7 +562,7 @@ public class Duplicity : Object
     // from a backup when not all of the signature files are in your archive
     // dir (which happens when you start using an archive dir in the middle
     // of a backup chain).
-    return state == State.CLEANUP || state == State.DELETE;
+    return state == State.CLEANUP;
   }
 
   void handle_done(DuplicityInstance? inst, bool success, bool cancelled)
