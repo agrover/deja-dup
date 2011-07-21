@@ -464,7 +464,7 @@ def backup_simple(finish=True, error=None, timeout=400, backend = None,
   waitforgui('frmBackUp')
 
   if encrypt is not None:
-    wait_for_encryption('frmBackUp', 3, encrypt)
+    wait_for_encryption('frmBackUp', 5, encrypt)
 
   if finish:
     error = strip_obj_name(error)

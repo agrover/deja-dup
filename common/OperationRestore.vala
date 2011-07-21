@@ -25,8 +25,6 @@ public class OperationRestore : Operation
 {
   public string dest {get; construct;} // Directory user wants to put files in
   public string time {get; construct;} // Date user wants to restore to
-  string source; // Directory duplicity puts files in
-  List<string> errors;
   private List<File> _restore_files;
   public List<File> restore_files {
     get {
@@ -63,26 +61,20 @@ public class OperationRestore : Operation
 
   protected override List<string>? make_argv() throws Error
   {
-    source = dest;
-    
     List<string> argv = new List<string>();
     if (time != null)
       argv.append("--restore-time=%s".printf(time));
     
-    dup.local = File.new_for_path(source);
+    dup.local = File.new_for_path(dest);
     
     return argv;
   }
   
   protected async override void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
-    if (success) {
+    if (success)
       DejaDup.update_last_run_timestamp(DejaDup.TimestampType.RESTORE);
-    }
-    else if (!cancelled) {
-      // Error case.
-    }
-    
+
     base.operation_finished(dup, success, cancelled);
   }
 }

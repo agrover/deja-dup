@@ -89,6 +89,7 @@ public class Duplicity : Object
   bool is_full_backup = false;
   bool cleaned_up_once = false;
   bool needs_root = false;
+  bool force_encryption = false;
   
   bool has_progress_total = false;
   uint64 progress_total; // zero, unless we already know limit
@@ -369,10 +370,13 @@ public class Duplicity : Object
     
     switch (original_mode) {
     case Operation.Mode.BACKUP:
-      // We need to first check if the user has encrypted backup files.
-      // If so, we'll add to that chain.
+      // We need to first check the backup status to see if we need to start
+      // a full backup and to see if we should use encryption.
       if (!checked_collection_info) {
-        mode = Operation.Mode.STATUS;
+        if (mode != Operation.Mode.STATUS) { // first status check
+          mode = Operation.Mode.STATUS;
+          force_encryption = true; // check for encrypted backups first
+        }
         state = State.STATUS;
         action_desc = _("Preparing…");
       }
@@ -1121,6 +1125,14 @@ public class Duplicity : Object
         in_chain = false;
     }
 
+    if (state == State.STATUS && dates.length() == 0 && force_encryption) {
+      // No files...  Check if results are different without encryption
+      force_encryption = false;
+      if (restart())
+        return;
+    }
+    // else if we got results, keep the force_encryption flag on
+
     got_collection_info = true;
     collection_info = new List<DateInfo?>();
     foreach (DateInfo s in infos)
@@ -1262,7 +1274,8 @@ public class Duplicity : Object
     foreach (string s in envp_extra) envp.append(s);
 
     if (encrypt_password == null || encrypt_password == "") {
-      argv.append("--no-encryption");
+      if (!force_encryption)
+        argv.append("--no-encryption");
       envp.append("PASSPHRASE="); // duplicity sometimes asks for a passphrase when it doesn't need it (during cleanup), so this stops it from prompting the user and us getting an exception as a result
     }
     else {
