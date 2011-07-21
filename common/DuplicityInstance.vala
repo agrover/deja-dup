@@ -36,10 +36,7 @@ public class DuplicityInstance : Object
     var verbose_str = Environment.get_variable("DEJA_DUP_DEBUG");
     if (verbose_str != null && int.parse(verbose_str) > 0)
       verbose = true;
-    
-    if (!DuplicityInfo.get_default().has_fixed_log_file)
-      as_root = false; // without a log file, we can't use gksu
-    
+
     if (as_root) {
       var settings = get_settings();
       if (!settings.get_boolean(ROOT_PROMPT_KEY))

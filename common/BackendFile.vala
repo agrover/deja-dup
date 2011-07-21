@@ -67,13 +67,7 @@ public class BackendFile : Backend
   public override string? get_location() throws Error
   {
     var file = get_file_from_settings();
-    if (DuplicityInfo.get_default().has_native_gio)
-      return file.get_uri();
-    else {
-      if (file.get_path() == null)
-        throw new BackupError.BAD_CONFIG(_("GVFS FUSE is not installed"));
-      return "file://" + file.get_path();
-    }
+    return file.get_uri();
   }
 
   public override string? get_location_pretty() throws Error
@@ -195,7 +189,7 @@ public class BackendFile : Backend
       }
     }
     
-    if (mode == Operation.Mode.INVALID && DuplicityInfo.get_default().has_native_gio)
+    if (mode == Operation.Mode.INVALID)
       argv.prepend("--gio");
   }
   

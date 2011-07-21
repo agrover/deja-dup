@@ -369,11 +369,9 @@ public class Duplicity : Object
     
     switch (original_mode) {
     case Operation.Mode.BACKUP:
-      // If duplicity is using the new time format, we need to first check if
-      // the user has files in the old 'short-filenames' format.  If so, we'll
-      // add to that chain.
-      if (!checked_collection_info &&
-          DuplicityInfo.get_default().has_collection_status) {
+      // We need to first check if the user has encrypted backup files.
+      // If so, we'll add to that chain.
+      if (!checked_collection_info) {
         mode = Operation.Mode.STATUS;
         state = State.STATUS;
         action_desc = _("Preparing…");
@@ -381,8 +379,7 @@ public class Duplicity : Object
       // If we're backing up, and the version of duplicity supports it, we should
       // first run using --dry-run to get the total size of the backup, to make
       // accurate progress bars.
-      else if (use_progress && !has_progress_total &&
-               DuplicityInfo.get_default().has_backup_progress) {
+      else if (use_progress && !has_progress_total) {
         state = State.DRY_RUN;
         action_desc = _("Preparing…");
         extra_argv.append("--dry-run");
@@ -411,17 +408,13 @@ public class Duplicity : Object
         if (homes.length() > 1)
           has_non_home_contents = true;
         else if (homes.length() == 1) {
-          if (DuplicityInfo.get_default().has_rename_arg) {
-            var old_home = homes.data;
-            var new_home = slash_home_me;
-            if (!old_home.equal(new_home)) {
-              extra_argv.append("--rename");
-              extra_argv.append(slash.get_relative_path(old_home));
-              extra_argv.append(slash.get_relative_path(new_home));
-            }
+          var old_home = homes.data;
+          var new_home = slash_home_me;
+          if (!old_home.equal(new_home)) {
+            extra_argv.append("--rename");
+            extra_argv.append(slash.get_relative_path(old_home));
+            extra_argv.append(slash.get_relative_path(new_home));
           }
-          else if (!homes.data.has_prefix(slash_home_me))
-            has_non_home_contents = true;
         }
         
         if (restore_files != null) {
@@ -461,8 +454,7 @@ public class Duplicity : Object
             needs_root = true;
         }
         
-        if (DuplicityInfo.get_default().has_restore_progress)
-          progress(0f);
+        progress(0f);
       }
       break;
     }
@@ -530,8 +522,7 @@ public class Duplicity : Object
   }
 
   bool cleanup() {
-    if (DuplicityInfo.get_default().has_broken_cleanup ||
-        state == State.CLEANUP)
+    if (state == State.CLEANUP)
       return false;
     
     state = State.CLEANUP;
@@ -602,16 +593,6 @@ public class Duplicity : Object
       case State.STATUS:
         checked_collection_info = true;
         mode = Operation.Mode.BACKUP;
-        
-        if (!got_collection_info || collection_info == null) {
-          // Checking for backup files added the short-filename parameter.
-          // If there were no files, we want to take it out again and
-          // proceed with a normal filename backup.
-          foreach (weak string s in backend_argv) {
-            if (s == "--short-filenames")
-              backend_argv.remove(s);
-          }
-        }
 
         /* Set full backup threshold and determine whether we should trigger
            a full backup. */
@@ -699,25 +680,6 @@ public class Duplicity : Object
       set_status_file(saved_status_file, saved_status_file_action, false);
   }
 
-  bool restart_with_short_filenames_if_needed()
-  {
-    if (DuplicityInfo.get_default().can_read_short_filenames)
-      return false;
-    
-    foreach (string s in backend_argv) {
-      if (s == "--short-filenames")
-        return false;
-    }
-    
-    backend_argv.append("--short-filenames");
-    if (!restart()) {
-      done(false, false);
-      return false;
-    }
-    
-    return true;
-  }
-  
   // Should only be called *after* a successful backup
   bool delete_files_if_needed()
   {
@@ -830,8 +792,7 @@ public class Duplicity : Object
     // happens often enough that we do that for the user here.  It should be
     // safe to do this, as the cache is not necessary for operation, only
     // a performance improvement.
-    if (DuplicityInfo.get_default().guarantees_error_codes &&
-        code == ERROR_GENERIC && !error_issued) {
+    if (code == ERROR_GENERIC && !error_issued) {
       restart_without_cache();
     }
   }
@@ -1000,26 +961,8 @@ public class Duplicity : Object
         if (restart_without_cache())
           return;
       }
-      else {
-        // Very possibly a FAT file system that can't handle the colons that 
-        // duplicity likes to use.  Try again with --short-filenames
-        // But first make sure we aren't already doing that.
-        // Happens on backup only.
-        if (!DuplicityInfo.get_default().new_time_format &&
-            restart_with_short_filenames_if_needed())
-          return;
-      }
       break;
     case "CollectionsError":
-      // Very possibly a FAT file system that we are trying to restore from.
-      // Duplicity can't find the short filenames that duplicity uses and
-      // throws an exception. We should try again with --short-filenames.
-      // Note that this code path is unlikely to have been hit on recent
-      // versions of duplicity (ones with parsable collection-status support)
-      // because when we run collection-status and see no backups, we add
-      // --short-filenames to argv then.
-      if (restart_with_short_filenames_if_needed())
-        return;
       show_error(_("No backup files found"));
       break;
     case "AssertionError":
@@ -1114,10 +1057,6 @@ public class Duplicity : Object
   
   void process_progress(string[] firstline)
   {
-    if (!DuplicityInfo.get_default().has_restore_progress &&
-        mode == Operation.Mode.RESTORE)
-      return;
-    
     double total;
     
     if (firstline.length > 2)
@@ -1181,13 +1120,7 @@ public class Duplicity : Object
       else if (in_chain)
         in_chain = false;
     }
-    
-    if (mode == Operation.Mode.STATUS &&
-        dates.length() == 0) { // may not have found short-filenamed-backups
-      if (restart_with_short_filenames_if_needed())
-        return;
-    }
-    
+
     got_collection_info = true;
     collection_info = new List<DateInfo?>();
     foreach (DateInfo s in infos)

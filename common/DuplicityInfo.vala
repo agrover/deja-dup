@@ -24,21 +24,11 @@ namespace DejaDup {
 public class DuplicityInfo : Object
 {
   public static const int REQUIRED_MAJOR = 0;
-  public static const int REQUIRED_MINOR = 5;
-  public static const int REQUIRED_MICRO = 3;
+  public static const int REQUIRED_MINOR = 6;
+  public static const int REQUIRED_MICRO = 8;
 
-  public bool has_broken_cleanup {get; private set; default = false; }
-  public bool has_backup_progress {get; private set; default = false; }
-  public bool has_restore_progress {get; private set; default = false; }
-  public bool has_collection_status {get; private set; default = false; }
-  public bool new_time_format {get; private set; default = false; }
-  public bool can_read_short_filenames {get; private set; default = false; }
-  public bool has_native_gio {get; private set; default = false; }
   public bool can_resume {get; private set; default = false; }
-  public bool has_rename_arg {get; private set; default = false; }
-  public bool has_fixed_log_file {get; private set; default = false; }
   public bool use_gpg_options {get; private set; default = false; }
-  public bool guarantees_error_codes {get; private set; default = false; }
   public bool has_u1 {get; private set; default = false;}
   
   static DuplicityInfo info = null;
@@ -87,27 +77,7 @@ public class DuplicityInfo : Object
       set_bad_version_error(out header, out msg);
       return false;
     }
-    
-    if (meets_version(0, 5, 4)) {
-      has_backup_progress = true;
-      has_collection_status = true;
-      guarantees_error_codes = true;
-    }
-    if (equals_version(0, 5, 4) || equals_version(0, 5, 5))
-      has_broken_cleanup = true;
-    if (meets_version(0, 5, 6))
-      has_restore_progress = true;
-    if (meets_version(0, 5, 10))
-      new_time_format = true;
-    if (meets_version(0, 5, 16))
-      can_read_short_filenames = true;
-    if (meets_version(0, 6, 5)) {
-      has_native_gio = true; // had it since 0.6.1, but didn't work on restore
-    }
-    if (meets_version(0, 6, 7)) {
-      has_rename_arg = true;
-      has_fixed_log_file = true; // had it since 0.5.3, but was buggy
-    }
+
     if (equals_version(0, 6, 8))
       use_gpg_options = true; // workaround a duplicity bug
     if (meets_version(0, 6, 13))
