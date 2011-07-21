@@ -26,7 +26,6 @@ use strict;
 use Getopt::Long;
 use Text::Tabs qw(expand);
 use POSIX qw(strftime setlocale LC_ALL);
-use Locale::gettext;
 use Encode qw(decode encode);
 use I18N::Langinfo qw(langinfo CODESET);
 
@@ -35,8 +34,7 @@ my $this_version = '1.38.2';
 my $encoding;
 
 {
-    my $gettext = Locale::gettext->domain($this_program);
-    sub _ { $gettext->get($_[0]) }
+    sub _ { $_[0] }
 
     my ($user_locale) = grep defined && length,
 	(map $ENV{$_}, qw(LANGUAGE LC_ALL LC_MESSAGES LANG)), 'C';
@@ -57,7 +55,7 @@ my $encoding;
     sub kark # die with message formatted in the invoking user's locale
     {
 	setlocale LC_ALL, $user_locale;
-	my $fmt = $gettext->get(shift);
+	my $fmt = shift;
 	my $errmsg = enc_user sprintf $fmt, @_;
 	die $errmsg, "\n";
     }
