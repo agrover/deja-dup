@@ -34,7 +34,36 @@ HELP_FILES = \
 	restore-worst-case.page \
 	support.page
 
-HELP_LINGUAS = ar cs da de en_GB es eu fi fr gl he hr hu id it ja lt nb nl pl ps pt_BR ru sv th tr zh_CN zh_TW
+HELP_LINGUAS = \
+	ar \
+	cs \
+	da \
+	de \
+	en_GB \
+	es \
+	eu \
+	fi \
+	fr \
+	gl \
+	he \
+	hr \
+	hu \
+	id \
+	it \
+	ja \
+	lt \
+	nb \
+	nl \
+	pl \
+	ps \
+	pt_BR \
+	ru \
+	sv \
+	th \
+	tr \
+	vi \
+	zh_CN \
+	zh_TW
 
 deja-dup-help.pot: deja-dup.pot
 	cp -a $^ $@

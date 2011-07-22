@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-02 13:03+0100\n"
-"PO-Revision-Date: 2011-06-29 09:24+0000\n"
+"POT-Creation-Date: 2011-07-07 02:04-0400\n"
+"PO-Revision-Date: 2011-07-14 15:08+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-04 04:47+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-15 04:51+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:139
-#: ../deja-dup/StatusIcon.vala:283 ../monitor/monitor.vala:104
+#: ../deja-dup/StatusIcon.vala:283 ../monitor/monitor.vala:115
 #: ../preferences/preferences-main.vala:51
 #: ../preferences/preferences-main.vala:63
 msgid "Backup"
@@ -32,7 +32,7 @@ msgstr "Biztonsági mentés"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:88
 #: ../deja-dup/main.vala:79 ../preferences/Preferences.vala:85
 #, c-format
 msgid "Déjà Dup Backup Tool"
@@ -51,9 +51,9 @@ msgstr "A mentés beállítások megváltoztatása"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:297
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:308
 msgid "Backup Monitor"
-msgstr "Visszaállítás-figyelő"
+msgstr "Biztonságimentés-figyelő"
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
 msgid "Schedules backups at regular intervals"
@@ -209,7 +209,7 @@ msgid ""
 "The last time Déjà Dup successfully completed a restore. This time should be "
 "in ISO 8601 format."
 msgstr ""
-"Az utolsó alkalom amikor a Déjà Dup visszaállított fájlokat. Ennek ISO 8601 "
+"Az utolsó alkalom amikor a Déjà Dup helyreállított fájlokat. Ennek ISO 8601 "
 "formátumban kell lennie."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
@@ -307,26 +307,14 @@ msgid "Whether to automatically back up on a regular schedule."
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
-msgid "Whether to encrypt your backup"
-msgstr "Biztonsági mentések titkosítása"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
-msgid ""
-"Whether to encrypt your backup files in the storage location. It’s strongly "
-"recommended to leave this as ‘true’."
-msgstr ""
-"A biztonsági mentés fájljainak titkosítása a tárolandó helyen. Erősen "
-"ajánlott az ‘igen’ beállításon hagyni."
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Whether to periodically back up"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid "Whether to request the root password"
 msgstr "Elfogadja a root jelszót?"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
@@ -334,7 +322,7 @@ msgstr ""
 "Elfogadja a root jelszót rendszermappákból történő mentéskor illetve "
 "visszaállításkor?"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -342,7 +330,7 @@ msgstr ""
 "Amelyik Amazon S3 bucketben történik a fájlok tárolása. Ennek nem szükséges "
 "már meglévőnek lennie. Csak az érvényes gépnevek engedélyezettek."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -351,13 +339,13 @@ msgstr ""
 "nem szükséges már meglévőnek lennie. Csak az érvényes gépnevek "
 "engedélyezettek."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Az Ön Amazon S3 Azonosító kulcsa. Ez úgy használható, mint az S3 "
 "felhasználóneve."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Your Rackspace username"
 msgstr "Rackspace felhasználónév"
 
@@ -365,17 +353,17 @@ msgstr "Rackspace felhasználónév"
 msgid "Folder:"
 msgstr "Mappa:"
 
-#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:171
+#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:176
 msgid "Scanning…"
 msgstr "Keresés…"
 
 #: ../nautilus/NautilusExtension.c:165
 msgid "Restore Missing Files…"
-msgstr "Hiányzó fájlok visszaállítása…"
+msgstr "Hiányzó fájlok helyreállítása…"
 
 #: ../nautilus/NautilusExtension.c:166
 msgid "Restore deleted files from backup"
-msgstr "Törölt fájlok visszaállítása biztonsági mentésből"
+msgstr "Törölt fájlok helyreállítása biztonsági mentésből"
 
 #: ../nautilus/NautilusExtension.c:208
 msgid "Revert to Previous Version…"
@@ -386,8 +374,8 @@ msgstr[1] "Visszaállítás egy előző változatra…"
 #: ../nautilus/NautilusExtension.c:212
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
-msgstr[0] "Fájl visszaállítása biztonsági mentésből"
-msgstr[1] "Fájlok visszaállítása biztonsági mentésből"
+msgstr[0] "Fájl helyreállítása biztonsági mentésből"
+msgstr[1] "Fájlok helyreállítása biztonsági mentésből"
 
 #: ../common/BackendFile.vala:74
 msgid "GVFS FUSE is not installed"
@@ -395,7 +383,7 @@ msgstr "A GVFS FUSE nincs telepítve"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:430
+#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:429
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s ezen: %2$s"
@@ -540,6 +528,8 @@ msgstr ""
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
+"A Déjà Dup biztonságimentés-kezelő a duplicity nélkül nem működik. Az "
+"alkalmazás bezáródik."
 
 #: ../common/DuplicityInfo.vala:155
 msgid "Duplicity’s version is too old"
@@ -551,69 +541,59 @@ msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
 "only found version %d.%d.%.2d"
 msgstr ""
+"A Déjà Dup működéséhez a duplicity %d.%d.%.2d-s verziója szükséges, de csak "
+"a(z) %d.%d.%.2d-s verzió van telepítve."
 
-#: ../common/Duplicity.vala:127 ../common/Duplicity.vala:179
+#: ../common/Duplicity.vala:127 ../common/Duplicity.vala:177
 msgid "Paused (no network)"
 msgstr "Szüneteltetve (nincs hálózat)"
 
-#: ../common/Duplicity.vala:377 ../common/Duplicity.vala:385
-#: ../common/Duplicity.vala:402 ../common/Operation.vala:80
+#: ../common/Duplicity.vala:375 ../common/Duplicity.vala:383
+#: ../common/Duplicity.vala:400 ../common/Operation.vala:79
 #: ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Előkészítés…"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:433
+#: ../common/Duplicity.vala:431
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
-msgstr "Nem állítható vissza: „%s”. Nem érvényes fájlútvonal"
+msgstr "Nem állitató helyre: „%s”. Nem érvényes fájlútvonal"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:500
+#: ../common/Duplicity.vala:498
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "A biztonsági mentés helye túl kicsi. Próbáljon egy nagyobbat választani."
 
-#: ../common/Duplicity.vala:521
+#: ../common/Duplicity.vala:519
 msgid "Backup location does not have enough free space."
 msgstr "A biztonsági mentés helyén nincs elegendő szabad hely."
 
-#: ../common/Duplicity.vala:541 ../common/Duplicity.vala:555
+#: ../common/Duplicity.vala:539 ../common/Duplicity.vala:553
 msgid "Cleaning up…"
 msgstr "Tisztítás…"
 
-#: ../common/Duplicity.vala:626
-msgid "Creating the first backup.  This may take a while."
-msgstr "Első biztonsági mentés létrehozása. Ez eltarthat egy ideig."
-
-#: ../common/Duplicity.vala:628
-msgid ""
-"Creating a fresh backup to protect against backup corruption.  This will "
-"take longer than normal."
-msgstr ""
-"Friss biztonsági mentés létrehozása a meghibásodások elkerülésére. Ez "
-"hosszabb időt vesz igénybe."
-
-#: ../common/Duplicity.vala:670 ../common/Duplicity.vala:1042
+#: ../common/Duplicity.vala:662 ../common/Duplicity.vala:1039
 msgid "Failed with an unknown error."
 msgstr "Ismeretlen hiba lépett fel."
 
-#: ../common/Duplicity.vala:895
+#: ../common/Duplicity.vala:887
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
-"Nem állítható vissza: „%s”. A fájl nem található meg a biztonsági mentésben"
+"Nem állítható helyre: „%s”. A fájl nem található meg a biztonsági mentésben"
 
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:901 ../common/Duplicity.vala:980
+#: ../common/Duplicity.vala:893 ../common/Duplicity.vala:972
 msgid "Bad encryption password."
 msgstr "Rossz titkosítási jelszó."
 
-#: ../common/Duplicity.vala:906
+#: ../common/Duplicity.vala:898
 msgid "Computer name changed"
 msgstr "A számítógép neve megváltozott"
 
-#: ../common/Duplicity.vala:906
+#: ../common/Duplicity.vala:898
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -623,69 +603,69 @@ msgstr ""
 "A meglévő biztonsági mentés neve %s, de a jelenlegi gépnév %s. Ha ez nem "
 "várt fejlemény, inkább készítsen biztonsági mentést egy másik helyre."
 
-#: ../common/Duplicity.vala:919
+#: ../common/Duplicity.vala:911
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Hozzáférés megtagadva a következő készítése közben: „%s”."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:923 ../common/Duplicity.vala:927
+#: ../common/Duplicity.vala:915 ../common/Duplicity.vala:919
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Hozzáférés megtagadva a következő olvasása közben: „%s”."
 
-#: ../common/Duplicity.vala:931
+#: ../common/Duplicity.vala:923
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Hozzáférés megtagadva a következő törlése közben: „%s”."
 
-#: ../common/Duplicity.vala:938
+#: ../common/Duplicity.vala:930
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "A biztonsági mentés helye nem létezik: „%s”."
 
-#: ../common/Duplicity.vala:944 ../common/Duplicity.vala:999
+#: ../common/Duplicity.vala:936 ../common/Duplicity.vala:991
 msgid "No space left."
 msgstr "Nincs több hely."
 
-#: ../common/Duplicity.vala:958
+#: ../common/Duplicity.vala:950
 msgid "Invalid ID."
 msgstr "Érvénytelen azonosító."
 
-#: ../common/Duplicity.vala:960
+#: ../common/Duplicity.vala:952
 msgid "Invalid secret key."
 msgstr "Érvénytelen titkosítási kulcs."
 
-#: ../common/Duplicity.vala:962
+#: ../common/Duplicity.vala:954
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Az Ön Amazon Webszolgáltatás fiókja nincs csatlakoztatva az S3 "
 "szolgáltatáshoz."
 
-#: ../common/Duplicity.vala:975
+#: ../common/Duplicity.vala:967
 msgid "S3 bucket name is not available."
 msgstr "Az S3 bucket név nem áll rendelkezésre."
 
-#: ../common/Duplicity.vala:984
+#: ../common/Duplicity.vala:976
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Fájlolvasási hiba: „%s”"
 
-#: ../common/Duplicity.vala:986
+#: ../common/Duplicity.vala:978
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Fájlírási hiba: „%s”"
 
-#: ../common/Duplicity.vala:1001
+#: ../common/Duplicity.vala:993
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Nem maradt több hely itt: „%s”"
 
-#: ../common/Duplicity.vala:1025
+#: ../common/Duplicity.vala:1019
 msgid "No backup files found"
 msgstr "Nem találhatóak biztonsági mentési fájlok"
 
-#: ../common/Duplicity.vala:1073
+#: ../common/Duplicity.vala:1070
 msgid "Uploading…"
 msgstr "Feltöltés…"
 
@@ -700,32 +680,32 @@ msgid ""
 "still be found in %s."
 msgstr ""
 "Nem lehetséges az összes fájl helyreállítása. Azok a fájlok, amelyek nem "
-"állíthatóak vissza, továbbra is megtalálhatóak itt: %s."
+"állíthatóak helyre, továbbra is megtalálhatóak itt: %s."
 
 #: ../common/OperationRestore.vala:186
 #, c-format
 msgid "Could not restore %s: %s"
 msgstr "Helyreállítás sikertelen: %s: %s"
 
-#: ../common/Operation.vala:72
+#: ../common/Operation.vala:71
 msgid "Backing up…"
 msgstr "Biztonsági mentés…"
 
-#: ../common/Operation.vala:74 ../deja-dup/AssistantRestore.vala:504
+#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:482
 msgid "Restoring…"
 msgstr "Helyreállítás…"
 
-#: ../common/Operation.vala:76
+#: ../common/Operation.vala:75
 msgid "Checking for backups…"
 msgstr "Biztonsági mentések ellenőrzése…"
 
-#: ../common/Operation.vala:78
+#: ../common/Operation.vala:77
 msgid "Listing files…"
 msgstr "Fájlok listázása…"
 
-#: ../common/Operation.vala:287
+#: ../common/Operation.vala:278
 msgid "Another backup operation is already running"
-msgstr ""
+msgstr "Egy másik mentési művelet már fut"
 
 #: ../deja-dup/AssistantBackup.vala:31
 msgctxt "back up is verb"
@@ -737,139 +717,152 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "_Biztonsági mentés"
 
+#: ../deja-dup/AssistantBackup.vala:51
+msgid "Creating the first backup.  This may take a while."
+msgstr "Első biztonsági mentés létrehozása. Ez eltarthat egy ideig."
+
+#: ../deja-dup/AssistantBackup.vala:52
+msgid ""
+"Creating a fresh backup to protect against backup corruption.  This will "
+"take longer than normal."
+msgstr ""
+"Friss biztonsági mentés létrehozása a meghibásodások elkerülésére. Ez "
+"hosszabb időt vesz igénybe."
+
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:73
+#: ../deja-dup/AssistantBackup.vala:82
 msgid "Backing up:"
 msgstr "Biztonsági mentés:"
 
-#: ../deja-dup/AssistantBackup.vala:90
+#: ../deja-dup/AssistantBackup.vala:91
 msgid "Backup Failed"
 msgstr "Biztonsági mentés sikertelen"
 
-#: ../deja-dup/AssistantBackup.vala:97
+#: ../deja-dup/AssistantBackup.vala:98
 msgid "Backing Up…"
 msgstr "Biztonsági mentés…"
 
-#: ../deja-dup/AssistantOperation.vala:170
+#: ../deja-dup/AssistantOperation.vala:175
 msgid "Scanning:"
 msgstr "Keresés:"
 
-#: ../deja-dup/AssistantOperation.vala:244
+#: ../deja-dup/AssistantOperation.vala:249
 msgid "_Details"
 msgstr "_Részletek"
 
-#: ../deja-dup/AssistantOperation.vala:293
+#: ../deja-dup/AssistantOperation.vala:297
+msgid "_Password-protect your backup"
+msgstr "_Védje jelszóval a biztonsági mentést"
+
+#: ../deja-dup/AssistantOperation.vala:310
 #, c-format
 msgid ""
-"You might want to write your password down. If you forget it, you will not "
-"be able to recover your files."
+"You will need your password to restore your files. You might want to write "
+"it down."
 msgstr ""
+"A jelszóra szüksége lesz a fájlok helyreállításhoz. Ha gondolja jegyezze le."
 
-#: ../deja-dup/AssistantOperation.vala:293
-msgid "Leave the password blank to disable encryption."
-msgstr ""
-
-#: ../deja-dup/AssistantOperation.vala:307
+#: ../deja-dup/AssistantOperation.vala:325
 msgid "E_ncryption password:"
 msgstr "Titkosítási _jelszó:"
 
-#: ../deja-dup/AssistantOperation.vala:323
+#: ../deja-dup/AssistantOperation.vala:342
 msgid "Confir_m password:"
 msgstr "Jelszó _megerősítése:"
 
-#: ../deja-dup/AssistantOperation.vala:333
+#: ../deja-dup/AssistantOperation.vala:355
 msgid "_Show password"
 msgstr "Je_lszó megjelenítése"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:364
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "J_elszó megjegyzése"
 
-#: ../deja-dup/AssistantOperation.vala:408
+#: ../deja-dup/AssistantOperation.vala:371
+msgid "_Allow restoring without a password"
+msgstr "_Helyreállítás engedélyezése jelszó nélkül"
+
+#: ../deja-dup/AssistantOperation.vala:438
 msgid "Summary"
 msgstr "Összegzés"
 
-#: ../deja-dup/AssistantOperation.vala:423
+#: ../deja-dup/AssistantOperation.vala:719
+msgid "Require Password?"
+msgstr "Szükséges legyen a jelszó megadása?"
+
+#: ../deja-dup/AssistantOperation.vala:721
 msgid "Encryption Password Needed"
 msgstr "Titkosítási jelszó szükséges"
 
-#: ../deja-dup/AssistantOperation.vala:691
+#: ../deja-dup/AssistantOperation.vala:764
 msgid "Backup encryption password"
-msgstr ""
+msgstr "Biztonsági mentést titkosító jelszó"
 
-#: ../deja-dup/AssistantRestore.vala:71
+#: ../deja-dup/AssistantRestore.vala:68
 msgid "Restore"
 msgstr "Helyreállítás"
 
-#: ../deja-dup/AssistantRestore.vala:72
+#: ../deja-dup/AssistantRestore.vala:69
 msgid "_Restore"
 msgstr "_Helyreállítás"
 
-#: ../deja-dup/AssistantRestore.vala:94 ../preferences/Preferences.vala:302
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
 msgid "_Backup location:"
 msgstr "Biztonsági mentés _helye:"
 
-#: ../deja-dup/AssistantRestore.vala:105
-msgid "Backup files are _encrypted"
-msgstr "A biztonsági mentés fájljai _titkosítottak"
-
-#: ../deja-dup/AssistantRestore.vala:131
+#: ../deja-dup/AssistantRestore.vala:124
 msgid "Settings"
 msgstr "Beállítások"
 
-#: ../deja-dup/AssistantRestore.vala:153
+#: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date:"
 msgstr "Dát_um:"
 
-#: ../deja-dup/AssistantRestore.vala:176
+#: ../deja-dup/AssistantRestore.vala:169
 msgid "Restore files to _original locations"
 msgstr "Fájlok helyreállítása az _eredeti helyükre"
 
-#: ../deja-dup/AssistantRestore.vala:181
+#: ../deja-dup/AssistantRestore.vala:174
 msgid "Restore to _specific folder"
 msgstr "Helyreállítás egy _megadott mappába"
 
-#: ../deja-dup/AssistantRestore.vala:191
+#: ../deja-dup/AssistantRestore.vala:184
 msgid "Choose destination for restored files"
 msgstr "Hely kiválasztása a helyreállított fájloknak"
 
-#: ../deja-dup/AssistantRestore.vala:195
+#: ../deja-dup/AssistantRestore.vala:188
 msgid "Restore _folder:"
 msgstr "_Helyreállítási mappa:"
 
-#: ../deja-dup/AssistantRestore.vala:228
+#: ../deja-dup/AssistantRestore.vala:221
 msgid "Backup location:"
 msgstr "Biztonsági mentés helye:"
 
-#: ../deja-dup/AssistantRestore.vala:235
-msgid "Encrypted:"
-msgstr "Titkosított:"
-
-#: ../deja-dup/AssistantRestore.vala:242
+#: ../deja-dup/AssistantRestore.vala:229
 msgid "Restore date:"
 msgstr "Helyreállítási dátum:"
 
-#: ../deja-dup/AssistantRestore.vala:251
+#: ../deja-dup/AssistantRestore.vala:237
 msgid "Restore folder:"
 msgstr "Helyreállítási mappa:"
 
-#: ../deja-dup/AssistantRestore.vala:276
+#: ../deja-dup/AssistantRestore.vala:263
 msgid "Checking for Backups…"
 msgstr "Biztonsági mentések ellenőrzése…"
 
-#: ../deja-dup/AssistantRestore.vala:284
+#: ../deja-dup/AssistantRestore.vala:271
 msgid "Restore from When?"
 msgstr "Helyreállítás mikortól?"
 
-#: ../deja-dup/AssistantRestore.vala:292
+#: ../deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
 msgstr "Helyreállítás hova?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:320
+#: ../deja-dup/AssistantRestore.vala:307
 msgid "Restoring:"
 msgstr "Helyreállítás:"
 
@@ -877,38 +870,38 @@ msgstr "Helyreállítás:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: ../deja-dup/AssistantRestore.vala:362
+#: ../deja-dup/AssistantRestore.vala:349
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
-#: ../deja-dup/AssistantRestore.vala:375
+#: ../deja-dup/AssistantRestore.vala:362
 msgid "No backups to restore"
 msgstr "Nincsenek helyreállítható biztonsági mentések"
 
-#: ../deja-dup/AssistantRestore.vala:455
+#: ../deja-dup/AssistantRestore.vala:439
 msgid "Original location"
 msgstr "Eredeti hely"
 
-#: ../deja-dup/AssistantRestore.vala:468
+#: ../deja-dup/AssistantRestore.vala:449
 msgid "File to restore:"
 msgid_plural "Files to restore:"
 msgstr[0] "Fájl helyreállítása:"
 msgstr[1] "Fájlok helyreállítása:"
 
-#: ../deja-dup/AssistantRestore.vala:492
+#: ../deja-dup/AssistantRestore.vala:470
 msgid "Restore Failed"
 msgstr "Helyreállítás sikertelen"
 
-#: ../deja-dup/AssistantRestore.vala:494
+#: ../deja-dup/AssistantRestore.vala:472
 msgid "Restore Finished"
 msgstr "Helyreállítás befejeződött"
 
-#: ../deja-dup/AssistantRestore.vala:496
+#: ../deja-dup/AssistantRestore.vala:474
 msgid "Your files were successfully restored."
 msgstr "A fájljai sikeresen helyreállításra kerültek."
 
-#: ../deja-dup/AssistantRestore.vala:498
+#: ../deja-dup/AssistantRestore.vala:476
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "A fájl sikeresen helyreállításra került."
@@ -924,19 +917,19 @@ msgstr "Utoljára látszott"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:215
 msgid "Restore which Files?"
-msgstr "Melyik fájl állítsuk vissza?"
+msgstr "Melyik fájlokat állítsuk helyre?"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:346
 msgid "Scanning for files from up to a day ago…"
-msgstr ""
+msgstr "Legalább egy nappal ezelőtti fájlok keresése…"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:349
 msgid "Scanning for files from up to a week ago…"
-msgstr ""
+msgstr "Legalább egy héttel ezelőtti fájlok keresése…"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:352
 msgid "Scanning for files from up to a month ago…"
-msgstr ""
+msgstr "Legalább egy hónappal ezelőtti fájlok keresése…"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:356
 #, c-format
@@ -964,7 +957,7 @@ msgstr "_Folytatás"
 msgid "_Resume Later"
 msgstr "Folytatás _később"
 
-#: ../deja-dup/main.vala:35 ../monitor/monitor.vala:35
+#: ../deja-dup/main.vala:35 ../monitor/monitor.vala:36
 #: ../preferences/preferences-main.vala:26
 msgid "Show version"
 msgstr "Verziószám megjelenítése"
@@ -1060,7 +1053,7 @@ msgstr "_Tartomány:"
 
 #: ../deja-dup/Prompt.vala:37
 msgid "Keep your files safe by backing up regularly"
-msgstr ""
+msgstr "Tartsa fájljait biztonságban rendszeres biztonsági mentéssel"
 
 #: ../deja-dup/Prompt.vala:42
 msgid ""
@@ -1068,22 +1061,24 @@ msgid ""
 "a backup. In the case of a disaster, you would be able to recover them from "
 "that backup."
 msgstr ""
+"A fontos dokumentumok, adatok és beállítások megóvhatók, ha biztonsági "
+"mentést készít róluk. Így bármilyen esetben helyreállíthatja azokat."
 
 #: ../deja-dup/Prompt.vala:48
 msgid "_Don't Show Again"
-msgstr ""
+msgstr "_Ne jelenjen meg többször"
 
 #: ../deja-dup/Prompt.vala:50
 msgid "Don't Show Again"
-msgstr ""
+msgstr "Ne jelenjen meg többször"
 
 #: ../deja-dup/Prompt.vala:56
 msgid "_Open Backup Settings"
-msgstr ""
+msgstr "_Biztonsági mentés beállítások megnyitása"
 
 #: ../deja-dup/Prompt.vala:58
 msgid "Open Backup Settings"
-msgstr ""
+msgstr "Biztonsági mentés beállítások megnyitása"
 
 #: ../deja-dup/StatusIcon.vala:105
 msgid "_Delay Backup"
@@ -1099,7 +1094,7 @@ msgstr "Biztonsági mentés kiha_gyása"
 
 #: ../deja-dup/StatusIcon.vala:140
 msgid "Backup completed"
-msgstr ""
+msgstr "A biztonsági mentés befejeződött"
 
 #: ../deja-dup/StatusIcon.vala:178
 msgid "Déjà Du_p"
@@ -1114,7 +1109,7 @@ msgstr "Ütemezett biztonsági mentés elkezdése"
 msgid "%.1f%% complete"
 msgstr "%.1f%% kész"
 
-#: ../monitor/monitor.vala:144
+#: ../monitor/monitor.vala:155
 msgid "Scheduled backup delayed"
 msgstr "Ütemezett biztonsági mentés késleltetve"
 
@@ -1128,76 +1123,72 @@ msgstr "_Helyre akarom állítani a fájlokat egy előző mentésből…"
 msgid "Just show my backup _settings"
 msgstr "Csak a biztonsági mentés beállítások megjelenítése"
 
-#: ../preferences/Preferences.vala:133
+#: ../preferences/Preferences.vala:132
 msgid "Categories"
 msgstr "Kategóriák"
 
-#: ../preferences/Preferences.vala:160
+#: ../preferences/Preferences.vala:159
 msgid "Automatic _backups:"
 msgstr "_Automatikus mentések:"
 
-#: ../preferences/Preferences.vala:172
+#: ../preferences/Preferences.vala:176
 msgid "Where:"
 msgstr "Hol:"
 
-#: ../preferences/Preferences.vala:184
+#: ../preferences/Preferences.vala:185
 msgid "Include files from:"
 msgstr "Fájlok származási helye:"
 
-#: ../preferences/Preferences.vala:194
+#: ../preferences/Preferences.vala:193
 msgid "Except for:"
 msgstr "Kivételek:"
 
-#: ../preferences/Preferences.vala:211
+#: ../preferences/Preferences.vala:206
 msgid "Most recent backup:"
 msgstr "Leggyakoribb biztonsági mentések:"
 
-#: ../preferences/Preferences.vala:233
+#: ../preferences/Preferences.vala:226
 msgid "Next automatic backup:"
 msgstr "Következő automatikus mentés:"
 
-#: ../preferences/Preferences.vala:260
+#: ../preferences/Preferences.vala:266
 msgid "_Restore…"
 msgstr "_Helyreállítás…"
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:272
 msgid "Back Up _Now"
 msgstr "Biztonsági me_ntés most"
 
-#: ../preferences/Preferences.vala:289
+#: ../preferences/Preferences.vala:294
 msgid "Overview"
 msgstr "Áttekintés"
 
-#: ../preferences/Preferences.vala:321
+#: ../preferences/Preferences.vala:323
 #, c-format
 msgid "_Keep backups:"
 msgstr "Biztonsági mentések _megtartása:"
 
-#: ../preferences/Preferences.vala:334
-msgid "_Encrypt backup files"
-msgstr "Biztonsági mentés fájljainak _titkosítása"
-
-#: ../preferences/Preferences.vala:347
+#: ../preferences/Preferences.vala:339
 msgid "Storage"
 msgstr "Tároló"
 
-#: ../preferences/Preferences.vala:369
+#: ../preferences/Preferences.vala:364
 msgid "I_nclude files in folders:"
 msgstr "Ma_ppákban lévő fájlok felvétele:"
 
-#: ../preferences/Preferences.vala:388
+#: ../preferences/Preferences.vala:379
 msgid "E_xcept files in folders:"
 msgstr "Mappákban lévő fájlok _kivétele:"
 
-#: ../preferences/Preferences.vala:407
+#: ../preferences/Preferences.vala:393
 msgid "Files"
 msgstr "Fájlok"
 
-#: ../preferences/Preferences.vala:417
+#: ../preferences/Preferences.vala:405
 msgid "How _often to back up:"
 msgstr "Ütemezett bizt_onsági mentések gyakorisága"
 
-#: ../preferences/Preferences.vala:432
+#: ../preferences/Preferences.vala:416
 msgid "Schedule"
 msgstr "Ütemező"
 
@@ -1282,7 +1273,7 @@ msgstr "Kuka"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../widgets/ConfigLabelPolicy.vala:61
+#: ../widgets/ConfigLabelPolicy.vala:63
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
@@ -1290,7 +1281,7 @@ msgstr ""
 "A régebbi mentések legalább egy hétig meg lesznek tartva vagy ameddig van "
 "számukra szabad hely."
 
-#: ../widgets/ConfigLabelPolicy.vala:63
+#: ../widgets/ConfigLabelPolicy.vala:65
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
@@ -1298,7 +1289,7 @@ msgstr ""
 "A régebbi mentések legalább egy hónapig meg lesznek tartva vagy ameddig van "
 "számukra szabad hely."
 
-#: ../widgets/ConfigLabelPolicy.vala:65
+#: ../widgets/ConfigLabelPolicy.vala:67
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
@@ -1306,7 +1297,7 @@ msgstr ""
 "A régebbi mentések legalább két hónapig meg lesznek tartva vagy ameddig van "
 "számukra szabad hely."
 
-#: ../widgets/ConfigLabelPolicy.vala:67
+#: ../widgets/ConfigLabelPolicy.vala:69
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
@@ -1314,7 +1305,7 @@ msgstr ""
 "A régebbi mentések legalább három hónapig meg lesznek tartva vagy ameddig "
 "van számukra szabad hely."
 
-#: ../widgets/ConfigLabelPolicy.vala:69
+#: ../widgets/ConfigLabelPolicy.vala:71
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
@@ -1322,7 +1313,7 @@ msgstr ""
 "A régebbi mentések legalább hat hónapig meg lesznek tartva vagy ameddig van "
 "számukra szabad hely."
 
-#: ../widgets/ConfigLabelPolicy.vala:71
+#: ../widgets/ConfigLabelPolicy.vala:73
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1330,12 +1321,12 @@ msgstr ""
 "A régebbi mentések legalább egy évig meg lesznek tartva vagy ameddig van "
 "számukra szabad hely."
 
-#: ../widgets/ConfigLabelPolicy.vala:73
+#: ../widgets/ConfigLabelPolicy.vala:75
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "A régebbi mentések meg lesznek tartva, ameddig van számukra szabad hely."
 
-#: ../widgets/ConfigLabelPolicy.vala:75
+#: ../widgets/ConfigLabelPolicy.vala:77
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1428,7 +1419,7 @@ msgstr "S3 Azonosító kulcs:"
 msgid "_Domain Name:"
 msgstr "_Tartománynév:"
 
-#: ../widgets/ConfigLocationTable.vala:99
+#: ../widgets/ConfigLocationTable.vala:97
 msgid "Optional information:"
 msgstr "További lehetőségek:"
 
@@ -1485,6 +1476,16 @@ msgstr "%s megjelenítése sikertelen"
 #~ msgid "Whether to automatically backup on a regular schedule."
 #~ msgstr "Automatikus biztonsági mentés rendszeres időbeosztás szerint."
 
+#~ msgid "Whether to encrypt your backup"
+#~ msgstr "Biztonsági mentések titkosítása"
+
+#~ msgid ""
+#~ "Whether to encrypt your backup files in the storage location. It’s strongly "
+#~ "recommended to leave this as ‘true’."
+#~ msgstr ""
+#~ "A biztonsági mentés fájljainak titkosítása a tárolandó helyen. Erősen "
+#~ "ajánlott az ‘igen’ beállításon hagyni."
+
 #~ msgid "Whether to periodically backup"
 #~ msgstr "Időszakos biztonsági mentés"
 
@@ -1496,8 +1497,14 @@ msgstr "%s megjelenítése sikertelen"
 #~ msgid "_Backup"
 #~ msgstr "Biztonsági _mentés"
 
+#~ msgid "_Encrypt backup files"
+#~ msgstr "Biztonsági mentés fájljainak _titkosítása"
+
 #~ msgid "Preferences"
 #~ msgstr "Beállítások"
+
+#~ msgid "Encrypted:"
+#~ msgstr "Titkosított:"
 
 #~ msgid "Include from:"
 #~ msgstr "Felvétel innen:"
@@ -1517,6 +1524,9 @@ msgstr "%s megjelenítése sikertelen"
 
 #~ msgid "Password needed"
 #~ msgstr "Jelszó szükséges"
+
+#~ msgid "Backup files are _encrypted"
+#~ msgstr "A biztonsági mentés fájljai _titkosítottak"
 
 #~ msgid "Checking for Backups"
 #~ msgstr "Biztonsági mentések ellenőrzése"
@@ -1671,16 +1681,6 @@ msgstr "%s megjelenítése sikertelen"
 #~ "A biztonsági mentés helyének típusa. Lehet egy külső köteten vagy egy "
 #~ "egyszerű mappában. A lehetséges értékek: 'kötet' vagy 'normál'."
 
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Launchpad Contributions:\n"
-#~ "  András Bognár https://launchpad.net/~bognarandras\n"
-#~ "  Gabor Kelemen https://launchpad.net/~kelemeng\n"
-#~ "  Gergely Szarka https://launchpad.net/~gszarka\n"
-#~ "  Michael Terry https://launchpad.net/~mterry\n"
-#~ "  Richard Somlói https://launchpad.net/~ricsipontaz\n"
-#~ "  johnny https://launchpad.net/~peter-bojtos"
-
 #~ msgid "Déjà Dup encryption password"
 #~ msgstr "Déjà Dup titkosítási jelszó"
 
@@ -1692,6 +1692,16 @@ msgstr "%s megjelenítése sikertelen"
 
 #~ msgid "Scanning for files from yesterday…"
 #~ msgstr "Tegnap fájlok keresése…"
+
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "Launchpad Contributions:\n"
+#~ "  András Bognár https://launchpad.net/~bognarandras\n"
+#~ "  Gabor Kelemen https://launchpad.net/~kelemeng\n"
+#~ "  Gergely Szarka https://launchpad.net/~gszarka\n"
+#~ "  Michael Terry https://launchpad.net/~mterry\n"
+#~ "  Richard Somlói https://launchpad.net/~ricsipontaz\n"
+#~ "  johnny https://launchpad.net/~peter-bojtos"
 
 #~ msgid "Indicates this backup was scheduled"
 #~ msgstr "Jelzi, hogy a biztonsági mentés ütemezett"

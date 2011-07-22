@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-02 13:03+0100\n"
+"POT-Creation-Date: 2011-07-07 02:04-0400\n"
 "PO-Revision-Date: 2011-05-23 09:38+0000\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh_TW@li.org>\n"
@@ -15,13 +15,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-07-04 04:48+0000\n"
+"X-Launchpad-Export-Date: 2011-07-08 04:45+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:139
-#: ../deja-dup/StatusIcon.vala:283 ../monitor/monitor.vala:104
+#: ../deja-dup/StatusIcon.vala:283 ../monitor/monitor.vala:115
 #: ../preferences/preferences-main.vala:51
 #: ../preferences/preferences-main.vala:63
 msgid "Backup"
@@ -32,7 +32,7 @@ msgstr "備份"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:88
 #: ../deja-dup/main.vala:79 ../preferences/Preferences.vala:85
 #, c-format
 msgid "Déjà Dup Backup Tool"
@@ -51,7 +51,7 @@ msgstr "變更您的備份設定值"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:297
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:308
 msgid "Backup Monitor"
 msgstr ""
 
@@ -277,46 +277,36 @@ msgid "Whether to automatically back up on a regular schedule."
 msgstr "是否要自動於固定排程備份。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
-msgid "Whether to encrypt your backup"
-msgstr "是否要加密您的備份"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
-msgid ""
-"Whether to encrypt your backup files in the storage location. It’s strongly "
-"recommended to leave this as ‘true’."
-msgstr "是否要在儲存位置內加密您的備份檔案。強烈建議保留為「true」。"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Whether to periodically back up"
 msgstr "是否要週期性備份"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid "Whether to request the root password"
 msgstr "是否要求 root 密碼"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
 msgstr "是否在從系統資料夾製作備份時，或還原至系統資料夾時要求輸入 root 密碼。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr "您想要儲存於哪個 Amazon S3 bucker。這已經不需要填寫。只能使用有效的主機名稱字串。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr "要儲存檔案在哪個 Rackspace Cloud Files 容器中。這個容器不需要事先存在。只有符合規範的主機名稱字串有效。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr "您的 Amazon S3 存取金鑰識別碼。這就像是您的 S3 使用者名稱。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Your Rackspace username"
 msgstr "您的 Rackspace 使用者名稱"
 
@@ -324,7 +314,7 @@ msgstr "您的 Rackspace 使用者名稱"
 msgid "Folder:"
 msgstr "資料夾："
 
-#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:171
+#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:176
 msgid "Scanning…"
 msgstr "正在掃描..."
 
@@ -352,7 +342,7 @@ msgstr "GVFS FUSE 未安裝"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:430
+#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:429
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%2$s 上的 %1$s"
@@ -507,64 +497,54 @@ msgid ""
 "only found version %d.%d.%.2d"
 msgstr ""
 
-#: ../common/Duplicity.vala:127 ../common/Duplicity.vala:179
+#: ../common/Duplicity.vala:127 ../common/Duplicity.vala:177
 msgid "Paused (no network)"
 msgstr "已暫停 (無網路)"
 
-#: ../common/Duplicity.vala:377 ../common/Duplicity.vala:385
-#: ../common/Duplicity.vala:402 ../common/Operation.vala:80
+#: ../common/Duplicity.vala:375 ../common/Duplicity.vala:383
+#: ../common/Duplicity.vala:400 ../common/Operation.vala:79
 #: ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "正在準備..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:433
+#: ../common/Duplicity.vala:431
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "無法還原「%s」：非有效的檔案位置"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:500
+#: ../common/Duplicity.vala:498
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "備份位置空間太小。請嘗試使用有更多空間的位置。"
 
-#: ../common/Duplicity.vala:521
+#: ../common/Duplicity.vala:519
 msgid "Backup location does not have enough free space."
 msgstr "備份位置沒有足夠可用空間。"
 
-#: ../common/Duplicity.vala:541 ../common/Duplicity.vala:555
+#: ../common/Duplicity.vala:539 ../common/Duplicity.vala:553
 msgid "Cleaning up…"
 msgstr "正在清理..."
 
-#: ../common/Duplicity.vala:626
-msgid "Creating the first backup.  This may take a while."
-msgstr "正在建立第一份備份。這會花上一些時間。"
-
-#: ../common/Duplicity.vala:628
-msgid ""
-"Creating a fresh backup to protect against backup corruption.  This will "
-"take longer than normal."
-msgstr "正在建立新鮮備份以保護備份免於損壞。這會比一般情況花上更多時間。"
-
-#: ../common/Duplicity.vala:670 ../common/Duplicity.vala:1042
+#: ../common/Duplicity.vala:662 ../common/Duplicity.vala:1039
 msgid "Failed with an unknown error."
 msgstr "失敗伴隨未知錯誤。"
 
-#: ../common/Duplicity.vala:895
+#: ../common/Duplicity.vala:887
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "無法還原「%s」：在備份內找不到檔案"
 
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:901 ../common/Duplicity.vala:980
+#: ../common/Duplicity.vala:893 ../common/Duplicity.vala:972
 msgid "Bad encryption password."
 msgstr "不良的加密密碼。"
 
-#: ../common/Duplicity.vala:906
+#: ../common/Duplicity.vala:898
 msgid "Computer name changed"
 msgstr "電腦名稱已變更"
 
-#: ../common/Duplicity.vala:906
+#: ../common/Duplicity.vala:898
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -572,67 +552,67 @@ msgid ""
 "location."
 msgstr "現存的備份其電腦名稱為 %s，但是目前的電腦名稱為 %s。若這是您未預期的問題，建議您應該備份至不同位置。"
 
-#: ../common/Duplicity.vala:919
+#: ../common/Duplicity.vala:911
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "當嘗試建立「%s」時不被許可。"
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:923 ../common/Duplicity.vala:927
+#: ../common/Duplicity.vala:915 ../common/Duplicity.vala:919
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "當嘗試讀取「%s」時不被許可。"
 
-#: ../common/Duplicity.vala:931
+#: ../common/Duplicity.vala:923
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "當嘗試刪除「%s」時不被許可。"
 
-#: ../common/Duplicity.vala:938
+#: ../common/Duplicity.vala:930
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "備份位置「%s」不存在。"
 
-#: ../common/Duplicity.vala:944 ../common/Duplicity.vala:999
+#: ../common/Duplicity.vala:936 ../common/Duplicity.vala:991
 msgid "No space left."
 msgstr "沒有剩餘空間。"
 
-#: ../common/Duplicity.vala:958
+#: ../common/Duplicity.vala:950
 msgid "Invalid ID."
 msgstr "無效的 ID。"
 
-#: ../common/Duplicity.vala:960
+#: ../common/Duplicity.vala:952
 msgid "Invalid secret key."
 msgstr "無效的秘密金鑰。"
 
-#: ../common/Duplicity.vala:962
+#: ../common/Duplicity.vala:954
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "您的 Amazon 網路服務帳號未登入 S3 服務。"
 
-#: ../common/Duplicity.vala:975
+#: ../common/Duplicity.vala:967
 msgid "S3 bucket name is not available."
 msgstr "S3 bucket 名稱不可用。"
 
-#: ../common/Duplicity.vala:984
+#: ../common/Duplicity.vala:976
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "讀取檔案發生錯誤「%s」。"
 
-#: ../common/Duplicity.vala:986
+#: ../common/Duplicity.vala:978
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "寫入檔案「%s」發生錯誤。"
 
-#: ../common/Duplicity.vala:1001
+#: ../common/Duplicity.vala:993
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "「%s」內沒有剩餘空間。"
 
-#: ../common/Duplicity.vala:1025
+#: ../common/Duplicity.vala:1019
 msgid "No backup files found"
 msgstr "找不到備份檔案"
 
-#: ../common/Duplicity.vala:1073
+#: ../common/Duplicity.vala:1070
 msgid "Uploading…"
 msgstr "正在上傳..."
 
@@ -652,23 +632,23 @@ msgstr "不是所有的檔案都能還原。任何無法還原的檔案也許在
 msgid "Could not restore %s: %s"
 msgstr "無法還原 %s：%s"
 
-#: ../common/Operation.vala:72
+#: ../common/Operation.vala:71
 msgid "Backing up…"
 msgstr "正在備份..."
 
-#: ../common/Operation.vala:74 ../deja-dup/AssistantRestore.vala:504
+#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:482
 msgid "Restoring…"
 msgstr "正在還原..."
 
-#: ../common/Operation.vala:76
+#: ../common/Operation.vala:75
 msgid "Checking for backups…"
 msgstr "正在檢查備份..."
 
-#: ../common/Operation.vala:78
+#: ../common/Operation.vala:77
 msgid "Listing files…"
 msgstr "正在列出檔案..."
 
-#: ../common/Operation.vala:287
+#: ../common/Operation.vala:278
 msgid "Another backup operation is already running"
 msgstr ""
 
@@ -682,139 +662,149 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "備份(_B)"
 
+#: ../deja-dup/AssistantBackup.vala:51
+msgid "Creating the first backup.  This may take a while."
+msgstr "正在建立第一份備份。這會花上一些時間。"
+
+#: ../deja-dup/AssistantBackup.vala:52
+msgid ""
+"Creating a fresh backup to protect against backup corruption.  This will "
+"take longer than normal."
+msgstr "正在建立新鮮備份以保護備份免於損壞。這會比一般情況花上更多時間。"
+
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:73
+#: ../deja-dup/AssistantBackup.vala:82
 msgid "Backing up:"
 msgstr "備份中："
 
-#: ../deja-dup/AssistantBackup.vala:90
+#: ../deja-dup/AssistantBackup.vala:91
 msgid "Backup Failed"
 msgstr "備份失敗"
 
-#: ../deja-dup/AssistantBackup.vala:97
+#: ../deja-dup/AssistantBackup.vala:98
 msgid "Backing Up…"
 msgstr "正在備份..."
 
-#: ../deja-dup/AssistantOperation.vala:170
+#: ../deja-dup/AssistantOperation.vala:175
 msgid "Scanning:"
 msgstr "掃描中："
 
-#: ../deja-dup/AssistantOperation.vala:244
+#: ../deja-dup/AssistantOperation.vala:249
 msgid "_Details"
 msgstr "詳細資料(_D)"
 
-#: ../deja-dup/AssistantOperation.vala:293
+#: ../deja-dup/AssistantOperation.vala:297
+msgid "_Password-protect your backup"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:310
 #, c-format
 msgid ""
-"You might want to write your password down. If you forget it, you will not "
-"be able to recover your files."
+"You will need your password to restore your files. You might want to write "
+"it down."
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:293
-msgid "Leave the password blank to disable encryption."
-msgstr ""
-
-#: ../deja-dup/AssistantOperation.vala:307
+#: ../deja-dup/AssistantOperation.vala:325
 msgid "E_ncryption password:"
 msgstr "加密用密碼(_N)："
 
-#: ../deja-dup/AssistantOperation.vala:323
+#: ../deja-dup/AssistantOperation.vala:342
 msgid "Confir_m password:"
 msgstr "確認密碼(_M)："
 
-#: ../deja-dup/AssistantOperation.vala:333
+#: ../deja-dup/AssistantOperation.vala:355
 msgid "_Show password"
 msgstr "顯示密碼(_S)"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:364
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "記住密碼(_R)"
 
-#: ../deja-dup/AssistantOperation.vala:408
+#: ../deja-dup/AssistantOperation.vala:371
+msgid "_Allow restoring without a password"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:438
 msgid "Summary"
 msgstr "摘要"
 
-#: ../deja-dup/AssistantOperation.vala:423
+#: ../deja-dup/AssistantOperation.vala:719
+msgid "Require Password?"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:721
 msgid "Encryption Password Needed"
 msgstr "需要加密密碼"
 
-#: ../deja-dup/AssistantOperation.vala:691
+#: ../deja-dup/AssistantOperation.vala:764
 msgid "Backup encryption password"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:71
+#: ../deja-dup/AssistantRestore.vala:68
 msgid "Restore"
 msgstr "還原"
 
-#: ../deja-dup/AssistantRestore.vala:72
+#: ../deja-dup/AssistantRestore.vala:69
 msgid "_Restore"
 msgstr "還原(_R)"
 
-#: ../deja-dup/AssistantRestore.vala:94 ../preferences/Preferences.vala:302
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
 msgid "_Backup location:"
 msgstr "備份位置(_B)："
 
-#: ../deja-dup/AssistantRestore.vala:105
-msgid "Backup files are _encrypted"
-msgstr "備份檔已加密(_E)"
-
-#: ../deja-dup/AssistantRestore.vala:131
+#: ../deja-dup/AssistantRestore.vala:124
 msgid "Settings"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:153
+#: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date:"
 msgstr "日期(_D)："
 
-#: ../deja-dup/AssistantRestore.vala:176
+#: ../deja-dup/AssistantRestore.vala:169
 msgid "Restore files to _original locations"
 msgstr "還原檔案至原始位置(_O)"
 
-#: ../deja-dup/AssistantRestore.vala:181
+#: ../deja-dup/AssistantRestore.vala:174
 msgid "Restore to _specific folder"
 msgstr "還原至指定資料夾"
 
-#: ../deja-dup/AssistantRestore.vala:191
+#: ../deja-dup/AssistantRestore.vala:184
 msgid "Choose destination for restored files"
 msgstr "為還原的檔案選擇目的地"
 
-#: ../deja-dup/AssistantRestore.vala:195
+#: ../deja-dup/AssistantRestore.vala:188
 msgid "Restore _folder:"
 msgstr "還原資料夾(_F)："
 
-#: ../deja-dup/AssistantRestore.vala:228
+#: ../deja-dup/AssistantRestore.vala:221
 msgid "Backup location:"
 msgstr "備份位置："
 
-#: ../deja-dup/AssistantRestore.vala:235
-msgid "Encrypted:"
-msgstr "已加密："
-
-#: ../deja-dup/AssistantRestore.vala:242
+#: ../deja-dup/AssistantRestore.vala:229
 msgid "Restore date:"
 msgstr "還原日期："
 
-#: ../deja-dup/AssistantRestore.vala:251
+#: ../deja-dup/AssistantRestore.vala:237
 msgid "Restore folder:"
 msgstr "還原資料夾："
 
-#: ../deja-dup/AssistantRestore.vala:276
+#: ../deja-dup/AssistantRestore.vala:263
 msgid "Checking for Backups…"
 msgstr "正在檢查備份..."
 
-#: ../deja-dup/AssistantRestore.vala:284
+#: ../deja-dup/AssistantRestore.vala:271
 msgid "Restore from When?"
 msgstr "從何時還原？"
 
-#: ../deja-dup/AssistantRestore.vala:292
+#: ../deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
 msgstr "還原至何處？"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:320
+#: ../deja-dup/AssistantRestore.vala:307
 msgid "Restoring:"
 msgstr "正在還原："
 
@@ -822,37 +812,37 @@ msgstr "正在還原："
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: ../deja-dup/AssistantRestore.vala:362
+#: ../deja-dup/AssistantRestore.vala:349
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
-#: ../deja-dup/AssistantRestore.vala:375
+#: ../deja-dup/AssistantRestore.vala:362
 msgid "No backups to restore"
 msgstr "沒有要還原的備份檔"
 
-#: ../deja-dup/AssistantRestore.vala:455
+#: ../deja-dup/AssistantRestore.vala:439
 msgid "Original location"
 msgstr "原始位置"
 
-#: ../deja-dup/AssistantRestore.vala:468
+#: ../deja-dup/AssistantRestore.vala:449
 msgid "File to restore:"
 msgid_plural "Files to restore:"
 msgstr[0] "要還原的檔案："
 
-#: ../deja-dup/AssistantRestore.vala:492
+#: ../deja-dup/AssistantRestore.vala:470
 msgid "Restore Failed"
 msgstr "還原失敗"
 
-#: ../deja-dup/AssistantRestore.vala:494
+#: ../deja-dup/AssistantRestore.vala:472
 msgid "Restore Finished"
 msgstr "還原完成"
 
-#: ../deja-dup/AssistantRestore.vala:496
+#: ../deja-dup/AssistantRestore.vala:474
 msgid "Your files were successfully restored."
 msgstr "您的檔案已成功還原。"
 
-#: ../deja-dup/AssistantRestore.vala:498
+#: ../deja-dup/AssistantRestore.vala:476
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "您的檔案已成功還原。"
@@ -905,7 +895,7 @@ msgstr "繼續(_N)"
 msgid "_Resume Later"
 msgstr "稍後繼續(_R)"
 
-#: ../deja-dup/main.vala:35 ../monitor/monitor.vala:35
+#: ../deja-dup/main.vala:35 ../monitor/monitor.vala:36
 #: ../preferences/preferences-main.vala:26
 msgid "Show version"
 msgstr "顯示版本"
@@ -1053,7 +1043,7 @@ msgstr "正在啟動備份排程"
 msgid "%.1f%% complete"
 msgstr "%.1f%% 完成"
 
-#: ../monitor/monitor.vala:144
+#: ../monitor/monitor.vala:155
 msgid "Scheduled backup delayed"
 msgstr "排定的備份已延遲"
 
@@ -1067,76 +1057,72 @@ msgstr "我想要從之前的備份中還原檔案(_R)…"
 msgid "Just show my backup _settings"
 msgstr "只顯示我的備份設定值(_S)"
 
-#: ../preferences/Preferences.vala:133
+#: ../preferences/Preferences.vala:132
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:160
+#: ../preferences/Preferences.vala:159
 msgid "Automatic _backups:"
 msgstr "自動備份(_B)："
 
-#: ../preferences/Preferences.vala:172
+#: ../preferences/Preferences.vala:176
 msgid "Where:"
 msgstr "位置："
 
-#: ../preferences/Preferences.vala:184
+#: ../preferences/Preferences.vala:185
 msgid "Include files from:"
 msgstr "從哪裡納入檔案："
 
-#: ../preferences/Preferences.vala:194
+#: ../preferences/Preferences.vala:193
 msgid "Except for:"
 msgstr "排除："
 
-#: ../preferences/Preferences.vala:211
+#: ../preferences/Preferences.vala:206
 msgid "Most recent backup:"
 msgstr "最近的備份："
 
-#: ../preferences/Preferences.vala:233
+#: ../preferences/Preferences.vala:226
 msgid "Next automatic backup:"
 msgstr "下個自動備份："
 
-#: ../preferences/Preferences.vala:260
+#: ../preferences/Preferences.vala:266
 msgid "_Restore…"
 msgstr "還原(_R)..."
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:272
 msgid "Back Up _Now"
 msgstr "立刻備份(_N)"
 
-#: ../preferences/Preferences.vala:289
+#: ../preferences/Preferences.vala:294
 msgid "Overview"
 msgstr "概覽"
 
-#: ../preferences/Preferences.vala:321
+#: ../preferences/Preferences.vala:323
 #, c-format
 msgid "_Keep backups:"
 msgstr "保留備份(_K)："
 
-#: ../preferences/Preferences.vala:334
-msgid "_Encrypt backup files"
-msgstr "加密備份檔案(_E)"
-
-#: ../preferences/Preferences.vala:347
+#: ../preferences/Preferences.vala:339
 msgid "Storage"
 msgstr "儲存處"
 
-#: ../preferences/Preferences.vala:369
+#: ../preferences/Preferences.vala:364
 msgid "I_nclude files in folders:"
 msgstr "納入資料夾中的檔案(_N)："
 
-#: ../preferences/Preferences.vala:388
+#: ../preferences/Preferences.vala:379
 msgid "E_xcept files in folders:"
 msgstr "從資料夾中排除的檔案(_X)："
 
-#: ../preferences/Preferences.vala:407
+#: ../preferences/Preferences.vala:393
 msgid "Files"
 msgstr "檔案"
 
-#: ../preferences/Preferences.vala:417
+#: ../preferences/Preferences.vala:405
 msgid "How _often to back up:"
 msgstr "多久備份一次(_O)："
 
-#: ../preferences/Preferences.vala:432
+#: ../preferences/Preferences.vala:416
 msgid "Schedule"
 msgstr "排程"
 
@@ -1218,47 +1204,47 @@ msgstr "回收筒"
 msgid "Unknown"
 msgstr "未知"
 
-#: ../widgets/ConfigLabelPolicy.vala:61
+#: ../widgets/ConfigLabelPolicy.vala:63
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
 msgstr "陳舊的備份將保留至少一週，或是直到備份位置空間低落為止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:63
+#: ../widgets/ConfigLabelPolicy.vala:65
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
 msgstr "陳舊的備份將保留至少一個月，或是直到備份位置空間低落為止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:65
+#: ../widgets/ConfigLabelPolicy.vala:67
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
 msgstr "陳舊的備份將保留至少兩個月，或是直到備份位置空間低落為止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:67
+#: ../widgets/ConfigLabelPolicy.vala:69
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
 msgstr "陳舊的備份將保留至少三個月，或是直到備份位置空間低落為止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:69
+#: ../widgets/ConfigLabelPolicy.vala:71
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr "陳舊的備份將保留至少六個月，或是直到備份位置空間低落為止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:71
+#: ../widgets/ConfigLabelPolicy.vala:73
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 msgstr "陳舊的備份將保留至少一年，或是直到備份位置空間低落為止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:73
+#: ../widgets/ConfigLabelPolicy.vala:75
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr "陳舊的備份將保留到備份位置空間低落為止。"
 
-#: ../widgets/ConfigLabelPolicy.vala:75
+#: ../widgets/ConfigLabelPolicy.vala:77
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1346,7 +1332,7 @@ msgstr "S3 存取金鑰 I_D："
 msgid "_Domain Name:"
 msgstr "網域名稱(_D)："
 
-#: ../widgets/ConfigLocationTable.vala:99
+#: ../widgets/ConfigLocationTable.vala:97
 msgid "Optional information:"
 msgstr "選擇性資訊："
 
@@ -1408,8 +1394,14 @@ msgstr "無法顯示 %s"
 #~ msgid "Back up your files"
 #~ msgstr "備份您的檔案"
 
+#~ msgid "_Encrypt backup files"
+#~ msgstr "加密備份檔案(_E)"
+
 #~ msgid "Preferences"
 #~ msgstr "偏好設定"
+
+#~ msgid "Encrypted:"
+#~ msgstr "已加密："
 
 #~ msgid "Backup Finished"
 #~ msgstr "備份成功"
@@ -1419,6 +1411,9 @@ msgstr "無法顯示 %s"
 
 #~ msgid "Password needed"
 #~ msgstr "需要密碼"
+
+#~ msgid "Backup files are _encrypted"
+#~ msgstr "備份檔已加密(_E)"
 
 #~ msgid "Checking for Backups"
 #~ msgstr "正在檢查備份檔"
@@ -1470,6 +1465,14 @@ msgstr "無法顯示 %s"
 
 #~ msgid "The type of backup location."
 #~ msgstr "備份位置的類型。"
+
+#~ msgid ""
+#~ "Whether to encrypt your backup files in the storage location. It’s strongly "
+#~ "recommended to leave this as ‘true’."
+#~ msgstr "是否要在儲存位置內加密您的備份檔案。強烈建議保留為「true」。"
+
+#~ msgid "Whether to encrypt your backup"
+#~ msgstr "是否要加密您的備份"
 
 #~ msgid "_Automatically back up on a regular schedule"
 #~ msgstr "自動於固定排程備份(_A)"
