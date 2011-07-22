@@ -54,7 +54,7 @@ public class Duplicity : Object
   public List<File> includes;
   public List<File> excludes;
   public bool use_progress {get; set; default = true;}
-  public string encrypt_password {private get; set;}
+  public string encrypt_password {private get; set; default = null;}
   
   private List<File> _restore_files;
   public List<File> restore_files {
@@ -89,7 +89,8 @@ public class Duplicity : Object
   bool is_full_backup = false;
   bool cleaned_up_once = false;
   bool needs_root = false;
-  bool force_encryption = false;
+  bool detected_encryption = false;
+  bool existing_encrypted = false;
   
   bool has_progress_total = false;
   uint64 progress_total; // zero, unless we already know limit
@@ -373,10 +374,7 @@ public class Duplicity : Object
       // We need to first check the backup status to see if we need to start
       // a full backup and to see if we should use encryption.
       if (!checked_collection_info) {
-        if (mode != Operation.Mode.STATUS) { // first status check
-          mode = Operation.Mode.STATUS;
-          force_encryption = true; // check for encrypted backups first
-        }
+        mode = Operation.Mode.STATUS;
         state = State.STATUS;
         action_desc = _("Preparing…");
       }
@@ -399,7 +397,14 @@ public class Duplicity : Object
       
       break;
     case Operation.Mode.RESTORE:
-      if (!has_checked_contents) {
+      // We need to first check the backup status to see if we should use
+      // encryption.
+      if (!checked_collection_info) {
+        mode = Operation.Mode.STATUS;
+        state = State.STATUS;
+        action_desc = _("Preparing…");
+      }
+      else if (!has_checked_contents) {
         mode = Operation.Mode.LIST;
         state = State.CHECK_CONTENTS;
         action_desc = _("Preparing…");
@@ -596,11 +601,12 @@ public class Duplicity : Object
       
       case State.STATUS:
         checked_collection_info = true;
-        mode = Operation.Mode.BACKUP;
+        var should_restart = mode != original_mode;
+        mode = original_mode;
 
         /* Set full backup threshold and determine whether we should trigger
            a full backup. */
-        if (got_collection_info) {
+        if (mode == Operation.Mode.BACKUP && got_collection_info) {
           Date threshold = DejaDup.get_full_backup_threshold_date();
           Date full_backup = Date();
           foreach (DateInfo info in collection_info) {
@@ -613,8 +619,10 @@ public class Duplicity : Object
           }
         }
 
-        if (restart())
-          return;
+        if (should_restart) {
+          if (restart())
+            return;
+        }
         break;
       
       case State.CHECK_CONTENTS:
@@ -769,6 +777,7 @@ public class Duplicity : Object
   protected static const int WARNING_UNMATCHED_SIG = 4;
   protected static const int WARNING_INCOMPLETE_BACKUP = 5;
   protected static const int WARNING_ORPHANED_BACKUP = 6;
+  protected static const int DEBUG_GENERIC = 1;
 
   bool restarted_without_cache = false;
   bool restart_without_cache()
@@ -820,6 +829,9 @@ public class Duplicity : Object
       break;
     case "WARNING":
       process_warning(control_line, data_lines, user_text);
+      break;
+    case "DEBUG":
+      process_debug(control_line, data_lines, user_text);
       break;
     }
   }
@@ -1026,7 +1038,32 @@ public class Duplicity : Object
       }
     }
   }
-  
+
+  protected virtual void process_debug(string[] firstline, List<string>? data,
+                                       string text)
+  {
+    /*
+     * Pass message to appropriate function considering the type of output
+     */
+    if (firstline.length > 1) {
+      switch (int.parse(firstline[1])) {
+      case DEBUG_GENERIC:
+        // In non-modern versions of duplicity, this list of files is the only
+        // way to tell whether the backup is encrypted or not.  This message
+        // was not translated in duplicity before switching to a better method
+        // of detecting, so we can safely check for it.
+        if (mode == Operation.Mode.STATUS &&
+            !DuplicityInfo.get_default().reports_encryption &&
+            !detected_encryption &&
+            text.has_prefix("Extracting backup chains from list of files:")) {
+          detected_encryption = true;
+          existing_encrypted = text.contains(".gpg'") || text.contains(".g'");
+        }
+        break;
+      }
+    }
+  }
+
   void process_file_stat(string date, string file, List<string> data, string text)
   {
     if (mode != Operation.Mode.LIST)
@@ -1099,6 +1136,8 @@ public class Duplicity : Object
      * this all up and report back to caller via a signal.
      * We're really only interested in the list of entries in the complete chain.
      */
+    if (mode != Operation.Mode.STATUS || got_collection_info)
+      return;
     
     var timeval = TimeVal();
     var dates = new List<string>();
@@ -1109,8 +1148,9 @@ public class Duplicity : Object
         in_chain = true;
       else if (in_chain && line.length > 0 && line[0] == ' ') {
         // OK, appears to be a date line.  Try to parse.  Should look like:
-        // ' inc TIMESTR NUMVOLS'.  Since there's a space at the beginning,
-        // when we tokenize it, we should expect an extra token at the front.
+        // ' inc TIMESTR NUMVOLS [ENCRYPTED]'.
+        // Since there's a space at the beginning, when we tokenize it, we
+        // should expect an extra token at the front.
         string[] tokens = line.split(" ");
         if (tokens.length > 2 && timeval.from_iso8601(tokens[2])) {
           dates.append(tokens[2]);
@@ -1119,19 +1159,20 @@ public class Duplicity : Object
           info.time = timeval;
           info.full = tokens[1] == "full";
           infos.append(info);
+
+          if (DuplicityInfo.get_default().reports_encryption &&
+              !detected_encryption &&
+              tokens.length > 4) {
+            // Just use the encryption status of the first one we see;
+            // mixed-encryption backups is not supported.
+            detected_encryption = true;
+            existing_encrypted = tokens[4] == "enc";
+          }
         }
       }
       else if (in_chain)
         in_chain = false;
     }
-
-    if (state == State.STATUS && dates.length() == 0 && force_encryption) {
-      // No files...  Check if results are different without encryption
-      force_encryption = false;
-      if (restart())
-        return;
-    }
-    // else if we got results, keep the force_encryption flag on
 
     got_collection_info = true;
     collection_info = new List<DateInfo?>();
@@ -1155,7 +1196,7 @@ public class Duplicity : Object
         // up before we continue.  We don't want to wait until we finish to
         // clean them up, since we may want that space, and if there's a bug
         // in ourselves, we may never get to it.
-        if (!this.cleaned_up_once)
+        if (mode != Operation.Mode.STATUS && !this.cleaned_up_once)
           cleanup(); // stops current backup, cleans up, then resumes
       break;
       }
@@ -1273,13 +1314,18 @@ public class Duplicity : Object
     foreach (string s in saved_envp) envp.append(s);
     foreach (string s in envp_extra) envp.append(s);
 
-    if (encrypt_password == null || encrypt_password == "") {
-      if (!force_encryption)
-        argv.append("--no-encryption");
-      envp.append("PASSPHRASE="); // duplicity sometimes asks for a passphrase when it doesn't need it (during cleanup), so this stops it from prompting the user and us getting an exception as a result
+    bool use_encryption = false;
+    if (encrypt_password != null)
+      use_encryption = encrypt_password != "";
+    else if (detected_encryption)
+      use_encryption = existing_encrypted;
+
+    if (use_encryption) {
+      envp.append("PASSPHRASE=%s".printf(encrypt_password == null ? "" : encrypt_password));
     }
     else {
-      envp.append("PASSPHRASE=%s".printf(encrypt_password));
+      argv.append("--no-encryption");
+      envp.append("PASSPHRASE="); // duplicity sometimes asks for a passphrase when it doesn't need it (during cleanup), so this stops it from prompting the user and us getting an exception as a result
     }
 
     /* Start duplicity instance */

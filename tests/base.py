@@ -106,10 +106,7 @@ def setup(root_prompt = False):
   environ['XDG_CACHE_HOME'] = get_temp_name('cache')
   environ['XDG_CONFIG_HOME'] = get_temp_name('config')
   environ['XDG_DATA_HOME'] = get_temp_name('share')
-  if 'XDG_DATA_DIRS' in environ:
-    environ['XDG_DATA_DIRS'] = "%s:%s" % (environ['XDG_DATA_HOME'], environ['XDG_DATA_DIRS'])
-  else:
-    environ['XDG_DATA_DIRS'] = environ['XDG_DATA_HOME']
+  environ['XDG_DATA_DIRS'] = "%s:/usr/share/" % environ['XDG_DATA_HOME']
   output = subprocess.Popen(['dbus-launch'], stdout=subprocess.PIPE).communicate()[0]
   lines = output.split('\n')
   for line in lines:
@@ -133,11 +130,6 @@ def setup(root_prompt = False):
   
   os.system('mkdir -p %s' % environ['XDG_CONFIG_HOME'])
   os.system('mkdir -p %s/glib-2.0/schemas/' % environ['XDG_DATA_HOME'])
-  
-  # Make sure file chooser has txtLocation
-  os.system('mkdir -p %s/gtk-2.0' % environ['XDG_CONFIG_HOME'])
-  os.system('echo [Filechooser Settings] > "%s/gtk-2.0/gtkfilechooser.ini"' % environ['XDG_CONFIG_HOME'])
-  os.system('echo LocationMode=filename-entry >> "%s/gtk-2.0/gtkfilechooser.ini"' % environ['XDG_CONFIG_HOME'])
 
   # Now install default schema into our temporary config dir
   schemas = glob.glob("/usr/share/glib-2.0/schemas/org.gtk.*")
@@ -148,6 +140,9 @@ def setup(root_prompt = False):
   # Copy interface files into place as well
   os.system("mkdir -p %s/deja-dup/ui" % environ['XDG_DATA_HOME'])
   os.system("cp %s/../data/ui/* %s/deja-dup/ui" % (srcdir, environ['XDG_DATA_HOME']))
+
+  set_settings_value("location-mode", "'filename-entry'",
+                     root='org.gtk.Settings.FileChooser:/org/gtk/settings/file-chooser/')
 
   set_settings_value("root-prompt", 'true' if root_prompt else 'false')
 
@@ -176,26 +171,30 @@ def cleanup(success):
     os.system('bash -c "echo -e \'\e[31mFAILED\e[0m\'"')
     sys.exit(1)
 
-def set_settings_value(key, value, schema = None):
+def set_settings_value(key, value, schema = None, root = None):
+  if root is None:
+    root = 'org.gnome.DejaDup'
   if schema:
-    fullschema = 'org.gnome.DejaDup.' + schema
+    fullschema = root + '.' + schema
   else:
-    fullschema = 'org.gnome.DejaDup'
+    fullschema = root
   cmd = ['gsettings', 'set', fullschema, key, value]
   sp = subprocess.Popen(cmd, stdout=subprocess.PIPE)
   sp.communicate()
   if sp.returncode:
     raise Exception('Could not set key %s to %s' % (key, value))
   # make sure everything is set correctly
-  setval = get_settings_value(key, schema=schema)
+  setval = get_settings_value(key, schema=schema, root=root)
   assert setval == value, "%s != %s" % (setval, value)
 
-def get_settings_value(key, schema = None):
+def get_settings_value(key, schema = None, root = None):
+  if root is None:
+    root = 'org.gnome.DejaDup'
   if schema:
-    schema = 'org.gnome.DejaDup.' + schema
+    fullschema = root + '.' + schema
   else:
-    schema = 'org.gnome.DejaDup'
-  cmd = ['gsettings', 'get', schema, key]
+    fullschema = root
+  cmd = ['gsettings', 'get', fullschema, key]
   sp = subprocess.Popen(cmd, stdout=subprocess.PIPE)
   pout = sp.communicate()[0]
   if sp.returncode:
@@ -365,7 +364,6 @@ def wait_for_encryption(dlg, max_count, encrypt):
         if guivisible(dlg, 'txtConfirmpassword'):
           ldtp.settextvalue(dlg, 'txtConfirmpassword', 'test')
       else:
-        print ldtp.getobjectlist(dlg)
         ldtp.click(dlg, 'rbtnAllowrestoringwithoutapassword')
       ldtp.click(dlg, 'btnContinue')
       break
@@ -402,7 +400,7 @@ def set_file_list(dlg, obj, addObj, removeObj, files):
 
   # FIXME compiz and modal windows tend to not work with ldtp
   set_settings_value('include-list' if obj == 'tblIncludeList' else 'exclude-list',
-                     '[%s]' % ','.join(["'%s'" % os.path.abspath(x) for x in files]))
+                     '[%s]' % ', '.join(["'%s'" % os.path.abspath(x) for x in files]))
   return
 
   # Add new items
@@ -470,19 +468,29 @@ def backup_simple(finish=True, error=None, timeout=400, backend = None,
     error = strip_obj_name(error)
     wait_for_finish('frmBackUp', error, timeout, prefix=True)
 
-def restore_simple(path, date=None, backend = None, encrypt = None, dest = None):
-  ldtp.click('frmDéjàDup', 'btnRestore…')
-  waitforgui('dlgRestore')
-  remap('dlgRestore')
-  if ldtp.guiexist('dlgRestore', 'lblPreferences'):
-    walk_restore_prefs('dlgRestore', backend=backend, encrypt=encrypt, dest=dest)
-  wait_for_encryption('dlgRestore', 'lblRestorefromWhen?', 200)
+def restore_simple(path, date=None, backend = None, encrypt=True, dest = None):
+  start_deja_dup(executable='deja-dup-preferences')
+
+  if guivisible('frmBackup', 'btnIwanttorestorefilesfromapreviousbackup…'):
+    ldtp.click('frmBackup', 'btnIwanttorestorefilesfromapreviousbackup…')
+  else:
+    ldtp.selectrow('frmBackup', 'tblCategories', 'Overview')
+    ldtp.click('frmBackup', 'btnRestore…')
+
+  waitforgui('frmRestore')
+
+  if backend is not None:
+    walk_restore_prefs('frmRestore', backend, dest)
+  else:
+    ldtp.click('frmRestore', 'btnForward')
+
+  wait_for_finish('frmRestore', 'lblRestorefromWhen?', 200)
   if date:
-    ldtp.comboselect('dlgRestore', 'cboDate', date)
-  ldtp.click('dlgRestore', 'btnForward')
-  remap('dlgRestore')
-  ldtp.click('dlgRestore', 'rbtnRestoretospecificfolder')
-  ldtp.comboselect('dlgRestore', 'cboRestorefolder', 'Other...')
+    ldtp.comboselect('frmRestore', 'cboDate', date)
+  ldtp.click('frmRestore', 'btnForward')
+
+  ldtp.click('frmRestore', 'rbtnRestoretospecificfolder')
+  ldtp.comboselect('frmRestore', 'cboRestorefolder', 'Other...')
   waitforgui('dlgChoosedestinationforrestoredfiles')
   # Make sure path ends in '/'
   if path[-1] != '/':
@@ -491,13 +499,16 @@ def restore_simple(path, date=None, backend = None, encrypt = None, dest = None)
   ldtp.settextvalue('dlgChoosedestinationforrestoredfiles', 'txtLocation', path)
   ldtp.click('dlgChoosedestinationforrestoredfiles', 'btnOpen')
   ldtp.wait(1) # give the combo a second to settle
-  ldtp.click('dlgRestore', 'btnForward')
+  ldtp.click('frmRestore', 'btnForward')
   ldtp.wait(1) # give the dlg a second to settle
-  ldtp.click('dlgRestore', 'btnRestore')
-  assert ldtp.waittillguiexist('dlgRestore', 'lblYourfilesweresuccessfullyrestored', 400)
-  assert guivisible('dlgRestore', 'lblYourfilesweresuccessfullyrestored')
-  ldtp.click('dlgRestore', 'btnClose')
-  ldtp.waittillguinotexist('dlgRestore')
+  ldtp.click('frmRestore', 'btnRestore')
+
+  if encrypt is not None:
+    wait_for_encryption('frmRestore', 5, encrypt)
+
+  wait_for_finish('frmRestore', 'lblYourfilesweresuccessfullyrestored', 400)
+  ldtp.click('frmRestore', 'btnClose')
+  ldtp.waittillguinotexist('frmRestore')
 
 def restore_specific(files, path, date=None, backend = None, encrypt = None, dest = None):
   global srcdir

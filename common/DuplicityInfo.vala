@@ -30,6 +30,7 @@ public class DuplicityInfo : Object
   public bool can_resume {get; private set; default = false; }
   public bool use_gpg_options {get; private set; default = false; }
   public bool has_u1 {get; private set; default = false;}
+  public bool reports_encryption {get; private set; default = false;}
   
   static DuplicityInfo info = null;
   public static DuplicityInfo get_default() {
@@ -84,6 +85,8 @@ public class DuplicityInfo : Object
       can_resume = true; // had it since 0.6.0, but had data corruption bugs
     if (meets_version(0, 6, 14))
       has_u1 = true;
+    if (meets_version(0, 6, 15))
+      reports_encryption = true;
 
     return true;
   }
