@@ -24,6 +24,7 @@ import sys
 sys.path.insert(0, sys.path[0]+'/..')
 import base
 import ldtp
+import time
 
 if not base.dup_meets_version(0, 6, 13):
   base.skip()
@@ -31,10 +32,10 @@ if not base.dup_meets_version(0, 6, 13):
 def wait_for_volume(destdir):
   count = 0
   while len(os.listdir(destdir)) < 2 and count < 200:
-    ldtp.wait(1)
+    time.sleep(1)
     count += 1
 
-def test():
+def noencrypt():
   base.setup()
   base.backup_simple(backend='file', finish=False, encrypt=False, includes=['/usr/bin'])
   destdir = base.get_temp_name('local')
@@ -49,4 +50,20 @@ def test():
   assert base.num_manifests() == 1
   assert vols_before[0] in vols_after
 
-base.run(test)
+def encrypt():
+  base.setup()
+  base.backup_simple(backend='file', finish=False, includes=['/usr/bin'])
+  destdir = base.get_temp_name('local')
+  wait_for_volume(destdir)
+  ldtp.click('frmBackUp', 'btnResumeLater')
+  ldtp.waittillguinotexist('frmBackUp')
+  vols_before = os.listdir(destdir)
+  assert vols_before != []
+  assert base.num_manifests() == 0
+  base.backup_simple()
+  vols_after = os.listdir(destdir)
+  assert base.num_manifests() == 1
+  assert vols_before[0] in vols_after
+
+base.run(noencrypt)
+base.run(encrypt)

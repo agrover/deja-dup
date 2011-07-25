@@ -875,9 +875,6 @@ public class Duplicity : Object
         break;
 
       case ERROR_GPG:
-        // See bug 815635.  The gist is that there may be bogus sigtar files in
-        // the archive after a GPGError.
-        delete_cache();
         bad_encryption_password(); // notify upper layers, if they want to do anything
         text = _("Bad encryption password.");
         break;
@@ -955,6 +952,11 @@ public class Duplicity : Object
         
         show_error(_("S3 bucket name is not available."));
       }
+      break;
+    case "EOFError":
+      // Duplicity tried to ask the user what the encryption password is.
+      bad_encryption_password(); // notify upper layers, if they want to do anything
+      show_error(_("Bad encryption password."));
       break;
     case "IOError":
       if (text.contains("GnuPG"))
@@ -1240,7 +1242,7 @@ public class Duplicity : Object
     // For local filesystems, we'll choose large volsize.
     // For remote FSs, we'll go smaller.
     if (in_testing_mode())
-      return 5;
+      return 1;
     else if (backend.is_native())
       return 50;
     else
@@ -1329,7 +1331,12 @@ public class Duplicity : Object
       use_encryption = existing_encrypted;
 
     if (use_encryption) {
-      envp.append("PASSPHRASE=%s".printf(encrypt_password == null ? "" : encrypt_password));
+      if (encrypt_password != null && encrypt_password != "")
+        envp.append("PASSPHRASE=%s".printf(encrypt_password));
+      // else duplicity will try to prompt user and we'll get an exception,
+      // which is our cue to ask user for password.  We could pass an empty
+      // passphrase (as we do below), but by not setting it at all, duplicity
+      // will error out quicker, and notably before it tries to sync metadata.
     }
     else {
       argv.append("--no-encryption");

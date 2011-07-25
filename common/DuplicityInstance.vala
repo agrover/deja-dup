@@ -189,7 +189,11 @@ public class DuplicityInstance : Object
                         SpawnFlags.LEAVE_DESCRIPTORS_OPEN |
                         SpawnFlags.STDOUT_TO_DEV_NULL |
                         SpawnFlags.STDERR_TO_DEV_NULL,
-                        null, out child_pid, null, null, null);
+                        () => {
+                          // Drop support for /dev/tty inside duplicity.
+                          // See our PASSPHRASE handling for more info.
+                          Posix.setsid();
+                        }, out child_pid, null, null, null);
     
     debug("Running the following duplicity (%i) command: %s\n", (int)child_pid, user_cmd);
     
