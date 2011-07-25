@@ -627,7 +627,7 @@ public class Duplicity : Object
       
       case State.CHECK_CONTENTS:
         has_checked_contents = true;
-        mode = Operation.Mode.RESTORE;
+        mode = original_mode;
         
         if (restart())
           return;
@@ -779,6 +779,17 @@ public class Duplicity : Object
   protected static const int WARNING_ORPHANED_BACKUP = 6;
   protected static const int DEBUG_GENERIC = 1;
 
+  void delete_cache()
+  {
+    string dir = Environment.get_user_cache_dir();
+    if (dir == null)
+      return;
+
+    var cachedir = Path.build_filename(dir, Config.PACKAGE);
+    var del = new RecursiveDelete(File.new_for_path(cachedir));
+    del.start();
+  }
+
   bool restarted_without_cache = false;
   bool restart_without_cache()
   {
@@ -787,13 +798,7 @@ public class Duplicity : Object
 
     restarted_without_cache = true;
 
-    string dir = Environment.get_user_cache_dir();
-    if (dir == null)
-      return false;
-
-    var cachedir = Path.build_filename(dir, Config.PACKAGE);
-    var del = new RecursiveDelete(File.new_for_path(cachedir));
-    del.start();
+    delete_cache();
     return restart();
   }
 
@@ -870,6 +875,9 @@ public class Duplicity : Object
         break;
 
       case ERROR_GPG:
+        // See bug 815635.  The gist is that there may be bogus sigtar files in
+        // the archive after a GPGError.
+        delete_cache();
         bad_encryption_password(); // notify upper layers, if they want to do anything
         text = _("Bad encryption password.");
         break;
