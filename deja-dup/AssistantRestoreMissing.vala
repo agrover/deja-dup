@@ -418,6 +418,7 @@ public class AssistantRestoreMissing : AssistantRestore {
      * summary page.
      */
     //status_icon = null; PRIV PARAMETER - FIXIT!
+    op_state = this.op.get_state();
     this.op = null;
 
     if (cancelled) {

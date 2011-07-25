@@ -94,7 +94,7 @@ public abstract class Operation : Object
   }
   public void set_state(State state) {
     backend = state.backend;
-    passphrase = state.passphrase;
+    set_passphrase(state.passphrase);
   }
 
   SimpleSettings settings;
@@ -156,6 +156,8 @@ public abstract class Operation : Object
       needs_password = true;
       passphrase_required(); // will block and call set_passphrase when ready
     }
+    else
+      dup.encrypt_password = passphrase;
 
     if (!finished)
       continue_with_passphrase();
@@ -198,7 +200,8 @@ public abstract class Operation : Object
   {
     needs_password = false;
     this.passphrase = passphrase;
-    dup.encrypt_password = passphrase;
+    if (dup != null)
+      dup.encrypt_password = passphrase;
   }
 
   async void continue_with_passphrase()
