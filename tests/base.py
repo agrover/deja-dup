@@ -118,9 +118,10 @@ def setup(root_prompt = False):
 
   # Shutdown ldtpd so that it will restart and pick up new dbus environment
   #os.system('pkill -f ldtpd\\.main; sleep 1')
-  #ldtp.getwindowlist()
+  #ldtp.getwindowlist()/reload(ldtp)
 
-  os.system('/usr/lib/d-conf/dconf-service &')
+  process = subprocess.Popen(['/usr/lib/d-conf/dconf-service'], stdout=subprocess.PIPE)
+  cleanup_pids += [process.pid]
 
   environ['PYTHONPATH'] = extra_pythonpaths + (environ['PYTHONPATH'] if 'PYTHONPATH' in environ else '')
   environ['PATH'] = extra_paths + environ['PATH']
@@ -355,8 +356,9 @@ def guivisible(frm, obj, prefix=False):
   states = ldtp.getallstates(frm, obj)
   return ldtp.state.VISIBLE in states
 
-def wait_for_encryption(dlg, max_count, encrypt):
+def wait_for_encryption(dlg, encrypt):
   count = 0
+  max_count = 10
   while count < max_count:
     if guivisible(dlg, 'txtEncryptionpassword'):
       if encrypt:
@@ -462,11 +464,17 @@ def backup_simple(finish=True, error=None, timeout=400, backend = None,
   waitforgui('frmBackUp')
 
   if encrypt is not None:
-    wait_for_encryption('frmBackUp', 5, encrypt)
+    wait_for_encryption('frmBackUp', encrypt)
 
   if finish:
     error = strip_obj_name(error)
     wait_for_finish('frmBackUp', error, timeout, prefix=True)
+
+def walk_restore_prefs(dlg, backend, dest):
+  if backend == 'file':
+    ldtp.comboselect(dlg, 'cboLocation', 'Local Folder')
+    ldtp.settextvalue(dlg, 'txt0', dest) # FIXME txt0 is bad name
+    ldtp.wait(1) # without this, sometimes ldtp moves so fast, deja-dup doesn't notice dest
 
 def restore_simple(path, date=None, backend = None, encrypt=True, dest = None):
   start_deja_dup(executable='deja-dup-preferences')
@@ -480,9 +488,8 @@ def restore_simple(path, date=None, backend = None, encrypt=True, dest = None):
   waitforgui('frmRestore')
 
   if backend is not None:
-    walk_restore_prefs('frmRestore', backend, dest)
-  else:
-    ldtp.click('frmRestore', 'btnForward')
+    walk_restore_prefs('frmRestore', backend, dest)  
+  ldtp.click('frmRestore', 'btnForward')
 
   wait_for_finish('frmRestore', 'lblRestorefromWhen?', 200)
   if date:
@@ -504,51 +511,57 @@ def restore_simple(path, date=None, backend = None, encrypt=True, dest = None):
   ldtp.click('frmRestore', 'btnRestore')
 
   if encrypt is not None:
-    wait_for_encryption('frmRestore', 5, encrypt)
+    wait_for_encryption('frmRestore', encrypt)
 
   wait_for_finish('frmRestore', 'lblYourfilesweresuccessfullyrestored', 400)
   ldtp.click('frmRestore', 'btnClose')
   ldtp.waittillguinotexist('frmRestore')
 
-def restore_specific(files, path, date=None, backend = None, encrypt = None, dest = None):
+def restore_specific(files, path, date=None, backend = None, encrypt = True, dest = None):
   global srcdir
   files = [os.path.join(srcdir, f) for f in files]
   args = ['--restore'] + files
-  start_deja_dup(args=args, waitfor='dlgRestore')
-  remap('dlgRestore')
-  if ldtp.guiexist('dlgRestore', 'lblPreferences'):
-    walk_restore_prefs('dlgRestore', backend=backend, encrypt=encrypt, dest=dest)
-  wait_for_encryption('dlgRestore', 'lblRestorefromWhen?', 200)
+  start_deja_dup(args=args, waitfor='frmRestore')
+
+  if backend is not None:
+    walk_restore_prefs('frmRestore', backend=backend, dest=dest)
+  ldtp.click('frmRestore', 'btnForward')
+
+  wait_for_finish('frmRestore', 'lblRestorefromWhen?', 200)
   if date:
-    ldtp.comboselect('dlgRestore', 'cboDate', date)
-  ldtp.click('dlgRestore', 'btnForward')
-  ldtp.click('dlgRestore', 'btnRestore')
+    ldtp.comboselect('frmRestore', 'cboDate', date)
+  ldtp.click('frmRestore', 'btnForward')
+  ldtp.click('frmRestore', 'btnRestore')
+
+  if encrypt is not None:
+    wait_for_encryption('frmRestore', encrypt)
+
   if len(files) == 1:
     lbl = 'lblYourfilewassuccessfullyrestored'
   else:
     lbl = 'lblYourfilesweresuccessfullyrestored'
-  assert ldtp.waittillguiexist('dlgRestore', lbl)
-  assert guivisible('dlgRestore', lbl)
-  ldtp.click('dlgRestore', 'btnClose')
+  wait_for_finish('frmRestore', lbl, 400)
+
+  ldtp.click('frmRestore', 'btnClose')
+  ldtp.waittillguinotexist('frmRestore')
 
 def restore_missing(files, path):
   args = ['--restore-missing', path]
-  start_deja_dup(args=args, waitfor='dlgRestore')
-  remap('dlgRestore')
-  wait_for_encryption('dlgRestore', 'lblScanningfinished', 200)
+  start_deja_dup(args=args, waitfor='frmRestore')
+  wait_for_finish('frmRestore', 'lblScanningfinished', 200)
   for f in files:
-    index = ldtp.gettablerowindex('dlgRestore', 'tbl0', f)
+    index = ldtp.gettablerowindex('frmRestore', 'tbl0', f)
     if index != -1:
-      ldtp.checkrow('dlgRestore', 'tbl0', index)
-  ldtp.click('dlgRestore', 'btnForward')
-  ldtp.click('dlgRestore', 'btnRestore')
+      ldtp.checkrow('frmRestore', 'tbl0', index)
+  ldtp.click('frmRestore', 'btnForward')
+  ldtp.click('frmRestore', 'btnRestore')
+  wait_for_encryption('frmRestore', True)
   if len(files) == 1:
     lbl = 'lblYourfilewassuccessfullyrestored'
   else:
     lbl = 'lblYourfilesweresuccessfullyrestored'
-  assert ldtp.waittillguiexist('dlgRestore', lbl)
-  assert guivisible('dlgRestore', lbl)
-  ldtp.click('dlgRestore', 'btnClose')
+  wait_for_finish('frmRestore', lbl, 200)
+  ldtp.click('frmRestore', 'btnClose')
 
 def file_equals(path, contents):
   f = open(path)

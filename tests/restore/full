@@ -45,7 +45,7 @@ def test():
   before = os.stat(restoredir)
   beforeparent = os.stat(base.temp_dir)
   base.setup()
-  base.restore_simple(restoredir, DATE1, backend='file', dest=(sys.path[0]+'/vols/simple'), encrypt=False)
+  base.restore_simple(restoredir, date=DATE1, backend='file', dest=(sys.path[0]+'/vols/simple'), encrypt=None)
   # A concern is that DD will overwrite the permissions of the restore directory or its parents, so check that here
   after = os.stat(restoredir)
   assert before.st_mode == after.st_mode, after.st_mode
@@ -57,12 +57,10 @@ def test():
   assert beforeparent.st_gid == afterparent.st_gid, afterparent.st_gid
   check_dir(restoredir, 'one\n')
   os.system("rm -r %s" % restoredir)
-  base.start_deja_dup()
-  base.restore_simple(restoredir, DATE2)
+  base.restore_simple(restoredir, DATE2, encrypt=None)
   check_dir(restoredir, 'one1\n')
   os.system("rm -r %s" % restoredir)
-  base.start_deja_dup()
-  base.restore_simple(restoredir, DATE3)
+  base.restore_simple(restoredir, DATE3, encrypt=None)
   check_dir(restoredir, 'one1!\n')
 
 base.run(test)

@@ -24,6 +24,7 @@ import sys
 sys.path.insert(0, sys.path[0]+'/..')
 import base
 import ldtp
+import time
 
 def wait_for_volume(destdir):
   count = 0
@@ -38,6 +39,6 @@ def test():
   wait_for_volume(destdir)
   ldtp.click('frmBackUp', 'btnCancel')
   ldtp.waittillguinotexist('frmBackUp')
-  return os.listdir(destdir) == []
+  assert os.listdir(destdir) == [], os.listdir(destdir)
 
 base.run(test)

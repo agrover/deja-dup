@@ -28,7 +28,6 @@ def test():
   datapath = '/usr/bin'
   base.setup()
   base.backup_simple(backend='file', includes=[datapath])
-  base.start_deja_dup()
   base.restore_simple(restoredir)
   return True
 

@@ -25,30 +25,30 @@ import ldtp
 
 # First we test how things work when there's no valid ssh info
 def no_values():
-	base.setup(start = False)
+	base.setup()
 	base.set_settings_value('backend', "'ssh'")
-	base.start_deja_dup()
+	base.start_deja_dup(executable='deja-dup-preferences')
 	assert base.get_settings_value('backend') == "'file'", base.get_settings_value('backend')
 
 # Now test bits and pieces missing
 def some_values():
-	base.setup(start = False)
+	base.setup()
 	base.set_settings_value('backend', "'ssh'")
 	base.set_settings_value('server', "'localhost'", schema="SSH")
-	base.start_deja_dup()
+	base.start_deja_dup(executable='deja-dup-preferences')
 	assert base.get_settings_value('backend') == "'file'" and \
 	       base.get_settings_value('path', schema="File") == "'ssh://localhost/'", \
 	       "%s and %s" % (base.get_settings_value('backend'), base.get_settings_value('path', schema="File"))
 
 # Now test everything together
 def all_values():
-	base.setup(start = False)
+	base.setup()
 	base.set_settings_value('backend', "'ssh'")
 	base.set_settings_value('server', "'localhost'", schema="SSH")
 	base.set_settings_value('port', '42', schema="SSH")
 	base.set_settings_value('username', "'goober'", schema="SSH")
 	base.set_settings_value('directory', "'/hello'", schema="SSH")
-	base.start_deja_dup()
+	base.start_deja_dup(executable='deja-dup-preferences')
 	assert base.get_settings_value('backend') == "'file'" and \
          base.get_settings_value('path', schema="File") == "'ssh://goober@localhost:42/hello'", \
 	       "%s and %s" % (base.get_settings_value('backend'), base.get_settings_value('path', schema="File"))

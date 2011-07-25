@@ -30,7 +30,7 @@
 # This dbus-launch is only for ldtp's benefit.  We still need a dbus-launch
 # run inside base.py to handle the dconf session
 if [ -z "$DISPLAY" ]; then
-  xvfb-run -a dbus-launch --exit-with-session $*
+  xvfb-run -a dbus-launch --exit-with-session sh -c "/usr/lib/gnome-settings-daemon/gnome-settings-daemon >/dev/null 2>&1 & sleep 2 && $*"
 else
   $*
 fi

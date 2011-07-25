@@ -24,19 +24,18 @@ AUTO_TESTS = \
 	backup/cancel-clean \
 	backup/clear-cache \
 	backup/continue \
-	backup/full \
 	backup/delete \
+	backup/encrypt \
 	backup/exclude \
+	backup/full \
 	backup/mkdir \
 	backup/permissions \
 	backup/spaces \
-	backup/symlinks
-
-NIL_VAR = \
+	backup/symlinks \
 	basic/badversion \
+	restore/cycle \
 	prefs/s3-folder \
 	prefs/ssh-to-file \
-	restore/cycle \
 	restore/full \
 	restore/gpg \
 	restore/missing \

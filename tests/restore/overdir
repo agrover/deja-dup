@@ -27,10 +27,8 @@ def test():
   restoredir = base.get_temp_name('restore')
   base.setup()
   base.backup_simple(backend='file', includes=['data/simple'])
-  base.start_deja_dup()
   base.restore_simple(restoredir)
   # Test restoring everything on top of previous restored files
-  base.start_deja_dup()
   base.restore_simple(restoredir)
   # Test restoring just one dir on top of previous restored files
   base.restore_specific(['data/simple/top'], restoredir)

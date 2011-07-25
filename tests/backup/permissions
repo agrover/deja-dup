@@ -38,7 +38,7 @@ def noread():
   backupdir = base.get_temp_name('backup', True)
   os.system('chmod a-r %s' % backupdir)
   base.setup()
-  base.backup_simple(error=u'lblPermissiondeniedwhentryingtoread\u2018%s\u2019' % backupdir, backend='file', includes=['data/simple'], dest=backupdir)
+  base.backup_simple(error=u'lblPermissiondeniedwhentryingtoread\u2018%s\u2019' % backupdir, backend='file', includes=['data/simple'], dest=backupdir, encrypt=None)
 
 def noexec():
   backupdir = base.get_temp_name('backup', True)
@@ -53,7 +53,7 @@ def noget():
   base.setup()
   base.backup_simple(error=u'lblPermissiondeniedwhentryingtoread\u2018%s\u2019' %
                            (backupdir+'/duplicity-full-signatures20090802T011441Zsigtargz'),
-                     backend='file', includes=['data/simple'], dest=backupdir, encrypt=False)
+                     backend='file', includes=['data/simple'], dest=backupdir, encrypt=None)
 
 base.run(nowrite)
 base.run(noread)

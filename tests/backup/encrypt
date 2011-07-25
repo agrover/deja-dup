@@ -29,7 +29,6 @@ import time
 def wait_for_volume(destdir, basenum):
   count = 0
   while len(os.listdir(destdir)) < basenum+2 and count < 200:
-    print len(os.listdir(destdir)), basenum+2, count
     time.sleep(1)
     count += 1
 
