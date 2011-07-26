@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: mike@mterry.name\n"
-"POT-Creation-Date: 2011-07-25 11:08-0400\n"
+"POT-Creation-Date: 2011-07-25 21:57-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -518,7 +518,7 @@ msgstr ""
 msgid "Cleaning up…"
 msgstr ""
 
-#: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1010
+#: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
 msgid "Failed with an unknown error."
 msgstr ""
 
@@ -528,15 +528,18 @@ msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
 
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:882 ../common/Duplicity.vala:961
+#. Duplicity tried to ask the user what the encryption password is.
+#. notify upper layers, if they want to do anything
+#: ../common/Duplicity.vala:879 ../common/Duplicity.vala:959
+#: ../common/Duplicity.vala:963
 msgid "Bad encryption password."
 msgstr ""
 
-#: ../common/Duplicity.vala:887
+#: ../common/Duplicity.vala:884
 msgid "Computer name changed"
 msgstr ""
 
-#: ../common/Duplicity.vala:887
+#: ../common/Duplicity.vala:884
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -544,67 +547,67 @@ msgid ""
 "location."
 msgstr ""
 
-#: ../common/Duplicity.vala:900
+#: ../common/Duplicity.vala:897
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr ""
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:904 ../common/Duplicity.vala:908
+#: ../common/Duplicity.vala:901 ../common/Duplicity.vala:905
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr ""
 
-#: ../common/Duplicity.vala:912
+#: ../common/Duplicity.vala:909
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr ""
 
-#: ../common/Duplicity.vala:919
+#: ../common/Duplicity.vala:916
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr ""
 
-#: ../common/Duplicity.vala:925 ../common/Duplicity.vala:980
+#: ../common/Duplicity.vala:922 ../common/Duplicity.vala:982
 msgid "No space left."
 msgstr ""
 
-#: ../common/Duplicity.vala:939
+#: ../common/Duplicity.vala:936
 msgid "Invalid ID."
 msgstr ""
 
-#: ../common/Duplicity.vala:941
+#: ../common/Duplicity.vala:938
 msgid "Invalid secret key."
 msgstr ""
 
-#: ../common/Duplicity.vala:943
+#: ../common/Duplicity.vala:940
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 
-#: ../common/Duplicity.vala:956
+#: ../common/Duplicity.vala:953
 msgid "S3 bucket name is not available."
-msgstr ""
-
-#: ../common/Duplicity.vala:965
-#, c-format
-msgid "Error reading file ‘%s’."
 msgstr ""
 
 #: ../common/Duplicity.vala:967
 #, c-format
+msgid "Error reading file ‘%s’."
+msgstr ""
+
+#: ../common/Duplicity.vala:969
+#, c-format
 msgid "Error writing file ‘%s’."
 msgstr ""
 
-#: ../common/Duplicity.vala:982
+#: ../common/Duplicity.vala:984
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr ""
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:992
 msgid "No backup files found"
 msgstr ""
 
-#: ../common/Duplicity.vala:1041
+#: ../common/Duplicity.vala:1043
 msgid "Uploading…"
 msgstr ""
 
@@ -1329,16 +1332,15 @@ msgstr ""
 msgid "Weekly"
 msgstr ""
 
-#. Translators: Biweekly is every two weeks
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Biweekly"
+#: ../widgets/ConfigPeriod.vala:38
+msgid "Every 2 weeks"
 msgstr ""
 
-#: ../widgets/ConfigPeriod.vala:40
+#: ../widgets/ConfigPeriod.vala:39
 msgid "Monthly"
 msgstr ""
 
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:83
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"

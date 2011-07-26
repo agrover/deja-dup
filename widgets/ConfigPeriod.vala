@@ -35,8 +35,7 @@ public class ConfigPeriod : ConfigChoice
     
     store.insert_with_values(out iter, i++, 0, _("Daily"), 1, 1);
     store.insert_with_values(out iter, i++, 0, _("Weekly"), 1, 7);
-    // Translators: Biweekly is every two weeks
-    store.insert_with_values(out iter, i++, 0, _("Biweekly"), 1, 14);
+    store.insert_with_values(out iter, i++, 0, _("Every 2 weeks"), 1, 14);
     store.insert_with_values(out iter, i++, 0, _("Monthly"), 1, 28);
     
     store.set_sort_column_id(1, Gtk.SortType.ASCENDING);
