@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-07 02:04-0400\n"
-"PO-Revision-Date: 2011-03-17 01:16+0000\n"
+"POT-Creation-Date: 2011-07-25 21:57-0400\n"
+"PO-Revision-Date: 2011-07-23 01:24+0000\n"
 "Last-Translator: 英华 <wantinghard@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-07-08 04:46+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-26 04:44+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:356
 #, c-format
@@ -348,32 +348,32 @@ msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "从备份中恢复文件"
 
-#: ../common/BackendFile.vala:74
-msgid "GVFS FUSE is not installed"
-msgstr "未安装 GVFS FUSE"
-
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:429
+#: ../common/BackendFile.vala:86 ../common/CommonUtils.vala:429
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s，在 %2$s"
 
-#: ../common/BackendFile.vala:130
+#: ../common/BackendFile.vala:124
 #, c-format
 msgid "Backup will begin when %s becomes connected."
 msgstr "备份将于 %s 建立连接时开始。"
 
-#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:49
+#: ../common/BackendFile.vala:131 ../common/BackendRackspace.vala:49
 #: ../common/BackendS3.vala:59 ../common/BackendU1.vala:146
 msgid "Backup will begin when a network connection becomes available."
 msgstr "备份将在网络连接可用时开始。"
 
-#: ../common/BackendFile.vala:419
+#: ../common/BackendFile.vala:362 ../common/BackendFile.vala:426
 msgid "Backup location not available"
 msgstr "备份位置不可用"
 
-#: ../common/BackendFile.vala:419
+#: ../common/BackendFile.vala:363
+msgid "Waiting for a network connection…"
+msgstr ""
+
+#: ../common/BackendFile.vala:426
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "正在等待“%s”建立连接..."
@@ -472,11 +472,11 @@ msgstr ""
 msgid "Connect to Ubuntu One"
 msgstr ""
 
-#: ../common/DuplicityInfo.vala:142
+#: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
 msgstr "无法运行 duplicity"
 
-#: ../common/DuplicityInfo.vala:147
+#: ../common/DuplicityInfo.vala:120
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -484,7 +484,7 @@ msgstr ""
 "无法识别 duplicity 版本。\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:149
+#: ../common/DuplicityInfo.vala:122
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -493,70 +493,73 @@ msgstr ""
 "无法识别 duplicity 版本“%s”。\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:151
+#: ../common/DuplicityInfo.vala:124
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
 
-#: ../common/DuplicityInfo.vala:155
+#: ../common/DuplicityInfo.vala:128
 msgid "Duplicity’s version is too old"
 msgstr "Duplicity 的版本过旧"
 
-#: ../common/DuplicityInfo.vala:156
+#: ../common/DuplicityInfo.vala:129
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
 "only found version %d.%d.%.2d"
 msgstr ""
 
-#: ../common/Duplicity.vala:127 ../common/Duplicity.vala:177
+#: ../common/Duplicity.vala:129 ../common/Duplicity.vala:183
 msgid "Paused (no network)"
 msgstr "已暂停（无网络）"
 
-#: ../common/Duplicity.vala:375 ../common/Duplicity.vala:383
-#: ../common/Duplicity.vala:400 ../common/Operation.vala:79
-#: ../common/Operation.vala:111
+#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
+#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
+#: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "正在准备..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:431
+#: ../common/Duplicity.vala:437
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr ""
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:498
+#: ../common/Duplicity.vala:503
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "备份位置空间过小。请尝试使用具有更多空间的位置。"
 
-#: ../common/Duplicity.vala:519
+#: ../common/Duplicity.vala:524
 msgid "Backup location does not have enough free space."
 msgstr "备份位置的自由空间不足。"
 
-#: ../common/Duplicity.vala:539 ../common/Duplicity.vala:553
+#: ../common/Duplicity.vala:543 ../common/Duplicity.vala:557
 msgid "Cleaning up…"
 msgstr "正在清理..."
 
-#: ../common/Duplicity.vala:662 ../common/Duplicity.vala:1039
+#: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
 msgid "Failed with an unknown error."
 msgstr "因出现未知错误而失败。"
 
-#: ../common/Duplicity.vala:887
+#: ../common/Duplicity.vala:873
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "无法恢复“%s”：在备份中未找到该文件"
 
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:893 ../common/Duplicity.vala:972
+#. Duplicity tried to ask the user what the encryption password is.
+#. notify upper layers, if they want to do anything
+#: ../common/Duplicity.vala:879 ../common/Duplicity.vala:959
+#: ../common/Duplicity.vala:963
 msgid "Bad encryption password."
 msgstr "无效加密密码。"
 
-#: ../common/Duplicity.vala:898
+#: ../common/Duplicity.vala:884
 msgid "Computer name changed"
 msgstr "计算机名称已更改"
 
-#: ../common/Duplicity.vala:898
+#: ../common/Duplicity.vala:884
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -564,85 +567,73 @@ msgid ""
 "location."
 msgstr "现有备份是名为 %s 的计算机的备份，但当前计算机的 名称却是 %s。如果这在意料之外，则您应该备份到其它 位置。"
 
-#: ../common/Duplicity.vala:911
+#: ../common/Duplicity.vala:897
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "尝试创建“%s”时权限被拒绝。"
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:915 ../common/Duplicity.vala:919
+#: ../common/Duplicity.vala:901 ../common/Duplicity.vala:905
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "尝试读取“%s”时权限被拒绝。"
 
-#: ../common/Duplicity.vala:923
+#: ../common/Duplicity.vala:909
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "尝试删除“%s”时权限被拒绝。"
 
-#: ../common/Duplicity.vala:930
+#: ../common/Duplicity.vala:916
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "备份位置“%s”不存在。"
 
-#: ../common/Duplicity.vala:936 ../common/Duplicity.vala:991
+#: ../common/Duplicity.vala:922 ../common/Duplicity.vala:982
 msgid "No space left."
 msgstr "无剩余空间。"
 
-#: ../common/Duplicity.vala:950
+#: ../common/Duplicity.vala:936
 msgid "Invalid ID."
 msgstr "无效 ID。"
 
-#: ../common/Duplicity.vala:952
+#: ../common/Duplicity.vala:938
 msgid "Invalid secret key."
 msgstr "无效密钥。"
 
-#: ../common/Duplicity.vala:954
+#: ../common/Duplicity.vala:940
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "您的 Amazon Web Services 账户未注册 S3 服务。"
 
-#: ../common/Duplicity.vala:967
+#: ../common/Duplicity.vala:953
 msgid "S3 bucket name is not available."
 msgstr "S3 存储段名称不可用。"
 
-#: ../common/Duplicity.vala:976
+#: ../common/Duplicity.vala:967
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "读取文件“%s”时出错。"
 
-#: ../common/Duplicity.vala:978
+#: ../common/Duplicity.vala:969
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "写入文件“%s”时出错。"
 
-#: ../common/Duplicity.vala:993
+#: ../common/Duplicity.vala:984
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "“%s”中没有剩余空间。"
 
-#: ../common/Duplicity.vala:1019
+#: ../common/Duplicity.vala:992
 msgid "No backup files found"
 msgstr "未找到备份文件"
 
-#: ../common/Duplicity.vala:1070
+#: ../common/Duplicity.vala:1043
 msgid "Uploading…"
 msgstr "正在上传..."
 
-#: ../common/OperationRestore.vala:54
+#: ../common/OperationRestore.vala:52
 msgid "Restoring files…"
 msgstr "正在恢复文件..."
-
-#: ../common/OperationRestore.vala:177
-#, c-format
-msgid ""
-"Not all files could be restored. Any files that could not be restored may "
-"still be found in %s."
-msgstr "并非所有文件都可以恢复。任何无法恢复的文件仍然可以 在 %s 中找到。"
-
-#: ../common/OperationRestore.vala:186
-#, c-format
-msgid "Could not restore %s: %s"
-msgstr "无法恢复 %s：%s"
 
 #: ../common/Operation.vala:71
 msgid "Backing up…"
@@ -660,7 +651,7 @@ msgstr "正在检查有无备份..."
 msgid "Listing files…"
 msgstr "正在列出文件..."
 
-#: ../common/Operation.vala:278
+#: ../common/Operation.vala:283
 msgid "Another backup operation is already running"
 msgstr ""
 
@@ -767,7 +758,7 @@ msgid "_Backup location:"
 msgstr "_备份位置："
 
 #: ../deja-dup/AssistantRestore.vala:124
-msgid "Settings"
+msgid "Restore from Where?"
 msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:146
@@ -883,7 +874,7 @@ msgstr ""
 msgid "Scanning for files from up to a month ago…"
 msgstr ""
 
-#: ../deja-dup/AssistantRestoreMissing.vala:452
+#: ../deja-dup/AssistantRestoreMissing.vala:453
 msgid "Scanning finished"
 msgstr "扫描完成"
 
@@ -1343,16 +1334,15 @@ msgstr "每天"
 msgid "Weekly"
 msgstr "每周"
 
-#. Translators: Biweekly is every two weeks
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Biweekly"
-msgstr "每两周"
+#: ../widgets/ConfigPeriod.vala:38
+msgid "Every 2 weeks"
+msgstr ""
 
-#: ../widgets/ConfigPeriod.vala:40
+#: ../widgets/ConfigPeriod.vala:39
 msgid "Monthly"
 msgstr "每月"
 
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:83
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1478,6 +1468,9 @@ msgstr "无法显示 %s"
 #~ msgid "_Report a Problem…"
 #~ msgstr "_报告问题..."
 
+#~ msgid "GVFS FUSE is not installed"
+#~ msgstr "未安装 GVFS FUSE"
+
 #~ msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 #~ msgstr "没有 duplicity，Déjà Dup 无法工作。现在它将关闭。"
 
@@ -1486,6 +1479,16 @@ msgstr "无法显示 %s"
 #~ "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
 #~ "version %d.%d.%.2d"
 #~ msgstr "Déjà Dup 要求 duplicity 的版本至少为 %d.%d.%.2d，但只找到 了 %d.%d.%.2d 版本"
+
+#, c-format
+#~ msgid ""
+#~ "Not all files could be restored. Any files that could not be restored may "
+#~ "still be found in %s."
+#~ msgstr "并非所有文件都可以恢复。任何无法恢复的文件仍然可以 在 %s 中找到。"
+
+#, c-format
+#~ msgid "Could not restore %s: %s"
+#~ msgstr "无法恢复 %s：%s"
 
 #~ msgid "Another Déjà Dup is already running"
 #~ msgstr "已有另一个 Déjà Dup 在运行"
@@ -1504,6 +1507,9 @@ msgstr "无法显示 %s"
 
 #~ msgid "Select Backup Location"
 #~ msgstr "选择备份位置"
+
+#~ msgid "Biweekly"
+#~ msgstr "每两周"
 
 #~ msgid "About Déjà Dup"
 #~ msgstr "关于 Déjà Dup"

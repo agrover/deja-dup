@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-07 02:04-0400\n"
+"POT-Creation-Date: 2011-07-25 21:57-0400\n"
 "PO-Revision-Date: 2011-07-07 20:03+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Proxecto Trasno <proxecto@trasno.net>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-08 04:44+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-26 04:43+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -365,33 +365,33 @@ msgid_plural "Restore files from backup"
 msgstr[0] "Restaurar ficheiro desde unha copia de seguranza"
 msgstr[1] "Restaurar ficheiros desde unha copia de seguranza"
 
-#: ../common/BackendFile.vala:74
-msgid "GVFS FUSE is not installed"
-msgstr "O GVFS FUSE non está instalado"
-
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:429
+#: ../common/BackendFile.vala:86 ../common/CommonUtils.vala:429
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s en %2$s"
 
-#: ../common/BackendFile.vala:130
+#: ../common/BackendFile.vala:124
 #, c-format
 msgid "Backup will begin when %s becomes connected."
 msgstr "A copia de seguranza comezará cando se conecte %s."
 
-#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:49
+#: ../common/BackendFile.vala:131 ../common/BackendRackspace.vala:49
 #: ../common/BackendS3.vala:59 ../common/BackendU1.vala:146
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "A copia de seguranza comezará cando este dispoñíbel unha conexión de rede."
 
-#: ../common/BackendFile.vala:419
+#: ../common/BackendFile.vala:362 ../common/BackendFile.vala:426
 msgid "Backup location not available"
 msgstr "Localización de copia de seguranza non dispoñíbel"
 
-#: ../common/BackendFile.vala:419
+#: ../common/BackendFile.vala:363
+msgid "Waiting for a network connection…"
+msgstr ""
+
+#: ../common/BackendFile.vala:426
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Agardando a que «%s» se conecte..."
@@ -490,11 +490,11 @@ msgstr ""
 msgid "Connect to Ubuntu One"
 msgstr ""
 
-#: ../common/DuplicityInfo.vala:142
+#: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
 msgstr "Non foi posíbel executar o duplicity"
 
-#: ../common/DuplicityInfo.vala:147
+#: ../common/DuplicityInfo.vala:120
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -502,7 +502,7 @@ msgstr ""
 "Non foi posíbel entender a versión do duplicity.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:149
+#: ../common/DuplicityInfo.vala:122
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -511,58 +511,58 @@ msgstr ""
 "Non foi posíbel entender a versión do duplicity «%s».\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:151
+#: ../common/DuplicityInfo.vala:124
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
 
-#: ../common/DuplicityInfo.vala:155
+#: ../common/DuplicityInfo.vala:128
 msgid "Duplicity’s version is too old"
 msgstr "A versión de duplicity é demasiado antiga"
 
-#: ../common/DuplicityInfo.vala:156
+#: ../common/DuplicityInfo.vala:129
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
 "only found version %d.%d.%.2d"
 msgstr ""
 
-#: ../common/Duplicity.vala:127 ../common/Duplicity.vala:177
+#: ../common/Duplicity.vala:129 ../common/Duplicity.vala:183
 msgid "Paused (no network)"
 msgstr "Detido (sen rede)"
 
-#: ../common/Duplicity.vala:375 ../common/Duplicity.vala:383
-#: ../common/Duplicity.vala:400 ../common/Operation.vala:79
-#: ../common/Operation.vala:111
+#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
+#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
+#: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Preparando..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:431
+#: ../common/Duplicity.vala:437
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr ""
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:498
+#: ../common/Duplicity.vala:503
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "A localización da copia de seguridade é demasiado pequena. Probe con outra "
 "máis grande."
 
-#: ../common/Duplicity.vala:519
+#: ../common/Duplicity.vala:524
 msgid "Backup location does not have enough free space."
 msgstr "A localización da copia de seguridade non ten espacio abondo."
 
-#: ../common/Duplicity.vala:539 ../common/Duplicity.vala:553
+#: ../common/Duplicity.vala:543 ../common/Duplicity.vala:557
 msgid "Cleaning up…"
 msgstr "Limpando..."
 
-#: ../common/Duplicity.vala:662 ../common/Duplicity.vala:1039
+#: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
 msgid "Failed with an unknown error."
 msgstr "Produciuse un erro descoñecido."
 
-#: ../common/Duplicity.vala:887
+#: ../common/Duplicity.vala:873
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
@@ -570,15 +570,18 @@ msgstr ""
 "seguranza."
 
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:893 ../common/Duplicity.vala:972
+#. Duplicity tried to ask the user what the encryption password is.
+#. notify upper layers, if they want to do anything
+#: ../common/Duplicity.vala:879 ../common/Duplicity.vala:959
+#: ../common/Duplicity.vala:963
 msgid "Bad encryption password."
 msgstr "Contrasinal de cifrado incorrecto."
 
-#: ../common/Duplicity.vala:898
+#: ../common/Duplicity.vala:884
 msgid "Computer name changed"
 msgstr "Cambiou o nome do computador"
 
-#: ../common/Duplicity.vala:898
+#: ../common/Duplicity.vala:884
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -589,87 +592,73 @@ msgstr ""
 "computador actual é %s.   Se non esperaba isto, debería facer a copia de "
 "seguranza noutra localización."
 
-#: ../common/Duplicity.vala:911
+#: ../common/Duplicity.vala:897
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Denegouse o permiso ao crear ‘%s’."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:915 ../common/Duplicity.vala:919
+#: ../common/Duplicity.vala:901 ../common/Duplicity.vala:905
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Denegouse o permiso ao ler ‘%s’."
 
-#: ../common/Duplicity.vala:923
+#: ../common/Duplicity.vala:909
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Denegouse o permiso ao eliminar ‘%s’."
 
-#: ../common/Duplicity.vala:930
+#: ../common/Duplicity.vala:916
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "O lugar da copia de seguridade ‘%s’ non existe."
 
-#: ../common/Duplicity.vala:936 ../common/Duplicity.vala:991
+#: ../common/Duplicity.vala:922 ../common/Duplicity.vala:982
 msgid "No space left."
 msgstr "Non hay espacio"
 
-#: ../common/Duplicity.vala:950
+#: ../common/Duplicity.vala:936
 msgid "Invalid ID."
 msgstr "ID incorrecto."
 
-#: ../common/Duplicity.vala:952
+#: ../common/Duplicity.vala:938
 msgid "Invalid secret key."
 msgstr "Chave secreta incorrecta."
 
-#: ../common/Duplicity.vala:954
+#: ../common/Duplicity.vala:940
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "A súa conta Amazon Web Services non ten rexistrado o servizo S3."
 
-#: ../common/Duplicity.vala:967
+#: ../common/Duplicity.vala:953
 msgid "S3 bucket name is not available."
 msgstr "O nome do contedor S3 non está dispoñíbel."
 
-#: ../common/Duplicity.vala:976
+#: ../common/Duplicity.vala:967
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Produciuse un erro ao ler o ficheiro '%s'."
 
-#: ../common/Duplicity.vala:978
+#: ../common/Duplicity.vala:969
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Produciuse un erro ao escribir o ficheiro '%s'."
 
-#: ../common/Duplicity.vala:993
+#: ../common/Duplicity.vala:984
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Non queda espazo libre en '%s'."
 
-#: ../common/Duplicity.vala:1019
+#: ../common/Duplicity.vala:992
 msgid "No backup files found"
 msgstr "Non se atopou ningún ficheiro de copia de seguranza"
 
-#: ../common/Duplicity.vala:1070
+#: ../common/Duplicity.vala:1043
 msgid "Uploading…"
 msgstr "Subindo..."
 
-#: ../common/OperationRestore.vala:54
+#: ../common/OperationRestore.vala:52
 msgid "Restoring files…"
 msgstr "Restaurando os ficheiros..."
-
-#: ../common/OperationRestore.vala:177
-#, c-format
-msgid ""
-"Not all files could be restored. Any files that could not be restored may "
-"still be found in %s."
-msgstr ""
-"Non foi posíbel restaurar todos os ficheiros. Algúns ficheiros que non foi "
-"posíbel restaurar pode que aínda se encontren en %s."
-
-#: ../common/OperationRestore.vala:186
-#, c-format
-msgid "Could not restore %s: %s"
-msgstr "Non foi posíbel restaurar %s: %s"
 
 #: ../common/Operation.vala:71
 msgid "Backing up…"
@@ -687,7 +676,7 @@ msgstr "Buscando copias de seguranza..."
 msgid "Listing files…"
 msgstr ""
 
-#: ../common/Operation.vala:278
+#: ../common/Operation.vala:283
 msgid "Another backup operation is already running"
 msgstr ""
 
@@ -796,7 +785,7 @@ msgid "_Backup location:"
 msgstr "_Localización da copia de seguranza:"
 
 #: ../deja-dup/AssistantRestore.vala:124
-msgid "Settings"
+msgid "Restore from Where?"
 msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:146
@@ -928,7 +917,7 @@ msgid_plural "Scanning for files from about %d years ago…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../deja-dup/AssistantRestoreMissing.vala:452
+#: ../deja-dup/AssistantRestoreMissing.vala:453
 msgid "Scanning finished"
 msgstr ""
 
@@ -1408,16 +1397,15 @@ msgstr "Diariamente"
 msgid "Weekly"
 msgstr "Semanalmente"
 
-#. Translators: Biweekly is every two weeks
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Biweekly"
-msgstr "Quincenalmente"
+#: ../widgets/ConfigPeriod.vala:38
+msgid "Every 2 weeks"
+msgstr ""
 
-#: ../widgets/ConfigPeriod.vala:40
+#: ../widgets/ConfigPeriod.vala:39
 msgid "Monthly"
 msgstr "Mensualmente"
 
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:83
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1562,6 +1550,9 @@ msgstr "Non foi posíbel mostrar %s"
 #~ msgid "_Report a Problem…"
 #~ msgstr "Informa_r dun problema..."
 
+#~ msgid "GVFS FUSE is not installed"
+#~ msgstr "O GVFS FUSE non está instalado"
+
 #~ msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 #~ msgstr ""
 #~ "Non é posíbel que Déjà Dup funcione sen duplicity.  A ferramenta pecharase."
@@ -1572,6 +1563,18 @@ msgstr "Non foi posíbel mostrar %s"
 #, c-format
 #~ msgid "No space left in %s"
 #~ msgstr "Non queda espazo en %s"
+
+#, c-format
+#~ msgid ""
+#~ "Not all files could be restored. Any files that could not be restored may "
+#~ "still be found in %s."
+#~ msgstr ""
+#~ "Non foi posíbel restaurar todos os ficheiros. Algúns ficheiros que non foi "
+#~ "posíbel restaurar pode que aínda se encontren en %s."
+
+#, c-format
+#~ msgid "Could not restore %s: %s"
+#~ msgstr "Non foi posíbel restaurar %s: %s"
 
 #~ msgid "Another Déjà Dup is already running"
 #~ msgstr "Déjà Dup xa está en execución"
@@ -1590,6 +1593,9 @@ msgstr "Non foi posíbel mostrar %s"
 
 #~ msgid "Select Backup Location"
 #~ msgstr "Seleccione a localización da copia de seguranza"
+
+#~ msgid "Biweekly"
+#~ msgstr "Quincenalmente"
 
 #~ msgid "About Déjà Dup"
 #~ msgstr "Sobre Déjà Dup"

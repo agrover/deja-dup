@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-07 02:04-0400\n"
-"PO-Revision-Date: 2011-05-23 09:38+0000\n"
+"POT-Creation-Date: 2011-07-25 21:57-0400\n"
+"PO-Revision-Date: 2011-07-24 15:50+0000\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-07-08 04:45+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-26 04:44+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -41,7 +41,7 @@ msgstr "Déjà Dup 備份工具"
 #: ../data/deja-dup-ccpanel.desktop.in.h:1
 #: ../data/deja-dup-preferences.desktop.in.in.h:1
 msgid "Back Up Now"
-msgstr ""
+msgstr "立刻備份"
 
 #: ../data/deja-dup-ccpanel.desktop.in.h:3
 #: ../data/deja-dup-preferences.desktop.in.in.h:3
@@ -53,11 +53,11 @@ msgstr "變更您的備份設定值"
 #. backups at scheduled times.
 #: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:308
 msgid "Backup Monitor"
-msgstr ""
+msgstr "備份監視器"
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
 msgid "Schedules backups at regular intervals"
-msgstr ""
+msgstr "為定期備份排程"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 msgid "Amazon S3 Access Key ID"
@@ -95,7 +95,7 @@ msgstr "保留備份多久"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:9
 msgid "How often to periodically back up"
-msgstr "要多久 (週期性) 備份一次"
+msgstr "要多久 (定期) 備份一次"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:10
 msgid "Icon of the external volume"
@@ -166,7 +166,7 @@ msgstr "Ubuntu One 資料夾"
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "The first time Déjà Dup checked whether it should prompt about backing up"
-msgstr ""
+msgstr "Déjà Dup 是否該提示備份的第一次檢查時間"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid ""
@@ -262,6 +262,9 @@ msgid ""
 "don’t know about backups. This time should be either ‘disabled’ to turn off "
 "this check or in ISO 8601 format."
 msgstr ""
+"當使用者登入時，Déjà Dup "
+"監視器會檢查是否該提示你備份。這個功能是為了提高不知道備份是什麼的使用者的發現率。這裡的時間可以是「disabled」表示關閉檢查，或是採用 ISO "
+"8601 格式。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
@@ -278,7 +281,7 @@ msgstr "是否要自動於固定排程備份。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Whether to periodically back up"
-msgstr "是否要週期性備份"
+msgstr "是否要定期備份"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid "Whether to request the root password"
@@ -336,32 +339,32 @@ msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "從備份還原檔案"
 
-#: ../common/BackendFile.vala:74
-msgid "GVFS FUSE is not installed"
-msgstr "GVFS FUSE 未安裝"
-
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:429
+#: ../common/BackendFile.vala:86 ../common/CommonUtils.vala:429
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%2$s 上的 %1$s"
 
-#: ../common/BackendFile.vala:130
+#: ../common/BackendFile.vala:124
 #, c-format
 msgid "Backup will begin when %s becomes connected."
 msgstr "當 %s 完成連接後將開始備份。"
 
-#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:49
+#: ../common/BackendFile.vala:131 ../common/BackendRackspace.vala:49
 #: ../common/BackendS3.vala:59 ../common/BackendU1.vala:146
 msgid "Backup will begin when a network connection becomes available."
 msgstr "當網路連線可用時備份將開始。"
 
-#: ../common/BackendFile.vala:419
+#: ../common/BackendFile.vala:362 ../common/BackendFile.vala:426
 msgid "Backup location not available"
 msgstr "備份位置無法使用"
 
-#: ../common/BackendFile.vala:419
+#: ../common/BackendFile.vala:363
+msgid "Waiting for a network connection…"
+msgstr "正在等候網路連線..."
+
+#: ../common/BackendFile.vala:426
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "正在等候「%s」完成連接..."
@@ -460,11 +463,11 @@ msgstr "登入 Ubuntu One…"
 msgid "Connect to Ubuntu One"
 msgstr "連接至 Ubuntu One"
 
-#: ../common/DuplicityInfo.vala:142
+#: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
 msgstr "無法執行 duplicity"
 
-#: ../common/DuplicityInfo.vala:147
+#: ../common/DuplicityInfo.vala:120
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -472,7 +475,7 @@ msgstr ""
 "無法得知 duplicity 版本。\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:149
+#: ../common/DuplicityInfo.vala:122
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -481,70 +484,73 @@ msgstr ""
 "無法得知 duplicity 版本「%s」。\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:151
+#: ../common/DuplicityInfo.vala:124
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
-msgstr ""
+msgstr "若沒有 duplicity，Déjà Dup 備份工具就無法運作。即將關閉。"
 
-#: ../common/DuplicityInfo.vala:155
+#: ../common/DuplicityInfo.vala:128
 msgid "Duplicity’s version is too old"
 msgstr "Duplicity 的版本過舊"
 
-#: ../common/DuplicityInfo.vala:156
+#: ../common/DuplicityInfo.vala:129
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
 "only found version %d.%d.%.2d"
-msgstr ""
+msgstr "Déjà Dup 備份工具需要 %d.%d.%.2d 版以上的 duplicity，但是只找到 %d.%d.%.2d 版"
 
-#: ../common/Duplicity.vala:127 ../common/Duplicity.vala:177
+#: ../common/Duplicity.vala:129 ../common/Duplicity.vala:183
 msgid "Paused (no network)"
 msgstr "已暫停 (無網路)"
 
-#: ../common/Duplicity.vala:375 ../common/Duplicity.vala:383
-#: ../common/Duplicity.vala:400 ../common/Operation.vala:79
-#: ../common/Operation.vala:111
+#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
+#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
+#: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "正在準備..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:431
+#: ../common/Duplicity.vala:437
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "無法還原「%s」：非有效的檔案位置"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:498
+#: ../common/Duplicity.vala:503
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "備份位置空間太小。請嘗試使用有更多空間的位置。"
 
-#: ../common/Duplicity.vala:519
+#: ../common/Duplicity.vala:524
 msgid "Backup location does not have enough free space."
 msgstr "備份位置沒有足夠可用空間。"
 
-#: ../common/Duplicity.vala:539 ../common/Duplicity.vala:553
+#: ../common/Duplicity.vala:543 ../common/Duplicity.vala:557
 msgid "Cleaning up…"
 msgstr "正在清理..."
 
-#: ../common/Duplicity.vala:662 ../common/Duplicity.vala:1039
+#: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
 msgid "Failed with an unknown error."
 msgstr "失敗伴隨未知錯誤。"
 
-#: ../common/Duplicity.vala:887
+#: ../common/Duplicity.vala:873
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "無法還原「%s」：在備份內找不到檔案"
 
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:893 ../common/Duplicity.vala:972
+#. Duplicity tried to ask the user what the encryption password is.
+#. notify upper layers, if they want to do anything
+#: ../common/Duplicity.vala:879 ../common/Duplicity.vala:959
+#: ../common/Duplicity.vala:963
 msgid "Bad encryption password."
 msgstr "不良的加密密碼。"
 
-#: ../common/Duplicity.vala:898
+#: ../common/Duplicity.vala:884
 msgid "Computer name changed"
 msgstr "電腦名稱已變更"
 
-#: ../common/Duplicity.vala:898
+#: ../common/Duplicity.vala:884
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -552,85 +558,73 @@ msgid ""
 "location."
 msgstr "現存的備份其電腦名稱為 %s，但是目前的電腦名稱為 %s。若這是您未預期的問題，建議您應該備份至不同位置。"
 
-#: ../common/Duplicity.vala:911
+#: ../common/Duplicity.vala:897
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "當嘗試建立「%s」時不被許可。"
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:915 ../common/Duplicity.vala:919
+#: ../common/Duplicity.vala:901 ../common/Duplicity.vala:905
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "當嘗試讀取「%s」時不被許可。"
 
-#: ../common/Duplicity.vala:923
+#: ../common/Duplicity.vala:909
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "當嘗試刪除「%s」時不被許可。"
 
-#: ../common/Duplicity.vala:930
+#: ../common/Duplicity.vala:916
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "備份位置「%s」不存在。"
 
-#: ../common/Duplicity.vala:936 ../common/Duplicity.vala:991
+#: ../common/Duplicity.vala:922 ../common/Duplicity.vala:982
 msgid "No space left."
 msgstr "沒有剩餘空間。"
 
-#: ../common/Duplicity.vala:950
+#: ../common/Duplicity.vala:936
 msgid "Invalid ID."
 msgstr "無效的 ID。"
 
-#: ../common/Duplicity.vala:952
+#: ../common/Duplicity.vala:938
 msgid "Invalid secret key."
 msgstr "無效的秘密金鑰。"
 
-#: ../common/Duplicity.vala:954
+#: ../common/Duplicity.vala:940
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "您的 Amazon 網路服務帳號未登入 S3 服務。"
 
-#: ../common/Duplicity.vala:967
+#: ../common/Duplicity.vala:953
 msgid "S3 bucket name is not available."
 msgstr "S3 bucket 名稱不可用。"
 
-#: ../common/Duplicity.vala:976
+#: ../common/Duplicity.vala:967
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "讀取檔案發生錯誤「%s」。"
 
-#: ../common/Duplicity.vala:978
+#: ../common/Duplicity.vala:969
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "寫入檔案「%s」發生錯誤。"
 
-#: ../common/Duplicity.vala:993
+#: ../common/Duplicity.vala:984
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "「%s」內沒有剩餘空間。"
 
-#: ../common/Duplicity.vala:1019
+#: ../common/Duplicity.vala:992
 msgid "No backup files found"
 msgstr "找不到備份檔案"
 
-#: ../common/Duplicity.vala:1070
+#: ../common/Duplicity.vala:1043
 msgid "Uploading…"
 msgstr "正在上傳..."
 
-#: ../common/OperationRestore.vala:54
+#: ../common/OperationRestore.vala:52
 msgid "Restoring files…"
 msgstr "正在還原檔案..."
-
-#: ../common/OperationRestore.vala:177
-#, c-format
-msgid ""
-"Not all files could be restored. Any files that could not be restored may "
-"still be found in %s."
-msgstr "不是所有的檔案都能還原。任何無法還原的檔案也許在 %s 內能找到。"
-
-#: ../common/OperationRestore.vala:186
-#, c-format
-msgid "Could not restore %s: %s"
-msgstr "無法還原 %s：%s"
 
 #: ../common/Operation.vala:71
 msgid "Backing up…"
@@ -648,9 +642,9 @@ msgstr "正在檢查備份..."
 msgid "Listing files…"
 msgstr "正在列出檔案..."
 
-#: ../common/Operation.vala:278
+#: ../common/Operation.vala:283
 msgid "Another backup operation is already running"
-msgstr ""
+msgstr "另一個備份操作正在執行中"
 
 #: ../deja-dup/AssistantBackup.vala:31
 msgctxt "back up is verb"
@@ -696,14 +690,14 @@ msgstr "詳細資料(_D)"
 
 #: ../deja-dup/AssistantOperation.vala:297
 msgid "_Password-protect your backup"
-msgstr ""
+msgstr "以密碼保護您的備份(_P)"
 
 #: ../deja-dup/AssistantOperation.vala:310
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
-msgstr ""
+msgstr "您以後需要密碼才能還原檔案。您可能會想要把它抄下來。"
 
 #: ../deja-dup/AssistantOperation.vala:325
 msgid "E_ncryption password:"
@@ -724,7 +718,7 @@ msgstr "記住密碼(_R)"
 
 #: ../deja-dup/AssistantOperation.vala:371
 msgid "_Allow restoring without a password"
-msgstr ""
+msgstr "允許不用密碼就能還原(_A)"
 
 #: ../deja-dup/AssistantOperation.vala:438
 msgid "Summary"
@@ -732,7 +726,7 @@ msgstr "摘要"
 
 #: ../deja-dup/AssistantOperation.vala:719
 msgid "Require Password?"
-msgstr ""
+msgstr "要求密碼？"
 
 #: ../deja-dup/AssistantOperation.vala:721
 msgid "Encryption Password Needed"
@@ -740,7 +734,7 @@ msgstr "需要加密密碼"
 
 #: ../deja-dup/AssistantOperation.vala:764
 msgid "Backup encryption password"
-msgstr ""
+msgstr "備份加密密碼"
 
 #: ../deja-dup/AssistantRestore.vala:68
 msgid "Restore"
@@ -755,7 +749,7 @@ msgid "_Backup location:"
 msgstr "備份位置(_B)："
 
 #: ../deja-dup/AssistantRestore.vala:124
-msgid "Settings"
+msgid "Restore from Where?"
 msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:146
@@ -861,15 +855,15 @@ msgstr "要還原哪些檔案？"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:346
 msgid "Scanning for files from up to a day ago…"
-msgstr ""
+msgstr "正在掃描一天前的檔案..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:349
 msgid "Scanning for files from up to a week ago…"
-msgstr ""
+msgstr "正在掃描一週前的檔案..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:352
 msgid "Scanning for files from up to a month ago…"
-msgstr ""
+msgstr "正在掃描一個月前的檔案..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:356
 #, c-format
@@ -883,7 +877,7 @@ msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
 msgstr[0] "正在掃描 %d 年前的檔案..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:452
+#: ../deja-dup/AssistantRestoreMissing.vala:453
 msgid "Scanning finished"
 msgstr "掃描完成"
 
@@ -989,30 +983,30 @@ msgstr "網域(_D)："
 
 #: ../deja-dup/Prompt.vala:37
 msgid "Keep your files safe by backing up regularly"
-msgstr ""
+msgstr "定期備份來保護檔案安全"
 
 #: ../deja-dup/Prompt.vala:42
 msgid ""
 "Important documents, data, and settings can be protected by storing them in "
 "a backup. In the case of a disaster, you would be able to recover them from "
 "that backup."
-msgstr ""
+msgstr "重要的文件、資料、設定可以透過備份的儲存而受到保護。若發生意外，您可以從該備份檔將它們還原。"
 
 #: ../deja-dup/Prompt.vala:48
 msgid "_Don't Show Again"
-msgstr ""
+msgstr "不要再顯示(_D)"
 
 #: ../deja-dup/Prompt.vala:50
 msgid "Don't Show Again"
-msgstr ""
+msgstr "不要再顯示"
 
 #: ../deja-dup/Prompt.vala:56
 msgid "_Open Backup Settings"
-msgstr ""
+msgstr "開啟備份設定(_O)"
 
 #: ../deja-dup/Prompt.vala:58
 msgid "Open Backup Settings"
-msgstr ""
+msgstr "開啟備份設定"
 
 #: ../deja-dup/StatusIcon.vala:105
 msgid "_Delay Backup"
@@ -1028,7 +1022,7 @@ msgstr "略過備份(_S)"
 
 #: ../deja-dup/StatusIcon.vala:140
 msgid "Backup completed"
-msgstr ""
+msgstr "備份已完成"
 
 #: ../deja-dup/StatusIcon.vala:178
 msgid "Déjà Du_p"
@@ -1059,7 +1053,7 @@ msgstr "只顯示我的備份設定值(_S)"
 
 #: ../preferences/Preferences.vala:132
 msgid "Categories"
-msgstr ""
+msgstr "類別"
 
 #: ../preferences/Preferences.vala:159
 msgid "Automatic _backups:"
@@ -1194,7 +1188,7 @@ msgstr "否"
 
 #: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
 msgid "Home"
-msgstr ""
+msgstr "家"
 
 #: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
 msgid "Trash"
@@ -1344,16 +1338,15 @@ msgstr "每天"
 msgid "Weekly"
 msgstr "每週"
 
-#. Translators: Biweekly is every two weeks
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Biweekly"
-msgstr "隔週"
+#: ../widgets/ConfigPeriod.vala:38
+msgid "Every 2 weeks"
+msgstr ""
 
-#: ../widgets/ConfigPeriod.vala:40
+#: ../widgets/ConfigPeriod.vala:39
 msgid "Monthly"
 msgstr "每月"
 
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:83
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1486,6 +1479,13 @@ msgstr "無法顯示 %s"
 #~ msgid "No filenames provided"
 #~ msgstr "沒有提供檔案名稱"
 
+#~ msgid "GVFS FUSE is not installed"
+#~ msgstr "GVFS FUSE 未安裝"
+
+#, c-format
+#~ msgid "Could not restore %s: %s"
+#~ msgstr "無法還原 %s：%s"
+
 #~ msgid "Home Folder"
 #~ msgstr "家資料夾"
 
@@ -1497,6 +1497,12 @@ msgstr "無法顯示 %s"
 #~ "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
 #~ "version %d.%d.%.2d"
 #~ msgstr "Déjà Dup 需要至少 %d.%d.%.2d 版的 duplicity，但只找到 %d.%d.%.2d 版"
+
+#, c-format
+#~ msgid ""
+#~ "Not all files could be restored. Any files that could not be restored may "
+#~ "still be found in %s."
+#~ msgstr "不是所有的檔案都能還原。任何無法還原的檔案也許在 %s 內能找到。"
 
 #~ msgid "Another Déjà Dup is already running"
 #~ msgstr "另一個 Déjà Dup 已經在執行中"
@@ -1512,6 +1518,9 @@ msgstr "無法顯示 %s"
 
 #~ msgid "Select Backup Location"
 #~ msgstr "選取備份位置"
+
+#~ msgid "Biweekly"
+#~ msgstr "隔週"
 
 #~ msgid ""
 #~ "This program is distributed in the hope that it will be useful, but WITHOUT "
@@ -1729,3 +1738,6 @@ msgstr "無法顯示 %s"
 
 #~ msgid "Déjà Dup encryption password"
 #~ msgstr "Déjà Dup 加密密碼"
+
+#~ msgid "Settings"
+#~ msgstr "設定值"

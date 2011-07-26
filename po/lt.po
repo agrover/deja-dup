@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-07 02:04-0400\n"
+"POT-Creation-Date: 2011-07-25 21:57-0400\n"
 "PO-Revision-Date: 2011-07-03 12:21+0000\n"
 "Last-Translator: Aurimas Fišeras <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-07-08 04:45+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-26 04:43+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -380,32 +380,32 @@ msgstr[0] "Atkurti failą iš atsarginės kopijos"
 msgstr[1] "Atkurti failus iš atsarginės kopijos"
 msgstr[2] "Atkurti failus iš atsarginės kopijos"
 
-#: ../common/BackendFile.vala:74
-msgid "GVFS FUSE is not installed"
-msgstr "GVFS FUSE neįdiegtas"
-
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:429
+#: ../common/BackendFile.vala:86 ../common/CommonUtils.vala:429
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s laikmenoje %2$s"
 
-#: ../common/BackendFile.vala:130
+#: ../common/BackendFile.vala:124
 #, c-format
 msgid "Backup will begin when %s becomes connected."
 msgstr "Atsarginės kopijos darymas prasidės, kai %s bus prijungtas."
 
-#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:49
+#: ../common/BackendFile.vala:131 ../common/BackendRackspace.vala:49
 #: ../common/BackendS3.vala:59 ../common/BackendU1.vala:146
 msgid "Backup will begin when a network connection becomes available."
 msgstr "Atsarginės kopijos darymas prasidės, kai atsiras tinklo ryšys."
 
-#: ../common/BackendFile.vala:419
+#: ../common/BackendFile.vala:362 ../common/BackendFile.vala:426
 msgid "Backup location not available"
 msgstr "Atsarginės kopijos vieta neprieinama"
 
-#: ../common/BackendFile.vala:419
+#: ../common/BackendFile.vala:363
+msgid "Waiting for a network connection…"
+msgstr ""
+
+#: ../common/BackendFile.vala:426
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Laukiama kol „%s“ bus prijungtas..."
@@ -506,11 +506,11 @@ msgstr "Prisijungti prie „Ubuntu One“..."
 msgid "Connect to Ubuntu One"
 msgstr "Prisijungti prie „Ubuntu One“"
 
-#: ../common/DuplicityInfo.vala:142
+#: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
 msgstr "Nepavyko paleisiti duplicity"
 
-#: ../common/DuplicityInfo.vala:147
+#: ../common/DuplicityInfo.vala:120
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -518,7 +518,7 @@ msgstr ""
 "Nepavyko suprasti duplicity versijos.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:149
+#: ../common/DuplicityInfo.vala:122
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -527,18 +527,18 @@ msgstr ""
 "Nepavyko suprasti duplicity versijos „%s“.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:151
+#: ../common/DuplicityInfo.vala:124
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
 "Be duplicity Déjà Dup atsarginių kopijų įrankis negali veikti. Jis bus "
 "uždarytas."
 
-#: ../common/DuplicityInfo.vala:155
+#: ../common/DuplicityInfo.vala:128
 msgid "Duplicity’s version is too old"
 msgstr "Duplicity versija yra per sena"
 
-#: ../common/DuplicityInfo.vala:156
+#: ../common/DuplicityInfo.vala:129
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -547,54 +547,57 @@ msgstr ""
 "Déjà Dup atsarginių kopijų įrankiui reikalinga „duplicity“ programos versija "
 "%d.%d.%.2d ar naujasnė, bet rasta tik versija %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:127 ../common/Duplicity.vala:177
+#: ../common/Duplicity.vala:129 ../common/Duplicity.vala:183
 msgid "Paused (no network)"
 msgstr "Pristabdyta (nėra tinklo)"
 
-#: ../common/Duplicity.vala:375 ../common/Duplicity.vala:383
-#: ../common/Duplicity.vala:400 ../common/Operation.vala:79
-#: ../common/Operation.vala:111
+#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
+#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
+#: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Ruošiamasi..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:431
+#: ../common/Duplicity.vala:437
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Nepavyko atkurti „%s“: neteisinga failo vieta"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:498
+#: ../common/Duplicity.vala:503
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "Atsarginės kopijos vieta per maža. Mėginkite naudoti kitą vietą."
 
-#: ../common/Duplicity.vala:519
+#: ../common/Duplicity.vala:524
 msgid "Backup location does not have enough free space."
 msgstr "Atsarginės kopijos vieta turi nepakankamai laisvos vietos."
 
-#: ../common/Duplicity.vala:539 ../common/Duplicity.vala:553
+#: ../common/Duplicity.vala:543 ../common/Duplicity.vala:557
 msgid "Cleaning up…"
 msgstr "Tvarkomasi..."
 
-#: ../common/Duplicity.vala:662 ../common/Duplicity.vala:1039
+#: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
 msgid "Failed with an unknown error."
 msgstr "Nepavyko su nežinoma klaida."
 
-#: ../common/Duplicity.vala:887
+#: ../common/Duplicity.vala:873
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Nepavyko atkurti „%s“: failas nerastas atsarginėje kopijoje"
 
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:893 ../common/Duplicity.vala:972
+#. Duplicity tried to ask the user what the encryption password is.
+#. notify upper layers, if they want to do anything
+#: ../common/Duplicity.vala:879 ../common/Duplicity.vala:959
+#: ../common/Duplicity.vala:963
 msgid "Bad encryption password."
 msgstr "Blogas užšifravimo slaptažodis."
 
-#: ../common/Duplicity.vala:898
+#: ../common/Duplicity.vala:884
 msgid "Computer name changed"
 msgstr "Kompiuterio vardas pasikeitė"
 
-#: ../common/Duplicity.vala:898
+#: ../common/Duplicity.vala:884
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -605,87 +608,73 @@ msgstr ""
 "kompiuterio vardas yra %s. Jei tai yra netikėta, turėtumėte daryti atsarginę "
 "kopiją į kitą vietą."
 
-#: ../common/Duplicity.vala:911
+#: ../common/Duplicity.vala:897
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Leidimas nesuteiktas mėginant sukurti „%s“."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:915 ../common/Duplicity.vala:919
+#: ../common/Duplicity.vala:901 ../common/Duplicity.vala:905
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Leidimas nesuteiktas mėginant perskaityti „%s“."
 
-#: ../common/Duplicity.vala:923
+#: ../common/Duplicity.vala:909
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Leidimas nesuteiktas mėginant pašalinti „%s“."
 
-#: ../common/Duplicity.vala:930
+#: ../common/Duplicity.vala:916
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Atsarginės kopijos vieta „%s“ neegzistuoja."
 
-#: ../common/Duplicity.vala:936 ../common/Duplicity.vala:991
+#: ../common/Duplicity.vala:922 ../common/Duplicity.vala:982
 msgid "No space left."
 msgstr "Neliko vietos."
 
-#: ../common/Duplicity.vala:950
+#: ../common/Duplicity.vala:936
 msgid "Invalid ID."
 msgstr "Neteisingas identifikatorius."
 
-#: ../common/Duplicity.vala:952
+#: ../common/Duplicity.vala:938
 msgid "Invalid secret key."
 msgstr "Neteisingas slaptas raktas."
 
-#: ../common/Duplicity.vala:954
+#: ../common/Duplicity.vala:940
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Jūsų Amazon Web Services paskyroje nėra užregistruota S3 paslauga."
 
-#: ../common/Duplicity.vala:967
+#: ../common/Duplicity.vala:953
 msgid "S3 bucket name is not available."
 msgstr "S3 kaušo vardas neprieinamas."
 
-#: ../common/Duplicity.vala:976
+#: ../common/Duplicity.vala:967
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Klaida skaitant failą „%s“."
 
-#: ../common/Duplicity.vala:978
+#: ../common/Duplicity.vala:969
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Klaida rašant failą „%s“."
 
-#: ../common/Duplicity.vala:993
+#: ../common/Duplicity.vala:984
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Neliko vietos „%s“."
 
-#: ../common/Duplicity.vala:1019
+#: ../common/Duplicity.vala:992
 msgid "No backup files found"
 msgstr "Nerastas nė vienas atsarginės kopijos failas"
 
-#: ../common/Duplicity.vala:1070
+#: ../common/Duplicity.vala:1043
 msgid "Uploading…"
 msgstr "Išsiunčiama..."
 
-#: ../common/OperationRestore.vala:54
+#: ../common/OperationRestore.vala:52
 msgid "Restoring files…"
 msgstr "Atkuriami failai..."
-
-#: ../common/OperationRestore.vala:177
-#, c-format
-msgid ""
-"Not all files could be restored. Any files that could not be restored may "
-"still be found in %s."
-msgstr ""
-"Ne visus failus pavyko atkurti. Failai, kurių nepavyko atkurti gali būti "
-"rasti %s."
-
-#: ../common/OperationRestore.vala:186
-#, c-format
-msgid "Could not restore %s: %s"
-msgstr "Nepavyko atkurti %s: %s"
 
 #: ../common/Operation.vala:71
 msgid "Backing up…"
@@ -703,7 +692,7 @@ msgstr "Ieškoma atsarginių kopijų..."
 msgid "Listing files…"
 msgstr "Gaunamas failų sąrašas..."
 
-#: ../common/Operation.vala:278
+#: ../common/Operation.vala:283
 msgid "Another backup operation is already running"
 msgstr ""
 
@@ -812,8 +801,8 @@ msgid "_Backup location:"
 msgstr "_Atsarginės kopijos vieta:"
 
 #: ../deja-dup/AssistantRestore.vala:124
-msgid "Settings"
-msgstr "Nuostatos"
+msgid "Restore from Where?"
+msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date:"
@@ -946,7 +935,7 @@ msgid_plural "Scanning for files from about %d years ago…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../deja-dup/AssistantRestoreMissing.vala:452
+#: ../deja-dup/AssistantRestoreMissing.vala:453
 msgid "Scanning finished"
 msgstr "Peržiūra baigta"
 
@@ -1438,16 +1427,15 @@ msgstr "Kas dieną"
 msgid "Weekly"
 msgstr "Kas savaitę"
 
-#. Translators: Biweekly is every two weeks
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Biweekly"
-msgstr "Kas dvi savaites"
+#: ../widgets/ConfigPeriod.vala:38
+msgid "Every 2 weeks"
+msgstr ""
 
-#: ../widgets/ConfigPeriod.vala:40
+#: ../widgets/ConfigPeriod.vala:39
 msgid "Monthly"
 msgstr "Kas mėnesį"
 
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:83
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1593,6 +1581,9 @@ msgstr "Nepavyko parodyti %s"
 #~ msgid "Show _Progress"
 #~ msgstr "Rodyti _eigą"
 
+#~ msgid "GVFS FUSE is not installed"
+#~ msgstr "GVFS FUSE neįdiegtas"
+
 #~ msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 #~ msgstr "Déjà Dup negali funkcionuoti be duplicity. Déjà Dup užsidarys."
 
@@ -1607,6 +1598,18 @@ msgstr "Nepavyko parodyti %s"
 #~ msgid "Checking for Backups"
 #~ msgstr "Ieškoma atsarginių kopijų"
 
+#, c-format
+#~ msgid ""
+#~ "Not all files could be restored. Any files that could not be restored may "
+#~ "still be found in %s."
+#~ msgstr ""
+#~ "Ne visus failus pavyko atkurti. Failai, kurių nepavyko atkurti gali būti "
+#~ "rasti %s."
+
+#, c-format
+#~ msgid "Could not restore %s: %s"
+#~ msgstr "Nepavyko atkurti %s: %s"
+
 #~ msgid "Another Déjà Dup is already running"
 #~ msgstr "Déjà Dup jau paleistas"
 
@@ -1618,6 +1621,9 @@ msgstr "Nepavyko parodyti %s"
 
 #~ msgid "Select Backup Location"
 #~ msgstr "Pasirinkite atsarginės kopijos vietą"
+
+#~ msgid "Biweekly"
+#~ msgstr "Kas dvi savaites"
 
 #~ msgid ""
 #~ "You should have received a copy of the GNU General Public License along with "
@@ -1687,3 +1693,6 @@ msgstr "Nepavyko parodyti %s"
 
 #~ msgid "Another Déjà Dup Backup Tool operation is already running"
 #~ msgstr "Jau vykdoma kita Déjà Dup atsarginių kopijų įrankio operacija"
+
+#~ msgid "Settings"
+#~ msgstr "Nuostatos"

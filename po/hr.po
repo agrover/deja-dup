@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-07 02:04-0400\n"
-"PO-Revision-Date: 2011-07-07 17:03+0000\n"
+"POT-Creation-Date: 2011-07-25 21:57-0400\n"
+"PO-Revision-Date: 2011-07-22 21:34+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-07-08 04:45+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-26 04:44+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -291,6 +291,10 @@ msgid ""
 "don’t know about backups. This time should be either ‘disabled’ to turn off "
 "this check or in ISO 8601 format."
 msgstr ""
+"Kada se korisnik prijavi, Déjà Dup nadziratelj provjerava treba li upozoriti "
+"o stvaranju sigurnosne kopije. To se koristi za povećanje mogućnosti "
+"korisnika koji nisu upoznati sa sigurnosnim kopiranjem. Ovaj put trebali "
+"biste ili \"onemogući\" da isključite ovu provjeru ili u ISO-8601 formatu."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
@@ -379,32 +383,32 @@ msgstr[0] "Vrati datoteku iz sigurnosne kopije"
 msgstr[1] "Vrati datoteke iz sigurnosne kopije"
 msgstr[2] "Vrati datoteka iz sigurnosne kopije"
 
-#: ../common/BackendFile.vala:74
-msgid "GVFS FUSE is not installed"
-msgstr "GVFS FUSE nije instaliran"
-
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:92 ../common/CommonUtils.vala:429
+#: ../common/BackendFile.vala:86 ../common/CommonUtils.vala:429
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s na %2$s"
 
-#: ../common/BackendFile.vala:130
+#: ../common/BackendFile.vala:124
 #, c-format
 msgid "Backup will begin when %s becomes connected."
 msgstr "Sigurnosno kopiranje će početi kada % s postane povezano."
 
-#: ../common/BackendFile.vala:137 ../common/BackendRackspace.vala:49
+#: ../common/BackendFile.vala:131 ../common/BackendRackspace.vala:49
 #: ../common/BackendS3.vala:59 ../common/BackendU1.vala:146
 msgid "Backup will begin when a network connection becomes available."
 msgstr "Sigurnosno kopiranje će početi kada mrežna veza postane dostupna."
 
-#: ../common/BackendFile.vala:419
+#: ../common/BackendFile.vala:362 ../common/BackendFile.vala:426
 msgid "Backup location not available"
 msgstr "Lokacija sigurnosne kopije nije dostupna"
 
-#: ../common/BackendFile.vala:419
+#: ../common/BackendFile.vala:363
+msgid "Waiting for a network connection…"
+msgstr "Čekam spajanje na mrežu..."
+
+#: ../common/BackendFile.vala:426
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Čekanje '%s' da postane spojeno..."
@@ -505,11 +509,11 @@ msgstr "Prijavite se na Ubuntu One..."
 msgid "Connect to Ubuntu One"
 msgstr "Povezivanje sa Ubuntu One"
 
-#: ../common/DuplicityInfo.vala:142
+#: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
 msgstr "Nije moguće pokrenuti dvostruko"
 
-#: ../common/DuplicityInfo.vala:147
+#: ../common/DuplicityInfo.vala:120
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -517,7 +521,7 @@ msgstr ""
 "Nije moguće razumjeti dvostruku verziju.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:149
+#: ../common/DuplicityInfo.vala:122
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -526,18 +530,18 @@ msgstr ""
 "Nije moguće razumjeti dvostruku verziju ‘%s’.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:151
+#: ../common/DuplicityInfo.vala:124
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
 "Bez dvostrukosti, Déjà Dup alat sigurnosnog kopiranja ne može funkcionirati. "
 "Sada će se zatvoriti."
 
-#: ../common/DuplicityInfo.vala:155
+#: ../common/DuplicityInfo.vala:128
 msgid "Duplicity’s version is too old"
 msgstr "Verzija dvostrukosti je prestara"
 
-#: ../common/DuplicityInfo.vala:156
+#: ../common/DuplicityInfo.vala:129
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -546,57 +550,60 @@ msgstr ""
 "Déjà Dup alat sigurnosnog kopiranja zahtjeva najmanje verziju %d.%d.%.2d "
 "dvostrukosti, pronađena verzija je %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:127 ../common/Duplicity.vala:177
+#: ../common/Duplicity.vala:129 ../common/Duplicity.vala:183
 msgid "Paused (no network)"
 msgstr "Pauzirano (nema mreže)"
 
-#: ../common/Duplicity.vala:375 ../common/Duplicity.vala:383
-#: ../common/Duplicity.vala:400 ../common/Operation.vala:79
-#: ../common/Operation.vala:111
+#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
+#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
+#: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Pripremanje..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:431
+#: ../common/Duplicity.vala:437
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Nije moguće vratiti ‘%s’: nije valjana lokacija datoteke"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:498
+#: ../common/Duplicity.vala:503
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Lokacija sigurnosne kopije je premala. Probajte odabrati lokaciju sa više "
 "slobodnog prostora."
 
-#: ../common/Duplicity.vala:519
+#: ../common/Duplicity.vala:524
 msgid "Backup location does not have enough free space."
 msgstr "Lokacija sigurnosne kopije nema dovoljno slobodnog prostora."
 
-#: ../common/Duplicity.vala:539 ../common/Duplicity.vala:553
+#: ../common/Duplicity.vala:543 ../common/Duplicity.vala:557
 msgid "Cleaning up…"
 msgstr "Čišćenje..."
 
-#: ../common/Duplicity.vala:662 ../common/Duplicity.vala:1039
+#: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
 msgid "Failed with an unknown error."
 msgstr "Neuspješno sa nepoznatom pogreškom."
 
-#: ../common/Duplicity.vala:887
+#: ../common/Duplicity.vala:873
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
 "Nije moguće vratiti ‘%s’: Datoteka nije pronađena u sigurnosnoj kopiji"
 
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:893 ../common/Duplicity.vala:972
+#. Duplicity tried to ask the user what the encryption password is.
+#. notify upper layers, if they want to do anything
+#: ../common/Duplicity.vala:879 ../common/Duplicity.vala:959
+#: ../common/Duplicity.vala:963
 msgid "Bad encryption password."
 msgstr "Loša lozinka šifriranja."
 
-#: ../common/Duplicity.vala:898
+#: ../common/Duplicity.vala:884
 msgid "Computer name changed"
 msgstr "Naziv računala je promijenjen"
 
-#: ../common/Duplicity.vala:898
+#: ../common/Duplicity.vala:884
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -607,87 +614,73 @@ msgstr ""
 "trenutnog računala je %s. Ako je ovo neočekivano, trebali bi sigurnosno "
 "kopirati na drugu lokaciju."
 
-#: ../common/Duplicity.vala:911
+#: ../common/Duplicity.vala:897
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Dozvola odbijena kada pokušavate stvoriti ‘%s’."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:915 ../common/Duplicity.vala:919
+#: ../common/Duplicity.vala:901 ../common/Duplicity.vala:905
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Dozvola odbijena kada pokušavate čitati ‘%s’."
 
-#: ../common/Duplicity.vala:923
+#: ../common/Duplicity.vala:909
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Dozvola odbijena kada pokušavate obrisati ‘%s’."
 
-#: ../common/Duplicity.vala:930
+#: ../common/Duplicity.vala:916
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Lokacija sigurnosne ‘%s’ kopije ne postoji."
 
-#: ../common/Duplicity.vala:936 ../common/Duplicity.vala:991
+#: ../common/Duplicity.vala:922 ../common/Duplicity.vala:982
 msgid "No space left."
 msgstr "Nema slobodnog prostora."
 
-#: ../common/Duplicity.vala:950
+#: ../common/Duplicity.vala:936
 msgid "Invalid ID."
 msgstr "Pogrešan ID."
 
-#: ../common/Duplicity.vala:952
+#: ../common/Duplicity.vala:938
 msgid "Invalid secret key."
 msgstr "Pogrešan tajni ključ."
 
-#: ../common/Duplicity.vala:954
+#: ../common/Duplicity.vala:940
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Vaš Amazon Web Servis račun nije prijavljen za S3 uslugu."
 
-#: ../common/Duplicity.vala:967
+#: ../common/Duplicity.vala:953
 msgid "S3 bucket name is not available."
 msgstr "S3 naziv spremnika nije dostupan."
 
-#: ../common/Duplicity.vala:976
+#: ../common/Duplicity.vala:967
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Pgreška pri čitanju datoteke ‘%s’."
 
-#: ../common/Duplicity.vala:978
+#: ../common/Duplicity.vala:969
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Pgreška pri pisanju datoteke ‘%s’."
 
-#: ../common/Duplicity.vala:993
+#: ../common/Duplicity.vala:984
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Nema slobodnog prostora u ‘%s’."
 
-#: ../common/Duplicity.vala:1019
+#: ../common/Duplicity.vala:992
 msgid "No backup files found"
 msgstr "Nema pronađenih datoteka sigurnosne kopije"
 
-#: ../common/Duplicity.vala:1070
+#: ../common/Duplicity.vala:1043
 msgid "Uploading…"
 msgstr "Prijenos..."
 
-#: ../common/OperationRestore.vala:54
+#: ../common/OperationRestore.vala:52
 msgid "Restoring files…"
 msgstr "Vraćanje datoteka..."
-
-#: ../common/OperationRestore.vala:177
-#, c-format
-msgid ""
-"Not all files could be restored. Any files that could not be restored may "
-"still be found in %s."
-msgstr ""
-"Nije moguće vratiti sve datoteke. Svaka datoteka koju nije moguće vratiti "
-"može se pronaći u %s."
-
-#: ../common/OperationRestore.vala:186
-#, c-format
-msgid "Could not restore %s: %s"
-msgstr "Nije moguće vratit %s: %s"
 
 #: ../common/Operation.vala:71
 msgid "Backing up…"
@@ -705,7 +698,7 @@ msgstr "Provjera sigurnosnih kopija..."
 msgid "Listing files…"
 msgstr "Popis datoteka..."
 
-#: ../common/Operation.vala:278
+#: ../common/Operation.vala:283
 msgid "Another backup operation is already running"
 msgstr "Druga operacija sigurnosnog kopiranja je već pokrenuta"
 
@@ -816,8 +809,8 @@ msgid "_Backup location:"
 msgstr "_Lokacija sigurnosne kopije:"
 
 #: ../deja-dup/AssistantRestore.vala:124
-msgid "Settings"
-msgstr "Postavke"
+msgid "Restore from Where?"
+msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date:"
@@ -952,7 +945,7 @@ msgstr[0] "Pretraživanje datoteka otprilike od prije godinu dana..."
 msgstr[1] "Pretraživanje datoteka otprilike od prije %d godine..."
 msgstr[2] "Pretraživanje datoteka otprilike od prije %d godina..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:452
+#: ../deja-dup/AssistantRestoreMissing.vala:453
 msgid "Scanning finished"
 msgstr "Pretraživanje završeno"
 
@@ -1444,16 +1437,15 @@ msgstr "Dnevno"
 msgid "Weekly"
 msgstr "Tjedno"
 
-#. Translators: Biweekly is every two weeks
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Biweekly"
-msgstr "Dvotjedno"
+#: ../widgets/ConfigPeriod.vala:38
+msgid "Every 2 weeks"
+msgstr ""
 
-#: ../widgets/ConfigPeriod.vala:40
+#: ../widgets/ConfigPeriod.vala:39
 msgid "Monthly"
 msgstr "Mjesečno"
 
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:83
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1484,14 +1476,35 @@ msgstr "Nije moguće prikazati %s"
 #~ "Bilo za šifriranje vaše sigurnosne kopije datoteka u lokaciji za pohranu. "
 #~ "Preproručljivo je da ostavite ovo kao ‘true’."
 
+#~ msgid "GVFS FUSE is not installed"
+#~ msgstr "GVFS FUSE nije instaliran"
+
+#, c-format
+#~ msgid ""
+#~ "Not all files could be restored. Any files that could not be restored may "
+#~ "still be found in %s."
+#~ msgstr ""
+#~ "Nije moguće vratiti sve datoteke. Svaka datoteka koju nije moguće vratiti "
+#~ "može se pronaći u %s."
+
+#, c-format
+#~ msgid "Could not restore %s: %s"
+#~ msgstr "Nije moguće vratit %s: %s"
+
 #~ msgid "Backup files are _encrypted"
 #~ msgstr "Datoteke sigurnosne kopije su _šifrirane"
+
+#~ msgid "Settings"
+#~ msgstr "Postavke"
 
 #~ msgid "Encrypted:"
 #~ msgstr "Šifrirano:"
 
 #~ msgid "_Encrypt backup files"
 #~ msgstr "_Šifriranje datoteka sigurnosnih kopija"
+
+#~ msgid "Biweekly"
+#~ msgstr "Dvotjedno"
 
 #~ msgid "Another Déjà Dup Backup Tool operation is already running"
 #~ msgstr "Drugi Déjà Dup alat sigurnosnog kopiranja je već pokrenut"
