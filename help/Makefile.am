@@ -70,3 +70,5 @@ deja-dup-help.pot: deja-dup.pot
 
 pot: deja-dup-help.pot
 all: deja-dup-help.pot
+
+DISTCLEANFILES = deja-dup.pot deja-dup-help.pot

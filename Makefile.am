@@ -50,8 +50,7 @@ EXTRA_DIST = \
 	autogen.sh \
 	intltool-extract.in \
 	intltool-merge.in \
-	intltool-update.in \
-	gnome-doc-utils.make
+	intltool-update.in
 
 DISTCLEANFILES = \
 	intltool-extract \
