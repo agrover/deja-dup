@@ -4,13 +4,15 @@ Bug Fixes:
  • Fix crash with accessibility turned on
  • Revert change in 19.3 that sometimes caused bogus "unknown error" dialogs after a successful backup
  • Watch for changes in automatic backup settings again
-Polish:
- • Drop encryption preference and either ask during first backup or detect using existing backup
- • More layout fixups to work better with latest GTK+
- • Check for Ubuntu One support more robustly, preventing it being showin as an option when it isn't available
- • Where the Autostart-Delay key is supported, delay monitor start by two minutes
+ • Check for Ubuntu One support more robustly, preventing it being shown as an option when it isn't available
  • Workaround some NetworkManager oddities by waiting two minutes to make sure we are really connected
  • When duplicity gives us an error we don't understand, try operation again without a cache to try and workaround whatever the problem is
+Polish:
+ • Drop encryption preference and either ask during first backup or detect from existing backup
+ • More layout fixups to work better with latest GTK+
+ • Where the Autostart-Delay key is supported, delay monitor start by two minutes
+Packaging:
+ • Require Duplicity >= 0.6.8
 Translations:
  • New Albanian, Asturian, and English (Australia) translations
  • Updated Basque, Brazilian Portuguese, Bulgarian, Chinese (Traditional), Croatian, Dutch, Faroese, Finnish, French, German, Hungarian, Italian, Lithuanian, Norwegian Bokmal, Polish, Slovenian, Spanish, Swedish, Turkish, and Vietnamese translations
