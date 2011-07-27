@@ -35,7 +35,7 @@ public class ConfigLocationFile : ConfigLocationTable
                               DejaDup.FILE_PATH_KEY,
                               DejaDup.FILE_ROOT);
 
-    var browse = new Gtk.Button.with_mnemonic(_("_Browse…"));
+    var browse = new Gtk.Button.with_mnemonic(_("_Choose Folder…"));
     browse.clicked.connect(browse_clicked);
 
     hbox.pack_start(entry, true, true, 0);
