@@ -94,6 +94,7 @@ public class ConfigList : ConfigWidget
     var scroll = new Gtk.ScrolledWindow(null, null);
     scroll.hscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
     scroll.vscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
+    scroll.shadow_type = Gtk.ShadowType.IN;
 
     var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
     var vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);

@@ -144,7 +144,14 @@ public class Preferences : Gtk.Box
         notebook.page = page;
       }
     });
-    settings_page.pack_start(tree, false, false);
+
+    var scrollwin = new Gtk.ScrolledWindow(null, null);
+    scrollwin.hscrollbar_policy = Gtk.PolicyType.NEVER;
+    scrollwin.vscrollbar_policy = Gtk.PolicyType.NEVER;
+    scrollwin.shadow_type = Gtk.ShadowType.IN;
+    scrollwin.add(tree);
+
+    settings_page.pack_start(scrollwin, false, false);
 
     table = new Gtk.Grid();
     table.orientation = Gtk.Orientation.VERTICAL;
