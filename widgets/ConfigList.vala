@@ -74,7 +74,7 @@ public class ConfigList : ConfigWidget
     tree.insert_column_with_attributes(-1, null, renderer,
                                        "text", 1);
     
-    add_button = new Gtk.Button.from_stock(Gtk.Stock.ADD);
+    add_button = new Gtk.Button.with_mnemonic(_("_Add…"));
     add_button.clicked.connect(handle_add);
     accessible = add_button.get_accessible();
     if (accessible != null)
