@@ -173,7 +173,7 @@ public class Preferences : Gtk.Box
 
     w = new DejaDup.ConfigLabelLocation();
     w.set("hexpand", true);
-    label = new Gtk.Label(_("Where:"));
+    label = new Gtk.Label(_("Backup location:"));
     label.set("xalign", 0.0f,
               "yalign", 0.0f);
     label_sizes.add_widget(label);
