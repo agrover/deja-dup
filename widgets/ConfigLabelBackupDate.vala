@@ -25,7 +25,6 @@ public class ConfigLabelBackupDate : ConfigLabel
 {
   public enum Kind {LAST, NEXT}
   public Kind kind {get; construct;}
-  public bool empty {get; protected set; default = true;}
 
   public ConfigLabelBackupDate(Kind kind)
   {
@@ -90,12 +89,10 @@ public class ConfigLabelBackupDate : ConfigLabel
 
     var time = TimeVal();
     if (val == "" || !time.from_iso8601(val)) {
-      label.label = "";
-      empty = true;
+      label.label = _("None");
     }
     else {
       label.label = pretty_date_name(new DateTime.from_timeval_local(time));
-      empty = false;
     }
   }
 
@@ -104,11 +101,9 @@ public class ConfigLabelBackupDate : ConfigLabel
     var next = DejaDup.next_run_date();
     if (next != null) {
       label.label = pretty_date_name(next);
-      empty = false;
     }
     else {
-      label.label = "";
-      empty = true;
+      label.label = _("None");
     }
   }
 

@@ -208,17 +208,6 @@ public class Preferences : Gtk.Box
     label_sizes.add_widget(bdate_label);
     var bdate = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.LAST);
 
-    bdate_label.show_all();
-    bdate.show_all();
-    bdate_label.no_show_all = true;
-    bdate.no_show_all = true;
-    bdate_label.visible = !bdate.empty;
-    bdate.visible = !bdate.empty;
-    bdate.notify["empty"].connect(() => {
-      bdate_label.visible = !bdate.empty;
-      bdate.visible = !bdate.empty;
-    });
-
     table.attach(bdate_label, 0, row, 1, 1);
     table.attach(bdate, 1, row, 1, 1);
     ++row;
@@ -227,17 +216,6 @@ public class Preferences : Gtk.Box
     ndate_label.xalign = 0.0f;
     label_sizes.add_widget(ndate_label);
     var ndate = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.NEXT);
-
-    ndate_label.show_all();
-    ndate.show_all();
-    ndate_label.no_show_all = true;
-    ndate.no_show_all = true;
-    ndate_label.visible = !ndate.empty;
-    ndate.visible = !ndate.empty;
-    ndate.notify["empty"].connect(() => {
-      ndate_label.visible = !ndate.empty;
-      ndate.visible = !ndate.empty;
-    });
 
     table.attach(ndate_label, 0, row, 1, 1);
     table.attach(ndate, 1, row, 1, 1);
