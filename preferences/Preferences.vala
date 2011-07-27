@@ -189,7 +189,7 @@ public class Preferences : Gtk.Box
     table.attach(w, 1, row, 1, 1);
     ++row;
 
-    label = new Gtk.Label(_("Include files from:"));
+    label = new Gtk.Label(_("Folders to back up:"));
     label.set("xalign", 0.0f, "yalign", 0.0f);
     label_sizes.add_widget(label);
     w = new DejaDup.ConfigLabelList(DejaDup.INCLUDE_LIST_KEY);
@@ -197,7 +197,7 @@ public class Preferences : Gtk.Box
     table.attach(w, 1, row, 1, 1);
     ++row;
 
-    label = new Gtk.Label(_("Except for:"));
+    label = new Gtk.Label(_("Folders to ignore:"));
     label.set("xalign", 0.0f, "yalign", 0.0f);
     label_sizes.add_widget(label);
     w = new DejaDup.ConfigLabelList(DejaDup.EXCLUDE_LIST_KEY);
@@ -356,7 +356,7 @@ public class Preferences : Gtk.Box
     w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY);
     //w.set_size_request(300, 120);
     w.set("expand", true);
-    label = new Gtk.Label(_("Folders to ignore:"));
+    label = new Gtk.Label(_("Folders to _ignore:"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "xalign", 0.0f,
