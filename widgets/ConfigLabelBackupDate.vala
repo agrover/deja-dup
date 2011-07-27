@@ -52,6 +52,11 @@ public class ConfigLabelBackupDate : ConfigLabel
   {
       var now = new DateTime.now_local();
 
+      if (kind == Kind.NEXT && now.compare(date) > 0) {
+        // never allow next date to be in the past
+        date = now;
+      }
+
       // Check for some really simple/common friendly names
       if (is_same_day(date, now))
         return _("Today");
