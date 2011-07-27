@@ -339,43 +339,35 @@ public class Preferences : Gtk.Box
     table = new Gtk.Grid();
     table.row_spacing = 6;
     table.column_spacing = 6;
-    row = 0;
+    table.column_homogeneous = true;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
-    button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
-    w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY, button_sizes);
-    w.set_size_request(300, 80);
+    w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY);
+    //w.set_size_request(300, 80);
     w.set("expand", true);
-    label = new Gtk.Label(_("I_nclude files in folders:"));
+    label = new Gtk.Label(_("Folders to _back up:"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
-              "wrap", true,
-              "max-width-chars", 10,
+              "xalign", 0.0f,
+              "yalign", 0.0f);
+    table.attach(label, 0, 0, 1, 1);
+    table.attach(w, 0, 1, 1, 1);
+    
+    w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY);
+    //w.set_size_request(300, 120);
+    w.set("expand", true);
+    label = new Gtk.Label(_("Folders to ignore:"));
+    label.set("mnemonic-widget", w,
+              "use-underline", true,
               "xalign", 0.0f,
               "yalign", 0.0f);
     label_sizes.add_widget(label);
-    table.attach(label, 0, row, 1, 1);
-    table.attach(w, 1, row, 1, 1);
-    ++row;
-    
-    w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY, button_sizes);
-    w.set_size_request(300, 120);
-    w.set("expand", true);
-    label = new Gtk.Label(_("E_xcept files in folders:"));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "wrap", true,
-              "max-width-chars", 10,
-              "xalign", 0.0f,
-              "yalign", 0.0f);
-    label_sizes.add_widget(label);
-    table.attach(label, 0, row, 1, 1);
-    table.attach(w, 1, row, 1, 1);
-    ++row;
+    table.attach(label, 1, 0, 1, 1);
+    table.attach(w, 1, 1, 1, 1);
     
     page_box.pack_start(table, true, true, 0);
     notebook.append_page(page_box, null);
-    cat_model.insert_with_values(out iter, i, 0, _("Files"), 1, i);
+    cat_model.insert_with_values(out iter, i, 0, _("Folders"), 1, i);
     ++i;
     
     // Reset page

@@ -23,11 +23,9 @@ namespace DejaDup {
 
 public class ConfigList : ConfigWidget
 {
-  public Gtk.SizeGroup? size_group {get; construct;}
-  
-  public ConfigList(string key, Gtk.SizeGroup? sg = null, string ns="")
+  public ConfigList(string key, string ns="")
   {
-    Object(size_group: sg, key: key, ns: ns);
+    Object(key: key, ns: ns);
   }
 
   // Assumes key is simple ascii
@@ -52,8 +50,8 @@ public class ConfigList : ConfigWidget
   }
 
   Gtk.TreeView tree;
-  Gtk.Button add_button;
-  Gtk.Button remove_button;
+  Gtk.ToolButton add_button;
+  Gtk.ToolButton remove_button;
   construct {
     var model = new Gtk.ListStore(3, typeof(string), typeof(string), typeof(Icon));
     tree = new Gtk.TreeView();
@@ -73,38 +71,41 @@ public class ConfigList : ConfigWidget
     var renderer = new Gtk.CellRendererText();
     tree.insert_column_with_attributes(-1, null, renderer,
                                        "text", 1);
-    
-    add_button = new Gtk.Button.with_mnemonic(_("_Add…"));
-    add_button.clicked.connect(handle_add);
-    accessible = add_button.get_accessible();
-    if (accessible != null)
-      accessible.set_name(a11y_name + "Add");
-
-    remove_button = new Gtk.Button.from_stock(Gtk.Stock.REMOVE);
-    remove_button.clicked.connect(handle_remove);
-    accessible = remove_button.get_accessible();
-    if (accessible != null)
-      accessible.set_name(a11y_name + "Remove");
-
-    if (size_group != null) {
-      size_group.add_widget(add_button);
-      size_group.add_widget(remove_button);
-    }
 
     var scroll = new Gtk.ScrolledWindow(null, null);
     scroll.hscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
     scroll.vscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
     scroll.shadow_type = Gtk.ShadowType.IN;
-
-    var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
-    var vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
-    
-    vbox.pack_start(add_button, false, false, 0);
-    vbox.pack_start(remove_button, false, false, 0);
     scroll.add(tree);
-    hbox.pack_start(scroll, true, true, 0);
-    hbox.pack_start(vbox, false, false, 0);
-    add(hbox);
+
+    var tbar = new Gtk.Toolbar();
+    tbar.set_style(Gtk.ToolbarStyle.ICONS);
+    tbar.set_icon_size(Gtk.IconSize.SMALL_TOOLBAR);
+    tbar.set_show_arrow(false);
+
+    add_button = new Gtk.ToolButton(null, _("_Add"));
+    add_button.set_tooltip_text(_("Add"));
+    add_button.set_icon_name("list-add-symbolic");
+    add_button.clicked.connect(handle_add);
+    accessible = add_button.get_accessible();
+    if (accessible != null)
+      accessible.set_name(a11y_name + "Add");
+    tbar.insert(add_button, -1);
+
+    remove_button = new Gtk.ToolButton(null, _("_Remove"));
+    remove_button.set_tooltip_text(_("Remove"));
+    remove_button.set_icon_name("list-remove-symbolic");
+    remove_button.clicked.connect(handle_remove);
+    accessible = remove_button.get_accessible();
+    if (accessible != null)
+      accessible.set_name(a11y_name + "Remove");
+    tbar.insert(remove_button, -1);
+
+    var vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
+
+    vbox.pack_start(scroll, true, true, 0);
+    vbox.pack_start(tbar, false, false, 0);
+    add(vbox);
     
     var selection = tree.get_selection();
     selection.set_mode(Gtk.SelectionMode.MULTIPLE);
