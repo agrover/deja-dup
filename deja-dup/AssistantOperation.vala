@@ -510,6 +510,11 @@ public abstract class AssistantOperation : Assistant
      * handler functions and starts operation.
      */
     op = create_op();
+    if (op == null) {
+      show_error(_("Failed with an unknown error."), null);
+      return;
+    }
+
     op.done.connect(apply_finished);
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
     op.passphrase_required.connect(get_passphrase);

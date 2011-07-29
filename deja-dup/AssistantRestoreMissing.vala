@@ -467,6 +467,10 @@ public class AssistantRestoreMissing : AssistantRestore {
     realize();
     var xid = Gdk.X11Window.get_xid(this.get_window());
 
+    if (restore_files_remaining == null ||
+        restore_files_remaining.data.get_path() == null)
+      return null;
+
     DeletedFile restore_file = allfiles_prev.lookup(restore_files_remaining.data.get_path());
     restore_files_remaining.remove_link(restore_files_remaining);
 
