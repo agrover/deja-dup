@@ -84,6 +84,13 @@ update_include_excludes ()
 }
 
 static gboolean
+update_include_excludes_idle_cb ()
+{
+  update_include_excludes ();
+  return FALSE;
+}
+
+static gboolean
 is_dir_included(GFile *file)
 {
   GList *p;
@@ -315,7 +322,7 @@ void nautilus_module_initialize(GTypeModule *module)
                    update_include_excludes, NULL);
   g_signal_connect(settings, "changed::" DEJA_DUP_EXCLUDE_LIST_KEY,
                    update_include_excludes, NULL);
-  update_include_excludes();
+  g_idle_add(update_include_excludes_idle_cb, NULL);
 }
 
 void nautilus_module_list_types (const GType **types, int *num_types)
