@@ -65,13 +65,17 @@ update_include_excludes ()
   gchar **p;
   for (p = includes_strv; *p; p++) {
     GFile *file = deja_dup_parse_dir(*p);
-    g_object_set_data(G_OBJECT(file), "included", GINT_TO_POINTER(TRUE));
-    dirs = g_list_insert_sorted(dirs, file, (GCompareFunc)cmp_prefix);
+    if (file != NULL) {
+      g_object_set_data(G_OBJECT(file), "included", GINT_TO_POINTER(TRUE));
+      dirs = g_list_insert_sorted(dirs, file, (GCompareFunc)cmp_prefix);
+    }
   }
   for (p = excludes_strv; *p; p++) {
     GFile *file = deja_dup_parse_dir(*p);
-    g_object_set_data(G_OBJECT(file), "included", GINT_TO_POINTER(FALSE));
-    dirs = g_list_insert_sorted(dirs, file, (GCompareFunc)cmp_prefix);
+    if (file != NULL) {
+      g_object_set_data(G_OBJECT(file), "included", GINT_TO_POINTER(FALSE));
+      dirs = g_list_insert_sorted(dirs, file, (GCompareFunc)cmp_prefix);
+    }
   }
 
 
