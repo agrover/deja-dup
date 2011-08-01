@@ -23,8 +23,9 @@
 
 #include <gtk/gtk.h>
 #include <libgnome-control-center/cc-panel.h>
-#include "preferences.h"
 #include "config.h"
+
+extern void* deja_dup_preferences_new (void);
 
 #define DEJA_DUP_TYPE_PREFERENCES_PANEL deja_dup_preferences_panel_get_type()
 
