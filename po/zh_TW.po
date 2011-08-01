@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-25 21:57-0400\n"
+"POT-Creation-Date: 2011-07-27 15:10-0400\n"
 "PO-Revision-Date: 2011-07-24 15:50+0000\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh_TW@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:44+0000\n"
+"X-Launchpad-Export-Date: 2011-07-28 04:36+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -744,7 +744,7 @@ msgstr "還原"
 msgid "_Restore"
 msgstr "還原(_R)"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
 msgid "_Backup location:"
 msgstr "備份位置(_B)："
 
@@ -772,7 +772,7 @@ msgstr "為還原的檔案選擇目的地"
 msgid "Restore _folder:"
 msgstr "還原資料夾(_F)："
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location:"
 msgstr "備份位置："
 
@@ -1055,68 +1055,64 @@ msgstr "只顯示我的備份設定值(_S)"
 msgid "Categories"
 msgstr "類別"
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups:"
 msgstr "自動備份(_B)："
 
-#: ../preferences/Preferences.vala:176
-msgid "Where:"
-msgstr "位置："
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:185
-msgid "Include files from:"
-msgstr "從哪裡納入檔案："
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:193
-msgid "Except for:"
-msgstr "排除："
-
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup:"
 msgstr "最近的備份："
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup:"
 msgstr "下個自動備份："
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:251
 msgid "_Restore…"
 msgstr "還原(_R)..."
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:257
 msgid "Back Up _Now"
 msgstr "立刻備份(_N)"
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:279
 msgid "Overview"
 msgstr "概覽"
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:308
 #, c-format
 msgid "_Keep backups:"
 msgstr "保留備份(_K)："
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:324
 msgid "Storage"
 msgstr "儲存處"
 
-#: ../preferences/Preferences.vala:364
-msgid "I_nclude files in folders:"
-msgstr "納入資料夾中的檔案(_N)："
+#: ../preferences/Preferences.vala:348
+msgid "Folders to _back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:379
-msgid "E_xcept files in folders:"
-msgstr "從資料夾中排除的檔案(_X)："
+#: ../preferences/Preferences.vala:359
+msgid "Folders to _ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:393
-msgid "Files"
-msgstr "檔案"
+#: ../preferences/Preferences.vala:370
+msgid "Folders"
+msgstr ""
 
-#: ../preferences/Preferences.vala:405
+#: ../preferences/Preferences.vala:382
 msgid "How _often to back up:"
 msgstr "多久備份一次(_O)："
 
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "排程"
 
@@ -1154,29 +1150,34 @@ msgid "At least %d day"
 msgid_plural "At least %d days"
 msgstr[0] "至少 %d 天"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr "今日"
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr "昨日"
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr "明日"
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] "現在起 %d 日後"
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d 日前"
+
+#: ../widgets/ConfigLabelBackupDate.vala:92
+#: ../widgets/ConfigLabelBackupDate.vala:106
+msgid "None"
+msgstr ""
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1186,11 +1187,11 @@ msgstr "是"
 msgid "No"
 msgstr "否"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
 msgid "Home"
 msgstr "家"
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
 msgid "Trash"
 msgstr "回收筒"
 
@@ -1248,7 +1249,23 @@ msgid_plural ""
 "low on space."
 msgstr[0] "陳舊的備份將保留至少 %d 天，或是直到備份位置空間低落為止。"
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:86
+msgid "_Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:87
+msgid "Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:95
+msgid "_Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:96
+msgid "Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:189
 msgid "Choose folders"
 msgstr "選擇資料夾"
 
@@ -1307,8 +1324,8 @@ msgid "_Log in with a username"
 msgstr "以使用者名稱登入(_L)"
 
 #: ../widgets/ConfigLocationFile.vala:38
-msgid "_Browse…"
-msgstr "瀏覽(_B)…"
+msgid "_Choose Folder…"
+msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
@@ -1473,6 +1490,9 @@ msgstr "無法顯示 %s"
 #~ msgid "Include from:"
 #~ msgstr "納入："
 
+#~ msgid "Except for:"
+#~ msgstr "排除："
+
 #~ msgid "Déjà Dup backup passphrase"
 #~ msgstr "Déjà Dup 備份密語"
 
@@ -1485,6 +1505,15 @@ msgstr "無法顯示 %s"
 #, c-format
 #~ msgid "Could not restore %s: %s"
 #~ msgstr "無法還原 %s：%s"
+
+#~ msgid "Files"
+#~ msgstr "檔案"
+
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "納入資料夾中的檔案(_N)："
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "從資料夾中排除的檔案(_X)："
 
 #~ msgid "Home Folder"
 #~ msgstr "家資料夾"
@@ -1725,6 +1754,9 @@ msgstr "無法顯示 %s"
 #~ "what is available."
 #~ msgstr "備份位置的類型。若為「自動」，預設將根據可用的情況來選擇。"
 
+#~ msgid "_Browse…"
+#~ msgstr "瀏覽(_B)…"
+
 #~ msgid ""
 #~ "Déjà Dup is a simple backup tool.  It hides the complexity of backing up\n"
 #~ "the 'right way' (encrypted, off-site, and regular) and uses duplicity as\n"
@@ -1738,6 +1770,12 @@ msgstr "無法顯示 %s"
 
 #~ msgid "Déjà Dup encryption password"
 #~ msgstr "Déjà Dup 加密密碼"
+
+#~ msgid "Where:"
+#~ msgstr "位置："
+
+#~ msgid "Include files from:"
+#~ msgstr "從哪裡納入檔案："
 
 #~ msgid "Settings"
 #~ msgstr "設定值"

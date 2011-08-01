@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-25 21:57-0400\n"
+"POT-Creation-Date: 2011-07-27 15:10-0400\n"
 "PO-Revision-Date: 2011-07-23 01:16+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-07-28 04:34+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #~ msgid ""
@@ -818,7 +818,7 @@ msgstr "Restaurer"
 msgid "_Restore"
 msgstr "_Restaurer"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
 msgid "_Backup location:"
 msgstr "_Emplacement de la sauvegarde:"
 
@@ -846,7 +846,7 @@ msgstr "Choisissez une destination pour les fichiers restaurés"
 msgid "Restore _folder:"
 msgstr "Restaurer le _dossier :"
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location:"
 msgstr "Emplacement de la sauvegarde :"
 
@@ -1136,68 +1136,64 @@ msgstr "Afficher seulement mes paramètres de _sauvegarde"
 msgid "Categories"
 msgstr "Catégories"
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups:"
 msgstr "_Sauvegardes automatiques :"
 
-#: ../preferences/Preferences.vala:176
-msgid "Where:"
-msgstr "Où :"
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:185
-msgid "Include files from:"
-msgstr "Inclure les fichier de :"
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:193
-msgid "Except for:"
-msgstr "Sauf :"
-
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup:"
 msgstr "Sauvegarde la plus récente :"
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup:"
 msgstr "Prochaine sauvegarde automatique :"
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:251
 msgid "_Restore…"
 msgstr "_Restaurer…"
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:257
 msgid "Back Up _Now"
 msgstr "Sauvegarder _maintenant"
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:279
 msgid "Overview"
 msgstr "Vue d'ensemble"
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:308
 #, c-format
 msgid "_Keep backups:"
 msgstr "_Conserver les sauvegardes :"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:324
 msgid "Storage"
 msgstr "Stockage"
 
-#: ../preferences/Preferences.vala:364
-msgid "I_nclude files in folders:"
-msgstr "I_nclure les fichiers dans les dossiers :"
+#: ../preferences/Preferences.vala:348
+msgid "Folders to _back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:379
-msgid "E_xcept files in folders:"
-msgstr "E_xclure les fichiers dans les dossiers :"
+#: ../preferences/Preferences.vala:359
+msgid "Folders to _ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:393
-msgid "Files"
-msgstr "Fichiers"
+#: ../preferences/Preferences.vala:370
+msgid "Folders"
+msgstr ""
 
-#: ../preferences/Preferences.vala:405
+#: ../preferences/Preferences.vala:382
 msgid "How _often to back up:"
 msgstr "Fréquence de sauvegarde :"
 
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "Planification"
 
@@ -1236,31 +1232,36 @@ msgid_plural "At least %d days"
 msgstr[0] "Au moins %d jour"
 msgstr[1] "Au moins %d jours"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr "Aujourd’hui"
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr "Hier"
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr "Demain"
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] "Dans %d jour"
 msgstr[1] "Dans %d jours"
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "il y a %d jour"
 msgstr[1] "il y a %d jours"
+
+#: ../widgets/ConfigLabelBackupDate.vala:92
+#: ../widgets/ConfigLabelBackupDate.vala:106
+msgid "None"
+msgstr ""
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1270,11 +1271,11 @@ msgstr "Oui"
 msgid "No"
 msgstr "Non"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
 msgid "Home"
 msgstr "Dossier personnel"
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
 msgid "Trash"
 msgstr "Corbeille"
 
@@ -1353,7 +1354,23 @@ msgstr[1] ""
 "Les anciennes sauvegardes seront gardées pour au moins %d jours, ou jusqu'à "
 "ce que l'endroit de stockage des sauvegardes ait peu d'espace libre restant."
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:86
+msgid "_Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:87
+msgid "Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:95
+msgid "_Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:96
+msgid "Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:189
 msgid "Choose folders"
 msgstr "Choisissez les dossiers"
 
@@ -1412,8 +1429,8 @@ msgid "_Log in with a username"
 msgstr "Se _connecter avec un nom d'utilisateur"
 
 #: ../widgets/ConfigLocationFile.vala:38
-msgid "_Browse…"
-msgstr "_Parcourir…"
+msgid "_Choose Folder…"
+msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
@@ -2593,8 +2610,17 @@ msgstr "Impossible d'afficher %s"
 #~ msgid "Backup"
 #~ msgstr "Sauvegarder"
 
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "I_nclure les fichiers dans les dossiers :"
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "E_xclure les fichiers dans les dossiers :"
+
 #~ msgid "Include from:"
 #~ msgstr "Inclure depuis :"
+
+#~ msgid "Except for:"
+#~ msgstr "Sauf :"
 
 #~ msgid "Encrypted:"
 #~ msgstr "Chiffré :"
@@ -2777,6 +2803,9 @@ msgstr "Impossible d'afficher %s"
 #~ "Si l'endroit de stockage de la sauvegarde est un volume externe monté ou un "
 #~ "dossier normal. Les valeurs possibles sont ‘volume’ ou ‘normal’."
 
+#~ msgid "Files"
+#~ msgstr "Fichiers"
+
 #~ msgid "Password Needed"
 #~ msgstr "Mot de passe nécessaire"
 
@@ -2811,6 +2840,15 @@ msgstr "Impossible d'afficher %s"
 #~ msgstr ""
 #~ "Le nom du dossier dans lequel stocker les fichiers. Si '$HOSTNAME' est "
 #~ "indiqué, le dossier sera basé sur le nom de l'ordinateur."
+
+#~ msgid "_Browse…"
+#~ msgstr "_Parcourir…"
+
+#~ msgid "Where:"
+#~ msgstr "Où :"
+
+#~ msgid "Include files from:"
+#~ msgstr "Inclure les fichier de :"
 
 #~ msgid "Indicates this backup was scheduled"
 #~ msgstr "Indique que cette sauvegarde était planifiée"

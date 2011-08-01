@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-25 21:57-0400\n"
-"PO-Revision-Date: 2011-07-25 16:50+0000\n"
-"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
+"POT-Creation-Date: 2011-07-27 15:10-0400\n"
+"PO-Revision-Date: 2011-07-30 13:12+0000\n"
+"Last-Translator: Dr. Tibor Attila ANCA <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-07-31 04:38+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -41,7 +41,7 @@ msgstr "Déjà Dup biztonságimentés-kezelő"
 #: ../data/deja-dup-ccpanel.desktop.in.h:1
 #: ../data/deja-dup-preferences.desktop.in.in.h:1
 msgid "Back Up Now"
-msgstr "Visszaállítás most"
+msgstr "Biztonsági mentés most"
 
 #: ../data/deja-dup-ccpanel.desktop.in.h:3
 #: ../data/deja-dup-preferences.desktop.in.in.h:3
@@ -173,7 +173,7 @@ msgstr "A Rackspace felhő fájlkonténer"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "The Ubuntu One folder"
-msgstr "Az Ubunut One mappa"
+msgstr "Az Ubuntu One mappa"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
@@ -308,7 +308,7 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Whether to periodically back up"
-msgstr ""
+msgstr "Végezzen-e időszakos biztonsági mentést."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid "Whether to request the root password"
@@ -797,13 +797,13 @@ msgstr "Helyreállítás"
 msgid "_Restore"
 msgstr "_Helyreállítás"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
 msgid "_Backup location:"
 msgstr "Biztonsági mentés _helye:"
 
 #: ../deja-dup/AssistantRestore.vala:124
 msgid "Restore from Where?"
-msgstr ""
+msgstr "Honnan állítson vissza?"
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date:"
@@ -825,7 +825,7 @@ msgstr "Hely kiválasztása a helyreállított fájloknak"
 msgid "Restore _folder:"
 msgstr "_Helyreállítási mappa:"
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location:"
 msgstr "Biztonsági mentés helye:"
 
@@ -1116,68 +1116,64 @@ msgstr "Csak a biztonsági mentés beállítások megjelenítése"
 msgid "Categories"
 msgstr "Kategóriák"
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups:"
 msgstr "_Automatikus mentések:"
 
-#: ../preferences/Preferences.vala:176
-msgid "Where:"
-msgstr "Hol:"
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up:"
+msgstr "Mentendő mappák:"
 
-#: ../preferences/Preferences.vala:185
-msgid "Include files from:"
-msgstr "Mentendő fájlok helye:"
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:193
-msgid "Except for:"
-msgstr "Kivételek:"
-
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup:"
 msgstr "Legfrissebb biztonsági mentés:"
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup:"
 msgstr "Következő automatikus mentés:"
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:251
 msgid "_Restore…"
 msgstr "_Helyreállítás…"
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:257
 msgid "Back Up _Now"
 msgstr "Biztonsági me_ntés most"
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:279
 msgid "Overview"
 msgstr "Áttekintés"
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:308
 #, c-format
 msgid "_Keep backups:"
 msgstr "Biztonsági mentések _megtartása:"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:324
 msgid "Storage"
 msgstr "Tároló"
 
-#: ../preferences/Preferences.vala:364
-msgid "I_nclude files in folders:"
-msgstr "Ezen mappák fájljainak _felvétele:"
+#: ../preferences/Preferences.vala:348
+msgid "Folders to _back up:"
+msgstr "_Mentendő mappák:"
 
-#: ../preferences/Preferences.vala:379
-msgid "E_xcept files in folders:"
-msgstr "Ezen mappák fájljai _kivételek:"
+#: ../preferences/Preferences.vala:359
+msgid "Folders to _ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:393
-msgid "Files"
-msgstr "Fájlok"
+#: ../preferences/Preferences.vala:370
+msgid "Folders"
+msgstr ""
 
-#: ../preferences/Preferences.vala:405
+#: ../preferences/Preferences.vala:382
 msgid "How _often to back up:"
 msgstr "Ütemezett bizt_onsági mentések gyakorisága"
 
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "Ütemező"
 
@@ -1216,31 +1212,36 @@ msgid_plural "At least %d days"
 msgstr[0] "Legalább %d napig"
 msgstr[1] "Legalább %d napig"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr "Ma"
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr "Tegnap"
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr "Holnap"
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] "%d nap múlva"
 msgstr[1] "%d nap múlva"
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d napja"
 msgstr[1] "%d napja"
+
+#: ../widgets/ConfigLabelBackupDate.vala:92
+#: ../widgets/ConfigLabelBackupDate.vala:106
+msgid "None"
+msgstr ""
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1250,11 +1251,11 @@ msgstr "Igen"
 msgid "No"
 msgstr "Nem"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
 msgid "Home"
 msgstr "Saját mappa"
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
 msgid "Trash"
 msgstr "Kuka"
 
@@ -1330,7 +1331,23 @@ msgstr[1] ""
 "A régebbi mentések legalább %d napig meg lesznek tartva vagy ameddig van "
 "számukra szabad hely."
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:86
+msgid "_Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:87
+msgid "Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:95
+msgid "_Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:96
+msgid "Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:189
 msgid "Choose folders"
 msgstr "Mappa kiválasztása"
 
@@ -1389,8 +1406,8 @@ msgid "_Log in with a username"
 msgstr "Beje_lentkezés felhasználónévvel"
 
 #: ../widgets/ConfigLocationFile.vala:38
-msgid "_Browse…"
-msgstr "_Tallózás…"
+msgid "_Choose Folder…"
+msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
@@ -1398,7 +1415,7 @@ msgstr "Mappa kiválasztása"
 
 #: ../widgets/ConfigLocationRackspace.vala:34
 msgid "_Container:"
-msgstr "_Konténer:"
+msgstr "_Tároló"
 
 #: ../widgets/ConfigLocationS3.vala:31
 msgid "S3 Access Key I_D:"
@@ -1496,6 +1513,9 @@ msgstr "%s megjelenítése sikertelen"
 
 #~ msgid "Include from:"
 #~ msgstr "Felvétel innen:"
+
+#~ msgid "Except for:"
+#~ msgstr "Kivételek:"
 
 #~ msgid "_Automatically backup on a regular schedule"
 #~ msgstr "Automatikus biztonsági mentés rendszeres i_dőbeosztás szerint"
@@ -1688,16 +1708,14 @@ msgstr "%s megjelenítése sikertelen"
 #~ msgid "Scanning for files from yesterday…"
 #~ msgstr "Tegnap fájlok keresése…"
 
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Launchpad Contributions:\n"
-#~ "  András Bognár https://launchpad.net/~bognarandras\n"
-#~ "  Gabor Kelemen https://launchpad.net/~kelemeng\n"
-#~ "  Gergely Szarka https://launchpad.net/~gszarka\n"
-#~ "  Horváth Árpád https://launchpad.net/~horvath-arpad-roik\n"
-#~ "  Michael Terry https://launchpad.net/~mterry\n"
-#~ "  Richard Somlói https://launchpad.net/~ricsipontaz\n"
-#~ "  johnny https://launchpad.net/~peter-bojtos"
+#~ msgid "Where:"
+#~ msgstr "Hol:"
+
+#~ msgid "Files"
+#~ msgstr "Fájlok"
+
+#~ msgid "_Browse…"
+#~ msgstr "_Tallózás…"
 
 #~ msgid "GVFS FUSE is not installed"
 #~ msgstr "A GVFS FUSE nincs telepítve"
@@ -1716,5 +1734,26 @@ msgstr "%s megjelenítése sikertelen"
 #~ "Nem lehetséges az összes fájl helyreállítása. Azok a fájlok, amelyek nem "
 #~ "állíthatóak helyre, továbbra is megtalálhatóak itt: %s."
 
+#~ msgid "Include files from:"
+#~ msgstr "Mentendő fájlok helye:"
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "Ezen mappák fájljai _kivételek:"
+
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "Ezen mappák fájljainak _felvétele:"
+
 #~ msgid "Another Déjà Dup Backup Tool operation is already running"
 #~ msgstr "A Déjà Dup biztonságimentés-kezelő egy másik művelete már fut"
+
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "Launchpad Contributions:\n"
+#~ "  András Bognár https://launchpad.net/~bognarandras\n"
+#~ "  Dr. Tibor Attila ANCA https://launchpad.net/~tibor-anca\n"
+#~ "  Gabor Kelemen https://launchpad.net/~kelemeng\n"
+#~ "  Gergely Szarka https://launchpad.net/~gszarka\n"
+#~ "  Horváth Árpád https://launchpad.net/~horvath-arpad-roik\n"
+#~ "  Michael Terry https://launchpad.net/~mterry\n"
+#~ "  Richard Somlói https://launchpad.net/~ricsipontaz\n"
+#~ "  johnny https://launchpad.net/~peter-bojtos"

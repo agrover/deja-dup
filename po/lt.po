@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-25 21:57-0400\n"
+"POT-Creation-Date: 2011-07-27 15:10-0400\n"
 "PO-Revision-Date: 2011-07-03 12:21+0000\n"
 "Last-Translator: Aurimas Fišeras <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-07-28 04:35+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -796,7 +796,7 @@ msgstr "Atkurti"
 msgid "_Restore"
 msgstr "_Atkurti"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
 msgid "_Backup location:"
 msgstr "_Atsarginės kopijos vieta:"
 
@@ -824,7 +824,7 @@ msgstr "Pasirinkite atkuriamų failų paskirtį"
 msgid "Restore _folder:"
 msgstr "Atkūrimo _aplankas:"
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location:"
 msgstr "Atsarginių kopijų vieta:"
 
@@ -1116,68 +1116,64 @@ msgstr "Tik parodyti mano atsarginių kopijų _nuostatas"
 msgid "Categories"
 msgstr "Kategorijos"
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups:"
 msgstr "Automatinės _atsarginės kopijos:"
 
-#: ../preferences/Preferences.vala:176
-msgid "Where:"
-msgstr "Kur:"
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:185
-msgid "Include files from:"
-msgstr "Įtraukti failus iš:"
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:193
-msgid "Except for:"
-msgstr "Išskyrus:"
-
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup:"
 msgstr "Naujausia atsarginė kopija:"
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup:"
 msgstr "Kita automatinė atsarginė kopija:"
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:251
 msgid "_Restore…"
 msgstr "_Atkurti..."
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:257
 msgid "Back Up _Now"
 msgstr "Daryti atsarginę kopiją _dabar"
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:279
 msgid "Overview"
 msgstr "Apžvalga"
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:308
 #, c-format
 msgid "_Keep backups:"
 msgstr "_Laikyti atsargines kopijas:"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:324
 msgid "Storage"
 msgstr "Saugojimas"
 
-#: ../preferences/Preferences.vala:364
-msgid "I_nclude files in folders:"
-msgstr "Į_traukti failus aplankuose:"
+#: ../preferences/Preferences.vala:348
+msgid "Folders to _back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:379
-msgid "E_xcept files in folders:"
-msgstr "Iš_skyrus failus aplankuose:"
+#: ../preferences/Preferences.vala:359
+msgid "Folders to _ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:393
-msgid "Files"
-msgstr "Failai"
+#: ../preferences/Preferences.vala:370
+msgid "Folders"
+msgstr ""
 
-#: ../preferences/Preferences.vala:405
+#: ../preferences/Preferences.vala:382
 msgid "How _often to back up:"
 msgstr "Kaip _dažnai daryti atsargines kopijas:"
 
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "Tvarkaraštis"
 
@@ -1217,19 +1213,19 @@ msgstr[0] "Mažiausiai %d dieną"
 msgstr[1] "Mažiausiai %d dienas"
 msgstr[2] "Mažiausiai %d dienų"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr "Šiandien"
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr "Vakar"
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr "Rytoj"
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
@@ -1237,13 +1233,18 @@ msgstr[0] "už %d dienos"
 msgstr[1] "už %d dienų"
 msgstr[2] "už %d dienų"
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "Prieš %d dieną"
 msgstr[1] "Prieš %d dienas"
 msgstr[2] "Prieš %d dienų"
+
+#: ../widgets/ConfigLabelBackupDate.vala:92
+#: ../widgets/ConfigLabelBackupDate.vala:106
+msgid "None"
+msgstr ""
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1253,11 +1254,11 @@ msgstr "Taip"
 msgid "No"
 msgstr "Ne"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
 msgid "Home"
 msgstr ""
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
 msgid "Trash"
 msgstr "Šiukšlinė"
 
@@ -1337,7 +1338,23 @@ msgstr[2] ""
 "Senos atsarginės kopijos bus saugomos mažiausiai %d dienų arba kol "
 "atsarginės kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:86
+msgid "_Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:87
+msgid "Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:95
+msgid "_Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:96
+msgid "Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:189
 msgid "Choose folders"
 msgstr "Pasirinkite aplankus"
 
@@ -1396,8 +1413,8 @@ msgid "_Log in with a username"
 msgstr "_Prisijungti naudojant naudotojo vardą"
 
 #: ../widgets/ConfigLocationFile.vala:38
-msgid "_Browse…"
-msgstr "_Naršyti..."
+msgid "_Choose Folder…"
+msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
@@ -1524,6 +1541,12 @@ msgstr "Nepavyko parodyti %s"
 #~ msgid "Preferences"
 #~ msgstr "Nuostatos"
 
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "Į_traukti failus aplankuose:"
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "Iš_skyrus failus aplankuose:"
+
 #~ msgid "Encrypted:"
 #~ msgstr "Užšifruota:"
 
@@ -1538,6 +1561,9 @@ msgstr "Nepavyko parodyti %s"
 
 #~ msgid "Include from:"
 #~ msgstr "Įtraukti iš:"
+
+#~ msgid "Except for:"
+#~ msgstr "Išskyrus:"
 
 #~ msgid "Déjà Dup backup passphrase"
 #~ msgstr "Déjà Dup atsarginės kopijos slaptažodis"
@@ -1615,6 +1641,9 @@ msgstr "Nepavyko parodyti %s"
 
 #~ msgid "Connect to _Server…"
 #~ msgstr "Jungtis prie _serverio..."
+
+#~ msgid "Files"
+#~ msgstr "Failai"
 
 #~ msgid "Could not open connection dialog"
 #~ msgstr "Nepavyko atverti prisijungimo dialogo lango"
@@ -1696,3 +1725,12 @@ msgstr "Nepavyko parodyti %s"
 
 #~ msgid "Settings"
 #~ msgstr "Nuostatos"
+
+#~ msgid "Where:"
+#~ msgstr "Kur:"
+
+#~ msgid "Include files from:"
+#~ msgstr "Įtraukti failus iš:"
+
+#~ msgid "_Browse…"
+#~ msgstr "_Naršyti..."

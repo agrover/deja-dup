@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-25 21:57-0400\n"
+"POT-Creation-Date: 2011-07-27 15:10-0400\n"
 "PO-Revision-Date: 2011-07-07 20:03+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Proxecto Trasno <proxecto@trasno.net>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-07-28 04:35+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -780,7 +780,7 @@ msgstr "Restaurar"
 msgid "_Restore"
 msgstr "_Restaurar"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
 msgid "_Backup location:"
 msgstr "_Localización da copia de seguranza:"
 
@@ -808,7 +808,7 @@ msgstr "Escolla o destino para os ficheiros restaurados"
 msgid "Restore _folder:"
 msgstr "Restaurar no carta_fol:"
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location:"
 msgstr "Localización da copia de seguranza:"
 
@@ -1092,68 +1092,64 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:176
-msgid "Where:"
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:185
-msgid "Include files from:"
-msgstr "Incluír os ficheiros de:"
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:193
-msgid "Except for:"
-msgstr "Excluír:"
-
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:251
 msgid "_Restore…"
 msgstr "_Restaurar..."
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:257
 msgid "Back Up _Now"
 msgstr ""
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:279
 msgid "Overview"
 msgstr ""
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:308
 #, c-format
 msgid "_Keep backups:"
 msgstr "_Conservar as copias de seguranza:"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:324
 msgid "Storage"
 msgstr "Almacéns"
 
-#: ../preferences/Preferences.vala:364
-msgid "I_nclude files in folders:"
-msgstr "_Incluír os ficheiros nos cartafoles:"
+#: ../preferences/Preferences.vala:348
+msgid "Folders to _back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:379
-msgid "E_xcept files in folders:"
-msgstr "E_xcluír os ficheiros nos cartafoles:"
+#: ../preferences/Preferences.vala:359
+msgid "Folders to _ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:393
-msgid "Files"
-msgstr "Ficheiros"
+#: ../preferences/Preferences.vala:370
+msgid "Folders"
+msgstr ""
 
-#: ../preferences/Preferences.vala:405
+#: ../preferences/Preferences.vala:382
 msgid "How _often to back up:"
 msgstr "Con que _frecuencia facer a copia de seguranza:"
 
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "Planificación"
 
@@ -1192,31 +1188,36 @@ msgid_plural "At least %d days"
 msgstr[0] "Polo menos %d día"
 msgstr[1] "Polo menos %d días"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
+
+#: ../widgets/ConfigLabelBackupDate.vala:92
+#: ../widgets/ConfigLabelBackupDate.vala:106
+msgid "None"
+msgstr ""
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1226,11 +1227,11 @@ msgstr "Si"
 msgid "No"
 msgstr "Non"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
 msgid "Home"
 msgstr ""
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
 msgid "Trash"
 msgstr "Lixo"
 
@@ -1307,7 +1308,23 @@ msgstr[1] ""
 "As copias de seguranza antigas mantéñense &d días como mínimo ou até que "
 "fique pouco espazo nese lugar."
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:86
+msgid "_Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:87
+msgid "Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:95
+msgid "_Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:96
+msgid "Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:189
 msgid "Choose folders"
 msgstr "Escoller os cartafoles"
 
@@ -1366,7 +1383,7 @@ msgid "_Log in with a username"
 msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:38
-msgid "_Browse…"
+msgid "_Choose Folder…"
 msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:49
@@ -1503,6 +1520,12 @@ msgstr "Non foi posíbel mostrar %s"
 #~ msgid "_Encrypt backup files"
 #~ msgstr "_Cifrar os ficheiros de copia de seguranza"
 
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "_Incluír os ficheiros nos cartafoles:"
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "E_xcluír os ficheiros nos cartafoles:"
+
 #~ msgid "Preferences"
 #~ msgstr "Preferencias"
 
@@ -1511,6 +1534,9 @@ msgstr "Non foi posíbel mostrar %s"
 
 #~ msgid "Include from:"
 #~ msgstr "Incluír:"
+
+#~ msgid "Except for:"
+#~ msgstr "Excluír:"
 
 #~ msgid "_Automatically back up on a regular schedule"
 #~ msgstr "_Facer copia de seguranza automaticamente de xeito regular"
@@ -1630,6 +1656,9 @@ msgstr "Non foi posíbel mostrar %s"
 #~ "Debeu recibir unha copia da Licenza pública xeral de GNU xunto con este "
 #~ "programa.   Se non é así, vexa <http://www.gnu.org/licenses/>."
 
+#~ msgid "Files"
+#~ msgstr "Ficheiros"
+
 #~ msgid "Backup Preferences"
 #~ msgstr "Preferencias da copia de seguranza"
 
@@ -1710,6 +1739,9 @@ msgstr "Non foi posíbel mostrar %s"
 #~ "$PUBLIC_SHARE, $TEMPLATES, $TRASH, e $VIDEO son recoñecidos como cartafoles "
 #~ "especiais do usuario. As entradas relativas refírense ó cartafol do usuario. "
 #~ "Esta lista ten prioridade sobre a lista de inclusión."
+
+#~ msgid "Include files from:"
+#~ msgstr "Incluír os ficheiros de:"
 
 #~ msgid "translator-credits"
 #~ msgstr ""

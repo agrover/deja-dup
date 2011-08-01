@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-25 21:57-0400\n"
+"POT-Creation-Date: 2011-07-27 15:10-0400\n"
 "PO-Revision-Date: 2011-07-07 19:57+0000\n"
 "Last-Translator: Sergey Basalaev <SBasalaev@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:44+0000\n"
+"X-Launchpad-Export-Date: 2011-07-28 04:35+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../deja-dup/AssistantRestore.vala:271
@@ -786,7 +786,7 @@ msgstr "Восстановить"
 msgid "_Restore"
 msgstr "_Восстановить"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
 msgid "_Backup location:"
 msgstr "_Местоположение резервной копии:"
 
@@ -814,7 +814,7 @@ msgstr "Выберите местоположение для восстанов�
 msgid "Restore _folder:"
 msgstr "Восстановить в _каталог:"
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location:"
 msgstr "Местоположение резервной копии:"
 
@@ -1098,68 +1098,64 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:176
-msgid "Where:"
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:185
-msgid "Include files from:"
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:193
-msgid "Except for:"
-msgstr "Исключаемые каталоги:"
-
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:251
 msgid "_Restore…"
 msgstr "_Восстановление..."
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:257
 msgid "Back Up _Now"
 msgstr ""
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:279
 msgid "Overview"
 msgstr ""
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:308
 #, c-format
 msgid "_Keep backups:"
 msgstr "_Хранить резервные копии:"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:324
 msgid "Storage"
 msgstr "Носитель"
 
-#: ../preferences/Preferences.vala:364
-msgid "I_nclude files in folders:"
-msgstr "С_охранять в резервной копии:"
+#: ../preferences/Preferences.vala:348
+msgid "Folders to _back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:379
-msgid "E_xcept files in folders:"
-msgstr "И_сключить из резервной копии:"
+#: ../preferences/Preferences.vala:359
+msgid "Folders to _ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:393
-msgid "Files"
-msgstr "Файлы"
+#: ../preferences/Preferences.vala:370
+msgid "Folders"
+msgstr ""
 
-#: ../preferences/Preferences.vala:405
+#: ../preferences/Preferences.vala:382
 msgid "How _often to back up:"
 msgstr "_Частота резервного копирования:"
 
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "Расписание"
 
@@ -1199,31 +1195,36 @@ msgstr[0] "Минимум %d день"
 msgstr[1] "Минимум %d дня"
 msgstr[2] "Минимум %d дней"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
+
+#: ../widgets/ConfigLabelBackupDate.vala:92
+#: ../widgets/ConfigLabelBackupDate.vala:106
+msgid "None"
+msgstr ""
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1233,11 +1234,11 @@ msgstr "Да"
 msgid "No"
 msgstr "Нет"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
 msgid "Home"
 msgstr ""
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
 msgid "Trash"
 msgstr "Корзина"
 
@@ -1317,7 +1318,23 @@ msgstr[2] ""
 "Старые резервные копии будут храниться %d дней или до тех пор пока не "
 "останется свободного места."
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:86
+msgid "_Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:87
+msgid "Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:95
+msgid "_Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:96
+msgid "Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:189
 msgid "Choose folders"
 msgstr "Выберите каталоги"
 
@@ -1376,8 +1393,8 @@ msgid "_Log in with a username"
 msgstr "_Вход с именем пользователя"
 
 #: ../widgets/ConfigLocationFile.vala:38
-msgid "_Browse…"
-msgstr "_Обзор..."
+msgid "_Choose Folder…"
+msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
@@ -2371,6 +2388,9 @@ msgstr "Не удалось отобразить %s"
 #~ msgid "Include from:"
 #~ msgstr "Добавляемые каталоги:"
 
+#~ msgid "Except for:"
+#~ msgstr "Исключаемые каталоги:"
+
 #~ msgid "Your files were successfully backed up."
 #~ msgstr "Успешно создана резервная копия ваших файлов."
 
@@ -2499,6 +2519,9 @@ msgstr "Не удалось отобразить %s"
 #~ "Будут ли резервные копии располагаться на внешнем носителе или в обычной "
 #~ "папке. Возможные значения ‘volume’ или ‘normal’."
 
+#~ msgid "Files"
+#~ msgstr "Файлы"
+
 #~ msgid ""
 #~ "Older backups will be kept for at least six months or until the backup "
 #~ "location is low on space."
@@ -2532,6 +2555,12 @@ msgstr "Не удалось отобразить %s"
 
 #~ msgid "_Encrypt backup files"
 #~ msgstr "_Шифровать резервную копию"
+
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "С_охранять в резервной копии:"
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "И_сключить из резервной копии:"
 
 #~ msgid "Password needed"
 #~ msgstr "Требуется пароль"
@@ -2777,6 +2806,9 @@ msgstr "Не удалось отобразить %s"
 #~ "Déjà Dup это простой инструмент резервного копирования.\n"
 #~ "Он скрывает всю сложность этого процесса."
 
+#~ msgid "_Browse…"
+#~ msgstr "_Обзор..."
+
 #~ msgid ""
 #~ "The folder name to store files in. If '$HOSTNAME', it will default to a "
 #~ "folder based on the name of the computer."
@@ -2798,7 +2830,7 @@ msgstr "Не удалось отобразить %s"
 #~ "  Alexey Rusaleev https://launchpad.net/~alexey-rusaleev\n"
 #~ "  GamePad64 https://launchpad.net/~gamepad64\n"
 #~ "  Ilya Telegin https://launchpad.net/~devi29rus\n"
-#~ "  Max Chagaev https://launchpad.net/~chamvion\n"
+#~ "  Maxim Chagaev https://launchpad.net/~chamvion\n"
 #~ "  Michael Terry https://launchpad.net/~mterry\n"
 #~ "  Norrius https://launchpad.net/~norrius\n"
 #~ "  Sergey Basalaev https://launchpad.net/~sbasalaev\n"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-25 21:57-0400\n"
-"PO-Revision-Date: 2011-07-09 09:46+0000\n"
+"POT-Creation-Date: 2011-07-27 15:10-0400\n"
+"PO-Revision-Date: 2011-07-28 09:36+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-07-29 04:48+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -409,7 +409,7 @@ msgstr "Położenie kopii zapasowych jest niedostępne"
 
 #: ../common/BackendFile.vala:363
 msgid "Waiting for a network connection…"
-msgstr ""
+msgstr "Oczekiwanie na połączenie sieciowe…"
 
 #: ../common/BackendFile.vala:426
 #, c-format
@@ -808,13 +808,13 @@ msgstr "Przywróć"
 msgid "_Restore"
 msgstr "P_rzywróć"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
 msgid "_Backup location:"
 msgstr "Położenie _kopii zapasowej:"
 
 #: ../deja-dup/AssistantRestore.vala:124
 msgid "Restore from Where?"
-msgstr ""
+msgstr "Skąd przywrócić?"
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date:"
@@ -836,7 +836,7 @@ msgstr "Wybór miejsca docelowego dla przywróconych plików"
 msgid "Restore _folder:"
 msgstr "Przywrócenie _katalogu:"
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location:"
 msgstr "Położenie kopii zapasowej:"
 
@@ -1130,68 +1130,64 @@ msgstr "Wyświetlenie u_stawień kopii zapasowej"
 msgid "Categories"
 msgstr "Kategorie"
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups:"
 msgstr "Automatyczne _kopie zapasowe:"
 
-#: ../preferences/Preferences.vala:176
-msgid "Where:"
-msgstr "Gdzie:"
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up:"
+msgstr "Katalogi do zachowania:"
 
-#: ../preferences/Preferences.vala:185
-msgid "Include files from:"
-msgstr "Dołączanie plików z:"
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore:"
+msgstr "Ignorowane katalogi:"
 
-#: ../preferences/Preferences.vala:193
-msgid "Except for:"
-msgstr "Poza:"
-
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup:"
 msgstr "Najnowsza kopia zapasowa:"
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup:"
 msgstr "Następna automatyczna kopia zapasowa:"
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:251
 msgid "_Restore…"
 msgstr "P_rzywróć…"
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:257
 msgid "Back Up _Now"
 msgstr "Wyko_naj kopię zapasową"
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:279
 msgid "Overview"
 msgstr "Przegląd"
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:308
 #, c-format
 msgid "_Keep backups:"
 msgstr "Trzymanie _kopii zapasowych:"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:324
 msgid "Storage"
 msgstr "Przechowywanie danych"
 
-#: ../preferences/Preferences.vala:364
-msgid "I_nclude files in folders:"
-msgstr "Dołącze_nie plików w katalogach:"
+#: ../preferences/Preferences.vala:348
+msgid "Folders to _back up:"
+msgstr "Katalogi do z_achowania:"
 
-#: ../preferences/Preferences.vala:379
-msgid "E_xcept files in folders:"
-msgstr "_Poza plikami w katalogach:"
+#: ../preferences/Preferences.vala:359
+msgid "Folders to _ignore:"
+msgstr "Katalogi do _zachowania:"
 
-#: ../preferences/Preferences.vala:393
-msgid "Files"
-msgstr "Pliki"
+#: ../preferences/Preferences.vala:370
+msgid "Folders"
+msgstr "Katalogi"
 
-#: ../preferences/Preferences.vala:405
+#: ../preferences/Preferences.vala:382
 msgid "How _often to back up:"
 msgstr "Jak często tw_orzyć kopię zapasową:"
 
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "Planowanie"
 
@@ -1231,19 +1227,19 @@ msgstr[0] "Co najmniej %d dzień"
 msgstr[1] "Co najmniej %d dni"
 msgstr[2] "Co najmniej %d dni"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr "Dzisiaj"
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr "Wczoraj"
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr "Jutro"
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
@@ -1251,13 +1247,18 @@ msgstr[0] "%d dzień od dzisiaj"
 msgstr[1] "%d dni od dzisiaj"
 msgstr[2] "%d dni od dzisiaj"
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d dzień temu"
 msgstr[1] "%d dni temu"
 msgstr[2] "%d dni temu"
+
+#: ../widgets/ConfigLabelBackupDate.vala:92
+#: ../widgets/ConfigLabelBackupDate.vala:106
+msgid "None"
+msgstr "Brak"
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1267,11 +1268,11 @@ msgstr "Tak"
 msgid "No"
 msgstr "Nie"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
 msgid "Home"
 msgstr "Katalog domowy"
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
 msgid "Trash"
 msgstr "Kosz"
 
@@ -1350,7 +1351,23 @@ msgstr[2] ""
 "Poprzednie kopie zapasowe będą trzymane co najmniej %d dni lub do czasu "
 "wyczerpania miejsca."
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:86
+msgid "_Add"
+msgstr "Dod_aj"
+
+#: ../widgets/ConfigList.vala:87
+msgid "Add"
+msgstr "Dodaj"
+
+#: ../widgets/ConfigList.vala:95
+msgid "_Remove"
+msgstr "_Usuń"
+
+#: ../widgets/ConfigList.vala:96
+msgid "Remove"
+msgstr "Usuń"
+
+#: ../widgets/ConfigList.vala:189
 msgid "Choose folders"
 msgstr "Wybór katalogów"
 
@@ -1409,8 +1426,8 @@ msgid "_Log in with a username"
 msgstr "_Logowanie za pomocą nazwy użytkownika"
 
 #: ../widgets/ConfigLocationFile.vala:38
-msgid "_Browse…"
-msgstr "_Przeglądaj…"
+msgid "_Choose Folder…"
+msgstr "_Wybierz katalog…"
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
@@ -1442,7 +1459,7 @@ msgstr "Co tydzień"
 
 #: ../widgets/ConfigPeriod.vala:38
 msgid "Every 2 weeks"
-msgstr ""
+msgstr "Co dwa tygodnie"
 
 #: ../widgets/ConfigPeriod.vala:39
 msgid "Monthly"
@@ -1550,8 +1567,17 @@ msgstr "Nie można wyświetlić %s"
 #~ msgstr ""
 #~ "_Automatyczne wykonywanie kopii zapasowych w regularnych odstępach czasu"
 
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "Dołącze_nie plików w katalogach:"
+
 #~ msgid "Include from:"
 #~ msgstr "Dołączanie z:"
+
+#~ msgid "Except for:"
+#~ msgstr "Poza:"
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "_Poza plikami w katalogach:"
 
 #~ msgid "Encrypted:"
 #~ msgstr "Zaszyfrowane:"
@@ -1724,6 +1750,9 @@ msgstr "Nie można wyświetlić %s"
 #~ msgid "_Back Up…"
 #~ msgstr "Utwórz _kopię zapasową…"
 
+#~ msgid "Files"
+#~ msgstr "Pliki"
+
 #, c-format
 #~ msgid ""
 #~ "Older backups will be kept at least %d day or until the backup location is "
@@ -1835,6 +1864,9 @@ msgstr "Nie można wyświetlić %s"
 #~ "  Piotr Drąg https://launchpad.net/~raven46\n"
 #~ "  Tomasz Chrzczonowicz https://launchpad.net/~tch"
 
+#~ msgid "_Browse…"
+#~ msgstr "_Przeglądaj…"
+
 #~ msgid ""
 #~ "The folder name to store files in. If '$HOSTNAME', it will default to a "
 #~ "folder based on the name of the computer."
@@ -1858,6 +1890,12 @@ msgstr "Nie można wyświetlić %s"
 #~ msgstr ""
 #~ "Usługa Ubuntu One wymaga konta Ubuntu Single Sign On (SSO). Jeśli użytkownik "
 #~ "jeszcze go nie posiada, to ten proces pozwoli na jego utworzenie."
+
+#~ msgid "Where:"
+#~ msgstr "Gdzie:"
+
+#~ msgid "Include files from:"
+#~ msgstr "Dołączanie plików z:"
 
 #~ msgid "Indicates this backup was scheduled"
 #~ msgstr "Wskazuje, że ta kopia zapasowa została zaplanowana"

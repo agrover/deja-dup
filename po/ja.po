@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-25 21:57-0400\n"
-"PO-Revision-Date: 2011-07-07 20:07+0000\n"
+"POT-Creation-Date: 2011-07-27 15:10-0400\n"
+"PO-Revision-Date: 2011-07-27 02:23+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-07-28 04:35+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -744,7 +744,7 @@ msgstr "復元"
 msgid "_Restore"
 msgstr "復元(_R)"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
 msgid "_Backup location:"
 msgstr "バックアップの保存場所(_B):"
 
@@ -772,7 +772,7 @@ msgstr "復元するファイルの保存先を選択してください"
 msgid "Restore _folder:"
 msgstr "復元先のフォルダ(_F):"
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location:"
 msgstr "バックアップ先:"
 
@@ -1052,68 +1052,64 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:176
-msgid "Where:"
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:185
-msgid "Include files from:"
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:193
-msgid "Except for:"
-msgstr "除外する:"
-
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:251
 msgid "_Restore…"
 msgstr "復元(_R)…"
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:257
 msgid "Back Up _Now"
 msgstr ""
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:279
 msgid "Overview"
 msgstr ""
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:308
 #, c-format
 msgid "_Keep backups:"
 msgstr "バックアップの保存期間(_K):"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:324
 msgid "Storage"
 msgstr "記憶装置"
 
-#: ../preferences/Preferences.vala:364
-msgid "I_nclude files in folders:"
-msgstr "フォルダ内のファイルを含める(_N):"
+#: ../preferences/Preferences.vala:348
+msgid "Folders to _back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:379
-msgid "E_xcept files in folders:"
-msgstr "フォルダ内のファイルを除外する(_X):"
+#: ../preferences/Preferences.vala:359
+msgid "Folders to _ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:393
-msgid "Files"
-msgstr "ファイル"
+#: ../preferences/Preferences.vala:370
+msgid "Folders"
+msgstr ""
 
-#: ../preferences/Preferences.vala:405
+#: ../preferences/Preferences.vala:382
 msgid "How _often to back up:"
 msgstr "バックアップする頻度(_O):"
 
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "スケジュール"
 
@@ -1151,31 +1147,36 @@ msgid "At least %d day"
 msgid_plural "At least %d days"
 msgstr[0] "最低 %d 日"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
+
+#: ../widgets/ConfigLabelBackupDate.vala:92
+#: ../widgets/ConfigLabelBackupDate.vala:106
+msgid "None"
+msgstr ""
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1185,11 +1186,11 @@ msgstr "有効"
 msgid "No"
 msgstr "無効"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
 msgid "Home"
 msgstr ""
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
 msgid "Trash"
 msgstr "ゴミ箱"
 
@@ -1247,7 +1248,23 @@ msgid_plural ""
 "low on space."
 msgstr[0] "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低 %d 日間保存されます。"
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:86
+msgid "_Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:87
+msgid "Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:95
+msgid "_Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:96
+msgid "Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:189
 msgid "Choose folders"
 msgstr "フォルダを選択"
 
@@ -1306,7 +1323,7 @@ msgid "_Log in with a username"
 msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:38
-msgid "_Browse…"
+msgid "_Choose Folder…"
 msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:49
@@ -1422,6 +1439,9 @@ msgstr "%s を表示できません"
 #~ "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
 #~ "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 #~ "more details."
+
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "フォルダ内のファイルを含める(_N):"
 
 #~ msgid "Backup Finished"
 #~ msgstr "バックアップが終了しました"
@@ -1678,6 +1698,12 @@ msgstr "%s を表示できません"
 #~ msgid "Include from:"
 #~ msgstr "含める:"
 
+#~ msgid "Except for:"
+#~ msgstr "除外する:"
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "フォルダ内のファイルを除外する(_X):"
+
 #~ msgid "Your files were successfully backed up."
 #~ msgstr "バックアップが成功しました。"
 
@@ -1692,6 +1718,9 @@ msgstr "%s を表示できません"
 #~ "Déjà Dup requires at least version %d.%d.%.2d of duplicity, but only found "
 #~ "version %d.%d.%.2d"
 #~ msgstr "Déjà Dup にはバージョン %d.%d.%.2d の duplicity が必要ですが、%d.%d.%.2d しか見つかりません。"
+
+#~ msgid "Files"
+#~ msgstr "ファイル"
 
 #, c-format
 #~ msgid "Could not restore %s: %s"

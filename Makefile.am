@@ -38,6 +38,9 @@ copy-po:
 sign:
 	gpg --armor --sign --detach-sig deja-dup-$(PACKAGE_VERSION).tar.bz2
 
+check:
+	test "$(shell ls -1 po/*.po | wc -l)" -eq "$(shell cat po/LINGUAS | wc -l)"
+
 releasecheck: all distcheck sign
 release: all dist sign
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-25 21:57-0400\n"
+"POT-Creation-Date: 2011-07-27 15:10-0400\n"
 "PO-Revision-Date: 2011-07-23 03:31+0000\n"
 "Last-Translator: Claudio Arseni <claudio.arseni@gmail.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-07-28 04:35+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -808,7 +808,7 @@ msgstr "Ripristina"
 msgid "_Restore"
 msgstr "_Ripristina"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
 msgid "_Backup location:"
 msgstr "Posizione di _backup:"
 
@@ -836,7 +836,7 @@ msgstr "Scegliere la destinazione per i file ripristinati"
 msgid "Restore _folder:"
 msgstr "Ca_rtella di ripristino:"
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location:"
 msgstr "Posizione di backup:"
 
@@ -1126,68 +1126,64 @@ msgstr "Mostra _solo le impostazioni di backup"
 msgid "Categories"
 msgstr "Categorie"
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups:"
 msgstr "_Backup automatici:"
 
-#: ../preferences/Preferences.vala:176
-msgid "Where:"
-msgstr "Dove:"
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:185
-msgid "Include files from:"
-msgstr "File da includere:"
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:193
-msgid "Except for:"
-msgstr "Escludere da:"
-
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup:"
 msgstr "Backup più recenti:"
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup:"
 msgstr "Prossimo backup automatico:"
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:251
 msgid "_Restore…"
 msgstr "_Ripristina..."
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:257
 msgid "Back Up _Now"
 msgstr "Esegui backup _ora"
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:279
 msgid "Overview"
 msgstr "Panoramica"
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:308
 #, c-format
 msgid "_Keep backups:"
 msgstr "_Mantenere i backup:"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:324
 msgid "Storage"
 msgstr "Archiviazione"
 
-#: ../preferences/Preferences.vala:364
-msgid "I_nclude files in folders:"
-msgstr "I_ncludere i file nelle cartelle:"
+#: ../preferences/Preferences.vala:348
+msgid "Folders to _back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:379
-msgid "E_xcept files in folders:"
-msgstr "E_scludere i file nelle cartelle"
+#: ../preferences/Preferences.vala:359
+msgid "Folders to _ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:393
-msgid "Files"
-msgstr "File"
+#: ../preferences/Preferences.vala:370
+msgid "Folders"
+msgstr ""
 
-#: ../preferences/Preferences.vala:405
+#: ../preferences/Preferences.vala:382
 msgid "How _often to back up:"
 msgstr "Frequenza di esecuzi_one del backup:"
 
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "Pianificazione"
 
@@ -1226,31 +1222,36 @@ msgid_plural "At least %d days"
 msgstr[0] "Almeno %d giorno"
 msgstr[1] "Almeno %d giorni"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr "Oggi"
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr "Ieri"
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr "Domani"
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] "%d giorno da adesso"
 msgstr[1] "%d giorni da adesso"
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d giorno fa"
 msgstr[1] "%d giorni fa"
+
+#: ../widgets/ConfigLabelBackupDate.vala:92
+#: ../widgets/ConfigLabelBackupDate.vala:106
+msgid "None"
+msgstr ""
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1260,11 +1261,11 @@ msgstr "Sì"
 msgid "No"
 msgstr "No"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
 msgid "Home"
 msgstr "Home"
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
 msgid "Trash"
 msgstr "Cestino"
 
@@ -1341,7 +1342,23 @@ msgstr[1] ""
 "I vecchi backup verranno mantenuti per almeno %d giorni o finché la "
 "posizione di backup non esaurirà lo spazio."
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:86
+msgid "_Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:87
+msgid "Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:95
+msgid "_Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:96
+msgid "Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:189
 msgid "Choose folders"
 msgstr "Scelta delle cartelle"
 
@@ -1400,8 +1417,8 @@ msgid "_Log in with a username"
 msgstr "_Accedi con un nome utente"
 
 #: ../widgets/ConfigLocationFile.vala:38
-msgid "_Browse…"
-msgstr "_Esplora..."
+msgid "_Choose Folder…"
+msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
@@ -1569,11 +1586,20 @@ msgstr "Impossibile mostrare %s"
 #~ msgid "_Encrypt backup files"
 #~ msgstr "Cifrar_e i file di backup"
 
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "I_ncludere i file nelle cartelle:"
+
 #~ msgid "_Automatically back up on a regular schedule"
 #~ msgstr "Eseguire il backup _automaticamente in modo periodico"
 
 #~ msgid "Include from:"
 #~ msgstr "Includere da:"
+
+#~ msgid "Except for:"
+#~ msgstr "Escludere da:"
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "E_scludere i file nelle cartelle"
 
 #~ msgid "Encrypted:"
 #~ msgstr "Cifrato:"
@@ -1612,6 +1638,9 @@ msgstr "Impossibile mostrare %s"
 
 #~ msgid "Could not open connection dialog"
 #~ msgstr "Impossibile aprire il dialogo di connessione"
+
+#~ msgid "Files"
+#~ msgstr "File"
 
 #~ msgid "Backup Preferences"
 #~ msgstr "Preferenze di backup"
@@ -1693,6 +1722,12 @@ msgstr "Impossibile mostrare %s"
 #~ "eseguire un backup nel modo \"giusto\" (cifratura, off-site, regolare) e\n"
 #~ "usa Duplicity come backend."
 
+#~ msgid "_Browse…"
+#~ msgstr "_Esplora..."
+
+#~ msgid "Where:"
+#~ msgstr "Dove:"
+
 #~ msgid ""
 #~ "Whether to encrypt your backup files in the storage location. It’s strongly "
 #~ "recommended to leave this as ‘true’."
@@ -1706,6 +1741,9 @@ msgstr "Impossibile mostrare %s"
 
 #~ msgid "Settings"
 #~ msgstr "Impostazioni"
+
+#~ msgid "Include files from:"
+#~ msgstr "File da includere:"
 
 #, c-format
 #~ msgid ""

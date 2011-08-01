@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-25 21:57-0400\n"
+"POT-Creation-Date: 2011-07-27 15:10-0400\n"
 "PO-Revision-Date: 2011-07-07 19:53+0000\n"
 "Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-07-28 04:34+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -770,7 +770,7 @@ msgstr "Obnovit"
 msgid "_Restore"
 msgstr "_Obnovit"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
 msgid "_Backup location:"
 msgstr "_Umístění zálohy:"
 
@@ -798,7 +798,7 @@ msgstr "Vybrat umístění pro obnovené soubory"
 msgid "Restore _folder:"
 msgstr "Obnovit _složku:"
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location:"
 msgstr "Umístění zálohy:"
 
@@ -1084,68 +1084,64 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:176
-msgid "Where:"
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:185
-msgid "Include files from:"
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:193
-msgid "Except for:"
-msgstr "Vyřadit z:"
-
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:251
 msgid "_Restore…"
 msgstr "_Obnovit..."
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:257
 msgid "Back Up _Now"
 msgstr ""
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:279
 msgid "Overview"
 msgstr ""
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:308
 #, c-format
 msgid "_Keep backups:"
 msgstr "_Ukládat zálohy:"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:324
 msgid "Storage"
 msgstr "Úložiště"
 
-#: ../preferences/Preferences.vala:364
-msgid "I_nclude files in folders:"
-msgstr "V_ložit soubory ze složek:"
+#: ../preferences/Preferences.vala:348
+msgid "Folders to _back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:379
-msgid "E_xcept files in folders:"
-msgstr "V_yřadit soubory v adresářích:"
+#: ../preferences/Preferences.vala:359
+msgid "Folders to _ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:393
-msgid "Files"
-msgstr "Soubory"
+#: ../preferences/Preferences.vala:370
+msgid "Folders"
+msgstr ""
 
-#: ../preferences/Preferences.vala:405
+#: ../preferences/Preferences.vala:382
 msgid "How _often to back up:"
 msgstr "Jak _často zálohovat:"
 
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "Plán"
 
@@ -1185,31 +1181,36 @@ msgstr[0] "Nejméně %d den"
 msgstr[1] "Nejméně %d dny"
 msgstr[2] "Nejméně %d dnů"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
+
+#: ../widgets/ConfigLabelBackupDate.vala:92
+#: ../widgets/ConfigLabelBackupDate.vala:106
+msgid "None"
+msgstr ""
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1219,11 +1220,11 @@ msgstr "Ano"
 msgid "No"
 msgstr "Ne"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
 msgid "Home"
 msgstr ""
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
 msgid "Trash"
 msgstr "Koš"
 
@@ -1303,7 +1304,23 @@ msgstr[2] ""
 "Staré zálohy budou ponechány alespoň %d dnů nebo dokud má umístění zálohy "
 "dostatek místa."
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:86
+msgid "_Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:87
+msgid "Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:95
+msgid "_Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:96
+msgid "Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:189
 msgid "Choose folders"
 msgstr "Vybrat adresáře"
 
@@ -1362,8 +1379,8 @@ msgid "_Log in with a username"
 msgstr "_Přihlásit se uživatelským jménem"
 
 #: ../widgets/ConfigLocationFile.vala:38
-msgid "_Browse…"
-msgstr "_Procházet..."
+msgid "_Choose Folder…"
+msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
@@ -1465,6 +1482,9 @@ msgstr "Nelze zobrazit %s"
 #~ msgid "Preferences"
 #~ msgstr "Nastavení"
 
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "V_ložit soubory ze složek:"
+
 #~ msgid "Encrypted:"
 #~ msgstr "Zašifrováno:"
 
@@ -1476,6 +1496,9 @@ msgstr "Nelze zobrazit %s"
 
 #~ msgid "Include from:"
 #~ msgstr "Vložit z:"
+
+#~ msgid "Except for:"
+#~ msgstr "Vyřadit z:"
 
 #~ msgid "_Automatically back up on a regular schedule"
 #~ msgstr "_Automaticky zálohovat podle plánu"
@@ -1563,6 +1586,9 @@ msgstr "Nelze zobrazit %s"
 #~ msgid "_Encrypt backup files"
 #~ msgstr "_Zašifrovat zálohované soubory"
 
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "V_yřadit soubory v adresářích:"
+
 #~ msgid "Home Folder"
 #~ msgstr "Domovský adresář"
 
@@ -1597,6 +1623,9 @@ msgstr "Nelze zobrazit %s"
 
 #~ msgid "GVFS FUSE is not installed"
 #~ msgstr "GVFS FUSE není nainstalováno"
+
+#~ msgid "Files"
+#~ msgstr "Soubory"
 
 #, c-format
 #~ msgid "Show _Progress (%.1f%%)"
@@ -1669,6 +1698,9 @@ msgstr "Nelze zobrazit %s"
 
 #~ msgid "FILES"
 #~ msgstr "SOUBORY"
+
+#~ msgid "_Browse…"
+#~ msgstr "_Procházet..."
 
 #~ msgid "Sign into Ubuntu One"
 #~ msgstr "Přihlásit se do Ubuntu One"

@@ -58,12 +58,16 @@ HELP_LINGUAS = \
 	ps \
 	pt_BR \
 	ru \
+	sl \
 	sv \
 	th \
 	tr \
 	vi \
 	zh_CN \
 	zh_TW
+
+check:
+	test "$(shell ls -1 */*.po | wc -l)" -eq "$(shell echo $(HELP_LINGUAS) | wc -w)"
 
 deja-dup-help.pot: deja-dup.pot
 	cp -a $^ $@

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-25 21:57-0400\n"
-"PO-Revision-Date: 2011-07-22 13:29+0000\n"
+"POT-Creation-Date: 2011-07-27 15:10-0400\n"
+"PO-Revision-Date: 2011-07-29 21:17+0000\n"
 "Last-Translator: Asier Sarasua Garmendia <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:42+0000\n"
+"X-Launchpad-Export-Date: 2011-07-30 05:00+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -801,13 +801,13 @@ msgstr "Leheneratu"
 msgid "_Restore"
 msgstr "_Leheneratu"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
 msgid "_Backup location:"
 msgstr "_Babeskopiaren kokapena:"
 
 #: ../deja-dup/AssistantRestore.vala:124
 msgid "Restore from Where?"
-msgstr ""
+msgstr "Leheneratu nondik?"
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date:"
@@ -829,7 +829,7 @@ msgstr "Hautatu leheneratuko diren fitxategien helburua"
 msgid "Restore _folder:"
 msgstr "Leheneratze-_karpeta:"
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location:"
 msgstr "Babeskopiaren kokapena:"
 
@@ -1119,68 +1119,64 @@ msgstr "Erakutsi nire babeskopia-_ezarpenak"
 msgid "Categories"
 msgstr "Kategoriak"
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups:"
 msgstr "_Babeskopia automatikoak:"
 
-#: ../preferences/Preferences.vala:176
-msgid "Where:"
-msgstr "Non:"
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up:"
+msgstr "Babeskopian gordeko diren karpetak:"
 
-#: ../preferences/Preferences.vala:185
-msgid "Include files from:"
-msgstr "Sartu hemengo fitxategiak:"
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore:"
+msgstr "Ezikusiko diren karpetak:"
 
-#: ../preferences/Preferences.vala:193
-msgid "Except for:"
-msgstr "Ez sartu hauek:"
-
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup:"
 msgstr "Babeskopiarik berriena:"
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup:"
 msgstr "Hurrengo babeskopia automatikoa:"
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:251
 msgid "_Restore…"
 msgstr "_Leheneratu..."
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:257
 msgid "Back Up _Now"
 msgstr "Babeskopia _orain"
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:279
 msgid "Overview"
 msgstr "Ikuspegi orokorra"
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:308
 #, c-format
 msgid "_Keep backups:"
 msgstr "_Mantendu babeskopiak"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:324
 msgid "Storage"
 msgstr "Biltegia"
 
-#: ../preferences/Preferences.vala:364
-msgid "I_nclude files in folders:"
-msgstr "_Sartu hurrengo karpetetako fitxategiak:"
+#: ../preferences/Preferences.vala:348
+msgid "Folders to _back up:"
+msgstr "_Babeskopian gordeko diren karpetak:"
 
-#: ../preferences/Preferences.vala:379
-msgid "E_xcept files in folders:"
-msgstr "_Ez sartu hurrengo karpetetako fitxategiak:"
+#: ../preferences/Preferences.vala:359
+msgid "Folders to _ignore:"
+msgstr "_Ezikusiko diren karpetak:"
 
-#: ../preferences/Preferences.vala:393
-msgid "Files"
-msgstr "Fitxategiak"
+#: ../preferences/Preferences.vala:370
+msgid "Folders"
+msgstr "Karpetak"
 
-#: ../preferences/Preferences.vala:405
+#: ../preferences/Preferences.vala:382
 msgid "How _often to back up:"
 msgstr "_Zenbatero egin babeskopia"
 
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "Programaketa"
 
@@ -1219,31 +1215,36 @@ msgid_plural "At least %d days"
 msgstr[0] "Gutxienez egun %d"
 msgstr[1] "Gutxienez %d egun"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr "Gaur"
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr "Atzo"
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr "Bihar"
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] "Hemendik egun %dera"
 msgstr[1] "Hemendik %d egunetara"
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "Duela egun %d"
 msgstr[1] "Duela %d egun"
+
+#: ../widgets/ConfigLabelBackupDate.vala:92
+#: ../widgets/ConfigLabelBackupDate.vala:106
+msgid "None"
+msgstr "Bat ere ez"
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1253,11 +1254,11 @@ msgstr "Bai"
 msgid "No"
 msgstr "Ez"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
 msgid "Home"
 msgstr "Karpeta nagusia"
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
 msgid "Trash"
 msgstr "Zakarrontzia"
 
@@ -1334,7 +1335,23 @@ msgstr[1] ""
 "Babeskopia zaharrak gutxienez %d egun edo babeskopiaren kokapena lekurik "
 "gabe geratu arte mantenduko dira."
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:86
+msgid "_Add"
+msgstr "_Gehitu"
+
+#: ../widgets/ConfigList.vala:87
+msgid "Add"
+msgstr "Gehitu"
+
+#: ../widgets/ConfigList.vala:95
+msgid "_Remove"
+msgstr "_Kendu"
+
+#: ../widgets/ConfigList.vala:96
+msgid "Remove"
+msgstr "Kendu"
+
+#: ../widgets/ConfigList.vala:189
 msgid "Choose folders"
 msgstr "Hautatu karpetak"
 
@@ -1393,8 +1410,8 @@ msgid "_Log in with a username"
 msgstr "_Hasi saioa erabiltzaile-izen batekin"
 
 #: ../widgets/ConfigLocationFile.vala:38
-msgid "_Browse…"
-msgstr "_Arakatu..."
+msgid "_Choose Folder…"
+msgstr "_Hautatu karpeta..."
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
@@ -1426,7 +1443,7 @@ msgstr "Astero"
 
 #: ../widgets/ConfigPeriod.vala:38
 msgid "Every 2 weeks"
-msgstr ""
+msgstr "Bi astetik behin"
 
 #: ../widgets/ConfigPeriod.vala:39
 msgid "Monthly"
@@ -1474,8 +1491,17 @@ msgstr "Ezin izan da %s erakutsi"
 #~ msgid "Preferences"
 #~ msgstr "Hobespenak"
 
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "_Sartu hurrengo karpetetako fitxategiak:"
+
 #~ msgid "Include from:"
 #~ msgstr "Sartu hauek:"
+
+#~ msgid "Except for:"
+#~ msgstr "Ez sartu hauek:"
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "_Ez sartu hurrengo karpetetako fitxategiak:"
 
 #~ msgid "Backup Finished"
 #~ msgstr "Babeskopia amaitu da"
@@ -1569,6 +1595,9 @@ msgstr "Ezin izan da %s erakutsi"
 #~ msgid "Could not open connection dialog"
 #~ msgstr "Ezin izan da konexio-koadroa ireki"
 
+#~ msgid "Files"
+#~ msgstr "Fitxategiak"
+
 #~ msgid "Home Folder"
 #~ msgstr "Karpeta nagusia"
 
@@ -1652,6 +1681,9 @@ msgstr "Ezin izan da %s erakutsi"
 #~ "  Julen Ruiz Aizpuru https://launchpad.net/~julen\n"
 #~ "  Michael Terry https://launchpad.net/~mterry"
 
+#~ msgid "_Browse…"
+#~ msgstr "_Arakatu..."
+
 #~ msgid ""
 #~ "The type of backup location. If 'auto', a default will be chosen based on "
 #~ "what is available."
@@ -1700,8 +1732,14 @@ msgstr "Ezin izan da %s erakutsi"
 #~ "Babeskopiaren kokapena muntatutako kanpo-bolumena den ala karpeta normala "
 #~ "den. Balio posibleak 'bolumena' edo 'normala' dira."
 
+#~ msgid "Where:"
+#~ msgstr "Non:"
+
 #~ msgid "Déjà Dup encryption password"
 #~ msgstr "Déjà Dup-en zifratze-pasahitza"
+
+#~ msgid "Include files from:"
+#~ msgstr "Sartu hemengo fitxategiak:"
 
 #~ msgid "Indicates this backup was scheduled"
 #~ msgstr "Babeskopia hau aurrez programatu dela adierazten du"

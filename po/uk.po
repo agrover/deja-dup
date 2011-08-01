@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-25 21:57-0400\n"
+"POT-Creation-Date: 2011-07-27 15:10-0400\n"
 "PO-Revision-Date: 2011-07-07 20:01+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:44+0000\n"
+"X-Launchpad-Export-Date: 2011-07-28 04:36+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -766,7 +766,7 @@ msgstr "Відновити з збереженої копії."
 msgid "_Restore"
 msgstr "_Відновити"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
 msgid "_Backup location:"
 msgstr "_Місце збереження:"
 
@@ -794,7 +794,7 @@ msgstr "Виберіть місце призначення для відновл
 msgid "Restore _folder:"
 msgstr "Тека _збереження:"
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location:"
 msgstr "Місце для резервного збереження:"
 
@@ -1082,68 +1082,64 @@ msgstr "Лише покажіть мені налаштування для ре�
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups:"
 msgstr "Автоматичне _резервування:"
 
-#: ../preferences/Preferences.vala:176
-msgid "Where:"
-msgstr "Де:"
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:185
-msgid "Include files from:"
-msgstr "Включити файли з:"
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:193
-msgid "Except for:"
-msgstr "Виключити з:"
-
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup:"
 msgstr "Найсвіжіші резервні копії:"
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup:"
 msgstr "Наступне автоматичне резервування:"
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:251
 msgid "_Restore…"
 msgstr "_Відновлення..."
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:257
 msgid "Back Up _Now"
 msgstr "Резервувати зараз"
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:279
 msgid "Overview"
 msgstr "Огляд"
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:308
 #, c-format
 msgid "_Keep backups:"
 msgstr "_Збереження резервних копій:"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:324
 msgid "Storage"
 msgstr "Сховище"
 
-#: ../preferences/Preferences.vala:364
-msgid "I_nclude files in folders:"
-msgstr "Включити файли в теках:"
+#: ../preferences/Preferences.vala:348
+msgid "Folders to _back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:379
-msgid "E_xcept files in folders:"
-msgstr "Виключити файли в теках:"
+#: ../preferences/Preferences.vala:359
+msgid "Folders to _ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:393
-msgid "Files"
-msgstr "Файли"
+#: ../preferences/Preferences.vala:370
+msgid "Folders"
+msgstr ""
 
-#: ../preferences/Preferences.vala:405
+#: ../preferences/Preferences.vala:382
 msgid "How _often to back up:"
 msgstr "Як часто робити резервування:"
 
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "Розклад"
 
@@ -1183,19 +1179,19 @@ msgstr[0] "Раз на %d день"
 msgstr[1] "Раз на %d дні"
 msgstr[2] "Раз на %d днів"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr "Сьогодні"
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr "Вчора"
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr "Завтра"
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
@@ -1203,13 +1199,18 @@ msgstr[0] "%d день від сьогодні"
 msgstr[1] "%d дні від сьогодні"
 msgstr[2] "%d днів від сьогодні"
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d день тому"
 msgstr[1] "%d дні тому"
 msgstr[2] "%d днів тому"
+
+#: ../widgets/ConfigLabelBackupDate.vala:92
+#: ../widgets/ConfigLabelBackupDate.vala:106
+msgid "None"
+msgstr ""
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1219,11 +1220,11 @@ msgstr "Так"
 msgid "No"
 msgstr "Ні"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
 msgid "Home"
 msgstr ""
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
 msgid "Trash"
 msgstr "Смітник"
 
@@ -1282,7 +1283,23 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:86
+msgid "_Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:87
+msgid "Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:95
+msgid "_Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:96
+msgid "Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:189
 msgid "Choose folders"
 msgstr "Оберіть каталоги"
 
@@ -1341,8 +1358,8 @@ msgid "_Log in with a username"
 msgstr "_Вхід з іменем користувача"
 
 #: ../widgets/ConfigLocationFile.vala:38
-msgid "_Browse…"
-msgstr "_Огляд..."
+msgid "_Choose Folder…"
+msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
@@ -1530,8 +1547,17 @@ msgstr "Не вдалось показати %s"
 #~ msgid "Backing up"
 #~ msgstr "Створення резервної копії"
 
+#~ msgid "Except for:"
+#~ msgstr "Виключити з:"
+
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "Включити файли в теках:"
+
 #~ msgid "Include from:"
 #~ msgstr "Включити з:"
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "Виключити файли в теках:"
 
 #~ msgid "Encrypted:"
 #~ msgstr "Шифрування:"
@@ -1642,8 +1668,20 @@ msgstr "Не вдалось показати %s"
 #~ msgid "Scanning for files from yesterday…"
 #~ msgstr "Сканування вчорашніх файлів..."
 
+#~ msgid "Where:"
+#~ msgstr "Де:"
+
+#~ msgid "Include files from:"
+#~ msgstr "Включити файли з:"
+
+#~ msgid "Files"
+#~ msgstr "Файли"
+
 #~ msgid "Home Folder"
 #~ msgstr "Домівка"
+
+#~ msgid "_Browse…"
+#~ msgstr "_Огляд..."
 
 #~ msgid "Biweekly"
 #~ msgstr "Раз на два тижні"

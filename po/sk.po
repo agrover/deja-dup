@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 21:57-0400\n"
+"POT-Creation-Date: 2011-07-27 15:10-0400\n"
 "PO-Revision-Date: 2010-05-04 16:07+0000\n"
 "Last-Translator: Marián Bača <majoobaca@gmail.com>\n"
 "Language-Team: Slovak <>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:44+0000\n"
+"X-Launchpad-Export-Date: 2011-07-28 04:35+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -759,7 +759,7 @@ msgstr "Obnoviť"
 msgid "_Restore"
 msgstr "O_bnoviť"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
 msgid "_Backup location:"
 msgstr "_Umiestnenie záloh:"
 
@@ -787,7 +787,7 @@ msgstr "Vyberte cieľ pre obnovu súborov"
 msgid "Restore _folder:"
 msgstr "Obnoviť p_riečinok:"
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location:"
 msgstr "Umiestnenie záloh:"
 
@@ -1072,68 +1072,64 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:176
-msgid "Where:"
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:185
-msgid "Include files from:"
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:193
-msgid "Except for:"
-msgstr "Okrem:"
-
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:251
 msgid "_Restore…"
 msgstr "_Obnoviť..."
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:257
 msgid "Back Up _Now"
 msgstr ""
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:279
 msgid "Overview"
 msgstr ""
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:308
 #, c-format
 msgid "_Keep backups:"
 msgstr "Po_nechať zálohy:"
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:324
 msgid "Storage"
 msgstr ""
 
-#: ../preferences/Preferences.vala:364
-msgid "I_nclude files in folders:"
-msgstr "Za_hrnúť súbory v priečinkoch:"
-
-#: ../preferences/Preferences.vala:379
-msgid "E_xcept files in folders:"
-msgstr "Vy_lúčiť súbory v priečinkoch:"
-
-#: ../preferences/Preferences.vala:393
-msgid "Files"
+#: ../preferences/Preferences.vala:348
+msgid "Folders to _back up:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:405
+#: ../preferences/Preferences.vala:359
+msgid "Folders to _ignore:"
+msgstr ""
+
+#: ../preferences/Preferences.vala:370
+msgid "Folders"
+msgstr ""
+
+#: ../preferences/Preferences.vala:382
 msgid "How _often to back up:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr ""
 
@@ -1173,31 +1169,36 @@ msgstr[0] "Najmenej %d dní"
 msgstr[1] "Najmenej %d deň"
 msgstr[2] "Najmenej %d dni"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
+
+#: ../widgets/ConfigLabelBackupDate.vala:92
+#: ../widgets/ConfigLabelBackupDate.vala:106
+msgid "None"
+msgstr ""
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1207,11 +1208,11 @@ msgstr "Áno"
 msgid "No"
 msgstr "Nie"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
 msgid "Home"
 msgstr ""
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
 msgid "Trash"
 msgstr "Kôš"
 
@@ -1270,7 +1271,23 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:86
+msgid "_Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:87
+msgid "Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:95
+msgid "_Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:96
+msgid "Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:189
 msgid "Choose folders"
 msgstr "Vybrať priečinky"
 
@@ -1329,7 +1346,7 @@ msgid "_Log in with a username"
 msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:38
-msgid "_Browse…"
+msgid "_Choose Folder…"
 msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:49
@@ -1516,8 +1533,17 @@ msgstr "Nemôžem zobraziť %s"
 #~ msgid "_Encrypt backup files"
 #~ msgstr "Z_ašifrovať zálohované súbory"
 
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "Za_hrnúť súbory v priečinkoch:"
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "Vy_lúčiť súbory v priečinkoch:"
+
 #~ msgid "Include from:"
 #~ msgstr "Vrátane:"
+
+#~ msgid "Except for:"
+#~ msgstr "Okrem:"
 
 #~ msgid "_Automatically backup on a regular schedule"
 #~ msgstr "Au_tomaticky zálohovať v pravidelných intervaloch"

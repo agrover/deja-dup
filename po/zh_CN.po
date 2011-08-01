@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-25 21:57-0400\n"
+"POT-Creation-Date: 2011-07-27 15:10-0400\n"
 "PO-Revision-Date: 2011-07-23 01:24+0000\n"
 "Last-Translator: 英华 <wantinghard@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:44+0000\n"
+"X-Launchpad-Export-Date: 2011-07-28 04:36+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:356
@@ -753,7 +753,7 @@ msgstr "恢复"
 msgid "_Restore"
 msgstr "_恢复"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
 msgid "_Backup location:"
 msgstr "_备份位置："
 
@@ -781,7 +781,7 @@ msgstr "选择所恢复文件的目的地"
 msgid "Restore _folder:"
 msgstr "恢复_文件夹："
 
-#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location:"
 msgstr "备份位置："
 
@@ -1049,68 +1049,64 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:176
-msgid "Where:"
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:185
-msgid "Include files from:"
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:193
-msgid "Except for:"
-msgstr "不包括："
-
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup:"
 msgstr ""
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:251
 msgid "_Restore…"
 msgstr "_恢复..."
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:257
 msgid "Back Up _Now"
 msgstr ""
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:279
 msgid "Overview"
 msgstr ""
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:308
 #, c-format
 msgid "_Keep backups:"
 msgstr "_保留备份："
 
-#: ../preferences/Preferences.vala:339
+#: ../preferences/Preferences.vala:324
 msgid "Storage"
 msgstr "存储"
 
-#: ../preferences/Preferences.vala:364
-msgid "I_nclude files in folders:"
-msgstr "_包括以下文件夹中的文件："
+#: ../preferences/Preferences.vala:348
+msgid "Folders to _back up:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:379
-msgid "E_xcept files in folders:"
-msgstr "_不包括以下文件夹中的文件："
+#: ../preferences/Preferences.vala:359
+msgid "Folders to _ignore:"
+msgstr ""
 
-#: ../preferences/Preferences.vala:393
-msgid "Files"
-msgstr "文件"
+#: ../preferences/Preferences.vala:370
+msgid "Folders"
+msgstr ""
 
-#: ../preferences/Preferences.vala:405
+#: ../preferences/Preferences.vala:382
 msgid "How _often to back up:"
 msgstr "_备份频率："
 
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "计划"
 
@@ -1148,31 +1144,36 @@ msgid "At least %d day"
 msgid_plural "At least %d days"
 msgstr[0] "至少 %d 天"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
+
+#: ../widgets/ConfigLabelBackupDate.vala:92
+#: ../widgets/ConfigLabelBackupDate.vala:106
+msgid "None"
+msgstr ""
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1182,11 +1183,11 @@ msgstr "是"
 msgid "No"
 msgstr "否"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
+#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
 msgid "Home"
 msgstr ""
 
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
+#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
 msgid "Trash"
 msgstr "垃圾桶"
 
@@ -1244,7 +1245,23 @@ msgid_plural ""
 "low on space."
 msgstr[0] "旧备份将至少保留 %d 天，或直至备份位置 空间不足。"
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:86
+msgid "_Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:87
+msgid "Add"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:95
+msgid "_Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:96
+msgid "Remove"
+msgstr ""
+
+#: ../widgets/ConfigList.vala:189
 msgid "Choose folders"
 msgstr "选择文件夹"
 
@@ -1303,7 +1320,7 @@ msgid "_Log in with a username"
 msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:38
-msgid "_Browse…"
+msgid "_Choose Folder…"
 msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:49
@@ -1394,6 +1411,12 @@ msgstr "无法显示 %s"
 #~ msgid "_Encrypt backup files"
 #~ msgstr "_加密备份文件"
 
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "_包括以下文件夹中的文件："
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "_不包括以下文件夹中的文件："
+
 #~ msgid "Preferences"
 #~ msgstr "首选项"
 
@@ -1402,6 +1425,9 @@ msgstr "无法显示 %s"
 
 #~ msgid "Include from:"
 #~ msgstr "包括来自："
+
+#~ msgid "Except for:"
+#~ msgstr "不包括："
 
 #~ msgid "_Automatically back up on a regular schedule"
 #~ msgstr "_按照固定时间表自动备份"
@@ -1495,6 +1521,9 @@ msgstr "无法显示 %s"
 
 #~ msgid "Restore missing files…"
 #~ msgstr "正在恢复缺少的文件..."
+
+#~ msgid "Files"
+#~ msgstr "文件"
 
 #~ msgid "Connect to _Server…"
 #~ msgstr "正在连接到_服务器..."
