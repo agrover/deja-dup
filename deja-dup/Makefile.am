@@ -26,9 +26,15 @@ deja_dup_CFLAGS = \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
-deja_dup_LDADD = $(DUP_LIBS) $(APPINDICATOR_LIBS) $(UNITY_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la $(top_builddir)/widgets/libwidgets.la
+deja_dup_LDADD = \
+	$(DUP_LIBS) \
+	$(APPINDICATOR_LIBS) \
+	$(UNITY_LIBS) \
+	@INTLLIBS@ \
+	$(top_builddir)/common/libcommon.la \
+	$(top_builddir)/widgets/libwidgets.la
 
-deja_dup_VALASOURCES = \
+deja_dup_SOURCES = \
 	Assistant.vala \
 	AssistantBackup.vala \
 	AssistantOperation.vala \
@@ -39,14 +45,10 @@ deja_dup_VALASOURCES = \
 	StatusIcon.vala \
 	main.vala
 
-deja_dup_VALABUILTSOURCES = \
-	$(deja_dup_VALASOURCES:.vala=.c)
-
-deja_dup_SOURCES = \
-	$(deja_dup_VALABUILTSOURCES)
-
-if MAINTAINER_MODE
-PACKAGES = \
+AM_VALAFLAGS = \
+	--vapidir $(top_srcdir)/common \
+	--vapidir $(top_srcdir)/widgets \
+	--vapidir $(top_srcdir)/vapi \
 	--pkg gmodule-2.0 \
 	--pkg @GTK_MODULE@ \
 	--pkg @GDK_X11_MODULE@ \
@@ -61,14 +63,3 @@ PACKAGES = \
 	--pkg hacks \
 	--pkg hacks-unity \
 	--pkg config
-BUILT_SOURCES = vala.stamp
-vala.stamp: $(deja_dup_VALASOURCES)
-	$(AM_V_GEN)$(VALAC) --vapidir $(top_srcdir)/common --vapidir $(top_srcdir)/widgets \
-	         --vapidir $(top_srcdir)/vapi $(PACKAGES) $^ -C
-	touch $@
-endif
-
-EXTRA_DIST = $(deja_dup_VALASOURCES)
-if MAINTAINER_MODE
-CLEANFILES = $(BUILT_SOURCES) $(deja_dup_VALABUILTSOURCES)
-endif

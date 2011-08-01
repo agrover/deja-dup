@@ -26,9 +26,19 @@ libwidgets_la_CFLAGS = \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
-libwidgets_la_LIBADD = $(WIDGETS_LIBS) $(APPINDICATOR_LIBS) $(UNITY_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la
+libwidgets_la_LIBADD = \
+	$(WIDGETS_LIBS) \
+	$(APPINDICATOR_LIBS) \
+	$(UNITY_LIBS) \
+	@INTLLIBS@ \
+	$(top_builddir)/common/libcommon.la
 
-libwidgets_la_VALASOURCES = \
+noinst_HEADERS = \
+	widgets.h \
+	whacks.h
+
+libwidgets_la_SOURCES = \
+	whacks.c \
 	ConfigBool.vala \
 	ConfigChoice.vala \
 	ConfigDelete.vala \
@@ -63,16 +73,11 @@ libwidgets_la_VALASOURCES = \
 	ToggleGroup.vala \
 	WidgetUtils.vala
 
-libwidgets_la_VALABUILTSOURCES = \
-	widgets.h \
-	$(libwidgets_la_VALASOURCES:.vala=.c)
-
-libwidgets_la_SOURCES = \
-	whacks.c whacks.h \
-	$(libwidgets_la_VALABUILTSOURCES)
-
-if MAINTAINER_MODE
-PACKAGES = \
+AM_VALAFLAGS = \
+	--library=libwidgets \
+	-H widgets.h \
+	--vapidir=$(top_srcdir)/common \
+	--vapidir=$(top_srcdir)/vapi \
 	--pkg libcommon \
 	--pkg @GTK_MODULE@ \
 	--pkg uriutils \
@@ -80,14 +85,3 @@ PACKAGES = \
 	--pkg hacks-unity \
 	--pkg libnotify \
 	--pkg config
-BUILT_SOURCES = vala.stamp
-vala.stamp: $(libwidgets_la_VALASOURCES)
-	$(AM_V_GEN)$(VALAC) --library=libwidgets -H widgets.h --vapidir=$(top_srcdir)/vapi \
-	                    --vapidir=$(top_srcdir)/common $(PACKAGES) $^ -C
-	touch $@
-endif
-
-EXTRA_DIST = $(libwidgets_la_VALASOURCES)
-if MAINTAINER_MODE
-CLEANFILES = $(BUILT_SOURCES) $(libwidgets_la_VALABUILTSOURCES)
-endif

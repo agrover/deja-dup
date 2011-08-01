@@ -24,9 +24,18 @@ libcommon_la_CFLAGS = \
 	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
-libcommon_la_LIBADD = $(COMMON_LIBS) @INTLLIBS@
+libcommon_la_LIBADD = \
+	$(COMMON_LIBS) \
+	@INTLLIBS@
 
-libcommon_la_VALASOURCES = \
+noinst_HEADERS = \
+	common.h \
+	chacks.h \
+	uriutils.h
+
+libcommon_la_SOURCES = \
+	chacks.c \
+	uriutils.c \
 	AsyncCommand.vala \
 	Backend.vala \
 	BackendAuto.vala \
@@ -51,30 +60,13 @@ libcommon_la_VALASOURCES = \
 	RecursiveOp.vala \
 	SimpleSettings.vala
 
-libcommon_la_VALABUILTSOURCES = \
-	common.h \
-	$(libcommon_la_VALASOURCES:.vala=.c)
-
-libcommon_la_SOURCES = \
-	chacks.c chacks.h \
-	uriutils.c uriutils.h \
-	$(libcommon_la_VALABUILTSOURCES)
-
-if MAINTAINER_MODE
-PACKAGES = \
+AM_VALAFLAGS = \
+	--library=libcommon \
+	-H common.h \
+	--vapidir=$(top_srcdir)/vapi \
 	--pkg gio-2.0 \
 	--pkg gio-unix-2.0 \
 	--pkg gnome-keyring-1 \
 	--pkg uriutils \
 	--pkg posix \
 	--pkg config
-BUILT_SOURCES = vala.stamp
-vala.stamp: $(libcommon_la_VALASOURCES)
-	$(AM_V_GEN)$(VALAC) --library=libcommon -H common.h --vapidir=$(top_srcdir)/vapi $(PACKAGES) $^ -C
-	touch $@
-endif
-
-EXTRA_DIST = $(libcommon_la_VALASOURCES)
-if MAINTAINER_MODE
-CLEANFILES = $(BUILT_SOURCES) $(libcommon_la_VALABUILTSOURCES)
-endif

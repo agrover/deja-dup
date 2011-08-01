@@ -25,30 +25,18 @@ deja_dup_monitor_CFLAGS = \
 	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
-deja_dup_monitor_LDADD = $(MONITOR_LIBS) @INTLLIBS@ $(top_builddir)/common/libcommon.la
-
-deja_dup_monitor_VALASOURCES = \
-	monitor.vala
-
-deja_dup_monitor_VALABUILTSOURCES = \
-	$(deja_dup_monitor_VALASOURCES:.vala=.c)
+deja_dup_monitor_LDADD = \
+	$(MONITOR_LIBS) \
+	@INTLLIBS@ \
+	$(top_builddir)/common/libcommon.la
 
 deja_dup_monitor_SOURCES = \
-	$(deja_dup_monitor_VALABUILTSOURCES)
+	monitor.vala
 
-if MAINTAINER_MODE
-PACKAGES = \
+AM_VALAFLAGS = \
+	--vapidir $(top_srcdir)/common \
+	--vapidir $(top_srcdir)/vapi \
 	--pkg config \
 	--pkg gio-2.0 \
 	--pkg libcommon \
 	--pkg libnotify
-BUILT_SOURCES = vala.stamp
-vala.stamp: $(deja_dup_monitor_VALASOURCES)
-	$(AM_V_GEN)$(VALAC) --vapidir $(top_srcdir)/common --vapidir $(top_srcdir)/vapi $(PACKAGES) $^ -C
-	touch $@
-endif
-
-EXTRA_DIST = $(deja_dup_monitor_VALASOURCES)
-if MAINTAINER_MODE
-CLEANFILES = $(BUILT_SOURCES) $(deja_dup_monitor_VALABUILTSOURCES)
-endif

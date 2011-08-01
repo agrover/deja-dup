@@ -29,36 +29,35 @@ SHARED_CFLAGS = \
 	$(PREF_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
-libdeja_dup_la_CFLAGS = $(SHARED_CFLAGS) $(CCPANEL_CFLAGS)
-deja_dup_preferences_CFLAGS = $(SHARED_CFLAGS)
+libdeja_dup_la_CFLAGS = \
+	$(SHARED_CFLAGS) \
+	$(CCPANEL_CFLAGS)
+deja_dup_preferences_CFLAGS = \
+	$(SHARED_CFLAGS)
 
-SHARED_LIBS = $(PREF_LIBS) @INTLLIBS@ $(top_builddir)/widgets/libwidgets.la
+SHARED_LIBS = \
+	$(PREF_LIBS) \
+	@INTLLIBS@ \
+	$(top_builddir)/widgets/libwidgets.la
 libdeja_dup_la_LDFLAGS = -module -avoid-version
-libdeja_dup_la_LIBADD = $(SHARED_LIBS) $(CCPANEL_LIBS)
-deja_dup_preferences_LDADD = $(SHARED_LIBS)
-
-SHARED_VALASOURCES = \
-	Preferences.vala
-libdeja_dup_la_VALASOURCES = \
-	$(SHARED_VALASOURCES)
-deja_dup_preferences_VALASOURCES = \
-	$(SHARED_VALASOURCES) \
-	preferences-main.vala
-
-libdeja_dup_la_VALABUILTSOURCES = \
-	$(libdeja_dup_la_VALASOURCES:.vala=.c)
-deja_dup_preferences_VALABUILTSOURCES = \
-	$(deja_dup_preferences_VALASOURCES:.vala=.c)
+libdeja_dup_la_LIBADD = \
+	$(SHARED_LIBS) \
+	$(CCPANEL_LIBS)
+deja_dup_preferences_LDADD = \
+	$(SHARED_LIBS)
 
 libdeja_dup_la_SOURCES = \
-	$(libdeja_dup_la_VALABUILTSOURCES) \
-	preferences.h \
+	Preferences.vala \
 	PreferencesPanel.c
-deja_dup_preferences_SOURCES = \
-	$(deja_dup_preferences_VALABUILTSOURCES)
 
-if MAINTAINER_MODE
-PACKAGES = \
+deja_dup_preferences_SOURCES = \
+	Preferences.vala \
+	preferences-main.vala
+
+AM_VALAFLAGS = \
+	--vapidir $(top_srcdir)/common \
+	--vapidir $(top_srcdir)/widgets \
+	--vapidir $(top_srcdir)/vapi \
 	--pkg @GTK_MODULE@ \
 	--pkg gio-2.0 \
 	--pkg libcommon \
@@ -66,25 +65,3 @@ PACKAGES = \
 	--pkg hacks \
 	--pkg unix \
 	--pkg config
-BUILT_SOURCES = vala.stamp
-vala.stamp: $(libdeja_dup_la_VALASOURCES) $(deja_dup_preferences_VALASOURCES)
-if HAVE_CCPANEL
-	$(AM_V_GEN)$(VALAC) --vapidir $(top_srcdir)/common --vapidir $(top_srcdir)/widgets \
-	                    --vapidir $(top_srcdir)/vapi -H preferences.h $(PACKAGES) \
-			    $(libdeja_dup_la_VALASOURCES) -C
-endif
-	$(AM_V_GEN)$(VALAC) --vapidir $(top_srcdir)/common --vapidir $(top_srcdir)/widgets \
-	                    --vapidir $(top_srcdir)/vapi $(PACKAGES) \
-			    $(deja_dup_preferences_VALASOURCES) -C
-	touch $@
-endif
-
-EXTRA_DIST = \
-	$(libdeja_dup_la_VALASOURCES) \
-	$(deja_dup_preferences_VALASOURCES)
-if MAINTAINER_MODE
-CLEANFILES = \
-	$(BUILT_SOURCES) \
-	$(libdeja_dup_la_VALABUILTSOURCES) \
-	$(deja_dup_preferences_VALABUILTSOURCES)
-endif

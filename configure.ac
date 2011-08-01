@@ -39,12 +39,10 @@ AC_PROG_MAKE_SET
 LT_PREREQ([2.2.6])
 LT_INIT
 
+DEJA_PROG_VALAC([0.11.6])
+
 # Checks for valac
 if test "x$USE_MAINTAINER_MODE" = "xyes" ; then
-  DEJA_PROG_VALAC([0.11.6])
-  if test "x$VALAC" = "x" ; then
-      AC_MSG_ERROR([Cannot find the "valac" compiler in your PATH])
-  fi
   CFLAGS+=" -DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED"
 fi
 
