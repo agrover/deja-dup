@@ -60,6 +60,11 @@ dist_convert_DATA = deja-dup.convert
 EXTRA_DIST = deja-dup.desktop.in deja-dup-ccpanel.desktop.in deja-dup-preferences.desktop.in.in deja-dup-monitor.desktop.in.in org.gnome.DejaDup.gschema.xml.in
 CLEANFILES = deja-dup.desktop deja-dup-ccpanel.desktop deja-dup-preferences.desktop deja-dup-preferences.desktop.in deja-dup-monitor.desktop deja-dup-monitor.desktop.in org.gnome.DejaDup.gschema.xml
 
+check: $(desktop_DATA)
+	for desktop in *.desktop; do \
+		desktop-file-validate $${desktop}; \
+	done
+
 gtk_update_icon_cache = gtk-update-icon-cache -f -t
 install-data-hook: update-icon-cache
 uninstall-hook: update-icon-cache
