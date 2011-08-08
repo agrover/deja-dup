@@ -21,6 +21,81 @@ using GLib;
 
 namespace DejaDup {
 
+// This is a convenience version of Gtk.ListStore that handles the drag and
+// drop code.
+class ConfigListStore : Gtk.ListStore, Gtk.TreeDragDest, Gtk.TreeDragSource
+{
+  public ConfigList list {get; construct;}
+
+  public ConfigListStore(ConfigList list)
+  {
+    Object(list: list);
+  }
+
+  construct {
+    // path, display name, icon
+    GLib.Type[] types = {typeof(string), typeof(string), typeof(Icon)};
+    set_column_types(types);
+  }
+
+  public bool drag_data_received (Gtk.TreePath dest,
+                                  Gtk.SelectionData selection_data)
+  {
+    if (base.drag_data_received(dest, selection_data))
+      return true;
+
+    string[] uris = selection_data.get_uris();
+    if (uris == null)
+      return false;
+
+    // Only use URIs that are local full paths
+    SList<string> files = new SList<string>();
+    foreach (weak string uri in uris) {
+      if (Uri.parse_scheme(uri) != "file")
+        continue;
+      try {
+        var file = Filename.from_uri(uri, null);
+        if (file == null)
+          continue;
+        var gfile = File.new_for_path(file);
+        if (gfile.query_file_type(FileQueryInfoFlags.NONE, null) == FileType.DIRECTORY)
+          files.append(file);
+      }
+      catch (ConvertError e) {
+        warning("%s", e.message);
+      }
+    }
+
+    return list.add_files(files);
+  }
+
+  public bool drag_data_get (Gtk.TreePath path,
+                             Gtk.SelectionData selection_data)
+  {
+    if (base.drag_data_get(path, selection_data))
+      return true;
+
+    Gtk.TreeIter iter;
+    if (!get_iter(out iter, path))
+      return false;
+
+    string file;
+    get(iter, 0, out file);
+
+    string uri;
+    try {
+      uri = Filename.to_uri(file, null);
+    }
+    catch (ConvertError e) {
+      warning("%s", e.message);
+      return false;
+    }
+
+    string[] uris = {uri};
+    return selection_data.set_uris(uris);
+  }
+}
+
 public class ConfigList : ConfigWidget
 {
   public ConfigList(string key, string ns="")
@@ -53,7 +128,7 @@ public class ConfigList : ConfigWidget
   Gtk.ToolButton add_button;
   Gtk.ToolButton remove_button;
   construct {
-    var model = new Gtk.ListStore(3, typeof(string), typeof(string), typeof(Icon));
+    var model = new ConfigListStore(this);
     tree = new Gtk.TreeView();
     tree.set("model", model,
              "headers-visible", false);
@@ -71,6 +146,20 @@ public class ConfigList : ConfigWidget
     var renderer = new Gtk.CellRendererText();
     tree.insert_column_with_attributes(-1, null, renderer,
                                        "text", 1);
+
+    Gtk.TargetEntry[] targets = new Gtk.TargetEntry[1];
+    targets[0].target = "text/uri-list";
+    targets[0].flags = Gtk.TargetFlags.OTHER_WIDGET;
+    targets[0].info = Quark.from_string(key);
+    tree.enable_model_drag_dest (targets, Gdk.DragAction.COPY);
+
+    // Allow moving within our own app
+    targets[0].flags = Gtk.TargetFlags.SAME_APP;
+    tree.enable_model_drag_source (Gdk.ModifierType.BUTTON1_MASK, targets,
+                                   Gdk.DragAction.MOVE);
+
+    // For when the above drag moves files away
+    model.row_deleted.connect(write_to_config);
 
     var scroll = new Gtk.ScrolledWindow(null, null);
     scroll.hscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
@@ -139,7 +228,9 @@ public class ConfigList : ConfigWidget
     
     Gtk.ListStore model;
     tree.get("model", out model);
+    model.row_deleted.disconnect(write_to_config);
     model.clear();
+    model.row_deleted.connect(write_to_config);
     
     int i = 0;
     File home = File.new_for_path(Environment.get_home_dir());
@@ -200,9 +291,18 @@ public class ConfigList : ConfigWidget
     
     SList<string> files = dlg.get_filenames();
     destroy_widget(dlg);
-    
+
+    add_files(files);
+  }
+
+  public bool add_files(SList<string>? files)
+  {
+    if (files == null)
+      return false;
+
     var slist_val = settings.get_value(key);
     string*[] slist = slist_val.get_strv();
+    bool rv = false;
     
     foreach (string file in files) {
       var folder = File.new_for_path(file);
@@ -215,50 +315,52 @@ public class ConfigList : ConfigWidget
         }
       }
       
-      if (!found)
+      if (!found) {
         slist += folder.get_parse_name();
+        rv = true;
+      }
     }
-    
-    settings.set_value(key, new Variant.strv(slist));
+
+    if (rv) {
+      settings.set_value(key, new Variant.strv(slist));
+    }
+    return rv;
   }
-  
+
+  public string[] get_files()
+  {
+    var slist_val = settings.get_value(key);
+    return slist_val.dup_strv();
+  }
+
+  public void write_to_config(Gtk.TreeModel model, Gtk.TreePath path)
+  {
+    Gtk.TreeIter iter;
+    string[] paths = new string[0];
+
+    if (model.get_iter_first(out iter)) {
+      do {
+        string current;
+        model.get(iter, 0, out current);
+        paths += current;
+      } while (model.iter_next(ref iter));
+    }
+
+    settings.set_value(key, new Variant.strv((string*[])paths));
+  }
+
   void handle_remove()
   {
     var sel = tree.get_selection();
-    
+
     weak Gtk.TreeModel model;
     List<Gtk.TreePath> paths = sel.get_selected_rows(out model);
-    if (paths == null)
-      return;
-    
-    var slist_val = settings.get_value(key);
-    string*[] before = slist_val.get_strv();
-    string[] after = new string[0];
-    
-    foreach (string file in before) {
-      var sfile = DejaDup.parse_dir(file);
-      if (sfile == null)
-        continue;
 
-      bool to_remove = false;
-      foreach (Gtk.TreePath path in paths) {
-        Gtk.TreeIter iter;
-        if (!model.get_iter(out iter, path))
-          continue;
-        
-        string current;
-        model.get(iter, 0, out current);
-        var current_file = File.new_for_path(current);
-        
-        if (sfile.equal(current_file))
-          to_remove = true;
-      }
-
-      if (!to_remove)
-        after += file;
+    foreach (Gtk.TreePath path in paths) {
+      Gtk.TreeIter iter;
+      if (model.get_iter(out iter, path))
+        (model as Gtk.ListStore).remove(iter);
     }
-    
-    settings.set_value(key, new Variant.strv((string*[])after));
   }
 }
 
