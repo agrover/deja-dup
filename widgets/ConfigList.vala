@@ -211,7 +211,7 @@ public class ConfigList : ConfigWidget
     uint modifiers = Gtk.accelerator_get_default_mod_mask();
     
     // Vala keysym bindings would be nice.  Check for delete or kp_delete
-    if ((e.keyval == 0xffff || e.keyval == 0xff9f) && modifiers == 0) {
+    if ((e.keyval == 0xffff || e.keyval == 0xff9f) && (e.state & modifiers) == 0) {
       handle_remove();
       return true;
     }
