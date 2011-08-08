@@ -141,9 +141,10 @@ public class ConfigLocation : ConfigWidget
     mon.ref(); // bug 569418; bad things happen when VM goes away
     List<Volume> vols = mon.get_volumes();
     foreach (Volume v in vols) {
-      add_entry(v.get_icon(), v.get_name(), Group.VOLUMES,
-                new ConfigLocationVolume(label_sizes),
-                v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID));
+      if (is_allowed_volume(v))
+        add_entry(v.get_icon(), v.get_name(), Group.VOLUMES,
+                  new ConfigLocationVolume(label_sizes),
+                  v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID));
     }
     index_vol_end = next_index();
 
@@ -215,6 +216,35 @@ public class ConfigLocation : ConfigWidget
     else if (!checker.complete) {
       checker.notify["complete"].connect(() => {cb();});
     }
+  }
+
+  bool is_allowed_volume(Volume volume)
+  {
+    // Unfortunately, there is no convenience API to ask, "what type is this
+    // GVolume?"  Instead, we ask for the icon and look for standard icon
+    // names to determine type.
+    // Currently, to be on the safe side (and the user always has an 'out' by
+    // specifying a custom path), we whitelist the types we allow.
+    
+    ThemedIcon icon = volume.get_icon() as ThemedIcon;
+    if (icon == null)
+      return false;
+
+    weak string[] names = icon.get_names();
+    foreach (weak string name in names) {
+      switch (name) {
+      case "drive-harddisk":
+      case "drive-removable-media":
+      case "media-flash":
+      case "media-floppy":
+      case "media-tape":
+        return true;
+      //case "drive-optical":
+      //case "media-optical":
+      }
+    }
+
+    return false;
   }
 
   bool is_separator(Gtk.TreeModel model, Gtk.TreeIter iter)
