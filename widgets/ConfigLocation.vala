@@ -66,9 +66,8 @@ public class ConfigLocation : ConfigWidget
   int index_cloud_sep = -2;
   int index_ssh;
   int index_smb;
-  int index_vol_base;
-  int index_vol_end;
-  int index_vol_saved = -2;
+  int num_volumes = 0;
+  int index_vol_sep = -2;
   int index_custom;
   int index_local;
 
@@ -136,23 +135,17 @@ public class ConfigLocation : ConfigWidget
                             Group.LOCAL, new ConfigLocationFile(label_sizes));
 
     // Now insert removable drives
-    index_vol_base = next_index();
     var mon = VolumeMonitor.get();
     mon.ref(); // bug 569418; bad things happen when VM goes away
     List<Volume> vols = mon.get_volumes();
     foreach (Volume v in vols) {
-      if (is_allowed_volume(v))
-        add_entry(v.get_icon(), v.get_name(), Group.VOLUMES,
-                  new ConfigLocationVolume(label_sizes),
-                  v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID));
+      add_volume(mon, v);
     }
-    index_vol_end = next_index();
-
-    if (index_vol_base != index_vol_end)
-      add_separator(Group.VOLUMES_SEP);
-
-    // And finally a saved volume, if one exists (must be last)
     update_saved_volume();
+
+    mon.volume_added.connect(add_volume);
+    mon.volume_changed.connect(update_volume);
+    mon.volume_removed.connect(remove_volume);
 
     var pixrenderer = new Gtk.CellRendererPixbuf();
     button.pack_start(pixrenderer, false);
@@ -218,15 +211,15 @@ public class ConfigLocation : ConfigWidget
     }
   }
 
-  bool is_allowed_volume(Volume volume)
+  bool is_allowed_volume(Icon icon_in)
   {
     // Unfortunately, there is no convenience API to ask, "what type is this
     // GVolume?"  Instead, we ask for the icon and look for standard icon
     // names to determine type.
     // Currently, to be on the safe side (and the user always has an 'out' by
     // specifying a custom path), we whitelist the types we allow.
-    
-    ThemedIcon icon = volume.get_icon() as ThemedIcon;
+
+    ThemedIcon icon = icon_in as ThemedIcon;
     if (icon == null)
       return false;
 
@@ -291,51 +284,115 @@ public class ConfigLocation : ConfigWidget
     return index;
   }
 
+  bool lookup_uuid(string uuid, out Gtk.TreeIter iter_in)
+  {
+    Gtk.TreeIter iter;
+    if (store.get_iter_first(out iter)) {
+      do {
+        string iter_uuid;
+        store.get(iter, COL_UUID, out iter_uuid);
+        if (iter_uuid == uuid) {
+          iter_in = iter;
+          return true;
+        }
+      } while (store.iter_next(ref iter));
+    }
+
+    return false;
+  }
+
+  void add_volume(VolumeMonitor monitor, Volume v)
+  {
+    add_volume_full(v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID),
+                    v.get_name(), v.get_icon());
+  }
+
+  void add_volume_full(string uuid, string name, Icon icon)
+  {
+    Gtk.TreeIter iter;
+    if (lookup_uuid(uuid, out iter)) {
+      update_volume_full(uuid, name, icon);
+      return;
+    }
+
+    if (is_allowed_volume(icon)) {
+      if (num_volumes++ == 0)
+        index_vol_sep = add_separator(Group.VOLUMES_SEP);
+      add_entry(icon, name, Group.VOLUMES,
+                new ConfigLocationVolume(label_sizes), uuid);
+    }
+  }
+
+  void update_volume(VolumeMonitor monitor, Volume v)
+  {
+    update_volume_full(v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID),
+                       v.get_name(), v.get_icon());
+  }
+
+  void update_volume_full(string uuid, string name, Icon icon)
+  {
+    Gtk.TreeIter iter;
+    if (!lookup_uuid(uuid, out iter))
+      return;
+
+    store.set(iter, COL_ICON, icon, COL_TEXT, name, COL_UUID, uuid);
+  }
+
+  void remove_volume(VolumeMonitor monitor, Volume v)
+  {
+    remove_volume_full(v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID));
+  }
+
+  void remove_volume_full(string uuid)
+  {
+    Gtk.TreeIter iter;
+    if (!lookup_uuid(uuid, out iter))
+      return;
+
+    // Make sure it isn't the saved volume; we never want to remove that
+    var fsettings = DejaDup.get_settings(FILE_ROOT);
+    var saved_uuid = fsettings.get_string(FILE_UUID_KEY);
+    if (uuid == saved_uuid)
+      return;
+
+    store.remove(iter);
+
+    if (--num_volumes == 0) {
+      Gtk.TreeIter sep_iter;
+      if (store.get_iter_from_string(out sep_iter, index_vol_sep.to_string())) {
+        store.remove(sep_iter);
+        index_vol_sep = -2;
+      }
+    }
+  }
+
   bool update_saved_volume()
   {
     // And add an entry for any saved volume
     var fsettings = DejaDup.get_settings(FILE_ROOT);
-    var vol_uuid = fsettings.get_string(FILE_UUID_KEY);
-    if (vol_uuid != "") {
-      Gtk.TreeIter iter;
-
-      // First, check if it's already in UI because it's in the volume list
-      if (index_vol_saved == -2) {
-        for (int i = index_vol_base; i < index_vol_end; i++) {
-          if (!store.get_iter_from_string(out iter, i.to_string()))
-            continue;
-          string uuid;
-          store.get(iter, COL_UUID, out uuid);
-          if (vol_uuid == uuid) {
-            index_vol_saved = i;
-            return true;
-          }
-        }
-      }
-
+    var uuid = fsettings.get_string(FILE_UUID_KEY);
+    if (uuid != "") {
       Icon vol_icon = null;
       try {
         vol_icon = Icon.new_for_string(fsettings.get_string(FILE_ICON_KEY));
       }
       catch (Error e) {warning("%s\n", e.message);}
+
       var vol_name = fsettings.get_string(FILE_SHORT_NAME_KEY);
 
-      // If this is the first time, add a new entry
-      if (index_vol_saved == -2) {
-        if (index_vol_base == index_vol_end)
-          add_separator(Group.VOLUMES_SEP); // this hadn't been added yet, so add it now
-
-        index_vol_saved = add_entry(vol_icon, vol_name, Group.VOLUMES,
-                                    new ConfigLocationVolume(label_sizes),
-                                    vol_uuid);
-      }
-      else if (store.get_iter_from_string(out iter, index_vol_saved.to_string()))
-        store.set(iter, COL_ICON, vol_icon, COL_TEXT, vol_name, COL_UUID, vol_uuid);
-
+      add_volume_full(uuid, vol_name, vol_icon);
       return true;
     }
     else
       return false;
+  }
+
+  void set_active_iter(Gtk.TreeIter iter)
+  {
+    Gtk.TreeIter iter0;
+    sort_model.convert_child_iter_to_iter(out iter0, iter);
+    warning("setting active iter");
+    button.set_active_iter(iter0);
   }
 
   protected override async void set_from_config()
@@ -357,8 +414,14 @@ public class ConfigLocation : ConfigWidget
       var fsettings = DejaDup.get_settings(FILE_ROOT);
 
       if (fsettings.get_string(FILE_TYPE_KEY) == "volume") {
-        if (update_saved_volume())
-          index = index_vol_saved;
+        if (update_saved_volume()) {
+          var uuid = fsettings.get_string(FILE_UUID_KEY);
+          Gtk.TreeIter saved_iter;
+          if (lookup_uuid(uuid, out saved_iter)) {
+            set_active_iter(saved_iter);
+            return;
+          }
+        }
       }
       else { // normal
         var scheme = ConfigURLPart.read_uri_part(fsettings, FILE_PATH_KEY,
@@ -377,11 +440,9 @@ public class ConfigLocation : ConfigWidget
     }
 
     if (index >= 0) {
-      Gtk.TreeIter iter, iter0;
-      if (store.get_iter_from_string(out iter, index.to_string())) {
-        sort_model.convert_child_iter_to_iter(out iter0, iter);
-        button.set_active_iter(iter0);
-      }
+      Gtk.TreeIter iter;
+      if (store.get_iter_from_string(out iter, index.to_string()))
+        set_active_iter(iter);
     }
   }
 
@@ -415,9 +476,9 @@ public class ConfigLocation : ConfigWidget
       return;
     sort_model.convert_iter_to_child_iter(out iter, iter0);
 
-    Value index_var;
-    store.get_value(iter, COL_INDEX, out index_var);
-    var index = index_var.get_int();
+    int index;
+    string uuid;
+    store.get(iter, COL_INDEX, out index, COL_UUID, out uuid);
 
     var prev = internal_set;
     internal_set = true;
@@ -443,12 +504,11 @@ public class ConfigLocation : ConfigWidget
     }
     else if (index == index_smb)
       set_remote_info("smb");
-    else if ((index >= index_vol_base && index < index_vol_end) ||
-             index == index_vol_saved)
-      yield set_volume_info(iter);
     else if (index == index_local ||
              index == index_custom)
       set_remote_info("file");
+    else if (uuid != null)
+      yield set_volume_info(iter);
     else {
       warning("Unknown location index %i\n", index);
     }
