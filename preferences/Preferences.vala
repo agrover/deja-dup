@@ -303,16 +303,6 @@ public class Preferences : Gtk.Box
     location.extras.set("hexpand", true);
     table.attach(location.extras, 0, row, 2, 1);
     ++row;
-    
-    w = new DejaDup.ConfigDelete(DejaDup.DELETE_AFTER_KEY);
-    label = new Gtk.Label("%s".printf(_("_Keep backups:")));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "xalign", 0.0f);
-    label_sizes.add_widget(label);
-    table.attach(label, 0, row, 1, 1);
-    table.attach(w, 1, row, 1, 1);
-    ++row;
 
     w = new DejaDup.ConfigLabelPolicy();
     w.set("expand", true);
@@ -379,6 +369,7 @@ public class Preferences : Gtk.Box
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
     w = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
+    w.set("hexpand", true);
     label = new Gtk.Label(_("How _often to back up:"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
@@ -386,6 +377,22 @@ public class Preferences : Gtk.Box
     label_sizes.add_widget(label);
     table.attach(label, 0, row, 1, 1);
     table.attach(w, 1, row, 1, 1);
+    ++row;
+
+    w = new DejaDup.ConfigDelete(DejaDup.DELETE_AFTER_KEY);
+    w.set("hexpand", true);
+    label = new Gtk.Label("%s".printf(_("_Keep backups:")));
+    label.set("mnemonic-widget", w,
+              "use-underline", true,
+              "xalign", 0.0f);
+    label_sizes.add_widget(label);
+    table.attach(label, 0, row, 1, 1);
+    table.attach(w, 1, row, 1, 1);
+    ++row;
+
+    w = new DejaDup.ConfigLabelPolicy();
+    w.set("expand", true);
+    table.attach(w, 0, row, 2, 1);
     ++row;
 
     page_box.pack_start(table, true, true, 0);
