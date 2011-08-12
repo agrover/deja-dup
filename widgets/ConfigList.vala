@@ -172,6 +172,10 @@ public class ConfigList : ConfigWidget
     tbar.set_icon_size(Gtk.IconSize.SMALL_TOOLBAR);
     tbar.set_show_arrow(false);
 
+    scroll.get_style_context().set_junction_sides(Gtk.JunctionSides.BOTTOM);
+    tbar.get_style_context().add_class(Gtk.STYLE_CLASS_INLINE_TOOLBAR);
+    tbar.get_style_context().set_junction_sides(Gtk.JunctionSides.TOP);
+
     add_button = new Gtk.ToolButton(null, _("_Add"));
     add_button.set_tooltip_text(_("Add"));
     add_button.set_icon_name("list-add-symbolic");
@@ -193,7 +197,7 @@ public class ConfigList : ConfigWidget
     var vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
 
     vbox.pack_start(scroll, true, true, 0);
-    vbox.pack_start(tbar, false, false, 0);
+    vbox.pack_start(tbar, false, true, 0);
     add(vbox);
     
     var selection = tree.get_selection();
@@ -233,6 +237,7 @@ public class ConfigList : ConfigWidget
     model.row_deleted.connect(write_to_config);
     
     int i = 0;
+    var trash = File.new_for_path(DejaDup.get_trash_path());
     foreach (File f in list) {
       string s = yield DejaDup.get_display_name(f);
 
