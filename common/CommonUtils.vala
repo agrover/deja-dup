@@ -431,6 +431,61 @@ public string get_file_desc(File file)
   return desc;
 }
 
+public string? get_utf8_relative_path (File parent, File child)
+{
+  // Unfortunately, the results of File.get_relative_path() are in local
+  // encoding, not utf8, and there is no easy function to get a utf8 version.
+  // So we manually convert.
+  string s = parent.get_relative_path(child);
+  try {
+    return Filename.to_utf8(s, s.length, null, null);
+  }
+  catch (ConvertError e) {
+    warning("%s\n", e.message);
+    return null;
+  }
+}
+
+static File home;
+static File trash;
+public async string get_display_name (File f)
+{
+  if (home == null) {
+    // Fill these out for the first time
+    home = File.new_for_path(Environment.get_home_dir());
+    trash = File.new_for_path(DejaDup.get_trash_path());
+  }
+
+  string s;
+  if (f.equal(home)) {
+    // Try to use the username in the display because several users have
+    // previously assumed that "Home" meant "/home", and thus thought they
+    // were backing up more than they were.  This should help avoid such data
+    // loss accidents.
+    try {
+      var info = yield f.query_info_async(FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
+                                          FileQueryInfoFlags.NOFOLLOW_SYMLINKS);
+      // Translators: %s is the user's username
+      s = _("Home (%s)").printf(info.get_display_name());
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      s = _("Home");
+    }
+  }
+  else if (f.equal(trash))
+    s = _("Trash");
+  else if (f.has_prefix(home)) {
+    s = get_utf8_relative_path(home, f);
+    if (s == null)
+      s = f.get_parse_name();
+  }
+  else
+    s = f.get_parse_name();
+
+  return s;
+}
+
 public int get_full_backup_threshold()
 {
   int threshold = 7 * 6; // default to 6 weeks

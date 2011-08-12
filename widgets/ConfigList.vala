@@ -233,19 +233,9 @@ public class ConfigList : ConfigWidget
     model.row_deleted.connect(write_to_config);
     
     int i = 0;
-    File home = File.new_for_path(Environment.get_home_dir());
-    File trash = File.new_for_path(DejaDup.get_trash_path());
     foreach (File f in list) {
-      string s;
-      if (f.equal(home))
-        s = _("Home");
-      else if (f.equal(trash))
-        s = _("Trash");
-      else if (f.has_prefix(home))
-        s = home.get_relative_path(f);
-      else
-        s = f.get_path();
-      
+      string s = yield DejaDup.get_display_name(f);
+
       Gtk.TreeIter iter;
       model.insert_with_values(out iter, i++, 0, f.get_path(), 1, s);
       

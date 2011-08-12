@@ -44,19 +44,8 @@ public class ConfigLabelList : ConfigLabel
     var list = DejaDup.parse_dir_list(slist);
     
     int i = 0;
-    File home = File.new_for_path(Environment.get_home_dir());
-    File trash = File.new_for_path(DejaDup.get_trash_path());
     foreach (File f in list) {
-      string s;
-      if (f.equal(home))
-        s = _("Home");
-      else if (f.equal(trash))
-        s = _("Trash");
-      else if (f.has_prefix(home))
-        s = home.get_relative_path(f);
-      else
-        s = f.get_parse_name();
-      
+      string s = yield DejaDup.get_display_name(f);
       if (i > 0)
         val += ", ";
       val += s;

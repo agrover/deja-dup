@@ -391,7 +391,6 @@ public class ConfigLocation : ConfigWidget
   {
     Gtk.TreeIter iter0;
     sort_model.convert_child_iter_to_iter(out iter0, iter);
-    warning("setting active iter");
     button.set_active_iter(iter0);
   }
 
