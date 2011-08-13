@@ -30,6 +30,7 @@ AUTO_TESTS = \
 	backup/full \
 	backup/mkdir \
 	backup/permissions \
+	backup/quiescent \
 	backup/spaces \
 	backup/symlinks \
 	basic/badversion \

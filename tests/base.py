@@ -431,7 +431,7 @@ def walk_prefs(backend, dest, includes, excludes):
     ldtp.settextvalue('frmBackup', 'txt0', dest) # FIXME txt0 is bad name
     ldtp.wait(1) # without this, sometimes ldtp moves so fast, deja-dup doesn't notice dest
 
-  ldtp.selectrow('frmBackup', 'tblCategories', 'Files')
+  ldtp.selectrow('frmBackup', 'tblCategories', 'Folders')
   if includes is not None:
     set_file_list('frmBackup', 'tblIncludeList', 'btnIncludeListAdd', 'btnIncludeListRemove', includes)
   if excludes is not None:

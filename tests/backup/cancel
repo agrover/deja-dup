@@ -24,12 +24,12 @@ import sys
 sys.path.insert(0, sys.path[0]+'/..')
 import base
 import ldtp
+import time
 
 def wait_for_volume(destdir):
   count = 0
   while len(os.listdir(destdir)) < 2 and count < 200:
-    print count, os.listdir(destdir)
-    ldtp.wait(1)
+    time.sleep(1)
     count += 1
   assert count < 200
 
@@ -40,16 +40,16 @@ def test():
   wait_for_volume(destdir)
   ldtp.click('frmBackUp', 'btnCancel')
   base.backup_simple(finish=False, encrypt=False)
-  ldtp.wait(5)
+  time.sleep(5)
   ldtp.click('frmBackUp', 'btnCancel')
   base.backup_simple(finish=False, encrypt=False)
-  ldtp.wait(4)
+  time.sleep(4)
   ldtp.click('frmBackUp', 'btnCancel')
   base.backup_simple(finish=False, encrypt=False)
   wait_for_volume(destdir)
   ldtp.click('frmBackUp', 'btnCancel')
   base.backup_simple(finish=False, encrypt=False)
-  ldtp.wait(7)
+  time.sleep(7)
   ldtp.click('frmBackUp', 'btnCancel')
 
 base.run(test)
