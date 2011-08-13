@@ -83,13 +83,13 @@ public class AssistantRestore : AssistantOperation
     Gtk.SizeGroup label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
     var page = new Gtk.Grid();
-    page.set("row-spacing", 6,
+    page.set("row-spacing", 12,
              "column-spacing", 6,
              "border-width", 12);
     
     var location = new DejaDup.ConfigLocation(label_sizes);
-    label = new Gtk.Label.with_mnemonic(_("_Backup location:"));
-    label.set("xalign", 0.0f,
+    label = new Gtk.Label.with_mnemonic(_("_Backup location"));
+    label.set("xalign", 1.0f,
               "mnemonic-widget", location);
     label_sizes.add_widget(label);
     page.attach(label, 0, rows, 1, 1);
@@ -143,10 +143,10 @@ public class AssistantRestore : AssistantOperation
     date_combo = new Gtk.ComboBoxText();
     date_combo.model = date_store;
     
-    var date_label = new Gtk.Label(_("_Date:"));
+    var date_label = new Gtk.Label(_("_Date"));
     date_label.set("mnemonic-widget", date_combo,
                    "use-underline", true,
-                   "xalign", 0.0f);
+                   "xalign", 1.0f);
     
     var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
     hbox.set("child", date_label,
@@ -185,10 +185,10 @@ public class AssistantRestore : AssistantOperation
                                 Gtk.FileChooserAction.SELECT_FOLDER);
     cust_button.selection_changed.connect((b) => {restore_location = b.get_filename();});
     
-    var cust_label = new Gtk.Label("    " + _("Restore _folder:"));
+    var cust_label = new Gtk.Label("    " + _("Restore _folder"));
     cust_label.set("mnemonic-widget", cust_button,
                    "use-underline", true,
-                   "xalign", 0.0f);
+                   "xalign", 1.0f);
     
     cust_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
     cust_box.set("child", cust_label,
@@ -214,28 +214,28 @@ public class AssistantRestore : AssistantOperation
     
     confirm_table = new Gtk.Grid();
     var page = confirm_table;
-    page.set("row-spacing", 6,
+    page.set("row-spacing", 12,
              "column-spacing", 6,
              "border-width", 12);
     
-    label = new Gtk.Label(_("Backup location:"));
-    label.set("xalign", 0.0f, "yalign", 0.0f);
+    label = new Gtk.Label(_("Backup location"));
+    label.set("xalign", 1.0f, "yalign", 0.0f);
     w = new DejaDup.ConfigLabelLocation();
     w.set("hexpand", true);
     page.attach(label, 0, rows, 1, 1);
     page.attach(w, 1, rows, 1, 1);
     ++rows;
 
-    confirm_date_label = new Gtk.Label(_("Restore date:"));
-    confirm_date_label.set("xalign", 0.0f);
+    confirm_date_label = new Gtk.Label(_("Restore date"));
+    confirm_date_label.set("xalign", 1.0f);
     confirm_date = new Gtk.Label("");
     confirm_date.set("xalign", 0.0f);
     page.attach(confirm_date_label, 0, rows, 1, 1);
     page.attach(confirm_date, 1, rows, 1, 1);
     ++rows;
     
-    confirm_location_label = new Gtk.Label(_("Restore folder:"));
-    confirm_location_label.set("xalign", 0.0f);
+    confirm_location_label = new Gtk.Label(_("Restore folder"));
+    confirm_location_label.set("xalign", 1.0f);
     confirm_location = new Gtk.Label("");
     confirm_location.set("xalign", 0.0f);
     page.attach(confirm_location_label, 0, rows, 1, 1);
@@ -243,7 +243,7 @@ public class AssistantRestore : AssistantOperation
     ++rows;
     
     confirm_files_label = new Gtk.Label("");
-    confirm_files_label.set("xalign", 0.0f, "yalign", 0.0f);
+    confirm_files_label.set("xalign", 1.0f, "yalign", 0.0f);
     confirm_files = new Gtk.Grid();
     confirm_files.orientation = Gtk.Orientation.VERTICAL;
     confirm_files.row_spacing = 6;
@@ -446,8 +446,8 @@ public class AssistantRestore : AssistantOperation
         confirm_files.hide();
       }
       else {
-        confirm_files_label.label = ngettext("File to restore:",
-                                             "Files to restore:",
+        confirm_files_label.label = ngettext("File to restore",
+                                             "Files to restore",
                                              restore_files.length());
 
         confirm_files.foreach((w) => {DejaDup.destroy_widget(w);});

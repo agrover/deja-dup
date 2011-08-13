@@ -294,7 +294,15 @@ public abstract class AssistantOperation : Assistant
              "column-spacing", 6,
              "border-width", 12);
 
-    encrypt_enabled = new Gtk.RadioButton.with_mnemonic(null, _("_Password-protect your backup"));
+    w = new Gtk.RadioButton.with_mnemonic(null,
+                                          _("_Allow restoring without a password"));
+    page.attach(w, 0, rows, 3, 1);
+    first_password_widgets.append(w);
+    ++rows;
+
+    encrypt_enabled = new Gtk.RadioButton.with_mnemonic_from_widget(w as Gtk.RadioButton,
+                                                                    _("_Password-protect your backup"));
+    encrypt_enabled.active = true; // always default to encrypted
     page.attach(encrypt_enabled, 0, rows, 3, 1);
     first_password_widgets.append(encrypt_enabled);
     encrypt_enabled.toggled.connect(() => {check_password_validity();});
@@ -322,10 +330,10 @@ public abstract class AssistantOperation : Assistant
           "hexpand", true,
           "activates-default", true);
     ((Gtk.Entry)w).changed.connect(() => {check_password_validity();});
-    label = new Gtk.Label(_("E_ncryption password:"));
+    label = new Gtk.Label(_("E_ncryption password"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
-              "xalign", 0.0f);
+              "xalign", 1.0f);
     page.attach(label, 1, rows, 1, 1);
     page.attach(w, 2, rows, 1, 1);
     password_toggles.add_dependent(label);
@@ -339,10 +347,10 @@ public abstract class AssistantOperation : Assistant
           "hexpand", true,
           "activates-default", true);
     ((Gtk.Entry)w).changed.connect(() => {check_password_validity();});
-    label = new Gtk.Label(_("Confir_m password:"));
+    label = new Gtk.Label(_("Confir_m password"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
-              "xalign", 0.0f);
+              "xalign", 1.0f);
     page.attach(label, 1, rows, 1, 1);
     page.attach(w, 2, rows, 1, 1);
     password_toggles.add_dependent(w);
@@ -357,22 +365,15 @@ public abstract class AssistantOperation : Assistant
       encrypt_entry.visibility = button.get_active();
       encrypt_confirm_entry.visibility = button.get_active();
     });
-    page.attach(w, 1, rows, 2, 1);
+    page.attach(w, 2, rows, 1, 1);
     password_toggles.add_dependent(w);
     ++rows;
 
     w = new Gtk.CheckButton.with_mnemonic(_("_Remember password"));
-    page.attach(w, 1, rows, 2, 1);
+    page.attach(w, 2, rows, 1, 1);
     password_toggles.add_dependent(w);
     ++rows;
     encrypt_remember = (Gtk.CheckButton)w;
-
-    w = new Gtk.RadioButton.with_mnemonic_from_widget(encrypt_enabled,
-                                                      _("_Allow restoring without a password"));
-    w.margin_top = 6;
-    page.attach(w, 0, rows, 3, 1);
-    first_password_widgets.append(w);
-    ++rows;
 
     return page;
   }

@@ -136,7 +136,7 @@ public class BackendRackspace : Backend
 
   void ask_password() {
     mount_op.set("label_help", _("You can sign up for a Rackspace Cloud Files account <a href=\"%s\">online</a>.").printf("https://signup.rackspacecloud.com/signup"));
-    mount_op.set("label_password", _("_API access key:"));
+    mount_op.set("label_password", _("_API access key"));
     mount_op.set("label_show_password", _("S_how API access key"));
     mount_op.set("label_remember_password", _("_Remember API access key"));
     mount_op.reply.connect(got_password_reply);

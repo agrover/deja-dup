@@ -66,6 +66,7 @@ class ConfigListStore : Gtk.ListStore, Gtk.TreeDragDest, Gtk.TreeDragSource
       }
     }
 
+warning("drag data received");
     return list.add_files(files);
   }
 

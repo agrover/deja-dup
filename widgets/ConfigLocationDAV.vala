@@ -28,9 +28,9 @@ public class ConfigLocationDAV : ConfigLocationTable
   }
 
   construct {
-    add_widget(_("_Server:"), new ConfigURLPart(ConfigURLPart.Part.SERVER,
-                                                DejaDup.FILE_PATH_KEY,
-                                                DejaDup.FILE_ROOT));
+    add_widget(_("_Server"), new ConfigURLPart(ConfigURLPart.Part.SERVER,
+                                               DejaDup.FILE_PATH_KEY,
+                                               DejaDup.FILE_ROOT));
 
     var w = new ConfigURLPartBool(ConfigURLPart.Part.SCHEME,
                                   DejaDup.FILE_PATH_KEY,
@@ -38,18 +38,17 @@ public class ConfigLocationDAV : ConfigLocationTable
                                   _("Use secure connection (_HTTPS)"));
     w.test_active = is_https_active;
     w.toggled.connect(https_toggled);
-    add_wide_widget(w);
+    add_widget("", w);
 
-    add_optional_label();
-    add_widget(_("_Port:"), new ConfigURLPart(ConfigURLPart.Part.PORT,
-                                              DejaDup.FILE_PATH_KEY,
-                                              DejaDup.FILE_ROOT));
-    add_widget(_("_Folder:"), new ConfigURLPart(ConfigURLPart.Part.FOLDER,
-                                                DejaDup.FILE_PATH_KEY,
-                                                DejaDup.FILE_ROOT));
-    add_widget(_("_Username:"), new ConfigURLPart(ConfigURLPart.Part.USER,
-                                                  DejaDup.FILE_PATH_KEY,
-                                                  DejaDup.FILE_ROOT));
+    add_widget(_("_Port"), new ConfigURLPart(ConfigURLPart.Part.PORT,
+                                             DejaDup.FILE_PATH_KEY,
+                                             DejaDup.FILE_ROOT));
+    add_widget(_("_Folder"), new ConfigURLPart(ConfigURLPart.Part.FOLDER,
+                                               DejaDup.FILE_PATH_KEY,
+                                               DejaDup.FILE_ROOT));
+    add_widget(_("_Username"), new ConfigURLPart(ConfigURLPart.Part.USER,
+                                                 DejaDup.FILE_PATH_KEY,
+                                                 DejaDup.FILE_ROOT));
   }
 
   static bool is_https_active(string val)

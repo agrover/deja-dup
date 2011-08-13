@@ -28,8 +28,8 @@ public class ConfigLocationVolume : ConfigLocationTable
   }
 
   construct {
-    add_widget(_("_Folder:"), new ConfigRelPath(DejaDup.FILE_RELPATH_KEY,
-                                                DejaDup.FILE_ROOT));
+    add_widget(_("_Folder"), new ConfigRelPath(DejaDup.FILE_RELPATH_KEY,
+                                               DejaDup.FILE_ROOT));
   }
 }
 

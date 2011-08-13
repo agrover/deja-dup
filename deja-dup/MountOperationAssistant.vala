@@ -33,8 +33,8 @@ public class MountOperationAssistant : MountOperation
 {
   public string label_button {get; set;}
   public string label_help {get; set;}
-  public string label_username {get; set; default = _("_Username:");}
-  public string label_password {get; set; default = _("_Password:");}
+  public string label_username {get; set; default = _("_Username");}
+  public string label_password {get; set; default = _("_Password");}
   public string label_show_password {get; set; default = _("S_how password");}
   public string label_remember_password {get; set; default = _("_Remember password");}
   public X.Window xid {get; private set;}
@@ -173,7 +173,7 @@ public class MountOperationAssistant : MountOperation
       anonymous_w.toggled.connect((b) => {check_valid_inputs();});
       layout.pack_start(anonymous_w, false, false, 0);
 
-      var w = new Gtk.RadioButton.with_mnemonic_from_widget(anonymous_w, _("Connect as u_ser:"));
+      var w = new Gtk.RadioButton.with_mnemonic_from_widget(anonymous_w, _("Connect as u_ser"));
       anonymous_w.toggled.connect((b) => {
         table.sensitive = !b.active;
       });
@@ -196,11 +196,12 @@ public class MountOperationAssistant : MountOperation
       username_w = new Gtk.Entry();
       username_w.set("activates-default", true,
                      "text", default_user);
+      username_w.hexpand = true;
       username_w.changed.connect((e) => {check_valid_inputs();});
       label = new Gtk.Label(label_username);
       label.set("mnemonic-widget", username_w,
                 "use-underline", true,
-                "xalign", 0.0f);
+                "xalign", 1.0f);
       table.attach(label, ucol, rows, 1, 1);
       table.attach(username_w, ucol+1, rows, 2-ucol, 1);
       ++rows;
@@ -212,11 +213,12 @@ public class MountOperationAssistant : MountOperation
       domain_w = new Gtk.Entry();
       domain_w.set("activates-default", true,
                    "text", default_domain);
+      domain_w.hexpand = true;
       domain_w.changed.connect((e) => {check_valid_inputs();});
-      label = new Gtk.Label(_("_Domain:"));
+      label = new Gtk.Label(_("_Domain"));
       label.set("mnemonic-widget", domain_w,
                 "use-underline", true,
-                "xalign", 0.0f);
+                "xalign", 1.0f);
       table.attach(label, ucol, rows, 1, 1);
       table.attach(domain_w, ucol+1, rows, 2-ucol, 1);
       ++rows;
@@ -228,10 +230,11 @@ public class MountOperationAssistant : MountOperation
       password_w = new Gtk.Entry();
       password_w.set("visibility", false,
                      "activates-default", true);
+      password_w.hexpand = true;
       label = new Gtk.Label(label_password);
       label.set("mnemonic-widget", password_w,
                 "use-underline", true,
-                "xalign", 0.0f);
+                "xalign", 1.0f);
       table.attach(label, ucol, rows, 1, 1);
       table.attach(password_w, ucol+1, rows, 2-ucol, 1);
       ++rows;
@@ -240,14 +243,16 @@ public class MountOperationAssistant : MountOperation
       ((Gtk.CheckButton)w).toggled.connect((button) => {
         password_w.visibility = button.get_active();
       });
-      layout.pack_start(w, false, false, 0);
+      table.attach(w, ucol+1, rows, 2-ucol, 1);
+      ++rows;
     }
     else
       password_w = null;
 
     if ((flags & AskPasswordFlags.SAVING_SUPPORTED) != 0) {
       remember_w = new Gtk.CheckButton.with_mnemonic(label_remember_password);
-      layout.pack_start(remember_w, false, false, 0);
+      table.attach(remember_w, ucol+1, rows, 2-ucol, 1);
+      ++rows;
     }
     else
       remember_w = null;

@@ -41,7 +41,7 @@ public class ConfigLocationFile : ConfigLocationTable
     hbox.pack_start(entry, true, true, 0);
     hbox.pack_start(browse, false, false, 0);
 
-    add_widget(_("_Folder:"), hbox, null, entry);
+    add_widget(_("_Folder"), hbox, null, entry);
   }
 
   void browse_clicked()

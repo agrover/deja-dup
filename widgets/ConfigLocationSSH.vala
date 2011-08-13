@@ -28,19 +28,18 @@ public class ConfigLocationSSH : ConfigLocationTable
   }
 
   construct {
-    add_widget(_("_Server:"), new ConfigURLPart(ConfigURLPart.Part.SERVER,
-                                                DejaDup.FILE_PATH_KEY,
-                                                DejaDup.FILE_ROOT));
-    add_optional_label();
-    add_widget(_("_Port:"), new ConfigURLPart(ConfigURLPart.Part.PORT,
-                                              DejaDup.FILE_PATH_KEY,
-                                              DejaDup.FILE_ROOT));
-    add_widget(_("_Folder:"), new ConfigURLPart(ConfigURLPart.Part.FOLDER,
-                                                DejaDup.FILE_PATH_KEY,
-                                                DejaDup.FILE_ROOT));
-    add_widget(_("_Username:"), new ConfigURLPart(ConfigURLPart.Part.USER,
-                                                  DejaDup.FILE_PATH_KEY,
-                                                  DejaDup.FILE_ROOT));
+    add_widget(_("_Server"), new ConfigURLPart(ConfigURLPart.Part.SERVER,
+                                               DejaDup.FILE_PATH_KEY,
+                                               DejaDup.FILE_ROOT));
+    add_widget(_("_Port"), new ConfigURLPart(ConfigURLPart.Part.PORT,
+                                             DejaDup.FILE_PATH_KEY,
+                                             DejaDup.FILE_ROOT));
+    add_widget(_("_Folder"), new ConfigURLPart(ConfigURLPart.Part.FOLDER,
+                                               DejaDup.FILE_PATH_KEY,
+                                               DejaDup.FILE_ROOT));
+    add_widget(_("_Username"), new ConfigURLPart(ConfigURLPart.Part.USER,
+                                                 DejaDup.FILE_PATH_KEY,
+                                                 DejaDup.FILE_ROOT));
   }
 }
 

@@ -28,8 +28,8 @@ public class ConfigLocationCustom : ConfigLocationTable
   }
 
   construct {
-    add_widget(_("_URI:"), new ConfigEntry(DejaDup.FILE_PATH_KEY,
-                                           DejaDup.FILE_ROOT));
+    add_widget(_("_URI"), new ConfigEntry(DejaDup.FILE_PATH_KEY,
+                                          DejaDup.FILE_ROOT));
   }
 }
 

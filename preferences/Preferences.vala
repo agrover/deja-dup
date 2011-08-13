@@ -120,7 +120,6 @@ public class Preferences : Gtk.Box
     Gtk.TreeIter iter;
     int i = 0;
     Gtk.SizeGroup label_sizes;
-    Gtk.SizeGroup button_sizes;
 
     settings_page.spacing = 12;
 
@@ -155,7 +154,7 @@ public class Preferences : Gtk.Box
 
     table = new Gtk.Grid();
     table.orientation = Gtk.Orientation.VERTICAL;
-    table.row_spacing = 6;
+    table.row_spacing = 12;
     table.column_spacing = 6;
 
     row = 0;
@@ -163,10 +162,10 @@ public class Preferences : Gtk.Box
 
     w = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
     (w as Gtk.Bin).add(new DejaDup.ConfigSwitch(DejaDup.PERIODIC_KEY));
-    label = new Gtk.Label(_("Automatic _backups:"));
+    label = new Gtk.Label(_("Automatic _backups"));
     label.set("mnemonic-widget", (w as Gtk.Bin).get_child(),
               "use-underline", true,
-              "xalign", 0.0f);
+              "xalign", 1.0f);
     label_sizes.add_widget(label);
 
     table.attach(label, 0, row, 1, 1);
@@ -180,8 +179,8 @@ public class Preferences : Gtk.Box
 
     w = new DejaDup.ConfigLabelLocation();
     w.set("hexpand", true);
-    label = new Gtk.Label(_("Backup location:"));
-    label.set("xalign", 0.0f,
+    label = new Gtk.Label(_("Backup location"));
+    label.set("xalign", 1.0f,
               "yalign", 0.0f);
     label_sizes.add_widget(label);
 
@@ -189,16 +188,16 @@ public class Preferences : Gtk.Box
     table.attach(w, 1, row, 1, 1);
     ++row;
 
-    label = new Gtk.Label(_("Folders to back up:"));
-    label.set("xalign", 0.0f, "yalign", 0.0f);
+    label = new Gtk.Label(_("Folders to back up"));
+    label.set("xalign", 1.0f, "yalign", 0.0f);
     label_sizes.add_widget(label);
     w = new DejaDup.ConfigLabelList(DejaDup.INCLUDE_LIST_KEY);
     table.attach(label, 0, row, 1, 1);
     table.attach(w, 1, row, 1, 1);
     ++row;
 
-    label = new Gtk.Label(_("Folders to ignore:"));
-    label.set("xalign", 0.0f, "yalign", 0.0f);
+    label = new Gtk.Label(_("Folders to ignore"));
+    label.set("xalign", 1.0f, "yalign", 0.0f);
     label_sizes.add_widget(label);
     w = new DejaDup.ConfigLabelList(DejaDup.EXCLUDE_LIST_KEY);
     table.attach(label, 0, row, 1, 1);
@@ -210,8 +209,8 @@ public class Preferences : Gtk.Box
     table.attach(w, 0, row, 2, 1);
     ++row;
 
-    var bdate_label = new Gtk.Label(_("Most recent backup:"));
-    bdate_label.xalign = 0.0f;
+    var bdate_label = new Gtk.Label(_("Most recent backup"));
+    bdate_label.xalign = 1.0f;
     label_sizes.add_widget(bdate_label);
     var bdate = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.LAST);
 
@@ -219,8 +218,8 @@ public class Preferences : Gtk.Box
     table.attach(bdate, 1, row, 1, 1);
     ++row;
 
-    var ndate_label = new Gtk.Label(_("Next automatic backup:"));
-    ndate_label.xalign = 0.0f;
+    var ndate_label = new Gtk.Label(_("Next automatic backup"));
+    ndate_label.xalign = 1.0f;
     label_sizes.add_widget(ndate_label);
     var ndate = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.NEXT);
 
@@ -282,17 +281,15 @@ public class Preferences : Gtk.Box
     // Reset page
     page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
     table = new Gtk.Grid();
-    table.row_spacing = 6;
+    table.row_spacing = 12;
     table.column_spacing = 6;
     row = 0;
-    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
-    button_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
 
     var location = new DejaDup.ConfigLocation(label_sizes);
-    label = new Gtk.Label(_("_Backup location:"));
+    label = new Gtk.Label(_("_Backup location"));
     label.set("mnemonic-widget", location,
               "use-underline", true,
-              "xalign", 0.0f);
+              "xalign", 1.0f);
     label_sizes.add_widget(label);
 
     table.attach(label, 0, row, 1, 1);
@@ -327,15 +324,13 @@ public class Preferences : Gtk.Box
     // Reset page
     page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
     table = new Gtk.Grid();
-    table.row_spacing = 6;
+    table.row_spacing = 12;
     table.column_spacing = 6;
     table.column_homogeneous = true;
-    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
     w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY);
-    //w.set_size_request(300, 80);
     w.set("expand", true);
-    label = new Gtk.Label(_("Folders to _back up:"));
+    label = new Gtk.Label(_("Folders to _back up"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "xalign", 0.0f,
@@ -344,14 +339,12 @@ public class Preferences : Gtk.Box
     table.attach(w, 0, 1, 1, 1);
     
     w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY);
-    //w.set_size_request(300, 120);
     w.set("expand", true);
-    label = new Gtk.Label(_("Folders to _ignore:"));
+    label = new Gtk.Label(_("Folders to _ignore"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
               "xalign", 0.0f,
               "yalign", 0.0f);
-    label_sizes.add_widget(label);
     table.attach(label, 1, 0, 1, 1);
     table.attach(w, 1, 1, 1, 1);
     
@@ -363,28 +356,27 @@ public class Preferences : Gtk.Box
     // Reset page
     page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
     table = new Gtk.Grid();
-    table.row_spacing = 6;
+    table.row_spacing = 12;
     table.column_spacing = 6;
     row = 0;
-    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
     w = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
-    w.set("hexpand", true);
-    label = new Gtk.Label(_("How _often to back up:"));
+    w.hexpand = true;
+    label = new Gtk.Label(_("How _often to back up"));
     label.set("mnemonic-widget", w,
               "use-underline", true,
-              "xalign", 0.0f);
+              "xalign", 1.0f);
     label_sizes.add_widget(label);
     table.attach(label, 0, row, 1, 1);
     table.attach(w, 1, row, 1, 1);
     ++row;
 
     w = new DejaDup.ConfigDelete(DejaDup.DELETE_AFTER_KEY);
-    w.set("hexpand", true);
-    label = new Gtk.Label("%s".printf(_("_Keep backups:")));
+    w.hexpand = true;
+    label = new Gtk.Label("%s".printf(_("_Keep backups")));
     label.set("mnemonic-widget", w,
               "use-underline", true,
-              "xalign", 0.0f);
+              "xalign", 1.0f);
     label_sizes.add_widget(label);
     table.attach(label, 0, row, 1, 1);
     table.attach(w, 1, row, 1, 1);

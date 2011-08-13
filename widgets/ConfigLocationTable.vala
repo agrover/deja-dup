@@ -31,7 +31,7 @@ public class ConfigLocationTable : Gtk.Grid
   }
 
   construct {
-    row_spacing = 6;
+    row_spacing = 12;
     column_spacing = 6;
   }
 
@@ -39,17 +39,17 @@ public class ConfigLocationTable : Gtk.Grid
                             Togglable? check = null,
                             Gtk.Widget? mnemonic = null)
   {
-    string indent;
-    if (check == null)
-      indent = "    ";
-    else
-      indent = "        ";
-
-    var label = new Gtk.Label("%s%s".printf(indent, msg));
+    var label = new Gtk.Label(msg);
     label.set("mnemonic-widget", (mnemonic != null) ? mnemonic : w,
               "use-underline", true,
-              "xalign", 0.0f);
+              "xalign", 1.0f);
     label_sizes.add_widget(label);
+    add_widget_with_label(label, w, check);
+  }
+
+  protected void add_widget_with_label(Gtk.Widget label, Gtk.Widget w,
+                                       Togglable? check = null)
+  {
     this.attach(label, 0, row, 1, 1);
 
     w.set("hexpand", true);
@@ -57,10 +57,12 @@ public class ConfigLocationTable : Gtk.Grid
     ++row;
 
     if (check != null) {
-      label.sensitive = check.get_active();
+      if ((label as Object) != (check as Object))
+        label.sensitive = check.get_active();
       w.sensitive = check.get_active();
       check.toggled.connect(() => {
-        label.sensitive = check.get_active();
+        if ((label as Object) != (check as Object))
+          label.sensitive = check.get_active();
         w.sensitive = check.get_active();
       });
     }
@@ -68,35 +70,16 @@ public class ConfigLocationTable : Gtk.Grid
 
   protected void add_wide_widget(Gtk.Widget w, Togglable? check = null)
   {
-    string indent;
-    if (check == null)
-      indent = "    ";
-    else
-      indent = "        ";
-
-    var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
-    var label = new Gtk.Label(indent);
-
-    hbox.pack_start(label, false, false, 0);
-    hbox.pack_start(w, true, true, 0);
-
-    hbox.set("hexpand", true);
-    this.attach(hbox, 0, row, 2, 1);
+    w.hexpand = true;
+    this.attach(w, 0, row, 2, 1);
     ++row;
 
     if (check != null) {
-      hbox.sensitive = check.get_active();
+      w.sensitive = check.get_active();
       check.toggled.connect(() => {
-        hbox.sensitive = check.get_active();
+        w.sensitive = check.get_active();
       });
     }
-  }
-
-  protected void add_optional_label()
-  {
-    var label = new Gtk.Label(_("Optional information:"));
-    label.set("xalign", 0.0f);
-    add_wide_widget(label);
   }
 }
 

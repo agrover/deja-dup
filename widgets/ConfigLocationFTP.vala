@@ -29,29 +29,28 @@ public class ConfigLocationFTP : ConfigLocationTable
 
   ConfigURLPart user;
   construct {
-    add_widget(_("_Server:"), new ConfigURLPart(ConfigURLPart.Part.SERVER,
-                                                DejaDup.FILE_PATH_KEY,
-                                                DejaDup.FILE_ROOT));
-    add_optional_label();
-    add_widget(_("_Port:"), new ConfigURLPart(ConfigURLPart.Part.PORT,
-                                              DejaDup.FILE_PATH_KEY,
-                                              DejaDup.FILE_ROOT));
-    add_widget(_("_Folder:"), new ConfigURLPart(ConfigURLPart.Part.FOLDER,
-                                                DejaDup.FILE_PATH_KEY,
-                                                DejaDup.FILE_ROOT));
+    add_widget(_("_Server"), new ConfigURLPart(ConfigURLPart.Part.SERVER,
+                                               DejaDup.FILE_PATH_KEY,
+                                               DejaDup.FILE_ROOT));
+    add_widget(_("_Port"), new ConfigURLPart(ConfigURLPart.Part.PORT,
+                                             DejaDup.FILE_PATH_KEY,
+                                             DejaDup.FILE_ROOT));
+    add_widget(_("_Folder"), new ConfigURLPart(ConfigURLPart.Part.FOLDER,
+                                               DejaDup.FILE_PATH_KEY,
+                                               DejaDup.FILE_ROOT));
 
     var w = new ConfigURLPartBool(ConfigURLPart.Part.USER,
                                   DejaDup.FILE_PATH_KEY,
                                   DejaDup.FILE_ROOT,
-                                  _("_Log in with a username"));
+                                  _("_Username"));
+    w.halign = Gtk.Align.END;
     w.test_active = is_not_anon;
     w.toggled.connect(username_toggled);
-    add_wide_widget(w);
 
     user = new ConfigURLPart(ConfigURLPart.Part.USER,
                              DejaDup.FILE_PATH_KEY,
                              DejaDup.FILE_ROOT);
-    add_widget(_("_Username:"), user, w);
+    add_widget_with_label(w, user, w);
   }
 
   static bool is_not_anon(string val)

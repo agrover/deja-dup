@@ -28,10 +28,9 @@ public class ConfigLocationRackspace : ConfigLocationTable
   }
 
   construct {
-    //add_optional_label();
-    add_widget(_("_Username:"),
+    add_widget(_("_Username"),
                new ConfigEntry(DejaDup.RACKSPACE_USERNAME_KEY, DejaDup.RACKSPACE_ROOT));
-    add_widget(_("_Container:"),
+    add_widget(_("_Container"),
                new ConfigFolder(DejaDup.RACKSPACE_CONTAINER_KEY, DejaDup.RACKSPACE_ROOT));
   }
 }
