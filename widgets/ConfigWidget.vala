@@ -28,7 +28,8 @@ public abstract class ConfigWidget : Gtk.EventBox
   public Gtk.Widget mnemonic_widget {get; protected set;}
   public string key {get; construct;}
   public string ns {get; construct; default = "";}
-  
+
+  protected bool syncing;  
   protected SimpleSettings settings;
   protected List<SimpleSettings> all_settings;
   construct {
@@ -67,10 +68,17 @@ public abstract class ConfigWidget : Gtk.EventBox
     return false;
   }
 
-  void key_changed()
+  async void key_changed()
   {
-    set_from_config();
+    // Not great to just drop new notification on the floor when already 
+    // syncing, but we don't have a good cancellation method.
+    if (syncing)
+      return;
+
+    syncing = true;
+    yield set_from_config();
     changed();
+    syncing = false;
   }
 
   protected abstract async void set_from_config();
