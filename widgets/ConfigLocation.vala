@@ -74,8 +74,6 @@ public class ConfigLocation : ConfigWidget
   int extras_max_width = 0;
   int extras_max_height = 0;
 
-  bool internal_set = false;
-
   Gtk.ComboBox button;
   Gtk.ListStore store;
   Gtk.TreeModelSort sort_model;
@@ -396,9 +394,6 @@ public class ConfigLocation : ConfigWidget
 
   protected override async void set_from_config()
   {
-    if (internal_set || syncing)
-      return;
-
     int index = -1;
 
     // Check the backend type, then GIO uri if needed
@@ -423,6 +418,20 @@ public class ConfigLocation : ConfigWidget
         }
       }
       else { // normal
+        // If we are already on 'custom location', don't switch away from it
+        // to another toplevel entry
+        Gtk.TreeIter iter0, inner_iter;
+        if (!button.get_active_iter(out iter0))
+          return;
+        sort_model.convert_iter_to_child_iter(out inner_iter, iter0);
+
+        int cur_index;
+        store.get(inner_iter, COL_INDEX, out cur_index);
+
+        if (cur_index == index_custom)
+          return;
+
+        // OK, we can continue
         var scheme = ConfigURLPart.read_uri_part(fsettings, FILE_PATH_KEY,
                                                  ConfigURLPart.Part.SCHEME);
         switch (scheme) {
@@ -462,9 +471,9 @@ public class ConfigLocation : ConfigWidget
     }
   }
 
-  void handle_changed()
+  async void handle_changed()
   {
-    set_location_info();
+    yield set_location_info();
     set_location_widgets();
   }
 
@@ -478,9 +487,6 @@ public class ConfigLocation : ConfigWidget
     int index;
     string uuid;
     store.get(iter, COL_INDEX, out index, COL_UUID, out uuid);
-
-    var prev = internal_set;
-    internal_set = true;
 
     if (index == index_s3)
       settings.set_string(BACKEND_KEY, "s3");
@@ -503,9 +509,10 @@ public class ConfigLocation : ConfigWidget
     }
     else if (index == index_smb)
       set_remote_info("smb");
-    else if (index == index_local ||
-             index == index_custom)
+    else if (index == index_local)
       set_remote_info("file");
+    else if (index == index_custom)
+      set_remote_info(null);
     else if (uuid != null)
       yield set_volume_info(iter);
     else {
@@ -513,8 +520,6 @@ public class ConfigLocation : ConfigWidget
     }
 
     changed();
-
-    internal_set = prev;
   }
 
   async void set_volume_info(Gtk.TreeIter iter)
@@ -542,12 +547,15 @@ public class ConfigLocation : ConfigWidget
     yield BackendFile.set_volume_info(vol);
   }
 
-  void set_remote_info(string scheme)
+  void set_remote_info(string? scheme)
   {
     var fsettings = DejaDup.get_settings(FILE_ROOT);
+    fsettings.delay();
     fsettings.set_string(FILE_TYPE_KEY, "normal");
-    ConfigURLPart.write_uri_part(fsettings, FILE_PATH_KEY,
-                                 ConfigURLPart.Part.SCHEME, scheme);
+    if (scheme != null)
+      ConfigURLPart.write_uri_part(fsettings, FILE_PATH_KEY,
+                                   ConfigURLPart.Part.SCHEME, scheme);
+    fsettings.apply();
     settings.set_string(BACKEND_KEY, "file");
   }
 }
