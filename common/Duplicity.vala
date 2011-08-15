@@ -517,6 +517,7 @@ public class Duplicity : Object
           // don't set checked_backup_space, we want to be able to do this again if needed
           checked_backup_space = false;
           checked_collection_info = false; // get info again
+          got_collection_info = false;
           return;
         }
       }
