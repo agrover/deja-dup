@@ -19,12 +19,13 @@
 
 import sys
 import os
+import subprocess
 sys.path.insert(0, sys.path[0]+'/..')
 import base
 import ldtp
 
 BASEPATH = '/tmp/deja-dup-test/'
-DATE = '08/01/09 21:14:34'
+DATE = subprocess.Popen(['date', '-d', '08/01/09 21:14:34', '+%x %X'], stdout=subprocess.PIPE).communicate()[0].strip()
 
 def test():
   restoredir = base.get_temp_name('restore')

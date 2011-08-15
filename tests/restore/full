@@ -19,16 +19,16 @@
 
 import sys
 import os
-import datetime
+import subprocess
 import stat
 sys.path.insert(0, sys.path[0]+'/..')
 import base
 import ldtp
 
 BASEPATH = '/tmp/deja-dup-test/'
-DATE1 = datetime.datetime.strptime('8 1 21:14:21 2009', '%m %d %H:%M:%S %Y').strftime('%x %X')
-DATE2 = datetime.datetime.strptime('8 1 21:14:34 2009', '%m %d %H:%M:%S %Y').strftime('%x %X')
-DATE3 = datetime.datetime.strptime('8 1 21:14:41 2009', '%m %d %H:%M:%S %Y').strftime('%x %X')
+DATE1 = subprocess.Popen(['date', '-d', '2009-08-01 21:14:21', '+%x %X'], stdout=subprocess.PIPE).communicate()[0].strip()
+DATE2 = subprocess.Popen(['date', '-d', '2009-08-01 21:14:34', '+%x %X'], stdout=subprocess.PIPE).communicate()[0].strip()
+DATE3 = subprocess.Popen(['date', '-d', '2009-08-01 21:14:41', '+%x %X'], stdout=subprocess.PIPE).communicate()[0].strip()
 
 def check_dir(path, oneval):
   root = path+BASEPATH

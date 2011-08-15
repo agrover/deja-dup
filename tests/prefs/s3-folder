@@ -25,31 +25,33 @@ import subprocess
 
 # First we test how things work with defaults, never used
 def defaults():
-	base.setup()
-	assert base.get_settings_value('folder', schema="S3") == "''", base.get_settings_value('folder', schema="S3")
+  base.setup()
+  assert base.get_settings_value('folder', schema="S3") == "''", base.get_settings_value('folder', schema="S3")
 
 # Now test when there has been a run
 def has_run():
-	base.setup()
-	base.set_settings_value('last-run', "'foo'")
-	base.start_deja_dup(executable='deja-dup-preferences')
-	pout = subprocess.Popen('hostname', stdout=subprocess.PIPE).communicate()[0].strip()
-	assert base.get_settings_value('folder', schema="S3") == "'%s'" % pout, base.get_settings_value('folder', schema="S3")
+  base.setup()
+  base.set_settings_value('last-run', "'foo'")
+  base.start_deja_dup(executable='deja-dup-preferences')
+  pout = subprocess.Popen('hostname', stdout=subprocess.PIPE).communicate()[0].strip()
+  assert base.get_settings_value('folder', schema="S3") == "'%s'" % pout, base.get_settings_value('folder', schema="S3")
 
 # Now test when backend isn't s3
 def is_not_s3():
-	base.setup()
-	base.set_settings_value('backend', "'rackspace'")
-	base.start_deja_dup(executable='deja-dup-preferences')
-	pout = subprocess.Popen('hostname', stdout=subprocess.PIPE).communicate()[0].strip()
-	assert base.get_settings_value('folder', schema="S3") == "'%s'" % pout, base.get_settings_value('folder', schema="S3")
+  base.setup()
+  base.set_settings_value('backend', "'rackspace'")
+  base.start_deja_dup(executable='deja-dup-preferences')
+  ldtp.click('frmBackup', 'btnJustshowmybackupsettings')
+  pout = subprocess.Popen('hostname', stdout=subprocess.PIPE).communicate()[0].strip()
+  assert base.get_settings_value('folder', schema="S3") == "'%s'" % pout, base.get_settings_value('folder', schema="S3")
 
 # Now test when folder isn't '/'
 def custom_folder():
-	base.setup()
-	base.set_settings_value('folder', "'foo'", schema="S3")
-	base.start_deja_dup(executable='deja-dup-preferences')
-	assert base.get_settings_value('folder', schema="S3") == "'foo'", base.get_settings_value('folder', schema="S3")
+  base.setup()
+  base.set_settings_value('folder', "'foo'", schema="S3")
+  base.start_deja_dup(executable='deja-dup-preferences')
+  ldtp.click('frmBackup', 'btnJustshowmybackupsettings')
+  assert base.get_settings_value('folder', schema="S3") == "'foo'", base.get_settings_value('folder', schema="S3")
 
 base.run(defaults)
 base.run(has_run)

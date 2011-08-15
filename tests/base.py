@@ -28,6 +28,7 @@ import ldtp
 import glob
 import re
 import traceback
+import time
 
 srcdir = "."
 temp_dir = None
@@ -369,7 +370,7 @@ def wait_for_encryption(dlg, encrypt):
         ldtp.click(dlg, 'rbtnAllowrestoringwithoutapassword')
       ldtp.click(dlg, 'btnContinue')
       break
-    ldtp.wait(1)
+    time.sleep(1)
     count += 1
   assert count < max_count, max_count
 
