@@ -70,7 +70,6 @@ GDK_X11_MODULE=gdk-x11-3.0
 GLIB_REQ_VER=2.26
 GIO_REQ_VER=$GLIB_REQ_VER
 NOTIFY_REQ_VER=0.7
-APPINDICATOR_MODULE=appindicator3-0.1
 DBUSMENU_GTK_MODULE=dbusmenu-gtk3-0.4
 
 AC_SUBST(GTK_MODULE)
@@ -166,25 +165,6 @@ AS_IF([test "x$with_nautilus" != xno],
   )]
 )
 AM_CONDITIONAL([HAVE_NAUTILUS], [test -n "$NAUTILUS_LIBS"])
-
-AH_TEMPLATE([HAVE_APPINDICATOR], [whether libappindicator is available])
-AC_ARG_WITH([appindicator],
-  [AS_HELP_STRING([--with-appindicator],
-    [use libappindicator for notification icons @<:@default=check@:>@])],
-  [],
-  [with_appindicator=check])
-AS_IF([test "x$with_appindicator" != xno],
-  [PKG_CHECK_MODULES(APPINDICATOR, $APPINDICATOR_MODULE,
-    [AC_DEFINE(HAVE_APPINDICATOR)
-     AC_SUBST(APPINDICATOR_CFLAGS)
-     AC_SUBST(APPINDICATOR_LIBS)],
-    [if test "x$with_appindicator" != xcheck; then
-        AC_MSG_FAILURE(
-          [--with-appindicator was given, but test for $APPINDICATOR_MODULE failed])
-      fi
-    ]
-  )]
-)
 
 AH_TEMPLATE([HAVE_UNITY], [whether libunity is available])
 AC_ARG_WITH([unity],

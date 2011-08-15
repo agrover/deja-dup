@@ -20,11 +20,10 @@
 using GLib;
 
 /**
- * There are four modes for 'shell' integration:
+ * There are three modes for 'shell' integration:
  * 1) GNOME Shell
  * 2) Unity
- * 3) Indicator
- * 4) Legacy
+ * 3) Legacy
  * 
  * GNOME Shell:
  * No status icon at all.
@@ -37,11 +36,6 @@ using GLib;
  * Always shows progress.
  * Success notification.
  * Detected by presence of Unity (usually on Ubuntu).
- * 
- * Indicator:
- * Register as an application indicator, which falls back to standard GTK+ status icon.
- * Success notification.
- * Detected by presence of application indicator host (usually on Ubuntu).
  * 
  * Legacy:
  * Standard GTK+ status icon.
@@ -66,9 +60,7 @@ public abstract class StatusIcon : Object
       break;
 
     default:
-      instance = new IndicatorStatusIcon(window, op, automatic);
-      if (!instance.is_valid)
-        instance = new LegacyStatusIcon(window, op, automatic);
+      instance = new LegacyStatusIcon(window, op, automatic);
       break;
     }
     return instance;
@@ -235,27 +227,6 @@ class UnityStatusIcon : StatusIcon
   {
     hacks_unity_entry_set_progress(entry, this.progress);
     hacks_unity_entry_show_progress(entry, true);
-  }
-}
-
-class IndicatorStatusIcon : StatusIcon
-{
-  public IndicatorStatusIcon(Gtk.Window window, DejaDup.Operation op, bool automatic)
-  {
-    Object(window: window, op: op, automatic: automatic);
-  }
-
-  Object indicator;
-  construct {
-    indicator = hacks_status_icon_make_app_indicator(ensure_menu());
-    is_valid = indicator != null;
-  }
-
-  ~IndicatorStatusIcon()
-  {
-    // FIXME: icon won't die, even with this call
-    if (indicator != null)
-      hacks_status_icon_close_app_indicator(indicator);
   }
 }
 
