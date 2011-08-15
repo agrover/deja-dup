@@ -134,19 +134,12 @@ public class MountOperationAssistant : MountOperation
     int ucol = 0;
     Gtk.Label label;
 
-    // Display user message    
-    string[] tokens = message.split("\n", 2);
-    assist.set_page_title(password_page, tokens[0]);
+    // Display user message
+    assist.set_page_title(password_page, _("Connect to Server"));
 
-    label = new Gtk.Label(_("This backup location requires authentication."));
-    label.set("xalign", 0f);
+    label = new Gtk.Label(message);
+    label.xalign = 0.0f;
     layout.pack_start(label, false, false, 0);
-
-    if (tokens[1] != null) {
-      label = new Gtk.Label(tokens[1]);
-      label.set("xalign", 0f);
-      layout.pack_start(label, false, false, 0);
-    }
 
     if (label_help != null) {
       label = new Gtk.Label(label_help);
