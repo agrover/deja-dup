@@ -23,12 +23,12 @@
           <note style="warning"><p>These services costs money.  Read their rates carefully before using them.</p></note>
         </item>
         <item>
-          <title>Removable Media</title>
-          <p>You may see removable media like external hard drives or thumb drives listed.</p>
-        </item>
-        <item>
           <title>Remote Servers</title>
           <p>Choose the type of remote server to which you want to connect. Then you can enter the server information.  Alternatively, if you know your server’s URL, choose <gui>Custom Location</gui> and enter it.</p>
+        </item>
+        <item>
+          <title>Removable Media</title>
+          <p>You may see removable media like external hard drives or thumb drives listed.</p>
         </item>
         <item>
           <title>Local Folder</title>
@@ -38,20 +38,15 @@
       </terms>
     </item>
     <item>
-      <title><gui>Keep backups</gui></title>
-      <p>Choose the minimum amount of time to keep backup files.  If you find that the backup files are taking up too much space, you may want to decrease this duration.  Due to implementation details, files may be kept a bit longer than the chosen time.  But no files will be deleted early.</p>
-      <note><p>Backups are kept forever by default, but still may be deleted earlier if the backup location begins to run out of space.</p></note>
+      <title><gui>Folders to back up</gui></title>
+      <p>Choose a list of folders to back up. Press the <gui style="button">Add</gui> or <gui style="button">Remove</gui> buttons to modify the list. If you are only interested in backing up your own data, the default of <gui>Home</gui> is sufficient.</p>
     </item>
     <item>
-      <title><gui>Include files in folders</gui></title>
-      <p>Choose a list of directories to back up. Press the <gui style="button">Add</gui> or <gui style="button">Remove</gui> buttons to modify the list. If you are only interested in backing up your own data, the default of <gui>Home Folder</gui> is sufficient.</p>
-    </item>
-    <item>
-      <title><gui>Except files in folders</gui></title>
-      <p>Choose a list of directories to not back up. Press the <gui style="button">Add </gui> or <gui style="button">Remove</gui> buttons to modify the list.</p>
+      <title><gui>Folders to ignore</gui></title>
+      <p>Choose a list of folders to not back up. Press the <gui style="button">Add </gui> or <gui style="button">Remove</gui> buttons to modify the list.</p>
       <p>Some of your data may be large and not very important to you.  In that case, you can save yourself some time and space by not backing them up.</p>
       <note style="advanced">
-        <p>Some locations are always excluded by default:</p>
+        <p>Some locations are always ignored by default:</p>
         <list its:translate="no">
           <item><p><file>~/.adobe/Flash_Player/AssetCache</file></p></item>
           <item><p><file>~/.cache</file></p></item>
@@ -66,6 +61,11 @@
           <item><p><file>/tmp</file></p></item>
         </list>
        </note>
+    </item>
+    <item>
+      <title><gui>Keep backups</gui></title>
+      <p>Choose the minimum amount of time to keep backup files.  If you find that the backup files are taking up too much space, you may want to decrease this duration.  Due to implementation details, files may be kept a bit longer than the chosen time.  But no files will be deleted early.</p>
+      <note><p>Backups are kept forever by default, but still may be deleted earlier if the backup location begins to run out of space.</p></note>
     </item>
    </terms>
 </page>
