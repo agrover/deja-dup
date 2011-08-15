@@ -393,6 +393,14 @@ public void initialize()
 {
   convert_ssh_to_file();
   convert_s3_folder_to_hostname();
+
+  /* We do a little trick here.  BackendAuto -- which is the default
+     backend on a fresh install of deja-dup -- will do some work to
+     automatically suss out which backend should be used instead of it.
+     So we request the current backend then drop it just to get that
+     ball rolling in case this is the first time. */
+  var unused_backend = DejaDup.Backend.get_default();
+  unused_backend = null;
 }
 
 public void i18n_setup()

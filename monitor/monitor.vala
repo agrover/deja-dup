@@ -275,14 +275,6 @@ static void make_first_check()
 {
   first_check = true;
 
-  /* We do a little trick here.  BackendAuto -- which is the default
-     backend on a fresh install of deja-dup -- will do some work to
-     automatically suss out which backend should be used instead of it.
-     So we request the current backend then drop it just to get that
-     ball rolling in case this is the first time. */
-  var unused_backend = DejaDup.Backend.get_default();
-  unused_backend = null;
-
   DejaDup.make_prompt_check();
   Timeout.add_seconds(DejaDup.get_prompt_delay(), () => {
     DejaDup.make_prompt_check();
