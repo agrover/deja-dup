@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2010-12-07 21:19+0000\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:32+0000\n"
 "Last-Translator: Hertatijanto Hartono <dvertx@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-08-02 04:36+0000\n"
-"X-Generator: Launchpad (build 13552)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:36+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -72,6 +72,7 @@ msgstr ""
 "dipilih."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "Lokasi backup"
 
@@ -326,20 +327,20 @@ msgstr ""
 msgid "Scanning…"
 msgstr "Memindai..."
 
-#: ../nautilus/NautilusExtension.c:165
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:166
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:208
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Kembalikan ke Versi Sebelumnya..."
 
-#: ../nautilus/NautilusExtension.c:212
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Pulihkan file dari backup"
@@ -378,7 +379,7 @@ msgstr "Menunggu hingga '%s' tersambung..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr ""
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr ""
 
@@ -415,7 +416,7 @@ msgstr ""
 msgid "Enter Rackspace Cloud Files API key"
 msgstr ""
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -451,7 +452,7 @@ msgstr "_Ingat kunci akses rahasia"
 msgid "Enter Amazon S3 access key"
 msgstr "Masukkan kunci akses Amazon S3"
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr ""
 
@@ -468,6 +469,20 @@ msgstr ""
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr ""
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
+msgstr ""
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr ""
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "Sampah"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -536,7 +551,7 @@ msgid "Cleaning up…"
 msgstr "Melakukan pembenahan..."
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
-#: ../deja-dup/AssistantOperation.vala:514
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "Gagal dengan kesalahan yang tidak dikenali."
 
@@ -695,51 +710,51 @@ msgstr "Memindai:"
 msgid "_Details"
 msgstr "_Detil"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Password-protect your backup"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr "Sandi E_nkripsi"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "_Ingat sandi"
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr ""
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "Rangkuman"
 
-#: ../deja-dup/AssistantOperation.vala:724
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:726
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:769
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr ""
 
@@ -751,7 +766,7 @@ msgstr "Pulihkan"
 msgid "_Restore"
 msgstr "_Pulihkan"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "Lokasi _Backup"
 
@@ -948,11 +963,10 @@ msgstr ""
 msgid "You must specify a mode"
 msgstr ""
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "Nama pengg_una"
 
@@ -968,19 +982,20 @@ msgstr ""
 msgid "Location not available"
 msgstr "Lokasi tidak tersedia"
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
-msgstr "Lokasi backup membutuhkan otentifikasi"
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
+msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr "Sambungkan secara _anonim"
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr "Sambungkan sebagai pengg_una"
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr "Ranah/_Domain"
 
@@ -1054,68 +1069,68 @@ msgstr ""
 msgid "Just show my backup _settings"
 msgstr ""
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr ""
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr ""
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr ""
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:251
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr ""
 
-#: ../preferences/Preferences.vala:257
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr ""
 
-#: ../preferences/Preferences.vala:279
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr ""
 
-#: ../preferences/Preferences.vala:308
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr ""
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr ""
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr ""
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr ""
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr ""
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr "Sim_pan backup"
 
-#: ../preferences/Preferences.vala:324
-msgid "Storage"
-msgstr ""
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr ""
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr ""
-
-#: ../preferences/Preferences.vala:382
-msgid "How _often to back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr ""
 
@@ -1192,14 +1207,6 @@ msgstr "Ya"
 msgid "No"
 msgstr "Tidak"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
-msgid "Home"
-msgstr ""
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
-msgid "Trash"
-msgstr "Sampah"
-
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
 msgstr "Tidak Diketahui"
@@ -1255,48 +1262,48 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:95
+#: ../widgets/ConfigList.vala:189
 msgid "_Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:96
+#: ../widgets/ConfigList.vala:190
 msgid "Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:189
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "Pilih map"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr ""
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr "Map lokal"
 
@@ -1313,21 +1320,17 @@ msgstr "_Server"
 msgid "Use secure connection (_HTTPS)"
 msgstr ""
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr "_Port"
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "_Map"
-
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -1337,7 +1340,7 @@ msgstr ""
 msgid "Choose Folder"
 msgstr ""
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr ""
 
@@ -1345,12 +1348,8 @@ msgstr ""
 msgid "S3 Access Key I_D"
 msgstr "I_D Kunci Akses S3"
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
-msgstr ""
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
 msgstr ""
 
 #: ../widgets/ConfigPeriod.vala:36
@@ -1394,27 +1393,6 @@ msgstr "Tidak dapat menampilkan %s"
 
 #~ msgid "Directories to backup"
 #~ msgstr "Direktori yang akan di backup"
-
-#~ msgid "Local backup location"
-#~ msgstr "Lokasi backup lokal"
-
-#~ msgid "SSH port"
-#~ msgstr "Port SSH"
-
-#~ msgid "SSH server"
-#~ msgstr "Server SSH"
-
-#~ msgid "SSH username"
-#~ msgstr "Nama pengguna SSH"
-
-#~ msgid "The directory used for SSH connections."
-#~ msgstr "Direktori yang digunakan untuk koneksi SSH"
-
-#~ msgid "The server used for SSH connections."
-#~ msgstr "Server yang digunakan untuk koneksi SSH."
-
-#~ msgid "The user used for SSH connections."
-#~ msgstr "User yang digunakan untuk koneksi SSH."
 
 #~ msgid "Whether to automatically backup on a regular schedule."
 #~ msgstr "Apakah akan melakukan backup rutin secara otomatis."
@@ -1463,6 +1441,9 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "Rerun"
 #~ msgstr "Jalankan kembali"
 
+#~ msgid "Backup location:"
+#~ msgstr "Lokasi backup:"
+
 #~ msgid "Backing up"
 #~ msgstr "Melakukan proses backup"
 
@@ -1474,13 +1455,6 @@ msgstr "Tidak dapat menampilkan %s"
 
 #~ msgid "Checking for Backups"
 #~ msgstr "Memeriksa Backup"
-
-#~ msgid "SSH Password"
-#~ msgstr "Password SSH"
-
-#, c-format
-#~ msgid "Enter your SSH username and password for server %s."
-#~ msgstr "Masukkan nama pengguna dan password SSH anda untuk server %s."
 
 #, c-format
 #~ msgid ""
@@ -1573,22 +1547,6 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "The last time Déjà Dup was run, in ISO 8601 format."
 #~ msgstr "Saat terakhir Déjà Dup dijalankan, dalam format ISO 8601."
 
-#~ msgid "SSH directory"
-#~ msgstr "Direktori SSH"
-
-#~ msgid "The port used for SSH connections."
-#~ msgstr "Port yang digunakan untuk koneksi SSH."
-
-#~ msgid ""
-#~ "The protocol used for the backup location. Valid values are 's3', 'file', or "
-#~ "'ssh'."
-#~ msgstr ""
-#~ "Protokol yang digunakan untuk lokasi backup. Nilai yang dapat digunakan "
-#~ "adalah 's3', 'file', atau 'ssh'."
-
-#~ msgid "Folder on your system in which to hold the backup files."
-#~ msgstr "Map pada sistem tempat menyimpan file backup"
-
 #~ msgid ""
 #~ "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 #~ "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
@@ -1618,6 +1576,9 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "Déjà Dup Applet"
 #~ msgstr "Aplet Déjà Dup"
 
+#~ msgid "_Date:"
+#~ msgstr "_Tanggal:"
+
 #~ msgid "Déjà Dup"
 #~ msgstr "Déjà Dup"
 
@@ -1636,9 +1597,6 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "_Help"
 #~ msgstr "_Bantuan"
 
-#~ msgid "Contents"
-#~ msgstr "Isi"
-
 #~ msgid "Get Help _Online..."
 #~ msgstr "Dapatkan Bantuan _Online..."
 
@@ -1648,11 +1606,11 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "_Report a Problem..."
 #~ msgstr "_Laporkan Masalah..."
 
-#~ msgid "I_nclude"
-#~ msgstr "Cakupa_n"
+#~ msgid "_Server:"
+#~ msgstr "_Server:"
 
-#~ msgid "E_xclude"
-#~ msgstr "Pen_gecualian"
+#~ msgid "_Port:"
+#~ msgstr "_Port:"
 
 #~ msgid "_Encrypt backup files"
 #~ msgstr "_Enkripsikan file backup"
@@ -1681,17 +1639,11 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "SEE ALSO"
 #~ msgstr "LIHAT JUGA"
 
-#~ msgid "Michael Terry"
-#~ msgstr "Michael Terry"
-
 #~ msgid "Feedback"
 #~ msgstr "Umpan balik"
 
 #~ msgid "Introduction"
 #~ msgstr "Pendahuluan"
-
-#~ msgid "Local folder"
-#~ msgstr "Map lokal"
 
 #~ msgid "Getting Started"
 #~ msgstr "Pengenalan Awal"
@@ -1715,12 +1667,6 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "<guilabel>Amazon S3</guilabel>"
 #~ msgstr "<guilabel>Amazon S3</guilabel>"
 
-#~ msgid "<guilabel>Local Folder</guilabel>"
-#~ msgstr "<guilabel>Map Lokal</guilabel>"
-
-#~ msgid "<guilabel>SSH</guilabel>"
-#~ msgstr "<guilabel>SSH</guilabel>"
-
 #~ msgid "Default: <guilabel>Amazon S3</guilabel>."
 #~ msgstr "Default: <guilabel>Amazon S3</guilabel>."
 
@@ -1737,27 +1683,6 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "<guilabel>Folder</guilabel>"
 #~ msgstr "<guilabel>Map</guilabel>"
 
-#~ msgid "<guilabel>Username</guilabel>"
-#~ msgstr "<guilabel>Nama pengguna</guilabel>"
-
-#~ msgid "<guilabel>Server</guilabel>"
-#~ msgstr "<guilabel>Server</guilabel>"
-
-#~ msgid "<guilabel>Port</guilabel>"
-#~ msgstr "<guilabel>Port</guilabel>"
-
-#~ msgid "<guilabel>Directory</guilabel>"
-#~ msgstr "<guilabel>Direktori</guilabel>"
-
-#~ msgid "<guilabel>Include</guilabel>"
-#~ msgstr "<guilabel>Cakupan</guilabel>"
-
-#~ msgid "<guilabel>Exclude</guilabel>"
-#~ msgstr "<guilabel>Pengecualian</guilabel>"
-
-#~ msgid "~/Private"
-#~ msgstr "~/Private"
-
 #~ msgid "/sys"
 #~ msgstr "/sys"
 
@@ -1770,14 +1695,8 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "Could not open preferences"
 #~ msgstr "Tidak dapat membuka preferensi"
 
-#~ msgid "No username specified"
-#~ msgstr "Nama pengguna belum diberikan"
-
 #~ msgid "Amazon S3 Password"
 #~ msgstr "Password Amazon S3"
-
-#~ msgid "Choose backup destination"
-#~ msgstr "Pilih lokasi tujuan backup"
 
 #~ msgid ""
 #~ "Enter your Amazon Web Services user ID and secret key.  This is not the same "
@@ -1787,27 +1706,11 @@ msgstr "Tidak dapat menampilkan %s"
 #~ "tidak sama dengan nama dan password yang anda gunakan di amazon.com."
 
 #, c-format
-#~ msgid "%s on ssh://%s@%s:%d"
-#~ msgstr "%s pada ssh://%s@%s:%d"
-
-#~ msgid "No server specified"
-#~ msgstr "Server belum dispesifikasikan"
-
-#, c-format
 #~ msgid "Folder %s on Amazon S3"
 #~ msgstr "Map %s di Amazon S3"
 
 #~ msgid "Checking for backups..."
 #~ msgstr "Memeriksa keberadaan backup..."
-
-#~ msgid ""
-#~ "You should have received a copy of the GNU General Public License along with "
-#~ "this program; if not, write to the Free Software Foundation, Inc., 59 Temple "
-#~ "Place - Suite 330, Boston, MA  02111-1307, USA."
-#~ msgstr ""
-#~ "Anda seharusnya telah menerima salinan lisensi GNU General Public License "
-#~ "terlampir bersama program ini. Jika belum, tulis ke Free Software "
-#~ "Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 
 #~ msgid ""
 #~ "This program is distributed in the hope that it will be useful, but WITHOUT "
@@ -1823,25 +1726,15 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "Home Folder"
 #~ msgstr "Map Pangkal"
 
-#~ msgid "Select Folder"
-#~ msgstr "Pilih Map"
-
 #~ msgid "Revert to Previous Version..."
 #~ msgid_plural "Revert to Previous Versions..."
 #~ msgstr[0] "Dialihkan Kembali ke Versi Sebelumnya..."
 
-#, c-format
-#~ msgid "%s is already in the list."
-#~ msgstr "%s sudah ada dalam daftar."
-
 #~ msgid "Déjà Dup Preferences"
 #~ msgstr "Preferensi Déjà Dup"
 
-#~ msgid "Choose folder"
-#~ msgstr "Pilih map"
-
-#~ msgid "Could not add the folder"
-#~ msgstr "Tidak dapat menambahkan map"
+#~ msgid "S3 Access Key I_D:"
+#~ msgstr "I_D Kunci Akses S3:"
 
 #, no-wrap
 #~ msgid "USER COMMANDS"
@@ -1853,14 +1746,8 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "B<deja-dup> [OPTIONS]"
 #~ msgstr "B<deja-dup> [PILIHAN]"
 
-#~ msgid ""
-#~ "deja-dup is a graphical frontend to B<duplicity>(1).  It can backup and "
-#~ "restore using Amazon S3, an SSH server, or a local folder, as well as "
-#~ "schedule backups at regular intervals."
-#~ msgstr ""
-#~ "deja-dup adalah program GUI bagi B<duplicity>(1). Ia dapat melakukan backup "
-#~ "dan restorasi data pada Amazon S3, server SSH, atau pada lokal map, selain "
-#~ "dapat pula menskedulkan backup pada interval yang teratur."
+#~ msgid "_Backup location:"
+#~ msgstr "Lokasi _Backup:"
 
 #, no-wrap
 #~ msgid "DESCRIPTION"
@@ -1959,9 +1846,6 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "Michael Terry <email>mike@mterry.name</email>"
 #~ msgstr "Michael Terry <email>mike@mterry.name</email>"
 
-#~ msgid "<indexterm zone=\"index\">"
-#~ msgstr "<indexterm zone=\"index\">"
-
 #~ msgid ""
 #~ "To report a bug or make a suggestion regarding the <application>Déjà "
 #~ "Dup</application> application or this manual, visit the <ulink "
@@ -1972,9 +1856,6 @@ msgstr "Tidak dapat menampilkan %s"
 #~ "<application>Déjà Dup</application> atau buku panduan ini, kunjungi <ulink "
 #~ "url=\"http://bugs.launchpad.net/deja-dup\" type=\"http\">laman proyek "
 #~ "<application>Déjà Dup</application></ulink>."
-
-#~ msgid "<author> <firstname>Michael</firstname> <surname>Terry</surname>"
-#~ msgstr "<author> <firstname>Michael</firstname> <surname>Terry</surname>"
 
 #~ msgid "<application>Déjà Dup</application> Manual"
 #~ msgstr "Buku panduan <application>Déjà Dup</application>"
@@ -1999,8 +1880,8 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "Schedules regular backups."
 #~ msgstr "Menskedul backup secara teratur."
 
-#~ msgid "<application>Déjà Dup</application> provides the following features"
-#~ msgstr "<application>Déjà Dup</application> menyediakan fitur-fitur berikut"
+#~ msgid "<application>Déjà Dup</application> provides the following features:"
+#~ msgstr "<application>Déjà Dup</application> menyediakan fitur-fitur berikut:"
 
 #~ msgid ""
 #~ "<application>Déjà Dup</application> is a simple backup program. It hides the "
@@ -2012,25 +1893,6 @@ msgstr "Tidak dapat menampilkan %s"
 #~ "lokasi terpisah, dan rutin) dan menggunakan duplicity sebagai program latar "
 #~ "belakangnya."
 
-#~ msgid "Support for the following backup locations"
-#~ msgstr "Mendukung lokasi backup berikut"
-
-#~ msgid "</indexterm> <indexterm zone=\"index\">"
-#~ msgstr "</indexterm> <indexterm zone=\"index\">"
-
-#~ msgid "When You Start <application>Déjà Dup</application>"
-#~ msgstr "Ketika Anda Memulai <application>Déjà Dup</application>"
-
-#~ msgid ""
-#~ "If this is the first time you have run <application>Déjà Dup</application>, "
-#~ "you should configure your backup before continuing.  You'll need to decide "
-#~ "where to put the backup files and which folders to include or exclude."
-#~ msgstr ""
-#~ "Jika ini merupakan pertama kalinya anda menjalankan <application>Déjà "
-#~ "Dup</application>, anda perlu mengkonfigurasi backup anda sebelum "
-#~ "meneruskannya. Anda perlu menentukan dimana tempat backup akan diletakkan, "
-#~ "serta direktori-direktori yang akan termasuk maupun dikecualikan dari backup."
-
 #~ msgid "<command>deja-dup</command>"
 #~ msgstr "<command>deja-dup</command>"
 
@@ -2038,28 +1900,17 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgstr "Baris perintah"
 
 #~ msgid ""
-#~ "You can start <application>Déjà Dup</application> in the following ways"
+#~ "You can start <application>Déjà Dup</application> in the following ways:"
 #~ msgstr ""
 #~ "Anda dapat memulai <application>Déjà Dup</application> dengan cara-cara "
-#~ "berikut"
+#~ "berikut:"
 
 #~ msgid ""
 #~ "To start <application>Déjà Dup</application> from a command line, type the "
-#~ "following command, then press <keycap>Return</keycap>"
+#~ "following command, then press <keycap>Return</keycap>:"
 #~ msgstr ""
 #~ "Untuk memuulai <application>Déjà Dup</application> dari baris perintah, "
-#~ "ketik perintah berikut, kemudian tekan <keycap>Return</keycap>"
-
-#~ msgid ""
-#~ "Choose "
-#~ "<menuchoice><guimenu>Edit</guimenu><guimenuitem>Preferences</guimenuitem></me"
-#~ "nuchoice> to open the <link linkend=\"deja-dup-prefs\">Preferences "
-#~ "window</link>."
-#~ msgstr ""
-#~ "Pilih "
-#~ "<menuchoice><guimenu>Edit</guimenu><guimenuitem>Preferensi</guimenuitem></men"
-#~ "uchoice> untuk membuka <link linkend=\"deja-dup-prefs\">window "
-#~ "Preferensi</link>."
+#~ "ketik perintah berikut, kemudian tekan <keycap>Return</keycap>:"
 
 #~ msgid ""
 #~ "To configure <application>Déjà Dup</application>, choose "
@@ -2102,33 +1953,49 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "Backup"
 #~ msgstr "Backup"
 
-#~ msgid "I_nclude files in folders"
+#~ msgid "I_nclude files in folders:"
 #~ msgstr "Masukka_n file dalam map"
 
-#~ msgid "E_xcept files in folders"
+#~ msgid "E_xcept files in folders:"
 #~ msgstr "_Kecuali file dalam map"
 
-#~ msgid "Include from"
-#~ msgstr "Sisipkan dari"
+#~ msgid "Include from:"
+#~ msgstr "Sisipkan dari:"
 
-#~ msgid "Except for"
-#~ msgstr "Kecuali untuk"
+#~ msgid "Except for:"
+#~ msgstr "Kecuali untuk:"
 
-#~ msgid "Encrypted"
-#~ msgstr "Terenkripsi"
+#~ msgid "Encrypted:"
+#~ msgstr "Terenkripsi:"
+
+#~ msgid "E_ncryption password:"
+#~ msgstr "Sandi E_nkripsi:"
 
 #~ msgid "Password needed"
 #~ msgstr "Kata sandi dibutuhkan"
 
 #, c-format
-#~ msgid "How _often to backup"
+#~ msgid "How _often to backup:"
 #~ msgstr "Berapa se_ring membackup"
 
 #~ msgid "_Automatically backup on a regular schedule"
 #~ msgstr "B_ackup otomatis terskedul"
 
+#~ msgid "Restore folder:"
+#~ msgstr "Map pemulihan:"
+
+#~ msgid "Restore _folder:"
+#~ msgstr "Pulihkan _map"
+
+#~ msgid "Restore date:"
+#~ msgstr "Tanggal pemulihan:"
+
 #~ msgid "Backup files are _encrypted"
 #~ msgstr "File di backup secara ter_enkripsi"
+
+#~ msgid "File to restore:"
+#~ msgid_plural "Files to restore:"
+#~ msgstr[0] "File yang akan dipulihkan:"
 
 #~ msgctxt "backup is noun"
 #~ msgid "_Backup"
@@ -2143,8 +2010,29 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgid "_Contents"
 #~ msgstr "Daftar _Isi"
 
+#~ msgid "Connect as u_ser:"
+#~ msgstr "Sambungkan sebagai pengg_una:"
+
+#~ msgid "_Domain:"
+#~ msgstr "Ranah/_Domain:"
+
+#~ msgid "This backup location requires authentication."
+#~ msgstr "Lokasi backup membutuhkan otentifikasi"
+
+#~ msgid "_Access key ID:"
+#~ msgstr "ID kunci _akses:"
+
+#~ msgid "_Secret access key:"
+#~ msgstr "Kunci akses raha_sia:"
+
 #~ msgid "_Report a Problem…"
 #~ msgstr "_Laporkan Permasalahan"
+
+#~ msgid "_Username:"
+#~ msgstr "Nama pengg_una:"
+
+#~ msgid "_Password:"
+#~ msgstr "_Kata sandi:"
 
 #~ msgid "GVFS FUSE is not installed"
 #~ msgstr "GVFS FUSE tidak terinstal"
@@ -2168,6 +2056,13 @@ msgstr "Tidak dapat menampilkan %s"
 #~ msgstr ""
 #~ "Tidak semua file dapat dipulihkan. File yang tidak terpulihkan mungkin dapat "
 #~ "ditemukan di %s."
+
+#~ msgid "_Folder:"
+#~ msgstr "_Map:"
+
+#, c-format
+#~ msgid "_Keep backups:"
+#~ msgstr "Sim_pan backup:"
 
 #~ msgid "Could not open connection dialog"
 #~ msgstr "Tidak dapat membuka dialog koneksi"

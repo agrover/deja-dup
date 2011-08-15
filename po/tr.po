@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2011-07-27 02:21+0000\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:33+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-08-02 04:37+0000\n"
-"X-Generator: Launchpad (build 13552)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:37+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -72,6 +72,7 @@ msgstr ""
 "listede oluşturulacak."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "Yedekleme konumu"
 
@@ -183,7 +184,7 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "The last time Déjà Dup backed up"
-msgstr ""
+msgstr "İlk Déjà Dup yedeklemesi"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "The last time Déjà Dup restored"
@@ -324,20 +325,20 @@ msgstr "Klasör"
 msgid "Scanning…"
 msgstr "Taranıyor..."
 
-#: ../nautilus/NautilusExtension.c:165
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr "Eksik Dosyaları Geri Yükle..."
 
-#: ../nautilus/NautilusExtension.c:166
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr "Silinen dosyaları yedekten geri yükle"
 
-#: ../nautilus/NautilusExtension.c:208
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Önceki Versiyona geri dön..."
 
-#: ../nautilus/NautilusExtension.c:212
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] ""
@@ -377,7 +378,7 @@ msgstr "'%s'in bağlanması bekleniyor..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr ""
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr ""
 
@@ -414,7 +415,7 @@ msgstr "API erişim anahtarını _hatırla"
 msgid "Enter Rackspace Cloud Files API key"
 msgstr ""
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -449,7 +450,7 @@ msgstr "Gizli erişim anahtarını _hatırla"
 msgid "Enter Amazon S3 access key"
 msgstr ""
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -457,7 +458,7 @@ msgstr "Ubuntu One"
 #: ../common/BackendU1.vala:165
 #, c-format
 msgid "%s on Ubuntu One"
-msgstr ""
+msgstr "%s Ubuntu One üzerinde"
 
 #: ../common/BackendU1.vala:220
 msgid "Sign into Ubuntu One…"
@@ -465,7 +466,21 @@ msgstr ""
 
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
+msgstr "Ubuntu One'a Bağlan"
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
 msgstr ""
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr ""
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "Çöp Kutusu"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -530,7 +545,7 @@ msgid "Cleaning up…"
 msgstr "Temizleniyor..."
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
-#: ../deja-dup/AssistantOperation.vala:514
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "Bilinmeyen bir sebepten dolayı başarısız."
 
@@ -650,12 +665,12 @@ msgstr ""
 #: ../deja-dup/AssistantBackup.vala:31
 msgctxt "back up is verb"
 msgid "Back Up"
-msgstr ""
+msgstr "Yedekle"
 
 #: ../deja-dup/AssistantBackup.vala:32
 msgctxt "back up is verb"
 msgid "_Back Up"
-msgstr ""
+msgstr "_Yedekle"
 
 #: ../deja-dup/AssistantBackup.vala:51
 msgid "Creating the first backup.  This may take a while."
@@ -689,51 +704,51 @@ msgstr "Taranıyor:"
 msgid "_Details"
 msgstr "_Ayrıntılar"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Password-protect your backup"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr "Parolayı _doğrula"
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr "_Parolayı göster"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "_Parolayı hatırla"
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr ""
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "Özet"
 
-#: ../deja-dup/AssistantOperation.vala:724
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:726
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:769
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr ""
 
@@ -745,7 +760,7 @@ msgstr "Geri Yükle"
 msgid "_Restore"
 msgstr "_Geri Yükle"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "_Yedekleme konumu"
 
@@ -943,11 +958,10 @@ msgstr ""
 msgid "You must specify a mode"
 msgstr ""
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "_Kullanıcı Adı"
 
@@ -963,19 +977,20 @@ msgstr "Parolayı _göster"
 msgid "Location not available"
 msgstr "Konum geçerli değil"
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
-msgstr "Bu yedekleme konumu doğrulama gerektiriyor"
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
+msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr "_Anonim olarak bağlan"
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr "_Kullanıcı olarak bağlan"
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr ""
 
@@ -1049,68 +1064,68 @@ msgstr ""
 msgid "Just show my backup _settings"
 msgstr ""
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr "Kategoriler"
 
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr "Otomatik _yedeklemeler"
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr ""
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr ""
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr "Sonraki otomatik yedekleme"
 
-#: ../preferences/Preferences.vala:251
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr "_Geri Yükle..."
 
-#: ../preferences/Preferences.vala:257
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr "_Şimdi Yedekle"
 
-#: ../preferences/Preferences.vala:279
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr "Genel Görünüm"
 
-#: ../preferences/Preferences.vala:308
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr "Depolama"
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr ""
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr ""
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr ""
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr ""
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr "Yedekleri _tut"
 
-#: ../preferences/Preferences.vala:324
-msgid "Storage"
-msgstr "Depolama"
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr ""
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr ""
-
-#: ../preferences/Preferences.vala:382
-msgid "How _often to back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr ""
 
@@ -1164,8 +1179,7 @@ msgstr "Yarın"
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Bugünden itibaren %d gün"
 
 #: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
@@ -1185,14 +1199,6 @@ msgstr "Evet"
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
 msgstr "Hayır"
-
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
-msgid "Home"
-msgstr ""
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
-msgid "Trash"
-msgstr "Çöp Kutusu"
 
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
@@ -1249,48 +1255,48 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:95
+#: ../widgets/ConfigList.vala:189
 msgid "_Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:96
+#: ../widgets/ConfigList.vala:190
 msgid "Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:189
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "Klasörleri Seçin"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
-msgstr ""
+msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr "Dosya Transfer Protokolü(FTP)"
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
-msgstr ""
+msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr "Özel Konum"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr "Yerel Klasör"
 
@@ -1307,21 +1313,17 @@ msgstr "_Sunucu"
 msgid "Use secure connection (_HTTPS)"
 msgstr "Güvenli bağlantı kullan (_HTTPS)"
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
-msgstr "_Bağlantı Noktası "
+msgstr "_Bağlantı Noktası"
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "_Klasör"
-
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr "Bir kullanıcı adıyla _bağlan"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -1331,7 +1333,7 @@ msgstr ""
 msgid "Choose Folder"
 msgstr "Klasör Seç"
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr ""
 
@@ -1339,13 +1341,9 @@ msgstr ""
 msgid "S3 Access Key I_D"
 msgstr ""
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
 msgstr "_Alan Adı"
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
-msgstr "İsteğe bağlı bilgi"
 
 #: ../widgets/ConfigPeriod.vala:36
 msgid "Daily"
@@ -1377,6 +1375,9 @@ msgstr "%s gösterilemiyor"
 #~ msgid "Could not open preferences"
 #~ msgstr "Tercihler açılamadı"
 
+#~ msgid "_Date:"
+#~ msgstr "_Tarih:"
+
 #~ msgid "_Help"
 #~ msgstr "_Yardım"
 
@@ -1392,6 +1393,12 @@ msgstr "%s gösterilemiyor"
 #~ msgid "Home Folder"
 #~ msgstr "Ana Klasör"
 
+#~ msgid "_Server:"
+#~ msgstr "_Sunucu:"
+
+#~ msgid "_Folder:"
+#~ msgstr "_Klasör:"
+
 #, no-wrap
 #~ msgid "USER COMMANDS"
 #~ msgstr "KULLANICI KOMUTLARI"
@@ -1406,9 +1413,6 @@ msgstr "%s gösterilemiyor"
 
 #~ msgid "C"
 #~ msgstr "C"
-
-#~ msgid "Michael Terry"
-#~ msgstr "Michael Terry"
 
 #~ msgid "Preferences"
 #~ msgstr "Tercihler"
@@ -1431,8 +1435,14 @@ msgstr "%s gösterilemiyor"
 #~ msgid "Your files were successfully backed up."
 #~ msgstr "Dosyalarınız başarılı bir şekilde yedeklendi."
 
+#~ msgid "Backup location:"
+#~ msgstr "Yedekleme konumu:"
+
 #~ msgid "Backing up..."
 #~ msgstr "Yedekleniyor..."
+
+#~ msgid "_Backup location:"
+#~ msgstr "_Yedekleme konumu:"
 
 #~ msgid "Backup Tool"
 #~ msgstr "Yedekleme Aracı"
@@ -1457,8 +1467,8 @@ msgstr "%s gösterilemiyor"
 #~ msgid "Backup"
 #~ msgstr "Yedekle"
 
-#~ msgid "Encrypted"
-#~ msgstr "Şifreli"
+#~ msgid "Encrypted:"
+#~ msgstr "Şifreli:"
 
 #~ msgid "Password needed"
 #~ msgstr "Parola gerekli"
@@ -1473,8 +1483,17 @@ msgstr "%s gösterilemiyor"
 #~ msgid "_Translate This Application…"
 #~ msgstr "Bu Uygulamayı _Tercüme Et..."
 
+#~ msgid "This backup location requires authentication."
+#~ msgstr "Bu yedekleme konumu doğrulama gerektiriyor"
+
 #~ msgid "_Report a Problem…"
 #~ msgstr "Sorun _Bildirin..."
+
+#~ msgid "_Username:"
+#~ msgstr "_Kullanıcı Adı:"
+
+#~ msgid "_Password:"
+#~ msgstr "_Parola:"
 
 #~ msgid "Select Backup Location"
 #~ msgstr "Yedekleme Konumunu Seçin"
@@ -1503,6 +1522,10 @@ msgstr "%s gösterilemiyor"
 #~ msgid "Biweekly"
 #~ msgstr "İki Haftada Bir"
 
+#, c-format
+#~ msgid "_Keep backups:"
+#~ msgstr "Yedekleri _tut:"
+
 #~ msgid "Déjà Dup Preferences"
 #~ msgstr "Déjà Dup Tercihleri"
 
@@ -1530,6 +1553,15 @@ msgstr "%s gösterilemiyor"
 #~ msgid "Scanning..."
 #~ msgstr "Taranıyor..."
 
+#~ msgid "Folder:"
+#~ msgstr "Klasör:"
+
+#~ msgid "_API access key:"
+#~ msgstr "_API erişim anahtarı:"
+
+#~ msgid "_Secret access key:"
+#~ msgstr "_Gizli erişim anahtarı:"
+
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
@@ -1538,22 +1570,50 @@ msgstr "%s gösterilemiyor"
 #~ "  Fatih Dayioglu https://launchpad.net/~fthd\n"
 #~ "  Irmak Bıçakçıgil https://launchpad.net/~irmak\n"
 #~ "  Merih AKAR https://launchpad.net/~merihakar\n"
-#~ "  Michael Terry https://launchpad.net/~mterry\n"
 #~ "  Muhammet Kara https://launchpad.net/~muhammet-k\n"
 #~ "  Osman Tosun https://launchpad.net/~rainman-neu\n"
 #~ "  Rbbt https://launchpad.net/~rbbt62\n"
 #~ "  Yalçın Can https://launchpad.net/~echza\n"
-#~ "  ozgurkaya111 https://launchpad.net/~ozgurkaya111"
+#~ "  kulkke https://launchpad.net/~kulkke\n"
+#~ "  ozgurkaya111 https://launchpad.net/~ozgurkaya111\n"
+#~ "  yasin özdemir https://launchpad.net/~serenler07"
+
+#~ msgid "Optional information:"
+#~ msgstr "İsteğe bağlı bilgi:"
+
+#~ msgid "_Domain Name:"
+#~ msgstr "_Alan Adı:"
+
+#~ msgid "_Log in with a username"
+#~ msgstr "Bir kullanıcı adıyla _bağlan"
+
+#~ msgid "_Port:"
+#~ msgstr "_Bağlantı Noktası :"
+
+#~ msgid "_Access key ID:"
+#~ msgstr "_Erişim anahtarı kimliği:"
 
 #, c-format
 #~ msgid "Could not restore %s: %s"
 #~ msgstr "%s geri yüklenemiyor: %s"
 
-#~ msgid "Settings"
-#~ msgstr "Ayarlar"
+#~ msgid "Confir_m password:"
+#~ msgstr "Parolayı _doğrula:"
+
+#~ msgid "Restore _folder:"
+#~ msgstr "Yedekleme _klasörü:"
+
+#~ msgid "Connect as u_ser:"
+#~ msgstr "_Kullanıcı olarak bağlan:"
+
+#~ msgid "Automatic _backups:"
+#~ msgstr "Otomatik _yedeklemeler:"
 
 #~ msgid "Files"
 #~ msgstr "Dosyalar"
+
+#~ msgid "Next automatic backup:"
+#~ msgstr "Sonraki otomatik yedekleme:"
 
 #~ msgid "_Browse…"
 #~ msgstr "_Göz at…"

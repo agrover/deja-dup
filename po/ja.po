@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2011-07-27 02:23+0000\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:27+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-08-02 04:36+0000\n"
-"X-Generator: Launchpad (build 13552)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:36+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -70,6 +70,7 @@ msgid ""
 msgstr "ファイルを置く任意のフォルダ名。選択したバケット内に作成されます。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "バックアップの保存場所"
 
@@ -320,20 +321,20 @@ msgstr "フォルダー"
 msgid "Scanning…"
 msgstr "スキャンしています…"
 
-#: ../nautilus/NautilusExtension.c:165
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:166
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr "バックアップから削除ファイルを復元"
 
-#: ../nautilus/NautilusExtension.c:208
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "以前のバージョンに戻す…"
 
-#: ../nautilus/NautilusExtension.c:212
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "バックアップからファイルを復元"
@@ -372,7 +373,7 @@ msgstr "‘%s’ が接続されるのを待っています…"
 msgid "You must specify a Rackspace container in your preferences."
 msgstr ""
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr ""
 
@@ -409,7 +410,7 @@ msgstr ""
 msgid "Enter Rackspace Cloud Files API key"
 msgstr ""
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -444,7 +445,7 @@ msgstr "secret access key を記憶する(_R)"
 msgid "Enter Amazon S3 access key"
 msgstr "Amazon S3 access key の入力"
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr ""
 
@@ -461,6 +462,20 @@ msgstr ""
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr ""
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
+msgstr ""
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr ""
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "ゴミ箱"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -529,7 +544,7 @@ msgid "Cleaning up…"
 msgstr "クリーンアップしています…"
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
-#: ../deja-dup/AssistantOperation.vala:514
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "不明なエラーで失敗しました"
 
@@ -689,51 +704,51 @@ msgstr "スキャン中:"
 msgid "_Details"
 msgstr "詳細(_D)"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Password-protect your backup"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr "暗号化パスワード(_N)"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr "パスワードを表示する(_S)"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "パスワードを記憶する(_R)"
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr ""
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "設定一覧"
 
-#: ../deja-dup/AssistantOperation.vala:724
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:726
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:769
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr ""
 
@@ -745,7 +760,7 @@ msgstr "復元"
 msgid "_Restore"
 msgstr "復元(_R)"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "バックアップの保存場所(_B)"
 
@@ -939,11 +954,10 @@ msgstr "ファイルではなく、ディレクトリーを指定する必要が
 msgid "You must specify a mode"
 msgstr ""
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "ユーザ名(_U)"
 
@@ -959,19 +973,20 @@ msgstr "パスワードを表示する(_H)"
 msgid "Location not available"
 msgstr "場所が使用できません"
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
-msgstr "このバックアップ保存場所は認証が必要です。"
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
+msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr "匿名で接続する(_A)"
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr "ユーザ名を指定して接続する(_S)"
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr "ドメイン(_D)"
 
@@ -1045,68 +1060,68 @@ msgstr ""
 msgid "Just show my backup _settings"
 msgstr ""
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr ""
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr ""
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr ""
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:251
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr "復元(_R)…"
 
-#: ../preferences/Preferences.vala:257
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr ""
 
-#: ../preferences/Preferences.vala:279
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr ""
 
-#: ../preferences/Preferences.vala:308
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr "記憶装置"
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr ""
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr ""
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr ""
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr "バックアップする頻度(_O)"
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr "バックアップの保存期間(_K)"
 
-#: ../preferences/Preferences.vala:324
-msgid "Storage"
-msgstr "記憶装置"
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr ""
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr ""
-
-#: ../preferences/Preferences.vala:382
-msgid "How _often to back up"
-msgstr "バックアップする頻度(_O)"
-
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "スケジュール"
 
@@ -1183,14 +1198,6 @@ msgstr "有効"
 msgid "No"
 msgstr "無効"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
-msgid "Home"
-msgstr ""
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
-msgid "Trash"
-msgstr "ゴミ箱"
-
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
 msgstr "不明"
@@ -1245,48 +1252,48 @@ msgid_plural ""
 "low on space."
 msgstr[0] "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低 %d 日間保存されます。"
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:95
+#: ../widgets/ConfigList.vala:189
 msgid "_Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:96
+#: ../widgets/ConfigList.vala:190
 msgid "Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:189
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "フォルダを選択"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr ""
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr ""
 
@@ -1303,21 +1310,17 @@ msgstr ""
 msgid "Use secure connection (_HTTPS)"
 msgstr ""
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr ""
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "フォルダ(_F)"
-
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -1327,7 +1330,7 @@ msgstr ""
 msgid "Choose Folder"
 msgstr ""
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr ""
 
@@ -1335,12 +1338,8 @@ msgstr ""
 msgid "S3 Access Key I_D"
 msgstr "S3 Access Key ID(_D)"
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
-msgstr ""
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
 msgstr ""
 
 #: ../widgets/ConfigPeriod.vala:36
@@ -1411,6 +1410,12 @@ msgstr "%s を表示できません"
 #~ msgid "Select Backup Location"
 #~ msgstr "バックアップ保存場所の選択"
 
+#~ msgid "S3 Access Key I_D:"
+#~ msgstr "S3 Access Key ID(_D):"
+
+#~ msgid "_Folder:"
+#~ msgstr "フォルダ(_F):"
+
 #~ msgid "_Encrypt backup files"
 #~ msgstr "バックアップファイルを暗号化する(_E)"
 
@@ -1422,6 +1427,9 @@ msgstr "%s を表示できません"
 
 #~ msgid "Password needed"
 #~ msgstr "パスワードが必要です"
+
+#~ msgid "This backup location requires authentication."
+#~ msgstr "このバックアップ保存場所は認証が必要です。"
 
 #~ msgid "Creating a fresh backup.  This will take longer than normal."
 #~ msgstr "初回のバックアップを作成しています。通常より時間がかかります。"
@@ -1437,14 +1445,32 @@ msgstr "%s を表示できません"
 #~ "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 #~ "more details."
 
-#~ msgid "I_nclude files in folders"
-#~ msgstr "フォルダ内のファイルを含める(_N)"
+#~ msgid "_Date:"
+#~ msgstr "日付(_D):"
+
+#~ msgid "Restore folder:"
+#~ msgstr "復元先のフォルダ:"
+
+#~ msgid "Restore _folder:"
+#~ msgstr "復元先のフォルダ(_F):"
+
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "フォルダ内のファイルを含める(_N):"
+
+#~ msgid "E_ncryption password:"
+#~ msgstr "暗号化パスワード(_N):"
+
+#~ msgid "Restore date:"
+#~ msgstr "復元の日付:"
+
+#~ msgid "_Backup location:"
+#~ msgstr "バックアップの保存場所(_B):"
 
 #~ msgid "Backup Finished"
 #~ msgstr "バックアップが終了しました"
 
-#~ msgid "Encrypted"
-#~ msgstr "暗号化"
+#~ msgid "Encrypted:"
+#~ msgstr "暗号化:"
 
 #~ msgid "Schedule backups at regular intervals"
 #~ msgstr "定期的なバックアップをスケジュールする"
@@ -1464,6 +1490,10 @@ msgstr "%s を表示できません"
 #~ msgid "Whether to periodically backup"
 #~ msgstr "定期的にバックアップを行うか"
 
+#~ msgid "File to restore:"
+#~ msgid_plural "Files to restore:"
+#~ msgstr[0] "復元するファイル:"
+
 #~ msgid "Déjà Dup backup passphrase"
 #~ msgstr "Déjà Dup バックアップ用のパスフレーズ"
 
@@ -1473,8 +1503,23 @@ msgstr "%s を表示できません"
 #~ msgid "No filenames provided"
 #~ msgstr "ファイル名がありません"
 
-#~ msgid "Hide _Progress"
-#~ msgstr "進歩状況を隠す"
+#~ msgid "Connect as u_ser:"
+#~ msgstr "ユーザ名を指定して接続する(_S):"
+
+#~ msgid "_Domain:"
+#~ msgstr "ドメイン(_D):"
+
+#~ msgid "_Password:"
+#~ msgstr "パスワード(_P):"
+
+#~ msgid "_Access key ID:"
+#~ msgstr "Access key ID(_A):"
+
+#~ msgid "_Secret access key:"
+#~ msgstr "Secret access key(_S):"
+
+#~ msgid "_Username:"
+#~ msgstr "ユーザ名(_U):"
 
 #~ msgid "GVFS FUSE is not installed"
 #~ msgstr "GVFS FUSE がインストールされていません"
@@ -1659,11 +1704,6 @@ msgstr "%s を表示できません"
 #~ msgstr "Déjà Dup バックアップユーティリティ"
 
 #~ msgid ""
-#~ "Whether to request the root password when backing up from or retoring to "
-#~ "system folders."
-#~ msgstr "システムフォルダからバックアップまたは復元する際にルートパスワードを要求するかどうか"
-
-#~ msgid ""
 #~ "Whether the backup location is a mounted external volume or a normal folder. "
 #~ "Possible values are ‘volume’ or ‘normal’."
 #~ msgstr "バックアップ場所が、マウントされた外部ボリュームか通常のフォルダかです。取り得る値は ‘volume’ または ‘normal’ です。"
@@ -1672,12 +1712,8 @@ msgstr "%s を表示できません"
 #~ msgstr "定期的なバックアップをどのような頻度で行うか"
 
 #, c-format
-#~ msgid "How _often to backup"
-#~ msgstr "バックアップの頻度(_O)"
-
-#~ msgctxt "backup is verb"
-#~ msgid "_Backup…"
-#~ msgstr "バックアップ(_B)..."
+#~ msgid "How _often to backup:"
+#~ msgstr "バックアップの頻度(_O):"
 
 #, c-format
 #~ msgid "Show _Progress (%.1f%%)"
@@ -1692,14 +1728,17 @@ msgstr "%s を表示できません"
 #~ msgid "_Automatically back up on a regular schedule"
 #~ msgstr "定期的なスケジュールに従って自動的にバックアップする(_A)"
 
-#~ msgid "Include from"
-#~ msgstr "含める"
+#~ msgid "Include from:"
+#~ msgstr "含める:"
 
-#~ msgid "Except for"
-#~ msgstr "除外する"
+#~ msgid "Except for:"
+#~ msgstr "除外する:"
 
-#~ msgid "E_xcept files in folders"
-#~ msgstr "フォルダ内のファイルを除外する(_X)"
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "フォルダ内のファイルを除外する(_X):"
+
+#~ msgid "How _often to back up:"
+#~ msgstr "バックアップする頻度(_O):"
 
 #~ msgid "Your files were successfully backed up."
 #~ msgstr "バックアップが成功しました。"
@@ -1716,8 +1755,15 @@ msgstr "%s を表示できません"
 #~ "version %d.%d.%.2d"
 #~ msgstr "Déjà Dup にはバージョン %d.%d.%.2d の duplicity が必要ですが、%d.%d.%.2d しか見つかりません。"
 
+#, c-format
+#~ msgid "_Keep backups:"
+#~ msgstr "バックアップの保存期間(_K):"
+
 #~ msgid "Files"
 #~ msgstr "ファイル"
+
+#~ msgid "Backup location:"
+#~ msgstr "バックアップ先:"
 
 #, c-format
 #~ msgid "Could not restore %s: %s"
@@ -1745,14 +1791,11 @@ msgstr "%s を表示できません"
 #~ msgid "Déjà Dup Backup Preferences"
 #~ msgstr "Déjà Dup バックアップの設定"
 
+#~ msgid "Folder:"
+#~ msgstr "フォルダー:"
+
 #~ msgid "Password Needed"
 #~ msgstr "パスワードが必要"
-
-#~ msgid "The type of backup location."
-#~ msgstr "バックアップ場所のタイプ。"
-
-#~ msgid "Restore missing files…"
-#~ msgstr "欠落ファイルの復元…"
 
 #~ msgid "Scanning for files from last week…"
 #~ msgstr "先週のファイルをスキャン…"
@@ -1767,7 +1810,5 @@ msgstr "%s を表示できません"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
 #~ "  Kentaro Kazuhama https://launchpad.net/~kazken3\n"
-#~ "  Michael Terry https://launchpad.net/~mterry\n"
 #~ "  Nobuto MURATA https://launchpad.net/~nobuto\n"
-#~ "  Ryunosuke Tanaka https://launchpad.net/~aozora-genei\n"
-#~ "  Tosiki Iga https://launchpad.net/~tosiki-iga"
+#~ "  Ryunosuke Tanaka https://launchpad.net/~aozora-genei"

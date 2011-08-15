@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2011-07-24 15:50+0000\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:32+0000\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-08-02 04:37+0000\n"
-"X-Generator: Launchpad (build 13552)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:37+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -70,6 +70,7 @@ msgid ""
 msgstr "要儲存檔案至其中的選擇性資料夾名稱。此資料夾將建立於所選擇的 bucket 內。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "備份位置"
 
@@ -321,20 +322,20 @@ msgstr "資料夾"
 msgid "Scanning…"
 msgstr "正在掃描..."
 
-#: ../nautilus/NautilusExtension.c:165
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr "還原遺失檔案…"
 
-#: ../nautilus/NautilusExtension.c:166
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr "從備份中還原已刪除的檔案"
 
-#: ../nautilus/NautilusExtension.c:208
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "復原至之前的版本..."
 
-#: ../nautilus/NautilusExtension.c:212
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "從備份還原檔案"
@@ -373,7 +374,7 @@ msgstr "正在等候「%s」完成連接..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "您必須在您的偏好設定中指定一個 Rackspace 容器。"
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
@@ -410,7 +411,7 @@ msgstr "記住 API 存取金鑰(_R)"
 msgid "Enter Rackspace Cloud Files API key"
 msgstr "輸入 Rackspace Cloud Files API 金鑰"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -445,7 +446,7 @@ msgstr "記住秘密存取金鑰(_R)"
 msgid "Enter Amazon S3 access key"
 msgstr "輸入 Amazon S3 存取金鑰"
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -462,6 +463,20 @@ msgstr "登入 Ubuntu One…"
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr "連接至 Ubuntu One"
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
+msgstr ""
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr "家"
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "回收筒"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -530,7 +545,7 @@ msgid "Cleaning up…"
 msgstr "正在清理..."
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
-#: ../deja-dup/AssistantOperation.vala:514
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "失敗伴隨未知錯誤。"
 
@@ -689,51 +704,51 @@ msgstr "掃描中："
 msgid "_Details"
 msgstr "詳細資料(_D)"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr "允許不用密碼就能還原(_A)"
+
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Password-protect your backup"
 msgstr "以密碼保護您的備份(_P)"
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr "您以後需要密碼才能還原檔案。您可能會想要把它抄下來。"
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr "加密用密碼(_N)"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr "確認密碼(_M)"
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr "顯示密碼(_S)"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "記住密碼(_R)"
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr "允許不用密碼就能還原(_A)"
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "摘要"
 
-#: ../deja-dup/AssistantOperation.vala:724
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
 msgstr "要求密碼？"
 
-#: ../deja-dup/AssistantOperation.vala:726
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr "需要加密密碼"
 
-#: ../deja-dup/AssistantOperation.vala:769
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr "備份加密密碼"
 
@@ -745,7 +760,7 @@ msgstr "還原"
 msgid "_Restore"
 msgstr "還原(_R)"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "備份位置(_B)"
 
@@ -942,11 +957,10 @@ msgstr "您必須提供目錄而不是檔案"
 msgid "You must specify a mode"
 msgstr "您必須指定一個模式"
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "使用者名稱(_U)"
 
@@ -962,19 +976,20 @@ msgstr "顯示密碼(_H)"
 msgid "Location not available"
 msgstr "位置不可用"
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
-msgstr "此備份位置需要認證。"
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
+msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr "匿名連線(_A)"
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr "以此使用者連線(_S)"
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr "網域(_D)"
 
@@ -1048,68 +1063,68 @@ msgstr "我想要從之前的備份中還原檔案(_R)…"
 msgid "Just show my backup _settings"
 msgstr "只顯示我的備份設定值(_S)"
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr "類別"
 
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr "自動備份(_B)"
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr ""
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr ""
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr "最近的備份"
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr "下個自動備份"
 
-#: ../preferences/Preferences.vala:251
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr "還原(_R)..."
 
-#: ../preferences/Preferences.vala:257
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr "立刻備份(_N)"
 
-#: ../preferences/Preferences.vala:279
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr "概覽"
 
-#: ../preferences/Preferences.vala:308
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr "儲存處"
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr ""
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr ""
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr ""
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr "多久備份一次(_O)"
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr "保留備份(_K)"
 
-#: ../preferences/Preferences.vala:324
-msgid "Storage"
-msgstr "儲存處"
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr ""
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr ""
-
-#: ../preferences/Preferences.vala:382
-msgid "How _often to back up"
-msgstr "多久備份一次(_O)"
-
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "排程"
 
@@ -1184,14 +1199,6 @@ msgstr "是"
 msgid "No"
 msgstr "否"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
-msgid "Home"
-msgstr "家"
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
-msgid "Trash"
-msgstr "回收筒"
-
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
 msgstr "未知"
@@ -1246,48 +1253,48 @@ msgid_plural ""
 "low on space."
 msgstr[0] "陳舊的備份將保留至少 %d 天，或是直到備份位置空間低落為止。"
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:95
+#: ../widgets/ConfigList.vala:189
 msgid "_Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:96
+#: ../widgets/ConfigList.vala:190
 msgid "Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:189
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "選擇資料夾"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
 msgstr "Windows Share"
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr "自訂位置"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr "本地端資料夾"
 
@@ -1304,21 +1311,17 @@ msgstr "伺服器(_S)"
 msgid "Use secure connection (_HTTPS)"
 msgstr "使用安全連線 (_HTTPS)"
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr "連接埠(_P)"
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "資料夾(_F)"
-
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr "以使用者名稱登入(_L)"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -1328,7 +1331,7 @@ msgstr ""
 msgid "Choose Folder"
 msgstr "選擇資料夾"
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr "容器(_C)"
 
@@ -1336,13 +1339,9 @@ msgstr "容器(_C)"
 msgid "S3 Access Key I_D"
 msgstr "S3 存取金鑰 I_D"
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
 msgstr "網域名稱(_D)"
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
-msgstr "選擇性資訊"
 
 #: ../widgets/ConfigPeriod.vala:36
 msgid "Daily"
@@ -1404,14 +1403,23 @@ msgstr "無法顯示 %s"
 #~ msgid "_Encrypt backup files"
 #~ msgstr "加密備份檔案(_E)"
 
+#~ msgid "_Backup location:"
+#~ msgstr "備份位置(_B)："
+
 #~ msgid "Preferences"
 #~ msgstr "偏好設定"
 
-#~ msgid "Encrypted"
-#~ msgstr "已加密"
+#~ msgid "Backup location:"
+#~ msgstr "備份位置："
+
+#~ msgid "Encrypted:"
+#~ msgstr "已加密："
 
 #~ msgid "Backup Finished"
 #~ msgstr "備份成功"
+
+#~ msgid "E_ncryption password:"
+#~ msgstr "加密用密碼(_N)："
 
 #~ msgid "Your files were successfully backed up."
 #~ msgstr "您的檔案已成功備份。"
@@ -1422,8 +1430,24 @@ msgstr "無法顯示 %s"
 #~ msgid "Backup files are _encrypted"
 #~ msgstr "備份檔已加密(_E)"
 
+#~ msgid "_Date:"
+#~ msgstr "日期(_D)："
+
+#~ msgid "Restore folder:"
+#~ msgstr "還原資料夾："
+
+#~ msgid "Restore _folder:"
+#~ msgstr "還原資料夾(_F)："
+
+#~ msgid "Restore date:"
+#~ msgstr "還原日期："
+
 #~ msgid "Checking for Backups"
 #~ msgstr "正在檢查備份檔"
+
+#~ msgid "File to restore:"
+#~ msgid_plural "Files to restore:"
+#~ msgstr[0] "要還原的檔案："
 
 #~ msgid "_Help"
 #~ msgstr "幫助(_H)"
@@ -1447,6 +1471,9 @@ msgstr "無法顯示 %s"
 #~ msgid "_Contents"
 #~ msgstr "內容(_C)"
 
+#~ msgid "_Username:"
+#~ msgstr "使用者名稱(_U)："
+
 #~ msgid "_Edit"
 #~ msgstr "編輯(_E)"
 
@@ -1454,12 +1481,24 @@ msgstr "無法顯示 %s"
 #~ msgid "_Back Up…"
 #~ msgstr "備份(_B)..."
 
+#~ msgid "Connect as u_ser:"
+#~ msgstr "以此使用者連線(_S)："
+
+#~ msgid "_Domain:"
+#~ msgstr "網域(_D)："
+
+#~ msgid "_Password:"
+#~ msgstr "密碼(_P)："
+
 #, c-format
 #~ msgid "Show _Progress (%.1f%%)"
 #~ msgstr "顯示進度 (%.1f%%)(_P)"
 
 #~ msgid "Show _Progress"
 #~ msgstr "顯示進度(_P)"
+
+#~ msgid "This backup location requires authentication."
+#~ msgstr "此備份位置需要認證。"
 
 #~ msgid "Déjà Dup Preferences"
 #~ msgstr "Déjà Dup 偏好設定"
@@ -1469,9 +1508,6 @@ msgstr "無法顯示 %s"
 
 #~ msgid "Déjà Dup Backup Preferences"
 #~ msgstr "Déjà Dup 備份偏好設定"
-
-#~ msgid "The type of backup location."
-#~ msgstr "備份位置的類型。"
 
 #~ msgid ""
 #~ "Whether to encrypt your backup files in the storage location. It’s strongly "
@@ -1484,11 +1520,14 @@ msgstr "無法顯示 %s"
 #~ msgid "_Automatically back up on a regular schedule"
 #~ msgstr "自動於固定排程備份(_A)"
 
-#~ msgid "Include from"
-#~ msgstr "納入"
+#~ msgid "Include from:"
+#~ msgstr "納入："
 
-#~ msgid "Except for"
-#~ msgstr "排除"
+#~ msgid "Except for:"
+#~ msgstr "排除："
+
+#~ msgid "How _often to back up:"
+#~ msgstr "多久備份一次(_O)："
 
 #~ msgid "Déjà Dup backup passphrase"
 #~ msgstr "Déjà Dup 備份密語"
@@ -1499,18 +1538,34 @@ msgstr "無法顯示 %s"
 #~ msgid "GVFS FUSE is not installed"
 #~ msgstr "GVFS FUSE 未安裝"
 
+#~ msgid "_Access key ID:"
+#~ msgstr "存取金鑰 ID(_A)："
+
+#~ msgid "_Secret access key:"
+#~ msgstr "秘密存取金鑰(_S)："
+
 #, c-format
 #~ msgid "Could not restore %s: %s"
 #~ msgstr "無法還原 %s：%s"
 
+#, c-format
+#~ msgid "_Keep backups:"
+#~ msgstr "保留備份(_K)："
+
+#~ msgid "S3 Access Key I_D:"
+#~ msgstr "S3 存取金鑰 I_D："
+
 #~ msgid "Files"
 #~ msgstr "檔案"
 
-#~ msgid "I_nclude files in folders"
-#~ msgstr "納入資料夾中的檔案(_N)"
+#~ msgid "_Folder:"
+#~ msgstr "資料夾(_F)："
 
-#~ msgid "E_xcept files in folders"
-#~ msgstr "從資料夾中排除的檔案(_X)"
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "納入資料夾中的檔案(_N)："
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "從資料夾中排除的檔案(_X)："
 
 #~ msgid "Home Folder"
 #~ msgstr "家資料夾"
@@ -1714,7 +1769,6 @@ msgstr "無法顯示 %s"
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
-#~ "  Cheng-Chia Tseng https://launchpad.net/~zerng07\n"
 #~ "  Michael Terry https://launchpad.net/~mterry\n"
 #~ "  Rex Tsai https://launchpad.net/~chihchun"
 
@@ -1725,6 +1779,9 @@ msgstr "無法顯示 %s"
 
 #~ msgid "Scanning for files from yesterday…"
 #~ msgstr "正在掃描昨天的檔案..."
+
+#~ msgid "Folder:"
+#~ msgstr "資料夾："
 
 #~ msgid "Password Needed"
 #~ msgstr "需要密碼"
@@ -1738,9 +1795,6 @@ msgstr "無法顯示 %s"
 #~ msgid "Scanning for files from last month…"
 #~ msgstr "正在掃描上個月的檔案..."
 
-#~ msgid "Restore missing files…"
-#~ msgstr "還原遺失的檔案..."
-
 #~ msgid ""
 #~ "The folder name to store files in. If '$HOSTNAME', it will default to a "
 #~ "folder based on the name of the computer."
@@ -1751,8 +1805,29 @@ msgstr "無法顯示 %s"
 #~ "what is available."
 #~ msgstr "備份位置的類型。若為「自動」，預設將根據可用的情況來選擇。"
 
+#~ msgid "_API access key:"
+#~ msgstr "API 存取金鑰(_A)："
+
+#~ msgid "_URI:"
+#~ msgstr "_URI："
+
+#~ msgid "_Server:"
+#~ msgstr "伺服器(_S)："
+
+#~ msgid "_Log in with a username"
+#~ msgstr "以使用者名稱登入(_L)"
+
 #~ msgid "_Browse…"
 #~ msgstr "瀏覽(_B)…"
+
+#~ msgid "_Port:"
+#~ msgstr "連接埠(_P)："
+
+#~ msgid "Optional information:"
+#~ msgstr "選擇性資訊："
+
+#~ msgid "_Domain Name:"
+#~ msgstr "網域名稱(_D)："
 
 #~ msgid ""
 #~ "Déjà Dup is a simple backup tool.  It hides the complexity of backing up\n"
@@ -1762,17 +1837,23 @@ msgstr "無法顯示 %s"
 #~ "Déjà Dup 是一套簡易的備份工具。它以「正道」將備份背後的複雜性隱藏起來\n"
 #~ "(加密、遠端、日常等)。它使用 duplicity 作為其後端程式。"
 
-#~ msgid "Indicates this backup was scheduled"
-#~ msgstr "表示這個備份已被排程"
+#~ msgid "Confir_m password:"
+#~ msgstr "確認密碼(_M)："
 
-#~ msgid "Déjà Dup encryption password"
-#~ msgstr "Déjà Dup 加密密碼"
+#~ msgid "Next automatic backup:"
+#~ msgstr "下個自動備份："
 
-#~ msgid "Where"
-#~ msgstr "位置"
+#~ msgid "Automatic _backups:"
+#~ msgstr "自動備份(_B)："
 
-#~ msgid "Include files from"
-#~ msgstr "從哪裡納入檔案"
+#~ msgid "Where:"
+#~ msgstr "位置："
 
-#~ msgid "Settings"
-#~ msgstr "設定值"
+#~ msgid "Include files from:"
+#~ msgstr "從哪裡納入檔案："
+
+#~ msgid "Most recent backup:"
+#~ msgstr "最近的備份："
+
+#~ msgid "_Container:"
+#~ msgstr "容器(_C)："

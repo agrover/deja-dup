@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2011-07-07 20:02+0000\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:33+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-08-02 04:37+0000\n"
-"X-Generator: Launchpad (build 13552)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:36+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -70,6 +70,7 @@ msgid ""
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "Plassering av sikkerhetskopi"
 
@@ -327,21 +328,21 @@ msgstr "Mappe"
 msgid "Scanning…"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:165
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr "Gjenopprett manglende filer…"
 
-#: ../nautilus/NautilusExtension.c:166
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr "Gjenopprett slettede filer fra en sikkerhetskopi"
 
-#: ../nautilus/NautilusExtension.c:208
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Tilbakestill til en tidligere versjon…"
 msgstr[1] "Tilbakestill til tidligere versjoner…"
 
-#: ../nautilus/NautilusExtension.c:212
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Gjenopprett fil fra sikkerhetskopi"
@@ -382,7 +383,7 @@ msgstr "Venter på at ‘%s’ blir koblet til…"
 msgid "You must specify a Rackspace container in your preferences."
 msgstr ""
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr ""
 
@@ -419,7 +420,7 @@ msgstr ""
 msgid "Enter Rackspace Cloud Files API key"
 msgstr ""
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -455,7 +456,7 @@ msgstr ""
 msgid "Enter Amazon S3 access key"
 msgstr ""
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -472,6 +473,20 @@ msgstr "Logg inn på Ubuntu One…"
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr "Koble til Ubuntu One"
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
+msgstr ""
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr ""
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "Søppel"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -548,7 +563,7 @@ msgid "Cleaning up…"
 msgstr ""
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
-#: ../deja-dup/AssistantOperation.vala:514
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "Feilet av ukjent årsak."
 
@@ -712,51 +727,51 @@ msgstr ""
 msgid "_Details"
 msgstr "_Detaljer"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Password-protect your backup"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr ""
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "Sammendrag"
 
-#: ../deja-dup/AssistantOperation.vala:724
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:726
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr "Trenger et krypteringspassord"
 
-#: ../deja-dup/AssistantOperation.vala:769
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr "Krypteringspassord for sikkerhetskopieringen"
 
@@ -768,7 +783,7 @@ msgstr "Gjenopprett"
 msgid "_Restore"
 msgstr "_Gjenopprett"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "_Plassering av sikkerhetskopi"
 
@@ -966,11 +981,10 @@ msgstr ""
 msgid "You must specify a mode"
 msgstr ""
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "Br_ukernavn"
 
@@ -986,19 +1000,20 @@ msgstr ""
 msgid "Location not available"
 msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
 msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr "_Domene"
 
@@ -1072,68 +1087,68 @@ msgstr ""
 msgid "Just show my backup _settings"
 msgstr ""
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr ""
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr ""
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr ""
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:251
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr "_Gjenopprett …"
 
-#: ../preferences/Preferences.vala:257
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr "Ta sikkerhetskopi _nå"
 
-#: ../preferences/Preferences.vala:279
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr ""
 
-#: ../preferences/Preferences.vala:308
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr "Lagring"
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr ""
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr ""
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr ""
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr ""
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr ""
 
-#: ../preferences/Preferences.vala:324
-msgid "Storage"
-msgstr "Lagring"
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr ""
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr ""
-
-#: ../preferences/Preferences.vala:382
-msgid "How _often to back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "Tidsplan"
 
@@ -1211,14 +1226,6 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nei"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
-msgid "Home"
-msgstr ""
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
-msgid "Trash"
-msgstr "Søppel"
-
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
 msgstr "Ukjent"
@@ -1292,48 +1299,48 @@ msgstr[1] ""
 "Gamle sikkerhetskopier vil bli behold minst %d dager, eller til det er lite "
 "tilgjengelig lagringsplass."
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:95
+#: ../widgets/ConfigList.vala:189
 msgid "_Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:96
+#: ../widgets/ConfigList.vala:190
 msgid "Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:189
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "Velg mapper"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr ""
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr "Lokal mappe"
 
@@ -1350,21 +1357,17 @@ msgstr "_Server"
 msgid "Use secure connection (_HTTPS)"
 msgstr ""
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr "_Port"
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "_Mappe"
-
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -1374,7 +1377,7 @@ msgstr ""
 msgid "Choose Folder"
 msgstr "Velg mappe"
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr ""
 
@@ -1382,12 +1385,8 @@ msgstr ""
 msgid "S3 Access Key I_D"
 msgstr ""
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
-msgstr ""
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
 msgstr ""
 
 #: ../widgets/ConfigPeriod.vala:36
@@ -1418,9 +1417,6 @@ msgstr[1] "Hver %d. dag"
 msgid "Could not display %s"
 msgstr "Kunne ikke vise %s"
 
-#~ msgid "Local backup location"
-#~ msgstr "Plassering for lokal sikkerhetskopi"
-
 #~ msgid "Déjà Dup Monitor"
 #~ msgstr "Déjà Dup Overvåker"
 
@@ -1438,24 +1434,6 @@ msgstr "Kunne ikke vise %s"
 
 #~ msgid "The last time Déjà Dup was run, in ISO 8601 format."
 #~ msgstr "Sist gang Déjà Dup ble brukt (i ISO 8601-format)."
-
-#~ msgid "The port used for SSH connections."
-#~ msgstr "Hvilken port som brukes ved SSH-tilkoblinger."
-
-#~ msgid "The directory used for SSH connections."
-#~ msgstr "Katalog for SSH-tilkoblinger"
-
-#~ msgid "SSH port"
-#~ msgstr "SSH-port"
-
-#~ msgid "SSH directory"
-#~ msgstr "SSH-katalog"
-
-#~ msgid "SSH username"
-#~ msgstr "SSH-brukernavn"
-
-#~ msgid "SSH server"
-#~ msgstr "SSH-server"
 
 #~ msgid ""
 #~ "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
@@ -1492,9 +1470,6 @@ msgstr "Kunne ikke vise %s"
 #~ msgid "Backup your files"
 #~ msgstr "Sikkerhetskopier systemet ditt"
 
-#~ msgid "Folder on your system in which to hold the backup files."
-#~ msgstr "Mappe på ditt system for å lagre sikkerhetskopier i."
-
 #~ msgid ""
 #~ "This list of directories will not be backed up. Reserved values $HOME, "
 #~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
@@ -1508,19 +1483,6 @@ msgstr "Kunne ikke vise %s"
 #~ "spesielle kataloger. Relative katalognavn er relative til brukerens "
 #~ "hjemmekatalog. Denne listen overstyrer listen over kataloger som skal "
 #~ "sikkerhetskopieres."
-
-#~ msgid "The user used for SSH connections."
-#~ msgstr "Hvilket brukernavn som brukes ved SSH-tilkoblingen."
-
-#~ msgid "The server used for SSH connections."
-#~ msgstr "Hvilken server som brukes ved SSH-tilkoblingen."
-
-#~ msgid ""
-#~ "The protocol used for the backup location. Valid values are 's3', 'file', or "
-#~ "'ssh'."
-#~ msgstr ""
-#~ "Hvilken protokoll som skal brukes til plasseringen av sikkerhetskopien. Velg "
-#~ "mellom 's3', 'file' og 'ssh'."
 
 #~ msgid ""
 #~ "A scheduled backup will shortly begin.  You can instead choose to backup "
@@ -1547,11 +1509,26 @@ msgstr "Kunne ikke vise %s"
 #~ msgid "Your files were successfully backed up."
 #~ msgstr "Filene dine er sikkerhetskopiert."
 
+#~ msgid "Backup location:"
+#~ msgstr "Plassering for sikkerhetskopi:"
+
 #~ msgid "Backing up"
 #~ msgstr "Sikkerhetskopierer"
 
 #~ msgid "Backing up..."
 #~ msgstr "Sikkerhetskopierer..."
+
+#~ msgid "Restore folder:"
+#~ msgstr "Gjenopprett mappe:"
+
+#~ msgid "Restore _folder:"
+#~ msgstr "Gjenopprett _mappe:"
+
+#~ msgid "_Date:"
+#~ msgstr "_Dato:"
+
+#~ msgid "Restore date:"
+#~ msgstr "Gjenopprett dato:"
 
 #~ msgid "Checking for Backups"
 #~ msgstr "Leter etter sikkerhetskopier"
@@ -1561,6 +1538,11 @@ msgstr "Kunne ikke vise %s"
 
 #~ msgid "Restoring"
 #~ msgstr "Gjenoppretter"
+
+#~ msgid "File to restore:"
+#~ msgid_plural "Files to restore:"
+#~ msgstr[0] "Fil å gjenopprette:"
+#~ msgstr[1] "Filer å gjenopprette:"
 
 #~ msgid "Restoring..."
 #~ msgstr "Gjenoppretter..."
@@ -1573,9 +1555,6 @@ msgstr "Kunne ikke vise %s"
 
 #~ msgid "No filenames provided"
 #~ msgstr "Ingen filnavn er oppgitt"
-
-#~ msgid "Contents"
-#~ msgstr "Innhold"
 
 #~ msgid "_Report a Problem..."
 #~ msgstr "_Si fra om et problem..."
@@ -1591,20 +1570,6 @@ msgstr "Kunne ikke vise %s"
 
 #~ msgid "_Help"
 #~ msgstr "_Hjelp"
-
-#~ msgid "SSH Password"
-#~ msgstr "SSH-passord"
-
-#, c-format
-#~ msgid "Enter your SSH username and password for server %s."
-#~ msgstr "Oppgi SSH-brukernavn og -passord for server %s."
-
-#, c-format
-#~ msgid "%s on ssh://%s@%s:%d"
-#~ msgstr "%s på ssh://%s@%s:%d"
-
-#~ msgid "No server specified"
-#~ msgstr "Ingen server er angitt"
 
 #~ msgid "Preparing..."
 #~ msgstr "Klargjør..."
@@ -1660,40 +1625,36 @@ msgstr "Kunne ikke vise %s"
 #~ msgid "Encryption Password"
 #~ msgstr "Krypterings-passord"
 
-#, c-format
-#~ msgid "%s is already in the list."
-#~ msgstr "%s er allerede i lista."
-
-#~ msgid "Choose folder"
-#~ msgstr "Velg mappe"
-
-#~ msgid "Could not add the folder"
-#~ msgstr "Kunne ikke legge til mappe"
-
 #~ msgid "Home Folder"
 #~ msgstr "Hjemmemappe"
-
-#~ msgid "Select Folder"
-#~ msgstr "Velg mappe"
 
 #~ msgid "Biweekly"
 #~ msgstr "Annenhver uke"
 
+#~ msgid "_Backup location:"
+#~ msgstr "_Plassering av sikkerhetskopi:"
+
 #~ msgid "Déjà Dup Preferences"
 #~ msgstr "Déjà Dup innstillinger"
+
+#~ msgid "_Server:"
+#~ msgstr "_Server:"
+
+#~ msgid "_Username:"
+#~ msgstr "Br_ukernavn:"
+
+#~ msgid "_Folder:"
+#~ msgstr "_Mappe:"
+
+#~ msgid "_Port:"
+#~ msgstr "_Port:"
 
 #~ msgid "_Encrypt backup files"
 #~ msgstr "_Krypter sikkerhetskopier"
 
-#~ msgid "E_xclude"
-#~ msgstr "_Unnta"
-
-#~ msgid "I_nclude"
-#~ msgstr "I_nkluder"
-
 #, c-format
-#~ msgid "How _often to backup"
-#~ msgstr "Hvor _ofte sikkerhetskopi skal tas"
+#~ msgid "How _often to backup:"
+#~ msgstr "Hvor _ofte sikkerhetskopi skal tas:"
 
 #~ msgid "_Automatically backup on a regular schedule"
 #~ msgstr "_Automatisk ta sikkerhetskopi ved faste intervaller"
@@ -1733,18 +1694,12 @@ msgstr "Kunne ikke vise %s"
 #~ msgid "Backup _Later"
 #~ msgstr "Ta sikkerhetskopi _senere"
 
-#~ msgid "Choose backup destination"
-#~ msgstr "Velg plassering for sikkerhetskopi"
-
 #~ msgid ""
 #~ "Enter your Amazon Web Services user ID and secret key.  This is not the same "
 #~ "as your amazon.com username and password."
 #~ msgstr ""
 #~ "Oppgi din bruker-ID og hemmelig nøkkel hos Amazon Web Services. Dette er "
 #~ "ikke det samme som det generelle brukernavnet og passordet hos amazon.com."
-
-#~ msgid "No username specified"
-#~ msgstr "Ingen brukernavn oppgitt"
 
 #~ msgid "Amazon S3 Password"
 #~ msgstr "Amazon S3-passord"
@@ -1767,15 +1722,6 @@ msgstr "Kunne ikke vise %s"
 #~ "Déjà Dup behøver minimum versjon %d.%d.%.2d av duplicity, men kunne bare "
 #~ "finne versjon %d.%d.%.2d"
 
-#~ msgid ""
-#~ "You should have received a copy of the GNU General Public License along with "
-#~ "this program; if not, write to the Free Software Foundation, Inc., 59 Temple "
-#~ "Place - Suite 330, Boston, MA  02111-1307, USA."
-#~ msgstr ""
-#~ "Sammen med dette programmet skulle det ha fulgt med en kopi av GNU General "
-#~ "Public License (GPL). Hvis det ikke gjorde det, skriv til Free Software "
-#~ "Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
-
 #, c-format
 #~ msgid ""
 #~ "This program is free software; you can redistribute it and/or modify it "
@@ -1787,31 +1733,6 @@ msgstr "Kunne ikke vise %s"
 #~ "modifisere det under vilkårene oppgitt i GNU General Public License (GPL), "
 #~ "som publiseres av Free Software Foundation -- enten i versjon 3 av GPL, "
 #~ "eller en senere versjon."
-
-#~ msgid "Amazon S3 Key ID"
-#~ msgstr "Amazon S3 Key ID"
-
-#~ msgid "Your Amazon S3 Key identifier. This acts as your S3 username."
-#~ msgstr ""
-#~ "Din Amazon S3 «Key Identifier». Dette brukes som brukernavnet ditt av S3."
-
-#~ msgid "Bucket %s on Amazon S3"
-#~ msgstr "Bucket %s hos Amazon S3"
-
-#~ msgid "Invalid ID"
-#~ msgstr "Ugyldig ID"
-
-#~ msgid "Invalid secret key"
-#~ msgstr "Ugyldig hemmelig nøkkel"
-
-#~ msgid "S3 buc_ket"
-#~ msgstr "S3 buc_ket"
-
-#~ msgid "S3 I_D"
-#~ msgstr "S3 I_D"
-
-#~ msgid "_Directory"
-#~ msgstr "_Katalog"
 
 #~ msgid "Default: <guilabel>Weekly</guilabel>."
 #~ msgstr "<guilabel>Ukentlig</guilabel>."
@@ -1837,7 +1758,7 @@ msgstr "Kunne ikke vise %s"
 #~ msgid "Preferences"
 #~ msgstr "Brukervalg"
 
-#~ msgid "Encrypted"
+#~ msgid "Encrypted:"
 #~ msgstr "Kryptert"
 
 #, c-format
@@ -1866,8 +1787,8 @@ msgstr "Kunne ikke vise %s"
 #~ msgstr "%VERSJON%"
 
 #~ msgid ""
-#~ "You can start <application>Déjà Dup</application> in the following ways"
-#~ msgstr "Du kan starte <application>Déjà Dup</application> på følgende måter"
+#~ "You can start <application>Déjà Dup</application> in the following ways:"
+#~ msgstr "Du kan starte <application>Déjà Dup</application> på følgende måter:"
 
 #~ msgid "Starting <application>Déjà Dup</application>"
 #~ msgstr "Starter <application>Déjà Dup</application>"
@@ -1890,11 +1811,11 @@ msgstr "Kunne ikke vise %s"
 #~ msgid "<guilabel>Except files in folders</guilabel>"
 #~ msgstr "<guilabel>Unnta filer i følgende kataloger</guilabel>"
 
-#~ msgid "Except for"
-#~ msgstr "Unntatt for"
+#~ msgid "Except for:"
+#~ msgstr "Unntatt for:"
 
-#~ msgid "Include from"
-#~ msgstr "Inkluder fra"
+#~ msgid "Include from:"
+#~ msgstr "Inkluder fra:"
 
 #~ msgid "Connect to _Server..."
 #~ msgstr "Koble til _tjener..."
@@ -1914,6 +1835,9 @@ msgstr "Kunne ikke vise %s"
 #~ msgstr ""
 #~ "Du skulle ha mottatt en kopi av GNU's Generell Offentlig Lisens sammen med "
 #~ "programmet.  Hvis ikke, se http://www.gnu.org/licenses/."
+
+#~ msgid "_Domain:"
+#~ msgstr "_Domene:"
 
 #, c-format
 #~ msgid "Error writing file '%s'."
@@ -1982,14 +1906,13 @@ msgstr "Kunne ikke vise %s"
 #~ "Launchpad Contributions:\n"
 #~ "  Håvard Gulldahl https://launchpad.net/~havard\n"
 #~ "  Kåre Birger Lapstuen https://launchpad.net/~lapstue\n"
-#~ "  Michael Terry https://launchpad.net/~mterry\n"
 #~ "  Thomas Amland https://launchpad.net/~amland\n"
 #~ "  Tor Syversen https://launchpad.net/~sol-moe\n"
 #~ "  Torstein Bø https://launchpad.net/~haarek\n"
 #~ "  mabynke https://launchpad.net/~mabynke"
 
+#~ msgid "Folder:"
+#~ msgstr "Mappe:"
+
 #~ msgid "GVFS FUSE is not installed"
 #~ msgstr "GVFS FUSE er ikke installert"
-
-#~ msgid "Settings"
-#~ msgstr "Innstillinger"

@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2011-08-11 07:42+0000\n"
-"Last-Translator: Jiri Grönroos <Unknown>\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:27+0000\n"
+"Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-08-12 04:36+0000\n"
-"X-Generator: Launchpad (build 13662)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:36+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -72,6 +72,7 @@ msgstr ""
 "luodaan valittuun sijaintiin."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "Varmuuskopion sijainti"
 
@@ -338,21 +339,21 @@ msgstr "Kansio"
 msgid "Scanning…"
 msgstr "Kartoitetaan…"
 
-#: ../nautilus/NautilusExtension.c:172
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr "Palauta kadonneita tiedostoja..."
 
-#: ../nautilus/NautilusExtension.c:173
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr "Palauta poistettuja tiedostoja varmuuskopioista"
 
-#: ../nautilus/NautilusExtension.c:215
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Palauta aiempi versio..."
 msgstr[1] "Palauta aiemmat versiot..."
 
-#: ../nautilus/NautilusExtension.c:219
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Palauta tiedosto varmuuskopiosta"
@@ -392,7 +393,7 @@ msgstr "Odotetaan yhteyttä kohteeseen '%s'..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Valitse Rackspace-säiliö asetuksista"
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
@@ -430,7 +431,7 @@ msgstr "_Muista API-käyttöavain"
 msgid "Enter Rackspace Cloud Files API key"
 msgstr "Anna Rackspace Cloud Files -palvelun API-avain"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -467,7 +468,7 @@ msgstr "_Muista salainen käyttöavain"
 msgid "Enter Amazon S3 access key"
 msgstr "Syötä Amazon S3 -käyttöavain"
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -484,6 +485,20 @@ msgstr "Kirjaudu Ubuntu One -palveluun…"
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr "Yhdistä Ubuntu One -palveluun"
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
+msgstr ""
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr ""
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "Roskakori"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -559,6 +574,7 @@ msgid "Cleaning up…"
 msgstr "Siivotaan jälkiä..."
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "Epäonnistui tuntemattomasta syystä."
 
@@ -720,11 +736,15 @@ msgstr "Kartoitetaan:"
 msgid "_Details"
 msgstr "_Yksityiskohdat"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr "Salli _palautus ilman salasanaa"
+
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Password-protect your backup"
 msgstr "_Suojaa varmuuskopio salasanalla"
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
@@ -733,40 +753,36 @@ msgstr ""
 "Tarvitset salasanan palautusta varten. Varmista siis, että salasana on "
 "varmassa tallessa tai pysyy muistissasi."
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr "_Salauksen salasana"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr "Va_hvista salasana"
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr "_Näytä salasana"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "_Muista salasana"
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr "Salli _palautus ilman salasanaa"
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "Yhteenveto"
 
-#: ../deja-dup/AssistantOperation.vala:719
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
 msgstr "Vaaditaanko salasana?"
 
-#: ../deja-dup/AssistantOperation.vala:721
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr "Salauksen salasana vaaditaan"
 
-#: ../deja-dup/AssistantOperation.vala:764
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr "Varmuuskopion salauksen salasana"
 
@@ -778,7 +794,7 @@ msgstr "Palauta"
 msgid "_Restore"
 msgstr "_Palauta"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "_Varmuuskopion sijainti"
 
@@ -979,11 +995,10 @@ msgstr "Sinun täytyy antaa hakemisto, ei tiedostoa."
 msgid "You must specify a mode"
 msgstr "Sinun täytyy määrittää tila."
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "_Käyttäjätunnus"
 
@@ -999,19 +1014,20 @@ msgstr "Näy_tä salasana"
 msgid "Location not available"
 msgstr "Sijainti ei saatavilla"
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
-msgstr "Tämä varmuuskopion sijainti vaatii tunnistuksen."
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
+msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr "Yhdistä _nimettömänä"
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr "Yhdistä _käyttäjänä"
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr "_Toimialue"
 
@@ -1087,68 +1103,68 @@ msgstr "Haluan _palauttaa tiedostoja aiemmasta varmuuskopiosta..."
 msgid "Just show my backup _settings"
 msgstr "Näytä _varmuuskopioinnin asetukset"
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr "Automaatti_set varmuuskopiot"
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr "Varmuuskopioitavat kansiot"
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr "Ohitettavat kansiot"
 
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr "Viimeisin varmuuskopio"
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr "Seuraava automaattinen varmuuskopiointi"
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr "_Palauta..."
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr "Varmuuskopioi n_yt"
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr "Yhteenveto"
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr "Tallennus"
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr "Va_rmuuskopioitavat kansiot"
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr "O_hitettavat kansiot"
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr "Kansiot"
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr "Kuinka _usein varmuuskopio luodaan"
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr "Varmuus_kopioiden säilytysaika"
 
-#: ../preferences/Preferences.vala:339
-msgid "Storage"
-msgstr "Tallennus"
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr "Va_rmuuskopioitavat kansiot"
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr "O_hitettavat kansiot"
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr "Kansiot"
-
-#: ../preferences/Preferences.vala:405
-msgid "How _often to back up"
-msgstr "Kuinka _usein varmuuskopio luodaan"
-
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "Aikataulu"
 
@@ -1187,26 +1203,26 @@ msgid_plural "At least %d days"
 msgstr[0] "Vähintään %d päivä"
 msgstr[1] "Vähintään %d päivää"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr "Tänään"
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr "Eilen"
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr "Huomenna"
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] "%d päivän päästä"
 msgstr[1] "%d päivän päästä"
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -1225,14 +1241,6 @@ msgstr "Kyllä"
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
 msgstr "Ei"
-
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
-msgid "Home"
-msgstr ""
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
-msgid "Trash"
-msgstr "Roskakori"
 
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
@@ -1307,48 +1315,48 @@ msgstr[1] ""
 "Vanhempia varmuuskopioita säilytetään vähintään %d päivää jos "
 "varmuuskopiosijainnissa on riittävästi vapaata tilaa."
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
 msgstr "_Lisää"
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
 msgstr "Lisää"
 
-#: ../widgets/ConfigList.vala:95
+#: ../widgets/ConfigList.vala:189
 msgid "_Remove"
 msgstr "_Poista"
 
-#: ../widgets/ConfigList.vala:96
+#: ../widgets/ConfigList.vala:190
 msgid "Remove"
 msgstr "Poista"
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "Valitse kansiot"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
 msgstr "Windows-jako"
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr "Muu sijainti"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr "Paikallinen kansio"
 
@@ -1365,21 +1373,17 @@ msgstr "_Palvelin"
 msgid "Use secure connection (_HTTPS)"
 msgstr "Käytä suojattua yhteyttä (H_TTPS)"
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr "_Portti"
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "_Kansio"
-
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr "Ki_rjaudu käyttäjätunnuksella"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -1389,7 +1393,7 @@ msgstr "_Valitse kansio..."
 msgid "Choose Folder"
 msgstr "Valitse kansio"
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr "S_äiliö"
 
@@ -1397,13 +1401,9 @@ msgstr "S_äiliö"
 msgid "S3 Access Key I_D"
 msgstr "S3-avaimen _tunniste"
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
 msgstr "_Toimialuenimi"
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
-msgstr "Lisätiedot"
 
 #: ../widgets/ConfigPeriod.vala:36
 msgid "Daily"
@@ -1506,6 +1506,9 @@ msgstr "Ei voinut näyttää %s"
 #~ msgid "Backup Finished"
 #~ msgstr "Varmuuskopio on valmis"
 
+#~ msgid "Backup location:"
+#~ msgstr "Varmuuskopion sijainti:"
+
 #~ msgid "Backing up"
 #~ msgstr "Luo varmuuskopiota"
 
@@ -1514,6 +1517,14 @@ msgstr "Ei voinut näyttää %s"
 
 #~ msgid "Backing up..."
 #~ msgstr "Luo varmuuskopiota..."
+
+#~ msgid "_Date:"
+#~ msgstr "_Päivämäärä:"
+
+#~ msgid "File to restore:"
+#~ msgid_plural "Files to restore:"
+#~ msgstr[0] "Palautettava tiedosto:"
+#~ msgstr[1] "Palautettavat tiedostot:"
 
 #~ msgid "Get Help _Online..."
 #~ msgstr "Hae ohje _Netistä..."
@@ -1549,8 +1560,20 @@ msgstr "Ei voinut näyttää %s"
 #~ msgid "Folder %s on Amazon S3"
 #~ msgstr "Kansio %s  Amazon S3:ssa"
 
+#~ msgid "_Server:"
+#~ msgstr "_Palvelin:"
+
+#~ msgid "_Username:"
+#~ msgstr "_Käyttäjätunnus:"
+
+#~ msgid "_Port:"
+#~ msgstr "_Portti:"
+
 #~ msgid "Biweekly"
 #~ msgstr "Joka toinen viikko"
+
+#~ msgid "_Folder:"
+#~ msgstr "_Kansio:"
 
 #~ msgid "Revert to Previous Version..."
 #~ msgid_plural "Revert to Previous Versions..."
@@ -1699,6 +1722,15 @@ msgstr "Ei voinut näyttää %s"
 #~ msgid "Backup"
 #~ msgstr "Varmuuskopioi"
 
+#~ msgid "_Backup location:"
+#~ msgstr "_Varmuuskopion sijainti:"
+
+#~ msgid "E_ncryption password:"
+#~ msgstr "_Salauksen salasana:"
+
+#~ msgid "Restore date:"
+#~ msgstr "Palauta päivämäärä:"
+
 #~ msgctxt "backup is noun"
 #~ msgid "_Backup"
 #~ msgstr "_Varmuuskopio"
@@ -1717,6 +1749,9 @@ msgstr "Ei voinut näyttää %s"
 
 #~ msgid "_Report a Problem…"
 #~ msgstr "_Ilmoita ongelmasta..."
+
+#~ msgid "_Password:"
+#~ msgstr "_Salasana:"
 
 #, c-format
 #~ msgid ""
@@ -1748,6 +1783,9 @@ msgstr "Ei voinut näyttää %s"
 #~ msgid "Backup Tool"
 #~ msgstr "Varmuuskopiointityökalu"
 
+#~ msgid "This backup location requires authentication."
+#~ msgstr "Tämä varmuuskopion sijainti vaatii tunnistuksen."
+
 #~ msgid ""
 #~ "Whether to encrypt your backup files in the storage location. It’s strongly "
 #~ "recommended to leave this as ‘true’."
@@ -1758,8 +1796,8 @@ msgstr "Ei voinut näyttää %s"
 #~ msgid "_Encrypt backup files"
 #~ msgstr "Sa_laa varmuuskopiotiedostot"
 
-#~ msgid "Encrypted"
-#~ msgstr "Salattu"
+#~ msgid "Encrypted:"
+#~ msgstr "Salattu:"
 
 #~ msgid "_Automatically backup on a regular schedule"
 #~ msgstr "Varmuuskopioi _automaattisesti säännöllisin väliajoin"
@@ -1769,6 +1807,10 @@ msgstr "Ei voinut näyttää %s"
 
 #~ msgid "About Déjà Dup"
 #~ msgstr "Tietoja Déjà Dupista"
+
+#, c-format
+#~ msgid "_Keep backups:"
+#~ msgstr "Varmuus_kopioiden säilytysaika:"
 
 #, c-format
 #~ msgid ""
@@ -1792,6 +1834,9 @@ msgstr "Ei voinut näyttää %s"
 #~ "Tässä listassa olevat kansiot kumoavat varmuuskopiointiin sisällytettävien "
 #~ "kansioiden listalla mahdollisesti olevat kansiot, joten kansioita, jotka "
 #~ "esiintyvät molemmissa listoissa, ei varmuuskopioida."
+
+#~ msgid "Restore _folder:"
+#~ msgstr "Palauta _kansio:"
 
 #, c-format
 #~ msgid ""
@@ -1821,18 +1866,24 @@ msgstr "Ei voinut näyttää %s"
 #~ msgid "How often to periodically backup"
 #~ msgstr "Kuinka usein säännöllinen varmuuskopio luodaan"
 
+#~ msgid "Restore folder:"
+#~ msgstr "Palautuskansio:"
+
 #~ msgid "Creating a fresh backup.  This will take longer than normal."
 #~ msgstr "Luodaan uutta varmuuskopiota. Tämä kestää kauemmin kuin yleensä."
 
+#~ msgid "S3 Access Key I_D:"
+#~ msgstr "S3-avaimen _tunniste:"
+
 #, c-format
-#~ msgid "How _often to backup"
-#~ msgstr "Kuinka _usein varmuuskopio luodaan"
+#~ msgid "How _often to backup:"
+#~ msgstr "Kuinka _usein varmuuskopio luodaan:"
 
-#~ msgid "I_nclude files in folders"
-#~ msgstr "Varmuuskopioi _tiedostot kansioista"
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "Varmuuskopioi _tiedostot kansioista:"
 
-#~ msgid "E_xcept files in folders"
-#~ msgstr "_Ohita tiedostot kansioissa"
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "_Ohita tiedostot kansioissa:"
 
 #~ msgid "Back up your files"
 #~ msgstr "Varmuuskopioi tiedostosi"
@@ -1856,14 +1907,17 @@ msgstr "Ei voinut näyttää %s"
 #~ msgid "Checking for Backups"
 #~ msgstr "Tarkistaa varmuuskopioita"
 
-#~ msgid "Include from"
-#~ msgstr "Sisällytä kohteesta"
+#~ msgid "Include from:"
+#~ msgstr "Sisällytä kohteesta:"
 
-#~ msgid "Except for"
-#~ msgstr "Paitsi kohteesta"
+#~ msgid "Except for:"
+#~ msgstr "Paitsi kohteesta:"
 
 #~ msgid "Backup files are _encrypted"
 #~ msgstr "Varmuuskopiotiedostot on _salattu"
+
+#~ msgid "Connect as u_ser:"
+#~ msgstr "Yhdistä _käyttäjänä:"
 
 #, c-format
 #~ msgid "No space left in %s"
@@ -1872,6 +1926,12 @@ msgstr "Ei voinut näyttää %s"
 #, c-format
 #~ msgid "Could not restore %s: %s"
 #~ msgstr "Ei voitu palauttaa %s: %s"
+
+#~ msgid "_Access key ID:"
+#~ msgstr "_Käyttöavaimen tunnus:"
+
+#~ msgid "_Secret access key:"
+#~ msgstr "_Salainen käyttöavain:"
 
 #~ msgid ""
 #~ "Whether the backup location is a mounted external volume or a normal folder. "
@@ -1893,14 +1953,35 @@ msgstr "Ei voinut näyttää %s"
 #~ msgid "Show _Progress"
 #~ msgstr "Näytä _edistyminen"
 
+#~ msgid "_URI:"
+#~ msgstr "_URI:"
+
+#~ msgid "Optional information:"
+#~ msgstr "Lisätiedot:"
+
+#~ msgid "Folder:"
+#~ msgstr "Kansio:"
+
+#~ msgid "How _often to back up:"
+#~ msgstr "Kuinka _usein varmuuskopio luodaan:"
+
 #~ msgid "FILES"
 #~ msgstr "TIEDOSTOT"
+
+#~ msgid "_Log in with a username"
+#~ msgstr "Ki_rjaudu käyttäjätunnuksella"
 
 #~ msgid "_Browse…"
 #~ msgstr "S_elaa..."
 
+#~ msgid "_Domain Name:"
+#~ msgstr "_Toimialuenimi:"
+
 #~ msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 #~ msgstr "Déjà Dup ei toimi ilman Dublicity-ohjelmaa. Se sulkeutuu nyt."
+
+#~ msgid "_API access key:"
+#~ msgstr "_API-käyttöavain:"
 
 #~ msgid "Password Needed"
 #~ msgstr "Anna salasanasi"
@@ -1914,11 +1995,26 @@ msgstr "Ei voinut näyttää %s"
 #~ msgid "Scanning for files from last week…"
 #~ msgstr "Kartoitetaan tiedostoja viime viikolta..."
 
-#~ msgid "Where"
-#~ msgstr "Missä"
+#~ msgid "Confir_m password:"
+#~ msgstr "Va_hvista salasana:"
 
-#~ msgid "Include files from"
-#~ msgstr "Sisällytä tiedostot kohteesta"
+#~ msgid "Automatic _backups:"
+#~ msgstr "Automaatti_set varmuuskopiot:"
+
+#~ msgid "Next automatic backup:"
+#~ msgstr "Seuraava automaattinen varmuuskopiointi:"
+
+#~ msgid "Where:"
+#~ msgstr "Missä:"
+
+#~ msgid "Most recent backup:"
+#~ msgstr "Viimeisin varmuuskopio:"
+
+#~ msgid "_Domain:"
+#~ msgstr "_Toimialue:"
+
+#~ msgid "Include files from:"
+#~ msgstr "Sisällytä tiedostot kohteesta:"
 
 #~ msgid "translator-credits"
 #~ msgstr ""
@@ -1929,7 +2025,9 @@ msgstr "Ei voinut näyttää %s"
 #~ "  Jiri Grönroos https://launchpad.net/~jiri-gronroos\n"
 #~ "  Jussi https://launchpad.net/~jussiphil\n"
 #~ "  Jussi Aalto https://launchpad.net/~jtaalto-deactivatedaccount\n"
-#~ "  Michael Terry https://launchpad.net/~mterry\n"
 #~ "  Otto Kekäläinen https://launchpad.net/~otto\n"
 #~ "  T Kortehisto https://launchpad.net/~kortehisto\n"
 #~ "  papukaija https://launchpad.net/~papukaija"
+
+#~ msgid "_Container:"
+#~ msgstr "S_äiliö:"

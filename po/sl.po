@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2011-07-23 03:21+0000\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:32+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2011-08-02 04:37+0000\n"
-"X-Generator: Launchpad (build 13552)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:37+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -73,6 +73,7 @@ msgstr ""
 "poti."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "Mesto varnostne kopije"
 
@@ -291,6 +292,10 @@ msgid ""
 "don’t know about backups. This time should be either ‘disabled’ to turn off "
 "this check or in ISO 8601 format."
 msgstr ""
+"Ko se uporabnik prijavi, Déjà Dup nadzornik preveri, ali naj takoj ustvari "
+"varnostno kopijo. To uporabnikom, ki ne vedo nič o varnostnem kopiranju, "
+"omogoča lažje odkrivanje programa. Tokrat mora za onemogočanje preverjanja "
+"'onemogočeno' ali v obliki ISO 8601."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
@@ -328,16 +333,23 @@ msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr ""
+"V katerem vedru Amazon S3 naj bodo shranjene datoteke. Za to ni nujno, da "
+"vedra že obstajajo. Uporabite lahko le vejavne nizi imen gostitelja."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr ""
+"V katerem zabojniku datotek oblaka Rackpace bodo shranjene datoteke. "
+"Zabojniku ni treba nujno obstajati.  Dovoljeni so samo pravilni nizi imena "
+"gostitelja."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
+"Določilnik vašega ključa Amazon S3 za dostop. Obnaša se kot vaše uporabniško "
+"ime S3."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Your Rackspace username"
@@ -351,15 +363,15 @@ msgstr "Mapa"
 msgid "Scanning…"
 msgstr "Preiskovanje ..."
 
-#: ../nautilus/NautilusExtension.c:165
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr "Obnovi manjkajoče datoteke ..."
 
-#: ../nautilus/NautilusExtension.c:166
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr "Obnova izbrisanih datotek iz varnostne kopije"
 
-#: ../nautilus/NautilusExtension.c:208
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Povrni na predhodne različice ..."
@@ -367,7 +379,7 @@ msgstr[1] "Povrni na predhodno različico ..."
 msgstr[2] "Povrni na predhodni različici ..."
 msgstr[3] "Povrni na predhodne različice ..."
 
-#: ../nautilus/NautilusExtension.c:212
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Obnovi datoteke iz varnostne kopije"
@@ -399,7 +411,7 @@ msgstr "Mesto za ustvarjanje varnostne kopije ni na voljo"
 
 #: ../common/BackendFile.vala:363
 msgid "Waiting for a network connection…"
-msgstr ""
+msgstr "Čakanje na omrežno povezavo ..."
 
 #: ../common/BackendFile.vala:426
 #, c-format
@@ -410,7 +422,7 @@ msgstr "Čakanje povezavo z '%s' ..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Vsebnik računa Rackspace mora biti določen med možnostmi."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr "Datoteke v oblaku Rackspace"
 
@@ -430,6 +442,8 @@ msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
 "href=\"%s\">online</a>."
 msgstr ""
+"Račun za datotečni oblak Rackpace lahko ustvarite <a href=\"%s\">na "
+"spletu</a>."
 
 #: ../common/BackendRackspace.vala:139
 msgid "_API access key"
@@ -445,9 +459,9 @@ msgstr "_Zapomni si API ključ za dostop"
 
 #: ../common/BackendRackspace.vala:143
 msgid "Enter Rackspace Cloud Files API key"
-msgstr ""
+msgstr "Vpišite ključ API za datotečni oblak Rackspace"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -460,7 +474,7 @@ msgstr "%s na Amazon S3"
 #: ../common/BackendS3.vala:193
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
-msgstr ""
+msgstr "Račun za Amazon S3 lahko ustvarite <a href=\"%s\">na spletu</a>."
 
 #: ../common/BackendS3.vala:194
 msgid "_Access key ID"
@@ -480,9 +494,9 @@ msgstr "_Zapomni si skrivni ključ za dostop"
 
 #: ../common/BackendS3.vala:199
 msgid "Enter Amazon S3 access key"
-msgstr ""
+msgstr "Vpišite dostopni ključ za Amazon S3"
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -499,6 +513,20 @@ msgstr "Prijava v Ubuntu One ..."
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr "Poveži se z Ubuntu One"
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
+msgstr ""
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr "Domača mapa"
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "Smeti"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -572,7 +600,7 @@ msgid "Cleaning up…"
 msgstr "Čiščenje ..."
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
-#: ../deja-dup/AssistantOperation.vala:514
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "Opravilo je spodletelo z neznano napako."
 
@@ -600,6 +628,9 @@ msgid ""
 "name is %s.  If this is unexpected, you should back up to a different "
 "location."
 msgstr ""
+"Obstoječa varnostna kopija je za računalnik %s, toda ime trenutnega "
+"računalnika je %s. Če je to nepričakovano, naredite varnostno kopijo na "
+"drugo mesto."
 
 #: ../common/Duplicity.vala:897
 #, c-format
@@ -636,11 +667,11 @@ msgstr "Neveljaven skrivni ključ."
 
 #: ../common/Duplicity.vala:940
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
-msgstr ""
+msgstr "Vaš račun Amazon Web Services ni potrjen za storitev S3."
 
 #: ../common/Duplicity.vala:953
 msgid "S3 bucket name is not available."
-msgstr ""
+msgstr "Ime vedra S3 ni na voljo."
 
 #: ../common/Duplicity.vala:967
 #, c-format
@@ -731,51 +762,51 @@ msgstr "Preiskovanje:"
 msgid "_Details"
 msgstr "_Podrobnosti"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr "_Dovoli obnavljanje datotek brez uporabe gesla"
+
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Password-protect your backup"
 msgstr "Zaščita varnostne kopije z _geslom"
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr "_Šifrirno geslo"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr "Potrdi _geslo"
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr "_Pokaži geslo"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "_Zapomni si geslo"
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr "_Dovoli obnavljanje datotek brez uporabe gesla"
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "Povzetek"
 
-#: ../deja-dup/AssistantOperation.vala:724
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
 msgstr "Ali naj bo geslo zahtevano?"
 
-#: ../deja-dup/AssistantOperation.vala:726
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr "Zahtevano je šifrirno geslo"
 
-#: ../deja-dup/AssistantOperation.vala:769
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr ""
 
@@ -787,7 +818,7 @@ msgstr "Obnovi"
 msgid "_Restore"
 msgstr "_Obnovi"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "_Mesto varostne kopije"
 
@@ -985,11 +1016,10 @@ msgstr ""
 msgid "You must specify a mode"
 msgstr ""
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "_Uporabniško ime"
 
@@ -1005,19 +1035,20 @@ msgstr ""
 msgid "Location not available"
 msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
 msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr "Poveži se _brezimno"
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr "Poveži se kot _uporabnik"
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr "_Domena"
 
@@ -1091,68 +1122,68 @@ msgstr ""
 msgid "Just show my backup _settings"
 msgstr ""
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr "Kategorije"
 
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr ""
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr ""
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr ""
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:251
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr ""
 
-#: ../preferences/Preferences.vala:257
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr ""
 
-#: ../preferences/Preferences.vala:279
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr "Pregled"
 
-#: ../preferences/Preferences.vala:308
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr "Nosilci za shranjevanje"
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr ""
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr ""
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr ""
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr ""
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr ""
 
-#: ../preferences/Preferences.vala:324
-msgid "Storage"
-msgstr "Nosilci za shranjevanje"
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr ""
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr ""
-
-#: ../preferences/Preferences.vala:382
-msgid "How _often to back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "Urnik"
 
@@ -1230,14 +1261,6 @@ msgstr "Da"
 msgid "No"
 msgstr "Ne"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
-msgid "Home"
-msgstr "Domača mapa"
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
-msgid "Trash"
-msgstr "Smeti"
-
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
 msgstr "Neznano"
@@ -1293,48 +1316,48 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:95
+#: ../widgets/ConfigList.vala:189
 msgid "_Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:96
+#: ../widgets/ConfigList.vala:190
 msgid "Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:189
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "Izbor map"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr "Mesto po meri"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr "Krajevna mapa"
 
@@ -1351,21 +1374,17 @@ msgstr "_Strežnik"
 msgid "Use secure connection (_HTTPS)"
 msgstr "Uporabi varno povezavo (_HTTPS)"
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr "_Vrata"
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "_Mapa"
-
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr "_Prijava z uporabniškim imenom"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -1375,7 +1394,7 @@ msgstr ""
 msgid "Choose Folder"
 msgstr "Izbor mape"
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr "_Vsebnik"
 
@@ -1383,13 +1402,9 @@ msgstr "_Vsebnik"
 msgid "S3 Access Key I_D"
 msgstr "ID _S3 ključa za dostop"
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
 msgstr "_Ime domene"
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
-msgstr "Dodatne podrobnosti"
 
 #: ../widgets/ConfigPeriod.vala:36
 msgid "Daily"
@@ -1453,8 +1468,8 @@ msgstr "Ni mogoče prikazati %s"
 #~ msgid "Backup"
 #~ msgstr "Arhiviraj"
 
-#~ msgid "I_nclude files in folders"
-#~ msgstr "_Vključi datoteke v mapah"
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "_Vključi datoteke v mapah:"
 
 #~ msgid "_Encrypt backup files"
 #~ msgstr "_Šifriraj varnostni arhiv"
@@ -1465,14 +1480,20 @@ msgstr "Ni mogoče prikazati %s"
 #~ msgid "Backup Finished"
 #~ msgstr "Varnostno kopiranje končano"
 
-#~ msgid "Encrypted"
-#~ msgstr "Šifrirano"
+#~ msgid "Encrypted:"
+#~ msgstr "Šifrirano:"
 
 #~ msgid "Déjà Dup backup passphrase"
 #~ msgstr "Déjà Dup geslo arhiva"
 
+#~ msgid "E_ncryption password:"
+#~ msgstr "_Šifrirno geslo"
+
 #~ msgid "Password needed"
 #~ msgstr "Potrebno je vnesti geslo"
+
+#~ msgid "_Date:"
+#~ msgstr "_Datum:"
 
 #~ msgid "Backup files are _encrypted"
 #~ msgstr "Varnostna kopija je _šifrirana"
@@ -1499,6 +1520,15 @@ msgstr "Ni mogoče prikazati %s"
 #~ msgid "Get Help _Online…"
 #~ msgstr "_Najdi on-line pomoč"
 
+#~ msgid "_Username:"
+#~ msgstr "_Uporabniško ime:"
+
+#~ msgid "_Domain:"
+#~ msgstr "_Domena:"
+
+#~ msgid "_Password:"
+#~ msgstr "_Geslo:"
+
 #, c-format
 #~ msgid "No space left in %s"
 #~ msgstr "Na %s ni več prostega prostora"
@@ -1508,6 +1538,9 @@ msgstr "Ni mogoče prikazati %s"
 
 #~ msgid "Connect to _Server…"
 #~ msgstr "Poveži se na _Strežnik…"
+
+#~ msgid "_Folder:"
+#~ msgstr "_Mapa:"
 
 #~ msgid "Home Folder"
 #~ msgstr "Domača mapa"
@@ -1535,32 +1568,88 @@ msgstr "Ni mogoče prikazati %s"
 #~ msgid "GVFS FUSE is not installed"
 #~ msgstr "Program GVFS FUSE ni nameščen"
 
-#~ msgid "E_xcept files in folders"
-#~ msgstr "_Izloči datotke v mapah"
+#~ msgid "_Backup location:"
+#~ msgstr "_Mesto varostne kopije:"
+
+#~ msgid "Connect as u_ser:"
+#~ msgstr "Poveži se kot _uporabnik:"
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "_Izloči datotke v mapah:"
 
 #~ msgid "Biweekly"
 #~ msgstr "Štirinajstdnevno"
+
+#~ msgid "Folder:"
+#~ msgstr "Mapa:"
+
+#~ msgid "_Secret access key:"
+#~ msgstr "_Skrivni ključ za dostop:"
+
+#~ msgid "_Access key ID:"
+#~ msgstr "ID ključa za dostop:"
+
+#~ msgid "_API access key:"
+#~ msgstr "_API ključ za dostop:"
 
 #, c-format
 #~ msgid "Could not restore %s: %s"
 #~ msgstr "Ni mogoče obnoviti %s: %s"
 
+#~ msgid "S3 Access Key I_D:"
+#~ msgstr "ID _S3 ključa za dostop:"
+
+#~ msgid "_Container:"
+#~ msgstr "_Vsebnik"
+
+#~ msgid "Optional information:"
+#~ msgstr "Dodatne podrobnosti:"
+
+#~ msgid "_Domain Name:"
+#~ msgstr "_Ime domene:"
+
+#~ msgid "_Log in with a username"
+#~ msgstr "_Prijava z uporabniškim imenom"
+
 #~ msgid "_Browse…"
 #~ msgstr "_Prebrskaj …"
 
-#~ msgid "Settings"
-#~ msgstr "Nastavitve"
+#~ msgid "_URI:"
+#~ msgstr "Naslov _URI:"
 
-#~ msgid "Where"
-#~ msgstr "Kje"
+#~ msgid "_Server:"
+#~ msgstr "_Strežnik:"
+
+#~ msgid "_Port:"
+#~ msgstr "_Vrata:"
+
+#~ msgid "Confir_m password:"
+#~ msgstr "Potrdi _geslo:"
+
+#~ msgid "Where:"
+#~ msgstr "Kje:"
 
 #~ msgid "Files"
 #~ msgstr "Datoteke"
 
+#~ msgid "Restore folder:"
+#~ msgstr "Mapa za obnovljene datoteke:"
+
+#~ msgid "Restore _folder:"
+#~ msgstr "Obnovi _mapo:"
+
+#~ msgid "Backup location:"
+#~ msgstr "Mesto varnostne kopije:"
+
+#~ msgid "Restore date:"
+#~ msgstr "Datum obnovitve:"
+
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
+#~ "  Andrej Znidarsic https://launchpad.net/~andrej.znidarsic\n"
 #~ "  Marko Petejan https://launchpad.net/~marko-petejan\n"
 #~ "  Matej Kovacic https://launchpad.net/~matej-kovacic\n"
 #~ "  Matej Urbančič https://launchpad.net/~matej-urban\n"
-#~ "  Michael Terry https://launchpad.net/~mterry"
+#~ "  Mojca Ograjšek https://launchpad.net/~mojca-ograjsek\n"
+#~ "  Primoz Princic https://launchpad.net/~primoz-princic"

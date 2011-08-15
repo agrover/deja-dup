@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2011-07-07 19:53+0000\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:33+0000\n"
 "Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-08-02 04:36+0000\n"
-"X-Generator: Launchpad (build 13552)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:36+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -72,6 +72,7 @@ msgstr ""
 "zvoleném chlívku."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "Umístění zálohy"
 
@@ -338,21 +339,21 @@ msgstr "Adresář"
 msgid "Scanning…"
 msgstr "Skenování…"
 
-#: ../nautilus/NautilusExtension.c:165
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr "Obnovit ztracené soubory..."
 
-#: ../nautilus/NautilusExtension.c:166
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr "Obnovit smazané soubory ze zálohy"
 
-#: ../nautilus/NautilusExtension.c:208
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Vrátit se k předchozí verzi..."
 msgstr[1] "Vrátit se k předchozím verzím..."
 
-#: ../nautilus/NautilusExtension.c:212
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Obnovit soubor ze zálohy"
@@ -392,7 +393,7 @@ msgstr "Čeká se, dokud nebude ‘%s’ opět připojeno…"
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Musíte určit Rackspace kontejner v nastavení"
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
@@ -430,7 +431,7 @@ msgstr "Zapamatovat si API přístupový klíč"
 msgid "Enter Rackspace Cloud Files API key"
 msgstr "Vložit Rackspace Cloud Files API klíč"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -465,7 +466,7 @@ msgstr "Z_apamatovat si tajný přístupový klíč"
 msgid "Enter Amazon S3 access key"
 msgstr "Vložte Amazon S3 přístupový klíč"
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -482,6 +483,20 @@ msgstr "Přihlásit se do Ubuntu One..."
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr "Připojit se k Ubuntu One"
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
+msgstr ""
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr ""
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "Koš"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -551,7 +566,7 @@ msgid "Cleaning up…"
 msgstr "Vyčišťuje se..."
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
-#: ../deja-dup/AssistantOperation.vala:514
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "Ukončeno s neznámou chybou."
 
@@ -715,51 +730,51 @@ msgstr "Skenování:"
 msgid "_Details"
 msgstr "_Detaily"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Password-protect your backup"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr "_Heslo k zašifrování"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr "Potvr_dit heslo"
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr "_Zobrazit heslo"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "_Zapamatovat heslo"
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr ""
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "Souhrn"
 
-#: ../deja-dup/AssistantOperation.vala:724
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:726
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:769
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr ""
 
@@ -771,7 +786,7 @@ msgstr "Obnovit"
 msgid "_Restore"
 msgstr "_Obnovit"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "_Umístění zálohy"
 
@@ -971,11 +986,10 @@ msgstr "Musíte poskytnout adresář, ne soubor"
 msgid "You must specify a mode"
 msgstr ""
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "_Uživatelské jméno"
 
@@ -991,19 +1005,20 @@ msgstr "Z_obrazit heslo"
 msgid "Location not available"
 msgstr "Umístění není k dispozici"
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
-msgstr "Toto umístění pro zálohu požaduje ověření."
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
+msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr "Připojit _anonymně"
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr "Připojit se jako _uživatel"
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr "_Doména"
 
@@ -1077,68 +1092,68 @@ msgstr ""
 msgid "Just show my backup _settings"
 msgstr ""
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr ""
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr ""
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr ""
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:251
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr "_Obnovit..."
 
-#: ../preferences/Preferences.vala:257
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr ""
 
-#: ../preferences/Preferences.vala:279
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr ""
 
-#: ../preferences/Preferences.vala:308
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr "Úložiště"
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr ""
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr ""
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr ""
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr "Jak _často zálohovat"
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr "_Ukládat zálohy"
 
-#: ../preferences/Preferences.vala:324
-msgid "Storage"
-msgstr "Úložiště"
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr ""
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr ""
-
-#: ../preferences/Preferences.vala:382
-msgid "How _often to back up"
-msgstr "Jak _často zálohovat"
-
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "Plán"
 
@@ -1217,14 +1232,6 @@ msgstr "Ano"
 msgid "No"
 msgstr "Ne"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
-msgid "Home"
-msgstr ""
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
-msgid "Trash"
-msgstr "Koš"
-
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
 msgstr "Neznámý"
@@ -1301,48 +1308,48 @@ msgstr[2] ""
 "Staré zálohy budou ponechány alespoň %d dnů nebo dokud má umístění zálohy "
 "dostatek místa."
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:95
+#: ../widgets/ConfigList.vala:189
 msgid "_Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:96
+#: ../widgets/ConfigList.vala:190
 msgid "Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:189
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "Vybrat adresáře"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
 msgstr "Sdílení Windows"
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr "Vlastní umístění"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr "Místní adresář"
 
@@ -1359,21 +1366,17 @@ msgstr "_Server"
 msgid "Use secure connection (_HTTPS)"
 msgstr "Použijte zabezpečené připojení (_HTTPS)"
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr "_Port"
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "_Složka"
-
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr "_Přihlásit se uživatelským jménem"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -1383,7 +1386,7 @@ msgstr ""
 msgid "Choose Folder"
 msgstr "Vybrat adresář"
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr "_Kontejner"
 
@@ -1391,13 +1394,9 @@ msgstr "_Kontejner"
 msgid "S3 Access Key I_D"
 msgstr "S3 přístupový klíč I_D"
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
 msgstr "_Název domény"
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
-msgstr "Nepovinné informace"
 
 #: ../widgets/ConfigPeriod.vala:36
 msgid "Daily"
@@ -1479,11 +1478,17 @@ msgstr "Nelze zobrazit %s"
 #~ msgid "Preferences"
 #~ msgstr "Nastavení"
 
-#~ msgid "I_nclude files in folders"
-#~ msgstr "V_ložit soubory ze složek"
+#~ msgid "_Backup location:"
+#~ msgstr "_Umístění zálohy:"
 
-#~ msgid "Encrypted"
-#~ msgstr "Zašifrováno"
+#~ msgid "Backup location:"
+#~ msgstr "Umístění zálohy:"
+
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "V_ložit soubory ze složek:"
+
+#~ msgid "Encrypted:"
+#~ msgstr "Zašifrováno:"
 
 #~ msgid "Backup Finished"
 #~ msgstr "Zálohování bylo dokončeno"
@@ -1491,17 +1496,29 @@ msgstr "Nelze zobrazit %s"
 #~ msgid "Your files were successfully backed up."
 #~ msgstr "Vaše soubory byly úspěšně zazálohovány."
 
-#~ msgid "Include from"
-#~ msgstr "Vložit z"
+#~ msgid "Include from:"
+#~ msgstr "Vložit z:"
 
-#~ msgid "Except for"
-#~ msgstr "Vyřadit z"
+#~ msgid "Except for:"
+#~ msgstr "Vyřadit z:"
 
 #~ msgid "_Automatically back up on a regular schedule"
 #~ msgstr "_Automaticky zálohovat podle plánu"
 
+#~ msgid "E_ncryption password:"
+#~ msgstr "_Heslo k zašifrování:"
+
 #~ msgid "Password needed"
 #~ msgstr "Vyžadováno heslo"
+
+#~ msgid "_Date:"
+#~ msgstr "_Datum:"
+
+#~ msgid "File to restore:"
+#~ msgid_plural "Files to restore:"
+#~ msgstr[0] "Soubor k obnovení:"
+#~ msgstr[1] "Soubory k obnovení:"
+#~ msgstr[2] "Souborů k obnovení:"
 
 #~ msgid "_Contents"
 #~ msgstr "_Obsah"
@@ -1583,8 +1600,14 @@ msgstr "Nelze zobrazit %s"
 #~ msgid "_Encrypt backup files"
 #~ msgstr "_Zašifrovat zálohované soubory"
 
-#~ msgid "E_xcept files in folders"
-#~ msgstr "V_yřadit soubory v adresářích"
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "V_yřadit soubory v adresářích:"
+
+#~ msgid "How _often to back up:"
+#~ msgstr "Jak _často zálohovat:"
+
+#~ msgid "Restore folder:"
+#~ msgstr "Adresář pro obnovení:"
 
 #~ msgid "Home Folder"
 #~ msgstr "Domovský adresář"
@@ -1602,6 +1625,9 @@ msgstr "Nelze zobrazit %s"
 #~ "jsou vztaženy k domovskému adresáři. Tento seznam má přednost před "
 #~ "přiloženým seznamem."
 
+#~ msgid "Restore _folder:"
+#~ msgstr "Obnovit _složku:"
+
 #~ msgid "Déjà Dup backup passphrase"
 #~ msgstr "Heslo zálohy Déjà Dup"
 
@@ -1618,11 +1644,33 @@ msgstr "Nelze zobrazit %s"
 #~ msgid "Could not open preferences"
 #~ msgstr "Nelze otevřít nastavení"
 
+#~ msgid "Connect as u_ser:"
+#~ msgstr "Připojit se jako _uživatel:"
+
+#~ msgid "_Domain:"
+#~ msgstr "_Doména:"
+
+#~ msgid "This backup location requires authentication."
+#~ msgstr "Toto umístění pro zálohu požaduje ověření."
+
+#~ msgid "_Username:"
+#~ msgstr "_Uživatelské jméno:"
+
 #~ msgid "GVFS FUSE is not installed"
 #~ msgstr "GVFS FUSE není nainstalováno"
 
+#, c-format
+#~ msgid "_Keep backups:"
+#~ msgstr "_Ukládat zálohy:"
+
 #~ msgid "Files"
 #~ msgstr "Soubory"
+
+#~ msgid "_Folder:"
+#~ msgstr "_Složka:"
+
+#~ msgid "Restore date:"
+#~ msgstr "Datum obnovení"
 
 #, c-format
 #~ msgid "Show _Progress (%.1f%%)"
@@ -1630,6 +1678,12 @@ msgstr "Nelze zobrazit %s"
 
 #~ msgid "Show _Progress"
 #~ msgstr "Zobrazit _stav"
+
+#~ msgid "_Access key ID:"
+#~ msgstr "ID _přístupového klíče:"
+
+#~ msgid "_Secret access key:"
+#~ msgstr "_Tajný přístupový klíč"
 
 #~ msgid "Connect to _Server…"
 #~ msgstr "_Připojit se k serveru…"
@@ -1643,6 +1697,12 @@ msgstr "Nelze zobrazit %s"
 #~ "Tento program je šířen v naději, že bude užitečný, avšak BEZ JAKÉKOLIV "
 #~ "ZÁRUKY; neposkytují se ani odvozené záruky PRODEJNOSTI anebo VHODNOSTI PRO "
 #~ "URČITÝ ÚČEL. Další podrobnosti hledejte v GNU General Public License."
+
+#~ msgid "_Password:"
+#~ msgstr "_Heslo:"
+
+#~ msgid "S3 Access Key I_D:"
+#~ msgstr "S3 přístupový klíč I_D:"
 
 #~ msgid "No filenames provided"
 #~ msgstr "Nebyly poskytnuty názvy souborů"
@@ -1666,14 +1726,11 @@ msgstr "Nelze zobrazit %s"
 #~ "Déjà Dup vyžaduje alespoň verzi %d.%d.%.2d duplicity, ale nalezena byla "
 #~ "pouze verze %d.%d.%.2d"
 
-#~ msgid "The type of backup location."
-#~ msgstr "Typ umístění zálohy."
+#~ msgid "Folder:"
+#~ msgstr "Adresář:"
 
 #~ msgid "Password Needed"
 #~ msgstr "Je vyžadováno heslo"
-
-#~ msgid "Restore missing files…"
-#~ msgstr "Obnovit chybějící soubory"
 
 #~ msgid "Scanning for files from last month…"
 #~ msgstr "Vyhledávání souborů z minulého měsíce..."
@@ -1696,11 +1753,29 @@ msgstr "Nelze zobrazit %s"
 #~ msgid "FILES"
 #~ msgstr "SOUBORY"
 
+#~ msgid "_Log in with a username"
+#~ msgstr "_Přihlásit se uživatelským jménem"
+
 #~ msgid "_Browse…"
 #~ msgstr "_Procházet..."
 
-#~ msgid "Sign into Ubuntu One"
-#~ msgstr "Přihlásit se do Ubuntu One"
+#~ msgid "_Domain Name:"
+#~ msgstr "_Název domény:"
+
+#~ msgid "_Server:"
+#~ msgstr "_Server:"
+
+#~ msgid "_Port:"
+#~ msgstr "_Port:"
+
+#~ msgid "Optional information:"
+#~ msgstr "Nepovinné informace:"
+
+#~ msgid "_API access key:"
+#~ msgstr "_API přístupový klíč:"
+
+#~ msgid "_URI:"
+#~ msgstr "_URI:"
 
 #~ msgid ""
 #~ "The folder name to store files in. If '$HOSTNAME', it will default to a "
@@ -1709,6 +1784,9 @@ msgstr "Nelze zobrazit %s"
 #~ "Název adresáře pro uložení souborů. Pokud to je '$HOSTNAME', pak bude "
 #~ "standartně ukládáno do složky pojmenované podle názvu počítače."
 
+#~ msgid "_Container:"
+#~ msgstr "_Kontejner:"
+
 #~ msgid ""
 #~ "The type of backup location. If 'auto', a default will be chosen based on "
 #~ "what is available."
@@ -1716,17 +1794,17 @@ msgstr "Nelze zobrazit %s"
 #~ "Typ umístění zálohy. Pokud je automatické, standardně bude zvolen na základě "
 #~ "toho, co je k dispozici."
 
+#~ msgid "Confir_m password:"
+#~ msgstr "Potvr_dit heslo:"
+
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
 #~ "  Jiri Machala https://launchpad.net/~jirka-machala\n"
-#~ "  Kamil Hanus https://launchpad.net/~kamilhanus\n"
-#~ "  Konki https://launchpad.net/~pavel-konkol\n"
 #~ "  Matyas Gazur https://launchpad.net/~matty-g\n"
 #~ "  Michael Terry https://launchpad.net/~mterry\n"
 #~ "  Petr R. https://launchpad.net/~ateps-r\n"
 #~ "  Petr Šimáček https://launchpad.net/~petr-simacek\n"
-#~ "  Roman Horník https://launchpad.net/~roman.hornik\n"
 #~ "  Sesivany https://launchpad.net/~jiri-eischmann\n"
 #~ "  chaeMil https://launchpad.net/~chaemil72\n"
 #~ "  luisah https://launchpad.net/~luisah\n"

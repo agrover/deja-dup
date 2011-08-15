@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2011-08-04 02:38+0000\n"
-"Last-Translator: abuyop <Unknown>\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:36+0000\n"
+"Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-08-05 04:40+0000\n"
-"X-Generator: Launchpad (build 13604)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:36+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -72,6 +72,7 @@ msgstr ""
 "didalam bakul yang dipilih."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "Lokasi Sandar"
 
@@ -358,21 +359,21 @@ msgstr "Folder"
 msgid "Scanning…"
 msgstr "Mengimbas..."
 
-#: ../nautilus/NautilusExtension.c:172
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr "pulih Fail yang Hilang..."
 
-#: ../nautilus/NautilusExtension.c:173
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr "Pulih fail yang dipadam dari sandar"
 
-#: ../nautilus/NautilusExtension.c:215
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Kembali ke Versi Terdahulu"
 msgstr[1] "Kembali ke Versi Terdahulu"
 
-#: ../nautilus/NautilusExtension.c:219
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Pulihkan fail dari sandar"
@@ -412,7 +413,7 @@ msgstr "Menunggu '%s' menjadi bersambung..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Anda mesti tentukan bekas Rackspace didalam keutamaan anda."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr "Fail Awan Rackspace"
 
@@ -451,7 +452,7 @@ msgstr "_Ingat kekunci capaian API"
 msgid "Enter Rackspace Cloud Files API key"
 msgstr "Masukkan kekunci API bagi Fail Awan Rackspace"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -487,7 +488,7 @@ msgstr "_Ingat kekunci capaian rahsia"
 msgid "Enter Amazon S3 access key"
 msgstr "Masukkan kekunci capaian Amazon S3"
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -504,6 +505,20 @@ msgstr "Tandatangan kedalam Ubuntu One..."
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr "Sambung ke Ubuntu One"
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
+msgstr ""
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr "Utama"
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "Tong Sampah"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -577,6 +592,7 @@ msgid "Cleaning up…"
 msgstr "Membersihkan..."
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "Gagal dengan ralat tidak diketahui"
 
@@ -741,11 +757,15 @@ msgstr "Mengimbas:"
 msgid "_Details"
 msgstr "_Perincian"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr "_Benarkan pemulihan tanpa kata laluan"
+
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Password-protect your backup"
 msgstr "_Kata laluan-lindungi sandar anda"
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
@@ -754,40 +774,36 @@ msgstr ""
 "Anda perlukan kata laluan untuk memulihkan fail anda. Anda mungkin ingin "
 "menulisnya."
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr "Kata laluan pen_yulitan"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr "Sah_kan kata laluan"
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr "_Papar kata laluan"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "_Ingat kata laluan"
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr "_Benarkan pemulihan tanpa kata laluan"
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "Ringkasan"
 
-#: ../deja-dup/AssistantOperation.vala:719
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
 msgstr "Perlukan Kata Laluan?"
 
-#: ../deja-dup/AssistantOperation.vala:721
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr "Kata Laluan Penyulitan Diperlukan"
 
-#: ../deja-dup/AssistantOperation.vala:764
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr "Sandar kata laluan penyulitan"
 
@@ -799,7 +815,7 @@ msgstr "Pulih"
 msgid "_Restore"
 msgstr "_Pulih"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "Lokasi _sandar"
 
@@ -984,6 +1000,9 @@ msgid ""
 "the Right Way (encrypted, off-site, and regular) and uses duplicity as\n"
 "the backend."
 msgstr ""
+"Déjà Dup merupakan alat sandar yang ringkas. Ia menyembunyikan\n"
+"kerumitan penyandaran, cara yang betul dan gunakan pendua \n"
+"sebagai bahagian belakang."
 
 #: ../deja-dup/main.vala:141
 msgid "Directory does not exists"
@@ -997,11 +1016,10 @@ msgstr "Anda mesti sediakan direktori bukan fail"
 msgid "You must specify a mode"
 msgstr "Anda mesti tentukan mod"
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "_Nama Pengguna"
 
@@ -1017,19 +1035,20 @@ msgstr "P_apar kata laluan"
 msgid "Location not available"
 msgstr "Tiada lokasi"
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
-msgstr "Lokasi sandar ini memerlukan pengesahihan."
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
+msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr "Sambung sebagai a_wanama"
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr "Sambung sebagai pen_gguna"
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr "_Domain"
 
@@ -1106,68 +1125,68 @@ msgstr "Saya ingin p_ulihkan fail dari sandar terdahulu..."
 msgid "Just show my backup _settings"
 msgstr "Hanya papar t_etapan sandar saya"
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr "Kategori"
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr "San_dar automatik"
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr "Folder untuk disandarkan"
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr "Folder yang diabaikan"
 
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr "Sandar baru-baru ini"
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr "Sandar automatik berikutnya"
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr "_Pulih..."
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr "Sandar S_ekarang"
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr "Selayang Pandang"
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr "Storan"
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr "Folder untuk _disandarkan"
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr "Folder di_abaikan"
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr "Folder"
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr "Kekerapan melakukan sandar"
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr "_Kekal Sandar"
 
-#: ../preferences/Preferences.vala:339
-msgid "Storage"
-msgstr "Storan"
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr "Folder untuk _disandarkan"
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr "Folder di_abaikan"
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr "Folder"
-
-#: ../preferences/Preferences.vala:405
-msgid "How _often to back up"
-msgstr "Kekerapan melakukan sandar"
-
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "Jadual"
 
@@ -1206,26 +1225,26 @@ msgid_plural "At least %d days"
 msgstr[0] "Sekurang-kurangnya %d hari"
 msgstr[1] "Sekurang-kurangnya %d hari"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr "Hari Ini"
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr "Semalam"
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr "Esok"
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] "%d hari dari sekarang"
 msgstr[1] "%d hari dari sekarang"
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -1244,14 +1263,6 @@ msgstr "Ya"
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
 msgstr "Tidak"
-
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
-msgid "Home"
-msgstr "Utama"
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
-msgid "Trash"
-msgstr "Tong Sampah"
 
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
@@ -1326,48 +1337,48 @@ msgstr[1] ""
 "Sandar lama akan dikekalkan sekurang-kurangnya %d hari atau sehinggalah "
 "lokasi sandar mengalami kekurangan ruang."
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
 msgstr "_Tambah"
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
 msgstr "Tambah"
 
-#: ../widgets/ConfigList.vala:95
+#: ../widgets/ConfigList.vala:189
 msgid "_Remove"
 msgstr "_Buang"
 
-#: ../widgets/ConfigList.vala:96
+#: ../widgets/ConfigList.vala:190
 msgid "Remove"
 msgstr "Buang"
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "Pilih folder"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
 msgstr "Perkongsian Windows"
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr "Lokasi Suai"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr "Folder Setempat"
 
@@ -1384,21 +1395,17 @@ msgstr "_Pelayan"
 msgid "Use secure connection (_HTTPS)"
 msgstr "Guna sambungan selamat (_HTTPS)"
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr "_Port"
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "_Folder"
-
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr "_Daftar masuk dengan nama pengguna"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -1408,7 +1415,7 @@ msgstr "_Pilih Folder..."
 msgid "Choose Folder"
 msgstr "Pilih Folder"
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr "_Bekas"
 
@@ -1416,13 +1423,9 @@ msgstr "_Bekas"
 msgid "S3 Access Key I_D"
 msgstr "I_D Kekunci Capaian S3"
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
 msgstr "Nama _Domain"
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
-msgstr "Maklumat tambahan"
 
 #: ../widgets/ConfigPeriod.vala:36
 msgid "Daily"
@@ -1452,23 +1455,122 @@ msgstr[1] "Setiap %d hari"
 msgid "Could not display %s"
 msgstr "Tidak boleh paparkan %s"
 
-#~ msgid "Where"
-#~ msgstr "Di mana"
+#~ msgid "Folder:"
+#~ msgstr "Folder:"
+
+#~ msgid "_API access key:"
+#~ msgstr "kekunci capaian _API:"
+
+#~ msgid "_Access key ID:"
+#~ msgstr "ID kekunci _capaian:"
+
+#~ msgid "_Secret access key:"
+#~ msgstr "Kekunci capaian _rahsia:"
+
+#~ msgid "Confir_m password:"
+#~ msgstr "Sah_kan kata laluan:"
+
+#~ msgid "E_ncryption password:"
+#~ msgstr "Kata laluan pen_yulitan:"
+
+#~ msgid "_Backup location:"
+#~ msgstr "Lokasi _sandar:"
+
+#~ msgid "Restore folder:"
+#~ msgstr "Folder pulih:"
+
+#~ msgid "Restore _folder:"
+#~ msgstr "Folder _Pulih:"
+
+#~ msgid "Backup location:"
+#~ msgstr "Lokasi sandar:"
+
+#~ msgid "_Date:"
+#~ msgstr "_Tarikh:"
+
+#~ msgid "Restore date:"
+#~ msgstr "Tarikh pulih:"
+
+#~ msgid "File to restore:"
+#~ msgid_plural "Files to restore:"
+#~ msgstr[0] "Fail untuk dipulihkan:"
+#~ msgstr[1] "Fail untuk dipulihkan:"
+
+#~ msgid "Connect as u_ser:"
+#~ msgstr "Sambung sebagai pen_gguna:"
+
+#~ msgid "_Password:"
+#~ msgstr "_Kata Laluan:"
+
+#~ msgid "_Username:"
+#~ msgstr "_Nama Pengguna:"
+
+#~ msgid "_Domain:"
+#~ msgstr "_Domain:"
+
+#~ msgid "Where:"
+#~ msgstr "Di mana:"
 
 #~ msgid "Files"
 #~ msgstr "Fail"
 
-#~ msgid "Include files from"
-#~ msgstr "Sertakan fail dari"
+#~ msgid "_Server:"
+#~ msgstr "_Pelayan:"
 
-#~ msgid "Except for"
-#~ msgstr "Kecual"
+#~ msgid "Optional information:"
+#~ msgstr "Maklumat tambahan:"
 
-#~ msgid "E_xcept files in folders"
-#~ msgstr "Ke_cuali fail dalam folder"
+#~ msgid "_Domain Name:"
+#~ msgstr "Nama _Domain:"
 
-#~ msgid "I_nclude files in folders"
-#~ msgstr "Se_rta fail dalam folder"
+#~ msgid "_Folder:"
+#~ msgstr "_Folder:"
+
+#~ msgid "_Port:"
+#~ msgstr "_Port:"
+
+#~ msgid "This backup location requires authentication."
+#~ msgstr "Lokasi sandar ini memerlukan pengesahihan."
+
+#~ msgid "Include files from:"
+#~ msgstr "Sertakan fail dari:"
+
+#~ msgid "Automatic _backups:"
+#~ msgstr "San_dar automatik:"
+
+#~ msgid "Next automatic backup:"
+#~ msgstr "Sandar automatik berikutnya:"
+
+#~ msgid "Most recent backup:"
+#~ msgstr "Sandar baru-baru ini:"
+
+#~ msgid "Except for:"
+#~ msgstr "Kecual:"
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "Ke_cuali fail dalam folder:"
+
+#~ msgid "How _often to back up:"
+#~ msgstr "Kekerapan melakukan sandar:"
+
+#, c-format
+#~ msgid "_Keep backups:"
+#~ msgstr "_Kekal Sandar:"
+
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "Se_rta fail dalam folder:"
+
+#~ msgid "_Log in with a username"
+#~ msgstr "_Daftar masuk dengan nama pengguna"
+
+#~ msgid "_URI:"
+#~ msgstr "_URI:"
 
 #~ msgid "_Browse…"
 #~ msgstr "_Layar"
+
+#~ msgid "S3 Access Key I_D:"
+#~ msgstr "I_D Kekunci Capaian S3:"
+
+#~ msgid "_Container:"
+#~ msgstr "_Bekas:"

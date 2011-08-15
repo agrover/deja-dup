@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2010-07-13 02:58+0000\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:31+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-08-02 04:37+0000\n"
-"X-Generator: Launchpad (build 13552)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:37+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -71,6 +71,7 @@ msgstr ""
 "เลือกโฟลเดอร์เพื่อจัดเก็บไฟล์ โฟลเดอร์นี้จะถูกสร้างขึ้นในถังที่ถูกเลือก"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "แหล่งสำรองข้อมูล"
 
@@ -330,20 +331,20 @@ msgstr ""
 msgid "Scanning…"
 msgstr "กำลังสแกน..."
 
-#: ../nautilus/NautilusExtension.c:165
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:166
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:208
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "ย้อนกลับไปรุ่นก่อนหน้า..."
 
-#: ../nautilus/NautilusExtension.c:212
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "กู้คืนไฟล์จากข้อมูลสำรอง"
@@ -382,7 +383,7 @@ msgstr "กำลังรอ ‘%s’ เพื่อจะเชื่อม�
 msgid "You must specify a Rackspace container in your preferences."
 msgstr ""
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr ""
 
@@ -419,7 +420,7 @@ msgstr ""
 msgid "Enter Rackspace Cloud Files API key"
 msgstr ""
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -454,7 +455,7 @@ msgstr "_จำกุญแจการเข้าถึงความลั�
 msgid "Enter Amazon S3 access key"
 msgstr "ป้อนกุญแจการเข้าถึง Amazon S3"
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr ""
 
@@ -471,6 +472,20 @@ msgstr ""
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr ""
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
+msgstr ""
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr ""
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "ถังขยะ"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -539,7 +554,7 @@ msgid "Cleaning up…"
 msgstr "กำลังล้างข้อมูล..."
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
-#: ../deja-dup/AssistantOperation.vala:514
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "ล้มเหลวกับข้อผิดพลาดที่ไม่รู้จัก"
 
@@ -703,51 +718,51 @@ msgstr "การสแกน:"
 msgid "_Details"
 msgstr "_รายละเอียด"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Password-protect your backup"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr "_รหัสผ่านการเข้ารหัส"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr "แส_ดงรหัสผ่าน"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "_จำรหัสผ่าน"
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr ""
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "ภาพรวม"
 
-#: ../deja-dup/AssistantOperation.vala:724
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:726
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:769
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr ""
 
@@ -759,7 +774,7 @@ msgstr "กู้คืน"
 msgid "_Restore"
 msgstr "กู้_คืน"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "_แหล่งเก็บสำรองข้อมูล"
 
@@ -955,11 +970,10 @@ msgstr ""
 msgid "You must specify a mode"
 msgstr ""
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "_ชื่อผู้ใช้"
 
@@ -975,19 +989,20 @@ msgstr "แ_สดงรหัสผ่าน"
 msgid "Location not available"
 msgstr "แหล่งข้อมูลไม่สามารถใช้งานได้"
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
-msgstr "แหล่งสำรองข้อมูลนี้ต้องการยืนยันตัวตน"
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
+msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr "เชื่อมต่อแบบบุคคลทั่วไป"
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr "เชื่อมต่อ_ด้วยผู้ใช้"
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr "โ_ดเมน"
 
@@ -1061,68 +1076,68 @@ msgstr ""
 msgid "Just show my backup _settings"
 msgstr ""
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr ""
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr ""
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr ""
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:251
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr "กู้_คืน..."
 
-#: ../preferences/Preferences.vala:257
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr ""
 
-#: ../preferences/Preferences.vala:279
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr ""
 
-#: ../preferences/Preferences.vala:308
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr "แหล่งเก็บข้อมูล"
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr ""
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr ""
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr ""
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr "จะ_สำรองเมื่อใด"
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr "เ_ก็บข้อมูลสำรองไว้"
 
-#: ../preferences/Preferences.vala:324
-msgid "Storage"
-msgstr "แหล่งเก็บข้อมูล"
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr ""
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr ""
-
-#: ../preferences/Preferences.vala:382
-msgid "How _often to back up"
-msgstr "จะ_สำรองเมื่อใด"
-
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "กำหนดการณ์"
 
@@ -1199,14 +1214,6 @@ msgstr "ใช่"
 msgid "No"
 msgstr "ไม่"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
-msgid "Home"
-msgstr ""
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
-msgid "Trash"
-msgstr "ถังขยะ"
-
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
 msgstr "ไม่รู้จัก"
@@ -1262,48 +1269,48 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:95
+#: ../widgets/ConfigList.vala:189
 msgid "_Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:96
+#: ../widgets/ConfigList.vala:190
 msgid "Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:189
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "เลือกโฟลเดอร์"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr ""
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr ""
 
@@ -1320,21 +1327,17 @@ msgstr ""
 msgid "Use secure connection (_HTTPS)"
 msgstr ""
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr ""
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "โ_ฟลเดอร์"
-
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -1344,7 +1347,7 @@ msgstr ""
 msgid "Choose Folder"
 msgstr ""
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr ""
 
@@ -1352,12 +1355,8 @@ msgstr ""
 msgid "S3 Access Key I_D"
 msgstr "I_D กุญแจเข้าถึง S3"
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
-msgstr ""
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
 msgstr ""
 
 #: ../widgets/ConfigPeriod.vala:36
@@ -1402,26 +1401,29 @@ msgstr "ไม่สามารถแสดงผล %s"
 #~ msgid "_Encrypt backup files"
 #~ msgstr "เ_ข้ารหัสแฟ้มข้อมูลสำรอง"
 
-#~ msgid "I_nclude files in folders"
-#~ msgstr "_สำรองแฟ้มในโฟลเดอร์"
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "_สำรองแฟ้มในโฟลเดอร์:"
 
-#~ msgid "E_xcept files in folders"
-#~ msgstr "_ยกเว้นแฟ้มในโฟลเดอร์"
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "_ยกเว้นแฟ้มในโฟลเดอร์:"
 
 #~ msgid "Preferences"
 #~ msgstr "ปรับแต่ง"
 
-#~ msgid "Encrypted"
-#~ msgstr "การเข้ารหัส"
+#~ msgid "Encrypted:"
+#~ msgstr "การเข้ารหัส:"
 
-#~ msgid "Include from"
-#~ msgstr "สำรองข้อมูลจาก"
+#~ msgid "Include from:"
+#~ msgstr "สำรองข้อมูลจาก:"
 
-#~ msgid "Except for"
-#~ msgstr "ยกเว้นการสำรอง"
+#~ msgid "Except for:"
+#~ msgstr "ยกเว้นการสำรอง:"
 
 #~ msgid "_Automatically back up on a regular schedule"
 #~ msgstr "สำรองข้อมูลตาม_กำหนดการณ์โดยอัตโนมัติ"
+
+#~ msgid "How _often to back up:"
+#~ msgstr "จะ_สำรองเมื่อใด:"
 
 #~ msgid "Backup Finished"
 #~ msgstr "สำรองข้อมูลเสร็จสิ้น"
@@ -1429,11 +1431,23 @@ msgstr "ไม่สามารถแสดงผล %s"
 #~ msgid "Your files were successfully backed up."
 #~ msgstr "แฟ้มของคุณสำรองสำเร็จแล้ว"
 
+#~ msgid "E_ncryption password:"
+#~ msgstr "_รหัสผ่านการเข้ารหัส:"
+
 #~ msgid "Password needed"
 #~ msgstr "ต้องการรหัสผ่าน"
 
 #~ msgid "Backup files are _encrypted"
 #~ msgstr "แฟ้มข้อมูลสำรองเ_ข้ารหัสแล้ว"
+
+#~ msgid "_Date:"
+#~ msgstr "_วันที่:"
+
+#~ msgid "Restore _folder:"
+#~ msgstr "กู้คืนโ_ฟลเดอร์:"
+
+#~ msgid "Restore folder:"
+#~ msgstr "กู้คืนโฟลเดอร์:"
 
 #~ msgctxt "back up is verb"
 #~ msgid "_Back Up…"
@@ -1464,6 +1478,21 @@ msgstr "ไม่สามารถแสดงผล %s"
 #~ msgid "_Report a Problem…"
 #~ msgstr "_รายงานปัญหา..."
 
+#~ msgid "_Username:"
+#~ msgstr "_ชื่อผู้ใช้:"
+
+#~ msgid "_Password:"
+#~ msgstr "_รหัสผ่าน:"
+
+#~ msgid "Connect as u_ser:"
+#~ msgstr "เชื่อมต่อ_ด้วยผู้ใช้:"
+
+#~ msgid "_Domain:"
+#~ msgstr "โ_ดเมน:"
+
+#~ msgid "_Access key ID:"
+#~ msgstr "ID กุ_ญแจการเข้าใช้:"
+
 #, c-format
 #~ msgid "Could not restore %s: %s"
 #~ msgstr "ไม่สามารถกู้คืน %s: %s"
@@ -1474,8 +1503,18 @@ msgstr "ไม่สามารถแสดงผล %s"
 #~ msgid "Déjà Dup Preferences"
 #~ msgstr "ปรับแต่งค่า Déjà Dup"
 
+#~ msgid "S3 Access Key I_D:"
+#~ msgstr "I_D กุญแจเข้าถึง S3:"
+
+#~ msgid "_Folder:"
+#~ msgstr "โ_ฟลเดอร์:"
+
 #~ msgid "Files"
 #~ msgstr "แฟ้ม"
+
+#, c-format
+#~ msgid "_Keep backups:"
+#~ msgstr "เ_ก็บข้อมูลสำรองไว้:"
 
 #~ msgid "Connect to _Server…"
 #~ msgstr "เ_ชื่อมต่อไปยังเซิร์ฟเวอร์..."
@@ -1530,14 +1569,30 @@ msgstr "ไม่สามารถแสดงผล %s"
 #~ msgstr ""
 #~ "เข้ารหัสไฟล์สำรองข้อมูลในแหล่งเก็บข้อมูล แนะนำให้คงค่านี้ไว้นี้เป็น 'จริง'"
 
+#~ msgid "_Backup location:"
+#~ msgstr "_แหล่งเก็บสำรองข้อมูล:"
+
+#~ msgid "Backup location:"
+#~ msgstr "แหล่งสำรองข้อมูล:"
+
 #~ msgid "Déjà Dup backup passphrase"
 #~ msgstr "วลีรหัสผ่านใช้สำรองข้อมูลของ Déjà Dup"
+
+#~ msgid "Restore date:"
+#~ msgstr "กู้คืนจากวันที่:"
 
 #~ msgid "Checking for Backups"
 #~ msgstr "ตรวจสอบการสำรองข้อมูล"
 
+#~ msgid "File to restore:"
+#~ msgid_plural "Files to restore:"
+#~ msgstr[0] "ไฟลืที่ต้องการกู้คืน:"
+
 #~ msgid "No filenames provided"
 #~ msgstr "ไม่ได้กำหนดชื่อไฟล์"
+
+#~ msgid "This backup location requires authentication."
+#~ msgstr "แหล่งสำรองข้อมูลนี้ต้องการยืนยันตัวตน"
 
 #, c-format
 #~ msgid "Show _Progress (%.1f%%)"
@@ -1548,6 +1603,9 @@ msgstr "ไม่สามารถแสดงผล %s"
 
 #~ msgid "GVFS FUSE is not installed"
 #~ msgstr "GVFS FUSE ไม่ถูกติดตั้ง"
+
+#~ msgid "_Secret access key:"
+#~ msgstr "_กุญแจการเข้าถึงความลับ:"
 
 #~ msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 #~ msgstr "ไม่มี duplicity Déjà Dup ทำงานไม่ได้ โปรแกรมจะจบการทำงานเดี๋ยวนี้"
@@ -1566,13 +1624,6 @@ msgstr "ไม่สามารถแสดงผล %s"
 #~ msgstr ""
 #~ "ไฟล์ทั้งหมดไม่สามารถกู้คืน ไฟล์ต่างๆ ที่ไม่สามารถกู้คืนอาจยังอยู่ใน %s"
 
-#~ msgid ""
-#~ "Older backups will be kept for at least six months or until the backup "
-#~ "location is low on space."
-#~ msgstr ""
-#~ "สำรองข้อมูลเก่าจะถูกเก็บไว้อย่างน้อย 6 "
-#~ "เดือนหรือจนกว่าแหล่งสำรองข้อมูลมีพื้นที่เหลือน้อย"
-
 #, c-format
 #~ msgid ""
 #~ "This program is free software; you can redistribute it and/or modify it "
@@ -1602,61 +1653,9 @@ msgstr "ไม่สามารถแสดงผล %s"
 #~ msgstr ""
 #~ "You should have received a copy of the GNU General Public License along with "
 #~ "this program.  If not, see http://www.gnu.org/licenses/."
-
-#~ msgid ""
-#~ "Older Older backups will be kept for at least a week or until the backup "
-#~ "location is low on space."
-#~ msgstr ""
-#~ "ข้อมูลสำรองเก่าๆ จะถูกเก็บไว้อย่างน้อย 1 "
-#~ "สัปดาห์หรือจนกว่าแหล่งสำรองข้อมูลมีพื้นที่เหลือน้อย"
-
-#~ msgid ""
-#~ "Older backups will be kept for at least a month or until the backup location "
-#~ "is low on space."
-#~ msgstr ""
-#~ "ข้อมูลสำรองเก่าจะถูกเก็บไว้อย่างน้อย 1 "
-#~ "เดือนหรือจนกว่าแหล่งสำรองข้อมูลมีพื้นที่เหลือน้อย"
-
-#~ msgid ""
-#~ "Older backups will be kept for at least two months or until the backup "
-#~ "location is low on space."
-#~ msgstr ""
-#~ "ข้อมูลสำรองเก่าจะถูก เก็บไว้อย่างน้อย 2 "
-#~ "เดือนหรือจนกว่าแหล่งสำรองข้อมูลมีพื้นที่เหลือน้อย"
-
-#~ msgid ""
-#~ "Older backups will be kept for at least three months or until the backup "
-#~ "location is low on space."
-#~ msgstr ""
-#~ "ข้อมูลสำรองเก่าจะถูกเก็บไว้อย่างน้อย 3 "
-#~ "เดือนหรือจนจนกว่าแหล่งสำรองข้อมูลมีพื้นที่เหลือน้อย"
-
-#~ msgid ""
-#~ "Older backups will be kept for at least a year or until the backup location "
-#~ "is low on space."
-#~ msgstr ""
-#~ "ข้อมูลสำรองเก่าจะถูกเก็บไว้อย่างน้อย 1 "
-#~ "ปีหรือจนกว่าแหล่งสำรองข้อมูลมีพื้นที่เหลือน้อย"
-
-#~ msgid "Older backups will be kept until the backup location is low on space."
-#~ msgstr ""
-#~ "ข้อมูลสำรองเก่าจะถูกเก็บไว้จนจนกว่าแหล่งสำรองข้อมูลมีพื้นที่เหลือน้อย"
-
-#, c-format
-#~ msgid ""
-#~ "Older backups will be kept at least %d day or until the backup location is "
-#~ "low on space."
-#~ msgid_plural ""
-#~ "Older backups will be kept at least %d days or until the backup location is "
-#~ "low on space."
-#~ msgstr[0] ""
-#~ "ข้อมูลสำรองเก่าจะถูก เก็บไว้อย่างน้อย %d "
-#~ "วันหรือจนกว่าแหล่งสำรองข้อมูลมีพื้นที่เหลือน้อย"
 
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
-#~ "  Anuchit Chalothorn https://launchpad.net/~anuchit-redlinesoft\n"
 #~ "  AnuchitChalothorn https://launchpad.net/~anuchit\n"
-#~ "  Michael Terry https://launchpad.net/~mterry\n"
 #~ "  SiraNokyoongtong https://launchpad.net/~gumara"

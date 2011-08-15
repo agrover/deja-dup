@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2011-08-01 18:14+0000\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:27+0000\n"
 "Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-08-02 04:37+0000\n"
-"X-Generator: Launchpad (build 13552)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:37+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -72,6 +72,7 @@ msgstr ""
 "bucket."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "Plats för säkerhetskopior"
 
@@ -333,21 +334,21 @@ msgstr "Mapp"
 msgid "Scanning…"
 msgstr "Söker av…"
 
-#: ../nautilus/NautilusExtension.c:165
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr "Återskapa saknade filer..."
 
-#: ../nautilus/NautilusExtension.c:166
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr "Återskapa borttagna filer från säkerhetskopia"
 
-#: ../nautilus/NautilusExtension.c:208
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Återgå till tidigare version..."
 msgstr[1] "Återgå till tidigare versioner..."
 
-#: ../nautilus/NautilusExtension.c:212
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Återskapa fil från säkerhetskopia"
@@ -389,7 +390,7 @@ msgstr "Väntar på att \"%s\" ska anslutas…"
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Du måste ange en Rackspace-container i dina inställningar."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
@@ -427,7 +428,7 @@ msgstr "_Kom ihåg åtkomstnyckel för API"
 msgid "Enter Rackspace Cloud Files API key"
 msgstr "Ange API-nyckel för Rackspace Cloud Files"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -462,7 +463,7 @@ msgstr "_Kom ihåg hemlig åtkomstnyckel"
 msgid "Enter Amazon S3 access key"
 msgstr "Ange åtkomstnyckel för Amazon S3"
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -479,6 +480,20 @@ msgstr "Logga in på Ubuntu One…"
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr "Anslut till Ubuntu One"
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
+msgstr ""
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr "Hem"
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "Papperskorg"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -554,7 +569,7 @@ msgid "Cleaning up…"
 msgstr "Rensar upp..."
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
-#: ../deja-dup/AssistantOperation.vala:514
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "Misslyckades med ett okänt fel."
 
@@ -719,11 +734,15 @@ msgstr "Söker av:"
 msgid "_Details"
 msgstr "_Detaljer"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr "_Tillåt återskapning utan ett lösenord"
+
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Password-protect your backup"
 msgstr "_Lösenordsskydda din säkerhetskopia"
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
@@ -732,40 +751,36 @@ msgstr ""
 "Du behöver ditt lösenord för att återskapa dina filer. Du bör skriva ner "
 "lösenordet och spara det."
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr "Kr_ypteringslösenord"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr "B_ekräfta lösenordet"
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr "_Visa lösenord"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "_Kom ihåg lösenord"
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr "_Tillåt återskapning utan ett lösenord"
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "Sammandrag"
 
-#: ../deja-dup/AssistantOperation.vala:724
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
 msgstr "Kräv lösenord?"
 
-#: ../deja-dup/AssistantOperation.vala:726
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr "Krypteringslösenord krävs"
 
-#: ../deja-dup/AssistantOperation.vala:769
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr "Lösenord för kryptering av säkerhetskopia"
 
@@ -777,7 +792,7 @@ msgstr "Återskapa"
 msgid "_Restore"
 msgstr "Åte_rskapa"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "_Plats för säkerhetskopia"
 
@@ -980,11 +995,10 @@ msgstr "Du måste ange en katalog, inte en fil"
 msgid "You must specify a mode"
 msgstr "Du måste ange ett läge"
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "_Användarnamn"
 
@@ -1000,19 +1014,20 @@ msgstr "V_isa lösenord"
 msgid "Location not available"
 msgstr "Platsen är inte tillgänglig"
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
-msgstr "Denna säkerhetskopieringsplats kräver autentisering."
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
+msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr "Anslut _anonymt"
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr "Anslut som an_vändare"
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr "_Domän"
 
@@ -1089,68 +1104,68 @@ msgstr "Jag vill å_terskapa filer från en tidigare säkerhetskopiering..."
 msgid "Just show my backup _settings"
 msgstr "Visa mig mina _inställningar"
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr "Kategorier"
 
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr "Automatiska _säkerhetskopior"
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr "Mappar att säkerhetskopiera"
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr "Mappar att ignorera"
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr "Senaste säkerhetskopian"
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr "Nästa automatiska säkerhetskopiering"
 
-#: ../preferences/Preferences.vala:251
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr "Åte_rskapa..."
 
-#: ../preferences/Preferences.vala:257
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr "Säkerhetskopiera _nu"
 
-#: ../preferences/Preferences.vala:279
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr "Översikt"
 
-#: ../preferences/Preferences.vala:308
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr "Lagring"
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr "Mappar att sä_kerhetskopiera"
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr "Mappar att _ignorera"
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr "Mappar"
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr "Hur _ofta säkerhetskopiering ska ske"
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr "_Behåll säkerhetskopior"
 
-#: ../preferences/Preferences.vala:324
-msgid "Storage"
-msgstr "Lagring"
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr "Mappar att sä_kerhetskopiera"
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr "Mappar att _ignorera"
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr "Mappar"
-
-#: ../preferences/Preferences.vala:382
-msgid "How _often to back up"
-msgstr "Hur _ofta säkerhetskopiering ska ske"
-
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "Schema"
 
@@ -1228,14 +1243,6 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nej"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
-msgid "Home"
-msgstr "Hem"
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
-msgid "Trash"
-msgstr "Papperskorg"
-
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
 msgstr "Okänt"
@@ -1309,48 +1316,48 @@ msgstr[1] ""
 "Äldre säkerhetskopior kommer att sparas minst %d dagar eller tills "
 "lagringsutrymmet börjar ta slut."
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
 msgstr "_Lägg till"
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
 msgstr "Lägg till"
 
-#: ../widgets/ConfigList.vala:95
+#: ../widgets/ConfigList.vala:189
 msgid "_Remove"
 msgstr "_Ta bort"
 
-#: ../widgets/ConfigList.vala:96
+#: ../widgets/ConfigList.vala:190
 msgid "Remove"
 msgstr "Ta bort"
 
-#: ../widgets/ConfigList.vala:189
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "Välj mappar"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
 msgstr "Windows-utdelning"
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr "Anpassad plats"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr "Lokal mapp"
 
@@ -1367,21 +1374,17 @@ msgstr "_Server"
 msgid "Use secure connection (_HTTPS)"
 msgstr "Använd säker anslutning (_HTTPS)"
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr "_Port"
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "_Mapp"
-
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr "_Logga in med ett användarnamn"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -1391,7 +1394,7 @@ msgstr "_Välj mapp..."
 msgid "Choose Folder"
 msgstr "Välj mapp"
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr "_Container"
 
@@ -1399,13 +1402,9 @@ msgstr "_Container"
 msgid "S3 Access Key I_D"
 msgstr "I_d för S3 Access Key"
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
 msgstr "_Domännamn"
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
-msgstr "Ytterligare information"
 
 #: ../widgets/ConfigPeriod.vala:36
 msgid "Daily"
@@ -1515,15 +1514,6 @@ msgstr "Kunde inte visa %s"
 #~ msgstr "Om Déjà Dup"
 
 #~ msgid ""
-#~ "You should have received a copy of the GNU General Public License along with "
-#~ "this program; if not, write to the Free Software Foundation, Inc., 59 Temple "
-#~ "Place - Suite 330, Boston, MA  02111-1307, USA."
-#~ msgstr ""
-#~ "Du bör ha fått en kopia av GNU General Public License tillsammans med detta "
-#~ "program; om inte, skriv till Free Software Foundation, Inc., 59 Temple Place "
-#~ "- Suite 330, Boston, MA  02111-1307, USA."
-
-#~ msgid ""
 #~ "This program is distributed in the hope that it will be useful, but WITHOUT "
 #~ "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
 #~ "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
@@ -1548,20 +1538,11 @@ msgstr "Kunde inte visa %s"
 #~ msgid "Home Folder"
 #~ msgstr "Hemmapp"
 
-#~ msgid "Select Folder"
-#~ msgstr "Välj mapp"
-
 #~ msgid "Encryption Password"
 #~ msgstr "Krypteringslösenord"
 
 #~ msgid "Déjà Dup Preferences"
 #~ msgstr "Inställningar för Déjà Dup"
-
-#~ msgid "Choose folder"
-#~ msgstr "Välj mapp"
-
-#~ msgid "Could not add the folder"
-#~ msgstr "Kunde inte lägga till mappen"
 
 #~ msgid "Biweekly"
 #~ msgstr "Varannan vecka"
@@ -1569,14 +1550,8 @@ msgstr "Kunde inte visa %s"
 #~ msgid "_Encrypt backup files"
 #~ msgstr "_Kryptera säkerhetskopior"
 
-#~ msgid "E_xclude"
-#~ msgstr "E_xkludera"
-
-#~ msgid "I_nclude"
-#~ msgstr "I_nkludera"
-
-#~ msgid "Local backup location"
-#~ msgstr "Lokal plats för säkerhetskopior"
+#~ msgid "_Folder:"
+#~ msgstr "_Mapp:"
 
 #~ msgid "The last time Déjà Dup was run, in ISO 8601 format."
 #~ msgstr "Senaste gången som Déjà Dup kördes, i ISO 8601-format."
@@ -1584,14 +1559,8 @@ msgstr "Kunde inte visa %s"
 #~ msgid "How often to periodically backup"
 #~ msgstr "Hur ofta periodiska säkerhetskopior ska tas"
 
-#~ msgid "Folder on your system in which to hold the backup files."
-#~ msgstr "Mapp på din dator i vilken säkerhetskopiorna ska ligga."
-
 #~ msgid "Please enter the server password for your backup."
 #~ msgstr "Ange serverlösenordet för din säkerhetskopia."
-
-#~ msgid "Choose backup destination"
-#~ msgstr "Välj mål för säkerhetskopia"
 
 #~ msgid "Backup error occurred"
 #~ msgstr "Fel vid säkerhetskopiering inträffade"
@@ -1623,9 +1592,12 @@ msgstr "Kunde inte visa %s"
 #~ "Déjà Dup kräver minst version %d.%d.%.2d av duplicity, men hittade endast "
 #~ "version %d.%d.%.2d"
 
+#~ msgid "_Backup location:"
+#~ msgstr "_Plats för säkerhetskopia:"
+
 #, c-format
-#~ msgid "How _often to backup"
-#~ msgstr "Hur _ofta säkerhetskopior ska tas"
+#~ msgid "How _often to backup:"
+#~ msgstr "Hur _ofta säkerhetskopior ska tas:"
 
 #~ msgid "_Automatically backup on a regular schedule"
 #~ msgstr "Säkerhetskopiera _automatiskt vid fasta tidspunkter"
@@ -1683,66 +1655,26 @@ msgstr "Kunde inte visa %s"
 #~ "användarens specialkataloger. Relativa poster är relativa till användarens "
 #~ "hemkatalog. Denna lista åsidosätter inkluderingslistan."
 
+#~ msgid "Backup location:"
+#~ msgstr "Plats för säkerhetskopior:"
+
 #~ msgid "_Translate This Application..."
 #~ msgstr "_Översätt det här programmet..."
-
-#~ msgid "No username specified"
-#~ msgstr "Inget användarnamn angivet"
 
 #~ msgid "Restoring"
 #~ msgstr "Återställer"
 
-#, c-format
-#~ msgid "%s on ssh://%s@%s:%d"
-#~ msgstr "%s på ssh://%s@%s:%d"
+#~ msgid "_Username:"
+#~ msgstr "_Användarnamn:"
 
-#~ msgid "No server specified"
-#~ msgstr "Ingen server angiven"
+#~ msgid "_Server:"
+#~ msgstr "_Server:"
 
-#, c-format
-#~ msgid "%s is already in the list."
-#~ msgstr "%s finns redan i listan."
-
-#~ msgid "The user used for SSH connections."
-#~ msgstr "Användarnamnet som används för SSH-anslutningar."
-
-#~ msgid "The port used for SSH connections."
-#~ msgstr "Portnumret som används för SSH-anslutningar."
-
-#~ msgid "The directory used for SSH connections."
-#~ msgstr "Katalog som använd för SSH-anslutningar."
-
-#~ msgid "The server used for SSH connections."
-#~ msgstr "Servern som används för SSH-anslutningar."
-
-#~ msgid ""
-#~ "The protocol used for the backup location. Valid values are 's3', 'file', or "
-#~ "'ssh'."
-#~ msgstr ""
-#~ "Protokollet som används för säkerhetskopians plats. Giltiga värden är "
-#~ "\"s3\", \"file\" eller \"ssh\"."
-
-#~ msgid "SSH port"
-#~ msgstr "SSH-port"
-
-#~ msgid "SSH directory"
-#~ msgstr "SSH-katalog"
-
-#~ msgid "SSH username"
-#~ msgstr "Användarnamn för SSH"
-
-#~ msgid "SSH server"
-#~ msgstr "SSH-server"
+#~ msgid "_Port:"
+#~ msgstr "_Port:"
 
 #~ msgid "Get Help _Online..."
 #~ msgstr "Få hjälp på _nätet..."
-
-#~ msgid "SSH Password"
-#~ msgstr "SSH-lösenord"
-
-#, c-format
-#~ msgid "Enter your SSH username and password for server %s."
-#~ msgstr "Ange ditt SSH-användarnamn och lösenord för servern %s."
 
 #, c-format
 #~ msgid ""
@@ -1767,11 +1699,14 @@ msgstr "Kunde inte visa %s"
 #~ msgid "Restoring..."
 #~ msgstr "Återställer..."
 
-#~ msgid "Contents"
-#~ msgstr "Innehåll"
-
 #~ msgid "_Report a Problem..."
 #~ msgstr "_Rapportera ett fel..."
+
+#~ msgid "_Date:"
+#~ msgstr "_Datum:"
+
+#~ msgid "Restore date:"
+#~ msgstr "Datum för återskapande:"
 
 #~ msgid "Checking for Backups"
 #~ msgstr "Letar efter säkerhetskopior"
@@ -1781,6 +1716,12 @@ msgstr "Kunde inte visa %s"
 
 #~ msgid "Checking for backups..."
 #~ msgstr "Letar efter säkerhetskopior..."
+
+#~ msgid "Restore folder:"
+#~ msgstr "Återskapningsmapp:"
+
+#~ msgid "Restore _folder:"
+#~ msgstr "Återskapnings_mapp:"
 
 #, c-format
 #~ msgid ""
@@ -1793,6 +1734,11 @@ msgstr "Kunde inte visa %s"
 #, c-format
 #~ msgid "Could not restore %s: %s"
 #~ msgstr "Kunde inte återskapa %s: %s"
+
+#~ msgid "File to restore:"
+#~ msgid_plural "Files to restore:"
+#~ msgstr[0] "Fil att återskapa:"
+#~ msgstr[1] "Filer att återskapa:"
 
 #~ msgid "Revert to Previous Version..."
 #~ msgid_plural "Revert to Previous Versions..."
@@ -1810,54 +1756,17 @@ msgstr "Kunde inte visa %s"
 #~ msgid "Folder %s on Amazon S3"
 #~ msgstr "Mappen %s på Amazon S3"
 
-#~ msgid "Amazon S3 Key ID"
-#~ msgstr "Nyckel-id för Amazon S3"
-
-#~ msgid "Your Amazon S3 Key identifier. This acts as your S3 username."
-#~ msgstr ""
-#~ "Din Amazon S3-nyckelidentifierare. Detta fungerar som ditt S3-användarnamn."
-
-#~ msgid "Backing up files..."
-#~ msgstr "Säkerhetskopierar filer..."
-
-#~ msgid "Could not connect to backup location"
-#~ msgstr "Kunde inte ansluta till plats för säkerhetskopia"
-
-#~ msgid "Error occurred"
-#~ msgstr "Fel har uppstått"
-
-#~ msgid "Backup finished"
-#~ msgstr "Säkerhetskopieringen är färdig"
-
-#~ msgid "S3 buc_ket"
-#~ msgstr "S3 buc_ket"
-
-#~ msgid "S3 I_D"
-#~ msgstr "S3 I_D"
-
-#~ msgid "_Report a Problem"
-#~ msgstr "_Rapportera ett fel"
-
-#~ msgid "Bucket %s on Amazon S3"
-#~ msgstr "Bucket %s på Amazon S3"
-
-#~ msgid "Invalid ID"
-#~ msgstr "Ogiltigt id"
-
-#~ msgid "Invalid secret key"
-#~ msgstr "Ogiltig  hemlig nyckel"
-
-#~ msgid "_Directory"
-#~ msgstr "_Katalog"
+#~ msgid "S3 Access Key I_D:"
+#~ msgstr "I_d för S3 Access Key:"
 
 #~ msgid "Preferences"
 #~ msgstr "Inställningar"
 
-#~ msgid "Include from"
-#~ msgstr "Inkludera från"
+#~ msgid "Include from:"
+#~ msgstr "Inkludera från:"
 
-#~ msgid "Except for"
-#~ msgstr "Undantag för"
+#~ msgid "Except for:"
+#~ msgstr "Undantag för:"
 
 #~ msgid "Backup files are _encrypted"
 #~ msgstr "Säkerhetskopior är _krypterade"
@@ -1879,6 +1788,9 @@ msgstr "Kunde inte visa %s"
 #~ msgid "GVFS FUSE is not installed"
 #~ msgstr "GVFS FUSE är inte installerad"
 
+#~ msgid "Connect as u_ser:"
+#~ msgstr "Anslut som an_vändare:"
+
 #~ msgid ""
 #~ "You should have received a copy of the GNU General Public License along with "
 #~ "this program.  If not, see http://www.gnu.org/licenses/."
@@ -1895,12 +1807,18 @@ msgstr "Kunde inte visa %s"
 #~ msgid "Remember password until you _logout"
 #~ msgstr "Kom ihåg lösenordet tills du _loggar ut"
 
+#~ msgid "_Domain:"
+#~ msgstr "_Domän:"
+
 #~ msgid "Remember _forever"
 #~ msgstr "Kom ihåg för _alltid"
 
 #, c-format
 #~ msgid "No space left in %s"
 #~ msgstr "Inget ledigt utrymme kvar i %s"
+
+#~ msgid "_Password:"
+#~ msgstr "_Lösenord:"
 
 #, no-wrap
 #~ msgid "NAME"
@@ -2063,16 +1981,16 @@ msgstr "Kunde inte visa %s"
 #~ msgid "Schedules regular backups."
 #~ msgstr "Schemaläggning av vanliga säkerhetskopior."
 
-#~ msgid "<application>Déjà Dup</application> provides the following features"
+#~ msgid "<application>Déjà Dup</application> provides the following features:"
 #~ msgstr ""
-#~ "<application>Déjà Dup</application> tillhandahåller följande funktioner"
+#~ "<application>Déjà Dup</application> tillhandahåller följande funktioner:"
 
 #~ msgid ""
 #~ "To start <application>Déjà Dup</application> from a command line, type the "
-#~ "following command, then press <keycap>Return</keycap>"
+#~ "following command, then press <keycap>Return</keycap>:"
 #~ msgstr ""
 #~ "För att starta <application>Déjà Dup</application> från en kommandorad så "
-#~ "ange följande kommando och tryck sedan på <keycap>Return</keycap>"
+#~ "ange följande kommando och tryck sedan på <keycap>Return</keycap>:"
 
 #~ msgid "<command>deja-dup</command>"
 #~ msgstr "<command>deja-dup</command>"
@@ -2092,8 +2010,8 @@ msgstr "Kunde inte visa %s"
 #~ msgstr "<guimenu>Program</guimenu>-menyn"
 
 #~ msgid ""
-#~ "You can start <application>Déjà Dup</application> in the following ways"
-#~ msgstr "Du kan starta <application>Déjà Dup</application> på följande sätt"
+#~ "You can start <application>Déjà Dup</application> in the following ways:"
+#~ msgstr "Du kan starta <application>Déjà Dup</application> på följande sätt:"
 
 #~ msgid "Backing Up"
 #~ msgstr "Säkerhetskopiera"
@@ -2176,17 +2094,21 @@ msgstr "Kunde inte visa %s"
 #~ msgid "Could not open connection dialog"
 #~ msgstr "Kunde inte öppna anslutningsdialogen"
 
-#~ msgid "I_nclude files in folders"
-#~ msgstr "I_nkludera filer i mappar"
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "I_nkludera filer i mappar:"
 
-#~ msgid "E_xcept files in folders"
-#~ msgstr "Un_danta filer i mappar"
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "Un_danta filer i mappar:"
 
-#~ msgid "Encrypted"
-#~ msgstr "Krypterad"
+#~ msgid "Encrypted:"
+#~ msgstr "Krypterad:"
 
 #~ msgid "Scanning..."
 #~ msgstr "Söker av..."
+
+#, c-format
+#~ msgid "_Keep backups:"
+#~ msgstr "_Behåll säkerhetskopior:"
 
 #~ msgid "Backup Tool"
 #~ msgstr "Säkerhetskopiering"
@@ -2231,6 +2153,9 @@ msgstr "Kunde inte visa %s"
 #~ msgid "_Backup"
 #~ msgstr "Säker_hetskopiering"
 
+#~ msgid "E_ncryption password:"
+#~ msgstr "Kr_ypteringslösenord:"
+
 #~ msgctxt "back up is verb"
 #~ msgid "_Back Up…"
 #~ msgstr "Sä_kerhetskopiera..."
@@ -2241,18 +2166,8 @@ msgstr "Kunde inte visa %s"
 #~ msgid "Files"
 #~ msgstr "Filer"
 
-#~ msgid "Restore missing files…"
-#~ msgstr "Återskapa saknade filer..."
-
-#~ msgid "Sign into Ubuntu One"
-#~ msgstr "Logga in på Ubuntu One"
-
-#~ msgid ""
-#~ "Ubuntu One requires an Ubuntu Single Sign On (SSO) account. This process "
-#~ "will allow you to create a new account, if you do not yet have one."
-#~ msgstr ""
-#~ "Ubuntu One kräver ett Ubuntu Single Sign On-konto (SSO). Denna process låter "
-#~ "dig skapa ett nytt konto, om du inte redan har ett."
+#~ msgid "Folder:"
+#~ msgstr "Mapp:"
 
 #~ msgid "Password Needed"
 #~ msgstr "Lösenord krävs"
@@ -2269,8 +2184,26 @@ msgstr "Kunde inte visa %s"
 #~ msgid "FILES"
 #~ msgstr "FILER"
 
+#~ msgid "This backup location requires authentication."
+#~ msgstr "Denna säkerhetskopieringsplats kräver autentisering."
+
+#~ msgid "_Log in with a username"
+#~ msgstr "_Logga in med ett användarnamn"
+
 #~ msgid "_Browse…"
 #~ msgstr "_Bläddra..."
+
+#~ msgid "_Container:"
+#~ msgstr "_Container:"
+
+#~ msgid "_URI:"
+#~ msgstr "_URI:"
+
+#~ msgid "Optional information:"
+#~ msgstr "Ytterligare information:"
+
+#~ msgid "_Domain Name:"
+#~ msgstr "_Domännamn:"
 
 #~ msgid "_Automatically back up on a regular schedule"
 #~ msgstr "Säkerhetskopiera au_tomatiskt med jämna intervall"
@@ -2286,21 +2219,40 @@ msgstr "Kunde inte visa %s"
 #~ "och\n"
 #~ "med jämna intervall) och använder duplicity som bakgrundsprogram."
 
-#~ msgid "Include files from"
-#~ msgstr "Inkludera filer från"
+#~ msgid "How _often to back up:"
+#~ msgstr "Hur _ofta säkerhetskopiering ska ske:"
 
-#~ msgid "Settings"
-#~ msgstr "Inställningar"
+#~ msgid "_Secret access key:"
+#~ msgstr "_Hemlig åtkomstnyckel:"
 
-#~ msgid "Where"
-#~ msgstr "Var"
+#~ msgid "Next automatic backup:"
+#~ msgstr "Nästa automatiska säkerhetskopiering:"
+
+#~ msgid "Include files from:"
+#~ msgstr "Inkludera filer från:"
+
+#~ msgid "_API access key:"
+#~ msgstr "Åtkomstnyckel för _API:"
+
+#~ msgid "Confir_m password:"
+#~ msgstr "B_ekräfta lösenordet:"
+
+#~ msgid "Where:"
+#~ msgstr "Var:"
+
+#~ msgid "Automatic _backups:"
+#~ msgstr "Automatiska _säkerhetskopior:"
+
+#~ msgid "Most recent backup:"
+#~ msgstr "Senaste säkerhetskopian:"
+
+#~ msgid "_Access key ID:"
+#~ msgstr "ID för _åtkomstnyckel:"
 
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
 #~ "  Arve Eriksson https://launchpad.net/~031299870-telia\n"
-#~ "  Christian Widell https://launchpad.net/~christian.w\n"
-#~ "  Daniel Nylander https://launchpad.net/~yeager\n"
 #~ "  Erik Simmesgård https://launchpad.net/~ersi\n"
 #~ "  Joel Rosenqvist https://launchpad.net/~josjuice\n"
 #~ "  Johan Malm https://launchpad.net/~johan-badanka\n"

@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2011-08-09 17:17+0000\n"
-"Last-Translator: Fran Diéguez <Unknown>\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:27+0000\n"
+"Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Proxecto Trasno <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-08-10 04:36+0000\n"
-"X-Generator: Launchpad (build 13636)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:36+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -72,6 +72,7 @@ msgstr ""
 "crear no contedor elixido."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "Localización da copia de seguranza"
 
@@ -364,21 +365,21 @@ msgstr "Cartafol"
 msgid "Scanning…"
 msgstr "Escaneando..."
 
-#: ../nautilus/NautilusExtension.c:172
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr "Retaurar ficheiros que faltan..."
 
-#: ../nautilus/NautilusExtension.c:173
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr "Restaurar ficheiros borrados do respaldo"
 
-#: ../nautilus/NautilusExtension.c:215
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Reverter á versión previa..."
 msgstr[1] "Reverter ás versións previas..."
 
-#: ../nautilus/NautilusExtension.c:219
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Restaurar ficheiro desde unha copia de seguranza"
@@ -419,7 +420,7 @@ msgstr "Agardando a que «%s» se conecte..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Debe especificar un contedor de Rackspace nas súas preferencias."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr "Ficheiros na nube de Rackspace"
 
@@ -458,7 +459,7 @@ msgstr "_Lembrar chave de acceso á API"
 msgid "Enter Rackspace Cloud Files API key"
 msgstr "Escriba a chave da API de Rackspace Cloud Files"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -493,7 +494,7 @@ msgstr "Lembra_r a chave de acceso secreta"
 msgid "Enter Amazon S3 access key"
 msgstr "Introduza a chave de acceso Amazon S3"
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -510,6 +511,20 @@ msgstr "Rexistrarse en Ubuntu One..."
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr "Conectarse a Ubuntu One"
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
+msgstr ""
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr "Cartafol persoal"
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "Lixo"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -585,6 +600,7 @@ msgid "Cleaning up…"
 msgstr "Limpando..."
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "Produciuse un erro descoñecido."
 
@@ -750,11 +766,15 @@ msgstr "Escaneando:"
 msgid "_Details"
 msgstr "_Detalles"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr "Permitir rest_aurar sen contrasinal"
+
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Password-protect your backup"
 msgstr "_Protexa o seu respaldo con un contrasinal"
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
@@ -763,40 +783,36 @@ msgstr ""
 "Precisará do seu contrasinal para restaurar os seus ficheiros. "
 "Recomendámoslle que a escriba e garde nun lugar seguro."
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr "Co_ntrasinal de cifrado"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr "confir_mar contrasinal"
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr "Mostrar o _contrasinal"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "_Lembrar o contrasinal"
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr "Permitir rest_aurar sen contrasinal"
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "Resumo"
 
-#: ../deja-dup/AssistantOperation.vala:719
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
 msgstr "Requirir contrasinal?"
 
-#: ../deja-dup/AssistantOperation.vala:721
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr "Precisase o contrasinal de cifrado"
 
-#: ../deja-dup/AssistantOperation.vala:764
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr "Contrasinal de cifrado da copia de seguranza"
 
@@ -808,7 +824,7 @@ msgstr "Restaurar"
 msgid "_Restore"
 msgstr "_Restaurar"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "_Localización da copia de seguranza"
 
@@ -1011,11 +1027,10 @@ msgstr "Debe fornecer un cartafol, non un ficheiro"
 msgid "You must specify a mode"
 msgstr "Debe especificar un modo"
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "Nome de _usuario"
 
@@ -1031,19 +1046,20 @@ msgstr "_Mostrar o contrasinal"
 msgid "Location not available"
 msgstr "Localización non dispoñíbel"
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
-msgstr "Esta localización da copia de seguranza require autenticación."
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
+msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr "Conectarse _anonimamente"
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr "Conectar como o u_suario"
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr "_Dominio"
 
@@ -1121,68 +1137,68 @@ msgstr "Quero _restaurar ficheiros dunha copia de respaldo anterior…"
 msgid "Just show my backup _settings"
 msgstr "Só mostrar as miñas _configuracións de copia de respaldo"
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr "Categorías"
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr "C_opias de respaldo automáticas"
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr "Cartafoles a respaldar"
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr "Cartafoles a ignorar"
 
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr "Copia de respaldo máis recente"
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr "Seguinte copia de respaldo automática"
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr "_Restaurar..."
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr "_Realizar unah copia de respaldo agora"
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr "Vista xeral"
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr "Almacéns"
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr "Cargafoles a _respaldar"
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr "Cartafoles a _ignorar"
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr "Cartafoles"
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr "Con que _frecuencia facer a copia de seguranza"
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr "_Conservar as copias de seguranza"
 
-#: ../preferences/Preferences.vala:339
-msgid "Storage"
-msgstr "Almacéns"
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr "Cargafoles a _respaldar"
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr "Cartafoles a _ignorar"
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr "Cartafoles"
-
-#: ../preferences/Preferences.vala:405
-msgid "How _often to back up"
-msgstr "Con que _frecuencia facer a copia de seguranza"
-
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "Planificación"
 
@@ -1221,26 +1237,26 @@ msgid_plural "At least %d days"
 msgstr[0] "Polo menos %d día"
 msgstr[1] "Polo menos %d días"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr "Hoxe"
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr "Mañá"
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr "Mañá"
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] "Dentro de %d día"
 msgstr[1] "Dentro de %d días"
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -1259,14 +1275,6 @@ msgstr "Si"
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
 msgstr "Non"
-
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
-msgid "Home"
-msgstr "Cartafol persoal"
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
-msgid "Trash"
-msgstr "Lixo"
 
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
@@ -1341,48 +1349,48 @@ msgstr[1] ""
 "As copias de seguranza antigas mantéñense &d días como mínimo ou até que "
 "fique pouco espazo nese lugar."
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
 msgstr "_Engadir"
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
 msgstr "Engadir"
 
-#: ../widgets/ConfigList.vala:95
+#: ../widgets/ConfigList.vala:189
 msgid "_Remove"
 msgstr "_Quitar"
 
-#: ../widgets/ConfigList.vala:96
+#: ../widgets/ConfigList.vala:190
 msgid "Remove"
 msgstr "Quitar"
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "Escoller os cartafoles"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
 msgstr "Compartición de Windows"
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr "Localización personalizada"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr "Cartafol local"
 
@@ -1399,21 +1407,17 @@ msgstr "_Servidor"
 msgid "Use secure connection (_HTTPS)"
 msgstr "Usar conexión segura (_HTTPS)"
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr "_Porto"
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "Carta_fol"
-
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr "I_niciar sesión cun nombre de usuario"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -1423,7 +1427,7 @@ msgstr "_Seleccionar cartafol…"
 msgid "Choose Folder"
 msgstr "Seleccionar cartafol"
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr "_Contedor"
 
@@ -1431,13 +1435,9 @@ msgstr "_Contedor"
 msgid "S3 Access Key I_D"
 msgstr "I_D da chave de acceso S3"
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
 msgstr "Nome de _dominio"
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
-msgstr "Información opcional"
 
 #: ../widgets/ConfigPeriod.vala:36
 msgid "Daily"
@@ -1491,11 +1491,25 @@ msgstr "Non foi posíbel mostrar %s"
 #~ msgid "Déjà Dup"
 #~ msgstr "Déjà Dup"
 
+#~ msgid "_Date:"
+#~ msgstr "_Data:"
+
+#~ msgid "File to restore:"
+#~ msgid_plural "Files to restore:"
+#~ msgstr[0] "Ficheiro a restaurar:"
+#~ msgstr[1] "Ficheiros a restaurar:"
+
 #~ msgid "_Help"
 #~ msgstr "_Axuda"
 
 #~ msgid "_Edit"
 #~ msgstr "_Editar"
+
+#~ msgid "Connect as u_ser:"
+#~ msgstr "Conectar como o u_suario:"
+
+#~ msgid "_Domain:"
+#~ msgstr "_Dominio:"
 
 #~ msgid "Back up your files"
 #~ msgstr "Facer copia de seguranza dos seus ficheiros"
@@ -1523,38 +1537,59 @@ msgstr "Non foi posíbel mostrar %s"
 #~ "Indica se se cifrará a copia de seguranza na localización de almacenaxe. É "
 #~ "recomendábel deixar isto como 'true'."
 
+#~ msgid "_Backup location:"
+#~ msgstr "_Localización da copia de seguranza:"
+
 #~ msgid "_Encrypt backup files"
 #~ msgstr "_Cifrar os ficheiros de copia de seguranza"
 
-#~ msgid "I_nclude files in folders"
-#~ msgstr "_Incluír os ficheiros nos cartafoles"
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "_Incluír os ficheiros nos cartafoles:"
 
-#~ msgid "E_xcept files in folders"
-#~ msgstr "E_xcluír os ficheiros nos cartafoles"
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "E_xcluír os ficheiros nos cartafoles:"
 
 #~ msgid "Preferences"
 #~ msgstr "Preferencias"
 
-#~ msgid "Encrypted"
-#~ msgstr "Cifrada"
+#~ msgid "Backup location:"
+#~ msgstr "Localización da copia de seguranza:"
 
-#~ msgid "Include from"
-#~ msgstr "Incluír"
+#~ msgid "Encrypted:"
+#~ msgstr "Cifrada:"
 
-#~ msgid "Except for"
-#~ msgstr "Excluír"
+#~ msgid "Include from:"
+#~ msgstr "Incluír:"
+
+#~ msgid "Except for:"
+#~ msgstr "Excluír:"
 
 #~ msgid "_Automatically back up on a regular schedule"
 #~ msgstr "_Facer copia de seguranza automaticamente de xeito regular"
 
+#~ msgid "How _often to back up:"
+#~ msgstr "Con que _frecuencia facer a copia de seguranza:"
+
 #~ msgid "Backup Finished"
 #~ msgstr "Rematou a copia de seguranza"
+
+#~ msgid "E_ncryption password:"
+#~ msgstr "Co_ntrasinal de cifrado:"
 
 #~ msgid "Déjà Dup backup passphrase"
 #~ msgstr "Frase de paso da copia de seguranza Déjà Dup"
 
 #~ msgid "Backup files are _encrypted"
 #~ msgstr "Os ficheiros da copia de seguranza están _cifrados"
+
+#~ msgid "Restore _folder:"
+#~ msgstr "Restaurar no carta_fol:"
+
+#~ msgid "Restore date:"
+#~ msgstr "Data de restauración:"
+
+#~ msgid "Restore folder:"
+#~ msgstr "Restaurar no cartafol:"
 
 #~ msgid "No filenames provided"
 #~ msgstr "Non se forneceron nomes de ficheiro"
@@ -1582,8 +1617,23 @@ msgstr "Non foi posíbel mostrar %s"
 #~ msgid "_Report a Problem…"
 #~ msgstr "Informa_r dun problema..."
 
+#~ msgid "_Username:"
+#~ msgstr "Nome de _usuario:"
+
+#~ msgid "_Password:"
+#~ msgstr "_Contrasinal:"
+
+#~ msgid "This backup location requires authentication."
+#~ msgstr "Esta localización da copia de seguranza require autenticación."
+
 #~ msgid "GVFS FUSE is not installed"
 #~ msgstr "O GVFS FUSE non está instalado"
+
+#~ msgid "_Access key ID:"
+#~ msgstr "ID de chave de _acceso:"
+
+#~ msgid "_Secret access key:"
+#~ msgstr "Chave de acceso _secreta:"
 
 #~ msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 #~ msgstr ""
@@ -1610,6 +1660,16 @@ msgstr "Non foi posíbel mostrar %s"
 
 #~ msgid "Déjà Dup Preferences"
 #~ msgstr "Preferencias do Déjà Dup"
+
+#~ msgid "S3 Access Key I_D:"
+#~ msgstr "I_D da chave de acceso S3:"
+
+#~ msgid "_Folder:"
+#~ msgstr "Carta_fol:"
+
+#, c-format
+#~ msgid "_Keep backups:"
+#~ msgstr "_Conservar as copias de seguranza:"
 
 #~ msgid "Connect to _Server…"
 #~ msgstr "Conectar ó servidor..."
@@ -1743,14 +1803,52 @@ msgstr "Non foi posíbel mostrar %s"
 #~ "especiais do usuario. As entradas relativas refírense ó cartafol do usuario. "
 #~ "Esta lista ten prioridade sobre a lista de inclusión."
 
-#~ msgid "Include files from"
-#~ msgstr "Incluír os ficheiros de"
+#~ msgid "Optional information:"
+#~ msgstr "Información opcional:"
+
+#~ msgid "Include files from:"
+#~ msgstr "Incluír os ficheiros de:"
+
+#~ msgid "Folder:"
+#~ msgstr "Cartafol:"
+
+#~ msgid "_API access key:"
+#~ msgstr "Chave de acceso á _API:"
+
+#~ msgid "Confir_m password:"
+#~ msgstr "confir_mar contrasinal:"
+
+#~ msgid "Next automatic backup:"
+#~ msgstr "Seguinte copia de respaldo automática:"
+
+#~ msgid "Automatic _backups:"
+#~ msgstr "C_opias de respaldo automáticas:"
+
+#~ msgid "Most recent backup:"
+#~ msgstr "Copia de respaldo máis recente:"
+
+#~ msgid "_Log in with a username"
+#~ msgstr "I_niciar sesión cun nombre de usuario"
+
+#~ msgid "_URI:"
+#~ msgstr "_URI:"
+
+#~ msgid "_Server:"
+#~ msgstr "_Servidor:"
+
+#~ msgid "_Port:"
+#~ msgstr "_Porto:"
+
+#~ msgid "_Domain Name:"
+#~ msgstr "Nome de _dominio:"
+
+#~ msgid "_Container:"
+#~ msgstr "_Contedor:"
 
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
 #~ "  Fran Diéguez https://launchpad.net/~frandieguez\n"
-#~ "  Michael Terry https://launchpad.net/~mterry\n"
 #~ "  Miguel Anxo Bouzada https://launchpad.net/~mbouzada\n"
 #~ "  Mundi Granja https://launchpad.net/~mundigranja\n"
 #~ "  NaNo https://launchpad.net/~danigz3\n"

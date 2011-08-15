@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2011-07-03 12:21+0000\n"
-"Last-Translator: Aurimas Fišeras <Unknown>\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:31+0000\n"
+"Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-08-02 04:36+0000\n"
-"X-Generator: Launchpad (build 13552)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:36+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -73,6 +73,7 @@ msgstr ""
 "pasirinktame kauše."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "Atsarginių kopijų vieta"
 
@@ -358,22 +359,22 @@ msgstr "Aplankas"
 msgid "Scanning…"
 msgstr "Peržiūrima..."
 
-#: ../nautilus/NautilusExtension.c:165
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr "Atkurti trūkstamus failus..."
 
-#: ../nautilus/NautilusExtension.c:166
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr "Atkurti pašalintus failus iš atsarginės kopijos"
 
-#: ../nautilus/NautilusExtension.c:208
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Atkurti ankstesnę versiją..."
 msgstr[1] "Atkurti ankstesnes versijas..."
 msgstr[2] "Atkurti ankstesnes versijas..."
 
-#: ../nautilus/NautilusExtension.c:212
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Atkurti failą iš atsarginės kopijos"
@@ -403,7 +404,7 @@ msgstr "Atsarginės kopijos vieta neprieinama"
 
 #: ../common/BackendFile.vala:363
 msgid "Waiting for a network connection…"
-msgstr ""
+msgstr "Laukiama tinklo ryšio..."
 
 #: ../common/BackendFile.vala:426
 #, c-format
@@ -414,7 +415,7 @@ msgstr "Laukiama kol „%s“ bus prijungtas..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Jūs turite nurodyti „Rackspace“ konteinerį nuostatose."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr "„Rackspace Cloud Files“"
 
@@ -453,7 +454,7 @@ msgstr "Įsi_minti API prieigos raktą"
 msgid "Enter Rackspace Cloud Files API key"
 msgstr "Įveskite „Rackspace Cloud Files“ API raktą"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -488,7 +489,7 @@ msgstr "Įsi_minti slaptą prieigos raktą"
 msgid "Enter Amazon S3 access key"
 msgstr "Įveskite Amazon S3 prieigos raktą"
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "„Ubuntu One“"
 
@@ -505,6 +506,20 @@ msgstr "Prisijungti prie „Ubuntu One“..."
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr "Prisijungti prie „Ubuntu One“"
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
+msgstr "Namai (%s)"
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr "Namai"
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "Šiukšlinė"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -577,7 +592,7 @@ msgid "Cleaning up…"
 msgstr "Tvarkomasi..."
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
-#: ../deja-dup/AssistantOperation.vala:514
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "Nepavyko su nežinoma klaida."
 
@@ -695,7 +710,7 @@ msgstr "Gaunamas failų sąrašas..."
 
 #: ../common/Operation.vala:283
 msgid "Another backup operation is already running"
-msgstr ""
+msgstr "Jau vykdoma kita atsarginės kopijos operacija"
 
 #: ../deja-dup/AssistantBackup.vala:31
 msgctxt "back up is verb"
@@ -741,51 +756,53 @@ msgstr "Peržiūrima:"
 msgid "_Details"
 msgstr "_Išsamiai"
 
-#: ../deja-dup/AssistantOperation.vala:297
-msgid "_Password-protect your backup"
-msgstr ""
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr "_Leisti atkurti be slaptažodžio"
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:304
+msgid "_Password-protect your backup"
+msgstr "Atsarginę kopiją apsaugoti sla_ptažodžiu"
+
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
+"Jums reikės slaptažodžio norint atkurti jūsų failus. Greičiausiai norėsite "
+"jį užsirašyti."
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr "Užšifravimo _slaptažodis"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr "Pa_tvirtinkite slaptažodį"
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr "_Rodyti slaptažodį"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "Įsi_minti slaptažodį"
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr ""
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "Santrauka"
 
-#: ../deja-dup/AssistantOperation.vala:724
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
-msgstr ""
+msgstr "Reikalauti slaptažodžio?"
 
-#: ../deja-dup/AssistantOperation.vala:726
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr "Reikalingas užšifravimo slaptažodis"
 
-#: ../deja-dup/AssistantOperation.vala:769
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr "Atsarginės kopijos užšifravimo slaptažodis"
 
@@ -797,13 +814,13 @@ msgstr "Atkurti"
 msgid "_Restore"
 msgstr "_Atkurti"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "_Atsarginės kopijos vieta"
 
 #: ../deja-dup/AssistantRestore.vala:124
 msgid "Restore from Where?"
-msgstr ""
+msgstr "Iš kur atkurti?"
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date"
@@ -908,29 +925,31 @@ msgstr "Kuriuos failus atkurti?"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:346
 msgid "Scanning for files from up to a day ago…"
-msgstr ""
+msgstr "Peržiūrimi iki dienos senumo failai..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:349
 msgid "Scanning for files from up to a week ago…"
-msgstr ""
+msgstr "Peržiūrimi iki saveitės senumo failai..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:352
 msgid "Scanning for files from up to a month ago…"
-msgstr ""
+msgstr "Peržiūrimi iki mėnesio senumo failai..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:356
 #, c-format
 msgid "Scanning for files from about a month ago…"
 msgid_plural "Scanning for files from about %d months ago…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Peržiūrimi maždaug mėnesio senumo failai..."
+msgstr[1] "Peržiūrimi maždaug %d mėnesių senumo failai..."
+msgstr[2] "Peržiūrimi maždaug %d mėnesių senumo failai..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:362
 #, c-format
 msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Peržiūrimi maždaug metų senumo failai..."
+msgstr[1] "Peržiūrimi maždaug %d metų senumo failai..."
+msgstr[2] "Peržiūrimi maždaug %d metų senumo failai..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:453
 msgid "Scanning finished"
@@ -1000,11 +1019,10 @@ msgstr "Jūs privalote pateikti katalogą, ne failą"
 msgid "You must specify a mode"
 msgstr "Jūs privalote nurodyti veikseną"
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "_Naudotojo vardas"
 
@@ -1020,19 +1038,20 @@ msgstr "_Rodyti slaptažodį"
 msgid "Location not available"
 msgstr "Vieta neprieinama"
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
-msgstr "Šiai atsarginių kopijų vietai reikalingas tapatumo nustatymas."
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
+msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr "Jungtis _anonimiškai"
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr "Prisijungti _naudotoju"
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr "_Sritis"
 
@@ -1109,68 +1128,68 @@ msgstr "Aš noriu _atkurti failus iš ankstesnės atsarginės kopijos..."
 msgid "Just show my backup _settings"
 msgstr "Tik parodyti mano atsarginių kopijų _nuostatas"
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr "Kategorijos"
 
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr "Automatinės _atsarginės kopijos"
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr ""
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr ""
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr "Naujausia atsarginė kopija"
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr "Kita automatinė atsarginė kopija"
 
-#: ../preferences/Preferences.vala:251
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr "_Atkurti..."
 
-#: ../preferences/Preferences.vala:257
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr "Daryti atsarginę kopiją _dabar"
 
-#: ../preferences/Preferences.vala:279
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr "Apžvalga"
 
-#: ../preferences/Preferences.vala:308
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr "Saugojimas"
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr ""
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr ""
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr "Aplankai"
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr "Kaip _dažnai daryti atsargines kopijas"
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr "_Laikyti atsargines kopijas"
 
-#: ../preferences/Preferences.vala:324
-msgid "Storage"
-msgstr "Saugojimas"
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr ""
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr ""
-
-#: ../preferences/Preferences.vala:382
-msgid "How _often to back up"
-msgstr "Kaip _dažnai daryti atsargines kopijas"
-
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "Tvarkaraštis"
 
@@ -1241,7 +1260,7 @@ msgstr[2] "Prieš %d dienų"
 #: ../widgets/ConfigLabelBackupDate.vala:92
 #: ../widgets/ConfigLabelBackupDate.vala:106
 msgid "None"
-msgstr ""
+msgstr "Nėra"
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1250,14 +1269,6 @@ msgstr "Taip"
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
 msgstr "Ne"
-
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
-msgid "Home"
-msgstr ""
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
-msgid "Trash"
-msgstr "Šiukšlinė"
 
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
@@ -1335,48 +1346,48 @@ msgstr[2] ""
 "Senos atsarginės kopijos bus saugomos mažiausiai %d dienų arba kol "
 "atsarginės kopijos vietoje liks mažai vietos."
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
-msgstr ""
+msgstr "P_ridėti"
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
-msgstr ""
-
-#: ../widgets/ConfigList.vala:95
-msgid "_Remove"
-msgstr ""
-
-#: ../widgets/ConfigList.vala:96
-msgid "Remove"
-msgstr ""
+msgstr "Pridėti"
 
 #: ../widgets/ConfigList.vala:189
+msgid "_Remove"
+msgstr "_Pašalinti"
+
+#: ../widgets/ConfigList.vala:190
+msgid "Remove"
+msgstr "Pašalinti"
+
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "Pasirinkite aplankus"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
-msgstr ""
+msgstr "Windows viešinys"
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr "Pasirinktinė vieta"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr "Vietinis aplankas"
 
@@ -1393,31 +1404,27 @@ msgstr "_Serveris"
 msgid "Use secure connection (_HTTPS)"
 msgstr "Naudoti saugų ryšį (_HTTPS)"
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr "_Prievadas"
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "_Aplankas"
 
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr "_Prisijungti naudojant naudotojo vardą"
-
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
-msgstr ""
+msgstr "_Pasirinkite aplanką..."
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
 msgstr "Pasirinkite aplanką"
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr "_Konteineris"
 
@@ -1425,12 +1432,8 @@ msgstr "_Konteineris"
 msgid "S3 Access Key I_D"
 msgstr "S3 prieigos _raktas"
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
-msgstr ""
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
 msgstr ""
 
 #: ../widgets/ConfigPeriod.vala:36
@@ -1443,7 +1446,7 @@ msgstr "Kas savaitę"
 
 #: ../widgets/ConfigPeriod.vala:38
 msgid "Every 2 weeks"
-msgstr ""
+msgstr "Kas dvi savaites"
 
 #: ../widgets/ConfigPeriod.vala:39
 msgid "Monthly"
@@ -1465,14 +1468,8 @@ msgstr "Nepavyko parodyti %s"
 #~ msgid "Déjà Dup Backup Utility"
 #~ msgstr "Atsarginių kopijų įrankis „Déjà Dup“"
 
-#~ msgid "Choose folder"
-#~ msgstr "Pasirink aplanką"
-
 #~ msgid "Home Folder"
 #~ msgstr "Asmeninis aplankas"
-
-#~ msgid "Select Folder"
-#~ msgstr "Pasirinkite aplanką"
 
 #~ msgid "Restoring files..."
 #~ msgstr "Atkuriami failai..."
@@ -1489,11 +1486,8 @@ msgstr "Nepavyko parodyti %s"
 #~ msgid "_Help"
 #~ msgstr "_Pagalba"
 
-#~ msgid "Error occurred"
-#~ msgstr "Įvyko klaida"
-
-#~ msgid "Restore finished"
-#~ msgstr "Atkūrimas baigtas"
+#~ msgid "Folder:"
+#~ msgstr "Aplankas:"
 
 #~ msgid "Déjà Dup"
 #~ msgstr "Déjà Dup"
@@ -1519,9 +1513,6 @@ msgstr "Nepavyko parodyti %s"
 #~ msgid "Déjà Dup Backup Preferences"
 #~ msgstr "Déjà Dup atsarginių kopijų nuostatos"
 
-#~ msgid "The type of backup location."
-#~ msgstr "Atsarginių kopijų vietos tipas."
-
 #~ msgid ""
 #~ "Whether to encrypt your backup files in the storage location. It’s strongly "
 #~ "recommended to leave this as ‘true’."
@@ -1535,17 +1526,23 @@ msgstr "Nepavyko parodyti %s"
 #~ msgid "_Encrypt backup files"
 #~ msgstr "Užši_fruoti atsarginės kopijos failus"
 
+#~ msgid "_Backup location:"
+#~ msgstr "_Atsarginės kopijos vieta:"
+
+#~ msgid "Backup location:"
+#~ msgstr "Atsarginių kopijų vieta:"
+
 #~ msgid "Preferences"
 #~ msgstr "Nuostatos"
 
-#~ msgid "I_nclude files in folders"
-#~ msgstr "Į_traukti failus aplankuose"
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "Į_traukti failus aplankuose:"
 
-#~ msgid "E_xcept files in folders"
-#~ msgstr "Iš_skyrus failus aplankuose"
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "Iš_skyrus failus aplankuose:"
 
-#~ msgid "Encrypted"
-#~ msgstr "Užšifruota"
+#~ msgid "Encrypted:"
+#~ msgstr "Užšifruota:"
 
 #~ msgid "_Automatically back up on a regular schedule"
 #~ msgstr "_Automatiškai daryti atsargines kopijas reguliariu grafiku"
@@ -1556,20 +1553,44 @@ msgstr "Nepavyko parodyti %s"
 #~ msgid "Your files were successfully backed up."
 #~ msgstr "Buvo sėkmingai padaryta jūsų failų atsarginė kopija."
 
-#~ msgid "Include from"
-#~ msgstr "Įtraukti iš"
+#~ msgid "Include from:"
+#~ msgstr "Įtraukti iš:"
 
-#~ msgid "Except for"
-#~ msgstr "Išskyrus"
+#~ msgid "Except for:"
+#~ msgstr "Išskyrus:"
+
+#~ msgid "How _often to back up:"
+#~ msgstr "Kaip _dažnai daryti atsargines kopijas:"
 
 #~ msgid "Déjà Dup backup passphrase"
 #~ msgstr "Déjà Dup atsarginės kopijos slaptažodis"
 
+#~ msgid "E_ncryption password:"
+#~ msgstr "Užšifravimo _slaptažodis:"
+
 #~ msgid "Password needed"
 #~ msgstr "Reikalingas slaptažodis"
 
+#~ msgid "Restore folder:"
+#~ msgstr "Atkūrimo aplankas:"
+
+#~ msgid "Restore _folder:"
+#~ msgstr "Atkūrimo _aplankas:"
+
+#~ msgid "_Date:"
+#~ msgstr "_Data:"
+
+#~ msgid "Restore date:"
+#~ msgstr "Atkūrimo data:"
+
 #~ msgid "Backup files are _encrypted"
 #~ msgstr "Atsarginės kopijos failai yra užši_fruoti"
+
+#~ msgid "File to restore:"
+#~ msgid_plural "Files to restore:"
+#~ msgstr[0] "Failas atkūrimui:"
+#~ msgstr[1] "Failai atkūrimui:"
+#~ msgstr[2] "Failai atkūrimui:"
 
 #~ msgctxt "backup is noun"
 #~ msgid "_Backup"
@@ -1585,6 +1606,12 @@ msgstr "Nepavyko parodyti %s"
 #~ msgid "_Back Up…"
 #~ msgstr "_Daryti atsarginę kopiją..."
 
+#~ msgid "This backup location requires authentication."
+#~ msgstr "Šiai atsarginių kopijų vietai reikalingas tapatumo nustatymas."
+
+#~ msgid "_Password:"
+#~ msgstr "_Slaptažodis:"
+
 #~ msgid "Get Help _Online…"
 #~ msgstr "Pagalba _internete..."
 
@@ -1597,6 +1624,12 @@ msgstr "Nepavyko parodyti %s"
 #~ msgid "_Contents"
 #~ msgstr "_Turinys"
 
+#~ msgid "_Username:"
+#~ msgstr "_Naudotojo vardas:"
+
+#~ msgid "Connect as u_ser:"
+#~ msgstr "Prisijungti _naudotoju:"
+
 #, c-format
 #~ msgid "Show _Progress (%.1f%%)"
 #~ msgstr "Rodyti _eigą (%.1f %%)"
@@ -1604,8 +1637,17 @@ msgstr "Nepavyko parodyti %s"
 #~ msgid "Show _Progress"
 #~ msgstr "Rodyti _eigą"
 
+#~ msgid "_Domain:"
+#~ msgstr "_Sritis:"
+
 #~ msgid "GVFS FUSE is not installed"
 #~ msgstr "GVFS FUSE neįdiegtas"
+
+#~ msgid "_Access key ID:"
+#~ msgstr "_Prieigos raktas:"
+
+#~ msgid "_Secret access key:"
+#~ msgstr "_Slaptas prieigos raktas:"
 
 #~ msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 #~ msgstr "Déjà Dup negali funkcionuoti be duplicity. Déjà Dup užsidarys."
@@ -1639,8 +1681,18 @@ msgstr "Nepavyko parodyti %s"
 #~ msgid "Connect to _Server…"
 #~ msgstr "Jungtis prie _serverio..."
 
+#, c-format
+#~ msgid "_Keep backups:"
+#~ msgstr "_Laikyti atsargines kopijas:"
+
+#~ msgid "S3 Access Key I_D:"
+#~ msgstr "S3 prieigos _raktas:"
+
 #~ msgid "Files"
 #~ msgstr "Failai"
+
+#~ msgid "_Folder:"
+#~ msgstr "_Aplankas:"
 
 #~ msgid "Could not open connection dialog"
 #~ msgstr "Nepavyko atverti prisijungimo dialogo lango"
@@ -1708,8 +1760,7 @@ msgstr "Nepavyko parodyti %s"
 #~ "Launchpad Contributions:\n"
 #~ "  Aurimas Fišeras https://launchpad.net/~aurimas-gmail\n"
 #~ "  Izumi https://launchpad.net/~reyfantasy\n"
-#~ "  Mantas Kriaučiūnas https://launchpad.net/~mantas\n"
-#~ "  Michael Terry https://launchpad.net/~mterry"
+#~ "  Mantas Kriaučiūnas https://launchpad.net/~mantas"
 
 #~ msgid "Password Needed"
 #~ msgstr "Reikalingas slaptažodis"
@@ -1717,17 +1768,47 @@ msgstr "Nepavyko parodyti %s"
 #~ msgid "FILES"
 #~ msgstr "FAILAI"
 
-#~ msgid "Another Déjà Dup Backup Tool operation is already running"
-#~ msgstr "Jau vykdoma kita Déjà Dup atsarginių kopijų įrankio operacija"
+#~ msgid "_API access key:"
+#~ msgstr "_API prieigos raktas:"
 
-#~ msgid "Settings"
-#~ msgstr "Nuostatos"
+#~ msgid "Confir_m password:"
+#~ msgstr "Pa_tvirtinkite slaptažodį:"
 
-#~ msgid "Where"
-#~ msgstr "Kur"
+#~ msgid "Next automatic backup:"
+#~ msgstr "Kita automatinė atsarginė kopija:"
 
-#~ msgid "Include files from"
-#~ msgstr "Įtraukti failus iš"
+#~ msgid "Automatic _backups:"
+#~ msgstr "Automatinės _atsarginės kopijos:"
+
+#~ msgid "Where:"
+#~ msgstr "Kur:"
+
+#~ msgid "Most recent backup:"
+#~ msgstr "Naujausia atsarginė kopija:"
+
+#~ msgid "Include files from:"
+#~ msgstr "Įtraukti failus iš:"
 
 #~ msgid "_Browse…"
 #~ msgstr "_Naršyti..."
+
+#~ msgid "_Log in with a username"
+#~ msgstr "_Prisijungti naudojant naudotojo vardą"
+
+#~ msgid "_URI:"
+#~ msgstr "_URI:"
+
+#~ msgid "_Server:"
+#~ msgstr "_Serveris:"
+
+#~ msgid "_Port:"
+#~ msgstr "_Prievadas:"
+
+#~ msgid "_Container:"
+#~ msgstr "_Konteineris:"
+
+#~ msgid "Optional information:"
+#~ msgstr "Papildoma informacija:"
+
+#~ msgid "_Domain Name:"
+#~ msgstr "_Srities pavadinimas:"

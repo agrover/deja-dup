@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2011-07-23 01:24+0000\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:32+0000\n"
 "Last-Translator: 英华 <wantinghard@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-08-02 04:37+0000\n"
-"X-Generator: Launchpad (build 13552)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:37+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:356
 #, c-format
@@ -82,6 +82,7 @@ msgid ""
 msgstr "用来存储文件的文件夹名称（可选）。将在所选存储段中创建 此文件夹。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "备份位置"
 
@@ -330,20 +331,20 @@ msgstr "文件夹"
 msgid "Scanning…"
 msgstr "正在扫描..."
 
-#: ../nautilus/NautilusExtension.c:165
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:166
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr "从备份中恢复删除的文件"
 
-#: ../nautilus/NautilusExtension.c:208
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "恢复到上一版本..."
 
-#: ../nautilus/NautilusExtension.c:212
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "从备份中恢复文件"
@@ -382,7 +383,7 @@ msgstr "正在等待“%s”建立连接..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr ""
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr ""
 
@@ -419,7 +420,7 @@ msgstr ""
 msgid "Enter Rackspace Cloud Files API key"
 msgstr ""
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -454,7 +455,7 @@ msgstr "_记住访问密钥"
 msgid "Enter Amazon S3 access key"
 msgstr "输入 Amazon S3 访问密钥"
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr ""
 
@@ -471,6 +472,20 @@ msgstr ""
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr ""
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
+msgstr ""
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr ""
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "垃圾桶"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -539,7 +554,7 @@ msgid "Cleaning up…"
 msgstr "正在清理..."
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
-#: ../deja-dup/AssistantOperation.vala:514
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "因出现未知错误而失败。"
 
@@ -698,51 +713,51 @@ msgstr "扫描："
 msgid "_Details"
 msgstr "_详细信息"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Password-protect your backup"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr "_加密密码"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr "_显示密码"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "_记住密码"
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr ""
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "概述"
 
-#: ../deja-dup/AssistantOperation.vala:724
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:726
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr ""
 
-#: ../deja-dup/AssistantOperation.vala:769
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr ""
 
@@ -754,7 +769,7 @@ msgstr "恢复"
 msgid "_Restore"
 msgstr "_恢复"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:292
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "_备份位置"
 
@@ -936,11 +951,10 @@ msgstr "您必须提供目录，而不是文件"
 msgid "You must specify a mode"
 msgstr ""
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "_用户名"
 
@@ -956,19 +970,20 @@ msgstr "_显示密码"
 msgid "Location not available"
 msgstr "位置不可用"
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
-msgstr "此备份位置需要验证。"
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
+msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr "匿名_连接"
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr "以用户身份_连接"
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr "_域"
 
@@ -1042,68 +1057,68 @@ msgstr ""
 msgid "Just show my backup _settings"
 msgstr ""
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr ""
 
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr ""
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr ""
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr ""
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:251
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr "_恢复..."
 
-#: ../preferences/Preferences.vala:257
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr ""
 
-#: ../preferences/Preferences.vala:279
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr ""
 
-#: ../preferences/Preferences.vala:308
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr "存储"
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr ""
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr ""
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr ""
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr "_备份频率"
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr "_保留备份"
 
-#: ../preferences/Preferences.vala:324
-msgid "Storage"
-msgstr "存储"
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr ""
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr ""
-
-#: ../preferences/Preferences.vala:382
-msgid "How _often to back up"
-msgstr "_备份频率"
-
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "计划"
 
@@ -1180,14 +1195,6 @@ msgstr "是"
 msgid "No"
 msgstr "否"
 
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:150
-msgid "Home"
-msgstr ""
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:152
-msgid "Trash"
-msgstr "垃圾桶"
-
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
 msgstr "未知"
@@ -1242,48 +1249,48 @@ msgid_plural ""
 "low on space."
 msgstr[0] "旧备份将至少保留 %d 天，或直至备份位置 空间不足。"
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:95
+#: ../widgets/ConfigList.vala:189
 msgid "_Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:96
+#: ../widgets/ConfigList.vala:190
 msgid "Remove"
 msgstr ""
 
-#: ../widgets/ConfigList.vala:189
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "选择文件夹"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr ""
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr ""
 
@@ -1300,21 +1307,17 @@ msgstr ""
 msgid "Use secure connection (_HTTPS)"
 msgstr ""
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr ""
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "_文件夹"
-
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr ""
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -1324,7 +1327,7 @@ msgstr ""
 msgid "Choose Folder"
 msgstr ""
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr ""
 
@@ -1332,12 +1335,8 @@ msgstr ""
 msgid "S3 Access Key I_D"
 msgstr "S3 访问密钥 I_D"
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
-msgstr ""
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
 msgstr ""
 
 #: ../widgets/ConfigPeriod.vala:36
@@ -1394,9 +1393,6 @@ msgstr "无法显示 %s"
 #~ msgid "Déjà Dup Preferences"
 #~ msgstr "Déjà Dup 首选项"
 
-#~ msgid "The type of backup location."
-#~ msgstr "备份位置的类型。"
-
 #~ msgid "Whether to encrypt your backup"
 #~ msgstr "是否对备份加密"
 
@@ -1405,35 +1401,50 @@ msgstr "无法显示 %s"
 #~ "recommended to leave this as ‘true’."
 #~ msgstr "是否在存储位置加密您的备份文件。强烈 建议将此项保留为 ‘true’。"
 
+#~ msgid "Folder:"
+#~ msgstr "文件夹："
+
+#~ msgid "_Backup location:"
+#~ msgstr "_备份位置："
+
 #~ msgid "_Encrypt backup files"
 #~ msgstr "_加密备份文件"
 
-#~ msgid "I_nclude files in folders"
-#~ msgstr "_包括以下文件夹中的文件"
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "_包括以下文件夹中的文件："
 
-#~ msgid "E_xcept files in folders"
-#~ msgstr "_不包括以下文件夹中的文件"
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "_不包括以下文件夹中的文件："
 
 #~ msgid "Preferences"
 #~ msgstr "首选项"
 
-#~ msgid "Encrypted"
-#~ msgstr "已加密"
+#~ msgid "Backup location:"
+#~ msgstr "备份位置："
 
-#~ msgid "Include from"
-#~ msgstr "包括来自"
+#~ msgid "Encrypted:"
+#~ msgstr "已加密："
 
-#~ msgid "Except for"
-#~ msgstr "不包括"
+#~ msgid "Include from:"
+#~ msgstr "包括来自："
+
+#~ msgid "Except for:"
+#~ msgstr "不包括："
 
 #~ msgid "_Automatically back up on a regular schedule"
 #~ msgstr "_按照固定时间表自动备份"
+
+#~ msgid "How _often to back up:"
+#~ msgstr "_备份频率："
 
 #~ msgid "Backup Finished"
 #~ msgstr "备份完成"
 
 #~ msgid "Your files were successfully backed up."
 #~ msgstr "您的文件已成功备份。"
+
+#~ msgid "E_ncryption password:"
+#~ msgstr "_加密密码："
 
 #~ msgid "Password Needed"
 #~ msgstr "需要密码"
@@ -1443,6 +1454,22 @@ msgstr "无法显示 %s"
 
 #~ msgid "Backup files are _encrypted"
 #~ msgstr "备份文件_已加密"
+
+#~ msgid "_Date:"
+#~ msgstr "_日期："
+
+#~ msgid "Restore _folder:"
+#~ msgstr "恢复_文件夹："
+
+#~ msgid "Restore date:"
+#~ msgstr "恢复日期："
+
+#~ msgid "Restore folder:"
+#~ msgstr "恢复文件夹："
+
+#~ msgid "File to restore:"
+#~ msgid_plural "Files to restore:"
+#~ msgstr[0] "要恢复的文件："
 
 #~ msgid "Scanning for files from yesterday…"
 #~ msgstr "正在扫描昨天的文件..."
@@ -1491,8 +1518,29 @@ msgstr "无法显示 %s"
 #~ msgid "_Report a Problem…"
 #~ msgstr "_报告问题..."
 
+#~ msgid "_Username:"
+#~ msgstr "_用户名："
+
+#~ msgid "_Password:"
+#~ msgstr "_密码："
+
+#~ msgid "This backup location requires authentication."
+#~ msgstr "此备份位置需要验证。"
+
+#~ msgid "Connect as u_ser:"
+#~ msgstr "以用户身份_连接："
+
+#~ msgid "_Domain:"
+#~ msgstr "_域："
+
 #~ msgid "GVFS FUSE is not installed"
 #~ msgstr "未安装 GVFS FUSE"
+
+#~ msgid "_Access key ID:"
+#~ msgstr "_访问密钥 ID："
+
+#~ msgid "_Secret access key:"
+#~ msgstr "_访问密钥："
 
 #~ msgid "Without duplicity, Déjà Dup cannot function.  It will close now."
 #~ msgstr "没有 duplicity，Déjà Dup 无法工作。现在它将关闭。"
@@ -1516,11 +1564,18 @@ msgstr "无法显示 %s"
 #~ msgid "Another Déjà Dup is already running"
 #~ msgstr "已有另一个 Déjà Dup 在运行"
 
-#~ msgid "Restore missing files…"
-#~ msgstr "正在恢复缺少的文件..."
+#~ msgid "S3 Access Key I_D:"
+#~ msgstr "S3 访问密钥 I_D："
+
+#~ msgid "_Folder:"
+#~ msgstr "_文件夹："
 
 #~ msgid "Files"
 #~ msgstr "文件"
+
+#, c-format
+#~ msgid "_Keep backups:"
+#~ msgstr "_保留备份："
 
 #~ msgid "Connect to _Server…"
 #~ msgstr "正在连接到_服务器..."
@@ -1609,8 +1664,8 @@ msgstr "无法显示 %s"
 #~ msgstr "正在检查备份"
 
 #, c-format
-#~ msgid "How _often to backup"
-#~ msgstr "备份周期(_o)"
+#~ msgid "How _often to backup:"
+#~ msgstr "备份周期(_o):"
 
 #~ msgid "_Automatically backup on a regular schedule"
 #~ msgstr "按固定日程安排自动备份(_A)"
@@ -1629,4 +1684,4 @@ msgstr "无法显示 %s"
 #~ "  Michael Terry https://launchpad.net/~mterry\n"
 #~ "  XsLiDian https://launchpad.net/~xslidian\n"
 #~ "  ooinzaghi https://launchpad.net/~chufanjun\n"
-#~ "  英华 https://launchpad.net/~wantinghard"
+#~ "  peaceman https://launchpad.net/~zengchang1985"

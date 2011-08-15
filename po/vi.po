@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-31 23:34-0400\n"
-"PO-Revision-Date: 2011-08-03 06:21+0000\n"
+"POT-Creation-Date: 2011-08-14 21:35-0400\n"
+"PO-Revision-Date: 2011-08-13 04:27+0000\n"
 "Last-Translator: Lê Trường An <truongan@linuxmail.org>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-08-04 04:35+0000\n"
-"X-Generator: Launchpad (build 13573)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:37+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -72,6 +72,7 @@ msgstr ""
 "đã chọn."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
 msgid "Backup location"
 msgstr "Vị trí lưu bản sao lưu"
 
@@ -349,20 +350,20 @@ msgstr "Thư mục"
 msgid "Scanning…"
 msgstr "Đang quét..."
 
-#: ../nautilus/NautilusExtension.c:172
+#: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
 msgstr "Phục hồi các tập tin bị mất..."
 
-#: ../nautilus/NautilusExtension.c:173
+#: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
 msgstr "Phục hồi các tập tin bị xóa từ sao lưu"
 
-#: ../nautilus/NautilusExtension.c:215
+#: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Trở về phiên bản trước..."
 
-#: ../nautilus/NautilusExtension.c:219
+#: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Phục hồi tập tin từ sao lưu"
@@ -401,7 +402,7 @@ msgstr "Đang chờ cho '%s' được kết nối..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Bạn phải chỉ định dịch vụ lưu trữ Rackspace trong phần tùy chỉnh."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:199
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
@@ -440,7 +441,7 @@ msgstr "Nhớ khóa t_ruy cập API"
 msgid "Enter Rackspace Cloud Files API key"
 msgstr "Nhập khóa API của Rackspace Cloud Files"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -476,7 +477,7 @@ msgstr "Nhớ khóa t_ruy cập bí mật"
 msgid "Enter Amazon S3 access key"
 msgstr "Nhập khóa truy cập Amazon S3"
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -493,6 +494,20 @@ msgstr "Đăng nhập vào Ubuntu One..."
 #: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr "Kết nối đến Ubuntu One"
+
+#. Translators: %s is the user's username
+#: ../common/CommonUtils.vala:469
+#, c-format
+msgid "Home (%s)"
+msgstr ""
+
+#: ../common/CommonUtils.vala:473
+msgid "Home"
+msgstr "Thư mục riêng"
+
+#: ../common/CommonUtils.vala:477
+msgid "Trash"
+msgstr "Sọt rác"
 
 #: ../common/DuplicityInfo.vala:115
 msgid "Could not run duplicity"
@@ -566,6 +581,7 @@ msgid "Cleaning up…"
 msgstr "Đang dọn dẹp..."
 
 #: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
+#: ../deja-dup/AssistantOperation.vala:515
 msgid "Failed with an unknown error."
 msgstr "Thất bại với lỗi không rõ."
 
@@ -728,11 +744,15 @@ msgstr "Đang quét:"
 msgid "_Details"
 msgstr "_Chi tiết"
 
-#: ../deja-dup/AssistantOperation.vala:297
+#: ../deja-dup/AssistantOperation.vala:298
+msgid "_Allow restoring without a password"
+msgstr "_Cho phép phục hồi mà không cần mật khẩu"
+
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Password-protect your backup"
 msgstr "_Mật khẩu-bảo vệ sao lưu của bạn"
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
@@ -740,40 +760,36 @@ msgid ""
 msgstr ""
 "Bạn sẽ cần mật khẩu để phục hồi lại các tập tin. Có lẽ bạn cần ghi nó lại."
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: ../deja-dup/AssistantOperation.vala:333
 msgid "E_ncryption password"
 msgstr "Mật _khẩu mã hóa"
 
-#: ../deja-dup/AssistantOperation.vala:342
+#: ../deja-dup/AssistantOperation.vala:350
 msgid "Confir_m password"
 msgstr "_Xác nhận mật khẩu"
 
-#: ../deja-dup/AssistantOperation.vala:355
+#: ../deja-dup/AssistantOperation.vala:363
 msgid "_Show password"
 msgstr "Hiện _mật khẩu"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:372
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "_Nhớ mật khẩu"
 
-#: ../deja-dup/AssistantOperation.vala:371
-msgid "_Allow restoring without a password"
-msgstr "_Cho phép phục hồi mà không cần mật khẩu"
-
-#: ../deja-dup/AssistantOperation.vala:438
+#: ../deja-dup/AssistantOperation.vala:439
 msgid "Summary"
 msgstr "Tóm tắt"
 
-#: ../deja-dup/AssistantOperation.vala:719
+#: ../deja-dup/AssistantOperation.vala:725
 msgid "Require Password?"
 msgstr "Yêu cầu mật khẩu?"
 
-#: ../deja-dup/AssistantOperation.vala:721
+#: ../deja-dup/AssistantOperation.vala:727
 msgid "Encryption Password Needed"
 msgstr "Cần mật khẩu mã hóa"
 
-#: ../deja-dup/AssistantOperation.vala:764
+#: ../deja-dup/AssistantOperation.vala:770
 msgid "Backup encryption password"
 msgstr "Sao lưu mật khẩu mã hóa"
 
@@ -785,7 +801,7 @@ msgstr "Phục hồi"
 msgid "_Restore"
 msgstr "_Phục hồi"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:307
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
 msgid "_Backup location"
 msgstr "_Vị trí lưu bản sao lưu"
 
@@ -982,11 +998,10 @@ msgstr "Bạn phải cung cấp một thư mục, không phải tập tin"
 msgid "You must specify a mode"
 msgstr "Bạn phải chỉ định một chế độ"
 
-#. add_optional_label();
 #: ../deja-dup/MountOperationAssistant.vala:36
-#: ../widgets/ConfigLocationDAV.vala:50 ../widgets/ConfigLocationFTP.vala:54
-#: ../widgets/ConfigLocationRackspace.vala:32
-#: ../widgets/ConfigLocationSMB.vala:38 ../widgets/ConfigLocationSSH.vala:41
+#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
+#: ../widgets/ConfigLocationRackspace.vala:31
+#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "_Tên người dùng"
 
@@ -1002,19 +1017,20 @@ msgstr "_Hiện mật khẩu"
 msgid "Location not available"
 msgstr "Vị trí chưa sẵn sàng"
 
-#: ../deja-dup/MountOperationAssistant.vala:141
-msgid "This backup location requires authentication."
-msgstr "Vị trí lưu bản sao lưu này cần xác thực."
+#. Display user message
+#: ../deja-dup/MountOperationAssistant.vala:138
+msgid "Connect to Server"
+msgstr ""
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:165
 msgid "Connect _anonymously"
 msgstr "Kết nối _vô danh"
 
-#: ../deja-dup/MountOperationAssistant.vala:176
+#: ../deja-dup/MountOperationAssistant.vala:169
 msgid "Connect as u_ser"
 msgstr "Kết _nối với tư cách người dùng"
 
-#: ../deja-dup/MountOperationAssistant.vala:216
+#: ../deja-dup/MountOperationAssistant.vala:211
 msgid "_Domain"
 msgstr "Tê_n miền"
 
@@ -1091,68 +1107,68 @@ msgstr "Tôi muốn phục _hồi các tập tin từ một bản sao lưu trư�
 msgid "Just show my backup _settings"
 msgstr "Chỉ hiện những thiết lập _sao lưu của tôi"
 
-#: ../preferences/Preferences.vala:132
+#: ../preferences/Preferences.vala:131
 msgid "Categories"
 msgstr "Loại"
 
-#: ../preferences/Preferences.vala:159
+#: ../preferences/Preferences.vala:165
 msgid "Automatic _backups"
 msgstr "_Sao lưu tự động"
 
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:191
 msgid "Folders to back up"
 msgstr "Sao lưu các thư mục"
 
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:199
 msgid "Folders to ignore"
 msgstr "Bỏ qua các thư mục"
 
-#: ../preferences/Preferences.vala:206
+#: ../preferences/Preferences.vala:212
 msgid "Most recent backup"
 msgstr "Sao lưu gần đây nhất"
 
-#: ../preferences/Preferences.vala:226
+#: ../preferences/Preferences.vala:221
 msgid "Next automatic backup"
 msgstr "Lần tự động sao lưu kế tiếp"
 
-#: ../preferences/Preferences.vala:266
+#: ../preferences/Preferences.vala:250
 msgid "_Restore…"
 msgstr "Phụ_c hồi..."
 
-#: ../preferences/Preferences.vala:272
+#: ../preferences/Preferences.vala:256
 msgid "Back Up _Now"
 msgstr "Sao _lưu ngay"
 
-#: ../preferences/Preferences.vala:294
+#: ../preferences/Preferences.vala:278
 msgid "Overview"
 msgstr "Tổng thể"
 
-#: ../preferences/Preferences.vala:323
+#: ../preferences/Preferences.vala:311
+msgid "Storage"
+msgstr "Lưu trữ"
+
+#: ../preferences/Preferences.vala:333
+msgid "Folders to _back up"
+msgstr "Thư _mục để sao lưu"
+
+#: ../preferences/Preferences.vala:343
+msgid "Folders to _ignore"
+msgstr "_Bỏ qua các thư mục"
+
+#: ../preferences/Preferences.vala:353
+msgid "Folders"
+msgstr "Thư mục"
+
+#: ../preferences/Preferences.vala:365
+msgid "How _often to back up"
+msgstr "_Sao lưu sau"
+
+#: ../preferences/Preferences.vala:376
 #, c-format
 msgid "_Keep backups"
 msgstr "Lưu bản sa_o lưu"
 
-#: ../preferences/Preferences.vala:339
-msgid "Storage"
-msgstr "Lưu trữ"
-
-#: ../preferences/Preferences.vala:348
-msgid "Folders to _back up"
-msgstr "Thư _mục để sao lưu"
-
-#: ../preferences/Preferences.vala:359
-msgid "Folders to _ignore"
-msgstr "_Bỏ qua các thư mục"
-
-#: ../preferences/Preferences.vala:370
-msgid "Folders"
-msgstr "Thư mục"
-
-#: ../preferences/Preferences.vala:405
-msgid "How _often to back up"
-msgstr "_Sao lưu sau"
-
-#: ../preferences/Preferences.vala:416
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "Lên lịch"
 
@@ -1190,25 +1206,25 @@ msgid "At least %d day"
 msgid_plural "At least %d days"
 msgstr[0] "Ít nhất %d ngày"
 
-#: ../widgets/ConfigLabelBackupDate.vala:57
+#: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr "Hôm nay"
 
-#: ../widgets/ConfigLabelBackupDate.vala:59
+#: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr "Hôm qua"
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr "Ngày mai"
 
-#: ../widgets/ConfigLabelBackupDate.vala:69
+#: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] "%d ngày kể từ bây giờ"
 
-#: ../widgets/ConfigLabelBackupDate.vala:78
+#: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -1226,14 +1242,6 @@ msgstr "Đồng ý"
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
 msgstr "Không"
-
-#: ../widgets/ConfigLabelList.vala:52 ../widgets/ConfigList.vala:148
-msgid "Home"
-msgstr "Thư mục riêng"
-
-#: ../widgets/ConfigLabelList.vala:54 ../widgets/ConfigList.vala:150
-msgid "Trash"
-msgstr "Sọt rác"
 
 #: ../widgets/ConfigLabelLocation.vala:75
 msgid "Unknown"
@@ -1305,48 +1313,48 @@ msgstr[0] ""
 "Các bản sao lưu cũ sẽ được giữ lại ít nhất %d ngày hoặc cho đến khi vị trí "
 "lưu bản sao lưu không còn đủ dung lượng."
 
-#: ../widgets/ConfigList.vala:86
+#: ../widgets/ConfigList.vala:180
 msgid "_Add"
 msgstr "_Thêm"
 
-#: ../widgets/ConfigList.vala:87
+#: ../widgets/ConfigList.vala:181
 msgid "Add"
 msgstr "Thêm"
 
-#: ../widgets/ConfigList.vala:95
+#: ../widgets/ConfigList.vala:189
 msgid "_Remove"
 msgstr "Loại _bỏ"
 
-#: ../widgets/ConfigList.vala:96
+#: ../widgets/ConfigList.vala:190
 msgid "Remove"
 msgstr "Loại bỏ"
 
-#: ../widgets/ConfigList.vala:187
+#: ../widgets/ConfigList.vala:276
 msgid "Choose folders"
 msgstr "Chọn thư mục"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "Windows Share"
 msgstr "Windows Share"
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:125
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:129
+#: ../widgets/ConfigLocation.vala:128
 msgid "Custom Location"
 msgstr "Vị trí tuỳ chọn"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:135
+#: ../widgets/ConfigLocation.vala:134
 msgid "Local Folder"
 msgstr "Thư mục trên máy"
 
@@ -1363,21 +1371,17 @@ msgstr "_Máy chủ"
 msgid "Use secure connection (_HTTPS)"
 msgstr "Dùng kết nối an toàn (_HTTPS)"
 
-#: ../widgets/ConfigLocationDAV.vala:44 ../widgets/ConfigLocationFTP.vala:36
-#: ../widgets/ConfigLocationSSH.vala:35
+#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
+#: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr "Cổ_ng"
 
-#: ../widgets/ConfigLocationDAV.vala:47 ../widgets/ConfigLocationFTP.vala:39
+#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:35 ../widgets/ConfigLocationSSH.vala:38
+#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
 msgstr "_Thư mục"
-
-#: ../widgets/ConfigLocationFTP.vala:46
-msgid "_Log in with a username"
-msgstr "Đăng _nhập với tên người dùng"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -1387,7 +1391,7 @@ msgstr "_Chọn thư mục..."
 msgid "Choose Folder"
 msgstr "Chọn thư mục"
 
-#: ../widgets/ConfigLocationRackspace.vala:34
+#: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr "Nơi lưu t_rữ"
 
@@ -1395,13 +1399,9 @@ msgstr "Nơi lưu t_rữ"
 msgid "S3 Access Key I_D"
 msgstr "I_D khóa truy cập S3"
 
-#: ../widgets/ConfigLocationSMB.vala:41
+#: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
 msgstr "Tên _miền"
-
-#: ../widgets/ConfigLocationTable.vala:97
-msgid "Optional information"
-msgstr "Thông tin tùy chọn thêm"
 
 #: ../widgets/ConfigPeriod.vala:36
 msgid "Daily"
@@ -1436,8 +1436,17 @@ msgstr "Không thể hiển thị %s"
 #~ msgid "Schedule backups at regular intervals"
 #~ msgstr "Lên lịch sao lưu theo chu kỳ"
 
+#~ msgid "Folder:"
+#~ msgstr "Thư mục:"
+
 #~ msgid "GVFS FUSE is not installed"
 #~ msgstr "GVFS FUSE chưa được cài đặt"
+
+#~ msgid "_Access key ID:"
+#~ msgstr "ID khó_a truy cập:"
+
+#~ msgid "_Secret access key:"
+#~ msgstr "Khóa truy cập _bí mật:"
 
 #~ msgid "Déjà Dup"
 #~ msgstr "Déjà Dup"
@@ -1454,14 +1463,42 @@ msgstr "Không thể hiển thị %s"
 #~ msgid "Could not restore %s: %s"
 #~ msgstr "Không thể phục hồi %s: %s"
 
+#~ msgid "Confir_m password:"
+#~ msgstr "_Xác nhận mật khẩu:"
+
+#~ msgid "E_ncryption password:"
+#~ msgstr "Mật _khẩu mã hóa:"
+
 #~ msgid "Preferences"
 #~ msgstr "Tùy chỉnh"
 
-#~ msgid "Déjà Dup encryption password"
-#~ msgstr "Mật khẩu mã hóa Déjà Dup"
+#~ msgid "_Date:"
+#~ msgstr "Ngà_y:"
 
 #~ msgid "Backup files are _encrypted"
 #~ msgstr "Các tập tin sao lưu đã được mã _hóa"
+
+#~ msgid "Restore folder:"
+#~ msgstr "Thư mục phục hồi:"
+
+#~ msgid "Restore _folder:"
+#~ msgstr "Phục hồi _thư mục:"
+
+#~ msgid "Restore date:"
+#~ msgstr "Ngày phục hồi:"
+
+#~ msgid "File to restore:"
+#~ msgid_plural "Files to restore:"
+#~ msgstr[0] "Tập tin để phục hồi"
+
+#~ msgid "_Password:"
+#~ msgstr "_Mật khẩu:"
+
+#~ msgid "_Username:"
+#~ msgstr "_Tên người dùng"
+
+#~ msgid "_Domain:"
+#~ msgstr "Tê_n miền:"
 
 #~ msgid "Files"
 #~ msgstr "Tập tin"
@@ -1469,33 +1506,87 @@ msgstr "Không thể hiển thị %s"
 #~ msgid "_Browse…"
 #~ msgstr "_Duyệt..."
 
+#~ msgid "_URI:"
+#~ msgstr "_URI:"
+
+#~ msgid "_Port:"
+#~ msgstr "Cổ_ng:"
+
+#~ msgid "_Folder:"
+#~ msgstr "_Thư mục:"
+
 #~ msgid "About Déjà Dup"
 #~ msgstr "Giới thiệu Déjà Dup"
+
+#~ msgid "S3 Access Key I_D:"
+#~ msgstr "I_D khóa truy cập S3:"
+
+#~ msgid "_Domain Name:"
+#~ msgstr "Tên _miền:"
 
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
-#~ "  Lê Trường An https://launchpad.net/~truongan\n"
 #~ "  Michael Terry https://launchpad.net/~mterry\n"
 #~ "  Ngô Chin https://launchpad.net/~ndtrung4419"
 
-#~ msgid "Settings"
-#~ msgstr "Thiết lập"
+#~ msgid "Connect as u_ser:"
+#~ msgstr "Kết _nối với tư cách người dùng:"
 
-#~ msgid "Where"
-#~ msgstr "Vị trí"
+#~ msgid "Where:"
+#~ msgstr "Vị trí:"
 
-#~ msgid "Include files from"
-#~ msgstr "Gồm những tập tin từ"
+#~ msgid "Include files from:"
+#~ msgstr "Gồm những tập tin từ:"
 
-#~ msgid "Except for"
-#~ msgstr "Ngoại trừ"
+#~ msgid "Next automatic backup:"
+#~ msgstr "Lần tự động sao lưu kế tiếp:"
+
+#~ msgid "Most recent backup:"
+#~ msgstr "Sao lưu gần đây nhất:"
+
+#~ msgid "Except for:"
+#~ msgstr "Ngoại trừ:"
+
+#~ msgid "_Log in with a username"
+#~ msgstr "Đăng _nhập với tên người dùng"
 
 #~ msgid "Biweekly"
 #~ msgstr "Mỗi hai tuần"
 
-#~ msgid "I_nclude files in folders"
-#~ msgstr "_Gồm các tập tin trong thư mục"
+#~ msgid "_Backup location:"
+#~ msgstr "_Vị trí lưu bản sao lưu:"
 
-#~ msgid "E_xcept files in folders"
-#~ msgstr "Ngoại trừ tập tin trong thư mụ_c"
+#~ msgid "Backup location:"
+#~ msgstr "Vị trí lưu bản sao lưu:"
+
+#~ msgid "This backup location requires authentication."
+#~ msgstr "Vị trí lưu bản sao lưu này cần xác thực."
+
+#~ msgid "_Server:"
+#~ msgstr "_Máy chủ:"
+
+#~ msgid "Optional information:"
+#~ msgstr "Thông tin tùy chọn thêm:"
+
+#~ msgid "_API access key:"
+#~ msgstr "Khóa truy cập A_PI:"
+
+#~ msgid "Automatic _backups:"
+#~ msgstr "_Sao lưu tự động:"
+
+#, c-format
+#~ msgid "_Keep backups:"
+#~ msgstr "Lưu bản sa_o lưu:"
+
+#~ msgid "I_nclude files in folders:"
+#~ msgstr "_Gồm các tập tin trong thư mục:"
+
+#~ msgid "E_xcept files in folders:"
+#~ msgstr "Ngoại trừ tập tin trong thư mụ_c:"
+
+#~ msgid "_Container:"
+#~ msgstr "Nơi lưu t_rữ:"
+
+#~ msgid "How _often to back up:"
+#~ msgstr "_Sao lưu sau:"
