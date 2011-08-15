@@ -206,39 +206,48 @@ public abstract class AssistantOperation : Assistant
   
   protected void set_secondary_label(string text)
   {
-    Gtk.Box page = (Gtk.Box)progress_page;
     if (text != null && text != "") {
       secondary_label.label = "<i>" + text + "</i>";
       secondary_label.show();
-      page.add(secondary_label);
-      page.reorder_child(secondary_label, 1);
-      page.child_set(secondary_label, "expand", false);
     }
     else
-      page.remove(secondary_label);
+      secondary_label.hide();
   }
 
   protected virtual Gtk.Widget make_progress_page()
   {
+    var page = new Gtk.Grid();
+    page.orientation = Gtk.Orientation.VERTICAL;
+    page.row_spacing = 6;
+    page.column_spacing = 6;
+
+    int row = 0;
+
     progress_label = new Gtk.Label("");
-    progress_label.set("xalign", 0.0f);
-    
+    progress_label.xalign = 0.0f;
+
     progress_file_label = new Gtk.Label("");
-    progress_file_label.set("xalign", 0.0f,
-                            "ellipsize", Pango.EllipsizeMode.MIDDLE);
-    
-    var progress_hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
-    progress_hbox.set("child", progress_label,
-                      "child", progress_file_label);
-    progress_hbox.child_set(progress_label, "expand", false);
-    
-    progress_bar = new Gtk.ProgressBar();
-    
+    progress_file_label.xalign = 0.0f;
+    progress_file_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
+    progress_label.hexpand = true;
+
+    page.attach(progress_label, 0, row, 1, 1);
+    page.attach(progress_file_label, 1, row, 1, 1);
+    ++row;
+
     secondary_label = new Gtk.Label("");
-    secondary_label.set("xalign", 0.0f,
-                        "wrap", true,
-                        "use-markup", true);
-    
+    secondary_label.xalign = 0.0f;
+    secondary_label.wrap = true;
+    secondary_label.max_width_chars = 30;
+    secondary_label.no_show_all = true;
+    secondary_label.use_markup = true;
+    page.attach(secondary_label, 0, row, 2, 1);
+    ++row;
+
+    progress_bar = new Gtk.ProgressBar();
+    page.attach(progress_bar, 0, row, 2, 1);
+    ++row;
+
     progress_text = new Gtk.TextView();
     progress_text.editable = false;
     progress_scroll = new Gtk.ScrolledWindow(null, null);
@@ -248,18 +257,15 @@ public abstract class AssistantOperation : Assistant
                         "border-width", 0);
     progress_expander = new Gtk.Expander.with_mnemonic(_("_Details"));
     progress_expander.set("child", progress_scroll);
-    
-    var page = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
-    page.set("child", progress_hbox,
-             "child", progress_bar,
-             "child", progress_expander,
-             "border-width", 12);
-    page.child_set(progress_hbox, "expand", false);
-    page.child_set(progress_bar, "expand", false);
-    page.child_set(progress_expander, "expand", true);
+    progress_expander.expand = true;
+    page.attach(progress_expander, 0, row, 2, 1);
+    ++row;
+
+    page.border_width = 12;
+
     // Reserve space for details + labels
     page.set_size_request(-1, 200);
-    
+
     return page;
   }
   
