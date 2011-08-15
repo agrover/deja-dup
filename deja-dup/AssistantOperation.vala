@@ -218,7 +218,6 @@ public abstract class AssistantOperation : Assistant
   {
     var page = new Gtk.Grid();
     page.orientation = Gtk.Orientation.VERTICAL;
-    page.row_spacing = 6;
     page.column_spacing = 6;
 
     int row = 0;
@@ -229,7 +228,7 @@ public abstract class AssistantOperation : Assistant
     progress_file_label = new Gtk.Label("");
     progress_file_label.xalign = 0.0f;
     progress_file_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
-    progress_label.hexpand = true;
+    progress_file_label.hexpand = true;
 
     page.attach(progress_label, 0, row, 1, 1);
     page.attach(progress_file_label, 1, row, 1, 1);
