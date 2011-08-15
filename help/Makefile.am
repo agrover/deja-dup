@@ -67,7 +67,7 @@ HELP_LINGUAS = \
 	zh_TW
 
 check:
-	test "$(shell ls -1 */*.po | wc -l)" -eq "$(shell echo $(HELP_LINGUAS) | wc -w)"
+	test "$(shell ls -1 $(srcdir)/*/*.po | wc -l)" -eq "$(shell echo $(HELP_LINGUAS) | wc -w)"
 
 deja-dup-help.pot: deja-dup.pot
 	cp -a $^ $@
