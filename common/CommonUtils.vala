@@ -391,21 +391,21 @@ void convert_s3_folder_to_hostname()
 
 public bool initialize(out string header, out string msg)
 {
+  if (!DuplicityInfo.get_default().check_duplicity_version(out header, out msg))
+    return false;
+
   convert_ssh_to_file();
   convert_s3_folder_to_hostname();
 
-  var rv = DuplicityInfo.get_default().check_duplicity_version(out header, out msg);
-  if (rv) {
-    /* We do a little trick here.  BackendAuto -- which is the default
-       backend on a fresh install of deja-dup -- will do some work to
-       automatically suss out which backend should be used instead of it.
-       So we request the current backend then drop it just to get that
-       ball rolling in case this is the first time. */
-    var unused_backend = DejaDup.Backend.get_default();
-    unused_backend = null;
-  }
+  /* We do a little trick here.  BackendAuto -- which is the default
+     backend on a fresh install of deja-dup -- will do some work to
+     automatically suss out which backend should be used instead of it.
+     So we request the current backend then drop it just to get that
+     ball rolling in case this is the first time. */
+  var unused_backend = DejaDup.Backend.get_default();
+  unused_backend = null;
 
-  return rv;
+  return true;
 }
 
 public void i18n_setup()
