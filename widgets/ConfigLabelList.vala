@@ -27,32 +27,29 @@ public class ConfigLabelList : ConfigLabel
   {
     Object(key: key, ns: ns);
   }
-  
+
   construct {
-    label.set("wrap", true, "wrap-mode", Pango.WrapMode.WORD);
-    size_allocate.connect(() => {
-      label.set("width-request", this.get_allocated_width());
-    });
+    label.wrap = true;
+    label.wrap_mode = Pango.WrapMode.WORD;
   }
-  
+
   protected override async void set_from_config()
   {
-    string val = "";
+    string val = null;
     var slist_val = settings.get_value(key);
     string*[] slist = slist_val.get_strv();
-    
+
     var list = DejaDup.parse_dir_list(slist);
-    
-    int i = 0;
+
     foreach (File f in list) {
       string s = yield DejaDup.get_display_name(f);
-      if (i > 0)
-        val += ", ";
-      val += s;
-      i++;
+      if (val != null)
+        val += ", %s".printf(s);
+      else
+        val = s;
     }
-    
-    label.label = val;
+
+    label.label = val == null ? "" : val;
   }
 }
 

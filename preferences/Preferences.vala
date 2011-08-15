@@ -21,9 +21,8 @@ using GLib;
 
 namespace DejaDup {
 
-public class Preferences : Gtk.Box
+public class Preferences : Gtk.Grid
 {
-  Gtk.Notebook top_notebook;
   Gtk.Widget backup_button;
   Gtk.Widget restore_button;
   uint bus_watch_id = 0;
@@ -37,6 +36,8 @@ public class Preferences : Gtk.Box
 
   Gtk.Widget make_welcome_page()
   {
+    var page = new Gtk.Alignment(0.0f, 0.5f, 1.0f, 0.0f);
+
     var restore_button = new Gtk.Button();
     restore_button.clicked.connect((b) => {
       run_deja_dup("--restore", b.get_display().get_app_launch_context());
@@ -56,7 +57,9 @@ public class Preferences : Gtk.Box
     continue_button.clicked.connect(() => {
       var settings = DejaDup.get_settings();
       settings.set_boolean(DejaDup.WELCOMED_KEY, true);
-      top_notebook.page = 1;
+      this.remove(page);
+      this.add(make_settings_page());
+      this.show_all();
     });
     var continue_label = new Gtk.Label("<big>%s</big>".printf(_("Just show my backup _settings")));
     continue_label.set("mnemonic-widget", continue_button,
@@ -99,21 +102,19 @@ public class Preferences : Gtk.Box
     hbox.pack_start(ialign, true, false);
     hbox.pack_start(balign, true, false);
 
-    var page = new Gtk.Alignment(0.0f, 0.5f, 1.0f, 0.0f);
     page.add(hbox);
 
     continue_button.set("has-focus", true);
 
+    page.border_width = 24;
     page.show();
     return page;
   }
 
   Gtk.Widget make_settings_page() {
-    var settings_page = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
+    var settings_page = new Gtk.Grid();
     Gtk.Notebook notebook = new Gtk.Notebook();
     Gtk.Widget w;
-    Gtk.Box page_box;
-    Gtk.Box hbox;
     Gtk.Label label;
     Gtk.Grid table;
     int row;
@@ -121,7 +122,7 @@ public class Preferences : Gtk.Box
     int i = 0;
     Gtk.SizeGroup label_sizes;
 
-    settings_page.spacing = 12;
+    settings_page.row_spacing = 12;
 
     var cat_model = new Gtk.ListStore(2, typeof(string), typeof(int));
     var tree = new Gtk.TreeView.with_model(cat_model);
@@ -150,7 +151,7 @@ public class Preferences : Gtk.Box
     scrollwin.shadow_type = Gtk.ShadowType.IN;
     scrollwin.add(tree);
 
-    settings_page.pack_start(scrollwin, false, false);
+    settings_page.add(scrollwin);
 
     table = new Gtk.Grid();
     table.orientation = Gtk.Orientation.VERTICAL;
@@ -243,28 +244,28 @@ public class Preferences : Gtk.Box
     table.attach(w, 0, row, 2, 1);
     ++row;
 
-    hbox = new Gtk.ButtonBox(Gtk.Orientation.HORIZONTAL);
-    hbox.spacing = 12;
+    var bbox = new Gtk.ButtonBox(Gtk.Orientation.HORIZONTAL);
+    bbox.layout_style = Gtk.ButtonBoxStyle.END;
+    bbox.spacing = 12;
 
-    (hbox as Gtk.ButtonBox).layout_style = Gtk.ButtonBoxStyle.END;
     w = new Gtk.Button.with_mnemonic(_("_Restore…"));
     (w as Gtk.Button).clicked.connect((b) => {
       run_deja_dup("--restore", b.get_display().get_app_launch_context());
     });
     restore_button = w;
-    hbox.add(w);
+    bbox.add(w);
     w = new Gtk.Button.with_mnemonic(_("Back Up _Now"));
     (w as Gtk.Button).clicked.connect((b) => {
       run_deja_dup("--backup", b.get_display().get_app_launch_context());
     });
     backup_button = w;
-    hbox.add(w);
+    bbox.add(w);
     w = new Gtk.Button.from_stock(Gtk.Stock.HELP);
     (w as Gtk.Button).clicked.connect(() => {
       DejaDup.show_uri(this.get_toplevel() as Gtk.Window, "ghelp:deja-dup");
     });
-    hbox.add(w);
-    (hbox as Gtk.ButtonBox).set_child_secondary(w, true);
+    bbox.add(w);
+    bbox.set_child_secondary(w, true);
 
     bus_watch_id = Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
                                   BusNameWatcherFlags.NONE,
@@ -273,13 +274,12 @@ public class Preferences : Gtk.Box
                                   () => {restore_button.sensitive = true;
                                          backup_button.sensitive = true;});
 
-    table.attach(hbox, 0, row, 2, 1);
+    table.attach(bbox, 0, row, 2, 1);
     notebook.append_page(table, null);
     cat_model.insert_with_values(out iter, i, 0, _("Overview"), 1, i);
     ++i;
 
     // Reset page
-    page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
     table = new Gtk.Grid();
     table.row_spacing = 12;
     table.column_spacing = 6;
@@ -306,23 +306,21 @@ public class Preferences : Gtk.Box
     table.attach(w, 0, row, 2, 1);
     ++row;
     
-    page_box.pack_start(table, true, true, 0);
-    notebook.append_page(page_box, null);
+    notebook.append_page(table, null);
     cat_model.insert_with_values(out iter, i, 0, _("Storage"), 1, i);
     ++i;
 
     // Now make sure to reserve the excess space that the hidden bits of
     // ConfigLocation will need.
     Gtk.Requisition req, hidden;
-    page_box.show_all();
-    page_box.get_preferred_size(null, out req);
+    table.show_all();
+    table.get_preferred_size(null, out req);
     hidden = location.hidden_size();
     req.width = req.width + hidden.width;
     req.height = req.height + hidden.height;
-    page_box.set_size_request(req.width, req.height);
+    table.set_size_request(req.width, req.height);
 
     // Reset page
-    page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
     table = new Gtk.Grid();
     table.row_spacing = 12;
     table.column_spacing = 6;
@@ -348,13 +346,11 @@ public class Preferences : Gtk.Box
     table.attach(label, 1, 0, 1, 1);
     table.attach(w, 1, 1, 1, 1);
     
-    page_box.pack_start(table, true, true, 0);
-    notebook.append_page(page_box, null);
+    notebook.append_page(table, null);
     cat_model.insert_with_values(out iter, i, 0, _("Folders"), 1, i);
     ++i;
     
     // Reset page
-    page_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
     table = new Gtk.Grid();
     table.row_spacing = 12;
     table.column_spacing = 6;
@@ -387,8 +383,7 @@ public class Preferences : Gtk.Box
     table.attach(w, 0, row, 2, 1);
     ++row;
 
-    page_box.pack_start(table, true, true, 0);
-    notebook.append_page(page_box, null);
+    notebook.append_page(table, null);
     cat_model.insert_with_values(out iter, i, 0, _("Schedule"), 1, i);
     ++i;
 
@@ -398,8 +393,10 @@ public class Preferences : Gtk.Box
 
     notebook.show_tabs = false;
     notebook.show_border = false;
-    settings_page.pack_start(notebook, true, true);
+    notebook.expand = true;
+    settings_page.add(notebook);
 
+    settings_page.border_width = 12;
     settings_page.show();
     return settings_page;
   }
@@ -415,14 +412,10 @@ public class Preferences : Gtk.Box
   }
 
   construct {
-    top_notebook = new Gtk.Notebook();
-    top_notebook.append_page(make_welcome_page(), null);
-    top_notebook.append_page(make_settings_page(), null);
-    top_notebook.show_tabs = false;
-    top_notebook.show_border = false;
-    top_notebook.border_width = 12;
-    top_notebook.page = should_show_welcome() ? 0 : 1;
-    add(top_notebook);
+    if (should_show_welcome())
+      add(make_welcome_page());
+    else
+      add(make_settings_page());
   }
 }
 
