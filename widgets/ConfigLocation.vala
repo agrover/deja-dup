@@ -396,7 +396,7 @@ public class ConfigLocation : ConfigWidget
 
   protected override async void set_from_config()
   {
-    if (internal_set)
+    if (internal_set || syncing)
       return;
 
     int index = -1;
