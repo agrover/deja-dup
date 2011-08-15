@@ -233,7 +233,7 @@ static void prepare_run(TimeSpan wait_time)
     Source.remove(timeout_id);
 
   TimeSpan secs = wait_time / TimeSpan.SECOND + 1;
-  if (secs > 0) {
+  if (wait_time > 0 && secs > 0) {
     debug("Waiting %ld seconds until next backup.", secs);
     timeout_id = Timeout.add_seconds((uint)secs, kickoff);
   }
