@@ -233,6 +233,11 @@ public class Preferences : Gtk.Grid
     table.attach(w, 0, row, 2, 1);
     ++row;
 
+    w = new Gtk.EventBox(); // second spacer
+    w.height_request = 12; // plus 6 pixels on either side
+    table.attach(w, 0, row, 2, 1);
+    ++row;
+
     w = new DejaDup.ConfigLabelPolicy();
     w.expand = true;
     w.valign = Gtk.Align.END;
