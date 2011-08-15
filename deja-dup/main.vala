@@ -23,7 +23,6 @@ public Gtk.Window toplevel = null;
 
 class DejaDupApp : Object
 {
-  static bool valid_duplicity = false;
   static bool show_version = false;
   static bool restore_mode = false;
   static bool backup_mode = false;
@@ -97,16 +96,13 @@ class DejaDupApp : Object
     int status;
     if (!handle_console_options(out status))
       return status;
-    
-    DejaDup.initialize();
+
     Gtk.init(ref args); // to open display ('cause we passed false above)
-    
     Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
     Gtk.Window.set_default_icon_name(Config.PACKAGE);
 
     /* First, check duplicity version info */
-    valid_duplicity = DejaDup.init_duplicity(null);
-    if (!valid_duplicity)
+    if (!DejaDup.gui_initialize(null))
       return 1;
 
     /* Now proceed with main program */

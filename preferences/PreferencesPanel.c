@@ -72,8 +72,7 @@ g_io_module_load (GIOModule *module)
   GtkIconTheme *theme = gtk_icon_theme_get_default ();
   gtk_icon_theme_append_search_path (theme, THEME_DIR);
 
-  deja_dup_initialize();
-  if (!deja_dup_init_duplicity(NULL, FALSE))
+  if (!deja_dup_gui_initialize(NULL, FALSE))
     return;
 
   deja_dup_preferences_panel_register_type (G_TYPE_MODULE (module));

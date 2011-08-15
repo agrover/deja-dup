@@ -312,7 +312,9 @@ static int main(string[] args)
   if (!handle_options(out status))
     return status;
 
-  DejaDup.initialize();
+  if (!DejaDup.initialize(null, null))
+    return 1;
+
   DejaDup.Network.ensure_status();
   DejaDup.Network.get().notify["connected"].connect(network_changed);
 

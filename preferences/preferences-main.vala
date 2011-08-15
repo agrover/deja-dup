@@ -76,12 +76,11 @@ class PreferencesApp : Object
     if (!handle_console_options(out status))
       return status;
 
-    DejaDup.initialize();
     Gtk.init(ref args); // to open display ('cause we passed false above)
     Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
     Gtk.Window.set_default_icon_name(Config.PACKAGE);
 
-    if (!DejaDup.init_duplicity(null))
+    if (!DejaDup.gui_initialize(null))
       return 1;
 
     var app = new Gtk.Application("org.gnome.DejaDup.Preferences", 0);
