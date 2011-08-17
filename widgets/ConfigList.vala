@@ -239,7 +239,7 @@ public class ConfigList : ConfigWidget
     int i = 0;
     var trash = File.new_for_path(DejaDup.get_trash_path());
     foreach (File f in list) {
-      string s = yield DejaDup.get_display_name(f);
+      string s = yield DejaDup.get_nickname(f);
 
       Gtk.TreeIter iter;
       model.insert_with_values(out iter, i++, 0, f.get_path(), 1, s);

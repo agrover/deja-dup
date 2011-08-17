@@ -42,7 +42,7 @@ public class ConfigLabelList : ConfigLabel
     var list = DejaDup.parse_dir_list(slist);
 
     foreach (File f in list) {
-      string s = yield DejaDup.get_display_name(f);
+      string s = yield DejaDup.get_nickname(f);
       if (val != null)
         val += ", %s".printf(s);
       else

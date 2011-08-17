@@ -164,12 +164,11 @@ public abstract class AssistantOperation : Assistant
   
   void set_progress_label_file(DejaDup.Operation op, File file, bool actual)
   {
-    var parse_name = file.get_parse_name();
     string prefix;
     if (actual) {
       prefix = get_progress_file_prefix();
       progress_label.label = prefix + " ";
-      progress_file_label.label = Path.get_basename(parse_name);
+      progress_file_label.label = DejaDup.get_display_name(file);
     }
     else {
       prefix = _("Scanning:");
@@ -177,7 +176,7 @@ public abstract class AssistantOperation : Assistant
       progress_file_label.label = "";
     }
 
-    string log_line = prefix + " " + parse_name;
+    string log_line = prefix + " " + file.get_parse_name();
 
     bool adjustment_at_end = false;
     Gtk.Adjustment adjust = progress_scroll.get_vadjustment();

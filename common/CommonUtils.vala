@@ -444,30 +444,41 @@ public string get_file_desc(File file)
   return desc;
 }
 
-public string? get_utf8_relative_path (File parent, File child)
-{
-  // Unfortunately, the results of File.get_relative_path() are in local
-  // encoding, not utf8, and there is no easy function to get a utf8 version.
-  // So we manually convert.
-  string s = parent.get_relative_path(child);
-  try {
-    return Filename.to_utf8(s, s.length, null, null);
-  }
-  catch (ConvertError e) {
-    warning("%s\n", e.message);
-    return null;
-  }
-}
-
 static File home;
 static File trash;
-public async string get_display_name (File f)
+
+void ensure_special_paths ()
 {
   if (home == null) {
     // Fill these out for the first time
     home = File.new_for_path(Environment.get_home_dir());
     trash = File.new_for_path(DejaDup.get_trash_path());
   }
+}
+
+public string get_display_name (File f)
+{
+  ensure_special_paths();
+
+  if (f.has_prefix(home)) {
+    // Unfortunately, the results of File.get_relative_path() are in local
+    // encoding, not utf8, and there is no easy function to get a utf8 version.
+    // So we manually convert.
+    string s = home.get_relative_path(f);
+    try {
+      return Filename.to_utf8(s, s.length, null, null);
+    }
+    catch (ConvertError e) {
+      warning("%s\n", e.message);
+    }
+  }
+
+  return f.get_parse_name();
+}
+
+public async string get_nickname (File f)
+{
+  ensure_special_paths();
 
   string s;
   if (f.equal(home)) {
@@ -488,13 +499,8 @@ public async string get_display_name (File f)
   }
   else if (f.equal(trash))
     s = _("Trash");
-  else if (f.has_prefix(home)) {
-    s = get_utf8_relative_path(home, f);
-    if (s == null)
-      s = f.get_parse_name();
-  }
-  else
-    s = f.get_parse_name();
+  else 
+    s = DejaDup.get_display_name(f);
 
   return s;
 }
