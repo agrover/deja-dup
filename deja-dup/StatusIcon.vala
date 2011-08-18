@@ -254,6 +254,7 @@ class ShellStatusIcon : StatusIcon
       Notify.init(_("Backup"));
       note = new Notify.Notification(_("Starting scheduled backup"), null,
                                      "deja-dup");
+      note.add_action("show-details", _("Show Progress"), () => {show_window();});
       note.add_action("later", later_label.replace("_", ""), () => {later();});
       note.add_action("skip", skip_label.replace("_", ""), () => {skip();});
       try {
@@ -262,10 +263,6 @@ class ShellStatusIcon : StatusIcon
       catch (Error e) {
         warning("%s\n", e.message);
       }
-
-      // Since we aren't using a status icon, no UI at all for this run, so no
-      // need to calculate progress.
-      op.use_progress = false;
     }
   }
 }
