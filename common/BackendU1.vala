@@ -217,9 +217,10 @@ public class BackendU1 : Backend
   }
 
   void ask_password() {
+    mount_op.set("label_title", _("Connect to Ubuntu One"));
     mount_op.set("label_button", _("Sign into Ubuntu One…"));
     mount_op.connect("signal::button-clicked", sign_in, null);
-    mount_op.ask_password(_("Connect to Ubuntu One"), "", "", 0);
+    mount_op.ask_password("", "", "", 0);
   }
 
   async void sign_in()
