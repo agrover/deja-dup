@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-08-14 21:35-0400\n"
-"PO-Revision-Date: 2011-08-13 04:27+0000\n"
+"POT-Creation-Date: 2011-08-18 15:35-0400\n"
+"PO-Revision-Date: 2011-08-15 13:55+0000\n"
 "Last-Translator: Monkey <monkey.libre@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-08-15 04:37+0000\n"
-"X-Generator: Launchpad (build 13674)\n"
+"X-Launchpad-Export-Date: 2011-08-19 04:37+0000\n"
+"X-Generator: Launchpad (build 13697)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
-#: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:139
-#: ../deja-dup/StatusIcon.vala:283 ../monitor/monitor.vala:115
+#: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:131
+#: ../deja-dup/StatusIcon.vala:254 ../monitor/monitor.vala:115
 #: ../preferences/preferences-main.vala:51
 #: ../preferences/preferences-main.vala:63
 msgid "Backup"
@@ -33,7 +33,7 @@ msgstr "Copia de seguridad"
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:88
-#: ../deja-dup/main.vala:79 ../preferences/Preferences.vala:85
+#: ../deja-dup/main.vala:78 ../preferences/Preferences.vala:88
 #, c-format
 msgid "Déjà Dup Backup Tool"
 msgstr "Herramienta de respaldo Déjà Dup"
@@ -48,10 +48,16 @@ msgstr "Respaldar ahora"
 msgid "Change your backup settings"
 msgstr "Cambie las configuraciones de copiado de seguridad"
 
+#. These keywords are used when searching for applications in dashes, etc.
+#: ../data/deja-dup-ccpanel.desktop.in.h:5
+#: ../data/deja-dup-preferences.desktop.in.in.h:5
+msgid "déjà;deja;dup;"
+msgstr ""
+
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:308
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:300
 msgid "Backup Monitor"
 msgstr "Monitor de copias de seguridad"
 
@@ -72,7 +78,7 @@ msgstr ""
 "se creará el cubo elegido."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:182
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location"
 msgstr "Ubicación de la copia de seguridad"
 
@@ -361,7 +367,7 @@ msgstr "Su nombre de usuario de Rackspace"
 msgid "Folder"
 msgstr "Carpeta"
 
-#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:176
+#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:175
 msgid "Scanning…"
 msgstr "Explorando"
 
@@ -387,7 +393,7 @@ msgstr[1] "Restaurar archivos del respaldo"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:86 ../common/CommonUtils.vala:429
+#: ../common/BackendFile.vala:86 ../common/CommonUtils.vala:442
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s en %2$s"
@@ -420,7 +426,7 @@ msgstr "Esperando que «%s» se conecte..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Debe especificar un contenedor de Rackspace en sus preferencias."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:191
 msgid "Rackspace Cloud Files"
 msgstr "Archivos en la nube de Rackspace"
 
@@ -444,22 +450,22 @@ msgstr ""
 "línea</a>."
 
 #: ../common/BackendRackspace.vala:139
+msgid "Connect to Rackspace Cloud Files"
+msgstr ""
+
+#: ../common/BackendRackspace.vala:140
 msgid "_API access key"
 msgstr "Clave de acceso _API"
 
-#: ../common/BackendRackspace.vala:140
+#: ../common/BackendRackspace.vala:141
 msgid "S_how API access key"
 msgstr "_Mostrar clave de acceso API"
 
-#: ../common/BackendRackspace.vala:141
+#: ../common/BackendRackspace.vala:142
 msgid "_Remember API access key"
 msgstr "_Recordar clave de acceso a API"
 
-#: ../common/BackendRackspace.vala:143
-msgid "Enter Rackspace Cloud Files API key"
-msgstr "Introduzca la clave API de Rackspace Cloud Files"
-
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:177
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:175
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -475,26 +481,26 @@ msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr "Puede abrir una cuenta en Amazon S3 <a href=\"%s\">online</a>."
 
 #: ../common/BackendS3.vala:194
+msgid "Connect to Amazon S3"
+msgstr ""
+
+#: ../common/BackendS3.vala:195
 msgid "_Access key ID"
 msgstr "ID de cl_ave de acceso"
 
-#: ../common/BackendS3.vala:195
+#: ../common/BackendS3.vala:196
 msgid "_Secret access key"
 msgstr "_Clave secreta de acceso"
 
-#: ../common/BackendS3.vala:196
+#: ../common/BackendS3.vala:197
 msgid "S_how secret access key"
 msgstr "M_ostrar la clave de acceso secreta"
 
-#: ../common/BackendS3.vala:197
+#: ../common/BackendS3.vala:198
 msgid "_Remember secret access key"
 msgstr "_Recordar clave secreta de acceso"
 
-#: ../common/BackendS3.vala:199
-msgid "Enter Amazon S3 access key"
-msgstr "Introduzca la clave de acceso Amazon S3"
-
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:185
+#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:183
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -505,24 +511,24 @@ msgid "%s on Ubuntu One"
 msgstr "%s en Ubuntu One"
 
 #: ../common/BackendU1.vala:220
-msgid "Sign into Ubuntu One…"
-msgstr "Registrarse en Ubuntu One..."
-
-#: ../common/BackendU1.vala:222
 msgid "Connect to Ubuntu One"
 msgstr "Conectar a Ubuntu One"
 
+#: ../common/BackendU1.vala:221
+msgid "Sign into Ubuntu One…"
+msgstr "Registrarse en Ubuntu One..."
+
 #. Translators: %s is the user's username
-#: ../common/CommonUtils.vala:469
+#: ../common/CommonUtils.vala:493
 #, c-format
 msgid "Home (%s)"
-msgstr ""
+msgstr "Home (%s)"
 
-#: ../common/CommonUtils.vala:473
+#: ../common/CommonUtils.vala:497
 msgid "Home"
 msgstr "Carpeta personal"
 
-#: ../common/CommonUtils.vala:477
+#: ../common/CommonUtils.vala:501
 msgid "Trash"
 msgstr "Papelera"
 
@@ -590,20 +596,20 @@ msgstr ""
 "La localización del respaldo es demasiado pequeña. Intente usar una con más "
 "espacio."
 
-#: ../common/Duplicity.vala:524
+#: ../common/Duplicity.vala:525
 msgid "Backup location does not have enough free space."
 msgstr "La localización del respaldo no tiene espacio libre suficiente."
 
-#: ../common/Duplicity.vala:543 ../common/Duplicity.vala:557
+#: ../common/Duplicity.vala:544 ../common/Duplicity.vala:558
 msgid "Cleaning up…"
 msgstr "Limpiando..."
 
-#: ../common/Duplicity.vala:659 ../common/Duplicity.vala:1012
-#: ../deja-dup/AssistantOperation.vala:515
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:1013
+#: ../deja-dup/AssistantOperation.vala:519
 msgid "Failed with an unknown error."
 msgstr "Falló con un error desconocido."
 
-#: ../common/Duplicity.vala:873
+#: ../common/Duplicity.vala:874
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
@@ -613,16 +619,16 @@ msgstr ""
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:879 ../common/Duplicity.vala:959
-#: ../common/Duplicity.vala:963
+#: ../common/Duplicity.vala:880 ../common/Duplicity.vala:960
+#: ../common/Duplicity.vala:964
 msgid "Bad encryption password."
 msgstr "Contraseña de cifrado errónea."
 
-#: ../common/Duplicity.vala:884
+#: ../common/Duplicity.vala:885
 msgid "Computer name changed"
 msgstr "El nombre del equipo ha cambiado"
 
-#: ../common/Duplicity.vala:884
+#: ../common/Duplicity.vala:885
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -633,68 +639,68 @@ msgstr ""
 "del equipo actual es %s. Si esto es inesperado, debería realizar la copia en "
 "una ubicación distinta."
 
-#: ../common/Duplicity.vala:897
+#: ../common/Duplicity.vala:898
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Permiso denegado cuando se intenta crear «%s»."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:901 ../common/Duplicity.vala:905
+#: ../common/Duplicity.vala:902 ../common/Duplicity.vala:906
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Permiso denegado cuando se intenta leer «%s»."
 
-#: ../common/Duplicity.vala:909
+#: ../common/Duplicity.vala:910
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Permiso denegado cuando se intenta eliminar «%s»."
 
-#: ../common/Duplicity.vala:916
+#: ../common/Duplicity.vala:917
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "La localización del respaldo «%s» no existe."
 
-#: ../common/Duplicity.vala:922 ../common/Duplicity.vala:982
+#: ../common/Duplicity.vala:923 ../common/Duplicity.vala:983
 msgid "No space left."
 msgstr "No queda espacio."
 
-#: ../common/Duplicity.vala:936
+#: ../common/Duplicity.vala:937
 msgid "Invalid ID."
 msgstr "ID inválido"
 
-#: ../common/Duplicity.vala:938
+#: ../common/Duplicity.vala:939
 msgid "Invalid secret key."
 msgstr "Clave secreta inválida."
 
-#: ../common/Duplicity.vala:940
+#: ../common/Duplicity.vala:941
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Su cuenta de «Amazon Web Services» no esta firmada para el servicio S3"
 
-#: ../common/Duplicity.vala:953
+#: ../common/Duplicity.vala:954
 msgid "S3 bucket name is not available."
 msgstr "El nombre del cubo S3 no está disponible."
 
-#: ../common/Duplicity.vala:967
+#: ../common/Duplicity.vala:968
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Error al leer el archivo «%s»"
 
-#: ../common/Duplicity.vala:969
+#: ../common/Duplicity.vala:970
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Error escribiendo el archivo «%s»."
 
-#: ../common/Duplicity.vala:984
+#: ../common/Duplicity.vala:985
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "No queda espacio en «%s»."
 
-#: ../common/Duplicity.vala:992
+#: ../common/Duplicity.vala:993
 msgid "No backup files found"
 msgstr "No se han encontrado archivos de copia de seguridad"
 
-#: ../common/Duplicity.vala:1043
+#: ../common/Duplicity.vala:1044
 msgid "Uploading…"
 msgstr "Cargando..."
 
@@ -758,23 +764,23 @@ msgstr "Fallo en la copia de seguridad"
 msgid "Backing Up…"
 msgstr "Respaldando..."
 
-#: ../deja-dup/AssistantOperation.vala:175
+#: ../deja-dup/AssistantOperation.vala:174
 msgid "Scanning:"
 msgstr "Explorando:"
 
-#: ../deja-dup/AssistantOperation.vala:249
+#: ../deja-dup/AssistantOperation.vala:256
 msgid "_Details"
 msgstr "_Detalles"
 
-#: ../deja-dup/AssistantOperation.vala:298
+#: ../deja-dup/AssistantOperation.vala:302
 msgid "_Allow restoring without a password"
 msgstr "Permitir rest_aurar sin contraseña"
 
-#: ../deja-dup/AssistantOperation.vala:304
+#: ../deja-dup/AssistantOperation.vala:308
 msgid "_Password-protect your backup"
 msgstr "_Proteja a tu respaldo con una contraseña"
 
-#: ../deja-dup/AssistantOperation.vala:318
+#: ../deja-dup/AssistantOperation.vala:322
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
@@ -783,36 +789,36 @@ msgstr ""
 "Necesitará su contraseña para restaurar sus archivos. Le recomendamos que la "
 "escriba y guarde en un lugar seguro."
 
-#: ../deja-dup/AssistantOperation.vala:333
+#: ../deja-dup/AssistantOperation.vala:337
 msgid "E_ncryption password"
 msgstr "_Contraseña cifrada"
 
-#: ../deja-dup/AssistantOperation.vala:350
+#: ../deja-dup/AssistantOperation.vala:354
 msgid "Confir_m password"
 msgstr "Confir_mar contraseña"
 
-#: ../deja-dup/AssistantOperation.vala:363
+#: ../deja-dup/AssistantOperation.vala:367
 msgid "_Show password"
 msgstr "_Mostrar contraseña"
 
-#: ../deja-dup/AssistantOperation.vala:372
-#: ../deja-dup/MountOperationAssistant.vala:39
+#: ../deja-dup/AssistantOperation.vala:376
+#: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Recordar contraseña"
 
-#: ../deja-dup/AssistantOperation.vala:439
+#: ../deja-dup/AssistantOperation.vala:443
 msgid "Summary"
 msgstr "Resumen"
 
-#: ../deja-dup/AssistantOperation.vala:725
+#: ../deja-dup/AssistantOperation.vala:729
 msgid "Require Password?"
 msgstr "¿Requiere contraseña?"
 
-#: ../deja-dup/AssistantOperation.vala:727
+#: ../deja-dup/AssistantOperation.vala:731
 msgid "Encryption Password Needed"
 msgstr "Se necesita la contraseña de cifrado"
 
-#: ../deja-dup/AssistantOperation.vala:770
+#: ../deja-dup/AssistantOperation.vala:774
 msgid "Backup encryption password"
 msgstr "Contraseña de cifrado de la copia de seguridad"
 
@@ -824,7 +830,7 @@ msgstr "Restaurar"
 msgid "_Restore"
 msgstr "_Restaurar"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:289
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:294
 msgid "_Backup location"
 msgstr "_Ubicación de copia de seguridad"
 
@@ -965,45 +971,45 @@ msgstr "Análisis finalizado"
 msgid "Co_ntinue"
 msgstr "Co_ntinuar"
 
-#: ../deja-dup/Assistant.vala:348 ../deja-dup/StatusIcon.vala:103
+#: ../deja-dup/Assistant.vala:348 ../deja-dup/StatusIcon.vala:95
 msgid "_Resume Later"
 msgstr "_Resumir después"
 
-#: ../deja-dup/main.vala:35 ../monitor/monitor.vala:36
+#: ../deja-dup/main.vala:34 ../monitor/monitor.vala:36
 #: ../preferences/preferences-main.vala:26
 msgid "Show version"
 msgstr "Mostrar versión"
 
-#: ../deja-dup/main.vala:36
+#: ../deja-dup/main.vala:35
 msgid "Restore given files"
 msgstr "Restaurando los archivos"
 
-#: ../deja-dup/main.vala:37
+#: ../deja-dup/main.vala:36
 msgid "Immediately start a backup"
 msgstr "Empezar la copia de seguridad inmediatamente"
 
-#: ../deja-dup/main.vala:39
+#: ../deja-dup/main.vala:38
 msgid "Restore deleted files"
 msgstr "Restaurar archivos borrados"
 
-#: ../deja-dup/main.vala:56
+#: ../deja-dup/main.vala:55
 msgid "No directory provided"
 msgstr "No se proporcionó ningún directorio"
 
-#: ../deja-dup/main.vala:61
+#: ../deja-dup/main.vala:60
 msgid "Only one directory can be shown at once"
 msgstr "Solo se puede mostrar un directorio a la vez"
 
-#: ../deja-dup/main.vala:82
+#: ../deja-dup/main.vala:81
 msgid "[FILES…]"
 msgstr "[ARCHIVOS...]"
 
-#: ../deja-dup/main.vala:83
+#: ../deja-dup/main.vala:82
 msgid "DIRECTORY"
 msgstr "DIRECTORIO"
 
 #. Translators: Wrap this to 80 characters per line if you can, as I have for English
-#: ../deja-dup/main.vala:87
+#: ../deja-dup/main.vala:86
 msgid ""
 "Déjà Dup is a simple backup tool.  It hides the complexity of backing up\n"
 "the Right Way (encrypted, off-site, and regular) and uses duplicity as\n"
@@ -1015,51 +1021,50 @@ msgstr ""
 "duplicity como\n"
 " herramienta base de funcionamiento"
 
-#: ../deja-dup/main.vala:141
+#: ../deja-dup/main.vala:137
 msgid "Directory does not exists"
 msgstr "El directorio no existe"
 
-#: ../deja-dup/main.vala:145
+#: ../deja-dup/main.vala:141
 msgid "You must provide a directory, not a file"
 msgstr "Debe proporcionar una carpeta, no un archivo"
 
-#: ../deja-dup/main.vala:157
+#: ../deja-dup/main.vala:153
 msgid "You must specify a mode"
 msgstr "Debe especificar un modo"
 
 #: ../deja-dup/MountOperationAssistant.vala:36
+msgid "Connect to Server"
+msgstr "Conectar con el servidor"
+
+#: ../deja-dup/MountOperationAssistant.vala:37
 #: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
 #: ../widgets/ConfigLocationRackspace.vala:31
 #: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "_Usuario"
 
-#: ../deja-dup/MountOperationAssistant.vala:37
+#: ../deja-dup/MountOperationAssistant.vala:38
 msgid "_Password"
 msgstr "_Contraseña"
 
-#: ../deja-dup/MountOperationAssistant.vala:38
+#: ../deja-dup/MountOperationAssistant.vala:39
 msgid "S_how password"
 msgstr "M_ostrar contraseña"
 
-#: ../deja-dup/MountOperationAssistant.vala:81
+#: ../deja-dup/MountOperationAssistant.vala:82
 msgid "Location not available"
 msgstr "La ubicación no está disponible"
 
-#. Display user message
-#: ../deja-dup/MountOperationAssistant.vala:138
-msgid "Connect to Server"
-msgstr ""
-
-#: ../deja-dup/MountOperationAssistant.vala:165
+#: ../deja-dup/MountOperationAssistant.vala:166
 msgid "Connect _anonymously"
 msgstr "Conectar de forma _anónima"
 
-#: ../deja-dup/MountOperationAssistant.vala:169
+#: ../deja-dup/MountOperationAssistant.vala:170
 msgid "Connect as u_ser"
 msgstr "Conectar como u_suario"
 
-#: ../deja-dup/MountOperationAssistant.vala:211
+#: ../deja-dup/MountOperationAssistant.vala:212
 msgid "_Domain"
 msgstr "_Dominio"
 
@@ -1094,31 +1099,35 @@ msgstr "_Abrir configuración de copia de seguridad"
 msgid "Open Backup Settings"
 msgstr "Abrir configuración de copia de seguridad"
 
-#: ../deja-dup/StatusIcon.vala:105
+#: ../deja-dup/StatusIcon.vala:97
 msgid "_Delay Backup"
 msgstr "_Aplazar la copia de seguridad"
 
-#: ../deja-dup/StatusIcon.vala:107
+#: ../deja-dup/StatusIcon.vala:99
 msgid "_Cancel Backup"
 msgstr "_Cancelar respaldo"
 
-#: ../deja-dup/StatusIcon.vala:108
+#: ../deja-dup/StatusIcon.vala:100
 msgid "_Skip Backup"
 msgstr "Omitir la copia de _seguridad"
 
-#: ../deja-dup/StatusIcon.vala:140
+#: ../deja-dup/StatusIcon.vala:132
 msgid "Backup completed"
 msgstr "Respaldo completado"
 
-#: ../deja-dup/StatusIcon.vala:178
+#: ../deja-dup/StatusIcon.vala:170
 msgid "Déjà Du_p"
 msgstr "Déjà Du_p"
 
-#: ../deja-dup/StatusIcon.vala:284
+#: ../deja-dup/StatusIcon.vala:255
 msgid "Starting scheduled backup"
 msgstr "Iniciando el respaldo programado"
 
-#: ../deja-dup/StatusIcon.vala:326
+#: ../deja-dup/StatusIcon.vala:257
+msgid "Show Progress"
+msgstr ""
+
+#: ../deja-dup/StatusIcon.vala:294
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% completo"
@@ -1127,73 +1136,73 @@ msgstr "%.1f%% completo"
 msgid "Scheduled backup delayed"
 msgstr "Copia de seguirdad programada retrasada"
 
-#: ../preferences/Preferences.vala:44
+#: ../preferences/Preferences.vala:45
 #, c-format
 msgid "I want to _restore files from a previous backup…"
 msgstr "Quiero _restaurar archivos de una copia de seguridad anterior..."
 
-#: ../preferences/Preferences.vala:61
+#: ../preferences/Preferences.vala:64
 #, c-format
 msgid "Just show my backup _settings"
 msgstr "Solo mostrar mis _configuraciones de copia de seguridad"
 
-#: ../preferences/Preferences.vala:131
+#: ../preferences/Preferences.vala:132
 msgid "Categories"
 msgstr "Categorías"
 
-#: ../preferences/Preferences.vala:165
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups"
 msgstr "C_opias de seguridad automáticas"
 
-#: ../preferences/Preferences.vala:191
+#: ../preferences/Preferences.vala:192
 msgid "Folders to back up"
-msgstr ""
+msgstr "Carpetas a respaldar"
 
-#: ../preferences/Preferences.vala:199
+#: ../preferences/Preferences.vala:200
 msgid "Folders to ignore"
-msgstr ""
+msgstr "Carpetas a ignorar"
 
-#: ../preferences/Preferences.vala:212
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup"
 msgstr "Copia de seguridad más reciente"
 
-#: ../preferences/Preferences.vala:221
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup"
 msgstr "Siguiente copia de seguridad automática"
 
-#: ../preferences/Preferences.vala:250
+#: ../preferences/Preferences.vala:256
 msgid "_Restore…"
 msgstr "_Restaurar…"
 
-#: ../preferences/Preferences.vala:256
+#: ../preferences/Preferences.vala:262
 msgid "Back Up _Now"
 msgstr "_Realizar una copia de seguridad ahora"
 
-#: ../preferences/Preferences.vala:278
+#: ../preferences/Preferences.vala:284
 msgid "Overview"
 msgstr "Información general"
 
-#: ../preferences/Preferences.vala:311
+#: ../preferences/Preferences.vala:315
 msgid "Storage"
 msgstr "Almacenamiento"
 
-#: ../preferences/Preferences.vala:333
+#: ../preferences/Preferences.vala:336
 msgid "Folders to _back up"
-msgstr ""
+msgstr "Carpetas a _respaldar"
 
-#: ../preferences/Preferences.vala:343
+#: ../preferences/Preferences.vala:346
 msgid "Folders to _ignore"
-msgstr ""
+msgstr "Carpetas a _ignorar"
 
-#: ../preferences/Preferences.vala:353
+#: ../preferences/Preferences.vala:355
 msgid "Folders"
 msgstr "Carpetas"
 
-#: ../preferences/Preferences.vala:365
+#: ../preferences/Preferences.vala:366
 msgid "How _often to back up"
 msgstr "Con cuá_nta frecuencia respaldar"
 
-#: ../preferences/Preferences.vala:376
+#: ../preferences/Preferences.vala:377
 #, c-format
 msgid "_Keep backups"
 msgstr "_Mantener copias de seguridad"
@@ -1266,7 +1275,7 @@ msgstr[1] "hace %d días"
 #: ../widgets/ConfigLabelBackupDate.vala:92
 #: ../widgets/ConfigLabelBackupDate.vala:106
 msgid "None"
-msgstr ""
+msgstr "Ninguno"
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1349,48 +1358,48 @@ msgstr[1] ""
 "Los respaldos antiguos se guardarán al menos %d días o hasta que la "
 "localización del respaldo tenga poco espacio."
 
-#: ../widgets/ConfigList.vala:180
+#: ../widgets/ConfigList.vala:179
 msgid "_Add"
 msgstr "_Añadir"
 
-#: ../widgets/ConfigList.vala:181
+#: ../widgets/ConfigList.vala:180
 msgid "Add"
 msgstr "Añadir"
 
-#: ../widgets/ConfigList.vala:189
+#: ../widgets/ConfigList.vala:188
 msgid "_Remove"
-msgstr ""
+msgstr "Elimina_r"
 
-#: ../widgets/ConfigList.vala:190
+#: ../widgets/ConfigList.vala:189
 msgid "Remove"
-msgstr ""
+msgstr "Eliminar"
 
-#: ../widgets/ConfigList.vala:276
+#: ../widgets/ConfigList.vala:275
 msgid "Choose folders"
 msgstr "Escoja las carpetas"
 
-#: ../widgets/ConfigLocation.vala:119
+#: ../widgets/ConfigLocation.vala:117
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:121
+#: ../widgets/ConfigLocation.vala:119
 msgid "Windows Share"
 msgstr "Compartido por Windows"
 
-#: ../widgets/ConfigLocation.vala:123
+#: ../widgets/ConfigLocation.vala:121
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:125
+#: ../widgets/ConfigLocation.vala:123
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:128
+#: ../widgets/ConfigLocation.vala:126
 msgid "Custom Location"
 msgstr "Ubicación personalizada"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:134
+#: ../widgets/ConfigLocation.vala:132
 msgid "Local Folder"
 msgstr "Carpeta local"
 
@@ -1421,7 +1430,7 @@ msgstr "_Carpeta"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
-msgstr ""
+msgstr "_Escoger carpeta..."
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
@@ -1793,6 +1802,9 @@ msgstr "No se pudo mostrar %s"
 #~ msgid "S3 Access Key I_D:"
 #~ msgstr "I_D de clave de acceso S3:"
 
+#~ msgid "Enter Amazon S3 access key"
+#~ msgstr "Introduzca la clave de acceso Amazon S3"
+
 #~ msgid "_Access key ID:"
 #~ msgstr "ID de cl_ave de acceso:"
 
@@ -2031,6 +2043,9 @@ msgstr "No se pudo mostrar %s"
 #~ msgid "_API access key:"
 #~ msgstr "Clave de acceso _API:"
 
+#~ msgid "Enter Rackspace Cloud Files API key"
+#~ msgstr "Introduzca la clave API de Rackspace Cloud Files"
+
 #~ msgid ""
 #~ "The type of backup location. If 'auto', a default will be chosen based on "
 #~ "what is available."
@@ -2048,21 +2063,6 @@ msgstr "No se pudo mostrar %s"
 
 #~ msgid "Confir_m password:"
 #~ msgstr "Confir_mar contraseña:"
-
-#~ msgid "Automatic _backups:"
-#~ msgstr "C_opias de seguridad automáticas:"
-
-#~ msgid "Where:"
-#~ msgstr "Dónde:"
-
-#~ msgid "Include files from:"
-#~ msgstr "Incluir archivos de:"
-
-#~ msgid "Next automatic backup:"
-#~ msgstr "Siguiente copia de seguridad automática:"
-
-#~ msgid "Most recent backup:"
-#~ msgstr "Copia de seguridad más reciente:"
 
 #~ msgid "translator-credits"
 #~ msgstr ""
@@ -2082,6 +2082,7 @@ msgstr "No se pudo mostrar %s"
 #~ "  Leandro Gómez https://launchpad.net/~leogg\n"
 #~ "  Luciano Facchinelli https://launchpad.net/~facchinelli-luciano\n"
 #~ "  Luis J. Claros https://launchpad.net/~luisj-claros\n"
+#~ "  Monkey https://launchpad.net/~monkey-libre\n"
 #~ "  Pablo Capeluto https://launchpad.net/~pcapeluto-gmail\n"
 #~ "  Paco Molinero https://launchpad.net/~franciscomol\n"
 #~ "  Ramón Calderón https://launchpad.net/~rcalderon\n"
