@@ -36,7 +36,6 @@ public abstract class Assistant : Gtk.Window
   public signal void forward();
   public signal void backward();
   public string apply_text {get; set; default = Gtk.Stock.APPLY;}
-  public bool resume_supported {get; set; default = false;}
   public bool last_op_was_back {get; private set; default = false;}
 
   public enum Type {
@@ -312,7 +311,7 @@ public abstract class Assistant : Gtk.Window
       break;
     case Type.PROGRESS:
       show_cancel = true;
-      show_resume = resume_supported;
+      show_resume = true;
       break;
     case Type.FINISH:
       show_close = true;

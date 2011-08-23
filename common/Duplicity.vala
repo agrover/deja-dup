@@ -326,13 +326,10 @@ public class Duplicity : Object
   }
   
   public void stop() {
+    // just abruptly stop, without a cleanup, duplicity will resume
     was_stopped = true;
-    if (!DuplicityInfo.get_default().can_resume)
-      cancel(); // might as well be clean about it
-    else { // just abruptly stop, without a cleanup
-      mode = Operation.Mode.INVALID;
-      cancel_inst();
-    }
+    mode = Operation.Mode.INVALID;
+    cancel_inst();
   }
 
   public void pause(string? reason)

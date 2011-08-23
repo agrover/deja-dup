@@ -77,12 +77,6 @@ class U1Checker : Checker
 {
   PythonChecker pyu1;
   construct {
-    if (!DuplicityInfo.get_default().has_u1) {
-      available = false;
-      complete = true;
-      return;
-    }
-
     try {
       var proxy = BackendU1.get_creds_proxy();
       if (proxy.get_name_owner() == null) {

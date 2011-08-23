@@ -118,7 +118,6 @@ public abstract class Operation : Object
       done(false, false);
       return;
     }
-    yield set_session_inhibited(true);
 
     yield DejaDup.Network.ensure_status();
 
@@ -252,7 +251,6 @@ public abstract class Operation : Object
   {
     finished = true;
 
-    yield set_session_inhibited(false);
     unclaim_bus();
 
     done(success, cancelled);
@@ -286,47 +284,6 @@ public abstract class Operation : Object
   void unclaim_bus()
   {
     Bus.unown_name(bus_id);
-  }
-  
-  uint inhibit_cookie = 0;
-  async void set_session_inhibited(bool inhibit)
-  {
-    // Don't inhibit if we can resume safely
-    if (DuplicityInfo.get_default().can_resume)
-      return;
-
-    try {
-      // FIXME: use async version when I figure out the syntax
-      DBusProxy obj = new DBusProxy.for_bus_sync(BusType.SESSION,
-                                                 DBusProxyFlags.NONE, null, 
-                                                 "org.gnome.SessionManager",
-                                                 "/org/gnome/SessionManager",
-                                                 "org.gnome.SessionManager",
-                                                 null);
-      
-      if (inhibit) {
-        if (inhibit_cookie > 0)
-          return; // already inhibited
-        
-        var cookie_val = yield obj.call("Inhibit",
-                                        // logout and suspend, but not switch user
-                                        new Variant("(susu)",
-                                                    Config.PACKAGE,
-                                                    xid,
-                                                    mode_to_string(dup.mode),
-                                                    (uint) (1 | 4)),
-                                        DBusCallFlags.NONE, -1, null);
-        cookie_val.get("(u)", out inhibit_cookie);
-      }
-      else if (inhibit_cookie > 0) {
-        yield obj.call("Uninhibit", new Variant("(u)", inhibit_cookie),
-                       DBusCallFlags.NONE, -1, null);
-        inhibit_cookie = 0;
-      }
-    }
-    catch (Error e) {
-      // Ignore.  We may not be allowed to inhibit or it may not be running
-    }
   }
 }
 

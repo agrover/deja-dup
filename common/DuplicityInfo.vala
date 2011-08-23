@@ -25,11 +25,8 @@ public class DuplicityInfo : Object
 {
   public static const int REQUIRED_MAJOR = 0;
   public static const int REQUIRED_MINOR = 6;
-  public static const int REQUIRED_MICRO = 8;
+  public static const int REQUIRED_MICRO = 14;
 
-  public bool can_resume {get; private set; default = false; }
-  public bool use_gpg_options {get; private set; default = false; }
-  public bool has_u1 {get; private set; default = false;}
   public bool reports_encryption {get; private set; default = false;}
   
   static DuplicityInfo info = null;
@@ -79,12 +76,6 @@ public class DuplicityInfo : Object
       return false;
     }
 
-    if (equals_version(0, 6, 8))
-      use_gpg_options = true; // workaround a duplicity bug
-    if (meets_version(0, 6, 13))
-      can_resume = true; // had it since 0.6.0, but had data corruption bugs
-    if (meets_version(0, 6, 14))
-      has_u1 = true;
     if (meets_version(0, 6, 15))
       reports_encryption = true;
 

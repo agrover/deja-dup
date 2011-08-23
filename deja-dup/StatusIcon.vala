@@ -91,12 +91,7 @@ public abstract class StatusIcon : Object
   protected Notify.Notification note;
 
   construct {
-    if (DejaDup.DuplicityInfo.get_default().can_resume)
-      later_label = _("_Resume Later");
-    else if (automatic)
-      later_label = _("_Delay Backup");
-    else
-      later_label = _("_Cancel Backup");
+    later_label = _("_Resume Later");
     skip_label = _("_Skip Backup");
 
     op.action_desc_changed.connect(set_action_desc);

@@ -30,7 +30,6 @@ public class AssistantBackup : AssistantOperation
   {
     title = C_("back up is verb", "Back Up");
     apply_text = C_("back up is verb", "_Back Up");
-    resume_supported = DejaDup.DuplicityInfo.get_default().can_resume;
     resumed.connect(do_resume);
   }
   
