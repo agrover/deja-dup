@@ -267,7 +267,7 @@ public class Preferences : Gtk.Grid
     bbox.add(w);
     w = new Gtk.Button.from_stock(Gtk.Stock.HELP);
     (w as Gtk.Button).clicked.connect(() => {
-      DejaDup.show_uri(this.get_toplevel() as Gtk.Window, "ghelp:deja-dup");
+      DejaDup.show_uri(this.get_toplevel() as Gtk.Window, "help:deja-dup");
     });
     bbox.add(w);
     bbox.set_child_secondary(w, true);
