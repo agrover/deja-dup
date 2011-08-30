@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-08-18 15:35-0400\n"
-"PO-Revision-Date: 2011-08-15 14:20+0000\n"
-"Last-Translator: Sergey Basalaev <SBasalaev@gmail.com>\n"
+"POT-Creation-Date: 2011-08-23 10:14-0400\n"
+"PO-Revision-Date: 2011-08-29 18:43+0000\n"
+"Last-Translator: Nick Becker <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-08-19 04:37+0000\n"
-"X-Generator: Launchpad (build 13697)\n"
+"X-Launchpad-Export-Date: 2011-08-30 04:49+0000\n"
+"X-Generator: Launchpad (build 13794)\n"
 
 #: ../deja-dup/AssistantRestore.vala:271
 msgid "Restore from When?"
@@ -25,8 +25,8 @@ msgstr "С какой даты восстановить файлы?"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
-#: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:131
-#: ../deja-dup/StatusIcon.vala:254 ../monitor/monitor.vala:115
+#: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:126
+#: ../deja-dup/StatusIcon.vala:249 ../monitor/monitor.vala:115
 #: ../preferences/preferences-main.vala:51
 #: ../preferences/preferences-main.vala:63
 msgid "Backup"
@@ -190,20 +190,24 @@ msgstr "Каталог Ubuntu One"
 msgid ""
 "The first time Déjà Dup checked whether it should prompt about backing up"
 msgstr ""
+"В первый раз Déjà Dup проверит, следует ли ему задавать вопрос о создании "
+"резервной копии"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
 msgstr ""
+"Название папки для хранения файлов. При значении ‘$HOSTNAME’ папка будет "
+"называться по имени компьютера."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "The last time Déjà Dup backed up"
-msgstr ""
+msgstr "Последняя дата резервного копирования Déjà Dup"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "The last time Déjà Dup restored"
-msgstr ""
+msgstr "Последняя дата восстановления с помощью Déjà Dup"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid ""
@@ -250,6 +254,8 @@ msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
 msgstr ""
+"Тип местоположения резервной копии. Если ‘auto’, будет использоваться "
+"доступное местоположение по умолчанию."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "This is your username for the Rackspace Cloud Files service."
@@ -305,7 +311,7 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Whether the welcome screen has been dismissed"
-msgstr ""
+msgstr "Был ли пропущен экран приветствия"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid "Whether to automatically back up on a regular schedule."
@@ -394,7 +400,7 @@ msgid "Backup will begin when %s becomes connected."
 msgstr "Резервное копирование будет начато при подключении %s"
 
 #: ../common/BackendFile.vala:131 ../common/BackendRackspace.vala:49
-#: ../common/BackendS3.vala:59 ../common/BackendU1.vala:146
+#: ../common/BackendS3.vala:59 ../common/BackendU1.vala:140
 msgid "Backup will begin when a network connection becomes available."
 msgstr "Резервное копирование будет начато при подключении к сети."
 
@@ -413,7 +419,7 @@ msgstr "Ожидание подключения  ‘%s’ ..."
 
 #: ../common/BackendRackspace.vala:58
 msgid "You must specify a Rackspace container in your preferences."
-msgstr ""
+msgstr "Необходимо указать в свойствах контейнер Rackspace."
 
 #: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:191
 msgid "Rackspace Cloud Files"
@@ -423,7 +429,7 @@ msgstr "Облачные файлы Rackspace"
 #: ../common/BackendRackspace.vala:70
 #, c-format
 msgid "%s on Rackspace Cloud Files"
-msgstr ""
+msgstr "%s в облачных файлах Rackspace"
 
 #: ../common/BackendRackspace.vala:117 ../common/BackendS3.vala:172
 msgid "Permission denied"
@@ -440,7 +446,7 @@ msgstr ""
 
 #: ../common/BackendRackspace.vala:139
 msgid "Connect to Rackspace Cloud Files"
-msgstr ""
+msgstr "Подключиться к облачным файлам Rackspace"
 
 #: ../common/BackendRackspace.vala:140
 msgid "_API access key"
@@ -472,7 +478,7 @@ msgstr ""
 
 #: ../common/BackendS3.vala:194
 msgid "Connect to Amazon S3"
-msgstr ""
+msgstr "Соединиться с Amazon S3"
 
 #: ../common/BackendS3.vala:195
 msgid "_Access key ID"
@@ -490,21 +496,21 @@ msgstr "_Показать секретный ключ доступа"
 msgid "_Remember secret access key"
 msgstr "_Запомнить секретный ключ доступа"
 
-#: ../common/BackendU1.vala:162 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendU1.vala:156 ../widgets/ConfigLocation.vala:183
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
 #. Translators: %s is a folder.
-#: ../common/BackendU1.vala:165
+#: ../common/BackendU1.vala:159
 #, c-format
 msgid "%s on Ubuntu One"
 msgstr "%s на Ubuntu One"
 
-#: ../common/BackendU1.vala:220
+#: ../common/BackendU1.vala:214
 msgid "Connect to Ubuntu One"
 msgstr "Соединить с Ubuntu One"
 
-#: ../common/BackendU1.vala:221
+#: ../common/BackendU1.vala:215
 msgid "Sign into Ubuntu One…"
 msgstr "Авторизация на Ubuntu One…"
 
@@ -516,17 +522,17 @@ msgstr ""
 
 #: ../common/CommonUtils.vala:497
 msgid "Home"
-msgstr ""
+msgstr "Главная"
 
 #: ../common/CommonUtils.vala:501
 msgid "Trash"
 msgstr "Корзина"
 
-#: ../common/DuplicityInfo.vala:115
+#: ../common/DuplicityInfo.vala:106
 msgid "Could not run duplicity"
 msgstr "Не удалось запустить duplicity"
 
-#: ../common/DuplicityInfo.vala:120
+#: ../common/DuplicityInfo.vala:111
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -534,7 +540,7 @@ msgstr ""
 "Не удалось распознать версию duplicity.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:122
+#: ../common/DuplicityInfo.vala:113
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -543,16 +549,16 @@ msgstr ""
 "Не удалось распознать версию duplicity ‘%s’.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:124
+#: ../common/DuplicityInfo.vala:115
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
 
-#: ../common/DuplicityInfo.vala:128
+#: ../common/DuplicityInfo.vala:119
 msgid "Duplicity’s version is too old"
 msgstr "Версия duplicity слишком старая"
 
-#: ../common/DuplicityInfo.vala:129
+#: ../common/DuplicityInfo.vala:120
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -563,39 +569,39 @@ msgstr ""
 msgid "Paused (no network)"
 msgstr "Приостановлено (нет сети)"
 
-#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
-#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
+#: ../common/Duplicity.vala:376 ../common/Duplicity.vala:383
+#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:407
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Подготовка..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:437
+#: ../common/Duplicity.vala:434
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Невозможно восстановить ‘%s’: Некорректное местоположение файла"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:503
+#: ../common/Duplicity.vala:500
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Недостаточно места для резервного копирования. Попробуйте использовать "
 "другой носитель."
 
-#: ../common/Duplicity.vala:525
+#: ../common/Duplicity.vala:522
 msgid "Backup location does not have enough free space."
 msgstr "Недостаточно свободного места для резервного копирования"
 
-#: ../common/Duplicity.vala:544 ../common/Duplicity.vala:558
+#: ../common/Duplicity.vala:541 ../common/Duplicity.vala:555
 msgid "Cleaning up…"
 msgstr "Очистка..."
 
-#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:1013
+#: ../common/Duplicity.vala:657 ../common/Duplicity.vala:1010
 #: ../deja-dup/AssistantOperation.vala:519
 msgid "Failed with an unknown error."
 msgstr "Не удалось (неизвестная ошибка)"
 
-#: ../common/Duplicity.vala:874
+#: ../common/Duplicity.vala:871
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Не удалось восстановить  ‘%s’: файл не найден в резервной копии"
@@ -603,16 +609,16 @@ msgstr "Не удалось восстановить  ‘%s’: файл не н
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:880 ../common/Duplicity.vala:960
-#: ../common/Duplicity.vala:964
+#: ../common/Duplicity.vala:877 ../common/Duplicity.vala:957
+#: ../common/Duplicity.vala:961
 msgid "Bad encryption password."
 msgstr "Неверный пароль шифрования"
 
-#: ../common/Duplicity.vala:885
+#: ../common/Duplicity.vala:882
 msgid "Computer name changed"
 msgstr "Изменилось название компьютера"
 
-#: ../common/Duplicity.vala:885
+#: ../common/Duplicity.vala:882
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -623,67 +629,67 @@ msgstr ""
 "избежание непредсказуемых последствий, рекомендуется создать резервную копию "
 "на другом носителе."
 
-#: ../common/Duplicity.vala:898
+#: ../common/Duplicity.vala:895
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Доступ запрещён при попытке создать ‘%s’."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:902 ../common/Duplicity.vala:906
+#: ../common/Duplicity.vala:899 ../common/Duplicity.vala:903
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Доступ запрещён при попытке прочитать ‘%s’"
 
-#: ../common/Duplicity.vala:910
+#: ../common/Duplicity.vala:907
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Доступ запрещён при попытке удаления ‘%s’"
 
-#: ../common/Duplicity.vala:917
+#: ../common/Duplicity.vala:914
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Носитель ‘%s’ не существует."
 
-#: ../common/Duplicity.vala:923 ../common/Duplicity.vala:983
+#: ../common/Duplicity.vala:920 ../common/Duplicity.vala:980
 msgid "No space left."
 msgstr "Не осталось свободного места"
 
-#: ../common/Duplicity.vala:937
+#: ../common/Duplicity.vala:934
 msgid "Invalid ID."
 msgstr "Неправильный ID."
 
-#: ../common/Duplicity.vala:939
+#: ../common/Duplicity.vala:936
 msgid "Invalid secret key."
 msgstr "Не правильный секретный ключ."
 
-#: ../common/Duplicity.vala:941
+#: ../common/Duplicity.vala:938
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Ваш аккаунт на службе Amazon не имеет подписки на сервис S3."
 
-#: ../common/Duplicity.vala:954
+#: ../common/Duplicity.vala:951
 msgid "S3 bucket name is not available."
 msgstr "Имя набора (bucket) S3 недоступно."
 
-#: ../common/Duplicity.vala:968
+#: ../common/Duplicity.vala:965
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Ошибка чтения файла ‘%s’."
 
-#: ../common/Duplicity.vala:970
+#: ../common/Duplicity.vala:967
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Ошибка записи файла ‘%s’."
 
-#: ../common/Duplicity.vala:985
+#: ../common/Duplicity.vala:982
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Не осталось свободного места на ‘%s’."
 
-#: ../common/Duplicity.vala:993
+#: ../common/Duplicity.vala:990
 msgid "No backup files found"
 msgstr "Резервных копий не обнаружено"
 
-#: ../common/Duplicity.vala:1044
+#: ../common/Duplicity.vala:1041
 msgid "Uploading…"
 msgstr "Загрузка..."
 
@@ -707,7 +713,7 @@ msgstr "Проверка резервных копий..."
 msgid "Listing files…"
 msgstr "Список файлов..."
 
-#: ../common/Operation.vala:283
+#: ../common/Operation.vala:281
 msgid "Another backup operation is already running"
 msgstr "Выполняется другая операция резервного копирования"
 
@@ -721,12 +727,12 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "_Создать резервную копию"
 
-#: ../deja-dup/AssistantBackup.vala:51
+#: ../deja-dup/AssistantBackup.vala:50
 msgid "Creating the first backup.  This may take a while."
 msgstr ""
 "Резервная копия создаётся первый раз. Это может занять некоторое время."
 
-#: ../deja-dup/AssistantBackup.vala:52
+#: ../deja-dup/AssistantBackup.vala:51
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -736,15 +742,15 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:82
+#: ../deja-dup/AssistantBackup.vala:81
 msgid "Backing up:"
 msgstr "Создается резервная копия для:"
 
-#: ../deja-dup/AssistantBackup.vala:91
+#: ../deja-dup/AssistantBackup.vala:90
 msgid "Backup Failed"
 msgstr "Резервное копирование не удалось"
 
-#: ../deja-dup/AssistantBackup.vala:98
+#: ../deja-dup/AssistantBackup.vala:97
 msgid "Backing Up…"
 msgstr "Резервное копирование..."
 
@@ -762,7 +768,7 @@ msgstr "_Разрешить восстановление без пароля"
 
 #: ../deja-dup/AssistantOperation.vala:308
 msgid "_Password-protect your backup"
-msgstr ""
+msgstr "Защитите _паролем резервную копию"
 
 #: ../deja-dup/AssistantOperation.vala:322
 #, c-format
@@ -770,6 +776,8 @@ msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
+"Потребуется указать пароль для восстановления файлов. Возможно, его лучше "
+"записать."
 
 #: ../deja-dup/AssistantOperation.vala:337
 msgid "E_ncryption password"
@@ -794,15 +802,15 @@ msgstr "Сводная информация"
 
 #: ../deja-dup/AssistantOperation.vala:729
 msgid "Require Password?"
-msgstr ""
+msgstr "Требовать пароль?"
 
 #: ../deja-dup/AssistantOperation.vala:731
 msgid "Encryption Password Needed"
-msgstr ""
+msgstr "Требуется пароль шифрования"
 
 #: ../deja-dup/AssistantOperation.vala:774
 msgid "Backup encryption password"
-msgstr ""
+msgstr "Сделать резервную копию пароля шифрования"
 
 #: ../deja-dup/AssistantRestore.vala:68
 msgid "Restore"
@@ -818,7 +826,7 @@ msgstr "_Местоположение резервной копии"
 
 #: ../deja-dup/AssistantRestore.vala:124
 msgid "Restore from Where?"
-msgstr ""
+msgstr "Откуда восстановить?"
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date"
@@ -919,15 +927,15 @@ msgstr "Какие файлы восстанавливать?"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:346
 msgid "Scanning for files from up to a day ago…"
-msgstr ""
+msgstr "Поиск файлов ранее прошлого дня..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:349
 msgid "Scanning for files from up to a week ago…"
-msgstr ""
+msgstr "Поиск файлов ранее прошлой недели..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:352
 msgid "Scanning for files from up to a month ago…"
-msgstr ""
+msgstr "Поиск файлов ранее прошлого месяца..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:356
 #, c-format
@@ -949,11 +957,11 @@ msgstr[2] "Сканирование файлов %d годовой давнос�
 msgid "Scanning finished"
 msgstr "Сканирование завершено"
 
-#: ../deja-dup/Assistant.vala:310
+#: ../deja-dup/Assistant.vala:309
 msgid "Co_ntinue"
 msgstr "_Продолжить"
 
-#: ../deja-dup/Assistant.vala:348 ../deja-dup/StatusIcon.vala:95
+#: ../deja-dup/Assistant.vala:347 ../deja-dup/StatusIcon.vala:94
 msgid "_Resume Later"
 msgstr "П_родолжить позже"
 
@@ -997,6 +1005,11 @@ msgid ""
 "the Right Way (encrypted, off-site, and regular) and uses duplicity as\n"
 "the backend."
 msgstr ""
+"Déjà Dup простой инструмент резервного копирования. Скрывает сложность "
+"правильного\n"
+"резервного копирования (с шифрованием, удалённо и регулярно) и использует "
+"duplicity\n"
+"в качестве обработчика."
 
 #: ../deja-dup/main.vala:137
 msgid "Directory does not exists"
@@ -1076,35 +1089,27 @@ msgstr "_Открыть настройки резервного копирова
 msgid "Open Backup Settings"
 msgstr "Открыть настройки резервного копирования"
 
-#: ../deja-dup/StatusIcon.vala:97
-msgid "_Delay Backup"
-msgstr "_Отложить резервное копирование"
-
-#: ../deja-dup/StatusIcon.vala:99
-msgid "_Cancel Backup"
-msgstr "_Отменить резервное копирование"
-
-#: ../deja-dup/StatusIcon.vala:100
+#: ../deja-dup/StatusIcon.vala:95
 msgid "_Skip Backup"
 msgstr "_Пропустить резервное копирование"
 
-#: ../deja-dup/StatusIcon.vala:132
+#: ../deja-dup/StatusIcon.vala:127
 msgid "Backup completed"
 msgstr "Резервное копирование выполнено"
 
-#: ../deja-dup/StatusIcon.vala:170
+#: ../deja-dup/StatusIcon.vala:165
 msgid "Déjà Du_p"
 msgstr "Déjà Du_p"
 
-#: ../deja-dup/StatusIcon.vala:255
+#: ../deja-dup/StatusIcon.vala:250
 msgid "Starting scheduled backup"
 msgstr "Запуск запланированного резервного копирования"
 
-#: ../deja-dup/StatusIcon.vala:257
+#: ../deja-dup/StatusIcon.vala:252
 msgid "Show Progress"
-msgstr ""
+msgstr "Отображать ход выполнения"
 
-#: ../deja-dup/StatusIcon.vala:294
+#: ../deja-dup/StatusIcon.vala:289
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% завершено"
@@ -1116,7 +1121,7 @@ msgstr "Отложено создание резервной копии по р�
 #: ../preferences/Preferences.vala:45
 #, c-format
 msgid "I want to _restore files from a previous backup…"
-msgstr ""
+msgstr "Я хочу  _восстановить файлы из резервной копии ..."
 
 #: ../preferences/Preferences.vala:64
 #, c-format
@@ -1137,7 +1142,7 @@ msgstr "Папки для резервного копирования"
 
 #: ../preferences/Preferences.vala:200
 msgid "Folders to ignore"
-msgstr ""
+msgstr "Игнорируемые папки"
 
 #: ../preferences/Preferences.vala:213
 msgid "Most recent backup"
@@ -1157,7 +1162,7 @@ msgstr "_Создать резервную копию"
 
 #: ../preferences/Preferences.vala:284
 msgid "Overview"
-msgstr ""
+msgstr "Обзор"
 
 #: ../preferences/Preferences.vala:315
 msgid "Storage"
@@ -1169,7 +1174,7 @@ msgstr "Папки для _резервного копирования"
 
 #: ../preferences/Preferences.vala:346
 msgid "Folders to _ignore"
-msgstr ""
+msgstr "Игнорируемые _папки"
 
 #: ../preferences/Preferences.vala:355
 msgid "Folders"
@@ -1240,8 +1245,9 @@ msgstr "Завтра"
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d сутки ранее"
+msgstr[1] "%d суток ранее"
+msgstr[2] "%d суток ранее"
 
 #: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
@@ -1411,7 +1417,7 @@ msgstr "_Каталог"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
-msgstr ""
+msgstr "_Выберите папку…"
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
@@ -1439,7 +1445,7 @@ msgstr "Еженедельно"
 
 #: ../widgets/ConfigPeriod.vala:38
 msgid "Every 2 weeks"
-msgstr ""
+msgstr "Каждые 2 недели"
 
 #: ../widgets/ConfigPeriod.vala:39
 msgid "Monthly"
@@ -2256,6 +2262,9 @@ msgstr "Не удалось отобразить %s"
 #~ "компьютера %s. Если это неожиданно для вас, то осуществите резервное "
 #~ "копирование на другой носитель (в другое место)."
 
+#~ msgid "_Delay Backup"
+#~ msgstr "_Отложить резервное копирование"
+
 #~ msgid "Revert to Previous Version..."
 #~ msgid_plural "Revert to Previous Versions..."
 #~ msgstr[0] "Вернуться к предыдущей версии..."
@@ -2613,6 +2622,9 @@ msgstr "Не удалось отобразить %s"
 #~ msgid "Scanning for files from last month…"
 #~ msgstr "Сканирование файлов прошлого месяца..."
 
+#~ msgid "_Cancel Backup"
+#~ msgstr "_Отменить резервное копирование"
+
 #~ msgid "FILES"
 #~ msgstr "ФАЙЛЫ"
 
@@ -2676,10 +2688,12 @@ msgstr "Не удалось отобразить %s"
 #~ "  Ilya Telegin https://launchpad.net/~devi29rus\n"
 #~ "  Maxim Chagaev https://launchpad.net/~chamvion\n"
 #~ "  Michael Terry https://launchpad.net/~mterry\n"
+#~ "  Mihail Kravsun https://launchpad.net/~ozzymk\n"
 #~ "  Nick Becker https://launchpad.net/~nickbecker\n"
 #~ "  Norrius https://launchpad.net/~norrius\n"
 #~ "  Sergey Basalaev https://launchpad.net/~sbasalaev\n"
 #~ "  Sergey Sedov https://launchpad.net/~serg-sedov\n"
+#~ "  Stanislav Hanzhin https://launchpad.net/~hanzhin-stas\n"
 #~ "  Vladimir Yakovlev https://launchpad.net/~nagos\n"
 #~ "  deusbase https://launchpad.net/~deusbase\n"
 #~ "  diablo https://launchpad.net/~diablo"
