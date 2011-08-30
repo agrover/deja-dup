@@ -91,6 +91,9 @@ public class Duplicity : Object
   bool needs_root = false;
   bool detected_encryption = false;
   bool existing_encrypted = false;
+
+  string last_bad_volume;
+  uint bad_volume_count;
   
   bool has_progress_total = false;
   uint64 progress_total; // zero, unless we already know limit
@@ -754,6 +757,7 @@ public class Duplicity : Object
   protected static const int ERROR_RESTORE_DIR_NOT_FOUND = 19;
   protected static const int ERROR_EXCEPTION = 30;
   protected static const int ERROR_GPG = 31;
+  protected static const int ERROR_BAD_VOLUME = 44;
   protected static const int ERROR_BACKEND = 50;
   protected static const int ERROR_BACKEND_PERMISSION_DENIED = 51;
   protected static const int ERROR_BACKEND_NOT_FOUND = 52;
@@ -887,6 +891,27 @@ public class Duplicity : Object
         saved_argv.append("--allow-source-mismatch");
         if (restart())
           return;
+        break;
+
+      case ERROR_BAD_VOLUME:
+        // A volume was detected to be corrupt/incomplete after uploading.
+        // We'll first try a restart because then duplicity will retry it.
+        // If it's still bad, we'll do a full cleanup and try again.
+        // If it's *still* bad, tell the user, but I'm not sure what they can
+        // do about it.
+        if (mode == Operation.Mode.BACKUP) {
+          var this_volume = firstline[2];
+          if (last_bad_volume != this_volume) {
+            bad_volume_count = 0;
+            last_bad_volume = this_volume;
+          }
+
+          if ((bad_volume_count == 0 && restart()) ||
+              (bad_volume_count == 1 && cleanup())) {
+            bad_volume_count += 1;
+            return;
+          }
+        }
         break;
 
       case ERROR_BACKEND_PERMISSION_DENIED:

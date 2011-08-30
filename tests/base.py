@@ -221,7 +221,7 @@ def start_deja_dup(args=[], executable='deja-dup', waitfor='frmBackup', debug=Fa
     cmd = ['gnome-terminal', '-x', 'gdb', '-ex', 'run'] + cmd
   # FIXME gtk3/gail3 seem problematic with always-malloc
   #environ['G_SLICE'] = 'always-malloc,debug-blocks'
-  environ['G_SLICE'] = 'debug-blocks'
+  #environ['G_SLICE'] = 'debug-blocks'
   environ['G_DEBUG'] = 'gc-friendly' if not environ.get('G_DEBUG') else environ['G_DEBUG'] + ',gc-friendly'
   subprocess.Popen(cmd)
   if waitfor is not None:
