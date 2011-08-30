@@ -28,18 +28,19 @@ import subprocess
 # Drop the PATH override that pointed to this script
 os.environ['PATH'] = os.environ['PATH'].split(':', 1)[-1]
 
-# Read the skip file to see what we should skip
-f = open(os.environ['DEJA_DUP_TEST_SKIP_FILE'])
-all_volumes = f.read().split()
-f.close()
-
 extra_args = []
 
-if all_volumes:
-  f = open(os.environ['DEJA_DUP_TEST_SKIP_FILE'], 'wb')
-  f.write(' '.join(all_volumes[1:]))
+if 'DEJA_DUP_TEST_SKIP_FILE' in os.environ and 'full' in sys.argv and '--dry-run' not in sys.argv:
+  # Read the skip file to see what we should skip
+  f = open(os.environ['DEJA_DUP_TEST_SKIP_FILE'])
+  all_volumes = f.read().split()
   f.close()
 
-  extra_args = ['--skip-volume', all_volumes[0]]
+  if all_volumes:
+    f = open(os.environ['DEJA_DUP_TEST_SKIP_FILE'], 'wb')
+    f.write(' '.join(all_volumes[1:]))
+    f.close()
+
+    extra_args = ['--skip-volume', all_volumes[0]]
 
 subprocess.call(['duplicity'] + sys.argv[1:] + extra_args)

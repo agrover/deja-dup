@@ -24,11 +24,11 @@ import base
 import os
 import tempfile
 
-if not base.dup_meets_version(0, 6, 16):
-  base.skip()
-
 # Set up our duplicity wrapper to be called by deja-dup
 os.environ['PATH'] = os.path.join(scriptdir, 'bad-volume-bin') + ":" + os.environ['PATH']
+
+# TODO: These aren't done yet; ldtp in Ubuntu 11.10 is crazy right now
+# I've done manually similar testing though.
 
 def set_skip_volumes(vols):
   (fd, name) = tempfile.mkstemp()
@@ -40,12 +40,14 @@ def set_skip_volumes(vols):
 
 def test():
   base.setup()
+  if not base.dup_meets_version(0, 6, 16): base.skip()
   set_skip_volumes([3, 3, 3])
   base.backup_simple(backend='file', encrypt=False, includes=['/usr/bin'],
                      error='lblBlarg')
 
 def test():
   base.setup()
+  if not base.dup_meets_version(0, 6, 16): base.skip()
   set_skip_volumes([1, 2, 3, 4])
   base.backup_simple(backend='file', encrypt=False, includes=['/usr/bin'])
 

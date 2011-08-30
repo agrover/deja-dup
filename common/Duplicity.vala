@@ -853,6 +853,19 @@ public class Duplicity : Object
     return rv;
   }
 
+  // Hacky function to return later parts of a duplicity filename.
+  // Used to chop off the date bit
+  string parse_duplicity_file(string file, int skip_bits)
+  {
+    int next = 0;
+    while (skip_bits-- > 0 && next >= 0)
+      next = file.index_of_char('.', next) + 1;
+    if (next < 0)
+      return "";
+    else
+      return file.substring(next);
+  }
+
   protected virtual void process_error(string[] firstline, List<string>? data,
                                        string text_in)
   {
@@ -900,7 +913,8 @@ public class Duplicity : Object
         // If it's *still* bad, tell the user, but I'm not sure what they can
         // do about it.
         if (mode == Operation.Mode.BACKUP) {
-          var this_volume = firstline[2];
+          // strip date info from volume (after cleanup below, we'll get new date)
+          var this_volume = parse_duplicity_file(firstline[2], 2);
           if (last_bad_volume != this_volume) {
             bad_volume_count = 0;
             last_bad_volume = this_volume;
