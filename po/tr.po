@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-08-23 10:14-0400\n"
+"POT-Creation-Date: 2011-08-30 23:48-0400\n"
 "PO-Revision-Date: 2011-08-15 14:16+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-08-24 04:39+0000\n"
-"X-Generator: Launchpad (build 13697)\n"
+"X-Launchpad-Export-Date: 2011-08-31 04:42+0000\n"
+"X-Generator: Launchpad (build 13815)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -52,7 +52,7 @@ msgstr "Yedekleme ayarlarınızı değiştirin"
 #: ../data/deja-dup-ccpanel.desktop.in.h:5
 #: ../data/deja-dup-preferences.desktop.in.in.h:5
 msgid "déjà;deja;dup;"
-msgstr ""
+msgstr "déjà;deja;dup;"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
@@ -63,7 +63,7 @@ msgstr "Yedekleme Takipçisi"
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
 msgid "Schedules backups at regular intervals"
-msgstr ""
+msgstr "Düzenli aralıklarla planlanmış yedeklemeler"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 msgid "Amazon S3 Access Key ID"
@@ -83,16 +83,18 @@ msgid "Backup location"
 msgstr "Yedekleme konumu"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:4
-msgid "Directories not to back up"
-msgstr "Yedeklenmeyecek dizinler"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-msgid "Directories to back up"
-msgstr "Yedeklenecek dizinler"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
 msgid "Folder type"
 msgstr "Klasör türü"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up"
+msgstr "Yedeklenecek klasörler"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore"
+msgstr "Yoksayılacak dizinler"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:7
 msgid "Full name of the external volume"
@@ -437,7 +439,7 @@ msgstr ""
 
 #: ../common/BackendS3.vala:194
 msgid "Connect to Amazon S3"
-msgstr ""
+msgstr "Amazon S3'e bağlan"
 
 #: ../common/BackendS3.vala:195
 msgid "_Access key ID"
@@ -471,7 +473,7 @@ msgstr "Ubuntu One'a Bağlan"
 
 #: ../common/BackendU1.vala:215
 msgid "Sign into Ubuntu One…"
-msgstr ""
+msgstr "Ubuntu One oturumu aç..."
 
 #. Translators: %s is the user's username
 #: ../common/CommonUtils.vala:493
@@ -521,41 +523,41 @@ msgid ""
 "only found version %d.%d.%.2d"
 msgstr ""
 
-#: ../common/Duplicity.vala:129 ../common/Duplicity.vala:183
+#: ../common/Duplicity.vala:132 ../common/Duplicity.vala:186
 msgid "Paused (no network)"
 msgstr "Duraklatıldı (ağ yok)"
 
-#: ../common/Duplicity.vala:376 ../common/Duplicity.vala:383
-#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:407
+#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
+#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Hazırlanıyor..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:434
+#: ../common/Duplicity.vala:437
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "'%s' geri yüklenemedi: Dosya konumu geçerli değil"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:500
+#: ../common/Duplicity.vala:503
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "Yedekleme alanı çok küçük. Daha fazla alana sahip bir konum deneyin."
 
-#: ../common/Duplicity.vala:522
+#: ../common/Duplicity.vala:525
 msgid "Backup location does not have enough free space."
 msgstr "Yedekleme konumunda yeterli boş alan yok."
 
-#: ../common/Duplicity.vala:541 ../common/Duplicity.vala:555
+#: ../common/Duplicity.vala:544 ../common/Duplicity.vala:558
 msgid "Cleaning up…"
 msgstr "Temizleniyor..."
 
-#: ../common/Duplicity.vala:657 ../common/Duplicity.vala:1010
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:1049
 #: ../deja-dup/AssistantOperation.vala:519
 msgid "Failed with an unknown error."
 msgstr "Bilinmeyen bir sebepten dolayı başarısız."
 
-#: ../common/Duplicity.vala:871
+#: ../common/Duplicity.vala:888
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "'%s' geri yüklenemedi: Dosya yedek içerisinde bulunamadı"
@@ -563,16 +565,16 @@ msgstr "'%s' geri yüklenemedi: Dosya yedek içerisinde bulunamadı"
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:877 ../common/Duplicity.vala:957
-#: ../common/Duplicity.vala:961
+#: ../common/Duplicity.vala:894 ../common/Duplicity.vala:996
+#: ../common/Duplicity.vala:1000
 msgid "Bad encryption password."
 msgstr ""
 
-#: ../common/Duplicity.vala:882
+#: ../common/Duplicity.vala:899
 msgid "Computer name changed"
 msgstr "Bilgisayar adı değişmiş"
 
-#: ../common/Duplicity.vala:882
+#: ../common/Duplicity.vala:899
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -580,67 +582,67 @@ msgid ""
 "location."
 msgstr ""
 
-#: ../common/Duplicity.vala:895
+#: ../common/Duplicity.vala:934
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
-msgstr ""
+msgstr "‘%s’ oluşturmaya çalışılırken izin verilmedi."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:899 ../common/Duplicity.vala:903
+#: ../common/Duplicity.vala:938 ../common/Duplicity.vala:942
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
-msgstr ""
+msgstr "‘%s’ okunmaya çalışılırken izin verilmedi."
 
-#: ../common/Duplicity.vala:907
+#: ../common/Duplicity.vala:946
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
-msgstr ""
+msgstr "‘%s’ silinmeye çalışılırken izin verilmedi."
 
-#: ../common/Duplicity.vala:914
+#: ../common/Duplicity.vala:953
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Yedekleme konumu ‘%s’ bulunmuyor."
 
-#: ../common/Duplicity.vala:920 ../common/Duplicity.vala:980
+#: ../common/Duplicity.vala:959 ../common/Duplicity.vala:1019
 msgid "No space left."
-msgstr ""
+msgstr "Boş alan kalmadı."
 
-#: ../common/Duplicity.vala:934
+#: ../common/Duplicity.vala:973
 msgid "Invalid ID."
 msgstr "Geçersiz kimlik."
 
-#: ../common/Duplicity.vala:936
+#: ../common/Duplicity.vala:975
 msgid "Invalid secret key."
 msgstr ""
 
-#: ../common/Duplicity.vala:938
+#: ../common/Duplicity.vala:977
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 
-#: ../common/Duplicity.vala:951
+#: ../common/Duplicity.vala:990
 msgid "S3 bucket name is not available."
 msgstr ""
 
-#: ../common/Duplicity.vala:965
+#: ../common/Duplicity.vala:1004
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "'%s' dosyası okumada hata."
 
-#: ../common/Duplicity.vala:967
+#: ../common/Duplicity.vala:1006
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "'%s' dosyası yazmada hata ."
 
-#: ../common/Duplicity.vala:982
+#: ../common/Duplicity.vala:1021
 #, c-format
 msgid "No space left in ‘%s’."
-msgstr ""
+msgstr "‘%s’ içerisinde boş alan kalmadı."
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:1029
 msgid "No backup files found"
 msgstr "Yedekleme dosyası bulunamadı"
 
-#: ../common/Duplicity.vala:1041
+#: ../common/Duplicity.vala:1080
 msgid "Uploading…"
 msgstr "Yükleniyor..."
 
@@ -727,7 +729,7 @@ msgstr ""
 
 #: ../deja-dup/AssistantOperation.vala:337
 msgid "E_ncryption password"
-msgstr ""
+msgstr "_Şifreleme parolası"
 
 #: ../deja-dup/AssistantOperation.vala:354
 msgid "Confir_m password"
@@ -752,7 +754,7 @@ msgstr ""
 
 #: ../deja-dup/AssistantOperation.vala:731
 msgid "Encryption Password Needed"
-msgstr ""
+msgstr "Şifreleme Parolası Gerekli"
 
 #: ../deja-dup/AssistantOperation.vala:774
 msgid "Backup encryption password"
@@ -772,7 +774,7 @@ msgstr "_Yedekleme konumu"
 
 #: ../deja-dup/AssistantRestore.vala:124
 msgid "Restore from Where?"
-msgstr ""
+msgstr "Nereden Geri Yüklensin?"
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date"
@@ -780,15 +782,15 @@ msgstr "_Tarih"
 
 #: ../deja-dup/AssistantRestore.vala:169
 msgid "Restore files to _original locations"
-msgstr ""
+msgstr "Dosyaları _özgün konumlarına geri yükle"
 
 #: ../deja-dup/AssistantRestore.vala:174
 msgid "Restore to _specific folder"
-msgstr ""
+msgstr "_Belirli bir klasörden geri yükle"
 
 #: ../deja-dup/AssistantRestore.vala:184
 msgid "Choose destination for restored files"
-msgstr ""
+msgstr "Geri yüklenen dosyalar için konum seçin"
 
 #: ../deja-dup/AssistantRestore.vala:188
 msgid "Restore _folder"
@@ -800,19 +802,19 @@ msgstr "Geri yükleme tarihi"
 
 #: ../deja-dup/AssistantRestore.vala:237
 msgid "Restore folder"
-msgstr ""
+msgstr "Klasörü geri yükle"
 
 #: ../deja-dup/AssistantRestore.vala:263
 msgid "Checking for Backups…"
-msgstr ""
+msgstr "Yedekler Kontrol Ediliyor..."
 
 #: ../deja-dup/AssistantRestore.vala:271
 msgid "Restore from When?"
-msgstr ""
+msgstr "Hangi Zamandan Geri Yüklensin?"
 
 #: ../deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
-msgstr ""
+msgstr "Nereye Geri Yüklensin?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
@@ -835,7 +837,7 @@ msgstr "Geri yüklenebilecek yedek yok"
 
 #: ../deja-dup/AssistantRestore.vala:439
 msgid "Original location"
-msgstr ""
+msgstr "Özgün konum"
 
 #: ../deja-dup/AssistantRestore.vala:449
 msgid "File to restore"
@@ -858,8 +860,7 @@ msgstr "Dosyalarınız başarıyla geri yüklendi."
 #: ../deja-dup/AssistantRestore.vala:476
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Dosyanız başarıyla geri yüklendi."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:199
 msgid "File"
@@ -867,7 +868,7 @@ msgstr "Dosya"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:200
 msgid "Last seen"
-msgstr ""
+msgstr "En son görüldüğü zaman"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:215
 msgid "Restore which Files?"
@@ -1073,14 +1074,6 @@ msgstr "Kategoriler"
 msgid "Automatic _backups"
 msgstr "Otomatik _yedeklemeler"
 
-#: ../preferences/Preferences.vala:192
-msgid "Folders to back up"
-msgstr "Yedeklenecek klasörler"
-
-#: ../preferences/Preferences.vala:200
-msgid "Folders to ignore"
-msgstr ""
-
 #: ../preferences/Preferences.vala:213
 msgid "Most recent backup"
 msgstr ""
@@ -1107,11 +1100,11 @@ msgstr "Depolama"
 
 #: ../preferences/Preferences.vala:336
 msgid "Folders to _back up"
-msgstr ""
+msgstr "Y_edeklenecek dizinler"
 
 #: ../preferences/Preferences.vala:346
 msgid "Folders to _ignore"
-msgstr ""
+msgstr "Y_oksayılacak dizinler"
 
 #: ../preferences/Preferences.vala:355
 msgid "Folders"
@@ -1317,7 +1310,7 @@ msgstr "Yerel Klasör"
 
 #: ../widgets/ConfigLocationCustom.vala:31
 msgid "_URI"
-msgstr ""
+msgstr "_URI"
 
 #: ../widgets/ConfigLocationDAV.vala:31 ../widgets/ConfigLocationFTP.vala:32
 #: ../widgets/ConfigLocationSMB.vala:31 ../widgets/ConfigLocationSSH.vala:31
@@ -1342,7 +1335,7 @@ msgstr "_Klasör"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
-msgstr ""
+msgstr "Dizin _Seç..."
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
@@ -1552,6 +1545,12 @@ msgstr "%s gösterilemiyor"
 
 #~ msgid "Déjà Dup Monitor"
 #~ msgstr "Déjà Dup Gözlemcisi"
+
+#~ msgid "Directories to back up"
+#~ msgstr "Yedeklenecek dizinler"
+
+#~ msgid "Directories not to back up"
+#~ msgstr "Yedeklenmeyecek dizinler"
 
 #~ msgid "Backup Preferences"
 #~ msgstr "Yedekleme Tercihleri"

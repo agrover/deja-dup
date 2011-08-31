@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-08-23 10:14-0400\n"
+"POT-Creation-Date: 2011-08-30 23:48-0400\n"
 "PO-Revision-Date: 2011-08-15 14:01+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-08-24 04:38+0000\n"
-"X-Generator: Launchpad (build 13697)\n"
+"X-Launchpad-Export-Date: 2011-08-31 04:42+0000\n"
+"X-Generator: Launchpad (build 13815)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -41,7 +41,7 @@ msgstr "Déjà Dup バックアップツール"
 #: ../data/deja-dup-ccpanel.desktop.in.h:1
 #: ../data/deja-dup-preferences.desktop.in.in.h:1
 msgid "Back Up Now"
-msgstr ""
+msgstr "今すぐバックアップ"
 
 #: ../data/deja-dup-ccpanel.desktop.in.h:3
 #: ../data/deja-dup-preferences.desktop.in.in.h:3
@@ -52,7 +52,7 @@ msgstr "バックアップの設定を変更します"
 #: ../data/deja-dup-ccpanel.desktop.in.h:5
 #: ../data/deja-dup-preferences.desktop.in.in.h:5
 msgid "déjà;deja;dup;"
-msgstr ""
+msgstr "déjà;deja;dup;"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
@@ -81,16 +81,18 @@ msgid "Backup location"
 msgstr "バックアップの保存場所"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:4
-msgid "Directories not to back up"
-msgstr "バックアップしないディレクトリ"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-msgid "Directories to back up"
-msgstr "バックアップするディレクトリ"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
 msgid "Folder type"
 msgstr "フォルダタイプ"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up"
+msgstr "バックアップするフォルダ"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore"
+msgstr "無視するフォルダ"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:7
 msgid "Full name of the external volume"
@@ -179,7 +181,7 @@ msgstr ""
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
-msgstr ""
+msgstr "ファイルを保存されるフォルダ名。‘$HOSTNAME’の場合、コンピュータ名をベースとしたフォルダをデフォルトにします。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "The last time Déjà Dup backed up"
@@ -231,7 +233,7 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "This is your username for the Rackspace Cloud Files service."
-msgstr ""
+msgstr "Rackspace Cloud Filesサービスのユーザー名"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid ""
@@ -368,7 +370,7 @@ msgstr "バックアップの保存場所が使用できません"
 
 #: ../common/BackendFile.vala:363
 msgid "Waiting for a network connection…"
-msgstr ""
+msgstr "ネットワークの接続を待っています..."
 
 #: ../common/BackendFile.vala:426
 #, c-format
@@ -433,7 +435,7 @@ msgstr "<a href=\"%s\">オンライン</a>でAmazon S3アカウントをサイ�
 
 #: ../common/BackendS3.vala:194
 msgid "Connect to Amazon S3"
-msgstr ""
+msgstr "Amazon S3に接続"
 
 #: ../common/BackendS3.vala:195
 msgid "_Access key ID"
@@ -453,7 +455,7 @@ msgstr "secret access key を記憶する(_R)"
 
 #: ../common/BackendU1.vala:156 ../widgets/ConfigLocation.vala:183
 msgid "Ubuntu One"
-msgstr ""
+msgstr "Ubuntu One"
 
 #. Translators: %s is a folder.
 #: ../common/BackendU1.vala:159
@@ -463,7 +465,7 @@ msgstr ""
 
 #: ../common/BackendU1.vala:214
 msgid "Connect to Ubuntu One"
-msgstr ""
+msgstr "Ubuntu Oneに接続"
 
 #: ../common/BackendU1.vala:215
 msgid "Sign into Ubuntu One…"
@@ -473,11 +475,11 @@ msgstr ""
 #: ../common/CommonUtils.vala:493
 #, c-format
 msgid "Home (%s)"
-msgstr ""
+msgstr "ホーム (%s)"
 
 #: ../common/CommonUtils.vala:497
 msgid "Home"
-msgstr ""
+msgstr "ホーム"
 
 #: ../common/CommonUtils.vala:501
 msgid "Trash"
@@ -520,41 +522,41 @@ msgid ""
 "only found version %d.%d.%.2d"
 msgstr ""
 
-#: ../common/Duplicity.vala:129 ../common/Duplicity.vala:183
+#: ../common/Duplicity.vala:132 ../common/Duplicity.vala:186
 msgid "Paused (no network)"
 msgstr "中断（ネットワークが使用できません）"
 
-#: ../common/Duplicity.vala:376 ../common/Duplicity.vala:383
-#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:407
+#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
+#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "準備しています…"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:434
+#: ../common/Duplicity.vala:437
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr ""
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:500
+#: ../common/Duplicity.vala:503
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "バックアップ保存場所の空き容量が足りません。もっと空き容量の大きいもので試してください。"
 
-#: ../common/Duplicity.vala:522
+#: ../common/Duplicity.vala:525
 msgid "Backup location does not have enough free space."
 msgstr "バックアップの保存場所に十分な空き容量がありません。"
 
-#: ../common/Duplicity.vala:541 ../common/Duplicity.vala:555
+#: ../common/Duplicity.vala:544 ../common/Duplicity.vala:558
 msgid "Cleaning up…"
 msgstr "クリーンアップしています…"
 
-#: ../common/Duplicity.vala:657 ../common/Duplicity.vala:1010
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:1049
 #: ../deja-dup/AssistantOperation.vala:519
 msgid "Failed with an unknown error."
 msgstr "不明なエラーで失敗しました"
 
-#: ../common/Duplicity.vala:871
+#: ../common/Duplicity.vala:888
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "‘%s’ を復元できません: ファイルがバックアップ内に見つかりません"
@@ -562,16 +564,16 @@ msgstr "‘%s’ を復元できません: ファイルがバックアップ内�
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:877 ../common/Duplicity.vala:957
-#: ../common/Duplicity.vala:961
+#: ../common/Duplicity.vala:894 ../common/Duplicity.vala:996
+#: ../common/Duplicity.vala:1000
 msgid "Bad encryption password."
 msgstr "暗号化パスワードが違います。"
 
-#: ../common/Duplicity.vala:882
+#: ../common/Duplicity.vala:899
 msgid "Computer name changed"
 msgstr "コンピュータ名が変更されました"
 
-#: ../common/Duplicity.vala:882
+#: ../common/Duplicity.vala:899
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -580,67 +582,67 @@ msgid ""
 msgstr ""
 "見つかったバックアップのコンピュータ名は %s ですが、現在のコンピュータ名は %s です。意図していない場合は、別の場所にバックアップしてください。"
 
-#: ../common/Duplicity.vala:895
+#: ../common/Duplicity.vala:934
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "'%s' を作成しようとしましたが権限がありません。"
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:899 ../common/Duplicity.vala:903
+#: ../common/Duplicity.vala:938 ../common/Duplicity.vala:942
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "'%s' を読み込もうとしましたが権限がありません。"
 
-#: ../common/Duplicity.vala:907
+#: ../common/Duplicity.vala:946
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "'%s' を削除しようとしましたが権限がありません。"
 
-#: ../common/Duplicity.vala:914
+#: ../common/Duplicity.vala:953
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "バックアップの保存場所 '%s' が存在しません。"
 
-#: ../common/Duplicity.vala:920 ../common/Duplicity.vala:980
+#: ../common/Duplicity.vala:959 ../common/Duplicity.vala:1019
 msgid "No space left."
 msgstr "空き容量がありません。"
 
-#: ../common/Duplicity.vala:934
+#: ../common/Duplicity.vala:973
 msgid "Invalid ID."
 msgstr "不正な ID です。"
 
-#: ../common/Duplicity.vala:936
+#: ../common/Duplicity.vala:975
 msgid "Invalid secret key."
 msgstr "不正な secret key です。"
 
-#: ../common/Duplicity.vala:938
+#: ../common/Duplicity.vala:977
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "あなたのAmazon Web サービスアカウントは S3 サービスにサインアップされていません。"
 
-#: ../common/Duplicity.vala:951
+#: ../common/Duplicity.vala:990
 msgid "S3 bucket name is not available."
 msgstr "S3 バケット名が使用できません。"
 
-#: ../common/Duplicity.vala:965
+#: ../common/Duplicity.vala:1004
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "ファイル ‘%s’ を読み込み中にエラー。"
 
-#: ../common/Duplicity.vala:967
+#: ../common/Duplicity.vala:1006
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "ファイル ‘%s’ を書き込み中にエラー。"
 
-#: ../common/Duplicity.vala:982
+#: ../common/Duplicity.vala:1021
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "'%s' に空き容量がありません。"
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:1029
 msgid "No backup files found"
 msgstr "バックアップファイルが見つかりません"
 
-#: ../common/Duplicity.vala:1041
+#: ../common/Duplicity.vala:1080
 msgid "Uploading…"
 msgstr "アップロードしています…"
 
@@ -712,11 +714,11 @@ msgstr "詳細(_D)"
 
 #: ../deja-dup/AssistantOperation.vala:302
 msgid "_Allow restoring without a password"
-msgstr ""
+msgstr "パスワード無しで復元を許可する(_A)"
 
 #: ../deja-dup/AssistantOperation.vala:308
 msgid "_Password-protect your backup"
-msgstr ""
+msgstr "バックアップをパスワードで保護する(_P)"
 
 #: ../deja-dup/AssistantOperation.vala:322
 #, c-format
@@ -731,7 +733,7 @@ msgstr "暗号化パスワード(_N)"
 
 #: ../deja-dup/AssistantOperation.vala:354
 msgid "Confir_m password"
-msgstr ""
+msgstr "パスワードの確認(_M)"
 
 #: ../deja-dup/AssistantOperation.vala:367
 msgid "_Show password"
@@ -752,11 +754,11 @@ msgstr ""
 
 #: ../deja-dup/AssistantOperation.vala:731
 msgid "Encryption Password Needed"
-msgstr ""
+msgstr "暗号化パスワードが必要です。"
 
 #: ../deja-dup/AssistantOperation.vala:774
 msgid "Backup encryption password"
-msgstr ""
+msgstr "バックアップ暗号化パスワード"
 
 #: ../deja-dup/AssistantRestore.vala:68
 msgid "Restore"
@@ -938,7 +940,7 @@ msgstr ""
 
 #: ../deja-dup/main.vala:82
 msgid "DIRECTORY"
-msgstr ""
+msgstr "ディレクトリ"
 
 #. Translators: Wrap this to 80 characters per line if you can, as I have for English
 #: ../deja-dup/main.vala:86
@@ -962,7 +964,7 @@ msgstr ""
 
 #: ../deja-dup/MountOperationAssistant.vala:36
 msgid "Connect to Server"
-msgstr ""
+msgstr "サーバに接続"
 
 #: ../deja-dup/MountOperationAssistant.vala:37
 #: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
@@ -1016,11 +1018,11 @@ msgstr ""
 
 #: ../deja-dup/Prompt.vala:56
 msgid "_Open Backup Settings"
-msgstr ""
+msgstr "バックアップの設定を開く(_O)"
 
 #: ../deja-dup/Prompt.vala:58
 msgid "Open Backup Settings"
-msgstr ""
+msgstr "バックアップの設定を開く"
 
 #: ../deja-dup/StatusIcon.vala:95
 msgid "_Skip Backup"
@@ -1028,7 +1030,7 @@ msgstr "バックアップの中止(_S)"
 
 #: ../deja-dup/StatusIcon.vala:127
 msgid "Backup completed"
-msgstr ""
+msgstr "バックアップが完了しました"
 
 #: ../deja-dup/StatusIcon.vala:165
 msgid "Déjà Du_p"
@@ -1040,7 +1042,7 @@ msgstr "スケジュール・バックアップの開始"
 
 #: ../deja-dup/StatusIcon.vala:252
 msgid "Show Progress"
-msgstr ""
+msgstr "経過を表示"
 
 #: ../deja-dup/StatusIcon.vala:289
 #, c-format
@@ -1063,27 +1065,19 @@ msgstr ""
 
 #: ../preferences/Preferences.vala:132
 msgid "Categories"
-msgstr ""
+msgstr "カテゴリー"
 
 #: ../preferences/Preferences.vala:166
 msgid "Automatic _backups"
-msgstr ""
-
-#: ../preferences/Preferences.vala:192
-msgid "Folders to back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:200
-msgid "Folders to ignore"
-msgstr ""
+msgstr "自動バックアップ(_B)"
 
 #: ../preferences/Preferences.vala:213
 msgid "Most recent backup"
-msgstr ""
+msgstr "一番最近のバックアップ"
 
 #: ../preferences/Preferences.vala:222
 msgid "Next automatic backup"
-msgstr ""
+msgstr "次の自動バックアップ"
 
 #: ../preferences/Preferences.vala:256
 msgid "_Restore…"
@@ -1091,11 +1085,11 @@ msgstr "復元(_R)…"
 
 #: ../preferences/Preferences.vala:262
 msgid "Back Up _Now"
-msgstr ""
+msgstr "今すぐバックアップ(_N)"
 
 #: ../preferences/Preferences.vala:284
 msgid "Overview"
-msgstr ""
+msgstr "概要"
 
 #: ../preferences/Preferences.vala:315
 msgid "Storage"
@@ -1103,15 +1097,15 @@ msgstr "記憶装置"
 
 #: ../preferences/Preferences.vala:336
 msgid "Folders to _back up"
-msgstr ""
+msgstr "バックアップするフォルダ(_B)"
 
 #: ../preferences/Preferences.vala:346
 msgid "Folders to _ignore"
-msgstr ""
+msgstr "無視するフォルダ(_I)"
 
 #: ../preferences/Preferences.vala:355
 msgid "Folders"
-msgstr ""
+msgstr "フォルダ"
 
 #: ../preferences/Preferences.vala:366
 msgid "How _often to back up"
@@ -1162,34 +1156,32 @@ msgstr[0] "最低 %d 日"
 
 #: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
-msgstr ""
+msgstr "今日"
 
 #: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
-msgstr ""
+msgstr "昨日"
 
 #: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
-msgstr ""
+msgstr "明日"
 
 #: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "今から %d 日"
 
 #: ../widgets/ConfigLabelBackupDate.vala:82
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d 日前"
 
 #: ../widgets/ConfigLabelBackupDate.vala:92
 #: ../widgets/ConfigLabelBackupDate.vala:106
 msgid "None"
-msgstr ""
+msgstr "なし"
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1255,19 +1247,19 @@ msgstr[0] "バックアップ保存先の空き容量が少なくならない限
 
 #: ../widgets/ConfigList.vala:179
 msgid "_Add"
-msgstr ""
+msgstr "追加(_A)"
 
 #: ../widgets/ConfigList.vala:180
 msgid "Add"
-msgstr ""
+msgstr "追加"
 
 #: ../widgets/ConfigList.vala:188
 msgid "_Remove"
-msgstr ""
+msgstr "削除(_R)"
 
 #: ../widgets/ConfigList.vala:189
 msgid "Remove"
-msgstr ""
+msgstr "削除"
 
 #: ../widgets/ConfigList.vala:275
 msgid "Choose folders"
@@ -1275,37 +1267,37 @@ msgstr "フォルダを選択"
 
 #: ../widgets/ConfigLocation.vala:117
 msgid "SSH"
-msgstr ""
+msgstr "SSH"
 
 #: ../widgets/ConfigLocation.vala:119
 msgid "Windows Share"
-msgstr ""
+msgstr "Windows共有"
 
 #: ../widgets/ConfigLocation.vala:121
 msgid "FTP"
-msgstr ""
+msgstr "FTP"
 
 #: ../widgets/ConfigLocation.vala:123
 msgid "WebDAV"
-msgstr ""
+msgstr "WebDAV"
 
 #: ../widgets/ConfigLocation.vala:126
 msgid "Custom Location"
-msgstr ""
+msgstr "カスタム"
 
 #. And a local folder option
 #: ../widgets/ConfigLocation.vala:132
 msgid "Local Folder"
-msgstr ""
+msgstr "ローカルフォルダ"
 
 #: ../widgets/ConfigLocationCustom.vala:31
 msgid "_URI"
-msgstr ""
+msgstr "URI(_U)"
 
 #: ../widgets/ConfigLocationDAV.vala:31 ../widgets/ConfigLocationFTP.vala:32
 #: ../widgets/ConfigLocationSMB.vala:31 ../widgets/ConfigLocationSSH.vala:31
 msgid "_Server"
-msgstr ""
+msgstr "サーバー(_S)"
 
 #: ../widgets/ConfigLocationDAV.vala:38
 msgid "Use secure connection (_HTTPS)"
@@ -1314,7 +1306,7 @@ msgstr ""
 #: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
 #: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
-msgstr ""
+msgstr "ポート(_P)"
 
 #: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
@@ -1325,15 +1317,15 @@ msgstr "フォルダ(_F)"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
-msgstr ""
+msgstr "フォルダを選択...(_C)"
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
-msgstr ""
+msgstr "フォルダの選択"
 
 #: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
-msgstr ""
+msgstr "コンテナー(_C)"
 
 #: ../widgets/ConfigLocationS3.vala:31
 msgid "S3 Access Key I_D"
@@ -1341,7 +1333,7 @@ msgstr "S3 Access Key ID(_D)"
 
 #: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
-msgstr ""
+msgstr "ドメイン名(_D)"
 
 #: ../widgets/ConfigPeriod.vala:36
 msgid "Daily"
@@ -1729,6 +1721,12 @@ msgstr "%s を表示できません"
 #~ msgid "Back up your files"
 #~ msgstr "あなたのファイルをバックアップ"
 
+#~ msgid "Directories not to back up"
+#~ msgstr "バックアップしないディレクトリ"
+
+#~ msgid "Directories to back up"
+#~ msgstr "バックアップするディレクトリ"
+
 #~ msgid "Whether to encrypt your backup"
 #~ msgstr "バックアップを暗号化するかどうか"
 
@@ -1819,6 +1817,7 @@ msgstr "%s を表示できません"
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
+#~ "  Fumihito YOSHIDA https://launchpad.net/~hito\n"
 #~ "  Kentaro Kazuhama https://launchpad.net/~kazken3\n"
 #~ "  Nobuto MURATA https://launchpad.net/~nobuto\n"
 #~ "  Ryunosuke Tanaka https://launchpad.net/~aozora-genei"

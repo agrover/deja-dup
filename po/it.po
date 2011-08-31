@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-08-23 10:14-0400\n"
+"POT-Creation-Date: 2011-08-30 23:48-0400\n"
 "PO-Revision-Date: 2011-08-26 16:49+0000\n"
 "Last-Translator: Claudio Arseni <claudio.arseni@gmail.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-08-27 05:41+0000\n"
-"X-Generator: Launchpad (build 13794)\n"
+"X-Launchpad-Export-Date: 2011-08-31 04:41+0000\n"
+"X-Generator: Launchpad (build 13815)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -84,16 +84,18 @@ msgid "Backup location"
 msgstr "Posizione di backup"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:4
-msgid "Directories not to back up"
-msgstr "Directory escluse dal backup"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-msgid "Directories to back up"
-msgstr "Directory incluse nel backup"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
 msgid "Folder type"
 msgstr "Tipo di cartella"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up"
+msgstr "Cartelle incluse nel backup"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore"
+msgstr "Cartelle da ignorare"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:7
 msgid "Full name of the external volume"
@@ -574,43 +576,43 @@ msgstr ""
 "Lo strumento di backup Déjà Dup richiede almeno la versione %d.%d.%.2d di "
 "duplicity, ma è stata trovata la versione %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:129 ../common/Duplicity.vala:183
+#: ../common/Duplicity.vala:132 ../common/Duplicity.vala:186
 msgid "Paused (no network)"
 msgstr "In pausa (rete non disponibile)"
 
-#: ../common/Duplicity.vala:376 ../common/Duplicity.vala:383
-#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:407
+#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
+#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Preparazione..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:434
+#: ../common/Duplicity.vala:437
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Impossibile ripristinare \"%s\": non è una posizione file valida"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:500
+#: ../common/Duplicity.vala:503
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Spazio non sufficiente nella posizione di backup. Provare a usare una "
 "posizione più capiente."
 
-#: ../common/Duplicity.vala:522
+#: ../common/Duplicity.vala:525
 msgid "Backup location does not have enough free space."
 msgstr "Spazio libero non sufficiente nella posizione di backup."
 
-#: ../common/Duplicity.vala:541 ../common/Duplicity.vala:555
+#: ../common/Duplicity.vala:544 ../common/Duplicity.vala:558
 msgid "Cleaning up…"
 msgstr "Pulizia..."
 
-#: ../common/Duplicity.vala:657 ../common/Duplicity.vala:1010
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:1049
 #: ../deja-dup/AssistantOperation.vala:519
 msgid "Failed with an unknown error."
 msgstr "Non riuscito con un errore sconosciuto."
 
-#: ../common/Duplicity.vala:871
+#: ../common/Duplicity.vala:888
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
@@ -619,16 +621,16 @@ msgstr ""
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:877 ../common/Duplicity.vala:957
-#: ../common/Duplicity.vala:961
+#: ../common/Duplicity.vala:894 ../common/Duplicity.vala:996
+#: ../common/Duplicity.vala:1000
 msgid "Bad encryption password."
 msgstr "Password di cifratura errata."
 
-#: ../common/Duplicity.vala:882
+#: ../common/Duplicity.vala:899
 msgid "Computer name changed"
 msgstr "Il nome del computer è cambiato"
 
-#: ../common/Duplicity.vala:882
+#: ../common/Duplicity.vala:899
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -639,68 +641,68 @@ msgstr ""
 "\"%s\", il computer corrente è invece \"%s\". Se questa evenienza risulta "
 "inattesa, è opportuno eseguire il backup su una differente posizione."
 
-#: ../common/Duplicity.vala:895
+#: ../common/Duplicity.vala:934
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Permesso negato durante il tentativo di creare \"%s\"."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:899 ../common/Duplicity.vala:903
+#: ../common/Duplicity.vala:938 ../common/Duplicity.vala:942
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Permesso negato durante il tentativo di leggere \"%s\"."
 
-#: ../common/Duplicity.vala:907
+#: ../common/Duplicity.vala:946
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Permesso negato durante il tentativo di eliminare \"%s\"."
 
-#: ../common/Duplicity.vala:914
+#: ../common/Duplicity.vala:953
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "La posizione di backup \"%s\" non esiste."
 
-#: ../common/Duplicity.vala:920 ../common/Duplicity.vala:980
+#: ../common/Duplicity.vala:959 ../common/Duplicity.vala:1019
 msgid "No space left."
 msgstr "Spazio esaurito."
 
-#: ../common/Duplicity.vala:934
+#: ../common/Duplicity.vala:973
 msgid "Invalid ID."
 msgstr "ID non valido."
 
-#: ../common/Duplicity.vala:936
+#: ../common/Duplicity.vala:975
 msgid "Invalid secret key."
 msgstr "Chiave segreta non valida."
 
-#: ../common/Duplicity.vala:938
+#: ../common/Duplicity.vala:977
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Il proprio account Amazon Web Services non è registrato per il servizio S3."
 
-#: ../common/Duplicity.vala:951
+#: ../common/Duplicity.vala:990
 msgid "S3 bucket name is not available."
 msgstr "Il nome del bucket S3 non è disponibile."
 
-#: ../common/Duplicity.vala:965
+#: ../common/Duplicity.vala:1004
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Errore nel leggere il file \"%s\"."
 
-#: ../common/Duplicity.vala:967
+#: ../common/Duplicity.vala:1006
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Errore nello scrivere il file \"%s\"."
 
-#: ../common/Duplicity.vala:982
+#: ../common/Duplicity.vala:1021
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Spazio esaurito su \"%s\"."
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:1029
 msgid "No backup files found"
 msgstr "Non è stato trovato alcun file di backup"
 
-#: ../common/Duplicity.vala:1041
+#: ../common/Duplicity.vala:1080
 msgid "Uploading…"
 msgstr "Caricamento..."
 
@@ -1143,14 +1145,6 @@ msgstr "Categorie"
 msgid "Automatic _backups"
 msgstr "_Backup automatici"
 
-#: ../preferences/Preferences.vala:192
-msgid "Folders to back up"
-msgstr "Cartelle incluse nel backup"
-
-#: ../preferences/Preferences.vala:200
-msgid "Folders to ignore"
-msgstr "Cartelle da ignorare"
-
 #: ../preferences/Preferences.vala:213
 msgid "Most recent backup"
 msgstr "Backup più recenti"
@@ -1574,6 +1568,9 @@ msgstr "Impossibile mostrare %s"
 #~ msgid "Back up your files"
 #~ msgstr "Esegue il backup dei propri file"
 
+#~ msgid "Directories not to back up"
+#~ msgstr "Directory escluse dal backup"
+
 #~ msgid "The type of backup location. Valid values are ‘s3’ or ‘file’."
 #~ msgstr ""
 #~ "Il tipo di posizione di backup. Valori validi sono \"s3\" o \"file\"."
@@ -1693,6 +1690,9 @@ msgstr "Impossibile mostrare %s"
 
 #~ msgid "Déjà Dup Backup Preferences"
 #~ msgstr "Preferenze di backup di Déjà Dup"
+
+#~ msgid "Directories to back up"
+#~ msgstr "Directory incluse nel backup"
 
 #~ msgid "File to restore:"
 #~ msgid_plural "Files to restore:"

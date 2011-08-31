@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-08-23 10:14-0400\n"
-"PO-Revision-Date: 2011-08-24 22:13+0000\n"
-"Last-Translator: Rūdolfs Mazurs <Unknown>\n"
+"POT-Creation-Date: 2011-08-30 23:48-0400\n"
+"PO-Revision-Date: 2011-08-30 22:18+0000\n"
+"Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-08-25 04:38+0000\n"
-"X-Generator: Launchpad (build 13727)\n"
+"X-Launchpad-Export-Date: 2011-08-31 04:42+0000\n"
+"X-Generator: Launchpad (build 13815)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -84,16 +84,18 @@ msgid "Backup location"
 msgstr "Dublējuma vieta"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:4
-msgid "Directories not to back up"
-msgstr "Mapes, kuras nedublēt"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-msgid "Directories to back up"
-msgstr "Mapes, kuras dublēt"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
 msgid "Folder type"
 msgstr "Mapes tips"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up"
+msgstr "Mapes, ko dublēt"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore"
+msgstr "Mapes, ko ignorēt"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:7
 msgid "Full name of the external volume"
@@ -566,41 +568,41 @@ msgstr ""
 "Déjà Dup dublēšanas rīkam ir vajadzīga vismaz %d.%d.%.2d duplicity versija, "
 "bet atrasta tika tikai %d.%d.%.2d versija"
 
-#: ../common/Duplicity.vala:129 ../common/Duplicity.vala:183
+#: ../common/Duplicity.vala:132 ../common/Duplicity.vala:186
 msgid "Paused (no network)"
 msgstr "Pauzēts (nav tīkla)"
 
-#: ../common/Duplicity.vala:376 ../common/Duplicity.vala:383
-#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:407
+#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
+#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Sagatavo..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:434
+#: ../common/Duplicity.vala:437
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Nevarēja atjaunot ‘%s’: nav derīga faila vieta"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:500
+#: ../common/Duplicity.vala:503
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "Dublējuma vieta ir pārāk maza. Mēģiniet kādu ar vairāk vietas."
 
-#: ../common/Duplicity.vala:522
+#: ../common/Duplicity.vala:525
 msgid "Backup location does not have enough free space."
 msgstr "Dublējuma vietai nepietiek brīvās vietas."
 
-#: ../common/Duplicity.vala:541 ../common/Duplicity.vala:555
+#: ../common/Duplicity.vala:544 ../common/Duplicity.vala:558
 msgid "Cleaning up…"
 msgstr "Uzkopj..."
 
-#: ../common/Duplicity.vala:657 ../common/Duplicity.vala:1010
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:1049
 #: ../deja-dup/AssistantOperation.vala:519
 msgid "Failed with an unknown error."
 msgstr "Neizdevās ar nezināmu kļūdu."
 
-#: ../common/Duplicity.vala:871
+#: ../common/Duplicity.vala:888
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Nevarēja atjaunot ‘%s’: Fails nav atrast dublējumā"
@@ -608,16 +610,16 @@ msgstr "Nevarēja atjaunot ‘%s’: Fails nav atrast dublējumā"
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:877 ../common/Duplicity.vala:957
-#: ../common/Duplicity.vala:961
+#: ../common/Duplicity.vala:894 ../common/Duplicity.vala:996
+#: ../common/Duplicity.vala:1000
 msgid "Bad encryption password."
 msgstr "Slikta šifrēšanas parole."
 
-#: ../common/Duplicity.vala:882
+#: ../common/Duplicity.vala:899
 msgid "Computer name changed"
 msgstr "Datora vārds ir mainīts"
 
-#: ../common/Duplicity.vala:882
+#: ../common/Duplicity.vala:899
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -627,67 +629,67 @@ msgstr ""
 "Esošais dublējums ir no datora ar nosaukumu %s, bet šī datora nosaukums ir "
 "%s. Ja tas ir negaidīti, jums vajadzētu dublēt citā vietā."
 
-#: ../common/Duplicity.vala:895
+#: ../common/Duplicity.vala:934
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Atļauja liegta, mēģinot izveidot ‘%s’."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:899 ../common/Duplicity.vala:903
+#: ../common/Duplicity.vala:938 ../common/Duplicity.vala:942
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Atļauja liegta, mēģinot lasīt ‘%s’."
 
-#: ../common/Duplicity.vala:907
+#: ../common/Duplicity.vala:946
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Atļauja liegta, mēģinot dzēst ‘%s’."
 
-#: ../common/Duplicity.vala:914
+#: ../common/Duplicity.vala:953
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Dublējuma vieta ‘%s’ neeksistē."
 
-#: ../common/Duplicity.vala:920 ../common/Duplicity.vala:980
+#: ../common/Duplicity.vala:959 ../common/Duplicity.vala:1019
 msgid "No space left."
 msgstr "Vairs nav vietas."
 
-#: ../common/Duplicity.vala:934
+#: ../common/Duplicity.vala:973
 msgid "Invalid ID."
 msgstr "Nederīgs ID."
 
-#: ../common/Duplicity.vala:936
+#: ../common/Duplicity.vala:975
 msgid "Invalid secret key."
 msgstr "Nederīga slepenā atslēga."
 
-#: ../common/Duplicity.vala:938
+#: ../common/Duplicity.vala:977
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Jūsu Amazon Web Services konts nav pierakstīts S3 servisam."
 
-#: ../common/Duplicity.vala:951
+#: ../common/Duplicity.vala:990
 msgid "S3 bucket name is not available."
 msgstr "S3 groza nosaukums nav pieejams."
 
-#: ../common/Duplicity.vala:965
+#: ../common/Duplicity.vala:1004
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Kļūda, lasot failu ‘%s’."
 
-#: ../common/Duplicity.vala:967
+#: ../common/Duplicity.vala:1006
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Kļūda, rakstot failu ‘%s’."
 
-#: ../common/Duplicity.vala:982
+#: ../common/Duplicity.vala:1021
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Uz ‘%s’ vairs nav vietas."
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:1029
 msgid "No backup files found"
 msgstr "Nav atrastu dublējuma failu"
 
-#: ../common/Duplicity.vala:1041
+#: ../common/Duplicity.vala:1080
 msgid "Uploading…"
 msgstr "Augšupielādē..."
 
@@ -1132,14 +1134,6 @@ msgstr "Kategorijas"
 msgid "Automatic _backups"
 msgstr "Automātiskā du_blēšana"
 
-#: ../preferences/Preferences.vala:192
-msgid "Folders to back up"
-msgstr "Mapes, ko dublēt"
-
-#: ../preferences/Preferences.vala:200
-msgid "Folders to ignore"
-msgstr "Mapes, ko ignorēt"
-
 #: ../preferences/Preferences.vala:213
 msgid "Most recent backup"
 msgstr "Visjaunākais dublējums"
@@ -1461,13 +1455,20 @@ msgstr[2] "Katras %d dienas"
 msgid "Could not display %s"
 msgstr "Nevarēja attēlot %s"
 
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Launchpad Contributions:\n"
-#~ "  Rūdolfs Mazurs https://launchpad.net/~rudolfs-mazurs"
+#~ msgid "Directories not to back up"
+#~ msgstr "Mapes, kuras nedublēt"
+
+#~ msgid "Directories to back up"
+#~ msgstr "Mapes, kuras dublēt"
 
 #~ msgid "_Delay Backup"
 #~ msgstr "Aizkavēt _dublēšanu"
 
 #~ msgid "_Cancel Backup"
 #~ msgstr "At_celt dublēšanu"
+
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "Launchpad Contributions:\n"
+#~ "  Michael Terry https://launchpad.net/~mterry\n"
+#~ "  Rūdolfs Mazurs https://launchpad.net/~rudolfs-mazurs"

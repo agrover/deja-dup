@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-08-23 10:14-0400\n"
+"POT-Creation-Date: 2011-08-30 23:48-0400\n"
 "PO-Revision-Date: 2011-08-22 04:33+0000\n"
 "Last-Translator: Edvaldo de Souza Cruz <edvaldoscruz@hotmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-08-24 04:39+0000\n"
-"X-Generator: Launchpad (build 13697)\n"
+"X-Launchpad-Export-Date: 2011-08-31 04:42+0000\n"
+"X-Generator: Launchpad (build 13815)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -83,16 +83,18 @@ msgid "Backup location"
 msgstr "Local da cópia de segurança"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:4
-msgid "Directories not to back up"
-msgstr "Diretórios para excluir a cópia de segurança"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-msgid "Directories to back up"
-msgstr "Diretórios para a cópia de segurança"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
 msgid "Folder type"
 msgstr "Tipo de pasta"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up"
+msgstr "Pastas a serem copiadas"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore"
+msgstr "Pastas a serem ignoradas"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:7
 msgid "Full name of the external volume"
@@ -572,42 +574,42 @@ msgstr ""
 "O Déjà Dup requer pelo menos a versão %d.%d.%.2d de duplicidade, mas foi "
 "encontrada apenas a versão %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:129 ../common/Duplicity.vala:183
+#: ../common/Duplicity.vala:132 ../common/Duplicity.vala:186
 msgid "Paused (no network)"
 msgstr "Pausado (sem conexão)"
 
-#: ../common/Duplicity.vala:376 ../common/Duplicity.vala:383
-#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:407
+#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
+#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Preparando..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:434
+#: ../common/Duplicity.vala:437
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Não é possível restaurar `%s´. Local de armazenamento inválido."
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:500
+#: ../common/Duplicity.vala:503
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Local da cópia de segurança é muito pequena. Tente usar uma com mais espaço."
 
-#: ../common/Duplicity.vala:522
+#: ../common/Duplicity.vala:525
 msgid "Backup location does not have enough free space."
 msgstr "Local da cópia de segurança não tem espaço disponível o bastante."
 
-#: ../common/Duplicity.vala:541 ../common/Duplicity.vala:555
+#: ../common/Duplicity.vala:544 ../common/Duplicity.vala:558
 msgid "Cleaning up…"
 msgstr "Limpando..."
 
-#: ../common/Duplicity.vala:657 ../common/Duplicity.vala:1010
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:1049
 #: ../deja-dup/AssistantOperation.vala:519
 msgid "Failed with an unknown error."
 msgstr "Falha com um erro desconhecido."
 
-#: ../common/Duplicity.vala:871
+#: ../common/Duplicity.vala:888
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
@@ -616,16 +618,16 @@ msgstr ""
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:877 ../common/Duplicity.vala:957
-#: ../common/Duplicity.vala:961
+#: ../common/Duplicity.vala:894 ../common/Duplicity.vala:996
+#: ../common/Duplicity.vala:1000
 msgid "Bad encryption password."
 msgstr "Senha de encriptação errada."
 
-#: ../common/Duplicity.vala:882
+#: ../common/Duplicity.vala:899
 msgid "Computer name changed"
 msgstr "O nome do computador mudou"
 
-#: ../common/Duplicity.vala:882
+#: ../common/Duplicity.vala:899
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -636,67 +638,67 @@ msgstr ""
 "computador atual é %s. Se isso é inesperado, você deveria fazer a cópia de "
 "segurança em uma local diferente."
 
-#: ../common/Duplicity.vala:895
+#: ../common/Duplicity.vala:934
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Permissão negada ao tentar criar '%s'."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:899 ../common/Duplicity.vala:903
+#: ../common/Duplicity.vala:938 ../common/Duplicity.vala:942
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Permissão negada ao tentar ler '%s'."
 
-#: ../common/Duplicity.vala:907
+#: ../common/Duplicity.vala:946
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Permissão negada ao tentar apagar '%s'."
 
-#: ../common/Duplicity.vala:914
+#: ../common/Duplicity.vala:953
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Local da cópia de segurança '%s' não existe."
 
-#: ../common/Duplicity.vala:920 ../common/Duplicity.vala:980
+#: ../common/Duplicity.vala:959 ../common/Duplicity.vala:1019
 msgid "No space left."
 msgstr "Não resta espaço."
 
-#: ../common/Duplicity.vala:934
+#: ../common/Duplicity.vala:973
 msgid "Invalid ID."
 msgstr "ID inválido."
 
-#: ../common/Duplicity.vala:936
+#: ../common/Duplicity.vala:975
 msgid "Invalid secret key."
 msgstr "Chave secreta inválida."
 
-#: ../common/Duplicity.vala:938
+#: ../common/Duplicity.vala:977
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Sua conta de Serviços Web Amazon não está cadastrada no serviço S3."
 
-#: ../common/Duplicity.vala:951
+#: ../common/Duplicity.vala:990
 msgid "S3 bucket name is not available."
 msgstr "O nome do bucket S3 é inválido."
 
-#: ../common/Duplicity.vala:965
+#: ../common/Duplicity.vala:1004
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Erro ao ler o arquivo '%s'."
 
-#: ../common/Duplicity.vala:967
+#: ../common/Duplicity.vala:1006
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Erro ao gravar arquivo '%s'."
 
-#: ../common/Duplicity.vala:982
+#: ../common/Duplicity.vala:1021
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Não há espaço restante em ‘%s’.R"
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:1029
 msgid "No backup files found"
 msgstr "Arquivos da cópia de segurança não encontrados."
 
-#: ../common/Duplicity.vala:1041
+#: ../common/Duplicity.vala:1080
 msgid "Uploading…"
 msgstr "Enviando..."
 
@@ -1142,14 +1144,6 @@ msgstr "Categorias"
 #: ../preferences/Preferences.vala:166
 msgid "Automatic _backups"
 msgstr "_Cópia de segurança automáticas"
-
-#: ../preferences/Preferences.vala:192
-msgid "Folders to back up"
-msgstr "Pastas a serem copiadas"
-
-#: ../preferences/Preferences.vala:200
-msgid "Folders to ignore"
-msgstr "Pastas a serem ignoradas"
 
 #: ../preferences/Preferences.vala:213
 msgid "Most recent backup"
@@ -1743,6 +1737,9 @@ msgstr "Não foi possivel exibir %s"
 #~ msgid "Schedule backups at regular intervals"
 #~ msgstr "Agendar cópias de segurança em intervalos regulares"
 
+#~ msgid "Directories to back up"
+#~ msgstr "Diretórios para a cópia de segurança"
+
 #~ msgid ""
 #~ "Whether to encrypt your backup files in the storage location. It’s strongly "
 #~ "recommended to leave this as ‘true’."
@@ -1804,6 +1801,9 @@ msgstr "Não foi possivel exibir %s"
 
 #~ msgid "How _often to back up:"
 #~ msgstr "Frequência da c_ópia de segurança:"
+
+#~ msgid "Directories not to back up"
+#~ msgstr "Diretórios para excluir a cópia de segurança"
 
 #~ msgid "translator-credits"
 #~ msgstr ""

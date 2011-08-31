@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-08-23 10:14-0400\n"
+"POT-Creation-Date: 2011-08-30 23:48-0400\n"
 "PO-Revision-Date: 2011-08-19 05:02+0000\n"
 "Last-Translator: Aurimas Fišeras <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-08-24 04:39+0000\n"
-"X-Generator: Launchpad (build 13697)\n"
+"X-Launchpad-Export-Date: 2011-08-31 04:42+0000\n"
+"X-Generator: Launchpad (build 13815)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -84,16 +84,18 @@ msgid "Backup location"
 msgstr "Atsarginių kopijų vieta"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:4
-msgid "Directories not to back up"
-msgstr "Katalogai, kurių atsarginės kopijos nedaromos"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-msgid "Directories to back up"
-msgstr "Katalogai, kurių atsarginės kopijos daromos"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
 msgid "Folder type"
 msgstr "Aplanko tipas"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up"
+msgstr "Aplankai atsarginių kopijų kūrimui"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore"
+msgstr "Aplankai, kurie praleidžiami"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:7
 msgid "Full name of the external volume"
@@ -568,41 +570,41 @@ msgstr ""
 "Déjà Dup atsarginių kopijų įrankiui reikalinga „duplicity“ programos versija "
 "%d.%d.%.2d ar naujasnė, bet rasta tik versija %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:129 ../common/Duplicity.vala:183
+#: ../common/Duplicity.vala:132 ../common/Duplicity.vala:186
 msgid "Paused (no network)"
 msgstr "Pristabdyta (nėra tinklo)"
 
-#: ../common/Duplicity.vala:376 ../common/Duplicity.vala:383
-#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:407
+#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
+#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Ruošiamasi..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:434
+#: ../common/Duplicity.vala:437
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Nepavyko atkurti „%s“: neteisinga failo vieta"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:500
+#: ../common/Duplicity.vala:503
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "Atsarginės kopijos vieta per maža. Mėginkite naudoti kitą vietą."
 
-#: ../common/Duplicity.vala:522
+#: ../common/Duplicity.vala:525
 msgid "Backup location does not have enough free space."
 msgstr "Atsarginės kopijos vieta turi nepakankamai laisvos vietos."
 
-#: ../common/Duplicity.vala:541 ../common/Duplicity.vala:555
+#: ../common/Duplicity.vala:544 ../common/Duplicity.vala:558
 msgid "Cleaning up…"
 msgstr "Tvarkomasi..."
 
-#: ../common/Duplicity.vala:657 ../common/Duplicity.vala:1010
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:1049
 #: ../deja-dup/AssistantOperation.vala:519
 msgid "Failed with an unknown error."
 msgstr "Nepavyko su nežinoma klaida."
 
-#: ../common/Duplicity.vala:871
+#: ../common/Duplicity.vala:888
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Nepavyko atkurti „%s“: failas nerastas atsarginėje kopijoje"
@@ -610,16 +612,16 @@ msgstr "Nepavyko atkurti „%s“: failas nerastas atsarginėje kopijoje"
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:877 ../common/Duplicity.vala:957
-#: ../common/Duplicity.vala:961
+#: ../common/Duplicity.vala:894 ../common/Duplicity.vala:996
+#: ../common/Duplicity.vala:1000
 msgid "Bad encryption password."
 msgstr "Blogas užšifravimo slaptažodis."
 
-#: ../common/Duplicity.vala:882
+#: ../common/Duplicity.vala:899
 msgid "Computer name changed"
 msgstr "Kompiuterio vardas pasikeitė"
 
-#: ../common/Duplicity.vala:882
+#: ../common/Duplicity.vala:899
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -630,67 +632,67 @@ msgstr ""
 "kompiuterio vardas yra %s. Jei tai yra netikėta, turėtumėte daryti atsarginę "
 "kopiją į kitą vietą."
 
-#: ../common/Duplicity.vala:895
+#: ../common/Duplicity.vala:934
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Leidimas nesuteiktas mėginant sukurti „%s“."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:899 ../common/Duplicity.vala:903
+#: ../common/Duplicity.vala:938 ../common/Duplicity.vala:942
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Leidimas nesuteiktas mėginant perskaityti „%s“."
 
-#: ../common/Duplicity.vala:907
+#: ../common/Duplicity.vala:946
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Leidimas nesuteiktas mėginant pašalinti „%s“."
 
-#: ../common/Duplicity.vala:914
+#: ../common/Duplicity.vala:953
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Atsarginės kopijos vieta „%s“ neegzistuoja."
 
-#: ../common/Duplicity.vala:920 ../common/Duplicity.vala:980
+#: ../common/Duplicity.vala:959 ../common/Duplicity.vala:1019
 msgid "No space left."
 msgstr "Neliko vietos."
 
-#: ../common/Duplicity.vala:934
+#: ../common/Duplicity.vala:973
 msgid "Invalid ID."
 msgstr "Neteisingas identifikatorius."
 
-#: ../common/Duplicity.vala:936
+#: ../common/Duplicity.vala:975
 msgid "Invalid secret key."
 msgstr "Neteisingas slaptas raktas."
 
-#: ../common/Duplicity.vala:938
+#: ../common/Duplicity.vala:977
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Jūsų Amazon Web Services paskyroje nėra užregistruota S3 paslauga."
 
-#: ../common/Duplicity.vala:951
+#: ../common/Duplicity.vala:990
 msgid "S3 bucket name is not available."
 msgstr "S3 kaušo vardas neprieinamas."
 
-#: ../common/Duplicity.vala:965
+#: ../common/Duplicity.vala:1004
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Klaida skaitant failą „%s“."
 
-#: ../common/Duplicity.vala:967
+#: ../common/Duplicity.vala:1006
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Klaida rašant failą „%s“."
 
-#: ../common/Duplicity.vala:982
+#: ../common/Duplicity.vala:1021
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Neliko vietos „%s“."
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:1029
 msgid "No backup files found"
 msgstr "Nerastas nė vienas atsarginės kopijos failas"
 
-#: ../common/Duplicity.vala:1041
+#: ../common/Duplicity.vala:1080
 msgid "Uploading…"
 msgstr "Išsiunčiama..."
 
@@ -1137,14 +1139,6 @@ msgstr "Kategorijos"
 msgid "Automatic _backups"
 msgstr "Automatinės _atsarginės kopijos"
 
-#: ../preferences/Preferences.vala:192
-msgid "Folders to back up"
-msgstr "Aplankai atsarginių kopijų kūrimui"
-
-#: ../preferences/Preferences.vala:200
-msgid "Folders to ignore"
-msgstr "Aplankai, kurie praleidžiami"
-
 #: ../preferences/Preferences.vala:213
 msgid "Most recent backup"
 msgstr "Naujausia atsarginė kopija"
@@ -1523,6 +1517,12 @@ msgstr "Nepavyko parodyti %s"
 
 #~ msgid "Whether to encrypt your backup"
 #~ msgstr "Ar užšifruoti atsargines kopijas"
+
+#~ msgid "Directories to back up"
+#~ msgstr "Katalogai, kurių atsarginės kopijos daromos"
+
+#~ msgid "Directories not to back up"
+#~ msgstr "Katalogai, kurių atsarginės kopijos nedaromos"
 
 #~ msgid "_Encrypt backup files"
 #~ msgstr "Užši_fruoti atsarginės kopijos failus"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-08-23 10:14-0400\n"
+"POT-Creation-Date: 2011-08-30 23:48-0400\n"
 "PO-Revision-Date: 2011-08-15 14:36+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Thai <th@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-08-24 04:39+0000\n"
-"X-Generator: Launchpad (build 13697)\n"
+"X-Launchpad-Export-Date: 2011-08-31 04:42+0000\n"
+"X-Generator: Launchpad (build 13815)\n"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
@@ -25,7 +25,7 @@ msgstr ""
 #: ../preferences/preferences-main.vala:51
 #: ../preferences/preferences-main.vala:63
 msgid "Backup"
-msgstr ""
+msgstr "สำรองข้อมูล"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
@@ -41,57 +41,59 @@ msgstr "เครื่องมือสำรองข้อมูล Déjà D
 #: ../data/deja-dup-ccpanel.desktop.in.h:1
 #: ../data/deja-dup-preferences.desktop.in.in.h:1
 msgid "Back Up Now"
-msgstr ""
+msgstr "สำรองข้อมูลเดี๋ยวนี้"
 
 #: ../data/deja-dup-ccpanel.desktop.in.h:3
 #: ../data/deja-dup-preferences.desktop.in.in.h:3
 msgid "Change your backup settings"
-msgstr ""
+msgstr "แก้ไขการตั้งค่าการสำรองข้อมูลของคุณ"
 
 #. These keywords are used when searching for applications in dashes, etc.
 #: ../data/deja-dup-ccpanel.desktop.in.h:5
 #: ../data/deja-dup-preferences.desktop.in.in.h:5
 msgid "déjà;deja;dup;"
-msgstr ""
+msgstr "déjà;deja;dup;"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
 #: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:300
 msgid "Backup Monitor"
-msgstr ""
+msgstr "เฝ้าสังเกตการสำรองข้อมูล"
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
 msgid "Schedules backups at regular intervals"
-msgstr ""
+msgstr "ตารางเวลาการสำรองข้อมูลในช่วงเวลาปกติ"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 msgid "Amazon S3 Access Key ID"
-msgstr "ID กุญแจสำหรับเข้าถึง Amazon S3"
+msgstr "หมายเลขกุญแจการเข้าถึง Amazon S3"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:2
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
 msgstr ""
-"เลือกโฟลเดอร์เพื่อจัดเก็บไฟล์ โฟลเดอร์นี้จะถูกสร้างขึ้นในถังที่ถูกเลือก"
+"เลือกโฟลเดอร์เพื่อจัดเก็บแฟ้ม โฟลเดอร์นี้จะถูกสร้างขึ้นในตะกร้าที่ถูกเลือก"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
 #: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location"
-msgstr "แหล่งสำรองข้อมูล"
+msgstr "ตำแหน่งการสำรองข้อมูล"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:4
-msgid "Directories not to back up"
-msgstr "ไดเรกทอรีที่ไม่สำรองข้อมูล"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-msgid "Directories to back up"
-msgstr "ไดเรกทอรีที่จะสำรอง"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
 msgid "Folder type"
 msgstr "ประเภทของโฟลเดอร์"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
+#: ../preferences/Preferences.vala:192
+msgid "Folders to back up"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
+#: ../preferences/Preferences.vala:200
+msgid "Folders to ignore"
+msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:7
 msgid "Full name of the external volume"
@@ -103,7 +105,7 @@ msgstr "จะเก็บแฟ้มข้อมูลสำรองไว้
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:9
 msgid "How often to periodically back up"
-msgstr "ความบ่อยครั้งของช่วงเวลาสำรองข้อมูล"
+msgstr "ความถี่ของช่วงเวลาในการสำรองข้อมูล"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:10
 msgid "Icon of the external volume"
@@ -114,48 +116,49 @@ msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
 msgstr ""
-"หากแหล่งสำรองข้อมูลอยู่ในสื่อเก็บข้อมูลภายนอกสื่อนี้เป็นตัวระบุระบบแฟ้มที่ไม่"
-"ซ้ำกัน"
+"หากตำแหน่งการสำรองข้อมูลอยู่ในสื่อเก็บข้อมูลภายนอก "
+"สื่อนี้เป็นตัวระบุระบบแฟ้มที่ไม่ซ้ำกัน"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:12
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
 msgstr ""
-"หากแหล่งสำรองอยู่ในสื่อเก็บข้อมูลภายนอกนี่คือพาร์ทของโฟลเดอร์ที่อยู่ในสื่อเก็"
-"บข้อมูลนั้น"
+"หากตำแหน่งการสำรองข้อมูลอยู่ในสื่อเก็บข้อมูลภายนอก "
+"นี่คือพาร์ธของโฟลเดอร์ที่อยู่ในสื่อเก็บข้อมูลนั้น"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:13
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
-"หากแหล่งสำรองอยู่ในสื่อเก็บข้อมูลภายนอกนี่คือไอคอนของสื่อเก็บข้อมูลนั้น"
+"หากตำแหน่งการสำรองอยู่ในสื่อเก็บข้อมูลภายนอก นี่คือไอคอนของสื่อเก็บข้อมูลนั้น"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:14
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
 msgstr ""
-"หากแหล่งสำรองอยู่ในสื่อเก็บข้อมูลภายนอกนี่คือคำอธิบายสื่อเก็บข้อมูลนั้น"
+"หากตำแหน่งการสำรองอยู่ในสื่อเก็บข้อมูลภายนอก นี่คือคำอธิบายสื่อเก็บข้อมูลนั้น"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:15
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
 msgstr ""
-"หากแหล่งสำรองอยู่ในสื่อเก็บข้อมูลภายนอกนี่คือชื่อเรียกสื่อเก็บข้อมูลนั้น"
+"หากตำแหน่งการสำรองอยู่ในสื่อเก็บข้อมูลภายนอก "
+"นี่คือชื่อเรียกสื่อเก็บข้อมูลนั้น"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:16
 msgid "Location in which to hold the backup files."
-msgstr "แหล่งที่เก็บไฟล์สำรองข้อมูล"
+msgstr "ตำแหน่งที่เก็บแฟ้มข้อมูลสำรอง"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:17
 msgid "Obsolete"
-msgstr ""
+msgstr "ล้าสมัย"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:18
 msgid "Relative path under the external volume"
-msgstr "พาร์ทที่เกี่ยวข้องอยู่ในแหล่งเก็บข้อมูลภายนอก"
+msgstr "พาธที่เกี่ยวข้องอยู่ในสื่อเก็บข้อมูลภายนอก"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:19
 msgid "Short name of the external volume"
@@ -163,7 +166,7 @@ msgstr "ชื่อเรียกของสื่อเก็บข้อม
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:20
 msgid "The Amazon S3 bucket name to use"
-msgstr "ชื่อถังข้อมูลบน Amazon S3 ที่เรียกใช้"
+msgstr "ชื่อตะกร้าบน Amazon S3 ที่ใช้"
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
@@ -172,56 +175,63 @@ msgstr "โฟลเดอร์ Amazon S3"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
 msgid "The Rackspace Cloud Files container"
-msgstr ""
+msgstr "The Rackspace Cloud Files container"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "The Ubuntu One folder"
-msgstr ""
+msgstr "โฟลเดอร์ Ubuntu One"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "The first time Déjà Dup checked whether it should prompt about backing up"
-msgstr ""
+msgstr "เมื่อ Déjà Dup ตรวจสอบครั้งแรก มันควรแจ้งเกี่ยวกับการสำรองข้อมูล"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
 msgstr ""
+"ชื่อโฟลเดอร์ที่จะใช้เก็บแฟ้ม ถ้าเป็น ‘$HOSTNAME’ "
+"จะเป็นค่าปริยายไปยังโฟลเดอร์ที่อยู่บนคอมพิวเตอร์ชื่อนั้น"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "The last time Déjà Dup backed up"
-msgstr ""
+msgstr "ครั้งล่าสุดที่ Déjà Dup สำรองข้อมูล"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "The last time Déjà Dup restored"
-msgstr ""
+msgstr "ครั้งล่าสุดที่ Déjà Dup กู้คืนข้อมูล"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid ""
 "The last time Déjà Dup successfully completed a backup. This time should be "
 "in ISO 8601 format."
 msgstr ""
+"ครั้งล่าสุดที่ Déjà Dup สำรองข้อมูลแบบสมบูรณ์ ครั้งนี้ควรอยู่ในรูปแบบ ISO "
+"8601"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
 msgid ""
 "The last time Déjà Dup successfully completed a restore. This time should be "
 "in ISO 8601 format."
 msgstr ""
+"ครั้งล่าสุดที่ Déjà Dup กู้คืนข้อมูลแบบสมบูรณ์ ครั้งนี้ควรอยู่ในรูปแบบ ISO "
+"8601"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The last time Déjà Dup was run"
-msgstr "ครั้งสุดท้ายที่ Déjà Dup ทำงาน"
+msgstr "ครั้งล่าสุดที่ Déjà Dup ทำงาน"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
-msgstr "ครั้งสุดท้ายที่ Déjà Dup ทำงานสำเร็จ เวลาอยู่ในรูปแบบ ISO 8601"
+msgstr ""
+"ครั้งล่าสุดที่ Déjà Dup ทำงานอย่างสมบูรณ์ ครั้งนี้ควรอยู่ในรูปแบบ ISO 8601"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "The number of days between backups."
-msgstr "จำนวนวันระหว่างสำรองข้อมูล"
+msgstr "จำนวนวันระหว่างการสำรองข้อมูล"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
@@ -229,8 +239,8 @@ msgid ""
 "means forever. This is a minimum number of days; the files may be kept "
 "longer."
 msgstr ""
-"จำนวนวันที่จะสำรองไฟล์ในแหล่งสำรองข้อมูล ค่า 0 หมายถึงตลอดไป "
-"นี่คือซึ่งเป็นจำนวนต่ำสุดของวัน; ไฟล์อาจถูกเก็บไว้นานมากว่านั้น"
+"จำนวนวันที่จะเก็บข้อมูลสำรองไว้ในตำแหน่งการสำรอง ค่า 0 หมายถึงตลอดไป "
+"นี่เป็นจำนวนต่ำสุดของวัน แฟ้มอาจถูกเก็บไว้นานกว่านั้น"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid ""
@@ -530,41 +540,41 @@ msgid ""
 "only found version %d.%d.%.2d"
 msgstr ""
 
-#: ../common/Duplicity.vala:129 ../common/Duplicity.vala:183
+#: ../common/Duplicity.vala:132 ../common/Duplicity.vala:186
 msgid "Paused (no network)"
 msgstr "หยุดชั่วคราว (ไม่มีเครือข่าย)"
 
-#: ../common/Duplicity.vala:376 ../common/Duplicity.vala:383
-#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:407
+#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
+#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "กำลังเตรียม..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:434
+#: ../common/Duplicity.vala:437
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr ""
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:500
+#: ../common/Duplicity.vala:503
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "แหล่งสำรองข้อมูลเล็กเกินไปลองใช้ที่อื่นที่มีพื้นที่ว่างมากกว่านี้"
 
-#: ../common/Duplicity.vala:522
+#: ../common/Duplicity.vala:525
 msgid "Backup location does not have enough free space."
 msgstr "แหล่งสำรองข้อมูลมีพื้นที่ว่างไม่พอ"
 
-#: ../common/Duplicity.vala:541 ../common/Duplicity.vala:555
+#: ../common/Duplicity.vala:544 ../common/Duplicity.vala:558
 msgid "Cleaning up…"
 msgstr "กำลังล้างข้อมูล..."
 
-#: ../common/Duplicity.vala:657 ../common/Duplicity.vala:1010
+#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:1049
 #: ../deja-dup/AssistantOperation.vala:519
 msgid "Failed with an unknown error."
 msgstr "ล้มเหลวกับข้อผิดพลาดที่ไม่รู้จัก"
 
-#: ../common/Duplicity.vala:871
+#: ../common/Duplicity.vala:888
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "ไม่สามารถกู้คืน ‘%s’: ไม่พบแฟ้มในแฟ้มข้อมูลสำรอง"
@@ -572,16 +582,16 @@ msgstr "ไม่สามารถกู้คืน ‘%s’: ไม่พบ�
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:877 ../common/Duplicity.vala:957
-#: ../common/Duplicity.vala:961
+#: ../common/Duplicity.vala:894 ../common/Duplicity.vala:996
+#: ../common/Duplicity.vala:1000
 msgid "Bad encryption password."
 msgstr "รหัสผ่านการเข้ารหัสแย่"
 
-#: ../common/Duplicity.vala:882
+#: ../common/Duplicity.vala:899
 msgid "Computer name changed"
 msgstr "เปลี่ยนชื่อคอมพิวเตอร์แล้ว"
 
-#: ../common/Duplicity.vala:882
+#: ../common/Duplicity.vala:899
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -592,67 +602,67 @@ msgstr ""
 "แต่ชื่อคอมพิวเตอร์ในปัจจุบันเป็น %s "
 "ถ้าข้อมูลนี้ผิดพลาดคุณควรสำรองข้อมูลที่แหล่งอื่น"
 
-#: ../common/Duplicity.vala:895
+#: ../common/Duplicity.vala:934
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "ไม่อนุญาตให้ใช้งานขณะพยายามสร้าง'% s'"
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:899 ../common/Duplicity.vala:903
+#: ../common/Duplicity.vala:938 ../common/Duplicity.vala:942
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "ไม่อนุญาตให้ใช้งานเมื่อพยายามอ่าน '%s'"
 
-#: ../common/Duplicity.vala:907
+#: ../common/Duplicity.vala:946
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "ไม่อนุญาตให้ใช้งานขณะพยายามลบ ‘%s’"
 
-#: ../common/Duplicity.vala:914
+#: ../common/Duplicity.vala:953
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "แหล่งสำรองข้อมูล ‘%s’ ไม่มีอยู่"
 
-#: ../common/Duplicity.vala:920 ../common/Duplicity.vala:980
+#: ../common/Duplicity.vala:959 ../common/Duplicity.vala:1019
 msgid "No space left."
 msgstr "ไม่มีพื้นที่ว่างเหลือ"
 
-#: ../common/Duplicity.vala:934
+#: ../common/Duplicity.vala:973
 msgid "Invalid ID."
 msgstr "ID ไม่ถูกต้อง"
 
-#: ../common/Duplicity.vala:936
+#: ../common/Duplicity.vala:975
 msgid "Invalid secret key."
 msgstr "กุญแจรหัสลับไม่ถูกต้อง"
 
-#: ../common/Duplicity.vala:938
+#: ../common/Duplicity.vala:977
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "บัญชี Amazon Web Services ของคุณไม่สามารถลงทะเบียนบริการ S3"
 
-#: ../common/Duplicity.vala:951
+#: ../common/Duplicity.vala:990
 msgid "S3 bucket name is not available."
 msgstr "ชื่อถัง S3 ไม่สามารถใช้งานได้"
 
-#: ../common/Duplicity.vala:965
+#: ../common/Duplicity.vala:1004
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "การอ่านแฟ้มผิดพลาด ‘%s’"
 
-#: ../common/Duplicity.vala:967
+#: ../common/Duplicity.vala:1006
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "การเขียนแฟ้มผิดพลาด ‘%s’"
 
-#: ../common/Duplicity.vala:982
+#: ../common/Duplicity.vala:1021
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "ไม่มีพื้นที่ว่างพอใน ‘%s’"
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:1029
 msgid "No backup files found"
 msgstr "ไม่พบไฟล์สำรองข้อมูล"
 
-#: ../common/Duplicity.vala:1041
+#: ../common/Duplicity.vala:1080
 msgid "Uploading…"
 msgstr "กำลังอัปโหลด"
 
@@ -1083,14 +1093,6 @@ msgstr ""
 
 #: ../preferences/Preferences.vala:166
 msgid "Automatic _backups"
-msgstr ""
-
-#: ../preferences/Preferences.vala:192
-msgid "Folders to back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:200
-msgid "Folders to ignore"
 msgstr ""
 
 #: ../preferences/Preferences.vala:213
@@ -1541,6 +1543,9 @@ msgstr "ไม่สามารถแสดงผล %s"
 #~ msgid "Schedule backups at regular intervals"
 #~ msgstr "ตารางเวลาสำรองข้อมูลในช่วงปกติ"
 
+#~ msgid "Directories not to back up"
+#~ msgstr "ไดเรกทอรีที่ไม่สำรองข้อมูล"
+
 #~ msgid "The type of backup location. Valid values are ‘s3’ or ‘file’."
 #~ msgstr "ประเภทแหล่งสำรองข้อมูล ค่าที่ถูกต้องคือ 's3' หรือ 'file'"
 
@@ -1666,3 +1671,6 @@ msgstr "ไม่สามารถแสดงผล %s"
 #~ "Launchpad Contributions:\n"
 #~ "  AnuchitChalothorn https://launchpad.net/~anuchit\n"
 #~ "  SiraNokyoongtong https://launchpad.net/~gumara"
+
+#~ msgid "Directories to back up"
+#~ msgstr "ไดเรกทอรีที่จะสำรองข้อมูล"
