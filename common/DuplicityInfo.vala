@@ -76,8 +76,8 @@ public class DuplicityInfo : Object
       return false;
     }
 
-    if (meets_version(0, 6, 15))
-      reports_encryption = true;
+    //if (meets_version(0, 6, 15))
+    //  reports_encryption = true;
 
     return true;
   }
