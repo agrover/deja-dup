@@ -328,7 +328,7 @@ public class ConfigList : ConfigWidget
     return slist_val.dup_strv();
   }
 
-  public void write_to_config(Gtk.TreeModel model, Gtk.TreePath path)
+  public void write_to_config(Gtk.TreeModel model, Gtk.TreePath? path)
   {
     Gtk.TreeIter iter;
     string[] paths = new string[0];
@@ -350,12 +350,21 @@ public class ConfigList : ConfigWidget
 
     weak Gtk.TreeModel model;
     List<Gtk.TreePath> paths = sel.get_selected_rows(out model);
+    List<Gtk.TreeIter?> iters = null;
 
     foreach (Gtk.TreePath path in paths) {
       Gtk.TreeIter iter;
       if (model.get_iter(out iter, path))
-        (model as Gtk.ListStore).remove(iter);
+        iters.prepend(iter);
     }
+
+    model.row_deleted.disconnect(write_to_config);
+    foreach (Gtk.TreeIter iter in iters) {
+      (model as Gtk.ListStore).remove(iter);
+    }
+    model.row_deleted.connect(write_to_config);
+
+    write_to_config(model, null);
   }
 }
 
