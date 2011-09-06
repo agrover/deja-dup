@@ -19,6 +19,7 @@
 @YELP_HELP_RULES@
 
 HELP_ID = deja-dup
+HELP_POT = deja-dup-help.pot
 
 HELP_FILES = \
 	backup-auto.page \
@@ -68,11 +69,3 @@ HELP_LINGUAS = \
 
 check:
 	test "$(shell ls -1 $(srcdir)/*/*.po | wc -l)" -eq "$(shell echo $(HELP_LINGUAS) | wc -w)"
-
-deja-dup-help.pot: deja-dup.pot
-	cp -a $^ $@
-
-pot: deja-dup-help.pot
-all: deja-dup-help.pot
-
-DISTCLEANFILES = deja-dup.pot deja-dup-help.pot
