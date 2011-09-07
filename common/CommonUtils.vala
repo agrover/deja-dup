@@ -389,9 +389,14 @@ void convert_s3_folder_to_hostname()
   }
 }
 
+public bool meet_requirements(out string header, out string msg)
+{
+  return DuplicityInfo.get_default().check_duplicity_version(out header, out msg);
+}
+
 public bool initialize(out string header, out string msg)
 {
-  if (!DuplicityInfo.get_default().check_duplicity_version(out header, out msg))
+  if (!meet_requirements(out header, out msg))
     return false;
 
   convert_ssh_to_file();

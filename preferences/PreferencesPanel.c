@@ -63,22 +63,31 @@ deja_dup_preferences_panel_init (DejaDupPreferencesPanel *self)
   gtk_container_add (GTK_CONTAINER (self), widget);
 }
 
+static gboolean
+delayed_init ()
+{
+  deja_dup_gui_initialize(NULL, FALSE);
+  return FALSE;
+}
+
 void
 g_io_module_load (GIOModule *module)
 {
+  if (!deja_dup_meet_requirements(NULL, NULL))
+    return;
+
   bindtextdomain (GETTEXT_PACKAGE, LOCALE_DIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
   GtkIconTheme *theme = gtk_icon_theme_get_default ();
   gtk_icon_theme_append_search_path (theme, THEME_DIR);
 
-  if (!deja_dup_gui_initialize(NULL, FALSE))
-    return;
-
   deja_dup_preferences_panel_register_type (G_TYPE_MODULE (module));
   g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
                                   DEJA_DUP_TYPE_PREFERENCES_PANEL,
                                   "deja-dup", 0);
+
+  g_idle_add(delayed_init, NULL);
 }
 
 void
