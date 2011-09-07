@@ -179,7 +179,9 @@ public class ConfigLocation : ConfigWidget
 
   void insert_u1() {
     insert_cloud_if_available("u1", BackendU1.get_checker(),
-                              new ThemedIcon("ubuntuone"),
+                              new ThemedIcon.from_names({"ubuntuone",
+                                                         "ubuntuone-installer",
+                                                         "deja-dup-cloud"}),
                               _("Ubuntu One"),
                               new ConfigLocationU1(label_sizes),
                               ref index_u1, insert_u1);

@@ -80,8 +80,16 @@ class U1Checker : Checker
     try {
       var proxy = BackendU1.get_creds_proxy();
       if (proxy.get_name_owner() == null) {
-        available = false;
-        complete = true;
+        // No U1 installed...  See if installer is available.
+        var cmd = Environment.find_program_in_path("ubuntuone-installer");
+        if (cmd == null) {
+          available = false;
+          complete = true;
+        }
+        else {
+          available = true;
+          complete = true;
+        }
       }
     }
     catch (Error e) {
@@ -112,6 +120,9 @@ class U1Checker : Checker
 
 public class BackendU1 : Backend
 {
+  uint installer_watch = 0;
+  ulong button_handler = 0;
+
   static Checker checker_instance = null;
   public static Checker get_checker()
   {
@@ -124,6 +135,18 @@ public class BackendU1 : Backend
     return new BackendU1();
   }
 
+  ~BackendU1()
+  {
+    if (button_handler > 0) {
+      mount_op.disconnect(button_handler);
+      button_handler = 0;
+    }
+    if (installer_watch > 0) {
+      Source.remove(installer_watch);
+      installer_watch = 0;
+    }
+  }
+
   public override bool is_native() {
     return false;
   }
@@ -133,7 +156,7 @@ public class BackendU1 : Backend
   }
 
   public override Icon? get_icon() {
-    return new ThemedIcon("ubuntuone");
+    return new ThemedIcon.from_names({"ubuntuone", "ubuntuone-installer", "deja-dup-cloud"});
   }
 
   public override bool is_ready(out string when) {
@@ -170,6 +193,9 @@ public class BackendU1 : Backend
       return INFINITE_SPACE;
     }
 
+    if (obj.get_name_owner() == null)
+      return INFINITE_SPACE;
+
     uint64 total = INFINITE_SPACE;
     uint64 used = 0;
     var listener = new Listener(obj, "account_info", null, (name, args) => {
@@ -197,6 +223,10 @@ public class BackendU1 : Backend
   {
     bool found = false;
     var obj = get_creds_proxy();
+    if (obj.get_name_owner() == null) {
+      ask_password();
+      return;
+    }
 
     var listener = new Listener(obj, "find_credentials", null, (name, args) => {
       if (name == "CredentialsFound")
@@ -210,17 +240,64 @@ public class BackendU1 : Backend
       ask_password();
   }
 
+  void button_clicked()
+  {
+    sign_in();
+  }
+
   void ask_password() {
     mount_op.set("label_title", _("Connect to Ubuntu One"));
     mount_op.set("label_button", _("Sign into Ubuntu One…"));
-    mount_op.connect("signal::button-clicked", sign_in, null);
+    if (button_handler == 0)
+      button_handler = Signal.connect_swapped(mount_op, "button-clicked",
+                                              (Callback)button_clicked, this);
     mount_op.ask_password("", "", "", 0);
+  }
+
+  void installer_finished(Pid pid, int status)
+  {
+    installer_watch = 0;
+
+    var obj = get_creds_proxy();
+    if (obj.get_name_owner() == null)
+      envp_ready(false, null);
+    else
+      sign_in();
+  }
+
+  bool install_u1()
+  {
+    if (installer_watch > 0)
+      return true;
+
+    var cmd = Environment.find_program_in_path("ubuntuone-installer");
+    if (cmd == null)
+      return false;
+
+    Pid pid = 0;
+    try {
+      Process.spawn_async(null, {cmd}, null,
+                          SpawnFlags.DO_NOT_REAP_CHILD, null, out pid);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      return false;
+    }
+
+    installer_watch = ChildWatch.add(pid, installer_finished);
+    return true;
   }
 
   async void sign_in()
   {
     try {
       var obj = get_creds_proxy();
+      if (obj.get_name_owner() == null) {
+        // No U1 installed, so first install it
+        if (!install_u1())
+          envp_ready(false, null);
+        return;
+      }
 
       var listener = new Listener(obj, "login", new Variant("(a{ss})", null),
                                   (name, args) => {
