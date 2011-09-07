@@ -258,11 +258,17 @@ public class BackendU1 : Backend
   {
     installer_watch = 0;
 
-    var obj = get_creds_proxy();
-    if (obj.get_name_owner() == null)
+    try {
+      var obj = get_creds_proxy();
+      if (obj.get_name_owner() == null)
+        envp_ready(false, null);
+      else
+        sign_in();
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
       envp_ready(false, null);
-    else
-      sign_in();
+    }
   }
 
   bool install_u1()
