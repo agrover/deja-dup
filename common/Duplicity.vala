@@ -1243,7 +1243,7 @@ public class Duplicity : Object
         // up before we continue.  We don't want to wait until we finish to
         // clean them up, since we may want that space, and if there's a bug
         // in ourselves, we may never get to it.
-        if (mode != Operation.Mode.STATUS && !this.cleaned_up_once)
+        if (mode == Operation.Mode.BACKUP && !this.cleaned_up_once)
           cleanup(); // stops current backup, cleans up, then resumes
       break;
       }
