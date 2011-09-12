@@ -122,7 +122,7 @@ public class Preferences : Gtk.Grid
     int i = 0;
     Gtk.SizeGroup label_sizes;
 
-    settings_page.row_spacing = 12;
+    settings_page.column_spacing = 12;
 
     var cat_model = new Gtk.ListStore(2, typeof(string), typeof(int));
     var tree = new Gtk.TreeView.with_model(cat_model);
@@ -155,8 +155,8 @@ public class Preferences : Gtk.Grid
 
     table = new Gtk.Grid();
     table.orientation = Gtk.Orientation.VERTICAL;
-    table.row_spacing = 12;
-    table.column_spacing = 6;
+    table.row_spacing = 6;
+    table.column_spacing = 12;
 
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
@@ -286,8 +286,8 @@ public class Preferences : Gtk.Grid
 
     // Reset page
     table = new Gtk.Grid();
-    table.row_spacing = 12;
-    table.column_spacing = 6;
+    table.row_spacing = 6;
+    table.column_spacing = 12;
     row = 0;
 
     var location = new DejaDup.ConfigLocation(label_sizes);
@@ -327,8 +327,8 @@ public class Preferences : Gtk.Grid
 
     // Reset page
     table = new Gtk.Grid();
-    table.row_spacing = 12;
-    table.column_spacing = 6;
+    table.row_spacing = 6;
+    table.column_spacing = 12;
     table.column_homogeneous = true;
     
     w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY);
@@ -357,8 +357,8 @@ public class Preferences : Gtk.Grid
     
     // Reset page
     table = new Gtk.Grid();
-    table.row_spacing = 12;
-    table.column_spacing = 6;
+    table.row_spacing = 6;
+    table.column_spacing = 12;
     row = 0;
     
     w = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);

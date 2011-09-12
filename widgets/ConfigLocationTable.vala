@@ -31,8 +31,8 @@ public class ConfigLocationTable : Gtk.Grid
   }
 
   construct {
-    row_spacing = 12;
-    column_spacing = 6;
+    row_spacing = 6;
+    column_spacing = 12;
   }
 
   protected void add_widget(string msg, Gtk.Widget w,

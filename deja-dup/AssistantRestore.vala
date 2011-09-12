@@ -83,8 +83,8 @@ public class AssistantRestore : AssistantOperation
     Gtk.SizeGroup label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     
     var page = new Gtk.Grid();
-    page.set("row-spacing", 12,
-             "column-spacing", 6,
+    page.set("row-spacing", 6,
+             "column-spacing", 12,
              "border-width", 12);
     
     var location = new DejaDup.ConfigLocation(label_sizes);
@@ -214,8 +214,8 @@ public class AssistantRestore : AssistantOperation
     
     confirm_table = new Gtk.Grid();
     var page = confirm_table;
-    page.set("row-spacing", 12,
-             "column-spacing", 6,
+    page.set("row-spacing", 6,
+             "column-spacing", 12,
              "border-width", 12);
     
     label = new Gtk.Label(_("Backup location"));

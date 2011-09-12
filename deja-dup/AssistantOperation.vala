@@ -217,7 +217,7 @@ public abstract class AssistantOperation : Assistant
   {
     var page = new Gtk.Grid();
     page.orientation = Gtk.Orientation.VERTICAL;
-    page.column_spacing = 6;
+    page.row_spacing = 6;
 
     int row = 0;
 
