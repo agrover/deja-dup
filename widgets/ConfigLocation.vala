@@ -497,9 +497,9 @@ public class ConfigLocation : ConfigWidget
     else if (index == index_u1)
       settings.set_string(BACKEND_KEY, "u1");
     else if (index == index_ssh)
-      set_remote_info("sftp");
+      yield set_remote_info("sftp");
     else if (index == index_ftp)
-      set_remote_info("ftp");
+      yield set_remote_info("ftp");
     else if (index == index_dav) {
       // Support not overriding davs with dav by checking current value
       var fsettings = DejaDup.get_settings(FILE_ROOT);
@@ -507,14 +507,14 @@ public class ConfigLocation : ConfigWidget
                                                ConfigURLPart.Part.SCHEME);
       if (scheme != "dav" && scheme != "davs")
         scheme = "dav"; // default to non-https, since we do default to encrypted backups
-      set_remote_info(scheme);
+      yield set_remote_info(scheme);
     }
     else if (index == index_smb)
-      set_remote_info("smb");
+      yield set_remote_info("smb");
     else if (index == index_local)
-      set_remote_info("file");
+      yield set_remote_info("file");
     else if (index == index_custom)
-      set_remote_info(null);
+      yield set_remote_info(null);
     else if (uuid != null)
       yield set_volume_info(iter);
     else {
@@ -549,7 +549,7 @@ public class ConfigLocation : ConfigWidget
     yield BackendFile.set_volume_info(vol);
   }
 
-  void set_remote_info(string? scheme)
+  async void set_remote_info(string? scheme)
   {
     var fsettings = DejaDup.get_settings(FILE_ROOT);
     fsettings.delay();

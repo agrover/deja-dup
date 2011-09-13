@@ -198,8 +198,6 @@ public class BackendFile : Backend
   {
     var settings = get_settings(FILE_ROOT);
 
-    get_settings().set_string(BACKEND_KEY, "file");
-
     if (!file.is_native()) {
       settings.set_string(FILE_TYPE_KEY, "normal");
       return;
@@ -229,13 +227,11 @@ public class BackendFile : Backend
         relpath = "";
     }
 
-    set_volume_info(volume, relpath);
+    yield set_volume_info(volume, relpath);
   }
 
   public async static void set_volume_info(Volume volume, string? relpath = null)
   {
-    get_settings().set_string(BACKEND_KEY, "file");
-
     var uuid = volume.get_identifier(VOLUME_IDENTIFIER_KIND_UUID);
     if (uuid == null || uuid == "")
       return;
@@ -246,9 +242,8 @@ public class BackendFile : Backend
     settings.set_string(FILE_UUID_KEY, uuid);
     if (relpath != null)
       settings.set_value(FILE_RELPATH_KEY, new Variant.bytestring(relpath));
-    settings.apply();
-
     update_volume_info(volume);
+    settings.apply();
   }
 
   static void update_volume_info(Volume volume)
@@ -338,19 +333,19 @@ public class BackendFile : Backend
         throw err; // continue error on
     }
 
-    var gfile = get_file_from_settings();
+    if (success) {
+      var gfile = get_file_from_settings();
 
-    // If we don't know what type this is, look up volume data
-    if (type != "volume" && type != "normal" && success) {
+      // If we don't know what type this is, look up volume data
       yield check_for_volume_info(gfile);
-    }
 
-    // Ensure directory exists
-    try {
-      gfile.make_directory_with_parents (null);
-    }
-    catch (IOError.EXISTS err2) {
-      // ignore
+      // Ensure directory exists
+      try {
+        gfile.make_directory_with_parents (null);
+      }
+      catch (IOError.EXISTS err2) {
+        // ignore
+      }
     }
 
     envp_ready(success, new List<string>());
