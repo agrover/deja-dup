@@ -20,54 +20,7 @@
 
 HELP_ID = deja-dup
 HELP_POT = deja-dup-help.pot
+HELP_FILES = $(foreach f,$(shell ls $(srcdir)/C/*.page),$(shell basename $(f)))
+HELP_LINGUAS = $(foreach f,$(shell ls $(srcdir)/*/*.po),$(shell basename $(f) .po))
 
-HELP_FILES = \
-	backup-auto.page \
-	backup-first.page \
-	credits.page \
-	contribute.page \
-	index.page \
-	license.page \
-	prefs.page \
-	restore-full.page \
-	restore-lost.page \
-	restore-revert.page \
-	restore-worst-case.page \
-	support.page
-
-HELP_LINGUAS = \
-	ar \
-	cs \
-	da \
-	de \
-	en_GB \
-	es \
-	eu \
-	fi \
-	fr \
-	gl \
-	he \
-	hr \
-	hu \
-	id \
-	it \
-	ja \
-	lt \
-	nb \
-	nl \
-	pl \
-	ps \
-	pt_BR \
-	ru \
-	sl \
-	sv \
-	th \
-	tr \
-	vi \
-	zh_CN \
-	zh_TW
-
-check:
-	test "$(shell ls -1 $(srcdir)/*/*.po | wc -l)" -eq "$(shell echo $(HELP_LINGUAS) | wc -w)"
-
-DISTCLEANFILES = deja-dup-help.pot
+DISTCLEANFILES = $(HELP_POT)
