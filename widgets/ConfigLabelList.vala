@@ -30,7 +30,7 @@ public class ConfigLabelList : ConfigLabel
 
   construct {
     label.wrap = true;
-    label.wrap_mode = Pango.WrapMode.WORD;
+    label.max_width_chars = 30;
     label.ellipsize = Pango.EllipsizeMode.END;
   }
 
