@@ -44,6 +44,18 @@ public class ConfigLabelList : ConfigLabel
 
     foreach (File f in list) {
       string s = yield DejaDup.get_nickname(f);
+
+      /* Make sure that any leading periods aren't treated as "breaking" by
+         pango and thus screwing up our wrapping layout.
+         (See https://launchpad.net/bugs/850430)
+         Solution here is to use a character that *looks* like a period
+         (U+2024 ONE DOT LEADER) and follow it with a non-breaking invisible
+         character (U+2060 WORD JOINER).  A huge hack.  But I don't know how
+         to tell Pango to treat periods as non-breaking...
+       */
+      if (s.length > 1 && s.has_prefix("."))
+        s = s.splice(0, 1, "․\xE2\x81\xA0");
+
       if (val != null)
         val += ", %s".printf(s);
       else
