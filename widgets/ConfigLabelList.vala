@@ -31,6 +31,7 @@ public class ConfigLabelList : ConfigLabel
   construct {
     label.wrap = true;
     label.wrap_mode = Pango.WrapMode.WORD;
+    label.ellipsize = Pango.EllipsizeMode.END;
   }
 
   protected override async void set_from_config()
