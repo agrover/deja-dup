@@ -146,9 +146,9 @@ public abstract class Assistant : Gtk.Window
     }
   }
 
-  public virtual void hide_for_now()
+  public void hide_for_now()
   {
-    hide();
+    DejaDup.hide_background_window_for_shell(this);
   }
 
   public bool is_interrupted()

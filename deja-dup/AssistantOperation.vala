@@ -573,23 +573,6 @@ public abstract class AssistantOperation : Assistant
     else if (page == password_page)
       set_header_icon(Gtk.Stock.DIALOG_AUTHENTICATION);
   }
-  
-  // Minimize or hide when operation is in progress.  Used when user closes
-  // window or after a password interruption.
-  public override void hide_for_now()
-  {
-    if (status_icon != null && status_icon.close_action == StatusIcon.CloseAction.MINIMIZE) {
-      // We show in case we are just starting up (like in automatic mode) and
-      // haven't been shown yet.  Ideally we'd just iconify then show, but
-      // window managers are dumb and don't start iconified in that situation,
-      // so to help them, we iconify again.
-      iconify();
-      show();
-      iconify();
-    }
-    else
-      hide();
-  }
 
   // Make Deja Dup invisible, used when we are shutting down or some such.
   public void hide_everything()

@@ -77,7 +77,6 @@ public abstract class StatusIcon : Object
   public DejaDup.Operation op {get; construct;}
   public bool automatic {get; construct; default = false;}
 
-  public CloseAction close_action {get; protected set; default = CloseAction.HIDE;}
   public bool show_automatic_progress {get; protected set; default = false;}
 
   protected bool is_valid = true;
@@ -204,7 +203,6 @@ class UnityStatusIcon : StatusIcon
   construct {
     entry = hacks_unity_get_entry();
     is_valid = entry != null;
-    close_action = CloseAction.MINIMIZE;
     show_automatic_progress = true;
     if (is_valid)
       hacks_unity_entry_set_menu(entry, ensure_menu(false));
