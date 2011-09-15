@@ -69,3 +69,5 @@ HELP_LINGUAS = \
 
 check:
 	test "$(shell ls -1 $(srcdir)/*/*.po | wc -l)" -eq "$(shell echo $(HELP_LINGUAS) | wc -w)"
+
+DISTCLEANFILES = deja-dup-help.pot
