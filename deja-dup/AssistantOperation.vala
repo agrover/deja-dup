@@ -120,7 +120,7 @@ public abstract class AssistantOperation : Assistant
    * that is then used to perform various defined tasks on backend. It is
    * also later connected to various signals.
    */
-  protected abstract DejaDup.Operation create_op();
+  protected abstract DejaDup.Operation? create_op();
   protected abstract string get_progress_file_prefix();
 
   protected Gdk.Pixbuf? make_op_icon()

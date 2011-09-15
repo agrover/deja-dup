@@ -280,7 +280,7 @@ public class AssistantRestore : AssistantOperation
     restore_dest_page = page;
   }
   
-  protected override DejaDup.Operation create_op()
+  protected override DejaDup.Operation? create_op()
   {
     string date = null;
     if (got_dates) {

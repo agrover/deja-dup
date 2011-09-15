@@ -459,7 +459,7 @@ public class AssistantRestoreMissing : AssistantRestore {
     }
   }
 
-  protected override DejaDup.Operation create_op()
+  protected override DejaDup.Operation? create_op()
   {
     /*
      * Creates operation that is then called by do_apply.

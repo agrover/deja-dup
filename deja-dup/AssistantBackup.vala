@@ -33,7 +33,7 @@ public class AssistantBackup : AssistantOperation
     resumed.connect(do_resume);
   }
   
-  protected override DejaDup.Operation create_op()
+  protected override DejaDup.Operation? create_op()
   {
     realize();
     var xid = Gdk.X11Window.get_xid(this.get_window());
