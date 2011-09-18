@@ -24,7 +24,7 @@ AC_CONFIG_HEADERS([config.h:config.h.in])
 AC_CONFIG_MACRO_DIR([m4])
 
 # Sets up automake.
-AM_INIT_AUTOMAKE([1.11 foreign tar-ustar dist-bzip2 no-dist-gzip])
+AM_INIT_AUTOMAKE([1.11 foreign tar-ustar dist-xz no-dist-gzip])
 AM_SILENT_RULES([yes])
 
 YELP_HELP_INIT
