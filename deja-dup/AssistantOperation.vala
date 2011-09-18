@@ -594,7 +594,7 @@ public abstract class AssistantOperation : Assistant
       do_close();
   }
 
-  bool do_minimize_to_tray(Gdk.Event event)
+  bool do_minimize_to_tray(Gdk.EventAny event)
   {
     if (is_interrupted() || op == null)
       do_cancel(); // instead, do the normal cancel operation

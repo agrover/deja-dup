@@ -69,7 +69,7 @@ public class ConfigLabelBackupDate : ConfigLabel
                                  now.get_month(),
                                  now.get_day_of_month(),
                                  0, 0, 0.0);
-        var diff = date.difference(now) / TimeSpan.DAY;
+        var diff = (int)(date.difference(now) / TimeSpan.DAY);
         return ngettext("%d day from now", "%d days from now", diff).printf(diff);
       }
       else {
@@ -78,7 +78,7 @@ public class ConfigLabelBackupDate : ConfigLabel
                                  now.get_month(),
                                  now.get_day_of_month(),
                                  0, 0, 0.0);
-        var diff = now.difference(date) / TimeSpan.DAY + 1;
+        var diff = (int)(now.difference(date) / TimeSpan.DAY + 1);
         return ngettext("%d day ago", "%d days ago", diff).printf(diff);
       }
   }

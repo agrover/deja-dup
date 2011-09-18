@@ -40,6 +40,9 @@ public class DuplicityInfo : Object
   // will already have been thrown up.
   public bool check_duplicity_version(out string header, out string msg) {
     string output;
+
+    header = null;
+    msg = null;
     
     try {
       Process.spawn_command_line_sync("duplicity --version", out output, null, null);

@@ -287,6 +287,7 @@ public class ConfigLocation : ConfigWidget
   bool lookup_uuid(string uuid, out Gtk.TreeIter iter_in)
   {
     Gtk.TreeIter iter;
+    iter_in = Gtk.TreeIter();
     if (store.get_iter_first(out iter)) {
       do {
         string iter_uuid;

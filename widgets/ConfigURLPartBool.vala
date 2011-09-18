@@ -26,8 +26,8 @@ public class ConfigURLPartBool : ConfigBool
   public delegate bool TestActive(string val);
   public ConfigURLPart.Part part {get; construct;}
 
-  TestActive _test_active;
-  public TestActive test_active {
+  unowned TestActive _test_active;
+  public unowned TestActive test_active {
     get {return _test_active;}
     set {
       _test_active = value;

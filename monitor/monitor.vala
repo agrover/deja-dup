@@ -216,6 +216,8 @@ static bool kickoff()
 
 static bool time_until_next_run(out TimeSpan time)
 {
+  time = 0;
+
   var next_date = DejaDup.next_run_date();
   if (next_date == null) {
     debug("Automatic backups disabled.  Not scheduling a backup.");
@@ -234,11 +236,11 @@ static void prepare_run(TimeSpan wait_time)
 
   TimeSpan secs = wait_time / TimeSpan.SECOND + 1;
   if (wait_time > 0 && secs > 0) {
-    debug("Waiting %ld seconds until next backup.", secs);
+    debug("Waiting %ld seconds until next backup.", (long)secs);
     timeout_id = Timeout.add_seconds((uint)secs, kickoff);
   }
   else {
-    debug("Late by %ld seconds.  Backing up now.", secs * -1);
+    debug("Late by %ld seconds.  Backing up now.", (long)(secs * -1));
     kickoff();
   }
 }

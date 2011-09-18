@@ -96,7 +96,7 @@ public class AssistantRestoreMissing : AssistantRestore {
   */
   private bool scan_queue = true;
   private bool cancel_assistant = false;
-  private Sequence<Time?> backups_queue = new Sequence<Time?>(g_free);
+  private Sequence<Time?> backups_queue = new Sequence<Time?>();
 
   private HashTable<string, DeletedFile> allfiles_prev;
   private List<File> restore_files_remaining;

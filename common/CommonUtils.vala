@@ -167,7 +167,7 @@ public int get_prompt_delay()
     span = TimeSpan.MINUTE * 2;
   else
     span = TimeSpan.DAY * 30;
-  return span / TimeSpan.SECOND;
+  return (int)(span / TimeSpan.SECOND);
 }
 
 public bool has_seen_settings()

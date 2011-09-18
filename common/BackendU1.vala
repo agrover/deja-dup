@@ -30,7 +30,7 @@ class Listener : Object
   public DBusProxy proxy {get; construct;}
   public string method {get; construct;}
   public Variant args {get; construct;}
-  public Handler handler {get; set;}
+  public unowned Handler handler {get; set;}
 
   public Listener(DBusProxy proxy, string method, Variant? args, Handler handler)
   {
