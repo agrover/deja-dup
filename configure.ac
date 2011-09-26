@@ -17,7 +17,7 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 # Sets up autoconf.
-AC_INIT([Déjà Dup],[21.0],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup],[https://launchpad.net/deja-dup])
+AC_INIT([Déjà Dup],[21.1],[https://bugs.launchpad.net/deja-dup/+filebug],[deja-dup],[https://launchpad.net/deja-dup])
 AC_PREREQ(2.64)
 AC_CONFIG_SRCDIR(deja-dup/main.vala)
 AC_CONFIG_HEADERS([config.h:config.h.in])
