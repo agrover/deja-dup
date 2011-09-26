@@ -83,15 +83,9 @@ public void show_background_window_for_shell(Gtk.Window win)
 
   if (get_shell() == ShellEnv.UNITY) {
     // Show as a launcher icon instead of a window in the background
-    /* Unity in Ubuntu 11.10 has bad behavior when using iconify.  So instead,
-       we just show as a legit background window.
-       See https://launchpad.net/bugs/732997 */
-    win.show();
-    /*
     win.iconify();
     win.show();
     win.iconify(); // In case WM didn't respect first iconify
-    */
   }
   else
     win.show();
@@ -100,18 +94,10 @@ public void show_background_window_for_shell(Gtk.Window win)
 public void hide_background_window_for_shell(Gtk.Window win)
 {
   if (get_shell() == ShellEnv.UNITY) {
-    /* Unity in Ubuntu 11.10 has bad behavior when using iconify.  So instead,
-       we just show as a legit background window.  (We can't straight up hide
-       because then user would have no way to get at the window.)
-       See https://launchpad.net/bugs/732997 */
-    win.focus_on_map = false;
-    win.show();
-    /*
     // "Hide" in launcher
     win.iconify();
     win.show();
     win.iconify(); // In case WM didn't respect first iconify
-    */
   }
   else
     win.hide();

@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-08-30 23:48-0400\n"
-"PO-Revision-Date: 2011-08-30 22:17+0000\n"
-"Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
+"POT-Creation-Date: 2011-09-15 11:49-0400\n"
+"PO-Revision-Date: 2011-09-18 20:54+0000\n"
+"Last-Translator: Eugene Marshal <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-09-01 04:53+0000\n"
-"X-Generator: Launchpad (build 13827)\n"
+"X-Launchpad-Export-Date: 2011-09-19 04:43+0000\n"
+"X-Generator: Launchpad (build 13955)\n"
 
 #: ../deja-dup/AssistantRestore.vala:271
 msgid "Restore from When?"
@@ -25,12 +25,12 @@ msgstr "С какой даты восстановить файлы?"
 
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
-#: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:126
-#: ../deja-dup/StatusIcon.vala:249 ../monitor/monitor.vala:115
+#: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
+#: ../deja-dup/StatusIcon.vala:247 ../monitor/monitor.vala:115
 #: ../preferences/preferences-main.vala:51
 #: ../preferences/preferences-main.vala:63
 msgid "Backup"
-msgstr "Резервная копия"
+msgstr "Резервное копирование"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
@@ -41,7 +41,7 @@ msgstr "Резервная копия"
 #: ../deja-dup/main.vala:78 ../preferences/Preferences.vala:88
 #, c-format
 msgid "Déjà Dup Backup Tool"
-msgstr "Сохранение данных с Déjà Dup"
+msgstr "Программа резервного копирования Déjà Dup"
 
 #: ../data/deja-dup-ccpanel.desktop.in.h:1
 #: ../data/deja-dup-preferences.desktop.in.in.h:1
@@ -57,14 +57,14 @@ msgstr "Изменить параметры резервного копиров�
 #: ../data/deja-dup-ccpanel.desktop.in.h:5
 #: ../data/deja-dup-preferences.desktop.in.in.h:5
 msgid "déjà;deja;dup;"
-msgstr ""
+msgstr "déjà;deja;dup;дежа;дап;дуп"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
 #: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:300
 msgid "Backup Monitor"
-msgstr "Монитор резервных копий"
+msgstr "Менеджер резервного копирования"
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
 msgid "Schedules backups at regular intervals"
@@ -99,7 +99,7 @@ msgstr "Папки для резервного копирования"
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
 #: ../preferences/Preferences.vala:200
 msgid "Folders to ignore"
-msgstr "Игнорируемые папки"
+msgstr "Исключённые папки"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:7
 msgid "Full name of the external volume"
@@ -303,6 +303,10 @@ msgid ""
 "don’t know about backups. This time should be either ‘disabled’ to turn off "
 "this check or in ISO 8601 format."
 msgstr ""
+"После входа пользователя в систему, монитор Déjà Dup проверяет, нужно ли "
+"сообщать о необходимости резервного копирования. Это упростит работу для "
+"пользователей, которые мало знают о резервном копировании. Время задается в "
+"формате ISO 8601. Для отключения проверок укажите значение 'disabled'."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
@@ -348,6 +352,8 @@ msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr ""
+"Используемый контейнер Rackspace Cloud Files. Он может еще не существовать. "
+"Допустимы лишь правильные сетевые имена компьютеров."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
@@ -361,7 +367,7 @@ msgstr "Ваше имя пользователя в Rackspace"
 
 #: ../data/ui/restore-missing.ui.h:1
 msgid "Folder"
-msgstr "Каталог"
+msgstr "Папка"
 
 #: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:175
 msgid "Scanning…"
@@ -391,7 +397,7 @@ msgstr[2] "Восстановить файлов из резервной коп�
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:86 ../common/CommonUtils.vala:442
+#: ../common/BackendFile.vala:86 ../common/CommonUtils.vala:447
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s на %2$s"
@@ -402,19 +408,19 @@ msgid "Backup will begin when %s becomes connected."
 msgstr "Резервное копирование будет начато при подключении %s"
 
 #: ../common/BackendFile.vala:131 ../common/BackendRackspace.vala:49
-#: ../common/BackendS3.vala:59 ../common/BackendU1.vala:140
+#: ../common/BackendS3.vala:59 ../common/BackendU1.vala:163
 msgid "Backup will begin when a network connection becomes available."
 msgstr "Резервное копирование будет начато при подключении к сети."
 
-#: ../common/BackendFile.vala:362 ../common/BackendFile.vala:426
+#: ../common/BackendFile.vala:357 ../common/BackendFile.vala:421
 msgid "Backup location not available"
 msgstr "Место хранения резервных копий сейчас недоступно"
 
-#: ../common/BackendFile.vala:363
+#: ../common/BackendFile.vala:358
 msgid "Waiting for a network connection…"
 msgstr "Ожидание сетевого подключения ..."
 
-#: ../common/BackendFile.vala:426
+#: ../common/BackendFile.vala:421
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Ожидание подключения  ‘%s’ ..."
@@ -423,7 +429,7 @@ msgstr "Ожидание подключения  ‘%s’ ..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Необходимо указать в свойствах контейнер Rackspace."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:191
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr "Облачные файлы Rackspace"
 
@@ -498,35 +504,35 @@ msgstr "_Показать секретный ключ доступа"
 msgid "_Remember secret access key"
 msgstr "_Запомнить секретный ключ доступа"
 
-#: ../common/BackendU1.vala:156 ../widgets/ConfigLocation.vala:183
+#: ../common/BackendU1.vala:179 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
 #. Translators: %s is a folder.
-#: ../common/BackendU1.vala:159
+#: ../common/BackendU1.vala:182
 #, c-format
 msgid "%s on Ubuntu One"
 msgstr "%s на Ubuntu One"
 
-#: ../common/BackendU1.vala:214
+#: ../common/BackendU1.vala:249
 msgid "Connect to Ubuntu One"
 msgstr "Соединить с Ubuntu One"
 
-#: ../common/BackendU1.vala:215
+#: ../common/BackendU1.vala:250
 msgid "Sign into Ubuntu One…"
 msgstr "Авторизация на Ubuntu One…"
 
 #. Translators: %s is the user's username
-#: ../common/CommonUtils.vala:493
+#: ../common/CommonUtils.vala:498
 #, c-format
 msgid "Home (%s)"
-msgstr ""
+msgstr "Домашний каталог (%s)"
 
-#: ../common/CommonUtils.vala:497
+#: ../common/CommonUtils.vala:502
 msgid "Home"
 msgstr "Главная"
 
-#: ../common/CommonUtils.vala:501
+#: ../common/CommonUtils.vala:506
 msgid "Trash"
 msgstr "Корзина"
 
@@ -555,6 +561,8 @@ msgstr ""
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
+"Пакет duplicity не установлен. Из-за этого Déjà Dup не может создавать "
+"резервные копии и завершает свою работу."
 
 #: ../common/DuplicityInfo.vala:119
 msgid "Duplicity’s version is too old"
@@ -566,6 +574,8 @@ msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
 "only found version %d.%d.%.2d"
 msgstr ""
+"Для работы Déjà Dup требуется пакет duplicity версии как минимум %d.%d.%.2d, "
+"но установлена версия %d.%d.%.2d"
 
 #: ../common/Duplicity.vala:132 ../common/Duplicity.vala:186
 msgid "Paused (no network)"
@@ -802,15 +812,15 @@ msgstr "_Запомнить пароль"
 msgid "Summary"
 msgstr "Сводная информация"
 
-#: ../deja-dup/AssistantOperation.vala:729
+#: ../deja-dup/AssistantOperation.vala:712
 msgid "Require Password?"
-msgstr "Требовать пароль?"
+msgstr "Хотите ли вы установить пароль?"
 
-#: ../deja-dup/AssistantOperation.vala:731
+#: ../deja-dup/AssistantOperation.vala:714
 msgid "Encryption Password Needed"
 msgstr "Требуется пароль шифрования"
 
-#: ../deja-dup/AssistantOperation.vala:774
+#: ../deja-dup/AssistantOperation.vala:757
 msgid "Backup encryption password"
 msgstr "Сделать резервную копию пароля шифрования"
 
@@ -963,7 +973,7 @@ msgstr "Сканирование завершено"
 msgid "Co_ntinue"
 msgstr "_Продолжить"
 
-#: ../deja-dup/Assistant.vala:347 ../deja-dup/StatusIcon.vala:94
+#: ../deja-dup/Assistant.vala:347 ../deja-dup/StatusIcon.vala:93
 msgid "_Resume Later"
 msgstr "П_родолжить позже"
 
@@ -986,7 +996,7 @@ msgstr "Восстановить удалённые файлы"
 
 #: ../deja-dup/main.vala:55
 msgid "No directory provided"
-msgstr "Каталог не указан"
+msgstr "Папка не указана"
 
 #: ../deja-dup/main.vala:60
 msgid "Only one directory can be shown at once"
@@ -1015,7 +1025,7 @@ msgstr ""
 
 #: ../deja-dup/main.vala:137
 msgid "Directory does not exists"
-msgstr "Каталог не существует"
+msgstr "Папка не существует"
 
 #: ../deja-dup/main.vala:141
 msgid "You must provide a directory, not a file"
@@ -1091,27 +1101,27 @@ msgstr "_Открыть настройки резервного копирова
 msgid "Open Backup Settings"
 msgstr "Открыть настройки резервного копирования"
 
-#: ../deja-dup/StatusIcon.vala:95
+#: ../deja-dup/StatusIcon.vala:94
 msgid "_Skip Backup"
 msgstr "_Пропустить резервное копирование"
 
-#: ../deja-dup/StatusIcon.vala:127
+#: ../deja-dup/StatusIcon.vala:126
 msgid "Backup completed"
 msgstr "Резервное копирование выполнено"
 
-#: ../deja-dup/StatusIcon.vala:165
+#: ../deja-dup/StatusIcon.vala:164
 msgid "Déjà Du_p"
 msgstr "Déjà Du_p"
 
-#: ../deja-dup/StatusIcon.vala:250
+#: ../deja-dup/StatusIcon.vala:248
 msgid "Starting scheduled backup"
 msgstr "Запуск запланированного резервного копирования"
 
-#: ../deja-dup/StatusIcon.vala:252
+#: ../deja-dup/StatusIcon.vala:250
 msgid "Show Progress"
 msgstr "Отображать ход выполнения"
 
-#: ../deja-dup/StatusIcon.vala:289
+#: ../deja-dup/StatusIcon.vala:287
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% завершено"
@@ -1136,7 +1146,7 @@ msgstr "Категории"
 
 #: ../preferences/Preferences.vala:166
 msgid "Automatic _backups"
-msgstr "Автоматические _резервные копии"
+msgstr "Создавать резервные копии автоматически"
 
 #: ../preferences/Preferences.vala:213
 msgid "Most recent backup"
@@ -1247,13 +1257,14 @@ msgstr[2] "%d суток ранее"
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d день назад"
+msgstr[1] "%d дня назад"
+msgstr[2] "%d дней назад"
 
 #: ../widgets/ConfigLabelBackupDate.vala:92
 #: ../widgets/ConfigLabelBackupDate.vala:106
 msgid "None"
-msgstr ""
+msgstr "Нет"
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1365,7 +1376,7 @@ msgstr "SSH"
 
 #: ../widgets/ConfigLocation.vala:119
 msgid "Windows Share"
-msgstr "Каталог Windows"
+msgstr "Общий ресурс Windows"
 
 #: ../widgets/ConfigLocation.vala:121
 msgid "FTP"
@@ -1382,7 +1393,7 @@ msgstr "Другой адрес"
 #. And a local folder option
 #: ../widgets/ConfigLocation.vala:132
 msgid "Local Folder"
-msgstr "Локальный каталог"
+msgstr "Локальная папка"
 
 #: ../widgets/ConfigLocationCustom.vala:31
 msgid "_URI"
@@ -1407,7 +1418,7 @@ msgstr "_Порт"
 #: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
-msgstr "_Каталог"
+msgstr "_Папка"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
@@ -2683,6 +2694,8 @@ msgstr "Не удалось отобразить %s"
 #~ "  Alex Stepankov https://launchpad.net/~xeurun\n"
 #~ "  Alexey Ivanov https://launchpad.net/~alexey-ivanov\n"
 #~ "  Alexey Rusaleev https://launchpad.net/~alexey-rusaleev\n"
+#~ "  AsstZD https://launchpad.net/~eskaer-spamsink\n"
+#~ "  Dmitry Shachnev https://launchpad.net/~mitya57\n"
 #~ "  Eugene Marshal https://launchpad.net/~lowrider\n"
 #~ "  GamePad64 https://launchpad.net/~gamepad64\n"
 #~ "  Ilya Telegin https://launchpad.net/~devi29rus\n"

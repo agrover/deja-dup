@@ -95,11 +95,11 @@ public class DuplicityInfo : Object
            (major == vmaj && minor > vmin) ||
            (major == vmaj && minor == vmin && micro >= vmic);
   }
-  
+/*
   bool equals_version(int vmaj, int vmin, int vmic) {
     return major == vmaj && minor == vmin && micro == vmic;
   }
-  
+*/
   // Doesn't yet handle a blacklist of versions.  We'll cross that bridge when we come to it
   bool meets_requirements() {
     return meets_version(REQUIRED_MAJOR, REQUIRED_MINOR, REQUIRED_MICRO);

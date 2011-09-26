@@ -80,16 +80,8 @@ class U1Checker : Checker
     try {
       var proxy = BackendU1.get_creds_proxy();
       if (proxy.get_name_owner() == null) {
-        // No U1 installed...  See if installer is available.
-        var cmd = Environment.find_program_in_path("ubuntuone-installer");
-        if (cmd == null) {
-          available = false;
-          complete = true;
-        }
-        else {
-          available = true;
-          complete = true;
-        }
+        available = false;
+        complete = true;
       }
     }
     catch (Error e) {
@@ -120,7 +112,6 @@ class U1Checker : Checker
 
 public class BackendU1 : Backend
 {
-  uint installer_watch = 0;
   ulong button_handler = 0;
 
   static Checker checker_instance = null;
@@ -140,10 +131,6 @@ public class BackendU1 : Backend
     if (button_handler > 0) {
       mount_op.disconnect(button_handler);
       button_handler = 0;
-    }
-    if (installer_watch > 0) {
-      Source.remove(installer_watch);
-      installer_watch = 0;
     }
   }
 
@@ -254,54 +241,12 @@ public class BackendU1 : Backend
     mount_op.ask_password("", "", "", 0);
   }
 
-  void installer_finished(Pid pid, int status)
-  {
-    installer_watch = 0;
-
-    try {
-      var obj = get_creds_proxy();
-      if (obj.get_name_owner() == null)
-        envp_ready(false, null);
-      else
-        sign_in();
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      envp_ready(false, null);
-    }
-  }
-
-  bool install_u1()
-  {
-    if (installer_watch > 0)
-      return true;
-
-    var cmd = Environment.find_program_in_path("ubuntuone-installer");
-    if (cmd == null)
-      return false;
-
-    Pid pid = 0;
-    try {
-      Process.spawn_async(null, {cmd}, null,
-                          SpawnFlags.DO_NOT_REAP_CHILD, null, out pid);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      return false;
-    }
-
-    installer_watch = ChildWatch.add(pid, installer_finished);
-    return true;
-  }
-
   async void sign_in()
   {
     try {
       var obj = get_creds_proxy();
       if (obj.get_name_owner() == null) {
-        // No U1 installed, so first install it
-        if (!install_u1())
-          envp_ready(false, null);
+        envp_ready(false, null);
         return;
       }
 
