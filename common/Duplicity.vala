@@ -286,6 +286,19 @@ public class Duplicity : Object
       expand_links_in_file(file, ref all, include);
   }
 
+  string escape_duplicity_path(string path)
+  {
+    // Duplicity paths are actually shell globs.  So we want to escape anything
+    // that might fool duplicity into thinking this isn't the real path.
+    // Specifically, anything in '[?*'.  Duplicity does not have escape
+    // characters, so we surround each with brackets.
+    string rv;
+    rv = path.replace("[", "[[]");
+    rv =   rv.replace("?", "[?]");
+    rv =   rv.replace("*", "[*]");
+    return rv;
+  }
+
   void process_include_excludes()
   {
     expand_links_in_list(ref includes, true);
@@ -301,16 +314,16 @@ public class Duplicity : Object
       var excludes2 = excludes.copy();
       foreach (File e in excludes2) {
         if (e.has_prefix(i)) {
-          saved_argv.append("--exclude=" + e.get_path());
+          saved_argv.append("--exclude=" + escape_duplicity_path(e.get_path()));
           excludes.remove(e);
         }
       }
-      saved_argv.append("--include=" + i.get_path());
+      saved_argv.append("--include=" + escape_duplicity_path(i.get_path()));
       //if (!i.has_prefix(slash_home_me))
       //  needs_root = true;
     }
     foreach (File e in excludes) {
-      saved_argv.append("--exclude=" + e.get_path());
+      saved_argv.append("--exclude=" + escape_duplicity_path(e.get_path()));
     }
 
     saved_argv.append("--exclude=**");
