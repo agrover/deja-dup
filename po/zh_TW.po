@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-09-26 09:13-0400\n"
+"POT-Creation-Date: 2011-10-05 21:37-0400\n"
 "PO-Revision-Date: 2011-09-18 03:00+0000\n"
 "Last-Translator: Roy Chan <roy.chan@linux.org.hk>\n"
 "Language-Team: Traditional Chinese <zh_TW@li.org>\n"
@@ -15,15 +15,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-09-27 05:12+0000\n"
-"X-Generator: Launchpad (build 14028)\n"
+"X-Launchpad-Export-Date: 2011-10-06 05:10+0000\n"
+"X-Generator: Launchpad (build 14085)\n"
 
+#. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
-#: ../deja-dup/StatusIcon.vala:247 ../monitor/monitor.vala:115
-#: ../preferences/preferences-main.vala:51
-#: ../preferences/preferences-main.vala:63
+#: ../deja-dup/StatusIcon.vala:244 ../monitor/monitor.vala:115
+#: ../preferences/preferences-main.vala:52
+#: ../preferences/preferences-main.vala:64
 msgid "Backup"
 msgstr "備份"
 
@@ -57,7 +58,7 @@ msgstr "déjà;deja;dup;備份"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:300
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:302
 msgid "Backup Monitor"
 msgstr "備份監視器"
 
@@ -472,25 +473,27 @@ msgstr "連接至 Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "登入 Ubuntu One…"
 
-#. Translators: %s is the user's username
+#. Translators: this is the home folder and %s is the user's username
 #: ../common/CommonUtils.vala:498
 #, c-format
 msgid "Home (%s)"
 msgstr "家 (%s)"
 
-#: ../common/CommonUtils.vala:502
+#. Translators: this is the home folder
+#: ../common/CommonUtils.vala:503
 msgid "Home"
 msgstr "家"
 
-#: ../common/CommonUtils.vala:506
+#. Translators: this is the trash folder
+#: ../common/CommonUtils.vala:508
 msgid "Trash"
 msgstr "回收筒"
 
-#: ../common/DuplicityInfo.vala:106
+#: ../common/DuplicityInfo.vala:109
 msgid "Could not run duplicity"
 msgstr "無法執行 duplicity"
 
-#: ../common/DuplicityInfo.vala:111
+#: ../common/DuplicityInfo.vala:114
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -498,7 +501,7 @@ msgstr ""
 "無法得知 duplicity 版本。\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:113
+#: ../common/DuplicityInfo.vala:116
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -507,16 +510,16 @@ msgstr ""
 "無法得知 duplicity 版本「%s」。\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:115
+#: ../common/DuplicityInfo.vala:118
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr "若沒有 duplicity，Déjà Dup 備份工具就無法運作。即將關閉。"
 
-#: ../common/DuplicityInfo.vala:119
+#: ../common/DuplicityInfo.vala:122
 msgid "Duplicity’s version is too old"
 msgstr "Duplicity 的版本過舊"
 
-#: ../common/DuplicityInfo.vala:120
+#: ../common/DuplicityInfo.vala:123
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -527,37 +530,37 @@ msgstr "Déjà Dup 備份工具需要 %d.%d.%.2d 版以上的 duplicity，但是
 msgid "Paused (no network)"
 msgstr "已暫停 (無網路)"
 
-#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
-#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
+#: ../common/Duplicity.vala:392 ../common/Duplicity.vala:399
+#: ../common/Duplicity.vala:418 ../common/Duplicity.vala:423
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "正在準備..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:437
+#: ../common/Duplicity.vala:450
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "無法還原「%s」：非有效的檔案位置"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:503
+#: ../common/Duplicity.vala:516
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "備份位置空間太小。請嘗試使用有更多空間的位置。"
 
-#: ../common/Duplicity.vala:525
+#: ../common/Duplicity.vala:538
 msgid "Backup location does not have enough free space."
 msgstr "備份位置沒有足夠可用空間。"
 
-#: ../common/Duplicity.vala:544 ../common/Duplicity.vala:558
+#: ../common/Duplicity.vala:557 ../common/Duplicity.vala:571
 msgid "Cleaning up…"
 msgstr "正在清理..."
 
-#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:1049
+#: ../common/Duplicity.vala:673 ../common/Duplicity.vala:1062
 #: ../deja-dup/AssistantOperation.vala:519
 msgid "Failed with an unknown error."
 msgstr "失敗伴隨未知錯誤。"
 
-#: ../common/Duplicity.vala:888
+#: ../common/Duplicity.vala:901
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "無法還原「%s」：在備份內找不到檔案"
@@ -565,16 +568,16 @@ msgstr "無法還原「%s」：在備份內找不到檔案"
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:894 ../common/Duplicity.vala:996
-#: ../common/Duplicity.vala:1000
+#: ../common/Duplicity.vala:907 ../common/Duplicity.vala:1009
+#: ../common/Duplicity.vala:1013
 msgid "Bad encryption password."
 msgstr "不良的加密密碼。"
 
-#: ../common/Duplicity.vala:899
+#: ../common/Duplicity.vala:912
 msgid "Computer name changed"
 msgstr "電腦名稱已變更"
 
-#: ../common/Duplicity.vala:899
+#: ../common/Duplicity.vala:912
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -582,67 +585,67 @@ msgid ""
 "location."
 msgstr "現存的備份其電腦名稱為 %s，但是目前的電腦名稱為 %s。若這是您未預期的問題，建議您應該備份至不同位置。"
 
-#: ../common/Duplicity.vala:934
+#: ../common/Duplicity.vala:947
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "當嘗試建立「%s」時不被許可。"
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:938 ../common/Duplicity.vala:942
+#: ../common/Duplicity.vala:951 ../common/Duplicity.vala:955
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "當嘗試讀取「%s」時不被許可。"
 
-#: ../common/Duplicity.vala:946
+#: ../common/Duplicity.vala:959
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "當嘗試刪除「%s」時不被許可。"
 
-#: ../common/Duplicity.vala:953
+#: ../common/Duplicity.vala:966
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "備份位置「%s」不存在。"
 
-#: ../common/Duplicity.vala:959 ../common/Duplicity.vala:1019
+#: ../common/Duplicity.vala:972 ../common/Duplicity.vala:1032
 msgid "No space left."
 msgstr "沒有剩餘空間。"
 
-#: ../common/Duplicity.vala:973
+#: ../common/Duplicity.vala:986
 msgid "Invalid ID."
 msgstr "無效的 ID。"
 
-#: ../common/Duplicity.vala:975
+#: ../common/Duplicity.vala:988
 msgid "Invalid secret key."
 msgstr "無效的秘密金鑰。"
 
-#: ../common/Duplicity.vala:977
+#: ../common/Duplicity.vala:990
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "您的 Amazon 網路服務帳號未登入 S3 服務。"
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:1003
 msgid "S3 bucket name is not available."
 msgstr "S3 bucket 名稱不可用。"
 
-#: ../common/Duplicity.vala:1004
+#: ../common/Duplicity.vala:1017
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "讀取檔案發生錯誤「%s」。"
 
-#: ../common/Duplicity.vala:1006
+#: ../common/Duplicity.vala:1019
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "寫入檔案「%s」發生錯誤。"
 
-#: ../common/Duplicity.vala:1021
+#: ../common/Duplicity.vala:1034
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "「%s」內沒有剩餘空間。"
 
-#: ../common/Duplicity.vala:1029
+#: ../common/Duplicity.vala:1042
 msgid "No backup files found"
 msgstr "找不到備份檔案"
 
-#: ../common/Duplicity.vala:1080
+#: ../common/Duplicity.vala:1093
 msgid "Uploading…"
 msgstr "正在上傳..."
 
@@ -996,7 +999,8 @@ msgstr "匿名連線(_A)"
 msgid "Connect as u_ser"
 msgstr "以此使用者連線(_S)"
 
-#: ../deja-dup/MountOperationAssistant.vala:212
+#. Translators: this is a Windows networking domain
+#: ../deja-dup/MountOperationAssistant.vala:213
 msgid "_Domain"
 msgstr "網域(_D)"
 
@@ -1035,19 +1039,19 @@ msgstr "略過備份(_S)"
 msgid "Backup completed"
 msgstr "備份已完成"
 
-#: ../deja-dup/StatusIcon.vala:164
-msgid "Déjà Du_p"
-msgstr "Déjà Du_p"
+#: ../deja-dup/StatusIcon.vala:163
+msgid "Show _Progress"
+msgstr "顯示進度(_P)"
 
-#: ../deja-dup/StatusIcon.vala:248
+#: ../deja-dup/StatusIcon.vala:245
 msgid "Starting scheduled backup"
 msgstr "正在啟動備份排程"
 
-#: ../deja-dup/StatusIcon.vala:250
+#: ../deja-dup/StatusIcon.vala:247
 msgid "Show Progress"
 msgstr "顯示進度"
 
-#: ../deja-dup/StatusIcon.vala:287
+#: ../deja-dup/StatusIcon.vala:284
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% 完成"
@@ -1094,32 +1098,33 @@ msgstr "立刻備份(_N)"
 msgid "Overview"
 msgstr "概覽"
 
-#: ../preferences/Preferences.vala:315
+#. Translators: storage as in "where to store the backup"
+#: ../preferences/Preferences.vala:316
 msgid "Storage"
 msgstr "儲存處"
 
-#: ../preferences/Preferences.vala:336
+#: ../preferences/Preferences.vala:337
 msgid "Folders to _back up"
 msgstr "要備份的資料夾(_B)"
 
-#: ../preferences/Preferences.vala:346
+#: ../preferences/Preferences.vala:347
 msgid "Folders to _ignore"
 msgstr "要忽略的資料夾(_I)"
 
-#: ../preferences/Preferences.vala:355
+#: ../preferences/Preferences.vala:356
 msgid "Folders"
 msgstr "資料夾"
 
-#: ../preferences/Preferences.vala:366
+#: ../preferences/Preferences.vala:367
 msgid "How _often to back up"
 msgstr "多久備份一次(_O)"
 
-#: ../preferences/Preferences.vala:377
+#: ../preferences/Preferences.vala:378
 #, c-format
 msgid "_Keep backups"
 msgstr "保留備份(_K)"
 
-#: ../preferences/Preferences.vala:392
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "排程"
 
@@ -1181,8 +1186,9 @@ msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d 日前"
 
-#: ../widgets/ConfigLabelBackupDate.vala:92
-#: ../widgets/ConfigLabelBackupDate.vala:106
+#. Translators: This is used in phrases like "Most recent backup: None"
+#: ../widgets/ConfigLabelBackupDate.vala:93
+#: ../widgets/ConfigLabelBackupDate.vala:107
 msgid "None"
 msgstr "無"
 
@@ -1193,10 +1199,6 @@ msgstr "是"
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
 msgstr "否"
-
-#: ../widgets/ConfigLabelLocation.vala:75
-msgid "Unknown"
-msgstr "未知"
 
 #: ../widgets/ConfigLabelPolicy.vala:63
 msgid ""
@@ -1364,3 +1366,9 @@ msgstr[0] "每 %d 天"
 #, c-format
 msgid "Could not display %s"
 msgstr "無法顯示 %s"
+
+#~ msgid "Unknown"
+#~ msgstr "未知"
+
+#~ msgid "Déjà Du_p"
+#~ msgstr "Déjà Du_p"

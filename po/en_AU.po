@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-09-26 09:13-0400\n"
+"POT-Creation-Date: 2011-10-05 21:37-0400\n"
 "PO-Revision-Date: 2011-09-18 03:00+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: English (Australia) <en_AU@li.org>\n"
@@ -15,15 +15,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-09-27 05:12+0000\n"
-"X-Generator: Launchpad (build 14028)\n"
+"X-Launchpad-Export-Date: 2011-10-06 05:10+0000\n"
+"X-Generator: Launchpad (build 14085)\n"
 
+#. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
-#: ../deja-dup/StatusIcon.vala:247 ../monitor/monitor.vala:115
-#: ../preferences/preferences-main.vala:51
-#: ../preferences/preferences-main.vala:63
+#: ../deja-dup/StatusIcon.vala:244 ../monitor/monitor.vala:115
+#: ../preferences/preferences-main.vala:52
+#: ../preferences/preferences-main.vala:64
 msgid "Backup"
 msgstr "Backup"
 
@@ -57,7 +58,7 @@ msgstr "déjà;deja;dup;"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:300
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:302
 msgid "Backup Monitor"
 msgstr "Backup Monitor"
 
@@ -511,25 +512,27 @@ msgstr "Connect to Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "Sign into Ubuntu One…"
 
-#. Translators: %s is the user's username
+#. Translators: this is the home folder and %s is the user's username
 #: ../common/CommonUtils.vala:498
 #, c-format
 msgid "Home (%s)"
 msgstr "Home (%s)"
 
-#: ../common/CommonUtils.vala:502
+#. Translators: this is the home folder
+#: ../common/CommonUtils.vala:503
 msgid "Home"
 msgstr "Home"
 
-#: ../common/CommonUtils.vala:506
+#. Translators: this is the trash folder
+#: ../common/CommonUtils.vala:508
 msgid "Trash"
 msgstr "Rubbish Bin"
 
-#: ../common/DuplicityInfo.vala:106
+#: ../common/DuplicityInfo.vala:109
 msgid "Could not run duplicity"
 msgstr "Could not run duplicity"
 
-#: ../common/DuplicityInfo.vala:111
+#: ../common/DuplicityInfo.vala:114
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -537,7 +540,7 @@ msgstr ""
 "Could not understand duplicity version.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:113
+#: ../common/DuplicityInfo.vala:116
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -546,17 +549,17 @@ msgstr ""
 "Could not understand duplicity version ‘%s’.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:115
+#: ../common/DuplicityInfo.vala:118
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 
-#: ../common/DuplicityInfo.vala:119
+#: ../common/DuplicityInfo.vala:122
 msgid "Duplicity’s version is too old"
 msgstr "Duplicity’s version is too old"
 
-#: ../common/DuplicityInfo.vala:120
+#: ../common/DuplicityInfo.vala:123
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -569,37 +572,37 @@ msgstr ""
 msgid "Paused (no network)"
 msgstr "Paused (no network)"
 
-#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
-#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
+#: ../common/Duplicity.vala:392 ../common/Duplicity.vala:399
+#: ../common/Duplicity.vala:418 ../common/Duplicity.vala:423
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Preparing…"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:437
+#: ../common/Duplicity.vala:450
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Could not restore ‘%s’: Not a valid file location"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:503
+#: ../common/Duplicity.vala:516
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "Backup location is too small.  Try using one with more space."
 
-#: ../common/Duplicity.vala:525
+#: ../common/Duplicity.vala:538
 msgid "Backup location does not have enough free space."
 msgstr "Backup location does not have enough free space."
 
-#: ../common/Duplicity.vala:544 ../common/Duplicity.vala:558
+#: ../common/Duplicity.vala:557 ../common/Duplicity.vala:571
 msgid "Cleaning up…"
 msgstr "Cleaning up…"
 
-#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:1049
+#: ../common/Duplicity.vala:673 ../common/Duplicity.vala:1062
 #: ../deja-dup/AssistantOperation.vala:519
 msgid "Failed with an unknown error."
 msgstr "Failed with an unknown error."
 
-#: ../common/Duplicity.vala:888
+#: ../common/Duplicity.vala:901
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Could not restore ‘%s’: File not found in backup"
@@ -607,16 +610,16 @@ msgstr "Could not restore ‘%s’: File not found in backup"
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:894 ../common/Duplicity.vala:996
-#: ../common/Duplicity.vala:1000
+#: ../common/Duplicity.vala:907 ../common/Duplicity.vala:1009
+#: ../common/Duplicity.vala:1013
 msgid "Bad encryption password."
 msgstr "Bad encryption password."
 
-#: ../common/Duplicity.vala:899
+#: ../common/Duplicity.vala:912
 msgid "Computer name changed"
 msgstr "Computer name changed"
 
-#: ../common/Duplicity.vala:899
+#: ../common/Duplicity.vala:912
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -627,68 +630,68 @@ msgstr ""
 "name is %s.  If this is unexpected, you should back up to a different "
 "location."
 
-#: ../common/Duplicity.vala:934
+#: ../common/Duplicity.vala:947
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Permission denied when trying to create ‘%s’."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:938 ../common/Duplicity.vala:942
+#: ../common/Duplicity.vala:951 ../common/Duplicity.vala:955
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Permission denied when trying to read ‘%s’."
 
-#: ../common/Duplicity.vala:946
+#: ../common/Duplicity.vala:959
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Permission denied when trying to delete ‘%s’."
 
-#: ../common/Duplicity.vala:953
+#: ../common/Duplicity.vala:966
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Backup location ‘%s’ does not exist."
 
-#: ../common/Duplicity.vala:959 ../common/Duplicity.vala:1019
+#: ../common/Duplicity.vala:972 ../common/Duplicity.vala:1032
 msgid "No space left."
 msgstr "No space left."
 
-#: ../common/Duplicity.vala:973
+#: ../common/Duplicity.vala:986
 msgid "Invalid ID."
 msgstr "Invalid ID."
 
-#: ../common/Duplicity.vala:975
+#: ../common/Duplicity.vala:988
 msgid "Invalid secret key."
 msgstr "Invalid secret key."
 
-#: ../common/Duplicity.vala:977
+#: ../common/Duplicity.vala:990
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Your Amazon Web Services account is not signed up for the S3 service."
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:1003
 msgid "S3 bucket name is not available."
 msgstr "S3 bucket name is not available."
 
-#: ../common/Duplicity.vala:1004
+#: ../common/Duplicity.vala:1017
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Error reading file ‘%s’."
 
-#: ../common/Duplicity.vala:1006
+#: ../common/Duplicity.vala:1019
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Error writing file ‘%s’."
 
-#: ../common/Duplicity.vala:1021
+#: ../common/Duplicity.vala:1034
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "No space left in ‘%s’."
 
-#: ../common/Duplicity.vala:1029
+#: ../common/Duplicity.vala:1042
 msgid "No backup files found"
 msgstr "No backup files found"
 
-#: ../common/Duplicity.vala:1080
+#: ../common/Duplicity.vala:1093
 msgid "Uploading…"
 msgstr "Uploading…"
 
@@ -1050,7 +1053,8 @@ msgstr "Connect _anonymously"
 msgid "Connect as u_ser"
 msgstr "Connect as u_ser"
 
-#: ../deja-dup/MountOperationAssistant.vala:212
+#. Translators: this is a Windows networking domain
+#: ../deja-dup/MountOperationAssistant.vala:213
 msgid "_Domain"
 msgstr "_Domain"
 
@@ -1092,19 +1096,19 @@ msgstr "_Skip Backup"
 msgid "Backup completed"
 msgstr "Backup completed"
 
-#: ../deja-dup/StatusIcon.vala:164
-msgid "Déjà Du_p"
-msgstr "Déjà Du_p"
+#: ../deja-dup/StatusIcon.vala:163
+msgid "Show _Progress"
+msgstr ""
 
-#: ../deja-dup/StatusIcon.vala:248
+#: ../deja-dup/StatusIcon.vala:245
 msgid "Starting scheduled backup"
 msgstr "Starting scheduled backup"
 
-#: ../deja-dup/StatusIcon.vala:250
+#: ../deja-dup/StatusIcon.vala:247
 msgid "Show Progress"
 msgstr "Show Progress"
 
-#: ../deja-dup/StatusIcon.vala:287
+#: ../deja-dup/StatusIcon.vala:284
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% complete"
@@ -1151,32 +1155,33 @@ msgstr "Back Up _Now"
 msgid "Overview"
 msgstr "Overview"
 
-#: ../preferences/Preferences.vala:315
+#. Translators: storage as in "where to store the backup"
+#: ../preferences/Preferences.vala:316
 msgid "Storage"
 msgstr "Storage"
 
-#: ../preferences/Preferences.vala:336
+#: ../preferences/Preferences.vala:337
 msgid "Folders to _back up"
 msgstr "Folders to _back up"
 
-#: ../preferences/Preferences.vala:346
+#: ../preferences/Preferences.vala:347
 msgid "Folders to _ignore"
 msgstr "Folders to _ignore"
 
-#: ../preferences/Preferences.vala:355
+#: ../preferences/Preferences.vala:356
 msgid "Folders"
 msgstr "Folders"
 
-#: ../preferences/Preferences.vala:366
+#: ../preferences/Preferences.vala:367
 msgid "How _often to back up"
 msgstr "How _often to back up"
 
-#: ../preferences/Preferences.vala:377
+#: ../preferences/Preferences.vala:378
 #, c-format
 msgid "_Keep backups"
 msgstr "_Keep backups"
 
-#: ../preferences/Preferences.vala:392
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "Schedule"
 
@@ -1241,8 +1246,9 @@ msgid_plural "%d days ago"
 msgstr[0] "%d day ago"
 msgstr[1] "%d days ago"
 
-#: ../widgets/ConfigLabelBackupDate.vala:92
-#: ../widgets/ConfigLabelBackupDate.vala:106
+#. Translators: This is used in phrases like "Most recent backup: None"
+#: ../widgets/ConfigLabelBackupDate.vala:93
+#: ../widgets/ConfigLabelBackupDate.vala:107
 msgid "None"
 msgstr "None"
 
@@ -1253,10 +1259,6 @@ msgstr "Yes"
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
 msgstr "No"
-
-#: ../widgets/ConfigLabelLocation.vala:75
-msgid "Unknown"
-msgstr "Unknown"
 
 #: ../widgets/ConfigLabelPolicy.vala:63
 msgid ""
@@ -1442,3 +1444,9 @@ msgstr[1] "Every %d days"
 #, c-format
 msgid "Could not display %s"
 msgstr "Could not display %s"
+
+#~ msgid "Déjà Du_p"
+#~ msgstr "Déjà Du_p"
+
+#~ msgid "Unknown"
+#~ msgstr "Unknown"

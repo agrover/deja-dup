@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-09-26 09:13-0400\n"
+"POT-Creation-Date: 2011-10-05 21:37-0400\n"
 "PO-Revision-Date: 2011-09-28 23:04+0000\n"
 "Last-Translator: Fran Diéguez <Unknown>\n"
 "Language-Team: Proxecto Trasno <proxecto@trasno.net>\n"
@@ -15,15 +15,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-09-29 05:11+0000\n"
-"X-Generator: Launchpad (build 14049)\n"
+"X-Launchpad-Export-Date: 2011-10-06 05:09+0000\n"
+"X-Generator: Launchpad (build 14085)\n"
 
+#. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
-#: ../deja-dup/StatusIcon.vala:247 ../monitor/monitor.vala:115
-#: ../preferences/preferences-main.vala:51
-#: ../preferences/preferences-main.vala:63
+#: ../deja-dup/StatusIcon.vala:244 ../monitor/monitor.vala:115
+#: ../preferences/preferences-main.vala:52
+#: ../preferences/preferences-main.vala:64
 msgid "Backup"
 msgstr "Copia de respaldo"
 
@@ -57,7 +58,7 @@ msgstr "déjà;deja;dup;"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:300
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:302
 msgid "Backup Monitor"
 msgstr "Monitor de copias de respaldo"
 
@@ -520,25 +521,27 @@ msgstr "Conectarse a Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "Rexistrarse en Ubuntu One..."
 
-#. Translators: %s is the user's username
+#. Translators: this is the home folder and %s is the user's username
 #: ../common/CommonUtils.vala:498
 #, c-format
 msgid "Home (%s)"
 msgstr "Cartafol persoal (%s)"
 
-#: ../common/CommonUtils.vala:502
+#. Translators: this is the home folder
+#: ../common/CommonUtils.vala:503
 msgid "Home"
 msgstr "Cartafol persoal"
 
-#: ../common/CommonUtils.vala:506
+#. Translators: this is the trash folder
+#: ../common/CommonUtils.vala:508
 msgid "Trash"
 msgstr "Lixo"
 
-#: ../common/DuplicityInfo.vala:106
+#: ../common/DuplicityInfo.vala:109
 msgid "Could not run duplicity"
 msgstr "Non foi posíbel executar o duplicity"
 
-#: ../common/DuplicityInfo.vala:111
+#: ../common/DuplicityInfo.vala:114
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -546,7 +549,7 @@ msgstr ""
 "Non foi posíbel entender a versión do duplicity.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:113
+#: ../common/DuplicityInfo.vala:116
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -555,18 +558,18 @@ msgstr ""
 "Non foi posíbel entender a versión do duplicity «%s».\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:115
+#: ../common/DuplicityInfo.vala:118
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
 "A ferramenta de copias de respaldo Déjà Dup non pode funcionar sen "
 "duplicity. Pecharase automaticamente."
 
-#: ../common/DuplicityInfo.vala:119
+#: ../common/DuplicityInfo.vala:122
 msgid "Duplicity’s version is too old"
 msgstr "A versión de duplicity é demasiado antiga"
 
-#: ../common/DuplicityInfo.vala:120
+#: ../common/DuplicityInfo.vala:123
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -579,40 +582,40 @@ msgstr ""
 msgid "Paused (no network)"
 msgstr "Detido (sen rede)"
 
-#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
-#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
+#: ../common/Duplicity.vala:392 ../common/Duplicity.vala:399
+#: ../common/Duplicity.vala:418 ../common/Duplicity.vala:423
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Preparando..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:437
+#: ../common/Duplicity.vala:450
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr ""
 "Non foi posíbel restaurar «%s»: Non é unha localización de ficheiro válida"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:503
+#: ../common/Duplicity.vala:516
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "A localización da copia de seguridade é demasiado pequena. Probe con outra "
 "máis grande."
 
-#: ../common/Duplicity.vala:525
+#: ../common/Duplicity.vala:538
 msgid "Backup location does not have enough free space."
 msgstr "A localización da copia de seguridade non ten espacio abondo."
 
-#: ../common/Duplicity.vala:544 ../common/Duplicity.vala:558
+#: ../common/Duplicity.vala:557 ../common/Duplicity.vala:571
 msgid "Cleaning up…"
 msgstr "Limpando..."
 
-#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:1049
+#: ../common/Duplicity.vala:673 ../common/Duplicity.vala:1062
 #: ../deja-dup/AssistantOperation.vala:519
 msgid "Failed with an unknown error."
 msgstr "Produciuse un erro descoñecido."
 
-#: ../common/Duplicity.vala:888
+#: ../common/Duplicity.vala:901
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
@@ -622,16 +625,16 @@ msgstr ""
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:894 ../common/Duplicity.vala:996
-#: ../common/Duplicity.vala:1000
+#: ../common/Duplicity.vala:907 ../common/Duplicity.vala:1009
+#: ../common/Duplicity.vala:1013
 msgid "Bad encryption password."
 msgstr "Contrasinal de cifrado incorrecto."
 
-#: ../common/Duplicity.vala:899
+#: ../common/Duplicity.vala:912
 msgid "Computer name changed"
 msgstr "Cambiou o nome do computador"
 
-#: ../common/Duplicity.vala:899
+#: ../common/Duplicity.vala:912
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -642,67 +645,67 @@ msgstr ""
 "computador actual é %s.   Se non esperaba isto, debería facer a copia de "
 "seguranza noutra localización."
 
-#: ../common/Duplicity.vala:934
+#: ../common/Duplicity.vala:947
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Denegouse o permiso ao crear ‘%s’."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:938 ../common/Duplicity.vala:942
+#: ../common/Duplicity.vala:951 ../common/Duplicity.vala:955
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Denegouse o permiso ao ler ‘%s’."
 
-#: ../common/Duplicity.vala:946
+#: ../common/Duplicity.vala:959
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Denegouse o permiso ao eliminar ‘%s’."
 
-#: ../common/Duplicity.vala:953
+#: ../common/Duplicity.vala:966
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "O lugar da copia de seguridade ‘%s’ non existe."
 
-#: ../common/Duplicity.vala:959 ../common/Duplicity.vala:1019
+#: ../common/Duplicity.vala:972 ../common/Duplicity.vala:1032
 msgid "No space left."
 msgstr "Non hay espacio"
 
-#: ../common/Duplicity.vala:973
+#: ../common/Duplicity.vala:986
 msgid "Invalid ID."
 msgstr "ID incorrecto."
 
-#: ../common/Duplicity.vala:975
+#: ../common/Duplicity.vala:988
 msgid "Invalid secret key."
 msgstr "Chave secreta incorrecta."
 
-#: ../common/Duplicity.vala:977
+#: ../common/Duplicity.vala:990
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "A súa conta Amazon Web Services non ten rexistrado o servizo S3."
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:1003
 msgid "S3 bucket name is not available."
 msgstr "O nome do contedor S3 non está dispoñíbel."
 
-#: ../common/Duplicity.vala:1004
+#: ../common/Duplicity.vala:1017
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Produciuse un erro ao ler o ficheiro '%s'."
 
-#: ../common/Duplicity.vala:1006
+#: ../common/Duplicity.vala:1019
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Produciuse un erro ao escribir o ficheiro '%s'."
 
-#: ../common/Duplicity.vala:1021
+#: ../common/Duplicity.vala:1034
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Non queda espazo libre en '%s'."
 
-#: ../common/Duplicity.vala:1029
+#: ../common/Duplicity.vala:1042
 msgid "No backup files found"
 msgstr "Non se atopou ningún ficheiro de copia de seguranza"
 
-#: ../common/Duplicity.vala:1080
+#: ../common/Duplicity.vala:1093
 msgid "Uploading…"
 msgstr "Subindo..."
 
@@ -1066,7 +1069,8 @@ msgstr "Conectarse _anonimamente"
 msgid "Connect as u_ser"
 msgstr "Conectar como o u_suario"
 
-#: ../deja-dup/MountOperationAssistant.vala:212
+#. Translators: this is a Windows networking domain
+#: ../deja-dup/MountOperationAssistant.vala:213
 msgid "_Domain"
 msgstr "_Dominio"
 
@@ -1109,19 +1113,19 @@ msgstr "_Omitir a copia de seguranza"
 msgid "Backup completed"
 msgstr "Respaldo completado"
 
-#: ../deja-dup/StatusIcon.vala:164
-msgid "Déjà Du_p"
-msgstr "Déjà Du_p"
+#: ../deja-dup/StatusIcon.vala:163
+msgid "Show _Progress"
+msgstr "Mostrar o _progreso"
 
-#: ../deja-dup/StatusIcon.vala:248
+#: ../deja-dup/StatusIcon.vala:245
 msgid "Starting scheduled backup"
 msgstr "Iniciando o respaldo programado"
 
-#: ../deja-dup/StatusIcon.vala:250
+#: ../deja-dup/StatusIcon.vala:247
 msgid "Show Progress"
 msgstr "Mostrar progreso"
 
-#: ../deja-dup/StatusIcon.vala:287
+#: ../deja-dup/StatusIcon.vala:284
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% completo"
@@ -1168,32 +1172,33 @@ msgstr "_Realizar unha copia de respaldo agora"
 msgid "Overview"
 msgstr "Vista xeral"
 
-#: ../preferences/Preferences.vala:315
+#. Translators: storage as in "where to store the backup"
+#: ../preferences/Preferences.vala:316
 msgid "Storage"
 msgstr "Almacéns"
 
-#: ../preferences/Preferences.vala:336
+#: ../preferences/Preferences.vala:337
 msgid "Folders to _back up"
 msgstr "Cargafoles a _respaldar"
 
-#: ../preferences/Preferences.vala:346
+#: ../preferences/Preferences.vala:347
 msgid "Folders to _ignore"
 msgstr "Cartafoles a _ignorar"
 
-#: ../preferences/Preferences.vala:355
+#: ../preferences/Preferences.vala:356
 msgid "Folders"
 msgstr "Cartafoles"
 
-#: ../preferences/Preferences.vala:366
+#: ../preferences/Preferences.vala:367
 msgid "How _often to back up"
 msgstr "Con que _frecuencia facer a copia de seguranza"
 
-#: ../preferences/Preferences.vala:377
+#: ../preferences/Preferences.vala:378
 #, c-format
 msgid "_Keep backups"
 msgstr "_Conservar as copias de seguranza"
 
-#: ../preferences/Preferences.vala:392
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "Planificación"
 
@@ -1258,8 +1263,9 @@ msgid_plural "%d days ago"
 msgstr[0] "Fai %d día"
 msgstr[1] "Fai %d días"
 
-#: ../widgets/ConfigLabelBackupDate.vala:92
-#: ../widgets/ConfigLabelBackupDate.vala:106
+#. Translators: This is used in phrases like "Most recent backup: None"
+#: ../widgets/ConfigLabelBackupDate.vala:93
+#: ../widgets/ConfigLabelBackupDate.vala:107
 msgid "None"
 msgstr "NIngún"
 
@@ -1270,10 +1276,6 @@ msgstr "Si"
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
 msgstr "Non"
-
-#: ../widgets/ConfigLabelLocation.vala:75
-msgid "Unknown"
-msgstr "Descoñecido"
 
 #: ../widgets/ConfigLabelPolicy.vala:63
 msgid ""
@@ -1461,3 +1463,9 @@ msgstr[1] "Cada %d días"
 #, c-format
 msgid "Could not display %s"
 msgstr "Non foi posíbel mostrar %s"
+
+#~ msgid "Unknown"
+#~ msgstr "Descoñecido"
+
+#~ msgid "Déjà Du_p"
+#~ msgstr "Déjà Du_p"

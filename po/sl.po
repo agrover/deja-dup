@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-09-26 09:13-0400\n"
+"POT-Creation-Date: 2011-10-05 21:37-0400\n"
 "PO-Revision-Date: 2011-09-28 20:08+0000\n"
 "Last-Translator: Dražen Matešić <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -16,15 +16,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2011-09-29 05:12+0000\n"
-"X-Generator: Launchpad (build 14049)\n"
+"X-Launchpad-Export-Date: 2011-10-06 05:09+0000\n"
+"X-Generator: Launchpad (build 14085)\n"
 
+#. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
-#: ../deja-dup/StatusIcon.vala:247 ../monitor/monitor.vala:115
-#: ../preferences/preferences-main.vala:51
-#: ../preferences/preferences-main.vala:63
+#: ../deja-dup/StatusIcon.vala:244 ../monitor/monitor.vala:115
+#: ../preferences/preferences-main.vala:52
+#: ../preferences/preferences-main.vala:64
 msgid "Backup"
 msgstr "Ustvari varnostno kopijo"
 
@@ -58,7 +59,7 @@ msgstr "déjà;deja;dup;varnostna;kopija;arhiv"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:300
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:302
 msgid "Backup Monitor"
 msgstr "Nadzor varnostnih kopij"
 
@@ -522,25 +523,27 @@ msgstr "Poveži se z Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "Prijava v Ubuntu One ..."
 
-#. Translators: %s is the user's username
+#. Translators: this is the home folder and %s is the user's username
 #: ../common/CommonUtils.vala:498
 #, c-format
 msgid "Home (%s)"
 msgstr "Domov (%s)"
 
-#: ../common/CommonUtils.vala:502
+#. Translators: this is the home folder
+#: ../common/CommonUtils.vala:503
 msgid "Home"
 msgstr "Domača mapa"
 
-#: ../common/CommonUtils.vala:506
+#. Translators: this is the trash folder
+#: ../common/CommonUtils.vala:508
 msgid "Trash"
 msgstr "Smeti"
 
-#: ../common/DuplicityInfo.vala:106
+#: ../common/DuplicityInfo.vala:109
 msgid "Could not run duplicity"
 msgstr "Ni mogoče zagnati programa duplicity"
 
-#: ../common/DuplicityInfo.vala:111
+#: ../common/DuplicityInfo.vala:114
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -548,7 +551,7 @@ msgstr ""
 "Ni mogoče strojno razbrati različice programa duplicity.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:113
+#: ../common/DuplicityInfo.vala:116
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -557,17 +560,17 @@ msgstr ""
 "Ni mogoče strojno razbrati različice programa duplicity ‘%s’.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:115
+#: ../common/DuplicityInfo.vala:118
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
 "Brez programa duplicity, orodje Déjà Dup ne deluje. Program se bo končal."
 
-#: ../common/DuplicityInfo.vala:119
+#: ../common/DuplicityInfo.vala:122
 msgid "Duplicity’s version is too old"
 msgstr "Različica programa Duplicity je zastarela"
 
-#: ../common/DuplicityInfo.vala:120
+#: ../common/DuplicityInfo.vala:123
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -580,39 +583,39 @@ msgstr ""
 msgid "Paused (no network)"
 msgstr "Premor (ni omrežne povezave)"
 
-#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
-#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
+#: ../common/Duplicity.vala:392 ../common/Duplicity.vala:399
+#: ../common/Duplicity.vala:418 ../common/Duplicity.vala:423
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Pripravljanje ..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:437
+#: ../common/Duplicity.vala:450
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Ni mogoče obnoviti ‘%s’: mesto datoteke ni veljavno"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:503
+#: ../common/Duplicity.vala:516
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Mesto za ustvarjanje varnostnih kopij je prostorsko majhno. Izbrati je treba "
 "mesto z več razpoložljivega prostora."
 
-#: ../common/Duplicity.vala:525
+#: ../common/Duplicity.vala:538
 msgid "Backup location does not have enough free space."
 msgstr "Na mesto varnostne kopije ni dovolj razpoložljivega prostora."
 
-#: ../common/Duplicity.vala:544 ../common/Duplicity.vala:558
+#: ../common/Duplicity.vala:557 ../common/Duplicity.vala:571
 msgid "Cleaning up…"
 msgstr "Čiščenje ..."
 
-#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:1049
+#: ../common/Duplicity.vala:673 ../common/Duplicity.vala:1062
 #: ../deja-dup/AssistantOperation.vala:519
 msgid "Failed with an unknown error."
 msgstr "Opravilo je spodletelo z neznano napako."
 
-#: ../common/Duplicity.vala:888
+#: ../common/Duplicity.vala:901
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Ni mogoče obnoviti ‘%s’: datoteke v varnostni kopiji ni mogoče najti"
@@ -620,16 +623,16 @@ msgstr "Ni mogoče obnoviti ‘%s’: datoteke v varnostni kopiji ni mogoče naj
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:894 ../common/Duplicity.vala:996
-#: ../common/Duplicity.vala:1000
+#: ../common/Duplicity.vala:907 ../common/Duplicity.vala:1009
+#: ../common/Duplicity.vala:1013
 msgid "Bad encryption password."
 msgstr "Neustrezno šifrirno geslo."
 
-#: ../common/Duplicity.vala:899
+#: ../common/Duplicity.vala:912
 msgid "Computer name changed"
 msgstr "Ime računalnika je spremenjeno"
 
-#: ../common/Duplicity.vala:899
+#: ../common/Duplicity.vala:912
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -640,67 +643,67 @@ msgstr ""
 "trenutnega računalnika pa je %s. V kolikor je to nepričakovano, naredite "
 "varnostno kopijo na drugo mesto."
 
-#: ../common/Duplicity.vala:934
+#: ../common/Duplicity.vala:947
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Ni ustreznih dovoljenj za ustvarjanje ‘%s’."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:938 ../common/Duplicity.vala:942
+#: ../common/Duplicity.vala:951 ../common/Duplicity.vala:955
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Ni ustreznih dovoljenj za branje ‘%s’."
 
-#: ../common/Duplicity.vala:946
+#: ../common/Duplicity.vala:959
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Ni ustreznih dovoljenj za brisanje ‘%s’."
 
-#: ../common/Duplicity.vala:953
+#: ../common/Duplicity.vala:966
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Mesto varnostne kopije ‘%s’ ne obstaja."
 
-#: ../common/Duplicity.vala:959 ../common/Duplicity.vala:1019
+#: ../common/Duplicity.vala:972 ../common/Duplicity.vala:1032
 msgid "No space left."
 msgstr "Ni prostora."
 
-#: ../common/Duplicity.vala:973
+#: ../common/Duplicity.vala:986
 msgid "Invalid ID."
 msgstr "Neveljaven ID."
 
-#: ../common/Duplicity.vala:975
+#: ../common/Duplicity.vala:988
 msgid "Invalid secret key."
 msgstr "Neveljaven skrivni ključ."
 
-#: ../common/Duplicity.vala:977
+#: ../common/Duplicity.vala:990
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Vaš račun Amazon Web Services ni potrjen za storitev S3."
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:1003
 msgid "S3 bucket name is not available."
 msgstr "Ime vedra S3 ni na voljo."
 
-#: ../common/Duplicity.vala:1004
+#: ../common/Duplicity.vala:1017
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Napaka branja datoteke ‘%s’."
 
-#: ../common/Duplicity.vala:1006
+#: ../common/Duplicity.vala:1019
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Napaka pisanja datoteke ‘%s’."
 
-#: ../common/Duplicity.vala:1021
+#: ../common/Duplicity.vala:1034
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Na ‘%s’ ni razpoložljivega prostora."
 
-#: ../common/Duplicity.vala:1029
+#: ../common/Duplicity.vala:1042
 msgid "No backup files found"
 msgstr "Datotek varnostnih kopij ni mogoče najti"
 
-#: ../common/Duplicity.vala:1080
+#: ../common/Duplicity.vala:1093
 msgid "Uploading…"
 msgstr "Pošiljanje ..."
 
@@ -1071,7 +1074,8 @@ msgstr "Poveži se _brezimno"
 msgid "Connect as u_ser"
 msgstr "Poveži se kot _uporabnik"
 
-#: ../deja-dup/MountOperationAssistant.vala:212
+#. Translators: this is a Windows networking domain
+#: ../deja-dup/MountOperationAssistant.vala:213
 msgid "_Domain"
 msgstr "_Domena"
 
@@ -1113,19 +1117,19 @@ msgstr "_Preskoči ustvarjanje varnostne kopije"
 msgid "Backup completed"
 msgstr "Ustvarjanje varnostne kopije je končano"
 
-#: ../deja-dup/StatusIcon.vala:164
-msgid "Déjà Du_p"
-msgstr "Déjà Du_p"
+#: ../deja-dup/StatusIcon.vala:163
+msgid "Show _Progress"
+msgstr ""
 
-#: ../deja-dup/StatusIcon.vala:248
+#: ../deja-dup/StatusIcon.vala:245
 msgid "Starting scheduled backup"
 msgstr "Začenjanje načrtovanega ustvarjanja varnostne kopije"
 
-#: ../deja-dup/StatusIcon.vala:250
+#: ../deja-dup/StatusIcon.vala:247
 msgid "Show Progress"
 msgstr "Pokaži napredek"
 
-#: ../deja-dup/StatusIcon.vala:287
+#: ../deja-dup/StatusIcon.vala:284
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% končano"
@@ -1172,32 +1176,33 @@ msgstr "Ustvari varnostno kopijo _zdaj"
 msgid "Overview"
 msgstr "Pregled"
 
-#: ../preferences/Preferences.vala:315
+#. Translators: storage as in "where to store the backup"
+#: ../preferences/Preferences.vala:316
 msgid "Storage"
 msgstr "Nosilci za shranjevanje"
 
-#: ../preferences/Preferences.vala:336
+#: ../preferences/Preferences.vala:337
 msgid "Folders to _back up"
 msgstr "Mape za ustvarjanje _varnostne kopije"
 
-#: ../preferences/Preferences.vala:346
+#: ../preferences/Preferences.vala:347
 msgid "Folders to _ignore"
 msgstr "Mape za _prezrtje"
 
-#: ../preferences/Preferences.vala:355
+#: ../preferences/Preferences.vala:356
 msgid "Folders"
 msgstr "Mape"
 
-#: ../preferences/Preferences.vala:366
+#: ../preferences/Preferences.vala:367
 msgid "How _often to back up"
 msgstr "Kako _pogosto želite ustvariti varnostne kopije"
 
-#: ../preferences/Preferences.vala:377
+#: ../preferences/Preferences.vala:378
 #, c-format
 msgid "_Keep backups"
 msgstr "_Obdrži varnostne kopije"
 
-#: ../preferences/Preferences.vala:392
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "Urnik"
 
@@ -1268,8 +1273,9 @@ msgstr[1] "Pred %d dnevoma"
 msgstr[2] "Pred %d dnevi"
 msgstr[3] "Pred %d dnevi"
 
-#: ../widgets/ConfigLabelBackupDate.vala:92
-#: ../widgets/ConfigLabelBackupDate.vala:106
+#. Translators: This is used in phrases like "Most recent backup: None"
+#: ../widgets/ConfigLabelBackupDate.vala:93
+#: ../widgets/ConfigLabelBackupDate.vala:107
 msgid "None"
 msgstr "Brez"
 
@@ -1280,10 +1286,6 @@ msgstr "Da"
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
 msgstr "Ne"
-
-#: ../widgets/ConfigLabelLocation.vala:75
-msgid "Unknown"
-msgstr "Neznano"
 
 #: ../widgets/ConfigLabelPolicy.vala:63
 msgid ""
@@ -1479,3 +1481,9 @@ msgstr[3] "Vsake %d dni"
 #, c-format
 msgid "Could not display %s"
 msgstr "Ni mogoče prikazati %s"
+
+#~ msgid "Unknown"
+#~ msgstr "Neznano"
+
+#~ msgid "Déjà Du_p"
+#~ msgstr "Déjà Du_p"

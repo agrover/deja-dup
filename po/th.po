@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-09-26 09:13-0400\n"
+"POT-Creation-Date: 2011-10-05 21:37-0400\n"
 "PO-Revision-Date: 2011-09-18 03:42+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Thai <th@li.org>\n"
@@ -15,15 +15,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-09-27 05:12+0000\n"
-"X-Generator: Launchpad (build 14028)\n"
+"X-Launchpad-Export-Date: 2011-10-06 05:09+0000\n"
+"X-Generator: Launchpad (build 14085)\n"
 
+#. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
-#: ../deja-dup/StatusIcon.vala:247 ../monitor/monitor.vala:115
-#: ../preferences/preferences-main.vala:51
-#: ../preferences/preferences-main.vala:63
+#: ../deja-dup/StatusIcon.vala:244 ../monitor/monitor.vala:115
+#: ../preferences/preferences-main.vala:52
+#: ../preferences/preferences-main.vala:64
 msgid "Backup"
 msgstr "สำรองข้อมูล"
 
@@ -57,7 +58,7 @@ msgstr "déjà;deja;dup;"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:300
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:302
 msgid "Backup Monitor"
 msgstr "เฝ้าสังเกตการสำรองข้อมูล"
 
@@ -503,25 +504,27 @@ msgstr "เชื่อมต่อไปยัง Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "เข้าระบบ Ubuntu One…"
 
-#. Translators: %s is the user's username
+#. Translators: this is the home folder and %s is the user's username
 #: ../common/CommonUtils.vala:498
 #, c-format
 msgid "Home (%s)"
 msgstr "บ้านของ (%s)"
 
-#: ../common/CommonUtils.vala:502
+#. Translators: this is the home folder
+#: ../common/CommonUtils.vala:503
 msgid "Home"
 msgstr "บ้าน"
 
-#: ../common/CommonUtils.vala:506
+#. Translators: this is the trash folder
+#: ../common/CommonUtils.vala:508
 msgid "Trash"
 msgstr "ถังขยะ"
 
-#: ../common/DuplicityInfo.vala:106
+#: ../common/DuplicityInfo.vala:109
 msgid "Could not run duplicity"
 msgstr "ไม่สามารถเรียก duplicity"
 
-#: ../common/DuplicityInfo.vala:111
+#: ../common/DuplicityInfo.vala:114
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -529,7 +532,7 @@ msgstr ""
 "ไม่เข้าใจรุ่น duplicity\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:113
+#: ../common/DuplicityInfo.vala:116
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -538,18 +541,18 @@ msgstr ""
 "ไม่เข้าใจ duplicity รุ่น ‘%s’\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:115
+#: ../common/DuplicityInfo.vala:118
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
 "ถ้าไม่มี duplicity โปรแกรมสำรองข้อมูล Déjà Dup จะไม่สามารถทำงานได้ "
 "และจะปิดเดี๋ยวนี้"
 
-#: ../common/DuplicityInfo.vala:119
+#: ../common/DuplicityInfo.vala:122
 msgid "Duplicity’s version is too old"
 msgstr "รุ่นของ Duplicity เก่าเกินไป"
 
-#: ../common/DuplicityInfo.vala:120
+#: ../common/DuplicityInfo.vala:123
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -562,38 +565,38 @@ msgstr ""
 msgid "Paused (no network)"
 msgstr "หยุด (ไม่มีเครือข่าย)"
 
-#: ../common/Duplicity.vala:379 ../common/Duplicity.vala:386
-#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:410
+#: ../common/Duplicity.vala:392 ../common/Duplicity.vala:399
+#: ../common/Duplicity.vala:418 ../common/Duplicity.vala:423
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "กำลังเตรียม..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:437
+#: ../common/Duplicity.vala:450
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "ไม่สามารถกู้คืน ‘%s’: ไม่ใช่ตำแหน่งที่ถูกต้อง"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:503
+#: ../common/Duplicity.vala:516
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "ตำแหน่งการสำรองข้อมูลเล็กเกินไป ลองใช้ที่อื่นที่มีพื้นที่ว่างมากกว่านี้"
 
-#: ../common/Duplicity.vala:525
+#: ../common/Duplicity.vala:538
 msgid "Backup location does not have enough free space."
 msgstr "ตำแหน่งการสำรองข้อมูลมีพื้นที่ว่างไม่พอ"
 
-#: ../common/Duplicity.vala:544 ../common/Duplicity.vala:558
+#: ../common/Duplicity.vala:557 ../common/Duplicity.vala:571
 msgid "Cleaning up…"
 msgstr "กำลังล้างข้อมูล..."
 
-#: ../common/Duplicity.vala:660 ../common/Duplicity.vala:1049
+#: ../common/Duplicity.vala:673 ../common/Duplicity.vala:1062
 #: ../deja-dup/AssistantOperation.vala:519
 msgid "Failed with an unknown error."
 msgstr "ล้มเหลวโดยไม่ทราบข้อผิดพลาด"
 
-#: ../common/Duplicity.vala:888
+#: ../common/Duplicity.vala:901
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "ไม่สามารถกู้คืน ‘%s’: ไม่พบแฟ้มในข้อมูลสำรอง"
@@ -601,16 +604,16 @@ msgstr "ไม่สามารถกู้คืน ‘%s’: ไม่พบ�
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:894 ../common/Duplicity.vala:996
-#: ../common/Duplicity.vala:1000
+#: ../common/Duplicity.vala:907 ../common/Duplicity.vala:1009
+#: ../common/Duplicity.vala:1013
 msgid "Bad encryption password."
 msgstr "รหัสผ่านการเข้ารหัสแย่"
 
-#: ../common/Duplicity.vala:899
+#: ../common/Duplicity.vala:912
 msgid "Computer name changed"
 msgstr "เปลี่ยนชื่อคอมพิวเตอร์แล้ว"
 
-#: ../common/Duplicity.vala:899
+#: ../common/Duplicity.vala:912
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -621,67 +624,67 @@ msgstr ""
 "แต่ชื่อคอมพิวเตอร์ในปัจจุบันเป็น %s "
 "ถ้าข้อมูลนี้ผิดพลาดคุณควรสำรองข้อมูลที่ตำแหน่งอื่น"
 
-#: ../common/Duplicity.vala:934
+#: ../common/Duplicity.vala:947
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "ไม่ได้รับอนุญาตขณะพยายามสร้าง '%s'"
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:938 ../common/Duplicity.vala:942
+#: ../common/Duplicity.vala:951 ../common/Duplicity.vala:955
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "ไม่ได้รับอนุญาตขณะพยายามอ่าน '%s'"
 
-#: ../common/Duplicity.vala:946
+#: ../common/Duplicity.vala:959
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "ไม่ได้รับอนุญาตขณะพยายามลบ '%s'"
 
-#: ../common/Duplicity.vala:953
+#: ../common/Duplicity.vala:966
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "ยังไม่มีตำแหน่งการสำรองข้อมูล ‘%s’"
 
-#: ../common/Duplicity.vala:959 ../common/Duplicity.vala:1019
+#: ../common/Duplicity.vala:972 ../common/Duplicity.vala:1032
 msgid "No space left."
 msgstr "ไม่มีพื้นที่ว่างเหลือ"
 
-#: ../common/Duplicity.vala:973
+#: ../common/Duplicity.vala:986
 msgid "Invalid ID."
 msgstr "ID ไม่ถูกต้อง"
 
-#: ../common/Duplicity.vala:975
+#: ../common/Duplicity.vala:988
 msgid "Invalid secret key."
 msgstr "กุญแจรหัสลับไม่ถูกต้อง"
 
-#: ../common/Duplicity.vala:977
+#: ../common/Duplicity.vala:990
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "บัญชี Amazon Web Services ของคุณไม่สามารถลงทะเบียนบริการ S3 ได้"
 
-#: ../common/Duplicity.vala:990
+#: ../common/Duplicity.vala:1003
 msgid "S3 bucket name is not available."
 msgstr "ชื่อตะกร้า S3 ไม่สามารถใช้งานได้"
 
-#: ../common/Duplicity.vala:1004
+#: ../common/Duplicity.vala:1017
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "การอ่านแฟ้ม ‘%s’ ผิดพลาด"
 
-#: ../common/Duplicity.vala:1006
+#: ../common/Duplicity.vala:1019
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "การเขียนแฟ้ม ‘%s’ ผิดพลาด"
 
-#: ../common/Duplicity.vala:1021
+#: ../common/Duplicity.vala:1034
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "ไม่มีพื้นที่ว่างใน ‘%s’"
 
-#: ../common/Duplicity.vala:1029
+#: ../common/Duplicity.vala:1042
 msgid "No backup files found"
 msgstr "ไม่พบแฟ้มข้อมูลสำรอง"
 
-#: ../common/Duplicity.vala:1080
+#: ../common/Duplicity.vala:1093
 msgid "Uploading…"
 msgstr "กำลังอัปโหลด..."
 
@@ -1037,7 +1040,8 @@ msgstr "เชื่อมต่อแบบ_นิรนาม"
 msgid "Connect as u_ser"
 msgstr "เชื่อมต่อเป็นผู้ใ_ช้"
 
-#: ../deja-dup/MountOperationAssistant.vala:212
+#. Translators: this is a Windows networking domain
+#: ../deja-dup/MountOperationAssistant.vala:213
 msgid "_Domain"
 msgstr "โ_ดเมน"
 
@@ -1078,19 +1082,19 @@ msgstr "_ข้ามการสำรองข้อมูล"
 msgid "Backup completed"
 msgstr "การสำรองข้อมูลสมบูรณ์"
 
-#: ../deja-dup/StatusIcon.vala:164
-msgid "Déjà Du_p"
-msgstr "Déjà Du_p"
+#: ../deja-dup/StatusIcon.vala:163
+msgid "Show _Progress"
+msgstr "แสดง_ความคืบหน้า"
 
-#: ../deja-dup/StatusIcon.vala:248
+#: ../deja-dup/StatusIcon.vala:245
 msgid "Starting scheduled backup"
 msgstr "กำลังเริ่มการสำรองข้อมูลตามกำหนดการ"
 
-#: ../deja-dup/StatusIcon.vala:250
+#: ../deja-dup/StatusIcon.vala:247
 msgid "Show Progress"
 msgstr "แสดงสถานะ"
 
-#: ../deja-dup/StatusIcon.vala:287
+#: ../deja-dup/StatusIcon.vala:284
 #, c-format
 msgid "%.1f%% complete"
 msgstr "สมบูรณ์แล้ว %.1f%%"
@@ -1137,32 +1141,33 @@ msgstr "สำรองข้อมูลเ_ดี๋ยวนี้"
 msgid "Overview"
 msgstr "ภาพรวม"
 
-#: ../preferences/Preferences.vala:315
+#. Translators: storage as in "where to store the backup"
+#: ../preferences/Preferences.vala:316
 msgid "Storage"
 msgstr "สื่อจัดเก็บข้อมูล"
 
-#: ../preferences/Preferences.vala:336
+#: ../preferences/Preferences.vala:337
 msgid "Folders to _back up"
 msgstr "โฟลเดอร์ที่จะ_สำรองข้อมูล"
 
-#: ../preferences/Preferences.vala:346
+#: ../preferences/Preferences.vala:347
 msgid "Folders to _ignore"
 msgstr "โฟลเดอร์ที่จะเ_พิกเฉย"
 
-#: ../preferences/Preferences.vala:355
+#: ../preferences/Preferences.vala:356
 msgid "Folders"
 msgstr "โฟลเดอร์"
 
-#: ../preferences/Preferences.vala:366
+#: ../preferences/Preferences.vala:367
 msgid "How _often to back up"
 msgstr "จะสำรอง_ถี่แค่ไหน"
 
-#: ../preferences/Preferences.vala:377
+#: ../preferences/Preferences.vala:378
 #, c-format
 msgid "_Keep backups"
 msgstr "เ_ก็บข้อมูลสำรองไว้"
 
-#: ../preferences/Preferences.vala:392
+#: ../preferences/Preferences.vala:393
 msgid "Schedule"
 msgstr "กำหนดการ"
 
@@ -1224,8 +1229,9 @@ msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d วันก่อน"
 
-#: ../widgets/ConfigLabelBackupDate.vala:92
-#: ../widgets/ConfigLabelBackupDate.vala:106
+#. Translators: This is used in phrases like "Most recent backup: None"
+#: ../widgets/ConfigLabelBackupDate.vala:93
+#: ../widgets/ConfigLabelBackupDate.vala:107
 msgid "None"
 msgstr "ไม่มี"
 
@@ -1236,10 +1242,6 @@ msgstr "ใช่"
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
 msgstr "ไม่"
-
-#: ../widgets/ConfigLabelLocation.vala:75
-msgid "Unknown"
-msgstr "ไม่รู้จัก"
 
 #: ../widgets/ConfigLabelPolicy.vala:63
 msgid ""
@@ -1422,3 +1424,9 @@ msgstr[0] "ทุก %d วัน"
 #, c-format
 msgid "Could not display %s"
 msgstr "ไม่สามารถแสดงผล %s"
+
+#~ msgid "Unknown"
+#~ msgstr "ไม่รู้จัก"
+
+#~ msgid "Déjà Du_p"
+#~ msgstr "Déjà Du_p"
