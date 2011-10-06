@@ -69,10 +69,8 @@ public class ConfigLabelLocation : ConfigLabel
       desc = backend.get_location_pretty();
     }
     catch (Error e) {}
-    if (desc != null && desc != "")
-      label.label = desc;
-    else
-      label.label = _("Unknown");
+    if (desc == null)
+      desc = "";
     label.label = desc;
 
     Icon icon = backend.get_icon();

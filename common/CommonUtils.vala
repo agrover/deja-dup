@@ -494,16 +494,19 @@ public async string get_nickname (File f)
     try {
       var info = yield f.query_info_async(FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
                                           FileQueryInfoFlags.NOFOLLOW_SYMLINKS);
-      // Translators: %s is the user's username
+      // Translators: this is the home folder and %s is the user's username
       s = _("Home (%s)").printf(info.get_display_name());
     }
     catch (Error e) {
       warning("%s\n", e.message);
+      // Translators: this is the home folder
       s = _("Home");
     }
   }
-  else if (f.equal(trash))
+  else if (f.equal(trash)) {
+    // Translators: this is the trash folder
     s = _("Trash");
+  }
   else 
     s = DejaDup.get_display_name(f);
 

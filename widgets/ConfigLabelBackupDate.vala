@@ -89,6 +89,7 @@ public class ConfigLabelBackupDate : ConfigLabel
 
     var time = TimeVal();
     if (val == "" || !time.from_iso8601(val)) {
+      // Translators: This is used in phrases like "Most recent backup: None"
       label.label = _("None");
     }
     else {

@@ -209,6 +209,7 @@ public class MountOperationAssistant : MountOperation
                    "text", default_domain);
       domain_w.hexpand = true;
       domain_w.changed.connect((e) => {check_valid_inputs();});
+      // Translators: this is a Windows networking domain
       label = new Gtk.Label(_("_Domain"));
       label.set("mnemonic-widget", domain_w,
                 "use-underline", true,

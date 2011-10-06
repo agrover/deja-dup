@@ -160,12 +160,9 @@ public abstract class StatusIcon : Object
     menu = new Gtk.Menu();
 
     if (show_self) {
-      Gtk.ImageMenuItem imageitem;
-      imageitem = new Gtk.ImageMenuItem.with_mnemonic(_("Déjà Du_p"));
-      imageitem.image = new Gtk.Image.from_icon_name("deja-dup-symbolic", Gtk.IconSize.MENU);
-      imageitem.always_show_image = true;
-      imageitem.activate.connect((i) => {show_window();});
-      menu.append(imageitem);
+      var progressitem = new Gtk.MenuItem.with_mnemonic(_("Show _Progress"));
+      progressitem.activate.connect((i) => {show_window();});
+      menu.append(progressitem);
     }
 
     if (op.mode == DejaDup.Operation.Mode.BACKUP) {

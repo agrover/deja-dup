@@ -48,6 +48,7 @@ class PreferencesApp : Object
     else {
       // We're first instance.  Yay!
       var dlg = new Gtk.Window();
+      // Translators: "Backup" is a noun
       dlg.title = _("Backup");
       dlg.resizable = false;
       dlg.add(new DejaDup.Preferences());

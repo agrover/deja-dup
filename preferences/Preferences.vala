@@ -312,6 +312,7 @@ public class Preferences : Gtk.Grid
     ++row;
     
     notebook.append_page(table, null);
+    // Translators: storage as in "where to store the backup"
     cat_model.insert_with_values(out iter, i, 0, _("Storage"), 1, i);
     ++i;
 
