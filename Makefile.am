@@ -36,7 +36,7 @@ copy-po:
 	bzr add help/*/*.po
 
 sign:
-	gpg --armor --sign --detach-sig deja-dup-$(PACKAGE_VERSION).tar.bz2
+	gpg --armor --sign --detach-sig deja-dup-$(PACKAGE_VERSION).tar.xz
 
 # This next test check is line-broken this way to make it easier to compare 
 # lists when something breaks
