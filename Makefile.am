@@ -38,8 +38,12 @@ copy-po:
 sign:
 	gpg --armor --sign --detach-sig deja-dup-$(PACKAGE_VERSION).tar.bz2
 
+# This next test check is line-broken this way to make it easier to compare 
+# lists when something breaks
 check:
-	test "$(shell ls -1 $(srcdir)/po/*.po | wc -l)" -eq "$(shell cat $(srcdir)/po/LINGUAS | wc -l)"
+	test \
+	     "$(shell ls -1 $(srcdir)/po/*.po | sed 's|.*/\(.*\)\.po|\1|' | sort)" = \
+	     "$(shell cat $(srcdir)/po/LINGUAS)"
 
 releasecheck: all distcheck sign
 release: all dist sign
