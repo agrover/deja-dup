@@ -23,9 +23,6 @@
 
 #include <gtk/gtk.h>
 
-extern GObject *hacks_status_icon_make_app_indicator (GtkMenu *menu);
-extern void hacks_status_icon_close_app_indicator (GObject *icon);
-
 extern gboolean hacks_unity_present(void);
 extern GObject *hacks_unity_get_entry(void);
 extern void hacks_unity_entry_show_progress(GObject *entry, gboolean show);
