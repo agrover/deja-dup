@@ -93,7 +93,10 @@ public class ConfigDelete : ConfigChoice
     if (!valid) {
       var store = (Gtk.ListStore)combo.model;
       store.insert_with_values(out iter, 0, 0,
-                               ngettext("At least %d day", "At least %d days", confval).printf(confval),
+                               dngettext(Config.GETTEXT_PACKAGE,
+                                         "At least %d day",
+                                         "At least %d days",
+                                         confval).printf(confval),
                                1, confval);
       combo.set_active_iter(iter);
     }

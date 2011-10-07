@@ -446,9 +446,10 @@ public class AssistantRestore : AssistantOperation
         confirm_files.hide();
       }
       else {
-        confirm_files_label.label = ngettext("File to restore",
-                                             "Files to restore",
-                                             restore_files.length());
+        confirm_files_label.label = dngettext(Config.GETTEXT_PACKAGE,
+                                              "File to restore",
+                                              "Files to restore",
+                                              restore_files.length());
 
         confirm_files.foreach((w) => {DejaDup.destroy_widget(w);});
         foreach (File f in restore_files) {
@@ -473,9 +474,10 @@ public class AssistantRestore : AssistantOperation
         if (restore_files == null)
           summary_label.label = _("Your files were successfully restored.");
         else
-          summary_label.label = ngettext("Your file was successfully restored.",
-                                         "Your files were successfully restored.",
-                                         restore_files.length());
+          summary_label.label = dngettext(Config.GETTEXT_PACKAGE,
+                                          "Your file was successfully restored.",
+                                          "Your files were successfully restored.",
+                                          restore_files.length());
       }
     }
     else if (page == progress_page) {

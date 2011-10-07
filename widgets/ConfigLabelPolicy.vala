@@ -74,9 +74,10 @@ public class ConfigLabelPolicy : ConfigLabel
     else if (delete_after == ConfigDelete.FOREVER)
       policy = _("Old backups will be kept until the backup location is low on space.");
     else
-      policy = ngettext("Old backups will be kept at least %d day or until the backup location is low on space.",
-                        "Old backups will be kept at least %d days or until the backup location is low on space.",
-                        delete_after).printf(delete_after);
+      policy = dngettext(Config.GETTEXT_PACKAGE,
+                         "Old backups will be kept at least %d day or until the backup location is low on space.",
+                         "Old backups will be kept at least %d days or until the backup location is low on space.",
+                         delete_after).printf(delete_after);
     
     label.label = policy;
   }

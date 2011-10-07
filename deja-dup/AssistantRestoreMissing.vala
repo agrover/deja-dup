@@ -353,15 +353,17 @@ public class AssistantRestoreMissing : AssistantRestore {
     }
     else if (tdiff / 24 / 30 >= 1 && tdiff / 24 / 30 <= 12) {
       int n = tdiff / 24 / 30;
-      worddiff = ngettext("Scanning for files from about a month ago…",
-                          "Scanning for files from about %d months ago…",
-                          n).printf(n);
+      worddiff = dngettext(Config.GETTEXT_PACKAGE,
+                           "Scanning for files from about a month ago…",
+                           "Scanning for files from about %d months ago…",
+                           n).printf(n);
     }
     else {
       int n = tdiff / 24 / 30 / 12;
-      worddiff = ngettext("Scanning for files from about a year ago…",
-                          "Scanning for files from about %d years ago…",
-                          n).printf(n);
+      worddiff = dngettext(Config.GETTEXT_PACKAGE,
+                           "Scanning for files from about a year ago…",
+                           "Scanning for files from about %d years ago…",
+                           n).printf(n);
     }
 
     this.current_scan_date.set_text(worddiff);
