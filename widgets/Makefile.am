@@ -37,8 +37,7 @@ noinst_HEADERS = \
 	widgets.h \
 	whacks.h
 
-libwidgets_la_SOURCES = \
-	whacks.c \
+libwidgets_la_VALASOURCES = \
 	ConfigBool.vala \
 	ConfigChoice.vala \
 	ConfigDelete.vala \
@@ -73,6 +72,10 @@ libwidgets_la_SOURCES = \
 	ToggleGroup.vala \
 	WidgetUtils.vala
 
+libwidgets_la_SOURCES = \
+	whacks.c \
+	$(libwidgets_la_VALASOURCES)
+
 AM_VALAFLAGS = \
 	--library=libwidgets \
 	-H widgets.h \
@@ -85,3 +88,8 @@ AM_VALAFLAGS = \
 	--pkg hacks-unity \
 	--pkg libnotify \
 	--pkg config
+
+dist-hook:
+	cd $(distdir) && rm $(libwidgets_la_VALASOURCES:.vala=.c) \
+	                    widgets.h libwidgets_la_vala.stamp
+

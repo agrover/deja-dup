@@ -34,7 +34,7 @@ deja_dup_LDADD = \
 	$(top_builddir)/common/libcommon.la \
 	$(top_builddir)/widgets/libwidgets.la
 
-deja_dup_SOURCES = \
+deja_dup_VALASOURCES = \
 	Assistant.vala \
 	AssistantBackup.vala \
 	AssistantOperation.vala \
@@ -44,6 +44,9 @@ deja_dup_SOURCES = \
 	Prompt.vala \
 	StatusIcon.vala \
 	main.vala
+
+deja_dup_SOURCES = \
+	$(deja_dup_VALASOURCES)
 
 AM_VALAFLAGS = \
 	--vapidir $(top_srcdir)/common \
@@ -63,3 +66,8 @@ AM_VALAFLAGS = \
 	--pkg hacks \
 	--pkg hacks-unity \
 	--pkg config
+
+dist-hook:
+	cd $(distdir) && rm $(deja_dup_VALASOURCES:.vala=.c) \
+	                    deja_dup_vala.stamp
+

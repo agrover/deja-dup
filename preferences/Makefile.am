@@ -46,13 +46,19 @@ libdeja_dup_la_LIBADD = \
 deja_dup_preferences_LDADD = \
 	$(SHARED_LIBS)
 
+libdeja_dup_la_VALASOURCES = \
+	Preferences.vala
+
 libdeja_dup_la_SOURCES = \
-	Preferences.vala \
+	$(libdeja_dup_la_VALASOURCES) \
 	PreferencesPanel.c
 
-deja_dup_preferences_SOURCES = \
+deja_dup_preferences_VALASOURCES = \
 	Preferences.vala \
 	preferences-main.vala
+
+deja_dup_preferences_SOURCES = \
+	$(deja_dup_preferences_VALASOURCES)
 
 AM_VALAFLAGS = \
 	--vapidir $(top_srcdir)/common \
@@ -65,3 +71,9 @@ AM_VALAFLAGS = \
 	--pkg hacks \
 	--pkg unix \
 	--pkg config
+
+dist-hook:
+	cd $(distdir) && rm $(shell echo $(libdeja_dup_la_VALASOURCES:.vala=.c) \
+	                                 $(deja_dup_preferences_VALASOURCES:.vala=.c) | tr ' ' '\n' | sort | uniq) \
+	                    libdeja_dup_la_vala.stamp deja_dup_preferences_vala.stamp
+

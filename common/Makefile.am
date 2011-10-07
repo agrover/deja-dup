@@ -33,9 +33,7 @@ noinst_HEADERS = \
 	chacks.h \
 	uriutils.h
 
-libcommon_la_SOURCES = \
-	chacks.c \
-	uriutils.c \
+libcommon_la_VALASOURCES = \
 	AsyncCommand.vala \
 	Backend.vala \
 	BackendAuto.vala \
@@ -60,6 +58,11 @@ libcommon_la_SOURCES = \
 	RecursiveOp.vala \
 	SimpleSettings.vala
 
+libcommon_la_SOURCES = \
+	chacks.c \
+	uriutils.c \
+	$(libcommon_la_VALASOURCES)
+
 AM_VALAFLAGS = \
 	--library=libcommon \
 	-H common.h \
@@ -70,3 +73,8 @@ AM_VALAFLAGS = \
 	--pkg uriutils \
 	--pkg posix \
 	--pkg config
+
+dist-hook:
+	cd $(distdir) && rm $(libcommon_la_VALASOURCES:.vala=.c) \
+	                    common.h libcommon_la_vala.stamp
+

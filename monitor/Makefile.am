@@ -30,8 +30,11 @@ deja_dup_monitor_LDADD = \
 	@INTLLIBS@ \
 	$(top_builddir)/common/libcommon.la
 
-deja_dup_monitor_SOURCES = \
+deja_dup_monitor_VALASOURCES = \
 	monitor.vala
+
+deja_dup_monitor_SOURCES = \
+	$(deja_dup_monitor_VALASOURCES)
 
 AM_VALAFLAGS = \
 	--vapidir $(top_srcdir)/common \
@@ -40,3 +43,8 @@ AM_VALAFLAGS = \
 	--pkg gio-2.0 \
 	--pkg libcommon \
 	--pkg libnotify
+
+dist-hook:
+	cd $(distdir) && rm $(deja_dup_monitor_VALASOURCES:.vala=.c) \
+	                    deja_dup_monitor_vala.stamp
+
