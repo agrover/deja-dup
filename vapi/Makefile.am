@@ -16,5 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-EXTRA_DIST = config.vapi hacks.vapi keyring.vapi libnotify.vapi unix.vapi uriutils.vapi
+EXTRA_DIST = \
+	config.vapi \
+	hacks.vapi \
+	hacks-unity.vapi \
+	keyring.vapi \
+	libnotify.deps libnotify.vapi \
+	unix.vapi \
+	uriutils.vapi
 
