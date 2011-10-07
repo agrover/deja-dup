@@ -61,7 +61,6 @@ AM_VALAFLAGS = \
 	--pkg libnotify \
 	--pkg libcommon \
 	--pkg libwidgets \
-	--pkg unix \
 	--pkg keyring \
 	--pkg hacks-unity \
 	--pkg config

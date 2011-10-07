@@ -68,7 +68,6 @@ AM_VALAFLAGS = \
 	--pkg gio-2.0 \
 	--pkg libcommon \
 	--pkg libwidgets \
-	--pkg unix \
 	--pkg config
 
 dist-hook:
