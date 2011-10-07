@@ -15,7 +15,7 @@
 # DEJA_PROG_VALAC([MINIMUM-VERSION])
 # --------------------------------
 AC_DEFUN([DEJA_PROG_VALAC],
-[AC_PATH_PROG([VALAC], [valac-0.14], [])
+[AC_PATH_PROGS([VALAC], [valac-0.14 valac], [])
  AS_IF([test -z "$VALAC"],
    [AC_MSG_WARN([No Vala compiler found.  You will not be able to compile .vala source files.])],
    [AS_IF([test -n "$1"],
