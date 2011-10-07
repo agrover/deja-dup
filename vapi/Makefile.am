@@ -21,7 +21,6 @@ EXTRA_DIST = \
 	hacks.vapi \
 	hacks-unity.vapi \
 	keyring.vapi \
-	libnotify.deps libnotify.vapi \
 	unix.vapi \
 	uriutils.vapi
 
