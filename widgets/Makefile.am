@@ -84,7 +84,6 @@ AM_VALAFLAGS = \
 	--pkg libcommon \
 	--pkg @GTK_MODULE@ \
 	--pkg uriutils \
-	--pkg hacks \
 	--pkg hacks-unity \
 	--pkg libnotify \
 	--pkg config

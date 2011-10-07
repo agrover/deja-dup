@@ -63,7 +63,6 @@ AM_VALAFLAGS = \
 	--pkg libwidgets \
 	--pkg unix \
 	--pkg keyring \
-	--pkg hacks \
 	--pkg hacks-unity \
 	--pkg config
 
