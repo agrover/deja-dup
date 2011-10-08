@@ -45,10 +45,13 @@ protected ShellEnv shell = ShellEnv.NONE;
 public ShellEnv get_shell()
 {
   if (shell == ShellEnv.NONE) {
+#if HAVE_UNITY
     // Easiest check is Unity -- it tells us directly
-    if (hacks_unity_present())
+    if (Unity.Inspector.get_default().unity_running)
       shell = ShellEnv.UNITY;
-    else {
+    else
+#endif
+    {
       // Next check for Shell by notification capabilities
       unowned List<string> caps = Notify.get_server_caps();
       bool persistence = false, actions = false;

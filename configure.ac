@@ -169,6 +169,7 @@ AC_ARG_WITH([unity],
 AS_IF([test "x$with_unity" != xno],
   [PKG_CHECK_MODULES(UNITY, $DBUSMENU_GTK_MODULE >= 0.3.94 unity >= 3.4.2,
     [AC_DEFINE(HAVE_UNITY)
+     AC_SUBST(UNITY_VALAFLAGS, ["--pkg unity --pkg DbusmenuGtk3-0.4 -D HAVE_UNITY"])
      AC_SUBST(UNITY_CFLAGS)
      AC_SUBST(UNITY_LIBS)],
     [if test "x$with_unity" != xcheck; then

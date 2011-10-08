@@ -70,6 +70,9 @@ AM_VALAFLAGS = \
 	--pkg libwidgets \
 	--pkg config
 
+libdeja_dup_la_vala.stamp: $(top_srcdir)/config.h
+deja_dup_preferences_vala.stamp: $(top_srcdir)/config.h
+
 dist-hook:
 	cd $(distdir) && rm $(shell echo $(libdeja_dup_la_VALASOURCES:.vala=.c) \
 	                                 $(deja_dup_preferences_VALASOURCES:.vala=.c) | tr ' ' '\n' | sort | uniq) \

@@ -51,9 +51,11 @@ public abstract class StatusIcon : Object
     // for indicators or not.
     StatusIcon instance = null;
     switch (DejaDup.get_shell()) {
+#if HAVE_UNITY
     case DejaDup.ShellEnv.UNITY:
       instance = new UnityStatusIcon(window, op, automatic);
       break;
+#endif
 
     case DejaDup.ShellEnv.GNOME:
       instance = new ShellStatusIcon(window, op, automatic);
@@ -189,6 +191,7 @@ public abstract class StatusIcon : Object
   }
 }
 
+#if HAVE_UNITY
 class UnityStatusIcon : StatusIcon
 {
   public UnityStatusIcon(Gtk.Window window, DejaDup.Operation op, bool automatic)
@@ -196,29 +199,32 @@ class UnityStatusIcon : StatusIcon
     Object(window: window, op: op, automatic: automatic);
   }
 
-  Object entry;
+  Unity.LauncherEntry entry;
   construct {
-    entry = hacks_unity_get_entry();
+    entry = Unity.LauncherEntry.get_for_desktop_id("deja-dup.desktop");
     is_valid = entry != null;
     show_automatic_progress = true;
-    if (is_valid)
-      hacks_unity_entry_set_menu(entry, ensure_menu(false));
+    if (is_valid) {
+      var menu = DbusmenuGtk.gtk_parse_menu_structure(ensure_menu(false));
+      entry.quicklist = menu;
+    }
   }
 
   ~UnityStatusIcon()
   {
     if (entry != null) {
-      hacks_unity_entry_show_progress(entry, false);
-      hacks_unity_entry_set_menu(entry, null);
+      entry.progress_visible = false;
+      entry.quicklist = null;
     }
   }
 
   protected override void update_progress()
   {
-    hacks_unity_entry_set_progress(entry, this.progress);
-    hacks_unity_entry_show_progress(entry, true);
+    entry.progress = this.progress;
+    entry.progress_visible = true;
   }
 }
+#endif
 
 class ShellStatusIcon : StatusIcon
 {

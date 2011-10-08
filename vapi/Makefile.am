@@ -18,7 +18,6 @@
 
 EXTRA_DIST = \
 	config.vapi \
-	hacks-unity.vapi \
 	keyring.vapi \
 	uriutils.vapi
 

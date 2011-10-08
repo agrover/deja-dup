@@ -22,13 +22,12 @@ deja_dup_CFLAGS = \
 	-I$(top_srcdir)/common \
 	-I$(top_srcdir)/widgets \
 	$(DUP_CFLAGS) \
-	$(APPINDICATOR_CFLAGS) \
+	$(UNITY_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 deja_dup_LDADD = \
 	$(DUP_LIBS) \
-	$(APPINDICATOR_LIBS) \
 	$(UNITY_LIBS) \
 	@INTLLIBS@ \
 	$(top_builddir)/common/libcommon.la \
@@ -52,6 +51,7 @@ AM_VALAFLAGS = \
 	--vapidir $(top_srcdir)/common \
 	--vapidir $(top_srcdir)/widgets \
 	--vapidir $(top_srcdir)/vapi \
+	$(UNITY_VALAFLAGS) \
 	--pkg gmodule-2.0 \
 	--pkg @GTK_MODULE@ \
 	--pkg @GDK_X11_MODULE@ \
@@ -62,8 +62,9 @@ AM_VALAFLAGS = \
 	--pkg libcommon \
 	--pkg libwidgets \
 	--pkg keyring \
-	--pkg hacks-unity \
 	--pkg config
+
+deja_dup_vala.stamp: $(top_srcdir)/config.h
 
 dist-hook:
 	cd $(distdir) && rm $(deja_dup_VALASOURCES:.vala=.c) \

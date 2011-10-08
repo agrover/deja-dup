@@ -21,21 +21,18 @@ noinst_LTLIBRARIES = libwidgets.la
 libwidgets_la_CFLAGS = \
 	-I$(top_srcdir)/common \
 	$(WIDGETS_CFLAGS) \
-	$(APPINDICATOR_CFLAGS) \
 	$(UNITY_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 libwidgets_la_LIBADD = \
 	$(WIDGETS_LIBS) \
-	$(APPINDICATOR_LIBS) \
 	$(UNITY_LIBS) \
 	@INTLLIBS@ \
 	$(top_builddir)/common/libcommon.la
 
 noinst_HEADERS = \
-	widgets.h \
-	whacks.h
+	widgets.h
 
 libwidgets_la_VALASOURCES = \
 	ConfigBool.vala \
@@ -73,7 +70,6 @@ libwidgets_la_VALASOURCES = \
 	WidgetUtils.vala
 
 libwidgets_la_SOURCES = \
-	whacks.c \
 	$(libwidgets_la_VALASOURCES)
 
 AM_VALAFLAGS = \
@@ -81,12 +77,14 @@ AM_VALAFLAGS = \
 	-H widgets.h \
 	--vapidir=$(top_srcdir)/common \
 	--vapidir=$(top_srcdir)/vapi \
+	$(UNITY_VALAFLAGS) \
 	--pkg libcommon \
 	--pkg @GTK_MODULE@ \
 	--pkg uriutils \
-	--pkg hacks-unity \
 	--pkg libnotify \
 	--pkg config
+
+libwidgets_la_vala.stamp: $(top_srcdir)/config.h
 
 dist-hook:
 	cd $(distdir) && rm $(libwidgets_la_VALASOURCES:.vala=.c) \

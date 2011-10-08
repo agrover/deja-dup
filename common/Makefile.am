@@ -74,6 +74,8 @@ AM_VALAFLAGS = \
 	--pkg posix \
 	--pkg config
 
+libcommon_la_vala.stamp: $(top_srcdir)/config.h
+
 dist-hook:
 	cd $(distdir) && rm $(libcommon_la_VALASOURCES:.vala=.c) \
 	                    common.h libcommon_la_vala.stamp

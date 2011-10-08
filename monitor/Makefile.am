@@ -44,6 +44,8 @@ AM_VALAFLAGS = \
 	--pkg libcommon \
 	--pkg libnotify
 
+deja_dup_monitor_vala.stamp: $(top_srcdir)/config.h
+
 dist-hook:
 	cd $(distdir) && rm $(deja_dup_monitor_VALASOURCES:.vala=.c) \
 	                    deja_dup_monitor_vala.stamp
