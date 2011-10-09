@@ -64,7 +64,6 @@ GDK_X11_MODULE=gdk-x11-3.0
 GLIB_REQ_VER=2.26
 GIO_REQ_VER=$GLIB_REQ_VER
 NOTIFY_REQ_VER=0.7
-DBUSMENU_GTK_MODULE=dbusmenu-gtk3-0.4
 
 AC_SUBST(GTK_MODULE)
 AC_SUBST(GDK_X11_MODULE)
@@ -167,9 +166,9 @@ AC_ARG_WITH([unity],
   [],
   [with_unity=check])
 AS_IF([test "x$with_unity" != xno],
-  [PKG_CHECK_MODULES(UNITY, $DBUSMENU_GTK_MODULE >= 0.3.94 unity >= 3.4.2,
+  [PKG_CHECK_MODULES(UNITY, unity >= 3.4.2,
     [AC_DEFINE(HAVE_UNITY)
-     AC_SUBST(UNITY_VALAFLAGS, ["--pkg unity --pkg DbusmenuGtk3-0.4 -D HAVE_UNITY"])
+     AC_SUBST(UNITY_VALAFLAGS, ["--pkg unity -D HAVE_UNITY"])
      AC_SUBST(UNITY_CFLAGS)
      AC_SUBST(UNITY_LIBS)],
     [if test "x$with_unity" != xcheck; then

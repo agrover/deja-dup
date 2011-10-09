@@ -88,7 +88,6 @@ public abstract class StatusIcon : Object
   protected string later_label;
   protected string skip_label;
 
-  protected Gtk.Menu menu;
   protected Notify.Notification note;
 
   construct {
@@ -153,42 +152,6 @@ public abstract class StatusIcon : Object
 
     op.cancel();
   }
-
-  protected Gtk.Menu ensure_menu(bool show_self = true)
-  {
-    if (menu != null)
-      return menu;
-
-    menu = new Gtk.Menu();
-
-    if (show_self) {
-      var progressitem = new Gtk.MenuItem.with_mnemonic(_("Show _Progress"));
-      progressitem.activate.connect((i) => {show_window();});
-      menu.append(progressitem);
-    }
-
-    if (op.mode == DejaDup.Operation.Mode.BACKUP) {
-      Gtk.MenuItem item;
-
-      if (show_self)
-        menu.append(new Gtk.SeparatorMenuItem());
-
-      item = new Gtk.MenuItem.with_mnemonic(later_label);
-      item.activate.connect((i) => {later();});
-      menu.append(item);
-
-      if (automatic) {
-        item = new Gtk.MenuItem.with_mnemonic(skip_label);
-        item.activate.connect((i) => {skip();});
-        menu.append(item);
-      }
-    }
-
-    update_progress();
-
-    menu.show_all();
-    return menu;
-  }
 }
 
 #if HAVE_UNITY
@@ -205,8 +168,8 @@ class UnityStatusIcon : StatusIcon
     is_valid = entry != null;
     show_automatic_progress = true;
     if (is_valid) {
-      var menu = DbusmenuGtk.gtk_parse_menu_structure(ensure_menu(false));
-      entry.quicklist = menu;
+      entry.quicklist = ensure_menu();
+      update_progress();
     }
   }
 
@@ -222,6 +185,29 @@ class UnityStatusIcon : StatusIcon
   {
     entry.progress = this.progress;
     entry.progress_visible = true;
+  }
+
+  Dbusmenu.Menuitem? ensure_menu()
+  {
+    Dbusmenu.Menuitem menu = null;
+
+    if (op.mode == DejaDup.Operation.Mode.BACKUP) {
+      menu = new Dbusmenu.Menuitem();
+
+      var item = new Dbusmenu.Menuitem();
+      item.property_set(Dbusmenu.MENUITEM_PROP_LABEL, later_label);
+      item.item_activated.connect((i) => {later();});
+      menu.child_append(item);
+
+      if (automatic) {
+        item = new Dbusmenu.Menuitem();
+        item.property_set(Dbusmenu.MENUITEM_PROP_LABEL, skip_label);
+        item.item_activated.connect((i) => {skip();});
+        menu.child_append(item);
+      }
+    }
+
+    return menu;
   }
 }
 #endif
@@ -270,6 +256,7 @@ class LegacyStatusIcon : StatusIcon
     Object(window: window, op: op, automatic: automatic);
   }
 
+  Gtk.Menu menu;
   Gtk.StatusIcon icon;
   construct {
     icon = new Gtk.StatusIcon();
@@ -294,6 +281,35 @@ class LegacyStatusIcon : StatusIcon
   void show_menu(Gtk.StatusIcon status_icon, uint button, uint activate_time)
   {
     menu.popup(null, null, status_icon.position_menu, button, activate_time);
+  }
+
+  void ensure_menu()
+  {
+    menu = new Gtk.Menu();
+
+    var progressitem = new Gtk.MenuItem.with_mnemonic(_("Show _Progress"));
+    progressitem.activate.connect((i) => {show_window();});
+    menu.append(progressitem);
+
+    if (op.mode == DejaDup.Operation.Mode.BACKUP) {
+      Gtk.MenuItem item;
+
+      menu.append(new Gtk.SeparatorMenuItem());
+
+      item = new Gtk.MenuItem.with_mnemonic(later_label);
+      item.activate.connect((i) => {later();});
+      menu.append(item);
+
+      if (automatic) {
+        item = new Gtk.MenuItem.with_mnemonic(skip_label);
+        item.activate.connect((i) => {skip();});
+        menu.append(item);
+      }
+    }
+
+    update_progress();
+
+    menu.show_all();
   }
 }
 
