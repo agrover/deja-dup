@@ -81,7 +81,6 @@ public abstract class StatusIcon : Object
 
   public bool show_automatic_progress {get; protected set; default = false;}
 
-  protected bool is_valid = true;
   protected string action;
   protected double progress;
 
@@ -165,9 +164,8 @@ class UnityStatusIcon : StatusIcon
   Unity.LauncherEntry entry;
   construct {
     entry = Unity.LauncherEntry.get_for_desktop_id("deja-dup.desktop");
-    is_valid = entry != null;
     show_automatic_progress = true;
-    if (is_valid) {
+    if (entry != null) {
       entry.quicklist = ensure_menu();
       update_progress();
     }
@@ -183,8 +181,10 @@ class UnityStatusIcon : StatusIcon
 
   protected override void update_progress()
   {
-    entry.progress = this.progress;
-    entry.progress_visible = true;
+    if (entry != null) {
+      entry.progress = this.progress;
+      entry.progress_visible = true;
+    }
   }
 
   Dbusmenu.Menuitem? ensure_menu()
@@ -219,20 +219,8 @@ class ShellStatusIcon : StatusIcon
     Object(window: window, op: op, automatic: automatic);
   }
 
-  bool persistence = false;
-  bool actions = false;
   construct {
-    unowned List<string> caps = Notify.get_server_caps();
-    foreach (string cap in caps) {
-      if (cap == "persistence")
-        persistence = true;
-      else if (cap == "actions")
-        actions = true;
-    }
-
-    is_valid = persistence && actions;
-
-    if (is_valid && automatic && op.mode == DejaDup.Operation.Mode.BACKUP) {
+    if (automatic && op.mode == DejaDup.Operation.Mode.BACKUP) {
       Notify.init(_("Backup"));
       note = new Notify.Notification(_("Starting scheduled backup"), null,
                                      "deja-dup");
