@@ -219,6 +219,11 @@ public class ConfigLocation : ConfigWidget
     // Currently, to be on the safe side (and the user always has an 'out' by
     // specifying a custom path), we whitelist the types we allow.
 
+    // First, if the icon is emblemed, look past emblems to real icon
+    EmblemedIcon icon_emblemed = icon_in as EmblemedIcon;
+    if (icon_emblemed != null)
+      icon_in = icon_emblemed.get_icon();
+
     ThemedIcon icon = icon_in as ThemedIcon;
     if (icon == null)
       return false;
