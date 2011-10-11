@@ -140,6 +140,8 @@ public class MountOperationAssistant : MountOperation
 
     label = new Gtk.Label(message);
     label.xalign = 0.0f;
+    label.wrap = true;
+    label.max_width_chars = 25;
     layout.pack_start(label, false, false, 0);
 
     if (label_help != null) {
