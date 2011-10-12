@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-05 21:37-0400\n"
+"POT-Creation-Date: 2011-10-11 09:43-0400\n"
 "PO-Revision-Date: 2011-09-18 03:39+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -15,14 +15,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-10-07 05:27+0000\n"
-"X-Generator: Launchpad (build 14085)\n"
+"X-Launchpad-Export-Date: 2011-10-12 05:10+0000\n"
+"X-Generator: Launchpad (build 14124)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
-#: ../deja-dup/StatusIcon.vala:244 ../monitor/monitor.vala:115
+#: ../deja-dup/StatusIcon.vala:224 ../monitor/monitor.vala:115
 #: ../preferences/preferences-main.vala:52
 #: ../preferences/preferences-main.vala:64
 msgid "Backup"
@@ -74,7 +74,7 @@ msgstr "Amazon S3 Access Key ID"
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
-msgstr "ファイルを置く任意のフォルダ名。選択したバケット内に作成されます。"
+msgstr "ファイルを置く任意のフォルダー名。選択したバケット内に作成されます。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
 #: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
@@ -83,17 +83,17 @@ msgstr "バックアップの保存場所"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:4
 msgid "Folder type"
-msgstr "フォルダタイプ"
+msgstr "フォルダータイプ"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
 #: ../preferences/Preferences.vala:192
 msgid "Folders to back up"
-msgstr "バックアップするフォルダ"
+msgstr "バックアップするフォルダー"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
 #: ../preferences/Preferences.vala:200
 msgid "Folders to ignore"
-msgstr "無視するフォルダ"
+msgstr "無視するフォルダー"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:7
 msgid "Full name of the external volume"
@@ -121,7 +121,7 @@ msgstr "バックアップ場所が外部ボリュームの場合、これが一
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
-msgstr "バックアップ場所が外部ボリュームの場合、これがボリューム上のフォルダパスです。"
+msgstr "バックアップ場所が外部ボリュームの場合、これがボリューム上のフォルダーパスです。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:13
 msgid ""
@@ -163,7 +163,7 @@ msgstr "使用する Amazon S3 のバケット名"
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
 msgid "The Amazon S3 folder"
-msgstr "Amazon S3 フォルダ"
+msgstr "Amazon S3 フォルダー"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
 msgid "The Rackspace Cloud Files container"
@@ -171,7 +171,7 @@ msgstr "Rackspace Cloud Filesコンテナー"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "The Ubuntu One folder"
-msgstr "Ubuntu One フォルダー"
+msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
@@ -182,7 +182,7 @@ msgstr "最初に、Déjà Dupはバックアップをどのように行うべ�
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
-msgstr "ファイルを保存されるフォルダ名。‘$HOSTNAME’の場合、コンピュータ名をベースとしたフォルダをデフォルトにします。"
+msgstr "ファイルを保存されるフォルダー名。‘$HOSTNAME’の場合、コンピューター名をベースとしたフォルダーをデフォルトにします。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "The last time Déjà Dup backed up"
@@ -580,7 +580,7 @@ msgstr "暗号化パスワードが違います。"
 
 #: ../common/Duplicity.vala:912
 msgid "Computer name changed"
-msgstr "コンピュータ名が変更されました"
+msgstr "コンピューター名が変更されました"
 
 #: ../common/Duplicity.vala:912
 #, c-format
@@ -589,7 +589,7 @@ msgid ""
 "name is %s.  If this is unexpected, you should back up to a different "
 "location."
 msgstr ""
-"見つかったバックアップのコンピュータ名は %s ですが、現在のコンピュータ名は %s です。意図していない場合は、別の場所にバックアップしてください。"
+"見つかったバックアップのコンピューター名は %s ですが、現在のコンピューター名は %s です。意図していない場合は、別の場所にバックアップしてください。"
 
 #: ../common/Duplicity.vala:947
 #, c-format
@@ -663,7 +663,7 @@ msgstr "ファイルを復元しています…"
 msgid "Backing up…"
 msgstr "バックアップしています…"
 
-#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:482
+#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:484
 msgid "Restoring…"
 msgstr "復元しています…"
 
@@ -795,7 +795,7 @@ msgstr "元の場所にファイルを復元する(_O)"
 
 #: ../deja-dup/AssistantRestore.vala:174
 msgid "Restore to _specific folder"
-msgstr "指定したフォルダへ復元する(_S)"
+msgstr "指定したフォルダーへ復元する(_S)"
 
 #: ../deja-dup/AssistantRestore.vala:184
 msgid "Choose destination for restored files"
@@ -803,7 +803,7 @@ msgstr "復元するファイルの保存先を選択してください"
 
 #: ../deja-dup/AssistantRestore.vala:188
 msgid "Restore _folder"
-msgstr "復元先のフォルダ(_F)"
+msgstr "復元先のフォルダー(_F)"
 
 #: ../deja-dup/AssistantRestore.vala:229
 msgid "Restore date"
@@ -811,7 +811,7 @@ msgstr "復元の日付"
 
 #: ../deja-dup/AssistantRestore.vala:237
 msgid "Restore folder"
-msgstr "復元先のフォルダ"
+msgstr "復元先のフォルダー"
 
 #: ../deja-dup/AssistantRestore.vala:263
 msgid "Checking for Backups…"
@@ -848,24 +848,24 @@ msgstr "復元できるバックアップはありません"
 msgid "Original location"
 msgstr "元の場所"
 
-#: ../deja-dup/AssistantRestore.vala:449
+#: ../deja-dup/AssistantRestore.vala:450
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "復元するファイル"
 
-#: ../deja-dup/AssistantRestore.vala:470
+#: ../deja-dup/AssistantRestore.vala:471
 msgid "Restore Failed"
 msgstr "復元に失敗しました"
 
-#: ../deja-dup/AssistantRestore.vala:472
+#: ../deja-dup/AssistantRestore.vala:473
 msgid "Restore Finished"
 msgstr "復元が終了しました"
 
-#: ../deja-dup/AssistantRestore.vala:474
+#: ../deja-dup/AssistantRestore.vala:475
 msgid "Your files were successfully restored."
 msgstr "ファイルが正常に復元されました。"
 
-#: ../deja-dup/AssistantRestore.vala:476
+#: ../deja-dup/AssistantRestore.vala:478
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "ファイルが正常に復元されました。"
@@ -894,19 +894,19 @@ msgstr "1週間以上前のファイルを検索中…"
 msgid "Scanning for files from up to a month ago…"
 msgstr "1ヶ月以上前のファイルを検索中…"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:356
+#: ../deja-dup/AssistantRestoreMissing.vala:357
 #, c-format
 msgid "Scanning for files from about a month ago…"
 msgid_plural "Scanning for files from about %d months ago…"
 msgstr[0] "約 %d ヶ月前のファイルをスキャン..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:362
+#: ../deja-dup/AssistantRestoreMissing.vala:364
 #, c-format
 msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
 msgstr[0] "約 %d 年前のファイルをスキャン..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:453
+#: ../deja-dup/AssistantRestoreMissing.vala:455
 msgid "Scanning finished"
 msgstr "スキャン完了"
 
@@ -1047,22 +1047,22 @@ msgstr "バックアップの中止(_S)"
 msgid "Backup completed"
 msgstr "バックアップが完了しました"
 
-#: ../deja-dup/StatusIcon.vala:163
-msgid "Show _Progress"
-msgstr "進捗を表示(_P)"
-
-#: ../deja-dup/StatusIcon.vala:245
+#: ../deja-dup/StatusIcon.vala:225
 msgid "Starting scheduled backup"
 msgstr "スケジュール・バックアップの開始"
 
-#: ../deja-dup/StatusIcon.vala:247
+#: ../deja-dup/StatusIcon.vala:227
 msgid "Show Progress"
 msgstr "経過を表示"
 
-#: ../deja-dup/StatusIcon.vala:284
+#: ../deja-dup/StatusIcon.vala:265
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% 完了"
+
+#: ../deja-dup/StatusIcon.vala:278
+msgid "Show _Progress"
+msgstr "進捗を表示(_P)"
 
 #: ../monitor/monitor.vala:155
 msgid "Scheduled backup delayed"
@@ -1113,15 +1113,15 @@ msgstr "記憶装置"
 
 #: ../preferences/Preferences.vala:337
 msgid "Folders to _back up"
-msgstr "バックアップするフォルダ(_B)"
+msgstr "バックアップするフォルダー(_B)"
 
 #: ../preferences/Preferences.vala:347
 msgid "Folders to _ignore"
-msgstr "無視するフォルダ(_I)"
+msgstr "無視するフォルダー(_I)"
 
 #: ../preferences/Preferences.vala:356
 msgid "Folders"
-msgstr "フォルダ"
+msgstr "フォルダー"
 
 #: ../preferences/Preferences.vala:367
 msgid "How _often to back up"
@@ -1164,7 +1164,7 @@ msgstr "最低1年"
 msgid "Forever"
 msgstr "期限なし"
 
-#: ../widgets/ConfigDelete.vala:96
+#: ../widgets/ConfigDelete.vala:97
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -1188,15 +1188,15 @@ msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] "今から %d 日"
 
-#: ../widgets/ConfigLabelBackupDate.vala:82
+#: ../widgets/ConfigLabelBackupDate.vala:83
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d 日前"
 
 #. Translators: This is used in phrases like "Most recent backup: None"
-#: ../widgets/ConfigLabelBackupDate.vala:93
-#: ../widgets/ConfigLabelBackupDate.vala:107
+#: ../widgets/ConfigLabelBackupDate.vala:95
+#: ../widgets/ConfigLabelBackupDate.vala:109
 msgid "None"
 msgstr "なし"
 
@@ -1248,7 +1248,7 @@ msgstr "バックアップ保存先の空き容量が少なくならない限り
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは保存され続けます。"
 
-#: ../widgets/ConfigLabelPolicy.vala:77
+#: ../widgets/ConfigLabelPolicy.vala:78
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1276,7 +1276,7 @@ msgstr "削除"
 
 #: ../widgets/ConfigList.vala:275
 msgid "Choose folders"
-msgstr "フォルダを選択"
+msgstr "フォルダーを選択"
 
 #: ../widgets/ConfigLocation.vala:117
 msgid "SSH"
@@ -1301,7 +1301,7 @@ msgstr "カスタム"
 #. And a local folder option
 #: ../widgets/ConfigLocation.vala:132
 msgid "Local Folder"
-msgstr "ローカルフォルダ"
+msgstr "ローカルのフォルダー"
 
 #: ../widgets/ConfigLocationCustom.vala:31
 msgid "_URI"
@@ -1326,15 +1326,15 @@ msgstr "ポート(_P)"
 #: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
-msgstr "フォルダ(_F)"
+msgstr "フォルダー(_F)"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
-msgstr "フォルダを選択...(_C)"
+msgstr "フォルダーを選択...(_C)"
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
-msgstr "フォルダの選択"
+msgstr "フォルダーの選択"
 
 #: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
@@ -1364,7 +1364,7 @@ msgstr "2週間ごと"
 msgid "Monthly"
 msgstr "毎月"
 
-#: ../widgets/ConfigPeriod.vala:83
+#: ../widgets/ConfigPeriod.vala:84
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
