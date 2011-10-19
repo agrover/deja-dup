@@ -28,20 +28,22 @@ public class ConfigLabel : ConfigWidget
     Object(key: key, ns: ns);
   }
   
-  protected Gtk.Box hbox;
+  protected Gtk.Grid box;
   protected Gtk.Label label;
   construct {
     label = new Gtk.Label("");
-    label.set("xalign", 0.0f);
-    hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
-    add(hbox);
+    label.xalign = 0.0f;
+    label.expand = true;
+    box = new Gtk.Grid();
+    box.column_spacing = 6;
+    add(box);
     fill_box();
     set_from_config();
   }
 
   protected virtual void fill_box()
   {
-    hbox.pack_start(label, true, true, 0);
+    box.add(label);
   }
 
   protected override async void set_from_config()

@@ -38,7 +38,8 @@ public class ConfigLabelLocation : ConfigLabel
     label.wrap = true;
     label.max_width_chars = 30;
     img = new Gtk.Image.from_icon_name("folder", Gtk.IconSize.MENU);
-    img.set("yalign", 0.0f);
+    img.expand = false;
+    img.yalign = 0.0f;
     fill_box();
     watch_key(BACKEND_KEY);
     watch_key(null, (file_root = DejaDup.get_settings(FILE_ROOT)));
@@ -53,8 +54,8 @@ public class ConfigLabelLocation : ConfigLabel
     if (img == null)
       return;
 
-    hbox.pack_start(img, false, false, 0);
-    hbox.pack_start(label, true, true, 0);
+    box.add(img);
+    box.add(label);
   }
 
   protected override async void set_from_config()

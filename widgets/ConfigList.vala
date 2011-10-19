@@ -130,8 +130,8 @@ public class ConfigList : ConfigWidget
   construct {
     var model = new ConfigListStore(this);
     tree = new Gtk.TreeView();
-    tree.set("model", model,
-             "headers-visible", false);
+    tree.model = model;
+    tree.headers_visible = false;
     mnemonic_widget = tree;
 
     var a11y_name = convert_key_to_a11y_name(key);

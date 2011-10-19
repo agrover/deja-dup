@@ -33,6 +33,8 @@ public abstract class ConfigWidget : Gtk.EventBox
   protected SimpleSettings settings;
   protected List<SimpleSettings> all_settings;
   construct {
+    visible_window = false;
+
     settings = DejaDup.get_settings(ns);
     
     if (key != null)

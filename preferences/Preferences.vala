@@ -118,45 +118,13 @@ public class Preferences : Gtk.Grid
     Gtk.Label label;
     Gtk.Grid table;
     int row;
-    Gtk.TreeIter iter;
-    int i = 0;
     Gtk.SizeGroup label_sizes;
-
-    settings_page.column_spacing = 12;
-
-    var cat_model = new Gtk.ListStore(2, typeof(string), typeof(int));
-    var tree = new Gtk.TreeView.with_model(cat_model);
-    var accessible = tree.get_accessible();
-    if (accessible != null) {
-      accessible.set_name("Categories");
-      accessible.set_description(_("Categories"));
-    }
-    tree.headers_visible = false;
-    tree.set_size_request(150, -1);
-    tree.insert_column_with_attributes(-1, null, new Gtk.CellRendererText(),
-                                       "text", 0);
-    tree.get_selection().set_mode(Gtk.SelectionMode.SINGLE);
-    tree.get_selection().changed.connect(() => {
-      Gtk.TreeIter sel_iter;
-      int page;
-      if (tree.get_selection().get_selected(null, out sel_iter)) {
-        cat_model.get(sel_iter, 1, out page);
-        notebook.page = page;
-      }
-    });
-
-    var scrollwin = new Gtk.ScrolledWindow(null, null);
-    scrollwin.hscrollbar_policy = Gtk.PolicyType.NEVER;
-    scrollwin.vscrollbar_policy = Gtk.PolicyType.NEVER;
-    scrollwin.shadow_type = Gtk.ShadowType.IN;
-    scrollwin.add(tree);
-
-    settings_page.add(scrollwin);
 
     table = new Gtk.Grid();
     table.orientation = Gtk.Orientation.VERTICAL;
     table.row_spacing = 6;
     table.column_spacing = 12;
+    table.border_width = 12;
 
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
@@ -173,7 +141,7 @@ public class Preferences : Gtk.Grid
     table.attach(w, 1, row, 1, 1);
     ++row;
 
-    w = new Gtk.EventBox(); // spacer
+    w = new Gtk.Grid(); // spacer
     w.height_request = 12; // plus 6 pixels on either side
     table.attach(w, 0, row, 2, 1);
     ++row;
@@ -205,7 +173,7 @@ public class Preferences : Gtk.Grid
     table.attach(w, 1, row, 1, 1);
     ++row;
 
-    w = new Gtk.EventBox(); // spacer
+    w = new Gtk.Grid(); // spacer
     w.height_request = 12; // plus 6 pixels on either side
     table.attach(w, 0, row, 2, 1);
     ++row;
@@ -228,12 +196,12 @@ public class Preferences : Gtk.Grid
     table.attach(ndate, 1, row, 1, 1);
     ++row;
 
-    w = new Gtk.EventBox(); // spacer
+    w = new Gtk.Grid(); // spacer
     w.height_request = 12; // plus 6 pixels on either side
     table.attach(w, 0, row, 2, 1);
     ++row;
 
-    w = new Gtk.EventBox(); // second spacer
+    w = new Gtk.Grid(); // second spacer
     w.height_request = 12; // plus 6 pixels on either side
     table.attach(w, 0, row, 2, 1);
     ++row;
@@ -244,7 +212,7 @@ public class Preferences : Gtk.Grid
     table.attach(w, 0, row, 2, 1);
     ++row;
 
-    w = new Gtk.EventBox(); // spacer
+    w = new Gtk.Grid(); // spacer
     w.height_request = 12; // plus 6 pixels on either side
     table.attach(w, 0, row, 2, 1);
     ++row;
@@ -281,13 +249,13 @@ public class Preferences : Gtk.Grid
 
     table.attach(bbox, 0, row, 2, 1);
     notebook.append_page(table, null);
-    cat_model.insert_with_values(out iter, i, 0, _("Overview"), 1, i);
-    ++i;
+    notebook.set_tab_label_text(table, _("Overview"));
 
     // Reset page
     table = new Gtk.Grid();
     table.row_spacing = 6;
     table.column_spacing = 12;
+    table.border_width = 12;
     row = 0;
 
     var location = new DejaDup.ConfigLocation(label_sizes);
@@ -313,8 +281,7 @@ public class Preferences : Gtk.Grid
     
     notebook.append_page(table, null);
     // Translators: storage as in "where to store the backup"
-    cat_model.insert_with_values(out iter, i, 0, _("Storage"), 1, i);
-    ++i;
+    notebook.set_tab_label_text(table, _("Storage"));
 
     // Now make sure to reserve the excess space that the hidden bits of
     // ConfigLocation will need.
@@ -330,6 +297,7 @@ public class Preferences : Gtk.Grid
     table = new Gtk.Grid();
     table.row_spacing = 6;
     table.column_spacing = 12;
+    table.border_width = 12;
     table.column_homogeneous = true;
     
     w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY);
@@ -353,13 +321,13 @@ public class Preferences : Gtk.Grid
     table.attach(w, 1, 1, 1, 1);
     
     notebook.append_page(table, null);
-    cat_model.insert_with_values(out iter, i, 0, _("Folders"), 1, i);
-    ++i;
+    notebook.set_tab_label_text(table, _("Folders"));
     
     // Reset page
     table = new Gtk.Grid();
     table.row_spacing = 6;
     table.column_spacing = 12;
+    table.border_width = 12;
     row = 0;
     
     w = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
@@ -390,15 +358,8 @@ public class Preferences : Gtk.Grid
     ++row;
 
     notebook.append_page(table, null);
-    cat_model.insert_with_values(out iter, i, 0, _("Schedule"), 1, i);
-    ++i;
+    notebook.set_tab_label_text(table, _("Schedule"));
 
-    // Select first one by default
-    cat_model.get_iter_first(out iter);
-    tree.get_selection().select_iter(iter);
-
-    notebook.show_tabs = false;
-    notebook.show_border = false;
     notebook.expand = true;
     settings_page.add(notebook);
 
