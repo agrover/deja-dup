@@ -51,7 +51,9 @@ class PreferencesApp : Object
       // Translators: "Backup" is a noun
       dlg.title = _("Backup");
       dlg.resizable = false;
-      dlg.add(new DejaDup.Preferences());
+      var prefs = new DejaDup.Preferences();
+      prefs.border_width = 12;
+      dlg.add(prefs);
       dlg.set_application(app);
       dlg.show_all();
     }

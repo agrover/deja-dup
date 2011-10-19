@@ -59,6 +59,7 @@ static void
 deja_dup_preferences_panel_init (DejaDupPreferencesPanel *self)
 {
   GtkWidget *widget = GTK_WIDGET (deja_dup_preferences_new ());
+  gtk_container_set_border_width (GTK_CONTAINER (widget), 6); // g-c-c adds 6
   gtk_widget_show_all (widget);
   gtk_container_add (GTK_CONTAINER (self), widget);
 }

@@ -106,7 +106,7 @@ public class Preferences : Gtk.Grid
 
     continue_button.set("has-focus", true);
 
-    page.border_width = 24;
+    page.border_width = 18;
     page.show();
     return page;
   }
@@ -363,7 +363,6 @@ public class Preferences : Gtk.Grid
     notebook.expand = true;
     settings_page.add(notebook);
 
-    settings_page.border_width = 12;
     settings_page.show();
     return settings_page;
   }
@@ -383,6 +382,7 @@ public class Preferences : Gtk.Grid
       add(make_welcome_page());
     else
       add(make_settings_page());
+    set_size_request(-1, 400);
   }
 }
 

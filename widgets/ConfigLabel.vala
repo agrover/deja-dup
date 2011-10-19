@@ -32,8 +32,6 @@ public class ConfigLabel : ConfigWidget
   protected Gtk.Label label;
   construct {
     label = new Gtk.Label("");
-    label.xalign = 0.0f;
-    label.expand = true;
     box = new Gtk.Grid();
     box.column_spacing = 6;
     add(box);
@@ -43,6 +41,7 @@ public class ConfigLabel : ConfigWidget
 
   protected virtual void fill_box()
   {
+    label.xalign = 0.0f;
     box.add(label);
   }
 

@@ -39,6 +39,7 @@ public class ConfigLabelPolicy : ConfigLabel
     label.wrap = true;
     label.max_width_chars = 25;
     label.yalign = 1.0f;
+    label.expand = true;
   }
   
   protected override async void set_from_config()

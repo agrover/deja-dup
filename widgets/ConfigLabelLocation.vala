@@ -35,9 +35,7 @@ public class ConfigLabelLocation : ConfigLabel
   }
   
   construct {
-    label.ellipsize = Pango.EllipsizeMode.MIDDLE;
     img = new Gtk.Image.from_icon_name("folder", Gtk.IconSize.MENU);
-    img.expand = false;
     fill_box();
     watch_key(BACKEND_KEY);
     watch_key(null, (file_root = DejaDup.get_settings(FILE_ROOT)));
@@ -52,7 +50,11 @@ public class ConfigLabelLocation : ConfigLabel
     if (img == null)
       return;
 
+    img.expand = false;
     box.add(img);
+
+    label.xalign = 0.0f;
+    label.ellipsize = Pango.EllipsizeMode.MIDDLE;
     box.add(label);
   }
 
