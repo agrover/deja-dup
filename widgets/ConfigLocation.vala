@@ -104,6 +104,7 @@ public class ConfigLocation : ConfigWidget
       label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
 
     extras = new Gtk.EventBox();
+    extras.visible_window = false;
     extras.border_width = 0;
     extras.show();
 
