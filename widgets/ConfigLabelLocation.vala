@@ -35,11 +35,9 @@ public class ConfigLabelLocation : ConfigLabel
   }
   
   construct {
-    label.wrap = true;
-    label.max_width_chars = 30;
+    label.ellipsize = Pango.EllipsizeMode.MIDDLE;
     img = new Gtk.Image.from_icon_name("folder", Gtk.IconSize.MENU);
     img.expand = false;
-    img.yalign = 0.0f;
     fill_box();
     watch_key(BACKEND_KEY);
     watch_key(null, (file_root = DejaDup.get_settings(FILE_ROOT)));

@@ -29,8 +29,6 @@ public class ConfigLabelList : ConfigLabel
   }
 
   construct {
-    label.wrap = true;
-    label.max_width_chars = 30;
     label.ellipsize = Pango.EllipsizeMode.END;
   }
 
