@@ -1375,10 +1375,10 @@ public class Duplicity : Object
     foreach (string s in envp_extra) envp.append(s);
 
     bool use_encryption = false;
-    if (encrypt_password != null)
-      use_encryption = encrypt_password != "";
-    else if (detected_encryption)
+    if (detected_encryption)
       use_encryption = existing_encrypted;
+    else if (encrypt_password != null)
+      use_encryption = encrypt_password != "";
 
     if (use_encryption) {
       if (encrypt_password != null && encrypt_password != "")
