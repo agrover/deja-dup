@@ -121,7 +121,7 @@ public class AssistantRestore : AssistantOperation
     if (restore_files == null || !DejaDup.has_seen_settings()) {
       var page = make_backup_location_page();
       append_page(page);
-      set_page_title(page, _("Restore from Where?"));
+      set_page_title(page, _("Restore From Where?"));
     }
   }
   
@@ -268,7 +268,7 @@ public class AssistantRestore : AssistantOperation
   {
     var page = make_date_page();
     append_page(page);
-    set_page_title(page, _("Restore from When?"));
+    set_page_title(page, _("Restore From When?"));
     date_page = page;
   }
   
