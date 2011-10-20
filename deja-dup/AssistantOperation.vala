@@ -746,8 +746,11 @@ public abstract class AssistantOperation : Assistant
   {
     var passphrase = "";
 
-    if (encrypt_enabled.active)
+    if (encrypt_enabled.active) {
       passphrase = encrypt_entry.get_text().strip();
+      if (passphrase == "") // all whitespace password?  allow it...
+        passphrase = encrypt_entry.get_text();
+    }
 
     if (passphrase != "") {
       // Save it
