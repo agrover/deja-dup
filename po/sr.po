@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-11 09:43-0400\n"
-"PO-Revision-Date: 2011-09-18 03:00+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-10-20 14:01-0400\n"
+"PO-Revision-Date: 2011-10-20 08:21+0000\n"
+"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-10-12 05:11+0000\n"
-"X-Generator: Launchpad (build 14124)\n"
+"X-Launchpad-Export-Date: 2011-10-21 05:08+0000\n"
+"X-Generator: Launchpad (build 14165)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -25,7 +25,7 @@ msgstr ""
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
 #: ../deja-dup/StatusIcon.vala:224 ../monitor/monitor.vala:115
 #: ../preferences/preferences-main.vala:52
-#: ../preferences/preferences-main.vala:64
+#: ../preferences/preferences-main.vala:66
 msgid "Backup"
 msgstr "Резерва"
 
@@ -80,7 +80,7 @@ msgstr ""
 "направљена у изабраном ведру."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "Место за резерву"
 
@@ -89,12 +89,12 @@ msgid "Folder type"
 msgstr "Врста фасцикле"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:160
 msgid "Folders to back up"
 msgstr "Фасцикле за које ће бити прављење резерве"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:168
 msgid "Folders to ignore"
 msgstr "Фасцикле које ће бити занемарене"
 
@@ -427,7 +427,7 @@ msgstr "Чекам да „%s“ постане повезан…"
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Морате да наведете Ракспејс садржаоца у вашим поставкама."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:194
 msgid "Rackspace Cloud Files"
 msgstr "Облак датотека Ракспејса"
 
@@ -466,7 +466,7 @@ msgstr "_Прикажи АПИ кључ приступа"
 msgid "_Remember API access key"
 msgstr "_Запамти АПИ кључ приступа"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:175
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:176
 msgid "Amazon S3"
 msgstr "Амазон С3"
 
@@ -502,7 +502,7 @@ msgstr "_Прикажи тајни кључ приступа"
 msgid "_Remember secret access key"
 msgstr "_Запамти тајни кључ приступа"
 
-#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:185
+#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:186
 msgid "Ubuntu One"
 msgstr "Убунту један"
 
@@ -819,7 +819,7 @@ msgstr "Да тражим лозинку?"
 msgid "Encryption Password Needed"
 msgstr "Потребна је лозинка шифровања"
 
-#: ../deja-dup/AssistantOperation.vala:757
+#: ../deja-dup/AssistantOperation.vala:760
 msgid "Backup encryption password"
 msgstr "Направи резерву лозике шифровања"
 
@@ -831,13 +831,13 @@ msgstr "Поврати"
 msgid "_Restore"
 msgstr "_Поврати"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:294
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:262
 msgid "_Backup location"
 msgstr "_Место за резерву"
 
 #: ../deja-dup/AssistantRestore.vala:124
-msgid "Restore from Where?"
-msgstr "Одакле да повратим?"
+msgid "Restore From Where?"
+msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date"
@@ -872,8 +872,8 @@ msgid "Checking for Backups…"
 msgstr "Вршим проверу за резервама…"
 
 #: ../deja-dup/AssistantRestore.vala:271
-msgid "Restore from When?"
-msgstr "Од када да повратим?"
+msgid "Restore From When?"
+msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
@@ -1061,16 +1061,16 @@ msgstr "_Прикажи лозинку"
 msgid "Location not available"
 msgstr "Место није доступно"
 
-#: ../deja-dup/MountOperationAssistant.vala:166
+#: ../deja-dup/MountOperationAssistant.vala:168
 msgid "Connect _anonymously"
 msgstr "Повежи се _анонимно"
 
-#: ../deja-dup/MountOperationAssistant.vala:170
+#: ../deja-dup/MountOperationAssistant.vala:172
 msgid "Connect as u_ser"
 msgstr "Повежи се као _корисник"
 
 #. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:213
+#: ../deja-dup/MountOperationAssistant.vala:215
 msgid "_Domain"
 msgstr "_Домен"
 
@@ -1127,7 +1127,7 @@ msgstr "%.1f%% је обављено"
 
 #: ../deja-dup/StatusIcon.vala:278
 msgid "Show _Progress"
-msgstr ""
+msgstr "Прикажи _напредовање"
 
 #: ../monitor/monitor.vala:155
 msgid "Scheduled backup delayed"
@@ -1143,61 +1143,57 @@ msgstr "Желим да _повратим датотеек из претходн
 msgid "Just show my backup _settings"
 msgstr "Само прикажи моја подешавања _резерве"
 
-#: ../preferences/Preferences.vala:132
-msgid "Categories"
-msgstr "Категорије"
-
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:134
 msgid "Automatic _backups"
 msgstr "Самосталне _резерве"
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:181
 msgid "Most recent backup"
 msgstr "Најновија резерва"
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:190
 msgid "Next automatic backup"
 msgstr "Следећа самостална резерва"
 
-#: ../preferences/Preferences.vala:256
+#: ../preferences/Preferences.vala:224
 msgid "_Restore…"
 msgstr "_Поврати…"
 
-#: ../preferences/Preferences.vala:262
+#: ../preferences/Preferences.vala:230
 msgid "Back Up _Now"
 msgstr "_Сада направи резерву"
 
-#: ../preferences/Preferences.vala:284
+#: ../preferences/Preferences.vala:252
 msgid "Overview"
 msgstr "Преглед"
 
 #. Translators: storage as in "where to store the backup"
-#: ../preferences/Preferences.vala:316
+#: ../preferences/Preferences.vala:284
 msgid "Storage"
 msgstr "Смештај"
 
-#: ../preferences/Preferences.vala:337
+#: ../preferences/Preferences.vala:305
 msgid "Folders to _back up"
 msgstr "Фасцикле за _резерву"
 
-#: ../preferences/Preferences.vala:347
+#: ../preferences/Preferences.vala:315
 msgid "Folders to _ignore"
 msgstr "Фасцикле за _занемаривање"
 
-#: ../preferences/Preferences.vala:356
+#: ../preferences/Preferences.vala:324
 msgid "Folders"
 msgstr "Фасцикле"
 
-#: ../preferences/Preferences.vala:367
+#: ../preferences/Preferences.vala:335
 msgid "How _often to back up"
 msgstr "_Колико често правити резерву"
 
-#: ../preferences/Preferences.vala:378
+#: ../preferences/Preferences.vala:346
 #, c-format
 msgid "_Keep backups"
 msgstr "_Задржи резерве"
 
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:361
 msgid "Schedule"
 msgstr "Планирање"
 
@@ -1279,7 +1275,7 @@ msgstr "Да"
 msgid "No"
 msgstr "Не"
 
-#: ../widgets/ConfigLabelPolicy.vala:63
+#: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
@@ -1287,7 +1283,7 @@ msgstr ""
 "Старе резерве ће бити задржане најмање недељу дана или док на месту резерве "
 "не буде понестало простора."
 
-#: ../widgets/ConfigLabelPolicy.vala:65
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
@@ -1295,7 +1291,7 @@ msgstr ""
 "Старе резерве ће бити задржане најмање месец дана или док на месту резерве "
 "не буде понестало простора."
 
-#: ../widgets/ConfigLabelPolicy.vala:67
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
@@ -1303,7 +1299,7 @@ msgstr ""
 "Старе резерве ће бити задржане најмање два месеца или док на месту резерве "
 "не буде понестало простора."
 
-#: ../widgets/ConfigLabelPolicy.vala:69
+#: ../widgets/ConfigLabelPolicy.vala:70
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
@@ -1311,7 +1307,7 @@ msgstr ""
 "Старе резерве ће бити задржане најмање три месеца или док на месту резерве "
 "не буде понестало простора."
 
-#: ../widgets/ConfigLabelPolicy.vala:71
+#: ../widgets/ConfigLabelPolicy.vala:72
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
@@ -1319,7 +1315,7 @@ msgstr ""
 "Старе резерве ће бити задржане најмање шест месеци или док на месту резерве "
 "не буде понестало простора."
 
-#: ../widgets/ConfigLabelPolicy.vala:73
+#: ../widgets/ConfigLabelPolicy.vala:74
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1327,13 +1323,13 @@ msgstr ""
 "Старе резерве ће бити задржане најмање годину дана или док на месту резерве "
 "не буде понестало простора."
 
-#: ../widgets/ConfigLabelPolicy.vala:75
+#: ../widgets/ConfigLabelPolicy.vala:76
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Старе резерве ће бити задржане све док на месту резерве не буде понестало "
 "простора."
 
-#: ../widgets/ConfigLabelPolicy.vala:78
+#: ../widgets/ConfigLabelPolicy.vala:79
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1371,28 +1367,28 @@ msgstr "Уклони"
 msgid "Choose folders"
 msgstr "Изаберите фасцикле"
 
-#: ../widgets/ConfigLocation.vala:117
+#: ../widgets/ConfigLocation.vala:118
 msgid "SSH"
 msgstr "ССХ"
 
-#: ../widgets/ConfigLocation.vala:119
+#: ../widgets/ConfigLocation.vala:120
 msgid "Windows Share"
 msgstr "Виндоуз дељење"
 
-#: ../widgets/ConfigLocation.vala:121
+#: ../widgets/ConfigLocation.vala:122
 msgid "FTP"
 msgstr "ФТП"
 
-#: ../widgets/ConfigLocation.vala:123
+#: ../widgets/ConfigLocation.vala:124
 msgid "WebDAV"
 msgstr "ВебДАВ"
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:127
 msgid "Custom Location"
 msgstr "Произвољна путања"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:132
+#: ../widgets/ConfigLocation.vala:133
 msgid "Local Folder"
 msgstr "Локална фасцикла"
 
@@ -1470,8 +1466,17 @@ msgstr[2] "Сваких %d дана"
 msgid "Could not display %s"
 msgstr "Не могу да прикажем „%s“"
 
+#~ msgid "Restore from Where?"
+#~ msgstr "Одакле да повратим?"
+
+#~ msgid "Restore from When?"
+#~ msgstr "Од када да повратим?"
+
 #~ msgid "Déjà Du_p"
 #~ msgstr "_Безбедни сеф"
+
+#~ msgid "Categories"
+#~ msgstr "Категорије"
 
 #~ msgid "Unknown"
 #~ msgstr "Непознато"

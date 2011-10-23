@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-11 09:43-0400\n"
+"POT-Creation-Date: 2011-10-20 14:01-0400\n"
 "PO-Revision-Date: 2011-09-18 03:00+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-10-12 05:11+0000\n"
-"X-Generator: Launchpad (build 14124)\n"
+"X-Launchpad-Export-Date: 2011-10-21 05:08+0000\n"
+"X-Generator: Launchpad (build 14165)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -24,7 +24,7 @@ msgstr ""
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
 #: ../deja-dup/StatusIcon.vala:224 ../monitor/monitor.vala:115
 #: ../preferences/preferences-main.vala:52
-#: ../preferences/preferences-main.vala:64
+#: ../preferences/preferences-main.vala:66
 msgid "Backup"
 msgstr "Yedek"
 
@@ -79,7 +79,7 @@ msgstr ""
 "listede oluşturulacak."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "Yedekleme konumu"
 
@@ -88,12 +88,12 @@ msgid "Folder type"
 msgstr "Dizin türü"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:160
 msgid "Folders to back up"
 msgstr "Yedeklenecek dizinler"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:168
 msgid "Folders to ignore"
 msgstr "Yok sayılcak dizinler"
 
@@ -107,7 +107,7 @@ msgstr "Yedek dosyalarının saklanma süresi"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:9
 msgid "How often to periodically back up"
-msgstr "Ne arayla yedeklenir"
+msgstr "Ne arayla düzenli yedeklenir"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:10
 msgid "Icon of the external volume"
@@ -188,12 +188,15 @@ msgstr "Ubuntu One klasörü"
 msgid ""
 "The first time Déjà Dup checked whether it should prompt about backing up"
 msgstr ""
+"Déjà Dup ilk defa denetlendiğinde yedeklenip yedeklenmeyeceğini soracaktır"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
 msgstr ""
+"Dosyaların saklanacağı dizin adı. Eğer ‘$HOSTNAME’ ise, bu bilgisayar adına "
+"dayalı bir dizine öntanımlı olacaktır."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "The last time Déjà Dup backed up"
@@ -208,6 +211,8 @@ msgid ""
 "The last time Déjà Dup successfully completed a backup. This time should be "
 "in ISO 8601 format."
 msgstr ""
+"Déjà Dup bir yedeği son defa tamamladı.  Bu defa ISO 8601 biçiminde "
+"olmalıdır."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
 msgid ""
@@ -248,6 +253,8 @@ msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
 msgstr ""
+"Yedek konumunun türü. Eğer 'auto' ise, bir öntanımlı mevcut olana göre "
+"seçilecektir."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "This is your username for the Rackspace Cloud Files service."
@@ -260,6 +267,10 @@ msgid ""
 "and $VIDEO are recognized as the user’s special directories. Relative "
 "entries are relative to the user’s home directory."
 msgstr ""
+"Yedeklenecek dizinlerin listesi. Ayrılan değerler $HOME, $DESKTOP, "
+"$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+"ve $VIDEO kullanıcının özel dizinleri olarak tanımlanacaktır. İlgili "
+"girdiler kullanıcının ev diziniyle ilgilidir."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
@@ -268,6 +279,10 @@ msgid ""
 "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
 "directories. Relative entries are relative to the user’s home directory."
 msgstr ""
+"Yedeklenmeyecek dizinlerin listesi. Ayrılan değerler $HOME, $DESKTOP, "
+"$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+"ve $VIDEO kullanıcının özel dizinleri olarak tanımlanacaktır. İlgili "
+"girdiler kullanıcının ev diziniyle ilgilidir."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 msgid "Type of location to store backup"
@@ -284,49 +299,59 @@ msgid ""
 "don’t know about backups. This time should be either ‘disabled’ to turn off "
 "this check or in ISO 8601 format."
 msgstr ""
+"Bir kullanıcı oturum açtığında, Déjà Dup gözlemcisi yedekleme hakkında "
+"sorulup sorulmayacağını denetler. Bu yedeklemeyi bilmeyen kullanıcılar için "
+"keşfedilebilirliği azaltmak için kullanılır. Bu defa ya bu denetlemeyi "
+"kapatmak 'devre dışı' olacaktır, ya da ISO 8601 biçiminde olacaktır."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
-msgstr ""
+msgstr "Yedek konumu bağlı bir dış bölümde mi yoksa normal bir dizinde mi."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Whether the welcome screen has been dismissed"
-msgstr ""
+msgstr "Hoş geldin ekranı devre dışı mı."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid "Whether to automatically back up on a regular schedule."
-msgstr ""
+msgstr "Otomatik yedekleme düzenli zamanlandı mı"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Whether to periodically back up"
-msgstr ""
+msgstr "Periyodik yedeklenecek mi."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid "Whether to request the root password"
-msgstr ""
+msgstr "Yönetici şifresi istenecek mi."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
 msgstr ""
+"Yönetici şifresi sistem dosyaları yedeklenir ya da onarılırken istenecek mi."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr ""
+"Dosyaları depolamak için Amazon S3 deposu. Zaten var olması gerekmiyor. "
+"Sadece yasal ana bilgisayar dizgeleri geçerlidir."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr ""
+"Dosyaları depolamak için Rackspace Bulut Dosya deposu. Zaten var olması "
+"gerekmiyor. Sadece yasal ana bilgisayar dizgeleri geçerlidir."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
+"Amazon S3 Erişim Şifresi tanımlayıcınız. Bu S3 kullanıcı adınız yerine geçer."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Your Rackspace username"
@@ -390,17 +415,17 @@ msgstr "'%s'in bağlanması bekleniyor..."
 
 #: ../common/BackendRackspace.vala:58
 msgid "You must specify a Rackspace container in your preferences."
-msgstr ""
+msgstr "Tercihlerinizde bir Rackspace deposu belirtmelisiniz."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:194
 msgid "Rackspace Cloud Files"
-msgstr ""
+msgstr "Rackspace Bulut Dosyaları"
 
 #. Translators: %s is a folder.
 #: ../common/BackendRackspace.vala:70
 #, c-format
 msgid "%s on Rackspace Cloud Files"
-msgstr ""
+msgstr "%s Rackspace Bulut Dosyaları'nda"
 
 #: ../common/BackendRackspace.vala:117 ../common/BackendS3.vala:172
 msgid "Permission denied"
@@ -412,10 +437,12 @@ msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
 "href=\"%s\">online</a>."
 msgstr ""
+"<a href=\"%s\">Çevrim içi olarak</a> bir Rackspace Bulut Dosyaları "
+"edinebilirsiniz."
 
 #: ../common/BackendRackspace.vala:139
 msgid "Connect to Rackspace Cloud Files"
-msgstr ""
+msgstr "Rackspace Bulut Dosyaları'na bağlan"
 
 #: ../common/BackendRackspace.vala:140
 msgid "_API access key"
@@ -429,7 +456,7 @@ msgstr "API erişim anahtarını _göster"
 msgid "_Remember API access key"
 msgstr "API erişim anahtarını _hatırla"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:175
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:176
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -443,6 +470,7 @@ msgstr "Amazon S3 üzerindeki %s"
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr ""
+"<a href=\"%s\">Çevrim içi olarak</a> bir Amazon S3 hesabı edinebilirsiniz."
 
 #: ../common/BackendS3.vala:194
 msgid "Connect to Amazon S3"
@@ -464,7 +492,7 @@ msgstr "Gizli erişim anahtarını _göster"
 msgid "_Remember secret access key"
 msgstr "Gizli erişim anahtarını _hatırla"
 
-#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:185
+#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:186
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -486,12 +514,12 @@ msgstr "Ubuntu One oturumu aç..."
 #: ../common/CommonUtils.vala:498
 #, c-format
 msgid "Home (%s)"
-msgstr ""
+msgstr "Ev dizini (%s)"
 
 #. Translators: this is the home folder
 #: ../common/CommonUtils.vala:503
 msgid "Home"
-msgstr ""
+msgstr "Ev dizini"
 
 #. Translators: this is the trash folder
 #: ../common/CommonUtils.vala:508
@@ -500,13 +528,15 @@ msgstr "Çöp Kutusu"
 
 #: ../common/DuplicityInfo.vala:109
 msgid "Could not run duplicity"
-msgstr ""
+msgstr "Duplicity çalıştırlamıyor"
 
 #: ../common/DuplicityInfo.vala:114
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
 msgstr ""
+"Duplicity sürümü anlaşılamıyor.\n"
+"\n"
 
 #: ../common/DuplicityInfo.vala:116
 #, c-format
@@ -514,6 +544,8 @@ msgid ""
 "Could not understand duplicity version ‘%s’.\n"
 "\n"
 msgstr ""
+"Duplicity sürümü ‘%s’ anlaşılamıyor.\n"
+"\n"
 
 #: ../common/DuplicityInfo.vala:118
 msgid ""
@@ -531,6 +563,8 @@ msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
 "only found version %d.%d.%.2d"
 msgstr ""
+"Déjà Dup Yedek aracı Duplicity'nin en az %d.%d.%.2d sürümünü gerektirir, ama "
+"sadece %d.%d.%.2d sürümü mevcut."
 
 #: ../common/Duplicity.vala:132 ../common/Duplicity.vala:186
 msgid "Paused (no network)"
@@ -577,7 +611,7 @@ msgstr "'%s' geri yüklenemedi: Dosya yedek içerisinde bulunamadı"
 #: ../common/Duplicity.vala:907 ../common/Duplicity.vala:1009
 #: ../common/Duplicity.vala:1013
 msgid "Bad encryption password."
-msgstr ""
+msgstr "Kötü şifreleme parolası."
 
 #: ../common/Duplicity.vala:912
 msgid "Computer name changed"
@@ -590,6 +624,8 @@ msgid ""
 "name is %s.  If this is unexpected, you should back up to a different "
 "location."
 msgstr ""
+"Mevcut yedek %s adlı bir bilgisayarın, ama mevcut bilgisayarın adı %s. Eğer "
+"bu beklenmiyorsa, başka bir konuma yedeklemelisiniz."
 
 #: ../common/Duplicity.vala:947
 #, c-format
@@ -698,12 +734,14 @@ msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
 msgstr ""
+"Yedek bozulmasını önlemek için taze bir yedek oluşturuluyor. Bu normalden "
+"daha uzun sürebilir."
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
 #: ../deja-dup/AssistantBackup.vala:81
 msgid "Backing up:"
-msgstr "Yedekliyor:"
+msgstr "Yedekleniyor:"
 
 #: ../deja-dup/AssistantBackup.vala:90
 msgid "Backup Failed"
@@ -723,11 +761,11 @@ msgstr "_Ayrıntılar"
 
 #: ../deja-dup/AssistantOperation.vala:302
 msgid "_Allow restoring without a password"
-msgstr ""
+msgstr "_Şifresiz geri yüklemeye izin ver"
 
 #: ../deja-dup/AssistantOperation.vala:308
 msgid "_Password-protect your backup"
-msgstr ""
+msgstr "_Yedeğinizi parolayla koruyun"
 
 #: ../deja-dup/AssistantOperation.vala:322
 #, c-format
@@ -735,6 +773,8 @@ msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
+"Dosyalarınızı geri yüklemek için parola gereklidir. Bunu bir yere yazmak "
+"isteyebilirsiniz."
 
 #: ../deja-dup/AssistantOperation.vala:337
 msgid "E_ncryption password"
@@ -759,15 +799,15 @@ msgstr "Özet"
 
 #: ../deja-dup/AssistantOperation.vala:712
 msgid "Require Password?"
-msgstr ""
+msgstr "Parola istesin mi?"
 
 #: ../deja-dup/AssistantOperation.vala:714
 msgid "Encryption Password Needed"
 msgstr "Şifreleme Parolası Gerekli"
 
-#: ../deja-dup/AssistantOperation.vala:757
+#: ../deja-dup/AssistantOperation.vala:760
 msgid "Backup encryption password"
-msgstr ""
+msgstr "Yedek şifreleme parolası"
 
 #: ../deja-dup/AssistantRestore.vala:68
 msgid "Restore"
@@ -777,13 +817,13 @@ msgstr "Geri Yükle"
 msgid "_Restore"
 msgstr "_Geri Yükle"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:294
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:262
 msgid "_Backup location"
 msgstr "_Yedekleme konumu"
 
 #: ../deja-dup/AssistantRestore.vala:124
-msgid "Restore from Where?"
-msgstr "Nereden Geri Yüklensin?"
+msgid "Restore From Where?"
+msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date"
@@ -818,8 +858,8 @@ msgid "Checking for Backups…"
 msgstr "Yedekler Kontrol Ediliyor..."
 
 #: ../deja-dup/AssistantRestore.vala:271
-msgid "Restore from When?"
-msgstr "Hangi Zamandan Geri Yüklensin?"
+msgid "Restore From When?"
+msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
@@ -851,8 +891,7 @@ msgstr "Özgün konum"
 #: ../deja-dup/AssistantRestore.vala:450
 msgid "File to restore"
 msgid_plural "Files to restore"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Geri yüklenecek dosya(lar)"
 
 #: ../deja-dup/AssistantRestore.vala:471
 msgid "Restore Failed"
@@ -881,19 +920,19 @@ msgstr "En son görüldüğü zaman"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:215
 msgid "Restore which Files?"
-msgstr ""
+msgstr "Hangi dosyalar geri yüklensin?"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:346
 msgid "Scanning for files from up to a day ago…"
-msgstr ""
+msgstr "Bir günden kalan dosyalar taranıyor..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:349
 msgid "Scanning for files from up to a week ago…"
-msgstr ""
+msgstr "Bir haftadan kalan dosyalar taranıyor..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:352
 msgid "Scanning for files from up to a month ago…"
-msgstr ""
+msgstr "Bir aydan kalan dosyalar taranıyor..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:357
 #, c-format
@@ -997,16 +1036,16 @@ msgstr "Parolayı _göster"
 msgid "Location not available"
 msgstr "Konum geçerli değil"
 
-#: ../deja-dup/MountOperationAssistant.vala:166
+#: ../deja-dup/MountOperationAssistant.vala:168
 msgid "Connect _anonymously"
 msgstr "_Anonim olarak bağlan"
 
-#: ../deja-dup/MountOperationAssistant.vala:170
+#: ../deja-dup/MountOperationAssistant.vala:172
 msgid "Connect as u_ser"
 msgstr "_Kullanıcı olarak bağlan"
 
 #. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:213
+#: ../deja-dup/MountOperationAssistant.vala:215
 msgid "_Domain"
 msgstr ""
 
@@ -1076,61 +1115,57 @@ msgstr ""
 msgid "Just show my backup _settings"
 msgstr "Sadece yedekleme ayarlarımı _göster"
 
-#: ../preferences/Preferences.vala:132
-msgid "Categories"
-msgstr "Kategoriler"
-
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:134
 msgid "Automatic _backups"
 msgstr "Otomatik _yedeklemeler"
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:181
 msgid "Most recent backup"
 msgstr ""
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:190
 msgid "Next automatic backup"
 msgstr "Sonraki otomatik yedekleme"
 
-#: ../preferences/Preferences.vala:256
+#: ../preferences/Preferences.vala:224
 msgid "_Restore…"
 msgstr "_Geri Yükle..."
 
-#: ../preferences/Preferences.vala:262
+#: ../preferences/Preferences.vala:230
 msgid "Back Up _Now"
 msgstr "_Şimdi Yedekle"
 
-#: ../preferences/Preferences.vala:284
+#: ../preferences/Preferences.vala:252
 msgid "Overview"
 msgstr "Genel Görünüm"
 
 #. Translators: storage as in "where to store the backup"
-#: ../preferences/Preferences.vala:316
+#: ../preferences/Preferences.vala:284
 msgid "Storage"
 msgstr "Depolama"
 
-#: ../preferences/Preferences.vala:337
+#: ../preferences/Preferences.vala:305
 msgid "Folders to _back up"
 msgstr "Y_edeklenecek dizinler"
 
-#: ../preferences/Preferences.vala:347
+#: ../preferences/Preferences.vala:315
 msgid "Folders to _ignore"
 msgstr "Y_oksayılacak dizinler"
 
-#: ../preferences/Preferences.vala:356
+#: ../preferences/Preferences.vala:324
 msgid "Folders"
 msgstr "Klasörler"
 
-#: ../preferences/Preferences.vala:367
+#: ../preferences/Preferences.vala:335
 msgid "How _often to back up"
 msgstr ""
 
-#: ../preferences/Preferences.vala:378
+#: ../preferences/Preferences.vala:346
 #, c-format
 msgid "_Keep backups"
 msgstr "Yedekleri _tut"
 
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:361
 msgid "Schedule"
 msgstr "Zamanlama"
 
@@ -1206,7 +1241,7 @@ msgstr "Evet"
 msgid "No"
 msgstr "Hayır"
 
-#: ../widgets/ConfigLabelPolicy.vala:63
+#: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
@@ -1214,7 +1249,7 @@ msgstr ""
 "Eski yedekler en azından bir hafta veya yedekleme alanı düşük seviyeye "
 "gelene kadar saklanacak."
 
-#: ../widgets/ConfigLabelPolicy.vala:65
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
@@ -1222,7 +1257,7 @@ msgstr ""
 "Eski yedekler en azından bir ay veya yedekleme alanı düşük seviyeye gelene "
 "kadar saklanacak."
 
-#: ../widgets/ConfigLabelPolicy.vala:67
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
@@ -1230,7 +1265,7 @@ msgstr ""
 "Eski yedekler en azından iki ay veya yedekleme alanı düşük seviyeye gelene "
 "kadar saklanacak."
 
-#: ../widgets/ConfigLabelPolicy.vala:69
+#: ../widgets/ConfigLabelPolicy.vala:70
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
@@ -1238,7 +1273,7 @@ msgstr ""
 "Eski yedekler en azından üç ay veya yedekleme alanı düşük seviyeye gelene "
 "kadar saklanacak."
 
-#: ../widgets/ConfigLabelPolicy.vala:71
+#: ../widgets/ConfigLabelPolicy.vala:72
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
@@ -1246,7 +1281,7 @@ msgstr ""
 "Eski yedekler en azından altı ay veya yedekleme alanı düşük seviyeye gelene "
 "kadar saklanacak."
 
-#: ../widgets/ConfigLabelPolicy.vala:73
+#: ../widgets/ConfigLabelPolicy.vala:74
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1254,12 +1289,12 @@ msgstr ""
 "Eski yedekler en azından bir yıl veya yedekleme alanı düşük seviyeye gelene "
 "kadar saklanacak."
 
-#: ../widgets/ConfigLabelPolicy.vala:75
+#: ../widgets/ConfigLabelPolicy.vala:76
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Eski yedekler yedekleme alanı düşük seviyeye gelene kadar saklanacak."
 
-#: ../widgets/ConfigLabelPolicy.vala:78
+#: ../widgets/ConfigLabelPolicy.vala:79
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1291,28 +1326,28 @@ msgstr "Sil"
 msgid "Choose folders"
 msgstr "Klasörleri Seçin"
 
-#: ../widgets/ConfigLocation.vala:117
+#: ../widgets/ConfigLocation.vala:118
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:119
+#: ../widgets/ConfigLocation.vala:120
 msgid "Windows Share"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:121
+#: ../widgets/ConfigLocation.vala:122
 msgid "FTP"
 msgstr "Dosya Transfer Protokolü(FTP)"
 
-#: ../widgets/ConfigLocation.vala:123
+#: ../widgets/ConfigLocation.vala:124
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:127
 msgid "Custom Location"
 msgstr "Özel Konum"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:132
+#: ../widgets/ConfigLocation.vala:133
 msgid "Local Folder"
 msgstr "Yerel Klasör"
 
@@ -1391,5 +1426,14 @@ msgstr "%s gösterilemiyor"
 #~ msgid "Unknown"
 #~ msgstr "Bilinmeyen"
 
+#~ msgid "Categories"
+#~ msgstr "Kategoriler"
+
 #~ msgid "Déjà Du_p"
 #~ msgstr "Déjà Du_p"
+
+#~ msgid "Restore from When?"
+#~ msgstr "Hangi Zamandan Geri Yüklensin?"
+
+#~ msgid "Restore from Where?"
+#~ msgstr "Nereden Geri Yüklensin?"

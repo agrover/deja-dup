@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-11 09:43-0400\n"
+"POT-Creation-Date: 2011-10-20 14:01-0400\n"
 "PO-Revision-Date: 2011-09-18 03:00+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-10-12 05:11+0000\n"
-"X-Generator: Launchpad (build 14124)\n"
+"X-Launchpad-Export-Date: 2011-10-21 05:08+0000\n"
+"X-Generator: Launchpad (build 14165)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -24,7 +24,7 @@ msgstr ""
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
 #: ../deja-dup/StatusIcon.vala:224 ../monitor/monitor.vala:115
 #: ../preferences/preferences-main.vala:52
-#: ../preferences/preferences-main.vala:64
+#: ../preferences/preferences-main.vala:66
 msgid "Backup"
 msgstr "Backup"
 
@@ -79,7 +79,7 @@ msgstr ""
 "the chosen bucket."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "Backup location"
 
@@ -88,12 +88,12 @@ msgid "Folder type"
 msgstr "Folder type"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:160
 msgid "Folders to back up"
 msgstr "Folders to back up"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:168
 msgid "Folders to ignore"
 msgstr "Folders to ignore"
 
@@ -420,7 +420,7 @@ msgstr "Waiting for ‘%s’ to become connected…"
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "You must specify a Rackspace container in your preferences."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:194
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
@@ -459,7 +459,7 @@ msgstr "S_how API access key"
 msgid "_Remember API access key"
 msgstr "_Remember API access key"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:175
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:176
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -494,7 +494,7 @@ msgstr "S_how secret access key"
 msgid "_Remember secret access key"
 msgstr "_Remember secret access key"
 
-#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:185
+#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:186
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -809,7 +809,7 @@ msgstr "Require Password?"
 msgid "Encryption Password Needed"
 msgstr "Encryption Password Needed"
 
-#: ../deja-dup/AssistantOperation.vala:757
+#: ../deja-dup/AssistantOperation.vala:760
 msgid "Backup encryption password"
 msgstr "Backup encryption password"
 
@@ -821,13 +821,13 @@ msgstr "Restore"
 msgid "_Restore"
 msgstr "_Restore"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:294
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:262
 msgid "_Backup location"
 msgstr "_Backup location"
 
 #: ../deja-dup/AssistantRestore.vala:124
-msgid "Restore from Where?"
-msgstr "Restore from where?"
+msgid "Restore From Where?"
+msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date"
@@ -862,8 +862,8 @@ msgid "Checking for Backups…"
 msgstr "Checking for Backups…"
 
 #: ../deja-dup/AssistantRestore.vala:271
-msgid "Restore from When?"
-msgstr "Restore from When?"
+msgid "Restore From When?"
+msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
@@ -1045,16 +1045,16 @@ msgstr "S_how password"
 msgid "Location not available"
 msgstr "Location not available"
 
-#: ../deja-dup/MountOperationAssistant.vala:166
+#: ../deja-dup/MountOperationAssistant.vala:168
 msgid "Connect _anonymously"
 msgstr "Connect _anonymously"
 
-#: ../deja-dup/MountOperationAssistant.vala:170
+#: ../deja-dup/MountOperationAssistant.vala:172
 msgid "Connect as u_ser"
 msgstr "Connect as u_ser"
 
 #. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:213
+#: ../deja-dup/MountOperationAssistant.vala:215
 msgid "_Domain"
 msgstr "_Domain"
 
@@ -1127,61 +1127,57 @@ msgstr "I want to _restore files from a previous backup…"
 msgid "Just show my backup _settings"
 msgstr "Just show my backup _settings"
 
-#: ../preferences/Preferences.vala:132
-msgid "Categories"
-msgstr "Categories"
-
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:134
 msgid "Automatic _backups"
 msgstr "Automatic _backups"
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:181
 msgid "Most recent backup"
 msgstr "Most recent backup"
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:190
 msgid "Next automatic backup"
 msgstr "Next automatic backup"
 
-#: ../preferences/Preferences.vala:256
+#: ../preferences/Preferences.vala:224
 msgid "_Restore…"
 msgstr "_Restore…"
 
-#: ../preferences/Preferences.vala:262
+#: ../preferences/Preferences.vala:230
 msgid "Back Up _Now"
 msgstr "Back Up _Now"
 
-#: ../preferences/Preferences.vala:284
+#: ../preferences/Preferences.vala:252
 msgid "Overview"
 msgstr "Overview"
 
 #. Translators: storage as in "where to store the backup"
-#: ../preferences/Preferences.vala:316
+#: ../preferences/Preferences.vala:284
 msgid "Storage"
 msgstr "Storage"
 
-#: ../preferences/Preferences.vala:337
+#: ../preferences/Preferences.vala:305
 msgid "Folders to _back up"
 msgstr "Folders to _back up"
 
-#: ../preferences/Preferences.vala:347
+#: ../preferences/Preferences.vala:315
 msgid "Folders to _ignore"
 msgstr "Folders to _ignore"
 
-#: ../preferences/Preferences.vala:356
+#: ../preferences/Preferences.vala:324
 msgid "Folders"
 msgstr "Folders"
 
-#: ../preferences/Preferences.vala:367
+#: ../preferences/Preferences.vala:335
 msgid "How _often to back up"
 msgstr "How _often to back up"
 
-#: ../preferences/Preferences.vala:378
+#: ../preferences/Preferences.vala:346
 #, c-format
 msgid "_Keep backups"
 msgstr "_Keep backups"
 
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:361
 msgid "Schedule"
 msgstr "Schedule"
 
@@ -1260,7 +1256,7 @@ msgstr "Yes"
 msgid "No"
 msgstr "No"
 
-#: ../widgets/ConfigLabelPolicy.vala:63
+#: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
@@ -1268,7 +1264,7 @@ msgstr ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:65
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
@@ -1276,7 +1272,7 @@ msgstr ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:67
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
@@ -1284,7 +1280,7 @@ msgstr ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:69
+#: ../widgets/ConfigLabelPolicy.vala:70
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
@@ -1292,7 +1288,7 @@ msgstr ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:71
+#: ../widgets/ConfigLabelPolicy.vala:72
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
@@ -1300,7 +1296,7 @@ msgstr ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:73
+#: ../widgets/ConfigLabelPolicy.vala:74
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1308,11 +1304,11 @@ msgstr ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:75
+#: ../widgets/ConfigLabelPolicy.vala:76
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr "Old backups will be kept until the backup location is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:78
+#: ../widgets/ConfigLabelPolicy.vala:79
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1347,28 +1343,28 @@ msgstr "Remove"
 msgid "Choose folders"
 msgstr "Choose folders"
 
-#: ../widgets/ConfigLocation.vala:117
+#: ../widgets/ConfigLocation.vala:118
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:119
+#: ../widgets/ConfigLocation.vala:120
 msgid "Windows Share"
 msgstr "Windows Share"
 
-#: ../widgets/ConfigLocation.vala:121
+#: ../widgets/ConfigLocation.vala:122
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:123
+#: ../widgets/ConfigLocation.vala:124
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:127
 msgid "Custom Location"
 msgstr "Custom Location"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:132
+#: ../widgets/ConfigLocation.vala:133
 msgid "Local Folder"
 msgstr "Local Folder"
 
@@ -1448,5 +1444,14 @@ msgstr "Could not display %s"
 #~ msgid "Unknown"
 #~ msgstr "Unknown"
 
+#~ msgid "Restore from When?"
+#~ msgstr "Restore from When?"
+
 #~ msgid "Déjà Du_p"
 #~ msgstr "Déjà Du_p"
+
+#~ msgid "Restore from Where?"
+#~ msgstr "Restore from where?"
+
+#~ msgid "Categories"
+#~ msgstr "Categories"

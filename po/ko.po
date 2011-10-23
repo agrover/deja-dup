@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-11 09:43-0400\n"
+"POT-Creation-Date: 2011-10-20 14:01-0400\n"
 "PO-Revision-Date: 2011-09-18 03:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-10-12 05:10+0000\n"
-"X-Generator: Launchpad (build 14124)\n"
+"X-Launchpad-Export-Date: 2011-10-21 05:08+0000\n"
+"X-Generator: Launchpad (build 14165)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -24,7 +24,7 @@ msgstr ""
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
 #: ../deja-dup/StatusIcon.vala:224 ../monitor/monitor.vala:115
 #: ../preferences/preferences-main.vala:52
-#: ../preferences/preferences-main.vala:64
+#: ../preferences/preferences-main.vala:66
 msgid "Backup"
 msgstr "떠두기(백업)"
 
@@ -77,7 +77,7 @@ msgid ""
 msgstr "파일을 놔둘 폴더 이름입니다. 이 폴더는 고른 곳 안에 만들어집니다."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "떠둘 곳"
 
@@ -86,12 +86,12 @@ msgid "Folder type"
 msgstr "폴더 갈래"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:160
 msgid "Folders to back up"
 msgstr "떠둘 폴더"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:168
 msgid "Folders to ignore"
 msgstr "모른 척 할 폴더"
 
@@ -385,7 +385,7 @@ msgstr "'%s'이(가) 이어지기를 기다리고 있습니다..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "설정에서 Rackspace container를 정해줘야 합니다."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:194
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
@@ -422,7 +422,7 @@ msgstr "API 접속 열쇠 보기(_S)"
 msgid "_Remember API access key"
 msgstr "API 접속 열쇠 기억하기(_R)"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:175
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:176
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -457,7 +457,7 @@ msgstr "비밀 접속 열쇠 보기(_S)"
 msgid "_Remember secret access key"
 msgstr "비밀 접속 열쇠 기억하기(_R)"
 
-#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:185
+#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:186
 msgid "Ubuntu One"
 msgstr "우분투 원"
 
@@ -762,7 +762,7 @@ msgstr "열쇠글을 달라고 할까요?"
 msgid "Encryption Password Needed"
 msgstr "암호화 열쇠글이 있어야 합니다."
 
-#: ../deja-dup/AssistantOperation.vala:757
+#: ../deja-dup/AssistantOperation.vala:760
 msgid "Backup encryption password"
 msgstr "떠두기 암호화 열쇠글"
 
@@ -774,13 +774,13 @@ msgstr "되돌리기"
 msgid "_Restore"
 msgstr "되돌리기(_R)"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:294
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:262
 msgid "_Backup location"
 msgstr "떠둘 곳(_B)"
 
 #: ../deja-dup/AssistantRestore.vala:124
-msgid "Restore from Where?"
-msgstr "어디에서 되돌릴까요?"
+msgid "Restore From Where?"
+msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date"
@@ -815,8 +815,8 @@ msgid "Checking for Backups…"
 msgstr "떠둔 걸 살피고 있습니다..."
 
 #: ../deja-dup/AssistantRestore.vala:271
-msgid "Restore from When?"
-msgstr "언제로 되돌리겠습니까?"
+msgid "Restore From When?"
+msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
@@ -993,16 +993,16 @@ msgstr "열쇠글 보이기(_S)"
 msgid "Location not available"
 msgstr "쓸 수 없는 곳임"
 
-#: ../deja-dup/MountOperationAssistant.vala:166
+#: ../deja-dup/MountOperationAssistant.vala:168
 msgid "Connect _anonymously"
 msgstr "익명으로 잇기(_A)"
 
-#: ../deja-dup/MountOperationAssistant.vala:170
+#: ../deja-dup/MountOperationAssistant.vala:172
 msgid "Connect as u_ser"
 msgstr "쓰는이로 잇기(_U)"
 
 #. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:213
+#: ../deja-dup/MountOperationAssistant.vala:215
 msgid "_Domain"
 msgstr "도메인(_D)"
 
@@ -1073,61 +1073,57 @@ msgstr "이전에 떠둔 걸로 파일을 되돌리고 싶습니다...(_R)"
 msgid "Just show my backup _settings"
 msgstr "내 떠두기 설정만 보기(_S)"
 
-#: ../preferences/Preferences.vala:132
-msgid "Categories"
-msgstr "갈래"
-
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:134
 msgid "Automatic _backups"
 msgstr "알아서 떠두기(_B)"
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:181
 msgid "Most recent backup"
 msgstr "가장 요즘 떠두기"
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:190
 msgid "Next automatic backup"
 msgstr "다음으로 알아서 할 떠두기"
 
-#: ../preferences/Preferences.vala:256
+#: ../preferences/Preferences.vala:224
 msgid "_Restore…"
 msgstr "되돌리기(_R)..."
 
-#: ../preferences/Preferences.vala:262
+#: ../preferences/Preferences.vala:230
 msgid "Back Up _Now"
 msgstr "지금 것 떠두기(_N)"
 
-#: ../preferences/Preferences.vala:284
+#: ../preferences/Preferences.vala:252
 msgid "Overview"
 msgstr "한눈에 보기"
 
 #. Translators: storage as in "where to store the backup"
-#: ../preferences/Preferences.vala:316
+#: ../preferences/Preferences.vala:284
 msgid "Storage"
 msgstr "저장소"
 
-#: ../preferences/Preferences.vala:337
+#: ../preferences/Preferences.vala:305
 msgid "Folders to _back up"
 msgstr "뜰 폴더(_B)"
 
-#: ../preferences/Preferences.vala:347
+#: ../preferences/Preferences.vala:315
 msgid "Folders to _ignore"
 msgstr "무시할 폴더(_I)"
 
-#: ../preferences/Preferences.vala:356
+#: ../preferences/Preferences.vala:324
 msgid "Folders"
 msgstr ""
 
-#: ../preferences/Preferences.vala:367
+#: ../preferences/Preferences.vala:335
 msgid "How _often to back up"
 msgstr "얼마나 자주 떠 둘까요(_O)"
 
-#: ../preferences/Preferences.vala:378
+#: ../preferences/Preferences.vala:346
 #, c-format
 msgid "_Keep backups"
 msgstr "떠둔 것 그대로 두기(_K)"
 
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:361
 msgid "Schedule"
 msgstr "스케쥴"
 
@@ -1203,47 +1199,47 @@ msgstr "예"
 msgid "No"
 msgstr "아니오"
 
-#: ../widgets/ConfigLabelPolicy.vala:63
+#: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
 msgstr "예전에 떠둔 것들은 적어도 한 주 동안 또는 떠두는 자리가 얼마 없을 때까지 그대로 둡니다."
 
-#: ../widgets/ConfigLabelPolicy.vala:65
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
 msgstr "예전에 떠둔 것들은 적어도 한 달 동안 또는 떠두는 자리가 얼마 없을 때까지 그대로 둡니다."
 
-#: ../widgets/ConfigLabelPolicy.vala:67
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
 msgstr "예전에 떠둔 것들은 적어도 두 달 동안 또는 떠두는 자리가 얼마 없을 때까지 그대로 둡니다."
 
-#: ../widgets/ConfigLabelPolicy.vala:69
+#: ../widgets/ConfigLabelPolicy.vala:70
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
 msgstr "예전에 떠둔 것들은 적어도 세 달 동안 또는 떠두는 자리가 얼마 없을 때까지 그대로 둡니다."
 
-#: ../widgets/ConfigLabelPolicy.vala:71
+#: ../widgets/ConfigLabelPolicy.vala:72
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr "예전에 떠둔 것들은 적어도 여섯 달 동안 또는 떠두는 자리가 얼마 없을 때까지 그대로 둡니다."
 
-#: ../widgets/ConfigLabelPolicy.vala:73
+#: ../widgets/ConfigLabelPolicy.vala:74
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 msgstr "예전에 떠둔 것들은 적어도 한 해 동안 또는 떠두는 자리가 얼마 없을 때까지 그대로 둡니다."
 
-#: ../widgets/ConfigLabelPolicy.vala:75
+#: ../widgets/ConfigLabelPolicy.vala:76
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr "예전에 떠둔 것들은 떠두는 자리가 얼마 없을 때까지 그대로 둡니다."
 
-#: ../widgets/ConfigLabelPolicy.vala:78
+#: ../widgets/ConfigLabelPolicy.vala:79
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1273,28 +1269,28 @@ msgstr "지우기"
 msgid "Choose folders"
 msgstr "폴더 고르기"
 
-#: ../widgets/ConfigLocation.vala:117
+#: ../widgets/ConfigLocation.vala:118
 msgid "SSH"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:119
+#: ../widgets/ConfigLocation.vala:120
 msgid "Windows Share"
 msgstr "윈도 공유"
 
-#: ../widgets/ConfigLocation.vala:121
+#: ../widgets/ConfigLocation.vala:122
 msgid "FTP"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:123
+#: ../widgets/ConfigLocation.vala:124
 msgid "WebDAV"
 msgstr ""
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:127
 msgid "Custom Location"
 msgstr "직접 고른 곳"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:132
+#: ../widgets/ConfigLocation.vala:133
 msgid "Local Folder"
 msgstr "로컬 폴더"
 
@@ -1369,6 +1365,15 @@ msgstr[0] "매 %d일"
 #, c-format
 msgid "Could not display %s"
 msgstr "%s을(를) 보일 수 없음"
+
+#~ msgid "Restore from Where?"
+#~ msgstr "어디에서 되돌릴까요?"
+
+#~ msgid "Restore from When?"
+#~ msgstr "언제로 되돌리겠습니까?"
+
+#~ msgid "Categories"
+#~ msgstr "갈래"
 
 #~ msgid "Déjà Du_p"
 #~ msgstr "데자둡(_P)"

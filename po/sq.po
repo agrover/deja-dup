@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-11 09:43-0400\n"
+"POT-Creation-Date: 2011-10-20 14:01-0400\n"
 "PO-Revision-Date: 2011-09-18 03:00+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Albanian <sq@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-10-12 05:10+0000\n"
-"X-Generator: Launchpad (build 14124)\n"
+"X-Launchpad-Export-Date: 2011-10-21 05:07+0000\n"
+"X-Generator: Launchpad (build 14165)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
@@ -24,7 +24,7 @@ msgstr ""
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
 #: ../deja-dup/StatusIcon.vala:224 ../monitor/monitor.vala:115
 #: ../preferences/preferences-main.vala:52
-#: ../preferences/preferences-main.vala:64
+#: ../preferences/preferences-main.vala:66
 msgid "Backup"
 msgstr "Backup (kopje)"
 
@@ -79,7 +79,7 @@ msgstr ""
 "vendin e përzgjedhur."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "Vendi i ruajtjes"
 
@@ -88,12 +88,12 @@ msgid "Folder type"
 msgstr "Lloji i dosjes"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-#: ../preferences/Preferences.vala:192
+#: ../preferences/Preferences.vala:160
 msgid "Folders to back up"
 msgstr "Dosjet që do të ruhen"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
-#: ../preferences/Preferences.vala:200
+#: ../preferences/Preferences.vala:168
 msgid "Folders to ignore"
 msgstr "Dosjet që duhen shpërfillur"
 
@@ -268,6 +268,10 @@ msgid ""
 "and $VIDEO are recognized as the user’s special directories. Relative "
 "entries are relative to the user’s home directory."
 msgstr ""
+"Kjo listë drejtorish do të ruhet. Vlerat e rezervuara $HOME, $DESKTOP, "
+"$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+"dhe $VIDEO njihen si drejtoritë speciale të përdoruesit. Hyrjet relative "
+"janë relative me drejtorinë shtëpi të përdoruesit."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
@@ -276,6 +280,10 @@ msgid ""
 "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
 "directories. Relative entries are relative to the user’s home directory."
 msgstr ""
+"Kjo listë drejtorish nuk do të ruhet. Vlerat e rezervuara $HOME, $DESKTOP, "
+"$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+"dhe $VIDEO njihen si drejtoritë speciale të përdoruesit. Hyrjet relative "
+"janë relative me drejtorinë shtëpi të përdoruesit."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 msgid "Type of location to store backup"
@@ -292,6 +300,10 @@ msgid ""
 "don’t know about backups. This time should be either ‘disabled’ to turn off "
 "this check or in ISO 8601 format."
 msgstr ""
+"Kur një përdorues hyn në sistem, Déjà Dup monitor kontrollon nëse duhet ta "
+"njoftojë për ruajtjen. Kjo përdoret për të rritur zbulueshmërinë për "
+"përdoruesit që nuk e dinë për ruajtjet. Kësaj radhe ose duhet përzgjedhur "
+"'çaktivizuar'për ta fikur ose në fromatin ISO 8601."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
@@ -329,12 +341,18 @@ msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr ""
+"Në cilën shportë të Amazon S3 të ruaj skedarët. Kjo nuk ka nevojë të "
+"ekzistojë tashmë. Vetëm rreshtat me emra mbartësish të ligjshëm janë të "
+"vlefshëm."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr ""
+"Në cilin Mbartës të Skedarëve në Re Rackspace ti ruaj skedarët. Kjo nuk ka "
+"nevojë të ekzistojë tashmë. Vetëm rreshtat me emra mbartësish të ligjshëm "
+"janë të vlefshëm."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
@@ -409,7 +427,7 @@ msgstr "Duke pritur pëe '%s' që të lidhet..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Duke të specifikoni një mbajtës të Rackspace në preferencat tuaja."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:194
 msgid "Rackspace Cloud Files"
 msgstr "Skedarët Re të Rackspace"
 
@@ -448,7 +466,7 @@ msgstr "S_hfaq çelësin e hyrjes API"
 msgid "_Remember API access key"
 msgstr "_Mba mend çelësin e hyrjes API"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:175
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:176
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -485,7 +503,7 @@ msgstr "S_hfaq çelësin sekret të hyrjes"
 msgid "_Remember secret access key"
 msgstr "_Mba mend çelësin sekret të hyrjes"
 
-#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:185
+#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:186
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -557,6 +575,8 @@ msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
 "only found version %d.%d.%.2d"
 msgstr ""
+"Mjeti i ruajtjes Déjà kërkon të paktën versionin %d.%d.%.2d të duplicity, "
+"por gjeti vetëm versionin %d.%d.%.2d"
 
 #: ../common/Duplicity.vala:132 ../common/Duplicity.vala:186
 msgid "Paused (no network)"
@@ -573,6 +593,7 @@ msgstr "Duke e përgatitur..."
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr ""
+"Nuk munda të rikthej ‘%s’: Nuk është një vendndodhje e vlefshme e skedarëve"
 
 #. Tiny backup location.  Suggest they get a larger one.
 #: ../common/Duplicity.vala:516
@@ -618,6 +639,9 @@ msgid ""
 "name is %s.  If this is unexpected, you should back up to a different "
 "location."
 msgstr ""
+"Ruajtja ekzistuese është e një kompjuteri të emërtuar %s, por emri i këtij "
+"kompjuteri është %s. Nëse kjo nuk pritej, ju duhet të ruani në një "
+"vendndodhje tjetër."
 
 #: ../common/Duplicity.vala:947
 #, c-format
@@ -728,6 +752,8 @@ msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
 msgstr ""
+"Duke krijuar një ruajtje të freskët për tu mbrojtur nga korruptimi i "
+"ruajtjes. Kjo do të zgjasë më tepër se zakonisht."
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
@@ -765,6 +791,8 @@ msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
+"Do t'iu nevojitet fjalëkalimi për të ruajtur skedarët tuaj. Mund t'iu "
+"nevojitet ta shkruani."
 
 #: ../deja-dup/AssistantOperation.vala:337
 msgid "E_ncryption password"
@@ -795,7 +823,7 @@ msgstr "Të Kërkoj Fjalëkalimin?"
 msgid "Encryption Password Needed"
 msgstr "Nevojitet Fjalëkalimi i Kriptuar"
 
-#: ../deja-dup/AssistantOperation.vala:757
+#: ../deja-dup/AssistantOperation.vala:760
 msgid "Backup encryption password"
 msgstr "ruaj fjalëkalimin e kriptuar"
 
@@ -807,13 +835,13 @@ msgstr "Rikthe"
 msgid "_Restore"
 msgstr "_Rivendos"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:294
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:262
 msgid "_Backup location"
 msgstr "Vendndodhja e _ruajtjes"
 
 #: ../deja-dup/AssistantRestore.vala:124
-msgid "Restore from Where?"
-msgstr "Ta rikthej prej ku?"
+msgid "Restore From Where?"
+msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date"
@@ -848,8 +876,8 @@ msgid "Checking for Backups…"
 msgstr "Duke kërkuar për Ruajtje..."
 
 #: ../deja-dup/AssistantRestore.vala:271
-msgid "Restore from When?"
-msgstr "Kur ta rikthej?"
+msgid "Restore From When?"
+msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
@@ -1033,16 +1061,16 @@ msgstr "S_hfaq fjalëkalimin"
 msgid "Location not available"
 msgstr "Vendndodhja nuk është e disponueshme"
 
-#: ../deja-dup/MountOperationAssistant.vala:166
+#: ../deja-dup/MountOperationAssistant.vala:168
 msgid "Connect _anonymously"
 msgstr "Lidhu në _anonimitet"
 
-#: ../deja-dup/MountOperationAssistant.vala:170
+#: ../deja-dup/MountOperationAssistant.vala:172
 msgid "Connect as u_ser"
 msgstr "Lidhu si _përdorues"
 
 #. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:213
+#: ../deja-dup/MountOperationAssistant.vala:215
 msgid "_Domain"
 msgstr "_Domain"
 
@@ -1115,61 +1143,57 @@ msgstr "Dua të _rikthej skedarët nga një ruajtje e mëparshme..."
 msgid "Just show my backup _settings"
 msgstr "Thjesht shfaq _parametrat e mija të ruajtjes"
 
-#: ../preferences/Preferences.vala:132
-msgid "Categories"
-msgstr "Kategoritë"
-
-#: ../preferences/Preferences.vala:166
+#: ../preferences/Preferences.vala:134
 msgid "Automatic _backups"
 msgstr "_Ruajtje automatike"
 
-#: ../preferences/Preferences.vala:213
+#: ../preferences/Preferences.vala:181
 msgid "Most recent backup"
 msgstr "Ruajtja më e fundit"
 
-#: ../preferences/Preferences.vala:222
+#: ../preferences/Preferences.vala:190
 msgid "Next automatic backup"
 msgstr "Ruajtja tjetër automatike"
 
-#: ../preferences/Preferences.vala:256
+#: ../preferences/Preferences.vala:224
 msgid "_Restore…"
 msgstr "_Rikthe…"
 
-#: ../preferences/Preferences.vala:262
+#: ../preferences/Preferences.vala:230
 msgid "Back Up _Now"
 msgstr "Ruaje _Tani"
 
-#: ../preferences/Preferences.vala:284
+#: ../preferences/Preferences.vala:252
 msgid "Overview"
 msgstr "Përmbledhje"
 
 #. Translators: storage as in "where to store the backup"
-#: ../preferences/Preferences.vala:316
+#: ../preferences/Preferences.vala:284
 msgid "Storage"
 msgstr "Magazinim"
 
-#: ../preferences/Preferences.vala:337
+#: ../preferences/Preferences.vala:305
 msgid "Folders to _back up"
 msgstr "Dosjet për tu _ruajtur"
 
-#: ../preferences/Preferences.vala:347
+#: ../preferences/Preferences.vala:315
 msgid "Folders to _ignore"
 msgstr "Dosjet për tu _shpërfillur"
 
-#: ../preferences/Preferences.vala:356
+#: ../preferences/Preferences.vala:324
 msgid "Folders"
 msgstr "Dosjet"
 
-#: ../preferences/Preferences.vala:367
+#: ../preferences/Preferences.vala:335
 msgid "How _often to back up"
 msgstr "Sa _shpesh ta ruaj"
 
-#: ../preferences/Preferences.vala:378
+#: ../preferences/Preferences.vala:346
 #, c-format
 msgid "_Keep backups"
 msgstr "_Mba ruajtjet"
 
-#: ../preferences/Preferences.vala:393
+#: ../preferences/Preferences.vala:361
 msgid "Schedule"
 msgstr "Skedo"
 
@@ -1248,7 +1272,7 @@ msgstr "Po"
 msgid "No"
 msgstr "Jo"
 
-#: ../widgets/ConfigLabelPolicy.vala:63
+#: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
 "Old backups will be kept for at least a week or until the backup location is "
 "low on space."
@@ -1256,7 +1280,7 @@ msgstr ""
 "Ruajtjet e vjetra do të mbahen për të paktën një javë ose deri sa vendi i "
 "ruajtjes të mos ketë më hapësirë."
 
-#: ../widgets/ConfigLabelPolicy.vala:65
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
@@ -1264,7 +1288,7 @@ msgstr ""
 "Ruajtjet e vjetra do të mbahen për të paktën një muaj ose deri sa "
 "vendndodhja e ruajtjes të ketë pak hapësirë të mbetur."
 
-#: ../widgets/ConfigLabelPolicy.vala:67
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
@@ -1272,7 +1296,7 @@ msgstr ""
 "Ruajtjet e vjetra do të mbahen për të paktën dy muaj ose deri sa vendndodhja "
 "e ruajtjes të ketë pak hapësirë të mbetur."
 
-#: ../widgets/ConfigLabelPolicy.vala:69
+#: ../widgets/ConfigLabelPolicy.vala:70
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
@@ -1280,23 +1304,29 @@ msgstr ""
 "Ruajtjet e vjetra do të mbahen për të paktën tre muaj ose deri sa "
 "vendndodhja e ruajtjes të ketë pak hapësirë të mbetur."
 
-#: ../widgets/ConfigLabelPolicy.vala:71
+#: ../widgets/ConfigLabelPolicy.vala:72
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
+"Ruajtjet e vjetra do të mbahen për të paktën gjashtë muaj ose deri sa "
+"vendndodhja e ruajtjes të mos ketë më hapësirë."
 
-#: ../widgets/ConfigLabelPolicy.vala:73
+#: ../widgets/ConfigLabelPolicy.vala:74
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 msgstr ""
+"Ruajtjet e vjetra do të mbahen për të paktën një vit ose deri sa vendndodhja "
+"e ruajtjes të mos ketë më hapësirë."
 
-#: ../widgets/ConfigLabelPolicy.vala:75
+#: ../widgets/ConfigLabelPolicy.vala:76
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
+"Ruajtjet e vjetra do të mbahen deri sa vendndodhja e ruajtjes të mos ketë më "
+"hapësirë."
 
-#: ../widgets/ConfigLabelPolicy.vala:78
+#: ../widgets/ConfigLabelPolicy.vala:79
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1305,7 +1335,11 @@ msgid_plural ""
 "Old backups will be kept at least %d days or until the backup location is "
 "low on space."
 msgstr[0] ""
+"Ruajtjet e vjetra do të mbahen për të paktën %d ditë ose deri sa vendndodhja "
+"e ruajtjes të mos ketë më hapësirë."
 msgstr[1] ""
+"Ruajtjet e vjetra do të mbahen për të paktën %d ditë ose deri sa vendndodhja "
+"e ruajtjes të mos ketë më hapësirë."
 
 #: ../widgets/ConfigList.vala:179
 msgid "_Add"
@@ -1327,28 +1361,28 @@ msgstr "Hiqe"
 msgid "Choose folders"
 msgstr "Zgjidh dosjet"
 
-#: ../widgets/ConfigLocation.vala:117
+#: ../widgets/ConfigLocation.vala:118
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:119
+#: ../widgets/ConfigLocation.vala:120
 msgid "Windows Share"
 msgstr "Windows Share"
 
-#: ../widgets/ConfigLocation.vala:121
+#: ../widgets/ConfigLocation.vala:122
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:123
+#: ../widgets/ConfigLocation.vala:124
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:126
+#: ../widgets/ConfigLocation.vala:127
 msgid "Custom Location"
 msgstr "Vendndodhje e zgjedhur"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:132
+#: ../widgets/ConfigLocation.vala:133
 msgid "Local Folder"
 msgstr "Dosje Lokale"
 
@@ -1425,8 +1459,17 @@ msgstr[1] "Çdo %d ditë"
 msgid "Could not display %s"
 msgstr "Nuk mund të shfaq %s"
 
+#~ msgid "Categories"
+#~ msgstr "Kategoritë"
+
 #~ msgid "Unknown"
 #~ msgstr "I Panjohur"
+
+#~ msgid "Restore from Where?"
+#~ msgstr "Ta rikthej prej ku?"
+
+#~ msgid "Restore from When?"
+#~ msgstr "Kur ta rikthej?"
 
 #~ msgid "Déjà Du_p"
 #~ msgstr "Déjà Du_p"
