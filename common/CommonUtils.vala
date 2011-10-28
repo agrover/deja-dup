@@ -541,7 +541,7 @@ public int get_full_backup_threshold()
   var settings = get_settings();
   var delete_age = settings.get_int(DELETE_AFTER_KEY);
   if (delete_age > 0)
-    max = int.min(delete_age/min_fulls, max);
+    max = int.max(int.min(delete_age/min_fulls, max), min);
   
   var periodic = settings.get_boolean(PERIODIC_KEY);
   if (periodic) {
