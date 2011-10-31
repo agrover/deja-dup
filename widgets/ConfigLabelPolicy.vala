@@ -60,9 +60,7 @@ public class ConfigLabelPolicy : ConfigLabel
     if (delete_after <= 0)
       delete_after = ConfigDelete.FOREVER;
     
-    if (delete_after == ConfigDelete.WEEKLY)
-      policy = _("Old backups will be kept for at least a week or until the backup location is low on space.");
-    else if (delete_after == ConfigDelete.MONTHLY)
+    if (delete_after == ConfigDelete.MONTHLY)
       policy = _("Old backups will be kept for at least a month or until the backup location is low on space.");
     else if (delete_after == ConfigDelete.BIMONTHLY)
       policy = _("Old backups will be kept for at least two months or until the backup location is low on space.");
