@@ -360,6 +360,10 @@ public class Preferences : Gtk.Grid
     notebook.append_page(table, null);
     notebook.set_tab_label_text(table, _("Schedule"));
 
+    var accessible = notebook.get_accessible();
+    if (accessible != null)
+      accessible.set_name(_("Categories"));
+
     notebook.expand = true;
     settings_page.add(notebook);
 
