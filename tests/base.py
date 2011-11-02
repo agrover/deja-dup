@@ -493,7 +493,7 @@ def restore_simple(path, date=None, backend = None, encrypt=True, dest = None):
     walk_restore_prefs('frmRestore', backend, dest)  
   ldtp.click('frmRestore', 'btnForward')
 
-  wait_for_finish('frmRestore', 'lblRestorefromWhen?', 200)
+  wait_for_finish('frmRestore', 'lblRestoreFromWhen?', 200)
   if date:
     ldtp.comboselect('frmRestore', 'cboDate', date)
   ldtp.click('frmRestore', 'btnForward')
@@ -529,7 +529,7 @@ def restore_specific(files, path, date=None, backend = None, encrypt = True, des
     walk_restore_prefs('frmRestore', backend=backend, dest=dest)
   ldtp.click('frmRestore', 'btnForward')
 
-  wait_for_finish('frmRestore', 'lblRestorefromWhen?', 200)
+  wait_for_finish('frmRestore', 'lblRestoreFromWhen?', 200)
   if date:
     ldtp.comboselect('frmRestore', 'cboDate', date)
   ldtp.click('frmRestore', 'btnForward')

@@ -19,7 +19,8 @@
 
 # This file acts like a duplicity wrapper.
 # It transforms any instances of "Extracting backup chains from list of files:"
-# to "Translation:"
+# to "Translation:" (to help catch things like bug
+# https://bugs.launchpad.net/deja-dup/+bug/877631)
 
 import os
 import sys
@@ -30,7 +31,7 @@ os.environ['PATH'] = os.environ['PATH'].split(':', 1)[-1]
 
 extra_args = []
 
-p1 = subprocess.Popen(['duplicity'] + sys.argv[1:], stdout=PIPE)
+p1 = subprocess.Popen(['duplicity'] + sys.argv[1:], stdout=subprocess.PIPE)
 p2 = subprocess.Popen(["sed", "-s", "s/Extracting backup chains from list of files:/Translation:/g"], stdin=p1.stdout)
 p1.stdout.close()  # Allow p1 to receive a SIGPIPE if p2 exits.
 p2.wait()
