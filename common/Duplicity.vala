@@ -103,6 +103,7 @@ public class Duplicity : Object
   static File slash_root;
   static File slash_home;
   static File slash_home_me;
+  static Regex gpg_regex;
   
   bool has_checked_contents = false;
   bool has_non_home_contents = false;
@@ -142,6 +143,15 @@ public class Duplicity : Object
       slash_root = File.new_for_path("/root");
       slash_home = File.new_for_path("/home");
       slash_home_me = File.new_for_path(Environment.get_home_dir());
+    }
+
+    if (gpg_regex == null) {
+      try {
+        gpg_regex = new Regex(".*\\[.*\\.(g|gpg)'.*]$");
+      }
+      catch (Error e) {
+        error("%s\n", e.message); // this is a programmer error, so use error()
+      }
     }
   }
 
@@ -1108,16 +1118,13 @@ public class Duplicity : Object
     if (firstline.length > 1) {
       switch (int.parse(firstline[1])) {
       case DEBUG_GENERIC:
-        // In non-modern versions of duplicity, this list of files is the only
-        // way to tell whether the backup is encrypted or not.  This message
-        // was not translated in duplicity before switching to a better method
-        // of detecting, so we can safely check for it.
         if (mode == Operation.Mode.STATUS &&
             !DuplicityInfo.get_default().reports_encryption &&
-            !detected_encryption &&
-            text.has_prefix("Extracting backup chains from list of files:")) {
-          detected_encryption = true;
-          existing_encrypted = text.contains(".gpg'") || text.contains(".g'");
+            !detected_encryption) {
+          if (gpg_regex != null && gpg_regex.match(text)) {
+            detected_encryption = true;
+            existing_encrypted = true;
+          }
         }
         break;
       }

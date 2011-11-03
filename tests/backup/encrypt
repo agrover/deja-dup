@@ -20,7 +20,8 @@
 # Test whether we correctly ask or not for the encryption password
 
 import sys
-sys.path.insert(0, sys.path[0]+'/..')
+scriptdir=sys.path[0]
+sys.path.insert(0, scriptdir+'/..')
 import base
 import os
 import ldtp
@@ -34,6 +35,7 @@ def wait_for_volume(destdir, basenum):
 
 def encrypt():
   base.setup()
+  os.environ['PATH'] = os.path.join(scriptdir, 'encrypt-bin') + ":" + os.environ['PATH']
   base.backup_simple(backend='file', encrypt=True, includes=['data/simple'])
   basenum = len(os.listdir(base.get_temp_name('local')))
   base.backup_simple(encrypt=True, finish=False, includes=['/usr/bin'])

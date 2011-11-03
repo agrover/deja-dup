@@ -420,7 +420,7 @@ def set_file_list(dlg, obj, addObj, removeObj, files):
 
 def walk_prefs(backend, dest, includes, excludes):
   if backend == 'file':
-    ldtp.selectrow('frmBackup', 'tblCategories', 'Storage')
+    ldtp.selecttab('frmBackup', 'ptlCategories', 'Storage')
 
     if dest is None:
       dest = get_temp_name('local')
@@ -432,7 +432,7 @@ def walk_prefs(backend, dest, includes, excludes):
     ldtp.settextvalue('frmBackup', 'txt0', dest) # FIXME txt0 is bad name
     ldtp.wait(1) # without this, sometimes ldtp moves so fast, deja-dup doesn't notice dest
 
-  ldtp.selectrow('frmBackup', 'tblCategories', 'Folders')
+  ldtp.selecttab('frmBackup', 'ptlCategories', 'Folders')
   if includes is not None:
     set_file_list('frmBackup', 'tblIncludeList', 'btnIncludeListAdd', 'btnIncludeListRemove', includes)
   if excludes is not None:
@@ -455,12 +455,13 @@ def backup_simple(finish=True, error=None, timeout=400, backend = None,
 
   if guivisible('frmBackup', 'btnJustshowmybackupsettings'):
     ldtp.click('frmBackup', 'btnJustshowmybackupsettings')
+    remap('frmBackup')
 
   if backend is not None or includes is not None or excludes is not None:
     walk_prefs(backend=backend, dest=dest, includes=includes,
                excludes=excludes)
 
-  ldtp.selectrow('frmBackup', 'tblCategories', 'Overview')
+  ldtp.selecttab('frmBackup', 'ptlCategories', 'Overview')
   ldtp.click('frmBackup', 'btnBackUpNow')
   waitforgui('frmBackUp')
 
@@ -483,7 +484,7 @@ def restore_simple(path, date=None, backend = None, encrypt=True, dest = None):
   if guivisible('frmBackup', 'btnIwanttorestorefilesfromapreviousbackup…'):
     ldtp.click('frmBackup', 'btnIwanttorestorefilesfromapreviousbackup…')
   else:
-    ldtp.selectrow('frmBackup', 'tblCategories', 'Overview')
+    ldtp.selecttab('frmBackup', 'ptlCategories', 'Overview')
     ldtp.click('frmBackup', 'btnRestore…')
 
   waitforgui('frmRestore')
@@ -492,7 +493,7 @@ def restore_simple(path, date=None, backend = None, encrypt=True, dest = None):
     walk_restore_prefs('frmRestore', backend, dest)  
   ldtp.click('frmRestore', 'btnForward')
 
-  wait_for_finish('frmRestore', 'lblRestorefromWhen?', 200)
+  wait_for_finish('frmRestore', 'lblRestoreFromWhen?', 200)
   if date:
     ldtp.comboselect('frmRestore', 'cboDate', date)
   ldtp.click('frmRestore', 'btnForward')
@@ -528,7 +529,7 @@ def restore_specific(files, path, date=None, backend = None, encrypt = True, des
     walk_restore_prefs('frmRestore', backend=backend, dest=dest)
   ldtp.click('frmRestore', 'btnForward')
 
-  wait_for_finish('frmRestore', 'lblRestorefromWhen?', 200)
+  wait_for_finish('frmRestore', 'lblRestoreFromWhen?', 200)
   if date:
     ldtp.comboselect('frmRestore', 'cboDate', date)
   ldtp.click('frmRestore', 'btnForward')
