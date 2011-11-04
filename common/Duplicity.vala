@@ -1052,13 +1052,12 @@ public class Duplicity : Object
       show_error(_("No backup files found"));
       break;
     case "AssertionError":
-      // Sometimes if an incremental backup is cancelled then tried again,
-      // duplicity will emit an "time not moving forward" assertion.  Clearing
-      // the cache will solve it.  This message is not localized in duplicity.
-      if (text.contains("time not moving forward at appropriate pace")) {
-        if (restart_without_cache())
-          return;
-      }
+      // This is an internal error.  Similar to when duplicity just returns
+      // 1 with no message.  Some of these, like "time not moving forward" or
+      // bug 877631, can be recovered from by clearing the cache.  Worth a
+      // shot.
+      if (restart_without_cache())
+        return;
       break;
     }
     
