@@ -27,7 +27,7 @@ public class OperationBackup : Operation
     Object(xid: xid, mode: Mode.BACKUP);
   }
   
-  protected async override void operation_finished(Duplicity dup, bool success, bool cancelled)
+  internal async override void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
     /* If successfully completed, update time of last backup and run base operation_finished */
     if (success)

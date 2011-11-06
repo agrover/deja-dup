@@ -98,7 +98,7 @@ public abstract class Operation : Object
   }
 
   SimpleSettings settings;
-  protected Duplicity dup;
+  internal Duplicity dup;
   protected string passphrase;
   bool finished = false;
   construct
@@ -247,7 +247,7 @@ public abstract class Operation : Object
     }
   }
   
-  protected async virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
+  internal async virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
     finished = true;
 

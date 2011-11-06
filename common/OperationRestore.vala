@@ -70,7 +70,7 @@ public class OperationRestore : Operation
     return argv;
   }
   
-  protected async override void operation_finished(Duplicity dup, bool success, bool cancelled)
+  internal async override void operation_finished(Duplicity dup, bool success, bool cancelled)
   {
     if (success)
       DejaDup.update_last_run_timestamp(DejaDup.TimestampType.RESTORE);

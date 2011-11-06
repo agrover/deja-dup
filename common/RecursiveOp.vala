@@ -21,7 +21,7 @@ using GLib;
 
 namespace DejaDup {
 
-public abstract class RecursiveOp : Object
+internal abstract class RecursiveOp : Object
 {
   public signal void done();
   public signal void raise_error(File src, File dst, string errstr);

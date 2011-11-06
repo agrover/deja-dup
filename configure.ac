@@ -191,6 +191,7 @@ AC_CONFIG_FILES([Makefile
                  po/Makefile.in
                  preferences/Makefile
                  tests/Makefile
+                 tests/common/Makefile
                  vapi/Makefile
                  widgets/Makefile])
 AC_OUTPUT

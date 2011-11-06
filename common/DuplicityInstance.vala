@@ -21,7 +21,7 @@ using GLib;
 
 namespace DejaDup {
 
-public class DuplicityInstance : Object
+internal class DuplicityInstance : Object
 {
   public signal void done(bool success, bool cancelled);
   public signal void exited(int code);

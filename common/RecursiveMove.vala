@@ -29,7 +29,7 @@ namespace DejaDup {
  * This is not optimized for remote files.  It's mostly async, but it does the
  * occasional sync operation.
  */
-public class RecursiveMove : RecursiveOp
+internal class RecursiveMove : RecursiveOp
 {
   public RecursiveMove(File source, File dest)
   {

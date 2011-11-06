@@ -21,7 +21,7 @@ using GLib;
 
 namespace DejaDup {
 
-public class Duplicity : Object
+internal class Duplicity : Object
 {
   /*
    * Vala implementation of various methods for accessing duplicity

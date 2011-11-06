@@ -21,7 +21,7 @@ using GLib;
 
 namespace DejaDup {
 
-public class RecursiveDelete : RecursiveOp
+internal class RecursiveDelete : RecursiveOp
 {
   public RecursiveDelete(File source)
   {
