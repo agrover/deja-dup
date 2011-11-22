@@ -1,7 +1,15 @@
 Déjà Dup 21.2 (GNOME 3.3.2)
 ---------------------------
+Bug Fixes:
+ • Use smarter test for detecting whether existing backups are encrypted, which will work even if duplicity uses translations
+ • Fix a bug that in some situations could lead to a full backup being created more frequently than once a month
+Polish:
+ • Drop "After a week" from "Keep backups" option, since internally, we always wait a month anyway
+ • Treat any AssertionError by duplicity as an internal duplicity error by wiping the cache and trying again; this will let us be more pro-active about fixing some odd duplicity situations
+Packaging:
+ • Start of a unit test for our internal library; compile and run it with 'make check'
 Translations:
- • Updated Basque, Brazilian Portuguese, Finnish, German, Serbian, Slovak, and Slovenian translations
+ • Updated Basque, Brazilian Portuguese, English (UK), Estonian, Finnish, German, Norwegian Bokmal, Norwegian Nynorsk, Serbian, Slovak, Slovenian, Swedish, Telugu, Turkish, and Vietnamese translations
 
 Déjà Dup 21.1 (GNOME 3.3.1)
 ---------------------------
