@@ -8,23 +8,22 @@ msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-10-28 12:39-0400\n"
-"PO-Revision-Date: 2011-09-18 03:00+0000\n"
-"Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
+"PO-Revision-Date: 2011-11-12 16:23+0000\n"
+"Last-Translator: Anthony Harrington <untaintableangel@hotmail.co.uk>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-11-01 05:40+0000\n"
-"X-Generator: Launchpad (build 14197)\n"
+"X-Launchpad-Export-Date: 2011-11-13 06:12+0000\n"
+"X-Generator: Launchpad (build 14277)\n"
 
-#. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
-#: ../deja-dup/StatusIcon.vala:224 ../monitor/monitor.vala:115
-#: ../preferences/preferences-main.vala:52
-#: ../preferences/preferences-main.vala:66
+#: ../deja-dup/StatusIcon.vala:247 ../monitor/monitor.vala:115
+#: ../preferences/preferences-main.vala:51
+#: ../preferences/preferences-main.vala:63
 msgid "Backup"
 msgstr "Backup"
 
@@ -58,7 +57,7 @@ msgstr "déjà;deja;dup;"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:302
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:300
 msgid "Backup Monitor"
 msgstr "Backup Monitor"
 
@@ -79,7 +78,7 @@ msgstr ""
 "the chosen bucket."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location"
 msgstr "Backup location"
 
@@ -88,12 +87,12 @@ msgid "Folder type"
 msgstr "Folder type"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-#: ../preferences/Preferences.vala:160
+#: ../preferences/Preferences.vala:192
 msgid "Folders to back up"
 msgstr "Folders to back up"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
-#: ../preferences/Preferences.vala:168
+#: ../preferences/Preferences.vala:200
 msgid "Folders to ignore"
 msgstr "Folders to ignore"
 
@@ -420,7 +419,7 @@ msgstr "Waiting for ‘%s’ to become connected…"
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "You must specify a Rackspace container in your preferences."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:194
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
@@ -459,7 +458,7 @@ msgstr "S_how API access key"
 msgid "_Remember API access key"
 msgstr "_Remember API access key"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:176
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:175
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -494,7 +493,7 @@ msgstr "S_how secret access key"
 msgid "_Remember secret access key"
 msgstr "_Remember secret access key"
 
-#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:186
+#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -512,27 +511,25 @@ msgstr "Connect to Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "Sign into Ubuntu One…"
 
-#. Translators: this is the home folder and %s is the user's username
+#. Translators: %s is the user's username
 #: ../common/CommonUtils.vala:498
 #, c-format
 msgid "Home (%s)"
 msgstr "Home (%s)"
 
-#. Translators: this is the home folder
-#: ../common/CommonUtils.vala:503
+#: ../common/CommonUtils.vala:502
 msgid "Home"
 msgstr "Home"
 
-#. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:508
+#: ../common/CommonUtils.vala:506
 msgid "Trash"
 msgstr "Wastebasket"
 
-#: ../common/DuplicityInfo.vala:109
+#: ../common/DuplicityInfo.vala:106
 msgid "Could not run duplicity"
 msgstr "Could not run duplicity"
 
-#: ../common/DuplicityInfo.vala:114
+#: ../common/DuplicityInfo.vala:111
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -540,7 +537,7 @@ msgstr ""
 "Could not understand duplicity version.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:116
+#: ../common/DuplicityInfo.vala:113
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -549,17 +546,17 @@ msgstr ""
 "Could not understand duplicity version ‘%s’.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:118
+#: ../common/DuplicityInfo.vala:115
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 
-#: ../common/DuplicityInfo.vala:122
+#: ../common/DuplicityInfo.vala:119
 msgid "Duplicity’s version is too old"
 msgstr "Duplicity’s version is too old"
 
-#: ../common/DuplicityInfo.vala:123
+#: ../common/DuplicityInfo.vala:120
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -809,7 +806,7 @@ msgstr "Require Password?"
 msgid "Encryption Password Needed"
 msgstr "Encryption Password Needed"
 
-#: ../deja-dup/AssistantOperation.vala:760
+#: ../deja-dup/AssistantOperation.vala:757
 msgid "Backup encryption password"
 msgstr "Backup encryption password"
 
@@ -821,13 +818,13 @@ msgstr "Restore"
 msgid "_Restore"
 msgstr "_Restore"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:262
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:294
 msgid "_Backup location"
 msgstr "_Backup location"
 
 #: ../deja-dup/AssistantRestore.vala:124
 msgid "Restore From Where?"
-msgstr ""
+msgstr "Restore From Where?"
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date"
@@ -863,7 +860,7 @@ msgstr "Checking for Backups…"
 
 #: ../deja-dup/AssistantRestore.vala:271
 msgid "Restore From When?"
-msgstr ""
+msgstr "Restore From When?"
 
 #: ../deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
@@ -1045,16 +1042,15 @@ msgstr "S_how password"
 msgid "Location not available"
 msgstr "Location not available"
 
-#: ../deja-dup/MountOperationAssistant.vala:168
+#: ../deja-dup/MountOperationAssistant.vala:166
 msgid "Connect _anonymously"
 msgstr "Connect _anonymously"
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:170
 msgid "Connect as u_ser"
 msgstr "Connect as u_ser"
 
-#. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:215
+#: ../deja-dup/MountOperationAssistant.vala:212
 msgid "_Domain"
 msgstr "_Domain"
 
@@ -1096,15 +1092,15 @@ msgstr "_Skip Backup"
 msgid "Backup completed"
 msgstr "Backup completed"
 
-#: ../deja-dup/StatusIcon.vala:225
+#: ../deja-dup/StatusIcon.vala:248
 msgid "Starting scheduled backup"
 msgstr "Starting scheduled backup"
 
-#: ../deja-dup/StatusIcon.vala:227
+#: ../deja-dup/StatusIcon.vala:250
 msgid "Show Progress"
 msgstr "Show Progress"
 
-#: ../deja-dup/StatusIcon.vala:265
+#: ../deja-dup/StatusIcon.vala:287
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% complete"
@@ -1127,85 +1123,84 @@ msgstr "I want to _restore files from a previous backup…"
 msgid "Just show my backup _settings"
 msgstr "Just show my backup _settings"
 
-#: ../preferences/Preferences.vala:134
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups"
 msgstr "Automatic _backups"
 
-#: ../preferences/Preferences.vala:181
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup"
 msgstr "Most recent backup"
 
-#: ../preferences/Preferences.vala:190
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup"
 msgstr "Next automatic backup"
 
-#: ../preferences/Preferences.vala:224
+#: ../preferences/Preferences.vala:256
 msgid "_Restore…"
 msgstr "_Restore…"
 
-#: ../preferences/Preferences.vala:230
+#: ../preferences/Preferences.vala:262
 msgid "Back Up _Now"
 msgstr "Back Up _Now"
 
-#: ../preferences/Preferences.vala:252
+#: ../preferences/Preferences.vala:284
 msgid "Overview"
 msgstr "Overview"
 
-#. Translators: storage as in "where to store the backup"
-#: ../preferences/Preferences.vala:284
+#: ../preferences/Preferences.vala:315
 msgid "Storage"
 msgstr "Storage"
 
-#: ../preferences/Preferences.vala:305
+#: ../preferences/Preferences.vala:336
 msgid "Folders to _back up"
 msgstr "Folders to _back up"
 
-#: ../preferences/Preferences.vala:315
+#: ../preferences/Preferences.vala:346
 msgid "Folders to _ignore"
 msgstr "Folders to _ignore"
 
-#: ../preferences/Preferences.vala:324
+#: ../preferences/Preferences.vala:355
 msgid "Folders"
 msgstr "Folders"
 
-#: ../preferences/Preferences.vala:335
+#: ../preferences/Preferences.vala:366
 msgid "How _often to back up"
 msgstr "How _often to back up"
 
-#: ../preferences/Preferences.vala:346
+#: ../preferences/Preferences.vala:377
 #, c-format
 msgid "_Keep backups"
 msgstr "_Keep backups"
 
-#: ../preferences/Preferences.vala:361
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "Schedule"
 
-#: ../widgets/ConfigDelete.vala:43
+#: ../widgets/ConfigDelete.vala:45
 msgid "At least a month"
 msgstr "At least a month"
 
-#: ../widgets/ConfigDelete.vala:44
+#: ../widgets/ConfigDelete.vala:46
 msgid "At least two months"
 msgstr "At least two months"
 
-#: ../widgets/ConfigDelete.vala:45
+#: ../widgets/ConfigDelete.vala:47
 msgid "At least three months"
 msgstr "At least three months"
 
-#: ../widgets/ConfigDelete.vala:46
+#: ../widgets/ConfigDelete.vala:48
 msgid "At least six months"
 msgstr "At least six months"
 
-#: ../widgets/ConfigDelete.vala:47
+#: ../widgets/ConfigDelete.vala:49
 msgid "At least a year"
 msgstr "At least a year"
 
-#: ../widgets/ConfigDelete.vala:48
+#: ../widgets/ConfigDelete.vala:50
 msgid "Forever"
 msgstr "Forever"
 
-#: ../widgets/ConfigDelete.vala:95
+#: ../widgets/ConfigDelete.vala:97
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -1238,9 +1233,8 @@ msgid_plural "%d days ago"
 msgstr[0] "%d day ago"
 msgstr[1] "%d days ago"
 
-#. Translators: This is used in phrases like "Most recent backup: None"
-#: ../widgets/ConfigLabelBackupDate.vala:95
-#: ../widgets/ConfigLabelBackupDate.vala:109
+#: ../widgets/ConfigLabelBackupDate.vala:94
+#: ../widgets/ConfigLabelBackupDate.vala:108
 msgid "None"
 msgstr "None"
 
@@ -1252,7 +1246,7 @@ msgstr "Yes"
 msgid "No"
 msgstr "No"
 
-#: ../widgets/ConfigLabelPolicy.vala:64
+#: ../widgets/ConfigLabelPolicy.vala:65
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
@@ -1260,7 +1254,7 @@ msgstr ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:66
+#: ../widgets/ConfigLabelPolicy.vala:67
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
@@ -1268,7 +1262,7 @@ msgstr ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:68
+#: ../widgets/ConfigLabelPolicy.vala:69
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
@@ -1276,7 +1270,7 @@ msgstr ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:70
+#: ../widgets/ConfigLabelPolicy.vala:71
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
@@ -1284,7 +1278,7 @@ msgstr ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:73
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1292,11 +1286,11 @@ msgstr ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:75
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr "Old backups will be kept until the backup location is low on space."
 
-#: ../widgets/ConfigLabelPolicy.vala:77
+#: ../widgets/ConfigLabelPolicy.vala:78
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1331,28 +1325,28 @@ msgstr "Remove"
 msgid "Choose folders"
 msgstr "Choose folders"
 
-#: ../widgets/ConfigLocation.vala:118
+#: ../widgets/ConfigLocation.vala:117
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "Windows Share"
 msgstr "Windows Share"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:127
+#: ../widgets/ConfigLocation.vala:126
 msgid "Custom Location"
 msgstr "Custom Location"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:133
+#: ../widgets/ConfigLocation.vala:132
 msgid "Local Folder"
 msgstr "Local Folder"
 

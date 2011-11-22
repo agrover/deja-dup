@@ -8,23 +8,22 @@ msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-10-28 12:39-0400\n"
-"PO-Revision-Date: 2011-09-18 03:00+0000\n"
+"PO-Revision-Date: 2011-11-14 07:23+0000\n"
 "Last-Translator: Lê Trường An <truongan@linuxmail.org>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-11-01 05:40+0000\n"
-"X-Generator: Launchpad (build 14197)\n"
+"X-Launchpad-Export-Date: 2011-11-15 05:28+0000\n"
+"X-Generator: Launchpad (build 14291)\n"
 
-#. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
-#: ../deja-dup/StatusIcon.vala:224 ../monitor/monitor.vala:115
-#: ../preferences/preferences-main.vala:52
-#: ../preferences/preferences-main.vala:66
+#: ../deja-dup/StatusIcon.vala:247 ../monitor/monitor.vala:115
+#: ../preferences/preferences-main.vala:51
+#: ../preferences/preferences-main.vala:63
 msgid "Backup"
 msgstr "Sao lưu"
 
@@ -53,12 +52,12 @@ msgstr "Thay đổi thiết lập sao lưu của bạn"
 #: ../data/deja-dup-ccpanel.desktop.in.h:5
 #: ../data/deja-dup-preferences.desktop.in.in.h:5
 msgid "déjà;deja;dup;"
-msgstr ""
+msgstr "déjà;deja;dup;"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:302
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:300
 msgid "Backup Monitor"
 msgstr "Theo dõi sao lưu"
 
@@ -79,7 +78,7 @@ msgstr ""
 "đã chọn."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location"
 msgstr "Vị trí lưu bản sao lưu"
 
@@ -88,12 +87,12 @@ msgid "Folder type"
 msgstr "Loại thư mục"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-#: ../preferences/Preferences.vala:160
+#: ../preferences/Preferences.vala:192
 msgid "Folders to back up"
 msgstr "Sao lưu các thư mục"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
-#: ../preferences/Preferences.vala:168
+#: ../preferences/Preferences.vala:200
 msgid "Folders to ignore"
 msgstr "Bỏ qua các thư mục"
 
@@ -411,7 +410,7 @@ msgstr "Đang chờ cho '%s' được kết nối..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Bạn phải chỉ định dịch vụ lưu trữ Rackspace trong phần tùy chỉnh."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:194
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
@@ -436,7 +435,7 @@ msgstr ""
 
 #: ../common/BackendRackspace.vala:139
 msgid "Connect to Rackspace Cloud Files"
-msgstr ""
+msgstr "Kết nối đến Rackspace Cloud Files"
 
 #: ../common/BackendRackspace.vala:140
 msgid "_API access key"
@@ -450,7 +449,7 @@ msgstr "_Hiện khóa truy cập API"
 msgid "_Remember API access key"
 msgstr "Nhớ khóa t_ruy cập API"
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:176
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:175
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -468,7 +467,7 @@ msgstr ""
 
 #: ../common/BackendS3.vala:194
 msgid "Connect to Amazon S3"
-msgstr ""
+msgstr "Kết nối đến Amazon S3"
 
 #: ../common/BackendS3.vala:195
 msgid "_Access key ID"
@@ -486,7 +485,7 @@ msgstr "_Hiện khóa truy cập bí mật"
 msgid "_Remember secret access key"
 msgstr "Nhớ khóa t_ruy cập bí mật"
 
-#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:186
+#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -504,27 +503,25 @@ msgstr "Kết nối đến Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "Đăng nhập vào Ubuntu One..."
 
-#. Translators: this is the home folder and %s is the user's username
+#. Translators: %s is the user's username
 #: ../common/CommonUtils.vala:498
 #, c-format
 msgid "Home (%s)"
-msgstr ""
+msgstr "Thư mục chính (%s)"
 
-#. Translators: this is the home folder
-#: ../common/CommonUtils.vala:503
+#: ../common/CommonUtils.vala:502
 msgid "Home"
 msgstr "Thư mục riêng"
 
-#. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:508
+#: ../common/CommonUtils.vala:506
 msgid "Trash"
 msgstr "Sọt rác"
 
-#: ../common/DuplicityInfo.vala:109
+#: ../common/DuplicityInfo.vala:106
 msgid "Could not run duplicity"
 msgstr "Không thể chạy duplicity"
 
-#: ../common/DuplicityInfo.vala:114
+#: ../common/DuplicityInfo.vala:111
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -532,7 +529,7 @@ msgstr ""
 "Không hiểu phiên bản duplicity.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:116
+#: ../common/DuplicityInfo.vala:113
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -541,18 +538,18 @@ msgstr ""
 "Không hiểu phiên bản duplicity '%s'.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:118
+#: ../common/DuplicityInfo.vala:115
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
 "Không có duplicity, Công cụ sao lưu Déjà Dup không thể vận hành. Nó sẽ đóng "
 "ngay."
 
-#: ../common/DuplicityInfo.vala:122
+#: ../common/DuplicityInfo.vala:119
 msgid "Duplicity’s version is too old"
 msgstr "Phiên bản duplicity quá cũ"
 
-#: ../common/DuplicityInfo.vala:123
+#: ../common/DuplicityInfo.vala:120
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -800,7 +797,7 @@ msgstr "Yêu cầu mật khẩu?"
 msgid "Encryption Password Needed"
 msgstr "Cần mật khẩu mã hóa"
 
-#: ../deja-dup/AssistantOperation.vala:760
+#: ../deja-dup/AssistantOperation.vala:757
 msgid "Backup encryption password"
 msgstr "Sao lưu mật khẩu mã hóa"
 
@@ -812,13 +809,13 @@ msgstr "Phục hồi"
 msgid "_Restore"
 msgstr "_Phục hồi"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:262
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:294
 msgid "_Backup location"
 msgstr "_Vị trí lưu bản sao lưu"
 
 #: ../deja-dup/AssistantRestore.vala:124
 msgid "Restore From Where?"
-msgstr ""
+msgstr "Phục hồi từ đâu?"
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date"
@@ -854,7 +851,7 @@ msgstr "Đang kiểm tra để sao lưu..."
 
 #: ../deja-dup/AssistantRestore.vala:271
 msgid "Restore From When?"
-msgstr ""
+msgstr "Phục hồi từ thời điểm nào?"
 
 #: ../deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
@@ -1032,16 +1029,15 @@ msgstr "_Hiện mật khẩu"
 msgid "Location not available"
 msgstr "Vị trí chưa sẵn sàng"
 
-#: ../deja-dup/MountOperationAssistant.vala:168
+#: ../deja-dup/MountOperationAssistant.vala:166
 msgid "Connect _anonymously"
 msgstr "Kết nối _vô danh"
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:170
 msgid "Connect as u_ser"
 msgstr "Kết _nối với tư cách người dùng"
 
-#. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:215
+#: ../deja-dup/MountOperationAssistant.vala:212
 msgid "_Domain"
 msgstr "Tê_n miền"
 
@@ -1083,22 +1079,22 @@ msgstr "_Bỏ qua quá trình sao lưu"
 msgid "Backup completed"
 msgstr "Đã sao lưu xong"
 
-#: ../deja-dup/StatusIcon.vala:225
+#: ../deja-dup/StatusIcon.vala:248
 msgid "Starting scheduled backup"
 msgstr "Bắt đầu lên lịch sao lưu"
 
-#: ../deja-dup/StatusIcon.vala:227
+#: ../deja-dup/StatusIcon.vala:250
 msgid "Show Progress"
-msgstr ""
+msgstr "Hiện tiến độ"
 
-#: ../deja-dup/StatusIcon.vala:265
+#: ../deja-dup/StatusIcon.vala:287
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% hoàn tất"
 
 #: ../deja-dup/StatusIcon.vala:278
 msgid "Show _Progress"
-msgstr ""
+msgstr "Hiện _tiến độ"
 
 #: ../monitor/monitor.vala:155
 msgid "Scheduled backup delayed"
@@ -1114,85 +1110,84 @@ msgstr "Tôi muốn phục _hồi các tập tin từ một bản sao lưu trư�
 msgid "Just show my backup _settings"
 msgstr "Chỉ hiện những thiết lập _sao lưu của tôi"
 
-#: ../preferences/Preferences.vala:134
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups"
 msgstr "_Sao lưu tự động"
 
-#: ../preferences/Preferences.vala:181
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup"
 msgstr "Sao lưu gần đây nhất"
 
-#: ../preferences/Preferences.vala:190
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup"
 msgstr "Lần tự động sao lưu kế tiếp"
 
-#: ../preferences/Preferences.vala:224
+#: ../preferences/Preferences.vala:256
 msgid "_Restore…"
 msgstr "Phụ_c hồi..."
 
-#: ../preferences/Preferences.vala:230
+#: ../preferences/Preferences.vala:262
 msgid "Back Up _Now"
 msgstr "Sao _lưu ngay"
 
-#: ../preferences/Preferences.vala:252
+#: ../preferences/Preferences.vala:284
 msgid "Overview"
 msgstr "Tổng thể"
 
-#. Translators: storage as in "where to store the backup"
-#: ../preferences/Preferences.vala:284
+#: ../preferences/Preferences.vala:315
 msgid "Storage"
 msgstr "Lưu trữ"
 
-#: ../preferences/Preferences.vala:305
+#: ../preferences/Preferences.vala:336
 msgid "Folders to _back up"
 msgstr "Thư _mục để sao lưu"
 
-#: ../preferences/Preferences.vala:315
+#: ../preferences/Preferences.vala:346
 msgid "Folders to _ignore"
 msgstr "_Bỏ qua các thư mục"
 
-#: ../preferences/Preferences.vala:324
+#: ../preferences/Preferences.vala:355
 msgid "Folders"
 msgstr "Thư mục"
 
-#: ../preferences/Preferences.vala:335
+#: ../preferences/Preferences.vala:366
 msgid "How _often to back up"
 msgstr "_Sao lưu sau"
 
-#: ../preferences/Preferences.vala:346
+#: ../preferences/Preferences.vala:377
 #, c-format
 msgid "_Keep backups"
 msgstr "Lưu bản sa_o lưu"
 
-#: ../preferences/Preferences.vala:361
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "Lên lịch"
 
-#: ../widgets/ConfigDelete.vala:43
+#: ../widgets/ConfigDelete.vala:45
 msgid "At least a month"
 msgstr "Ít nhất một tháng"
 
-#: ../widgets/ConfigDelete.vala:44
+#: ../widgets/ConfigDelete.vala:46
 msgid "At least two months"
 msgstr "Ít nhất hai tháng"
 
-#: ../widgets/ConfigDelete.vala:45
+#: ../widgets/ConfigDelete.vala:47
 msgid "At least three months"
 msgstr "Ít nhất ba tháng"
 
-#: ../widgets/ConfigDelete.vala:46
+#: ../widgets/ConfigDelete.vala:48
 msgid "At least six months"
 msgstr "Ít nhất sáu tháng"
 
-#: ../widgets/ConfigDelete.vala:47
+#: ../widgets/ConfigDelete.vala:49
 msgid "At least a year"
 msgstr "Ít nhất một năm"
 
-#: ../widgets/ConfigDelete.vala:48
+#: ../widgets/ConfigDelete.vala:50
 msgid "Forever"
 msgstr "Vô hạn"
 
-#: ../widgets/ConfigDelete.vala:95
+#: ../widgets/ConfigDelete.vala:97
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -1222,9 +1217,8 @@ msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d ngày trước"
 
-#. Translators: This is used in phrases like "Most recent backup: None"
-#: ../widgets/ConfigLabelBackupDate.vala:95
-#: ../widgets/ConfigLabelBackupDate.vala:109
+#: ../widgets/ConfigLabelBackupDate.vala:94
+#: ../widgets/ConfigLabelBackupDate.vala:108
 msgid "None"
 msgstr "Không"
 
@@ -1236,7 +1230,7 @@ msgstr "Đồng ý"
 msgid "No"
 msgstr "Không"
 
-#: ../widgets/ConfigLabelPolicy.vala:64
+#: ../widgets/ConfigLabelPolicy.vala:65
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
@@ -1244,7 +1238,7 @@ msgstr ""
 "Các bản sao lưu cũ sẽ được giữ lại ít nhất một tháng hoặc cho đến khi vị trí "
 "lưu bản sao lưu không còn đủ dung lượng."
 
-#: ../widgets/ConfigLabelPolicy.vala:66
+#: ../widgets/ConfigLabelPolicy.vala:67
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
@@ -1252,7 +1246,7 @@ msgstr ""
 "Các bản sao lưu cũ sẽ được giữ lại ít nhất hai tháng hoặc cho đến khi vị trí "
 "lưu bản sao lưu không còn đủ dung lượng."
 
-#: ../widgets/ConfigLabelPolicy.vala:68
+#: ../widgets/ConfigLabelPolicy.vala:69
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
@@ -1260,7 +1254,7 @@ msgstr ""
 "Các bản sao lưu cũ sẽ được giữ lại ít nhất ba tháng hoặc cho đến khi vị trí "
 "lưu bản sao lưu không còn đủ dung lượng."
 
-#: ../widgets/ConfigLabelPolicy.vala:70
+#: ../widgets/ConfigLabelPolicy.vala:71
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
@@ -1268,7 +1262,7 @@ msgstr ""
 "Các bản sao lưu cũ sẽ được giữ lại ít nhất sáu tháng hoặc cho đến khi vị trí "
 "lưu bản sao lưu không còn đủ dung lượng."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:73
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1276,13 +1270,13 @@ msgstr ""
 "Các bản sao lưu cũ sẽ được giữ lại ít nhất một năm hoặc cho đến khi vị trí "
 "lưu bản sao lưu không còn đủ dung lượng."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:75
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Các bản sao lưu cũ sẽ được giữ lại cho đến khi vị trí lưu bản sao lưu không "
 "còn đủ dung lượng."
 
-#: ../widgets/ConfigLabelPolicy.vala:77
+#: ../widgets/ConfigLabelPolicy.vala:78
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1314,28 +1308,28 @@ msgstr "Loại bỏ"
 msgid "Choose folders"
 msgstr "Chọn thư mục"
 
-#: ../widgets/ConfigLocation.vala:118
+#: ../widgets/ConfigLocation.vala:117
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "Windows Share"
 msgstr "Windows Share"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:127
+#: ../widgets/ConfigLocation.vala:126
 msgid "Custom Location"
 msgstr "Vị trí tuỳ chọn"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:133
+#: ../widgets/ConfigLocation.vala:132
 msgid "Local Folder"
 msgstr "Thư mục trên máy"
 

@@ -8,23 +8,22 @@ msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-10-28 12:39-0400\n"
-"PO-Revision-Date: 2011-10-17 15:07+0000\n"
-"Last-Translator: mabynke <Unknown>\n"
+"PO-Revision-Date: 2011-11-13 11:30+0000\n"
+"Last-Translator: Jarl Arntzen <jarl.arntzen@gmail.com>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-11-01 05:39+0000\n"
-"X-Generator: Launchpad (build 14197)\n"
+"X-Launchpad-Export-Date: 2011-11-14 05:59+0000\n"
+"X-Generator: Launchpad (build 14277)\n"
 
-#. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:2
 #: ../data/deja-dup-preferences.desktop.in.in.h:2 ../deja-dup/Prompt.vala:93
 #: ../deja-dup/Prompt.vala:127 ../deja-dup/StatusIcon.vala:125
-#: ../deja-dup/StatusIcon.vala:224 ../monitor/monitor.vala:115
-#: ../preferences/preferences-main.vala:52
-#: ../preferences/preferences-main.vala:66
+#: ../deja-dup/StatusIcon.vala:247 ../monitor/monitor.vala:115
+#: ../preferences/preferences-main.vala:51
+#: ../preferences/preferences-main.vala:63
 msgid "Backup"
 msgstr "Sikkerhetskopi"
 
@@ -58,13 +57,13 @@ msgstr ""
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:302
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:300
 msgid "Backup Monitor"
-msgstr ""
+msgstr "Planlegging av sikkerhetskopiering"
 
 #: ../data/deja-dup-monitor.desktop.in.in.h:2
 msgid "Schedules backups at regular intervals"
-msgstr "Tar en sikkerhetskopi med gjevne mellomrom"
+msgstr "Tar en sikkerhetskopi med jevne mellomrom"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 msgid "Amazon S3 Access Key ID"
@@ -77,7 +76,7 @@ msgid ""
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
+#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:183
 msgid "Backup location"
 msgstr "Plassering av sikkerhetskopi"
 
@@ -86,12 +85,12 @@ msgid "Folder type"
 msgstr "Mappetype"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
-#: ../preferences/Preferences.vala:160
+#: ../preferences/Preferences.vala:192
 msgid "Folders to back up"
 msgstr "Mapper som skal sikkerhetskopieres"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
-#: ../preferences/Preferences.vala:168
+#: ../preferences/Preferences.vala:200
 msgid "Folders to ignore"
 msgstr "Mapper som skal hoppes over"
 
@@ -116,6 +115,8 @@ msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
 msgstr ""
+"Hvis sikkerhetskopien skal plasseres på et eksternt volum, er dette volumets "
+"unike identitet."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:12
 msgid ""
@@ -158,11 +159,11 @@ msgstr "Overflødig"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:18
 msgid "Relative path under the external volume"
-msgstr ""
+msgstr "Relativ bane i det eksterne volumet"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:19
 msgid "Short name of the external volume"
-msgstr ""
+msgstr "Kortnavn for det eksterne volumet"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:20
 msgid "The Amazon S3 bucket name to use"
@@ -191,6 +192,8 @@ msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
 msgstr ""
+"Mappenavnet filene blir lagret i. Bruk ‘$HOSTNAME’, for å automatisk lage et "
+"mappenavn basert på navnet på datamaskinen."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "The last time Déjà Dup backed up"
@@ -205,12 +208,16 @@ msgid ""
 "The last time Déjà Dup successfully completed a backup. This time should be "
 "in ISO 8601 format."
 msgstr ""
+"Sist gang Déjà Dup gjennomførte en vellykket sikkerhetskopiering. (Dette "
+"tidspunktet skal være angitt i formatet ISO 8601.)"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
 msgid ""
 "The last time Déjà Dup successfully completed a restore. This time should be "
 "in ISO 8601 format."
 msgstr ""
+"Sist gang Déjà Dup gjennomførte en vellykket sikkerhetskopiering. (Dette "
+"tidspunktet skal være angitt i formatet ISO 8601.)"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The last time Déjà Dup was run"
@@ -221,10 +228,12 @@ msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
 msgstr ""
+"Sist gang Déjà Dup ble kjørt. (Dette tidspunktet skal være angitt i formatet "
+"ISO 8601.)"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "The number of days between backups."
-msgstr "Dager mellom sikkerhetskopiering."
+msgstr "Antall dager mellom sikkerthetskopieringer."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
@@ -244,7 +253,7 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "This is your username for the Rackspace Cloud Files service."
-msgstr ""
+msgstr "Dette er ditt brukernavn for tjenesten Rackspace Cloud Files."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid ""
@@ -253,6 +262,10 @@ msgid ""
 "and $VIDEO are recognized as the user’s special directories. Relative "
 "entries are relative to the user’s home directory."
 msgstr ""
+"Denne listen med mapper vil bli sikkerhetskopiert. Reserverte nøkkelord som "
+"$HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+"$TEMPLATES, $TRASH, og $VIDEO kan brukes istedenfor brukerens norske navn på "
+"disse mappene. Filbaner er relative i forhold til brukerens hjemmemappe."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
@@ -261,6 +274,11 @@ msgid ""
 "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
 "directories. Relative entries are relative to the user’s home directory."
 msgstr ""
+"Denne listen med mapper vil ikke bli sikkerhetskopiert. Reserverte nøkkelord "
+"som $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, "
+"$PUBLIC_SHARE, $TEMPLATES, $TRASH, og $VIDEO kan brukes istedenfor brukerens "
+"norske navn på disse mappene. Filbaner er relative i forhold til brukerens "
+"hjemmemappe."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 msgid "Type of location to store backup"
@@ -295,31 +313,36 @@ msgstr "Om det skal tas sikkerhetskopier automatisk etter en tidsplan."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Whether to periodically back up"
-msgstr "Om det skal tas gjevnlige sikkerhetskopier"
+msgstr "Om det skal tas jevnlige sikkerhetskopier"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid "Whether to request the root password"
-msgstr ""
+msgstr "Om det skal spørres etter root (administrator)-passordet"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
 msgstr ""
+"Om det skal spørres om root (administrator)-passordet ved "
+"sikkerhetskopiering fra eller gjenoppretting til systemmapper."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr ""
-"Hvilken Amazon S3 bucket sikkerhetskopiene skal oppbevares i. Denne behøver "
-"ikke å eksistere fra før av. Amazon tillater bare navn som i vertsnavn."
+"Hvilken Amazon S3 \"bucket\" sikkerhetskopiene skal oppbevares i. Denne "
+"behøver ikke å eksistere fra før av. Amazon tillater bare gyldige vertsnavn."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr ""
+"Hvilken Rackspace Cloud Files \"container\" sikkerhetskopiene skal "
+"oppbevares i. Denne behøver ikke å eksistere fra før av. Rackspace tillater "
+"bare gyldige vertsnavn."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
@@ -327,7 +350,7 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Your Rackspace username"
-msgstr ""
+msgstr "Ditt Rackspace-brukernavn."
 
 #: ../data/ui/restore-missing.ui.h:1
 msgid "Folder"
@@ -390,9 +413,9 @@ msgstr "Venter på at ‘%s’ blir koblet til…"
 
 #: ../common/BackendRackspace.vala:58
 msgid "You must specify a Rackspace container in your preferences."
-msgstr ""
+msgstr "Du må oppgi en Rackspace-\"container\" i innstillingene."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:194
+#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:193
 msgid "Rackspace Cloud Files"
 msgstr ""
 
@@ -429,7 +452,7 @@ msgstr ""
 msgid "_Remember API access key"
 msgstr ""
 
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:176
+#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:175
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -447,7 +470,7 @@ msgstr ""
 
 #: ../common/BackendS3.vala:194
 msgid "Connect to Amazon S3"
-msgstr ""
+msgstr "Koble til Amazon S3"
 
 #: ../common/BackendS3.vala:195
 msgid "_Access key ID"
@@ -465,7 +488,7 @@ msgstr ""
 msgid "_Remember secret access key"
 msgstr ""
 
-#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:186
+#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:185
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
@@ -483,27 +506,25 @@ msgstr "Koble til Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "Logg inn på Ubuntu One…"
 
-#. Translators: this is the home folder and %s is the user's username
+#. Translators: %s is the user's username
 #: ../common/CommonUtils.vala:498
 #, c-format
 msgid "Home (%s)"
 msgstr "Hjemmemappe (%s)"
 
-#. Translators: this is the home folder
-#: ../common/CommonUtils.vala:503
+#: ../common/CommonUtils.vala:502
 msgid "Home"
 msgstr "Hjemmemappe"
 
-#. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:508
+#: ../common/CommonUtils.vala:506
 msgid "Trash"
 msgstr "Søppel"
 
-#: ../common/DuplicityInfo.vala:109
+#: ../common/DuplicityInfo.vala:106
 msgid "Could not run duplicity"
 msgstr "Kunne ikke starte duplicity"
 
-#: ../common/DuplicityInfo.vala:114
+#: ../common/DuplicityInfo.vala:111
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
@@ -511,7 +532,7 @@ msgstr ""
 "Kan ikke tolke versjonen av duplicity.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:116
+#: ../common/DuplicityInfo.vala:113
 #, c-format
 msgid ""
 "Could not understand duplicity version ‘%s’.\n"
@@ -520,18 +541,18 @@ msgstr ""
 "Klarte ikke forstå duplicity versjon ‘%s’.\n"
 "\n"
 
-#: ../common/DuplicityInfo.vala:118
+#: ../common/DuplicityInfo.vala:115
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
 "Déjà Dup Verktøy for sikkerhetskopiering trenger duplicity for å fungere. "
 "Verktøyet vil nå avsluttes."
 
-#: ../common/DuplicityInfo.vala:122
+#: ../common/DuplicityInfo.vala:119
 msgid "Duplicity’s version is too old"
 msgstr "Den installerte versjonen av Duplicity er for gammel"
 
-#: ../common/DuplicityInfo.vala:123
+#: ../common/DuplicityInfo.vala:120
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -784,7 +805,7 @@ msgstr "Krev passord?"
 msgid "Encryption Password Needed"
 msgstr "Trenger et krypteringspassord"
 
-#: ../deja-dup/AssistantOperation.vala:760
+#: ../deja-dup/AssistantOperation.vala:757
 msgid "Backup encryption password"
 msgstr "Krypteringspassord for sikkerhetskopieringen"
 
@@ -796,7 +817,7 @@ msgstr "Gjenopprett"
 msgid "_Restore"
 msgstr "_Gjenopprett"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:262
+#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:294
 msgid "_Backup location"
 msgstr "_Plassering av sikkerhetskopi"
 
@@ -1015,24 +1036,23 @@ msgstr "V_is passord"
 
 #: ../deja-dup/MountOperationAssistant.vala:82
 msgid "Location not available"
-msgstr ""
+msgstr "Plasseringen er ikke tilgjengelig"
 
-#: ../deja-dup/MountOperationAssistant.vala:168
+#: ../deja-dup/MountOperationAssistant.vala:166
 msgid "Connect _anonymously"
 msgstr "Koble til _anonymt"
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:170
 msgid "Connect as u_ser"
 msgstr "Koble til som br_uker"
 
-#. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:215
+#: ../deja-dup/MountOperationAssistant.vala:212
 msgid "_Domain"
 msgstr "_Domene"
 
 #: ../deja-dup/Prompt.vala:37
 msgid "Keep your files safe by backing up regularly"
-msgstr ""
+msgstr "Hold filene dine trykke ved å sikkerhetskopiere jevnlig"
 
 #: ../deja-dup/Prompt.vala:42
 msgid ""
@@ -1040,6 +1060,9 @@ msgid ""
 "a backup. In the case of a disaster, you would be able to recover them from "
 "that backup."
 msgstr ""
+"Viktige dokumenter, data og innstillinger kan beskyttes ved å "
+"sikkerhetskopieres. I tilfelle katastrofe, vil du kunne gjenopprette disse "
+"fra denne sikkerhetskopien."
 
 #: ../deja-dup/Prompt.vala:48
 msgid "_Don't Show Again"
@@ -1065,15 +1088,15 @@ msgstr "_Hopp over sikkerhetskopi"
 msgid "Backup completed"
 msgstr "Sikkerhetskopieringen er ferdig"
 
-#: ../deja-dup/StatusIcon.vala:225
+#: ../deja-dup/StatusIcon.vala:248
 msgid "Starting scheduled backup"
 msgstr "Starter planlagt sikkerhetskopiering"
 
-#: ../deja-dup/StatusIcon.vala:227
+#: ../deja-dup/StatusIcon.vala:250
 msgid "Show Progress"
 msgstr "Vis fremgang"
 
-#: ../deja-dup/StatusIcon.vala:265
+#: ../deja-dup/StatusIcon.vala:287
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% ferdig"
@@ -1096,85 +1119,84 @@ msgstr "Jeg vil _gjenopprette filer fra en tidligere sikkerhetskopi…"
 msgid "Just show my backup _settings"
 msgstr "Vis _innstillingene for sikkerhetskopiering"
 
-#: ../preferences/Preferences.vala:134
+#: ../preferences/Preferences.vala:166
 msgid "Automatic _backups"
-msgstr ""
+msgstr "Automatiske _sikkerhetskopier"
 
-#: ../preferences/Preferences.vala:181
+#: ../preferences/Preferences.vala:213
 msgid "Most recent backup"
 msgstr "Siste sikkerhetskopi"
 
-#: ../preferences/Preferences.vala:190
+#: ../preferences/Preferences.vala:222
 msgid "Next automatic backup"
 msgstr "Neste automatiske sikkerhetskopiering"
 
-#: ../preferences/Preferences.vala:224
+#: ../preferences/Preferences.vala:256
 msgid "_Restore…"
 msgstr "_Gjenopprett …"
 
-#: ../preferences/Preferences.vala:230
+#: ../preferences/Preferences.vala:262
 msgid "Back Up _Now"
 msgstr "Ta sikkerhetskopi _nå"
 
-#: ../preferences/Preferences.vala:252
+#: ../preferences/Preferences.vala:284
 msgid "Overview"
 msgstr "Oversikt"
 
-#. Translators: storage as in "where to store the backup"
-#: ../preferences/Preferences.vala:284
+#: ../preferences/Preferences.vala:315
 msgid "Storage"
 msgstr "Lagring"
 
-#: ../preferences/Preferences.vala:305
+#: ../preferences/Preferences.vala:336
 msgid "Folders to _back up"
-msgstr ""
+msgstr "Mapper som skal _kopieres."
 
-#: ../preferences/Preferences.vala:315
+#: ../preferences/Preferences.vala:346
 msgid "Folders to _ignore"
-msgstr ""
+msgstr "Mapper som skal _hoppes over"
 
-#: ../preferences/Preferences.vala:324
+#: ../preferences/Preferences.vala:355
 msgid "Folders"
 msgstr "Mapper"
 
-#: ../preferences/Preferences.vala:335
+#: ../preferences/Preferences.vala:366
 msgid "How _often to back up"
-msgstr ""
+msgstr "Hvor _ofte sikkerhetskopiering skal utføres"
 
-#: ../preferences/Preferences.vala:346
+#: ../preferences/Preferences.vala:377
 #, c-format
 msgid "_Keep backups"
-msgstr ""
+msgstr "_Behold sikkerhetskopier"
 
-#: ../preferences/Preferences.vala:361
+#: ../preferences/Preferences.vala:392
 msgid "Schedule"
 msgstr "Tidsplan"
 
-#: ../widgets/ConfigDelete.vala:43
+#: ../widgets/ConfigDelete.vala:45
 msgid "At least a month"
 msgstr "Minst én måned"
 
-#: ../widgets/ConfigDelete.vala:44
+#: ../widgets/ConfigDelete.vala:46
 msgid "At least two months"
-msgstr ""
+msgstr "Minst to måneder"
 
-#: ../widgets/ConfigDelete.vala:45
+#: ../widgets/ConfigDelete.vala:47
 msgid "At least three months"
 msgstr "Minst tre måneder"
 
-#: ../widgets/ConfigDelete.vala:46
+#: ../widgets/ConfigDelete.vala:48
 msgid "At least six months"
 msgstr "Minst seks måneder"
 
-#: ../widgets/ConfigDelete.vala:47
+#: ../widgets/ConfigDelete.vala:49
 msgid "At least a year"
 msgstr "Minst ett år"
 
-#: ../widgets/ConfigDelete.vala:48
+#: ../widgets/ConfigDelete.vala:50
 msgid "Forever"
 msgstr "For alltid"
 
-#: ../widgets/ConfigDelete.vala:95
+#: ../widgets/ConfigDelete.vala:97
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -1183,35 +1205,34 @@ msgstr[1] "Minst %d dager"
 
 #: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
-msgstr ""
+msgstr "I dag"
 
 #: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
-msgstr ""
+msgstr "I går"
 
 #: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
-msgstr ""
+msgstr "I morgen"
 
 #: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d dag fra nå"
+msgstr[1] "%d dager fra nå"
 
 #: ../widgets/ConfigLabelBackupDate.vala:83
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d dag siden"
+msgstr[1] "%d dager siden"
 
-#. Translators: This is used in phrases like "Most recent backup: None"
-#: ../widgets/ConfigLabelBackupDate.vala:95
-#: ../widgets/ConfigLabelBackupDate.vala:109
+#: ../widgets/ConfigLabelBackupDate.vala:94
+#: ../widgets/ConfigLabelBackupDate.vala:108
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
@@ -1221,7 +1242,7 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nei"
 
-#: ../widgets/ConfigLabelPolicy.vala:64
+#: ../widgets/ConfigLabelPolicy.vala:65
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
@@ -1229,7 +1250,7 @@ msgstr ""
 "Gamle sikkerhetskopier vil bli behold minst én måned, eller til det er lite "
 "tilgjengelig lagringsplass."
 
-#: ../widgets/ConfigLabelPolicy.vala:66
+#: ../widgets/ConfigLabelPolicy.vala:67
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
@@ -1237,7 +1258,7 @@ msgstr ""
 "Gamle sikkerhetskopier vil bli behold minst to måneder, eller til det er "
 "lite tilgjengelig lagringsplass."
 
-#: ../widgets/ConfigLabelPolicy.vala:68
+#: ../widgets/ConfigLabelPolicy.vala:69
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
@@ -1245,7 +1266,7 @@ msgstr ""
 "Gamle sikkerhetskopier vil bli behold minst tre måneder, eller til det er "
 "lite tilgjengelig lagringsplass."
 
-#: ../widgets/ConfigLabelPolicy.vala:70
+#: ../widgets/ConfigLabelPolicy.vala:71
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
@@ -1253,7 +1274,7 @@ msgstr ""
 "Gamle sikkerhetskopier vil bli behold minst seks måneder, eller til det er "
 "lite tilgjengelig lagringsplass."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:73
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1261,13 +1282,13 @@ msgstr ""
 "Gamle sikkerhetskopier vil bli behold minst ett år, eller til det er lite "
 "tilgjengelig lagringsplass."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:75
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Gamle sikkerhetskopier vil bli behold til det er lite tilgjengelig "
 "lagringsplass."
 
-#: ../widgets/ConfigLabelPolicy.vala:77
+#: ../widgets/ConfigLabelPolicy.vala:78
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1284,52 +1305,52 @@ msgstr[1] ""
 
 #: ../widgets/ConfigList.vala:179
 msgid "_Add"
-msgstr ""
+msgstr "_Legg til"
 
 #: ../widgets/ConfigList.vala:180
 msgid "Add"
-msgstr ""
+msgstr "Legg til"
 
 #: ../widgets/ConfigList.vala:188
 msgid "_Remove"
-msgstr ""
+msgstr "_Fjern"
 
 #: ../widgets/ConfigList.vala:189
 msgid "Remove"
-msgstr ""
+msgstr "Fjern"
 
 #: ../widgets/ConfigList.vala:275
 msgid "Choose folders"
 msgstr "Velg mapper"
 
-#: ../widgets/ConfigLocation.vala:118
+#: ../widgets/ConfigLocation.vala:117
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../widgets/ConfigLocation.vala:119
 msgid "Windows Share"
-msgstr ""
+msgstr "Delt mappe i Windows"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../widgets/ConfigLocation.vala:121
 msgid "FTP"
-msgstr ""
+msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../widgets/ConfigLocation.vala:123
 msgid "WebDAV"
-msgstr ""
+msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:127
+#: ../widgets/ConfigLocation.vala:126
 msgid "Custom Location"
-msgstr ""
+msgstr "Egendefinert plassering"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:133
+#: ../widgets/ConfigLocation.vala:132
 msgid "Local Folder"
 msgstr "Lokal mappe"
 
 #: ../widgets/ConfigLocationCustom.vala:31
 msgid "_URI"
-msgstr ""
+msgstr "_URI"
 
 #: ../widgets/ConfigLocationDAV.vala:31 ../widgets/ConfigLocationFTP.vala:32
 #: ../widgets/ConfigLocationSMB.vala:31 ../widgets/ConfigLocationSSH.vala:31
@@ -1338,7 +1359,7 @@ msgstr "_Server"
 
 #: ../widgets/ConfigLocationDAV.vala:38
 msgid "Use secure connection (_HTTPS)"
-msgstr ""
+msgstr "Bruke sikker tilkobling (_HTTPS)"
 
 #: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
 #: ../widgets/ConfigLocationSSH.vala:34
@@ -1354,7 +1375,7 @@ msgstr "_Mappe"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
-msgstr ""
+msgstr "_Velg mappe …"
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
@@ -1370,7 +1391,7 @@ msgstr ""
 
 #: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
-msgstr ""
+msgstr "_Domenenavn"
 
 #: ../widgets/ConfigPeriod.vala:36
 msgid "Daily"
@@ -1382,7 +1403,7 @@ msgstr "Ukentlig"
 
 #: ../widgets/ConfigPeriod.vala:38
 msgid "Every 2 weeks"
-msgstr ""
+msgstr "Hver andre uke"
 
 #: ../widgets/ConfigPeriod.vala:39
 msgid "Monthly"
