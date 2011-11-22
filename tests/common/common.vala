@@ -78,6 +78,17 @@ void parse_dir_list()
   
 }
 
+void mode_to_string()
+{
+  Environment.set_variable("DEJA_DUP_LANGUAGE", "en", true);
+  assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.INVALID) == "Preparing…");
+  assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.BACKUP) == "Backing up…");
+  assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.RESTORE) == "Restoring…");
+  assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.STATUS) == "Checking for backups…");
+  assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.LIST) == "Listing files…");
+  assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.FILEHISTORY) == "Preparing…");
+}
+
 int main(string[] args)
 {
   Test.init(ref args);
@@ -85,5 +96,6 @@ int main(string[] args)
   Test.add_func("/common/utils/get_day", get_day);
   Test.add_func("/common/utils/parse_dir", parse_dir);
   Test.add_func("/common/utils/parse_dir_list", parse_dir_list);
+  Test.add_func("/common/operation/mode_to_string", mode_to_string);
   return Test.run();
 }
