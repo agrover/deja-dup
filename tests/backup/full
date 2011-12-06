@@ -33,7 +33,7 @@ def max_inc():
   # Change date to maximum allowed incremental, confirm next is incremental
   base.last_date_change('%d days ago' % (max_allowed))
   base.backup_simple(encrypt=None)
-  assert base.last_type() == 'inc'
+  assert base.last_type() == 'inc', base.list_manifests()
 
 def max_full():
   base.setup()
@@ -41,25 +41,25 @@ def max_full():
   # Change date to maximum allowed incremental+1, confirm next is full
   base.last_date_change('%d days ago' % (max_allowed+1))
   base.backup_simple(encrypt=None)
-  assert base.last_type() == 'full'
+  assert base.last_type() == 'full', base.list_manifests()
 
 def half_inc():
   base.setup()
-  base.set_settings_value("delete-after", '20')
+  base.set_settings_value("delete-after", '80')
   base.backup_simple(backend='file', encrypt=False, includes=['data/simple'])
   # Change date to maximum allowed incremental, confirm next is inc
-  base.last_date_change('%d days ago' % (10))
+  base.last_date_change('%d days ago' % (40))
   base.backup_simple(encrypt=None)
-  assert base.last_type() == 'inc'
+  assert base.last_type() == 'inc', base.list_manifests()
 
 def half_full():
   base.setup()
-  base.set_settings_value("delete-after", '20')
+  base.set_settings_value("delete-after", '80')
   base.backup_simple(backend='file', encrypt=False, includes=['data/simple'])
   # Change date to maximum allowed incremental+1, confirm next is full
-  base.last_date_change('%d days ago' % (11))
+  base.last_date_change('%d days ago' % (41))
   base.backup_simple(encrypt=None)
-  assert base.last_type() == 'full'
+  assert base.last_type() == 'full', base.list_manifests()
 
 def period_inc():
   base.setup()
@@ -69,7 +69,7 @@ def period_inc():
   # Change date to maximum allowed incremental, confirm next is inc
   base.last_date_change('%d days ago' % (7*scale))
   base.backup_simple(encrypt=None)
-  assert base.last_type() == 'inc'
+  assert base.last_type() == 'inc', base.list_manifests()
 
 def period_full():
   base.setup()
@@ -79,7 +79,7 @@ def period_full():
   # Change date to maximum allowed incremental+1, confirm next is full
   base.last_date_change('%d days ago' % ((7*scale)+1))
   base.backup_simple(encrypt=None)
-  assert base.last_type() == 'full'
+  assert base.last_type() == 'full', base.list_manifests()
 
 base.run(max_inc)
 base.run(max_full)
