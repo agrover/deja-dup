@@ -25,12 +25,12 @@ import base
 import ldtp
 
 BASEPATH = '/tmp/deja-dup-test/'
-DATE = subprocess.Popen(['date', '-d', '08/01/09 21:14:34', '+%x %X'], stdout=subprocess.PIPE).communicate()[0].strip()
 
 def test():
   restoredir = base.get_temp_name('restore')
   files = [BASEPATH+'one', BASEPATH+'top/one']
   base.setup()
+  DATE = subprocess.Popen(['date', '-d', '08/01/09 21:14:34', '+%x %X'], stdout=subprocess.PIPE).communicate()[0].strip()
   os.system('rm -rf %s' % BASEPATH)
   base.restore_specific(files, restoredir, DATE, backend='file', dest=(sys.path[0]+'/vols/simple'), encrypt=None)
   assert base.file_equals(BASEPATH+'one', 'one1\n')
