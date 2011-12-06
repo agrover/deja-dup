@@ -75,21 +75,18 @@ $(builddir)/data/symlink.tar.gz: symtar
 # This is for 'interactive' running of all the tests.  See 'check' target for
 # a target more suitable for automated testing.
 test: prep
-	@export OLD_DISPLAY=$$DISPLAY ; \
-	export DISPLAY= ; \
 	rm -f test.log ; \
 	for t in $(AUTO_TESTS); do \
 		echo -n "Testing $$t..."; \
-		if $(srcdir)/wrap $(srcdir)/$$t >>test.log 2>&1; then \
+		if $(srcdir)/$$t >>test.log 2>&1; then \
 			echo -e " \e[32mPASSED\e[0m"; \
 		else \
 			echo -e " \e[31mFAILED\e[0m"; \
 		fi; \
 	done; \
-	export DISPLAY=$$OLD_DISPLAY ; \
 	for t in $(MANUAL_TESTS); do \
 		echo -n "Testing $$t..."; \
-		if $(srcdir)/wrap $(srcdir)/$$t >>test.log 2>&1; then \
+		if $(srcdir)/$$t >>test.log 2>&1; then \
 			echo -e " \e[32mPASSED\e[0m"; \
 		else \
 			echo -e " \e[31mFAILED\e[0m"; \
