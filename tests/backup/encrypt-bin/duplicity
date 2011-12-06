@@ -30,22 +30,22 @@ import subprocess
 os.environ['PATH'] = os.environ['PATH'].split(':', 1)[-1]
 
 logfd = None
-read, write = os.pipe()
 
 for i in xrange(len(sys.argv)):
   split = sys.argv[i].split('=', 1)
   if len(split) > 1 and split[0] == "--log-fd":
     logfd = int(split[1])
-    sys.argv[i] = "--log-fd=%d" % write
     break
 
-p1 = subprocess.Popen(['duplicity'] + sys.argv[1:])
-p2 = None
+origcmd = "duplicity %s" % (" ".join(["'%s'" % x for x in sys.argv[1:]]))
+
 if logfd is not None:
-  p2 = subprocess.Popen(["sed", "s/Extracting backup chains from list of files:/Translation/g"], stdin=read, stdout=logfd)
-  os.close(read)
-  os.close(write)
-  os.close(logfd)
+  dupcmd = "(%s >/dev/null 2>&1) %d>&1" % (origcmd, logfd)
+  sedcmd = "sed 's/Extracting backup chains from list of files:/Translation/g'"
+  cmd = "%s | %s" % (dupcmd, sedcmd)
+  print cmd, logfd
+  p1 = subprocess.Popen(cmd, shell=True, executable="/bin/bash", stdout=logfd)
+else:
+  p1 = subprocess.Popen(origcmd, executable="/bin/bash", shell=True)
+
 p1.wait()
-if p2 is not None:
-  p2.kill()
