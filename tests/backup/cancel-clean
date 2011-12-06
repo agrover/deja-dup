@@ -39,6 +39,7 @@ def test():
   wait_for_volume(destdir)
   ldtp.click('frmBackUp', 'btnCancel')
   ldtp.waittillguinotexist('frmBackUp')
+  ldtp.wait(2) # wait a little longer because UI hides before duplicity finishes
   assert os.listdir(destdir) == [], os.listdir(destdir)
 
 base.run(test)
