@@ -121,7 +121,7 @@ def setup(root_prompt = False):
   #os.system('pkill -f ldtpd\\.main; sleep 1')
   #ldtp.getwindowlist()/reload(ldtp)
 
-  process = subprocess.Popen(['/usr/lib/d-conf/dconf-service'], stdout=subprocess.PIPE)
+  process = subprocess.Popen(['/usr/lib/dconf/dconf-service'], stdout=subprocess.PIPE)
   cleanup_pids += [process.pid]
 
   environ['PYTHONPATH'] = extra_pythonpaths + (environ['PYTHONPATH'] if 'PYTHONPATH' in environ else '')
