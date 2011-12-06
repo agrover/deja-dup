@@ -79,7 +79,10 @@ def setup(root_prompt = False):
   environ['LANG'] = 'C'
   environ['DEJA_DUP_TESTING'] = '1'
 
-  extra_paths = ':'.join(['%s/../%s' % (builddir, x) for x in ['deja-dup', 'preferences', 'monitor']]) + ':'
+  if 'DEJA_DUP_TEST_SYSTEM' in environ and environ['DEJA_DUP_TEST_SYSTEM'] == '1':
+    extra_paths = ''
+  else:
+    extra_paths = ':'.join(['%s/../%s' % (builddir, x) for x in ['deja-dup', 'preferences', 'monitor']]) + ':'
   extra_pythonpaths = ''
   
   version = None
