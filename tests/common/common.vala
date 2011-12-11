@@ -39,38 +39,29 @@ void get_day()
   Environment.unset_variable("DEJA_DUP_TESTING");
 }
 
+void parse_one_dir (string to_parse, string? result)
+{
+  if (result != null)
+    assert(DejaDup.parse_dir(to_parse).equal(File.new_for_path(result)));
+}
+
 void parse_dir()
 {
-  assert(DejaDup.parse_dir("$HOME").equal(
-         File.new_for_path(Environment.get_home_dir())));
-  assert(DejaDup.parse_dir("$TRASH").equal(
-         File.new_for_path(Path.build_filename(Environment.get_user_data_dir(), "Trash"))));
-  assert(DejaDup.parse_dir("$DESKTOP").equal(
-         File.new_for_path(Environment.get_user_special_dir(UserDirectory.DESKTOP))));
-  assert(DejaDup.parse_dir("$DOCUMENTS").equal(
-         File.new_for_path(Environment.get_user_special_dir(UserDirectory.DOCUMENTS))));
-  assert(DejaDup.parse_dir("$DOWNLOAD").equal(
-         File.new_for_path(Environment.get_user_special_dir(UserDirectory.DOWNLOAD))));
-  assert(DejaDup.parse_dir("$MUSIC").equal(
-         File.new_for_path(Environment.get_user_special_dir(UserDirectory.MUSIC))));
-  assert(DejaDup.parse_dir("$PICTURES").equal(
-         File.new_for_path(Environment.get_user_special_dir(UserDirectory.PICTURES))));
-  assert(DejaDup.parse_dir("$PUBLIC_SHARE").equal(
-         File.new_for_path(Environment.get_user_special_dir(UserDirectory.PUBLIC_SHARE))));
-  assert(DejaDup.parse_dir("$TEMPLATES").equal(
-         File.new_for_path(Environment.get_user_special_dir(UserDirectory.TEMPLATES))));
-  assert(DejaDup.parse_dir("$VIDEOS").equal(
-         File.new_for_path(Environment.get_user_special_dir(UserDirectory.VIDEOS))));
-  assert(DejaDup.parse_dir("VIDEOS").equal(
-         File.new_for_path(Path.build_filename(Environment.get_home_dir(), "VIDEOS"))));
-  assert(DejaDup.parse_dir("/VIDEOS").equal(
-         File.new_for_path("/VIDEOS")));
-  assert(DejaDup.parse_dir("file:VIDEOS").equal(
-         File.parse_name("file:VIDEOS")));
-  assert(DejaDup.parse_dir("file:///VIDEOS").equal(
-         File.new_for_path("/VIDEOS")));
-  assert(DejaDup.parse_dir("").equal(
-         File.new_for_path(Environment.get_home_dir())));
+  parse_one_dir("", Environment.get_home_dir());
+  parse_one_dir("$HOME", Environment.get_home_dir());
+  parse_one_dir("$TRASH", Path.build_filename(Environment.get_user_data_dir(), "Trash"));
+  parse_one_dir("$DESKTOP", Environment.get_user_special_dir(UserDirectory.DESKTOP));
+  parse_one_dir("$DOCUMENTS", Environment.get_user_special_dir(UserDirectory.DOCUMENTS));
+  parse_one_dir("$DOWNLOAD", Environment.get_user_special_dir(UserDirectory.DOWNLOAD));
+  parse_one_dir("$MUSIC", Environment.get_user_special_dir(UserDirectory.MUSIC));
+  parse_one_dir("$PICTURES", Environment.get_user_special_dir(UserDirectory.PICTURES));
+  parse_one_dir("$PUBLIC_SHARE", Environment.get_user_special_dir(UserDirectory.PUBLIC_SHARE));
+  parse_one_dir("$TEMPLATES", Environment.get_user_special_dir(UserDirectory.TEMPLATES));
+  parse_one_dir("$VIDEOS", Environment.get_user_special_dir(UserDirectory.VIDEOS));
+  parse_one_dir("VIDEOS", Path.build_filename(Environment.get_home_dir(), "VIDEOS"));
+  parse_one_dir("/VIDEOS", "/VIDEOS");
+  parse_one_dir("file:///VIDEOS", "/VIDEOS");
+  assert(DejaDup.parse_dir("file:VIDEOS").equal(File.parse_name("file:VIDEOS")));
 }
 
 void parse_dir_list()
