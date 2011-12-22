@@ -31,9 +31,6 @@ libwidgets_la_LIBADD = \
 	@INTLLIBS@ \
 	$(top_builddir)/common/libcommon.la
 
-noinst_HEADERS = \
-	widgets.h
-
 libwidgets_la_VALASOURCES = \
 	ConfigBool.vala \
 	ConfigChoice.vala \

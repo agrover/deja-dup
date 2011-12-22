@@ -29,7 +29,6 @@ libcommon_la_LIBADD = \
 	@INTLLIBS@
 
 noinst_HEADERS = \
-	common.h \
 	chacks.h \
 	uriutils.h
 
