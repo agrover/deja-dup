@@ -17,7 +17,7 @@
 AC_DEFUN([DEJA_PROG_VALAC],
 [AC_PATH_PROGS([VALAC], [valac-0.14 valac], [])
  AS_IF([test -z "$VALAC"],
-   [AC_MSG_WARN([No Vala compiler found.  You will not be able to compile .vala source files.])],
+   [AC_MSG_ERROR([No Vala compiler found.])],
    [AS_IF([test -n "$1"],
       [AC_MSG_CHECKING([$VALAC is at least version $1])
        am__vala_version=`$VALAC --version | sed 's/Vala  *//'`
