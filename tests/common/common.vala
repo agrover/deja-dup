@@ -71,7 +71,6 @@ void parse_dir_list()
 
 void mode_to_string()
 {
-  Environment.set_variable("DEJA_DUP_LANGUAGE", "en", true);
   assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.INVALID) == "Preparing…");
   assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.BACKUP) == "Backing up…");
   assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.RESTORE) == "Restoring…");
@@ -80,13 +79,170 @@ void mode_to_string()
   assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.FILEHISTORY) == "Preparing…");
 }
 
+void backup_setup()
+{
+  Environment.set_variable("PATH", "./mock:" + Environment.get_variable("PATH"), true);
+
+  try {
+    string scriptname;
+    var scriptfd = FileUtils.open_tmp("deja-dup-test-XXXXXX", out scriptname);
+    Posix.close(scriptfd);
+    Environment.set_variable("DEJA_DUP_TEST_MOCKSCRIPT", scriptname, true);
+  }
+  catch (Error e) {
+    assert_not_reached();
+  }
+
+  var settings = DejaDup.get_settings();
+  settings.set_string(DejaDup.BACKEND_KEY, "file");
+  settings = DejaDup.get_settings(DejaDup.FILE_ROOT);
+  settings.set_string(DejaDup.FILE_PATH_KEY, "/tmp/not/a/thing");
+}
+
+void backup_teardown()
+{
+  var path = Environment.get_variable("PATH");
+  if (path.has_prefix("./mock:")) {
+    path = path.substring(7);
+    Environment.set_variable("PATH", path, true);
+  }
+
+  var file = File.new_for_path(Environment.get_variable("DEJA_DUP_TEST_MOCKSCRIPT"));
+  if (file.query_exists(null)) {
+    try {
+      file.delete(null);
+    }
+    catch (Error e) {
+      assert_not_reached();
+    }
+    // Fail the test, something went wrong
+    assert_not_reached();
+  }
+
+  file = File.new_for_path("/tmp/not/a/thing");
+  try {
+    file.delete(null);
+  }
+  catch (Error e) {
+    assert_not_reached();
+  }
+
+  Environment.unset_variable("DEJA_DUP_TEST_MOCKSCRIPT");
+}
+
+void set_script(string contents)
+{
+  try {
+    var script = Environment.get_variable("DEJA_DUP_TEST_MOCKSCRIPT");
+    FileUtils.set_contents(script, contents);
+  }
+  catch (Error e) {
+    assert_not_reached();
+  }
+}
+
+void run_basic_backup(bool success = true, bool cancelled = false, string? detail = null)
+{
+  var loop = new MainLoop(null);
+  var op = new DejaDup.OperationBackup();
+  op.done.connect((op, s, c) => {
+    assert(success == s);
+    assert(cancelled == c);
+    loop.quit();
+  });
+
+  op.raise_error.connect((str, detail) => {
+    Test.message("Error: %s, %s", str, detail);
+  });
+  op.action_desc_changed.connect((action) => {
+  });
+  op.action_file_changed.connect((file, actual) => {
+  });
+  op.progress.connect((percent) => {
+  });
+  op.passphrase_required.connect(() => {
+    Test.message("Passphrase required");
+  });
+  op.question.connect((title, msg) => {
+    Test.message("Question asked: %s, %s", title, msg);
+  });
+  op.is_full.connect((isfull) => {
+    Test.message("Is full? %d", (int)isfull);
+  });
+
+  op.start();
+  loop.run();
+}
+
+enum Mode {
+  NONE,
+  DRY,
+  BACKUP,
+}
+
+string default_args(Mode mode = Mode.NONE, bool encrypted = false, string extra = "")
+{
+  string source_str = "";
+  if (mode == Mode.DRY || mode == Mode.BACKUP)
+    source_str = " --volsize=50 /";
+
+  string dry_str = "";
+  if (mode == Mode.DRY)
+    dry_str = " --dry-run";
+
+  string enc_str = "";
+  if (!encrypted)
+    enc_str = " --no-encryption";
+
+  return "'--exclude=/tmp/not/a/thing' '--exclude=/home/ME/Downloads' '--exclude=/home/ME/.local/share/Trash' '--exclude=/home/ME/.xsession-errors' '--exclude=/home/ME/.thumbnails' '--exclude=/home/ME/.Private' '--exclude=/home/ME/.gvfs' '--exclude=/home/ME/.adobe/Flash_Player/AssetCache' '--exclude=/home/ME/.cache/deja-dup' '--exclude=/home/ME/.cache' '--include=/home/ME' '--exclude=/home/.ecryptfs/ME/.Private' '--exclude=/sys' '--exclude=/proc' '--exclude=/tmp' '--exclude=**'%s%s '--gio'%s 'file:///tmp/not/a/thing'%s '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=/home/ME/.cache/deja-dup' '--log-fd=?'".printf(extra, dry_str, source_str, enc_str);
+}
+
+void bad_hostname()
+{
+  set_script("""
+ARGS: collection-status %s
+RETURN: 0
+
+INFO 3
+
+=== deja-dup ===
+ARGS: full %s
+RETURN: 3
+
+ERROR 3 new old
+
+=== deja-dup ===
+ARGS: full %s
+RETURN: 0
+
+=== deja-dup ===
+ARGS: full %s
+RETURN: 0
+
+""".printf(default_args(),
+           default_args(Mode.DRY),
+           default_args(Mode.DRY, false, " --allow-source-mismatch"),
+           default_args(Mode.BACKUP, false, " --allow-source-mismatch")));
+  run_basic_backup();
+}
+
 int main(string[] args)
 {
   Test.init(ref args);
-  Test.add_func("/common/utils/testing_mode", testing_mode);
-  Test.add_func("/common/utils/get_day", get_day);
-  Test.add_func("/common/utils/parse_dir", parse_dir);
-  Test.add_func("/common/utils/parse_dir_list", parse_dir_list);
-  Test.add_func("/common/operation/mode_to_string", mode_to_string);
+
+  Environment.set_variable("DEJA_DUP_LANGUAGE", "en", true);
+  Environment.set_variable("GSETTINGS_BACKEND", "memory", true);
+  Test.bug_base("https://launchpad.net/bugs/%s");
+
+  Test.add_func("/unit/utils/testing_mode", testing_mode);
+  Test.add_func("/unit/utils/get_day", get_day);
+  Test.add_func("/unit/utils/parse_dir", parse_dir);
+  Test.add_func("/unit/utils/parse_dir_list", parse_dir_list);
+  Test.add_func("/unit/operation/mode_to_string", mode_to_string);
+
+  var backup = new TestSuite("backup");
+  backup.add(new TestCase("bad_hostname", backup_setup, bad_hostname, backup_teardown));
+  TestSuite.get_root().add_suite(backup);
+
   return Test.run();
 }
