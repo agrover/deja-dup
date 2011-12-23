@@ -68,8 +68,8 @@ public abstract class AssistantOperation : Assistant
   protected Gtk.Widget progress_page {get; private set;}
   
   protected Gtk.Label summary_label;
-  Gtk.Widget error_widget;
-  Gtk.TextView error_text_view;
+  protected Gtk.Widget detail_widget;
+  Gtk.TextView detail_text_view;
   protected Gtk.Widget summary_page {get; private set;}
   
   protected Gdk.Pixbuf op_icon {get; private set;}
@@ -266,22 +266,24 @@ public abstract class AssistantOperation : Assistant
 
     return page;
   }
-  
+
+  void show_detail(string detail)
+  {
+    page_box.set_size_request(300, 200);
+    detail_widget.no_show_all = false;
+    detail_widget.show_all();
+    detail_text_view.buffer.set_text(detail, -1);
+  }
+
   public virtual void show_error(string error, string? detail)
   {
     error_occurred = true;
     
     summary_label.label = error;
-    summary_label.wrap = true;
     summary_label.selectable = true;
-    summary_label.max_width_chars = 25;
     
-    if (detail != null) {
-      page_box.set_size_request(300, 200);
-      error_widget.no_show_all = false;
-      error_widget.show_all();
-      error_text_view.buffer.set_text(detail, -1);
-    }
+    if (detail != null)
+      show_detail(detail);
     
     go_to_page(summary_page);
     set_header_icon(Gtk.Stock.DIALOG_ERROR);
@@ -408,23 +410,25 @@ public abstract class AssistantOperation : Assistant
   {
     summary_label = new Gtk.Label("");
     summary_label.set("xalign", 0.0f);
+    summary_label.wrap = true;
+    summary_label.max_width_chars = 25;
     
-    error_text_view = new Gtk.TextView();
-    error_text_view.editable = false;
-    error_text_view.wrap_mode = Gtk.WrapMode.WORD;
-    error_text_view.height_request = 150;
+    detail_text_view = new Gtk.TextView();
+    detail_text_view.editable = false;
+    detail_text_view.wrap_mode = Gtk.WrapMode.WORD;
+    detail_text_view.height_request = 150;
 
     var scroll = new Gtk.ScrolledWindow(null, null);
-    scroll.add(error_text_view);
+    scroll.add(detail_text_view);
     scroll.no_show_all = true; // only will be shown if an error occurs
-    error_widget = scroll;
+    detail_widget = scroll;
     
     var page = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
     page.set("child", summary_label,
-             "child", error_widget,
+             "child", detail_widget,
              "border-width", 12);
     page.child_set(summary_label, "expand", false);
-    page.child_set(error_widget, "expand", true);
+    page.child_set(detail_widget, "expand", true);
     
     return page;
   }
@@ -472,10 +476,10 @@ public abstract class AssistantOperation : Assistant
     summary_page = page;
   }
   
-  protected virtual void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
+  protected virtual void apply_finished(DejaDup.Operation op, bool success, bool cancelled, string? detail)
   {
     if (status_icon != null) {
-      status_icon.done(success, cancelled);
+      status_icon.done(success, cancelled, detail);
       status_icon = null;
     }
     this.op = null;
@@ -489,6 +493,20 @@ public abstract class AssistantOperation : Assistant
     else {
       if (success) {
         succeeded = true;
+
+        if (detail != null) {
+          // Expect one paragraph followed by a blank line.  The first paragraph
+          // is an explanation before the full detail content.  So split it out
+          // into a proper label to look nice.
+          var halves = detail.split("\n\n", 2);
+          if (halves.length == 1) // no full detail content
+            summary_label.label = detail;
+          else if (halves.length == 2) {
+            summary_label.label = halves[0];
+            show_detail(halves[1]);
+          }
+        }
+
         go_to_page(summary_page);
       }
       else // show error
@@ -579,7 +597,7 @@ public abstract class AssistantOperation : Assistant
   {
     hide();
     if (status_icon != null) {
-      status_icon.done(false, true);
+      status_icon.done(false, true, null);
       status_icon = null; // hide immediately to seem responsive
     }
   }

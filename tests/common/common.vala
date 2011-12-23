@@ -145,9 +145,11 @@ void run_basic_backup(bool success = true, bool cancelled = false, string? detai
 {
   var loop = new MainLoop(null);
   var op = new DejaDup.OperationBackup();
-  op.done.connect((op, s, c) => {
+  op.done.connect((op, s, c, d) => {
+    Test.message("Done: %d, %d, %s", (int)s, (int)c, d);
     assert(success == s);
     assert(cancelled == c);
+    assert(detail == d);
     loop.quit();
   });
 
@@ -226,6 +228,45 @@ RETURN: 0
   run_basic_backup();
 }
 
+void read_error()
+{
+  Test.bug("907846");
+  var user = Environment.get_user_name();
+  set_script("""
+ARGS: collection-status %s
+RETURN: 0
+
+INFO 3
+
+=== deja-dup ===
+ARGS: full %s
+RETURN: 0
+
+WARNING 10 '/blarg'
+
+WARNING 10 '/home/%s/1'
+
+WARNING 10 '/home/%s/2'
+
+=== deja-dup ===
+ARGS: full %s
+RETURN: 0
+
+WARNING 10 '/blarg'
+
+WARNING 10 '/home/%s/1'
+
+WARNING 10 '/home/%s/2'
+
+""".printf(default_args(),
+           default_args(Mode.DRY), user, user,
+           default_args(Mode.BACKUP), user, user));
+  run_basic_backup(true, false, """Could not back up the following files.  Please make sure you are able to open them.
+
+/home/%s/1
+/home/%s/2""".printf(user, user));
+}
+
 int main(string[] args)
 {
   Test.init(ref args);
@@ -242,6 +283,7 @@ int main(string[] args)
 
   var backup = new TestSuite("backup");
   backup.add(new TestCase("bad_hostname", backup_setup, bad_hostname, backup_teardown));
+  backup.add(new TestCase("read_error", backup_setup, read_error, backup_teardown));
   TestSuite.get_root().add_suite(backup);
 
   return Test.run();
