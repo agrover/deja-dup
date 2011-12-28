@@ -620,6 +620,7 @@ internal class Duplicity : Object
         
         // Else, we probably started cleaning up after a cancel.  Just continue
         // that cancels
+        success = false;
         cancelled = true;
         break;
       

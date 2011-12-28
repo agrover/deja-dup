@@ -268,7 +268,7 @@ ARGS: cleanup %s
            default_args(Mode.DRY),
            default_args(Mode.BACKUP),
            default_args(Mode.CLEANUP)));
-  run_backup(true, true, null, (op) => {
+  run_backup(false, true, null, (op) => {
     op.cancel();
   });
 }
