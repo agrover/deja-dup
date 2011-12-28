@@ -44,9 +44,10 @@
 # any caller can know if we got passed unexpected arguments by testing for the
 # existence of the file.
 
-import sys, os, shlex, getpass
+import sys, os, shlex, getpass, time
 
 if not os.path.exists(os.environ['DEJA_DUP_TEST_MOCKSCRIPT']):
+  print >> logfd, "TESTFAIL: no mockscript"
   sys.exit(-1)
 
 lines = []
@@ -63,8 +64,19 @@ def skip_whitespace(lineno):
 
 curline = skip_whitespace(0)
 
-expected_args = shlex.split(lines[curline])[1:]
-rv = int(lines[curline+1].split()[1])
+rv = 0
+expected_args = []
+delay = 0
+
+while len(lines) > curline and lines[curline].strip():
+  tokens = lines[curline].split()
+  if tokens[0] == 'ARGS:':
+    expected_args = shlex.split(lines[curline])[1:]
+  elif tokens[0] == 'RETURN:':
+    rv = int(tokens[1])
+  elif tokens[0] == 'DELAY:':
+    delay = int(tokens[1])
+  curline += 1
 
 # Where should we spit our messages to?
 logfd = None
@@ -77,10 +89,10 @@ for i in xrange(len(sys.argv)):
     sys.argv[i] = sys.argv[i].replace("/%s" % getpass.getuser(), "/ME")
 
 if expected_args != sys.argv[1:]:
-  print >> logfd, "TESTFAIL:\n%s\nvs\n%s" % (expected_args, sys.argv[1:])
+  print >> logfd, "TESTFAIL: expected\n%s\nvs\n%s" % (expected_args, sys.argv[1:])
   sys.exit(-1)
 
-curline = skip_whitespace(curline+2)
+curline = skip_whitespace(curline)
 
 while len(lines) > curline and lines[curline] != "=== deja-dup ===\n":
   print >> logfd, lines[curline],
@@ -93,5 +105,7 @@ else:
   lines = lines[curline+1:]
   with open(os.environ['DEJA_DUP_TEST_MOCKSCRIPT'], 'w') as f:
     f.writelines(lines)
+
+time.sleep(delay)
 
 sys.exit(rv)
