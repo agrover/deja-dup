@@ -116,7 +116,7 @@ void backup_teardown()
       assert_not_reached();
     }
     // Fail the test, something went wrong
-    assert_not_reached();
+    warning("Mockscript file still exists");
   }
 
   file = File.new_for_path("/tmp/not/a/thing");
@@ -141,15 +141,20 @@ void set_script(string contents)
   }
 }
 
-void run_basic_backup(bool success = true, bool cancelled = false, string? detail = null)
+delegate void OpCallback (DejaDup.Operation op);
+
+void run_backup(bool success = true, bool cancelled = false, string? detail = null, OpCallback? cb = null)
 {
   var loop = new MainLoop(null);
   var op = new DejaDup.OperationBackup();
   op.done.connect((op, s, c, d) => {
     Test.message("Done: %d, %d, %s", (int)s, (int)c, d);
-    assert(success == s);
-    assert(cancelled == c);
-    assert(detail == d);
+    if (success != s)
+      warning("Success didn't match; expected %d, got %d", (int) success, (int) s);
+    if (cancelled != c)
+      warning("Cancel didn't match; expected %d, got %d", (int) cancelled, (int) c);
+    if (detail != d)
+      warning("Detail didn't match; expected %s, got %s", detail, d);
     loop.quit();
   });
 
@@ -173,6 +178,12 @@ void run_basic_backup(bool success = true, bool cancelled = false, string? detai
   });
 
   op.start();
+  if (cb != null) {
+    Timeout.add_seconds(3, () => {
+      cb(op);
+      return false;
+    });
+  }
   loop.run();
 }
 
@@ -180,10 +191,14 @@ enum Mode {
   NONE,
   DRY,
   BACKUP,
+  CLEANUP,
 }
 
 string default_args(Mode mode = Mode.NONE, bool encrypted = false, string extra = "")
 {
+  if (mode == Mode.CLEANUP)
+    return "'--force' 'file:///tmp/not/a/thing' '--gio' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=/home/ME/.cache/deja-dup' '--log-fd=?'";
+
   string source_str = "";
   if (mode == Mode.DRY || mode == Mode.BACKUP)
     source_str = " --volsize=50 /";
@@ -203,7 +218,6 @@ void bad_hostname()
 {
   set_script("""
 ARGS: collection-status %s
-RETURN: 0
 
 INFO 3
 
@@ -215,17 +229,71 @@ ERROR 3 new old
 
 === deja-dup ===
 ARGS: full %s
-RETURN: 0
 
 === deja-dup ===
 ARGS: full %s
-RETURN: 0
 
 """.printf(default_args(),
            default_args(Mode.DRY),
            default_args(Mode.DRY, false, " --allow-source-mismatch"),
            default_args(Mode.BACKUP, false, " --allow-source-mismatch")));
-  run_basic_backup();
+  run_backup();
+}
+
+void cancel_noop()
+{
+  set_script("""
+ARGS: collection-status %s
+DELAY: 10
+
+""".printf(default_args()));
+  run_backup(false, true, null, (op) => {
+    op.cancel();
+  });
+}
+
+void cancel()
+{
+  set_script("""
+ARGS: collection-status %s
+
+=== deja-dup ===
+ARGS: %s
+
+=== deja-dup ===
+ARGS: %s
+DELAY: 10
+
+=== deja-dup ===
+ARGS: cleanup %s
+
+""".printf(default_args(),
+           default_args(Mode.DRY),
+           default_args(Mode.BACKUP),
+           default_args(Mode.CLEANUP)));
+  run_backup(false, true, null, (op) => {
+    op.cancel();
+  });
+}
+
+void stop()
+{
+  set_script("""
+ARGS: collection-status %s
+
+=== deja-dup ===
+ARGS: %s
+
+=== deja-dup ===
+ARGS: %s
+DELAY: 10
+
+""".printf(default_args(),
+           default_args(Mode.DRY),
+           default_args(Mode.BACKUP)));
+  run_backup(true, true, null, (op) => {
+    op.stop();
+  });
 }
 
 void read_error()
@@ -234,13 +302,11 @@ void read_error()
   var user = Environment.get_user_name();
   set_script("""
 ARGS: collection-status %s
-RETURN: 0
 
 INFO 3
 
 === deja-dup ===
 ARGS: full %s
-RETURN: 0
 
 WARNING 10 '/blarg'
 
@@ -250,7 +316,6 @@ WARNING 10 '/home/%s/2'
 
 === deja-dup ===
 ARGS: full %s
-RETURN: 0
 
 WARNING 10 '/blarg'
 
@@ -261,7 +326,7 @@ WARNING 10 '/home/%s/2'
 """.printf(default_args(),
            default_args(Mode.DRY), user, user,
            default_args(Mode.BACKUP), user, user));
-  run_basic_backup(true, false, """Could not back up the following files.  Please make sure you are able to open them.
+  run_backup(true, false, """Could not back up the following files.  Please make sure you are able to open them.
 
 /home/%s/1
 /home/%s/2""".printf(user, user));
@@ -283,6 +348,9 @@ int main(string[] args)
 
   var backup = new TestSuite("backup");
   backup.add(new TestCase("bad_hostname", backup_setup, bad_hostname, backup_teardown));
+  backup.add(new TestCase("cancel_noop", backup_setup, cancel_noop, backup_teardown));
+  backup.add(new TestCase("cancel", backup_setup, cancel, backup_teardown));
+  backup.add(new TestCase("stop", backup_setup, stop, backup_teardown));
   backup.add(new TestCase("read_error", backup_setup, read_error, backup_teardown));
   TestSuite.get_root().add_suite(backup);
 
