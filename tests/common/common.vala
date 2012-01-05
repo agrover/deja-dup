@@ -81,17 +81,15 @@ void mode_to_string()
 
 void backup_setup()
 {
-  Environment.set_variable("PATH", "./mock:" + Environment.get_variable("PATH"), true);
+  var dir = Environment.get_variable("DEJA_DUP_TEST_HOME");
 
-  try {
-    string scriptname;
-    var scriptfd = FileUtils.open_tmp("deja-dup-test-XXXXXX", out scriptname);
-    Posix.close(scriptfd);
-    Environment.set_variable("DEJA_DUP_TEST_MOCKSCRIPT", scriptname, true);
-  }
-  catch (Error e) {
-    assert_not_reached();
-  }
+  var cachedir = Path.build_filename(dir, "cache");
+  DirUtils.create_with_parents(Path.build_filename(cachedir, "deja-dup"), 0700);
+
+  Environment.set_variable("DEJA_DUP_TEST_HOME", dir, true);
+  Environment.set_variable("DEJA_DUP_TEST_MOCKSCRIPT", Path.build_filename(dir, "mockscript"), true);
+  Environment.set_variable("XDG_CACHE_HOME", cachedir, true);
+  Environment.set_variable("PATH", "./mock:" + Environment.get_variable("PATH"), true);
 
   var settings = DejaDup.get_settings();
   settings.set_string(DejaDup.BACKEND_KEY, "file");
@@ -109,12 +107,6 @@ void backup_teardown()
 
   var file = File.new_for_path(Environment.get_variable("DEJA_DUP_TEST_MOCKSCRIPT"));
   if (file.query_exists(null)) {
-    try {
-      file.delete(null);
-    }
-    catch (Error e) {
-      assert_not_reached();
-    }
     // Fail the test, something went wrong
     warning("Mockscript file still exists");
   }
@@ -127,10 +119,14 @@ void backup_teardown()
     assert_not_reached();
   }
 
+  if (Posix.system("rm -r %s".printf(Environment.get_variable("DEJA_DUP_TEST_HOME"))) != 0)
+    warning("Could not clean TEST_HOME %s", Environment.get_variable("DEJA_DUP_TEST_HOME"));
+
   Environment.unset_variable("DEJA_DUP_TEST_MOCKSCRIPT");
+  Environment.unset_variable("XDG_CACHE_HOME");
 }
 
-void set_script(string contents)
+public void set_script(string contents)
 {
   try {
     var script = Environment.get_variable("DEJA_DUP_TEST_MOCKSCRIPT");
@@ -141,60 +137,19 @@ void set_script(string contents)
   }
 }
 
-delegate void OpCallback (DejaDup.Operation op);
-
-void run_backup(bool success = true, bool cancelled = false, string? detail = null, OpCallback? cb = null)
-{
-  var loop = new MainLoop(null);
-  var op = new DejaDup.OperationBackup();
-  op.done.connect((op, s, c) => {
-    if (success != s)
-      warning("Success didn't match; expected %d, got %d", (int) success, (int) s);
-    if (cancelled != c)
-      warning("Cancel didn't match; expected %d, got %d", (int) cancelled, (int) c);
-    loop.quit();
-  });
-
-  op.raise_error.connect((str, detail) => {
-    Test.message("Error: %s, %s", str, detail);
-  });
-  op.action_desc_changed.connect((action) => {
-  });
-  op.action_file_changed.connect((file, actual) => {
-  });
-  op.progress.connect((percent) => {
-  });
-  op.passphrase_required.connect(() => {
-    Test.message("Passphrase required");
-  });
-  op.question.connect((title, msg) => {
-    Test.message("Question asked: %s, %s", title, msg);
-  });
-  op.is_full.connect((isfull) => {
-    Test.message("Is full? %d", (int)isfull);
-  });
-
-  op.start();
-  if (cb != null) {
-    Timeout.add_seconds(3, () => {
-      cb(op);
-      return false;
-    });
-  }
-  loop.run();
-}
-
-enum Mode {
+public enum Mode {
   NONE,
   DRY,
   BACKUP,
   CLEANUP,
 }
 
-string default_args(Mode mode = Mode.NONE, bool encrypted = false, string extra = "")
+public string default_args(Mode mode = Mode.NONE, bool encrypted = false, string extra = "")
 {
+  var cachedir = Environment.get_variable("XDG_CACHE_HOME");
+
   if (mode == Mode.CLEANUP)
-    return "'--force' 'file:///tmp/not/a/thing' '--gio' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=/home/ME/.cache/deja-dup' '--log-fd=?'";
+    return "'--force' 'file:///tmp/not/a/thing' '--gio' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir);
 
   string source_str = "";
   if (mode == Mode.DRY || mode == Mode.BACKUP)
@@ -208,7 +163,86 @@ string default_args(Mode mode = Mode.NONE, bool encrypted = false, string extra 
   if (!encrypted)
     enc_str = " --no-encryption";
 
-  return "'--exclude=/tmp/not/a/thing' '--exclude=/home/ME/Downloads' '--exclude=/home/ME/.local/share/Trash' '--exclude=/home/ME/.xsession-errors' '--exclude=/home/ME/.thumbnails' '--exclude=/home/ME/.Private' '--exclude=/home/ME/.gvfs' '--exclude=/home/ME/.adobe/Flash_Player/AssetCache' '--exclude=/home/ME/.cache/deja-dup' '--exclude=/home/ME/.cache' '--include=/home/ME' '--exclude=/home/.ecryptfs/ME/.Private' '--exclude=/sys' '--exclude=/proc' '--exclude=/tmp' '--exclude=**'%s%s '--gio'%s 'file:///tmp/not/a/thing'%s '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=/home/ME/.cache/deja-dup' '--log-fd=?'".printf(extra, dry_str, source_str, enc_str);
+  return "'--exclude=/tmp/not/a/thing' '--exclude=/home/ME/Downloads' '--exclude=/home/ME/.local/share/Trash' '--exclude=/home/ME/.xsession-errors' '--exclude=/home/ME/.thumbnails' '--exclude=/home/ME/.Private' '--exclude=/home/ME/.gvfs' '--exclude=/home/ME/.adobe/Flash_Player/AssetCache' '--include=/home/ME' '--exclude=/home/.ecryptfs/ME/.Private' '--exclude=/sys' '--exclude=/proc' '--exclude=/tmp' '--exclude=%s/deja-dup' '--exclude=%s' '--exclude=**'%s%s '--gio'%s 'file:///tmp/not/a/thing'%s '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir, cachedir, extra, dry_str, source_str, enc_str, cachedir);
+}
+
+TestCase make_backup_case(string name, TestFunc cb)
+{
+  return new TestCase(name, backup_setup, cb, backup_teardown);
+}
+
+class BackupRunner : Object
+{
+  public delegate void OpCallback (DejaDup.Operation op);
+  public bool success = true;
+  public bool cancelled = false;
+  public string? detail = null;
+  public string? error_str = "Failed with an unknown error.";
+  public string? error_detail = null;
+  public OpCallback? callback = null;
+  public bool is_full = true;
+
+  public void run()
+  {
+    var loop = new MainLoop(null);
+    var op = new DejaDup.OperationBackup();
+    op.done.connect((op, s, c) => {
+      if (success != s)
+        warning("Success didn't match; expected %d, got %d", (int) success, (int) s);
+      if (cancelled != c)
+        warning("Cancel didn't match; expected %d, got %d", (int) cancelled, (int) c);
+      loop.quit();
+    });
+
+    op.raise_error.connect((str, det) => {
+      Test.message("Error: %s, %s", str, det);
+      if (error_str != str)
+        warning("Error string didn't match; expected %s, got %s", error_str, str);
+      if (error_detail != det)
+        warning("Error detail didn't match; expected %s, got %s", error_detail, det);
+    });
+    op.action_desc_changed.connect((action) => {
+    });
+    op.action_file_changed.connect((file, actual) => {
+    });
+    op.progress.connect((percent) => {
+    });
+    op.passphrase_required.connect(() => {
+      Test.message("Passphrase required");
+    });
+    op.question.connect((title, msg) => {
+      Test.message("Question asked: %s, %s", title, msg);
+    });
+    op.is_full.connect((full) => {
+      Test.message("Is full? %d", (int)full);
+      if (is_full != full)
+        warning("IsFull didn't match; expected %d, got %d", (int) is_full, (int) full);
+    });
+
+    op.start();
+    if (callback != null) {
+      Timeout.add_seconds(3, () => {
+        callback(op);
+        return false;
+      });
+    }
+    loop.run();
+  }
+}
+
+void no_space()
+{
+  set_script("""
+ARGS: collection-status %s
+
+ERROR 53 get 'local' 'remote'
+
+""".printf(default_args()));
+
+  var br = new BackupRunner();
+  br.success = false;
+  br.error_str = "No space left.";
+  br.run();
 }
 
 void bad_hostname()
@@ -234,7 +268,9 @@ ARGS: full %s
            default_args(Mode.DRY),
            default_args(Mode.DRY, false, " --allow-source-mismatch"),
            default_args(Mode.BACKUP, false, " --allow-source-mismatch")));
-  run_backup();
+
+  var br = new BackupRunner();
+  br.run();
 }
 
 void cancel_noop()
@@ -244,9 +280,14 @@ ARGS: collection-status %s
 DELAY: 10
 
 """.printf(default_args()));
-  run_backup(false, true, null, (op) => {
+
+  var br = new BackupRunner();
+  br.success = false;
+  br.cancelled = true;
+  br.callback = (op) => {
     op.cancel();
-  });
+  };
+  br.run();
 }
 
 void cancel()
@@ -268,9 +309,14 @@ ARGS: cleanup %s
            default_args(Mode.DRY),
            default_args(Mode.BACKUP),
            default_args(Mode.CLEANUP)));
-  run_backup(false, true, null, (op) => {
+
+  var br = new BackupRunner();
+  br.success = false;
+  br.cancelled = true;
+  br.callback = (op) => {
     op.cancel();
-  });
+  };
+  br.run();
 }
 
 void stop()
@@ -288,14 +334,22 @@ DELAY: 10
 """.printf(default_args(),
            default_args(Mode.DRY),
            default_args(Mode.BACKUP)));
-  run_backup(true, true, null, (op) => {
+
+  var br = new BackupRunner();
+  br.cancelled = true;
+  br.callback = (op) => {
     op.stop();
-  });
+  };
+  br.run();
 }
 
 int main(string[] args)
 {
   Test.init(ref args);
+
+  var dir = "/tmp/deja-dup-test-XXXXXX";
+  dir = DirUtils.mkdtemp(dir);
+  Environment.set_variable("DEJA_DUP_TEST_HOME", dir, true);
 
   Environment.set_variable("DEJA_DUP_LANGUAGE", "en", true);
   Environment.set_variable("GSETTINGS_BACKEND", "memory", true);
@@ -308,11 +362,17 @@ int main(string[] args)
   Test.add_func("/unit/operation/mode_to_string", mode_to_string);
 
   var backup = new TestSuite("backup");
-  backup.add(new TestCase("bad_hostname", backup_setup, bad_hostname, backup_teardown));
-  backup.add(new TestCase("cancel_noop", backup_setup, cancel_noop, backup_teardown));
-  backup.add(new TestCase("cancel", backup_setup, cancel, backup_teardown));
-  backup.add(new TestCase("stop", backup_setup, stop, backup_teardown));
+  backup.add(make_backup_case("no_space", no_space));
+  backup.add(make_backup_case("bad_hostname", bad_hostname));
+  backup.add(make_backup_case("cancel_noop", cancel_noop));
+  backup.add(make_backup_case("cancel", cancel));
+  backup.add(make_backup_case("stop", stop));
   TestSuite.get_root().add_suite(backup);
 
-  return Test.run();
+  var rv = Test.run();
+
+  if (Posix.system("rm -rf %s".printf(dir)) != 0)
+    warning("Could not clean TEST_HOME %s", dir);
+
+  return rv;
 }
