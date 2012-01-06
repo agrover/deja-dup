@@ -163,7 +163,28 @@ public string default_args(Mode mode = Mode.NONE, bool encrypted = false, string
   if (!encrypted)
     enc_str = " --no-encryption";
 
-  return "'--exclude=/tmp/not/a/thing' '--exclude=/home/ME/Downloads' '--exclude=/home/ME/.local/share/Trash' '--exclude=/home/ME/.xsession-errors' '--exclude=/home/ME/.thumbnails' '--exclude=/home/ME/.Private' '--exclude=/home/ME/.gvfs' '--exclude=/home/ME/.adobe/Flash_Player/AssetCache' '--include=/home/ME' '--exclude=/home/.ecryptfs/ME/.Private' '--exclude=/sys' '--exclude=/proc' '--exclude=/tmp' '--exclude=%s/deja-dup' '--exclude=%s' '--exclude=**'%s%s '--gio'%s 'file:///tmp/not/a/thing'%s '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir, cachedir, extra, dry_str, source_str, enc_str, cachedir);
+  var user = Environment.get_user_name();
+  var args = "'--exclude=/tmp/not/a/thing' ";
+
+  string[] excludes1 = {"/home/ME/Downloads", "/home/ME/.local/share/Trash", "/home/ME/.xsession-errors", "/home/ME/.thumbnails", "/home/ME/.Private", "/home/ME/.gvfs", "/home/ME/.adobe/Flash_Player/AssetCache"};
+
+  string[] excludes2 = {"/home/.ecryptfs/ME/.Private", "/sys", "/proc", "/tmp"};
+
+  foreach (string ex in excludes1) {
+    if (FileUtils.test (ex.replace("ME", user), FileTest.EXISTS))
+      args += "'--exclude=%s' ".printf(ex);
+  }
+
+  args += "'--include=/home/ME' ";
+
+  foreach (string ex in excludes2) {
+    if (FileUtils.test (ex.replace("ME", user), FileTest.EXISTS))
+      args += "'--exclude=%s' ".printf(ex);
+  }
+
+  args += "'--exclude=%s/deja-dup' '--exclude=%s' '--exclude=**'%s%s '--gio'%s 'file:///tmp/not/a/thing'%s '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir, cachedir, extra, dry_str, source_str, enc_str, cachedir);
+
+  return args;
 }
 
 TestCase make_backup_case(string name, TestFunc cb)
