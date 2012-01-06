@@ -198,7 +198,7 @@ class BackupRunner : Object
   public bool success = true;
   public bool cancelled = false;
   public string? detail = null;
-  public string? error_str = "Failed with an unknown error.";
+  public string? error_str = null;
   public string? error_detail = null;
   public OpCallback? callback = null;
   public bool is_full = true;
@@ -221,6 +221,8 @@ class BackupRunner : Object
         warning("Error string didn't match; expected %s, got %s", error_str, str);
       if (error_detail != det)
         warning("Error detail didn't match; expected %s, got %s", error_detail, det);
+      error_str = null;
+      error_detail = null;
     });
     op.action_desc_changed.connect((action) => {
     });
@@ -248,6 +250,11 @@ class BackupRunner : Object
       });
     }
     loop.run();
+
+    if (error_str != null)
+      warning("Error str didn't match; expected %s, never got error", error_str);
+    if (error_detail != null)
+      warning("Error detail didn't match; expected %s, never got error", error_detail);
   }
 }
 
