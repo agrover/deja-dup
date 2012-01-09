@@ -30,7 +30,7 @@ internal class Duplicity : Object
    * vala withot the need of manually running duplicity command.
    */
 
-  public signal void done(bool success, bool cancelled);
+  public signal void done(bool success, bool cancelled, string? detail);
   public signal void raise_error(string errstr, string? detail);
   public signal void action_desc_changed(string action);
   public signal void action_file_changed(File file, bool actual);
@@ -108,6 +108,8 @@ internal class Duplicity : Object
   bool has_checked_contents = false;
   bool has_non_home_contents = false;
   List<File> homes = new List<File>();
+
+  List<File> read_error_files = null;
   
   bool checked_collection_info = false;
   bool got_collection_info = false;
@@ -169,7 +171,7 @@ internal class Duplicity : Object
     }
     catch (Error e) {
       raise_error(e.message, null);
-      done(false, false);
+      done(false, false, null);
       return;
     }
     this.backend = backend;
@@ -187,7 +189,7 @@ internal class Duplicity : Object
     delete_age = settings.get_int(DELETE_AFTER_KEY);
 
     if (!restart())
-      done(false, false);
+      done(false, false, null);
 
     if (!backend.is_native()) {
       Network.get().notify["connected"].connect(network_changed);
@@ -384,6 +386,7 @@ internal class Duplicity : Object
   bool restart()
   {
     state = State.NORMAL;
+    read_error_files = null;
     
     if (mode == Operation.Mode.INVALID)
       return false;
@@ -515,7 +518,7 @@ internal class Duplicity : Object
 
     if (!has_progress_total) {
       if (!restart())
-        done(false, false);
+        done(false, false, null);
       return;
     }
 
@@ -551,7 +554,7 @@ internal class Duplicity : Object
     }
     
     if (!restart())
-      done(false, false);
+      done(false, false, null);
   }
 
   bool cleanup() {
@@ -596,6 +599,8 @@ internal class Duplicity : Object
 
   void handle_done(DuplicityInstance? inst, bool success, bool cancelled)
   {
+    string detail = null;
+
     if (can_ignore_error())
       success = true;
 
@@ -667,6 +672,17 @@ internal class Duplicity : Object
           }
         }
         else if (mode == Operation.Mode.BACKUP) {
+          if (read_error_files != null) {
+            // OK, we succeeded yay!  But some files didn't make it into the backup
+            // because we couldn't read them.  So tell the user so they don't think
+            // everything is hunky dory.
+            detail = _("Could not back up the following files.  Please make sure you are able to open them.");
+            detail += "\n";
+            foreach (File f in read_error_files) {
+              detail += "\n%s".printf(f.get_parse_name());
+            }
+          }
+
           mode = Operation.Mode.INVALID; // mark 'done' so when we delete, we don't restart
           if (delete_files_if_needed())
             return;
@@ -682,9 +698,9 @@ internal class Duplicity : Object
     
     if (!success && !cancelled && !error_issued)
       show_error(_("Failed with an unknown error."));
-    
+
     inst = null;
-    done(success, cancelled);
+    done(success, cancelled, detail);
   }
   
   string saved_status;
@@ -803,6 +819,7 @@ internal class Duplicity : Object
   protected static const int WARNING_UNMATCHED_SIG = 4;
   protected static const int WARNING_INCOMPLETE_BACKUP = 5;
   protected static const int WARNING_ORPHANED_BACKUP = 6;
+  protected static const int WARNING_CANNOT_READ = 10;
   protected static const int DEBUG_GENERIC = 1;
 
   void delete_cache()
@@ -1265,7 +1282,22 @@ internal class Duplicity : Object
         // in ourselves, we may never get to it.
         if (mode == Operation.Mode.BACKUP && !this.cleaned_up_once)
           cleanup(); // stops current backup, cleans up, then resumes
-      break;
+        break;
+
+      case WARNING_CANNOT_READ:
+        // A file couldn't be backed up!  We should note the name and present
+        // the user with a list at the end.
+        if (firstline.length > 2) {
+          // Only add it if it's a child of one of our includes.  Sometimes
+          // Duplicity likes to talk to us about folders like /lost+found and
+          // such that we don't care about.
+          var error_file = make_file_obj(firstline[2]);
+          foreach (File f in includes) {
+            if (error_file.equal(f) || error_file.has_prefix(f))
+              read_error_files.append(error_file);
+          }
+        }
+        break;
       }
     }
   }
@@ -1406,7 +1438,7 @@ internal class Duplicity : Object
     }
     catch (Error e) {
       show_error(e.message);
-      done(false, false);
+      done(false, false, null);
     }
   }
 }

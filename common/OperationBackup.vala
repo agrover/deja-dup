@@ -27,13 +27,13 @@ public class OperationBackup : Operation
     Object(xid: xid, mode: Mode.BACKUP);
   }
   
-  internal async override void operation_finished(Duplicity dup, bool success, bool cancelled)
+  internal async override void operation_finished(Duplicity dup, bool success, bool cancelled, string? detail)
   {
     /* If successfully completed, update time of last backup and run base operation_finished */
     if (success)
       DejaDup.update_last_run_timestamp(DejaDup.TimestampType.BACKUP);
     
-    base.operation_finished(dup, success, cancelled);
+    base.operation_finished(dup, success, cancelled, detail);
   }
   
   protected override List<string>? make_argv() throws Error

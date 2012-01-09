@@ -32,7 +32,7 @@ public abstract class Operation : Object
    * but it is provided to provide easier development and an abstraction layer
    * in case Deja Dup project ever replaces its backend.
    */
-  public signal void done(bool success, bool cancelled);
+  public signal void done(bool success, bool cancelled, string? detail);
   public signal void raise_error(string errstr, string? detail);
   public signal void action_desc_changed(string action);
   public signal void action_file_changed(File file, bool actual);
@@ -115,7 +115,7 @@ public abstract class Operation : Object
     }
     catch (Error e) {
       raise_error(e.message, null);
-      done(false, false);
+      done(false, false, null);
       return;
     }
 
@@ -179,7 +179,7 @@ public abstract class Operation : Object
     /*
      * Connect Deja Dup to signals
      */
-    dup.done.connect((d, o, c) => {operation_finished(d, o, c);});
+    dup.done.connect((d, o, c, detail) => {operation_finished(d, o, c, detail);});
     dup.raise_error.connect((d, s, detail) => {raise_error(s, detail);});
     dup.action_desc_changed.connect((d, s) => {action_desc_changed(s);});
     dup.action_file_changed.connect((d, f, b) => {action_file_changed(f, b);});
@@ -214,7 +214,7 @@ public abstract class Operation : Object
     }
     catch (Error e) {
       raise_error(e.message, null);
-      operation_finished(dup, false, false);
+      operation_finished(dup, false, false, null);
     }
   }
   
@@ -230,7 +230,7 @@ public abstract class Operation : Object
     if (!success) {
       if (error != null)
         raise_error(error, null);
-      operation_finished(dup, false, false);
+      operation_finished(dup, false, false, null);
       return;
     }
 
@@ -242,18 +242,18 @@ public abstract class Operation : Object
     }
     catch (Error e) {
       raise_error(e.message, null);
-      operation_finished(dup, false, false);
+      operation_finished(dup, false, false, null);
       return;
     }
   }
   
-  internal async virtual void operation_finished(Duplicity dup, bool success, bool cancelled)
+  internal async virtual void operation_finished(Duplicity dup, bool success, bool cancelled, string? detail)
   {
     finished = true;
 
     unclaim_bus();
 
-    done(success, cancelled);
+    done(success, cancelled, detail);
   }
   
   protected virtual List<string>? make_argv() throws Error

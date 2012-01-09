@@ -90,7 +90,11 @@ public class AssistantBackup : AssistantOperation
         set_page_title(page, _("Backup Failed"));
       }
       else {
-        Idle.add(() => {do_close(); return false;});
+        set_page_title(page, _("Backup Finished"));
+
+        // If we don't have a special message to show the user, just bail.
+        if (!detail_widget.get_visible())
+          Idle.add(() => {do_close(); return false;});
       }
     }
     else if (page == progress_page) {

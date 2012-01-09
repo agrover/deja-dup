@@ -326,7 +326,7 @@ public class AssistantRestoreMissing : AssistantRestore {
 
     // Don't start if queue is empty.
     if (backups_queue.get_length() == 0) {
-      query_files_finished(query_op_files, true, false);
+      query_files_finished(query_op_files, true, false, null);
       return;
     }
     
@@ -385,7 +385,7 @@ public class AssistantRestoreMissing : AssistantRestore {
     query_op_files.start();
   }
   
-  protected override void query_finished(DejaDup.Operation op, bool success, bool cancelled)
+  protected override void query_finished(DejaDup.Operation op, bool success, bool cancelled, string? detail)
   {
     query_op = null;
     op_state = this.op.get_state();
@@ -410,7 +410,7 @@ public class AssistantRestoreMissing : AssistantRestore {
     base.do_cancel();
   }
 
-  protected override void apply_finished(DejaDup.Operation op, bool success, bool cancelled)
+  protected override void apply_finished(DejaDup.Operation op, bool success, bool cancelled, string? detail)
   {
     /*
      * Ran after assistant finishes applying restore operation.
@@ -444,7 +444,7 @@ public class AssistantRestoreMissing : AssistantRestore {
     }
   }
   
-  protected void query_files_finished(DejaDup.Operation? op, bool success, bool cancelled)
+  protected void query_files_finished(DejaDup.Operation? op, bool success, bool cancelled, string? detail)
   {
     query_op_files = null;
     this.op = null;

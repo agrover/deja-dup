@@ -362,7 +362,7 @@ public class AssistantRestore : AssistantOperation
       show_error(_("No backups to restore"), null);
   }
   
-  protected virtual void query_finished(DejaDup.Operation op, bool success, bool cancelled)
+  protected virtual void query_finished(DejaDup.Operation op, bool success, bool cancelled, string? detail)
   {
     this.op_state = op.get_state();
     this.query_op = null;

@@ -109,7 +109,7 @@ public abstract class StatusIcon : Object
     update_progress();
   }
 
-  public virtual void done(bool success, bool cancelled)
+  public virtual void done(bool success, bool cancelled, string? detail)
   {
     if (note != null) {
       try {
@@ -122,9 +122,16 @@ public abstract class StatusIcon : Object
     }
 
     if (success && !cancelled && op.mode == DejaDup.Operation.Mode.BACKUP) {
+      string msg = _("Backup completed");
+
+      string more = null;
+      if (detail != null) {
+        msg = _("Backup finished");
+        more = _("Not all files were successfully backed up.  See dialog for more details.");
+      }
+
       Notify.init(_("Backup"));
-      note = new Notify.Notification(_("Backup completed"), null,
-                                     "deja-dup");
+      note = new Notify.Notification(msg, more, "deja-dup");
       try {
         note.show();
       }

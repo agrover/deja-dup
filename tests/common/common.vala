@@ -207,11 +207,14 @@ class BackupRunner : Object
   {
     var loop = new MainLoop(null);
     var op = new DejaDup.OperationBackup();
-    op.done.connect((op, s, c) => {
+    op.done.connect((op, s, c, d) => {
+      Test.message("Done: %d, %d, %s", (int)s, (int)c, d);
       if (success != s)
         warning("Success didn't match; expected %d, got %d", (int) success, (int) s);
       if (cancelled != c)
         warning("Cancel didn't match; expected %d, got %d", (int) cancelled, (int) c);
+      if (detail != d)
+        warning("Detail didn't match; expected %s, got %s", detail, d);
       loop.quit();
     });
 
@@ -420,6 +423,43 @@ DELAY: 10
   br.run();
 }
 
+void read_error()
+{
+  Test.bug("907846");
+  var user = Environment.get_user_name();
+  set_script("""
+ARGS: collection-status %s
+
+=== deja-dup ===
+ARGS: %s
+
+WARNING 10 '/blarg'
+
+WARNING 10 '/home/%s/1'
+
+WARNING 10 '/home/%s/2'
+
+=== deja-dup ===
+ARGS: %s
+
+WARNING 10 '/blarg'
+
+WARNING 10 '/home/%s/1'
+
+WARNING 10 '/home/%s/2'
+
+""".printf(default_args(),
+           default_args(Mode.DRY), user, user,
+           default_args(Mode.BACKUP), user, user));
+
+  var br = new BackupRunner();
+  br.detail = """Could not back up the following files.  Please make sure you are able to open them.
+
+/home/%s/1
+/home/%s/2""".printf(user, user);
+  br.run();
+}
+
 int main(string[] args)
 {
   Test.init(ref args);
@@ -445,6 +485,7 @@ int main(string[] args)
   backup.add(make_backup_case("cancel_noop", cancel_noop));
   backup.add(make_backup_case("cancel", cancel));
   backup.add(make_backup_case("stop", stop));
+  backup.add(make_backup_case("read_error", read_error));
   TestSuite.get_root().add_suite(backup);
 
   var rv = Test.run();
