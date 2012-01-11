@@ -76,14 +76,14 @@ static void volume_added(VolumeMonitor vm, Volume vol)
   reactive_check = false;
 }
 
-static bool is_ready(out string when)
+static async bool is_ready(out string when)
 {
   if (DejaDup.in_testing_mode() && testing_delay) {
     testing_delay = false;
     when = "Testing";
     return false;
   }
-  return DejaDup.Backend.get_default().is_ready(out when);
+  return yield DejaDup.Backend.get_default().is_ready(out when);
 }
 
 static bool handle_options(out int status)
@@ -128,16 +128,16 @@ static void notify_delay(string header, string reason)
   }
 }
 
-static bool kickoff()
+static async void kickoff()
 {
   TimeSpan wait_time;
   if (!time_until_next_run(out wait_time))
-    return false;
+    return;
   
   if (wait_time > 0) {
     // Huh?  Shouldn't have been called now.
     prepare_next_run();
-    return false;
+    return;
   }
 
   if (!reactive_check) {
@@ -149,19 +149,20 @@ static bool kickoff()
   }
 
   string when;
-  if (!is_ready(out when)) {
+  bool ready = yield is_ready(out when);
+  if (!ready) {
     debug("Postponing the backup.");
     if (!reactive_check && when != null)
       notify_delay(_("Scheduled backup delayed"), when);
-    return false;
+    return;
   }
 
   if (note != null) {
     try {
       note.close(); // no need to continue talking about the delay
     }
-    catch (Error e) {
-      warning("%s\n", e.message);
+    catch (Error e2) {
+      warning("%s\n", e2.message);
     }
     note = null;
   }
@@ -210,8 +211,6 @@ static bool kickoff()
   }
   else
     debug("Not rerunning deja-dup, already doing so.");
-  
-  return false;
 }
 
 static bool time_until_next_run(out TimeSpan time)
@@ -237,7 +236,10 @@ static void prepare_run(TimeSpan wait_time)
   TimeSpan secs = wait_time / TimeSpan.SECOND + 1;
   if (wait_time > 0 && secs > 0) {
     debug("Waiting %ld seconds until next backup.", (long)secs);
-    timeout_id = Timeout.add_seconds((uint)secs, kickoff);
+    timeout_id = Timeout.add_seconds((uint)secs, () => {
+      kickoff();
+      return false;
+    });
   }
   else {
     debug("Late by %ld seconds.  Backing up now.", (long)(secs * -1));

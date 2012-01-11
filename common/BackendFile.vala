@@ -109,7 +109,7 @@ public class BackendFile : Backend
     return true; // default to yes?
   }
 
-  public override bool is_ready(out string when) {
+  public override async bool is_ready(out string when) {
     when = null;
     try {
       var file = get_file_from_settings();
@@ -129,7 +129,7 @@ public class BackendFile : Backend
         return true;
       else {
         when = _("Backup will begin when a network connection becomes available.");
-        return Network.get().connected;
+        return yield Network.get().can_reach (file.get_uri ());
       }
     }
     catch (Error e) {

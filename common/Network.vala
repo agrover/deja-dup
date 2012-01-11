@@ -21,6 +21,59 @@ using GLib;
 
 namespace DejaDup {
 
+#if HAVE_NETWORKMONITOR
+
+public class Network : Object
+{
+  public bool connected {get; set; default = true;}
+
+  public new static Network get() {
+    if (singleton == null)
+      singleton = new Network();
+    return singleton;
+  }
+
+  public async static void ensure_status()
+  {
+    var network = Network.get();
+    network.update_status();
+  }
+
+  public async bool can_reach(string url)
+  {
+    var mon = NetworkMonitor.get_default();
+    try {
+      var socket = NetworkAddress.parse_uri(url, 0);
+      return yield mon.can_reach_async(socket);
+    }
+    catch (Error e) {
+      warning("%s", e.message);
+      return false;
+    }
+  }
+
+  construct {
+    var mon = NetworkMonitor.get_default();
+    mon.network_changed.connect(handle_changed);
+  }
+
+  void handle_changed(bool available)
+  {
+    update_status();
+  }
+
+  void update_status()
+  {
+    var mon = NetworkMonitor.get_default();
+    if (mon.network_available != connected)
+      connected = mon.network_available;
+  }
+
+  static Network singleton;
+}
+
+#else
+
 abstract class StatusProvider : Object
 {
   public enum Status {ONLINE, OFFLINE, UNKNOWN, UNINITIALIZED}
@@ -181,6 +234,11 @@ public class Network : Object
     }
   }
 
+  public async bool can_reach(string url)
+  {
+    return connected; // naively, assume yes if connected
+  }
+
   static Network singleton;
   List<StatusProvider> providers;
 
@@ -220,5 +278,7 @@ public class Network : Object
       connected = merged_status;
   }
 }
+
+#endif
 
 } // end namespace

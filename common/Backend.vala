@@ -34,7 +34,7 @@ public abstract class Backend : Object
   public abstract string? get_location() throws Error;
   public abstract string? get_location_pretty() throws Error; // short description for user
 
-  public virtual bool is_ready(out string when) {when = null; return true;} // must be callable when nothing is mounted, nothing is prepared
+  public virtual async bool is_ready(out string when) {when = null; return true;} // must be callable when nothing is mounted, nothing is prepared
 
   public virtual async void get_envp() throws Error {
     envp_ready(true, new List<string>());
