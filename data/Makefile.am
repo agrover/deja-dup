@@ -62,7 +62,7 @@ CLEANFILES = deja-dup.desktop deja-dup-ccpanel.desktop deja-dup-preferences.desk
 
 check: $(desktop_DATA) $(autostart_DATA)
 	for desktop in $(desktop_DATA) $(autostart_DATA); do \
-		desktop-file-validate $${desktop}; \
+		desktop-file-validate $${desktop} || exit 1; \
 	done
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t
