@@ -35,7 +35,7 @@ abstract class StatusProvider : Object
       proxy.g_signal.connect(handle_signal);
     }
     catch (Error e) {
-      warning("%s\n", e.message);
+      // Totally normal if proxy isn't available
     }
   }
 
@@ -52,7 +52,7 @@ abstract class StatusProvider : Object
 
   public async void check_owner_status()
   {
-    if (proxy.g_name_owner == null)
+    if (proxy == null || proxy.g_name_owner == null)
       update_status(Status.UNKNOWN);
     else {
       Status status = Status.UNKNOWN;

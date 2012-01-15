@@ -19,7 +19,7 @@
 noinst_PROGRAMS = common
 
 check:
-	gtester $(noinst_PROGRAMS)
+	dbus-launch ./common
 
 common_CFLAGS = \
 	-I$(top_srcdir)/common \

@@ -85,8 +85,6 @@ for i in xrange(len(sys.argv)):
   if len(split) > 1 and split[0] == "--log-fd":
     logfd = os.fdopen(int(split[1]), "w")
     sys.argv[i] = "--log-fd=?"
-  elif "/home/" in sys.argv[i]:
-    sys.argv[i] = sys.argv[i].replace("/%s" % getpass.getuser(), "/ME")
 
 if expected_args != sys.argv[1:]:
   print >> logfd, "TESTFAIL: expected\n%s\nvs\n%s" % (expected_args, sys.argv[1:])

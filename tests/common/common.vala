@@ -166,19 +166,21 @@ public string default_args(Mode mode = Mode.NONE, bool encrypted = false, string
   var user = Environment.get_user_name();
   var args = "'--exclude=/tmp/not/a/thing' ";
 
-  string[] excludes1 = {"/home/ME/Downloads", "/home/ME/.local/share/Trash", "/home/ME/.xsession-errors", "/home/ME/.thumbnails", "/home/ME/.Private", "/home/ME/.gvfs", "/home/ME/.adobe/Flash_Player/AssetCache"};
+  string[] excludes1 = {"~/Downloads", "~/.local/share/Trash", "~/.xsession-errors", "~/.thumbnails", "~/ME/.Private", "~/.gvfs", "~/.adobe/Flash_Player/AssetCache"};
 
-  string[] excludes2 = {"/home/.ecryptfs/ME/.Private", "/sys", "/proc", "/tmp"};
+  string[] excludes2 = {"/home/.ecryptfs/%s/.Private".printf(user), "/sys", "/proc", "/tmp"};
 
   foreach (string ex in excludes1) {
-    if (FileUtils.test (ex.replace("ME", user), FileTest.EXISTS))
+    ex = ex.replace("~", Environment.get_home_dir());
+    if (FileUtils.test (ex, FileTest.EXISTS))
       args += "'--exclude=%s' ".printf(ex);
   }
 
-  args += "'--include=/home/ME' ";
+  args += "'--include=%s' ".printf(Environment.get_home_dir());
 
   foreach (string ex in excludes2) {
-    if (FileUtils.test (ex.replace("ME", user), FileTest.EXISTS))
+    ex = ex.replace("~", Environment.get_home_dir());
+    if (FileUtils.test (ex, FileTest.EXISTS))
       args += "'--exclude=%s' ".printf(ex);
   }
 
@@ -426,7 +428,7 @@ DELAY: 10
 void read_error()
 {
   Test.bug("907846");
-  var user = Environment.get_user_name();
+  var home = Environment.get_home_dir();
   set_script("""
 ARGS: collection-status %s
 
@@ -435,29 +437,48 @@ ARGS: %s
 
 WARNING 10 '/blarg'
 
-WARNING 10 '/home/%s/1'
+WARNING 10 '%s/1'
 
-WARNING 10 '/home/%s/2'
+WARNING 10 '%s/2'
 
 === deja-dup ===
 ARGS: %s
 
 WARNING 10 '/blarg'
 
-WARNING 10 '/home/%s/1'
+WARNING 10 '%s/1'
 
-WARNING 10 '/home/%s/2'
+WARNING 10 '%s/2'
 
 """.printf(default_args(),
-           default_args(Mode.DRY), user, user,
-           default_args(Mode.BACKUP), user, user));
+           default_args(Mode.DRY), home, home,
+           default_args(Mode.BACKUP), home, home));
 
   var br = new BackupRunner();
   br.detail = """Could not back up the following files.  Please make sure you are able to open them.
 
-/home/%s/1
-/home/%s/2""".printf(user, user);
+%s/1
+%s/2""".printf(home, home);
   br.run();
+}
+
+void setup_gsettings()
+{
+  var dir = Environment.get_variable("DEJA_DUP_TEST_HOME");
+
+  var schema_dir = Path.build_filename(dir, "share", "glib-2.0", "schemas");
+  DirUtils.create_with_parents(schema_dir, 0700);
+
+  var data_dirs = Environment.get_variable("XDG_DATA_DIRS");
+  Environment.set_variable("XDG_DATA_DIRS", "%s:%s".printf(Path.build_filename(dir, "share"), data_dirs), true);
+
+  if (Posix.system("cp ../../data/org.gnome.DejaDup.gschema.xml %s".printf(schema_dir)) != 0)
+    warning("Could not copy schema to %s", schema_dir);
+
+  if (Posix.system("glib-compile-schemas %s".printf(schema_dir)) != 0)
+    warning("Could not compile schemas in %s", schema_dir);
+
+  Environment.set_variable("GSETTINGS_BACKEND", "memory", true);
 }
 
 int main(string[] args)
@@ -469,8 +490,9 @@ int main(string[] args)
   Environment.set_variable("DEJA_DUP_TEST_HOME", dir, true);
 
   Environment.set_variable("DEJA_DUP_LANGUAGE", "en", true);
-  Environment.set_variable("GSETTINGS_BACKEND", "memory", true);
   Test.bug_base("https://launchpad.net/bugs/%s");
+
+  setup_gsettings();
 
   Test.add_func("/unit/utils/testing_mode", testing_mode);
   Test.add_func("/unit/utils/get_day", get_day);
