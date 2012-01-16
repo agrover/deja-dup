@@ -166,7 +166,7 @@ public string default_args(Mode mode = Mode.NONE, bool encrypted = false, string
   var user = Environment.get_user_name();
   var args = "'--exclude=/tmp/not/a/thing' ";
 
-  string[] excludes1 = {"~/Downloads", "~/.local/share/Trash", "~/.xsession-errors", "~/.thumbnails", "~/ME/.Private", "~/.gvfs", "~/.adobe/Flash_Player/AssetCache"};
+  string[] excludes1 = {"~/Downloads", "~/.local/share/Trash", "~/.xsession-errors", "~/.thumbnails", "~/.Private", "~/.gvfs", "~/.adobe/Flash_Player/AssetCache"};
 
   string[] excludes2 = {"/home/.ecryptfs/%s/.Private".printf(user), "/sys", "/proc", "/tmp"};
 
