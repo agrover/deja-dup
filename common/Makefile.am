@@ -76,6 +76,6 @@ AM_VALAFLAGS = \
 libcommon_la_vala.stamp: $(top_srcdir)/config.h
 
 dist-hook:
-	cd $(distdir) && rm $(libcommon_la_VALASOURCES:.vala=.c) \
-	                    common.h libcommon_la_vala.stamp
+	cd $(distdir) && rm -f $(libcommon_la_VALASOURCES:.vala=.c) \
+	                       common.h libcommon_la_vala.stamp
 

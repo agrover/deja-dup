@@ -51,3 +51,5 @@ dist-hook:
 	cd $(distdir) && rm $(common_VALASOURCES:.vala=.c) \
 	                    common_vala.stamp
 
+EXTRA_DIST = \
+	mock

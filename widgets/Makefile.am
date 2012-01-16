@@ -84,6 +84,6 @@ AM_VALAFLAGS = \
 libwidgets_la_vala.stamp: $(top_srcdir)/config.h
 
 dist-hook:
-	cd $(distdir) && rm $(libwidgets_la_VALASOURCES:.vala=.c) \
-	                    widgets.h libwidgets_la_vala.stamp
+	cd $(distdir) && rm -f $(libwidgets_la_VALASOURCES:.vala=.c) \
+	                       widgets.h libwidgets_la_vala.stamp
 
