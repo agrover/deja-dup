@@ -38,6 +38,7 @@ AC_PROG_MAKE_SET
 LT_PREREQ([2.2.6])
 LT_INIT
 
+PKG_PROG_PKG_CONFIG([0.24])
 DEJA_PROG_VALAC([0.14.0])
 
 # Sets up gettext.
@@ -76,35 +77,31 @@ PKG_CHECK_MODULES(DUP,
                   gnome-keyring-1
                   gmodule-2.0 >= $GLIB_REQ_VER
                   libnotify >= $NOTIFY_REQ_VER)
-AC_SUBST(DUP_CFLAGS)
-AC_SUBST(DUP_LIBS)
 
 PKG_CHECK_MODULES(PREF,
                   $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER)
-AC_SUBST(PREF_CFLAGS)
-AC_SUBST(PREF_LIBS)
 
 PKG_CHECK_MODULES(COMMON,
                   gio-2.0 >= $GIO_REQ_VER
                   gio-unix-2.0 >= $GIO_REQ_VER
                   gnome-keyring-1
                   gmodule-2.0 >= $GLIB_REQ_VER)
-AC_SUBST(COMMON_CFLAGS)
-AC_SUBST(COMMON_LIBS)
 
 PKG_CHECK_MODULES(WIDGETS,
                   gmodule-2.0 >= $GLIB_REQ_VER
                   $GTK_MODULE >= $GTK_REQ_VER
                   libnotify >= $NOTIFY_REQ_VER)
-AC_SUBST(WIDGETS_CFLAGS)
-AC_SUBST(WIDGETS_LIBS)
 
 PKG_CHECK_MODULES(MONITOR,
                   gio-2.0 >= $GIO_REQ_VER
                   libnotify >= $NOTIFY_REQ_VER)
-AC_SUBST(MONITOR_CFLAGS)
-AC_SUBST(MONITOR_LIBS)
+
+AH_TEMPLATE([HAVE_NETWORKMONITOR], [whether NetworkMonitor is available in gio])
+PKG_CHECK_EXISTS(gio-2.0 >= 2.31.6,
+  [AC_DEFINE(HAVE_NETWORKMONITOR)
+   AC_SUBST(NETWORKMONITOR_VALAFLAGS, ["--pkg networkmonitor -D HAVE_NETWORKMONITOR"])],
+  [])
 
 AC_ARG_WITH([extensiondir],
   [AS_HELP_STRING([--with-extensiondir],
@@ -119,13 +116,11 @@ AC_ARG_WITH([ccpanel],
   [with_ccpanel=check])
 AS_IF([test "x$with_ccpanel" != xno],
   [PKG_CHECK_MODULES(CCPANEL, libgnome-control-center,
-    [AC_SUBST(CCPANEL_CFLAGS)
-     AC_SUBST(CCPANEL_LIBS)]
-     dnl Get control center extensions directory
+    [dnl Get control center extensions directory
      AS_IF([test "x$with_extensiondir" != xno],
        [CCPANEL_DIR=`$PKG_CONFIG --variable=extensiondir libgnome-control-center`],
        [CCPANEL_DIR="${PREFIX}/lib/control-center-1/panels"])
-     AC_SUBST(CCPANEL_DIR),
+     AC_SUBST(CCPANEL_DIR)],
     [if test "x$with_ccpanel" != xcheck; then
         AC_MSG_FAILURE(
           [--with-ccpanel was given, but test for libgnome-control-center failed])
@@ -143,13 +138,11 @@ AC_ARG_WITH([nautilus],
 AS_IF([test "x$with_nautilus" != xno],
   [PKG_CHECK_MODULES(NAUTILUS, libnautilus-extension 
                                glib-2.0 >= $GLIB_REQ_VER,
-    [AC_SUBST(NAUTILUS_CFLAGS)
-     AC_SUBST(NAUTILUS_LIBS)]
-     dnl Get nautilus extensions directory
+    [dnl Get nautilus extensions directory
      AS_IF([test "x$with_extensiondir" != xno],
        [NAUTILUS_EXTENSION_DIR=`$PKG_CONFIG --variable=extensiondir libnautilus-extension`],
        [NAUTILUS_EXTENSION_DIR="${PREFIX}/lib/nautilus/extensions-3.0"])
-     AC_SUBST(NAUTILUS_EXTENSION_DIR),
+     AC_SUBST(NAUTILUS_EXTENSION_DIR)],
     [if test "x$with_nautilus" != xcheck; then
         AC_MSG_FAILURE(
           [--with-nautilus was given, but test for libnautilus-extension failed])
@@ -168,9 +161,7 @@ AC_ARG_WITH([unity],
 AS_IF([test "x$with_unity" != xno],
   [PKG_CHECK_MODULES(UNITY, unity >= 3.4.2,
     [AC_DEFINE(HAVE_UNITY)
-     AC_SUBST(UNITY_VALAFLAGS, ["--pkg unity -D HAVE_UNITY"])
-     AC_SUBST(UNITY_CFLAGS)
-     AC_SUBST(UNITY_LIBS)],
+     AC_SUBST(UNITY_VALAFLAGS, ["--pkg unity -D HAVE_UNITY"])],
     [if test "x$with_unity" != xcheck; then
         AC_MSG_FAILURE(
           [--with-unity was given, but test for unity failed])

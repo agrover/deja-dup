@@ -16,18 +16,19 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-noinst_PROGRAMS = common
+noinst_PROGRAMS = \
+	common \
+	network
 
 check:
 	dbus-launch ./common
 
-common_CFLAGS = \
+AM_CFLAGS = \
 	-I$(top_srcdir)/common \
-	$(MONITOR_CFLAGS) \
-	$(DEBUG_CFLAGS)
+	$(DUP_CFLAGS)
 
-common_LDADD = \
-	$(MONITOR_LIBS) \
+LDADD = \
+	$(DUP_LIBS) \
 	@INTLLIBS@ \
 	$(top_builddir)/common/libcommon.la
 
@@ -37,19 +38,30 @@ common_VALASOURCES = \
 common_SOURCES = \
 	$(common_VALASOURCES)
 
+network_VALASOURCES = \
+	network.vala
+
+network_SOURCES = \
+	$(network_VALASOURCES)
+
 AM_VALAFLAGS = \
 	--vapidir $(top_srcdir)/common \
 	--vapidir $(top_srcdir)/vapi \
+	$(NETWORKMONITOR_VALAFLAGS) \
 	--pkg config \
 	--pkg gio-2.0 \
+	--pkg gtk+-3.0 \
 	--pkg posix \
 	--pkg libcommon
 
 common_vala.stamp: $(top_srcdir)/config.h
+network_vala.stamp: $(top_srcdir)/config.h
 
 dist-hook:
 	cd $(distdir) && rm $(common_VALASOURCES:.vala=.c) \
 	                    common_vala.stamp
+	cd $(distdir) && rm $(network_VALASOURCES:.vala=.c) \
+	                    network_vala.stamp
 
 EXTRA_DIST = \
 	mock

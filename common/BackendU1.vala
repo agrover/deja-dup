@@ -146,9 +146,9 @@ public class BackendU1 : Backend
     return new ThemedIcon.from_names({"ubuntuone", "ubuntuone-installer", "deja-dup-cloud"});
   }
 
-  public override bool is_ready(out string when) {
+  public override async bool is_ready(out string when) {
     when = _("Backup will begin when a network connection becomes available.");
-    return Network.get().connected;
+    return yield Network.get().can_reach ("https://one.ubuntu.com/");
   }
 
   public override string? get_location() throws Error

@@ -35,7 +35,7 @@ public class BackendAuto : Backend
     return null;
   }
 
-  public override bool is_ready(out string when) {
+  public override async bool is_ready(out string when) {
     when = null;
     return false;
   }
