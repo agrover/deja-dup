@@ -39,7 +39,7 @@ LT_PREREQ([2.2.6])
 LT_INIT
 
 PKG_PROG_PKG_CONFIG([0.24])
-DEJA_PROG_VALAC([0.14.0])
+DD_PROG_VALAC([0.14.0], [valac-0.14 valac])
 
 # Sets up gettext.
 GETTEXT_PACKAGE="$PACKAGE"
