@@ -159,8 +159,13 @@ internal class DuplicityInstance : Object
           else
             args.append(" " + Shell.quote(a));
         }
+#if HAVE_VALAC_14
         scriptfile.replace_contents(args.str, args.len, null, false,
                                     FileCreateFlags.NONE, null, null);
+#else
+        scriptfile.replace_contents((uint8[])args.str, null, false,
+                                    FileCreateFlags.NONE, null, null);
+#endif
         
         argv = new List<string>(); // reset
         

@@ -39,7 +39,11 @@ LT_PREREQ([2.2.6])
 LT_INIT
 
 PKG_PROG_PKG_CONFIG([0.24])
-DD_PROG_VALAC([0.14.0], [valac-0.14 valac])
+
+DD_PROG_VALAC([0.14.0], [valac-0.16 valac-0.14 valac])
+AS_IF([test "x$(basename $VALAC)" = xvalac-0.14],
+  [AC_SUBST(SHARED_VALAFLAGS, ["-D HAVE_VALAC_14"])]
+)
 
 # Sets up gettext.
 GETTEXT_PACKAGE="$PACKAGE"
@@ -100,7 +104,12 @@ PKG_CHECK_MODULES(MONITOR,
 AH_TEMPLATE([HAVE_NETWORKMONITOR], [whether NetworkMonitor is available in gio])
 PKG_CHECK_EXISTS(gio-2.0 >= 2.31.6,
   [AC_DEFINE(HAVE_NETWORKMONITOR)
-   AC_SUBST(NETWORKMONITOR_VALAFLAGS, ["--pkg networkmonitor -D HAVE_NETWORKMONITOR"])],
+   if test "x$(basename $VALAC)" = xvalac-0.14; then
+     AC_SUBST(NETWORKMONITOR_VALAFLAGS, ["-D HAVE_NETWORKMONITOR --pkg networkmonitor"])
+   else
+     AC_SUBST(NETWORKMONITOR_VALAFLAGS, ["-D HAVE_NETWORKMONITOR"])
+   fi
+  ],
   [])
 
 AC_ARG_WITH([extensiondir],

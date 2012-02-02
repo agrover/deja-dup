@@ -53,7 +53,7 @@ public abstract class Assistant : Gtk.Window
   Gtk.Widget apply_button;
   protected Gtk.EventBox page_box;
 
-  class PageInfo {
+  public class PageInfo {
     public Gtk.Widget page;
     public string title;
     public Type type;

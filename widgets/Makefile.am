@@ -74,6 +74,7 @@ AM_VALAFLAGS = \
 	-H widgets.h \
 	--vapidir=$(top_srcdir)/common \
 	--vapidir=$(top_srcdir)/vapi \
+	$(SHARED_VALAFLAGS) \
 	$(UNITY_VALAFLAGS) \
 	--pkg libcommon \
 	--pkg @GTK_MODULE@ \
