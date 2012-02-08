@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-01-04 16:22-0500\n"
+"POT-Creation-Date: 2012-01-17 23:17-0500\n"
 "PO-Revision-Date: 2011-09-18 03:00+0000\n"
 "Last-Translator: Marios Zindilis <m.zindilis@dmajor.org>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-01-10 05:58+0000\n"
-"X-Generator: Launchpad (build 14640)\n"
+"X-Launchpad-Export-Date: 2012-01-20 05:15+0000\n"
+"X-Generator: Launchpad (build 14700)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -48,7 +48,7 @@ msgstr "Αλλαγή ρυθμίσεων των αντιγράφων ασφαλε
 #: ../data/deja-dup-ccpanel.desktop.in.h:4
 #: ../data/deja-dup-preferences.desktop.in.in.h:4
 msgid "déjà;deja;dup;"
-msgstr ""
+msgstr "déjà;deja;dup;"
 
 #: ../data/deja-dup-ccpanel.desktop.in.h:5
 #: ../data/deja-dup-preferences.desktop.in.in.h:5
@@ -58,7 +58,7 @@ msgstr "Δημιουργία Αντιγράφων Ασφαλείας Τώρα"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:302
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:304
 msgid "Backup Monitor"
 msgstr "Παρακολούθηση δημιουργίας αντιγράφων ασφαλείας"
 
@@ -79,6 +79,11 @@ msgid ""
 "and $VIDEO are recognized as the user’s special directories. Relative "
 "entries are relative to the user’s home directory."
 msgstr ""
+"Θα ληφθεί αντίγραφο ασφαλείας για αυτόν τον κατάλογο φακέλων. Οι "
+"προκρατημένες τιμές $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, "
+"$PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, και $VIDEO, αναγνωρίζονται ως "
+"ειδικοί φάκελοι του χρήστη. Οι σχετικές καταχωρήσεις είναι σχετικές ως προς "
+"τον  προσωπικό φάκελο του χρήστη."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
 #: ../preferences/Preferences.vala:168
@@ -92,20 +97,28 @@ msgid ""
 "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
 "directories. Relative entries are relative to the user’s home directory."
 msgstr ""
+"Δε θα ληφθεί αντίγραφο ασφαλείας για αυτόν τον κατάλογο φακέλων. Οι "
+"προκρατημένες τιμές $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, "
+"$PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, και $VIDEO, αναγνωρίζονται ως "
+"ειδικοί φάκελοι του χρήστη. Οι σχετικές καταχωρήσεις είναι σχετικές ως προς "
+"τον προσωπικό φάκελο του χρήστη."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
 msgid "Whether the welcome screen has been dismissed"
-msgstr ""
+msgstr "Αν η οθόνη καλωσορίσματος θα έχει ακυρωθεί"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
 msgid "Whether to request the root password"
-msgstr ""
+msgstr "Αν θα πρέπει να απαιτείται ο κωδικός πρόσβασης του συστήματος (root)"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:7
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
 msgstr ""
+"Αν θα πρέπει να απαιτείται ο κωδικός πρόσβασης συστήματος (root), όταν "
+"γίνεται λήψη αντιγράφων ασφαλείας είτε όταν γίνεται επαναφορά σε φακέλους "
+"του συστήματος."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:8
 msgid "The last time Déjà Dup was run"
@@ -145,11 +158,13 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:14
 msgid "Whether to periodically back up"
-msgstr ""
+msgstr "Αν θα λαμβάνονται αντίγραφα ασφαλείας ανά τακτά διαστήματα"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:15
 msgid "Whether to automatically back up on a regular schedule."
 msgstr ""
+"Αν θα λαμβάνονται αυτομάτως αντίγραφα ασφαλείας, ανά τακτά προγραμματισμένα "
+"διαστήματα."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:16
 msgid "How often to periodically back up"
@@ -173,6 +188,12 @@ msgid ""
 "don’t know about backups. This time should be either ‘disabled’ to turn off "
 "this check or in ISO 8601 format."
 msgstr ""
+"Όταν συνδέεται ένας χρήστης, ο μηχανισμός παρακολούθησης του Déjà Dup "
+"ελέγχει κατά πόσο θα πρέπει να ειδοποιήσει για την λήψη αντιγράφου "
+"ασφαλείας. Αυτό χρησιμοποιείται για την αύξηση της ανακαλυψιμότητας, για "
+"χρήστες που δεν γνωρίζουν σχετικά με τα αντίγραφα ασφαλείας. Αυτή τη φορά θα "
+"πρέπει να είναι είτε «απενεργοποιημένο», για την ακύρωση αυτού του ελέγχου, "
+"είτε να είναι σε μορφή ISO 8601."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:20
 msgid "How long to keep backup files"
@@ -190,7 +211,7 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
 msgid "Type of location to store backup"
-msgstr ""
+msgstr "Είδος τοποθεσίας για την αποθήκευση αντιγράφου ασφαλείας"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
 msgid ""
@@ -207,21 +228,25 @@ msgstr "Access Key ID του Amazon S3"
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
+"Το αναγνωριστικό κλειδί πρόσβασης S3 του Amazon σου. Χρησιμοποιείται ως το "
+"όνομα χρήστη σου S3."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid "The Amazon S3 bucket name to use"
-msgstr ""
+msgstr "Όνομα  κάδου χρήσης S3 του Amazon"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr ""
+"Σε ποιο κάδο του Amazon S3 αποθηκεύονται τα αρχεία. Δεν απαιτείται να "
+"προϋπάρχει ήδη. Μόνο νόμιμα αλφαριθμητικά ονόματος  συστήματος είναι έγκυρα."
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid "The Amazon S3 folder"
-msgstr ""
+msgstr "Ο  φάκελος S3 του Amazon"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
 msgid ""
@@ -233,21 +258,26 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The Rackspace Cloud Files container"
-msgstr ""
+msgstr "Ο χώρος Rackspace  για τη συλλογή των αρχείων νέφους (cloud)"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr ""
+"Σε ποιον χώρο Rackspace αρχείων νέφους (cloud) θα αποθηκεύονται τα αρχεία. "
+"Δεν είναι ανάγκη να προϋπάρχει. Μόνο τα νόμιμα αλφαριθμητικά ονόματα "
+"συστήματος είναι έγκυρα."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "Your Rackspace username"
-msgstr ""
+msgstr "Το δικό σας όνομα χρήστη για το Rackspace"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr ""
+"Αυτό είναι το δικό σας όνομα χρήστη για την υπηρεσία Rackspace των αρχείων "
+"νέφους (cloud)."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "The Ubuntu One folder"
@@ -258,6 +288,9 @@ msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
 msgstr ""
+"Το όνομα του φακέλου στον οποίο θα αποθηκεύονται τα αρχεία. Αν ορίζεται ως "
+"‘$HOSTNAME’, τότε θα εκλαμβάνεται ως προεπιλογή ένας φάκελος που θα "
+"βασίζεται στο όνομα του υπολογιστή σας."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 #: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
@@ -276,6 +309,8 @@ msgstr "Τύπος φακέλου"
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
+"Αν η τοποθεσία λήψης αντιγράφων ασφαλείας είναι μία εξωτερική μονάδα ή ένας "
+"κανονικός φάκελος."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid "Relative path under the external volume"
@@ -291,7 +326,7 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Unique ID of the external volume"
-msgstr ""
+msgstr "Μοναδικός κωδικός ταυτοποίησης της εξωτερικής μονάδας"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid ""
@@ -342,79 +377,82 @@ msgstr "Παλιό/ξεπερασμένο"
 
 #: ../data/ui/restore-missing.ui.h:1
 msgid "Folder"
-msgstr ""
+msgstr "Φάκελος"
 
 #: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:175
 msgid "Scanning…"
-msgstr ""
+msgstr "Γίνεται σάρωση..."
 
 #: ../nautilus/NautilusExtension.c:176
 msgid "Restore Missing Files…"
-msgstr ""
+msgstr "Γίνεται επαναφορά χαμένων αρχείων..."
 
 #: ../nautilus/NautilusExtension.c:177
 msgid "Restore deleted files from backup"
-msgstr ""
+msgstr "Επαναφορά διαγραμμένων αρχείων από αντίγραφο ασφαλείας"
 
 #: ../nautilus/NautilusExtension.c:219
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Επαναφορά σε προηγούμενη έκδοση..."
+msgstr[1] "Επαναφορά σε προηγούμενες έκδοσεις..."
 
 #: ../nautilus/NautilusExtension.c:223
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Επαναφορά αρχείου από αντίγραφο ασφαλείας"
+msgstr[1] "Επαναφορά αρχείων από αντίγραφο ασφαλείας"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
 #: ../common/BackendFile.vala:86 ../common/CommonUtils.vala:447
 #, c-format
 msgid "%1$s on %2$s"
-msgstr ""
+msgstr "%1$s στο %2$s"
 
 #: ../common/BackendFile.vala:124
 #, c-format
 msgid "Backup will begin when %s becomes connected."
 msgstr ""
+"Το αντίγραφος ασφαλείας θα ξεκινήσει να δημιουργείται όταν το %s συνδεθεί."
 
 #: ../common/BackendFile.vala:131 ../common/BackendRackspace.vala:49
 #: ../common/BackendS3.vala:59 ../common/BackendU1.vala:150
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
+"Η δημιουργία αντίγραφου ασφαλείας θα ξεκινήσει όταν είναι διαθέσιμη μια "
+"σύνδεση σε δίκτυο."
 
 #: ../common/BackendFile.vala:357 ../common/BackendFile.vala:421
 msgid "Backup location not available"
-msgstr ""
+msgstr "Η τοποθεσία για τα αντίγραφα ασφαλείας δεν είναι διαθέσιμη"
 
 #: ../common/BackendFile.vala:358
 msgid "Waiting for a network connection…"
-msgstr ""
+msgstr "Αναμονή για σύνδεση σε δίκτυο..."
 
 #: ../common/BackendFile.vala:421
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
-msgstr ""
+msgstr "Αναμονή για να συνδεθεί το ‘%s’…"
 
 #: ../common/BackendRackspace.vala:58
 msgid "You must specify a Rackspace container in your preferences."
-msgstr ""
+msgstr "Πρέπει να ορίσετε ένα χώρο Rackspace στις προτιμήσεις σας."
 
 #: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:194
 msgid "Rackspace Cloud Files"
-msgstr ""
+msgstr "Rackspace Cloud Files"
 
 #. Translators: %s is a folder.
 #: ../common/BackendRackspace.vala:70
 #, c-format
 msgid "%s on Rackspace Cloud Files"
-msgstr ""
+msgstr "%s στο Rackspace Cloud Files"
 
 #: ../common/BackendRackspace.vala:117 ../common/BackendS3.vala:172
 msgid "Permission denied"
-msgstr ""
+msgstr "Μη επιτρεπτή πρόσβαση"
 
 #: ../common/BackendRackspace.vala:138
 #, c-format
@@ -422,101 +460,107 @@ msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
 "href=\"%s\">online</a>."
 msgstr ""
+"Μπορείτε να γραφτείτε για ένα λογαριασμό στο Rackspace Cloud Files (παρέχει "
+"αποθηκευτικό χώρο στο διαδίκτυο) μέσω <a href=\"%s\">του περιηγητή σας</a>."
 
 #: ../common/BackendRackspace.vala:139
 msgid "Connect to Rackspace Cloud Files"
-msgstr ""
+msgstr "Σύνδεση στο Rackspace Cloud Files"
 
 #: ../common/BackendRackspace.vala:140
 msgid "_API access key"
-msgstr ""
+msgstr "Πλήκτρο πρόσβασης  _API"
 
 #: ../common/BackendRackspace.vala:141
 msgid "S_how API access key"
-msgstr ""
+msgstr "Εμφάνισ_η κλειδιού πρόσβασης API"
 
 #: ../common/BackendRackspace.vala:142
 msgid "_Remember API access key"
-msgstr ""
+msgstr "_Απομνημόνευση κλειδιού πρόσβασης API"
 
 #: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:176
 msgid "Amazon S3"
-msgstr ""
+msgstr "Amazon S3"
 
 #. Translators: %s is a folder.
 #: ../common/BackendS3.vala:125
 #, c-format
 msgid "%s on Amazon S3"
-msgstr ""
+msgstr "%s στο Amazon S3"
 
 #: ../common/BackendS3.vala:193
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr ""
+"Μπορείτε να εγγραφείτε για ένα λογαριασμό Amazon S3 <a href=\"%s\">μέσω "
+"διαδικτύου</a>."
 
 #: ../common/BackendS3.vala:194
 msgid "Connect to Amazon S3"
-msgstr ""
+msgstr "Σύνδεση στο Amazon S3"
 
 #: ../common/BackendS3.vala:195
 msgid "_Access key ID"
-msgstr ""
+msgstr "_Αναγνωριστικό κλειδιού πρόσβασης"
 
 #: ../common/BackendS3.vala:196
 msgid "_Secret access key"
-msgstr ""
+msgstr "Μυ_στικό κλειδί πρόσβασης"
 
 #: ../common/BackendS3.vala:197
 msgid "S_how secret access key"
-msgstr ""
+msgstr "Π_ροβολή  μυστικού κλειδιού πρόσβασης"
 
 #: ../common/BackendS3.vala:198
 msgid "_Remember secret access key"
-msgstr ""
+msgstr "Α_πομνημόνευση μυστικού κλειδιού πρόσβασης"
 
 #: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:186
 msgid "Ubuntu One"
-msgstr ""
+msgstr "Ubuntu One"
 
 #. Translators: %s is a folder.
 #: ../common/BackendU1.vala:169
 #, c-format
 msgid "%s on Ubuntu One"
-msgstr ""
+msgstr "%s στο Ubuntu One"
 
 #: ../common/BackendU1.vala:236
 msgid "Connect to Ubuntu One"
-msgstr ""
+msgstr "Σύνδεση με το Ubuntu One"
 
 #: ../common/BackendU1.vala:237
 msgid "Sign into Ubuntu One…"
-msgstr ""
+msgstr "Είσοδος στο Ubuntu One…"
 
 #. Translators: this is the home folder and %s is the user's username
 #: ../common/CommonUtils.vala:498
 #, c-format
 msgid "Home (%s)"
-msgstr ""
+msgstr "Προσωπικός φάκελος του (%s)"
 
 #. Translators: this is the home folder
 #: ../common/CommonUtils.vala:503
 msgid "Home"
-msgstr ""
+msgstr "Αρχή"
 
 #. Translators: this is the trash folder
 #: ../common/CommonUtils.vala:508
 msgid "Trash"
-msgstr ""
+msgstr "Κάδος απορριμάτων"
 
 #: ../common/DuplicityInfo.vala:109
 msgid "Could not run duplicity"
-msgstr ""
+msgstr "Αδυναμία εκτέλεσης  της εφαρμογής duplicity"
 
 #: ../common/DuplicityInfo.vala:114
 msgid ""
 "Could not understand duplicity version.\n"
 "\n"
 msgstr ""
+"Αδυναμία κατανόησης της έκδοσης της εφαρμογής duplicity.\n"
+"\n"
 
 #: ../common/DuplicityInfo.vala:116
 #, c-format
@@ -524,15 +568,19 @@ msgid ""
 "Could not understand duplicity version ‘%s’.\n"
 "\n"
 msgstr ""
+"Αδυναμία κατανόησης της έκδοσης «%s» του duplicity.\n"
+"\n"
 
 #: ../common/DuplicityInfo.vala:118
 msgid ""
 "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 msgstr ""
+"Χωρίς το πακέτο duplicity, το Εργαλείο αντιγράφων ασφαλείας Déjà Dup δε "
+"μπορεί να λειτουργήσει. Θα τερματιστεί τώρα."
 
 #: ../common/DuplicityInfo.vala:122
 msgid "Duplicity’s version is too old"
-msgstr ""
+msgstr "Η έκδοση του duplicity είναι πολύ παλιά"
 
 #: ../common/DuplicityInfo.vala:123
 #, c-format
@@ -540,35 +588,41 @@ msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
 "only found version %d.%d.%.2d"
 msgstr ""
+"Το εργαλείο αντιγράφων ασφαλείας Déjà Dup χρειάζεται τουλάχιστον την έκδοση "
+"%d.%d.%.2d του πακέτου duplicity, αλλά βρέθηκε μόνο η έκδοση %d.%d.%.2d"
 
 #: ../common/Duplicity.vala:135 ../common/Duplicity.vala:198
 msgid "Paused (no network)"
-msgstr ""
+msgstr "Παύση (δεν υπάρχει σύνδεση στο διαδίκτυο)"
 
 #: ../common/Duplicity.vala:405 ../common/Duplicity.vala:412
 #: ../common/Duplicity.vala:431 ../common/Duplicity.vala:436
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
-msgstr ""
+msgstr "Γίνεται προετοιμασία…"
 
 #. Was not even a file path (maybe something goofy like computer://)
 #: ../common/Duplicity.vala:463
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
-msgstr ""
+msgstr "Δεν ήταν δυνατή η επαναφορά του «%s»: Μη έγκυρη τοποθεσία αρχείου"
 
 #. Tiny backup location.  Suggest they get a larger one.
 #: ../common/Duplicity.vala:529
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
+"Η τοποθεσία για την αποθήκευση του αντίγραφου ασφαλείας έχει πολύ λίγο "
+"ελεύθερο χώρο. Δοκιμάστε κάποια με περισσότερο χώρο."
 
 #: ../common/Duplicity.vala:551
 msgid "Backup location does not have enough free space."
 msgstr ""
+"Η τοποθεσία για την αποθήκευση του αντίγραφου ασφαλείας δεν έχει αρκετό "
+"ελεύθερο χώρο."
 
 #: ../common/Duplicity.vala:570 ../common/Duplicity.vala:584
 msgid "Cleaning up…"
-msgstr ""
+msgstr "Γίνεται εκκαθάριση…"
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
@@ -582,12 +636,14 @@ msgstr ""
 #: ../common/Duplicity.vala:700 ../common/Duplicity.vala:1089
 #: ../deja-dup/AssistantOperation.vala:537
 msgid "Failed with an unknown error."
-msgstr ""
+msgstr "Απέτυχε με άγνωστο σφάμα."
 
 #: ../common/Duplicity.vala:929
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
+"Δεν ήταν δυνατή η επαναφορά του «%s»: Δε βρέθηκε το αρχείο κατά τη "
+"δημιουργία του αντίγραφου ασφαλείας"
 
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
@@ -595,11 +651,11 @@ msgstr ""
 #: ../common/Duplicity.vala:935 ../common/Duplicity.vala:1037
 #: ../common/Duplicity.vala:1041
 msgid "Bad encryption password."
-msgstr ""
+msgstr "Άσχημος κωδικός κρυπτογράφησης."
 
 #: ../common/Duplicity.vala:940
 msgid "Computer name changed"
-msgstr ""
+msgstr "Το όνομα υπολογιστή έχει τροποποιηθεί"
 
 #: ../common/Duplicity.vala:940
 #, c-format
@@ -608,124 +664,136 @@ msgid ""
 "name is %s.  If this is unexpected, you should back up to a different "
 "location."
 msgstr ""
+"Το υπάρχον αντίγραφο ασφαλείας προέρχεται από έναν υπολογιστή με όνομα %s, "
+"αλλά το τρέχον όνομα του υπολογιστή είναι %s. Αν αυτό δεν ήταν αναμενόμενο, "
+"τότε θα πρέπει να δημιουργήσετε αντίγραφο ασφαλείας σε μια διαφορετική "
+"τοποθεσία."
 
 #: ../common/Duplicity.vala:975
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
-msgstr ""
+msgstr "Δεν επιτράπηκε η πρόσβαση κατά την προσπάθεια δημιουργίας του «%s»."
 
 #. assume error is on backend side
 #: ../common/Duplicity.vala:979 ../common/Duplicity.vala:983
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr ""
+"Δεν επιτράπηκε η εξουσιοδότηση κατά την προσπάθεια ανάγνωσης του «%s»."
 
 #: ../common/Duplicity.vala:987
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr ""
+"Δεν επιτράπηκε η εξουσιοδότηση κατά την προσπάθεια διαγραφής του «%s»."
 
 #: ../common/Duplicity.vala:994
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
-msgstr ""
+msgstr "Δεν υπάρχει η τοποθεσία αντίγραφου ασφαλείας «%s»."
 
 #: ../common/Duplicity.vala:1000 ../common/Duplicity.vala:1060
 msgid "No space left."
-msgstr ""
+msgstr "Δεν υπάρχει χώρος."
 
 #: ../common/Duplicity.vala:1014
 msgid "Invalid ID."
-msgstr ""
+msgstr "Μη έγκυρο αναγνωριστικό."
 
 #: ../common/Duplicity.vala:1016
 msgid "Invalid secret key."
-msgstr ""
+msgstr "Μη έγκυρο μυστικό κλειδί."
 
 #: ../common/Duplicity.vala:1018
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
+"Ο λογαριασμός σας στις Amazon Web Services δεν είναι συνδεδεμένος για την "
+"υπηρεσία S3."
 
 #: ../common/Duplicity.vala:1031
 msgid "S3 bucket name is not available."
-msgstr ""
+msgstr "Το όνομα κάδου S3 δεν είναι διαθέσιμο."
 
 #: ../common/Duplicity.vala:1045
 #, c-format
 msgid "Error reading file ‘%s’."
-msgstr ""
+msgstr "Σφάλμα κατά την ανάγνωση του αρχείου «%s»."
 
 #: ../common/Duplicity.vala:1047
 #, c-format
 msgid "Error writing file ‘%s’."
-msgstr ""
+msgstr "Σφάλμα κατά την εγγραφή του αρχείου «%s»."
 
 #: ../common/Duplicity.vala:1062
 #, c-format
 msgid "No space left in ‘%s’."
-msgstr ""
+msgstr "Δεν έχει μείνει ελέυθερος χώρος στο «%s»."
 
 #: ../common/Duplicity.vala:1070
 msgid "No backup files found"
-msgstr ""
+msgstr "Δεν βρέθηκαν αντίγραφα ασφαλείας"
 
 #: ../common/Duplicity.vala:1120
 msgid "Uploading…"
-msgstr ""
+msgstr "Γίνεται αποστολή…"
 
 #: ../common/OperationRestore.vala:52
 msgid "Restoring files…"
-msgstr ""
+msgstr "Γίνεται επαναφορά αρχείων..."
 
 #: ../common/Operation.vala:71
 msgid "Backing up…"
-msgstr ""
+msgstr "Δημιουργία αντιγράφων ασφαλείας..."
 
 #: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:484
 msgid "Restoring…"
-msgstr ""
+msgstr "Γίνεται επαναφορά…"
 
 #: ../common/Operation.vala:75
 msgid "Checking for backups…"
-msgstr ""
+msgstr "Έλεγχος για αντίγραφα ασφαλείας"
 
 #: ../common/Operation.vala:77
 msgid "Listing files…"
-msgstr ""
+msgstr "Λίστα αρχείων…"
 
 #: ../common/Operation.vala:281
 msgid "Another backup operation is already running"
-msgstr ""
+msgstr "Μια άλλη λειτουργία αντιγράφων ασφαλείας είναι σε εκτέλεση"
 
 #: ../deja-dup/AssistantBackup.vala:31
 msgctxt "back up is verb"
 msgid "Back Up"
-msgstr ""
+msgstr "Αντίγραφο ασφαλείας"
 
 #: ../deja-dup/AssistantBackup.vala:32
 msgctxt "back up is verb"
 msgid "_Back Up"
-msgstr ""
+msgstr "_Λήψη αντιγράφου ασφαλείας"
 
 #: ../deja-dup/AssistantBackup.vala:50
 msgid "Creating the first backup.  This may take a while."
 msgstr ""
+"Δημιουργία πρώτου αντίγραφου ασφαλείας. Αυτό μπορεί να διαρκέσει λίγο."
 
 #: ../deja-dup/AssistantBackup.vala:51
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
 msgstr ""
+"Δημιουργία νέου αντιγράφου ασφαλείας για να προστατευτείτε από τυχόν "
+"κατεστραμμένο αντίγραφο ασφαλείας. Αυτό μπορεί να διαρκέσει παραπάνω από το "
+"κανονικό."
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
 #: ../deja-dup/AssistantBackup.vala:81
 msgid "Backing up:"
-msgstr ""
+msgstr "Δημιουργία αντιγράφου:"
 
 #: ../deja-dup/AssistantBackup.vala:90
 msgid "Backup Failed"
-msgstr ""
+msgstr "Η δημιουργία αντίγραφου ασφαλείας απέτυχε"
 
 #: ../deja-dup/AssistantBackup.vala:93
 msgid "Backup Finished"
@@ -733,23 +801,23 @@ msgstr ""
 
 #: ../deja-dup/AssistantBackup.vala:101
 msgid "Backing Up…"
-msgstr ""
+msgstr "Δημιουργία αντιγράφου ασφαλείας…"
 
 #: ../deja-dup/AssistantOperation.vala:174
 msgid "Scanning:"
-msgstr ""
+msgstr "Σάρωση:"
 
 #: ../deja-dup/AssistantOperation.vala:256
 msgid "_Details"
-msgstr ""
+msgstr "_Λεπτομέρειες"
 
 #: ../deja-dup/AssistantOperation.vala:304
 msgid "_Allow restoring without a password"
-msgstr ""
+msgstr "Ν_α επιτρέπεται επαναφορά χωρίς κωδικό πρόσβασης"
 
 #: ../deja-dup/AssistantOperation.vala:310
 msgid "_Password-protect your backup"
-msgstr ""
+msgstr "_Προστασία του αντίγραφου ασφαλείας σας με κωδικό πρόσβασης"
 
 #: ../deja-dup/AssistantOperation.vala:324
 #, c-format
@@ -757,101 +825,103 @@ msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
+"Θα χρειαστείτε τον κωδικό πρόσβασής σας για την επαναφορά των αρχείων σας. "
+"Ενδεχομένως να θέλετε να τον γράψετε κάπου."
 
 #: ../deja-dup/AssistantOperation.vala:339
 msgid "E_ncryption password"
-msgstr ""
+msgstr "Κωδικός _κρυπτογράφησης"
 
 #: ../deja-dup/AssistantOperation.vala:356
 msgid "Confir_m password"
-msgstr ""
+msgstr "_Επιβεβαίωση κωδικού"
 
 #: ../deja-dup/AssistantOperation.vala:369
 msgid "_Show password"
-msgstr ""
+msgstr "_Εμφάνιση κωδικού"
 
 #: ../deja-dup/AssistantOperation.vala:378
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
-msgstr ""
+msgstr "Απο_μνημόνευση κωδικού"
 
 #: ../deja-dup/AssistantOperation.vala:447
 msgid "Summary"
-msgstr ""
+msgstr "Σύνοψη"
 
 #: ../deja-dup/AssistantOperation.vala:730
 msgid "Require Password?"
-msgstr ""
+msgstr "Απαιτείται κωδικός πρόσβασης;"
 
 #: ../deja-dup/AssistantOperation.vala:732
 msgid "Encryption Password Needed"
-msgstr ""
+msgstr "Είναι απαραίτητος ο κωδικός κρυπτογράφησης"
 
 #: ../deja-dup/AssistantOperation.vala:778
 msgid "Backup encryption password"
-msgstr ""
+msgstr "Κωδικός κρυπτογράφησης αντίγραφου ασφαλείας"
 
 #: ../deja-dup/AssistantRestore.vala:68
 msgid "Restore"
-msgstr ""
+msgstr "Επαναφορά"
 
 #: ../deja-dup/AssistantRestore.vala:69
 msgid "_Restore"
-msgstr ""
+msgstr "_Επαναφορά"
 
 #: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:262
 msgid "_Backup location"
-msgstr ""
+msgstr "Τοποθεσία _αντιγράφου ασφαλείας"
 
 #: ../deja-dup/AssistantRestore.vala:124
 msgid "Restore From Where?"
-msgstr ""
+msgstr "Επαναφορά από που;"
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date"
-msgstr ""
+msgstr "_Ημερομηνία"
 
 #: ../deja-dup/AssistantRestore.vala:169
 msgid "Restore files to _original locations"
-msgstr ""
+msgstr "Επαναφορά αρχείων στις _αρχικές τους τοποθεσίες"
 
 #: ../deja-dup/AssistantRestore.vala:174
 msgid "Restore to _specific folder"
-msgstr ""
+msgstr "Επαναφορά σε ένα _συγκεκριμένο φάκελο"
 
 #: ../deja-dup/AssistantRestore.vala:184
 msgid "Choose destination for restored files"
-msgstr ""
+msgstr "Επιλογή τοποθεσίας για τα αρχεία που θα επαναφερθούν"
 
 #: ../deja-dup/AssistantRestore.vala:188
 msgid "Restore _folder"
-msgstr ""
+msgstr "Επαναφορά _φακέλου"
 
 #: ../deja-dup/AssistantRestore.vala:229
 msgid "Restore date"
-msgstr ""
+msgstr "Ημερομηνία επαναφοράς"
 
 #: ../deja-dup/AssistantRestore.vala:237
 msgid "Restore folder"
-msgstr ""
+msgstr "Φάκελος επαναφοράς"
 
 #: ../deja-dup/AssistantRestore.vala:263
 msgid "Checking for Backups…"
-msgstr ""
+msgstr "Έλεγχος για αντίγραφα ασφαλείας…"
 
 #: ../deja-dup/AssistantRestore.vala:271
 msgid "Restore From When?"
-msgstr ""
+msgstr "Από ποια χρονική στιγμή να γίνει επαναφορά;"
 
 #: ../deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
-msgstr ""
+msgstr "Σε ποιο σημείο να γίνει η επαναφορά;"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
 #: ../deja-dup/AssistantRestore.vala:307
 msgid "Restoring:"
-msgstr ""
+msgstr "Επαναφορά:"
 
 #. Translators: %x is the current date, %X is the current time.
 #. This will be in a list with other strings that just have %x (the
@@ -860,122 +930,122 @@ msgstr ""
 #: ../deja-dup/AssistantRestore.vala:349
 #, c-format
 msgid "%x %X"
-msgstr ""
+msgstr "%x %X"
 
 #: ../deja-dup/AssistantRestore.vala:362
 msgid "No backups to restore"
-msgstr ""
+msgstr "Δεν υπάρχουν αντίγραφα ασφαλείας για επαναφορά"
 
 #: ../deja-dup/AssistantRestore.vala:439
 msgid "Original location"
-msgstr ""
+msgstr "Αρχική τοποθεσία"
 
 #: ../deja-dup/AssistantRestore.vala:450
 msgid "File to restore"
 msgid_plural "Files to restore"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Αρχείο για επαναφορά"
+msgstr[1] "Αρχεία για επαναφορά"
 
 #: ../deja-dup/AssistantRestore.vala:471
 msgid "Restore Failed"
-msgstr ""
+msgstr "Η επαναφορά απέτυχε"
 
 #: ../deja-dup/AssistantRestore.vala:473
 msgid "Restore Finished"
-msgstr ""
+msgstr "Η επαναφορά ολοκληρώθηκε"
 
 #: ../deja-dup/AssistantRestore.vala:475
 msgid "Your files were successfully restored."
-msgstr ""
+msgstr "Η επαναφορά των αρχείων ολοκληρώθηκε επιτυχώς."
 
 #: ../deja-dup/AssistantRestore.vala:478
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Η επαναφορά του αρχείου ολοκληρώθηκε επιτυχώς."
+msgstr[1] "Η επαναφορά των αρχείων ολοκληρώθηκε επιτυχώς."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:199
 msgid "File"
-msgstr ""
+msgstr "Αρχείο"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:200
 msgid "Last seen"
-msgstr ""
+msgstr "Τελευταία εμφάνιση"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:215
 msgid "Restore which Files?"
-msgstr ""
+msgstr "Επαναφορά ποιων αρχείων;"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:346
 msgid "Scanning for files from up to a day ago…"
-msgstr ""
+msgstr "Σάρωση για αρχεία μέχρι πάνω από μια μέρα πριν…"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:349
 msgid "Scanning for files from up to a week ago…"
-msgstr ""
+msgstr "Σάρωση για αρχεία μέχρι και μια βδομάδα πριν…"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:352
 msgid "Scanning for files from up to a month ago…"
-msgstr ""
+msgstr "Σάρωση για αρχεία μέχρι και ένα μήνα πριν…"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:357
 #, c-format
 msgid "Scanning for files from about a month ago…"
 msgid_plural "Scanning for files from about %d months ago…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Σάρωση για αρχεία μέχρι και ένα μήνα περίπου πριν…"
+msgstr[1] "Σάρωση για αρχεία μέχρι και %d μήνες περίπου πριν…"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:364
 #, c-format
 msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Σάρωση για αρχεία μέχρι και ένα χρόνο περίπου πριν…"
+msgstr[1] "Σάρωση για αρχεία μέχρι και %d χρόνια περίπου πριν…"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:455
 msgid "Scanning finished"
-msgstr ""
+msgstr "Η σάρωση ολοκληρώθηκε"
 
 #: ../deja-dup/Assistant.vala:309
 msgid "Co_ntinue"
-msgstr ""
+msgstr "Συ_νέχεια"
 
 #: ../deja-dup/Assistant.vala:347 ../deja-dup/StatusIcon.vala:93
 msgid "_Resume Later"
-msgstr ""
+msgstr "_Συνέχιση αργότερα"
 
 #: ../deja-dup/main.vala:34 ../monitor/monitor.vala:36
 #: ../preferences/preferences-main.vala:26
 msgid "Show version"
-msgstr ""
+msgstr "Προβολή έκδοσης"
 
 #: ../deja-dup/main.vala:35
 msgid "Restore given files"
-msgstr ""
+msgstr "Επαναφορά αυτών των αρχείων"
 
 #: ../deja-dup/main.vala:36
 msgid "Immediately start a backup"
-msgstr ""
+msgstr "Άμεση εκκίνηση δημιουργίας αντίγραφου ασφαλείας"
 
 #: ../deja-dup/main.vala:38
 msgid "Restore deleted files"
-msgstr ""
+msgstr "Επαναφορά διαγραμμένων αρχείων"
 
 #: ../deja-dup/main.vala:55
 msgid "No directory provided"
-msgstr ""
+msgstr "Δεν έχει δοθεί κάποιος κατάλογος"
 
 #: ../deja-dup/main.vala:60
 msgid "Only one directory can be shown at once"
-msgstr ""
+msgstr "Μόνο ένας κατάλογος μπορεί να εμφανίζεται κάθε φορά"
 
 #: ../deja-dup/main.vala:81
 msgid "[FILES…]"
-msgstr ""
+msgstr "[ΑΡΧΕΙΑ…]"
 
 #: ../deja-dup/main.vala:82
 msgid "DIRECTORY"
-msgstr ""
+msgstr "ΚΑΤΑΛΟΓΟΣ"
 
 #. Translators: Wrap this to 80 characters per line if you can, as I have for English
 #: ../deja-dup/main.vala:86
@@ -984,58 +1054,64 @@ msgid ""
 "the Right Way (encrypted, off-site, and regular) and uses duplicity as\n"
 "the backend."
 msgstr ""
+"Το Déjà Dup είναι ένα απλό εργαλείο δημιουργίας αντιγράφων ασφαλείας. "
+"Αποκρύπτει τις δύσκολες διαδικασίες για τη δημιουργία\n"
+"αντιγράφων ασφαλείας με το σωστό τρόπο (με κρυπτογράφηση, με απομακρυσμένη "
+"σύνδεση και υπό κανονικές συνθήκες) και χρησιμοποιεί το duplicity ως\n"
+"γραφικό περιβάλλον."
 
 #: ../deja-dup/main.vala:137
 msgid "Directory does not exists"
-msgstr ""
+msgstr "Δεν υπάρχει ο κατάλογος"
 
 #: ../deja-dup/main.vala:141
 msgid "You must provide a directory, not a file"
-msgstr ""
+msgstr "Πρέπει να επιλέξτε έναν κατάλογο, όχι ένα αρχείο"
 
 #: ../deja-dup/main.vala:153
 msgid "You must specify a mode"
-msgstr ""
+msgstr "Πρέπει να καθορίσετε μια λειτουργία"
 
 #: ../deja-dup/MountOperationAssistant.vala:36
 msgid "Connect to Server"
-msgstr ""
+msgstr "Σύνδεση σε εξυπηρετητή"
 
 #: ../deja-dup/MountOperationAssistant.vala:37
 #: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
 #: ../widgets/ConfigLocationRackspace.vala:31
 #: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
-msgstr ""
+msgstr "Όνομα _χρήστη:"
 
 #: ../deja-dup/MountOperationAssistant.vala:38
 msgid "_Password"
-msgstr ""
+msgstr "_Κωδικός"
 
 #: ../deja-dup/MountOperationAssistant.vala:39
 msgid "S_how password"
-msgstr ""
+msgstr "Εμ_φάνιση κωδικού"
 
 #: ../deja-dup/MountOperationAssistant.vala:82
 msgid "Location not available"
-msgstr ""
+msgstr "Η τοποθεσία δεν είναι διαθέσιμη"
 
 #: ../deja-dup/MountOperationAssistant.vala:168
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "_Ανώνυμη σύνδεση"
 
 #: ../deja-dup/MountOperationAssistant.vala:172
 msgid "Connect as u_ser"
-msgstr ""
+msgstr "Σύνδεση ως χ_ρήστης"
 
 #. Translators: this is a Windows networking domain
 #: ../deja-dup/MountOperationAssistant.vala:215
 msgid "_Domain"
-msgstr ""
+msgstr "Ό_νομα συστήματος"
 
 #: ../deja-dup/Prompt.vala:37
 msgid "Keep your files safe by backing up regularly"
 msgstr ""
+"Κρατήστε τα αρχεία σας ασφαλή δημιουργώντας συχνά αντίγραφα ασφαλείας"
 
 #: ../deja-dup/Prompt.vala:42
 msgid ""
@@ -1043,30 +1119,33 @@ msgid ""
 "a backup. In the case of a disaster, you would be able to recover them from "
 "that backup."
 msgstr ""
+"Σημαντικά έγγραφα, δεδομένα, και ρυθμίσεις μπορούν να προστατευτούν "
+"αποθηκεύοντας τα σε ένα αντίγραφο ασφαλείας. Σε περίπτωση καταστροφής, θα "
+"μπορείτε να τα ανακτήσετε από το αντίγραφο ασφαλείας."
 
 #: ../deja-dup/Prompt.vala:48
 msgid "_Don't Show Again"
-msgstr ""
+msgstr "Να _μην εμφανιστεί ξανά"
 
 #: ../deja-dup/Prompt.vala:50
 msgid "Don't Show Again"
-msgstr ""
+msgstr "Να μην εμφανιστεί ξανά"
 
 #: ../deja-dup/Prompt.vala:56
 msgid "_Open Backup Settings"
-msgstr ""
+msgstr "_Άνοιγμα ρυθμίσεων αντιγράφων ασφαλείας"
 
 #: ../deja-dup/Prompt.vala:58
 msgid "Open Backup Settings"
-msgstr ""
+msgstr "Άνοιγμα ρυθμίσεων αντιγράφων ασφαλείας"
 
 #: ../deja-dup/StatusIcon.vala:94
 msgid "_Skip Backup"
-msgstr ""
+msgstr "_Προσπέραση αντιγράφου ασφαλείας"
 
 #: ../deja-dup/StatusIcon.vala:125
 msgid "Backup completed"
-msgstr ""
+msgstr "Η δημιουργία αντιφράφου ασφαλείας ολοκληρώθηκε"
 
 #: ../deja-dup/StatusIcon.vala:129
 msgid "Backup finished"
@@ -1079,197 +1158,209 @@ msgstr ""
 
 #: ../deja-dup/StatusIcon.vala:232
 msgid "Starting scheduled backup"
-msgstr ""
+msgstr "Εκκίνηση προγραμματισμένης δημιουργίας αντιγράφου ασφαλείας"
 
 #: ../deja-dup/StatusIcon.vala:234
 msgid "Show Progress"
-msgstr ""
+msgstr "Εμφάνιση προόδου"
 
 #: ../deja-dup/StatusIcon.vala:272
 #, c-format
 msgid "%.1f%% complete"
-msgstr ""
+msgstr "%.1f%% ολοκληρώθηκε"
 
 #: ../deja-dup/StatusIcon.vala:285
 msgid "Show _Progress"
-msgstr ""
+msgstr "Εμφάνιση _προόδου"
 
-#: ../monitor/monitor.vala:155
+#: ../monitor/monitor.vala:156
 msgid "Scheduled backup delayed"
-msgstr ""
+msgstr "Αναβλήθηκε το προγραμματισμένο αντίγραφο ασφαλείας"
 
 #: ../preferences/Preferences.vala:45
 #, c-format
 msgid "I want to _restore files from a previous backup…"
-msgstr ""
+msgstr "Θέλω να _επαναφέρω αρχεία από προηγούμενο αντίγραφο ασφαλείας…"
 
 #: ../preferences/Preferences.vala:64
 #, c-format
 msgid "Just show my backup _settings"
-msgstr ""
+msgstr "Απλά εμφάνισε τις _ρυθμίσεις μου για αντίγραφα ασφαλείας"
 
 #: ../preferences/Preferences.vala:134
 msgid "Automatic _backups"
-msgstr ""
+msgstr "Αυτόματα _αντίγραφα ασφαλείας"
 
 #: ../preferences/Preferences.vala:181
 msgid "Most recent backup"
-msgstr ""
+msgstr "Πιο πρόσφατο αντίγραφο ασφαλείας"
 
 #: ../preferences/Preferences.vala:190
 msgid "Next automatic backup"
-msgstr ""
+msgstr "Επόμενη αυτόματη δημιουργία αντιγράφου ασφαλείας"
 
 #: ../preferences/Preferences.vala:224
 msgid "_Restore…"
-msgstr ""
+msgstr "_Επαναφορά…"
 
 #: ../preferences/Preferences.vala:230
 msgid "Back Up _Now"
-msgstr ""
+msgstr "Δημιουργία αντίγραφου ασφαλείας _τώρα"
 
 #: ../preferences/Preferences.vala:252
 msgid "Overview"
-msgstr ""
+msgstr "Επισκόπηση"
 
 #. Translators: storage as in "where to store the backup"
 #: ../preferences/Preferences.vala:284
 msgid "Storage"
-msgstr ""
+msgstr "Αποθηκευτικός χώρος"
 
 #: ../preferences/Preferences.vala:305
 msgid "Folders to _back up"
-msgstr ""
+msgstr "Φάκελοι για _δημιουργία αντιγράφου ασφαλείας"
 
 #: ../preferences/Preferences.vala:315
 msgid "Folders to _ignore"
-msgstr ""
+msgstr "Φάκελοι για _προσπέραση"
 
 #: ../preferences/Preferences.vala:324
 msgid "Folders"
-msgstr ""
+msgstr "Φάκελοι"
 
 #: ../preferences/Preferences.vala:335
 msgid "How _often to back up"
-msgstr ""
+msgstr "Πόσο συχνά να δημιουργούνται αντίγραφα ασφαλείας"
 
 #: ../preferences/Preferences.vala:346
 #, c-format
 msgid "_Keep backups"
-msgstr ""
+msgstr "_Διατήρηση αντιγράφων ασφαλείας"
 
 #: ../preferences/Preferences.vala:361
 msgid "Schedule"
-msgstr ""
+msgstr "Προγραμματισμός αντιγράφων"
 
 #: ../preferences/Preferences.vala:365
 msgid "Categories"
-msgstr ""
+msgstr "Κατηγορίες"
 
 #: ../widgets/ConfigDelete.vala:43
 msgid "At least a month"
-msgstr ""
+msgstr "Τουλάχιστον ένα μήνα"
 
 #: ../widgets/ConfigDelete.vala:44
 msgid "At least two months"
-msgstr ""
+msgstr "Τουλάχιστον δύο μήνες"
 
 #: ../widgets/ConfigDelete.vala:45
 msgid "At least three months"
-msgstr ""
+msgstr "Τουλάχιστον τρεις μήνες"
 
 #: ../widgets/ConfigDelete.vala:46
 msgid "At least six months"
-msgstr ""
+msgstr "Τουλάχιστον έξι μήνες"
 
 #: ../widgets/ConfigDelete.vala:47
 msgid "At least a year"
-msgstr ""
+msgstr "Τουλάχιστον ένα χρόνο"
 
 #: ../widgets/ConfigDelete.vala:48
 msgid "Forever"
-msgstr ""
+msgstr "Για πάντα"
 
 #: ../widgets/ConfigDelete.vala:95
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Τουλάχιστον %d μέρα"
+msgstr[1] "Τουλάχιστον %d μέρες"
 
 #: ../widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
-msgstr ""
+msgstr "Σήμερα"
 
 #: ../widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
-msgstr ""
+msgstr "Χθες"
 
 #: ../widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
-msgstr ""
+msgstr "Αύριο"
 
 #: ../widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d ημέρα από τώρα"
+msgstr[1] "%d ημέρες από τώρα"
 
 #: ../widgets/ConfigLabelBackupDate.vala:83
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d ημέρα πριν"
+msgstr[1] "%d ημέρες πριν"
 
 #. Translators: This is used in phrases like "Most recent backup: None"
 #: ../widgets/ConfigLabelBackupDate.vala:95
 #: ../widgets/ConfigLabelBackupDate.vala:109
 msgid "None"
-msgstr ""
+msgstr "Κανένα"
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "Yes"
-msgstr ""
+msgstr "Ναι"
 
 #: ../widgets/ConfigLabelBool.vala:34
 msgid "No"
-msgstr ""
+msgstr "Όχι"
 
 #: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
 msgstr ""
+"Τα προγενέστερα αντίγραφα ασφαλείας θα διατηρηθούν για τουλάχιστον ένα μήνα "
+"ή μέχρι η τοποθεσία που τα περιέχει δεν έχει αρκετό ελεύθερο χώρο."
 
 #: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
 msgstr ""
+"Τα προγενέστερα αντίγραφα ασφαλείας θα διατηρηθούν για τουλάχιστον δύο μήνες "
+"ή μέχρι η τοποθεσία που τα περιέχει δεν έχει αρκετό ελεύθερο χώρο."
 
 #: ../widgets/ConfigLabelPolicy.vala:68
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
 msgstr ""
+"Τα προγενέστερα αντίγραφα ασφαλείας θα διατηρηθούν για τουλάχιστον τρεις "
+"μήνες ή μέχρι η τοποθεσία που τα περιέχει δεν έχει αρκετό ελεύθερο χώρο."
 
 #: ../widgets/ConfigLabelPolicy.vala:70
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
+"Τα παλιά αντίγραφα ασφαλείας θα παραμένουν για τουλάχιστον έξι μήνες ή μέχρι "
+"η τοποθεσία αποθήκευσης να έχει μικρή χωρητικότητα."
 
 #: ../widgets/ConfigLabelPolicy.vala:72
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 msgstr ""
+"Τα παλιά αντίγραφα ασφαλείας θα παραμένουν για τουλάχιστον ένα χρόνο ή μέχρι "
+"η τοποθεσία αποθήκευσης τους να έχει μικρή χωρητικότητα."
 
 #: ../widgets/ConfigLabelPolicy.vala:74
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
+"Τα παλιά αντίγραφα ασφαλείας θα παραμένουν μέχρι η τοποθεσία αποθήκευσης "
+"τους να έχει μικρή χωρητικότητα."
 
 #: ../widgets/ConfigLabelPolicy.vala:77
 #, c-format
@@ -1280,122 +1371,126 @@ msgid_plural ""
 "Old backups will be kept at least %d days or until the backup location is "
 "low on space."
 msgstr[0] ""
+"Τα παλιά αντίγραφα ασφαλείας θα διατηρηθούν για τουλάχιστον μία μέρα ή μέχρι "
+"η τοποθεσία τους δεν έχει αρκετό ελεύθερο χώρο."
 msgstr[1] ""
+"Τα παλιά αντίγραφα ασφαλείας θα διατηρηθούν για τουλάχιστον %d μέρες ή μέχρι "
+"η τοποθεσία τους δεν έχει αρκετό ελεύθερο χώρο."
 
 #: ../widgets/ConfigList.vala:179
 msgid "_Add"
-msgstr ""
+msgstr "_Προσθήκη"
 
 #: ../widgets/ConfigList.vala:180
 msgid "Add"
-msgstr ""
+msgstr "Προσθήκη"
 
 #: ../widgets/ConfigList.vala:188
 msgid "_Remove"
-msgstr ""
+msgstr "_Αφαίρεση"
 
 #: ../widgets/ConfigList.vala:189
 msgid "Remove"
-msgstr ""
+msgstr "Αφαίρεση"
 
 #: ../widgets/ConfigList.vala:275
 msgid "Choose folders"
-msgstr ""
+msgstr "Επιλογή φακέλων"
 
 #: ../widgets/ConfigLocation.vala:118
 msgid "SSH"
-msgstr ""
+msgstr "SSH"
 
 #: ../widgets/ConfigLocation.vala:120
 msgid "Windows Share"
-msgstr ""
+msgstr "Διαμοιραζόμενος πόρος των Windows"
 
 #: ../widgets/ConfigLocation.vala:122
 msgid "FTP"
-msgstr ""
+msgstr "FTP"
 
 #: ../widgets/ConfigLocation.vala:124
 msgid "WebDAV"
-msgstr ""
+msgstr "WebDAV"
 
 #: ../widgets/ConfigLocation.vala:127
 msgid "Custom Location"
-msgstr ""
+msgstr "Προσαρμοσμένη τοποθεσία"
 
 #. And a local folder option
 #: ../widgets/ConfigLocation.vala:133
 msgid "Local Folder"
-msgstr ""
+msgstr "Τοπικός φάκελος"
 
 #: ../widgets/ConfigLocationCustom.vala:31
 msgid "_URI"
-msgstr ""
+msgstr "_URI"
 
 #: ../widgets/ConfigLocationDAV.vala:31 ../widgets/ConfigLocationFTP.vala:32
 #: ../widgets/ConfigLocationSMB.vala:31 ../widgets/ConfigLocationSSH.vala:31
 msgid "_Server"
-msgstr ""
+msgstr "_Εξυπηρετητής"
 
 #: ../widgets/ConfigLocationDAV.vala:38
 msgid "Use secure connection (_HTTPS)"
-msgstr ""
+msgstr "Χρήση ασφαλούς σύνδεσης (_HTTPS)"
 
 #: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
 #: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
-msgstr ""
+msgstr "_Θύρα"
 
 #: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
 #: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
 #: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
 msgid "_Folder"
-msgstr ""
+msgstr "_Φάκελος"
 
 #: ../widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
-msgstr ""
+msgstr "_Επιλογή φακέλου…"
 
 #: ../widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
-msgstr ""
+msgstr "Επιλογή φακέλου"
 
 #: ../widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
-msgstr ""
+msgstr "_Υποδοχέας"
 
 #: ../widgets/ConfigLocationS3.vala:31
 msgid "S3 Access Key I_D"
-msgstr ""
+msgstr "Ταυτότητα (ID) κλειδιού πρόσβασης για S3"
 
 #: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
-msgstr ""
+msgstr "_Επίθεμα (domain name)"
 
 #: ../widgets/ConfigPeriod.vala:36
 msgid "Daily"
-msgstr ""
+msgstr "Καθημερινά"
 
 #: ../widgets/ConfigPeriod.vala:37
 msgid "Weekly"
-msgstr ""
+msgstr "Εβδομαδιαία"
 
 #: ../widgets/ConfigPeriod.vala:38
 msgid "Every 2 weeks"
-msgstr ""
+msgstr "Κάθε δύο εβδομαες"
 
 #: ../widgets/ConfigPeriod.vala:39
 msgid "Monthly"
-msgstr ""
+msgstr "Μηνιαία"
 
 #: ../widgets/ConfigPeriod.vala:84
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Κάθε μέρα"
+msgstr[1] "Κάθε %d ημέρες"
 
 #: ../widgets/WidgetUtils.vala:30
 #, c-format
 msgid "Could not display %s"
-msgstr ""
+msgstr "Δέν μπορεί να εμφανιστεί %s"
