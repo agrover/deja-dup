@@ -86,7 +86,6 @@ void backup_setup()
   var cachedir = Path.build_filename(dir, "cache");
   DirUtils.create_with_parents(Path.build_filename(cachedir, "deja-dup"), 0700);
 
-  Environment.set_variable("DEJA_DUP_TEST_HOME", dir, true);
   Environment.set_variable("DEJA_DUP_TEST_MOCKSCRIPT", Path.build_filename(dir, "mockscript"), true);
   Environment.set_variable("XDG_CACHE_HOME", cachedir, true);
   Environment.set_variable("PATH", "./mock:" + Environment.get_variable("PATH"), true);
@@ -112,11 +111,13 @@ void backup_teardown()
   }
 
   file = File.new_for_path("/tmp/not/a/thing");
-  try {
-    file.delete(null);
-  }
-  catch (Error e) {
-    assert_not_reached();
+  if (file.query_exists(null)) {
+    try {
+      file.delete(null);
+    }
+    catch (Error e) {
+      assert_not_reached();
+    }
   }
 
   if (Posix.system("rm -r %s".printf(Environment.get_variable("DEJA_DUP_TEST_HOME"))) != 0)
@@ -494,11 +495,13 @@ int main(string[] args)
 
   setup_gsettings();
 
-  Test.add_func("/unit/utils/testing_mode", testing_mode);
-  Test.add_func("/unit/utils/get_day", get_day);
-  Test.add_func("/unit/utils/parse_dir", parse_dir);
-  Test.add_func("/unit/utils/parse_dir_list", parse_dir_list);
-  Test.add_func("/unit/operation/mode_to_string", mode_to_string);
+  var unit = new TestSuite("unit");
+  unit.add(make_backup_case("testing_mode", testing_mode));
+  unit.add(make_backup_case("get_day", get_day));
+  unit.add(make_backup_case("parse_dir", parse_dir));
+  unit.add(make_backup_case("parse_dir_list", parse_dir_list));
+  unit.add(make_backup_case("mode_to_string", mode_to_string));
+  TestSuite.get_root().add_suite(unit);
 
   var backup = new TestSuite("backup");
   backup.add(make_backup_case("bad_volume", bad_volume));
