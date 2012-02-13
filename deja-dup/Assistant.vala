@@ -77,10 +77,9 @@ public abstract class Assistant : Gtk.Window
   {
     infos = new List<PageInfo>();
 
-    var ebox = new Gtk.EventBox();
     var evbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
-    ebox.add(evbox);
 
+    var ebox = new Gtk.EventBox();
     var ehbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
     header_title = new Gtk.Label("");
     header_title.xalign = 0f;
@@ -88,7 +87,8 @@ public abstract class Assistant : Gtk.Window
     ehbox.border_width = 6;
     ehbox.pack_start(header_title, true, true, 0);
     ehbox.pack_start(header_icon, false, false, 0);
-    evbox.pack_start(ehbox, false, false, 0);
+    ebox.add(ehbox);
+    evbox.pack_start(ebox, false, false, 0);
 
     page_box = new Gtk.EventBox();
     evbox.pack_start(page_box, true, true, 0);
@@ -99,7 +99,7 @@ public abstract class Assistant : Gtk.Window
     button_box.spacing = 12;
 
     var dlg_vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
-    dlg_vbox.pack_start(ebox, true, true);
+    dlg_vbox.pack_start(evbox, true, true);
     dlg_vbox.pack_end(button_box, false, true);
     dlg_vbox.show_all();
     add(dlg_vbox);
