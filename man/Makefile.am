@@ -17,9 +17,18 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 # Here's a bunch of translation support.  Some stolen from dpkg
+# and intltool.
 
-POLINGUAS = $(shell grep -v "^\#" $(top_srcdir)/po/LINGUAS)
-MAN_LINGUAS = C $(POLINGUAS)
+ALL_LINGUAS = @ALL_LINGUAS@
+
+PO_LINGUAS=$(shell if test -r $(top_srcdir)/po/LINGUAS; then grep -v "^\#" $(top_srcdir)/po/LINGUAS; else echo "$(ALL_LINGUAS)"; fi)
+
+USER_LINGUAS=$(shell if test -n "$(LINGUAS)"; then LLINGUAS="$(LINGUAS)"; ALINGUAS="$(ALL_LINGUAS)"; for lang in $$LLINGUAS; do if test -n "`grep \^$$lang$$ $(top_srcdir)/po/LINGUAS 2>/dev/null`" -o -n "`echo $$ALINGUAS|tr ' ' '\n'|grep \^$$lang$$`"; then printf "$$lang "; fi; done; fi)
+
+USE_LINGUAS=$(shell if test -n "$(USER_LINGUAS)" -o -n "$(LINGUAS)"; then LLINGUAS="$(USER_LINGUAS)"; else if test -n "$(PO_LINGUAS)"; then LLINGUAS="$(PO_LINGUAS)"; else LLINGUAS="$(ALL_LINGUAS)"; fi; fi; for lang in $$LLINGUAS; do printf "$$lang "; done)
+
+MAN_LINGUAS = C $(USE_LINGUAS)
+
 
 PAGES = deja-dup.1 deja-dup-preferences.1
 
@@ -52,7 +61,7 @@ clean-local-yes:
 install-data-local: install-data-local-@USE_NLS@
 install-data-local-no:
 install-data-local-yes: man
-	for lang in $(POLINGUAS); do \
+	for lang in $(USE_LINGUAS); do \
 		$(mkinstalldirs) "$(DESTDIR)$(mandir)/$$lang/man1"; \
 		$(INSTALL_DATA) $$lang/*.1 "$(DESTDIR)$(mandir)/$$lang/man1"; \
 	done
@@ -62,7 +71,7 @@ install-data-local-yes: man
 uninstall-local: uninstall-local-@USE_NLS@
 uninstall-local-no:
 uninstall-local-yes: man
-	for lang in $(POLINGUAS); do \
+	for lang in $(USE_LINGUAS); do \
 		for file in $(PAGES); do \
 			rm -f "$(DESTDIR)$(mandir)/$$lang/man1/$$file"; \
 		done \
