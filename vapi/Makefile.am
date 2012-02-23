@@ -19,5 +19,6 @@
 EXTRA_DIST = \
 	config.vapi \
 	keyring.vapi \
+	networkmonitor.vapi \
 	uriutils.vapi
 
