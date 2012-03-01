@@ -208,6 +208,7 @@ def get_settings_value(key, schema = None, root = None):
   return pout.strip()
 
 def start_deja_dup(args=[], executable='deja-dup', waitfor='frmBackup', debug=False):
+  assert executable != 'deja-dup' or args # must be some argument
   # Rather than running debug, it's sometimes more effective to run
   # "./interactive shell" and then run gdb directly
   cmd = [executable] + args
@@ -417,6 +418,7 @@ def set_file_list(dlg, obj, addObj, removeObj, files):
     if f[-1] != '/':
       f += '/'
     ldtp.selectlastrow('dlgChoosefolders', 'tblPlaces') # must switch away from Recent Files view to get txtLocation
+    ldtp.wait(1)
     ldtp.settextvalue('dlgChoosefolders', 'txtLocation', f)
     ldtp.click('dlgChoosefolders', 'btnOpen')
     ldtp.wait(1) # let dialog close
@@ -508,6 +510,7 @@ def restore_simple(path, date=None, backend = None, encrypt=True, dest = None):
   if path[-1] != '/':
     path += '/'
   ldtp.selectlastrow('dlgChoosedestinationforrestoredfiles', 'tblPlaces') # must switch away from Recent Files view to get txtLocation
+  ldtp.wait(1) # give the dlg a second to settle
   ldtp.settextvalue('dlgChoosedestinationforrestoredfiles', 'txtLocation', path)
   ldtp.click('dlgChoosedestinationforrestoredfiles', 'btnOpen')
   ldtp.wait(1) # give the combo a second to settle

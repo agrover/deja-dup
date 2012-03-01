@@ -31,7 +31,6 @@ def test():
   os.makedirs(backupdir)
   base.setup()
   base.backup_simple(backend='file', dest=backupdir, includes=['data/spa [ ces'], excludes=['data/spa [ ces/bad one'])
-  base.start_deja_dup()
   base.restore_simple(restoredir)
   root = os.path.join(restoredir, os.path.normpath(sys.path[0])[1:], 'data/spa [ ces')
   assert base.file_equals(os.path.join(root, 'one space/file.txt'), 'space\n')
