@@ -33,6 +33,13 @@ public class ConfigEntry : ConfigWidget
     return entry.get_text();
   }
 
+  public void set_accessible_name (string name)
+  {
+    var accessible = entry.get_accessible();
+    if (accessible != null)
+      accessible.set_name(name);
+  }
+
   protected Gtk.Entry entry;
   construct {
     entry = new Gtk.Entry();

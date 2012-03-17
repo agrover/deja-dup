@@ -28,8 +28,9 @@ public class ConfigLocationU1 : ConfigLocationTable
   }
 
   construct {
-    add_widget(_("_Folder"),
-               new ConfigFolder(DejaDup.U1_FOLDER_KEY, DejaDup.U1_ROOT));
+    var entry = new ConfigFolder(DejaDup.U1_FOLDER_KEY, DejaDup.U1_ROOT);
+    entry.set_accessible_name("U1Folder");
+    add_widget(_("_Folder"), entry);
   }
 }
 

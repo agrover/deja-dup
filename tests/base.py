@@ -423,6 +423,12 @@ def set_file_list(dlg, obj, addObj, removeObj, files):
     ldtp.click('dlgChoosefolders', 'btnOpen')
     ldtp.wait(1) # let dialog close
 
+def wait_for_combo(frm, obj, value):
+  count = 0
+  while not ldtp.ischildselected(frm, obj, value) and count < 30:
+    ldtp.wait(1)
+    count = count + 1
+
 def walk_prefs(backend, dest, includes, excludes):
   if backend == 'file':
     ldtp.selecttab('frmBackup', 'ptlCategories', 'Storage')
@@ -434,7 +440,9 @@ def walk_prefs(backend, dest, includes, excludes):
       dest = os.getcwd()+'/'+dest
 
     ldtp.comboselect('frmBackup', 'cboLocation', 'Local Folder')
-    ldtp.settextvalue('frmBackup', 'txt0', dest) # FIXME txt0 is bad name
+    wait_for_combo('frmBackup', 'cboLocation', 'Local Folder') # this menu acts slowly, because of custom widgets
+    remap('frmBackup')
+    ldtp.settextvalue('frmBackup', 'txtFileFolder', dest)
     ldtp.wait(1) # without this, sometimes ldtp moves so fast, deja-dup doesn't notice dest
 
   ldtp.selecttab('frmBackup', 'ptlCategories', 'Folders')
@@ -480,7 +488,9 @@ def backup_simple(finish=True, error=None, timeout=400, backend = None,
 def walk_restore_prefs(dlg, backend, dest):
   if backend == 'file':
     ldtp.comboselect(dlg, 'cboLocation', 'Local Folder')
-    ldtp.settextvalue(dlg, 'txt0', dest) # FIXME txt0 is bad name
+    wait_for_combo(dlg, 'cboLocation', 'Local Folder') # this menu acts slowly, because of custom widgets
+    remap(dlg)
+    ldtp.settextvalue(dlg, 'txtFileFolder', dest)
     ldtp.wait(1) # without this, sometimes ldtp moves so fast, deja-dup doesn't notice dest
 
 def restore_simple(path, date=None, backend = None, encrypt=True, dest = None):

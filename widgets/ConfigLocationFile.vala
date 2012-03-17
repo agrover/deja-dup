@@ -34,6 +34,7 @@ public class ConfigLocationFile : ConfigLocationTable
     entry = new ConfigURLPart(ConfigURLPart.Part.FOLDER,
                               DejaDup.FILE_PATH_KEY,
                               DejaDup.FILE_ROOT);
+    entry.set_accessible_name("FileFolder");
 
     var browse = new Gtk.Button.with_mnemonic(_("_Choose Folder…"));
     browse.clicked.connect(browse_clicked);
