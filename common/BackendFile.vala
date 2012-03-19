@@ -37,7 +37,7 @@ public class BackendFile : Backend
   }
 
   // Will return null if volume isn't ready
-  static File? get_file_from_settings() throws Error
+  static File? get_file_from_settings()
   {
     var settings = get_settings(FILE_ROOT);
     var type = settings.get_string(FILE_TYPE_KEY);
@@ -92,51 +92,40 @@ public class BackendFile : Backend
   }
   
   public override bool is_native() {
-    try {
-      var settings = get_settings(FILE_ROOT);
-      var type = settings.get_string(FILE_TYPE_KEY);
-      if (type == "volume")
-        return true;
+    var settings = get_settings(FILE_ROOT);
+    var type = settings.get_string(FILE_TYPE_KEY);
+    if (type == "volume")
+      return true;
 
-      var file = get_file_from_settings();
-      if (file != null)
-        return file.is_native();
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
+    var file = get_file_from_settings();
+    if (file != null)
+      return file.is_native();
 
     return true; // default to yes?
   }
 
   public override async bool is_ready(out string when) {
     when = null;
-    try {
-      var file = get_file_from_settings();
-      if (file == null) { // must be a volume that isn't yet mounted. See if volume is connected
-        var settings = get_settings(FILE_ROOT);
-        var uuid = settings.get_string(FILE_UUID_KEY);
-        var vol = find_volume_by_uuid(uuid);
-        if (vol != null)
-          return true;
-        else {
-          var name = settings.get_string(FILE_SHORT_NAME_KEY);
-          when = _("Backup will begin when %s becomes connected.").printf(name);
-          return false;
-        }
-      }
-      else if (file.is_native())
+
+    var file = get_file_from_settings();
+    if (file == null) { // must be a volume that isn't yet mounted. See if volume is connected
+      var settings = get_settings(FILE_ROOT);
+      var uuid = settings.get_string(FILE_UUID_KEY);
+      var vol = find_volume_by_uuid(uuid);
+      if (vol != null)
         return true;
       else {
-        when = _("Backup will begin when a network connection becomes available.");
-        return yield Network.get().can_reach (file.get_uri ());
+        var name = settings.get_string(FILE_SHORT_NAME_KEY);
+        when = _("Backup will begin when %s becomes connected.").printf(name);
+        return false;
       }
     }
-    catch (Error e) {
-      warning("%s\n", e.message);
+    else if (file.is_native())
+      return true;
+    else {
+      when = _("Backup will begin when a network connection becomes available.");
+      return yield Network.get().can_reach (file.get_uri ());
     }
-
-    return true; // default to yes?
   }
 
   public override Icon? get_icon() {
@@ -146,13 +135,7 @@ public class BackendFile : Backend
     if (type == "volume")
       icon_name = settings.get_string(FILE_ICON_KEY);
     else {
-      File file = null;
-      try {
-        file = get_file_from_settings();
-      }
-      catch (Error e) {
-        // ignore, icon will be folder-remote
-      }
+      File file = get_file_from_settings();
       if (file != null) {
         try {
           var info = file.query_info(FILE_ATTRIBUTE_STANDARD_ICON,
@@ -179,14 +162,9 @@ public class BackendFile : Backend
   public override void add_argv(Operation.Mode mode, ref List<string> argv)
   {
     if (mode == Operation.Mode.BACKUP) {
-      try {
-        var file = get_file_from_settings();
-        if (file != null && file.is_native())
-          argv.prepend("--exclude=%s".printf(file.get_path()));
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
+      var file = get_file_from_settings();
+      if (file != null && file.is_native())
+        argv.prepend("--exclude=%s".printf(file.get_path()));
     }
     
     if (mode == Operation.Mode.INVALID)
