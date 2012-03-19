@@ -31,7 +31,7 @@ internal class DuplicityInstance : Object
   public bool verbose {get; private set; default = false;}
   
   public virtual void start(List<string> argv_in, List<string>? envp_in,
-                            bool as_root = false) throws SpawnError
+                            bool as_root = false) throws Error
   {
     var verbose_str = Environment.get_variable("DEJA_DUP_DEBUG");
     if (verbose_str != null && int.parse(verbose_str) > 0)
@@ -136,49 +136,38 @@ internal class DuplicityInstance : Object
         Environment.find_program_in_path("sh") != null) {
       // gksu has a restrictive command line maximum length.  To work around
       // that, we stick the duplicity command inside a temporary script.
+
+      string scriptname;
+      var scriptfd = FileUtils.open_tmp(Config.PACKAGE + "-XXXXXX", out scriptname);
+      scriptfile = File.new_for_path(scriptname);
+      Posix.close(scriptfd);
       
-      try {
-        string scriptname;
-        var scriptfd = FileUtils.open_tmp(Config.PACKAGE + "-XXXXXX", out scriptname);
-        scriptfile = File.new_for_path(scriptname);
-        Posix.close(scriptfd);
-        
-        // We have to wrap all current args into one string.
-        StringBuilder args = new StringBuilder();
+      // We have to wrap all current args into one string.
+      StringBuilder args = new StringBuilder();
 
-        // Set environment variables for subprocess here because sudo reserves
-        // the right to strip them.
-        foreach (string env in envp_in)
-          args.append("export '%s'\n".printf(env));
+      // Set environment variables for subprocess here because sudo reserves
+      // the right to strip them.
+      foreach (string env in envp_in)
+        args.append("export '%s'\n".printf(env));
 
-        foreach (string a in argv) {
-          if (a == null)
-            break;
-          if (args.len == 0)
-            args.append(Shell.quote(a));
-          else
-            args.append(" " + Shell.quote(a));
-        }
-#if HAVE_VALAC_14
-        scriptfile.replace_contents(args.str, args.len, null, false,
-                                    FileCreateFlags.NONE, null, null);
-#else
-        scriptfile.replace_contents((uint8[])args.str, null, false,
-                                    FileCreateFlags.NONE, null, null);
-#endif
-        
-        argv = new List<string>(); // reset
-        
-        // gksu command must be one string
-        argv.prepend("sh %s".printf(Shell.quote(scriptfile.get_path())));
-        
-        argv.prepend(Environment.get_application_name());
-        argv.prepend("--description");
-        argv.prepend("gksu");
+      foreach (string a in argv) {
+        if (a == null)
+          break;
+        if (args.len == 0)
+          args.append(Shell.quote(a));
+        else
+          args.append(" " + Shell.quote(a));
       }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
+      FileUtils.set_contents(scriptname, args.str);
+      
+      argv = new List<string>(); // reset
+      
+      // gksu command must be one string
+      argv.prepend("sh %s".printf(Shell.quote(scriptname)));
+      
+      argv.prepend(Environment.get_application_name());
+      argv.prepend("--description");
+      argv.prepend("gksu");
     }
     
     string[] real_argv = new string[argv.length()];
