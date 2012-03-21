@@ -40,11 +40,11 @@ public class BackendAuto : Backend
     return false;
   }
 
-  public override string? get_location() throws Error {
+  public override string get_location() {
     return "invalid";
   }
 
-  public override string? get_location_pretty() throws Error {
+  public override string get_location_pretty() {
     return "";
   }
 

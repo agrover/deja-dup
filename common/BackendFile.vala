@@ -64,19 +64,25 @@ public class BackendFile : Backend
   }
 
   // Location will be mounted by this time
-  public override string? get_location() throws Error
+  public override string get_location()
   {
     var file = get_file_from_settings();
     return file.get_uri();
   }
 
-  public override string? get_location_pretty() throws Error
+  public override string get_location_pretty()
   {
     var settings = get_settings(FILE_ROOT);
     var type = settings.get_string(FILE_TYPE_KEY);
     if (type == "volume") {
       var path_val = settings.get_value(FILE_RELPATH_KEY);
-      var path = Filename.to_utf8(path_val.get_bytestring(), -1, null, null);
+      var path = "";
+      try {
+        path = Filename.to_utf8(path_val.get_bytestring(), -1, null, null);
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
       var name = settings.get_string(FILE_SHORT_NAME_KEY);
       if (path == "")
         return name;

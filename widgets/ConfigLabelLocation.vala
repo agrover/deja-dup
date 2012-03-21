@@ -65,11 +65,7 @@ public class ConfigLabelLocation : ConfigLabel
 
     var backend = Backend.get_default();
 
-    string desc = null;
-    try {
-      desc = backend.get_location_pretty();
-    }
-    catch (Error e) {}
+    string desc = backend.get_location_pretty();
     if (desc == null)
       desc = "";
     label.label = desc;

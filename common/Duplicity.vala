@@ -166,14 +166,7 @@ internal class Duplicity : Object
   {
     // save arguments for calling duplicity again later
     mode = original_mode;
-    try {
-      this.remote = backend.get_location();
-    }
-    catch (Error e) {
-      raise_error(e.message, null);
-      done(false, false, null);
-      return;
-    }
+    this.remote = backend.get_location();
     this.backend = backend;
     saved_argv = new List<string>();
     saved_envp = new List<string>();
@@ -1020,12 +1013,9 @@ internal class Duplicity : Object
     case "S3CreateError":
       if (text.contains("<Code>BucketAlreadyExists</Code>")) {
         if (((BackendS3)backend).bump_bucket()) {
-          try {
-            remote = backend.get_location();
-            if (restart())
-              return;
-          }
-          catch (Error e) {warning("%s\n", e.message);}
+          remote = backend.get_location();
+          if (restart())
+            return;
         }
         
         show_error(_("S3 bucket name is not available."));
@@ -1048,12 +1038,8 @@ internal class Duplicity : Object
       }
       else if (text.contains("[Errno 28]")) { // No space left on device
         string where = null;
-        if (mode == Operation.Mode.BACKUP) {
-          try {
-            where = backend.get_location_pretty();
-          }
-          catch (Error e) {warning("%s\n", e.message);}
-        }
+        if (mode == Operation.Mode.BACKUP)
+          where = backend.get_location_pretty();
         else
           where = local.get_path();
         if (where == null)

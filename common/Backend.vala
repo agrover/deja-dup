@@ -31,8 +31,8 @@ public abstract class Backend : Object
   public abstract bool is_native(); // must be callable when nothing is mounted, nothing is prepared
   public virtual Icon? get_icon() {return null;}
 
-  public abstract string? get_location() throws Error;
-  public abstract string? get_location_pretty() throws Error; // short description for user
+  public abstract string get_location();
+  public abstract string get_location_pretty(); // short description for user
 
   public virtual async bool is_ready(out string when) {when = null; return true;} // must be callable when nothing is mounted, nothing is prepared
 

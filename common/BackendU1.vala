@@ -151,14 +151,14 @@ public class BackendU1 : Backend
     return yield Network.get().can_reach ("https://one.ubuntu.com/");
   }
 
-  public override string? get_location() throws Error
+  public override string get_location()
   {
     var settings = get_settings(U1_ROOT);
     var folder = get_folder_key(settings, U1_FOLDER_KEY);
     return "u1+http://%s".printf(folder);
   }
 
-  public override string? get_location_pretty() throws Error
+  public override string get_location_pretty()
   {
     var settings = get_settings(U1_ROOT);
     var folder = get_folder_key(settings, U1_FOLDER_KEY);

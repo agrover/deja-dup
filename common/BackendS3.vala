@@ -60,7 +60,7 @@ public class BackendS3 : Backend
     return yield Network.get().can_reach ("http://%s/".printf(S3_SERVER));
   }
 
-  public override string? get_location() throws Error
+  public override string get_location()
   {
     var settings = get_settings(S3_ROOT);
     
@@ -114,7 +114,7 @@ public class BackendS3 : Backend
     return true;
   }
   
-  public override string? get_location_pretty() throws Error
+  public override string get_location_pretty()
   {
     var settings = get_settings(S3_ROOT);
     var folder = get_folder_key(settings, S3_FOLDER_KEY);
