@@ -64,9 +64,52 @@ public class BackendFile : Backend
   }
 
   // Location will be mounted by this time
-  public override string get_location()
+  public override string get_location(ref bool as_root)
   {
     var file = get_file_from_settings();
+
+    if (as_root && !file.is_native()) {
+      // OK...  Root can't use GVFS URIs as-is because it would need access to
+      // our GVFS mounts which are only available on our session dbus.  Which
+      // root can't talk to.  Possible workarounds:
+      //  * Some magic to let root talk to our gvfs daemons (haven't found yet)
+      //  * Use FUSE local paths (root also isn't given access to these mounts)
+      //  * Have duplicity notice that it needs root to write to a file, and
+      //    then restart itself under sudo.  But then we'd just hit the same
+      //    problem again but now duplicity has to solve it...
+      //  * Restore to a temporary folder and move files over with sudo.  This
+      //    is what we used to always do in older deja-dup.  But it had
+      //    several problems with consuming the hard drive, especially if the
+      //    user had partitioned in ways we didn't expect.  Hard to know where
+      //    a safe spot is to hoard all the files.
+      //  * Pass mount username/password to duplicity as environment variables
+      //    and have root do the mount itself.  This could work...  if we had
+      //    a reliable way to get the username/password.  We could get it from
+      //    keyring (even then, only a guess, since the daemon could have set
+      //    the 'object' or 'authtype' fields, which we don't know if it did)
+      //    or from a MountOperation.  But a user could have mounted it earlier
+      //    in session without saving password in keyring.  And we can't force
+      //    an unmount on the user just so we can remount it.
+      //  * Have duplicity try to mount and ask user for password.  We'd need
+      //    to add functionality to duplicity to allow a conversation between a
+      //    driving app like deja-dup and itself, to be able to proxy these
+      //    prompts and questions to the user.  This would work nicely, but is
+      //    a very different interaction model than duplicity uses today.
+      //    Much more deja-dup-focused.  If we're going down this direction,
+      //    there are all sorts of two-way interactions that we could stand to
+      //    benefit from.  Would require a deep rethink of our driving model.
+      //
+      // So in the absence of an actually good solution, we'll just disable
+      // running under sudo if the location is remote.  :(  Maybe our
+      // over-eager needs-root algorithm got it wrong anyway. Regardless, this
+      // way the user will get a permissions denied error that will point them
+      // in the direction of trying to restore in a new folder rather than on
+      // top of their running system, which, let's be honest, is probably not
+      // a good idea anyway.  BTW, where does Napolean keep his armies?
+      // In his sleevies!
+      as_root = false;
+    }
+
     return file.get_uri();
   }
 

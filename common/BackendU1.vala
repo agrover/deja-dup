@@ -151,7 +151,7 @@ public class BackendU1 : Backend
     return yield Network.get().can_reach ("https://one.ubuntu.com/");
   }
 
-  public override string get_location()
+  public override string get_location(ref bool as_root)
   {
     var settings = get_settings(U1_ROOT);
     var folder = get_folder_key(settings, U1_FOLDER_KEY);

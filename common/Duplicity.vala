@@ -82,7 +82,6 @@ internal class Duplicity : Object
   
   DuplicityInstance inst;
   
-  string remote;
   List<string> backend_argv;
   List<string> saved_argv;
   List<string> saved_envp;
@@ -166,7 +165,6 @@ internal class Duplicity : Object
   {
     // save arguments for calling duplicity again later
     mode = original_mode;
-    this.remote = backend.get_location();
     this.backend = backend;
     saved_argv = new List<string>();
     saved_envp = new List<string>();
@@ -204,6 +202,11 @@ internal class Duplicity : Object
       return 1;
     else
       return 0;
+  }
+
+  string get_remote ()
+  {
+    return backend.get_location(ref needs_root);
   }
 
   void expand_links_in_file(File file, ref List<File> all, bool include, List<File>? seen = null)
@@ -558,7 +561,7 @@ internal class Duplicity : Object
     var cleanup_argv = new List<string>();
     cleanup_argv.append("cleanup");
     cleanup_argv.append("--force");
-    cleanup_argv.append(this.remote);
+    cleanup_argv.append(get_remote());
     
     set_status(_("Cleaning up…"));
     connect_and_start(null, null, cleanup_argv);
@@ -572,7 +575,7 @@ internal class Duplicity : Object
     argv.append("remove-all-but-n-full");
     argv.append("%d".printf(cutoff));
     argv.append("--force");
-    argv.append(this.remote);
+    argv.append(get_remote());
     
     set_status(_("Cleaning up…"));
     connect_and_start(null, null, argv);
@@ -1013,8 +1016,7 @@ internal class Duplicity : Object
     case "S3CreateError":
       if (text.contains("<Code>BucketAlreadyExists</Code>")) {
         if (((BackendS3)backend).bump_bucket()) {
-          remote = backend.get_location();
-          if (restart())
+          if (restart()) // get_remote() will eventually grab new bucket name
             return;
         }
         
@@ -1375,21 +1377,21 @@ internal class Duplicity : Object
           argv.prepend("full");
         argv.append("--volsize=%d".printf(get_volsize()));
         argv.append(local_arg.get_path());
-        argv.append(remote);
+        argv.append(get_remote());
         break;
       case Operation.Mode.RESTORE:
         argv.prepend("restore");
         argv.append("--force");
-        argv.append(remote);
+        argv.append(get_remote());
         argv.append(local_arg.get_path());
         break;
       case Operation.Mode.STATUS:
         argv.prepend("collection-status");
-        argv.append(remote);
+        argv.append(get_remote());
         break;
       case Operation.Mode.LIST:
         argv.prepend("list-current-files");
-        argv.append(remote);
+        argv.append(get_remote());
         break;
       }
     }

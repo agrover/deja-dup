@@ -40,7 +40,7 @@ public class BackendAuto : Backend
     return false;
   }
 
-  public override string get_location() {
+  public override string get_location(ref bool as_root) {
     return "invalid";
   }
 

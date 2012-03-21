@@ -60,7 +60,7 @@ public class BackendS3 : Backend
     return yield Network.get().can_reach ("http://%s/".printf(S3_SERVER));
   }
 
-  public override string get_location()
+  public override string get_location(ref bool as_root)
   {
     var settings = get_settings(S3_ROOT);
     

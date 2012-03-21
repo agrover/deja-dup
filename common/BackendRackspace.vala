@@ -50,7 +50,7 @@ public class BackendRackspace : Backend
     return yield Network.get().can_reach ("http://%s/".printf(RACKSPACE_SERVER));
   }
 
-  public override string get_location()
+  public override string get_location(ref bool as_root)
   {
     var settings = get_settings(RACKSPACE_ROOT);
     var container = get_folder_key(settings, RACKSPACE_CONTAINER_KEY);
