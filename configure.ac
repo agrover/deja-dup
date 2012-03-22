@@ -40,10 +40,10 @@ LT_INIT
 
 PKG_PROG_PKG_CONFIG([0.24])
 
-DD_PROG_VALAC([0.14.0], [valac-0.16 valac-0.14 valac])
-AS_IF([test "x$(basename $VALAC)" = xvalac-0.14],
-  [AC_SUBST(SHARED_VALAFLAGS, ["-D HAVE_VALAC_14"])]
-)
+DD_PROG_VALAC([0.15.2], [valac-0.16 valac])
+#AS_IF([test "x$(basename $VALAC)" = xvalac-0.16],
+#  [AC_SUBST(SHARED_VALAFLAGS, ["-D HAVE_VALAC_16"])]
+#)
 
 # Sets up gettext.
 GETTEXT_PACKAGE="$PACKAGE"
@@ -66,7 +66,7 @@ AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package 
 GTK_MODULE=gtk+-3.0
 GTK_REQ_VER=3.0
 GDK_X11_MODULE=gdk-x11-3.0
-GLIB_REQ_VER=2.26
+GLIB_REQ_VER=2.31.6
 GIO_REQ_VER=$GLIB_REQ_VER
 NOTIFY_REQ_VER=0.7
 
@@ -100,17 +100,6 @@ PKG_CHECK_MODULES(WIDGETS,
 PKG_CHECK_MODULES(MONITOR,
                   gio-2.0 >= $GIO_REQ_VER
                   libnotify >= $NOTIFY_REQ_VER)
-
-AH_TEMPLATE([HAVE_NETWORKMONITOR], [whether NetworkMonitor is available in gio])
-PKG_CHECK_EXISTS(gio-2.0 >= 2.31.6,
-  [AC_DEFINE(HAVE_NETWORKMONITOR)
-   if test "x$(basename $VALAC)" = xvalac-0.14; then
-     AC_SUBST(NETWORKMONITOR_VALAFLAGS, ["-D HAVE_NETWORKMONITOR --pkg networkmonitor"])
-   else
-     AC_SUBST(NETWORKMONITOR_VALAFLAGS, ["-D HAVE_NETWORKMONITOR"])
-   fi
-  ],
-  [])
 
 AC_ARG_WITH([extensiondir],
   [AS_HELP_STRING([--with-extensiondir],

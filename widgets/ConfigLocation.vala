@@ -310,7 +310,7 @@ public class ConfigLocation : ConfigWidget
 
   void add_volume(VolumeMonitor monitor, Volume v)
   {
-    add_volume_full(v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID),
+    add_volume_full(v.get_identifier(VolumeIdentifier.UUID),
                     v.get_name(), v.get_icon());
   }
 
@@ -332,7 +332,7 @@ public class ConfigLocation : ConfigWidget
 
   void update_volume(VolumeMonitor monitor, Volume v)
   {
-    update_volume_full(v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID),
+    update_volume_full(v.get_identifier(VolumeIdentifier.UUID),
                        v.get_name(), v.get_icon());
   }
 
@@ -347,7 +347,7 @@ public class ConfigLocation : ConfigWidget
 
   void remove_volume(VolumeMonitor monitor, Volume v)
   {
-    remove_volume_full(v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID));
+    remove_volume_full(v.get_identifier(VolumeIdentifier.UUID));
   }
 
   void remove_volume_full(string uuid)

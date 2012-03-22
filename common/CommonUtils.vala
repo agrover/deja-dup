@@ -430,13 +430,13 @@ public string get_file_desc(File file)
 {
   // First try to get the DESCRIPTION.  Else get the DISPLAY_NAME
   try {
-    var info = file.query_info(FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME + "," +
-                               FILE_ATTRIBUTE_STANDARD_DESCRIPTION,
+    var info = file.query_info(FileAttribute.STANDARD_DISPLAY_NAME + "," +
+                               FileAttribute.STANDARD_DESCRIPTION,
                                FileQueryInfoFlags.NONE, null);
-    if (info.has_attribute(FILE_ATTRIBUTE_STANDARD_DESCRIPTION))
-      return info.get_attribute_string(FILE_ATTRIBUTE_STANDARD_DESCRIPTION);
-    else if (info.has_attribute(FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME))
-      return info.get_attribute_string(FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME);
+    if (info.has_attribute(FileAttribute.STANDARD_DESCRIPTION))
+      return info.get_attribute_string(FileAttribute.STANDARD_DESCRIPTION);
+    else if (info.has_attribute(FileAttribute.STANDARD_DISPLAY_NAME))
+      return info.get_attribute_string(FileAttribute.STANDARD_DISPLAY_NAME);
   }
   catch (Error e) {}
 
@@ -492,7 +492,7 @@ public async string get_nickname (File f)
     // were backing up more than they were.  This should help avoid such data
     // loss accidents.
     try {
-      var info = yield f.query_info_async(FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
+      var info = yield f.query_info_async(FileAttribute.STANDARD_DISPLAY_NAME,
                                           FileQueryInfoFlags.NOFOLLOW_SYMLINKS);
       // Translators: this is the home folder and %s is the user's username
       s = _("Home (%s)").printf(info.get_display_name());

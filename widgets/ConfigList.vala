@@ -254,7 +254,7 @@ public class ConfigList : ConfigWidget
       }
       else {
         try {
-          FileInfo info = f.query_info(FILE_ATTRIBUTE_STANDARD_ICON, FileQueryInfoFlags.NONE, null);
+          FileInfo info = f.query_info(FileAttribute.STANDARD_ICON, FileQueryInfoFlags.NONE, null);
           icon = info.get_icon();
         }
         catch (Error err) {warning("%s\n", err.message);}

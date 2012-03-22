@@ -193,20 +193,12 @@ public abstract class AssistantOperation : Assistant
       Gtk.TextIter start, line100;
       buffer.get_start_iter(out start);
       buffer.get_iter_at_line(out line100, buffer.get_line_count() - 100);
-#if HAVE_VALAC_14
-      buffer.delete(start, line100);
-#else
       buffer.delete(ref start, ref line100);
-#endif
     }
     
     Gtk.TextIter iter;
     buffer.get_end_iter(out iter);
-#if HAVE_VALAC_14
-    buffer.insert_text(iter, log_line, (int)log_line.length);
-#else
     buffer.insert_text(ref iter, log_line, (int)log_line.length);
-#endif
     if (adjustment_at_end)
       adjust.value = adjust.upper;
   }

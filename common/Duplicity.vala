@@ -234,8 +234,8 @@ internal class Duplicity : Object
       foreach (weak string piece in pieces) {
         parent = so_far;
         so_far = parent.resolve_relative_path(piece);
-        var info = so_far.query_info(FILE_ATTRIBUTE_STANDARD_IS_SYMLINK + "," +
-                                     FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET,
+        var info = so_far.query_info(FileAttribute.STANDARD_IS_SYMLINK + "," +
+                                     FileAttribute.STANDARD_SYMLINK_TARGET,
                                      FileQueryInfoFlags.NOFOLLOW_SYMLINKS, 
                                      null);
         if (info.get_is_symlink()) {

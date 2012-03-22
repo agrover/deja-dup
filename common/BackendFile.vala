@@ -187,7 +187,7 @@ public class BackendFile : Backend
       File file = get_file_from_settings();
       if (file != null) {
         try {
-          var info = file.query_info(FILE_ATTRIBUTE_STANDARD_ICON,
+          var info = file.query_info(FileAttribute.STANDARD_ICON,
                                      FileQueryInfoFlags.NONE, null);
           return info.get_icon();
         }
@@ -259,7 +259,7 @@ public class BackendFile : Backend
 
   public async static void set_volume_info(Volume volume, string? relpath = null)
   {
-    var uuid = volume.get_identifier(VOLUME_IDENTIFIER_KIND_UUID);
+    var uuid = volume.get_identifier(VolumeIdentifier.UUID);
     if (uuid == null || uuid == "")
       return;
 
@@ -433,7 +433,7 @@ public class BackendFile : Backend
       // For some reason, when I last tested this (glib 2.22.2), 
       // Volume.get_uuid always returned null.
       // Looping and asking for the identifier is more reliable.
-      if (v.get_identifier(VOLUME_IDENTIFIER_KIND_UUID) == uuid)
+      if (v.get_identifier(VolumeIdentifier.UUID) == uuid)
         return v;
     }
     return null;
@@ -463,7 +463,7 @@ public class BackendFile : Backend
 
   public override async uint64 get_space(bool free = true)
   {
-    var attr = free ? FILE_ATTRIBUTE_FILESYSTEM_FREE : FILE_ATTRIBUTE_FILESYSTEM_SIZE;
+    var attr = free ? FileAttribute.FILESYSTEM_FREE : FileAttribute.FILESYSTEM_SIZE;
     try {
       var file = get_file_from_settings();
       var info = yield file.query_filesystem_info_async(attr, Priority.DEFAULT, null);

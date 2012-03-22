@@ -90,7 +90,7 @@ internal abstract class RecursiveOp : Object
     add_ref();
     try {
       var enumerator = yield src.enumerate_children_async(
-                         FILE_ATTRIBUTE_STANDARD_NAME,
+                         FileAttribute.STANDARD_NAME,
                          FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
                          Priority.DEFAULT, null);
 
