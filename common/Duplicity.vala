@@ -108,7 +108,7 @@ internal class Duplicity : Object
   bool has_non_home_contents = false;
   List<File> homes = new List<File>();
 
-  List<File> read_error_files = null;
+  List<File> local_error_files = null;
   
   bool checked_collection_info = false;
   bool got_collection_info = false;
@@ -382,7 +382,8 @@ internal class Duplicity : Object
   bool restart()
   {
     state = State.NORMAL;
-    read_error_files = null;
+    if (restore_files == null) // only clear if we're not in middle of restore sequence
+      local_error_files = null;
     
     if (mode == Operation.Mode.INVALID)
       return false;
@@ -667,14 +668,15 @@ internal class Duplicity : Object
               return;
           }
         }
-        else if (mode == Operation.Mode.BACKUP) {
-          if (read_error_files != null) {
+
+        if (mode == Operation.Mode.BACKUP) {
+          if (local_error_files != null) {
             // OK, we succeeded yay!  But some files didn't make it into the backup
             // because we couldn't read them.  So tell the user so they don't think
             // everything is hunky dory.
             detail = _("Could not back up the following files.  Please make sure you are able to open them.");
             detail += "\n";
-            foreach (File f in read_error_files) {
+            foreach (File f in local_error_files) {
               detail += "\n%s".printf(f.get_parse_name());
             }
           }
@@ -682,6 +684,18 @@ internal class Duplicity : Object
           mode = Operation.Mode.INVALID; // mark 'done' so when we delete, we don't restart
           if (delete_files_if_needed())
             return;
+        }
+        else if (mode == Operation.Mode.RESTORE) {
+          if (local_error_files != null) {
+            // OK, we succeeded yay!  But some files didn't actually restore
+            // because we couldn't write to them.  So tell the user so they
+            // don't think everything is hunky dory.
+            detail = _("Could not restore the following files.  Please make sure you are able to write to them.");
+            detail += "\n";
+            foreach (File f in local_error_files) {
+              detail += "\n%s".printf(f.get_parse_name());
+            }
+          }
         }
         break;
       }
@@ -816,6 +830,7 @@ internal class Duplicity : Object
   protected static const int WARNING_INCOMPLETE_BACKUP = 5;
   protected static const int WARNING_ORPHANED_BACKUP = 6;
   protected static const int WARNING_CANNOT_READ = 10;
+  protected static const int WARNING_CANNOT_PROCESS = 12; // basically, cannot write or change attrs
   protected static const int DEBUG_GENERIC = 1;
 
   void delete_cache()
@@ -1282,8 +1297,24 @@ internal class Duplicity : Object
           var error_file = make_file_obj(firstline[2]);
           foreach (File f in includes) {
             if (error_file.equal(f) || error_file.has_prefix(f))
-              read_error_files.append(error_file);
+              local_error_files.append(error_file);
           }
+        }
+        break;
+
+      case WARNING_CANNOT_PROCESS:
+        // A file couldn't be restored!  We should note the name and present
+        // the user with a list at the end.
+        if (firstline.length > 2) {
+          // Only add it if it's a child of one of our includes.  Sometimes
+          // Duplicity likes to talk to us about folders like /lost+found and
+          // such that we don't care about.
+          var error_file = make_file_obj(firstline[2]);
+          if (!error_file.equal(slash) && // for some reason, duplicity likes to talk about '/'
+              // Duplicity also likes to whine about files a lot, with errno 1, for no reason.
+              // We only care about errno 13, which is "couldn't write at all"
+              text.contains("[Errno 13]"))
+            local_error_files.append(error_file);
         }
         break;
       }

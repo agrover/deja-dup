@@ -471,13 +471,15 @@ public class AssistantRestore : AssistantOperation
         set_page_title(page, _("Restore Failed"));
       else {
         set_page_title(page, _("Restore Finished"));
-        if (restore_files == null)
-          summary_label.label = _("Your files were successfully restored.");
-        else
-          summary_label.label = dngettext(Config.GETTEXT_PACKAGE,
-                                          "Your file was successfully restored.",
-                                          "Your files were successfully restored.",
-                                          restore_files.length());
+        if (!detail_widget.get_visible()) { // if it *is* visible, a header will be set already
+          if (restore_files == null)
+            summary_label.label = _("Your files were successfully restored.");
+          else
+            summary_label.label = dngettext(Config.GETTEXT_PACKAGE,
+                                            "Your file was successfully restored.",
+                                            "Your files were successfully restored.",
+                                            restore_files.length());
+        }
       }
     }
     else if (page == progress_page) {
