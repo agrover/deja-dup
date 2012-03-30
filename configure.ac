@@ -40,10 +40,10 @@ LT_INIT
 
 PKG_PROG_PKG_CONFIG([0.24])
 
-DD_PROG_VALAC([0.15.2], [valac-0.16 valac])
-#AS_IF([test "x$(basename $VALAC)" = xvalac-0.16],
-#  [AC_SUBST(SHARED_VALAFLAGS, ["-D HAVE_VALAC_16"])]
-#)
+DD_PROG_VALAC([0.16.0], [valac-0.18 valac-0.16 valac])
+AS_IF([test "x$(basename $VALAC)" = xvalac-0.16],
+  [AC_SUBST(SHARED_VALAFLAGS, ["-D HAVE_VALAC_16"])]
+)
 
 # Sets up gettext.
 GETTEXT_PACKAGE="$PACKAGE"
@@ -66,7 +66,7 @@ AC_DEFINE_UNQUOTED(PKG_DATA_DIR, "${PREFIX}/${DATADIRNAME}/${PACKAGE}",[Package 
 GTK_MODULE=gtk+-3.0
 GTK_REQ_VER=3.0
 GDK_X11_MODULE=gdk-x11-3.0
-GLIB_REQ_VER=2.31.6
+GLIB_REQ_VER=2.32
 GIO_REQ_VER=$GLIB_REQ_VER
 NOTIFY_REQ_VER=0.7
 
