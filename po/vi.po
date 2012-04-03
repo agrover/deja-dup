@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-01-17 23:17-0500\n"
-"PO-Revision-Date: 2011-11-14 07:23+0000\n"
+"PO-Revision-Date: 2012-03-22 14:30+0000\n"
 "Last-Translator: Lê Trường An <truongan@linuxmail.org>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-01-20 05:16+0000\n"
-"X-Generator: Launchpad (build 14700)\n"
+"X-Launchpad-Export-Date: 2012-03-23 05:15+0000\n"
+"X-Generator: Launchpad (build 14996)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -379,30 +379,30 @@ msgstr[0] "Phục hồi tập tin từ sao lưu"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:86 ../common/CommonUtils.vala:447
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:447
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s trên %2$s"
 
-#: ../common/BackendFile.vala:124
+#: ../common/BackendFile.vala:168
 #, c-format
 msgid "Backup will begin when %s becomes connected."
 msgstr "Quá trình sao lưu sẽ bắt đầu khi %s được kết nối."
 
-#: ../common/BackendFile.vala:131 ../common/BackendRackspace.vala:49
+#: ../common/BackendFile.vala:175 ../common/BackendRackspace.vala:49
 #: ../common/BackendS3.vala:59 ../common/BackendU1.vala:150
 msgid "Backup will begin when a network connection becomes available."
 msgstr "Quá trình sao lưu sẽ bắt đầu khi kết nối mạng đã sẵn sàng."
 
-#: ../common/BackendFile.vala:357 ../common/BackendFile.vala:421
+#: ../common/BackendFile.vala:384 ../common/BackendFile.vala:448
 msgid "Backup location not available"
 msgstr "Vị trí lưu bản sao lưu chưa sẵn sàng"
 
-#: ../common/BackendFile.vala:358
+#: ../common/BackendFile.vala:385
 msgid "Waiting for a network connection…"
 msgstr "Đang chờ một kết nối mạng..."
 
-#: ../common/BackendFile.vala:421
+#: ../common/BackendFile.vala:448
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Đang chờ cho '%s' được kết nối..."
@@ -411,21 +411,21 @@ msgstr "Đang chờ cho '%s' được kết nối..."
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Bạn phải chỉ định dịch vụ lưu trữ Rackspace trong phần tùy chỉnh."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:194
+#: ../common/BackendRackspace.vala:69 ../widgets/ConfigLocation.vala:194
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
 #. Translators: %s is a folder.
-#: ../common/BackendRackspace.vala:70
+#: ../common/BackendRackspace.vala:72
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "%s trên Rackspace Cloud Files"
 
-#: ../common/BackendRackspace.vala:117 ../common/BackendS3.vala:172
+#: ../common/BackendRackspace.vala:119 ../common/BackendS3.vala:172
 msgid "Permission denied"
 msgstr "Không được phép"
 
-#: ../common/BackendRackspace.vala:138
+#: ../common/BackendRackspace.vala:140
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
@@ -434,19 +434,19 @@ msgstr ""
 "Bạn có thể đăng nhập vào tài khoản Rackspace Cloud Files <a href=\"%s\">trên "
 "mạng</a>."
 
-#: ../common/BackendRackspace.vala:139
+#: ../common/BackendRackspace.vala:141
 msgid "Connect to Rackspace Cloud Files"
 msgstr "Kết nối đến Rackspace Cloud Files"
 
-#: ../common/BackendRackspace.vala:140
+#: ../common/BackendRackspace.vala:142
 msgid "_API access key"
 msgstr "Khóa truy cập A_PI"
 
-#: ../common/BackendRackspace.vala:141
+#: ../common/BackendRackspace.vala:143
 msgid "S_how API access key"
 msgstr "_Hiện khóa truy cập API"
 
-#: ../common/BackendRackspace.vala:142
+#: ../common/BackendRackspace.vala:144
 msgid "_Remember API access key"
 msgstr "Nhớ khóa t_ruy cập API"
 
@@ -561,51 +561,51 @@ msgstr ""
 "Công cụ sao lưu Déjà Dup yêu cầu duplicity phiên bản %d.%d.%.2d trở lên, "
 "nhưng chỉ tìm thấy phiên bản %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:135 ../common/Duplicity.vala:198
+#: ../common/Duplicity.vala:134 ../common/Duplicity.vala:189
 msgid "Paused (no network)"
 msgstr "Tạm dừng (không có mạng)"
 
-#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:412
-#: ../common/Duplicity.vala:431 ../common/Duplicity.vala:436
+#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:409
+#: ../common/Duplicity.vala:428 ../common/Duplicity.vala:433
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Đang chuẩn bị..."
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:463
+#: ../common/Duplicity.vala:460
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Không thể phục hồi '%s': Vị trí tập tin không hợp lệ"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:529
+#: ../common/Duplicity.vala:526
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Vị trí lưu bản sao lưu quá nhỏ. Hãy chọn nơi có dung lượng trống lớn hơn."
 
-#: ../common/Duplicity.vala:551
+#: ../common/Duplicity.vala:548
 msgid "Backup location does not have enough free space."
 msgstr "Vị trí lưu bản sao lưu không đủ dung lượng trống."
 
-#: ../common/Duplicity.vala:570 ../common/Duplicity.vala:584
+#: ../common/Duplicity.vala:567 ../common/Duplicity.vala:581
 msgid "Cleaning up…"
 msgstr "Đang dọn dẹp..."
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: ../common/Duplicity.vala:679
+#: ../common/Duplicity.vala:677
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
 msgstr ""
 
-#: ../common/Duplicity.vala:700 ../common/Duplicity.vala:1089
-#: ../deja-dup/AssistantOperation.vala:537
+#: ../common/Duplicity.vala:710 ../common/Duplicity.vala:1092
+#: ../deja-dup/AssistantOperation.vala:545
 msgid "Failed with an unknown error."
 msgstr "Thất bại với lỗi không rõ."
 
-#: ../common/Duplicity.vala:929
+#: ../common/Duplicity.vala:940
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Không thể phục hồi '%s': Không tìm thấy tập tin trong bản sao lưu"
@@ -613,16 +613,16 @@ msgstr "Không thể phục hồi '%s': Không tìm thấy tập tin trong bản
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:935 ../common/Duplicity.vala:1037
-#: ../common/Duplicity.vala:1041
+#: ../common/Duplicity.vala:946 ../common/Duplicity.vala:1044
+#: ../common/Duplicity.vala:1048
 msgid "Bad encryption password."
 msgstr "Mật khẩu mã hóa không tốt."
 
-#: ../common/Duplicity.vala:940
+#: ../common/Duplicity.vala:951
 msgid "Computer name changed"
 msgstr "Đã đổi tên máy tính"
 
-#: ../common/Duplicity.vala:940
+#: ../common/Duplicity.vala:951
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -632,67 +632,67 @@ msgstr ""
 "Sao lưu đang tồn tại là của một máy tính có tên %s, nhưng tên máy tính hiện "
 "tại là %s. Nếu bạn không muốn điều này, bạn nên sao lưu sang vị trí khác."
 
-#: ../common/Duplicity.vala:975
+#: ../common/Duplicity.vala:986
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Không đủ quyền khi tạo '%s'."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:979 ../common/Duplicity.vala:983
+#: ../common/Duplicity.vala:990 ../common/Duplicity.vala:994
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Không đủ quyền khi đọc '%s'."
 
-#: ../common/Duplicity.vala:987
+#: ../common/Duplicity.vala:998
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Không đủ quyền khi xóa '%s'."
 
-#: ../common/Duplicity.vala:994
+#: ../common/Duplicity.vala:1005
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Vị trí lưu bản sao lưu '%s' không tồn tại."
 
-#: ../common/Duplicity.vala:1000 ../common/Duplicity.vala:1060
+#: ../common/Duplicity.vala:1011 ../common/Duplicity.vala:1063
 msgid "No space left."
 msgstr "Không đủ dung lượng."
 
-#: ../common/Duplicity.vala:1014
+#: ../common/Duplicity.vala:1025
 msgid "Invalid ID."
 msgstr "ID không hợp lệ."
 
-#: ../common/Duplicity.vala:1016
+#: ../common/Duplicity.vala:1027
 msgid "Invalid secret key."
 msgstr "Khóa bí mật không hợp lệ."
 
-#: ../common/Duplicity.vala:1018
+#: ../common/Duplicity.vala:1029
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Tài khoản dịch vụ Amazon Web của bạn chưa đăng nhập cho dịch vụ S3."
 
-#: ../common/Duplicity.vala:1031
+#: ../common/Duplicity.vala:1038
 msgid "S3 bucket name is not available."
 msgstr "Tên thùng trên S3 chưa có sẵn."
 
-#: ../common/Duplicity.vala:1045
+#: ../common/Duplicity.vala:1052
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Lỗi khi đọc tập tin '%s'."
 
-#: ../common/Duplicity.vala:1047
+#: ../common/Duplicity.vala:1054
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Lỗi khi ghi tập tin '%s'."
 
-#: ../common/Duplicity.vala:1062
+#: ../common/Duplicity.vala:1065
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Không còn dung lượng trống tại '%s'."
 
-#: ../common/Duplicity.vala:1070
+#: ../common/Duplicity.vala:1073
 msgid "No backup files found"
 msgstr "Không tìm thấy các tập tin sao lưu"
 
-#: ../common/Duplicity.vala:1120
+#: ../common/Duplicity.vala:1123
 msgid "Uploading…"
 msgstr "Đang tải lên..."
 
@@ -704,7 +704,7 @@ msgstr "Đang phục hồi các tập tin..."
 msgid "Backing up…"
 msgstr "Đang sao lưu..."
 
-#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:484
+#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:486
 msgid "Restoring…"
 msgstr "Đang phục hồi..."
 
@@ -764,19 +764,19 @@ msgstr "Đang sao lưu..."
 msgid "Scanning:"
 msgstr "Đang quét:"
 
-#: ../deja-dup/AssistantOperation.vala:256
+#: ../deja-dup/AssistantOperation.vala:264
 msgid "_Details"
 msgstr "_Chi tiết"
 
-#: ../deja-dup/AssistantOperation.vala:304
+#: ../deja-dup/AssistantOperation.vala:312
 msgid "_Allow restoring without a password"
 msgstr "_Cho phép phục hồi mà không cần mật khẩu"
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 msgid "_Password-protect your backup"
 msgstr "_Mật khẩu-bảo vệ sao lưu của bạn"
 
-#: ../deja-dup/AssistantOperation.vala:324
+#: ../deja-dup/AssistantOperation.vala:332
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
@@ -784,36 +784,36 @@ msgid ""
 msgstr ""
 "Bạn sẽ cần mật khẩu để phục hồi lại các tập tin. Có lẽ bạn cần ghi nó lại."
 
-#: ../deja-dup/AssistantOperation.vala:339
+#: ../deja-dup/AssistantOperation.vala:347
 msgid "E_ncryption password"
 msgstr "Mật _khẩu mã hóa"
 
-#: ../deja-dup/AssistantOperation.vala:356
+#: ../deja-dup/AssistantOperation.vala:364
 msgid "Confir_m password"
 msgstr "_Xác nhận mật khẩu"
 
-#: ../deja-dup/AssistantOperation.vala:369
+#: ../deja-dup/AssistantOperation.vala:377
 msgid "_Show password"
 msgstr "Hiện _mật khẩu"
 
-#: ../deja-dup/AssistantOperation.vala:378
+#: ../deja-dup/AssistantOperation.vala:386
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Nhớ mật khẩu"
 
-#: ../deja-dup/AssistantOperation.vala:447
+#: ../deja-dup/AssistantOperation.vala:455
 msgid "Summary"
 msgstr "Tóm tắt"
 
-#: ../deja-dup/AssistantOperation.vala:730
+#: ../deja-dup/AssistantOperation.vala:738
 msgid "Require Password?"
 msgstr "Yêu cầu mật khẩu?"
 
-#: ../deja-dup/AssistantOperation.vala:732
+#: ../deja-dup/AssistantOperation.vala:740
 msgid "Encryption Password Needed"
 msgstr "Cần mật khẩu mã hóa"
 
-#: ../deja-dup/AssistantOperation.vala:778
+#: ../deja-dup/AssistantOperation.vala:786
 msgid "Backup encryption password"
 msgstr "Sao lưu mật khẩu mã hóa"
 
@@ -909,11 +909,11 @@ msgstr "Phục hồi thất bại"
 msgid "Restore Finished"
 msgstr "Hoàn tất phục hồi"
 
-#: ../deja-dup/AssistantRestore.vala:475
+#: ../deja-dup/AssistantRestore.vala:476
 msgid "Your files were successfully restored."
 msgstr "Các tập tin của bạn đã được phục hồi."
 
-#: ../deja-dup/AssistantRestore.vala:478
+#: ../deja-dup/AssistantRestore.vala:479
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Các tập tin của bạn đã được phục hồi."
@@ -1365,7 +1365,7 @@ msgstr "Vị trí tuỳ chọn"
 msgid "Local Folder"
 msgstr "Thư mục trên máy"
 
-#: ../widgets/ConfigLocationCustom.vala:31
+#: ../widgets/ConfigLocationCustom.vala:33
 msgid "_URI"
 msgstr "_URI"
 
@@ -1384,17 +1384,17 @@ msgid "_Port"
 msgstr "Cổ_ng"
 
 #: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
-#: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
+#: ../widgets/ConfigLocationFile.vala:45 ../widgets/ConfigLocationS3.vala:33
 #: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
-#: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
+#: ../widgets/ConfigLocationU1.vala:33 ../widgets/ConfigLocationVolume.vala:33
 msgid "_Folder"
 msgstr "_Thư mục"
 
-#: ../widgets/ConfigLocationFile.vala:38
+#: ../widgets/ConfigLocationFile.vala:39
 msgid "_Choose Folder…"
 msgstr "_Chọn thư mục..."
 
-#: ../widgets/ConfigLocationFile.vala:49
+#: ../widgets/ConfigLocationFile.vala:50
 msgid "Choose Folder"
 msgstr "Chọn thư mục"
 
@@ -1436,25 +1436,3 @@ msgstr[0] "Mỗi %d ngày"
 #, c-format
 msgid "Could not display %s"
 msgstr "Không thể hiển thị %s"
-
-#~ msgid "Déjà Du_p"
-#~ msgstr "Déjà Du_p"
-
-#~ msgid "At least a week"
-#~ msgstr "Ít nhất một tuần"
-
-#~ msgid "Unknown"
-#~ msgstr "Chưa xác định"
-
-#~ msgid "Restore from When?"
-#~ msgstr "Phục hồi từ khi nào?"
-
-#~ msgid ""
-#~ "Old backups will be kept for at least a week or until the backup location is "
-#~ "low on space."
-#~ msgstr ""
-#~ "Các bản sao lưu cũ sẽ được giữ lại ít nhất một tuần hoặc cho đến khi vị trí "
-#~ "lưu bản sao lưu không còn đủ dung lượng."
-
-#~ msgid "Restore from Where?"
-#~ msgstr "Phục hồi từ đâu?"

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-01-17 23:17-0500\n"
-"PO-Revision-Date: 2011-10-09 06:01+0000\n"
+"PO-Revision-Date: 2012-03-22 14:30+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Catalan (Valencian) <ca@valencia@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-01-20 05:16+0000\n"
-"X-Generator: Launchpad (build 14700)\n"
+"X-Launchpad-Export-Date: 2012-03-23 05:15+0000\n"
+"X-Generator: Launchpad (build 14996)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -398,33 +398,33 @@ msgstr[1] "Restaura els fitxers des de la còpia de seguretat"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:86 ../common/CommonUtils.vala:447
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:447
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s a %2$s"
 
-#: ../common/BackendFile.vala:124
+#: ../common/BackendFile.vala:168
 #, c-format
 msgid "Backup will begin when %s becomes connected."
 msgstr ""
 "La còpia de seguretat començarà quan s'establisca la connexió amb %s."
 
-#: ../common/BackendFile.vala:131 ../common/BackendRackspace.vala:49
+#: ../common/BackendFile.vala:175 ../common/BackendRackspace.vala:49
 #: ../common/BackendS3.vala:59 ../common/BackendU1.vala:150
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "La còpia de seguretat s'iniciarà quan estiga disponible una connexió de "
 "xarxa."
 
-#: ../common/BackendFile.vala:357 ../common/BackendFile.vala:421
+#: ../common/BackendFile.vala:384 ../common/BackendFile.vala:448
 msgid "Backup location not available"
 msgstr "La ubicació de la còpia de seguretat no està disponible"
 
-#: ../common/BackendFile.vala:358
+#: ../common/BackendFile.vala:385
 msgid "Waiting for a network connection…"
 msgstr "S'està esperant una connexió de xarxa…"
 
-#: ../common/BackendFile.vala:421
+#: ../common/BackendFile.vala:448
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "S'està esperant que «%s» es connecte…"
@@ -433,21 +433,21 @@ msgstr "S'està esperant que «%s» es connecte…"
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Heu d'especificar un contenidor de Rackspace a les preferències."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:194
+#: ../common/BackendRackspace.vala:69 ../widgets/ConfigLocation.vala:194
 msgid "Rackspace Cloud Files"
 msgstr "Emmagatzematge de fitxers en el núvol de Rackspace"
 
 #. Translators: %s is a folder.
-#: ../common/BackendRackspace.vala:70
+#: ../common/BackendRackspace.vala:72
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "%s al contenidor de fitxers en el núvol de Rackspace"
 
-#: ../common/BackendRackspace.vala:117 ../common/BackendS3.vala:172
+#: ../common/BackendRackspace.vala:119 ../common/BackendS3.vala:172
 msgid "Permission denied"
 msgstr "S’ha denegat el permís"
 
-#: ../common/BackendRackspace.vala:138
+#: ../common/BackendRackspace.vala:140
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
@@ -456,19 +456,19 @@ msgstr ""
 "Podeu crear un compte <a href=\"%s\">en línia</a> al servei de fitxers en el "
 "núvol de Rackspace."
 
-#: ../common/BackendRackspace.vala:139
+#: ../common/BackendRackspace.vala:141
 msgid "Connect to Rackspace Cloud Files"
 msgstr "ConnectaÇt amb el servei de fitxers en el núvol de Rackspace"
 
-#: ../common/BackendRackspace.vala:140
+#: ../common/BackendRackspace.vala:142
 msgid "_API access key"
 msgstr "Clau d'accés de l'_API"
 
-#: ../common/BackendRackspace.vala:141
+#: ../common/BackendRackspace.vala:143
 msgid "S_how API access key"
 msgstr "_Mostra la clau d'accés de l'API"
 
-#: ../common/BackendRackspace.vala:142
+#: ../common/BackendRackspace.vala:144
 msgid "_Remember API access key"
 msgstr "_Recorda la clau d'accés de l'API"
 
@@ -583,52 +583,54 @@ msgstr ""
 "Al Déjà Dup li cal com a mínim la versió «%d.%d%.2d» del Duplicity, però "
 "només teniu instal·lada la versió «%d.%d%.2d»."
 
-#: ../common/Duplicity.vala:135 ../common/Duplicity.vala:198
+#: ../common/Duplicity.vala:134 ../common/Duplicity.vala:189
 msgid "Paused (no network)"
 msgstr "En pausa (sense xarxa)"
 
-#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:412
-#: ../common/Duplicity.vala:431 ../common/Duplicity.vala:436
+#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:409
+#: ../common/Duplicity.vala:428 ../common/Duplicity.vala:433
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "S'està preparant…"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:463
+#: ../common/Duplicity.vala:460
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "No s'ha pogut restaurar «%s»: no és una ubicació de fitxer vàlida"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:529
+#: ../common/Duplicity.vala:526
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "La ubicació de la còpia de seguretat no és prou gran. Proveu d'utilitzar-ne "
 "una altra amb més espai."
 
-#: ../common/Duplicity.vala:551
+#: ../common/Duplicity.vala:548
 msgid "Backup location does not have enough free space."
 msgstr "La ubicació de la còpia de seguretat no té prou espai lliure."
 
-#: ../common/Duplicity.vala:570 ../common/Duplicity.vala:584
+#: ../common/Duplicity.vala:567 ../common/Duplicity.vala:581
 msgid "Cleaning up…"
 msgstr "S'està netejant…"
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: ../common/Duplicity.vala:679
+#: ../common/Duplicity.vala:677
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
 msgstr ""
+"No ha estat possible fer la còpia de seguretat dels següents fitxers. "
+"Comproveu que els podeu obrir."
 
-#: ../common/Duplicity.vala:700 ../common/Duplicity.vala:1089
-#: ../deja-dup/AssistantOperation.vala:537
+#: ../common/Duplicity.vala:710 ../common/Duplicity.vala:1092
+#: ../deja-dup/AssistantOperation.vala:545
 msgid "Failed with an unknown error."
 msgstr "Ha fallat amb un error desconegut."
 
-#: ../common/Duplicity.vala:929
+#: ../common/Duplicity.vala:940
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
@@ -637,16 +639,16 @@ msgstr ""
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:935 ../common/Duplicity.vala:1037
-#: ../common/Duplicity.vala:1041
+#: ../common/Duplicity.vala:946 ../common/Duplicity.vala:1044
+#: ../common/Duplicity.vala:1048
 msgid "Bad encryption password."
 msgstr "La contrasenya d'encriptació no és correcta"
 
-#: ../common/Duplicity.vala:940
+#: ../common/Duplicity.vala:951
 msgid "Computer name changed"
 msgstr "El nom de l'ordinador ha canviat"
 
-#: ../common/Duplicity.vala:940
+#: ../common/Duplicity.vala:951
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -657,68 +659,68 @@ msgstr ""
 "l'ordinador actual és «%s». Si és un error, realitzeu la còpia en una altra "
 "ubicació diferent."
 
-#: ../common/Duplicity.vala:975
+#: ../common/Duplicity.vala:986
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "S'ha denegat el permís en crear «%s»."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:979 ../common/Duplicity.vala:983
+#: ../common/Duplicity.vala:990 ../common/Duplicity.vala:994
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "S'ha denegat el permís en llegir «%s»."
 
-#: ../common/Duplicity.vala:987
+#: ../common/Duplicity.vala:998
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "S'ha denegat el permís en suprimir «%s»."
 
-#: ../common/Duplicity.vala:994
+#: ../common/Duplicity.vala:1005
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "No s'ha trobat la ubicació «%s» de la còpia de seguretat."
 
-#: ../common/Duplicity.vala:1000 ../common/Duplicity.vala:1060
+#: ../common/Duplicity.vala:1011 ../common/Duplicity.vala:1063
 msgid "No space left."
 msgstr "No hi ha prou espai."
 
-#: ../common/Duplicity.vala:1014
+#: ../common/Duplicity.vala:1025
 msgid "Invalid ID."
 msgstr "L'identificador no és vàlid."
 
-#: ../common/Duplicity.vala:1016
+#: ../common/Duplicity.vala:1027
 msgid "Invalid secret key."
 msgstr "La clau secreta no és vàlida."
 
-#: ../common/Duplicity.vala:1018
+#: ../common/Duplicity.vala:1029
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "El vostrea compte del servei web d'Amazon no està subscrit al servei S3."
 
-#: ../common/Duplicity.vala:1031
+#: ../common/Duplicity.vala:1038
 msgid "S3 bucket name is not available."
 msgstr "El nom del dipòsit S3 no està disponible."
 
-#: ../common/Duplicity.vala:1045
+#: ../common/Duplicity.vala:1052
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "S'ha produït un error en llegir el fitxer «%s»."
 
-#: ../common/Duplicity.vala:1047
+#: ../common/Duplicity.vala:1054
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "S'ha produït un error en escriure al fitxer «%s»."
 
-#: ../common/Duplicity.vala:1062
+#: ../common/Duplicity.vala:1065
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "No hi ha prou espai a «%s»."
 
-#: ../common/Duplicity.vala:1070
+#: ../common/Duplicity.vala:1073
 msgid "No backup files found"
 msgstr "No s'ha trobat cap fitxer de còpia de seguretat"
 
-#: ../common/Duplicity.vala:1120
+#: ../common/Duplicity.vala:1123
 msgid "Uploading…"
 msgstr "S'està pujant…"
 
@@ -730,7 +732,7 @@ msgstr "S'estan restaurant els fitxers…"
 msgid "Backing up…"
 msgstr "S'està fent la còpia de seguretat…"
 
-#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:484
+#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:486
 msgid "Restoring…"
 msgstr "S'està restaurant…"
 
@@ -781,7 +783,7 @@ msgstr "Ha fallat la còpia de seguretat"
 
 #: ../deja-dup/AssistantBackup.vala:93
 msgid "Backup Finished"
-msgstr ""
+msgstr "Ha finalitzat la còpia de seguretat"
 
 #: ../deja-dup/AssistantBackup.vala:101
 msgid "Backing Up…"
@@ -791,19 +793,19 @@ msgstr "S'està fent la còpia de seguretat…"
 msgid "Scanning:"
 msgstr "S'està escanejant:"
 
-#: ../deja-dup/AssistantOperation.vala:256
+#: ../deja-dup/AssistantOperation.vala:264
 msgid "_Details"
 msgstr "_Detalls"
 
-#: ../deja-dup/AssistantOperation.vala:304
+#: ../deja-dup/AssistantOperation.vala:312
 msgid "_Allow restoring without a password"
 msgstr "_Permet restaurar sense contrasenya"
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 msgid "_Password-protect your backup"
 msgstr "Protegeix la còpia de seguretat amb una _contrasenya"
 
-#: ../deja-dup/AssistantOperation.vala:324
+#: ../deja-dup/AssistantOperation.vala:332
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
@@ -812,36 +814,36 @@ msgstr ""
 "Vos caldrà la contrasenya per restaurar els arxius. Vos recomanem que la "
 "alceu en un lloc segur."
 
-#: ../deja-dup/AssistantOperation.vala:339
+#: ../deja-dup/AssistantOperation.vala:347
 msgid "E_ncryption password"
 msgstr "_Contrasenya d'encriptació"
 
-#: ../deja-dup/AssistantOperation.vala:356
+#: ../deja-dup/AssistantOperation.vala:364
 msgid "Confir_m password"
 msgstr "_Confirmeu la contrasenya"
 
-#: ../deja-dup/AssistantOperation.vala:369
+#: ../deja-dup/AssistantOperation.vala:377
 msgid "_Show password"
 msgstr "_Mostra la contrasenya"
 
-#: ../deja-dup/AssistantOperation.vala:378
+#: ../deja-dup/AssistantOperation.vala:386
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Recorda la contrasenya"
 
-#: ../deja-dup/AssistantOperation.vala:447
+#: ../deja-dup/AssistantOperation.vala:455
 msgid "Summary"
 msgstr "Resum"
 
-#: ../deja-dup/AssistantOperation.vala:730
+#: ../deja-dup/AssistantOperation.vala:738
 msgid "Require Password?"
 msgstr "Voleu utilitzar una contrasenya?"
 
-#: ../deja-dup/AssistantOperation.vala:732
+#: ../deja-dup/AssistantOperation.vala:740
 msgid "Encryption Password Needed"
 msgstr "Cal una clau d'encriptació"
 
-#: ../deja-dup/AssistantOperation.vala:778
+#: ../deja-dup/AssistantOperation.vala:786
 msgid "Backup encryption password"
 msgstr "Contrasenya d'encriptació de la còpia de seguretat"
 
@@ -859,7 +861,7 @@ msgstr "_Ubicació de la còpia de seguretat"
 
 #: ../deja-dup/AssistantRestore.vala:124
 msgid "Restore From Where?"
-msgstr ""
+msgstr "Des d'on voleu restaurar?"
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date"
@@ -895,7 +897,7 @@ msgstr "S'està comprovant si hi ha còpies de seguretat…"
 
 #: ../deja-dup/AssistantRestore.vala:271
 msgid "Restore From When?"
-msgstr ""
+msgstr "Des de quan voleu restaurar?"
 
 #: ../deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
@@ -938,11 +940,11 @@ msgstr "Ha fallat la restauració"
 msgid "Restore Finished"
 msgstr "Ha finalitzat la restauració"
 
-#: ../deja-dup/AssistantRestore.vala:475
+#: ../deja-dup/AssistantRestore.vala:476
 msgid "Your files were successfully restored."
 msgstr "Els fitxers s'han restaurat correctament."
 
-#: ../deja-dup/AssistantRestore.vala:478
+#: ../deja-dup/AssistantRestore.vala:479
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "El fitxer s'ha restaurat correctament."
@@ -1133,12 +1135,14 @@ msgstr "S'ha creat la còpia de seguretat correctament"
 
 #: ../deja-dup/StatusIcon.vala:129
 msgid "Backup finished"
-msgstr ""
+msgstr "Ha finalitzat la còpia de seguretat"
 
 #: ../deja-dup/StatusIcon.vala:130
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr ""
+"No s'ha pogut fer la còpia de seguretat de tots els fitxers. Vegeu el diàleg "
+"per a més informació."
 
 #: ../deja-dup/StatusIcon.vala:232
 msgid "Starting scheduled backup"
@@ -1155,7 +1159,7 @@ msgstr "%.1f%% completat"
 
 #: ../deja-dup/StatusIcon.vala:285
 msgid "Show _Progress"
-msgstr ""
+msgstr "Mostra el _progrés"
 
 #: ../monitor/monitor.vala:156
 msgid "Scheduled backup delayed"
@@ -1406,7 +1410,7 @@ msgstr "Ubicació personalitzada"
 msgid "Local Folder"
 msgstr "Carpeta local"
 
-#: ../widgets/ConfigLocationCustom.vala:31
+#: ../widgets/ConfigLocationCustom.vala:33
 msgid "_URI"
 msgstr "_URI"
 
@@ -1425,17 +1429,17 @@ msgid "_Port"
 msgstr "_Port"
 
 #: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
-#: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
+#: ../widgets/ConfigLocationFile.vala:45 ../widgets/ConfigLocationS3.vala:33
 #: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
-#: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
+#: ../widgets/ConfigLocationU1.vala:33 ../widgets/ConfigLocationVolume.vala:33
 msgid "_Folder"
 msgstr "_Carpeta"
 
-#: ../widgets/ConfigLocationFile.vala:38
+#: ../widgets/ConfigLocationFile.vala:39
 msgid "_Choose Folder…"
 msgstr "_Trieu una carpeta…"
 
-#: ../widgets/ConfigLocationFile.vala:49
+#: ../widgets/ConfigLocationFile.vala:50
 msgid "Choose Folder"
 msgstr "Trieu una carpeta"
 
@@ -1478,25 +1482,3 @@ msgstr[1] "Cada %d dies"
 #, c-format
 msgid "Could not display %s"
 msgstr "No es pot mostrar %s"
-
-#~ msgid "Restore from Where?"
-#~ msgstr "Des d'on voleu restaurar?"
-
-#~ msgid "Restore from When?"
-#~ msgstr "Des de quan voleu restaurar?"
-
-#~ msgid "Déjà Du_p"
-#~ msgstr "Déjà Du_p"
-
-#~ msgid "At least a week"
-#~ msgstr "Almenys una setmana"
-
-#~ msgid "Unknown"
-#~ msgstr "Desconegut"
-
-#~ msgid ""
-#~ "Old backups will be kept for at least a week or until the backup location is "
-#~ "low on space."
-#~ msgstr ""
-#~ "Les còpies de seguretat antigues s'alçaran almenys una setmana, o fins que "
-#~ "no quede espai disponible al disc."

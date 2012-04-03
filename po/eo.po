@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-01-17 23:17-0500\n"
-"PO-Revision-Date: 2012-02-20 11:14+0000\n"
+"PO-Revision-Date: 2012-03-22 14:30+0000\n"
 "Last-Translator: Michael Moroni <michael.moroni@mailoo.org>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-02-21 06:20+0000\n"
-"X-Generator: Launchpad (build 14838)\n"
+"X-Launchpad-Export-Date: 2012-03-23 05:14+0000\n"
+"X-Generator: Launchpad (build 14996)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -392,30 +392,30 @@ msgstr[1] "Restaŭri forviŝitajn dosierojn de sukurkopi-loko"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:86 ../common/CommonUtils.vala:447
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:447
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s en %2$s"
 
-#: ../common/BackendFile.vala:124
+#: ../common/BackendFile.vala:168
 #, c-format
 msgid "Backup will begin when %s becomes connected."
 msgstr "Sekurkopii komencos kiam %s estos konektata."
 
-#: ../common/BackendFile.vala:131 ../common/BackendRackspace.vala:49
+#: ../common/BackendFile.vala:175 ../common/BackendRackspace.vala:49
 #: ../common/BackendS3.vala:59 ../common/BackendU1.vala:150
 msgid "Backup will begin when a network connection becomes available."
 msgstr "Sekurkopii komencos kiam reta konekto estos disponebla."
 
-#: ../common/BackendFile.vala:357 ../common/BackendFile.vala:421
+#: ../common/BackendFile.vala:384 ../common/BackendFile.vala:448
 msgid "Backup location not available"
 msgstr "Sekurkopiloko ne disponebla"
 
-#: ../common/BackendFile.vala:358
+#: ../common/BackendFile.vala:385
 msgid "Waiting for a network connection…"
 msgstr "Atendas por reta konekto…"
 
-#: ../common/BackendFile.vala:421
+#: ../common/BackendFile.vala:448
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Atendas por '%s' estigi konekto…"
@@ -424,21 +424,21 @@ msgstr "Atendas por '%s' estigi konekto…"
 msgid "You must specify a Rackspace container in your preferences."
 msgstr "Vi devas specifi Rackspace-ujon en via a agordoj."
 
-#: ../common/BackendRackspace.vala:67 ../widgets/ConfigLocation.vala:194
+#: ../common/BackendRackspace.vala:69 ../widgets/ConfigLocation.vala:194
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Dosierij"
 
 #. Translators: %s is a folder.
-#: ../common/BackendRackspace.vala:70
+#: ../common/BackendRackspace.vala:72
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "%s en Rackspace Cloud Dosieroj"
 
-#: ../common/BackendRackspace.vala:117 ../common/BackendS3.vala:172
+#: ../common/BackendRackspace.vala:119 ../common/BackendS3.vala:172
 msgid "Permission denied"
 msgstr "Permeso malaprobita"
 
-#: ../common/BackendRackspace.vala:138
+#: ../common/BackendRackspace.vala:140
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
@@ -447,19 +447,19 @@ msgstr ""
 "Vi pova enskribiĝi por Rackspace Cloud dosieroj konto <a "
 "href=%s\">enreta</a>."
 
-#: ../common/BackendRackspace.vala:139
+#: ../common/BackendRackspace.vala:141
 msgid "Connect to Rackspace Cloud Files"
 msgstr "Konekti al Rackspace Cloud Dosieroj"
 
-#: ../common/BackendRackspace.vala:140
+#: ../common/BackendRackspace.vala:142
 msgid "_API access key"
 msgstr "_API atingoŝlosilo"
 
-#: ../common/BackendRackspace.vala:141
+#: ../common/BackendRackspace.vala:143
 msgid "S_how API access key"
 msgstr "Mo_ntri API-an atingoŝlosilon"
 
-#: ../common/BackendRackspace.vala:142
+#: ../common/BackendRackspace.vala:144
 msgid "_Remember API access key"
 msgstr "Memo_ri API-an atingoŝlosilon"
 
@@ -571,51 +571,53 @@ msgstr ""
 "Déjà Dup sekurkopilo bezonas minimuman version %d.%d.%.2d de duplicity, sed "
 "nur trovitas %d.%d.%.2d"
 
-#: ../common/Duplicity.vala:135 ../common/Duplicity.vala:198
+#: ../common/Duplicity.vala:134 ../common/Duplicity.vala:189
 msgid "Paused (no network)"
 msgstr "Paŭzigita (nenia reta)"
 
-#: ../common/Duplicity.vala:405 ../common/Duplicity.vala:412
-#: ../common/Duplicity.vala:431 ../common/Duplicity.vala:436
+#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:409
+#: ../common/Duplicity.vala:428 ../common/Duplicity.vala:433
 #: ../common/Operation.vala:79 ../common/Operation.vala:111
 msgid "Preparing…"
 msgstr "Preparanta…"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:463
+#: ../common/Duplicity.vala:460
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Ne povas restaŭri ‘%s’: Ne valida dosiero-loko"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:529
+#: ../common/Duplicity.vala:526
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Loko de la sekurkopio estas tro eta. Provi uzinta unu ke havas pli spaco."
 
-#: ../common/Duplicity.vala:551
+#: ../common/Duplicity.vala:548
 msgid "Backup location does not have enough free space."
 msgstr "Loko de la sekurkopio ne havas sufiĉa malokupa spaco."
 
-#: ../common/Duplicity.vala:570 ../common/Duplicity.vala:584
+#: ../common/Duplicity.vala:567 ../common/Duplicity.vala:581
 msgid "Cleaning up…"
 msgstr "Puriganta…"
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: ../common/Duplicity.vala:679
+#: ../common/Duplicity.vala:677
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
 msgstr ""
+"Ne eblis sekurkopii la sekvajn dosierojn. Bonvolu esti certa ke ili estas "
+"malfermeblaj."
 
-#: ../common/Duplicity.vala:700 ../common/Duplicity.vala:1089
-#: ../deja-dup/AssistantOperation.vala:537
+#: ../common/Duplicity.vala:710 ../common/Duplicity.vala:1092
+#: ../deja-dup/AssistantOperation.vala:545
 msgid "Failed with an unknown error."
 msgstr "Malsukcesis per nekonata eraro."
 
-#: ../common/Duplicity.vala:929
+#: ../common/Duplicity.vala:940
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Ne povas restaŭri '%s': Dosiero ne trovita en sekurkoparo"
@@ -623,16 +625,16 @@ msgstr "Ne povas restaŭri '%s': Dosiero ne trovita en sekurkoparo"
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:935 ../common/Duplicity.vala:1037
-#: ../common/Duplicity.vala:1041
+#: ../common/Duplicity.vala:946 ../common/Duplicity.vala:1044
+#: ../common/Duplicity.vala:1048
 msgid "Bad encryption password."
 msgstr "Malbona ĉifropasvorto."
 
-#: ../common/Duplicity.vala:940
+#: ../common/Duplicity.vala:951
 msgid "Computer name changed"
 msgstr "Komputila nomo ŝanĝita"
 
-#: ../common/Duplicity.vala:940
+#: ../common/Duplicity.vala:951
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -642,67 +644,67 @@ msgstr ""
 "La ekzistanta sekurkopio estas de komputilo nomita %s, sed la nomo de la "
 "nuna komputilo estas %s."
 
-#: ../common/Duplicity.vala:975
+#: ../common/Duplicity.vala:986
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Permeso ne donita kiam provanta krei '%s'."
 
 #. assume error is on backend side
-#: ../common/Duplicity.vala:979 ../common/Duplicity.vala:983
+#: ../common/Duplicity.vala:990 ../common/Duplicity.vala:994
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Permeso ne donita kiam provanta legi '%s'."
 
-#: ../common/Duplicity.vala:987
+#: ../common/Duplicity.vala:998
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Permeso ne donita kiam provanta forigi '%s'."
 
-#: ../common/Duplicity.vala:994
+#: ../common/Duplicity.vala:1005
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Loko de sekurkopii '%s' ne ekzistas."
 
-#: ../common/Duplicity.vala:1000 ../common/Duplicity.vala:1060
+#: ../common/Duplicity.vala:1011 ../common/Duplicity.vala:1063
 msgid "No space left."
 msgstr "Mankata spaco."
 
-#: ../common/Duplicity.vala:1014
+#: ../common/Duplicity.vala:1025
 msgid "Invalid ID."
 msgstr "Nevalida identigilo"
 
-#: ../common/Duplicity.vala:1016
+#: ../common/Duplicity.vala:1027
 msgid "Invalid secret key."
 msgstr "Nevalida sekretŝlosilo."
 
-#: ../common/Duplicity.vala:1018
+#: ../common/Duplicity.vala:1029
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Via Amazon Web Services konto ne estas enskribiĝis por la S3 servo."
 
-#: ../common/Duplicity.vala:1031
+#: ../common/Duplicity.vala:1038
 msgid "S3 bucket name is not available."
 msgstr "S3 sitelonomo ne estas akirebla."
 
-#: ../common/Duplicity.vala:1045
+#: ../common/Duplicity.vala:1052
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Eraro dum legado de dosiero ‘%s’."
 
-#: ../common/Duplicity.vala:1047
+#: ../common/Duplicity.vala:1054
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Eraro dum legado de dosiero ‘%s’."
 
-#: ../common/Duplicity.vala:1062
+#: ../common/Duplicity.vala:1065
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Ne sufiĉa spaco en ‘%s’."
 
-#: ../common/Duplicity.vala:1070
+#: ../common/Duplicity.vala:1073
 msgid "No backup files found"
 msgstr "Neniu sekurkopio-dosieroj trovita"
 
-#: ../common/Duplicity.vala:1120
+#: ../common/Duplicity.vala:1123
 msgid "Uploading…"
 msgstr "Alŝultanta…"
 
@@ -714,7 +716,7 @@ msgstr "Restaŭras dosierojn…"
 msgid "Backing up…"
 msgstr "Sekurkopias…"
 
-#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:484
+#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:486
 msgid "Restoring…"
 msgstr "Restaŭras…"
 
@@ -764,7 +766,7 @@ msgstr "Sekurkopii Malsukcesis"
 
 #: ../deja-dup/AssistantBackup.vala:93
 msgid "Backup Finished"
-msgstr ""
+msgstr "Finiĝis la sekurkopiado"
 
 #: ../deja-dup/AssistantBackup.vala:101
 msgid "Backing Up…"
@@ -774,19 +776,19 @@ msgstr "Sekurkopias…"
 msgid "Scanning:"
 msgstr "Skananta:"
 
-#: ../deja-dup/AssistantOperation.vala:256
+#: ../deja-dup/AssistantOperation.vala:264
 msgid "_Details"
 msgstr "_Detaloj"
 
-#: ../deja-dup/AssistantOperation.vala:304
+#: ../deja-dup/AssistantOperation.vala:312
 msgid "_Allow restoring without a password"
 msgstr "_Permesi restaŭron sen pasvorto"
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:318
 msgid "_Password-protect your backup"
 msgstr "_Protekti vian sekurkopi per pasvorto"
 
-#: ../deja-dup/AssistantOperation.vala:324
+#: ../deja-dup/AssistantOperation.vala:332
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
@@ -795,36 +797,36 @@ msgstr ""
 "Vi bezonos vian pasvorton por restaŭri vian dosieron.  Vi volus enskribigin "
 "ĝin."
 
-#: ../deja-dup/AssistantOperation.vala:339
+#: ../deja-dup/AssistantOperation.vala:347
 msgid "E_ncryption password"
 msgstr "Ĉi_fropasvorto"
 
-#: ../deja-dup/AssistantOperation.vala:356
+#: ../deja-dup/AssistantOperation.vala:364
 msgid "Confir_m password"
 msgstr "Konfir_mi pasvorton"
 
-#: ../deja-dup/AssistantOperation.vala:369
+#: ../deja-dup/AssistantOperation.vala:377
 msgid "_Show password"
 msgstr "Mo_ntri pasvorto"
 
-#: ../deja-dup/AssistantOperation.vala:378
+#: ../deja-dup/AssistantOperation.vala:386
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Memori pasvorton"
 
-#: ../deja-dup/AssistantOperation.vala:447
+#: ../deja-dup/AssistantOperation.vala:455
 msgid "Summary"
 msgstr "Resumo"
 
-#: ../deja-dup/AssistantOperation.vala:730
+#: ../deja-dup/AssistantOperation.vala:738
 msgid "Require Password?"
 msgstr "Bezonata pasvorto?"
 
-#: ../deja-dup/AssistantOperation.vala:732
+#: ../deja-dup/AssistantOperation.vala:740
 msgid "Encryption Password Needed"
 msgstr "Ĉifrado-pasvorto bezonata"
 
-#: ../deja-dup/AssistantOperation.vala:778
+#: ../deja-dup/AssistantOperation.vala:786
 msgid "Backup encryption password"
 msgstr "Sekurkopii ĉifrado-pasvorton"
 
@@ -921,11 +923,11 @@ msgstr "Restaŭro malsukcesis"
 msgid "Restore Finished"
 msgstr "Restaŭro finis"
 
-#: ../deja-dup/AssistantRestore.vala:475
+#: ../deja-dup/AssistantRestore.vala:476
 msgid "Your files were successfully restored."
 msgstr "Via dosieroj restaŭris sukcese."
 
-#: ../deja-dup/AssistantRestore.vala:478
+#: ../deja-dup/AssistantRestore.vala:479
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Via dosiero restaŭris sukcese"
@@ -1112,12 +1114,14 @@ msgstr "Sekurkopio finis"
 
 #: ../deja-dup/StatusIcon.vala:129
 msgid "Backup finished"
-msgstr ""
+msgstr "Finiĝis la sekurkopiado"
 
 #: ../deja-dup/StatusIcon.vala:130
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr ""
+"Ne ĉiuj dosieroj estis sukcese sekurkopiitaj. Vidu dialogujon por pli da "
+"detaloj."
 
 #: ../deja-dup/StatusIcon.vala:232
 msgid "Starting scheduled backup"
@@ -1384,7 +1388,7 @@ msgstr "Propra loko"
 msgid "Local Folder"
 msgstr "Loka dosierujo"
 
-#: ../widgets/ConfigLocationCustom.vala:31
+#: ../widgets/ConfigLocationCustom.vala:33
 msgid "_URI"
 msgstr "_URI"
 
@@ -1403,17 +1407,17 @@ msgid "_Port"
 msgstr "_Pordo"
 
 #: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
-#: ../widgets/ConfigLocationFile.vala:44 ../widgets/ConfigLocationS3.vala:33
+#: ../widgets/ConfigLocationFile.vala:45 ../widgets/ConfigLocationS3.vala:33
 #: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
-#: ../widgets/ConfigLocationU1.vala:31 ../widgets/ConfigLocationVolume.vala:31
+#: ../widgets/ConfigLocationU1.vala:33 ../widgets/ConfigLocationVolume.vala:33
 msgid "_Folder"
 msgstr "_Dosierujo"
 
-#: ../widgets/ConfigLocationFile.vala:38
+#: ../widgets/ConfigLocationFile.vala:39
 msgid "_Choose Folder…"
 msgstr "_Elekti dosierujon…"
 
-#: ../widgets/ConfigLocationFile.vala:49
+#: ../widgets/ConfigLocationFile.vala:50
 msgid "Choose Folder"
 msgstr "Elekti dosierujon"
 
@@ -1456,25 +1460,3 @@ msgstr[1] "Ĉiuj %d tagoj"
 #, c-format
 msgid "Could not display %s"
 msgstr "Ne povas montri %s"
-
-#~ msgid "At least a week"
-#~ msgstr "Almenaŭ unu semajno"
-
-#~ msgid "Restore from Where?"
-#~ msgstr "Restaŭri de kie?"
-
-#~ msgid "Restore from When?"
-#~ msgstr "Restaŭri de kiam?"
-
-#~ msgid "Déjà Du_p"
-#~ msgstr "Déjà Du_p"
-
-#~ msgid "Unknown"
-#~ msgstr "Nekonata"
-
-#~ msgid ""
-#~ "Old backups will be kept for at least a week or until the backup location is "
-#~ "low on space."
-#~ msgstr ""
-#~ "Malnovaj sekurkopioj konserviĝos dum almenaŭ unu semajno, aŭ ĝis mankas "
-#~ "spaco al la loko de sekurkopio."
