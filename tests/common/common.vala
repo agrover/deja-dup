@@ -143,6 +143,9 @@ public enum Mode {
   DRY,
   BACKUP,
   CLEANUP,
+  RESTORE,
+  RESTORE_STATUS,
+  LIST,
 }
 
 public string default_args(Mode mode = Mode.NONE, bool encrypted = false, string extra = "")
@@ -151,41 +154,51 @@ public string default_args(Mode mode = Mode.NONE, bool encrypted = false, string
 
   if (mode == Mode.CLEANUP)
     return "'--force' 'file:///tmp/not/a/thing' '--gio' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir);
+  else if (mode == Mode.RESTORE)
+    return "'restore' '--gio' '--force' 'file:///tmp/not/a/thing' '/tmp/not/a/restore' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir);
+  else if (mode == Mode.LIST)
+    return "'list-current-files' '--gio' 'file:///tmp/not/a/thing' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir);
 
   string source_str = "";
   if (mode == Mode.DRY || mode == Mode.BACKUP)
-    source_str = " --volsize=50 /";
+    source_str = "--volsize=50 / ";
 
   string dry_str = "";
   if (mode == Mode.DRY)
-    dry_str = " --dry-run";
+    dry_str = "--dry-run ";
 
   string enc_str = "";
   if (!encrypted)
-    enc_str = " --no-encryption";
+    enc_str = "--no-encryption ";
 
-  var user = Environment.get_user_name();
-  var args = "'--exclude=/tmp/not/a/thing' ";
+  string args = "";
 
-  string[] excludes1 = {"~/Downloads", "~/.local/share/Trash", "~/.xsession-errors", "~/.thumbnails", "~/.Private", "~/.gvfs", "~/.adobe/Flash_Player/AssetCache"};
+  if (mode == Mode.NONE || mode == Mode.DRY || mode == Mode.BACKUP) {
+    args += "'--exclude=/tmp/not/a/thing' ";
 
-  string[] excludes2 = {"/home/.ecryptfs/%s/.Private".printf(user), "/sys", "/proc", "/tmp"};
+    string[] excludes1 = {"~/Downloads", "~/.local/share/Trash", "~/.xsession-errors", "~/.thumbnails", "~/.Private", "~/.gvfs", "~/.adobe/Flash_Player/AssetCache"};
 
-  foreach (string ex in excludes1) {
-    ex = ex.replace("~", Environment.get_home_dir());
-    if (FileUtils.test (ex, FileTest.EXISTS))
-      args += "'--exclude=%s' ".printf(ex);
+    var user = Environment.get_user_name();
+    string[] excludes2 = {"/home/.ecryptfs/%s/.Private".printf(user), "/sys", "/proc", "/tmp"};
+
+    foreach (string ex in excludes1) {
+      ex = ex.replace("~", Environment.get_home_dir());
+      if (FileUtils.test (ex, FileTest.EXISTS))
+        args += "'--exclude=%s' ".printf(ex);
+    }
+
+    args += "'--include=%s' ".printf(Environment.get_home_dir());
+
+    foreach (string ex in excludes2) {
+      ex = ex.replace("~", Environment.get_home_dir());
+      if (FileUtils.test (ex, FileTest.EXISTS))
+        args += "'--exclude=%s' ".printf(ex);
+    }
+
+    args += "'--exclude=%s/deja-dup' '--exclude=%s' '--exclude=**' ".printf(cachedir, cachedir);
   }
 
-  args += "'--include=%s' ".printf(Environment.get_home_dir());
-
-  foreach (string ex in excludes2) {
-    ex = ex.replace("~", Environment.get_home_dir());
-    if (FileUtils.test (ex, FileTest.EXISTS))
-      args += "'--exclude=%s' ".printf(ex);
-  }
-
-  args += "'--exclude=%s/deja-dup' '--exclude=%s' '--exclude=**'%s%s '--gio'%s 'file:///tmp/not/a/thing'%s '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir, cachedir, extra, dry_str, source_str, enc_str, cachedir);
+  args += "%s%s'--gio' %s'file:///tmp/not/a/thing' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(extra, dry_str, source_str, enc_str, cachedir);
 
   return args;
 }
@@ -246,6 +259,72 @@ class BackupRunner : Object
       Test.message("Is full? %d", (int)full);
       if (is_full != full)
         warning("IsFull didn't match; expected %d, got %d", (int) is_full, (int) full);
+    });
+
+    op.start();
+    if (callback != null) {
+      Timeout.add_seconds(3, () => {
+        callback(op);
+        return false;
+      });
+    }
+    loop.run();
+
+    if (error_str != null)
+      warning("Error str didn't match; expected %s, never got error", error_str);
+    if (error_detail != null)
+      warning("Error detail didn't match; expected %s, never got error", error_detail);
+  }
+}
+
+class RestoreRunner : Object
+{
+  public delegate void OpCallback (DejaDup.Operation op);
+  public bool success = true;
+  public bool cancelled = false;
+  public string? detail = null;
+  public string? error_str = null;
+  public string? error_detail = null;
+  public OpCallback? callback = null;
+
+  public void run()
+  {
+    var loop = new MainLoop(null);
+    var op = new DejaDup.OperationRestore("/tmp/not/a/restore");
+    op.done.connect((op, s, c, d) => {
+      Test.message("Done: %d, %d, %s", (int)s, (int)c, d);
+      if (success != s)
+        warning("Success didn't match; expected %d, got %d", (int) success, (int) s);
+      if (cancelled != c)
+        warning("Cancel didn't match; expected %d, got %d", (int) cancelled, (int) c);
+      if (detail != d)
+        warning("Detail didn't match; expected %s, got %s", detail, d);
+      loop.quit();
+    });
+
+    op.raise_error.connect((str, det) => {
+      Test.message("Error: %s, %s", str, det);
+      if (error_str != str)
+        warning("Error string didn't match; expected %s, got %s", error_str, str);
+      if (error_detail != det)
+        warning("Error detail didn't match; expected %s, got %s", error_detail, det);
+      error_str = null;
+      error_detail = null;
+    });
+    op.action_desc_changed.connect((action) => {
+    });
+    op.action_file_changed.connect((file, actual) => {
+    });
+    op.progress.connect((percent) => {
+    });
+    op.passphrase_required.connect(() => {
+      Test.message("Passphrase required");
+    });
+    op.question.connect((title, msg) => {
+      Test.message("Question asked: %s, %s", title, msg);
+    });
+    op.is_full.connect((full) => {
+      warning("Didn't expect IsFull");
     });
 
     op.start();
@@ -349,8 +428,8 @@ ARGS: full %s
 
 """.printf(default_args(),
            default_args(Mode.DRY),
-           default_args(Mode.DRY, false, " --allow-source-mismatch"),
-           default_args(Mode.BACKUP, false, " --allow-source-mismatch")));
+           default_args(Mode.DRY, false, "--allow-source-mismatch "),
+           default_args(Mode.BACKUP, false, "--allow-source-mismatch ")));
 
   var br = new BackupRunner();
   br.run();
@@ -463,6 +542,39 @@ WARNING 10 '%s/2'
   br.run();
 }
 
+void write_error()
+{
+  var home = Environment.get_home_dir();
+  set_script("""
+ARGS: collection-status %s
+
+=== deja-dup ===
+ARGS: %s
+
+=== deja-dup ===
+ARGS: %s
+
+WARNING 12 '/blarg'
+. [Errno 1] not a real error
+
+WARNING 12 '%s/1'
+. [Errno 13] real error
+
+WARNING 12 '%s/2'
+. [Errno 13] real error
+
+""".printf(default_args(Mode.RESTORE_STATUS),
+           default_args(Mode.LIST),
+           default_args(Mode.RESTORE), home, home));
+
+  var br = new RestoreRunner();
+  br.detail = """Could not restore the following files.  Please make sure you are able to write to them.
+
+%s/1
+%s/2""".printf(home, home);
+  br.run();
+}
+
 void setup_gsettings()
 {
   var dir = Environment.get_variable("DEJA_DUP_TEST_HOME");
@@ -512,6 +624,10 @@ int main(string[] args)
   backup.add(make_backup_case("stop", stop));
   backup.add(make_backup_case("read_error", read_error));
   TestSuite.get_root().add_suite(backup);
+
+  var restore = new TestSuite("restore");
+  restore.add(make_backup_case("write_error", write_error));
+  TestSuite.get_root().add_suite(restore);
 
   var rv = Test.run();
 
