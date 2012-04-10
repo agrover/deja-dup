@@ -38,7 +38,6 @@ public class MountOperationAssistant : MountOperation
   public string label_password {get; set; default = _("_Password");}
   public string label_show_password {get; set; default = _("S_how password");}
   public string label_remember_password {get; set; default = _("_Remember password");}
-  public X.Window xid {get; private set;}
   public bool go_forward {get; set; default = false;} // set by backends if they want to move on
 
   signal void button_clicked();
@@ -64,7 +63,6 @@ public class MountOperationAssistant : MountOperation
     add_password_page();
 
     assist.realize();
-    xid = Gdk.X11Window.get_xid(assist.get_window());
   }
 
   construct {

@@ -41,7 +41,6 @@ public abstract class Operation : Object
   public signal void question(string title, string msg);
   public signal void is_full(bool first);
 
-  public uint xid {get; construct;}
   public bool needs_password {get; set;}
   public Backend backend {get; private set;}
   public bool use_progress {get {return dup.use_progress;}

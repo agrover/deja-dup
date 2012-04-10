@@ -25,10 +25,9 @@ public class OperationFiles : Operation {
   public Time time {get; set;} // Default value is 1900-01-00 00:00:00; since epoch hasn't happened yet, its default %s value is -1
   public File source {get; construct;}
     
-  public OperationFiles(uint xid = 0,
-                        Time? time_in,
+  public OperationFiles(Time? time_in,
                         File source) {
-    Object(xid: xid, mode: Mode.LIST, source: source);
+    Object(mode: Mode.LIST, source: source);
     if (time_in != null)
         time = time_in;
   }

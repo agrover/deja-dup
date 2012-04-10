@@ -369,10 +369,9 @@ public class AssistantRestoreMissing : AssistantRestore {
     this.current_scan_date.set_text(worddiff);
 
     realize();
-    var xid = Gdk.X11Window.get_xid(this.get_window());
     
     /* Time object does not support GObject-style construction */
-    query_op_files = new DejaDup.OperationFiles((uint)xid, etime, list_directory);
+    query_op_files = new DejaDup.OperationFiles(etime, list_directory);
     query_op_files.listed_current_files.connect(handle_listed_files);
     query_op_files.done.connect(query_files_finished);
     
@@ -467,7 +466,6 @@ public class AssistantRestoreMissing : AssistantRestore {
      * Creates operation that is then called by do_apply.
      */
     realize();
-    var xid = Gdk.X11Window.get_xid(this.get_window());
 
     if (restore_files_remaining == null ||
         restore_files_remaining.data.get_path() == null)
@@ -487,8 +485,7 @@ public class AssistantRestoreMissing : AssistantRestore {
     
     var rest_op = new DejaDup.OperationRestore("/", 
                                                restore_file.deleted.format("%s"),
-                                               file_list,
-                                               (uint)xid);
+                                               file_list);
     rest_op.set_state(op_state);
     return rest_op;
   }

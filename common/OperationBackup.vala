@@ -23,8 +23,8 @@ namespace DejaDup {
 
 public class OperationBackup : Operation
 {
-  public OperationBackup(uint xid = 0) {
-    Object(xid: xid, mode: Mode.BACKUP);
+  public OperationBackup() {
+    Object(mode: Mode.BACKUP);
   }
   
   internal async override void operation_finished(Duplicity dup, bool success, bool cancelled, string? detail)

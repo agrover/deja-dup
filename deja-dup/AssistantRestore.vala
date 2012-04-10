@@ -290,10 +290,9 @@ public class AssistantRestore : AssistantOperation
     }
 
     realize();
-    var xid = Gdk.X11Window.get_xid(this.get_window());
 
     var rest_op = new DejaDup.OperationRestore(restore_location, date,
-                                               restore_files, (uint)xid);
+                                               restore_files);
     if (this.op_state != null)
       rest_op.set_state(this.op_state);
 
@@ -383,9 +382,8 @@ public class AssistantRestore : AssistantOperation
   protected async void do_query()
   {
     realize();
-    var xid = Gdk.X11Window.get_xid(this.get_window());
 
-    query_op = new DejaDup.OperationStatus((uint)xid);
+    query_op = new DejaDup.OperationStatus();
     op = query_op;
 
     op.done.connect(query_finished);

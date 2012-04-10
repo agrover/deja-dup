@@ -55,7 +55,6 @@ AM_VALAFLAGS = \
 	$(UNITY_VALAFLAGS) \
 	--pkg gmodule-2.0 \
 	--pkg @GTK_MODULE@ \
-	--pkg @GDK_X11_MODULE@ \
 	--pkg gio-2.0 \
 	--pkg gio-unix-2.0 \
 	--pkg gnome-keyring-1 \
