@@ -139,7 +139,7 @@ public abstract class Operation : Object
     if (dup != null) {
       SignalHandler.disconnect_matched(dup, SignalMatchType.DATA,
                                        0, 0, null, null, this);
-      dup.cancel();
+      dup.stop();
       dup = null;
     }
 
