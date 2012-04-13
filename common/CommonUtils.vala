@@ -228,11 +228,6 @@ public void update_prompt_time(bool cancel = false)
   settings.set_string(PROMPT_CHECK_KEY, cur_time_str);
 }
 
-public string get_trash_path()
-{
-  return Path.build_filename(Environment.get_user_data_dir(), "Trash");
-}
-
 public string get_folder_key(SimpleSettings settings, string key)
 {
   string folder = settings.get_string(key);
@@ -243,53 +238,6 @@ public string get_folder_key(SimpleSettings settings, string key)
   if (folder.has_prefix("/"))
     folder = folder.substring(1);
   return folder;
-}
-
-public File? parse_dir(string dir)
-{
-  string s = dir;
-  if (s == "$HOME")
-    s = Environment.get_home_dir();
-  else if (s == "$DESKTOP")
-    s = Environment.get_user_special_dir(UserDirectory.DESKTOP);
-  else if (s == "$DOCUMENTS")
-    s = Environment.get_user_special_dir(UserDirectory.DOCUMENTS);
-  else if (s == "$DOWNLOAD")
-    s = Environment.get_user_special_dir(UserDirectory.DOWNLOAD);
-  else if (s == "$MUSIC")
-    s = Environment.get_user_special_dir(UserDirectory.MUSIC);
-  else if (s == "$PICTURES")
-    s = Environment.get_user_special_dir(UserDirectory.PICTURES);
-  else if (s == "$PUBLIC_SHARE")
-    s = Environment.get_user_special_dir(UserDirectory.PUBLIC_SHARE);
-  else if (s == "$TEMPLATES")
-    s = Environment.get_user_special_dir(UserDirectory.TEMPLATES);
-  else if (s == "$TRASH")
-    s = get_trash_path();
-  else if (s == "$VIDEOS")
-    s = Environment.get_user_special_dir(UserDirectory.VIDEOS);
-  else if (Uri.parse_scheme(s) == null && !Path.is_absolute(s))
-    s = Path.build_filename(Environment.get_home_dir(), s);
-  else
-    return File.parse_name(s);
-
-  if (s != null)
-    return File.new_for_path(s);
-  else
-    return null;
-}
-
-public File[] parse_dir_list(string*[] dirs)
-{
-  File[] rv = new File[0];
-  
-  foreach (string s in dirs) {
-    var f = parse_dir(s);
-    if (f != null)
-      rv += f;
-  }
-  
-  return rv;
 }
 
 bool settings_read_only = false;
@@ -389,15 +337,42 @@ void convert_s3_folder_to_hostname()
   }
 }
 
-public bool meet_requirements(out string header, out string msg)
+ToolPlugin tool = null;
+void initialize_tool_plugin() throws Error
 {
-  return DuplicityInfo.get_default().check_duplicity_version(out header, out msg);
+  var engine = new Peas.Engine ();
+  engine.add_search_path(Path.build_filename(Config.PKG_LIBEXEC_DIR, "tools"), null);
+
+  var info = engine.get_plugin_info("libduplicity.so");
+  if (info == null)
+    throw new SpawnError.FAILED(_("Could not find backup tool.  Your installation is incomplete."));
+  if (!engine.try_load_plugin(info))
+    throw new SpawnError.FAILED(_("Could not load backup tool.  Your installation is incomplete."));
+
+  var extset = new Peas.ExtensionSet(engine, typeof(Peas.Activatable));
+  var ext = extset.get_extension(info);
+  tool = ext as ToolPlugin;
+  if (tool == null)
+    throw new SpawnError.FAILED(_("Backup tool is broken.  Your installation is incomplete."));
+
+  tool.activate();
+  tool.do_initial_setup();
 }
 
 public bool initialize(out string header, out string msg)
 {
-  if (!meet_requirements(out header, out msg))
+  header = null;
+  msg = null;
+
+  // Get tool plugin to use
+  try {
+    initialize_tool_plugin();
+  }
+  catch (Error e) {
+    header = _("Could not start backup tool");
+    msg = e.message;
     return false;
+  }
 
   convert_ssh_to_file();
   convert_s3_folder_to_hostname();

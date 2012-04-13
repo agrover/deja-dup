@@ -16,39 +16,42 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-pkglibexec_PROGRAMS = deja-dup-monitor
+lib_LTLIBRARIES = libduplicity.la
 
-deja_dup_monitor_CFLAGS = \
+libduplicity_la_CFLAGS = \
 	-I$(top_srcdir)/common \
-	$(MONITOR_CFLAGS) \
+	$(COMMON_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
-deja_dup_monitor_LDADD = \
-	$(MONITOR_LIBS) \
-	@INTLLIBS@ \
-	$(top_builddir)/common/libcommon.la
+libduplicity_la_LDFLAGS = -module -avoid-version
 
-deja_dup_monitor_VALASOURCES = \
-	monitor.vala
+libduplicity_la_LIBADD = \
+	$(COMMON_LIBS) \
+	@INTLLIBS@
 
-deja_dup_monitor_SOURCES = \
-	$(deja_dup_monitor_VALASOURCES)
+libduplicity_la_VALASOURCES = \
+	DuplicityPlugin.vala
+
+libduplicity_la_SOURCES = \
+	$(libduplicity_la_VALASOURCES)
 
 AM_VALAFLAGS = \
+	--library=libduplicity \
 	--vapidir $(top_srcdir)/common \
-	--vapidir $(top_srcdir)/vapi \
+	--vapidir=$(top_srcdir)/vapi \
 	$(SHARED_VALAFLAGS) \
-	--pkg config \
 	--pkg gio-2.0 \
 	--pkg libpeas-1.0 \
+	--pkg gio-unix-2.0 \
+	--pkg posix \
 	--pkg libcommon \
-	--pkg libnotify
+	--pkg config
 
-deja_dup_monitor_vala.stamp: $(top_srcdir)/config.h
+libduplicity_la_vala.stamp: $(top_srcdir)/config.h
 
 dist-hook:
-	cd $(distdir) && rm $(deja_dup_monitor_VALASOURCES:.vala=.c) \
-	                    deja_dup_monitor_vala.stamp
+	cd $(distdir) && rm -f $(libduplicity_la_VALASOURCES:.vala=.c) \
+	                       libduplicity_la_vala.stamp
 

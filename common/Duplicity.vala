@@ -1139,7 +1139,7 @@ internal class Duplicity : Object
       switch (int.parse(firstline[1])) {
       case DEBUG_GENERIC:
         if (mode == Operation.Mode.STATUS &&
-            !DuplicityInfo.get_default().reports_encryption &&
+            /*!DuplicityInfo.get_default().reports_encryption &&*/
             !detected_encryption) {
           if (gpg_regex != null && gpg_regex.match(text)) {
             detected_encryption = true;
@@ -1247,6 +1247,7 @@ internal class Duplicity : Object
           info.full = tokens[1] == "full";
           infos.append(info);
 
+/*
           if (DuplicityInfo.get_default().reports_encryption &&
               !detected_encryption &&
               tokens.length > 4) {
@@ -1255,6 +1256,7 @@ internal class Duplicity : Object
             detected_encryption = true;
             existing_encrypted = tokens[4] == "enc";
           }
+*/
         }
       }
       else if (in_chain)
