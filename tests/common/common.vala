@@ -343,23 +343,6 @@ class RestoreRunner : Object
   }
 }
 
-void cancel_noop()
-{
-  set_script("""
-ARGS: collection-status %s
-DELAY: 10
-
-""".printf(default_args()));
-
-  var br = new BackupRunner();
-  br.success = false;
-  br.cancelled = true;
-  br.callback = (op) => {
-    op.cancel();
-  };
-  br.run();
-}
-
 void cancel()
 {
   set_script("""
@@ -524,7 +507,6 @@ int main(string[] args)
   TestSuite.get_root().add_suite(unit);
 
   var backup = new TestSuite("backup");
-  backup.add(make_backup_case("cancel_noop", cancel_noop));
   backup.add(make_backup_case("cancel", cancel));
   backup.add(make_backup_case("stop", stop));
   backup.add(make_backup_case("read_error", read_error));

@@ -264,11 +264,12 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
     br.error_detail = keyfile.get_string(group, "ErrorDetail");
 }
 
-void process_duplicity_run_block(KeyFile keyfile, string run) throws Error
+void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) throws Error
 {
   string outputscript = null;
   string extra_args = "";
   bool encrypted = false;
+  bool cancel = false;
   Mode mode = Mode.NONE;
 
   var parts = run.split(" ", 2);
@@ -276,6 +277,8 @@ void process_duplicity_run_block(KeyFile keyfile, string run) throws Error
   var group = "Duplicity " + run;
 
   if (keyfile.has_group(group)) {
+    if (keyfile.has_key(group, "Cancel"))
+      cancel = keyfile.get_boolean(group, "Cancel");
     if (keyfile.has_key(group, "Encrypted"))
       encrypted = keyfile.get_boolean(group, "Encrypted");
     if (keyfile.has_key(group, "ExtraArgs")) {
@@ -299,8 +302,16 @@ void process_duplicity_run_block(KeyFile keyfile, string run) throws Error
     assert_not_reached();
 
   var dupscript = "ARGS: " + default_args(mode, encrypted, extra_args);
+
+  if (cancel) {
+    dupscript += "\n" + "DELAY: 10";
+    br.callback = (op) => {
+      op.cancel();
+    };
+  }
+
   if (outputscript != null && outputscript != "")
-    dupscript = dupscript + "\n\n" + outputscript + "\n";
+    dupscript += "\n\n" + outputscript + "\n";
 
   add_to_mockscript(dupscript);
 }
@@ -309,7 +320,7 @@ void process_duplicity_block(KeyFile keyfile, string group, BackupRunner br) thr
 {
   var runs = keyfile.get_string_list(group, "Runs");
   foreach (var run in runs)
-    process_duplicity_run_block(keyfile, run);
+    process_duplicity_run_block(keyfile, run, br);
 }
 
 void backup_run()
