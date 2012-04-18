@@ -343,35 +343,6 @@ class RestoreRunner : Object
   }
 }
 
-void cancel()
-{
-  set_script("""
-ARGS: collection-status %s
-
-=== deja-dup ===
-ARGS: %s
-
-=== deja-dup ===
-ARGS: %s
-DELAY: 10
-
-=== deja-dup ===
-ARGS: cleanup %s
-
-""".printf(default_args(),
-           default_args(Mode.DRY),
-           default_args(Mode.BACKUP),
-           default_args(Mode.CLEANUP)));
-
-  var br = new BackupRunner();
-  br.success = false;
-  br.cancelled = true;
-  br.callback = (op) => {
-    op.cancel();
-  };
-  br.run();
-}
-
 void stop()
 {
   set_script("""
@@ -507,7 +478,6 @@ int main(string[] args)
   TestSuite.get_root().add_suite(unit);
 
   var backup = new TestSuite("backup");
-  backup.add(make_backup_case("cancel", cancel));
   backup.add(make_backup_case("stop", stop));
   backup.add(make_backup_case("read_error", read_error));
   TestSuite.get_root().add_suite(backup);
