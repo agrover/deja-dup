@@ -392,21 +392,6 @@ ERROR 44 'duplicity-full.20090802T011421Z.vol3.difftar.gz'
   br.run();
 }
 
-void no_space()
-{
-  set_script("""
-ARGS: collection-status %s
-
-ERROR 53 get 'local' 'remote'
-
-""".printf(default_args()));
-
-  var br = new BackupRunner();
-  br.success = false;
-  br.error_str = "No space left.";
-  br.run();
-}
-
 void bad_hostname()
 {
   set_script("""
@@ -617,7 +602,6 @@ int main(string[] args)
 
   var backup = new TestSuite("backup");
   backup.add(make_backup_case("bad_volume", bad_volume));
-  backup.add(make_backup_case("no_space", no_space));
   backup.add(make_backup_case("bad_hostname", bad_hostname));
   backup.add(make_backup_case("cancel_noop", cancel_noop));
   backup.add(make_backup_case("cancel", cancel));
