@@ -3,12 +3,9 @@ Type=backup
 Success=false
 Error=No space left.
 
-[Run 0]
-Type=status
+[Duplicity]
+Runs=status;dry;backup;
 
-[Run 1]
-Type=dry
-
-[Run 2]
+[Duplicity backup]
 #ERROR 53 get 'local' 'remote'
-Type=backup
+Output=true

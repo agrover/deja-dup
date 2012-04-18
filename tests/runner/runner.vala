@@ -264,11 +264,12 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
     br.error_detail = keyfile.get_string(group, "ErrorDetail");
 }
 
-void process_run_block(KeyFile keyfile, string group) throws Error
+void process_duplicity_run_block(KeyFile keyfile, string run) throws Error
 {
   var dupscript = "";
 
-  var type = keyfile.get_string(group, "Type");
+  var parts = run.split(" ", 2);
+  var type = parts[0];
   if (type == "status")
     dupscript = "ARGS: " + default_args(Mode.STATUS);
   else if (type == "dry")
@@ -276,11 +277,23 @@ void process_run_block(KeyFile keyfile, string group) throws Error
   else if (type == "backup")
     dupscript = "ARGS: " + default_args(Mode.BACKUP);
 
-  var commentscript = keyfile.get_comment(group, "Type");
-  if (commentscript != null && commentscript != "")
-    dupscript = dupscript + "\n\n" + commentscript + "\n";
+  var group = "Duplicity " + run;
+  if (keyfile.has_group(group)) {
+    if (keyfile.has_key(group, "Output") && keyfile.get_boolean(group, "Output")) {
+      var commentscript = keyfile.get_comment(group, "Output");
+      if (commentscript != null && commentscript != "")
+        dupscript = dupscript + "\n\n" + commentscript + "\n";
+    }
+  }
 
   add_to_mockscript(dupscript);
+}
+
+void process_duplicity_block(KeyFile keyfile, string group, BackupRunner br) throws Error
+{
+  var runs = keyfile.get_string_list(group, "Runs");
+  foreach (var run in runs)
+    process_duplicity_run_block(keyfile, run);
 }
 
 void backup_run()
@@ -296,8 +309,8 @@ void backup_run()
     foreach (var group in groups) {
       if (group == "Operation")
         process_operation_block(keyfile, group, br);
-      else if (group == "Run" || group.has_prefix("Run "))
-        process_run_block(keyfile, group);
+      else if (group == "Duplicity")
+        process_duplicity_block(keyfile, group, br);
     }
 
     br.run();
