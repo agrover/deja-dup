@@ -270,6 +270,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
   string extra_args = "";
   bool encrypted = false;
   bool cancel = false;
+  bool stop = false;
   Mode mode = Mode.NONE;
 
   var parts = run.split(" ", 2);
@@ -288,6 +289,8 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
     }
     if (keyfile.has_key(group, "Output") && keyfile.get_boolean(group, "Output"))
       outputscript = keyfile.get_comment(group, "Output");
+    if (keyfile.has_key(group, "Stop"))
+      stop = keyfile.get_boolean(group, "Stop");
   }
 
   if (type == "status")
@@ -307,6 +310,13 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
     dupscript += "\n" + "DELAY: 10";
     br.callback = (op) => {
       op.cancel();
+    };
+  }
+
+  if (stop) {
+    dupscript += "\n" + "DELAY: 10";
+    br.callback = (op) => {
+      op.stop();
     };
   }
 
