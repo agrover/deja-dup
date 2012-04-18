@@ -1,0 +1,28 @@
+# When duplicity fails to correctly upload a volume, it might tell us.
+# First time, we restart.  Second time (on the same volume number), we will
+# cleanup and restart.  Third time we tell the user.
+
+[Operation]
+Type=backup
+Success=false
+Error=Blarg blarg do something
+
+[Duplicity]
+Runs=status;dry;backup 1;backup 2;backup 3;cleanup;backup 4;
+
+[Duplicity backup 1]
+#ERROR 44 'duplicity-full.20090802T011421Z.vol2.difftar.gz'
+Output=true
+
+[Duplicity backup 2]
+#ERROR 44 'duplicity-full.20090802T011421Z.vol3.difftar.gz'
+Output=true
+
+[Duplicity backup 3]
+#ERROR 44 'duplicity-full.20090802T011421Z.vol3.difftar.gz'
+Output=true
+
+[Duplicity backup 4]
+#ERROR 44 'duplicity-full.20090802T011421Z.vol3.difftar.gz'
+#. Blarg blarg do something
+Output=true

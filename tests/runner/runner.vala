@@ -102,7 +102,7 @@ public string default_args(Mode mode = Mode.NONE, bool encrypted = false, string
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
 
   if (mode == Mode.CLEANUP)
-    return "'--force' 'file:///tmp/not/a/thing' '--gio' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir);
+    return "cleanup '--force' 'file:///tmp/not/a/thing' '--gio' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir);
   else if (mode == Mode.RESTORE)
     return "'restore' '--gio' '--force' 'file:///tmp/not/a/thing' '/tmp/not/a/restore' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir);
   else if (mode == Mode.LIST)
@@ -293,6 +293,8 @@ void process_duplicity_run_block(KeyFile keyfile, string run) throws Error
     mode = Mode.DRY;
   else if (type == "backup")
     mode = Mode.BACKUP;
+  else if (type == "cleanup")
+    mode = Mode.CLEANUP;
   else
     assert_not_reached();
 

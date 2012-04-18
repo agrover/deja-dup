@@ -343,55 +343,6 @@ class RestoreRunner : Object
   }
 }
 
-void bad_volume()
-{
-  // When duplicity fails to correctly upload a volume, it might tell us.
-  // First time, we restart.  Second time (on the same volume number), we will
-  // cleanup and restart.  Third time we tell the user.
-  set_script("""
-ARGS: collection-status %s
-
-=== deja-dup ===
-ARGS: %s
-
-=== deja-dup ===
-ARGS: %s
-
-ERROR 44 'duplicity-full.20090802T011421Z.vol2.difftar.gz'
-
-=== deja-dup ===
-ARGS: %s
-
-ERROR 44 'duplicity-full.20090802T011421Z.vol3.difftar.gz'
-
-=== deja-dup ===
-ARGS: %s
-
-ERROR 44 'duplicity-full.20090802T011421Z.vol3.difftar.gz'
-
-=== deja-dup ===
-ARGS: cleanup %s
-
-=== deja-dup ===
-ARGS: %s
-
-ERROR 44 'duplicity-full.20090802T011421Z.vol3.difftar.gz'
-. Blarg blarg do something
-
-""".printf(default_args(),
-           default_args(Mode.DRY),
-           default_args(Mode.BACKUP),
-           default_args(Mode.BACKUP),
-           default_args(Mode.BACKUP),
-           default_args(Mode.CLEANUP),
-           default_args(Mode.BACKUP)));
-
-  var br = new BackupRunner();
-  br.success = false;
-  br.error_str = "Blarg blarg do something";
-  br.run();
-}
-
 void cancel_noop()
 {
   set_script("""
@@ -573,7 +524,6 @@ int main(string[] args)
   TestSuite.get_root().add_suite(unit);
 
   var backup = new TestSuite("backup");
-  backup.add(make_backup_case("bad_volume", bad_volume));
   backup.add(make_backup_case("cancel_noop", cancel_noop));
   backup.add(make_backup_case("cancel", cancel));
   backup.add(make_backup_case("stop", stop));
