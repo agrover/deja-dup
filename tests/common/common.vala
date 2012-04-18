@@ -208,75 +208,6 @@ TestCase make_backup_case(string name, TestFunc cb)
   return new TestCase(name, backup_setup, cb, backup_teardown);
 }
 
-class BackupRunner : Object
-{
-  public delegate void OpCallback (DejaDup.Operation op);
-  public bool success = true;
-  public bool cancelled = false;
-  public string? detail = null;
-  public string? error_str = null;
-  public string? error_detail = null;
-  public OpCallback? callback = null;
-  public bool is_full = true;
-
-  public void run()
-  {
-    var loop = new MainLoop(null);
-    var op = new DejaDup.OperationBackup();
-    op.done.connect((op, s, c, d) => {
-      Test.message("Done: %d, %d, %s", (int)s, (int)c, d);
-      if (success != s)
-        warning("Success didn't match; expected %d, got %d", (int) success, (int) s);
-      if (cancelled != c)
-        warning("Cancel didn't match; expected %d, got %d", (int) cancelled, (int) c);
-      if (detail != d)
-        warning("Detail didn't match; expected %s, got %s", detail, d);
-      loop.quit();
-    });
-
-    op.raise_error.connect((str, det) => {
-      Test.message("Error: %s, %s", str, det);
-      if (error_str != str)
-        warning("Error string didn't match; expected %s, got %s", error_str, str);
-      if (error_detail != det)
-        warning("Error detail didn't match; expected %s, got %s", error_detail, det);
-      error_str = null;
-      error_detail = null;
-    });
-    op.action_desc_changed.connect((action) => {
-    });
-    op.action_file_changed.connect((file, actual) => {
-    });
-    op.progress.connect((percent) => {
-    });
-    op.passphrase_required.connect(() => {
-      Test.message("Passphrase required");
-    });
-    op.question.connect((title, msg) => {
-      Test.message("Question asked: %s, %s", title, msg);
-    });
-    op.is_full.connect((full) => {
-      Test.message("Is full? %d", (int)full);
-      if (is_full != full)
-        warning("IsFull didn't match; expected %d, got %d", (int) is_full, (int) full);
-    });
-
-    op.start();
-    if (callback != null) {
-      Timeout.add_seconds(3, () => {
-        callback(op);
-        return false;
-      });
-    }
-    loop.run();
-
-    if (error_str != null)
-      warning("Error str didn't match; expected %s, never got error", error_str);
-    if (error_detail != null)
-      warning("Error detail didn't match; expected %s, never got error", error_detail);
-  }
-}
-
 class RestoreRunner : Object
 {
   public delegate void OpCallback (DejaDup.Operation op);
@@ -341,43 +272,6 @@ class RestoreRunner : Object
     if (error_detail != null)
       warning("Error detail didn't match; expected %s, never got error", error_detail);
   }
-}
-
-void read_error()
-{
-  Test.bug("907846");
-  var home = Environment.get_home_dir();
-  set_script("""
-ARGS: collection-status %s
-
-=== deja-dup ===
-ARGS: %s
-
-WARNING 10 '/blarg'
-
-WARNING 10 '%s/1'
-
-WARNING 10 '%s/2'
-
-=== deja-dup ===
-ARGS: %s
-
-WARNING 10 '/blarg'
-
-WARNING 10 '%s/1'
-
-WARNING 10 '%s/2'
-
-""".printf(default_args(),
-           default_args(Mode.DRY), home, home,
-           default_args(Mode.BACKUP), home, home));
-
-  var br = new BackupRunner();
-  br.detail = """Could not back up the following files.  Please make sure you are able to open them.
-
-%s/1
-%s/2""".printf(home, home);
-  br.run();
 }
 
 void write_error()
@@ -452,10 +346,6 @@ int main(string[] args)
   unit.add(make_backup_case("parse_dir_list", parse_dir_list));
   unit.add(make_backup_case("mode_to_string", mode_to_string));
   TestSuite.get_root().add_suite(unit);
-
-  var backup = new TestSuite("backup");
-  backup.add(make_backup_case("read_error", read_error));
-  TestSuite.get_root().add_suite(backup);
 
   var restore = new TestSuite("restore");
   restore.add(make_backup_case("write_error", write_error));

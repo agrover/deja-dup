@@ -245,6 +245,12 @@ void add_to_mockscript(string contents)
   }
 }
 
+string replace_keywords(string in)
+{
+  var home = Environment.get_home_dir();
+  return in.replace("@HOME@", home);
+}
+
 void process_operation_block(KeyFile keyfile, string group, BackupRunner br) throws Error
 {
   var type = keyfile.get_string(group, "Type");
@@ -257,7 +263,7 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
   if (keyfile.has_key(group, "IsFull"))
     br.is_full = keyfile.get_boolean(group, "IsFull");
   if (keyfile.has_key(group, "Detail"))
-    br.detail = keyfile.get_string(group, "Detail");
+    br.detail = replace_keywords(keyfile.get_string(group, "Detail"));
   if (keyfile.has_key(group, "Error"))
     br.error_str = keyfile.get_string(group, "Error");
   if (keyfile.has_key(group, "ErrorDetail"))
@@ -288,7 +294,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
         extra_args += " ";
     }
     if (keyfile.has_key(group, "Output") && keyfile.get_boolean(group, "Output"))
-      outputscript = keyfile.get_comment(group, "Output");
+      outputscript = replace_keywords(keyfile.get_comment(group, "Output"));
     if (keyfile.has_key(group, "Stop"))
       stop = keyfile.get_boolean(group, "Stop");
   }
