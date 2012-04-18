@@ -122,7 +122,7 @@ public string default_args(Mode mode = Mode.NONE, bool encrypted = false, string
 
   string args = "";
 
-  if (mode == Mode.STATUS)
+  if (mode == Mode.STATUS || mode == Mode.RESTORE_STATUS)
     args += "collection-status ";
 
   if (mode == Mode.STATUS || mode == Mode.NONE || mode == Mode.DRY || mode == Mode.BACKUP) {
@@ -256,6 +256,10 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
   var type = keyfile.get_string(group, "Type");
   if (type == "backup")
     br.op = new DejaDup.OperationBackup();
+  else if (type == "restore")
+    br.op = new DejaDup.OperationRestore("/tmp/not/a/restore");
+  else
+    assert_not_reached();
   if (keyfile.has_key(group, "Success"))
     br.success = keyfile.get_boolean(group, "Success");
   if (keyfile.has_key(group, "Canceled"))
@@ -301,10 +305,16 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
 
   if (type == "status")
     mode = Mode.STATUS;
+  else if (type == "status-restore")
+    mode = Mode.RESTORE_STATUS; // should really consolidate the statuses
   else if (type == "dry")
     mode = Mode.DRY;
+  else if (type == "list")
+    mode = Mode.LIST;
   else if (type == "backup")
     mode = Mode.BACKUP;
+  else if (type == "restore")
+    mode = Mode.RESTORE;
   else if (type == "cleanup")
     mode = Mode.CLEANUP;
   else
