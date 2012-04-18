@@ -178,9 +178,9 @@ AC_CONFIG_FILES([Makefile
                  po/Makefile.in
                  preferences/Makefile
                  tests/Makefile
-                 tests/common/Makefile
                  tests/runner/Makefile
                  tests/scripts/Makefile
+                 tests/unit/Makefile
                  vapi/Makefile
                  widgets/Makefile])
 AC_OUTPUT

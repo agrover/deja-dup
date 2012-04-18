@@ -17,26 +17,26 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 noinst_PROGRAMS = \
-	common \
+	unit-tests \
 	network
 
 check:
-	dbus-launch ./common
+	@dbus-launch ./unit-tests
 
 AM_CFLAGS = \
 	-I$(top_srcdir)/common \
-	$(DUP_CFLAGS)
+	$(COMMON_CFLAGS)
 
 LDADD = \
-	$(DUP_LIBS) \
+	$(COMMON_LIBS) \
 	@INTLLIBS@ \
 	$(top_builddir)/common/libcommon.la
 
-common_VALASOURCES = \
-	common.vala
+unit_tests_VALASOURCES = \
+	unit-tests.vala
 
-common_SOURCES = \
-	$(common_VALASOURCES)
+unit_tests_SOURCES = \
+	$(unit_tests_VALASOURCES)
 
 network_VALASOURCES = \
 	network.vala
@@ -50,18 +50,14 @@ AM_VALAFLAGS = \
 	$(NETWORKMONITOR_VALAFLAGS) \
 	--pkg config \
 	--pkg gio-2.0 \
-	--pkg gtk+-3.0 \
 	--pkg posix \
 	--pkg libcommon
 
-common_vala.stamp: $(top_srcdir)/config.h
+unit_tests_vala.stamp: $(top_srcdir)/config.h
 network_vala.stamp: $(top_srcdir)/config.h
 
 dist-hook:
-	cd $(distdir) && rm $(common_VALASOURCES:.vala=.c) \
-	                    common_vala.stamp
+	cd $(distdir) && rm $(unit_tests_VALASOURCES:.vala=.c) \
+	                    unit_tests_vala.stamp
 	cd $(distdir) && rm $(network_VALASOURCES:.vala=.c) \
 	                    network_vala.stamp
-
-EXTRA_DIST = \
-	mock
