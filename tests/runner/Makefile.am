@@ -20,8 +20,9 @@ noinst_PROGRAMS = \
 	runner
 
 check:
-	@dbus-launch ./runner ../scripts/no-space
-	@dbus-launch ./runner ../scripts/bad-hostname
+	@for test in $(srcdir)/../scripts/*.test; do \
+		dbus-launch ./runner $$test; \
+	done
 
 AM_CFLAGS = \
 	-I$(top_srcdir)/common \

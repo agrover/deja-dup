@@ -352,9 +352,9 @@ int main(string[] args)
     script = args[1];
   Environment.set_variable("DEJA_DUP_TEST_SCRIPT", script, true);
 
-  var parts = script.split("/", 3);
-  var suitename = parts[1];
-  var testname = parts[2];
+  var parts = script.split("/");
+  var suitename = parts[parts.length - 2];
+  var testname = parts[parts.length - 1].split(".")[0];
 
   var suite = new TestSuite(suitename);
   suite.add(new TestCase(testname, backup_setup, backup_run, backup_teardown));

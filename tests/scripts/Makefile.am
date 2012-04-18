@@ -16,5 +16,4 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-EXTRA_DIST = \
-	no-space
+EXTRA_DIST = $(shell ls $(srcdir)/*.test)
