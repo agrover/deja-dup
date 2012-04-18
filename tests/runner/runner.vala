@@ -266,25 +266,39 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
 
 void process_duplicity_run_block(KeyFile keyfile, string run) throws Error
 {
-  var dupscript = "";
+  string outputscript = null;
+  string extra_args = "";
+  bool encrypted = false;
+  Mode mode = Mode.NONE;
 
   var parts = run.split(" ", 2);
   var type = parts[0];
-  if (type == "status")
-    dupscript = "ARGS: " + default_args(Mode.STATUS);
-  else if (type == "dry")
-    dupscript = "ARGS: " + default_args(Mode.DRY);
-  else if (type == "backup")
-    dupscript = "ARGS: " + default_args(Mode.BACKUP);
-
   var group = "Duplicity " + run;
+
   if (keyfile.has_group(group)) {
-    if (keyfile.has_key(group, "Output") && keyfile.get_boolean(group, "Output")) {
-      var commentscript = keyfile.get_comment(group, "Output");
-      if (commentscript != null && commentscript != "")
-        dupscript = dupscript + "\n\n" + commentscript + "\n";
+    if (keyfile.has_key(group, "Encrypted"))
+      encrypted = keyfile.get_boolean(group, "Encrypted");
+    if (keyfile.has_key(group, "ExtraArgs")) {
+      extra_args = keyfile.get_string(group, "ExtraArgs");
+      if (!extra_args.has_suffix(" "))
+        extra_args += " ";
     }
+    if (keyfile.has_key(group, "Output") && keyfile.get_boolean(group, "Output"))
+      outputscript = keyfile.get_comment(group, "Output");
   }
+
+  if (type == "status")
+    mode = Mode.STATUS;
+  else if (type == "dry")
+    mode = Mode.DRY;
+  else if (type == "backup")
+    mode = Mode.BACKUP;
+  else
+    assert_not_reached();
+
+  var dupscript = "ARGS: " + default_args(mode, encrypted, extra_args);
+  if (outputscript != null && outputscript != "")
+    dupscript = dupscript + "\n\n" + outputscript + "\n";
 
   add_to_mockscript(dupscript);
 }

@@ -392,34 +392,6 @@ ERROR 44 'duplicity-full.20090802T011421Z.vol3.difftar.gz'
   br.run();
 }
 
-void bad_hostname()
-{
-  set_script("""
-ARGS: collection-status %s
-
-INFO 3
-
-=== deja-dup ===
-ARGS: full %s
-RETURN: 3
-
-ERROR 3 new old
-
-=== deja-dup ===
-ARGS: full %s
-
-=== deja-dup ===
-ARGS: full %s
-
-""".printf(default_args(),
-           default_args(Mode.DRY),
-           default_args(Mode.DRY, false, "--allow-source-mismatch "),
-           default_args(Mode.BACKUP, false, "--allow-source-mismatch ")));
-
-  var br = new BackupRunner();
-  br.run();
-}
-
 void cancel_noop()
 {
   set_script("""
@@ -602,7 +574,6 @@ int main(string[] args)
 
   var backup = new TestSuite("backup");
   backup.add(make_backup_case("bad_volume", bad_volume));
-  backup.add(make_backup_case("bad_hostname", bad_hostname));
   backup.add(make_backup_case("cancel_noop", cancel_noop));
   backup.add(make_backup_case("cancel", cancel));
   backup.add(make_backup_case("stop", stop));

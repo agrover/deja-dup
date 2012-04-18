@@ -21,6 +21,7 @@ noinst_PROGRAMS = \
 
 check:
 	@dbus-launch ./runner ../scripts/no-space
+	@dbus-launch ./runner ../scripts/bad-hostname
 
 AM_CFLAGS = \
 	-I$(top_srcdir)/common \
