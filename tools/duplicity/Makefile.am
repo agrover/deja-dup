@@ -16,7 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-lib_LTLIBRARIES = libduplicity.la
+toolsdir = $(pkglibexecdir)/tools
+tools_LTLIBRARIES = libduplicity.la
 
 libduplicity_la_CFLAGS = \
 	-I$(top_srcdir)/common \
