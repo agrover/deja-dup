@@ -357,7 +357,6 @@ void initialize_tool_plugin() throws Error
     throw new SpawnError.FAILED(_("Backup tool is broken.  Your installation is incomplete."));
 
   tool.activate();
-  tool.do_initial_setup();
 }
 
 public ToolJob make_tool_job() throws Error

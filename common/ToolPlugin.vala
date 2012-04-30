@@ -93,7 +93,6 @@ public abstract class ToolPlugin : Peas.ExtensionBase, Peas.Activatable
 
   // Deja Dup methods
   public string name {get; protected set;}
-  public abstract void do_initial_setup () throws Error;
   public abstract ToolJob create_job () throws Error;
 }
 

@@ -21,6 +21,8 @@ using GLib;
 
 public class DuplicityPlugin : DejaDup.ToolPlugin
 {
+  bool has_been_setup = false;
+
   construct
   {
     name = "Duplicity";
@@ -29,7 +31,7 @@ public class DuplicityPlugin : DejaDup.ToolPlugin
   static const int REQUIRED_MAJOR = 0;
   static const int REQUIRED_MINOR = 6;
   static const int REQUIRED_MICRO = 14;
-  public override void do_initial_setup () throws Error
+  void do_initial_setup () throws Error
   {
     string output;
     Process.spawn_command_line_sync("duplicity --version", out output, null, null);
@@ -64,6 +66,10 @@ public class DuplicityPlugin : DejaDup.ToolPlugin
 
   public override DejaDup.ToolJob create_job () throws Error
   {
+    if (!has_been_setup) {
+      do_initial_setup();
+      has_been_setup = true;
+    }
     return new DuplicityJob();
   }
 }
