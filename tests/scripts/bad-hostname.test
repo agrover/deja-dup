@@ -1,0 +1,15 @@
+[Operation]
+Type=backup
+
+[Duplicity]
+Runs=status;dry 1;dry 2;backup;
+
+[Duplicity dry 1]
+#ERROR 3 new old
+Output=true
+
+[Duplicity dry 2]
+ExtraArgs=--allow-source-mismatch
+
+[Duplicity backup]
+ExtraArgs=--allow-source-mismatch

@@ -19,7 +19,7 @@
 # Don't use special name 'TESTS', as it will trigger an automatically-created
 # 'check' target used during distcheck.
 
-SUBDIRS = common
+SUBDIRS = scripts unit runner
 
 AUTO_TESTS = \
 	backup/cancel \

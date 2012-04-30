@@ -19,7 +19,7 @@
 
 using GLib;
 
-async void check_status()
+async void check_status(MainLoop loop)
 {
   yield DejaDup.Network.ensure_status();
   var nw = DejaDup.Network.get();
@@ -28,13 +28,13 @@ async void check_status()
   print("Connected: %d\n", (int)nw.connected);
   print("Can reach U1: %d\n", (int)can_reach);
   print("Can reach local server: %d\n", (int)can_reach2);
-  Gtk.main_quit();
+  loop.quit();
 }
 
 int main(string[] args)
 {
-  Gtk.init(ref args);
-  check_status();
-  Gtk.main();
+  var loop = new MainLoop(null);
+  check_status(loop);
+  loop.run();
   return 0;
 }

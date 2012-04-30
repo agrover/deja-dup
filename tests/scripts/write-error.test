@@ -1,0 +1,17 @@
+[Operation]
+Type=restore
+Detail=Could not restore the following files.  Please make sure you are able to write to them.\n\n@HOME@/1\n@HOME@/2
+
+[Duplicity]
+Runs=status-restore;list;restore;
+
+[Duplicity restore]
+#WARNING 12 '/blarg'
+#. [Errno 1] not a real error
+#
+#WARNING 12 '@HOME@/1'
+#. [Errno 13] real error
+#
+#WARNING 12 '@HOME@/2'
+#. [Errno 13] real error
+Output=true

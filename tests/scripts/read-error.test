@@ -1,0 +1,16 @@
+# Bug 907846
+
+[Operation]
+Type=backup
+Detail=Could not back up the following files.  Please make sure you are able to open them.\n\n@HOME@/1\n@HOME@/2
+
+[Duplicity]
+Runs=status;dry;backup;
+
+[Duplicity backup]
+#WARNING 10 '/blarg'
+#
+#WARNING 10 '@HOME@/1'
+#
+#WARNING 10 '@HOME@/2'
+Output=true
