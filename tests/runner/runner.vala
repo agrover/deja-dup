@@ -210,7 +210,7 @@ class BackupRunner : Object
 
     op.start();
     if (callback != null) {
-      Timeout.add_seconds(3, () => {
+      Timeout.add_seconds(5, () => {
         callback(op);
         return false;
       });
