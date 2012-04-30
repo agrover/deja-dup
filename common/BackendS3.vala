@@ -38,8 +38,8 @@ public class BackendS3 : Backend
     return new BackendS3();
   }
   
-  public override void add_argv(Operation.Mode mode, ref List<string> argv) {
-    if (mode == Operation.Mode.INVALID)
+  public override void add_argv(ToolJob.Mode mode, ref List<string> argv) {
+    if (mode == ToolJob.Mode.INVALID)
       argv.append("--s3-use-new-style");
   }
   

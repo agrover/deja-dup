@@ -24,19 +24,19 @@ namespace DejaDup {
 public class OperationBackup : Operation
 {
   public OperationBackup() {
-    Object(mode: Mode.BACKUP);
+    Object(mode: ToolJob.Mode.BACKUP);
   }
   
-  internal async override void operation_finished(Duplicity dup, bool success, bool cancelled, string? detail)
+  internal async override void operation_finished(ToolJob job, bool success, bool cancelled, string? detail)
   {
     /* If successfully completed, update time of last backup and run base operation_finished */
     if (success)
       DejaDup.update_last_run_timestamp(DejaDup.TimestampType.BACKUP);
     
-    base.operation_finished(dup, success, cancelled, detail);
+    base.operation_finished(job, success, cancelled, detail);
   }
   
-  protected override List<string>? make_argv() throws Error
+  protected override List<string>? make_argv()
   {
     var settings = get_settings();
     
@@ -45,21 +45,19 @@ public class OperationBackup : Operation
     var exclude_val = settings.get_value(EXCLUDE_LIST_KEY);
     var exclude_list = parse_dir_list(exclude_val.get_strv());
     
-    List<string> rv = new List<string>();
-    
     // Exclude directories no one wants to backup
     var always_excluded = get_always_excluded_dirs();
     foreach (string dir in always_excluded)
-      dup.excludes.prepend(File.new_for_path(dir));
+      job.excludes.prepend(File.new_for_path(dir));
     
     foreach (File s in exclude_list)
-      dup.excludes.prepend(s);
+      job.excludes.prepend(s);
     foreach (File s in include_list)
-      dup.includes.prepend(s);
+      job.includes.prepend(s);
     
-    dup.local = File.new_for_path("/");
+    job.local = File.new_for_path("/");
     
-    return rv;
+    return null;
   }
   
   List<string> get_always_excluded_dirs()

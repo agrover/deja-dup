@@ -341,11 +341,12 @@ ToolPlugin tool = null;
 void initialize_tool_plugin() throws Error
 {
   var engine = new Peas.Engine ();
-  engine.add_search_path(Path.build_filename(Config.PKG_LIBEXEC_DIR, "tools"), null);
+  var search_path = Path.build_filename(Config.PKG_LIBEXEC_DIR, "tools");
+  engine.add_search_path(search_path, null);
 
   var info = engine.get_plugin_info("libduplicity.so");
   if (info == null)
-    throw new SpawnError.FAILED(_("Could not find backup tool.  Your installation is incomplete."));
+    throw new SpawnError.FAILED(_("Could not find backup tool in %s.  Your installation is incomplete.").printf(search_path));
   if (!engine.try_load_plugin(info))
     throw new SpawnError.FAILED(_("Could not load backup tool.  Your installation is incomplete."));
 
@@ -357,6 +358,13 @@ void initialize_tool_plugin() throws Error
 
   tool.activate();
   tool.do_initial_setup();
+}
+
+public ToolJob make_tool_job() throws Error
+{
+  if (tool == null)
+    initialize_tool_plugin();
+  return tool.create_job();
 }
 
 public bool initialize(out string header, out string msg)

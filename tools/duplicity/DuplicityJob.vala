@@ -19,57 +19,12 @@
 
 using GLib;
 
-namespace DejaDup {
-
-internal class Duplicity : Object
+internal class DuplicityJob : DejaDup.ToolJob
 {
-  /*
-   * Vala implementation of various methods for accessing duplicity
-   *
-   * Vala implementation of various methods for accessing duplicity from
-   * vala withot the need of manually running duplicity command.
-   */
+  DejaDup.ToolJob.Mode original_mode {get; private set;}
+  bool error_issued {get; private set; default = false;}
+  bool was_stopped {get; private set; default = false;}
 
-  public signal void done(bool success, bool cancelled, string? detail);
-  public signal void raise_error(string errstr, string? detail);
-  public signal void action_desc_changed(string action);
-  public signal void action_file_changed(File file, bool actual);
-  public signal void progress(double percent);
-  /*
-   * Signal emitted when collection dates are retrieved from duplicity
-   */
-  public signal void collection_dates(List<string>? dates);
-  public signal void listed_current_files(string date, string file);
-  public signal void question(string title, string msg);
-  public signal void is_full(bool first);
-  public signal void bad_encryption_password();
-  
-  public Operation.Mode original_mode {get; construct;}
-  public Operation.Mode mode {get; private set; default = Operation.Mode.INVALID;}
-  public bool error_issued {get; private set; default = false;}
-  public bool was_stopped {get; private set; default = false;}
-  
-  public File local {get; set;}
-  public Backend backend {get; set;}
-  public List<File> includes;
-  public List<File> excludes;
-  public bool use_progress {get; set; default = true;}
-  public string encrypt_password {private get; set; default = null;}
-  
-  private List<File> _restore_files;
-  public List<File> restore_files {
-    get {
-      return this._restore_files;
-    }
-    set {
-      foreach (File f in this._restore_files)
-        f.unref();
-      this._restore_files = value.copy();
-      foreach (File f in this._restore_files)
-        f.ref();
-    }
-  }
-  
   protected enum State {
     NORMAL,
     DRY_RUN, // used when backing up, and we need to first get time estimate
@@ -128,16 +83,12 @@ internal class Duplicity : Object
 
   void network_changed()
   {
-    if (Network.get().connected)
+    if (DejaDup.Network.get().connected)
       resume();
     else
       pause(_("Paused (no network)"));
   }
 
-  public Duplicity(Operation.Mode mode) {
-    Object(original_mode: mode);
-  }
-  
   construct {
     if (slash == null) {
       slash = File.new_for_path("/");
@@ -157,34 +108,67 @@ internal class Duplicity : Object
   }
 
   ~Duplicity() {
-    Network.get().notify["connected"].disconnect(network_changed);
+    DejaDup.Network.get().notify["connected"].disconnect(network_changed);
   }
 
-  public virtual void start(Backend backend,
-                            List<string>? argv, List<string>? envp)
+  public override void start()
   {
     // save arguments for calling duplicity again later
+    if (original_mode == DejaDup.ToolJob.Mode.INVALID)
+      original_mode = mode;
     mode = original_mode;
-    this.backend = backend;
     saved_argv = new List<string>();
     saved_envp = new List<string>();
     backend_argv = new List<string>();
-    foreach (string s in argv) saved_argv.append(s);
-    foreach (string s in envp) saved_envp.append(s);
-    backend.add_argv(Operation.Mode.INVALID, ref backend_argv);
+    backend.add_argv(DejaDup.ToolJob.Mode.INVALID, ref backend_argv);
+    backend.add_argv(mode, ref saved_argv);
     
-    if (mode == Operation.Mode.BACKUP)
+    if (mode == DejaDup.ToolJob.Mode.BACKUP)
       process_include_excludes();
     
-    var settings = get_settings();
-    delete_age = settings.get_int(DELETE_AFTER_KEY);
+    var settings = DejaDup.get_settings();
+    delete_age = settings.get_int(DejaDup.DELETE_AFTER_KEY);
+
+    get_envp();
+  }
+
+  async void get_envp()
+  {
+    try {
+      backend.envp_ready.connect(continue_with_envp);
+      yield backend.get_envp();
+    }
+    catch (Error e) {
+      raise_error(e.message, null);
+      done(false, false, null);
+    }
+  }
+
+  void continue_with_envp(DejaDup.Backend b, bool success, List<string>? envp, string? error)
+  {
+    /*
+     * Starts Duplicity backup with added enviroment variables
+     * 
+     * Start Duplicity backup process with costum values for enviroment variables.
+     */
+    backend.envp_ready.disconnect(continue_with_envp);
+
+    if (!success) {
+      if (error != null)
+        raise_error(error, null);
+      done(false, false, null);
+      return;
+    }
+
+    foreach (string s in envp)
+      saved_envp.append(s);
 
     if (!restart())
       done(false, false, null);
 
     if (!backend.is_native()) {
-      Network.get().notify["connected"].connect(network_changed);
-      if (!Network.get().connected) {
+      DejaDup.Network.get().notify["connected"].connect(network_changed);
+      if (!DejaDup.Network.get().connected) {
         debug("No connection found. Postponing the backup.");
         pause(_("Paused (no network)"));
       }
@@ -337,11 +321,11 @@ internal class Duplicity : Object
     saved_argv.append("--exclude=**");
   }
   
-  public void cancel() {
+  public override void cancel() {
     var prev_mode = mode;
-    mode = Operation.Mode.INVALID;
+    mode = DejaDup.ToolJob.Mode.INVALID;
     
-    if (prev_mode == Operation.Mode.BACKUP && state == State.NORMAL) {
+    if (prev_mode == DejaDup.ToolJob.Mode.BACKUP && state == State.NORMAL) {
       if (cleanup())
         return;
     }
@@ -349,14 +333,14 @@ internal class Duplicity : Object
     cancel_inst();
   }
   
-  public void stop() {
+  public override void stop() {
     // just abruptly stop, without a cleanup, duplicity will resume
     was_stopped = true;
-    mode = Operation.Mode.INVALID;
+    mode = DejaDup.ToolJob.Mode.INVALID;
     cancel_inst();
   }
 
-  public void pause(string? reason)
+  public override void pause(string? reason)
   {
     if (inst != null) {
       inst.pause();
@@ -365,7 +349,7 @@ internal class Duplicity : Object
     }
   }
 
-  public void resume()
+  public override void resume()
   {
     if (inst != null) {
       inst.resume();
@@ -385,7 +369,7 @@ internal class Duplicity : Object
     if (restore_files == null) // only clear if we're not in middle of restore sequence
       local_error_files = null;
     
-    if (mode == Operation.Mode.INVALID)
+    if (mode == DejaDup.ToolJob.Mode.INVALID)
       return false;
     
     var extra_argv = new List<string>();
@@ -393,18 +377,18 @@ internal class Duplicity : Object
     File custom_local = null;
     
     switch (original_mode) {
-    case Operation.Mode.BACKUP:
+    case DejaDup.ToolJob.Mode.BACKUP:
       // We need to first check the backup status to see if we need to start
       // a full backup and to see if we should use encryption.
       if (!checked_collection_info) {
-        mode = Operation.Mode.STATUS;
+        mode = DejaDup.ToolJob.Mode.STATUS;
         state = State.STATUS;
         action_desc = _("Preparing…");
       }
       // If we're backing up, and the version of duplicity supports it, we should
       // first run using --dry-run to get the total size of the backup, to make
       // accurate progress bars.
-      else if (use_progress && !has_progress_total) {
+      else if ((flags & DejaDup.ToolJob.Flags.NO_PROGRESS) == 0 && !has_progress_total) {
         state = State.DRY_RUN;
         action_desc = _("Preparing…");
         extra_argv.append("--dry-run");
@@ -419,16 +403,16 @@ internal class Duplicity : Object
       }
       
       break;
-    case Operation.Mode.RESTORE:
+    case DejaDup.ToolJob.Mode.RESTORE:
       // We need to first check the backup status to see if we should use
       // encryption.
       if (!checked_collection_info) {
-        mode = Operation.Mode.STATUS;
+        mode = DejaDup.ToolJob.Mode.STATUS;
         state = State.STATUS;
         action_desc = _("Preparing…");
       }
       else if (!has_checked_contents) {
-        mode = Operation.Mode.LIST;
+        mode = DejaDup.ToolJob.Mode.LIST;
         state = State.CHECK_CONTENTS;
         action_desc = _("Preparing…");
       }
@@ -494,7 +478,7 @@ internal class Duplicity : Object
     // Send appropriate description for what we're about to do.  Is often
     // very quickly overridden by a message like "Backing up file X"
     if (action_desc == null)
-      action_desc = Operation.mode_to_string(mode);
+      action_desc = DejaDup.Operation.mode_to_string(mode);
     set_status(action_desc);
     
     connect_and_start(extra_argv, null, null, custom_local);
@@ -633,7 +617,7 @@ internal class Duplicity : Object
 
         /* Set full backup threshold and determine whether we should trigger
            a full backup. */
-        if (mode == Operation.Mode.BACKUP && got_collection_info) {
+        if (mode == DejaDup.ToolJob.Mode.BACKUP && got_collection_info) {
           Date threshold = DejaDup.get_full_backup_threshold_date();
           Date full_backup = Date();
           foreach (DateInfo info in collection_info) {
@@ -661,7 +645,7 @@ internal class Duplicity : Object
         break;
       
       case State.NORMAL:
-        if (mode == Operation.Mode.RESTORE && restore_files != null) {
+        if (mode == DejaDup.ToolJob.Mode.RESTORE && restore_files != null) {
           _restore_files.delete_link(_restore_files);
           if (restore_files != null) {
             if (restart())
@@ -669,7 +653,7 @@ internal class Duplicity : Object
           }
         }
 
-        if (mode == Operation.Mode.BACKUP) {
+        if (mode == DejaDup.ToolJob.Mode.BACKUP) {
           if (local_error_files != null) {
             // OK, we succeeded yay!  But some files didn't make it into the backup
             // because we couldn't read them.  So tell the user so they don't think
@@ -681,11 +665,11 @@ internal class Duplicity : Object
             }
           }
 
-          mode = Operation.Mode.INVALID; // mark 'done' so when we delete, we don't restart
+          mode = DejaDup.ToolJob.Mode.INVALID; // mark 'done' so when we delete, we don't restart
           if (delete_files_if_needed())
             return;
         }
-        else if (mode == Operation.Mode.RESTORE) {
+        else if (mode == DejaDup.ToolJob.Mode.RESTORE) {
           if (local_error_files != null) {
             // OK, we succeeded yay!  But some files didn't actually restore
             // because we couldn't write to them.  So tell the user so they
@@ -899,7 +883,7 @@ internal class Duplicity : Object
   {
     disconnect_inst();
     question(t, m);
-    var rv = mode != Operation.Mode.INVALID; // return whether we were canceled
+    var rv = mode != DejaDup.ToolJob.Mode.INVALID; // return whether we were canceled
     if (!rv)
       handle_done(null, false, true);
     return rv;
@@ -964,7 +948,7 @@ internal class Duplicity : Object
         // If it's still bad, we'll do a full cleanup and try again.
         // If it's *still* bad, tell the user, but I'm not sure what they can
         // do about it.
-        if (mode == Operation.Mode.BACKUP) {
+        if (mode == DejaDup.ToolJob.Mode.BACKUP) {
           // strip date info from volume (after cleanup below, we'll get new date)
           var this_volume = parse_duplicity_file(firstline[2], 2);
           if (last_bad_volume != this_volume) {
@@ -1030,7 +1014,7 @@ internal class Duplicity : Object
       break;
     case "S3CreateError":
       if (text.contains("<Code>BucketAlreadyExists</Code>")) {
-        if (((BackendS3)backend).bump_bucket()) {
+        if (((DejaDup.BackendS3)backend).bump_bucket()) {
           if (restart()) // get_remote() will eventually grab new bucket name
             return;
         }
@@ -1048,14 +1032,14 @@ internal class Duplicity : Object
         show_error(_("Bad encryption password."));
       else if (text.contains("[Errno 5]") && // I/O Error
                last_touched_file != null) {
-        if (mode == Operation.Mode.BACKUP)
+        if (mode == DejaDup.ToolJob.Mode.BACKUP)
           show_error(_("Error reading file ‘%s’.").printf(last_touched_file.get_parse_name()));
         else
           show_error(_("Error writing file ‘%s’.").printf(last_touched_file.get_parse_name()));
       }
       else if (text.contains("[Errno 28]")) { // No space left on device
         string where = null;
-        if (mode == Operation.Mode.BACKUP)
+        if (mode == DejaDup.ToolJob.Mode.BACKUP)
           where = backend.get_location_pretty();
         else
           where = local.get_path();
@@ -1138,7 +1122,7 @@ internal class Duplicity : Object
     if (firstline.length > 1) {
       switch (int.parse(firstline[1])) {
       case DEBUG_GENERIC:
-        if (mode == Operation.Mode.STATUS &&
+        if (mode == DejaDup.ToolJob.Mode.STATUS &&
             /*!DuplicityInfo.get_default().reports_encryption &&*/
             !detected_encryption) {
           if (gpg_regex != null && gpg_regex.match(text)) {
@@ -1153,7 +1137,7 @@ internal class Duplicity : Object
 
   void process_file_stat(string date, string file, List<string> data, string text)
   {
-    if (mode != Operation.Mode.LIST)
+    if (mode != DejaDup.ToolJob.Mode.LIST)
       return;
     if (state == State.CHECK_CONTENTS) {
       var gfile = make_file_obj(file);
@@ -1223,7 +1207,7 @@ internal class Duplicity : Object
      * this all up and report back to caller via a signal.
      * We're really only interested in the list of entries in the complete chain.
      */
-    if (mode != Operation.Mode.STATUS || got_collection_info)
+    if (mode != DejaDup.ToolJob.Mode.STATUS || got_collection_info)
       return;
     
     var timeval = TimeVal();
@@ -1285,7 +1269,7 @@ internal class Duplicity : Object
         // up before we continue.  We don't want to wait until we finish to
         // clean them up, since we may want that space, and if there's a bug
         // in ourselves, we may never get to it.
-        if (mode == Operation.Mode.BACKUP && !this.cleaned_up_once)
+        if (mode == DejaDup.ToolJob.Mode.BACKUP && !this.cleaned_up_once)
           cleanup(); // stops current backup, cleans up, then resumes
         break;
 
@@ -1351,7 +1335,7 @@ internal class Duplicity : Object
     //
     // For local filesystems, we'll choose large volsize.
     // For remote FSs, we'll go smaller.
-    if (in_testing_mode())
+    if (DejaDup.in_testing_mode())
       return 1;
     else if (backend.is_native())
       return 50;
@@ -1405,24 +1389,26 @@ internal class Duplicity : Object
     if (argv_entire == null) {
       // add operation, local, and remote args
       switch (mode) {
-      case Operation.Mode.BACKUP:
+      case DejaDup.ToolJob.Mode.BACKUP:
         if (is_full_backup)
           argv.prepend("full");
         argv.append("--volsize=%d".printf(get_volsize()));
         argv.append(local_arg.get_path());
         argv.append(get_remote());
         break;
-      case Operation.Mode.RESTORE:
+      case DejaDup.ToolJob.Mode.RESTORE:
         argv.prepend("restore");
+        if (time != null)
+          argv.append("--time=%s".printf(time));
         argv.append("--force");
         argv.append(get_remote());
         argv.append(local_arg.get_path());
         break;
-      case Operation.Mode.STATUS:
+      case DejaDup.ToolJob.Mode.STATUS:
         argv.prepend("collection-status");
         argv.append(get_remote());
         break;
-      case Operation.Mode.LIST:
+      case DejaDup.ToolJob.Mode.LIST:
         argv.prepend("list-current-files");
         argv.append(get_remote());
         break;
@@ -1463,6 +1449,4 @@ internal class Duplicity : Object
     }
   }
 }
-
-} // end namespace
 

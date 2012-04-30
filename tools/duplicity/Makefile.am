@@ -32,7 +32,12 @@ libduplicity_la_LIBADD = \
 	@INTLLIBS@
 
 libduplicity_la_VALASOURCES = \
-	DuplicityPlugin.vala
+	DuplicityInstance.vala \
+	DuplicityJob.vala \
+	DuplicityPlugin.vala \
+	RecursiveDelete.vala \
+	RecursiveMove.vala \
+	RecursiveOp.vala
 
 libduplicity_la_SOURCES = \
 	$(libduplicity_la_VALASOURCES)

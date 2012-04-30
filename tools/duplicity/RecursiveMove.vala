@@ -19,8 +19,6 @@
 
 using GLib;
 
-namespace DejaDup {
-
 /**
  * Recursively moves one directory into another, merging files.  And by merge,
  * I mean it overwrites.  It skips any files it can't move and reports an
@@ -163,6 +161,4 @@ internal class RecursiveMove : RecursiveOp
     return new RecursiveMove(src_child, dst_child);
   }
 }
-
-} // end namespace
 

@@ -43,8 +43,6 @@ libcommon_la_VALASOURCES = \
 	Checker.vala \
 	CommonUtils.vala \
 	DirHandling.vala \
-	Duplicity.vala \
-	DuplicityInstance.vala \
 	Network.vala \
 	Operation.vala \
 	OperationBackup.vala \
@@ -52,9 +50,6 @@ libcommon_la_VALASOURCES = \
 	OperationStatus.vala \
 	OperationFiles.vala \
 	PythonChecker.vala \
-	RecursiveDelete.vala \
-	RecursiveMove.vala \
-	RecursiveOp.vala \
 	SimpleSettings.vala \
 	ToolPlugin.vala
 

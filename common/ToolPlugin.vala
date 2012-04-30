@@ -21,7 +21,6 @@ using GLib;
 
 namespace DejaDup {
 
-/*
 public abstract class ToolJob : Object
 {
   // life cycle signals
@@ -43,15 +42,16 @@ public abstract class ToolJob : Object
   public signal void listed_current_files(string date, string file); // LIST
 
   // life cycle control
+  public abstract void start ();
   public abstract void cancel (); // destroy progress so far
   public abstract void stop (); // just abruptly stop
   public abstract void pause (string? reason);
   public abstract void resume ();
 
   public enum Mode {
-    BACKUP, RESTORE, STATUS, LIST, HISTORY,
+    INVALID, BACKUP, RESTORE, STATUS, LIST, HISTORY,
   }
-  public Mode mode {get; set;}
+  public Mode mode {get; set; default = Mode.INVALID;}
 
   public enum Flags {
     NO_PROGRESS,
@@ -64,9 +64,24 @@ public abstract class ToolJob : Object
 
   public List<File> includes; // BACKUP
   public List<File> excludes; // BACKUP
-  public List<File> restore_files; // RESTORE
+
+  protected List<File> _restore_files;
+  public List<File> restore_files { // RESTORE
+    get {
+      return this._restore_files;
+    }
+    set {
+      // Deep copy
+      foreach (File f in this._restore_files)
+        f.unref();
+      this._restore_files = value.copy();
+      foreach (File f in this._restore_files)
+        f.ref();
+    }
+  }
+
+  public string time {get; set;} // RESTORE
 }
-*/
 
 public abstract class ToolPlugin : Peas.ExtensionBase, Peas.Activatable
 {
@@ -79,7 +94,7 @@ public abstract class ToolPlugin : Peas.ExtensionBase, Peas.Activatable
   // Deja Dup methods
   public string name {get; protected set;}
   public abstract void do_initial_setup () throws Error;
-  //public abstract void start_job (ToolJob job) throws Error;
+  public abstract ToolJob create_job () throws Error;
 }
 
 } // end namespace

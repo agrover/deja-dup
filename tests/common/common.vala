@@ -71,12 +71,12 @@ void parse_dir_list()
 
 void mode_to_string()
 {
-  assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.INVALID) == "Preparing…");
-  assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.BACKUP) == "Backing up…");
-  assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.RESTORE) == "Restoring…");
-  assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.STATUS) == "Checking for backups…");
-  assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.LIST) == "Listing files…");
-  assert(DejaDup.Operation.mode_to_string(DejaDup.Operation.Mode.FILEHISTORY) == "Preparing…");
+  assert(DejaDup.Operation.mode_to_string(DejaDup.ToolJob.Mode.INVALID) == "Preparing…");
+  assert(DejaDup.Operation.mode_to_string(DejaDup.ToolJob.Mode.BACKUP) == "Backing up…");
+  assert(DejaDup.Operation.mode_to_string(DejaDup.ToolJob.Mode.RESTORE) == "Restoring…");
+  assert(DejaDup.Operation.mode_to_string(DejaDup.ToolJob.Mode.STATUS) == "Checking for backups…");
+  assert(DejaDup.Operation.mode_to_string(DejaDup.ToolJob.Mode.LIST) == "Listing files…");
+  assert(DejaDup.Operation.mode_to_string(DejaDup.ToolJob.Mode.HISTORY) == "Preparing…");
 }
 
 void backup_setup()

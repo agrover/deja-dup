@@ -62,9 +62,10 @@ public class DuplicityPlugin : DejaDup.ToolPlugin
       throw new SpawnError.FAILED(_("Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but only found version %d.%d.%.2d").printf(REQUIRED_MAJOR, REQUIRED_MINOR, REQUIRED_MICRO, major, minor, micro));
   }
 
-/*  public override void start_job (DejaDup.ToolJob job) throws Error
+  public override DejaDup.ToolJob create_job () throws Error
   {
-  }*/
+    return new DuplicityJob();
+  }
 }
 
 [ModuleInit]
