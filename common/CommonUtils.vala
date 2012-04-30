@@ -341,7 +341,11 @@ ToolPlugin tool = null;
 void initialize_tool_plugin() throws Error
 {
   var engine = new Peas.Engine ();
-  var search_path = Path.build_filename(Config.PKG_LIBEXEC_DIR, "tools");
+
+  // For testing, we'll often point to in-tree tools
+  string search_path = Environment.get_variable("DEJA_DUP_TOOLS_PATH");
+  if (search_path == null || search_path == "")
+    search_path = Path.build_filename(Config.PKG_LIBEXEC_DIR, "tools");
   engine.add_search_path(search_path, null);
 
   var info = engine.get_plugin_info("libduplicity.so");
