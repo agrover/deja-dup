@@ -18,6 +18,7 @@
 
 toolsdir = $(pkglibexecdir)/tools
 tools_LTLIBRARIES = libduplicity.la
+dist_tools_DATA = duplicity.plugin
 
 libduplicity_la_CFLAGS = \
 	-I$(top_srcdir)/common \
