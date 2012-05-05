@@ -65,7 +65,7 @@ class Listener : Object
     }
   }
 
-  void handle_dbus_signal(DBusProxy obj, string sender, string name, Variant args)
+  void handle_dbus_signal(DBusProxy obj, string? sender, string name, Variant args)
   {
     // Stop on first signal
     handler(name, args);
