@@ -74,9 +74,6 @@ delayed_init ()
 void
 g_io_module_load (GIOModule *module)
 {
-  if (!deja_dup_meet_requirements(NULL, NULL))
-    return;
-
   bindtextdomain (GETTEXT_PACKAGE, LOCALE_DIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
