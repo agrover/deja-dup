@@ -42,9 +42,7 @@ libcommon_la_VALASOURCES = \
 	BackendU1.vala \
 	Checker.vala \
 	CommonUtils.vala \
-	Duplicity.vala \
-	DuplicityInfo.vala \
-	DuplicityInstance.vala \
+	DirHandling.vala \
 	Network.vala \
 	Operation.vala \
 	OperationBackup.vala \
@@ -52,10 +50,8 @@ libcommon_la_VALASOURCES = \
 	OperationStatus.vala \
 	OperationFiles.vala \
 	PythonChecker.vala \
-	RecursiveDelete.vala \
-	RecursiveMove.vala \
-	RecursiveOp.vala \
-	SimpleSettings.vala
+	SimpleSettings.vala \
+	ToolPlugin.vala
 
 libcommon_la_SOURCES = \
 	chacks.c \
@@ -71,6 +67,7 @@ AM_VALAFLAGS = \
 	--pkg gio-2.0 \
 	--pkg gio-unix-2.0 \
 	--pkg gnome-keyring-1 \
+	--pkg libpeas-1.0 \
 	--pkg uriutils \
 	--pkg posix \
 	--pkg config

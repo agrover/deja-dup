@@ -19,8 +19,6 @@
 
 using GLib;
 
-namespace DejaDup {
-
 internal class DuplicityInstance : Object
 {
   public signal void done(bool success, bool cancelled);
@@ -38,8 +36,8 @@ internal class DuplicityInstance : Object
       verbose = true;
 
     if (as_root) {
-      var settings = get_settings();
-      if (!settings.get_boolean(ROOT_PROMPT_KEY))
+      var settings = DejaDup.get_settings();
+      if (!settings.get_boolean(DejaDup.ROOT_PROMPT_KEY))
         as_root = false;
     }
     
@@ -590,6 +588,4 @@ internal class DuplicityInstance : Object
     done(success, cancelled);
   }
 }
-
-} // end namespace
 

@@ -121,7 +121,7 @@ public abstract class StatusIcon : Object
       }
     }
 
-    if (success && !cancelled && op.mode == DejaDup.Operation.Mode.BACKUP) {
+    if (success && !cancelled && op.mode == DejaDup.ToolJob.Mode.BACKUP) {
       string msg = _("Backup completed");
 
       string more = null;
@@ -198,7 +198,7 @@ class UnityStatusIcon : StatusIcon
   {
     Dbusmenu.Menuitem menu = null;
 
-    if (op.mode == DejaDup.Operation.Mode.BACKUP) {
+    if (op.mode == DejaDup.ToolJob.Mode.BACKUP) {
       menu = new Dbusmenu.Menuitem();
 
       var item = new Dbusmenu.Menuitem();
@@ -227,7 +227,7 @@ class ShellStatusIcon : StatusIcon
   }
 
   construct {
-    if (automatic && op.mode == DejaDup.Operation.Mode.BACKUP) {
+    if (automatic && op.mode == DejaDup.ToolJob.Mode.BACKUP) {
       Notify.init(_("Backup"));
       note = new Notify.Notification(_("Starting scheduled backup"), null,
                                      "deja-dup");
@@ -286,7 +286,7 @@ class LegacyStatusIcon : StatusIcon
     progressitem.activate.connect((i) => {show_window();});
     menu.append(progressitem);
 
-    if (op.mode == DejaDup.Operation.Mode.BACKUP) {
+    if (op.mode == DejaDup.ToolJob.Mode.BACKUP) {
       Gtk.MenuItem item;
 
       menu.append(new Gtk.SeparatorMenuItem());

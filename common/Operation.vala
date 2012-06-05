@@ -43,36 +43,26 @@ public abstract class Operation : Object
 
   public bool needs_password {get; set;}
   public Backend backend {get; private set;}
-  public bool use_progress {get {return dup.use_progress;}
-                            set {dup.use_progress = value;}}
+  public bool use_progress {get {return (job.flags & ToolJob.Flags.NO_PROGRESS) == 0;}
+                            set {
+                              if (value)
+                                job.flags = job.flags | ToolJob.Flags.NO_PROGRESS;
+                              else
+                                job.flags = job.flags ^ ToolJob.Flags.NO_PROGRESS;
+                            }}
 
-  public enum Mode {
-    /*
-   * Mode of operation of instance
-   *
-   * Every instance of class that inherit its methods and properties from
-   * this class must define in which mode it operates. Based on this Duplicity
-   * attaches appropriate argument.
-   */
-    INVALID,
-    BACKUP,
-    RESTORE,
-    STATUS,
-    LIST,
-    FILEHISTORY
-  }
-  public Mode mode {get; construct; default = Mode.INVALID;}
+  public ToolJob.Mode mode {get; construct; default = ToolJob.Mode.INVALID;}
   
-  public static string mode_to_string(Mode mode)
+  public static string mode_to_string(ToolJob.Mode mode)
   {
     switch (mode) {
-    case Operation.Mode.BACKUP:
+    case ToolJob.Mode.BACKUP:
       return _("Backing up…");
-    case Operation.Mode.RESTORE:
+    case ToolJob.Mode.RESTORE:
       return _("Restoring…");
-    case Operation.Mode.STATUS:
+    case ToolJob.Mode.STATUS:
       return _("Checking for backups…");
-    case Operation.Mode.LIST:
+    case ToolJob.Mode.LIST:
       return _("Listing files…");
     default:
       return _("Preparing…");
@@ -97,7 +87,7 @@ public abstract class Operation : Object
   }
 
   SimpleSettings settings;
-  internal Duplicity dup;
+  internal ToolJob job;
   protected string passphrase;
   bool finished = false;
   construct
@@ -136,16 +126,27 @@ public abstract class Operation : Object
       settings = null;
     }
 
-    if (dup != null) {
-      SignalHandler.disconnect_matched(dup, SignalMatchType.DATA,
+    if (job != null) {
+      SignalHandler.disconnect_matched(job, SignalMatchType.DATA,
                                        0, 0, null, null, this);
-      dup.stop();
-      dup = null;
+      job.stop();
+      job = null;
     }
 
-    dup = new Duplicity(mode);
+    try {
+      job = make_tool_job();
+    }
+    catch (Error e) {
+      raise_error(e.message, null);
+      done(false, false, null);
+      return;
+    }
 
-    connect_to_dup();
+    job.mode = mode;
+    job.backend = backend;
+
+    make_argv();
+    connect_to_job();
 
     ref(); // don't know what might happen in passphrase_required call
 
@@ -155,38 +156,38 @@ public abstract class Operation : Object
       passphrase_required(); // will block and call set_passphrase when ready
     }
     else
-      dup.encrypt_password = passphrase;
+      job.encrypt_password = passphrase;
 
     if (!finished)
-      continue_with_passphrase();
+      job.start();
 
     unref();
   }
 
   public void cancel()
   {
-    dup.cancel();
+    job.cancel();
   }
   
   public void stop()
   {
-    dup.stop();
+    job.stop();
   }
   
-  protected virtual void connect_to_dup()
+  protected virtual void connect_to_job()
   {
     /*
      * Connect Deja Dup to signals
      */
-    dup.done.connect((d, o, c, detail) => {operation_finished(d, o, c, detail);});
-    dup.raise_error.connect((d, s, detail) => {raise_error(s, detail);});
-    dup.action_desc_changed.connect((d, s) => {action_desc_changed(s);});
-    dup.action_file_changed.connect((d, f, b) => {action_file_changed(f, b);});
-    dup.progress.connect((d, p) => {progress(p);});
-    dup.question.connect((d, t, m) => {question(t, m);});
-    dup.is_full.connect((first) => {is_full(first);});
-    dup.bad_encryption_password.connect(() => {
-      // If duplicity gives us a gpg error, we set needs_password so that
+    job.done.connect((d, o, c, detail) => {operation_finished(d, o, c, detail);});
+    job.raise_error.connect((d, s, detail) => {raise_error(s, detail);});
+    job.action_desc_changed.connect((d, s) => {action_desc_changed(s);});
+    job.action_file_changed.connect((d, f, b) => {action_file_changed(f, b);});
+    job.progress.connect((d, p) => {progress(p);});
+    job.question.connect((d, t, m) => {question(t, m);});
+    job.is_full.connect((first) => {is_full(first);});
+    job.bad_encryption_password.connect(() => {
+      // If tool gives us a gpg error, we set needs_password so that
       // we will prompt for it.
       needs_password = true;
       passphrase = null;
@@ -198,55 +199,11 @@ public abstract class Operation : Object
   {
     needs_password = false;
     this.passphrase = passphrase;
-    if (dup != null)
-      dup.encrypt_password = passphrase;
+    if (job != null)
+      job.encrypt_password = passphrase;
   }
 
-  async void continue_with_passphrase()
-  {
-   /*
-    * Continues with operation after passphrase has been acquired.
-    */
-    try {
-      backend.envp_ready.connect(continue_with_envp);
-      yield backend.get_envp();
-    }
-    catch (Error e) {
-      raise_error(e.message, null);
-      operation_finished(dup, false, false, null);
-    }
-  }
-  
-  void continue_with_envp(DejaDup.Backend b, bool success, List<string>? envp, string? error)
-  {
-    /*
-     * Starts Duplicity backup with added enviroment variables
-     * 
-     * Start Duplicity backup process with costum values for enviroment variables.
-     */
-    backend.envp_ready.disconnect(continue_with_envp);
-
-    if (!success) {
-      if (error != null)
-        raise_error(error, null);
-      operation_finished(dup, false, false, null);
-      return;
-    }
-
-    try {
-      List<string> argv = make_argv();
-      backend.add_argv(mode, ref argv);
-      
-      dup.start(backend, argv, envp);
-    }
-    catch (Error e) {
-      raise_error(e.message, null);
-      operation_finished(dup, false, false, null);
-      return;
-    }
-  }
-  
-  internal async virtual void operation_finished(Duplicity dup, bool success, bool cancelled, string? detail)
+  internal async virtual void operation_finished(ToolJob job, bool success, bool cancelled, string? detail)
   {
     finished = true;
 
@@ -255,7 +212,7 @@ public abstract class Operation : Object
     done(success, cancelled, detail);
   }
   
-  protected virtual List<string>? make_argv() throws Error
+  protected virtual List<string>? make_argv()
   {
   /**
    * Abstract method that prepares arguments that will be sent to duplicity

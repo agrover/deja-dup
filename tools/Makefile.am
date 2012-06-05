@@ -16,44 +16,5 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-check_PROGRAMS = \
-	runner
+SUBDIRS = duplicity
 
-check:
-	@for test in $(srcdir)/../scripts/*.test; do \
-		dbus-launch ./runner $$test; \
-	done
-
-AM_CFLAGS = \
-	-I$(top_srcdir)/common \
-	$(DUP_CFLAGS)
-
-LDADD = \
-	$(DUP_LIBS) \
-	@INTLLIBS@ \
-	$(top_builddir)/common/libcommon.la
-
-runner_VALASOURCES = \
-	runner.vala
-
-runner_SOURCES = \
-	$(runner_VALASOURCES)
-
-AM_VALAFLAGS = \
-	--vapidir $(top_srcdir)/common \
-	--vapidir $(top_srcdir)/vapi \
-	$(NETWORKMONITOR_VALAFLAGS) \
-	--pkg config \
-	--pkg gio-2.0 \
-	--pkg libpeas-1.0 \
-	--pkg posix \
-	--pkg libcommon
-
-runner_vala.stamp: $(top_srcdir)/config.h
-
-dist-hook:
-	cd $(distdir) && rm $(runner_VALASOURCES:.vala=.c) \
-	                    runner_vala.stamp
-
-EXTRA_DIST = \
-	mock

@@ -45,6 +45,7 @@ void backup_setup()
   var cachedir = Path.build_filename(dir, "cache");
   DirUtils.create_with_parents(Path.build_filename(cachedir, "deja-dup"), 0700);
 
+  Environment.set_variable("DEJA_DUP_TOOLS_PATH", "../../tools/duplicity", true);
   Environment.set_variable("DEJA_DUP_TEST_MOCKSCRIPT", Path.build_filename(dir, "mockscript"), true);
   Environment.set_variable("XDG_CACHE_HOME", cachedir, true);
   Environment.set_variable("PATH", "./mock:" + Environment.get_variable("PATH"), true);

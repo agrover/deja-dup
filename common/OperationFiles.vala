@@ -27,28 +27,25 @@ public class OperationFiles : Operation {
     
   public OperationFiles(Time? time_in,
                         File source) {
-    Object(mode: Mode.LIST, source: source);
+    Object(mode: ToolJob.Mode.LIST, source: source);
     if (time_in != null)
         time = time_in;
   }
 
-  protected override void connect_to_dup()
+  protected override void connect_to_job()
   {
-    dup.listed_current_files.connect((d, date, file) => {listed_current_files(date, file);});
-    base.connect_to_dup();
+    job.listed_current_files.connect((d, date, file) => {listed_current_files(date, file);});
+    base.connect_to_job();
   }
 
-  protected override List<string>? make_argv() throws Error
+  protected override List<string>? make_argv()
   {
-    List<string> argv = new List<string>();
-    //if (time != null) - no need, we don't allow null anyway
-    //stdout.printf("timedefault: %i", time.year);
     if (time.format("%s") != "-1")
-        argv.append("--time=%s".printf(time.format("%s")));
-    
-    dup.local = source;
-      
-    return argv;
+      job.time = time.format("%s");
+    else
+      job.time = null;
+    job.local = source;
+    return null;
   }
 }
 }

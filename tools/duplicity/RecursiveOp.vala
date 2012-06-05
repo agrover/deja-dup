@@ -19,8 +19,6 @@
 
 using GLib;
 
-namespace DejaDup {
-
 internal abstract class RecursiveOp : Object
 {
   public signal void done();
@@ -130,6 +128,4 @@ internal abstract class RecursiveOp : Object
     }
   }
 }
-
-} // end namespace
 

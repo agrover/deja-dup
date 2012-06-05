@@ -18,7 +18,7 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "CommonUtils.c"
+#include "DirHandling.c"
 
 #include "NautilusExtension.h"
 #include "config.h"
@@ -57,10 +57,8 @@ update_include_excludes ()
   if (settings == NULL)
     return;
 
-  gchar **includes_strv = g_settings_get_strv(settings,
-                                              DEJA_DUP_INCLUDE_LIST_KEY);
-  gchar **excludes_strv = g_settings_get_strv(settings,
-                                              DEJA_DUP_EXCLUDE_LIST_KEY);
+  gchar **includes_strv = g_settings_get_strv(settings, "include-list");
+  gchar **excludes_strv = g_settings_get_strv(settings, "exclude-list");
 
   gchar **p;
   for (p = includes_strv; p && *p; p++) {
@@ -318,9 +316,9 @@ void nautilus_module_initialize(GTypeModule *module)
   bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 
   settings = g_settings_new("org.gnome.DejaDup");
-  g_signal_connect(settings, "changed::" DEJA_DUP_INCLUDE_LIST_KEY,
+  g_signal_connect(settings, "changed::include-list",
                    update_include_excludes, NULL);
-  g_signal_connect(settings, "changed::" DEJA_DUP_EXCLUDE_LIST_KEY,
+  g_signal_connect(settings, "changed::exclude-list",
                    update_include_excludes, NULL);
   g_idle_add(update_include_excludes_idle_cb, NULL);
 }

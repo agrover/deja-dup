@@ -208,15 +208,15 @@ public class BackendFile : Backend
   }
 
   // will be mounted by this time
-  public override void add_argv(Operation.Mode mode, ref List<string> argv)
+  public override void add_argv(ToolJob.Mode mode, ref List<string> argv)
   {
-    if (mode == Operation.Mode.BACKUP) {
+    if (mode == ToolJob.Mode.BACKUP) {
       var file = get_file_from_settings();
       if (file != null && file.is_native())
         argv.prepend("--exclude=%s".printf(file.get_path()));
     }
     
-    if (mode == Operation.Mode.INVALID)
+    if (mode == ToolJob.Mode.INVALID)
       argv.prepend("--gio");
   }
   

@@ -46,7 +46,7 @@ public abstract class Backend : Object
   
   // Arguments needed only when the particular mode is active
   // If mode == INVALID, arguments needed any time the backup is referenced.
-  public virtual void add_argv(Operation.Mode mode, ref List<string> argv) {}
+  public virtual void add_argv(ToolJob.Mode mode, ref List<string> argv) {}
   
   public abstract Backend clone();
   

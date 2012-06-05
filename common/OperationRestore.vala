@@ -43,7 +43,7 @@ public class OperationRestore : Operation
                           string? time_in = null,
                           List<File>? files_in = null) {
     Object(dest: dest_in, time: time_in, restore_files: files_in,
-           mode: Mode.RESTORE);
+           mode: ToolJob.Mode.RESTORE);
   }
   
   public async override void start()
@@ -52,29 +52,25 @@ public class OperationRestore : Operation
     base.start();
   }
 
-  protected override void connect_to_dup()
+  protected override void connect_to_job()
   {
-    base.connect_to_dup();
-    dup.restore_files = restore_files;
+    base.connect_to_job();
+    job.restore_files = restore_files;
   }
 
-  protected override List<string>? make_argv() throws Error
+  protected override List<string>? make_argv()
   {
-    List<string> argv = new List<string>();
-    if (time != null)
-      argv.append("--restore-time=%s".printf(time));
-    
-    dup.local = File.new_for_path(dest);
-    
-    return argv;
+    job.time = time;
+    job.local = File.new_for_path(dest);
+    return null;
   }
   
-  internal async override void operation_finished(Duplicity dup, bool success, bool cancelled, string? detail)
+  internal async override void operation_finished(ToolJob job, bool success, bool cancelled, string? detail)
   {
     if (success)
       DejaDup.update_last_run_timestamp(DejaDup.TimestampType.RESTORE);
 
-    base.operation_finished(dup, success, cancelled, detail);
+    base.operation_finished(job, success, cancelled, detail);
   }
 }
 

@@ -16,49 +16,49 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-check_PROGRAMS = \
-	unit-tests \
-	network
+toolsdir = $(pkglibexecdir)/tools
+tools_LTLIBRARIES = libduplicity.la
+dist_tools_DATA = duplicity.plugin
 
-check:
-	@dbus-launch ./unit-tests
-
-AM_CFLAGS = \
+libduplicity_la_CFLAGS = \
 	-I$(top_srcdir)/common \
-	$(COMMON_CFLAGS)
+	$(COMMON_CFLAGS) \
+	$(DEBUG_CFLAGS) \
+	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
+	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
-LDADD = \
+libduplicity_la_LDFLAGS = -module -avoid-version
+
+libduplicity_la_LIBADD = \
 	$(COMMON_LIBS) \
-	@INTLLIBS@ \
-	$(top_builddir)/common/libcommon.la
+	@INTLLIBS@
 
-unit_tests_VALASOURCES = \
-	unit-tests.vala
+libduplicity_la_VALASOURCES = \
+	DuplicityInstance.vala \
+	DuplicityJob.vala \
+	DuplicityPlugin.vala \
+	RecursiveDelete.vala \
+	RecursiveMove.vala \
+	RecursiveOp.vala
 
-unit_tests_SOURCES = \
-	$(unit_tests_VALASOURCES)
-
-network_VALASOURCES = \
-	network.vala
-
-network_SOURCES = \
-	$(network_VALASOURCES)
+libduplicity_la_SOURCES = \
+	$(libduplicity_la_VALASOURCES)
 
 AM_VALAFLAGS = \
+	--library=libduplicity \
 	--vapidir $(top_srcdir)/common \
-	--vapidir $(top_srcdir)/vapi \
-	$(NETWORKMONITOR_VALAFLAGS) \
-	--pkg config \
+	--vapidir=$(top_srcdir)/vapi \
+	$(SHARED_VALAFLAGS) \
 	--pkg gio-2.0 \
 	--pkg libpeas-1.0 \
+	--pkg gio-unix-2.0 \
 	--pkg posix \
-	--pkg libcommon
+	--pkg libcommon \
+	--pkg config
 
-unit_tests_vala.stamp: $(top_srcdir)/config.h
-network_vala.stamp: $(top_srcdir)/config.h
+libduplicity_la_vala.stamp: $(top_srcdir)/config.h
 
 dist-hook:
-	cd $(distdir) && rm $(unit_tests_VALASOURCES:.vala=.c) \
-	                    unit_tests_vala.stamp
-	cd $(distdir) && rm $(network_VALASOURCES:.vala=.c) \
-	                    network_vala.stamp
+	cd $(distdir) && rm -f $(libduplicity_la_VALASOURCES:.vala=.c) \
+	                       libduplicity_la_vala.stamp
+

@@ -26,13 +26,13 @@ public class OperationStatus : Operation
   public signal void collection_dates(List<string>? dates);
   
   public OperationStatus() {
-    Object(mode: Mode.STATUS);
+    Object(mode: ToolJob.Mode.STATUS);
   }
   
-  protected override void connect_to_dup()
+  protected override void connect_to_job()
   {
-    dup.collection_dates.connect((d, dates) => {collection_dates(dates);});
-    base.connect_to_dup();
+    job.collection_dates.connect((d, dates) => {collection_dates(dates);});
+    base.connect_to_job();
   }
 }
 
