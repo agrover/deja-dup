@@ -16,13 +16,15 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-noinst_LTLIBRARIES = libcommon.la
+pkglib_LTLIBRARIES = libcommon.la
 
 libcommon_la_CFLAGS = \
 	$(COMMON_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
+
+libcommon_la_LDFLAGS = -module -avoid-version
 
 libcommon_la_LIBADD = \
 	$(COMMON_LIBS) \

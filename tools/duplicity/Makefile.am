@@ -31,7 +31,8 @@ libduplicity_la_LDFLAGS = -module -avoid-version
 
 libduplicity_la_LIBADD = \
 	$(COMMON_LIBS) \
-	@INTLLIBS@
+	@INTLLIBS@ \
+	$(top_builddir)/common/libcommon.la
 
 libduplicity_la_VALASOURCES = \
 	DuplicityInstance.vala \
