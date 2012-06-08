@@ -1,5 +1,5 @@
-#!/usr/bin/env python
-# -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
+#!/bin/sh
+# -*- Mode: sh; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
 #
 # This file is part of Déjà Dup.
 # For copyright information, see AUTHORS.
@@ -16,81 +16,57 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
-#
-# Setup a local backend, but just show the UI.  The user will interact with
-# it and test manually.  Good for playing with the UI as you make changes,
-# without futzing up your own settings.
 
-import base
-import ldtp
-import sys
-import os
-import tempfile
+# This script dumps you in a special shell, ideal for testing deja-dup.
+# It will point at the locally built executables and plugins.  It will
+# point at a custom dconf location and $HOME.
 
-def test():
-  version = None
-  mtype = None
-  tmpid = None
-  sources = []
-  dest = None
-  size = None
-  back = 'file'
-  prog = None
-  hasrun = False
-  encrypt = None
-  cmd = ''
-  for arg in sys.argv[1:]:
-    if prog == 'cmd':
-      cmd += arg + ' '
-      continue
-    if arg == 'vfat':
-      mtype = arg
-    elif arg == 'ext':
-      mtype = arg
-    elif arg in ('applet', 'shell', 'cmd'):
-      prog = arg
-    elif arg == 'hasrun':
-      hasrun = True
-    elif arg == 'nocrypto':
-      encrypt = False
-    elif arg.startswith('id='):
-      tmpid = arg.split('=', 1)[-1]
-    elif arg.startswith('dup='):
-      version = arg.split('=', 1)[-1]
-    elif arg.startswith('source='):
-      source = arg.split('=', 1)[-1]
-      sources += [source]
-    elif arg.startswith('size='):
-      size = int(arg.split('=', 1)[-1])
-    elif arg.startswith('back='):
-      back = arg.split('=', 1)[-1]
-    elif arg.startswith('dest='):
-      dest = arg.split('=', 1)[-1]
-    else:
-      print "Unrecognized argument '%s'" % arg
-      return 1
-  
-  if version is not None:
-    os.environ['DEJA_DUP_TEST_VERSION'] = version
-  if tmpid is not None:
-    tmpdir = tempfile.gettempdir() + '/' + tmpid
-    os.environ['DEJA_DUP_TEST_TMP'] = tmpdir
-  if mtype is not None or size is not None:
-    dest = base.create_mount(mtype=mtype, size=size)
-  
-  base.setup(root_prompt=True)
-  if hasrun:
-    base.set_settings_value("last-run", "'fake'")
-  
-  if prog is None:
-    base.start_deja_dup(executable='deja-dup-preferences', waitfor=None)
-    base.wait_for_quit()
-  elif prog == 'applet':
-    base.start_deja_dup(args=['--backup'])
-    base.wait_for_quit()
-  elif prog == 'shell':
-    os.system('bash')
-  elif prog == 'cmd':
-    os.system(cmd)
+TOPDIR=$(dirname "$( cd "$( dirname "${0}" )" && pwd )")
 
-base.run(test)
+# Create fake home environment
+ROOTDIR=$(mktemp -d --tmpdir dd.XXXXXXXXXX)
+
+mkdir -p "${ROOTDIR}/share/glib-2.0/schemas"
+cp "${TOPDIR}/data/org.gnome.DejaDup.gschema.xml" "${ROOTDIR}/share/glib-2.0/schemas"
+glib-compile-schemas "${ROOTDIR}/share/glib-2.0/schemas"
+export XDG_DATA_HOME="${ROOTDIR}/share"
+export XDG_DATA_DIRS="${XDG_DATA_HOME}:${XDG_DATA_DIRS}"
+
+mkdir -p "${XDG_DATA_HOME}/deja-dup/ui"
+cp "${TOPDIR}/data/ui/"* "${XDG_DATA_HOME}/deja-dup/ui"
+
+mkdir -p "${ROOTDIR}/cache"
+export XDG_CACHE_HOME="${ROOTDIR}/cache"
+
+mkdir -p "${ROOTDIR}/config"
+export XDG_CONFIG_HOME="${ROOTDIR}/config"
+
+mkdir -p "${ROOTDIR}/gnupg"
+export GNUPGHOME="${ROOTDIR}/gnupg"
+
+mkdir -p "${ROOTDIR}/source"  # for convenience
+mkdir -p "${ROOTDIR}/backup"  # for convenience
+mkdir -p "${ROOTDIR}/restore" # for convenience
+
+
+# Point at our built objects
+export DEJA_DUP_TOOLS_PATH="${TOPDIR}/tools/duplicity"
+export PATH="${TOPDIR}/monitor:${TOPDIR}/deja-dup:${TOPDIR}/preferences:${PATH}"
+
+
+# Explain what's going on to user
+echo "You are now in a special shell that points to all the built objects in"
+echo "your local tree.  You are also using a custom gsettings location, so any"
+echo "changes to your configuration won't mess up your system."
+echo "Your data playground is ${ROOTDIR}"
+echo "Run deja-dup, deja-dup-preferences, or deja-dup-monitor to test."
+echo "Run exit to leave."
+echo "Run exit 1 to leave and keep data playground intact."
+
+
+# Now dump user out
+cd "${ROOTDIR}"
+export PS1='\[\e[1;32m\]deja-dup\$\[\e[0m\] '
+if dbus-launch bash --norc; then
+  rm -rf "${ROOTDIR}" # Cleanup on clean exit
+fi
