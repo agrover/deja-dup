@@ -24,7 +24,7 @@ libcommon_la_CFLAGS = \
 	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
-libcommon_la_LDFLAGS = -module -avoid-version
+libcommon_la_LDFLAGS = -avoid-version
 
 libcommon_la_LIBADD = \
 	$(COMMON_LIBS) \
