@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-noinst_LTLIBRARIES = libwidgets.la
+pkglib_LTLIBRARIES = libwidgets.la
 
 libwidgets_la_CFLAGS = \
 	-I$(top_srcdir)/common \
@@ -24,6 +24,8 @@ libwidgets_la_CFLAGS = \
 	$(UNITY_CFLAGS) \
 	$(DEBUG_CFLAGS) \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
+
+libwidgets_la_LDFLAGS = -avoid-version
 
 libwidgets_la_LIBADD = \
 	$(WIDGETS_LIBS) \
