@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-01-17 23:17-0500\n"
+"POT-Creation-Date: 2012-04-29 23:17-0700\n"
 "PO-Revision-Date: 2012-03-22 14:30+0000\n"
 "Last-Translator: 英华 <wantinghard@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-03-23 05:15+0000\n"
-"X-Generator: Launchpad (build 14996)\n"
+"X-Launchpad-Export-Date: 2012-06-06 05:33+0000\n"
+"X-Generator: Launchpad (build 15353)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -80,7 +80,7 @@ msgid ""
 msgstr ""
 "将备份此列表中的目录。保留值 $HOME、$DESKTOP、 "
 "$DOCUMENTS、$DOWNLOAD、$MUSIC、$PICTURES、$PUBLIC_SHARE、$TEMPLATES、$TRASH  和 "
-"$VIDEO 被确认为用户的特殊目录。相对 条目相对于用户的主目录。"
+"$VIDEO 被确认为用户的特殊目录。相对条目相对于用户的主目录。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
 #: ../preferences/Preferences.vala:168
@@ -96,11 +96,11 @@ msgid ""
 msgstr ""
 "将不备份此列表中的目录。保留值 $HOME、 "
 "$DESKTOP、$DOCUMENTS、$DOWNLOAD、$MUSIC、$PICTURES、$PUBLIC_SHARE、 "
-"$TEMPLATES、$TRASH 和 $VIDEO 被确认为用户的特殊 目录。相对条目相对于用户的主目录。"
+"$TEMPLATES、$TRASH 和 $VIDEO 被确认为用户的特殊目录。相对条目相对于用户的主目录。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
 msgid "Whether the welcome screen has been dismissed"
-msgstr ""
+msgstr "欢迎屏幕是否已被关闭"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
 msgid "Whether to request the root password"
@@ -110,7 +110,7 @@ msgstr "是否要求提供根密码"
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
-msgstr "是否在从系统文件夹备份或向系统文件夹恢复时要求提供 根密码。"
+msgstr "是否在从系统文件夹备份或向系统文件夹恢复时要求提供 root 用户密码。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:8
 msgid "The last time Déjà Dup was run"
@@ -161,7 +161,7 @@ msgstr "备份的间隔天数。"
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:18
 msgid ""
 "The first time Déjà Dup checked whether it should prompt about backing up"
-msgstr ""
+msgstr "Déjà Dup 第一次检查是否应提示用户进行备份的时间"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:19
 msgid ""
@@ -170,6 +170,8 @@ msgid ""
 "don’t know about backups. This time should be either ‘disabled’ to turn off "
 "this check or in ISO 8601 format."
 msgstr ""
+"当用户登录到系统，Déjà Dup 会检查它是否应当提示用户进行备份。这可以用来帮助不了解备分的用户发现本软件。这个时间应该设置为标准的 ISO "
+"8601 格式时间或禁用。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:20
 msgid "How long to keep backup files"
@@ -190,7 +192,7 @@ msgstr "备份存储位置的类型"
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
-msgstr "备份位置的类型。如果设置为 auto，则会使用可用的位置。"
+msgstr "备份位置的类型。如果设置为 auto，则会自动使用可用的位置。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "Amazon S3 Access Key ID"
@@ -208,7 +210,7 @@ msgstr "要使用的 Amazon S3 存储段名称"
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
-msgstr "将文件存储在哪个 Amazon S3 存储段中。此项不必是已有 项。只有合法主机名字符串有效。"
+msgstr "将文件存储在哪个 Amazon S3 存储段中。此项不必是已有项。只有合法主机名字符串有效。"
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
@@ -219,7 +221,7 @@ msgstr "Amazon S3 文件夹"
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
-msgstr "用来存储文件的文件夹名称（可选）。将在所选存储段中创建 此文件夹。"
+msgstr "用来存储文件的文件夹名称(可选)。将在所选存储段中创建此文件夹。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The Rackspace Cloud Files container"
@@ -229,7 +231,7 @@ msgstr "Rackspace 云文件容器"
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
-msgstr ""
+msgstr "在哪个 Rackspace 云文件服务容器上存储。此选项可以不进行设置，设置时仅有合法的主机名是有效的。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "Your Rackspace username"
@@ -247,7 +249,7 @@ msgstr "Ubuntu One 文件夹"
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
-msgstr ""
+msgstr "用来保存文件的文件夹名称。如果是“$HOSTNAME”，会缺省使用一个基于计算机名的文件夹。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 #: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
@@ -275,7 +277,7 @@ msgstr "外部卷下的相对路径"
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
-msgstr "如果备份位置位于外部卷上，此项即为该卷上文件夹 的路径。"
+msgstr "如果备份位置位于外部卷上，此项即为该卷上文件夹的路径。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Unique ID of the external volume"
@@ -285,7 +287,7 @@ msgstr "外部卷的唯一 ID"
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
-msgstr "如果备份位置位于外部卷上，此项即为其唯一的 文件系统标识符。"
+msgstr "如果备份位置位于外部卷上，此项即为其唯一的文件系统标识符。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Full name of the external volume"
@@ -295,7 +297,7 @@ msgstr "外部卷的全名"
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
-msgstr "如果备份位置位于外部卷上，此项即为该卷的详细 描述名称。"
+msgstr "如果备份位置位于外部卷上，此项即为该卷的详细描述名称。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Short name of the external volume"
@@ -305,7 +307,7 @@ msgstr "外部卷的简短名称"
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
-msgstr "如果备份位置位于外部卷上，此项即为该卷的 简短名称。"
+msgstr "如果备份位置位于外部卷上，此项即为该卷的简短名称。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid "Icon of the external volume"
@@ -318,7 +320,7 @@ msgstr "如果备份位置位于外部卷上，此项即为该卷的图标。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Obsolete"
-msgstr "过时"
+msgstr "过期"
 
 #: ../data/ui/restore-missing.ui.h:1
 msgid "Folder"
@@ -328,27 +330,27 @@ msgstr "文件夹"
 msgid "Scanning…"
 msgstr "正在扫描..."
 
-#: ../nautilus/NautilusExtension.c:176
+#: ../nautilus/NautilusExtension.c:174
 msgid "Restore Missing Files…"
 msgstr "还原丢失的文件..."
 
-#: ../nautilus/NautilusExtension.c:177
+#: ../nautilus/NautilusExtension.c:175
 msgid "Restore deleted files from backup"
 msgstr "从备份中恢复删除的文件"
 
-#: ../nautilus/NautilusExtension.c:219
+#: ../nautilus/NautilusExtension.c:217
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "恢复到上一版本..."
 
-#: ../nautilus/NautilusExtension.c:223
+#: ../nautilus/NautilusExtension.c:221
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "从备份中恢复文件"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:447
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:433
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s，在 %2$s"
@@ -376,10 +378,6 @@ msgstr "等待网络连接..."
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "正在等待“%s”建立连接..."
 
-#: ../common/BackendRackspace.vala:58
-msgid "You must specify a Rackspace container in your preferences."
-msgstr "您必须在设置里指定一个 Rackspace 文件容器"
-
 #: ../common/BackendRackspace.vala:69 ../widgets/ConfigLocation.vala:194
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace 云文件"
@@ -399,7 +397,7 @@ msgstr "权限不够"
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
 "href=\"%s\">online</a>."
-msgstr ""
+msgstr "您可以在线<a href=\"%s\">注册</a>一个 Rackspace 云文件帐号。"
 
 #: ../common/BackendRackspace.vala:141
 msgid "Connect to Rackspace Cloud Files"
@@ -430,7 +428,7 @@ msgstr "Amazon S3 上的 %s"
 #: ../common/BackendS3.vala:193
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
-msgstr "您可以<a href=\"%s\">在线</a>注册一个 Amazon S3 账户。"
+msgstr "您可以<a href=\"%s\">在线</a>注册一个 Amazon S3 帐号。"
 
 #: ../common/BackendS3.vala:194
 msgid "Connect to Amazon S3"
@@ -470,212 +468,68 @@ msgstr "连接到 Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "登录 Ubuntu One..."
 
-#. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:498
+#: ../common/CommonUtils.vala:353
 #, c-format
-msgid "Home (%s)"
+msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 
+#: ../common/CommonUtils.vala:355
+msgid "Could not load backup tool.  Your installation is incomplete."
+msgstr ""
+
+#: ../common/CommonUtils.vala:361
+msgid "Backup tool is broken.  Your installation is incomplete."
+msgstr ""
+
+#: ../common/CommonUtils.vala:383
+msgid "Could not start backup tool"
+msgstr ""
+
+#. Translators: this is the home folder and %s is the user's username
+#: ../common/CommonUtils.vala:484
+#, c-format
+msgid "Home (%s)"
+msgstr "主目录(%s)"
+
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:503
+#: ../common/CommonUtils.vala:489
 msgid "Home"
 msgstr "主目录"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:508
+#: ../common/CommonUtils.vala:494
 msgid "Trash"
 msgstr "回收站"
 
-#: ../common/DuplicityInfo.vala:109
-msgid "Could not run duplicity"
-msgstr "无法运行 duplicity"
-
-#: ../common/DuplicityInfo.vala:114
-msgid ""
-"Could not understand duplicity version.\n"
-"\n"
-msgstr ""
-"无法识别 duplicity 版本。\n"
-"\n"
-
-#: ../common/DuplicityInfo.vala:116
-#, c-format
-msgid ""
-"Could not understand duplicity version ‘%s’.\n"
-"\n"
-msgstr ""
-"无法识别 duplicity 版本“%s”。\n"
-"\n"
-
-#: ../common/DuplicityInfo.vala:118
-msgid ""
-"Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
-msgstr ""
-
-#: ../common/DuplicityInfo.vala:122
-msgid "Duplicity’s version is too old"
-msgstr "Duplicity 的版本过旧"
-
-#: ../common/DuplicityInfo.vala:123
-#, c-format
-msgid ""
-"Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
-"only found version %d.%d.%.2d"
-msgstr ""
-
-#: ../common/Duplicity.vala:134 ../common/Duplicity.vala:189
-msgid "Paused (no network)"
-msgstr "已暂停(无网络)"
-
-#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:409
-#: ../common/Duplicity.vala:428 ../common/Duplicity.vala:433
-#: ../common/Operation.vala:79 ../common/Operation.vala:111
-msgid "Preparing…"
-msgstr "正在准备..."
-
-#. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:460
-#, c-format
-msgid "Could not restore ‘%s’: Not a valid file location"
-msgstr "无法还原“%s”：不是有效的文件位置"
-
-#. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:526
-msgid "Backup location is too small.  Try using one with more space."
-msgstr "备份位置空间过小。请尝试使用具有更多空间的位置。"
-
-#: ../common/Duplicity.vala:548
-msgid "Backup location does not have enough free space."
-msgstr "备份位置的自由空间不足。"
-
-#: ../common/Duplicity.vala:567 ../common/Duplicity.vala:581
-msgid "Cleaning up…"
-msgstr "正在清理..."
-
-#. OK, we succeeded yay!  But some files didn't make it into the backup
-#. because we couldn't read them.  So tell the user so they don't think
-#. everything is hunky dory.
-#: ../common/Duplicity.vala:677
-msgid ""
-"Could not back up the following files.  Please make sure you are able to "
-"open them."
-msgstr ""
-
-#: ../common/Duplicity.vala:710 ../common/Duplicity.vala:1092
-#: ../deja-dup/AssistantOperation.vala:545
-msgid "Failed with an unknown error."
-msgstr "因出现未知错误而失败。"
-
-#: ../common/Duplicity.vala:940
-#, c-format
-msgid "Could not restore ‘%s’: File not found in backup"
-msgstr "无法恢复“%s”：在备份中未找到该文件"
-
-#. notify upper layers, if they want to do anything
-#. Duplicity tried to ask the user what the encryption password is.
-#. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:946 ../common/Duplicity.vala:1044
-#: ../common/Duplicity.vala:1048
-msgid "Bad encryption password."
-msgstr "无效加密密码。"
-
-#: ../common/Duplicity.vala:951
-msgid "Computer name changed"
-msgstr "计算机名称已更改"
-
-#: ../common/Duplicity.vala:951
-#, c-format
-msgid ""
-"The existing backup is of a computer named %s, but the current computer’s "
-"name is %s.  If this is unexpected, you should back up to a different "
-"location."
-msgstr "现有备份是名为 %s 的计算机的备份，但当前计算机的 名称却是 %s。如果这在意料之外，则您应该备份到其它 位置。"
-
-#: ../common/Duplicity.vala:986
-#, c-format
-msgid "Permission denied when trying to create ‘%s’."
-msgstr "尝试创建“%s”时权限被拒绝。"
-
-#. assume error is on backend side
-#: ../common/Duplicity.vala:990 ../common/Duplicity.vala:994
-#, c-format
-msgid "Permission denied when trying to read ‘%s’."
-msgstr "尝试读取“%s”时权限被拒绝。"
-
-#: ../common/Duplicity.vala:998
-#, c-format
-msgid "Permission denied when trying to delete ‘%s’."
-msgstr "尝试删除“%s”时权限被拒绝。"
-
-#: ../common/Duplicity.vala:1005
-#, c-format
-msgid "Backup location ‘%s’ does not exist."
-msgstr "备份位置“%s”不存在。"
-
-#: ../common/Duplicity.vala:1011 ../common/Duplicity.vala:1063
-msgid "No space left."
-msgstr "无剩余空间。"
-
-#: ../common/Duplicity.vala:1025
-msgid "Invalid ID."
-msgstr "无效的 ID。"
-
-#: ../common/Duplicity.vala:1027
-msgid "Invalid secret key."
-msgstr "无效的私钥。"
-
-#: ../common/Duplicity.vala:1029
-msgid "Your Amazon Web Services account is not signed up for the S3 service."
-msgstr "您的 Amazon Web Services 账户未注册 S3 服务。"
-
-#: ../common/Duplicity.vala:1038
-msgid "S3 bucket name is not available."
-msgstr "S3 存储段名称不可用。"
-
-#: ../common/Duplicity.vala:1052
-#, c-format
-msgid "Error reading file ‘%s’."
-msgstr "读取文件“%s”时出错。"
-
-#: ../common/Duplicity.vala:1054
-#, c-format
-msgid "Error writing file ‘%s’."
-msgstr "写入文件“%s”时出错。"
-
-#: ../common/Duplicity.vala:1065
-#, c-format
-msgid "No space left in ‘%s’."
-msgstr "“%s”中没有剩余空间。"
-
-#: ../common/Duplicity.vala:1073
-msgid "No backup files found"
-msgstr "未找到备份文件"
-
-#: ../common/Duplicity.vala:1123
-msgid "Uploading…"
-msgstr "正在上传..."
-
-#: ../common/OperationRestore.vala:52
+#: ../common/OperationRestore.vala:51
 msgid "Restoring files…"
 msgstr "正在恢复文件..."
 
-#: ../common/Operation.vala:71
+#: ../common/Operation.vala:60
 msgid "Backing up…"
 msgstr "正在备份..."
 
-#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:486
+#: ../common/Operation.vala:62 ../deja-dup/AssistantRestore.vala:484
 msgid "Restoring…"
 msgstr "正在恢复..."
 
-#: ../common/Operation.vala:75
+#: ../common/Operation.vala:64
 msgid "Checking for backups…"
 msgstr "正在检查有无备份..."
 
-#: ../common/Operation.vala:77
+#: ../common/Operation.vala:66
 msgid "Listing files…"
 msgstr "正在列出文件..."
 
-#: ../common/Operation.vala:281
+#: ../common/Operation.vala:68 ../common/Operation.vala:100
+#: ../tools/duplicity/DuplicityJob.vala:386
+#: ../tools/duplicity/DuplicityJob.vala:393
+#: ../tools/duplicity/DuplicityJob.vala:412
+#: ../tools/duplicity/DuplicityJob.vala:417
+msgid "Preparing…"
+msgstr "正在准备..."
+
+#: ../common/Operation.vala:237
 msgid "Another backup operation is already running"
 msgstr "另一个备份操作正在运行中"
 
@@ -689,31 +543,31 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "备份(_B)"
 
-#: ../deja-dup/AssistantBackup.vala:50
+#: ../deja-dup/AssistantBackup.vala:49
 msgid "Creating the first backup.  This may take a while."
 msgstr "正在创建第一个备份。这可能需要一段时间。"
 
-#: ../deja-dup/AssistantBackup.vala:51
+#: ../deja-dup/AssistantBackup.vala:50
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
-msgstr "创建一个全新备份以防范备份损坏。这要比 正常备份花费更长的时间。"
+msgstr "创建一个全新备份以防范备份损坏。这要比正常备份花费更长的时间。"
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:81
+#: ../deja-dup/AssistantBackup.vala:80
 msgid "Backing up:"
 msgstr "备份："
 
-#: ../deja-dup/AssistantBackup.vala:90
+#: ../deja-dup/AssistantBackup.vala:89
 msgid "Backup Failed"
 msgstr "备份失败"
 
-#: ../deja-dup/AssistantBackup.vala:93
+#: ../deja-dup/AssistantBackup.vala:92
 msgid "Backup Finished"
 msgstr "备份完成"
 
-#: ../deja-dup/AssistantBackup.vala:101
+#: ../deja-dup/AssistantBackup.vala:100
 msgid "Backing Up…"
 msgstr "正在备份..."
 
@@ -721,55 +575,61 @@ msgstr "正在备份..."
 msgid "Scanning:"
 msgstr "扫描："
 
-#: ../deja-dup/AssistantOperation.vala:264
+#: ../deja-dup/AssistantOperation.vala:256
 msgid "_Details"
 msgstr "详细信息(_D)"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Allow restoring without a password"
 msgstr "允许不使用密码还原(_A)"
 
-#: ../deja-dup/AssistantOperation.vala:318
+#: ../deja-dup/AssistantOperation.vala:310
 msgid "_Password-protect your backup"
 msgstr "用密码保护您的备份(_P)"
 
-#: ../deja-dup/AssistantOperation.vala:332
+#: ../deja-dup/AssistantOperation.vala:324
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
-msgstr ""
+msgstr "还原文件将需要密码，您可能需要将其抄写下来。"
 
-#: ../deja-dup/AssistantOperation.vala:347
+#: ../deja-dup/AssistantOperation.vala:339
 msgid "E_ncryption password"
 msgstr "加密密码(_N)"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:356
 msgid "Confir_m password"
 msgstr "确认密码(_M)"
 
-#: ../deja-dup/AssistantOperation.vala:377
+#: ../deja-dup/AssistantOperation.vala:369
 msgid "_Show password"
 msgstr "显示密码(_S)"
 
-#: ../deja-dup/AssistantOperation.vala:386
+#: ../deja-dup/AssistantOperation.vala:378
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "记住密码(_R)"
 
-#: ../deja-dup/AssistantOperation.vala:455
+#: ../deja-dup/AssistantOperation.vala:447
 msgid "Summary"
 msgstr "摘要"
 
-#: ../deja-dup/AssistantOperation.vala:738
+#: ../deja-dup/AssistantOperation.vala:537
+#: ../tools/duplicity/DuplicityJob.vala:694
+#: ../tools/duplicity/DuplicityJob.vala:1076
+msgid "Failed with an unknown error."
+msgstr "因出现未知错误而失败。"
+
+#: ../deja-dup/AssistantOperation.vala:730
 msgid "Require Password?"
 msgstr "需要密码？"
 
-#: ../deja-dup/AssistantOperation.vala:740
+#: ../deja-dup/AssistantOperation.vala:732
 msgid "Encryption Password Needed"
 msgstr "请输入加密密码"
 
-#: ../deja-dup/AssistantOperation.vala:786
+#: ../deja-dup/AssistantOperation.vala:778
 msgid "Backup encryption password"
 msgstr "备份加密密码"
 
@@ -787,7 +647,7 @@ msgstr "备份位置(_B)"
 
 #: ../deja-dup/AssistantRestore.vala:124
 msgid "Restore From Where?"
-msgstr ""
+msgstr "从哪里恢复？"
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date"
@@ -823,7 +683,7 @@ msgstr "正在检查有无备份..."
 
 #: ../deja-dup/AssistantRestore.vala:271
 msgid "Restore From When?"
-msgstr ""
+msgstr "从何时恢复？"
 
 #: ../deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
@@ -831,7 +691,7 @@ msgstr "恢复到何处？"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:307
+#: ../deja-dup/AssistantRestore.vala:306
 msgid "Restoring:"
 msgstr "恢复："
 
@@ -839,37 +699,37 @@ msgstr "恢复："
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: ../deja-dup/AssistantRestore.vala:349
+#: ../deja-dup/AssistantRestore.vala:348
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
-#: ../deja-dup/AssistantRestore.vala:362
+#: ../deja-dup/AssistantRestore.vala:361
 msgid "No backups to restore"
 msgstr "无备份可恢复"
 
-#: ../deja-dup/AssistantRestore.vala:439
+#: ../deja-dup/AssistantRestore.vala:437
 msgid "Original location"
 msgstr "原始位置"
 
-#: ../deja-dup/AssistantRestore.vala:450
+#: ../deja-dup/AssistantRestore.vala:448
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "要恢复的文件"
 
-#: ../deja-dup/AssistantRestore.vala:471
+#: ../deja-dup/AssistantRestore.vala:469
 msgid "Restore Failed"
 msgstr "恢复失败"
 
-#: ../deja-dup/AssistantRestore.vala:473
+#: ../deja-dup/AssistantRestore.vala:471
 msgid "Restore Finished"
 msgstr "恢复完成"
 
-#: ../deja-dup/AssistantRestore.vala:476
+#: ../deja-dup/AssistantRestore.vala:474
 msgid "Your files were successfully restored."
 msgstr "您的文件已成功恢复。"
 
-#: ../deja-dup/AssistantRestore.vala:479
+#: ../deja-dup/AssistantRestore.vala:477
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "您的文件已成功恢复。"
@@ -888,15 +748,15 @@ msgstr "恢复哪些文件？"
 
 #: ../deja-dup/AssistantRestoreMissing.vala:346
 msgid "Scanning for files from up to a day ago…"
-msgstr ""
+msgstr "正在扫描一天内的文件..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:349
 msgid "Scanning for files from up to a week ago…"
-msgstr ""
+msgstr "正在扫描一周内的文件..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:352
 msgid "Scanning for files from up to a month ago…"
-msgstr ""
+msgstr "正在扫描一个月内的文件..."
 
 #: ../deja-dup/AssistantRestoreMissing.vala:357
 #, c-format
@@ -908,9 +768,9 @@ msgstr[0] "正在扫描大约一月前的文件..."
 #, c-format
 msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
-msgstr[0] "正在扫描大约 %d 年前的文件..."
+msgstr[0] "正在扫描约 %d 年前的文件..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:455
+#: ../deja-dup/AssistantRestoreMissing.vala:454
 msgid "Scanning finished"
 msgstr "扫描完成"
 
@@ -949,7 +809,7 @@ msgstr "一次只能显示一个目录"
 
 #: ../deja-dup/main.vala:81
 msgid "[FILES…]"
-msgstr "[文件…]"
+msgstr "[文件...]"
 
 #: ../deja-dup/main.vala:82
 msgid "DIRECTORY"
@@ -962,6 +822,9 @@ msgid ""
 "the Right Way (encrypted, off-site, and regular) and uses duplicity as\n"
 "the backend."
 msgstr ""
+"Déjà Dup 是一个简单的备份工具。它隐藏了备份的复杂性、\n"
+"帮助用户选择正确的备份方式(加密、离线、定期等)，\n"
+"它使用 duplicity 作为后端。"
 
 #: ../deja-dup/main.vala:137
 msgid "Directory does not exists"
@@ -994,20 +857,20 @@ msgstr "密码(_P)"
 msgid "S_how password"
 msgstr "显示密码(_H)"
 
-#: ../deja-dup/MountOperationAssistant.vala:82
+#: ../deja-dup/MountOperationAssistant.vala:80
 msgid "Location not available"
 msgstr "位置不可用"
 
-#: ../deja-dup/MountOperationAssistant.vala:168
+#: ../deja-dup/MountOperationAssistant.vala:166
 msgid "Connect _anonymously"
 msgstr "匿名连接(_A)"
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:170
 msgid "Connect as u_ser"
 msgstr "以用户身份连接(_U)"
 
 #. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:215
+#: ../deja-dup/MountOperationAssistant.vala:213
 msgid "_Domain"
 msgstr "域(_D)"
 
@@ -1048,12 +911,12 @@ msgstr "备份完成"
 
 #: ../deja-dup/StatusIcon.vala:129
 msgid "Backup finished"
-msgstr ""
+msgstr "备份完成"
 
 #: ../deja-dup/StatusIcon.vala:130
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
-msgstr ""
+msgstr "未能成功备份全部文件。更多细节参见对话框。"
 
 #: ../deja-dup/StatusIcon.vala:232
 msgid "Starting scheduled backup"
@@ -1144,6 +1007,157 @@ msgstr "计划任务"
 msgid "Categories"
 msgstr "分类"
 
+#: ../tools/duplicity/DuplicityJob.vala:89
+#: ../tools/duplicity/DuplicityJob.vala:173
+msgid "Paused (no network)"
+msgstr "已暂停(无网络)"
+
+#. Was not even a file path (maybe something goofy like computer://)
+#: ../tools/duplicity/DuplicityJob.vala:444
+#, c-format
+msgid "Could not restore ‘%s’: Not a valid file location"
+msgstr "无法还原“%s”：不是有效的文件位置"
+
+#. Tiny backup location.  Suggest they get a larger one.
+#: ../tools/duplicity/DuplicityJob.vala:510
+msgid "Backup location is too small.  Try using one with more space."
+msgstr "备份位置空间过小。请尝试使用具有更多空间的位置。"
+
+#: ../tools/duplicity/DuplicityJob.vala:532
+msgid "Backup location does not have enough free space."
+msgstr "备份位置的自由空间不足。"
+
+#: ../tools/duplicity/DuplicityJob.vala:551
+#: ../tools/duplicity/DuplicityJob.vala:565
+msgid "Cleaning up…"
+msgstr "正在清理..."
+
+#. OK, we succeeded yay!  But some files didn't make it into the backup
+#. because we couldn't read them.  So tell the user so they don't think
+#. everything is hunky dory.
+#: ../tools/duplicity/DuplicityJob.vala:661
+msgid ""
+"Could not back up the following files.  Please make sure you are able to "
+"open them."
+msgstr "无法备份下列文件。请确认您可以打开这些文件。"
+
+#. OK, we succeeded yay!  But some files didn't actually restore
+#. because we couldn't write to them.  So tell the user so they
+#. don't think everything is hunky dory.
+#: ../tools/duplicity/DuplicityJob.vala:677
+msgid ""
+"Could not restore the following files.  Please make sure you are able to "
+"write to them."
+msgstr "无法恢复下列文件。请确认您能够写入它们。"
+
+#: ../tools/duplicity/DuplicityJob.vala:924
+#, c-format
+msgid "Could not restore ‘%s’: File not found in backup"
+msgstr "无法恢复“%s”：在备份中未找到该文件"
+
+#. notify upper layers, if they want to do anything
+#. Duplicity tried to ask the user what the encryption password is.
+#. notify upper layers, if they want to do anything
+#: ../tools/duplicity/DuplicityJob.vala:930
+#: ../tools/duplicity/DuplicityJob.vala:1028
+#: ../tools/duplicity/DuplicityJob.vala:1032
+msgid "Bad encryption password."
+msgstr "无效的加密密码。"
+
+#: ../tools/duplicity/DuplicityJob.vala:935
+msgid "Computer name changed"
+msgstr "计算机名称已更改"
+
+#: ../tools/duplicity/DuplicityJob.vala:935
+#, c-format
+msgid ""
+"The existing backup is of a computer named %s, but the current computer’s "
+"name is %s.  If this is unexpected, you should back up to a different "
+"location."
+msgstr "现有备份是名为 %s 的计算机的备份，但当前计算机的名称却是 %s。如果这在意料之外，则您应该备份到其它位置。"
+
+#: ../tools/duplicity/DuplicityJob.vala:970
+#, c-format
+msgid "Permission denied when trying to create ‘%s’."
+msgstr "尝试创建“%s”时被拒绝访问。"
+
+#. assume error is on backend side
+#: ../tools/duplicity/DuplicityJob.vala:974
+#: ../tools/duplicity/DuplicityJob.vala:978
+#, c-format
+msgid "Permission denied when trying to read ‘%s’."
+msgstr "尝试读取“%s”时权限被拒绝。"
+
+#: ../tools/duplicity/DuplicityJob.vala:982
+#, c-format
+msgid "Permission denied when trying to delete ‘%s’."
+msgstr "尝试删除“%s”时权限被拒绝。"
+
+#: ../tools/duplicity/DuplicityJob.vala:989
+#, c-format
+msgid "Backup location ‘%s’ does not exist."
+msgstr "备份位置“%s”不存在。"
+
+#: ../tools/duplicity/DuplicityJob.vala:995
+#: ../tools/duplicity/DuplicityJob.vala:1047
+msgid "No space left."
+msgstr "无剩余空间。"
+
+#: ../tools/duplicity/DuplicityJob.vala:1009
+msgid "Invalid ID."
+msgstr "无效的 ID。"
+
+#: ../tools/duplicity/DuplicityJob.vala:1011
+msgid "Invalid secret key."
+msgstr "无效的私钥。"
+
+#: ../tools/duplicity/DuplicityJob.vala:1013
+msgid "Your Amazon Web Services account is not signed up for the S3 service."
+msgstr "您的 Amazon Web Services 帐号未注册 S3 服务。"
+
+#: ../tools/duplicity/DuplicityJob.vala:1022
+msgid "S3 bucket name is not available."
+msgstr "S3 存储段名称不可用。"
+
+#: ../tools/duplicity/DuplicityJob.vala:1036
+#, c-format
+msgid "Error reading file ‘%s’."
+msgstr "读取文件“%s”时出错。"
+
+#: ../tools/duplicity/DuplicityJob.vala:1038
+#, c-format
+msgid "Error writing file ‘%s’."
+msgstr "写入文件“%s”时出错。"
+
+#: ../tools/duplicity/DuplicityJob.vala:1049
+#, c-format
+msgid "No space left in ‘%s’."
+msgstr "“%s”上没有剩余空间。"
+
+#: ../tools/duplicity/DuplicityJob.vala:1057
+msgid "No backup files found"
+msgstr "未找到备份文件"
+
+#: ../tools/duplicity/DuplicityJob.vala:1107
+msgid "Uploading…"
+msgstr "正在上传..."
+
+#: ../tools/duplicity/DuplicityPlugin.vala:41
+msgid "Could not understand duplicity version."
+msgstr ""
+
+#: ../tools/duplicity/DuplicityPlugin.vala:47
+#, c-format
+msgid "Could not understand duplicity version ‘%s’."
+msgstr ""
+
+#: ../tools/duplicity/DuplicityPlugin.vala:64
+#, c-format
+msgid ""
+"Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
+"only found version %d.%d.%.2d"
+msgstr "Déjà Dup 备份工具至少需要 %d.%d.%.2d 版的 duplicity 软件包，但只找到 %d.%d.%.2d 版"
+
 #: ../widgets/ConfigDelete.vala:43
 msgid "At least a month"
 msgstr "至少一个月"
@@ -1216,31 +1230,31 @@ msgstr "否"
 msgid ""
 "Old backups will be kept for at least a month or until the backup location "
 "is low on space."
-msgstr "旧备份将至少保留一月，或直至备份位置 空间不足。"
+msgstr "旧备份将至少保留一月，或直至备份位置空间不足。"
 
 #: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least two months or until the backup "
 "location is low on space."
-msgstr "旧备份将至少保留两月，或直至备份位置 空间不足。"
+msgstr "旧备份将至少保留两月，或直至备份位置空间不足。"
 
 #: ../widgets/ConfigLabelPolicy.vala:68
 msgid ""
 "Old backups will be kept for at least three months or until the backup "
 "location is low on space."
-msgstr "旧备份将至少保留三月，或直至备份位置 空间不足。"
+msgstr "旧备份将至少保留三月，或直至备份位置空间不足。"
 
 #: ../widgets/ConfigLabelPolicy.vala:70
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
-msgstr "旧备份将至少保留六月，或直至备份位置 空间不足。"
+msgstr "旧备份将至少保留六月，或直至备份位置空间不足。"
 
 #: ../widgets/ConfigLabelPolicy.vala:72
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
-msgstr "旧备份将至少保留一年，或直至备份位置 空间不足。"
+msgstr "旧备份将至少保留一年，或直至备份位置空间不足。"
 
 #: ../widgets/ConfigLabelPolicy.vala:74
 msgid "Old backups will be kept until the backup location is low on space."
@@ -1254,7 +1268,7 @@ msgid ""
 msgid_plural ""
 "Old backups will be kept at least %d days or until the backup location is "
 "low on space."
-msgstr[0] "旧备份将至少保留 %d 天，或直至备份位置 空间不足。"
+msgstr[0] "旧备份将至少保留 %d 天，或直至备份位置空间不足。"
 
 #: ../widgets/ConfigList.vala:179
 msgid "_Add"
@@ -1317,7 +1331,7 @@ msgstr "使用加密链接(_HTTPS)"
 #: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
 #: ../widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
-msgstr "_端口"
+msgstr "端口(_P)"
 
 #: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
 #: ../widgets/ConfigLocationFile.vala:45 ../widgets/ConfigLocationS3.vala:33
@@ -1372,3 +1386,31 @@ msgstr[0] "每 %d 天"
 #, c-format
 msgid "Could not display %s"
 msgstr "无法显示 %s"
+
+#~ msgid "Could not run duplicity"
+#~ msgstr "无法运行 duplicity"
+
+#~ msgid ""
+#~ "Could not understand duplicity version.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "无法识别 duplicity 版本。\n"
+#~ "\n"
+
+#, c-format
+#~ msgid ""
+#~ "Could not understand duplicity version ‘%s’.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "无法识别 duplicity 版本“%s”。\n"
+#~ "\n"
+
+#~ msgid "Duplicity’s version is too old"
+#~ msgstr "Duplicity 的版本过旧"
+
+#~ msgid "You must specify a Rackspace container in your preferences."
+#~ msgstr "您必须在设置里指定一个 Rackspace 文件容器"
+
+#~ msgid ""
+#~ "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
+#~ msgstr "没有 duplicity 软件包，Déjà Dup 备份工具无法工作。现在关闭。"

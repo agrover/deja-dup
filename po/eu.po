@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-01-17 23:17-0500\n"
+"POT-Creation-Date: 2012-04-29 23:17-0700\n"
 "PO-Revision-Date: 2012-03-22 14:30+0000\n"
 "Last-Translator: Asier Sarasua Garmendia <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-23 05:14+0000\n"
-"X-Generator: Launchpad (build 14996)\n"
+"X-Launchpad-Export-Date: 2012-06-06 05:31+0000\n"
+"X-Generator: Launchpad (build 15353)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -371,21 +371,21 @@ msgstr "Karpeta"
 msgid "Scanning…"
 msgstr "Eskaneatzen..."
 
-#: ../nautilus/NautilusExtension.c:176
+#: ../nautilus/NautilusExtension.c:174
 msgid "Restore Missing Files…"
 msgstr "Leheneratu galdutako fitxategiak..."
 
-#: ../nautilus/NautilusExtension.c:177
+#: ../nautilus/NautilusExtension.c:175
 msgid "Restore deleted files from backup"
 msgstr "Leheneratu babeskopiatik ezabatutako fitxategiak"
 
-#: ../nautilus/NautilusExtension.c:219
+#: ../nautilus/NautilusExtension.c:217
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Leheneratu aurreko bertsiora..."
 msgstr[1] "Leheneratu aurreko bertsioetara..."
 
-#: ../nautilus/NautilusExtension.c:223
+#: ../nautilus/NautilusExtension.c:221
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Leheneratu fitxategia babeskopiatik"
@@ -393,7 +393,7 @@ msgstr[1] "Leheneratu fitxategiak babeskopiatik"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:447
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:433
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s %2$s-(e)n"
@@ -420,10 +420,6 @@ msgstr "Sareko konexio baten zain..."
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "‘%s’ konektatu dadin itxaroten..."
-
-#: ../common/BackendRackspace.vala:58
-msgid "You must specify a Rackspace container in your preferences."
-msgstr "Rackspace edukiontzi bat zehaztu behar duzu zure hobespenetan."
 
 #: ../common/BackendRackspace.vala:69 ../widgets/ConfigLocation.vala:194
 msgid "Rackspace Cloud Files"
@@ -517,223 +513,68 @@ msgstr "Konektatu Ubuntu One zerbitzura"
 msgid "Sign into Ubuntu One…"
 msgstr "Hasi saioa Ubuntu One zerbitzuan..."
 
+#: ../common/CommonUtils.vala:353
+#, c-format
+msgid "Could not find backup tool in %s.  Your installation is incomplete."
+msgstr ""
+
+#: ../common/CommonUtils.vala:355
+msgid "Could not load backup tool.  Your installation is incomplete."
+msgstr ""
+
+#: ../common/CommonUtils.vala:361
+msgid "Backup tool is broken.  Your installation is incomplete."
+msgstr ""
+
+#: ../common/CommonUtils.vala:383
+msgid "Could not start backup tool"
+msgstr ""
+
 #. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:498
+#: ../common/CommonUtils.vala:484
 #, c-format
 msgid "Home (%s)"
 msgstr "Karpeta nagusia (%s)"
 
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:503
+#: ../common/CommonUtils.vala:489
 msgid "Home"
 msgstr "Karpeta nagusia"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:508
+#: ../common/CommonUtils.vala:494
 msgid "Trash"
 msgstr "Zakarrontzia"
 
-#: ../common/DuplicityInfo.vala:109
-msgid "Could not run duplicity"
-msgstr "Ezin izan da duplicity exekutatu"
-
-#: ../common/DuplicityInfo.vala:114
-msgid ""
-"Could not understand duplicity version.\n"
-"\n"
-msgstr ""
-"Ezin izan da duplicity-ren bertsioa ulertu.\n"
-"\n"
-
-#: ../common/DuplicityInfo.vala:116
-#, c-format
-msgid ""
-"Could not understand duplicity version ‘%s’.\n"
-"\n"
-msgstr ""
-"Ezin izan da duplicity-ren ‘%s’ bertsioa ulertu.\n"
-"\n"
-
-#: ../common/DuplicityInfo.vala:118
-msgid ""
-"Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
-msgstr ""
-"Duplicity ez badago, Déjà Dup Backup Tool aplikazioak ezin du funtzionatu. "
-"Itxi egingo da orain."
-
-#: ../common/DuplicityInfo.vala:122
-msgid "Duplicity’s version is too old"
-msgstr "Duplicity-ren bertsioa zaharregia da"
-
-#: ../common/DuplicityInfo.vala:123
-#, c-format
-msgid ""
-"Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
-"only found version %d.%d.%.2d"
-msgstr ""
-"Déjà Dup Backup Tool aplikazioak duplicity aplikazioaren %d.%d.%.2d bertsioa "
-"behar du gutxienez, eta %d.%d.%.2d bertsioa aurkitu da."
-
-#: ../common/Duplicity.vala:134 ../common/Duplicity.vala:189
-msgid "Paused (no network)"
-msgstr "Pausatua (sarerik ez)"
-
-#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:409
-#: ../common/Duplicity.vala:428 ../common/Duplicity.vala:433
-#: ../common/Operation.vala:79 ../common/Operation.vala:111
-msgid "Preparing…"
-msgstr "Prestatzen..."
-
-#. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:460
-#, c-format
-msgid "Could not restore ‘%s’: Not a valid file location"
-msgstr "Ezin izan da ‘%s’ leheneratu: Fitxategiaren kokapena ez da zuzena"
-
-#. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:526
-msgid "Backup location is too small.  Try using one with more space."
-msgstr ""
-"Babeskopiaren kokapena txikiegia da. Saiatu toki gehiago duen bat erabiltzen."
-
-#: ../common/Duplicity.vala:548
-msgid "Backup location does not have enough free space."
-msgstr "Babeskopiaren kokapenak ez dauka nahiko toki librerik."
-
-#: ../common/Duplicity.vala:567 ../common/Duplicity.vala:581
-msgid "Cleaning up…"
-msgstr "Garbitzen..."
-
-#. OK, we succeeded yay!  But some files didn't make it into the backup
-#. because we couldn't read them.  So tell the user so they don't think
-#. everything is hunky dory.
-#: ../common/Duplicity.vala:677
-msgid ""
-"Could not back up the following files.  Please make sure you are able to "
-"open them."
-msgstr ""
-"Ezin izan dira hurrengo fitxategien babeskopia egin. Segurtatu haiek ireki "
-"ahal dituzula."
-
-#: ../common/Duplicity.vala:710 ../common/Duplicity.vala:1092
-#: ../deja-dup/AssistantOperation.vala:545
-msgid "Failed with an unknown error."
-msgstr "Huts egin du errore ezezagunarengatik."
-
-#: ../common/Duplicity.vala:940
-#, c-format
-msgid "Could not restore ‘%s’: File not found in backup"
-msgstr "Ezin izan da ‘%s’ leheneratu: Fitxategia ez da aurkitu babeskopian"
-
-#. notify upper layers, if they want to do anything
-#. Duplicity tried to ask the user what the encryption password is.
-#. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:946 ../common/Duplicity.vala:1044
-#: ../common/Duplicity.vala:1048
-msgid "Bad encryption password."
-msgstr "Zifratze-pasahitz okerra."
-
-#: ../common/Duplicity.vala:951
-msgid "Computer name changed"
-msgstr "Ordenagailuaren izena aldatu da"
-
-#: ../common/Duplicity.vala:951
-#, c-format
-msgid ""
-"The existing backup is of a computer named %s, but the current computer’s "
-"name is %s.  If this is unexpected, you should back up to a different "
-"location."
-msgstr ""
-"Existitzen den babeskopia %s deitutako ordenagailu batena da, bain uneko "
-"ordenagailuaren izena %s da. Hau espero ez bazenuen, beste kokapen batean "
-"egin beharko zenuke babeskopia."
-
-#: ../common/Duplicity.vala:986
-#, c-format
-msgid "Permission denied when trying to create ‘%s’."
-msgstr "Baimena ukatu da ‘%s’ sortzen saiatzean."
-
-#. assume error is on backend side
-#: ../common/Duplicity.vala:990 ../common/Duplicity.vala:994
-#, c-format
-msgid "Permission denied when trying to read ‘%s’."
-msgstr "Baimena ukatu da ‘%s’ irakurtzen saiatzean."
-
-#: ../common/Duplicity.vala:998
-#, c-format
-msgid "Permission denied when trying to delete ‘%s’."
-msgstr "Baimena ukatu da ‘%s’ ezabatzen saiatzean."
-
-#: ../common/Duplicity.vala:1005
-#, c-format
-msgid "Backup location ‘%s’ does not exist."
-msgstr "Babeskopiaren ‘%s’ kokapena ez da existitzen."
-
-#: ../common/Duplicity.vala:1011 ../common/Duplicity.vala:1063
-msgid "No space left."
-msgstr "Ez dago espaziorik."
-
-#: ../common/Duplicity.vala:1025
-msgid "Invalid ID."
-msgstr "ID baliogabea."
-
-#: ../common/Duplicity.vala:1027
-msgid "Invalid secret key."
-msgstr "Gako sekretu baliogabea."
-
-#: ../common/Duplicity.vala:1029
-msgid "Your Amazon Web Services account is not signed up for the S3 service."
-msgstr ""
-"Zure Amazon Web Services zerbitzuko kontua ez dago alta emanda S3 zerbitzuan."
-
-#: ../common/Duplicity.vala:1038
-msgid "S3 bucket name is not available."
-msgstr "S3 ontzi-izena ezin da eskuratu."
-
-#: ../common/Duplicity.vala:1052
-#, c-format
-msgid "Error reading file ‘%s’."
-msgstr "Errorea ‘%s’ fitxategia irakurtzean."
-
-#: ../common/Duplicity.vala:1054
-#, c-format
-msgid "Error writing file ‘%s’."
-msgstr "Errorea ‘%s’ fitxategia idaztean."
-
-#: ../common/Duplicity.vala:1065
-#, c-format
-msgid "No space left in ‘%s’."
-msgstr "Ez dago lekurik ‘%s’-(e)n."
-
-#: ../common/Duplicity.vala:1073
-msgid "No backup files found"
-msgstr "Ez da aurkitu babeskopiaren fitxategirik"
-
-#: ../common/Duplicity.vala:1123
-msgid "Uploading…"
-msgstr "Kargatzen..."
-
-#: ../common/OperationRestore.vala:52
+#: ../common/OperationRestore.vala:51
 msgid "Restoring files…"
 msgstr "Fitxategiak leheneratzen..."
 
-#: ../common/Operation.vala:71
+#: ../common/Operation.vala:60
 msgid "Backing up…"
 msgstr "Babeskopia egiten..."
 
-#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:486
+#: ../common/Operation.vala:62 ../deja-dup/AssistantRestore.vala:484
 msgid "Restoring…"
 msgstr "Leheneratzen..."
 
-#: ../common/Operation.vala:75
+#: ../common/Operation.vala:64
 msgid "Checking for backups…"
 msgstr "Babeskopiak egiaztatzen..."
 
-#: ../common/Operation.vala:77
+#: ../common/Operation.vala:66
 msgid "Listing files…"
 msgstr "Fitxategiak zerrendatzen..."
 
-#: ../common/Operation.vala:281
+#: ../common/Operation.vala:68 ../common/Operation.vala:100
+#: ../tools/duplicity/DuplicityJob.vala:386
+#: ../tools/duplicity/DuplicityJob.vala:393
+#: ../tools/duplicity/DuplicityJob.vala:412
+#: ../tools/duplicity/DuplicityJob.vala:417
+msgid "Preparing…"
+msgstr "Prestatzen..."
+
+#: ../common/Operation.vala:237
 msgid "Another backup operation is already running"
 msgstr "Beste babeskopia-eragiketa bat dago abian"
 
@@ -747,11 +588,11 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "Babes_kopia"
 
-#: ../deja-dup/AssistantBackup.vala:50
+#: ../deja-dup/AssistantBackup.vala:49
 msgid "Creating the first backup.  This may take a while."
 msgstr "Lehen babeskopia sortzen. Honek denbora behar dezake."
 
-#: ../deja-dup/AssistantBackup.vala:51
+#: ../deja-dup/AssistantBackup.vala:50
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -761,19 +602,19 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:81
+#: ../deja-dup/AssistantBackup.vala:80
 msgid "Backing up:"
 msgstr "Babeskopia egiten:"
 
-#: ../deja-dup/AssistantBackup.vala:90
+#: ../deja-dup/AssistantBackup.vala:89
 msgid "Backup Failed"
 msgstr "Babeskopiak huts egin du"
 
-#: ../deja-dup/AssistantBackup.vala:93
+#: ../deja-dup/AssistantBackup.vala:92
 msgid "Backup Finished"
 msgstr "Babeskopia amaitu da"
 
-#: ../deja-dup/AssistantBackup.vala:101
+#: ../deja-dup/AssistantBackup.vala:100
 msgid "Backing Up…"
 msgstr "Babeskopia egiten..."
 
@@ -781,19 +622,19 @@ msgstr "Babeskopia egiten..."
 msgid "Scanning:"
 msgstr "Eskaneatzen:"
 
-#: ../deja-dup/AssistantOperation.vala:264
+#: ../deja-dup/AssistantOperation.vala:256
 msgid "_Details"
 msgstr "_Xehetasunak"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Allow restoring without a password"
 msgstr "_Onartu pasahitzik gabe leheneratzea"
 
-#: ../deja-dup/AssistantOperation.vala:318
+#: ../deja-dup/AssistantOperation.vala:310
 msgid "_Password-protect your backup"
 msgstr "Babestu zure kopia _pasahitzez"
 
-#: ../deja-dup/AssistantOperation.vala:332
+#: ../deja-dup/AssistantOperation.vala:324
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
@@ -802,36 +643,42 @@ msgstr ""
 "Zure pasahitza beharko duzu fitxategiak leheneratzeko. Agian hobe da nonbait "
 "idazten baduzu."
 
-#: ../deja-dup/AssistantOperation.vala:347
+#: ../deja-dup/AssistantOperation.vala:339
 msgid "E_ncryption password"
 msgstr "Enkriptatze-pasahit_za"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:356
 msgid "Confir_m password"
 msgstr "Baie_ztatu pasahitza"
 
-#: ../deja-dup/AssistantOperation.vala:377
+#: ../deja-dup/AssistantOperation.vala:369
 msgid "_Show password"
 msgstr "Erakut_si pasahitza"
 
-#: ../deja-dup/AssistantOperation.vala:386
+#: ../deja-dup/AssistantOperation.vala:378
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Gogoratu pasahitza"
 
-#: ../deja-dup/AssistantOperation.vala:455
+#: ../deja-dup/AssistantOperation.vala:447
 msgid "Summary"
 msgstr "Laburpena"
 
-#: ../deja-dup/AssistantOperation.vala:738
+#: ../deja-dup/AssistantOperation.vala:537
+#: ../tools/duplicity/DuplicityJob.vala:694
+#: ../tools/duplicity/DuplicityJob.vala:1076
+msgid "Failed with an unknown error."
+msgstr "Huts egin du errore ezezagunarengatik."
+
+#: ../deja-dup/AssistantOperation.vala:730
 msgid "Require Password?"
 msgstr "Pasahitza beharrezko egin?"
 
-#: ../deja-dup/AssistantOperation.vala:740
+#: ../deja-dup/AssistantOperation.vala:732
 msgid "Encryption Password Needed"
 msgstr "Zifratze-pasahitza behar da"
 
-#: ../deja-dup/AssistantOperation.vala:786
+#: ../deja-dup/AssistantOperation.vala:778
 msgid "Backup encryption password"
 msgstr "Babeskopiaren zifratze-pasahitza"
 
@@ -893,7 +740,7 @@ msgstr "Nora leheneratu?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:307
+#: ../deja-dup/AssistantRestore.vala:306
 msgid "Restoring:"
 msgstr "Leheneratzen:"
 
@@ -901,38 +748,38 @@ msgstr "Leheneratzen:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: ../deja-dup/AssistantRestore.vala:349
+#: ../deja-dup/AssistantRestore.vala:348
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
-#: ../deja-dup/AssistantRestore.vala:362
+#: ../deja-dup/AssistantRestore.vala:361
 msgid "No backups to restore"
 msgstr "Ez dago leheneratzeko babeskopiarik"
 
-#: ../deja-dup/AssistantRestore.vala:439
+#: ../deja-dup/AssistantRestore.vala:437
 msgid "Original location"
 msgstr "Jatorrizko kokapena"
 
-#: ../deja-dup/AssistantRestore.vala:450
+#: ../deja-dup/AssistantRestore.vala:448
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "Leheneratuko den fitxategia"
 msgstr[1] "Leheneratuko diren fitxategiak"
 
-#: ../deja-dup/AssistantRestore.vala:471
+#: ../deja-dup/AssistantRestore.vala:469
 msgid "Restore Failed"
 msgstr "Leheneratzeak huts egin du"
 
-#: ../deja-dup/AssistantRestore.vala:473
+#: ../deja-dup/AssistantRestore.vala:471
 msgid "Restore Finished"
 msgstr "Leheneratzea amaitu da"
 
-#: ../deja-dup/AssistantRestore.vala:476
+#: ../deja-dup/AssistantRestore.vala:474
 msgid "Your files were successfully restored."
 msgstr "Zure fitxategiak ongi leheneratu dira"
 
-#: ../deja-dup/AssistantRestore.vala:479
+#: ../deja-dup/AssistantRestore.vala:477
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Zure fitxategia ongi leheneratu da."
@@ -976,7 +823,7 @@ msgid_plural "Scanning for files from about %d years ago…"
 msgstr[0] "Duela urtebete inguruko fitxategiak eskaneatzen..."
 msgstr[1] "Duela %d urtebete inguruko fitxategiak eskaneatzen..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:455
+#: ../deja-dup/AssistantRestoreMissing.vala:454
 msgid "Scanning finished"
 msgstr "Eskaneatzea amaitu da"
 
@@ -1063,20 +910,20 @@ msgstr "_Pasahitza"
 msgid "S_how password"
 msgstr "Era_kutsi pasahitza"
 
-#: ../deja-dup/MountOperationAssistant.vala:82
+#: ../deja-dup/MountOperationAssistant.vala:80
 msgid "Location not available"
 msgstr "Kokapena ez dago eskuragarri"
 
-#: ../deja-dup/MountOperationAssistant.vala:168
+#: ../deja-dup/MountOperationAssistant.vala:166
 msgid "Connect _anonymously"
 msgstr "Konektatu _anonimoki"
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:170
 msgid "Connect as u_ser"
 msgstr "Konektatu era_biltzaile gisa"
 
 #. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:215
+#: ../deja-dup/MountOperationAssistant.vala:213
 msgid "_Domain"
 msgstr "_Domeinua"
 
@@ -1217,6 +1064,168 @@ msgstr "Programaketa"
 #: ../preferences/Preferences.vala:365
 msgid "Categories"
 msgstr "Kategoriak"
+
+#: ../tools/duplicity/DuplicityJob.vala:89
+#: ../tools/duplicity/DuplicityJob.vala:173
+msgid "Paused (no network)"
+msgstr "Pausatua (sarerik ez)"
+
+#. Was not even a file path (maybe something goofy like computer://)
+#: ../tools/duplicity/DuplicityJob.vala:444
+#, c-format
+msgid "Could not restore ‘%s’: Not a valid file location"
+msgstr "Ezin izan da ‘%s’ leheneratu: Fitxategiaren kokapena ez da zuzena"
+
+#. Tiny backup location.  Suggest they get a larger one.
+#: ../tools/duplicity/DuplicityJob.vala:510
+msgid "Backup location is too small.  Try using one with more space."
+msgstr ""
+"Babeskopiaren kokapena txikiegia da. Saiatu toki gehiago duen bat erabiltzen."
+
+#: ../tools/duplicity/DuplicityJob.vala:532
+msgid "Backup location does not have enough free space."
+msgstr "Babeskopiaren kokapenak ez dauka nahiko toki librerik."
+
+#: ../tools/duplicity/DuplicityJob.vala:551
+#: ../tools/duplicity/DuplicityJob.vala:565
+msgid "Cleaning up…"
+msgstr "Garbitzen..."
+
+#. OK, we succeeded yay!  But some files didn't make it into the backup
+#. because we couldn't read them.  So tell the user so they don't think
+#. everything is hunky dory.
+#: ../tools/duplicity/DuplicityJob.vala:661
+msgid ""
+"Could not back up the following files.  Please make sure you are able to "
+"open them."
+msgstr ""
+"Ezin izan dira hurrengo fitxategien babeskopia egin. Segurtatu haiek ireki "
+"ahal dituzula."
+
+#. OK, we succeeded yay!  But some files didn't actually restore
+#. because we couldn't write to them.  So tell the user so they
+#. don't think everything is hunky dory.
+#: ../tools/duplicity/DuplicityJob.vala:677
+msgid ""
+"Could not restore the following files.  Please make sure you are able to "
+"write to them."
+msgstr ""
+"Ezin izan dira berrezarri ondorengo fitxategiak. Egiaztatu fitxategi hauetan "
+"idatz dezakezula."
+
+#: ../tools/duplicity/DuplicityJob.vala:924
+#, c-format
+msgid "Could not restore ‘%s’: File not found in backup"
+msgstr "Ezin izan da ‘%s’ leheneratu: Fitxategia ez da aurkitu babeskopian"
+
+#. notify upper layers, if they want to do anything
+#. Duplicity tried to ask the user what the encryption password is.
+#. notify upper layers, if they want to do anything
+#: ../tools/duplicity/DuplicityJob.vala:930
+#: ../tools/duplicity/DuplicityJob.vala:1028
+#: ../tools/duplicity/DuplicityJob.vala:1032
+msgid "Bad encryption password."
+msgstr "Zifratze-pasahitz okerra."
+
+#: ../tools/duplicity/DuplicityJob.vala:935
+msgid "Computer name changed"
+msgstr "Ordenagailuaren izena aldatu da"
+
+#: ../tools/duplicity/DuplicityJob.vala:935
+#, c-format
+msgid ""
+"The existing backup is of a computer named %s, but the current computer’s "
+"name is %s.  If this is unexpected, you should back up to a different "
+"location."
+msgstr ""
+"Existitzen den babeskopia %s deitutako ordenagailu batena da, bain uneko "
+"ordenagailuaren izena %s da. Hau espero ez bazenuen, beste kokapen batean "
+"egin beharko zenuke babeskopia."
+
+#: ../tools/duplicity/DuplicityJob.vala:970
+#, c-format
+msgid "Permission denied when trying to create ‘%s’."
+msgstr "Baimena ukatu da ‘%s’ sortzen saiatzean."
+
+#. assume error is on backend side
+#: ../tools/duplicity/DuplicityJob.vala:974
+#: ../tools/duplicity/DuplicityJob.vala:978
+#, c-format
+msgid "Permission denied when trying to read ‘%s’."
+msgstr "Baimena ukatu da ‘%s’ irakurtzen saiatzean."
+
+#: ../tools/duplicity/DuplicityJob.vala:982
+#, c-format
+msgid "Permission denied when trying to delete ‘%s’."
+msgstr "Baimena ukatu da ‘%s’ ezabatzen saiatzean."
+
+#: ../tools/duplicity/DuplicityJob.vala:989
+#, c-format
+msgid "Backup location ‘%s’ does not exist."
+msgstr "Babeskopiaren ‘%s’ kokapena ez da existitzen."
+
+#: ../tools/duplicity/DuplicityJob.vala:995
+#: ../tools/duplicity/DuplicityJob.vala:1047
+msgid "No space left."
+msgstr "Ez dago espaziorik."
+
+#: ../tools/duplicity/DuplicityJob.vala:1009
+msgid "Invalid ID."
+msgstr "ID baliogabea."
+
+#: ../tools/duplicity/DuplicityJob.vala:1011
+msgid "Invalid secret key."
+msgstr "Gako sekretu baliogabea."
+
+#: ../tools/duplicity/DuplicityJob.vala:1013
+msgid "Your Amazon Web Services account is not signed up for the S3 service."
+msgstr ""
+"Zure Amazon Web Services zerbitzuko kontua ez dago alta emanda S3 zerbitzuan."
+
+#: ../tools/duplicity/DuplicityJob.vala:1022
+msgid "S3 bucket name is not available."
+msgstr "S3 ontzi-izena ezin da eskuratu."
+
+#: ../tools/duplicity/DuplicityJob.vala:1036
+#, c-format
+msgid "Error reading file ‘%s’."
+msgstr "Errorea ‘%s’ fitxategia irakurtzean."
+
+#: ../tools/duplicity/DuplicityJob.vala:1038
+#, c-format
+msgid "Error writing file ‘%s’."
+msgstr "Errorea ‘%s’ fitxategia idaztean."
+
+#: ../tools/duplicity/DuplicityJob.vala:1049
+#, c-format
+msgid "No space left in ‘%s’."
+msgstr "Ez dago lekurik ‘%s’-(e)n."
+
+#: ../tools/duplicity/DuplicityJob.vala:1057
+msgid "No backup files found"
+msgstr "Ez da aurkitu babeskopiaren fitxategirik"
+
+#: ../tools/duplicity/DuplicityJob.vala:1107
+msgid "Uploading…"
+msgstr "Kargatzen..."
+
+#: ../tools/duplicity/DuplicityPlugin.vala:41
+msgid "Could not understand duplicity version."
+msgstr ""
+
+#: ../tools/duplicity/DuplicityPlugin.vala:47
+#, c-format
+msgid "Could not understand duplicity version ‘%s’."
+msgstr ""
+
+#: ../tools/duplicity/DuplicityPlugin.vala:64
+#, c-format
+msgid ""
+"Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
+"only found version %d.%d.%.2d"
+msgstr ""
+"Déjà Dup Backup Tool aplikazioak duplicity aplikazioaren %d.%d.%.2d bertsioa "
+"behar du gutxienez, eta %d.%d.%.2d bertsioa aurkitu da."
 
 #: ../widgets/ConfigDelete.vala:43
 msgid "At least a month"
@@ -1467,3 +1476,33 @@ msgstr[1] "%d egunetik behin"
 #, c-format
 msgid "Could not display %s"
 msgstr "Ezin izan da %s erakutsi"
+
+#~ msgid ""
+#~ "Could not understand duplicity version.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Ezin izan da duplicity-ren bertsioa ulertu.\n"
+#~ "\n"
+
+#~ msgid "Could not run duplicity"
+#~ msgstr "Ezin izan da duplicity exekutatu"
+
+#, c-format
+#~ msgid ""
+#~ "Could not understand duplicity version ‘%s’.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Ezin izan da duplicity-ren ‘%s’ bertsioa ulertu.\n"
+#~ "\n"
+
+#~ msgid "Duplicity’s version is too old"
+#~ msgstr "Duplicity-ren bertsioa zaharregia da"
+
+#~ msgid "You must specify a Rackspace container in your preferences."
+#~ msgstr "Rackspace edukiontzi bat zehaztu behar duzu zure hobespenetan."
+
+#~ msgid ""
+#~ "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
+#~ msgstr ""
+#~ "Duplicity ez badago, Déjà Dup Backup Tool aplikazioak ezin du funtzionatu. "
+#~ "Itxi egingo da orain."

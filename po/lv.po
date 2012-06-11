@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-01-17 23:17-0500\n"
+"POT-Creation-Date: 2012-04-29 23:17-0700\n"
 "PO-Revision-Date: 2012-03-22 14:30+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-03-23 05:15+0000\n"
-"X-Generator: Launchpad (build 14996)\n"
+"X-Launchpad-Export-Date: 2012-06-06 05:32+0000\n"
+"X-Generator: Launchpad (build 15353)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -366,22 +366,22 @@ msgstr "Mape"
 msgid "Scanning…"
 msgstr "Skenē..."
 
-#: ../nautilus/NautilusExtension.c:176
+#: ../nautilus/NautilusExtension.c:174
 msgid "Restore Missing Files…"
 msgstr "Atjauno trūkstošos failus..."
 
-#: ../nautilus/NautilusExtension.c:177
+#: ../nautilus/NautilusExtension.c:175
 msgid "Restore deleted files from backup"
 msgstr "Atjaunot dzēstos failus no dublējuma"
 
-#: ../nautilus/NautilusExtension.c:219
+#: ../nautilus/NautilusExtension.c:217
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Atjaunot uz iepriekšējo versiju..."
 msgstr[1] "Atjaunot uz iepriekšējām versijām..."
 msgstr[2] "Atjaunot uz iepriekšējām versijām..."
 
-#: ../nautilus/NautilusExtension.c:223
+#: ../nautilus/NautilusExtension.c:221
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Atjaunot failu no dublējuma"
@@ -390,7 +390,7 @@ msgstr[2] "Atjaunot failus no dublējuma"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:447
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:433
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s uz %2$s"
@@ -417,10 +417,6 @@ msgstr "Gaida tīkla savienojumu..."
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Gaida, līdz ‘%s’ savienosies..."
-
-#: ../common/BackendRackspace.vala:58
-msgid "You must specify a Rackspace container in your preferences."
-msgstr "Rackspace konteineris ir jānorāda iestatījumos."
 
 #: ../common/BackendRackspace.vala:69 ../widgets/ConfigLocation.vala:194
 msgid "Rackspace Cloud Files"
@@ -515,217 +511,68 @@ msgstr "Savienoties ar Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "Ierakstās Ubuntu One..."
 
+#: ../common/CommonUtils.vala:353
+#, c-format
+msgid "Could not find backup tool in %s.  Your installation is incomplete."
+msgstr ""
+
+#: ../common/CommonUtils.vala:355
+msgid "Could not load backup tool.  Your installation is incomplete."
+msgstr ""
+
+#: ../common/CommonUtils.vala:361
+msgid "Backup tool is broken.  Your installation is incomplete."
+msgstr ""
+
+#: ../common/CommonUtils.vala:383
+msgid "Could not start backup tool"
+msgstr ""
+
 #. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:498
+#: ../common/CommonUtils.vala:484
 #, c-format
 msgid "Home (%s)"
 msgstr "Mājas (%s)"
 
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:503
+#: ../common/CommonUtils.vala:489
 msgid "Home"
 msgstr "Mājas"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:508
+#: ../common/CommonUtils.vala:494
 msgid "Trash"
 msgstr "Miskaste"
 
-#: ../common/DuplicityInfo.vala:109
-msgid "Could not run duplicity"
-msgstr "Nevarēja palaist duplicity"
-
-#: ../common/DuplicityInfo.vala:114
-msgid ""
-"Could not understand duplicity version.\n"
-"\n"
-msgstr ""
-"Nevarēja saprast duplicity versiju.\n"
-"\n"
-
-#: ../common/DuplicityInfo.vala:116
-#, c-format
-msgid ""
-"Could not understand duplicity version ‘%s’.\n"
-"\n"
-msgstr ""
-"Nevarēja saprast duplicity versiju ‘%s’.\n"
-"\n"
-
-#: ../common/DuplicityInfo.vala:118
-msgid ""
-"Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
-msgstr ""
-"Bez duplicity Déjà Dup dublēšanas rīks nevar darboties. Tas tagad aizvērsies."
-
-#: ../common/DuplicityInfo.vala:122
-msgid "Duplicity’s version is too old"
-msgstr "Duplicity’s versija ir pārāk veca"
-
-#: ../common/DuplicityInfo.vala:123
-#, c-format
-msgid ""
-"Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
-"only found version %d.%d.%.2d"
-msgstr ""
-"Déjà Dup dublēšanas rīkam ir vajadzīga vismaz %d.%d.%.2d duplicity versija, "
-"bet atrasta tika tikai %d.%d.%.2d versija"
-
-#: ../common/Duplicity.vala:134 ../common/Duplicity.vala:189
-msgid "Paused (no network)"
-msgstr "Pauzēts (nav tīkla)"
-
-#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:409
-#: ../common/Duplicity.vala:428 ../common/Duplicity.vala:433
-#: ../common/Operation.vala:79 ../common/Operation.vala:111
-msgid "Preparing…"
-msgstr "Sagatavo..."
-
-#. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:460
-#, c-format
-msgid "Could not restore ‘%s’: Not a valid file location"
-msgstr "Nevarēja atjaunot ‘%s’: nav derīga faila vieta"
-
-#. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:526
-msgid "Backup location is too small.  Try using one with more space."
-msgstr "Dublējuma vieta ir pārāk maza. Mēģiniet kādu ar vairāk vietas."
-
-#: ../common/Duplicity.vala:548
-msgid "Backup location does not have enough free space."
-msgstr "Dublējuma vietai nepietiek brīvās vietas."
-
-#: ../common/Duplicity.vala:567 ../common/Duplicity.vala:581
-msgid "Cleaning up…"
-msgstr "Uzkopj..."
-
-#. OK, we succeeded yay!  But some files didn't make it into the backup
-#. because we couldn't read them.  So tell the user so they don't think
-#. everything is hunky dory.
-#: ../common/Duplicity.vala:677
-msgid ""
-"Could not back up the following files.  Please make sure you are able to "
-"open them."
-msgstr ""
-
-#: ../common/Duplicity.vala:710 ../common/Duplicity.vala:1092
-#: ../deja-dup/AssistantOperation.vala:545
-msgid "Failed with an unknown error."
-msgstr "Neizdevās ar nezināmu kļūdu."
-
-#: ../common/Duplicity.vala:940
-#, c-format
-msgid "Could not restore ‘%s’: File not found in backup"
-msgstr "Nevarēja atjaunot ‘%s’: Fails nav atrast dublējumā"
-
-#. notify upper layers, if they want to do anything
-#. Duplicity tried to ask the user what the encryption password is.
-#. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:946 ../common/Duplicity.vala:1044
-#: ../common/Duplicity.vala:1048
-msgid "Bad encryption password."
-msgstr "Slikta šifrēšanas parole."
-
-#: ../common/Duplicity.vala:951
-msgid "Computer name changed"
-msgstr "Datora vārds ir mainīts"
-
-#: ../common/Duplicity.vala:951
-#, c-format
-msgid ""
-"The existing backup is of a computer named %s, but the current computer’s "
-"name is %s.  If this is unexpected, you should back up to a different "
-"location."
-msgstr ""
-"Esošais dublējums ir no datora ar nosaukumu %s, bet šī datora nosaukums ir "
-"%s. Ja tas ir negaidīti, jums vajadzētu dublēt citā vietā."
-
-#: ../common/Duplicity.vala:986
-#, c-format
-msgid "Permission denied when trying to create ‘%s’."
-msgstr "Atļauja liegta, mēģinot izveidot ‘%s’."
-
-#. assume error is on backend side
-#: ../common/Duplicity.vala:990 ../common/Duplicity.vala:994
-#, c-format
-msgid "Permission denied when trying to read ‘%s’."
-msgstr "Atļauja liegta, mēģinot lasīt ‘%s’."
-
-#: ../common/Duplicity.vala:998
-#, c-format
-msgid "Permission denied when trying to delete ‘%s’."
-msgstr "Atļauja liegta, mēģinot dzēst ‘%s’."
-
-#: ../common/Duplicity.vala:1005
-#, c-format
-msgid "Backup location ‘%s’ does not exist."
-msgstr "Dublējuma vieta ‘%s’ neeksistē."
-
-#: ../common/Duplicity.vala:1011 ../common/Duplicity.vala:1063
-msgid "No space left."
-msgstr "Vairs nav vietas."
-
-#: ../common/Duplicity.vala:1025
-msgid "Invalid ID."
-msgstr "Nederīgs ID."
-
-#: ../common/Duplicity.vala:1027
-msgid "Invalid secret key."
-msgstr "Nederīga slepenā atslēga."
-
-#: ../common/Duplicity.vala:1029
-msgid "Your Amazon Web Services account is not signed up for the S3 service."
-msgstr "Jūsu Amazon Web Services konts nav pierakstīts S3 servisam."
-
-#: ../common/Duplicity.vala:1038
-msgid "S3 bucket name is not available."
-msgstr "S3 groza nosaukums nav pieejams."
-
-#: ../common/Duplicity.vala:1052
-#, c-format
-msgid "Error reading file ‘%s’."
-msgstr "Kļūda, lasot failu ‘%s’."
-
-#: ../common/Duplicity.vala:1054
-#, c-format
-msgid "Error writing file ‘%s’."
-msgstr "Kļūda, rakstot failu ‘%s’."
-
-#: ../common/Duplicity.vala:1065
-#, c-format
-msgid "No space left in ‘%s’."
-msgstr "Uz ‘%s’ vairs nav vietas."
-
-#: ../common/Duplicity.vala:1073
-msgid "No backup files found"
-msgstr "Nav atrastu dublējuma failu"
-
-#: ../common/Duplicity.vala:1123
-msgid "Uploading…"
-msgstr "Augšupielādē..."
-
-#: ../common/OperationRestore.vala:52
+#: ../common/OperationRestore.vala:51
 msgid "Restoring files…"
 msgstr "Atjauno failus..."
 
-#: ../common/Operation.vala:71
+#: ../common/Operation.vala:60
 msgid "Backing up…"
 msgstr "Dublē..."
 
-#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:486
+#: ../common/Operation.vala:62 ../deja-dup/AssistantRestore.vala:484
 msgid "Restoring…"
 msgstr "Atjauno..."
 
-#: ../common/Operation.vala:75
+#: ../common/Operation.vala:64
 msgid "Checking for backups…"
 msgstr "Pārbauda dublējumus..."
 
-#: ../common/Operation.vala:77
+#: ../common/Operation.vala:66
 msgid "Listing files…"
 msgstr "Uzskaita failus..."
 
-#: ../common/Operation.vala:281
+#: ../common/Operation.vala:68 ../common/Operation.vala:100
+#: ../tools/duplicity/DuplicityJob.vala:386
+#: ../tools/duplicity/DuplicityJob.vala:393
+#: ../tools/duplicity/DuplicityJob.vala:412
+#: ../tools/duplicity/DuplicityJob.vala:417
+msgid "Preparing…"
+msgstr "Sagatavo..."
+
+#: ../common/Operation.vala:237
 msgid "Another backup operation is already running"
 msgstr "Jau darbojas cita dublēšanas darbība"
 
@@ -739,11 +586,11 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "_Dublēt"
 
-#: ../deja-dup/AssistantBackup.vala:50
+#: ../deja-dup/AssistantBackup.vala:49
 msgid "Creating the first backup.  This may take a while."
 msgstr "Veido pirmo dublējumu. Tas var aizņemt kādu laiciņu."
 
-#: ../deja-dup/AssistantBackup.vala:51
+#: ../deja-dup/AssistantBackup.vala:50
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -753,19 +600,19 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:81
+#: ../deja-dup/AssistantBackup.vala:80
 msgid "Backing up:"
 msgstr "Dublē:"
 
-#: ../deja-dup/AssistantBackup.vala:90
+#: ../deja-dup/AssistantBackup.vala:89
 msgid "Backup Failed"
 msgstr "Dublēšana neizdevās"
 
-#: ../deja-dup/AssistantBackup.vala:93
+#: ../deja-dup/AssistantBackup.vala:92
 msgid "Backup Finished"
-msgstr ""
+msgstr "Dublēšana ir pabeigta"
 
-#: ../deja-dup/AssistantBackup.vala:101
+#: ../deja-dup/AssistantBackup.vala:100
 msgid "Backing Up…"
 msgstr "Dublē..."
 
@@ -773,19 +620,19 @@ msgstr "Dublē..."
 msgid "Scanning:"
 msgstr "Skenē:"
 
-#: ../deja-dup/AssistantOperation.vala:264
+#: ../deja-dup/AssistantOperation.vala:256
 msgid "_Details"
 msgstr "_Sīkāk"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Allow restoring without a password"
 msgstr "Ļ_aut atjaunot bez paroles"
 
-#: ../deja-dup/AssistantOperation.vala:318
+#: ../deja-dup/AssistantOperation.vala:310
 msgid "_Password-protect your backup"
 msgstr "Dublējumu aizsargāt ar _paroli"
 
-#: ../deja-dup/AssistantOperation.vala:332
+#: ../deja-dup/AssistantOperation.vala:324
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
@@ -793,36 +640,42 @@ msgid ""
 msgstr ""
 "Jums vajadzēs jūsu paroli, lai atjaunotu failus. Būtu prātīgi to pierakstīt."
 
-#: ../deja-dup/AssistantOperation.vala:347
+#: ../deja-dup/AssistantOperation.vala:339
 msgid "E_ncryption password"
 msgstr "Ši_frēšanas parole"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:356
 msgid "Confir_m password"
 msgstr "Apstipri_nāt paroli"
 
-#: ../deja-dup/AssistantOperation.vala:377
+#: ../deja-dup/AssistantOperation.vala:369
 msgid "_Show password"
 msgstr "Rā_dīt paroli"
 
-#: ../deja-dup/AssistantOperation.vala:386
+#: ../deja-dup/AssistantOperation.vala:378
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "Atce_rēties paroli"
 
-#: ../deja-dup/AssistantOperation.vala:455
+#: ../deja-dup/AssistantOperation.vala:447
 msgid "Summary"
 msgstr "Kopsavilkums"
 
-#: ../deja-dup/AssistantOperation.vala:738
+#: ../deja-dup/AssistantOperation.vala:537
+#: ../tools/duplicity/DuplicityJob.vala:694
+#: ../tools/duplicity/DuplicityJob.vala:1076
+msgid "Failed with an unknown error."
+msgstr "Neizdevās ar nezināmu kļūdu."
+
+#: ../deja-dup/AssistantOperation.vala:730
 msgid "Require Password?"
 msgstr "Pieprasīt paroli?"
 
-#: ../deja-dup/AssistantOperation.vala:740
+#: ../deja-dup/AssistantOperation.vala:732
 msgid "Encryption Password Needed"
 msgstr "Vajadzīga šifrēšanas parole"
 
-#: ../deja-dup/AssistantOperation.vala:786
+#: ../deja-dup/AssistantOperation.vala:778
 msgid "Backup encryption password"
 msgstr "Dublējuma šifrēšanas parole"
 
@@ -840,7 +693,7 @@ msgstr "Du_blējuma vieta"
 
 #: ../deja-dup/AssistantRestore.vala:124
 msgid "Restore From Where?"
-msgstr ""
+msgstr "Atjaunot no kurienes?"
 
 #: ../deja-dup/AssistantRestore.vala:146
 msgid "_Date"
@@ -876,7 +729,7 @@ msgstr "Pārbauda dublējumus..."
 
 #: ../deja-dup/AssistantRestore.vala:271
 msgid "Restore From When?"
-msgstr ""
+msgstr "Atjaunot no kura laika?"
 
 #: ../deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
@@ -884,7 +737,7 @@ msgstr "Atjaunot uz kurieni?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:307
+#: ../deja-dup/AssistantRestore.vala:306
 msgid "Restoring:"
 msgstr "Atjauno:"
 
@@ -892,39 +745,39 @@ msgstr "Atjauno:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: ../deja-dup/AssistantRestore.vala:349
+#: ../deja-dup/AssistantRestore.vala:348
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
-#: ../deja-dup/AssistantRestore.vala:362
+#: ../deja-dup/AssistantRestore.vala:361
 msgid "No backups to restore"
 msgstr "Nav dublējumu, ko atjaunot"
 
-#: ../deja-dup/AssistantRestore.vala:439
+#: ../deja-dup/AssistantRestore.vala:437
 msgid "Original location"
 msgstr "Sākotnējā vieta"
 
-#: ../deja-dup/AssistantRestore.vala:450
+#: ../deja-dup/AssistantRestore.vala:448
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "Fails, ko atjaunot"
 msgstr[1] "Faili, ko atjaunot"
 msgstr[2] "Failu, ko atjaunot"
 
-#: ../deja-dup/AssistantRestore.vala:471
+#: ../deja-dup/AssistantRestore.vala:469
 msgid "Restore Failed"
 msgstr "Atjaunošana neizdevās"
 
-#: ../deja-dup/AssistantRestore.vala:473
+#: ../deja-dup/AssistantRestore.vala:471
 msgid "Restore Finished"
 msgstr "Atjaunošana pabeigta"
 
-#: ../deja-dup/AssistantRestore.vala:476
+#: ../deja-dup/AssistantRestore.vala:474
 msgid "Your files were successfully restored."
 msgstr "Jūsu faili tika veiksmīgi atjaunoti."
 
-#: ../deja-dup/AssistantRestore.vala:479
+#: ../deja-dup/AssistantRestore.vala:477
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Fails tika veiksmīgi atjaunots."
@@ -971,7 +824,7 @@ msgstr[0] "Meklē ap %d gadu vecus failus..."
 msgstr[1] "Meklē ap %d gadus vecus failus..."
 msgstr[2] "Meklē ap %d gadu vecus failus..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:455
+#: ../deja-dup/AssistantRestoreMissing.vala:454
 msgid "Scanning finished"
 msgstr "Beidza skenēšanu"
 
@@ -1058,20 +911,20 @@ msgstr "_Parole"
 msgid "S_how password"
 msgstr "Rā_dīt paroli"
 
-#: ../deja-dup/MountOperationAssistant.vala:82
+#: ../deja-dup/MountOperationAssistant.vala:80
 msgid "Location not available"
 msgstr "Nav pieejama vieta"
 
-#: ../deja-dup/MountOperationAssistant.vala:168
+#: ../deja-dup/MountOperationAssistant.vala:166
 msgid "Connect _anonymously"
 msgstr "Savienoties _anonīmi"
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:170
 msgid "Connect as u_ser"
 msgstr "_Savienoties kā lietotājam"
 
 #. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:215
+#: ../deja-dup/MountOperationAssistant.vala:213
 msgid "_Domain"
 msgstr "_Domēns"
 
@@ -1114,12 +967,14 @@ msgstr "Dublēšana pabeigta"
 
 #: ../deja-dup/StatusIcon.vala:129
 msgid "Backup finished"
-msgstr ""
+msgstr "Dublēšana ir pabeigta"
 
 #: ../deja-dup/StatusIcon.vala:130
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr ""
+"Ne visi faili ir veiksmīgi nodublēti. Apskatiet dialoglodziņu, lai uzzinātu "
+"vairāk."
 
 #: ../deja-dup/StatusIcon.vala:232
 msgid "Starting scheduled backup"
@@ -1209,6 +1064,165 @@ msgstr "Grafiks"
 #: ../preferences/Preferences.vala:365
 msgid "Categories"
 msgstr "Kategorijas"
+
+#: ../tools/duplicity/DuplicityJob.vala:89
+#: ../tools/duplicity/DuplicityJob.vala:173
+msgid "Paused (no network)"
+msgstr "Pauzēts (nav tīkla)"
+
+#. Was not even a file path (maybe something goofy like computer://)
+#: ../tools/duplicity/DuplicityJob.vala:444
+#, c-format
+msgid "Could not restore ‘%s’: Not a valid file location"
+msgstr "Nevarēja atjaunot ‘%s’: nav derīga faila vieta"
+
+#. Tiny backup location.  Suggest they get a larger one.
+#: ../tools/duplicity/DuplicityJob.vala:510
+msgid "Backup location is too small.  Try using one with more space."
+msgstr "Dublējuma vieta ir pārāk maza. Mēģiniet kādu ar vairāk vietas."
+
+#: ../tools/duplicity/DuplicityJob.vala:532
+msgid "Backup location does not have enough free space."
+msgstr "Dublējuma vietai nepietiek brīvās vietas."
+
+#: ../tools/duplicity/DuplicityJob.vala:551
+#: ../tools/duplicity/DuplicityJob.vala:565
+msgid "Cleaning up…"
+msgstr "Uzkopj..."
+
+#. OK, we succeeded yay!  But some files didn't make it into the backup
+#. because we couldn't read them.  So tell the user so they don't think
+#. everything is hunky dory.
+#: ../tools/duplicity/DuplicityJob.vala:661
+msgid ""
+"Could not back up the following files.  Please make sure you are able to "
+"open them."
+msgstr ""
+"Sekojošajiem failiem neizdevās izveidot dublējumu. Pārliecinieties, ka jūs "
+"varat tos atvērt."
+
+#. OK, we succeeded yay!  But some files didn't actually restore
+#. because we couldn't write to them.  So tell the user so they
+#. don't think everything is hunky dory.
+#: ../tools/duplicity/DuplicityJob.vala:677
+msgid ""
+"Could not restore the following files.  Please make sure you are able to "
+"write to them."
+msgstr ""
+"Nevarēja atjaunot sekojošos failus. Pārliecinieties, ka varat uz tiem "
+"rakstīt."
+
+#: ../tools/duplicity/DuplicityJob.vala:924
+#, c-format
+msgid "Could not restore ‘%s’: File not found in backup"
+msgstr "Nevarēja atjaunot ‘%s’: Fails nav atrast dublējumā"
+
+#. notify upper layers, if they want to do anything
+#. Duplicity tried to ask the user what the encryption password is.
+#. notify upper layers, if they want to do anything
+#: ../tools/duplicity/DuplicityJob.vala:930
+#: ../tools/duplicity/DuplicityJob.vala:1028
+#: ../tools/duplicity/DuplicityJob.vala:1032
+msgid "Bad encryption password."
+msgstr "Slikta šifrēšanas parole."
+
+#: ../tools/duplicity/DuplicityJob.vala:935
+msgid "Computer name changed"
+msgstr "Datora vārds ir mainīts"
+
+#: ../tools/duplicity/DuplicityJob.vala:935
+#, c-format
+msgid ""
+"The existing backup is of a computer named %s, but the current computer’s "
+"name is %s.  If this is unexpected, you should back up to a different "
+"location."
+msgstr ""
+"Esošais dublējums ir no datora ar nosaukumu %s, bet šī datora nosaukums ir "
+"%s. Ja tas ir negaidīti, jums vajadzētu dublēt citā vietā."
+
+#: ../tools/duplicity/DuplicityJob.vala:970
+#, c-format
+msgid "Permission denied when trying to create ‘%s’."
+msgstr "Atļauja liegta, mēģinot izveidot ‘%s’."
+
+#. assume error is on backend side
+#: ../tools/duplicity/DuplicityJob.vala:974
+#: ../tools/duplicity/DuplicityJob.vala:978
+#, c-format
+msgid "Permission denied when trying to read ‘%s’."
+msgstr "Atļauja liegta, mēģinot lasīt ‘%s’."
+
+#: ../tools/duplicity/DuplicityJob.vala:982
+#, c-format
+msgid "Permission denied when trying to delete ‘%s’."
+msgstr "Atļauja liegta, mēģinot dzēst ‘%s’."
+
+#: ../tools/duplicity/DuplicityJob.vala:989
+#, c-format
+msgid "Backup location ‘%s’ does not exist."
+msgstr "Dublējuma vieta ‘%s’ neeksistē."
+
+#: ../tools/duplicity/DuplicityJob.vala:995
+#: ../tools/duplicity/DuplicityJob.vala:1047
+msgid "No space left."
+msgstr "Vairs nav vietas."
+
+#: ../tools/duplicity/DuplicityJob.vala:1009
+msgid "Invalid ID."
+msgstr "Nederīgs ID."
+
+#: ../tools/duplicity/DuplicityJob.vala:1011
+msgid "Invalid secret key."
+msgstr "Nederīga slepenā atslēga."
+
+#: ../tools/duplicity/DuplicityJob.vala:1013
+msgid "Your Amazon Web Services account is not signed up for the S3 service."
+msgstr "Jūsu Amazon Web Services konts nav pierakstīts S3 servisam."
+
+#: ../tools/duplicity/DuplicityJob.vala:1022
+msgid "S3 bucket name is not available."
+msgstr "S3 groza nosaukums nav pieejams."
+
+#: ../tools/duplicity/DuplicityJob.vala:1036
+#, c-format
+msgid "Error reading file ‘%s’."
+msgstr "Kļūda, lasot failu ‘%s’."
+
+#: ../tools/duplicity/DuplicityJob.vala:1038
+#, c-format
+msgid "Error writing file ‘%s’."
+msgstr "Kļūda, rakstot failu ‘%s’."
+
+#: ../tools/duplicity/DuplicityJob.vala:1049
+#, c-format
+msgid "No space left in ‘%s’."
+msgstr "Uz ‘%s’ vairs nav vietas."
+
+#: ../tools/duplicity/DuplicityJob.vala:1057
+msgid "No backup files found"
+msgstr "Nav atrastu dublējuma failu"
+
+#: ../tools/duplicity/DuplicityJob.vala:1107
+msgid "Uploading…"
+msgstr "Augšupielādē..."
+
+#: ../tools/duplicity/DuplicityPlugin.vala:41
+msgid "Could not understand duplicity version."
+msgstr ""
+
+#: ../tools/duplicity/DuplicityPlugin.vala:47
+#, c-format
+msgid "Could not understand duplicity version ‘%s’."
+msgstr ""
+
+#: ../tools/duplicity/DuplicityPlugin.vala:64
+#, c-format
+msgid ""
+"Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
+"only found version %d.%d.%.2d"
+msgstr ""
+"Déjà Dup dublēšanas rīkam ir vajadzīga vismaz %d.%d.%.2d duplicity versija, "
+"bet atrasta tika tikai %d.%d.%.2d versija"
 
 #: ../widgets/ConfigDelete.vala:43
 msgid "At least a month"
@@ -1466,3 +1480,32 @@ msgstr[2] "Katras %d dienas"
 #, c-format
 msgid "Could not display %s"
 msgstr "Nevarēja attēlot %s"
+
+#~ msgid "You must specify a Rackspace container in your preferences."
+#~ msgstr "Rackspace konteineris ir jānorāda iestatījumos."
+
+#~ msgid "Could not run duplicity"
+#~ msgstr "Nevarēja palaist duplicity"
+
+#~ msgid ""
+#~ "Could not understand duplicity version.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Nevarēja saprast duplicity versiju.\n"
+#~ "\n"
+
+#, c-format
+#~ msgid ""
+#~ "Could not understand duplicity version ‘%s’.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Nevarēja saprast duplicity versiju ‘%s’.\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
+#~ msgstr ""
+#~ "Bez duplicity Déjà Dup dublēšanas rīks nevar darboties. Tas tagad aizvērsies."
+
+#~ msgid "Duplicity’s version is too old"
+#~ msgstr "Duplicity’s versija ir pārāk veca"

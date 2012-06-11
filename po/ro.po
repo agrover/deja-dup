@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-01-17 23:17-0500\n"
+"POT-Creation-Date: 2012-04-29 23:17-0700\n"
 "PO-Revision-Date: 2012-03-22 14:30+0000\n"
 "Last-Translator: Launchpad Translations Administrators "
 "<rosetta@launchpad.net>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2012-03-23 05:15+0000\n"
-"X-Generator: Launchpad (build 14996)\n"
+"X-Launchpad-Export-Date: 2012-06-06 05:32+0000\n"
+"X-Generator: Launchpad (build 15353)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -384,22 +384,22 @@ msgstr "Dosar"
 msgid "Scanning…"
 msgstr "Se scanează..."
 
-#: ../nautilus/NautilusExtension.c:176
+#: ../nautilus/NautilusExtension.c:174
 msgid "Restore Missing Files…"
 msgstr "Se restaurează fișierele pierdute..."
 
-#: ../nautilus/NautilusExtension.c:177
+#: ../nautilus/NautilusExtension.c:175
 msgid "Restore deleted files from backup"
 msgstr "Restaurează fișierele șterse din copia de siguranță"
 
-#: ../nautilus/NautilusExtension.c:219
+#: ../nautilus/NautilusExtension.c:217
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Înapoi la versiunea anterioara..."
 msgstr[1] "Înapoi la versiunile anterioare..."
 msgstr[2] "Înapoi la versiunile anterioare..."
 
-#: ../nautilus/NautilusExtension.c:223
+#: ../nautilus/NautilusExtension.c:221
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Restaurează fișierul folosind copia de siguranță"
@@ -408,7 +408,7 @@ msgstr[2] "Restaurează fișierele folosind copia de siguranță"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:447
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:433
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s pe %2$s"
@@ -437,11 +437,6 @@ msgstr "Se așteaptă o conexiune la rețea..."
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Se așteaptă ca „%s” să fie conectat..."
-
-#: ../common/BackendRackspace.vala:58
-msgid "You must specify a Rackspace container in your preferences."
-msgstr ""
-"Trebuie să specificați un container Rackspace în preferințele dumneavoastră."
 
 #: ../common/BackendRackspace.vala:69 ../widgets/ConfigLocation.vala:194
 msgid "Rackspace Cloud Files"
@@ -534,227 +529,68 @@ msgstr "Conectare la Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "Autentifică în Ubuntu One…"
 
+#: ../common/CommonUtils.vala:353
+#, c-format
+msgid "Could not find backup tool in %s.  Your installation is incomplete."
+msgstr ""
+
+#: ../common/CommonUtils.vala:355
+msgid "Could not load backup tool.  Your installation is incomplete."
+msgstr ""
+
+#: ../common/CommonUtils.vala:361
+msgid "Backup tool is broken.  Your installation is incomplete."
+msgstr ""
+
+#: ../common/CommonUtils.vala:383
+msgid "Could not start backup tool"
+msgstr ""
+
 #. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:498
+#: ../common/CommonUtils.vala:484
 #, c-format
 msgid "Home (%s)"
 msgstr "Dosar personal (%s)"
 
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:503
+#: ../common/CommonUtils.vala:489
 msgid "Home"
 msgstr "Dosar personal"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:508
+#: ../common/CommonUtils.vala:494
 msgid "Trash"
 msgstr "Coș de gunoi"
 
-#: ../common/DuplicityInfo.vala:109
-msgid "Could not run duplicity"
-msgstr "Aplicația duplicity nu poate rula"
-
-#: ../common/DuplicityInfo.vala:114
-msgid ""
-"Could not understand duplicity version.\n"
-"\n"
-msgstr ""
-"Versiunea aplicației duplicity nu poate fi interpretată.\n"
-"\n"
-
-#: ../common/DuplicityInfo.vala:116
-#, c-format
-msgid ""
-"Could not understand duplicity version ‘%s’.\n"
-"\n"
-msgstr ""
-"Versiunea „%s” a aplicației duplicity nu poate fi interpretată .\n"
-"\n"
-
-#: ../common/DuplicityInfo.vala:118
-msgid ""
-"Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
-msgstr ""
-"Fără aplicația duplicity, utilitarul pentru crearea copiilor de siguranță "
-"Déjà Dup nu poate funcționa. Se va închide acum."
-
-#: ../common/DuplicityInfo.vala:122
-msgid "Duplicity’s version is too old"
-msgstr "Versiunea aplicației duplicity este prea veche"
-
-#: ../common/DuplicityInfo.vala:123
-#, c-format
-msgid ""
-"Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
-"only found version %d.%d.%.2d"
-msgstr ""
-"Utilitarul Déjà Dup solicită cel puțin versiunea %d.%d.%.2d a aplicației "
-"duplicity, însă versiunea curentă este %d.%d.%.2d"
-
-#: ../common/Duplicity.vala:134 ../common/Duplicity.vala:189
-msgid "Paused (no network)"
-msgstr "În așteptare (nu există conexiune la rețea)"
-
-#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:409
-#: ../common/Duplicity.vala:428 ../common/Duplicity.vala:433
-#: ../common/Operation.vala:79 ../common/Operation.vala:111
-msgid "Preparing…"
-msgstr "Se pregătește..."
-
-#. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:460
-#, c-format
-msgid "Could not restore ‘%s’: Not a valid file location"
-msgstr "„%s” nu poate fi restaurat: loc nevalid pentru fișier"
-
-#. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:526
-msgid "Backup location is too small.  Try using one with more space."
-msgstr ""
-"Locul pentru păstrarea copiei de siguranță este prea mic. Încercați să "
-"utilizați unul care să ofere mai mult spațiu."
-
-#: ../common/Duplicity.vala:548
-msgid "Backup location does not have enough free space."
-msgstr ""
-"Locul pentru păstrarea copiilor de siguranță nu are spațiu liber suficient."
-
-#: ../common/Duplicity.vala:567 ../common/Duplicity.vala:581
-msgid "Cleaning up…"
-msgstr "Se curăță..."
-
-#. OK, we succeeded yay!  But some files didn't make it into the backup
-#. because we couldn't read them.  So tell the user so they don't think
-#. everything is hunky dory.
-#: ../common/Duplicity.vala:677
-msgid ""
-"Could not back up the following files.  Please make sure you are able to "
-"open them."
-msgstr ""
-"Nu pot fi create copii de rezervă pentru următoarele fișiere. Asigurați-vă "
-"că le puteți deschide."
-
-#: ../common/Duplicity.vala:710 ../common/Duplicity.vala:1092
-#: ../deja-dup/AssistantOperation.vala:545
-msgid "Failed with an unknown error."
-msgstr "Eșec cu eroare necunoscută."
-
-#: ../common/Duplicity.vala:940
-#, c-format
-msgid "Could not restore ‘%s’: File not found in backup"
-msgstr ""
-"„%s” nu poate fi restaurat: fișierul nu a fost găsit în copia de siguranță"
-
-#. notify upper layers, if they want to do anything
-#. Duplicity tried to ask the user what the encryption password is.
-#. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:946 ../common/Duplicity.vala:1044
-#: ../common/Duplicity.vala:1048
-msgid "Bad encryption password."
-msgstr "Parola de criptare este greșită."
-
-#: ../common/Duplicity.vala:951
-msgid "Computer name changed"
-msgstr "Numele calculatorului a fost schimbat"
-
-#: ../common/Duplicity.vala:951
-#, c-format
-msgid ""
-"The existing backup is of a computer named %s, but the current computer’s "
-"name is %s.  If this is unexpected, you should back up to a different "
-"location."
-msgstr ""
-"Copia de siguranță existentă este pentru un calculator denumit %s, dar "
-"numele actual al calculatorului este %s. Dacă acest lucru este o surpriză "
-"pentru dumneavoastră, ar trebui să utilizați un alt loc pentru copia de "
-"siguranță."
-
-#: ../common/Duplicity.vala:986
-#, c-format
-msgid "Permission denied when trying to create ‘%s’."
-msgstr "Permisiune refuzată la încercarea de a crea „%s”."
-
-#. assume error is on backend side
-#: ../common/Duplicity.vala:990 ../common/Duplicity.vala:994
-#, c-format
-msgid "Permission denied when trying to read ‘%s’."
-msgstr "Permisiune refuzată la încercarea de a citi „%s”."
-
-#: ../common/Duplicity.vala:998
-#, c-format
-msgid "Permission denied when trying to delete ‘%s’."
-msgstr "Permisiune refuzată la încercarea de a șterge „%s”."
-
-#: ../common/Duplicity.vala:1005
-#, c-format
-msgid "Backup location ‘%s’ does not exist."
-msgstr "Locul „%s” pentru păstrarea copiilor de siguranță nu există."
-
-#: ../common/Duplicity.vala:1011 ../common/Duplicity.vala:1063
-msgid "No space left."
-msgstr "Nu mai există spațiu."
-
-#: ../common/Duplicity.vala:1025
-msgid "Invalid ID."
-msgstr "Identificator nevalid."
-
-#: ../common/Duplicity.vala:1027
-msgid "Invalid secret key."
-msgstr "Cheie secretă nevalidă."
-
-#: ../common/Duplicity.vala:1029
-msgid "Your Amazon Web Services account is not signed up for the S3 service."
-msgstr ""
-"Contul dumneavoastră Amazon Web Services nu este înscris pentru serviciul S3."
-
-#: ../common/Duplicity.vala:1038
-msgid "S3 bucket name is not available."
-msgstr "Nume recipient S3 nevalid."
-
-#: ../common/Duplicity.vala:1052
-#, c-format
-msgid "Error reading file ‘%s’."
-msgstr "Eroare la citirea fișierului „%s”"
-
-#: ../common/Duplicity.vala:1054
-#, c-format
-msgid "Error writing file ‘%s’."
-msgstr "Eroare la scrierea fișierului „%s”."
-
-#: ../common/Duplicity.vala:1065
-#, c-format
-msgid "No space left in ‘%s’."
-msgstr "„%s” nu mai are spațiu disponibil."
-
-#: ../common/Duplicity.vala:1073
-msgid "No backup files found"
-msgstr "Nu au fost găsite fișiere care să conțină copii de siguranță"
-
-#: ../common/Duplicity.vala:1123
-msgid "Uploading…"
-msgstr "Se încarcă..."
-
-#: ../common/OperationRestore.vala:52
+#: ../common/OperationRestore.vala:51
 msgid "Restoring files…"
 msgstr "Se restaurează fișiere..."
 
-#: ../common/Operation.vala:71
+#: ../common/Operation.vala:60
 msgid "Backing up…"
 msgstr "Se creează copia de siguranță..."
 
-#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:486
+#: ../common/Operation.vala:62 ../deja-dup/AssistantRestore.vala:484
 msgid "Restoring…"
 msgstr "Se restaurează..."
 
-#: ../common/Operation.vala:75
+#: ../common/Operation.vala:64
 msgid "Checking for backups…"
 msgstr "Se verifică existența copiilor de siguranță..."
 
-#: ../common/Operation.vala:77
+#: ../common/Operation.vala:66
 msgid "Listing files…"
 msgstr "Se afișează fișierele..."
 
-#: ../common/Operation.vala:281
+#: ../common/Operation.vala:68 ../common/Operation.vala:100
+#: ../tools/duplicity/DuplicityJob.vala:386
+#: ../tools/duplicity/DuplicityJob.vala:393
+#: ../tools/duplicity/DuplicityJob.vala:412
+#: ../tools/duplicity/DuplicityJob.vala:417
+msgid "Preparing…"
+msgstr "Se pregătește..."
+
+#: ../common/Operation.vala:237
 msgid "Another backup operation is already running"
 msgstr "Rulează deja o altă operație de realizarea a unei copii de siguranță"
 
@@ -768,12 +604,12 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "Copie de si_guranță"
 
-#: ../deja-dup/AssistantBackup.vala:50
+#: ../deja-dup/AssistantBackup.vala:49
 msgid "Creating the first backup.  This may take a while."
 msgstr ""
 "Se creează prima copie de siguranță. Operația poate fi una de durată."
 
-#: ../deja-dup/AssistantBackup.vala:51
+#: ../deja-dup/AssistantBackup.vala:50
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -784,19 +620,19 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:81
+#: ../deja-dup/AssistantBackup.vala:80
 msgid "Backing up:"
 msgstr "Se realizează copia de siguranță:"
 
-#: ../deja-dup/AssistantBackup.vala:90
+#: ../deja-dup/AssistantBackup.vala:89
 msgid "Backup Failed"
 msgstr "Realizarea copiei de siguranță a eșuat"
 
-#: ../deja-dup/AssistantBackup.vala:93
+#: ../deja-dup/AssistantBackup.vala:92
 msgid "Backup Finished"
 msgstr "Procesul de creare a copiilor de rezervă s-a încheiat."
 
-#: ../deja-dup/AssistantBackup.vala:101
+#: ../deja-dup/AssistantBackup.vala:100
 msgid "Backing Up…"
 msgstr "Se creează copia de siguranță..."
 
@@ -804,19 +640,19 @@ msgstr "Se creează copia de siguranță..."
 msgid "Scanning:"
 msgstr "Se scanează..."
 
-#: ../deja-dup/AssistantOperation.vala:264
+#: ../deja-dup/AssistantOperation.vala:256
 msgid "_Details"
 msgstr "_Detalii"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Allow restoring without a password"
 msgstr "Permite rest_aurarea fără solicitarea unei parole"
 
-#: ../deja-dup/AssistantOperation.vala:318
+#: ../deja-dup/AssistantOperation.vala:310
 msgid "_Password-protect your backup"
 msgstr "Protejați copia de siguranță cu _parolă"
 
-#: ../deja-dup/AssistantOperation.vala:332
+#: ../deja-dup/AssistantOperation.vala:324
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
@@ -825,36 +661,42 @@ msgstr ""
 "Veți avea nevoie de parolă pentru a restaura copia de siguranță. Ați face "
 "bine să o notați chiar acum."
 
-#: ../deja-dup/AssistantOperation.vala:347
+#: ../deja-dup/AssistantOperation.vala:339
 msgid "E_ncryption password"
 msgstr "Parolă pe_ntru criptare"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:356
 msgid "Confir_m password"
 msgstr "Confir_mare parolă"
 
-#: ../deja-dup/AssistantOperation.vala:377
+#: ../deja-dup/AssistantOperation.vala:369
 msgid "_Show password"
 msgstr "Arată _parola"
 
-#: ../deja-dup/AssistantOperation.vala:386
+#: ../deja-dup/AssistantOperation.vala:378
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Reține parola"
 
-#: ../deja-dup/AssistantOperation.vala:455
+#: ../deja-dup/AssistantOperation.vala:447
 msgid "Summary"
 msgstr "Rezumat"
 
-#: ../deja-dup/AssistantOperation.vala:738
+#: ../deja-dup/AssistantOperation.vala:537
+#: ../tools/duplicity/DuplicityJob.vala:694
+#: ../tools/duplicity/DuplicityJob.vala:1076
+msgid "Failed with an unknown error."
+msgstr "Eșec cu eroare necunoscută."
+
+#: ../deja-dup/AssistantOperation.vala:730
 msgid "Require Password?"
 msgstr "Solicită parolă?"
 
-#: ../deja-dup/AssistantOperation.vala:740
+#: ../deja-dup/AssistantOperation.vala:732
 msgid "Encryption Password Needed"
 msgstr "Este nevoie de parola de criptare"
 
-#: ../deja-dup/AssistantOperation.vala:786
+#: ../deja-dup/AssistantOperation.vala:778
 msgid "Backup encryption password"
 msgstr "Parola pentru criptarea copiei de siguranță"
 
@@ -916,7 +758,7 @@ msgstr "Locul în care se restaurează?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:307
+#: ../deja-dup/AssistantRestore.vala:306
 msgid "Restoring:"
 msgstr "Se restaurează:"
 
@@ -924,39 +766,39 @@ msgstr "Se restaurează:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: ../deja-dup/AssistantRestore.vala:349
+#: ../deja-dup/AssistantRestore.vala:348
 #, c-format
 msgid "%x %X"
 msgstr "%x la %X"
 
-#: ../deja-dup/AssistantRestore.vala:362
+#: ../deja-dup/AssistantRestore.vala:361
 msgid "No backups to restore"
 msgstr "Nu există fișiere de restaurat"
 
-#: ../deja-dup/AssistantRestore.vala:439
+#: ../deja-dup/AssistantRestore.vala:437
 msgid "Original location"
 msgstr "Locul original"
 
-#: ../deja-dup/AssistantRestore.vala:450
+#: ../deja-dup/AssistantRestore.vala:448
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "Fișier de restaurat"
 msgstr[1] "Fișiere de restaurat"
 msgstr[2] "Fișiere de restaurat"
 
-#: ../deja-dup/AssistantRestore.vala:471
+#: ../deja-dup/AssistantRestore.vala:469
 msgid "Restore Failed"
 msgstr "Restaurarea a eșuat"
 
-#: ../deja-dup/AssistantRestore.vala:473
+#: ../deja-dup/AssistantRestore.vala:471
 msgid "Restore Finished"
 msgstr "Restaurarea s-a încheiat"
 
-#: ../deja-dup/AssistantRestore.vala:476
+#: ../deja-dup/AssistantRestore.vala:474
 msgid "Your files were successfully restored."
 msgstr "Fișierele dumneavoastră au fost restaurate cu succes."
 
-#: ../deja-dup/AssistantRestore.vala:479
+#: ../deja-dup/AssistantRestore.vala:477
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Fișierul a fost restaurat cu succes."
@@ -1003,7 +845,7 @@ msgstr[0] "Se scanează pentru fișiere vechi de un an..."
 msgstr[1] "Se scanează pentru fișiere vechi de %d ani..."
 msgstr[2] "Se scanează pentru fișiere vechi de %d de ani..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:455
+#: ../deja-dup/AssistantRestoreMissing.vala:454
 msgid "Scanning finished"
 msgstr "Scanare terminată"
 
@@ -1091,20 +933,20 @@ msgstr "_Parolă"
 msgid "S_how password"
 msgstr "Arată parola"
 
-#: ../deja-dup/MountOperationAssistant.vala:82
+#: ../deja-dup/MountOperationAssistant.vala:80
 msgid "Location not available"
 msgstr "Locul nu este disponibil"
 
-#: ../deja-dup/MountOperationAssistant.vala:168
+#: ../deja-dup/MountOperationAssistant.vala:166
 msgid "Connect _anonymously"
 msgstr "Conectare _anonimă"
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:170
 msgid "Connect as u_ser"
 msgstr "Conectare ca utili_zator"
 
 #. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:215
+#: ../deja-dup/MountOperationAssistant.vala:213
 msgid "_Domain"
 msgstr "_Domeniu"
 
@@ -1247,6 +1089,172 @@ msgstr "Planificare"
 #: ../preferences/Preferences.vala:365
 msgid "Categories"
 msgstr "Categorii"
+
+#: ../tools/duplicity/DuplicityJob.vala:89
+#: ../tools/duplicity/DuplicityJob.vala:173
+msgid "Paused (no network)"
+msgstr "În așteptare (nu există conexiune la rețea)"
+
+#. Was not even a file path (maybe something goofy like computer://)
+#: ../tools/duplicity/DuplicityJob.vala:444
+#, c-format
+msgid "Could not restore ‘%s’: Not a valid file location"
+msgstr "„%s” nu poate fi restaurat: loc nevalid pentru fișier"
+
+#. Tiny backup location.  Suggest they get a larger one.
+#: ../tools/duplicity/DuplicityJob.vala:510
+msgid "Backup location is too small.  Try using one with more space."
+msgstr ""
+"Locul pentru păstrarea copiei de siguranță este prea mic. Încercați să "
+"utilizați unul care să ofere mai mult spațiu."
+
+#: ../tools/duplicity/DuplicityJob.vala:532
+msgid "Backup location does not have enough free space."
+msgstr ""
+"Locul pentru păstrarea copiilor de siguranță nu are spațiu liber suficient."
+
+#: ../tools/duplicity/DuplicityJob.vala:551
+#: ../tools/duplicity/DuplicityJob.vala:565
+msgid "Cleaning up…"
+msgstr "Se curăță..."
+
+#. OK, we succeeded yay!  But some files didn't make it into the backup
+#. because we couldn't read them.  So tell the user so they don't think
+#. everything is hunky dory.
+#: ../tools/duplicity/DuplicityJob.vala:661
+msgid ""
+"Could not back up the following files.  Please make sure you are able to "
+"open them."
+msgstr ""
+"Nu pot fi create copii de rezervă pentru următoarele fișiere. Asigurați-vă "
+"că le puteți deschide."
+
+#. OK, we succeeded yay!  But some files didn't actually restore
+#. because we couldn't write to them.  So tell the user so they
+#. don't think everything is hunky dory.
+#: ../tools/duplicity/DuplicityJob.vala:677
+msgid ""
+"Could not restore the following files.  Please make sure you are able to "
+"write to them."
+msgstr ""
+"Următoarele fișiere nu pot fi restaurate. Asigurați-vă că aveți drepturi de "
+"scriere pentru acestea."
+
+#: ../tools/duplicity/DuplicityJob.vala:924
+#, c-format
+msgid "Could not restore ‘%s’: File not found in backup"
+msgstr ""
+"„%s” nu poate fi restaurat: fișierul nu a fost găsit în copia de siguranță"
+
+#. notify upper layers, if they want to do anything
+#. Duplicity tried to ask the user what the encryption password is.
+#. notify upper layers, if they want to do anything
+#: ../tools/duplicity/DuplicityJob.vala:930
+#: ../tools/duplicity/DuplicityJob.vala:1028
+#: ../tools/duplicity/DuplicityJob.vala:1032
+msgid "Bad encryption password."
+msgstr "Parola de criptare este greșită."
+
+#: ../tools/duplicity/DuplicityJob.vala:935
+msgid "Computer name changed"
+msgstr "Numele calculatorului a fost schimbat"
+
+#: ../tools/duplicity/DuplicityJob.vala:935
+#, c-format
+msgid ""
+"The existing backup is of a computer named %s, but the current computer’s "
+"name is %s.  If this is unexpected, you should back up to a different "
+"location."
+msgstr ""
+"Copia de siguranță existentă este pentru un calculator denumit %s, dar "
+"numele actual al calculatorului este %s. Dacă acest lucru este o surpriză "
+"pentru dumneavoastră, ar trebui să utilizați un alt loc pentru copia de "
+"siguranță."
+
+#: ../tools/duplicity/DuplicityJob.vala:970
+#, c-format
+msgid "Permission denied when trying to create ‘%s’."
+msgstr "Permisiune refuzată la încercarea de a crea „%s”."
+
+#. assume error is on backend side
+#: ../tools/duplicity/DuplicityJob.vala:974
+#: ../tools/duplicity/DuplicityJob.vala:978
+#, c-format
+msgid "Permission denied when trying to read ‘%s’."
+msgstr "Permisiune refuzată la încercarea de a citi „%s”."
+
+#: ../tools/duplicity/DuplicityJob.vala:982
+#, c-format
+msgid "Permission denied when trying to delete ‘%s’."
+msgstr "Permisiune refuzată la încercarea de a șterge „%s”."
+
+#: ../tools/duplicity/DuplicityJob.vala:989
+#, c-format
+msgid "Backup location ‘%s’ does not exist."
+msgstr "Locul „%s” pentru păstrarea copiilor de siguranță nu există."
+
+#: ../tools/duplicity/DuplicityJob.vala:995
+#: ../tools/duplicity/DuplicityJob.vala:1047
+msgid "No space left."
+msgstr "Nu mai există spațiu."
+
+#: ../tools/duplicity/DuplicityJob.vala:1009
+msgid "Invalid ID."
+msgstr "Identificator nevalid."
+
+#: ../tools/duplicity/DuplicityJob.vala:1011
+msgid "Invalid secret key."
+msgstr "Cheie secretă nevalidă."
+
+#: ../tools/duplicity/DuplicityJob.vala:1013
+msgid "Your Amazon Web Services account is not signed up for the S3 service."
+msgstr ""
+"Contul dumneavoastră Amazon Web Services nu este înscris pentru serviciul S3."
+
+#: ../tools/duplicity/DuplicityJob.vala:1022
+msgid "S3 bucket name is not available."
+msgstr "Nume recipient S3 nevalid."
+
+#: ../tools/duplicity/DuplicityJob.vala:1036
+#, c-format
+msgid "Error reading file ‘%s’."
+msgstr "Eroare la citirea fișierului „%s”"
+
+#: ../tools/duplicity/DuplicityJob.vala:1038
+#, c-format
+msgid "Error writing file ‘%s’."
+msgstr "Eroare la scrierea fișierului „%s”."
+
+#: ../tools/duplicity/DuplicityJob.vala:1049
+#, c-format
+msgid "No space left in ‘%s’."
+msgstr "„%s” nu mai are spațiu disponibil."
+
+#: ../tools/duplicity/DuplicityJob.vala:1057
+msgid "No backup files found"
+msgstr "Nu au fost găsite fișiere care să conțină copii de siguranță"
+
+#: ../tools/duplicity/DuplicityJob.vala:1107
+msgid "Uploading…"
+msgstr "Se încarcă..."
+
+#: ../tools/duplicity/DuplicityPlugin.vala:41
+msgid "Could not understand duplicity version."
+msgstr ""
+
+#: ../tools/duplicity/DuplicityPlugin.vala:47
+#, c-format
+msgid "Could not understand duplicity version ‘%s’."
+msgstr ""
+
+#: ../tools/duplicity/DuplicityPlugin.vala:64
+#, c-format
+msgid ""
+"Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
+"only found version %d.%d.%.2d"
+msgstr ""
+"Utilitarul Déjà Dup solicită cel puțin versiunea %d.%d.%.2d a aplicației "
+"duplicity, însă versiunea curentă este %d.%d.%.2d"
 
 #: ../widgets/ConfigDelete.vala:43
 msgid "At least a month"
@@ -1504,3 +1512,34 @@ msgstr[2] "La fiecare %d de zile"
 #, c-format
 msgid "Could not display %s"
 msgstr "Nu se poate afișa %s"
+
+#~ msgid "You must specify a Rackspace container in your preferences."
+#~ msgstr ""
+#~ "Trebuie să specificați un container Rackspace în preferințele dumneavoastră."
+
+#~ msgid ""
+#~ "Could not understand duplicity version.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Versiunea aplicației duplicity nu poate fi interpretată.\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
+#~ msgstr ""
+#~ "Fără aplicația duplicity, utilitarul pentru crearea copiilor de siguranță "
+#~ "Déjà Dup nu poate funcționa. Se va închide acum."
+
+#~ msgid "Could not run duplicity"
+#~ msgstr "Aplicația duplicity nu poate rula"
+
+#, c-format
+#~ msgid ""
+#~ "Could not understand duplicity version ‘%s’.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Versiunea „%s” a aplicației duplicity nu poate fi interpretată .\n"
+#~ "\n"
+
+#~ msgid "Duplicity’s version is too old"
+#~ msgstr "Versiunea aplicației duplicity este prea veche"

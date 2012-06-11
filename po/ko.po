@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-01-17 23:17-0500\n"
+"POT-Creation-Date: 2012-04-29 23:17-0700\n"
 "PO-Revision-Date: 2012-03-22 14:30+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-03-23 05:15+0000\n"
-"X-Generator: Launchpad (build 14996)\n"
+"X-Launchpad-Export-Date: 2012-06-06 05:32+0000\n"
+"X-Generator: Launchpad (build 15353)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -333,27 +333,27 @@ msgstr "폴더"
 msgid "Scanning…"
 msgstr "훑어보고 있습니다..."
 
-#: ../nautilus/NautilusExtension.c:176
+#: ../nautilus/NautilusExtension.c:174
 msgid "Restore Missing Files…"
 msgstr "빠진 파일을 되돌리고 있습니다..."
 
-#: ../nautilus/NautilusExtension.c:177
+#: ../nautilus/NautilusExtension.c:175
 msgid "Restore deleted files from backup"
 msgstr "떠둔 걸 가지고 지워진 파일을 되돌립니다."
 
-#: ../nautilus/NautilusExtension.c:219
+#: ../nautilus/NautilusExtension.c:217
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "이전 판으로 되돌립니다..."
 
-#: ../nautilus/NautilusExtension.c:223
+#: ../nautilus/NautilusExtension.c:221
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "떠둔 걸로 파일 되돌리기"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:447
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:433
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s (%2$s에 있음)"
@@ -380,10 +380,6 @@ msgstr "네트워크가 이어지기를 기다리고 있습니다..."
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "'%s'이(가) 이어지기를 기다리고 있습니다..."
-
-#: ../common/BackendRackspace.vala:58
-msgid "You must specify a Rackspace container in your preferences."
-msgstr "설정에서 Rackspace container를 정해줘야 합니다."
 
 #: ../common/BackendRackspace.vala:69 ../widgets/ConfigLocation.vala:194
 msgid "Rackspace Cloud Files"
@@ -475,213 +471,68 @@ msgstr "우분투 원과 잇기"
 msgid "Sign into Ubuntu One…"
 msgstr "우분투 원 계정 만들기..."
 
+#: ../common/CommonUtils.vala:353
+#, c-format
+msgid "Could not find backup tool in %s.  Your installation is incomplete."
+msgstr ""
+
+#: ../common/CommonUtils.vala:355
+msgid "Could not load backup tool.  Your installation is incomplete."
+msgstr ""
+
+#: ../common/CommonUtils.vala:361
+msgid "Backup tool is broken.  Your installation is incomplete."
+msgstr ""
+
+#: ../common/CommonUtils.vala:383
+msgid "Could not start backup tool"
+msgstr ""
+
 #. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:498
+#: ../common/CommonUtils.vala:484
 #, c-format
 msgid "Home (%s)"
 msgstr "집 폴더(%s)"
 
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:503
+#: ../common/CommonUtils.vala:489
 msgid "Home"
 msgstr "집 폴더"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:508
+#: ../common/CommonUtils.vala:494
 msgid "Trash"
 msgstr "쓰레기통"
 
-#: ../common/DuplicityInfo.vala:109
-msgid "Could not run duplicity"
-msgstr "duplicity를 돌릴 수 없습니다."
-
-#: ../common/DuplicityInfo.vala:114
-msgid ""
-"Could not understand duplicity version.\n"
-"\n"
-msgstr ""
-"duplicity가 몇 번째 판인지 알 수 없습니다.\n"
-"\n"
-
-#: ../common/DuplicityInfo.vala:116
-#, c-format
-msgid ""
-"Could not understand duplicity version ‘%s’.\n"
-"\n"
-msgstr ""
-"duplicity의 판인 ‘%s’을(를) 이해할 수 없습니다.\n"
-"\n"
-
-#: ../common/DuplicityInfo.vala:118
-msgid ""
-"Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
-msgstr "duplicity 없이는 데자둡 떠둠이를 돌릴 수 없습니다. 곧 닫힙니다."
-
-#: ../common/DuplicityInfo.vala:122
-msgid "Duplicity’s version is too old"
-msgstr "duplicity가 너무 옛날 판입니다."
-
-#: ../common/DuplicityInfo.vala:123
-#, c-format
-msgid ""
-"Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
-"only found version %d.%d.%.2d"
-msgstr "데자둡 베낌이는 duplicity %d.%d.%.2d가 있어야 하는데 %d.%d.%.2d밖에 찾지 못했습니다."
-
-#: ../common/Duplicity.vala:134 ../common/Duplicity.vala:189
-msgid "Paused (no network)"
-msgstr "잠시 멈춤 (네트워크 없음)"
-
-#: ../common/Duplicity.vala:402 ../common/Duplicity.vala:409
-#: ../common/Duplicity.vala:428 ../common/Duplicity.vala:433
-#: ../common/Operation.vala:79 ../common/Operation.vala:111
-msgid "Preparing…"
-msgstr "마련하고 있습니다..."
-
-#. Was not even a file path (maybe something goofy like computer://)
-#: ../common/Duplicity.vala:460
-#, c-format
-msgid "Could not restore ‘%s’: Not a valid file location"
-msgstr "‘%s’을(를) 되돌릴 수 없습니다: 파일이 있을 올바른 곳이 아닙니다."
-
-#. Tiny backup location.  Suggest they get a larger one.
-#: ../common/Duplicity.vala:526
-msgid "Backup location is too small.  Try using one with more space."
-msgstr "떠둘 곳의 크기가 너무 작습니다. 더 넓은 곳을 써보십시오."
-
-#: ../common/Duplicity.vala:548
-msgid "Backup location does not have enough free space."
-msgstr "떠둘 곳의 들이가 넉넉하지 않습니다."
-
-#: ../common/Duplicity.vala:567 ../common/Duplicity.vala:581
-msgid "Cleaning up…"
-msgstr "치우고 있습니다..."
-
-#. OK, we succeeded yay!  But some files didn't make it into the backup
-#. because we couldn't read them.  So tell the user so they don't think
-#. everything is hunky dory.
-#: ../common/Duplicity.vala:677
-msgid ""
-"Could not back up the following files.  Please make sure you are able to "
-"open them."
-msgstr ""
-
-#: ../common/Duplicity.vala:710 ../common/Duplicity.vala:1092
-#: ../deja-dup/AssistantOperation.vala:545
-msgid "Failed with an unknown error."
-msgstr "알 수 없는 에러로 하지 못했습니다."
-
-#: ../common/Duplicity.vala:940
-#, c-format
-msgid "Could not restore ‘%s’: File not found in backup"
-msgstr "‘%s’을(를) 되돌리지 못했습니다: 파일이 떠둔 곳에 없음"
-
-#. notify upper layers, if they want to do anything
-#. Duplicity tried to ask the user what the encryption password is.
-#. notify upper layers, if they want to do anything
-#: ../common/Duplicity.vala:946 ../common/Duplicity.vala:1044
-#: ../common/Duplicity.vala:1048
-msgid "Bad encryption password."
-msgstr "나쁜 암호화 열쇠글입니다."
-
-#: ../common/Duplicity.vala:951
-msgid "Computer name changed"
-msgstr "컴퓨터 이름 바뀌었음"
-
-#: ../common/Duplicity.vala:951
-#, c-format
-msgid ""
-"The existing backup is of a computer named %s, but the current computer’s "
-"name is %s.  If this is unexpected, you should back up to a different "
-"location."
-msgstr ""
-"이미 있는 떠둔 컴퓨터의 이름은 %s이나 지금의 컴퓨터 이름은 %s입니다. 만약 이게 뜻밖의 일이라면, 다른 곳에 떠두셔야 합니다."
-
-#: ../common/Duplicity.vala:986
-#, c-format
-msgid "Permission denied when trying to create ‘%s’."
-msgstr "‘%s’을(를) 만들 권한이 없습니다."
-
-#. assume error is on backend side
-#: ../common/Duplicity.vala:990 ../common/Duplicity.vala:994
-#, c-format
-msgid "Permission denied when trying to read ‘%s’."
-msgstr "‘%s’을(를) 만들 권한이 없습니다."
-
-#: ../common/Duplicity.vala:998
-#, c-format
-msgid "Permission denied when trying to delete ‘%s’."
-msgstr "‘%s’를 지울 권한이 없습니다."
-
-#: ../common/Duplicity.vala:1005
-#, c-format
-msgid "Backup location ‘%s’ does not exist."
-msgstr "떠둘 곳인 ‘%s’이(가) 없습니다."
-
-#: ../common/Duplicity.vala:1011 ../common/Duplicity.vala:1063
-msgid "No space left."
-msgstr "빈 자리가 없습니다."
-
-#: ../common/Duplicity.vala:1025
-msgid "Invalid ID."
-msgstr "쓰지 못하는 ID입니다."
-
-#: ../common/Duplicity.vala:1027
-msgid "Invalid secret key."
-msgstr "쓰지 못하는 열쇠글입니다."
-
-#: ../common/Duplicity.vala:1029
-msgid "Your Amazon Web Services account is not signed up for the S3 service."
-msgstr "당신의 Amazon Web Services 계정은 S3 서비스에 쓸 수 없습니다."
-
-#: ../common/Duplicity.vala:1038
-msgid "S3 bucket name is not available."
-msgstr "S3 bucket 이름을 쓸 수 없습니다."
-
-#: ../common/Duplicity.vala:1052
-#, c-format
-msgid "Error reading file ‘%s’."
-msgstr "파일 ‘%s’을(를) 읽을 수 없습니다."
-
-#: ../common/Duplicity.vala:1054
-#, c-format
-msgid "Error writing file ‘%s’."
-msgstr "‘%s’을(를) 쓸 수 없습니다."
-
-#: ../common/Duplicity.vala:1065
-#, c-format
-msgid "No space left in ‘%s’."
-msgstr "‘%s’에 남은 자리가 없습니다."
-
-#: ../common/Duplicity.vala:1073
-msgid "No backup files found"
-msgstr "떠둔 파일 없음"
-
-#: ../common/Duplicity.vala:1123
-msgid "Uploading…"
-msgstr "올리고 있습니다..."
-
-#: ../common/OperationRestore.vala:52
+#: ../common/OperationRestore.vala:51
 msgid "Restoring files…"
 msgstr "파일을 되돌리고 있습니다..."
 
-#: ../common/Operation.vala:71
+#: ../common/Operation.vala:60
 msgid "Backing up…"
 msgstr "뜨고 있습니다..."
 
-#: ../common/Operation.vala:73 ../deja-dup/AssistantRestore.vala:486
+#: ../common/Operation.vala:62 ../deja-dup/AssistantRestore.vala:484
 msgid "Restoring…"
 msgstr "되돌리고 있습니다..."
 
-#: ../common/Operation.vala:75
+#: ../common/Operation.vala:64
 msgid "Checking for backups…"
 msgstr "떠두는 걸 살피고 있습니다..."
 
-#: ../common/Operation.vala:77
+#: ../common/Operation.vala:66
 msgid "Listing files…"
 msgstr "파일을 나열하고 있습니다..."
 
-#: ../common/Operation.vala:281
+#: ../common/Operation.vala:68 ../common/Operation.vala:100
+#: ../tools/duplicity/DuplicityJob.vala:386
+#: ../tools/duplicity/DuplicityJob.vala:393
+#: ../tools/duplicity/DuplicityJob.vala:412
+#: ../tools/duplicity/DuplicityJob.vala:417
+msgid "Preparing…"
+msgstr "마련하고 있습니다..."
+
+#: ../common/Operation.vala:237
 msgid "Another backup operation is already running"
 msgstr "다른 뜨는 일이 이미 돌아가고 있음"
 
@@ -695,11 +546,11 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "떠두기(_B)"
 
-#: ../deja-dup/AssistantBackup.vala:50
+#: ../deja-dup/AssistantBackup.vala:49
 msgid "Creating the first backup.  This may take a while."
 msgstr "처음으로 떠두고 있습니다. 좀 기다리셔야 합니다."
 
-#: ../deja-dup/AssistantBackup.vala:51
+#: ../deja-dup/AssistantBackup.vala:50
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -707,19 +558,19 @@ msgstr "떠둔 게 깨지는 걸 막기 위해 새로 떠두고 있습니다. �
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:81
+#: ../deja-dup/AssistantBackup.vala:80
 msgid "Backing up:"
 msgstr "뜨고 있음:"
 
-#: ../deja-dup/AssistantBackup.vala:90
+#: ../deja-dup/AssistantBackup.vala:89
 msgid "Backup Failed"
 msgstr "뜨지 못했음"
 
-#: ../deja-dup/AssistantBackup.vala:93
+#: ../deja-dup/AssistantBackup.vala:92
 msgid "Backup Finished"
 msgstr ""
 
-#: ../deja-dup/AssistantBackup.vala:101
+#: ../deja-dup/AssistantBackup.vala:100
 msgid "Backing Up…"
 msgstr "뜨고 있습니다..."
 
@@ -727,55 +578,61 @@ msgstr "뜨고 있습니다..."
 msgid "Scanning:"
 msgstr "훑어보고 있음:"
 
-#: ../deja-dup/AssistantOperation.vala:264
+#: ../deja-dup/AssistantOperation.vala:256
 msgid "_Details"
 msgstr "자세히(_D)"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:304
 msgid "_Allow restoring without a password"
 msgstr "열쇠글 없이 되돌릴 수 있음"
 
-#: ../deja-dup/AssistantOperation.vala:318
+#: ../deja-dup/AssistantOperation.vala:310
 msgid "_Password-protect your backup"
 msgstr "떠둔 걸 지킬 열쇠글(_P)"
 
-#: ../deja-dup/AssistantOperation.vala:332
+#: ../deja-dup/AssistantOperation.vala:324
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr "파일을 되돌리려면 열쇠글이 있어야 합니다. 여기에 써넣을 수 있습니다."
 
-#: ../deja-dup/AssistantOperation.vala:347
+#: ../deja-dup/AssistantOperation.vala:339
 msgid "E_ncryption password"
 msgstr "암호화 열쇠글(_N)"
 
-#: ../deja-dup/AssistantOperation.vala:364
+#: ../deja-dup/AssistantOperation.vala:356
 msgid "Confir_m password"
 msgstr "열쇠글 확인(_M)"
 
-#: ../deja-dup/AssistantOperation.vala:377
+#: ../deja-dup/AssistantOperation.vala:369
 msgid "_Show password"
 msgstr "열쇠글 보기(_S)"
 
-#: ../deja-dup/AssistantOperation.vala:386
+#: ../deja-dup/AssistantOperation.vala:378
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "열쇠글 기억(_R)"
 
-#: ../deja-dup/AssistantOperation.vala:455
+#: ../deja-dup/AssistantOperation.vala:447
 msgid "Summary"
 msgstr "간단히"
 
-#: ../deja-dup/AssistantOperation.vala:738
+#: ../deja-dup/AssistantOperation.vala:537
+#: ../tools/duplicity/DuplicityJob.vala:694
+#: ../tools/duplicity/DuplicityJob.vala:1076
+msgid "Failed with an unknown error."
+msgstr "알 수 없는 에러로 하지 못했습니다."
+
+#: ../deja-dup/AssistantOperation.vala:730
 msgid "Require Password?"
 msgstr "열쇠글을 달라고 할까요?"
 
-#: ../deja-dup/AssistantOperation.vala:740
+#: ../deja-dup/AssistantOperation.vala:732
 msgid "Encryption Password Needed"
 msgstr "암호화 열쇠글이 있어야 합니다."
 
-#: ../deja-dup/AssistantOperation.vala:786
+#: ../deja-dup/AssistantOperation.vala:778
 msgid "Backup encryption password"
 msgstr "떠두기 암호화 열쇠글"
 
@@ -837,7 +694,7 @@ msgstr "어디로 되돌리겠습니까?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:307
+#: ../deja-dup/AssistantRestore.vala:306
 msgid "Restoring:"
 msgstr "되돌리고 있음:"
 
@@ -845,37 +702,37 @@ msgstr "되돌리고 있음:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: ../deja-dup/AssistantRestore.vala:349
+#: ../deja-dup/AssistantRestore.vala:348
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
-#: ../deja-dup/AssistantRestore.vala:362
+#: ../deja-dup/AssistantRestore.vala:361
 msgid "No backups to restore"
 msgstr "되돌릴 때 쓸 떠둔 게 없음"
 
-#: ../deja-dup/AssistantRestore.vala:439
+#: ../deja-dup/AssistantRestore.vala:437
 msgid "Original location"
 msgstr "원래 곳"
 
-#: ../deja-dup/AssistantRestore.vala:450
+#: ../deja-dup/AssistantRestore.vala:448
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "되돌릴 파일"
 
-#: ../deja-dup/AssistantRestore.vala:471
+#: ../deja-dup/AssistantRestore.vala:469
 msgid "Restore Failed"
 msgstr "되돌리지 못했음"
 
-#: ../deja-dup/AssistantRestore.vala:473
+#: ../deja-dup/AssistantRestore.vala:471
 msgid "Restore Finished"
 msgstr "모두 되돌림"
 
-#: ../deja-dup/AssistantRestore.vala:476
+#: ../deja-dup/AssistantRestore.vala:474
 msgid "Your files were successfully restored."
 msgstr "파일을 모두 잘 되돌렸습니다."
 
-#: ../deja-dup/AssistantRestore.vala:479
+#: ../deja-dup/AssistantRestore.vala:477
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "파일을 잘 되돌렸습니다."
@@ -916,7 +773,7 @@ msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
 msgstr[0] "%d 해 전까지의 파일을 훑어보고 있습니다..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:455
+#: ../deja-dup/AssistantRestoreMissing.vala:454
 msgid "Scanning finished"
 msgstr "모두 훑어봄"
 
@@ -1002,20 +859,20 @@ msgstr "열쇠글(_P)"
 msgid "S_how password"
 msgstr "열쇠글 보이기(_S)"
 
-#: ../deja-dup/MountOperationAssistant.vala:82
+#: ../deja-dup/MountOperationAssistant.vala:80
 msgid "Location not available"
 msgstr "쓸 수 없는 곳임"
 
-#: ../deja-dup/MountOperationAssistant.vala:168
+#: ../deja-dup/MountOperationAssistant.vala:166
 msgid "Connect _anonymously"
 msgstr "익명으로 잇기(_A)"
 
-#: ../deja-dup/MountOperationAssistant.vala:172
+#: ../deja-dup/MountOperationAssistant.vala:170
 msgid "Connect as u_ser"
 msgstr "쓰는이로 잇기(_U)"
 
 #. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:215
+#: ../deja-dup/MountOperationAssistant.vala:213
 msgid "_Domain"
 msgstr "도메인(_D)"
 
@@ -1152,6 +1009,158 @@ msgstr "스케쥴"
 #: ../preferences/Preferences.vala:365
 msgid "Categories"
 msgstr "갈래"
+
+#: ../tools/duplicity/DuplicityJob.vala:89
+#: ../tools/duplicity/DuplicityJob.vala:173
+msgid "Paused (no network)"
+msgstr "잠시 멈춤 (네트워크 없음)"
+
+#. Was not even a file path (maybe something goofy like computer://)
+#: ../tools/duplicity/DuplicityJob.vala:444
+#, c-format
+msgid "Could not restore ‘%s’: Not a valid file location"
+msgstr "‘%s’을(를) 되돌릴 수 없습니다: 파일이 있을 올바른 곳이 아닙니다."
+
+#. Tiny backup location.  Suggest they get a larger one.
+#: ../tools/duplicity/DuplicityJob.vala:510
+msgid "Backup location is too small.  Try using one with more space."
+msgstr "떠둘 곳의 크기가 너무 작습니다. 더 넓은 곳을 써보십시오."
+
+#: ../tools/duplicity/DuplicityJob.vala:532
+msgid "Backup location does not have enough free space."
+msgstr "떠둘 곳의 들이가 넉넉하지 않습니다."
+
+#: ../tools/duplicity/DuplicityJob.vala:551
+#: ../tools/duplicity/DuplicityJob.vala:565
+msgid "Cleaning up…"
+msgstr "치우고 있습니다..."
+
+#. OK, we succeeded yay!  But some files didn't make it into the backup
+#. because we couldn't read them.  So tell the user so they don't think
+#. everything is hunky dory.
+#: ../tools/duplicity/DuplicityJob.vala:661
+msgid ""
+"Could not back up the following files.  Please make sure you are able to "
+"open them."
+msgstr ""
+
+#. OK, we succeeded yay!  But some files didn't actually restore
+#. because we couldn't write to them.  So tell the user so they
+#. don't think everything is hunky dory.
+#: ../tools/duplicity/DuplicityJob.vala:677
+msgid ""
+"Could not restore the following files.  Please make sure you are able to "
+"write to them."
+msgstr ""
+
+#: ../tools/duplicity/DuplicityJob.vala:924
+#, c-format
+msgid "Could not restore ‘%s’: File not found in backup"
+msgstr "‘%s’을(를) 되돌리지 못했습니다: 파일이 떠둔 곳에 없음"
+
+#. notify upper layers, if they want to do anything
+#. Duplicity tried to ask the user what the encryption password is.
+#. notify upper layers, if they want to do anything
+#: ../tools/duplicity/DuplicityJob.vala:930
+#: ../tools/duplicity/DuplicityJob.vala:1028
+#: ../tools/duplicity/DuplicityJob.vala:1032
+msgid "Bad encryption password."
+msgstr "나쁜 암호화 열쇠글입니다."
+
+#: ../tools/duplicity/DuplicityJob.vala:935
+msgid "Computer name changed"
+msgstr "컴퓨터 이름 바뀌었음"
+
+#: ../tools/duplicity/DuplicityJob.vala:935
+#, c-format
+msgid ""
+"The existing backup is of a computer named %s, but the current computer’s "
+"name is %s.  If this is unexpected, you should back up to a different "
+"location."
+msgstr ""
+"이미 있는 떠둔 컴퓨터의 이름은 %s이나 지금의 컴퓨터 이름은 %s입니다. 만약 이게 뜻밖의 일이라면, 다른 곳에 떠두셔야 합니다."
+
+#: ../tools/duplicity/DuplicityJob.vala:970
+#, c-format
+msgid "Permission denied when trying to create ‘%s’."
+msgstr "‘%s’을(를) 만들 권한이 없습니다."
+
+#. assume error is on backend side
+#: ../tools/duplicity/DuplicityJob.vala:974
+#: ../tools/duplicity/DuplicityJob.vala:978
+#, c-format
+msgid "Permission denied when trying to read ‘%s’."
+msgstr "‘%s’을(를) 만들 권한이 없습니다."
+
+#: ../tools/duplicity/DuplicityJob.vala:982
+#, c-format
+msgid "Permission denied when trying to delete ‘%s’."
+msgstr "‘%s’를 지울 권한이 없습니다."
+
+#: ../tools/duplicity/DuplicityJob.vala:989
+#, c-format
+msgid "Backup location ‘%s’ does not exist."
+msgstr "떠둘 곳인 ‘%s’이(가) 없습니다."
+
+#: ../tools/duplicity/DuplicityJob.vala:995
+#: ../tools/duplicity/DuplicityJob.vala:1047
+msgid "No space left."
+msgstr "빈 자리가 없습니다."
+
+#: ../tools/duplicity/DuplicityJob.vala:1009
+msgid "Invalid ID."
+msgstr "쓰지 못하는 ID입니다."
+
+#: ../tools/duplicity/DuplicityJob.vala:1011
+msgid "Invalid secret key."
+msgstr "쓰지 못하는 열쇠글입니다."
+
+#: ../tools/duplicity/DuplicityJob.vala:1013
+msgid "Your Amazon Web Services account is not signed up for the S3 service."
+msgstr "당신의 Amazon Web Services 계정은 S3 서비스에 쓸 수 없습니다."
+
+#: ../tools/duplicity/DuplicityJob.vala:1022
+msgid "S3 bucket name is not available."
+msgstr "S3 bucket 이름을 쓸 수 없습니다."
+
+#: ../tools/duplicity/DuplicityJob.vala:1036
+#, c-format
+msgid "Error reading file ‘%s’."
+msgstr "파일 ‘%s’을(를) 읽을 수 없습니다."
+
+#: ../tools/duplicity/DuplicityJob.vala:1038
+#, c-format
+msgid "Error writing file ‘%s’."
+msgstr "‘%s’을(를) 쓸 수 없습니다."
+
+#: ../tools/duplicity/DuplicityJob.vala:1049
+#, c-format
+msgid "No space left in ‘%s’."
+msgstr "‘%s’에 남은 자리가 없습니다."
+
+#: ../tools/duplicity/DuplicityJob.vala:1057
+msgid "No backup files found"
+msgstr "떠둔 파일 없음"
+
+#: ../tools/duplicity/DuplicityJob.vala:1107
+msgid "Uploading…"
+msgstr "올리고 있습니다..."
+
+#: ../tools/duplicity/DuplicityPlugin.vala:41
+msgid "Could not understand duplicity version."
+msgstr ""
+
+#: ../tools/duplicity/DuplicityPlugin.vala:47
+#, c-format
+msgid "Could not understand duplicity version ‘%s’."
+msgstr ""
+
+#: ../tools/duplicity/DuplicityPlugin.vala:64
+#, c-format
+msgid ""
+"Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
+"only found version %d.%d.%.2d"
+msgstr "데자둡 베낌이는 duplicity %d.%d.%.2d가 있어야 하는데 %d.%d.%.2d밖에 찾지 못했습니다."
 
 #: ../widgets/ConfigDelete.vala:43
 msgid "At least a month"
@@ -1381,3 +1390,31 @@ msgstr[0] "매 %d일"
 #, c-format
 msgid "Could not display %s"
 msgstr "%s을(를) 보일 수 없음"
+
+#~ msgid "You must specify a Rackspace container in your preferences."
+#~ msgstr "설정에서 Rackspace container를 정해줘야 합니다."
+
+#~ msgid ""
+#~ "Could not understand duplicity version.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "duplicity가 몇 번째 판인지 알 수 없습니다.\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
+#~ msgstr "duplicity 없이는 데자둡 떠둠이를 돌릴 수 없습니다. 곧 닫힙니다."
+
+#~ msgid "Could not run duplicity"
+#~ msgstr "duplicity를 돌릴 수 없습니다."
+
+#, c-format
+#~ msgid ""
+#~ "Could not understand duplicity version ‘%s’.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "duplicity의 판인 ‘%s’을(를) 이해할 수 없습니다.\n"
+#~ "\n"
+
+#~ msgid "Duplicity’s version is too old"
+#~ msgstr "duplicity가 너무 옛날 판입니다."
