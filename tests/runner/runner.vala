@@ -98,7 +98,7 @@ public enum Mode {
   LIST,
 }
 
-public string default_args(Mode mode = Mode.NONE, bool encrypted = false, string extra = "")
+string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = false, string extra = "")
 {
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
 
@@ -122,6 +122,9 @@ public string default_args(Mode mode = Mode.NONE, bool encrypted = false, string
     enc_str = "--no-encryption ";
 
   string args = "";
+
+  if (br.is_full && !br.is_first && (mode == Mode.BACKUP || mode == Mode.DRY))
+    args += "full ";
 
   if (mode == Mode.STATUS || mode == Mode.RESTORE_STATUS)
     args += "collection-status ";
@@ -166,7 +169,8 @@ class BackupRunner : Object
   public string? error_str = null;
   public string? error_detail = null;
   public OpCallback? callback = null;
-  public bool is_full = true;
+  public bool is_full = false; // we don't often give INFO 3 which triggers is_full()
+  public bool is_first = false;
 
   public void run()
   {
@@ -182,6 +186,7 @@ class BackupRunner : Object
       loop.quit();
     });
 
+    bool checked_is_full = false;
     op.raise_error.connect((str, det) => {
       Test.message("Error: %s, %s", str, det);
       if (error_str != str)
@@ -203,10 +208,13 @@ class BackupRunner : Object
     op.question.connect((title, msg) => {
       Test.message("Question asked: %s, %s", title, msg);
     });
-    op.is_full.connect((full) => {
-      Test.message("Is full? %d", (int)full);
-      if (is_full != full)
-        warning("IsFull didn't match; expected %d, got %d", (int) is_full, (int) full);
+    op.is_full.connect((first) => {
+      Test.message("Is full; is first: %d", (int)first);
+      if (!is_full)
+        warning("IsFull was not expected");
+      if (is_first != first)
+        warning("IsFirst didn't match; expected %d, got %d", (int) is_first, (int) first);
+      checked_is_full = true;
     });
 
     op.start();
@@ -218,6 +226,11 @@ class BackupRunner : Object
     }
     loop.run();
 
+    if (!checked_is_full && is_full) {
+      warning("IsFull was expected");
+      if (is_first)
+        warning("IsFirst was expected");
+    }
     if (error_str != null)
       warning("Error str didn't match; expected %s, never got error", error_str);
     if (error_detail != null)
@@ -252,6 +265,19 @@ string replace_keywords(string in)
   return in.replace("@HOME@", home);
 }
 
+string run_script(string in)
+{
+  string output;
+  try {
+    Process.spawn_sync(null, {"/bin/sh", "-c", in}, null, 0, null, out output, null, null);
+  }
+  catch (SpawnError e) {
+    warning(e.message);
+    assert_not_reached();
+  }
+  return output;
+}
+
 void process_operation_block(KeyFile keyfile, string group, BackupRunner br) throws Error
 {
   var type = keyfile.get_string(group, "Type");
@@ -267,6 +293,8 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
     br.cancelled = keyfile.get_boolean(group, "Canceled");
   if (keyfile.has_key(group, "IsFull"))
     br.is_full = keyfile.get_boolean(group, "IsFull");
+  if (keyfile.has_key(group, "IsFirst"))
+    br.is_first = keyfile.get_boolean(group, "IsFirst");
   if (keyfile.has_key(group, "Detail"))
     br.detail = replace_keywords(keyfile.get_string(group, "Detail"));
   if (keyfile.has_key(group, "Error"))
@@ -300,6 +328,8 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
     }
     if (keyfile.has_key(group, "Output") && keyfile.get_boolean(group, "Output"))
       outputscript = replace_keywords(keyfile.get_comment(group, "Output"));
+    else if (keyfile.has_key(group, "OutputScript") && keyfile.get_boolean(group, "OutputScript"))
+      outputscript = run_script(replace_keywords(keyfile.get_comment(group, "OutputScript")));
     if (keyfile.has_key(group, "Stop"))
       stop = keyfile.get_boolean(group, "Stop");
   }
@@ -321,7 +351,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
   else
     assert_not_reached();
 
-  var dupscript = "ARGS: " + default_args(mode, encrypted, extra_args);
+  var dupscript = "ARGS: " + default_args(br, mode, encrypted, extra_args);
 
   if (cancel) {
     dupscript += "\n" + "DELAY: 10";
