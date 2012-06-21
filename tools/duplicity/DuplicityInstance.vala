@@ -130,10 +130,10 @@ internal class DuplicityInstance : Object
     
     // Run as root if needed
     if (as_root &&
-        Environment.find_program_in_path("gksu") != null &&
+        Environment.find_program_in_path("pkexec") != null &&
         Environment.find_program_in_path("sh") != null) {
-      // gksu has a restrictive command line maximum length.  To work around
-      // that, we stick the duplicity command inside a temporary script.
+      // pkexec does not preserve environment variables, so we need to stuff
+      // the ones we care about in a shell script.
 
       string scriptname;
       var scriptfd = FileUtils.open_tmp(Config.PACKAGE + "-XXXXXX", out scriptname);
@@ -160,12 +160,9 @@ internal class DuplicityInstance : Object
       
       argv = new List<string>(); // reset
       
-      // gksu command must be one string
-      argv.prepend("sh %s".printf(Shell.quote(scriptname)));
-      
-      argv.prepend(Environment.get_application_name());
-      argv.prepend("--description");
-      argv.prepend("gksu");
+      argv.prepend(scriptname);
+      argv.prepend("sh");
+      argv.prepend("pkexec");
     }
     
     string[] real_argv = new string[argv.length()];
@@ -577,8 +574,8 @@ internal class DuplicityInstance : Object
     bool cancelled = !Process.if_exited(status);
     
     if (Process.if_exited(status) && !processed_a_message &&
-        (Process.exit_status(status) == 255 || // gksu returns 255 on cancel
-         Process.exit_status(status) == 3)) // and 3 on bad password
+        (Process.exit_status(status) == 126 || // pkexec returns 126 on cancel
+         Process.exit_status(status) == 127))  // and 127 on bad password
       cancelled = true;
 
     if (Process.if_exited(status))

@@ -154,7 +154,7 @@ def setup(root_prompt = False):
 def cleanup(success):
   global temp_dir, cleanup_dirs, cleanup_mounts, cleanup_pids, cleanup_envs
   for d in cleanup_mounts:
-    os.system('gksudo "umount %s"' % d)
+    os.system('pkexec umount %s' % d)
   for d in cleanup_dirs:
     os.system("rm -rf %s" % d)
   for p in cleanup_pids:
@@ -262,7 +262,7 @@ def create_mount(path=None, mtype='ext', size=20):
     args = ',umask=0000'
   else:
     args = ''
-  if os.system('gksudo "mount -t %s -o loop,sizelimit=%d%s %s %s"' % (mtype, size*1024*1024, args, path, mount_dir)):
+  if os.system('pkexec mount -t %s -o loop,sizelimit=%d%s %s %s' % (mtype, size*1024*1024, args, path, mount_dir)):
     raise Exception("Couldn't mount")
   cleanup_mounts += [mount_dir]
   return mount_dir
