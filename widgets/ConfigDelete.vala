@@ -23,9 +23,6 @@ namespace DejaDup {
 
 public class ConfigDelete : ConfigChoice
 {
-  public static const int MONTHLY = 28;
-  public static const int BIMONTHLY = 28*2;
-  public static const int TRIMONTHLY = 28*3;
   public static const int SEMIANNUALLY = 365/2;
   public static const int ANNUALLY = 365;
   public static int FOREVER = int.MAX;
@@ -40,9 +37,6 @@ public class ConfigDelete : ConfigChoice
     Gtk.TreeIter iter;
     int i = 0;
     
-    store.insert_with_values(out iter, i++, 0, _("At least a month"), 1, MONTHLY);
-    store.insert_with_values(out iter, i++, 0, _("At least two months"), 1, BIMONTHLY);
-    store.insert_with_values(out iter, i++, 0, _("At least three months"), 1, TRIMONTHLY);
     store.insert_with_values(out iter, i++, 0, _("At least six months"), 1, SEMIANNUALLY);
     store.insert_with_values(out iter, i++, 0, _("At least a year"), 1, ANNUALLY);
     store.insert_with_values(out iter, i++, 0, _("Forever"), 1, FOREVER);
