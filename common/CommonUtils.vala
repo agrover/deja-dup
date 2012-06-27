@@ -33,6 +33,7 @@ public const string PROMPT_CHECK_KEY = "prompt-check";
 public const string PERIODIC_KEY = "periodic";
 public const string PERIODIC_PERIOD_KEY = "periodic-period";
 public const string DELETE_AFTER_KEY = "delete-after";
+public const string FULL_BACKUP_PERIOD_KEY = "full-backup-period";
 
 public errordomain BackupError {
   BAD_CONFIG,
@@ -501,43 +502,22 @@ public async string get_nickname (File f)
 
 public int get_full_backup_threshold()
 {
-  int threshold = 7 * 6; // default to 6 weeks
   // So, there are a few factors affecting how often to make a fresh full
   // backup:
+  //
   // 1) The longer we wait, the more we're filling up the backend with 
   //    iterations on the same crap.
   // 2) The longer we wait, there's a higher risk that some bit will flip
-  //    and the whole backup is toast.
+  //    and the whole incremental chain afterwards is toast.
   // 3) The longer we wait, the less annoying we are, since full backups 
   //    take a long time.
-  // So we try to do them at reasonable times.  But almost nobody should be
-  // going longer than 6 months without a full backup.  Further, we want
-  // to try to keep at least 2 full backups around, so also don't allow a
-  // longer full threshold than half the delete age.
-  // 
-  // 'daily' gets 2 weeks: 1 * 12 => 2 * 7
-  // 'weekly' gets 3 months: 7 * 12
-  // 'biweekly' gets 6 months: 14 * 12
-  // 'monthly' gets 6 months: 28 * 12 => 24 * 7
-  var max = 24 * 7; // 6 months
-  var min = 4 * 7; // 4 weeks
-  var scale = 12;
-  var min_fulls = 2;
-  
+  //
+  // We default to 3 months.
+
   var settings = get_settings();
-  var delete_age = settings.get_int(DELETE_AFTER_KEY);
-  if (delete_age > 0)
-    max = int.max(int.min(delete_age/min_fulls, max), min);
-  
-  var periodic = settings.get_boolean(PERIODIC_KEY);
-  if (periodic) {
-    var period = settings.get_int(PERIODIC_PERIOD_KEY);
-    threshold = period * scale;
-    threshold.clamp(min, max);
-  }
-  else
-    threshold = max;
-  
+  var threshold = settings.get_int(FULL_BACKUP_PERIOD_KEY);
+  if (threshold < 1)
+    threshold = 84; // 3 months
   return threshold;
 }
 

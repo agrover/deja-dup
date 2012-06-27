@@ -1,0 +1,15 @@
+# Confirm that we are doing the right thing with full backup thresholds.
+# Specifically, that when we are right over the threshold, we do a full backup.
+
+[Operation]
+Type=backup
+IsFull=true
+
+[Duplicity]
+Runs=status;dry;backup;
+
+[Duplicity status]
+#echo "INFO 3"
+#echo "chain-complete"
+#echo " full $(date --utc --date='91 days ago' +%Y%m%dT%H%M%SZ) 1 enc"
+OutputScript=true

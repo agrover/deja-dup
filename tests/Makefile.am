@@ -29,7 +29,6 @@ AUTO_TESTS = \
 	backup/delete \
 	backup/encrypt \
 	backup/exclude \
-	backup/full \
 	backup/mkdir \
 	backup/permissions \
 	backup/quiescent \
