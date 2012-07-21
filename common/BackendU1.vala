@@ -153,6 +153,10 @@ public class BackendU1 : Backend
 
   public override string get_location(ref bool as_root)
   {
+    // The UI backend for duplicity needs to talk to our session dbus, but it
+    // can't as root.
+    as_root = false;
+
     var settings = get_settings(U1_ROOT);
     var folder = get_folder_key(settings, U1_FOLDER_KEY);
     return "u1+http://%s".printf(folder);
