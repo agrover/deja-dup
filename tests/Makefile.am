@@ -30,7 +30,6 @@ AUTO_TESTS = \
 	backup/encrypt \
 	backup/exclude \
 	backup/mkdir \
-	backup/permissions \
 	backup/quiescent \
 	backup/spaces \
 	backup/symlinks \
