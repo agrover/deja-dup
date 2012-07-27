@@ -163,6 +163,7 @@ class BackupRunner : Object
 {
   public delegate void OpCallback (DejaDup.Operation op);
   public DejaDup.Operation op = null;
+  public string? init_error = null;
   public bool success = true;
   public bool cancelled = false;
   public string? detail = null;
@@ -174,6 +175,15 @@ class BackupRunner : Object
 
   public void run()
   {
+    string header, msg;
+    if (!DejaDup.initialize(out header, out msg)) {
+      if (header + "\n" + msg != init_error)
+        warning("Init error didn't match; expected '%s', got '%s'", init_error, msg);
+      return;
+    }
+    if (init_error != null)
+      warning("Init error '%s' was expected", init_error);
+
     var loop = new MainLoop(null);
     op.done.connect((op, s, c, d) => {
       Test.message("Done: %d, %d, %s", (int)s, (int)c, d);
@@ -297,6 +307,8 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
     br.is_first = keyfile.get_boolean(group, "IsFirst");
   if (keyfile.has_key(group, "Detail"))
     br.detail = replace_keywords(keyfile.get_string(group, "Detail"));
+  if (keyfile.has_key(group, "InitError"))
+    br.init_error = keyfile.get_string(group, "InitError");
   if (keyfile.has_key(group, "Error"))
     br.error_str = keyfile.get_string(group, "Error");
   if (keyfile.has_key(group, "ErrorDetail"))
@@ -375,9 +387,16 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
 
 void process_duplicity_block(KeyFile keyfile, string group, BackupRunner br) throws Error
 {
-  var runs = keyfile.get_string_list(group, "Runs");
-  foreach (var run in runs)
-    process_duplicity_run_block(keyfile, run, br);
+  var version = "9.9.99";
+  if (keyfile.has_key(group, "Version"))
+    version = keyfile.get_string(group, "Version");
+  add_to_mockscript("ARGS: --version\n\nduplicity " + version + "\n");
+
+  if (keyfile.has_key(group, "Runs")) {
+    var runs = keyfile.get_string_list(group, "Runs");
+    foreach (var run in runs)
+      process_duplicity_run_block(keyfile, run, br);
+  }
 }
 
 void backup_run()
@@ -400,6 +419,7 @@ void backup_run()
     br.run();
   }
   catch (Error e) {
+    warning("%s\n", e.message);
     assert_not_reached();
   }
 }

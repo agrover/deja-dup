@@ -34,7 +34,6 @@ AUTO_TESTS = \
 	backup/quiescent \
 	backup/spaces \
 	backup/symlinks \
-	basic/badversion \
 	restore/cycle \
 	prefs/s3-folder \
 	prefs/ssh-to-file \
@@ -113,7 +112,6 @@ XXXcheck: prep
 
 EXTRA_DIST = \
 	backup \
-	basic \
 	prefs \
 	restore \
 	base.py \

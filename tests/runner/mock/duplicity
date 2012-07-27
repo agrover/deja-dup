@@ -46,10 +46,6 @@
 
 import sys, os, shlex, getpass, time
 
-if sys.argv[1] == '--version':
-  print 'duplicity 9.9.99'
-  sys.exit(0)
-
 if not os.path.exists(os.environ['DEJA_DUP_TEST_MOCKSCRIPT']):
   print >> logfd, "TESTFAIL: no mockscript"
   sys.exit(-1)
