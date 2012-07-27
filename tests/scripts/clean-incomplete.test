@@ -1,0 +1,13 @@
+# Make sure we clean junk left over from previous runs.
+# Must provide warning during backup, since that's the only time we listen
+# for it.
+
+[Operation]
+Type=backup
+
+[Duplicity]
+Runs=status;dry;backup 1;cleanup;backup 2;
+
+[Duplicity backup 1]
+#WARNING 2
+Output=true
