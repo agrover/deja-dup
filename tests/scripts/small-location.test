@@ -1,0 +1,14 @@
+# Tests that we give appropriate message if backup location is just too small.
+# Assume that 999TB is bigger than any disk we will run on.
+
+[Operation]
+Type=backup
+Success=false
+Error=Backup location is too small.  Try using one with more space.
+
+[Duplicity]
+Runs=status;dry;
+
+[Duplicity dry]
+#INFO 2 999999999999999
+Output=true

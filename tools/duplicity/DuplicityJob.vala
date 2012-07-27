@@ -508,6 +508,7 @@ internal class DuplicityJob : DejaDup.ToolJob
     if (total < progress_total) {
         // Tiny backup location.  Suggest they get a larger one.
         show_error(_("Backup location is too small.  Try using one with more space."));
+        done(false, false, null);
         return;
     }
 
@@ -530,6 +531,7 @@ internal class DuplicityJob : DejaDup.ToolJob
       }
       else {
         show_error(_("Backup location does not have enough free space."));
+        done(false, false, null);
         return;
       }
     }
