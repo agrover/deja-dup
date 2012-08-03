@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-04-29 23:17-0700\n"
-"PO-Revision-Date: 2012-06-10 19:38+0000\n"
+"POT-Creation-Date: 2012-07-20 19:31-0400\n"
+"PO-Revision-Date: 2012-07-31 18:02+0000\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2012-06-11 05:13+0000\n"
-"X-Generator: Launchpad (build 15376)\n"
+"X-Launchpad-Export-Date: 2012-08-01 05:29+0000\n"
+"X-Generator: Launchpad (build 15719)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -34,7 +34,7 @@ msgstr "Varnostne kopije"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:88
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
 #: ../deja-dup/main.vala:78 ../preferences/Preferences.vala:88
 #, c-format
 msgid "Déjà Dup Backup Tool"
@@ -202,10 +202,22 @@ msgstr ""
 "pomeni trajno shranjevanje."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
+msgid "How long to wait between full backups"
+msgstr "Kako dolg naj bo časovni razmik med ustvarjanjem varnostnih kopij."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+msgid ""
+"Déjà Dup needs to occasionally make fresh full backups. This is the number "
+"of days to wait between full backups."
+msgstr ""
+"Program Déjà Dup občasno ustvari polne varnostne kopije. Nastavitev določa "
+"število dni med njimi."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "Type of location to store backup"
 msgstr "Vrsta mesta za shranjevanje varnostnih kopij"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
@@ -213,21 +225,21 @@ msgstr ""
 "Vrsta mesta ustvarjanja varnostnih kopij. Možnost ‘samodejno’ določa "
 "privzeto mesto med razpoložljivimi možnostmi."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid "Amazon S3 Access Key ID"
-msgstr "Amazon S3 dostopni ID"
+msgstr "ID ključa za dostop na Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Določilnik vašega ključa Amazon S3 za dostop. Obnaša se kot vaše uporabniško "
 "ime S3."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "The Amazon S3 bucket name to use"
 msgstr "Ime Amazon S3 za uporabo"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -236,11 +248,11 @@ msgstr ""
 "vedra že obstajajo. Uporabite lahko le vejavne nizi imen gostitelja."
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The Amazon S3 folder"
 msgstr "Mapa Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
@@ -248,11 +260,11 @@ msgstr ""
 "Izbirno ime mape za shranjevanje datotek. Mapa bo ustvarjena znotraj izbrane "
 "poti."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "The Rackspace Cloud Files container"
 msgstr "Vsebnik za datoteke v oblaku Rackspace"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -261,19 +273,19 @@ msgstr ""
 "Zabojniku ni treba nujno obstajati.  Dovoljeni so samo pravilni nizi imena "
 "gostitelja."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "Your Rackspace username"
 msgstr "Uporabniško ime računa Rackspace"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "Vrednost določa uporabniško ime storitve v oblaku Rackspace."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "The Ubuntu One folder"
 msgstr "Mapa Ubuntu One"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
@@ -281,31 +293,31 @@ msgstr ""
 "Ime mape, kjer so shranjene datoteke. Vrednost ‘$IME-GOSTITELJA’, določa "
 "privzeto mapo na gostitelju s tem imenom."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 #: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
-msgstr "Mesto varnostne kopije"
+msgstr "Mesto varnostnih kopij"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "Location in which to hold the backup files."
 msgstr "Mesto, kjer naj se hranijo varnostne kopije"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid "Folder type"
 msgstr "Vrsta mape"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Ali je mesto varnostne kopije priklopljen zunanji nosilec oziroma običajna "
 "mapa na notranjem disku."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Relative path under the external volume"
 msgstr "Relativna pot do zunanjega nosilca"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -313,11 +325,11 @@ msgstr ""
 "V primeru, da je mesto shranjevanja varnostnih kopij na zunanji napravi, je "
 "to mesto določeno s polno potjo do nosilca."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Unique ID of the external volume"
 msgstr "Enoznačen ID za zunanji nosilec"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -325,11 +337,11 @@ msgstr ""
 "V primeru, da je mesto shranjevanja varnostnih kopij zunanji nosilec, je to "
 "mesto določeno z enoznačnim določilom datotečnega sistema."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Full name of the external volume"
 msgstr "Polno ime zunanjega nosilca"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -337,11 +349,11 @@ msgstr ""
 "V primeru, da je mesto shranjevanja varnostnih kopij na zunanji napravi, je "
 "to mesto označeno z daljšim opisom nosilca."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid "Short name of the external volume"
 msgstr "Kratko ime zunanjega nosilca"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
@@ -349,18 +361,18 @@ msgstr ""
 "V primeru, da je mesto shranjevanja varnostnih kopij na zunanji napravi, je "
 "to mesto označeno z kratkim imenom nosilca."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Icon of the external volume"
 msgstr "Ikona zunanjega nosilca"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
 "V primeru, da je mesto shranjevanja varnostnih kopij na zunanji napravi, je "
 "to mesto označeno s posebno ikono nosilca."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
 msgid "Obsolete"
 msgstr "Zastarelo"
 
@@ -398,7 +410,7 @@ msgstr[3] "Obnovi datoteke iz varnostne kopije"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:433
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:434
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s na %2$s"
@@ -456,15 +468,15 @@ msgstr "Poveži z datotekami oblaka Rackspace"
 
 #: ../common/BackendRackspace.vala:142
 msgid "_API access key"
-msgstr "_API ključ za dostop"
+msgstr "Ključ _API za dostop"
 
 #: ../common/BackendRackspace.vala:143
 msgid "S_how API access key"
-msgstr "_Pokažo API ključ za dostop"
+msgstr "_Pokaži ključ _API za dostop"
 
 #: ../common/BackendRackspace.vala:144
 msgid "_Remember API access key"
-msgstr "_Zapomni si API ključ za dostop"
+msgstr "_Zapomni si ključ API za dostop"
 
 #: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:176
 msgid "Amazon S3"
@@ -519,42 +531,42 @@ msgstr "Poveži se z Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "Prijava v Ubuntu One ..."
 
-#: ../common/CommonUtils.vala:353
+#: ../common/CommonUtils.vala:354
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 "Orodja za ustvarjanje varnostnik kopij v %s ni mogoče najti. Namestitev ni "
 "uspešno dokončana."
 
-#: ../common/CommonUtils.vala:355
+#: ../common/CommonUtils.vala:356
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 "Orodja za ustvarjanje varnostnik kopij ni mogoče najti. Namestitev ni "
 "uspešno dokončana."
 
-#: ../common/CommonUtils.vala:361
+#: ../common/CommonUtils.vala:362
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 "Orodja za ustvarjanje varnostnik kopij je okvarjeno. Namestitev ni uspešno "
 "dokončana."
 
-#: ../common/CommonUtils.vala:383
+#: ../common/CommonUtils.vala:384
 msgid "Could not start backup tool"
 msgstr "Ni mogoče začeti orodja za ustvarjanje varnostnik kopij."
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:484
+#: ../common/CommonUtils.vala:485
 #, c-format
 msgid "Home (%s)"
-msgstr "Domov (%s)"
+msgstr "Domača mapa (%s)"
 
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:489
+#: ../common/CommonUtils.vala:490
 msgid "Home"
 msgstr "Domača mapa"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:494
+#: ../common/CommonUtils.vala:495
 msgid "Trash"
 msgstr "Smeti"
 
@@ -1248,31 +1260,19 @@ msgstr ""
 "Orodje Déjà Dup zahteva program duplicity vsaj različice %d.%d.%.2d, zaznana "
 "pa je le različica %d.%d.%.2d"
 
-#: ../widgets/ConfigDelete.vala:43
-msgid "At least a month"
-msgstr "Vsaj mesec dni"
-
-#: ../widgets/ConfigDelete.vala:44
-msgid "At least two months"
-msgstr "Vsaj dva meseca"
-
-#: ../widgets/ConfigDelete.vala:45
-msgid "At least three months"
-msgstr "Vsaj tri mesece"
-
-#: ../widgets/ConfigDelete.vala:46
+#: ../widgets/ConfigDelete.vala:40
 msgid "At least six months"
 msgstr "Vsaj šest mesecev"
 
-#: ../widgets/ConfigDelete.vala:47
+#: ../widgets/ConfigDelete.vala:41
 msgid "At least a year"
 msgstr "Vsaj eno leto"
 
-#: ../widgets/ConfigDelete.vala:48
+#: ../widgets/ConfigDelete.vala:42
 msgid "Forever"
 msgstr "Trajno"
 
-#: ../widgets/ConfigDelete.vala:95
+#: ../widgets/ConfigDelete.vala:89
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -1327,37 +1327,13 @@ msgstr "Ne"
 
 #: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
-"Old backups will be kept for at least a month or until the backup location "
-"is low on space."
-msgstr ""
-"Stare varnostne kopije se hranijo za vsaj mesec dni nazaj oziroma dokler ne "
-"zmanjka prostora na mestu varnostne kopije."
-
-#: ../widgets/ConfigLabelPolicy.vala:66
-msgid ""
-"Old backups will be kept for at least two months or until the backup "
-"location is low on space."
-msgstr ""
-"Stare varnostne kopije se hranijo za vsaj dva meseca nazaj oziroma dokler ne "
-"zmanjka prostora na mestu varnostne kopije."
-
-#: ../widgets/ConfigLabelPolicy.vala:68
-msgid ""
-"Old backups will be kept for at least three months or until the backup "
-"location is low on space."
-msgstr ""
-"Stare varnostne kopije se hranijo za vsaj tri mesece nazaj oziroma dokler ne "
-"zmanjka prostora na mestu varnostne kopije."
-
-#: ../widgets/ConfigLabelPolicy.vala:70
-msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
 "Stare varnostne kopije se hranijo za vsaj šest mesecev nazaj oziroma dokler "
 "ne zmanjka prostora na mestu varnostne kopije."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1365,13 +1341,13 @@ msgstr ""
 "Stare varnostne kopije se hranijo za vsaj eno leto nazaj oziroma dokler ne "
 "zmanjka prostora na mestu varnostne kopije."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Stare varnostne kopije se hranijo, dokler ne zmanjka prostora na mestu "
 "varnostne kopije."
 
-#: ../widgets/ConfigLabelPolicy.vala:77
+#: ../widgets/ConfigLabelPolicy.vala:71
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1476,7 +1452,7 @@ msgstr "_Vsebnik"
 
 #: ../widgets/ConfigLocationS3.vala:31
 msgid "S3 Access Key I_D"
-msgstr "ID _S3 ključa za dostop"
+msgstr "ID ključa _S3 za dostop"
 
 #: ../widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
@@ -1490,15 +1466,7 @@ msgstr "Dnevno"
 msgid "Weekly"
 msgstr "Tedensko"
 
-#: ../widgets/ConfigPeriod.vala:38
-msgid "Every 2 weeks"
-msgstr "Vsaka 2 tedna"
-
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Monthly"
-msgstr "Mesečno"
-
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:82
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1511,6 +1479,9 @@ msgstr[3] "Vsake %d dni"
 #, c-format
 msgid "Could not display %s"
 msgstr "Ni mogoče prikazati %s"
+
+#~ msgid "Monthly"
+#~ msgstr "Mesečno"
 
 #~ msgid "Could not run duplicity"
 #~ msgstr "Ni mogoče zagnati programa duplicity"
@@ -1540,3 +1511,36 @@ msgstr "Ni mogoče prikazati %s"
 #~ msgstr ""
 #~ "Ni mogoče strojno razbrati različice programa duplicity ‘%s’.\n"
 #~ "\n"
+
+#~ msgid "At least a month"
+#~ msgstr "Vsaj mesec dni"
+
+#~ msgid "At least three months"
+#~ msgstr "Vsaj tri mesece"
+
+#~ msgid "At least two months"
+#~ msgstr "Vsaj dva meseca"
+
+#~ msgid "Every 2 weeks"
+#~ msgstr "Vsaka 2 tedna"
+
+#~ msgid ""
+#~ "Old backups will be kept for at least a month or until the backup location "
+#~ "is low on space."
+#~ msgstr ""
+#~ "Stare varnostne kopije se hranijo za vsaj mesec dni nazaj oziroma dokler ne "
+#~ "zmanjka prostora na mestu varnostne kopije."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least two months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "Stare varnostne kopije se hranijo za vsaj dva meseca nazaj oziroma dokler ne "
+#~ "zmanjka prostora na mestu varnostne kopije."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least three months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "Stare varnostne kopije se hranijo za vsaj tri mesece nazaj oziroma dokler ne "
+#~ "zmanjka prostora na mestu varnostne kopije."

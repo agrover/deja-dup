@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-04-29 23:17-0700\n"
+"POT-Creation-Date: 2012-07-20 19:31-0400\n"
 "PO-Revision-Date: 2012-03-22 14:30+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-06-06 05:32+0000\n"
-"X-Generator: Launchpad (build 15353)\n"
+"X-Launchpad-Export-Date: 2012-07-22 04:58+0000\n"
+"X-Generator: Launchpad (build 15654)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "バックアップ"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:88
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
 #: ../deja-dup/main.vala:78 ../preferences/Preferences.vala:88
 #, c-format
 msgid "Déjà Dup Backup Tool"
@@ -187,28 +187,38 @@ msgstr ""
 "バックアップ先のファイルを保持する日数。0 が永久を意味します。これは最低限の日数で、ファイルによってはより長く保存される場合があります。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
+msgid "How long to wait between full backups"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+msgid ""
+"Déjà Dup needs to occasionally make fresh full backups. This is the number "
+"of days to wait between full backups."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "Type of location to store backup"
 msgstr "バックアップを保存する場所のタイプ"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
 msgstr "バックアップ場所の指定。'auto'にした場合は、対象が存在する場所をデフォルトとして用います。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid "Amazon S3 Access Key ID"
 msgstr "Amazon S3 Access Key ID"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr "Amazon S3 Access Key の識別子。S3のユーザ名のようなものです。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "The Amazon S3 bucket name to use"
 msgstr "使用する Amazon S3 のバケット名"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -216,21 +226,21 @@ msgstr ""
 "どの Amazon S3 バケットにファイルを保存するか。保存先はまだ存在していなくてもよい。基準を満たしたホスト名の文字列のみ有効です。"
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The Amazon S3 folder"
 msgstr "Amazon S3 フォルダー"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
 msgstr "ファイルを置く任意のフォルダー名。選択したバケット内に作成されます。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "The Rackspace Cloud Files container"
 msgstr "Rackspace Cloud Filesコンテナー"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -238,92 +248,92 @@ msgstr ""
 "どのRackspace Cloud "
 "Filesコンテナーをファイルの格納に利用するか。常に指定が必要な項目ではありません。ホスト名として有効な文字列のみ入力できます。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "Your Rackspace username"
 msgstr "Rackspaceのユーザー名"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "Rackspace Cloud Filesサービスのユーザー名"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "The Ubuntu One folder"
 msgstr "Ubuntu One のフォルダー"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
 msgstr "ファイルを保存されるフォルダー名。‘$HOSTNAME’の場合、コンピューター名をベースとしたフォルダーをデフォルトにします。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 #: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "バックアップの保存場所"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "Location in which to hold the backup files."
 msgstr "バックアップファイルを保存する場所"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid "Folder type"
 msgstr "フォルダータイプ"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr "バックアップ場所が、マウントされた外部ボリュームであるか、または通常のフォルダーのいずれであるのか。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Relative path under the external volume"
 msgstr "外部ボリューム内の相対パス"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
 msgstr "バックアップ場所が外部ボリュームの場合、これがボリューム上のフォルダーパスです。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Unique ID of the external volume"
 msgstr "外部ボリュームのユニークID"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
 msgstr "バックアップ場所が外部ボリュームの場合、これが一意の識別子となります。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Full name of the external volume"
 msgstr "外部ボリュームのフルネーム"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
 msgstr "バックアップ場所が外部ボリュームの場合、これがボリュームの長めの説明を伴う名前です。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid "Short name of the external volume"
 msgstr "外部ボリュームの短い名前"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
 msgstr "バックアップ場所が外部ボリュームの場合、これがボリュームの短い名前です。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Icon of the external volume"
 msgstr "外部ボリュームのアイコン"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr "バックアップ場所が外部ボリュームの場合、これがボリュームのアイコンです。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
 msgid "Obsolete"
 msgstr "廃止"
 
@@ -355,7 +365,7 @@ msgstr[0] "バックアップからファイルを復元"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:433
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:434
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%2$s 上の %1$s"
@@ -473,36 +483,36 @@ msgstr "Ubuntu Oneに接続"
 msgid "Sign into Ubuntu One…"
 msgstr "Ubuntu Oneにサインイン…"
 
-#: ../common/CommonUtils.vala:353
+#: ../common/CommonUtils.vala:354
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:355
+#: ../common/CommonUtils.vala:356
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:361
+#: ../common/CommonUtils.vala:362
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:383
+#: ../common/CommonUtils.vala:384
 msgid "Could not start backup tool"
 msgstr ""
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:484
+#: ../common/CommonUtils.vala:485
 #, c-format
 msgid "Home (%s)"
 msgstr "ホーム (%s)"
 
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:489
+#: ../common/CommonUtils.vala:490
 msgid "Home"
 msgstr "ホーム"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:494
+#: ../common/CommonUtils.vala:495
 msgid "Trash"
 msgstr "ゴミ箱"
 
@@ -1167,31 +1177,19 @@ msgid ""
 msgstr ""
 "Déjà Dup バックアップツールは、duplicityのバージョン %d.%d.%.2d 以上が必要ですが、%d.%d.%.2d のみ認識されました"
 
-#: ../widgets/ConfigDelete.vala:43
-msgid "At least a month"
-msgstr "最低1か月"
-
-#: ../widgets/ConfigDelete.vala:44
-msgid "At least two months"
-msgstr "最低2か月"
-
-#: ../widgets/ConfigDelete.vala:45
-msgid "At least three months"
-msgstr "最低3か月"
-
-#: ../widgets/ConfigDelete.vala:46
+#: ../widgets/ConfigDelete.vala:40
 msgid "At least six months"
 msgstr "最低6か月"
 
-#: ../widgets/ConfigDelete.vala:47
+#: ../widgets/ConfigDelete.vala:41
 msgid "At least a year"
 msgstr "最低1年"
 
-#: ../widgets/ConfigDelete.vala:48
+#: ../widgets/ConfigDelete.vala:42
 msgid "Forever"
 msgstr "期限なし"
 
-#: ../widgets/ConfigDelete.vala:95
+#: ../widgets/ConfigDelete.vala:89
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -1237,39 +1235,21 @@ msgstr "無効"
 
 #: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
-"Old backups will be kept for at least a month or until the backup location "
-"is low on space."
-msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低1ヶ月間保存されます。"
-
-#: ../widgets/ConfigLabelPolicy.vala:66
-msgid ""
-"Old backups will be kept for at least two months or until the backup "
-"location is low on space."
-msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低2ヶ月間保存されます。"
-
-#: ../widgets/ConfigLabelPolicy.vala:68
-msgid ""
-"Old backups will be kept for at least three months or until the backup "
-"location is low on space."
-msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低3ヶ月間保存されます。"
-
-#: ../widgets/ConfigLabelPolicy.vala:70
-msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低6ヶ月間保存されます。"
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低1年間保存されます。"
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは保存され続けます。"
 
-#: ../widgets/ConfigLabelPolicy.vala:77
+#: ../widgets/ConfigLabelPolicy.vala:71
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1377,15 +1357,7 @@ msgstr "毎日"
 msgid "Weekly"
 msgstr "毎週"
 
-#: ../widgets/ConfigPeriod.vala:38
-msgid "Every 2 weeks"
-msgstr "2週間ごと"
-
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Monthly"
-msgstr "毎月"
-
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:82
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1395,6 +1367,18 @@ msgstr[0] "%d 日毎"
 #, c-format
 msgid "Could not display %s"
 msgstr "%s を表示できません"
+
+#~ msgid "Monthly"
+#~ msgstr "毎月"
+
+#~ msgid "At least a month"
+#~ msgstr "最低1か月"
+
+#~ msgid "At least two months"
+#~ msgstr "最低2か月"
+
+#~ msgid "At least three months"
+#~ msgstr "最低3か月"
 
 #~ msgid ""
 #~ "Could not understand duplicity version.\n"
@@ -1417,9 +1401,27 @@ msgstr "%s を表示できません"
 #~ msgid "Duplicity’s version is too old"
 #~ msgstr "Duplicity のバージョンが古いです"
 
+#~ msgid ""
+#~ "Old backups will be kept for at least three months or until the backup "
+#~ "location is low on space."
+#~ msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低3ヶ月間保存されます。"
+
+#~ msgid ""
+#~ "Old backups will be kept for at least two months or until the backup "
+#~ "location is low on space."
+#~ msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低2ヶ月間保存されます。"
+
+#~ msgid ""
+#~ "Old backups will be kept for at least a month or until the backup location "
+#~ "is low on space."
+#~ msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低1ヶ月間保存されます。"
+
 #~ msgid "You must specify a Rackspace container in your preferences."
 #~ msgstr "どのRackspaceコンテナーを利用するか、設定で指定してください。"
 
 #~ msgid ""
 #~ "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 #~ msgstr "duplicityがインストールされていないと、Déjà Dup Backupは機能しません。このまま終了します。"
+
+#~ msgid "Every 2 weeks"
+#~ msgstr "2週間ごと"

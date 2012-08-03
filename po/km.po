@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-04-29 23:17-0700\n"
+"POT-Creation-Date: 2012-07-20 19:31-0400\n"
 "PO-Revision-Date: 2012-03-22 14:30+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Khmer <km@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-06-06 05:32+0000\n"
-"X-Generator: Launchpad (build 15353)\n"
+"X-Launchpad-Export-Date: 2012-07-22 04:58+0000\n"
+"X-Generator: Launchpad (build 15654)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "បម្រុង​ទុក"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:88
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
 #: ../deja-dup/main.vala:78 ../preferences/Preferences.vala:88
 #, c-format
 msgid "Déjà Dup Backup Tool"
@@ -206,10 +206,20 @@ msgstr ""
 "មាន​ន័យ​ថា វា​មាន​ន័យ​​ចំនួន​ថ្ងៃ​អប្បបរមា ឯកសារ​អាច​ត្រូវ​បាន​រក្សាទុក​ ។"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
+msgid "How long to wait between full backups"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+msgid ""
+"Déjà Dup needs to occasionally make fresh full backups. This is the number "
+"of days to wait between full backups."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "Type of location to store backup"
 msgstr "ប្រភេទ​ទីតាំង​ត្រូវ​ទុក​ការ​បម្រុង"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
@@ -217,21 +227,21 @@ msgstr ""
 "ប្រភេទ​ទីតាំង​ដែល​បម្រុង​ទុក ។ ប្រសិនបើ ‘ស្វ័យប្រវត្តិ’ "
 "លំនាំដើម​នឹង​ត្រូវ​បាន​ជ្រើស​ផ្អែក​តាម​អ្វី​ដែល​មាន ។"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid "Amazon S3 Access Key ID"
 msgstr "លេខ​សម្គាល់​​ចូល​ដំណើរការ Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "ឧបករណ៍​សម្គាល់​​ចូល​ដំណើរការ​ Amazon S3 របស់​អ្នក​ ។ "
 "សកម្មភាព​នេះ​ជា​ឈ្មោះ​អ្នក​ប្រើ​ S3 របស់​អ្នក ។"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "The Amazon S3 bucket name to use"
 msgstr "ឈ្មោះ​របស់  Amazon S3 bucket ត្រូវ​ប្រើ"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -240,11 +250,11 @@ msgstr ""
 "ខ្សែ​អក្សរ​ឈ្មោះ​ម៉ាស៊ីន​គឺ​ត្រឹមត្រូវ ។"
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The Amazon S3 folder"
 msgstr "ថត Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
@@ -252,11 +262,11 @@ msgstr ""
 "ឈ្មោះ​ថត​ជា​ជម្រើស​ដែល​ត្រូវ​រក្សាទុក​ឯកសារ ។ "
 "ថត​នេះ​នឹង​ត្រូវ​បាន​បង្កើត​​នៅ​ក្នុង​ធុង​ដែល​បាន​ជ្រើស ។"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "The Rackspace Cloud Files container"
 msgstr "ឧបករណ៍​ផ្ទុក​ឯកសារ Rackspace Cloud"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -264,20 +274,20 @@ msgstr ""
 "ឧបករណ៍​ផ្ទុក​ឯកសារ​របស់ Rackspace Cloude ​ ដើម្បី​ទុក​ឯកសារ ។ "
 "វា​មិន​ចាំបាច់​មាន​ក៏​បាន ។ ខ្សែ​អក្សរ​ឈ្មោះ​ម៉ាស៊ីន​ប៉ុណ្ណោះ​គឺ​ត្រឹមត្រូវ ។"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "Your Rackspace username"
 msgstr "ឈ្មោះ​អ្នក​ប្រើ Rackspace របស់​អ្នក"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr ""
 "វា​ជា​ឈ្មោះ​របស់​អ្នក​ប្រើ​​សម្រាប់​ប្រើ​សេវាកម្ម​ឯកសារ Rackspace Cloud ។"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "The Ubuntu One folder"
 msgstr "ថត Ubuntu One"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
@@ -285,30 +295,30 @@ msgstr ""
 "ឈ្មោះ​ថត​ត្រូវ​ទុក​ឯកសារ ។ ប្រសិនបើ ‘$HOSTNAME’ "
 "វា​នឹង​ទៅកាន់​ថត​លំនាំដើម​អាស្រ័យ​តាម​ឈ្មោះ​របស់​កុំព្យូទ័រ ។"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 #: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "ទីតាំង​បម្រុង​ទុក"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "Location in which to hold the backup files."
 msgstr "ទីតាំង​​​​ដែល​ត្រូវ​បម្រុង​ទុក​ឯកសារ ។"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid "Folder type"
 msgstr "ប្រភេទ​ថត"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "ថា​តើ​ទីតាំង​បម្រុង​ទុក​ត្រូវ​បាន​ម៉ោន​ភាគ​ខាងក្រៅ ឬ​ថត​ធម្មតា​ដែរ​ឬ​ទេ ។"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Relative path under the external volume"
 msgstr "ផ្លូវ​ដែល​ទាក់ទង​នឹង​ភាគ​ខាង​ក្រៅ"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -316,11 +326,11 @@ msgstr ""
 "ប្រសិនបើ​​ទីតាំង​បម្រុង​ទុក​នៅ​លើ​​​ភាគ​ខាងក្រៅ "
 "វា​ជា​ផ្លូវ​របស់​ថត​នៅ​លើ​ភាគ​នោះ ។"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Unique ID of the external volume"
 msgstr "លេខ​សម្គាល់​តែមួយ​របស់​ភាគ​ខាងក្រៅ"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -328,11 +338,11 @@ msgstr ""
 "ប្រសិនបើ​ទីតាំង​បម្រុង​ទុក​ គឺ​នៅ​លើ​ភាគ​ខាងក្រៅ "
 "វា​ជា​ឧបករណ៍​សម្គាល់​ប្រព័ន្ធ​ឯកសារ​តែមួយ ។"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Full name of the external volume"
 msgstr "ឈ្មោះ​ពេញ​​របស់​ភាគ​ខាងក្រៅ"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -340,27 +350,27 @@ msgstr ""
 "ប្រសិនបើ​ទីតាំង​បម្រុង​ទុក​នៅ​លើ​ភាគ​ខាងក្រៅ "
 "វា​ជា​ឈ្មោះ​ដែល​ពិពណ៌នា​អំពី​ភាគ ។"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid "Short name of the external volume"
 msgstr "ឈ្មោះ​ខ្លី​របស់​ភាព​ខាងក្រៅ"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
 msgstr ""
 "ប្រសិនបើ​ទីតាំង​បម្រុង​ទុក​នៅ​លើ​ភាគ​ខាងក្រៅ វា​ជា​ឈ្មោះ​​ខ្លី​របស់​ភាគ ។"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Icon of the external volume"
 msgstr "រូបតំណាង​របស់​ភាគ​ខាងក្រៅ"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr "ប្រសិនបើ​ទីតាំង​បម្រុង​​នៅ​លើ​ភាគ​ខាងក្រៅ វា​ជា​រូបតំណាង​របស់​ភាគ ។"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
 msgid "Obsolete"
 msgstr "លែង​ប្រើ"
 
@@ -392,7 +402,7 @@ msgstr[0] "ស្ដារ​ឯកសារ​ពី​ការ​បម្រ
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:433
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:434
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s លើ %2$s"
@@ -513,36 +523,36 @@ msgstr "តភ្ជាប់​ទៅកាន់​ Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "ចុះ​ហត្ថលេខា​នៅ​ក្នុង Ubuntu One…"
 
-#: ../common/CommonUtils.vala:353
+#: ../common/CommonUtils.vala:354
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:355
+#: ../common/CommonUtils.vala:356
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:361
+#: ../common/CommonUtils.vala:362
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:383
+#: ../common/CommonUtils.vala:384
 msgid "Could not start backup tool"
 msgstr ""
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:484
+#: ../common/CommonUtils.vala:485
 #, c-format
 msgid "Home (%s)"
 msgstr "ផ្ទះ (%s)"
 
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:489
+#: ../common/CommonUtils.vala:490
 msgid "Home"
 msgstr "ផ្ទះ"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:494
+#: ../common/CommonUtils.vala:495
 msgid "Trash"
 msgstr "ធុងសំរាម"
 
@@ -1225,31 +1235,19 @@ msgstr ""
 "ឧបករណ៍​សម្រុង​ទុក​របស់ Déjà Dup ទាមទារ​យ៉ាង​ហោច​ណាស់​កំណែ %d.%d.%.2d "
 "នៃ​​ភាព​ស្ទួន ប៉ុន្តែ​រក​ឃើញ​តែ​កំណែ %d.%d.%.2d ប៉ុណ្ណោះ ។"
 
-#: ../widgets/ConfigDelete.vala:43
-msgid "At least a month"
-msgstr "យ៉ាង​ហោច​ណាស់​មួយ​ខែ"
-
-#: ../widgets/ConfigDelete.vala:44
-msgid "At least two months"
-msgstr "យ៉ាង​ហោច​ណាស់​ពីរ​ខែ"
-
-#: ../widgets/ConfigDelete.vala:45
-msgid "At least three months"
-msgstr "យ៉ាង​ហោច​ណាស់​បី​ខែ"
-
-#: ../widgets/ConfigDelete.vala:46
+#: ../widgets/ConfigDelete.vala:40
 msgid "At least six months"
 msgstr "យ៉ាង​ហោច​ណាស់​ប្រាំមួយ​ខែ"
 
-#: ../widgets/ConfigDelete.vala:47
+#: ../widgets/ConfigDelete.vala:41
 msgid "At least a year"
 msgstr "យ៉ាង​ហោច​ណាស់​មួយ​ឆ្នាំ"
 
-#: ../widgets/ConfigDelete.vala:48
+#: ../widgets/ConfigDelete.vala:42
 msgid "Forever"
 msgstr "រហូត"
 
-#: ../widgets/ConfigDelete.vala:95
+#: ../widgets/ConfigDelete.vala:89
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -1295,37 +1293,13 @@ msgstr "ទេ"
 
 #: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
-"Old backups will be kept for at least a month or until the backup location "
-"is low on space."
-msgstr ""
-"ការ​បម្រុង​ទុក​ចាស់ៗ​នឹង​​ត្រូវ​បាន​រក្សាទុក​​​​យ៉ាង​ហោច​ណាស់​មួយ​ខែ "
-"ឬ​រហូត​ដល់​ទីតាំង​ក្នុង​ការ​បម្រុង​ទុក​ជិត​អស់​ទំហំ​ ។"
-
-#: ../widgets/ConfigLabelPolicy.vala:66
-msgid ""
-"Old backups will be kept for at least two months or until the backup "
-"location is low on space."
-msgstr ""
-"ការ​បម្រុង​ទុក​ចាស់​ៗ​នឹង​ត្រូវ​បាន​រក្សាទុក​យ៉ាង​ហោច​ណាស់​ពីរ​ខែ "
-"ឬ​រហូត​ដល់​ទីតាំង​ក្នុង​ការ​បម្រុង​ទុក​ជិត​អស់​ទំហំ ។"
-
-#: ../widgets/ConfigLabelPolicy.vala:68
-msgid ""
-"Old backups will be kept for at least three months or until the backup "
-"location is low on space."
-msgstr ""
-"ការ​បម្រុង​ទុក​ចាស់​ៗ​នឹង​ត្រូវ​បាន​​រក្សា​ទុក​យ៉ាង​ហោច​ណាស់​បី​ខែ "
-"ឬ​រហូត​ដល់​ទីតាំង​ក្នុង​ការ​បម្រុង​ទុក​ជិត​អស់​ទំហំ ។"
-
-#: ../widgets/ConfigLabelPolicy.vala:70
-msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
 "ការ​បម្រុង​ទុក​ចាស់​ៗ​នឹង​ត្រូវ​បាន​រក្សាទុក​​យ៉ាង​ហោច​ណាស់​ប្រាំ​​មួយ​ខែ "
 "ឬ​រហូត​ដល់​​ទីតាំង​ក្នុង​ការ​បម្រុង​ទុក​ជិត​អស់​ទំហំ ។"
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1333,13 +1307,13 @@ msgstr ""
 "ការ​បម្រុង​ទុក​ចាស់ៗ​នឹង​ត្រូវ​បាន​រក្សាទុក​យ៉ាង​ហោច​ណាស់​មួយ​ឆ្នាំ "
 "ឬ​រហូត​ដល់​ទីតាំង​ក្នុង​ការ​បម្រុង​ទុក​ជិត​អស់​ទំហំ ។"
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "ការ​បម្រុង​ទុក​ចាស់ៗ​នឹង​ត្រូវ​បាន​រក្សាទុក​រហូត​ដល់​ទីតាំង​ក្នុង​ការ​បម្រុង​"
 "ទុក​ជិត​អស់​ទំហំ ។"
 
-#: ../widgets/ConfigLabelPolicy.vala:77
+#: ../widgets/ConfigLabelPolicy.vala:71
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1449,15 +1423,7 @@ msgstr "រាល់​ថ្ងៃ"
 msgid "Weekly"
 msgstr "រាល់​សប្ដាហ៍"
 
-#: ../widgets/ConfigPeriod.vala:38
-msgid "Every 2 weeks"
-msgstr "រាល់​ ២ សប្ដាហ៍"
-
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Monthly"
-msgstr "រៀងរាល់​ខែ"
-
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:82
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1494,3 +1460,39 @@ msgstr "មិន​អាច​បង្ហាញ %s បាន​ទេ"
 
 #~ msgid "Duplicity’s version is too old"
 #~ msgstr "កំណែ​របស់​ភាព​​ស្ទួន​​ចាស់​ពេក"
+
+#~ msgid "At least a month"
+#~ msgstr "យ៉ាង​ហោច​ណាស់​មួយ​ខែ"
+
+#~ msgid "At least two months"
+#~ msgstr "យ៉ាង​ហោច​ណាស់​ពីរ​ខែ"
+
+#~ msgid "At least three months"
+#~ msgstr "យ៉ាង​ហោច​ណាស់​បី​ខែ"
+
+#~ msgid ""
+#~ "Old backups will be kept for at least a month or until the backup location "
+#~ "is low on space."
+#~ msgstr ""
+#~ "ការ​បម្រុង​ទុក​ចាស់ៗ​នឹង​​ត្រូវ​បាន​រក្សាទុក​​​​យ៉ាង​ហោច​ណាស់​មួយ​ខែ "
+#~ "ឬ​រហូត​ដល់​ទីតាំង​ក្នុង​ការ​បម្រុង​ទុក​ជិត​អស់​ទំហំ​ ។"
+
+#~ msgid ""
+#~ "Old backups will be kept for at least two months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "ការ​បម្រុង​ទុក​ចាស់​ៗ​នឹង​ត្រូវ​បាន​រក្សាទុក​យ៉ាង​ហោច​ណាស់​ពីរ​ខែ "
+#~ "ឬ​រហូត​ដល់​ទីតាំង​ក្នុង​ការ​បម្រុង​ទុក​ជិត​អស់​ទំហំ ។"
+
+#~ msgid ""
+#~ "Old backups will be kept for at least three months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "ការ​បម្រុង​ទុក​ចាស់​ៗ​នឹង​ត្រូវ​បាន​​រក្សា​ទុក​យ៉ាង​ហោច​ណាស់​បី​ខែ "
+#~ "ឬ​រហូត​ដល់​ទីតាំង​ក្នុង​ការ​បម្រុង​ទុក​ជិត​អស់​ទំហំ ។"
+
+#~ msgid "Every 2 weeks"
+#~ msgstr "រាល់​ ២ សប្ដាហ៍"
+
+#~ msgid "Monthly"
+#~ msgstr "រៀងរាល់​ខែ"

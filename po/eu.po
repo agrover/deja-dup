@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-04-29 23:17-0700\n"
+"POT-Creation-Date: 2012-07-20 19:31-0400\n"
 "PO-Revision-Date: 2012-07-04 16:24+0000\n"
 "Last-Translator: Asier Sarasua Garmendia <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-07-05 05:22+0000\n"
-"X-Generator: Launchpad (build 15544)\n"
+"X-Launchpad-Export-Date: 2012-07-22 04:58+0000\n"
+"X-Generator: Launchpad (build 15654)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "Babeskopia"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:88
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
 #: ../deja-dup/main.vala:78 ../preferences/Preferences.vala:88
 #, c-format
 msgid "Déjà Dup Backup Tool"
@@ -203,10 +203,20 @@ msgstr ""
 "fitxategiak denbora gehiagoz egon daitezke gordeta."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
+msgid "How long to wait between full backups"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+msgid ""
+"Déjà Dup needs to occasionally make fresh full backups. This is the number "
+"of days to wait between full backups."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "Type of location to store backup"
 msgstr "Babeskopia gordetzeko kokapen-mota"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
@@ -214,21 +224,21 @@ msgstr ""
 "Babeskopiaren kokapen-mota. Balio hau 'auto' bada, balio lehenetsia "
 "hautatuko da, atzigarri dagoenaren arabera."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid "Amazon S3 Access Key ID"
 msgstr "Amazon S3 zerbitzuaren atzitze-gakoaren IDa"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Zure Amazon S3 zerbitzuaren atzitze-gakoaren identifikatzailea. Honek zure "
 "erabiltzaile-izen modura funtzionatuko du."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "The Amazon S3 bucket name to use"
 msgstr "Erabiliko den Amazon S3 ontziaren izena"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -238,11 +248,11 @@ msgstr ""
 "soilik balio dute orain."
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The Amazon S3 folder"
 msgstr "Amazon S3 karpeta"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
@@ -250,11 +260,11 @@ msgstr ""
 "Fitxategiak gordetzeko hautazko karpeta-izena. Karpeta hau hautatutako "
 "ontzian sortuko da."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "The Rackspace Cloud Files container"
 msgstr "Rackspace Cloud Files edukiontzia"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -263,19 +273,19 @@ msgstr ""
 "Honek ez dauka zertan momentuan existitu beharrik. Ostalari-izenerako "
 "legezko kateak soilik dira baliozkoak."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "Your Rackspace username"
 msgstr "Rackspace zerbitzurako duzun erabiltzaile-izena"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "Rackspace Cloud Files zerbitzurako duzun erabiltzaile-izena da."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "The Ubuntu One folder"
 msgstr "Ubuntu One karpeta"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
@@ -283,31 +293,31 @@ msgstr ""
 "Fitxategiak gordeko diren karpetaren izena. ‘$HOSTNAME’ bada, "
 "ordenagailuaren izenean oinarritutako karpeta bat sortuko da."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 #: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "Babeskopiaren kokapena"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "Location in which to hold the backup files."
 msgstr "Babeskopiako fitxategiak non gordeko diren."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid "Folder type"
 msgstr "Karpeta-mota"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Babeskopiaren kokapena muntatutako kanpo-unitatea den ala karpeta normala "
 "den."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Relative path under the external volume"
 msgstr "Kanpo-bolumenaren bide-izen erlatiboa"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -315,11 +325,11 @@ msgstr ""
 "Babeskopiaren kokapena kanpo-bolumen bat bada, hau bere karpetaren bide-"
 "izena da."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Unique ID of the external volume"
 msgstr "Kanpo-unitatearen ID bakarra"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -327,11 +337,11 @@ msgstr ""
 "Babeskopiaren kokapena kanpo-bolumen bat bada, hau bere fitxategi-sistemaren "
 "identifikatzaile bakarra da."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Full name of the external volume"
 msgstr "Kanpo-bolumenaren izen osoa"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -339,27 +349,27 @@ msgstr ""
 "Babeskopiaren kokapena kanpo-bolumen bat bada, hau bere deskribapen-izen "
 "luzea da."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid "Short name of the external volume"
 msgstr "Kanpo-bolumenaren izen laburra"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
 msgstr ""
 "Babeskopiaren kokapena kanpo-bolumen bat bada, hau bere izen laburra da."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Icon of the external volume"
 msgstr "Kanpo-bolumenaren ikonoa"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr "Babeskopiaren kokapena kanpo-bolumen bat bada, hau bere ikonoa da."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
 msgid "Obsolete"
 msgstr "Zaharkitua"
 
@@ -393,7 +403,7 @@ msgstr[1] "Leheneratu fitxategiak babeskopiatik"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:433
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:434
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s %2$s-(e)n"
@@ -513,40 +523,40 @@ msgstr "Konektatu Ubuntu One zerbitzura"
 msgid "Sign into Ubuntu One…"
 msgstr "Hasi saioa Ubuntu One zerbitzuan..."
 
-#: ../common/CommonUtils.vala:353
+#: ../common/CommonUtils.vala:354
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 "Ez da babeskopia-tresna %s kokapenean aurkitu.  Zure instalazioari zerbait "
 "falta zaio."
 
-#: ../common/CommonUtils.vala:355
+#: ../common/CommonUtils.vala:356
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 "Ezin izan da babeskopia-tresna kargatu. Zure instalazioari zerbait falta "
 "zaio."
 
-#: ../common/CommonUtils.vala:361
+#: ../common/CommonUtils.vala:362
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr "Babeskopia-tresna apurtuta dago. Zure instalazioa ez da ongi osatu."
 
-#: ../common/CommonUtils.vala:383
+#: ../common/CommonUtils.vala:384
 msgid "Could not start backup tool"
 msgstr "Ezin izan da babeskopia-tresna abiarazi"
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:484
+#: ../common/CommonUtils.vala:485
 #, c-format
 msgid "Home (%s)"
 msgstr "Karpeta nagusia (%s)"
 
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:489
+#: ../common/CommonUtils.vala:490
 msgid "Home"
 msgstr "Karpeta nagusia"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:494
+#: ../common/CommonUtils.vala:495
 msgid "Trash"
 msgstr "Zakarrontzia"
 
@@ -1231,31 +1241,19 @@ msgstr ""
 "Déjà Dup Backup Tool aplikazioak duplicity aplikazioaren %d.%d.%.2d bertsioa "
 "behar du gutxienez, eta %d.%d.%.2d bertsioa aurkitu da."
 
-#: ../widgets/ConfigDelete.vala:43
-msgid "At least a month"
-msgstr "Gutxienez hilabete"
-
-#: ../widgets/ConfigDelete.vala:44
-msgid "At least two months"
-msgstr "Gutxienez bi hilabete"
-
-#: ../widgets/ConfigDelete.vala:45
-msgid "At least three months"
-msgstr "Gutxienez hiru hilabete"
-
-#: ../widgets/ConfigDelete.vala:46
+#: ../widgets/ConfigDelete.vala:40
 msgid "At least six months"
 msgstr "Gutxienez sei hilabete"
 
-#: ../widgets/ConfigDelete.vala:47
+#: ../widgets/ConfigDelete.vala:41
 msgid "At least a year"
 msgstr "Gutxienez urtebete"
 
-#: ../widgets/ConfigDelete.vala:48
+#: ../widgets/ConfigDelete.vala:42
 msgid "Forever"
 msgstr "Beti"
 
-#: ../widgets/ConfigDelete.vala:95
+#: ../widgets/ConfigDelete.vala:89
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -1304,37 +1302,13 @@ msgstr "Ez"
 
 #: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
-"Old backups will be kept for at least a month or until the backup location "
-"is low on space."
-msgstr ""
-"Babeskopia zaharrak gutxienez hilabetez edo babeskopiaren kokapena lekurik "
-"gabe geratu arte mantenduko dira."
-
-#: ../widgets/ConfigLabelPolicy.vala:66
-msgid ""
-"Old backups will be kept for at least two months or until the backup "
-"location is low on space."
-msgstr ""
-"Babeskopia zaharrak gutxienez bi hilabetez edo babeskopiaren kokapena "
-"lekurik gabe geratu arte mantenduko dira."
-
-#: ../widgets/ConfigLabelPolicy.vala:68
-msgid ""
-"Old backups will be kept for at least three months or until the backup "
-"location is low on space."
-msgstr ""
-"Babeskopia zaharrak gutxienez hiru hilabetez edo babeskopiaren kokapena "
-"lekurik gabe geratu arte mantenduko dira."
-
-#: ../widgets/ConfigLabelPolicy.vala:70
-msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
 "Babeskopia zaharrak gutxienez sei hilabetez edo babeskopiaren kokapena "
 "lekurik gabe geratu arte mantenduko dira."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1342,13 +1316,13 @@ msgstr ""
 "Babeskopia zaharrak gutxienez urtebetez edo babeskopiaren kokapena lekurik "
 "gabe geratu arte mantenduko dira."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Babeskopia zaharrak babeskopiaren kokapena lekurik gabe geratu arte "
 "mantenduko dira."
 
-#: ../widgets/ConfigLabelPolicy.vala:77
+#: ../widgets/ConfigLabelPolicy.vala:71
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1461,15 +1435,7 @@ msgstr "Egunero"
 msgid "Weekly"
 msgstr "Astero"
 
-#: ../widgets/ConfigPeriod.vala:38
-msgid "Every 2 weeks"
-msgstr "Bi astetik behin"
-
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Monthly"
-msgstr "Hilero"
-
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:82
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1502,6 +1468,39 @@ msgstr "Ezin izan da %s erakutsi"
 #~ msgid "Duplicity’s version is too old"
 #~ msgstr "Duplicity-ren bertsioa zaharregia da"
 
+#~ msgid "At least a month"
+#~ msgstr "Gutxienez hilabete"
+
+#~ msgid "At least three months"
+#~ msgstr "Gutxienez hiru hilabete"
+
+#~ msgid "At least two months"
+#~ msgstr "Gutxienez bi hilabete"
+
+#~ msgid ""
+#~ "Old backups will be kept for at least a month or until the backup location "
+#~ "is low on space."
+#~ msgstr ""
+#~ "Babeskopia zaharrak gutxienez hilabetez edo babeskopiaren kokapena lekurik "
+#~ "gabe geratu arte mantenduko dira."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least three months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "Babeskopia zaharrak gutxienez hiru hilabetez edo babeskopiaren kokapena "
+#~ "lekurik gabe geratu arte mantenduko dira."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least two months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "Babeskopia zaharrak gutxienez bi hilabetez edo babeskopiaren kokapena "
+#~ "lekurik gabe geratu arte mantenduko dira."
+
+#~ msgid "Monthly"
+#~ msgstr "Hilero"
+
 #~ msgid "You must specify a Rackspace container in your preferences."
 #~ msgstr "Rackspace edukiontzi bat zehaztu behar duzu zure hobespenetan."
 
@@ -1510,3 +1509,6 @@ msgstr "Ezin izan da %s erakutsi"
 #~ msgstr ""
 #~ "Duplicity ez badago, Déjà Dup Backup Tool aplikazioak ezin du funtzionatu. "
 #~ "Itxi egingo da orain."
+
+#~ msgid "Every 2 weeks"
+#~ msgstr "Bi astetik behin"

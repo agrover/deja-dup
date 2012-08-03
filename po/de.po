@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-04-29 23:17-0700\n"
-"PO-Revision-Date: 2012-07-03 15:47+0000\n"
-"Last-Translator: Hendrik Knackstedt <Unknown>\n"
+"POT-Creation-Date: 2012-07-20 19:31-0400\n"
+"PO-Revision-Date: 2012-07-20 20:26+0000\n"
+"Last-Translator: Eduard Gotwig <eduardgotwig@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-07-04 05:24+0000\n"
-"X-Generator: Launchpad (build 15544)\n"
+"X-Launchpad-Export-Date: 2012-07-22 04:58+0000\n"
+"X-Generator: Launchpad (build 15654)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "Sicherung"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:88
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
 #: ../deja-dup/main.vala:78 ../preferences/Preferences.vala:88
 #, c-format
 msgid "Déjà Dup Backup Tool"
@@ -205,10 +205,20 @@ msgstr ""
 "der Tage, die Dateien können auch länger behalten werden."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
+msgid "How long to wait between full backups"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+msgid ""
+"Déjà Dup needs to occasionally make fresh full backups. This is the number "
+"of days to wait between full backups."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "Type of location to store backup"
 msgstr "Art des Datensicherungzieles"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
@@ -216,20 +226,20 @@ msgstr ""
 "Der Typ des Speicherortes der Datensicherung. Falls »auto«, wird eine "
 "Standardeinstellung auf Basis des Verfügbaren gewählt."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid "Amazon S3 Access Key ID"
 msgstr "Amazon S3-Zugangsschlüssel-ID"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Die Amazon S3-Zugangsschlüsselkennung. Dies fungiert als S3-Benutzername."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "The Amazon S3 bucket name to use"
 msgstr "Der Amazon S3 Bucket-Name, der genutzt werden soll"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -239,11 +249,11 @@ msgstr ""
 "gültig."
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The Amazon S3 folder"
 msgstr "Ordner auf Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
@@ -251,11 +261,11 @@ msgstr ""
 "Optionaler Name eines Ordners, in dem die Dateien gespeichert werden. Der "
 "Ordner wird im gewählten S3-Bucket erstellt."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "The Rackspace Cloud Files container"
 msgstr "Der Rackspace Cloud Files Container"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -263,19 +273,19 @@ msgstr ""
 "Legt fest, welcher Rackspace Cloud Files-Container zum Speichern von Dateien "
 "verwendet werden soll. Nur gültige Rechnername-Zeichenketten sind zulässig."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "Your Rackspace username"
 msgstr "Ihr Rackspace-Benutzername"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "Dies ist Ihr Benutzername für den Rackspace Cloud Files-Dienst."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "The Ubuntu One folder"
 msgstr "Der Ordner »Ubuntu One«"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
@@ -284,31 +294,31 @@ msgstr ""
 "wird als Standardeinstellung ein Ordner basierend auf dem Rechnernamen "
 "übernommen."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 #: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "Ort der Datensicherung"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "Location in which to hold the backup files."
 msgstr "Ort, an dem die Datensicherungsdateien abgelegt werden sollen."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid "Folder type"
 msgstr "Ordnertyp"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Legt fest, ob sich die Datensicherung auf einem eingehängten externen "
 "Datenträger befindet oder in einem normalen Ordner"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Relative path under the external volume"
 msgstr "Relativer Pfad auf dem externen Datenträger"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -316,11 +326,11 @@ msgstr ""
 "Wenn sich die Sicherung auf einem externen Datenträger befindet, ist dies "
 "der Pfad zum Ordner auf dem Datenträger."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Unique ID of the external volume"
 msgstr "Eindeutige Kennung des externen Datenträgers"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -328,11 +338,11 @@ msgstr ""
 "Wenn sich die Sicherung auf einem externen Datenträger befindet, ist dies "
 "ihre eindeutige Dateisystemkennung."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Full name of the external volume"
 msgstr "Name des externen Datenträges"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -340,11 +350,11 @@ msgstr ""
 "Wenn sich die Sicherung auf einem externen Datenträger befindet, ist dies "
 "der ausführliche Name des Datenträgers."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid "Short name of the external volume"
 msgstr "Kurzer Name des externen Datenträgers"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
@@ -352,18 +362,18 @@ msgstr ""
 "Wenn sich die Sicherung auf einem externen Datenträger befindet, ist dies "
 "der kurze Name des Datenträgers."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Icon of the external volume"
 msgstr "Symbol des externen Datenträgers"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
 "Wenn sich die Sicherung auf einem externen Datenträger befindet, ist dies "
 "das Symbol des Datenträgers."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
 msgid "Obsolete"
 msgstr "Veraltet"
 
@@ -377,7 +387,7 @@ msgstr "Einlesen …"
 
 #: ../nautilus/NautilusExtension.c:174
 msgid "Restore Missing Files…"
-msgstr "Verschwundene Dateien wiederherstellen …"
+msgstr "Fehlende Dateien wiederherstellen…"
 
 #: ../nautilus/NautilusExtension.c:175
 msgid "Restore deleted files from backup"
@@ -397,7 +407,7 @@ msgstr[1] "Dateien aus Datensicherung wiederherstellen"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:433
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:434
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s auf %2$s"
@@ -521,41 +531,41 @@ msgstr "Mit Ubuntu One verbinden"
 msgid "Sign into Ubuntu One…"
 msgstr "Bei Ubuntu One anmelden …"
 
-#: ../common/CommonUtils.vala:353
+#: ../common/CommonUtils.vala:354
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 "Datensicherungswerkzeug konnte unter %s nicht lokalisiert werden. Ihre "
 "Installation ist fehlerhaft."
 
-#: ../common/CommonUtils.vala:355
+#: ../common/CommonUtils.vala:356
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 "Datensicherungswerkzeug konnte nicht geladen werden. Ihre Installation ist "
 "fehlerhaft."
 
-#: ../common/CommonUtils.vala:361
+#: ../common/CommonUtils.vala:362
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 "Datensicherungswerkzeug ist beschädigt. Ihre Installation ist fehlerhaft."
 
-#: ../common/CommonUtils.vala:383
+#: ../common/CommonUtils.vala:384
 msgid "Could not start backup tool"
 msgstr "Datensicherungswerkzeug konnte nicht gestartet werden."
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:484
+#: ../common/CommonUtils.vala:485
 #, c-format
 msgid "Home (%s)"
 msgstr "Persönlicher Ordner (%s)"
 
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:489
+#: ../common/CommonUtils.vala:490
 msgid "Home"
 msgstr "Persönlicher Ordner"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:494
+#: ../common/CommonUtils.vala:495
 msgid "Trash"
 msgstr "Mülleimer"
 
@@ -1248,31 +1258,19 @@ msgstr ""
 "Déjà Dup benötigt mindestens Version %d.%d.%.2d von Duplicity, konnte aber "
 "nur Version %d.%d.%.2d finden"
 
-#: ../widgets/ConfigDelete.vala:43
-msgid "At least a month"
-msgstr "Mindestens ein Monat"
-
-#: ../widgets/ConfigDelete.vala:44
-msgid "At least two months"
-msgstr "Mindestens zwei Monate"
-
-#: ../widgets/ConfigDelete.vala:45
-msgid "At least three months"
-msgstr "Mindestens drei Monate"
-
-#: ../widgets/ConfigDelete.vala:46
+#: ../widgets/ConfigDelete.vala:40
 msgid "At least six months"
 msgstr "Mindestens sechs Monate"
 
-#: ../widgets/ConfigDelete.vala:47
+#: ../widgets/ConfigDelete.vala:41
 msgid "At least a year"
 msgstr "Mindestens ein Jahr"
 
-#: ../widgets/ConfigDelete.vala:48
+#: ../widgets/ConfigDelete.vala:42
 msgid "Forever"
 msgstr "Für immer"
 
-#: ../widgets/ConfigDelete.vala:95
+#: ../widgets/ConfigDelete.vala:89
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -1321,37 +1319,13 @@ msgstr "Nein"
 
 #: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
-"Old backups will be kept for at least a month or until the backup location "
-"is low on space."
-msgstr ""
-"Alte Datensicherungen werden für mindestens einen Monat aufbewahrt, oder bis "
-"kein Platz mehr im Sicherungsordner verfügbar ist."
-
-#: ../widgets/ConfigLabelPolicy.vala:66
-msgid ""
-"Old backups will be kept for at least two months or until the backup "
-"location is low on space."
-msgstr ""
-"Alte Datensicherungen werden für mindestens zwei Monate aufbewahrt, oder bis "
-"kein Platz mehr im Sicherungsordner verfügbar ist."
-
-#: ../widgets/ConfigLabelPolicy.vala:68
-msgid ""
-"Old backups will be kept for at least three months or until the backup "
-"location is low on space."
-msgstr ""
-"Alte Datensicherungen werden für mindestens drei Monate aufbewahrt, oder bis "
-"kein Platz mehr im Sicherungsordner verfügbar ist."
-
-#: ../widgets/ConfigLabelPolicy.vala:70
-msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
 "Alte Datensicherungen werden für mindestens sechs Monate aufbewahrt, oder "
 "bis kein Platz mehr im Sicherungsordner verfügbar ist."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1359,13 +1333,13 @@ msgstr ""
 "Alte Datensicherungen werden für mindestens ein Jahr aufbewahrt, oder bis "
 "kein Platz mehr im Sicherungsordner verfügbar ist."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Alte Datensicherungen werden aufbewahrt, bis kein Platz mehr im "
 "Sicherungsordner verfügbar ist."
 
-#: ../widgets/ConfigLabelPolicy.vala:77
+#: ../widgets/ConfigLabelPolicy.vala:71
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1478,15 +1452,7 @@ msgstr "Täglich"
 msgid "Weekly"
 msgstr "Wöchentlich"
 
-#: ../widgets/ConfigPeriod.vala:38
-msgid "Every 2 weeks"
-msgstr "Alle zwei Wochen"
-
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Monthly"
-msgstr "Monatlich"
-
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:82
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1497,6 +1463,18 @@ msgstr[1] "Alle %d Tage"
 #, c-format
 msgid "Could not display %s"
 msgstr "%s konnte nicht angezeigt werden"
+
+#~ msgid "At least a month"
+#~ msgstr "Mindestens ein Monat"
+
+#~ msgid "At least three months"
+#~ msgstr "Mindestens drei Monate"
+
+#~ msgid "At least two months"
+#~ msgstr "Mindestens zwei Monate"
+
+#~ msgid "Monthly"
+#~ msgstr "Monatlich"
 
 #~ msgid ""
 #~ "Could not understand duplicity version.\n"
@@ -1526,3 +1504,27 @@ msgstr "%s konnte nicht angezeigt werden"
 #~ msgid ""
 #~ "Without duplicity, Déjà Dup Backup Tool cannot function. It will close now."
 #~ msgstr "Ohne Duplicity funktioniert Déjà Dup nicht. Es wird nun beendet."
+
+#~ msgid "Every 2 weeks"
+#~ msgstr "Alle zwei Wochen"
+
+#~ msgid ""
+#~ "Old backups will be kept for at least a month or until the backup location "
+#~ "is low on space."
+#~ msgstr ""
+#~ "Alte Datensicherungen werden für mindestens einen Monat aufbewahrt, oder bis "
+#~ "kein Platz mehr im Sicherungsordner verfügbar ist."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least three months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "Alte Datensicherungen werden für mindestens drei Monate aufbewahrt, oder bis "
+#~ "kein Platz mehr im Sicherungsordner verfügbar ist."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least two months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "Alte Datensicherungen werden für mindestens zwei Monate aufbewahrt, oder bis "
+#~ "kein Platz mehr im Sicherungsordner verfügbar ist."

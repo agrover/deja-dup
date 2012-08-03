@@ -2,22 +2,23 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the deja-dup package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# Piotr Sokół <psokol@jabster.pl>, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-04-29 23:17-0700\n"
-"PO-Revision-Date: 2012-06-06 19:36+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Polish <pl@li.org>\n"
+"POT-Creation-Date: 2012-07-20 19:31-0400\n"
+"PO-Revision-Date: 2012-07-26 11:06+0000\n"
+"Last-Translator: Piotr Sokół <Unknown>\n"
+"Language-Team: polski <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-06-07 05:12+0000\n"
-"X-Generator: Launchpad (build 15353)\n"
+"X-Launchpad-Export-Date: 2012-07-27 05:36+0000\n"
+"X-Generator: Launchpad (build 15694)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -34,7 +35,7 @@ msgstr "Kopia zapasowa"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:88
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
 #: ../deja-dup/main.vala:78 ../preferences/Preferences.vala:88
 #, c-format
 msgid "Déjà Dup Backup Tool"
@@ -70,7 +71,7 @@ msgstr "Planowanie kopii zapasowych w regularnych odstępach czasu"
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 #: ../preferences/Preferences.vala:160
 msgid "Folders to back up"
-msgstr "Katalogi do zachowania"
+msgstr "Uwzględniane katalogi"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:2
 msgid ""
@@ -204,10 +205,22 @@ msgstr ""
 "jest minimalna liczba dni, pliki mogą być trzymane dłużej."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
+msgid "How long to wait between full backups"
+msgstr "Jak długo czekać między wykonaniem pełnych kopii zapasowych"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+msgid ""
+"Déjà Dup needs to occasionally make fresh full backups. This is the number "
+"of days to wait between full backups."
+msgstr ""
+"Program Déjà Dup musi co jakiś czas wykonać świeże, pełne kopie zapasowe. To "
+"jest liczba dni oczekiwania między wykonaniem pełnych kopii zapasowych"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "Type of location to store backup"
 msgstr "Typ położenia, w którym przechowywać kopie zapasowe"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
@@ -215,20 +228,20 @@ msgstr ""
 "Typ położenia kopii zapasowe. Jeśli wynosi \"auto\", to zostanie wybrany "
 "domyślny z dostępnych."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid "Amazon S3 Access Key ID"
 msgstr "Identyfikator klucza dostępu do serwisu Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Identyfikator klucza dostępu serwisu Amazon S3. Działa jak nazwa użytkownika."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "The Amazon S3 bucket name to use"
 msgstr "Nazwa używanego kosza serwisu Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -238,11 +251,11 @@ msgstr ""
 "prawidłowe."
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The Amazon S3 folder"
 msgstr "Katalog serwisu Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
@@ -250,11 +263,11 @@ msgstr ""
 "Opcjonalna nazwa katalogu, w którym przechowywać pliki. Zostanie on "
 "utworzony w wybranym koszu."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "The Rackspace Cloud Files container"
 msgstr "Kontener Rackspace Cloud Files"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -262,19 +275,19 @@ msgstr ""
 "W którym kontenerze Rackspace Cloud Files przechowywać pliki. Kontener nie "
 "musi już istnieć. Tylko dozwolone ciągi nazw komputera są dozwolone."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "Your Rackspace username"
 msgstr "Nazwa użytkownika usługi Rackspace"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "To jest nazwa użytkownika usługi Rackspace Cloud Files."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "The Ubuntu One folder"
 msgstr "Katalog usługi Ubuntu One"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
@@ -282,31 +295,31 @@ msgstr ""
 "Nazwa katalogu do przechowywania plików. Jeśli wynosi \"$HOSTNAME\", to "
 "będzie użyty domyślny katalog oparty na nazwie komputera."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 #: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "Położenie kopii zapasowej"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "Location in which to hold the backup files."
 msgstr "Położenie, w którym przechowywać pliki kopii zapasowych."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid "Folder type"
 msgstr "Typ katalogu"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Określa, czy położenie kopii zapasowej znajduje się na zamontowanym "
 "woluminie zewnętrznym czy w normalnym katalogu."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Relative path under the external volume"
 msgstr "Względna ścieżka woluminu zewnętrznego"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -314,11 +327,11 @@ msgstr ""
 "Jeśli położenie kopii zapasowej znajduje się na zewnętrznym woluminie, to "
 "jest ścieżka do katalogu na nim."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Unique ID of the external volume"
 msgstr "Unikalny identyfikator woluminu zewnętrznego"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -326,11 +339,11 @@ msgstr ""
 "Jeśli położenie kopii zapasowej znajduje się na zewnętrznym woluminie, to "
 "jest jego unikalny identyfikator systemu plików."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Full name of the external volume"
 msgstr "Pełna nazwa zewnętrznego woluminu"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -338,11 +351,11 @@ msgstr ""
 "Jeśli położenie kopii zapasowej znajduje się na zewnętrznym woluminie, to "
 "jest jego dłuższy opis."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid "Short name of the external volume"
 msgstr "Krótka nazwa woluminu zewnętrznego"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
@@ -350,18 +363,18 @@ msgstr ""
 "Jeśli położenie kopii zapasowej znajduje się na zewnętrznym woluminie, to "
 "jest jego krótszy opis."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Icon of the external volume"
 msgstr "Ikona zewnętrznego woluminu"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
 "Jeśli położenie kopii zapasowej znajduje się na zewnętrznym woluminie, to "
 "jest jego ikona."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
 msgid "Obsolete"
 msgstr "Przestarzałe"
 
@@ -397,7 +410,7 @@ msgstr[2] "Przywróć pliki z kopii zapasowej"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:433
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:434
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s w %2$s"
@@ -519,42 +532,42 @@ msgstr "Połączenie z usługą Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "Zaloguj do usługi Ubuntu One…"
 
-#: ../common/CommonUtils.vala:353
+#: ../common/CommonUtils.vala:354
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 "Nie można odnaleźć narzędzia do tworzenia kopii zapasowych w %s. Instalacja "
 "jest niepełna."
 
-#: ../common/CommonUtils.vala:355
+#: ../common/CommonUtils.vala:356
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 "Nie można wczytać narzędzia do tworzenia kopii zapasowych. Instalacja jest "
 "niepełna."
 
-#: ../common/CommonUtils.vala:361
+#: ../common/CommonUtils.vala:362
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 "Narzędzie do tworzenia kopii zapasowych jest uszkodzone. Instalacja jest "
 "niepełna."
 
-#: ../common/CommonUtils.vala:383
+#: ../common/CommonUtils.vala:384
 msgid "Could not start backup tool"
 msgstr "Nie można uruchomić narzędzia do tworzenia kopii zapasowych"
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:484
+#: ../common/CommonUtils.vala:485
 #, c-format
 msgid "Home (%s)"
 msgstr "Katalog domowy (%s)"
 
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:489
+#: ../common/CommonUtils.vala:490
 msgid "Home"
 msgstr "Katalog domowy"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:494
+#: ../common/CommonUtils.vala:495
 msgid "Trash"
 msgstr "Kosz"
 
@@ -1043,7 +1056,7 @@ msgstr "Wyko_naj kopię zapasową"
 
 #: ../preferences/Preferences.vala:252
 msgid "Overview"
-msgstr "Przegląd"
+msgstr "Podsumowanie"
 
 #. Translators: storage as in "where to store the backup"
 #: ../preferences/Preferences.vala:284
@@ -1052,11 +1065,11 @@ msgstr "Przechowywanie danych"
 
 #: ../preferences/Preferences.vala:305
 msgid "Folders to _back up"
-msgstr "Katalogi do z_achowania"
+msgstr "_Uwzględniane katalogi"
 
 #: ../preferences/Preferences.vala:315
 msgid "Folders to _ignore"
-msgstr "Katalogi do z_ignorowania"
+msgstr "_Ignorowane katalogi"
 
 #: ../preferences/Preferences.vala:324
 msgid "Folders"
@@ -1064,12 +1077,12 @@ msgstr "Katalogi"
 
 #: ../preferences/Preferences.vala:335
 msgid "How _often to back up"
-msgstr "Jak często tw_orzyć kopię zapasową"
+msgstr "_Częstotliwość wykonywania kopii zapasowych"
 
 #: ../preferences/Preferences.vala:346
 #, c-format
 msgid "_Keep backups"
-msgstr "Trzymanie _kopii zapasowych"
+msgstr "Czas przechowywania _kopii zapasowych"
 
 #: ../preferences/Preferences.vala:361
 msgid "Schedule"
@@ -1244,31 +1257,19 @@ msgstr ""
 "Narzędzie do wykonywania kopii zapasowych Déjà Dup wymaga co najmniej wersji "
 "%d.%d.%.2d programu duplicity, ale odnaleziono tylko wersję %d.%d.%.2d"
 
-#: ../widgets/ConfigDelete.vala:43
-msgid "At least a month"
-msgstr "Co najmniej miesiąc"
-
-#: ../widgets/ConfigDelete.vala:44
-msgid "At least two months"
-msgstr "Co najmniej dwa miesiące"
-
-#: ../widgets/ConfigDelete.vala:45
-msgid "At least three months"
-msgstr "Co najmniej kwartał"
-
-#: ../widgets/ConfigDelete.vala:46
+#: ../widgets/ConfigDelete.vala:40
 msgid "At least six months"
 msgstr "Co najmniej pół roku"
 
-#: ../widgets/ConfigDelete.vala:47
+#: ../widgets/ConfigDelete.vala:41
 msgid "At least a year"
 msgstr "Co najmniej rok"
 
-#: ../widgets/ConfigDelete.vala:48
+#: ../widgets/ConfigDelete.vala:42
 msgid "Forever"
 msgstr "Zawsze"
 
-#: ../widgets/ConfigDelete.vala:95
+#: ../widgets/ConfigDelete.vala:89
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -1320,37 +1321,13 @@ msgstr "Nie"
 
 #: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
-"Old backups will be kept for at least a month or until the backup location "
-"is low on space."
-msgstr ""
-"Poprzednie kopie zapasowe będą trzymane co najmniej miesiąc lub do czasu "
-"wyczerpania miejsca."
-
-#: ../widgets/ConfigLabelPolicy.vala:66
-msgid ""
-"Old backups will be kept for at least two months or until the backup "
-"location is low on space."
-msgstr ""
-"Poprzednie kopie zapasowe będą trzymane co najmniej dwa miesiące lub do "
-"czasu wyczerpania miejsca."
-
-#: ../widgets/ConfigLabelPolicy.vala:68
-msgid ""
-"Old backups will be kept for at least three months or until the backup "
-"location is low on space."
-msgstr ""
-"Poprzednie kopie zapasowe będą trzymane co najmniej kwartał lub do czasu "
-"wyczerpania miejsca."
-
-#: ../widgets/ConfigLabelPolicy.vala:70
-msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
 "Poprzednie kopie zapasowe będą trzymane co najmniej pół roku lub do czasu "
 "wyczerpania miejsca."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1358,12 +1335,12 @@ msgstr ""
 "Poprzednie kopie zapasowe będą trzymane co najmniej rok lub do czasu "
 "wyczerpania miejsca."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Poprzednie kopie zapasowe będą trzymane do czasu wyczerpania miejsca."
 
-#: ../widgets/ConfigLabelPolicy.vala:77
+#: ../widgets/ConfigLabelPolicy.vala:71
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1479,15 +1456,7 @@ msgstr "Codziennie"
 msgid "Weekly"
 msgstr "Co tydzień"
 
-#: ../widgets/ConfigPeriod.vala:38
-msgid "Every 2 weeks"
-msgstr "Co dwa tygodnie"
-
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Monthly"
-msgstr "Co miesiąc"
-
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:82
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1521,6 +1490,39 @@ msgstr "Nie można wyświetlić %s"
 #~ msgid "Duplicity’s version is too old"
 #~ msgstr "Wersja programu duplicity jest za stara"
 
+#~ msgid "At least a month"
+#~ msgstr "Co najmniej miesiąc"
+
+#~ msgid "At least three months"
+#~ msgstr "Co najmniej kwartał"
+
+#~ msgid "At least two months"
+#~ msgstr "Co najmniej dwa miesiące"
+
+#~ msgid "Monthly"
+#~ msgstr "Co miesiąc"
+
+#~ msgid ""
+#~ "Old backups will be kept for at least a month or until the backup location "
+#~ "is low on space."
+#~ msgstr ""
+#~ "Poprzednie kopie zapasowe będą trzymane co najmniej miesiąc lub do czasu "
+#~ "wyczerpania miejsca."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least three months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "Poprzednie kopie zapasowe będą trzymane co najmniej kwartał lub do czasu "
+#~ "wyczerpania miejsca."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least two months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "Poprzednie kopie zapasowe będą trzymane co najmniej dwa miesiące lub do "
+#~ "czasu wyczerpania miejsca."
+
 #~ msgid "You must specify a Rackspace container in your preferences."
 #~ msgstr "Należy podać kontener usługi Rackspace w preferencjach."
 
@@ -1529,3 +1531,6 @@ msgstr "Nie można wyświetlić %s"
 #~ msgstr ""
 #~ "Bez programu duplicity narzędzie do wykonywania kopii zapasowych Déjà Dup "
 #~ "nie może działać. Zostanie teraz zamknięte."
+
+#~ msgid "Every 2 weeks"
+#~ msgstr "Co dwa tygodnie"

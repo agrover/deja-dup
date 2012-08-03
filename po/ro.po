@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-04-29 23:17-0700\n"
+"POT-Creation-Date: 2012-07-20 19:31-0400\n"
 "PO-Revision-Date: 2012-03-22 14:30+0000\n"
 "Last-Translator: Launchpad Translations Administrators "
 "<rosetta@launchpad.net>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2012-06-06 05:32+0000\n"
-"X-Generator: Launchpad (build 15353)\n"
+"X-Launchpad-Export-Date: 2012-07-22 04:59+0000\n"
+"X-Generator: Launchpad (build 15654)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -35,7 +35,7 @@ msgstr "Copie de siguranță"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:88
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
 #: ../deja-dup/main.vala:78 ../preferences/Preferences.vala:88
 #, c-format
 msgid "Déjà Dup Backup Tool"
@@ -211,10 +211,20 @@ msgstr ""
 "zile minim; fișierele ar putea fi păstrate pentru mai mult timp."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
+msgid "How long to wait between full backups"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+msgid ""
+"Déjà Dup needs to occasionally make fresh full backups. This is the number "
+"of days to wait between full backups."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "Type of location to store backup"
 msgstr "Tipul locului pentru păstrarea copiilor de siguranță"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
@@ -222,21 +232,21 @@ msgstr ""
 "Tipul locului în care sunt păstrate copiile de siguranță. Dacă este pe "
 "„auto”, va fi ales un loc implicit după criteriul disponibilității."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid "Amazon S3 Access Key ID"
 msgstr "Identificator cheie de access Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Identificatorul cheii dumneavoastră de acces Amazon S3. Acesta se comportă "
 "precum numele dumneavoastră de utilizator S3."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "The Amazon S3 bucket name to use"
 msgstr "Numele recipientului Amazon S3 utilizat"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -246,11 +256,11 @@ msgstr ""
 "valide."
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The Amazon S3 folder"
 msgstr "Dosarul Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
@@ -258,11 +268,11 @@ msgstr ""
 "Un nume opțional pentru dosarul în care se păstrează fișierele. Dosarul va "
 "fi creat în recipientul ales."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "The Rackspace Cloud Files container"
 msgstr "Containerul pentru fișiere Rackspace Cloud"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -271,21 +281,21 @@ msgstr ""
 "Nu trebuie să fie unul existent deja. Numai numele de gazdă acceptate sunt "
 "valide."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "Your Rackspace username"
 msgstr "Numele dumneavoastră de utilizator Rackspace"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr ""
 "Acesta este numele dumneavoastră de utilizatormpentru serviciul Rackspace "
 "Cloud Files."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "The Ubuntu One folder"
 msgstr "Dosarul Ubuntu One"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
@@ -293,31 +303,31 @@ msgstr ""
 "Numele dosarului în care sunt păstrate fișiere. Dacă acesta este "
 "‘$HOSTNAME’, implicit va fi desemnat un dosar bazat pe numele calcualtorului."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 #: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "Locul copiilor de siguranță"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "Location in which to hold the backup files."
 msgstr "Locul în care vor fi păstrate copiile de siguranță."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid "Folder type"
 msgstr "Tip dosar"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Dacă locul pentru păstrarea copiilor de siguranță este un volum extern "
 "atașat la sistem sau un dosar normal."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Relative path under the external volume"
 msgstr "Calea relativă din structura volumului extern"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -325,11 +335,11 @@ msgstr ""
 "Dacă locul pentru păstrarea copiilor de siguranță este pe un volum extern, "
 "aceasta este calea către dosarul de pe acel volum."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Unique ID of the external volume"
 msgstr "Identificatorul unic al volumului extern"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -337,11 +347,11 @@ msgstr ""
 "Dacă locul pentru păstrarea copiilor de siguranță este pe un volum extern, "
 "acesta este identificatorul unic al sistemului de fișiere."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Full name of the external volume"
 msgstr "Numele întreg al volumului extern"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -349,11 +359,11 @@ msgstr ""
 "Dacă locul pentru păstrarea copiilor de siguranță este pe un volum extern, "
 "acesta este numele care descrie pe larg volumul."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid "Short name of the external volume"
 msgstr "Numele scurt al volumului extern"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
@@ -361,18 +371,18 @@ msgstr ""
 "Dacă locul pentru păstrarea copiilor de siguranță este pe un volum extern, "
 "acesta este numele scurt al volumului."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Icon of the external volume"
 msgstr "Iconița volumului extern"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
 "Dacă locul pentru păstrarea copiilor de siguranță este pe un volum extern, "
 "aceasta este iconița volumului."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
 msgid "Obsolete"
 msgstr "Învechit"
 
@@ -408,7 +418,7 @@ msgstr[2] "Restaurează fișierele folosind copia de siguranță"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:433
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:434
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s pe %2$s"
@@ -529,36 +539,36 @@ msgstr "Conectare la Ubuntu One"
 msgid "Sign into Ubuntu One…"
 msgstr "Autentifică în Ubuntu One…"
 
-#: ../common/CommonUtils.vala:353
+#: ../common/CommonUtils.vala:354
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:355
+#: ../common/CommonUtils.vala:356
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:361
+#: ../common/CommonUtils.vala:362
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:383
+#: ../common/CommonUtils.vala:384
 msgid "Could not start backup tool"
 msgstr ""
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:484
+#: ../common/CommonUtils.vala:485
 #, c-format
 msgid "Home (%s)"
 msgstr "Dosar personal (%s)"
 
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:489
+#: ../common/CommonUtils.vala:490
 msgid "Home"
 msgstr "Dosar personal"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:494
+#: ../common/CommonUtils.vala:495
 msgid "Trash"
 msgstr "Coș de gunoi"
 
@@ -1256,31 +1266,19 @@ msgstr ""
 "Utilitarul Déjà Dup solicită cel puțin versiunea %d.%d.%.2d a aplicației "
 "duplicity, însă versiunea curentă este %d.%d.%.2d"
 
-#: ../widgets/ConfigDelete.vala:43
-msgid "At least a month"
-msgstr "Cel puțin o lună"
-
-#: ../widgets/ConfigDelete.vala:44
-msgid "At least two months"
-msgstr "Cel puțin două luni"
-
-#: ../widgets/ConfigDelete.vala:45
-msgid "At least three months"
-msgstr "Cel puțin trei luni"
-
-#: ../widgets/ConfigDelete.vala:46
+#: ../widgets/ConfigDelete.vala:40
 msgid "At least six months"
 msgstr "Cel puțin șase luni"
 
-#: ../widgets/ConfigDelete.vala:47
+#: ../widgets/ConfigDelete.vala:41
 msgid "At least a year"
 msgstr "Cel puțin un an"
 
-#: ../widgets/ConfigDelete.vala:48
+#: ../widgets/ConfigDelete.vala:42
 msgid "Forever"
 msgstr "Permanent"
 
-#: ../widgets/ConfigDelete.vala:95
+#: ../widgets/ConfigDelete.vala:89
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -1332,37 +1330,13 @@ msgstr "Nu"
 
 #: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
-"Old backups will be kept for at least a month or until the backup location "
-"is low on space."
-msgstr ""
-"Copiile de siguranță vechi vor fi păstrate pentru cel puțin o lună sau până "
-"la epuizarea spațiului de stocare."
-
-#: ../widgets/ConfigLabelPolicy.vala:66
-msgid ""
-"Old backups will be kept for at least two months or until the backup "
-"location is low on space."
-msgstr ""
-"Copiile de siguranță vechi vor fi păstrate pentru cel puțin două luni sau "
-"până la epuizarea spațiului de stocare."
-
-#: ../widgets/ConfigLabelPolicy.vala:68
-msgid ""
-"Old backups will be kept for at least three months or until the backup "
-"location is low on space."
-msgstr ""
-"Copiile de siguranță vechi vor fi păstrate pentru cel puțin trei luni sau "
-"până la epuizarea spațiului de stocare."
-
-#: ../widgets/ConfigLabelPolicy.vala:70
-msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
 "Copiile de siguranță vechi vor fi păstrate pentru cel puțin șase luni sau "
 "până la epuizarea spațiului de stocare."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1370,13 +1344,13 @@ msgstr ""
 "Copiile de siguranță vechi vor fi păstrate pentru cel puțin un an sau până "
 "la epuizarea spațiului de stocare."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Copiile de siguranță vechi vor fi păstrate până la epuizarea spațiului de "
 "stocare."
 
-#: ../widgets/ConfigLabelPolicy.vala:77
+#: ../widgets/ConfigLabelPolicy.vala:71
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1492,15 +1466,7 @@ msgstr "Zilnic"
 msgid "Weekly"
 msgstr "Săptămânal"
 
-#: ../widgets/ConfigPeriod.vala:38
-msgid "Every 2 weeks"
-msgstr "Bilunar"
-
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Monthly"
-msgstr "Lunar"
-
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:82
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1512,6 +1478,18 @@ msgstr[2] "La fiecare %d de zile"
 #, c-format
 msgid "Could not display %s"
 msgstr "Nu se poate afișa %s"
+
+#~ msgid "Monthly"
+#~ msgstr "Lunar"
+
+#~ msgid "At least three months"
+#~ msgstr "Cel puțin trei luni"
+
+#~ msgid "At least a month"
+#~ msgstr "Cel puțin o lună"
+
+#~ msgid "At least two months"
+#~ msgstr "Cel puțin două luni"
 
 #~ msgid "You must specify a Rackspace container in your preferences."
 #~ msgstr ""
@@ -1543,3 +1521,27 @@ msgstr "Nu se poate afișa %s"
 
 #~ msgid "Duplicity’s version is too old"
 #~ msgstr "Versiunea aplicației duplicity este prea veche"
+
+#~ msgid ""
+#~ "Old backups will be kept for at least a month or until the backup location "
+#~ "is low on space."
+#~ msgstr ""
+#~ "Copiile de siguranță vechi vor fi păstrate pentru cel puțin o lună sau până "
+#~ "la epuizarea spațiului de stocare."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least two months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "Copiile de siguranță vechi vor fi păstrate pentru cel puțin două luni sau "
+#~ "până la epuizarea spațiului de stocare."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least three months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "Copiile de siguranță vechi vor fi păstrate pentru cel puțin trei luni sau "
+#~ "până la epuizarea spațiului de stocare."
+
+#~ msgid "Every 2 weeks"
+#~ msgstr "Bilunar"

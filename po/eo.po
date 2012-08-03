@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-04-29 23:17-0700\n"
+"POT-Creation-Date: 2012-07-20 19:31-0400\n"
 "PO-Revision-Date: 2012-03-22 14:30+0000\n"
 "Last-Translator: Michael Moroni <michael.moroni@mailoo.org>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-06-06 05:31+0000\n"
-"X-Generator: Launchpad (build 15353)\n"
+"X-Launchpad-Export-Date: 2012-07-22 04:58+0000\n"
+"X-Generator: Launchpad (build 15654)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "Sekurkopio"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:88
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
 #: ../deja-dup/main.vala:78 ../preferences/Preferences.vala:88
 #, c-format
 msgid "Déjà Dup Backup Tool"
@@ -200,10 +200,20 @@ msgstr ""
 "povus konservita pli longa."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
+msgid "How long to wait between full backups"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+msgid ""
+"Déjà Dup needs to occasionally make fresh full backups. This is the number "
+"of days to wait between full backups."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "Type of location to store backup"
 msgstr "Tipo de loko por konservi sekurkopion"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
@@ -211,21 +221,21 @@ msgstr ""
 "La tipo de sekurkopi-loko. Se ‘auto’, defaŭlto-loko estos elektinta per kiuj "
 "lokoj estas disponeblaj."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid "Amazon S3 Access Key ID"
 msgstr "Amazon S3 atingoŝlosila identigilo"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Via Amazon S3 atingoŝlosila identigilo.  Ĉi tiu estas ankaŭe via S3-a "
 "uzantnomo."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "The Amazon S3 bucket name to use"
 msgstr "La nomo de la sitelo ĉe Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -234,11 +244,11 @@ msgstr ""
 "ekzisti jam. Nur permesita gastiga komputilnomo ĉenoj estas validaj."
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The Amazon S3 folder"
 msgstr "La dosierujo ĉe Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
@@ -246,11 +256,11 @@ msgstr ""
 "Laŭvola dosiernomo por konservi dosierojn. Ĉi tiu dosiero kreiĝos en la "
 "selektita sitelo."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "The Rackspace Cloud Files container"
 msgstr "Ujo de la Rackspace Cloud dosieraj"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -259,19 +269,19 @@ msgstr ""
 "ne bezonas ekzisti jam. Nur permesita gastiga komputilnomo ĉenoj estas "
 "validaj."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "Your Rackspace username"
 msgstr "Via Rackspace uzantnomo"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "Ĉi tiu estas via uzantnomo por la Rackspace Cloud Files servo."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "The Ubuntu One folder"
 msgstr "La dosiero de Ubuntu Unu"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
@@ -279,31 +289,31 @@ msgstr ""
 "La dosierujo-nomo por konservi dosierojn. Se '%HOSTNAME', defaŭltos al "
 "dosiero bazinta sur la nomo de la komputilo."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 #: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "Loko de sekurkopio"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "Location in which to hold the backup files."
 msgstr "Loko kiam teni la sekurkopiojn."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid "Folder type"
 msgstr "Tipo de dosierujo"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Ĉu la loko de sekurkopio estas portilo muntita eksterne lo aŭ normala "
 "dosierujo."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Relative path under the external volume"
 msgstr "Relativa vojo sub la ekstera portilo"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -311,11 +321,11 @@ msgstr ""
 "Se la sekurkopio loko estas sur ekstera portilo, ĉi tiu estas la dosieruja "
 "vojo sur tiu portilo."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Unique ID of the external volume"
 msgstr "Unika identigilo de la ekstera portilo"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -323,11 +333,11 @@ msgstr ""
 "Se la sekurkopia loko estas sur ekstera portilo, ĉi tio estas ties unika "
 "dosiersistema identigilo."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Full name of the external volume"
 msgstr "Plena nomo de la ekstera portilo"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -335,11 +345,11 @@ msgstr ""
 "Se la loko de la sekurkopio estas en ekstera portilo, ĉi tio estas la pli "
 "longa priskriba nomo de la portilo."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid "Short name of the external volume"
 msgstr "Mallonga nomo de la ekstera portilo"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
@@ -347,18 +357,18 @@ msgstr ""
 "Se la loko de la sekurkopio estas en ekstera portilo, ĉi tio estas la pli "
 "mallonga nomo de la portilo."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Icon of the external volume"
 msgstr "Bildsimbolo de la ekstera portilo"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
 "Se la sekurkopio estas sur ekstera portilo, ĉi tiu estas la bildsimbolo de "
 "la portilo."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
 msgid "Obsolete"
 msgstr "Neaktuala"
 
@@ -392,7 +402,7 @@ msgstr[1] "Restaŭri forviŝitajn dosierojn de sukurkopi-loko"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:433
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:434
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s en %2$s"
@@ -512,36 +522,36 @@ msgstr "Konekti al Ubuntu Unu"
 msgid "Sign into Ubuntu One…"
 msgstr "Ensaluti al Ubuntu Unu…"
 
-#: ../common/CommonUtils.vala:353
+#: ../common/CommonUtils.vala:354
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:355
+#: ../common/CommonUtils.vala:356
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:361
+#: ../common/CommonUtils.vala:362
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:383
+#: ../common/CommonUtils.vala:384
 msgid "Could not start backup tool"
 msgstr ""
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:484
+#: ../common/CommonUtils.vala:485
 #, c-format
 msgid "Home (%s)"
 msgstr "Hejmo (%s)"
 
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:489
+#: ../common/CommonUtils.vala:490
 msgid "Home"
 msgstr "Hejmo"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:494
+#: ../common/CommonUtils.vala:495
 msgid "Trash"
 msgstr "Rubujo"
 
@@ -1223,31 +1233,19 @@ msgstr ""
 "Déjà Dup sekurkopilo bezonas minimuman version %d.%d.%.2d de duplicity, sed "
 "nur trovitas %d.%d.%.2d"
 
-#: ../widgets/ConfigDelete.vala:43
-msgid "At least a month"
-msgstr "Almenaŭ unu monato"
-
-#: ../widgets/ConfigDelete.vala:44
-msgid "At least two months"
-msgstr "Almenaŭ du monatoj"
-
-#: ../widgets/ConfigDelete.vala:45
-msgid "At least three months"
-msgstr "Almenaŭ tri monatoj"
-
-#: ../widgets/ConfigDelete.vala:46
+#: ../widgets/ConfigDelete.vala:40
 msgid "At least six months"
 msgstr "Almenaŭ ses monatoj"
 
-#: ../widgets/ConfigDelete.vala:47
+#: ../widgets/ConfigDelete.vala:41
 msgid "At least a year"
 msgstr "Almenaŭ unu jaro"
 
-#: ../widgets/ConfigDelete.vala:48
+#: ../widgets/ConfigDelete.vala:42
 msgid "Forever"
 msgstr "Eterne"
 
-#: ../widgets/ConfigDelete.vala:95
+#: ../widgets/ConfigDelete.vala:89
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -1296,37 +1294,13 @@ msgstr "Ne"
 
 #: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
-"Old backups will be kept for at least a month or until the backup location "
-"is low on space."
-msgstr ""
-"Malnovaj sekurkopioj konserviĝos dum almenaŭ unu monato, aŭ ĝis mankas spaco "
-"al la loko de sekurkopio."
-
-#: ../widgets/ConfigLabelPolicy.vala:66
-msgid ""
-"Old backups will be kept for at least two months or until the backup "
-"location is low on space."
-msgstr ""
-"Malnovaj sekurkopioj konserviĝos dum almenaŭ du monatoj, aŭ ĝis mankas spaco "
-"al la loko de sekurkopio."
-
-#: ../widgets/ConfigLabelPolicy.vala:68
-msgid ""
-"Old backups will be kept for at least three months or until the backup "
-"location is low on space."
-msgstr ""
-"Malnovaj sekurkopioj konserviĝos dum almenaŭ du monatoj, aŭ ĝis mankas spaco "
-"al la loko de sekurkopio."
-
-#: ../widgets/ConfigLabelPolicy.vala:70
-msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
 "Malnovaj sekurkopioj konserviĝos dum almenaŭ ses monatoj, aŭ ĝis mankas "
 "spaco al la loko de sekurkopio."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1334,12 +1308,12 @@ msgstr ""
 "Malnovaj sekurkopioj konserviĝos dum almenaŭ unu jaro, aŭ ĝis mankas spaco "
 "al la loko de sekurkopio."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Malnovaj sekurkopioj konserviĝos ĝis mankas spaco al la loko de sekurkopio."
 
-#: ../widgets/ConfigLabelPolicy.vala:77
+#: ../widgets/ConfigLabelPolicy.vala:71
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1452,15 +1426,7 @@ msgstr "Ĉiutage"
 msgid "Weekly"
 msgstr "Semajne"
 
-#: ../widgets/ConfigPeriod.vala:38
-msgid "Every 2 weeks"
-msgstr "Ĉiuj 2 semajnoj"
-
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Monthly"
-msgstr "Monate"
-
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:82
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1471,6 +1437,15 @@ msgstr[1] "Ĉiuj %d tagoj"
 #, c-format
 msgid "Could not display %s"
 msgstr "Ne povas montri %s"
+
+#~ msgid "At least a month"
+#~ msgstr "Almenaŭ unu monato"
+
+#~ msgid "At least three months"
+#~ msgstr "Almenaŭ tri monatoj"
+
+#~ msgid "At least two months"
+#~ msgstr "Almenaŭ du monatoj"
 
 #~ msgid "You must specify a Rackspace container in your preferences."
 #~ msgstr "Vi devas specifi Rackspace-ujon en via a agordoj."
@@ -1499,3 +1474,30 @@ msgstr "Ne povas montri %s"
 
 #~ msgid "Duplicity’s version is too old"
 #~ msgstr "Versio de duplicity estas tro malnova."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least a month or until the backup location "
+#~ "is low on space."
+#~ msgstr ""
+#~ "Malnovaj sekurkopioj konserviĝos dum almenaŭ unu monato, aŭ ĝis mankas spaco "
+#~ "al la loko de sekurkopio."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least two months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "Malnovaj sekurkopioj konserviĝos dum almenaŭ du monatoj, aŭ ĝis mankas spaco "
+#~ "al la loko de sekurkopio."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least three months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "Malnovaj sekurkopioj konserviĝos dum almenaŭ du monatoj, aŭ ĝis mankas spaco "
+#~ "al la loko de sekurkopio."
+
+#~ msgid "Every 2 weeks"
+#~ msgstr "Ĉiuj 2 semajnoj"
+
+#~ msgid "Monthly"
+#~ msgstr "Monate"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-04-29 23:17-0700\n"
+"POT-Creation-Date: 2012-07-20 19:31-0400\n"
 "PO-Revision-Date: 2012-03-22 14:30+0000\n"
 "Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-06-06 05:31+0000\n"
-"X-Generator: Launchpad (build 15353)\n"
+"X-Launchpad-Export-Date: 2012-07-22 04:58+0000\n"
+"X-Generator: Launchpad (build 15654)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -33,7 +33,7 @@ msgstr "Varmistukset"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:88
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
 #: ../deja-dup/main.vala:78 ../preferences/Preferences.vala:88
 #, c-format
 msgid "Déjà Dup Backup Tool"
@@ -203,10 +203,20 @@ msgstr ""
 "säilyttää kauemminkin."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
+msgid "How long to wait between full backups"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+msgid ""
+"Déjà Dup needs to occasionally make fresh full backups. This is the number "
+"of days to wait between full backups."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "Type of location to store backup"
 msgstr "Varmuuskopioiden sijainnin tyyppi"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
@@ -214,19 +224,19 @@ msgstr ""
 "Varmuuskopiointisijainnin tyyppi. Jos \"auto\", oletus valitaan "
 "käytettävissä olevien valintojen perusteella."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid "Amazon S3 Access Key ID"
 msgstr "Amazon S3 -käyttöavaimen tunnus"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr "Amazon S3 -avaimen identifioija. Se toimii S3-käyttäjätunnuksenasi."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "The Amazon S3 bucket name to use"
 msgstr "Käytettävän Amazon S3 -korin nimi"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -235,11 +245,11 @@ msgstr ""
 "olemassa. Vain lailliset verkkonimet hyväksytään."
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The Amazon S3 folder"
 msgstr "Amazon S3 -kansio"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
@@ -247,11 +257,11 @@ msgstr ""
 "Vapaaehtoinen nimi kansiolle, jonne tiedostot tallennetaan. Tämä kansio "
 "luodaan valittuun sijaintiin."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "The Rackspace Cloud Files container"
 msgstr "Rackspace Cloud Files -säiliö"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -259,19 +269,19 @@ msgstr ""
 "Mille Rackspace Cloud Files -säiliöön tiedostot tallennetaan. Sitä ei "
 "tarvitse ennalta luoda. On käytettävä laillisia palvelin-nimiä."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "Your Rackspace username"
 msgstr "Rackspace-käyttäjätunnuksesi"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "Käyttäjänimesi Rackspace Cloud Files -palveluun."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "The Ubuntu One folder"
 msgstr "Ubuntu One -kansio"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
@@ -279,30 +289,30 @@ msgstr ""
 "Kansio jonne tiedostot tallennetaan. Jos käytetään ‘$HOSTNAME’, kansion "
 "nimetään tietokoneen nimen mukaan."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 #: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "Varmuuskopion sijainti"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "Location in which to hold the backup files."
 msgstr "Sijainti, jossa varmuuskopiot säilytetään."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid "Folder type"
 msgstr "Kansion laji"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Onko varmuuskopiosijainti liitetty ulkoinen taltio vai normaali kansio."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Relative path under the external volume"
 msgstr "Suhteellinen polku ulkoisella medialla"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -310,22 +320,22 @@ msgstr ""
 "Jos varmuuskopio tulee ulkoiselle medialle, tämä on kansion polku sillä "
 "medialla."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Unique ID of the external volume"
 msgstr "Ulkoisen median yksilöivä tunniste"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
 msgstr ""
 "Jos varmuuskopio tulee ulkoiselle medialle, tämä on sen yksilöivä tunniste."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Full name of the external volume"
 msgstr "Ulkoisen median koko nimi"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -333,27 +343,27 @@ msgstr ""
 "Jos varmuuskopio tulee ulkoiselle medialle, tämä on median pidempi, "
 "kuvaavampi nimi."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid "Short name of the external volume"
 msgstr "Ulkoisen median lyhyt nimi"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
 msgstr ""
 "Jos varmuuskopio tulee ulkoiselle medialle, tämä on median lyhyt nimi."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Icon of the external volume"
 msgstr "Ulkoisen median kuvake"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr "Jos varmuuskopio tulee ulkoiselle medialle, tämä on median kuvake."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
 msgid "Obsolete"
 msgstr "Vanhentunut"
 
@@ -387,7 +397,7 @@ msgstr[1] "Palauta tiedostot varmuuskopiosta"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:433
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:434
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%s palvelimella %s"
@@ -508,36 +518,36 @@ msgstr "Yhdistä Ubuntu One -palveluun"
 msgid "Sign into Ubuntu One…"
 msgstr "Kirjaudu Ubuntu One -palveluun…"
 
-#: ../common/CommonUtils.vala:353
+#: ../common/CommonUtils.vala:354
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:355
+#: ../common/CommonUtils.vala:356
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:361
+#: ../common/CommonUtils.vala:362
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:383
+#: ../common/CommonUtils.vala:384
 msgid "Could not start backup tool"
 msgstr ""
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:484
+#: ../common/CommonUtils.vala:485
 #, c-format
 msgid "Home (%s)"
 msgstr "Käyttäjän %s kotihakemisto"
 
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:489
+#: ../common/CommonUtils.vala:490
 msgid "Home"
 msgstr "Kotihakemisto"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:494
+#: ../common/CommonUtils.vala:495
 msgid "Trash"
 msgstr "Roskakori"
 
@@ -1222,31 +1232,19 @@ msgstr ""
 "Déjà Dup -varmuuskopiointi vaatii vähintään version %d.%d.%.2d sovelluksesta "
 "duplicity, mutta vain versio %d.%d.%.2d löydettiin."
 
-#: ../widgets/ConfigDelete.vala:43
-msgid "At least a month"
-msgstr "Vähintään kuukausi"
-
-#: ../widgets/ConfigDelete.vala:44
-msgid "At least two months"
-msgstr "Vähintään kaksi kuukautta"
-
-#: ../widgets/ConfigDelete.vala:45
-msgid "At least three months"
-msgstr "Vähintään kolme kuukautta"
-
-#: ../widgets/ConfigDelete.vala:46
+#: ../widgets/ConfigDelete.vala:40
 msgid "At least six months"
 msgstr "Vähintään kuusi kuukautta"
 
-#: ../widgets/ConfigDelete.vala:47
+#: ../widgets/ConfigDelete.vala:41
 msgid "At least a year"
 msgstr "Vähintään yksi vuosi"
 
-#: ../widgets/ConfigDelete.vala:48
+#: ../widgets/ConfigDelete.vala:42
 msgid "Forever"
 msgstr "Ikuisesti"
 
-#: ../widgets/ConfigDelete.vala:95
+#: ../widgets/ConfigDelete.vala:89
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -1295,37 +1293,13 @@ msgstr "Ei"
 
 #: ../widgets/ConfigLabelPolicy.vala:64
 msgid ""
-"Old backups will be kept for at least a month or until the backup location "
-"is low on space."
-msgstr ""
-"Vanhempia varmuuskopioita säilytetään vähintään yksi kuukausi jos "
-"varmuuskopiosijainnissa on riittävästi vapaata tilaa."
-
-#: ../widgets/ConfigLabelPolicy.vala:66
-msgid ""
-"Old backups will be kept for at least two months or until the backup "
-"location is low on space."
-msgstr ""
-"Vanhempia varmuuskopioita säilytetään vähintään kaksi kuukautta jos "
-"varmuuskopiosijainnissa on riittävästi vapaata tilaa."
-
-#: ../widgets/ConfigLabelPolicy.vala:68
-msgid ""
-"Old backups will be kept for at least three months or until the backup "
-"location is low on space."
-msgstr ""
-"Vanhempia varmuuskopioita säilytetään vähintään kolme kuukautta jos "
-"varmuuskopiosijainnissa on riittävästi vapaata tilaa."
-
-#: ../widgets/ConfigLabelPolicy.vala:70
-msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr ""
 "Vanhempia varmuuskopioita säilytetään vähintään kuusi kuukautta jos "
 "varmuuskopiosijainnissa on riittävästi vapaata tilaa."
 
-#: ../widgets/ConfigLabelPolicy.vala:72
+#: ../widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
@@ -1333,13 +1307,13 @@ msgstr ""
 "Vanhempia varmuuskopioita säilytetään vähintään yksi vuosi jos "
 "varmuuskopiosijainnissa on riittävästi vapaata tilaa."
 
-#: ../widgets/ConfigLabelPolicy.vala:74
+#: ../widgets/ConfigLabelPolicy.vala:68
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr ""
 "Vanhemmat varmuuskopiot säilytetään jos varmuuskopiosijainnissa on "
 "riittävästi vapaata tilaa."
 
-#: ../widgets/ConfigLabelPolicy.vala:77
+#: ../widgets/ConfigLabelPolicy.vala:71
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1452,15 +1426,7 @@ msgstr "Päivittäin"
 msgid "Weekly"
 msgstr "Viikoittain"
 
-#: ../widgets/ConfigPeriod.vala:38
-msgid "Every 2 weeks"
-msgstr "Kahden viikon välein"
-
-#: ../widgets/ConfigPeriod.vala:39
-msgid "Monthly"
-msgstr "Kuukausittain"
-
-#: ../widgets/ConfigPeriod.vala:84
+#: ../widgets/ConfigPeriod.vala:82
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
@@ -1471,6 +1437,18 @@ msgstr[1] "%d päivän välein"
 #, c-format
 msgid "Could not display %s"
 msgstr "Ei voinut näyttää %s"
+
+#~ msgid "Monthly"
+#~ msgstr "Kuukausittain"
+
+#~ msgid "At least a month"
+#~ msgstr "Vähintään kuukausi"
+
+#~ msgid "At least three months"
+#~ msgstr "Vähintään kolme kuukautta"
+
+#~ msgid "At least two months"
+#~ msgstr "Vähintään kaksi kuukautta"
 
 #~ msgid "Duplicity’s version is too old"
 #~ msgstr "Duplicityn versio on liian vanha"
@@ -1484,6 +1462,27 @@ msgstr "Ei voinut näyttää %s"
 
 #~ msgid "Could not run duplicity"
 #~ msgstr "Duplicity-ohjelmaa ei voitu suorittaa"
+
+#~ msgid ""
+#~ "Old backups will be kept for at least a month or until the backup location "
+#~ "is low on space."
+#~ msgstr ""
+#~ "Vanhempia varmuuskopioita säilytetään vähintään yksi kuukausi jos "
+#~ "varmuuskopiosijainnissa on riittävästi vapaata tilaa."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least three months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "Vanhempia varmuuskopioita säilytetään vähintään kolme kuukautta jos "
+#~ "varmuuskopiosijainnissa on riittävästi vapaata tilaa."
+
+#~ msgid ""
+#~ "Old backups will be kept for at least two months or until the backup "
+#~ "location is low on space."
+#~ msgstr ""
+#~ "Vanhempia varmuuskopioita säilytetään vähintään kaksi kuukautta jos "
+#~ "varmuuskopiosijainnissa on riittävästi vapaata tilaa."
 
 #, c-format
 #~ msgid ""
@@ -1501,3 +1500,6 @@ msgstr "Ei voinut näyttää %s"
 #~ msgstr ""
 #~ "Déjà Dup -varmuuskopiointi ei voi toimia ilman sovellusta duplicity, joten "
 #~ "se suljetaan nyt."
+
+#~ msgid "Every 2 weeks"
+#~ msgstr "Kahden viikon välein"
