@@ -49,7 +49,7 @@ public class OperationRestore : Operation
   public async override void start()
   {
     action_desc_changed(_("Restoring files…"));
-    base.start();
+    yield base.start();
   }
 
   protected override void connect_to_job()
@@ -70,7 +70,7 @@ public class OperationRestore : Operation
     if (success)
       DejaDup.update_last_run_timestamp(DejaDup.TimestampType.RESTORE);
 
-    base.operation_finished(job, success, cancelled, detail);
+    yield base.operation_finished(job, success, cancelled, detail);
   }
 }
 

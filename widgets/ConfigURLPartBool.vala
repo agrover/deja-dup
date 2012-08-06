@@ -31,7 +31,7 @@ public class ConfigURLPartBool : ConfigBool
     get {return _test_active;}
     set {
       _test_active = value;
-      set_from_config();
+      set_from_config.begin();
     }
   }
 

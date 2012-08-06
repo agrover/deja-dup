@@ -550,7 +550,7 @@ public abstract class AssistantOperation : Assistant
 
     ensure_status_icon(op);
 
-    op.start();
+    op.start.begin();
   }
 
   protected virtual void do_prepare(Assistant assist, Gtk.Widget page)
@@ -586,7 +586,7 @@ public abstract class AssistantOperation : Assistant
         provide_password();
       }
       else if (op == null)
-        do_apply();
+        do_apply.begin();
     }
     else if (page == password_page)
       set_header_icon(Gtk.Stock.DIALOG_AUTHENTICATION);

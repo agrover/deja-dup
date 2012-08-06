@@ -33,7 +33,7 @@ public class OperationBackup : Operation
     if (success)
       DejaDup.update_last_run_timestamp(DejaDup.TimestampType.BACKUP);
     
-    base.operation_finished(job, success, cancelled, detail);
+    yield base.operation_finished(job, success, cancelled, detail);
   }
   
   protected override List<string>? make_argv()

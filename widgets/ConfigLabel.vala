@@ -36,7 +36,7 @@ public class ConfigLabel : ConfigWidget
     box.column_spacing = 6;
     add(box);
     fill_box();
-    set_from_config();
+    set_from_config.begin();
   }
 
   protected virtual void fill_box()

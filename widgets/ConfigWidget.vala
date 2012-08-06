@@ -66,7 +66,7 @@ public abstract class ConfigWidget : Gtk.EventBox
 
   static bool key_changed_wrapper(ConfigWidget w)
   {
-    w.key_changed();
+    w.key_changed.begin();
     return false;
   }
 

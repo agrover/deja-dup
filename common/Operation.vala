@@ -179,7 +179,7 @@ public abstract class Operation : Object
     /*
      * Connect Deja Dup to signals
      */
-    job.done.connect((d, o, c, detail) => {operation_finished(d, o, c, detail);});
+    job.done.connect((d, o, c, detail) => {operation_finished.begin(d, o, c, detail);});
     job.raise_error.connect((d, s, detail) => {raise_error(s, detail);});
     job.action_desc_changed.connect((d, s) => {action_desc_changed(s);});
     job.action_file_changed.connect((d, f, b) => {action_file_changed(f, b);});

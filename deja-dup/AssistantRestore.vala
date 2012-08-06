@@ -393,7 +393,7 @@ public class AssistantRestore : AssistantOperation
     op.backend.mount_op = new MountOperationAssistant(this);
     op.backend.pause_op.connect(pause_op);
 
-    op.start();
+    op.start.begin();
   }
   
   protected override void do_prepare(Assistant assist, Gtk.Widget page)
@@ -494,7 +494,7 @@ public class AssistantRestore : AssistantOperation
           provide_password();
         }
         else if (query_op == null)
-          do_query();
+          do_query.begin();
       }
     }
   }

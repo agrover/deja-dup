@@ -46,7 +46,7 @@ class Listener : Object
   public void run()
   {
     Idle.add(() => {
-      call_but_quit_on_fail();
+      call_but_quit_on_fail.begin();
       return false;
     });
     proxy.g_signal.connect(handle_dbus_signal);
@@ -233,7 +233,7 @@ public class BackendU1 : Backend
 
   void button_clicked()
   {
-    sign_in();
+    sign_in.begin();
   }
 
   void ask_password() {

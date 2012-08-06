@@ -159,7 +159,7 @@ public class ConfigLocation : ConfigWidget
     mnemonic_widget = button;
 
     button.set_active(0); // worst case, activate first entry
-    set_from_config();
+    set_from_config.begin();
 
     set_location_widgets();
     button.changed.connect(handle_changed);

@@ -240,7 +240,7 @@ public class AssistantRestoreMissing : AssistantRestore {
           provide_password();
         }
         else if (!backups_queue_filled) {
-          do_query();
+          do_query.begin();
         }
       }
 
@@ -332,7 +332,7 @@ public class AssistantRestoreMissing : AssistantRestore {
     
     var begin = backups_queue.get_begin_iter();
     var etime = begin.get();
-    backups_queue.remove(begin);
+    Sequence<Time?>.remove(begin);
 
     /* Update progress */
     int tepoch = int.parse(etime.format("%s"));
@@ -381,7 +381,7 @@ public class AssistantRestoreMissing : AssistantRestore {
 
     op.set_state(op_state); // share state between ops
     
-    query_op_files.start();
+    query_op_files.start.begin();
   }
   
   protected override void query_finished(DejaDup.Operation op, bool success, bool cancelled, string? detail)
@@ -433,7 +433,7 @@ public class AssistantRestoreMissing : AssistantRestore {
       if (success) {
         succeeded = true;
         if (this.restore_files_remaining != null) {
-          base.do_apply();
+          base.do_apply.begin();
         } else {
           go_to_page(summary_page);
         }

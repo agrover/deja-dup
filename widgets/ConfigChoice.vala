@@ -39,7 +39,7 @@ public class ConfigChoice : ConfigWidget
     combo.model = model;
     this.settings_col = settings_col;
 
-    set_from_config();
+    set_from_config.begin();
     combo.changed.connect(handle_changed);
   }
   

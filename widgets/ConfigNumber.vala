@@ -36,7 +36,7 @@ public class ConfigNumber : ConfigWidget
     spin = new Gtk.SpinButton.with_range(lower_bound, upper_bound, 1);
     add(spin);
     
-    set_from_config();
+    set_from_config.begin();
     spin.value_changed.connect(handle_value_changed);
   }
   

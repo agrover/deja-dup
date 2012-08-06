@@ -205,7 +205,7 @@ public class ConfigList : ConfigWidget
     
     key_press_event.connect(on_key_press_event);
     
-    set_from_config();
+    set_from_config.begin();
     handle_selection_change(selection);
     selection.changed.connect(handle_selection_change);
   }

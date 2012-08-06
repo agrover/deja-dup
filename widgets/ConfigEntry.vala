@@ -46,7 +46,7 @@ public class ConfigEntry : ConfigWidget
     add(entry);
     mnemonic_widget = entry;
     
-    set_from_config();
+    set_from_config.begin();
     entry.focus_out_event.connect(handle_focus_out);
   }
 

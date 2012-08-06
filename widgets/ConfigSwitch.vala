@@ -36,7 +36,7 @@ public class ConfigSwitch : ConfigWidget, Togglable
     button = new Gtk.Switch();
     add(button);
 
-    set_from_config();
+    set_from_config.begin();
     button.notify["active"].connect(handle_toggled);
   }
 

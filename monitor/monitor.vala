@@ -237,13 +237,13 @@ static void prepare_run(TimeSpan wait_time)
   if (wait_time > 0 && secs > 0) {
     debug("Waiting %ld seconds until next backup.", (long)secs);
     timeout_id = Timeout.add_seconds((uint)secs, () => {
-      kickoff();
+      kickoff.begin();
       return false;
     });
   }
   else {
     debug("Late by %ld seconds.  Backing up now.", (long)(secs * -1));
-    kickoff();
+    kickoff.begin();
   }
 }
 
@@ -319,7 +319,7 @@ static int main(string[] args)
   if (!DejaDup.initialize(null, null))
     return 1;
 
-  DejaDup.Network.ensure_status();
+  DejaDup.Network.ensure_status.begin();
   DejaDup.Network.get().notify["connected"].connect(network_changed);
 
   Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",

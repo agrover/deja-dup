@@ -270,11 +270,11 @@ public abstract class Assistant : Gtk.Window
     }
   }
 
-  Gtk.Button add_button(string stock, int response)
+  Gtk.Button add_button(string stock, int response_id)
   {
     var btn = new Gtk.Button.from_stock(stock);
     btn.can_default = true;
-    btn.clicked.connect(() => {this.response(response);});
+    btn.clicked.connect(() => {this.response(response_id);});
     btn.show();
     button_box.pack_end(btn, false, true, 0);
     return btn;

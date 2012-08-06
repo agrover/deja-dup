@@ -38,7 +38,7 @@ public class ConfigBool : ConfigWidget, Togglable
     button = new Gtk.CheckButton.with_mnemonic(label);
     add(button);
     
-    set_from_config();
+    set_from_config.begin();
     button.toggled.connect(handle_toggled);
   }
   
