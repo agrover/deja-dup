@@ -38,7 +38,7 @@ internal abstract class RecursiveOp : Object
   
   bool idle_action()
   {
-    start_async();
+    start_async.begin();
     return false;
   }
   
@@ -50,7 +50,7 @@ internal abstract class RecursiveOp : Object
     loop.run();
   }
   
-  public void start_async()
+  public async void start_async()
   {
     if (src != null)
       src_type = src.query_file_type(FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
@@ -59,7 +59,7 @@ internal abstract class RecursiveOp : Object
     
     switch (src_type) {
     case FileType.DIRECTORY:
-      do_dir();
+      yield do_dir();
       break;
     default:
       handle_file();
@@ -76,7 +76,7 @@ internal abstract class RecursiveOp : Object
     op.ref();
     op.done.connect((m) => {remove_ref(); m.unref();});
     op.raise_error.connect((m, s, d, e) => {raise_error(s, d, e);}); // percolate up
-    op.start_async();
+    op.start_async.begin();
   }
 
   static const int NUM_ENUMERATED = 16;

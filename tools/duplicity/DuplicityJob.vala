@@ -129,7 +129,7 @@ internal class DuplicityJob : DejaDup.ToolJob
     var settings = DejaDup.get_settings();
     delete_age = settings.get_int(DejaDup.DELETE_AFTER_KEY);
 
-    get_envp();
+    get_envp.begin();
   }
 
   async void get_envp()
@@ -394,7 +394,7 @@ internal class DuplicityJob : DejaDup.ToolJob
         extra_argv.append("--dry-run");
       }
       else if (!checked_backup_space) {
-        check_backup_space();
+        check_backup_space.begin();
         return true;
       }
       else {

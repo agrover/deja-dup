@@ -189,7 +189,7 @@ internal class DuplicityInstance : Object
     if (pipes[1] != -1)
       Posix.close(pipes[1]);
     
-    read_log();
+    read_log.begin();
   }
   
   public bool is_started()
@@ -280,7 +280,7 @@ internal class DuplicityInstance : Object
           else {
             // We're reading faster than duplicity can provide.  Wait a bit
             // before trying again.
-            Timeout.add_seconds(1, () => {read_log_lines(); return false;});
+            Timeout.add_seconds(1, () => {read_log_lines.begin(); return false;});
             return; // skip cleanup at bottom of this function
           }
         }
@@ -340,7 +340,7 @@ internal class DuplicityInstance : Object
     // This loop goes on while rest of class is doing its work.  We ref
     // it to make sure that the rest of the class doesn't drop from under us.
     ref();
-    read_log_lines();
+    yield read_log_lines();
   }
   
   // If start is < 0, starts at word.length - 1.
