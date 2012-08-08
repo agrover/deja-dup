@@ -27,7 +27,7 @@ SHARED_CFLAGS = \
 	-I$(top_srcdir)/common \
 	-I$(top_srcdir)/widgets \
 	$(PREF_CFLAGS) \
-	$(DEBUG_CFLAGS) \
+	-w \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 libdeja_dup_la_CFLAGS = \
 	$(SHARED_CFLAGS) \
@@ -81,3 +81,4 @@ dist-hook:
 	                                 $(deja_dup_preferences_VALASOURCES:.vala=.c) | tr ' ' '\n' | sort | uniq) \
 	                    libdeja_dup_la_vala.stamp deja_dup_preferences_vala.stamp
 
+CLEANFILES = libdeja_dup_la_vala.stamp deja_dup_preferences_vala.stamp

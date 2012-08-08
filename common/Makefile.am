@@ -20,7 +20,7 @@ pkglib_LTLIBRARIES = libcommon.la
 
 libcommon_la_CFLAGS = \
 	$(COMMON_CFLAGS) \
-	$(DEBUG_CFLAGS) \
+	-w \
 	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
@@ -80,3 +80,4 @@ dist-hook:
 	cd $(distdir) && rm -f $(libcommon_la_VALASOURCES:.vala=.c) \
 	                       common.h libcommon_la_vala.stamp
 
+CLEANFILES = libcommon_la_vala.stamp

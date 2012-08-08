@@ -21,7 +21,7 @@ pkglibexec_PROGRAMS = deja-dup-monitor
 deja_dup_monitor_CFLAGS = \
 	-I$(top_srcdir)/common \
 	$(MONITOR_CFLAGS) \
-	$(DEBUG_CFLAGS) \
+	-w \
 	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
@@ -52,3 +52,4 @@ dist-hook:
 	cd $(distdir) && rm $(deja_dup_monitor_VALASOURCES:.vala=.c) \
 	                    deja_dup_monitor_vala.stamp
 
+CLEANFILES = deja_dup_monitor_vala.stamp

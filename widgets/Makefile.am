@@ -22,7 +22,7 @@ libwidgets_la_CFLAGS = \
 	-I$(top_srcdir)/common \
 	$(WIDGETS_CFLAGS) \
 	$(UNITY_CFLAGS) \
-	$(DEBUG_CFLAGS) \
+	-w \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 libwidgets_la_LDFLAGS = -avoid-version
@@ -91,3 +91,4 @@ dist-hook:
 	cd $(distdir) && rm -f $(libwidgets_la_VALASOURCES:.vala=.c) \
 	                       widgets.h libwidgets_la_vala.stamp
 
+CLEANFILES = libwidgets_la_vala.stamp

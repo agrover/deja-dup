@@ -23,7 +23,7 @@ dist_tools_DATA = duplicity.plugin
 libduplicity_la_CFLAGS = \
 	-I$(top_srcdir)/common \
 	$(COMMON_CFLAGS) \
-	$(DEBUG_CFLAGS) \
+	-w \
 	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
@@ -63,3 +63,4 @@ dist-hook:
 	cd $(distdir) && rm -f $(libduplicity_la_VALASOURCES:.vala=.c) \
 	                       libduplicity_la_vala.stamp
 
+CLEANFILES = libduplicity_la_vala.stamp

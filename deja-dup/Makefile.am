@@ -23,7 +23,7 @@ deja_dup_CFLAGS = \
 	-I$(top_srcdir)/widgets \
 	$(DUP_CFLAGS) \
 	$(UNITY_CFLAGS) \
-	$(DEBUG_CFLAGS) \
+	-w \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
 deja_dup_LDADD = \
@@ -70,3 +70,4 @@ dist-hook:
 	cd $(distdir) && rm $(deja_dup_VALASOURCES:.vala=.c) \
 	                    deja_dup_vala.stamp
 
+CLEANFILES = deja_dup_vala.stamp
