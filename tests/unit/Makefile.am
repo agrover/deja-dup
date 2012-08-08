@@ -25,7 +25,8 @@ check:
 
 AM_CFLAGS = \
 	-I$(top_srcdir)/common \
-	$(COMMON_CFLAGS)
+	$(COMMON_CFLAGS) \
+	-w
 
 LDADD = \
 	$(COMMON_LIBS) \
@@ -62,3 +63,5 @@ dist-hook:
 	                    unit_tests_vala.stamp
 	cd $(distdir) && rm $(network_VALASOURCES:.vala=.c) \
 	                    network_vala.stamp
+
+CLEANFILES = unit_tests_vala.stamp network_vala.stamp

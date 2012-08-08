@@ -227,7 +227,7 @@ class BackupRunner : Object
       checked_is_full = true;
     });
 
-    op.start();
+    op.start.begin();
     if (callback != null) {
       Timeout.add_seconds(5, () => {
         callback(op);

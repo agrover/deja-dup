@@ -34,7 +34,7 @@ async void check_status(MainLoop loop)
 int main(string[] args)
 {
   var loop = new MainLoop(null);
-  check_status(loop);
+  check_status.begin(loop);
   loop.run();
   return 0;
 }

@@ -26,7 +26,8 @@ check:
 
 AM_CFLAGS = \
 	-I$(top_srcdir)/common \
-	$(DUP_CFLAGS)
+	$(DUP_CFLAGS) \
+	-w
 
 LDADD = \
 	$(DUP_LIBS) \
@@ -57,3 +58,5 @@ dist-hook:
 
 EXTRA_DIST = \
 	mock
+
+CLEANFILES = runner_vala.stamp
