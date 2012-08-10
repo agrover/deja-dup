@@ -45,6 +45,9 @@ void backup_setup()
   var cachedir = Path.build_filename(dir, "cache");
   DirUtils.create_with_parents(Path.build_filename(cachedir, "deja-dup"), 0700);
 
+  DirUtils.create_with_parents(Path.build_filename(dir, "backup"), 0700);
+  DirUtils.create_with_parents(Path.build_filename(dir, "restore"), 0700);
+
   Environment.set_variable("DEJA_DUP_TOOLS_PATH", "../../tools/duplicity", true);
   Environment.set_variable("DEJA_DUP_TEST_MOCKSCRIPT", Path.build_filename(dir, "mockscript"), true);
   Environment.set_variable("XDG_CACHE_HOME", cachedir, true);
@@ -53,7 +56,7 @@ void backup_setup()
   var settings = DejaDup.get_settings();
   settings.set_string(DejaDup.BACKEND_KEY, "file");
   settings = DejaDup.get_settings(DejaDup.FILE_ROOT);
-  settings.set_string(DejaDup.FILE_PATH_KEY, "/tmp/not/a/thing");
+  settings.set_string(DejaDup.FILE_PATH_KEY, Path.build_filename(dir, "backup"));
 }
 
 void backup_teardown()
@@ -70,7 +73,8 @@ void backup_teardown()
     warning("Mockscript file still exists");
   }
 
-  file = File.new_for_path("/tmp/not/a/thing");
+  var test_home = Environment.get_variable("DEJA_DUP_TEST_HOME");
+  file = File.new_for_path(Path.build_filename(test_home, "backup"));
   if (file.query_exists(null)) {
     try {
       file.delete(null);
@@ -101,17 +105,20 @@ public enum Mode {
 string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = false, string extra = "")
 {
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
+  var test_home = Environment.get_variable("DEJA_DUP_TEST_HOME");
+  var backupdir = Path.build_filename(test_home, "backup");
+  var restoredir = Path.build_filename(test_home, "restore");
 
   if (mode == Mode.CLEANUP)
-    return "cleanup '--force' 'file:///tmp/not/a/thing' '--gio' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir);
+    return "cleanup '--force' 'file://%s' '--gio' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, cachedir);
   else if (mode == Mode.RESTORE)
-    return "'restore' '--gio' '--force' 'file:///tmp/not/a/thing' '/tmp/not/a/restore' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir);
+    return "'restore' '--gio' '--force' 'file://%s' '%s' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, restoredir, cachedir);
   else if (mode == Mode.LIST)
-    return "'list-current-files' '--gio' 'file:///tmp/not/a/thing' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir);
+    return "'list-current-files' '--gio' 'file://%s' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, cachedir);
 
   string source_str = "";
   if (mode == Mode.DRY || mode == Mode.BACKUP)
-    source_str = "--volsize=50 / ";
+    source_str = "--volsize=1 / ";
 
   string dry_str = "";
   if (mode == Mode.DRY)
@@ -130,7 +137,7 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     args += "collection-status ";
 
   if (mode == Mode.STATUS || mode == Mode.NONE || mode == Mode.DRY || mode == Mode.BACKUP) {
-    args += "'--exclude=/tmp/not/a/thing' ";
+    args += "'--exclude=%s' ".printf(backupdir);
 
     string[] excludes1 = {"~/Downloads", "~/.local/share/Trash", "~/.xsession-errors", "~/.thumbnails", "~/.Private", "~/.gvfs", "~/.adobe/Flash_Player/AssetCache"};
 
@@ -154,7 +161,7 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     args += "'--exclude=%s/deja-dup' '--exclude=%s' '--exclude=**' ".printf(cachedir, cachedir);
   }
 
-  args += "%s%s'--gio' %s'file:///tmp/not/a/thing' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(extra, dry_str, source_str, enc_str, cachedir);
+  args += "%s%s'--gio' %s'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(extra, dry_str, source_str, backupdir, enc_str, cachedir);
 
   return args;
 }
@@ -290,11 +297,14 @@ string run_script(string in)
 
 void process_operation_block(KeyFile keyfile, string group, BackupRunner br) throws Error
 {
+  var test_home = Environment.get_variable("DEJA_DUP_TEST_HOME");
+  var restoredir = Path.build_filename(test_home, "restore");
+
   var type = keyfile.get_string(group, "Type");
   if (type == "backup")
     br.op = new DejaDup.OperationBackup();
   else if (type == "restore")
-    br.op = new DejaDup.OperationRestore("/tmp/not/a/restore");
+    br.op = new DejaDup.OperationRestore(restoredir);
   else
     assert_not_reached();
   if (keyfile.has_key(group, "Success"))
@@ -432,6 +442,7 @@ int main(string[] args)
   dir = DirUtils.mkdtemp(dir);
   Environment.set_variable("DEJA_DUP_TEST_HOME", dir, true);
 
+  Environment.set_variable("DEJA_DUP_TESTING", "1", true);
   Environment.set_variable("DEJA_DUP_LANGUAGE", "en", true);
   Test.bug_base("https://launchpad.net/bugs/%s");
 
