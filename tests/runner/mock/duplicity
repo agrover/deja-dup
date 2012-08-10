@@ -44,7 +44,7 @@
 # any caller can know if we got passed unexpected arguments by testing for the
 # existence of the file.
 
-import sys, os, shlex, getpass, time
+import sys, os, shlex, getpass, time, subprocess
 
 if not os.path.exists(os.environ['DEJA_DUP_TEST_MOCKSCRIPT']):
   print >> logfd, "TESTFAIL: no mockscript"
@@ -67,6 +67,7 @@ curline = skip_whitespace(0)
 rv = 0
 expected_args = []
 delay = 0
+script = ''
 
 while len(lines) > curline and lines[curline].strip():
   tokens = lines[curline].split()
@@ -76,6 +77,8 @@ while len(lines) > curline and lines[curline].strip():
     rv = int(tokens[1])
   elif tokens[0] == 'DELAY:':
     delay = int(tokens[1])
+  elif tokens[0] == 'SCRIPT:':
+    script = ' '.join(tokens[1:])
   curline += 1
 
 # Where should we spit our messages to?
@@ -95,6 +98,9 @@ curline = skip_whitespace(curline)
 while len(lines) > curline and lines[curline] != "=== deja-dup ===\n":
   print >> logfd, lines[curline],
   curline += 1
+
+if script:
+  subprocess.call(script, shell=True)
 
 # Write back mockscript
 if len(lines) <= curline:
