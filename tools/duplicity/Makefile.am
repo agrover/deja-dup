@@ -37,10 +37,7 @@ libduplicity_la_LIBADD = \
 libduplicity_la_VALASOURCES = \
 	DuplicityInstance.vala \
 	DuplicityJob.vala \
-	DuplicityPlugin.vala \
-	RecursiveDelete.vala \
-	RecursiveMove.vala \
-	RecursiveOp.vala
+	DuplicityPlugin.vala
 
 libduplicity_la_SOURCES = \
 	$(libduplicity_la_VALASOURCES)

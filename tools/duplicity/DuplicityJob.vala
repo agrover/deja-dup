@@ -826,7 +826,7 @@ internal class DuplicityJob : DejaDup.ToolJob
       return;
 
     var cachedir = Path.build_filename(dir, Config.PACKAGE);
-    var del = new RecursiveDelete(File.new_for_path(cachedir));
+    var del = new DejaDup.RecursiveDelete(File.new_for_path(cachedir));
     del.start();
   }
 

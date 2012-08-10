@@ -96,6 +96,7 @@ public enum Mode {
   STATUS,
   DRY,
   BACKUP,
+  VERIFY,
   CLEANUP,
   RESTORE,
   RESTORE_STATUS,
@@ -113,6 +114,8 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     return "cleanup '--force' 'file://%s' '--gio' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, cachedir);
   else if (mode == Mode.RESTORE)
     return "'restore' '--gio' '--force' 'file://%s' '%s' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, restoredir, cachedir);
+  else if (mode == Mode.VERIFY)
+    return "'restore' '--file-to-restore=%s/deja-dup/metadata' '--gio' '--force' 'file://%s' '%s/deja-dup/metadata' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir.substring(1), backupdir, cachedir, cachedir);
   else if (mode == Mode.LIST)
     return "'list-current-files' '--gio' 'file://%s' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, cachedir);
 
@@ -137,7 +140,7 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     args += "collection-status ";
 
   if (mode == Mode.STATUS || mode == Mode.NONE || mode == Mode.DRY || mode == Mode.BACKUP) {
-    args += "'--exclude=%s' ".printf(backupdir);
+    args += "'--exclude=%s' '--include=%s/deja-dup/metadata' ".printf(backupdir, cachedir);
 
     string[] excludes1 = {"~/Downloads", "~/.local/share/Trash", "~/.xsession-errors", "~/.thumbnails", "~/.Private", "~/.gvfs", "~/.adobe/Flash_Player/AssetCache"};
 
@@ -279,7 +282,8 @@ void add_to_mockscript(string contents)
 string replace_keywords(string in)
 {
   var home = Environment.get_home_dir();
-  return in.replace("@HOME@", home);
+  var cachedir = Environment.get_variable("XDG_CACHE_HOME");
+  return in.replace("@HOME@", home).replace("@XDG_CACHE_HOME@", cachedir);
 }
 
 string run_script(string in)
@@ -369,12 +373,16 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
     mode = Mode.LIST;
   else if (type == "backup")
     mode = Mode.BACKUP;
+  else if (type == "verify")
+    mode = Mode.VERIFY;
   else if (type == "restore")
     mode = Mode.RESTORE;
   else if (type == "cleanup")
     mode = Mode.CLEANUP;
   else
     assert_not_reached();
+
+  var cachedir = Environment.get_variable("XDG_CACHE_HOME");
 
   var dupscript = "ARGS: " + default_args(br, mode, encrypted, extra_args);
 
@@ -394,6 +402,8 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
 
   if (script != null)
     dupscript += "\n" + "SCRIPT: " + script;
+  else if (mode == Mode.VERIFY)
+    dupscript += "\n" + "SCRIPT: mkdir -p %s/deja-dup/metadata; echo 'This folder can be safely deleted.\\n0' > %s/deja-dup/metadata/README".printf(cachedir, cachedir);
 
   if (outputscript != null && outputscript != "")
     dupscript += "\n\n" + outputscript + "\n";

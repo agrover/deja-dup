@@ -40,7 +40,10 @@ internal class DuplicityInstance : Object
       if (!settings.get_boolean(DejaDup.ROOT_PROMPT_KEY))
         as_root = false;
     }
-    
+
+    if (as_root && Environment.get_variable("DEJA_DUP_TESTING") != null)
+      as_root = false;
+
     // Copy current environment, add custom variables
     var myenv = Environment.list_variables();
     int myenv_len = 0;

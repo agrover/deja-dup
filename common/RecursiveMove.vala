@@ -19,6 +19,8 @@
 
 using GLib;
 
+namespace DejaDup {
+
 /**
  * Recursively moves one directory into another, merging files.  And by merge,
  * I mean it overwrites.  It skips any files it can't move and reports an
@@ -27,7 +29,7 @@ using GLib;
  * This is not optimized for remote files.  It's mostly async, but it does the
  * occasional sync operation.
  */
-internal class RecursiveMove : RecursiveOp
+public class RecursiveMove : RecursiveOp
 {
   public RecursiveMove(File source, File dest)
   {
@@ -162,3 +164,4 @@ internal class RecursiveMove : RecursiveOp
   }
 }
 
+} // namespace

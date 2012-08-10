@@ -46,20 +46,15 @@ public class OperationRestore : Operation
            mode: ToolJob.Mode.RESTORE);
   }
   
-  public async override void start()
+  public async override void start(bool try_claim_bus = true)
   {
     action_desc_changed(_("Restoring files…"));
-    yield base.start();
-  }
-
-  protected override void connect_to_job()
-  {
-    base.connect_to_job();
-    job.restore_files = restore_files;
+    yield base.start(try_claim_bus);
   }
 
   protected override List<string>? make_argv()
   {
+    job.restore_files = restore_files;
     job.time = time;
     job.local = File.new_for_path(dest);
     return null;
