@@ -356,7 +356,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
     if (keyfile.has_key(group, "Stop"))
       stop = keyfile.get_boolean(group, "Stop");
     if (keyfile.has_key(group, "Script"))
-      script = keyfile.get_boolean(group, "Script");
+      script = replace_keywords(keyfile.get_string(group, "Script"));
   }
 
   if (type == "status")
