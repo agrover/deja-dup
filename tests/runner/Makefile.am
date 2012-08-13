@@ -20,7 +20,7 @@ check_PROGRAMS = \
 	runner
 
 check:
-	@for test in $(srcdir)/../scripts/*.test; do \
+	@set -e; for test in $(srcdir)/../scripts/*.test; do \
 		dbus-launch ./runner $$test; \
 	done
 
