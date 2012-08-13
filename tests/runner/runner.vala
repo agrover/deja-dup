@@ -348,6 +348,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
   bool encrypted = false;
   bool cancel = false;
   bool stop = false;
+  bool passphrase = false;
   string script = null;
   Mode mode = Mode.NONE;
 
@@ -369,6 +370,8 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
       outputscript = replace_keywords(keyfile.get_comment(group, "Output"));
     else if (keyfile.has_key(group, "OutputScript") && keyfile.get_boolean(group, "OutputScript"))
       outputscript = run_script(replace_keywords(keyfile.get_comment(group, "OutputScript")));
+    if (keyfile.has_key(group, "Passphrase"))
+      passphrase = keyfile.get_boolean(group, "Passphrase");
     if (keyfile.has_key(group, "Stop"))
       stop = keyfile.get_boolean(group, "Stop");
     if (keyfile.has_key(group, "Script"))
@@ -410,6 +413,11 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
 
   if (script != null)
     dupscript += "\n" + "SCRIPT: " + script;
+
+  if (passphrase)
+    dupscript += "\n" + "PASSPHRASE: test";
+  else if (!encrypted) // when not encrypted, we always expect empty string
+    dupscript += "\n" + "PASSPHRASE:";
 
   if (outputscript != null && outputscript != "")
     dupscript += "\n\n" + outputscript + "\n";

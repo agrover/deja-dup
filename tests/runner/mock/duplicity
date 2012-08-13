@@ -76,6 +76,7 @@ rv = 0
 expected_args = []
 delay = 0
 script = ''
+passphrase = None
 
 while len(lines) > curline and lines[curline].strip():
   tokens = lines[curline].split()
@@ -87,10 +88,16 @@ while len(lines) > curline and lines[curline].strip():
     delay = int(tokens[1])
   elif tokens[0] == 'SCRIPT:':
     script = ' '.join(tokens[1:])
+  elif tokens[0] == 'PASSPHRASE:':
+    passphrase = tokens[1] if len(tokens) > 1 else ''
   curline += 1
 
 if expected_args != sys.argv[1:]:
   print >> logfd, "TESTFAIL: expected\n%s\nvs\n%s" % (expected_args, sys.argv[1:])
+  sys.exit(-1)
+
+if passphrase != os.environ.get('PASSPHRASE'):
+  print >> logfd, "TESTFAIL: expected passphrase '%s', but got '%s'" % (passphrase, os.environ.get('PASSPHRASE'))
   sys.exit(-1)
 
 curline = skip_whitespace(curline)
