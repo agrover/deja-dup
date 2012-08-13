@@ -90,6 +90,7 @@ public abstract class Operation : Object
   internal ToolJob job;
   protected string passphrase;
   bool finished = false;
+  string saved_detail = null;
   construct
   {
     backend = Backend.get_default();
@@ -229,14 +230,27 @@ public abstract class Operation : Object
     return null;
   }
 
-  protected async void chain_op(Operation subop, string desc)
+  static string combine_details(string? old_detail, string? new_detail)
+  {
+    if (old_detail == null)
+      return new_detail;
+    else if (new_detail == null)
+      return old_detail;
+    else
+      return old_detail + "\n\n" + new_detail;
+  }
+
+  protected async void chain_op(Operation subop, string desc, string? detail)
   {
     /**
      * Sometimes an operation wants to chain to a separate operation.
      * Here is the glue to make that happen.
      */
     subop.ref();
-    subop.done.connect((s, c, d) => {done(s, c, d); subop.unref();});
+    subop.done.connect((s, c, d) => {
+      done(s, c, combine_details(saved_detail, d));
+      subop.unref();
+    });
     subop.raise_error.connect((e, d) => {raise_error(e, d);});
     subop.progress.connect((p) => {progress(p);});
     subop.passphrase_required.connect(() => {
@@ -246,6 +260,7 @@ public abstract class Operation : Object
     });
     subop.question.connect((t, m) => {question(t, m);});
 
+    saved_detail = combine_details(saved_detail, detail);
     subop.set_state(get_state());
     job = subop.job;
 

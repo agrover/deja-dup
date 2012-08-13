@@ -38,7 +38,10 @@ public class OperationBackup : Operation
     if (metadir != null)
       new RecursiveDelete(metadir).start();
 
-    yield chain_op(new OperationVerify(), _("Verifying backup…"));
+    if (success && !cancelled)
+      yield chain_op(new OperationVerify(), _("Verifying backup…"), detail);
+    else
+      yield base.operation_finished(job, success, cancelled, detail);
   }
 
   protected override void send_action_file_changed(File file, bool actual)
