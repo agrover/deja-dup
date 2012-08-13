@@ -182,6 +182,7 @@ class BackupRunner : Object
   public OpCallback? callback = null;
   public bool is_full = false; // we don't often give INFO 3 which triggers is_full()
   public bool is_first = false;
+  public int passphrases = 0;
 
   public void run()
   {
@@ -206,7 +207,6 @@ class BackupRunner : Object
       loop.quit();
     });
 
-    bool checked_is_full = false;
     op.raise_error.connect((str, det) => {
       Test.message("Error: %s, %s", str, det);
       if (error_str != str)
@@ -216,25 +216,36 @@ class BackupRunner : Object
       error_str = null;
       error_detail = null;
     });
+
     op.action_desc_changed.connect((action) => {
     });
     op.action_file_changed.connect((file, actual) => {
     });
     op.progress.connect((percent) => {
     });
+
     op.passphrase_required.connect(() => {
       Test.message("Passphrase required");
+      if (passphrases == 0)
+        warning("Passphrase needed but not provided");
+      else {
+        passphrases--;
+        op.set_passphrase("test");
+      }
     });
+
     op.question.connect((title, msg) => {
       Test.message("Question asked: %s, %s", title, msg);
     });
+
+    var seen_is_full = false;
     op.is_full.connect((first) => {
       Test.message("Is full; is first: %d", (int)first);
       if (!is_full)
         warning("IsFull was not expected");
       if (is_first != first)
         warning("IsFirst didn't match; expected %d, got %d", (int) is_first, (int) first);
-      checked_is_full = true;
+      seen_is_full = true;
     });
 
     op.start.begin();
@@ -246,7 +257,7 @@ class BackupRunner : Object
     }
     loop.run();
 
-    if (!checked_is_full && is_full) {
+    if (!seen_is_full && is_full) {
       warning("IsFull was expected");
       if (is_first)
         warning("IsFirst was expected");
@@ -255,6 +266,9 @@ class BackupRunner : Object
       warning("Error str didn't match; expected %s, never got error", error_str);
     if (error_detail != null)
       warning("Error detail didn't match; expected %s, never got error", error_detail);
+
+    if (passphrases > 0)
+      warning("Passphrases expected, but not seen");
   }
 }
 
@@ -327,6 +341,8 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
     br.error_str = keyfile.get_string(group, "Error");
   if (keyfile.has_key(group, "ErrorDetail"))
     br.error_detail = keyfile.get_string(group, "ErrorDetail");
+  if (keyfile.has_key(group, "Passphrases"))
+    br.passphrases = keyfile.get_integer(group, "Passphrases");
 }
 
 void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) throws Error
@@ -336,6 +352,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
   bool encrypted = false;
   bool cancel = false;
   bool stop = false;
+  bool passphrase = false;
   string script = null;
   Mode mode = Mode.NONE;
 
@@ -357,6 +374,8 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
       outputscript = replace_keywords(keyfile.get_comment(group, "Output"));
     else if (keyfile.has_key(group, "OutputScript") && keyfile.get_boolean(group, "OutputScript"))
       outputscript = run_script(replace_keywords(keyfile.get_comment(group, "OutputScript")));
+    if (keyfile.has_key(group, "Passphrase"))
+      passphrase = keyfile.get_boolean(group, "Passphrase");
     if (keyfile.has_key(group, "Stop"))
       stop = keyfile.get_boolean(group, "Stop");
     if (keyfile.has_key(group, "Script"))
@@ -404,6 +423,11 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
     dupscript += "\n" + "SCRIPT: " + script;
   else if (mode == Mode.VERIFY)
     dupscript += "\n" + "SCRIPT: mkdir -p %s/deja-dup/metadata; echo 'This folder can be safely deleted.\\n0' > %s/deja-dup/metadata/README".printf(cachedir, cachedir);
+
+  if (passphrase)
+    dupscript += "\n" + "PASSPHRASE: test";
+  else if (!encrypted) // when not encrypted, we always expect empty string
+    dupscript += "\n" + "PASSPHRASE:";
 
   if (outputscript != null && outputscript != "")
     dupscript += "\n\n" + outputscript + "\n";

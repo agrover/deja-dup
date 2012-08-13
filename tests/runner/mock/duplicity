@@ -46,6 +46,14 @@
 
 import sys, os, shlex, getpass, time, subprocess
 
+# Where should we spit our messages to?
+logfd = None
+for i in xrange(len(sys.argv)):
+  split = sys.argv[i].split('=', 1)
+  if len(split) > 1 and split[0] == "--log-fd":
+    logfd = os.fdopen(int(split[1]), "w")
+    sys.argv[i] = "--log-fd=?"
+
 if not os.path.exists(os.environ['DEJA_DUP_TEST_MOCKSCRIPT']):
   print >> logfd, "TESTFAIL: no mockscript"
   sys.exit(-1)
@@ -68,6 +76,7 @@ rv = 0
 expected_args = []
 delay = 0
 script = ''
+passphrase = None
 
 while len(lines) > curline and lines[curline].strip():
   tokens = lines[curline].split()
@@ -79,18 +88,16 @@ while len(lines) > curline and lines[curline].strip():
     delay = int(tokens[1])
   elif tokens[0] == 'SCRIPT:':
     script = ' '.join(tokens[1:])
+  elif tokens[0] == 'PASSPHRASE:':
+    passphrase = tokens[1] if len(tokens) > 1 else ''
   curline += 1
-
-# Where should we spit our messages to?
-logfd = None
-for i in xrange(len(sys.argv)):
-  split = sys.argv[i].split('=', 1)
-  if len(split) > 1 and split[0] == "--log-fd":
-    logfd = os.fdopen(int(split[1]), "w")
-    sys.argv[i] = "--log-fd=?"
 
 if expected_args != sys.argv[1:]:
   print >> logfd, "TESTFAIL: expected\n%s\nvs\n%s" % (expected_args, sys.argv[1:])
+  sys.exit(-1)
+
+if passphrase != os.environ.get('PASSPHRASE'):
+  print >> logfd, "TESTFAIL: expected passphrase '%s', but got '%s'" % (passphrase, os.environ.get('PASSPHRASE'))
   sys.exit(-1)
 
 curline = skip_whitespace(curline)
@@ -99,9 +106,6 @@ while len(lines) > curline and lines[curline] != "=== deja-dup ===\n":
   print >> logfd, lines[curline],
   curline += 1
 
-if script:
-  subprocess.call(script, shell=True)
-
 # Write back mockscript
 if len(lines) <= curline:
   os.unlink(os.environ['DEJA_DUP_TEST_MOCKSCRIPT'])
@@ -109,6 +113,9 @@ else:
   lines = lines[curline+1:]
   with open(os.environ['DEJA_DUP_TEST_MOCKSCRIPT'], 'w') as f:
     f.writelines(lines)
+
+if script:
+  subprocess.call(script, shell=True)
 
 time.sleep(delay)
 
