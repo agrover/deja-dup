@@ -1,0 +1,16 @@
+[Operation]
+Type=backup
+
+[Duplicity]
+Runs=status;dry;backup;
+
+[Duplicity status]
+#DEBUG 1
+#. ['duplicity.gpg']
+Output=true
+
+[Duplicity dry]
+Encrypted=true
+
+[Duplicity backup]
+Encrypted=true

@@ -1,0 +1,42 @@
+[Operation]
+Type=backup
+Passphrases=2
+
+[Duplicity]
+Runs=status 1;dry 1;status 2;dry 2;backup 1;status 3;dry 3;backup 2;
+
+[Duplicity status 1]
+#DEBUG 1
+#. ['duplicity.gpg']
+Output=true
+
+[Duplicity dry 1]
+#ERROR 31
+Output=true
+Encrypted=true
+
+[Duplicity status 2]
+#DEBUG 1
+#. ['duplicity.gpg']
+Output=true
+Encrypted=true
+
+[Duplicity dry 2]
+Encrypted=true
+
+[Duplicity backup 1]
+#ERROR 31
+Output=true
+Encrypted=true
+
+[Duplicity status 3]
+#DEBUG 1
+#. ['duplicity.gpg']
+Output=true
+Encrypted=true
+
+[Duplicity dry 3]
+Encrypted=true
+
+[Duplicity backup 2]
+Encrypted=true
