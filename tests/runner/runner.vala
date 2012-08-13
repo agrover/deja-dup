@@ -111,13 +111,13 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
   var restoredir = Path.build_filename(test_home, "restore");
 
   if (mode == Mode.CLEANUP)
-    return "cleanup '--force' 'file://%s' '--gio' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, cachedir);
+    return "cleanup '--force' 'file://%s' '--gio' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, encrypted ? "" : "'--no-encryption' ", cachedir);
   else if (mode == Mode.RESTORE)
-    return "'restore' '--gio' '--force' 'file://%s' '%s' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, restoredir, cachedir);
+    return "'restore' '--gio' '--force' 'file://%s' '%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, restoredir, encrypted ? "" : "'--no-encryption' ", cachedir);
   else if (mode == Mode.VERIFY)
-    return "'restore' '--file-to-restore=%s/deja-dup/metadata' '--gio' '--force' 'file://%s' '%s/deja-dup/metadata' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir.substring(1), backupdir, cachedir, cachedir);
+    return "'restore' '--file-to-restore=%s/deja-dup/metadata' '--gio' '--force' 'file://%s' '%s/deja-dup/metadata' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir.substring(1), backupdir, cachedir, encrypted ? "" : "'--no-encryption' ", cachedir);
   else if (mode == Mode.LIST)
-    return "'list-current-files' '--gio' 'file://%s' '--no-encryption' '--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, cachedir);
+    return "'list-current-files' '--gio' 'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, encrypted ? "" : "'--no-encryption' ", cachedir);
 
   string source_str = "";
   if (mode == Mode.DRY || mode == Mode.BACKUP)
