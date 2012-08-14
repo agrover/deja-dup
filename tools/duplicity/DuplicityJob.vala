@@ -107,7 +107,7 @@ internal class DuplicityJob : DejaDup.ToolJob
     }
   }
 
-  ~Duplicity() {
+  ~DuplicityJob() {
     DejaDup.Network.get().notify["connected"].disconnect(network_changed);
   }
 
