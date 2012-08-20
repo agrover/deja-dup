@@ -66,6 +66,7 @@
         <choice value='file'/>
         <choice value='rackspace'/>
         <choice value='s3'/>
+        <choice value='google-drive'/>
         <choice value='ssh'/>
         <choice value='u1'/>
       </choices>
@@ -75,6 +76,7 @@
     </key>
     <child name="rackspace" schema="org.gnome.DejaDup.Rackspace"/>
     <child name="s3" schema="org.gnome.DejaDup.S3"/>
+    <child name="google-drive" schema="org.gnome.DejaDup.GoogleDrive"/>
     <child name="u1" schema="org.gnome.DejaDup.U1"/>
     <child name="file" schema="org.gnome.DejaDup.File"/>
   </schema>
@@ -93,6 +95,18 @@
       <default>''</default> <!-- Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname() -->
       <_summary>The Amazon S3 folder</_summary>
       <_description>An optional folder name to store files in.  This folder will be created in the chosen bucket.</_description>
+    </key>
+  </schema>
+  <schema id="org.gnome.DejaDup.GoogleDrive" path="/org/gnome/deja-dup/google-drive/">
+    <key name="email" type="s">
+      <default>''</default>
+      <_summary>The email-address of your Google account</_summary>
+      <_description>The email-address of your Google account.</_description>
+    </key>
+    <key name="folder" type="s">
+      <default>'/deja-dup/$HOSTNAME'</default>
+      <_summary>The folder where backups are stored</_summary>
+      <_description>The folder hierarchy where backups are stored.</_description>
     </key>
   </schema>
   <schema id="org.gnome.DejaDup.Rackspace" path="/org/gnome/deja-dup/rackspace/">

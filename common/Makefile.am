@@ -41,6 +41,7 @@ libcommon_la_VALASOURCES = \
 	BackendFile.vala \
 	BackendRackspace.vala \
 	BackendS3.vala \
+	BackendGoogleDrive.vala \
 	BackendU1.vala \
 	Checker.vala \
 	CommonUtils.vala \

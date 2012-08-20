@@ -52,6 +52,7 @@ public class BackendAuto : Backend
   static bool done = false;
   Checker u1checker;
   Checker s3checker;
+  Checker google_drive_checker;
   construct {
     if (!started) {
       // Start slow process of testing various backends to see
@@ -59,12 +60,15 @@ public class BackendAuto : Backend
       started = true;
       ref(); // Give us time to finish
 
-      // List is (in order): u1, s3, file
+      // List is (in order): u1, s3, google_drive, file
       u1checker = BackendU1.get_checker();
       u1checker.notify["complete"].connect(examine_checkers);
 
       s3checker = BackendS3.get_checker();
       s3checker.notify["complete"].connect(examine_checkers);
+
+      google_drive_checker = BackendGoogleDrive.get_checker();
+      google_drive_checker.notify["complete"].connect(examine_checkers);
 
       examine_checkers();
     }
@@ -80,10 +84,15 @@ public class BackendAuto : Backend
         finish("u1");
       }
       else if (s3checker.complete) {
-        if (s3checker.available)
+        if (s3checker.available) {
           finish("s3");
-        else
-          finish("file");
+        }
+        else if (google_drive_checker.complete) {
+          if (google_drive_checker.available)
+            finish("google-drive");
+          else
+            finish("file");
+        }
       }
     }
   }
