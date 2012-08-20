@@ -39,7 +39,7 @@ public abstract class Assistant : Gtk.Window
   public bool last_op_was_back {get; private set; default = false;}
 
   public enum Type {
-    NORMAL, INTERRUPT, SUMMARY, PROGRESS, FINISH
+    NORMAL, INTERRUPT, CHECK, SUMMARY, PROGRESS, FINISH
   }
 
   Gtk.Label header_title;
@@ -165,6 +165,11 @@ public abstract class Assistant : Gtk.Window
       go_forward();
   }
 
+  static bool is_interrupt_type(Type type)
+  {
+    return type == Type.INTERRUPT || type == Type.CHECK;
+  }
+
   public void go_back()
   {
     weak List<PageInfo> next;
@@ -172,7 +177,7 @@ public abstract class Assistant : Gtk.Window
       next = interrupted.prev;
     else {
       next = current.prev;
-      while (next != null && next.data.type == Type.INTERRUPT)
+      while (next != null && is_interrupt_type(next.data.type))
         next = next.prev;
     }
 
@@ -194,7 +199,7 @@ public abstract class Assistant : Gtk.Window
     }
     else {
       next = (current == null) ? infos : current.next;
-      while (next != null && next.data.type == Type.INTERRUPT)
+      while (next != null && is_interrupt_type(next.data.type))
         next = next.next;
     }
 
@@ -308,6 +313,11 @@ public abstract class Assistant : Gtk.Window
         show_forward = true;
         forward_text = _("Co_ntinue");
       }
+      break;
+    case Type.CHECK:
+      show_close = true;
+      show_forward = true;
+      forward_text = C_("verb", "_Test");
       break;
     case Type.PROGRESS:
       show_cancel = true;

@@ -55,6 +55,7 @@ public abstract class ToolJob : Object
 
   public enum Flags {
     NO_PROGRESS,
+    NO_CACHE,
   }
   public Flags flags {get; set;}
 

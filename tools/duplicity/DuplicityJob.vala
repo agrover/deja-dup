@@ -80,6 +80,7 @@ internal class DuplicityJob : DejaDup.ToolJob
   int delete_age = 0;
   
   File last_touched_file = null;
+  string forced_cache_dir = null;
 
   void network_changed()
   {
@@ -109,6 +110,9 @@ internal class DuplicityJob : DejaDup.ToolJob
 
   ~DuplicityJob() {
     DejaDup.Network.get().notify["connected"].disconnect(network_changed);
+
+    if (forced_cache_dir != null)
+      new DejaDup.RecursiveDelete(File.new_for_path(forced_cache_dir)).start_async.begin();
   }
 
   public override void start()
@@ -125,7 +129,17 @@ internal class DuplicityJob : DejaDup.ToolJob
     
     if (mode == DejaDup.ToolJob.Mode.BACKUP)
       process_include_excludes();
-    
+
+    /* Fake cache dir if we need to */
+    if ((flags & DejaDup.ToolJob.Flags.NO_CACHE) != 0) {
+      try {
+        forced_cache_dir = DirUtils.make_tmp("deja-dup-XXXXXX");
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
+    }
+
     var settings = DejaDup.get_settings();
     delete_age = settings.get_int(DejaDup.DELETE_AFTER_KEY);
 
@@ -1371,6 +1385,9 @@ internal class DuplicityJob : DejaDup.ToolJob
     /* Start new duplicity instance */
     inst = new DuplicityInstance();
     inst.done.connect(handle_done);
+
+    if (forced_cache_dir != null)
+      inst.forced_cache_dir = forced_cache_dir;
 
     /* As duplicity's data is returned via a signal, handle_message begins post-raw stream processing */
     inst.message.connect(handle_message);

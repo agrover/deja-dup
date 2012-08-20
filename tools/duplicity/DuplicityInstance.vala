@@ -27,6 +27,7 @@ internal class DuplicityInstance : Object
                              string user_text);
   
   public bool verbose {get; private set; default = false;}
+  public string forced_cache_dir {get; set; default = null;}
   
   public virtual void start(List<string> argv_in, List<string>? envp_in,
                             bool as_root = false) throws Error
@@ -71,7 +72,9 @@ internal class DuplicityInstance : Object
     argv.append("--gpg-options=--no-use-agent");
 
     // Cache signature files
-    var cache_dir = Environment.get_user_cache_dir();
+    var cache_dir = forced_cache_dir;
+    if (cache_dir == null)
+      cache_dir = Environment.get_user_cache_dir();
     if (cache_dir != null) {
       bool add_dir = false;
       var cache_file = File.new_for_path(cache_dir);

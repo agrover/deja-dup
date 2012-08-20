@@ -30,6 +30,7 @@ public const string LAST_RUN_KEY = "last-run";
 public const string LAST_BACKUP_KEY = "last-backup";
 public const string LAST_RESTORE_KEY = "last-restore";
 public const string PROMPT_CHECK_KEY = "prompt-check";
+public const string NAG_CHECK_KEY = "nag-check";
 public const string PERIODIC_KEY = "periodic";
 public const string PERIODIC_PERIOD_KEY = "periodic-period";
 public const string DELETE_AFTER_KEY = "delete-after";
@@ -209,11 +210,11 @@ public void make_prompt_check()
     run_deja_dup("--prompt");
 }
 
-public void update_prompt_time(bool cancel = false)
+private void update_time_key(string key, bool cancel)
 {
   var settings = DejaDup.get_settings();
 
-  if (settings.get_string(PROMPT_CHECK_KEY) == "disabled")
+  if (settings.get_string(key) == "disabled")
     return; // never re-enable
 
   string cur_time_str;
@@ -226,7 +227,53 @@ public void update_prompt_time(bool cancel = false)
     cur_time_str = cur_time.to_iso8601();
   }
 
-  settings.set_string(PROMPT_CHECK_KEY, cur_time_str);
+  settings.set_string(key, cur_time_str);
+}
+
+public void update_prompt_time(bool cancel = false)
+{
+  update_time_key(PROMPT_CHECK_KEY, cancel);
+}
+
+public void update_nag_time(bool cancel = false)
+{
+  update_time_key(NAG_CHECK_KEY, cancel);
+}
+
+// In seconds
+public int get_nag_delay()
+{
+  TimeSpan span = 0;
+  if (DejaDup.in_testing_mode())
+    span = TimeSpan.MINUTE * 2;
+  else
+    span = TimeSpan.DAY * 30 * 2;
+  return (int)(span / TimeSpan.SECOND);
+}
+
+// This makes the check of whether we should remind user about their password.
+public bool is_nag_time()
+{
+  var settings = DejaDup.get_settings();
+  var nag = settings.get_string(NAG_CHECK_KEY);
+  var last_run_string = last_run_date(TimestampType.BACKUP);
+
+  if (nag == "disabled" || last_run_string == "")
+    return false;
+  else if (nag == "") {
+    update_nag_time();
+    return false;
+  }
+
+  TimeVal last_check_tval = TimeVal();
+  if (!last_check_tval.from_iso8601(nag))
+    return false;
+
+  var last_check = new DateTime.from_timeval_local(last_check_tval);
+  last_check = last_check.add_seconds(get_nag_delay());
+
+  var now = new DateTime.now_local();
+  return (last_check.compare(now) <= 0);
 }
 
 public string get_folder_key(SimpleSettings settings, string key)
