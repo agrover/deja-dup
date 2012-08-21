@@ -84,8 +84,8 @@ void backup_teardown()
     }
   }
 
-//  if (Posix.system("rm -r %s".printf(Environment.get_variable("DEJA_DUP_TEST_HOME"))) != 0)
-//    warning("Could not clean TEST_HOME %s", Environment.get_variable("DEJA_DUP_TEST_HOME"));
+  if (Posix.system("rm -r %s".printf(Environment.get_variable("DEJA_DUP_TEST_HOME"))) != 0)
+    warning("Could not clean TEST_HOME %s", Environment.get_variable("DEJA_DUP_TEST_HOME"));
 
   Environment.unset_variable("DEJA_DUP_TEST_MOCKSCRIPT");
   Environment.unset_variable("XDG_CACHE_HOME");
