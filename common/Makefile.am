@@ -48,10 +48,14 @@ libcommon_la_VALASOURCES = \
 	Network.vala \
 	Operation.vala \
 	OperationBackup.vala \
+	OperationFiles.vala \
 	OperationRestore.vala \
 	OperationStatus.vala \
-	OperationFiles.vala \
+	OperationVerify.vala \
 	PythonChecker.vala \
+	RecursiveDelete.vala \
+	RecursiveMove.vala \
+	RecursiveOp.vala \
 	SimpleSettings.vala \
 	ToolPlugin.vala
 

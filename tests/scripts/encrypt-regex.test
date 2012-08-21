@@ -2,7 +2,7 @@
 Type=backup
 
 [Duplicity]
-Runs=status;dry;backup;
+Runs=status;dry;backup;status-restore;list;verify;
 
 [Duplicity status]
 #DEBUG 1
@@ -13,4 +13,15 @@ Output=true
 Encrypted=true
 
 [Duplicity backup]
+Encrypted=true
+
+[Duplicity status-restore]
+#DEBUG 1
+#. ['duplicity.gpg']
+Output=true
+
+[Duplicity list]
+Encrypted=true
+
+[Duplicity verify]
 Encrypted=true

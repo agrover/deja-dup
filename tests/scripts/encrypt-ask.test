@@ -3,7 +3,7 @@ Type=backup
 Passphrases=2
 
 [Duplicity]
-Runs=status 1;dry 1;status 2;dry 2;backup 1;status 3;dry 3;backup 2;
+Runs=status 1;dry 1;status 2;dry 2;backup 1;status 3;dry 3;backup 2;status-restore;list;verify;
 
 [Duplicity status 1]
 #DEBUG 1
@@ -44,5 +44,17 @@ Encrypted=true
 Passphrase=true
 
 [Duplicity backup 2]
+Encrypted=true
+Passphrase=true
+
+[Duplicity status-restore]
+Encrypted=true
+Passphrase=true
+
+[Duplicity list]
+Encrypted=true
+Passphrase=true
+
+[Duplicity verify]
 Encrypted=true
 Passphrase=true

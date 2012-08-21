@@ -90,17 +90,19 @@ public abstract class Operation : Object
   internal ToolJob job;
   protected string passphrase;
   bool finished = false;
+  string saved_detail = null;
   construct
   {
     backend = Backend.get_default();
   }
 
-  public async virtual void start()
+  public async virtual void start(bool try_claim_bus = true)
   {
     action_desc_changed(_("Preparing…"));  
     
     try {
-      claim_bus();
+      if (try_claim_bus)
+        claim_bus();
     }
     catch (Error e) {
       raise_error(e.message, null);
@@ -182,7 +184,7 @@ public abstract class Operation : Object
     job.done.connect((d, o, c, detail) => {operation_finished.begin(d, o, c, detail);});
     job.raise_error.connect((d, s, detail) => {raise_error(s, detail);});
     job.action_desc_changed.connect((d, s) => {action_desc_changed(s);});
-    job.action_file_changed.connect((d, f, b) => {action_file_changed(f, b);});
+    job.action_file_changed.connect((d, f, b) => {send_action_file_changed(f, b);});
     job.progress.connect((d, p) => {progress(p);});
     job.question.connect((d, t, m) => {question(t, m);});
     job.is_full.connect((first) => {is_full(first);});
@@ -193,6 +195,11 @@ public abstract class Operation : Object
       passphrase = null;
       restart();
     });
+  }
+
+  protected virtual void send_action_file_changed(File file, bool actual)
+  {
+    action_file_changed(file, actual);
   }
 
   public void set_passphrase(string? passphrase)
@@ -222,7 +229,47 @@ public abstract class Operation : Object
    */
     return null;
   }
-  
+
+  static string combine_details(string? old_detail, string? new_detail)
+  {
+    if (old_detail == null)
+      return new_detail;
+    else if (new_detail == null)
+      return old_detail;
+    else
+      return old_detail + "\n\n" + new_detail;
+  }
+
+  protected async void chain_op(Operation subop, string desc, string? detail)
+  {
+    /**
+     * Sometimes an operation wants to chain to a separate operation.
+     * Here is the glue to make that happen.
+     */
+    subop.ref();
+    subop.done.connect((s, c, d) => {
+      done(s, c, combine_details(saved_detail, d));
+      subop.unref();
+    });
+    subop.raise_error.connect((e, d) => {raise_error(e, d);});
+    subop.progress.connect((p) => {progress(p);});
+    subop.passphrase_required.connect(() => {
+      passphrase_required();
+      subop.needs_password = needs_password;
+      subop.passphrase = passphrase;
+    });
+    subop.question.connect((t, m) => {question(t, m);});
+
+    saved_detail = combine_details(saved_detail, detail);
+    subop.set_state(get_state());
+    job = subop.job;
+
+    action_desc_changed(desc);
+    progress(0);
+
+    yield subop.start(false);
+  }
+
   uint bus_id = 0;
   void claim_bus() throws BackupError
   {
@@ -239,7 +286,8 @@ public abstract class Operation : Object
 
   void unclaim_bus()
   {
-    Bus.unown_name(bus_id);
+    if (bus_id > 0)
+      Bus.unown_name(bus_id);
   }
 }
 

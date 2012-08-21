@@ -23,6 +23,8 @@ namespace DejaDup {
 
 public class OperationBackup : Operation
 {
+  File metadir;
+
   public OperationBackup() {
     Object(mode: ToolJob.Mode.BACKUP);
   }
@@ -32,10 +34,24 @@ public class OperationBackup : Operation
     /* If successfully completed, update time of last backup and run base operation_finished */
     if (success)
       DejaDup.update_last_run_timestamp(DejaDup.TimestampType.BACKUP);
-    
-    yield base.operation_finished(job, success, cancelled, detail);
+
+    if (metadir != null)
+      new RecursiveDelete(metadir).start();
+
+    if (success && !cancelled)
+      yield chain_op(new OperationVerify(), _("Verifying backup…"), detail);
+    else
+      yield base.operation_finished(job, success, cancelled, detail);
   }
-  
+
+  protected override void send_action_file_changed(File file, bool actual)
+  {
+    // Intercept action_file_changed signals and ignore them if they are
+    // metadata file, the user doesn't need to see them.
+    if (!file.has_prefix(metadir))
+      base.send_action_file_changed(file, actual);
+  }
+
   protected override List<string>? make_argv()
   {
     var settings = get_settings();
@@ -54,9 +70,20 @@ public class OperationBackup : Operation
       job.excludes.prepend(s);
     foreach (File s in include_list)
       job.includes.prepend(s);
+
+    // Insert deja-dup meta info directory
+    string cachedir = Environment.get_user_cache_dir();
+    try {
+      metadir = File.new_for_path(Path.build_filename(cachedir, Config.PACKAGE, "metadata"));
+      fill_metadir();
+      job.includes.prepend(metadir);
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+    }
     
     job.local = File.new_for_path("/");
-    
+
     return null;
   }
   
@@ -98,6 +125,24 @@ public class OperationBackup : Operation
     rv.append("/sys");
     
     return rv;
+  }
+
+  void fill_metadir() throws Error
+  {
+    if (metadir == null)
+      return;
+
+    // Delete old dir, if any, and replace it
+    new RecursiveDelete(metadir).start();
+    metadir.make_directory_with_parents(null);
+
+    // Put a file in there that is one part always constant, and one part
+    // always different, for basic sanity checking.  This way, it will be
+    // included in every backup, but we can still check its contents for
+    // corruption.  We'll stuff seconds-since-epoch in it.
+    var now = new DateTime.now_utc();
+    var msg = "This folder can be safely deleted.\n%s".printf(now.format("%s"));
+    FileUtils.set_contents(Path.build_filename(metadir.get_path(), "README"), msg);
   }
 }
 
