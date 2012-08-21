@@ -103,21 +103,23 @@ public enum Mode {
   LIST,
 }
 
-string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = false, string extra = "")
+string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = false, string extra = "", bool tmp_archive = false)
 {
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
   var test_home = Environment.get_variable("DEJA_DUP_TEST_HOME");
   var backupdir = Path.build_filename(test_home, "backup");
   var restoredir = Path.build_filename(test_home, "restore");
 
+  var archive = tmp_archive ? "?" : "%s/deja-dup".printf(cachedir);
+
   if (mode == Mode.CLEANUP)
-    return "cleanup '--force' 'file://%s' '--gio' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, encrypted ? "" : "'--no-encryption' ", cachedir);
+    return "cleanup '--force' 'file://%s' '--gio' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(backupdir, encrypted ? "" : "'--no-encryption' ", archive);
   else if (mode == Mode.RESTORE)
-    return "'restore' '--gio' '--force' 'file://%s' '%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, restoredir, encrypted ? "" : "'--no-encryption' ", cachedir);
+    return "'restore' '--gio' '--force' 'file://%s' '%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(backupdir, restoredir, encrypted ? "" : "'--no-encryption' ", archive);
   else if (mode == Mode.VERIFY)
-    return "'restore' '--file-to-restore=%s/deja-dup/metadata' '--gio' '--force' 'file://%s' '%s/deja-dup/metadata' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(cachedir.substring(1), backupdir, cachedir, encrypted ? "" : "'--no-encryption' ", cachedir);
+    return "'restore' '--file-to-restore=%s/deja-dup/metadata' '--gio' '--force' 'file://%s' '%s/deja-dup/metadata' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(cachedir.substring(1), backupdir, cachedir, encrypted ? "" : "'--no-encryption' ", archive);
   else if (mode == Mode.LIST)
-    return "'list-current-files' '--gio' 'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(backupdir, encrypted ? "" : "'--no-encryption' ", cachedir);
+    return "'list-current-files' '--gio' 'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(backupdir, encrypted ? "" : "'--no-encryption' ", archive);
 
   string source_str = "";
   if (mode == Mode.DRY || mode == Mode.BACKUP)
@@ -164,7 +166,7 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     args += "'--exclude=%s/deja-dup' '--exclude=%s' '--exclude=**' ".printf(cachedir, cachedir);
   }
 
-  args += "%s%s'--gio' %s'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s/deja-dup' '--log-fd=?'".printf(extra, dry_str, source_str, backupdir, enc_str, cachedir);
+  args += "%s%s'--gio' %s'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(extra, dry_str, source_str, backupdir, enc_str, archive);
 
   return args;
 }
@@ -297,14 +299,20 @@ string replace_keywords(string in)
 {
   var home = Environment.get_home_dir();
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
-  return in.replace("@HOME@", home).replace("@XDG_CACHE_HOME@", cachedir);
+  var test_home = Environment.get_variable("DEJA_DUP_TEST_HOME");
+  return in.replace("@HOME@", home).
+         replace("@XDG_CACHE_HOME@", cachedir).
+         replace("@TEST_HOME@", test_home);
 }
 
 string run_script(string in)
 {
   string output;
+  string errstr;
   try {
-    Process.spawn_sync(null, {"/bin/sh", "-c", in}, null, 0, null, out output, null, null);
+    Process.spawn_sync(null, {"/bin/sh", "-c", in}, null, 0, null, out output, out errstr, null);
+    if (errstr != null && errstr != "")
+      warning("Error running script: %s", errstr);
   }
   catch (SpawnError e) {
     warning(e.message);
@@ -343,6 +351,22 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
     br.error_detail = keyfile.get_string(group, "ErrorDetail");
   if (keyfile.has_key(group, "Passphrases"))
     br.passphrases = keyfile.get_integer(group, "Passphrases");
+  if (keyfile.has_key(group, "Settings")) {
+    var settings_list = keyfile.get_string_list(group, "Settings");
+    var settings = DejaDup.get_settings();
+    foreach (var setting in settings_list) {
+      try {
+        var tokens = setting.split("=");
+        var key = tokens[0];
+        var val = Variant.parse(null, tokens[1]);
+        settings.set_value(key, val);
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+        assert_not_reached();
+      }
+    }
+  }
 }
 
 void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) throws Error
@@ -353,6 +377,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
   bool cancel = false;
   bool stop = false;
   bool passphrase = false;
+  bool tmp_archive = false;
   string script = null;
   Mode mode = Mode.NONE;
 
@@ -361,6 +386,8 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
   var group = "Duplicity " + run;
 
   if (keyfile.has_group(group)) {
+    if (keyfile.has_key(group, "ArchiveDirIsTmp"))
+      tmp_archive = keyfile.get_boolean(group, "ArchiveDirIsTmp");
     if (keyfile.has_key(group, "Cancel"))
       cancel = keyfile.get_boolean(group, "Cancel");
     if (keyfile.has_key(group, "Encrypted"))
@@ -403,7 +430,10 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
 
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
 
-  var dupscript = "ARGS: " + default_args(br, mode, encrypted, extra_args);
+  var dupscript = "ARGS: " + default_args(br, mode, encrypted, extra_args, tmp_archive);
+
+  if (tmp_archive)
+    dupscript += "\n" + "TMP_ARCHIVE";
 
   if (cancel) {
     dupscript += "\n" + "DELAY: 10";

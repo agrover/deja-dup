@@ -45,11 +45,14 @@ public abstract class AssistantOperation : Assistant
   protected StatusIcon status_icon;
   protected bool succeeded = false;
 
+  Gtk.Entry nag_entry;
   Gtk.Entry encrypt_entry;
   Gtk.Entry encrypt_confirm_entry;
   Gtk.RadioButton encrypt_enabled;
   Gtk.CheckButton encrypt_remember;
   protected Gtk.Widget password_page {get; private set;}
+  protected Gtk.Widget nag_page {get; private set;}
+  protected bool nagged;
   List<Gtk.Widget> first_password_widgets;
   MainLoop password_ask_loop;
   MainLoop password_find_loop;
@@ -94,6 +97,7 @@ public abstract class AssistantOperation : Assistant
     add_setup_pages();
     add_confirm_page();
     add_password_page();
+    add_nag_page();
     add_question_page();
     add_progress_page();
     add_summary_page();
@@ -384,6 +388,59 @@ public abstract class AssistantOperation : Assistant
     return page;
   }
 
+  protected Gtk.Widget make_nag_page()
+  {
+    int rows = 0;
+    Gtk.Widget w, label;
+
+    var page = new Gtk.Grid();
+    page.set("row-spacing", 6,
+             "column-spacing", 6,
+             "border-width", 12);
+
+    w = new Gtk.Label(_("In order to check that you will be able to retrieve your files in the case of an emergency, please enter your encryption password again to perform a brief restore test."));
+    w.set("xalign", 0.0f,
+          "max-width-chars", 25,
+          "wrap", true);
+    page.attach(w, 0, rows, 3, 1);
+    w.hide();
+    ++rows;
+
+    w = new Gtk.Entry();
+    w.set("visibility", false,
+          "hexpand", true,
+          "activates-default", true);
+    ((Gtk.Entry)w).changed.connect((entry) => {check_nag_validity();});
+    label = new Gtk.Label(_("E_ncryption password"));
+    label.set("mnemonic-widget", w,
+              "use-underline", true,
+              "xalign", 1.0f);
+    page.attach(label, 1, rows, 1, 1);
+    page.attach(w, 2, rows, 1, 1);
+    nag_entry = w as Gtk.Entry;
+    ++rows;
+
+    w = new Gtk.CheckButton.with_mnemonic(_("_Show password"));
+    ((Gtk.CheckButton)w).toggled.connect((button) => {
+      nag_entry.visibility = button.get_active();
+    });
+    page.attach(w, 2, rows, 1, 1);
+    ++rows;
+
+    w = new Gtk.CheckButton.with_mnemonic(_("Test every two _months"));
+    page.attach(w, 0, rows, 3, 1);
+    w.hide();
+    ((Gtk.CheckButton)w).active = true;
+    w.vexpand = true;
+    w.valign = Gtk.Align.END;
+    ((Gtk.CheckButton)w).toggled.connect((button) => {
+      DejaDup.update_nag_time(!button.get_active());
+    });
+    ++rows;
+
+    return page;
+  }
+
   protected Gtk.Widget make_question_page()
   {
     int rows = 0;
@@ -460,6 +517,14 @@ public abstract class AssistantOperation : Assistant
     var page = make_password_page();
     append_page(page, Type.INTERRUPT);
     password_page = page;
+  }
+
+  void add_nag_page()
+  {
+    var page = make_nag_page();
+    append_page(page, Type.CHECK);
+    set_page_title(page, _("Restore Test"));
+    nag_page = page;
   }
 
   void add_question_page()
@@ -588,7 +653,7 @@ public abstract class AssistantOperation : Assistant
       else if (op == null)
         do_apply.begin();
     }
-    else if (page == password_page)
+    else if (page == password_page || page == nag_page)
       set_header_icon(Gtk.Stock.DIALOG_AUTHENTICATION);
   }
 
@@ -677,8 +742,8 @@ public abstract class AssistantOperation : Assistant
 
   protected void get_passphrase()
   {
-    // DEJA_DUP_TESTING only set when we are in test suite
-    if (!searched_for_passphrase && !DejaDup.in_testing_mode()) {
+    if (!searched_for_passphrase && !DejaDup.in_testing_mode() &&
+        op.use_cached_password) {
       // First, try user's keyring
       GnomeKeyring.find_password(PASSPHRASE_SCHEMA,
                                  found_passphrase,
@@ -730,12 +795,29 @@ public abstract class AssistantOperation : Assistant
       set_page_title(password_page, _("Require Password?"));
     else
       set_page_title(password_page, _("Encryption Password Needed"));
-    foreach (Gtk.Widget w in first_password_widgets) {
+
+    foreach (Gtk.Widget w in first_password_widgets)
       w.visible = first;
-    }
+
     check_password_validity();
     encrypt_entry.select_region(0, -1);
     encrypt_entry.grab_focus();
+  }
+
+  void check_nag_validity()
+  {
+    var passphrase = nag_entry.get_text();
+    if (passphrase == "")
+      allow_forward(false);
+    else
+      allow_forward(true);
+  }
+
+  void configure_nag_page()
+  {
+    check_nag_validity();
+    nag_entry.set_text("");
+    nag_entry.grab_focus();
   }
 
   void stop_password_loop(Assistant dlg, int resp)
@@ -751,8 +833,15 @@ public abstract class AssistantOperation : Assistant
   protected void ask_passphrase(bool first = false)
   {
     op.needs_password = true;
-    interrupt(password_page);
-    configure_password_page(first);
+    if (op.use_cached_password) {
+      interrupt(password_page);
+      configure_password_page(first);
+    }
+    else {
+      interrupt(nag_page);
+      configure_nag_page();
+      nagged = true;
+    }
     force_visible(false);
     // pause until we can provide password by entering new main loop
     password_ask_loop = new MainLoop(null);
@@ -764,22 +853,29 @@ public abstract class AssistantOperation : Assistant
   {
     var passphrase = "";
 
-    if (encrypt_enabled.active) {
-      passphrase = encrypt_entry.get_text().strip();
-      if (passphrase == "") // all whitespace password?  allow it...
-        passphrase = encrypt_entry.get_text();
-    }
-
-    if (passphrase != "") {
-      // Save it
-      if (encrypt_remember.active) {
-        GnomeKeyring.store_password(PASSPHRASE_SCHEMA,
-                                    GnomeKeyring.DEFAULT,
-                                    _("Backup encryption password"),
-                                    passphrase, save_password_callback,
-                                    "owner", Config.PACKAGE,
-                                    "type", "passphrase");
+    if (op.use_cached_password) {
+      if (encrypt_enabled.active) {
+        passphrase = encrypt_entry.get_text().strip();
+        if (passphrase == "") // all whitespace password?  allow it...
+          passphrase = encrypt_entry.get_text();
       }
+
+      if (passphrase != "") {
+        // Save it
+        if (encrypt_remember.active) {
+          GnomeKeyring.store_password(PASSPHRASE_SCHEMA,
+                                      GnomeKeyring.DEFAULT,
+                                      _("Backup encryption password"),
+                                      passphrase, save_password_callback,
+                                      "owner", Config.PACKAGE,
+                                      "type", "passphrase");
+        }
+      }
+    }
+    else {
+      passphrase = nag_entry.get_text().strip();
+      if (passphrase == "") // all whitespace password?  allow it...
+        passphrase = nag_entry.get_text();
     }
 
     op.set_passphrase(passphrase);

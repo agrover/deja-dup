@@ -91,8 +91,11 @@ public class AssistantBackup : AssistantOperation
       else {
         set_page_title(page, _("Backup Finished"));
 
+        // Also leave ourselves up if we just finished a restore test.
+        if (nagged)
+          summary_label.label = _("Your files were successfully backed up and tested.");
         // If we don't have a special message to show the user, just bail.
-        if (!detail_widget.get_visible())
+        else if (!detail_widget.get_visible())
           Idle.add(() => {do_close(); return false;});
       }
     }

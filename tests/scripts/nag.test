@@ -1,0 +1,58 @@
+# Tests whether we correctly nag the user about their password during some
+# verify checks.
+
+[Operation]
+Type=backup
+Settings=nag-check='1970-01-01T00:32:08.916885Z'
+Passphrases=2
+
+[Duplicity]
+Runs=status 1;status 2;dry;backup;status-restore 1;status-restore 2;list;verify;
+
+[Duplicity status 1]
+#DEBUG 1
+#. ['duplicity.gpg']
+#
+#ERROR 31
+Output=true
+
+[Duplicity status 2]
+#DEBUG 1
+#. ['duplicity.gpg']
+Output=true
+Encrypted=true
+Passphrase=true
+
+[Duplicity dry]
+Encrypted=true
+Passphrase=true
+
+[Duplicity backup]
+Encrypted=true
+Passphrase=true
+
+[Duplicity status-restore 1]
+#DEBUG 1
+#. ['duplicity.gpg']
+#
+#ERROR 31
+Output=true
+ArchiveDirIsTmp=true
+
+[Duplicity status-restore 2]
+#DEBUG 1
+#. ['duplicity.gpg']
+Output=true
+Encrypted=true
+Passphrase=true
+ArchiveDirIsTmp=true
+
+[Duplicity list]
+Encrypted=true
+Passphrase=true
+ArchiveDirIsTmp=true
+
+[Duplicity verify]
+Encrypted=true
+Passphrase=true
+ArchiveDirIsTmp=true

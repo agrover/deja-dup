@@ -28,19 +28,40 @@ public class OperationVerify : Operation
 {
   File metadir;
   File destdir;
+  bool nag;
 
   public OperationVerify() {
     Object(mode: ToolJob.Mode.RESTORE);
   }
 
+  construct {
+    // Should we nag user about password, etc?  What this really means is that
+    // we try to do our normal verification routine in as close an emulation
+    // to a fresh restore after a disaster as possible.  So fresh cache, no
+    // saved password, etc.  We do *not* explicitly unmount the backend,
+    // because we may not be the only consumers.
+    if (is_nag_time()) {
+      use_cached_password = false;
+      nag = true;
+    }
+  }
+
   public async override void start(bool try_claim_bus = true)
   {
+    if (nag) {
+      var fake_state = new State();
+      fake_state.backend = backend.clone();
+      set_state(fake_state);
+    }
     action_desc_changed(_("Verifying backup…"));
     yield base.start(try_claim_bus);
   }
 
   protected override void connect_to_job()
   {
+    if (nag)
+      job.flags |= ToolJob.Flags.NO_CACHE;
+
     string cachedir = Environment.get_user_cache_dir();
     metadir = File.new_for_path(Path.build_filename(cachedir, Config.PACKAGE, "metadata"));
     job.restore_files.append(metadir);
@@ -73,6 +94,9 @@ public class OperationVerify : Operation
         raise_error(_("Your backup appears to be corrupted.  You should delete the backup and try again."), null);
         success = false;
       }
+
+      if (nag)
+        update_nag_time();
     }
 
     new RecursiveDelete(metadir).start();

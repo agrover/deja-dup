@@ -41,6 +41,7 @@ public abstract class Operation : Object
   public signal void question(string title, string msg);
   public signal void is_full(bool first);
 
+  public bool use_cached_password {get; protected set; default = true;}
   public bool needs_password {get; set;}
   public Backend backend {get; private set;}
   public bool use_progress {get {return (job.flags & ToolJob.Flags.NO_PROGRESS) == 0;}
@@ -91,6 +92,7 @@ public abstract class Operation : Object
   protected string passphrase;
   bool finished = false;
   string saved_detail = null;
+  Operation chained_op = null;
   construct
   {
     backend = Backend.get_default();
@@ -168,12 +170,18 @@ public abstract class Operation : Object
 
   public void cancel()
   {
-    job.cancel();
+    if (chained_op != null)
+      chained_op.cancel();
+    else
+      job.cancel();
   }
   
   public void stop()
   {
-    job.stop();
+    if (chained_op != null)
+      chained_op.stop();
+    else
+      job.stop();
   }
   
   protected virtual void connect_to_job()
@@ -246,23 +254,26 @@ public abstract class Operation : Object
      * Sometimes an operation wants to chain to a separate operation.
      * Here is the glue to make that happen.
      */
-    subop.ref();
+    assert(chained_op == null);
+
+    chained_op = subop;
     subop.done.connect((s, c, d) => {
       done(s, c, combine_details(saved_detail, d));
-      subop.unref();
+      chained_op = null;
     });
     subop.raise_error.connect((e, d) => {raise_error(e, d);});
     subop.progress.connect((p) => {progress(p);});
     subop.passphrase_required.connect(() => {
+      needs_password = true;
       passphrase_required();
-      subop.needs_password = needs_password;
-      subop.passphrase = passphrase;
+      if (!needs_password)
+        subop.set_passphrase(passphrase);
     });
     subop.question.connect((t, m) => {question(t, m);});
 
+    use_cached_password = subop.use_cached_password;
     saved_detail = combine_details(saved_detail, detail);
     subop.set_state(get_state());
-    job = subop.job;
 
     action_desc_changed(desc);
     progress(0);
