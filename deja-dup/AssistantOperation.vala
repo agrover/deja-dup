@@ -52,6 +52,7 @@ public abstract class AssistantOperation : Assistant
   Gtk.CheckButton encrypt_remember;
   protected Gtk.Widget password_page {get; private set;}
   protected Gtk.Widget nag_page {get; private set;}
+  protected bool nagged;
   List<Gtk.Widget> first_password_widgets;
   MainLoop password_ask_loop;
   MainLoop password_find_loop;
@@ -839,6 +840,7 @@ public abstract class AssistantOperation : Assistant
     else {
       interrupt(nag_page);
       configure_nag_page();
+      nagged = true;
     }
     force_visible(false);
     // pause until we can provide password by entering new main loop
