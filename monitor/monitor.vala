@@ -294,6 +294,27 @@ static void watch_settings()
   settings.changed.connect(prepare_if_necessary);
 }
 
+static void begin_monitoring()
+{
+  DejaDup.Network.ensure_status.begin();
+  DejaDup.Network.get().notify["connected"].connect(network_changed);
+
+  Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
+                 BusNameWatcherFlags.NONE, op_started, op_ended);
+
+  var mon = VolumeMonitor.get();
+  mon.ref(); // bug 569418; bad things happen when VM goes away
+  mon.volume_added.connect(volume_added);
+
+  watch_settings();
+
+  // Delay first check to give the network and desktop environment a chance to start up.
+  if (DejaDup.in_testing_mode())
+    make_first_check();
+  else
+    Timeout.add_seconds(120, () => {make_first_check(); return false;});
+}
+
 static int main(string[] args)
 {
   DejaDup.i18n_setup();
@@ -319,27 +340,17 @@ static int main(string[] args)
   if (!DejaDup.initialize(null, null))
     return 1;
 
-  DejaDup.Network.ensure_status.begin();
-  DejaDup.Network.get().notify["connected"].connect(network_changed);
-
-  Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
-                 BusNameWatcherFlags.NONE, op_started, op_ended);
-
-  var mon = VolumeMonitor.get();
-  mon.ref(); // bug 569418; bad things happen when VM goes away
-  mon.volume_added.connect(volume_added);
-
   var loop = new MainLoop(null, false);
-
-  // Delay first check to give the network and desktop environment a chance to start up.
-  if (DejaDup.in_testing_mode())
-    make_first_check();
-  else
-    Timeout.add_seconds(120, () => {make_first_check(); return false;});
-
-  watch_settings();
+  Idle.add(() => {
+    // quit if we can't get the bus name or become disconnected
+    Bus.own_name(BusType.SESSION, "org.gnome.DejaDup.Monitor",
+                 BusNameOwnerFlags.NONE, ()=>{},
+                 ()=>{begin_monitoring();},
+                 ()=>{loop.quit();});
+    return false;
+  });
   loop.run();
-  
+
   return 0;
 }
 
