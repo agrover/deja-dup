@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-07-20 19:31-0400\n"
+"POT-Creation-Date: 2012-08-20 21:34-0400\n"
 "PO-Revision-Date: 2012-03-22 14:30+0000\n"
 "Last-Translator: Michael Terry <michael.terry@canonical.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-07-22 04:58+0000\n"
-"X-Generator: Launchpad (build 15654)\n"
+"X-Launchpad-Export-Date: 2012-08-28 10:10+0000\n"
+"X-Generator: Launchpad (build 15864)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -34,7 +34,7 @@ msgstr "Dublēšana"
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:89
+#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:90
 #: ../deja-dup/main.vala:78 ../preferences/Preferences.vala:88
 #, c-format
 msgid "Déjà Dup Backup Tool"
@@ -169,9 +169,8 @@ msgstr "Dienu skaits starp dublējumiem."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:18
 msgid ""
-"The first time Déjà Dup checked whether it should prompt about backing up"
+"The last time Déjà Dup checked whether it should prompt about backing up"
 msgstr ""
-"Pirmā reize, kad Déjà Dup pārbaudīja, vai vajadzētu jautāt par dublēšanu"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:19
 msgid ""
@@ -186,10 +185,22 @@ msgstr ""
 "8601 formātā."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:20
+msgid ""
+"The last time Déjà Dup checked whether it should prompt about your password"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:21
+msgid ""
+"In order to prevent you from forgetting your passwords, Déjà Dup will "
+"occasionally notify you to confirm the password. This time should be either "
+"‘disabled’ to turn off this check or in ISO 8601 format."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
 msgid "How long to keep backup files"
 msgstr "Cik ilgi paturēt dublējuma failus"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:21
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
@@ -198,21 +209,21 @@ msgstr ""
 "Dienu skaits, cik ilgi jāpatur dublējumu faili dublēšanas vietā. '0' nozīmē "
 "bezgalīgi. Tas ir minimālais dienu skaits; faili var tikt paturēti ilgāk."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "How long to wait between full backups"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "Déjà Dup needs to occasionally make fresh full backups. This is the number "
 "of days to wait between full backups."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid "Type of location to store backup"
 msgstr "Tips vietai, kur glabāt dublējumus"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
@@ -220,21 +231,21 @@ msgstr ""
 "Dublējuma vietas tips. Ja 'auto', noklusējums tiks izvēlēts no tā, kas ir "
 "pieejams."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
 msgid "Amazon S3 Access Key ID"
 msgstr "Amazon S3 pieejas atslēgas ID"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Jūsu Amazon S3 piekļuves atslēgas identifikators. Tas darbojas kā jūsu S3 "
 "lietotājvārds."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
 msgid "The Amazon S3 bucket name to use"
 msgstr "Amazon S3 groza nosaukums, ko izmantot"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -243,11 +254,11 @@ msgstr ""
 "atļautas datora nosaukuma virknes."
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "The Amazon S3 folder"
 msgstr "Amazon S3 mape"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
@@ -255,11 +266,11 @@ msgstr ""
 "Neobligāts mapes nosaukums, kurā glabāt failus. Šī mape tiks veidota "
 "izvēlētajā grozā."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "The Rackspace Cloud Files container"
 msgstr "Rackspace Cloud Files konteineris"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -267,19 +278,19 @@ msgstr ""
 "Kurā Rackspace Cloud Files konteinerī glabāt failus. Tam nav jābūt jau "
 "esošam. Der tikai atļautas datora nosaukuma virknes."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "Your Rackspace username"
 msgstr "Jūsu Rackspace lietotājvārds"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "Šis ir jūsu lietotāja vārds Rackspace Cloud Files servisam."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 msgid "The Ubuntu One folder"
 msgstr "Ubuntu One mape"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid ""
 "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
 "folder based on the name of the computer."
@@ -287,30 +298,30 @@ msgstr ""
 "Nosaukums mapei, kura glabāt failus. Ja ‘$HOSTNAME’, pēc noklusējumā mapes "
 "nosaukums būs balstīts uz datora nosaukumu."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 #: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "Dublējuma vieta"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid "Location in which to hold the backup files."
 msgstr "Vieta, kur turēt dublējuma failus."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Folder type"
 msgstr "Mapes tips"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Vai dublējuma vieta tiek montēta uz ārēja sējuma, vai uz parastas mapes."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Relative path under the external volume"
 msgstr "Relatīvais ceļš uz ārējā sējuma"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -318,11 +329,11 @@ msgstr ""
 "Ja dublējuma atrašanās vieta ir uz ārējā sējuma, tad šis ir ceļš uz mapi "
 "tajā sējumā."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Unique ID of the external volume"
 msgstr "Ārējā sējuma unikālais ID"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -330,11 +341,11 @@ msgstr ""
 "Ja dublējuma atrašanās vieta ir uz ārējā sējuma, tad šis ir tā unikālās "
 "failu sistēmas identifikators."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid "Full name of the external volume"
 msgstr "Ārējā sējuma pilns nosaukums"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -342,11 +353,11 @@ msgstr ""
 "Ja dublējuma atrašanās vieta ir uz ārējā sējuma, tad šis is sējuma garākais "
 "aprakstošais nosaukums."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Short name of the external volume"
 msgstr "Ārējā sējuma īss nosaukums"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
@@ -354,17 +365,17 @@ msgstr ""
 "Ja dublējuma atrašanās vieta ir uz ārējā sējuma, tad šī ir sējuma īsākais "
 "nosaukums."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
 msgid "Icon of the external volume"
 msgstr "Ārējā sējuma ikona"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:54
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
 "Ja dublējuma atrašanās vieta ir uz ārējā sējuma, tad šī ir sējuma ikona."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:55
 msgid "Obsolete"
 msgstr "Novecojis"
 
@@ -372,7 +383,7 @@ msgstr "Novecojis"
 msgid "Folder"
 msgstr "Mape"
 
-#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:175
+#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:179
 msgid "Scanning…"
 msgstr "Skenē..."
 
@@ -400,7 +411,7 @@ msgstr[2] "Atjaunot failus no dublējuma"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:434
+#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:481
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s uz %2$s"
@@ -503,86 +514,96 @@ msgstr "Rā_dīt slepeno pieejas atslēgu"
 msgid "_Remember secret access key"
 msgstr "Atce_rēties slepeno pieejas atslēgu"
 
-#: ../common/BackendU1.vala:166 ../widgets/ConfigLocation.vala:186
+#: ../common/BackendU1.vala:170 ../widgets/ConfigLocation.vala:186
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
 #. Translators: %s is a folder.
-#: ../common/BackendU1.vala:169
+#: ../common/BackendU1.vala:173
 #, c-format
 msgid "%s on Ubuntu One"
 msgstr "%s uz Ubuntu One"
 
-#: ../common/BackendU1.vala:236
+#: ../common/BackendU1.vala:240
 msgid "Connect to Ubuntu One"
 msgstr "Savienoties ar Ubuntu One"
 
-#: ../common/BackendU1.vala:237
+#: ../common/BackendU1.vala:241
 msgid "Sign into Ubuntu One…"
 msgstr "Ierakstās Ubuntu One..."
 
-#: ../common/CommonUtils.vala:354
+#: ../common/CommonUtils.vala:401
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:356
+#: ../common/CommonUtils.vala:403
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:362
+#: ../common/CommonUtils.vala:409
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 
-#: ../common/CommonUtils.vala:384
+#: ../common/CommonUtils.vala:431
 msgid "Could not start backup tool"
 msgstr ""
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:485
+#: ../common/CommonUtils.vala:532
 #, c-format
 msgid "Home (%s)"
 msgstr "Mājas (%s)"
 
 #. Translators: this is the home folder
-#: ../common/CommonUtils.vala:490
+#: ../common/CommonUtils.vala:537
 msgid "Home"
 msgstr "Mājas"
 
 #. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:495
+#: ../common/CommonUtils.vala:542
 msgid "Trash"
 msgstr "Miskaste"
+
+#: ../common/OperationBackup.vala:42 ../common/OperationVerify.vala:56
+msgid "Verifying backup…"
+msgstr ""
 
 #: ../common/OperationRestore.vala:51
 msgid "Restoring files…"
 msgstr "Atjauno failus..."
 
-#: ../common/Operation.vala:60
+#: ../common/OperationVerify.vala:94
+msgid ""
+"Your backup appears to be corrupted.  You should delete the backup and try "
+"again."
+msgstr ""
+
+#: ../common/Operation.vala:61
 msgid "Backing up…"
 msgstr "Dublē..."
 
-#: ../common/Operation.vala:62 ../deja-dup/AssistantRestore.vala:484
+#: ../common/Operation.vala:63 ../deja-dup/AssistantRestore.vala:484
 msgid "Restoring…"
 msgstr "Atjauno..."
 
-#: ../common/Operation.vala:64
+#: ../common/Operation.vala:65
 msgid "Checking for backups…"
 msgstr "Pārbauda dublējumus..."
 
-#: ../common/Operation.vala:66
+#: ../common/Operation.vala:67
 msgid "Listing files…"
 msgstr "Uzskaita failus..."
 
-#: ../common/Operation.vala:68 ../common/Operation.vala:100
-#: ../tools/duplicity/DuplicityJob.vala:386
-#: ../tools/duplicity/DuplicityJob.vala:393
-#: ../tools/duplicity/DuplicityJob.vala:412
-#: ../tools/duplicity/DuplicityJob.vala:417
+#: ../common/Operation.vala:69 ../common/Operation.vala:103
+#: ../tools/duplicity/DuplicityJob.vala:400
+#: ../tools/duplicity/DuplicityJob.vala:407
+#: ../tools/duplicity/DuplicityJob.vala:426
+#: ../tools/duplicity/DuplicityJob.vala:431
 msgid "Preparing…"
 msgstr "Sagatavo..."
 
-#: ../common/Operation.vala:237
+#: ../common/Operation.vala:295
 msgid "Another backup operation is already running"
 msgstr "Jau darbojas cita dublēšanas darbība"
 
@@ -622,27 +643,31 @@ msgstr "Dublēšana neizdevās"
 msgid "Backup Finished"
 msgstr "Dublēšana ir pabeigta"
 
-#: ../deja-dup/AssistantBackup.vala:100
+#: ../deja-dup/AssistantBackup.vala:96
+msgid "Your files were successfully backed up and tested."
+msgstr ""
+
+#: ../deja-dup/AssistantBackup.vala:103
 msgid "Backing Up…"
 msgstr "Dublē..."
 
-#: ../deja-dup/AssistantOperation.vala:174
+#: ../deja-dup/AssistantOperation.vala:178
 msgid "Scanning:"
 msgstr "Skenē:"
 
-#: ../deja-dup/AssistantOperation.vala:256
+#: ../deja-dup/AssistantOperation.vala:260
 msgid "_Details"
 msgstr "_Sīkāk"
 
-#: ../deja-dup/AssistantOperation.vala:304
+#: ../deja-dup/AssistantOperation.vala:308
 msgid "_Allow restoring without a password"
 msgstr "Ļ_aut atjaunot bez paroles"
 
-#: ../deja-dup/AssistantOperation.vala:310
+#: ../deja-dup/AssistantOperation.vala:314
 msgid "_Password-protect your backup"
 msgstr "Dublējumu aizsargāt ar _paroli"
 
-#: ../deja-dup/AssistantOperation.vala:324
+#: ../deja-dup/AssistantOperation.vala:328
 #, c-format
 msgid ""
 "You will need your password to restore your files. You might want to write "
@@ -650,42 +675,59 @@ msgid ""
 msgstr ""
 "Jums vajadzēs jūsu paroli, lai atjaunotu failus. Būtu prātīgi to pierakstīt."
 
-#: ../deja-dup/AssistantOperation.vala:339
+#: ../deja-dup/AssistantOperation.vala:343
+#: ../deja-dup/AssistantOperation.vala:414
 msgid "E_ncryption password"
 msgstr "Ši_frēšanas parole"
 
-#: ../deja-dup/AssistantOperation.vala:356
+#: ../deja-dup/AssistantOperation.vala:360
 msgid "Confir_m password"
 msgstr "Apstipri_nāt paroli"
 
-#: ../deja-dup/AssistantOperation.vala:369
+#: ../deja-dup/AssistantOperation.vala:373
+#: ../deja-dup/AssistantOperation.vala:423
 msgid "_Show password"
 msgstr "Rā_dīt paroli"
 
-#: ../deja-dup/AssistantOperation.vala:378
+#: ../deja-dup/AssistantOperation.vala:382
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "Atce_rēties paroli"
 
-#: ../deja-dup/AssistantOperation.vala:447
+#: ../deja-dup/AssistantOperation.vala:401
+msgid ""
+"In order to check that you will be able to retrieve your files in the case "
+"of an emergency, please enter your encryption password again to perform a "
+"brief restore test."
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:430
+msgid "Test every two _months"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:504
 msgid "Summary"
 msgstr "Kopsavilkums"
 
-#: ../deja-dup/AssistantOperation.vala:537
-#: ../tools/duplicity/DuplicityJob.vala:694
-#: ../tools/duplicity/DuplicityJob.vala:1076
+#: ../deja-dup/AssistantOperation.vala:526
+msgid "Restore Test"
+msgstr ""
+
+#: ../deja-dup/AssistantOperation.vala:602
+#: ../tools/duplicity/DuplicityJob.vala:710
+#: ../tools/duplicity/DuplicityJob.vala:1092
 msgid "Failed with an unknown error."
 msgstr "Neizdevās ar nezināmu kļūdu."
 
-#: ../deja-dup/AssistantOperation.vala:730
+#: ../deja-dup/AssistantOperation.vala:795
 msgid "Require Password?"
 msgstr "Pieprasīt paroli?"
 
-#: ../deja-dup/AssistantOperation.vala:732
+#: ../deja-dup/AssistantOperation.vala:797
 msgid "Encryption Password Needed"
 msgstr "Vajadzīga šifrēšanas parole"
 
-#: ../deja-dup/AssistantOperation.vala:778
+#: ../deja-dup/AssistantOperation.vala:868
 msgid "Backup encryption password"
 msgstr "Dublējuma šifrēšanas parole"
 
@@ -838,11 +880,16 @@ msgstr[2] "Meklē ap %d gadu vecus failus..."
 msgid "Scanning finished"
 msgstr "Beidza skenēšanu"
 
-#: ../deja-dup/Assistant.vala:309
+#: ../deja-dup/Assistant.vala:314
 msgid "Co_ntinue"
 msgstr "_Turpināt"
 
-#: ../deja-dup/Assistant.vala:347 ../deja-dup/StatusIcon.vala:93
+#: ../deja-dup/Assistant.vala:320
+msgctxt "verb"
+msgid "_Test"
+msgstr ""
+
+#: ../deja-dup/Assistant.vala:357 ../deja-dup/StatusIcon.vala:93
 msgid "_Resume Later"
 msgstr "Tu_rpināt vēlāk"
 
@@ -1075,35 +1122,35 @@ msgstr "Grafiks"
 msgid "Categories"
 msgstr "Kategorijas"
 
-#: ../tools/duplicity/DuplicityJob.vala:89
-#: ../tools/duplicity/DuplicityJob.vala:173
+#: ../tools/duplicity/DuplicityJob.vala:90
+#: ../tools/duplicity/DuplicityJob.vala:187
 msgid "Paused (no network)"
 msgstr "Pauzēts (nav tīkla)"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../tools/duplicity/DuplicityJob.vala:444
+#: ../tools/duplicity/DuplicityJob.vala:458
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Nevarēja atjaunot ‘%s’: nav derīga faila vieta"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../tools/duplicity/DuplicityJob.vala:510
+#: ../tools/duplicity/DuplicityJob.vala:524
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "Dublējuma vieta ir pārāk maza. Mēģiniet kādu ar vairāk vietas."
 
-#: ../tools/duplicity/DuplicityJob.vala:532
+#: ../tools/duplicity/DuplicityJob.vala:547
 msgid "Backup location does not have enough free space."
 msgstr "Dublējuma vietai nepietiek brīvās vietas."
 
-#: ../tools/duplicity/DuplicityJob.vala:551
-#: ../tools/duplicity/DuplicityJob.vala:565
+#: ../tools/duplicity/DuplicityJob.vala:567
+#: ../tools/duplicity/DuplicityJob.vala:581
 msgid "Cleaning up…"
 msgstr "Uzkopj..."
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: ../tools/duplicity/DuplicityJob.vala:661
+#: ../tools/duplicity/DuplicityJob.vala:677
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
@@ -1114,7 +1161,7 @@ msgstr ""
 #. OK, we succeeded yay!  But some files didn't actually restore
 #. because we couldn't write to them.  So tell the user so they
 #. don't think everything is hunky dory.
-#: ../tools/duplicity/DuplicityJob.vala:677
+#: ../tools/duplicity/DuplicityJob.vala:693
 msgid ""
 "Could not restore the following files.  Please make sure you are able to "
 "write to them."
@@ -1122,7 +1169,7 @@ msgstr ""
 "Nevarēja atjaunot sekojošos failus. Pārliecinieties, ka varat uz tiem "
 "rakstīt."
 
-#: ../tools/duplicity/DuplicityJob.vala:924
+#: ../tools/duplicity/DuplicityJob.vala:940
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Nevarēja atjaunot ‘%s’: Fails nav atrast dublējumā"
@@ -1130,17 +1177,17 @@ msgstr "Nevarēja atjaunot ‘%s’: Fails nav atrast dublējumā"
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../tools/duplicity/DuplicityJob.vala:930
-#: ../tools/duplicity/DuplicityJob.vala:1028
-#: ../tools/duplicity/DuplicityJob.vala:1032
+#: ../tools/duplicity/DuplicityJob.vala:946
+#: ../tools/duplicity/DuplicityJob.vala:1044
+#: ../tools/duplicity/DuplicityJob.vala:1048
 msgid "Bad encryption password."
 msgstr "Slikta šifrēšanas parole."
 
-#: ../tools/duplicity/DuplicityJob.vala:935
+#: ../tools/duplicity/DuplicityJob.vala:951
 msgid "Computer name changed"
 msgstr "Datora vārds ir mainīts"
 
-#: ../tools/duplicity/DuplicityJob.vala:935
+#: ../tools/duplicity/DuplicityJob.vala:951
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -1150,69 +1197,69 @@ msgstr ""
 "Esošais dublējums ir no datora ar nosaukumu %s, bet šī datora nosaukums ir "
 "%s. Ja tas ir negaidīti, jums vajadzētu dublēt citā vietā."
 
-#: ../tools/duplicity/DuplicityJob.vala:970
+#: ../tools/duplicity/DuplicityJob.vala:986
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Atļauja liegta, mēģinot izveidot ‘%s’."
 
 #. assume error is on backend side
-#: ../tools/duplicity/DuplicityJob.vala:974
-#: ../tools/duplicity/DuplicityJob.vala:978
+#: ../tools/duplicity/DuplicityJob.vala:990
+#: ../tools/duplicity/DuplicityJob.vala:994
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Atļauja liegta, mēģinot lasīt ‘%s’."
 
-#: ../tools/duplicity/DuplicityJob.vala:982
+#: ../tools/duplicity/DuplicityJob.vala:998
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Atļauja liegta, mēģinot dzēst ‘%s’."
 
-#: ../tools/duplicity/DuplicityJob.vala:989
+#: ../tools/duplicity/DuplicityJob.vala:1005
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Dublējuma vieta ‘%s’ neeksistē."
 
-#: ../tools/duplicity/DuplicityJob.vala:995
-#: ../tools/duplicity/DuplicityJob.vala:1047
+#: ../tools/duplicity/DuplicityJob.vala:1011
+#: ../tools/duplicity/DuplicityJob.vala:1063
 msgid "No space left."
 msgstr "Vairs nav vietas."
 
-#: ../tools/duplicity/DuplicityJob.vala:1009
+#: ../tools/duplicity/DuplicityJob.vala:1025
 msgid "Invalid ID."
 msgstr "Nederīgs ID."
 
-#: ../tools/duplicity/DuplicityJob.vala:1011
+#: ../tools/duplicity/DuplicityJob.vala:1027
 msgid "Invalid secret key."
 msgstr "Nederīga slepenā atslēga."
 
-#: ../tools/duplicity/DuplicityJob.vala:1013
+#: ../tools/duplicity/DuplicityJob.vala:1029
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Jūsu Amazon Web Services konts nav pierakstīts S3 servisam."
 
-#: ../tools/duplicity/DuplicityJob.vala:1022
+#: ../tools/duplicity/DuplicityJob.vala:1038
 msgid "S3 bucket name is not available."
 msgstr "S3 groza nosaukums nav pieejams."
 
-#: ../tools/duplicity/DuplicityJob.vala:1036
+#: ../tools/duplicity/DuplicityJob.vala:1052
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Kļūda, lasot failu ‘%s’."
 
-#: ../tools/duplicity/DuplicityJob.vala:1038
+#: ../tools/duplicity/DuplicityJob.vala:1054
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Kļūda, rakstot failu ‘%s’."
 
-#: ../tools/duplicity/DuplicityJob.vala:1049
+#: ../tools/duplicity/DuplicityJob.vala:1065
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Uz ‘%s’ vairs nav vietas."
 
-#: ../tools/duplicity/DuplicityJob.vala:1057
+#: ../tools/duplicity/DuplicityJob.vala:1073
 msgid "No backup files found"
 msgstr "Nav atrastu dublējuma failu"
 
-#: ../tools/duplicity/DuplicityJob.vala:1107
+#: ../tools/duplicity/DuplicityJob.vala:1123
 msgid "Uploading…"
 msgstr "Augšupielādē..."
 
@@ -1446,6 +1493,11 @@ msgstr[2] "Katras %d dienas"
 #, c-format
 msgid "Could not display %s"
 msgstr "Nevarēja attēlot %s"
+
+#~ msgid ""
+#~ "The first time Déjà Dup checked whether it should prompt about backing up"
+#~ msgstr ""
+#~ "Pirmā reize, kad Déjà Dup pārbaudīja, vai vajadzētu jautāt par dublēšanu"
 
 #~ msgid "You must specify a Rackspace container in your preferences."
 #~ msgstr "Rackspace konteineris ir jānorāda iestatījumos."
