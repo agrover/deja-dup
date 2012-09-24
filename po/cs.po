@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-20 21:34-0400\n"
-"PO-Revision-Date: 2012-03-22 14:30+0000\n"
+"PO-Revision-Date: 2012-09-20 18:53+0000\n"
 "Last-Translator: Vojtěch Trefný <vojtech.trefny@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-08-28 10:10+0000\n"
-"X-Generator: Launchpad (build 15864)\n"
+"X-Launchpad-Export-Date: 2012-09-21 04:58+0000\n"
+"X-Generator: Launchpad (build 15985)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -58,7 +58,7 @@ msgstr "Zálohovat nyní"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:304
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:325
 msgid "Backup Monitor"
 msgstr "Kontrola zálohy"
 
@@ -211,13 +211,15 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid "How long to wait between full backups"
-msgstr ""
+msgstr "Jak dlouho čekat mezi plnými zálohami"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid ""
 "Déjà Dup needs to occasionally make fresh full backups. This is the number "
 "of days to wait between full backups."
 msgstr ""
+"Déjà Dup potřebuje příležitostně vytvořit plnou zálohu. Toto určuje kolik "
+"dní se má čekat mezi plnými zálohami."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
 msgid "Type of location to store backup"
@@ -530,19 +532,19 @@ msgstr "Přihlásit se do Ubuntu One..."
 #: ../common/CommonUtils.vala:401
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
-msgstr ""
+msgstr "Nelze najít zálohovací nástroj v %s.  Vaše instalace není kompletní."
 
 #: ../common/CommonUtils.vala:403
 msgid "Could not load backup tool.  Your installation is incomplete."
-msgstr ""
+msgstr "Zálohovací nástroj nelze načíst. Vaše instalace není kompletní."
 
 #: ../common/CommonUtils.vala:409
 msgid "Backup tool is broken.  Your installation is incomplete."
-msgstr ""
+msgstr "Zálohovací nástroj je poškozený. Vaše instalace není kompletní."
 
 #: ../common/CommonUtils.vala:431
 msgid "Could not start backup tool"
-msgstr ""
+msgstr "Nelze spustit zálohovací nástroj"
 
 #. Translators: this is the home folder and %s is the user's username
 #: ../common/CommonUtils.vala:532
@@ -562,7 +564,7 @@ msgstr "Koš"
 
 #: ../common/OperationBackup.vala:42 ../common/OperationVerify.vala:56
 msgid "Verifying backup…"
-msgstr ""
+msgstr "Kontroluje se záloha..."
 
 #: ../common/OperationRestore.vala:51
 msgid "Restoring files…"
@@ -572,7 +574,7 @@ msgstr "Obnovování souborů..."
 msgid ""
 "Your backup appears to be corrupted.  You should delete the backup and try "
 "again."
-msgstr ""
+msgstr "Záloha vypadá poškozeně. Zkuste jí odstranit a vytvořit znovu."
 
 #: ../common/Operation.vala:61
 msgid "Backing up…"
@@ -640,7 +642,7 @@ msgstr "Zálohování bylo dokončeno"
 
 #: ../deja-dup/AssistantBackup.vala:96
 msgid "Your files were successfully backed up and tested."
-msgstr ""
+msgstr "Soubory byly úspěšně zálohovány a ověřeny."
 
 #: ../deja-dup/AssistantBackup.vala:103
 msgid "Backing Up…"
@@ -695,10 +697,12 @@ msgid ""
 "of an emergency, please enter your encryption password again to perform a "
 "brief restore test."
 msgstr ""
+"Pro rychlé ověření, že v případě nouze budete schopni obnovit své soubory, "
+"prosím zadejte znovu své heslo a Déjá Dup zkusí nějaký soubor obnovit."
 
 #: ../deja-dup/AssistantOperation.vala:430
 msgid "Test every two _months"
-msgstr ""
+msgstr "Testovat každé dva _měsíce"
 
 #: ../deja-dup/AssistantOperation.vala:504
 msgid "Summary"
@@ -706,7 +710,7 @@ msgstr "Souhrn"
 
 #: ../deja-dup/AssistantOperation.vala:526
 msgid "Restore Test"
-msgstr ""
+msgstr "Test obnovy"
 
 #: ../deja-dup/AssistantOperation.vala:602
 #: ../tools/duplicity/DuplicityJob.vala:710
@@ -882,7 +886,7 @@ msgstr "Pokračo_vat"
 #: ../deja-dup/Assistant.vala:320
 msgctxt "verb"
 msgid "_Test"
-msgstr ""
+msgstr "_Testovat"
 
 #: ../deja-dup/Assistant.vala:357 ../deja-dup/StatusIcon.vala:93
 msgid "_Resume Later"
@@ -1260,12 +1264,12 @@ msgstr "Nahrávání..."
 
 #: ../tools/duplicity/DuplicityPlugin.vala:41
 msgid "Could not understand duplicity version."
-msgstr ""
+msgstr "Nepodařilo se zjistit verzi duplicity."
 
 #: ../tools/duplicity/DuplicityPlugin.vala:47
 #, c-format
 msgid "Could not understand duplicity version ‘%s’."
-msgstr ""
+msgstr "Nepodařilo se zjistit verzi duplicity '%s'."
 
 #: ../tools/duplicity/DuplicityPlugin.vala:64
 #, c-format
