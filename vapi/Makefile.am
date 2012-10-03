@@ -18,6 +18,6 @@
 
 EXTRA_DIST = \
 	config.vapi \
-	keyring.vapi \
+	secret.vapi \
 	uriutils.vapi
 

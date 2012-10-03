@@ -56,12 +56,10 @@ AM_VALAFLAGS = \
 	--pkg @GTK_MODULE@ \
 	--pkg gio-2.0 \
 	--pkg gio-unix-2.0 \
-	--pkg gnome-keyring-1 \
-	--pkg libpeas-1.0 \
+	--pkg libsecret-1 \
 	--pkg libnotify \
 	--pkg libcommon \
 	--pkg libwidgets \
-	--pkg keyring \
 	--pkg config
 
 deja_dup_vala.stamp: $(top_srcdir)/config.h

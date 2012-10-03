@@ -55,7 +55,6 @@ public abstract class AssistantOperation : Assistant
   protected bool nagged;
   List<Gtk.Widget> first_password_widgets;
   MainLoop password_ask_loop;
-  MainLoop password_find_loop;
   DejaDup.ToggleGroup password_toggles;
 
   Gtk.Label question_label;
@@ -648,7 +647,7 @@ public abstract class AssistantOperation : Assistant
       timeout_id = Timeout.add(250, pulse);
       if (op != null && op.needs_password) {
         // Operation is waiting for password
-        provide_password();
+        provide_password.begin();
       }
       else if (op == null)
         do_apply.begin();
@@ -728,43 +727,47 @@ public abstract class AssistantOperation : Assistant
     }
   }
 
-  void found_passphrase(GnomeKeyring.Result result, string? str)
+  async string? lookup_keyring()
   {
-    if (str != null) {
-      op.set_passphrase(str);
-    }
-    else {
-      ask_passphrase();
-    }
-    password_find_loop.quit();
-    password_find_loop = null;
+      try {
+        return yield Secret.password_lookup(DejaDup.get_passphrase_schema(),
+                                            null,
+                                            "owner", Config.PACKAGE,
+                                            "type", "passphrase");
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+        return null;
+      }
   }
 
   protected void get_passphrase()
   {
     if (!searched_for_passphrase && !DejaDup.in_testing_mode() &&
         op.use_cached_password) {
-      // First, try user's keyring
-      GnomeKeyring.find_password(PASSPHRASE_SCHEMA,
-                                 found_passphrase,
-                                 "owner", Config.PACKAGE,
-                                 "type", "passphrase");
       // If we get asked for passphrase again, it is because a
       // saved or entered passphrase didn't work.  So don't bother
       // searching a second time.
       searched_for_passphrase = true;
-      // block until found
-      password_find_loop = new MainLoop(null);
-      password_find_loop.run();
-    }
-    else {
-      // just jump straight to asking user
-      ask_passphrase();
-    }
-  }
 
-  void save_password_callback(GnomeKeyring.Result result)
-  {
+      string str = null;
+
+      // First, try user's keyring
+      var loop = new MainLoop(null);
+      lookup_keyring.begin((obj, res) => {
+        str = lookup_keyring.end(res);
+        loop.quit();
+      });
+      loop.run();
+
+      // Did we get anything?
+      if (str != null) {
+        op.set_passphrase(str);
+        return;
+      }
+    }
+
+    ask_passphrase();
   }
 
   void check_password_validity()
@@ -849,7 +852,7 @@ public abstract class AssistantOperation : Assistant
     password_ask_loop.run();
   }
 
-  protected void provide_password()
+  protected async void provide_password()
   {
     var passphrase = "";
 
@@ -863,12 +866,18 @@ public abstract class AssistantOperation : Assistant
       if (passphrase != "") {
         // Save it
         if (encrypt_remember.active) {
-          GnomeKeyring.store_password(PASSPHRASE_SCHEMA,
-                                      GnomeKeyring.DEFAULT,
-                                      _("Backup encryption password"),
-                                      passphrase, save_password_callback,
-                                      "owner", Config.PACKAGE,
-                                      "type", "passphrase");
+          try {
+            yield Secret.password_store(DejaDup.get_passphrase_schema(),
+                                        Secret.COLLECTION_DEFAULT,
+                                        _("Backup encryption password"),
+                                        passphrase,
+                                        null,
+                                        "owner", Config.PACKAGE,
+                                        "type", "passphrase");
+          }
+          catch (Error e) {
+            warning("%s\n", e.message);
+          }
         }
       }
     }

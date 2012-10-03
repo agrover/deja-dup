@@ -80,7 +80,6 @@ AM_VALAFLAGS = \
 	$(UNITY_VALAFLAGS) \
 	--pkg libcommon \
 	--pkg @GTK_MODULE@ \
-	--pkg libpeas-1.0 \
 	--pkg uriutils \
 	--pkg libnotify \
 	--pkg config

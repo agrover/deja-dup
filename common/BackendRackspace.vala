@@ -89,31 +89,27 @@ public class BackendRackspace : Backend
 
     if (id != "") {
       // First, try user's keyring
-      secret_key = null;
-      GnomeKeyring.find_network_password(id, null, RACKSPACE_SERVER, null, "https",
-                                         null, 0, found_password);
+      try {
+        secret_key = yield Secret.password_lookup(Secret.SCHEMA_COMPAT_NETWORK,
+                                                  null, 
+                                                  "user", id,
+                                                  "server", RACKSPACE_SERVER,
+                                                  "protocol", "https");
+        if (secret_key != null) {
+          got_secret_key();
+          return;
+        }
+      }
+      catch (Error e) {
+        // fall through to ask_password below
+      }
     }
-    else
-      ask_password();
+
+    // Didn't find it, so ask user
+    ask_password();
   }
 
-  void found_password(GnomeKeyring.Result result,
-                      GLib.List<GnomeKeyring.NetworkPasswordData>? list)
-  {
-    if (result == GnomeKeyring.Result.OK && list != null) {
-      secret_key = list.data.password;
-      got_secret_key();
-    }
-    else {
-      ask_password();
-    }
-  }
-  
-  void save_password_callback(GnomeKeyring.Result result, uint32 val)
-  {
-  }
-  
-  void got_password_reply(MountOperation mount_op, MountOperationResult result)
+  async void got_password_reply(MountOperation mount_op, MountOperationResult result)
   {
     if (result != MountOperationResult.HANDLED) {
       envp_ready(false, new List<string>(), _("Permission denied"));
@@ -127,10 +123,15 @@ public class BackendRackspace : Backend
     var remember = mount_op.password_save;
     if (remember != PasswordSave.NEVER) {
       string where = (remember == PasswordSave.FOR_SESSION) ?
-                     "session" : GnomeKeyring.DEFAULT;
-      GnomeKeyring.set_network_password(where, id, null, RACKSPACE_SERVER, null,
-                                        "https", null, 0, secret_key,
-                                        save_password_callback);
+                     Secret.COLLECTION_SESSION : Secret.COLLECTION_DEFAULT;
+      yield Secret.password_store(Secret.SCHEMA_COMPAT_NETWORK,
+                                  where,
+                                  "%s@%s".printf(id, RACKSPACE_SERVER),
+                                  secret_key,
+                                  null,
+                                  "user", id,
+                                  "server", RACKSPACE_SERVER,
+                                  "protocol", "https");
     }
 
     got_secret_key();
