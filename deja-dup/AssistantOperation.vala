@@ -729,16 +729,16 @@ public abstract class AssistantOperation : Assistant
 
   async string? lookup_keyring()
   {
-      try {
-        return yield Secret.password_lookup(DejaDup.get_passphrase_schema(),
-                                            null,
-                                            "owner", Config.PACKAGE,
-                                            "type", "passphrase");
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-        return null;
-      }
+    try {
+      return yield Secret.password_lookup(DejaDup.get_passphrase_schema(),
+                                          null,
+                                          "owner", Config.PACKAGE,
+                                          "type", "passphrase");
+    }
+    catch (Error e) {
+      warning("%s\n", e.message);
+      return null;
+    }
   }
 
   protected void get_passphrase()
