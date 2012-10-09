@@ -34,8 +34,6 @@ AUTO_TESTS = \
 	backup/spaces \
 	backup/symlinks \
 	restore/cycle \
-	prefs/s3-folder \
-	prefs/ssh-to-file \
 	restore/full \
 	restore/gpg \
 	restore/missing \
@@ -111,7 +109,6 @@ XXXcheck: prep
 
 EXTRA_DIST = \
 	backup \
-	prefs \
 	restore \
 	base.py \
 	build-duplicity \
