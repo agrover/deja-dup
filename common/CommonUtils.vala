@@ -327,64 +327,6 @@ public SimpleSettings get_settings(string? subdir = null)
   return rv;
 }
 
-const string SSH_USERNAME_KEY = "username";
-const string SSH_SERVER_KEY = "server";
-const string SSH_PORT_KEY = "port";
-const string SSH_DIRECTORY_KEY = "directory";
-
-// Once, we didn't use GIO, but had a special SSH backend for duplicity that
-// would tell duplicity to use its own SSH handling.  We convert those gsettings
-// values to the new ones here.
-void convert_ssh_to_file()
-{
-  var settings = get_settings();
-  var backend = settings.get_string(BACKEND_KEY);
-  if (backend == "ssh") {
-    settings.set_string(BACKEND_KEY, "file");
-    var ssh_settings = get_settings("SSH");
-    var server = ssh_settings.get_string(SSH_SERVER_KEY);
-    if (server != null && server != "") {
-      var username = ssh_settings.get_string(SSH_USERNAME_KEY);
-      var port = ssh_settings.get_int(SSH_PORT_KEY);
-      var directory = ssh_settings.get_string(SSH_DIRECTORY_KEY);
-      
-      var gio_uri = "ssh://";
-      if (username != null && username != "")
-        gio_uri += username + "@";
-      gio_uri += server;
-      if (port > 0 && port != 22)
-        gio_uri += ":" + port.to_string();
-      if (directory == null || directory == "")
-        gio_uri += "/";
-      else if (directory[0] != '/')
-        gio_uri += "/" + directory;
-      else
-        gio_uri += directory;
-      
-      var file_settings = get_settings(FILE_ROOT);
-      file_settings.set_string(FILE_PATH_KEY, gio_uri);
-    }
-  }
-}
-
-void convert_s3_folder_to_hostname()
-{
-  // So historically, the default S3 folder was '/'.  But in keeping with other
-  // cloud backends, the desire to use a hostname in the default folder would
-  // make one want to change that default.  But since the user might not have
-  // actually changed the default, we don't want to upgrade the folder default
-  // in such a case.  So we check here if the user has ever backed up before
-  // and if not (or not using S3), then we update the field.
-  var settings = get_settings();
-  var s3_settings = get_settings(S3_ROOT);
-  if ((s3_settings.get_string(S3_FOLDER_KEY) == "" ||
-       s3_settings.get_string(S3_FOLDER_KEY) == "/") &&
-      (Backend.get_default_type() != "s3" ||
-       settings.get_string(LAST_RUN_KEY) == "")) {
-    s3_settings.set_string(S3_FOLDER_KEY, "$HOSTNAME");
-  }
-}
-
 ToolPlugin tool = null;
 void initialize_tool_plugin() throws Error
 {
@@ -432,9 +374,6 @@ public bool initialize(out string header, out string msg)
     msg = e.message;
     return false;
   }
-
-  convert_ssh_to_file();
-  convert_s3_folder_to_hostname();
 
   /* We do a little trick here.  BackendAuto -- which is the default
      backend on a fresh install of deja-dup -- will do some work to

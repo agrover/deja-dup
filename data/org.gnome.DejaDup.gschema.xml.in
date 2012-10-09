@@ -71,7 +71,6 @@
         <choice value='file'/>
         <choice value='rackspace'/>
         <choice value='s3'/>
-        <choice value='ssh'/>
         <choice value='u1'/>
       </choices>
       <default>'auto'</default>
@@ -95,7 +94,7 @@
       <_description>Which Amazon S3 bucket to store files in.  This does not need to exist already.  Only legal hostname strings are valid.</_description>
     </key>
     <key name="folder" type="s">
-      <default>''</default> <!-- Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname() -->
+      <default>'$HOSTNAME'</default>
       <_summary>The Amazon S3 folder</_summary>
       <_description>An optional folder name to store files in.  This folder will be created in the chosen bucket.</_description>
     </key>
@@ -158,24 +157,6 @@
       <default>''</default>
       <_summary>Icon of the external volume</_summary>
       <_description>If the backup location is on an external volume, this is the volume’s icon.</_description>
-    </key>
-  </schema>
-  <schema id="org.gnome.DejaDup.SSH" path="/org/gnome/deja-dup/ssh/">
-    <key type="s" name="server">
-      <default>''</default>
-      <_summary>Obsolete</_summary>
-    </key>
-    <key type="i" name="port">
-      <default>22</default>
-      <_summary>Obsolete</_summary>
-    </key>
-    <key type="s" name="username">
-      <default>''</default>
-      <_summary>Obsolete</_summary>
-    </key>
-    <key type="s" name="directory">
-      <default>'/'</default>
-      <_summary>Obsolete</_summary>
     </key>
   </schema>
 </schemalist>
