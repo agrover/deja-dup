@@ -521,5 +521,14 @@ public Date get_full_backup_threshold_date()
   return date;
 }
 
+public Secret.Schema get_passphrase_schema()
+{
+  // Use freedesktop's schema id for historical reasons
+  return new Secret.Schema("org.freedesktop.Secret.Generic",
+                           Secret.SchemaFlags.NONE,
+                           "owner", Secret.SchemaAttributeType.STRING,
+                           "type", Secret.SchemaAttributeType.STRING);
+}
+
 } // end namespace
 

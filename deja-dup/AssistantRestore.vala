@@ -491,7 +491,7 @@ public class AssistantRestore : AssistantOperation
         query_timeout_id = Timeout.add(250, query_pulse);
         if (query_op != null && query_op.needs_password) {
           // Operation is waiting for password
-          provide_password();
+          provide_password.begin();
         }
         else if (query_op == null)
           do_query.begin();

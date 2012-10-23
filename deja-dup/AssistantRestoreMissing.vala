@@ -234,10 +234,10 @@ public class AssistantRestoreMissing : AssistantRestore {
       }
       else {
         if (query_op != null && query_op.needs_password) {
-          provide_password();
+          provide_password.begin();
         }
         else if (query_op_files != null && query_op_files.needs_password) {
-          provide_password();
+          provide_password.begin();
         }
         else if (!backups_queue_filled) {
           do_query.begin();

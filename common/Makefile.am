@@ -31,7 +31,6 @@ libcommon_la_LIBADD = \
 	@INTLLIBS@
 
 noinst_HEADERS = \
-	chacks.h \
 	uriutils.h
 
 libcommon_la_VALASOURCES = \
@@ -60,7 +59,6 @@ libcommon_la_VALASOURCES = \
 	ToolPlugin.vala
 
 libcommon_la_SOURCES = \
-	chacks.c \
 	uriutils.c \
 	$(libcommon_la_VALASOURCES)
 
@@ -72,7 +70,8 @@ AM_VALAFLAGS = \
 	$(NETWORKMONITOR_VALAFLAGS) \
 	--pkg gio-2.0 \
 	--pkg gio-unix-2.0 \
-	--pkg gnome-keyring-1 \
+	--pkg libsecret-1 \
+	--pkg secret \
 	--pkg libpeas-1.0 \
 	--pkg uriutils \
 	--pkg posix \

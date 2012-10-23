@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: nil; tab-width: 2 -*- */
+/* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
 /*
     This file is part of Déjà Dup.
     For copyright information, see AUTHORS.
@@ -17,13 +17,10 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* This file is for whatever we can't currently do in Vala. */
-#ifndef __CHACKS_H__
-#define __CHACKS_H__
-
-#include <gnome-keyring.h>
-
-extern const GnomeKeyringPasswordSchema *PASSPHRASE_SCHEMA;
-
-#endif
+/* TODO: libsecret-1.vapi does not have SECRET_SCHEMA_COMPAT_NETWORK yet */
+[CCode (cprefix = "Secret", gir_namespace = "Secret", gir_version = "1", lower_case_cprefix = "secret_")]
+namespace Secret {
+	[CCode (cheader_filename = "libsecret/secret.h", cname = "SECRET_SCHEMA_COMPAT_NETWORK")]
+	public Secret.Schema SCHEMA_COMPAT_NETWORK;
+}
 

@@ -76,7 +76,7 @@ PKG_CHECK_MODULES(DUP,
                   $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
                   gio-unix-2.0 >= $GIO_REQ_VER
-                  gnome-keyring-1
+                  libsecret-1
                   libpeas-1.0
                   gmodule-2.0 >= $GLIB_REQ_VER
                   libnotify >= $NOTIFY_REQ_VER)
@@ -84,23 +84,26 @@ PKG_CHECK_MODULES(DUP,
 PKG_CHECK_MODULES(PREF,
                   $GTK_MODULE >= $GTK_REQ_VER
                   gio-2.0 >= $GIO_REQ_VER
+                  libsecret-1
                   libpeas-1.0)
 
 PKG_CHECK_MODULES(COMMON,
                   gio-2.0 >= $GIO_REQ_VER
                   gio-unix-2.0 >= $GIO_REQ_VER
-                  gnome-keyring-1
+                  libsecret-1
                   libpeas-1.0
                   gmodule-2.0 >= $GLIB_REQ_VER)
 
 PKG_CHECK_MODULES(WIDGETS,
                   gmodule-2.0 >= $GLIB_REQ_VER
                   $GTK_MODULE >= $GTK_REQ_VER
+                  libsecret-1
                   libpeas-1.0
                   libnotify >= $NOTIFY_REQ_VER)
 
 PKG_CHECK_MODULES(MONITOR,
                   gio-2.0 >= $GIO_REQ_VER
+                  libsecret-1
                   libpeas-1.0
                   libnotify >= $NOTIFY_REQ_VER)
 
