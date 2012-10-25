@@ -177,14 +177,19 @@ public class BackendS3 : Backend
     if (remember != PasswordSave.NEVER) {
       string where = (remember == PasswordSave.FOR_SESSION) ?
                      Secret.COLLECTION_SESSION : Secret.COLLECTION_DEFAULT;
-      yield Secret.password_store(Secret.SCHEMA_COMPAT_NETWORK,
-                                  where,
-                                  "%s@%s".printf(id, S3_SERVER),
-                                  secret_key,
-                                  null,
-                                  "user", id,
-                                  "server", S3_SERVER,
-                                  "protocol", "https");
+      try {
+        yield Secret.password_store(Secret.SCHEMA_COMPAT_NETWORK,
+                                    where,
+                                    "%s@%s".printf(id, S3_SERVER),
+                                    secret_key,
+                                    null,
+                                    "user", id,
+                                    "server", S3_SERVER,
+                                    "protocol", "https");
+      }
+      catch (Error e) {
+        warning("%s\n", e.message);
+      }
     }
 
     got_secret_key();
