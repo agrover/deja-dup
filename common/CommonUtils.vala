@@ -394,6 +394,7 @@ public void i18n_setup()
   var language = Environment.get_variable("DEJA_DUP_LANGUAGE");
   if (language != null && language != "")
     Environment.set_variable("LANGUAGE", language, true);
+  Intl.setlocale(LocaleCategory.ALL, "");
   Intl.textdomain(Config.GETTEXT_PACKAGE);
   Intl.bindtextdomain(Config.GETTEXT_PACKAGE, localedir);
   Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
