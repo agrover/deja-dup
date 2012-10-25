@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
 #
 # This file is part of Déjà Dup.
@@ -48,14 +48,14 @@ import sys, os, shlex, getpass, time, subprocess
 
 # Where should we spit our messages to?
 logfd = None
-for i in xrange(len(sys.argv)):
+for i in range(len(sys.argv)):
   split = sys.argv[i].split('=', 1)
   if len(split) > 1 and split[0] == "--log-fd":
     logfd = os.fdopen(int(split[1]), "w")
     sys.argv[i] = "--log-fd=?"
 
 if not os.path.exists(os.environ['DEJA_DUP_TEST_MOCKSCRIPT']):
-  print >> logfd, "TESTFAIL: no mockscript"
+  print("TESTFAIL: no mockscript", file=logfd)
   sys.exit(-1)
 
 lines = []
@@ -96,26 +96,26 @@ while len(lines) > curline and lines[curline].strip():
   curline += 1
 
 if tmp_archive:
-  for i in xrange(len(sys.argv)):
+  for i in range(len(sys.argv)):
     split = sys.argv[i].split('=', 1)
     if len(split) > 1 and split[0] == "--archive-dir":
       if split[1].find("/cache/") != -1:
-        print >> logfd, "TESTFAIL: expected random /tmp archive dir"
+        print("TESTFAIL: expected random /tmp archive dir", file=logfd)
         sys.exit(-1)
       sys.argv[i] = "--archive-dir=?"
 
 if expected_args != sys.argv[1:]:
-  print >> logfd, "TESTFAIL: expected\n%s\nvs\n%s" % (expected_args, sys.argv[1:])
+  print("TESTFAIL: expected\n%s\nvs\n%s" % (expected_args, sys.argv[1:]), file=logfd)
   sys.exit(-1)
 
 if passphrase != os.environ.get('PASSPHRASE'):
-  print >> logfd, "TESTFAIL: expected passphrase '%s', but got '%s'" % (passphrase, os.environ.get('PASSPHRASE'))
+  print("TESTFAIL: expected passphrase '%s', but got '%s'" % (passphrase, os.environ.get('PASSPHRASE')), file=logfd)
   sys.exit(-1)
 
 curline = skip_whitespace(curline)
 
 while len(lines) > curline and lines[curline] != "=== deja-dup ===\n":
-  print >> logfd, lines[curline],
+  print(lines[curline], end='', file=logfd)
   curline += 1
 
 # Write back mockscript
