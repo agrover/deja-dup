@@ -45,8 +45,8 @@ void backup_setup()
   var cachedir = Path.build_filename(dir, "cache");
   DirUtils.create_with_parents(Path.build_filename(cachedir, "deja-dup"), 0700);
 
-  DirUtils.create_with_parents(Path.build_filename(dir, "backup"), 0700);
-  DirUtils.create_with_parents(Path.build_filename(dir, "restore"), 0700);
+  // Intentionally don't create @TEST_HOME@/backup, as the mkdir test relies
+  // on us not doing so.
 
   Environment.set_variable("DEJA_DUP_TOOLS_PATH", "../../tools/duplicity", true);
   Environment.set_variable("DEJA_DUP_TEST_MOCKSCRIPT", Path.build_filename(dir, "mockscript"), true);

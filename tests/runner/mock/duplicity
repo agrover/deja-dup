@@ -127,7 +127,10 @@ else:
     f.writelines(lines)
 
 if script:
-  subprocess.call(script, shell=True)
+  script_rv = subprocess.call(script, shell=True)
+  if script_rv != 0:
+    print("TESTFAIL: expected script success, but got return code %d" % script_rv, file=logfd)
+    sys.exit(-1)
 
 time.sleep(delay)
 
