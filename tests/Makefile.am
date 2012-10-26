@@ -24,12 +24,10 @@ SUBDIRS = scripts unit runner
 AUTO_TESTS = \
 	backup/cancel \
 	backup/cancel-clean \
-	backup/clear-cache \
 	backup/continue \
 	backup/delete \
 	backup/encrypt \
 	backup/exclude \
-	backup/mkdir \
 	backup/quiescent \
 	backup/spaces \
 	backup/symlinks \
