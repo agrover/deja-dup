@@ -40,17 +40,14 @@ void setup_gsettings()
 
 void backup_setup()
 {
-  var dir = Environment.get_variable("DEJA_DUP_TEST_HOME");
-
-  var cachedir = Path.build_filename(dir, "cache");
-  DirUtils.create_with_parents(Path.build_filename(cachedir, "deja-dup"), 0700);
-
   // Intentionally don't create @TEST_HOME@/backup, as the mkdir test relies
   // on us not doing so.
 
+  var dir = Environment.get_variable("DEJA_DUP_TEST_HOME");
+
   Environment.set_variable("DEJA_DUP_TOOLS_PATH", "../../tools/duplicity", true);
   Environment.set_variable("DEJA_DUP_TEST_MOCKSCRIPT", Path.build_filename(dir, "mockscript"), true);
-  Environment.set_variable("XDG_CACHE_HOME", cachedir, true);
+  Environment.set_variable("XDG_CACHE_HOME", Path.build_filename(dir, "cache"), true);
   Environment.set_variable("PATH", "./mock:" + Environment.get_variable("PATH"), true);
 
   var settings = DejaDup.get_settings();
@@ -378,6 +375,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
   bool stop = false;
   bool passphrase = false;
   bool tmp_archive = false;
+  int return_code = 0;
   string script = null;
   Mode mode = Mode.NONE;
 
@@ -403,6 +401,8 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
       outputscript = run_script(replace_keywords(keyfile.get_comment(group, "OutputScript")));
     if (keyfile.has_key(group, "Passphrase"))
       passphrase = keyfile.get_boolean(group, "Passphrase");
+    if (keyfile.has_key(group, "Return"))
+      return_code = keyfile.get_integer(group, "Return");
     if (keyfile.has_key(group, "Stop"))
       stop = keyfile.get_boolean(group, "Stop");
     if (keyfile.has_key(group, "Script"))
@@ -448,6 +448,9 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
       op.stop();
     };
   }
+
+  if (return_code != 0)
+    dupscript += "\n" + "RETURN: %d".printf(return_code);
 
   if (script != null)
     dupscript += "\n" + "SCRIPT: " + script;

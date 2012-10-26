@@ -1,0 +1,18 @@
+# Make sure if duplicity gives us a generic return code that we clear out the
+# cache.  And that we ignore further generic return codes.
+
+[Operation]
+Type=backup
+Success=false
+Error=Failed with an unknown error.
+
+[Duplicity]
+Runs=status 1;status 2;
+
+[Duplicity status 1]
+Script=mkdir -p @TEST_HOME@/cache/deja-dup/TEST
+Return=1
+
+[Duplicity status 2]
+Script=! ls @TEST_HOME@/cache/deja-dup/TEST
+Return=1

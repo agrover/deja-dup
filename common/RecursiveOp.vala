@@ -65,10 +65,9 @@ public abstract class RecursiveOp : Object
       break;
     default:
       handle_file();
+      check_ref();
       break;
     }
-    
-    check_ref();
   }
 
   void recurse_on_info(FileInfo info)
