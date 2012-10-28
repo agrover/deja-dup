@@ -1,0 +1,18 @@
+# Now try with a subdir, make sure parent dir itself isn't an include
+
+[Operation]
+Type=backup
+Settings=include-list=['@TEST_HOME@/2/b', '$HOME'];
+Script=mkdir -p @TEST_HOME@/a/b && ln -s a @TEST_HOME@/1 && ln -s 1 @TEST_HOME@/2
+
+[Duplicity]
+Runs=status;dry;backup;status-restore;list;verify;
+
+[Duplicity status]
+IncludeArgs='--include=@TEST_HOME@/2' '--include=@TEST_HOME@/1' '--include=@TEST_HOME@/a/b'
+
+[Duplicity dry]
+IncludeArgs='--include=@TEST_HOME@/2' '--include=@TEST_HOME@/1' '--include=@TEST_HOME@/a/b'
+
+[Duplicity backup]
+IncludeArgs='--include=@TEST_HOME@/2' '--include=@TEST_HOME@/1' '--include=@TEST_HOME@/a/b'

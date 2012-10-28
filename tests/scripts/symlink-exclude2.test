@@ -1,0 +1,18 @@
+# non-matching prefixes but they still point to same data
+
+[Operation]
+Type=backup
+Settings=include-list=['@TEST_HOME@/1/b', '$HOME'];exclude-list=['@TEST_HOME@/a/b/c', '$TRASH', '$DOWNLOAD'];
+Script=mkdir -p @TEST_HOME@/a/b/c && ln -s a @TEST_HOME@/1
+
+[Duplicity]
+Runs=status;dry;backup;status-restore;list;verify;
+
+[Duplicity status]
+IncludeArgs='--include=@TEST_HOME@/1' '--exclude=@TEST_HOME@/a/b/c' '--include=@TEST_HOME@/a/b'
+
+[Duplicity dry]
+IncludeArgs='--include=@TEST_HOME@/1' '--exclude=@TEST_HOME@/a/b/c' '--include=@TEST_HOME@/a/b'
+
+[Duplicity backup]
+IncludeArgs='--include=@TEST_HOME@/1' '--exclude=@TEST_HOME@/a/b/c' '--include=@TEST_HOME@/a/b'

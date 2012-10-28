@@ -100,7 +100,7 @@ public enum Mode {
   LIST,
 }
 
-string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = false, string extra = "", string include_args = "", bool tmp_archive = false)
+string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = false, string extra = "", string include_args = "", string exclude_args = "", bool tmp_archive = false)
 {
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
   var test_home = Environment.get_variable("DEJA_DUP_TEST_HOME");
@@ -159,6 +159,7 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     }
 
     args += "'--exclude=%s/deja-dup' '--exclude=%s' ".printf(cachedir, cachedir);
+    args += exclude_args;
 
     string[] excludes3 = {"/home/.ecryptfs/%s/.Private".printf(Environment.get_user_name())};
     foreach (string ex in excludes3) {
@@ -380,6 +381,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
   string outputscript = null;
   string extra_args = "";
   string include_args = "";
+  string exclude_args = "";
   bool encrypted = false;
   bool cancel = false;
   bool stop = false;
@@ -409,6 +411,11 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
       include_args = replace_keywords(keyfile.get_string(group, "IncludeArgs"));
       if (!include_args.has_suffix(" "))
         include_args += " ";
+    }
+    if (keyfile.has_key(group, "ExcludeArgs")) {
+      exclude_args = replace_keywords(keyfile.get_string(group, "ExcludeArgs"));
+      if (!exclude_args.has_suffix(" "))
+        exclude_args += " ";
     }
     if (keyfile.has_key(group, "Output") && keyfile.get_boolean(group, "Output"))
       outputscript = replace_keywords(keyfile.get_comment(group, "Output"));
@@ -445,7 +452,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
 
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
 
-  var dupscript = "ARGS: " + default_args(br, mode, encrypted, extra_args, include_args, tmp_archive);
+  var dupscript = "ARGS: " + default_args(br, mode, encrypted, extra_args, include_args, exclude_args, tmp_archive);
 
   if (tmp_archive)
     dupscript += "\n" + "TMP_ARCHIVE";

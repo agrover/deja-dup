@@ -1,0 +1,16 @@
+[Operation]
+Type=backup
+Settings=include-list=['@TEST_HOME@/a', '$HOME'];exclude-list=['@TEST_HOME@/a/2/3/d', '$TRASH', '$DOWNLOAD'];
+Script=mkdir -p @TEST_HOME@/a/b/c/d && ln -s b @TEST_HOME@/a/2 && ln -s c @TEST_HOME@/a/b/3
+
+[Duplicity]
+Runs=status;dry;backup;status-restore;list;verify;
+
+[Duplicity status]
+IncludeArgs='--exclude=@TEST_HOME@/a/2/3/d' '--exclude=@TEST_HOME@/a/b/c/d' '--include=@TEST_HOME@/a'
+
+[Duplicity dry]
+IncludeArgs='--exclude=@TEST_HOME@/a/2/3/d' '--exclude=@TEST_HOME@/a/b/c/d' '--include=@TEST_HOME@/a'
+
+[Duplicity backup]
+IncludeArgs='--exclude=@TEST_HOME@/a/2/3/d' '--exclude=@TEST_HOME@/a/b/c/d' '--include=@TEST_HOME@/a'

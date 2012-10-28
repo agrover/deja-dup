@@ -1,0 +1,18 @@
+# Just make sure DD doesn't go off the rails
+
+[Operation]
+Type=backup
+Settings=include-list=['@TEST_HOME@/1', '$HOME'];
+Script=ln -s 1 @TEST_HOME@/1
+
+[Duplicity]
+Runs=status;dry;backup;status-restore;list;verify;
+
+[Duplicity status]
+IncludeArgs='--include=@TEST_HOME@/1'
+
+[Duplicity dry]
+IncludeArgs='--include=@TEST_HOME@/1'
+
+[Duplicity backup]
+IncludeArgs='--include=@TEST_HOME@/1'

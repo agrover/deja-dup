@@ -28,7 +28,6 @@ AUTO_TESTS = \
 	backup/encrypt \
 	backup/quiescent \
 	backup/spaces \
-	backup/symlinks \
 	restore/cycle \
 	restore/full \
 	restore/gpg \
@@ -44,28 +43,9 @@ MANUAL_TESTS = \
 
 ALL_TESTS = $(AUTO_TESTS) $(MANUAL_TESTS)
 
-prep: data/symlink
-
-data/symlink: $(srcdir)/data/symlink.tar.gz
-	@echo "Expanding symlink.tar.gz"
-	@rm -rf $(builddir)/data/symlink
-	@mkdir -p $(builddir)/data
-	@tar xf $(srcdir)/data/symlink.tar.gz -C $(builddir)/data
-
-symtar:
-	@echo "Making symlink.tar.gz"
-	@rm -f $(builddir)/data/symlink.tar.gz
-	@mkdir -p $(builddir)/data
-	if [ -e $(srcdir)/data/symlink.tar.gz ]; then \
-		cp $(srcdir)/data/symlink.tar.gz $(builddir)/data/symlink.tar.gz; \
-	else \
-		tar -cf $(builddir)/data/symlink.tar -C $(srcdir)/data symlink && gzip $(builddir)/data/symlink.tar; \
-	fi
-$(builddir)/data/symlink.tar.gz: symtar
-
 # This is for 'interactive' running of all the tests.  See 'check' target for
 # a target more suitable for automated testing.
-test: prep
+test:
 	rm -f test.log ; \
 	for t in $(AUTO_TESTS); do \
 		echo -n "Testing $$t..."; \
@@ -88,7 +68,7 @@ test: prep
 # Needs to error out if a test fails and needs to be runnable with no DISPLAY.
 # Use system duplicity to avoid downloading on the fly and to facilitate
 # testing against a distro's potentially patched version of duplicity.
-XXXcheck: prep
+XXXcheck:
 	@export TESTS_PASSED=true ; \
 	export DEJA_DUP_TEST_VERSION=system ; \
 	export DISPLAY= ; \
@@ -116,13 +96,4 @@ EXTRA_DIST = \
 
 distclean-local:
 	rm -rf duplicity duplicity-src
-	rm -f data/symlink.tar.gz
-	rm -rf $(builddir)/data/symlink
 	rm -f test.log
-
-dist-hook: symtar
-	@rm -rf $(distdir)/data/symlink
-	if ! [ -e $(distdir)/data/symlink.tar.gz ]; then \
-		mkdir -p $(distdir)/data; \
-		cp -p $(builddir)/data/symlink.tar.gz $(distdir)/data; \
-	fi

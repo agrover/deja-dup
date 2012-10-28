@@ -1,0 +1,16 @@
+[Operation]
+Type=backup
+Settings=include-list=['@TEST_HOME@/1/2/c', '$HOME'];
+Script=mkdir -p @TEST_HOME@/a/b/c && ln -s a @TEST_HOME@/1 && ln -s b @TEST_HOME@/a/2
+
+[Duplicity]
+Runs=status;dry;backup;status-restore;list;verify;
+
+[Duplicity status]
+IncludeArgs='--include=@TEST_HOME@/1' '--include=@TEST_HOME@/a/2' '--include=@TEST_HOME@/a/b/c'
+
+[Duplicity dry]
+IncludeArgs='--include=@TEST_HOME@/1' '--include=@TEST_HOME@/a/2' '--include=@TEST_HOME@/a/b/c'
+
+[Duplicity backup]
+IncludeArgs='--include=@TEST_HOME@/1' '--include=@TEST_HOME@/a/2' '--include=@TEST_HOME@/a/b/c'
