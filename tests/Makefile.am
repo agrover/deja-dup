@@ -23,11 +23,9 @@ SUBDIRS = scripts unit runner
 
 AUTO_TESTS = \
 	backup/cancel \
-	backup/cancel-clean \
 	backup/continue \
 	backup/delete \
 	backup/encrypt \
-	backup/exclude \
 	backup/quiescent \
 	backup/spaces \
 	backup/symlinks \

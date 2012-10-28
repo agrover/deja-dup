@@ -243,7 +243,7 @@ internal class DuplicityJob : DejaDup.ToolJob
             return; // stop here
 
           if (include)
-            all.prepend(so_far); // back up symlink as a leaf element of its path
+            all.append(so_far); // back up symlink as a leaf element of its path
 
           // Recurse on the new file (since it could point at a completely
           // new place, which has its own symlinks in its hierarchy, so we need
@@ -274,7 +274,7 @@ internal class DuplicityJob : DejaDup.ToolJob
       // Survived symlink gauntlet, add it to list if this is not the original
       // request (i.e. if this is the final target of a symlink chain)
       if (seen != null)
-        all.prepend(file);
+        all.append(file);
     }
     catch (IOError.NOT_FOUND e) {
       // Don't bother keeping this file in the list

@@ -100,7 +100,7 @@ public enum Mode {
   LIST,
 }
 
-string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = false, string extra = "", bool tmp_archive = false)
+string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = false, string extra = "", string include_args = "", bool tmp_archive = false)
 {
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
   var test_home = Environment.get_variable("DEJA_DUP_TEST_HOME");
@@ -142,10 +142,6 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     args += "'--exclude=%s' '--include=%s/deja-dup/metadata' ".printf(backupdir, cachedir);
 
     string[] excludes1 = {"~/Downloads", "~/.local/share/Trash", "~/.xsession-errors", "~/.thumbnails", "~/.Private", "~/.gvfs", "~/.adobe/Flash_Player/AssetCache"};
-
-    var user = Environment.get_user_name();
-    string[] excludes2 = {"/home/.ecryptfs/%s/.Private".printf(user), "/sys", "/proc", "/tmp"};
-
     foreach (string ex in excludes1) {
       ex = ex.replace("~", Environment.get_home_dir());
       if (FileUtils.test (ex, FileTest.EXISTS))
@@ -153,14 +149,25 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     }
 
     args += "'--include=%s' ".printf(Environment.get_home_dir());
+    args += include_args;
 
+    string[] excludes2 = {"/sys", "/proc", "/tmp"};
     foreach (string ex in excludes2) {
       ex = ex.replace("~", Environment.get_home_dir());
       if (FileUtils.test (ex, FileTest.EXISTS))
         args += "'--exclude=%s' ".printf(ex);
     }
 
-    args += "'--exclude=%s/deja-dup' '--exclude=%s' '--exclude=**' ".printf(cachedir, cachedir);
+    args += "'--exclude=%s/deja-dup' '--exclude=%s' ".printf(cachedir, cachedir);
+
+    string[] excludes3 = {"/home/.ecryptfs/%s/.Private".printf(Environment.get_user_name())};
+    foreach (string ex in excludes3) {
+      ex = ex.replace("~", Environment.get_home_dir());
+      if (FileUtils.test (ex, FileTest.EXISTS))
+        args += "'--exclude=%s' ".printf(ex);
+    }
+
+    args += "'--exclude=**' ";
   }
 
   args += "%s%s'--gio' %s'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(extra, dry_str, source_str, backupdir, enc_str, archive);
@@ -348,12 +355,14 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
     br.error_detail = keyfile.get_string(group, "ErrorDetail");
   if (keyfile.has_key(group, "Passphrases"))
     br.passphrases = keyfile.get_integer(group, "Passphrases");
+  if (keyfile.has_key(group, "Script"))
+    run_script(replace_keywords(keyfile.get_string(group, "Script")));
   if (keyfile.has_key(group, "Settings")) {
     var settings_list = keyfile.get_string_list(group, "Settings");
     var settings = DejaDup.get_settings();
     foreach (var setting in settings_list) {
       try {
-        var tokens = setting.split("=");
+        var tokens = replace_keywords(setting).split("=");
         var key = tokens[0];
         var val = Variant.parse(null, tokens[1]);
         settings.set_value(key, val);
@@ -370,6 +379,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
 {
   string outputscript = null;
   string extra_args = "";
+  string include_args = "";
   bool encrypted = false;
   bool cancel = false;
   bool stop = false;
@@ -391,9 +401,14 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
     if (keyfile.has_key(group, "Encrypted"))
       encrypted = keyfile.get_boolean(group, "Encrypted");
     if (keyfile.has_key(group, "ExtraArgs")) {
-      extra_args = keyfile.get_string(group, "ExtraArgs");
+      extra_args = replace_keywords(keyfile.get_string(group, "ExtraArgs"));
       if (!extra_args.has_suffix(" "))
         extra_args += " ";
+    }
+    if (keyfile.has_key(group, "IncludeArgs")) {
+      include_args = replace_keywords(keyfile.get_string(group, "IncludeArgs"));
+      if (!include_args.has_suffix(" "))
+        include_args += " ";
     }
     if (keyfile.has_key(group, "Output") && keyfile.get_boolean(group, "Output"))
       outputscript = replace_keywords(keyfile.get_comment(group, "Output"));
@@ -430,7 +445,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
 
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
 
-  var dupscript = "ARGS: " + default_args(br, mode, encrypted, extra_args, tmp_archive);
+  var dupscript = "ARGS: " + default_args(br, mode, encrypted, extra_args, include_args, tmp_archive);
 
   if (tmp_archive)
     dupscript += "\n" + "TMP_ARCHIVE";
