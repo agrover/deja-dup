@@ -35,26 +35,11 @@ AUTO_TESTS = \
 	restore/overdir \
 	restore/two
 
-# Tests that must be run manually
-# disk-full because it prompts for root password
-MANUAL_TESTS = \
-	backup/disk-full
-
-ALL_TESTS = $(AUTO_TESTS) $(MANUAL_TESTS)
-
 # This is for 'interactive' running of all the tests.  See 'check' target for
 # a target more suitable for automated testing.
 test:
 	rm -f test.log ; \
 	for t in $(AUTO_TESTS); do \
-		echo -n "Testing $$t..."; \
-		if $(srcdir)/$$t >>test.log 2>&1; then \
-			echo -e " \e[32mPASSED\e[0m"; \
-		else \
-			echo -e " \e[31mFAILED\e[0m"; \
-		fi; \
-	done; \
-	for t in $(MANUAL_TESTS); do \
 		echo -n "Testing $$t..."; \
 		if $(srcdir)/$$t >>test.log 2>&1; then \
 			echo -e " \e[32mPASSED\e[0m"; \

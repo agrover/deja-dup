@@ -470,6 +470,14 @@ public class BackendFile : Backend
       if (!info.has_attribute(attr))
         return INFINITE_SPACE;
       var space = info.get_attribute_uint64(attr);
+      if (in_testing_mode() && free &&
+          Environment.get_variable("DEJA_DUP_TEST_SPACE_FREE") != null) {
+          var free_str = Environment.get_variable("DEJA_DUP_TEST_SPACE_FREE");
+          var free_list = free_str.split(";");
+          space = uint64.parse(free_list[0]);
+          if (free_list[1] != null)
+            Environment.set_variable("DEJA_DUP_TEST_SPACE_FREE", string.joinv(";", free_list[1:-1]), true);
+      }
       if (space == INFINITE_SPACE)
         return space - 1; // avoid accidentally reporting infinite
       else

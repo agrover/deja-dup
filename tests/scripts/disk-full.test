@@ -1,0 +1,40 @@
+[Operation]
+Type=backup
+DiskFree=98;99;100
+
+[Duplicity]
+Runs=status 1;dry;remove 1;status 2;remove 2;status 3;backup;status-restore;list;verify;
+
+[Duplicity status 1]
+#echo "INFO 3"
+#echo "chain-no-sig"
+#echo " full $(date --utc --date='3 days ago' +%Y%m%dT%H%M%SZ) 1 enc"
+#echo "chain-no-sig"
+#echo " full $(date --utc --date='2 days ago' +%Y%m%dT%H%M%SZ) 1 enc"
+#echo "chain-complete"
+#echo " full $(date --utc --date='1 day ago' +%Y%m%dT%H%M%SZ) 1 enc"
+OutputScript=true
+
+[Duplicity dry]
+#echo "INFO 2 100"
+OutputScript=true
+
+[Duplicity remove 1]
+RemoveButN=2
+
+[Duplicity status 2]
+#echo "INFO 3"
+#echo "chain-no-sig"
+#echo " full $(date --utc --date='2 days ago' +%Y%m%dT%H%M%SZ) 1 enc"
+#echo "chain-complete"
+#echo " full $(date --utc --date='1 day ago' +%Y%m%dT%H%M%SZ) 1 enc"
+OutputScript=true
+
+[Duplicity remove 2]
+RemoveButN=1
+
+[Duplicity status 3]
+#echo "INFO 3"
+#echo "chain-complete"
+#echo " full $(date --utc --date='1 day ago' +%Y%m%dT%H%M%SZ) 1 enc"
+OutputScript=true
