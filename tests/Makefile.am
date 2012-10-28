@@ -27,7 +27,6 @@ AUTO_TESTS = \
 	backup/delete \
 	backup/encrypt \
 	backup/quiescent \
-	backup/spaces \
 	restore/cycle \
 	restore/full \
 	restore/gpg \
