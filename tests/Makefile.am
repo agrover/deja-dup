@@ -63,32 +63,12 @@ test:
 		fi; \
 	done
 
-# This is run automatically by distcheck and some build tools.
-# Needs to error out if a test fails and needs to be runnable with no DISPLAY.
-# Use system duplicity to avoid downloading on the fly and to facilitate
-# testing against a distro's potentially patched version of duplicity.
-XXXcheck:
-	@export TESTS_PASSED=true ; \
-	export DEJA_DUP_TEST_VERSION=system ; \
-	export DISPLAY= ; \
-	export srcdir=$(srcdir) ; \
-	export distdir=$(distdir) ; \
-	export builddir=$(builddir) ; \
-	for t in $(AUTO_TESTS); do \
-		echo -n "Testing $$t..."; \
-		if ! $(srcdir)/wrap $(srcdir)/$$t; then \
-			export TESTS_PASSED=false ; \
-		fi; \
-	done; \
-	$${TESTS_PASSED}
-
 EXTRA_DIST = \
 	backup \
 	restore \
 	base.py \
 	build-duplicity \
 	interactive \
-	wrap \
 	data \
 	vols \
 	README
