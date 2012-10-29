@@ -186,8 +186,7 @@ AC_CONFIG_FILES([Makefile
                  po/Makefile.in
                  preferences/Makefile
                  tests/Makefile
-                 tests/runner/Makefile
-                 tests/scripts/Makefile
+                 tests/ldtp/Makefile
                  tests/unit/Makefile
                  tools/Makefile
                  tools/duplicity/Makefile

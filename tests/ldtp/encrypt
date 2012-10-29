@@ -36,7 +36,7 @@ def wait_for_volume(destdir, basenum):
 def encrypt():
   base.setup()
   os.environ['PATH'] = os.path.join(scriptdir, 'encrypt-bin') + ":" + os.environ['PATH']
-  base.backup_simple(backend='file', encrypt=True, includes=['data/simple'])
+  base.backup_simple(backend='file', encrypt=True, includes=['data'])
   basenum = len(os.listdir(base.get_temp_name('local')))
   base.backup_simple(encrypt=True, finish=False, includes=['/usr/bin'])
   # Test resuming a backup too
@@ -47,7 +47,7 @@ def encrypt():
 
 def encrypt_nocache():
   base.setup()
-  base.backup_simple(backend='file', encrypt=True, includes=['data/simple'])
+  base.backup_simple(backend='file', encrypt=True, includes=['data'])
   os.system('rm -r %s' % base.get_temp_name('cache/deja-dup'))
   basenum = len(os.listdir(base.get_temp_name('local')))
   base.backup_simple(encrypt=True, finish=False, includes=['/usr/bin'])
@@ -60,7 +60,7 @@ def encrypt_nocache():
 
 def noencrypt():
   base.setup()
-  base.backup_simple(backend='file', encrypt=False, includes=['data/simple'])
+  base.backup_simple(backend='file', encrypt=False, includes=['data'])
   basenum = len(os.listdir(base.get_temp_name('local')))
   base.backup_simple(encrypt=None, finish=False, includes=['/usr/bin'])
   # Test resuming a backup too
@@ -71,7 +71,7 @@ def noencrypt():
 
 def noencrypt_nocache():
   base.setup()
-  base.backup_simple(backend='file', encrypt=False, includes=['data/simple'])
+  base.backup_simple(backend='file', encrypt=False, includes=['data'])
   os.system('rm -r %s' % base.get_temp_name('cache/deja-dup'))
   basenum = len(os.listdir(base.get_temp_name('local')))
   base.backup_simple(encrypt=None, finish=False, includes=['/usr/bin'])

@@ -78,35 +78,14 @@ def setup(root_prompt = False):
   
   environ['LANG'] = 'C'
   environ['DEJA_DUP_TESTING'] = '1'
+  environ['DEJA_DUP_TOOLS_PATH'] = '%s/../../tools/duplicity' % (builddir)
 
   if 'DEJA_DUP_TEST_SYSTEM' in environ and environ['DEJA_DUP_TEST_SYSTEM'] == '1':
     extra_paths = ''
   else:
-    extra_paths = ':'.join(['%s/../%s' % (builddir, x) for x in ['deja-dup', 'preferences', 'monitor']]) + ':'
+    extra_paths = ':'.join(['%s/../../%s' % (builddir, x) for x in ['deja-dup', 'preferences', 'monitor']]) + ':'
   extra_pythonpaths = ''
-  
-  version = None
-  if 'DEJA_DUP_TEST_VERSION' in environ:
-    version = environ['DEJA_DUP_TEST_VERSION']
-  if version is None:
-    version = 'system'
-  if version != 'system':
-    os.system('%s/build-duplicity %s' % (srcdir, version))
-    duproot = '%s/duplicity/duplicity-%s' % (srcdir, version)
-    if not os.path.exists(duproot):
-      print 'Could not find duplicity %s' % version
-      sys.exit(1)
-    
-    extra_paths += duproot + '/usr/local/bin:'
-    
-    # Also add the module path, but we have to find it
-    libdir = duproot + '/usr/local/lib/'
-    libdir += os.listdir(libdir)[0] # python2.5 or python2.6, etc
-    libdir += '/'
-    libdir += os.listdir(libdir)[0] # site-packages or dist-packages
-    libdir += ':'
-    extra_pythonpaths += libdir
-  
+
   environ['XDG_CACHE_HOME'] = get_temp_name('cache')
   environ['XDG_CONFIG_HOME'] = get_temp_name('config')
   environ['XDG_DATA_HOME'] = get_temp_name('share')
@@ -138,13 +117,13 @@ def setup(root_prompt = False):
 
   # Now install default schema into our temporary config dir
   schemas = glob.glob("/usr/share/glib-2.0/schemas/org.gtk.*")
-  schemas.append("%s/../data/org.gnome.DejaDup.gschema.xml" % builddir)
+  schemas.append("%s/../../data/org.gnome.DejaDup.gschema.xml" % builddir)
   if os.system('cp %s %s/glib-2.0/schemas/ && glib-compile-schemas %s/glib-2.0/schemas/' % (' '.join(schemas), environ['XDG_DATA_HOME'], environ['XDG_DATA_HOME'])):
     raise Exception('Could not install settings schema')
 
   # Copy interface files into place as well
   os.system("mkdir -p %s/deja-dup/ui" % environ['XDG_DATA_HOME'])
-  os.system("cp %s/../data/ui/* %s/deja-dup/ui" % (srcdir, environ['XDG_DATA_HOME']))
+  os.system("cp %s/../../data/ui/* %s/deja-dup/ui" % (srcdir, environ['XDG_DATA_HOME']))
 
   set_settings_value("location-mode", "'filename-entry'",
                      root='org.gtk.Settings.FileChooser:/org/gtk/settings/file-chooser/')

@@ -16,47 +16,41 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-check_PROGRAMS = \
-	runner
+# Don't use special name 'TESTS', as it will trigger an automatically-created
+# 'check' target used during distcheck.
 
-check:
-	@set -e; for test in $(srcdir)/../scripts/*.test; do \
-		dbus-launch ./runner $$test; \
+LDTP_TESTS = \
+	cancel \
+	continue \
+	delete \
+	encrypt \
+	quiescent \
+	cycle \
+	full \
+	gpg \
+	missing \
+	rename \
+	overdir \
+	two
+
+# This is for 'interactive' running of all the tests.  Not suitable for
+# automated testing yet.
+test:
+	rm -f test.log ; \
+	for t in $(LDTP_TESTS); do \
+		echo -n "Testing $$t..."; \
+		if $(srcdir)/$$t >>test.log 2>&1; then \
+			echo -e " \e[32mPASSED\e[0m"; \
+		else \
+			echo -e " \e[31mFAILED\e[0m"; \
+		fi; \
 	done
 
-AM_CFLAGS = \
-	-I$(top_srcdir)/common \
-	$(DUP_CFLAGS) \
-	-w
-
-LDADD = \
-	$(DUP_LIBS) \
-	@INTLLIBS@ \
-	$(top_builddir)/common/libcommon.la
-
-runner_VALASOURCES = \
-	runner.vala
-
-runner_SOURCES = \
-	$(runner_VALASOURCES)
-
-AM_VALAFLAGS = \
-	--vapidir $(top_srcdir)/common \
-	--vapidir $(top_srcdir)/vapi \
-	$(NETWORKMONITOR_VALAFLAGS) \
-	--pkg config \
-	--pkg gio-2.0 \
-	--pkg libpeas-1.0 \
-	--pkg posix \
-	--pkg libcommon
-
-runner_vala.stamp: $(top_srcdir)/config.h
-
-dist-hook:
-	cd $(distdir) && rm $(runner_VALASOURCES:.vala=.c) \
-	                    runner_vala.stamp
-
 EXTRA_DIST = \
-	mock
+	base.py \
+	data \
+	vols \
+	README
 
-CLEANFILES = runner_vala.stamp
+distclean-local:
+	rm -f test.log

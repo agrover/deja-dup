@@ -29,7 +29,7 @@ void setup_gsettings()
   var data_dirs = Environment.get_variable("XDG_DATA_DIRS");
   Environment.set_variable("XDG_DATA_DIRS", "%s:%s".printf(Path.build_filename(dir, "share"), data_dirs), true);
 
-  if (Posix.system("cp ../../data/org.gnome.DejaDup.gschema.xml %s".printf(schema_dir)) != 0)
+  if (Posix.system("cp ../data/org.gnome.DejaDup.gschema.xml %s".printf(schema_dir)) != 0)
     warning("Could not copy schema to %s", schema_dir);
 
   if (Posix.system("glib-compile-schemas %s".printf(schema_dir)) != 0)
@@ -45,7 +45,7 @@ void backup_setup()
 
   var dir = Environment.get_variable("DEJA_DUP_TEST_HOME");
 
-  Environment.set_variable("DEJA_DUP_TOOLS_PATH", "../../tools/duplicity", true);
+  Environment.set_variable("DEJA_DUP_TOOLS_PATH", "../tools/duplicity", true);
   Environment.set_variable("DEJA_DUP_TEST_MOCKSCRIPT", Path.build_filename(dir, "mockscript"), true);
   Environment.set_variable("XDG_CACHE_HOME", Path.build_filename(dir, "cache"), true);
   Environment.set_variable("PATH", "./mock:" + Environment.get_variable("PATH"), true);
@@ -549,6 +549,7 @@ int main(string[] args)
 
   Environment.set_variable("DEJA_DUP_TESTING", "1", true);
   Environment.set_variable("DEJA_DUP_LANGUAGE", "en", true);
+  Environment.unset_variable("DEJA_DUP_TEST_SPACE_FREE");
   Test.bug_base("https://launchpad.net/bugs/%s");
 
   setup_gsettings();

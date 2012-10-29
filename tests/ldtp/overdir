@@ -24,22 +24,14 @@ import base
 import ldtp
 
 def test():
+  restoredir = base.get_temp_name('restore')
   base.setup()
-  sourcedir = base.get_temp_name('source', True)
-  os.system('cp -r %s/data/simple/* %s' % (base.srcdir, sourcedir))
-  base.backup_simple(backend='file', includes=[sourcedir], add_srcdir=False)
-  os.system('echo bar > %s/foo' % sourcedir)
-  os.system('rm -f %s/one %s/two' % (sourcedir, sourcedir))
-  base.backup_simple()
-  os.system('echo 1 > %s/one' % sourcedir)
-  base.backup_simple()
-
-  files = ['one', 'two', 'three']
-  os.system('rm -f %s' % ' '.join([sourcedir+'/'+f for f in files]))
-  base.restore_missing(files, sourcedir)
-
-  assert base.file_equals(sourcedir+'/one', '1\n')
-  assert base.file_equals(sourcedir+'/two', 'two\n')
-  assert base.file_equals(sourcedir+'/three', 'three\n')
+  base.backup_simple(backend='file', includes=['data'])
+  base.restore_simple(restoredir)
+  # Test restoring everything on top of previous restored files
+  base.restore_simple(restoredir)
+  # Test restoring just one dir on top of previous restored files
+  base.restore_specific(['data/top'], restoredir)
+  return True
 
 base.run(test)

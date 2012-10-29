@@ -16,48 +16,51 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-# Don't use special name 'TESTS', as it will trigger an automatically-created
-# 'check' target used during distcheck.
+SUBDIRS = unit ldtp
 
-SUBDIRS = scripts unit runner
+check_PROGRAMS = \
+	runner
 
-AUTO_TESTS = \
-	backup/cancel \
-	backup/continue \
-	backup/delete \
-	backup/encrypt \
-	backup/quiescent \
-	restore/cycle \
-	restore/full \
-	restore/gpg \
-	restore/missing \
-	restore/rename \
-	restore/overdir \
-	restore/two
-
-# This is for 'interactive' running of all the tests.  See 'check' target for
-# a target more suitable for automated testing.
-test:
-	rm -f test.log ; \
-	for t in $(AUTO_TESTS); do \
-		echo -n "Testing $$t..."; \
-		if $(srcdir)/$$t >>test.log 2>&1; then \
-			echo -e " \e[32mPASSED\e[0m"; \
-		else \
-			echo -e " \e[31mFAILED\e[0m"; \
-		fi; \
+check:
+	@set -e; for test in $(srcdir)/scripts/*.test; do \
+		dbus-launch ./runner $$test; \
 	done
 
-EXTRA_DIST = \
-	backup \
-	restore \
-	base.py \
-	build-duplicity \
-	interactive \
-	data \
-	vols \
-	README
+AM_CFLAGS = \
+	-I$(top_srcdir)/common \
+	$(DUP_CFLAGS) \
+	-w
 
-distclean-local:
-	rm -rf duplicity duplicity-src
-	rm -f test.log
+LDADD = \
+	$(DUP_LIBS) \
+	@INTLLIBS@ \
+	$(top_builddir)/common/libcommon.la
+
+runner_VALASOURCES = \
+	runner.vala
+
+runner_SOURCES = \
+	$(runner_VALASOURCES)
+
+AM_VALAFLAGS = \
+	--vapidir $(top_srcdir)/common \
+	--vapidir $(top_srcdir)/vapi \
+	$(NETWORKMONITOR_VALAFLAGS) \
+	--pkg config \
+	--pkg gio-2.0 \
+	--pkg libpeas-1.0 \
+	--pkg posix \
+	--pkg libcommon
+
+runner_vala.stamp: $(top_srcdir)/config.h
+
+dist-hook:
+	cd $(distdir) && rm $(runner_VALASOURCES:.vala=.c) \
+	                    runner_vala.stamp
+
+EXTRA_DIST = \
+	interactive \
+	mock \
+	scripts
+
+CLEANFILES = runner_vala.stamp

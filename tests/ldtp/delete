@@ -27,7 +27,7 @@ import ldtp
 def delete():
   base.setup()
   base.set_settings_value('delete-after', '30')
-  base.backup_simple(backend='file', includes=['data/simple'])
+  base.backup_simple(backend='file', includes=['data'])
   base.last_date_change('%d days ago' % 100)
   base.backup_simple()
   assert base.num_manifests() == 2 and base.num_manifests('full') == 2
@@ -48,7 +48,7 @@ def delete():
 # Make sure that we don't delete backups when we aren't supposed to!
 def forever():
   base.setup()
-  base.backup_simple(backend='file', includes=['data/simple'])
+  base.backup_simple(backend='file', includes=['data'])
   base.last_date_change('%d days ago' % 1000)
   base.backup_simple()
   assert base.num_manifests() == 2 and base.num_manifests('full') == 2
