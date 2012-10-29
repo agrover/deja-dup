@@ -1,6 +1,6 @@
 When making a non-trivial change, remember to add yourself to AUTHORS and help/C/credits.page.
 
-When testing a change, it is helpful to: "cd tests; ./interactive".  It has many interesting options, check the script and base.py to know more.
+When testing a change, it is helpful to: "./tests/interactive".
 
 Directories:
  • common: shared code that does not require gtk
@@ -9,18 +9,13 @@ Directories:
  • preferences: control center panel
  • nautilus: nautilus extension
  • deja-dup: deja-dup helper app
+ • tools: backup tool backend, handles talking to duplicity
  • data: schemas, icons, desktop files, etc
  • help: help documentation
  • vapi: some helper APIs for vala
  • tests: test scripts
 
-To do next cycle:
- • bump supported valac
-   • drop old valac #ifdef blocks
-   • fix deprecation warnings
- • bump required gtk if we have #ifdefs
-   • drop old gtk #ifdef blocks
-   • review new gtk symbols
+TODO:
  • use GResource
 
 Backend split:
@@ -35,5 +30,3 @@ What do we need?
 * list
 * size-of-these (to make sure there is room)
 basically, same as duplicity, duh!
-
-

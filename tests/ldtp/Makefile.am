@@ -49,8 +49,7 @@ test:
 EXTRA_DIST = \
 	base.py \
 	data \
-	vols \
-	README
+	vols
 
 distclean-local:
 	rm -f test.log
