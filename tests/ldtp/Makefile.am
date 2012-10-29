@@ -29,16 +29,14 @@ LDTP_TESTS = \
 	full \
 	gpg \
 	missing \
-	rename \
 	overdir
 
 # This is for 'interactive' running of all the tests.  Not suitable for
 # automated testing yet.
 test:
-	rm -f test.log ; \
 	for t in $(LDTP_TESTS); do \
 		echo -n "Testing $$t..."; \
-		if $(srcdir)/$$t >>test.log 2>&1; then \
+		if $(srcdir)/$$t 2>&1; then \
 			echo -e " \e[32mPASSED\e[0m"; \
 		else \
 			echo -e " \e[31mFAILED\e[0m"; \
@@ -46,9 +44,7 @@ test:
 	done
 
 EXTRA_DIST = \
+	$(LDTP_TESTS) \
 	base.py \
 	data \
 	vols
-
-distclean-local:
-	rm -f test.log

@@ -1,0 +1,13 @@
+# Unlike restore-one.test, if we have two home directories, do NOT rename
+
+[Operation]
+Type=restore
+
+[Duplicity]
+Runs=status-restore;list;restore;
+
+[Duplicity list]
+#INFO 10 20121029T124408Z 'home/NULL'
+#
+#INFO 10 20121029T124408Z 'home/NULL2'
+Output=true

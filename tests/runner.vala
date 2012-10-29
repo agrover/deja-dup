@@ -118,7 +118,7 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
       file_arg = "'--file-to-restore=%s' ".printf(file_to_restore.substring(1)); // skip root /
       dest_arg = file_to_restore;
     }
-    return "'restore' %s'--gio' '--force' 'file://%s' '%s%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(file_arg, backupdir, restoredir, dest_arg, encrypted ? "" : "'--no-encryption' ", archive);
+    return "'restore' %s%s'--gio' '--force' 'file://%s' '%s%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(extra, file_arg, backupdir, restoredir, dest_arg, encrypted ? "" : "'--no-encryption' ", archive);
   }
   else if (mode == Mode.VERIFY)
     return "'restore' '--file-to-restore=%s/deja-dup/metadata' '--gio' '--force' 'file://%s' '%s/deja-dup/metadata' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(cachedir.substring(1), backupdir, cachedir, encrypted ? "" : "'--no-encryption' ", archive);
@@ -313,11 +313,13 @@ void add_to_mockscript(string contents)
 string replace_keywords(string in)
 {
   var home = Environment.get_home_dir();
+  var user = Environment.get_user_name();
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
   var test_home = Environment.get_variable("DEJA_DUP_TEST_HOME");
   return in.replace("@HOME@", home).
-         replace("@XDG_CACHE_HOME@", cachedir).
-         replace("@TEST_HOME@", test_home);
+            replace("@USER@", user).
+            replace("@XDG_CACHE_HOME@", cachedir).
+            replace("@TEST_HOME@", test_home);
 }
 
 string run_script(string in)
