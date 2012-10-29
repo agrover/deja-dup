@@ -30,8 +30,7 @@ LDTP_TESTS = \
 	gpg \
 	missing \
 	rename \
-	overdir \
-	two
+	overdir
 
 # This is for 'interactive' running of all the tests.  Not suitable for
 # automated testing yet.

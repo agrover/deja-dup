@@ -101,7 +101,7 @@ public enum Mode {
   LIST,
 }
 
-string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = false, string extra = "", string include_args = "", string exclude_args = "", bool tmp_archive = false, int remove_n = -1)
+string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = false, string extra = "", string include_args = "", string exclude_args = "", bool tmp_archive = false, int remove_n = -1, string? file_to_restore = null)
 {
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
   var test_home = Environment.get_variable("DEJA_DUP_TEST_HOME");
@@ -112,8 +112,14 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
 
   if (mode == Mode.CLEANUP)
     return "cleanup '--force' 'file://%s' '--gio' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(backupdir, encrypted ? "" : "'--no-encryption' ", archive);
-  else if (mode == Mode.RESTORE)
-    return "'restore' '--gio' '--force' 'file://%s' '%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(backupdir, restoredir, encrypted ? "" : "'--no-encryption' ", archive);
+  else if (mode == Mode.RESTORE) {
+    string file_arg = "", dest_arg = "";
+    if (file_to_restore != null) {
+      file_arg = "'--file-to-restore=%s' ".printf(file_to_restore.substring(1)); // skip root /
+      dest_arg = file_to_restore;
+    }
+    return "'restore' %s'--gio' '--force' 'file://%s' '%s%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(file_arg, backupdir, restoredir, dest_arg, encrypted ? "" : "'--no-encryption' ", archive);
+  }
   else if (mode == Mode.VERIFY)
     return "'restore' '--file-to-restore=%s/deja-dup/metadata' '--gio' '--force' 'file://%s' '%s/deja-dup/metadata' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(cachedir.substring(1), backupdir, cachedir, encrypted ? "" : "'--no-encryption' ", archive);
   else if (mode == Mode.LIST)
@@ -189,6 +195,7 @@ class BackupRunner : Object
   public string? detail = null;
   public string? error_str = null;
   public string? error_detail = null;
+  public List<File> restore_files = null;
   public OpCallback? callback = null;
   public bool is_full = false; // we don't often give INFO 3 which triggers is_full()
   public bool is_first = false;
@@ -334,11 +341,17 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
   var test_home = Environment.get_variable("DEJA_DUP_TEST_HOME");
   var restoredir = Path.build_filename(test_home, "restore");
 
+  if (keyfile.has_key(group, "RestoreFiles")) {
+    var array = keyfile.get_string_list(group, "RestoreFiles");
+    br.restore_files = new List<File>();
+    foreach (var file in array)
+      br.restore_files.append(File.new_for_path(replace_keywords(file)));
+  }
   var type = keyfile.get_string(group, "Type");
   if (type == "backup")
     br.op = new DejaDup.OperationBackup();
   else if (type == "restore")
-    br.op = new DejaDup.OperationRestore(restoredir);
+    br.op = new DejaDup.OperationRestore(restoredir, null, br.restore_files);
   else
     assert_not_reached();
   if (keyfile.has_key(group, "Success"))
@@ -387,6 +400,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
   string extra_args = "";
   string include_args = "";
   string exclude_args = "";
+  string file_to_restore = null;
   bool encrypted = false;
   bool cancel = false;
   bool stop = false;
@@ -423,6 +437,8 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
       if (!exclude_args.has_suffix(" "))
         exclude_args += " ";
     }
+    if (keyfile.has_key(group, "FileToRestore"))
+      file_to_restore = replace_keywords(keyfile.get_string(group, "FileToRestore"));
     if (keyfile.has_key(group, "Output") && keyfile.get_boolean(group, "Output"))
       outputscript = replace_keywords(keyfile.get_comment(group, "Output"));
     else if (keyfile.has_key(group, "OutputScript") && keyfile.get_boolean(group, "OutputScript"))
@@ -462,7 +478,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
 
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
 
-  var dupscript = "ARGS: " + default_args(br, mode, encrypted, extra_args, include_args, exclude_args, tmp_archive, remove_n);
+  var dupscript = "ARGS: " + default_args(br, mode, encrypted, extra_args, include_args, exclude_args, tmp_archive, remove_n, file_to_restore);
 
   if (tmp_archive)
     dupscript += "\n" + "TMP_ARCHIVE";
