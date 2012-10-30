@@ -21,9 +21,14 @@ SUBDIRS = unit ldtp
 check_PROGRAMS = \
 	runner
 
-check:
+check: runner
 	@set -e; for test in $(srcdir)/scripts/*.test; do \
 		dbus-launch ./runner $$test; \
+	done
+
+check-system: runner
+	@set -e; for test in $(srcdir)/scripts/*.test; do \
+		dbus-launch ./runner --system $$test; \
 	done
 
 AM_CFLAGS = \
@@ -45,7 +50,6 @@ runner_SOURCES = \
 AM_VALAFLAGS = \
 	--vapidir $(top_srcdir)/common \
 	--vapidir $(top_srcdir)/vapi \
-	$(NETWORKMONITOR_VALAFLAGS) \
 	--pkg config \
 	--pkg gio-2.0 \
 	--pkg libpeas-1.0 \

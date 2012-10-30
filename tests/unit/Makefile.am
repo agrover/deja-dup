@@ -48,7 +48,6 @@ network_SOURCES = \
 AM_VALAFLAGS = \
 	--vapidir $(top_srcdir)/common \
 	--vapidir $(top_srcdir)/vapi \
-	$(NETWORKMONITOR_VALAFLAGS) \
 	--pkg config \
 	--pkg gio-2.0 \
 	--pkg libpeas-1.0 \

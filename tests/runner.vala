@@ -19,21 +19,25 @@
 
 using GLib;
 
+bool system_mode = false;
+
 void setup_gsettings()
 {
-  var dir = Environment.get_variable("DEJA_DUP_TEST_HOME");
+  if (!system_mode) {
+    var dir = Environment.get_variable("DEJA_DUP_TEST_HOME");
 
-  var schema_dir = Path.build_filename(dir, "share", "glib-2.0", "schemas");
-  DirUtils.create_with_parents(schema_dir, 0700);
+    var schema_dir = Path.build_filename(dir, "share", "glib-2.0", "schemas");
+    DirUtils.create_with_parents(schema_dir, 0700);
 
-  var data_dirs = Environment.get_variable("XDG_DATA_DIRS");
-  Environment.set_variable("XDG_DATA_DIRS", "%s:%s".printf(Path.build_filename(dir, "share"), data_dirs), true);
+    var data_dirs = Environment.get_variable("XDG_DATA_DIRS");
+    Environment.set_variable("XDG_DATA_DIRS", "%s:%s".printf(Path.build_filename(dir, "share"), data_dirs), true);
 
-  if (Posix.system("cp ../data/org.gnome.DejaDup.gschema.xml %s".printf(schema_dir)) != 0)
-    warning("Could not copy schema to %s", schema_dir);
+    if (Posix.system("cp ../data/org.gnome.DejaDup.gschema.xml %s".printf(schema_dir)) != 0)
+      warning("Could not copy schema to %s", schema_dir);
 
-  if (Posix.system("glib-compile-schemas %s".printf(schema_dir)) != 0)
-    warning("Could not compile schemas in %s", schema_dir);
+    if (Posix.system("glib-compile-schemas %s".printf(schema_dir)) != 0)
+      warning("Could not compile schemas in %s", schema_dir);
+  }
 
   Environment.set_variable("GSETTINGS_BACKEND", "memory", true);
 }
@@ -45,7 +49,9 @@ void backup_setup()
 
   var dir = Environment.get_variable("DEJA_DUP_TEST_HOME");
 
-  Environment.set_variable("DEJA_DUP_TOOLS_PATH", "../tools/duplicity", true);
+  if (!system_mode)
+    Environment.set_variable("DEJA_DUP_TOOLS_PATH", "../tools/duplicity", true);
+
   Environment.set_variable("DEJA_DUP_TEST_MOCKSCRIPT", Path.build_filename(dir, "mockscript"), true);
   Environment.set_variable("XDG_CACHE_HOME", Path.build_filename(dir, "cache"), true);
   Environment.set_variable("PATH", "./mock:" + Environment.get_variable("PATH"), true);
@@ -568,9 +574,23 @@ void backup_run()
   }
 }
 
+const OptionEntry[] options = {
+  {"system", 0, 0, OptionArg.NONE, ref system_mode, "Run against system install", null},
+  {null}
+};
+
 int main(string[] args)
 {
   Test.init(ref args);
+
+  OptionContext context = new OptionContext("");
+  context.add_main_entries(options, null);
+  try {
+    context.parse(ref args);
+  } catch (Error e) {
+    printerr("%s\n\n%s", e.message, context.get_help(true, null));
+    return 1;
+  }
 
   var dir = "/tmp/deja-dup-test-XXXXXX";
   dir = DirUtils.mkdtemp(dir);
@@ -578,7 +598,6 @@ int main(string[] args)
 
   Environment.set_variable("DEJA_DUP_TESTING", "1", true);
   Environment.set_variable("DEJA_DUP_LANGUAGE", "en", true);
-  Environment.unset_variable("DEJA_DUP_TEST_SPACE_FREE");
   Test.bug_base("https://launchpad.net/bugs/%s");
 
   setup_gsettings();

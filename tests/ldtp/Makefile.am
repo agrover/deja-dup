@@ -22,13 +22,13 @@
 LDTP_TESTS = \
 	cancel \
 	continue \
+	cycle \
 	delete \
 	encrypt \
-	quiescent \
-	cycle \
 	full \
 	missing \
-	overdir
+	overdir \
+	quiescent
 
 # This is for 'interactive' running of all the tests.  Not suitable for
 # automated testing yet.
