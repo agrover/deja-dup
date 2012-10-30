@@ -101,7 +101,12 @@ public enum Mode {
   LIST,
 }
 
-string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = false, string extra = "", string include_args = "", string exclude_args = "", bool tmp_archive = false, int remove_n = -1, string? file_to_restore = null)
+string make_fd_arg(bool as_root)
+{
+  return as_root ? "--log-file=?" : "--log-fd=?";
+}
+
+string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = false, string extra = "", string include_args = "", string exclude_args = "", bool tmp_archive = false, int remove_n = -1, string? file_to_restore = null, bool as_root = false)
 {
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
   var test_home = Environment.get_variable("DEJA_DUP_TEST_HOME");
@@ -111,21 +116,21 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
   var archive = tmp_archive ? "?" : "%s/deja-dup".printf(cachedir);
 
   if (mode == Mode.CLEANUP)
-    return "cleanup '--force' 'file://%s' '--gio' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(backupdir, encrypted ? "" : "'--no-encryption' ", archive);
+    return "cleanup '--force' 'file://%s' '--gio' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(backupdir, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
   else if (mode == Mode.RESTORE) {
     string file_arg = "", dest_arg = "";
     if (file_to_restore != null) {
       file_arg = "'--file-to-restore=%s' ".printf(file_to_restore.substring(1)); // skip root /
       dest_arg = file_to_restore;
     }
-    return "'restore' %s%s'--gio' '--force' 'file://%s' '%s%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(extra, file_arg, backupdir, restoredir, dest_arg, encrypted ? "" : "'--no-encryption' ", archive);
+    return "'restore' %s%s'--gio' '--force' 'file://%s' '%s%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(extra, file_arg, backupdir, restoredir, dest_arg, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
   }
   else if (mode == Mode.VERIFY)
-    return "'restore' '--file-to-restore=%s/deja-dup/metadata' '--gio' '--force' 'file://%s' '%s/deja-dup/metadata' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(cachedir.substring(1), backupdir, cachedir, encrypted ? "" : "'--no-encryption' ", archive);
+    return "'restore' '--file-to-restore=%s/deja-dup/metadata' '--gio' '--force' 'file://%s' '%s/deja-dup/metadata' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(cachedir.substring(1), backupdir, cachedir, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
   else if (mode == Mode.LIST)
-    return "'list-current-files' '--gio' 'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(backupdir, encrypted ? "" : "'--no-encryption' ", archive);
+    return "'list-current-files' '--gio' 'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(backupdir, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
   else if (mode == Mode.REMOVE)
-    return "'remove-all-but-n-full' '%d' '--force' 'file://%s' '--gio' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(remove_n, backupdir, encrypted ? "" : "'--no-encryption' ", archive);
+    return "'remove-all-but-n-full' '%d' '--force' 'file://%s' '--gio' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(remove_n, backupdir, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
 
   string source_str = "";
   if (mode == Mode.DRY || mode == Mode.BACKUP)
@@ -180,7 +185,7 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     args += "'--exclude=**' ";
   }
 
-  args += "%s%s'--gio' %s'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--log-fd=?'".printf(extra, dry_str, source_str, backupdir, enc_str, archive);
+  args += "%s%s'--gio' %s'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(extra, dry_str, source_str, backupdir, enc_str, archive, make_fd_arg(as_root));
 
   return args;
 }
@@ -408,6 +413,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
   bool stop = false;
   bool passphrase = false;
   bool tmp_archive = false;
+  bool as_root = false;
   int return_code = 0;
   int remove_n = -1;
   string script = null;
@@ -420,6 +426,8 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
   if (keyfile.has_group(group)) {
     if (keyfile.has_key(group, "ArchiveDirIsTmp"))
       tmp_archive = keyfile.get_boolean(group, "ArchiveDirIsTmp");
+    if (keyfile.has_key(group, "AsRoot"))
+      as_root = keyfile.get_boolean(group, "AsRoot");
     if (keyfile.has_key(group, "Cancel"))
       cancel = keyfile.get_boolean(group, "Cancel");
     if (keyfile.has_key(group, "Encrypted"))
@@ -480,7 +488,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
 
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
 
-  var dupscript = "ARGS: " + default_args(br, mode, encrypted, extra_args, include_args, exclude_args, tmp_archive, remove_n, file_to_restore);
+  var dupscript = "ARGS: " + default_args(br, mode, encrypted, extra_args, include_args, exclude_args, tmp_archive, remove_n, file_to_restore, as_root);
 
   if (tmp_archive)
     dupscript += "\n" + "TMP_ARCHIVE";
@@ -501,6 +509,9 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
 
   if (return_code != 0)
     dupscript += "\n" + "RETURN: %d".printf(return_code);
+
+  if (as_root)
+    dupscript += "\n" + "AS_ROOT";
 
   if (script != null)
     dupscript += "\n" + "SCRIPT: " + script;

@@ -460,7 +460,8 @@ internal class DuplicityJob : DejaDup.ToolJob
             return false;
           }
 
-          if (!local_file.has_prefix(slash_home_me))
+          if (!local_file.has_prefix(slash_home_me) &&
+              !(DejaDup.in_testing_mode() && local_file.get_path().has_prefix(Environment.get_tmp_dir())))
             needs_root = true;
           
           try {

@@ -45,7 +45,7 @@ def test():
   DATE1 = subprocess.Popen(['date', '-d', '2009-08-01 21:14:21', '+%x %X'], stdout=subprocess.PIPE).communicate()[0].strip()
   DATE2 = subprocess.Popen(['date', '-d', '2009-08-01 21:14:34', '+%x %X'], stdout=subprocess.PIPE).communicate()[0].strip()
   DATE3 = subprocess.Popen(['date', '-d', '2009-08-01 21:14:41', '+%x %X'], stdout=subprocess.PIPE).communicate()[0].strip()
-  base.restore_simple(restoredir, date=DATE1, backend='file', dest=(sys.path[0]+'/vols/simple'), encrypt=None)
+  base.restore_simple(restoredir, date=DATE1, backend='file', dest=(sys.path[0]+'/vols'), encrypt=None)
   # A concern is that DD will overwrite the permissions of the restore directory or its parents, so check that here
   after = os.stat(restoredir)
   assert before.st_mode == after.st_mode, after.st_mode

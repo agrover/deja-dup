@@ -27,7 +27,6 @@ LDTP_TESTS = \
 	quiescent \
 	cycle \
 	full \
-	gpg \
 	missing \
 	overdir
 
