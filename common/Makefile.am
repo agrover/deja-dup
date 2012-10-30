@@ -83,3 +83,5 @@ dist-hook:
 	                       common.h libcommon_la_vala.stamp
 
 CLEANFILES = libcommon_la_vala.stamp
+
+EXTRA_DIST = libcommon.deps
