@@ -20,9 +20,8 @@
 import os
 import sys
 import signal
-import atexit
 import subprocess
-from os import environ, path, remove
+from os import environ
 import tempfile
 import ldtp
 import glob
@@ -37,10 +36,6 @@ cleanup_mounts = []
 cleanup_pids = []
 cleanup_envs = []
 have_run = False
-
-def skip():
-  os.system('bash -c "echo -e \'\e[32mSKIPPED\e[0m\'"')
-  sys.exit(0)
 
 def create_temp_dir():
   global temp_dir, cleanup_dirs
@@ -210,42 +205,6 @@ def start_deja_dup(args=[], executable='deja-dup', waitfor='frmBackup', debug=Fa
   if waitfor is not None:
     waitforgui(waitfor)
 
-def create_vol_config(dest='/'):
-  if dest is None:
-    raise 'Must specify dest=, using uuid:path syntax'
-  uuid, path = dest.split(':', 1)
-  set_settings_value("backend", "'file'")
-  set_settings_value("type", "'volume'", schema="File")
-  set_settings_value("name", "'USB Drive: Test Volume'", schema="File")
-  set_settings_value("short-name", "'Test Volume'", schema="File")
-  set_settings_value("uuid", "'%s'" % uuid, schema="File")
-  set_settings_value("relpath", "'%s'" % path, schema="File")
-  set_settings_value("icon", "'drive-removable-media-usb'", schema="File")
-
-def create_mount(path=None, mtype='ext', size=20):
-  global cleanup_mounts
-  if mtype is None or mtype == 'ext': mtype = 'ext4'
-  if size is None: size = 20
-  if path is None:
-    path = get_temp_name('blob')
-    if not os.path.exists(path):
-      os.system('dd if=/dev/zero of=%s bs=1 count=0 seek=%dM' % (path, size))
-      if mtype.startswith('ext'):
-        args = '-F'
-      else:
-        args = ''
-      os.system('mkfs -t %s %s %s' % (mtype, args, path))
-  mount_dir = get_temp_name('mount')
-  os.system('mkdir -p %s' % mount_dir)
-  if mtype == 'vfat':
-    args = ',umask=0000'
-  else:
-    args = ''
-  if os.system('pkexec mount -t %s -o loop,sizelimit=%d%s %s %s' % (mtype, size*1024*1024, args, path, mount_dir)):
-    raise Exception("Couldn't mount")
-  cleanup_mounts += [mount_dir]
-  return mount_dir
-
 def quit():
   if ldtp.guiexist('frmBackup'):
     ldtp.closewindow('frmBackup')
@@ -264,21 +223,6 @@ def run(method):
     quit()
     cleanup(success)
 
-def dup_meets_version(major, minor, micro):
-  # replicates logic in DuplicityInfo a bit
-  dupver = subprocess.Popen(['duplicity', '--version'], stdout=subprocess.PIPE).communicate()[0].strip().split()[1]
-  if dupver == '999': return True
-  dupmajor, dupminor, dupmicro = dupver.split('.')
-  dupmajor = int(dupmajor)
-  dupminor = int(dupminor)
-  dupmicro = int(dupmicro) # sometimes micro has weird characters like 'b' in it...
-  if dupmajor > major:  return True
-  if dupmajor < major:  return False
-  if dupminor > minor:  return True
-  if dupminor < minor:  return False
-  if dupmicro >= micro: return True
-  else:                 return False
-
 def get_manifest_date(filename):
   return re.sub('.*\.([0-9TZ]+)\.manifest.*', '\\1', filename)
 
@@ -294,36 +238,9 @@ def num_manifests(mtype=None, dest='local'):
     files = filter(lambda x: manifest_type(x) == mtype, files)
   return len(files)
 
-def last_manifest(dest='local'):
-  '''Returns last backup manifest (directory, filename) pair'''
-  destdir, files = list_manifests(dest)
-  assert len(files) > 0
-  latest = files[-1]
-  return (destdir, latest)
-
 def manifest_type(fn):
   # fn looks like duplicity-TYPE.DATES.manifest
   return fn.split('.')[0].split('-')[1]
-
-def last_type(dest='local'):
-  '''Returns last backup type, inc or full'''
-  filename = last_manifest(dest)[1]
-  return manifest_type(filename)
-
-def last_date_change(to_date, dest='local'):
-  '''Changes the most recent set of duplicity files to look like they were
-     from to_date's timestamp'''
-  destdir, latest = last_manifest(dest)
-  olddate = get_manifest_date(latest)
-  newdate = subprocess.Popen(['date', '--utc', '-d', to_date, '+%Y%m%dT%H%M%SZ'], stdout=subprocess.PIPE).communicate()[0].strip()
-  cachedir = environ['XDG_CACHE_HOME'] + '/deja-dup/'
-  cachedir += os.listdir(cachedir)[0]
-  for d in (destdir, cachedir):
-    files = glob.glob('%s/*' % d)
-    for f in files:
-      if f.find(olddate) != -1:
-        newname = re.sub(olddate, newdate, f)
-        os.rename(f, newname)
 
 def guiexist(frm, obj, prefix=False):
   if not prefix:

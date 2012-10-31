@@ -26,9 +26,6 @@ import base
 import ldtp
 import time
 
-if not base.dup_meets_version(0, 6, 13):
-  base.skip()
-
 def wait_for_volume(destdir):
   count = 0
   while len(os.listdir(destdir)) < 2 and count < 200:

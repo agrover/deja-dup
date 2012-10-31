@@ -23,7 +23,6 @@ LDTP_TESTS = \
 	cancel \
 	continue \
 	cycle \
-	encrypt \
 	missing \
 	overdir \
 	quiescent
