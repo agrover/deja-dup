@@ -24,7 +24,6 @@ LDTP_TESTS = \
 	continue \
 	cycle \
 	encrypt \
-	full \
 	missing \
 	overdir \
 	quiescent
@@ -44,5 +43,4 @@ test:
 EXTRA_DIST = \
 	$(LDTP_TESTS) \
 	base.py \
-	data \
-	vols
+	data

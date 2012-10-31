@@ -129,10 +129,10 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
       file_arg = "'--file-to-restore=%s' ".printf(file_to_restore.substring(1)); // skip root /
       dest_arg = file_to_restore;
     }
-    return "'restore' %s%s'--gio' '--force' 'file://%s' '%s%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(extra, file_arg, backupdir, restoredir, dest_arg, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
+    return "'restore' '--gio' %s%s'--force' 'file://%s' '%s%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(file_arg, extra, backupdir, restoredir, dest_arg, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
   }
   else if (mode == Mode.VERIFY)
-    return "'restore' '--file-to-restore=%s/deja-dup/metadata' '--gio' '--force' 'file://%s' '%s/deja-dup/metadata' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(cachedir.substring(1), backupdir, cachedir, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
+    return "'restore' '--gio' '--file-to-restore=%s/deja-dup/metadata' '--force' 'file://%s' '%s/deja-dup/metadata' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(cachedir.substring(1), backupdir, cachedir, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
   else if (mode == Mode.LIST)
     return "'list-current-files' '--gio' 'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(backupdir, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
   else if (mode == Mode.REMOVE)
@@ -191,7 +191,7 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     args += "'--exclude=**' ";
   }
 
-  args += "%s%s'--gio' %s'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(extra, dry_str, source_str, backupdir, enc_str, archive, make_fd_arg(as_root));
+  args += "%s'--gio' %s%s'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(extra, dry_str, source_str, backupdir, enc_str, archive, make_fd_arg(as_root));
 
   return args;
 }
@@ -206,6 +206,7 @@ class BackupRunner : Object
   public string? detail = null;
   public string? error_str = null;
   public string? error_detail = null;
+  public string? restore_date = null;
   public List<File> restore_files = null;
   public OpCallback? callback = null;
   public bool is_full = false; // we don't often give INFO 3 which triggers is_full()
@@ -360,11 +361,14 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
     foreach (var file in array)
       br.restore_files.append(File.new_for_path(replace_keywords(file)));
   }
+  if (keyfile.has_key(group, "RestoreDate"))
+    br.restore_date = keyfile.get_string(group, "RestoreDate");
+
   var type = keyfile.get_string(group, "Type");
   if (type == "backup")
     br.op = new DejaDup.OperationBackup();
   else if (type == "restore")
-    br.op = new DejaDup.OperationRestore(restoredir, null, br.restore_files);
+    br.op = new DejaDup.OperationRestore(restoredir, br.restore_date, br.restore_files);
   else
     assert_not_reached();
   if (keyfile.has_key(group, "Success"))

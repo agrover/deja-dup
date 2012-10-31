@@ -1402,8 +1402,8 @@ internal class DuplicityJob : DejaDup.ToolJob
     
     var argv = new List<string>();
     foreach (string s in master_argv) argv.append(s);
-    foreach (string s in argv_extra) argv.append(s);
     foreach (string s in this.backend_argv) argv.append(s);
+    foreach (string s in argv_extra) argv.append(s);
 
     /* Set duplicity into right mode */
     if (argv_entire == null) {
