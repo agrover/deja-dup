@@ -1,0 +1,18 @@
+[Operation]
+Type=backup
+Settings=delete-after=500;
+IsFull=true
+
+[Duplicity]
+Runs=status;dry;backup;remove;status-restore;list;verify;
+
+[Duplicity status]
+#echo "INFO 3"
+#echo "chain-no-sig"
+#echo " full $(date --utc --date='1001 days ago' +%Y%m%dT%H%M%SZ) 1 enc"
+#echo "chain-complete"
+#echo " full $(date --utc --date='1000 days ago' +%Y%m%dT%H%M%SZ) 1 enc"
+OutputScript=true
+
+[Duplicity remove]
+RemoveButN=2

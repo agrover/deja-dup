@@ -23,7 +23,6 @@ LDTP_TESTS = \
 	cancel \
 	continue \
 	cycle \
-	delete \
 	encrypt \
 	full \
 	missing \

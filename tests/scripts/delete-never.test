@@ -1,0 +1,23 @@
+# Just confirm that even with ancient backups, we don't delete them with the
+# default 'keep forever' setting.  We had a bug where we did in the past!
+
+[Operation]
+Type=backup
+IsFull=true
+
+[Duplicity]
+Runs=status;dry;backup;status-restore;list;verify;
+
+[Duplicity status]
+#echo "INFO 3"
+#echo "chain-no-sig"
+#echo " full $(date --utc --date='1970-1-1' +%Y%m%dT%H%M%SZ) 1 noenc"
+#echo "chain-no-sig"
+#echo " full $(date --utc --date='1970-1-2' +%Y%m%dT%H%M%SZ) 1 noenc"
+#echo "chain-no-sig"
+#echo " full $(date --utc --date='1970-1-3' +%Y%m%dT%H%M%SZ) 1 noenc"
+#echo "chain-no-sig"
+#echo " full $(date --utc --date='1970-1-4' +%Y%m%dT%H%M%SZ) 1 noenc"
+#echo "chain-complete"
+#echo " full $(date --utc --date='1970-1-5' +%Y%m%dT%H%M%SZ) 1 noenc"
+OutputScript=true
