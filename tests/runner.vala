@@ -188,9 +188,8 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     args += "'--include=%s' ".printf(Environment.get_home_dir());
     args += include_args;
 
-    string[] excludes2 = {"/sys", "/proc", "/tmp"};
+    string[] excludes2 = {"/sys", "/proc", Environment.get_tmp_dir()};
     foreach (string ex in excludes2) {
-      ex = ex.replace("~", Environment.get_home_dir());
       if (FileUtils.test (ex, FileTest.EXISTS))
         args += "'--exclude=%s' ".printf(ex);
     }
@@ -200,7 +199,6 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
 
     string[] excludes3 = {"/home/.ecryptfs/%s/.Private".printf(Environment.get_user_name())};
     foreach (string ex in excludes3) {
-      ex = ex.replace("~", Environment.get_home_dir());
       if (FileUtils.test (ex, FileTest.EXISTS))
         args += "'--exclude=%s' ".printf(ex);
     }
@@ -624,9 +622,13 @@ int main(string[] args)
     return 1;
   }
 
-  var dir = "/tmp/deja-dup-test-XXXXXX";
-  dir = DirUtils.mkdtemp(dir);
-  Environment.set_variable("DEJA_DUP_TEST_HOME", dir, true);
+  try {
+    var dir = DirUtils.make_tmp("deja-dup-test-XXXXXX");
+    Environment.set_variable("DEJA_DUP_TEST_HOME", dir, true);
+  } catch (Error e) {
+    printerr("Could not make temporary dir\n");
+    return 1;
+  }
 
   Environment.set_variable("DEJA_DUP_TESTING", "1", true);
   Environment.set_variable("DEJA_DUP_LANGUAGE", "en", true);
