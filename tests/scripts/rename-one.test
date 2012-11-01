@@ -9,4 +9,5 @@ Runs=status-restore;list;restore;
 Output=true
 
 [Duplicity restore]
-ExtraArgs=--rename home/NULL home/@USER@
+#echo --rename home/NULL $(echo @HOME@ | sed 's|/||')
+ExtraArgs=^sh

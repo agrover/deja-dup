@@ -428,6 +428,17 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
   }
 }
 
+string get_string_field(KeyFile keyfile, string group, string key) throws Error
+{
+  var field = keyfile.get_string(group, key);
+  if (field == "^")
+    return replace_keywords(keyfile.get_comment(group, key));
+  if (field == "^sh")
+    return run_script(replace_keywords(keyfile.get_comment(group, key))).strip();
+  else
+    return replace_keywords(field);
+}
+
 void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) throws Error
 {
   string outputscript = null;
@@ -460,22 +471,22 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
     if (keyfile.has_key(group, "Encrypted"))
       encrypted = keyfile.get_boolean(group, "Encrypted");
     if (keyfile.has_key(group, "ExtraArgs")) {
-      extra_args = replace_keywords(keyfile.get_string(group, "ExtraArgs"));
+      extra_args = get_string_field(keyfile, group, "ExtraArgs");
       if (!extra_args.has_suffix(" "))
         extra_args += " ";
     }
     if (keyfile.has_key(group, "IncludeArgs")) {
-      include_args = replace_keywords(keyfile.get_string(group, "IncludeArgs"));
+      include_args = get_string_field(keyfile, group, "IncludeArgs");
       if (!include_args.has_suffix(" "))
         include_args += " ";
     }
     if (keyfile.has_key(group, "ExcludeArgs")) {
-      exclude_args = replace_keywords(keyfile.get_string(group, "ExcludeArgs"));
+      exclude_args = get_string_field(keyfile, group, "ExcludeArgs");
       if (!exclude_args.has_suffix(" "))
         exclude_args += " ";
     }
     if (keyfile.has_key(group, "FileToRestore"))
-      file_to_restore = replace_keywords(keyfile.get_string(group, "FileToRestore"));
+      file_to_restore = get_string_field(keyfile, group, "FileToRestore");
     if (keyfile.has_key(group, "Output") && keyfile.get_boolean(group, "Output"))
       outputscript = replace_keywords(keyfile.get_comment(group, "Output"));
     else if (keyfile.has_key(group, "OutputScript") && keyfile.get_boolean(group, "OutputScript"))
@@ -489,7 +500,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
     if (keyfile.has_key(group, "Stop"))
       stop = keyfile.get_boolean(group, "Stop");
     if (keyfile.has_key(group, "Script"))
-      script = replace_keywords(keyfile.get_string(group, "Script"));
+      script = get_string_field(keyfile, group, "Script");
   }
 
   if (type == "status")
