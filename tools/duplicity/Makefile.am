@@ -59,5 +59,9 @@ libduplicity_la_vala.stamp: $(top_srcdir)/config.h
 dist-hook:
 	cd $(distdir) && rm -f $(libduplicity_la_VALASOURCES:.vala=.c) \
 	                       libduplicity_la_vala.stamp
+	rm -f libduplicity_la_vala.stamp # Start distcheck workarounds
+$(srcdir)/libduplicity_la_vala.stamp: chmod-srcdir
+chmod-srcdir:
+	@chmod u+w $(srcdir) # End distcheck workarounds
 
 CLEANFILES = libduplicity_la_vala.stamp

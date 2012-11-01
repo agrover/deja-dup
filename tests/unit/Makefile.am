@@ -62,5 +62,10 @@ dist-hook:
 	                    unit_tests_vala.stamp
 	cd $(distdir) && rm $(network_VALASOURCES:.vala=.c) \
 	                    network_vala.stamp
+	rm -f unit_tests_vala.stamp network_vala.stamp # Start distcheck workarounds
+$(srcdir)/unit_tests_vala.stamp: chmod-srcdir
+$(srcdir)/network_vala.stamp: chmod-srcdir
+chmod-srcdir:
+	@chmod u+w $(srcdir) # End distcheck workarounds
 
 CLEANFILES = unit_tests_vala.stamp network_vala.stamp

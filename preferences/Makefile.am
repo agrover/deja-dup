@@ -80,5 +80,10 @@ dist-hook:
 	cd $(distdir) && rm $(shell echo $(libdeja_dup_la_VALASOURCES:.vala=.c) \
 	                                 $(deja_dup_preferences_VALASOURCES:.vala=.c) | tr ' ' '\n' | sort | uniq) \
 	                    libdeja_dup_la_vala.stamp deja_dup_preferences_vala.stamp
+	rm -f libdeja_dup_la_vala.stamp deja_dup_preferences_vala.stamp # Start distcheck workarounds
+$(srcdir)/libdeja_dup_la_vala.stamp: chmod-srcdir
+$(srcdir)/deja_dup_preferences_vala.stamp: chmod-srcdir
+chmod-srcdir:
+	@chmod u+w $(srcdir) # End distcheck workarounds
 
 CLEANFILES = libdeja_dup_la_vala.stamp deja_dup_preferences_vala.stamp

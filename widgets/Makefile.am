@@ -89,5 +89,9 @@ libwidgets_la_vala.stamp: $(top_srcdir)/config.h
 dist-hook:
 	cd $(distdir) && rm -f $(libwidgets_la_VALASOURCES:.vala=.c) \
 	                       widgets.h libwidgets_la_vala.stamp
+	rm -f libwidgets_la_vala.stamp # Start distcheck workarounds
+$(srcdir)/libwidgets_la_vala.stamp: chmod-srcdir
+chmod-srcdir:
+	@chmod u+w $(srcdir) # End distcheck workarounds
 
 CLEANFILES = libwidgets_la_vala.stamp

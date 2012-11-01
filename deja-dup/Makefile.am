@@ -67,5 +67,9 @@ deja_dup_vala.stamp: $(top_srcdir)/config.h
 dist-hook:
 	cd $(distdir) && rm $(deja_dup_VALASOURCES:.vala=.c) \
 	                    deja_dup_vala.stamp
+	rm -f deja_dup_vala.stamp # Start distcheck workarounds
+$(srcdir)/deja_dup_vala.stamp: chmod-srcdir
+chmod-srcdir:
+	@chmod u+w $(srcdir) # End distcheck workarounds
 
 CLEANFILES = deja_dup_vala.stamp

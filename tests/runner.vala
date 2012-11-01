@@ -21,6 +21,22 @@ using GLib;
 
 bool system_mode = false;
 
+string get_top_builddir()
+{
+  var builddir = Environment.get_variable("top_builddir");
+  if (builddir == null)
+    builddir = "..";
+  return builddir;
+}
+
+string get_srcdir()
+{
+  var srcdir = Environment.get_variable("srcdir");
+  if (srcdir == null)
+    srcdir = ".";
+  return srcdir;
+}
+
 void setup_gsettings()
 {
   if (!system_mode) {
@@ -32,7 +48,7 @@ void setup_gsettings()
     var data_dirs = Environment.get_variable("XDG_DATA_DIRS");
     Environment.set_variable("XDG_DATA_DIRS", "%s:%s".printf(Path.build_filename(dir, "share"), data_dirs), true);
 
-    if (Posix.system("cp ../data/org.gnome.DejaDup.gschema.xml %s".printf(schema_dir)) != 0)
+    if (Posix.system("cp %s/data/org.gnome.DejaDup.gschema.xml %s".printf(get_top_builddir(), schema_dir)) != 0)
       warning("Could not copy schema to %s", schema_dir);
 
     if (Posix.system("glib-compile-schemas %s".printf(schema_dir)) != 0)
@@ -50,11 +66,11 @@ void backup_setup()
   var dir = Environment.get_variable("DEJA_DUP_TEST_HOME");
 
   if (!system_mode)
-    Environment.set_variable("DEJA_DUP_TOOLS_PATH", "../tools/duplicity", true);
+    Environment.set_variable("DEJA_DUP_TOOLS_PATH", "%s/tools/duplicity".printf(get_top_builddir()), true);
 
   Environment.set_variable("DEJA_DUP_TEST_MOCKSCRIPT", Path.build_filename(dir, "mockscript"), true);
   Environment.set_variable("XDG_CACHE_HOME", Path.build_filename(dir, "cache"), true);
-  Environment.set_variable("PATH", "./mock:" + Environment.get_variable("PATH"), true);
+  Environment.set_variable("PATH", get_srcdir() + "/mock:" + Environment.get_variable("PATH"), true);
 
   var settings = DejaDup.get_settings();
   settings.set_string(DejaDup.BACKEND_KEY, "file");
@@ -65,8 +81,9 @@ void backup_setup()
 void backup_teardown()
 {
   var path = Environment.get_variable("PATH");
-  if (path.has_prefix("./mock:")) {
-    path = path.substring(7);
+  var mockpath = get_srcdir() + "/mock:";
+  if (path.has_prefix(mockpath)) {
+    path = path.substring(mockpath.length);
     Environment.set_variable("PATH", path, true);
   }
 

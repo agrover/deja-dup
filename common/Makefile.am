@@ -81,6 +81,10 @@ libcommon_la_vala.stamp: $(top_srcdir)/config.h
 dist-hook:
 	cd $(distdir) && rm -f $(libcommon_la_VALASOURCES:.vala=.c) \
 	                       common.h libcommon_la_vala.stamp
+	rm -f libcommon_la_vala.stamp # Start distcheck workarounds
+$(srcdir)/libcommon_la_vala.stamp: chmod-srcdir
+chmod-srcdir:
+	@chmod u+w $(srcdir) # End distcheck workarounds
 
 CLEANFILES = libcommon_la_vala.stamp
 

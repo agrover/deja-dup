@@ -22,13 +22,19 @@ check_PROGRAMS = \
 	runner
 
 check: runner
+	@if [ "$(top_srcdir)" != "$(top_builddir)" ]; then \
+		cp "$(top_srcdir)/tools/duplicity/duplicity.plugin" "$(top_builddir)/tools/duplicity"; \
+	fi
 	@set -e; for test in $(srcdir)/scripts/*.test; do \
-		dbus-launch ./runner $$test; \
+		top_builddir=$(top_builddir) srcdir=$(srcdir) dbus-launch ./runner $$test; \
 	done
+	@if [ "$(top_srcdir)" != "$(top_builddir)" ]; then \
+		rm -f "$(top_builddir)/tools/duplicity/duplicity.plugin"; \
+	fi
 
 check-system: runner
 	@set -e; for test in $(srcdir)/scripts/*.test; do \
-		dbus-launch ./runner --system $$test; \
+		top_builddir=$(top_builddir) srcdir=$(srcdir) dbus-launch ./runner --system $$test; \
 	done
 
 AM_CFLAGS = \
@@ -61,6 +67,10 @@ runner_vala.stamp: $(top_srcdir)/config.h
 dist-hook:
 	cd $(distdir) && rm $(runner_VALASOURCES:.vala=.c) \
 	                    runner_vala.stamp
+	rm -f runner_vala.stamp # Start distcheck workarounds
+$(srcdir)/runner_vala.stamp: chmod-srcdir
+chmod-srcdir:
+	@chmod u+w $(srcdir) # End distcheck workarounds
 
 EXTRA_DIST = \
 	interactive \
