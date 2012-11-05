@@ -212,21 +212,40 @@ public class BackendU1 : Backend
 
   public override async void get_envp() throws Error
   {
-    bool found = false;
     var obj = get_creds_proxy();
     if (obj.get_name_owner() == null) {
       ask_password();
       return;
     }
 
+    var found = false;
+    var envp = new List<string>();
     var listener = new Listener(obj, "find_credentials", null, (name, args) => {
-      if (name == "CredentialsFound")
-        found = true;
+      if (name == "CredentialsFound") {
+        VariantIter iter;
+        args.get("(a{ss})", out iter);
+        string key, val;
+        string consumer_key = null, consumer_secret = null, token = null, token_secret = null;
+        while (iter.next("{ss}", out key, out val)) {
+          if (key == "consumer_key")
+            consumer_key = val;
+          else if (key == "consumer_secret")
+            consumer_secret = val;
+          else if (key == "token")
+            token = val;
+          else if (key == "token_secret")
+            token_secret = val;
+        }
+        if (consumer_key != null && consumer_secret != null && token != null && token_secret != null) {
+          envp.append("FTP_PASSWORD=%s:%s:%s:%s".printf(consumer_key, consumer_secret, token, token_secret));
+          found = true;
+        }
+      }
     });
     listener.run();
 
     if (found)
-      envp_ready(true, null);
+      envp_ready(true, envp);
     else
       ask_password();
   }
