@@ -178,11 +178,27 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
   if (mode == Mode.STATUS || mode == Mode.NONE || mode == Mode.DRY || mode == Mode.BACKUP) {
     args += "'--exclude=%s' '--include=%s/deja-dup/metadata' ".printf(backupdir, cachedir);
 
-    string[] excludes1 = {"~/Downloads", "~/.local/share/Trash", "~/.xsession-errors", "~/.thumbnails", "~/.Private", "~/.gvfs", "~/.adobe/Flash_Player/AssetCache"};
+    string[] excludes1 = {"~/Downloads", "~/.local/share/Trash", "~/.xsession-errors", "~/.thumbnails", "~/.steam/root", "~/.Private", "~/.gvfs", "~/.adobe/Flash_Player/AssetCache"};
     foreach (string ex in excludes1) {
       ex = ex.replace("~", Environment.get_home_dir());
-      if (FileUtils.test (ex, FileTest.EXISTS))
+      if (FileUtils.test (ex, FileTest.IS_SYMLINK | FileTest.EXISTS))
         args += "'--exclude=%s' ".printf(ex);
+    }
+
+    string[] symlinks = {"~/.steam/root"};
+    foreach (string sym in symlinks) {
+      sym = sym.replace("~", Environment.get_home_dir());
+      if (FileUtils.test (sym, FileTest.IS_SYMLINK) &&
+          FileUtils.test (sym, FileTest.EXISTS)) {
+        try {
+          sym = FileUtils.read_link (sym);
+          sym = Filename.to_utf8 (sym, -1, null, null);
+          args += "'--exclude=%s' ".printf(sym);
+        }
+        catch (Error e) {
+          assert_not_reached();
+        }
+      }
     }
 
     args += "'--include=%s' ".printf(Environment.get_home_dir());
