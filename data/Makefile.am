@@ -61,8 +61,8 @@ EXTRA_DIST = deja-dup.desktop.in deja-dup-ccpanel.desktop.in deja-dup-preference
 CLEANFILES = deja-dup.desktop deja-dup-ccpanel.desktop deja-dup-preferences.desktop deja-dup-preferences.desktop.in deja-dup-monitor.desktop deja-dup-monitor.desktop.in org.gnome.DejaDup.gschema.xml
 
 check: $(desktop_DATA) $(autostart_DATA)
-	for desktop in $(desktop_DATA) $(autostart_DATA); do \
-		desktop-file-validate $${desktop} || exit 1; \
+	@for desktop in $(desktop_DATA) $(autostart_DATA); do \
+		desktop-file-validate --no-hints $${desktop} || exit 1; \
 	done
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t
