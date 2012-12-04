@@ -2,7 +2,7 @@
 
 [Operation]
 Type=backup
-Settings=include-list=['@TEST_HOME@/1/b', '$HOME'];exclude-list=['@TEST_HOME@/a/b/c', '$TRASH', '$DOWNLOAD'];
+Settings=include-list=['@TEST_HOME@/1/b', '$HOME'];exclude-list=['$TRASH', '$DOWNLOAD', '@TEST_HOME@/a/b/c'];
 Script=mkdir -p @TEST_HOME@/a/b/c && ln -s a @TEST_HOME@/1
 
 [Duplicity]

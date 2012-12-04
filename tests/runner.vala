@@ -185,15 +185,18 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
         args += "'--exclude=%s' ".printf(ex);
     }
 
-    string[] symlinks = {"~/.steam/root"};
-    foreach (string sym in symlinks) {
+    var sys_sym_excludes = "";
+    foreach (string sym in excludes1) {
       sym = sym.replace("~", Environment.get_home_dir());
       if (FileUtils.test (sym, FileTest.IS_SYMLINK) &&
           FileUtils.test (sym, FileTest.EXISTS)) {
         try {
           sym = FileUtils.read_link (sym);
           sym = Filename.to_utf8 (sym, -1, null, null);
-          args += "'--exclude=%s' ".printf(sym);
+          if (sym.has_prefix (Environment.get_home_dir()))
+            args += "'--exclude=%s' ".printf(sym);
+          else // delay non-home paths until very end
+            sys_sym_excludes += "'--exclude=%s' ".printf(sym);
         }
         catch (Error e) {
           assert_not_reached();
@@ -211,13 +214,14 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     }
 
     args += "'--exclude=%s/deja-dup' '--exclude=%s' ".printf(cachedir, cachedir);
-    args += exclude_args;
 
-    string[] excludes3 = {"/home/.ecryptfs/%s/.Private".printf(Environment.get_user_name())};
-    foreach (string ex in excludes3) {
-      if (FileUtils.test (ex, FileTest.EXISTS))
-        args += "'--exclude=%s' ".printf(ex);
-    }
+    // Really, these following two lists can be interweaved, depending on
+    // what the paths are and the order in gsettings.  But tests are careful
+    // to avoid having us duplicate the sorting logic in DuplicityJob by
+    // putting /tmp paths at the end of exclude lists.  This lets us get away
+    // with the simple logic of just appending the two lists.
+    args += exclude_args;
+    args += sys_sym_excludes;
 
     args += "'--exclude=**' ";
   }
