@@ -37,6 +37,8 @@ void parse_dir()
   parse_one_dir("$PICTURES", Environment.get_user_special_dir(UserDirectory.PICTURES));
   parse_one_dir("$PUBLIC_SHARE", Environment.get_user_special_dir(UserDirectory.PUBLIC_SHARE));
   parse_one_dir("$TEMPLATES", Environment.get_user_special_dir(UserDirectory.TEMPLATES));
+  parse_one_dir("/backup/$USER", Path.build_filename("/backup", Environment.get_user_name()));
+  parse_one_dir("backup/$USER", Path.build_filename(Environment.get_home_dir(), "backup", Environment.get_user_name()));
   parse_one_dir("$VIDEOS", Environment.get_user_special_dir(UserDirectory.VIDEOS));
   parse_one_dir("VIDEOS", Path.build_filename(Environment.get_home_dir(), "VIDEOS"));
   parse_one_dir("/VIDEOS", "/VIDEOS");
