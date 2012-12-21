@@ -92,6 +92,7 @@ void show_prompt_notification()
 {
   Notify.init(_("Backup"));
   var note = new Notify.Notification(get_header(), get_body(), "deja-dup");
+  note.set_hint_string("desktop-entry", "deja-dup");
   note.add_action("cancel", get_cancel_button(false), () => {
     cancel();
     try {

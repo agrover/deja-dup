@@ -115,6 +115,7 @@ static void notify_delay(string header, string reason)
     Notify.init(_("Backup"));
     note = new Notify.Notification(header, reason,
                                    "deja-dup");
+    note.set_hint_string("desktop-entry", "deja-dup");
     note.closed.connect((n) => {note = null;});
   }
   else

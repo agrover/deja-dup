@@ -132,6 +132,7 @@ public abstract class StatusIcon : Object
 
       Notify.init(_("Backup"));
       note = new Notify.Notification(msg, more, "deja-dup");
+      note.set_hint_string("desktop-entry", "deja-dup");
       try {
         note.show();
       }
@@ -231,6 +232,7 @@ class ShellStatusIcon : StatusIcon
       Notify.init(_("Backup"));
       note = new Notify.Notification(_("Starting scheduled backup"), null,
                                      "deja-dup");
+      note.set_hint_string("desktop-entry", "deja-dup");
       note.add_action("show-details", _("Show Progress"), () => {show_window();});
       note.add_action("later", later_label.replace("_", ""), () => {later();});
       note.add_action("skip", skip_label.replace("_", ""), () => {skip();});
