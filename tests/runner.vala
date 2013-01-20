@@ -72,6 +72,10 @@ void backup_setup()
   Environment.set_variable("XDG_CACHE_HOME", Path.build_filename(dir, "cache"), true);
   Environment.set_variable("PATH", get_srcdir() + "/mock:" + Environment.get_variable("PATH"), true);
 
+  var tempdir = Path.build_filename(dir, "tmp");
+  DejaDup.ensure_directory_exists(tempdir);
+  Environment.set_variable("DEJA_DUP_TEMPDIR", tempdir, true);
+
   var settings = DejaDup.get_settings();
   settings.set_string(DejaDup.BACKEND_KEY, "file");
   settings = DejaDup.get_settings(DejaDup.FILE_ROOT);
@@ -138,22 +142,30 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
 
   var archive = tmp_archive ? "?" : "%s/deja-dup".printf(cachedir);
 
+  string enc_str = "";
+  if (!encrypted)
+    enc_str = "--no-encryption ";
+
+  var tempdir = Path.build_filename(test_home, "tmp");
+
+  var end_str = "%s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--tempdir=%s' '%s'".printf(enc_str, archive, tempdir, make_fd_arg(as_root));
+
   if (mode == Mode.CLEANUP)
-    return "cleanup '--force' 'file://%s' '--gio' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(backupdir, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
+    return "cleanup '--force' 'file://%s' '--gio' %s".printf(backupdir, end_str);
   else if (mode == Mode.RESTORE) {
     string file_arg = "", dest_arg = "";
     if (file_to_restore != null) {
       file_arg = "'--file-to-restore=%s' ".printf(file_to_restore.substring(1)); // skip root /
       dest_arg = file_to_restore;
     }
-    return "'restore' '--gio' %s%s'--force' 'file://%s' '%s%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(file_arg, extra, backupdir, restoredir, dest_arg, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
+    return "'restore' '--gio' %s%s'--force' 'file://%s' '%s%s' %s".printf(file_arg, extra, backupdir, restoredir, dest_arg, end_str);
   }
   else if (mode == Mode.VERIFY)
-    return "'restore' '--gio' '--file-to-restore=%s/deja-dup/metadata' '--force' 'file://%s' '%s/deja-dup/metadata' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(cachedir.substring(1), backupdir, cachedir, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
+    return "'restore' '--gio' '--file-to-restore=%s/deja-dup/metadata' '--force' 'file://%s' '%s/deja-dup/metadata' %s".printf(cachedir.substring(1), backupdir, cachedir, end_str);
   else if (mode == Mode.LIST)
-    return "'list-current-files' '--gio' 'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(backupdir, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
+    return "'list-current-files' '--gio' 'file://%s' %s".printf(backupdir, end_str);
   else if (mode == Mode.REMOVE)
-    return "'remove-all-but-n-full' '%d' '--force' 'file://%s' '--gio' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(remove_n, backupdir, encrypted ? "" : "'--no-encryption' ", archive, make_fd_arg(as_root));
+    return "'remove-all-but-n-full' '%d' '--force' 'file://%s' '--gio' %s".printf(remove_n, backupdir, end_str);
 
   string source_str = "";
   if (mode == Mode.DRY || mode == Mode.BACKUP)
@@ -162,10 +174,6 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
   string dry_str = "";
   if (mode == Mode.DRY)
     dry_str = "--dry-run ";
-
-  string enc_str = "";
-  if (!encrypted)
-    enc_str = "--no-encryption ";
 
   string args = "";
 
@@ -207,7 +215,7 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     args += "'--include=%s' ".printf(Environment.get_home_dir());
     args += include_args;
 
-    string[] excludes2 = {"/sys", "/proc", Environment.get_tmp_dir()};
+    string[] excludes2 = {"/sys", "/proc", tempdir};
     foreach (string ex in excludes2) {
       if (FileUtils.test (ex, FileTest.EXISTS))
         args += "'--exclude=%s' ".printf(ex);
@@ -226,7 +234,7 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     args += "'--exclude=**' ";
   }
 
-  args += "%s'--gio' %s%s'file://%s' %s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '%s'".printf(extra, dry_str, source_str, backupdir, enc_str, archive, make_fd_arg(as_root));
+  args += "%s'--gio' %s%s'file://%s' %s".printf(extra, dry_str, source_str, backupdir, end_str);
 
   return args;
 }
@@ -569,10 +577,15 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
   if (as_root)
     dupscript += "\n" + "AS_ROOT";
 
-  if (script != null)
-    dupscript += "\n" + "SCRIPT: " + script;
-  else if (mode == Mode.VERIFY)
-    dupscript += "\n" + "SCRIPT: mkdir -p %s/deja-dup/metadata; echo 'This folder can be safely deleted.\\n0' > %s/deja-dup/metadata/README".printf(cachedir, cachedir);
+  var verify_script = "mkdir -p %s/deja-dup/metadata && echo 'This folder can be safely deleted.\\n0' > %s/deja-dup/metadata/README".printf(cachedir, cachedir);
+  if (mode == Mode.VERIFY)
+    dupscript += "\n" + "SCRIPT: " + verify_script;
+  if (script != null) {
+    if (mode == Mode.VERIFY)
+      dupscript += " && " + script;
+    else
+      dupscript += "\n" + "SCRIPT: " + script;
+  }
 
   if (passphrase)
     dupscript += "\n" + "PASSPHRASE: test";
