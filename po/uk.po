@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-20 21:34-0400\n"
-"PO-Revision-Date: 2012-09-25 14:00+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2013-01-09 09:06+0000\n"
+"Last-Translator: Сергій Найтінгейл <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-09-26 05:13+0000\n"
-"X-Generator: Launchpad (build 16022)\n"
+"X-Launchpad-Export-Date: 2013-01-10 05:25+0000\n"
+"X-Generator: Launchpad (build 16412)\n"
 
 #. Translators: "Backup" is a noun
 #: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
@@ -59,7 +59,7 @@ msgstr "Створити резервну копію"
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:304
+#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:325
 msgid "Backup Monitor"
 msgstr "Спостурігач резервного копіювання"
 
@@ -79,6 +79,10 @@ msgid ""
 "and $VIDEO are recognized as the user’s special directories. Relative "
 "entries are relative to the user’s home directory."
 msgstr ""
+"Список тек, які необхідно заархівувати. Зарезервовані значення $HOME, "
+"$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+"$TEMPLATES, $TRASH та $VIDEO розпізнаються як спеціальні теки користувача. "
+"Відносні шляхи вказуються відносно домашньої теки."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
 #: ../preferences/Preferences.vala:168
@@ -92,6 +96,10 @@ msgid ""
 "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
 "directories. Relative entries are relative to the user’s home directory."
 msgstr ""
+"Список тек, які не будуть заархівовані. Зарезервовані значення $HOME, "
+"$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+"$TEMPLATES, $TRASH та $VIDEO розпізнаються як спеціальні теки користувача. "
+"Відносні шляхи вказуються відносно домашньої теки."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
 msgid "Whether the welcome screen has been dismissed"
@@ -173,6 +181,10 @@ msgid ""
 "don’t know about backups. This time should be either ‘disabled’ to turn off "
 "this check or in ISO 8601 format."
 msgstr ""
+"Після входу користувача до системи, сервіс Déjà Dup перевіряє, чи треба "
+"питати про необхідність резервного копіювання. Це спростить роботу "
+"користувачів, які небагато знають про резервне копіювання. Час задається у "
+"форматі ISO 8601. Для відключення перевірок вкажіть значення 'вимкнено'."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:20
 msgid ""
@@ -240,6 +252,8 @@ msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr ""
+"В якому наборі Amazon S3 зберігає файли. Його наявність не обов'язкова. "
+"Припускається лише справжнє ім'я хоста."
 
 #. Left this way for historical reasons, should be '$HOSTNAME'.  See convert_s3_folder_to_hostname()
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
