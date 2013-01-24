@@ -223,6 +223,7 @@ public abstract class Operation : Object
     finished = true;
 
     unclaim_bus();
+    yield DejaDup.clean_tempdirs();
 
     done(success, cancelled, detail);
   }

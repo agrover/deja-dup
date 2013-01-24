@@ -117,11 +117,11 @@ public class OperationBackup : Operation
       rv.append(Path.build_filename(dir, ".xsession-errors"));
     }
     
-    // Some problematic directories like /tmp and /proc should be left alone
-    dir = Environment.get_tmp_dir();
-    if (dir != null)
-      rv.append(dir);
-    
+    // Skip all of our temporary directories
+    foreach (var tempdir in DejaDup.get_tempdirs())
+      rv.append(tempdir);
+
+    // Skip kernel directories
     rv.append("/proc");
     rv.append("/sys");
     

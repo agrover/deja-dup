@@ -29,8 +29,30 @@ internal class DuplicityInstance : Object
   public bool verbose {get; private set; default = false;}
   public string forced_cache_dir {get; set; default = null;}
   
-  public virtual void start(List<string> argv_in, List<string>? envp_in,
-                            bool as_root = false) throws Error
+  public async void start(List<string> argv_in, List<string>? envp_in,
+                          bool as_root = false)
+  {
+    try {
+      /* Make deep copies of the lists, so if our caller doesn't yield, the
+         lists won't be invalidated. */
+      var argv = new List<string>();
+      foreach (var arg in argv_in)
+        argv.append(arg);
+      var envp = new List<string>();
+      foreach (var env in envp_in)
+        envp.append(env);
+      if (!yield start_internal(argv, envp, as_root))
+        done(false, false);
+    }
+    catch (Error e) {
+      // Fake a generic message from duplicity
+      message({"ERROR", "1"}, null, e.message);
+      done(false, false);
+    }
+  }
+
+  async bool start_internal(List<string> argv_in, List<string>? envp_in,
+                            bool as_root) throws Error
   {
     var verbose_str = Environment.get_variable("DEJA_DUP_DEBUG");
     if (verbose_str != null && int.parse(verbose_str) > 0)
@@ -73,46 +95,29 @@ internal class DuplicityInstance : Object
     if (cache_dir == null)
       cache_dir = Environment.get_user_cache_dir();
     if (cache_dir != null) {
-      bool add_dir = false;
-      var cache_file = File.new_for_path(cache_dir);
-      cache_file = cache_file.get_child(Config.PACKAGE);
-      try {
-        if (cache_file.make_directory_with_parents(null))
-          add_dir = true;
-      }
-      catch (IOError.EXISTS e) {
-        add_dir = true; // ignore
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
-      if (add_dir)
-        argv.append("--archive-dir=" + cache_file.get_path());
+      cache_dir = Path.build_filename(cache_dir, Config.PACKAGE);
+      if (DejaDup.ensure_directory_exists(cache_dir))
+        argv.append("--archive-dir=" + cache_dir);
     }
-    
+
+    // Specify tempdir
+    var tempdir = yield DejaDup.get_tempdir();
+    if (DejaDup.ensure_directory_exists(tempdir))
+      argv.append("--tempdir=%s".printf(tempdir));
+
     // Add logging argument
     if (as_root) {
       // Make log file
       int logfd = 0;
-      try {
-        string logname;
-        logfd = FileUtils.open_tmp(Config.PACKAGE + "-XXXXXX", out logname);
-        logfile = File.new_for_path(logname);
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-        done(false, false);
-        return;
-      }
-      
+      string logname;
+      logfd = FileUtils.open_tmp(Config.PACKAGE + "-XXXXXX", out logname);
+      logfile = File.new_for_path(logname);
       argv.append("--log-file=%s".printf(logfile.get_path()));
     }
     else {
       // Open pipes to communicate with subprocess
-      if (Posix.pipe(pipes) != 0) {
-        done(false, false);
-        return;
-      }
+      if (Posix.pipe(pipes) != 0)
+        return false;
 
       argv.append("--log-fd=%d".printf(pipes[1]));
     }
@@ -192,9 +197,10 @@ internal class DuplicityInstance : Object
     if (pipes[1] != -1)
       Posix.close(pipes[1]);
     
-    read_log.begin();
+    yield read_log();
+    return true;
   }
-  
+
   public bool is_started()
   {
     return (int)child_pid > 0;

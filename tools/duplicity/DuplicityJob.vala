@@ -1460,13 +1460,7 @@ internal class DuplicityJob : DejaDup.ToolJob
     }
 
     /* Start duplicity instance */
-    try {
-      inst.start(argv, envp, needs_root);
-    }
-    catch (Error e) {
-      show_error(e.message);
-      done(false, false, null);
-    }
+    inst.start.begin(argv, envp, needs_root);
   }
 }
 

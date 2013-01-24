@@ -1,0 +1,12 @@
+# Make sure we clean up the tempdir that we give to duplicity after we're done
+
+[Operation]
+Type=backup
+Script=mkdir -p @TEST_HOME@/tmp/duplicity-blarg @TEST_HOME@/tmp/nope
+
+[Duplicity]
+Runs=status;dry;backup;status-restore;list;verify;
+
+# Check at end of everything that we cleared the temp files
+[Duplicity verify]
+Script=test ! -e @TEST_HOME@/tmp/duplicity-blarg -a -d @TEST_HOME@/tmp/nope
