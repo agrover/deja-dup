@@ -70,7 +70,10 @@ void backup_setup()
 
   Environment.set_variable("DEJA_DUP_TEST_MOCKSCRIPT", Path.build_filename(dir, "mockscript"), true);
   Environment.set_variable("XDG_CACHE_HOME", Path.build_filename(dir, "cache"), true);
-  Environment.set_variable("PATH", get_srcdir() + "/mock:" + Environment.get_variable("PATH"), true);
+  Environment.set_variable("PATH",
+                           get_srcdir() + "/mock:" +
+                             Environment.get_variable("DEJA_DUP_TEST_PATH"),
+                           true);
 
   var tempdir = Path.build_filename(dir, "tmp");
   DejaDup.ensure_directory_exists(tempdir);
@@ -84,12 +87,9 @@ void backup_setup()
 
 void backup_teardown()
 {
-  var path = Environment.get_variable("PATH");
-  var mockpath = get_srcdir() + "/mock:";
-  if (path.has_prefix(mockpath)) {
-    path = path.substring(mockpath.length);
-    Environment.set_variable("PATH", path, true);
-  }
+  Environment.set_variable("PATH",
+                           Environment.get_variable("DEJA_DUP_TEST_PATH"),
+                           true);
 
   var file = File.new_for_path(Environment.get_variable("DEJA_DUP_TEST_MOCKSCRIPT"));
   if (file.query_exists(null)) {
@@ -243,6 +243,8 @@ class BackupRunner : Object
 {
   public delegate void OpCallback (DejaDup.Operation op);
   public DejaDup.Operation op = null;
+  public string path = null;
+  public string script = null;
   public string? init_error = null;
   public bool success = true;
   public bool cancelled = false;
@@ -258,6 +260,12 @@ class BackupRunner : Object
 
   public void run()
   {
+    if (script != null)
+      run_script(script);
+
+    if (path != null)
+      Environment.set_variable("PATH", path, true);
+
     string header, msg;
     if (!DejaDup.initialize(out header, out msg)) {
       if (header + "\n" + msg != init_error)
@@ -369,9 +377,13 @@ string replace_keywords(string in)
 {
   var home = Environment.get_home_dir();
   var user = Environment.get_user_name();
+  var mockdir = get_srcdir() + "/mock";
   var cachedir = Environment.get_variable("XDG_CACHE_HOME");
   var test_home = Environment.get_variable("DEJA_DUP_TEST_HOME");
+  var path = Environment.get_variable("PATH");
   return in.replace("@HOME@", home).
+            replace("@MOCK_DIR@", mockdir).
+            replace("@PATH@", path).
             replace("@USER@", user).
             replace("@XDG_CACHE_HOME@", cachedir).
             replace("@TEST_HOME@", test_home);
@@ -434,8 +446,10 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
     br.error_detail = keyfile.get_string(group, "ErrorDetail");
   if (keyfile.has_key(group, "Passphrases"))
     br.passphrases = keyfile.get_integer(group, "Passphrases");
+  if (keyfile.has_key(group, "Path"))
+    br.path = replace_keywords(keyfile.get_string(group, "Path"));
   if (keyfile.has_key(group, "Script"))
-    run_script(replace_keywords(keyfile.get_string(group, "Script")));
+    br.script = replace_keywords(keyfile.get_string(group, "Script"));
   if (keyfile.has_key(group, "Settings")) {
     var settings_list = keyfile.get_string_list(group, "Settings");
     var settings = DejaDup.get_settings();
@@ -673,6 +687,10 @@ int main(string[] args)
   if (args.length > 1)
     script = args[1];
   Environment.set_variable("DEJA_DUP_TEST_SCRIPT", script, true);
+
+  // Save PATH, as tests might reset it on us
+  Environment.set_variable("DEJA_DUP_TEST_PATH",
+                           Environment.get_variable("PATH"), true);
 
   var parts = script.split("/");
   var suitename = parts[parts.length - 2];

@@ -45,7 +45,8 @@ internal class DuplicityInstance : Object
         done(false, false);
     }
     catch (Error e) {
-      warning("%s\n", e.message);
+      // Fake a generic message from duplicity
+      message({"ERROR", "1"}, null, e.message);
       done(false, false);
     }
   }
