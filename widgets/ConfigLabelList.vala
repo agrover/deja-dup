@@ -35,10 +35,7 @@ public class ConfigLabelList : ConfigLabel
   protected override async void set_from_config()
   {
     string val = null;
-    var slist_val = settings.get_value(key);
-    string*[] slist = slist_val.get_strv();
-
-    var list = DejaDup.parse_dir_list(slist);
+    var list = settings.get_file_list(key);
 
     foreach (File f in list) {
       string s = yield DejaDup.get_nickname(f);

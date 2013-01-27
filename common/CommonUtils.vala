@@ -565,8 +565,7 @@ public async string get_tempdir()
   // This is admittedly fast and loose, but our primary concern is just
   // avoiding silly choices like tmpfs or tiny special /tmp partitions.
   var settings = get_settings();
-  var include_val = settings.get_value(INCLUDE_LIST_KEY);
-  var include_list = parse_dir_list(include_val.get_strv());
+  var include_list = settings.get_file_list(INCLUDE_LIST_KEY);
   File main_include = null;
   var home = File.new_for_path(Environment.get_home_dir());
   foreach (var include in include_list) {

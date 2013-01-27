@@ -59,6 +59,12 @@ public class FilteredSettings : Settings
       base.set_value(k, v);
   }
 
+  public new File[] get_file_list(string k) {
+    // If we are reading a file path, replace some special keywords.
+    var val = get_value(k);
+    return parse_dir_list(val.get_strv());
+  }
+
   // TODO: bytestring, strv
 }
 

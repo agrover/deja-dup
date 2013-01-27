@@ -225,10 +225,7 @@ public class ConfigList : ConfigWidget
 
   protected override async void set_from_config()
   {
-    var slist_val = settings.get_value(key);
-    string*[] slist = slist_val.get_strv();
-    
-    var list = DejaDup.parse_dir_list(slist);
+    var list = settings.get_file_list(key);
     
     Gtk.ListStore model;
     tree.get("model", out model);
@@ -295,6 +292,8 @@ public class ConfigList : ConfigWidget
     if (files == null)
       return false;
 
+    // Explicitly do not call get_file_list here, because we want to avoid
+    // modifying existing entries at all when we write the string list back.
     var slist_val = settings.get_value(key);
     string*[] slist = slist_val.get_strv();
     bool rv = false;
@@ -320,12 +319,6 @@ public class ConfigList : ConfigWidget
       settings.set_value(key, new Variant.strv(slist));
     }
     return rv;
-  }
-
-  public string[] get_files()
-  {
-    var slist_val = settings.get_value(key);
-    return slist_val.dup_strv();
   }
 
   public void write_to_config(Gtk.TreeModel model, Gtk.TreePath? path)
