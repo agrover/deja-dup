@@ -23,9 +23,11 @@ namespace DejaDup {
 
 public class ConfigEntry : ConfigWidget
 {
-  public ConfigEntry(string key, string ns="")
+  public bool is_uri {get; set;}
+
+  public ConfigEntry(string key, string ns="", bool is_uri=false)
   {
-    Object(key: key, ns: ns);
+    Object(key: key, ns: ns, is_uri: is_uri);
   }
   
   public string get_text()
@@ -52,9 +54,7 @@ public class ConfigEntry : ConfigWidget
 
   protected override async void set_from_config()
   {
-    var val = settings.get_string(key);
-    if (val == null)
-      val = "";
+    var val = is_uri ? settings.get_uri(key) : settings.get_string(key);
     entry.set_text(val);
   }
 

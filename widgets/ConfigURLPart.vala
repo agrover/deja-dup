@@ -116,9 +116,7 @@ public class ConfigURLPart : ConfigEntry
 
   static DejaDupDecodedUri get_current_uri(FilteredSettings settings, string key)
   {
-    var val = settings.get_string(key);
-    if (val == null)
-      val = "";
+    var val = settings.get_uri(key);
 
     // First, try to parse as is.  What's stored in settings is actually a
     // GFile parse_name, but we'd like a first crack at it because passing

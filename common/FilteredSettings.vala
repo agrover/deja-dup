@@ -59,6 +59,17 @@ public class FilteredSettings : Settings
       base.set_value(k, v);
   }
 
+  // May be uri, or may be a File's parsed path for historical reasons
+  public new string get_uri(string k) {
+    // If we are reading a URI, replace some special keywords.
+    var val = get_string(k);
+    var result = parse_keywords(val);
+    if (result == null)
+      return "";
+    else
+      return result;
+  }
+
   public new File[] get_file_list(string k) {
     // If we are reading a file path, replace some special keywords.
     var val = get_value(k);
