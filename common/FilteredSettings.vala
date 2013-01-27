@@ -31,11 +31,11 @@ namespace DejaDup {
    dconf, so it's nice to be able to avoid those.
  */
 
-public class SimpleSettings : Settings
+public class FilteredSettings : Settings
 {
   public bool read_only {get; set;}
 
-  public SimpleSettings(string schema, bool ro)
+  public FilteredSettings(string schema, bool ro)
   {
     Object(schema: schema, read_only: ro);
   }

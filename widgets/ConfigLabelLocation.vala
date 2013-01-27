@@ -24,10 +24,10 @@ namespace DejaDup {
 public class ConfigLabelLocation : ConfigLabel
 {
   Gtk.Image img;
-  SimpleSettings file_root;
-  SimpleSettings s3_root;
-  SimpleSettings u1_root;
-  SimpleSettings rackspace_root;
+  FilteredSettings file_root;
+  FilteredSettings s3_root;
+  FilteredSettings u1_root;
+  FilteredSettings rackspace_root;
 
   public ConfigLabelLocation()
   {
