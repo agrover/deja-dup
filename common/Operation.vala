@@ -87,7 +87,7 @@ public abstract class Operation : Object
     set_passphrase(state.passphrase);
   }
 
-  SimpleSettings settings;
+  FilteredSettings settings;
   internal ToolJob job;
   protected string passphrase;
   bool finished = false;

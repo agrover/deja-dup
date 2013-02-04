@@ -44,6 +44,7 @@ libcommon_la_VALASOURCES = \
 	Checker.vala \
 	CommonUtils.vala \
 	DirHandling.vala \
+	FilteredSettings.vala \
 	Network.vala \
 	Operation.vala \
 	OperationBackup.vala \
@@ -55,7 +56,6 @@ libcommon_la_VALASOURCES = \
 	RecursiveDelete.vala \
 	RecursiveMove.vala \
 	RecursiveOp.vala \
-	SimpleSettings.vala \
 	ToolPlugin.vala
 
 libcommon_la_SOURCES = \

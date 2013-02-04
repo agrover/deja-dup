@@ -31,11 +31,11 @@ namespace DejaDup {
    dconf, so it's nice to be able to avoid those.
  */
 
-public class SimpleSettings : Settings
+public class FilteredSettings : Settings
 {
   public bool read_only {get; set;}
 
-  public SimpleSettings(string schema, bool ro)
+  public FilteredSettings(string schema, bool ro)
   {
     Object(schema: schema, read_only: ro);
   }
@@ -57,6 +57,23 @@ public class SimpleSettings : Settings
   public new void set_value(string k, Variant v) {
     if (!get_value(k).equal(v))
       base.set_value(k, v);
+  }
+
+  // May be uri, or may be a File's parsed path for historical reasons
+  public new string get_uri(string k) {
+    // If we are reading a URI, replace some special keywords.
+    var val = get_string(k);
+    var result = parse_keywords(val);
+    if (result == null)
+      return "";
+    else
+      return result;
+  }
+
+  public new File[] get_file_list(string k) {
+    // If we are reading a file path, replace some special keywords.
+    var val = get_value(k);
+    return parse_dir_list(val.get_strv());
   }
 
   // TODO: bytestring, strv

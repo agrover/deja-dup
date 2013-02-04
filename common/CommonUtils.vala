@@ -276,7 +276,7 @@ public bool is_nag_time()
   return (last_check.compare(now) <= 0);
 }
 
-public string get_folder_key(SimpleSettings settings, string key)
+public string get_folder_key(FilteredSettings settings, string key)
 {
   string folder = settings.get_string(key);
   if (folder.contains("$HOSTNAME")) {
@@ -289,7 +289,7 @@ public string get_folder_key(SimpleSettings settings, string key)
 }
 
 bool settings_read_only = false;
-HashTable<string, SimpleSettings> settings_table = null;
+HashTable<string, FilteredSettings> settings_table = null;
 public void set_settings_read_only(bool ro)
 {
   settings_read_only = ro;
@@ -297,7 +297,7 @@ public void set_settings_read_only(bool ro)
     // When read only, we also need to make sure everyone shares the same
     // settings object.  Otherwise, they will not notice the changes other
     // parts of the code make.
-    settings_table = new HashTable<string, SimpleSettings>.full(str_hash,
+    settings_table = new HashTable<string, FilteredSettings>.full(str_hash,
                                                                 str_equal,
                                                                 g_free,
                                                                 g_object_unref);
@@ -307,22 +307,22 @@ public void set_settings_read_only(bool ro)
   }
 }
 
-public SimpleSettings get_settings(string? subdir = null)
+public FilteredSettings get_settings(string? subdir = null)
 {
   string schema = "org.gnome.DejaDup";
   if (subdir != null && subdir != "")
     schema += "." + subdir;
-  SimpleSettings rv;
+  FilteredSettings rv;
   if (settings_read_only) {
     rv = settings_table.lookup(schema);
     if (rv == null) {
-      rv = new SimpleSettings(schema, true);
+      rv = new FilteredSettings(schema, true);
       rv.delay(); // never to be apply()'d again
       settings_table.insert(schema, rv);
     }
   }
   else {
-    rv = new SimpleSettings(schema, false);
+    rv = new FilteredSettings(schema, false);
   }
   return rv;
 }
@@ -565,8 +565,7 @@ public async string get_tempdir()
   // This is admittedly fast and loose, but our primary concern is just
   // avoiding silly choices like tmpfs or tiny special /tmp partitions.
   var settings = get_settings();
-  var include_val = settings.get_value(INCLUDE_LIST_KEY);
-  var include_list = parse_dir_list(include_val.get_strv());
+  var include_list = settings.get_file_list(INCLUDE_LIST_KEY);
   File main_include = null;
   var home = File.new_for_path(Environment.get_home_dir());
   foreach (var include in include_list) {

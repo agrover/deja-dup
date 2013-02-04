@@ -27,7 +27,7 @@ static Pid pid;
 static bool op_active = false;
 static bool reactive_check;
 static bool first_check = false;
-static DejaDup.SimpleSettings settings = null;
+static DejaDup.FilteredSettings settings = null;
 
 static bool testing_delay = true;
 

@@ -26,41 +26,45 @@ public string get_trash_path()
   return Path.build_filename(Environment.get_user_data_dir(), "Trash");
 }
 
-public File? parse_dir(string dir)
+public string? parse_keywords(string dir)
 {
-  string s = dir;
-  if (s == "$HOME")
-    s = Environment.get_home_dir();
-  else if (s == "$DESKTOP")
-    s = Environment.get_user_special_dir(UserDirectory.DESKTOP);
-  else if (s == "$DOCUMENTS")
-    s = Environment.get_user_special_dir(UserDirectory.DOCUMENTS);
-  else if (s == "$DOWNLOAD")
-    s = Environment.get_user_special_dir(UserDirectory.DOWNLOAD);
-  else if (s == "$MUSIC")
-    s = Environment.get_user_special_dir(UserDirectory.MUSIC);
-  else if (s == "$PICTURES")
-    s = Environment.get_user_special_dir(UserDirectory.PICTURES);
-  else if (s == "$PUBLIC_SHARE")
-    s = Environment.get_user_special_dir(UserDirectory.PUBLIC_SHARE);
-  else if (s == "$TEMPLATES")
-    s = Environment.get_user_special_dir(UserDirectory.TEMPLATES);
-  else if (s == "$TRASH")
-    s = get_trash_path();
-  else if (s == "$VIDEOS")
-    s = Environment.get_user_special_dir(UserDirectory.VIDEOS);
+  string result = null;
+  if (dir == "$HOME")
+    result = Environment.get_home_dir();
+  else if (dir == "$DESKTOP")
+    result = Environment.get_user_special_dir(UserDirectory.DESKTOP);
+  else if (dir == "$DOCUMENTS")
+    result = Environment.get_user_special_dir(UserDirectory.DOCUMENTS);
+  else if (dir == "$DOWNLOAD")
+    result = Environment.get_user_special_dir(UserDirectory.DOWNLOAD);
+  else if (dir == "$MUSIC")
+    result = Environment.get_user_special_dir(UserDirectory.MUSIC);
+  else if (dir == "$PICTURES")
+    result = Environment.get_user_special_dir(UserDirectory.PICTURES);
+  else if (dir == "$PUBLIC_SHARE")
+    result = Environment.get_user_special_dir(UserDirectory.PUBLIC_SHARE);
+  else if (dir == "$TEMPLATES")
+    result = Environment.get_user_special_dir(UserDirectory.TEMPLATES);
+  else if (dir == "$TRASH")
+    result = get_trash_path();
+  else if (dir == "$VIDEOS")
+    result = Environment.get_user_special_dir(UserDirectory.VIDEOS);
   else {
     // Some variables can be placed inside a larger path, so replace those
-    s = s.replace("$USER", Environment.get_user_name());
+    result = dir.replace("$USER", Environment.get_user_name());
 
-    if (Uri.parse_scheme(s) == null && !Path.is_absolute(s))
-      s = Path.build_filename(Environment.get_home_dir(), s);
-    else
-      return File.parse_name(s);
+    if (Uri.parse_scheme(result) == null && !Path.is_absolute(result))
+      result = Path.build_filename(Environment.get_home_dir(), result);
   }
 
-  if (s != null)
-    return File.new_for_path(s);
+  return result;
+}
+
+public File? parse_dir(string dir)
+{
+  var result = parse_keywords(dir);
+  if (result != null)
+    return File.parse_name(result);
   else
     return null;
 }

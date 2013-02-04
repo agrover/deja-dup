@@ -30,8 +30,8 @@ public abstract class ConfigWidget : Gtk.EventBox
   public string ns {get; construct; default = "";}
 
   protected bool syncing;  
-  protected SimpleSettings settings;
-  protected List<SimpleSettings> all_settings;
+  protected FilteredSettings settings;
+  protected List<FilteredSettings> all_settings;
   construct {
     visible_window = false;
 
@@ -45,13 +45,13 @@ public abstract class ConfigWidget : Gtk.EventBox
 
   ~ConfigWidget() {
     SignalHandler.disconnect_by_func(settings, (void*)key_changed_wrapper, this);
-    foreach (weak SimpleSettings s in all_settings) {
+    foreach (weak FilteredSettings s in all_settings) {
       SignalHandler.disconnect_by_func(s, (void*)key_changed_wrapper, this);
       s.unref();
     }
   }
 
-  protected void watch_key(string? key, SimpleSettings? s = null)
+  protected void watch_key(string? key, FilteredSettings? s = null)
   {
     if (s == null) {
       s = settings;
