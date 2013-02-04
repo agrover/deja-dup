@@ -118,8 +118,9 @@ public class OperationBackup : Operation
     foreach (var tempdir in DejaDup.get_tempdirs())
       rv.append(tempdir);
 
-    // Skip kernel directories
+    // Skip transient directories
     rv.append("/proc");
+    rv.append("/run");
     rv.append("/sys");
     
     return rv;

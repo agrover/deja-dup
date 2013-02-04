@@ -215,7 +215,7 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     args += "'--include=%s' ".printf(Environment.get_home_dir());
     args += include_args;
 
-    string[] excludes2 = {"/sys", "/proc", tempdir};
+    string[] excludes2 = {"/sys", "/run", "/proc", tempdir};
     foreach (string ex in excludes2) {
       if (FileUtils.test (ex, FileTest.EXISTS))
         args += "'--exclude=%s' ".printf(ex);
