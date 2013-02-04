@@ -1,5 +1,10 @@
 Déjà Dup 25.5 (GNOME 3.7.5)
 ---------------------------
+Features:
+ • Support replacing $USER in gsettings file backup location too (in addition to previous support for include and exclude folders)
+Polish:
+ • Tell duplicity to use a temporary directory that is on the same partition as the include files, to avoid problems with tiny /tmp directories (as can happen with tmpfs)
+ • Tell GNOME 3 about our notifications, so the user can disable them
 Packaging:
  • Require duplicity 0.6.21 for its data corruption fixes
 Translations:
