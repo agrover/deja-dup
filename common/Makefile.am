@@ -39,6 +39,7 @@ libcommon_la_VALASOURCES = \
 	BackendAuto.vala \
 	BackendFile.vala \
 	BackendRackspace.vala \
+	BackendOpenstack.vala \
 	BackendS3.vala \
 	BackendU1.vala \
 	Checker.vala \

@@ -52,6 +52,7 @@ libwidgets_la_VALASOURCES = \
 	ConfigLocationFile.vala \
 	ConfigLocationFTP.vala \
 	ConfigLocationRackspace.vala \
+	ConfigLocationOpenstack.vala \
 	ConfigLocationS3.vala \
 	ConfigLocationSSH.vala \
 	ConfigLocationSMB.vala \

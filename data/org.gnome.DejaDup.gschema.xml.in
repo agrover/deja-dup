@@ -70,6 +70,7 @@
         <choice value='auto'/>
         <choice value='file'/>
         <choice value='rackspace'/>
+        <choice value='openstack'/>
         <choice value='s3'/>
         <choice value='u1'/>
       </choices>
@@ -78,6 +79,7 @@
       <_description>The type of backup location.  If ‘auto’, a default will be chosen based on what is available.</_description>
     </key>
     <child name="rackspace" schema="org.gnome.DejaDup.Rackspace"/>
+    <child name="openstack" schema="org.gnome.DejaDup.Openstack"/>
     <child name="s3" schema="org.gnome.DejaDup.S3"/>
     <child name="u1" schema="org.gnome.DejaDup.U1"/>
     <child name="file" schema="org.gnome.DejaDup.File"/>
@@ -109,6 +111,28 @@
       <default>''</default>
       <_summary>Your Rackspace username</_summary>
       <_description>This is your username for the Rackspace Cloud Files service.</_description>
+    </key>
+  </schema>
+  <schema id="org.gnome.DejaDup.Openstack" path="/org/gnome/deja-dup/openstack/">
+    <key name="container" type="s">
+      <default>'$HOSTNAME'</default>
+      <_summary>The Openstack Swift container</_summary>
+      <_description>Which Openstack Swift container to store files in.  This does not need to exist already.  Only legal hostname strings are valid.</_description>
+    </key>
+    <key name="username" type="s">
+      <default>''</default>
+      <_summary>Your Openstack username</_summary>
+      <_description>This is your username for the Openstack Swift service.</_description>
+    </key>
+    <key name="tenant" type="s">
+      <default>''</default>
+      <_summary>Your Openstack tenant</_summary>
+      <_description>This is your tenant for the Openstack Swift service.</_description>
+    </key>
+    <key name="authurl" type="s">
+      <default>''</default>
+      <_summary>Authentication URL</_summary>
+      <_description>This is the Authentication URL, or keystone URL for the Openstack service</_description>
     </key>
   </schema>
   <schema id="org.gnome.DejaDup.U1" path="/org/gnome/deja-dup/u1/">

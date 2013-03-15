@@ -28,12 +28,13 @@ public class ConfigLabelLocation : ConfigLabel
   FilteredSettings s3_root;
   FilteredSettings u1_root;
   FilteredSettings rackspace_root;
+  FilteredSettings openstack_root;
 
   public ConfigLabelLocation()
   {
     base(null);
   }
-  
+
   construct {
     img = new Gtk.Image.from_icon_name("folder", Gtk.IconSize.MENU);
     fill_box();
@@ -42,6 +43,7 @@ public class ConfigLabelLocation : ConfigLabel
     watch_key(null, (s3_root = DejaDup.get_settings(S3_ROOT)));
     watch_key(null, (u1_root = DejaDup.get_settings(U1_ROOT)));
     watch_key(null, (rackspace_root = DejaDup.get_settings(RACKSPACE_ROOT)));
+    watch_key(null, (openstack_root = DejaDup.get_settings(OPENSTACK_ROOT)));
     set_from_config.begin();
   }
 

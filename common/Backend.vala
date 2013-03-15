@@ -43,13 +43,13 @@ public abstract class Backend : Object
   public static uint64 INFINITE_SPACE = uint64.MAX;
   public virtual async uint64 get_space(bool free = true) {return INFINITE_SPACE;}
   public virtual bool space_can_be_infinite() {return true;}
-  
+
   // Arguments needed only when the particular mode is active
   // If mode == INVALID, arguments needed any time the backup is referenced.
   public virtual void add_argv(ToolJob.Mode mode, ref List<string> argv) {}
-  
+
   public abstract Backend clone();
-  
+
   public static string get_default_type()
   {
     var settings = get_settings();
@@ -58,6 +58,7 @@ public abstract class Backend : Object
     if (backend != "auto" &&
         backend != "s3" &&
         backend != "rackspace" &&
+        backend != "openstack" &&
         backend != "u1" &&
         backend != "file")
       backend = "auto"; // default to auto if string is not known
@@ -74,6 +75,8 @@ public abstract class Backend : Object
       return new BackendU1();
     else if (backend_name == "rackspace")
       return new BackendRackspace();
+    else if (backend_name == "openstack")
+      return new BackendOpenstack();
     else if (backend_name == "file")
       return new BackendFile();
     else
