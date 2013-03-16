@@ -41,6 +41,11 @@ public enum ShellEnv {
   LEGACY
 }
 
+[DBus (name = "org.Cinnamon")]
+public interface Cinnamon : GLib.Object {
+    public abstract string CinnamonVersion { owned get; }
+}
+
 protected ShellEnv shell = ShellEnv.NONE;
 public ShellEnv get_shell()
 {
@@ -61,8 +66,19 @@ public ShellEnv get_shell()
         else if (cap == "actions")
           actions = true;
       }
-      if (persistence && actions)
-        shell = ShellEnv.GNOME;
+      if (persistence && actions) {
+	string cv = null;
+	try {
+	    Cinnamon c = GLib.Bus.get_proxy_sync (BusType.SESSION, "org.Cinnamon", "/org/Cinnamon");
+	    cv = c.CinnamonVersion;
+	} catch (Error e) {}
+	if (cv != null) {
+	  // Detected Cinnamon which should get the Legacy behaviour.
+	  shell = ShellEnv.LEGACY;
+	}
+	else
+	  shell = ShellEnv.GNOME;
+      }
       else
         shell = ShellEnv.LEGACY;
     }
