@@ -41,6 +41,11 @@ public enum ShellEnv {
   LEGACY
 }
 
+[DBus (name = "org.gnome.Shell")]
+public interface GnomeShell : GLib.Object {
+    public abstract string ShellVersion { owned get; }
+}
+
 protected ShellEnv shell = ShellEnv.NONE;
 public ShellEnv get_shell()
 {
@@ -52,6 +57,8 @@ public ShellEnv get_shell()
     else
 #endif
     {
+      // Use Legacy unless we detect a different shell.
+      shell = ShellEnv.LEGACY;
       // Next check for Shell by notification capabilities
       unowned List<string> caps = Notify.get_server_caps();
       bool persistence = false, actions = false;
@@ -61,10 +68,20 @@ public ShellEnv get_shell()
         else if (cap == "actions")
           actions = true;
       }
-      if (persistence && actions)
-        shell = ShellEnv.GNOME;
-      else
-        shell = ShellEnv.LEGACY;
+      if (persistence && actions) {
+        // Ensure it's really Gnome-Shell, not a variation (like Cinnamon).
+        string gsv = null;
+        try {
+          GnomeShell gs = GLib.Bus.get_proxy_sync(BusType.SESSION,
+                                                  "org.gnome.Shell",
+                                                  "/org/gnome/Shell");
+          gsv = gs.ShellVersion;
+        } catch (Error e) {}
+        if (gsv != null) {
+          // It's really GnomeShell.
+          shell = ShellEnv.GNOME;
+        }
+      }
     }
   }
 
