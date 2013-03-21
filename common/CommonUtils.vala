@@ -19,6 +19,9 @@
 
 using GLib;
 
+[CCode (cheader_filename = "unistd.h")]
+extern long gethostid();
+
 namespace DejaDup {
 
 public const string INCLUDE_LIST_KEY = "include-list";
@@ -95,12 +98,56 @@ public void run_deja_dup(string args, AppLaunchContext? ctx = null,
   }
 }
 
+uint32 machine_id = 0;
+uint32 get_machine_id()
+{
+  if (machine_id > 0)
+    return machine_id;
+
+  // First try /etc/machine-id, then /var/lib/dbus/machine-id, then hostid
+
+  string machine_string;
+  try {
+    FileUtils.get_contents("/etc/machine-id", out machine_string);
+  }
+  catch (Error e) {}
+
+  if (machine_string == null) {
+    try {
+      FileUtils.get_contents("/var/lib/dbus/machine-id", out machine_string);
+    }
+    catch (Error e) {}
+  }
+
+  if (machine_string != null)
+    machine_id = (uint32)machine_string.to_ulong(null, 16);
+
+  if (machine_id == 0)
+    machine_id = (uint32)gethostid();
+
+  return machine_id;
+}
+
 DateTime most_recent_scheduled_date(TimeSpan period)
 {
   // Compare days between epoch and current days.  Mod by period to find
   // scheduled dates.
 
   var epoch = new DateTime.from_unix_local(0);
+
+  // Use early-morning local time for the epoch, not true midnight UNIX epoch:
+  // (A) In cases like cloud services or shared servers, it will help to avoid
+  //     all users hitting the server at the same time.  Hence the local time
+  //     and randomization.  (LP: #1154920)
+  // (B) Randomizing around 2-4 AM is probably a decent guess as for when to
+  //     back up, if the user leaves the machine on and in the absence of more
+  //     advanced scheduling support (LP: #479191)
+  // (C) We randomize using machine id as a seed to make our predictions
+  //     consistent between calls to this function and runs of deja-dup.
+  var rand = new Rand.with_seed(get_machine_id());
+  var early_hour = (TimeSpan)(rand.double_range(2, 4) * TimeSpan.HOUR);
+  epoch = epoch.add(early_hour - epoch.get_utc_offset());
+
   var cur_date = new DateTime.now_local();
 
   var between = cur_date.difference(epoch);
