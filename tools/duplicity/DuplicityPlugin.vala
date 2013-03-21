@@ -42,25 +42,11 @@ public class DuplicityPlugin : DejaDup.ToolPlugin
 
     // First token is 'duplicity' and is ignorable.  Second looks like '0.5.03'
     var version_string = tokens[1].strip();
-    var ver_tokens = version_string.split(".");
-    if (ver_tokens == null || ver_tokens[0] == null)
+    int major, minor, micro;
+    if (!DejaDup.parse_version(version_string, out major, out minor, out micro))
       throw new SpawnError.FAILED(_("Could not understand duplicity version ‘%s’.").printf(version_string));
 
-    int major = 0;
-    int minor = 0;
-    int micro = 0;
-    major = int.parse(ver_tokens[0]);
-    // Don't error out if no minor or micro.  Duplicity might not have them?
-    if (ver_tokens[1] != null) {
-      minor = int.parse(ver_tokens[1]);
-      if (ver_tokens[2] != null)
-        micro = int.parse(ver_tokens[2]);
-    }
-
-    var meets = (major > REQUIRED_MAJOR) ||
-                (major == REQUIRED_MAJOR && minor > REQUIRED_MINOR) ||
-                (major == REQUIRED_MAJOR && minor == REQUIRED_MINOR && micro >= REQUIRED_MICRO);
-    if (!meets)
+    if (!DejaDup.meets_version(major, minor, micro, REQUIRED_MAJOR, REQUIRED_MINOR, REQUIRED_MICRO))
       throw new SpawnError.FAILED(_("Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but only found version %d.%d.%.2d").printf(REQUIRED_MAJOR, REQUIRED_MINOR, REQUIRED_MICRO, major, minor, micro));
   }
 
