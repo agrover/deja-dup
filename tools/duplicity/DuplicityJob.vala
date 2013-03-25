@@ -137,7 +137,8 @@ internal class DuplicityJob : DejaDup.ToolJob
   {
     /* Fake cache dir if we need to */
     if ((flags & DejaDup.ToolJob.Flags.NO_CACHE) != 0) {
-      var template = Path.build_filename(yield DejaDup.get_tempdir(), "deja-dup-XXXXXX");
+      /* Look like a duplicity tempdir so that clean_tempdirs will clean this for us */
+      var template = Path.build_filename(yield DejaDup.get_tempdir(), "duplicity-XXXXXX");
       forced_cache_dir = DirUtils.mkdtemp(template);
     }
 
