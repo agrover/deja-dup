@@ -108,7 +108,8 @@ if tmp_archive:
       if split[1].find("/cache/") != -1:
         print("TESTFAIL: expected random /tmp archive dir", file=logfd)
         sys.exit(-1)
-      sys.argv[i] = "--archive-dir=?"
+      # Chop off random string at end, for reproducable tests
+      sys.argv[i] = sys.argv[i][:-6] + "?"
 
 if expected_args != sys.argv[1:]:
   print("TESTFAIL: expected\n%s\nvs\n%s" % (expected_args, sys.argv[1:]), file=logfd)
