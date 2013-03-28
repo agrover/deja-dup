@@ -72,20 +72,61 @@ public void update_last_run_timestamp(TimestampType type)
   settings.apply();
 }
 
+public bool parse_version(string version_string, out int major, out int minor,
+                          out int micro)
+{
+  major = 0;
+  minor = 0;
+  micro = 0;
+
+  var ver_tokens = version_string.split(".");
+  if (ver_tokens == null || ver_tokens[0] == null)
+    return false;
+
+  major = int.parse(ver_tokens[0]);
+  // Don't error out if no minor or micro.
+  if (ver_tokens[1] != null) {
+    minor = int.parse(ver_tokens[1]);
+    if (ver_tokens[2] != null)
+      micro = int.parse(ver_tokens[2]);
+  }
+
+  return true;
+}
+
+public bool meets_version(int major, int minor, int micro,
+                          int req_major, int req_minor, int req_micro)
+{
+  return (major > req_major) ||
+         (major == req_major && minor > req_minor) ||
+         (major == req_major && minor == req_minor && micro >= req_micro);
+}
+
 public void run_deja_dup(string args, AppLaunchContext? ctx = null,
                          List<File>? files = null)
 {
   var cmd = "deja-dup %s".printf(args);
 
+  int major, minor, micro;
+  var utsname = Posix.utsname();
+  parse_version(utsname.release, out major, out minor, out micro);
+
   // Check for ionice to be a good disk citizen
   if (Environment.find_program_in_path("ionice") != null) {
-    // lowest priority in best-effort class
-    // (can't use idle class as normal user on <2.6.25)
-    cmd = "ionice -c2 -n7 " + cmd;
+    // In Linux 2.6.25 and up, even normal users can request idle class
+    if (utsname.sysname == "Linux" && meets_version(major, minor, micro, 2, 6, 25))
+      cmd = "ionice -c3 " + cmd; // idle class
+    else
+      cmd = "ionice -c2 -n7 " + cmd; // lowest priority in best-effort class
   }
 
-  if (Environment.find_program_in_path("nice") != null)
-    cmd = "nice " + cmd;
+  // chrt's idle class is more-idle than nice, so prefer it
+  if (utsname.sysname == "Linux" &&
+      meets_version(major, minor, micro, 2, 6, 23) &&
+      Environment.find_program_in_path("chrt") != null)
+    cmd = "chrt --idle 0 " + cmd;
+  else if (Environment.find_program_in_path("nice") != null)
+    cmd = "nice -n19 " + cmd;
 
   var flags = AppInfoCreateFlags.SUPPORTS_STARTUP_NOTIFICATION |
               AppInfoCreateFlags.SUPPORTS_URIS;

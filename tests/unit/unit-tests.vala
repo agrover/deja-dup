@@ -46,6 +46,38 @@ void parse_dir()
   assert(DejaDup.parse_dir("file:VIDEOS").equal(File.parse_name("file:VIDEOS")));
 }
 
+void parse_one_version(string str, int maj, int min, int mic)
+{
+  int pmaj, pmin, pmic;
+  assert(DejaDup.parse_version(str, out pmaj, out pmin, out pmic));
+  assert(pmaj == maj);
+  assert(pmin == min);
+  assert(pmic == mic);
+}
+
+void parse_bad_version(string str)
+{
+  int pmaj, pmin, pmic;
+  assert(!DejaDup.parse_version(str, out pmaj, out pmin, out pmic));
+  assert(pmaj == 0);
+  assert(pmin == 0);
+  assert(pmic == 0);
+}
+
+void parse_version()
+{
+  parse_bad_version("");
+  parse_one_version("a", 0, 0, 0);
+  parse_one_version("1", 1, 0, 0);
+  parse_one_version("1.2", 1, 2, 0);
+  parse_one_version("1.2.3", 1, 2, 3);
+  parse_one_version("1.2.3.4", 1, 2, 3);
+  parse_one_version("1.2.3a4", 1, 2, 3);
+  parse_one_version("1.2a3.4", 1, 2, 4);
+  parse_one_version("1.2 3.4", 1, 2, 4);
+  parse_one_version("1.2-3.4", 1, 2, 4);
+}
+
 void setup()
 {
 }
@@ -64,6 +96,7 @@ int main(string[] args)
 
   var unit = new TestSuite("unit");
   unit.add(new TestCase("parse-dir", setup, parse_dir, teardown));
+  unit.add(new TestCase("parse-version", setup, parse_version, teardown));
   TestSuite.get_root().add_suite(unit);
 
   return Test.run();
