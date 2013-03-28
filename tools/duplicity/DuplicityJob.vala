@@ -110,9 +110,6 @@ internal class DuplicityJob : DejaDup.ToolJob
 
   ~DuplicityJob() {
     DejaDup.Network.get().notify["connected"].disconnect(network_changed);
-
-    if (forced_cache_dir != null)
-      new DejaDup.RecursiveDelete(File.new_for_path(forced_cache_dir)).start_async.begin();
   }
 
   public override void start()
@@ -130,24 +127,22 @@ internal class DuplicityJob : DejaDup.ToolJob
     if (mode == DejaDup.ToolJob.Mode.BACKUP)
       process_include_excludes();
 
-    /* Fake cache dir if we need to */
-    if ((flags & DejaDup.ToolJob.Flags.NO_CACHE) != 0) {
-      try {
-        forced_cache_dir = DirUtils.make_tmp("deja-dup-XXXXXX");
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
-    }
-
     var settings = DejaDup.get_settings();
     delete_age = settings.get_int(DejaDup.DELETE_AFTER_KEY);
 
-    get_envp.begin();
+    async_setup.begin();
   }
 
-  async void get_envp()
+  async void async_setup()
   {
+    /* Fake cache dir if we need to */
+    if ((flags & DejaDup.ToolJob.Flags.NO_CACHE) != 0) {
+      /* Look like a duplicity tempdir so that clean_tempdirs will clean this for us */
+      var template = Path.build_filename(yield DejaDup.get_tempdir(), "duplicity-XXXXXX");
+      forced_cache_dir = DirUtils.mkdtemp(template);
+    }
+
+    /* Get custom environment from backend, if needed */
     try {
       backend.envp_ready.connect(continue_with_envp);
       yield backend.get_envp();

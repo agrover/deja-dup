@@ -140,13 +140,12 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
   var backupdir = Path.build_filename(test_home, "backup");
   var restoredir = Path.build_filename(test_home, "restore");
 
-  var archive = tmp_archive ? "?" : "%s/deja-dup".printf(cachedir);
-
   string enc_str = "";
   if (!encrypted)
     enc_str = "--no-encryption ";
 
   var tempdir = Path.build_filename(test_home, "tmp");
+  var archive = tmp_archive ? "%s/duplicity-?".printf(tempdir) : "%s/deja-dup".printf(cachedir);
 
   var end_str = "%s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--tempdir=%s' '%s'".printf(enc_str, archive, tempdir, make_fd_arg(as_root));
 

@@ -93,12 +93,10 @@ internal class DuplicityInstance : Object
     // Cache signature files
     var cache_dir = forced_cache_dir;
     if (cache_dir == null)
-      cache_dir = Environment.get_user_cache_dir();
-    if (cache_dir != null) {
-      cache_dir = Path.build_filename(cache_dir, Config.PACKAGE);
-      if (DejaDup.ensure_directory_exists(cache_dir))
-        argv.append("--archive-dir=" + cache_dir);
-    }
+      cache_dir = Path.build_filename(Environment.get_user_cache_dir(),
+                                      Config.PACKAGE);
+    if (cache_dir != null && DejaDup.ensure_directory_exists(cache_dir))
+      argv.append("--archive-dir=" + cache_dir);
 
     // Specify tempdir
     var tempdir = yield DejaDup.get_tempdir();
