@@ -78,6 +78,45 @@ void parse_version()
   parse_one_version("1.2-3.4", 1, 2, 4);
 }
 
+void prompt()
+{
+  var settings = DejaDup.get_settings();
+
+  settings.set_string(DejaDup.PROMPT_CHECK_KEY, "");
+  DejaDup.update_prompt_time(true);
+  assert(settings.get_string(DejaDup.PROMPT_CHECK_KEY) == "disabled");
+
+  assert(DejaDup.make_prompt_check() == false);
+  assert(settings.get_string(DejaDup.PROMPT_CHECK_KEY) == "disabled");
+  DejaDup.update_prompt_time(); // shouldn't change anything
+  assert(settings.get_string(DejaDup.PROMPT_CHECK_KEY) == "disabled");
+
+  settings.set_string(DejaDup.PROMPT_CHECK_KEY, "");
+  assert(DejaDup.make_prompt_check() == false);
+  var time_now = settings.get_string(DejaDup.PROMPT_CHECK_KEY);
+  assert(time_now != "");
+  assert(DejaDup.make_prompt_check() == false);
+  assert(settings.get_string(DejaDup.PROMPT_CHECK_KEY) == time_now);
+
+  TimeVal cur_time = TimeVal();
+  cur_time.get_current_time();
+  cur_time.add((long) (-1 * DejaDup.get_prompt_delay() * TimeSpan.SECOND + TimeSpan.HOUR));
+  settings.set_string(DejaDup.PROMPT_CHECK_KEY, cur_time.to_iso8601());
+  assert(DejaDup.make_prompt_check() == false);
+
+  cur_time.add((long) (-2 * TimeSpan.HOUR));
+  settings.set_string(DejaDup.PROMPT_CHECK_KEY, cur_time.to_iso8601());
+  assert(DejaDup.make_prompt_check() == true);
+}
+
+string get_srcdir()
+{
+  var srcdir = Environment.get_variable("srcdir");
+  if (srcdir == null)
+    srcdir = ".";
+  return srcdir;
+}
+
 void setup()
 {
 }
@@ -90,6 +129,10 @@ int main(string[] args)
 {
   Test.init(ref args);
 
+  Environment.set_variable("PATH",
+                           get_srcdir() + "/../mock:" +
+                             Environment.get_variable("PATH"),
+                           true);
   Environment.set_variable("DEJA_DUP_LANGUAGE", "en", true);
   Environment.set_variable("GSETTINGS_BACKEND", "memory", true);
   Test.bug_base("https://launchpad.net/bugs/%s");
@@ -97,6 +140,7 @@ int main(string[] args)
   var unit = new TestSuite("unit");
   unit.add(new TestCase("parse-dir", setup, parse_dir, teardown));
   unit.add(new TestCase("parse-version", setup, parse_version, teardown));
+  unit.add(new TestCase("prompt", setup, prompt, teardown));
   TestSuite.get_root().add_suite(unit);
 
   return Test.run();

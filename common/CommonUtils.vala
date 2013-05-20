@@ -270,32 +270,36 @@ public bool has_seen_settings()
 // This makes the check of whether we should tell user about backing up.
 // For example, if a user has installed their OS and doesn't know about backing
 // up, we might notify them after a month.
-public void make_prompt_check()
+public bool make_prompt_check()
 {
   var settings = DejaDup.get_settings();
   var prompt = settings.get_string(PROMPT_CHECK_KEY);
 
   if (prompt == "disabled")
-    return;
+    return false;
   else if (prompt == "") {
     update_prompt_time();
-    return;
+    return false;
   }
   else if (has_seen_settings())
-    return;
+    return false;
 
   // OK, monitor has run before but user hasn't yet backed up or restored.
   // Let's see whether we should prompt now.
   TimeVal last_run_tval = TimeVal();
   if (!last_run_tval.from_iso8601(prompt))
-    return;
+    return false;
 
   var last_run = new DateTime.from_timeval_local(last_run_tval);
   last_run = last_run.add_seconds(get_prompt_delay());
 
   var now = new DateTime.now_local();
-  if (last_run.compare(now) <= 0)
+  if (last_run.compare(now) <= 0) {
     run_deja_dup("--prompt");
+    return true;
+  }
+  else
+    return false;
 }
 
 private void update_time_key(string key, bool cancel)
