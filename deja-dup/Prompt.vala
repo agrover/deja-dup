@@ -67,7 +67,7 @@ void ok()
 {
   DejaDup.update_prompt_time(true);
 
-  var app = new DesktopAppInfo("deja-dup-ccpanel.desktop");
+  var app = new DesktopAppInfo("gnome-deja-dup-panel.desktop");
   if (app != null) {
     try {
       app.launch(null, Gdk.Screen.get_default().get_display().get_app_launch_context());
