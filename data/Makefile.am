@@ -39,13 +39,13 @@ desktopdir = $(datadir)/applications
 desktop_DATA = deja-dup.desktop deja-dup-preferences.desktop
 
 if HAVE_CCPANEL
-desktop_DATA += deja-dup-ccpanel.desktop
+desktop_DATA += gnome-deja-dup-panel.desktop
 endif
 
 deja-dup-preferences.desktop.in: deja-dup-preferences.desktop.in.in
 	$(install_sh_DATA) $^ $@
 if HAVE_CCPANEL
-	sed -i "s/^Categories=.*/\0\n\nNotShowIn=$(shell grep OnlyShowIn $(srcdir)/deja-dup-ccpanel.desktop.in | cut -d= -f2)/" $@
+	sed -i "s/^Categories=.*/\0\n\nNotShowIn=$(shell grep OnlyShowIn $(srcdir)/gnome-deja-dup-panel.desktop.in | cut -d= -f2)/" $@
 endif
 
 deja-dup-monitor.desktop.in: deja-dup-monitor.desktop.in.in
@@ -57,8 +57,8 @@ autostart_DATA = deja-dup-monitor.desktop
 convertdir = $(datadir)/GConf/gsettings
 dist_convert_DATA = deja-dup.convert
 
-EXTRA_DIST = deja-dup.desktop.in deja-dup-ccpanel.desktop.in deja-dup-preferences.desktop.in.in deja-dup-monitor.desktop.in.in org.gnome.DejaDup.gschema.xml.in
-CLEANFILES = deja-dup.desktop deja-dup-ccpanel.desktop deja-dup-preferences.desktop deja-dup-preferences.desktop.in deja-dup-monitor.desktop deja-dup-monitor.desktop.in org.gnome.DejaDup.gschema.xml
+EXTRA_DIST = deja-dup.desktop.in gnome-deja-dup-panel.desktop.in deja-dup-preferences.desktop.in.in deja-dup-monitor.desktop.in.in org.gnome.DejaDup.gschema.xml.in
+CLEANFILES = deja-dup.desktop gnome-deja-dup-panel.desktop deja-dup-preferences.desktop deja-dup-preferences.desktop.in deja-dup-monitor.desktop deja-dup-monitor.desktop.in org.gnome.DejaDup.gschema.xml
 
 check: $(desktop_DATA) $(autostart_DATA)
 	@for desktop in $(desktop_DATA) $(autostart_DATA); do \
