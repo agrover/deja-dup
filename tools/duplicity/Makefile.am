@@ -46,7 +46,6 @@ AM_VALAFLAGS = \
 	--library=libduplicity \
 	--vapidir $(top_srcdir)/common \
 	--vapidir=$(top_srcdir)/vapi \
-	$(SHARED_VALAFLAGS) \
 	--pkg gio-2.0 \
 	--pkg libpeas-1.0 \
 	--pkg gio-unix-2.0 \
