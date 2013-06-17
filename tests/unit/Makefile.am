@@ -21,7 +21,7 @@ check_PROGRAMS = \
 	network
 
 check:
-	@dbus-launch ./unit-tests
+	@top_builddir=$(top_builddir) srcdir=$(srcdir) dbus-launch ./unit-tests
 
 AM_CFLAGS = \
 	-I$(top_srcdir)/common \
