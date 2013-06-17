@@ -98,14 +98,14 @@ void prompt()
   assert(DejaDup.make_prompt_check() == false);
   assert(settings.get_string(DejaDup.PROMPT_CHECK_KEY) == time_now);
 
-  TimeVal cur_time = TimeVal();
-  cur_time.get_current_time();
-  cur_time.add((long) (-1 * DejaDup.get_prompt_delay() * TimeSpan.SECOND + TimeSpan.HOUR));
-  settings.set_string(DejaDup.PROMPT_CHECK_KEY, cur_time.to_iso8601());
+  var cur_time = new DateTime.now_local();
+  cur_time = cur_time.add_seconds(-1 * DejaDup.get_prompt_delay());
+  cur_time = cur_time.add_hours(1);
+  settings.set_string(DejaDup.PROMPT_CHECK_KEY, cur_time.format("%Y-%m-%dT%H:%M:%S%z"));
   assert(DejaDup.make_prompt_check() == false);
 
-  cur_time.add((long) (-2 * TimeSpan.HOUR));
-  settings.set_string(DejaDup.PROMPT_CHECK_KEY, cur_time.to_iso8601());
+  cur_time = cur_time.add_hours(-2);
+  settings.set_string(DejaDup.PROMPT_CHECK_KEY, cur_time.format("%Y-%m-%dT%H:%M:%S%z"));
   assert(DejaDup.make_prompt_check() == true);
 }
 
