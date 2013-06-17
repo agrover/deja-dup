@@ -40,7 +40,7 @@ LT_INIT
 
 PKG_PROG_PKG_CONFIG([0.24])
 
-DD_PROG_VALAC([0.16.0], [valac-0.18 valac-0.16 valac])
+AM_PROG_VALAC([0.16.0])
 AS_IF([test "x$(basename $VALAC)" = xvalac-0.16],
   [AC_SUBST(SHARED_VALAFLAGS, ["-D HAVE_VALAC_16"])]
 )
