@@ -50,9 +50,18 @@ deja_dup_preferences_panel_class_finalize (DejaDupPreferencesPanelClass *klass)
 {
 }
 
+static const char *
+deja_dup_preferences_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:deja-dup";
+}
+
 static void
 deja_dup_preferences_panel_class_init (DejaDupPreferencesPanelClass *klass)
 {
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+
+  panel_class->get_help_uri = deja_dup_preferences_panel_get_help_uri;
 }
 
 static void
