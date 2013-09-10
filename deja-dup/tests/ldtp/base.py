@@ -73,7 +73,7 @@ def setup(root_prompt = False):
   
   environ['LANG'] = 'C'
   environ['DEJA_DUP_TESTING'] = '1'
-  environ['DEJA_DUP_TOOLS_PATH'] = '%s/../../tools/duplicity' % (builddir)
+  environ['DEJA_DUP_TOOLS_PATH'] = '%s/../../libdeja/tools/duplicity' % (builddir)
 
   if 'DEJA_DUP_TEST_SYSTEM' in environ and environ['DEJA_DUP_TEST_SYSTEM'] == '1':
     extra_paths = ''

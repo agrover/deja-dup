@@ -16,20 +16,20 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-SUBDIRS = unit ldtp
+SUBDIRS = unit
 
 check_PROGRAMS = \
 	runner
 
 check: runner
 	@if [ "$(top_srcdir)" != "$(top_builddir)" ]; then \
-		cp "$(top_srcdir)/tools/duplicity/duplicity.plugin" "$(top_builddir)/tools/duplicity"; \
+		cp "$(top_srcdir)/libdeja/tools/duplicity/duplicity.plugin" "$(top_builddir)/libdeja/tools/duplicity"; \
 	fi
 	@set -e; for test in $(srcdir)/scripts/*.test; do \
 		top_builddir=$(top_builddir) srcdir=$(srcdir) dbus-launch ./runner $$test; \
 	done
 	@if [ "$(top_srcdir)" != "$(top_builddir)" ]; then \
-		rm -f "$(top_builddir)/tools/duplicity/duplicity.plugin"; \
+		rm -f "$(top_builddir)/libdeja/tools/duplicity/duplicity.plugin"; \
 	fi
 
 check-system: runner
@@ -38,14 +38,14 @@ check-system: runner
 	done
 
 AM_CFLAGS = \
-	-I$(top_srcdir)/common \
+	-I$(top_srcdir)/libdeja \
 	$(DUP_CFLAGS) \
 	-w
 
 LDADD = \
 	$(DUP_LIBS) \
 	@INTLLIBS@ \
-	$(top_builddir)/common/libcommon.la
+	$(top_builddir)/libdeja/libdeja.la
 
 runner_VALASOURCES = \
 	runner.vala
@@ -54,13 +54,13 @@ runner_SOURCES = \
 	$(runner_VALASOURCES)
 
 AM_VALAFLAGS = \
-	--vapidir $(top_srcdir)/common \
+	--vapidir $(top_srcdir)/libdeja \
 	--vapidir $(top_srcdir)/vapi \
 	--pkg config \
 	--pkg gio-2.0 \
 	--pkg libpeas-1.0 \
 	--pkg posix \
-	--pkg libcommon
+	--pkg libdeja
 
 runner_vala.stamp: $(top_srcdir)/config.h
 

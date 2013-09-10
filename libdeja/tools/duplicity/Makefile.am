@@ -16,43 +16,51 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-pkglibexec_PROGRAMS = deja-dup-monitor
+toolsdir = $(pkglibexecdir)/tools
+tools_LTLIBRARIES = libduplicity.la
+dist_tools_DATA = duplicity.plugin
 
-deja_dup_monitor_CFLAGS = \
-	-I$(top_srcdir)/common \
-	$(MONITOR_CFLAGS) \
+libduplicity_la_CFLAGS = \
+	-I$(top_srcdir)/libdeja \
+	$(LIBDEJA_CFLAGS) \
 	-w \
 	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
-deja_dup_monitor_LDADD = \
-	$(MONITOR_LIBS) \
+libduplicity_la_LDFLAGS = -module -avoid-version
+
+libduplicity_la_LIBADD = \
+	$(LIBDEJA_LIBS) \
 	@INTLLIBS@ \
-	$(top_builddir)/common/libcommon.la
+	$(top_builddir)/libdeja/libdeja.la
 
-deja_dup_monitor_VALASOURCES = \
-	monitor.vala
+libduplicity_la_VALASOURCES = \
+	DuplicityInstance.vala \
+	DuplicityJob.vala \
+	DuplicityPlugin.vala
 
-deja_dup_monitor_SOURCES = \
-	$(deja_dup_monitor_VALASOURCES)
+libduplicity_la_SOURCES = \
+	$(libduplicity_la_VALASOURCES)
 
 AM_VALAFLAGS = \
-	--vapidir $(top_srcdir)/common \
-	--vapidir $(top_srcdir)/vapi \
-	--pkg config \
+	--library=libduplicity \
+	--vapidir $(top_srcdir)/libdeja \
+	--vapidir=$(top_srcdir)/vapi \
 	--pkg gio-2.0 \
 	--pkg libpeas-1.0 \
-	--pkg libcommon \
-	--pkg libnotify
+	--pkg gio-unix-2.0 \
+	--pkg posix \
+	--pkg libdeja \
+	--pkg config
 
-deja_dup_monitor_vala.stamp: $(top_srcdir)/config.h
+libduplicity_la_vala.stamp: $(top_srcdir)/config.h
 
 dist-hook:
-	cd $(distdir) && rm $(deja_dup_monitor_VALASOURCES:.vala=.c) \
-	                    deja_dup_monitor_vala.stamp
-	rm -f deja_dup_monitor_vala.stamp # Start distcheck workarounds
-$(srcdir)/deja_dup_monitor_vala.stamp: chmod-srcdir
+	cd $(distdir) && rm -f $(libduplicity_la_VALASOURCES:.vala=.c) \
+	                       libduplicity_la_vala.stamp
+	rm -f libduplicity_la_vala.stamp # Start distcheck workarounds
+$(srcdir)/libduplicity_la_vala.stamp: chmod-srcdir
 chmod-srcdir:
 	@chmod u+w $(srcdir) # End distcheck workarounds
 
-CLEANFILES = deja_dup_monitor_vala.stamp
+CLEANFILES = libduplicity_la_vala.stamp

@@ -1,19 +1,12 @@
 When making a non-trivial change, remember to add yourself to AUTHORS and help/C/credits.page.
 
-When testing a change, it is helpful to: "./tests/interactive".
+When testing a change, it is helpful to: "./libdeja/tests/interactive".
 
 Directories:
- • common: shared code that does not require gtk
- • widgets: shared code that does require gtk
- • monitor: daemon that runs in user's session, kicks off deja-dup as needed
- • preferences: control center panel
- • nautilus: nautilus extension
- • deja-dup: deja-dup helper app
- • tools: backup tool backend, handles talking to duplicity
+ • libdeja: non-GUI library that wraps policy and hides complexity of duplicity
+ • deja-dup: GNOME UI for libdeja, including integration points with nautilus and control-center
  • data: schemas, icons, desktop files, etc
- • help: help documentation
  • vapi: some helper APIs for vala
- • tests: test scripts
 
 TODO:
  • use GResource

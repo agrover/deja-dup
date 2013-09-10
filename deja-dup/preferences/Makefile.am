@@ -24,8 +24,8 @@ endif
 bin_PROGRAMS = deja-dup-preferences
 
 SHARED_CFLAGS = \
-	-I$(top_srcdir)/common \
-	-I$(top_srcdir)/widgets \
+	-I$(top_srcdir)/libdeja \
+	-I$(top_srcdir)/deja-dup/widgets \
 	$(PREF_CFLAGS) \
 	-w \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
@@ -38,8 +38,8 @@ deja_dup_preferences_CFLAGS = \
 SHARED_LIBS = \
 	$(PREF_LIBS) \
 	@INTLLIBS@ \
-	$(top_builddir)/common/libcommon.la \
-	$(top_builddir)/widgets/libwidgets.la
+	$(top_builddir)/libdeja/libdeja.la \
+	$(top_builddir)/deja-dup/widgets/libwidgets.la
 libdeja_dup_la_LDFLAGS = -module -avoid-version
 libdeja_dup_la_LIBADD = \
 	$(SHARED_LIBS) \
@@ -62,13 +62,13 @@ deja_dup_preferences_SOURCES = \
 	$(deja_dup_preferences_VALASOURCES)
 
 AM_VALAFLAGS = \
-	--vapidir $(top_srcdir)/common \
-	--vapidir $(top_srcdir)/widgets \
+	--vapidir $(top_srcdir)/libdeja \
 	--vapidir $(top_srcdir)/vapi \
+	--vapidir $(top_srcdir)/deja-dup/widgets \
 	--pkg @GTK_MODULE@ \
 	--pkg gio-2.0 \
 	--pkg libpeas-1.0 \
-	--pkg libcommon \
+	--pkg libdeja \
 	--pkg libwidgets \
 	--pkg config
 

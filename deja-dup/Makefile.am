@@ -16,11 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
+SUBDIRS = widgets monitor preferences nautilus help tests
+
 bin_PROGRAMS = deja-dup
 
 deja_dup_CFLAGS = \
-	-I$(top_srcdir)/common \
-	-I$(top_srcdir)/widgets \
+	-I$(top_srcdir)/libdeja \
+	-I$(srcdir)/widgets \
 	$(DUP_CFLAGS) \
 	$(UNITY_CFLAGS) \
 	-w \
@@ -30,8 +32,8 @@ deja_dup_LDADD = \
 	$(DUP_LIBS) \
 	$(UNITY_LIBS) \
 	@INTLLIBS@ \
-	$(top_builddir)/common/libcommon.la \
-	$(top_builddir)/widgets/libwidgets.la
+	$(top_builddir)/libdeja/libdeja.la \
+	$(builddir)/widgets/libwidgets.la
 
 deja_dup_VALASOURCES = \
 	Assistant.vala \
@@ -48,16 +50,16 @@ deja_dup_SOURCES = \
 	$(deja_dup_VALASOURCES)
 
 AM_VALAFLAGS = \
-	--vapidir $(top_srcdir)/common \
-	--vapidir $(top_srcdir)/widgets \
+	--vapidir $(top_srcdir)/libdeja \
 	--vapidir $(top_srcdir)/vapi \
+	--vapidir $(srcdir)/widgets \
 	$(UNITY_VALAFLAGS) \
 	--pkg @GTK_MODULE@ \
 	--pkg gio-2.0 \
 	--pkg gio-unix-2.0 \
 	--pkg libsecret-1 \
 	--pkg libnotify \
-	--pkg libcommon \
+	--pkg libdeja \
 	--pkg libwidgets \
 	--pkg config
 

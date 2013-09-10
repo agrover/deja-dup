@@ -19,7 +19,7 @@
 pkglib_LTLIBRARIES = libwidgets.la
 
 libwidgets_la_CFLAGS = \
-	-I$(top_srcdir)/common \
+	-I$(top_srcdir)/libdeja \
 	$(WIDGETS_CFLAGS) \
 	$(UNITY_CFLAGS) \
 	-w \
@@ -31,7 +31,7 @@ libwidgets_la_LIBADD = \
 	$(WIDGETS_LIBS) \
 	$(UNITY_LIBS) \
 	@INTLLIBS@ \
-	$(top_builddir)/common/libcommon.la
+	$(top_builddir)/libdeja/libdeja.la
 
 libwidgets_la_VALASOURCES = \
 	ConfigBool.vala \
@@ -74,10 +74,10 @@ libwidgets_la_SOURCES = \
 AM_VALAFLAGS = \
 	--library=libwidgets \
 	-H widgets.h \
-	--vapidir=$(top_srcdir)/common \
+	--vapidir=$(top_srcdir)/libdeja \
 	--vapidir=$(top_srcdir)/vapi \
 	$(UNITY_VALAFLAGS) \
-	--pkg libcommon \
+	--pkg libdeja \
 	--pkg @GTK_MODULE@ \
 	--pkg uriutils \
 	--pkg libnotify \

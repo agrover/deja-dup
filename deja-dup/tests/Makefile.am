@@ -16,20 +16,5 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-if HAVE_NAUTILUS
-nautilusdir = $(NAUTILUS_EXTENSION_DIR)
+SUBDIRS = ldtp
 
-nautilus_LTLIBRARIES = libdeja-dup.la
-
-libdeja_dup_la_CFLAGS = \
-	-I$(top_srcdir)/common \
-	$(NAUTILUS_CFLAGS) \
-	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
-	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
-
-libdeja_dup_la_SOURCES = \
-	NautilusExtension.c NautilusExtension.h
-
-libdeja_dup_la_LDFLAGS = -module -avoid-version
-libdeja_dup_la_LIBADD = $(NAUTILUS_LIBS) @INTLLIBS@
-endif

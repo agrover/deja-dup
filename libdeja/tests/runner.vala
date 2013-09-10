@@ -66,7 +66,7 @@ void backup_setup()
   var dir = Environment.get_variable("DEJA_DUP_TEST_HOME");
 
   if (!system_mode)
-    Environment.set_variable("DEJA_DUP_TOOLS_PATH", "%s/tools/duplicity".printf(get_top_builddir()), true);
+    Environment.set_variable("DEJA_DUP_TOOLS_PATH", "%s/libdeja/tools/duplicity".printf(get_top_builddir()), true);
 
   Environment.set_variable("DEJA_DUP_TEST_MOCKSCRIPT", Path.build_filename(dir, "mockscript"), true);
   Environment.set_variable("XDG_CACHE_HOME", Path.build_filename(dir, "cache"), true);

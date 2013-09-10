@@ -16,24 +16,26 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-pkglib_LTLIBRARIES = libcommon.la
+SUBDIRS = . tools tests
 
-libcommon_la_CFLAGS = \
-	$(COMMON_CFLAGS) \
+pkglib_LTLIBRARIES = libdeja.la
+
+libdeja_la_CFLAGS = \
+	$(LIBDEJA_CFLAGS) \
 	-w \
 	-DPKG_LIBEXEC_DIR=\"$(pkglibexecdir)\" \
 	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\"
 
-libcommon_la_LDFLAGS = -avoid-version
+libdeja_la_LDFLAGS = -avoid-version
 
-libcommon_la_LIBADD = \
-	$(COMMON_LIBS) \
+libdeja_la_LIBADD = \
+	$(LIBDEJA_LIBS) \
 	@INTLLIBS@
 
 noinst_HEADERS = \
 	uriutils.h
 
-libcommon_la_VALASOURCES = \
+libdeja_la_VALASOURCES = \
 	AsyncCommand.vala \
 	Backend.vala \
 	BackendAuto.vala \
@@ -58,13 +60,13 @@ libcommon_la_VALASOURCES = \
 	RecursiveOp.vala \
 	ToolPlugin.vala
 
-libcommon_la_SOURCES = \
+libdeja_la_SOURCES = \
 	uriutils.c \
-	$(libcommon_la_VALASOURCES)
+	$(libdeja_la_VALASOURCES)
 
 AM_VALAFLAGS = \
-	--library=libcommon \
-	-H common.h \
+	--library=libdeja \
+	-H deja.h \
 	--vapidir=$(top_srcdir)/vapi \
 	--pkg gio-2.0 \
 	--pkg gio-unix-2.0 \
@@ -75,16 +77,16 @@ AM_VALAFLAGS = \
 	--pkg posix \
 	--pkg config
 
-libcommon_la_vala.stamp: $(top_srcdir)/config.h
+libdeja_la_vala.stamp: $(top_srcdir)/config.h
 
 dist-hook:
-	cd $(distdir) && rm -f $(libcommon_la_VALASOURCES:.vala=.c) \
-	                       common.h libcommon_la_vala.stamp
-	rm -f libcommon_la_vala.stamp # Start distcheck workarounds
-$(srcdir)/libcommon_la_vala.stamp: chmod-srcdir
+	cd $(distdir) && rm -f $(libdeja_la_VALASOURCES:.vala=.c) \
+	                       deja.h libdeja_la_vala.stamp
+	rm -f libdeja_la_vala.stamp # Start distcheck workarounds
+$(srcdir)/libdeja_la_vala.stamp: chmod-srcdir
 chmod-srcdir:
 	@chmod u+w $(srcdir) # End distcheck workarounds
 
-CLEANFILES = libcommon_la_vala.stamp
+CLEANFILES = libdeja_la_vala.stamp
 
-EXTRA_DIST = libcommon.deps
+EXTRA_DIST = libdeja.deps

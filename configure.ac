@@ -84,7 +84,7 @@ PKG_CHECK_MODULES(PREF,
                   libsecret-1
                   libpeas-1.0)
 
-PKG_CHECK_MODULES(COMMON,
+PKG_CHECK_MODULES(LIBDEJA,
                   gio-2.0 >= $GIO_REQ_VER
                   gio-unix-2.0 >= $GIO_REQ_VER
                   libsecret-1
@@ -173,20 +173,21 @@ AS_IF([test "x$with_unity" != xno],
 
 # Sets up output files.
 AC_CONFIG_FILES([Makefile
-                 common/Makefile
                  data/Makefile
                  deja-dup/Makefile
-                 help/Makefile
+                 deja-dup/help/Makefile
+                 deja-dup/monitor/Makefile
+                 deja-dup/nautilus/Makefile
+                 deja-dup/preferences/Makefile
+                 deja-dup/tests/Makefile
+                 deja-dup/tests/ldtp/Makefile
+                 deja-dup/widgets/Makefile
+                 libdeja/Makefile
+                 libdeja/tests/Makefile
+                 libdeja/tests/unit/Makefile
+                 libdeja/tools/Makefile
+                 libdeja/tools/duplicity/Makefile
                  man/Makefile
-                 monitor/Makefile
-                 nautilus/Makefile
                  po/Makefile.in
-                 preferences/Makefile
-                 tests/Makefile
-                 tests/ldtp/Makefile
-                 tests/unit/Makefile
-                 tools/Makefile
-                 tools/duplicity/Makefile
-                 vapi/Makefile
-                 widgets/Makefile])
+                 vapi/Makefile])
 AC_OUTPUT
