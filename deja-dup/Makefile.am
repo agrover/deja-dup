@@ -20,6 +20,9 @@ SUBDIRS = widgets monitor preferences nautilus help tests
 
 bin_PROGRAMS = deja-dup
 
+appdatadir = $(datadir)/appdata
+dist_appdata_DATA = deja-dup.appdata.xml
+
 deja_dup_CFLAGS = \
 	-I$(top_srcdir)/libdeja \
 	-I$(srcdir)/widgets \
