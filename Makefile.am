@@ -21,7 +21,7 @@ SUBDIRS = data po vapi libdeja deja-dup man
 # Distribute pot file
 update-pot:
 	$(MAKE) -C po "$(GETTEXT_PACKAGE).pot"
-	$(MAKE) -C help pot
+	$(MAKE) -C deja-dup/help pot
 dist-hook: update-pot
 
 # call like 'make copy-po TD=path-to-translation-dir'
@@ -29,11 +29,11 @@ copy-po:
 	test -d $(TD)
 	cp -a $(TD)/po/*.po po
 	for po in $(TD)/help/*.po; do \
-		mkdir -p help/$$(basename $$po .po); \
-		cp -a $$po help/$$(basename $$po .po)/; \
+		mkdir -p deja-dup/help/$$(basename $$po .po); \
+		cp -a $$po deja-dup/help/$$(basename $$po .po)/; \
 	done
 	bzr add po/*.po
-	bzr add help/*/*.po
+	bzr add deja-dup/help/*/*.po
 
 sign:
 	gpg --armor --sign --detach-sig deja-dup-$(PACKAGE_VERSION).tar.xz
