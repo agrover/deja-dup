@@ -1310,8 +1310,8 @@ internal class DuplicityJob : DejaDup.ToolJob
           var error_file = make_file_obj(firstline[2]);
           if (!error_file.equal(slash) && // for some reason, duplicity likes to talk about '/'
               // Duplicity also likes to whine about files a lot, with errno 1, for no reason.
-              // We only care about errno 13, which is "couldn't write at all"
-              text.contains("[Errno 13]"))
+              // We only care about errno 13, which is "couldn't write at all" or libsync problems
+              (text.contains("[Errno 13]") || text.contains("librsync")))
             local_error_files.append(error_file);
         }
         break;
