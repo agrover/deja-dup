@@ -21,7 +21,7 @@
 # It will point at the locally built executables and plugins.  It will
 # point at a custom dconf location and $HOME.
 
-TOPDIR=$(dirname "$( cd "$( dirname "${0}" )" && pwd )")
+TOPDIR=$(readlink -e "$(dirname ${0})/../..")
 
 # Create fake home environment
 ROOTDIR=$(mktemp -d --tmpdir dd.XXXXXXXXXX)
