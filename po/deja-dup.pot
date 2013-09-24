@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: mike@mterry.name\n"
-"POT-Creation-Date: 2013-09-10 01:44-0400\n"
+"POT-Creation-Date: 2013-09-23 22:17-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,9 +23,9 @@ msgstr ""
 #: ../data/deja-dup-preferences.desktop.in.in.h:1
 #: ../data/gnome-deja-dup-panel.desktop.in.h:1 ../deja-dup/Prompt.vala:93
 #: ../deja-dup/Prompt.vala:128 ../deja-dup/StatusIcon.vala:133
-#: ../deja-dup/StatusIcon.vala:232 ../monitor/monitor.vala:115
-#: ../preferences/preferences-main.vala:52
-#: ../preferences/preferences-main.vala:66
+#: ../deja-dup/StatusIcon.vala:232 ../deja-dup/monitor/monitor.vala:115
+#: ../deja-dup/preferences/preferences-main.vala:52
+#: ../deja-dup/preferences/preferences-main.vala:66
 msgid "Backup"
 msgstr ""
 
@@ -35,7 +35,7 @@ msgstr ""
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
 #: ../data/deja-dup.desktop.in.h:2 ../deja-dup/main.vala:78
-#: ../libdeja/CommonUtils.vala:134 ../preferences/Preferences.vala:88
+#: ../deja-dup/preferences/Preferences.vala:88 ../libdeja/CommonUtils.vala:134
 #, c-format
 msgid "Déjà Dup Backup Tool"
 msgstr ""
@@ -59,7 +59,8 @@ msgstr ""
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:328
+#: ../data/deja-dup-monitor.desktop.in.in.h:1
+#: ../deja-dup/monitor/monitor.vala:328
 msgid "Backup Monitor"
 msgstr ""
 
@@ -68,7 +69,7 @@ msgid "Schedules backups at regular intervals"
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
-#: ../preferences/Preferences.vala:160
+#: ../deja-dup/preferences/Preferences.vala:160
 msgid "Folders to back up"
 msgstr ""
 
@@ -81,7 +82,7 @@ msgid ""
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../preferences/Preferences.vala:168
+#: ../deja-dup/preferences/Preferences.vala:168
 msgid "Folders to ignore"
 msgstr ""
 
@@ -266,7 +267,8 @@ msgid ""
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
-#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
+#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr ""
 
@@ -340,21 +342,21 @@ msgstr ""
 msgid "Scanning…"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:174
+#: ../deja-dup/nautilus/NautilusExtension.c:174
 msgid "Restore Missing Files…"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:175
+#: ../deja-dup/nautilus/NautilusExtension.c:175
 msgid "Restore deleted files from backup"
 msgstr ""
 
-#: ../nautilus/NautilusExtension.c:217
+#: ../deja-dup/nautilus/NautilusExtension.c:217
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../nautilus/NautilusExtension.c:221
+#: ../deja-dup/nautilus/NautilusExtension.c:221
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] ""
@@ -489,7 +491,8 @@ msgstr ""
 msgid "_Restore"
 msgstr ""
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:262
+#: ../deja-dup/AssistantRestore.vala:91
+#: ../deja-dup/preferences/Preferences.vala:262
 msgid "_Backup location"
 msgstr ""
 
@@ -643,8 +646,8 @@ msgstr ""
 msgid "_Resume Later"
 msgstr ""
 
-#: ../deja-dup/main.vala:34 ../monitor/monitor.vala:36
-#: ../preferences/preferences-main.vala:26
+#: ../deja-dup/main.vala:34 ../deja-dup/monitor/monitor.vala:36
+#: ../deja-dup/preferences/preferences-main.vala:26
 msgid "Show version"
 msgstr ""
 
@@ -701,9 +704,11 @@ msgid "Connect to Server"
 msgstr ""
 
 #: ../deja-dup/MountOperationAssistant.vala:37
-#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
-#: ../widgets/ConfigLocationRackspace.vala:31
-#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
+#: ../deja-dup/widgets/ConfigLocationDAV.vala:49
+#: ../deja-dup/widgets/ConfigLocationFTP.vala:45
+#: ../deja-dup/widgets/ConfigLocationRackspace.vala:31
+#: ../deja-dup/widgets/ConfigLocationSMB.vala:37
+#: ../deja-dup/widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr ""
 
@@ -793,6 +798,294 @@ msgstr ""
 msgid "Show _Progress"
 msgstr ""
 
+#: ../deja-dup/monitor/monitor.vala:159
+msgid "Scheduled backup delayed"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:45
+#, c-format
+msgid "I want to _restore files from a previous backup…"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:64
+#, c-format
+msgid "Just show my backup _settings"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:134
+msgid "Automatic _backups"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:181
+msgid "Most recent backup"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:190
+msgid "Next automatic backup"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:224
+msgid "_Restore…"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:230
+msgid "Back Up _Now"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:252
+msgid "Overview"
+msgstr ""
+
+#. Translators: storage as in "where to store the backup"
+#: ../deja-dup/preferences/Preferences.vala:284
+msgid "Storage"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:305
+msgid "Folders to _back up"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:315
+msgid "Folders to _ignore"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:324
+msgid "Folders"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:335
+msgid "How _often to back up"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:346
+#, c-format
+msgid "_Keep backups"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:361
+msgid "Schedule"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:365
+msgid "Categories"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigDelete.vala:40
+msgid "At least six months"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigDelete.vala:41
+msgid "At least a year"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigDelete.vala:42
+msgid "Forever"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigDelete.vala:89
+#, c-format
+msgid "At least %d day"
+msgid_plural "At least %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:61
+msgid "Today"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:63
+msgid "Yesterday"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:65
+msgid "Tomorrow"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:73
+#, c-format
+msgid "%d day from now"
+msgid_plural "%d days from now"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:83
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Translators: This is used in phrases like "Most recent backup: None"
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:95
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:109
+msgid "None"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelBool.vala:34
+msgid "Yes"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelBool.vala:34
+msgid "No"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelPolicy.vala:64
+msgid ""
+"Old backups will be kept for at least six months or until the backup "
+"location is low on space."
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelPolicy.vala:66
+msgid ""
+"Old backups will be kept for at least a year or until the backup location is "
+"low on space."
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelPolicy.vala:68
+msgid "Old backups will be kept until the backup location is low on space."
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelPolicy.vala:71
+#, c-format
+msgid ""
+"Old backups will be kept at least %d day or until the backup location is low "
+"on space."
+msgid_plural ""
+"Old backups will be kept at least %d days or until the backup location is "
+"low on space."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../deja-dup/widgets/ConfigList.vala:179
+msgid "_Add"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigList.vala:180
+msgid "Add"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigList.vala:188
+msgid "_Remove"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigList.vala:189
+msgid "Remove"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigList.vala:272
+msgid "Choose folders"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocation.vala:118
+msgid "SSH"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocation.vala:120
+msgid "Windows Share"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocation.vala:122
+msgid "FTP"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocation.vala:124
+msgid "WebDAV"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocation.vala:127
+msgid "Custom Location"
+msgstr ""
+
+#. And a local folder option
+#: ../deja-dup/widgets/ConfigLocation.vala:133
+msgid "Local Folder"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocation.vala:176 ../libdeja/BackendS3.vala:122
+msgid "Amazon S3"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocation.vala:186 ../libdeja/BackendU1.vala:170
+msgid "Ubuntu One"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocation.vala:194
+#: ../libdeja/BackendRackspace.vala:69
+msgid "Rackspace Cloud Files"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocationCustom.vala:34
+msgid "_URI"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocationDAV.vala:31
+#: ../deja-dup/widgets/ConfigLocationFTP.vala:32
+#: ../deja-dup/widgets/ConfigLocationSMB.vala:31
+#: ../deja-dup/widgets/ConfigLocationSSH.vala:31
+msgid "_Server"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocationDAV.vala:38
+msgid "Use secure connection (_HTTPS)"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocationDAV.vala:43
+#: ../deja-dup/widgets/ConfigLocationFTP.vala:35
+#: ../deja-dup/widgets/ConfigLocationSSH.vala:34
+msgid "_Port"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocationDAV.vala:46
+#: ../deja-dup/widgets/ConfigLocationFTP.vala:38
+#: ../deja-dup/widgets/ConfigLocationFile.vala:45
+#: ../deja-dup/widgets/ConfigLocationS3.vala:33
+#: ../deja-dup/widgets/ConfigLocationSMB.vala:34
+#: ../deja-dup/widgets/ConfigLocationSSH.vala:37
+#: ../deja-dup/widgets/ConfigLocationU1.vala:33
+#: ../deja-dup/widgets/ConfigLocationVolume.vala:33
+msgid "_Folder"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocationFile.vala:39
+msgid "_Choose Folder…"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocationFile.vala:50
+msgid "Choose Folder"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocationRackspace.vala:33
+msgid "_Container"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocationS3.vala:31
+msgid "S3 Access Key I_D"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocationSMB.vala:40
+msgid "_Domain Name"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigPeriod.vala:36
+msgid "Daily"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigPeriod.vala:37
+msgid "Weekly"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigPeriod.vala:82
+#, c-format
+msgid "Every %d day"
+msgid_plural "Every %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../deja-dup/widgets/WidgetUtils.vala:30
+#, c-format
+msgid "Could not display %s"
+msgstr ""
+
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
 #: ../libdeja/BackendFile.vala:135 ../libdeja/CommonUtils.vala:516
@@ -821,10 +1114,6 @@ msgstr ""
 #: ../libdeja/BackendFile.vala:448
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
-msgstr ""
-
-#: ../libdeja/BackendRackspace.vala:69 ../widgets/ConfigLocation.vala:194
-msgid "Rackspace Cloud Files"
 msgstr ""
 
 #. Translators: %s is a folder.
@@ -860,10 +1149,6 @@ msgstr ""
 msgid "_Remember API access key"
 msgstr ""
 
-#: ../libdeja/BackendS3.vala:122 ../widgets/ConfigLocation.vala:176
-msgid "Amazon S3"
-msgstr ""
-
 #. Translators: %s is a folder.
 #: ../libdeja/BackendS3.vala:125
 #, c-format
@@ -893,10 +1178,6 @@ msgstr ""
 
 #: ../libdeja/BackendS3.vala:204
 msgid "_Remember secret access key"
-msgstr ""
-
-#: ../libdeja/BackendU1.vala:170 ../widgets/ConfigLocation.vala:186
-msgid "Ubuntu One"
 msgstr ""
 
 #. Translators: %s is a folder.
@@ -1133,272 +1414,4 @@ msgstr ""
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
 "only found version %d.%d.%.2d"
-msgstr ""
-
-#: ../monitor/monitor.vala:159
-msgid "Scheduled backup delayed"
-msgstr ""
-
-#: ../preferences/Preferences.vala:45
-#, c-format
-msgid "I want to _restore files from a previous backup…"
-msgstr ""
-
-#: ../preferences/Preferences.vala:64
-#, c-format
-msgid "Just show my backup _settings"
-msgstr ""
-
-#: ../preferences/Preferences.vala:134
-msgid "Automatic _backups"
-msgstr ""
-
-#: ../preferences/Preferences.vala:181
-msgid "Most recent backup"
-msgstr ""
-
-#: ../preferences/Preferences.vala:190
-msgid "Next automatic backup"
-msgstr ""
-
-#: ../preferences/Preferences.vala:224
-msgid "_Restore…"
-msgstr ""
-
-#: ../preferences/Preferences.vala:230
-msgid "Back Up _Now"
-msgstr ""
-
-#: ../preferences/Preferences.vala:252
-msgid "Overview"
-msgstr ""
-
-#. Translators: storage as in "where to store the backup"
-#: ../preferences/Preferences.vala:284
-msgid "Storage"
-msgstr ""
-
-#: ../preferences/Preferences.vala:305
-msgid "Folders to _back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:315
-msgid "Folders to _ignore"
-msgstr ""
-
-#: ../preferences/Preferences.vala:324
-msgid "Folders"
-msgstr ""
-
-#: ../preferences/Preferences.vala:335
-msgid "How _often to back up"
-msgstr ""
-
-#: ../preferences/Preferences.vala:346
-#, c-format
-msgid "_Keep backups"
-msgstr ""
-
-#: ../preferences/Preferences.vala:361
-msgid "Schedule"
-msgstr ""
-
-#: ../preferences/Preferences.vala:365
-msgid "Categories"
-msgstr ""
-
-#: ../widgets/ConfigDelete.vala:40
-msgid "At least six months"
-msgstr ""
-
-#: ../widgets/ConfigDelete.vala:41
-msgid "At least a year"
-msgstr ""
-
-#: ../widgets/ConfigDelete.vala:42
-msgid "Forever"
-msgstr ""
-
-#: ../widgets/ConfigDelete.vala:89
-#, c-format
-msgid "At least %d day"
-msgid_plural "At least %d days"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../widgets/ConfigLabelBackupDate.vala:61
-msgid "Today"
-msgstr ""
-
-#: ../widgets/ConfigLabelBackupDate.vala:63
-msgid "Yesterday"
-msgstr ""
-
-#: ../widgets/ConfigLabelBackupDate.vala:65
-msgid "Tomorrow"
-msgstr ""
-
-#: ../widgets/ConfigLabelBackupDate.vala:73
-#, c-format
-msgid "%d day from now"
-msgid_plural "%d days from now"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../widgets/ConfigLabelBackupDate.vala:83
-#, c-format
-msgid "%d day ago"
-msgid_plural "%d days ago"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Translators: This is used in phrases like "Most recent backup: None"
-#: ../widgets/ConfigLabelBackupDate.vala:95
-#: ../widgets/ConfigLabelBackupDate.vala:109
-msgid "None"
-msgstr ""
-
-#: ../widgets/ConfigLabelBool.vala:34
-msgid "Yes"
-msgstr ""
-
-#: ../widgets/ConfigLabelBool.vala:34
-msgid "No"
-msgstr ""
-
-#: ../widgets/ConfigLabelPolicy.vala:64
-msgid ""
-"Old backups will be kept for at least six months or until the backup "
-"location is low on space."
-msgstr ""
-
-#: ../widgets/ConfigLabelPolicy.vala:66
-msgid ""
-"Old backups will be kept for at least a year or until the backup location is "
-"low on space."
-msgstr ""
-
-#: ../widgets/ConfigLabelPolicy.vala:68
-msgid "Old backups will be kept until the backup location is low on space."
-msgstr ""
-
-#: ../widgets/ConfigLabelPolicy.vala:71
-#, c-format
-msgid ""
-"Old backups will be kept at least %d day or until the backup location is low "
-"on space."
-msgid_plural ""
-"Old backups will be kept at least %d days or until the backup location is "
-"low on space."
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../widgets/ConfigList.vala:179
-msgid "_Add"
-msgstr ""
-
-#: ../widgets/ConfigList.vala:180
-msgid "Add"
-msgstr ""
-
-#: ../widgets/ConfigList.vala:188
-msgid "_Remove"
-msgstr ""
-
-#: ../widgets/ConfigList.vala:189
-msgid "Remove"
-msgstr ""
-
-#: ../widgets/ConfigList.vala:272
-msgid "Choose folders"
-msgstr ""
-
-#: ../widgets/ConfigLocation.vala:118
-msgid "SSH"
-msgstr ""
-
-#: ../widgets/ConfigLocation.vala:120
-msgid "Windows Share"
-msgstr ""
-
-#: ../widgets/ConfigLocation.vala:122
-msgid "FTP"
-msgstr ""
-
-#: ../widgets/ConfigLocation.vala:124
-msgid "WebDAV"
-msgstr ""
-
-#: ../widgets/ConfigLocation.vala:127
-msgid "Custom Location"
-msgstr ""
-
-#. And a local folder option
-#: ../widgets/ConfigLocation.vala:133
-msgid "Local Folder"
-msgstr ""
-
-#: ../widgets/ConfigLocationCustom.vala:34
-msgid "_URI"
-msgstr ""
-
-#: ../widgets/ConfigLocationDAV.vala:31 ../widgets/ConfigLocationFTP.vala:32
-#: ../widgets/ConfigLocationSMB.vala:31 ../widgets/ConfigLocationSSH.vala:31
-msgid "_Server"
-msgstr ""
-
-#: ../widgets/ConfigLocationDAV.vala:38
-msgid "Use secure connection (_HTTPS)"
-msgstr ""
-
-#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
-#: ../widgets/ConfigLocationSSH.vala:34
-msgid "_Port"
-msgstr ""
-
-#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
-#: ../widgets/ConfigLocationFile.vala:45 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
-#: ../widgets/ConfigLocationU1.vala:33 ../widgets/ConfigLocationVolume.vala:33
-msgid "_Folder"
-msgstr ""
-
-#: ../widgets/ConfigLocationFile.vala:39
-msgid "_Choose Folder…"
-msgstr ""
-
-#: ../widgets/ConfigLocationFile.vala:50
-msgid "Choose Folder"
-msgstr ""
-
-#: ../widgets/ConfigLocationRackspace.vala:33
-msgid "_Container"
-msgstr ""
-
-#: ../widgets/ConfigLocationS3.vala:31
-msgid "S3 Access Key I_D"
-msgstr ""
-
-#: ../widgets/ConfigLocationSMB.vala:40
-msgid "_Domain Name"
-msgstr ""
-
-#: ../widgets/ConfigPeriod.vala:36
-msgid "Daily"
-msgstr ""
-
-#: ../widgets/ConfigPeriod.vala:37
-msgid "Weekly"
-msgstr ""
-
-#: ../widgets/ConfigPeriod.vala:82
-#, c-format
-msgid "Every %d day"
-msgid_plural "Every %d days"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../widgets/WidgetUtils.vala:30
-#, c-format
-msgid "Could not display %s"
 msgstr ""
