@@ -68,6 +68,10 @@ echo "Run exit 1 to leave and keep data playground intact."
 # Now dump user out
 cd "${ROOTDIR}"
 export PS1='\[\e[1;32m\]deja-dup\$\[\e[0m\] '
-if dbus-launch bash --norc; then
+ARGS="$@"
+if [ -z "$ARGS" ]; then
+  ARGS="bash --norc"
+fi
+if dbus-launch sh -c "$ARGS"; then
   rm -rf "${ROOTDIR}" # Cleanup on clean exit
 fi

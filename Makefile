@@ -32,7 +32,7 @@ check: all
 check-system: all
 	CTEST_OUTPUT_ON_FAILURE=1 make -C builddir test-system
 
-dist: builddir
+dist: builddir screenshots
 	rm -f builddir/deja-dup-*.tar*
 	make -C builddir deja-dup.pot deja-dup-help.pot package_source
 	# Need the following until CPack supports an xz generator
@@ -42,6 +42,23 @@ dist: builddir
 
 clean:
 	rm -rf builddir
+
+screenshots: all
+	@mkdir -p ./builddir/screenshots
+	@rm -f ./builddir/screenshots/*
+	@./libdeja/tests/interactive "gsettings set org.gnome.DejaDup welcomed true;" \
+	                             "gsettings set org.gnome.DejaDup backend 'file';" \
+	                             "gsettings set org.gnome.DejaDup.File icon 'drive-removable-media';" \
+	                             "gsettings set org.gnome.DejaDup.File short-name 'Backup Drive';" \
+	                             "gsettings set org.gnome.DejaDup.File uuid 'NOPE';" \
+	                             "gsettings set org.gnome.DejaDup.File type 'volume';" \
+	                             "gsettings set org.gnome.DejaDup.File path '/NOPE';" \
+	                             "env HOME=/NOPE deja-dup-preferences" >/dev/null 2>&1 &
+	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-1.png
+	@killall deja-dup-preferences
+	@./libdeja/tests/interactive "deja-dup --backup" >/dev/null &
+	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-2.png
+	@killall deja-dup
 
 # call like 'make copy-po TD=path-to-translation-dir'
 copy-po:
@@ -54,4 +71,4 @@ copy-po:
 	bzr add po/*.po
 	bzr add deja-dup/help/*/*.po
 
-.PHONY: builddir clean dist all copy-po check check-system
+.PHONY: builddir clean dist all copy-po check check-system screenshots
