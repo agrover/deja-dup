@@ -5,16 +5,15 @@ _Name=Backup
 _Comment=Change your backup settings
 
 Icon=deja-dup
-TryExec=gnome-control-center
-Exec=gnome-control-center deja-dup
+TryExec=deja-dup-preferences
+Exec=deja-dup-preferences
 
 StartupNotify=true
 
 Type=Application
-Categories=Settings;Archiving;GNOME;GTK;X-GNOME-SystemSettings;X-GNOME-Settings-Panel;
-X-GNOME-Settings-Panel=deja-dup
+Categories=Settings;Archiving;GNOME;GTK;X-GNOME-SystemSettings;
 
-OnlyShowIn=GNOME;Unity;
+NotShowIn=@CCPANEL_SHOWIN@
 
 # Translators: Add whatever keywords you want in your language, separated by semicolons
 # These keywords are used when searching for applications in dashes, etc.

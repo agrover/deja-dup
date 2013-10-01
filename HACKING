@@ -1,25 +1,55 @@
-When making a non-trivial change, remember to add yourself to AUTHORS and help/C/credits.page.
+= New to deja-dup? =
 
-When testing a change, it is helpful to: "./libdeja/tests/interactive".
+When making a non-trivial change, remember to add yourself to AUTHORS and deja-dup/help/C/credits.page
 
-Directories:
- • libdeja: non-GUI library that wraps policy and hides complexity of duplicity
- • deja-dup: GNOME UI for libdeja, including integration points with nautilus and control-center
- • data: schemas, icons, desktop files, etc
- • vapi: some helper APIs for vala
+deja-dup uses cmake, but for most development purposes, you can simply use the convenience top-level Makefile:
+ * To build: make
+ * To test: make check
+ * To install: make install DESTDIR=/tmp/deja-dup
 
-TODO:
- • use GResource
+When testing a change, it is helpful to run ./libdeja/tests/interactive
+That will give you a full shell pointing at all 
 
-Backend split:
+== Folder Layout ==
+ * libdeja: non-GUI library that wraps policy and hides complexity of duplicity
+ * deja-dup: GNOME UI for libdeja, including integration points with nautilus and control-center
+ * data: shared schemas, icons, etc
+ * vapi: some helper APIs for vala
+
+= Development Notes =
+
+== How to Release ==
+
+Steps:
+ * Grab latest translations from LP, integrate
+ * Update help documentation (new arguments, new gui labels)
+ * make check dist
+ * debuild, install (to catch any foolish errors that check missed)
+ * Update CMakeLists.txt version
+ * Tag bzr with new release number (4.0 for 4.0)
+ * Update LP (new release, new download)
+ * NEWSTABLE: Update LP testing recipe version
+ * STABLE: New screenshots if needed for wiki [1]
+ * Announce on LP
+ * Mark bugs fix released on LP
+
+[1] Screenshots:
+ * Alt+PrntScreen to get just the current window
+
+== TODO ==
+ * use GResource
+
+== Backend Split Notes ==
+
 What do we need?
-* describe-credentials (like:
-  * username
-  * password
-  * folder)
-* here-are-credentials (secret how?)
-* put-these
-* get-these
-* list
-* size-of-these (to make sure there is room)
+ * describe-credentials like:
+   * username
+   * password
+   * folder
+ * here-are-credentials (secret how?)
+ * put-these
+ * get-these
+ * list
+ * size-of-these (to make sure there is room)
+
 basically, same as duplicity, duh!

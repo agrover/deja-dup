@@ -1,0 +1,92 @@
+# -*- Mode: CMake; indent-tabs-mode: nil; tab-width: 2 -*-
+#
+# This file is part of Déjà Dup.
+# For copyright information, see AUTHORS.
+#
+# Déjà Dup is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Déjà Dup is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
+
+project(deja-dup C)
+set(VERSION 29.1)
+cmake_minimum_required(VERSION 2.8)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+include(DejaDupMacros)
+
+option(ENABLE_CCPANEL "Build gnome-control-center panel" ON)
+option(ENABLE_NAUTILUS "Build nautilus plugin" ON)
+option(ENABLE_UNITY "Integrate with Unity" OFF)
+
+find_package(PkgConfig 0.24 REQUIRED)
+find_package(Vala 0.16 REQUIRED)
+deja_find_required_program(MSGFMT msgfmt)
+deja_find_required_program(INTLTOOL_MERGE intltool-merge)
+deja_check_modules(GLIB REQUIRED glib-2.0>=2.32 gio-2.0 gio-unix-2.0 gmodule-2.0)
+deja_check_modules(GTK REQUIRED gtk+-3.0)
+deja_check_modules(NOTIFY REQUIRED libnotify>=0.7)
+deja_check_modules(PEAS REQUIRED libpeas-1.0)
+deja_check_modules(SECRET REQUIRED libsecret-1)
+
+if(ENABLE_CCPANEL)
+  deja_check_modules(CCPANEL REQUIRED libgnome-control-center)
+  execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} --variable=extensiondir libgnome-control-center
+                  OUTPUT_VARIABLE CCPANEL_EXTENSIONDIR
+                  OUTPUT_STRIP_TRAILING_WHITESPACE
+                  ERROR_QUIET)
+endif()
+
+if(ENABLE_NAUTILUS)
+  deja_check_modules(NAUTILUS REQUIRED libnautilus-extension)
+  execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} --variable=extensiondir libnautilus-extension
+                  OUTPUT_VARIABLE NAUTILUS_EXTENSIONDIR
+                  OUTPUT_STRIP_TRAILING_WHITESPACE
+                  ERROR_QUIET)
+endif()
+
+if(ENABLE_UNITY)
+  deja_check_modules(UNITY REQUIRED unity>=3.4.2)
+endif()
+
+# Set up some common configuration values; Vala sees these via config.vapi.
+include(GNUInstallDirs)
+set(PACKAGE "deja-dup")
+set(GETTEXT_PACKAGE "deja-dup")
+set(PKG_DATADIR "${CMAKE_INSTALL_FULL_DATADIR}/${PACKAGE}")
+set(PKG_LIBDIR "${CMAKE_INSTALL_FULL_LIBDIR}/${PACKAGE}")
+set(PKG_LIBEXECDIR "${CMAKE_INSTALL_FULL_LIBEXECDIR}/${PACKAGE}")
+set(CMAKE_INSTALL_RPATH "${PKG_LIBEXECDIR}") # internal libraries go here
+set(COMMON_CFLAGS "-w")
+set(COMMON_CFLAGS "${COMMON_CFLAGS} -DPACKAGE=\\\"${PACKAGE}\\\"")
+set(COMMON_CFLAGS "${COMMON_CFLAGS} -DGETTEXT_PACKAGE=\\\"${GETTEXT_PACKAGE}\\\"")
+set(COMMON_CFLAGS "${COMMON_CFLAGS} -DVERSION=\\\"${VERSION}\\\"")
+set(COMMON_CFLAGS "${COMMON_CFLAGS} -DLOCALE_DIR=\\\"${CMAKE_INSTALL_FULL_LOCALEDIR}\\\"")
+set(COMMON_CFLAGS "${COMMON_CFLAGS} -DTHEME_DIR=\\\"${CMAKE_INSTALL_FULL_DATADIR}/icons\\\"")
+set(COMMON_CFLAGS "${COMMON_CFLAGS} -DPKG_DATA_DIR=\\\"${PKG_DATADIR}\\\"")
+set(COMMON_CFLAGS "${COMMON_CFLAGS} -DPKG_LIBEXEC_DIR=\\\"${PKG_LIBEXECDIR}\\\"")
+
+include(${VALA_USE_FILE})
+set(COMMON_VFLAGS "--target-glib=2.32")
+
+include(CTest)
+enable_testing()
+
+set(CPACK_PACKAGE_VERSION "${VERSION}")
+set(CPACK_SOURCE_PACKAGE_FILE_NAME "${PACKAGE}-${VERSION}")
+set(CPACK_SOURCE_GENERATOR "TBZ2")
+SET(CPACK_SOURCE_IGNORE_FILES "/.bzr/;/.bzrignore;/builddir/;/debian/;~$")
+include(CPack)
+
+add_subdirectory(data)
+add_subdirectory(deja-dup)
+add_subdirectory(libdeja)
+add_subdirectory(man)
+add_subdirectory(po)

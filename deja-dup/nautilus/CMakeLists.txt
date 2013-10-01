@@ -1,4 +1,4 @@
-# -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
+# -*- Mode: CMake; indent-tabs-mode: nil; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
 # For copyright information, see AUTHORS.
@@ -16,30 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-# Don't use special name 'TESTS', as it will trigger an automatically-created
-# 'check' target used during distcheck.
-
-LDTP_TESTS = \
-	cancel \
-	continue \
-	cycle \
-	missing \
-	overdir \
-	quiescent
-
-# This is for 'interactive' running of all the tests.  Not suitable for
-# automated testing yet.
-test:
-	for t in $(LDTP_TESTS); do \
-		echo -n "Testing $$t..."; \
-		if $(srcdir)/$$t 2>&1; then \
-			echo -e " \e[32mPASSED\e[0m"; \
-		else \
-			echo -e " \e[31mFAILED\e[0m"; \
-		fi; \
-	done
-
-EXTRA_DIST = \
-	$(LDTP_TESTS) \
-	base.py \
-	data
+if(ENABLE_CCPANEL)
+add_library(deja-dup-nautilus MODULE NautilusExtension.c)
+target_link_libraries(deja-dup-nautilus ${GLIB_LDFLAGS} ${NAUTILUS_LDFLAGS})
+set_target_properties(deja-dup-nautilus PROPERTIES
+                      OUTPUT_NAME deja-dup
+                      INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/libdeja"
+                      COMPILE_FLAGS "${GLIB_CFLAGS} ${NAUTILUS_CFLAGS} ${COMMON_CFLAGS}")
+install(TARGETS deja-dup-nautilus DESTINATION "${NAUTILUS_EXTENSIONDIR}")
+endif()

@@ -23,7 +23,6 @@
 
 #include <gtk/gtk.h>
 #include <libgnome-control-center/cc-panel.h>
-#include "config.h"
 #include "widgets.h"
 
 extern void* deja_dup_preferences_new (void);

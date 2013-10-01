@@ -22,18 +22,19 @@
 # point at a custom dconf location and $HOME.
 
 TOPDIR=$(readlink -e "$(dirname ${0})/../..")
+BUILDDIR="$TOPDIR/builddir"
 
 # Create fake home environment
 ROOTDIR=$(mktemp -d --tmpdir dd.XXXXXXXXXX)
 
 mkdir -p "${ROOTDIR}/share/glib-2.0/schemas"
-cp "${TOPDIR}/data/org.gnome.DejaDup.gschema.xml" "${ROOTDIR}/share/glib-2.0/schemas"
+cp "${BUILDDIR}/data/org.gnome.DejaDup.gschema.xml" "${ROOTDIR}/share/glib-2.0/schemas"
 glib-compile-schemas "${ROOTDIR}/share/glib-2.0/schemas"
 export XDG_DATA_HOME="${ROOTDIR}/share"
 export XDG_DATA_DIRS="${XDG_DATA_HOME}:${XDG_DATA_DIRS}"
 
 mkdir -p "${XDG_DATA_HOME}/deja-dup/ui"
-cp "${TOPDIR}/data/ui/"* "${XDG_DATA_HOME}/deja-dup/ui"
+cp "${TOPDIR}/deja-dup/ui/"* "${XDG_DATA_HOME}/deja-dup/ui"
 
 mkdir -p "${ROOTDIR}/cache"
 export XDG_CACHE_HOME="${ROOTDIR}/cache"
@@ -50,8 +51,8 @@ mkdir -p "${ROOTDIR}/restore" # for convenience
 
 
 # Point at our built objects
-export DEJA_DUP_TOOLS_PATH="${TOPDIR}/libdeja/tools/duplicity"
-export PATH="${TOPDIR}/deja-dup/monitor:${TOPDIR}/deja-dup:${TOPDIR}/deja-dup/preferences:${PATH}"
+export DEJA_DUP_TOOLS_PATH="${BUILDDIR}/libdeja/tools/duplicity"
+export PATH="${BUILDDIR}/deja-dup/monitor:${BUILDDIR}/deja-dup:${BUILDDIR}/deja-dup/preferences:${PATH}"
 
 
 # Explain what's going on to user

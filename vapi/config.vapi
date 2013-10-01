@@ -15,7 +15,7 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-[CCode (cprefix = "", lower_case_cprefix = "", cheader_filename = "config.h")]
+[CCode (cprefix = "", lower_case_cprefix = "")]
 namespace Config {
 	public const string GETTEXT_PACKAGE;
 	public const string LOCALE_DIR;
@@ -27,4 +27,3 @@ namespace Config {
 	public const string PACKAGE;
 	public const string VERSION;
 }
-

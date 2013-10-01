@@ -25,7 +25,7 @@ string get_top_builddir()
 {
   var builddir = Environment.get_variable("top_builddir");
   if (builddir == null)
-    builddir = "..";
+    builddir = "../../builddir";
   return builddir;
 }
 
