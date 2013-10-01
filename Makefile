@@ -54,10 +54,10 @@ screenshots: all
 	                             "gsettings set org.gnome.DejaDup.File type 'volume';" \
 	                             "gsettings set org.gnome.DejaDup.File path '/NOPE';" \
 	                             "env HOME=/NOPE deja-dup-preferences" >/dev/null 2>&1 &
-	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-1.png
+	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-1.jpg
 	@killall deja-dup-preferences
 	@./libdeja/tests/interactive "deja-dup --backup" >/dev/null &
-	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-2.png
+	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-2.jpg
 	@killall deja-dup
 
 # call like 'make copy-po TD=path-to-translation-dir'
