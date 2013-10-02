@@ -23,7 +23,7 @@ cmake_minimum_required(VERSION 2.8)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(DejaDupMacros)
 
-option(ENABLE_CCPANEL "Build gnome-control-center panel" ON)
+option(ENABLE_CCPANEL "Build gnome-control-center panel" OFF)
 option(ENABLE_NAUTILUS "Build nautilus plugin" ON)
 option(ENABLE_UNITY "Integrate with Unity" OFF)
 

@@ -24,7 +24,7 @@ all: builddir
 
 builddir:
 	@ # Enable all non-default options
-	@[ -d builddir ] || ( mkdir builddir && cd builddir && cmake .. -DENABLE_UNITY=ON )
+	@[ -d builddir ] || ( mkdir builddir && cd builddir && cmake .. -DENABLE_CCPANEL=ON -DENABLE_UNITY=ON )
 
 check: all
 	CTEST_OUTPUT_ON_FAILURE=1 make -C builddir test
