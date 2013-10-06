@@ -32,11 +32,8 @@ class CCPanelTests(AutopilotTestCase):
     super(CCPanelTests, self).setUp()
     self.pointer = Pointer(Touch.create())
 
-    panel_dir = subprocess.check_output(["pkg-config",
-                                         "--variable=extensiondir",
-                                         "libgnome-control-center"]).strip()
-    if not os.path.exists(os.path.join(panel_dir, "libdeja-dup.so")):
-      self.skip("Skipping ccpanel test because the panel is not installed")
+    if os.environ.get("HAS_CCPANEL") != "1":
+      self.skip("Skipping disabled ccpanel test")
 
   def test_clean_exit(self):
     """Launch and close the panel a couple times.  If we don't properly clean
