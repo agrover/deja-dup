@@ -1,4 +1,4 @@
-# -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
+# -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
 #
 # This file is part of Déjà Dup.
 # For copyright information, see AUTHORS.
@@ -16,4 +16,15 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-# Nothing here yet, until we can make the ldtp tests reliable
+import os
+from functools import wraps
+
+def system_only(fn):
+  """A simple decorator that skips test if we are in local mode."""
+  @wraps(fn)
+  def wrapper(*args, **kwargs):
+    if os.environ.get('DEJA_DUP_TEST_SYSTEM') != '1':
+      tests_self = args[0]
+      tests_self.skip("Skipping system test")
+    return fn(*args, **kwargs)
+  return wrapper

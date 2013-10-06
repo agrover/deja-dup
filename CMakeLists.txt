@@ -79,6 +79,9 @@ set(COMMON_VFLAGS "--target-glib=2.32")
 
 include(CTest)
 enable_testing()
+add_custom_target(autopilot)
+add_custom_target(autopilot-system)
+add_custom_target(test-system)
 
 set(CPACK_PACKAGE_VERSION "${VERSION}")
 set(CPACK_SOURCE_PACKAGE_FILE_NAME "${PACKAGE}-${VERSION}")

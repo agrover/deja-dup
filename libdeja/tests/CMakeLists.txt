@@ -34,13 +34,13 @@ foreach(SCRIPT ${SCRIPTS})
   add_test(${SCRIPT} env top_builddir=${CMAKE_BINARY_DIR} srcdir=${CMAKE_CURRENT_SOURCE_DIR} dbus-launch ./test-runner ${CMAKE_CURRENT_SOURCE_DIR}/scripts/${SCRIPT})
 endforeach()
 
-# Now add some dependencies for a special test-system target
+# Now add some dependencies for the special test-system target
 foreach(SCRIPT ${SCRIPTS})
   add_custom_target(test-system-${SCRIPT}
                     COMMAND env top_builddir=${CMAKE_BINARY_DIR} srcdir=${CMAKE_CURRENT_SOURCE_DIR} dbus-launch ./test-runner --system ${CMAKE_CURRENT_SOURCE_DIR}/scripts/${SCRIPT})
   set(TEST_SYSTEM_TARGETS ${TEST_SYSTEM_TARGETS} test-system-${SCRIPT})
 endforeach()
-add_custom_target(test-system DEPENDS test-runner ${TEST_SYSTEM_TARGETS})
+add_dependencies(test-system test-runner ${TEST_SYSTEM_TARGETS})
 
 endif(BUILD_TESTING)
 

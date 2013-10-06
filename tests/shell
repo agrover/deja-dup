@@ -21,20 +21,12 @@
 # It will point at the locally built executables and plugins.  It will
 # point at a custom dconf location and $HOME.
 
-TOPDIR=$(readlink -e "$(dirname ${0})/../..")
+TOPDIR=$(readlink -e "$(dirname ${0})/..")
 BUILDDIR="$TOPDIR/builddir"
+
 
 # Create fake home environment
 ROOTDIR=$(mktemp -d --tmpdir dd.XXXXXXXXXX)
-
-mkdir -p "${ROOTDIR}/share/glib-2.0/schemas"
-cp "${BUILDDIR}/data/org.gnome.DejaDup.gschema.xml" "${ROOTDIR}/share/glib-2.0/schemas"
-glib-compile-schemas "${ROOTDIR}/share/glib-2.0/schemas"
-export XDG_DATA_HOME="${ROOTDIR}/share"
-export XDG_DATA_DIRS="${XDG_DATA_HOME}:${XDG_DATA_DIRS}"
-
-mkdir -p "${XDG_DATA_HOME}/deja-dup/ui"
-cp "${TOPDIR}/deja-dup/ui/"* "${XDG_DATA_HOME}/deja-dup/ui"
 
 mkdir -p "${ROOTDIR}/cache"
 export XDG_CACHE_HOME="${ROOTDIR}/cache"
@@ -45,32 +37,46 @@ export XDG_CONFIG_HOME="${ROOTDIR}/config"
 mkdir -p "${ROOTDIR}/gnupg"
 export GNUPGHOME="${ROOTDIR}/gnupg"
 
-mkdir -p "${ROOTDIR}/source"  # for convenience
-mkdir -p "${ROOTDIR}/backup"  # for convenience
-mkdir -p "${ROOTDIR}/restore" # for convenience
+
+# For convenience, make some potentially useful folders
+mkdir -p "${ROOTDIR}/source"
+mkdir -p "${ROOTDIR}/backup"
+mkdir -p "${ROOTDIR}/restore"
 
 
-# Point at our built objects
-export DEJA_DUP_TOOLS_PATH="${BUILDDIR}/libdeja/tools/duplicity"
-export PATH="${BUILDDIR}/deja-dup/monitor:${BUILDDIR}/deja-dup:${BUILDDIR}/deja-dup/preferences:${PATH}"
+# If we are in local mode, point at our own data files and built objects
+SHNAME=$(basename $0)
+if [ "$SHNAME" = "shell" ]; then
+  mkdir -p "${ROOTDIR}/share/glib-2.0/schemas"
+  cp "${BUILDDIR}/data/org.gnome.DejaDup.gschema.xml" "${ROOTDIR}/share/glib-2.0/schemas"
+  glib-compile-schemas "${ROOTDIR}/share/glib-2.0/schemas"
+  export XDG_DATA_HOME="${ROOTDIR}/share"
+  export XDG_DATA_DIRS="${XDG_DATA_HOME}:${XDG_DATA_DIRS}"
+
+  mkdir -p "${XDG_DATA_HOME}/deja-dup/ui"
+  cp "${TOPDIR}/deja-dup/ui/"* "${XDG_DATA_HOME}/deja-dup/ui"
+
+  export DEJA_DUP_TOOLS_PATH="${BUILDDIR}/libdeja/tools/duplicity"
+  export PATH="${BUILDDIR}/deja-dup/monitor:${BUILDDIR}/deja-dup:${BUILDDIR}/deja-dup/preferences:${PATH}"
+
+  unset DEJA_DUP_TEST_SYSTEM
+else
+  export DEJA_DUP_TEST_SYSTEM=1
+fi
 
 
-# Explain what's going on to user
-echo "You are now in a special shell that points to all the built objects in"
-echo "your local tree.  You are also using a custom gsettings location, so any"
-echo "changes to your configuration won't mess up your system."
-echo "Your data playground is ${ROOTDIR}"
-echo "Run deja-dup, deja-dup-preferences, or deja-dup-monitor to test."
-echo "Run exit to leave."
-echo "Run exit 1 to leave and keep data playground intact."
-
-
-# Now dump user out
+# Now actually run shell
 cd "${ROOTDIR}"
 export PS1='\[\e[1;32m\]deja-dup\$\[\e[0m\] '
 ARGS="$@"
 if [ -z "$ARGS" ]; then
   ARGS="bash --norc"
+
+  # Explain the details
+  echo "Your data playground is ${ROOTDIR}"
+  echo "Run deja-dup, deja-dup-preferences, or deja-dup-monitor to test."
+  echo "Run exit to leave."
+  echo "Run exit 1 to leave and keep data playground intact."
 fi
 if dbus-launch sh -c "$ARGS"; then
   rm -rf "${ROOTDIR}" # Cleanup on clean exit

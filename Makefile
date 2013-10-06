@@ -46,17 +46,17 @@ clean:
 screenshots: all
 	@mkdir -p ./builddir/screenshots
 	@rm -f ./builddir/screenshots/*
-	@./libdeja/tests/interactive "gsettings set org.gnome.DejaDup welcomed true;" \
-	                             "gsettings set org.gnome.DejaDup backend 'file';" \
-	                             "gsettings set org.gnome.DejaDup.File icon 'drive-removable-media';" \
-	                             "gsettings set org.gnome.DejaDup.File short-name 'Backup Drive';" \
-	                             "gsettings set org.gnome.DejaDup.File uuid 'NOPE';" \
-	                             "gsettings set org.gnome.DejaDup.File type 'volume';" \
-	                             "gsettings set org.gnome.DejaDup.File path '/NOPE';" \
-	                             "env HOME=/NOPE deja-dup-preferences" >/dev/null 2>&1 &
+	@./tests/shell "gsettings set org.gnome.DejaDup welcomed true;" \
+	               "gsettings set org.gnome.DejaDup backend 'file';" \
+	               "gsettings set org.gnome.DejaDup.File icon 'drive-removable-media';" \
+	               "gsettings set org.gnome.DejaDup.File short-name 'Backup Drive';" \
+	               "gsettings set org.gnome.DejaDup.File uuid 'NOPE';" \
+	               "gsettings set org.gnome.DejaDup.File type 'volume';" \
+	               "gsettings set org.gnome.DejaDup.File path '/NOPE';" \
+	               "env HOME=/NOPE deja-dup-preferences" >/dev/null 2>&1 &
 	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-1.jpg
 	@killall deja-dup-preferences
-	@./libdeja/tests/interactive "deja-dup --backup" >/dev/null &
+	@./tests/shell "deja-dup --backup" >/dev/null &
 	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-2.jpg
 	@killall deja-dup
 
