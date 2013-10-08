@@ -67,10 +67,10 @@ fi
 
 
 # Now actually run shell
-cd "${ROOTDIR}"
-export PS1='\[\e[1;32m\]deja-dup\$\[\e[0m\] '
 ARGS="$@"
 if [ -z "$ARGS" ]; then
+  export PS1='\[\e[1;32m\]deja-dup\$\[\e[0m\] '
+  cd "${ROOTDIR}"
   ARGS="bash --norc"
 
   # Explain the details

@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
+# -*- Mode: Python; indent-tabs-mode: nil; tab-width: 4; coding: utf-8 -*-
 #
 # This file is part of Déjà Dup.
 # For copyright information, see AUTHORS.
@@ -17,21 +16,22 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
 import os
-sys.path.insert(0, sys.path[0]+'/..')
-import base
-import ldtp
+from deja_dup_autopilot import DejaDupTestCase
 
-def test():
-  restoredir = base.get_temp_name('restore')
-  base.setup()
-  base.backup_simple(backend='file', includes=['data'])
-  base.restore_simple(restoredir)
-  # Test restoring everything on top of previous restored files
-  base.restore_simple(restoredir)
-  # Test restoring just one dir on top of previous restored files
-  base.restore_specific(['data/top'], restoredir)
-  return True
 
-base.run(test)
+class OverwriteTests(DejaDupTestCase):
+
+    def test_overwrite_all(self):
+        """Test overwriting the whole srcdir"""
+        self.use_simple_setup()
+        self.backup(gui=False)
+        self.copy_sourcedir(delete=False)
+        self.restore()
+
+    def test_overwrite_one(self):
+        """Test overwriting a single file"""
+        self.use_simple_setup()
+        self.backup(gui=False)
+        self.copy_sourcedir(delete=False)
+        self.restore(files=[os.path.join(self.sourcedir, 'subdir')])

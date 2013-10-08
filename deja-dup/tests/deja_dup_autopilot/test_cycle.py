@@ -25,4 +25,5 @@ class CycleTests(DejaDupTestCase):
         """Do a simple backup / restore cycle."""
         self.use_simple_setup()
         self.backup()
+        self.copy_sourcedir()
         self.restore()

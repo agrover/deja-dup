@@ -17,6 +17,8 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import shutil
+import subprocess
 from autopilot.input import Pointer, Touch
 from autopilot.matchers import Eventually
 from autopilot.testcase import AutopilotTestCase
@@ -42,15 +44,35 @@ class DejaDupTestCase(AutopilotTestCase):
     def setUp(self):
         super(DejaDupTestCase, self).setUp()
         self.pointer = Pointer(Touch.create())
+
         self.rootdir = os.environ['DEJA_DUP_TEST_ROOT']
         self.sourcedir = os.path.join(self.rootdir, 'source')
+        self.addCleanup(shutil.rmtree, self.sourcedir)
+        self.copydir = os.path.join(self.rootdir, 'source.copy')
+        self.addCleanup(shutil.rmtree, self.copydir)
         self.backupdir = os.path.join(self.rootdir, 'backup')
+        self.addCleanup(shutil.rmtree, self.backupdir)
+        try:
+            os.makedirs(self.sourcedir)
+        except OSError:
+            pass
 
-        settings = Gio.Settings("org.gnome.DejaDup")
-        settings.set_boolean("root-prompt", False)
-        settings = Gio.Settings("org.gtk.Settings.FileChooser",
-                                path="/org/gtk/settings/file-chooser/")
-        settings.set_string("location-mode", "filename-entry")
+        self.set_config("root-prompt", False)
+        self.set_config("location-mode", "filename-entry",
+                        schema="org.gtk.Settings.FileChooser",
+                        path="/org/gtk/settings/file-chooser/")
+
+    def set_config(self, key, value, schema="org.gnome.DejaDup", path=None):
+        settings = Gio.Settings(schema, path=path)
+        if type(value) is list:
+            settings.set_strv(key, value)
+        elif type(value) is bool:
+            settings.set_boolean(key, value)
+        elif type(value) is str:
+            settings.set_string(key, value)
+        else:
+            settings.set_value(key, value)
+        self.addCleanup(settings.reset, key)
 
     def iterate(self, p):
         "Not meant for production use, just a debugging tool"
@@ -59,11 +81,10 @@ class DejaDupTestCase(AutopilotTestCase):
             self.iterate(c)
 
     def point_at_data_playground(self):
-        settings = Gio.Settings("org.gnome.DejaDup")
-        settings.set_strv("include-list", [self.sourcedir])
-        settings.set_string("backend", "file")
-        settings = Gio.Settings("org.gnome.DejaDup.File")
-        settings.set_string("path", self.backupdir)
+        self.set_config("include-list", [self.sourcedir])
+        self.set_config("backend", "file")
+        self.set_config("path", self.backupdir,
+                        schema="org.gnome.DejaDup.File")
 
     def add_simple_data(self):
         """Just put some really simple data in the backup source."""
@@ -87,7 +108,18 @@ class DejaDupTestCase(AutopilotTestCase):
     def header_string(self, label):
         return '<span size="xx-large" weight="ultrabold">%s</span>' % label
 
-    def backup(self):
+    def backup(self, gui=True):
+        if not gui:
+            # Sometimes we just want the backup to exist, without testing the
+            # gui workflow itself.
+            p = subprocess.Popen(['env', 'PASSPHRASE=test', 'duplicity', '/',
+                                   '--include=' + self.sourcedir,
+                                   '--exclude=**', 'file://' + self.backupdir],
+                                  stdout=subprocess.PIPE)
+            p.communicate()
+            self.assertEqual(0, p.returncode)
+            return
+
         app = self.launch_test_application('deja-dup', '--backup')
         first_header_label = self.header_string(u'Backing Up…')
         header = app.select_single('GtkLabel', label=first_header_label)
@@ -105,11 +137,14 @@ class DejaDupTestCase(AutopilotTestCase):
 
         self.assertThat(app.process.poll, Eventually(Equals(0), timeout=30))
 
-    def restore(self):
-        copydir = self.sourcedir + '.copy'
-        os.rename(self.sourcedir, copydir)
+    def copy_sourcedir(self, delete=True):
+        if delete:
+            shutil.move(self.sourcedir, self.copydir)
+        else:
+            shutil.copytree(self.sourcedir, self.copydir, symlinks=True)
 
-        app = self.launch_test_application('deja-dup', '--restore')
+    def restore(self, files=[]):
+        app = self.launch_test_application('deja-dup', '--restore', *files)
         first_header_label = self.header_string('Restore From Where?')
         header = app.select_single('GtkLabel', label=first_header_label)
         button = app.select_single('GtkLabel', label='_Forward')
@@ -121,11 +156,12 @@ class DejaDupTestCase(AutopilotTestCase):
         button = app.select_single('GtkLabel', label='_Forward')
         self.pointer.click_object(button)
 
-        self.assertThat(
-            header.label,
-            Eventually(Equals(self.header_string("Restore to Where?"))))
-        button = app.select_single('GtkLabel', label='_Forward')
-        self.pointer.click_object(button)
+        if not files:
+            self.assertThat(
+                header.label,
+                Eventually(Equals(self.header_string("Restore to Where?"))))
+            button = app.select_single('GtkLabel', label='_Forward')
+            self.pointer.click_object(button)
 
         self.assertThat(
             header.label,
@@ -152,5 +188,5 @@ class DejaDupTestCase(AutopilotTestCase):
         self.pointer.click_object(button)
 
         self.assertEqual(0,
-                         os.system('diff -ruN "%s" "%s"' % (copydir,
+                         os.system('diff -ruN "%s" "%s"' % (self.copydir,
                                                             self.sourcedir)))

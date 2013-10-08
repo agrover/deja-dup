@@ -304,20 +304,6 @@ def set_file_list(dlg, obj, addObj, removeObj, files):
   # FIXME compiz and modal windows tend to not work with ldtp
   set_settings_value('include-list' if obj == 'tblIncludeList' else 'exclude-list',
                      '[%s]' % ', '.join(["'%s'" % os.path.abspath(x) for x in files]))
-  return
-
-  # Add new items
-  for f in files:
-    ldtp.click(dlg, addObj)
-    waitforgui('dlgChoosefolders')
-    # Make sure path ends in '/'
-    if f[-1] != '/':
-      f += '/'
-    ldtp.selectlastrow('dlgChoosefolders', 'tblPlaces') # must switch away from Recent Files view to get txtLocation
-    ldtp.wait(1)
-    ldtp.settextvalue('dlgChoosefolders', 'txtLocation', f)
-    ldtp.click('dlgChoosefolders', 'btnOpen')
-    ldtp.wait(1) # let dialog close
 
 def wait_for_combo(frm, obj, value):
   count = 0
@@ -431,34 +417,6 @@ def restore_simple(path, date=None, backend = None, encrypt=True, dest = None):
   ldtp.click('frmRestore', 'btnClose')
   ldtp.waittillguinotexist('frmRestore')
 
-def restore_specific(files, path, date=None, backend = None, encrypt = True, dest = None):
-  global srcdir
-  files = [os.path.join(srcdir, f) for f in files]
-  args = ['--restore'] + files
-  start_deja_dup(args=args, waitfor='frmRestore')
-
-  if backend is not None:
-    walk_restore_prefs('frmRestore', backend=backend, dest=dest)
-  ldtp.click('frmRestore', 'btnForward')
-
-  wait_for_finish('frmRestore', 'lblRestoreFromWhen?', 200)
-  if date:
-    ldtp.comboselect('frmRestore', 'cboDate', date)
-  ldtp.click('frmRestore', 'btnForward')
-  ldtp.click('frmRestore', 'btnRestore')
-
-  if encrypt is not None:
-    wait_for_encryption('frmRestore', encrypt)
-
-  if len(files) == 1:
-    lbl = 'lblYourfilewassuccessfullyrestored'
-  else:
-    lbl = 'lblYourfilesweresuccessfullyrestored'
-  wait_for_finish('frmRestore', lbl, 400)
-
-  ldtp.click('frmRestore', 'btnClose')
-  ldtp.waittillguinotexist('frmRestore')
-
 def restore_missing(files, path):
   args = ['--restore-missing', path]
   start_deja_dup(args=args, waitfor='frmRestore')
@@ -480,14 +438,3 @@ def restore_missing(files, path):
 def file_equals(path, contents):
   f = open(path)
   return f.read() == contents
-
-def wait_for_quit():
-  cmd = ['pgrep', '-n', '-x', 'deja-dup']
-  pid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0].strip()
-  cmd = ['ps', '-p', pid]
-  while True:
-    sub = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-    if sub.wait() == 0 and sub.communicate()[0].count('defunct') == 0:
-      ldtp.wait(1)
-    else:
-      return
