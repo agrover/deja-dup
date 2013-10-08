@@ -17,21 +17,16 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import subprocess
-from autopilot.input import Pointer, Touch
 from autopilot.matchers import Eventually
-from autopilot.testcase import AutopilotTestCase
-from deja_dup_autopilot import system_only
+from deja_dup_autopilot import DejaDupTestCase, system_only
 from testtools.matchers import Equals, NotEquals
 
 
-class CCPanelTests(AutopilotTestCase):
+class CCPanelTests(DejaDupTestCase):
 
   @system_only
   def setUp(self):
     super(CCPanelTests, self).setUp()
-    self.pointer = Pointer(Touch.create())
-
     if os.environ.get("HAS_CCPANEL") != "1":
       self.skip("Skipping disabled ccpanel test")
 

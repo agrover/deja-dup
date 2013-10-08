@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
 #
 # This file is part of Déjà Dup.
@@ -17,18 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
-import os
-sys.path.insert(0, sys.path[0]+'/..')
-import base
-import ldtp
+from deja_dup_autopilot import DejaDupTestCase
 
-def test():
-  restoredir = base.get_temp_name('restore')
-  datapath = '/usr/bin'
-  base.setup()
-  base.backup_simple(backend='file', includes=[datapath])
-  base.restore_simple(restoredir)
-  return True
 
-base.run(test)
+class CycleTests(DejaDupTestCase):
+
+  def test_cycle(self):
+    """Do a simple backup / restore cycle."""
+    self.use_simple_setup()
+    self.backup()
+    self.restore()

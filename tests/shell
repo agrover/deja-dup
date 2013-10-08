@@ -27,6 +27,7 @@ BUILDDIR="$TOPDIR/builddir"
 
 # Create fake home environment
 ROOTDIR=$(mktemp -d --tmpdir dd.XXXXXXXXXX)
+export DEJA_DUP_TEST_ROOT="${ROOTDIR}"
 
 mkdir -p "${ROOTDIR}/cache"
 export XDG_CACHE_HOME="${ROOTDIR}/cache"
