@@ -1,4 +1,4 @@
-# -*- Mode: Python; indent-tabs-mode: nil; tab-width: 4; coding: utf-8 -*-
+# -*- Mode: CMake; indent-tabs-mode: nil; tab-width: 2 -*-
 #
 # This file is part of Déjà Dup.
 # For copyright information, see AUTHORS.
@@ -16,13 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-from deja_dup_autopilot import DejaDupTestCase
-
-
-class CycleTests(DejaDupTestCase):
-
-    def test_cycle(self):
-        """Do a simple backup / restore cycle."""
-        self.use_simple_setup()
-        self.backup()
-        self.restore()
+find_program(PEP8 pep8)
+if(PEP8)
+  add_test(pep8 "${PEP8}" --exclude=ldtp "${CMAKE_SOURCE_DIR}")
+endif()

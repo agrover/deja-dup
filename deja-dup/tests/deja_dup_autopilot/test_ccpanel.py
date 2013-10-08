@@ -1,4 +1,4 @@
-# -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
+# -*- Mode: Python; indent-tabs-mode: nil; tab-width: 4; coding: utf-8 -*-
 #
 # This file is part of Déjà Dup.
 # For copyright information, see AUTHORS.
@@ -24,29 +24,30 @@ from testtools.matchers import Equals, NotEquals
 
 class CCPanelTests(DejaDupTestCase):
 
-  @system_only
-  def setUp(self):
-    super(CCPanelTests, self).setUp()
-    if os.environ.get("HAS_CCPANEL") != "1":
-      self.skip("Skipping disabled ccpanel test")
+    @system_only
+    def setUp(self):
+        super(CCPanelTests, self).setUp()
+        if os.environ.get("HAS_CCPANEL") != "1":
+            self.skip("Skipping disabled ccpanel test")
 
-  def test_clean_exit(self):
-    """Launch and close the panel a couple times.  If we don't properly clean
-       up after ourselves when we are disposed, this may cause a crash."""
-    app = self.launch_test_application('gnome-control-center', 'deja-dup')
-    window = app.select_single("GtkApplicationWindow")
-    self.assertThat(window.title, Eventually(Equals("Backup")))
-    self.close_backup_panel(window)
-    self.open_backup_panel(window)
-    self.close_backup_panel(window)
+    def test_clean_exit(self):
+        """Launch and close the panel a couple times.  If we don't properly
+           clean up after ourselves when we are disposed, this may cause a
+           crash."""
+        app = self.launch_test_application('gnome-control-center', 'deja-dup')
+        window = app.select_single("GtkApplicationWindow")
+        self.assertThat(window.title, Eventually(Equals("Backup")))
+        self.close_backup_panel(window)
+        self.open_backup_panel(window)
+        self.close_backup_panel(window)
 
-  def open_backup_panel(self, window):
-    # This is dumb, but GtkIconView doesn't seem to list its contents to
-    # autopilot.  TODO: make this actually click on Backup icon in window
-    os.system('gnome-control-center deja-dup')
-    self.assertThat(window.title, Eventually(Equals("Backup")))
+    def open_backup_panel(self, window):
+        # This is dumb, but GtkIconView doesn't seem to list its contents to
+        # autopilot.  TODO: make this actually click on Backup icon in window
+        os.system('gnome-control-center deja-dup')
+        self.assertThat(window.title, Eventually(Equals("Backup")))
 
-  def close_backup_panel(self, window):
-    button = window.select_single("GtkButton", label="_All Settings")
-    self.pointer.click_object(button)
-    self.assertThat(window.title, Eventually(NotEquals("Backup")))
+    def close_backup_panel(self, window):
+        button = window.select_single("GtkButton", label="_All Settings")
+        self.pointer.click_object(button)
+        self.assertThat(window.title, Eventually(NotEquals("Backup")))
