@@ -1,73 +1,25 @@
 # Japanese translation for deja-dup
-# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the deja-dup package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-01-23 17:07-0500\n"
-"PO-Revision-Date: 2012-09-25 14:00+0000\n"
+"POT-Creation-Date: 2013-10-01 01:12-0400\n"
+"PO-Revision-Date: 2013-10-01 02:30+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-01-24 05:24+0000\n"
-"X-Generator: Launchpad (build 16445)\n"
-
-#. Translators: "Backup" is a noun
-#: ../data/deja-dup.desktop.in.h:1 ../data/deja-dup-ccpanel.desktop.in.h:1
-#: ../data/deja-dup-preferences.desktop.in.in.h:1 ../deja-dup/Prompt.vala:93
-#: ../deja-dup/Prompt.vala:128 ../deja-dup/StatusIcon.vala:133
-#: ../deja-dup/StatusIcon.vala:232 ../monitor/monitor.vala:115
-#: ../preferences/preferences-main.vala:52
-#: ../preferences/preferences-main.vala:66
-msgid "Backup"
-msgstr "バックアップ"
-
-#. Translators: The name is a play on the French phrase "déjà vu" meaning
-#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
-#. context is itself a reference to both the underlying command line tool
-#. "duplicity" and the act of duplicating data for backup.  As a whole, the
-#. phrase "Déjà Dup" may not be very translatable.
-#: ../data/deja-dup.desktop.in.h:2 ../common/CommonUtils.vala:90
-#: ../deja-dup/main.vala:78 ../preferences/Preferences.vala:88
-#, c-format
-msgid "Déjà Dup Backup Tool"
-msgstr "Déjà Dup バックアップツール"
-
-#: ../data/deja-dup-ccpanel.desktop.in.h:2
-#: ../data/deja-dup-preferences.desktop.in.in.h:2
-msgid "Change your backup settings"
-msgstr "バックアップの設定を変更します"
-
-#. These keywords are used when searching for applications in dashes, etc.
-#: ../data/deja-dup-ccpanel.desktop.in.h:4
-#: ../data/deja-dup-preferences.desktop.in.in.h:4
-msgid "déjà;deja;dup;"
-msgstr "déjà;deja;dup;backup;デジャ;ダップ;バックアップ;復元;dap;bakkuappu;fukugen;"
-
-#: ../data/deja-dup-ccpanel.desktop.in.h:5
-#: ../data/deja-dup-preferences.desktop.in.in.h:5
-msgid "Back Up Now"
-msgstr "今すぐバックアップ"
-
-#. Translators: Monitor in this sense means something akin to 'watcher', not
-#. a computer screen.  This program acts like a daemon that kicks off
-#. backups at scheduled times.
-#: ../data/deja-dup-monitor.desktop.in.in.h:1 ../monitor/monitor.vala:328
-msgid "Backup Monitor"
-msgstr "バックアップモニター"
-
-#: ../data/deja-dup-monitor.desktop.in.in.h:2
-msgid "Schedules backups at regular intervals"
-msgstr "定期的にバックアップをスケジュールします"
+"X-Launchpad-Export-Date: 2013-10-02 06:05+0000\n"
+"X-Generator: Launchpad (build 16774)\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
-#: ../preferences/Preferences.vala:160
+#: ../deja-dup/preferences/Preferences.vala:160
 msgid "Folders to back up"
 msgstr "バックアップするフォルダー"
 
@@ -83,7 +35,7 @@ msgstr ""
 "はユーザの特別なディレクトリと認識されます。相対パスの項目は、ユーザのホームディレクトリからの相対パスです。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../preferences/Preferences.vala:168
+#: ../deja-dup/preferences/Preferences.vala:168
 msgid "Folders to ignore"
 msgstr "無視するフォルダー"
 
@@ -280,7 +232,8 @@ msgid ""
 msgstr "ファイルを保存されるフォルダー名。‘$HOSTNAME’の場合、コンピューター名をベースとしたフォルダーをデフォルトにします。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
-#: ../deja-dup/AssistantRestore.vala:221 ../preferences/Preferences.vala:151
+#: ../deja-dup/AssistantRestore.vala:221
+#: ../deja-dup/preferences/Preferences.vala:151
 msgid "Backup location"
 msgstr "バックアップの保存場所"
 
@@ -346,226 +299,114 @@ msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr "バックアップ場所が外部ボリュームの場合、これがボリュームのアイコンです。"
 
-#: ../data/ui/restore-missing.ui.h:1
+#. Translators: The name is a play on the French phrase "déjà vu" meaning
+#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
+#. context is itself a reference to both the underlying command line tool
+#. "duplicity" and the act of duplicating data for backup.  As a whole, the
+#. phrase "Déjà Dup" may not be very translatable.
+#: ../deja-dup/deja-dup.appdata.xml.in.h:1 ../deja-dup/deja-dup.desktop.in.h:2
+#: ../deja-dup/main.vala:78 ../deja-dup/preferences/Preferences.vala:88
+#: ../libdeja/CommonUtils.vala:134
+#, c-format
+msgid "Déjà Dup Backup Tool"
+msgstr "Déjà Dup バックアップツール"
+
+#: ../deja-dup/deja-dup.appdata.xml.in.h:2
+msgid ""
+"Déjà Dup is a simple backup tool. It hides the complexity of backing up the "
+"Right Way (encrypted, off-site, and regular) and uses duplicity as the "
+"backend."
+msgstr ""
+
+#: ../deja-dup/deja-dup.appdata.xml.in.h:3
+msgid ""
+"Support for local, remote, or cloud backup locations, such as Amazon S3, "
+"Rackspace Cloud Files, and Ubuntu One"
+msgstr ""
+
+#: ../deja-dup/deja-dup.appdata.xml.in.h:4
+msgid "Securely encrypts and compresses your data"
+msgstr ""
+
+#: ../deja-dup/deja-dup.appdata.xml.in.h:5
+msgid ""
+"Incrementally backs up, letting you restore from any particular backup"
+msgstr ""
+
+#: ../deja-dup/deja-dup.appdata.xml.in.h:6
+msgid "Schedules regular backups"
+msgstr ""
+
+#: ../deja-dup/deja-dup.appdata.xml.in.h:7
+msgid "Integrates well into your GNOME desktop"
+msgstr ""
+
+#. Translators: "Backup" is a noun
+#: ../deja-dup/deja-dup.desktop.in.h:1
+#: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:1
+#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:1
+#: ../deja-dup/Prompt.vala:93 ../deja-dup/Prompt.vala:128
+#: ../deja-dup/StatusIcon.vala:133 ../deja-dup/StatusIcon.vala:232
+#: ../deja-dup/monitor/monitor.vala:115
+#: ../deja-dup/preferences/preferences-main.vala:52
+#: ../deja-dup/preferences/preferences-main.vala:66
+msgid "Backup"
+msgstr "バックアップ"
+
+#. Translators: Monitor in this sense means something akin to 'watcher', not
+#. a computer screen.  This program acts like a daemon that kicks off
+#. backups at scheduled times.
+#: ../deja-dup/monitor/deja-dup-monitor.desktop.in.h:1
+#: ../deja-dup/monitor/monitor.vala:328
+msgid "Backup Monitor"
+msgstr "バックアップモニター"
+
+#: ../deja-dup/monitor/deja-dup-monitor.desktop.in.h:2
+msgid "Schedules backups at regular intervals"
+msgstr "定期的にバックアップをスケジュールします"
+
+#: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:2
+#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:2
+msgid "Change your backup settings"
+msgstr "バックアップの設定を変更します"
+
+#. These keywords are used when searching for applications in dashes, etc.
+#: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:4
+#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:4
+msgid "déjà;deja;dup;"
+msgstr "déjà;deja;dup;backup;デジャ;ダップ;バックアップ;復元;dap;bakkuappu;fukugen;"
+
+#: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:5
+#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:5
+msgid "Back Up Now"
+msgstr "今すぐバックアップ"
+
+#: ../deja-dup/ui/restore-missing.ui.h:1
 msgid "Folder"
 msgstr "フォルダー"
 
-#: ../data/ui/restore-missing.ui.h:2 ../deja-dup/AssistantOperation.vala:178
+#: ../deja-dup/ui/restore-missing.ui.h:2
+#: ../deja-dup/AssistantOperation.vala:178
 msgid "Scanning…"
 msgstr "スキャンしています…"
 
-#: ../nautilus/NautilusExtension.c:174
+#: ../deja-dup/nautilus/NautilusExtension.c:173
 msgid "Restore Missing Files…"
 msgstr "消去したファイルを復元..."
 
-#: ../nautilus/NautilusExtension.c:175
+#: ../deja-dup/nautilus/NautilusExtension.c:174
 msgid "Restore deleted files from backup"
 msgstr "バックアップから削除ファイルを復元"
 
-#: ../nautilus/NautilusExtension.c:217
+#: ../deja-dup/nautilus/NautilusExtension.c:216
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "以前のバージョンに戻す…"
 
-#: ../nautilus/NautilusExtension.c:221
+#: ../deja-dup/nautilus/NautilusExtension.c:220
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "バックアップからファイルを復元"
-
-#. Translators: %2$s is the name of a removable drive, %1$s is a folder
-#. on that removable drive.
-#: ../common/BackendFile.vala:135 ../common/CommonUtils.vala:421
-#, c-format
-msgid "%1$s on %2$s"
-msgstr "%2$s 上の %1$s"
-
-#: ../common/BackendFile.vala:168
-#, c-format
-msgid "Backup will begin when %s becomes connected."
-msgstr "%s を接続するとバックアップが開始されます。"
-
-#: ../common/BackendFile.vala:175 ../common/BackendRackspace.vala:49
-#: ../common/BackendS3.vala:59 ../common/BackendU1.vala:150
-msgid "Backup will begin when a network connection becomes available."
-msgstr "ネットワークが利用可能になるとバックアップが開始されます。"
-
-#: ../common/BackendFile.vala:384 ../common/BackendFile.vala:448
-msgid "Backup location not available"
-msgstr "バックアップの保存場所が使用できません"
-
-#: ../common/BackendFile.vala:385
-msgid "Waiting for a network connection…"
-msgstr "ネットワークの接続を待っています..."
-
-#: ../common/BackendFile.vala:448
-#, c-format
-msgid "Waiting for ‘%s’ to become connected…"
-msgstr "‘%s’ が接続されるのを待っています…"
-
-#: ../common/BackendRackspace.vala:69 ../widgets/ConfigLocation.vala:194
-msgid "Rackspace Cloud Files"
-msgstr "Rackspace Cloud Files"
-
-#. Translators: %s is a folder.
-#: ../common/BackendRackspace.vala:72
-#, c-format
-msgid "%s on Rackspace Cloud Files"
-msgstr "%s （Rackspace Cloud Files上）"
-
-#: ../common/BackendRackspace.vala:115 ../common/BackendS3.vala:168
-msgid "Permission denied"
-msgstr "認証に失敗しました"
-
-#: ../common/BackendRackspace.vala:146
-#, c-format
-msgid ""
-"You can sign up for a Rackspace Cloud Files account <a "
-"href=\"%s\">online</a>."
-msgstr "Rackspace Cloud Filesアカウントに<a href=\"%s\">オンライン</a>でサインアップできます。"
-
-#: ../common/BackendRackspace.vala:147
-msgid "Connect to Rackspace Cloud Files"
-msgstr "Rackspace Cloud Filesに接続"
-
-#: ../common/BackendRackspace.vala:148
-msgid "_API access key"
-msgstr "APIアクセスキー(_A)"
-
-#: ../common/BackendRackspace.vala:149
-msgid "S_how API access key"
-msgstr "APIアクセスキーの表示(_H)"
-
-#: ../common/BackendRackspace.vala:150
-msgid "_Remember API access key"
-msgstr "APIアクセスキーを記憶する(_R)"
-
-#: ../common/BackendS3.vala:122 ../widgets/ConfigLocation.vala:176
-msgid "Amazon S3"
-msgstr "Amazon S3"
-
-#. Translators: %s is a folder.
-#: ../common/BackendS3.vala:125
-#, c-format
-msgid "%s on Amazon S3"
-msgstr "Amazon S3 上の %s"
-
-#: ../common/BackendS3.vala:199
-#, c-format
-msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
-msgstr "<a href=\"%s\">オンライン</a>でAmazon S3アカウントをサインアップできます。"
-
-#: ../common/BackendS3.vala:200
-msgid "Connect to Amazon S3"
-msgstr "Amazon S3に接続"
-
-#: ../common/BackendS3.vala:201
-msgid "_Access key ID"
-msgstr "Access key ID(_A)"
-
-#: ../common/BackendS3.vala:202
-msgid "_Secret access key"
-msgstr "Secret access key(_S)"
-
-#: ../common/BackendS3.vala:203
-msgid "S_how secret access key"
-msgstr "secret access key を表示する(_H)"
-
-#: ../common/BackendS3.vala:204
-msgid "_Remember secret access key"
-msgstr "secret access key を記憶する(_R)"
-
-#: ../common/BackendU1.vala:170 ../widgets/ConfigLocation.vala:186
-msgid "Ubuntu One"
-msgstr "Ubuntu One"
-
-#. Translators: %s is a folder.
-#: ../common/BackendU1.vala:173
-#, c-format
-msgid "%s on Ubuntu One"
-msgstr "%s （Ubuntu One上）"
-
-#: ../common/BackendU1.vala:259
-msgid "Connect to Ubuntu One"
-msgstr "Ubuntu Oneに接続"
-
-#: ../common/BackendU1.vala:260
-msgid "Sign into Ubuntu One…"
-msgstr "Ubuntu Oneにサインイン…"
-
-#: ../common/CommonUtils.vala:343
-#, c-format
-msgid "Could not find backup tool in %s.  Your installation is incomplete."
-msgstr "%s 内にバックアップツールが見つかりませんでした。インストールが不完全です。"
-
-#: ../common/CommonUtils.vala:345
-msgid "Could not load backup tool.  Your installation is incomplete."
-msgstr "バックアップツールのロードができませんでした。インストールが不完全です。"
-
-#: ../common/CommonUtils.vala:351
-msgid "Backup tool is broken.  Your installation is incomplete."
-msgstr "バックアップツールが破損しています。インストールが不完全です。"
-
-#: ../common/CommonUtils.vala:373
-msgid "Could not start backup tool"
-msgstr "バックアップツールを開始できませんでした。"
-
-#. Translators: this is the home folder and %s is the user's username
-#: ../common/CommonUtils.vala:472
-#, c-format
-msgid "Home (%s)"
-msgstr "ホーム (%s)"
-
-#. Translators: this is the home folder
-#: ../common/CommonUtils.vala:477
-msgid "Home"
-msgstr "ホーム"
-
-#. Translators: this is the trash folder
-#: ../common/CommonUtils.vala:482
-msgid "Trash"
-msgstr "ゴミ箱"
-
-#: ../common/OperationBackup.vala:42 ../common/OperationVerify.vala:56
-msgid "Verifying backup…"
-msgstr "バックアップを検証中..."
-
-#: ../common/OperationRestore.vala:51
-msgid "Restoring files…"
-msgstr "ファイルを復元しています…"
-
-#: ../common/OperationVerify.vala:94
-msgid ""
-"Your backup appears to be corrupted.  You should delete the backup and try "
-"again."
-msgstr "バックアップが破損しているようです。削除して再試行してください。"
-
-#: ../common/Operation.vala:61
-msgid "Backing up…"
-msgstr "バックアップしています…"
-
-#: ../common/Operation.vala:63 ../deja-dup/AssistantRestore.vala:484
-msgid "Restoring…"
-msgstr "復元しています…"
-
-#: ../common/Operation.vala:65
-msgid "Checking for backups…"
-msgstr "バックアップを照合しています…"
-
-#: ../common/Operation.vala:67
-msgid "Listing files…"
-msgstr "ファイルをリストアップしています…"
-
-#: ../common/Operation.vala:69 ../common/Operation.vala:103
-#: ../tools/duplicity/DuplicityJob.vala:400
-#: ../tools/duplicity/DuplicityJob.vala:407
-#: ../tools/duplicity/DuplicityJob.vala:426
-#: ../tools/duplicity/DuplicityJob.vala:431
-msgid "Preparing…"
-msgstr "準備しています…"
-
-#: ../common/Operation.vala:295
-msgid "Another backup operation is already running"
-msgstr "別のバックアップが実行中です"
 
 #: ../deja-dup/AssistantBackup.vala:31
 msgctxt "back up is verb"
@@ -671,8 +512,8 @@ msgid "Restore Test"
 msgstr "復元テスト"
 
 #: ../deja-dup/AssistantOperation.vala:601
-#: ../tools/duplicity/DuplicityJob.vala:711
-#: ../tools/duplicity/DuplicityJob.vala:1093
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:706
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1088
 msgid "Failed with an unknown error."
 msgstr "不明なエラーで失敗しました"
 
@@ -696,7 +537,8 @@ msgstr "復元"
 msgid "_Restore"
 msgstr "復元(_R)"
 
-#: ../deja-dup/AssistantRestore.vala:91 ../preferences/Preferences.vala:262
+#: ../deja-dup/AssistantRestore.vala:91
+#: ../deja-dup/preferences/Preferences.vala:262
 msgid "_Backup location"
 msgstr "バックアップの保存場所(_B)"
 
@@ -789,6 +631,10 @@ msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "ファイルが正常に復元されました。"
 
+#: ../deja-dup/AssistantRestore.vala:484 ../libdeja/Operation.vala:63
+msgid "Restoring…"
+msgstr "復元しています…"
+
 #: ../deja-dup/AssistantRestoreMissing.vala:199
 msgid "File"
 msgstr "ファイル"
@@ -842,8 +688,8 @@ msgstr "テスト(_T)"
 msgid "_Resume Later"
 msgstr "後で再開する(_R)"
 
-#: ../deja-dup/main.vala:34 ../monitor/monitor.vala:36
-#: ../preferences/preferences-main.vala:26
+#: ../deja-dup/main.vala:34 ../deja-dup/monitor/monitor.vala:36
+#: ../deja-dup/preferences/preferences-main.vala:26
 msgid "Show version"
 msgstr "バージョンを表示する"
 
@@ -903,9 +749,11 @@ msgid "Connect to Server"
 msgstr "サーバに接続"
 
 #: ../deja-dup/MountOperationAssistant.vala:37
-#: ../widgets/ConfigLocationDAV.vala:49 ../widgets/ConfigLocationFTP.vala:45
-#: ../widgets/ConfigLocationRackspace.vala:31
-#: ../widgets/ConfigLocationSMB.vala:37 ../widgets/ConfigLocationSSH.vala:40
+#: ../deja-dup/widgets/ConfigLocationDAV.vala:49
+#: ../deja-dup/widgets/ConfigLocationFTP.vala:45
+#: ../deja-dup/widgets/ConfigLocationRackspace.vala:31
+#: ../deja-dup/widgets/ConfigLocationSMB.vala:37
+#: ../deja-dup/widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "ユーザ名(_U)"
 
@@ -997,304 +845,151 @@ msgstr "%.1f%% 完了"
 msgid "Show _Progress"
 msgstr "進捗を表示(_P)"
 
-#: ../monitor/monitor.vala:159
+#: ../deja-dup/monitor/monitor.vala:159
 msgid "Scheduled backup delayed"
 msgstr "スケジュールされたバックアップが延期されました"
 
-#: ../preferences/Preferences.vala:45
+#: ../deja-dup/preferences/Preferences.vala:45
 #, c-format
 msgid "I want to _restore files from a previous backup…"
 msgstr "以前のバックアップからファイルを復元(_R)..."
 
-#: ../preferences/Preferences.vala:64
+#: ../deja-dup/preferences/Preferences.vala:64
 #, c-format
 msgid "Just show my backup _settings"
 msgstr "バックアップ設定を表示するのみ(_S)"
 
-#: ../preferences/Preferences.vala:134
+#: ../deja-dup/preferences/Preferences.vala:134
 msgid "Automatic _backups"
 msgstr "自動バックアップ(_B)"
 
-#: ../preferences/Preferences.vala:181
+#: ../deja-dup/preferences/Preferences.vala:181
 msgid "Most recent backup"
 msgstr "一番最近のバックアップ"
 
-#: ../preferences/Preferences.vala:190
+#: ../deja-dup/preferences/Preferences.vala:190
 msgid "Next automatic backup"
 msgstr "次の自動バックアップ"
 
-#: ../preferences/Preferences.vala:224
+#: ../deja-dup/preferences/Preferences.vala:224
 msgid "_Restore…"
 msgstr "復元(_R)…"
 
-#: ../preferences/Preferences.vala:230
+#: ../deja-dup/preferences/Preferences.vala:230
 msgid "Back Up _Now"
 msgstr "今すぐバックアップ(_N)"
 
-#: ../preferences/Preferences.vala:252
+#: ../deja-dup/preferences/Preferences.vala:252
 msgid "Overview"
 msgstr "概要"
 
 #. Translators: storage as in "where to store the backup"
-#: ../preferences/Preferences.vala:284
+#: ../deja-dup/preferences/Preferences.vala:284
 msgid "Storage"
 msgstr "記憶装置"
 
-#: ../preferences/Preferences.vala:305
+#: ../deja-dup/preferences/Preferences.vala:305
 msgid "Folders to _back up"
 msgstr "バックアップするフォルダー(_B)"
 
-#: ../preferences/Preferences.vala:315
+#: ../deja-dup/preferences/Preferences.vala:315
 msgid "Folders to _ignore"
 msgstr "無視するフォルダー(_I)"
 
-#: ../preferences/Preferences.vala:324
+#: ../deja-dup/preferences/Preferences.vala:324
 msgid "Folders"
 msgstr "フォルダー"
 
-#: ../preferences/Preferences.vala:335
+#: ../deja-dup/preferences/Preferences.vala:335
 msgid "How _often to back up"
 msgstr "バックアップする頻度(_O)"
 
-#: ../preferences/Preferences.vala:346
+#: ../deja-dup/preferences/Preferences.vala:346
 #, c-format
 msgid "_Keep backups"
 msgstr "バックアップの保存期間(_K)"
 
-#: ../preferences/Preferences.vala:361
+#: ../deja-dup/preferences/Preferences.vala:361
 msgid "Schedule"
 msgstr "スケジュール"
 
-#: ../preferences/Preferences.vala:365
+#: ../deja-dup/preferences/Preferences.vala:365
 msgid "Categories"
 msgstr "カテゴリー"
 
-#: ../tools/duplicity/DuplicityJob.vala:90
-#: ../tools/duplicity/DuplicityJob.vala:187
-msgid "Paused (no network)"
-msgstr "中断（ネットワークが使用できません）"
-
-#. Was not even a file path (maybe something goofy like computer://)
-#: ../tools/duplicity/DuplicityJob.vala:458
-#, c-format
-msgid "Could not restore ‘%s’: Not a valid file location"
-msgstr "‘%s’を復元できません: 場所の指定が適切ではありません"
-
-#. Tiny backup location.  Suggest they get a larger one.
-#: ../tools/duplicity/DuplicityJob.vala:525
-msgid "Backup location is too small.  Try using one with more space."
-msgstr "バックアップ保存場所の空き容量が足りません。もっと空き容量の大きいもので試してください。"
-
-#: ../tools/duplicity/DuplicityJob.vala:548
-msgid "Backup location does not have enough free space."
-msgstr "バックアップの保存場所に十分な空き容量がありません。"
-
-#: ../tools/duplicity/DuplicityJob.vala:568
-#: ../tools/duplicity/DuplicityJob.vala:582
-msgid "Cleaning up…"
-msgstr "クリーンアップしています…"
-
-#. OK, we succeeded yay!  But some files didn't make it into the backup
-#. because we couldn't read them.  So tell the user so they don't think
-#. everything is hunky dory.
-#: ../tools/duplicity/DuplicityJob.vala:678
-msgid ""
-"Could not back up the following files.  Please make sure you are able to "
-"open them."
-msgstr "次のファイルがバックアップされませんでした。ファイルを開けるか確認してください。"
-
-#. OK, we succeeded yay!  But some files didn't actually restore
-#. because we couldn't write to them.  So tell the user so they
-#. don't think everything is hunky dory.
-#: ../tools/duplicity/DuplicityJob.vala:694
-msgid ""
-"Could not restore the following files.  Please make sure you are able to "
-"write to them."
-msgstr "以下のファイルはリストアできませんでした。このファイルを書きこむことができるか確認してください。"
-
-#: ../tools/duplicity/DuplicityJob.vala:941
-#, c-format
-msgid "Could not restore ‘%s’: File not found in backup"
-msgstr "‘%s’ を復元できません: ファイルがバックアップ内に見つかりません"
-
-#. notify upper layers, if they want to do anything
-#. Duplicity tried to ask the user what the encryption password is.
-#. notify upper layers, if they want to do anything
-#: ../tools/duplicity/DuplicityJob.vala:947
-#: ../tools/duplicity/DuplicityJob.vala:1045
-#: ../tools/duplicity/DuplicityJob.vala:1049
-msgid "Bad encryption password."
-msgstr "暗号化パスワードが違います。"
-
-#: ../tools/duplicity/DuplicityJob.vala:952
-msgid "Computer name changed"
-msgstr "コンピューター名が変更されました"
-
-#: ../tools/duplicity/DuplicityJob.vala:952
-#, c-format
-msgid ""
-"The existing backup is of a computer named %s, but the current computer’s "
-"name is %s.  If this is unexpected, you should back up to a different "
-"location."
-msgstr ""
-"見つかったバックアップのコンピューター名は %s ですが、現在のコンピューター名は %s です。意図していない場合は、別の場所にバックアップしてください。"
-
-#: ../tools/duplicity/DuplicityJob.vala:987
-#, c-format
-msgid "Permission denied when trying to create ‘%s’."
-msgstr "'%s' を作成しようとしましたが権限がありません。"
-
-#. assume error is on backend side
-#: ../tools/duplicity/DuplicityJob.vala:991
-#: ../tools/duplicity/DuplicityJob.vala:995
-#, c-format
-msgid "Permission denied when trying to read ‘%s’."
-msgstr "'%s' を読み込もうとしましたが権限がありません。"
-
-#: ../tools/duplicity/DuplicityJob.vala:999
-#, c-format
-msgid "Permission denied when trying to delete ‘%s’."
-msgstr "'%s' を削除しようとしましたが権限がありません。"
-
-#: ../tools/duplicity/DuplicityJob.vala:1006
-#, c-format
-msgid "Backup location ‘%s’ does not exist."
-msgstr "バックアップの保存場所 '%s' が存在しません。"
-
-#: ../tools/duplicity/DuplicityJob.vala:1012
-#: ../tools/duplicity/DuplicityJob.vala:1064
-msgid "No space left."
-msgstr "空き容量がありません。"
-
-#: ../tools/duplicity/DuplicityJob.vala:1026
-msgid "Invalid ID."
-msgstr "不正な ID です。"
-
-#: ../tools/duplicity/DuplicityJob.vala:1028
-msgid "Invalid secret key."
-msgstr "不正な secret key です。"
-
-#: ../tools/duplicity/DuplicityJob.vala:1030
-msgid "Your Amazon Web Services account is not signed up for the S3 service."
-msgstr "あなたのAmazon Web サービスアカウントは S3 サービスにサインアップされていません。"
-
-#: ../tools/duplicity/DuplicityJob.vala:1039
-msgid "S3 bucket name is not available."
-msgstr "S3 バケット名が使用できません。"
-
-#: ../tools/duplicity/DuplicityJob.vala:1053
-#, c-format
-msgid "Error reading file ‘%s’."
-msgstr "ファイル ‘%s’ を読み込み中にエラー。"
-
-#: ../tools/duplicity/DuplicityJob.vala:1055
-#, c-format
-msgid "Error writing file ‘%s’."
-msgstr "ファイル ‘%s’ を書き込み中にエラー。"
-
-#: ../tools/duplicity/DuplicityJob.vala:1066
-#, c-format
-msgid "No space left in ‘%s’."
-msgstr "'%s' に空き容量がありません。"
-
-#: ../tools/duplicity/DuplicityJob.vala:1074
-msgid "No backup files found"
-msgstr "バックアップファイルが見つかりません"
-
-#: ../tools/duplicity/DuplicityJob.vala:1124
-msgid "Uploading…"
-msgstr "アップロードしています…"
-
-#: ../tools/duplicity/DuplicityPlugin.vala:41
-msgid "Could not understand duplicity version."
-msgstr "duplicity のバージョンを解釈できませんでした。"
-
-#: ../tools/duplicity/DuplicityPlugin.vala:47
-#, c-format
-msgid "Could not understand duplicity version ‘%s’."
-msgstr "duplicity のバージョン '%s' を解釈できませんでした。"
-
-#: ../tools/duplicity/DuplicityPlugin.vala:64
-#, c-format
-msgid ""
-"Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
-"only found version %d.%d.%.2d"
-msgstr ""
-"Déjà Dup バックアップツールは、duplicityのバージョン %d.%d.%.2d 以上が必要ですが、%d.%d.%.2d のみ認識されました"
-
-#: ../widgets/ConfigDelete.vala:40
+#: ../deja-dup/widgets/ConfigDelete.vala:40
 msgid "At least six months"
 msgstr "最低6か月"
 
-#: ../widgets/ConfigDelete.vala:41
+#: ../deja-dup/widgets/ConfigDelete.vala:41
 msgid "At least a year"
 msgstr "最低1年"
 
-#: ../widgets/ConfigDelete.vala:42
+#: ../deja-dup/widgets/ConfigDelete.vala:42
 msgid "Forever"
 msgstr "期限なし"
 
-#: ../widgets/ConfigDelete.vala:89
+#: ../deja-dup/widgets/ConfigDelete.vala:89
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
 msgstr[0] "最低 %d 日"
 
-#: ../widgets/ConfigLabelBackupDate.vala:61
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:61
 msgid "Today"
 msgstr "今日"
 
-#: ../widgets/ConfigLabelBackupDate.vala:63
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:63
 msgid "Yesterday"
 msgstr "昨日"
 
-#: ../widgets/ConfigLabelBackupDate.vala:65
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:65
 msgid "Tomorrow"
 msgstr "明日"
 
-#: ../widgets/ConfigLabelBackupDate.vala:73
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:73
 #, c-format
 msgid "%d day from now"
 msgid_plural "%d days from now"
 msgstr[0] "今から %d 日"
 
-#: ../widgets/ConfigLabelBackupDate.vala:83
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:83
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d 日前"
 
 #. Translators: This is used in phrases like "Most recent backup: None"
-#: ../widgets/ConfigLabelBackupDate.vala:95
-#: ../widgets/ConfigLabelBackupDate.vala:109
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:95
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:109
 msgid "None"
 msgstr "なし"
 
-#: ../widgets/ConfigLabelBool.vala:34
+#: ../deja-dup/widgets/ConfigLabelBool.vala:34
 msgid "Yes"
 msgstr "有効"
 
-#: ../widgets/ConfigLabelBool.vala:34
+#: ../deja-dup/widgets/ConfigLabelBool.vala:34
 msgid "No"
 msgstr "無効"
 
-#: ../widgets/ConfigLabelPolicy.vala:64
+#: ../deja-dup/widgets/ConfigLabelPolicy.vala:64
 msgid ""
 "Old backups will be kept for at least six months or until the backup "
 "location is low on space."
 msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低6ヶ月間保存されます。"
 
-#: ../widgets/ConfigLabelPolicy.vala:66
+#: ../deja-dup/widgets/ConfigLabelPolicy.vala:66
 msgid ""
 "Old backups will be kept for at least a year or until the backup location is "
 "low on space."
 msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低1年間保存されます。"
 
-#: ../widgets/ConfigLabelPolicy.vala:68
+#: ../deja-dup/widgets/ConfigLabelPolicy.vala:68
 msgid "Old backups will be kept until the backup location is low on space."
 msgstr "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは保存され続けます。"
 
-#: ../widgets/ConfigLabelPolicy.vala:71
+#: ../deja-dup/widgets/ConfigLabelPolicy.vala:71
 #, c-format
 msgid ""
 "Old backups will be kept at least %d day or until the backup location is low "
@@ -1304,114 +999,463 @@ msgid_plural ""
 "low on space."
 msgstr[0] "バックアップ保存先の空き容量が少なくならない限り、古いバックアップは最低 %d 日間保存されます。"
 
-#: ../widgets/ConfigList.vala:179
+#: ../deja-dup/widgets/ConfigList.vala:179
 msgid "_Add"
 msgstr "追加(_A)"
 
-#: ../widgets/ConfigList.vala:180
+#: ../deja-dup/widgets/ConfigList.vala:180
 msgid "Add"
 msgstr "追加"
 
-#: ../widgets/ConfigList.vala:188
+#: ../deja-dup/widgets/ConfigList.vala:188
 msgid "_Remove"
 msgstr "削除(_R)"
 
-#: ../widgets/ConfigList.vala:189
+#: ../deja-dup/widgets/ConfigList.vala:189
 msgid "Remove"
 msgstr "削除"
 
-#: ../widgets/ConfigList.vala:275
+#: ../deja-dup/widgets/ConfigList.vala:272
 msgid "Choose folders"
 msgstr "フォルダーを選択"
 
-#: ../widgets/ConfigLocation.vala:118
+#: ../deja-dup/widgets/ConfigLocation.vala:118
 msgid "SSH"
 msgstr "SSH"
 
-#: ../widgets/ConfigLocation.vala:120
+#: ../deja-dup/widgets/ConfigLocation.vala:120
 msgid "Windows Share"
 msgstr "Windows共有"
 
-#: ../widgets/ConfigLocation.vala:122
+#: ../deja-dup/widgets/ConfigLocation.vala:122
 msgid "FTP"
 msgstr "FTP"
 
-#: ../widgets/ConfigLocation.vala:124
+#: ../deja-dup/widgets/ConfigLocation.vala:124
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../widgets/ConfigLocation.vala:127
+#: ../deja-dup/widgets/ConfigLocation.vala:127
 msgid "Custom Location"
 msgstr "カスタム"
 
 #. And a local folder option
-#: ../widgets/ConfigLocation.vala:133
+#: ../deja-dup/widgets/ConfigLocation.vala:133
 msgid "Local Folder"
 msgstr "ローカルのフォルダー"
 
-#: ../widgets/ConfigLocationCustom.vala:33
+#: ../deja-dup/widgets/ConfigLocation.vala:176 ../libdeja/BackendS3.vala:122
+msgid "Amazon S3"
+msgstr "Amazon S3"
+
+#: ../deja-dup/widgets/ConfigLocation.vala:186 ../libdeja/BackendU1.vala:170
+msgid "Ubuntu One"
+msgstr "Ubuntu One"
+
+#: ../deja-dup/widgets/ConfigLocation.vala:194
+#: ../libdeja/BackendRackspace.vala:69
+msgid "Rackspace Cloud Files"
+msgstr "Rackspace Cloud Files"
+
+#: ../deja-dup/widgets/ConfigLocationCustom.vala:34
 msgid "_URI"
 msgstr "URI(_U)"
 
-#: ../widgets/ConfigLocationDAV.vala:31 ../widgets/ConfigLocationFTP.vala:32
-#: ../widgets/ConfigLocationSMB.vala:31 ../widgets/ConfigLocationSSH.vala:31
+#: ../deja-dup/widgets/ConfigLocationDAV.vala:31
+#: ../deja-dup/widgets/ConfigLocationFTP.vala:32
+#: ../deja-dup/widgets/ConfigLocationSMB.vala:31
+#: ../deja-dup/widgets/ConfigLocationSSH.vala:31
 msgid "_Server"
 msgstr "サーバー(_S)"
 
-#: ../widgets/ConfigLocationDAV.vala:38
+#: ../deja-dup/widgets/ConfigLocationDAV.vala:38
 msgid "Use secure connection (_HTTPS)"
 msgstr "保護された接続(_HTTPS)"
 
-#: ../widgets/ConfigLocationDAV.vala:43 ../widgets/ConfigLocationFTP.vala:35
-#: ../widgets/ConfigLocationSSH.vala:34
+#: ../deja-dup/widgets/ConfigLocationDAV.vala:43
+#: ../deja-dup/widgets/ConfigLocationFTP.vala:35
+#: ../deja-dup/widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr "ポート(_P)"
 
-#: ../widgets/ConfigLocationDAV.vala:46 ../widgets/ConfigLocationFTP.vala:38
-#: ../widgets/ConfigLocationFile.vala:45 ../widgets/ConfigLocationS3.vala:33
-#: ../widgets/ConfigLocationSMB.vala:34 ../widgets/ConfigLocationSSH.vala:37
-#: ../widgets/ConfigLocationU1.vala:33 ../widgets/ConfigLocationVolume.vala:33
+#: ../deja-dup/widgets/ConfigLocationDAV.vala:46
+#: ../deja-dup/widgets/ConfigLocationFTP.vala:38
+#: ../deja-dup/widgets/ConfigLocationFile.vala:45
+#: ../deja-dup/widgets/ConfigLocationS3.vala:33
+#: ../deja-dup/widgets/ConfigLocationSMB.vala:34
+#: ../deja-dup/widgets/ConfigLocationSSH.vala:37
+#: ../deja-dup/widgets/ConfigLocationU1.vala:33
+#: ../deja-dup/widgets/ConfigLocationVolume.vala:33
 msgid "_Folder"
 msgstr "フォルダー(_F)"
 
-#: ../widgets/ConfigLocationFile.vala:39
+#: ../deja-dup/widgets/ConfigLocationFile.vala:39
 msgid "_Choose Folder…"
 msgstr "フォルダーを選択...(_C)"
 
-#: ../widgets/ConfigLocationFile.vala:50
+#: ../deja-dup/widgets/ConfigLocationFile.vala:50
 msgid "Choose Folder"
 msgstr "フォルダーの選択"
 
-#: ../widgets/ConfigLocationRackspace.vala:33
+#: ../deja-dup/widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr "コンテナー(_C)"
 
-#: ../widgets/ConfigLocationS3.vala:31
+#: ../deja-dup/widgets/ConfigLocationS3.vala:31
 msgid "S3 Access Key I_D"
 msgstr "S3 Access Key ID(_D)"
 
-#: ../widgets/ConfigLocationSMB.vala:40
+#: ../deja-dup/widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
 msgstr "ドメイン名(_D)"
 
-#: ../widgets/ConfigPeriod.vala:36
+#: ../deja-dup/widgets/ConfigPeriod.vala:36
 msgid "Daily"
 msgstr "毎日"
 
-#: ../widgets/ConfigPeriod.vala:37
+#: ../deja-dup/widgets/ConfigPeriod.vala:37
 msgid "Weekly"
 msgstr "毎週"
 
-#: ../widgets/ConfigPeriod.vala:82
+#: ../deja-dup/widgets/ConfigPeriod.vala:82
 #, c-format
 msgid "Every %d day"
 msgid_plural "Every %d days"
 msgstr[0] "%d 日毎"
 
-#: ../widgets/WidgetUtils.vala:30
+#: ../deja-dup/widgets/WidgetUtils.vala:30
 #, c-format
 msgid "Could not display %s"
 msgstr "%s を表示できません"
 
-#~ msgid "Obsolete"
-#~ msgstr "廃止"
+#. Translators: %2$s is the name of a removable drive, %1$s is a folder
+#. on that removable drive.
+#: ../libdeja/BackendFile.vala:135 ../libdeja/CommonUtils.vala:516
+#, c-format
+msgid "%1$s on %2$s"
+msgstr "%2$s 上の %1$s"
+
+#: ../libdeja/BackendFile.vala:168
+#, c-format
+msgid "Backup will begin when %s becomes connected."
+msgstr "%s を接続するとバックアップが開始されます。"
+
+#: ../libdeja/BackendFile.vala:175 ../libdeja/BackendRackspace.vala:49
+#: ../libdeja/BackendS3.vala:59 ../libdeja/BackendU1.vala:150
+msgid "Backup will begin when a network connection becomes available."
+msgstr "ネットワークが利用可能になるとバックアップが開始されます。"
+
+#: ../libdeja/BackendFile.vala:384 ../libdeja/BackendFile.vala:448
+msgid "Backup location not available"
+msgstr "バックアップの保存場所が使用できません"
+
+#: ../libdeja/BackendFile.vala:385
+msgid "Waiting for a network connection…"
+msgstr "ネットワークの接続を待っています..."
+
+#: ../libdeja/BackendFile.vala:448
+#, c-format
+msgid "Waiting for ‘%s’ to become connected…"
+msgstr "‘%s’ が接続されるのを待っています…"
+
+#. Translators: %s is a folder.
+#: ../libdeja/BackendRackspace.vala:72
+#, c-format
+msgid "%s on Rackspace Cloud Files"
+msgstr "%s （Rackspace Cloud Files上）"
+
+#: ../libdeja/BackendRackspace.vala:115 ../libdeja/BackendS3.vala:168
+msgid "Permission denied"
+msgstr "認証に失敗しました"
+
+#: ../libdeja/BackendRackspace.vala:146
+#, c-format
+msgid ""
+"You can sign up for a Rackspace Cloud Files account <a "
+"href=\"%s\">online</a>."
+msgstr "Rackspace Cloud Filesアカウントに<a href=\"%s\">オンライン</a>でサインアップできます。"
+
+#: ../libdeja/BackendRackspace.vala:147
+msgid "Connect to Rackspace Cloud Files"
+msgstr "Rackspace Cloud Filesに接続"
+
+#: ../libdeja/BackendRackspace.vala:148
+msgid "_API access key"
+msgstr "APIアクセスキー(_A)"
+
+#: ../libdeja/BackendRackspace.vala:149
+msgid "S_how API access key"
+msgstr "APIアクセスキーの表示(_H)"
+
+#: ../libdeja/BackendRackspace.vala:150
+msgid "_Remember API access key"
+msgstr "APIアクセスキーを記憶する(_R)"
+
+#. Translators: %s is a folder.
+#: ../libdeja/BackendS3.vala:125
+#, c-format
+msgid "%s on Amazon S3"
+msgstr "Amazon S3 上の %s"
+
+#: ../libdeja/BackendS3.vala:199
+#, c-format
+msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
+msgstr "<a href=\"%s\">オンライン</a>でAmazon S3アカウントをサインアップできます。"
+
+#: ../libdeja/BackendS3.vala:200
+msgid "Connect to Amazon S3"
+msgstr "Amazon S3に接続"
+
+#: ../libdeja/BackendS3.vala:201
+msgid "_Access key ID"
+msgstr "Access key ID(_A)"
+
+#: ../libdeja/BackendS3.vala:202
+msgid "_Secret access key"
+msgstr "Secret access key(_S)"
+
+#: ../libdeja/BackendS3.vala:203
+msgid "S_how secret access key"
+msgstr "secret access key を表示する(_H)"
+
+#: ../libdeja/BackendS3.vala:204
+msgid "_Remember secret access key"
+msgstr "secret access key を記憶する(_R)"
+
+#. Translators: %s is a folder.
+#: ../libdeja/BackendU1.vala:173
+#, c-format
+msgid "%s on Ubuntu One"
+msgstr "%s （Ubuntu One上）"
+
+#: ../libdeja/BackendU1.vala:259
+msgid "Connect to Ubuntu One"
+msgstr "Ubuntu Oneに接続"
+
+#: ../libdeja/BackendU1.vala:260
+msgid "Sign into Ubuntu One…"
+msgstr "Ubuntu Oneにサインイン…"
+
+#: ../libdeja/CommonUtils.vala:435
+#, c-format
+msgid "Could not find backup tool in %s.  Your installation is incomplete."
+msgstr "%s 内にバックアップツールが見つかりませんでした。インストールが不完全です。"
+
+#: ../libdeja/CommonUtils.vala:437
+msgid "Could not load backup tool.  Your installation is incomplete."
+msgstr "バックアップツールのロードができませんでした。インストールが不完全です。"
+
+#: ../libdeja/CommonUtils.vala:443
+msgid "Backup tool is broken.  Your installation is incomplete."
+msgstr "バックアップツールが破損しています。インストールが不完全です。"
+
+#: ../libdeja/CommonUtils.vala:465
+msgid "Could not start backup tool"
+msgstr "バックアップツールを開始できませんでした。"
+
+#. Translators: this is the home folder and %s is the user's username
+#: ../libdeja/CommonUtils.vala:567
+#, c-format
+msgid "Home (%s)"
+msgstr "ホーム (%s)"
+
+#. Translators: this is the home folder
+#: ../libdeja/CommonUtils.vala:572
+msgid "Home"
+msgstr "ホーム"
+
+#. Translators: this is the trash folder
+#: ../libdeja/CommonUtils.vala:577
+msgid "Trash"
+msgstr "ゴミ箱"
+
+#: ../libdeja/OperationBackup.vala:42 ../libdeja/OperationVerify.vala:56
+msgid "Verifying backup…"
+msgstr "バックアップを検証中..."
+
+#: ../libdeja/OperationRestore.vala:51
+msgid "Restoring files…"
+msgstr "ファイルを復元しています…"
+
+#: ../libdeja/OperationVerify.vala:94
+msgid ""
+"Your backup appears to be corrupted.  You should delete the backup and try "
+"again."
+msgstr "バックアップが破損しているようです。削除して再試行してください。"
+
+#: ../libdeja/Operation.vala:61
+msgid "Backing up…"
+msgstr "バックアップしています…"
+
+#: ../libdeja/Operation.vala:65
+msgid "Checking for backups…"
+msgstr "バックアップを照合しています…"
+
+#: ../libdeja/Operation.vala:67
+msgid "Listing files…"
+msgstr "ファイルをリストアップしています…"
+
+#: ../libdeja/Operation.vala:69 ../libdeja/Operation.vala:103
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:395
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:402
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:421
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:426
+msgid "Preparing…"
+msgstr "準備しています…"
+
+#: ../libdeja/Operation.vala:296
+msgid "Another backup operation is already running"
+msgstr "別のバックアップが実行中です"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:90
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:182
+msgid "Paused (no network)"
+msgstr "中断（ネットワークが使用できません）"
+
+#. Was not even a file path (maybe something goofy like computer://)
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:453
+#, c-format
+msgid "Could not restore ‘%s’: Not a valid file location"
+msgstr "‘%s’を復元できません: 場所の指定が適切ではありません"
+
+#. Tiny backup location.  Suggest they get a larger one.
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:520
+msgid "Backup location is too small.  Try using one with more space."
+msgstr "バックアップ保存場所の空き容量が足りません。もっと空き容量の大きいもので試してください。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:543
+msgid "Backup location does not have enough free space."
+msgstr "バックアップの保存場所に十分な空き容量がありません。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:563
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:577
+msgid "Cleaning up…"
+msgstr "クリーンアップしています…"
+
+#. OK, we succeeded yay!  But some files didn't make it into the backup
+#. because we couldn't read them.  So tell the user so they don't think
+#. everything is hunky dory.
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:673
+msgid ""
+"Could not back up the following files.  Please make sure you are able to "
+"open them."
+msgstr "次のファイルがバックアップされませんでした。ファイルを開けるか確認してください。"
+
+#. OK, we succeeded yay!  But some files didn't actually restore
+#. because we couldn't write to them.  So tell the user so they
+#. don't think everything is hunky dory.
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:689
+msgid ""
+"Could not restore the following files.  Please make sure you are able to "
+"write to them."
+msgstr "以下のファイルはリストアできませんでした。このファイルを書きこむことができるか確認してください。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:936
+#, c-format
+msgid "Could not restore ‘%s’: File not found in backup"
+msgstr "‘%s’ を復元できません: ファイルがバックアップ内に見つかりません"
+
+#. notify upper layers, if they want to do anything
+#. Duplicity tried to ask the user what the encryption password is.
+#. notify upper layers, if they want to do anything
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:942
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1040
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1044
+msgid "Bad encryption password."
+msgstr "暗号化パスワードが違います。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:947
+msgid "Computer name changed"
+msgstr "コンピューター名が変更されました"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:947
+#, c-format
+msgid ""
+"The existing backup is of a computer named %s, but the current computer’s "
+"name is %s.  If this is unexpected, you should back up to a different "
+"location."
+msgstr ""
+"見つかったバックアップのコンピューター名は %s ですが、現在のコンピューター名は %s です。意図していない場合は、別の場所にバックアップしてください。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:982
+#, c-format
+msgid "Permission denied when trying to create ‘%s’."
+msgstr "'%s' を作成しようとしましたが権限がありません。"
+
+#. assume error is on backend side
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:986
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:990
+#, c-format
+msgid "Permission denied when trying to read ‘%s’."
+msgstr "'%s' を読み込もうとしましたが権限がありません。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:994
+#, c-format
+msgid "Permission denied when trying to delete ‘%s’."
+msgstr "'%s' を削除しようとしましたが権限がありません。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1001
+#, c-format
+msgid "Backup location ‘%s’ does not exist."
+msgstr "バックアップの保存場所 '%s' が存在しません。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1007
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1059
+msgid "No space left."
+msgstr "空き容量がありません。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1021
+msgid "Invalid ID."
+msgstr "不正な ID です。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1023
+msgid "Invalid secret key."
+msgstr "不正な secret key です。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1025
+msgid "Your Amazon Web Services account is not signed up for the S3 service."
+msgstr "あなたのAmazon Web サービスアカウントは S3 サービスにサインアップされていません。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1034
+msgid "S3 bucket name is not available."
+msgstr "S3 バケット名が使用できません。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1048
+#, c-format
+msgid "Error reading file ‘%s’."
+msgstr "ファイル ‘%s’ を読み込み中にエラー。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1050
+#, c-format
+msgid "Error writing file ‘%s’."
+msgstr "ファイル ‘%s’ を書き込み中にエラー。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1061
+#, c-format
+msgid "No space left in ‘%s’."
+msgstr "'%s' に空き容量がありません。"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1069
+msgid "No backup files found"
+msgstr "バックアップファイルが見つかりません"
+
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1119
+msgid "Uploading…"
+msgstr "アップロードしています…"
+
+#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:41
+msgid "Could not understand duplicity version."
+msgstr "duplicity のバージョンを解釈できませんでした。"
+
+#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:47
+#, c-format
+msgid "Could not understand duplicity version ‘%s’."
+msgstr "duplicity のバージョン '%s' を解釈できませんでした。"
+
+#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:50
+#, c-format
+msgid ""
+"Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
+"only found version %d.%d.%.2d"
+msgstr ""
+"Déjà Dup バックアップツールは、duplicityのバージョン %d.%d.%.2d 以上が必要ですが、%d.%d.%.2d のみ認識されました"

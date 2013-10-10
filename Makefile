@@ -64,7 +64,7 @@ screenshots: all
 copy-po:
 	test -d $(TD)
 	cp -a $(TD)/po/*.po po
-	for po in $(TD)/help/*.po; do \
+	for po in $(TD)/deja-dup/help/*.po; do \
 		mkdir -p deja-dup/help/$$(basename $$po .po); \
 		cp -a $$po deja-dup/help/$$(basename $$po .po)/; \
 	done
