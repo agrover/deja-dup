@@ -48,8 +48,8 @@ class PreferencesApp : Object
     else {
       // We're first instance.  Yay!
       var dlg = new Gtk.Window();
-      // Translators: "Backup" is a noun
-      dlg.title = _("Backup");
+      // Translators: "Backups" is a noun
+      dlg.title = _("Backups");
       dlg.resizable = false;
       var prefs = new DejaDup.Preferences();
       prefs.border_width = 12;
@@ -63,7 +63,7 @@ class PreferencesApp : Object
   {
     DejaDup.i18n_setup();
 
-    Environment.set_application_name(_("Backup"));
+    Environment.set_application_name(_("Backups"));
 
     OptionContext context = new OptionContext("");
     context.add_main_entries(options, Config.GETTEXT_PACKAGE);

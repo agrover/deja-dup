@@ -130,7 +130,7 @@ public abstract class StatusIcon : Object
         more = _("Not all files were successfully backed up.  See dialog for more details.");
       }
 
-      Notify.init(_("Backup"));
+      Notify.init(_("Backups"));
       note = new Notify.Notification(msg, more, "deja-dup");
       note.set_hint_string("desktop-entry", "deja-dup");
       try {
@@ -229,7 +229,7 @@ class ShellStatusIcon : StatusIcon
 
   construct {
     if (automatic && op.mode == DejaDup.ToolJob.Mode.BACKUP) {
-      Notify.init(_("Backup"));
+      Notify.init(_("Backups"));
       note = new Notify.Notification(_("Starting scheduled backup"), null,
                                      "deja-dup");
       note.set_hint_string("desktop-entry", "deja-dup");

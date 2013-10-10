@@ -36,7 +36,7 @@ class CCPanelTests(DejaDupTestCase):
            crash."""
         app = self.launch_test_application('gnome-control-center', 'deja-dup')
         window = app.select_single("GtkApplicationWindow")
-        self.assertThat(window.title, Eventually(Equals("Backup")))
+        self.assertThat(window.title, Eventually(Equals("Backups")))
         self.close_backup_panel(window)
         self.open_backup_panel(window)
         self.close_backup_panel(window)
@@ -45,9 +45,9 @@ class CCPanelTests(DejaDupTestCase):
         # This is dumb, but GtkIconView doesn't seem to list its contents to
         # autopilot.  TODO: make this actually click on Backup icon in window
         os.system('gnome-control-center deja-dup')
-        self.assertThat(window.title, Eventually(Equals("Backup")))
+        self.assertThat(window.title, Eventually(Equals("Backups")))
 
     def close_backup_panel(self, window):
         button = window.select_single("GtkButton", label="_All Settings")
         self.pointer.click_object(button)
-        self.assertThat(window.title, Eventually(NotEquals("Backup")))
+        self.assertThat(window.title, Eventually(NotEquals("Backups")))

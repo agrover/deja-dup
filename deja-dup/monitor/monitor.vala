@@ -112,7 +112,7 @@ static void close_pid(Pid child_pid, int status)
 static void notify_delay(string header, string reason)
 {
   if (note == null) {
-    Notify.init(_("Backup"));
+    Notify.init(_("Backups"));
     note = new Notify.Notification(header, reason,
                                    "deja-dup");
     // Pretend to be 'deja-dup', even though we are deja-dup-monitor for ease

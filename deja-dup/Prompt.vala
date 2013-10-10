@@ -90,7 +90,7 @@ void ok()
 
 void show_prompt_notification()
 {
-  Notify.init(_("Backup"));
+  Notify.init(_("Backups"));
   var note = new Notify.Notification(get_header(), get_body(), "deja-dup");
   note.set_hint_string("desktop-entry", "deja-dup");
   note.add_action("cancel", get_cancel_button(false), () => {
@@ -125,7 +125,7 @@ Gtk.Window show_prompt_dialog()
                                   Gtk.ButtonsType.NONE, "%s", get_header());
   dlg.format_secondary_text("%s", get_body());
   dlg.skip_taskbar_hint = false;
-  dlg.set_title(_("Backup"));
+  dlg.set_title(_("Backups"));
 
   var img = new Gtk.Image.from_icon_name("deja-dup", Gtk.IconSize.DIALOG);
   img.yalign = 0.0f;
