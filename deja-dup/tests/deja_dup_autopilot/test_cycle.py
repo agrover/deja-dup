@@ -27,3 +27,4 @@ class CycleTests(DejaDupTestCase):
         self.backup()
         self.copy_sourcedir()
         self.restore()
+        self.compare()

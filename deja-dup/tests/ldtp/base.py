@@ -416,25 +416,3 @@ def restore_simple(path, date=None, backend = None, encrypt=True, dest = None):
   wait_for_finish('frmRestore', 'lblYourfilesweresuccessfullyrestored', 400)
   ldtp.click('frmRestore', 'btnClose')
   ldtp.waittillguinotexist('frmRestore')
-
-def restore_missing(files, path):
-  args = ['--restore-missing', path]
-  start_deja_dup(args=args, waitfor='frmRestore')
-  wait_for_finish('frmRestore', 'lblScanningfinished', 200)
-  for f in files:
-    index = ldtp.gettablerowindex('frmRestore', 'tbl0', f)
-    if index != -1:
-      ldtp.checkrow('frmRestore', 'tbl0', index)
-  ldtp.click('frmRestore', 'btnForward')
-  ldtp.click('frmRestore', 'btnRestore')
-  wait_for_encryption('frmRestore', True)
-  if len(files) == 1:
-    lbl = 'lblYourfilewassuccessfullyrestored'
-  else:
-    lbl = 'lblYourfilesweresuccessfullyrestored'
-  wait_for_finish('frmRestore', lbl, 200)
-  ldtp.click('frmRestore', 'btnClose')
-
-def file_equals(path, contents):
-  f = open(path)
-  return f.read() == contents

@@ -17,23 +17,20 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import shutil
 from deja_dup_autopilot import DejaDupTestCase
 
 
-class OverwriteTests(DejaDupTestCase):
+class MissingTests(DejaDupTestCase):
 
-    def test_overwrite_all(self):
-        """Test overwriting the whole srcdir"""
+    def test_missing(self):
+        """Test missing files workflow"""
         self.use_simple_setup()
         self.backup(gui=False)
-        self.copy_sourcedir(delete=False)
-        self.restore()
-        self.compare()
 
-    def test_overwrite_one(self):
-        """Test overwriting a single file"""
-        self.use_simple_setup()
-        self.backup(gui=False)
-        self.copy_sourcedir(delete=False)
-        self.restore(files=[os.path.join(self.sourcedir, 'subdir')])
-        self.compare()
+        self.copy_sourcedir()
+        os.mkdir(self.sourcedir)
+        shutil.copy2(os.path.join(self.copydir, 'three'), self.sourcedir)
+
+        self.restore_missing(self.sourcedir, ['one', 'subdir'])
+        self.compare(equal=['one', 'three', 'subdir'], missing=['two'])

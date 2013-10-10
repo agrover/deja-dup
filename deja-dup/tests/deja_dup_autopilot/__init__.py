@@ -47,11 +47,12 @@ class DejaDupTestCase(AutopilotTestCase):
 
         self.rootdir = os.environ['DEJA_DUP_TEST_ROOT']
         self.sourcedir = os.path.join(self.rootdir, 'source')
-        self.addCleanup(shutil.rmtree, self.sourcedir)
         self.copydir = os.path.join(self.rootdir, 'source.copy')
-        self.addCleanup(shutil.rmtree, self.copydir)
         self.backupdir = os.path.join(self.rootdir, 'backup')
+        self.addCleanup(shutil.rmtree, self.sourcedir)
+        self.addCleanup(shutil.rmtree, self.copydir)
         self.addCleanup(shutil.rmtree, self.backupdir)
+        self.addCleanup(shutil.rmtree, os.path.join(self.rootdir, 'cache'))
         try:
             os.makedirs(self.sourcedir)
         except OSError:
@@ -61,6 +62,11 @@ class DejaDupTestCase(AutopilotTestCase):
         self.set_config("location-mode", "filename-entry",
                         schema="org.gtk.Settings.FileChooser",
                         path="/org/gtk/settings/file-chooser/")
+
+        # And a catch-all for the other settings that get set as part of a
+        # deja-dup run, like last-backup or such.
+        self.addCleanup(os.system,
+                        "gsettings reset-recursively org.gnome.DejaDup")
 
     def set_config(self, key, value, schema="org.gnome.DejaDup", path=None):
         settings = Gio.Settings(schema, path=path)
@@ -111,7 +117,8 @@ class DejaDupTestCase(AutopilotTestCase):
     def backup(self, gui=True):
         if not gui:
             # Sometimes we just want the backup to exist, without testing the
-            # gui workflow itself.
+            # gui workflow itself.  Note that this puts the archive files in
+            # a place where deja-dup won't find them.  Do we want that?
             p = subprocess.Popen(['env', 'PASSPHRASE=test', 'duplicity', '/',
                                    '--include=' + self.sourcedir,
                                    '--exclude=**', 'file://' + self.backupdir],
@@ -187,6 +194,76 @@ class DejaDupTestCase(AutopilotTestCase):
         button = app.select_single('GtkLabel', label='_Close')
         self.pointer.click_object(button)
 
-        self.assertEqual(0,
-                         os.system('diff -ruN "%s" "%s"' % (self.copydir,
-                                                            self.sourcedir)))
+    def restore_missing(self, path, files):
+        self.assertNotEqual(len(files), 0)
+
+        app = self.launch_test_application('deja-dup', '--restore-missing',
+                                           path)
+        first_header_label = self.header_string('Restore From Where?')
+        header = app.select_single('GtkLabel', label=first_header_label)
+        button = app.select_single('GtkLabel', label='_Forward')
+        self.pointer.click_object(button)
+
+        self.assertThat(
+            header.label,
+            Eventually(
+                Equals(self.header_string("Encryption Password Needed")),
+                timeout=30))
+        entry = app.select_single('GtkEntry', visible=True)
+        with self.keyboard.focused_type(entry, pointer=self.pointer) as kb:
+            kb.type("test")
+        button = app.select_single('GtkLabel', label='Co_ntinue')
+        self.pointer.click_object(button)
+
+        label = app.select_single('GtkLabel', BuilderName='status-label')
+        self.assertThat(label.label, Eventually(Equals("Scanning finished")))
+
+        tree = app.select_single('GtkTreeViewAccessible')
+        checkboxes = tree.select_many('GtkBooleanCellAccessible')
+        labels = tree.select_many('GtkTextCellAccessible')
+        for i in range(len(checkboxes)):
+            # Multiply by two, because there are two labels for each checkbox.
+            # The first is the name, the second is the date.
+            if labels[i * 2].accessible_name in files:
+                self.pointer.click_object(checkboxes[i])
+        button = app.select_single('GtkLabel', label='_Forward')
+        self.pointer.click_object(button)
+
+        self.assertThat(
+            header.label,
+            Eventually(Equals(self.header_string("Summary"))))
+        button = app.select_single('GtkLabel', label='_Restore')
+        self.pointer.click_object(button)
+
+        self.assertThat(
+            header.label,
+            Eventually(
+                Equals(self.header_string("Encryption Password Needed")),
+                timeout=30))
+        # No need to enter text, it should be saved from before
+        button = app.select_single('GtkLabel', label='Co_ntinue')
+        self.pointer.click_object(button)
+
+        self.assertThat(
+            header.label,
+            Eventually(Equals(self.header_string("Restore Finished")),
+                       timeout=300000))
+        button = app.select_single('GtkLabel', label='_Close')
+        self.pointer.click_object(button)
+
+    def compare(self, equal=None, missing=[]):
+        if equal is None:
+            self.assertEqual(
+                0, os.system('diff -ruN "%s" "%s"' % (self.copydir,
+                                                      self.sourcedir)))
+            return
+
+        for e in equal:
+            copy = os.path.join(self.copydir, e)
+            source = os.path.join(self.sourcedir, e)
+            self.assertEqual(
+                0, os.system('diff -ruN "%s" "%s"' % (copy, source)))
+
+        for m in missing:
+            source = os.path.join(self.sourcedir, m)
+            self.assertEqual(False, os.path.exists(source))
