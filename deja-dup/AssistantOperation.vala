@@ -289,7 +289,7 @@ public abstract class AssistantOperation : Assistant
       show_detail(detail);
     
     go_to_page(summary_page);
-    set_header_icon(Gtk.Stock.DIALOG_ERROR);
+    set_header_icon("dialog-error");
     page_box.queue_resize();
   }
 
@@ -653,7 +653,7 @@ public abstract class AssistantOperation : Assistant
         do_apply.begin();
     }
     else if (page == password_page || page == nag_page)
-      set_header_icon(Gtk.Stock.DIALOG_AUTHENTICATION);
+      set_header_icon("dialog-password");
   }
 
   // Make Deja Dup invisible, used when we are shutting down or some such.

@@ -272,8 +272,8 @@ public class ConfigList : ConfigWidget
     var dlg = new Gtk.FileChooserDialog(_("Choose folders"),
                                         get_ancestor(typeof(Gtk.Window)) as Gtk.Window,
                                         Gtk.FileChooserAction.SELECT_FOLDER,
-                                        Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL,
-                          				      Gtk.Stock.OPEN, Gtk.ResponseType.ACCEPT);
+                                        _("_Cancel"), Gtk.ResponseType.CANCEL,
+                                        _("_Add"), Gtk.ResponseType.ACCEPT);
     dlg.select_multiple = true;
     
     if (dlg.run() != Gtk.ResponseType.ACCEPT) {

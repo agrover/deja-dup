@@ -35,7 +35,7 @@ public abstract class Assistant : Gtk.Window
   public signal void prepare(Gtk.Widget page);
   public signal void forward();
   public signal void backward();
-  public string apply_text {get; set; default = Gtk.Stock.APPLY;}
+  public string apply_text {get; set; default = _("_OK");}
   public bool last_op_was_back {get; private set; default = false;}
 
   public enum Type {
@@ -277,9 +277,9 @@ public abstract class Assistant : Gtk.Window
     }
   }
 
-  Gtk.Button add_button(string stock, int response_id)
+  Gtk.Button add_button(string label, int response_id)
   {
-    var btn = new Gtk.Button.from_stock(stock);
+    var btn = new Gtk.Button.with_mnemonic(label);
     btn.can_default = true;
     btn.clicked.connect(() => {this.response(response_id);});
     btn.show();
@@ -295,7 +295,7 @@ public abstract class Assistant : Gtk.Window
 
     bool show_cancel = false, show_back = false, show_forward = false,
          show_apply = false, show_close = false, show_resume = false;
-    string forward_text = Gtk.Stock.GO_FORWARD;
+    string forward_text = _("_Forward");
 
     switch (info.type) {
     default:
@@ -348,13 +348,13 @@ public abstract class Assistant : Gtk.Window
       area.remove(apply_button); DejaDup.destroy_widget(apply_button); apply_button = null;}
 
     if (show_cancel)
-      cancel_button = add_button(Gtk.Stock.CANCEL, CANCEL);
+      cancel_button = add_button(_("_Cancel"), CANCEL);
     if (show_close) {
-      close_button = add_button(Gtk.Stock.CLOSE, CLOSE);
+      close_button = add_button(_("_Close"), CLOSE);
       close_button.grab_default();
     }
     if (show_back)
-      back_button = add_button(Gtk.Stock.GO_BACK, BACK);
+      back_button = add_button(_("_Back"), BACK);
     if (show_resume) {
       resume_button = add_button(_("_Resume Later"), RESUME);
       resume_button.grab_default();

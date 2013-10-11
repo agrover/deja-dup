@@ -87,7 +87,7 @@ public class MountOperationAssistant : MountOperation
     assist.interrupt(password_page);
     looping = true;
     check_valid_inputs();
-    assist.set_header_icon(Gtk.Stock.DIALOG_AUTHENTICATION);
+    assist.set_header_icon("dialog-password");
     assist.force_visible(false);
     Gtk.main(); // enter new loop so that we don't return until user hits next
   }

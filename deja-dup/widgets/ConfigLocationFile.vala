@@ -50,8 +50,8 @@ public class ConfigLocationFile : ConfigLocationTable
     var dlg = new Gtk.FileChooserDialog(_("Choose Folder"),
                                         get_ancestor(typeof(Gtk.Window)) as Gtk.Window,
                                         Gtk.FileChooserAction.SELECT_FOLDER,
-                                        Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL,
-                                        Gtk.Stock.OK, Gtk.ResponseType.ACCEPT);
+                                        _("_Cancel"), Gtk.ResponseType.CANCEL,
+                                        _("_OK"), Gtk.ResponseType.ACCEPT);
     var dir = entry.get_text();
     dlg.set_current_folder(dir); // empty string will be current dir
 
