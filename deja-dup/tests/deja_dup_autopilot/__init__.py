@@ -120,9 +120,9 @@ class DejaDupTestCase(AutopilotTestCase):
             # gui workflow itself.  Note that this puts the archive files in
             # a place where deja-dup won't find them.  Do we want that?
             p = subprocess.Popen(['env', 'PASSPHRASE=test', 'duplicity', '/',
-                                   '--include=' + self.sourcedir,
-                                   '--exclude=**', 'file://' + self.backupdir],
-                                  stdout=subprocess.PIPE)
+                                  '--include=' + self.sourcedir,
+                                  '--exclude=**', 'file://' + self.backupdir],
+                                 stdout=subprocess.PIPE)
             p.communicate()
             self.assertEqual(0, p.returncode)
             return
