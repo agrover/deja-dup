@@ -23,8 +23,7 @@ all: builddir
 	@[ "$@" = "Makefile" ] || make -C builddir $@
 
 builddir:
-	@ # Enable all non-default options
-	@[ -d builddir ] || ( mkdir builddir && cd builddir && cmake .. -DCMAKE_BUILD_TYPE=Debug -DENABLE_CCPANEL=ON -DENABLE_UNITY=ON )
+	@[ -d builddir ] || ( mkdir builddir && cd builddir && cmake .. -DCMAKE_BUILD_TYPE=Debug )
 
 check: all
 	CTEST_OUTPUT_ON_FAILURE=1 make -C builddir test
@@ -41,7 +40,7 @@ dist: builddir screenshots
 	gpg --armor --sign --detach-sig builddir/deja-dup-*.tar.xz
 
 clean:
-	rm -rf builddir
+	rm -rf builddir obj-*
 
 screenshots: all
 	@mkdir -p ./builddir/screenshots

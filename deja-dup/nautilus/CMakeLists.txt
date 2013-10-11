@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-if(ENABLE_CCPANEL)
+if(ENABLE_NAUTILUS)
 add_library(deja-dup-nautilus MODULE NautilusExtension.c)
 target_link_libraries(deja-dup-nautilus ${GLIB_LDFLAGS} ${NAUTILUS_LDFLAGS})
 set_target_properties(deja-dup-nautilus PROPERTIES

@@ -33,6 +33,37 @@ macro(deja_check_modules)
   set(${ARGV0}_LDFLAGS "${DEJA_STRIPPED}")
 endmacro()
 
+macro(deja_enable_option)
+  if(NOT ENABLE_${ARGV0})
+    return() # nothing to do
+  endif()
+
+  deja_check_modules(${ARGV})
+
+  if(NOT ${ARGV0}_FOUND)
+    if(ENABLE_${ARGV0} STREQUAL "CHECK")
+      set(ENABLE_${ARGV0} OFF)
+    else()
+      message(FATAL_ERROR "You enabled ${ARGV0}, but required dependencies could not be found")
+    endif()
+    return()
+  endif()
+endmacro()
+
+macro(deja_option NAME DESC DEFAULT)
+  # option() only lets you set ON/OFF as default.  But we want to also allow
+  # CHECK.
+  if(${DEFAULT} STREQUAL "CHECK" AND "${${NAME}}" STREQUAL "")
+    set(_DEJA_OPTION_SET_CHECK "1")
+  else()
+    set(_DEJA_OPTION_SET_CHECK "0")
+  endif()
+  option(${NAME} ${DESC} ${DEFAULT})
+  if(_DEJA_OPTION_SET_CHECK)
+    set(${NAME} "CHECK")
+  endif()
+endmacro()
+
 macro(deja_find_required_program VAR PROGRAM)
   find_program(${VAR} ${PROGRAM})
   if(NOT ${VAR})

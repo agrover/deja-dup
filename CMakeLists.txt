@@ -23,9 +23,9 @@ cmake_minimum_required(VERSION 2.8)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(DejaDupMacros)
 
-option(ENABLE_CCPANEL "Build gnome-control-center panel" OFF)
-option(ENABLE_NAUTILUS "Build nautilus plugin" ON)
-option(ENABLE_UNITY "Integrate with Unity" OFF)
+deja_option(ENABLE_CCPANEL "Build gnome-control-center panel" CHECK)
+deja_option(ENABLE_NAUTILUS "Build nautilus plugin" CHECK)
+deja_option(ENABLE_UNITY "Integrate with Unity" CHECK)
 
 find_package(PkgConfig 0.24 REQUIRED)
 find_package(Vala 0.16 REQUIRED)
@@ -37,25 +37,23 @@ deja_check_modules(NOTIFY REQUIRED libnotify>=0.7)
 deja_check_modules(PEAS REQUIRED libpeas-1.0)
 deja_check_modules(SECRET REQUIRED libsecret-1)
 
+deja_enable_option(CCPANEL libgnome-control-center)
 if(ENABLE_CCPANEL)
-  deja_check_modules(CCPANEL REQUIRED libgnome-control-center)
   execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} --variable=extensiondir libgnome-control-center
                   OUTPUT_VARIABLE CCPANEL_EXTENSIONDIR
                   OUTPUT_STRIP_TRAILING_WHITESPACE
                   ERROR_QUIET)
 endif()
 
+deja_enable_option(NAUTILUS libnautilus-extension)
 if(ENABLE_NAUTILUS)
-  deja_check_modules(NAUTILUS REQUIRED libnautilus-extension)
   execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} --variable=extensiondir libnautilus-extension
                   OUTPUT_VARIABLE NAUTILUS_EXTENSIONDIR
                   OUTPUT_STRIP_TRAILING_WHITESPACE
                   ERROR_QUIET)
 endif()
 
-if(ENABLE_UNITY)
-  deja_check_modules(UNITY REQUIRED unity>=3.4.2)
-endif()
+deja_enable_option(UNITY unity>=3.4.2)
 
 # Set up some common configuration values; Vala sees these via config.vapi.
 include(GNUInstallDirs)
