@@ -93,9 +93,11 @@ public class ConfigLabelBackupDate : ConfigLabel
     if (val == "" || !time.from_iso8601(val)) {
       // Translators: This is used in phrases like "Most recent backup: None"
       label.label = _("None");
+      sensitive = false;
     }
     else {
       label.label = pretty_date_name(new DateTime.from_timeval_local(time));
+      sensitive = true;
     }
   }
 
@@ -104,9 +106,11 @@ public class ConfigLabelBackupDate : ConfigLabel
     var next = DejaDup.next_run_date();
     if (next != null) {
       label.label = pretty_date_name(next);
+      sensitive = true;
     }
     else {
       label.label = _("None");
+      sensitive = false;
     }
   }
 

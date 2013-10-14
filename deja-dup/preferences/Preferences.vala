@@ -111,7 +111,8 @@ public class Preferences : Gtk.Grid
     return page;
   }
 
-  Gtk.Widget make_settings_page() {
+  Gtk.Widget make_settings_page()
+  {
     var settings_page = new Gtk.Grid();
     Gtk.Notebook notebook = new Gtk.Notebook();
     Gtk.Widget w;
@@ -120,25 +121,32 @@ public class Preferences : Gtk.Grid
     int row;
     Gtk.SizeGroup label_sizes;
 
+    var settings = DejaDup.get_settings();
+
+    var outer_table = new Gtk.Grid();
+    outer_table.orientation = Gtk.Orientation.VERTICAL;
+    outer_table.row_spacing = 6;
+    outer_table.border_width = 12;
+
     table = new Gtk.Grid();
     table.orientation = Gtk.Orientation.VERTICAL;
     table.row_spacing = 6;
     table.column_spacing = 12;
-    table.border_width = 12;
+    table.expand = true;
+    outer_table.add(table);
 
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
 
-    w = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
-    (w as Gtk.Bin).add(new DejaDup.ConfigSwitch(DejaDup.PERIODIC_KEY));
-    label = new Gtk.Label(_("Automatic _backups"));
-    label.set("mnemonic-widget", (w as Gtk.Bin).get_child(),
-              "use-underline", true,
-              "xalign", 1.0f);
-    label_sizes.add_widget(label);
-
+    var align = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
+    var @switch = new Gtk.Switch();
+    settings.bind(DejaDup.PERIODIC_KEY, @switch, "active", SettingsBindFlags.DEFAULT);
+    align.add(@switch);
+    label = new Gtk.Label.with_mnemonic(_("_Automatic backup"));
+    label.mnemonic_widget = @switch;
+    label.xalign = 1.0f;
     table.attach(label, 0, row, 1, 1);
-    table.attach(w, 1, row, 1, 1);
+    table.attach(align, 1, row, 1, 1);
     ++row;
 
     w = new Gtk.Grid(); // spacer
@@ -178,48 +186,26 @@ public class Preferences : Gtk.Grid
     table.attach(w, 0, row, 2, 1);
     ++row;
 
-    var bdate_label = new Gtk.Label(_("Most recent backup"));
+    var bdate_label = new Gtk.Label(_("Last backup"));
     bdate_label.xalign = 1.0f;
-    label_sizes.add_widget(bdate_label);
     var bdate = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.LAST);
-
+    bdate.bind_property("sensitive", bdate_label, "sensitive", BindingFlags.SYNC_CREATE);
     table.attach(bdate_label, 0, row, 1, 1);
     table.attach(bdate, 1, row, 1, 1);
     ++row;
 
-    var ndate_label = new Gtk.Label(_("Next automatic backup"));
+    var ndate_label = new Gtk.Label(_("Next backup"));
     ndate_label.xalign = 1.0f;
-    label_sizes.add_widget(ndate_label);
     var ndate = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.NEXT);
-
+    ndate.bind_property("sensitive", ndate_label, "sensitive", BindingFlags.SYNC_CREATE);
     table.attach(ndate_label, 0, row, 1, 1);
     table.attach(ndate, 1, row, 1, 1);
     ++row;
 
-    w = new Gtk.Grid(); // spacer
-    w.height_request = 12; // plus 6 pixels on either side
-    table.attach(w, 0, row, 2, 1);
-    ++row;
-
-    w = new Gtk.Grid(); // second spacer
-    w.height_request = 12; // plus 6 pixels on either side
-    table.attach(w, 0, row, 2, 1);
-    ++row;
-
-    w = new DejaDup.ConfigLabelPolicy();
-    w.expand = true;
-    w.valign = Gtk.Align.END;
-    table.attach(w, 0, row, 2, 1);
-    ++row;
-
-    w = new Gtk.Grid(); // spacer
-    w.height_request = 12; // plus 6 pixels on either side
-    table.attach(w, 0, row, 2, 1);
-    ++row;
-
     var bbox = new Gtk.ButtonBox(Gtk.Orientation.HORIZONTAL);
-    bbox.layout_style = Gtk.ButtonBoxStyle.END;
+    bbox.layout_style = Gtk.ButtonBoxStyle.CENTER;
     bbox.spacing = 12;
+    outer_table.add(bbox);
 
     w = new Gtk.Button.with_mnemonic(_("_Restore…"));
     (w as Gtk.Button).clicked.connect((b) => {
@@ -227,7 +213,7 @@ public class Preferences : Gtk.Grid
     });
     restore_button = w;
     bbox.add(w);
-    w = new Gtk.Button.with_mnemonic(_("Back Up _Now"));
+    w = new Gtk.Button.with_mnemonic(_("Back Up"));
     (w as Gtk.Button).clicked.connect((b) => {
       run_deja_dup("--backup", b.get_display().get_app_launch_context());
     });
@@ -241,9 +227,8 @@ public class Preferences : Gtk.Grid
                                   () => {restore_button.sensitive = true;
                                          backup_button.sensitive = true;});
 
-    table.attach(bbox, 0, row, 2, 1);
-    notebook.append_page(table, null);
-    notebook.set_tab_label_text(table, _("Overview"));
+    notebook.append_page(outer_table, null);
+    notebook.set_tab_label_text(outer_table, _("Overview"));
 
     // Reset page
     table = new Gtk.Grid();
@@ -253,7 +238,7 @@ public class Preferences : Gtk.Grid
     row = 0;
 
     var location = new DejaDup.ConfigLocation(label_sizes);
-    label = new Gtk.Label(_("_Backup location"));
+    label = new Gtk.Label(_("_Storage location"));
     label.set("mnemonic-widget", location,
               "use-underline", true,
               "xalign", 1.0f);
@@ -268,11 +253,6 @@ public class Preferences : Gtk.Grid
     table.attach(location.extras, 0, row, 2, 1);
     ++row;
 
-    w = new DejaDup.ConfigLabelPolicy();
-    w.set("expand", true);
-    table.attach(w, 0, row, 2, 1);
-    ++row;
-    
     notebook.append_page(table, null);
     // Translators: storage as in "where to store the backup"
     notebook.set_tab_label_text(table, _("Storage"));
@@ -322,37 +302,51 @@ public class Preferences : Gtk.Grid
     table.row_spacing = 6;
     table.column_spacing = 12;
     table.border_width = 12;
+    table.halign = Gtk.Align.CENTER;
     row = 0;
-    
+
+    align = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
+    @switch = new Gtk.Switch();
+    settings.bind(DejaDup.PERIODIC_KEY, @switch, "active", SettingsBindFlags.DEFAULT);
+    align.add(@switch);
+    label = new Gtk.Label.with_mnemonic(_("_Automatic backup"));
+    label.mnemonic_widget = @switch;
+    label.xalign = 1.0f;
+    table.attach(label, 0, row, 1, 1);
+    table.attach(align, 1, row, 1, 1);
+    ++row;
+
     w = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
     w.hexpand = true;
-    label = new Gtk.Label(_("How _often to back up"));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "xalign", 1.0f);
-    label_sizes.add_widget(label);
+    settings.bind(DejaDup.PERIODIC_KEY, w, "sensitive", SettingsBindFlags.DEFAULT);
+    label = new Gtk.Label.with_mnemonic(_("_Every"));
+    label.mnemonic_widget = w;
+    label.xalign = 1.0f;
+    settings.bind(DejaDup.PERIODIC_KEY, label, "sensitive", SettingsBindFlags.DEFAULT);
     table.attach(label, 0, row, 1, 1);
     table.attach(w, 1, row, 1, 1);
     ++row;
 
     w = new DejaDup.ConfigDelete(DejaDup.DELETE_AFTER_KEY);
     w.hexpand = true;
-    label = new Gtk.Label("%s".printf(_("_Keep backups")));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "xalign", 1.0f);
-    label_sizes.add_widget(label);
+    label = new Gtk.Label.with_mnemonic(_("_Keep"));
+    label.mnemonic_widget = w;
+    label.xalign = 1.0f;
     table.attach(label, 0, row, 1, 1);
     table.attach(w, 1, row, 1, 1);
     ++row;
 
-    w = new DejaDup.ConfigLabelPolicy();
-    w.set("expand", true);
-    table.attach(w, 0, row, 2, 1);
+    label = new Gtk.Label(_("Old backups will be deleted earlier if the storage location is low on space."));
+    var attrs = new Pango.AttrList();
+    attrs.insert(Pango.attr_style_new(Pango.Style.ITALIC));
+    label.set_attributes(attrs);
+    label.wrap = true;
+    label.max_width_chars = 25;
+    table.attach(label, 1, row, 1, 1);
     ++row;
 
     notebook.append_page(table, null);
-    notebook.set_tab_label_text(table, _("Schedule"));
+    notebook.set_tab_label_text(table, _("Scheduling"));
 
     var accessible = notebook.get_accessible();
     if (accessible != null)

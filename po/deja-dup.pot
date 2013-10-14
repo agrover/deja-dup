@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-14 10:34-0400\n"
+"POT-Creation-Date: 2013-10-14 13:09-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
-#: ../deja-dup/preferences/Preferences.vala:160
+#: ../deja-dup/preferences/Preferences.vala:168
 msgid "Folders to back up"
 msgstr ""
 
@@ -32,7 +32,7 @@ msgid ""
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/preferences/Preferences.vala:168
+#: ../deja-dup/preferences/Preferences.vala:176
 msgid "Folders to ignore"
 msgstr ""
 
@@ -218,7 +218,7 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 #: ../deja-dup/AssistantRestore.vala:221
-#: ../deja-dup/preferences/Preferences.vala:151
+#: ../deja-dup/preferences/Preferences.vala:159
 msgid "Backup location"
 msgstr ""
 
@@ -362,7 +362,8 @@ msgstr ""
 
 #: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:5
 #: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:5
-msgid "Back Up Now"
+#: ../deja-dup/preferences/Preferences.vala:216
+msgid "Back Up"
 msgstr ""
 
 #: ../deja-dup/ui/restore-missing.ui.h:1
@@ -524,7 +525,6 @@ msgid "_Restore"
 msgstr ""
 
 #: ../deja-dup/AssistantRestore.vala:91
-#: ../deja-dup/preferences/Preferences.vala:256
 msgid "_Backup location"
 msgstr ""
 
@@ -866,61 +866,66 @@ msgstr ""
 msgid "Just show my backup _settings"
 msgstr ""
 
-#: ../deja-dup/preferences/Preferences.vala:134
-msgid "Automatic _backups"
+#: ../deja-dup/preferences/Preferences.vala:145
+#: ../deja-dup/preferences/Preferences.vala:312
+msgid "_Automatic backup"
 msgstr ""
 
-#: ../deja-dup/preferences/Preferences.vala:181
-msgid "Most recent backup"
+#: ../deja-dup/preferences/Preferences.vala:189
+msgid "Last backup"
 msgstr ""
 
-#: ../deja-dup/preferences/Preferences.vala:190
-msgid "Next automatic backup"
+#: ../deja-dup/preferences/Preferences.vala:197
+msgid "Next backup"
 msgstr ""
 
-#: ../deja-dup/preferences/Preferences.vala:224
+#: ../deja-dup/preferences/Preferences.vala:210
 msgid "_Restore…"
 msgstr ""
 
-#: ../deja-dup/preferences/Preferences.vala:230
-msgid "Back Up _Now"
-msgstr ""
-
-#: ../deja-dup/preferences/Preferences.vala:246
+#: ../deja-dup/preferences/Preferences.vala:231
 msgid "Overview"
 msgstr ""
 
+#: ../deja-dup/preferences/Preferences.vala:241
+msgid "_Storage location"
+msgstr ""
+
 #. Translators: storage as in "where to store the backup"
-#: ../deja-dup/preferences/Preferences.vala:278
+#: ../deja-dup/preferences/Preferences.vala:258
 msgid "Storage"
 msgstr ""
 
-#: ../deja-dup/preferences/Preferences.vala:299
+#: ../deja-dup/preferences/Preferences.vala:279
 msgid "Folders to _back up"
 msgstr ""
 
-#: ../deja-dup/preferences/Preferences.vala:309
+#: ../deja-dup/preferences/Preferences.vala:289
 msgid "Folders to _ignore"
 msgstr ""
 
-#: ../deja-dup/preferences/Preferences.vala:318
+#: ../deja-dup/preferences/Preferences.vala:298
 msgid "Folders"
 msgstr ""
 
-#: ../deja-dup/preferences/Preferences.vala:329
-msgid "How _often to back up"
+#: ../deja-dup/preferences/Preferences.vala:322
+msgid "_Every"
 msgstr ""
 
-#: ../deja-dup/preferences/Preferences.vala:340
-#, c-format
-msgid "_Keep backups"
+#: ../deja-dup/preferences/Preferences.vala:332
+msgid "_Keep"
 msgstr ""
 
-#: ../deja-dup/preferences/Preferences.vala:355
-msgid "Schedule"
+#: ../deja-dup/preferences/Preferences.vala:339
+msgid ""
+"Old backups will be deleted earlier if the storage location is low on space."
 msgstr ""
 
-#: ../deja-dup/preferences/Preferences.vala:359
+#: ../deja-dup/preferences/Preferences.vala:349
+msgid "Scheduling"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:353
 msgid "Categories"
 msgstr ""
 
@@ -979,7 +984,7 @@ msgstr[1] ""
 
 #. Translators: This is used in phrases like "Most recent backup: None"
 #: ../deja-dup/widgets/ConfigLabelBackupDate.vala:95
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:109
+#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:112
 msgid "None"
 msgstr ""
 
@@ -1130,17 +1135,17 @@ msgid "_Domain Name"
 msgstr ""
 
 #: ../deja-dup/widgets/ConfigPeriod.vala:36
-msgid "Daily"
+msgid "Day"
 msgstr ""
 
 #: ../deja-dup/widgets/ConfigPeriod.vala:37
-msgid "Weekly"
+msgid "Week"
 msgstr ""
 
 #: ../deja-dup/widgets/ConfigPeriod.vala:82
 #, c-format
-msgid "Every %d day"
-msgid_plural "Every %d days"
+msgid "%d day"
+msgid_plural "%d days"
 msgstr[0] ""
 msgstr[1] ""
 

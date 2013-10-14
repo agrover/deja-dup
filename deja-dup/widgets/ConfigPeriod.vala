@@ -33,8 +33,8 @@ public class ConfigPeriod : ConfigChoice
     Gtk.TreeIter iter;
     int i = 0;
     
-    store.insert_with_values(out iter, i++, 0, _("Daily"), 1, 1);
-    store.insert_with_values(out iter, i++, 0, _("Weekly"), 1, 7);
+    store.insert_with_values(out iter, i++, 0, _("Day"), 1, 1);
+    store.insert_with_values(out iter, i++, 0, _("Week"), 1, 7);
     
     store.set_sort_column_id(1, Gtk.SortType.ASCENDING);
     
@@ -79,8 +79,8 @@ public class ConfigPeriod : ConfigChoice
       var store = (Gtk.ListStore)combo.model;
       store.insert_with_values(out iter, 0, 0,
                                dngettext(Config.GETTEXT_PACKAGE,
-                                         "Every %d day",
-                                         "Every %d days",
+                                         "%d day",
+                                         "%d days",
                                          confval).printf(confval),
                                1, confval);
       combo.set_active_iter(iter);
