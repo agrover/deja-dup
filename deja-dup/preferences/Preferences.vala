@@ -118,15 +118,46 @@ public class Preferences : Gtk.Grid
     Gtk.Widget w;
     Gtk.Label label;
     Gtk.Grid table;
+    Gtk.TreeIter iter;
+    int i = 0;
     int row;
     Gtk.SizeGroup label_sizes;
 
     var settings = DejaDup.get_settings();
 
+    settings_page.column_spacing = 12;
+
+    var cat_model = new Gtk.ListStore(2, typeof(string), typeof(int));
+    var tree = new Gtk.TreeView.with_model(cat_model);
+    var accessible = tree.get_accessible();
+    if (accessible != null) {
+      accessible.set_name("Categories");
+      accessible.set_description(_("Categories"));
+    }
+    tree.headers_visible = false;
+    tree.set_size_request(150, -1);
+    tree.insert_column_with_attributes(-1, null, new Gtk.CellRendererText(),
+                                       "text", 0);
+    tree.get_selection().set_mode(Gtk.SelectionMode.SINGLE);
+    tree.get_selection().changed.connect(() => {
+      Gtk.TreeIter sel_iter;
+      int page;
+      if (tree.get_selection().get_selected(null, out sel_iter)) {
+        cat_model.get(sel_iter, 1, out page);
+        notebook.page = page;
+      }
+    });
+
+    var scrollwin = new Gtk.ScrolledWindow(null, null);
+    scrollwin.hscrollbar_policy = Gtk.PolicyType.NEVER;
+    scrollwin.vscrollbar_policy = Gtk.PolicyType.NEVER;
+    scrollwin.shadow_type = Gtk.ShadowType.IN;
+    scrollwin.add(tree);
+    settings_page.add(scrollwin);
+
     var outer_table = new Gtk.Grid();
     outer_table.orientation = Gtk.Orientation.VERTICAL;
     outer_table.row_spacing = 6;
-    outer_table.border_width = 12;
 
     table = new Gtk.Grid();
     table.orientation = Gtk.Orientation.VERTICAL;
@@ -154,18 +185,7 @@ public class Preferences : Gtk.Grid
     table.attach(w, 0, row, 2, 1);
     ++row;
 
-    w = new DejaDup.ConfigLabelLocation();
-    w.set("hexpand", true);
-    label = new Gtk.Label(_("Backup location"));
-    label.set("xalign", 1.0f,
-              "yalign", 0.0f);
-    label_sizes.add_widget(label);
-
-    table.attach(label, 0, row, 1, 1);
-    table.attach(w, 1, row, 1, 1);
-    ++row;
-
-    label = new Gtk.Label(_("Folders to back up"));
+    label = new Gtk.Label(_("Folders to save"));
     label.set("xalign", 1.0f, "yalign", 0.0f);
     label_sizes.add_widget(label);
     w = new DejaDup.ConfigLabelList(DejaDup.INCLUDE_LIST_KEY);
@@ -177,6 +197,16 @@ public class Preferences : Gtk.Grid
     label.set("xalign", 1.0f, "yalign", 0.0f);
     label_sizes.add_widget(label);
     w = new DejaDup.ConfigLabelList(DejaDup.EXCLUDE_LIST_KEY);
+    table.attach(label, 0, row, 1, 1);
+    table.attach(w, 1, row, 1, 1);
+    ++row;
+
+    w = new DejaDup.ConfigLabelLocation();
+    w.set("hexpand", true);
+    label = new Gtk.Label(_("Storage location"));
+    label.set("xalign", 1.0f,
+              "yalign", 0.0f);
+    label_sizes.add_widget(label);
     table.attach(label, 0, row, 1, 1);
     table.attach(w, 1, row, 1, 1);
     ++row;
@@ -228,13 +258,29 @@ public class Preferences : Gtk.Grid
                                          backup_button.sensitive = true;});
 
     notebook.append_page(outer_table, null);
-    notebook.set_tab_label_text(outer_table, _("Overview"));
+    cat_model.insert_with_values(out iter, i, 0, _("Overview"), 1, i);
+    ++i;
+
+    // Reset page
+    w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY);
+    w.expand = true;
+
+    notebook.append_page(w, null);
+    cat_model.insert_with_values(out iter, i, 0, _("Folders to save"), 1, i);
+    ++i;
+
+    // Reset page
+    w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY);
+    w.expand = true;
+
+    notebook.append_page(w, null);
+    cat_model.insert_with_values(out iter, i, 0, _("Folders to ignore"), 1, i);
+    ++i;
 
     // Reset page
     table = new Gtk.Grid();
     table.row_spacing = 6;
     table.column_spacing = 12;
-    table.border_width = 12;
     row = 0;
 
     var location = new DejaDup.ConfigLocation(label_sizes);
@@ -255,7 +301,8 @@ public class Preferences : Gtk.Grid
 
     notebook.append_page(table, null);
     // Translators: storage as in "where to store the backup"
-    notebook.set_tab_label_text(table, _("Storage"));
+    cat_model.insert_with_values(out iter, i, 0, _("Storage location"), 1, i);
+    ++i;
 
     // Now make sure to reserve the excess space that the hidden bits of
     // ConfigLocation will need.
@@ -271,37 +318,6 @@ public class Preferences : Gtk.Grid
     table = new Gtk.Grid();
     table.row_spacing = 6;
     table.column_spacing = 12;
-    table.border_width = 12;
-    table.column_homogeneous = true;
-    
-    w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY);
-    w.set("expand", true);
-    label = new Gtk.Label(_("Folders to _back up"));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "xalign", 0.0f,
-              "yalign", 0.0f);
-    table.attach(label, 0, 0, 1, 1);
-    table.attach(w, 0, 1, 1, 1);
-    
-    w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY);
-    w.set("expand", true);
-    label = new Gtk.Label(_("Folders to _ignore"));
-    label.set("mnemonic-widget", w,
-              "use-underline", true,
-              "xalign", 0.0f,
-              "yalign", 0.0f);
-    table.attach(label, 1, 0, 1, 1);
-    table.attach(w, 1, 1, 1, 1);
-    
-    notebook.append_page(table, null);
-    notebook.set_tab_label_text(table, _("Folders"));
-    
-    // Reset page
-    table = new Gtk.Grid();
-    table.row_spacing = 6;
-    table.column_spacing = 12;
-    table.border_width = 12;
     table.halign = Gtk.Align.CENTER;
     row = 0;
 
@@ -318,18 +334,19 @@ public class Preferences : Gtk.Grid
 
     w = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
     w.hexpand = true;
-    settings.bind(DejaDup.PERIODIC_KEY, w, "sensitive", SettingsBindFlags.DEFAULT);
+    settings.bind(DejaDup.PERIODIC_KEY, w, "sensitive", SettingsBindFlags.GET);
+    // translators: as in "Every day"
     label = new Gtk.Label.with_mnemonic(_("_Every"));
     label.mnemonic_widget = w;
     label.xalign = 1.0f;
-    settings.bind(DejaDup.PERIODIC_KEY, label, "sensitive", SettingsBindFlags.DEFAULT);
+    settings.bind(DejaDup.PERIODIC_KEY, label, "sensitive", SettingsBindFlags.GET);
     table.attach(label, 0, row, 1, 1);
     table.attach(w, 1, row, 1, 1);
     ++row;
 
     w = new DejaDup.ConfigDelete(DejaDup.DELETE_AFTER_KEY);
     w.hexpand = true;
-    label = new Gtk.Label.with_mnemonic(_("_Keep"));
+    label = new Gtk.Label.with_mnemonic(C_("verb", "_Keep"));
     label.mnemonic_widget = w;
     label.xalign = 1.0f;
     table.attach(label, 0, row, 1, 1);
@@ -346,12 +363,15 @@ public class Preferences : Gtk.Grid
     ++row;
 
     notebook.append_page(table, null);
-    notebook.set_tab_label_text(table, _("Scheduling"));
+    cat_model.insert_with_values(out iter, i, 0, _("Scheduling"), 1, i);
+    ++i;
 
-    var accessible = notebook.get_accessible();
-    if (accessible != null)
-      accessible.set_name(_("Categories"));
+    // Select first one by default
+    cat_model.get_iter_first(out iter);
+    tree.get_selection().select_iter(iter);
 
+    notebook.show_tabs = false;
+    notebook.show_border = false;
     notebook.expand = true;
     settings_page.add(notebook);
 

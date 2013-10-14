@@ -10,40 +10,16 @@
 <title>Settings</title>
   <terms>
     <item>
-      <title><gui>Automatic backups</gui></title>
+      <title><gui>Automatic backup</gui></title>
       <p>Turn this option on to have <app>Déjà Dup</app> automatically back up for you. This is recommended so that you don’t forget to do it yourself. Backups are more useful the more recent they are, so it is important to back up regularly.</p>
     </item>
     <item>
-      <title><gui>Backup location</gui></title>
-      <p>Use these options to specify the backup location that <app>Déjà Dup</app> will use when backing up or restoring:</p>
-      <terms>
-        <item>
-          <title>Cloud Services</title>
-          <p>The first few backup locations are cloud storage services provided by various companies. For a small fee, they hold your data for you. A cloud service like this is recommended because it is an easy way to keep your data offsite (meaning out of your home: in case of disaster or theft, your data will still be safe).</p>
-          <note style="warning"><p>These services cost money.  Read their rates carefully before using them.</p></note>
-        </item>
-        <item>
-          <title>Remote Servers</title>
-          <p>Choose the type of remote server to which you want to connect. Then you can enter the server information.  Alternatively, if you know your server’s URL, choose <gui>Custom Location</gui> and enter it.</p>
-        </item>
-        <item>
-          <title>Removable Media</title>
-          <p>You may see removable media like external hard drives or thumb drives listed.</p>
-        </item>
-        <item>
-          <title>Local Folder</title>
-          <p>You may also want to choose a local folder as a backup location.  Note that backups can be quite large, so make sure you have enough free disk space.</p>
-          <note style="warning"><p>This is not recommended, because if your hardware fails, you will lose both your original data and your backups.</p></note>
-        </item>
-      </terms>
-    </item>
-    <item>
-      <title><gui>Folders to back up</gui></title>
-      <p>Choose a list of folders to back up. Press the <gui style="button">Add</gui> or <gui style="button">Remove</gui> buttons to modify the list. If you are only interested in backing up your own data, the default of <gui>Home</gui> is sufficient.</p>
+      <title><gui>Folders to save</gui></title>
+      <p>Choose a list of folders to save in your backup. Press the <gui style="button">Add</gui> or <gui style="button">Remove</gui> buttons to modify the list. If you are only interested in backing up your own data, the default of <gui>Home</gui> is sufficient.</p>
     </item>
     <item>
       <title><gui>Folders to ignore</gui></title>
-      <p>Choose a list of folders to not back up. Press the <gui style="button">Add</gui> or <gui style="button">Remove</gui> buttons to modify the list.</p>
+      <p>Choose a list of folders to not save in your backup. Press the <gui style="button">Add</gui> or <gui style="button">Remove</gui> buttons to modify the list.</p>
       <p>Some of your data may be large and not very important to you.  In that case, you can save yourself some time and space by not backing them up.</p>
       <note style="advanced">
         <p>Some locations are always ignored by default:</p>
@@ -65,9 +41,33 @@
        </note>
     </item>
     <item>
-      <title><gui>Keep backups</gui></title>
+      <title><gui>Storage location</gui></title>
+      <p>Use these options to specify the storage location that <app>Déjà Dup</app> will use when backing up or restoring:</p>
+      <terms>
+        <item>
+          <title>Cloud Services</title>
+          <p>The first few storage locations are cloud storage services provided by various companies. For a small fee, they hold your data for you. A cloud service like this is recommended because it is an easy way to keep your data offsite (meaning out of your home: in case of disaster or theft, your data will still be safe).</p>
+          <note style="warning"><p>These services cost money.  Read their rates carefully before using them.</p></note>
+        </item>
+        <item>
+          <title>Remote Servers</title>
+          <p>Choose the type of remote server to which you want to connect. Then you can enter the server information.  Alternatively, if you know your server’s URL, choose <gui>Custom Location</gui> and enter it.</p>
+        </item>
+        <item>
+          <title>Removable Media</title>
+          <p>You may see removable media like external hard drives or thumb drives listed.</p>
+        </item>
+        <item>
+          <title>Local Folder</title>
+          <p>You may also want to choose a local folder as a storage location.  Note that backups can be quite large, so make sure you have enough free disk space.</p>
+          <note style="warning"><p>This is not recommended, because if your hardware fails, you will lose both your original data and your backups.</p></note>
+        </item>
+      </terms>
+    </item>
+    <item>
+      <title><gui>Keep</gui></title>
       <p>Choose the minimum amount of time to keep backup files.  If you find that the backup files are taking up too much space, you may want to decrease this duration.  Due to implementation details, files may be kept a bit longer than the chosen time.  But no files will be deleted early.</p>
-      <note><p>Backups are kept forever by default, but still may be deleted earlier if the backup location begins to run out of space.</p></note>
+      <note><p>Backups are kept forever by default, but still may be deleted earlier if the storage location begins to run out of space.</p></note>
     </item>
    </terms>
 </page>
