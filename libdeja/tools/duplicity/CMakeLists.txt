@@ -22,7 +22,7 @@ vala_precompile(VALA_C DuplicityInstance.vala
                 PACKAGES gio-2.0 gio-unix-2.0 libpeas-1.0 libsecret-1 posix
                 CUSTOM_VAPIS ${CMAKE_BINARY_DIR}/libdeja/deja.vapi
                              ${CMAKE_SOURCE_DIR}/vapi/config.vapi
-                OPTIONS "${COMMON_VFLAGS}")
+                OPTIONS ${COMMON_VFLAGS})
 add_library(duplicity MODULE ${VALA_C})
 target_link_libraries(duplicity deja ${GLIB_LDFLAGS} ${PEAS_LDFLAGS} ${SECRET_LDFLAGS})
 set_target_properties(duplicity PROPERTIES

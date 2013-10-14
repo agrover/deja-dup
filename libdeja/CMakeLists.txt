@@ -43,7 +43,7 @@ vala_precompile(VALA_C AsyncCommand.vala
                 CUSTOM_VAPIS ${CMAKE_SOURCE_DIR}/vapi/config.vapi
                              ${CMAKE_SOURCE_DIR}/vapi/secret.vapi
                              ${CMAKE_SOURCE_DIR}/vapi/uriutils.vapi
-                OPTIONS "${COMMON_VFLAGS}"
+                OPTIONS ${COMMON_VFLAGS}
                 GENERATE_VAPI deja
                 GENERATE_HEADER deja)
 add_library(deja SHARED ${VALA_C} uriutils.c)

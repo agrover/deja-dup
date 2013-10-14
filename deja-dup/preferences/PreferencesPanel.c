@@ -25,7 +25,7 @@
 #include <libgnome-control-center/cc-panel.h>
 #include "widgets.h"
 
-extern void* deja_dup_preferences_new (void);
+extern void* deja_dup_preferences_new (gboolean show_auto_switch);
 
 #define DEJA_DUP_TYPE_PREFERENCES_PANEL deja_dup_preferences_panel_get_type()
 
@@ -49,6 +49,19 @@ deja_dup_preferences_panel_class_finalize (DejaDupPreferencesPanelClass *klass)
 {
 }
 
+static void
+deja_dup_preferences_panel_constructed (GObject *object)
+{
+  CcPanel *panel = CC_PANEL (object);
+
+  G_OBJECT_CLASS (deja_dup_preferences_panel_parent_class)->constructed (object);
+
+  GtkWidget *switcher = GTK_WIDGET (deja_dup_preferences_periodic_switch_new ());
+  gtk_widget_set_valign (switcher, GTK_ALIGN_CENTER);
+  gtk_widget_show_all (switcher);
+  cc_shell_embed_widget_in_header (cc_panel_get_shell (panel), switcher);
+}
+
 static const char *
 deja_dup_preferences_panel_get_help_uri (CcPanel *panel)
 {
@@ -58,15 +71,17 @@ deja_dup_preferences_panel_get_help_uri (CcPanel *panel)
 static void
 deja_dup_preferences_panel_class_init (DejaDupPreferencesPanelClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
+  object_class->constructed = deja_dup_preferences_panel_constructed;
   panel_class->get_help_uri = deja_dup_preferences_panel_get_help_uri;
 }
 
 static void
 deja_dup_preferences_panel_init (DejaDupPreferencesPanel *self)
 {
-  GtkWidget *widget = GTK_WIDGET (deja_dup_preferences_new ());
+  GtkWidget *widget = GTK_WIDGET (deja_dup_preferences_new (FALSE));
   gtk_container_set_border_width (GTK_CONTAINER (widget), 6); // g-c-c adds 6
   gtk_widget_show_all (widget);
   gtk_container_add (GTK_CONTAINER (self), widget);

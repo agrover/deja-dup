@@ -26,7 +26,7 @@ vala_precompile(VALA_C preferences-main.vala
                 CUSTOM_VAPIS ${CMAKE_BINARY_DIR}/libdeja/deja.vapi
                              ${CMAKE_BINARY_DIR}/deja-dup/widgets/widgets.vapi
                              ${CMAKE_SOURCE_DIR}/vapi/config.vapi
-                OPTIONS "${COMMON_VFLAGS}")
+                OPTIONS ${COMMON_VFLAGS})
 add_executable(deja-dup-preferences ${VALA_C})
 target_link_libraries(deja-dup-preferences deja widgets ${GTK_LDFLAGS} ${NOTIFY_LDFLAGS} ${PEAS_LDFLAGS} ${SECRET_LDFLAGS})
 set_target_properties(deja-dup-preferences PROPERTIES

@@ -42,6 +42,9 @@ dist: builddir screenshots
 clean:
 	rm -rf builddir obj-*
 
+deb:
+	DEB_BUILD_OPTIONS=nocheck debuild
+
 screenshots: all
 	@mkdir -p ./builddir/screenshots
 	@rm -f ./builddir/screenshots/*

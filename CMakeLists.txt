@@ -37,7 +37,7 @@ deja_check_modules(NOTIFY REQUIRED libnotify>=0.7)
 deja_check_modules(PEAS REQUIRED libpeas-1.0)
 deja_check_modules(SECRET REQUIRED libsecret-1)
 
-deja_enable_option(CCPANEL libgnome-control-center)
+deja_enable_option(CCPANEL libgnome-control-center>=3.4)
 if(ENABLE_CCPANEL)
   execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} --variable=extensiondir libgnome-control-center
                   OUTPUT_VARIABLE CCPANEL_EXTENSIONDIR
@@ -73,7 +73,10 @@ set(COMMON_CFLAGS "${COMMON_CFLAGS} -DPKG_DATA_DIR=\\\"${PKG_DATADIR}\\\"")
 set(COMMON_CFLAGS "${COMMON_CFLAGS} -DPKG_LIBEXEC_DIR=\\\"${PKG_LIBEXECDIR}\\\"")
 
 include(${VALA_USE_FILE})
-set(COMMON_VFLAGS "--target-glib=2.32")
+set(COMMON_VFLAGS --target-glib=2.32)
+if(GTK_VERSION GREATER "3.10" OR GTK_VERSION EQUAL "3.10")
+  set(COMMON_VFLAGS ${COMMON_VFLAGS} -D HAVE_GTK_3_10)
+endif()
 
 include(CTest)
 enable_testing()

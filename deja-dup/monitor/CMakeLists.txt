@@ -20,7 +20,7 @@ vala_precompile(VALA_C monitor.vala
                 PACKAGES gio-2.0 libnotify libpeas-1.0 libsecret-1
                 CUSTOM_VAPIS ${CMAKE_BINARY_DIR}/libdeja/deja.vapi
                              ${CMAKE_SOURCE_DIR}/vapi/config.vapi
-                OPTIONS "${COMMON_VFLAGS}")
+                OPTIONS ${COMMON_VFLAGS})
 add_executable(deja-dup-monitor ${VALA_C})
 target_link_libraries(deja-dup-monitor deja ${GLIB_LDFLAGS} ${NOTIFY_LDFLAGS} ${PEAS_LDFLAGS} ${SECRET_LDFLAGS})
 set_target_properties(deja-dup-monitor PROPERTIES

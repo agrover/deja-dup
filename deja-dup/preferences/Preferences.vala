@@ -21,11 +21,28 @@ using GLib;
 
 namespace DejaDup {
 
+// Convenience class for adding automatic backup switch to pref shells
+public class PreferencesPeriodicSwitch : Gtk.Switch
+{
+  construct
+  {
+    var settings = DejaDup.get_settings();
+    settings.bind(DejaDup.PERIODIC_KEY, this, "active", SettingsBindFlags.DEFAULT);
+  }
+}
+
 public class Preferences : Gtk.Grid
 {
+  public bool show_auto_switch {get; construct;}
+
   Gtk.Widget backup_button;
   Gtk.Widget restore_button;
   uint bus_watch_id = 0;
+
+  public Preferences(bool show_auto_switch)
+  {
+    Object(show_auto_switch: show_auto_switch);
+  }
 
   ~Preferences() {
     if (bus_watch_id > 0) {
@@ -169,21 +186,23 @@ public class Preferences : Gtk.Grid
     row = 0;
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
 
-    var align = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
-    var @switch = new Gtk.Switch();
-    settings.bind(DejaDup.PERIODIC_KEY, @switch, "active", SettingsBindFlags.DEFAULT);
-    align.add(@switch);
-    label = new Gtk.Label.with_mnemonic(_("_Automatic backup"));
-    label.mnemonic_widget = @switch;
-    label.xalign = 1.0f;
-    table.attach(label, 0, row, 1, 1);
-    table.attach(align, 1, row, 1, 1);
-    ++row;
+    if (show_auto_switch) {
+      var align = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
+      var @switch = new Gtk.Switch();
+      settings.bind(DejaDup.PERIODIC_KEY, @switch, "active", SettingsBindFlags.DEFAULT);
+      align.add(@switch);
+      label = new Gtk.Label.with_mnemonic(_("_Automatic backup"));
+      label.mnemonic_widget = @switch;
+      label.xalign = 1.0f;
+      table.attach(label, 0, row, 1, 1);
+      table.attach(align, 1, row, 1, 1);
+      ++row;
 
-    w = new Gtk.Grid(); // spacer
-    w.height_request = 12; // plus 6 pixels on either side
-    table.attach(w, 0, row, 2, 1);
-    ++row;
+      w = new Gtk.Grid(); // spacer
+      w.height_request = 12; // plus 6 pixels on either side
+      table.attach(w, 0, row, 2, 1);
+      ++row;
+    }
 
     label = new Gtk.Label(_("Folders to save"));
     label.set("xalign", 1.0f, "yalign", 0.0f);
@@ -321,16 +340,18 @@ public class Preferences : Gtk.Grid
     table.halign = Gtk.Align.CENTER;
     row = 0;
 
-    align = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
-    @switch = new Gtk.Switch();
-    settings.bind(DejaDup.PERIODIC_KEY, @switch, "active", SettingsBindFlags.DEFAULT);
-    align.add(@switch);
-    label = new Gtk.Label.with_mnemonic(_("_Automatic backup"));
-    label.mnemonic_widget = @switch;
-    label.xalign = 1.0f;
-    table.attach(label, 0, row, 1, 1);
-    table.attach(align, 1, row, 1, 1);
-    ++row;
+    if (show_auto_switch) {
+      var align = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
+      var @switch = new Gtk.Switch();
+      settings.bind(DejaDup.PERIODIC_KEY, @switch, "active", SettingsBindFlags.DEFAULT);
+      align.add(@switch);
+      label = new Gtk.Label.with_mnemonic(_("_Automatic backup"));
+      label.mnemonic_widget = @switch;
+      label.xalign = 1.0f;
+      table.attach(label, 0, row, 1, 1);
+      table.attach(align, 1, row, 1, 1);
+      ++row;
+    }
 
     w = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
     w.hexpand = true;

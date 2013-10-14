@@ -43,7 +43,6 @@ vala_precompile(VALA_C ConfigBool.vala
                        ConfigNumber.vala
                        ConfigPeriod.vala
                        ConfigRelPath.vala
-                       ConfigSwitch.vala
                        ConfigURLPart.vala
                        ConfigURLPartBool.vala
                        ConfigWidget.vala
@@ -53,7 +52,7 @@ vala_precompile(VALA_C ConfigBool.vala
                 CUSTOM_VAPIS ${CMAKE_BINARY_DIR}/libdeja/deja.vapi
                              ${CMAKE_SOURCE_DIR}/vapi/config.vapi
                              ${CMAKE_SOURCE_DIR}/vapi/uriutils.vapi
-                OPTIONS "${COMMON_VFLAGS}"
+                OPTIONS ${COMMON_VFLAGS}
                 GENERATE_VAPI widgets
                 GENERATE_HEADER widgets)
 add_library(widgets SHARED ${VALA_C})

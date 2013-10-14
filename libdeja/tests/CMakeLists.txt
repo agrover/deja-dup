@@ -22,7 +22,7 @@ vala_precompile(VALA_C runner.vala
                 PACKAGES gio-2.0 libpeas-1.0 libsecret-1 posix
                 CUSTOM_VAPIS ${CMAKE_BINARY_DIR}/libdeja/deja.vapi
                              ${CMAKE_SOURCE_DIR}/vapi/config.vapi
-                OPTIONS "${COMMON_VFLAGS}")
+                OPTIONS ${COMMON_VFLAGS})
 add_executable(test-runner ${VALA_C})
 target_link_libraries(test-runner deja ${GLIB_LDFLAGS} ${PEAS_LDFLAGS} ${SECRET_LDFLAGS})
 set_target_properties(test-runner PROPERTIES
