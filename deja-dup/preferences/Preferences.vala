@@ -233,12 +233,6 @@ public class Preferences : Gtk.Grid
     });
     backup_button = w;
     bbox.add(w);
-    w = new Gtk.Button.with_mnemonic(_("_Help"));
-    (w as Gtk.Button).clicked.connect(() => {
-      DejaDup.show_uri(this.get_toplevel() as Gtk.Window, "help:deja-dup");
-    });
-    bbox.add(w);
-    bbox.set_child_secondary(w, true);
 
     bus_watch_id = Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
                                   BusNameWatcherFlags.NONE,

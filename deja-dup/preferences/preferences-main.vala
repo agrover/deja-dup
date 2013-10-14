@@ -19,76 +19,115 @@
 
 using GLib;
 
-class PreferencesApp : Object
+class PreferencesApp : Gtk.Application
 {
-  static bool show_version = false;
-  static const OptionEntry[] options = {
-    {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
-    {null}
-  };
-
-  static bool handle_console_options(out int status)
+  public PreferencesApp()
   {
-    status = 0;
-
-    if (show_version) {
-      print("%s %s\n", "deja-dup-preferences", Config.VERSION);
-      return false;
-    }
-
-    return true;
+    Object(application_id: "org.gnome.DejaDup.Preferences");
   }
 
-  static void activated (Gtk.Application app)
+  public override void activate ()
   {
-    unowned List<Gtk.Window> list = app.get_windows();
+    base.activate();
+
+    unowned List<Gtk.Window> list = get_windows();
 
     if (list != null)
       list.data.present_with_time(Gtk.get_current_event_time());
     else {
       // We're first instance.  Yay!
-      var dlg = new Gtk.Window();
+      var dlg = new Gtk.ApplicationWindow(this);
       // Translators: "Backups" is a noun
       dlg.title = _("Backups");
       dlg.resizable = false;
       var prefs = new DejaDup.Preferences();
       prefs.border_width = 12;
       dlg.add(prefs);
-      dlg.set_application(app);
+      dlg.set_application(this);
       dlg.show_all();
     }
   }
 
-  public static int main(string [] args)
+  public override void startup ()
   {
-    DejaDup.i18n_setup();
+    base.startup();
 
-    Environment.set_application_name(_("Backups"));
+    add_action_entries(actions, null);
 
-    OptionContext context = new OptionContext("");
-    context.add_main_entries(options, Config.GETTEXT_PACKAGE);
-    context.add_group(Gtk.get_option_group(false)); // allow console use
-    try {
-      context.parse(ref args);
-    } catch (Error e) {
-      printerr("%s\n\n%s", e.message, context.get_help(true, null));
-      return 1;
-    }
-
-    int status;
-    if (!handle_console_options(out status))
-      return status;
-
-    Gtk.init(ref args); // to open display ('cause we passed false above)
-    Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
-    Gtk.Window.set_default_icon_name(Config.PACKAGE);
-
-    if (!DejaDup.gui_initialize(null))
-      return 1;
-
-    var app = new Gtk.Application("org.gnome.DejaDup.Preferences", 0);
-    app.activate.connect((app) => {activated(app as Gtk.Application);});
-    return app.run();
+    var help = new Menu();
+    help.append(_("_Help"), "app.help");
+    var quit = new Menu();
+    quit.append(_("_Quit"), "app.quit");
+    var menu = new Menu();
+    menu.append_section(null, help);
+    menu.append_section(null, quit);
+    set_app_menu(menu);
   }
 }
 
+PreferencesApp app = null;
+
+bool show_version = false;
+const OptionEntry[] options = {
+  {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
+  {null}
+};
+
+bool handle_console_options(out int status)
+{
+  status = 0;
+
+  if (show_version) {
+    print("%s %s\n", "deja-dup-preferences", Config.VERSION);
+    return false;
+  }
+
+  return true;
+}
+
+const ActionEntry[] actions = {
+  {"help", handle_help},
+  {"quit", handle_quit},
+};
+
+void handle_help ()
+{
+  unowned List<Gtk.Window> list = app.get_windows();
+  DejaDup.show_uri(list == null ? null : list.data, "help:deja-dup");
+}
+
+void handle_quit ()
+{
+  app.quit();
+}
+
+int main(string [] args)
+{
+  DejaDup.i18n_setup();
+
+  Environment.set_application_name(_("Backups"));
+
+  OptionContext context = new OptionContext("");
+  context.add_main_entries(options, Config.GETTEXT_PACKAGE);
+  context.add_group(Gtk.get_option_group(false)); // allow console use
+  try {
+    context.parse(ref args);
+  } catch (Error e) {
+    printerr("%s\n\n%s", e.message, context.get_help(true, null));
+    return 1;
+  }
+
+  int status;
+  if (!handle_console_options(out status))
+    return status;
+
+  Gtk.init(ref args); // to open display ('cause we passed false above)
+  Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
+  Gtk.Window.set_default_icon_name(Config.PACKAGE);
+
+  if (!DejaDup.gui_initialize(null))
+    return 1;
+
+  app = new PreferencesApp();
+  return app.run();
+}
