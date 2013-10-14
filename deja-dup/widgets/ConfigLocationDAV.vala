@@ -56,13 +56,13 @@ public class ConfigLocationDAV : ConfigLocationTable
     return val == "davs";
   }
 
-  void https_toggled(Togglable toggle, bool user)
+  void https_toggled(ConfigBool check, bool user)
   {
     if (!user)
       return;
 
     string scheme;
-    if (toggle.get_active())
+    if (check.get_active())
       scheme = "davs";
     else
       scheme = "dav";

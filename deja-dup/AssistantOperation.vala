@@ -55,7 +55,6 @@ public abstract class AssistantOperation : Assistant
   protected bool nagged;
   List<Gtk.Widget> first_password_widgets;
   MainLoop password_ask_loop;
-  DejaDup.ToggleGroup password_toggles;
 
   Gtk.Label question_label;
   protected Gtk.Widget question_page {get; private set;}
@@ -317,8 +316,6 @@ public abstract class AssistantOperation : Assistant
     encrypt_enabled.toggled.connect(() => {check_password_validity();});
     ++rows;
 
-    password_toggles = new DejaDup.ToggleGroup.with_button(encrypt_enabled);
-
     w = new Gtk.Label("    "); // indent
     page.attach(w, 0, rows, 1, 1);
     first_password_widgets.append(w);
@@ -330,7 +327,7 @@ public abstract class AssistantOperation : Assistant
           "max-width-chars", 25,
           "wrap", true);
     page.attach(w, 1, rows, 2, 1);
-    password_toggles.add_dependent(w);
+    encrypt_enabled.bind_property("active", w, "sensitive", BindingFlags.SYNC_CREATE);
     first_password_widgets.append(w);
     ++rows;
 
@@ -345,8 +342,8 @@ public abstract class AssistantOperation : Assistant
               "xalign", 1.0f);
     page.attach(label, 1, rows, 1, 1);
     page.attach(w, 2, rows, 1, 1);
-    password_toggles.add_dependent(label);
-    password_toggles.add_dependent(w);
+    encrypt_enabled.bind_property("active", w, "sensitive", BindingFlags.SYNC_CREATE);
+    encrypt_enabled.bind_property("active", label, "sensitive", BindingFlags.SYNC_CREATE);
     ++rows;
     encrypt_entry = (Gtk.Entry)w;
 
@@ -362,8 +359,8 @@ public abstract class AssistantOperation : Assistant
               "xalign", 1.0f);
     page.attach(label, 1, rows, 1, 1);
     page.attach(w, 2, rows, 1, 1);
-    password_toggles.add_dependent(w);
-    password_toggles.add_dependent(label);
+    encrypt_enabled.bind_property("active", w, "sensitive", BindingFlags.SYNC_CREATE);
+    encrypt_enabled.bind_property("active", label, "sensitive", BindingFlags.SYNC_CREATE);
     ++rows;
     encrypt_confirm_entry = (Gtk.Entry)w;
     first_password_widgets.append(w);
@@ -375,12 +372,12 @@ public abstract class AssistantOperation : Assistant
       encrypt_confirm_entry.visibility = button.get_active();
     });
     page.attach(w, 2, rows, 1, 1);
-    password_toggles.add_dependent(w);
+    encrypt_enabled.bind_property("active", w, "sensitive", BindingFlags.SYNC_CREATE);
     ++rows;
 
     w = new Gtk.CheckButton.with_mnemonic(_("_Remember password"));
     page.attach(w, 2, rows, 1, 1);
-    password_toggles.add_dependent(w);
+    encrypt_enabled.bind_property("active", w, "sensitive", BindingFlags.SYNC_CREATE);
     ++rows;
     encrypt_remember = (Gtk.CheckButton)w;
 

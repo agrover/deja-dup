@@ -46,7 +46,6 @@ vala_precompile(VALA_C ConfigBool.vala
                        ConfigURLPart.vala
                        ConfigURLPartBool.vala
                        ConfigWidget.vala
-                       ToggleGroup.vala
                        WidgetUtils.vala
                 PACKAGES gtk+-3.0 libnotify libpeas-1.0 libsecret-1
                 CUSTOM_VAPIS ${CMAKE_BINARY_DIR}/libdeja/deja.vapi

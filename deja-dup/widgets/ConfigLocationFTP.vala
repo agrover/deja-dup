@@ -58,7 +58,7 @@ public class ConfigLocationFTP : ConfigLocationTable
     return (val != "anonymous");
   }
 
-  void username_toggled(Togglable check, bool user)
+  void username_toggled(ConfigBool check, bool user)
   {
     if (!check.get_active())
       ConfigURLPart.write_uri_part(DejaDup.get_settings(DejaDup.FILE_ROOT),

@@ -21,7 +21,7 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigBool : ConfigWidget, Togglable
+public class ConfigBool : ConfigWidget
 {
   public string label {get; construct;}
   
@@ -30,6 +30,7 @@ public class ConfigBool : ConfigWidget, Togglable
     Object(key: key, label: label, ns: ns);
   }
   
+  public signal void toggled(ConfigBool check, bool user);
   public bool get_active() {return button.get_active();}
   
   protected Gtk.CheckButton button;

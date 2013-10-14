@@ -36,7 +36,7 @@ public class ConfigLocationTable : Gtk.Grid
   }
 
   protected void add_widget(string msg, Gtk.Widget w,
-                            Togglable? check = null,
+                            ConfigBool? check = null,
                             Gtk.Widget? mnemonic = null)
   {
     var label = new Gtk.Label(msg);
@@ -48,7 +48,7 @@ public class ConfigLocationTable : Gtk.Grid
   }
 
   protected void add_widget_with_label(Gtk.Widget label, Gtk.Widget w,
-                                       Togglable? check = null)
+                                       ConfigBool? check = null)
   {
     this.attach(label, 0, row, 1, 1);
 
@@ -68,7 +68,7 @@ public class ConfigLocationTable : Gtk.Grid
     }
   }
 
-  protected void add_wide_widget(Gtk.Widget w, Togglable? check = null)
+  protected void add_wide_widget(Gtk.Widget w, ConfigBool? check = null)
   {
     w.hexpand = true;
     this.attach(w, 0, row, 2, 1);
