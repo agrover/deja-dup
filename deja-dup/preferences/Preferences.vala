@@ -164,7 +164,7 @@ public class Preferences : Gtk.Grid
     restore_button = w;
     label_sizes.add_widget(w);
     table.attach(w, 0, row, 1, 1);
-    w = new Gtk.Button.with_mnemonic(_("Back Up"));
+    w = new Gtk.Button.with_mnemonic(_("Back Up…"));
     w.vexpand = true;
     w.valign = Gtk.Align.START;
     w.halign = Gtk.Align.CENTER;
