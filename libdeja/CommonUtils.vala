@@ -540,7 +540,7 @@ public string get_display_name (File f)
     // So we manually convert.
     string s = home.get_relative_path(f);
     try {
-      return Filename.to_utf8(s, s.length, null, null);
+      return "~/" + Filename.to_utf8(s, s.length, null, null);
     }
     catch (ConvertError e) {
       warning("%s\n", e.message);

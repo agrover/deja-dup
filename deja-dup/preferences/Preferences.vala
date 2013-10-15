@@ -38,6 +38,8 @@ public class Preferences : Gtk.Grid
   Gtk.Widget backup_button;
   Gtk.Widget restore_button;
   uint bus_watch_id = 0;
+  static const int PAGE_HMARGIN = 24;
+  static const int PAGE_VMARGIN = 12;
 
   public Preferences(bool show_auto_switch)
   {
@@ -172,7 +174,7 @@ public class Preferences : Gtk.Grid
     scrollwin.add(tree);
     settings_page.add(scrollwin);
 
-    var outer_table = new Gtk.Grid();
+    var outer_table = new_panel();
     outer_table.orientation = Gtk.Orientation.VERTICAL;
     outer_table.row_spacing = 6;
 
@@ -281,23 +283,29 @@ public class Preferences : Gtk.Grid
     ++i;
 
     // Reset page
+    table = new_panel();
+
     w = new DejaDup.ConfigList(DejaDup.INCLUDE_LIST_KEY);
     w.expand = true;
+    table.add(w);
 
-    notebook.append_page(w, null);
+    notebook.append_page(table, null);
     cat_model.insert_with_values(out iter, i, 0, _("Folders to save"), 1, i);
     ++i;
 
     // Reset page
+    table = new_panel();
+
     w = new DejaDup.ConfigList(DejaDup.EXCLUDE_LIST_KEY);
     w.expand = true;
+    table.add(w);
 
-    notebook.append_page(w, null);
+    notebook.append_page(table, null);
     cat_model.insert_with_values(out iter, i, 0, _("Folders to ignore"), 1, i);
     ++i;
 
     // Reset page
-    table = new Gtk.Grid();
+    table = new_panel();
     table.row_spacing = 6;
     table.column_spacing = 12;
     row = 0;
@@ -334,7 +342,7 @@ public class Preferences : Gtk.Grid
     table.set_size_request(req.width, req.height);
 
     // Reset page
-    table = new Gtk.Grid();
+    table = new_panel();
     table.row_spacing = 6;
     table.column_spacing = 12;
     table.halign = Gtk.Align.CENTER;
@@ -398,6 +406,16 @@ public class Preferences : Gtk.Grid
 
     settings_page.show();
     return settings_page;
+  }
+
+  Gtk.Grid new_panel()
+  {
+    var table = new Gtk.Grid();
+    table.margin_left = PAGE_HMARGIN;
+    table.margin_right = PAGE_HMARGIN;
+    table.margin_top = PAGE_VMARGIN;
+    table.margin_bottom = PAGE_VMARGIN;
+    return table;
   }
 
   bool should_show_welcome()

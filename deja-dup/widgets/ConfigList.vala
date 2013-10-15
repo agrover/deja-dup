@@ -33,8 +33,8 @@ class ConfigListStore : Gtk.ListStore, Gtk.TreeDragDest, Gtk.TreeDragSource
   }
 
   construct {
-    // path, display name, icon
-    GLib.Type[] types = {typeof(string), typeof(string), typeof(Icon)};
+    // path, display name
+    GLib.Type[] types = {typeof(string), typeof(string)};
     set_column_types(types);
   }
 
@@ -140,10 +140,9 @@ public class ConfigList : ConfigWidget
     if (accessible != null)
       accessible.set_name(a11y_name);
 
-    tree.insert_column_with_attributes(-1, null, new Gtk.CellRendererPixbuf(),
-                                       "gicon", 2);
-    
     var renderer = new Gtk.CellRendererText();
+    renderer.xpad = 12;
+    renderer.ypad = 12;
     tree.insert_column_with_attributes(-1, null, renderer,
                                        "text", 1);
 
@@ -234,30 +233,11 @@ public class ConfigList : ConfigWidget
     model.row_deleted.connect(write_to_config);
     
     int i = 0;
-    var trash = File.new_for_path(DejaDup.get_trash_path());
     foreach (File f in list) {
       string s = yield DejaDup.get_nickname(f);
 
       Gtk.TreeIter iter;
       model.insert_with_values(out iter, i++, 0, f.get_path(), 1, s);
-      
-      // If the folder is the trash, look up icon especially.  For some
-      // reason, gio doesn't do it for us.
-      Icon icon = null;
-      if (f.equal(trash)) {
-        // Until vala bug #564062 is fixed, we use append.  Else I'd use from_names
-        icon = new ThemedIcon("user-trash");
-        ((ThemedIcon)icon).append_name("folder");
-      }
-      else {
-        try {
-          FileInfo info = f.query_info(FileAttribute.STANDARD_ICON, FileQueryInfoFlags.NONE, null);
-          icon = info.get_icon();
-        }
-        catch (Error err) {warning("%s\n", err.message);}
-      }
-      if (icon != null)
-        model.set(iter, 2, icon);
     }
   }
   
