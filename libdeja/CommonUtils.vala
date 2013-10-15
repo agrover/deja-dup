@@ -28,7 +28,6 @@ public const string INCLUDE_LIST_KEY = "include-list";
 public const string EXCLUDE_LIST_KEY = "exclude-list";
 public const string BACKEND_KEY = "backend";
 public const string ROOT_PROMPT_KEY = "root-prompt";
-public const string WELCOMED_KEY = "welcomed";
 public const string LAST_RUN_KEY = "last-run";
 public const string LAST_BACKUP_KEY = "last-backup";
 public const string LAST_RESTORE_KEY = "last-restore";
@@ -262,9 +261,7 @@ public int get_prompt_delay()
 
 public bool has_seen_settings()
 {
-  var settings = DejaDup.get_settings();
-  return last_run_date(TimestampType.NONE) != "" ||
-         settings.get_boolean(WELCOMED_KEY);
+  return last_run_date(TimestampType.NONE) != "";
 }
 
 // This makes the check of whether we should tell user about backing up.

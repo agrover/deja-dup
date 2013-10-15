@@ -48,8 +48,7 @@ deb:
 screenshots: all
 	@mkdir -p ./builddir/screenshots
 	@rm -f ./builddir/screenshots/*
-	@./tests/shell "gsettings set org.gnome.DejaDup welcomed true;" \
-	               "gsettings set org.gnome.DejaDup backend 'file';" \
+	@./tests/shell "gsettings set org.gnome.DejaDup backend 'file';" \
 	               "gsettings set org.gnome.DejaDup.File icon 'drive-removable-media';" \
 	               "gsettings set org.gnome.DejaDup.File short-name 'Backup Drive';" \
 	               "gsettings set org.gnome.DejaDup.File uuid 'NOPE';" \

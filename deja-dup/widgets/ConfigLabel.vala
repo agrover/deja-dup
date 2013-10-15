@@ -42,6 +42,7 @@ public class ConfigLabel : ConfigWidget
   protected virtual void fill_box()
   {
     label.xalign = 0.0f;
+    label.hexpand = true;
     box.add(label);
   }
 

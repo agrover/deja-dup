@@ -39,6 +39,12 @@ public class ConfigLabelBackupDate : ConfigLabel
     }
   }
 
+  protected override void fill_box()
+  {
+    base.fill_box();
+    label.xalign = 0.5f;
+  }
+
   bool is_same_day(DateTime one, DateTime two)
   {
     int ny, nm, nd, dy, dm, dd;

@@ -53,83 +53,6 @@ public class Preferences : Gtk.Grid
     }
   }
 
-  Gtk.Widget make_welcome_page()
-  {
-    var page = new Gtk.Alignment(0.0f, 0.5f, 1.0f, 0.0f);
-
-    var restore_button = new Gtk.Button();
-    restore_button.clicked.connect((b) => {
-      run_deja_dup("--restore", b.get_display().get_app_launch_context());
-    });
-    var restore_label = new Gtk.Label("<big>%s</big>".printf(_("I want to _restore files from a previous backup…")));
-    restore_label.set("mnemonic-widget", restore_button,
-                      "wrap", true,
-                      "justify", Gtk.Justification.CENTER,
-                      "xpad", 6,
-                      "ypad", 6,
-                      "width-request", 300,
-                      "use-markup", true,
-                      "use-underline", true);
-    restore_button.add(restore_label);
-
-    var continue_button = new Gtk.Button();
-    continue_button.clicked.connect(() => {
-      var settings = DejaDup.get_settings();
-      settings.set_boolean(DejaDup.WELCOMED_KEY, true);
-      this.remove(page);
-      this.add(make_settings_page());
-      this.show_all();
-    });
-    var continue_label = new Gtk.Label("<big>%s</big>".printf(_("Just show my backup _settings")));
-    continue_label.set("mnemonic-widget", continue_button,
-                       "wrap", true,
-                       "justify", Gtk.Justification.CENTER,
-                       "xpad", 6,
-                       "ypad", 6,
-                       "width-request", 300,
-                       "use-markup", true,
-                       "use-underline", true);
-    continue_button.add(continue_label);
-
-    var bbox = new Gtk.ButtonBox(Gtk.Orientation.VERTICAL);
-    bbox.spacing = 24;
-    bbox.layout_style = Gtk.ButtonBoxStyle.CENTER;
-    bbox.add(restore_button);
-    bbox.add(continue_button);
-
-    var balign = new Gtk.Alignment(0.5f, 0.5f, 0.0f, 0.0f);
-    balign.add(bbox);
-
-    var icon = new Gtk.Image();
-    icon.set("icon-name", "deja-dup",
-             "pixel-size", 256);
-
-    var label = new Gtk.Label("<b><big>%s</big></b>".printf(_("Déjà Dup Backup Tool")));
-    label.set("wrap", true,
-              "justify", Gtk.Justification.CENTER,
-              "use-markup", true);
-
-    var ibox = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
-    ibox.pack_start(icon, false, false);
-    ibox.pack_start(label, false, false);
-
-    var ialign = new Gtk.Alignment(0.5f, 0.5f, 0.0f, 0.0f);
-    ialign.add(ibox);
-
-    var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
-    hbox.set("homogeneous", true);
-    hbox.pack_start(ialign, true, false);
-    hbox.pack_start(balign, true, false);
-
-    page.add(hbox);
-
-    continue_button.set("has-focus", true);
-
-    page.border_width = 18;
-    page.show();
-    return page;
-  }
-
   Gtk.Widget make_settings_page()
   {
     var settings_page = new Gtk.Grid();
@@ -155,7 +78,10 @@ public class Preferences : Gtk.Grid
     }
     tree.headers_visible = false;
     tree.set_size_request(150, -1);
-    tree.insert_column_with_attributes(-1, null, new Gtk.CellRendererText(),
+    var renderer = new Gtk.CellRendererText();
+    renderer.xpad = 6;
+    renderer.ypad = 6;
+    tree.insert_column_with_attributes(-1, null, renderer,
                                        "text", 0);
     tree.get_selection().set_mode(Gtk.SelectionMode.SINGLE);
     tree.get_selection().changed.connect(() => {
@@ -174,19 +100,14 @@ public class Preferences : Gtk.Grid
     scrollwin.add(tree);
     settings_page.add(scrollwin);
 
-    var outer_table = new_panel();
-    outer_table.orientation = Gtk.Orientation.VERTICAL;
-    outer_table.row_spacing = 6;
-
-    table = new Gtk.Grid();
+    table = new_panel();
     table.orientation = Gtk.Orientation.VERTICAL;
     table.row_spacing = 6;
     table.column_spacing = 12;
+    table.column_homogeneous = true;
     table.expand = true;
-    outer_table.add(table);
 
     row = 0;
-    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
 
     if (show_auto_switch) {
       var align = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
@@ -196,80 +117,64 @@ public class Preferences : Gtk.Grid
       label = new Gtk.Label.with_mnemonic(_("_Automatic backup"));
       label.mnemonic_widget = @switch;
       label.xalign = 1.0f;
-      table.attach(label, 0, row, 1, 1);
-      table.attach(align, 1, row, 1, 1);
-      ++row;
-
-      w = new Gtk.Grid(); // spacer
-      w.height_request = 12; // plus 6 pixels on either side
-      table.attach(w, 0, row, 2, 1);
+      var switch_grid = new Gtk.Grid();
+      switch_grid.column_spacing = 12;
+      switch_grid.halign = Gtk.Align.CENTER;
+      switch_grid.attach(label, 0, 0, 1, 1);
+      switch_grid.attach(align, 1, 0, 1, 1);
+      table.attach(switch_grid, 0, row, 2, 1);
       ++row;
     }
 
-    label = new Gtk.Label(_("Folders to save"));
-    label.set("xalign", 1.0f, "yalign", 0.0f);
-    label_sizes.add_widget(label);
-    w = new DejaDup.ConfigLabelList(DejaDup.INCLUDE_LIST_KEY);
-    table.attach(label, 0, row, 1, 1);
-    table.attach(w, 1, row, 1, 1);
+    var bdate_label = new Gtk.Label("<span size=\"x-large\">%s</span>".printf(_("Last")));
+    bdate_label.vexpand = true;
+    bdate_label.valign = Gtk.Align.END;
+    bdate_label.use_markup = true;
+    bdate_label.xalign = 0.5f;
+    var ndate_label = new Gtk.Label("<span size=\"x-large\">%s</span>".printf(_("Next")));
+    ndate_label.vexpand = true;
+    ndate_label.valign = Gtk.Align.END;
+    ndate_label.use_markup = true;
+    ndate_label.xalign = 0.5f;
+    table.attach(bdate_label, 0, row, 1, 1);
+    table.attach(ndate_label, 1, row, 1, 1);
     ++row;
 
-    label = new Gtk.Label(_("Folders to ignore"));
-    label.set("xalign", 1.0f, "yalign", 0.0f);
-    label_sizes.add_widget(label);
-    w = new DejaDup.ConfigLabelList(DejaDup.EXCLUDE_LIST_KEY);
-    table.attach(label, 0, row, 1, 1);
-    table.attach(w, 1, row, 1, 1);
-    ++row;
-
-    w = new DejaDup.ConfigLabelLocation();
-    w.set("hexpand", true);
-    label = new Gtk.Label(_("Storage location"));
-    label.set("xalign", 1.0f,
-              "yalign", 0.0f);
-    label_sizes.add_widget(label);
-    table.attach(label, 0, row, 1, 1);
-    table.attach(w, 1, row, 1, 1);
-    ++row;
-
-    w = new Gtk.Grid(); // spacer
-    w.height_request = 12; // plus 6 pixels on either side
-    table.attach(w, 0, row, 2, 1);
-    ++row;
-
-    var bdate_label = new Gtk.Label(_("Last backup"));
-    bdate_label.xalign = 1.0f;
     var bdate = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.LAST);
     bdate.bind_property("sensitive", bdate_label, "sensitive", BindingFlags.SYNC_CREATE);
-    table.attach(bdate_label, 0, row, 1, 1);
-    table.attach(bdate, 1, row, 1, 1);
-    ++row;
-
-    var ndate_label = new Gtk.Label(_("Next backup"));
-    ndate_label.xalign = 1.0f;
     var ndate = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.NEXT);
     ndate.bind_property("sensitive", ndate_label, "sensitive", BindingFlags.SYNC_CREATE);
-    table.attach(ndate_label, 0, row, 1, 1);
+    table.attach(bdate, 0, row, 1, 1);
     table.attach(ndate, 1, row, 1, 1);
     ++row;
 
-    var bbox = new Gtk.ButtonBox(Gtk.Orientation.HORIZONTAL);
-    bbox.layout_style = Gtk.ButtonBoxStyle.CENTER;
-    bbox.spacing = 12;
-    outer_table.add(bbox);
+    w = new Gtk.Grid(); // spacer
+    w.height_request = 24; // plus 6 pixels on either side
+    table.attach(w, 0, row, 2, 1);
+    ++row;
 
+    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     w = new Gtk.Button.with_mnemonic(_("_Restore…"));
+    w.vexpand = true;
+    w.valign = Gtk.Align.START;
+    w.halign = Gtk.Align.CENTER;
     (w as Gtk.Button).clicked.connect((b) => {
       run_deja_dup("--restore", b.get_display().get_app_launch_context());
     });
     restore_button = w;
-    bbox.add(w);
+    label_sizes.add_widget(w);
+    table.attach(w, 0, row, 1, 1);
     w = new Gtk.Button.with_mnemonic(_("Back Up"));
+    w.vexpand = true;
+    w.valign = Gtk.Align.START;
+    w.halign = Gtk.Align.CENTER;
     (w as Gtk.Button).clicked.connect((b) => {
       run_deja_dup("--backup", b.get_display().get_app_launch_context());
     });
     backup_button = w;
-    bbox.add(w);
+    label_sizes.add_widget(w);
+    table.attach(w, 1, row, 1, 1);
+    ++row;
 
     bus_watch_id = Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
                                   BusNameWatcherFlags.NONE,
@@ -278,7 +183,7 @@ public class Preferences : Gtk.Grid
                                   () => {restore_button.sensitive = true;
                                          backup_button.sensitive = true;});
 
-    notebook.append_page(outer_table, null);
+    notebook.append_page(table, null);
     cat_model.insert_with_values(out iter, i, 0, _("Overview"), 1, i);
     ++i;
 
@@ -310,6 +215,7 @@ public class Preferences : Gtk.Grid
     table.column_spacing = 12;
     row = 0;
 
+    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     var location = new DejaDup.ConfigLocation(label_sizes);
     label = new Gtk.Label(_("_Storage location"));
     label.set("mnemonic-widget", location,
@@ -418,21 +324,8 @@ public class Preferences : Gtk.Grid
     return table;
   }
 
-  bool should_show_welcome()
-  {
-    var settings = DejaDup.get_settings();
-
-    var last_run = settings.get_string(DejaDup.LAST_RUN_KEY);
-    var welcomed = settings.get_boolean(DejaDup.WELCOMED_KEY);
-
-    return !welcomed && last_run == "";
-  }
-
   construct {
-    if (should_show_welcome())
-      add(make_welcome_page());
-    else
-      add(make_settings_page());
+    add(make_settings_page());
     set_size_request(-1, 400);
   }
 }
