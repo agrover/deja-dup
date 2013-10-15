@@ -26,7 +26,6 @@ vala_precompile(VALA_C ConfigBool.vala
                        ConfigLabelBool.vala
                        ConfigLabelList.vala
                        ConfigLabelLocation.vala
-                       ConfigLabelPolicy.vala
                        ConfigList.vala
                        ConfigLocation.vala
                        ConfigLocationCustom.vala
@@ -40,7 +39,6 @@ vala_precompile(VALA_C ConfigBool.vala
                        ConfigLocationTable.vala
                        ConfigLocationU1.vala
                        ConfigLocationVolume.vala
-                       ConfigNumber.vala
                        ConfigPeriod.vala
                        ConfigRelPath.vala
                        ConfigURLPart.vala
