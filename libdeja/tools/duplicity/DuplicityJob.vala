@@ -57,7 +57,6 @@ internal class DuplicityJob : DejaDup.ToolJob
   static File slash_root;
   static File slash_home;
   static File slash_home_me;
-  static Regex gpg_regex;
   
   bool has_checked_contents = false;
   bool has_non_home_contents = false;
@@ -96,15 +95,6 @@ internal class DuplicityJob : DejaDup.ToolJob
       slash_root = File.new_for_path("/root");
       slash_home = File.new_for_path("/home");
       slash_home_me = File.new_for_path(Environment.get_home_dir());
-    }
-
-    if (gpg_regex == null) {
-      try {
-        gpg_regex = new Regex(".*\\[.*\\.(g|gpg)'.*]$");
-      }
-      catch (Error e) {
-        error("%s\n", e.message); // this is a programmer error, so use error()
-      }
     }
   }
 
@@ -885,9 +875,6 @@ internal class DuplicityJob : DejaDup.ToolJob
     case "WARNING":
       process_warning(control_line, data_lines, user_text);
       break;
-    case "DEBUG":
-      process_debug(control_line, data_lines, user_text);
-      break;
     }
   }
   
@@ -1125,28 +1112,6 @@ internal class DuplicityJob : DejaDup.ToolJob
     }
   }
 
-  protected virtual void process_debug(string[] firstline, List<string>? data,
-                                       string text)
-  {
-    /*
-     * Pass message to appropriate function considering the type of output
-     */
-    if (firstline.length > 1) {
-      switch (int.parse(firstline[1])) {
-      case DEBUG_GENERIC:
-        if (mode == DejaDup.ToolJob.Mode.STATUS &&
-            /*!DuplicityInfo.get_default().reports_encryption &&*/
-            !detected_encryption) {
-          if (gpg_regex != null && gpg_regex.match(text)) {
-            detected_encryption = true;
-            existing_encrypted = true;
-          }
-        }
-        break;
-      }
-    }
-  }
-
   void process_file_stat(string date, string file, List<string> data, string text)
   {
     if (mode != DejaDup.ToolJob.Mode.LIST)
@@ -1243,16 +1208,13 @@ internal class DuplicityJob : DejaDup.ToolJob
           info.full = tokens[1] == "full";
           infos.append(info);
 
-/*
-          if (DuplicityInfo.get_default().reports_encryption &&
-              !detected_encryption &&
+          if (!detected_encryption &&
               tokens.length > 4) {
             // Just use the encryption status of the first one we see;
             // mixed-encryption backups is not supported.
             detected_encryption = true;
             existing_encrypted = tokens[4] == "enc";
           }
-*/
         }
       }
       else if (in_chain)
