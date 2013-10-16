@@ -108,28 +108,6 @@ public class Preferences : Gtk.Grid
 
     row = 0;
 
-    if (show_auto_switch) {
-      var align = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
-      var @switch = new Gtk.Switch();
-      settings.bind(DejaDup.PERIODIC_KEY, @switch, "active", SettingsBindFlags.DEFAULT);
-      align.add(@switch);
-      label = new Gtk.Label.with_mnemonic(_("_Automatic backup"));
-      label.mnemonic_widget = @switch;
-      label.xalign = 1.0f;
-      var switch_grid = new Gtk.Grid();
-      switch_grid.column_spacing = 12;
-      switch_grid.halign = Gtk.Align.CENTER;
-      switch_grid.attach(label, 0, 0, 1, 1);
-      switch_grid.attach(align, 1, 0, 1, 1);
-      table.attach(switch_grid, 0, row, 2, 1);
-      ++row;
-
-      w = new Gtk.Grid(); // spacer
-      w.height_request = 12; // plus 12 pixels on either side
-      table.attach(w, 0, row, 2, 1);
-      ++row;
-    }
-
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
 
     w = new Gtk.Image.from_icon_name("document-save-symbolic", Gtk.IconSize.DIALOG);
