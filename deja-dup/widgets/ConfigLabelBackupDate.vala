@@ -76,8 +76,8 @@ public class ConfigLabelBackupDate : ConfigLabel
                                  0, 0, 0.0);
         var diff = (int)(date.difference(now) / TimeSpan.DAY);
         return dngettext(Config.GETTEXT_PACKAGE,
-                         "Next backup is %d day from now",
-                         "Next backup is %d days from now", diff).printf(diff);
+                         "Next backup is %d day from now.",
+                         "Next backup is %d days from now.", diff).printf(diff);
       }
   }
 
@@ -103,8 +103,8 @@ public class ConfigLabelBackupDate : ConfigLabel
                                  0, 0, 0.0);
         var diff = (int)(now.difference(date) / TimeSpan.DAY + 1);
         return dngettext(Config.GETTEXT_PACKAGE,
-                         "Last backup was %d day ago",
-                         "Last backup was %d days ago", diff).printf(diff);
+                         "Last backup was %d day ago.",
+                         "Last backup was %d days ago.", diff).printf(diff);
       }
   }
 
