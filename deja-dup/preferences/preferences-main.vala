@@ -48,7 +48,6 @@ class PreferencesApp : Gtk.Application
 
       var header = new Gtk.HeaderBar();
       header.show_close_button = true;
-      header.title = _("Backups");
       dlg.set_titlebar(header);
 
       var switcher = new DejaDup.PreferencesPeriodicSwitch();

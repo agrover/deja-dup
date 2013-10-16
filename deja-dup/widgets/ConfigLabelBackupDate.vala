@@ -42,7 +42,10 @@ public class ConfigLabelBackupDate : ConfigLabel
   protected override void fill_box()
   {
     base.fill_box();
-    label.xalign = 0.5f;
+    label.use_markup = true;
+    label.wrap = true;
+    // The only links we use is to enable the auto backup, so assume that's what's happening
+    label.activate_link.connect(enable_auto_backup);
   }
 
   bool is_same_day(DateTime one, DateTime two)
@@ -53,41 +56,55 @@ public class ConfigLabelBackupDate : ConfigLabel
     return (ny == dy && nm == dm && nd == dd);
   }
 
-  string pretty_date_name(DateTime date)
+  string pretty_next_name(DateTime date)
   {
       var now = new DateTime.now_local();
 
-      if (kind == Kind.NEXT && now.compare(date) > 0) {
-        // never allow next date to be in the past
+      // If we're past due, just say today.
+      if (kind == Kind.NEXT && now.compare(date) > 0)
         date = now;
-      }
 
       // Check for some really simple/common friendly names
       if (is_same_day(date, now))
-        return _("Today");
-      else if (is_same_day(date, now.add_days(-1)))
-        return _("Yesterday");
+        return _("Next backup is today.");
       else if (is_same_day(date, now.add_days(1)))
-        return _("Tomorrow");
-      else if (now.compare(date) < 0) {
-        // date is in future
+        return _("Next backup is tomorrow.");
+      else {
         now = new DateTime.local(now.get_year(),
                                  now.get_month(),
                                  now.get_day_of_month(),
                                  0, 0, 0.0);
         var diff = (int)(date.difference(now) / TimeSpan.DAY);
-        return dngettext(Config.GETTEXT_PACKAGE, "%d day from now",
-                         "%d days from now", diff).printf(diff);
+        return dngettext(Config.GETTEXT_PACKAGE,
+                         "Next backup is %d day from now",
+                         "Next backup is %d days from now", diff).printf(diff);
       }
+  }
+
+  string pretty_last_name(DateTime date)
+  {
+      var now = new DateTime.now_local();
+
+      // A last date in the future doesn't make any sense.
+      // Pretending it happened today doesn't make any more sense, but at
+      // least is intelligible.
+      if (kind == Kind.LAST && now.compare(date) < 0)
+        date = now;
+
+      // Check for some really simple/common friendly names
+      if (is_same_day(date, now))
+        return _("Last backup was today.");
+      else if (is_same_day(date, now.add_days(-1)))
+        return _("Last backup was yesterday.");
       else {
-        // date is in past
         now = new DateTime.local(now.get_year(),
                                  now.get_month(),
                                  now.get_day_of_month(),
                                  0, 0, 0.0);
         var diff = (int)(now.difference(date) / TimeSpan.DAY + 1);
-        return dngettext(Config.GETTEXT_PACKAGE, "%d day ago",
-                         "%d days ago", diff).printf(diff);
+        return dngettext(Config.GETTEXT_PACKAGE,
+                         "Last backup was %d day ago",
+                         "Last backup was %d days ago", diff).printf(diff);
       }
   }
 
@@ -95,28 +112,29 @@ public class ConfigLabelBackupDate : ConfigLabel
   {
     var val = DejaDup.last_run_date(DejaDup.TimestampType.BACKUP);
 
+    // This here encodes a lot of outside GUI information in this widget,
+    // but it's a very special case thing.
     var time = TimeVal();
     if (val == "" || !time.from_iso8601(val)) {
-      // Translators: This is used in phrases like "Most recent backup: None"
-      label.label = _("None");
-      sensitive = false;
+      var button_name = "<b>%s</b>".printf(_("Restore…"));
+      var desc = _("You may use the %s button to browse for existing backups.").printf(button_name);
+      label.label = "<b>%s</b>\n%s".printf(_("No recent backups."), desc);
     }
     else {
-      label.label = pretty_date_name(new DateTime.from_timeval_local(time));
-      sensitive = true;
+      label.label = "<b>%s</b>".printf(pretty_last_name(new DateTime.from_timeval_local(time)));
     }
   }
 
   protected void set_from_config_next()
   {
     var next = DejaDup.next_run_date();
-    if (next != null) {
-      label.label = pretty_date_name(next);
-      sensitive = true;
+    if (next == null) {
+      var button_name = "<b>%s</b>".printf(_("Back Up Now…"));
+      var desc = _("You should <a href=''>enable</a> automatic backups or use the %s button to start one now.").printf(button_name);
+      label.label = "<b>%s</b>\n%s".printf(_("No backup scheduled."), desc);
     }
     else {
-      label.label = _("None");
-      sensitive = false;
+      label.label = "<b>%s</b>".printf(pretty_next_name(next));
     }
   }
 
@@ -126,6 +144,13 @@ public class ConfigLabelBackupDate : ConfigLabel
       set_from_config_last();
     else
       set_from_config_next();
+  }
+
+  bool enable_auto_backup()
+  {
+    var settings = DejaDup.get_settings();
+    settings.set_boolean(DejaDup.PERIODIC_KEY, true);
+    return true;
   }
 }
 

@@ -102,9 +102,8 @@ public class Preferences : Gtk.Grid
 
     table = new_panel();
     table.orientation = Gtk.Orientation.VERTICAL;
-    table.row_spacing = 6;
+    table.row_spacing = 12;
     table.column_spacing = 12;
-    table.column_homogeneous = true;
     table.expand = true;
 
     row = 0;
@@ -124,50 +123,52 @@ public class Preferences : Gtk.Grid
       switch_grid.attach(align, 1, 0, 1, 1);
       table.attach(switch_grid, 0, row, 2, 1);
       ++row;
+
+      w = new Gtk.Grid(); // spacer
+      w.height_request = 12; // plus 12 pixels on either side
+      table.attach(w, 0, row, 2, 1);
+      ++row;
     }
 
-    var bdate_label = new Gtk.Label("<span size=\"x-large\">%s</span>".printf(_("Last")));
-    bdate_label.vexpand = true;
-    bdate_label.valign = Gtk.Align.END;
-    bdate_label.use_markup = true;
-    bdate_label.xalign = 0.5f;
-    var ndate_label = new Gtk.Label("<span size=\"x-large\">%s</span>".printf(_("Next")));
-    ndate_label.vexpand = true;
-    ndate_label.valign = Gtk.Align.END;
-    ndate_label.use_markup = true;
-    ndate_label.xalign = 0.5f;
-    table.attach(bdate_label, 0, row, 1, 1);
-    table.attach(ndate_label, 1, row, 1, 1);
-    ++row;
-
-    var bdate = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.LAST);
-    bdate.bind_property("sensitive", bdate_label, "sensitive", BindingFlags.SYNC_CREATE);
-    var ndate = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.NEXT);
-    ndate.bind_property("sensitive", ndate_label, "sensitive", BindingFlags.SYNC_CREATE);
-    table.attach(bdate, 0, row, 1, 1);
-    table.attach(ndate, 1, row, 1, 1);
-    ++row;
-
-    w = new Gtk.Grid(); // spacer
-    w.height_request = 24; // plus 6 pixels on either side
-    table.attach(w, 0, row, 2, 1);
-    ++row;
-
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
-    w = new Gtk.Button.with_mnemonic(_("_Restore…"));
-    w.vexpand = true;
-    w.valign = Gtk.Align.START;
+
+    w = new Gtk.Image.from_icon_name("document-save-symbolic", Gtk.IconSize.DIALOG);
     w.halign = Gtk.Align.CENTER;
+    w.valign = Gtk.Align.START;
+    table.attach(w, 0, row, 1, 2);
+    w = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.LAST);
+    w.halign = Gtk.Align.START;
+    w.valign = Gtk.Align.START;
+    table.attach(w, 1, row, 1, 1);
+    ++row;
+
+    w = new Gtk.Button.with_mnemonic(_("_Restore…"));
+    w.halign = Gtk.Align.START;
     (w as Gtk.Button).clicked.connect((b) => {
       run_deja_dup("--restore", b.get_display().get_app_launch_context());
     });
     restore_button = w;
     label_sizes.add_widget(w);
-    table.attach(w, 0, row, 1, 1);
-    w = new Gtk.Button.with_mnemonic(_("Back Up…"));
-    w.vexpand = true;
-    w.valign = Gtk.Align.START;
+    table.attach(w, 1, row, 1, 1);
+    ++row;
+
+    w = new Gtk.Grid(); // spacer
+    w.height_request = 24; // plus 12 pixels on either side
+    table.attach(w, 0, row, 2, 1);
+    ++row;
+
+    w = new Gtk.Image.from_icon_name("document-open-recent-symbolic", Gtk.IconSize.DIALOG);
     w.halign = Gtk.Align.CENTER;
+    w.valign = Gtk.Align.START;
+    table.attach(w, 0, row, 1, 2);
+    w = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.NEXT);
+    w.halign = Gtk.Align.START;
+    w.valign = Gtk.Align.START;
+    table.attach(w, 1, row, 1, 1);
+    ++row;
+
+    w = new Gtk.Button.with_mnemonic(_("_Back Up Now…"));
+    w.halign = Gtk.Align.START;
     (w as Gtk.Button).clicked.connect((b) => {
       run_deja_dup("--backup", b.get_display().get_app_launch_context());
     });
