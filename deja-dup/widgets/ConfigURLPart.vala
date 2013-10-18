@@ -32,6 +32,12 @@ public class ConfigURLPart : ConfigEntry
     Object(key: key, ns: ns, part: part);
   }
 
+  construct
+  {
+    if (part == Part.PORT)
+      entry.input_purpose = Gtk.InputPurpose.NUMBER;
+  }
+
   protected override async void set_from_config()
   {
     var userval = read_uri_part(settings, key, part);

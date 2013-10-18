@@ -332,7 +332,7 @@ public abstract class AssistantOperation : Assistant
     ++rows;
 
     w = new Gtk.Entry();
-    w.set("visibility", false,
+    w.set("input-purpose", Gtk.InputPurpose.PASSWORD,
           "hexpand", true,
           "activates-default", true);
     ((Gtk.Entry)w).changed.connect(() => {check_password_validity();});
@@ -349,7 +349,7 @@ public abstract class AssistantOperation : Assistant
 
     // Add a confirmation entry if this is user's first time
     w = new Gtk.Entry();
-    w.set("visibility", false,
+    w.set("input-purpose", Gtk.InputPurpose.PASSWORD,
           "hexpand", true,
           "activates-default", true);
     ((Gtk.Entry)w).changed.connect(() => {check_password_validity();});
@@ -367,10 +367,8 @@ public abstract class AssistantOperation : Assistant
     first_password_widgets.append(label);
 
     w = new Gtk.CheckButton.with_mnemonic(_("_Show password"));
-    ((Gtk.CheckButton)w).toggled.connect((button) => {
-      encrypt_entry.visibility = button.get_active();
-      encrypt_confirm_entry.visibility = button.get_active();
-    });
+    w.bind_property("active", encrypt_entry, "visibility", BindingFlags.SYNC_CREATE);
+    w.bind_property("active", encrypt_confirm_entry, "visibility", BindingFlags.SYNC_CREATE);
     page.attach(w, 2, rows, 1, 1);
     encrypt_enabled.bind_property("active", w, "sensitive", BindingFlags.SYNC_CREATE);
     ++rows;
@@ -403,7 +401,7 @@ public abstract class AssistantOperation : Assistant
     ++rows;
 
     w = new Gtk.Entry();
-    w.set("visibility", false,
+    w.set("input-purpose", Gtk.InputPurpose.PASSWORD,
           "hexpand", true,
           "activates-default", true);
     ((Gtk.Entry)w).changed.connect((entry) => {check_nag_validity();});
@@ -417,9 +415,7 @@ public abstract class AssistantOperation : Assistant
     ++rows;
 
     w = new Gtk.CheckButton.with_mnemonic(_("_Show password"));
-    ((Gtk.CheckButton)w).toggled.connect((button) => {
-      nag_entry.visibility = button.get_active();
-    });
+    w.bind_property("active", nag_entry, "visibility", BindingFlags.SYNC_CREATE);
     page.attach(w, 2, rows, 1, 1);
     ++rows;
 

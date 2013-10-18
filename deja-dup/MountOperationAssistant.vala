@@ -223,8 +223,8 @@ public class MountOperationAssistant : MountOperation
 
     if ((flags & AskPasswordFlags.NEED_PASSWORD) != 0) {
       password_w = new Gtk.Entry();
-      password_w.set("visibility", false,
-                     "activates-default", true);
+      password_w.input_purpose = Gtk.InputPurpose.PASSWORD;
+      password_w.set("activates-default", true);
       password_w.hexpand = true;
       label = new Gtk.Label(label_password);
       label.set("mnemonic-widget", password_w,
@@ -235,9 +235,7 @@ public class MountOperationAssistant : MountOperation
       ++rows;
 
       var w = new Gtk.CheckButton.with_mnemonic(label_show_password);
-      ((Gtk.CheckButton)w).toggled.connect((button) => {
-        password_w.visibility = button.get_active();
-      });
+      w.bind_property("active", password_w, "visibility", BindingFlags.SYNC_CREATE);
       table.attach(w, ucol+1, rows, 2-ucol, 1);
       ++rows;
     }
