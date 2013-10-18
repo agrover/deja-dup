@@ -70,7 +70,7 @@ public abstract class ConfigWidget : Gtk.EventBox
     return false;
   }
 
-  async void key_changed()
+  protected async void key_changed()
   {
     // Not great to just drop new notification on the floor when already 
     // syncing, but we don't have a good cancellation method.

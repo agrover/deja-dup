@@ -208,7 +208,10 @@ public class ConfigLocation : ConfigWidget
         index_cloud_sep = add_separator(Group.CLOUD_SEP);
     }
     else if (!checker.complete) {
-      checker.notify["complete"].connect(() => {cb();});
+      // Call ourselves when we've got enough information.  Also make sure to
+      // set from config again, in case in a previous set_from_config, we
+      // weren't available in the combo yet.
+      checker.notify["complete"].connect(() => {cb(); set_from_config.begin();});
     }
   }
 
@@ -558,6 +561,12 @@ public class ConfigLocation : ConfigWidget
 
   async void set_remote_info(string? scheme)
   {
+    // Since these changes span two settings roots, we will receive two
+    // changed() signals and thus run set_from_config twice.  To prevent
+    // dropping the second signal on the floor (as ConfigWidget does if it's
+    // in the middle of handling the first), we'll manually trigger the signal.
+    syncing = true;
+
     var fsettings = DejaDup.get_settings(FILE_ROOT);
     fsettings.delay();
     fsettings.set_string(FILE_TYPE_KEY, "normal");
@@ -566,6 +575,9 @@ public class ConfigLocation : ConfigWidget
                                    ConfigURLPart.Part.SCHEME, scheme);
     fsettings.apply();
     settings.set_string(BACKEND_KEY, "file");
+
+    syncing = false;
+    key_changed.begin();
   }
 }
 
