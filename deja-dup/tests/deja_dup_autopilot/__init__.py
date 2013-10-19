@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
+import glob
 import os
 import shutil
 import subprocess
@@ -24,7 +25,7 @@ from autopilot.matchers import Eventually
 from autopilot.testcase import AutopilotTestCase
 from functools import wraps
 from gi.repository import Gio
-from testtools.matchers import Equals
+from testtools.matchers import Equals, NotEquals
 
 
 def system_only(fn):
@@ -49,10 +50,10 @@ class DejaDupTestCase(AutopilotTestCase):
         self.sourcedir = os.path.join(self.rootdir, 'source')
         self.copydir = os.path.join(self.rootdir, 'source.copy')
         self.backupdir = os.path.join(self.rootdir, 'backup')
-        self.addCleanup(shutil.rmtree, self.sourcedir)
-        self.addCleanup(shutil.rmtree, self.copydir)
-        self.addCleanup(shutil.rmtree, self.backupdir)
-        self.addCleanup(shutil.rmtree, os.path.join(self.rootdir, 'cache'))
+        self.addCleanup(self.safe_rmtree, self.sourcedir)
+        self.addCleanup(self.safe_rmtree, self.copydir)
+        self.addCleanup(self.safe_rmtree, self.backupdir)
+        self.addCleanup(self.safe_rmtree, os.path.join(self.rootdir, 'cache'))
         try:
             os.makedirs(self.sourcedir)
         except OSError:
@@ -67,6 +68,10 @@ class DejaDupTestCase(AutopilotTestCase):
         # deja-dup run, like last-backup or such.
         self.addCleanup(os.system,
                         "gsettings reset-recursively org.gnome.DejaDup")
+
+    def safe_rmtree(self, folder):
+        if os.path.exists(folder):
+            shutil.rmtree(folder)
 
     def set_config(self, key, value, schema="org.gnome.DejaDup", path=None):
         settings = Gio.Settings(schema, path=path)
@@ -107,6 +112,13 @@ class DejaDupTestCase(AutopilotTestCase):
         deeper = os.path.join(subdir, 'deeper')
         os.mkdir(deeper)
 
+    def add_random_data(self, name, size):
+        """Fill a file with random bytes, which are poorly compressable.
+           Size is in megabytes."""
+        with open(os.path.join(self.sourcedir, name), 'w') as f:
+            for i in range(size):
+                f.write(os.urandom(1024 * 1024))
+
     def use_simple_setup(self):
         self.point_at_data_playground()
         self.add_simple_data()
@@ -114,7 +126,17 @@ class DejaDupTestCase(AutopilotTestCase):
     def header_string(self, label):
         return '<span size="xx-large" weight="ultrabold">%s</span>' % label
 
-    def backup(self, gui=True):
+    def cancel(self, app):
+        button = app.select_single('GtkLabel', label='_Cancel')
+        self.pointer.click_object(button)
+        self.assertThat(app.process.poll, Eventually(Equals(0)))
+
+    def resume(self, app):
+        button = app.select_single('GtkLabel', label='_Resume Later')
+        self.pointer.click_object(button)
+        self.assertThat(app.process.poll, Eventually(Equals(0)))
+
+    def backup(self, gui=True, first=True, encrypted=True, waitfor=None):
         if not gui:
             # Sometimes we just want the backup to exist, without testing the
             # gui workflow itself.  Note that this puts the archive files in
@@ -125,24 +147,47 @@ class DejaDupTestCase(AutopilotTestCase):
                                  stdout=subprocess.PIPE)
             p.communicate()
             self.assertEqual(0, p.returncode)
-            return
+            return None
 
         app = self.launch_test_application('deja-dup', '--backup')
-        first_header_label = self.header_string(u'Backing Up…')
-        header = app.select_single('GtkLabel', label=first_header_label)
+        header_label = self.header_string(u'Backing Up…')
+        header = app.select_single('GtkLabel', label=header_label)
 
-        self.assertThat(
-            header.label,
-            Eventually(Equals(self.header_string("Require Password?"))))
-        entries = app.select_many('GtkEntry', visible=True)
-        self.assertEquals(len(entries), 2)
-        for entry in entries:
+        entries = []
+        if first:
+            header_label = self.header_string("Require Password?")
+            self.assertThat(header.label, Eventually(Equals(header_label)))
+            if encrypted:
+                entries = app.select_many('GtkEntry', visible=True)
+                self.assertEquals(len(entries), 2)
+                for entry in entries:
+                    with self.keyboard.focused_type(
+                            entry, pointer=self.pointer) as kb:
+                        kb.type("test")
+            else:
+                radio_label = '_Allow restoring without a password'
+                radio = app.select_single('GtkLabel', label=radio_label)
+                self.pointer.click_object(radio)
+            button = app.select_single('GtkLabel', label='Co_ntinue')
+            self.pointer.click_object(button)
+        elif encrypted:
+            header_label = self.header_string("Encryption Password Needed")
+            self.assertThat(header.label, Eventually(Equals(header_label)))
+            entry = app.select_single('GtkEntry', visible=True)
             with self.keyboard.focused_type(entry, pointer=self.pointer) as kb:
                 kb.type("test")
-        button = app.select_single('GtkLabel', label='Co_ntinue')
-        self.pointer.click_object(button)
+            button = app.select_single('GtkLabel', label='Co_ntinue')
+            self.pointer.click_object(button)
 
-        self.assertThat(app.process.poll, Eventually(Equals(0), timeout=30))
+        if waitfor is None:
+            self.assertThat(app.process.poll,
+                            Eventually(Equals(0), timeout=30))
+            return None
+        else:
+            globstr = os.path.join(self.backupdir, waitfor)
+            self.assertThat(lambda: glob.glob(globstr),
+                            Eventually(NotEquals([]), timeout=30))
+            return app
 
     def copy_sourcedir(self, delete=True):
         if delete:
@@ -152,8 +197,8 @@ class DejaDupTestCase(AutopilotTestCase):
 
     def restore(self, files=[]):
         app = self.launch_test_application('deja-dup', '--restore', *files)
-        first_header_label = self.header_string('Restore From Where?')
-        header = app.select_single('GtkLabel', label=first_header_label)
+        header_label = self.header_string('Restore From Where?')
+        header = app.select_single('GtkLabel', label=header_label)
         button = app.select_single('GtkLabel', label='_Forward')
         self.pointer.click_object(button)
 
@@ -199,8 +244,8 @@ class DejaDupTestCase(AutopilotTestCase):
 
         app = self.launch_test_application('deja-dup', '--restore-missing',
                                            path)
-        first_header_label = self.header_string('Restore From Where?')
-        header = app.select_single('GtkLabel', label=first_header_label)
+        header_label = self.header_string('Restore From Where?')
+        header = app.select_single('GtkLabel', label=header_label)
         button = app.select_single('GtkLabel', label='_Forward')
         self.pointer.click_object(button)
 

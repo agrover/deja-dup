@@ -18,5 +18,5 @@
 
 find_program(PEP8 pep8)
 if(PEP8)
-  add_test(pep8 "${PEP8}" --exclude=ldtp "${CMAKE_SOURCE_DIR}")
+  add_test(pep8 "${PEP8}" "${CMAKE_SOURCE_DIR}")
 endif()

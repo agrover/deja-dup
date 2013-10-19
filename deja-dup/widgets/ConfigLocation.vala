@@ -564,7 +564,7 @@ public class ConfigLocation : ConfigWidget
     // Since these changes span two settings roots, we will receive two
     // changed() signals and thus run set_from_config twice.  To prevent
     // dropping the second signal on the floor (as ConfigWidget does if it's
-    // in the middle of handling the first), we'll manually trigger the signal.
+    // in the middle of handling the first), we'll manually trigger the update.
     syncing = true;
 
     var fsettings = DejaDup.get_settings(FILE_ROOT);
@@ -577,7 +577,7 @@ public class ConfigLocation : ConfigWidget
     settings.set_string(BACKEND_KEY, "file");
 
     syncing = false;
-    key_changed.begin();
+    yield set_from_config();
   }
 }
 
