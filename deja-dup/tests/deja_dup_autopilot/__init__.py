@@ -195,7 +195,7 @@ class DejaDupTestCase(AutopilotTestCase):
         else:
             shutil.copytree(self.sourcedir, self.copydir, symlinks=True)
 
-    def restore(self, files=[]):
+    def restore(self, encrypted=True, files=[]):
         app = self.launch_test_application('deja-dup', '--restore', *files)
         header_label = self.header_string('Restore From Where?')
         header = app.select_single('GtkLabel', label=header_label)
@@ -221,16 +221,17 @@ class DejaDupTestCase(AutopilotTestCase):
         button = app.select_single('GtkLabel', label='_Restore')
         self.pointer.click_object(button)
 
-        self.assertThat(
-            header.label,
-            Eventually(
-                Equals(self.header_string("Encryption Password Needed")),
-                timeout=30))
-        entry = app.select_single('GtkEntry', visible=True)
-        with self.keyboard.focused_type(entry, pointer=self.pointer) as kb:
-            kb.type("test")
-        button = app.select_single('GtkLabel', label='Co_ntinue')
-        self.pointer.click_object(button)
+        if encrypted:
+            self.assertThat(
+                header.label,
+                Eventually(
+                    Equals(self.header_string("Encryption Password Needed")),
+                    timeout=30))
+            entry = app.select_single('GtkEntry', visible=True)
+            with self.keyboard.focused_type(entry, pointer=self.pointer) as kb:
+                kb.type("test")
+            button = app.select_single('GtkLabel', label='Co_ntinue')
+            self.pointer.click_object(button)
 
         self.assertThat(
             header.label,

@@ -28,3 +28,11 @@ class CycleTests(DejaDupTestCase):
         self.copy_sourcedir()
         self.restore()
         self.compare()
+
+    def test_cycle_noenc(self):
+        """Do a simple unencrypted backup / restore cycle."""
+        self.use_simple_setup()
+        self.backup(encrypted=False)
+        self.copy_sourcedir()
+        self.restore(encrypted=False)
+        self.compare()
