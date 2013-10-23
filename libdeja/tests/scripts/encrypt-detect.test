@@ -5,9 +5,10 @@ Type=backup
 Runs=status;dry;backup;status-restore;list;verify;
 
 [Duplicity status]
-#DEBUG 1
-#. ['duplicity.gpg']
-Output=true
+#echo "INFO 3"
+#echo "chain-complete"
+#echo " full $(date --utc --date='1 day ago' +%Y%m%dT%H%M%SZ) 1 enc"
+OutputScript=true
 
 [Duplicity dry]
 Encrypted=true
@@ -16,9 +17,10 @@ Encrypted=true
 Encrypted=true
 
 [Duplicity status-restore]
-#DEBUG 1
-#. ['duplicity.gpg']
-Output=true
+#echo "INFO 3"
+#echo "chain-complete"
+#echo " full $(date --utc --date='1 day ago' +%Y%m%dT%H%M%SZ) 1 enc"
+OutputScript=true
 
 [Duplicity list]
 Encrypted=true

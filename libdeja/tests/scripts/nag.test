@@ -10,16 +10,18 @@ Passphrases=2
 Runs=status 1;status 2;dry;backup;status-restore 1;status-restore 2;list;verify;
 
 [Duplicity status 1]
-#DEBUG 1
-#. ['duplicity.gpg']
-#
-#ERROR 31
-Output=true
+#echo "INFO 3"
+#echo "chain-complete"
+#echo " full $(date --utc --date='1 day ago' +%Y%m%dT%H%M%SZ) 1 enc"
+#echo
+#echo "ERROR 31"
+OutputScript=true
 
 [Duplicity status 2]
-#DEBUG 1
-#. ['duplicity.gpg']
-Output=true
+#echo "INFO 3"
+#echo "chain-complete"
+#echo " full $(date --utc --date='1 day ago' +%Y%m%dT%H%M%SZ) 1 enc"
+OutputScript=true
 Encrypted=true
 Passphrase=true
 
@@ -32,17 +34,19 @@ Encrypted=true
 Passphrase=true
 
 [Duplicity status-restore 1]
-#DEBUG 1
-#. ['duplicity.gpg']
-#
-#ERROR 31
-Output=true
+#echo "INFO 3"
+#echo "chain-complete"
+#echo " full $(date --utc --date='1 day ago' +%Y%m%dT%H%M%SZ) 1 enc"
+#echo
+#echo "ERROR 31"
+OutputScript=true
 ArchiveDirIsTmp=true
 
 [Duplicity status-restore 2]
-#DEBUG 1
-#. ['duplicity.gpg']
-Output=true
+#echo "INFO 3"
+#echo "chain-complete"
+#echo " full $(date --utc --date='1 day ago' +%Y%m%dT%H%M%SZ) 1 enc"
+OutputScript=true
 Encrypted=true
 Passphrase=true
 ArchiveDirIsTmp=true
