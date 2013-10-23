@@ -82,6 +82,7 @@ public abstract class Assistant : Gtk.Window
     var ebox = new Gtk.EventBox();
     var ehbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
     header_title = new Gtk.Label("");
+    header_title.name = "header";
     header_title.xalign = 0f;
     header_icon = new Gtk.Image();
     ehbox.border_width = 6;

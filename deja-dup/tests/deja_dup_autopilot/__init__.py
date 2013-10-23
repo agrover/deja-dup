@@ -150,8 +150,7 @@ class DejaDupTestCase(AutopilotTestCase):
             return None
 
         app = self.launch_test_application('deja-dup', '--backup')
-        header_label = self.header_string(u'Backing Up…')
-        header = app.select_single('GtkLabel', label=header_label)
+        header = app.select_single('GtkLabel', name='header')
 
         entries = []
         if first:
@@ -197,8 +196,7 @@ class DejaDupTestCase(AutopilotTestCase):
 
     def restore(self, encrypted=True, files=[]):
         app = self.launch_test_application('deja-dup', '--restore', *files)
-        header_label = self.header_string('Restore From Where?')
-        header = app.select_single('GtkLabel', label=header_label)
+        header = app.select_single('GtkLabel', name='header')
         button = app.select_single('GtkLabel', label='_Forward')
         self.pointer.click_object(button)
 
@@ -245,8 +243,7 @@ class DejaDupTestCase(AutopilotTestCase):
 
         app = self.launch_test_application('deja-dup', '--restore-missing',
                                            path)
-        header_label = self.header_string('Restore From Where?')
-        header = app.select_single('GtkLabel', label=header_label)
+        header = app.select_single('GtkLabel', name='header')
         button = app.select_single('GtkLabel', label='_Forward')
         self.pointer.click_object(button)
 
