@@ -43,9 +43,6 @@ public class ConfigLabelBackupDate : ConfigLabel
   {
     base.fill_box();
     label.use_markup = true;
-    label.wrap = true;
-    // The only links we use is to enable the auto backup, so assume that's what's happening
-    label.activate_link.connect(enable_auto_backup);
   }
 
   bool is_same_day(DateTime one, DateTime two)
@@ -111,31 +108,20 @@ public class ConfigLabelBackupDate : ConfigLabel
   protected void set_from_config_last()
   {
     var val = DejaDup.last_run_date(DejaDup.TimestampType.BACKUP);
-
-    // This here encodes a lot of outside GUI information in this widget,
-    // but it's a very special case thing.
     var time = TimeVal();
-    if (val == "" || !time.from_iso8601(val)) {
-      var button_name = "<b>%s</b>".printf(_("Restore…"));
-      var desc = _("You may use the %s button to browse for existing backups.").printf(button_name);
-      label.label = "<b>%s</b>\n%s".printf(_("No recent backups."), desc);
-    }
-    else {
+    if (val == "" || !time.from_iso8601(val))
+      label.label = "<b>%s</b>".printf(_("No recent backups."));
+    else
       label.label = "<b>%s</b>".printf(pretty_last_name(new DateTime.from_timeval_local(time)));
-    }
   }
 
   protected void set_from_config_next()
   {
     var next = DejaDup.next_run_date();
-    if (next == null) {
-      var button_name = "<b>%s</b>".printf(_("Back Up Now…"));
-      var desc = _("You should <a href=''>enable</a> automatic backups or use the %s button to start one now.").printf(button_name);
-      label.label = "<b>%s</b>\n%s".printf(_("No backup scheduled."), desc);
-    }
-    else {
+    if (next == null)
+      label.label = "<b>%s</b>".printf(_("No backup scheduled."));
+    else
       label.label = "<b>%s</b>".printf(pretty_next_name(next));
-    }
   }
 
   protected override async void set_from_config()
@@ -144,13 +130,6 @@ public class ConfigLabelBackupDate : ConfigLabel
       set_from_config_last();
     else
       set_from_config_next();
-  }
-
-  bool enable_auto_backup()
-  {
-    var settings = DejaDup.get_settings();
-    settings.set_boolean(DejaDup.PERIODIC_KEY, true);
-    return true;
   }
 }
 

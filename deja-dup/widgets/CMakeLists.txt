@@ -23,8 +23,7 @@ vala_precompile(VALA_C ConfigBool.vala
                        ConfigFolder.vala
                        ConfigLabel.vala
                        ConfigLabelBackupDate.vala
-                       ConfigLabelBool.vala
-                       ConfigLabelList.vala
+                       ConfigLabelDescription.vala
                        ConfigLabelLocation.vala
                        ConfigList.vala
                        ConfigLocation.vala

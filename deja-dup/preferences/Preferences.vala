@@ -102,7 +102,7 @@ public class Preferences : Gtk.Grid
 
     table = new_panel();
     table.orientation = Gtk.Orientation.VERTICAL;
-    table.row_spacing = 12;
+    table.row_spacing = 6;
     table.column_spacing = 12;
     table.expand = true;
 
@@ -113,14 +113,21 @@ public class Preferences : Gtk.Grid
     w = new Gtk.Image.from_icon_name("document-save-symbolic", Gtk.IconSize.DIALOG);
     w.halign = Gtk.Align.CENTER;
     w.valign = Gtk.Align.START;
-    table.attach(w, 0, row, 1, 2);
+    table.attach(w, 0, row, 1, 3);
     w = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.LAST);
     w.halign = Gtk.Align.START;
     w.valign = Gtk.Align.START;
     table.attach(w, 1, row, 1, 1);
     ++row;
 
+    w = new DejaDup.ConfigLabelDescription(DejaDup.ConfigLabelDescription.Kind.RESTORE);
+    w.halign = Gtk.Align.START;
+    w.valign = Gtk.Align.START;
+    table.attach(w, 1, row, 1, 1);
+    ++row;
+
     w = new Gtk.Button.with_mnemonic(_("_Restore…"));
+    w.margin_top = 6;
     w.halign = Gtk.Align.START;
     (w as Gtk.Button).clicked.connect((b) => {
       run_deja_dup("--restore", b.get_display().get_app_launch_context());
@@ -138,14 +145,21 @@ public class Preferences : Gtk.Grid
     w = new Gtk.Image.from_icon_name("document-open-recent-symbolic", Gtk.IconSize.DIALOG);
     w.halign = Gtk.Align.CENTER;
     w.valign = Gtk.Align.START;
-    table.attach(w, 0, row, 1, 2);
+    table.attach(w, 0, row, 1, 3);
     w = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.NEXT);
     w.halign = Gtk.Align.START;
     w.valign = Gtk.Align.START;
     table.attach(w, 1, row, 1, 1);
     ++row;
 
+    w = new DejaDup.ConfigLabelDescription(DejaDup.ConfigLabelDescription.Kind.BACKUP);
+    w.halign = Gtk.Align.START;
+    w.valign = Gtk.Align.START;
+    table.attach(w, 1, row, 1, 1);
+    ++row;
+
     w = new Gtk.Button.with_mnemonic(_("_Back Up Now…"));
+    w.margin_top = 6;
     w.halign = Gtk.Align.START;
     (w as Gtk.Button).clicked.connect((b) => {
       run_deja_dup("--backup", b.get_display().get_app_launch_context());
