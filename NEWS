@@ -1,12 +1,23 @@
-Déjà Dup 29.1 (GNOME 3.11.1)
-----------------------------
+Déjà Dup 29.1
+-------------
+Bug Fixes:
+ • Detect encryption on existing backups by paying attention to what Duplicity
+   tells us, rather than trying to figure it out by scanning ourselves.
+   This removes a possible source of error.
+Polish:
+ • Rename to Backups (instead of Backup)
+ • Update look and feel of preferences a bit
+ • Add screenshots to appdata file
 Packaging:
+ • Require GTK+ 3.6 and GLib 2.34
  • Convert from autotools to cmake:
     --with-ccpanel is now -DENABLE_CCPANEL
     --with-nautilus is now -DENABLE_NAUTILUS
     --with-unity is now -DENABLE_UNITY
-    Otherwise, normal cmake conventions apply
- • Add some autopilot tests, runnable by 'autopilot' and 'autopilot-system' targets (which test against the local built executables or the installed system ones respectively)
+   Otherwise, normal cmake conventions apply
+ • Add some autopilot tests, runnable by 'autopilot' and 'autopilot-system'
+   targets (which test against the local built executables or the installed
+   system ones respectively)
 Translations:
  • Updated Basque, Chinese (Traditional), Finnish, and Polish translations
 
