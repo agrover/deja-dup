@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-30 21:24-0400\n"
+"POT-Creation-Date: 2013-10-16 01:33-0400\n"
 "PO-Revision-Date: 2013-10-01 02:30+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-02 06:04+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-10-17 06:06+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -26,7 +26,6 @@ msgstr ""
 "  Adriano Steffler https://launchpad.net/~adrianstiffler\n"
 "  André Gondim https://launchpad.net/~andregondim\n"
 "  André Soares Nascimento https://launchpad.net/~andresoaresnascimento\n"
-"  Charles do Nascimento Liesenfeld https://launchpad.net/~charlesdnl\n"
 "  Edvaldo de Souza Cruz https://launchpad.net/~edvaldoscruz\n"
 "  Gabriel https://launchpad.net/~fgbreel\n"
 "  Hélio Márcio Filho https://launchpad.net/~heliommsfilho\n"
@@ -609,7 +608,6 @@ msgstr ""
 "  Adriano Steffler https://launchpad.net/~adrianstiffler\n"
 "  André Gondim https://launchpad.net/~andregondim\n"
 "  André Soares Nascimento https://launchpad.net/~andresoaresnascimento\n"
-"  Charles do Nascimento Liesenfeld https://launchpad.net/~charlesdnl\n"
 "  Edvaldo de Souza Cruz https://launchpad.net/~edvaldoscruz\n"
 "  Gabriel https://launchpad.net/~fgbreel\n"
 "  Hélio Márcio Filho https://launchpad.net/~heliommsfilho\n"
@@ -648,8 +646,8 @@ msgstr ""
 #: C/backup-auto.page:12
 #: C/backup-first.page:11
 #: C/restore-full.page:20
-msgid "Open your <gui>Backup</gui> settings."
-msgstr "Abra as suas configurações de <gui>cópia de segurança</gui>"
+msgid "Open your <gui>Backups</gui> settings."
+msgstr ""
 
 #. (itstool) path: item/p
 #: C/backup-auto.page:13
@@ -695,11 +693,9 @@ msgstr "Sua Primeira Cópia de Segurança"
 #. (itstool) path: item/p
 #: C/backup-first.page:13
 msgid ""
-"Click on the <gui style=\"button\">Back Up Now</gui> button on the "
+"Click on the <gui style=\"button\">Back Up Now…</gui> button on the "
 "<gui>Overview</gui> page."
 msgstr ""
-"Clique no botão <gui style=\"button\">Fazer cópia de segurança agora</gui> "
-"na página <gui>Visão geral</gui>."
 
 #. (itstool) path: item/p
 #: C/backup-first.page:14
@@ -854,8 +850,8 @@ msgstr "Configurações"
 
 #. (itstool) path: item/title
 #: C/prefs.page:13
-msgid "<gui>Automatic backups</gui>"
-msgstr "<gui>Cópias de segurança automáticas</gui>"
+msgid "<gui>Automatic backup</gui>"
+msgstr ""
 
 #. (itstool) path: item/p
 #: C/prefs.page:14
@@ -868,53 +864,91 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: C/prefs.page:17
-msgid "<gui>Backup location</gui>"
-msgstr "<gui>Local da cópia de segurança</gui>"
+msgid "<gui>Folders to save</gui>"
+msgstr ""
 
 #. (itstool) path: item/p
 #: C/prefs.page:18
 msgid ""
-"Use these options to specify the backup location that <app>Déjà Dup</app> "
-"will use when backing up or restoring:"
+"Choose a list of folders to save in your backup. Press the <gui "
+"style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
+"modify the list. If you are only interested in backing up your own data, the "
+"default of <gui>Home</gui> is sufficient."
 msgstr ""
-"Usar estas opções para especificar o local da cópia de segurança que o "
-"<app>Déjà Dup</app> utilizará quando fizer ou restaurar uma cópia de "
-"segurança:"
 
 #. (itstool) path: item/title
 #: C/prefs.page:21
-msgid "Cloud Services"
-msgstr "Serviços na nuvem"
+msgid "<gui>Folders to ignore</gui>"
+msgstr "<gui>Pastas a serem ignoradas</gui>"
 
 #. (itstool) path: item/p
 #: C/prefs.page:22
 msgid ""
-"The first few backup locations are cloud storage services provided by "
+"Choose a list of folders to not save in your backup. Press the <gui "
+"style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
+"modify the list."
+msgstr ""
+
+#. (itstool) path: item/p
+#: C/prefs.page:23
+msgid ""
+"Some of your data may be large and not very important to you. In that case, "
+"you can save yourself some time and space by not backing them up."
+msgstr ""
+"Alguns dos seus dados podem ser grandes e não muito importantes para você. "
+"Nesse caso, você mesmo pode economizar tempo e espaço não fazendo uma cópia "
+"de segurança deles."
+
+#. (itstool) path: note/p
+#: C/prefs.page:25
+msgid "Some locations are always ignored by default:"
+msgstr "Por padrão, alguns locais são sempre ignorados:"
+
+#. (itstool) path: p/span
+#: C/prefs.page:33
+msgid "(which by default also ignores <_:file-1/>)"
+msgstr ""
+
+#. (itstool) path: item/title
+#: C/prefs.page:44
+msgid "<gui>Storage location</gui>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: C/prefs.page:45
+msgid ""
+"Use these options to specify the storage location that <app>Déjà Dup</app> "
+"will use when backing up or restoring:"
+msgstr ""
+
+#. (itstool) path: item/title
+#: C/prefs.page:48
+msgid "Cloud Services"
+msgstr "Serviços na nuvem"
+
+#. (itstool) path: item/p
+#: C/prefs.page:49
+msgid ""
+"The first few storage locations are cloud storage services provided by "
 "various companies. For a small fee, they hold your data for you. A cloud "
 "service like this is recommended because it is an easy way to keep your data "
 "offsite (meaning out of your home: in case of disaster or theft, your data "
 "will still be safe)."
 msgstr ""
-"Os primeiros poucos locais de cópia de segurança são serviços de "
-"armazenamento em nuvem fornecidos por várias empresas. Por uma pequena taxa, "
-"eles guardam seus dados para você. Um serviço na nuvem como esse é "
-"recomendado, porque esse é um modo fácil de manter os seus dados fora do "
-"local (significando fora da sua casa: em caso de desastre ou roubo, os seus "
-"dados ainda estarão seguros)."
 
 #. (itstool) path: note/p
-#: C/prefs.page:23
+#: C/prefs.page:50
 msgid ""
 "These services cost money. Read their rates carefully before using them."
 msgstr ""
 
 #. (itstool) path: item/title
-#: C/prefs.page:26
+#: C/prefs.page:53
 msgid "Remote Servers"
 msgstr "Servidores remotos"
 
 #. (itstool) path: item/p
-#: C/prefs.page:27
+#: C/prefs.page:54
 msgid ""
 "Choose the type of remote server to which you want to connect. Then you can "
 "enter the server information. Alternatively, if you know your server’s URL, "
@@ -926,12 +960,12 @@ msgstr ""
 "insira-a."
 
 #. (itstool) path: item/title
-#: C/prefs.page:30
+#: C/prefs.page:57
 msgid "Removable Media"
 msgstr "Mídia removível"
 
 #. (itstool) path: item/p
-#: C/prefs.page:31
+#: C/prefs.page:58
 msgid ""
 "You may see removable media like external hard drives or thumb drives listed."
 msgstr ""
@@ -939,22 +973,19 @@ msgstr ""
 "portáteis."
 
 #. (itstool) path: item/title
-#: C/prefs.page:34
+#: C/prefs.page:61
 msgid "Local Folder"
 msgstr "Pasta pessoal"
 
 #. (itstool) path: item/p
-#: C/prefs.page:35
+#: C/prefs.page:62
 msgid ""
-"You may also want to choose a local folder as a backup location. Note that "
+"You may also want to choose a local folder as a storage location. Note that "
 "backups can be quite large, so make sure you have enough free disk space."
 msgstr ""
-"Você também pode escolher uma pasta local como localização para a cópia de "
-"segurança. Note que as cópias de segurança podem ser relativamente grandes, "
-"então certifique-se de que tenha espaço livre suficiente."
 
 #. (itstool) path: note/p
-#: C/prefs.page:36
+#: C/prefs.page:63
 msgid ""
 "This is not recommended, because if your hardware fails, you will lose both "
 "your original data and your backups."
@@ -963,64 +994,9 @@ msgstr ""
 "os seu dados originais quanto a cópia de segurança."
 
 #. (itstool) path: item/title
-#: C/prefs.page:41
-msgid "<gui>Folders to back up</gui>"
-msgstr "<gui>Pastas das quais serão feitas cópias de segurança</gui>"
-
-#. (itstool) path: item/p
-#: C/prefs.page:42
-msgid ""
-"Choose a list of folders to back up. Press the <gui "
-"style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
-"modify the list. If you are only interested in backing up your own data, the "
-"default of <gui>Home</gui> is sufficient."
-msgstr ""
-"Escolha uma lista de pastas das quais serão feitas cópias de segurança. "
-"Aperte os botões <gui style=\"button\">Adicionar</gui> ou <gui "
-"style=\"button\">Remover</gui> para modificar a lista. Se você apenas "
-"estiver interessado em fazer uma cópia de segurança dos seus próprios dados, "
-"o padrão da <gui>Página inicial</gui> é suficiente."
-
-#. (itstool) path: item/title
-#: C/prefs.page:45
-msgid "<gui>Folders to ignore</gui>"
-msgstr "<gui>Pastas a serem ignoradas</gui>"
-
-#. (itstool) path: item/p
-#: C/prefs.page:46
-msgid ""
-"Choose a list of folders to not back up. Press the <gui "
-"style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
-"modify the list."
-msgstr ""
-"Escolha uma lista de pastas das quais não será feita cópia de segurança. "
-"Pressione a <gui style=\"button\">Adicionar</gui> ou <gui "
-"style=\"button\">Remover</gui> para modificar a lista."
-
-#. (itstool) path: item/p
-#: C/prefs.page:47
-msgid ""
-"Some of your data may be large and not very important to you. In that case, "
-"you can save yourself some time and space by not backing them up."
-msgstr ""
-"Alguns dos seus dados podem ser grandes e não muito importantes para você. "
-"Nesse caso, você mesmo pode economizar tempo e espaço não fazendo uma cópia "
-"de segurança deles."
-
-#. (itstool) path: note/p
-#: C/prefs.page:49
-msgid "Some locations are always ignored by default:"
-msgstr "Por padrão, alguns locais são sempre ignorados:"
-
-#. (itstool) path: p/span
-#: C/prefs.page:57
-msgid "(which by default also ignores <_:file-1/>)"
-msgstr ""
-
-#. (itstool) path: item/title
 #: C/prefs.page:68
-msgid "<gui>Keep backups</gui>"
-msgstr "<gui>Manter as cópias de segurança</gui>"
+msgid "<gui>Keep</gui>"
+msgstr ""
 
 #. (itstool) path: item/p
 #: C/prefs.page:69
@@ -1040,10 +1016,8 @@ msgstr ""
 #: C/prefs.page:70
 msgid ""
 "Backups are kept forever by default, but still may be deleted earlier if the "
-"backup location begins to run out of space."
+"storage location begins to run out of space."
 msgstr ""
-"Por padrão, as cópias de segurança são mantidas para sempre, mas podem ser "
-"deletadas antes se o local da cópia de segurança começar a ficar sem espaço."
 
 #. (itstool) path: info/desc
 #: C/contribute.page:8
@@ -1342,3 +1316,83 @@ msgid ""
 msgstr ""
 "Se isso ainda não funcionar, há <link xref=\"restore-worst-case\">coisas "
 "mais drásticas</link> que você pode tentar."
+
+#~ msgid ""
+#~ "You may also want to choose a local folder as a backup location. Note that "
+#~ "backups can be quite large, so make sure you have enough free disk space."
+#~ msgstr ""
+#~ "Você também pode escolher uma pasta local como localização para a cópia de "
+#~ "segurança. Note que as cópias de segurança podem ser relativamente grandes, "
+#~ "então certifique-se de que tenha espaço livre suficiente."
+
+#~ msgid "<gui>Folders to back up</gui>"
+#~ msgstr "<gui>Pastas das quais serão feitas cópias de segurança</gui>"
+
+#~ msgid ""
+#~ "Choose a list of folders to back up. Press the <gui "
+#~ "style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
+#~ "modify the list. If you are only interested in backing up your own data, the "
+#~ "default of <gui>Home</gui> is sufficient."
+#~ msgstr ""
+#~ "Escolha uma lista de pastas das quais serão feitas cópias de segurança. "
+#~ "Aperte os botões <gui style=\"button\">Adicionar</gui> ou <gui "
+#~ "style=\"button\">Remover</gui> para modificar a lista. Se você apenas "
+#~ "estiver interessado em fazer uma cópia de segurança dos seus próprios dados, "
+#~ "o padrão da <gui>Página inicial</gui> é suficiente."
+
+#~ msgid "Open your <gui>Backup</gui> settings."
+#~ msgstr "Abra as suas configurações de <gui>cópia de segurança</gui>"
+
+#~ msgid ""
+#~ "Click on the <gui style=\"button\">Back Up Now</gui> button on the "
+#~ "<gui>Overview</gui> page."
+#~ msgstr ""
+#~ "Clique no botão <gui style=\"button\">Fazer cópia de segurança agora</gui> "
+#~ "na página <gui>Visão geral</gui>."
+
+#~ msgid "<gui>Automatic backups</gui>"
+#~ msgstr "<gui>Cópias de segurança automáticas</gui>"
+
+#~ msgid "<gui>Backup location</gui>"
+#~ msgstr "<gui>Local da cópia de segurança</gui>"
+
+#~ msgid ""
+#~ "Use these options to specify the backup location that <app>Déjà Dup</app> "
+#~ "will use when backing up or restoring:"
+#~ msgstr ""
+#~ "Usar estas opções para especificar o local da cópia de segurança que o "
+#~ "<app>Déjà Dup</app> utilizará quando fizer ou restaurar uma cópia de "
+#~ "segurança:"
+
+#~ msgid ""
+#~ "The first few backup locations are cloud storage services provided by "
+#~ "various companies. For a small fee, they hold your data for you. A cloud "
+#~ "service like this is recommended because it is an easy way to keep your data "
+#~ "offsite (meaning out of your home: in case of disaster or theft, your data "
+#~ "will still be safe)."
+#~ msgstr ""
+#~ "Os primeiros poucos locais de cópia de segurança são serviços de "
+#~ "armazenamento em nuvem fornecidos por várias empresas. Por uma pequena taxa, "
+#~ "eles guardam seus dados para você. Um serviço na nuvem como esse é "
+#~ "recomendado, porque esse é um modo fácil de manter os seus dados fora do "
+#~ "local (significando fora da sua casa: em caso de desastre ou roubo, os seus "
+#~ "dados ainda estarão seguros)."
+
+#~ msgid "<gui>Keep backups</gui>"
+#~ msgstr "<gui>Manter as cópias de segurança</gui>"
+
+#~ msgid ""
+#~ "Backups are kept forever by default, but still may be deleted earlier if the "
+#~ "backup location begins to run out of space."
+#~ msgstr ""
+#~ "Por padrão, as cópias de segurança são mantidas para sempre, mas podem ser "
+#~ "deletadas antes se o local da cópia de segurança começar a ficar sem espaço."
+
+#~ msgid ""
+#~ "Choose a list of folders to not back up. Press the <gui "
+#~ "style=\"button\">Add</gui> or <gui style=\"button\">Remove</gui> buttons to "
+#~ "modify the list."
+#~ msgstr ""
+#~ "Escolha uma lista de pastas das quais não será feita cópia de segurança. "
+#~ "Pressione a <gui style=\"button\">Adicionar</gui> ou <gui "
+#~ "style=\"button\">Remover</gui> para modificar a lista."
