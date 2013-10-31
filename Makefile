@@ -46,6 +46,13 @@ deb:
 	DEB_BUILD_OPTIONS=nocheck debuild
 
 screenshots: all
+	@gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
+	@gsettings set org.gnome.desktop.interface font-name 'Cantarell 11'
+	@gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
+	@gsettings set org.gnome.desktop.interface icon-theme 'gnome'
+	@gsettings set org.gnome.desktop.wm.preferences theme 'Adwaita'
+	@sleep 2
+	
 	@mkdir -p ./builddir/screenshots
 	@rm -f ./builddir/screenshots/*
 	@./tests/shell "gsettings set org.gnome.DejaDup backend 'file';" \
@@ -55,11 +62,18 @@ screenshots: all
 	               "gsettings set org.gnome.DejaDup.File type 'volume';" \
 	               "gsettings set org.gnome.DejaDup.File path '/NOPE';" \
 	               "env HOME=/NOPE deja-dup-preferences" >/dev/null 2>&1 &
-	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-1.jpg
+	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-1.png
 	@killall deja-dup-preferences
+	
 	@./tests/shell "deja-dup --backup" >/dev/null &
-	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-2.jpg
+	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-2.png
 	@killall deja-dup
+	
+	@gsettings reset org.gnome.desktop.interface cursor-theme
+	@gsettings reset org.gnome.desktop.interface font-name
+	@gsettings reset org.gnome.desktop.interface gtk-theme
+	@gsettings reset org.gnome.desktop.interface icon-theme
+	@gsettings reset org.gnome.desktop.wm.preferences theme
 
 # call like 'make copy-po TD=path-to-translation-dir'
 copy-po:
