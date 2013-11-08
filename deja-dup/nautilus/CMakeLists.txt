@@ -23,5 +23,6 @@ set_target_properties(deja-dup-nautilus PROPERTIES
                       OUTPUT_NAME deja-dup
                       INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/libdeja"
                       COMPILE_FLAGS "${GLIB_CFLAGS} ${NAUTILUS_CFLAGS} ${COMMON_CFLAGS}")
+add_dependencies(deja-dup-nautilus deja) # needs DirHandling.c
 install(TARGETS deja-dup-nautilus DESTINATION "${NAUTILUS_EXTENSIONDIR}")
 endif()
