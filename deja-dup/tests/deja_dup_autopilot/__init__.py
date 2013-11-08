@@ -20,7 +20,7 @@ import glob
 import os
 import shutil
 import subprocess
-from autopilot.input import Pointer, Touch
+from autopilot.input import Pointer, Mouse
 from autopilot.matchers import Eventually
 from autopilot.testcase import AutopilotTestCase
 from functools import wraps
@@ -44,7 +44,7 @@ class DejaDupTestCase(AutopilotTestCase):
 
     def setUp(self):
         super(DejaDupTestCase, self).setUp()
-        self.pointer = Pointer(Touch.create())
+        self.pointer = Pointer(Mouse.create())
 
         self.rootdir = os.environ['DEJA_DUP_TEST_ROOT']
         self.sourcedir = os.path.join(self.rootdir, 'source')
@@ -87,7 +87,7 @@ class DejaDupTestCase(AutopilotTestCase):
 
     def iterate(self, p):
         "Not meant for production use, just a debugging tool"
-        print p, p.get_properties()
+        print(p, p.get_properties())
         for c in p.get_children():
             self.iterate(c)
 
@@ -115,7 +115,7 @@ class DejaDupTestCase(AutopilotTestCase):
     def add_random_data(self, name, size):
         """Fill a file with random bytes, which are poorly compressable.
            Size is in megabytes."""
-        with open(os.path.join(self.sourcedir, name), 'w') as f:
+        with open(os.path.join(self.sourcedir, name), 'wb') as f:
             for i in range(size):
                 f.write(os.urandom(1024 * 1024))
 
