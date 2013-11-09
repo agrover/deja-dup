@@ -34,19 +34,15 @@ macro(deja_check_modules)
 endmacro()
 
 macro(deja_enable_option)
-  if(NOT ENABLE_${ARGV0})
-    return() # nothing to do
-  endif()
-
-  deja_check_modules(${ARGV})
-
-  if(NOT ${ARGV0}_FOUND)
-    if(ENABLE_${ARGV0} STREQUAL "CHECK")
-      set(ENABLE_${ARGV0} OFF)
-    else()
-      message(FATAL_ERROR "You enabled ${ARGV0}, but required dependencies could not be found")
+  if(ENABLE_${ARGV0})
+    deja_check_modules(${ARGV})
+    if(NOT ${ARGV0}_FOUND)
+      if(ENABLE_${ARGV0} STREQUAL "CHECK")
+        set(ENABLE_${ARGV0} OFF)
+      else()
+        message(FATAL_ERROR "You enabled ${ARGV0}, but required dependencies could not be found")
+      endif()
     endif()
-    return()
   endif()
 endmacro()
 
