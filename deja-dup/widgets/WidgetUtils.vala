@@ -19,6 +19,10 @@
 
 using GLib;
 
+// vala 0.22.1 changed the prototype for Notify.get_server_caps.
+// Rather than require that specific version, use 0.22.1's definition directly.
+extern GLib.List notify_get_server_caps();
+
 namespace DejaDup {
 
 public void show_uri(Gtk.Window? parent, string link)
@@ -59,7 +63,7 @@ public ShellEnv get_shell()
       // Use Legacy unless we detect a different shell.
       shell = ShellEnv.LEGACY;
       // Next check for Shell by notification capabilities
-      unowned List<string> caps = Notify.get_server_caps();
+      List<string> caps = notify_get_server_caps();
       bool persistence = false, actions = false;
       foreach (string cap in caps) {
         if (cap == "persistence")
