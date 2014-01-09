@@ -22,7 +22,11 @@
 */
 
 #include <gtk/gtk.h>
+#ifdef USE_UNITY
+#include <libunity-control-center/cc-panel.h>
+#else
 #include <libgnome-control-center/cc-panel.h>
+#endif
 #include "widgets.h"
 
 extern void* deja_dup_preferences_new (gboolean show_auto_switch);

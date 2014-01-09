@@ -16,29 +16,21 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-# Hide preferences if have control center panel
 if(ENABLE_CCPANEL)
-  set(PREFERENCES_NOTSHOWIN "GNOME;")
-endif()
-if(ENABLE_UNITY_CCPANEL)
-  set(PREFERENCES_NOTSHOWIN "${PREFERENCES_NOTSHOWIN}Unity;")
-endif()
-
-vala_precompile(VALA_C preferences-main.vala
-                       Preferences.vala
+vala_precompile(VALA_C ../Preferences.vala
                 PACKAGES gtk+-3.0 libpeas-1.0 libsecret-1
                 CUSTOM_VAPIS ${CMAKE_BINARY_DIR}/libdeja/deja.vapi
                              ${CMAKE_BINARY_DIR}/deja-dup/widgets/widgets.vapi
                              ${CMAKE_SOURCE_DIR}/vapi/config.vapi
                 OPTIONS ${COMMON_VFLAGS})
-add_executable(deja-dup-preferences ${VALA_C})
-target_link_libraries(deja-dup-preferences deja widgets ${GTK_LDFLAGS} ${NOTIFY_LDFLAGS} ${PEAS_LDFLAGS} ${SECRET_LDFLAGS})
-set_target_properties(deja-dup-preferences PROPERTIES
+
+add_library(deja-dup-ccpanel MODULE ${VALA_C} ../PreferencesPanel.c)
+target_link_libraries(deja-dup-ccpanel deja widgets ${CCPANEL_LDFLAGS} ${GTK_LDFLAGS} ${PEAS_LDFLAGS} ${SECRET_LDFLAGS})
+set_target_properties(deja-dup-ccpanel PROPERTIES
+                      OUTPUT_NAME deja-dup
                       INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/libdeja;${CMAKE_BINARY_DIR}/deja-dup/widgets"
-                      COMPILE_FLAGS "${GTK_CFLAGS} ${PEAS_CFLAGS} ${SECRET_CFLAGS} ${COMMON_CFLAGS}")
-install(TARGETS deja-dup-preferences DESTINATION bin)
+                      COMPILE_FLAGS "${CCPANEL_CFLAGS} ${GTK_CFLAGS} ${PEAS_CFLAGS} ${SECRET_CFLAGS} ${COMMON_CFLAGS}")
+install(TARGETS deja-dup-ccpanel DESTINATION "${CCPANEL_EXTENSIONDIR}")
 
-deja_merge_po(desktop deja-dup-preferences.desktop "${CMAKE_INSTALL_FULL_DATADIR}/applications")
-
-add_subdirectory(gnome-control-center)
-add_subdirectory(unity-control-center)
+deja_merge_po(desktop gnome-deja-dup-panel.desktop "${CMAKE_INSTALL_FULL_DATADIR}/applications")
+endif()
