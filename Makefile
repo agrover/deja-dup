@@ -51,7 +51,7 @@ screenshots: all
 	@gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
 	@gsettings set org.gnome.desktop.interface icon-theme 'gnome'
 	@gsettings set org.gnome.desktop.wm.preferences theme 'Adwaita'
-	@sleep 2
+	@sleep 5
 	
 	@mkdir -p ./builddir/screenshots
 	@rm -f ./builddir/screenshots/*
