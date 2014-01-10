@@ -26,6 +26,7 @@ include(DejaDupMacros)
 deja_option(ENABLE_CCPANEL "Build gnome-control-center panel" CHECK)
 deja_option(ENABLE_NAUTILUS "Build nautilus plugin" CHECK)
 deja_option(ENABLE_UNITY "Integrate with Unity" CHECK)
+deja_option(ENABLE_UNITY_CCPANEL "Build unity-control-center panel" CHECK)
 
 find_package(PkgConfig 0.24 REQUIRED)
 find_package(Vala 0.20 REQUIRED)
@@ -54,6 +55,14 @@ if(ENABLE_NAUTILUS)
 endif()
 
 deja_enable_option(UNITY unity>=3.4.2)
+
+deja_enable_option(UNITY_CCPANEL libunity-control-center)
+if(ENABLE_UNITY_CCPANEL)
+  execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} --variable=extensiondir libunity-control-center
+                  OUTPUT_VARIABLE UNITY_CCPANEL_EXTENSIONDIR
+                  OUTPUT_STRIP_TRAILING_WHITESPACE
+                  ERROR_QUIET)
+endif()
 
 # Set up some common configuration values; Vala sees these via config.vapi.
 include(GNUInstallDirs)

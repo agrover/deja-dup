@@ -16,8 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
+# Hide preferences if have control center panel
 if(ENABLE_CCPANEL)
-  set(CCPANEL_SHOWIN "GNOME;Unity;") # for replacing @CCPANEL_SHOWIN@ in desktop files
+  set(PREFERENCES_NOTSHOWIN "GNOME;")
+endif()
+if(ENABLE_UNITY_CCPANEL)
+  set(PREFERENCES_NOTSHOWIN "${PREFERENCES_NOTSHOWIN}Unity;")
 endif()
 
 vala_precompile(VALA_C preferences-main.vala
@@ -41,9 +45,23 @@ add_library(deja-dup-ccpanel MODULE Preferences.c PreferencesPanel.c)
 target_link_libraries(deja-dup-ccpanel deja widgets ${CCPANEL_LDFLAGS} ${GTK_LDFLAGS} ${PEAS_LDFLAGS} ${SECRET_LDFLAGS})
 set_target_properties(deja-dup-ccpanel PROPERTIES
                       OUTPUT_NAME deja-dup
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/ccpanel"
                       INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/libdeja;${CMAKE_BINARY_DIR}/deja-dup/widgets"
                       COMPILE_FLAGS "${CCPANEL_CFLAGS} ${GTK_CFLAGS} ${PEAS_CFLAGS} ${SECRET_CFLAGS} ${COMMON_CFLAGS}")
 install(TARGETS deja-dup-ccpanel DESTINATION "${CCPANEL_EXTENSIONDIR}")
 
 deja_merge_po(desktop gnome-deja-dup-panel.desktop "${CMAKE_INSTALL_FULL_DATADIR}/applications")
+endif()
+
+if(ENABLE_UNITY_CCPANEL)
+add_library(deja-dup-unity-ccpanel MODULE Preferences.c PreferencesPanel.c)
+target_link_libraries(deja-dup-unity-ccpanel deja widgets ${UNITY_CCPANEL_LDFLAGS} ${GTK_LDFLAGS} ${PEAS_LDFLAGS} ${SECRET_LDFLAGS})
+set_target_properties(deja-dup-unity-ccpanel PROPERTIES
+                      OUTPUT_NAME deja-dup
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/unity-ccpanel"
+                      INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/libdeja;${CMAKE_BINARY_DIR}/deja-dup/widgets"
+                      COMPILE_FLAGS "-DUSE_UNITY ${UNITY_CCPANEL_CFLAGS} ${GTK_CFLAGS} ${PEAS_CFLAGS} ${SECRET_CFLAGS} ${COMMON_CFLAGS}")
+install(TARGETS deja-dup-unity-ccpanel DESTINATION "${UNITY_CCPANEL_EXTENSIONDIR}")
+
+deja_merge_po(desktop unity-deja-dup-panel.desktop "${CMAKE_INSTALL_FULL_DATADIR}/applications")
 endif()

@@ -34,7 +34,8 @@ class CCPanelTests(DejaDupTestCase):
         """Launch and close the panel a couple times.  If we don't properly
            clean up after ourselves when we are disposed, this may cause a
            crash."""
-        app = self.launch_test_application('gnome-control-center', 'deja-dup')
+        app = self.launch_test_application('gnome-control-center', 'deja-dup',
+                                           app_type='gtk')
         window = app.select_single("GtkApplicationWindow")
         self.assertThat(window.title, Eventually(Equals("Backups")))
         self.close_backup_panel(window)
@@ -45,6 +46,38 @@ class CCPanelTests(DejaDupTestCase):
         # This is dumb, but GtkIconView doesn't seem to list its contents to
         # autopilot.  TODO: make this actually click on Backup icon in window
         os.system('gnome-control-center deja-dup')
+        self.assertThat(window.title, Eventually(Equals("Backups")))
+
+    def close_backup_panel(self, window):
+        button = window.select_single("GtkButton", label="_All Settings")
+        self.pointer.click_object(button)
+        self.assertThat(window.title, Eventually(NotEquals("Backups")))
+
+
+class CCUnityPanelTests(DejaDupTestCase):
+
+    @system_only
+    def setUp(self):
+        super(CCUnityPanelTests, self).setUp()
+        if os.environ.get("HAS_UNITY_CCPANEL") != "1":
+            self.skip("Skipping disabled Unity ccpanel test")
+
+    def test_clean_exit(self):
+        """Launch and close the panel a couple times.  If we don't properly
+           clean up after ourselves when we are disposed, this may cause a
+           crash."""
+        app = self.launch_test_application('unity-control-center', 'deja-dup',
+                                           app_type='gtk')
+        window = app.select_single("GtkApplicationWindow")
+        self.assertThat(window.title, Eventually(Equals("Backups")))
+        self.close_backup_panel(window)
+        self.open_backup_panel(window)
+        self.close_backup_panel(window)
+
+    def open_backup_panel(self, window):
+        # This is dumb, but GtkIconView doesn't seem to list its contents to
+        # autopilot.  TODO: make this actually click on Backup icon in window
+        os.system('unity-control-center deja-dup')
         self.assertThat(window.title, Eventually(Equals("Backups")))
 
     def close_backup_panel(self, window):
