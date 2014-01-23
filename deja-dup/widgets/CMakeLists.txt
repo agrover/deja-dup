@@ -44,7 +44,7 @@ vala_precompile(VALA_C ConfigBool.vala
                        ConfigURLPartBool.vala
                        ConfigWidget.vala
                        WidgetUtils.vala
-                PACKAGES gtk+-3.0 libnotify libpeas-1.0 libsecret-1
+                PACKAGES gtk+-3.0 libnotify libpeas-1.0 libsecret-1 ${UNITY_PACKAGE}
                 CUSTOM_VAPIS ${CMAKE_BINARY_DIR}/libdeja/deja.vapi
                              ${CMAKE_SOURCE_DIR}/vapi/config.vapi
                              ${CMAKE_SOURCE_DIR}/vapi/uriutils.vapi
@@ -52,8 +52,8 @@ vala_precompile(VALA_C ConfigBool.vala
                 GENERATE_VAPI widgets
                 GENERATE_HEADER widgets)
 add_library(widgets SHARED ${VALA_C})
-target_link_libraries(widgets deja "${GTK_LDFLAGS} ${NOTIFY_LDFLAGS} ${PEAS_LDFLAGS} ${SECRET_LDFLAGS}")
+target_link_libraries(widgets deja "${GTK_LDFLAGS} ${NOTIFY_LDFLAGS} ${PEAS_LDFLAGS} ${SECRET_LDFLAGS} ${UNITY_LDFLAGS}")
 set_target_properties(widgets PROPERTIES
                       INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/libdeja;${CMAKE_SOURCE_DIR}/libdeja"
-                      COMPILE_FLAGS "${GTK_CFLAGS} ${NOTIFY_CFLAGS} ${PEAS_CFLAGS} ${SECRET_CFLAGS} ${COMMON_CFLAGS}")
+                      COMPILE_FLAGS "${GTK_CFLAGS} ${NOTIFY_CFLAGS} ${PEAS_CFLAGS} ${SECRET_CFLAGS} ${UNITY_CFLAGS} ${COMMON_CFLAGS}")
 install(TARGETS widgets DESTINATION "${PKG_LIBDIR}")
