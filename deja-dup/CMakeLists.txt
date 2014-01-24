@@ -25,15 +25,15 @@ vala_precompile(VALA_C main.vala
                        MountOperationAssistant.vala
                        Prompt.vala
                        StatusIcon.vala
-                PACKAGES gio-unix-2.0 gtk+-3.0 libnotify libpeas-1.0 libsecret-1
+                PACKAGES gio-unix-2.0 gtk+-3.0 libnotify libpeas-1.0 libsecret-1 ${UNITY_PACKAGE}
                 CUSTOM_VAPIS ${CMAKE_BINARY_DIR}/libdeja/deja.vapi
                              ${CMAKE_CURRENT_BINARY_DIR}/widgets/widgets.vapi
                              ${CMAKE_SOURCE_DIR}/vapi/config.vapi
                 OPTIONS ${COMMON_VFLAGS})
 add_executable(deja-dup ${VALA_C})
-target_link_libraries(deja-dup deja widgets ${GTK_LDFLAGS} ${NOTIFY_LDFLAGS} ${PEAS_LDFLAGS} ${SECRET_LDFLAGS})
+target_link_libraries(deja-dup deja widgets ${GTK_LDFLAGS} ${NOTIFY_LDFLAGS} ${PEAS_LDFLAGS} ${SECRET_LDFLAGS} ${UNITY_LDFLAGS})
 set_target_properties(deja-dup PROPERTIES
-                      COMPILE_FLAGS "${GTK_CFLAGS} ${NOTIFY_CFLAGS} ${PEAS_CFLAGS} ${SECRET_CFLAGS} ${COMMON_CFLAGS}"
+                      COMPILE_FLAGS "${GTK_CFLAGS} ${NOTIFY_CFLAGS} ${PEAS_CFLAGS} ${SECRET_CFLAGS} ${UNITY_CFLAGS} ${COMMON_CFLAGS}"
                       INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/libdeja;${CMAKE_CURRENT_BINARY_DIR}/widgets")
 install(TARGETS deja-dup DESTINATION bin)
 

@@ -54,8 +54,6 @@ if(ENABLE_NAUTILUS)
                   ERROR_QUIET)
 endif()
 
-deja_enable_option(UNITY unity>=3.4.2)
-
 deja_enable_option(UNITY_CCPANEL libunity-control-center)
 if(ENABLE_UNITY_CCPANEL)
   execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} --variable=extensiondir libunity-control-center
@@ -85,6 +83,12 @@ include(${VALA_USE_FILE})
 set(COMMON_VFLAGS --target-glib=2.34)
 if(GTK_VERSION VERSION_GREATER "3.10" OR GTK_VERSION VERSION_EQUAL "3.10")
   set(COMMON_VFLAGS ${COMMON_VFLAGS} -D HAVE_GTK_3_10)
+endif()
+
+deja_enable_option(UNITY unity>=3.4.2)
+if(ENABLE_UNITY)
+  set(COMMON_VFLAGS ${COMMON_VFLAGS} -D HAVE_UNITY)
+  set(UNITY_PACKAGE "unity")
 endif()
 
 include(CTest)
