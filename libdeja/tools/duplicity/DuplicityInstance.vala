@@ -176,6 +176,12 @@ internal class DuplicityInstance : Object
     foreach(string a in argv)
       real_argv[i++] = a;
     
+    // Kill any lockfile, since our cancel methods may leave them around.
+    // We already are pretty sure we don't have other duplicities in our
+    // archive directories, because we use our own and we ensure we only have
+    // one deja-dup running at a time via DBus.
+    Posix.system("rm " + Path.build_filename(cache_dir, "*", "lockfile.lock"));
+
     Process.spawn_async_with_pipes(null, real_argv, real_envp,
                         SpawnFlags.SEARCH_PATH |
                         SpawnFlags.DO_NOT_REAP_CHILD |

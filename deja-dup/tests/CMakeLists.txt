@@ -32,5 +32,5 @@ add_custom_target(autopilot-deja-dup
 add_dependencies(autopilot autopilot-deja-dup)
 
 add_custom_target(autopilot-system-deja-dup
-                  COMMAND env HAS_CCPANEL=${HAS_CCPANEL} HAS_UNITY_CCPANEL=${HAS_UNITY_CCPANEL} LANG=C DEJA_DUP_TESTING=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_SOURCE_DIR}/tests/shell-system" autopilot-py3 run deja_dup_autopilot.test_ccpanel)
+                  COMMAND env HAS_CCPANEL=${HAS_CCPANEL} HAS_UNITY_CCPANEL=${HAS_UNITY_CCPANEL} LANG=C DEJA_DUP_TESTING=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_SOURCE_DIR}/tests/shell-system" autopilot-py3 run deja_dup_autopilot)
 add_dependencies(autopilot-system autopilot-system-deja-dup)

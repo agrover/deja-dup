@@ -74,7 +74,7 @@ class DejaDupTestCase(AutopilotTestCase):
             shutil.rmtree(folder)
 
     def set_config(self, key, value, schema="org.gnome.DejaDup", path=None):
-        settings = Gio.Settings(schema, path=path)
+        settings = Gio.Settings(schema=schema, path=path)
         if type(value) is list:
             settings.set_strv(key, value)
         elif type(value) is bool:
