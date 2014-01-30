@@ -180,7 +180,7 @@ internal class DuplicityInstance : Object
     // We already are pretty sure we don't have other duplicities in our
     // archive directories, because we use our own and we ensure we only have
     // one deja-dup running at a time via DBus.
-    Posix.system("rm -f " + Path.build_filename(cache_dir, "*", "lockfile.lock"));
+    Posix.system("rm -f " + Shell.quote(cache_dir) + "/*/lockfile.lock");
 
     Process.spawn_async_with_pipes(null, real_argv, real_envp,
                         SpawnFlags.SEARCH_PATH |
