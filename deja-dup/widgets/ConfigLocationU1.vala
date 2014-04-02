@@ -28,9 +28,10 @@ public class ConfigLocationU1 : ConfigLocationTable
   }
 
   construct {
-    var entry = new ConfigFolder(DejaDup.U1_FOLDER_KEY, DejaDup.U1_ROOT);
-    entry.set_accessible_name("U1Folder");
-    add_widget(_("_Folder"), entry);
+    var label = new Gtk.Label("");
+    label.set_markup("<b><big>%s</big></b>".printf(_("Ubuntu One has shut down.  Please choose another storage location.")));
+    label.margin_top = 20;
+    add_wide_widget(label);
   }
 }
 

@@ -17,8 +17,8 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 project(deja-dup C)
-set(SERIES 30)
-set(VERSION 30.0)
+set(SERIES 32)
+set(VERSION 31.1)
 cmake_minimum_required(VERSION 2.8)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(DejaDupMacros)

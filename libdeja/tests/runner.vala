@@ -418,13 +418,6 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
   if (keyfile.has_key(group, "RestoreDate"))
     br.restore_date = keyfile.get_string(group, "RestoreDate");
 
-  var type = keyfile.get_string(group, "Type");
-  if (type == "backup")
-    br.op = new DejaDup.OperationBackup();
-  else if (type == "restore")
-    br.op = new DejaDup.OperationRestore(restoredir, br.restore_date, br.restore_files);
-  else
-    assert_not_reached();
   if (keyfile.has_key(group, "Success"))
     br.success = keyfile.get_boolean(group, "Success");
   if (keyfile.has_key(group, "Canceled"))
@@ -465,6 +458,13 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
       }
     }
   }
+  var type = keyfile.get_string(group, "Type");
+  if (type == "backup")
+    br.op = new DejaDup.OperationBackup();
+  else if (type == "restore")
+    br.op = new DejaDup.OperationRestore(restoredir, br.restore_date, br.restore_files);
+  else
+    assert_not_reached();
 }
 
 string get_string_field(KeyFile keyfile, string group, string key) throws Error

@@ -179,7 +179,9 @@ public class ConfigLocation : ConfigWidget
   }
 
   void insert_u1() {
-    insert_cloud_if_available("u1", BackendU1.get_checker(),
+    // No longer functional.
+    // Only shown if user already had it configured, for migration purposes.
+    insert_cloud_if_available("u1", null,
                               new ThemedIcon.from_names({"ubuntuone",
                                                          "ubuntuone-installer",
                                                          "deja-dup-cloud"}),
@@ -196,18 +198,18 @@ public class ConfigLocation : ConfigWidget
                               ref index_rackspace, insert_rackspace);
   }
 
-  void insert_cloud_if_available(string id, Checker checker,
+  void insert_cloud_if_available(string id, Checker? checker,
                                  Icon icon, string name,
-                                 Gtk.Widget w, ref int index,
+                                 Gtk.Widget? w, ref int index,
                                  CloudCallback cb)
   {
     var backend = Backend.get_default_type();
-    if (backend == id || (checker.complete && checker.available)) {
+    if (backend == id || (checker != null && checker.complete && checker.available)) {
       index = add_entry(icon, name, Group.CLOUD, w);
       if (index_cloud_sep == -2)
         index_cloud_sep = add_separator(Group.CLOUD_SEP);
     }
-    else if (!checker.complete) {
+    else if (checker != null && !checker.complete) {
       // Call ourselves when we've got enough information.  Also make sure to
       // set from config again, in case in a previous set_from_config, we
       // weren't available in the combo yet.

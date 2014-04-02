@@ -36,15 +36,14 @@ Recommends: deja-dup-backend-gvfs,
             policykit-1,
 Suggests: deja-dup-backend-cloudfiles,
           deja-dup-backend-s3,
-          deja-dup-backend-ubuntuone,
 Description: Back up your files
  Déjà Dup is a simple backup tool. It hides the complexity of backing up the
  Right Way (encrypted, off-site, and regular) and uses duplicity as the
  backend.
  .
  Features:
-  * Support for local, remote, or cloud backup locations, such as Amazon S3,
-    Rackspace Cloud Files, and Ubuntu One
+  * Support for local, remote, or cloud backup locations, such as Amazon S3 and
+    Rackspace Cloud Files
   * Securely encrypts and compresses your data
   * Incrementally backs up, letting you restore from any particular backup
   * Schedules regular backups
@@ -85,18 +84,3 @@ Description: Amazon S3 support for Déjà Dup
  backend.
  .
  This package adds Amazon S3 support to Déjà Dup.
-
-Package: deja-dup-backend-ubuntuone
-Architecture: all
-Depends: ${misc:Depends},
-         deja-dup,
-         python-httplib2,
-         python-oauthlib,
-         ubuntuone-client,
-         ubuntuone-control-panel,
-Description: Ubuntu One support for Déjà Dup
- Déjà Dup is a simple backup tool. It hides the complexity of backing up the
- Right Way (encrypted, off-site, and regular) and uses duplicity as the
- backend.
- .
- This package adds Ubuntu One support to Déjà Dup.

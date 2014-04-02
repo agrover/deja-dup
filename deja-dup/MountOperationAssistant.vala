@@ -26,7 +26,7 @@ using GLib;
  * 2) Or by driving the authentication themselves in some secret way.  If so,
  *    they will ask for a button to be shown to start the authentication.
  *    When they are done, they will set the 'go_forward' property to true.
- *    This is used by the U1 backend.
+ *    This was used by the U1 backend.
  */
 
 public class MountOperationAssistant : MountOperation
