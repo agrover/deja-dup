@@ -50,7 +50,6 @@ public class BackendAuto : Backend
 
   static bool started = false;
   static bool done = false;
-  Checker u1checker;
   Checker s3checker;
   construct {
     if (!started) {
@@ -59,10 +58,7 @@ public class BackendAuto : Backend
       started = true;
       ref(); // Give us time to finish
 
-      // List is (in order): u1, s3, file
-      u1checker = BackendU1.get_checker();
-      u1checker.notify["complete"].connect(examine_checkers);
-
+      // List is (in order): s3, file
       s3checker = BackendS3.get_checker();
       s3checker.notify["complete"].connect(examine_checkers);
 
@@ -75,17 +71,12 @@ public class BackendAuto : Backend
     if (done)
       return;
 
-    if (u1checker.complete) {
-      if (u1checker.available) {
-        finish("u1");
-      }
-      else if (s3checker.complete) {
+    if (s3checker.complete) {
         if (s3checker.available)
           finish("s3");
         else
           finish("file");
       }
-    }
   }
 
   void finish(string mode)
