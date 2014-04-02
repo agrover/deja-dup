@@ -22,6 +22,7 @@ vala_precompile(VALA_C AsyncCommand.vala
                        BackendFile.vala
                        BackendRackspace.vala
                        BackendS3.vala
+                       BackendU1.vala
                        Checker.vala
                        CommonUtils.vala
                        DirHandling.vala

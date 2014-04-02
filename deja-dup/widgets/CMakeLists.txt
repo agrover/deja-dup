@@ -36,6 +36,7 @@ vala_precompile(VALA_C ConfigBool.vala
                        ConfigLocationSSH.vala
                        ConfigLocationSMB.vala
                        ConfigLocationTable.vala
+                       ConfigLocationU1.vala
                        ConfigLocationVolume.vala
                        ConfigPeriod.vala
                        ConfigRelPath.vala

@@ -62,6 +62,7 @@ public class ConfigLocation : ConfigWidget
   int index_dav;
   int index_s3 = -2;
   int index_rackspace = -2;
+  int index_u1 = -2;
   int index_cloud_sep = -2;
   int index_ssh;
   int index_smb;
@@ -108,6 +109,7 @@ public class ConfigLocation : ConfigWidget
     extras.show();
 
     // Insert cloud providers
+    insert_u1();
     insert_s3();
     insert_rackspace();
 
@@ -176,6 +178,18 @@ public class ConfigLocation : ConfigWidget
                               ref index_s3, insert_s3);
   }
 
+  void insert_u1() {
+    // No longer functional.
+    // Only shown if user already had it configured, for migration purposes.
+    insert_cloud_if_available("u1", null,
+                              new ThemedIcon.from_names({"ubuntuone",
+                                                         "ubuntuone-installer",
+                                                         "deja-dup-cloud"}),
+                              _("Ubuntu One"),
+                              new ConfigLocationU1(label_sizes),
+                              ref index_u1, insert_u1);
+  }
+
   void insert_rackspace() {
     insert_cloud_if_available("rackspace", BackendRackspace.get_checker(),
                               new ThemedIcon("deja-dup-cloud"),
@@ -184,18 +198,18 @@ public class ConfigLocation : ConfigWidget
                               ref index_rackspace, insert_rackspace);
   }
 
-  void insert_cloud_if_available(string id, Checker checker,
+  void insert_cloud_if_available(string id, Checker? checker,
                                  Icon icon, string name,
-                                 Gtk.Widget w, ref int index,
+                                 Gtk.Widget? w, ref int index,
                                  CloudCallback cb)
   {
     var backend = Backend.get_default_type();
-    if (backend == id || (checker.complete && checker.available)) {
+    if (backend == id || (checker != null && checker.complete && checker.available)) {
       index = add_entry(icon, name, Group.CLOUD, w);
       if (index_cloud_sep == -2)
         index_cloud_sep = add_separator(Group.CLOUD_SEP);
     }
-    else if (!checker.complete) {
+    else if (checker != null && !checker.complete) {
       // Call ourselves when we've got enough information.  Also make sure to
       // set from config again, in case in a previous set_from_config, we
       // weren't available in the combo yet.
@@ -402,6 +416,8 @@ public class ConfigLocation : ConfigWidget
       index = index_s3;
     else if (backend == "rackspace")
       index = index_rackspace;
+    else if (backend == "u1")
+      index = index_u1;
     else if (backend == "file") {
       var fsettings = DejaDup.get_settings(FILE_ROOT);
 
@@ -490,6 +506,8 @@ public class ConfigLocation : ConfigWidget
       settings.set_string(BACKEND_KEY, "s3");
     else if (index == index_rackspace)
       settings.set_string(BACKEND_KEY, "rackspace");
+    else if (index == index_u1)
+      settings.set_string(BACKEND_KEY, "u1");
     else if (index == index_ssh)
       yield set_remote_info("sftp");
     else if (index == index_ftp)

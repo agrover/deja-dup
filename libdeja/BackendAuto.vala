@@ -72,11 +72,11 @@ public class BackendAuto : Backend
       return;
 
     if (s3checker.complete) {
-        if (s3checker.available)
-          finish("s3");
-        else
-          finish("file");
-      }
+      if (s3checker.available)
+        finish("s3");
+      else
+        finish("file");
+    }
   }
 
   void finish(string mode)
