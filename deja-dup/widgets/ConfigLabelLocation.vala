@@ -25,6 +25,7 @@ public class ConfigLabelLocation : ConfigLabel
 {
   Gtk.Image img;
   FilteredSettings file_root;
+  FilteredSettings gdrive_root;
   FilteredSettings s3_root;
   FilteredSettings rackspace_root;
 
@@ -38,6 +39,7 @@ public class ConfigLabelLocation : ConfigLabel
     fill_box();
     watch_key(BACKEND_KEY);
     watch_key(null, (file_root = DejaDup.get_settings(FILE_ROOT)));
+    watch_key(null, (gdrive_root = DejaDup.get_settings(GDRIVE_ROOT)));
     watch_key(null, (s3_root = DejaDup.get_settings(S3_ROOT)));
     watch_key(null, (rackspace_root = DejaDup.get_settings(RACKSPACE_ROOT)));
     set_from_config.begin();

@@ -65,6 +65,7 @@
       <choices>
         <choice value='auto'/>
         <choice value='file'/>
+        <choice value='gdrive'/>
         <choice value='rackspace'/>
         <choice value='s3'/>
         <choice value='u1'/>
@@ -75,6 +76,7 @@
     </key>
     <child name="rackspace" schema="org.gnome.DejaDup.Rackspace"/>
     <child name="s3" schema="org.gnome.DejaDup.S3"/>
+    <child name="gdrive" schema="org.gnome.DejaDup.GDrive"/>
     <child name="file" schema="org.gnome.DejaDup.File"/>
   </schema>
   <schema id="org.gnome.DejaDup.S3" path="/org/gnome/deja-dup/s3/">
@@ -92,6 +94,18 @@
       <default>'$HOSTNAME'</default>
       <_summary>The Amazon S3 folder</_summary>
       <_description>An optional folder name to store files in.  This folder will be created in the chosen bucket.</_description>
+    </key>
+  </schema>
+  <schema id="org.gnome.DejaDup.GDrive" path="/org/gnome/deja-dup/gdrive/">
+    <key name="email" type="s">
+      <default>''</default>
+      <_summary>The email-address of your Google account</_summary>
+      <_description>The email-address of your Google account.</_description>
+    </key>
+    <key name="folder" type="s">
+      <default>'/deja-dup/$HOSTNAME'</default>
+      <_summary>The folder where backups are stored</_summary>
+      <_description>The folder hierarchy where backups are stored.</_description>
     </key>
   </schema>
   <schema id="org.gnome.DejaDup.Rackspace" path="/org/gnome/deja-dup/rackspace/">

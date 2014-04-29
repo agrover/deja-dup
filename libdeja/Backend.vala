@@ -57,6 +57,7 @@ public abstract class Backend : Object
 
     if (backend != "auto" &&
         backend != "s3" &&
+        backend != "gdrive" &&
         backend != "rackspace" &&
         backend != "u1" &&
         backend != "file")
@@ -70,6 +71,8 @@ public abstract class Backend : Object
     var backend_name = get_default_type();
     if (backend_name == "s3")
       return new BackendS3();
+    else if (backend_name == "gdrive")
+      return new BackendGDrive();
     else if (backend_name == "u1")
       return new BackendU1();
     else if (backend_name == "rackspace")
