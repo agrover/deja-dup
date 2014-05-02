@@ -476,7 +476,7 @@ public class BackendFile : Backend
           var free_list = free_str.split(";");
           space = uint64.parse(free_list[0]);
           if (free_list[1] != null)
-            Environment.set_variable("DEJA_DUP_TEST_SPACE_FREE", string.joinv(";", free_list[1:-1]), true);
+            Environment.set_variable("DEJA_DUP_TEST_SPACE_FREE", string.joinv(";", free_list[1:free_list.length]), true);
       }
       if (space == INFINITE_SPACE)
         return space - 1; // avoid accidentally reporting infinite
