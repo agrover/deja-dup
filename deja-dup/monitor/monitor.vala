@@ -235,8 +235,10 @@ static bool time_until_next_run(out TimeSpan time)
 static void prepare_run(TimeSpan wait_time)
 {
   // Stop previous run timeout
-  if (timeout_id != 0)
+  if (timeout_id != 0) {
     Source.remove(timeout_id);
+    timeout_id = 0;
+  }
 
   TimeSpan secs = wait_time / TimeSpan.SECOND + 1;
   if (wait_time > 0 && secs > 0) {
