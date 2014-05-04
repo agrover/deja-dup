@@ -143,7 +143,9 @@ static async void kickoff()
     return;
   }
 
-  if (!reactive_check) {
+  bool was_reactive = reactive_check;
+
+  if (!was_reactive) {
     // Now we secretly schedule another kickoff tomorrow, in case something
     // goes wrong with this run (or user chooses to ignore for now)
     // If this run is successful, it will change 'last-run' key and this will
@@ -155,7 +157,7 @@ static async void kickoff()
   bool ready = yield is_ready(out when);
   if (!ready) {
     debug("Postponing the backup.");
-    if (!reactive_check && when != null)
+    if (!was_reactive && when != null)
       notify_delay(_("Scheduled backup delayed"), when);
     return;
   }
