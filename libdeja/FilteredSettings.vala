@@ -37,7 +37,7 @@ public class FilteredSettings : Settings
 
   public FilteredSettings(string schema, bool ro)
   {
-    Object(schema: schema, read_only: ro);
+    Object(schema_id: schema, read_only: ro);
   }
 
   public new void apply() {if (!read_only) base.apply();}
