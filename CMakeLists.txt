@@ -18,7 +18,7 @@
 
 project(deja-dup C)
 set(SERIES 32)
-set(VERSION 31.1)
+set(VERSION 32.0)
 cmake_minimum_required(VERSION 2.8)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(DejaDupMacros)
