@@ -29,6 +29,16 @@ public class Checker : Object
   // Guaranteed to only switch from false to true, never back again
   public bool available {get; protected set; default = false;}
   public bool complete {get; protected set; default = false;}
+
+  public Checker()
+  {
+    Object();
+  }
+
+  public Checker.with_available(bool available)
+  {
+    Object(available: available, complete: true);
+  }
 }
 
 } // end namespace

@@ -31,7 +31,8 @@ public class BackendGDrive : Backend
 
 {
   public static Checker get_checker() {
-    return PythonChecker.get_checker("gdata");
+    //return PythonChecker.get_checker("gdata");
+    return new Checker.with_available(false); // disable until duplicity's gdrive backend improves
   }
 
   public override Backend clone() {
