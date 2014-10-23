@@ -35,13 +35,17 @@ public class DuplicityPlugin : DejaDup.ToolPlugin
   {
     string output;
     Process.spawn_command_line_sync("duplicity --version", out output, null, null);
+    var tokens = output.split(" ");
 
-    var tokens = output.split(" ", 2);
-    if (tokens == null || tokens[0] == null || tokens[1] == null)
+    if (tokens == null || tokens.length < 2 )
       throw new SpawnError.FAILED(_("Could not understand duplicity version."));
 
-    // First token is 'duplicity' and is ignorable.  Second looks like '0.5.03'
-    var version_string = tokens[1].strip();
+    // in version 0.6.25, the output fro duplicity --version changed and the string
+    // "duplicity major.minor.micro" is not preceded by a deprecation warning
+    // as a consequence, the substring "major.minor.micro" is now
+    // always the penultimate token (the last one always being null)
+
+    var version_string = tokens[tokens.length - 1].strip();
     int major, minor, micro;
     if (!DejaDup.parse_version(version_string, out major, out minor, out micro))
       throw new SpawnError.FAILED(_("Could not understand duplicity version ‘%s’.").printf(version_string));
