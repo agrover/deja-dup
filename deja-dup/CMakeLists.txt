@@ -42,7 +42,7 @@ deja_merge_po(desktop deja-dup.desktop "${CMAKE_INSTALL_FULL_DATADIR}/applicatio
 deja_merge_po(xml deja-dup.appdata.xml "${CMAKE_INSTALL_FULL_DATADIR}/appdata")
 find_program(APPSTREAM_UTIL appstream-util)
 if(APPSTREAM_UTIL)
-  add_test(validate-deja-dup.appdata.xml appstream-util validate-relax "${CMAKE_CURRENT_BINARY_DIR}/deja-dup.appdata.xml")
+  add_test(validate-deja-dup.appdata.xml appstream-util --nonet validate-relax "${CMAKE_CURRENT_BINARY_DIR}/deja-dup.appdata.xml")
 endif()
 
 install(DIRECTORY ui DESTINATION "${PKG_DATADIR}")
