@@ -127,7 +127,8 @@ public abstract class StatusIcon : Object
       string more = null;
       if (detail != null) {
         msg = _("Backup finished");
-        more = _("Not all files were successfully backed up.  See dialog for more details.");
+        more = _("Not all files were successfully backed up.  See dialog for more details."); 
+        show_window();
       }
 
       Notify.init(_("Backups"));
