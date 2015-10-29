@@ -50,6 +50,7 @@ public class BackendAuto : Backend
 
   static bool started = false;
   static bool done = false;
+  Checker gcs_checker;
   Checker gdrive_checker;
   Checker s3checker;
   construct {
@@ -59,9 +60,12 @@ public class BackendAuto : Backend
       started = true;
       ref(); // Give us time to finish
 
-      // List is (in order): gdrive, s3, file
+      // List is (in order): gdrive, gcs, s3, file
       gdrive_checker = BackendGDrive.get_checker();
       gdrive_checker.notify["complete"].connect(examine_checkers);
+
+      gcs_checker = BackendGCS.get_checker();
+      gcs_checker.notify["complete"].connect(examine_checkers);
 
       s3checker = BackendS3.get_checker();
       s3checker.notify["complete"].connect(examine_checkers);
@@ -78,11 +82,15 @@ public class BackendAuto : Backend
     if (gdrive_checker.complete) {
       if (gdrive_checker.available)
         finish("gdrive");
-      else if (s3checker.complete) {
-        if (s3checker.available)
-          finish("s3");
-        else
-          finish("file");
+      else if (gcs_checker.complete) {
+        if (gcs_checker.available)
+          finish("gcs");
+        else if (s3checker.complete) {
+          if (s3checker.available)
+            finish("s3");
+          else
+            finish("file");
+        }
       }
     }
   }

@@ -36,6 +36,7 @@ Recommends: deja-dup-backend-gvfs,
             policykit-1,
 Suggests: deja-dup-backend-cloudfiles,
           deja-dup-backend-s3,
+          deja-dup-backend-gcs,
 Description: Back up your files
  Déjà Dup is a simple backup tool. It hides the complexity of backing up the
  Right Way (encrypted, off-site, and regular) and uses duplicity as the
@@ -72,6 +73,18 @@ Description: Rackspace Cloudfiles support for Déjà Dup
  backend.
  .
  This package adds Rackspace Cloudfiles support to Déjà Dup.
+
+Package: deja-dup-backend-gcs
+Architecture: all
+Depends: ${misc:Depends},
+         deja-dup,
+         python-boto (>= 2.20),
+Description: Google Cloud Storage support for Déjà Dup
+ Déjà Dup is a simple backup tool. It hides the complexity of backing up the
+ Right Way (encrypted, off-site, and regular) and uses duplicity as the
+ backend.
+ .
+ This package adds Google Cloud Storage support to Déjà Dup.
 
 #Package: deja-dup-backend-gdrive
 #Architecture: all
