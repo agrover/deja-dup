@@ -73,7 +73,7 @@ public abstract class StatusIcon : Object
     MINIMIZE,
   }
 
-  public signal void show_window();
+  public signal void show_window(bool user_click);
   public signal void hide_all();
   public Gtk.Window? window {get; construct;}
   public DejaDup.Operation op {get; construct;}
@@ -128,6 +128,7 @@ public abstract class StatusIcon : Object
       if (detail != null) {
         msg = _("Backup finished");
         more = _("Not all files were successfully backed up.  See dialog for more details.");
+        show_window(false);
       }
 
       Notify.init(_("Backups"));
@@ -233,7 +234,7 @@ class ShellStatusIcon : StatusIcon
       note = new Notify.Notification(_("Starting scheduled backup"), null,
                                      "deja-dup");
       note.set_hint_string("desktop-entry", "deja-dup");
-      note.add_action("show-details", _("Show Progress"), () => {show_window();});
+      note.add_action("show-details", _("Show Progress"), () => {show_window(true);});
       note.add_action("later", later_label.replace("_", ""), () => {later();});
       note.add_action("skip", skip_label.replace("_", ""), () => {skip();});
       try {
@@ -285,7 +286,7 @@ class LegacyStatusIcon : StatusIcon
     menu = new Gtk.Menu();
 
     var progressitem = new Gtk.MenuItem.with_mnemonic(_("Show _Progress"));
-    progressitem.activate.connect((i) => {show_window();});
+    progressitem.activate.connect((i) => {show_window(true);});
     menu.append(progressitem);
 
     if (op.mode == DejaDup.ToolJob.Mode.BACKUP) {
