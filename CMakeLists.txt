@@ -35,7 +35,11 @@ deja_check_modules(GLIB REQUIRED glib-2.0>=2.34 gio-2.0 gio-unix-2.0 gmodule-2.0
 deja_check_modules(GTK REQUIRED gtk+-3.0>=3.6)
 deja_check_modules(NOTIFY REQUIRED libnotify>=0.7)
 deja_check_modules(PEAS REQUIRED libpeas-1.0)
+deja_check_modules(PK REQUIRED packagekit-glib2)
 deja_check_modules(SECRET REQUIRED libsecret-1)
+
+# This is obnoxious.
+set(PK_CFLAGS "${PK_CFLAGS} -DI_KNOW_THE_PACKAGEKIT_GLIB2_API_IS_SUBJECT_TO_CHANGE")
 
 deja_enable_option(NAUTILUS libnautilus-extension)
 if(ENABLE_NAUTILUS)

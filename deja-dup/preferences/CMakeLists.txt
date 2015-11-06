@@ -27,24 +27,25 @@ vala_precompile(VALA_C preferences-main.vala
                 CUSTOM_VAPIS ${CMAKE_BINARY_DIR}/libdeja/deja.vapi
                              ${CMAKE_BINARY_DIR}/deja-dup/widgets/widgets.vapi
                              ${CMAKE_SOURCE_DIR}/vapi/config.vapi
+                             ${CMAKE_SOURCE_DIR}/vapi/packagekit-glib2.vapi
                 OPTIONS ${COMMON_VFLAGS})
 add_executable(deja-dup-preferences ${VALA_C})
-target_link_libraries(deja-dup-preferences deja widgets ${GTK_LDFLAGS} ${NOTIFY_LDFLAGS} ${PEAS_LDFLAGS} ${SECRET_LDFLAGS})
+target_link_libraries(deja-dup-preferences deja widgets ${GTK_LDFLAGS} ${NOTIFY_LDFLAGS} ${PEAS_LDFLAGS} ${PK_LDFLAGS} ${SECRET_LDFLAGS})
 set_target_properties(deja-dup-preferences PROPERTIES
                       INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/libdeja;${CMAKE_BINARY_DIR}/deja-dup/widgets"
-                      COMPILE_FLAGS "${GTK_CFLAGS} ${PEAS_CFLAGS} ${SECRET_CFLAGS} ${COMMON_CFLAGS}")
+                      COMPILE_FLAGS "${GTK_CFLAGS} ${PEAS_CFLAGS} ${PK_CFLAGS} ${SECRET_CFLAGS} ${COMMON_CFLAGS}")
 install(TARGETS deja-dup-preferences DESTINATION bin)
 
 deja_merge_po(desktop deja-dup-preferences.desktop "${CMAKE_INSTALL_FULL_DATADIR}/applications")
 
 if(ENABLE_UNITY_CCPANEL)
 add_library(deja-dup-unity-ccpanel MODULE Preferences.c PreferencesPanel.c)
-target_link_libraries(deja-dup-unity-ccpanel deja widgets ${UNITY_CCPANEL_LDFLAGS} ${GTK_LDFLAGS} ${PEAS_LDFLAGS} ${SECRET_LDFLAGS})
+target_link_libraries(deja-dup-unity-ccpanel deja widgets ${UNITY_CCPANEL_LDFLAGS} ${GTK_LDFLAGS} ${PEAS_LDFLAGS} ${PK_LDFLAGS} ${SECRET_LDFLAGS})
 set_target_properties(deja-dup-unity-ccpanel PROPERTIES
                       OUTPUT_NAME deja-dup
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/unity-ccpanel"
                       INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/libdeja;${CMAKE_BINARY_DIR}/deja-dup/widgets"
-                      COMPILE_FLAGS "-DUSE_UNITY ${UNITY_CCPANEL_CFLAGS} ${GTK_CFLAGS} ${PEAS_CFLAGS} ${SECRET_CFLAGS} ${COMMON_CFLAGS}")
+                      COMPILE_FLAGS "-DUSE_UNITY ${UNITY_CCPANEL_CFLAGS} ${GTK_CFLAGS} ${PEAS_CFLAGS} ${PK_CFLAGS} ${SECRET_CFLAGS} ${COMMON_CFLAGS}")
 install(TARGETS deja-dup-unity-ccpanel DESTINATION "${UNITY_CCPANEL_EXTENSIONDIR}")
 
 deja_merge_po(desktop unity-deja-dup-panel.desktop "${CMAKE_INSTALL_FULL_DATADIR}/applications")
