@@ -101,11 +101,9 @@ public bool meets_version(int major, int minor, int micro,
          (major == req_major && minor == req_minor && micro >= req_micro);
 }
 
-public void run_deja_dup(string args, AppLaunchContext? ctx = null,
-                         List<File>? files = null)
+public string nice_prefix(string command)
 {
-  var cmd = "deja-dup %s".printf(args);
-
+  var cmd = command;
   int major, minor, micro;
   var utsname = Posix.utsname();
   parse_version(utsname.release, out major, out minor, out micro);
@@ -127,6 +125,13 @@ public void run_deja_dup(string args, AppLaunchContext? ctx = null,
   else if (Environment.find_program_in_path("nice") != null)
     cmd = "nice -n19 " + cmd;
 
+  return cmd;
+}
+
+public void run_deja_dup(string args, AppLaunchContext? ctx = null,
+                         List<File>? files = null)
+{
+  var cmd = nice_prefix("deja-dup %s".printf(args));
   var flags = AppInfoCreateFlags.SUPPORTS_STARTUP_NOTIFICATION |
               AppInfoCreateFlags.SUPPORTS_URIS;
   try {
