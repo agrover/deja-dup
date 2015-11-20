@@ -45,6 +45,7 @@ struct _DejaDupPreferencesPanelClass
 G_DEFINE_DYNAMIC_TYPE (DejaDupPreferencesPanel, deja_dup_preferences_panel, CC_TYPE_PANEL)
 
 extern void* deja_dup_preferences_new (DejaDupPreferencesPeriodicSwitch *auto_switch);
+extern DejaDupPreferencesPeriodicSwitch* deja_dup_preferences_periodic_switch_new (void);
 
 static void
 deja_dup_preferences_panel_class_finalize (DejaDupPreferencesPanelClass *klass)
