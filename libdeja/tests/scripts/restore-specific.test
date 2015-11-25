@@ -1,12 +1,12 @@
 [Operation]
 Type=restore
-RestoreFiles=@HOME@/one;@HOME@/two;
+RestoreFiles=@TEST_HOME@/one;@TEST_HOME@/two;
 
 [Duplicity]
 Runs=status-restore;list;restore 1;restore 2;
 
 [Duplicity restore 1]
-FileToRestore=@HOME@/one
+FileToRestore=@TEST_HOME@/one
 
 [Duplicity restore 2]
-FileToRestore=@HOME@/two
+FileToRestore=@TEST_HOME@/two
