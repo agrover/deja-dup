@@ -53,12 +53,15 @@ class AsyncCommand : Object
                               SpawnFlags.STDERR_TO_DEV_NULL |
                               SpawnFlags.DO_NOT_REAP_CHILD |
                               SpawnFlags.SEARCH_PATH,
-                              null, out pid))
+                              null, out pid)) {
         done(false);
+        return;
+      }
     }
     catch (Error e) {
       warning("%s\n", e.message);
       done(false);
+      return;
     }
 
     watch = ChildWatch.add(pid, handle_done);

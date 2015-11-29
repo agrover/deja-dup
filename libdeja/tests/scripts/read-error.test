@@ -2,15 +2,24 @@
 
 [Operation]
 Type=backup
-Detail=Could not back up the following files.  Please make sure you are able to open them.\n\n@HOME@/1\n@HOME@/2
+Detail=Could not back up the following files.  Please make sure you are able to open them.\n\n@TEST_HOME@/1\n@TEST_HOME@/2
+Settings=include-list=['@TEST_HOME@/2', '@TEST_HOME@/1', '$HOME'];
+Script=mkdir -p @TEST_HOME@/1 @TEST_HOME@/2
 
 [Duplicity]
 Runs=status;dry;backup;status-restore;list;verify;
 
+[Duplicity status]
+IncludeArgs='--include=@TEST_HOME@/1' '--include=@TEST_HOME@/2'
+
+[Duplicity dry]
+IncludeArgs='--include=@TEST_HOME@/1' '--include=@TEST_HOME@/2'
+
 [Duplicity backup]
 #WARNING 10 '/blarg'
 #
-#WARNING 10 '@HOME@/1'
+#WARNING 10 '@TEST_HOME@/1'
 #
-#WARNING 10 '@HOME@/2'
+#WARNING 10 '@TEST_HOME@/2'
 Output=true
+IncludeArgs='--include=@TEST_HOME@/1' '--include=@TEST_HOME@/2'

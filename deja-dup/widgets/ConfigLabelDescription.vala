@@ -25,10 +25,11 @@ public class ConfigLabelDescription : ConfigLabel
 {
   public enum Kind {BACKUP, RESTORE}
   public Kind kind {get; construct;}
+  public bool everything_installed {get; set;}
 
-  public ConfigLabelDescription(Kind kind)
+  public ConfigLabelDescription(Kind kind, bool everything_installed)
   {
-    Object(kind: kind);
+    Object(kind: kind, everything_installed: everything_installed);
   }
 
   construct {
@@ -37,6 +38,9 @@ public class ConfigLabelDescription : ConfigLabel
       watch_key(DejaDup.PERIODIC_KEY);
       watch_key(DejaDup.PERIODIC_PERIOD_KEY);
     }
+    notify["everything-installed"].connect((s, p) => {
+      set_from_config.begin();
+    });
   }
 
   protected override void fill_box()
@@ -51,6 +55,12 @@ public class ConfigLabelDescription : ConfigLabel
 
   void set_from_config_restore()
   {
+    if (!everything_installed) {
+      var button_name = "<b>%s</b>".printf(_("Install…"));
+      label.label = _("You can restore existing backups after you first install some necessary software by clicking the %s button.").printf(button_name);
+      return;
+    }
+
     var val = DejaDup.last_run_date(DejaDup.TimestampType.BACKUP);
 
     // This here encodes a lot of outside GUI information in this widget,
@@ -67,6 +77,12 @@ public class ConfigLabelDescription : ConfigLabel
 
   void set_from_config_backup()
   {
+    if (!everything_installed) {
+      var button_name = "<b>%s</b>".printf(_("Install…"));
+      label.label = _("You can create a backup after you first install some necessary software by clicking the %s button.").printf(button_name);
+      return;
+    }
+
     var next = DejaDup.next_run_date();
     if (next == null) {
       var button_name = "<b>%s</b>".printf(_("Back Up Now…"));

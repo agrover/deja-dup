@@ -9,8 +9,7 @@ override_dh_auto_clean:
 	rm -rf builddir
 
 override_dh_auto_configure:
-	dh_auto_configure -- -DENABLE_CCPANEL=ON \
-	                     -DENABLE_NAUTILUS=ON \
+	dh_auto_configure -- -DENABLE_NAUTILUS=ON \
 	                     -DENABLE_UNITY=ON \
 	                     -DENABLE_UNITY_CCPANEL=ON \
 	                     -DCMAKE_INSTALL_LIBEXECDIR="/usr/lib/${DEB_HOST_MULTIARCH}" \

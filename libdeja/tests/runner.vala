@@ -211,7 +211,9 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
       }
     }
 
-    args += "'--include=%s' ".printf(Environment.get_home_dir());
+    if (FileUtils.test (Environment.get_home_dir(), FileTest.EXISTS)) {
+      args += "'--include=%s' ".printf(Environment.get_home_dir());
+    }
     args += include_args;
 
     string[] excludes2 = {"/sys", "/run", "/proc", tempdir};
@@ -677,6 +679,7 @@ int main(string[] args)
   }
 
   Environment.set_variable("DEJA_DUP_TESTING", "1", true);
+  Environment.set_variable("DEJA_DUP_DEBUG", "1", true);
   Environment.set_variable("DEJA_DUP_LANGUAGE", "en", true);
   Test.bug_base("https://launchpad.net/bugs/%s");
 

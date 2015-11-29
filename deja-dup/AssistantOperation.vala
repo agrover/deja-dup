@@ -575,7 +575,7 @@ public abstract class AssistantOperation : Assistant
   {
     if (status_icon == null) {
       status_icon = StatusIcon.create(this, o, automatic);
-      status_icon.show_window.connect((s) => {force_visible(true);});
+      status_icon.show_window.connect((s, user_click) => {force_visible(user_click);});
       status_icon.hide_all.connect((s) => {hide_everything();});
     }
   }

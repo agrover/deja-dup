@@ -22,23 +22,19 @@
 */
 
 #include <gtk/gtk.h>
-#ifdef USE_UNITY
 #include <libunity-control-center/cc-panel.h>
-#else
-#include <libgnome-control-center/cc-panel.h>
-#endif
 #include "widgets.h"
-
-extern void* deja_dup_preferences_new (gboolean show_auto_switch);
 
 #define DEJA_DUP_TYPE_PREFERENCES_PANEL deja_dup_preferences_panel_get_type()
 
 typedef struct _DejaDupPreferencesPanel DejaDupPreferencesPanel;
 typedef struct _DejaDupPreferencesPanelClass DejaDupPreferencesPanelClass;
+typedef struct _DejaDupPreferencesPeriodicSwitch DejaDupPreferencesPeriodicSwitch;
 
 struct _DejaDupPreferencesPanel
 {
   CcPanel parent;
+  DejaDupPreferencesPeriodicSwitch *auto_switch;
 };
 
 struct _DejaDupPreferencesPanelClass
@@ -47,6 +43,9 @@ struct _DejaDupPreferencesPanelClass
 };
 
 G_DEFINE_DYNAMIC_TYPE (DejaDupPreferencesPanel, deja_dup_preferences_panel, CC_TYPE_PANEL)
+
+extern void* deja_dup_preferences_new (DejaDupPreferencesPeriodicSwitch *auto_switch);
+extern DejaDupPreferencesPeriodicSwitch* deja_dup_preferences_periodic_switch_new (void);
 
 static void
 deja_dup_preferences_panel_class_finalize (DejaDupPreferencesPanelClass *klass)
@@ -57,13 +56,11 @@ static void
 deja_dup_preferences_panel_constructed (GObject *object)
 {
   CcPanel *panel = CC_PANEL (object);
+  DejaDupPreferencesPanel *self = (DejaDupPreferencesPanel*)object;
 
   G_OBJECT_CLASS (deja_dup_preferences_panel_parent_class)->constructed (object);
 
-  GtkWidget *switcher = GTK_WIDGET (deja_dup_preferences_periodic_switch_new ());
-  gtk_widget_set_valign (switcher, GTK_ALIGN_CENTER);
-  gtk_widget_show_all (switcher);
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (panel), switcher);
+  cc_shell_embed_widget_in_header (cc_panel_get_shell (panel), GTK_WIDGET (self->auto_switch));
 }
 
 static const char *
@@ -85,7 +82,11 @@ deja_dup_preferences_panel_class_init (DejaDupPreferencesPanelClass *klass)
 static void
 deja_dup_preferences_panel_init (DejaDupPreferencesPanel *self)
 {
-  GtkWidget *widget = GTK_WIDGET (deja_dup_preferences_new (FALSE));
+  self->auto_switch = deja_dup_preferences_periodic_switch_new ();
+  gtk_widget_set_valign (GTK_WIDGET (self->auto_switch), GTK_ALIGN_CENTER);
+  gtk_widget_show_all (GTK_WIDGET (self->auto_switch));
+
+  GtkWidget *widget = GTK_WIDGET (deja_dup_preferences_new (self->auto_switch));
   gtk_container_set_border_width (GTK_CONTAINER (widget), 6); // g-c-c adds 6
   gtk_widget_show_all (widget);
   gtk_container_add (GTK_CONTAINER (self), widget);

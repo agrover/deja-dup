@@ -33,17 +33,26 @@ public class PreferencesPeriodicSwitch : Gtk.Switch
 
 public class Preferences : Gtk.Grid
 {
-  public bool show_auto_switch {get; construct;}
+  public DejaDup.PreferencesPeriodicSwitch auto_switch {get; set; default = null;}
+  public bool duplicity_installed {get; private set; default = false;}
 
-  Gtk.Widget backup_button;
-  Gtk.Widget restore_button;
+  DejaDup.ConfigLabelDescription backup_desc;
+  Gtk.Button backup_button;
+  Gtk.ProgressBar backup_progress;
+  DejaDup.ConfigLabelDescription restore_desc;
+  Gtk.Button restore_button;
+  Gtk.ProgressBar restore_progress;
   uint bus_watch_id = 0;
   static const int PAGE_HMARGIN = 24;
   static const int PAGE_VMARGIN = 12;
 
-  public Preferences(bool show_auto_switch)
+  public Preferences(DejaDup.PreferencesPeriodicSwitch? auto_switch)
   {
-    Object(show_auto_switch: show_auto_switch);
+    Object(auto_switch: auto_switch);
+
+    // Set initial switch sensitivity, but for some odd reason we can't set
+    // this earlier.  Even if at the end of the constructor, it gets reset...
+    auto_switch.sensitive = duplicity_installed;
   }
 
   ~Preferences() {
@@ -51,6 +60,64 @@ public class Preferences : Gtk.Grid
       Bus.unwatch_name(bus_watch_id);
       bus_watch_id = 0;
     }
+  }
+
+  async void install_duplicity()
+  {
+    backup_button.sensitive = false;
+    restore_button.sensitive = false;
+
+    try {
+      var task = new Pk.Task();
+      var results = yield task.resolve_async(Pk.Filter.NOT_INSTALLED, {"duplicity"}, null, () => {});
+      if (results != null && results.get_error_code () == null) {
+
+        // Convert from List to array (I don't know why the API couldn't be friendlier...)
+        var package_array = results.get_package_array();
+        var package_ids = new string[package_array.length + 1];
+        package_ids[package_array.length] = null;
+        for (var i = 0; i < package_array.length; i++) {
+            package_ids[i] = package_array.data[i].get_id();
+        }
+
+        yield task.install_packages_async(package_ids, null, (p, t) => {
+          backup_progress.fraction = p.percentage / 100.0;
+          restore_progress.fraction = p.percentage / 100.0;
+        });
+
+        duplicity_installed = Environment.find_program_in_path("duplicity") != null;
+        if (duplicity_installed) {
+          backup_desc.everything_installed = true;
+          backup_button.label = _("_Back Up Now…");
+          restore_desc.everything_installed = true;
+          restore_button.label = _("_Restore…");
+          auto_switch.sensitive = true;
+        }
+      }
+    }
+    catch (Error e) {
+      // We don't want to show authorization errors -- either the user clicked
+      // cancel or already entered password several times.  Don't need to warn them.
+      // Oddly enough, I couldn't get error matching to work for this.  Maybe the
+      // policykit bindings I copied are incomplete.
+      if (e.message.contains("org.freedesktop.PolicyKit.Error.NotAuthorized")) {
+        warning("%s\n", e.message);
+      } else {
+        Gtk.MessageDialog dlg = new Gtk.MessageDialog (get_toplevel() as Gtk.Window,
+            Gtk.DialogFlags.DESTROY_WITH_PARENT | Gtk.DialogFlags.MODAL,
+            Gtk.MessageType.ERROR,
+            Gtk.ButtonsType.OK,
+            "%s", _("Could not install"));
+        dlg.format_secondary_text("%s", e.message);
+        dlg.run();
+        destroy_widget(dlg);
+      }
+    }
+
+    backup_progress.visible = false;
+    restore_progress.visible = false;
+    backup_button.sensitive = true;
+    restore_button.sensitive = true;
   }
 
   Gtk.Widget make_settings_page()
@@ -117,24 +184,38 @@ public class Preferences : Gtk.Grid
     w = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.LAST);
     w.halign = Gtk.Align.START;
     w.valign = Gtk.Align.START;
-    table.attach(w, 1, row, 1, 1);
+    table.attach(w, 1, row, 2, 1);
     ++row;
 
-    w = new DejaDup.ConfigLabelDescription(DejaDup.ConfigLabelDescription.Kind.RESTORE);
+    w = new DejaDup.ConfigLabelDescription(DejaDup.ConfigLabelDescription.Kind.RESTORE, duplicity_installed);
     w.halign = Gtk.Align.START;
     w.valign = Gtk.Align.START;
-    table.attach(w, 1, row, 1, 1);
+    restore_desc = w as DejaDup.ConfigLabelDescription;
+    table.attach(w, 1, row, 2, 1);
     ++row;
 
-    w = new Gtk.Button.with_mnemonic(_("_Restore…"));
+    w = new Gtk.Button.with_mnemonic(duplicity_installed ? _("_Restore…") : _("_Install…"));
     w.margin_top = 6;
     w.halign = Gtk.Align.START;
+    w.expand = false;
     (w as Gtk.Button).clicked.connect((b) => {
-      run_deja_dup("--restore", b.get_display().get_app_launch_context());
+      if (duplicity_installed) {
+        run_deja_dup("--restore", b.get_display().get_app_launch_context());
+      } else {
+        restore_progress.visible = true;
+        install_duplicity.begin();
+      }
     });
-    restore_button = w;
+    restore_button = w as Gtk.Button;
     label_sizes.add_widget(w);
     table.attach(w, 1, row, 1, 1);
+    w = new Gtk.ProgressBar();
+    w.halign = Gtk.Align.START;
+    w.valign = Gtk.Align.CENTER;
+    w.hexpand = true;
+    w.no_show_all = true;
+    restore_progress = w as Gtk.ProgressBar;
+    table.attach(w, 2, row, 1, 1);
     ++row;
 
     w = new Gtk.Grid(); // spacer
@@ -149,24 +230,38 @@ public class Preferences : Gtk.Grid
     w = new DejaDup.ConfigLabelBackupDate(DejaDup.ConfigLabelBackupDate.Kind.NEXT);
     w.halign = Gtk.Align.START;
     w.valign = Gtk.Align.START;
-    table.attach(w, 1, row, 1, 1);
+    table.attach(w, 1, row, 2, 1);
     ++row;
 
-    w = new DejaDup.ConfigLabelDescription(DejaDup.ConfigLabelDescription.Kind.BACKUP);
+    w = new DejaDup.ConfigLabelDescription(DejaDup.ConfigLabelDescription.Kind.BACKUP, duplicity_installed);
     w.halign = Gtk.Align.START;
     w.valign = Gtk.Align.START;
-    table.attach(w, 1, row, 1, 1);
+    backup_desc = w as DejaDup.ConfigLabelDescription;
+    table.attach(w, 1, row, 2, 1);
     ++row;
 
-    w = new Gtk.Button.with_mnemonic(_("_Back Up Now…"));
+    w = new Gtk.Button.with_mnemonic(duplicity_installed ? _("_Back Up Now…") : _("Install…"));
     w.margin_top = 6;
     w.halign = Gtk.Align.START;
+    w.expand = false;
     (w as Gtk.Button).clicked.connect((b) => {
-      run_deja_dup("--backup", b.get_display().get_app_launch_context());
+      if (duplicity_installed) {
+        run_deja_dup("--backup", b.get_display().get_app_launch_context());
+      } else {
+        backup_progress.visible = true;
+        install_duplicity.begin();
+      }
     });
-    backup_button = w;
+    backup_button = w as Gtk.Button;
     label_sizes.add_widget(w);
     table.attach(w, 1, row, 1, 1);
+    w = new Gtk.ProgressBar();
+    w.halign = Gtk.Align.START;
+    w.valign = Gtk.Align.CENTER;
+    w.hexpand = true;
+    w.no_show_all = true;
+    backup_progress = w as Gtk.ProgressBar;
+    table.attach(w, 2, row, 1, 1);
     ++row;
 
     bus_watch_id = Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
@@ -247,13 +342,12 @@ public class Preferences : Gtk.Grid
     table.halign = Gtk.Align.CENTER;
     row = 0;
 
-    if (show_auto_switch) {
+    if (auto_switch == null) {
       var align = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
-      var @switch = new Gtk.Switch();
-      settings.bind(DejaDup.PERIODIC_KEY, @switch, "active", SettingsBindFlags.DEFAULT);
-      align.add(@switch);
+      auto_switch = new DejaDup.PreferencesPeriodicSwitch();
+      align.add(auto_switch);
       label = new Gtk.Label.with_mnemonic(_("_Automatic backup"));
-      label.mnemonic_widget = @switch;
+      label.mnemonic_widget = auto_switch;
       label.xalign = 1.0f;
       table.attach(label, 0, row, 1, 1);
       table.attach(align, 1, row, 1, 1);
@@ -318,6 +412,7 @@ public class Preferences : Gtk.Grid
   }
 
   construct {
+    duplicity_installed = Environment.find_program_in_path("duplicity") != null;
     add(make_settings_page());
     set_size_request(-1, 400);
   }

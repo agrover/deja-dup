@@ -31,6 +31,8 @@ set_target_properties(test-runner PROPERTIES
 
 file(GLOB SCRIPTS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/scripts scripts/*.test)
 foreach(SCRIPT ${SCRIPTS})
+  add_custom_target(test-${SCRIPT}
+                    COMMAND env top_builddir=${CMAKE_BINARY_DIR} srcdir=${CMAKE_CURRENT_SOURCE_DIR} dbus-launch ./test-runner ${CMAKE_CURRENT_SOURCE_DIR}/scripts/${SCRIPT})
   add_test(${SCRIPT} env top_builddir=${CMAKE_BINARY_DIR} srcdir=${CMAKE_CURRENT_SOURCE_DIR} dbus-launch ./test-runner ${CMAKE_CURRENT_SOURCE_DIR}/scripts/${SCRIPT})
 endforeach()
 
