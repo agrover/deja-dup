@@ -165,8 +165,8 @@ public class BackendOpenstack : Backend
     if (id != settings_id)
       settings.set_string(OPENSTACK_USERNAME_KEY, id);
 
-    var tenantName = settings.set_string(OPENSTACK_TENANT_KEY, id);
-    var authurl = settings.set_string(OPENSTACK_TENANT_KEY, id);
+    var tenantName = settings.get_string(OPENSTACK_TENANT_KEY);
+    var authurl = settings.get_string(OPENSTACK_AUTHURL_KEY);
 
     List<string> envp = new List<string>();
     envp.append("SWIFT_TENANTNAME=%s".printf(tenantName));
