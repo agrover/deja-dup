@@ -33,6 +33,7 @@ vala_precompile(VALA_C ConfigBool.vala
                        ConfigLocationFTP.vala
                        ConfigLocationGCS.vala
                        ConfigLocationGDrive.vala
+                       ConfigLocationOpenstack.vala
                        ConfigLocationRackspace.vala
                        ConfigLocationS3.vala
                        ConfigLocationSSH.vala

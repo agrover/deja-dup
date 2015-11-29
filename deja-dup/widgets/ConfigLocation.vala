@@ -64,6 +64,7 @@ public class ConfigLocation : ConfigWidget
   int index_gcs = -2;
   int index_gdrive = -2;
   int index_rackspace = -2;
+  int index_openstack = -2;
   int index_u1 = -2;
   int index_cloud_sep = -2;
   int index_ssh;
@@ -116,6 +117,7 @@ public class ConfigLocation : ConfigWidget
     insert_gcs();
     insert_gdrive();
     insert_rackspace();
+    insert_openstack();
 
     // Now insert remote servers
     index_ssh = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
@@ -216,6 +218,14 @@ public class ConfigLocation : ConfigWidget
                               _("Rackspace Cloud Files"),
                               new ConfigLocationRackspace(label_sizes),
                               ref index_rackspace, insert_rackspace);
+  }
+
+  void insert_openstack() {
+    insert_cloud_if_available("openstack", BackendOpenstack.get_checker(),
+                              new ThemedIcon("deja-dup-cloud"),
+                              _("OpenStack Swift"),
+                              new ConfigLocationOpenstack(label_sizes),
+                              ref index_openstack, insert_openstack);
   }
 
   void insert_cloud_if_available(string id, Checker? checker,
@@ -440,6 +450,8 @@ public class ConfigLocation : ConfigWidget
       index = index_gdrive;
     else if (backend == "rackspace")
       index = index_rackspace;
+    else if (backend == "openstack")
+      index = index_openstack;
     else if (backend == "u1")
       index = index_u1;
     else if (backend == "file") {
@@ -534,6 +546,8 @@ public class ConfigLocation : ConfigWidget
       settings.set_string(BACKEND_KEY, "gdrive");
     else if (index == index_rackspace)
       settings.set_string(BACKEND_KEY, "rackspace");
+    else if (index == index_openstack)
+      settings.set_string(BACKEND_KEY, "openstack");
     else if (index == index_u1)
       settings.set_string(BACKEND_KEY, "u1");
     else if (index == index_ssh)
