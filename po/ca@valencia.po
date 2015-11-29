@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-01-10 18:29-0500\n"
+"POT-Creation-Date: 2015-04-10 16:55-0400\n"
 "PO-Revision-Date: 2014-10-25 13:50+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Catalan (Valencian) <ca@valencia@li.org>\n"
@@ -15,13 +15,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-26 06:37+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2015-04-11 05:56+0000\n"
+"X-Generator: Launchpad (build 17423)\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 #: ../deja-dup/preferences/Preferences.vala:191
 msgid "Folders to save"
-msgstr ""
+msgstr "Carpetes que cal guardar"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:2
 msgid ""
@@ -123,6 +123,8 @@ msgstr "El nombre de dies entre còpies de seguretat."
 msgid ""
 "The last time Déjà Dup checked whether it should prompt about backing up"
 msgstr ""
+"L'últim cop que el Déjà Dup va comprovar si hauria de preguntar sobre fer "
+"una còpia de seguretat"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:18
 msgid ""
@@ -140,6 +142,8 @@ msgstr ""
 msgid ""
 "The last time Déjà Dup checked whether it should prompt about your password"
 msgstr ""
+"L'últim cop que el Déjà Dup va comprovar si hauria de preguntar sobre la "
+"contrasenya"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:20
 msgid ""
@@ -147,6 +151,10 @@ msgid ""
 "occasionally notify you to confirm the password. This time should be either "
 "‘disabled’ to turn off this check or in ISO 8601 format."
 msgstr ""
+"Per evitar que oblideu les contrasenyes, ocasionalment el Déjà Dup vos "
+"sol·licitarà que confirmeu la contrasenya. Este temps hauria de ser "
+"«disabled» (inhabilitat) per inhabilitar esta comprovació o en format ISO "
+"8601."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:21
 msgid "How long to keep backup files"
@@ -165,13 +173,15 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
 msgid "How long to wait between full backups"
-msgstr ""
+msgstr "Quant de temps s'ha d'esperar entre còpies de seguretat completes."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
 msgid ""
 "Déjà Dup needs to occasionally make fresh full backups. This is the number "
 "of days to wait between full backups."
 msgstr ""
+"Ocasionalment cal que el Déjà Dup  faça còpies de seguretat completes noves. "
+"Este és el nombre de dies que han de passar entre estes còpies."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
 msgid "Type of location to store backup"
@@ -220,10 +230,26 @@ msgstr ""
 "crearà en la galleda triada."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+msgid "The email-address of your Google account"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+msgid "The email-address of your Google account."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+msgid "The folder where backups are stored"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+msgid "The folder hierarchy where backups are stored."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "The Rackspace Cloud Files container"
 msgstr "Contenidor d'espai de fitxers al núvol de «Rackspace»"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -232,51 +258,39 @@ msgstr ""
 "fitxers. El contenidor no cal que existisca, i només s'accepten noms "
 "d'ordinador vàlids."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 msgid "Your Rackspace username"
 msgstr "El vostre nom d'usuari de Rackspace"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "Este és el nom d'usuari del servei de fitxers al núvol de Rackspace."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
-msgid "The Ubuntu One folder"
-msgstr "La carpeta de l'Ubuntu One"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
-msgid ""
-"The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
-"folder based on the name of the computer."
-msgstr ""
-"Nom de la carpeta on emmagatzemar els fitxers. Si és «$HOSTNAME», per "
-"defecte serà una carpeta basada en el nom de l'ordinador."
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 #: ../deja-dup/AssistantRestore.vala:221
 msgid "Backup location"
 msgstr "Ubicació de la còpia de seguretat"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid "Location in which to hold the backup files."
 msgstr "Ubicació on s'emmagatzemaran els fitxers de còpia de seguretat."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid "Folder type"
 msgstr "Tipus de carpeta"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Indica si la còpia de seguretat es realitza en un volum extern o dins una "
 "carpeta normal."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "Relative path under the external volume"
 msgstr "Camí relatiu en el dispositiu extern"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -284,11 +298,11 @@ msgstr ""
 "Si la ubicació de la còpia de seguretat és en un dispositiu extern, este és "
 "el camí a la carpeta d'aquell dispositiu."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid "Unique ID of the external volume"
 msgstr "Identificador únic del dispositiu extern"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -296,11 +310,11 @@ msgstr ""
 "Si la ubicació de la còpia de seguretat és en un dispositiu extern, este és "
 "el seu identificador únic del sistema de fitxers."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid "Full name of the external volume"
 msgstr "Nom complet del volum extern"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -308,11 +322,11 @@ msgstr ""
 "Si la ubicació de la còpia de seguretat és en un dispositiu extern, esta és "
 "la descripció llarga del dispositiu."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
 msgid "Short name of the external volume"
 msgstr "Nom curt del dispositiu extern"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
@@ -320,11 +334,11 @@ msgstr ""
 "Si la ubicació de la còpia de seguretat és en un dispositiu extern, este és "
 "el nom curt del dispositiu."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
 msgid "Icon of the external volume"
 msgstr "Icona del volum extern"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:54
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
@@ -342,34 +356,38 @@ msgid "Déjà Dup Backup Tool"
 msgstr "Eina de còpies de seguretat Déjà Dup"
 
 #: ../deja-dup/deja-dup.appdata.xml.in.h:2
+msgid "Keep your important documents safe from disaster"
+msgstr ""
+
+#: ../deja-dup/deja-dup.appdata.xml.in.h:3
 msgid ""
 "Déjà Dup is a simple backup tool. It hides the complexity of backing up the "
 "Right Way (encrypted, off-site, and regular) and uses duplicity as the "
 "backend."
 msgstr ""
 
-#: ../deja-dup/deja-dup.appdata.xml.in.h:3
-msgid ""
-"Support for local, remote, or cloud backup locations, such as Amazon S3, "
-"Rackspace Cloud Files, and Ubuntu One"
-msgstr ""
-
 #: ../deja-dup/deja-dup.appdata.xml.in.h:4
-msgid "Securely encrypts and compresses your data"
+msgid ""
+"Support for local, remote, or cloud backup locations, such as Amazon S3 and "
+"Rackspace Cloud Files"
 msgstr ""
 
 #: ../deja-dup/deja-dup.appdata.xml.in.h:5
+msgid "Securely encrypts and compresses your data"
+msgstr "Encripta i comprimeix les vostres dades amb seguretat"
+
+#: ../deja-dup/deja-dup.appdata.xml.in.h:6
 msgid ""
 "Incrementally backs up, letting you restore from any particular backup"
 msgstr ""
 
-#: ../deja-dup/deja-dup.appdata.xml.in.h:6
-msgid "Schedules regular backups"
-msgstr ""
-
 #: ../deja-dup/deja-dup.appdata.xml.in.h:7
+msgid "Schedules regular backups"
+msgstr "Planifica còpies de seguretat"
+
+#: ../deja-dup/deja-dup.appdata.xml.in.h:8
 msgid "Integrates well into your GNOME desktop"
-msgstr ""
+msgstr "S'integra bé a l'escriptori de GNOME"
 
 #. Translators: "Backups" is a noun
 #: ../deja-dup/deja-dup.desktop.in.h:1
@@ -381,13 +399,13 @@ msgstr ""
 #: ../deja-dup/preferences/preferences-main.vala:43
 #: ../deja-dup/preferences/preferences-main.vala:123
 msgid "Backups"
-msgstr ""
+msgstr "Còpies de seguretat"
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
 #: ../deja-dup/monitor/deja-dup-monitor.desktop.in.h:1
-#: ../deja-dup/monitor/monitor.vala:328
+#: ../deja-dup/monitor/monitor.vala:332
 msgid "Backup Monitor"
 msgstr "Monitor de còpies de seguretat"
 
@@ -409,7 +427,7 @@ msgstr "déjà;deja;dup;"
 #: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:5
 #: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:5
 msgid "Back Up"
-msgstr ""
+msgstr "Fes una còpia de seguretat"
 
 #: ../deja-dup/ui/restore-missing.ui.h:1
 msgid "Folder"
@@ -510,7 +528,7 @@ msgid ""
 "it down."
 msgstr ""
 "Vos caldrà la contrasenya per restaurar els arxius. Vos recomanem que la "
-"alceu en un lloc segur."
+"guardeu en un lloc segur."
 
 #: ../deja-dup/AssistantOperation.vala:339
 #: ../deja-dup/AssistantOperation.vala:408
@@ -732,11 +750,11 @@ msgstr "Ha finalitzat l'escaneig"
 #: ../deja-dup/Assistant.vala:38
 #: ../deja-dup/widgets/ConfigLocationFile.vala:54
 msgid "_OK"
-msgstr ""
+msgstr "_D'acord"
 
 #: ../deja-dup/Assistant.vala:299
 msgid "_Forward"
-msgstr ""
+msgstr "_Endavant"
 
 #: ../deja-dup/Assistant.vala:317
 msgid "Co_ntinue"
@@ -750,15 +768,15 @@ msgstr "_Comprova"
 #: ../deja-dup/Assistant.vala:352 ../deja-dup/widgets/ConfigList.vala:255
 #: ../deja-dup/widgets/ConfigLocationFile.vala:53
 msgid "_Cancel"
-msgstr ""
+msgstr "_Cancel·la"
 
 #: ../deja-dup/Assistant.vala:354
 msgid "_Close"
-msgstr ""
+msgstr "_Tanca"
 
 #: ../deja-dup/Assistant.vala:358
 msgid "_Back"
-msgstr ""
+msgstr "_Enrere"
 
 #: ../deja-dup/Assistant.vala:360 ../deja-dup/StatusIcon.vala:93
 msgid "_Resume Later"
@@ -836,6 +854,7 @@ msgid "_Username"
 msgstr "Nom d'_usuari"
 
 #: ../deja-dup/MountOperationAssistant.vala:38
+#: ../libdeja/BackendGDrive.vala:160
 msgid "_Password"
 msgstr "_Contrasenya"
 
@@ -927,7 +946,7 @@ msgstr "%.1f%% completat"
 msgid "Show _Progress"
 msgstr "Mostra el _progrés"
 
-#: ../deja-dup/monitor/monitor.vala:159
+#: ../deja-dup/monitor/monitor.vala:161
 msgid "Scheduled backup delayed"
 msgstr "S'ha posposat la còpia de seguretat planificada"
 
@@ -949,26 +968,26 @@ msgstr "Resum"
 
 #: ../deja-dup/preferences/Preferences.vala:213
 msgid "_Storage location"
-msgstr ""
+msgstr "_Ubicació de l'emmagatzematge"
 
 #. Translators: storage as in "where to store the backup"
 #: ../deja-dup/preferences/Preferences.vala:230
 msgid "Storage location"
-msgstr ""
+msgstr "Ubicació de l'emmagatzematge"
 
 #: ../deja-dup/preferences/Preferences.vala:255
 msgid "_Automatic backup"
-msgstr ""
+msgstr "_Còpia de seguretat automàtica"
 
 #. translators: as in "Every day"
 #: ../deja-dup/preferences/Preferences.vala:267
 msgid "_Every"
-msgstr ""
+msgstr "_Cada"
 
 #: ../deja-dup/preferences/Preferences.vala:277
 msgctxt "verb"
 msgid "_Keep"
-msgstr ""
+msgstr "_Manté"
 
 #: ../deja-dup/preferences/Preferences.vala:284
 msgid ""
@@ -977,15 +996,15 @@ msgstr ""
 
 #: ../deja-dup/preferences/Preferences.vala:294
 msgid "Scheduling"
-msgstr ""
+msgstr "Planificació"
 
 #: ../deja-dup/preferences/preferences-main.vala:73
 msgid "_Help"
-msgstr ""
+msgstr "_Ajuda"
 
 #: ../deja-dup/preferences/preferences-main.vala:75
 msgid "_Quit"
-msgstr ""
+msgstr "I_x"
 
 #: ../deja-dup/widgets/ConfigDelete.vala:40
 msgid "At least six months"
@@ -1113,40 +1132,44 @@ msgid "Choose folders"
 msgstr "Trieu les carpetes"
 
 #. Now insert remote servers
-#: ../deja-dup/widgets/ConfigLocation.vala:118
+#: ../deja-dup/widgets/ConfigLocation.vala:120
 msgid "SSH"
 msgstr "SSH"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:120
+#: ../deja-dup/widgets/ConfigLocation.vala:122
 msgid "Windows Share"
 msgstr "Recurs compartit del Windows"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:122
+#: ../deja-dup/widgets/ConfigLocation.vala:124
 msgid "FTP"
 msgstr "FTP"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:124
+#: ../deja-dup/widgets/ConfigLocation.vala:126
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:127
+#: ../deja-dup/widgets/ConfigLocation.vala:129
 msgid "Custom Location"
 msgstr "Ubicació personalitzada"
 
 #. And a local folder option
-#: ../deja-dup/widgets/ConfigLocation.vala:133
+#: ../deja-dup/widgets/ConfigLocation.vala:135
 msgid "Local Folder"
 msgstr "Carpeta local"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:176 ../libdeja/BackendS3.vala:122
+#: ../deja-dup/widgets/ConfigLocation.vala:178 ../libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "S3 d'Amazon"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:186 ../libdeja/BackendU1.vala:170
+#: ../deja-dup/widgets/ConfigLocation.vala:186
+msgid "Google Drive"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocation.vala:198 ../libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:194
+#: ../deja-dup/widgets/ConfigLocation.vala:206
 #: ../libdeja/BackendRackspace.vala:69
 msgid "Rackspace Cloud Files"
 msgstr "Emmagatzematge de fitxers en el núvol de Rackspace"
@@ -1175,10 +1198,10 @@ msgstr "_Port"
 #: ../deja-dup/widgets/ConfigLocationDAV.vala:46
 #: ../deja-dup/widgets/ConfigLocationFTP.vala:38
 #: ../deja-dup/widgets/ConfigLocationFile.vala:45
+#: ../deja-dup/widgets/ConfigLocationGDrive.vala:33
 #: ../deja-dup/widgets/ConfigLocationS3.vala:33
 #: ../deja-dup/widgets/ConfigLocationSMB.vala:34
 #: ../deja-dup/widgets/ConfigLocationSSH.vala:37
-#: ../deja-dup/widgets/ConfigLocationU1.vala:33
 #: ../deja-dup/widgets/ConfigLocationVolume.vala:33
 msgid "_Folder"
 msgstr "_Carpeta"
@@ -1190,6 +1213,10 @@ msgstr "_Trieu una carpeta…"
 #: ../deja-dup/widgets/ConfigLocationFile.vala:50
 msgid "Choose Folder"
 msgstr "Trieu una carpeta"
+
+#: ../deja-dup/widgets/ConfigLocationGDrive.vala:31
+msgid "_Email address"
+msgstr ""
 
 #: ../deja-dup/widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
@@ -1203,20 +1230,24 @@ msgstr "I_dentificador de la clau d'accés de l'S3 dAmazon"
 msgid "_Domain Name"
 msgstr "_Nom del domini"
 
+#: ../deja-dup/widgets/ConfigLocationU1.vala:32 ../libdeja/BackendU1.vala:50
+msgid "Ubuntu One has shut down.  Please choose another storage location."
+msgstr ""
+
 #: ../deja-dup/widgets/ConfigPeriod.vala:36
 msgid "Day"
-msgstr ""
+msgstr "Dia"
 
 #: ../deja-dup/widgets/ConfigPeriod.vala:37
 msgid "Week"
-msgstr ""
+msgstr "Setmana"
 
 #: ../deja-dup/widgets/ConfigPeriod.vala:82
 #, c-format
 msgid "%d day"
 msgid_plural "%d days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d dia"
+msgstr[1] "%d dies"
 
 #: ../deja-dup/widgets/WidgetUtils.vala:33
 #, c-format
@@ -1236,8 +1267,8 @@ msgid "Backup will begin when %s becomes connected."
 msgstr ""
 "La còpia de seguretat començarà quan s'establisca la connexió amb %s."
 
-#: ../libdeja/BackendFile.vala:175 ../libdeja/BackendRackspace.vala:49
-#: ../libdeja/BackendS3.vala:59 ../libdeja/BackendU1.vala:150
+#: ../libdeja/BackendFile.vala:175 ../libdeja/BackendGDrive.vala:51
+#: ../libdeja/BackendRackspace.vala:49 ../libdeja/BackendS3.vala:59
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "La còpia de seguretat s'iniciarà quan estiga disponible una connexió de "
@@ -1257,14 +1288,34 @@ msgid "Waiting for ‘%s’ to become connected…"
 msgstr "S'està esperant que «%s» es connecte…"
 
 #. Translators: %s is a folder.
+#: ../libdeja/BackendGDrive.vala:83
+#, c-format
+msgid "%s at Google Drive"
+msgstr ""
+
+#: ../libdeja/BackendGDrive.vala:126 ../libdeja/BackendRackspace.vala:115
+#: ../libdeja/BackendS3.vala:168
+msgid "Permission denied"
+msgstr "S’ha denegat el permís"
+
+#: ../libdeja/BackendGDrive.vala:157
+#, c-format
+msgid "You can sign up for a Google account <a href=\"%s\">online</a>."
+msgstr ""
+
+#: ../libdeja/BackendGDrive.vala:158
+msgid "Connect to Google Drive"
+msgstr ""
+
+#: ../libdeja/BackendGDrive.vala:159
+msgid "_Email"
+msgstr ""
+
+#. Translators: %s is a folder.
 #: ../libdeja/BackendRackspace.vala:72
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "%s al contenidor de fitxers en el núvol de Rackspace"
-
-#: ../libdeja/BackendRackspace.vala:115 ../libdeja/BackendS3.vala:168
-msgid "Permission denied"
-msgstr "S’ha denegat el permís"
 
 #: ../libdeja/BackendRackspace.vala:146
 #, c-format
@@ -1324,32 +1375,23 @@ msgstr "M_ostra la clau secreta d'accés"
 msgid "_Remember secret access key"
 msgstr "_Recorda la clau secreta d'accés"
 
-#. Translators: %s is a folder.
-#: ../libdeja/BackendU1.vala:173
-#, c-format
-msgid "%s on Ubuntu One"
-msgstr "%s a l'Ubuntu One"
-
-#: ../libdeja/BackendU1.vala:259
-msgid "Connect to Ubuntu One"
-msgstr "Connecta't a l'Ubuntu One"
-
-#: ../libdeja/BackendU1.vala:260
-msgid "Sign into Ubuntu One…"
-msgstr "Entra a l'Ubuntu One..."
-
 #: ../libdeja/CommonUtils.vala:432
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
+"No s'ha pogut trobar l'eina de còpies de seguretat a %s. La instal·lació no "
+"és completa."
 
 #: ../libdeja/CommonUtils.vala:434
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
+"No s'ha pogut carregar l'eina de còpies de seguretat. La instal·lació no és "
+"completa."
 
 #: ../libdeja/CommonUtils.vala:440
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
+"L'eina de còpies de seguretat no funciona. La instal·lació no és completa."
 
 #: ../libdeja/CommonUtils.vala:462
 msgid "Could not start backup tool"
@@ -1564,12 +1606,12 @@ msgstr "S'està pujant…"
 msgid "Could not understand duplicity version."
 msgstr "No s'ha pogut processar la versió del Duplicity."
 
-#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:47
+#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:51
 #, c-format
 msgid "Could not understand duplicity version ‘%s’."
 msgstr "No s'ha pogut processar la versió del Duplicity «%s»."
 
-#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:50
+#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:54
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -1577,3 +1619,23 @@ msgid ""
 msgstr ""
 "Al Déjà Dup li cal com a mínim la versió «%d.%d%.2d» del Duplicity, però "
 "només teniu instal·lada la versió «%d.%d%.2d»."
+
+#~ msgid "The Ubuntu One folder"
+#~ msgstr "La carpeta de l'Ubuntu One"
+
+#~ msgid ""
+#~ "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
+#~ "folder based on the name of the computer."
+#~ msgstr ""
+#~ "Nom de la carpeta on emmagatzemar els fitxers. Si és «$HOSTNAME», per "
+#~ "defecte serà una carpeta basada en el nom de l'ordinador."
+
+#, c-format
+#~ msgid "%s on Ubuntu One"
+#~ msgstr "%s a l'Ubuntu One"
+
+#~ msgid "Connect to Ubuntu One"
+#~ msgstr "Connecta't a l'Ubuntu One"
+
+#~ msgid "Sign into Ubuntu One…"
+#~ msgstr "Entra a l'Ubuntu One..."

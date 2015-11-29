@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-01-10 18:29-0500\n"
+"POT-Creation-Date: 2015-04-10 16:55-0400\n"
 "PO-Revision-Date: 2015-03-22 22:24+0000\n"
 "Last-Translator: Åka Sikrom <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-03-23 05:35+0000\n"
-"X-Generator: Launchpad (build 17405)\n"
+"X-Launchpad-Export-Date: 2015-04-11 05:55+0000\n"
+"X-Generator: Launchpad (build 17423)\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 #: ../deja-dup/preferences/Preferences.vala:191
@@ -220,6 +220,22 @@ msgstr ""
 "Valgfritt mappenavn for lagring av sikkerhetskopierte filer. Mappa blir "
 "opprettet i valgt «bucket»."
 
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+msgid "The email-address of your Google account"
+msgstr "E-postadresse til Google-kontoen"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+msgid "The email-address of your Google account."
+msgstr "E-postadresse til Google-kontoen."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+msgid "The folder where backups are stored"
+msgstr "Mappa hvor sikkerhetskopier skal lagres"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+msgid "The folder hierarchy where backups are stored."
+msgstr "Mappehierarki for sikkerhetskopier."
+
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "The Rackspace Cloud Files container"
 msgstr "Rackspace Cloud Files-beholderen"
@@ -240,18 +256,6 @@ msgstr "Brukernavnet ditt hos Rackspace"
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "Dette er brukernavnet ditt for tjenesten Rackspace skyfiler."
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
-msgid "The Ubuntu One folder"
-msgstr "Ubuntu One-mappa"
-
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
-msgid ""
-"The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
-"folder based on the name of the computer."
-msgstr ""
-"Mappenavn som filer lagres i. Bruk «$HOSTNAME» for å lage et automatisk "
-"mappenavn basert på datamaskinens vertsnavn."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 #: ../deja-dup/AssistantRestore.vala:221
@@ -342,6 +346,10 @@ msgstr ""
 msgid "Déjà Dup Backup Tool"
 msgstr "Déjà Dup verktøy for sikkerhetskopiering"
 
+#: ../deja-dup/deja-dup.appdata.xml.in.h:2
+msgid "Keep your important documents safe from disaster"
+msgstr "Beskytt viktige dokumenter mot ulykkeshendelser"
+
 #: ../deja-dup/deja-dup.appdata.xml.in.h:3
 msgid ""
 "Déjà Dup is a simple backup tool. It hides the complexity of backing up the "
@@ -352,13 +360,13 @@ msgstr ""
 "programmet duplicity - med å ta sikkerhetskopi på rett måte: kryptert, "
 "fysisk adskilt fra pc-en din, og regelmessig."
 
-#: ../deja-dup/deja-dup.appdata.xml.in.h:3
+#: ../deja-dup/deja-dup.appdata.xml.in.h:4
 msgid ""
-"Support for local, remote, or cloud backup locations, such as Amazon S3, "
-"Rackspace Cloud Files, and Ubuntu One"
+"Support for local, remote, or cloud backup locations, such as Amazon S3 and "
+"Rackspace Cloud Files"
 msgstr ""
-"Støtte for lokale, eksterne og skylagring av sikkerhetskopier, som f.eks. på "
-"Amazon S3, Rackspace Cloud Files og Ubuntu One"
+"Støtte for lokale eller eksterne lagringssteder for sikkerhetskopier, som "
+"f.eks. Amazon S3 og Rackspace Cloud Files"
 
 #: ../deja-dup/deja-dup.appdata.xml.in.h:5
 msgid "Securely encrypts and compresses your data"
@@ -1152,6 +1160,10 @@ msgstr "Lokal mappe"
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
+#: ../deja-dup/widgets/ConfigLocation.vala:186
+msgid "Google Drive"
+msgstr "Google Disk"
+
 #: ../deja-dup/widgets/ConfigLocation.vala:198 ../libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
@@ -1201,6 +1213,10 @@ msgstr "_Velg mappe …"
 msgid "Choose Folder"
 msgstr "Velg mappe"
 
+#: ../deja-dup/widgets/ConfigLocationGDrive.vala:31
+msgid "_Email address"
+msgstr "_E-postadresse"
+
 #: ../deja-dup/widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr "_Beholder"
@@ -1212,6 +1228,10 @@ msgstr "S3 tilgangsnøkkel-ID"
 #: ../deja-dup/widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
 msgstr "_Domenenavn"
+
+#: ../deja-dup/widgets/ConfigLocationU1.vala:32 ../libdeja/BackendU1.vala:50
+msgid "Ubuntu One has shut down.  Please choose another storage location."
+msgstr "Ubuntu One-tjenesten er nedlagt. Velg et annet lagringssted."
 
 #: ../deja-dup/widgets/ConfigPeriod.vala:36
 msgid "Day"
@@ -1264,15 +1284,34 @@ msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Venter på at ‘%s’ blir koblet til…"
 
 #. Translators: %s is a folder.
-#: ../libdeja/BackendRackspace.vala:72
+#: ../libdeja/BackendGDrive.vala:83
 #, c-format
-msgid "%s on Rackspace Cloud Files"
-msgstr "%s i Rackspace skyfiler"
+msgid "%s at Google Drive"
+msgstr "%s på Google Disk"
 
 #: ../libdeja/BackendGDrive.vala:126 ../libdeja/BackendRackspace.vala:115
 #: ../libdeja/BackendS3.vala:168
 msgid "Permission denied"
 msgstr "Ikke tilgang"
+
+#: ../libdeja/BackendGDrive.vala:157
+#, c-format
+msgid "You can sign up for a Google account <a href=\"%s\">online</a>."
+msgstr "Lag en Google-konto <a href=\"%s\">på nettet</a>."
+
+#: ../libdeja/BackendGDrive.vala:158
+msgid "Connect to Google Drive"
+msgstr "Koble til Google Disk"
+
+#: ../libdeja/BackendGDrive.vala:159
+msgid "_Email"
+msgstr "_E-post"
+
+#. Translators: %s is a folder.
+#: ../libdeja/BackendRackspace.vala:72
+#, c-format
+msgid "%s on Rackspace Cloud Files"
+msgstr "%s i Rackspace skyfiler"
 
 #: ../libdeja/BackendRackspace.vala:146
 #, c-format
@@ -1328,20 +1367,6 @@ msgstr "V_is hemmelig tilgangsnøkkel"
 #: ../libdeja/BackendS3.vala:204
 msgid "_Remember secret access key"
 msgstr "_Husk hemmelig tilgangsnøkkel"
-
-#. Translators: %s is a folder.
-#: ../libdeja/BackendU1.vala:173
-#, c-format
-msgid "%s on Ubuntu One"
-msgstr "%s på Ubuntu One"
-
-#: ../libdeja/BackendU1.vala:259
-msgid "Connect to Ubuntu One"
-msgstr "Koble til Ubuntu One"
-
-#: ../libdeja/BackendU1.vala:260
-msgid "Sign into Ubuntu One…"
-msgstr "Logg på Ubuntu One …"
 
 #: ../libdeja/CommonUtils.vala:432
 #, c-format
@@ -1576,12 +1601,12 @@ msgstr "Laster opp…"
 msgid "Could not understand duplicity version."
 msgstr "Duplikatversjon kan ikke tolkes."
 
-#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:47
+#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:51
 #, c-format
 msgid "Could not understand duplicity version ‘%s’."
 msgstr "Forstår ikke duplikatversjonen «%s»."
 
-#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:50
+#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:54
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -1589,3 +1614,30 @@ msgid ""
 msgstr ""
 "Déjà Dup Verktøy for sikkerhetskopiering trenger versjon %d.%d.%.2d eller "
 "nyere av duplicity, men fant bare versjon %d.%d.%.2d"
+
+#, c-format
+#~ msgid "%s on Ubuntu One"
+#~ msgstr "%s på Ubuntu One"
+
+#~ msgid "Connect to Ubuntu One"
+#~ msgstr "Koble til Ubuntu One"
+
+#~ msgid ""
+#~ "Support for local, remote, or cloud backup locations, such as Amazon S3, "
+#~ "Rackspace Cloud Files, and Ubuntu One"
+#~ msgstr ""
+#~ "Støtte for lokale, eksterne og skylagring av sikkerhetskopier, som f.eks. på "
+#~ "Amazon S3, Rackspace Cloud Files og Ubuntu One"
+
+#~ msgid "The Ubuntu One folder"
+#~ msgstr "Ubuntu One-mappa"
+
+#~ msgid "Sign into Ubuntu One…"
+#~ msgstr "Logg på Ubuntu One …"
+
+#~ msgid ""
+#~ "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
+#~ "folder based on the name of the computer."
+#~ msgstr ""
+#~ "Mappenavn som filer lagres i. Bruk «$HOSTNAME» for å lage et automatisk "
+#~ "mappenavn basert på datamaskinens vertsnavn."
