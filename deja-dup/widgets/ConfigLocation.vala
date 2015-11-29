@@ -61,6 +61,7 @@ public class ConfigLocation : ConfigWidget
   int index_ftp;
   int index_dav;
   int index_s3 = -2;
+  int index_gcs = -2;
   int index_gdrive = -2;
   int index_rackspace = -2;
   int index_u1 = -2;
@@ -112,6 +113,7 @@ public class ConfigLocation : ConfigWidget
     // Insert cloud providers
     insert_u1();
     insert_s3();
+    insert_gcs();
     insert_gdrive();
     insert_rackspace();
 
@@ -178,6 +180,14 @@ public class ConfigLocation : ConfigWidget
                               _("Amazon S3"),
                               new ConfigLocationS3(label_sizes),
                               ref index_s3, insert_s3);
+  }
+
+  void insert_gcs() {
+    insert_cloud_if_available("gcs", BackendGCS.get_checker(),
+                              new ThemedIcon("deja-dup-cloud"),
+                              _("Google Cloud Storage"),
+                              new ConfigLocationGCS(label_sizes),
+                              ref index_gcs, insert_gcs);
   }
 
   void insert_gdrive() {
@@ -424,6 +434,8 @@ public class ConfigLocation : ConfigWidget
     var backend = Backend.get_default_type();
     if (backend == "s3")
       index = index_s3;
+    else if (backend == "gcs")
+      index = index_gcs;
     else if (backend == "gdrive")
       index = index_gdrive;
     else if (backend == "rackspace")
@@ -516,6 +528,8 @@ public class ConfigLocation : ConfigWidget
 
     if (index == index_s3)
       settings.set_string(BACKEND_KEY, "s3");
+    else if (index == index_gcs)
+      settings.set_string(BACKEND_KEY, "gcs");
     else if (index == index_gdrive)
       settings.set_string(BACKEND_KEY, "gdrive");
     else if (index == index_rackspace)

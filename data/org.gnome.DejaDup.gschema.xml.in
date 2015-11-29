@@ -65,6 +65,7 @@
       <choices>
         <choice value='auto'/>
         <choice value='file'/>
+        <choice value='gcs'/>
         <choice value='gdrive'/>
         <choice value='rackspace'/>
         <choice value='s3'/>
@@ -76,6 +77,7 @@
     </key>
     <child name="rackspace" schema="org.gnome.DejaDup.Rackspace"/>
     <child name="s3" schema="org.gnome.DejaDup.S3"/>
+    <child name="gcs" schema="org.gnome.DejaDup.GCS"/>
     <child name="gdrive" schema="org.gnome.DejaDup.GDrive"/>
     <child name="file" schema="org.gnome.DejaDup.File"/>
   </schema>
@@ -93,6 +95,23 @@
     <key name="folder" type="s">
       <default>'$HOSTNAME'</default>
       <_summary>The Amazon S3 folder</_summary>
+      <_description>An optional folder name to store files in.  This folder will be created in the chosen bucket.</_description>
+    </key>
+  </schema>
+  <schema id="org.gnome.DejaDup.GCS" path="/org/gnome/deja-dup/gcs/">
+    <key name="id" type="s">
+      <default>''</default>
+      <_summary>Google Cloud Storage Access Key ID</_summary>
+      <_description>Your Google Cloud Storage Access Key Identifier.  This acts as your Google Cloud Storage username.</_description>
+    </key>
+    <key name="bucket" type="s">
+      <default>''</default>
+      <_summary>The Google Cloud Storage bucket name to use</_summary>
+      <_description>Which Google Cloud Storage bucket to store files in.  This does not need to exist already.  Only legal hostname strings are valid.</_description>
+    </key>
+    <key name="folder" type="s">
+      <default>'$HOSTNAME'</default>
+      <_summary>The Google Cloud Storage folder</_summary>
       <_description>An optional folder name to store files in.  This folder will be created in the chosen bucket.</_description>
     </key>
   </schema>

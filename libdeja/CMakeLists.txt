@@ -20,6 +20,7 @@ vala_precompile(VALA_C AsyncCommand.vala
                        Backend.vala
                        BackendAuto.vala
                        BackendFile.vala
+                       BackendGCS.vala
                        BackendGDrive.vala
                        BackendRackspace.vala
                        BackendS3.vala
