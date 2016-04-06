@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-04-10 16:55-0400\n"
-"PO-Revision-Date: 2015-03-22 22:24+0000\n"
+"POT-Creation-Date: 2015-11-29 11:05-0500\n"
+"PO-Revision-Date: 2015-12-28 06:21+0000\n"
 "Last-Translator: Åka Sikrom <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-04-11 05:55+0000\n"
-"X-Generator: Launchpad (build 17423)\n"
+"X-Launchpad-Export-Date: 2015-12-29 05:36+0000\n"
+"X-Generator: Launchpad (build 17865)\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
-#: ../deja-dup/preferences/Preferences.vala:191
+#: ../deja-dup/preferences/Preferences.vala:286
 msgid "Folders to save"
 msgstr "Mapper som skal lagres"
 
@@ -36,7 +36,7 @@ msgstr ""
 "navn på disse mappene. Filbaner er relative til brukerens hjemmemappe."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/preferences/Preferences.vala:202
+#: ../deja-dup/preferences/Preferences.vala:297
 msgid "Folders to ignore"
 msgstr "Mapper som skal hoppes over"
 
@@ -221,26 +221,54 @@ msgstr ""
 "opprettet i valgt «bucket»."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+msgid "Google Cloud Storage Access Key ID"
+msgstr "Google Cloud Storage-tilgangsnøkkel-ID"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+msgid ""
+"Your Google Cloud Storage Access Key Identifier. This acts as your Google "
+"Cloud Storage username."
+msgstr ""
+"ID-en for Google Cloud Storage-tilgangsnøkkelen som skal brukes. Dette "
+"brukes som Google Cloud Storage-brukernavn."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+msgid "The Google Cloud Storage bucket name to use"
+msgstr "Google Cloud Storage-bøttenavn som skal brukes"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+msgid ""
+"Which Google Cloud Storage bucket to store files in. This does not need to "
+"exist already. Only legal hostname strings are valid."
+msgstr ""
+"Hvilken Google Cloud Storage-bøtte filer skal lagres i. Du behøver ikke å "
+"opprette bøtta på forhånd. Du kan bare bruke tegn som er gyldige i vertsnavn."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+msgid "The Google Cloud Storage folder"
+msgstr "Google Cloud Storage-mappe"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid "The email-address of your Google account"
 msgstr "E-postadresse til Google-kontoen"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 msgid "The email-address of your Google account."
 msgstr "E-postadresse til Google-kontoen."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "The folder where backups are stored"
 msgstr "Mappa hvor sikkerhetskopier skal lagres"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid "The folder hierarchy where backups are stored."
 msgstr "Mappehierarki for sikkerhetskopier."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid "The Rackspace Cloud Files container"
 msgstr "Rackspace Cloud Files-beholderen"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -249,39 +277,79 @@ msgstr ""
 "behøver ikke å eksistere fra før av. Rackspace tillater bare gyldige "
 "vertsnavn."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid "Your Rackspace username"
 msgstr "Brukernavnet ditt hos Rackspace"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "Dette er brukernavnet ditt for tjenesten Rackspace skyfiler."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+msgid "The OpenStack Swift container"
+msgstr "OpenStack Swift-beholder"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+msgid ""
+"Which OpenStack Swift container to store files in. This does not need to "
+"exist already. Only legal hostname strings are valid."
+msgstr ""
+"Hvilken OpenStack Swift-beholder filer skal lagres i. Du behøver ikke å "
+"opprette beholderen på forhånd. Du kan bare bruke tegn som er gyldige i "
+"vertsnavn."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+msgid "Your OpenStack username"
+msgstr "OpenStack-brukernavn"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+msgid "This is your username for the OpenStack Swift service."
+msgstr "Brukernavn for OpenStack Swift-tjeneste."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+msgid "Your OpenStack tenant"
+msgstr "OpenStack-leietaker"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+msgid "This is your tenant for the OpenStack Swift service."
+msgstr "Dette er leietakeren for OpenStack Swift-tjenesten."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
+msgid "Authentication URL"
+msgstr "Nettadresse for autentisering"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
+msgid ""
+"This is the Authentication URL, or keystone URL for the OpenStack service"
+msgstr ""
+"Dette er nettadressen for autentisering, eller hjørnesteinsadressen til "
+"OpenStack-tjenesten"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:54
 #: ../deja-dup/AssistantRestore.vala:221
 msgid "Backup location"
 msgstr "Plassering av sikkerhetskopi"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:55
 msgid "Location in which to hold the backup files."
 msgstr "Plasseringen hvor sikkerhetskopiene skal lagres."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:56
 msgid "Folder type"
 msgstr "Mappetype"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:57
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Om sikkerhetskopien ligger på et montert eksternt volum eller en normal "
 "mappe."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:58
 msgid "Relative path under the external volume"
 msgstr "Relativ bane i det eksterne volumet"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:59
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -289,11 +357,11 @@ msgstr ""
 "Hvis sikkerhetskopiens plassering er på et eksternt volum, er dette banen "
 "til mappa på volumet."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:60
 msgid "Unique ID of the external volume"
 msgstr "Det eksterne volumets unike ID"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:61
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -301,11 +369,11 @@ msgstr ""
 "Hvis sikkerhetskopien skal plasseres på et eksternt volum, er dette volumets "
 "unike identitet."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:62
 msgid "Full name of the external volume"
 msgstr "Det eksterne volumets fulle navn"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:63
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -313,11 +381,11 @@ msgstr ""
 "Hvis plasseringen til sikkerhetskopien er på et eksternt volum, er dette "
 "volumets lange, beskrivende navn."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:64
 msgid "Short name of the external volume"
 msgstr "Kortnavn for det eksterne volumet"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:65
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
@@ -325,11 +393,11 @@ msgstr ""
 "Hvis plasseringen til sikkerhetskopien er på et eksternt volum, er dette "
 "volumets kortere navn."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:66
 msgid "Icon of the external volume"
 msgstr "Det eksterne volumets ikon"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:54
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:67
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
@@ -342,7 +410,7 @@ msgstr ""
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
 #: ../deja-dup/deja-dup.appdata.xml.in.h:1 ../deja-dup/deja-dup.desktop.in.h:2
-#: ../deja-dup/main.vala:78 ../libdeja/CommonUtils.vala:133
+#: ../deja-dup/main.vala:78 ../libdeja/CommonUtils.vala:138
 msgid "Déjà Dup Backup Tool"
 msgstr "Déjà Dup verktøy for sikkerhetskopiering"
 
@@ -390,12 +458,11 @@ msgstr "Godt integrert på GNOME-skrivebordet"
 #. Translators: "Backups" is a noun
 #: ../deja-dup/deja-dup.desktop.in.h:1
 #: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:1
-#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:1
 #: ../deja-dup/Prompt.vala:93 ../deja-dup/Prompt.vala:128
-#: ../deja-dup/StatusIcon.vala:133 ../deja-dup/StatusIcon.vala:232
+#: ../deja-dup/StatusIcon.vala:134 ../deja-dup/StatusIcon.vala:233
 #: ../deja-dup/monitor/monitor.vala:115
-#: ../deja-dup/preferences/preferences-main.vala:43
-#: ../deja-dup/preferences/preferences-main.vala:123
+#: ../deja-dup/preferences/preferences-main.vala:42
+#: ../deja-dup/preferences/preferences-main.vala:121
 msgid "Backups"
 msgstr "Sikkerhetskopier"
 
@@ -403,7 +470,7 @@ msgstr "Sikkerhetskopier"
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
 #: ../deja-dup/monitor/deja-dup-monitor.desktop.in.h:1
-#: ../deja-dup/monitor/monitor.vala:332
+#: ../deja-dup/monitor/monitor.vala:315
 msgid "Backup Monitor"
 msgstr "Planlegging av sikkerhetskopiering"
 
@@ -412,18 +479,15 @@ msgid "Schedules backups at regular intervals"
 msgstr "Tar en sikkerhetskopi med jevne mellomrom"
 
 #: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:2
-#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:2
 msgid "Change your backup settings"
 msgstr "Endre innstillinger for sikkerhetskopiering"
 
 #. These keywords are used when searching for applications in dashes, etc.
 #: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:4
-#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:4
 msgid "déjà;deja;dup;"
 msgstr "déjà;deja;dup;"
 
 #: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:5
-#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:5
 msgid "Back Up"
 msgstr "Ta sikkerhetskopi"
 
@@ -778,7 +842,7 @@ msgid "_Resume Later"
 msgstr "Fortsett _senere"
 
 #: ../deja-dup/main.vala:34 ../deja-dup/monitor/monitor.vala:36
-#: ../deja-dup/preferences/preferences-main.vala:87
+#: ../deja-dup/preferences/preferences-main.vala:85
 msgid "Show version"
 msgstr "Vis versjon"
 
@@ -921,20 +985,20 @@ msgstr ""
 "Ikke alle filene ble sikkerhetskopiert uten problemer. Se dialogen for flere "
 "detaljer."
 
-#: ../deja-dup/StatusIcon.vala:233
+#: ../deja-dup/StatusIcon.vala:234
 msgid "Starting scheduled backup"
 msgstr "Starter planlagt sikkerhetskopiering"
 
-#: ../deja-dup/StatusIcon.vala:236
+#: ../deja-dup/StatusIcon.vala:237
 msgid "Show Progress"
 msgstr "Vis fremgang"
 
-#: ../deja-dup/StatusIcon.vala:274
+#: ../deja-dup/StatusIcon.vala:275
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% ferdig"
 
-#: ../deja-dup/StatusIcon.vala:287
+#: ../deja-dup/StatusIcon.vala:288
 msgid "Show _Progress"
 msgstr "Vis _fremgang"
 
@@ -942,61 +1006,77 @@ msgstr "Vis _fremgang"
 msgid "Scheduled backup delayed"
 msgstr "Planlagt sikkerhetskopiering utsatt"
 
-#: ../deja-dup/preferences/Preferences.vala:77
-msgid "Categories"
-msgstr "Kategorier"
-
-#: ../deja-dup/preferences/Preferences.vala:129
-msgid "_Restore…"
-msgstr "_Gjenopprett …"
-
-#: ../deja-dup/preferences/Preferences.vala:161
+#: ../deja-dup/preferences/Preferences.vala:91
+#: ../deja-dup/preferences/Preferences.vala:243
 msgid "_Back Up Now…"
 msgstr "_Ta sikkerhetskopi nå …"
 
-#: ../deja-dup/preferences/Preferences.vala:180
+#: ../deja-dup/preferences/Preferences.vala:93
+#: ../deja-dup/preferences/Preferences.vala:197
+msgid "_Restore…"
+msgstr "_Gjenopprett …"
+
+#: ../deja-dup/preferences/Preferences.vala:110
+msgid "Could not install"
+msgstr "Klarte ikke å installere"
+
+#: ../deja-dup/preferences/Preferences.vala:144
+msgid "Categories"
+msgstr "Kategorier"
+
+#: ../deja-dup/preferences/Preferences.vala:197
+msgid "_Install…"
+msgstr "_Installer …"
+
+#: ../deja-dup/preferences/Preferences.vala:243
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:59
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:81
+msgid "Install…"
+msgstr "Installer …"
+
+#: ../deja-dup/preferences/Preferences.vala:275
 msgid "Overview"
 msgstr "Oversikt"
 
-#: ../deja-dup/preferences/Preferences.vala:213
+#: ../deja-dup/preferences/Preferences.vala:308
 msgid "_Storage location"
 msgstr "_Lagringssted"
 
 #. Translators: storage as in "where to store the backup"
-#: ../deja-dup/preferences/Preferences.vala:230
+#: ../deja-dup/preferences/Preferences.vala:325
 msgid "Storage location"
 msgstr "Lagringssted"
 
-#: ../deja-dup/preferences/Preferences.vala:255
+#: ../deja-dup/preferences/Preferences.vala:349
 msgid "_Automatic backup"
 msgstr "_Automatisk sikkerhetskopi"
 
 #. translators: as in "Every day"
-#: ../deja-dup/preferences/Preferences.vala:267
+#: ../deja-dup/preferences/Preferences.vala:361
 msgid "_Every"
 msgstr "_Hver"
 
-#: ../deja-dup/preferences/Preferences.vala:277
+#: ../deja-dup/preferences/Preferences.vala:371
 msgctxt "verb"
 msgid "_Keep"
 msgstr "_Behold"
 
-#: ../deja-dup/preferences/Preferences.vala:284
+#: ../deja-dup/preferences/Preferences.vala:378
 msgid ""
 "Old backups will be deleted earlier if the storage location is low on space."
 msgstr ""
 "Gamle sikkerhetskopier blir slettet raskere hvis det er nødvendig for å "
 "frigjøre lagringsplass."
 
-#: ../deja-dup/preferences/Preferences.vala:294
+#: ../deja-dup/preferences/Preferences.vala:388
 msgid "Scheduling"
 msgstr "Planlegging"
 
-#: ../deja-dup/preferences/preferences-main.vala:73
+#: ../deja-dup/preferences/preferences-main.vala:71
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: ../deja-dup/preferences/preferences-main.vala:75
+#: ../deja-dup/preferences/preferences-main.vala:73
 msgid "_Quit"
 msgstr "_Avslutt"
 
@@ -1059,20 +1139,29 @@ msgstr "Ingen nylige sikkerhetskopier."
 msgid "No backup scheduled."
 msgstr "Ingen planlagt sikkerhetskopi."
 
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:60
+#, c-format
+msgid ""
+"You can restore existing backups after you first install some necessary "
+"software by clicking the %s button."
+msgstr ""
+"Du kan gjenopprette sikkerhetskopier etter å ha installert nødvendig "
+"programvare ved å trykke på %s-knappen."
+
 #. This here encodes a lot of outside GUI information in this widget,
 #. but it's a very special case thing.
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:59
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:69
 msgid "Restore…"
 msgstr "Gjenopprett …"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:61
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:71
 #, c-format
 msgid "You may use the %s button to browse for existing backups."
 msgstr ""
 "Du kan bruke %s-knappen for å se gjennom eksisterende sikkerhetskopier."
 
 #. Translators: Files is the user-visible name of nautilus in your language
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:64
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:74
 #, c-format
 msgid ""
 "You can restore the entire backup with the %s button or use Files to either "
@@ -1081,11 +1170,20 @@ msgstr ""
 "Du kan gjenopprette hele sikkerhetskopien med %s-knappen, eller bruke "
 "filbehandleren til å enten tilbakestille eller gjenopprette filer du mangler."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:72
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:82
+#, c-format
+msgid ""
+"You can create a backup after you first install some necessary software by "
+"clicking the %s button."
+msgstr ""
+"Du kan lage sikkerhetskopier etter å ha installert nødvendig programvare ved "
+"å trykke på %s-knappen."
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:88
 msgid "Back Up Now…"
 msgstr "Ta sikkerhetskopi nå …"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:73
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:89
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
@@ -1094,15 +1192,15 @@ msgstr ""
 "Du bør <a href=''>slå på</a> automatisk sikkerhetskopiering, eller bruke %s-"
 "knappen for å ta en kopi nå."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:79
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:95
 msgid "A backup automatically starts every day."
 msgstr "Sikkerhetskopiering blir tatt automatisk hver dag."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:81
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
 msgid "A backup automatically starts every week."
 msgstr "Sikkerhetskopiering blir tatt automatisk hver uke."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:84
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:100
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1131,47 +1229,55 @@ msgid "Choose folders"
 msgstr "Velg mapper"
 
 #. Now insert remote servers
-#: ../deja-dup/widgets/ConfigLocation.vala:120
+#: ../deja-dup/widgets/ConfigLocation.vala:124
 msgid "SSH"
 msgstr "SSH"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:122
+#: ../deja-dup/widgets/ConfigLocation.vala:126
 msgid "Windows Share"
 msgstr "Delt mappe i Windows"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:124
+#: ../deja-dup/widgets/ConfigLocation.vala:128
 msgid "FTP"
 msgstr "FTP"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:126
+#: ../deja-dup/widgets/ConfigLocation.vala:130
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:129
+#: ../deja-dup/widgets/ConfigLocation.vala:133
 msgid "Custom Location"
 msgstr "Egendefinert plassering"
 
 #. And a local folder option
-#: ../deja-dup/widgets/ConfigLocation.vala:135
+#: ../deja-dup/widgets/ConfigLocation.vala:139
 msgid "Local Folder"
 msgstr "Lokal mappe"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:178 ../libdeja/BackendS3.vala:122
+#: ../deja-dup/widgets/ConfigLocation.vala:182 ../libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:186
+#: ../deja-dup/widgets/ConfigLocation.vala:190
+msgid "Google Cloud Storage"
+msgstr "Google skylagring"
+
+#: ../deja-dup/widgets/ConfigLocation.vala:198
 msgid "Google Drive"
 msgstr "Google Disk"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:198 ../libdeja/BackendU1.vala:45
+#: ../deja-dup/widgets/ConfigLocation.vala:210 ../libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:206
+#: ../deja-dup/widgets/ConfigLocation.vala:218
 #: ../libdeja/BackendRackspace.vala:69
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace skyfiler"
+
+#: ../deja-dup/widgets/ConfigLocation.vala:226
+msgid "OpenStack Swift"
+msgstr "OpenStack Swift"
 
 #: ../deja-dup/widgets/ConfigLocationCustom.vala:34
 msgid "_URI"
@@ -1255,7 +1361,7 @@ msgstr "Klarte ikke å vise %s"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../libdeja/BackendFile.vala:135 ../libdeja/CommonUtils.vala:513
+#: ../libdeja/BackendFile.vala:135 ../libdeja/CommonUtils.vala:518
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s på %2$s"
@@ -1368,42 +1474,42 @@ msgstr "V_is hemmelig tilgangsnøkkel"
 msgid "_Remember secret access key"
 msgstr "_Husk hemmelig tilgangsnøkkel"
 
-#: ../libdeja/CommonUtils.vala:432
+#: ../libdeja/CommonUtils.vala:437
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 "Fant ikke sikkerhetskopieringsverktøy i %s. Du bruker en ufullstendig "
 "installasjon."
 
-#: ../libdeja/CommonUtils.vala:434
+#: ../libdeja/CommonUtils.vala:439
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 "Klarer ikke å laste inn sikkerhetskopieringsverktøy. Du bruker en "
 "ufullstendig installasjon."
 
-#: ../libdeja/CommonUtils.vala:440
+#: ../libdeja/CommonUtils.vala:445
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 "Sikkerhetskopieringsverktøyet er ødelagt. Du bruker en ufullstendig "
 "installasjon."
 
-#: ../libdeja/CommonUtils.vala:462
+#: ../libdeja/CommonUtils.vala:467
 msgid "Could not start backup tool"
 msgstr "Klarer ikke å starte sikkerhetskoperingsverktøyet"
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../libdeja/CommonUtils.vala:564
+#: ../libdeja/CommonUtils.vala:569
 #, c-format
 msgid "Home (%s)"
 msgstr "Hjemmemappe (%s)"
 
 #. Translators: this is the home folder
-#: ../libdeja/CommonUtils.vala:569
+#: ../libdeja/CommonUtils.vala:574
 msgid "Home"
 msgstr "Hjemmemappe"
 
 #. Translators: this is the trash folder
-#: ../libdeja/CommonUtils.vala:574
+#: ../libdeja/CommonUtils.vala:579
 msgid "Trash"
 msgstr "Søppel"
 

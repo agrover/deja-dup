@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-04-10 16:55-0400\n"
+"POT-Creation-Date: 2015-11-29 11:05-0500\n"
 "PO-Revision-Date: 2014-10-25 13:50+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2015-04-11 05:55+0000\n"
-"X-Generator: Launchpad (build 17423)\n"
+"X-Launchpad-Export-Date: 2015-11-30 05:33+0000\n"
+"X-Generator: Launchpad (build 17850)\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
-#: ../deja-dup/preferences/Preferences.vala:191
+#: ../deja-dup/preferences/Preferences.vala:286
 msgid "Folders to save"
 msgstr "要保存的文件夹"
 
@@ -35,7 +35,7 @@ msgstr ""
 "$VIDEO 被确认为用户的特殊目录。相对条目相对于用户的主目录。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/preferences/Preferences.vala:202
+#: ../deja-dup/preferences/Preferences.vala:297
 msgid "Folders to ignore"
 msgstr "要忽略的文件夹"
 
@@ -191,102 +191,161 @@ msgid ""
 msgstr "用来存储文件的文件夹名称(可选)。将在所选存储段中创建此文件夹。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
-msgid "The email-address of your Google account"
+msgid "Google Cloud Storage Access Key ID"
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
-msgid "The email-address of your Google account."
+msgid ""
+"Your Google Cloud Storage Access Key Identifier. This acts as your Google "
+"Cloud Storage username."
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
-msgid "The folder where backups are stored"
+msgid "The Google Cloud Storage bucket name to use"
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
-msgid "The folder hierarchy where backups are stored."
+msgid ""
+"Which Google Cloud Storage bucket to store files in. This does not need to "
+"exist already. Only legal hostname strings are valid."
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+msgid "The Google Cloud Storage folder"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+msgid "The email-address of your Google account"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+msgid "The email-address of your Google account."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+msgid "The folder where backups are stored"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+msgid "The folder hierarchy where backups are stored."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid "The Rackspace Cloud Files container"
 msgstr "Rackspace 云文件容器"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr "在哪个 Rackspace 云文件服务容器上存储。此选项可以不进行设置，设置时仅有合法的主机名是有效的。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid "Your Rackspace username"
 msgstr "您的 Rackspace 用户名"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "这是您在 Rackspace 云文件服务上的用户名。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+msgid "The OpenStack Swift container"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+msgid ""
+"Which OpenStack Swift container to store files in. This does not need to "
+"exist already. Only legal hostname strings are valid."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+msgid "Your OpenStack username"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+msgid "This is your username for the OpenStack Swift service."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+msgid "Your OpenStack tenant"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+msgid "This is your tenant for the OpenStack Swift service."
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
+msgid "Authentication URL"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
+msgid ""
+"This is the Authentication URL, or keystone URL for the OpenStack service"
+msgstr ""
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:54
 #: ../deja-dup/AssistantRestore.vala:221
 msgid "Backup location"
 msgstr "备份位置"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:55
 msgid "Location in which to hold the backup files."
 msgstr "用于存放备份文件的位置。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:56
 msgid "Folder type"
 msgstr "文件夹类型"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:57
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr "备份位置是装入的外部卷还是普通文件夹。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:58
 msgid "Relative path under the external volume"
 msgstr "外部卷下的相对路径"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:59
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
 msgstr "如果备份位置位于外部卷上，此项即为该卷上文件夹的路径。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:60
 msgid "Unique ID of the external volume"
 msgstr "外部卷的唯一 ID"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:61
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
 msgstr "如果备份位置位于外部卷上，此项即为其唯一的文件系统标识符。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:62
 msgid "Full name of the external volume"
 msgstr "外部卷的全名"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:63
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
 msgstr "如果备份位置位于外部卷上，此项即为该卷的详细描述名称。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:64
 msgid "Short name of the external volume"
 msgstr "外部卷的简短名称"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:65
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
 msgstr "如果备份位置位于外部卷上，此项即为该卷的简短名称。"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:66
 msgid "Icon of the external volume"
 msgstr "外部卷的图标"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:54
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:67
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr "如果备份位置位于外部卷上，此项即为该卷的图标。"
@@ -297,7 +356,7 @@ msgstr "如果备份位置位于外部卷上，此项即为该卷的图标。"
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
 #: ../deja-dup/deja-dup.appdata.xml.in.h:1 ../deja-dup/deja-dup.desktop.in.h:2
-#: ../deja-dup/main.vala:78 ../libdeja/CommonUtils.vala:133
+#: ../deja-dup/main.vala:78 ../libdeja/CommonUtils.vala:138
 msgid "Déjà Dup Backup Tool"
 msgstr "Déjà Dup 备份工具"
 
@@ -338,12 +397,11 @@ msgstr "融入 GNOME 桌面"
 #. Translators: "Backups" is a noun
 #: ../deja-dup/deja-dup.desktop.in.h:1
 #: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:1
-#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:1
 #: ../deja-dup/Prompt.vala:93 ../deja-dup/Prompt.vala:128
-#: ../deja-dup/StatusIcon.vala:133 ../deja-dup/StatusIcon.vala:232
+#: ../deja-dup/StatusIcon.vala:134 ../deja-dup/StatusIcon.vala:233
 #: ../deja-dup/monitor/monitor.vala:115
-#: ../deja-dup/preferences/preferences-main.vala:43
-#: ../deja-dup/preferences/preferences-main.vala:123
+#: ../deja-dup/preferences/preferences-main.vala:42
+#: ../deja-dup/preferences/preferences-main.vala:121
 msgid "Backups"
 msgstr "备份"
 
@@ -351,7 +409,7 @@ msgstr "备份"
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
 #: ../deja-dup/monitor/deja-dup-monitor.desktop.in.h:1
-#: ../deja-dup/monitor/monitor.vala:332
+#: ../deja-dup/monitor/monitor.vala:315
 msgid "Backup Monitor"
 msgstr "备份监视器"
 
@@ -360,18 +418,15 @@ msgid "Schedules backups at regular intervals"
 msgstr "每隔一段时间进行定期备份"
 
 #: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:2
-#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:2
 msgid "Change your backup settings"
 msgstr "更改您的备份设置"
 
 #. These keywords are used when searching for applications in dashes, etc.
 #: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:4
-#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:4
 msgid "déjà;deja;dup;"
 msgstr "déjà;deja;dup;备份;"
 
 #: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:5
-#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:5
 msgid "Back Up"
 msgstr "备份"
 
@@ -713,7 +768,7 @@ msgid "_Resume Later"
 msgstr "稍后继续(_R)"
 
 #: ../deja-dup/main.vala:34 ../deja-dup/monitor/monitor.vala:36
-#: ../deja-dup/preferences/preferences-main.vala:87
+#: ../deja-dup/preferences/preferences-main.vala:85
 msgid "Show version"
 msgstr "显示版本号"
 
@@ -848,20 +903,20 @@ msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr "未能成功备份全部文件。更多细节参见对话框。"
 
-#: ../deja-dup/StatusIcon.vala:233
+#: ../deja-dup/StatusIcon.vala:234
 msgid "Starting scheduled backup"
 msgstr "开始计划备份"
 
-#: ../deja-dup/StatusIcon.vala:236
+#: ../deja-dup/StatusIcon.vala:237
 msgid "Show Progress"
 msgstr "显示进度"
 
-#: ../deja-dup/StatusIcon.vala:274
+#: ../deja-dup/StatusIcon.vala:275
 #, c-format
 msgid "%.1f%% complete"
 msgstr "已完成 %.1f%%"
 
-#: ../deja-dup/StatusIcon.vala:287
+#: ../deja-dup/StatusIcon.vala:288
 msgid "Show _Progress"
 msgstr "显示进度(_P)"
 
@@ -869,59 +924,75 @@ msgstr "显示进度(_P)"
 msgid "Scheduled backup delayed"
 msgstr "计划备份被延迟"
 
-#: ../deja-dup/preferences/Preferences.vala:77
-msgid "Categories"
-msgstr "分类"
-
-#: ../deja-dup/preferences/Preferences.vala:129
-msgid "_Restore…"
-msgstr "恢复(_R)..."
-
-#: ../deja-dup/preferences/Preferences.vala:161
+#: ../deja-dup/preferences/Preferences.vala:91
+#: ../deja-dup/preferences/Preferences.vala:243
 msgid "_Back Up Now…"
 msgstr "立即备份(_B)"
 
-#: ../deja-dup/preferences/Preferences.vala:180
+#: ../deja-dup/preferences/Preferences.vala:93
+#: ../deja-dup/preferences/Preferences.vala:197
+msgid "_Restore…"
+msgstr "恢复(_R)..."
+
+#: ../deja-dup/preferences/Preferences.vala:110
+msgid "Could not install"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:144
+msgid "Categories"
+msgstr "分类"
+
+#: ../deja-dup/preferences/Preferences.vala:197
+msgid "_Install…"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:243
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:59
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:81
+msgid "Install…"
+msgstr ""
+
+#: ../deja-dup/preferences/Preferences.vala:275
 msgid "Overview"
 msgstr "概览"
 
-#: ../deja-dup/preferences/Preferences.vala:213
+#: ../deja-dup/preferences/Preferences.vala:308
 msgid "_Storage location"
 msgstr "存储位置(_S)"
 
 #. Translators: storage as in "where to store the backup"
-#: ../deja-dup/preferences/Preferences.vala:230
+#: ../deja-dup/preferences/Preferences.vala:325
 msgid "Storage location"
 msgstr "存储位置"
 
-#: ../deja-dup/preferences/Preferences.vala:255
+#: ../deja-dup/preferences/Preferences.vala:349
 msgid "_Automatic backup"
 msgstr "自动备份(_A)"
 
 #. translators: as in "Every day"
-#: ../deja-dup/preferences/Preferences.vala:267
+#: ../deja-dup/preferences/Preferences.vala:361
 msgid "_Every"
 msgstr "每天(_E)"
 
-#: ../deja-dup/preferences/Preferences.vala:277
+#: ../deja-dup/preferences/Preferences.vala:371
 msgctxt "verb"
 msgid "_Keep"
 msgstr "维持原状(_K)"
 
-#: ../deja-dup/preferences/Preferences.vala:284
+#: ../deja-dup/preferences/Preferences.vala:378
 msgid ""
 "Old backups will be deleted earlier if the storage location is low on space."
 msgstr "存储空间不足时，旧的备份将被删除。"
 
-#: ../deja-dup/preferences/Preferences.vala:294
+#: ../deja-dup/preferences/Preferences.vala:388
 msgid "Scheduling"
 msgstr "调度中"
 
-#: ../deja-dup/preferences/preferences-main.vala:73
+#: ../deja-dup/preferences/preferences-main.vala:71
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../deja-dup/preferences/preferences-main.vala:75
+#: ../deja-dup/preferences/preferences-main.vala:73
 msgid "_Quit"
 msgstr "退出(_Q)"
 
@@ -981,45 +1052,59 @@ msgstr "没有最近进行的备份。"
 msgid "No backup scheduled."
 msgstr "没有计划进行的备份。"
 
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:60
+#, c-format
+msgid ""
+"You can restore existing backups after you first install some necessary "
+"software by clicking the %s button."
+msgstr ""
+
 #. This here encodes a lot of outside GUI information in this widget,
 #. but it's a very special case thing.
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:59
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:69
 msgid "Restore…"
 msgstr "还原..."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:61
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:71
 #, c-format
 msgid "You may use the %s button to browse for existing backups."
 msgstr "您可以通过 %s 按钮浏览已有的备份。"
 
 #. Translators: Files is the user-visible name of nautilus in your language
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:64
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:74
 #, c-format
 msgid ""
 "You can restore the entire backup with the %s button or use Files to either "
 "revert individual files or restore missing ones."
 msgstr "您可以通过 %s 按钮还原完整的备份，或通过“文件”还原单个文件。"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:72
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:82
+#, c-format
+msgid ""
+"You can create a backup after you first install some necessary software by "
+"clicking the %s button."
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:88
 msgid "Back Up Now…"
 msgstr "立即备份..."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:73
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:89
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
 "start one now."
 msgstr "您应当<a href=''>设置</a>自动备份或通过 %s 按钮立即进行一次备份。"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:79
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:95
 msgid "A backup automatically starts every day."
 msgstr "每天自动进行一次备份。"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:81
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
 msgid "A backup automatically starts every week."
 msgstr "每周自动进行一次备份。"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:84
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:100
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1047,47 +1132,55 @@ msgid "Choose folders"
 msgstr "选择文件夹"
 
 #. Now insert remote servers
-#: ../deja-dup/widgets/ConfigLocation.vala:120
+#: ../deja-dup/widgets/ConfigLocation.vala:124
 msgid "SSH"
 msgstr "SSH"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:122
+#: ../deja-dup/widgets/ConfigLocation.vala:126
 msgid "Windows Share"
 msgstr "Windows 共享"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:124
+#: ../deja-dup/widgets/ConfigLocation.vala:128
 msgid "FTP"
 msgstr "FTP"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:126
+#: ../deja-dup/widgets/ConfigLocation.vala:130
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:129
+#: ../deja-dup/widgets/ConfigLocation.vala:133
 msgid "Custom Location"
 msgstr "自定义位置"
 
 #. And a local folder option
-#: ../deja-dup/widgets/ConfigLocation.vala:135
+#: ../deja-dup/widgets/ConfigLocation.vala:139
 msgid "Local Folder"
 msgstr "本地文件夹"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:178 ../libdeja/BackendS3.vala:122
+#: ../deja-dup/widgets/ConfigLocation.vala:182 ../libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:186
+#: ../deja-dup/widgets/ConfigLocation.vala:190
+msgid "Google Cloud Storage"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLocation.vala:198
 msgid "Google Drive"
 msgstr ""
 
-#: ../deja-dup/widgets/ConfigLocation.vala:198 ../libdeja/BackendU1.vala:45
+#: ../deja-dup/widgets/ConfigLocation.vala:210 ../libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:206
+#: ../deja-dup/widgets/ConfigLocation.vala:218
 #: ../libdeja/BackendRackspace.vala:69
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace 云文件"
+
+#: ../deja-dup/widgets/ConfigLocation.vala:226
+msgid "OpenStack Swift"
+msgstr ""
 
 #: ../deja-dup/widgets/ConfigLocationCustom.vala:34
 msgid "_URI"
@@ -1170,7 +1263,7 @@ msgstr "无法显示 %s"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../libdeja/BackendFile.vala:135 ../libdeja/CommonUtils.vala:513
+#: ../libdeja/BackendFile.vala:135 ../libdeja/CommonUtils.vala:518
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s，在 %2$s"
@@ -1282,36 +1375,36 @@ msgstr "显示访问密钥(_H)"
 msgid "_Remember secret access key"
 msgstr "记住访问密钥(_R)"
 
-#: ../libdeja/CommonUtils.vala:432
+#: ../libdeja/CommonUtils.vala:437
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr "无法找到 %s 中的备份工具。您的安装不完整。"
 
-#: ../libdeja/CommonUtils.vala:434
+#: ../libdeja/CommonUtils.vala:439
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr "无法加载备份工具。您的安装不完整。"
 
-#: ../libdeja/CommonUtils.vala:440
+#: ../libdeja/CommonUtils.vala:445
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr "备份工具损坏。您的安装不完整。"
 
-#: ../libdeja/CommonUtils.vala:462
+#: ../libdeja/CommonUtils.vala:467
 msgid "Could not start backup tool"
 msgstr "无法启动备份工具"
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../libdeja/CommonUtils.vala:564
+#: ../libdeja/CommonUtils.vala:569
 #, c-format
 msgid "Home (%s)"
 msgstr "主目录(%s)"
 
 #. Translators: this is the home folder
-#: ../libdeja/CommonUtils.vala:569
+#: ../libdeja/CommonUtils.vala:574
 msgid "Home"
 msgstr "主目录"
 
 #. Translators: this is the trash folder
-#: ../libdeja/CommonUtils.vala:574
+#: ../libdeja/CommonUtils.vala:579
 msgid "Trash"
 msgstr "回收站"
 

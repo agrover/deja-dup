@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-04-10 16:55-0400\n"
-"PO-Revision-Date: 2015-08-27 17:39+0000\n"
+"POT-Creation-Date: 2015-11-29 11:05-0500\n"
+"PO-Revision-Date: 2016-03-04 21:14+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2015-08-28 05:52+0000\n"
-"X-Generator: Launchpad (build 17690)\n"
+"X-Launchpad-Export-Date: 2016-03-05 06:30+0000\n"
+"X-Generator: Launchpad (build 17936)\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
-#: ../deja-dup/preferences/Preferences.vala:191
+#: ../deja-dup/preferences/Preferences.vala:286
 msgid "Folders to save"
 msgstr "Uwzględniane katalogi"
 
@@ -37,7 +37,7 @@ msgstr ""
 "katalogi użytkownika. Ścieżki są względne do katalogu domowego użytkownika."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/preferences/Preferences.vala:202
+#: ../deja-dup/preferences/Preferences.vala:297
 msgid "Folders to ignore"
 msgstr "Ignorowane katalogi"
 
@@ -226,26 +226,54 @@ msgstr ""
 "utworzony w wybranym koszu."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+msgid "Google Cloud Storage Access Key ID"
+msgstr "Identyfikator klucza dostępu do serwisu Google Cloud Storage."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+msgid ""
+"Your Google Cloud Storage Access Key Identifier. This acts as your Google "
+"Cloud Storage username."
+msgstr ""
+"Identyfikator klucza dostępu do serwisu Google Cloud Storage. Jest to nazwa "
+"użytkownika serwisu Google Cloud Storage."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+msgid "The Google Cloud Storage bucket name to use"
+msgstr "Nazwa używanego kubełka serwisu Google Cloud Storage"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+msgid ""
+"Which Google Cloud Storage bucket to store files in. This does not need to "
+"exist already. Only legal hostname strings are valid."
+msgstr ""
+"W którym kubełku serwisu Google Cloud Storage przechowywać pliki. Nie musi "
+"on już istnieć. Prawidłowe są tylko dozwolone ciągi nazwy komputera."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+msgid "The Google Cloud Storage folder"
+msgstr "Katalog serwisu Google Cloud Storage"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid "The email-address of your Google account"
 msgstr "Adres e-mail konta Google"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
 msgid "The email-address of your Google account."
 msgstr "Adres e-mail konta Google."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
 msgid "The folder where backups are stored"
 msgstr "Katalog do przechowywania kopii zapasowych"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
 msgid "The folder hierarchy where backups are stored."
 msgstr "Hierarchia katalogów do przechowywania kopii zapasowych."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
 msgid "The Rackspace Cloud Files container"
 msgstr "Kontener Rackspace Cloud Files"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -253,39 +281,76 @@ msgstr ""
 "W którym kontenerze Rackspace Cloud Files przechowywać pliki. Kontener nie "
 "musi już istnieć. Tylko dozwolone ciągi nazw komputera są dozwolone."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
 msgid "Your Rackspace username"
 msgstr "Nazwa użytkownika usługi Rackspace"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "To jest nazwa użytkownika usługi Rackspace Cloud Files."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+msgid "The OpenStack Swift container"
+msgstr "Kontener OpenStack Swift"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+msgid ""
+"Which OpenStack Swift container to store files in. This does not need to "
+"exist already. Only legal hostname strings are valid."
+msgstr ""
+"W którym kontenerze serwisu OpenStack Swift przechowywać pliki. Nie musi on "
+"już istnieć. Prawidłowe są tylko dozwolone ciągi nazwy komputera."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+msgid "Your OpenStack username"
+msgstr "Nazwa użytkownika serwisu OpenStack"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+msgid "This is your username for the OpenStack Swift service."
+msgstr "Nazwa użytkownika serwisu OpenStack Swift."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+msgid "Your OpenStack tenant"
+msgstr "Dzierżawca serwisu OpenStack"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+msgid "This is your tenant for the OpenStack Swift service."
+msgstr "Dzierżawca serwisu OpenStack Swift."
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
+msgid "Authentication URL"
+msgstr "Adres URL uwierzytelnienia"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
+msgid ""
+"This is the Authentication URL, or keystone URL for the OpenStack service"
+msgstr "Adres URL uwierzytelnienia lub kluczowy adres URL serwisu OpenStack"
+
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:54
 #: ../deja-dup/AssistantRestore.vala:221
 msgid "Backup location"
 msgstr "Położenie kopii zapasowej"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:55
 msgid "Location in which to hold the backup files."
 msgstr "Położenie, w którym przechowywać pliki kopii zapasowych."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:56
 msgid "Folder type"
 msgstr "Typ katalogu"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:57
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Określa, czy położenie kopii zapasowej znajduje się na zamontowanym "
 "woluminie zewnętrznym czy w normalnym katalogu."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:58
 msgid "Relative path under the external volume"
 msgstr "Względna ścieżka woluminu zewnętrznego"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:59
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -293,11 +358,11 @@ msgstr ""
 "Jeśli położenie kopii zapasowej znajduje się na zewnętrznym woluminie, to "
 "jest ścieżka do katalogu na nim."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:60
 msgid "Unique ID of the external volume"
 msgstr "Unikalny identyfikator woluminu zewnętrznego"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:61
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -305,11 +370,11 @@ msgstr ""
 "Jeśli położenie kopii zapasowej znajduje się na zewnętrznym woluminie, to "
 "jest jego unikalny identyfikator systemu plików."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:62
 msgid "Full name of the external volume"
 msgstr "Pełna nazwa zewnętrznego woluminu"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:63
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -317,11 +382,11 @@ msgstr ""
 "Jeśli położenie kopii zapasowej znajduje się na zewnętrznym woluminie, to "
 "jest jego dłuższy opis."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:64
 msgid "Short name of the external volume"
 msgstr "Krótka nazwa woluminu zewnętrznego"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:65
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
@@ -329,11 +394,11 @@ msgstr ""
 "Jeśli położenie kopii zapasowej znajduje się na zewnętrznym woluminie, to "
 "jest jego krótszy opis."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:66
 msgid "Icon of the external volume"
 msgstr "Ikona zewnętrznego woluminu"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:54
+#: ../data/org.gnome.DejaDup.gschema.xml.in.h:67
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
@@ -346,7 +411,7 @@ msgstr ""
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
 #: ../deja-dup/deja-dup.appdata.xml.in.h:1 ../deja-dup/deja-dup.desktop.in.h:2
-#: ../deja-dup/main.vala:78 ../libdeja/CommonUtils.vala:133
+#: ../deja-dup/main.vala:78 ../libdeja/CommonUtils.vala:138
 msgid "Déjà Dup Backup Tool"
 msgstr "Program do tworzenia kopii zapasowych Déjà Dup"
 
@@ -394,12 +459,11 @@ msgstr "Dobrze integruje się ze środowiskiem GNOME"
 #. Translators: "Backups" is a noun
 #: ../deja-dup/deja-dup.desktop.in.h:1
 #: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:1
-#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:1
 #: ../deja-dup/Prompt.vala:93 ../deja-dup/Prompt.vala:128
-#: ../deja-dup/StatusIcon.vala:133 ../deja-dup/StatusIcon.vala:232
+#: ../deja-dup/StatusIcon.vala:134 ../deja-dup/StatusIcon.vala:233
 #: ../deja-dup/monitor/monitor.vala:115
-#: ../deja-dup/preferences/preferences-main.vala:43
-#: ../deja-dup/preferences/preferences-main.vala:123
+#: ../deja-dup/preferences/preferences-main.vala:42
+#: ../deja-dup/preferences/preferences-main.vala:121
 msgid "Backups"
 msgstr "Kopie zapasowe"
 
@@ -407,7 +471,7 @@ msgstr "Kopie zapasowe"
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
 #: ../deja-dup/monitor/deja-dup-monitor.desktop.in.h:1
-#: ../deja-dup/monitor/monitor.vala:332
+#: ../deja-dup/monitor/monitor.vala:315
 msgid "Backup Monitor"
 msgstr "Monitor kopii zapasowych"
 
@@ -416,18 +480,15 @@ msgid "Schedules backups at regular intervals"
 msgstr "Planowanie kopii zapasowych w regularnych odstępach czasu"
 
 #: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:2
-#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:2
 msgid "Change your backup settings"
 msgstr "Zmiana ustawień kopii zapasowych"
 
 #. These keywords are used when searching for applications in dashes, etc.
 #: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:4
-#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:4
 msgid "déjà;deja;dup;"
 msgstr "déjà;deja;dup;"
 
 #: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:5
-#: ../deja-dup/preferences/gnome-deja-dup-panel.desktop.in.h:5
 msgid "Back Up"
 msgstr "Utwórz kopię zapasową"
 
@@ -756,7 +817,7 @@ msgstr "_OK"
 
 #: ../deja-dup/Assistant.vala:299
 msgid "_Forward"
-msgstr "_Naprzód"
+msgstr "_Dalej"
 
 #: ../deja-dup/Assistant.vala:317
 msgid "Co_ntinue"
@@ -785,7 +846,7 @@ msgid "_Resume Later"
 msgstr "_Wznów później"
 
 #: ../deja-dup/main.vala:34 ../deja-dup/monitor/monitor.vala:36
-#: ../deja-dup/preferences/preferences-main.vala:87
+#: ../deja-dup/preferences/preferences-main.vala:85
 msgid "Show version"
 msgstr "Wyświetla wersję"
 
@@ -928,20 +989,20 @@ msgstr ""
 "Niektóre pliki nie zostały dołączone do kopii zapasowej. Więcej informacji "
 "znajduje się w oknie dialogowym."
 
-#: ../deja-dup/StatusIcon.vala:233
+#: ../deja-dup/StatusIcon.vala:234
 msgid "Starting scheduled backup"
 msgstr "Rozpoczynanie zaplanowanego utworzenia kopii zapasowej"
 
-#: ../deja-dup/StatusIcon.vala:236
+#: ../deja-dup/StatusIcon.vala:237
 msgid "Show Progress"
 msgstr "Wyświetl postęp"
 
-#: ../deja-dup/StatusIcon.vala:274
+#: ../deja-dup/StatusIcon.vala:275
 #, c-format
 msgid "%.1f%% complete"
 msgstr "Ukończono %.1f%%"
 
-#: ../deja-dup/StatusIcon.vala:287
+#: ../deja-dup/StatusIcon.vala:288
 msgid "Show _Progress"
 msgstr "Wyświetlanie p_ostępu"
 
@@ -949,61 +1010,77 @@ msgstr "Wyświetlanie p_ostępu"
 msgid "Scheduled backup delayed"
 msgstr "Opóźniono zaplanowane utworzenie kopii zapasowej"
 
-#: ../deja-dup/preferences/Preferences.vala:77
-msgid "Categories"
-msgstr "Kategorie"
-
-#: ../deja-dup/preferences/Preferences.vala:129
-msgid "_Restore…"
-msgstr "P_rzywróć…"
-
-#: ../deja-dup/preferences/Preferences.vala:161
+#: ../deja-dup/preferences/Preferences.vala:91
+#: ../deja-dup/preferences/Preferences.vala:243
 msgid "_Back Up Now…"
 msgstr "_Wykonaj kopię zapasową…"
 
-#: ../deja-dup/preferences/Preferences.vala:180
+#: ../deja-dup/preferences/Preferences.vala:93
+#: ../deja-dup/preferences/Preferences.vala:197
+msgid "_Restore…"
+msgstr "P_rzywróć…"
+
+#: ../deja-dup/preferences/Preferences.vala:110
+msgid "Could not install"
+msgstr "Nie można zainstalować"
+
+#: ../deja-dup/preferences/Preferences.vala:144
+msgid "Categories"
+msgstr "Kategorie"
+
+#: ../deja-dup/preferences/Preferences.vala:197
+msgid "_Install…"
+msgstr "Za_instaluj…"
+
+#: ../deja-dup/preferences/Preferences.vala:243
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:59
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:81
+msgid "Install…"
+msgstr "Zainstaluj…"
+
+#: ../deja-dup/preferences/Preferences.vala:275
 msgid "Overview"
 msgstr "Podsumowanie"
 
-#: ../deja-dup/preferences/Preferences.vala:213
+#: ../deja-dup/preferences/Preferences.vala:308
 msgid "_Storage location"
 msgstr "Położenie p_rzechowywania"
 
 #. Translators: storage as in "where to store the backup"
-#: ../deja-dup/preferences/Preferences.vala:230
+#: ../deja-dup/preferences/Preferences.vala:325
 msgid "Storage location"
 msgstr "Położenie przechowywania"
 
-#: ../deja-dup/preferences/Preferences.vala:255
+#: ../deja-dup/preferences/Preferences.vala:349
 msgid "_Automatic backup"
 msgstr "Automatyczne _kopie zapasowe"
 
 #. translators: as in "Every day"
-#: ../deja-dup/preferences/Preferences.vala:267
+#: ../deja-dup/preferences/Preferences.vala:361
 msgid "_Every"
 msgstr "_Co"
 
-#: ../deja-dup/preferences/Preferences.vala:277
+#: ../deja-dup/preferences/Preferences.vala:371
 msgctxt "verb"
 msgid "_Keep"
 msgstr "_Przechowywanie"
 
-#: ../deja-dup/preferences/Preferences.vala:284
+#: ../deja-dup/preferences/Preferences.vala:378
 msgid ""
 "Old backups will be deleted earlier if the storage location is low on space."
 msgstr ""
 "Starsze kopie zapasowe będą przechowywane do czasu wyczerpania przestrzeni "
 "dyskowej."
 
-#: ../deja-dup/preferences/Preferences.vala:294
+#: ../deja-dup/preferences/Preferences.vala:388
 msgid "Scheduling"
 msgstr "Planowanie"
 
-#: ../deja-dup/preferences/preferences-main.vala:73
+#: ../deja-dup/preferences/preferences-main.vala:71
 msgid "_Help"
 msgstr "Pomo_c"
 
-#: ../deja-dup/preferences/preferences-main.vala:75
+#: ../deja-dup/preferences/preferences-main.vala:73
 msgid "_Quit"
 msgstr "Za_kończ"
 
@@ -1069,19 +1146,28 @@ msgstr "Brak ostatnich kopii."
 msgid "No backup scheduled."
 msgstr "Brak zaplanowanych kopii zapasowych."
 
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:60
+#, c-format
+msgid ""
+"You can restore existing backups after you first install some necessary "
+"software by clicking the %s button."
+msgstr ""
+"Można przywrócić istniejące kopie zapasowe po zainstalowaniu wymaganego "
+"oprogramowania klikając przycisk %s."
+
 #. This here encodes a lot of outside GUI information in this widget,
 #. but it's a very special case thing.
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:59
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:69
 msgid "Restore…"
 msgstr "Przywróć…"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:61
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:71
 #, c-format
 msgid "You may use the %s button to browse for existing backups."
 msgstr "Można użyć przycisku %s, aby przeglądać istniejące kopie zapasowe."
 
 #. Translators: Files is the user-visible name of nautilus in your language
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:64
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:74
 #, c-format
 msgid ""
 "You can restore the entire backup with the %s button or use Files to either "
@@ -1090,11 +1176,20 @@ msgstr ""
 "Można przywrócić całą kopię zapasową za pomocą przycisku %s lub poszczególne "
 "pliki używając menedżera plików."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:72
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:82
+#, c-format
+msgid ""
+"You can create a backup after you first install some necessary software by "
+"clicking the %s button."
+msgstr ""
+"Można utworzyć kopię zapasową po zainstalowaniu wymaganego oprogramowania "
+"klikając przycisk %s."
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:88
 msgid "Back Up Now…"
 msgstr "Wykonaj kopię zapasową…"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:73
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:89
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
@@ -1103,15 +1198,15 @@ msgstr ""
 "Należy <a href=''>włączyć</a> automatyczne tworzenie kopii zapasowych lub "
 "użyć przycisku %s, aby utworzyć kopię w tej chwili."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:79
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:95
 msgid "A backup automatically starts every day."
 msgstr "Kopia zapasowa jest automatycznie wykonywana każdego dnia."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:81
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
 msgid "A backup automatically starts every week."
 msgstr "Kopia zapasowa jest automatycznie wykonywana każdego tygodnia."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:84
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:100
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1141,47 +1236,55 @@ msgid "Choose folders"
 msgstr "Wybór katalogów"
 
 #. Now insert remote servers
-#: ../deja-dup/widgets/ConfigLocation.vala:120
+#: ../deja-dup/widgets/ConfigLocation.vala:124
 msgid "SSH"
 msgstr "SSH"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:122
+#: ../deja-dup/widgets/ConfigLocation.vala:126
 msgid "Windows Share"
 msgstr "Udział Windows"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:124
+#: ../deja-dup/widgets/ConfigLocation.vala:128
 msgid "FTP"
 msgstr "FTP"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:126
+#: ../deja-dup/widgets/ConfigLocation.vala:130
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:129
+#: ../deja-dup/widgets/ConfigLocation.vala:133
 msgid "Custom Location"
 msgstr "Własne położenie"
 
 #. And a local folder option
-#: ../deja-dup/widgets/ConfigLocation.vala:135
+#: ../deja-dup/widgets/ConfigLocation.vala:139
 msgid "Local Folder"
 msgstr "Katalog lokalny"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:178 ../libdeja/BackendS3.vala:122
+#: ../deja-dup/widgets/ConfigLocation.vala:182 ../libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:186
+#: ../deja-dup/widgets/ConfigLocation.vala:190
+msgid "Google Cloud Storage"
+msgstr "Google Cloud Storage"
+
+#: ../deja-dup/widgets/ConfigLocation.vala:198
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:198 ../libdeja/BackendU1.vala:45
+#: ../deja-dup/widgets/ConfigLocation.vala:210 ../libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:206
+#: ../deja-dup/widgets/ConfigLocation.vala:218
 #: ../libdeja/BackendRackspace.vala:69
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
+
+#: ../deja-dup/widgets/ConfigLocation.vala:226
+msgid "OpenStack Swift"
+msgstr "OpenStack Swift"
 
 #: ../deja-dup/widgets/ConfigLocationCustom.vala:34
 msgid "_URI"
@@ -1268,7 +1371,7 @@ msgstr "Nie można wyświetlić %s"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../libdeja/BackendFile.vala:135 ../libdeja/CommonUtils.vala:513
+#: ../libdeja/BackendFile.vala:135 ../libdeja/CommonUtils.vala:518
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s w %2$s"
@@ -1384,42 +1487,42 @@ msgstr "_Wyświetlanie tajnego hasła dostępu"
 msgid "_Remember secret access key"
 msgstr "_Zapamiętanie tajnego hasła dostępu"
 
-#: ../libdeja/CommonUtils.vala:432
+#: ../libdeja/CommonUtils.vala:437
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 "Nie można odnaleźć narzędzia do tworzenia kopii zapasowych w %s. Instalacja "
 "jest niepełna."
 
-#: ../libdeja/CommonUtils.vala:434
+#: ../libdeja/CommonUtils.vala:439
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 "Nie można wczytać narzędzia do tworzenia kopii zapasowych. Instalacja jest "
 "niepełna."
 
-#: ../libdeja/CommonUtils.vala:440
+#: ../libdeja/CommonUtils.vala:445
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 "Narzędzie do tworzenia kopii zapasowych jest uszkodzone. Instalacja jest "
 "niepełna."
 
-#: ../libdeja/CommonUtils.vala:462
+#: ../libdeja/CommonUtils.vala:467
 msgid "Could not start backup tool"
 msgstr "Nie można uruchomić narzędzia do tworzenia kopii zapasowych"
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../libdeja/CommonUtils.vala:564
+#: ../libdeja/CommonUtils.vala:569
 #, c-format
 msgid "Home (%s)"
 msgstr "Katalog domowy (%s)"
 
 #. Translators: this is the home folder
-#: ../libdeja/CommonUtils.vala:569
+#: ../libdeja/CommonUtils.vala:574
 msgid "Home"
 msgstr "Katalog domowy"
 
 #. Translators: this is the trash folder
-#: ../libdeja/CommonUtils.vala:574
+#: ../libdeja/CommonUtils.vala:579
 msgid "Trash"
 msgstr "Kosz"
 
