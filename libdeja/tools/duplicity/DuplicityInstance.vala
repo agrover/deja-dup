@@ -393,23 +393,23 @@ internal class DuplicityInstance : Object
   
   static string compress_string(string s_in)
   {
-    char[] rv = new char[s_in.length+1];
+    var rv = new StringBuilder.sized(s_in.length);
     weak char[] s = (char[])s_in;
     
-    int i = 0, j = 0;
+    int i = 0;
     while (s[i] != 0) {
       if (s[i] == '\\' && s[i+1] != 0) {
         bool bare_escape = false;
         
         // http://docs.python.org/reference/lexical_analysis.html
         switch (s[i+1]) {
-        case 'b': rv[j++] = '\b'; i += 2; break; // backspace
-        case 'f': rv[j++] = '\f'; i += 2; break; // form feed
-        case 't': rv[j++] = '\t'; i += 2; break; // tab
-        case 'n': rv[j++] = '\n'; i += 2; break; // line feed
-        case 'r': rv[j++] = '\r'; i += 2; break; // carriage return
-        case 'v': rv[j++] = '\xb'; i += 2; break; // vertical tab
-        case 'a': rv[j++] = '\x7'; i += 2; break; // bell
+        case 'b': rv.append_c('\b'); i += 2; break; // backspace
+        case 'f': rv.append_c('\f'); i += 2; break; // form feed
+        case 't': rv.append_c('\t'); i += 2; break; // tab
+        case 'n': rv.append_c('\n'); i += 2; break; // line feed
+        case 'r': rv.append_c('\r'); i += 2; break; // carriage return
+        case 'v': rv.append_c('\xb'); i += 2; break; // vertical tab
+        case 'a': rv.append_c('\x7'); i += 2; break; // bell
         case 'x':
           // start of a hex number
           if (s[i+2] != 0 && s[i+3] != 0) {
@@ -417,7 +417,7 @@ internal class DuplicityInstance : Object
             tmpstr[0] = s[i+2];
             tmpstr[1] = s[i+3];
             var val = ((string)tmpstr).to_ulong(null, 16);
-            rv[j++] = (char)val;
+            rv.append_unichar((unichar)val);
             i += 4;
           }
           else
@@ -438,7 +438,7 @@ internal class DuplicityInstance : Object
             tmpstr[1] = s[i+3];
             tmpstr[2] = s[i+4];
             var val = ((string)tmpstr).to_ulong(null, 8);
-            rv[j++] = (char)val;
+            rv.append_unichar((unichar)val);
             i += 5;
           }
           else
@@ -448,14 +448,14 @@ internal class DuplicityInstance : Object
           bare_escape = true; break;
         }
         if (bare_escape) {
-          rv[j++] = s[i+1]; i+=2;
+          rv.append_c(s[i+1]); i+=2;
         }
       }
       else
-        rv[j++] = s[i++];
+        rv.append_c(s[i++]);
     }
     
-    return (string)rv;
+    return rv.str;
   }
   
   static void split_line(string line, out string[] split)
