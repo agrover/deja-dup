@@ -134,7 +134,7 @@ class DejaDupApp : Object
     else if (restoremissing_mode) {
       File list_directory = File.new_for_commandline_arg(filenames[0]);
       if (!list_directory.query_exists(null)) {
-        printerr("%s\n", _("Directory does not exists"));
+        printerr("%s\n", _("Directory does not exist"));
         return 1;
       }
       if (list_directory.query_file_type (0, null) != FileType.DIRECTORY) {
