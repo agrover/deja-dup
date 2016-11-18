@@ -9,7 +9,7 @@ Type=backup
 Script=mkdir -p @TEST_HOME@/mockcopy && cp -r @MOCK_DIR@/* @TEST_HOME@/mockcopy && ln -s `which python3` @TEST_HOME@/mockcopy/python3
 Path=@TEST_HOME@/mockcopy
 Success=false
-Error=Failed to execute child process "duplicity" (No such file or directory)
+ErrorRegex=Failed to execute child process [“"]duplicity["”] \\(No such file or directory\\)
 
 [Duplicity]
 Runs=status;dry;
