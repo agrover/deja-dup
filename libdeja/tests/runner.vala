@@ -251,6 +251,7 @@ class BackupRunner : Object
   public bool cancelled = false;
   public string? detail = null;
   public string? error_str = null;
+  public string? error_regex = null;
   public string? error_detail = null;
   public string? restore_date = null;
   public List<File> restore_files = null;
@@ -290,11 +291,14 @@ class BackupRunner : Object
 
     op.raise_error.connect((str, det) => {
       Test.message("Error: %s, %s", str, det);
-      if (error_str != str)
+      if (error_str != null && error_str != str)
         warning("Error string didn't match; expected %s, got %s", error_str, str);
+      if (error_regex != null && !GLib.Regex.match_simple (error_regex, str))
+        warning("Error string didn't match regex; expected %s, got %s", error_regex, str);
       if (error_detail != det)
         warning("Error detail didn't match; expected %s, got %s", error_detail, det);
       error_str = null;
+      error_regex = null;
       error_detail = null;
     });
 
@@ -436,6 +440,8 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
     br.init_error = keyfile.get_string(group, "InitError");
   if (keyfile.has_key(group, "Error"))
     br.error_str = keyfile.get_string(group, "Error");
+  if (keyfile.has_key(group, "ErrorRegex"))
+    br.error_regex = keyfile.get_string(group, "ErrorRegex");
   if (keyfile.has_key(group, "ErrorDetail"))
     br.error_detail = keyfile.get_string(group, "ErrorDetail");
   if (keyfile.has_key(group, "Passphrases"))
