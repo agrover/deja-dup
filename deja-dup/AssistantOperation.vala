@@ -254,7 +254,8 @@ public abstract class AssistantOperation : Assistant
     progress_scroll.set("child", progress_text,
                         "hscrollbar-policy", Gtk.PolicyType.AUTOMATIC,
                         "vscrollbar-policy", Gtk.PolicyType.AUTOMATIC,
-                        "border-width", 0);
+                        "border-width", 0,
+                        "min-content-height", 200);
     progress_expander = new Gtk.Expander.with_mnemonic(_("_Details"));
     progress_expander.set("child", progress_scroll);
     progress_expander.expand = true;
