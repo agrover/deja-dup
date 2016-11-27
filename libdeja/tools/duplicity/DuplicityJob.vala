@@ -399,6 +399,12 @@ internal class DuplicityJob : DejaDup.ToolJob
       else {
         if (has_progress_total)
           progress(0f);
+        if (is_full_backup) {
+          // Make sure duplicity has to verify new password against the
+          // existing backup files by deleting any unencrypted caches.  And
+          // helps us keep the size of the cache down over time.
+          delete_cache();
+        }
       }
       
       break;
@@ -826,7 +832,7 @@ internal class DuplicityJob : DejaDup.ToolJob
       return;
 
     var cachedir = Path.build_filename(dir, Config.PACKAGE);
-    var del = new DejaDup.RecursiveDelete(File.new_for_path(cachedir));
+    var del = new DejaDup.RecursiveDelete(File.new_for_path(cachedir), "metadata");
     del.start();
   }
 

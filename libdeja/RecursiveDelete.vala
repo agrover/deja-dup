@@ -23,9 +23,13 @@ namespace DejaDup {
 
 public class RecursiveDelete : RecursiveOp
 {
-  public RecursiveDelete(File source)
+  // skip should probably be an array of files to skip, instead of just a single
+  // filename, but since we don't *need* that yet, we don't bother.
+  public string? skip {get; construct;}
+
+  public RecursiveDelete(File source, string? skip = null)
   {
-    Object(src: source);
+    Object(src: source, skip: skip);
   }
   
   protected override void handle_file()
@@ -51,11 +55,14 @@ public class RecursiveDelete : RecursiveOp
     }
   }
   
-  protected override RecursiveOp clone_for_info(FileInfo info)
+  protected override RecursiveOp? clone_for_info(FileInfo info)
   {
     var child_name = info.get_name();
+    if (child_name == skip)
+      return null;
+
     var src_child = src.get_child(child_name);
-    return new RecursiveDelete(src_child);
+    return new RecursiveDelete(src_child); // intentionally doesn't pass skip name
   }
 }
 

@@ -34,7 +34,7 @@ public abstract class RecursiveOp : Object
   protected virtual void handle_file() {} // src is file
   protected virtual void handle_dir() {} // src is dir
   protected virtual void finish_dir() {} // src is dir we are done with
-  protected abstract RecursiveOp clone_for_info(FileInfo info);
+  protected abstract RecursiveOp? clone_for_info(FileInfo info);
   
   int refs;
   
@@ -74,6 +74,10 @@ public abstract class RecursiveOp : Object
   {
     add_ref();
     var op = clone_for_info(info);
+    if (op == null) {
+      remove_ref();
+      return;
+    }
     op.ref();
     op.done.connect((m) => {remove_ref(); m.unref();});
     op.raise_error.connect((m, s, d, e) => {raise_error(s, d, e);}); // percolate up

@@ -155,7 +155,7 @@ public class RecursiveMove : RecursiveOp
     }
   }
   
-  protected override RecursiveOp clone_for_info(FileInfo info)
+  protected override RecursiveOp? clone_for_info(FileInfo info)
   {
     var child_name = info.get_name();
     var src_child = src.get_child(child_name);

@@ -1,0 +1,22 @@
+# When we do a new full backup, make sure clean the cache.  This is necessary
+# to make sure we don't accept a password for the new full backup that's
+# different from the old full backup, by forcing duplicity to re-decrypt the
+# cache files with the new password.
+
+[Operation]
+Type=backup
+IsFull=true
+Script=mkdir -p @XDG_CACHE_HOME@/deja-dup/canary
+
+[Duplicity]
+Runs=status;dry;backup;status-restore;list;verify;
+
+[Duplicity status]
+#echo "INFO 3"
+#echo "chain-complete"
+#echo " full $(date --utc --date='91 days ago' +%Y%m%dT%H%M%SZ) 1 noenc"
+OutputScript=true
+Script=test -d @XDG_CACHE_HOME@/deja-dup/canary
+
+[Duplicity backup]
+Script=test ! -d @XDG_CACHE_HOME@/deja-dup/canary
