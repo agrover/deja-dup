@@ -29,30 +29,34 @@ public string get_trash_path()
 public string? parse_keywords(string dir)
 {
   string result = null;
-  if (dir == "$HOME")
-    result = Environment.get_home_dir();
-  else if (dir == "$DESKTOP")
-    result = Environment.get_user_special_dir(UserDirectory.DESKTOP);
-  else if (dir == "$DOCUMENTS")
-    result = Environment.get_user_special_dir(UserDirectory.DOCUMENTS);
-  else if (dir == "$DOWNLOAD")
-    result = Environment.get_user_special_dir(UserDirectory.DOWNLOAD);
-  else if (dir == "$MUSIC")
-    result = Environment.get_user_special_dir(UserDirectory.MUSIC);
-  else if (dir == "$PICTURES")
-    result = Environment.get_user_special_dir(UserDirectory.PICTURES);
-  else if (dir == "$PUBLIC_SHARE")
-    result = Environment.get_user_special_dir(UserDirectory.PUBLIC_SHARE);
-  else if (dir == "$TEMPLATES")
-    result = Environment.get_user_special_dir(UserDirectory.TEMPLATES);
-  else if (dir == "$TRASH")
-    result = get_trash_path();
-  else if (dir == "$VIDEOS")
-    result = Environment.get_user_special_dir(UserDirectory.VIDEOS);
+
+  // Replace special variables when they are at the start of a larger path
+  // The resulting string is an absolute path
+  if (dir.has_prefix("$HOME"))
+    result = dir.replace("$HOME", Environment.get_home_dir());
+  else if (dir.has_prefix("$DESKTOP"))
+    result = dir.replace("$DESKTOP", Environment.get_user_special_dir(UserDirectory.DESKTOP));
+  else if (dir.has_prefix("$DOCUMENTS"))
+    result = dir.replace("$DOCUMENTS", Environment.get_user_special_dir(UserDirectory.DOCUMENTS));
+  else if (dir.has_prefix("$DOWNLOAD"))
+    result = dir.replace("$DOWNLOAD", Environment.get_user_special_dir(UserDirectory.DOWNLOAD));
+  else if (dir.has_prefix("$MUSIC"))
+    result = dir.replace("$MUSIC", Environment.get_user_special_dir(UserDirectory.MUSIC));
+  else if (dir.has_prefix("$PICTURES"))
+    result = dir.replace("$PICTURES", Environment.get_user_special_dir(UserDirectory.PICTURES));
+  else if (dir.has_prefix("$PUBLIC_SHARE"))
+    result = dir.replace("$PUBLIC_SHARE", Environment.get_user_special_dir(UserDirectory.PUBLIC_SHARE));
+  else if (dir.has_prefix("$TEMPLATES"))
+    result = dir.replace("$TEMPLATES", Environment.get_user_special_dir(UserDirectory.TEMPLATES));
+  else if (dir.has_prefix("$TRASH"))
+    result = dir.replace("$TRASH", get_trash_path());
+  else if (dir.has_prefix("$VIDEOS"))
+    result = dir.replace("$VIDEOS", Environment.get_user_special_dir(UserDirectory.VIDEOS));
   else {
-    // Some variables can be placed inside a larger path, so replace those
+    // Some variables can be placed anywhere in the path
     result = dir.replace("$USER", Environment.get_user_name());
 
+    // Relative paths are relative to the user's home directory
     if (Uri.parse_scheme(result) == null && !Path.is_absolute(result))
       result = Path.build_filename(Environment.get_home_dir(), result);
   }
