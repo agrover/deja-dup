@@ -22,12 +22,15 @@
 # point at a custom dconf location and $HOME.
 
 TOPDIR=$(readlink -e "$(dirname ${0})/..")
-BUILDDIR="$TOPDIR/builddir"
+BUILDDIR="${TOPDIR}/builddir"
 
 
 # Create fake home environment
 ROOTDIR=$(mktemp -d --tmpdir dd.XXXXXXXXXX)
 export DEJA_DUP_TEST_ROOT="${ROOTDIR}"
+
+OLD_HOME="${HOME}"
+HOME="${ROOTDIR}"
 
 mkdir -p "${ROOTDIR}/cache"
 export XDG_CACHE_HOME="${ROOTDIR}/cache"
@@ -37,6 +40,15 @@ export XDG_CONFIG_HOME="${ROOTDIR}/config"
 
 mkdir -p "${ROOTDIR}/gnupg"
 export GNUPGHOME="${ROOTDIR}/gnupg"
+
+if [ -f "${OLD_HOME}/.config/user-dirs.dirs" -a -f "${OLD_HOME}/.config/user-dirs.locale" ]; then
+  cp "${OLD_HOME}/.config/user-dirs.dirs" "${XDG_CONFIG_HOME}/user-dirs.dirs"
+  cp "${OLD_HOME}/.config/user-dirs.locale" "${XDG_CONFIG_HOME}/user-dirs.locale"
+  . "${XDG_CONFIG_HOME}/user-dirs.dirs"
+  for d in DESKTOP DOCUMENTS DOWNLOAD MUSIC PICTURES PUBLICSHARE TEMPLATES VIDEOS; do
+    eval mkdir -p "\${XDG_${d}_DIR}"
+  done
+fi
 
 
 # For convenience, make some potentially useful folders
@@ -57,6 +69,8 @@ if [ "$SHNAME" = "shell" ]; then
   mkdir -p "${XDG_DATA_HOME}/deja-dup/ui"
   cp "${TOPDIR}/deja-dup/ui/"* "${XDG_DATA_HOME}/deja-dup/ui"
 
+  mkdir -p "${XDG_DATA_HOME}/Trash"
+
   export DEJA_DUP_TOOLS_PATH="${BUILDDIR}/libdeja/tools/duplicity"
   export PATH="${BUILDDIR}/deja-dup/monitor:${BUILDDIR}/deja-dup:${BUILDDIR}/deja-dup/preferences:${PATH}"
 
@@ -74,7 +88,7 @@ if [ -z "$ARGS" ]; then
   ARGS="bash --norc"
 
   # Explain the details
-  echo "Your data playground is ${ROOTDIR}"
+  echo "Your data playground and home directory is ${ROOTDIR}"
   echo "Run deja-dup, deja-dup-preferences, or deja-dup-monitor to test."
   echo "Run exit to leave."
   echo "Run exit 1 to leave and keep data playground intact."
