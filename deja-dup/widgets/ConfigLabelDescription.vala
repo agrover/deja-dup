@@ -70,8 +70,11 @@ public class ConfigLabelDescription : ConfigLabel
     if (val == "" || !time.from_iso8601(val))
       label.label = _("You may use the %s button to browse for existing backups.").printf(button_name);
     else {
-      // Translators: Files is the user-visible name of nautilus in your language
-      label.label = _("You can restore the entire backup with the %s button or use Files to either revert individual files or restore missing ones.").printf(button_name);
+      // Translators: Files is the user-visible name of Nautilus in your language
+      var file_manager = "Files";
+      if (Environment.get_variable("XDG_CURRENT_DESKTOP") == "MATE")
+        file_manager = "Caja";
+      label.label = _("You can restore the entire backup with the %s button or use %s to either revert individual files or restore missing ones.").printf(button_name, file_manager);
     }
   }
 
