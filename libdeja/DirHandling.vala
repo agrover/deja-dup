@@ -30,28 +30,32 @@ public string? parse_keywords(string dir)
 {
   string result = dir;
 
+  // If vala supported a direct map syntax, I'd use that.  But instead, let's
+  // use two arrays.
+  string[] dirs = { "$DESKTOP", "$DOCUMENTS", "$DOWNLOAD", "$MUSIC",
+                    "$PICTURES", "$PUBLIC_SHARE", "$TEMPLATES", "$VIDEOS" };
+  UserDirectory[] enums = { UserDirectory.DESKTOP, UserDirectory.DOCUMENTS,
+                            UserDirectory.DOWNLOAD, UserDirectory.MUSIC,
+                            UserDirectory.PICTURES, UserDirectory.PUBLIC_SHARE,
+                            UserDirectory.TEMPLATES, UserDirectory.VIDEOS };
+  assert(dirs.length == enums.length);
+
   // Replace special variables when they are at the start of a larger path
   // The resulting string is an absolute path
   if (result.has_prefix("$HOME"))
     result = result.replace("$HOME", Environment.get_home_dir());
-  else if (result.has_prefix("$DESKTOP"))
-    result = result.replace("$DESKTOP", Environment.get_user_special_dir(UserDirectory.DESKTOP));
-  else if (result.has_prefix("$DOCUMENTS"))
-    result = result.replace("$DOCUMENTS", Environment.get_user_special_dir(UserDirectory.DOCUMENTS));
-  else if (result.has_prefix("$DOWNLOAD"))
-    result = result.replace("$DOWNLOAD", Environment.get_user_special_dir(UserDirectory.DOWNLOAD));
-  else if (result.has_prefix("$MUSIC"))
-    result = result.replace("$MUSIC", Environment.get_user_special_dir(UserDirectory.MUSIC));
-  else if (result.has_prefix("$PICTURES"))
-    result = result.replace("$PICTURES", Environment.get_user_special_dir(UserDirectory.PICTURES));
-  else if (result.has_prefix("$PUBLIC_SHARE"))
-    result = result.replace("$PUBLIC_SHARE", Environment.get_user_special_dir(UserDirectory.PUBLIC_SHARE));
-  else if (result.has_prefix("$TEMPLATES"))
-    result = result.replace("$TEMPLATES", Environment.get_user_special_dir(UserDirectory.TEMPLATES));
   else if (result.has_prefix("$TRASH"))
     result = result.replace("$TRASH", get_trash_path());
-  else if (result.has_prefix("$VIDEOS"))
-    result = result.replace("$VIDEOS", Environment.get_user_special_dir(UserDirectory.VIDEOS));
+  else {
+    for (int i = 0; i < dirs.length; i++) {
+      if (result.has_prefix(dirs[i])) {
+        var replacement = Environment.get_user_special_dir(enums[i]);
+        if (replacement != null)
+          result = result.replace(dirs[i], replacement);
+        break;
+      }
+    }
+  }
 
   // Some variables can be placed anywhere in the path
   result = result.replace("$USER", Environment.get_user_name());
