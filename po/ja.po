@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-04-07 12:03-0400\n"
-"PO-Revision-Date: 2016-01-20 06:14+0000\n"
+"PO-Revision-Date: 2017-03-04 04:27+0000\n"
 "Last-Translator: Akira Tanaka <root.167d36d4acb91@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2016-11-22 06:19+0000\n"
-"X-Generator: Launchpad (build 18269)\n"
+"X-Launchpad-Export-Date: 2017-03-05 06:25+0000\n"
+"X-Generator: Launchpad (build 18329)\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 #: ../deja-dup/preferences/Preferences.vala:286
@@ -46,6 +46,9 @@ msgid ""
 "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
 "directories. Relative entries are relative to the user’s home directory."
 msgstr ""
+"次のディレクトリー一覧はバックアップされません。予約値 "
+"$HOME、$DESKTOP、$DOCUMENTS、$DOWNLOAD、$MUSIC、$PICTURES、$PUBLIC_SHARE、$TEMPLATES"
+"、$TRASH そして $VIDEO はユーザーの特殊ディレクトリーと認識されます。相対パスの項目は、ユーザーのホームディレクトリーからの相対パスです。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
 msgid "Whether to request the root password"
@@ -163,7 +166,7 @@ msgstr "バックアップを保存する場所のタイプ"
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
-msgstr ""
+msgstr "バックアップ場所の指定。'auto'にした場合は、利用できる場所をデフォルトとして用います。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
 msgid "Amazon S3 Access Key ID"
@@ -182,6 +185,7 @@ msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr ""
+"どの Amazon S3 バケットにファイルを保存するかです。保存先はまだ存在していなくてもかまいません。基準を満たしたホスト名の文字列のみ有効です。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
 msgid "The Amazon S3 folder"
@@ -195,7 +199,7 @@ msgstr "ファイルを置く任意のフォルダー名。選択したバケッ
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
 msgid "Google Cloud Storage Access Key ID"
-msgstr ""
+msgstr "Google クラウドストレージアクセスキー ID"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
 msgid ""
@@ -205,17 +209,19 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
 msgid "The Google Cloud Storage bucket name to use"
-msgstr ""
+msgstr "使用するGoogle クラウドストレージのバケット名"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
 msgid ""
 "Which Google Cloud Storage bucket to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
+"ファイルの保存にはどのGoogle "
+"クラウドストレージのバケットを使用するか。既に存在しているものである必要はありません。正しいホスト名の文字列のみが有効です。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
 msgid "The Google Cloud Storage folder"
-msgstr ""
+msgstr "Google クラウドストレージ フォルダ"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
 msgid "The email-address of your Google account"
@@ -255,21 +261,23 @@ msgstr "Rackspace Cloud Filesサービスのユーザー名"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
 msgid "The OpenStack Swift container"
-msgstr ""
+msgstr "OpenStack Swift コンテナ"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
 msgid ""
 "Which OpenStack Swift container to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
+"ファイルの保存にはどのOpenStack Swift "
+"コンテナを使用するか。既に存在しているものである必要はありません。正しいホスト名の文字列のみが有効です。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
 msgid "Your OpenStack username"
-msgstr ""
+msgstr "OpenStack ユーザ名"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
 msgid "This is your username for the OpenStack Swift service."
-msgstr ""
+msgstr "OpenStack Swift サービスのユーザ名です。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
 msgid "Your OpenStack tenant"
@@ -281,7 +289,7 @@ msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
 msgid "Authentication URL"
-msgstr ""
+msgstr "認証 URL"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
 msgid ""
@@ -512,59 +520,59 @@ msgstr "バックアップ中…"
 msgid "Scanning:"
 msgstr "スキャン中:"
 
-#: ../deja-dup/AssistantOperation.vala:258
+#: ../deja-dup/AssistantOperation.vala:259
 msgid "_Details"
 msgstr "詳細(_D)"
 
-#: ../deja-dup/AssistantOperation.vala:306
+#: ../deja-dup/AssistantOperation.vala:307
 msgid "_Allow restoring without a password"
 msgstr "パスワード無しで復元を許可する(_A)"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:313
 msgid "_Password-protect your backup"
 msgstr "バックアップをパスワードで保護する(_P)"
 
-#: ../deja-dup/AssistantOperation.vala:324
+#: ../deja-dup/AssistantOperation.vala:325
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr "ファイルを復元するには、パスワードの入力が必要です。どこかに書き留めておくと良いでしょう。"
 
-#: ../deja-dup/AssistantOperation.vala:339
-#: ../deja-dup/AssistantOperation.vala:408
+#: ../deja-dup/AssistantOperation.vala:340
+#: ../deja-dup/AssistantOperation.vala:409
 msgid "E_ncryption password"
 msgstr "暗号化パスワード(_N)"
 
-#: ../deja-dup/AssistantOperation.vala:356
+#: ../deja-dup/AssistantOperation.vala:357
 msgid "Confir_m password"
 msgstr "パスワードの確認(_M)"
 
-#: ../deja-dup/AssistantOperation.vala:369
-#: ../deja-dup/AssistantOperation.vala:417
+#: ../deja-dup/AssistantOperation.vala:370
+#: ../deja-dup/AssistantOperation.vala:418
 msgid "_Show password"
 msgstr "パスワードを表示する(_S)"
 
-#: ../deja-dup/AssistantOperation.vala:376
+#: ../deja-dup/AssistantOperation.vala:377
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "パスワードを記憶する(_R)"
 
-#: ../deja-dup/AssistantOperation.vala:395
+#: ../deja-dup/AssistantOperation.vala:396
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
 "brief restore test."
 msgstr "緊急時にファイルの復元ができるかどうかのチェックを行います。簡単な復元テストを行うために暗号化パスワードをもう一度入力してください。"
 
-#: ../deja-dup/AssistantOperation.vala:422
+#: ../deja-dup/AssistantOperation.vala:423
 msgid "Test every two _months"
-msgstr ""
+msgstr "2ヶ月おきにテストする (_M)"
 
-#: ../deja-dup/AssistantOperation.vala:496
+#: ../deja-dup/AssistantOperation.vala:497
 msgid "Summary"
 msgstr "設定一覧"
 
-#: ../deja-dup/AssistantOperation.vala:518
+#: ../deja-dup/AssistantOperation.vala:519
 msgid "Restore Test"
 msgstr "復元テスト"
 
@@ -574,21 +582,21 @@ msgstr "復元テスト"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: ../deja-dup/AssistantOperation.vala:594
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:696
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1075
+#: ../deja-dup/AssistantOperation.vala:595
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:702
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1081
 msgid "Failed with an unknown error."
 msgstr "不明なエラーで失敗しました"
 
-#: ../deja-dup/AssistantOperation.vala:791
+#: ../deja-dup/AssistantOperation.vala:792
 msgid "Require Password?"
 msgstr "パスワードを要求しますか？"
 
-#: ../deja-dup/AssistantOperation.vala:793
+#: ../deja-dup/AssistantOperation.vala:794
 msgid "Encryption Password Needed"
 msgstr "暗号化パスワードが必要です。"
 
-#: ../deja-dup/AssistantOperation.vala:865
+#: ../deja-dup/AssistantOperation.vala:866
 msgid "Backup encryption password"
 msgstr "バックアップ暗号化パスワード"
 
@@ -948,7 +956,7 @@ msgstr "復元(_R)…"
 
 #: ../deja-dup/preferences/Preferences.vala:110
 msgid "Could not install"
-msgstr ""
+msgstr "インストールできませんでした"
 
 #: ../deja-dup/preferences/Preferences.vala:144
 msgid "Categories"
@@ -956,13 +964,13 @@ msgstr "カテゴリー"
 
 #: ../deja-dup/preferences/Preferences.vala:197
 msgid "_Install…"
-msgstr ""
+msgstr "インストール(_I)..."
 
 #: ../deja-dup/preferences/Preferences.vala:243
 #: ../deja-dup/widgets/ConfigLabelDescription.vala:59
 #: ../deja-dup/widgets/ConfigLabelDescription.vala:81
 msgid "Install…"
-msgstr ""
+msgstr "インストール…"
 
 #: ../deja-dup/preferences/Preferences.vala:275
 msgid "Overview"
@@ -1069,7 +1077,7 @@ msgstr "バックアップの予定はありません。"
 msgid ""
 "You can restore existing backups after you first install some necessary "
 "software by clicking the %s button."
-msgstr ""
+msgstr "既存のバックアップをリストアするには、まず %s ボタンをクリックして必要なソフトウェアをインストールしてください。"
 
 #. This here encodes a lot of outside GUI information in this widget,
 #. but it's a very special case thing.
@@ -1095,7 +1103,7 @@ msgstr "%s ボタンを押してバックアップ全体を復元するか、「
 msgid ""
 "You can create a backup after you first install some necessary software by "
 "clicking the %s button."
-msgstr ""
+msgstr "バックアップを作成するには、まず %s ボタンをクリックして必要なソフトウェアをインストールしてください。"
 
 #: ../deja-dup/widgets/ConfigLabelDescription.vala:88
 msgid "Back Up Now…"
@@ -1175,7 +1183,7 @@ msgstr "Amazon S3"
 
 #: ../deja-dup/widgets/ConfigLocation.vala:190
 msgid "Google Cloud Storage"
-msgstr ""
+msgstr "Google クラウドストレージ"
 
 #: ../deja-dup/widgets/ConfigLocation.vala:198
 msgid "Google Drive"
@@ -1192,7 +1200,7 @@ msgstr "Rackspace Cloud Files"
 
 #: ../deja-dup/widgets/ConfigLocation.vala:226
 msgid "OpenStack Swift"
-msgstr ""
+msgstr "OpenStack Swift"
 
 #: ../deja-dup/widgets/ConfigLocationCustom.vala:34
 msgid "_URI"
@@ -1449,8 +1457,8 @@ msgstr "ファイルをリストアップしています…"
 #: ../libdeja/Operation.vala:69 ../libdeja/Operation.vala:103
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:385
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:392
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:411
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:416
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:417
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:422
 msgid "Preparing…"
 msgstr "準備しています…"
 
@@ -1464,29 +1472,29 @@ msgid "Paused (no network)"
 msgstr "中断（ネットワークが使用できません）"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:443
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:449
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "‘%s’を復元できません: 場所の指定が適切ではありません"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:510
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:516
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "バックアップ保存場所の空き容量が足りません。もっと空き容量の大きいもので試してください。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:533
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:539
 msgid "Backup location does not have enough free space."
 msgstr "バックアップの保存場所に十分な空き容量がありません。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:553
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:567
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:559
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:573
 msgid "Cleaning up…"
 msgstr "クリーンアップしています…"
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:663
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:669
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
@@ -1495,7 +1503,7 @@ msgstr "次のファイルがバックアップできませんでした。ファ
 #. OK, we succeeded yay!  But some files didn't actually restore
 #. because we couldn't write to them.  So tell the user so they
 #. don't think everything is hunky dory.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:679
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:685
 msgid ""
 "Could not restore the following files.  Please make sure you are able to "
 "write to them."
@@ -1504,7 +1512,7 @@ msgstr "以下のファイルはリストアできませんでした。このフ
 #. make text a little nicer than duplicity gives
 #. duplicity gives something like "home/blah/blah not found in archive,
 #. no files restored".
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:923
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:929
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "‘%s’ を復元できません: ファイルがバックアップ内に見つかりません"
@@ -1512,17 +1520,17 @@ msgstr "‘%s’ を復元できません: ファイルがバックアップ内�
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:929
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1027
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1031
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:935
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1033
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1037
 msgid "Bad encryption password."
 msgstr "暗号化パスワードが違います。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:934
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:940
 msgid "Computer name changed"
 msgstr "コンピューター名が変更されました"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:934
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:940
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -1531,69 +1539,69 @@ msgid ""
 msgstr ""
 "見つかったバックアップのコンピューター名は %s ですが、現在のコンピューター名は %s です。意図していない場合は、別の場所にバックアップしてください。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:969
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:975
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "'%s' を作成しようとしましたが権限がありません。"
 
 #. assume error is on backend side
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:973
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:977
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:979
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:983
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "'%s' を読み込もうとしましたが権限がありません。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:981
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:987
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "'%s' を削除しようとしましたが権限がありません。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:988
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:994
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "バックアップの保存場所 '%s' が存在しません。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:994
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1046
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1000
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1052
 msgid "No space left."
 msgstr "空き容量がありません。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1008
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1014
 msgid "Invalid ID."
 msgstr "不正な ID です。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1010
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1016
 msgid "Invalid secret key."
 msgstr "不正な secret key です。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1012
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1018
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "あなたのAmazon Web サービスアカウントは S3 サービスにサインアップされていません。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1021
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1027
 msgid "S3 bucket name is not available."
 msgstr "S3 バケット名が使用できません。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1035
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1041
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "ファイル ‘%s’ を読み込み中にエラー。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1037
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1043
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "ファイル ‘%s’ を書き込み中にエラー。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1048
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1054
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "'%s' に空き容量がありません。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1056
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1062
 msgid "No backup files found"
 msgstr "バックアップファイルが見つかりません"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1106
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1112
 msgid "Uploading…"
 msgstr "アップロードしています…"
 
