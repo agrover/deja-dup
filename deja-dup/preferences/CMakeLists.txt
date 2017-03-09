@@ -18,7 +18,7 @@
 
 # Hide preferences if have control center panel
 if(ENABLE_UNITY_CCPANEL)
-  set(PREFERENCES_NOTSHOWIN "Unity;")
+  set(PREFERENCES_NOTSHOWIN "Unity7;")
 endif()
 
 vala_precompile(VALA_C preferences-main.vala
