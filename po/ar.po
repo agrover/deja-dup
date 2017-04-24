@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-04-07 12:03-0400\n"
+"POT-Creation-Date: 2017-03-09 14:16-0500\n"
 "PO-Revision-Date: 2014-10-25 13:50+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2016-11-22 06:19+0000\n"
-"X-Generator: Launchpad (build 18269)\n"
+"X-Launchpad-Export-Date: 2017-03-14 07:27+0000\n"
+"X-Generator: Launchpad (build 18331)\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 #: ../deja-dup/preferences/Preferences.vala:286
@@ -28,8 +28,10 @@ msgstr "المجلدات التي ستُحفظ"
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-"and $VIDEO are recognized as the user’s special directories. Relative "
-"entries are relative to the user’s home directory."
+"and $VIDEOS are recognized as the user’s special directories and can be at "
+"the start of a longer path ($HOME/subdir). Reserved value $USER is replaced "
+"by the user’s username and can be anywhere in the path. Relative entries are "
+"relative to the user’s home directory."
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
@@ -41,8 +43,10 @@ msgstr "المُجلدات التي سيتم تجاهلها"
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
-"directories. Relative entries are relative to the user’s home directory."
+"$TEMPLATES, $TRASH, and $VIDEOS are recognized as the user’s special "
+"directories and can be at the start of a longer path ($HOME/subdir). "
+"Reserved value $USER is replaced by the user’s username and can be anywhere "
+"in the path. Relative entries are relative to the user’s home directory."
 msgstr ""
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
@@ -529,45 +533,45 @@ msgstr "ينسخ احتياطيًا..."
 msgid "Scanning:"
 msgstr "يتفحص:"
 
-#: ../deja-dup/AssistantOperation.vala:258
+#: ../deja-dup/AssistantOperation.vala:259
 msgid "_Details"
 msgstr "ال_تفاصيل"
 
-#: ../deja-dup/AssistantOperation.vala:306
+#: ../deja-dup/AssistantOperation.vala:307
 msgid "_Allow restoring without a password"
 msgstr "ال_سماح بالاسترجاع دون كلمة سر"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:313
 msgid "_Password-protect your backup"
 msgstr "_حماية النسخة الاحتياطية بكلمة سر"
 
-#: ../deja-dup/AssistantOperation.vala:324
+#: ../deja-dup/AssistantOperation.vala:325
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
 "ستحتاج لكلمة سرّك لاسترجاع ملفاتك. قد ترغب في تدوينها في ورقة في حال نسيتها."
 
-#: ../deja-dup/AssistantOperation.vala:339
-#: ../deja-dup/AssistantOperation.vala:408
+#: ../deja-dup/AssistantOperation.vala:340
+#: ../deja-dup/AssistantOperation.vala:409
 msgid "E_ncryption password"
 msgstr "_كلمة السر"
 
-#: ../deja-dup/AssistantOperation.vala:356
+#: ../deja-dup/AssistantOperation.vala:357
 msgid "Confir_m password"
 msgstr "_تأكيد كلمة السر"
 
-#: ../deja-dup/AssistantOperation.vala:369
-#: ../deja-dup/AssistantOperation.vala:417
+#: ../deja-dup/AssistantOperation.vala:370
+#: ../deja-dup/AssistantOperation.vala:418
 msgid "_Show password"
 msgstr "إ_ظهار كلمة السر"
 
-#: ../deja-dup/AssistantOperation.vala:376
+#: ../deja-dup/AssistantOperation.vala:377
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "ت_ذكّر كلمة السر"
 
-#: ../deja-dup/AssistantOperation.vala:395
+#: ../deja-dup/AssistantOperation.vala:396
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -576,15 +580,15 @@ msgstr ""
 "من أجل التحقق من أنك ستكون قادرًا على استرداد ملفاتك في حالة الطوارئ، فيرجى "
 "إدخال كلمة سر تشفير البيانات مرة أخرى لإجراء اختبار استعادة موجز."
 
-#: ../deja-dup/AssistantOperation.vala:422
+#: ../deja-dup/AssistantOperation.vala:423
 msgid "Test every two _months"
 msgstr "اختبر كل _شهرين"
 
-#: ../deja-dup/AssistantOperation.vala:496
+#: ../deja-dup/AssistantOperation.vala:497
 msgid "Summary"
 msgstr "ملخّص"
 
-#: ../deja-dup/AssistantOperation.vala:518
+#: ../deja-dup/AssistantOperation.vala:519
 msgid "Restore Test"
 msgstr "اختبار الاسترجاع"
 
@@ -594,21 +598,21 @@ msgstr "اختبار الاسترجاع"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: ../deja-dup/AssistantOperation.vala:594
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:696
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1075
+#: ../deja-dup/AssistantOperation.vala:595
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:702
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1081
 msgid "Failed with an unknown error."
 msgstr "فشل بخطأ غير معروف."
 
-#: ../deja-dup/AssistantOperation.vala:791
+#: ../deja-dup/AssistantOperation.vala:792
 msgid "Require Password?"
 msgstr "طلب كلمة سر؟"
 
-#: ../deja-dup/AssistantOperation.vala:793
+#: ../deja-dup/AssistantOperation.vala:794
 msgid "Encryption Password Needed"
 msgstr "مطلوب كلمة سر التشفير"
 
-#: ../deja-dup/AssistantOperation.vala:865
+#: ../deja-dup/AssistantOperation.vala:866
 msgid "Backup encryption password"
 msgstr "كلمة سر تشفير النسخ الاحتياطي"
 
@@ -997,7 +1001,7 @@ msgstr ""
 
 #: ../deja-dup/preferences/Preferences.vala:243
 #: ../deja-dup/widgets/ConfigLabelDescription.vala:59
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:81
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:83
 msgid "Install…"
 msgstr ""
 
@@ -1134,28 +1138,33 @@ msgstr "استرجع..."
 msgid "You may use the %s button to browse for existing backups."
 msgstr "يمكنك استخدام زرّ \"%s\" لتصفح النُسخ الاحتياطية الموجودة."
 
-#. Translators: Files is the user-visible name of nautilus in your language
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:74
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:73
+msgid "Files"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:75
+msgid "Caja"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:76
 #, c-format
 msgid ""
-"You can restore the entire backup with the %s button or use Files to either "
+"You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
 msgstr ""
-"يمكنك استعادة النسخة الاحتياطية بالكامل من خلال النقر على زرّ \"%s\"، أو "
-"استخدام تطبيق الملفات لاسترجاع ملفات بعينها أو لاسترجاع المفقود منها."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:82
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:84
 #, c-format
 msgid ""
 "You can create a backup after you first install some necessary software by "
 "clicking the %s button."
 msgstr ""
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:88
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:90
 msgid "Back Up Now…"
 msgstr "خذ نسخة احتياطية الآن..."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:89
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:91
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
@@ -1164,15 +1173,15 @@ msgstr ""
 "ينبغي عليك <a href=''>تفعيل</a> النسخ الاحتياطي الآلي أو استخدام زرّ \"%s\" "
 "للبدء بأخذ نسخة احتياطية."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:95
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
 msgid "A backup automatically starts every day."
 msgstr "النسخ الاحتياطي سيبدأ آليا كل يوم."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:99
 msgid "A backup automatically starts every week."
 msgstr "النسخ الاحتياطي سيبدأ آليا كل أسبوع."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:100
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:102
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1515,8 +1524,8 @@ msgstr "يسرد الملفات..."
 #: ../libdeja/Operation.vala:69 ../libdeja/Operation.vala:103
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:385
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:392
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:411
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:416
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:417
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:422
 msgid "Preparing…"
 msgstr "يُحضّر..."
 
@@ -1530,30 +1539,30 @@ msgid "Paused (no network)"
 msgstr "مُلبث (لا يوجد شبكة)"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:443
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:449
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "تعذر استعادة ‘%s’: موقع ملف غير سليم"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:510
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:516
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "مساحة مكان النسخ الاحتياطي صغيرة جدًا. جرّب استخدام مكان ذو مساحة أكبر."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:533
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:539
 msgid "Backup location does not have enough free space."
 msgstr "لا توجد مساحة كافية في مكان النسخ الاحتياطي."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:553
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:567
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:559
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:573
 msgid "Cleaning up…"
 msgstr "ينظّف..."
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:663
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:669
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
@@ -1564,7 +1573,7 @@ msgstr ""
 #. OK, we succeeded yay!  But some files didn't actually restore
 #. because we couldn't write to them.  So tell the user so they
 #. don't think everything is hunky dory.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:679
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:685
 msgid ""
 "Could not restore the following files.  Please make sure you are able to "
 "write to them."
@@ -1575,7 +1584,7 @@ msgstr ""
 #. make text a little nicer than duplicity gives
 #. duplicity gives something like "home/blah/blah not found in archive,
 #. no files restored".
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:923
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:929
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "تعذّر استرجاع ‘%s’: لم يُعثر على الملف في النسخة الاحتياطية"
@@ -1583,17 +1592,17 @@ msgstr "تعذّر استرجاع ‘%s’: لم يُعثر على الملف ف
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:929
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1027
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1031
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:935
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1033
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1037
 msgid "Bad encryption password."
 msgstr "كلمة سر تشفير رديئة."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:934
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:940
 msgid "Computer name changed"
 msgstr "تغيّر اسم الحاسوب"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:934
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:940
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -1603,69 +1612,69 @@ msgstr ""
 "النسخة الاحتياطية الموجودة هي لحاسوب باسم \"%s\"، ولكن اسم الحاسوب الحالي هو "
 "\"%s\". إذا كان ذلك غير متوقع، فينبغي عليك أخذ النسخة على موقع مختلف."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:969
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:975
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "رُفِض الإذن عن محاولة إنشاء ‘%s’."
 
 #. assume error is on backend side
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:973
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:977
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:979
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:983
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "رُفِض الإذن عن محاولة قراءة ‘%s’."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:981
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:987
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "رُفِض الإذن عن محاولة حذف ‘%s’."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:988
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:994
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "مكان النسخ الاحتياطي ‘%s’ غير موجود."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:994
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1046
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1000
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1052
 msgid "No space left."
 msgstr "لا مساحة متبقية."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1008
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1014
 msgid "Invalid ID."
 msgstr "معرّف غير سليم."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1010
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1016
 msgid "Invalid secret key."
 msgstr "مفتاح سري غير سليم."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1012
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1018
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1021
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1027
 msgid "S3 bucket name is not available."
 msgstr ""
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1035
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1041
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "خطأ في قراءة الملف ‘%s’."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1037
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1043
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "خطأ في كتابة الملف ‘%s’."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1048
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1054
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "لا مساحة متبقية في ‘%s’."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1056
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1062
 msgid "No backup files found"
 msgstr "لم يُعثر على ملفات النسخ الاحتياطي"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1106
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1112
 msgid "Uploading…"
 msgstr "يرفع..."
 
@@ -1700,3 +1709,11 @@ msgstr ""
 
 #~ msgid "Directory does not exists"
 #~ msgstr "المُجلد غير موجود"
+
+#, c-format
+#~ msgid ""
+#~ "You can restore the entire backup with the %s button or use Files to either "
+#~ "revert individual files or restore missing ones."
+#~ msgstr ""
+#~ "يمكنك استعادة النسخة الاحتياطية بالكامل من خلال النقر على زرّ \"%s\"، أو "
+#~ "استخدام تطبيق الملفات لاسترجاع ملفات بعينها أو لاسترجاع المفقود منها."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-04-07 12:03-0400\n"
+"POT-Creation-Date: 2017-03-09 14:16-0500\n"
 "PO-Revision-Date: 2016-04-06 18:42+0000\n"
 "Last-Translator: shijing <jingshi@ubuntukylin.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2016-11-22 06:20+0000\n"
-"X-Generator: Launchpad (build 18269)\n"
+"X-Launchpad-Export-Date: 2017-03-14 07:28+0000\n"
+"X-Generator: Launchpad (build 18331)\n"
 "Language: zh\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
@@ -28,12 +28,11 @@ msgstr "要保存的文件夹"
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-"and $VIDEO are recognized as the user’s special directories. Relative "
-"entries are relative to the user’s home directory."
+"and $VIDEOS are recognized as the user’s special directories and can be at "
+"the start of a longer path ($HOME/subdir). Reserved value $USER is replaced "
+"by the user’s username and can be anywhere in the path. Relative entries are "
+"relative to the user’s home directory."
 msgstr ""
-"将备份此列表中的目录。保留值 $HOME、$DESKTOP、 "
-"$DOCUMENTS、$DOWNLOAD、$MUSIC、$PICTURES、$PUBLIC_SHARE、$TEMPLATES、$TRASH  和 "
-"$VIDEO 被确认为用户的特殊目录。相对条目相对于用户的主目录。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
 #: ../deja-dup/preferences/Preferences.vala:297
@@ -44,12 +43,11 @@ msgstr "要忽略的文件夹"
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
-"directories. Relative entries are relative to the user’s home directory."
+"$TEMPLATES, $TRASH, and $VIDEOS are recognized as the user’s special "
+"directories and can be at the start of a longer path ($HOME/subdir). "
+"Reserved value $USER is replaced by the user’s username and can be anywhere "
+"in the path. Relative entries are relative to the user’s home directory."
 msgstr ""
-"将不备份此列表中的目录。保留值 $HOME、 "
-"$DESKTOP、$DOCUMENTS、$DOWNLOAD、$MUSIC、$PICTURES、$PUBLIC_SHARE、 "
-"$TEMPLATES、$TRASH 和 $VIDEO 被确认为用户的特殊目录。相对条目相对于用户的主目录。"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
 msgid "Whether to request the root password"
@@ -507,59 +505,59 @@ msgstr "正在备份..."
 msgid "Scanning:"
 msgstr "扫描："
 
-#: ../deja-dup/AssistantOperation.vala:258
+#: ../deja-dup/AssistantOperation.vala:259
 msgid "_Details"
 msgstr "详细信息(_D)"
 
-#: ../deja-dup/AssistantOperation.vala:306
+#: ../deja-dup/AssistantOperation.vala:307
 msgid "_Allow restoring without a password"
 msgstr "允许不使用密码还原(_A)"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:313
 msgid "_Password-protect your backup"
 msgstr "用密码保护您的备份(_P)"
 
-#: ../deja-dup/AssistantOperation.vala:324
+#: ../deja-dup/AssistantOperation.vala:325
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr "还原文件将需要密码，您可能需要将其抄写下来。"
 
-#: ../deja-dup/AssistantOperation.vala:339
-#: ../deja-dup/AssistantOperation.vala:408
+#: ../deja-dup/AssistantOperation.vala:340
+#: ../deja-dup/AssistantOperation.vala:409
 msgid "E_ncryption password"
 msgstr "加密密码(_N)"
 
-#: ../deja-dup/AssistantOperation.vala:356
+#: ../deja-dup/AssistantOperation.vala:357
 msgid "Confir_m password"
 msgstr "确认密码(_M)"
 
-#: ../deja-dup/AssistantOperation.vala:369
-#: ../deja-dup/AssistantOperation.vala:417
+#: ../deja-dup/AssistantOperation.vala:370
+#: ../deja-dup/AssistantOperation.vala:418
 msgid "_Show password"
 msgstr "显示密码(_S)"
 
-#: ../deja-dup/AssistantOperation.vala:376
+#: ../deja-dup/AssistantOperation.vala:377
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "记住密码(_R)"
 
-#: ../deja-dup/AssistantOperation.vala:395
+#: ../deja-dup/AssistantOperation.vala:396
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
 "brief restore test."
 msgstr "为保证您在紧急时刻能够及时取回文件，请再次输入加密密码来运行一次快速的还原测试。"
 
-#: ../deja-dup/AssistantOperation.vala:422
+#: ../deja-dup/AssistantOperation.vala:423
 msgid "Test every two _months"
 msgstr "每隔 2 个月测试一次(_M)"
 
-#: ../deja-dup/AssistantOperation.vala:496
+#: ../deja-dup/AssistantOperation.vala:497
 msgid "Summary"
 msgstr "摘要"
 
-#: ../deja-dup/AssistantOperation.vala:518
+#: ../deja-dup/AssistantOperation.vala:519
 msgid "Restore Test"
 msgstr "还原测试"
 
@@ -569,21 +567,21 @@ msgstr "还原测试"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: ../deja-dup/AssistantOperation.vala:594
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:696
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1075
+#: ../deja-dup/AssistantOperation.vala:595
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:702
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1081
 msgid "Failed with an unknown error."
 msgstr "因出现未知错误而失败。"
 
-#: ../deja-dup/AssistantOperation.vala:791
+#: ../deja-dup/AssistantOperation.vala:792
 msgid "Require Password?"
 msgstr "需要密码？"
 
-#: ../deja-dup/AssistantOperation.vala:793
+#: ../deja-dup/AssistantOperation.vala:794
 msgid "Encryption Password Needed"
 msgstr "请输入加密密码"
 
-#: ../deja-dup/AssistantOperation.vala:865
+#: ../deja-dup/AssistantOperation.vala:866
 msgid "Backup encryption password"
 msgstr "备份加密密码"
 
@@ -952,7 +950,7 @@ msgstr "安装(_I)..."
 
 #: ../deja-dup/preferences/Preferences.vala:243
 #: ../deja-dup/widgets/ConfigLabelDescription.vala:59
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:81
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:83
 msgid "Install…"
 msgstr "安装..."
 
@@ -1074,41 +1072,48 @@ msgstr "还原..."
 msgid "You may use the %s button to browse for existing backups."
 msgstr "您可以通过 %s 按钮浏览已有的备份。"
 
-#. Translators: Files is the user-visible name of nautilus in your language
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:74
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:73
+msgid "Files"
+msgstr "文件"
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:75
+msgid "Caja"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:76
 #, c-format
 msgid ""
-"You can restore the entire backup with the %s button or use Files to either "
+"You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
-msgstr "您可以通过 %s 按钮还原完整的备份，或通过“文件”还原单个文件。"
+msgstr ""
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:82
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:84
 #, c-format
 msgid ""
 "You can create a backup after you first install some necessary software by "
 "clicking the %s button."
 msgstr "您可以先点击 %s 按钮安装一些必要的软件，然后创建一个备份。"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:88
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:90
 msgid "Back Up Now…"
 msgstr "立即备份..."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:89
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:91
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
 "start one now."
 msgstr "您应当<a href=''>设置</a>自动备份或通过 %s 按钮立即进行一次备份。"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:95
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
 msgid "A backup automatically starts every day."
 msgstr "每天自动进行一次备份。"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:99
 msgid "A backup automatically starts every week."
 msgstr "每周自动进行一次备份。"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:100
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:102
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1441,8 +1446,8 @@ msgstr "正在列出文件..."
 #: ../libdeja/Operation.vala:69 ../libdeja/Operation.vala:103
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:385
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:392
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:411
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:416
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:417
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:422
 msgid "Preparing…"
 msgstr "正在准备..."
 
@@ -1456,29 +1461,29 @@ msgid "Paused (no network)"
 msgstr "已暂停(无网络)"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:443
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:449
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "无法还原“%s”：不是有效的文件位置"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:510
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:516
 msgid "Backup location is too small.  Try using one with more space."
 msgstr "备份位置空间过小。请尝试使用具有更多空间的位置。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:533
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:539
 msgid "Backup location does not have enough free space."
 msgstr "备份位置的自由空间不足。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:553
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:567
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:559
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:573
 msgid "Cleaning up…"
 msgstr "正在清理..."
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:663
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:669
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
@@ -1487,7 +1492,7 @@ msgstr "无法备份下列文件。请确认您可以打开这些文件。"
 #. OK, we succeeded yay!  But some files didn't actually restore
 #. because we couldn't write to them.  So tell the user so they
 #. don't think everything is hunky dory.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:679
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:685
 msgid ""
 "Could not restore the following files.  Please make sure you are able to "
 "write to them."
@@ -1496,7 +1501,7 @@ msgstr "无法恢复下列文件。请确认您能够写入它们。"
 #. make text a little nicer than duplicity gives
 #. duplicity gives something like "home/blah/blah not found in archive,
 #. no files restored".
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:923
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:929
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "无法恢复“%s”：在备份中未找到该文件"
@@ -1504,17 +1509,17 @@ msgstr "无法恢复“%s”：在备份中未找到该文件"
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:929
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1027
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1031
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:935
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1033
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1037
 msgid "Bad encryption password."
 msgstr "无效的加密密码。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:934
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:940
 msgid "Computer name changed"
 msgstr "计算机名称已更改"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:934
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:940
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -1522,69 +1527,69 @@ msgid ""
 "location."
 msgstr "现有备份是名为 %s 的计算机的备份，但当前计算机的名称却是 %s。如果这在意料之外，则您应该备份到其它位置。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:969
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:975
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "尝试创建“%s”时被拒绝访问。"
 
 #. assume error is on backend side
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:973
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:977
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:979
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:983
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "尝试读取“%s”时权限被拒绝。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:981
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:987
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "尝试删除“%s”时权限被拒绝。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:988
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:994
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "备份位置“%s”不存在。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:994
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1046
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1000
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1052
 msgid "No space left."
 msgstr "无剩余空间。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1008
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1014
 msgid "Invalid ID."
 msgstr "无效的 ID。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1010
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1016
 msgid "Invalid secret key."
 msgstr "无效的私钥。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1012
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1018
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "您的 Amazon Web Services 帐号未注册 S3 服务。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1021
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1027
 msgid "S3 bucket name is not available."
 msgstr "S3 存储段名称不可用。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1035
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1041
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "读取文件“%s”时出错。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1037
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1043
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "写入文件“%s”时出错。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1048
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1054
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "“%s”上没有剩余空间。"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1056
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1062
 msgid "No backup files found"
 msgstr "未找到备份文件"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1106
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1112
 msgid "Uploading…"
 msgstr "正在上传..."
 
@@ -1603,6 +1608,26 @@ msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
 "only found version %d.%d.%.2d"
 msgstr "Déjà Dup 备份工具至少需要 %d.%d.%.2d 版的 duplicity 软件包，但只找到 %d.%d.%.2d 版"
+
+#~ msgid ""
+#~ "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
+#~ "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+#~ "and $VIDEO are recognized as the user’s special directories. Relative "
+#~ "entries are relative to the user’s home directory."
+#~ msgstr ""
+#~ "将备份此列表中的目录。保留值 $HOME、$DESKTOP、 "
+#~ "$DOCUMENTS、$DOWNLOAD、$MUSIC、$PICTURES、$PUBLIC_SHARE、$TEMPLATES、$TRASH  和 "
+#~ "$VIDEO 被确认为用户的特殊目录。相对条目相对于用户的主目录。"
+
+#~ msgid ""
+#~ "This list of directories will not be backed up. Reserved values $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
+#~ "directories. Relative entries are relative to the user’s home directory."
+#~ msgstr ""
+#~ "将不备份此列表中的目录。保留值 $HOME、 "
+#~ "$DESKTOP、$DOCUMENTS、$DOWNLOAD、$MUSIC、$PICTURES、$PUBLIC_SHARE、 "
+#~ "$TEMPLATES、$TRASH 和 $VIDEO 被确认为用户的特殊目录。相对条目相对于用户的主目录。"
 
 #~ msgid "The Ubuntu One folder"
 #~ msgstr "Ubuntu One 文件夹"
@@ -1624,6 +1649,12 @@ msgstr "Déjà Dup 备份工具至少需要 %d.%d.%.2d 版的 duplicity 软件�
 
 #~ msgid "Directory does not exists"
 #~ msgstr "目录不存在"
+
+#, c-format
+#~ msgid ""
+#~ "You can restore the entire backup with the %s button or use Files to either "
+#~ "revert individual files or restore missing ones."
+#~ msgstr "您可以通过 %s 按钮还原完整的备份，或通过“文件”还原单个文件。"
 
 #~ msgid ""
 #~ "Support for local, remote, or cloud backup locations, such as Amazon S3, "

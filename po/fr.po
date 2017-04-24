@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-04-07 12:03-0400\n"
+"POT-Creation-Date: 2017-03-09 14:16-0500\n"
 "PO-Revision-Date: 2016-12-12 18:28+0000\n"
 "Last-Translator: Jean-Marc <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2016-12-13 05:50+0000\n"
-"X-Generator: Launchpad (build 18293)\n"
+"X-Launchpad-Export-Date: 2017-03-14 07:27+0000\n"
+"X-Generator: Launchpad (build 18331)\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 #: ../deja-dup/preferences/Preferences.vala:286
@@ -27,14 +27,11 @@ msgstr "Dossiers à enregistrer"
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-"and $VIDEO are recognized as the user’s special directories. Relative "
-"entries are relative to the user’s home directory."
+"and $VIDEOS are recognized as the user’s special directories and can be at "
+"the start of a longer path ($HOME/subdir). Reserved value $USER is replaced "
+"by the user’s username and can be anywhere in the path. Relative entries are "
+"relative to the user’s home directory."
 msgstr ""
-"Les dossiers de cette liste seront sauvegardés. Les mots clés $HOME, "
-"$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH et $VIDEO sont reconnus en tant que dossiers spéciaux de "
-"l'utilisateur. Les chemins relatifs se rapportent au dossier personnel de "
-"l'utilisateur."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
 #: ../deja-dup/preferences/Preferences.vala:297
@@ -45,14 +42,11 @@ msgstr "Dossiers à ignorer"
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
-"directories. Relative entries are relative to the user’s home directory."
+"$TEMPLATES, $TRASH, and $VIDEOS are recognized as the user’s special "
+"directories and can be at the start of a longer path ($HOME/subdir). "
+"Reserved value $USER is replaced by the user’s username and can be anywhere "
+"in the path. Relative entries are relative to the user’s home directory."
 msgstr ""
-"Les dossiers de cette liste ne seront pas sauvegardés. Les mots clés $HOME, "
-"$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH et $VIDEO sont reconnus en tant que dossiers spéciaux de "
-"l'utilisateur. Les chemins relatifs se rapportent au dossier personnel de "
-"l'utilisateur."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
 msgid "Whether to request the root password"
@@ -582,19 +576,19 @@ msgstr "Sauvegarde..."
 msgid "Scanning:"
 msgstr "Analyse :"
 
-#: ../deja-dup/AssistantOperation.vala:258
+#: ../deja-dup/AssistantOperation.vala:259
 msgid "_Details"
 msgstr "_Détails"
 
-#: ../deja-dup/AssistantOperation.vala:306
+#: ../deja-dup/AssistantOperation.vala:307
 msgid "_Allow restoring without a password"
 msgstr "_Permettre la restauration sans mot de passe"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:313
 msgid "_Password-protect your backup"
 msgstr "_Protégez votre sauvegarde par un mot de passe"
 
-#: ../deja-dup/AssistantOperation.vala:324
+#: ../deja-dup/AssistantOperation.vala:325
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
@@ -602,26 +596,26 @@ msgstr ""
 "Votre mot de passe sera requis pour restaurer vos fichiers. Vous devriez le "
 "noter."
 
-#: ../deja-dup/AssistantOperation.vala:339
-#: ../deja-dup/AssistantOperation.vala:408
+#: ../deja-dup/AssistantOperation.vala:340
+#: ../deja-dup/AssistantOperation.vala:409
 msgid "E_ncryption password"
 msgstr "_Mot de passe de chiffrement"
 
-#: ../deja-dup/AssistantOperation.vala:356
+#: ../deja-dup/AssistantOperation.vala:357
 msgid "Confir_m password"
 msgstr "Confir_mer le mot de passe"
 
-#: ../deja-dup/AssistantOperation.vala:369
-#: ../deja-dup/AssistantOperation.vala:417
+#: ../deja-dup/AssistantOperation.vala:370
+#: ../deja-dup/AssistantOperation.vala:418
 msgid "_Show password"
 msgstr "_Afficher le mot de passe"
 
-#: ../deja-dup/AssistantOperation.vala:376
+#: ../deja-dup/AssistantOperation.vala:377
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Se souvenir du mot de passe"
 
-#: ../deja-dup/AssistantOperation.vala:395
+#: ../deja-dup/AssistantOperation.vala:396
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -631,15 +625,15 @@ msgstr ""
 "veuillez saisir de nouveau votre mot de passe de chiffrement pour effectuer "
 "un rapide test de restauration."
 
-#: ../deja-dup/AssistantOperation.vala:422
+#: ../deja-dup/AssistantOperation.vala:423
 msgid "Test every two _months"
 msgstr "Tester tous les deux _mois"
 
-#: ../deja-dup/AssistantOperation.vala:496
+#: ../deja-dup/AssistantOperation.vala:497
 msgid "Summary"
 msgstr "Résumé"
 
-#: ../deja-dup/AssistantOperation.vala:518
+#: ../deja-dup/AssistantOperation.vala:519
 msgid "Restore Test"
 msgstr "Test de restauration"
 
@@ -649,21 +643,21 @@ msgstr "Test de restauration"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: ../deja-dup/AssistantOperation.vala:594
+#: ../deja-dup/AssistantOperation.vala:595
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:702
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:1081
 msgid "Failed with an unknown error."
 msgstr "Échec dû à une erreur inconnue."
 
-#: ../deja-dup/AssistantOperation.vala:791
+#: ../deja-dup/AssistantOperation.vala:792
 msgid "Require Password?"
 msgstr "Demander un mot de passe ?"
 
-#: ../deja-dup/AssistantOperation.vala:793
+#: ../deja-dup/AssistantOperation.vala:794
 msgid "Encryption Password Needed"
 msgstr "Mot de passe de chiffrement nécessaire"
 
-#: ../deja-dup/AssistantOperation.vala:865
+#: ../deja-dup/AssistantOperation.vala:866
 msgid "Backup encryption password"
 msgstr "Mot de passe de chiffrement des sauvegardes"
 
@@ -1042,7 +1036,7 @@ msgstr "_Installer..."
 
 #: ../deja-dup/preferences/Preferences.vala:243
 #: ../deja-dup/widgets/ConfigLabelDescription.vala:59
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:81
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:83
 msgid "Install…"
 msgstr "Installation..."
 
@@ -1173,17 +1167,22 @@ msgstr ""
 "Vous pouvez utiliser le bouton %s pour naviguer dans les sauvegardes "
 "existantes."
 
-#. Translators: Files is the user-visible name of nautilus in your language
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:74
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:73
+msgid "Files"
+msgstr "Fichiers"
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:75
+msgid "Caja"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:76
 #, c-format
 msgid ""
-"You can restore the entire backup with the %s button or use Files to either "
+"You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
 msgstr ""
-"Vous pouvez restaurer la sauvegarde entière avec le bouton %s, ou utiliser "
-"Fichiers pour récupérer des fichiers individuels ou restaurer ceux manquants."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:82
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:84
 #, c-format
 msgid ""
 "You can create a backup after you first install some necessary software by "
@@ -1192,11 +1191,11 @@ msgstr ""
 "Vous pouvez créer une sauvegarde après la première installation de logiciels "
 "nécessaires en cliquant sur le bouton %s."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:88
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:90
 msgid "Back Up Now…"
 msgstr "Sauvegarder maintenant..."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:89
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:91
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
@@ -1205,15 +1204,15 @@ msgstr ""
 "Vous devriez <a href=''>activer</a> les sauvegardes automatiques ou utiliser "
 "le bouton %s pour en démarrer une maintenant."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:95
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
 msgid "A backup automatically starts every day."
 msgstr "Une sauvegarde démarre automatiquement tous les jours."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:99
 msgid "A backup automatically starts every week."
 msgstr "Une sauvegarde démarre automatiquement toutes les semaines."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:100
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:102
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1767,3 +1766,35 @@ msgstr ""
 
 #~ msgid "Directory does not exists"
 #~ msgstr "Le répertoire n'existe pas"
+
+#, c-format
+#~ msgid ""
+#~ "You can restore the entire backup with the %s button or use Files to either "
+#~ "revert individual files or restore missing ones."
+#~ msgstr ""
+#~ "Vous pouvez restaurer la sauvegarde entière avec le bouton %s, ou utiliser "
+#~ "Fichiers pour récupérer des fichiers individuels ou restaurer ceux manquants."
+
+#~ msgid ""
+#~ "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
+#~ "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+#~ "and $VIDEO are recognized as the user’s special directories. Relative "
+#~ "entries are relative to the user’s home directory."
+#~ msgstr ""
+#~ "Les dossiers de cette liste seront sauvegardés. Les mots clés $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH et $VIDEO sont reconnus en tant que dossiers spéciaux de "
+#~ "l'utilisateur. Les chemins relatifs se rapportent au dossier personnel de "
+#~ "l'utilisateur."
+
+#~ msgid ""
+#~ "This list of directories will not be backed up. Reserved values $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
+#~ "directories. Relative entries are relative to the user’s home directory."
+#~ msgstr ""
+#~ "Les dossiers de cette liste ne seront pas sauvegardés. Les mots clés $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH et $VIDEO sont reconnus en tant que dossiers spéciaux de "
+#~ "l'utilisateur. Les chemins relatifs se rapportent au dossier personnel de "
+#~ "l'utilisateur."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-04-07 12:03-0400\n"
+"POT-Creation-Date: 2017-03-09 14:16-0500\n"
 "PO-Revision-Date: 2016-04-21 00:01+0000\n"
 "Last-Translator: alasdair caimbeul <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2016-11-22 06:19+0000\n"
-"X-Generator: Launchpad (build 18269)\n"
+"X-Launchpad-Export-Date: 2017-03-14 07:27+0000\n"
+"X-Generator: Launchpad (build 18331)\n"
 "Language: gd\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
@@ -29,14 +29,11 @@ msgstr "Pasganan ri an sàbhaladh"
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-"and $VIDEO are recognized as the user’s special directories. Relative "
-"entries are relative to the user’s home directory."
+"and $VIDEOS are recognized as the user’s special directories and can be at "
+"the start of a longer path ($HOME/subdir). Reserved value $USER is replaced "
+"by the user’s username and can be anywhere in the path. Relative entries are "
+"relative to the user’s home directory."
 msgstr ""
-"Seo liosta nam pasganan a thèid lethbhreacan-glèidhidh a dhèanamh dhiubh. "
-"Tha $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, "
-"$PUBLIC_SHARE, $TEMPLATES, $TRASH agus $VIDEO 'nan luachan glèidhte agus "
-"aithnichear iad mar phasganan sònraichte a' chleachdaiche. Bidh innteartan "
-"dàimheach dàimheach ri pasgan-dachaigh a' chleachdaiche."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
 #: ../deja-dup/preferences/Preferences.vala:297
@@ -47,14 +44,11 @@ msgstr "Pasganan a thèid a leigeil seachad"
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
-"directories. Relative entries are relative to the user’s home directory."
+"$TEMPLATES, $TRASH, and $VIDEOS are recognized as the user’s special "
+"directories and can be at the start of a longer path ($HOME/subdir). "
+"Reserved value $USER is replaced by the user’s username and can be anywhere "
+"in the path. Relative entries are relative to the user’s home directory."
 msgstr ""
-"Cha dèid lethbhreacan-glèidhidh a dhèanamh dhe na pasganan air an liosta "
-"seo. Tha $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH agus $VIDEO 'nan luachan glèidhte agus aithnichear iad "
-"mar phasganan sònraichte a' chleachdaiche. Tha innteartan dàimheach ri "
-"pasgan dachaigh a' chleachdaiche."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
 msgid "Whether to request the root password"
@@ -590,19 +584,19 @@ msgstr "A' dèanamh lethbhreac-glèidhidh..."
 msgid "Scanning:"
 msgstr "'Ga sganadh:"
 
-#: ../deja-dup/AssistantOperation.vala:258
+#: ../deja-dup/AssistantOperation.vala:259
 msgid "_Details"
 msgstr "_Mion-fhiosrachadh"
 
-#: ../deja-dup/AssistantOperation.vala:306
+#: ../deja-dup/AssistantOperation.vala:307
 msgid "_Allow restoring without a password"
 msgstr "_Ceadaich aiseag às aonais facail-fhaire"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:313
 msgid "_Password-protect your backup"
 msgstr "Dìon an lethbhreac-glèidhidh agad le _facal-faire"
 
-#: ../deja-dup/AssistantOperation.vala:324
+#: ../deja-dup/AssistantOperation.vala:325
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
@@ -610,26 +604,26 @@ msgstr ""
 "Feumaidh tu am facal-faire agad mus urrainn dhut na faidhlichean agad "
 "aiseag. 'S dòcha gum b' fheairrde dhut an sgrìobadh sìos."
 
-#: ../deja-dup/AssistantOperation.vala:339
-#: ../deja-dup/AssistantOperation.vala:408
+#: ../deja-dup/AssistantOperation.vala:340
+#: ../deja-dup/AssistantOperation.vala:409
 msgid "E_ncryption password"
 msgstr "Facal-faire c_rioptachaidh"
 
-#: ../deja-dup/AssistantOperation.vala:356
+#: ../deja-dup/AssistantOperation.vala:357
 msgid "Confir_m password"
 msgstr "Dearb_h am facal-faire"
 
-#: ../deja-dup/AssistantOperation.vala:369
-#: ../deja-dup/AssistantOperation.vala:417
+#: ../deja-dup/AssistantOperation.vala:370
+#: ../deja-dup/AssistantOperation.vala:418
 msgid "_Show password"
 msgstr "_Seall am facal-faire"
 
-#: ../deja-dup/AssistantOperation.vala:376
+#: ../deja-dup/AssistantOperation.vala:377
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "Cuimhnich am facal-fai_re"
 
-#: ../deja-dup/AssistantOperation.vala:395
+#: ../deja-dup/AssistantOperation.vala:396
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -639,15 +633,15 @@ msgstr ""
 "faidhlichean agad ann an èiginn, cuir a-steach am facal-faire crioptachaidh "
 "agad a-rithist gus deuchainn aisig bheag a dhèanamh."
 
-#: ../deja-dup/AssistantOperation.vala:422
+#: ../deja-dup/AssistantOperation.vala:423
 msgid "Test every two _months"
 msgstr "Cuir fo dheuchainn a h-uile dà _mhìos"
 
-#: ../deja-dup/AssistantOperation.vala:496
+#: ../deja-dup/AssistantOperation.vala:497
 msgid "Summary"
 msgstr "Gearr-chunntas"
 
-#: ../deja-dup/AssistantOperation.vala:518
+#: ../deja-dup/AssistantOperation.vala:519
 msgid "Restore Test"
 msgstr "Deuchainn aisig"
 
@@ -657,21 +651,21 @@ msgstr "Deuchainn aisig"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: ../deja-dup/AssistantOperation.vala:594
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:696
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1075
+#: ../deja-dup/AssistantOperation.vala:595
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:702
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1081
 msgid "Failed with an unknown error."
 msgstr "Dh'fhàillig e ri linn mearachd nach aithne dhuinn."
 
-#: ../deja-dup/AssistantOperation.vala:791
+#: ../deja-dup/AssistantOperation.vala:792
 msgid "Require Password?"
 msgstr "A bheil thu airson 's gun iarrar facal-faire?"
 
-#: ../deja-dup/AssistantOperation.vala:793
+#: ../deja-dup/AssistantOperation.vala:794
 msgid "Encryption Password Needed"
 msgstr "Tha feum air facal-faire crioptachaidh"
 
-#: ../deja-dup/AssistantOperation.vala:865
+#: ../deja-dup/AssistantOperation.vala:866
 msgid "Backup encryption password"
 msgstr "Facal-faire crioptachadh nan lethbhreacan-glèidhidh"
 
@@ -1064,7 +1058,7 @@ msgstr "_Stàlaich…"
 
 #: ../deja-dup/preferences/Preferences.vala:243
 #: ../deja-dup/widgets/ConfigLabelDescription.vala:59
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:81
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:83
 msgid "Install…"
 msgstr "Stàlaich…"
 
@@ -1205,18 +1199,22 @@ msgstr ""
 "'S urrainn dhut am putan %s a cleachdadh gus rùrachadh airson lethbhreacan-"
 "glèidhidh a tha ann."
 
-#. Translators: Files is the user-visible name of nautilus in your language
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:74
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:73
+msgid "Files"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:75
+msgid "Caja"
+msgstr ""
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:76
 #, c-format
 msgid ""
-"You can restore the entire backup with the %s button or use Files to either "
+"You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
 msgstr ""
-"'S urrainn dhut an lethbhreac-glèidhidh aiseag gu slàn leis a' phutan %s no "
-"Faidhlichean a chleachdadh gus faidhlichean fa leth no feadhainn a tha a "
-"dhìth aiseag."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:82
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:84
 #, c-format
 msgid ""
 "You can create a backup after you first install some necessary software by "
@@ -1225,11 +1223,11 @@ msgstr ""
 "'S urrainn dhut lethbhreacan-glèidhidh a chruthachadh nuair a bhios tu air "
 "am bathar-bog a tha a dhìth a stàladh 's tu a' briogadh air a' phutan \"%s\"."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:88
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:90
 msgid "Back Up Now…"
 msgstr "Dèan lethbhreac-glèidhidh an-dràsta..."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:89
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:91
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
@@ -1238,18 +1236,18 @@ msgstr ""
 "Bu chòir dhut lethbhreacan-glèidhidh fèin-obrachail a chur <a href=''>an "
 "comas</a> no am putan %s a chleachdadh gus fear a thòiseachadh an-dràsta."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:95
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
 msgid "A backup automatically starts every day."
 msgstr ""
 "Tòisichear gu fèin-obrachail air lethbhreac-glèidhidh a dhèanamh gach latha."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:99
 msgid "A backup automatically starts every week."
 msgstr ""
 "Tòisichear gu fèin-obrachail air lethbhreac-glèidhidh a dhèanamh gach "
 "seachdain."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:100
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:102
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1614,8 +1612,8 @@ msgstr "A'  dèanamh liosta nam faidhlichean..."
 #: ../libdeja/Operation.vala:69 ../libdeja/Operation.vala:103
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:385
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:392
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:411
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:416
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:417
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:422
 msgid "Preparing…"
 msgstr "'Ga ullachadh..."
 
@@ -1629,32 +1627,32 @@ msgid "Paused (no network)"
 msgstr "'Na stad (chan eil lìonra ann)"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:443
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:449
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr ""
 "Cha b' urrainn dhuinn \"%s\" aiseag, chan e ionad dligheach a tha ann"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:510
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:516
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Tha ionad nan lethbhreacan-glèidhidh ro bheag. Feuch ionad aig a bheil "
 "barrachd àite."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:533
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:539
 msgid "Backup location does not have enough free space."
 msgstr "Chan eil àite saor gu leòr aig ionad nan lethbhreacan-glèidhidh."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:553
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:567
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:559
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:573
 msgid "Cleaning up…"
 msgstr "'Ga sgioblachadh..."
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:663
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:669
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
@@ -1665,7 +1663,7 @@ msgstr ""
 #. OK, we succeeded yay!  But some files didn't actually restore
 #. because we couldn't write to them.  So tell the user so they
 #. don't think everything is hunky dory.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:679
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:685
 msgid ""
 "Could not restore the following files.  Please make sure you are able to "
 "write to them."
@@ -1676,7 +1674,7 @@ msgstr ""
 #. make text a little nicer than duplicity gives
 #. duplicity gives something like "home/blah/blah not found in archive,
 #. no files restored".
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:923
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:929
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
@@ -1686,17 +1684,17 @@ msgstr ""
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:929
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1027
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1031
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:935
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1033
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1037
 msgid "Bad encryption password."
 msgstr "Droch fhacal-faire crioptachaidh."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:934
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:940
 msgid "Computer name changed"
 msgstr "Chaidh ainm a' choimpiutair atharrachadh"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:934
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:940
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -1707,71 +1705,71 @@ msgstr ""
 "bheil \"%s\" ach 's e \"%s\" an t-ainm a tha air a' choimpiutair-sa. Mur eil "
 "dùil agad ri seo, bu chòir dhut lethbhreac-glèidhidh a chur a dh'ionad eile."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:969
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:975
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Chaidh cruthachadh \"%s\" a dhiùltadh."
 
 #. assume error is on backend side
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:973
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:977
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:979
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:983
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Chaidh leughadh \"%s\" a dhiùltadh."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:981
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:987
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Chaidh sguabadh às \"%s\" a dhiùltadh."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:988
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:994
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Chan eil ionad nan lethbhreacan-glèidhidh \"%s\" ann."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:994
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1046
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1000
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1052
 msgid "No space left."
 msgstr "Chan eil àite air fhàgail."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1008
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1014
 msgid "Invalid ID."
 msgstr "ID mì-dhligheach."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1010
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1016
 msgid "Invalid secret key."
 msgstr "Iuchair rùin mhì-dhligheach."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1012
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1018
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Cha deach cunntas nan seirbheisean-lìn Amazon agad a chlàradh airson na "
 "seirbheise S3."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1021
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1027
 msgid "S3 bucket name is not available."
 msgstr "Chan eil ainm na bucaide S3 ri fhaighinn."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1035
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1041
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Mearachd a' leughadh an fhaidhle \"%s\"."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1037
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1043
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Mearachd a' sgrìobhadh an fhaidhle \"%s\"."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1048
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1054
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Chan eil àite air fhàgail ann an \"%s\"."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1056
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1062
 msgid "No backup files found"
 msgstr "Cha deach faidhlichean lethbhreacan-glèidhidh a lorg"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1106
+#: ../libdeja/tools/duplicity/DuplicityJob.vala:1112
 msgid "Uploading…"
 msgstr "'Ga luchdadh suas...."
 
@@ -1792,6 +1790,30 @@ msgid ""
 msgstr ""
 "Feumaidh inneal nan lethbhreacan-glèidhidh Déjà Dup tionndadh %d.%d.%.2d de "
 "Duplicity air a' char as lugha ach 's %d.%d.%.2d an tionndadh a chaidh a lorg"
+
+#~ msgid ""
+#~ "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
+#~ "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+#~ "and $VIDEO are recognized as the user’s special directories. Relative "
+#~ "entries are relative to the user’s home directory."
+#~ msgstr ""
+#~ "Seo liosta nam pasganan a thèid lethbhreacan-glèidhidh a dhèanamh dhiubh. "
+#~ "Tha $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, "
+#~ "$PUBLIC_SHARE, $TEMPLATES, $TRASH agus $VIDEO 'nan luachan glèidhte agus "
+#~ "aithnichear iad mar phasganan sònraichte a' chleachdaiche. Bidh innteartan "
+#~ "dàimheach dàimheach ri pasgan-dachaigh a' chleachdaiche."
+
+#~ msgid ""
+#~ "This list of directories will not be backed up. Reserved values $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
+#~ "directories. Relative entries are relative to the user’s home directory."
+#~ msgstr ""
+#~ "Cha dèid lethbhreacan-glèidhidh a dhèanamh dhe na pasganan air an liosta "
+#~ "seo. Tha $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH agus $VIDEO 'nan luachan glèidhte agus aithnichear iad "
+#~ "mar phasganan sònraichte a' chleachdaiche. Tha innteartan dàimheach ri "
+#~ "pasgan dachaigh a' chleachdaiche."
 
 #~ msgid "The Ubuntu One folder"
 #~ msgstr "Pasgan Ubuntu One"
@@ -1819,3 +1841,12 @@ msgstr ""
 #~ msgstr ""
 #~ "Taic airson ionadan lethbhreacan-glèidhidh ionadail, cèine no air neul a "
 #~ "leithid Amazon S3, Rackspace Cloud Files agus Ubuntu One"
+
+#, c-format
+#~ msgid ""
+#~ "You can restore the entire backup with the %s button or use Files to either "
+#~ "revert individual files or restore missing ones."
+#~ msgstr ""
+#~ "'S urrainn dhut an lethbhreac-glèidhidh aiseag gu slàn leis a' phutan %s no "
+#~ "Faidhlichean a chleachdadh gus faidhlichean fa leth no feadhainn a tha a "
+#~ "dhìth aiseag."

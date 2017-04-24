@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-04-07 12:03-0400\n"
-"PO-Revision-Date: 2017-01-04 15:10+0000\n"
-"Last-Translator: Christian Kirbach <Unknown>\n"
+"POT-Creation-Date: 2017-03-09 14:16-0500\n"
+"PO-Revision-Date: 2017-03-11 22:10+0000\n"
+"Last-Translator: Vej <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-01-05 06:07+0000\n"
-"X-Generator: Launchpad (build 18298)\n"
+"X-Launchpad-Export-Date: 2017-03-14 07:27+0000\n"
+"X-Generator: Launchpad (build 18331)\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 #: ../deja-dup/preferences/Preferences.vala:286
@@ -27,13 +27,17 @@ msgstr "Zu sichernde Ordner"
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-"and $VIDEO are recognized as the user’s special directories. Relative "
-"entries are relative to the user’s home directory."
+"and $VIDEOS are recognized as the user’s special directories and can be at "
+"the start of a longer path ($HOME/subdir). Reserved value $USER is replaced "
+"by the user’s username and can be anywhere in the path. Relative entries are "
+"relative to the user’s home directory."
 msgstr ""
-"Diese Auswahl an Ordnern wird gesichert. $HOME, $DESKTOP, $DOCUMENTS, "
-"$DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, und $VIDEO "
-"werden als besonders wichtige Ordner des Benutzers vermerkt.\r\n"
-"Relative Angaben sind relativ zum persönlichen Ordner des Benutzers."
+"Diese Liste von Ordnern wird gesichert. Die reservierten Schlüsselwörter  "
+"$HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+"$TEMPLATES, $TRASH, und $VIDEOS werden am Beginn eines Pfades durch die "
+"speziellen Nutzerordner ersetzt. Das Schlüsselwort $USER wird überall im "
+"Pfad mit dem Benutzernamen ersetzt. Relative Pfade gehen immer vom "
+"persönlichen Ordner des Benutzers aus."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
 #: ../deja-dup/preferences/Preferences.vala:297
@@ -44,14 +48,17 @@ msgstr "Zu ignorierende Ordner"
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
-"directories. Relative entries are relative to the user’s home directory."
+"$TEMPLATES, $TRASH, and $VIDEOS are recognized as the user’s special "
+"directories and can be at the start of a longer path ($HOME/subdir). "
+"Reserved value $USER is replaced by the user’s username and can be anywhere "
+"in the path. Relative entries are relative to the user’s home directory."
 msgstr ""
 "Diese Liste von Ordnern wird von der Datensicherung ausgenommen. Die "
 "reservierten Schlüsselwörter  $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, "
-"$MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, und $VIDEO werden als "
-"die speziellen Benutzerordner erkannt. Relative Pfade gehen immer vom "
-"persönlichen Ordner des Benutzers aus."
+"$MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, und $VIDEOS werden am "
+"Beginn eines Pfades durch die speziellen Nutzerordner ersetzt. Das "
+"Schlüsselwort $USER wird überall im Pfad mit dem Benutzernamen ersetzt. "
+"Relative Pfade gehen immer vom persönlichen Ordner des Benutzers aus."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
 msgid "Whether to request the root password"
@@ -574,19 +581,19 @@ msgstr "Sicherung läuft …"
 msgid "Scanning:"
 msgstr "Einlesevorgang:"
 
-#: ../deja-dup/AssistantOperation.vala:258
+#: ../deja-dup/AssistantOperation.vala:259
 msgid "_Details"
 msgstr "_Details"
 
-#: ../deja-dup/AssistantOperation.vala:306
+#: ../deja-dup/AssistantOperation.vala:307
 msgid "_Allow restoring without a password"
 msgstr "Wiederherstellung ohne Passwort _erlauben"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:313
 msgid "_Password-protect your backup"
 msgstr "Datensicherung mit _Passwort verschlüsseln"
 
-#: ../deja-dup/AssistantOperation.vala:324
+#: ../deja-dup/AssistantOperation.vala:325
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
@@ -594,26 +601,26 @@ msgstr ""
 "Sie werden Ihr Passwort benötigen, um Ihre Dateien wiederherstellen zu "
 "können. Daher wird Ihnen empfohlen, es aufzuschreiben."
 
-#: ../deja-dup/AssistantOperation.vala:339
-#: ../deja-dup/AssistantOperation.vala:408
+#: ../deja-dup/AssistantOperation.vala:340
+#: ../deja-dup/AssistantOperation.vala:409
 msgid "E_ncryption password"
 msgstr "Passwort zum Verschlüssel_n"
 
-#: ../deja-dup/AssistantOperation.vala:356
+#: ../deja-dup/AssistantOperation.vala:357
 msgid "Confir_m password"
 msgstr "Passwort _bestätigen"
 
-#: ../deja-dup/AssistantOperation.vala:369
-#: ../deja-dup/AssistantOperation.vala:417
+#: ../deja-dup/AssistantOperation.vala:370
+#: ../deja-dup/AssistantOperation.vala:418
 msgid "_Show password"
 msgstr "Passwort an_zeigen"
 
-#: ../deja-dup/AssistantOperation.vala:376
+#: ../deja-dup/AssistantOperation.vala:377
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "An Passwort _erinnern"
 
-#: ../deja-dup/AssistantOperation.vala:395
+#: ../deja-dup/AssistantOperation.vala:396
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -623,15 +630,15 @@ msgstr ""
 "Sie bitte Ihr Verschlüsselungspasswort erneut ein, um einen kurzen "
 "Wiederherstellungstest durchzuführen."
 
-#: ../deja-dup/AssistantOperation.vala:422
+#: ../deja-dup/AssistantOperation.vala:423
 msgid "Test every two _months"
 msgstr "Alle zwei _Monate überprüfen"
 
-#: ../deja-dup/AssistantOperation.vala:496
+#: ../deja-dup/AssistantOperation.vala:497
 msgid "Summary"
 msgstr "Zusammenfassung"
 
-#: ../deja-dup/AssistantOperation.vala:518
+#: ../deja-dup/AssistantOperation.vala:519
 msgid "Restore Test"
 msgstr "Wiederherstellungstest"
 
@@ -641,21 +648,21 @@ msgstr "Wiederherstellungstest"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: ../deja-dup/AssistantOperation.vala:594
+#: ../deja-dup/AssistantOperation.vala:595
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:702
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:1081
 msgid "Failed with an unknown error."
 msgstr "Mit unbekanntem Fehler fehlgeschlagen."
 
-#: ../deja-dup/AssistantOperation.vala:791
+#: ../deja-dup/AssistantOperation.vala:792
 msgid "Require Password?"
 msgstr "Passwort verlangen?"
 
-#: ../deja-dup/AssistantOperation.vala:793
+#: ../deja-dup/AssistantOperation.vala:794
 msgid "Encryption Password Needed"
 msgstr "Verschlüsselungspasswort erforderlich"
 
-#: ../deja-dup/AssistantOperation.vala:865
+#: ../deja-dup/AssistantOperation.vala:866
 msgid "Backup encryption password"
 msgstr "Passwort für die Verschlüsselung der Sicherung"
 
@@ -1035,7 +1042,7 @@ msgstr "_Installieren…"
 
 #: ../deja-dup/preferences/Preferences.vala:243
 #: ../deja-dup/widgets/ConfigLabelDescription.vala:59
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:81
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:83
 msgid "Install…"
 msgstr "Installieren…"
 
@@ -1166,18 +1173,25 @@ msgstr ""
 "Sie können den Knopf »%s« verwenden, um bestehende Datensicherungen zu "
 "suchen."
 
-#. Translators: Files is the user-visible name of nautilus in your language
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:74
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:73
+msgid "Files"
+msgstr "Dateien"
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:75
+msgid "Caja"
+msgstr "Caja"
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:76
 #, c-format
 msgid ""
-"You can restore the entire backup with the %s button or use Files to either "
+"You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
 msgstr ""
-"Auf den Knopf »%s« klicken, um die gesamte Datensicherung wiederherzustellen "
-"– oder die Dateiverwaltung verwenden, um einzelne Dateien durch ältere "
-"Versionen zu ersetzen bzw. fehlende wiederherzustellen."
+"Das gesamte Backup kann durch Klick auf %s wiederhergestellt werden. "
+"Alternativ kann %s zum Zurücksetzen einzelner Dateien, sowie für die "
+"Wiederherstellung fehlender Dateien verwendet werden."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:82
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:84
 #, c-format
 msgid ""
 "You can create a backup after you first install some necessary software by "
@@ -1186,11 +1200,11 @@ msgstr ""
 "Datensicherungen können erstellt werden. Die dafür notwendige Anwendung ist "
 "zuvor zu installieren. Dazu bitte den Knopf »%s« drücken."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:88
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:90
 msgid "Back Up Now…"
 msgstr "Jetzt sichern …"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:89
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:91
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
@@ -1199,15 +1213,15 @@ msgstr ""
 "Sie sollten automatische Datensicherungen <a href=''>einschalten</a> oder "
 "auf den Knopf %s klicken, um jetzt eine Datensicherung zu starten."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:95
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
 msgid "A backup automatically starts every day."
 msgstr "Eine Datensicherung wird automatisch jeden Tag gestartet."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:99
 msgid "A backup automatically starts every week."
 msgstr "Eine Datensicherung wird automatisch jede Woche gestartet."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:100
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:102
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1736,6 +1750,29 @@ msgstr ""
 "Déjà Dup benötigt mindestens Version %d.%d.%.2d von Duplicity, es konnte "
 "aber nur Version %d.%d.%.2d gefunden werden"
 
+#~ msgid ""
+#~ "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
+#~ "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+#~ "and $VIDEO are recognized as the user’s special directories. Relative "
+#~ "entries are relative to the user’s home directory."
+#~ msgstr ""
+#~ "Diese Auswahl an Ordnern wird gesichert. $HOME, $DESKTOP, $DOCUMENTS, "
+#~ "$DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, und $VIDEO "
+#~ "werden als besonders wichtige Ordner des Benutzers vermerkt.\r\n"
+#~ "Relative Angaben sind relativ zum persönlichen Ordner des Benutzers."
+
+#~ msgid ""
+#~ "This list of directories will not be backed up. Reserved values $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
+#~ "directories. Relative entries are relative to the user’s home directory."
+#~ msgstr ""
+#~ "Diese Liste von Ordnern wird von der Datensicherung ausgenommen. Die "
+#~ "reservierten Schlüsselwörter  $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, "
+#~ "$MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, und $VIDEO werden als "
+#~ "die speziellen Benutzerordner erkannt. Relative Pfade gehen immer vom "
+#~ "persönlichen Ordner des Benutzers aus."
+
 #~ msgid "The Ubuntu One folder"
 #~ msgstr "Der Ordner »Ubuntu One«"
 
@@ -1766,3 +1803,12 @@ msgstr ""
 
 #~ msgid "Directory does not exists"
 #~ msgstr "Verzeichnis ist nicht vorhanden"
+
+#, c-format
+#~ msgid ""
+#~ "You can restore the entire backup with the %s button or use Files to either "
+#~ "revert individual files or restore missing ones."
+#~ msgstr ""
+#~ "Auf den Knopf »%s« klicken, um die gesamte Datensicherung wiederherzustellen "
+#~ "– oder die Dateiverwaltung verwenden, um einzelne Dateien durch ältere "
+#~ "Versionen zu ersetzen bzw. fehlende wiederherzustellen."

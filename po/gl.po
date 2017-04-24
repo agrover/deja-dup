@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-04-07 12:03-0400\n"
+"POT-Creation-Date: 2017-03-09 14:16-0500\n"
 "PO-Revision-Date: 2017-01-20 16:44+0000\n"
 "Last-Translator: Marcos Lans <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-01-21 06:52+0000\n"
-"X-Generator: Launchpad (build 18302)\n"
+"X-Launchpad-Export-Date: 2017-03-14 07:27+0000\n"
+"X-Generator: Launchpad (build 18331)\n"
 "Language: gl\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
@@ -29,13 +29,18 @@ msgstr "Cartafoles que gardar"
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-"and $VIDEO are recognized as the user’s special directories. Relative "
-"entries are relative to the user’s home directory."
+"and $VIDEOS are recognized as the user’s special directories and can be at "
+"the start of a longer path ($HOME/subdir). Reserved value $USER is replaced "
+"by the user’s username and can be anywhere in the path. Relative entries are "
+"relative to the user’s home directory."
 msgstr ""
-"Farase copia de seguranza dos cartafoles desta lista. Os valores reservados "
+"Lista de cartafoles para facer copia de seguranza. Os valores reservados "
 "$HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, e $VIDEO recoñécense como os cartafoles especiais do "
-"usuario. As entradas relativas tomaranse en relación ao cartafol do usuario."
+"$TEMPLATES, $TRASH e $VIDEOS son recoñecidos como cartafoles especiais do "
+"usuario e poden estar no comezo dunha ruta máis longa ($HOME/subcartafol). O "
+"valor reservado $USER substitúese polo «nome do usuario» do usuario e pode "
+"estar en calquera parte da ruta. As entradas relativas son relativas con "
+"respecto ao cartafol persoal do usuario."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
 #: ../deja-dup/preferences/Preferences.vala:297
@@ -46,14 +51,18 @@ msgstr "Cartafoles a ignorar"
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
-"directories. Relative entries are relative to the user’s home directory."
+"$TEMPLATES, $TRASH, and $VIDEOS are recognized as the user’s special "
+"directories and can be at the start of a longer path ($HOME/subdir). "
+"Reserved value $USER is replaced by the user’s username and can be anywhere "
+"in the path. Relative entries are relative to the user’s home directory."
 msgstr ""
-"Dos cartafoles desta lista non se fará copia. Os valores reservados $HOME, "
-"$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, e $VIDEO recoñécense como cartafoles especiais do "
-"usuario. As entradas relativas son relativas ao cartafol de inicio do "
-"usuario."
+"Lista de cartafoles para os que non facer copia de seguranza. Os valores "
+"reservados $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, "
+"$PUBLIC_SHARE, $TEMPLATES, $TRASH e $VIDEOS son recoñecidos como cartafoles "
+"especiais do usuario e poden estar no comezo dunha ruta máis longa "
+"($HOME/subcartafol). O valor reservado $USER substitúese polo «nome do "
+"usuario» do usuario e pode estar en calquera parte da ruta. As entradas "
+"relativas son relativas con respecto ao cartafol persoal do usuario."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
 msgid "Whether to request the root password"
@@ -576,19 +585,19 @@ msgstr "Creando a copia..."
 msgid "Scanning:"
 msgstr "Analizando:"
 
-#: ../deja-dup/AssistantOperation.vala:258
+#: ../deja-dup/AssistantOperation.vala:259
 msgid "_Details"
 msgstr "_Detalles"
 
-#: ../deja-dup/AssistantOperation.vala:306
+#: ../deja-dup/AssistantOperation.vala:307
 msgid "_Allow restoring without a password"
 msgstr "Permitir rest_aurar sen contrasinal"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:313
 msgid "_Password-protect your backup"
 msgstr "_Protexa a súa copia de seguranza cun contrasinal"
 
-#: ../deja-dup/AssistantOperation.vala:324
+#: ../deja-dup/AssistantOperation.vala:325
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
@@ -596,26 +605,26 @@ msgstr ""
 "Precisará do seu contrasinal para restaurar os seus ficheiros. "
 "Recomendámoslle que o escriba e o garde nun lugar seguro."
 
-#: ../deja-dup/AssistantOperation.vala:339
-#: ../deja-dup/AssistantOperation.vala:408
+#: ../deja-dup/AssistantOperation.vala:340
+#: ../deja-dup/AssistantOperation.vala:409
 msgid "E_ncryption password"
 msgstr "Co_ntrasinal de cifrado"
 
-#: ../deja-dup/AssistantOperation.vala:356
+#: ../deja-dup/AssistantOperation.vala:357
 msgid "Confir_m password"
 msgstr "Confir_mar o contrasinal"
 
-#: ../deja-dup/AssistantOperation.vala:369
-#: ../deja-dup/AssistantOperation.vala:417
+#: ../deja-dup/AssistantOperation.vala:370
+#: ../deja-dup/AssistantOperation.vala:418
 msgid "_Show password"
 msgstr "Mostrar o _contrasinal"
 
-#: ../deja-dup/AssistantOperation.vala:376
+#: ../deja-dup/AssistantOperation.vala:377
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Lembrar o contrasinal"
 
-#: ../deja-dup/AssistantOperation.vala:395
+#: ../deja-dup/AssistantOperation.vala:396
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -625,15 +634,15 @@ msgstr ""
 "emerxencia, escriba o seu contrasinal de cifrado de novo para levar a cabo "
 "unha proba de restauración breve."
 
-#: ../deja-dup/AssistantOperation.vala:422
+#: ../deja-dup/AssistantOperation.vala:423
 msgid "Test every two _months"
 msgstr "Probar cada dous _meses"
 
-#: ../deja-dup/AssistantOperation.vala:496
+#: ../deja-dup/AssistantOperation.vala:497
 msgid "Summary"
 msgstr "Resumo"
 
-#: ../deja-dup/AssistantOperation.vala:518
+#: ../deja-dup/AssistantOperation.vala:519
 msgid "Restore Test"
 msgstr "Proba de restauración"
 
@@ -643,21 +652,21 @@ msgstr "Proba de restauración"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: ../deja-dup/AssistantOperation.vala:594
+#: ../deja-dup/AssistantOperation.vala:595
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:702
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:1081
 msgid "Failed with an unknown error."
 msgstr "Produciuse un erro descoñecido."
 
-#: ../deja-dup/AssistantOperation.vala:791
+#: ../deja-dup/AssistantOperation.vala:792
 msgid "Require Password?"
 msgstr "Requirir un contrasinal?"
 
-#: ../deja-dup/AssistantOperation.vala:793
+#: ../deja-dup/AssistantOperation.vala:794
 msgid "Encryption Password Needed"
 msgstr "Precisase o contrasinal de cifrado"
 
-#: ../deja-dup/AssistantOperation.vala:865
+#: ../deja-dup/AssistantOperation.vala:866
 msgid "Backup encryption password"
 msgstr "Contrasinal de cifrado da copia de seguranza"
 
@@ -1039,7 +1048,7 @@ msgstr "_Instalar…"
 
 #: ../deja-dup/preferences/Preferences.vala:243
 #: ../deja-dup/widgets/ConfigLabelDescription.vala:59
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:81
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:83
 msgid "Install…"
 msgstr "Instalar..."
 
@@ -1169,17 +1178,24 @@ msgid "You may use the %s button to browse for existing backups."
 msgstr ""
 "Debe usar o botón %s para examinar as copias de seguranza existentes."
 
-#. Translators: Files is the user-visible name of nautilus in your language
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:74
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:73
+msgid "Files"
+msgstr "Ficheiros"
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:75
+msgid "Caja"
+msgstr "Caja"
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:76
 #, c-format
 msgid ""
-"You can restore the entire backup with the %s button or use Files to either "
+"You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
 msgstr ""
-"Pode restabelecer a copia de seguranza completa co botón %s, usar Ficheiros "
-"para restaurar ficheiros individuais ou restaurar algún que falte."
+"Pode restabelecer unha copia de seguranza co botón %s, usar %s ou ben "
+"reverter ficheiros individuais ou restaurar os desaparecidos."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:82
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:84
 #, c-format
 msgid ""
 "You can create a backup after you first install some necessary software by "
@@ -1188,11 +1204,11 @@ msgstr ""
 "Pode crear unha copia de seguranza despois de instalar o software necesario "
 "premendo no boton %s."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:88
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:90
 msgid "Back Up Now…"
 msgstr "Facer unha copia agora..."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:89
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:91
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
@@ -1201,15 +1217,15 @@ msgstr ""
 "Debería <a href=''>activar</a> as copias de seguranza automáticas ou usar o "
 "botón %s para iniciar unha."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:95
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
 msgid "A backup automatically starts every day."
 msgstr "Executarase unha copia de seguranza diaria automaticamente."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:99
 msgid "A backup automatically starts every week."
 msgstr "Executarase unha copia de seguranza semanal automaticamente."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:100
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:102
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1730,6 +1746,29 @@ msgstr ""
 "A ferramenta de copias de seguranza Déjà Dup require como mínimo da versión "
 "%d.%d.%.2d de duplicity, pero só se atopou versión %d.%d.%.2d"
 
+#~ msgid ""
+#~ "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
+#~ "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+#~ "and $VIDEO are recognized as the user’s special directories. Relative "
+#~ "entries are relative to the user’s home directory."
+#~ msgstr ""
+#~ "Farase copia de seguranza dos cartafoles desta lista. Os valores reservados "
+#~ "$HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, e $VIDEO recoñécense como os cartafoles especiais do "
+#~ "usuario. As entradas relativas tomaranse en relación ao cartafol do usuario."
+
+#~ msgid ""
+#~ "This list of directories will not be backed up. Reserved values $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
+#~ "directories. Relative entries are relative to the user’s home directory."
+#~ msgstr ""
+#~ "Dos cartafoles desta lista non se fará copia. Os valores reservados $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, e $VIDEO recoñécense como cartafoles especiais do "
+#~ "usuario. As entradas relativas son relativas ao cartafol de inicio do "
+#~ "usuario."
+
 #~ msgid "The Ubuntu One folder"
 #~ msgstr "O cartafol de Ubuntu One"
 
@@ -1759,3 +1798,11 @@ msgstr ""
 #~ msgstr ""
 #~ "Compatibilidade para copia de ficheiros locais, remotos ou na nube como "
 #~ "Amazon S3, Rackspace Cloud Files e Ubuntu One"
+
+#, c-format
+#~ msgid ""
+#~ "You can restore the entire backup with the %s button or use Files to either "
+#~ "revert individual files or restore missing ones."
+#~ msgstr ""
+#~ "Pode restabelecer a copia de seguranza completa co botón %s, usar Ficheiros "
+#~ "para restaurar ficheiros individuais ou restaurar algún que falte."

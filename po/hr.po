@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-04-07 12:03-0400\n"
+"POT-Creation-Date: 2017-03-09 14:16-0500\n"
 "PO-Revision-Date: 2017-01-26 14:55+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2017-01-27 06:16+0000\n"
-"X-Generator: Launchpad (build 18315)\n"
+"X-Launchpad-Export-Date: 2017-03-14 07:28+0000\n"
+"X-Generator: Launchpad (build 18331)\n"
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
 #: ../deja-dup/preferences/Preferences.vala:286
@@ -28,13 +28,17 @@ msgstr "Mape uključene u sigurnosno kopiranje"
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-"and $VIDEO are recognized as the user’s special directories. Relative "
-"entries are relative to the user’s home directory."
+"and $VIDEOS are recognized as the user’s special directories and can be at "
+"the start of a longer path ($HOME/subdir). Reserved value $USER is replaced "
+"by the user’s username and can be anywhere in the path. Relative entries are "
+"relative to the user’s home directory."
 msgstr ""
-"Ovaj popis direktorija će biti sigurnosno kopiran. Rezervirano vrijednosti "
+"Mape na ovom popisu će biti sigurnosno kopirane. Rezervirane vrijednosti "
 "$HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, i $VIDEO su prepoznate kao korisnikovi posebni "
-"direktoriji. Srodne stavke su slične osobnom korisnikovu direktoriju."
+"$TEMPLATES, $TRASH, i $VIDEOS su prepoznate kao posebne korisničke mape i "
+"mogu biti na početku dulje putanje ($HOME/podmapa). Rezervirana vrijednost "
+"$USER je zamijenjenja korisničkim imenom i može se koristiti bilo gdje u "
+"putanji. Relativni unosi su relativni osobnoj mapi korisnika."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
 #: ../deja-dup/preferences/Preferences.vala:297
@@ -45,13 +49,17 @@ msgstr "Mape isključene iz sigurnosnog kopiranja"
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
-"directories. Relative entries are relative to the user’s home directory."
+"$TEMPLATES, $TRASH, and $VIDEOS are recognized as the user’s special "
+"directories and can be at the start of a longer path ($HOME/subdir). "
+"Reserved value $USER is replaced by the user’s username and can be anywhere "
+"in the path. Relative entries are relative to the user’s home directory."
 msgstr ""
-"Ovaj popis direktorija neće biti sigurnosno kopiran. Rezervirano vrijednosti "
+"Mape na ovom popisu neće biti sigurnosno kopirane. Rezervirane vrijednosti "
 "$HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-"$TEMPLATES, $TRASH, i $VIDEO su prepoznate kao korisnikovi posebni "
-"direktoriji. Srodne stavke su slične osobnom korisnikovu direktoriju."
+"$TEMPLATES, $TRASH, i $VIDEOS su prepoznate kao posebne korisničke mape i "
+"mogu biti na početku dulje putanje ($HOME/podmapa). Rezervirana vrijednost "
+"$USER je zamijenjenja korisničkim imenom i može se koristiti bilo gdje u "
+"putanji. Relativni unosi su relativni osobnoj mapi korisnika."
 
 #: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
 msgid "Whether to request the root password"
@@ -570,19 +578,19 @@ msgstr "Sigurnosno kopirnje..."
 msgid "Scanning:"
 msgstr "Pretraživanje:"
 
-#: ../deja-dup/AssistantOperation.vala:258
+#: ../deja-dup/AssistantOperation.vala:259
 msgid "_Details"
 msgstr "_Pojedinosti"
 
-#: ../deja-dup/AssistantOperation.vala:306
+#: ../deja-dup/AssistantOperation.vala:307
 msgid "_Allow restoring without a password"
 msgstr "_Dopusti vraćanje bez lozinke"
 
-#: ../deja-dup/AssistantOperation.vala:312
+#: ../deja-dup/AssistantOperation.vala:313
 msgid "_Password-protect your backup"
 msgstr "_Zaštitite lozinkom svoju sigurnosnu kopiju"
 
-#: ../deja-dup/AssistantOperation.vala:324
+#: ../deja-dup/AssistantOperation.vala:325
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
@@ -590,26 +598,26 @@ msgstr ""
 "Trebat ćete vašu lozinku da bi mogli vratiti svoje datoteke. Možda ju želite "
 "zapisati."
 
-#: ../deja-dup/AssistantOperation.vala:339
-#: ../deja-dup/AssistantOperation.vala:408
+#: ../deja-dup/AssistantOperation.vala:340
+#: ../deja-dup/AssistantOperation.vala:409
 msgid "E_ncryption password"
 msgstr "Š_ifrirana lozinka"
 
-#: ../deja-dup/AssistantOperation.vala:356
+#: ../deja-dup/AssistantOperation.vala:357
 msgid "Confir_m password"
 msgstr "Potvrd_i lozinku"
 
-#: ../deja-dup/AssistantOperation.vala:369
-#: ../deja-dup/AssistantOperation.vala:417
+#: ../deja-dup/AssistantOperation.vala:370
+#: ../deja-dup/AssistantOperation.vala:418
 msgid "_Show password"
 msgstr "_Prikaži lozinku"
 
-#: ../deja-dup/AssistantOperation.vala:376
+#: ../deja-dup/AssistantOperation.vala:377
 #: ../deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Zapamti lozinku"
 
-#: ../deja-dup/AssistantOperation.vala:395
+#: ../deja-dup/AssistantOperation.vala:396
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -618,15 +626,15 @@ msgstr ""
 "Za provjeru mogućnosti preuzimanja svojih datoteka u hitnom slučaju, upišite "
 "ponovno svoju šifriranu lozinku za izvođenje kratkog testa vraćanja."
 
-#: ../deja-dup/AssistantOperation.vala:422
+#: ../deja-dup/AssistantOperation.vala:423
 msgid "Test every two _months"
 msgstr "Testiraj svaka dva _mjeseca"
 
-#: ../deja-dup/AssistantOperation.vala:496
+#: ../deja-dup/AssistantOperation.vala:497
 msgid "Summary"
 msgstr "Kratak pregled"
 
-#: ../deja-dup/AssistantOperation.vala:518
+#: ../deja-dup/AssistantOperation.vala:519
 msgid "Restore Test"
 msgstr "Test vraćanja"
 
@@ -636,21 +644,21 @@ msgstr "Test vraćanja"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: ../deja-dup/AssistantOperation.vala:594
+#: ../deja-dup/AssistantOperation.vala:595
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:702
 #: ../libdeja/tools/duplicity/DuplicityJob.vala:1081
 msgid "Failed with an unknown error."
 msgstr "Neuspjelo s nepoznatom greškom."
 
-#: ../deja-dup/AssistantOperation.vala:791
+#: ../deja-dup/AssistantOperation.vala:792
 msgid "Require Password?"
 msgstr "Potrebna je lozinka?"
 
-#: ../deja-dup/AssistantOperation.vala:793
+#: ../deja-dup/AssistantOperation.vala:794
 msgid "Encryption Password Needed"
 msgstr "Potrebna je lozinka šifriranja"
 
-#: ../deja-dup/AssistantOperation.vala:865
+#: ../deja-dup/AssistantOperation.vala:866
 msgid "Backup encryption password"
 msgstr "Lozinka šifriranja sigurnosne kopije"
 
@@ -1033,7 +1041,7 @@ msgstr "_Instaliraj…"
 
 #: ../deja-dup/preferences/Preferences.vala:243
 #: ../deja-dup/widgets/ConfigLabelDescription.vala:59
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:81
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:83
 msgid "Install…"
 msgstr "Instaliraj…"
 
@@ -1165,17 +1173,24 @@ msgstr "Vrati..."
 msgid "You may use the %s button to browse for existing backups."
 msgstr "Možete koristiti %s tipku za pregled postojećih sigurnosnih kopija."
 
-#. Translators: Files is the user-visible name of nautilus in your language
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:74
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:73
+msgid "Files"
+msgstr "Datoteke"
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:75
+msgid "Caja"
+msgstr "Caja"
+
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:76
 #, c-format
 msgid ""
-"You can restore the entire backup with the %s button or use Files to either "
+"You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
 msgstr ""
-"Možete vratiti cijelu sigurnosnu kopiju s %s tipkom ili koristiti "
-"upravitelja datotekama za vraćanje pojedinih ili nedostajućih datoteka."
+"Možete vratiti cjelokupnu sigurnosnu kopiju s %s tipkom ili koristite %s "
+"kako bi vratili pojedinačne datoteke ili one koje nedostaju."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:82
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:84
 #, c-format
 msgid ""
 "You can create a backup after you first install some necessary software by "
@@ -1184,11 +1199,11 @@ msgstr ""
 "Možete stvoriti postojeće sigurnosne kopije nakon što najprije instalirate "
 "određeni softver klikom na %s tipku."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:88
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:90
 msgid "Back Up Now…"
 msgstr "Sigurnosno kopiraj odmah..."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:89
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:91
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
@@ -1197,15 +1212,15 @@ msgstr ""
 "Trebali bi <a href=''>omogućiti</a> automatsko sigurnosno kopiranje ili "
 "koristiti %s tipku za pokretanje trenutnog sigurnosnog kopiranja."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:95
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
 msgid "A backup automatically starts every day."
 msgstr "Sigurnosno kopiranje automatski počinje svakog dana."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:99
 msgid "A backup automatically starts every week."
 msgstr "Sigurnosno kopiranje automatski počinje svakog tjedna."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:100
+#: ../deja-dup/widgets/ConfigLabelDescription.vala:102
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1727,6 +1742,28 @@ msgstr ""
 "Déjà Dup alat sigurnosnog kopiranja zahtjeva najmanje inačicu %d.%d.%.2d "
 "dvostrukosti, pronađena inačica je %d.%d.%.2d"
 
+#~ msgid ""
+#~ "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
+#~ "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+#~ "and $VIDEO are recognized as the user’s special directories. Relative "
+#~ "entries are relative to the user’s home directory."
+#~ msgstr ""
+#~ "Ovaj popis direktorija će biti sigurnosno kopiran. Rezervirano vrijednosti "
+#~ "$HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, i $VIDEO su prepoznate kao korisnikovi posebni "
+#~ "direktoriji. Srodne stavke su slične osobnom korisnikovu direktoriju."
+
+#~ msgid ""
+#~ "This list of directories will not be backed up. Reserved values $HOME, "
+#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
+#~ "directories. Relative entries are relative to the user’s home directory."
+#~ msgstr ""
+#~ "Ovaj popis direktorija neće biti sigurnosno kopiran. Rezervirano vrijednosti "
+#~ "$HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
+#~ "$TEMPLATES, $TRASH, i $VIDEO su prepoznate kao korisnikovi posebni "
+#~ "direktoriji. Srodne stavke su slične osobnom korisnikovu direktoriju."
+
 #~ msgid "The Ubuntu One folder"
 #~ msgstr "Ubuntu One mapa"
 
@@ -1749,3 +1786,11 @@ msgstr ""
 
 #~ msgid "Directory does not exists"
 #~ msgstr "Direktorij ne postoji"
+
+#, c-format
+#~ msgid ""
+#~ "You can restore the entire backup with the %s button or use Files to either "
+#~ "revert individual files or restore missing ones."
+#~ msgstr ""
+#~ "Možete vratiti cijelu sigurnosnu kopiju s %s tipkom ili koristiti "
+#~ "upravitelja datotekama za vraćanje pojedinih ili nedostajućih datoteka."
