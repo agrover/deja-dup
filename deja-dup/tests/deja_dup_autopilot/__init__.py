@@ -40,7 +40,7 @@ def system_only(fn):
 
 
 class DejaDupTestCase(AutopilotTestCase):
-    """A test case base class for the Unity shell tests."""
+    """A test case base class for the UI."""
 
     def setUp(self):
         super(DejaDupTestCase, self).setUp()

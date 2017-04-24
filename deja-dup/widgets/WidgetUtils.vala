@@ -40,7 +40,6 @@ public void show_uri(Gtk.Window? parent, string link)
 public enum ShellEnv {
   NONE,
   GNOME,
-  UNITY,
   LEGACY
 }
 
@@ -53,37 +52,29 @@ protected ShellEnv shell = ShellEnv.NONE;
 public ShellEnv get_shell()
 {
   if (shell == ShellEnv.NONE) {
-#if HAVE_UNITY
-    // Easiest check is Unity -- it tells us directly
-    if (Unity.Inspector.get_default().unity_running)
-      shell = ShellEnv.UNITY;
-    else
-#endif
-    {
-      // Use Legacy unless we detect a different shell.
-      shell = ShellEnv.LEGACY;
-      // Next check for Shell by notification capabilities
-      List<string> caps = notify_get_server_caps();
-      bool persistence = false, actions = false;
-      foreach (string cap in caps) {
-        if (cap == "persistence")
-          persistence = true;
-        else if (cap == "actions")
-          actions = true;
-      }
-      if (persistence && actions) {
-        // Ensure it's really Gnome-Shell, not a variation (like Cinnamon).
-        string gsv = null;
-        try {
-          GnomeShell gs = GLib.Bus.get_proxy_sync(BusType.SESSION,
-                                                  "org.gnome.Shell",
-                                                  "/org/gnome/Shell");
-          gsv = gs.ShellVersion;
-        } catch (Error e) {}
-        if (gsv != null) {
-          // It's really GnomeShell.
-          shell = ShellEnv.GNOME;
-        }
+    // Use Legacy unless we detect a different shell.
+    shell = ShellEnv.LEGACY;
+    // Next check for Shell by notification capabilities
+    List<string> caps = notify_get_server_caps();
+    bool persistence = false, actions = false;
+    foreach (string cap in caps) {
+      if (cap == "persistence")
+        persistence = true;
+      else if (cap == "actions")
+        actions = true;
+    }
+    if (persistence && actions) {
+      // Ensure it's really Gnome-Shell, not a variation (like Cinnamon).
+      string gsv = null;
+      try {
+        GnomeShell gs = GLib.Bus.get_proxy_sync(BusType.SESSION,
+                                                "org.gnome.Shell",
+                                                "/org/gnome/Shell");
+        gsv = gs.ShellVersion;
+      } catch (Error e) {}
+      if (gsv != null) {
+        // It's really GnomeShell.
+        shell = ShellEnv.GNOME;
       }
     }
   }
@@ -103,27 +94,12 @@ public void show_background_window_for_shell(Gtk.Window win)
   win.focus_on_map = false;
   win.urgency_hint = true;
   win.focus_in_event.connect(user_focused);
-
-  if (get_shell() == ShellEnv.UNITY) {
-    // Show as a launcher icon instead of a window in the background
-    win.iconify();
-    win.show();
-    win.iconify(); // In case WM didn't respect first iconify
-  }
-  else
-    win.show();
+  win.show();
 }
 
 public void hide_background_window_for_shell(Gtk.Window win)
 {
-  if (get_shell() == ShellEnv.UNITY) {
-    // "Hide" in launcher
-    win.iconify();
-    win.show();
-    win.iconify(); // In case WM didn't respect first iconify
-  }
-  else
-    win.hide();
+  win.hide();
 }
 
 public void destroy_widget(Gtk.Widget w)

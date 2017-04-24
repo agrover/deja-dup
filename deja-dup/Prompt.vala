@@ -67,19 +67,7 @@ void ok()
 {
   DejaDup.update_prompt_time(true);
 
-  var app = new DesktopAppInfo("unity-deja-dup-panel.desktop");
-  if (app != null) {
-    try {
-      app.launch(null, Gdk.Screen.get_default().get_display().get_app_launch_context());
-      return;
-    }
-    catch (Error e) {
-      // ignore, may just be unity-control-center not being installed
-    }
-  }
-
-  // fallback to normal preference window
-  app = new DesktopAppInfo("deja-dup-preferences.desktop");
+  var app = new DesktopAppInfo("deja-dup-preferences.desktop");
   try {
     app.launch(null, Gdk.Screen.get_default().get_display().get_app_launch_context());
   }

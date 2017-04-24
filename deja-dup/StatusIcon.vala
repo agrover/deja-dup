@@ -20,22 +20,15 @@
 using GLib;
 
 /**
- * There are three modes for 'shell' integration:
+ * There are two modes for 'shell' integration:
  * 1) GNOME Shell
- * 2) Unity
- * 3) Legacy
+ * 2) Legacy
  * 
  * GNOME Shell:
  * No status icon at all.
  * Actions on persistent notifications.
  * Detected by 'persistent' capability of notification server.
  * Automatic-start and success notifications.
- * 
- * Unity:
- * Register as a launcher entry.
- * Always shows progress.
- * Success notification.
- * Detected by presence of Unity (usually on Ubuntu).
  * 
  * Legacy:
  * Standard GTK+ status icon.
@@ -46,17 +39,8 @@ public abstract class StatusIcon : Object
 {
   public static StatusIcon create(Gtk.Window window, DejaDup.Operation op, bool automatic)
   {
-    // Check unity first, since it is most direct.  Then try to guess shell
-    // based on notification capabilities.  Then just see whether we were built
-    // for indicators or not.
     StatusIcon instance = null;
     switch (DejaDup.get_shell()) {
-#if HAVE_UNITY
-    case DejaDup.ShellEnv.UNITY:
-      instance = new UnityStatusIcon(window, op, automatic);
-      break;
-#endif
-
     case DejaDup.ShellEnv.GNOME:
       instance = new ShellStatusIcon(window, op, automatic);
       break;
@@ -66,11 +50,6 @@ public abstract class StatusIcon : Object
       break;
     }
     return instance;
-  }
-
-  public enum CloseAction {
-    HIDE,
-    MINIMIZE,
   }
 
   public signal void show_window(bool user_click);
@@ -161,65 +140,6 @@ public abstract class StatusIcon : Object
     op.cancel();
   }
 }
-
-#if HAVE_UNITY
-class UnityStatusIcon : StatusIcon
-{
-  public UnityStatusIcon(Gtk.Window window, DejaDup.Operation op, bool automatic)
-  {
-    Object(window: window, op: op, automatic: automatic);
-  }
-
-  Unity.LauncherEntry entry;
-  construct {
-    entry = Unity.LauncherEntry.get_for_desktop_id("deja-dup.desktop");
-    show_automatic_progress = true;
-    if (entry != null) {
-      entry.quicklist = ensure_menu();
-      update_progress();
-    }
-  }
-
-  ~UnityStatusIcon()
-  {
-    if (entry != null) {
-      entry.progress_visible = false;
-      entry.quicklist = null;
-    }
-  }
-
-  protected override void update_progress()
-  {
-    if (entry != null) {
-      entry.progress = this.progress;
-      entry.progress_visible = true;
-    }
-  }
-
-  Dbusmenu.Menuitem? ensure_menu()
-  {
-    Dbusmenu.Menuitem menu = null;
-
-    if (op.mode == DejaDup.ToolJob.Mode.BACKUP) {
-      menu = new Dbusmenu.Menuitem();
-
-      var item = new Dbusmenu.Menuitem();
-      item.property_set(Dbusmenu.MENUITEM_PROP_LABEL, later_label);
-      item.item_activated.connect((i) => {later();});
-      menu.child_append(item);
-
-      if (automatic) {
-        item = new Dbusmenu.Menuitem();
-        item.property_set(Dbusmenu.MENUITEM_PROP_LABEL, skip_label);
-        item.item_activated.connect((i) => {skip();});
-        menu.child_append(item);
-      }
-    }
-
-    return menu;
-  }
-}
-#endif
 
 class ShellStatusIcon : StatusIcon
 {

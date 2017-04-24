@@ -24,8 +24,6 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(DejaDupMacros)
 
 deja_option(ENABLE_NAUTILUS "Build nautilus plugin" CHECK)
-deja_option(ENABLE_UNITY "Integrate with Unity" CHECK)
-deja_option(ENABLE_UNITY_CCPANEL "Build unity-control-center panel" CHECK)
 
 find_package(PkgConfig 0.24 REQUIRED)
 find_package(Vala 0.20 REQUIRED)
@@ -45,14 +43,6 @@ deja_enable_option(NAUTILUS libnautilus-extension)
 if(ENABLE_NAUTILUS)
   execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} --variable=extensiondir libnautilus-extension
                   OUTPUT_VARIABLE NAUTILUS_EXTENSIONDIR
-                  OUTPUT_STRIP_TRAILING_WHITESPACE
-                  ERROR_QUIET)
-endif()
-
-deja_enable_option(UNITY_CCPANEL libunity-control-center)
-if(ENABLE_UNITY_CCPANEL)
-  execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} --variable=extensiondir libunity-control-center
-                  OUTPUT_VARIABLE UNITY_CCPANEL_EXTENSIONDIR
                   OUTPUT_STRIP_TRAILING_WHITESPACE
                   ERROR_QUIET)
 endif()
@@ -78,12 +68,6 @@ include(${VALA_USE_FILE})
 set(COMMON_VFLAGS --target-glib=2.34)
 if(GTK_VERSION VERSION_GREATER "3.10" OR GTK_VERSION VERSION_EQUAL "3.10")
   set(COMMON_VFLAGS ${COMMON_VFLAGS} -D HAVE_GTK_3_10)
-endif()
-
-deja_enable_option(UNITY unity>=3.4.2)
-if(ENABLE_UNITY)
-  set(COMMON_VFLAGS ${COMMON_VFLAGS} -D HAVE_UNITY)
-  set(UNITY_PACKAGE "unity")
 endif()
 
 include(CTest)

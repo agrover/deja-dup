@@ -16,11 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-# Hide preferences if have control center panel
-if(ENABLE_UNITY_CCPANEL)
-  set(PREFERENCES_NOTSHOWIN "Unity7;")
-endif()
-
 vala_precompile(VALA_C preferences-main.vala
                        Preferences.vala
                 PACKAGES gtk+-3.0 libpeas-1.0 libsecret-1
@@ -37,16 +32,3 @@ set_target_properties(deja-dup-preferences PROPERTIES
 install(TARGETS deja-dup-preferences DESTINATION bin)
 
 deja_merge_po(desktop deja-dup-preferences.desktop "${CMAKE_INSTALL_FULL_DATADIR}/applications")
-
-if(ENABLE_UNITY_CCPANEL)
-add_library(deja-dup-unity-ccpanel MODULE Preferences.c PreferencesPanel.c)
-target_link_libraries(deja-dup-unity-ccpanel deja widgets ${UNITY_CCPANEL_LDFLAGS} ${GTK_LDFLAGS} ${PEAS_LDFLAGS} ${PK_LDFLAGS} ${SECRET_LDFLAGS})
-set_target_properties(deja-dup-unity-ccpanel PROPERTIES
-                      OUTPUT_NAME deja-dup
-                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/unity-ccpanel"
-                      INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/libdeja;${CMAKE_BINARY_DIR}/deja-dup/widgets"
-                      COMPILE_FLAGS "-DUSE_UNITY ${UNITY_CCPANEL_CFLAGS} ${GTK_CFLAGS} ${PEAS_CFLAGS} ${PK_CFLAGS} ${SECRET_CFLAGS} ${COMMON_CFLAGS}")
-install(TARGETS deja-dup-unity-ccpanel DESTINATION "${UNITY_CCPANEL_EXTENSIONDIR}")
-
-deja_merge_po(desktop unity-deja-dup-panel.desktop "${CMAKE_INSTALL_FULL_DATADIR}/applications")
-endif()

@@ -16,16 +16,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-if(ENABLE_UNITY_CCPANEL)
-  set(HAS_UNITY_CCPANEL "1")
-else()
-  set(HAS_UNITY_CCPANEL "0")
-endif()
-
 add_custom_target(autopilot-deja-dup
-                  COMMAND env HAS_UNITY_CCPANEL=${HAS_UNITY_CCPANEL} LANG=C DEJA_DUP_TESTING=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_SOURCE_DIR}/tests/shell" autopilot-sandbox-run deja_dup_autopilot)
+                  COMMAND env LANG=C DEJA_DUP_TESTING=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_SOURCE_DIR}/tests/shell" autopilot-sandbox-run deja_dup_autopilot)
 add_dependencies(autopilot autopilot-deja-dup)
 
 add_custom_target(autopilot-system-deja-dup
-                  COMMAND env HAS_UNITY_CCPANEL=${HAS_UNITY_CCPANEL} LANG=C DEJA_DUP_TESTING=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_SOURCE_DIR}/tests/shell-system" autopilot-sandbox-run deja_dup_autopilot)
+                  COMMAND env LANG=C DEJA_DUP_TESTING=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_SOURCE_DIR}/tests/shell-system" autopilot-sandbox-run deja_dup_autopilot)
 add_dependencies(autopilot-system autopilot-system-deja-dup)

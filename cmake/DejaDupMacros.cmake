@@ -70,8 +70,7 @@ endmacro()
 find_program(DESKTOP_FILE_VALIDATE desktop-file-validate)
 macro(deja_test_desktop DESKTOP_FILE)
   if(DESKTOP_FILE_VALIDATE)
-    # Disable for now since we use the desktop key Unity7 which isn't registered
-    #add_test(validate-${DESKTOP_FILE} ${DESKTOP_FILE_VALIDATE} ${CMAKE_CURRENT_BINARY_DIR}/${DESKTOP_FILE})
+    add_test(validate-${DESKTOP_FILE} ${DESKTOP_FILE_VALIDATE} ${CMAKE_CURRENT_BINARY_DIR}/${DESKTOP_FILE})
   endif()
 endmacro()
 
