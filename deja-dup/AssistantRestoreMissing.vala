@@ -332,7 +332,7 @@ public class AssistantRestoreMissing : AssistantRestore {
     
     var begin = backups_queue.get_begin_iter();
     var etime = begin.get();
-    Sequence<Time?>.remove(begin);
+    begin.remove();
 
     /* Update progress */
     int tepoch = int.parse(etime.format("%s"));

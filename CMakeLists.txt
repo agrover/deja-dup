@@ -26,7 +26,7 @@ include(DejaDupMacros)
 deja_option(ENABLE_NAUTILUS "Build nautilus plugin" CHECK)
 
 find_package(PkgConfig 0.24 REQUIRED)
-find_package(Vala 0.20 REQUIRED)
+find_package(Vala 0.26 REQUIRED)
 deja_find_required_program(MSGFMT msgfmt)
 deja_find_required_program(INTLTOOL_MERGE intltool-merge)
 deja_check_modules(GLIB REQUIRED glib-2.0>=2.34 gio-2.0 gio-unix-2.0 gmodule-2.0)

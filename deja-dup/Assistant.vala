@@ -105,7 +105,6 @@ public abstract class Assistant : Gtk.Window
     dlg_vbox.show_all();
     add(dlg_vbox);
 
-    ebox.ensure_style();
     ebox.override_background_color(Gtk.StateFlags.NORMAL,
                                    ebox.get_style_context().get_background_color(Gtk.StateFlags.SELECTED));
     ebox.override_color(Gtk.StateFlags.NORMAL,

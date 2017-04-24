@@ -117,7 +117,7 @@ static void notify_delay(string header, string reason)
                                    "deja-dup");
     // Pretend to be 'deja-dup', even though we are deja-dup-monitor for ease
     // of grouping all notifications from this project together.
-    note.set_hint_string("desktop-entry", "deja-dup");
+    note.set_hint("desktop-entry", "deja-dup");
     note.closed.connect((n) => {note = null;});
   }
   else
