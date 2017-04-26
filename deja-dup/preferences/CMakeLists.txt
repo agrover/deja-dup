@@ -30,5 +30,3 @@ set_target_properties(deja-dup-preferences PROPERTIES
                       INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/libdeja;${CMAKE_BINARY_DIR}/deja-dup/widgets"
                       COMPILE_FLAGS "${GTK_CFLAGS} ${PEAS_CFLAGS} ${PK_CFLAGS} ${SECRET_CFLAGS} ${COMMON_CFLAGS}")
 install(TARGETS deja-dup-preferences DESTINATION bin)
-
-deja_merge_po(desktop deja-dup-preferences.desktop "${CMAKE_INSTALL_FULL_DATADIR}/applications")
