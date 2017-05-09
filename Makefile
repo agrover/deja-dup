@@ -78,7 +78,7 @@ copy-po:
 		mkdir -p deja-dup/help/$$(basename $$po .po); \
 		cp -a $$po deja-dup/help/$$(basename $$po .po)/; \
 	done
-	bzr add po/*.po
-	bzr add deja-dup/help/*/*.po
+	git add po/*.po
+	git add deja-dup/help/*/*.po
 
 .PHONY: builddir clean dist all copy-po check screenshots
