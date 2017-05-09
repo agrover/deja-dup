@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-pos=$(ls po/*.po -1 | cut -d/ -f2 | cut -d. -f1)
+pos=$(ls *.po -1 | cut -d. -f1)
 linguas=$(echo $LINGUAS | sed 's/ /\n/g')
 
 test -n "$linguas"

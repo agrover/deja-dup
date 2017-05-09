@@ -80,4 +80,6 @@ gnome.yelp(meson.project_name(),
 
 validate_help_linguas = find_program('./validate-linguas')
 test('help-linguas', validate_help_linguas,
-    env: ['LINGUAS=' + ' '.join(help_linguas)])
+    env: ['LC_ALL=C.UTF-8',
+          'LINGUAS=' + ' '.join(help_linguas)],
+    workdir: meson.current_source_dir())

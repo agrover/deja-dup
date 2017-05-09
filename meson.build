@@ -34,7 +34,7 @@ vapidir = join_paths(meson.current_source_dir(), 'vapi')
 
 # Install paths
 datadir = join_paths(get_option('prefix'), get_option('datadir'))
-etcdir = join_paths(get_option('sysconfdir'))
+etcdir = get_option('sysconfdir')
 libdir = join_paths(get_option('prefix'), get_option('libdir'))
 libexecdir = join_paths(get_option('prefix'), get_option('libexecdir'))
 localedir = join_paths(get_option('prefix'), get_option('localedir'))
@@ -42,7 +42,7 @@ pkgdatadir = join_paths(datadir, meson.project_name())
 pkglibdir = join_paths(libdir, meson.project_name())
 pkglibexecdir = join_paths(libexecdir, meson.project_name())
 toolsdir = join_paths(pkglibexecdir, 'tools')
- 
+
 # Dependencies
 gio_dep = dependency('gio-2.0')
 gio_unix_dep = dependency('gio-unix-2.0')

@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-available=$(ls deja-dup/help/*/ -1d | cut -d/ -f3 | grep -v '^C$')
+available=$(ls */ -1d | cut -d/ -f1 | grep -v '^C$')
 linguas=$(echo $LINGUAS | sed 's/ /\n/g')
 
 test -n "$linguas"

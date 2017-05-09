@@ -43,8 +43,8 @@ linguas = [
     'fa',
     'fi',
     'fo',
-    'fr_CA',
     'fr',
+    'fr_CA',
     'fy',
     'gd',
     'gl',
@@ -77,8 +77,8 @@ linguas = [
     'pa',
     'pl',
     'ps',
-    'pt_BR',
     'pt',
+    'pt_BR',
     'ro',
     'ru',
     'se',
@@ -105,4 +105,6 @@ i18n.gettext(meson.project_name(), preset: 'glib', languages: linguas)
 
 validate_po_linguas = find_program('./validate-linguas')
 test('po-linguas', validate_po_linguas,
-    env: ['LINGUAS=' + ' '.join(linguas)])
+    env: ['LC_ALL=C.UTF-8',
+          'LINGUAS=' + ' '.join(linguas)],
+    workdir: meson.current_source_dir())

@@ -25,6 +25,7 @@ unit_tests = executable('unit-tests', ['unit-tests.vala'],
 
 test('unit-tests', dbus_run_session,
     env: ['top_builddir=' + meson.build_root(),
+          'top_srcdir=' + meson.source_root(),
           'srcdir=' + meson.current_source_dir()],
     args: [unit_tests.full_path()])
 

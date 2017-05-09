@@ -26,7 +26,7 @@ builddir:
 	@[ -d builddir ] || meson builddir
 
 check: all
-	mesontest -C builddir
+	LC_ALL=C.UTF-8 mesontest -C builddir
 
 dist: builddir screenshots
 	@if [ -z "$(VER)" ]; then echo Specify VER=; exit 1; fi
@@ -36,8 +36,8 @@ dist: builddir screenshots
 	git archive --worktree-attributes --prefix deja-dup-$(VER)/ -o builddir/deja-dup-$(VER).tar.xz HEAD
 	gpg --armor --sign --detach-sig builddir/deja-dup-*.tar.xz
 
-clean:
-	rm -rf builddir obj-*
+clean distclean:
+	rm -rf builddir
 
 deb:
 	DEB_BUILD_OPTIONS=nocheck debuild
