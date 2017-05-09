@@ -29,10 +29,12 @@ check: all
 	mesontest -C builddir
 
 dist: builddir screenshots
-	#rm -f builddir/deja-dup-*.tar*
-	#ninja -C builddir deja-dup-pot help-deja-dup-pot
-	# TODO: make tarball with git archive
-	#gpg --armor --sign --detach-sig builddir/deja-dup-*.tar.xz
+	@if [ -z "$(VER)" ]; then echo Specify VER=; exit 1; fi
+	rm -f builddir/deja-dup-*.tar*
+	ninja -C builddir deja-dup-pot help-deja-dup-pot
+	@git config tar.tar.xz.command "xz -c"
+	git archive --worktree-attributes --prefix deja-dup-$(VER)/ -o builddir/deja-dup-$(VER).tar.xz HEAD
+	gpg --armor --sign --detach-sig builddir/deja-dup-*.tar.xz
 
 clean:
 	rm -rf builddir obj-*
