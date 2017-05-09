@@ -26,11 +26,12 @@ deja_dup = executable('deja-dup',
      'AssistantRestore.vala',
      'AssistantRestoreMissing.vala',
      'MountOperationAssistant.vala',
+     'Preferences.vala',
      'Prompt.vala',
      'StatusIcon.vala'],
     vala_args: common_vflags,
     c_args: common_cflags,
-    dependencies: [gio_unix_dep, gtk_dep, notify_dep, peas_dep, secret_dep],
+    dependencies: [gio_unix_dep, gtk_dep, notify_dep, packagekit_dep, peas_dep, secret_dep],
     link_with: [libdeja, libwidgets],
     include_directories: [libdeja_inc, libwidgets_inc],
     install: true)
@@ -61,5 +62,4 @@ install_subdir('ui', install_dir: pkgdatadir)
 subdir('help')
 subdir('monitor')
 subdir('nautilus')
-subdir('preferences')
 subdir('tests')

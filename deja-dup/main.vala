@@ -20,6 +20,79 @@
 using GLib;
 
 public Gtk.Window toplevel = null;
+public Gtk.Application app = null;
+
+const ActionEntry[] actions = {
+  {"help", handle_help},
+  {"quit", handle_quit},
+};
+
+void handle_help ()
+{
+  unowned List<Gtk.Window> list = app.get_windows();
+  DejaDup.show_uri(list == null ? null : list.data, "help:deja-dup");
+}
+
+void handle_quit ()
+{
+  app.quit();
+}
+
+class PreferencesApp : Gtk.Application
+{
+  public PreferencesApp()
+  {
+    Object(application_id: "org.gnome.DejaDup.Preferences");
+  }
+
+  public override void activate ()
+  {
+    base.activate();
+
+    unowned List<Gtk.Window> list = get_windows();
+
+    if (list != null)
+      list.data.present_with_time(Gtk.get_current_event_time());
+    else {
+      // We're first instance.  Yay!
+
+      var dlg = new Gtk.ApplicationWindow(this);
+      // Translators: "Backups" is a noun
+      dlg.title = _("Backups");
+      dlg.resizable = false;
+
+      var header = new Gtk.HeaderBar();
+      header.show_close_button = true;
+      dlg.set_titlebar(header);
+
+      var auto_switch = new DejaDup.PreferencesPeriodicSwitch();
+      auto_switch.valign = Gtk.Align.CENTER;
+      header.pack_end(auto_switch);
+
+      var prefs = new DejaDup.Preferences(auto_switch);
+      prefs.border_width = 12;
+      dlg.add(prefs);
+      dlg.set_application(this);
+      dlg.show_all();
+    }
+  }
+
+  public override void startup ()
+  {
+    base.startup();
+
+    add_action_entries(actions, null);
+
+    var help = new Menu();
+    help.append(_("_Help"), "app.help");
+    var quit = new Menu();
+    quit.append(_("_Quit"), "app.quit");
+    var menu = new Menu();
+    menu.append_section(null, help);
+    menu.append_section(null, quit);
+    set_app_menu(menu);
+  }
+}
 
 class DejaDupApp : Object
 {
@@ -150,8 +223,8 @@ class DejaDupApp : Object
         return 0; // we're already done
     }
     else {
-        printerr("%s\n\n%s", _("You must specify a mode"), context.get_help(true, null));
-        return 1;
+      app = new PreferencesApp();
+      return app.run();
     }
 
     toplevel.destroy.connect(Gtk.main_quit);

@@ -58,9 +58,9 @@ screenshots: all
 	               "gsettings set org.gnome.DejaDup.File uuid 'NOPE';" \
 	               "gsettings set org.gnome.DejaDup.File type 'volume';" \
 	               "gsettings set org.gnome.DejaDup.File path '/NOPE';" \
-	               "env HOME=/NOPE deja-dup-preferences" >/dev/null 2>&1 &
+	               "env HOME=/NOPE deja-dup" >/dev/null 2>&1 &
 	@gnome-screenshot --window --delay 2 --file ./builddir/screenshots/screenshot-1.png
-	@killall deja-dup-preferences
+	@killall deja-dup
 	
 	@./tests/shell "deja-dup --backup" >/dev/null &
 	@gnome-screenshot --window --delay 2 --file ./builddir/screenshots/screenshot-2.png

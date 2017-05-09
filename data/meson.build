@@ -22,7 +22,7 @@ install_subdir(join_paths('icons', 'hicolor'),
 install_data('deja-dup.convert',
     install_dir: join_paths(datadir, 'GConf', 'gsettings'))
 
-install_man('deja-dup.1', 'deja-dup-preferences.1')
+install_man('deja-dup.1')
 
 install_data('org.gnome.DejaDup.gschema.xml',
     install_dir: join_paths(datadir, 'glib-2.0', 'schemas'))
