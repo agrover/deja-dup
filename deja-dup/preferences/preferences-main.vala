@@ -42,16 +42,13 @@ class PreferencesApp : Gtk.Application
       dlg.title = _("Backups");
       dlg.resizable = false;
 
-      DejaDup.PreferencesPeriodicSwitch auto_switch = null;
-#if HAVE_GTK_3_10
       var header = new Gtk.HeaderBar();
       header.show_close_button = true;
       dlg.set_titlebar(header);
 
-      auto_switch = new DejaDup.PreferencesPeriodicSwitch();
+      var auto_switch = new DejaDup.PreferencesPeriodicSwitch();
       auto_switch.valign = Gtk.Align.CENTER;
       header.pack_end(auto_switch);
-#endif
 
       var prefs = new DejaDup.Preferences(auto_switch);
       prefs.border_width = 12;

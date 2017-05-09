@@ -1,4 +1,4 @@
-# -*- Mode: CMake; indent-tabs-mode: nil; tab-width: 2 -*-
+# -*- Mode: Meson; indent-tabs-mode: nil; tab-width: 4 -*-
 #
 # This file is part of Déjà Dup.
 # For copyright information, see AUTHORS.
@@ -16,7 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-find_program(PEP8 pep8)
-if(PEP8)
-  add_test(pep8 "${PEP8}" "${CMAKE_SOURCE_DIR}")
-endif()
+if nautilus_dep.found()
+
+shared_module('deja-dup', ['NautilusExtension.c'],
+    c_args: common_cflags,
+    dependencies: [nautilus_dep],
+    include_directories: [libdeja.private_dir_include()],
+    install: true,
+    install_dir: nautilus_dep.get_pkgconfig_variable('extensiondir'))
+
+endif

@@ -17,27 +17,22 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 all: builddir
-	make -C builddir all
+	ninja -C builddir
 
 %:
-	@[ "$@" = "Makefile" ] || make -C builddir $@
+	@[ "$@" = "Makefile" ] || ninja -C builddir $@
 
 builddir:
-	@[ -d builddir ] || ( mkdir builddir && cd builddir && cmake .. -DCMAKE_BUILD_TYPE=Debug )
+	@[ -d builddir ] || meson builddir
 
 check: all
-	CTEST_OUTPUT_ON_FAILURE=1 make -C builddir test
-
-check-system: all
-	CTEST_OUTPUT_ON_FAILURE=1 make -C builddir test-system
+	mesontest -C builddir
 
 dist: builddir screenshots
-	rm -f builddir/deja-dup-*.tar*
-	make -C builddir deja-dup.pot deja-dup-help.pot package_source
-	# Need the following until CPack supports an xz generator
-	bunzip2 builddir/deja-dup-*.tar.bz2
-	xz builddir/deja-dup-*.tar
-	gpg --armor --sign --detach-sig builddir/deja-dup-*.tar.xz
+	#rm -f builddir/deja-dup-*.tar*
+	#ninja -C builddir deja-dup-pot help-deja-dup-pot
+	# TODO: make tarball with git archive
+	#gpg --armor --sign --detach-sig builddir/deja-dup-*.tar.xz
 
 clean:
 	rm -rf builddir obj-*
@@ -86,4 +81,4 @@ copy-po:
 	bzr add po/*.po
 	bzr add deja-dup/help/*/*.po
 
-.PHONY: builddir clean dist all copy-po check check-system screenshots
+.PHONY: builddir clean dist all copy-po check screenshots

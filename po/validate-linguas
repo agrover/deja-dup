@@ -1,4 +1,5 @@
-# -*- Mode: CMake; indent-tabs-mode: nil; tab-width: 2 -*-
+#!/bin/sh
+# -*- Mode: sh; indent-tabs-mode: nil; tab-width: 4 -*-
 #
 # This file is part of Déjà Dup.
 # For copyright information, see AUTHORS.
@@ -16,10 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-add_custom_target(autopilot-deja-dup
-                  COMMAND env LANG=C DEJA_DUP_TESTING=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_SOURCE_DIR}/tests/shell" autopilot-sandbox-run deja_dup_autopilot)
-add_dependencies(autopilot autopilot-deja-dup)
+pos=$(ls po/*.po -1 | cut -d/ -f2 | cut -d. -f1)
+linguas=$(echo $LINGUAS | sed 's/ /\n/g')
 
-add_custom_target(autopilot-system-deja-dup
-                  COMMAND env LANG=C DEJA_DUP_TESTING=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_SOURCE_DIR}/tests/shell-system" autopilot-sandbox-run deja_dup_autopilot)
-add_dependencies(autopilot-system autopilot-system-deja-dup)
+test -n "$linguas"
+test "$pos" = "$linguas"

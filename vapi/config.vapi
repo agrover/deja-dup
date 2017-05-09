@@ -20,7 +20,6 @@ namespace Config {
 	public const string GETTEXT_PACKAGE;
 	public const string LOCALE_DIR;
 	public const string THEME_DIR;
-	public const string PKG_DATA_DIR;
 	public const string PKG_LIBEXEC_DIR;
 	public const string PACKAGE_NAME;
 	public const string PACKAGE_VERSION;

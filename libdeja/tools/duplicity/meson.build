@@ -1,4 +1,4 @@
-# -*- Mode: CMake; indent-tabs-mode: nil; tab-width: 2 -*-
+# -*- Mode: Meson; indent-tabs-mode: nil; tab-width: 4 -*-
 #
 # This file is part of Déjà Dup.
 # For copyright information, see AUTHORS.
@@ -16,13 +16,22 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-if(ENABLE_NAUTILUS)
-add_library(deja-dup-nautilus MODULE NautilusExtension.c)
-target_link_libraries(deja-dup-nautilus ${GLIB_LDFLAGS} ${NAUTILUS_LDFLAGS})
-set_target_properties(deja-dup-nautilus PROPERTIES
-                      OUTPUT_NAME deja-dup
-                      INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/libdeja"
-                      COMPILE_FLAGS "${GLIB_CFLAGS} ${NAUTILUS_CFLAGS} ${COMMON_CFLAGS}")
-add_dependencies(deja-dup-nautilus deja) # needs DirHandling.c
-install(TARGETS deja-dup-nautilus DESTINATION "${NAUTILUS_EXTENSIONDIR}")
-endif()
+shared_module('duplicity',
+    ['DuplicityInstance.vala',
+     'DuplicityJob.vala',
+     'DuplicityPlugin.vala'],
+    vala_args: common_vflags,
+    c_args: common_cflags,
+    dependencies: [gio_dep, gio_unix_dep, peas_dep, secret_dep],
+    link_with: [libdeja],
+    include_directories: [libdeja_inc],
+    install: true,
+    install_dir: toolsdir)
+
+# Script tests would like to point at our builddir to use this plugin in-tree.
+# So we copy it into builddir with configure_file() and install from there.
+configure_file(
+    configuration: configuration_data(),
+    input: 'duplicity.plugin',
+    output: 'duplicity.plugin',
+    install_dir: toolsdir)

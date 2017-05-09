@@ -1,4 +1,4 @@
-# -*- Mode: CMake; indent-tabs-mode: nil; tab-width: 2 -*-
+# -*- Mode: Meson; indent-tabs-mode: nil; tab-width: 4 -*-
 #
 # This file is part of Déjà Dup.
 # For copyright information, see AUTHORS.
@@ -16,4 +16,4 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-add_subdirectory(duplicity)
+subdir('duplicity')
