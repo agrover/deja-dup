@@ -397,12 +397,12 @@ public class ConfigLocation : ConfigWidget
     if (uuid == saved_uuid)
       return;
 
-    store.remove(iter);
+    store.remove(ref iter);
 
     if (--num_volumes == 0) {
       Gtk.TreeIter sep_iter;
       if (store.get_iter_from_string(out sep_iter, index_vol_sep.to_string())) {
-        store.remove(sep_iter);
+        store.remove(ref sep_iter);
         index_vol_sep = -2;
       }
     }
