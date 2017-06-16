@@ -74,7 +74,7 @@ internal class DuplicityJob : DejaDup.ToolJob
   
   bool checked_backup_space = false;
 
-  static const int MINIMUM_FULL = 2;
+  const int MINIMUM_FULL = 2;
   bool deleted_files = false;
   int delete_age = 0;
   
@@ -794,36 +794,36 @@ internal class DuplicityJob : DejaDup.ToolJob
       return false;
   }
 
-  protected static const int ERROR_GENERIC = 1;
-  protected static const int ERROR_HOSTNAME_CHANGED = 3;
-  protected static const int ERROR_RESTORE_DIR_NOT_FOUND = 19;
-  protected static const int ERROR_EXCEPTION = 30;
-  protected static const int ERROR_GPG = 31;
-  protected static const int ERROR_BAD_VOLUME = 44;
-  protected static const int ERROR_BACKEND = 50;
-  protected static const int ERROR_BACKEND_PERMISSION_DENIED = 51;
-  protected static const int ERROR_BACKEND_NOT_FOUND = 52;
-  protected static const int ERROR_BACKEND_NO_SPACE = 53;
-  protected static const int INFO_PROGRESS = 2;
-  protected static const int INFO_COLLECTION_STATUS = 3;
-  protected static const int INFO_DIFF_FILE_NEW = 4;
-  protected static const int INFO_DIFF_FILE_CHANGED = 5;
-  protected static const int INFO_DIFF_FILE_DELETED = 6;
-  protected static const int INFO_PATCH_FILE_WRITING = 7;
-  protected static const int INFO_PATCH_FILE_PATCHING = 8;
-  protected static const int INFO_FILE_STAT = 10;
-  protected static const int INFO_SYNCHRONOUS_UPLOAD_BEGIN = 11;
-  protected static const int INFO_ASYNCHRONOUS_UPLOAD_BEGIN = 12;
-  protected static const int INFO_SYNCHRONOUS_UPLOAD_DONE = 13;
-  protected static const int INFO_ASYNCHRONOUS_UPLOAD_DONE = 14;
-  protected static const int WARNING_ORPHANED_SIG = 2;
-  protected static const int WARNING_UNNECESSARY_SIG = 3;
-  protected static const int WARNING_UNMATCHED_SIG = 4;
-  protected static const int WARNING_INCOMPLETE_BACKUP = 5;
-  protected static const int WARNING_ORPHANED_BACKUP = 6;
-  protected static const int WARNING_CANNOT_READ = 10;
-  protected static const int WARNING_CANNOT_PROCESS = 12; // basically, cannot write or change attrs
-  protected static const int DEBUG_GENERIC = 1;
+  protected const int ERROR_GENERIC = 1;
+  protected const int ERROR_HOSTNAME_CHANGED = 3;
+  protected const int ERROR_RESTORE_DIR_NOT_FOUND = 19;
+  protected const int ERROR_EXCEPTION = 30;
+  protected const int ERROR_GPG = 31;
+  protected const int ERROR_BAD_VOLUME = 44;
+  protected const int ERROR_BACKEND = 50;
+  protected const int ERROR_BACKEND_PERMISSION_DENIED = 51;
+  protected const int ERROR_BACKEND_NOT_FOUND = 52;
+  protected const int ERROR_BACKEND_NO_SPACE = 53;
+  protected const int INFO_PROGRESS = 2;
+  protected const int INFO_COLLECTION_STATUS = 3;
+  protected const int INFO_DIFF_FILE_NEW = 4;
+  protected const int INFO_DIFF_FILE_CHANGED = 5;
+  protected const int INFO_DIFF_FILE_DELETED = 6;
+  protected const int INFO_PATCH_FILE_WRITING = 7;
+  protected const int INFO_PATCH_FILE_PATCHING = 8;
+  protected const int INFO_FILE_STAT = 10;
+  protected const int INFO_SYNCHRONOUS_UPLOAD_BEGIN = 11;
+  protected const int INFO_ASYNCHRONOUS_UPLOAD_BEGIN = 12;
+  protected const int INFO_SYNCHRONOUS_UPLOAD_DONE = 13;
+  protected const int INFO_ASYNCHRONOUS_UPLOAD_DONE = 14;
+  protected const int WARNING_ORPHANED_SIG = 2;
+  protected const int WARNING_UNNECESSARY_SIG = 3;
+  protected const int WARNING_UNMATCHED_SIG = 4;
+  protected const int WARNING_INCOMPLETE_BACKUP = 5;
+  protected const int WARNING_ORPHANED_BACKUP = 6;
+  protected const int WARNING_CANNOT_READ = 10;
+  protected const int WARNING_CANNOT_PROCESS = 12; // basically, cannot write or change attrs
+  protected const int DEBUG_GENERIC = 1;
 
   void delete_cache()
   {

@@ -66,12 +66,12 @@ public abstract class Assistant : Gtk.Window
   public weak List<PageInfo> current;
   List<PageInfo> infos;
 
-  static const int APPLY = 1;
-  static const int BACK = 2;
-  static const int FORWARD = 3;
-  static const int CANCEL = 4;
-  static const int CLOSE = 5;
-  static const int RESUME = 6;
+  const int APPLY = 1;
+  const int BACK = 2;
+  const int FORWARD = 3;
+  const int CANCEL = 4;
+  const int CLOSE = 5;
+  const int RESUME = 6;
 
   construct
   {

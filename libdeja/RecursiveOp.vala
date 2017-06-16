@@ -84,7 +84,7 @@ public abstract class RecursiveOp : Object
     op.start_async.begin();
   }
 
-  static const int NUM_ENUMERATED = 16;
+  const int NUM_ENUMERATED = 16;
   async void do_dir()
   {
     handle_dir();

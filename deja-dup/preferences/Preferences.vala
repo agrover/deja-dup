@@ -43,8 +43,8 @@ public class Preferences : Gtk.Grid
   Gtk.Button restore_button;
   Gtk.ProgressBar restore_progress;
   uint bus_watch_id = 0;
-  static const int PAGE_HMARGIN = 24;
-  static const int PAGE_VMARGIN = 12;
+  const int PAGE_HMARGIN = 24;
+  const int PAGE_VMARGIN = 12;
 
   public Preferences(DejaDup.PreferencesPeriodicSwitch? auto_switch)
   {

@@ -32,7 +32,7 @@ static DejaDup.FilteredSettings settings = null;
 static bool testing_delay = true;
 
 static bool show_version = false;
-static const OptionEntry[] options = {
+const OptionEntry[] options = {
   {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
   {null}
 };
