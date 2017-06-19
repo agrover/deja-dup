@@ -23,8 +23,8 @@ namespace DejaDup {
 
 public class ConfigDelete : ConfigChoice
 {
-  public static const int SEMIANNUALLY = 365/2;
-  public static const int ANNUALLY = 365;
+  public const int SEMIANNUALLY = 365/2;
+  public const int ANNUALLY = 365;
   public static int FOREVER = int.MAX;
 
   public ConfigDelete(string key, string ns="") {

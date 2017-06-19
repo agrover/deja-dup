@@ -273,7 +273,7 @@ deja_dup_nautilus_extension_menu_provider_iface_init (NautilusMenuProviderIface 
 
 void deja_dup_nautilus_extension_register_type (GTypeModule *module)
 {
-  static const GTypeInfo info = {
+  const GTypeInfo info = {
     sizeof (DejaDupNautilusExtensionClass),
     (GBaseInitFunc) NULL,
     (GBaseFinalizeFunc) NULL,
@@ -290,7 +290,7 @@ void deja_dup_nautilus_extension_register_type (GTypeModule *module)
     "DejaDupNautilusExtension",
     &info, 0);
 
-  static const GInterfaceInfo menu_provider_iface_info =
+  const GInterfaceInfo menu_provider_iface_info =
   {
     (GInterfaceInitFunc)deja_dup_nautilus_extension_menu_provider_iface_init,
      NULL,

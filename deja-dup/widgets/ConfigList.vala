@@ -333,7 +333,7 @@ public class ConfigList : ConfigWidget
 
     model.row_deleted.disconnect(write_to_config);
     foreach (Gtk.TreeIter iter in iters) {
-      (model as Gtk.ListStore).remove(iter);
+      (model as Gtk.ListStore).remove(ref iter);
     }
     model.row_deleted.connect(write_to_config);
 

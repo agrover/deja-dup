@@ -28,9 +28,9 @@ public class DuplicityPlugin : DejaDup.ToolPlugin
     name = "Duplicity";
   }
 
-  static const int REQUIRED_MAJOR = 0;
-  static const int REQUIRED_MINOR = 6;
-  static const int REQUIRED_MICRO = 23;
+  const int REQUIRED_MAJOR = 0;
+  const int REQUIRED_MINOR = 6;
+  const int REQUIRED_MICRO = 23;
   void do_initial_setup () throws Error
   {
     string output;

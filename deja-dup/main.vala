@@ -103,7 +103,7 @@ class DejaDupApp : Object
   static bool restoremissing_mode = false;
   static bool prompt_mode = false;
   static string[] filenames = null;
-  static const OptionEntry[] options = {
+  const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
     {"restore", 0, 0, OptionArg.NONE, ref restore_mode, N_("Restore given files"), null},
     {"backup", 0, 0, OptionArg.NONE, ref backup_mode, N_("Immediately start a backup"), null},

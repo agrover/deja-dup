@@ -23,12 +23,12 @@ namespace DejaDup {
 
 public class ConfigLocation : ConfigWidget
 {
-  static const int COL_ICON = 0;
-  static const int COL_TEXT = 1;
-  static const int COL_SORT = 2;
-  static const int COL_UUID = 3;
-  static const int COL_PAGE = 4;
-  static const int COL_INDEX = 5;
+  const int COL_ICON = 0;
+  const int COL_TEXT = 1;
+  const int COL_SORT = 2;
+  const int COL_UUID = 3;
+  const int COL_PAGE = 4;
+  const int COL_INDEX = 5;
 
   enum Group {
     CLOUD = 0,
@@ -397,12 +397,12 @@ public class ConfigLocation : ConfigWidget
     if (uuid == saved_uuid)
       return;
 
-    store.remove(iter);
+    store.remove(ref iter);
 
     if (--num_volumes == 0) {
       Gtk.TreeIter sep_iter;
       if (store.get_iter_from_string(out sep_iter, index_vol_sep.to_string())) {
-        store.remove(sep_iter);
+        store.remove(ref sep_iter);
         index_vol_sep = -2;
       }
     }
