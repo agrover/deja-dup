@@ -44,7 +44,7 @@ pkglibexecdir = join_paths(libexecdir, meson.project_name())
 toolsdir = join_paths(pkglibexecdir, 'tools')
 
 # Dependencies
-gio_dep = dependency('gio-2.0')
+gio_dep = dependency('gio-2.0', version: '>= 2.40')
 gio_unix_dep = dependency('gio-unix-2.0')
 gtk_dep = dependency('gtk+-3.0', version: '>= 3.10')
 nautilus_dep = dependency('libnautilus-extension', required: false)

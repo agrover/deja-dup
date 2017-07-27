@@ -19,51 +19,142 @@
 
 using GLib;
 
-public Gtk.Window toplevel = null;
-public Gtk.Application app = null;
-
 const ActionEntry[] actions = {
   {"help", handle_help},
   {"quit", handle_quit},
 };
 
-void handle_help ()
+void handle_help()
 {
+  var app = Application.get_default() as Gtk.Application;
   unowned List<Gtk.Window> list = app.get_windows();
   DejaDup.show_uri(list == null ? null : list.data, "help:deja-dup");
 }
 
-void handle_quit ()
+void handle_quit()
 {
+  var app = Application.get_default() as Gtk.Application;
   app.quit();
 }
 
-class PreferencesApp : Gtk.Application
+class DejaDupApp : Gtk.Application
 {
-  public PreferencesApp()
+  Gtk.ApplicationWindow main_window = null;
+  const OptionEntry[] options = {
+    {"version", 0, 0, OptionArg.NONE, null, N_("Show version"), null},
+    {"restore", 0, 0, OptionArg.NONE, null, N_("Restore given files"), null},
+    {"backup", 0, 0, OptionArg.NONE, null, N_("Immediately start a backup"), null},
+    {"auto", 0, OptionFlags.HIDDEN, OptionArg.NONE, null, null, null},
+    {"restore-missing", 0, 0, OptionArg.NONE, null, N_("Restore deleted files"), null},
+    {"prompt", 0, OptionFlags.HIDDEN, OptionArg.NONE, null, null, null},
+    {"", 0, 0, OptionArg.FILENAME_ARRAY, null, null, null}, // remaining
+    {null}
+  };
+  
+  public DejaDupApp()
   {
-    Object(application_id: "org.gnome.DejaDup.Preferences");
+    Object(application_id: "org.gnome.DejaDup",
+           flags: ApplicationFlags.HANDLES_COMMAND_LINE);
+    add_main_option_entries(options);
   }
 
-  public override void activate ()
+  public override int handle_local_options(VariantDict options)
+  {
+    if (options.contains("version")) {
+      print("%s %s\n", "deja-dup", Config.VERSION);
+      return 0;
+    }
+    return -1;
+  }
+
+  public override int command_line(ApplicationCommandLine command_line)
+  {
+    var options = command_line.get_options_dict();
+
+    string[] filenames = {};
+    if (options.contains("")) {
+      var variant = options.lookup_value("", VariantType.BYTESTRING_ARRAY);
+      filenames = variant.get_bytestring_array();
+    }
+
+    Gtk.Window toplevel = null;
+
+    if (options.contains("restore")) {
+      List<File> file_list = new List<File>();
+      if (filenames != null) {
+        int i = 0;
+        while (filenames[i] != null)
+          file_list.append(command_line.create_file_for_arg(filenames[i++]));
+      }
+      else {
+        /* Determine if we should be in read-only mode.  This is done when
+           we're asked to do a generic restore and the user has backed up
+           before.  We do this because they may want to restore from a
+           different backup without adjusting their own settings. */
+        var last_run = DejaDup.last_run_date(DejaDup.TimestampType.BACKUP);
+        if (last_run != "")
+          DejaDup.set_settings_read_only(true);
+      }
+      toplevel = new AssistantRestore.with_files(file_list);
+      toplevel.show_all();
+    }
+    else if (options.contains("backup")) {
+      bool automatic = options.contains("auto");
+      toplevel = new AssistantBackup(automatic);
+      Gdk.notify_startup_complete();
+      // showing or not is handled by AssistantBackup
+    }
+    else if (options.contains("restore-missing")) {
+      if (filenames.length == 0) {
+        command_line.printerr("%s\n", _("No directory provided"));
+        return 1;
+      }
+      else if (filenames.length > 1) {
+        command_line.printerr("%s\n", _("Only one directory can be shown at once"));
+        return 1;
+      }
+
+      File list_directory = command_line.create_file_for_arg(filenames[0]);
+      if (!list_directory.query_exists(null)) {
+        command_line.printerr("%s\n", _("Directory does not exist"));
+        return 1;
+      }
+      if (list_directory.query_file_type (0, null) != FileType.DIRECTORY) {
+        command_line.printerr("%s\n", _("You must provide a directory, not a file"));
+        return 1;
+      }
+      toplevel = new AssistantRestoreMissing(list_directory);
+      toplevel.show_all();
+    }
+    else if (options.contains("prompt")) {
+      toplevel = prompt();
+    } else {
+      activate();
+    }
+
+    if (toplevel != null)
+      add_window(toplevel);
+
+    return 0;
+  }
+
+  public override void activate()
   {
     base.activate();
 
-    unowned List<Gtk.Window> list = get_windows();
-
-    if (list != null)
-      list.data.present_with_time(Gtk.get_current_event_time());
+    if (main_window != null)
+      main_window.present_with_time(Gtk.get_current_event_time());
     else {
       // We're first instance.  Yay!
 
-      var dlg = new Gtk.ApplicationWindow(this);
+      main_window = new Gtk.ApplicationWindow(this);
       // Translators: "Backups" is a noun
-      dlg.title = _("Backups");
-      dlg.resizable = false;
+      main_window.title = _("Backups");
+      main_window.resizable = false;
 
       var header = new Gtk.HeaderBar();
       header.show_close_button = true;
-      dlg.set_titlebar(header);
+      main_window.set_titlebar(header);
 
       var auto_switch = new DejaDup.PreferencesPeriodicSwitch();
       auto_switch.valign = Gtk.Align.CENTER;
@@ -71,15 +162,23 @@ class PreferencesApp : Gtk.Application
 
       var prefs = new DejaDup.Preferences(auto_switch);
       prefs.border_width = 12;
-      dlg.add(prefs);
-      dlg.set_application(this);
-      dlg.show_all();
+      main_window.add(prefs);
+      main_window.show_all();
     }
   }
 
-  public override void startup ()
+  public override void startup()
   {
     base.startup();
+
+    Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
+    Gtk.Window.set_default_icon_name(Config.PACKAGE);
+
+    /* First, check duplicity version info */
+    if (!DejaDup.gui_initialize(null)) {
+      quit();
+      return;
+    }
 
     add_action_entries(actions, null);
 
@@ -94,144 +193,16 @@ class PreferencesApp : Gtk.Application
   }
 }
 
-class DejaDupApp : Object
+int main(string[] args)
 {
-  static bool show_version = false;
-  static bool restore_mode = false;
-  static bool backup_mode = false;
-  static bool automatic = false;
-  static bool restoremissing_mode = false;
-  static bool prompt_mode = false;
-  static string[] filenames = null;
-  const OptionEntry[] options = {
-    {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
-    {"restore", 0, 0, OptionArg.NONE, ref restore_mode, N_("Restore given files"), null},
-    {"backup", 0, 0, OptionArg.NONE, ref backup_mode, N_("Immediately start a backup"), null},
-    {"auto", 0, OptionFlags.HIDDEN, OptionArg.NONE, ref automatic, null, null},
-    {"restore-missing", 0, 0, OptionArg.NONE, ref restoremissing_mode, N_("Restore deleted files"), null},
-    {"prompt", 0, OptionFlags.HIDDEN, OptionArg.NONE, ref prompt_mode, null, null},
-    {"", 0, 0, OptionArg.FILENAME_ARRAY, ref filenames, null, null}, // remaining
-    {null}
-  };
-  
-  static bool handle_console_options(out int status)
-  {
-    status = 0;
-    
-    if (show_version) {
-      print("%s %s\n", "deja-dup", Config.VERSION);
-      return false;
-    }
-    
-    if (restoremissing_mode) {
-      if (filenames == null) {
-        printerr("%s\n", _("No directory provided"));
-        status = 1;
-        return false;
-      }
-      else if (filenames.length > 1) {
-        printerr("%s\n", _("Only one directory can be shown at once"));
-        status = 1;
-        return false;
-      }
-    }
-    
-    return true;
-  }
+  DejaDup.i18n_setup();
 
-  public static int main(string [] args)
-  {
-    DejaDup.i18n_setup();
+  // Translators: The name is a play on the French phrase "déjà vu" meaning
+  // "already seen", but with the "vu" replaced with "dup".  "Dup" in this
+  // context is itself a reference to both the underlying command line tool
+  // "duplicity" and the act of duplicating data for backup.  As a whole, the
+  // phrase "Déjà Dup" may not be very translatable.
+  Environment.set_application_name(_("Déjà Dup Backup Tool"));
 
-    // Translators: The name is a play on the French phrase "déjà vu" meaning
-    // "already seen", but with the "vu" replaced with "dup".  "Dup" in this
-    // context is itself a reference to both the underlying command line tool
-    // "duplicity" and the act of duplicating data for backup.  As a whole, the
-    // phrase "Déjà Dup" may not be very translatable.
-    Environment.set_application_name(_("Déjà Dup Backup Tool"));
-    
-    var modes = "\n  %s --backup\n  %s --restore %s\n  %s --restore-missing %s"
-                .printf(Config.PACKAGE, Config.PACKAGE, _("[FILES…]"),
-                        Config.PACKAGE, _("DIRECTORY"));
-    OptionContext context = new OptionContext(modes);
-
-    // Translators: Wrap this to 80 characters per line if you can, as I have for English
-    context.set_summary(_("Déjà Dup is a simple backup tool.  It hides the complexity of backing up\nthe Right Way (encrypted, off-site, and regular) and uses duplicity as\nthe backend."));
-    context.add_main_entries(options, Config.GETTEXT_PACKAGE);
-    context.add_group(Gtk.get_option_group(false)); // allow console use
-    try {
-      context.parse(ref args);
-    } catch (Error e) {
-      printerr("%s\n\n%s", e.message, context.get_help(true, null));
-      return 1;
-    }
-    
-    int status;
-    if (!handle_console_options(out status))
-      return status;
-
-    Gtk.init(ref args); // to open display ('cause we passed false above)
-    Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
-    Gtk.Window.set_default_icon_name(Config.PACKAGE);
-
-    /* First, check duplicity version info */
-    if (!DejaDup.gui_initialize(null))
-      return 1;
-
-    /* Now proceed with main program */
-
-    if (restore_mode) {
-      List<File> file_list = new List<File>();
-      if (filenames != null) {
-        int i = 0;
-        while (filenames[i] != null)
-          file_list.append(File.new_for_commandline_arg(filenames[i++]));
-      }
-      else {
-        /* Determine if we should be in read-only mode.  This is done when
-           we're asked to do a generic restore and the user has backed up
-           before.  We do this because they may want to restore from a
-           different backup without adjusting their own settings. */
-        var last_run = DejaDup.last_run_date(DejaDup.TimestampType.BACKUP);
-        if (last_run != "")
-          DejaDup.set_settings_read_only(true);
-      }
-      toplevel = new AssistantRestore.with_files(file_list);
-      toplevel.show_all();
-    }
-    else if (backup_mode) {
-      toplevel = new AssistantBackup(automatic);
-      Gdk.notify_startup_complete();
-      // showing or not is handled by AssistantBackup
-    }
-    else if (restoremissing_mode) {
-      File list_directory = File.new_for_commandline_arg(filenames[0]);
-      if (!list_directory.query_exists(null)) {
-        printerr("%s\n", _("Directory does not exist"));
-        return 1;
-      }
-      if (list_directory.query_file_type (0, null) != FileType.DIRECTORY) {
-        printerr("%s\n", _("You must provide a directory, not a file"));
-        return 1;
-      }
-      toplevel = new AssistantRestoreMissing(list_directory);
-      toplevel.show_all();
-    }
-    else if (prompt_mode) {
-      toplevel = prompt();
-      if (toplevel == null)
-        return 0; // we're already done
-    }
-    else {
-      app = new PreferencesApp();
-      return app.run();
-    }
-
-    toplevel.destroy.connect(Gtk.main_quit);
-
-    Gtk.main();
-
-    return 0;
-  }
+  return new DejaDupApp().run(args);
 }
-
