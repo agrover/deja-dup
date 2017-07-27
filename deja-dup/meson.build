@@ -34,28 +34,8 @@ deja_dup = executable('deja-dup',
     dependencies: [gio_unix_dep, gtk_dep, notify_dep, packagekit_dep, peas_dep, secret_dep],
     link_with: [libdeja, libwidgets],
     include_directories: [libdeja_inc, libwidgets_inc],
-    install: true)
-
-deja_dup_desktop = custom_target('deja-dup.desktop',
-    input: 'deja-dup.desktop.in',
-    output: 'deja-dup.desktop',
-    # List keywords due to https://savannah.gnu.org/support/?108887
-    command: [msgfmt, '--desktop', '--keyword=Name', '--keyword=Comment', '--keyword=Keywords', '--template', '@INPUT@', '-d', podir, '-o', '@OUTPUT@'],
     install: true,
-    install_dir: join_paths(datadir, 'applications'))
-
-test('validate-deja-dup.desktop', desktop_file_validate,
-    args: [deja_dup_desktop.full_path()])
-
-deja_dup_appdata = custom_target('deja-dup.appdata.xml',
-    input: 'deja-dup.appdata.xml.in',
-    output: 'deja-dup.appdata.xml',
-    command: [msgfmt, '--xml', '--template', '@INPUT@', '-d', podir, '-o', '@OUTPUT@'],
-    install: true,
-    install_dir: join_paths(datadir, 'appdata'))
-
-test('validate-appstream', appstream_util,
-    args: ['--nonet', 'validate-relax', deja_dup_appdata.full_path()])
+    install_rpath: pkglibdir)
 
 install_subdir('ui', install_dir: pkgdatadir)
 

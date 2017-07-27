@@ -67,7 +67,7 @@ void ok()
 {
   DejaDup.update_prompt_time(true);
 
-  var app = new DesktopAppInfo("deja-dup.desktop");
+  var app = new DesktopAppInfo("org.gnome.DejaDup.desktop");
   try {
     app.launch(null, Gdk.Screen.get_default().get_display().get_app_launch_context());
   }
@@ -80,7 +80,7 @@ void show_prompt_notification()
 {
   Notify.init(_("Backups"));
   var note = new Notify.Notification(get_header(), get_body(), "deja-dup");
-  note.set_hint("desktop-entry", "deja-dup");
+  note.set_hint("desktop-entry", "org.gnome.DejaDup");
   note.add_action("cancel", get_cancel_button(false), () => {
     cancel();
     try {

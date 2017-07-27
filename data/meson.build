@@ -31,5 +31,33 @@ test('validate-gschema', glib_compile_schemas,
     args: ['--strict', '--dry-run', '--schema-file',
            join_paths(meson.current_source_dir(), 'org.gnome.DejaDup.gschema.xml')])
 
+conf_data = configuration_data()
+conf_data.set('bindir', bindir)
+vars = configure_file(input: 'org.gnome.DejaDup.service.in',
+    output: 'org.gnome.DejaDup.service',
+    configuration: conf_data,
+    install_dir: join_paths(datadir, 'dbus-1', 'services'))
+
+deja_dup_desktop = custom_target('org.gnome.DejaDup.desktop',
+    input: 'org.gnome.DejaDup.desktop.in',
+    output: 'org.gnome.DejaDup.desktop',
+    # List keywords due to https://savannah.gnu.org/support/?108887
+    command: [msgfmt, '--desktop', '--keyword=Name', '--keyword=Comment', '--keyword=Keywords', '--template', '@INPUT@', '-d', podir, '-o', '@OUTPUT@'],
+    install: true,
+    install_dir: join_paths(datadir, 'applications'))
+
+test('validate-org.gnome.DejaDup.desktop', desktop_file_validate,
+    args: [deja_dup_desktop.full_path()])
+
+deja_dup_appdata = custom_target('deja-dup.appdata.xml',
+    input: 'deja-dup.appdata.xml.in',
+    output: 'deja-dup.appdata.xml',
+    command: [msgfmt, '--xml', '--template', '@INPUT@', '-d', podir, '-o', '@OUTPUT@'],
+    install: true,
+    install_dir: join_paths(datadir, 'appdata'))
+
+test('validate-appstream', appstream_util,
+    args: ['--nonet', 'validate-relax', deja_dup_appdata.full_path()])
+
 message('You may need to recompile your gsettings schemas or regenerate
          your icon cache after installation.')

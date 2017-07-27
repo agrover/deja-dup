@@ -23,6 +23,7 @@ executable('deja-dup-monitor', ['monitor.vala'],
     link_with: [libdeja],
     include_directories: [libdeja_inc],
     install: true,
+    install_rpath: pkglibdir,
     install_dir: pkglibexecdir)
 
 conf_data = configuration_data()

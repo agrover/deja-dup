@@ -19,27 +19,10 @@
 
 using GLib;
 
-const ActionEntry[] actions = {
-  {"help", handle_help},
-  {"quit", handle_quit},
-};
-
-void handle_help()
-{
-  var app = Application.get_default() as Gtk.Application;
-  unowned List<Gtk.Window> list = app.get_windows();
-  DejaDup.show_uri(list == null ? null : list.data, "help:deja-dup");
-}
-
-void handle_quit()
-{
-  var app = Application.get_default() as Gtk.Application;
-  app.quit();
-}
-
 class DejaDupApp : Gtk.Application
 {
   Gtk.ApplicationWindow main_window = null;
+
   const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, null, N_("Show version"), null},
     {"restore", 0, 0, OptionArg.NONE, null, N_("Restore given files"), null},
@@ -50,7 +33,13 @@ class DejaDupApp : Gtk.Application
     {"", 0, 0, OptionArg.FILENAME_ARRAY, null, null, null}, // remaining
     {null}
   };
-  
+
+  const ActionEntry[] actions = {
+    {"backup", backup},
+    {"help", help},
+    {"quit", quit},
+  };
+
   public DejaDupApp()
   {
     Object(application_id: "org.gnome.DejaDup",
@@ -99,10 +88,7 @@ class DejaDupApp : Gtk.Application
       toplevel.show_all();
     }
     else if (options.contains("backup")) {
-      bool automatic = options.contains("auto");
-      toplevel = new AssistantBackup(automatic);
-      Gdk.notify_startup_complete();
-      // showing or not is handled by AssistantBackup
+      backup_full(options.contains("auto"));
     }
     else if (options.contains("restore-missing")) {
       if (filenames.length == 0) {
@@ -180,7 +166,7 @@ class DejaDupApp : Gtk.Application
       return;
     }
 
-    add_action_entries(actions, null);
+    add_action_entries(actions, this);
 
     var help = new Menu();
     help.append(_("_Help"), "app.help");
@@ -190,6 +176,23 @@ class DejaDupApp : Gtk.Application
     menu.append_section(null, help);
     menu.append_section(null, quit);
     set_app_menu(menu);
+  }
+
+  void help()
+  {
+    unowned List<Gtk.Window> list = get_windows();
+    DejaDup.show_uri(list == null ? null : list.data, "help:deja-dup");
+  }
+
+  void backup()
+  {
+    backup_full(false);
+  }
+
+  void backup_full(bool automatic) {
+    add_window(new AssistantBackup(automatic));
+    Gdk.notify_startup_complete();
+    // showing or not is handled by AssistantBackup
   }
 }
 

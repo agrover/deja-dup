@@ -33,6 +33,7 @@ podir = join_paths(meson.current_source_dir(), 'po')
 vapidir = join_paths(meson.current_source_dir(), 'vapi')
 
 # Install paths
+bindir = join_paths(get_option('prefix'), get_option('bindir'))
 datadir = join_paths(get_option('prefix'), get_option('datadir'))
 etcdir = get_option('sysconfdir')
 libdir = join_paths(get_option('prefix'), get_option('libdir'))
