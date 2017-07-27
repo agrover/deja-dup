@@ -388,6 +388,8 @@ public class Preferences : Gtk.Grid
     cat_model.insert_with_values(out iter, i, 0, _("Scheduling"), 1, i);
     ++i;
 
+    notebook.show_all(); // can't switch to pages that aren't shown
+
     // Select first one by default
     cat_model.get_iter_first(out iter);
     tree.get_selection().select_iter(iter);
