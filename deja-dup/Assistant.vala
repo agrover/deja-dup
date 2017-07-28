@@ -105,10 +105,15 @@ public abstract class Assistant : Gtk.Window
     dlg_vbox.show_all();
     add(dlg_vbox);
 
-    ebox.override_background_color(Gtk.StateFlags.NORMAL,
-                                   ebox.get_style_context().get_background_color(Gtk.StateFlags.SELECTED));
-    ebox.override_color(Gtk.StateFlags.NORMAL,
-                        ebox.get_style_context().get_color(Gtk.StateFlags.SELECTED));
+    // Make header look a little more distinct
+    try {
+      var css = new Gtk.CssProvider();
+      css.load_from_data("* {background-color: @selected_bg_color;
+                             color: @selected_fg_color;}");
+      ebox.get_style_context().add_provider(css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+    } catch (Error e) {
+      // Eh, don't worry about it
+    }
 
     response.connect(handle_response);
   }
