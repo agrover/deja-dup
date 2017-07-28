@@ -33,7 +33,7 @@ test('validate-gschema', glib_compile_schemas,
 
 conf_data = configuration_data()
 conf_data.set('bindir', bindir)
-vars = configure_file(input: 'org.gnome.DejaDup.service.in',
+configure_file(input: 'org.gnome.DejaDup.service.in',
     output: 'org.gnome.DejaDup.service',
     configuration: conf_data,
     install_dir: join_paths(datadir, 'dbus-1', 'services'))
@@ -49,8 +49,14 @@ deja_dup_desktop = custom_target('org.gnome.DejaDup.desktop',
 test('validate-org.gnome.DejaDup.desktop', desktop_file_validate,
     args: [deja_dup_desktop.full_path()])
 
+conf_data = configuration_data()
+conf_data.set('series', meson.project_version().split('.')[0])
+conf_data.set('version', meson.project_version())
+vars = configure_file(input: 'deja-dup.appdata.xml.in',
+    output: 'deja-dup.vars.appdata.xml.in',
+    configuration: conf_data)
 deja_dup_appdata = custom_target('deja-dup.appdata.xml',
-    input: 'deja-dup.appdata.xml.in',
+    input: vars,
     output: 'deja-dup.appdata.xml',
     command: [msgfmt, '--xml', '--template', '@INPUT@', '-d', podir, '-o', '@OUTPUT@'],
     install: true,

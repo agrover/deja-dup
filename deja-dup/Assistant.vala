@@ -107,12 +107,22 @@ public abstract class Assistant : Gtk.Window
 
     // Make header look a little more distinct
     try {
+      var style = ebox.get_style_context();
+      // Using @selected_bg_color and @selected_fg_color would be cleaner,
+      // but don't work in all themes (like Adwaita!), so we use this more
+      // manual-but-reliable method.
+      var bg_boxed = style.get_property(Gtk.STYLE_PROPERTY_BACKGROUND_COLOR,
+                                        Gtk.StateFlags.SELECTED).get_boxed();
+      var bg = ((Gdk.RGBA*)bg_boxed).to_string();
+      var fg_boxed = style.get_property(Gtk.STYLE_PROPERTY_COLOR,
+                                        Gtk.StateFlags.SELECTED).get_boxed();
+      var fg = ((Gdk.RGBA*)fg_boxed).to_string();
       var css = new Gtk.CssProvider();
-      css.load_from_data("* {background-color: @selected_bg_color;
-                             color: @selected_fg_color;}");
+      css.load_from_data(@"* {background-color: $bg;
+                              color: $fg;}");
       ebox.get_style_context().add_provider(css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     } catch (Error e) {
-      // Eh, don't worry about it
+      warning("%s\n", e.message);
     }
 
     response.connect(handle_response);

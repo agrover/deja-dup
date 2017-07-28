@@ -18,7 +18,7 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 pos=$(ls *.po -1 | cut -d. -f1)
-linguas=$(echo $LINGUAS | sed 's/ /\n/g')
+linguas=$(cat LINGUAS)
 
 test -n "$linguas"
 test "$pos" = "$linguas"

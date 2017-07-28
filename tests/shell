@@ -61,7 +61,7 @@ mkdir -p "${ROOTDIR}/restore"
 SHNAME=$(basename $0)
 if [ "$SHNAME" = "shell" ]; then
   mkdir -p "${ROOTDIR}/share/glib-2.0/schemas"
-  cp "${BUILDDIR}/data/org.gnome.DejaDup.gschema.xml" "${ROOTDIR}/share/glib-2.0/schemas"
+  cp "${TOPDIR}/data/org.gnome.DejaDup.gschema.xml" "${ROOTDIR}/share/glib-2.0/schemas"
   glib-compile-schemas "${ROOTDIR}/share/glib-2.0/schemas"
   export XDG_DATA_HOME="${ROOTDIR}/share"
   export XDG_DATA_DIRS="${XDG_DATA_HOME}:${XDG_DATA_DIRS}"
@@ -93,6 +93,6 @@ if [ -z "$ARGS" ]; then
   echo "Run exit to leave."
   echo "Run exit 1 to leave and keep data playground intact."
 fi
-if dbus-launch sh -c "$ARGS"; then
+if dbus-run-session -- sh -c "$ARGS"; then
   rm -rf "${ROOTDIR}" # Cleanup on clean exit
 fi
