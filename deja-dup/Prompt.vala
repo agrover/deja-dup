@@ -19,17 +19,17 @@
 
 using GLib;
 
-public Gtk.Window? prompt()
+public Gtk.Window? prompt(Gtk.Application app)
 {
   DejaDup.update_prompt_time();
 
   // In GNOME Shell, we show a notification.  Elsewhere, we show a dialog.
   if (DejaDup.get_shell() == DejaDup.ShellEnv.GNOME) {
-    show_prompt_notification();
+    show_prompt_notification(app);
     return null;
   }
   else
-    return show_prompt_dialog();
+    return show_prompt_dialog(app);
 }
 
 string get_header()
@@ -44,70 +44,32 @@ string get_body()
 
 string get_cancel_button(bool mnemonics)
 {
-  if (mnemonics)
-    return _("_Don't Show Again");
-  else
-    return _("Don't Show Again");
+  var rv = _("_Don't Show Again");
+  if (!mnemonics)
+    rv = rv.replace("_", "");
+  return rv;
 }
 
 string get_ok_button(bool mnemonics)
 {
-  if (mnemonics)
-    return _("_Open Backup Settings");
-  else
-    return _("Open Backup Settings");
+  var rv = _("_Open Backup Settings");
+  if (!mnemonics)
+    rv = rv.replace("_", "");
+  return rv;
 }
 
-void cancel()
+void show_prompt_notification(Gtk.Application app)
 {
-  DejaDup.update_prompt_time(true);
+  var note = new Notification(get_header());
+  note.set_body(get_body());
+  note.set_icon(new ThemedIcon("deja-dup"));
+  note.set_default_action("app.prompt-ok");
+  note.add_button(get_cancel_button(false), "app.prompt-cancel");
+  note.add_button(get_ok_button(false), "app.prompt-ok");
+  app.send_notification("prompt", note);
 }
 
-void ok()
-{
-  DejaDup.update_prompt_time(true);
-
-  var app = new DesktopAppInfo("org.gnome.DejaDup.desktop");
-  try {
-    app.launch(null, Gdk.Screen.get_default().get_display().get_app_launch_context());
-  }
-  catch (Error e) {
-    warning("%s\n", e.message);
-  }
-}
-
-void show_prompt_notification()
-{
-  Notify.init(_("Backups"));
-  var note = new Notify.Notification(get_header(), get_body(), "deja-dup");
-  note.set_hint("desktop-entry", "org.gnome.DejaDup");
-  note.add_action("cancel", get_cancel_button(false), () => {
-    cancel();
-    try {
-      note.close();
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
-  });
-  note.add_action("ok", get_ok_button(false), () => {
-    ok();
-    try {
-      note.close();
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
-  });
-  try {
-    note.show();
-  }
-  catch (Error e) {
-    warning("%s\n", e.message);
-  }
-}
-
-Gtk.Window show_prompt_dialog()
+Gtk.Window show_prompt_dialog(Gtk.Application app)
 {
   var dlg = new Gtk.MessageDialog(null, 0, Gtk.MessageType.INFO,
                                   Gtk.ButtonsType.NONE, "%s", get_header());
@@ -124,9 +86,9 @@ Gtk.Window show_prompt_dialog()
                   get_ok_button(true), Gtk.ResponseType.ACCEPT);
   dlg.response.connect((dlg, resp) => {
     if (resp == Gtk.ResponseType.REJECT)
-      cancel();
+      app.activate_action("prompt-cancel", null);
     else if (resp == Gtk.ResponseType.ACCEPT)
-      ok();
+      app.activate_action("prompt-ok", null);
     DejaDup.destroy_widget(dlg);
   });
 

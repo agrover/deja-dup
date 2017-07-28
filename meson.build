@@ -45,11 +45,10 @@ pkglibexecdir = join_paths(libexecdir, meson.project_name())
 toolsdir = join_paths(pkglibexecdir, 'tools')
 
 # Dependencies
-gio_dep = dependency('gio-2.0', version: '>= 2.40')
+gio_dep = dependency('gio-2.0', version: '>= 2.42')
 gio_unix_dep = dependency('gio-unix-2.0')
 gtk_dep = dependency('gtk+-3.0', version: '>= 3.10')
 nautilus_dep = dependency('libnautilus-extension', required: false)
-notify_dep = dependency('libnotify', version: '>= 0.7')
 packagekit_dep = dependency('packagekit-glib2')
 peas_dep = dependency('libpeas-1.0')
 secret_dep = dependency('libsecret-1')
@@ -64,7 +63,7 @@ msgfmt = find_program('msgfmt')
 common_vflags = [
     '--pkg=config',
     '--pkg=posix',
-    '--target-glib=2.34',
+    '--target-glib=2.42',
     '--vapidir', vapidir]
 common_cflags = [
     '-w',

@@ -22,6 +22,7 @@ using GLib;
 class DejaDupApp : Gtk.Application
 {
   Gtk.ApplicationWindow main_window = null;
+  AssistantOperation op = null;
 
   const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, null, N_("Show version"), null},
@@ -29,6 +30,7 @@ class DejaDupApp : Gtk.Application
     {"backup", 0, 0, OptionArg.NONE, null, N_("Immediately start a backup"), null},
     {"auto", 0, OptionFlags.HIDDEN, OptionArg.NONE, null, null, null},
     {"restore-missing", 0, 0, OptionArg.NONE, null, N_("Restore deleted files"), null},
+    {"delay", 0, OptionFlags.HIDDEN, OptionArg.STRING, null, null, null},
     {"prompt", 0, OptionFlags.HIDDEN, OptionArg.NONE, null, null, null},
     {"", 0, 0, OptionArg.FILENAME_ARRAY, null, null, null}, // remaining
     {null}
@@ -36,6 +38,9 @@ class DejaDupApp : Gtk.Application
 
   const ActionEntry[] actions = {
     {"backup", backup},
+    {"op-show", op_show},
+    {"prompt-ok", prompt_ok},
+    {"prompt-cancel", prompt_cancel},
     {"help", help},
     {"quit", quit},
   };
@@ -66,9 +71,12 @@ class DejaDupApp : Gtk.Application
       filenames = variant.get_bytestring_array();
     }
 
-    Gtk.Window toplevel = null;
-
     if (options.contains("restore")) {
+      if (op != null) {
+        command_line.printerr("%s\n", _("An operation is already in progress"));
+        return 1;
+      }
+
       List<File> file_list = new List<File>();
       if (filenames != null) {
         int i = 0;
@@ -84,13 +92,14 @@ class DejaDupApp : Gtk.Application
         if (last_run != "")
           DejaDup.set_settings_read_only(true);
       }
-      toplevel = new AssistantRestore.with_files(file_list);
-      toplevel.show_all();
-    }
-    else if (options.contains("backup")) {
-      backup_full(options.contains("auto"));
+      set_op(new AssistantRestore.with_files(file_list));
     }
     else if (options.contains("restore-missing")) {
+      if (op != null) {
+        command_line.printerr("%s\n", _("An operation is already in progress"));
+        return 1;
+      }
+
       if (filenames.length == 0) {
         command_line.printerr("%s\n", _("No directory provided"));
         return 1;
@@ -109,17 +118,31 @@ class DejaDupApp : Gtk.Application
         command_line.printerr("%s\n", _("You must provide a directory, not a file"));
         return 1;
       }
-      toplevel = new AssistantRestoreMissing(list_directory);
-      toplevel.show_all();
+      set_op(new AssistantRestoreMissing(list_directory));
+    }
+    else if (options.contains("backup")) {
+      if (op != null) {
+        command_line.printerr("%s\n", _("An operation is already in progress"));
+        return 1;
+      }
+
+      backup_full(options.contains("auto"));
+    }
+    else if (options.contains("delay")) {
+      var note = new Notification(_("Scheduled backup delayed"));
+      string body = null;
+      options.lookup("delay", "s", ref body);
+      note.set_body(body);
+      note.set_icon(new ThemedIcon("deja-dup"));
+      Application.get_default().send_notification("backup-status", note);
     }
     else if (options.contains("prompt")) {
-      toplevel = prompt();
+      var toplevel = prompt(this);
+      if (toplevel != null)
+        add_window(toplevel);
     } else {
       activate();
     }
-
-    if (toplevel != null)
-      add_window(toplevel);
 
     return 0;
   }
@@ -178,6 +201,19 @@ class DejaDupApp : Gtk.Application
     set_app_menu(menu);
   }
 
+  void set_op(AssistantOperation op)
+  {
+    if (this.op != null) {
+      warning("Trying to override operation! This shouldn't happen.");
+      return;
+    }
+
+    this.op = op;
+    this.op.destroy.connect(() => {this.op = null;});
+    add_window(op);
+    op.show_all();
+  }
+
   void help()
   {
     unowned List<Gtk.Window> list = get_windows();
@@ -186,13 +222,38 @@ class DejaDupApp : Gtk.Application
 
   void backup()
   {
-    backup_full(false);
+    if (op != null) {
+      op_show();
+    } else {
+      backup_full(false);
+    }
   }
 
-  void backup_full(bool automatic) {
-    add_window(new AssistantBackup(automatic));
+  void backup_full(bool automatic)
+  {
+    set_op(new AssistantBackup(automatic));
     Gdk.notify_startup_complete();
     // showing or not is handled by AssistantBackup
+  }
+
+  void op_show()
+  {
+    // Show op window if it exists, else just activate
+    if (op != null)
+      op.force_visible(true);
+    else
+      activate();
+  }
+
+  void prompt_ok()
+  {
+    prompt_cancel();
+    activate();
+  }
+
+  void prompt_cancel()
+  {
+    DejaDup.update_prompt_time(true);
   }
 }
 

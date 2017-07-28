@@ -23,8 +23,6 @@ class Monitor : Object {
 
 static uint timeout_id;
 static uint netcheck_id;
-static Pid pid;
-static bool op_active = false;
 static bool reactive_check;
 static bool first_check = false;
 static DejaDup.FilteredSettings settings = null;
@@ -36,18 +34,6 @@ const OptionEntry[] options = {
   {"version", 0, 0, OptionArg.NONE, ref show_version, N_("Show version"), null},
   {null}
 };
-
-static Notify.Notification note;
-
-static void op_started(DBusConnection conn, string name, string name_owner)
-{
-  op_active = true;
-}
-
-static void op_ended(DBusConnection conn, string name)
-{
-  op_active = false;
-}
 
 static bool network_check()
 {
@@ -103,28 +89,18 @@ static TimeSpan time_until(DateTime date)
   return date.difference(new DateTime.now_local());
 }
 
-static void close_pid(Pid child_pid, int status)
+static void notify_delay(string reason)
 {
-  Process.close_pid(child_pid);
-  pid = (Pid)0;
-}
-
-static void notify_delay(string header, string reason)
-{
-  if (note == null) {
-    Notify.init(_("Backups"));
-    note = new Notify.Notification(header, reason,
-                                   "deja-dup");
-    // Pretend to be 'deja-dup', even though we are deja-dup-monitor for ease
-    // of grouping all notifications from this project together.
-    note.set_hint("desktop-entry", "org.gnome.DejaDup");
-    note.closed.connect((n) => {note = null;});
-  }
-  else
-    note.update(header, reason, "deja-dup");
-
   try {
-    note.show();
+    var command = DejaDup.nice_prefix("deja-dup --delay");
+    string[] argv = command.split(" ");
+    argv += reason;
+
+    Process.spawn_async(null, argv, null,
+                        SpawnFlags.SEARCH_PATH |
+                        SpawnFlags.STDOUT_TO_DEV_NULL |
+                        SpawnFlags.STDERR_TO_DEV_NULL,
+                        null, null);
   }
   catch (Error e) {
     warning("%s\n", e.message);
@@ -158,47 +134,30 @@ static async void kickoff()
   if (!ready) {
     debug("Postponing the backup.");
     if (!was_reactive && when != null)
-      notify_delay(_("Scheduled backup delayed"), when);
+      notify_delay(when);
     return;
   }
 
-  if (note != null) {
-    try {
-      note.close(); // no need to continue talking about the delay
-    }
-    catch (Error e2) {
-      warning("%s\n", e2.message);
-    }
-    note = null;
-  }
+  try {
+    debug("Running automatic backup.");
+    var command = DejaDup.nice_prefix("deja-dup --backup --auto");
+    string[] argv = command.split(" ");
 
-  // Don't run right now if an instance is already running
-  if (pid == (Pid)0 && !op_active) {
-    try {
-      debug("Running automatic backup.");
-      var command = DejaDup.nice_prefix("deja-dup --backup --auto");
-      string[] argv = command.split(" ");
-
-      if (DejaDup.in_testing_mode()) {
-        // fake successful and schedule next run
-        DejaDup.update_last_run_timestamp(DejaDup.TimestampType.BACKUP);
-      }
-      else {
-        Process.spawn_async(null, argv, null,
-                            SpawnFlags.SEARCH_PATH |
-                            SpawnFlags.DO_NOT_REAP_CHILD |
-                            SpawnFlags.STDOUT_TO_DEV_NULL |
-                            SpawnFlags.STDERR_TO_DEV_NULL,
-                            null, out pid);
-        ChildWatch.add(pid, close_pid);
-      }
+    if (DejaDup.in_testing_mode()) {
+      // fake successful and schedule next run
+      DejaDup.update_last_run_timestamp(DejaDup.TimestampType.BACKUP);
     }
-    catch (Error e) {
-      warning("%s\n", e.message);
+    else {
+      Process.spawn_async(null, argv, null,
+                          SpawnFlags.SEARCH_PATH |
+                          SpawnFlags.STDOUT_TO_DEV_NULL |
+                          SpawnFlags.STDERR_TO_DEV_NULL,
+                          null, null);
     }
   }
-  else
-    debug("Not rerunning deja-dup, already doing so.");
+  catch (Error e) {
+    warning("%s\n", e.message);
+  }
 }
 
 static bool time_until_next_run(out TimeSpan time)
@@ -288,9 +247,6 @@ static void begin_monitoring()
 {
   DejaDup.Network.ensure_status.begin();
   DejaDup.Network.get().notify["connected"].connect(network_changed);
-
-  Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
-                 BusNameWatcherFlags.NONE, op_started, op_ended);
 
   var mon = VolumeMonitor.get();
   mon.ref(); // bug 569418; bad things happen when VM goes away

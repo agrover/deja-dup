@@ -66,8 +66,6 @@ public abstract class StatusIcon : Object
   protected string later_label;
   protected string skip_label;
 
-  protected Notify.Notification note;
-
   construct {
     later_label = _("_Resume Later");
     skip_label = _("_Skip Backup");
@@ -90,35 +88,27 @@ public abstract class StatusIcon : Object
 
   public virtual void done(bool success, bool cancelled, string? detail)
   {
-    if (note != null) {
-      try {
-        // We're done with this backup, no need to still talk about it
-        note.close();
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
-    }
-
     if (success && !cancelled && op.mode == DejaDup.ToolJob.Mode.BACKUP) {
       string msg = _("Backup completed");
+      var priority = NotificationPriority.LOW;
 
       string more = null;
       if (detail != null) {
         msg = _("Backup finished");
         more = _("Not all files were successfully backed up.  See dialog for more details.");
+        priority = NotificationPriority.NORMAL;
         show_window(false);
       }
 
-      Notify.init(_("Backups"));
-      note = new Notify.Notification(msg, more, "deja-dup");
-      note.set_hint("desktop-entry", "org.gnome.DejaDup");
-      try {
-        note.show();
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
+      var note = new Notification(msg);
+      note.set_body(more);
+      note.set_icon(new ThemedIcon("deja-dup"));
+      note.set_priority(priority);
+      note.set_default_action("app.op-show");
+      Application.get_default().send_notification("backup-status", note);
+    } else {
+      // We're done with this backup, no need to still talk about it
+      Application.get_default().withdraw_notification("backup-status");
     }
   }
 
@@ -150,19 +140,10 @@ class ShellStatusIcon : StatusIcon
 
   construct {
     if (automatic && op.mode == DejaDup.ToolJob.Mode.BACKUP) {
-      Notify.init(_("Backups"));
-      note = new Notify.Notification(_("Starting scheduled backup"), null,
-                                     "deja-dup");
-      note.set_hint("desktop-entry", "org.gnome.DejaDup");
-      note.add_action("show-details", _("Show Progress"), () => {show_window(true);});
-      note.add_action("later", later_label.replace("_", ""), () => {later();});
-      note.add_action("skip", skip_label.replace("_", ""), () => {skip();});
-      try {
-        note.show();
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
+      var note = new Notification(_("Starting scheduled backup"));
+      note.set_icon(new ThemedIcon("deja-dup"));
+      note.set_default_action("app.op-show");
+      Application.get_default().send_notification("backup-status", note);
     }
   }
 }

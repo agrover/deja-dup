@@ -19,10 +19,6 @@
 
 using GLib;
 
-// vala 0.22.1 changed the prototype for Notify.get_server_caps.
-// Rather than require that specific version, use 0.22.1's definition directly.
-extern GLib.List notify_get_server_caps();
-
 namespace DejaDup {
 
 public void show_uri(Gtk.Window? parent, string link)
@@ -54,28 +50,16 @@ public ShellEnv get_shell()
   if (shell == ShellEnv.NONE) {
     // Use Legacy unless we detect a different shell.
     shell = ShellEnv.LEGACY;
-    // Next check for Shell by notification capabilities
-    List<string> caps = notify_get_server_caps();
-    bool persistence = false, actions = false;
-    foreach (string cap in caps) {
-      if (cap == "persistence")
-        persistence = true;
-      else if (cap == "actions")
-        actions = true;
-    }
-    if (persistence && actions) {
-      // Ensure it's really Gnome-Shell, not a variation (like Cinnamon).
-      string gsv = null;
-      try {
-        GnomeShell gs = GLib.Bus.get_proxy_sync(BusType.SESSION,
-                                                "org.gnome.Shell",
-                                                "/org/gnome/Shell");
-        gsv = gs.ShellVersion;
-      } catch (Error e) {}
-      if (gsv != null) {
-        // It's really GnomeShell.
-        shell = ShellEnv.GNOME;
-      }
+    string gsv = null;
+    try {
+      GnomeShell gs = GLib.Bus.get_proxy_sync(BusType.SESSION,
+                                              "org.gnome.Shell",
+                                              "/org/gnome/Shell");
+      gsv = gs.ShellVersion;
+    } catch (Error e) {}
+    if (gsv != null) {
+      // It's really GnomeShell.
+      shell = ShellEnv.GNOME;
     }
   }
 
