@@ -50,7 +50,7 @@ test('validate-org.gnome.DejaDup.desktop', desktop_file_validate,
     args: [deja_dup_desktop.full_path()])
 
 conf_data = configuration_data()
-conf_data.set('series', meson.project_version().split('.')[0])
+conf_data.set('series', series)
 conf_data.set('version', meson.project_version())
 vars = configure_file(input: 'deja-dup.appdata.xml.in',
     output: 'deja-dup.vars.appdata.xml.in',
