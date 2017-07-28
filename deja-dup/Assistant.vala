@@ -80,6 +80,7 @@ public abstract class Assistant : Gtk.Window
     var evbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
 
     var ebox = new Gtk.EventBox();
+    ebox.border_width = 6;
     var ehbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
     header_title = new Gtk.Label("");
     header_title.name = "header";
@@ -104,26 +105,6 @@ public abstract class Assistant : Gtk.Window
     dlg_vbox.pack_end(button_box, false, true);
     dlg_vbox.show_all();
     add(dlg_vbox);
-
-    // Make header look a little more distinct
-    try {
-      var style = ebox.get_style_context();
-      // Using @selected_bg_color and @selected_fg_color would be cleaner,
-      // but don't work in all themes (like Adwaita!), so we use this more
-      // manual-but-reliable method.
-      var bg_boxed = style.get_property(Gtk.STYLE_PROPERTY_BACKGROUND_COLOR,
-                                        Gtk.StateFlags.SELECTED).get_boxed();
-      var bg = ((Gdk.RGBA*)bg_boxed).to_string();
-      var fg_boxed = style.get_property(Gtk.STYLE_PROPERTY_COLOR,
-                                        Gtk.StateFlags.SELECTED).get_boxed();
-      var fg = ((Gdk.RGBA*)fg_boxed).to_string();
-      var css = new Gtk.CssProvider();
-      css.load_from_data(@"* {background-color: $bg;
-                              color: $fg;}");
-      ebox.get_style_context().add_provider(css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-    } catch (Error e) {
-      warning("%s\n", e.message);
-    }
 
     response.connect(handle_response);
   }

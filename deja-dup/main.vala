@@ -19,10 +19,10 @@
 
 using GLib;
 
-class DejaDupApp : Gtk.Application
+public class DejaDupApp : Gtk.Application
 {
   Gtk.ApplicationWindow main_window = null;
-  AssistantOperation op = null;
+  public AssistantOperation op {get; private set; default = null;}
 
   const OptionEntry[] options = {
     {"version", 0, 0, OptionArg.NONE, null, N_("Show version"), null},
@@ -38,6 +38,7 @@ class DejaDupApp : Gtk.Application
 
   const ActionEntry[] actions = {
     {"backup", backup},
+    {"restore", restore},
     {"op-show", op_show},
     {"prompt-ok", prompt_ok},
     {"prompt-cancel", prompt_cancel},
@@ -78,21 +79,13 @@ class DejaDupApp : Gtk.Application
       }
 
       List<File> file_list = new List<File>();
-      if (filenames != null) {
+      if (filenames.length > 0) {
         int i = 0;
         while (filenames[i] != null)
           file_list.append(command_line.create_file_for_arg(filenames[i++]));
       }
-      else {
-        /* Determine if we should be in read-only mode.  This is done when
-           we're asked to do a generic restore and the user has backed up
-           before.  We do this because they may want to restore from a
-           different backup without adjusting their own settings. */
-        var last_run = DejaDup.last_run_date(DejaDup.TimestampType.BACKUP);
-        if (last_run != "")
-          DejaDup.set_settings_read_only(true);
-      }
-      set_op(new AssistantRestore.with_files(file_list));
+
+      restore_full(file_list);
     }
     else if (options.contains("restore-missing")) {
       if (op != null) {
@@ -118,7 +111,7 @@ class DejaDupApp : Gtk.Application
         command_line.printerr("%s\n", _("You must provide a directory, not a file"));
         return 1;
       }
-      set_op(new AssistantRestoreMissing(list_directory));
+      assign_op(new AssistantRestoreMissing(list_directory));
     }
     else if (options.contains("backup")) {
       if (op != null) {
@@ -170,6 +163,7 @@ class DejaDupApp : Gtk.Application
       header.pack_end(auto_switch);
 
       var prefs = new DejaDup.Preferences(auto_switch);
+      prefs.app = this;
       prefs.border_width = 12;
       main_window.add(prefs);
       main_window.show_all();
@@ -201,7 +195,7 @@ class DejaDupApp : Gtk.Application
     set_app_menu(menu);
   }
 
-  void set_op(AssistantOperation op)
+  void assign_op(AssistantOperation op)
   {
     if (this.op != null) {
       warning("Trying to override operation! This shouldn't happen.");
@@ -220,7 +214,7 @@ class DejaDupApp : Gtk.Application
     DejaDup.show_uri(list == null ? null : list.data, "help:deja-dup");
   }
 
-  void backup()
+  public void backup()
   {
     if (op != null) {
       op_show();
@@ -231,9 +225,32 @@ class DejaDupApp : Gtk.Application
 
   void backup_full(bool automatic)
   {
-    set_op(new AssistantBackup(automatic));
+    assign_op(new AssistantBackup(automatic));
     Gdk.notify_startup_complete();
     // showing or not is handled by AssistantBackup
+  }
+
+  public void restore()
+  {
+    if (op != null) {
+      op_show();
+    } else {
+      restore_full(null);
+    }
+  }
+
+  void restore_full(List<File>? file_list)
+  {
+    if (file_list.length() == 0) {
+      /* Determine if we should be in read-only mode.  This is done when
+         we're asked to do a generic restore and the user has backed up
+         before.  We do this because they may want to restore from a
+         different backup without adjusting their own settings. */
+      var last_run = DejaDup.last_run_date(DejaDup.TimestampType.BACKUP);
+      if (last_run != "")
+        DejaDup.set_settings_read_only(true);
+    }
+    assign_op(new AssistantRestore.with_files(file_list));
   }
 
   void op_show()

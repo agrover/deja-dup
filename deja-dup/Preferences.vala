@@ -36,13 +36,26 @@ public class Preferences : Gtk.Grid
   public DejaDup.PreferencesPeriodicSwitch auto_switch {get; set; default = null;}
   public bool duplicity_installed {get; private set; default = false;}
 
+  DejaDupApp _app;
+  public DejaDupApp app {
+    get { return _app; }
+    set {
+      _app = value;
+      _app.notify["op"].connect(() => {
+        restore_button.sensitive = _app.op == null;
+        backup_button.sensitive = _app.op == null;
+      });
+      restore_button.sensitive = _app.op == null;
+      backup_button.sensitive = _app.op == null;
+    }
+  }
+
   DejaDup.ConfigLabelDescription backup_desc;
   Gtk.Button backup_button;
   Gtk.ProgressBar backup_progress;
   DejaDup.ConfigLabelDescription restore_desc;
   Gtk.Button restore_button;
   Gtk.ProgressBar restore_progress;
-  uint bus_watch_id = 0;
   const int PAGE_HMARGIN = 24;
   const int PAGE_VMARGIN = 12;
 
@@ -53,13 +66,6 @@ public class Preferences : Gtk.Grid
     // Set initial switch sensitivity, but for some odd reason we can't set
     // this earlier.  Even if at the end of the constructor, it gets reset...
     auto_switch.sensitive = duplicity_installed;
-  }
-
-  ~Preferences() {
-    if (bus_watch_id > 0) {
-      Bus.unwatch_name(bus_watch_id);
-      bus_watch_id = 0;
-    }
   }
 
   async void install_duplicity()
@@ -200,7 +206,7 @@ public class Preferences : Gtk.Grid
     w.expand = false;
     (w as Gtk.Button).clicked.connect((b) => {
       if (duplicity_installed) {
-        run_deja_dup("--restore", b.get_display().get_app_launch_context());
+        app.restore();
       } else {
         restore_progress.visible = true;
         install_duplicity.begin();
@@ -246,7 +252,7 @@ public class Preferences : Gtk.Grid
     w.expand = false;
     (w as Gtk.Button).clicked.connect((b) => {
       if (duplicity_installed) {
-        run_deja_dup("--backup", b.get_display().get_app_launch_context());
+        app.backup();
       } else {
         backup_progress.visible = true;
         install_duplicity.begin();
@@ -263,13 +269,6 @@ public class Preferences : Gtk.Grid
     backup_progress = w as Gtk.ProgressBar;
     table.attach(w, 2, row, 1, 1);
     ++row;
-
-    bus_watch_id = Bus.watch_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
-                                  BusNameWatcherFlags.NONE,
-                                  () => {restore_button.sensitive = false;
-                                         backup_button.sensitive = false;},
-                                  () => {restore_button.sensitive = true;
-                                         backup_button.sensitive = true;});
 
     notebook.append_page(table, null);
     cat_model.insert_with_values(out iter, i, 0, _("Overview"), 1, i);
