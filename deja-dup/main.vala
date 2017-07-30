@@ -184,6 +184,8 @@ public class DejaDupApp : Gtk.Application
     }
 
     add_action_entries(actions, this);
+    set_accels_for_action("app.help", {"F1"});
+    set_accels_for_action("app.quit", {"<Primary>q"});
 
     var help = new Menu();
     help.append(_("_Help"), "app.help");
