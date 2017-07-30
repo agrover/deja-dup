@@ -106,9 +106,9 @@ make_file_list(NautilusFileInfo *info, GString *str)
 {
   gchar *uri = nautilus_file_info_get_uri(info);
   if (!str->len)
-    g_string_assign(str, uri);
+    g_string_printf(str, "\"%s\"", uri);
   else
-    g_string_append_printf(str, " %s", uri);
+    g_string_append_printf(str, " \"%s\"", uri);
   g_free(uri);
 }
 
@@ -120,7 +120,7 @@ restore_missing_files_callback(NautilusMenuItem *item)
 
   info = g_object_get_data(G_OBJECT(item), "deja_dup_extension_file");
 
-  cmd = g_strdup_printf("deja-dup --restore-missing %s",
+  cmd = g_strdup_printf("deja-dup --restore-missing \"%s\"",
                         nautilus_file_info_get_uri(info));
 
   g_spawn_command_line_async(cmd, NULL);
