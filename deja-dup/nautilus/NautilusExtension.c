@@ -18,6 +18,7 @@
     along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "dirhandling.h"
 #include "NautilusExtension.h"
 #include <libnautilus-extension/nautilus-menu-provider.h>
 #include <glib/gi18n-lib.h>
