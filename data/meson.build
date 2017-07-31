@@ -52,12 +52,12 @@ test('validate-org.gnome.DejaDup.desktop', desktop_file_validate,
 conf_data = configuration_data()
 conf_data.set('series', series)
 conf_data.set('version', meson.project_version())
-vars = configure_file(input: 'deja-dup.appdata.xml.in',
-    output: 'deja-dup.vars.appdata.xml.in',
+vars = configure_file(input: 'org.gnome.DejaDup.appdata.xml.in',
+    output: 'org.gnome.DejaDup.vars.appdata.xml.in',
     configuration: conf_data)
-deja_dup_appdata = custom_target('deja-dup.appdata.xml',
+deja_dup_appdata = custom_target('org.gnome.DejaDup.appdata.xml',
     input: vars,
-    output: 'deja-dup.appdata.xml',
+    output: 'org.gnome.DejaDup.appdata.xml',
     command: [msgfmt, '--xml', '--template', '@INPUT@', '-d', podir, '-o', '@OUTPUT@'],
     install: true,
     install_dir: join_paths(datadir, 'appdata'))
