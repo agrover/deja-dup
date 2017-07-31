@@ -189,14 +189,6 @@ public class DejaDupApp : Gtk.Application
     add_action_entries(actions, this);
     set_accels_for_action("app.help", {"F1"});
     set_accels_for_action("app.quit", {"<Primary>q"});
-
-    var meta = new Menu();
-    meta.append(_("_Help"), "app.help");
-    meta.append(_("_About"), "app.about");
-    meta.append(_("_Quit"), "app.quit");
-    var menu = new Menu();
-    menu.append_section(null, meta);
-    set_app_menu(menu);
   }
 
   void assign_op(AssistantOperation op)
