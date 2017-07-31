@@ -48,7 +48,7 @@ toolsdir = join_paths(pkglibexecdir, 'tools')
 # Dependencies
 gio_dep = dependency('gio-2.0', version: '>= 2.42')
 gio_unix_dep = dependency('gio-unix-2.0')
-gtk_dep = dependency('gtk+-3.0', version: '>= 3.10')
+gtk_dep = dependency('gtk+-3.0', version: '>= 3.22')
 nautilus_dep = dependency('libnautilus-extension', required: false)
 packagekit_dep = dependency('packagekit-glib2')
 peas_dep = dependency('libpeas-1.0')
