@@ -43,6 +43,7 @@ public class DejaDupApp : Gtk.Application
     {"prompt-ok", prompt_ok},
     {"prompt-cancel", prompt_cancel},
     {"help", help},
+    {"about", about},
     {"quit", quit},
   };
 
@@ -187,13 +188,12 @@ public class DejaDupApp : Gtk.Application
     set_accels_for_action("app.help", {"F1"});
     set_accels_for_action("app.quit", {"<Primary>q"});
 
-    var help = new Menu();
-    help.append(_("_Help"), "app.help");
-    var quit = new Menu();
-    quit.append(_("_Quit"), "app.quit");
+    var meta = new Menu();
+    meta.append(_("_Help"), "app.help");
+    meta.append(_("_About"), "app.about");
+    meta.append(_("_Quit"), "app.quit");
     var menu = new Menu();
-    menu.append_section(null, help);
-    menu.append_section(null, quit);
+    menu.append_section(null, meta);
     set_app_menu(menu);
   }
 
@@ -214,6 +214,17 @@ public class DejaDupApp : Gtk.Application
   {
     unowned List<Gtk.Window> list = get_windows();
     DejaDup.show_uri(list == null ? null : list.data, "help:deja-dup");
+  }
+
+  void about()
+  {
+    unowned List<Gtk.Window> list = get_windows();
+    Gtk.show_about_dialog(list == null ? null : list.data,
+                          "license-type", Gtk.License.GPL_3_0,
+                          "logo-icon-name", "deja-dup",
+                          "translator-credits", _("translator-credits"),
+                          "version", Config.VERSION,
+                          "website", "https://wiki.gnome.org/Apps/DejaDup");
   }
 
   public void backup()
