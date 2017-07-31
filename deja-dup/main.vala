@@ -19,6 +19,8 @@
 
 using GLib;
 
+extern unowned Resource resources_get_resource();
+
 public class DejaDupApp : Gtk.Application
 {
   Gtk.ApplicationWindow main_window = null;
@@ -128,7 +130,7 @@ public class DejaDupApp : Gtk.Application
       options.lookup("delay", "s", ref body);
       note.set_body(body);
       note.set_icon(new ThemedIcon("deja-dup"));
-      Application.get_default().send_notification("backup-status", note);
+      send_notification("backup-status", note);
     }
     else if (options.contains("prompt")) {
       var toplevel = prompt(this);
@@ -297,6 +299,8 @@ int main(string[] args)
   // "duplicity" and the act of duplicating data for backup.  As a whole, the
   // phrase "Déjà Dup" may not be very translatable.
   Environment.set_application_name(_("Déjà Dup Backup Tool"));
+
+  resources_get_resource()._register();
 
   return new DejaDupApp().run(args);
 }

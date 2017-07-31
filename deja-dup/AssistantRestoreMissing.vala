@@ -124,17 +124,6 @@ public class AssistantRestoreMissing : AssistantRestore {
       base.add_custom_config_pages();
   }
 
-  private string? get_ui_file(string ui_file) {
-    var sysdatadirs = GLib.Environment.get_system_data_dirs();
-    foreach (var sysdir in sysdatadirs) {
-      var p = Path.build_filename(sysdir, Config.PACKAGE, "ui", ui_file);
-      var file = File.new_for_path(p);
-      if (file.query_exists(null))
-        return p;
-    }
-    return null;
-  }
-
   Gtk.Widget? make_listfiles_page() {
     /*
      * Build list files (introduction) page which shows deleted files.
@@ -143,14 +132,8 @@ public class AssistantRestoreMissing : AssistantRestore {
      * components to it. Deleted files are dynamically added on-the-fly by
      * applicable functions.
      */
-      var builder = new Gtk.Builder();
+      var builder = new Gtk.Builder.from_resource("/org/gnome/DejaDup/restore-missing.ui");
       try {
-        string gf = get_ui_file("restore-missing.ui");
-        if (gf == null) {
-          warning("Error: Could not find interface file.");
-          return null;
-        }
-        builder.add_from_file(gf);
         builder.connect_signals(this);
         
         var page = builder.get_object("restore-missing-files") as Gtk.Widget;

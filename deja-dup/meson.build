@@ -18,6 +18,9 @@
 
 subdir('widgets')
 
+resources = gnome.compile_resources('resources', 'resources.xml',
+    source_dir: ['ui'])
+
 deja_dup = executable('deja-dup',
     ['main.vala',
      'Assistant.vala',
@@ -28,7 +31,8 @@ deja_dup = executable('deja-dup',
      'MountOperationAssistant.vala',
      'Preferences.vala',
      'Prompt.vala',
-     'StatusIcon.vala'],
+     'StatusIcon.vala'] +
+     resources,
     vala_args: common_vflags,
     c_args: common_cflags,
     dependencies: [gio_unix_dep, gtk_dep, packagekit_dep, peas_dep, secret_dep],
@@ -36,8 +40,6 @@ deja_dup = executable('deja-dup',
     include_directories: [libdeja_inc, libwidgets_inc],
     install: true,
     install_rpath: pkglibdir)
-
-install_subdir('ui', install_dir: pkgdatadir)
 
 subdir('help')
 subdir('monitor')
