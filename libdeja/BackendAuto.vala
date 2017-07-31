@@ -77,13 +77,17 @@ public class BackendAuto : Backend
 
     if (!gdrive_checker.complete)
       return;
-    else if (gdrive_checker.available)
+    else if (gdrive_checker.available) {
       finish("gdrive");
+      return;
+    }
 
     if (!s3checker.complete)
       return;
-    else if (s3checker.available)
+    else if (s3checker.available) {
       finish("s3");
+      return;
+    }
 
     finish("file");
   }
