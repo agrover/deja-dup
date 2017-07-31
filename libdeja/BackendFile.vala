@@ -165,7 +165,7 @@ public class BackendFile : Backend
         return true;
       else {
         var name = settings.get_string(FILE_SHORT_NAME_KEY);
-        when = _("Backup will begin when %s becomes connected.").printf(name);
+        when = _("Backup will begin when %s is connected.").printf(name);
         return false;
       }
     }
