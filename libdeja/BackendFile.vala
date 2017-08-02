@@ -171,7 +171,6 @@ public class BackendFile : Backend
     else if (file.is_native())
       return true;
     else {
-      when = _("Backup will begin when a network connection becomes available.");
       try {
         // Test if we can mount successfully (this is better than simply
         // testing if network is reachable, since ssh configs and all sorts of
@@ -182,7 +181,11 @@ public class BackendFile : Backend
       } catch (IOError.FAILED_HANDLED e) {
         // Needed user input, so we know we can reach server
         return true;
+      } catch (IOError.HOST_NOT_FOUND e) {
+        when = _("Backup will begin when a network connection becomes available.");
+        return false;
       } catch (Error e) {
+        when = e.message;
         return false;
       }
     }
