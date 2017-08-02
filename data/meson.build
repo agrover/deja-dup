@@ -39,7 +39,7 @@ configure_file(input: 'org.gnome.DejaDup.service.in',
     install_dir: join_paths(datadir, 'dbus-1', 'services'))
 
 deja_dup_desktop = custom_target('org.gnome.DejaDup.desktop',
-    input: 'org.gnome.DejaDup.desktop.in',
+    input: 'org.gnome.DejaDup.desktop',
     output: 'org.gnome.DejaDup.desktop',
     # List keywords due to https://savannah.gnu.org/support/?108887
     command: [msgfmt, '--desktop', '--keyword=Name', '--keyword=Comment', '--keyword=Keywords', '--template', '@INPUT@', '-d', podir, '-o', '@OUTPUT@'],
