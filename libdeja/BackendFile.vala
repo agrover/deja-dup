@@ -408,14 +408,16 @@ public class BackendFile : Backend
     }
 
     try {
-      // Check if it's already mounted
-      var mount = yield file.find_enclosing_mount_async(Priority.DEFAULT, null);
-      if (mount != null)
-        return true;
+      return yield file.mount_enclosing_volume(MountMountFlags.NONE, mount_op, null);
+    } catch (IOError.ALREADY_MOUNTED e) {
+      return true;
+    } catch (Error e) {
+      // try once more with same response in case we timed out while waiting for user
+      mount_op.@set("retry_mode", true);
+      return yield file.mount_enclosing_volume(MountMountFlags.NONE, mount_op, null);
+    } finally {
+      mount_op.@set("retry_mode", false);
     }
-    catch (Error e) {}
-
-    return yield file.mount_enclosing_volume(MountMountFlags.NONE, mount_op, null);
   }
 
   async bool mount_volume() throws Error

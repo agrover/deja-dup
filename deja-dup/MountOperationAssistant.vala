@@ -39,6 +39,7 @@ public class MountOperationAssistant : MountOperation
   public string label_show_password {get; set; default = _("S_how password");}
   public string label_remember_password {get; set; default = _("_Remember password");}
   public bool go_forward {get; set; default = false;} // set by backends if they want to move on
+  public bool retry_mode {get; set; default = false;} // skip any questions, send existing data back
 
   signal void button_clicked();
 
@@ -83,6 +84,11 @@ public class MountOperationAssistant : MountOperation
   public override void ask_password(string message, string default_user,
                                     string default_domain, AskPasswordFlags flags)
   {
+    if (retry_mode) {
+      reply(MountOperationResult.HANDLED);
+      return;
+    }
+
     flesh_out_password_page(message, default_user, default_domain, flags);
     assist.interrupt(password_page);
     looping = true;
