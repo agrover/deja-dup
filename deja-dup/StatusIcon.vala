@@ -101,7 +101,8 @@ public abstract class StatusIcon : Object
       }
 
       var note = new Notification(msg);
-      note.set_body(more);
+      if (more != null)
+        note.set_body(more);
       note.set_icon(new ThemedIcon("deja-dup"));
       note.set_priority(priority);
       note.set_default_action("app.op-show");
