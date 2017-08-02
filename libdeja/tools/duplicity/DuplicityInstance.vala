@@ -410,18 +410,20 @@ internal class DuplicityInstance : Object
         case 'r': rv.append_c('\r'); i += 2; break; // carriage return
         case 'v': rv.append_c('\xb'); i += 2; break; // vertical tab
         case 'a': rv.append_c('\x7'); i += 2; break; // bell
-        case 'x':
-          // start of a hex number
-          if (s[i+2] != 0 && s[i+3] != 0) {
-            char[] tmpstr = new char[3];
-            tmpstr[0] = s[i+2];
-            tmpstr[1] = s[i+3];
-            var val = ((string)tmpstr).to_ulong(null, 16);
-            rv.append_unichar((unichar)val);
-            i += 4;
-          }
-          else
-            bare_escape = true;
+        case 'U': // start of a hex number
+          var val = (((string)s).substring(i+2, 8)).to_ulong(null, 16);
+          rv.append_unichar((unichar)val);
+          i += 10;
+          break;
+        case 'u': // start of a hex number
+          var val = (((string)s).substring(i+2, 4)).to_ulong(null, 16);
+          rv.append_unichar((unichar)val);
+          i += 6;
+          break;
+        case 'x': // start of a hex number
+          var val = (((string)s).substring(i+2, 2)).to_ulong(null, 16);
+          rv.append_unichar((unichar)val);
+          i += 4;
           break;
         case '0':
         case '1':
