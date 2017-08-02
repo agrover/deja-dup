@@ -124,7 +124,7 @@ public class AssistantRestoreMissing : AssistantRestore {
       base.add_custom_config_pages();
   }
 
-  Gtk.Widget? make_listfiles_page() {
+  Gtk.Widget make_listfiles_page() {
     /*
      * Build list files (introduction) page which shows deleted files.
      *
@@ -133,63 +133,58 @@ public class AssistantRestoreMissing : AssistantRestore {
      * applicable functions.
      */
       var builder = new Gtk.Builder.from_resource("/org/gnome/DejaDup/restore-missing.ui");
-      try {
-        builder.connect_signals(this);
-        
-        var page = builder.get_object("restore-missing-files") as Gtk.Widget;
-        var filelistwindow = builder.get_object("file-list-window") as Gtk.ScrolledWindow;
-        var status_table = builder.get_object("folder-box") as Gtk.Box;
-        var progress_table = builder.get_object("status-box") as Gtk.Box;
-        current_scan_date = builder.get_object("status-label") as Gtk.Label;
+      builder.connect_signals(this);
 
-        /* Add backup and scan information */
-        this.list_dir_label = new Gtk.Label("");
-        this.list_dir_label.set("xalign", 0.0f);
-        status_table.pack_start(this.list_dir_label, true, true, 0);
+      var page = builder.get_object("restore-missing-files") as Gtk.Widget;
+      var filelistwindow = builder.get_object("file-list-window") as Gtk.ScrolledWindow;
+      var status_table = builder.get_object("folder-box") as Gtk.Box;
+      var progress_table = builder.get_object("status-box") as Gtk.Box;
+      current_scan_date = builder.get_object("status-label") as Gtk.Label;
 
-        /* Spinner */
-        progress_table.pack_end(this.spinner, false, false, 0);
-        this.spinner.set_size_request(20, 20);
-       
-        this.listmodel = new Gtk.ListStore (3, typeof (bool), typeof (string), typeof (string));
-        var treeview = new Gtk.TreeView.with_model (this.listmodel);
-        var toggle = new Gtk.CellRendererToggle();
-        
-        toggle.toggled.connect ((toggle, path) => {
-          var active = !toggle.active;
-          var tree_path = new Gtk.TreePath.from_string (path);
-          this.listmodel.get_iter (out this.deleted_iter, tree_path);
-          this.listmodel.set(this.deleted_iter, 0, active);
+      /* Add backup and scan information */
+      this.list_dir_label = new Gtk.Label("");
+      this.list_dir_label.set("xalign", 0.0f);
+      status_table.pack_start(this.list_dir_label, true, true, 0);
 
-          string name;
-          this.listmodel.get(this.deleted_iter, 1, out name);
-          File file = list_directory.get_child(name);
+      /* Spinner */
+      progress_table.pack_end(this.spinner, false, false, 0);
+      this.spinner.set_size_request(20, 20);
 
-          if (active)
-            _restore_files.prepend(file);
-          else
-            _restore_files.remove_link(_restore_files.find_custom(file, (a, b) => {
-              if (a != null && b != null && (a as File).equal(b as File))
-                return 0;
-              else
-                return 1;
-            }));
+      this.listmodel = new Gtk.ListStore (3, typeof (bool), typeof (string), typeof (string));
+      var treeview = new Gtk.TreeView.with_model (this.listmodel);
+      var toggle = new Gtk.CellRendererToggle();
 
-          allow_forward(restore_files != null);
-        });
+      toggle.toggled.connect ((toggle, path) => {
+        var active = !toggle.active;
+        var tree_path = new Gtk.TreePath.from_string (path);
+        this.listmodel.get_iter (out this.deleted_iter, tree_path);
+        this.listmodel.set(this.deleted_iter, 0, active);
 
-        treeview.insert_column_with_attributes(-1, "    ", toggle, "active", 0);
-        treeview.insert_column_with_attributes(-1, _("File"), new Gtk.CellRendererText(), "text", 1);
-        treeview.insert_column_with_attributes(-1, _("Last seen"), new Gtk.CellRendererText(), "text", 2);
- 
-        treeview.set_headers_visible (true);
+        string name;
+        this.listmodel.get(this.deleted_iter, 1, out name);
+        File file = list_directory.get_child(name);
 
-        filelistwindow.add_with_viewport(treeview);
-        return page;
-      } catch (Error err) {
-        warning("%s", err.message);
-        return null;
-      }
+        if (active)
+          _restore_files.prepend(file);
+        else
+          _restore_files.remove_link(_restore_files.find_custom(file, (a, b) => {
+            if (a != null && b != null && (a as File).equal(b as File))
+              return 0;
+            else
+              return 1;
+          }));
+
+        allow_forward(restore_files != null);
+      });
+
+      treeview.insert_column_with_attributes(-1, "    ", toggle, "active", 0);
+      treeview.insert_column_with_attributes(-1, _("File"), new Gtk.CellRendererText(), "text", 1);
+      treeview.insert_column_with_attributes(-1, _("Last seen"), new Gtk.CellRendererText(), "text", 2);
+
+      treeview.set_headers_visible (true);
+
+      filelistwindow.add_with_viewport(treeview);
+      return page;
   }
 
   void add_listfiles_page() {
