@@ -155,7 +155,6 @@ public class BackendFile : Backend
 
   public override async bool is_ready(out string when) {
     when = null;
-
     var file = get_file_from_settings();
     if (file == null) { // must be a volume that isn't yet mounted. See if volume is connected
       var settings = get_settings(FILE_ROOT);
@@ -173,7 +172,19 @@ public class BackendFile : Backend
       return true;
     else {
       when = _("Backup will begin when a network connection becomes available.");
-      return yield Network.get().can_reach (file.get_uri ());
+      try {
+        // Test if we can mount successfully (this is better than simply
+        // testing if network is reachable, since ssh configs and all sorts of
+        // things might be taken into account by GIO but not by a simple
+        // network test). If we do end up mounting it, that's fine.  This is
+        // only called right before attempting an operation.
+        return yield file.mount_enclosing_volume(MountMountFlags.NONE, null, null);
+      } catch (IOError.FAILED_HANDLED e) {
+        // Needed user input, so we know we can reach server
+        return true;
+      } catch (Error e) {
+        return false;
+      }
     }
   }
 
