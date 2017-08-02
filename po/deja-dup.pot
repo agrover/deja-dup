@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-28 11:46-0400\n"
+"POT-Creation-Date: 2017-08-02 13:45-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,46 +23,46 @@ msgstr ""
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: data/deja-dup.appdata.xml.in:7 deja-dup/main.vala:269
+#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:293
 #: libdeja/CommonUtils.vala:138
 msgid "Déjà Dup Backup Tool"
 msgstr ""
 
-#: data/deja-dup.appdata.xml.in:8
+#: data/org.gnome.DejaDup.appdata.xml.in:8
 msgid "Keep your important documents safe from disaster"
 msgstr ""
 
-#: data/deja-dup.appdata.xml.in:10
+#: data/org.gnome.DejaDup.appdata.xml.in:10
 msgid ""
 "Déjà Dup is a simple backup tool. It hides the complexity of backing up the "
 "Right Way (encrypted, off-site, and regular) and uses duplicity as the "
 "backend."
 msgstr ""
 
-#: data/deja-dup.appdata.xml.in:12
+#: data/org.gnome.DejaDup.appdata.xml.in:12
 msgid ""
 "Support for local, remote, or cloud backup locations, such as Amazon S3 and "
 "Rackspace Cloud Files"
 msgstr ""
 
-#: data/deja-dup.appdata.xml.in:13
+#: data/org.gnome.DejaDup.appdata.xml.in:13
 msgid "Securely encrypts and compresses your data"
 msgstr ""
 
-#: data/deja-dup.appdata.xml.in:14
+#: data/org.gnome.DejaDup.appdata.xml.in:14
 msgid "Incrementally backs up, letting you restore from any particular backup"
 msgstr ""
 
-#: data/deja-dup.appdata.xml.in:15
+#: data/org.gnome.DejaDup.appdata.xml.in:15
 msgid "Schedules regular backups"
 msgstr ""
 
-#: data/deja-dup.appdata.xml.in:16
+#: data/org.gnome.DejaDup.appdata.xml.in:16
 msgid "Integrates well into your GNOME desktop"
 msgstr ""
 
 #. Translators: "Backups" is a noun
-#: data/org.gnome.DejaDup.desktop.in:5 deja-dup/main.vala:161
+#: data/org.gnome.DejaDup.desktop.in:5 deja-dup/main.vala:157
 #: deja-dup/Prompt.vala:78
 msgid "Backups"
 msgstr ""
@@ -86,7 +86,7 @@ msgstr ""
 msgid "Back Up"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:6 deja-dup/Preferences.vala:286
+#: data/org.gnome.DejaDup.gschema.xml:6 deja-dup/Preferences.vala:285
 msgid "Folders to save"
 msgstr ""
 
@@ -100,7 +100,7 @@ msgid ""
 "relative to the user’s home directory."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:11 deja-dup/Preferences.vala:297
+#: data/org.gnome.DejaDup.gschema.xml:11 deja-dup/Preferences.vala:296
 msgid "Folders to ignore"
 msgstr ""
 
@@ -426,6 +426,42 @@ msgstr ""
 msgid "Schedules backups at regular intervals"
 msgstr ""
 
+#: deja-dup/ui/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr ""
+
+#: deja-dup/ui/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr ""
+
+#: deja-dup/ui/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Help"
+msgstr ""
+
+#: deja-dup/ui/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Shortcuts"
+msgstr ""
+
+#: deja-dup/ui/menus.ui:7
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#: deja-dup/ui/menus.ui:11
+msgid "_Help"
+msgstr ""
+
+#: deja-dup/ui/menus.ui:15
+msgid "_About"
+msgstr ""
+
+#: deja-dup/ui/menus.ui:19
+msgid "_Quit"
+msgstr ""
+
 #: deja-dup/ui/restore-missing.ui:18
 msgid "Folder"
 msgstr ""
@@ -434,21 +470,21 @@ msgstr ""
 msgid "Scanning…"
 msgstr ""
 
-#: deja-dup/nautilus/NautilusExtension.c:171
+#: deja-dup/nautilus/NautilusExtension.c:172
 msgid "Restore Missing Files…"
 msgstr ""
 
-#: deja-dup/nautilus/NautilusExtension.c:172
+#: deja-dup/nautilus/NautilusExtension.c:173
 msgid "Restore deleted files from backup"
 msgstr ""
 
-#: deja-dup/nautilus/NautilusExtension.c:214
+#: deja-dup/nautilus/NautilusExtension.c:215
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: deja-dup/nautilus/NautilusExtension.c:218
+#: deja-dup/nautilus/NautilusExtension.c:219
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] ""
@@ -688,46 +724,46 @@ msgstr[1] ""
 msgid "Restoring…"
 msgstr ""
 
-#: deja-dup/AssistantRestoreMissing.vala:199
+#: deja-dup/AssistantRestoreMissing.vala:182
 msgid "File"
 msgstr ""
 
-#: deja-dup/AssistantRestoreMissing.vala:200
+#: deja-dup/AssistantRestoreMissing.vala:183
 msgid "Last seen"
 msgstr ""
 
-#: deja-dup/AssistantRestoreMissing.vala:215
+#: deja-dup/AssistantRestoreMissing.vala:198
 msgid "Restore which Files?"
 msgstr ""
 
 #. Hours
-#: deja-dup/AssistantRestoreMissing.vala:346
+#: deja-dup/AssistantRestoreMissing.vala:329
 msgid "Scanning for files from up to a day ago…"
 msgstr ""
 
-#: deja-dup/AssistantRestoreMissing.vala:349
+#: deja-dup/AssistantRestoreMissing.vala:332
 msgid "Scanning for files from up to a week ago…"
 msgstr ""
 
-#: deja-dup/AssistantRestoreMissing.vala:352
+#: deja-dup/AssistantRestoreMissing.vala:335
 msgid "Scanning for files from up to a month ago…"
 msgstr ""
 
-#: deja-dup/AssistantRestoreMissing.vala:357
+#: deja-dup/AssistantRestoreMissing.vala:340
 #, c-format
 msgid "Scanning for files from about a month ago…"
 msgid_plural "Scanning for files from about %d months ago…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: deja-dup/AssistantRestoreMissing.vala:364
+#: deja-dup/AssistantRestoreMissing.vala:347
 #, c-format
 msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: deja-dup/AssistantRestoreMissing.vala:454
+#: deja-dup/AssistantRestoreMissing.vala:437
 msgid "Scanning finished"
 msgstr ""
 
@@ -735,82 +771,78 @@ msgstr ""
 msgid "_OK"
 msgstr ""
 
-#: deja-dup/Assistant.vala:313
+#: deja-dup/Assistant.vala:294
 msgid "_Forward"
 msgstr ""
 
-#: deja-dup/Assistant.vala:331
+#: deja-dup/Assistant.vala:312
 msgid "Co_ntinue"
 msgstr ""
 
-#: deja-dup/Assistant.vala:337
+#: deja-dup/Assistant.vala:318
 msgctxt "verb"
 msgid "_Test"
 msgstr ""
 
-#: deja-dup/Assistant.vala:366 deja-dup/widgets/ConfigList.vala:255
+#: deja-dup/Assistant.vala:347 deja-dup/widgets/ConfigList.vala:255
 #: deja-dup/widgets/ConfigLocationFile.vala:53
 msgid "_Cancel"
 msgstr ""
 
-#: deja-dup/Assistant.vala:368
+#: deja-dup/Assistant.vala:349
 msgid "_Close"
 msgstr ""
 
-#: deja-dup/Assistant.vala:372
+#: deja-dup/Assistant.vala:353
 msgid "_Back"
 msgstr ""
 
-#: deja-dup/Assistant.vala:374 deja-dup/StatusIcon.vala:70
+#: deja-dup/Assistant.vala:355 deja-dup/StatusIcon.vala:70
 msgid "_Resume Later"
 msgstr ""
 
-#: deja-dup/main.vala:28 deja-dup/monitor/monitor.vala:34
+#: deja-dup/main.vala:30 deja-dup/monitor/monitor.vala:34
 msgid "Show version"
 msgstr ""
 
-#: deja-dup/main.vala:29
+#: deja-dup/main.vala:31
 msgid "Restore given files"
 msgstr ""
 
-#: deja-dup/main.vala:30
+#: deja-dup/main.vala:32
 msgid "Immediately start a backup"
 msgstr ""
 
-#: deja-dup/main.vala:32
+#: deja-dup/main.vala:34
 msgid "Restore deleted files"
 msgstr ""
 
-#: deja-dup/main.vala:76 deja-dup/main.vala:99 deja-dup/main.vala:125
+#: deja-dup/main.vala:80 deja-dup/main.vala:95 deja-dup/main.vala:121
 msgid "An operation is already in progress"
 msgstr ""
 
-#: deja-dup/main.vala:104
+#: deja-dup/main.vala:100
 msgid "No directory provided"
 msgstr ""
 
-#: deja-dup/main.vala:108
+#: deja-dup/main.vala:104
 msgid "Only one directory can be shown at once"
 msgstr ""
 
-#: deja-dup/main.vala:114
+#: deja-dup/main.vala:110
 msgid "Directory does not exist"
 msgstr ""
 
-#: deja-dup/main.vala:118
+#: deja-dup/main.vala:114
 msgid "You must provide a directory, not a file"
 msgstr ""
 
-#: deja-dup/main.vala:132
+#: deja-dup/main.vala:128
 msgid "Scheduled backup delayed"
 msgstr ""
 
-#: deja-dup/main.vala:195
-msgid "_Help"
-msgstr ""
-
-#: deja-dup/main.vala:197
-msgid "_Quit"
+#: deja-dup/main.vala:219
+msgid "translator-credits"
 msgstr ""
 
 #: deja-dup/MountOperationAssistant.vala:36
@@ -851,65 +883,65 @@ msgstr ""
 msgid "_Domain"
 msgstr ""
 
-#: deja-dup/Preferences.vala:91 deja-dup/Preferences.vala:243
+#: deja-dup/Preferences.vala:97 deja-dup/Preferences.vala:249
 msgid "_Back Up Now…"
 msgstr ""
 
-#: deja-dup/Preferences.vala:93 deja-dup/Preferences.vala:197
+#: deja-dup/Preferences.vala:99 deja-dup/Preferences.vala:203
 msgid "_Restore…"
 msgstr ""
 
-#: deja-dup/Preferences.vala:110
+#: deja-dup/Preferences.vala:116
 msgid "Could not install"
 msgstr ""
 
-#: deja-dup/Preferences.vala:144
+#: deja-dup/Preferences.vala:150
 msgid "Categories"
 msgstr ""
 
-#: deja-dup/Preferences.vala:197
+#: deja-dup/Preferences.vala:203
 msgid "_Install…"
 msgstr ""
 
-#: deja-dup/Preferences.vala:243
+#: deja-dup/Preferences.vala:249
 #: deja-dup/widgets/ConfigLabelDescription.vala:59
 #: deja-dup/widgets/ConfigLabelDescription.vala:83
 msgid "Install…"
 msgstr ""
 
-#: deja-dup/Preferences.vala:275
+#: deja-dup/Preferences.vala:274
 msgid "Overview"
 msgstr ""
 
-#: deja-dup/Preferences.vala:308
+#: deja-dup/Preferences.vala:307
 msgid "_Storage location"
 msgstr ""
 
 #. Translators: storage as in "where to store the backup"
-#: deja-dup/Preferences.vala:325
+#: deja-dup/Preferences.vala:324
 msgid "Storage location"
 msgstr ""
 
-#: deja-dup/Preferences.vala:349
+#: deja-dup/Preferences.vala:348
 msgid "_Automatic backup"
 msgstr ""
 
 #. translators: as in "Every day"
-#: deja-dup/Preferences.vala:361
+#: deja-dup/Preferences.vala:360
 msgid "_Every"
 msgstr ""
 
-#: deja-dup/Preferences.vala:371
+#: deja-dup/Preferences.vala:370
 msgctxt "verb"
 msgid "_Keep"
 msgstr ""
 
-#: deja-dup/Preferences.vala:378
+#: deja-dup/Preferences.vala:377
 msgid ""
 "Old backups will be deleted earlier if the storage location is low on space."
 msgstr ""
 
-#: deja-dup/Preferences.vala:388
+#: deja-dup/Preferences.vala:387
 msgid "Scheduling"
 msgstr ""
 
@@ -949,16 +981,16 @@ msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr ""
 
-#: deja-dup/StatusIcon.vala:143
+#: deja-dup/StatusIcon.vala:144
 msgid "Starting scheduled backup"
 msgstr ""
 
-#: deja-dup/StatusIcon.vala:176
+#: deja-dup/StatusIcon.vala:177
 #, c-format
 msgid "%.1f%% complete"
 msgstr ""
 
-#: deja-dup/StatusIcon.vala:189
+#: deja-dup/StatusIcon.vala:190
 msgid "Show _Progress"
 msgstr ""
 
@@ -1246,7 +1278,7 @@ msgstr ""
 
 #: libdeja/BackendFile.vala:168
 #, c-format
-msgid "Backup will begin when %s becomes connected."
+msgid "Backup will begin when %s is connected."
 msgstr ""
 
 #: libdeja/BackendFile.vala:175 libdeja/BackendGDrive.vala:51
@@ -1254,15 +1286,15 @@ msgstr ""
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 
-#: libdeja/BackendFile.vala:384 libdeja/BackendFile.vala:448
+#: libdeja/BackendFile.vala:389 libdeja/BackendFile.vala:453
 msgid "Backup location not available"
 msgstr ""
 
-#: libdeja/BackendFile.vala:385
+#: libdeja/BackendFile.vala:390
 msgid "Waiting for a network connection…"
 msgstr ""
 
-#: libdeja/BackendFile.vala:448
+#: libdeja/BackendFile.vala:453
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr ""

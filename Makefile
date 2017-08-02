@@ -28,9 +28,8 @@ builddir:
 check: all
 	LC_ALL=C.UTF-8 mesontest -C builddir
 
-dist: builddir screenshots
+dist: builddir screenshots pot
 	rm -f builddir/deja-dup-*.tar*
-	ninja -C builddir deja-dup-pot help-deja-dup-pot
 	@git config tar.tar.xz.command "xz -c"
 	VER=$(shell grep -m 1 version: meson.build | cut -d\' -f2) && \
 	git archive --worktree-attributes --prefix deja-dup-$$VER/ -o builddir/deja-dup-$$VER.tar.xz HEAD
@@ -71,6 +70,9 @@ screenshots: all
 	@gsettings reset org.gnome.desktop.interface gtk-theme
 	@gsettings reset org.gnome.desktop.interface icon-theme
 	@gsettings reset org.gnome.desktop.wm.preferences theme
+
+pot: builddir
+	ninja -C builddir deja-dup-pot help-deja-dup-pot
 
 # call like 'make copy-po TD=path-to-translation-dir'
 copy-po:
