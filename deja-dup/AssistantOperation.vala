@@ -73,7 +73,6 @@ public abstract class AssistantOperation : Assistant
   Gtk.TextView detail_text_view;
   protected Gtk.Widget summary_page {get; private set;}
   
-  protected Gdk.Pixbuf op_icon {get; private set;}
   protected DejaDup.Operation op;
   uint timeout_id;
   protected bool error_occurred {get; private set;}
@@ -87,10 +86,6 @@ public abstract class AssistantOperation : Assistant
 
   construct
   {
-    icon_name = "deja-dup";
-    op_icon = make_op_icon();
-    header_icon.pixbuf = op_icon;
-
     add_custom_config_pages();
     add_setup_pages();
     add_confirm_page();
@@ -125,21 +120,6 @@ public abstract class AssistantOperation : Assistant
   protected abstract DejaDup.Operation? create_op();
   protected abstract string get_progress_file_prefix();
 
-  protected Gdk.Pixbuf? make_op_icon()
-  {
-    if (this.icon_name == null)
-      return null;
-    try {
-      var theme = Gtk.IconTheme.get_for_screen(get_screen());
-      return theme.load_icon(this.icon_name, 48,
-                             Gtk.IconLookupFlags.FORCE_SIZE);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      return null;
-    }
-  }
-  
   bool pulse()
   {
     if (!gives_progress)

@@ -118,7 +118,7 @@ public class MountOperationAssistant : MountOperation
                                string default_domain, AskPasswordFlags flags)
   {
     if (layout != null)
-      DejaDup.destroy_widget(layout);
+      password_page.remove(layout);
 
     layout = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
     layout.set("border-width", 12);

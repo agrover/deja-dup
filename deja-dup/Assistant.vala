@@ -117,12 +117,14 @@ public abstract class Assistant : Gtk.Window
 
   public void set_header_icon(string? name)
   {
-    if (name == null)
-      name = this.icon_name;
+    if (name == null) {
+      header_icon.pixbuf = null;
+      return;
+    }
 
     try {
       var theme = Gtk.IconTheme.get_for_screen(get_screen());
-      var pixbuf = theme.load_icon(name, 48,
+      var pixbuf = theme.load_icon(name + "-symbolic", 48,
                                    Gtk.IconLookupFlags.FORCE_SIZE);
       header_icon.pixbuf = pixbuf;
     }
