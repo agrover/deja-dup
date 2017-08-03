@@ -60,7 +60,7 @@ deja_dup_appdata = custom_target('org.gnome.DejaDup.appdata.xml',
     output: 'org.gnome.DejaDup.appdata.xml',
     command: [msgfmt, '--xml', '--template', '@INPUT@', '-d', podir, '-o', '@OUTPUT@'],
     install: true,
-    install_dir: join_paths(datadir, 'appdata'))
+    install_dir: join_paths(datadir, 'metainfo'))
 
 test('validate-appstream', appstream_util,
     args: ['--nonet', 'validate-relax', deja_dup_appdata.full_path()])
