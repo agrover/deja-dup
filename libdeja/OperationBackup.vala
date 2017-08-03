@@ -105,6 +105,7 @@ public class OperationBackup : Operation
     dir = Environment.get_home_dir();
     if (dir != null) {
       rv.append(Path.build_filename(dir, ".adobe/Flash_Player/AssetCache"));
+      rv.append(Path.build_filename(dir, ".ccache"));
       rv.append(Path.build_filename(dir, ".gvfs"));
       rv.append(Path.build_filename(dir, ".Private")); // encrypted copies of stuff in $HOME
       rv.append(Path.build_filename(dir, ".recent-applications.xbel"));

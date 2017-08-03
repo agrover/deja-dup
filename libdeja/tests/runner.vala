@@ -193,7 +193,7 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
   if (mode == Mode.STATUS || mode == Mode.NONE || mode == Mode.DRY || mode == Mode.BACKUP) {
     args += "'--exclude=%s' '--include=%s/deja-dup/metadata' ".printf(backupdir, cachedir);
 
-    string[] excludes1 = {"~/Downloads", "~/.local/share/Trash", "~/.xsession-errors", "~/.thumbnails", "~/.steam/root", "~/.Private", "~/.gvfs", "~/.adobe/Flash_Player/AssetCache"};
+    string[] excludes1 = {"~/Downloads", "~/.local/share/Trash", "~/.xsession-errors", "~/.thumbnails", "~/.steam/root", "~/.Private", "~/.gvfs", "~/.ccache", "~/.adobe/Flash_Player/AssetCache"};
     foreach (string ex in excludes1) {
       ex = ex.replace("~", Environment.get_home_dir());
       if (FileUtils.test (ex, FileTest.IS_SYMLINK | FileTest.EXISTS))
