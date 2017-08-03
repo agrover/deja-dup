@@ -153,6 +153,8 @@ public class DejaDupApp : Gtk.Application
       // We're first instance.  Yay!
 
       main_window = new Gtk.ApplicationWindow(this);
+      main_window.destroy.connect(() => {this.main_window = null;});
+
       // Translators: "Backups" is a noun
       main_window.title = _("Backups");
       main_window.resizable = false;
