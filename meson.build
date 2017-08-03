@@ -17,7 +17,7 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 project('deja-dup', ['vala', 'c'],
-    version: '35.2',
+    version: '35.3',
     license: 'GPLv3+',
     default_options: [
         'warning_level=1',
