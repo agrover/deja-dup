@@ -37,6 +37,7 @@ public const string PERIODIC_KEY = "periodic";
 public const string PERIODIC_PERIOD_KEY = "periodic-period";
 public const string DELETE_AFTER_KEY = "delete-after";
 public const string FULL_BACKUP_PERIOD_KEY = "full-backup-period";
+public const string ALLOW_METERED_KEY = "allow-metered";
 
 public errordomain BackupError {
   BAD_CONFIG,

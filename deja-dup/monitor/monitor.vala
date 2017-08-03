@@ -35,10 +35,16 @@ const OptionEntry[] options = {
   {null}
 };
 
+static bool valid_network()
+{
+  var network = DejaDup.Network.get();
+  return network.connected && !network.metered;
+}
+
 static bool network_check()
 {
   reactive_check = true;
-  if (DejaDup.Network.get().connected)
+  if (valid_network())
     prepare_next_run(); // in case network manager was blocking us
   reactive_check = false;
   return false;
@@ -51,7 +57,7 @@ static void network_changed()
   // LP bug 805140) we don't error out too soon.
   if (netcheck_id > 0)
     Source.remove(netcheck_id);
-  if (DejaDup.Network.get().connected)
+  if (valid_network())
     netcheck_id = Timeout.add_seconds(120, network_check);
 }
 
@@ -69,7 +75,16 @@ static async bool is_ready(out string when)
     when = "Testing";
     return false;
   }
-  return yield DejaDup.Backend.get_default().is_ready(out when);
+  var backend = DejaDup.Backend.get_default();
+  var network = DejaDup.Network.get();
+  if (!backend.is_native() && !network.connected) {
+    when = _("Backup will begin when a network connection becomes available.");
+    return false;
+  } else if (!backend.is_native() && network.metered) {
+    when = _("Backup will begin when an unmetered network connection becomes available.");
+    return false;
+  }
+  return yield backend.is_ready(out when);
 }
 
 static bool handle_options(out int status)
@@ -245,8 +260,8 @@ static void watch_settings()
 
 static void begin_monitoring()
 {
-  DejaDup.Network.ensure_status.begin();
   DejaDup.Network.get().notify["connected"].connect(network_changed);
+  DejaDup.Network.get().notify["metered"].connect(network_changed);
 
   var mon = VolumeMonitor.get();
   mon.ref(); // bug 569418; bad things happen when VM goes away

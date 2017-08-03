@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-02 13:45-0400\n"
+"POT-Creation-Date: 2017-08-02 23:17-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
 #: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:293
-#: libdeja/CommonUtils.vala:138
+#: libdeja/CommonUtils.vala:139
 msgid "Déjà Dup Backup Tool"
 msgstr ""
 
@@ -62,27 +62,27 @@ msgid "Integrates well into your GNOME desktop"
 msgstr ""
 
 #. Translators: "Backups" is a noun
-#: data/org.gnome.DejaDup.desktop.in:5 deja-dup/main.vala:157
+#: data/org.gnome.DejaDup.desktop:5 deja-dup/main.vala:157
 #: deja-dup/Prompt.vala:78
 msgid "Backups"
 msgstr ""
 
-#: data/org.gnome.DejaDup.desktop.in:6
+#: data/org.gnome.DejaDup.desktop:6
 msgid "Change your backup settings"
 msgstr ""
 
-#: data/org.gnome.DejaDup.desktop.in:8
+#: data/org.gnome.DejaDup.desktop:8
 #: deja-dup/monitor/deja-dup-monitor.desktop.in:8
 msgid "deja-dup"
 msgstr ""
 
 #. Translators: Add whatever keywords you want in your language, separated by semicolons
 #. These keywords are used when searching for applications in dashes, etc.
-#: data/org.gnome.DejaDup.desktop.in:19
+#: data/org.gnome.DejaDup.desktop:19
 msgid "déjà;deja;dup;"
 msgstr ""
 
-#: data/org.gnome.DejaDup.desktop.in:26
+#: data/org.gnome.DejaDup.desktop:26
 msgid "Back Up"
 msgstr ""
 
@@ -216,200 +216,210 @@ msgid ""
 "of days to wait between full backups."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:76
+#: data/org.gnome.DejaDup.gschema.xml:66
+msgid "Whether to use metered networks"
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:67
+msgid ""
+"If false, Déjà Dup will refuse to run scheduled backups over metered network "
+"connections (like 4G)."
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:81
 msgid "Type of location to store backup"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:77
+#: data/org.gnome.DejaDup.gschema.xml:82
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:89
+#: data/org.gnome.DejaDup.gschema.xml:94
 msgid "Amazon S3 Access Key ID"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:90
+#: data/org.gnome.DejaDup.gschema.xml:95
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:94
+#: data/org.gnome.DejaDup.gschema.xml:99
 msgid "The Amazon S3 bucket name to use"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:95
+#: data/org.gnome.DejaDup.gschema.xml:100
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:99
+#: data/org.gnome.DejaDup.gschema.xml:104
 msgid "The Amazon S3 folder"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:100
-#: data/org.gnome.DejaDup.gschema.xml:117
+#: data/org.gnome.DejaDup.gschema.xml:105
+#: data/org.gnome.DejaDup.gschema.xml:122
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:106
+#: data/org.gnome.DejaDup.gschema.xml:111
 msgid "Google Cloud Storage Access Key ID"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:107
+#: data/org.gnome.DejaDup.gschema.xml:112
 msgid ""
 "Your Google Cloud Storage Access Key Identifier. This acts as your Google "
 "Cloud Storage username."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:111
+#: data/org.gnome.DejaDup.gschema.xml:116
 msgid "The Google Cloud Storage bucket name to use"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:112
+#: data/org.gnome.DejaDup.gschema.xml:117
 msgid ""
 "Which Google Cloud Storage bucket to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:116
+#: data/org.gnome.DejaDup.gschema.xml:121
 msgid "The Google Cloud Storage folder"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:123
+#: data/org.gnome.DejaDup.gschema.xml:128
 msgid "The email-address of your Google account"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:124
+#: data/org.gnome.DejaDup.gschema.xml:129
 msgid "The email-address of your Google account."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:128
+#: data/org.gnome.DejaDup.gschema.xml:133
 msgid "The folder where backups are stored"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:129
+#: data/org.gnome.DejaDup.gschema.xml:134
 msgid "The folder hierarchy where backups are stored."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:135
+#: data/org.gnome.DejaDup.gschema.xml:140
 msgid "The Rackspace Cloud Files container"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:136
+#: data/org.gnome.DejaDup.gschema.xml:141
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:140
+#: data/org.gnome.DejaDup.gschema.xml:145
 msgid "Your Rackspace username"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:141
+#: data/org.gnome.DejaDup.gschema.xml:146
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:147
+#: data/org.gnome.DejaDup.gschema.xml:152
 msgid "The OpenStack Swift container"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:148
+#: data/org.gnome.DejaDup.gschema.xml:153
 msgid ""
 "Which OpenStack Swift container to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:152
+#: data/org.gnome.DejaDup.gschema.xml:157
 msgid "Your OpenStack username"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:153
+#: data/org.gnome.DejaDup.gschema.xml:158
 msgid "This is your username for the OpenStack Swift service."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:157
+#: data/org.gnome.DejaDup.gschema.xml:162
 msgid "Your OpenStack tenant"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:158
+#: data/org.gnome.DejaDup.gschema.xml:163
 msgid "This is your tenant for the OpenStack Swift service."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:162
+#: data/org.gnome.DejaDup.gschema.xml:167
 msgid "Authentication URL"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:163
+#: data/org.gnome.DejaDup.gschema.xml:168
 msgid ""
 "This is the Authentication URL, or keystone URL for the OpenStack service"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:169 deja-dup/AssistantRestore.vala:221
+#: data/org.gnome.DejaDup.gschema.xml:174 deja-dup/AssistantRestore.vala:221
 msgid "Backup location"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:170
+#: data/org.gnome.DejaDup.gschema.xml:175
 msgid "Location in which to hold the backup files."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:178
+#: data/org.gnome.DejaDup.gschema.xml:183
 msgid "Folder type"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:179
+#: data/org.gnome.DejaDup.gschema.xml:184
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:183
+#: data/org.gnome.DejaDup.gschema.xml:188
 msgid "Relative path under the external volume"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:184
+#: data/org.gnome.DejaDup.gschema.xml:189
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:188
+#: data/org.gnome.DejaDup.gschema.xml:193
 msgid "Unique ID of the external volume"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:189
+#: data/org.gnome.DejaDup.gschema.xml:194
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:193
+#: data/org.gnome.DejaDup.gschema.xml:198
 msgid "Full name of the external volume"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:194
+#: data/org.gnome.DejaDup.gschema.xml:199
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:198
+#: data/org.gnome.DejaDup.gschema.xml:203
 msgid "Short name of the external volume"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:199
+#: data/org.gnome.DejaDup.gschema.xml:204
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:203
+#: data/org.gnome.DejaDup.gschema.xml:208
 msgid "Icon of the external volume"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:204
+#: data/org.gnome.DejaDup.gschema.xml:209
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
@@ -418,7 +428,7 @@ msgstr ""
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
 #: deja-dup/monitor/deja-dup-monitor.desktop.in:5
-#: deja-dup/monitor/monitor.vala:271
+#: deja-dup/monitor/monitor.vala:286
 msgid "Backup Monitor"
 msgstr ""
 
@@ -466,7 +476,7 @@ msgstr ""
 msgid "Folder"
 msgstr ""
 
-#: deja-dup/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:177
+#: deja-dup/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:157
 msgid "Scanning…"
 msgstr ""
 
@@ -533,61 +543,61 @@ msgstr ""
 msgid "Backing Up…"
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:176
+#: deja-dup/AssistantOperation.vala:156
 msgid "Scanning:"
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:259
+#: deja-dup/AssistantOperation.vala:239
 msgid "_Details"
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:307
+#: deja-dup/AssistantOperation.vala:287
 msgid "_Allow restoring without a password"
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:313
+#: deja-dup/AssistantOperation.vala:293
 msgid "_Password-protect your backup"
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:325
+#: deja-dup/AssistantOperation.vala:305
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:340 deja-dup/AssistantOperation.vala:409
+#: deja-dup/AssistantOperation.vala:320 deja-dup/AssistantOperation.vala:389
 msgid "E_ncryption password"
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:357
+#: deja-dup/AssistantOperation.vala:337
 msgid "Confir_m password"
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:370 deja-dup/AssistantOperation.vala:418
+#: deja-dup/AssistantOperation.vala:350 deja-dup/AssistantOperation.vala:398
 msgid "_Show password"
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:377
+#: deja-dup/AssistantOperation.vala:357
 #: deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:396
+#: deja-dup/AssistantOperation.vala:376
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
 "brief restore test."
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:423
+#: deja-dup/AssistantOperation.vala:403
 msgid "Test every two _months"
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:497
+#: deja-dup/AssistantOperation.vala:477
 msgid "Summary"
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:519
+#: deja-dup/AssistantOperation.vala:499
 msgid "Restore Test"
 msgstr ""
 
@@ -597,21 +607,21 @@ msgstr ""
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: deja-dup/AssistantOperation.vala:595
+#: deja-dup/AssistantOperation.vala:575
 #: libdeja/tools/duplicity/DuplicityJob.vala:702
 #: libdeja/tools/duplicity/DuplicityJob.vala:1081
 msgid "Failed with an unknown error."
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:792
+#: deja-dup/AssistantOperation.vala:772
 msgid "Require Password?"
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:794
+#: deja-dup/AssistantOperation.vala:774
 msgid "Encryption Password Needed"
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:866
+#: deja-dup/AssistantOperation.vala:846
 msgid "Backup encryption password"
 msgstr ""
 
@@ -724,46 +734,46 @@ msgstr[1] ""
 msgid "Restoring…"
 msgstr ""
 
-#: deja-dup/AssistantRestoreMissing.vala:182
+#: deja-dup/AssistantRestoreMissing.vala:181
 msgid "File"
 msgstr ""
 
-#: deja-dup/AssistantRestoreMissing.vala:183
+#: deja-dup/AssistantRestoreMissing.vala:182
 msgid "Last seen"
 msgstr ""
 
-#: deja-dup/AssistantRestoreMissing.vala:198
+#: deja-dup/AssistantRestoreMissing.vala:193
 msgid "Restore which Files?"
 msgstr ""
 
 #. Hours
-#: deja-dup/AssistantRestoreMissing.vala:329
+#: deja-dup/AssistantRestoreMissing.vala:324
 msgid "Scanning for files from up to a day ago…"
 msgstr ""
 
-#: deja-dup/AssistantRestoreMissing.vala:332
+#: deja-dup/AssistantRestoreMissing.vala:327
 msgid "Scanning for files from up to a week ago…"
 msgstr ""
 
-#: deja-dup/AssistantRestoreMissing.vala:335
+#: deja-dup/AssistantRestoreMissing.vala:330
 msgid "Scanning for files from up to a month ago…"
 msgstr ""
 
-#: deja-dup/AssistantRestoreMissing.vala:340
+#: deja-dup/AssistantRestoreMissing.vala:335
 #, c-format
 msgid "Scanning for files from about a month ago…"
 msgid_plural "Scanning for files from about %d months ago…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: deja-dup/AssistantRestoreMissing.vala:347
+#: deja-dup/AssistantRestoreMissing.vala:342
 #, c-format
 msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: deja-dup/AssistantRestoreMissing.vala:437
+#: deja-dup/AssistantRestoreMissing.vala:432
 msgid "Scanning finished"
 msgstr ""
 
@@ -771,33 +781,33 @@ msgstr ""
 msgid "_OK"
 msgstr ""
 
-#: deja-dup/Assistant.vala:294
+#: deja-dup/Assistant.vala:296
 msgid "_Forward"
 msgstr ""
 
-#: deja-dup/Assistant.vala:312
+#: deja-dup/Assistant.vala:314
 msgid "Co_ntinue"
 msgstr ""
 
-#: deja-dup/Assistant.vala:318
+#: deja-dup/Assistant.vala:320
 msgctxt "verb"
 msgid "_Test"
 msgstr ""
 
-#: deja-dup/Assistant.vala:347 deja-dup/widgets/ConfigList.vala:255
+#: deja-dup/Assistant.vala:349 deja-dup/widgets/ConfigList.vala:255
 #: deja-dup/widgets/ConfigLocationFile.vala:53
 msgid "_Cancel"
 msgstr ""
 
-#: deja-dup/Assistant.vala:349
+#: deja-dup/Assistant.vala:351
 msgid "_Close"
 msgstr ""
 
-#: deja-dup/Assistant.vala:353
+#: deja-dup/Assistant.vala:355
 msgid "_Back"
 msgstr ""
 
-#: deja-dup/Assistant.vala:355 deja-dup/StatusIcon.vala:70
+#: deja-dup/Assistant.vala:357 deja-dup/StatusIcon.vala:70
 msgid "_Resume Later"
 msgstr ""
 
@@ -866,20 +876,20 @@ msgstr ""
 msgid "S_how password"
 msgstr ""
 
-#: deja-dup/MountOperationAssistant.vala:80
+#: deja-dup/MountOperationAssistant.vala:81
 msgid "Location not available"
 msgstr ""
 
-#: deja-dup/MountOperationAssistant.vala:166
+#: deja-dup/MountOperationAssistant.vala:172
 msgid "Connect _anonymously"
 msgstr ""
 
-#: deja-dup/MountOperationAssistant.vala:170
+#: deja-dup/MountOperationAssistant.vala:176
 msgid "Connect as u_ser"
 msgstr ""
 
 #. Translators: this is a Windows networking domain
-#: deja-dup/MountOperationAssistant.vala:213
+#: deja-dup/MountOperationAssistant.vala:219
 msgid "_Domain"
 msgstr ""
 
@@ -992,6 +1002,16 @@ msgstr ""
 
 #: deja-dup/StatusIcon.vala:190
 msgid "Show _Progress"
+msgstr ""
+
+#: deja-dup/monitor/monitor.vala:81 libdeja/BackendGDrive.vala:51
+#: libdeja/BackendRackspace.vala:49 libdeja/BackendS3.vala:59
+msgid "Backup will begin when a network connection becomes available."
+msgstr ""
+
+#: deja-dup/monitor/monitor.vala:84
+msgid ""
+"Backup will begin when an unmetered network connection becomes available."
 msgstr ""
 
 #: deja-dup/widgets/ConfigDelete.vala:40
@@ -1271,30 +1291,25 @@ msgstr ""
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: libdeja/BackendFile.vala:135 libdeja/CommonUtils.vala:518
+#: libdeja/BackendFile.vala:135 libdeja/CommonUtils.vala:519
 #, c-format
 msgid "%1$s on %2$s"
 msgstr ""
 
-#: libdeja/BackendFile.vala:168
+#: libdeja/BackendFile.vala:167
 #, c-format
 msgid "Backup will begin when %s is connected."
 msgstr ""
 
-#: libdeja/BackendFile.vala:175 libdeja/BackendGDrive.vala:51
-#: libdeja/BackendRackspace.vala:49 libdeja/BackendS3.vala:59
-msgid "Backup will begin when a network connection becomes available."
-msgstr ""
-
-#: libdeja/BackendFile.vala:389 libdeja/BackendFile.vala:453
+#: libdeja/BackendFile.vala:395 libdeja/BackendFile.vala:461
 msgid "Backup location not available"
 msgstr ""
 
-#: libdeja/BackendFile.vala:390
+#: libdeja/BackendFile.vala:396
 msgid "Waiting for a network connection…"
 msgstr ""
 
-#: libdeja/BackendFile.vala:453
+#: libdeja/BackendFile.vala:461
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr ""
@@ -1383,36 +1398,36 @@ msgstr ""
 msgid "_Remember secret access key"
 msgstr ""
 
-#: libdeja/CommonUtils.vala:437
+#: libdeja/CommonUtils.vala:438
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 
-#: libdeja/CommonUtils.vala:439
+#: libdeja/CommonUtils.vala:440
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 
-#: libdeja/CommonUtils.vala:445
+#: libdeja/CommonUtils.vala:446
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 
-#: libdeja/CommonUtils.vala:467
+#: libdeja/CommonUtils.vala:468
 msgid "Could not start backup tool"
 msgstr ""
 
 #. Translators: this is the home folder and %s is the user's username
-#: libdeja/CommonUtils.vala:569
+#: libdeja/CommonUtils.vala:570
 #, c-format
 msgid "Home (%s)"
 msgstr ""
 
 #. Translators: this is the home folder
-#: libdeja/CommonUtils.vala:574
+#: libdeja/CommonUtils.vala:575
 msgid "Home"
 msgstr ""
 
 #. Translators: this is the trash folder
-#: libdeja/CommonUtils.vala:579
+#: libdeja/CommonUtils.vala:580
 msgid "Trash"
 msgstr ""
 
@@ -1450,7 +1465,7 @@ msgstr ""
 msgid "Preparing…"
 msgstr ""
 
-#: libdeja/Operation.vala:296
+#: libdeja/Operation.vala:294
 msgid "Another backup operation is already running"
 msgstr ""
 

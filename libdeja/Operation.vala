@@ -112,8 +112,6 @@ public abstract class Operation : Object
       return;
     }
 
-    yield DejaDup.Network.ensure_status();
-
     if (backend is BackendAuto) {
       // OK, we're not ready yet.  Let's hold off until we are
       settings = get_settings();

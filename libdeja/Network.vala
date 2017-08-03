@@ -23,18 +23,13 @@ namespace DejaDup {
 
 public class Network : Object
 {
-  public bool connected {get; set; default = true;}
+  public bool connected {get; private set; default = true;}
+  public bool metered {get; private set; default = false;}
 
   public new static Network get() {
     if (singleton == null)
       singleton = new Network();
     return singleton;
-  }
-
-  public async static void ensure_status()
-  {
-    var network = Network.get();
-    network.update_status();
   }
 
   public async bool can_reach(string url)
@@ -52,19 +47,25 @@ public class Network : Object
 
   construct {
     var mon = NetworkMonitor.get_default();
-    mon.network_changed.connect(handle_changed);
+
+    update_connected();
+    mon.notify["network-available"].connect(update_connected);
+
+    update_metered();
+    mon.notify["network-metered"].connect(update_metered);
   }
 
-  void handle_changed(bool available)
+  void update_connected()
   {
-    update_status();
+    connected = NetworkMonitor.get_default().network_available;
   }
 
-  void update_status()
+  void update_metered()
   {
     var mon = NetworkMonitor.get_default();
-    if (mon.network_available != connected)
-      connected = mon.network_available;
+    var settings = DejaDup.get_settings();
+    var allow_metered = settings.get_boolean(DejaDup.ALLOW_METERED_KEY);
+    metered = mon.network_metered && !allow_metered;
   }
 
   static Network singleton;

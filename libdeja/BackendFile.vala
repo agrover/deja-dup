@@ -181,9 +181,6 @@ public class BackendFile : Backend
       } catch (IOError.FAILED_HANDLED e) {
         // Needed user input, so we know we can reach server
         return true;
-      } catch (IOError.HOST_NOT_FOUND e) {
-        when = _("Backup will begin when a network connection becomes available.");
-        return false;
       } catch (Error e) {
         when = e.message;
         return false;

@@ -21,12 +21,12 @@ using GLib;
 
 async void check_status(MainLoop loop)
 {
-  yield DejaDup.Network.ensure_status();
   var nw = DejaDup.Network.get();
-  var can_reach = yield nw.can_reach("https://one.ubuntu.com/");
+  var can_reach = yield nw.can_reach("https://example.com/");
   var can_reach2 = yield nw.can_reach("http://nowhere.local/");
   print("Connected: %d\n", (int)nw.connected);
-  print("Can reach U1: %d\n", (int)can_reach);
+  print("Metered: %d\n", (int)nw.metered);
+  print("Can reach example.com: %d\n", (int)can_reach);
   print("Can reach local server: %d\n", (int)can_reach2);
   loop.quit();
 }
