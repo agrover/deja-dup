@@ -209,7 +209,7 @@ public class DejaDupApp : Gtk.Application
   void help()
   {
     unowned List<Gtk.Window> list = get_windows();
-    DejaDup.show_uri(list == null ? null : list.data, "help:deja-dup");
+    DejaDup.show_uri(list == null ? null : list.data, "help:org.gnome.DejaDup");
   }
 
   void about()

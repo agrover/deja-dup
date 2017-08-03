@@ -61,7 +61,7 @@ help_linguas = [
     'zh_CN',
     'zh_TW']
 
-gnome.yelp(meson.project_name(),
+gnome.yelp('org.gnome.DejaDup',
     sources: ['backup-auto.page',
               'backup-first.page',
               'contribute.page',
