@@ -66,9 +66,6 @@ if [ "$SHNAME" = "shell" ]; then
   export XDG_DATA_HOME="${ROOTDIR}/share"
   export XDG_DATA_DIRS="${XDG_DATA_HOME}:${XDG_DATA_DIRS}"
 
-  mkdir -p "${XDG_DATA_HOME}/deja-dup/ui"
-  cp "${TOPDIR}/deja-dup/ui/"* "${XDG_DATA_HOME}/deja-dup/ui"
-
   mkdir -p "${XDG_DATA_HOME}/Trash"
 
   export DEJA_DUP_TOOLS_PATH="${BUILDDIR}/libdeja/tools/duplicity"
