@@ -72,7 +72,7 @@ screenshots: all
 	@gsettings reset org.gnome.desktop.wm.preferences theme
 
 pot: builddir
-	ninja -C builddir deja-dup-pot help-deja-dup-pot
+	ninja -C builddir deja-dup-pot help-org.gnome.DejaDup-pot
 
 # call like 'make copy-po TD=path-to-translation-dir'
 copy-po:
