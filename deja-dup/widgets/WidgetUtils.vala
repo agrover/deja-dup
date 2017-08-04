@@ -44,7 +44,7 @@ public interface GnomeShell : GLib.Object {
     public abstract string ShellVersion { owned get; }
 }
 
-protected ShellEnv shell = ShellEnv.NONE;
+private ShellEnv shell = ShellEnv.NONE;
 public ShellEnv get_shell()
 {
   if (shell == ShellEnv.NONE) {

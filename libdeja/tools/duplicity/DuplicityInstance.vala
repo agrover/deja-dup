@@ -411,17 +411,17 @@ internal class DuplicityInstance : Object
         case 'v': rv.append_c('\xb'); i += 2; break; // vertical tab
         case 'a': rv.append_c('\x7'); i += 2; break; // bell
         case 'U': // start of a hex number
-          var val = (((string)s).substring(i+2, 8)).to_ulong(null, 16);
+          var val = DejaDup.strtoull(((string)s).substring(i+2, 8), null, 16);
           rv.append_unichar((unichar)val);
           i += 10;
           break;
         case 'u': // start of a hex number
-          var val = (((string)s).substring(i+2, 4)).to_ulong(null, 16);
+          var val = DejaDup.strtoull(((string)s).substring(i+2, 4), null, 16);
           rv.append_unichar((unichar)val);
           i += 6;
           break;
         case 'x': // start of a hex number
-          var val = (((string)s).substring(i+2, 2)).to_ulong(null, 16);
+          var val = DejaDup.strtoull(((string)s).substring(i+2, 2), null, 16);
           rv.append_unichar((unichar)val);
           i += 4;
           break;
@@ -439,7 +439,7 @@ internal class DuplicityInstance : Object
             tmpstr[0] = s[i+2];
             tmpstr[1] = s[i+3];
             tmpstr[2] = s[i+4];
-            var val = ((string)tmpstr).to_ulong(null, 8);
+            var val = DejaDup.strtoull((string)tmpstr, null, 8);
             rv.append_unichar((unichar)val);
             i += 5;
           }

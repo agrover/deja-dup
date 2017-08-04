@@ -72,6 +72,12 @@ public void update_last_run_timestamp(TimestampType type)
   settings.apply();
 }
 
+// We manually reference this method, because Vala does not give us (as of
+// 0.36 anyway...) a non-deprecated version that can still specify a base.
+// So we use this one to avoid deprecation warnings during build.
+[CCode (cname = "g_ascii_strtoull")]
+public extern uint64 strtoull(string nptr, out char* endptr, uint _base);
+
 public bool parse_version(string version_string, out int major, out int minor,
                           out int micro)
 {
@@ -166,7 +172,7 @@ uint32 get_machine_id()
   }
 
   if (machine_string != null)
-    machine_id = (uint32)machine_string.to_ulong(null, 16);
+    machine_id = (uint32)strtoull(machine_string, null, 16);
 
   if (machine_id == 0)
     machine_id = (uint32)gethostid();
