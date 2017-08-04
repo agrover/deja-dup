@@ -341,7 +341,7 @@ class BackupRunner : Object
       seen_is_full = true;
     });
 
-    op.start.begin();
+    Idle.add(() => {op.start.begin(); return false;});
     if (callback != null) {
       Timeout.add_seconds(5, () => {
         callback(op);
