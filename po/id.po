@@ -7,23 +7,98 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-03-09 14:16-0500\n"
-"PO-Revision-Date: 2015-12-25 08:59+0000\n"
+"POT-Creation-Date: 2017-08-03 11:12-0400\n"
+"PO-Revision-Date: 2017-08-02 18:16+0000\n"
 "Last-Translator: Hertatijanto Hartono <dvertx@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2017-03-14 07:27+0000\n"
-"X-Generator: Launchpad (build 18331)\n"
+"X-Launchpad-Export-Date: 2017-08-04 05:38+0000\n"
+"X-Generator: Launchpad (build 18441)\n"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
-#: ../deja-dup/preferences/Preferences.vala:286
+#. Translators: The name is a play on the French phrase "déjà vu" meaning
+#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
+#. context is itself a reference to both the underlying command line tool
+#. "duplicity" and the act of duplicating data for backup.  As a whole, the
+#. phrase "Déjà Dup" may not be very translatable.
+#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:295
+#: libdeja/CommonUtils.vala:139
+msgid "Déjà Dup Backup Tool"
+msgstr "Peralatan Backup Déjà Dup"
+
+#: data/org.gnome.DejaDup.appdata.xml.in:8
+msgid "Keep your important documents safe from disaster"
+msgstr "Menjaga dokumen-dokumen penting Anda tetap aman dari bencana"
+
+#: data/org.gnome.DejaDup.appdata.xml.in:10
+msgid ""
+"Déjà Dup is a simple backup tool. It hides the complexity of backing up the "
+"Right Way (encrypted, off-site, and regular) and uses duplicity as the "
+"backend."
+msgstr ""
+"Déjà Dup adalah perkakas backup sederhana. Ini menyembunyikan kerumitan "
+"melakukan backup Yang Baik dan Benar (dienkripsi, luar situs, berkala) dan "
+"memakai duplicity sebagai backend."
+
+#: data/org.gnome.DejaDup.appdata.xml.in:12
+msgid ""
+"Support for local, remote, or cloud backup locations, such as Amazon S3 and "
+"Rackspace Cloud Files"
+msgstr ""
+"Dukungan untuk lokasi backup lokal, remote, atau cloud, seperti Amazon S3 "
+"atau Rackspace Cloud Files"
+
+#: data/org.gnome.DejaDup.appdata.xml.in:13
+msgid "Securely encrypts and compresses your data"
+msgstr "Secara aman mengenkripsi dan mengkompresi data Anda"
+
+#: data/org.gnome.DejaDup.appdata.xml.in:14
+msgid ""
+"Incrementally backs up, letting you restore from any particular backup"
+msgstr ""
+"Secara inkremental melakukan backup, memungkinkan Anda memulihkan dari "
+"sebarang backup tertentu"
+
+#: data/org.gnome.DejaDup.appdata.xml.in:15
+msgid "Schedules regular backups"
+msgstr "Menjadwalkan backup berkala"
+
+#: data/org.gnome.DejaDup.appdata.xml.in:16
+msgid "Integrates well into your GNOME desktop"
+msgstr "Terintegrasi dengan baik ke deskto GNOME Anda"
+
+#. Translators: "Backups" is a noun
+#: data/org.gnome.DejaDup.desktop:5 deja-dup/main.vala:159
+#: deja-dup/Prompt.vala:78
+msgid "Backups"
+msgstr "Cadangan"
+
+#: data/org.gnome.DejaDup.desktop:6
+msgid "Change your backup settings"
+msgstr "Ubah seting backup anda"
+
+#: data/org.gnome.DejaDup.desktop:8
+#: deja-dup/monitor/deja-dup-monitor.desktop.in:8
+msgid "deja-dup"
+msgstr "deja-dup"
+
+#. Translators: Add whatever keywords you want in your language, separated by semicolons
+#. These keywords are used when searching for applications in dashes, etc.
+#: data/org.gnome.DejaDup.desktop:19
+msgid "déjà;deja;dup;"
+msgstr "déjà;deja;dup;"
+
+#: data/org.gnome.DejaDup.desktop:26
+msgid "Back Up"
+msgstr "Buat Cadangan"
+
+#: data/org.gnome.DejaDup.gschema.xml:6 deja-dup/Preferences.vala:285
 msgid "Folders to save"
 msgstr "Folder yang akan disimpan"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:2
+#: data/org.gnome.DejaDup.gschema.xml:7
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
@@ -32,13 +107,19 @@ msgid ""
 "by the user’s username and can be anywhere in the path. Relative entries are "
 "relative to the user’s home directory."
 msgstr ""
+"Ini menampung daftar direktori yang akan dibuat salinan cadangannya. Nilai-"
+"nilai yang dicadangkan $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, "
+"$PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, dan $VIDEOS dikenali sebagai "
+"direktori khusus pengguna dan bisa berada di awal dari path yang lebih "
+"panjang ($HOME/subdir). Nilai yang dicadangkan $USER digantikan oleh nama "
+"pengguna dan dapat berada di manapun dalam path. Entri relatif akan relatif "
+"terhadap direktori rumah pengguna."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/preferences/Preferences.vala:297
+#: data/org.gnome.DejaDup.gschema.xml:11 deja-dup/Preferences.vala:296
 msgid "Folders to ignore"
 msgstr "Map yang diabaikan"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:4
+#: data/org.gnome.DejaDup.gschema.xml:12
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
@@ -47,12 +128,19 @@ msgid ""
 "Reserved value $USER is replaced by the user’s username and can be anywhere "
 "in the path. Relative entries are relative to the user’s home directory."
 msgstr ""
+"Ini menampung daftar direktori yang tidak akan dibuat salinan cadangannya. "
+"Nilai-nilai yang dicadangkan $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, "
+"$PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, dan $VIDEOS dikenali sebagai "
+"direktori khusus pengguna dan bisa berada di awal dari path yang lebih "
+"panjang ($HOME/subdir). Nilai yang dicadangkan $USER digantikan oleh nama "
+"pengguna dan dapat berada di manapun dalam path. Entri relatif akan relatif "
+"terhadap direktori rumah pengguna."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
+#: data/org.gnome.DejaDup.gschema.xml:16
 msgid "Whether to request the root password"
 msgstr "Menentukan apakah perlu meminta kata sandi root"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
+#: data/org.gnome.DejaDup.gschema.xml:17
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
@@ -60,11 +148,11 @@ msgstr ""
 "Menentukan apakah perlu meminta kata sandi root ketika membackup dari atau "
 "memulihkan ke map sistem."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:7
+#: data/org.gnome.DejaDup.gschema.xml:21
 msgid "The last time Déjà Dup was run"
 msgstr "Saat terakhir Déjà Dup dijalankan"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:8
+#: data/org.gnome.DejaDup.gschema.xml:22
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
@@ -72,11 +160,11 @@ msgstr ""
 "Saat terakhir Déjà Dup berhasil  dijalankan. Waktu harus ditulis dalam "
 "format ISO 8601."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:9
+#: data/org.gnome.DejaDup.gschema.xml:26
 msgid "The last time Déjà Dup backed up"
 msgstr "Terakhir kali Déjà Dup melakukan backup"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:10
+#: data/org.gnome.DejaDup.gschema.xml:27
 msgid ""
 "The last time Déjà Dup successfully completed a backup. This time should be "
 "in ISO 8601 format."
@@ -84,11 +172,11 @@ msgstr ""
 "Terakhir kali Déjà Dup berhasil menyelesaikan backup. Waktu harus ditulis "
 "dalam format ISO 8601."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:11
+#: data/org.gnome.DejaDup.gschema.xml:31
 msgid "The last time Déjà Dup restored"
 msgstr "Terakhir kali Déjà Dup memulihkan cadangan"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:12
+#: data/org.gnome.DejaDup.gschema.xml:32
 msgid ""
 "The last time Déjà Dup successfully completed a restore. This time should be "
 "in ISO 8601 format."
@@ -96,31 +184,31 @@ msgstr ""
 "Terakhir kali Déjà Dup berhasil memulihkan cadangan. Waktu harus ditulis "
 "dalam format ISO 8601."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:13
+#: data/org.gnome.DejaDup.gschema.xml:36
 msgid "Whether to periodically back up"
 msgstr "Meentukan apakah akan melakukan backup terjadwal"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:14
+#: data/org.gnome.DejaDup.gschema.xml:37
 msgid "Whether to automatically back up on a regular schedule."
 msgstr ""
 "Menentukan apakah akan melakukan backup secara otomatis dan terjadwal."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:15
+#: data/org.gnome.DejaDup.gschema.xml:41
 msgid "How often to periodically back up"
 msgstr "Berapa sering membackup secara periodik"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:16
+#: data/org.gnome.DejaDup.gschema.xml:42
 msgid "The number of days between backups."
 msgstr "Jumlah hari antara backup yang satu dengan lainnya."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:17
+#: data/org.gnome.DejaDup.gschema.xml:46
 msgid ""
 "The last time Déjà Dup checked whether it should prompt about backing up"
 msgstr ""
 "Kala terakhir Déjà Dup memeriksa apakah mesti bertanya untuk membuat salinan "
 "cadangan"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:18
+#: data/org.gnome.DejaDup.gschema.xml:47
 msgid ""
 "When a user logs in, the Déjà Dup monitor checks whether it should prompt "
 "about backing up. This is used to increase discoverability for users that "
@@ -132,12 +220,12 @@ msgstr ""
 "backup. Waktunya dapat diisi dengan 'nonaktif' untuk mematikan pengecekan "
 "atau dalam format ISO 8601."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:19
+#: data/org.gnome.DejaDup.gschema.xml:51
 msgid ""
 "The last time Déjà Dup checked whether it should prompt about your password"
 msgstr "Kala terakhir Déjà Dup memeriksa apakah mesti menanyakan sandi Anda"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:20
+#: data/org.gnome.DejaDup.gschema.xml:52
 msgid ""
 "In order to prevent you from forgetting your passwords, Déjà Dup will "
 "occasionally notify you to confirm the password. This time should be either "
@@ -147,11 +235,11 @@ msgstr ""
 "untuk mengkonfirmasi kata sandi Anda. Sekarang seharusnya 'tidak diaktifkan' "
 "untuk mematikan fungsi pemeriksaan atau di format ISO 8601."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:21
+#: data/org.gnome.DejaDup.gschema.xml:56
 msgid "How long to keep backup files"
 msgstr "Berapa lama akan menyimpan backup"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
+#: data/org.gnome.DejaDup.gschema.xml:57
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
@@ -161,11 +249,11 @@ msgstr ""
 "selamanya. Diisi dengan jumlah hari terkecil; berkas mungkin akan tersimpan "
 "lebih lama."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+#: data/org.gnome.DejaDup.gschema.xml:61
 msgid "How long to wait between full backups"
 msgstr "Jeda waktu di antara backup penuh"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+#: data/org.gnome.DejaDup.gschema.xml:62
 msgid ""
 "Déjà Dup needs to occasionally make fresh full backups. This is the number "
 "of days to wait between full backups."
@@ -173,11 +261,21 @@ msgstr ""
 "Déjà Dup perlu membuat backup penuh baru secara berkala. Merupakan jeda "
 "waktu (dalam hari) di antara backup penuh."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
+#: data/org.gnome.DejaDup.gschema.xml:66
+msgid "Whether to use metered networks"
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:67
+msgid ""
+"If false, Déjà Dup will refuse to run scheduled backups over metered network "
+"connections (like 4G)."
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:81
 msgid "Type of location to store backup"
 msgstr "Jenis lokasi untuk menyimpan backup"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+#: data/org.gnome.DejaDup.gschema.xml:82
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
@@ -185,21 +283,21 @@ msgstr ""
 "Tipe lokasi backup. Jika 'auto', maka akan dipilih standar sesuai yang "
 "tersedia."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: data/org.gnome.DejaDup.gschema.xml:94
 msgid "Amazon S3 Access Key ID"
 msgstr "ID Kunci Akses Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
+#: data/org.gnome.DejaDup.gschema.xml:95
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Identifikasi Kunci Akses Amazon S3 anda. Ini berfungsi sebagai nama pengguna "
 "S3 anda."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: data/org.gnome.DejaDup.gschema.xml:99
 msgid "The Amazon S3 bucket name to use"
 msgstr "Nama wadah Amazon S3 yang akan digunakan"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: data/org.gnome.DejaDup.gschema.xml:100
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -207,11 +305,12 @@ msgstr ""
 "Wadah Amazon S3 untuk penempatan file. Tidak perlu sudah di buat sebelumnya. "
 "Hanya diperbolehkan dalam bentuk untaian nama host."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: data/org.gnome.DejaDup.gschema.xml:104
 msgid "The Amazon S3 folder"
 msgstr "Map Amazon S3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: data/org.gnome.DejaDup.gschema.xml:105
+#: data/org.gnome.DejaDup.gschema.xml:122
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
@@ -219,11 +318,11 @@ msgstr ""
 "Nama map opsional untuk menyimpan file. Map ini akan dibuat dalam wadah yang "
 "dipilih."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: data/org.gnome.DejaDup.gschema.xml:111
 msgid "Google Cloud Storage Access Key ID"
 msgstr "Google Cloud Storage Access Key ID"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: data/org.gnome.DejaDup.gschema.xml:112
 msgid ""
 "Your Google Cloud Storage Access Key Identifier. This acts as your Google "
 "Cloud Storage username."
@@ -231,11 +330,11 @@ msgstr ""
 "Identifikasi Google Cloud Storage Access Key anda. Ini akan menjadi nama "
 "pengguna Google Cloud Storage anda."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: data/org.gnome.DejaDup.gschema.xml:116
 msgid "The Google Cloud Storage bucket name to use"
 msgstr "Nama wadah Google Cloud Storage yang akan digunakan"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: data/org.gnome.DejaDup.gschema.xml:117
 msgid ""
 "Which Google Cloud Storage bucket to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
@@ -243,31 +342,31 @@ msgstr ""
 "Nama wadah Google Cloud Storage untuk menyimpan berkas. Tidak harus sudah "
 "eksis."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: data/org.gnome.DejaDup.gschema.xml:121
 msgid "The Google Cloud Storage folder"
 msgstr "Direktori Google Cloud Storage"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: data/org.gnome.DejaDup.gschema.xml:128
 msgid "The email-address of your Google account"
 msgstr "Alamat surel dari akun Google Anda"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: data/org.gnome.DejaDup.gschema.xml:129
 msgid "The email-address of your Google account."
 msgstr "Alamat surel dari akun Google Anda."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: data/org.gnome.DejaDup.gschema.xml:133
 msgid "The folder where backups are stored"
 msgstr "Folder tempat backup disimpan"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: data/org.gnome.DejaDup.gschema.xml:134
 msgid "The folder hierarchy where backups are stored."
 msgstr "Hirarki folder tempat backup disimpan"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: data/org.gnome.DejaDup.gschema.xml:140
 msgid "The Rackspace Cloud Files container"
 msgstr "Nama wadah Rackspace Cloud Files"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: data/org.gnome.DejaDup.gschema.xml:141
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -275,75 +374,74 @@ msgstr ""
 "Wadah Rackspace Cloud Files untuk penempatan file. Tidak perlu sudah di buat "
 "sebelumnya. Hanya diperbolehkan dalam bentuk untaian nama host."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: data/org.gnome.DejaDup.gschema.xml:145
 msgid "Your Rackspace username"
 msgstr "Nama pengguna Rackspace anda"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: data/org.gnome.DejaDup.gschema.xml:146
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "Ini adalah nama anda pada layanan Rackspace Cloud Files."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: data/org.gnome.DejaDup.gschema.xml:152
 msgid "The OpenStack Swift container"
 msgstr "Wadah OpenStack Swift"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: data/org.gnome.DejaDup.gschema.xml:153
 msgid ""
 "Which OpenStack Swift container to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
 "Nama wadah OpenStack Swift untuk menyimpan berkas. Tidak harus sudah eksis."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: data/org.gnome.DejaDup.gschema.xml:157
 msgid "Your OpenStack username"
 msgstr "Nama pengguna OpenStack anda"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: data/org.gnome.DejaDup.gschema.xml:158
 msgid "This is your username for the OpenStack Swift service."
 msgstr "Nama pengguna anda pada layanan OpenStack Swift."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: data/org.gnome.DejaDup.gschema.xml:162
 msgid "Your OpenStack tenant"
 msgstr "Penghuni OpenStack anda"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: data/org.gnome.DejaDup.gschema.xml:163
 msgid "This is your tenant for the OpenStack Swift service."
 msgstr "Berikut ini penghuni layanan OpenStack Swift anda."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
+#: data/org.gnome.DejaDup.gschema.xml:167
 msgid "Authentication URL"
 msgstr "URL Otentikasi"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
+#: data/org.gnome.DejaDup.gschema.xml:168
 msgid ""
 "This is the Authentication URL, or keystone URL for the OpenStack service"
 msgstr "Ini merupakan URL Otentikasi, atau URL kunci untuk layanan OpenStack"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:54
-#: ../deja-dup/AssistantRestore.vala:221
+#: data/org.gnome.DejaDup.gschema.xml:174 deja-dup/AssistantRestore.vala:221
 msgid "Backup location"
 msgstr "Lokasi backup"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:55
+#: data/org.gnome.DejaDup.gschema.xml:175
 msgid "Location in which to hold the backup files."
 msgstr "Lokasi penyimpanan file backup"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:56
+#: data/org.gnome.DejaDup.gschema.xml:183
 msgid "Folder type"
 msgstr "Tipe map"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:57
+#: data/org.gnome.DejaDup.gschema.xml:184
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Menentukan apakah lokasi backup berada pada volume ekternal atau pada map "
 "normal."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:58
+#: data/org.gnome.DejaDup.gschema.xml:188
 msgid "Relative path under the external volume"
 msgstr "Path relatif pada volume eksternal"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:59
+#: data/org.gnome.DejaDup.gschema.xml:189
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -351,11 +449,11 @@ msgstr ""
 "Jika lokasi backup berada pada volume eksternal, ini adalah path terhadap "
 "map volume tersebut."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:60
+#: data/org.gnome.DejaDup.gschema.xml:193
 msgid "Unique ID of the external volume"
 msgstr "ID unik volume eksternal"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:61
+#: data/org.gnome.DejaDup.gschema.xml:194
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -363,11 +461,11 @@ msgstr ""
 "Jika lokasi backup berada pada volume eksternal, ini adalah identifikasi "
 "filesistem volume tersebut."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:62
+#: data/org.gnome.DejaDup.gschema.xml:198
 msgid "Full name of the external volume"
 msgstr "Nama lengkap volume eksternal"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:63
+#: data/org.gnome.DejaDup.gschema.xml:199
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -375,11 +473,11 @@ msgstr ""
 "Jika lokasi backup berada pada volume eksternal, ini adalah nama penuh "
 "volume yang deskriptif."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:64
+#: data/org.gnome.DejaDup.gschema.xml:203
 msgid "Short name of the external volume"
 msgstr "Nama singkat volume eksternal"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:65
+#: data/org.gnome.DejaDup.gschema.xml:204
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
@@ -387,146 +485,106 @@ msgstr ""
 "Jika lokasi backup berada pada volume eksternal, ini adalah nama singkat "
 "volume tersebut."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:66
+#: data/org.gnome.DejaDup.gschema.xml:208
 msgid "Icon of the external volume"
 msgstr "Ikon volume eksternal"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:67
+#: data/org.gnome.DejaDup.gschema.xml:209
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
 "Jika lokasi backup berada pada volume eksternal, ini adalah ikon volume "
 "tersebut."
 
-#. Translators: The name is a play on the French phrase "déjà vu" meaning
-#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
-#. context is itself a reference to both the underlying command line tool
-#. "duplicity" and the act of duplicating data for backup.  As a whole, the
-#. phrase "Déjà Dup" may not be very translatable.
-#: ../deja-dup/deja-dup.appdata.xml.in.h:1 ../deja-dup/deja-dup.desktop.in.h:2
-#: ../deja-dup/main.vala:78 ../libdeja/CommonUtils.vala:138
-msgid "Déjà Dup Backup Tool"
-msgstr "Peralatan Backup Déjà Dup"
-
-#: ../deja-dup/deja-dup.appdata.xml.in.h:2
-msgid "Keep your important documents safe from disaster"
-msgstr "Menjaga dokumen-dokumen penting Anda tetap aman dari bencana"
-
-#: ../deja-dup/deja-dup.appdata.xml.in.h:3
-msgid ""
-"Déjà Dup is a simple backup tool. It hides the complexity of backing up the "
-"Right Way (encrypted, off-site, and regular) and uses duplicity as the "
-"backend."
-msgstr ""
-"Déjà Dup adalah perkakas backup sederhana. Ini menyembunyikan kerumitan "
-"melakukan backup Yang Baik dan Benar (dienkripsi, luar situs, berkala) dan "
-"memakai duplicity sebagai backend."
-
-#: ../deja-dup/deja-dup.appdata.xml.in.h:4
-msgid ""
-"Support for local, remote, or cloud backup locations, such as Amazon S3 and "
-"Rackspace Cloud Files"
-msgstr ""
-"Dukungan untuk lokasi backup lokal, remote, atau cloud, seperti Amazon S3 "
-"atau Rackspace Cloud Files"
-
-#: ../deja-dup/deja-dup.appdata.xml.in.h:5
-msgid "Securely encrypts and compresses your data"
-msgstr "Secara aman mengenkripsi dan mengkompresi data Anda"
-
-#: ../deja-dup/deja-dup.appdata.xml.in.h:6
-msgid ""
-"Incrementally backs up, letting you restore from any particular backup"
-msgstr ""
-"Secara inkremental melakukan backup, memungkinkan Anda memulihkan dari "
-"sebarang backup tertentu"
-
-#: ../deja-dup/deja-dup.appdata.xml.in.h:7
-msgid "Schedules regular backups"
-msgstr "Menjadwalkan backup berkala"
-
-#: ../deja-dup/deja-dup.appdata.xml.in.h:8
-msgid "Integrates well into your GNOME desktop"
-msgstr "Terintegrasi dengan baik ke deskto GNOME Anda"
-
-#. Translators: "Backups" is a noun
-#: ../deja-dup/deja-dup.desktop.in.h:1
-#: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:1
-#: ../deja-dup/Prompt.vala:93 ../deja-dup/Prompt.vala:128
-#: ../deja-dup/StatusIcon.vala:134 ../deja-dup/StatusIcon.vala:233
-#: ../deja-dup/monitor/monitor.vala:115
-#: ../deja-dup/preferences/preferences-main.vala:42
-#: ../deja-dup/preferences/preferences-main.vala:121
-msgid "Backups"
-msgstr "Cadangan"
-
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../deja-dup/monitor/deja-dup-monitor.desktop.in.h:1
-#: ../deja-dup/monitor/monitor.vala:315
+#: deja-dup/monitor/deja-dup-monitor.desktop.in:5
+#: deja-dup/monitor/monitor.vala:286
 msgid "Backup Monitor"
 msgstr "Pemantau Backup"
 
-#: ../deja-dup/monitor/deja-dup-monitor.desktop.in.h:2
+#: deja-dup/monitor/deja-dup-monitor.desktop.in:6
 msgid "Schedules backups at regular intervals"
 msgstr "Skedulkan backup dengan jadwal rutin"
 
-#: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:2
-msgid "Change your backup settings"
-msgstr "Ubah seting backup anda"
+#: deja-dup/ui/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr ""
 
-#. These keywords are used when searching for applications in dashes, etc.
-#: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:4
-msgid "déjà;deja;dup;"
-msgstr "déjà;deja;dup;"
+#: deja-dup/ui/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr ""
 
-#: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:5
-msgid "Back Up"
-msgstr "Buat Cadangan"
+#: deja-dup/ui/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Help"
+msgstr ""
 
-#: ../deja-dup/ui/restore-missing.ui.h:1
+#: deja-dup/ui/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Shortcuts"
+msgstr ""
+
+#: deja-dup/ui/menus.ui:7
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#: deja-dup/ui/menus.ui:11
+msgid "_Help"
+msgstr "_Bantuan"
+
+#: deja-dup/ui/menus.ui:15
+msgid "_About"
+msgstr ""
+
+#: deja-dup/ui/menus.ui:19
+msgid "_Quit"
+msgstr "_Keluar"
+
+#: deja-dup/ui/restore-missing.ui:18
 msgid "Folder"
 msgstr "Map"
 
-#: ../deja-dup/ui/restore-missing.ui.h:2
-#: ../deja-dup/AssistantOperation.vala:177
+#: deja-dup/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:157
 msgid "Scanning…"
 msgstr "Memindai..."
 
-#: ../deja-dup/nautilus/NautilusExtension.c:173
+#: deja-dup/nautilus/NautilusExtension.c:172
 msgid "Restore Missing Files…"
 msgstr "Pulihkan Berkas yang Hilang..."
 
-#: ../deja-dup/nautilus/NautilusExtension.c:174
+#: deja-dup/nautilus/NautilusExtension.c:173
 msgid "Restore deleted files from backup"
 msgstr "Pulihkan berkas yang terhapus dari backup"
 
-#: ../deja-dup/nautilus/NautilusExtension.c:216
+#: deja-dup/nautilus/NautilusExtension.c:215
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Kembalikan ke Versi Sebelumnya..."
 
-#: ../deja-dup/nautilus/NautilusExtension.c:220
+#: deja-dup/nautilus/NautilusExtension.c:219
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Pulihkan berkas dari backup"
 
-#: ../deja-dup/AssistantBackup.vala:31
+#: deja-dup/AssistantBackup.vala:31
 msgctxt "back up is verb"
 msgid "Back Up"
 msgstr "Backup"
 
-#: ../deja-dup/AssistantBackup.vala:32
+#: deja-dup/AssistantBackup.vala:32
 msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "_Backup"
 
-#: ../deja-dup/AssistantBackup.vala:49
+#: deja-dup/AssistantBackup.vala:49
 msgid "Creating the first backup.  This may take a while."
 msgstr "Membentuk backup pertama.  Mungkin akan memakan waktu lama."
 
-#: ../deja-dup/AssistantBackup.vala:50
+#: deja-dup/AssistantBackup.vala:50
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -536,44 +594,44 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:80
+#: deja-dup/AssistantBackup.vala:80
 msgid "Backing up:"
 msgstr "Melakukan backup:"
 
-#: ../deja-dup/AssistantBackup.vala:89
+#: deja-dup/AssistantBackup.vala:89
 msgid "Backup Failed"
 msgstr "Backup Gagal"
 
-#: ../deja-dup/AssistantBackup.vala:92
+#: deja-dup/AssistantBackup.vala:92
 msgid "Backup Finished"
 msgstr "Backup Selesai"
 
 #. Also leave ourselves up if we just finished a restore test.
-#: ../deja-dup/AssistantBackup.vala:96
+#: deja-dup/AssistantBackup.vala:96
 msgid "Your files were successfully backed up and tested."
 msgstr "Berkas-berkas Anda berhasil dicadangkan dan telah dicoba."
 
-#: ../deja-dup/AssistantBackup.vala:103
+#: deja-dup/AssistantBackup.vala:103
 msgid "Backing Up…"
 msgstr "Melakukan backup..."
 
-#: ../deja-dup/AssistantOperation.vala:176
+#: deja-dup/AssistantOperation.vala:156
 msgid "Scanning:"
 msgstr "Memindai:"
 
-#: ../deja-dup/AssistantOperation.vala:259
+#: deja-dup/AssistantOperation.vala:239
 msgid "_Details"
 msgstr "_Detil"
 
-#: ../deja-dup/AssistantOperation.vala:307
+#: deja-dup/AssistantOperation.vala:287
 msgid "_Allow restoring without a password"
 msgstr "I_zinkan pemulihan tanpa kata sandi"
 
-#: ../deja-dup/AssistantOperation.vala:313
+#: deja-dup/AssistantOperation.vala:293
 msgid "_Password-protect your backup"
 msgstr "_Lindungi backup dengan kata sandi"
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: deja-dup/AssistantOperation.vala:305
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
@@ -581,26 +639,24 @@ msgstr ""
 "Anda akan membutuhkan kata sandinya untuk memulihkan berkas. Catatlah jika "
 "merasa perlu."
 
-#: ../deja-dup/AssistantOperation.vala:340
-#: ../deja-dup/AssistantOperation.vala:409
+#: deja-dup/AssistantOperation.vala:320 deja-dup/AssistantOperation.vala:389
 msgid "E_ncryption password"
 msgstr "Kata sandi e_nkripsi"
 
-#: ../deja-dup/AssistantOperation.vala:357
+#: deja-dup/AssistantOperation.vala:337
 msgid "Confir_m password"
 msgstr "Konfir_masi kata sandi"
 
-#: ../deja-dup/AssistantOperation.vala:370
-#: ../deja-dup/AssistantOperation.vala:418
+#: deja-dup/AssistantOperation.vala:350 deja-dup/AssistantOperation.vala:398
 msgid "_Show password"
 msgstr "Per_lihatkan kata sandi"
 
-#: ../deja-dup/AssistantOperation.vala:377
-#: ../deja-dup/MountOperationAssistant.vala:40
+#: deja-dup/AssistantOperation.vala:357
+#: deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Ingat kata sandi"
 
-#: ../deja-dup/AssistantOperation.vala:396
+#: deja-dup/AssistantOperation.vala:376
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -610,15 +666,15 @@ msgstr ""
 "terjadi keadaan darurat, mohon masukkan kembali kata sandi enkripsi Anda "
 "untuk melaksanakan uji coba pengembalian cepat."
 
-#: ../deja-dup/AssistantOperation.vala:423
+#: deja-dup/AssistantOperation.vala:403
 msgid "Test every two _months"
 msgstr "Uji setiap dua bula_n"
 
-#: ../deja-dup/AssistantOperation.vala:497
+#: deja-dup/AssistantOperation.vala:477
 msgid "Summary"
 msgstr "Rangkuman"
 
-#: ../deja-dup/AssistantOperation.vala:519
+#: deja-dup/AssistantOperation.vala:499
 msgid "Restore Test"
 msgstr "Uji Pemulihan"
 
@@ -628,83 +684,83 @@ msgstr "Uji Pemulihan"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: ../deja-dup/AssistantOperation.vala:595
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:702
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1081
+#: deja-dup/AssistantOperation.vala:575
+#: libdeja/tools/duplicity/DuplicityJob.vala:702
+#: libdeja/tools/duplicity/DuplicityJob.vala:1081
 msgid "Failed with an unknown error."
 msgstr "Gagal dengan kesalahan yang tidak dikenali."
 
-#: ../deja-dup/AssistantOperation.vala:792
+#: deja-dup/AssistantOperation.vala:772
 msgid "Require Password?"
 msgstr "Membutuhkan Kata Sandi?"
 
-#: ../deja-dup/AssistantOperation.vala:794
+#: deja-dup/AssistantOperation.vala:774
 msgid "Encryption Password Needed"
 msgstr "Dibutuhkan Kata Sandi Enkripsi"
 
-#: ../deja-dup/AssistantOperation.vala:866
+#: deja-dup/AssistantOperation.vala:846
 msgid "Backup encryption password"
 msgstr "Kata sandi enkripsi backup"
 
-#: ../deja-dup/AssistantRestore.vala:68
+#: deja-dup/AssistantRestore.vala:68
 msgid "Restore"
 msgstr "Pulihkan"
 
-#: ../deja-dup/AssistantRestore.vala:69
+#: deja-dup/AssistantRestore.vala:69
 msgid "_Restore"
 msgstr "_Pulihkan"
 
-#: ../deja-dup/AssistantRestore.vala:91
+#: deja-dup/AssistantRestore.vala:91
 msgid "_Backup location"
 msgstr "Lokasi _Backup"
 
-#: ../deja-dup/AssistantRestore.vala:124
+#: deja-dup/AssistantRestore.vala:124
 msgid "Restore From Where?"
 msgstr "Memulihkan Dari Mana?"
 
-#: ../deja-dup/AssistantRestore.vala:146
+#: deja-dup/AssistantRestore.vala:146
 msgid "_Date"
 msgstr "_Tanggal"
 
-#: ../deja-dup/AssistantRestore.vala:169
+#: deja-dup/AssistantRestore.vala:169
 msgid "Restore files to _original locations"
 msgstr "Pulihkan berkas ke lokasi _asal"
 
-#: ../deja-dup/AssistantRestore.vala:174
+#: deja-dup/AssistantRestore.vala:174
 msgid "Restore to _specific folder"
 msgstr "Pulihkan _ke map tertentu"
 
-#: ../deja-dup/AssistantRestore.vala:184
+#: deja-dup/AssistantRestore.vala:184
 msgid "Choose destination for restored files"
 msgstr "Pilih tujuan pemulihan berkas"
 
-#: ../deja-dup/AssistantRestore.vala:188
+#: deja-dup/AssistantRestore.vala:188
 msgid "Restore _folder"
 msgstr "_Map pemulihan"
 
-#: ../deja-dup/AssistantRestore.vala:229
+#: deja-dup/AssistantRestore.vala:229
 msgid "Restore date"
 msgstr "Tanggal pemulihan"
 
-#: ../deja-dup/AssistantRestore.vala:237
+#: deja-dup/AssistantRestore.vala:237
 msgid "Restore folder"
 msgstr "Map pemulihan"
 
-#: ../deja-dup/AssistantRestore.vala:263
+#: deja-dup/AssistantRestore.vala:263
 msgid "Checking for Backups…"
 msgstr "Memeriksa Keberadaan Backup..."
 
-#: ../deja-dup/AssistantRestore.vala:271
+#: deja-dup/AssistantRestore.vala:271
 msgid "Restore From When?"
 msgstr "Memulihkan Sejak Kapan?"
 
-#: ../deja-dup/AssistantRestore.vala:279
+#: deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
 msgstr "Pulihkan Kemana?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:306
+#: deja-dup/AssistantRestore.vala:306
 msgid "Restoring:"
 msgstr "Melaksanakan Pemulihan:"
 
@@ -712,224 +768,277 @@ msgstr "Melaksanakan Pemulihan:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: ../deja-dup/AssistantRestore.vala:348
+#: deja-dup/AssistantRestore.vala:348
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
 #. If we didn't see any dates...  Must not be any backups on the backend
-#: ../deja-dup/AssistantRestore.vala:361
+#: deja-dup/AssistantRestore.vala:361
 msgid "No backups to restore"
 msgstr "Tidak ada backup untuk dipulihkan"
 
-#: ../deja-dup/AssistantRestore.vala:437
+#: deja-dup/AssistantRestore.vala:437
 msgid "Original location"
 msgstr "Lokasi asal"
 
-#: ../deja-dup/AssistantRestore.vala:448
+#: deja-dup/AssistantRestore.vala:448
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "Berkas yang akan dipulihkan"
 
-#: ../deja-dup/AssistantRestore.vala:469
+#: deja-dup/AssistantRestore.vala:469
 msgid "Restore Failed"
 msgstr "Pemulihan Gagal"
 
-#: ../deja-dup/AssistantRestore.vala:471
+#: deja-dup/AssistantRestore.vala:471
 msgid "Restore Finished"
 msgstr "Pemulihan Selesai"
 
 #. if it *is* visible, a header will be set already
-#: ../deja-dup/AssistantRestore.vala:474
+#: deja-dup/AssistantRestore.vala:474
 msgid "Your files were successfully restored."
 msgstr "Berkas anda berhasil dipulihkan."
 
-#: ../deja-dup/AssistantRestore.vala:477
+#: deja-dup/AssistantRestore.vala:477
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Berkas anda berhasil dipulihkan."
 
-#: ../deja-dup/AssistantRestore.vala:484 ../libdeja/Operation.vala:63
+#: deja-dup/AssistantRestore.vala:484 libdeja/Operation.vala:63
 msgid "Restoring…"
 msgstr "Melaksanakan Pemulihan:..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:199
+#: deja-dup/AssistantRestoreMissing.vala:181
 msgid "File"
 msgstr "Berkas"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:200
+#: deja-dup/AssistantRestoreMissing.vala:182
 msgid "Last seen"
 msgstr "Terlihat terakhir"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:215
+#: deja-dup/AssistantRestoreMissing.vala:193
 msgid "Restore which Files?"
 msgstr "Pulihkan Berkas Mana?"
 
 #. Hours
-#: ../deja-dup/AssistantRestoreMissing.vala:346
+#: deja-dup/AssistantRestoreMissing.vala:324
 msgid "Scanning for files from up to a day ago…"
 msgstr "Memindai berkas hingga sehari yang lalu..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:349
+#: deja-dup/AssistantRestoreMissing.vala:327
 msgid "Scanning for files from up to a week ago…"
 msgstr "Memindai berkas hingga seminggu yang lalu..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:352
+#: deja-dup/AssistantRestoreMissing.vala:330
 msgid "Scanning for files from up to a month ago…"
 msgstr "Memindai berkas hingga sebulan yang lalu..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:357
+#: deja-dup/AssistantRestoreMissing.vala:335
 #, c-format
 msgid "Scanning for files from about a month ago…"
 msgid_plural "Scanning for files from about %d months ago…"
 msgstr[0] "Memindai berkas hingga sebulan yang lalu..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:364
+#: deja-dup/AssistantRestoreMissing.vala:342
 #, c-format
 msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
 msgstr[0] "Memindai berkas hingga setahun yang lalu..."
 
-#: ../deja-dup/AssistantRestoreMissing.vala:454
+#: deja-dup/AssistantRestoreMissing.vala:432
 msgid "Scanning finished"
 msgstr "Selesai memindai"
 
-#: ../deja-dup/Assistant.vala:38 ../deja-dup/widgets/ConfigLocationFile.vala:54
+#: deja-dup/Assistant.vala:38 deja-dup/widgets/ConfigLocationFile.vala:54
 msgid "_OK"
 msgstr "_Ok"
 
-#: ../deja-dup/Assistant.vala:299
+#: deja-dup/Assistant.vala:296
 msgid "_Forward"
 msgstr "Ma_ju"
 
-#: ../deja-dup/Assistant.vala:317
+#: deja-dup/Assistant.vala:314
 msgid "Co_ntinue"
 msgstr "La_njutkan"
 
-#: ../deja-dup/Assistant.vala:323
+#: deja-dup/Assistant.vala:320
 msgctxt "verb"
 msgid "_Test"
 msgstr "_Uji"
 
-#: ../deja-dup/Assistant.vala:352 ../deja-dup/widgets/ConfigList.vala:255
-#: ../deja-dup/widgets/ConfigLocationFile.vala:53
+#: deja-dup/Assistant.vala:349 deja-dup/widgets/ConfigList.vala:255
+#: deja-dup/widgets/ConfigLocationFile.vala:53
 msgid "_Cancel"
 msgstr "_Batal"
 
-#: ../deja-dup/Assistant.vala:354
+#: deja-dup/Assistant.vala:351
 msgid "_Close"
 msgstr "_Tutup"
 
-#: ../deja-dup/Assistant.vala:358
+#: deja-dup/Assistant.vala:355
 msgid "_Back"
 msgstr "Mun_dur"
 
-#: ../deja-dup/Assistant.vala:360 ../deja-dup/StatusIcon.vala:93
+#: deja-dup/Assistant.vala:357 deja-dup/StatusIcon.vala:70
 msgid "_Resume Later"
 msgstr "Te_ruskan Nanti"
 
-#: ../deja-dup/main.vala:34 ../deja-dup/monitor/monitor.vala:36
-#: ../deja-dup/preferences/preferences-main.vala:85
+#: deja-dup/main.vala:30 deja-dup/monitor/monitor.vala:34
 msgid "Show version"
 msgstr "Tampilkan versi"
 
-#: ../deja-dup/main.vala:35
+#: deja-dup/main.vala:31
 msgid "Restore given files"
 msgstr "Pulihkan file tercatat"
 
-#: ../deja-dup/main.vala:36
+#: deja-dup/main.vala:32
 msgid "Immediately start a backup"
 msgstr "Langsung laksanakan backup"
 
-#: ../deja-dup/main.vala:38
+#: deja-dup/main.vala:34
 msgid "Restore deleted files"
 msgstr "Pulihkan berkas yang terhapus"
 
-#: ../deja-dup/main.vala:55
+#: deja-dup/main.vala:80 deja-dup/main.vala:95 deja-dup/main.vala:121
+msgid "An operation is already in progress"
+msgstr "Suatu operasi tengah berlangsung"
+
+#: deja-dup/main.vala:100
 msgid "No directory provided"
 msgstr "Direktori tidak tersedia"
 
-#: ../deja-dup/main.vala:60
+#: deja-dup/main.vala:104
 msgid "Only one directory can be shown at once"
 msgstr "Hanya satu direktori yang dapat ditampilkan pada satu saat"
 
-#: ../deja-dup/main.vala:81
-msgid "[FILES…]"
-msgstr "[BERKAS...]"
-
-#: ../deja-dup/main.vala:82
-msgid "DIRECTORY"
-msgstr "DIREKTORI"
-
-#. Translators: Wrap this to 80 characters per line if you can, as I have for English
-#: ../deja-dup/main.vala:86
-msgid ""
-"Déjà Dup is a simple backup tool.  It hides the complexity of backing up\n"
-"the Right Way (encrypted, off-site, and regular) and uses duplicity as\n"
-"the backend."
-msgstr ""
-"Déjà Dup adalah peralatan backup sederhana.  Ia menyembunyikan kompleksitas "
-"proses backup\n"
-"Dengan Benar (terenkripsi, pada lokasi berbeda, serta terjadwal) dan "
-"menggunakan duplicity\n"
-"sebagai mesin penggeraknya."
-
-#: ../deja-dup/main.vala:137
+#: deja-dup/main.vala:110
 msgid "Directory does not exist"
 msgstr ""
 
-#: ../deja-dup/main.vala:141
+#: deja-dup/main.vala:114
 msgid "You must provide a directory, not a file"
 msgstr "Harusnya diisi dengan nama direktori, bukan nama berkas"
 
-#: ../deja-dup/main.vala:153
-msgid "You must specify a mode"
-msgstr "Harus menentukan modusnya"
+#: deja-dup/main.vala:128
+msgid "Scheduled backup delayed"
+msgstr "Backup rutin tertunda"
 
-#: ../deja-dup/MountOperationAssistant.vala:36
+#: deja-dup/main.vala:221
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Andika Triwidada https://launchpad.net/~andika\n"
+"  Chairuddin Nur Lubis https://launchpad.net/~ogeng98\n"
+"  Hertatijanto Hartono https://launchpad.net/~dvertx\n"
+"  Mei Hua Song https://launchpad.net/~song-sharen"
+
+#: deja-dup/MountOperationAssistant.vala:36
 msgid "Connect to Server"
 msgstr "Sambungkan ke Server"
 
-#: ../deja-dup/MountOperationAssistant.vala:37
-#: ../deja-dup/widgets/ConfigLocationDAV.vala:49
-#: ../deja-dup/widgets/ConfigLocationFTP.vala:45
-#: ../deja-dup/widgets/ConfigLocationRackspace.vala:31
-#: ../deja-dup/widgets/ConfigLocationSMB.vala:37
-#: ../deja-dup/widgets/ConfigLocationSSH.vala:40
+#: deja-dup/MountOperationAssistant.vala:37
+#: deja-dup/widgets/ConfigLocationDAV.vala:49
+#: deja-dup/widgets/ConfigLocationFTP.vala:45
+#: deja-dup/widgets/ConfigLocationRackspace.vala:31
+#: deja-dup/widgets/ConfigLocationSMB.vala:37
+#: deja-dup/widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "Nama pengg_una"
 
-#: ../deja-dup/MountOperationAssistant.vala:38
-#: ../libdeja/BackendGDrive.vala:160
+#: deja-dup/MountOperationAssistant.vala:38 libdeja/BackendGDrive.vala:160
 msgid "_Password"
 msgstr "_Kata sandi"
 
-#: ../deja-dup/MountOperationAssistant.vala:39
+#: deja-dup/MountOperationAssistant.vala:39
 msgid "S_how password"
 msgstr "Per_lihatkan kata sandi"
 
-#: ../deja-dup/MountOperationAssistant.vala:80
+#: deja-dup/MountOperationAssistant.vala:81
 msgid "Location not available"
 msgstr "Lokasi tidak tersedia"
 
-#: ../deja-dup/MountOperationAssistant.vala:166
+#: deja-dup/MountOperationAssistant.vala:172
 msgid "Connect _anonymously"
 msgstr "Sambungkan secara _anonim"
 
-#: ../deja-dup/MountOperationAssistant.vala:170
+#: deja-dup/MountOperationAssistant.vala:176
 msgid "Connect as u_ser"
 msgstr "Sambungkan sebagai pengg_una"
 
 #. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:213
+#: deja-dup/MountOperationAssistant.vala:219
 msgid "_Domain"
 msgstr "Ranah/_Domain"
 
-#: ../deja-dup/Prompt.vala:37
+#: deja-dup/Preferences.vala:97 deja-dup/Preferences.vala:249
+msgid "_Back Up Now…"
+msgstr "_Buat Backup Sekarang..."
+
+#: deja-dup/Preferences.vala:99 deja-dup/Preferences.vala:203
+msgid "_Restore…"
+msgstr "_Pulihkan..."
+
+#: deja-dup/Preferences.vala:116
+msgid "Could not install"
+msgstr "Tidak dapat menginstal"
+
+#: deja-dup/Preferences.vala:150
+msgid "Categories"
+msgstr "Kategori"
+
+#: deja-dup/Preferences.vala:203
+msgid "_Install…"
+msgstr "_Instal..."
+
+#: deja-dup/Preferences.vala:249
+#: deja-dup/widgets/ConfigLabelDescription.vala:59
+#: deja-dup/widgets/ConfigLabelDescription.vala:83
+msgid "Install…"
+msgstr "Instal..."
+
+#: deja-dup/Preferences.vala:274
+msgid "Overview"
+msgstr "Pratilik"
+
+#: deja-dup/Preferences.vala:307
+msgid "_Storage location"
+msgstr "Loka_si penyimpanan"
+
+#. Translators: storage as in "where to store the backup"
+#: deja-dup/Preferences.vala:324
+msgid "Storage location"
+msgstr "Lokasi penyimpanan"
+
+#: deja-dup/Preferences.vala:348
+msgid "_Automatic backup"
+msgstr "Backup otom_atis"
+
+#. translators: as in "Every day"
+#: deja-dup/Preferences.vala:360
+msgid "_Every"
+msgstr "S_etiap"
+
+#: deja-dup/Preferences.vala:370
+msgctxt "verb"
+msgid "_Keep"
+msgstr "_Simpan"
+
+#: deja-dup/Preferences.vala:377
+msgid ""
+"Old backups will be deleted earlier if the storage location is low on space."
+msgstr ""
+"Backup lama akan dihapus lebih dini bila ruang lokasi penyimpanan kurang."
+
+#: deja-dup/Preferences.vala:387
+msgid "Scheduling"
+msgstr "Penjadwalan"
+
+#: deja-dup/Prompt.vala:37
 msgid "Keep your files safe by backing up regularly"
 msgstr "Amankan berkas anda dengan backup yang terjadwal"
 
-#: ../deja-dup/Prompt.vala:42
+#: deja-dup/Prompt.vala:42
 msgid ""
 "Important documents, data, and settings can be protected by storing them in "
 "a backup. In the case of a disaster, you would be able to recover them from "
@@ -939,191 +1048,112 @@ msgstr ""
 "sebagai backup. Jika terjadi musibah, maka anda dapat memulihkannya kembali "
 "dari backup tersebut."
 
-#: ../deja-dup/Prompt.vala:48
+#: deja-dup/Prompt.vala:47
 msgid "_Don't Show Again"
 msgstr "_Jangan Perlihatkan Lagi"
 
-#: ../deja-dup/Prompt.vala:50
-msgid "Don't Show Again"
-msgstr "Jangan Perlihatkan Lagi"
-
-#: ../deja-dup/Prompt.vala:56
+#: deja-dup/Prompt.vala:55
 msgid "_Open Backup Settings"
 msgstr "_Buka Penataan Backup"
 
-#: ../deja-dup/Prompt.vala:58
-msgid "Open Backup Settings"
-msgstr "Buka Penataan Backup"
-
-#: ../deja-dup/StatusIcon.vala:94
+#: deja-dup/StatusIcon.vala:71
 msgid "_Skip Backup"
 msgstr "_Abaikan Backup"
 
-#: ../deja-dup/StatusIcon.vala:125
+#: deja-dup/StatusIcon.vala:92
 msgid "Backup completed"
 msgstr "Proses backup selesai"
 
-#: ../deja-dup/StatusIcon.vala:129
+#: deja-dup/StatusIcon.vala:97
 msgid "Backup finished"
 msgstr "Backup berhasil"
 
-#: ../deja-dup/StatusIcon.vala:130
+#: deja-dup/StatusIcon.vala:98
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr ""
 "Tidak semua berkas berhasil di backup. Lihat kotak dialog untuk detailnya."
 
-#: ../deja-dup/StatusIcon.vala:234
+#: deja-dup/StatusIcon.vala:144
 msgid "Starting scheduled backup"
 msgstr "Memulai backup terjadwal"
 
-#: ../deja-dup/StatusIcon.vala:237
-msgid "Show Progress"
-msgstr "Tunjukkan Kemajuan Proses"
-
-#: ../deja-dup/StatusIcon.vala:275
+#: deja-dup/StatusIcon.vala:177
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% komplit"
 
-#: ../deja-dup/StatusIcon.vala:288
+#: deja-dup/StatusIcon.vala:190
 msgid "Show _Progress"
 msgstr "_Perlihatkan Kemajuan"
 
-#: ../deja-dup/monitor/monitor.vala:161
-msgid "Scheduled backup delayed"
-msgstr "Backup rutin tertunda"
+#: deja-dup/monitor/monitor.vala:81 libdeja/BackendGDrive.vala:51
+#: libdeja/BackendRackspace.vala:49 libdeja/BackendS3.vala:59
+msgid "Backup will begin when a network connection becomes available."
+msgstr "Backup akan dimulai saat sambungan jaringan tersedia."
 
-#: ../deja-dup/preferences/Preferences.vala:91
-#: ../deja-dup/preferences/Preferences.vala:243
-msgid "_Back Up Now…"
-msgstr "_Buat Backup Sekarang..."
-
-#: ../deja-dup/preferences/Preferences.vala:93
-#: ../deja-dup/preferences/Preferences.vala:197
-msgid "_Restore…"
-msgstr "_Pulihkan..."
-
-#: ../deja-dup/preferences/Preferences.vala:110
-msgid "Could not install"
-msgstr "Tidak dapat menginstal"
-
-#: ../deja-dup/preferences/Preferences.vala:144
-msgid "Categories"
-msgstr "Kategori"
-
-#: ../deja-dup/preferences/Preferences.vala:197
-msgid "_Install…"
-msgstr "_Instal..."
-
-#: ../deja-dup/preferences/Preferences.vala:243
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:59
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:83
-msgid "Install…"
-msgstr "Instal..."
-
-#: ../deja-dup/preferences/Preferences.vala:275
-msgid "Overview"
-msgstr "Pratilik"
-
-#: ../deja-dup/preferences/Preferences.vala:308
-msgid "_Storage location"
-msgstr "Loka_si penyimpanan"
-
-#. Translators: storage as in "where to store the backup"
-#: ../deja-dup/preferences/Preferences.vala:325
-msgid "Storage location"
-msgstr "Lokasi penyimpanan"
-
-#: ../deja-dup/preferences/Preferences.vala:349
-msgid "_Automatic backup"
-msgstr "Backup otom_atis"
-
-#. translators: as in "Every day"
-#: ../deja-dup/preferences/Preferences.vala:361
-msgid "_Every"
-msgstr "S_etiap"
-
-#: ../deja-dup/preferences/Preferences.vala:371
-msgctxt "verb"
-msgid "_Keep"
-msgstr "_Simpan"
-
-#: ../deja-dup/preferences/Preferences.vala:378
+#: deja-dup/monitor/monitor.vala:84
 msgid ""
-"Old backups will be deleted earlier if the storage location is low on space."
+"Backup will begin when an unmetered network connection becomes available."
 msgstr ""
-"Backup lama akan dihapus lebih dini bila ruang lokasi penyimpanan kurang."
 
-#: ../deja-dup/preferences/Preferences.vala:388
-msgid "Scheduling"
-msgstr "Penjadwalan"
-
-#: ../deja-dup/preferences/preferences-main.vala:71
-msgid "_Help"
-msgstr "_Bantuan"
-
-#: ../deja-dup/preferences/preferences-main.vala:73
-msgid "_Quit"
-msgstr "_Keluar"
-
-#: ../deja-dup/widgets/ConfigDelete.vala:40
+#: deja-dup/widgets/ConfigDelete.vala:40
 msgid "At least six months"
 msgstr "Setidaknya enam bulan"
 
-#: ../deja-dup/widgets/ConfigDelete.vala:41
+#: deja-dup/widgets/ConfigDelete.vala:41
 msgid "At least a year"
 msgstr "Setidaknya setahun"
 
-#: ../deja-dup/widgets/ConfigDelete.vala:42
+#: deja-dup/widgets/ConfigDelete.vala:42
 msgid "Forever"
 msgstr "Selamanya"
 
-#: ../deja-dup/widgets/ConfigDelete.vala:89
+#: deja-dup/widgets/ConfigDelete.vala:89
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
 msgstr[0] "Setidaknya %d hari"
 
 #. Check for some really simple/common friendly names
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:66
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:66
 msgid "Next backup is today."
 msgstr "Backup selanjutnya adalah hari ini."
 
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:68
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:68
 msgid "Next backup is tomorrow."
 msgstr "Backup selanjutnya adalah besok."
 
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:76
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:76
 #, c-format
 msgid "Next backup is %d day from now."
 msgid_plural "Next backup is %d days from now."
 msgstr[0] "Backup selanjutnya %d hari lagi dari sekarang."
 
 #. Check for some really simple/common friendly names
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:93
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:93
 msgid "Last backup was today."
 msgstr "Backup terakhir adalah hari ini."
 
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:95
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:95
 msgid "Last backup was yesterday."
 msgstr "Backup terakhir adalah kemarin."
 
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:103
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:103
 #, c-format
 msgid "Last backup was %d day ago."
 msgid_plural "Last backup was %d days ago."
 msgstr[0] "Backup terakhir %d hari yang lalu."
 
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:113
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:113
 msgid "No recent backups."
 msgstr "Tidak ada backup baru-baru ini."
 
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:122
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:122
 msgid "No backup scheduled."
 msgstr "Tidak ada backup yang dijadwalkan."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:60
+#: deja-dup/widgets/ConfigLabelDescription.vala:60
 #, c-format
 msgid ""
 "You can restore existing backups after you first install some necessary "
@@ -1134,31 +1164,33 @@ msgstr ""
 
 #. This here encodes a lot of outside GUI information in this widget,
 #. but it's a very special case thing.
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:69
+#: deja-dup/widgets/ConfigLabelDescription.vala:69
 msgid "Restore…"
 msgstr "Pulihkan..."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:71
+#: deja-dup/widgets/ConfigLabelDescription.vala:71
 #, c-format
 msgid "You may use the %s button to browse for existing backups."
 msgstr "Anda bisa memakai tombol %s untuk meramban backup yang ada."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:73
+#: deja-dup/widgets/ConfigLabelDescription.vala:73
 msgid "Files"
-msgstr ""
+msgstr "Berkas"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:75
+#: deja-dup/widgets/ConfigLabelDescription.vala:75
 msgid "Caja"
-msgstr ""
+msgstr "Caja"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:76
+#: deja-dup/widgets/ConfigLabelDescription.vala:76
 #, c-format
 msgid ""
 "You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
 msgstr ""
+"Anda dapat memulihkan seluruh salinan cadangan dengan tombol %s atau gunakan "
+"%s untuk mengembalikan berkas individu atau memulihkan yang hilang."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:84
+#: deja-dup/widgets/ConfigLabelDescription.vala:84
 #, c-format
 msgid ""
 "You can create a backup after you first install some necessary software by "
@@ -1167,11 +1199,11 @@ msgstr ""
 "Anda dapat membuat backup setelah menginstal software yang dibutuhkan dengan "
 "mengklik tombol %s."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:90
+#: deja-dup/widgets/ConfigLabelDescription.vala:90
 msgid "Back Up Now…"
 msgstr "Buat Backup Sekarang..."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:91
+#: deja-dup/widgets/ConfigLabelDescription.vala:91
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
@@ -1180,232 +1212,225 @@ msgstr ""
 "Anda mesti <a href=\">memfungsikan</a> backup otomatis atau memakai tombol "
 "%s untuk memulai sekarang."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
+#: deja-dup/widgets/ConfigLabelDescription.vala:97
 msgid "A backup automatically starts every day."
 msgstr "Suatu backup secara otomatis dimulai setiap hari."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:99
+#: deja-dup/widgets/ConfigLabelDescription.vala:99
 msgid "A backup automatically starts every week."
 msgstr "Suatu backup secara otomatis dimulai setiap minggu."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:102
+#: deja-dup/widgets/ConfigLabelDescription.vala:102
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
 msgstr[0] "Suatu backup secara otomatis dimulai setiap %d hari."
 
-#: ../deja-dup/widgets/ConfigList.vala:178
-#: ../deja-dup/widgets/ConfigList.vala:256
+#: deja-dup/widgets/ConfigList.vala:178 deja-dup/widgets/ConfigList.vala:256
 msgid "_Add"
 msgstr "_Tambah"
 
-#: ../deja-dup/widgets/ConfigList.vala:179
+#: deja-dup/widgets/ConfigList.vala:179
 msgid "Add"
 msgstr "Tambah"
 
-#: ../deja-dup/widgets/ConfigList.vala:187
+#: deja-dup/widgets/ConfigList.vala:187
 msgid "_Remove"
 msgstr "_Hapus"
 
-#: ../deja-dup/widgets/ConfigList.vala:188
+#: deja-dup/widgets/ConfigList.vala:188
 msgid "Remove"
 msgstr "Hapus"
 
-#: ../deja-dup/widgets/ConfigList.vala:252
+#: deja-dup/widgets/ConfigList.vala:252
 msgid "Choose folders"
 msgstr "Pilih map"
 
 #. Now insert remote servers
-#: ../deja-dup/widgets/ConfigLocation.vala:124
+#: deja-dup/widgets/ConfigLocation.vala:124
 msgid "SSH"
 msgstr "SSH"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:126
+#: deja-dup/widgets/ConfigLocation.vala:126
 msgid "Windows Share"
 msgstr "Share Windows"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:128
+#: deja-dup/widgets/ConfigLocation.vala:128
 msgid "FTP"
 msgstr "FTP"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:130
+#: deja-dup/widgets/ConfigLocation.vala:130
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:133
+#: deja-dup/widgets/ConfigLocation.vala:133
 msgid "Custom Location"
 msgstr "Lokasi Kustom"
 
 #. And a local folder option
-#: ../deja-dup/widgets/ConfigLocation.vala:139
+#: deja-dup/widgets/ConfigLocation.vala:139
 msgid "Local Folder"
 msgstr "Map Lokal"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:182 ../libdeja/BackendS3.vala:122
+#: deja-dup/widgets/ConfigLocation.vala:182 libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:190
+#: deja-dup/widgets/ConfigLocation.vala:190
 msgid "Google Cloud Storage"
 msgstr "Google Cloud Storage"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:198
+#: deja-dup/widgets/ConfigLocation.vala:198
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:210 ../libdeja/BackendU1.vala:45
+#: deja-dup/widgets/ConfigLocation.vala:210 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:218
-#: ../libdeja/BackendRackspace.vala:69
+#: deja-dup/widgets/ConfigLocation.vala:218 libdeja/BackendRackspace.vala:69
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:226
+#: deja-dup/widgets/ConfigLocation.vala:226
 msgid "OpenStack Swift"
 msgstr "OpenStack Swift"
 
-#: ../deja-dup/widgets/ConfigLocationCustom.vala:34
+#: deja-dup/widgets/ConfigLocationCustom.vala:34
 msgid "_URI"
 msgstr "_URI"
 
-#: ../deja-dup/widgets/ConfigLocationDAV.vala:31
-#: ../deja-dup/widgets/ConfigLocationFTP.vala:32
-#: ../deja-dup/widgets/ConfigLocationSMB.vala:31
-#: ../deja-dup/widgets/ConfigLocationSSH.vala:31
+#: deja-dup/widgets/ConfigLocationDAV.vala:31
+#: deja-dup/widgets/ConfigLocationFTP.vala:32
+#: deja-dup/widgets/ConfigLocationSMB.vala:31
+#: deja-dup/widgets/ConfigLocationSSH.vala:31
 msgid "_Server"
 msgstr "_Server"
 
-#: ../deja-dup/widgets/ConfigLocationDAV.vala:38
+#: deja-dup/widgets/ConfigLocationDAV.vala:38
 msgid "Use secure connection (_HTTPS)"
 msgstr "Gunakan sambungan aman (_HTTPS)"
 
-#: ../deja-dup/widgets/ConfigLocationDAV.vala:43
-#: ../deja-dup/widgets/ConfigLocationFTP.vala:35
-#: ../deja-dup/widgets/ConfigLocationSSH.vala:34
+#: deja-dup/widgets/ConfigLocationDAV.vala:43
+#: deja-dup/widgets/ConfigLocationFTP.vala:35
+#: deja-dup/widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr "_Port"
 
-#: ../deja-dup/widgets/ConfigLocationDAV.vala:46
-#: ../deja-dup/widgets/ConfigLocationFTP.vala:38
-#: ../deja-dup/widgets/ConfigLocationFile.vala:45
-#: ../deja-dup/widgets/ConfigLocationGDrive.vala:33
-#: ../deja-dup/widgets/ConfigLocationS3.vala:33
-#: ../deja-dup/widgets/ConfigLocationSMB.vala:34
-#: ../deja-dup/widgets/ConfigLocationSSH.vala:37
-#: ../deja-dup/widgets/ConfigLocationVolume.vala:33
+#: deja-dup/widgets/ConfigLocationDAV.vala:46
+#: deja-dup/widgets/ConfigLocationFTP.vala:38
+#: deja-dup/widgets/ConfigLocationFile.vala:45
+#: deja-dup/widgets/ConfigLocationGDrive.vala:33
+#: deja-dup/widgets/ConfigLocationS3.vala:33
+#: deja-dup/widgets/ConfigLocationSMB.vala:34
+#: deja-dup/widgets/ConfigLocationSSH.vala:37
+#: deja-dup/widgets/ConfigLocationVolume.vala:33
 msgid "_Folder"
 msgstr "_Map"
 
-#: ../deja-dup/widgets/ConfigLocationFile.vala:39
+#: deja-dup/widgets/ConfigLocationFile.vala:39
 msgid "_Choose Folder…"
 msgstr "Pi_lih Map"
 
-#: ../deja-dup/widgets/ConfigLocationFile.vala:50
+#: deja-dup/widgets/ConfigLocationFile.vala:50
 msgid "Choose Folder"
 msgstr "Pilih Map"
 
-#: ../deja-dup/widgets/ConfigLocationGDrive.vala:31
+#: deja-dup/widgets/ConfigLocationGDrive.vala:31
 msgid "_Email address"
 msgstr "Alamat sur_el"
 
-#: ../deja-dup/widgets/ConfigLocationRackspace.vala:33
+#: deja-dup/widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr "_Wadah"
 
-#: ../deja-dup/widgets/ConfigLocationS3.vala:31
+#: deja-dup/widgets/ConfigLocationS3.vala:31
 msgid "S3 Access Key I_D"
 msgstr "I_D Kunci Akses S3"
 
-#: ../deja-dup/widgets/ConfigLocationSMB.vala:40
+#: deja-dup/widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
 msgstr "Nama _Domain"
 
-#: ../deja-dup/widgets/ConfigLocationU1.vala:32 ../libdeja/BackendU1.vala:50
+#: deja-dup/widgets/ConfigLocationU1.vala:32 libdeja/BackendU1.vala:50
 msgid "Ubuntu One has shut down.  Please choose another storage location."
 msgstr "Ubuntu One telah dibubarkan. Harap pilih lokasi penyimpanan lain."
 
-#: ../deja-dup/widgets/ConfigPeriod.vala:36
+#: deja-dup/widgets/ConfigPeriod.vala:36
 msgid "Day"
 msgstr "Hari"
 
-#: ../deja-dup/widgets/ConfigPeriod.vala:37
+#: deja-dup/widgets/ConfigPeriod.vala:37
 msgid "Week"
 msgstr "Minggu"
 
-#: ../deja-dup/widgets/ConfigPeriod.vala:82
+#: deja-dup/widgets/ConfigPeriod.vala:82
 #, c-format
 msgid "%d day"
 msgid_plural "%d days"
 msgstr[0] "%d hari"
 
-#: ../deja-dup/widgets/WidgetUtils.vala:33
+#: deja-dup/widgets/WidgetUtils.vala:29
 #, c-format
 msgid "Could not display %s"
 msgstr "Tidak dapat menampilkan %s"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../libdeja/BackendFile.vala:135 ../libdeja/CommonUtils.vala:518
+#: libdeja/BackendFile.vala:135 libdeja/CommonUtils.vala:519
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s pada %2$s"
 
-#: ../libdeja/BackendFile.vala:168
+#: libdeja/BackendFile.vala:167
 #, c-format
-msgid "Backup will begin when %s becomes connected."
-msgstr "Backup akan dimulai ketika %s telah tersambung."
+msgid "Backup will begin when %s is connected."
+msgstr ""
 
-#: ../libdeja/BackendFile.vala:175 ../libdeja/BackendGDrive.vala:51
-#: ../libdeja/BackendRackspace.vala:49 ../libdeja/BackendS3.vala:59
-msgid "Backup will begin when a network connection becomes available."
-msgstr "Backup akan dimulai saat sambungan jaringan tersedia."
-
-#: ../libdeja/BackendFile.vala:384 ../libdeja/BackendFile.vala:448
+#: libdeja/BackendFile.vala:395 libdeja/BackendFile.vala:461
 msgid "Backup location not available"
 msgstr "Lokasi backup tidak tersedia"
 
-#: ../libdeja/BackendFile.vala:385
+#: libdeja/BackendFile.vala:396
 msgid "Waiting for a network connection…"
 msgstr "Menunggu sambungan jaringan..."
 
-#: ../libdeja/BackendFile.vala:448
+#: libdeja/BackendFile.vala:461
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Menunggu hingga '%s' tersambung..."
 
 #. Translators: %s is a folder.
-#: ../libdeja/BackendGDrive.vala:83
+#: libdeja/BackendGDrive.vala:83
 #, c-format
 msgid "%s at Google Drive"
 msgstr "%s pada Google Drive"
 
-#: ../libdeja/BackendGDrive.vala:126 ../libdeja/BackendRackspace.vala:115
-#: ../libdeja/BackendS3.vala:168
+#: libdeja/BackendGDrive.vala:126 libdeja/BackendRackspace.vala:115
+#: libdeja/BackendS3.vala:168
 msgid "Permission denied"
 msgstr "Akses ditolak"
 
-#: ../libdeja/BackendGDrive.vala:157
+#: libdeja/BackendGDrive.vala:157
 #, c-format
 msgid "You can sign up for a Google account <a href=\"%s\">online</a>."
 msgstr "Anda dapat mendaftar akun Google secara <a href=\"%s\">daring</a>."
 
-#: ../libdeja/BackendGDrive.vala:158
+#: libdeja/BackendGDrive.vala:158
 msgid "Connect to Google Drive"
 msgstr "Menyambung ke Google Drive"
 
-#: ../libdeja/BackendGDrive.vala:159
+#: libdeja/BackendGDrive.vala:159
 msgid "_Email"
 msgstr "Sur_el"
 
 #. Translators: %s is a folder.
-#: ../libdeja/BackendRackspace.vala:72
+#: libdeja/BackendRackspace.vala:72
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "%s pada Rackspace Cloud Files"
 
-#: ../libdeja/BackendRackspace.vala:146
+#: libdeja/BackendRackspace.vala:146
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
@@ -1414,97 +1439,97 @@ msgstr ""
 "Anda dapat mendaftarkan akun Rackspace Cloud Files secara <a "
 "href=\"%s\">online</a>."
 
-#: ../libdeja/BackendRackspace.vala:147
+#: libdeja/BackendRackspace.vala:147
 msgid "Connect to Rackspace Cloud Files"
 msgstr "Sambungkan ke Rackspace Cloud Files"
 
-#: ../libdeja/BackendRackspace.vala:148
+#: libdeja/BackendRackspace.vala:148
 msgid "_API access key"
 msgstr "kunci akses _API"
 
-#: ../libdeja/BackendRackspace.vala:149
+#: libdeja/BackendRackspace.vala:149
 msgid "S_how API access key"
 msgstr "Per_lihatkan kunci akses API"
 
-#: ../libdeja/BackendRackspace.vala:150
+#: libdeja/BackendRackspace.vala:150
 msgid "_Remember API access key"
 msgstr "_Ingat kunci akses API"
 
 #. Translators: %s is a folder.
-#: ../libdeja/BackendS3.vala:125
+#: libdeja/BackendS3.vala:125
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "%s pada Amazon S3"
 
-#: ../libdeja/BackendS3.vala:199
+#: libdeja/BackendS3.vala:199
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr ""
 "Anda dapat mendaftarkan akun Amazon S3 secara <a href=\"%s\">online</a>."
 
-#: ../libdeja/BackendS3.vala:200
+#: libdeja/BackendS3.vala:200
 msgid "Connect to Amazon S3"
 msgstr "Sambungkan ke Amazon S3"
 
-#: ../libdeja/BackendS3.vala:201
+#: libdeja/BackendS3.vala:201
 msgid "_Access key ID"
 msgstr "ID kunci _akses"
 
-#: ../libdeja/BackendS3.vala:202
+#: libdeja/BackendS3.vala:202
 msgid "_Secret access key"
 msgstr "Kunci akses _rahasia"
 
-#: ../libdeja/BackendS3.vala:203
+#: libdeja/BackendS3.vala:203
 msgid "S_how secret access key"
 msgstr "Per_lihatkan kunci akses rahasia"
 
-#: ../libdeja/BackendS3.vala:204
+#: libdeja/BackendS3.vala:204
 msgid "_Remember secret access key"
 msgstr "_Ingat kunci akses rahasia"
 
-#: ../libdeja/CommonUtils.vala:437
+#: libdeja/CommonUtils.vala:438
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 "Tidak menemukan peralatan backup di %s. Instalasi anda tidak lengkap."
 
-#: ../libdeja/CommonUtils.vala:439
+#: libdeja/CommonUtils.vala:440
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr "Tidak dapat memuat peralatan backup. Instalasi anda tidak lengkap."
 
-#: ../libdeja/CommonUtils.vala:445
+#: libdeja/CommonUtils.vala:446
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr "Peralatan backup rusak. Instalasi anda tidak lengkap."
 
-#: ../libdeja/CommonUtils.vala:467
+#: libdeja/CommonUtils.vala:468
 msgid "Could not start backup tool"
 msgstr "Tidak dapat memulai peralatan backup"
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../libdeja/CommonUtils.vala:569
+#: libdeja/CommonUtils.vala:570
 #, c-format
 msgid "Home (%s)"
 msgstr "Pangkal (%s)"
 
 #. Translators: this is the home folder
-#: ../libdeja/CommonUtils.vala:574
+#: libdeja/CommonUtils.vala:575
 msgid "Home"
 msgstr "Pangkal"
 
 #. Translators: this is the trash folder
-#: ../libdeja/CommonUtils.vala:579
+#: libdeja/CommonUtils.vala:580
 msgid "Trash"
 msgstr "Sampah"
 
-#: ../libdeja/OperationBackup.vala:42 ../libdeja/OperationVerify.vala:56
+#: libdeja/OperationBackup.vala:42 libdeja/OperationVerify.vala:56
 msgid "Verifying backup…"
 msgstr "Memverifikasi cadangan..."
 
-#: ../libdeja/OperationRestore.vala:51
+#: libdeja/OperationRestore.vala:51
 msgid "Restoring files…"
 msgstr "Memulihkan berkas..."
 
-#: ../libdeja/OperationVerify.vala:94
+#: libdeja/OperationVerify.vala:94
 msgid ""
 "Your backup appears to be corrupted.  You should delete the backup and try "
 "again."
@@ -1512,60 +1537,60 @@ msgstr ""
 "Cadangan Anda sepertinya rusak. Anda seharusya menghapus cadangan ini dan "
 "mencoba kembali."
 
-#: ../libdeja/Operation.vala:61
+#: libdeja/Operation.vala:61
 msgid "Backing up…"
 msgstr "Melaksanakan backup..."
 
-#: ../libdeja/Operation.vala:65
+#: libdeja/Operation.vala:65
 msgid "Checking for backups…"
 msgstr "Memeriksa keberadaan backup..."
 
-#: ../libdeja/Operation.vala:67
+#: libdeja/Operation.vala:67
 msgid "Listing files…"
 msgstr "Mendaftarkan berkas..."
 
-#: ../libdeja/Operation.vala:69 ../libdeja/Operation.vala:103
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:385
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:392
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:417
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:422
+#: libdeja/Operation.vala:69 libdeja/Operation.vala:103
+#: libdeja/tools/duplicity/DuplicityJob.vala:385
+#: libdeja/tools/duplicity/DuplicityJob.vala:392
+#: libdeja/tools/duplicity/DuplicityJob.vala:417
+#: libdeja/tools/duplicity/DuplicityJob.vala:422
 msgid "Preparing…"
 msgstr "Mempersiapkan..."
 
-#: ../libdeja/Operation.vala:296
+#: libdeja/Operation.vala:294
 msgid "Another backup operation is already running"
 msgstr "Pelaksanaan backup lain sedang berlangsung"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:89
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:172
+#: libdeja/tools/duplicity/DuplicityJob.vala:89
+#: libdeja/tools/duplicity/DuplicityJob.vala:172
 msgid "Paused (no network)"
 msgstr "Tertunda (tidak ada jaringan)"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:449
+#: libdeja/tools/duplicity/DuplicityJob.vala:449
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Tidak dapat memulihkan ‘%s’: Bukan lokasi berkas yang sah"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:516
+#: libdeja/tools/duplicity/DuplicityJob.vala:516
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Lokasi backup terlalu kecil.  Coba gunakan pada ruang yang lebih besar."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:539
+#: libdeja/tools/duplicity/DuplicityJob.vala:539
 msgid "Backup location does not have enough free space."
 msgstr "Lokasi backup tidak memiliki cukup ruang kosong."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:559
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:573
+#: libdeja/tools/duplicity/DuplicityJob.vala:559
+#: libdeja/tools/duplicity/DuplicityJob.vala:573
 msgid "Cleaning up…"
 msgstr "Melakukan pembenahan..."
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:669
+#: libdeja/tools/duplicity/DuplicityJob.vala:669
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
@@ -1576,7 +1601,7 @@ msgstr ""
 #. OK, we succeeded yay!  But some files didn't actually restore
 #. because we couldn't write to them.  So tell the user so they
 #. don't think everything is hunky dory.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:685
+#: libdeja/tools/duplicity/DuplicityJob.vala:685
 msgid ""
 "Could not restore the following files.  Please make sure you are able to "
 "write to them."
@@ -1587,7 +1612,7 @@ msgstr ""
 #. make text a little nicer than duplicity gives
 #. duplicity gives something like "home/blah/blah not found in archive,
 #. no files restored".
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:929
+#: libdeja/tools/duplicity/DuplicityJob.vala:929
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Tidak dapat memulihkan '%s': Berkas tidak ditemukan dalam backup"
@@ -1595,17 +1620,17 @@ msgstr "Tidak dapat memulihkan '%s': Berkas tidak ditemukan dalam backup"
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:935
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1033
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1037
+#: libdeja/tools/duplicity/DuplicityJob.vala:935
+#: libdeja/tools/duplicity/DuplicityJob.vala:1033
+#: libdeja/tools/duplicity/DuplicityJob.vala:1037
 msgid "Bad encryption password."
 msgstr "Password enkripsi buruk."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:940
+#: libdeja/tools/duplicity/DuplicityJob.vala:940
 msgid "Computer name changed"
 msgstr "Nama komputer berubah"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:940
+#: libdeja/tools/duplicity/DuplicityJob.vala:940
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -1615,82 +1640,82 @@ msgstr ""
 "Backup ini berasal dari komputer bernama %s, tetapi komputer sekarang "
 "bernama %s.  Jika tidak diinginkan, maka tentukan lokasi backup yang berbeda."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:975
+#: libdeja/tools/duplicity/DuplicityJob.vala:975
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Akses ditolak saat mencoba membuat '%s'."
 
 #. assume error is on backend side
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:979
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:983
+#: libdeja/tools/duplicity/DuplicityJob.vala:979
+#: libdeja/tools/duplicity/DuplicityJob.vala:983
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Akses ditolak saat mencoba membaca '%s'."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:987
+#: libdeja/tools/duplicity/DuplicityJob.vala:987
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Akses ditolak saat mencoba menghapus '%s'."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:994
+#: libdeja/tools/duplicity/DuplicityJob.vala:994
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Lokasi backup '%s' tidak ada."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1000
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1052
+#: libdeja/tools/duplicity/DuplicityJob.vala:1000
+#: libdeja/tools/duplicity/DuplicityJob.vala:1052
 msgid "No space left."
 msgstr "Tidak ada ruang yang tersisa."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1014
+#: libdeja/tools/duplicity/DuplicityJob.vala:1014
 msgid "Invalid ID."
 msgstr "ID tidak sah."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1016
+#: libdeja/tools/duplicity/DuplicityJob.vala:1016
 msgid "Invalid secret key."
 msgstr "Kunci rahasia tidak sah."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1018
+#: libdeja/tools/duplicity/DuplicityJob.vala:1018
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Akun Layanan Web Amazon anda tidak terdaftar pada layanan S3."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1027
+#: libdeja/tools/duplicity/DuplicityJob.vala:1027
 msgid "S3 bucket name is not available."
 msgstr "Nama wadah S3 tidak tersedia."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1041
+#: libdeja/tools/duplicity/DuplicityJob.vala:1041
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Gagal membaca berkas '%s'."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1043
+#: libdeja/tools/duplicity/DuplicityJob.vala:1043
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Gagal menulis berkas '%s'."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1054
+#: libdeja/tools/duplicity/DuplicityJob.vala:1054
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Tidak ada ruang tersisa pada '%s'."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1062
+#: libdeja/tools/duplicity/DuplicityJob.vala:1062
 msgid "No backup files found"
 msgstr "Tidak ditemukan adanya file backup"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1112
+#: libdeja/tools/duplicity/DuplicityJob.vala:1112
 msgid "Uploading…"
 msgstr "Mengunggah..."
 
-#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:41
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:41
 msgid "Could not understand duplicity version."
 msgstr "Tidak dapat mengenali versi duplicity."
 
-#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:51
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:51
 #, c-format
 msgid "Could not understand duplicity version ‘%s’."
 msgstr "Tidak dapat mengenali versi duplicity ‘%s’."
 
-#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:54
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:54
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -1699,62 +1724,6 @@ msgstr ""
 "Déjà Dup Backup Tool sedikitnya membutuhkan duplicity versi %d.%d.%.2d, "
 "tetapi hanya menemukan versi %d.%d.%.2d"
 
-#~ msgid ""
-#~ "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
-#~ "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-#~ "and $VIDEO are recognized as the user’s special directories. Relative "
-#~ "entries are relative to the user’s home directory."
-#~ msgstr ""
-#~ "Daftar direktori yang akan di backup. Nilai $HOME, $DESKTOP, $DOCUMENTS, "
-#~ "$DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, dan $VIDEO "
-#~ "dikenali sebagai direktori khusus pengguna. Isian dengan nilai relatif akan "
-#~ "diasosiasikan relatif terhadap direktori pangkal pengguna."
-
-#~ msgid ""
-#~ "This list of directories will not be backed up. Reserved values $HOME, "
-#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-#~ "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
-#~ "directories. Relative entries are relative to the user’s home directory."
-#~ msgstr ""
-#~ "Daftar direktori yang tidak akan di backup. Nilai $HOME, $DESKTOP, "
-#~ "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-#~ "dan $VIDEO dikenali sebagai direktori khusus. Isian dengan nilai relatif "
-#~ "adalah relatif terhadap direktori pangkal pengguna."
-
-#~ msgid "The Ubuntu One folder"
-#~ msgstr "Map Ubuntu One"
-
-#~ msgid ""
-#~ "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
-#~ "folder based on the name of the computer."
-#~ msgstr ""
-#~ "Nama map untuk menyimpan file. Jika ‘$HOSTNAME’, akan terkirim ke map dengan "
-#~ "nama seperti nama komputer."
-
 #, c-format
-#~ msgid "%s on Ubuntu One"
-#~ msgstr "%s pada Ubuntu One"
-
-#~ msgid "Connect to Ubuntu One"
-#~ msgstr "Sambungkan ke Ubuntu One"
-
-#~ msgid "Sign into Ubuntu One…"
-#~ msgstr "Masuk ke Ubuntu One..."
-
-#~ msgid "Directory does not exists"
-#~ msgstr "Direktori tidak ada"
-
-#~ msgid ""
-#~ "Support for local, remote, or cloud backup locations, such as Amazon S3, "
-#~ "Rackspace Cloud Files, and Ubuntu One"
-#~ msgstr ""
-#~ "Mendukung lokasi backup lokal, remote, atau cloud, seperti misalnya Amazon "
-#~ "S3, Rackspace Cloud Files, dan Ubuntu One"
-
-#, c-format
-#~ msgid ""
-#~ "You can restore the entire backup with the %s button or use Files to either "
-#~ "revert individual files or restore missing ones."
-#~ msgstr ""
-#~ "Anda dapat memulihkan seluruh backup dengan tombol %s atau memakai Berkas "
-#~ "untuk mengembalikan berkas individu atau memulihkan yang hilang."
+#~ msgid "Backup will begin when %s becomes connected."
+#~ msgstr "Backup akan dimulai ketika %s telah tersambung."

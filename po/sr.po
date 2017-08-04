@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-03-09 14:16-0500\n"
-"PO-Revision-Date: 2014-10-25 13:50+0000\n"
+"POT-Creation-Date: 2017-08-03 11:12-0400\n"
+"PO-Revision-Date: 2017-08-02 18:16+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,15 +16,90 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2017-03-14 07:28+0000\n"
-"X-Generator: Launchpad (build 18331)\n"
+"X-Launchpad-Export-Date: 2017-08-04 05:38+0000\n"
+"X-Generator: Launchpad (build 18441)\n"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:1
-#: ../deja-dup/preferences/Preferences.vala:286
+#. Translators: The name is a play on the French phrase "déjà vu" meaning
+#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
+#. context is itself a reference to both the underlying command line tool
+#. "duplicity" and the act of duplicating data for backup.  As a whole, the
+#. phrase "Déjà Dup" may not be very translatable.
+#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:295
+#: libdeja/CommonUtils.vala:139
+msgid "Déjà Dup Backup Tool"
+msgstr "Безбедни сеф алат за резерве"
+
+#: data/org.gnome.DejaDup.appdata.xml.in:8
+msgid "Keep your important documents safe from disaster"
+msgstr "Чувајте ваша важна документа на најбезбеднијем месту на планети"
+
+#: data/org.gnome.DejaDup.appdata.xml.in:10
+msgid ""
+"Déjà Dup is a simple backup tool. It hides the complexity of backing up the "
+"Right Way (encrypted, off-site, and regular) and uses duplicity as the "
+"backend."
+msgstr ""
+"Безбедни сеф је једноставан алат за резерве. Скрива сложеност прављења "
+"резерви „Правог начина“ (шифроване, ван сајта, и редовне) и користи "
+"дуплирање као услужни програм."
+
+#: data/org.gnome.DejaDup.appdata.xml.in:12
+msgid ""
+"Support for local, remote, or cloud backup locations, such as Amazon S3 and "
+"Rackspace Cloud Files"
+msgstr ""
+"Подршка за месна, удаљена, или облачна места резерви, као што су Амазон С3 и "
+"Датотеке облака Ракспејса"
+
+#: data/org.gnome.DejaDup.appdata.xml.in:13
+msgid "Securely encrypts and compresses your data"
+msgstr "Безбедно шифрујте и запакујте ваше податке"
+
+#: data/org.gnome.DejaDup.appdata.xml.in:14
+msgid ""
+"Incrementally backs up, letting you restore from any particular backup"
+msgstr ""
+"Правите увећавајуће резерве, допуштајући вам да вратите из неке нарочите "
+"резерве"
+
+#: data/org.gnome.DejaDup.appdata.xml.in:15
+msgid "Schedules regular backups"
+msgstr "Испланирајте редовно прављење резрви"
+
+#: data/org.gnome.DejaDup.appdata.xml.in:16
+msgid "Integrates well into your GNOME desktop"
+msgstr "Лепо се уклапа у вашу Гномову радну површ"
+
+#. Translators: "Backups" is a noun
+#: data/org.gnome.DejaDup.desktop:5 deja-dup/main.vala:159
+#: deja-dup/Prompt.vala:78
+msgid "Backups"
+msgstr "Резерве"
+
+#: data/org.gnome.DejaDup.desktop:6
+msgid "Change your backup settings"
+msgstr "Измените подешавања резерве"
+
+#: data/org.gnome.DejaDup.desktop:8
+#: deja-dup/monitor/deja-dup-monitor.desktop.in:8
+msgid "deja-dup"
+msgstr ""
+
+#. Translators: Add whatever keywords you want in your language, separated by semicolons
+#. These keywords are used when searching for applications in dashes, etc.
+#: data/org.gnome.DejaDup.desktop:19
+msgid "déjà;deja;dup;"
+msgstr "резерва;сеф;умножак;déjà;deja;dup;"
+
+#: data/org.gnome.DejaDup.desktop:26
+msgid "Back Up"
+msgstr "Направи резерву"
+
+#: data/org.gnome.DejaDup.gschema.xml:6 deja-dup/Preferences.vala:285
 msgid "Folders to save"
 msgstr "Фасцикле за чување"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:2
+#: data/org.gnome.DejaDup.gschema.xml:7
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
@@ -33,13 +108,19 @@ msgid ""
 "by the user’s username and can be anywhere in the path. Relative entries are "
 "relative to the user’s home directory."
 msgstr ""
+"За директоријуме са овог списка биће направљена резерва. Резервисане "
+"вредности „$HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, "
+"$PUBLIC_SHARE, $TEMPLATES, $TRASH, и $VIDEOS“ се препознају као посебни "
+"корисникови директоријумии могу стајати на почетку дуже путање "
+"($HOME/subdir). Резервисана вредност „$USER“ се замењује корисниковим "
+"корисничким именом и може стајати било где у путањи. Релативни уноси се "
+"односе на корисникову личну фасциклу."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:3
-#: ../deja-dup/preferences/Preferences.vala:297
+#: data/org.gnome.DejaDup.gschema.xml:11 deja-dup/Preferences.vala:296
 msgid "Folders to ignore"
 msgstr "Фасцикле које ће бити занемарене"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:4
+#: data/org.gnome.DejaDup.gschema.xml:12
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
@@ -48,12 +129,19 @@ msgid ""
 "Reserved value $USER is replaced by the user’s username and can be anywhere "
 "in the path. Relative entries are relative to the user’s home directory."
 msgstr ""
+"За директоријуме са овог списка неће бити направљена резерва. Резервисане "
+"вредности „$HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, "
+"$PUBLIC_SHARE, $TEMPLATES, $TRASH, и $VIDEOS“ се препознају као посебни "
+"корисникови директоријумии могу стајати на почетку дуже путање "
+"($HOME/subdir). Резервисана вредност „$USER“ се замењује корисниковим "
+"корисничким именом и може стајати било где у путањи. Релативни уноси се "
+"односе на корисникову личну фасциклу."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:5
+#: data/org.gnome.DejaDup.gschema.xml:16
 msgid "Whether to request the root password"
 msgstr "Да ли ће бити тражена лозинка администратора"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:6
+#: data/org.gnome.DejaDup.gschema.xml:17
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
@@ -61,11 +149,11 @@ msgstr ""
 "Да ли ће бити тражена лозинка администратора приликом прављења резерве или "
 "приликом враћања у фасцикле система."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:7
+#: data/org.gnome.DejaDup.gschema.xml:21
 msgid "The last time Déjà Dup was run"
 msgstr "Време последњег покретања Безбедног сефа"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:8
+#: data/org.gnome.DejaDup.gschema.xml:22
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
@@ -73,11 +161,11 @@ msgstr ""
 "Време када је последњи пут Безбедни сеф успешно покренут. Ово време треба "
 "бити у запису ИСО 8601."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:9
+#: data/org.gnome.DejaDup.gschema.xml:26
 msgid "The last time Déjà Dup backed up"
 msgstr "Последњи пут када је Безбедни сеф направио резерве"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:10
+#: data/org.gnome.DejaDup.gschema.xml:27
 msgid ""
 "The last time Déjà Dup successfully completed a backup. This time should be "
 "in ISO 8601 format."
@@ -85,11 +173,11 @@ msgstr ""
 "Време када је последњи пут Безбедни сеф успешно обавио прављење резерве. Ово "
 "време треба бити у запису ИСО 8601."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:11
+#: data/org.gnome.DejaDup.gschema.xml:31
 msgid "The last time Déjà Dup restored"
 msgstr "Последњи пут када је Безбедни сеф повратио резерве"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:12
+#: data/org.gnome.DejaDup.gschema.xml:32
 msgid ""
 "The last time Déjà Dup successfully completed a restore. This time should be "
 "in ISO 8601 format."
@@ -97,32 +185,32 @@ msgstr ""
 "Време када је последњи пут Безбедни сеф успешно обавио враћање резерве. Ово "
 "време треба бити у запису ИСО 8601."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:13
+#: data/org.gnome.DejaDup.gschema.xml:36
 msgid "Whether to periodically back up"
 msgstr "Да ли ће резерве бити повремено прављене"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:14
+#: data/org.gnome.DejaDup.gschema.xml:37
 msgid "Whether to automatically back up on a regular schedule."
 msgstr ""
 "Да ли ће се вршити самостално прављење резерви на основу испланираног "
 "времена."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:15
+#: data/org.gnome.DejaDup.gschema.xml:41
 msgid "How often to periodically back up"
 msgstr "Колико често ће резерве бити повремено прављене"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:16
+#: data/org.gnome.DejaDup.gschema.xml:42
 msgid "The number of days between backups."
 msgstr "Број дана између прављења резерви."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:17
+#: data/org.gnome.DejaDup.gschema.xml:46
 msgid ""
 "The last time Déjà Dup checked whether it should prompt about backing up"
 msgstr ""
 "Последњи пут када је Безбедни сеф проверио да ли треба да понуди прављење "
 "резерве"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:18
+#: data/org.gnome.DejaDup.gschema.xml:47
 msgid ""
 "When a user logs in, the Déjà Dup monitor checks whether it should prompt "
 "about backing up. This is used to increase discoverability for users that "
@@ -134,14 +222,14 @@ msgstr ""
 "који не знају ништа о резервама. Ово време треба бити или „disabled“ "
 "(искључено) да би се искључила ова провера или у запису ИСО 8601."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:19
+#: data/org.gnome.DejaDup.gschema.xml:51
 msgid ""
 "The last time Déjà Dup checked whether it should prompt about your password"
 msgstr ""
 "Последњи пут када је Безбедни сеф проверио да ли треба да упита о вашој "
 "лозинки"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:20
+#: data/org.gnome.DejaDup.gschema.xml:52
 msgid ""
 "In order to prevent you from forgetting your passwords, Déjà Dup will "
 "occasionally notify you to confirm the password. This time should be either "
@@ -151,11 +239,11 @@ msgstr ""
 "обавестити о потврђивању лозинке. Ово време треба да буде „disabled“ за "
 "искључивање ове провере или у ИСО 8601 запису."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:21
+#: data/org.gnome.DejaDup.gschema.xml:56
 msgid "How long to keep backup files"
 msgstr "Колико дуго ће бити чуване датотеке резерве"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:22
+#: data/org.gnome.DejaDup.gschema.xml:57
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
@@ -164,11 +252,11 @@ msgstr ""
 "Број дана за чување резервних датотека на месту за резерве. Вредност 0 значи "
 "заувек. Ово је најмањи број дана; датотеке могу бити чуване дуже."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:23
+#: data/org.gnome.DejaDup.gschema.xml:61
 msgid "How long to wait between full backups"
 msgstr "Колико ће чекати између пуних резерви"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:24
+#: data/org.gnome.DejaDup.gschema.xml:62
 msgid ""
 "Déjà Dup needs to occasionally make fresh full backups. This is the number "
 "of days to wait between full backups."
@@ -176,11 +264,21 @@ msgstr ""
 "Безбедни сеф мора повремено да направи свежу потпуну резерву. Ово је број "
 "дана након којих ће направити потпуну резерву."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:25
+#: data/org.gnome.DejaDup.gschema.xml:66
+msgid "Whether to use metered networks"
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:67
+msgid ""
+"If false, Déjà Dup will refuse to run scheduled backups over metered network "
+"connections (like 4G)."
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:81
 msgid "Type of location to store backup"
 msgstr "Врста места за чување резерви"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:26
+#: data/org.gnome.DejaDup.gschema.xml:82
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
@@ -188,20 +286,20 @@ msgstr ""
 "Врста места за резерве. Ако је „auto“, биће изабрано основно у зависности "
 "које је доступно."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:27
+#: data/org.gnome.DejaDup.gschema.xml:94
 msgid "Amazon S3 Access Key ID"
 msgstr "ИБ кључа приступања Амазону С3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:28
+#: data/org.gnome.DejaDup.gschema.xml:95
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr ""
 "Ваш одредник кључа приступа Амазону С3. Ово важи као ваше С3 корисничко име."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:29
+#: data/org.gnome.DejaDup.gschema.xml:99
 msgid "The Amazon S3 bucket name to use"
 msgstr "Назив Амазон С3 ведра које ће бити коришћено"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:30
+#: data/org.gnome.DejaDup.gschema.xml:100
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
@@ -209,11 +307,12 @@ msgstr ""
 "У ком Амазон С3 ведру ће бити чуване датотеке. Ово не мора већ да постоји. "
 "Само правилне ниске назива домаћина су исправне."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:31
+#: data/org.gnome.DejaDup.gschema.xml:104
 msgid "The Amazon S3 folder"
 msgstr "Фасцикла Амазона С3"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:32
+#: data/org.gnome.DejaDup.gschema.xml:105
+#: data/org.gnome.DejaDup.gschema.xml:122
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
@@ -221,51 +320,51 @@ msgstr ""
 "Назив изборне фасцикле за чување датотека. Ова фасцикла биће направљена у "
 "изабраном ведру."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:33
+#: data/org.gnome.DejaDup.gschema.xml:111
 msgid "Google Cloud Storage Access Key ID"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:34
+#: data/org.gnome.DejaDup.gschema.xml:112
 msgid ""
 "Your Google Cloud Storage Access Key Identifier. This acts as your Google "
 "Cloud Storage username."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:35
+#: data/org.gnome.DejaDup.gschema.xml:116
 msgid "The Google Cloud Storage bucket name to use"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:36
+#: data/org.gnome.DejaDup.gschema.xml:117
 msgid ""
 "Which Google Cloud Storage bucket to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:37
+#: data/org.gnome.DejaDup.gschema.xml:121
 msgid "The Google Cloud Storage folder"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:38
+#: data/org.gnome.DejaDup.gschema.xml:128
 msgid "The email-address of your Google account"
-msgstr "Адреса ел. поште вашег Гугл налога"
+msgstr "Адреса е-поште вашег Гугл налога"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:39
+#: data/org.gnome.DejaDup.gschema.xml:129
 msgid "The email-address of your Google account."
-msgstr "Адреса ел. поште вашег Гугл налога."
+msgstr "Адреса е-поште вашег Гугл налога."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:40
+#: data/org.gnome.DejaDup.gschema.xml:133
 msgid "The folder where backups are stored"
 msgstr "Фасцикла складиштења резерви"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:41
+#: data/org.gnome.DejaDup.gschema.xml:134
 msgid "The folder hierarchy where backups are stored."
 msgstr "Хијерархија фасцикли у којима су смештене резерве."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:42
+#: data/org.gnome.DejaDup.gschema.xml:140
 msgid "The Rackspace Cloud Files container"
 msgstr "Садржалац облака датотека Ракспејса"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:43
+#: data/org.gnome.DejaDup.gschema.xml:141
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
@@ -273,73 +372,72 @@ msgstr ""
 "У ком садржаоцу облака датотека Ракспејса ће бити чуване датотеке. Ово не "
 "мора већ да постоји. Само правилне ниске назива домаћина су исправне."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:44
+#: data/org.gnome.DejaDup.gschema.xml:145
 msgid "Your Rackspace username"
 msgstr "Ваше корисничко име Ракспејса"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:45
+#: data/org.gnome.DejaDup.gschema.xml:146
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "Ово је ваше корисничко име за услугу облака датотека Ракспејса."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:46
+#: data/org.gnome.DejaDup.gschema.xml:152
 msgid "The OpenStack Swift container"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:47
+#: data/org.gnome.DejaDup.gschema.xml:153
 msgid ""
 "Which OpenStack Swift container to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:48
+#: data/org.gnome.DejaDup.gschema.xml:157
 msgid "Your OpenStack username"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:49
+#: data/org.gnome.DejaDup.gschema.xml:158
 msgid "This is your username for the OpenStack Swift service."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:50
+#: data/org.gnome.DejaDup.gschema.xml:162
 msgid "Your OpenStack tenant"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:51
+#: data/org.gnome.DejaDup.gschema.xml:163
 msgid "This is your tenant for the OpenStack Swift service."
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:52
+#: data/org.gnome.DejaDup.gschema.xml:167
 msgid "Authentication URL"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:53
+#: data/org.gnome.DejaDup.gschema.xml:168
 msgid ""
 "This is the Authentication URL, or keystone URL for the OpenStack service"
 msgstr ""
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:54
-#: ../deja-dup/AssistantRestore.vala:221
+#: data/org.gnome.DejaDup.gschema.xml:174 deja-dup/AssistantRestore.vala:221
 msgid "Backup location"
 msgstr "Место за резерву"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:55
+#: data/org.gnome.DejaDup.gschema.xml:175
 msgid "Location in which to hold the backup files."
 msgstr "Место на коме ће се чувати датотеке резерве."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:56
+#: data/org.gnome.DejaDup.gschema.xml:183
 msgid "Folder type"
 msgstr "Врста фасцикле"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:57
+#: data/org.gnome.DejaDup.gschema.xml:184
 msgid ""
 "Whether the backup location is a mounted external volume or a normal folder."
 msgstr ""
 "Да ли је место за резерве прикачени спољни волумен или обична фасцикла."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:58
+#: data/org.gnome.DejaDup.gschema.xml:188
 msgid "Relative path under the external volume"
 msgstr "Релативна путања под спољним волуменом"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:59
+#: data/org.gnome.DejaDup.gschema.xml:189
 msgid ""
 "If the backup location is on an external volume, this is the path of the "
 "folder on that volume."
@@ -347,11 +445,11 @@ msgstr ""
 "Ако је место за резерве на спољном волумену, ово је путања фасцикле на том "
 "волумену."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:60
+#: data/org.gnome.DejaDup.gschema.xml:193
 msgid "Unique ID of the external volume"
 msgstr "Јединствени ИБ спољног волумена"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:61
+#: data/org.gnome.DejaDup.gschema.xml:194
 msgid ""
 "If the backup location is on an external volume, this is its unique "
 "filesystem identifier."
@@ -359,11 +457,11 @@ msgstr ""
 "Ако је место за резерве на спољном волумену, ово је његов јединствени "
 "одредник система датотека."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:62
+#: data/org.gnome.DejaDup.gschema.xml:198
 msgid "Full name of the external volume"
 msgstr "Пун назив спољног волумена"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:63
+#: data/org.gnome.DejaDup.gschema.xml:199
 msgid ""
 "If the backup location is on an external volume, this is the volume’s longer "
 "descriptive name."
@@ -371,160 +469,120 @@ msgstr ""
 "Ако је место за резерве на спољном волумену, ово је дужи описни назив "
 "волумена."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:64
+#: data/org.gnome.DejaDup.gschema.xml:203
 msgid "Short name of the external volume"
 msgstr "Краћи назив спољног волумена"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:65
+#: data/org.gnome.DejaDup.gschema.xml:204
 msgid ""
 "If the backup location is on an external volume, this is the volume’s "
 "shorter name."
 msgstr ""
 "Ако је место за резерве на спољном волумену, ово је краћи назив волумена."
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:66
+#: data/org.gnome.DejaDup.gschema.xml:208
 msgid "Icon of the external volume"
 msgstr "Иконица спољног волумена"
 
-#: ../data/org.gnome.DejaDup.gschema.xml.in.h:67
+#: data/org.gnome.DejaDup.gschema.xml:209
 msgid ""
 "If the backup location is on an external volume, this is the volume’s icon."
 msgstr ""
 "Ако је место за резерве на спољном волумену, ово је иконица волумена."
 
-#. Translators: The name is a play on the French phrase "déjà vu" meaning
-#. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
-#. context is itself a reference to both the underlying command line tool
-#. "duplicity" and the act of duplicating data for backup.  As a whole, the
-#. phrase "Déjà Dup" may not be very translatable.
-#: ../deja-dup/deja-dup.appdata.xml.in.h:1 ../deja-dup/deja-dup.desktop.in.h:2
-#: ../deja-dup/main.vala:78 ../libdeja/CommonUtils.vala:138
-msgid "Déjà Dup Backup Tool"
-msgstr "Безбедни сеф алат за резерве"
-
-#: ../deja-dup/deja-dup.appdata.xml.in.h:2
-msgid "Keep your important documents safe from disaster"
-msgstr "Чувајте ваша важна документа на најбезбеднијем месту на планети"
-
-#: ../deja-dup/deja-dup.appdata.xml.in.h:3
-msgid ""
-"Déjà Dup is a simple backup tool. It hides the complexity of backing up the "
-"Right Way (encrypted, off-site, and regular) and uses duplicity as the "
-"backend."
-msgstr ""
-"Безбедни сеф је једноставан алат за резерве. Скрива сложеност прављења "
-"резерви „Правог начина“ (шифроване, ван сајта, и редовне) и користи "
-"дуплирање као услужни програм."
-
-#: ../deja-dup/deja-dup.appdata.xml.in.h:4
-msgid ""
-"Support for local, remote, or cloud backup locations, such as Amazon S3 and "
-"Rackspace Cloud Files"
-msgstr ""
-"Подршка за месна, удаљена, или облачна места резерви, као што су Амазон С3 и "
-"Датотеке облака Ракспејса"
-
-#: ../deja-dup/deja-dup.appdata.xml.in.h:5
-msgid "Securely encrypts and compresses your data"
-msgstr "Безбедно шифрујте и запакујте ваше податке"
-
-#: ../deja-dup/deja-dup.appdata.xml.in.h:6
-msgid ""
-"Incrementally backs up, letting you restore from any particular backup"
-msgstr ""
-"Правите увећавајуће резерве, допуштајући вам да вратите из неке нарочите "
-"резерве"
-
-#: ../deja-dup/deja-dup.appdata.xml.in.h:7
-msgid "Schedules regular backups"
-msgstr "Испланирајте редовно прављење резрви"
-
-#: ../deja-dup/deja-dup.appdata.xml.in.h:8
-msgid "Integrates well into your GNOME desktop"
-msgstr "Лепо се уклапа у вашу Гномову радну површ"
-
-#. Translators: "Backups" is a noun
-#: ../deja-dup/deja-dup.desktop.in.h:1
-#: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:1
-#: ../deja-dup/Prompt.vala:93 ../deja-dup/Prompt.vala:128
-#: ../deja-dup/StatusIcon.vala:134 ../deja-dup/StatusIcon.vala:233
-#: ../deja-dup/monitor/monitor.vala:115
-#: ../deja-dup/preferences/preferences-main.vala:42
-#: ../deja-dup/preferences/preferences-main.vala:121
-msgid "Backups"
-msgstr "Резерве"
-
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: ../deja-dup/monitor/deja-dup-monitor.desktop.in.h:1
-#: ../deja-dup/monitor/monitor.vala:315
+#: deja-dup/monitor/deja-dup-monitor.desktop.in:5
+#: deja-dup/monitor/monitor.vala:286
 msgid "Backup Monitor"
 msgstr "Пратилац резерви"
 
-#: ../deja-dup/monitor/deja-dup-monitor.desktop.in.h:2
+#: deja-dup/monitor/deja-dup-monitor.desktop.in:6
 msgid "Schedules backups at regular intervals"
 msgstr "Испланирајте прављење резерве у одређеним временским размацима"
 
-#: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:2
-msgid "Change your backup settings"
-msgstr "Измените подешавања резерве"
+#: deja-dup/ui/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr ""
 
-#. These keywords are used when searching for applications in dashes, etc.
-#: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:4
-msgid "déjà;deja;dup;"
-msgstr "резерва;сеф;умножак;déjà;deja;dup;"
+#: deja-dup/ui/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr ""
 
-#: ../deja-dup/preferences/deja-dup-preferences.desktop.in.h:5
-msgid "Back Up"
-msgstr "Направи резерву"
+#: deja-dup/ui/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Help"
+msgstr ""
 
-#: ../deja-dup/ui/restore-missing.ui.h:1
+#: deja-dup/ui/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Shortcuts"
+msgstr ""
+
+#: deja-dup/ui/menus.ui:7
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#: deja-dup/ui/menus.ui:11
+msgid "_Help"
+msgstr "По_моћ"
+
+#: deja-dup/ui/menus.ui:15
+msgid "_About"
+msgstr ""
+
+#: deja-dup/ui/menus.ui:19
+msgid "_Quit"
+msgstr "_Изађи"
+
+#: deja-dup/ui/restore-missing.ui:18
 msgid "Folder"
 msgstr "Фасцикла"
 
-#: ../deja-dup/ui/restore-missing.ui.h:2
-#: ../deja-dup/AssistantOperation.vala:177
+#: deja-dup/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:157
 msgid "Scanning…"
 msgstr "Прегледам…"
 
-#: ../deja-dup/nautilus/NautilusExtension.c:173
+#: deja-dup/nautilus/NautilusExtension.c:172
 msgid "Restore Missing Files…"
 msgstr "Поврати недостајуће датотеке…"
 
-#: ../deja-dup/nautilus/NautilusExtension.c:174
+#: deja-dup/nautilus/NautilusExtension.c:173
 msgid "Restore deleted files from backup"
 msgstr "Повратите обрисане датотеке из резерве"
 
-#: ../deja-dup/nautilus/NautilusExtension.c:216
+#: deja-dup/nautilus/NautilusExtension.c:215
 msgid "Revert to Previous Version…"
 msgid_plural "Revert to Previous Versions…"
 msgstr[0] "Поврати на претходно издање…"
 msgstr[1] "Поврати на претходна издања…"
 msgstr[2] "Поврати на претходна издања…"
 
-#: ../deja-dup/nautilus/NautilusExtension.c:220
+#: deja-dup/nautilus/NautilusExtension.c:219
 msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "Поврати датотеку из резерве"
 msgstr[1] "Поврати датотеке из резерве"
 msgstr[2] "Поврати датотеке из резерве"
 
-#: ../deja-dup/AssistantBackup.vala:31
+#: deja-dup/AssistantBackup.vala:31
 msgctxt "back up is verb"
 msgid "Back Up"
 msgstr "Направи резерву"
 
-#: ../deja-dup/AssistantBackup.vala:32
+#: deja-dup/AssistantBackup.vala:32
 msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "_Направи резерву"
 
-#: ../deja-dup/AssistantBackup.vala:49
+#: deja-dup/AssistantBackup.vala:49
 msgid "Creating the first backup.  This may take a while."
 msgstr "Правим прву резерву.  Ово може да потраје."
 
-#: ../deja-dup/AssistantBackup.vala:50
+#: deja-dup/AssistantBackup.vala:50
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -534,44 +592,44 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: ../deja-dup/AssistantBackup.vala:80
+#: deja-dup/AssistantBackup.vala:80
 msgid "Backing up:"
 msgstr "Правим резерву:"
 
-#: ../deja-dup/AssistantBackup.vala:89
+#: deja-dup/AssistantBackup.vala:89
 msgid "Backup Failed"
 msgstr "Прављење резерве није успело"
 
-#: ../deja-dup/AssistantBackup.vala:92
+#: deja-dup/AssistantBackup.vala:92
 msgid "Backup Finished"
 msgstr "Резерва је направљена"
 
 #. Also leave ourselves up if we just finished a restore test.
-#: ../deja-dup/AssistantBackup.vala:96
+#: deja-dup/AssistantBackup.vala:96
 msgid "Your files were successfully backed up and tested."
 msgstr "Успешно је направљена резерва ваших датотека и обављена проба."
 
-#: ../deja-dup/AssistantBackup.vala:103
+#: deja-dup/AssistantBackup.vala:103
 msgid "Backing Up…"
 msgstr "Правим резерву…"
 
-#: ../deja-dup/AssistantOperation.vala:176
+#: deja-dup/AssistantOperation.vala:156
 msgid "Scanning:"
 msgstr "Претражујем:"
 
-#: ../deja-dup/AssistantOperation.vala:259
+#: deja-dup/AssistantOperation.vala:239
 msgid "_Details"
 msgstr "_Детаљи"
 
-#: ../deja-dup/AssistantOperation.vala:307
+#: deja-dup/AssistantOperation.vala:287
 msgid "_Allow restoring without a password"
 msgstr "_Допусти враћање без лозинке"
 
-#: ../deja-dup/AssistantOperation.vala:313
+#: deja-dup/AssistantOperation.vala:293
 msgid "_Password-protect your backup"
 msgstr "_Заштити лозинком резерву"
 
-#: ../deja-dup/AssistantOperation.vala:325
+#: deja-dup/AssistantOperation.vala:305
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
@@ -579,26 +637,24 @@ msgstr ""
 "Биће вам потребна лозинка за враћање датотека. Можда би било боље да је "
 "забележите."
 
-#: ../deja-dup/AssistantOperation.vala:340
-#: ../deja-dup/AssistantOperation.vala:409
+#: deja-dup/AssistantOperation.vala:320 deja-dup/AssistantOperation.vala:389
 msgid "E_ncryption password"
 msgstr "_Лозинка шифровања"
 
-#: ../deja-dup/AssistantOperation.vala:357
+#: deja-dup/AssistantOperation.vala:337
 msgid "Confir_m password"
 msgstr "_Потврди лозинку"
 
-#: ../deja-dup/AssistantOperation.vala:370
-#: ../deja-dup/AssistantOperation.vala:418
+#: deja-dup/AssistantOperation.vala:350 deja-dup/AssistantOperation.vala:398
 msgid "_Show password"
 msgstr "Пр_икажи лозинку"
 
-#: ../deja-dup/AssistantOperation.vala:377
-#: ../deja-dup/MountOperationAssistant.vala:40
+#: deja-dup/AssistantOperation.vala:357
+#: deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Запамти лозинку"
 
-#: ../deja-dup/AssistantOperation.vala:396
+#: deja-dup/AssistantOperation.vala:376
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -608,15 +664,15 @@ msgstr ""
 "случају хитне потребе, унесите још једном вашу лозинку шифровања да обавите "
 "кратко испробавање враћања."
 
-#: ../deja-dup/AssistantOperation.vala:423
+#: deja-dup/AssistantOperation.vala:403
 msgid "Test every two _months"
 msgstr "Испробај свака два _месеца"
 
-#: ../deja-dup/AssistantOperation.vala:497
+#: deja-dup/AssistantOperation.vala:477
 msgid "Summary"
 msgstr "Извештај"
 
-#: ../deja-dup/AssistantOperation.vala:519
+#: deja-dup/AssistantOperation.vala:499
 msgid "Restore Test"
 msgstr "Проба враћања"
 
@@ -626,83 +682,83 @@ msgstr "Проба враћања"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: ../deja-dup/AssistantOperation.vala:595
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:702
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1081
+#: deja-dup/AssistantOperation.vala:575
+#: libdeja/tools/duplicity/DuplicityJob.vala:702
+#: libdeja/tools/duplicity/DuplicityJob.vala:1081
 msgid "Failed with an unknown error."
 msgstr "Неуспех са непознатом грешком."
 
-#: ../deja-dup/AssistantOperation.vala:792
+#: deja-dup/AssistantOperation.vala:772
 msgid "Require Password?"
 msgstr "Да тражим лозинку?"
 
-#: ../deja-dup/AssistantOperation.vala:794
+#: deja-dup/AssistantOperation.vala:774
 msgid "Encryption Password Needed"
 msgstr "Потребна је лозинка шифровања"
 
-#: ../deja-dup/AssistantOperation.vala:866
+#: deja-dup/AssistantOperation.vala:846
 msgid "Backup encryption password"
 msgstr "Лозинка шифровања резерве"
 
-#: ../deja-dup/AssistantRestore.vala:68
+#: deja-dup/AssistantRestore.vala:68
 msgid "Restore"
 msgstr "Поврати"
 
-#: ../deja-dup/AssistantRestore.vala:69
+#: deja-dup/AssistantRestore.vala:69
 msgid "_Restore"
 msgstr "_Поврати"
 
-#: ../deja-dup/AssistantRestore.vala:91
+#: deja-dup/AssistantRestore.vala:91
 msgid "_Backup location"
 msgstr "_Место за резерву"
 
-#: ../deja-dup/AssistantRestore.vala:124
+#: deja-dup/AssistantRestore.vala:124
 msgid "Restore From Where?"
 msgstr "Одакле да повратим?"
 
-#: ../deja-dup/AssistantRestore.vala:146
+#: deja-dup/AssistantRestore.vala:146
 msgid "_Date"
 msgstr "_Датум"
 
-#: ../deja-dup/AssistantRestore.vala:169
+#: deja-dup/AssistantRestore.vala:169
 msgid "Restore files to _original locations"
 msgstr "Врати датотеке на _првобитна места"
 
-#: ../deja-dup/AssistantRestore.vala:174
+#: deja-dup/AssistantRestore.vala:174
 msgid "Restore to _specific folder"
 msgstr "Врати у _посебну фасциклу"
 
-#: ../deja-dup/AssistantRestore.vala:184
+#: deja-dup/AssistantRestore.vala:184
 msgid "Choose destination for restored files"
 msgstr "Изаберите одредиште за повраћене датотеке"
 
-#: ../deja-dup/AssistantRestore.vala:188
+#: deja-dup/AssistantRestore.vala:188
 msgid "Restore _folder"
 msgstr "Врати _фасциклу"
 
-#: ../deja-dup/AssistantRestore.vala:229
+#: deja-dup/AssistantRestore.vala:229
 msgid "Restore date"
 msgstr "Датум враћања"
 
-#: ../deja-dup/AssistantRestore.vala:237
+#: deja-dup/AssistantRestore.vala:237
 msgid "Restore folder"
 msgstr "Фасцикла враћања"
 
-#: ../deja-dup/AssistantRestore.vala:263
+#: deja-dup/AssistantRestore.vala:263
 msgid "Checking for Backups…"
 msgstr "Вршим проверу за резервама…"
 
-#: ../deja-dup/AssistantRestore.vala:271
+#: deja-dup/AssistantRestore.vala:271
 msgid "Restore From When?"
 msgstr "Од када да повратим?"
 
-#: ../deja-dup/AssistantRestore.vala:279
+#: deja-dup/AssistantRestore.vala:279
 msgid "Restore to Where?"
 msgstr "Где да повратим?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: ../deja-dup/AssistantRestore.vala:306
+#: deja-dup/AssistantRestore.vala:306
 msgid "Restoring:"
 msgstr "Враћам:"
 
@@ -710,77 +766,77 @@ msgstr "Враћам:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: ../deja-dup/AssistantRestore.vala:348
+#: deja-dup/AssistantRestore.vala:348
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
 #. If we didn't see any dates...  Must not be any backups on the backend
-#: ../deja-dup/AssistantRestore.vala:361
+#: deja-dup/AssistantRestore.vala:361
 msgid "No backups to restore"
 msgstr "Нема резерви за враћање"
 
-#: ../deja-dup/AssistantRestore.vala:437
+#: deja-dup/AssistantRestore.vala:437
 msgid "Original location"
 msgstr "Првобитна путања"
 
-#: ../deja-dup/AssistantRestore.vala:448
+#: deja-dup/AssistantRestore.vala:448
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "Датотека за повраћај"
 msgstr[1] "Датотеке за повраћај"
 msgstr[2] "Датотеке за повраћај"
 
-#: ../deja-dup/AssistantRestore.vala:469
+#: deja-dup/AssistantRestore.vala:469
 msgid "Restore Failed"
 msgstr "Повраћај није успео"
 
-#: ../deja-dup/AssistantRestore.vala:471
+#: deja-dup/AssistantRestore.vala:471
 msgid "Restore Finished"
 msgstr "Повраћај је обављен"
 
 #. if it *is* visible, a header will be set already
-#: ../deja-dup/AssistantRestore.vala:474
+#: deja-dup/AssistantRestore.vala:474
 msgid "Your files were successfully restored."
 msgstr "Ваше датотеке су успешно враћене."
 
-#: ../deja-dup/AssistantRestore.vala:477
+#: deja-dup/AssistantRestore.vala:477
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Ваша датотека је успешно враћена."
 msgstr[1] "Ваше датотеке су успешно враћене."
 msgstr[2] "Ваше датотеке су успешно враћене."
 
-#: ../deja-dup/AssistantRestore.vala:484 ../libdeja/Operation.vala:63
+#: deja-dup/AssistantRestore.vala:484 libdeja/Operation.vala:63
 msgid "Restoring…"
 msgstr "Враћам…"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:199
+#: deja-dup/AssistantRestoreMissing.vala:181
 msgid "File"
 msgstr "Датотека"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:200
+#: deja-dup/AssistantRestoreMissing.vala:182
 msgid "Last seen"
 msgstr "Виђено пре"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:215
+#: deja-dup/AssistantRestoreMissing.vala:193
 msgid "Restore which Files?"
 msgstr "Које датотеке да вратим?"
 
 #. Hours
-#: ../deja-dup/AssistantRestoreMissing.vala:346
+#: deja-dup/AssistantRestoreMissing.vala:324
 msgid "Scanning for files from up to a day ago…"
 msgstr "Претражујем датотеке од почетка до пре једног дана…"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:349
+#: deja-dup/AssistantRestoreMissing.vala:327
 msgid "Scanning for files from up to a week ago…"
 msgstr "Претражујем датотеке од почетка до пре једне недеље…"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:352
+#: deja-dup/AssistantRestoreMissing.vala:330
 msgid "Scanning for files from up to a month ago…"
 msgstr "Претражујем датотеке од почетка до пре једног месеца…"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:357
+#: deja-dup/AssistantRestoreMissing.vala:335
 #, c-format
 msgid "Scanning for files from about a month ago…"
 msgid_plural "Scanning for files from about %d months ago…"
@@ -788,7 +844,7 @@ msgstr[0] "Претражујем датотеке од пре %d месеца�
 msgstr[1] "Претражујем датотеке од пре %d месеца…"
 msgstr[2] "Претражујем датотеке од пре %d месеци…"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:364
+#: deja-dup/AssistantRestoreMissing.vala:342
 #, c-format
 msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
@@ -796,145 +852,199 @@ msgstr[0] "Претражујем датотеке од пре %d године�
 msgstr[1] "Претражујем датотеке од пре %d године…"
 msgstr[2] "Претражујем датотеке од пре %d година…"
 
-#: ../deja-dup/AssistantRestoreMissing.vala:454
+#: deja-dup/AssistantRestoreMissing.vala:432
 msgid "Scanning finished"
 msgstr "Претраживање је завршено"
 
-#: ../deja-dup/Assistant.vala:38 ../deja-dup/widgets/ConfigLocationFile.vala:54
+#: deja-dup/Assistant.vala:38 deja-dup/widgets/ConfigLocationFile.vala:54
 msgid "_OK"
 msgstr "_У реду"
 
-#: ../deja-dup/Assistant.vala:299
+#: deja-dup/Assistant.vala:296
 msgid "_Forward"
 msgstr "На_пред"
 
-#: ../deja-dup/Assistant.vala:317
+#: deja-dup/Assistant.vala:314
 msgid "Co_ntinue"
 msgstr "_Настави"
 
-#: ../deja-dup/Assistant.vala:323
+#: deja-dup/Assistant.vala:320
 msgctxt "verb"
 msgid "_Test"
 msgstr "_Испробај"
 
-#: ../deja-dup/Assistant.vala:352 ../deja-dup/widgets/ConfigList.vala:255
-#: ../deja-dup/widgets/ConfigLocationFile.vala:53
+#: deja-dup/Assistant.vala:349 deja-dup/widgets/ConfigList.vala:255
+#: deja-dup/widgets/ConfigLocationFile.vala:53
 msgid "_Cancel"
 msgstr "_Откажи"
 
-#: ../deja-dup/Assistant.vala:354
+#: deja-dup/Assistant.vala:351
 msgid "_Close"
 msgstr "_Затвори"
 
-#: ../deja-dup/Assistant.vala:358
+#: deja-dup/Assistant.vala:355
 msgid "_Back"
 msgstr "На_зад"
 
-#: ../deja-dup/Assistant.vala:360 ../deja-dup/StatusIcon.vala:93
+#: deja-dup/Assistant.vala:357 deja-dup/StatusIcon.vala:70
 msgid "_Resume Later"
 msgstr "Настави _касније"
 
-#: ../deja-dup/main.vala:34 ../deja-dup/monitor/monitor.vala:36
-#: ../deja-dup/preferences/preferences-main.vala:85
+#: deja-dup/main.vala:30 deja-dup/monitor/monitor.vala:34
 msgid "Show version"
 msgstr "Приказује издање"
 
-#: ../deja-dup/main.vala:35
+#: deja-dup/main.vala:31
 msgid "Restore given files"
 msgstr "Враћа дате датотеке"
 
-#: ../deja-dup/main.vala:36
+#: deja-dup/main.vala:32
 msgid "Immediately start a backup"
 msgstr "Истог тренутка започиње прављење резерве"
 
-#: ../deja-dup/main.vala:38
+#: deja-dup/main.vala:34
 msgid "Restore deleted files"
 msgstr "Враћа обрисане датотеке"
 
-#: ../deja-dup/main.vala:55
+#: deja-dup/main.vala:80 deja-dup/main.vala:95 deja-dup/main.vala:121
+msgid "An operation is already in progress"
+msgstr ""
+
+#: deja-dup/main.vala:100
 msgid "No directory provided"
 msgstr "Није наведен директоријум"
 
-#: ../deja-dup/main.vala:60
+#: deja-dup/main.vala:104
 msgid "Only one directory can be shown at once"
 msgstr "Само један директоријум може бити приказан у једном тренутку"
 
-#: ../deja-dup/main.vala:81
-msgid "[FILES…]"
-msgstr "[ДАТОТЕКЕ…]"
-
-#: ../deja-dup/main.vala:82
-msgid "DIRECTORY"
-msgstr "ДИРЕКТОРИЈУМ"
-
-#. Translators: Wrap this to 80 characters per line if you can, as I have for English
-#: ../deja-dup/main.vala:86
-msgid ""
-"Déjà Dup is a simple backup tool.  It hides the complexity of backing up\n"
-"the Right Way (encrypted, off-site, and regular) and uses duplicity as\n"
-"the backend."
-msgstr ""
-"Безбедни сеф је једноставан алат за резерве.  Скрива сложеност прављења "
-"резерви\n"
-"Правог начина (шифроване, ван сајта, и редовне) и користи дуплирка као\n"
-"услужника."
-
-#: ../deja-dup/main.vala:137
+#: deja-dup/main.vala:110
 msgid "Directory does not exist"
 msgstr ""
 
-#: ../deja-dup/main.vala:141
+#: deja-dup/main.vala:114
 msgid "You must provide a directory, not a file"
 msgstr "Морате да доставите директоријум, а не датотеку"
 
-#: ../deja-dup/main.vala:153
-msgid "You must specify a mode"
-msgstr "Морате да наведете режим"
+#: deja-dup/main.vala:128
+msgid "Scheduled backup delayed"
+msgstr "Заказано прављење резерве је одложено"
 
-#: ../deja-dup/MountOperationAssistant.vala:36
+#: deja-dup/main.vala:221
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Rade Jekic https://launchpad.net/~jekic-va\n"
+"  Љубиша Радовановић https://launchpad.net/~prevod\n"
+"  Марко М. Костић https://launchpad.net/~marko-m-kostic\n"
+"  Мирослав Николић https://launchpad.net/~lipek"
+
+#: deja-dup/MountOperationAssistant.vala:36
 msgid "Connect to Server"
 msgstr "Повежи се са сервером"
 
-#: ../deja-dup/MountOperationAssistant.vala:37
-#: ../deja-dup/widgets/ConfigLocationDAV.vala:49
-#: ../deja-dup/widgets/ConfigLocationFTP.vala:45
-#: ../deja-dup/widgets/ConfigLocationRackspace.vala:31
-#: ../deja-dup/widgets/ConfigLocationSMB.vala:37
-#: ../deja-dup/widgets/ConfigLocationSSH.vala:40
+#: deja-dup/MountOperationAssistant.vala:37
+#: deja-dup/widgets/ConfigLocationDAV.vala:49
+#: deja-dup/widgets/ConfigLocationFTP.vala:45
+#: deja-dup/widgets/ConfigLocationRackspace.vala:31
+#: deja-dup/widgets/ConfigLocationSMB.vala:37
+#: deja-dup/widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "_Корисник"
 
-#: ../deja-dup/MountOperationAssistant.vala:38
-#: ../libdeja/BackendGDrive.vala:160
+#: deja-dup/MountOperationAssistant.vala:38 libdeja/BackendGDrive.vala:160
 msgid "_Password"
 msgstr "_Лозинка"
 
-#: ../deja-dup/MountOperationAssistant.vala:39
+#: deja-dup/MountOperationAssistant.vala:39
 msgid "S_how password"
 msgstr "_Прикажи лозинку"
 
-#: ../deja-dup/MountOperationAssistant.vala:80
+#: deja-dup/MountOperationAssistant.vala:81
 msgid "Location not available"
 msgstr "Место није доступно"
 
-#: ../deja-dup/MountOperationAssistant.vala:166
+#: deja-dup/MountOperationAssistant.vala:172
 msgid "Connect _anonymously"
 msgstr "Повежи се _анонимно"
 
-#: ../deja-dup/MountOperationAssistant.vala:170
+#: deja-dup/MountOperationAssistant.vala:176
 msgid "Connect as u_ser"
 msgstr "Повежи се као _корисник"
 
 #. Translators: this is a Windows networking domain
-#: ../deja-dup/MountOperationAssistant.vala:213
+#: deja-dup/MountOperationAssistant.vala:219
 msgid "_Domain"
 msgstr "_Домен"
 
-#: ../deja-dup/Prompt.vala:37
+#: deja-dup/Preferences.vala:97 deja-dup/Preferences.vala:249
+msgid "_Back Up Now…"
+msgstr "_Сада направи резерву…"
+
+#: deja-dup/Preferences.vala:99 deja-dup/Preferences.vala:203
+msgid "_Restore…"
+msgstr "_Поврати…"
+
+#: deja-dup/Preferences.vala:116
+msgid "Could not install"
+msgstr ""
+
+#: deja-dup/Preferences.vala:150
+msgid "Categories"
+msgstr "Категорије"
+
+#: deja-dup/Preferences.vala:203
+msgid "_Install…"
+msgstr ""
+
+#: deja-dup/Preferences.vala:249
+#: deja-dup/widgets/ConfigLabelDescription.vala:59
+#: deja-dup/widgets/ConfigLabelDescription.vala:83
+msgid "Install…"
+msgstr ""
+
+#: deja-dup/Preferences.vala:274
+msgid "Overview"
+msgstr "Преглед"
+
+#: deja-dup/Preferences.vala:307
+msgid "_Storage location"
+msgstr "Место _смештаја"
+
+#. Translators: storage as in "where to store the backup"
+#: deja-dup/Preferences.vala:324
+msgid "Storage location"
+msgstr "Место смештаја"
+
+#: deja-dup/Preferences.vala:348
+msgid "_Automatic backup"
+msgstr "Сам _направи реерву"
+
+#. translators: as in "Every day"
+#: deja-dup/Preferences.vala:360
+msgid "_Every"
+msgstr "_Сваког"
+
+#: deja-dup/Preferences.vala:370
+msgctxt "verb"
+msgid "_Keep"
+msgstr "_Задржи"
+
+#: deja-dup/Preferences.vala:377
+msgid ""
+"Old backups will be deleted earlier if the storage location is low on space."
+msgstr ""
+"Старе резерве ће бити обрисане ако на месту смештаја нема довољно простора."
+
+#: deja-dup/Preferences.vala:387
+msgid "Scheduling"
+msgstr "Планирање"
+
+#: deja-dup/Prompt.vala:37
 msgid "Keep your files safe by backing up regularly"
 msgstr "Очувајте ваше датотеке редовним прављењем резерви"
 
-#: ../deja-dup/Prompt.vala:42
+#: deja-dup/Prompt.vala:42
 msgid ""
 "Important documents, data, and settings can be protected by storing them in "
 "a backup. In the case of a disaster, you would be able to recover them from "
@@ -944,148 +1054,69 @@ msgstr ""
 "резервама. У случају несреће, бићете у могућности да их спасите из тих "
 "резерви."
 
-#: ../deja-dup/Prompt.vala:48
+#: deja-dup/Prompt.vala:47
 msgid "_Don't Show Again"
 msgstr "_Не приказуј поново"
 
-#: ../deja-dup/Prompt.vala:50
-msgid "Don't Show Again"
-msgstr "Не приказуј поново"
-
-#: ../deja-dup/Prompt.vala:56
+#: deja-dup/Prompt.vala:55
 msgid "_Open Backup Settings"
 msgstr "_Отвори подешавања резерве"
 
-#: ../deja-dup/Prompt.vala:58
-msgid "Open Backup Settings"
-msgstr "Отвори подешавања резерве"
-
-#: ../deja-dup/StatusIcon.vala:94
+#: deja-dup/StatusIcon.vala:71
 msgid "_Skip Backup"
 msgstr "_Прескочи резерву"
 
-#: ../deja-dup/StatusIcon.vala:125
+#: deja-dup/StatusIcon.vala:92
 msgid "Backup completed"
 msgstr "Прављење резерве је обављено"
 
-#: ../deja-dup/StatusIcon.vala:129
+#: deja-dup/StatusIcon.vala:97
 msgid "Backup finished"
 msgstr "Резерва је направљена"
 
-#: ../deja-dup/StatusIcon.vala:130
+#: deja-dup/StatusIcon.vala:98
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr ""
 "Нису успешно направљене резерве свих датотека.  Погледајте прозорче за више "
 "појединости."
 
-#: ../deja-dup/StatusIcon.vala:234
+#: deja-dup/StatusIcon.vala:144
 msgid "Starting scheduled backup"
 msgstr "Покрећем заказано прављење резерве"
 
-#: ../deja-dup/StatusIcon.vala:237
-msgid "Show Progress"
-msgstr "Прикажи напредовање"
-
-#: ../deja-dup/StatusIcon.vala:275
+#: deja-dup/StatusIcon.vala:177
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% је обављено"
 
-#: ../deja-dup/StatusIcon.vala:288
+#: deja-dup/StatusIcon.vala:190
 msgid "Show _Progress"
 msgstr "Прикажи _напредовање"
 
-#: ../deja-dup/monitor/monitor.vala:161
-msgid "Scheduled backup delayed"
-msgstr "Заказано прављење резерве је одложено"
+#: deja-dup/monitor/monitor.vala:81 libdeja/BackendGDrive.vala:51
+#: libdeja/BackendRackspace.vala:49 libdeja/BackendS3.vala:59
+msgid "Backup will begin when a network connection becomes available."
+msgstr "Стварање резерве ће започети када мрежна веза постане доступна."
 
-#: ../deja-dup/preferences/Preferences.vala:91
-#: ../deja-dup/preferences/Preferences.vala:243
-msgid "_Back Up Now…"
-msgstr "_Сада направи резерву…"
-
-#: ../deja-dup/preferences/Preferences.vala:93
-#: ../deja-dup/preferences/Preferences.vala:197
-msgid "_Restore…"
-msgstr "_Поврати…"
-
-#: ../deja-dup/preferences/Preferences.vala:110
-msgid "Could not install"
-msgstr ""
-
-#: ../deja-dup/preferences/Preferences.vala:144
-msgid "Categories"
-msgstr "Категорије"
-
-#: ../deja-dup/preferences/Preferences.vala:197
-msgid "_Install…"
-msgstr ""
-
-#: ../deja-dup/preferences/Preferences.vala:243
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:59
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:83
-msgid "Install…"
-msgstr ""
-
-#: ../deja-dup/preferences/Preferences.vala:275
-msgid "Overview"
-msgstr "Преглед"
-
-#: ../deja-dup/preferences/Preferences.vala:308
-msgid "_Storage location"
-msgstr "Место _смештаја"
-
-#. Translators: storage as in "where to store the backup"
-#: ../deja-dup/preferences/Preferences.vala:325
-msgid "Storage location"
-msgstr "Место смештаја"
-
-#: ../deja-dup/preferences/Preferences.vala:349
-msgid "_Automatic backup"
-msgstr "Сам _направи реерву"
-
-#. translators: as in "Every day"
-#: ../deja-dup/preferences/Preferences.vala:361
-msgid "_Every"
-msgstr "_Сваког"
-
-#: ../deja-dup/preferences/Preferences.vala:371
-msgctxt "verb"
-msgid "_Keep"
-msgstr "_Задржи"
-
-#: ../deja-dup/preferences/Preferences.vala:378
+#: deja-dup/monitor/monitor.vala:84
 msgid ""
-"Old backups will be deleted earlier if the storage location is low on space."
+"Backup will begin when an unmetered network connection becomes available."
 msgstr ""
-"Старе резерве ће бити обрисане ако на месту смештаја нема довољно простора."
 
-#: ../deja-dup/preferences/Preferences.vala:388
-msgid "Scheduling"
-msgstr "Планирање"
-
-#: ../deja-dup/preferences/preferences-main.vala:71
-msgid "_Help"
-msgstr "По_моћ"
-
-#: ../deja-dup/preferences/preferences-main.vala:73
-msgid "_Quit"
-msgstr "_Изађи"
-
-#: ../deja-dup/widgets/ConfigDelete.vala:40
+#: deja-dup/widgets/ConfigDelete.vala:40
 msgid "At least six months"
 msgstr "Најмање шест месеци"
 
-#: ../deja-dup/widgets/ConfigDelete.vala:41
+#: deja-dup/widgets/ConfigDelete.vala:41
 msgid "At least a year"
 msgstr "Најмање једну годину"
 
-#: ../deja-dup/widgets/ConfigDelete.vala:42
+#: deja-dup/widgets/ConfigDelete.vala:42
 msgid "Forever"
 msgstr "Заувек"
 
-#: ../deja-dup/widgets/ConfigDelete.vala:89
+#: deja-dup/widgets/ConfigDelete.vala:89
 #, c-format
 msgid "At least %d day"
 msgid_plural "At least %d days"
@@ -1094,15 +1125,15 @@ msgstr[1] "Најмање %d дана"
 msgstr[2] "Најмање %d дана"
 
 #. Check for some really simple/common friendly names
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:66
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:66
 msgid "Next backup is today."
 msgstr "Следеће прављење резерве је данас."
 
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:68
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:68
 msgid "Next backup is tomorrow."
 msgstr "Следеће прављење резерве је сутра."
 
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:76
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:76
 #, c-format
 msgid "Next backup is %d day from now."
 msgid_plural "Next backup is %d days from now."
@@ -1111,15 +1142,15 @@ msgstr[1] "Следеће прављење резерве је за %d дана 
 msgstr[2] "Следеће прављење резерве је за %d дана од сада."
 
 #. Check for some really simple/common friendly names
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:93
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:93
 msgid "Last backup was today."
 msgstr "Последња резерва је направљена данас."
 
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:95
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:95
 msgid "Last backup was yesterday."
 msgstr "Последња резерва је направљена јуче."
 
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:103
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:103
 #, c-format
 msgid "Last backup was %d day ago."
 msgid_plural "Last backup was %d days ago."
@@ -1127,15 +1158,15 @@ msgstr[0] "Последња резерва је направљена пре %d �
 msgstr[1] "Последња резерва је направљена пре %d дана."
 msgstr[2] "Последња резерва је направљена пре %d дана."
 
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:113
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:113
 msgid "No recent backups."
 msgstr "Нема скорашњих резерви."
 
-#: ../deja-dup/widgets/ConfigLabelBackupDate.vala:122
+#: deja-dup/widgets/ConfigLabelBackupDate.vala:122
 msgid "No backup scheduled."
 msgstr "Нема испланираног прављења резерве."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:60
+#: deja-dup/widgets/ConfigLabelDescription.vala:60
 #, c-format
 msgid ""
 "You can restore existing backups after you first install some necessary "
@@ -1144,42 +1175,44 @@ msgstr ""
 
 #. This here encodes a lot of outside GUI information in this widget,
 #. but it's a very special case thing.
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:69
+#: deja-dup/widgets/ConfigLabelDescription.vala:69
 msgid "Restore…"
 msgstr "Поврати…"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:71
+#: deja-dup/widgets/ConfigLabelDescription.vala:71
 #, c-format
 msgid "You may use the %s button to browse for existing backups."
 msgstr "Можете да користите дугме „%s“ да разгледате постојеће резерве."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:73
+#: deja-dup/widgets/ConfigLabelDescription.vala:73
 msgid "Files"
-msgstr ""
+msgstr "Датотеке"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:75
+#: deja-dup/widgets/ConfigLabelDescription.vala:75
 msgid "Caja"
-msgstr ""
+msgstr "Цаја"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:76
+#: deja-dup/widgets/ConfigLabelDescription.vala:76
 #, c-format
 msgid ""
 "You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
 msgstr ""
+"Можете да повратите читаву резерву дугметом „%s“ или користите „%s“ да "
+"повратите појединачне датотеке илида вратите оне које недостају."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:84
+#: deja-dup/widgets/ConfigLabelDescription.vala:84
 #, c-format
 msgid ""
 "You can create a backup after you first install some necessary software by "
 "clicking the %s button."
 msgstr ""
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:90
+#: deja-dup/widgets/ConfigLabelDescription.vala:90
 msgid "Back Up Now…"
 msgstr "Сада направи резерву…"
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:91
+#: deja-dup/widgets/ConfigLabelDescription.vala:91
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
@@ -1188,15 +1221,15 @@ msgstr ""
 "Требало би да <a href=''>укључите</a> самостално стварање резерве или да "
 "користите дугме „%s“ да сада започнете прављење једне."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:97
+#: deja-dup/widgets/ConfigLabelDescription.vala:97
 msgid "A backup automatically starts every day."
 msgstr "Прављење резерве само почиње сваког дана."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:99
+#: deja-dup/widgets/ConfigLabelDescription.vala:99
 msgid "A backup automatically starts every week."
 msgstr "Прављење резерве само почиње сваке седмице."
 
-#: ../deja-dup/widgets/ConfigLabelDescription.vala:102
+#: deja-dup/widgets/ConfigLabelDescription.vala:102
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1204,147 +1237,145 @@ msgstr[0] "Прављење резерве само почиње сваког %d
 msgstr[1] "Прављење резерве само почиње свака %d дана."
 msgstr[2] "Прављење резерве само почиње сваких %d дана."
 
-#: ../deja-dup/widgets/ConfigList.vala:178
-#: ../deja-dup/widgets/ConfigList.vala:256
+#: deja-dup/widgets/ConfigList.vala:178 deja-dup/widgets/ConfigList.vala:256
 msgid "_Add"
 msgstr "_Додај"
 
-#: ../deja-dup/widgets/ConfigList.vala:179
+#: deja-dup/widgets/ConfigList.vala:179
 msgid "Add"
 msgstr "Додајте"
 
-#: ../deja-dup/widgets/ConfigList.vala:187
+#: deja-dup/widgets/ConfigList.vala:187
 msgid "_Remove"
 msgstr "_Уклони"
 
-#: ../deja-dup/widgets/ConfigList.vala:188
+#: deja-dup/widgets/ConfigList.vala:188
 msgid "Remove"
 msgstr "Уклоните"
 
-#: ../deja-dup/widgets/ConfigList.vala:252
+#: deja-dup/widgets/ConfigList.vala:252
 msgid "Choose folders"
 msgstr "Изаберите фасцикле"
 
 #. Now insert remote servers
-#: ../deja-dup/widgets/ConfigLocation.vala:124
+#: deja-dup/widgets/ConfigLocation.vala:124
 msgid "SSH"
 msgstr "Безбедна шкољка"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:126
+#: deja-dup/widgets/ConfigLocation.vala:126
 msgid "Windows Share"
 msgstr "Виндоуз дељење"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:128
+#: deja-dup/widgets/ConfigLocation.vala:128
 msgid "FTP"
 msgstr "ФТП"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:130
+#: deja-dup/widgets/ConfigLocation.vala:130
 msgid "WebDAV"
 msgstr "ВебДАВ"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:133
+#: deja-dup/widgets/ConfigLocation.vala:133
 msgid "Custom Location"
 msgstr "Произвољна путања"
 
 #. And a local folder option
-#: ../deja-dup/widgets/ConfigLocation.vala:139
+#: deja-dup/widgets/ConfigLocation.vala:139
 msgid "Local Folder"
 msgstr "Месна фасцикла"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:182 ../libdeja/BackendS3.vala:122
+#: deja-dup/widgets/ConfigLocation.vala:182 libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Амазон С3"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:190
+#: deja-dup/widgets/ConfigLocation.vala:190
 msgid "Google Cloud Storage"
 msgstr ""
 
-#: ../deja-dup/widgets/ConfigLocation.vala:198
+#: deja-dup/widgets/ConfigLocation.vala:198
 msgid "Google Drive"
 msgstr "Гугл диск"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:210 ../libdeja/BackendU1.vala:45
+#: deja-dup/widgets/ConfigLocation.vala:210 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Убунту један"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:218
-#: ../libdeja/BackendRackspace.vala:69
+#: deja-dup/widgets/ConfigLocation.vala:218 libdeja/BackendRackspace.vala:69
 msgid "Rackspace Cloud Files"
 msgstr "Облак датотека Ракспејса"
 
-#: ../deja-dup/widgets/ConfigLocation.vala:226
+#: deja-dup/widgets/ConfigLocation.vala:226
 msgid "OpenStack Swift"
 msgstr ""
 
-#: ../deja-dup/widgets/ConfigLocationCustom.vala:34
+#: deja-dup/widgets/ConfigLocationCustom.vala:34
 msgid "_URI"
 msgstr "_Адреса"
 
-#: ../deja-dup/widgets/ConfigLocationDAV.vala:31
-#: ../deja-dup/widgets/ConfigLocationFTP.vala:32
-#: ../deja-dup/widgets/ConfigLocationSMB.vala:31
-#: ../deja-dup/widgets/ConfigLocationSSH.vala:31
+#: deja-dup/widgets/ConfigLocationDAV.vala:31
+#: deja-dup/widgets/ConfigLocationFTP.vala:32
+#: deja-dup/widgets/ConfigLocationSMB.vala:31
+#: deja-dup/widgets/ConfigLocationSSH.vala:31
 msgid "_Server"
 msgstr "_Сервер"
 
-#: ../deja-dup/widgets/ConfigLocationDAV.vala:38
+#: deja-dup/widgets/ConfigLocationDAV.vala:38
 msgid "Use secure connection (_HTTPS)"
 msgstr "Користи безбедну везу (_ХТТПС)"
 
-#: ../deja-dup/widgets/ConfigLocationDAV.vala:43
-#: ../deja-dup/widgets/ConfigLocationFTP.vala:35
-#: ../deja-dup/widgets/ConfigLocationSSH.vala:34
+#: deja-dup/widgets/ConfigLocationDAV.vala:43
+#: deja-dup/widgets/ConfigLocationFTP.vala:35
+#: deja-dup/widgets/ConfigLocationSSH.vala:34
 msgid "_Port"
 msgstr "_Прикључник"
 
-#: ../deja-dup/widgets/ConfigLocationDAV.vala:46
-#: ../deja-dup/widgets/ConfigLocationFTP.vala:38
-#: ../deja-dup/widgets/ConfigLocationFile.vala:45
-#: ../deja-dup/widgets/ConfigLocationGDrive.vala:33
-#: ../deja-dup/widgets/ConfigLocationS3.vala:33
-#: ../deja-dup/widgets/ConfigLocationSMB.vala:34
-#: ../deja-dup/widgets/ConfigLocationSSH.vala:37
-#: ../deja-dup/widgets/ConfigLocationVolume.vala:33
+#: deja-dup/widgets/ConfigLocationDAV.vala:46
+#: deja-dup/widgets/ConfigLocationFTP.vala:38
+#: deja-dup/widgets/ConfigLocationFile.vala:45
+#: deja-dup/widgets/ConfigLocationGDrive.vala:33
+#: deja-dup/widgets/ConfigLocationS3.vala:33
+#: deja-dup/widgets/ConfigLocationSMB.vala:34
+#: deja-dup/widgets/ConfigLocationSSH.vala:37
+#: deja-dup/widgets/ConfigLocationVolume.vala:33
 msgid "_Folder"
 msgstr "_Фасцикла"
 
-#: ../deja-dup/widgets/ConfigLocationFile.vala:39
+#: deja-dup/widgets/ConfigLocationFile.vala:39
 msgid "_Choose Folder…"
 msgstr "_Изабери фасциклу…"
 
-#: ../deja-dup/widgets/ConfigLocationFile.vala:50
+#: deja-dup/widgets/ConfigLocationFile.vala:50
 msgid "Choose Folder"
 msgstr "Изаберите фасциклу"
 
-#: ../deja-dup/widgets/ConfigLocationGDrive.vala:31
+#: deja-dup/widgets/ConfigLocationGDrive.vala:31
 msgid "_Email address"
-msgstr "Адреса _ел. поште"
+msgstr "Адреса _е-поште"
 
-#: ../deja-dup/widgets/ConfigLocationRackspace.vala:33
+#: deja-dup/widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
 msgstr "_Садржалац"
 
-#: ../deja-dup/widgets/ConfigLocationS3.vala:31
+#: deja-dup/widgets/ConfigLocationS3.vala:31
 msgid "S3 Access Key I_D"
 msgstr "ИБ С3 кључа _приступа"
 
-#: ../deja-dup/widgets/ConfigLocationSMB.vala:40
+#: deja-dup/widgets/ConfigLocationSMB.vala:40
 msgid "_Domain Name"
 msgstr "_Назив домена"
 
-#: ../deja-dup/widgets/ConfigLocationU1.vala:32 ../libdeja/BackendU1.vala:50
+#: deja-dup/widgets/ConfigLocationU1.vala:32 libdeja/BackendU1.vala:50
 msgid "Ubuntu One has shut down.  Please choose another storage location."
 msgstr "Убунту Један је угашен.  Изаберите неко друго место за складиштење."
 
-#: ../deja-dup/widgets/ConfigPeriod.vala:36
+#: deja-dup/widgets/ConfigPeriod.vala:36
 msgid "Day"
 msgstr "Дан"
 
-#: ../deja-dup/widgets/ConfigPeriod.vala:37
+#: deja-dup/widgets/ConfigPeriod.vala:37
 msgid "Week"
 msgstr "Недеља"
 
-#: ../deja-dup/widgets/ConfigPeriod.vala:82
+#: deja-dup/widgets/ConfigPeriod.vala:82
 #, c-format
 msgid "%d day"
 msgid_plural "%d days"
@@ -1352,72 +1383,67 @@ msgstr[0] "%d дан"
 msgstr[1] "%d дана"
 msgstr[2] "%d дана"
 
-#: ../deja-dup/widgets/WidgetUtils.vala:33
+#: deja-dup/widgets/WidgetUtils.vala:29
 #, c-format
 msgid "Could not display %s"
 msgstr "Не могу да прикажем „%s“"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: ../libdeja/BackendFile.vala:135 ../libdeja/CommonUtils.vala:518
+#: libdeja/BackendFile.vala:135 libdeja/CommonUtils.vala:519
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s на %2$s"
 
-#: ../libdeja/BackendFile.vala:168
+#: libdeja/BackendFile.vala:167
 #, c-format
-msgid "Backup will begin when %s becomes connected."
-msgstr "Стварање резерве ће започети када се повеже „%s“."
+msgid "Backup will begin when %s is connected."
+msgstr ""
 
-#: ../libdeja/BackendFile.vala:175 ../libdeja/BackendGDrive.vala:51
-#: ../libdeja/BackendRackspace.vala:49 ../libdeja/BackendS3.vala:59
-msgid "Backup will begin when a network connection becomes available."
-msgstr "Стварање резерве ће започети када мрежна веза постане доступна."
-
-#: ../libdeja/BackendFile.vala:384 ../libdeja/BackendFile.vala:448
+#: libdeja/BackendFile.vala:395 libdeja/BackendFile.vala:461
 msgid "Backup location not available"
 msgstr "Место за резерве није доступно"
 
-#: ../libdeja/BackendFile.vala:385
+#: libdeja/BackendFile.vala:396
 msgid "Waiting for a network connection…"
 msgstr "Чекам на везу са мрежом…"
 
-#: ../libdeja/BackendFile.vala:448
+#: libdeja/BackendFile.vala:461
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Чекам да се повеже „%s“…"
 
 #. Translators: %s is a folder.
-#: ../libdeja/BackendGDrive.vala:83
+#: libdeja/BackendGDrive.vala:83
 #, c-format
 msgid "%s at Google Drive"
 msgstr "%s на Гугл диску"
 
-#: ../libdeja/BackendGDrive.vala:126 ../libdeja/BackendRackspace.vala:115
-#: ../libdeja/BackendS3.vala:168
+#: libdeja/BackendGDrive.vala:126 libdeja/BackendRackspace.vala:115
+#: libdeja/BackendS3.vala:168
 msgid "Permission denied"
 msgstr "Забрањен приступ"
 
-#: ../libdeja/BackendGDrive.vala:157
+#: libdeja/BackendGDrive.vala:157
 #, c-format
 msgid "You can sign up for a Google account <a href=\"%s\">online</a>."
 msgstr "Можете да се претплатите за налог Гугла <a href=\"%s\">на мрежи</a>."
 
-#: ../libdeja/BackendGDrive.vala:158
+#: libdeja/BackendGDrive.vala:158
 msgid "Connect to Google Drive"
 msgstr "Повежи се на Гугл диск"
 
-#: ../libdeja/BackendGDrive.vala:159
+#: libdeja/BackendGDrive.vala:159
 msgid "_Email"
-msgstr "_Ел. пошта"
+msgstr "_Е-пошта"
 
 #. Translators: %s is a folder.
-#: ../libdeja/BackendRackspace.vala:72
+#: libdeja/BackendRackspace.vala:72
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "„%s“ на облаку датотека Ракспејса"
 
-#: ../libdeja/BackendRackspace.vala:146
+#: libdeja/BackendRackspace.vala:146
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
@@ -1426,158 +1452,158 @@ msgstr ""
 "Можете да се претплатите за налог облака датотека Ракспејса <a "
 "href=\"%s\">на мрежи</a>."
 
-#: ../libdeja/BackendRackspace.vala:147
+#: libdeja/BackendRackspace.vala:147
 msgid "Connect to Rackspace Cloud Files"
 msgstr "Повежи се на облак датотека Ракспејса"
 
-#: ../libdeja/BackendRackspace.vala:148
+#: libdeja/BackendRackspace.vala:148
 msgid "_API access key"
 msgstr "_АПИ кључ приступа"
 
-#: ../libdeja/BackendRackspace.vala:149
+#: libdeja/BackendRackspace.vala:149
 msgid "S_how API access key"
 msgstr "_Прикажи АПИ кључ приступа"
 
-#: ../libdeja/BackendRackspace.vala:150
+#: libdeja/BackendRackspace.vala:150
 msgid "_Remember API access key"
 msgstr "_Запамти АПИ кључ приступа"
 
 #. Translators: %s is a folder.
-#: ../libdeja/BackendS3.vala:125
+#: libdeja/BackendS3.vala:125
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "„%s“ на Амазону С3"
 
-#: ../libdeja/BackendS3.vala:199
+#: libdeja/BackendS3.vala:199
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr ""
 "Можете да се претплатите за налог Амазона С3 <a href=\"%s\">на мрежи</a>."
 
-#: ../libdeja/BackendS3.vala:200
+#: libdeja/BackendS3.vala:200
 msgid "Connect to Amazon S3"
 msgstr "Повежи се на Амазон С3"
 
-#: ../libdeja/BackendS3.vala:201
+#: libdeja/BackendS3.vala:201
 msgid "_Access key ID"
 msgstr "ИБ кључа _приступа"
 
-#: ../libdeja/BackendS3.vala:202
+#: libdeja/BackendS3.vala:202
 msgid "_Secret access key"
 msgstr "_Тајни кључ приступа"
 
-#: ../libdeja/BackendS3.vala:203
+#: libdeja/BackendS3.vala:203
 msgid "S_how secret access key"
 msgstr "_Прикажи тајни кључ приступа"
 
-#: ../libdeja/BackendS3.vala:204
+#: libdeja/BackendS3.vala:204
 msgid "_Remember secret access key"
 msgstr "_Запамти тајни кључ приступа"
 
-#: ../libdeja/CommonUtils.vala:437
+#: libdeja/CommonUtils.vala:438
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 "Не могу да пронађем алат за резерву у „%s“.  Ваша инсталација није потпуна."
 
-#: ../libdeja/CommonUtils.vala:439
+#: libdeja/CommonUtils.vala:440
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr "Не могу да учитам алат за резерву.  Ваша инсталација није потпуна."
 
-#: ../libdeja/CommonUtils.vala:445
+#: libdeja/CommonUtils.vala:446
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr "Алат за резерву је оштећен.  Ваша инсталација није потпуна."
 
-#: ../libdeja/CommonUtils.vala:467
+#: libdeja/CommonUtils.vala:468
 msgid "Could not start backup tool"
 msgstr "Не могу да покренем алат за резерву"
 
 #. Translators: this is the home folder and %s is the user's username
-#: ../libdeja/CommonUtils.vala:569
+#: libdeja/CommonUtils.vala:570
 #, c-format
 msgid "Home (%s)"
 msgstr "Лична (%s)"
 
 #. Translators: this is the home folder
-#: ../libdeja/CommonUtils.vala:574
+#: libdeja/CommonUtils.vala:575
 msgid "Home"
 msgstr "Лична"
 
 #. Translators: this is the trash folder
-#: ../libdeja/CommonUtils.vala:579
+#: libdeja/CommonUtils.vala:580
 msgid "Trash"
 msgstr "Смеће"
 
-#: ../libdeja/OperationBackup.vala:42 ../libdeja/OperationVerify.vala:56
+#: libdeja/OperationBackup.vala:42 libdeja/OperationVerify.vala:56
 msgid "Verifying backup…"
 msgstr "Проверавам резерву…"
 
-#: ../libdeja/OperationRestore.vala:51
+#: libdeja/OperationRestore.vala:51
 msgid "Restoring files…"
 msgstr "Враћам датотеке…"
 
-#: ../libdeja/OperationVerify.vala:94
+#: libdeja/OperationVerify.vala:94
 msgid ""
 "Your backup appears to be corrupted.  You should delete the backup and try "
 "again."
 msgstr ""
 "Изгледа да је ваша резерва оштећена.  Треба да је обришете и да пробате опет."
 
-#: ../libdeja/Operation.vala:61
+#: libdeja/Operation.vala:61
 msgid "Backing up…"
 msgstr "Правим резерву…"
 
-#: ../libdeja/Operation.vala:65
+#: libdeja/Operation.vala:65
 msgid "Checking for backups…"
 msgstr "Вршим проверу за резервама…"
 
-#: ../libdeja/Operation.vala:67
+#: libdeja/Operation.vala:67
 msgid "Listing files…"
 msgstr "Исписујем датотеке…"
 
-#: ../libdeja/Operation.vala:69 ../libdeja/Operation.vala:103
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:385
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:392
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:417
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:422
+#: libdeja/Operation.vala:69 libdeja/Operation.vala:103
+#: libdeja/tools/duplicity/DuplicityJob.vala:385
+#: libdeja/tools/duplicity/DuplicityJob.vala:392
+#: libdeja/tools/duplicity/DuplicityJob.vala:417
+#: libdeja/tools/duplicity/DuplicityJob.vala:422
 msgid "Preparing…"
 msgstr "Припремам…"
 
-#: ../libdeja/Operation.vala:296
+#: libdeja/Operation.vala:294
 msgid "Another backup operation is already running"
 msgstr "Још једна радња прављења резерве је већ покренута"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:89
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:172
+#: libdeja/tools/duplicity/DuplicityJob.vala:89
+#: libdeja/tools/duplicity/DuplicityJob.vala:172
 msgid "Paused (no network)"
 msgstr "Паузиран (нема мреже)"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:449
+#: libdeja/tools/duplicity/DuplicityJob.vala:449
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Не могу да повратим „%s“: није исправно место датотеке"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:516
+#: libdeja/tools/duplicity/DuplicityJob.vala:516
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Место за резерву је премало.  Покушајте да користите неко друго са више "
 "простора."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:539
+#: libdeja/tools/duplicity/DuplicityJob.vala:539
 msgid "Backup location does not have enough free space."
 msgstr "Место за резерве нема довољно слободног простора."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:559
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:573
+#: libdeja/tools/duplicity/DuplicityJob.vala:559
+#: libdeja/tools/duplicity/DuplicityJob.vala:573
 msgid "Cleaning up…"
 msgstr "Чистим…"
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:669
+#: libdeja/tools/duplicity/DuplicityJob.vala:669
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
@@ -1588,7 +1614,7 @@ msgstr ""
 #. OK, we succeeded yay!  But some files didn't actually restore
 #. because we couldn't write to them.  So tell the user so they
 #. don't think everything is hunky dory.
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:685
+#: libdeja/tools/duplicity/DuplicityJob.vala:685
 msgid ""
 "Could not restore the following files.  Please make sure you are able to "
 "write to them."
@@ -1599,7 +1625,7 @@ msgstr ""
 #. make text a little nicer than duplicity gives
 #. duplicity gives something like "home/blah/blah not found in archive,
 #. no files restored".
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:929
+#: libdeja/tools/duplicity/DuplicityJob.vala:929
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Не могу да повратим „%s“: нисам пронашао датотеку у резерви"
@@ -1607,17 +1633,17 @@ msgstr "Не могу да повратим „%s“: нисам пронаша�
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:935
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1033
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1037
+#: libdeja/tools/duplicity/DuplicityJob.vala:935
+#: libdeja/tools/duplicity/DuplicityJob.vala:1033
+#: libdeja/tools/duplicity/DuplicityJob.vala:1037
 msgid "Bad encryption password."
 msgstr "Лоша лозинка шифровања."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:940
+#: libdeja/tools/duplicity/DuplicityJob.vala:940
 msgid "Computer name changed"
 msgstr "Назив рачунара је промењен"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:940
+#: libdeja/tools/duplicity/DuplicityJob.vala:940
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -1628,82 +1654,82 @@ msgstr ""
 "рачунара „%s“.  Ако је ово неочекивано, треба да направите резерву на другом "
 "месту."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:975
+#: libdeja/tools/duplicity/DuplicityJob.vala:975
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Приступ је одбијен када сам покушао да направим „%s“."
 
 #. assume error is on backend side
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:979
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:983
+#: libdeja/tools/duplicity/DuplicityJob.vala:979
+#: libdeja/tools/duplicity/DuplicityJob.vala:983
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Приступ је одбијен када сам покушао да прочитам „%s“."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:987
+#: libdeja/tools/duplicity/DuplicityJob.vala:987
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Приступ је одбијен када сам покушао да обришем „%s“."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:994
+#: libdeja/tools/duplicity/DuplicityJob.vala:994
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Место за резерве „%s“ не постоји."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1000
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1052
+#: libdeja/tools/duplicity/DuplicityJob.vala:1000
+#: libdeja/tools/duplicity/DuplicityJob.vala:1052
 msgid "No space left."
 msgstr "Нема више простора."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1014
+#: libdeja/tools/duplicity/DuplicityJob.vala:1014
 msgid "Invalid ID."
 msgstr "Неисправан ИБ."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1016
+#: libdeja/tools/duplicity/DuplicityJob.vala:1016
 msgid "Invalid secret key."
 msgstr "Неисправан тајни кључ."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1018
+#: libdeja/tools/duplicity/DuplicityJob.vala:1018
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Ваш налог за веб услуге Амазона није пријављен за С3 услугу."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1027
+#: libdeja/tools/duplicity/DuplicityJob.vala:1027
 msgid "S3 bucket name is not available."
 msgstr "Назив С3 ведра није доступан."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1041
+#: libdeja/tools/duplicity/DuplicityJob.vala:1041
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Грешка читања датотеке „%s“."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1043
+#: libdeja/tools/duplicity/DuplicityJob.vala:1043
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Грешка записивања датотеке „%s“."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1054
+#: libdeja/tools/duplicity/DuplicityJob.vala:1054
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Нема слободног простора на „%s“."
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1062
+#: libdeja/tools/duplicity/DuplicityJob.vala:1062
 msgid "No backup files found"
 msgstr "Нисам пронашао датотеке резерве"
 
-#: ../libdeja/tools/duplicity/DuplicityJob.vala:1112
+#: libdeja/tools/duplicity/DuplicityJob.vala:1112
 msgid "Uploading…"
 msgstr "Отпремам…"
 
-#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:41
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:41
 msgid "Could not understand duplicity version."
 msgstr "Не могу да разумем издање дуплирања."
 
-#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:51
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:51
 #, c-format
 msgid "Could not understand duplicity version ‘%s’."
 msgstr "Не могу да разумем издање дуплирања „%s“."
 
-#: ../libdeja/tools/duplicity/DuplicityPlugin.vala:54
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:54
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -1712,61 +1738,6 @@ msgstr ""
 "Безбедни сеф захтева барем издање %d.%d.%.2d дуплирка, али је нашао само "
 "издање %d.%d.%.2d"
 
-#~ msgid ""
-#~ "The folder name to store files in. If ‘$HOSTNAME’, it will default to a "
-#~ "folder based on the name of the computer."
-#~ msgstr ""
-#~ "Назив фасцикле за чување датотека. Ако је „$HOSTNAME“, подразумеваће "
-#~ "фасциклу засновану на називу рачунара."
-
-#~ msgid "Connect to Ubuntu One"
-#~ msgstr "Повежи се на Убунту један"
-
-#~ msgid "Sign into Ubuntu One…"
-#~ msgstr "Пријави се на Убунту један…"
-
-#~ msgid "Directory does not exists"
-#~ msgstr "Директоријум не постоји"
-
-#~ msgid ""
-#~ "Support for local, remote, or cloud backup locations, such as Amazon S3, "
-#~ "Rackspace Cloud Files, and Ubuntu One"
-#~ msgstr ""
-#~ "Подршка за месна, удаљена, или места резерве у облаку, као што је Амазон С3, "
-#~ "Датотеке облака Ракспејса, и Убунту један"
-
 #, c-format
-#~ msgid ""
-#~ "You can restore the entire backup with the %s button or use Files to either "
-#~ "revert individual files or restore missing ones."
-#~ msgstr ""
-#~ "Можете да повратите читаву резерву дугметом „%s“ или да користите „Датотеке“ "
-#~ "или да вратите појединачне датотеке или да повратите оне које недостају."
-
-#, c-format
-#~ msgid "%s on Ubuntu One"
-#~ msgstr "„%s“ на Убунтуу један"
-
-#~ msgid ""
-#~ "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
-#~ "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
-#~ "and $VIDEO are recognized as the user’s special directories. Relative "
-#~ "entries are relative to the user’s home directory."
-#~ msgstr ""
-#~ "Ово је списак директоријума за које ће бити направљене резерве. Резервисане "
-#~ "вредности $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, "
-#~ "$PUBLIC_SHARE, $TEMPLATES, $TRASH, и $VIDEO се препознају као корисникови "
-#~ "посебни директоријуми. Релативне ставке се односе на корисникову личну "
-#~ "фасциклу."
-
-#~ msgid ""
-#~ "This list of directories will not be backed up. Reserved values $HOME, "
-#~ "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
-#~ "$TEMPLATES, $TRASH, and $VIDEO are recognized as the user’s special "
-#~ "directories. Relative entries are relative to the user’s home directory."
-#~ msgstr ""
-#~ "Ово је списак директоријума за које неће бити направљене резерве. "
-#~ "Резервисане вредности $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, "
-#~ "$PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, и $VIDEO се препознају као "
-#~ "корисникови посебни директоријуми. Релативне ставке се односе на корисникову "
-#~ "личну фасциклу."
+#~ msgid "Backup will begin when %s becomes connected."
+#~ msgstr "Стварање резерве ће започети када се повеже „%s“."
