@@ -98,19 +98,9 @@ public abstract class Operation : Object
     backend = Backend.get_default();
   }
 
-  public async virtual void start(bool try_claim_bus = true)
+  public async virtual void start()
   {
     action_desc_changed(_("Preparing…"));  
-    
-    try {
-      if (try_claim_bus)
-        claim_bus();
-    }
-    catch (Error e) {
-      raise_error(e.message, null);
-      done(false, false, null);
-      return;
-    }
 
     if (backend is BackendAuto) {
       // OK, we're not ready yet.  Let's hold off until we are
@@ -220,7 +210,6 @@ public abstract class Operation : Object
   {
     finished = true;
 
-    unclaim_bus();
     yield DejaDup.clean_tempdirs();
 
     done(success, cancelled, detail);
@@ -277,27 +266,7 @@ public abstract class Operation : Object
     action_desc_changed(desc);
     progress(0);
 
-    yield subop.start(false);
-  }
-
-  uint bus_id = 0;
-  void claim_bus() throws BackupError
-  {
-    bool rv = false;
-    var loop = new MainLoop();
-    bus_id = Bus.own_name(BusType.SESSION, "org.gnome.DejaDup.Operation",
-                          BusNameOwnerFlags.NONE, ()=>{},
-                          ()=>{rv = true; loop.quit();},
-                          ()=>{rv = false; loop.quit();});
-    loop.run();
-    if (bus_id == 0 || rv == false)
-      throw new BackupError.ALREADY_RUNNING(_("Another backup operation is already running"));
-  }
-
-  void unclaim_bus()
-  {
-    if (bus_id > 0)
-      Bus.unown_name(bus_id);
+    yield subop.start();
   }
 }
 

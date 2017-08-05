@@ -46,10 +46,10 @@ public class OperationRestore : Operation
            mode: ToolJob.Mode.RESTORE);
   }
   
-  public async override void start(bool try_claim_bus = true)
+  public async override void start()
   {
     action_desc_changed(_("Restoring files…"));
-    yield base.start(try_claim_bus);
+    yield base.start();
   }
 
   protected override List<string>? make_argv()

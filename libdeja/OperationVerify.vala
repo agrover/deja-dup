@@ -46,7 +46,7 @@ public class OperationVerify : Operation
     }
   }
 
-  public async override void start(bool try_claim_bus = true)
+  public async override void start()
   {
     if (nag) {
       var fake_state = new State();
@@ -54,7 +54,7 @@ public class OperationVerify : Operation
       set_state(fake_state);
     }
     action_desc_changed(_("Verifying backup…"));
-    yield base.start(try_claim_bus);
+    yield base.start();
   }
 
   protected override void connect_to_job()
