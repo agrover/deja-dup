@@ -217,7 +217,8 @@ public class ConfigLocation : ConfigWidget
     // Without that, the user experience would be poor.
     insert_goa("owncloud");
     // TODO: We can enable Google if we have duplicity >= 0.7.14 and GNOME
-    //       bug 785870 is fixed (needs to report FS size).
+    //       bug 785870 is fixed (needs to report FS size) and maybe bug
+    //       768594 too (timeout permission issues).
     //insert_goa("google");
 
     if (group == Group.GOA) {
