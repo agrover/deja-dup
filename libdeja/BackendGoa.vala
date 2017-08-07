@@ -73,7 +73,11 @@ public class BackendGoa : BackendFile
     var files = obj.get_files();
     if (files == null)
       return null;
-    return File.new_for_uri(files.uri);
+
+    var settings = get_settings(GOA_ROOT);
+    var folder = settings.get_string(GOA_FOLDER_KEY);
+    var file = File.new_for_uri(files.uri);
+    return file.get_child(folder);
   }
 
   public override string get_location_pretty()
