@@ -19,7 +19,7 @@
 executable('deja-dup-monitor', ['monitor.vala'],
     vala_args: common_vflags,
     c_args: common_cflags,
-    dependencies: [gio_dep, peas_dep, secret_dep],
+    dependencies: [gio_dep, goa_dep, peas_dep, secret_dep],
     link_with: [libdeja],
     include_directories: [libdeja_inc],
     install: true,

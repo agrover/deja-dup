@@ -31,7 +31,7 @@ public abstract class Backend : Object
   public abstract bool is_native(); // must be callable when nothing is mounted, nothing is prepared
   public virtual Icon? get_icon() {return null;}
 
-  public abstract string get_location(ref bool as_root);
+  public abstract string get_location(ref bool as_root); // URI for duplicity
   public abstract string get_location_pretty(); // short description for user
 
   public virtual async bool is_ready(out string when) {when = null; return true;} // must be callable when nothing is mounted, nothing is prepared
@@ -42,7 +42,6 @@ public abstract class Backend : Object
 
   public static uint64 INFINITE_SPACE = uint64.MAX;
   public virtual async uint64 get_space(bool free = true) {return INFINITE_SPACE;}
-  public virtual bool space_can_be_infinite() {return true;}
   
   // Arguments needed only when the particular mode is active
   // If mode == INVALID, arguments needed any time the backup is referenced.
@@ -58,7 +57,7 @@ public abstract class Backend : Object
     if (backend != "auto" &&
         backend != "s3" &&
         backend != "gcs" &&
-        backend != "gdrive" &&
+        backend != "goa" &&
         backend != "rackspace" &&
         backend != "openstack" &&
         backend != "u1" &&
@@ -75,8 +74,8 @@ public abstract class Backend : Object
       return new BackendS3();
     else if (backend_name == "gcs")
       return new BackendGCS();
-    else if (backend_name == "gdrive")
-      return new BackendGDrive();
+    else if (backend_name == "goa")
+      return new BackendGoa();
     else if (backend_name == "u1")
       return new BackendU1();
     else if (backend_name == "rackspace")

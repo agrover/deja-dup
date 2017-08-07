@@ -48,6 +48,8 @@ toolsdir = join_paths(pkglibexecdir, 'tools')
 # Dependencies
 gio_dep = dependency('gio-2.0', version: '>= 2.46')
 gio_unix_dep = dependency('gio-unix-2.0')
+goa_dep = dependency('goa-1.0', version: '>= 3.8.0')
+goabackend_dep = dependency('goa-backend-1.0')
 gtk_dep = dependency('gtk+-3.0', version: '>= 3.22')
 nautilus_dep = dependency('libnautilus-extension', required: false)
 packagekit_dep = dependency('packagekit-glib2')
@@ -68,6 +70,8 @@ common_vflags = [
     '--vapidir', vapidir]
 common_cflags = [
     '-w',
+    '-DGOA_API_IS_SUBJECT_TO_CHANGE',
+    '-DGOA_BACKEND_API_IS_SUBJECT_TO_CHANGE',
     '-DI_KNOW_THE_PACKAGEKIT_GLIB2_API_IS_SUBJECT_TO_CHANGE',
     '-DPACKAGE="@0@"'.format(meson.project_name()),
     '-DGETTEXT_PACKAGE="@0@"'.format(meson.project_name()),

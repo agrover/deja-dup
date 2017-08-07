@@ -71,7 +71,7 @@
         <choice value='auto'/>
         <choice value='file'/>
         <choice value='gcs'/>
-        <choice value='gdrive'/>
+        <choice value='goa'/>
         <choice value='rackspace'/>
         <choice value='openstack'/>
         <choice value='s3'/>
@@ -85,7 +85,7 @@
     <child name="openstack" schema="org.gnome.DejaDup.OpenStack"/>
     <child name="s3" schema="org.gnome.DejaDup.S3"/>
     <child name="gcs" schema="org.gnome.DejaDup.GCS"/>
-    <child name="gdrive" schema="org.gnome.DejaDup.GDrive"/>
+    <child name='goa' schema="org.gnome.DejaDup.GOA"/>
     <child name="file" schema="org.gnome.DejaDup.File"/>
   </schema>
   <schema id="org.gnome.DejaDup.S3" path="/org/gnome/deja-dup/s3/">
@@ -122,18 +122,6 @@
       <description>An optional folder name to store files in.  This folder will be created in the chosen bucket.</description>
     </key>
   </schema>
-  <schema id="org.gnome.DejaDup.GDrive" path="/org/gnome/deja-dup/gdrive/">
-    <key name="email" type="s">
-      <default>''</default>
-      <summary>The email-address of your Google account</summary>
-      <description>The email-address of your Google account.</description>
-    </key>
-    <key name="folder" type="s">
-      <default>'/deja-dup/$HOSTNAME'</default>
-      <summary>The folder where backups are stored</summary>
-      <description>The folder hierarchy where backups are stored.</description>
-    </key>
-  </schema>
   <schema id="org.gnome.DejaDup.Rackspace" path="/org/gnome/deja-dup/rackspace/">
     <key name="container" type="s">
       <default>'$HOSTNAME'</default>
@@ -144,6 +132,23 @@
       <default>''</default>
       <summary>Your Rackspace username</summary>
       <description>This is your username for the Rackspace Cloud Files service.</description>
+    </key>
+  </schema>
+  <schema id="org.gnome.DejaDup.GOA" path="/org/gnome/deja-dup/goa/">
+    <key name="id" type="s">
+      <default>''</default>
+      <summary>Account ID</summary>
+      <description>The unique ID for the GNOME Online Account.</description>
+    </key>
+    <key name="type" type="s">
+      <default>''</default>
+      <summary>The type of account</summary>
+      <description>The cached type of account that ID represents.</description>
+    </key>
+    <key name="folder" type="s">
+      <default>'$HOSTNAME'</default>
+      <summary>The folder where backups are stored</summary>
+      <description>The folder hierarchy where backups are stored.</description>
     </key>
   </schema>
   <schema id="org.gnome.DejaDup.OpenStack" path="/org/gnome/deja-dup/openstack/">

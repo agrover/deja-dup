@@ -37,7 +37,7 @@ public class BackendFile : Backend
   }
 
   // Will return null if volume isn't ready
-  static File? get_file_from_settings()
+  protected virtual File? get_file_from_settings()
   {
     var settings = get_settings(FILE_ROOT);
     var type = settings.get_string(FILE_TYPE_KEY);
@@ -67,6 +67,8 @@ public class BackendFile : Backend
   public override string get_location(ref bool as_root)
   {
     var file = get_file_from_settings();
+    if (file == null)
+      return "invalid://"; // shouldn't happen!
 
     if (as_root && !file.is_native()) {
       // OK...  Root can't use GVFS URIs as-is because it would need access to
@@ -249,7 +251,7 @@ public class BackendFile : Backend
   }
   
   // Checks if file is secretly a volume file and fills out settings data if so.
-  public async static void check_for_volume_info(File file) throws Error
+  protected virtual async void check_for_volume_info(File file) throws Error
   {
     var settings = get_settings(FILE_ROOT);
 
@@ -360,20 +362,28 @@ public class BackendFile : Backend
     loop.run();
   }
 
-  async void mount_file() throws Error
+  protected virtual async bool choose_mount() throws Error
   {
-    var success = true;
     var settings = get_settings(FILE_ROOT);
     var type = settings.get_string(FILE_TYPE_KEY);
 
+    if (type == "volume")
+      return yield mount_volume();
+    else if (type == "normal") {
+      var file = get_file_from_settings();
+      if (!file.is_native())
+        return yield mount_remote(file);
+    }
+
+    return true;
+  }
+
+  async void mount_file() throws Error
+  {
+    bool success;
+
     try {
-      if (type == "volume")
-        success = yield mount_volume();
-      else if (type == "normal") {
-        var file = get_file_from_settings();
-        if (!file.is_native())
-          success = yield mount_remote(file);
-      }
+      success = yield choose_mount();
     }
     catch (IOError.FAILED err) {
       // So, this is odd, and not very descriptive, but IOError.FAILED is the
@@ -412,10 +422,10 @@ public class BackendFile : Backend
     envp_ready(success, new List<string>());
   }
 
-  async bool mount_remote(File file) throws Error
+  protected async bool mount_remote(File file) throws Error
   {
     if (!Network.get().connected) {
-      pause_op(_("Backup location not available"),
+      pause_op(_("Storage location not available"),
                _("Waiting for a network connection…"));
       var loop = new MainLoop(null, false);
       var sigid = Network.get().notify["connected"].connect(() => {
@@ -440,7 +450,7 @@ public class BackendFile : Backend
     }
   }
 
-  async bool mount_volume() throws Error
+  protected virtual async bool mount_volume() throws Error
   {
     var settings = get_settings(FILE_ROOT);
     var uuid = settings.get_string(FILE_UUID_KEY);
@@ -481,7 +491,7 @@ public class BackendFile : Backend
     if (vol == null) {
       var settings = get_settings(FILE_ROOT);
       var name = settings.get_string(FILE_NAME_KEY);
-      pause_op(_("Backup location not available"), _("Waiting for ‘%s’ to become connected…").printf(name));
+      pause_op(_("Storage location not available"), _("Waiting for ‘%s’ to become connected…").printf(name));
       var loop = new MainLoop(null, false);
       var mon = VolumeMonitor.get();
       mon.ref(); // bug 569418; bad things happen when VM goes away
@@ -502,6 +512,8 @@ public class BackendFile : Backend
     var attr = free ? FileAttribute.FILESYSTEM_FREE : FileAttribute.FILESYSTEM_SIZE;
     try {
       var file = get_file_from_settings();
+      if (file == null)
+        return INFINITE_SPACE;
       var info = yield file.query_filesystem_info_async(attr, Priority.DEFAULT, null);
       if (!info.has_attribute(attr))
         return INFINITE_SPACE;
@@ -524,8 +536,6 @@ public class BackendFile : Backend
       return INFINITE_SPACE;
     }
   }
-
-  public override bool space_can_be_infinite() {return false;}
 }
 
 } // end namespace

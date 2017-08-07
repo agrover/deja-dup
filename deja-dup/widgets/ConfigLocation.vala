@@ -23,15 +23,21 @@ namespace DejaDup {
 
 public class ConfigLocation : ConfigWidget
 {
-  const int COL_ICON = 0;
-  const int COL_TEXT = 1;
-  const int COL_SORT = 2;
-  const int COL_UUID = 3;
-  const int COL_PAGE = 4;
-  const int COL_INDEX = 5;
+  enum Col {
+    ICON = 0,
+    TEXT,
+    SORT,
+    ID,
+    PAGE,
+    GROUP,
+    GOA_TYPE,
+    NUM
+  }
 
   enum Group {
-    CLOUD = 0,
+    GOA = 0,
+    GOA_SEP,
+    CLOUD,
     CLOUD_SEP,
     REMOTE,
     REMOTE_CUSTOM,
@@ -58,21 +64,8 @@ public class ConfigLocation : ConfigWidget
     Object(label_sizes: sg);
   }
 
-  int index_ftp;
-  int index_dav;
-  int index_s3 = -2;
-  int index_gcs = -2;
-  int index_gdrive = -2;
-  int index_rackspace = -2;
-  int index_openstack = -2;
-  int index_u1 = -2;
-  int index_cloud_sep = -2;
-  int index_ssh;
-  int index_smb;
+  bool have_clouds;
   int num_volumes = 0;
-  int index_vol_sep = -2;
-  int index_custom;
-  int index_local;
 
   int extras_max_width = 0;
   int extras_max_height = 0;
@@ -87,11 +80,11 @@ public class ConfigLocation : ConfigWidget
     // Here we have a model wrapped inside a sortable model.  This is so we
     // can keep indices around for the inner model while the outer model appears
     // nice and sorted to users.
-    store = new Gtk.ListStore(6, typeof(Icon), typeof(string), typeof(string),
+    store = new Gtk.ListStore(Col.NUM, typeof(Icon), typeof(string), typeof(string),
                               typeof(string), typeof(ConfigLocationTable),
-                              typeof(int));
+                              typeof(int), typeof(string));
     sort_model = new Gtk.TreeModelSort.with_model(store);
-    sort_model.set_sort_column_id(COL_SORT, Gtk.SortType.ASCENDING);
+    sort_model.set_sort_column_id(Col.SORT, Gtk.SortType.ASCENDING);
     button = new Gtk.ComboBox.with_model(sort_model);
     button.set_row_separator_func(is_separator);
     vbox.add(button);
@@ -111,33 +104,38 @@ public class ConfigLocation : ConfigWidget
     extras.border_width = 0;
     extras.show();
 
+    remake_goa();
+    BackendGoa.get_client_sync().account_added.connect(remake_goa);
+    BackendGoa.get_client_sync().account_removed.connect(remake_goa);
+
+    add_separator(Group.GOA_SEP);
+
     // Insert cloud providers
     insert_u1();
     insert_s3();
     insert_gcs();
-    insert_gdrive();
     insert_rackspace();
     insert_openstack();
 
     // Now insert remote servers
-    index_ssh = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-                          _("SSH"), Group.REMOTE, new ConfigLocationSSH(label_sizes));
-    index_smb = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-                          _("Windows Share"), Group.REMOTE, new ConfigLocationSMB(label_sizes));
-    index_ftp = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-                          _("FTP"), Group.REMOTE, new ConfigLocationFTP(label_sizes));
-    index_dav = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-                          _("WebDAV"), Group.REMOTE, new ConfigLocationDAV(label_sizes));
+    add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
+              _("SSH"), Group.REMOTE, new ConfigLocationSSH(label_sizes), "sftp");
+    add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
+              _("Windows Share"), Group.REMOTE, new ConfigLocationSMB(label_sizes), "smb");
+    add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
+              _("FTP"), Group.REMOTE, new ConfigLocationFTP(label_sizes), "ftp");
+    add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
+              _("WebDAV"), Group.REMOTE, new ConfigLocationDAV(label_sizes), "dav");
 
-    index_custom = add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-                             _("Custom Location"), Group.REMOTE_CUSTOM,
-                             new ConfigLocationCustom(label_sizes));
+    add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
+              _("Custom Location"), Group.REMOTE_CUSTOM,
+              new ConfigLocationCustom(label_sizes));
 
     add_separator(Group.REMOTE_SEP);
 
     // And a local folder option
-    index_local = add_entry(new ThemedIcon("folder"), _("Local Folder"),
-                            Group.LOCAL, new ConfigLocationFile(label_sizes));
+    add_entry(new ThemedIcon("folder"), _("Local Folder"),
+              Group.LOCAL, new ConfigLocationFile(label_sizes), "file");
 
     // Now insert removable drives
     var mon = VolumeMonitor.get();
@@ -154,11 +152,12 @@ public class ConfigLocation : ConfigWidget
 
     var pixrenderer = new Gtk.CellRendererPixbuf();
     button.pack_start(pixrenderer, false);
-    button.add_attribute(pixrenderer, "gicon", COL_ICON);
+    button.add_attribute(pixrenderer, "gicon", Col.ICON);
 
     var textrenderer = new Gtk.CellRendererText();
+    textrenderer.xpad = 6;
     button.pack_start(textrenderer, true);
-    button.add_attribute(textrenderer, "text", COL_TEXT);
+    button.add_attribute(textrenderer, "markup", Col.TEXT);
 
     // End of location combo
 
@@ -174,6 +173,122 @@ public class ConfigLocation : ConfigWidget
     watch_key(FILE_PATH_KEY, DejaDup.get_settings(FILE_ROOT));
   }
 
+  void clear_group(int group)
+  {
+    Gtk.TreeIter iter;
+    bool loop = store.get_iter_first(out iter);
+    while (loop) {
+      int iter_group;
+      store.get(iter, Col.GROUP, out iter_group);
+      if (iter_group == group)
+        loop = store.remove(ref iter);
+      else
+        loop = store.iter_next(ref iter);
+    }
+  }
+
+  bool current_iter(out Gtk.TreeIter iter)
+  {
+    Gtk.TreeIter iter0;
+    iter = Gtk.TreeIter();
+    if (!button.get_active_iter(out iter0))
+      return false;
+    sort_model.convert_iter_to_child_iter(out iter, iter0);
+    return true;
+  }
+
+  void remake_goa()
+  {
+    int group = -1;
+    string id = null;
+    string goa_type = null;
+    Gtk.TreeIter iter;
+    if (current_iter(out iter))
+      store.get(iter, Col.GROUP, out group, Col.ID, out id, Col.GOA_TYPE, out goa_type);
+
+    // First, clear any existing GOA accounts (this might be called a second
+    // time when accounts are removed or added).
+    clear_group(Group.GOA);
+
+    // Insert GNOME Online Account providers. We use a whitelist (rather than
+    // adding any that support the Files interface) because we want to control
+    // the quality of the experience. For example, the Google gvfs backend,
+    // at the time of writing, does not support querying filesystem free space.
+    // Without that, the user experience would be poor.
+    insert_goa("owncloud");
+    // TODO: We can enable Google if we have duplicity >= 0.7.14 and GNOME
+    //       bug 785870 is fixed (needs to report FS size).
+    //insert_goa("google");
+
+    if (group == Group.GOA) {
+      // Find place again
+      if (id != null && lookup_id(group, id, out iter))
+        set_active_iter(iter);
+      else if (lookup_id(group, null, out iter, goa_type))
+        set_active_iter(iter);
+      // above should always work, we make sure to keep one of each type
+    }
+  }
+
+  void insert_goa(string type)
+  {
+    /**
+     * There are two cases:
+     * 1) Some number of existing accounts for this type, in which case we add
+     *    all of them.
+     * 2) Else if there no existing accounts, we offer a single entry that lets
+     *    them add an account of this type.
+     */
+
+    var provider = Goa.Provider.get_for_provider_type(type);
+
+    // sanity check
+    if (!(Goa.ProviderFeatures.FILES in provider.get_provider_features())) {
+      warning("Tried to add GOA provider %s but it doesn't support the Files interface", type);
+      return;
+    }
+
+    var client = DejaDup.BackendGoa.get_client_sync();
+    bool found_one = false;
+    foreach (Goa.Object obj in client.get_accounts()) {
+      var account = obj.get_account();
+      if (account != null &&
+          !account.is_temporary &&
+          account.provider_type == type)
+      {
+        Icon icon = null;
+        try {
+          icon = Icon.new_for_string(account.provider_icon);
+        }
+        catch (Error e) {warning("%s", e.message);}
+        add_entry(icon,
+                  "%s <i>(%s)</i>".printf(account.provider_name,
+                                          account.presentation_identity),
+                  Group.GOA,
+                  new ConfigLocationGoa(label_sizes, account),
+                  account.id, type);
+        found_one = true;
+      }
+    }
+
+    // Does the user have an old configured type that is now gone?
+    var settings = DejaDup.get_settings(GOA_ROOT);
+    if (settings.get_string(GOA_TYPE_KEY) == type &&
+        BackendGoa.get_object_from_settings() == null)
+    {
+      found_one = false;
+    }
+
+    if (found_one)
+      return;
+
+    add_entry(provider.get_provider_icon(null),
+              provider.get_provider_name(null),
+              Group.GOA,
+              new ConfigLocationGoa(label_sizes, null),
+              "", type);
+  }
+
   delegate void CloudCallback();
 
   void insert_s3() {
@@ -181,7 +296,7 @@ public class ConfigLocation : ConfigWidget
                               new ThemedIcon("deja-dup-cloud"),
                               _("Amazon S3"),
                               new ConfigLocationS3(label_sizes),
-                              ref index_s3, insert_s3);
+                              insert_s3);
   }
 
   void insert_gcs() {
@@ -189,15 +304,7 @@ public class ConfigLocation : ConfigWidget
                               new ThemedIcon("deja-dup-cloud"),
                               _("Google Cloud Storage"),
                               new ConfigLocationGCS(label_sizes),
-                              ref index_gcs, insert_gcs);
-  }
-
-  void insert_gdrive() {
-    insert_cloud_if_available("gdrive", BackendGDrive.get_checker(),
-                              new ThemedIcon("deja-dup-cloud"),
-                              _("Google Drive"),
-                              new ConfigLocationGDrive(label_sizes),
-                              ref index_gdrive, insert_gdrive);
+                              insert_gcs);
   }
 
   void insert_u1() {
@@ -209,7 +316,7 @@ public class ConfigLocation : ConfigWidget
                                                          "deja-dup-cloud"}),
                               _("Ubuntu One"),
                               new ConfigLocationU1(label_sizes),
-                              ref index_u1, insert_u1);
+                              insert_u1);
   }
 
   void insert_rackspace() {
@@ -217,7 +324,7 @@ public class ConfigLocation : ConfigWidget
                               new ThemedIcon("deja-dup-cloud"),
                               _("Rackspace Cloud Files"),
                               new ConfigLocationRackspace(label_sizes),
-                              ref index_rackspace, insert_rackspace);
+                              insert_rackspace);
   }
 
   void insert_openstack() {
@@ -225,19 +332,21 @@ public class ConfigLocation : ConfigWidget
                               new ThemedIcon("deja-dup-cloud"),
                               _("OpenStack Swift"),
                               new ConfigLocationOpenstack(label_sizes),
-                              ref index_openstack, insert_openstack);
+                              insert_openstack);
   }
 
   void insert_cloud_if_available(string id, Checker? checker,
                                  Icon icon, string name,
-                                 Gtk.Widget? w, ref int index,
+                                 Gtk.Widget? w,
                                  CloudCallback cb)
   {
     var backend = Backend.get_default_type();
     if (backend == id || (checker != null && checker.complete && checker.available)) {
-      index = add_entry(icon, name, Group.CLOUD, w);
-      if (index_cloud_sep == -2)
-        index_cloud_sep = add_separator(Group.CLOUD_SEP);
+      add_entry(icon, name, Group.CLOUD, w, id);
+      if (!have_clouds) {
+        add_separator(Group.CLOUD_SEP);
+        have_clouds = true;
+      }
     }
     else if (checker != null && !checker.complete) {
       // Call ourselves when we've got enough information.  Also make sure to
@@ -247,15 +356,23 @@ public class ConfigLocation : ConfigWidget
     }
   }
 
-  bool is_allowed_volume(Icon icon_in)
+  bool is_allowed_volume(Volume vol)
   {
     // Unfortunately, there is no convenience API to ask, "what type is this
     // GVolume?"  Instead, we ask for the icon and look for standard icon
     // names to determine type.
-    // Currently, to be on the safe side (and the user always has an 'out' by
-    // specifying a custom path), we whitelist the types we allow.
+    // Maybe there is a way to distinguish between optical drives and flash
+    // drives?  But I'm not sure what it is right now.
+
+    if (vol.get_drive() == null)
+      return false;
+
+    // Don't add internal hard drives
+    if (!vol.get_drive().is_removable())
+      return false;
 
     // First, if the icon is emblemed, look past emblems to real icon
+    Icon icon_in = vol.get_icon();
     EmblemedIcon icon_emblemed = icon_in as EmblemedIcon;
     if (icon_emblemed != null)
       icon_in = icon_emblemed.get_icon();
@@ -284,25 +401,22 @@ public class ConfigLocation : ConfigWidget
   bool is_separator(Gtk.TreeModel model, Gtk.TreeIter iter)
   {
     Value text_var;
-    model.get_value(iter, COL_TEXT, out text_var);
+    model.get_value(iter, Col.TEXT, out text_var);
     weak string text = text_var.get_string();
     return text == null;
   }
 
-  int next_index()
+  void add_entry(Icon? icon, string label, Group category,
+                 Gtk.Widget? page = null, string? id = null,
+                 string? goa_type = null)
   {
-    return store.iter_n_children(null);
-  }
-
-  int add_entry(Icon? icon, string label, Group category,
-                Gtk.Widget? page = null, string? uuid = null)
-  {
-    var index = next_index();
+    var index = store.iter_n_children(null);
 
     Gtk.TreeIter iter;
-    store.insert_with_values(out iter, index, COL_ICON, icon, COL_TEXT, label,
-                             COL_SORT, "%d%s".printf((int)category, label),
-                             COL_UUID, uuid, COL_PAGE, page, COL_INDEX, index);
+    store.insert_with_values(out iter, index, Col.ICON, icon, Col.TEXT, label,
+                             Col.SORT, "%d%s".printf((int)category, label),
+                             Col.ID, id, Col.PAGE, page, Col.GROUP, category,
+                             Col.GOA_TYPE, goa_type);
 
     if (page != null) {
       Gtk.Requisition pagereq;
@@ -311,29 +425,32 @@ public class ConfigLocation : ConfigWidget
       extras_max_width = int.max(extras_max_width, pagereq.width);
       extras_max_height = int.max(extras_max_height, pagereq.height);
     }
-
-    return index;
   }
 
-  int add_separator(Group category)
+  void add_separator(Group category)
   {
     var index = store.iter_n_children(null);
 
     Gtk.TreeIter iter;
-    store.insert_with_values(out iter, index, COL_SORT, "%d".printf((int)category),
-                             COL_TEXT, null, COL_INDEX, index);
-    return index;
+    store.insert_with_values(out iter, index, Col.SORT, "%d".printf((int)category),
+                             Col.TEXT, null, Col.GROUP, category);
   }
 
-  bool lookup_uuid(string uuid, out Gtk.TreeIter iter_in)
+  // A null id is a wildcard, will return first valid result
+  bool lookup_id(int group, string? id, out Gtk.TreeIter iter_in, string? goa_type = null)
   {
     Gtk.TreeIter iter;
     iter_in = Gtk.TreeIter();
     if (store.get_iter_first(out iter)) {
       do {
-        string iter_uuid;
-        store.get(iter, COL_UUID, out iter_uuid);
-        if (iter_uuid == uuid) {
+        int iter_group;
+        string iter_id;
+        string iter_goa_type;
+        store.get(iter, Col.GROUP, out iter_group, Col.ID, out iter_id, Col.GOA_TYPE, out iter_goa_type);
+        if (iter_group == group &&
+            (id == null || iter_id == id) &&
+            (goa_type == null || iter_goa_type == goa_type))
+        {
           iter_in = iter;
           return true;
         }
@@ -345,24 +462,25 @@ public class ConfigLocation : ConfigWidget
 
   void add_volume(VolumeMonitor monitor, Volume v)
   {
-    add_volume_full(v.get_identifier(VolumeIdentifier.UUID),
-                    v.get_name(), v.get_icon());
+    if (is_allowed_volume(v))
+    {
+      add_volume_full(v.get_identifier(VolumeIdentifier.UUID),
+                      v.get_name(), v.get_icon());
+    }
   }
 
   void add_volume_full(string uuid, string name, Icon icon)
   {
     Gtk.TreeIter iter;
-    if (lookup_uuid(uuid, out iter)) {
+    if (lookup_id(Group.VOLUMES, uuid, out iter)) {
       update_volume_full(uuid, name, icon);
       return;
     }
 
-    if (is_allowed_volume(icon)) {
-      if (num_volumes++ == 0)
-        index_vol_sep = add_separator(Group.VOLUMES_SEP);
-      add_entry(icon, name, Group.VOLUMES,
-                new ConfigLocationVolume(label_sizes), uuid);
-    }
+    if (num_volumes++ == 0)
+      add_separator(Group.VOLUMES_SEP);
+    add_entry(icon, name, Group.VOLUMES,
+              new ConfigLocationVolume(label_sizes), uuid);
   }
 
   void update_volume(VolumeMonitor monitor, Volume v)
@@ -374,10 +492,10 @@ public class ConfigLocation : ConfigWidget
   void update_volume_full(string uuid, string name, Icon icon)
   {
     Gtk.TreeIter iter;
-    if (!lookup_uuid(uuid, out iter))
+    if (!lookup_id(Group.VOLUMES, uuid, out iter))
       return;
 
-    store.set(iter, COL_ICON, icon, COL_TEXT, name, COL_UUID, uuid);
+    store.set(iter, Col.ICON, icon, Col.TEXT, name, Col.ID, uuid);
   }
 
   void remove_volume(VolumeMonitor monitor, Volume v)
@@ -388,7 +506,7 @@ public class ConfigLocation : ConfigWidget
   void remove_volume_full(string uuid)
   {
     Gtk.TreeIter iter;
-    if (!lookup_uuid(uuid, out iter))
+    if (!lookup_id(Group.VOLUMES, uuid, out iter))
       return;
 
     // Make sure it isn't the saved volume; we never want to remove that
@@ -401,10 +519,8 @@ public class ConfigLocation : ConfigWidget
 
     if (--num_volumes == 0) {
       Gtk.TreeIter sep_iter;
-      if (store.get_iter_from_string(out sep_iter, index_vol_sep.to_string())) {
+      if (lookup_id(Group.VOLUMES_SEP, null, out sep_iter))
         store.remove(ref sep_iter);
-        index_vol_sep = -2;
-      }
     }
   }
 
@@ -438,47 +554,54 @@ public class ConfigLocation : ConfigWidget
 
   protected override async void set_from_config()
   {
-    int index = -1;
+    int group = -1;
+    string id = null;
+    string goa_type = null;
 
     // Check the backend type, then GIO uri if needed
     var backend = Backend.get_default_type();
-    if (backend == "s3")
-      index = index_s3;
-    else if (backend == "gcs")
-      index = index_gcs;
-    else if (backend == "gdrive")
-      index = index_gdrive;
-    else if (backend == "rackspace")
-      index = index_rackspace;
-    else if (backend == "openstack")
-      index = index_openstack;
-    else if (backend == "u1")
-      index = index_u1;
+    if (backend == "gcs" ||
+        backend == "openstack" ||
+        backend == "rackspace" ||
+        backend == "s3" ||
+        backend == "u1") {
+      group = Group.CLOUD;
+      id = backend;
+    }
+    else if (backend == "goa") {
+      var goa_settings = DejaDup.get_settings(GOA_ROOT);
+      group = Group.GOA;
+      id = goa_settings.get_string(GOA_ID_KEY);
+      goa_type = goa_settings.get_string(GOA_TYPE_KEY);
+
+      // Test if the ID is no longer valid, but the type is... we'll fall back
+      // to that.
+      if (id != "" &&
+          !lookup_id(group, id, null, goa_type) &&
+          lookup_id(group, "", null, goa_type)) {
+        id = "";
+      }
+    }
     else if (backend == "file") {
       var fsettings = DejaDup.get_settings(FILE_ROOT);
 
       if (fsettings.get_string(FILE_TYPE_KEY) == "volume") {
         if (update_saved_volume()) {
-          var uuid = fsettings.get_string(FILE_UUID_KEY);
-          Gtk.TreeIter saved_iter;
-          if (lookup_uuid(uuid, out saved_iter)) {
-            set_active_iter(saved_iter);
-            return;
-          }
+          group = Group.VOLUMES;
+          id = fsettings.get_string(FILE_UUID_KEY);
         }
       }
       else { // normal
         // If we are already on 'custom location', don't switch away from it
         // to another toplevel entry
-        Gtk.TreeIter iter0, inner_iter;
-        if (!button.get_active_iter(out iter0))
+        Gtk.TreeIter iter;
+        if (!current_iter(out iter))
           return;
-        sort_model.convert_iter_to_child_iter(out inner_iter, iter0);
 
-        int cur_index;
-        store.get(inner_iter, COL_INDEX, out cur_index);
+        int cur_group;
+        store.get(iter, Col.GROUP, out cur_group);
 
-        if (cur_index == index_custom)
+        if (cur_group == Group.REMOTE_CUSTOM)
           return;
 
         // OK, we can continue
@@ -486,21 +609,21 @@ public class ConfigLocation : ConfigWidget
                                                  ConfigURLPart.Part.SCHEME);
         switch (scheme) {
         case "dav":
-        case "davs": index = index_dav;    break;
+        case "davs": group = Group.REMOTE; id = "dav";    break;
         case "sftp":
-        case "ssh":  index = index_ssh;    break;
-        case "ftp":  index = index_ftp;    break;
-        case "smb":  index = index_smb;    break;
-        case "file": index = index_local;  break;
-        default:     index = index_custom; break;
+        case "ssh":  group = Group.REMOTE; id = "sftp";   break;
+        case "ftp":  group = Group.REMOTE; id = scheme;   break;
+        case "smb":  group = Group.REMOTE; id = scheme;   break;
+        case "file": group = Group.LOCAL;  id = scheme;   break;
+        default:     group = Group.REMOTE_CUSTOM;         break;
         }
       }
     }
 
-    if (index >= 0) {
-      Gtk.TreeIter iter;
-      if (store.get_iter_from_string(out iter, index.to_string()))
-        set_active_iter(iter);
+    if (group >= 0) {
+      Gtk.TreeIter saved_iter;
+      if (lookup_id(group, id, out saved_iter, goa_type))
+        set_active_iter(saved_iter);
     }
   }
 
@@ -510,11 +633,10 @@ public class ConfigLocation : ConfigWidget
     if (current != null)
       extras.remove(current);
 
-    Gtk.TreeIter iter0, iter;
+    Gtk.TreeIter iter;
     Value page_var;
-    if (button.get_active_iter(out iter0)) {
-      sort_model.convert_iter_to_child_iter(out iter, iter0);
-      store.get_value(iter, COL_PAGE, out page_var);
+    if (current_iter(out iter)) {
+      store.get_value(iter, Col.PAGE, out page_var);
       ConfigLocationTable page = page_var.get_object() as ConfigLocationTable;
       if (page != null)
         extras.add(page);
@@ -529,50 +651,38 @@ public class ConfigLocation : ConfigWidget
 
   async void set_location_info()
   {
-    Gtk.TreeIter iter0, iter;
-    if (!button.get_active_iter(out iter0))
+    Gtk.TreeIter iter;
+    if (!current_iter(out iter))
       return;
-    sort_model.convert_iter_to_child_iter(out iter, iter0);
 
-    int index;
-    string uuid;
-    store.get(iter, COL_INDEX, out index, COL_UUID, out uuid);
+    int group;
+    string id;
+    string goa_type;
+    store.get(iter, Col.GROUP, out group, Col.ID, out id, Col.GOA_TYPE, out goa_type);
 
-    if (index == index_s3)
-      settings.set_string(BACKEND_KEY, "s3");
-    else if (index == index_gcs)
-      settings.set_string(BACKEND_KEY, "gcs");
-    else if (index == index_gdrive)
-      settings.set_string(BACKEND_KEY, "gdrive");
-    else if (index == index_rackspace)
-      settings.set_string(BACKEND_KEY, "rackspace");
-    else if (index == index_openstack)
-      settings.set_string(BACKEND_KEY, "openstack");
-    else if (index == index_u1)
-      settings.set_string(BACKEND_KEY, "u1");
-    else if (index == index_ssh)
-      yield set_remote_info("sftp");
-    else if (index == index_ftp)
-      yield set_remote_info("ftp");
-    else if (index == index_dav) {
-      // Support not overriding davs with dav by checking current value
-      var fsettings = DejaDup.get_settings(FILE_ROOT);
-      var scheme = ConfigURLPart.read_uri_part(fsettings, FILE_PATH_KEY,
-                                               ConfigURLPart.Part.SCHEME);
-      if (scheme != "dav" && scheme != "davs")
-        scheme = "dav"; // default to non-https, since we do default to encrypted backups
-      yield set_remote_info(scheme);
+    if (group == Group.GOA) {
+      var goa_settings = DejaDup.get_settings(GOA_ROOT);
+      goa_settings.set_string(GOA_ID_KEY, id == null ? "" : id);
+      goa_settings.set_string(GOA_TYPE_KEY, goa_type);
+      settings.set_string(BACKEND_KEY, "goa");
     }
-    else if (index == index_smb)
-      yield set_remote_info("smb");
-    else if (index == index_local)
-      yield set_remote_info("file");
-    else if (index == index_custom)
-      yield set_remote_info(null);
-    else if (uuid != null)
+    else if (group == Group.CLOUD)
+      settings.set_string(BACKEND_KEY, id);
+    else if (group == Group.VOLUMES)
       yield set_volume_info(iter);
+    else if (group == Group.REMOTE || group == Group.REMOTE_CUSTOM || group == Group.LOCAL) {
+      if (id == "dav") {
+        // Support not overriding davs with dav by checking current value
+        var fsettings = DejaDup.get_settings(FILE_ROOT);
+        id = ConfigURLPart.read_uri_part(fsettings, FILE_PATH_KEY,
+                                         ConfigURLPart.Part.SCHEME);
+        if (id != "dav" && id != "davs")
+          id = "dav"; // default to non-https, since we do default to encrypted backups
+      }
+      yield set_remote_info(id);
+    }
     else {
-      warning("Unknown location index %i\n", index);
+      warning("Unknown location: group %i, id: %s\n", group, id);
     }
 
     changed();
@@ -582,7 +692,7 @@ public class ConfigLocation : ConfigWidget
   {
     // Grab volume from model
     Value vol_var;
-    store.get_value(iter, COL_UUID, out vol_var);
+    store.get_value(iter, Col.ID, out vol_var);
     var uuid = vol_var.get_string();
     if (uuid == null) {
       warning("Invalid volume location at iter %s\n", store.get_string_from_iter(iter));

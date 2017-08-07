@@ -20,14 +20,59 @@
 # This script dumps you in a special shell, ideal for testing deja-dup.
 # It will point at the locally built executables and plugins.  It will
 # point at a custom dconf location and $HOME.
+#
+# There are three modes:
+# 1) default: called as 'shell', it simply points at the built versions
+# 2) local: called as 'shell-local', it also sets up a fake env
+# 3) system: called as 'shell-system', it sets ups a fake env and points at
+#            system executables
 
 TOPDIR=$(readlink -e "$(dirname ${0})/..")
 BUILDDIR="${TOPDIR}/builddir"
 
+SHNAME=$(basename $0)
 
-# Create fake home environment
+# Create temp environment
 ROOTDIR=$(mktemp -d --tmpdir dd.XXXXXXXXXX)
 export DEJA_DUP_TEST_ROOT="${ROOTDIR}"
+
+run_shell()
+{
+  ARGS=$@
+  if [ -z "$ARGS" ]; then
+    export PS1='\[\e[1;32m\]deja-dup\$\[\e[0m\] '
+    cd "${ROOTDIR}"
+    ARGS="bash --norc"
+
+    # Explain the details
+    echo "Your data playground and home directory is ${ROOTDIR}"
+    echo "Run deja-dup or deja-dup-monitor to test."
+    echo "Run exit to leave."
+    echo "Run exit 1 to leave and keep data playground intact."
+  fi
+  PREFIX=
+  if [ "$SHNAME" != "shell" ]; then
+    PREFIX="dbus-run-session -- sh -c"
+  fi
+  if $PREFIX $ARGS; then
+    rm -rf "${ROOTDIR}" # Cleanup on clean exit
+  fi
+}
+
+
+if [ "$SHNAME" = "shell" ]; then
+  mkdir -p "${ROOTDIR}/share/glib-2.0/schemas"
+  cp "${TOPDIR}/data/org.gnome.DejaDup.gschema.xml" "${ROOTDIR}/share/glib-2.0/schemas"
+  glib-compile-schemas "${ROOTDIR}/share/glib-2.0/schemas"
+  export XDG_DATA_DIRS="${ROOTDIR}/share:${XDG_DATA_DIRS}"
+
+  export DEJA_DUP_TOOLS_PATH="${BUILDDIR}/libdeja/tools/duplicity"
+  export PATH="${BUILDDIR}/deja-dup/monitor:${BUILDDIR}/deja-dup:${PATH}"
+
+  run_shell $@
+  exit
+fi
+
 
 OLD_HOME="${HOME}"
 HOME="${ROOTDIR}"
@@ -70,26 +115,8 @@ if [ "$SHNAME" = "shell" ]; then
 
   export DEJA_DUP_TOOLS_PATH="${BUILDDIR}/libdeja/tools/duplicity"
   export PATH="${BUILDDIR}/deja-dup/monitor:${BUILDDIR}/deja-dup:${PATH}"
-
-  unset DEJA_DUP_TEST_SYSTEM
 else
   export DEJA_DUP_TEST_SYSTEM=1
 fi
 
-
-# Now actually run shell
-ARGS="$@"
-if [ -z "$ARGS" ]; then
-  export PS1='\[\e[1;32m\]deja-dup\$\[\e[0m\] '
-  cd "${ROOTDIR}"
-  ARGS="bash --norc"
-
-  # Explain the details
-  echo "Your data playground and home directory is ${ROOTDIR}"
-  echo "Run deja-dup or deja-dup-monitor to test."
-  echo "Run exit to leave."
-  echo "Run exit 1 to leave and keep data playground intact."
-fi
-if dbus-run-session -- sh -c "$ARGS"; then
-  rm -rf "${ROOTDIR}" # Cleanup on clean exit
-fi
+run_shell $@

@@ -17,7 +17,7 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 run_target('autopilot',
-    command: ['env', 'LANG=C', 'DEJA_DUP_TESTING=1', 'PYTHONDONTWRITEBYTECODE=1', 'PYTHONPATH=' + meson.current_source_dir(), join_paths(meson.source_root(), 'tests', 'shell'), 'autopilot-sandbox-run', 'deja_dup_autopilot'],
+    command: ['env', 'LANG=C', 'DEJA_DUP_TESTING=1', 'PYTHONDONTWRITEBYTECODE=1', 'PYTHONPATH=' + meson.current_source_dir(), join_paths(meson.source_root(), 'tests', 'shell-local'), 'autopilot-sandbox-run', 'deja_dup_autopilot'],
     depends: [deja_dup])
 
 run_target('autopilot-system',

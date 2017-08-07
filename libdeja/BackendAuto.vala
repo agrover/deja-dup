@@ -41,74 +41,24 @@ public class BackendAuto : Backend
   }
 
   public override string get_location(ref bool as_root) {
-    return "invalid";
+    return "invalid://";
   }
 
   public override string get_location_pretty() {
     return "";
   }
 
-  static bool started = false;
-  static bool done = false;
-  Checker gdrive_checker;
-  Checker s3checker;
   construct {
-    if (!started) {
-      // Start slow process of testing various backends to see
-      // which to use.
-      started = true;
-      ref(); // Give us time to finish
-
-      // List is (in order): gdrive, s3, file
-      gdrive_checker = BackendGDrive.get_checker();
-      gdrive_checker.notify["complete"].connect(examine_checkers);
-
-      s3checker = BackendS3.get_checker();
-      s3checker.notify["complete"].connect(examine_checkers);
-
-      examine_checkers();
-    }
-  }
-
-  void examine_checkers()
-  {
-    if (done)
-      return;
-
-    if (!gdrive_checker.complete)
-      return;
-    else if (gdrive_checker.available) {
-      finish("gdrive");
-      return;
-    }
-
-    if (!s3checker.complete)
-      return;
-    else if (s3checker.available) {
-      finish("s3");
-      return;
-    }
-
-    finish("file");
-  }
-
-  void finish(string mode)
-  {
-    if (mode == "file") {
-      var file_settings = get_settings(FILE_ROOT);
-      file_settings.delay();
-
-      file_settings.set_string(FILE_TYPE_KEY, "normal");
-
-      var path = Path.build_filename(Environment.get_home_dir(), "deja-dup");
-      file_settings.set_string(FILE_PATH_KEY, path);
-
-      file_settings.apply();
-    }
+    // We used to check various backends to see if we had the right installed
+    // files for them and pick a best one.  But now that we support GOA, we
+    // just set that.  We should consider getting rid of this class.  The
+    // intent was that changing gsettings defaults wouldn't change the user's
+    // backup (i.e. ensuring that the storage location gsettings would be
+    // actively set, not relying on the gschema default).
     var settings = get_settings();
-    settings.set_string(BACKEND_KEY, mode);
-    done = true;
-    unref();
+    var goa_settings = get_settings(GOA_ROOT);
+    goa_settings.set_string(GOA_TYPE_KEY, "owncloud");
+    settings.set_string(BACKEND_KEY, "goa");
   }
 }
 
