@@ -40,7 +40,6 @@ public class ConfigLocation : ConfigWidget
     CLOUD,
     CLOUD_SEP,
     REMOTE,
-    REMOTE_CUSTOM,
     REMOTE_SEP,
     VOLUMES,
     VOLUMES_SEP,
@@ -117,18 +116,8 @@ public class ConfigLocation : ConfigWidget
     insert_rackspace();
     insert_openstack();
 
-    // Now insert remote servers
     add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-              _("SSH"), Group.REMOTE, new ConfigLocationSSH(label_sizes), "sftp");
-    add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-              _("Windows Share"), Group.REMOTE, new ConfigLocationSMB(label_sizes), "smb");
-    add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-              _("FTP"), Group.REMOTE, new ConfigLocationFTP(label_sizes), "ftp");
-    add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-              _("WebDAV"), Group.REMOTE, new ConfigLocationDAV(label_sizes), "dav");
-
-    add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
-              _("Custom Location"), Group.REMOTE_CUSTOM,
+              _("Network Server"), Group.REMOTE,
               new ConfigLocationCustom(label_sizes));
 
     add_separator(Group.REMOTE_SEP);
@@ -602,21 +591,15 @@ public class ConfigLocation : ConfigWidget
         int cur_group;
         store.get(iter, Col.GROUP, out cur_group);
 
-        if (cur_group == Group.REMOTE_CUSTOM)
+        if (cur_group == Group.REMOTE)
           return;
 
         // OK, we can continue
         var scheme = ConfigURLPart.read_uri_part(fsettings, FILE_PATH_KEY,
                                                  ConfigURLPart.Part.SCHEME);
         switch (scheme) {
-        case "dav":
-        case "davs": group = Group.REMOTE; id = "dav";    break;
-        case "sftp":
-        case "ssh":  group = Group.REMOTE; id = "sftp";   break;
-        case "ftp":  group = Group.REMOTE; id = scheme;   break;
-        case "smb":  group = Group.REMOTE; id = scheme;   break;
-        case "file": group = Group.LOCAL;  id = scheme;   break;
-        default:     group = Group.REMOTE_CUSTOM;         break;
+        case "file": group = Group.LOCAL;  break;
+        default:     group = Group.REMOTE; break;
         }
       }
     }
@@ -671,15 +654,7 @@ public class ConfigLocation : ConfigWidget
       settings.set_string(BACKEND_KEY, id);
     else if (group == Group.VOLUMES)
       yield set_volume_info(iter);
-    else if (group == Group.REMOTE || group == Group.REMOTE_CUSTOM || group == Group.LOCAL) {
-      if (id == "dav") {
-        // Support not overriding davs with dav by checking current value
-        var fsettings = DejaDup.get_settings(FILE_ROOT);
-        id = ConfigURLPart.read_uri_part(fsettings, FILE_PATH_KEY,
-                                         ConfigURLPart.Part.SCHEME);
-        if (id != "dav" && id != "davs")
-          id = "dav"; // default to non-https, since we do default to encrypted backups
-      }
+    else if (group == Group.REMOTE || group == Group.LOCAL) {
       yield set_remote_info(id);
     }
     else {
