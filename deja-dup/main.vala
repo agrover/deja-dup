@@ -24,6 +24,7 @@ extern unowned Resource resources_get_resource();
 public class DejaDupApp : Gtk.Application
 {
   Gtk.ApplicationWindow main_window = null;
+  SimpleAction quit_action = null;
   public AssistantOperation op {get; private set; default = null;}
 
   const OptionEntry[] options = {
@@ -191,6 +192,13 @@ public class DejaDupApp : Gtk.Application
     add_action_entries(actions, this);
     set_accels_for_action("app.help", {"F1"});
     set_accels_for_action("app.quit", {"<Primary>q"});
+    quit_action = lookup_action("quit") as SimpleAction;
+  }
+
+  void clear_op()
+  {
+    op = null;
+    quit_action.set_enabled(true);
   }
 
   void assign_op(AssistantOperation op)
@@ -201,7 +209,8 @@ public class DejaDupApp : Gtk.Application
     }
 
     this.op = op;
-    this.op.destroy.connect(() => {this.op = null;});
+    this.op.destroy.connect(clear_op);
+    quit_action.set_enabled(false);
     add_window(op);
     op.show_all();
   }
