@@ -116,7 +116,7 @@ public class ConfigLocation : ConfigWidget
     insert_rackspace();
     insert_openstack();
 
-    add_entry(new ThemedIcon.with_default_fallbacks("folder-remote"),
+    add_entry(new ThemedIcon("network-server"),
               _("Network Server"), Group.REMOTE,
               new ConfigLocationCustom(label_sizes));
 

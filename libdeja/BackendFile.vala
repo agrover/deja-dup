@@ -210,7 +210,7 @@ public class BackendFile : Backend
   public override Icon? get_icon() {
     var settings = get_settings(FILE_ROOT);
     var type = settings.get_string(FILE_TYPE_KEY);
-    string icon_name = "folder-remote";
+    string icon_name = "network-server";
     if (type == "volume")
       icon_name = settings.get_string(FILE_ICON_KEY);
     else {
