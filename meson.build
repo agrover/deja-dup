@@ -52,7 +52,7 @@ goa_dep = dependency('goa-1.0', version: '>= 3.8.0')
 goabackend_dep = dependency('goa-backend-1.0')
 gtk_dep = dependency('gtk+-3.0', version: '>= 3.22')
 nautilus_dep = dependency('libnautilus-extension', required: false)
-packagekit_dep = dependency('packagekit-glib2')
+packagekit_dep = dependency('packagekit-glib2', version: '>=0.6.5')
 peas_dep = dependency('libpeas-1.0')
 secret_dep = dependency('libsecret-1')
 

@@ -33,7 +33,7 @@ public class PreferencesPeriodicSwitch : Gtk.Switch
 
 public class Preferences : Gtk.Grid
 {
-  public DejaDup.PreferencesPeriodicSwitch auto_switch {get; set; default = null;}
+  public DejaDup.PreferencesPeriodicSwitch external_auto_switch {get; set; default = null;}
   public bool duplicity_installed {get; private set; default = false;}
 
   DejaDupApp _app;
@@ -56,16 +56,17 @@ public class Preferences : Gtk.Grid
   DejaDup.ConfigLabelDescription restore_desc;
   Gtk.Button restore_button;
   Gtk.ProgressBar restore_progress;
+  DejaDup.PreferencesPeriodicSwitch auto_switch;
   const int PAGE_HMARGIN = 24;
   const int PAGE_VMARGIN = 12;
 
   public Preferences(DejaDup.PreferencesPeriodicSwitch? auto_switch)
   {
-    Object(auto_switch: auto_switch);
+    Object(external_auto_switch: auto_switch);
 
     // Set initial switch sensitivity, but for some odd reason we can't set
     // this earlier.  Even if at the end of the constructor, it gets reset...
-    auto_switch.sensitive = duplicity_installed;
+    external_auto_switch.sensitive = duplicity_installed;
   }
 
   async void install_duplicity()
@@ -76,14 +77,21 @@ public class Preferences : Gtk.Grid
     try {
       var task = new Pk.Task();
       var results = yield task.resolve_async(Pk.Filter.NOT_INSTALLED, {"duplicity"}, null, () => {});
-      if (results != null && results.get_error_code () == null) {
-
+      if (results != null && results.get_error_code () == null)
+      {
         // Convert from List to array (I don't know why the API couldn't be friendlier...)
         var package_array = results.get_package_array();
-        var package_ids = new string[package_array.length + 1];
-        package_ids[package_array.length] = null;
+        var package_ids = new string[0];
+        var package_names = new GenericSet<string>(str_hash, str_equal);
         for (var i = 0; i < package_array.length; i++) {
-            package_ids[i] = package_array.data[i].get_id();
+          // First make sure we haven't added packages with this name already, which can happen
+          // if the user has multiple arch repositories enabled (like amd64 and i386). We could
+          // instead simply take the first result, but we want to make it easy for distros to
+          // patch the above resolve_async line to have multiple packages if they want.
+          if (!package_names.contains(package_array.data[i].get_name())) {
+            package_names.add(package_array.data[i].get_name());
+            package_ids += package_array.data[i].get_id();
+          }
         }
 
         yield task.install_packages_async(package_ids, null, (p, t) => {
@@ -98,6 +106,7 @@ public class Preferences : Gtk.Grid
           restore_desc.everything_installed = true;
           restore_button.label = _("_Restore…");
           auto_switch.sensitive = true;
+          external_auto_switch.sensitive = true;
         }
       }
     }
@@ -300,6 +309,7 @@ public class Preferences : Gtk.Grid
     table = new_panel();
     table.row_spacing = 6;
     table.column_spacing = 12;
+    table.halign = Gtk.Align.CENTER;
     row = 0;
 
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
@@ -341,17 +351,16 @@ public class Preferences : Gtk.Grid
     table.halign = Gtk.Align.CENTER;
     row = 0;
 
-    if (auto_switch == null) {
-      var align = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
-      auto_switch = new DejaDup.PreferencesPeriodicSwitch();
-      align.add(auto_switch);
-      label = new Gtk.Label.with_mnemonic(_("_Automatic backup"));
-      label.mnemonic_widget = auto_switch;
-      label.xalign = 1.0f;
-      table.attach(label, 0, row, 1, 1);
-      table.attach(align, 1, row, 1, 1);
-      ++row;
-    }
+    var align = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
+    auto_switch = new DejaDup.PreferencesPeriodicSwitch();
+    auto_switch.sensitive = duplicity_installed;
+    align.add(auto_switch);
+    label = new Gtk.Label.with_mnemonic(_("_Automatic backup"));
+    label.mnemonic_widget = auto_switch;
+    label.xalign = 1.0f;
+    table.attach(label, 0, row, 1, 1);
+    table.attach(align, 1, row, 1, 1);
+    ++row;
 
     w = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
     w.hexpand = true;

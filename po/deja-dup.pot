@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-08 01:20-0400\n"
+"POT-Creation-Date: 2017-08-09 15:43-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,7 +86,7 @@ msgstr ""
 msgid "Back Up"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:6 deja-dup/Preferences.vala:285
+#: data/org.gnome.DejaDup.gschema.xml:6 deja-dup/Preferences.vala:294
 msgid "Folders to save"
 msgstr ""
 
@@ -100,7 +100,7 @@ msgid ""
 "relative to the user’s home directory."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:11 deja-dup/Preferences.vala:296
+#: data/org.gnome.DejaDup.gschema.xml:11 deja-dup/Preferences.vala:305
 msgid "Folders to ignore"
 msgstr ""
 
@@ -436,7 +436,7 @@ msgstr ""
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
 #: deja-dup/monitor/deja-dup-monitor.desktop.in:5
-#: deja-dup/monitor/monitor.vala:286
+#: deja-dup/monitor/monitor.vala:288
 msgid "Backup Monitor"
 msgstr ""
 
@@ -616,8 +616,8 @@ msgstr ""
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
 #: deja-dup/AssistantOperation.vala:575
-#: libdeja/tools/duplicity/DuplicityJob.vala:704
-#: libdeja/tools/duplicity/DuplicityJob.vala:1083
+#: libdeja/tools/duplicity/DuplicityJob.vala:702
+#: libdeja/tools/duplicity/DuplicityJob.vala:1081
 msgid "Failed with an unknown error."
 msgstr ""
 
@@ -897,65 +897,65 @@ msgstr ""
 msgid "_Domain"
 msgstr ""
 
-#: deja-dup/Preferences.vala:97 deja-dup/Preferences.vala:249
+#: deja-dup/Preferences.vala:105 deja-dup/Preferences.vala:258
 msgid "_Back Up Now…"
 msgstr ""
 
-#: deja-dup/Preferences.vala:99 deja-dup/Preferences.vala:203
+#: deja-dup/Preferences.vala:107 deja-dup/Preferences.vala:212
 msgid "_Restore…"
 msgstr ""
 
-#: deja-dup/Preferences.vala:116
+#: deja-dup/Preferences.vala:125
 msgid "Could not install"
 msgstr ""
 
-#: deja-dup/Preferences.vala:150
+#: deja-dup/Preferences.vala:159
 msgid "Categories"
 msgstr ""
 
-#: deja-dup/Preferences.vala:203
+#: deja-dup/Preferences.vala:212
 msgid "_Install…"
 msgstr ""
 
-#: deja-dup/Preferences.vala:249
+#: deja-dup/Preferences.vala:258
 #: deja-dup/widgets/ConfigLabelDescription.vala:59
 #: deja-dup/widgets/ConfigLabelDescription.vala:83
 msgid "Install…"
 msgstr ""
 
-#: deja-dup/Preferences.vala:274
+#: deja-dup/Preferences.vala:283
 msgid "Overview"
 msgstr ""
 
-#: deja-dup/Preferences.vala:307
+#: deja-dup/Preferences.vala:317
 msgid "_Storage location"
 msgstr ""
 
 #. Translators: storage as in "where to store the backup"
-#: deja-dup/Preferences.vala:324
+#: deja-dup/Preferences.vala:334
 msgid "Storage location"
 msgstr ""
 
-#: deja-dup/Preferences.vala:348
+#: deja-dup/Preferences.vala:358
 msgid "_Automatic backup"
 msgstr ""
 
 #. translators: as in "Every day"
-#: deja-dup/Preferences.vala:360
+#: deja-dup/Preferences.vala:369
 msgid "_Every"
 msgstr ""
 
-#: deja-dup/Preferences.vala:370
+#: deja-dup/Preferences.vala:379
 msgctxt "verb"
 msgid "_Keep"
 msgstr ""
 
-#: deja-dup/Preferences.vala:377
+#: deja-dup/Preferences.vala:386
 msgid ""
 "Old backups will be deleted earlier if the storage location is low on space."
 msgstr ""
 
-#: deja-dup/Preferences.vala:387
+#: deja-dup/Preferences.vala:396
 msgid "Scheduling"
 msgstr ""
 
@@ -1008,12 +1008,12 @@ msgstr ""
 msgid "Show _Progress"
 msgstr ""
 
-#: deja-dup/monitor/monitor.vala:81 libdeja/BackendRackspace.vala:49
+#: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:49
 #: libdeja/BackendS3.vala:59
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 
-#: deja-dup/monitor/monitor.vala:84
+#: deja-dup/monitor/monitor.vala:85
 msgid ""
 "Backup will begin when an unmetered network connection becomes available."
 msgstr ""
@@ -1253,6 +1253,7 @@ msgid "_Choose Folder…"
 msgstr ""
 
 #: deja-dup/widgets/ConfigLocationFile.vala:45
+#: deja-dup/widgets/ConfigLocationGCS.vala:36
 #: deja-dup/widgets/ConfigLocationGoa.vala:36
 #: deja-dup/widgets/ConfigLocationS3.vala:33
 #: deja-dup/widgets/ConfigLocationVolume.vala:33
@@ -1261,6 +1262,15 @@ msgstr ""
 
 #: deja-dup/widgets/ConfigLocationFile.vala:50
 msgid "Choose Folder"
+msgstr ""
+
+#. Translators: GCS is Google Cloud Services
+#: deja-dup/widgets/ConfigLocationGCS.vala:32
+msgid "GCS Access Key I_D"
+msgstr ""
+
+#: deja-dup/widgets/ConfigLocationGCS.vala:34
+msgid "_Bucket"
 msgstr ""
 
 #: deja-dup/widgets/ConfigLocationGoa.vala:56
@@ -1325,7 +1335,7 @@ msgid "Backup will begin when %s is connected."
 msgstr ""
 
 #: libdeja/BackendFile.vala:428 libdeja/BackendFile.vala:494
-#: libdeja/BackendGoa.vala:169
+#: libdeja/BackendGoa.vala:149
 msgid "Storage location not available"
 msgstr ""
 
@@ -1338,8 +1348,7 @@ msgstr ""
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr ""
 
-#. likely account credentials are old?
-#: libdeja/BackendGoa.vala:100 libdeja/BackendGoa.vala:115
+#: libdeja/BackendGoa.vala:100
 msgid "Backup will begin when a storage location is configured"
 msgstr ""
 
@@ -1352,11 +1361,11 @@ msgstr ""
 msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr ""
 
-#: libdeja/BackendGoa.vala:163
+#: libdeja/BackendGoa.vala:143
 msgid "Waiting for Online Accounts to be configured in backup settings…"
 msgstr ""
 
-#: libdeja/BackendGoa.vala:167
+#: libdeja/BackendGoa.vala:147
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
@@ -1485,10 +1494,10 @@ msgid "Listing files…"
 msgstr ""
 
 #: libdeja/Operation.vala:69 libdeja/Operation.vala:103
-#: libdeja/tools/duplicity/DuplicityJob.vala:387
-#: libdeja/tools/duplicity/DuplicityJob.vala:394
-#: libdeja/tools/duplicity/DuplicityJob.vala:419
-#: libdeja/tools/duplicity/DuplicityJob.vala:424
+#: libdeja/tools/duplicity/DuplicityJob.vala:385
+#: libdeja/tools/duplicity/DuplicityJob.vala:392
+#: libdeja/tools/duplicity/DuplicityJob.vala:417
+#: libdeja/tools/duplicity/DuplicityJob.vala:422
 msgid "Preparing…"
 msgstr ""
 
@@ -1498,29 +1507,29 @@ msgid "Paused (no network)"
 msgstr ""
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: libdeja/tools/duplicity/DuplicityJob.vala:451
+#: libdeja/tools/duplicity/DuplicityJob.vala:449
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr ""
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: libdeja/tools/duplicity/DuplicityJob.vala:518
+#: libdeja/tools/duplicity/DuplicityJob.vala:516
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:541
+#: libdeja/tools/duplicity/DuplicityJob.vala:539
 msgid "Backup location does not have enough free space."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:561
-#: libdeja/tools/duplicity/DuplicityJob.vala:575
+#: libdeja/tools/duplicity/DuplicityJob.vala:559
+#: libdeja/tools/duplicity/DuplicityJob.vala:573
 msgid "Cleaning up…"
 msgstr ""
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: libdeja/tools/duplicity/DuplicityJob.vala:671
+#: libdeja/tools/duplicity/DuplicityJob.vala:669
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
@@ -1529,7 +1538,7 @@ msgstr ""
 #. OK, we succeeded yay!  But some files didn't actually restore
 #. because we couldn't write to them.  So tell the user so they
 #. don't think everything is hunky dory.
-#: libdeja/tools/duplicity/DuplicityJob.vala:687
+#: libdeja/tools/duplicity/DuplicityJob.vala:685
 msgid ""
 "Could not restore the following files.  Please make sure you are able to "
 "write to them."
@@ -1538,7 +1547,7 @@ msgstr ""
 #. make text a little nicer than duplicity gives
 #. duplicity gives something like "home/blah/blah not found in archive,
 #. no files restored".
-#: libdeja/tools/duplicity/DuplicityJob.vala:931
+#: libdeja/tools/duplicity/DuplicityJob.vala:929
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr ""
@@ -1546,17 +1555,17 @@ msgstr ""
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: libdeja/tools/duplicity/DuplicityJob.vala:937
-#: libdeja/tools/duplicity/DuplicityJob.vala:1035
-#: libdeja/tools/duplicity/DuplicityJob.vala:1039
+#: libdeja/tools/duplicity/DuplicityJob.vala:935
+#: libdeja/tools/duplicity/DuplicityJob.vala:1033
+#: libdeja/tools/duplicity/DuplicityJob.vala:1037
 msgid "Bad encryption password."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:942
+#: libdeja/tools/duplicity/DuplicityJob.vala:940
 msgid "Computer name changed"
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:942
+#: libdeja/tools/duplicity/DuplicityJob.vala:940
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -1564,69 +1573,69 @@ msgid ""
 "location."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:977
+#: libdeja/tools/duplicity/DuplicityJob.vala:975
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr ""
 
 #. assume error is on backend side
-#: libdeja/tools/duplicity/DuplicityJob.vala:981
-#: libdeja/tools/duplicity/DuplicityJob.vala:985
+#: libdeja/tools/duplicity/DuplicityJob.vala:979
+#: libdeja/tools/duplicity/DuplicityJob.vala:983
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:989
+#: libdeja/tools/duplicity/DuplicityJob.vala:987
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:996
+#: libdeja/tools/duplicity/DuplicityJob.vala:994
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1002
-#: libdeja/tools/duplicity/DuplicityJob.vala:1054
+#: libdeja/tools/duplicity/DuplicityJob.vala:1000
+#: libdeja/tools/duplicity/DuplicityJob.vala:1052
 msgid "No space left."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1016
+#: libdeja/tools/duplicity/DuplicityJob.vala:1014
 msgid "Invalid ID."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1018
+#: libdeja/tools/duplicity/DuplicityJob.vala:1016
 msgid "Invalid secret key."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1020
+#: libdeja/tools/duplicity/DuplicityJob.vala:1018
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1029
+#: libdeja/tools/duplicity/DuplicityJob.vala:1027
 msgid "S3 bucket name is not available."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1043
+#: libdeja/tools/duplicity/DuplicityJob.vala:1041
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1045
+#: libdeja/tools/duplicity/DuplicityJob.vala:1043
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1056
+#: libdeja/tools/duplicity/DuplicityJob.vala:1054
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1064
+#: libdeja/tools/duplicity/DuplicityJob.vala:1062
 msgid "No backup files found"
 msgstr ""
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1114
+#: libdeja/tools/duplicity/DuplicityJob.vala:1112
 msgid "Uploading…"
 msgstr ""
 

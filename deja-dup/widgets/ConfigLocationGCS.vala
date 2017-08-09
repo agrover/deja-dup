@@ -28,7 +28,8 @@ public class ConfigLocationGCS : ConfigLocationTable
   }
 
   construct {
-    add_widget(_("Google Cloud Storage Access Key I_D"),
+    // Translators: GCS is Google Cloud Services
+    add_widget(_("GCS Access Key I_D"),
                new ConfigEntry(DejaDup.GCS_ID_KEY, DejaDup.GCS_ROOT));
     add_widget(_("_Bucket"),
                new ConfigEntry(DejaDup.GCS_BUCKET_KEY, DejaDup.GCS_ROOT));
