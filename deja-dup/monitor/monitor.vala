@@ -57,6 +57,7 @@ static void network_changed()
   // LP bug 805140) we don't error out too soon.
   if (netcheck_id > 0)
     Source.remove(netcheck_id);
+  netcheck_id = 0;
   if (valid_network())
     netcheck_id = Timeout.add_seconds(120, network_check);
 }
@@ -202,6 +203,7 @@ static void prepare_run(TimeSpan wait_time)
     debug("Waiting %ld seconds until next backup.", (long)secs);
     timeout_id = Timeout.add_seconds((uint)secs, () => {
       kickoff.begin();
+      timeout_id = 0;
       return false;
     });
   }
