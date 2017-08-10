@@ -106,10 +106,7 @@ internal class DuplicityInstance : Object
     // Add logging argument
     if (as_root) {
       // Make log file
-      int logfd = 0;
-      string logname;
-      logfd = FileUtils.open_tmp(Config.PACKAGE + "-XXXXXX", out logname);
-      logfile = File.new_for_path(logname);
+      logfile = File.new_tmp(Config.PACKAGE + "-XXXXXX", out logstream);
       argv.append("--log-file=%s".printf(logfile.get_path()));
     }
     else {
@@ -136,38 +133,19 @@ internal class DuplicityInstance : Object
     
     // Run as root if needed
     if (as_root &&
-        Environment.find_program_in_path("pkexec") != null &&
-        Environment.find_program_in_path("sh") != null) {
-      // pkexec does not preserve environment variables, so we need to stuff
-      // the ones we care about in a shell script.
-
-      string scriptname;
-      var scriptfd = FileUtils.open_tmp(Config.PACKAGE + "-XXXXXX", out scriptname);
-      scriptfile = File.new_for_path(scriptname);
-      Posix.close(scriptfd);
-      
-      // We have to wrap all current args into one string.
-      StringBuilder args = new StringBuilder();
-
-      // Set environment variables for subprocess here because sudo reserves
+        Environment.find_program_in_path("pkexec") != null) {
+      // Set environment variables for subprocess here because pkexec reserves
       // the right to strip them.
+      StringBuilder args = new StringBuilder();
       foreach (string env in envp_in)
-        args.append("export '%s'\n".printf(env));
+        args.append("%s\n".printf(env));
 
-      foreach (string a in argv) {
-        if (a == null)
-          break;
-        if (args.len == 0)
-          args.append(Shell.quote(a));
-        else
-          args.append(" " + Shell.quote(a));
-      }
-      FileUtils.set_contents(scriptname, args.str);
-      
-      argv = new List<string>(); // reset
-      
-      argv.prepend(scriptname);
-      argv.prepend("sh");
+      IOStream iostream;
+      scriptfile = File.new_tmp(Config.PACKAGE + "-XXXXXX", out iostream);
+      yield iostream.get_output_stream().write_all_async(args.data, Priority.DEFAULT, null, null);
+
+      argv.prepend(scriptfile.get_path());
+      argv.prepend(Path.build_filename(Config.PKG_LIBEXEC_DIR, "duplicity"));
       argv.prepend("pkexec");
     }
     
@@ -235,6 +213,7 @@ internal class DuplicityInstance : Object
   int[] pipes;
   DataInputStream reader;
   File logfile;
+  IOStream logstream;
   File scriptfile;
   bool process_done;
   int status;
@@ -334,22 +313,15 @@ internal class DuplicityInstance : Object
     *
     * Stream initiated either from log file or pipe
     */
-    try {
-      InputStream stream;
-      
-      if (logfile != null)
-        stream = yield logfile.read_async(Priority.DEFAULT, null);
-      else
-        stream = new UnixInputStream(pipes[0], true);
-      
-      reader = new DataInputStream(stream);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      done(false, false);
-      return;
-    }
-    
+    InputStream stream;
+
+    if (logstream != null)
+      stream = logstream.get_input_stream();
+    else
+      stream = new UnixInputStream(pipes[0], true);
+
+    reader = new DataInputStream(stream);
+
     // This loop goes on while rest of class is doing its work.  We ref
     // it to make sure that the rest of the class doesn't drop from under us.
     ref();

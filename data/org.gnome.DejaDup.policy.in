@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD polkit Policy Configuration 1.0//EN"
+"http://www.freedesktop.org/software/polkit/policyconfig-1.dtd">
+
+<policyconfig>
+  <icon_name>deja-dup</icon_name>
+
+  <action id="org.gnome.DejaDup.duplicity">
+    <description gettext-domain="deja-dup">Restore</description>
+    <message gettext-domain="deja-dup">Privileges are required to restore files to system locations</message>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">@pkglibexecdir@/duplicity</annotate>
+  </action>
+
+</policyconfig>

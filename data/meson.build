@@ -65,5 +65,12 @@ deja_dup_appdata = custom_target('org.gnome.DejaDup.appdata.xml',
 test('validate-appstream', appstream_util,
     args: ['--nonet', 'validate-relax', deja_dup_appdata.full_path()])
 
+conf_data = configuration_data()
+conf_data.set('pkglibexecdir', pkglibexecdir)
+vars = configure_file(input: 'org.gnome.DejaDup.policy.in',
+    output: 'org.gnome.DejaDup.policy',
+    configuration: conf_data,
+    install_dir: join_paths(datadir, 'polkit-1', 'actions'))
+
 message('You may need to recompile your gsettings schemas or regenerate
          your icon cache after installation.')

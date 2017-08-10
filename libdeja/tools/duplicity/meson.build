@@ -35,3 +35,9 @@ configure_file(
     input: 'duplicity.plugin',
     output: 'duplicity.plugin',
     install_dir: toolsdir)
+
+# This is used when running duplicity as root.
+# See data/org.gnome.DejaDup.policy.in and DuplicityInstance.vala for more details.
+install_data('duplicity',
+    install_dir: pkglibexecdir,
+    install_mode: 'rwxr-xr-x')
