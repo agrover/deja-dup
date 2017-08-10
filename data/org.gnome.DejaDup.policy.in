@@ -12,7 +12,8 @@
     <defaults>
       <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
-      <allow_active>auth_admin_keep</allow_active>
+      <!-- Don't use _keep here.  It exposes us to a potential attack where anybody in the session can use our script as root to overwrite files using just our cached auth. Unfortunately, the way deja-dup is currently written, this means that we might ask user twice for root password if backup is encrypted.  We can try to solve that separately, it's better than a security vulnerability. -->
+      <allow_active>auth_admin</allow_active>
     </defaults>
     <annotate key="org.freedesktop.policykit.exec.path">@pkglibexecdir@/duplicity</annotate>
   </action>
