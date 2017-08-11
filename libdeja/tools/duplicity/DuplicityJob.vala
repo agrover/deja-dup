@@ -511,6 +511,10 @@ internal class DuplicityJob : DejaDup.ToolJob
 
     var free = yield backend.get_space();
     var total = yield backend.get_space(false);
+    // Sanity check total here, plus this can actually happen if an overflow
+    // occurs (GNOME bug 786177).
+    if (free != DejaDup.Backend.INFINITE_SPACE && free > total)
+      total = free;
     if (total < progress_total) {
         // Tiny backup location.  Suggest they get a larger one.
         show_error(_("Backup location is too small.  Try using one with more space."));
