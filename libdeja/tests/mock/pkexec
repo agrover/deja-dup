@@ -17,9 +17,14 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-# Emulate pkexec's clearing of environment, but keep test ones
+set -e
 
+# Emulate pkexec's clearing of environment, but keep test ones
 VARS="DEJA_DUP_TEST_AS_ROOT=1 $(env | grep ^DEJA_DUP_ | tr '\n' ' ')"
 VARS="$VARS PATH=$PATH XDG_DATA_DIRS=$XDG_DATA_DIRS XDG_CACHE_HOME=$XDG_CACHE_HOME"
 
-env -i $VARS $*
+# Test that first argument is our custom duplicity polkit script
+echo $1 | grep '.*/deja-dup/duplicity'
+shift
+
+env -i $VARS "$(dirname $0)/../../tools/duplicity/duplicity" $*
