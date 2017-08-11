@@ -2,12 +2,12 @@
 
 When making a non-trivial change, remember to add yourself to AUTHORS and deja-dup/help/C/credits.page
 
-deja-dup uses cmake, but for most development purposes, you can simply use the convenience top-level Makefile:
+deja-dup uses meson, but for most development purposes, you can simply use the convenience top-level Makefile:
  * To build: make
  * To test: make check
  * To install: make install DESTDIR=/tmp/deja-dup
 
-When testing a change, it is helpful to run ./tests/shell
+When testing a change, it is helpful to run ./tests/shell (or shell-local if you want a silo'd dbus environment too)
 That will give you a full shell pointing at all your built executables.
 
 == Folder Layout ==
@@ -25,7 +25,7 @@ Steps:
  * Update help documentation (new arguments, new gui labels)
  * make check dist
  * debuild, install (to catch any foolish errors that check missed)
- * Update CMakeLists.txt version
+ * Update toplevel meson.build version
  * Tag git with new release number (4.0 for 4.0)
  * Update LP (new release, new download)
  * NEWSTABLE: Update LP testing recipe version
