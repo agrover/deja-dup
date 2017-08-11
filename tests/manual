@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+# -*- Mode: Python; indent-tabs-mode: nil; tab-width: 2; coding: utf-8 -*-
+#
+# This file is part of Déjà Dup.
+# For copyright information, see AUTHORS.
+#
+# Déjà Dup is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Déjà Dup is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
+
+import configparser
+import os
+import subprocess
+import sys
+
+from gi.repository import Gio, GLib
+
+if len(sys.argv) != 3:
+  print("Usage: ./backup CONFIGID OPERATION", file=sys.stderr)
+  sys.exit(1)
+
+basedir = os.path.realpath(os.path.dirname(__file__))
+configname = os.path.join(basedir, "config.ini")
+if not os.path.exists(configname):
+  print("""Create a config.ini in this directory like the following:
+
+[ftp]
+backend='file'
+File.path='ftp://example.com/subdir'
+
+[s3]
+backend='s3'
+S3.id='...'
+S3.bucket='...'
+
+Then call this script with the config group name you want""", file=sys.stderr)
+  sys.exit(1)
+
+# Set config
+config = configparser.RawConfigParser()
+config.optionxform = lambda option: option # disable lowercasing of keys
+config.read(configname)
+for key, value in config[sys.argv[1]].items():
+  schema, _, key = key.rpartition('.')
+  if schema:
+    settings = Gio.Settings("org.gnome.DejaDup." + schema)
+  else:
+    settings = Gio.Settings("org.gnome.DejaDup")
+  variant = GLib.Variant.parse(None, value, None, None)
+  settings.set_value(key, variant)
+
+if sys.argv[2] == "backup":
+  # Make data
+  randomizer = os.path.join(basedir, "randomizer")
+  datadir = os.path.join(basedir, "data")
+  os.makedirs(datadir, exist_ok=True)
+  subprocess.run([randomizer, datadir], check=True, stdout=subprocess.DEVNULL)
+
+  settings = Gio.Settings("org.gnome.DejaDup")
+  settings.set_strv("include-list", [datadir])
+  settings.set_strv("exclude-list", [])
+
+  # Call deja-dup
+  subprocess.run(["deja-dup", "--backup"], check=True)
+
+elif sys.argv[3] == "restore":
+  pass
+
+else:
+  print("Unknown operation", file=sys.stderr)
+  sys.exit(1)
