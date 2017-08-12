@@ -58,10 +58,12 @@ public abstract class Backend : Object
         backend != "s3" &&
         backend != "gcs" &&
         backend != "goa" &&
+        backend != "u1" &&
         backend != "rackspace" &&
         backend != "openstack" &&
-        backend != "u1" &&
-        backend != "file")
+        backend != "drive" &&
+        backend != "remote" &&
+        backend != "local")
       backend = "auto"; // default to auto if string is not known
 
     return backend;
@@ -75,15 +77,19 @@ public abstract class Backend : Object
     else if (backend_name == "gcs")
       return new BackendGCS();
     else if (backend_name == "goa")
-      return new BackendGoa();
+      return new BackendGOA();
     else if (backend_name == "u1")
       return new BackendU1();
     else if (backend_name == "rackspace")
       return new BackendRackspace();
     else if (backend_name == "openstack")
       return new BackendOpenstack();
-    else if (backend_name == "file")
-      return new BackendFile();
+    else if (backend_name == "drive")
+      return new BackendDrive();
+    else if (backend_name == "remote")
+      return new BackendRemote();
+    else if (backend_name == "local")
+      return new BackendLocal();
     else
       return new BackendAuto();
   }

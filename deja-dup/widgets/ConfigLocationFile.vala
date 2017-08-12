@@ -27,13 +27,12 @@ public class ConfigLocationFile : ConfigLocationTable
     Object(label_sizes: sg);
   }
 
-  ConfigURLPart entry;
+  ConfigFolder entry;
   construct {
     var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
 
-    entry = new ConfigURLPart(ConfigURLPart.Part.FOLDER,
-                              DejaDup.FILE_PATH_KEY,
-                              DejaDup.FILE_ROOT);
+    entry = new ConfigFolder(DejaDup.LOCAL_FOLDER_KEY,
+                             DejaDup.LOCAL_ROOT, true);
     entry.set_accessible_name("FileFolder");
 
     var browse = new Gtk.Button.with_mnemonic(_("_Choose Folder…"));
@@ -52,12 +51,21 @@ public class ConfigLocationFile : ConfigLocationTable
                                         Gtk.FileChooserAction.SELECT_FOLDER,
                                         _("_Cancel"), Gtk.ResponseType.CANCEL,
                                         _("_OK"), Gtk.ResponseType.ACCEPT);
-    var dir = entry.get_text();
-    dlg.set_current_folder(dir); // empty string will be current dir
+    var home = File.new_for_path(Environment.get_home_dir());
+    try {
+      var dir = home.get_child_for_display_name(entry.get_text());
+      dlg.set_current_folder_file(dir);
+    } catch (Error e) {
+      warning("%s", e.message);
+    }
 
     if (dlg.run() == Gtk.ResponseType.ACCEPT) {
-      var settings = DejaDup.get_settings(DejaDup.FILE_ROOT);
-      settings.set_string(DejaDup.FILE_PATH_KEY, dlg.get_uri());
+      var settings = DejaDup.get_settings(DejaDup.LOCAL_ROOT);
+      var file = dlg.get_file();
+      var path = home.get_relative_path(file);
+      if (path == null)
+        path = file.get_path();
+      settings.set_string(DejaDup.LOCAL_FOLDER_KEY, path);
     }
 
     destroy_widget(dlg);

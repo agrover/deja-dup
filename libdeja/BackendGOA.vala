@@ -26,12 +26,12 @@ public const string GOA_ID_KEY = "id";
 public const string GOA_FOLDER_KEY = "folder";
 public const string GOA_TYPE_KEY = "type";
 
-public class BackendGoa : BackendFile
+public class BackendGOA : BackendRemote
 {
   static Goa.Client _client;
 
   public override Backend clone() {
-    return new BackendGoa();
+    return new BackendGOA();
   }
 
   public static async Goa.Client get_client()
@@ -58,6 +58,12 @@ public class BackendGoa : BackendFile
     return _client;
   }
 
+  protected override string get_folder()
+  {
+    var settings = get_settings(GOA_ROOT);
+    return settings.get_string(GOA_FOLDER_KEY);
+  }
+
   public static Goa.Object? get_object_from_settings()
   {
     var settings = get_settings(GOA_ROOT);
@@ -65,7 +71,7 @@ public class BackendGoa : BackendFile
     return get_client_sync().lookup_by_id(id);
   }
 
-  protected File? get_root_from_settings()
+  protected override File? get_root_from_settings()
   {
     var obj = get_object_from_settings();
     if (obj == null)
@@ -77,17 +83,6 @@ public class BackendGoa : BackendFile
     return File.new_for_uri(files.uri);
   }
 
-  protected override File? get_file_from_settings()
-  {
-    var root = get_root_from_settings();
-    if (root == null)
-      return null;
-
-    var settings = get_settings(GOA_ROOT);
-    var folder = settings.get_string(GOA_FOLDER_KEY);
-    return root.get_default_location().get_child(folder);
-  }
-
   public override string get_location_pretty()
   {
     var obj = get_object_from_settings();
@@ -95,10 +90,6 @@ public class BackendGoa : BackendFile
       return "";
     var account = obj.get_account();
     return "%s (%s)".printf(account.provider_name, account.presentation_identity);
-  }
-
-  public override bool is_native() {
-    return false;
   }
 
   public override async bool is_ready(out string when)
@@ -138,33 +129,28 @@ public class BackendGoa : BackendFile
     }
   }
 
-  protected override async void check_for_volume_info(File file) throws Error
-  {
-    // no-op
-  }
-
-  protected override async bool choose_mount() throws Error
+  protected override async void mount() throws Error
   {
     if (get_root_from_settings() == null) {
-        var settings = get_settings(GOA_ROOT);
-        var type = settings.get_string(GOA_TYPE_KEY);
-        var msg = _("Waiting for Online Accounts to be configured in backup settings…");
+      var settings = get_settings(GOA_ROOT);
+      var type = settings.get_string(GOA_TYPE_KEY);
+      var provider = Goa.Provider.get_for_provider_type(type);
 
-        var provider = Goa.Provider.get_for_provider_type(type);
-        if (provider != null) {
-          msg = _("Waiting for %s to be configured in your backup settings…").printf(provider.get_provider_name(null));
+      var msg = _("Waiting for Online Accounts to be configured in your backup settings…");
+      if (provider != null)
+        msg = _("Waiting for %s to be configured in your backup settings…").printf(provider.get_provider_name(null));
 
-        pause_op(_("Storage location not available"), msg);
-        var loop = new MainLoop(null, false);
-        settings.changed[GOA_ID_KEY].connect(() => {
-          if (get_root_from_settings() != null)
-            loop.quit();
-        });
-        loop.run();
-        pause_op(null, null);
-      }
+      pause_op(_("Storage location not available"), msg);
+      var loop = new MainLoop(null, false);
+      settings.changed[GOA_ID_KEY].connect(() => {
+        if (get_root_from_settings() != null)
+          loop.quit();
+      });
+      loop.run();
+      pause_op(null, null);
     }
-    return yield mount_remote(get_root_from_settings());
+
+    yield base.mount();
   }
 }
 } // end namespace

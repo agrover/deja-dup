@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- -*- Mode: XML; indent-tabs-mode: nil; tab-width: 2 -*- -->
+
 <schemalist gettext-domain="deja-dup">
+
   <schema id="org.gnome.DejaDup" path="/org/gnome/deja-dup/">
     <key name="include-list" type="as">
       <default>[ '$HOME' ]</default>
@@ -69,7 +72,9 @@
     <key name="backend" type="s">
       <choices>
         <choice value='auto'/>
-        <choice value='file'/>
+        <choice value='remote'/>
+        <choice value='local'/>
+        <choice value='drive'/>
         <choice value='gcs'/>
         <choice value='goa'/>
         <choice value='rackspace'/>
@@ -86,8 +91,56 @@
     <child name="s3" schema="org.gnome.DejaDup.S3"/>
     <child name="gcs" schema="org.gnome.DejaDup.GCS"/>
     <child name='goa' schema="org.gnome.DejaDup.GOA"/>
+    <child name='remote' schema="org.gnome.DejaDup.Remote"/>
+    <child name='local' schema="org.gnome.DejaDup.Local"/>
+    <child name='drive' schema="org.gnome.DejaDup.Drive"/>
     <child name="file" schema="org.gnome.DejaDup.File"/>
   </schema>
+
+  <schema id="org.gnome.DejaDup.Local" path="/org/gnome/deja-dup/local/">
+    <key name="folder" type="s">
+      <default>'$HOSTNAME'</default>
+      <summary>The folder where backups are stored</summary>
+      <description>The folder hierarchy where backups are stored. Paths can be absolute or relative to your home directory.</description>
+    </key>
+  </schema>
+
+  <schema id="org.gnome.DejaDup.Drive" path="/org/gnome/deja-dup/drive/">
+    <key name="uuid" type="s">
+      <default>''</default>
+      <summary>UUID</summary>
+      <description>The unique filesystem identifier for the drive, used to recognize the drive when it is plugged in.</description>
+    </key>
+    <key name="name" type="s">
+      <default>''</default>
+      <summary>Name</summary>
+      <description>The name of the external drive.</description>
+    </key>
+    <key name="icon" type="s">
+      <default>''</default>
+      <summary>Icon</summary>
+      <description>The icon of the external drive, as a serialized GIcon.</description>
+    </key>
+    <key name="folder" type="s">
+      <default>'$HOSTNAME'</default>
+      <summary>The folder where backups are stored</summary>
+      <description>The folder hierarchy where backups are stored. Paths are relative to the drive.</description>
+    </key>
+  </schema>
+
+  <schema id="org.gnome.DejaDup.Remote" path="/org/gnome/deja-dup/remote/">
+    <key name="uri" type="s">
+      <default>''</default>
+      <summary>The server address</summary>
+      <description>The URI of the remote server location.</description>
+    </key>
+    <key name="folder" type="s">
+      <default>'$HOSTNAME'</default>
+      <summary>The folder where backups are stored</summary>
+      <description>The folder hierarchy where backups are stored. Paths can be absolute or relative to the host.</description>
+    </key>
+  </schema>
+
   <schema id="org.gnome.DejaDup.S3" path="/org/gnome/deja-dup/s3/">
     <key name="id" type="s">
       <default>''</default>
@@ -105,6 +158,7 @@
       <description>An optional folder name to store files in.  This folder will be created in the chosen bucket.</description>
     </key>
   </schema>
+
   <schema id="org.gnome.DejaDup.GCS" path="/org/gnome/deja-dup/gcs/">
     <key name="id" type="s">
       <default>''</default>
@@ -122,6 +176,7 @@
       <description>An optional folder name to store files in.  This folder will be created in the chosen bucket.</description>
     </key>
   </schema>
+
   <schema id="org.gnome.DejaDup.Rackspace" path="/org/gnome/deja-dup/rackspace/">
     <key name="container" type="s">
       <default>'$HOSTNAME'</default>
@@ -134,6 +189,7 @@
       <description>This is your username for the Rackspace Cloud Files service.</description>
     </key>
   </schema>
+
   <schema id="org.gnome.DejaDup.GOA" path="/org/gnome/deja-dup/goa/">
     <key name="id" type="s">
       <default>''</default>
@@ -148,9 +204,10 @@
     <key name="folder" type="s">
       <default>'$HOSTNAME'</default>
       <summary>The folder where backups are stored</summary>
-      <description>The folder hierarchy where backups are stored.</description>
+      <description>The folder hierarchy where backups are stored. Paths can be absolute or relative to the host.</description>
     </key>
   </schema>
+
   <schema id="org.gnome.DejaDup.OpenStack" path="/org/gnome/deja-dup/openstack/">
     <key name="container" type="s">
       <default>'$HOSTNAME'</default>
@@ -173,11 +230,11 @@
       <description>This is the Authentication URL, or keystone URL for the OpenStack service</description>
     </key>
   </schema>
+
+  <!-- deprecated schema -->
   <schema id="org.gnome.DejaDup.File" path="/org/gnome/deja-dup/file/">
     <key name="path" type="s">
       <default>''</default>
-      <summary>Backup location</summary>
-      <description>Location in which to hold the backup files.</description>
     </key>
     <key name="type" type="s">
       <choices>
@@ -185,33 +242,25 @@
         <choice value='volume'/>
       </choices>
       <default>'normal'</default>
-      <summary>Folder type</summary>
-      <description>Whether the backup location is a mounted external volume or a normal folder.</description>
     </key>
     <key name="relpath" type="ay">
       <default>[]</default>
-      <summary>Relative path under the external volume</summary>
-      <description>If the backup location is on an external volume, this is the path of the folder on that volume.</description>
     </key>
     <key name="uuid" type="s">
       <default>''</default>
-      <summary>Unique ID of the external volume</summary>
-      <description>If the backup location is on an external volume, this is its unique filesystem identifier.</description>
     </key>
     <key name="name" type="s">
       <default>''</default>
-      <summary>Full name of the external volume</summary>
-      <description>If the backup location is on an external volume, this is the volume’s longer descriptive name.</description>
     </key>
     <key name="short-name" type="s">
       <default>''</default>
-      <summary>Short name of the external volume</summary>
-      <description>If the backup location is on an external volume, this is the volume’s shorter name.</description>
     </key>
     <key name="icon" type="s">
       <default>''</default>
-      <summary>Icon of the external volume</summary>
-      <description>If the backup location is on an external volume, this is the volume’s icon.</description>
+    </key>
+    <key name="migrated" type="b">
+      <default>false</default>
     </key>
   </schema>
+
 </schemalist>

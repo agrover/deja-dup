@@ -21,34 +21,45 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigRelPath : ConfigEntry
+public const string LOCAL_ROOT = "Local";
+public const string LOCAL_FOLDER_KEY = "folder";
+
+public class BackendLocal : BackendFile
 {
-  public ConfigRelPath(string key, string ns="")
-  {
-    Object(key: key, ns: ns);
+  public override Backend clone() {
+    return new BackendLocal();
   }
 
-  protected override async void set_from_config()
+  // Get mountable root
+  protected override File? get_root_from_settings()
   {
-    var byte_val = settings.get_value(key);
-    string val = null;
+    return File.new_for_path(Environment.get_home_dir());
+  }
+
+  // Get full URI to backup folder
+  protected override File? get_file_from_settings()
+  {
+    var root = get_root_from_settings();
+    var settings = get_settings(LOCAL_ROOT);
+    var folder = settings.get_string(LOCAL_FOLDER_KEY);
+
     try {
-      val = Filename.to_utf8(byte_val.get_bytestring(), -1, null, null);
+      return root.get_child_for_display_name(folder);
+    } catch (Error e) {
+      warning("%s", e.message);
+      return null;
     }
-    catch (Error e) {
-      warning("%s\n", e.message);
-    }
-    if (val == null)
-      val = "";
-    entry.set_text(val);
   }
 
-  public override void write_to_config()
+  public override Icon? get_icon()
   {
-    var val = new Variant.bytestring(entry.get_text());
-    settings.set_value(key, val);
+    try {
+      return Icon.new_for_string("folder");
+    }
+    catch (Error e) {}
+
+    return null;
   }
 }
 
-}
-
+} // end namespace

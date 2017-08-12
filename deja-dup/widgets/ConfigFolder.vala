@@ -23,14 +23,16 @@ namespace DejaDup {
 
 public class ConfigFolder : ConfigEntry
 {
-  public ConfigFolder(string key, string ns="")
+  public bool abs_allowed {get; construct;}
+
+  public ConfigFolder(string key, string ns="", bool abs_allowed=false)
   {
-    Object(key: key, ns: ns);
+    Object(key: key, ns: ns, abs_allowed: abs_allowed);
   }
 
   protected override async void set_from_config()
   {
-    var val = DejaDup.get_folder_key(settings, key);
+    var val = DejaDup.get_folder_key(settings, key, abs_allowed);
     entry.set_text(val);
   }
 }

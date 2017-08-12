@@ -24,11 +24,14 @@ namespace DejaDup {
 public class ConfigLabelLocation : ConfigLabel
 {
   Gtk.Image img;
-  FilteredSettings file_root;
+  FilteredSettings local_root;
+  FilteredSettings remote_root;
+  FilteredSettings drive_root;
   FilteredSettings goa_root;
   FilteredSettings s3_root;
   FilteredSettings rackspace_root;
   FilteredSettings openstack_root;
+  FilteredSettings gcs_root;
 
   public ConfigLabelLocation()
   {
@@ -39,11 +42,14 @@ public class ConfigLabelLocation : ConfigLabel
     img = new Gtk.Image.from_icon_name("folder", Gtk.IconSize.MENU);
     fill_box();
     watch_key(BACKEND_KEY);
-    watch_key(null, (file_root = DejaDup.get_settings(FILE_ROOT)));
+    watch_key(null, (local_root = DejaDup.get_settings(LOCAL_ROOT)));
+    watch_key(null, (remote_root = DejaDup.get_settings(REMOTE_ROOT)));
+    watch_key(null, (drive_root = DejaDup.get_settings(DRIVE_ROOT)));
     watch_key(null, (goa_root = DejaDup.get_settings(GOA_ROOT)));
     watch_key(null, (s3_root = DejaDup.get_settings(S3_ROOT)));
     watch_key(null, (rackspace_root = DejaDup.get_settings(RACKSPACE_ROOT)));
     watch_key(null, (openstack_root = DejaDup.get_settings(OPENSTACK_ROOT)));
+    watch_key(null, (gcs_root = DejaDup.get_settings(GCS_ROOT)));
     set_from_config.begin();
   }
 

@@ -1,0 +1,201 @@
+/* -*- Mode: Vala; indent-tabs-mode: nil; tab-width: 2 -*- */
+/*
+    This file is part of Déjà Dup.
+    For copyright information, see AUTHORS.
+
+    Déjà Dup is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Déjà Dup is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+using GLib;
+
+namespace DejaDup {
+
+public const string DRIVE_ROOT = "Drive";
+public const string DRIVE_UUID_KEY = "uuid";
+public const string DRIVE_NAME_KEY = "name";
+public const string DRIVE_ICON_KEY = "icon";
+public const string DRIVE_FOLDER_KEY = "folder";
+
+public class BackendDrive : BackendFile
+{
+  VolumeMonitor _monitor = null;
+  VolumeMonitor monitor {
+    get {
+      if (_monitor == null) {
+        _monitor = VolumeMonitor.get();
+        _monitor.ref(); // bug 569418; bad things happen when VM goes away
+      }
+      return _monitor;
+    }
+  }
+
+  public override Backend clone() {
+    return new BackendDrive();
+  }
+
+  string get_folder()
+  {
+    var settings = get_settings(DRIVE_ROOT);
+    var folder = settings.get_string(DRIVE_FOLDER_KEY);
+    if (folder != "" && folder[0] == '/')
+      return folder.substring(1);
+    else
+      return folder;
+  }
+
+  Volume get_volume()
+  {
+    var settings = get_settings(DRIVE_ROOT);
+    var uuid = settings.get_string(DRIVE_UUID_KEY);
+    return monitor.get_volume_for_uuid(uuid);
+  }
+
+  protected override File? get_root_from_settings()
+  {
+    var vol = get_volume();
+    if (vol == null)
+      return null;
+    var mount = vol.get_mount();
+    if (mount == null)
+      return null;
+    return mount.get_root();
+  }
+
+  protected override File? get_file_from_settings()
+  {
+    var root = get_root_from_settings();
+    if (root == null)
+      return null;
+    try {
+      return root.get_child_for_display_name(get_folder());
+    } catch (Error e) {
+      warning("%s", e.message);
+      return null;
+    }
+  }
+
+  public override string get_location_pretty()
+  {
+    var settings = get_settings(DRIVE_ROOT);
+    var name = settings.get_string(DRIVE_NAME_KEY);
+    var folder = get_folder();
+    if (folder == "")
+      return name;
+    else
+      // Translators: %2$s is the name of a removable drive, %1$s is a folder
+      // on that removable drive.
+      return _("%1$s on %2$s").printf(folder, name);
+  }
+
+  public override async bool is_ready(out string when)
+  {
+    if (get_volume() == null) {
+      var settings = get_settings(DRIVE_ROOT);
+      var name = settings.get_string(DRIVE_NAME_KEY);
+      when = _("Backup will begin when %s is connected.").printf(name);
+      return false;
+    }
+    when = null;
+    return true;
+  }
+
+  public override Icon? get_icon()
+  {
+    var settings = get_settings(DRIVE_ROOT);
+    var icon_name = settings.get_string(DRIVE_ICON_KEY);
+
+    try {
+      return Icon.new_for_string(icon_name);
+    }
+    catch (Error e) {
+      warning("%s", e.message);
+      return null;
+    }
+  }
+
+  public static void update_volume_info(Volume volume)
+  {
+    var name = volume.get_name();
+    var icon = volume.get_icon();
+
+    var settings = get_settings(DRIVE_ROOT);
+    settings.delay();
+
+    settings.set_string(DRIVE_NAME_KEY, name);
+    settings.set_string(DRIVE_ICON_KEY, icon.to_string());
+
+    settings.apply();
+  }
+
+  bool is_being_mounted_error(Error e)
+  {
+    return e.message.has_prefix("DBus error org.gtk.Private.RemoteVolumeMonitor.Failed:");
+  }
+
+  async void delay(uint secs)
+  {
+    var loop = new MainLoop(null);
+    Timeout.add_seconds(secs, () => {
+      loop.quit();
+      return false;
+    });
+    loop.run();
+  }
+
+  protected override async void mount() throws Error
+  {
+    var vol = yield wait_for_volume();
+
+    var mount = vol.get_mount();
+    if (mount == null) {
+      try {
+        yield vol.mount(MountMountFlags.NONE, mount_op, null);
+      } catch (IOError.FAILED err) {
+        // So, this is odd, and not very descriptive, but IOError.FAILED is the
+        // error given when someone else is mounting at the same time.  Sometimes
+        // happens when a USB stick is inserted and nautilus is fighting us.
+        if (is_being_mounted_error(err)) {
+          yield delay(1); // Try again in a second
+          yield vol.mount(MountMountFlags.NONE, mount_op, null);
+        }
+        else
+          throw err; // continue error on
+      }
+    }
+
+    update_volume_info(vol);
+  }
+
+  async Volume wait_for_volume() throws Error
+  {
+    var vol = get_volume();
+    if (vol == null) {
+      var settings = get_settings(DRIVE_ROOT);
+      var name = settings.get_string(DRIVE_NAME_KEY);
+      pause_op(_("Storage location not available"), _("Waiting for ‘%s’ to become connected…").printf(name));
+      var loop = new MainLoop(null, false);
+      var sigid = monitor.volume_added.connect((m, v) => {
+        loop.quit();
+      });
+      loop.run();
+      monitor.disconnect(sigid);
+      pause_op(null, null);
+      return yield wait_for_volume();
+    }
+
+    return vol;
+  }
+}
+
+} // end namespace

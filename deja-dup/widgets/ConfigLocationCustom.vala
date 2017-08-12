@@ -28,9 +28,9 @@ public class ConfigLocationCustom : ConfigLocationTable
   }
 
   construct {
-    var entry = new ConfigEntry(DejaDup.FILE_PATH_KEY, DejaDup.FILE_ROOT,
+    var entry = new ConfigEntry(DejaDup.REMOTE_URI_KEY, DejaDup.REMOTE_ROOT,
                                 true);
-    entry.set_accessible_name("CustomFolder");
+    entry.set_accessible_name("CustomAddress");
     add_widget(_("Server _Address"), entry);
 
     int row = 0;
@@ -67,7 +67,12 @@ public class ConfigLocationCustom : ConfigLocationTable
     add_label(hint, 1, row++, 1, 1, _("dav:// or davs://"));
 
     hint.show_all();
+    hint.margin_bottom = 6;
     add_widget("", hint);
+
+    var folder = new ConfigFolder(DejaDup.REMOTE_FOLDER_KEY, DejaDup.REMOTE_ROOT, true);
+    folder.set_accessible_name("CustomFolder");
+    add_widget(_("_Folder"), folder);
   }
 
   void add_label(Gtk.Grid grid, int left, int top, int width, int height, string text, int margin_top = 0)

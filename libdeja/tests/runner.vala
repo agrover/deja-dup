@@ -88,9 +88,9 @@ void backup_setup()
   Environment.set_variable("DEJA_DUP_TEMPDIR", tempdir, true);
 
   var settings = DejaDup.get_settings();
-  settings.set_string(DejaDup.BACKEND_KEY, "file");
-  settings = DejaDup.get_settings(DejaDup.FILE_ROOT);
-  settings.set_string(DejaDup.FILE_PATH_KEY, Path.build_filename(dir, "backup"));
+  settings.set_string(DejaDup.BACKEND_KEY, "local");
+  settings = DejaDup.get_settings(DejaDup.LOCAL_ROOT);
+  settings.set_string(DejaDup.LOCAL_FOLDER_KEY, Path.build_filename(dir, "backup"));
 }
 
 void backup_teardown()

@@ -377,14 +377,14 @@ public bool is_nag_time()
   return (last_check.compare(now) <= 0);
 }
 
-public string get_folder_key(FilteredSettings settings, string key)
+public string get_folder_key(FilteredSettings settings, string key, bool abs_allowed = false)
 {
   string folder = settings.get_string(key);
   if (folder.contains("$HOSTNAME")) {
     folder = folder.replace("$HOSTNAME", Environment.get_host_name());
     settings.set_string(key, folder);
   }
-  if (folder.has_prefix("/"))
+  if (!abs_allowed && folder.has_prefix("/"))
     folder = folder.substring(1);
   return folder;
 }
@@ -408,7 +408,7 @@ public void set_settings_read_only(bool ro)
   }
 }
 
-public FilteredSettings get_settings(string? subdir = null)
+public FilteredSettings get_settings(string? subdir = null, string? path = null)
 {
   string schema = "org.gnome.DejaDup";
   if (subdir != null && subdir != "")
@@ -476,6 +476,8 @@ public bool initialize(out string header, out string msg)
     return false;
   }
 
+  migrate_settings();
+
   /* We do a little trick here.  BackendAuto -- which is the default
      backend on a fresh install of deja-dup -- will do some work to
      automatically suss out which backend should be used instead of it.
@@ -488,6 +490,48 @@ public bool initialize(out string header, out string msg)
   clean_tempdirs.begin();
 
   return true;
+}
+
+void migrate_settings()
+{
+  // The old "File" schema has been split in three: local, remote, and drive
+
+  var file = get_settings("File");
+  if (file.get_boolean("migrated"))
+    return;
+
+  var drive = get_settings(DRIVE_ROOT);
+  drive.set_value(DRIVE_ICON_KEY, file.get_user_value("icon"));
+  drive.set_value(DRIVE_NAME_KEY, file.get_user_value("short-name"));
+  drive.set_value(DRIVE_UUID_KEY, file.get_user_value("uuid"));
+  if (file.get_user_value("relpath") != null)
+    drive.set_string(DRIVE_FOLDER_KEY, file.get_value("relpath").get_bytestring());
+
+  var type = file.get_string("type");
+  var path = file.get_string("path");
+  var gfile = File.parse_name(path);
+  if (type == "normal" && path != "") {
+    if (gfile.is_native()) {
+      var local = get_settings(LOCAL_ROOT);
+      local.set_string(LOCAL_FOLDER_KEY, gfile.get_path());
+    } else {
+      var remote = get_settings(REMOTE_ROOT);
+      remote.set_string(REMOTE_URI_KEY, gfile.get_uri());
+      remote.set_string(REMOTE_FOLDER_KEY, "");
+    }
+  }
+
+  var settings = get_settings();
+  if (settings.get_string(BACKEND_KEY) == "file") {
+    if (type == "volume")
+      settings.set_string(BACKEND_KEY, "drive");
+    else if (gfile.is_native())
+      settings.set_string(BACKEND_KEY, "local");
+    else
+      settings.set_string(BACKEND_KEY, "remote");
+  }
+
+  file.set_boolean("migrated", true);
 }
 
 public void i18n_setup()

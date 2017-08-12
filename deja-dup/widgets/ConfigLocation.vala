@@ -104,8 +104,8 @@ public class ConfigLocation : ConfigWidget
     extras.show();
 
     remake_goa();
-    BackendGoa.get_client_sync().account_added.connect(remake_goa);
-    BackendGoa.get_client_sync().account_removed.connect(remake_goa);
+    BackendGOA.get_client_sync().account_added.connect(remake_goa);
+    BackendGOA.get_client_sync().account_removed.connect(remake_goa);
 
     add_separator(Group.GOA_SEP);
 
@@ -124,7 +124,7 @@ public class ConfigLocation : ConfigWidget
 
     // And a local folder option
     add_entry(new ThemedIcon("folder"), _("Local Folder"),
-              Group.LOCAL, new ConfigLocationFile(label_sizes), "file");
+              Group.LOCAL, new ConfigLocationFile(label_sizes));
 
     // Now insert removable drives
     var mon = VolumeMonitor.get();
@@ -158,8 +158,10 @@ public class ConfigLocation : ConfigWidget
     set_location_widgets();
     button.changed.connect(handle_changed);
 
+    // Watch any key that would cause a row switch
     watch_key(BACKEND_KEY);
-    watch_key(FILE_PATH_KEY, DejaDup.get_settings(FILE_ROOT));
+    watch_key(GOA_ID_KEY, DejaDup.get_settings(GOA_ROOT));
+    watch_key(DRIVE_UUID_KEY, DejaDup.get_settings(DRIVE_ROOT));
   }
 
   void clear_group(int group)
@@ -238,7 +240,7 @@ public class ConfigLocation : ConfigWidget
       return;
     }
 
-    var client = DejaDup.BackendGoa.get_client_sync();
+    var client = DejaDup.BackendGOA.get_client_sync();
     bool found_one = false;
     foreach (Goa.Object obj in client.get_accounts()) {
       var account = obj.get_account();
@@ -264,7 +266,7 @@ public class ConfigLocation : ConfigWidget
     // Does the user have an old configured type that is now gone?
     var settings = DejaDup.get_settings(GOA_ROOT);
     if (settings.get_string(GOA_TYPE_KEY) == type &&
-        BackendGoa.get_object_from_settings() == null)
+        BackendGOA.get_object_from_settings() == null)
     {
       found_one = false;
     }
@@ -500,8 +502,8 @@ public class ConfigLocation : ConfigWidget
       return;
 
     // Make sure it isn't the saved volume; we never want to remove that
-    var fsettings = DejaDup.get_settings(FILE_ROOT);
-    var saved_uuid = fsettings.get_string(FILE_UUID_KEY);
+    var fsettings = DejaDup.get_settings(DRIVE_ROOT);
+    var saved_uuid = fsettings.get_string(DRIVE_UUID_KEY);
     if (uuid == saved_uuid)
       return;
 
@@ -517,16 +519,16 @@ public class ConfigLocation : ConfigWidget
   bool update_saved_volume()
   {
     // And add an entry for any saved volume
-    var fsettings = DejaDup.get_settings(FILE_ROOT);
-    var uuid = fsettings.get_string(FILE_UUID_KEY);
+    var fsettings = DejaDup.get_settings(DRIVE_ROOT);
+    var uuid = fsettings.get_string(DRIVE_UUID_KEY);
     if (uuid != "") {
       Icon vol_icon = null;
       try {
-        vol_icon = Icon.new_for_string(fsettings.get_string(FILE_ICON_KEY));
+        vol_icon = Icon.new_for_string(fsettings.get_string(DRIVE_ICON_KEY));
       }
       catch (Error e) {warning("%s\n", e.message);}
 
-      var vol_name = fsettings.get_string(FILE_SHORT_NAME_KEY);
+      var vol_name = fsettings.get_string(DRIVE_NAME_KEY);
 
       add_volume_full(uuid, vol_name, vol_icon);
       return true;
@@ -572,36 +574,16 @@ public class ConfigLocation : ConfigWidget
         id = "";
       }
     }
-    else if (backend == "file") {
-      var fsettings = DejaDup.get_settings(FILE_ROOT);
-
-      if (fsettings.get_string(FILE_TYPE_KEY) == "volume") {
-        if (update_saved_volume()) {
-          group = Group.VOLUMES;
-          id = fsettings.get_string(FILE_UUID_KEY);
-        }
-      }
-      else { // normal
-        // If we are already on 'custom location', don't switch away from it
-        // to another toplevel entry
-        Gtk.TreeIter iter;
-        if (!current_iter(out iter))
-          return;
-
-        int cur_group;
-        store.get(iter, Col.GROUP, out cur_group);
-
-        if (cur_group == Group.REMOTE)
-          return;
-
-        // OK, we can continue
-        var scheme = ConfigURLPart.read_uri_part(fsettings, FILE_PATH_KEY,
-                                                 ConfigURLPart.Part.SCHEME);
-        switch (scheme) {
-        case "file": group = Group.LOCAL;  break;
-        default:     group = Group.REMOTE; break;
-        }
-      }
+    else if (backend == "drive") {
+      var fsettings = DejaDup.get_settings(DRIVE_ROOT);
+      group = Group.VOLUMES;
+      id = fsettings.get_string(DRIVE_UUID_KEY);
+    }
+    else if (backend == "remote") {
+      group = Group.REMOTE;
+    }
+    else if (backend == "local") {
+      group = Group.LOCAL;
     }
 
     if (group >= 0) {
@@ -653,10 +635,11 @@ public class ConfigLocation : ConfigWidget
     else if (group == Group.CLOUD)
       settings.set_string(BACKEND_KEY, id);
     else if (group == Group.VOLUMES)
-      yield set_volume_info(iter);
-    else if (group == Group.REMOTE || group == Group.LOCAL) {
-      yield set_remote_info(id);
-    }
+      set_volume_info(iter);
+    else if (group == Group.REMOTE)
+      settings.set_string(BACKEND_KEY, "remote");
+    else if (group == Group.LOCAL)
+      settings.set_string(BACKEND_KEY, "local");
     else {
       warning("Unknown location: group %i, id: %s\n", group, id);
     }
@@ -664,50 +647,26 @@ public class ConfigLocation : ConfigWidget
     changed();
   }
 
-  async void set_volume_info(Gtk.TreeIter iter)
+  void set_volume_info(Gtk.TreeIter iter)
   {
     // Grab volume from model
-    Value vol_var;
-    store.get_value(iter, Col.ID, out vol_var);
-    var uuid = vol_var.get_string();
+    string uuid;
+    store.get(iter, Col.ID, out uuid);
     if (uuid == null) {
       warning("Invalid volume location at iter %s\n", store.get_string_from_iter(iter));
       return;
     }
 
     // First things first, we must remember that we set a volume
-    var fsettings = DejaDup.get_settings(FILE_ROOT);
-    fsettings.set_string(FILE_TYPE_KEY, "volume");
-    settings.set_string(BACKEND_KEY, "file");
+    settings.set_string(BACKEND_KEY, "drive");
 
-    var vol = BackendFile.find_volume_by_uuid(uuid);
+    var vol = VolumeMonitor.get().get_volume_for_uuid(uuid);
     if (vol == null) {
       // Not an error, it's just not plugged in right now
       return;
     }
 
-    yield BackendFile.set_volume_info(vol);
-  }
-
-  async void set_remote_info(string? scheme)
-  {
-    // Since these changes span two settings roots, we will receive two
-    // changed() signals and thus run set_from_config twice.  To prevent
-    // dropping the second signal on the floor (as ConfigWidget does if it's
-    // in the middle of handling the first), we'll manually trigger the update.
-    syncing = true;
-
-    var fsettings = DejaDup.get_settings(FILE_ROOT);
-    fsettings.delay();
-    fsettings.set_string(FILE_TYPE_KEY, "normal");
-    if (scheme != null)
-      ConfigURLPart.write_uri_part(fsettings, FILE_PATH_KEY,
-                                   ConfigURLPart.Part.SCHEME, scheme);
-    fsettings.apply();
-    settings.set_string(BACKEND_KEY, "file");
-
-    syncing = false;
-    yield set_from_config();
+    BackendDrive.update_volume_info(vol);
   }
 }
 

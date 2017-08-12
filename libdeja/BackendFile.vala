@@ -21,47 +21,13 @@ using GLib;
 
 namespace DejaDup {
 
-public const string FILE_ROOT = "File";
-public const string FILE_TYPE_KEY = "type";
-public const string FILE_PATH_KEY = "path";
-public const string FILE_RELPATH_KEY = "relpath";
-public const string FILE_UUID_KEY = "uuid";
-public const string FILE_NAME_KEY = "name";
-public const string FILE_SHORT_NAME_KEY = "short-name";
-public const string FILE_ICON_KEY = "icon";
-
-public class BackendFile : Backend
+public abstract class BackendFile : Backend
 {
-  public override Backend clone() {
-    return new BackendFile();
-  }
+  // Get mountable root
+  protected abstract File? get_root_from_settings();
 
-  // Will return null if volume isn't ready
-  protected virtual File? get_file_from_settings()
-  {
-    var settings = get_settings(FILE_ROOT);
-    var type = settings.get_string(FILE_TYPE_KEY);
-    if (type == "volume") {
-      var path_val = settings.get_value(FILE_RELPATH_KEY);
-      var path = path_val.get_bytestring();
-      var uuid = settings.get_string(FILE_UUID_KEY);
-      var vol = find_volume_by_uuid(uuid);
-      if (vol == null)
-        return null;
-      var mount = vol.get_mount();
-      if (mount == null)
-        return null;
-      var root = mount.get_root();
-      if (path != null)
-        return root.get_child(path);
-      else
-        return root;
-    }
-    else {
-      var path = settings.get_string(FILE_PATH_KEY);
-      return File.parse_name(path);
-    }
-  }
+  // Get full URI to backup folder
+  protected abstract File? get_file_from_settings();
 
   // Location will be mounted by this time
   public override string get_location(ref bool as_root)
@@ -107,7 +73,9 @@ public class BackendFile : Backend
       // way the user will get a permissions denied error that will point them
       // in the direction of trying to restore in a new folder rather than on
       // top of their running system, which, let's be honest, is probably not
-      // a good idea anyway.  BTW, where does Napolean keep his armies?
+      // a good idea anyway.
+      // 
+      // Here's a joke for reading this far: Where did Napolean keep his armies?
       // In his sleevies!
       as_root = false;
     }
@@ -117,112 +85,14 @@ public class BackendFile : Backend
 
   public override string get_location_pretty()
   {
-    var settings = get_settings(FILE_ROOT);
-    var type = settings.get_string(FILE_TYPE_KEY);
-    if (type == "volume") {
-      var path_val = settings.get_value(FILE_RELPATH_KEY);
-      var path = "";
-      try {
-        path = Filename.to_utf8(path_val.get_bytestring(), -1, null, null);
-      }
-      catch (Error e) {
-        warning("%s\n", e.message);
-      }
-      var name = settings.get_string(FILE_SHORT_NAME_KEY);
-      if (path == "")
-        return name;
-      else
-        // Translators: %2$s is the name of a removable drive, %1$s is a folder
-        // on that removable drive.
-        return _("%1$s on %2$s").printf(path, name);
-    }
-    else {
-      var file = get_file_from_settings();
-      return get_file_desc(file);
-    }
+    var file = get_file_from_settings();
+    if (file == null)
+      return "";
+    return get_file_desc(file);
   }
-  
+
   public override bool is_native() {
-    var settings = get_settings(FILE_ROOT);
-    var type = settings.get_string(FILE_TYPE_KEY);
-    if (type == "volume")
-      return true;
-
-    var file = get_file_from_settings();
-    if (file != null)
-      return file.is_native();
-
-    return true; // default to yes?
-  }
-
-  async bool mount_enclosing_volume(File file, MountOperation? mount_op) throws Error
-  {
-    return yield file.mount_enclosing_volume(MountMountFlags.NONE, mount_op, null);
-  }
-
-  public override async bool is_ready(out string when) {
-    when = null;
-    var file = get_file_from_settings();
-    if (file == null) { // must be a volume that isn't yet mounted. See if volume is connected
-      var settings = get_settings(FILE_ROOT);
-      var uuid = settings.get_string(FILE_UUID_KEY);
-      var vol = find_volume_by_uuid(uuid);
-      if (vol != null)
-        return true;
-      else {
-        var name = settings.get_string(FILE_SHORT_NAME_KEY);
-        when = _("Backup will begin when %s is connected.").printf(name);
-        return false;
-      }
-    }
-    else if (file.is_native())
-      return true;
-    else {
-      try {
-        // Test if we can mount successfully (this is better than simply
-        // testing if network is reachable, since ssh configs and all sorts of
-        // things might be taken into account by GIO but not by a simple
-        // network test). If we do end up mounting it, that's fine.  This is
-        // only called right before attempting an operation.
-        return yield mount_enclosing_volume(file, null);
-      } catch (IOError.FAILED_HANDLED e) {
-        // Needed user input, so we know we can reach server
-        return true;
-      } catch (Error e) {
-        when = e.message;
-        return false;
-      }
-    }
-  }
-
-  public override Icon? get_icon() {
-    var settings = get_settings(FILE_ROOT);
-    var type = settings.get_string(FILE_TYPE_KEY);
-    string icon_name = "network-server";
-    if (type == "volume")
-      icon_name = settings.get_string(FILE_ICON_KEY);
-    else {
-      File file = get_file_from_settings();
-      if (file != null) {
-        try {
-          var info = file.query_info(FileAttribute.STANDARD_ICON,
-                                     FileQueryInfoFlags.NONE, null);
-          return info.get_icon();
-        }
-        catch (Error e) {
-          if (file.is_native())
-            icon_name = "folder";
-        }
-      }
-    }
-
-    try {
-      return Icon.new_for_string(icon_name);
-    }
-    catch (Error e) {
-      warning("%s\n", e.message);
-      return null;
-    }
+    return true;
   }
 
   // will be mounted by this time
@@ -233,92 +103,9 @@ public class BackendFile : Backend
       if (file != null && file.is_native())
         argv.prepend("--exclude=%s".printf(file.get_path()));
     }
-    
+
     if (mode == ToolJob.Mode.INVALID)
       argv.prepend("--gio");
-  }
-  
-  // Checks if file is secretly a volume file and fills out settings data if so.
-  protected virtual async void check_for_volume_info(File file) throws Error
-  {
-    var settings = get_settings(FILE_ROOT);
-
-    if (!file.is_native()) {
-      settings.set_string(FILE_TYPE_KEY, "normal");
-      return;
-    }
-
-    if (!file.query_exists(null))
-      return; // doesn't tell us anything
-
-    Mount mount = null;
-    try {
-      mount = yield file.find_enclosing_mount_async(Priority.DEFAULT, null);
-    }
-    catch (Error e) {}
-    if (mount == null) {
-      settings.set_string(FILE_TYPE_KEY, "normal");
-      return;
-    }
-
-    var volume = mount.get_volume();
-    if (volume == null)
-      return;
-
-    string relpath = null;
-    if (file != null) {
-      relpath = mount.get_root().get_relative_path(file);
-      if (relpath == null)
-        relpath = "";
-    }
-
-    yield set_volume_info(volume, relpath);
-  }
-
-  public async static void set_volume_info(Volume volume, string? relpath = null)
-  {
-    var uuid = volume.get_identifier(VolumeIdentifier.UUID);
-    if (uuid == null || uuid == "")
-      return;
-
-    var settings = get_settings(FILE_ROOT);
-    settings.delay();
-    settings.set_string(FILE_TYPE_KEY, "volume");
-    settings.set_string(FILE_UUID_KEY, uuid);
-    if (relpath != null)
-      settings.set_value(FILE_RELPATH_KEY, new Variant.bytestring(relpath));
-    update_volume_info(volume);
-    settings.apply();
-  }
-
-  static void update_volume_info(Volume volume)
-  {
-    var settings = get_settings(FILE_ROOT);
-
-    var name = volume.get_name();
-    if (name == null || name == "")
-      return;
-    var short_name = name;
-
-    var drive = volume.get_drive();
-    if (drive != null) {
-      var drive_name = drive.get_name();
-      if (drive_name != null && drive_name != "")
-        name = "%s: %s".printf(drive_name, name);
-    }
-
-    var icon = volume.get_icon();
-    string icon_str = null;
-    if (icon != null)
-      icon_str = icon.to_string();
-
-    settings.delay();
-
-    settings.set_string(FILE_NAME_KEY, name);
-    settings.set_string(FILE_SHORT_NAME_KEY, short_name);
-    settings.set_string(FILE_ICON_KEY, icon_str);
-
-    settings.apply();
   }
 
   // This doesn't *really* worry about envp, it just is a convenient point to
@@ -327,173 +114,38 @@ public class BackendFile : Backend
   {
     this.ref();
     try {
-      yield mount_file();
+      yield do_mount();
     }
     catch (Error e) {
       envp_ready(false, new List<string>(), e.message);
     }
     this.unref();
   }
-  
-  bool is_being_mounted_error(Error e)
+
+  async void do_mount() throws Error
   {
-    return e.message.has_prefix("DBus error org.gtk.Private.RemoteVolumeMonitor.Failed:");
-  }
+    yield mount();
 
-  async void delay(uint secs)
-  {
-    var loop = new MainLoop(null);
-    Timeout.add_seconds(secs, () => {
-      loop.quit();
-      return false;
-    });
-    loop.run();
-  }
+    var gfile = get_file_from_settings();
 
-  protected virtual async bool choose_mount() throws Error
-  {
-    var settings = get_settings(FILE_ROOT);
-    var type = settings.get_string(FILE_TYPE_KEY);
-
-    if (type == "volume")
-      return yield mount_volume();
-    else if (type == "normal") {
-      var file = get_file_from_settings();
-      if (!file.is_native())
-        return yield mount_remote(file);
-    }
-
-    return true;
-  }
-
-  async void mount_file() throws Error
-  {
-    bool success;
-
-    try {
-      success = yield choose_mount();
-    }
-    catch (IOError.FAILED err) {
-      // So, this is odd, and not very descriptive, but IOError.FAILED is the
-      // error given when someone else is mounting at the same time.  Sometimes
-      // happens when a USB stick is inserted and nautilus is fighting us.
-      if (is_being_mounted_error(err)) {
-        yield delay(1); // Try again in a second
-        yield mount_file();
-        return;
+    // Ensure directory exists (we check first rather than just doing it,
+    // because this makes some backends -- like google-drive: -- work better,
+    // as they allow multiple files with the same name. Querying it
+    // anchors the path to the backend object and we don't create a second
+    // copy this way.
+    if (!gfile.query_exists()) {
+      try {
+        gfile.make_directory_with_parents (null);
       }
-      else
-        throw err; // continue error on
-    }
-
-    if (success) {
-      var gfile = get_file_from_settings();
-
-      // If we don't know what type this is, look up volume data
-      yield check_for_volume_info(gfile);
-
-      // Ensure directory exists (we check first rather than just doing it,
-      // because this makes some backends -- like google-drive: -- work better,
-      // as they allow multiple files with the same name. Querying it
-      // anchors the path to the backend object and we don't create a second
-      // copy this way.
-      if (!gfile.query_exists()) {
-        try {
-          gfile.make_directory_with_parents (null);
-        }
-        catch (IOError.EXISTS err2) {
-          // ignore
-        }
+      catch (IOError.EXISTS err2) {
+        // ignore
       }
     }
 
-    envp_ready(success, new List<string>());
+    envp_ready(true, new List<string>());
   }
 
-  protected async bool mount_remote(File file) throws Error
-  {
-    if (!Network.get().connected) {
-      pause_op(_("Storage location not available"),
-               _("Waiting for a network connection…"));
-      var loop = new MainLoop(null, false);
-      var sigid = Network.get().notify["connected"].connect(() => {
-        if (Network.get().connected)
-          loop.quit();
-      });
-      loop.run();
-      Network.get().disconnect(sigid);
-      pause_op(null, null);
-    }
-
-    try {
-      return yield mount_enclosing_volume(file, mount_op);
-    } catch (IOError.ALREADY_MOUNTED e) {
-      return true;
-    } catch (Error e) {
-      // try once more with same response in case we timed out while waiting for user
-      mount_op.@set("retry_mode", true);
-      return yield mount_enclosing_volume(file, mount_op);
-    } finally {
-      mount_op.@set("retry_mode", false);
-    }
-  }
-
-  protected virtual async bool mount_volume() throws Error
-  {
-    var settings = get_settings(FILE_ROOT);
-    var uuid = settings.get_string(FILE_UUID_KEY);
-
-    var vol = yield wait_for_volume(uuid);
-
-    var mount = vol.get_mount();
-    if (mount != null) {
-      update_volume_info(vol);
-      return true;
-    }
-
-    var rv = yield vol.mount(MountMountFlags.NONE, mount_op, null);
-    if (rv)
-      update_volume_info(vol);
-
-    return rv;
-  }
-
-  public static Volume? find_volume_by_uuid(string uuid)
-  {
-    var mon = VolumeMonitor.get();
-    mon.ref(); // bug 569418; bad things happen when VM goes away
-    List<Volume> vols = mon.get_volumes();
-    foreach (Volume v in vols) {
-      // For some reason, when I last tested this (glib 2.22.2), 
-      // Volume.get_uuid always returned null.
-      // Looping and asking for the identifier is more reliable.
-      if (v.get_identifier(VolumeIdentifier.UUID) == uuid)
-        return v;
-    }
-    return null;
-  }
-
-  async Volume wait_for_volume(string uuid) throws Error
-  {
-    var vol = find_volume_by_uuid(uuid);
-    if (vol == null) {
-      var settings = get_settings(FILE_ROOT);
-      var name = settings.get_string(FILE_NAME_KEY);
-      pause_op(_("Storage location not available"), _("Waiting for ‘%s’ to become connected…").printf(name));
-      var loop = new MainLoop(null, false);
-      var mon = VolumeMonitor.get();
-      mon.ref(); // bug 569418; bad things happen when VM goes away
-      var sigid = mon.volume_added.connect((m, v) => {
-        loop.quit();
-      });
-      loop.run();
-      mon.disconnect(sigid);
-      pause_op(null, null);
-      return yield wait_for_volume(uuid);
-    }
-
-    return vol;
-  }
+  protected virtual async void mount() throws Error {}
 
   public override async uint64 get_space(bool free = true)
   {
