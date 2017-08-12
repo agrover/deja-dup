@@ -155,21 +155,9 @@ public class BackendFile : Backend
     return true; // default to yes?
   }
 
-  async bool mount_root_file(File file, MountOperation? mount_op) throws Error
+  async bool mount_enclosing_volume(File file, MountOperation? mount_op) throws Error
   {
-    // We always mount the root file of remote mounts because some gvfs backends
-    // will happily mount a subfolder and then fail further operations. For
-    // example, the situation that made me write this code was that
-    // google-drive: URIs will mount the folder instead of the root, then will
-    // say "Operation unsupported" when you try to make the directory, since
-    // it's now the root directory instead of a subfolder. I can't find any way
-    // to detect this situation. So we always just find and mount the root
-    // ourselves. I don't think any remote paths have valid non-root mounts,
-    // so this should be safe. But let me know if you find that to be true.
-    File root = file;
-    while (root.get_parent() != null)
-      root = root.get_parent();
-    return yield root.mount_enclosing_volume(MountMountFlags.NONE, mount_op, null);
+    return yield file.mount_enclosing_volume(MountMountFlags.NONE, mount_op, null);
   }
 
   public override async bool is_ready(out string when) {
@@ -196,7 +184,7 @@ public class BackendFile : Backend
         // things might be taken into account by GIO but not by a simple
         // network test). If we do end up mounting it, that's fine.  This is
         // only called right before attempting an operation.
-        return yield mount_root_file(file, null);
+        return yield mount_enclosing_volume(file, null);
       } catch (IOError.FAILED_HANDLED e) {
         // Needed user input, so we know we can reach server
         return true;
@@ -438,13 +426,13 @@ public class BackendFile : Backend
     }
 
     try {
-      return yield mount_root_file(file, mount_op);
+      return yield mount_enclosing_volume(file, mount_op);
     } catch (IOError.ALREADY_MOUNTED e) {
       return true;
     } catch (Error e) {
       // try once more with same response in case we timed out while waiting for user
       mount_op.@set("retry_mode", true);
-      return yield mount_root_file(file, mount_op);
+      return yield mount_enclosing_volume(file, mount_op);
     } finally {
       mount_op.@set("retry_mode", false);
     }

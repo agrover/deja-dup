@@ -65,7 +65,7 @@ public class BackendGoa : BackendFile
     return get_client_sync().lookup_by_id(id);
   }
 
-  protected override File? get_file_from_settings()
+  protected File? get_root_from_settings()
   {
     var obj = get_object_from_settings();
     if (obj == null)
@@ -74,10 +74,18 @@ public class BackendGoa : BackendFile
     if (files == null)
       return null;
 
+    return File.new_for_uri(files.uri);
+  }
+
+  protected override File? get_file_from_settings()
+  {
+    var root = get_root_from_settings();
+    if (root == null)
+      return null;
+
     var settings = get_settings(GOA_ROOT);
     var folder = settings.get_string(GOA_FOLDER_KEY);
-    var file = File.new_for_uri(files.uri);
-    return file.get_child(folder);
+    return root.get_default_location().get_child(folder);
   }
 
   public override string get_location_pretty()
@@ -137,7 +145,7 @@ public class BackendGoa : BackendFile
 
   protected override async bool choose_mount() throws Error
   {
-    if (get_file_from_settings() == null) {
+    if (get_root_from_settings() == null) {
         var settings = get_settings(GOA_ROOT);
         var type = settings.get_string(GOA_TYPE_KEY);
         var msg = _("Waiting for Online Accounts to be configured in backup settings…");
@@ -149,14 +157,14 @@ public class BackendGoa : BackendFile
         pause_op(_("Storage location not available"), msg);
         var loop = new MainLoop(null, false);
         settings.changed[GOA_ID_KEY].connect(() => {
-          if (get_file_from_settings() != null)
+          if (get_root_from_settings() != null)
             loop.quit();
         });
         loop.run();
         pause_op(null, null);
       }
     }
-    return yield mount_remote(get_file_from_settings());
+    return yield mount_remote(get_root_from_settings());
   }
 }
 } // end namespace
