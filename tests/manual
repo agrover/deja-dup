@@ -24,7 +24,7 @@ import sys
 
 from gi.repository import Gio, GLib
 
-if len(sys.argv) != 3:
+if len(sys.argv) < 3:
   print("Usage: ./backup CONFIGID OPERATION", file=sys.stderr)
   sys.exit(1)
 
@@ -69,11 +69,15 @@ if sys.argv[2] == "backup":
   settings.set_strv("include-list", [datadir])
   settings.set_strv("exclude-list", [])
 
-  # Call deja-dup
-  subprocess.run(["deja-dup", "--backup"], check=True)
+  cmd = ["deja-dup", "--backup"]
+  if "--gdb" in sys.argv:
+    cmd = ["gdb", "-ex", "run", "--args"] + cmd
 
-elif sys.argv[3] == "restore":
-  pass
+  # Call deja-dup
+  subprocess.run(cmd, check=True)
+
+elif sys.argv[2] == "restore":
+  subprocess.run(["deja-dup", "--restore"], check=True)
 
 else:
   print("Unknown operation", file=sys.stderr)
