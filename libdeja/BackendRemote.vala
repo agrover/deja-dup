@@ -51,9 +51,26 @@ public class BackendRemote : BackendFile
     var root = get_root_from_settings();
     var folder = get_folder();
 
+    // So ideally the user just put the server address ("sftp://example.org" or
+    // "dav://example.org/remote.php/webdav/").  And then we add the folder on
+    // top of whatever that location gives as the default location -- which
+    // might be the user's home directory or whatever.
+    //
+    // However... the user might put more in the server address field (and we
+    // ourselves might have migrated an old gsettings key into the address
+    // field that had the full path as part of it). So if it looks like the
+    // URI has more than the mount root in it, we add that together with the
+    // folder value to make a new path from the mount root (not the default
+    // location root).
+
     try {
       var mount = root.find_enclosing_mount(null);
-      return mount.get_default_location().get_child_for_display_name(folder);
+      var mount_root = mount.get_root();
+
+      if (!root.has_prefix(mount_root)) // if (equal), basically
+        root = mount.get_default_location();
+
+      return root.get_child_for_display_name(folder);
     } catch (Error e) {
       return null;
     }
