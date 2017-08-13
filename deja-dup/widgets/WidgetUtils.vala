@@ -39,28 +39,13 @@ public enum ShellEnv {
   LEGACY
 }
 
-[DBus (name = "org.gnome.Shell")]
-public interface GnomeShell : GLib.Object {
-    public abstract string ShellVersion { owned get; }
-}
-
 private ShellEnv shell = ShellEnv.NONE;
 public ShellEnv get_shell()
 {
   if (shell == ShellEnv.NONE) {
     // Use Legacy unless we detect a different shell.
-    shell = ShellEnv.LEGACY;
-    string gsv = null;
-    try {
-      GnomeShell gs = GLib.Bus.get_proxy_sync(BusType.SESSION,
-                                              "org.gnome.Shell",
-                                              "/org/gnome/Shell");
-      gsv = gs.ShellVersion;
-    } catch (Error e) {}
-    if (gsv != null) {
-      // It's really GnomeShell.
-      shell = ShellEnv.GNOME;
-    }
+    var desktop = Environment.get_variable("XDG_CURRENT_DESKTOP");
+    shell = (desktop == "GNOME") ? ShellEnv.GNOME : ShellEnv.LEGACY;
   }
 
   return shell;

@@ -27,7 +27,6 @@ using GLib;
  * GNOME Shell:
  * No status icon at all.
  * Actions on persistent notifications.
- * Detected by 'persistent' capability of notification server.
  * Automatic-start and success notifications.
  * 
  * Legacy:
@@ -53,7 +52,6 @@ public abstract class StatusIcon : Object
   }
 
   public signal void show_window(bool user_click);
-  public signal void hide_all();
   public Gtk.Window? window {get; construct;}
   public DejaDup.Operation op {get; construct;}
   public bool automatic {get; construct; default = false;}
@@ -63,13 +61,7 @@ public abstract class StatusIcon : Object
   protected string action;
   protected double progress;
 
-  protected string later_label;
-  protected string skip_label;
-
   construct {
-    later_label = _("_Resume Later");
-    skip_label = _("_Skip Backup");
-
     op.action_desc_changed.connect(set_action_desc);
     op.progress.connect(note_progress);
   }
@@ -114,22 +106,6 @@ public abstract class StatusIcon : Object
   }
 
   protected virtual void update_progress() {}
-
-  protected void later()
-  {
-    hide_all();
-    op.stop();
-  }
-
-  protected void skip()
-  {
-    hide_all();
-
-    // Fake a run by setting today's timestamp as the 'last-run' setting
-    DejaDup.update_last_run_timestamp(DejaDup.TimestampType.NONE);
-
-    op.cancel();
-  }
 }
 
 class ShellStatusIcon : StatusIcon
@@ -156,16 +132,14 @@ class LegacyStatusIcon : StatusIcon
     Object(window: window, op: op, automatic: automatic);
   }
 
-  Gtk.Menu menu;
   Gtk.StatusIcon icon;
   construct {
     icon = new Gtk.StatusIcon();
-    icon.set("icon-name", "deja-dup-symbolic",
-             "title", Environment.get_application_name());
+    icon.icon_name = "deja-dup";
+    icon.title = Environment.get_application_name();
+    icon.activate.connect(() => {show_window(true);});
 
-    ensure_menu();
-    icon.popup_menu.connect(show_menu);
-    icon.activate.connect((s) => {show_menu(s, 0, Gtk.get_current_event_time());});
+    update_progress();
   }
 
   protected override void update_progress()
@@ -176,40 +150,6 @@ class LegacyStatusIcon : StatusIcon
     if (this.progress > 0)
       tooltip = tooltip + "\n" + _("%.1f%% complete").printf(this.progress * 100);
     icon.set_tooltip_text(tooltip);
-  }
-
-  void show_menu(Gtk.StatusIcon status_icon, uint button, uint activate_time)
-  {
-    menu.popup(null, null, status_icon.position_menu, button, activate_time);
-  }
-
-  void ensure_menu()
-  {
-    menu = new Gtk.Menu();
-
-    var progressitem = new Gtk.MenuItem.with_mnemonic(_("Show _Progress"));
-    progressitem.activate.connect((i) => {show_window(true);});
-    menu.append(progressitem);
-
-    if (op.mode == DejaDup.ToolJob.Mode.BACKUP) {
-      Gtk.MenuItem item;
-
-      menu.append(new Gtk.SeparatorMenuItem());
-
-      item = new Gtk.MenuItem.with_mnemonic(later_label);
-      item.activate.connect((i) => {later();});
-      menu.append(item);
-
-      if (automatic) {
-        item = new Gtk.MenuItem.with_mnemonic(skip_label);
-        item.activate.connect((i) => {skip();});
-        menu.append(item);
-      }
-    }
-
-    update_progress();
-
-    menu.show_all();
   }
 }
 
