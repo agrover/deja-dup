@@ -501,9 +501,12 @@ void migrate_settings()
     return;
 
   var drive = get_settings(DRIVE_ROOT);
-  drive.set_value(DRIVE_ICON_KEY, file.get_user_value("icon"));
-  drive.set_value(DRIVE_NAME_KEY, file.get_user_value("short-name"));
-  drive.set_value(DRIVE_UUID_KEY, file.get_user_value("uuid"));
+  if (file.get_user_value("icon") != null)
+    drive.set_string(DRIVE_ICON_KEY, file.get_string("icon"));
+  if (file.get_user_value("short-name") != null)
+    drive.set_string(DRIVE_NAME_KEY, file.get_string("short-name"));
+  if (file.get_user_value("uuid") != null)
+    drive.set_string(DRIVE_UUID_KEY, file.get_string("uuid"));
   if (file.get_user_value("relpath") != null)
     drive.set_string(DRIVE_FOLDER_KEY, file.get_value("relpath").get_bytestring());
 
