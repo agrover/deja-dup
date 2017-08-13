@@ -38,6 +38,7 @@ public class ConfigLocationCustom : ConfigLocationTable
     var hint = new Gtk.Grid();
     hint.row_spacing = 6;
 
+    // Translators: This is followed by a list of valid adresses (smb://gnome.org, ssh://192.168.0.1, ftp://[2001:db8::1])
     add_label(hint, 0, row++, 2, 1, _("Server addresses are made up of a protocol prefix and an address. Examples:"));
 
     add_label(hint, 0, row++, 2, 1, "smb://gnome.org, ssh://192.168.0.1, ftp://[2001:db8::1]");

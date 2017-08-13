@@ -137,8 +137,10 @@ public class BackendGOA : BackendRemote
       var provider = Goa.Provider.get_for_provider_type(type);
 
       var msg = _("Waiting for Online Accounts to be configured in your backup settings…");
-      if (provider != null)
+      if (provider != null) {
+        // Translators: %s is the name of the provider inside of GNOME Online Accounts
         msg = _("Waiting for %s to be configured in your backup settings…").printf(provider.get_provider_name(null));
+      }
 
       pause_op(_("Storage location not available"), msg);
       var loop = new MainLoop(null, false);
