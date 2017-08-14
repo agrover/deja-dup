@@ -19,6 +19,10 @@
 
 using GLib;
 
+// we don't want to include external strings in our pot file
+[CCode (cname = "g_dgettext", cheader_filename = "glib/gi18n-lib.h")]
+public extern unowned string external_dgettext (string? domain, [FormatArg] string msgid);
+
 namespace DejaDup {
 
 public class ConfigLabelDescription : ConfigLabel
@@ -70,9 +74,9 @@ public class ConfigLabelDescription : ConfigLabel
     if (val == "" || !time.from_iso8601(val))
       label.label = _("You may use the %s button to browse for existing backups.").printf(button_name);
     else {
-      var file_manager = dgettext("nautilus", "Files");
+      var file_manager = external_dgettext("nautilus", "Files");
       if (Environment.get_variable("XDG_CURRENT_DESKTOP") == "MATE")
-        file_manager = dgettext("caja", "Caja");
+        file_manager = external_dgettext("caja", "Caja");
       label.label = _("You can restore the entire backup with the %s button or use %s to either revert individual files or restore missing ones.").printf(button_name, file_manager);
     }
   }

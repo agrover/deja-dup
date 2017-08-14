@@ -19,6 +19,10 @@
 
 using GLib;
 
+// we don't want to include external strings in our pot file
+[CCode (cname = "g_dgettext", cheader_filename = "glib/gi18n-lib.h")]
+public extern unowned string external_dgettext (string? domain, [FormatArg] string msgid);
+
 internal class DuplicityJob : DejaDup.ToolJob
 {
   DejaDup.ToolJob.Mode original_mode {get; private set;}
@@ -941,7 +945,7 @@ internal class DuplicityJob : DejaDup.ToolJob
         // If we wanted to be even fancier, we'd compile against libgpg-error and use
         // gpg_strerror(GPG_ERR_BAD_KEY). Any other error should be presented to the
         // user so they can maybe fix it (bad configuration files or something).
-        var bad_key_msg = dgettext("libgpg-error", "Bad session key");
+        var bad_key_msg = external_dgettext("libgpg-error", "Bad session key");
         if (text_in.contains(bad_key_msg)) {
           bad_encryption_password(); // notify upper layers, if they want to do anything
           text = _("Bad encryption password.");
