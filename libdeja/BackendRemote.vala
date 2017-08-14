@@ -67,7 +67,13 @@ public class BackendRemote : BackendFile
       var mount = root.find_enclosing_mount(null);
       var mount_root = mount.get_root();
 
-      if (!root.has_prefix(mount_root)) // if (equal), basically
+      // I've had inconsistent results from gvfs.  On davs://, sometimes
+      // equal() isn't correct, but has_prefix() is.  On sftp://, sometimes
+      // equal() is correct, but has_prefix() isn't.  We test both, hopefully
+      // they both won't be wrong.  The point of this check is that we *should*
+      // use default_location(), but won't if the user has added extra bits to
+      // the URI for us.
+      if (root.equal(mount_root) || !root.has_prefix(mount_root))
         root = mount.get_default_location();
 
       return root.get_child_for_display_name(folder);
