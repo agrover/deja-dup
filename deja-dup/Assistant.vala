@@ -63,6 +63,8 @@ public abstract class Assistant : Gtk.Window
   bool interrupted_from_hidden = false;
   weak List<PageInfo> interrupted;
 
+  protected bool can_resume = false;
+
   public weak List<PageInfo> current;
   List<PageInfo> infos;
 
@@ -321,7 +323,8 @@ public abstract class Assistant : Gtk.Window
       break;
     case Type.PROGRESS:
       show_cancel = true;
-      show_resume = true;
+      if (can_resume)
+        show_resume = true;
       break;
     case Type.FINISH:
       show_close = true;

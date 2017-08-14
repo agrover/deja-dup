@@ -30,6 +30,8 @@ public class AssistantBackup : AssistantOperation
   {
     title = C_("back up is verb", "Back Up");
     apply_text = C_("back up is verb", "_Back Up");
+
+    can_resume = true;
     resumed.connect(do_resume);
   }
   
