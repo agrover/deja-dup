@@ -313,7 +313,7 @@ public class Preferences : Gtk.Grid
     row = 0;
 
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
-    var location = new DejaDup.ConfigLocation(label_sizes);
+    var location = new DejaDup.ConfigLocation(false, label_sizes);
     label = new Gtk.Label(_("_Storage location"));
     label.mnemonic_widget = location;
     label.use_underline = true;

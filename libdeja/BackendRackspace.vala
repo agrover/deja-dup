@@ -29,10 +29,6 @@ const string RACKSPACE_SERVER = "auth.api.rackspacecloud.com";
 
 public class BackendRackspace : Backend
 {
-  public static Checker get_checker() {
-    return PythonChecker.get_checker("cloudfiles");
-  }
-
   public override Backend clone() {
     return new BackendRackspace();
   }

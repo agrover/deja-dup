@@ -30,10 +30,6 @@ const string S3_SERVER = "s3.amazonaws.com";
 
 public class BackendS3 : Backend
 {
-  public static Checker get_checker() {
-    return PythonChecker.get_checker("boto");
-  }
-
   public override Backend clone() {
     return new BackendS3();
   }

@@ -30,10 +30,6 @@ const string GCS_SERVER = "www.googleapis.com";
 
 public class BackendGCS : Backend
 {
-  public static Checker get_checker() {
-    return PythonChecker.get_checker("boto");
-  }
-
   public override Backend clone() {
     return new BackendGCS();
   }

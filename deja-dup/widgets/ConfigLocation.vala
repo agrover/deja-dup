@@ -48,6 +48,7 @@ public class ConfigLocation : ConfigWidget
 
   public Gtk.EventBox extras {get; private set;}
   public Gtk.SizeGroup label_sizes {get; construct;}
+  public bool show_deprecated {get; construct;}
 
   public Gtk.Requisition hidden_size()
   {
@@ -58,12 +59,11 @@ public class ConfigLocation : ConfigWidget
     return pagereq;
   }
 
-  public ConfigLocation(Gtk.SizeGroup? sg = null)
+  public ConfigLocation(bool show_deprecated, Gtk.SizeGroup? sg = null)
   {
-    Object(label_sizes: sg);
+    Object(show_deprecated: show_deprecated, label_sizes: sg);
   }
 
-  bool have_clouds;
   int num_volumes = 0;
 
   int extras_max_width = 0;
@@ -106,20 +106,13 @@ public class ConfigLocation : ConfigWidget
     remake_goa();
     BackendGOA.get_client_sync().account_added.connect(remake_goa);
     BackendGOA.get_client_sync().account_removed.connect(remake_goa);
-
     add_separator(Group.GOA_SEP);
 
-    // Insert cloud providers
-    insert_u1();
-    insert_s3();
-    insert_gcs();
-    insert_rackspace();
-    insert_openstack();
+    insert_clouds();
 
     add_entry(new ThemedIcon("network-server"),
               _("Network Server"), Group.REMOTE,
               new ConfigLocationCustom(label_sizes));
-
     add_separator(Group.REMOTE_SEP);
 
     // And a local folder option
@@ -284,71 +277,34 @@ public class ConfigLocation : ConfigWidget
               "", type);
   }
 
-  delegate void CloudCallback();
-
-  void insert_s3() {
-    insert_cloud_if_available("s3", BackendS3.get_checker(),
-                              new ThemedIcon("deja-dup-cloud"),
-                              _("Amazon S3"),
-                              new ConfigLocationS3(label_sizes),
-                              insert_s3);
-  }
-
-  void insert_gcs() {
-    insert_cloud_if_available("gcs", BackendGCS.get_checker(),
-                              new ThemedIcon("deja-dup-cloud"),
-                              _("Google Cloud Storage"),
-                              new ConfigLocationGCS(label_sizes),
-                              insert_gcs);
-  }
-
-  void insert_u1() {
-    // No longer functional.
-    // Only shown if user already had it configured, for migration purposes.
-    insert_cloud_if_available("u1", null,
-                              new ThemedIcon.from_names({"ubuntuone",
-                                                         "ubuntuone-installer",
-                                                         "deja-dup-cloud"}),
-                              _("Ubuntu One"),
-                              new ConfigLocationU1(label_sizes),
-                              insert_u1);
-  }
-
-  void insert_rackspace() {
-    insert_cloud_if_available("rackspace", BackendRackspace.get_checker(),
-                              new ThemedIcon("deja-dup-cloud"),
-                              _("Rackspace Cloud Files"),
-                              new ConfigLocationRackspace(label_sizes),
-                              insert_rackspace);
-  }
-
-  void insert_openstack() {
-    insert_cloud_if_available("openstack", BackendOpenstack.get_checker(),
-                              new ThemedIcon("deja-dup-cloud"),
-                              _("OpenStack Swift"),
-                              new ConfigLocationOpenstack(label_sizes),
-                              insert_openstack);
-  }
-
-  void insert_cloud_if_available(string id, Checker? checker,
-                                 Icon icon, string name,
-                                 Gtk.Widget? w,
-                                 CloudCallback cb)
+  void insert_clouds()
   {
+    // Note that we are using | not || here, because if show_deprecated is set,
+    // we want to insert multiple backends.
+    if (insert_cloud("s3", _("Amazon S3"), show_deprecated,
+                     new ConfigLocationS3(label_sizes)) |
+        insert_cloud("gcs", _("Google Cloud Storage"), show_deprecated,
+                     new ConfigLocationGCS(label_sizes)) |
+        insert_cloud("u1", _("Ubuntu One"), false, /* u1 is more than deprecated */
+                     new ConfigLocationU1(label_sizes)) |
+        insert_cloud("rackspace", _("Rackspace Cloud Files"), show_deprecated,
+                     new ConfigLocationRackspace(label_sizes)) |
+        insert_cloud("openstack", _("OpenStack Swift"), show_deprecated,
+                     new ConfigLocationOpenstack(label_sizes)))
+      add_separator(Group.CLOUD_SEP);
+  }
+
+  bool insert_cloud(string id, string name, bool force_show, Gtk.Widget w)
+  {
+    // All cloud backends are deprecated in favor of GOA.  So we only show
+    // them if they are already configured as the backend (either from older
+    // users or they manually set the gsettings value).
     var backend = Backend.get_default_type();
-    if (backend == id || (checker != null && checker.complete && checker.available)) {
-      add_entry(icon, name, Group.CLOUD, w, id);
-      if (!have_clouds) {
-        add_separator(Group.CLOUD_SEP);
-        have_clouds = true;
-      }
-    }
-    else if (checker != null && !checker.complete) {
-      // Call ourselves when we've got enough information.  Also make sure to
-      // set from config again, in case in a previous set_from_config, we
-      // weren't available in the combo yet.
-      checker.notify["complete"].connect(() => {cb(); set_from_config.begin();});
-    }
+    if (force_show || backend == id) {
+      add_entry(new ThemedIcon("deja-dup-cloud"), name, Group.CLOUD, w, id);
+      return true;
+    } else
+      return false;
   }
 
   bool is_allowed_volume(Volume vol)

@@ -29,10 +29,6 @@ public const string OPENSTACK_AUTHURL_KEY = "authurl";
 
 public class BackendOpenstack : Backend
 {
-  public static Checker get_checker() {
-    return PythonChecker.get_checker("swiftclient");
-  }
-
   public override Backend clone() {
     return new BackendOpenstack();
   }

@@ -87,7 +87,7 @@ public class AssistantRestore : AssistantOperation
              "column-spacing", 12,
              "border-width", 12);
     
-    var location = new DejaDup.ConfigLocation(label_sizes);
+    var location = new DejaDup.ConfigLocation(true, label_sizes);
     label = new Gtk.Label.with_mnemonic(_("_Backup location"));
     label.set("xalign", 1.0f,
               "mnemonic-widget", location);
