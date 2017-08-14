@@ -24,6 +24,7 @@ namespace DejaDup {
 public class ConfigEntry : ConfigWidget
 {
   public bool is_uri {get; set;}
+  public Gtk.Entry entry {get; construct;}
 
   public ConfigEntry(string key, string ns="", bool is_uri=false)
   {
@@ -42,7 +43,6 @@ public class ConfigEntry : ConfigWidget
       accessible.set_name(name);
   }
 
-  protected Gtk.Entry entry;
   construct {
     entry = new Gtk.Entry();
     add(entry);

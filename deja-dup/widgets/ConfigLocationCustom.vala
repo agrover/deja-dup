@@ -27,64 +27,36 @@ public class ConfigLocationCustom : ConfigLocationTable
     Object(label_sizes: sg);
   }
 
+  Gtk.Popover hint = null;
   construct {
-    var entry = new ConfigEntry(DejaDup.REMOTE_URI_KEY, DejaDup.REMOTE_ROOT,
-                                true);
-    entry.set_accessible_name("CustomAddress");
-    add_widget(_("Server _Address"), entry);
+    var address = new ConfigEntry(DejaDup.REMOTE_URI_KEY, DejaDup.REMOTE_ROOT,
+                                  true);
+    address.set_accessible_name("CustomAddress");
+    address.entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY,
+                                          "dialog-question-symbolic");
+    address.entry.icon_press.connect(show_hint);
+    add_widget(_("Server _Address"), address);
 
-    int row = 0;
-
-    var hint = new Gtk.Grid();
-    hint.row_spacing = 6;
-
-    // Translators: This is followed by a list of valid adresses (smb://gnome.org, ssh://192.168.0.1, ftp://[2001:db8::1])
-    add_label(hint, 0, row++, 2, 1, _("Server addresses are made up of a protocol prefix and an address. Examples:"));
-
-    add_label(hint, 0, row++, 2, 1, "smb://gnome.org, ssh://192.168.0.1, ftp://[2001:db8::1]");
-
-    add_label(hint, 0, row, 1, 1, "<b>%s</b>".printf(_("Available Protocols")), 6);
-    add_label(hint, 1, row++, 1, 1, "<b>%s</b>".printf(_("Prefix")), 6);
-
-    add_label(hint, 0, row, 1, 1, _("AppleTalk"));
-    add_label(hint, 1, row++, 1, 1, "afp://");
-
-    add_label(hint, 0, row, 1, 1, _("File Transfer Protocol"));
-    // Translators: do not translate ftp:// and ftps://
-    add_label(hint, 1, row++, 1, 1, _("ftp:// or ftps://"));
-
-    add_label(hint, 0, row, 1, 1, _("Network File System"));
-    add_label(hint, 1, row++, 1, 1, "nfs://");
-
-    add_label(hint, 0, row, 1, 1, _("Samba"));
-    add_label(hint, 1, row++, 1, 1, "smb://");
-
-    add_label(hint, 0, row, 1, 1, _("SSH File Transfer Protocol"));
-    // Translators: do not translate sftp:// and ssh://
-    add_label(hint, 1, row++, 1, 1, _("sftp:// or ssh://"));
-
-    add_label(hint, 0, row, 1, 1, _("WebDav"));
-    // Translators: do not translate dav:// and davs://
-    add_label(hint, 1, row++, 1, 1, _("dav:// or davs://"));
-
-    hint.show_all();
-    hint.margin_bottom = 6;
-    add_widget("", hint);
+    hint = create_hint(address.entry);
 
     var folder = new ConfigFolder(DejaDup.REMOTE_FOLDER_KEY, DejaDup.REMOTE_ROOT, true);
     folder.set_accessible_name("CustomFolder");
     add_widget(_("_Folder"), folder);
   }
 
-  void add_label(Gtk.Grid grid, int left, int top, int width, int height, string text, int margin_top = 0)
+  void show_hint(Gtk.Entry entry, Gtk.EntryIconPosition icon_pos, Gdk.Event event)
   {
-    var label = new Gtk.Label(text);
-    label.wrap = true;
-    label.max_width_chars = 50;
-    label.use_markup = true;
-    label.xalign = 0.0f;
-    label.margin_top = margin_top;
-    grid.attach(label, left, top, width, height);
+    Gdk.Rectangle rect = entry.get_icon_area(icon_pos);
+    hint.set_pointing_to(rect);
+    hint.show_all();
+  }
+
+  Gtk.Popover create_hint(Gtk.Entry parent)
+  {
+    var builder = new Gtk.Builder.from_resource("/org/gnome/DejaDup/server-hint.ui");
+    var popover = builder.get_object("server_adresses_popover") as Gtk.Popover;
+    popover.relative_to = parent;
+    return popover;
   }
 }
 
