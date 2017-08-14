@@ -315,17 +315,17 @@ public class Preferences : Gtk.Grid
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
     var location = new DejaDup.ConfigLocation(label_sizes);
     label = new Gtk.Label(_("_Storage location"));
-    label.set("mnemonic-widget", location,
-              "use-underline", true,
-              "xalign", 1.0f);
+    label.mnemonic_widget = location;
+    label.use_underline = true;
+    label.xalign = 1.0f;
     label_sizes.add_widget(label);
 
     table.attach(label, 0, row, 1, 1);
     table.attach(location, 1, row, 1, 1);
-    location.set("hexpand", true);
+    location.hexpand = true;
     ++row;
 
-    location.extras.set("hexpand", true);
+    location.extras.hexpand = true;
     table.attach(location.extras, 0, row, 2, 1);
     ++row;
 

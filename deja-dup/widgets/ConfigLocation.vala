@@ -145,7 +145,10 @@ public class ConfigLocation : ConfigWidget
 
     var textrenderer = new Gtk.CellRendererText();
     textrenderer.xpad = 6;
-    button.pack_start(textrenderer, true);
+    textrenderer.ellipsize = Pango.EllipsizeMode.END;
+    textrenderer.ellipsize_set = true;
+    textrenderer.max_width_chars = 10;
+    button.pack_start(textrenderer, false);
     button.add_attribute(textrenderer, "markup", Col.TEXT);
 
     // End of location combo
