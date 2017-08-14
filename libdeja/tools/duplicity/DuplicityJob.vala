@@ -935,8 +935,17 @@ internal class DuplicityJob : DejaDup.ToolJob
         break;
 
       case ERROR_GPG:
-        bad_encryption_password(); // notify upper layers, if they want to do anything
-        text = _("Bad encryption password.");
+        // GPG does not expose the true reason in a machine-readable way for duplicity
+        // to pass on.  So we try to find out why it failed by looking for the
+        // "bad session key" error message that is given if the password was incorrect.
+        // If we wanted to be even fancier, we'd compile against libgpg-error and use
+        // gpg_strerror(GPG_ERR_BAD_KEY). Any other error should be presented to the
+        // user so they can maybe fix it (bad configuration files or something).
+        var bad_key_msg = dgettext("libgpg-error", "Bad session key");
+        if (text_in.contains(bad_key_msg)) {
+          bad_encryption_password(); // notify upper layers, if they want to do anything
+          text = _("Bad encryption password.");
+        }
         break;
 
       case ERROR_HOSTNAME_CHANGED:
