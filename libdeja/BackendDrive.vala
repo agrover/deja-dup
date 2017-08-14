@@ -138,11 +138,6 @@ public class BackendDrive : BackendFile
     settings.apply();
   }
 
-  bool is_being_mounted_error(Error e)
-  {
-    return e.message.has_prefix("DBus error org.gtk.Private.RemoteVolumeMonitor.Failed:");
-  }
-
   async void delay(uint secs)
   {
     var loop = new MainLoop(null);
@@ -153,27 +148,31 @@ public class BackendDrive : BackendFile
     loop.run();
   }
 
+  async void mount_internal(Volume vol, bool recurse=true) throws Error
+  {
+    // Volumes sometimes return a generic error message instead of
+    // IOError.ALREADY_MOUNTED, So let's check manually whether we're mounted.
+    if (vol.get_mount() != null)
+      return;
+
+    try {
+      yield vol.mount(MountMountFlags.NONE, mount_op, null);
+    } catch (IOError.ALREADY_MOUNTED e) {
+      return;
+    } catch (IOError.DBUS_ERROR e) {
+      // This is not very descriptive, but IOError.DBUS_ERROR is the
+      // error given when someone else is mounting at the same time.  Sometimes
+      // happens when a USB stick is inserted and nautilus is fighting us.
+      yield delay(1); // Try again in a second
+      if (recurse)
+        yield mount_internal(vol, false);
+    }
+  }
+
   protected override async void mount() throws Error
   {
     var vol = yield wait_for_volume();
-
-    var mount = vol.get_mount();
-    if (mount == null) {
-      try {
-        yield vol.mount(MountMountFlags.NONE, mount_op, null);
-      } catch (IOError.FAILED err) {
-        // So, this is odd, and not very descriptive, but IOError.FAILED is the
-        // error given when someone else is mounting at the same time.  Sometimes
-        // happens when a USB stick is inserted and nautilus is fighting us.
-        if (is_being_mounted_error(err)) {
-          yield delay(1); // Try again in a second
-          yield vol.mount(MountMountFlags.NONE, mount_op, null);
-        }
-        else
-          throw err; // continue error on
-      }
-    }
-
+    yield mount_internal(vol);
     update_volume_info(vol);
   }
 
