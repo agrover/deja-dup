@@ -231,13 +231,14 @@ public abstract class AssistantOperation : Assistant
     progress_text = new Gtk.TextView();
     progress_text.editable = false;
     progress_scroll = new Gtk.ScrolledWindow(null, null);
-    progress_scroll.set("child", progress_text,
-                        "hscrollbar-policy", Gtk.PolicyType.AUTOMATIC,
-                        "vscrollbar-policy", Gtk.PolicyType.AUTOMATIC,
-                        "border-width", 0,
-                        "min-content-height", 200);
+    progress_scroll.child = progress_text;
+    progress_scroll.hscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
+    progress_scroll.vscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
+    progress_scroll.border_width = 0;
+    progress_scroll.min_content_height = 200;
+    progress_scroll.expand = true;
     progress_expander = new Gtk.Expander.with_mnemonic(_("_Details"));
-    progress_expander.set("child", progress_scroll);
+    progress_expander.child = progress_scroll;
     progress_expander.expand = true;
     page.attach(progress_expander, 0, row, 2, 1);
     ++row;
