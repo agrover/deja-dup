@@ -280,7 +280,7 @@ public abstract class Assistant : Gtk.Window
     btn.can_default = true;
     btn.clicked.connect(() => {this.response(response_id);});
     btn.show();
-    if (response_id == CANCEL || response_id == CLOSE)
+    if (response_id == CANCEL)
       header_bar.pack_start(btn);
     else
       header_bar.pack_end(btn);
@@ -348,12 +348,6 @@ public abstract class Assistant : Gtk.Window
     if (apply_button != null) {
       area.remove(apply_button); DejaDup.destroy_widget(apply_button); apply_button = null;}
 
-    if (show_cancel)
-      cancel_button = add_button(_("_Cancel"), CANCEL);
-    if (show_close) {
-      close_button = add_button(_("_Close"), CLOSE);
-      close_button.grab_default();
-    }
     if (show_apply) {
       apply_button = add_button(apply_text, APPLY);
       apply_button.grab_default();
@@ -368,6 +362,12 @@ public abstract class Assistant : Gtk.Window
     }
     if (show_back)
       back_button = add_button(_("_Back"), BACK);
+    if (show_close) {
+      close_button = add_button(_("_Close"), CLOSE);
+      close_button.grab_default();
+    }
+    if (show_cancel)
+      cancel_button = add_button(_("_Cancel"), CANCEL);
   }
 
   bool set_first_page()
