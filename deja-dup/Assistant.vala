@@ -44,7 +44,7 @@ public abstract class Assistant : Gtk.Window
 
   Gtk.Label header_title;
   protected Gtk.Image header_icon;
-  Gtk.ButtonBox button_box;
+  Gtk.HeaderBar header_bar;
   Gtk.Widget back_button;
   Gtk.Widget forward_button;
   Gtk.Widget cancel_button;
@@ -79,6 +79,9 @@ public abstract class Assistant : Gtk.Window
   {
     infos = new List<PageInfo>();
 
+    header_bar = new Gtk.HeaderBar();
+    set_titlebar(header_bar);
+
     var evbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
 
     var ebox = new Gtk.EventBox();
@@ -97,14 +100,8 @@ public abstract class Assistant : Gtk.Window
     page_box = new Gtk.EventBox();
     evbox.pack_start(page_box, true, true, 0);
 
-    button_box = new Gtk.ButtonBox(Gtk.Orientation.HORIZONTAL);
-    button_box.set_layout(Gtk.ButtonBoxStyle.END);
-    button_box.border_width = 12;
-    button_box.spacing = 12;
-
     var dlg_vbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
     dlg_vbox.pack_start(evbox, true, true);
-    dlg_vbox.pack_end(button_box, false, true);
     dlg_vbox.show_all();
     add(dlg_vbox);
 
@@ -283,7 +280,10 @@ public abstract class Assistant : Gtk.Window
     btn.can_default = true;
     btn.clicked.connect(() => {this.response(response_id);});
     btn.show();
-    button_box.pack_end(btn, false, true, 0);
+    if (response_id == CANCEL || response_id == CLOSE)
+      header_bar.pack_start(btn);
+    else
+      header_bar.pack_end(btn);
     return btn;
   }
 
@@ -334,7 +334,7 @@ public abstract class Assistant : Gtk.Window
     // We call destroy on each so that they are destroyed in the idle loop.
     // GailButton does weird things with queued events during the idle loop,
     // so if we wait until then to destroy them, we avoid colliding with it.
-    var area = button_box;
+    var area = header_bar;
     if (cancel_button != null) {
       area.remove(cancel_button); DejaDup.destroy_widget(cancel_button); cancel_button = null;}
     if (close_button != null) {
@@ -354,20 +354,20 @@ public abstract class Assistant : Gtk.Window
       close_button = add_button(_("_Close"), CLOSE);
       close_button.grab_default();
     }
-    if (show_back)
-      back_button = add_button(_("_Back"), BACK);
-    if (show_resume) {
-      resume_button = add_button(_("_Resume Later"), RESUME);
-      resume_button.grab_default();
+    if (show_apply) {
+      apply_button = add_button(apply_text, APPLY);
+      apply_button.grab_default();
     }
     if (show_forward) {
       forward_button = add_button(forward_text, FORWARD);
       forward_button.grab_default();
     }
-    if (show_apply) {
-      apply_button = add_button(apply_text, APPLY);
-      apply_button.grab_default();
+    if (show_resume) {
+      resume_button = add_button(_("_Resume Later"), RESUME);
+      resume_button.grab_default();
     }
+    if (show_back)
+      back_button = add_button(_("_Back"), BACK);
   }
 
   bool set_first_page()
