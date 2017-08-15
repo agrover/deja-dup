@@ -45,7 +45,7 @@ public ShellEnv get_shell()
   if (shell == ShellEnv.NONE) {
     // Use Legacy unless we detect a different shell.
     var desktop = Environment.get_variable("XDG_CURRENT_DESKTOP");
-    shell = (desktop == "GNOME") ? ShellEnv.GNOME : ShellEnv.LEGACY;
+    shell = desktop.contains("GNOME") ? ShellEnv.GNOME : ShellEnv.LEGACY;
   }
 
   return shell;
