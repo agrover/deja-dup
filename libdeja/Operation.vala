@@ -285,6 +285,9 @@ public abstract class Operation : Object
       results = yield client.resolve_async(bitfield, deps, null, () => {});
       if (results == null || results.get_error_code() != null)
         return;
+    } catch (IOError.NOT_FOUND e) {
+      // This happens when the packagekit daemon isn't running -- it can't find the socket
+      return;
     } catch (Error e) {
       raise_error("%s".printf(e.message), null);
       done(false, false, null);
