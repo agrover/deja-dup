@@ -50,11 +50,11 @@ run_shell()
     echo "Run exit to leave."
     echo "Run exit 1 to leave and keep data playground intact."
   fi
-  PREFIX=
+  CMD="$ARGS"
   if [ "$SHNAME" != "shell" ]; then
-    PREFIX="dbus-run-session -- sh -c"
+    CMD="dbus-run-session -- $ARGS"
   fi
-  if $PREFIX $ARGS; then
+  if sh -c "$CMD"; then
     rm -rf "${ROOTDIR}" # Cleanup on clean exit
   fi
 }
@@ -104,7 +104,7 @@ mkdir -p "${ROOTDIR}/restore"
 
 # If we are in local mode, point at our own data files and built objects
 SHNAME=$(basename $0)
-if [ "$SHNAME" = "shell" ]; then
+if [ "$SHNAME" = "shell-local" ]; then
   mkdir -p "${ROOTDIR}/share/glib-2.0/schemas"
   cp "${TOPDIR}/data/org.gnome.DejaDup.gschema.xml" "${ROOTDIR}/share/glib-2.0/schemas"
   glib-compile-schemas "${ROOTDIR}/share/glib-2.0/schemas"
