@@ -7,24 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-08-03 11:12-0400\n"
-"PO-Revision-Date: 2017-08-02 18:16+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2017-08-14 17:05-0400\n"
+"PO-Revision-Date: 2017-08-04 23:04+0000\n"
+"Last-Translator: Michael Terry <mike@mterry.name>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2017-08-04 05:38+0000\n"
-"X-Generator: Launchpad (build 18441)\n"
+"X-Launchpad-Export-Date: 2017-08-16 05:23+0000\n"
+"X-Generator: Launchpad (build 18446)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:295
-#: libdeja/CommonUtils.vala:139
+#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:304
+#: libdeja/CommonUtils.vala:145
 msgid "Déjà Dup Backup Tool"
 msgstr "Công cụ Sao lưu Déjà Dup"
 
@@ -41,8 +41,7 @@ msgstr ""
 
 #: data/org.gnome.DejaDup.appdata.xml.in:12
 msgid ""
-"Support for local, remote, or cloud backup locations, such as Amazon S3 and "
-"Rackspace Cloud Files"
+"Support for local, remote, or cloud backup locations such as Nextcloud"
 msgstr ""
 
 #: data/org.gnome.DejaDup.appdata.xml.in:13
@@ -63,7 +62,7 @@ msgid "Integrates well into your GNOME desktop"
 msgstr ""
 
 #. Translators: "Backups" is a noun
-#: data/org.gnome.DejaDup.desktop:5 deja-dup/main.vala:159
+#: data/org.gnome.DejaDup.desktop:5 deja-dup/main.vala:160
 #: deja-dup/Prompt.vala:78
 msgid "Backups"
 msgstr ""
@@ -87,11 +86,11 @@ msgstr "déjà;deja;dup;"
 msgid "Back Up"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:6 deja-dup/Preferences.vala:285
+#: data/org.gnome.DejaDup.gschema.xml:9 deja-dup/Preferences.vala:294
 msgid "Folders to save"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:7
+#: data/org.gnome.DejaDup.gschema.xml:10
 msgid ""
 "This list of directories will be backed up. Reserved values $HOME, $DESKTOP, "
 "$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
@@ -101,11 +100,11 @@ msgid ""
 "relative to the user’s home directory."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:11 deja-dup/Preferences.vala:296
+#: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:305
 msgid "Folders to ignore"
 msgstr "Bỏ qua các thư mục"
 
-#: data/org.gnome.DejaDup.gschema.xml:12
+#: data/org.gnome.DejaDup.gschema.xml:15
 msgid ""
 "This list of directories will not be backed up. Reserved values $HOME, "
 "$DESKTOP, $DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, "
@@ -115,32 +114,32 @@ msgid ""
 "in the path. Relative entries are relative to the user’s home directory."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:16
+#: data/org.gnome.DejaDup.gschema.xml:19
 msgid "Whether to request the root password"
 msgstr "Yêu cầu mật khẩu quản trị"
 
-#: data/org.gnome.DejaDup.gschema.xml:17
+#: data/org.gnome.DejaDup.gschema.xml:20
 msgid ""
 "Whether to request the root password when backing up from or restoring to "
 "system folders."
 msgstr "Yêu cầu mật khẩu quản trị khi sao lưu hay phục hồi thư mục hệ thống."
 
-#: data/org.gnome.DejaDup.gschema.xml:21
+#: data/org.gnome.DejaDup.gschema.xml:24
 msgid "The last time Déjà Dup was run"
 msgstr "Lần chạy cuối của Déjà Dup"
 
-#: data/org.gnome.DejaDup.gschema.xml:22
+#: data/org.gnome.DejaDup.gschema.xml:25
 msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
 msgstr ""
 "Lần cuối Déjà Dup chạy thành công. Định dạng thời gian theo chuẩn ISO 8601."
 
-#: data/org.gnome.DejaDup.gschema.xml:26
+#: data/org.gnome.DejaDup.gschema.xml:29
 msgid "The last time Déjà Dup backed up"
 msgstr "Lần sao lưu cuối cùng với Déjà Dup"
 
-#: data/org.gnome.DejaDup.gschema.xml:27
+#: data/org.gnome.DejaDup.gschema.xml:30
 msgid ""
 "The last time Déjà Dup successfully completed a backup. This time should be "
 "in ISO 8601 format."
@@ -148,11 +147,11 @@ msgstr ""
 "Lần cuối Déjà Dup sao lưu thành công. Định dạng thời gian theo chuẩn ISO "
 "8601."
 
-#: data/org.gnome.DejaDup.gschema.xml:31
+#: data/org.gnome.DejaDup.gschema.xml:34
 msgid "The last time Déjà Dup restored"
 msgstr "Lần khôi phục cuối cùng với Déjà Dup"
 
-#: data/org.gnome.DejaDup.gschema.xml:32
+#: data/org.gnome.DejaDup.gschema.xml:35
 msgid ""
 "The last time Déjà Dup successfully completed a restore. This time should be "
 "in ISO 8601 format."
@@ -160,28 +159,28 @@ msgstr ""
 "Lần cuối Déjà Dup phục hồi thành công. Định dạng thời gian theo chuẩn ISO "
 "8601."
 
-#: data/org.gnome.DejaDup.gschema.xml:36
+#: data/org.gnome.DejaDup.gschema.xml:39
 msgid "Whether to periodically back up"
 msgstr "relativeSao lưu định kì"
 
-#: data/org.gnome.DejaDup.gschema.xml:37
+#: data/org.gnome.DejaDup.gschema.xml:40
 msgid "Whether to automatically back up on a regular schedule."
 msgstr "Tự động sao lưu với một lịch định kì."
 
-#: data/org.gnome.DejaDup.gschema.xml:41
+#: data/org.gnome.DejaDup.gschema.xml:44
 msgid "How often to periodically back up"
 msgstr "Bao lâu để sao lưu định kì"
 
-#: data/org.gnome.DejaDup.gschema.xml:42
+#: data/org.gnome.DejaDup.gschema.xml:45
 msgid "The number of days between backups."
 msgstr "Số ngày giữa các lần sao lưu."
 
-#: data/org.gnome.DejaDup.gschema.xml:46
+#: data/org.gnome.DejaDup.gschema.xml:49
 msgid ""
 "The last time Déjà Dup checked whether it should prompt about backing up"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:47
+#: data/org.gnome.DejaDup.gschema.xml:50
 msgid ""
 "When a user logs in, the Déjà Dup monitor checks whether it should prompt "
 "about backing up. This is used to increase discoverability for users that "
@@ -193,23 +192,23 @@ msgstr ""
 "lưu. Lần này nên đặt 'tắt' để không phải kiểm tra hoặc trong định dạng ISO "
 "8601."
 
-#: data/org.gnome.DejaDup.gschema.xml:51
+#: data/org.gnome.DejaDup.gschema.xml:54
 msgid ""
 "The last time Déjà Dup checked whether it should prompt about your password"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:52
+#: data/org.gnome.DejaDup.gschema.xml:55
 msgid ""
 "In order to prevent you from forgetting your passwords, Déjà Dup will "
 "occasionally notify you to confirm the password. This time should be either "
 "‘disabled’ to turn off this check or in ISO 8601 format."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:56
+#: data/org.gnome.DejaDup.gschema.xml:59
 msgid "How long to keep backup files"
 msgstr "Các tập tin sao lưu được giữ lại trong bao lâu"
 
-#: data/org.gnome.DejaDup.gschema.xml:57
+#: data/org.gnome.DejaDup.gschema.xml:60
 msgid ""
 "The number of days to keep backup files on the backup location. A value of 0 "
 "means forever. This is a minimum number of days; the files may be kept "
@@ -219,61 +218,121 @@ msgstr ""
 "không giới hạn thời gian. Đây là số ngày nhỏ nhất; các tập tin có thể được "
 "lưu giữ lâu hơn."
 
-#: data/org.gnome.DejaDup.gschema.xml:61
+#: data/org.gnome.DejaDup.gschema.xml:64
 msgid "How long to wait between full backups"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:62
+#: data/org.gnome.DejaDup.gschema.xml:65
 msgid ""
 "Déjà Dup needs to occasionally make fresh full backups. This is the number "
 "of days to wait between full backups."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:66
+#: data/org.gnome.DejaDup.gschema.xml:69
 msgid "Whether to use metered networks"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:67
+#: data/org.gnome.DejaDup.gschema.xml:70
 msgid ""
 "If false, Déjà Dup will refuse to run scheduled backups over metered network "
 "connections (like 4G)."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:81
+#: data/org.gnome.DejaDup.gschema.xml:86
 msgid "Type of location to store backup"
 msgstr "Nhập vị trí để lưu trữ các bản sao lưu"
 
-#: data/org.gnome.DejaDup.gschema.xml:82
+#: data/org.gnome.DejaDup.gschema.xml:87
 msgid ""
 "The type of backup location. If ‘auto’, a default will be chosen based on "
 "what is available."
 msgstr ""
 "Kiểu vị trí sao lưu. Nếu là 'auto', sẽ tự động chọn dựa trên những gì đã có."
 
-#: data/org.gnome.DejaDup.gschema.xml:94
+#: data/org.gnome.DejaDup.gschema.xml:103
+#: data/org.gnome.DejaDup.gschema.xml:126
+#: data/org.gnome.DejaDup.gschema.xml:139
+#: data/org.gnome.DejaDup.gschema.xml:206
+msgid "The folder where backups are stored"
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:104
+msgid ""
+"The folder hierarchy where backups are stored. Paths can be absolute or "
+"relative to your home directory."
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:111
+msgid "UUID"
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:112
+msgid ""
+"The unique filesystem identifier for the drive, used to recognize the drive "
+"when it is plugged in."
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:116
+msgid "Name"
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:117
+msgid "The name of the external drive."
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:121
+msgid "Icon"
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:122
+msgid "The icon of the external drive, as a serialized GIcon."
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:127
+msgid ""
+"The folder hierarchy where backups are stored. Paths are relative to the "
+"drive."
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:134
+msgid "The server address"
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:135
+msgid "The URI of the remote server location."
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:140
+#: data/org.gnome.DejaDup.gschema.xml:207
+msgid ""
+"The folder hierarchy where backups are stored. Paths can be absolute or "
+"relative to the host."
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:147
 msgid "Amazon S3 Access Key ID"
 msgstr "ID khóa truy cập Amazon S3"
 
-#: data/org.gnome.DejaDup.gschema.xml:95
+#: data/org.gnome.DejaDup.gschema.xml:148
 msgid "Your Amazon S3 Access Key Identifier. This acts as your S3 username."
 msgstr "Khóa nhận diện truy cập Amazon S3, cũng là tên đăng nhập của bạn."
 
-#: data/org.gnome.DejaDup.gschema.xml:99
+#: data/org.gnome.DejaDup.gschema.xml:152
 msgid "The Amazon S3 bucket name to use"
 msgstr "Tên thùng trong Amazon S3"
 
-#: data/org.gnome.DejaDup.gschema.xml:100
+#: data/org.gnome.DejaDup.gschema.xml:153
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:104
+#: data/org.gnome.DejaDup.gschema.xml:157
 msgid "The Amazon S3 folder"
 msgstr "Thư mục Amazon S3"
 
-#: data/org.gnome.DejaDup.gschema.xml:105
-#: data/org.gnome.DejaDup.gschema.xml:122
+#: data/org.gnome.DejaDup.gschema.xml:158
+#: data/org.gnome.DejaDup.gschema.xml:176
 msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
@@ -281,181 +340,112 @@ msgstr ""
 "Một thư mục tùy chọn để lưu các tập tin. Thư mục này sẽ được tạo trong thùng "
 "đã chọn."
 
-#: data/org.gnome.DejaDup.gschema.xml:111
+#: data/org.gnome.DejaDup.gschema.xml:165
 msgid "Google Cloud Storage Access Key ID"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:112
+#: data/org.gnome.DejaDup.gschema.xml:166
 msgid ""
 "Your Google Cloud Storage Access Key Identifier. This acts as your Google "
 "Cloud Storage username."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:116
+#: data/org.gnome.DejaDup.gschema.xml:170
 msgid "The Google Cloud Storage bucket name to use"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:117
+#: data/org.gnome.DejaDup.gschema.xml:171
 msgid ""
 "Which Google Cloud Storage bucket to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:121
+#: data/org.gnome.DejaDup.gschema.xml:175
 msgid "The Google Cloud Storage folder"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:128
-msgid "The email-address of your Google account"
-msgstr ""
-
-#: data/org.gnome.DejaDup.gschema.xml:129
-msgid "The email-address of your Google account."
-msgstr ""
-
-#: data/org.gnome.DejaDup.gschema.xml:133
-msgid "The folder where backups are stored"
-msgstr ""
-
-#: data/org.gnome.DejaDup.gschema.xml:134
-msgid "The folder hierarchy where backups are stored."
-msgstr ""
-
-#: data/org.gnome.DejaDup.gschema.xml:140
+#: data/org.gnome.DejaDup.gschema.xml:183
 msgid "The Rackspace Cloud Files container"
 msgstr "Dịch vụ lưu trữ Rackspace Cloud Files"
 
-#: data/org.gnome.DejaDup.gschema.xml:141
+#: data/org.gnome.DejaDup.gschema.xml:184
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:145
+#: data/org.gnome.DejaDup.gschema.xml:188
 msgid "Your Rackspace username"
 msgstr "Tên người dùng Rackspace của bạn"
 
-#: data/org.gnome.DejaDup.gschema.xml:146
+#: data/org.gnome.DejaDup.gschema.xml:189
 msgid "This is your username for the Rackspace Cloud Files service."
 msgstr "Đây là tên đăng nhập dịch vụ Rackspace Cloud Files của bạn."
 
-#: data/org.gnome.DejaDup.gschema.xml:152
+#: data/org.gnome.DejaDup.gschema.xml:196
+msgid "Account ID"
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:197
+msgid "The unique ID for the GNOME Online Account."
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:201
+msgid "The type of account"
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:202
+msgid "The cached type of account that ID represents."
+msgstr ""
+
+#: data/org.gnome.DejaDup.gschema.xml:214
 msgid "The OpenStack Swift container"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:153
+#: data/org.gnome.DejaDup.gschema.xml:215
 msgid ""
 "Which OpenStack Swift container to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:157
+#: data/org.gnome.DejaDup.gschema.xml:219
 msgid "Your OpenStack username"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:158
+#: data/org.gnome.DejaDup.gschema.xml:220
 msgid "This is your username for the OpenStack Swift service."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:162
+#: data/org.gnome.DejaDup.gschema.xml:224
 msgid "Your OpenStack tenant"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:163
+#: data/org.gnome.DejaDup.gschema.xml:225
 msgid "This is your tenant for the OpenStack Swift service."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:167
+#: data/org.gnome.DejaDup.gschema.xml:229
 msgid "Authentication URL"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:168
+#: data/org.gnome.DejaDup.gschema.xml:230
 msgid ""
 "This is the Authentication URL, or keystone URL for the OpenStack service"
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:174 deja-dup/AssistantRestore.vala:221
-msgid "Backup location"
-msgstr "Vị trí lưu bản sao lưu"
+#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:68
+msgid "Restore"
+msgstr "Phục hồi"
 
-#: data/org.gnome.DejaDup.gschema.xml:175
-msgid "Location in which to hold the backup files."
-msgstr "Nơi lưu trữ các tập tin sao lưu."
-
-#: data/org.gnome.DejaDup.gschema.xml:183
-msgid "Folder type"
-msgstr "Loại thư mục"
-
-#: data/org.gnome.DejaDup.gschema.xml:184
-msgid ""
-"Whether the backup location is a mounted external volume or a normal folder."
+#: data/org.gnome.DejaDup.policy.in:11
+msgid "Privileges are required to restore files to system locations"
 msgstr ""
-"Vị trí lưu bản sao lưu là một ổ đĩa gắn ngoài hay một thư mục bình thường."
-
-#: data/org.gnome.DejaDup.gschema.xml:188
-msgid "Relative path under the external volume"
-msgstr "Đường dẫn tương đối trong ổ đĩa gắn ngoài"
-
-#: data/org.gnome.DejaDup.gschema.xml:189
-msgid ""
-"If the backup location is on an external volume, this is the path of the "
-"folder on that volume."
-msgstr ""
-"Nếu vị trí lưu bản sao lưu nằm trên một ổ đĩa gắn ngoài, đây là đường dẫn "
-"đến thư mục trên ổ đĩa đó."
-
-#: data/org.gnome.DejaDup.gschema.xml:193
-msgid "Unique ID of the external volume"
-msgstr "ID đặc biệt của ổ đĩa gắn ngoài"
-
-#: data/org.gnome.DejaDup.gschema.xml:194
-msgid ""
-"If the backup location is on an external volume, this is its unique "
-"filesystem identifier."
-msgstr ""
-"Nếu vị trí lưu bản sao lưu nằm trên ổ đĩa gắn ngoài, đây là mã nhận dạng hệ "
-"thống tập tin duy nhất của nó."
-
-#: data/org.gnome.DejaDup.gschema.xml:198
-msgid "Full name of the external volume"
-msgstr "Tên đầy đủ của ổ đĩa gắn ngoài"
-
-#: data/org.gnome.DejaDup.gschema.xml:199
-msgid ""
-"If the backup location is on an external volume, this is the volume’s longer "
-"descriptive name."
-msgstr ""
-"Nếu vị trí lưu bản sao lưu nằm trên một ổ đĩa gắn ngoài, đây là tên đầy đủ "
-"của ổ đĩa đó."
-
-#: data/org.gnome.DejaDup.gschema.xml:203
-msgid "Short name of the external volume"
-msgstr "Tên viết tắt của ổ đĩa gắn ngoài"
-
-#: data/org.gnome.DejaDup.gschema.xml:204
-msgid ""
-"If the backup location is on an external volume, this is the volume’s "
-"shorter name."
-msgstr ""
-"Nếu vị trí lưu bản sao lưu nằm trên một ổ đĩa gắn ngoài, đây là tên rút gọn "
-"của ổ đĩa đó."
-
-#: data/org.gnome.DejaDup.gschema.xml:208
-msgid "Icon of the external volume"
-msgstr "Biểu tượng của ổ đĩa gắn ngoài"
-
-#: data/org.gnome.DejaDup.gschema.xml:209
-msgid ""
-"If the backup location is on an external volume, this is the volume’s icon."
-msgstr ""
-"Nếu vị trí lưu bản sao lưu nằm trên một ổ đĩa gắn ngoài, đây là biểu tượng "
-"của ổ đĩa đó."
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
 #: deja-dup/monitor/deja-dup-monitor.desktop.in:5
-#: deja-dup/monitor/monitor.vala:286
+#: deja-dup/monitor/monitor.vala:288
 msgid "Backup Monitor"
 msgstr "Theo dõi sao lưu"
 
@@ -507,6 +497,67 @@ msgstr "Thư mục"
 msgid "Scanning…"
 msgstr "Đang quét..."
 
+#: deja-dup/ui/server-hint.ui:16
+msgid "Server Addresses"
+msgstr ""
+
+#. Translators: This is followed by a list of valid adresses (smb://gnome.org, ssh://192.168.0.1, ftp://[2001:db8::1])
+#: deja-dup/ui/server-hint.ui:29
+msgid ""
+"Server addresses are made up of a protocol prefix and an address. Examples:"
+msgstr ""
+
+#: deja-dup/ui/server-hint.ui:64
+msgid "Available Protocols"
+msgstr ""
+
+#: deja-dup/ui/server-hint.ui:78
+msgid "AppleTalk"
+msgstr ""
+
+#: deja-dup/ui/server-hint.ui:89
+msgid "File Transfer Protocol"
+msgstr ""
+
+#: deja-dup/ui/server-hint.ui:100
+msgid "Network File System"
+msgstr ""
+
+#: deja-dup/ui/server-hint.ui:111
+msgid "Samba"
+msgstr ""
+
+#: deja-dup/ui/server-hint.ui:122
+msgid "SSH File Transfer Protocol"
+msgstr ""
+
+#: deja-dup/ui/server-hint.ui:133
+msgid "WebDAV"
+msgstr "WebDAV"
+
+#: deja-dup/ui/server-hint.ui:144
+msgid "Prefix"
+msgstr ""
+
+#. Translators: do not translate ftp:// and ftps://
+#: deja-dup/ui/server-hint.ui:169
+msgid "ftp:// or ftps://"
+msgstr ""
+
+#: deja-dup/ui/server-hint.ui:191
+msgid "smb://"
+msgstr ""
+
+#. Translators: do not translate sftp:// and ssh://
+#: deja-dup/ui/server-hint.ui:202
+msgid "sftp:// or ssh://"
+msgstr ""
+
+#. Translators: do not translate dav:// and davs://
+#: deja-dup/ui/server-hint.ui:213
+msgid "dav:// or davs://"
+msgstr ""
+
 #: deja-dup/nautilus/NautilusExtension.c:172
 msgid "Restore Missing Files…"
 msgstr "Phục hồi các tập tin bị mất..."
@@ -535,11 +586,11 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "Sao _lưu"
 
-#: deja-dup/AssistantBackup.vala:49
+#: deja-dup/AssistantBackup.vala:51
 msgid "Creating the first backup.  This may take a while."
 msgstr "Đang tạo sao lưu đầu tiên. Có thể mất thời gian."
 
-#: deja-dup/AssistantBackup.vala:50
+#: deja-dup/AssistantBackup.vala:52
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -549,24 +600,24 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: deja-dup/AssistantBackup.vala:80
+#: deja-dup/AssistantBackup.vala:82
 msgid "Backing up:"
 msgstr "Sao lưu:"
 
-#: deja-dup/AssistantBackup.vala:89
+#: deja-dup/AssistantBackup.vala:91
 msgid "Backup Failed"
 msgstr "Sao lưu thất bại"
 
-#: deja-dup/AssistantBackup.vala:92
+#: deja-dup/AssistantBackup.vala:94
 msgid "Backup Finished"
 msgstr ""
 
 #. Also leave ourselves up if we just finished a restore test.
-#: deja-dup/AssistantBackup.vala:96
+#: deja-dup/AssistantBackup.vala:98
 msgid "Your files were successfully backed up and tested."
 msgstr ""
 
-#: deja-dup/AssistantBackup.vala:103
+#: deja-dup/AssistantBackup.vala:105
 msgid "Backing Up…"
 msgstr "Đang sao lưu..."
 
@@ -574,58 +625,58 @@ msgstr "Đang sao lưu..."
 msgid "Scanning:"
 msgstr "Đang quét:"
 
-#: deja-dup/AssistantOperation.vala:239
+#: deja-dup/AssistantOperation.vala:240
 msgid "_Details"
 msgstr "_Chi tiết"
 
-#: deja-dup/AssistantOperation.vala:287
+#: deja-dup/AssistantOperation.vala:288
 msgid "_Allow restoring without a password"
 msgstr "_Cho phép phục hồi mà không cần mật khẩu"
 
-#: deja-dup/AssistantOperation.vala:293
+#: deja-dup/AssistantOperation.vala:294
 msgid "_Password-protect your backup"
 msgstr "_Mật khẩu-bảo vệ sao lưu của bạn"
 
-#: deja-dup/AssistantOperation.vala:305
+#: deja-dup/AssistantOperation.vala:306
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr ""
 "Bạn sẽ cần mật khẩu để phục hồi lại các tập tin. Có lẽ bạn cần ghi nó lại."
 
-#: deja-dup/AssistantOperation.vala:320 deja-dup/AssistantOperation.vala:389
+#: deja-dup/AssistantOperation.vala:321 deja-dup/AssistantOperation.vala:390
 msgid "E_ncryption password"
 msgstr "Mật _khẩu mã hóa"
 
-#: deja-dup/AssistantOperation.vala:337
+#: deja-dup/AssistantOperation.vala:338
 msgid "Confir_m password"
 msgstr "_Xác nhận mật khẩu"
 
-#: deja-dup/AssistantOperation.vala:350 deja-dup/AssistantOperation.vala:398
+#: deja-dup/AssistantOperation.vala:351 deja-dup/AssistantOperation.vala:399
 msgid "_Show password"
 msgstr "Hiện _mật khẩu"
 
-#: deja-dup/AssistantOperation.vala:357
+#: deja-dup/AssistantOperation.vala:358
 #: deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Nhớ mật khẩu"
 
-#: deja-dup/AssistantOperation.vala:376
+#: deja-dup/AssistantOperation.vala:377
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
 "brief restore test."
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:403
+#: deja-dup/AssistantOperation.vala:404
 msgid "Test every two _months"
 msgstr ""
 
-#: deja-dup/AssistantOperation.vala:477
+#: deja-dup/AssistantOperation.vala:478
 msgid "Summary"
 msgstr "Tóm tắt"
 
-#: deja-dup/AssistantOperation.vala:499
+#: deja-dup/AssistantOperation.vala:500
 msgid "Restore Test"
 msgstr ""
 
@@ -636,8 +687,8 @@ msgstr ""
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
 #: deja-dup/AssistantOperation.vala:575
-#: libdeja/tools/duplicity/DuplicityJob.vala:702
-#: libdeja/tools/duplicity/DuplicityJob.vala:1081
+#: libdeja/tools/duplicity/DuplicityJob.vala:710
+#: libdeja/tools/duplicity/DuplicityJob.vala:1098
 msgid "Failed with an unknown error."
 msgstr "Thất bại với lỗi không rõ."
 
@@ -652,10 +703,6 @@ msgstr "Cần mật khẩu mã hóa"
 #: deja-dup/AssistantOperation.vala:846
 msgid "Backup encryption password"
 msgstr "Sao lưu mật khẩu mã hóa"
-
-#: deja-dup/AssistantRestore.vala:68
-msgid "Restore"
-msgstr "Phục hồi"
 
 #: deja-dup/AssistantRestore.vala:69
 msgid "_Restore"
@@ -688,6 +735,10 @@ msgstr "Chọn thư mục đích để phục hồi các tập tin"
 #: deja-dup/AssistantRestore.vala:188
 msgid "Restore _folder"
 msgstr "Phục hồi _thư mục"
+
+#: deja-dup/AssistantRestore.vala:221
+msgid "Backup location"
+msgstr "Vị trí lưu bản sao lưu"
 
 #: deja-dup/AssistantRestore.vala:229
 msgid "Restore date"
@@ -801,81 +852,81 @@ msgstr[0] "Đang quét các tập tin từ %d năm trước..."
 msgid "Scanning finished"
 msgstr "Đã quét xong"
 
-#: deja-dup/Assistant.vala:38 deja-dup/widgets/ConfigLocationFile.vala:54
+#: deja-dup/Assistant.vala:38 deja-dup/widgets/ConfigLocationFile.vala:53
 msgid "_OK"
 msgstr ""
 
-#: deja-dup/Assistant.vala:296
+#: deja-dup/Assistant.vala:298
 msgid "_Forward"
 msgstr ""
 
-#: deja-dup/Assistant.vala:314
+#: deja-dup/Assistant.vala:316
 msgid "Co_ntinue"
 msgstr "_Tiếp tục"
 
-#: deja-dup/Assistant.vala:320
+#: deja-dup/Assistant.vala:322
 msgctxt "verb"
 msgid "_Test"
 msgstr ""
 
-#: deja-dup/Assistant.vala:349 deja-dup/widgets/ConfigList.vala:255
-#: deja-dup/widgets/ConfigLocationFile.vala:53
+#: deja-dup/Assistant.vala:352 deja-dup/widgets/ConfigList.vala:255
+#: deja-dup/widgets/ConfigLocationFile.vala:52
 msgid "_Cancel"
 msgstr ""
 
-#: deja-dup/Assistant.vala:351
+#: deja-dup/Assistant.vala:354
 msgid "_Close"
 msgstr ""
 
-#: deja-dup/Assistant.vala:355
+#: deja-dup/Assistant.vala:358
 msgid "_Back"
 msgstr ""
 
-#: deja-dup/Assistant.vala:357 deja-dup/StatusIcon.vala:70
+#: deja-dup/Assistant.vala:360
 msgid "_Resume Later"
 msgstr "Tạm _dừng"
 
-#: deja-dup/main.vala:30 deja-dup/monitor/monitor.vala:34
+#: deja-dup/main.vala:31 deja-dup/monitor/monitor.vala:34
 msgid "Show version"
 msgstr "Hiện phiên bản"
 
-#: deja-dup/main.vala:31
+#: deja-dup/main.vala:32
 msgid "Restore given files"
 msgstr "Phục hồi các tập tin"
 
-#: deja-dup/main.vala:32
+#: deja-dup/main.vala:33
 msgid "Immediately start a backup"
 msgstr "Bắt đầu một bản sao lưu ngay"
 
-#: deja-dup/main.vala:34
+#: deja-dup/main.vala:35
 msgid "Restore deleted files"
 msgstr "Phục hồi các tập tin bị xóa"
 
-#: deja-dup/main.vala:80 deja-dup/main.vala:95 deja-dup/main.vala:121
+#: deja-dup/main.vala:81 deja-dup/main.vala:96 deja-dup/main.vala:122
 msgid "An operation is already in progress"
 msgstr ""
 
-#: deja-dup/main.vala:100
+#: deja-dup/main.vala:101
 msgid "No directory provided"
 msgstr "Không có thư mục"
 
-#: deja-dup/main.vala:104
+#: deja-dup/main.vala:105
 msgid "Only one directory can be shown at once"
 msgstr "Mỗi lần chỉ hiện một thư mục"
 
-#: deja-dup/main.vala:110
+#: deja-dup/main.vala:111
 msgid "Directory does not exist"
 msgstr ""
 
-#: deja-dup/main.vala:114
+#: deja-dup/main.vala:115
 msgid "You must provide a directory, not a file"
 msgstr "Bạn phải cung cấp một thư mục, không phải tập tin"
 
-#: deja-dup/main.vala:128
+#: deja-dup/main.vala:129
 msgid "Scheduled backup delayed"
 msgstr "Lịch sao lưu bị hoãn"
 
-#: deja-dup/main.vala:221
+#: deja-dup/main.vala:230
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -890,15 +941,11 @@ msgid "Connect to Server"
 msgstr "Kết nối tới máy chủ"
 
 #: deja-dup/MountOperationAssistant.vala:37
-#: deja-dup/widgets/ConfigLocationDAV.vala:49
-#: deja-dup/widgets/ConfigLocationFTP.vala:45
 #: deja-dup/widgets/ConfigLocationRackspace.vala:31
-#: deja-dup/widgets/ConfigLocationSMB.vala:37
-#: deja-dup/widgets/ConfigLocationSSH.vala:40
 msgid "_Username"
 msgstr "_Tên người dùng"
 
-#: deja-dup/MountOperationAssistant.vala:38 libdeja/BackendGDrive.vala:160
+#: deja-dup/MountOperationAssistant.vala:38
 msgid "_Password"
 msgstr "_Mật khẩu"
 
@@ -923,65 +970,65 @@ msgstr "Kết _nối với tư cách người dùng"
 msgid "_Domain"
 msgstr "Tê_n miền"
 
-#: deja-dup/Preferences.vala:97 deja-dup/Preferences.vala:249
+#: deja-dup/Preferences.vala:105 deja-dup/Preferences.vala:258
 msgid "_Back Up Now…"
 msgstr ""
 
-#: deja-dup/Preferences.vala:99 deja-dup/Preferences.vala:203
+#: deja-dup/Preferences.vala:107 deja-dup/Preferences.vala:212
 msgid "_Restore…"
 msgstr "Phụ_c hồi..."
 
-#: deja-dup/Preferences.vala:116
+#: deja-dup/Preferences.vala:125
 msgid "Could not install"
 msgstr ""
 
-#: deja-dup/Preferences.vala:150
+#: deja-dup/Preferences.vala:159
 msgid "Categories"
 msgstr "Loại"
 
-#: deja-dup/Preferences.vala:203
+#: deja-dup/Preferences.vala:212
 msgid "_Install…"
 msgstr ""
 
-#: deja-dup/Preferences.vala:249
-#: deja-dup/widgets/ConfigLabelDescription.vala:59
-#: deja-dup/widgets/ConfigLabelDescription.vala:83
+#: deja-dup/Preferences.vala:258
+#: deja-dup/widgets/ConfigLabelDescription.vala:63
+#: deja-dup/widgets/ConfigLabelDescription.vala:87
 msgid "Install…"
 msgstr ""
 
-#: deja-dup/Preferences.vala:274
+#: deja-dup/Preferences.vala:283
 msgid "Overview"
 msgstr "Tổng thể"
 
-#: deja-dup/Preferences.vala:307
+#: deja-dup/Preferences.vala:317
 msgid "_Storage location"
 msgstr ""
 
 #. Translators: storage as in "where to store the backup"
-#: deja-dup/Preferences.vala:324
+#: deja-dup/Preferences.vala:334
 msgid "Storage location"
 msgstr ""
 
-#: deja-dup/Preferences.vala:348
+#: deja-dup/Preferences.vala:358
 msgid "_Automatic backup"
 msgstr ""
 
 #. translators: as in "Every day"
-#: deja-dup/Preferences.vala:360
+#: deja-dup/Preferences.vala:369
 msgid "_Every"
 msgstr ""
 
-#: deja-dup/Preferences.vala:370
+#: deja-dup/Preferences.vala:379
 msgctxt "verb"
 msgid "_Keep"
 msgstr ""
 
-#: deja-dup/Preferences.vala:377
+#: deja-dup/Preferences.vala:386
 msgid ""
 "Old backups will be deleted earlier if the storage location is low on space."
 msgstr ""
 
-#: deja-dup/Preferences.vala:387
+#: deja-dup/Preferences.vala:396
 msgid "Scheduling"
 msgstr ""
 
@@ -1007,42 +1054,34 @@ msgstr "K_hông hiện nữa"
 msgid "_Open Backup Settings"
 msgstr "_Mở thiết lập sao lưu"
 
-#: deja-dup/StatusIcon.vala:71
-msgid "_Skip Backup"
-msgstr "_Bỏ qua quá trình sao lưu"
-
-#: deja-dup/StatusIcon.vala:92
+#: deja-dup/StatusIcon.vala:84
 msgid "Backup completed"
 msgstr "Đã sao lưu xong"
 
-#: deja-dup/StatusIcon.vala:97
+#: deja-dup/StatusIcon.vala:89
 msgid "Backup finished"
 msgstr ""
 
-#: deja-dup/StatusIcon.vala:98
+#: deja-dup/StatusIcon.vala:90
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr ""
 
-#: deja-dup/StatusIcon.vala:144
+#: deja-dup/StatusIcon.vala:120
 msgid "Starting scheduled backup"
 msgstr "Bắt đầu lên lịch sao lưu"
 
-#: deja-dup/StatusIcon.vala:177
+#: deja-dup/StatusIcon.vala:151
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% hoàn tất"
 
-#: deja-dup/StatusIcon.vala:190
-msgid "Show _Progress"
-msgstr "Hiện _tiến độ"
-
-#: deja-dup/monitor/monitor.vala:81 libdeja/BackendGDrive.vala:51
-#: libdeja/BackendRackspace.vala:49 libdeja/BackendS3.vala:59
+#: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:45
+#: libdeja/BackendS3.vala:55
 msgid "Backup will begin when a network connection becomes available."
 msgstr "Quá trình sao lưu sẽ bắt đầu khi kết nối mạng đã sẵn sàng."
 
-#: deja-dup/monitor/monitor.vala:84
+#: deja-dup/monitor/monitor.vala:85
 msgid ""
 "Backup will begin when an unmetered network connection becomes available."
 msgstr ""
@@ -1105,7 +1144,7 @@ msgstr ""
 msgid "No backup scheduled."
 msgstr ""
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:60
+#: deja-dup/widgets/ConfigLabelDescription.vala:64
 #, c-format
 msgid ""
 "You can restore existing backups after you first install some necessary "
@@ -1114,57 +1153,49 @@ msgstr ""
 
 #. This here encodes a lot of outside GUI information in this widget,
 #. but it's a very special case thing.
-#: deja-dup/widgets/ConfigLabelDescription.vala:69
+#: deja-dup/widgets/ConfigLabelDescription.vala:73
 msgid "Restore…"
 msgstr ""
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:71
+#: deja-dup/widgets/ConfigLabelDescription.vala:75
 #, c-format
 msgid "You may use the %s button to browse for existing backups."
 msgstr ""
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:73
-msgid "Files"
-msgstr "Tập tin"
-
-#: deja-dup/widgets/ConfigLabelDescription.vala:75
-msgid "Caja"
-msgstr ""
-
-#: deja-dup/widgets/ConfigLabelDescription.vala:76
+#: deja-dup/widgets/ConfigLabelDescription.vala:80
 #, c-format
 msgid ""
 "You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
 msgstr ""
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:84
+#: deja-dup/widgets/ConfigLabelDescription.vala:88
 #, c-format
 msgid ""
 "You can create a backup after you first install some necessary software by "
 "clicking the %s button."
 msgstr ""
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:90
+#: deja-dup/widgets/ConfigLabelDescription.vala:94
 msgid "Back Up Now…"
 msgstr ""
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:91
+#: deja-dup/widgets/ConfigLabelDescription.vala:95
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
 "start one now."
 msgstr ""
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:97
+#: deja-dup/widgets/ConfigLabelDescription.vala:101
 msgid "A backup automatically starts every day."
 msgstr ""
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:99
+#: deja-dup/widgets/ConfigLabelDescription.vala:103
 msgid "A backup automatically starts every week."
 msgstr ""
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:102
+#: deja-dup/widgets/ConfigLabelDescription.vala:106
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1191,98 +1222,84 @@ msgstr "Loại bỏ"
 msgid "Choose folders"
 msgstr "Chọn thư mục"
 
-#. Now insert remote servers
-#: deja-dup/widgets/ConfigLocation.vala:124
-msgid "SSH"
-msgstr "SSH"
-
-#: deja-dup/widgets/ConfigLocation.vala:126
-msgid "Windows Share"
-msgstr "Windows Share"
-
-#: deja-dup/widgets/ConfigLocation.vala:128
-msgid "FTP"
-msgstr "FTP"
-
-#: deja-dup/widgets/ConfigLocation.vala:130
-msgid "WebDAV"
-msgstr "WebDAV"
-
-#: deja-dup/widgets/ConfigLocation.vala:133
-msgid "Custom Location"
-msgstr "Vị trí tuỳ chọn"
+#: deja-dup/widgets/ConfigLocation.vala:114
+msgid "Network Server"
+msgstr ""
 
 #. And a local folder option
-#: deja-dup/widgets/ConfigLocation.vala:139
+#: deja-dup/widgets/ConfigLocation.vala:119
 msgid "Local Folder"
 msgstr "Thư mục trên máy"
 
-#: deja-dup/widgets/ConfigLocation.vala:182 libdeja/BackendS3.vala:122
+#. Note that we are using | not || here, because if show_deprecated is set,
+#. we want to insert multiple backends.
+#: deja-dup/widgets/ConfigLocation.vala:284 libdeja/BackendS3.vala:118
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: deja-dup/widgets/ConfigLocation.vala:190
+#: deja-dup/widgets/ConfigLocation.vala:286
 msgid "Google Cloud Storage"
 msgstr ""
 
-#: deja-dup/widgets/ConfigLocation.vala:198
-msgid "Google Drive"
-msgstr ""
-
-#: deja-dup/widgets/ConfigLocation.vala:210 libdeja/BackendU1.vala:45
+#: deja-dup/widgets/ConfigLocation.vala:288 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: deja-dup/widgets/ConfigLocation.vala:218 libdeja/BackendRackspace.vala:69
+#: deja-dup/widgets/ConfigLocation.vala:290 libdeja/BackendRackspace.vala:65
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
-#: deja-dup/widgets/ConfigLocation.vala:226
+#: deja-dup/widgets/ConfigLocation.vala:292
 msgid "OpenStack Swift"
 msgstr ""
 
-#: deja-dup/widgets/ConfigLocationCustom.vala:34
-msgid "_URI"
-msgstr "_URI"
+#: deja-dup/widgets/ConfigLocationCustom.vala:38
+msgid "Server _Address"
+msgstr ""
 
-#: deja-dup/widgets/ConfigLocationDAV.vala:31
-#: deja-dup/widgets/ConfigLocationFTP.vala:32
-#: deja-dup/widgets/ConfigLocationSMB.vala:31
-#: deja-dup/widgets/ConfigLocationSSH.vala:31
-msgid "_Server"
-msgstr "_Máy chủ"
-
-#: deja-dup/widgets/ConfigLocationDAV.vala:38
-msgid "Use secure connection (_HTTPS)"
-msgstr "Dùng kết nối an toàn (_HTTPS)"
-
-#: deja-dup/widgets/ConfigLocationDAV.vala:43
-#: deja-dup/widgets/ConfigLocationFTP.vala:35
-#: deja-dup/widgets/ConfigLocationSSH.vala:34
-msgid "_Port"
-msgstr "Cổ_ng"
-
-#: deja-dup/widgets/ConfigLocationDAV.vala:46
-#: deja-dup/widgets/ConfigLocationFTP.vala:38
-#: deja-dup/widgets/ConfigLocationFile.vala:45
-#: deja-dup/widgets/ConfigLocationGDrive.vala:33
+#: deja-dup/widgets/ConfigLocationCustom.vala:44
+#: deja-dup/widgets/ConfigLocationFile.vala:44
+#: deja-dup/widgets/ConfigLocationGCS.vala:38
+#: deja-dup/widgets/ConfigLocationGoa.vala:36
 #: deja-dup/widgets/ConfigLocationS3.vala:33
-#: deja-dup/widgets/ConfigLocationSMB.vala:34
-#: deja-dup/widgets/ConfigLocationSSH.vala:37
 #: deja-dup/widgets/ConfigLocationVolume.vala:33
 msgid "_Folder"
 msgstr "_Thư mục"
 
-#: deja-dup/widgets/ConfigLocationFile.vala:39
+#: deja-dup/widgets/ConfigLocationFile.vala:38
 msgid "_Choose Folder…"
 msgstr "_Chọn thư mục..."
 
-#: deja-dup/widgets/ConfigLocationFile.vala:50
+#: deja-dup/widgets/ConfigLocationFile.vala:49
 msgid "Choose Folder"
 msgstr "Chọn thư mục"
 
-#: deja-dup/widgets/ConfigLocationGDrive.vala:31
-msgid "_Email address"
+#. Translators: GCS is Google Cloud Services
+#: deja-dup/widgets/ConfigLocationGCS.vala:32
+msgid "GCS Access Key I_D"
+msgstr ""
+
+#. Translators: "Bucket" refers to a term used by Google Cloud Services
+#. see https://cloud.google.com/storage/docs/key-terms#bucket
+#: deja-dup/widgets/ConfigLocationGCS.vala:36
+msgid "_Bucket"
+msgstr ""
+
+#: deja-dup/widgets/ConfigLocationGoa.vala:56
+msgid ""
+"This account is not yet configured. It cannot be used until you add it to "
+"your Online Accounts."
+msgstr ""
+
+#. Translators: 'Files' here refers to the feature label in GNOME Online Accounts
+#: deja-dup/widgets/ConfigLocationGoa.vala:60
+msgid ""
+"This account has disabled Files support. It cannot be used until Files "
+"support is enabled again for this Online Account."
+msgstr ""
+
+#: deja-dup/widgets/ConfigLocationGoa.vala:88
+msgid "_Open Online Account Settings"
 msgstr ""
 
 #: deja-dup/widgets/ConfigLocationRackspace.vala:33
@@ -1292,10 +1309,6 @@ msgstr "Nơi lưu t_rữ"
 #: deja-dup/widgets/ConfigLocationS3.vala:31
 msgid "S3 Access Key I_D"
 msgstr "I_D khóa truy cập S3"
-
-#: deja-dup/widgets/ConfigLocationSMB.vala:40
-msgid "_Domain Name"
-msgstr "Tên _miền"
 
 #: deja-dup/widgets/ConfigLocationU1.vala:32 libdeja/BackendU1.vala:50
 msgid "Ubuntu One has shut down.  Please choose another storage location."
@@ -1323,60 +1336,60 @@ msgstr "Không thể hiển thị %s"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: libdeja/BackendFile.vala:135 libdeja/CommonUtils.vala:519
+#: libdeja/BackendDrive.vala:98 libdeja/CommonUtils.vala:572
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s trên %2$s"
 
-#: libdeja/BackendFile.vala:167
+#: libdeja/BackendDrive.vala:106
 #, c-format
 msgid "Backup will begin when %s is connected."
 msgstr ""
 
-#: libdeja/BackendFile.vala:395 libdeja/BackendFile.vala:461
-msgid "Backup location not available"
-msgstr "Vị trí lưu bản sao lưu chưa sẵn sàng"
+#: libdeja/BackendDrive.vala:185 libdeja/BackendGOA.vala:145
+#: libdeja/BackendRemote.vala:123
+msgid "Storage location not available"
+msgstr ""
 
-#: libdeja/BackendFile.vala:396
-msgid "Waiting for a network connection…"
-msgstr "Đang chờ một kết nối mạng..."
-
-#: libdeja/BackendFile.vala:461
+#: libdeja/BackendDrive.vala:185
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Đang chờ cho '%s' được kết nối..."
 
-#. Translators: %s is a folder.
-#: libdeja/BackendGDrive.vala:83
+#: libdeja/BackendGOA.vala:99
+msgid "Backup will begin when a storage location is configured"
+msgstr ""
+
+#. TODO: actually watch for files support turning on or off
+#. Translators: "Files" here is the string used in GNOME Online Account
+#. settings checkbox for a given account to enable/disable an account's
+#. Files feature.
+#: libdeja/BackendGOA.vala:109
 #, c-format
-msgid "%s at Google Drive"
+msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr ""
 
-#: libdeja/BackendGDrive.vala:126 libdeja/BackendRackspace.vala:115
-#: libdeja/BackendS3.vala:168
-msgid "Permission denied"
-msgstr "Không được phép"
+#: libdeja/BackendGOA.vala:139
+msgid "Waiting for Online Accounts to be configured in your backup settings…"
+msgstr ""
 
-#: libdeja/BackendGDrive.vala:157
+#. Translators: %s is the name of the provider inside of GNOME Online Accounts
+#: libdeja/BackendGOA.vala:142
 #, c-format
-msgid "You can sign up for a Google account <a href=\"%s\">online</a>."
-msgstr ""
-
-#: libdeja/BackendGDrive.vala:158
-msgid "Connect to Google Drive"
-msgstr ""
-
-#: libdeja/BackendGDrive.vala:159
-msgid "_Email"
+msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
 
 #. Translators: %s is a folder.
-#: libdeja/BackendRackspace.vala:72
+#: libdeja/BackendRackspace.vala:68
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "%s trên Rackspace Cloud Files"
 
-#: libdeja/BackendRackspace.vala:146
+#: libdeja/BackendRackspace.vala:111 libdeja/BackendS3.vala:164
+msgid "Permission denied"
+msgstr "Không được phép"
+
+#: libdeja/BackendRackspace.vala:142
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
@@ -1385,84 +1398,88 @@ msgstr ""
 "Bạn có thể đăng nhập vào tài khoản Rackspace Cloud Files <a href=\"%s\">trên "
 "mạng</a>."
 
-#: libdeja/BackendRackspace.vala:147
+#: libdeja/BackendRackspace.vala:143
 msgid "Connect to Rackspace Cloud Files"
 msgstr "Kết nối đến Rackspace Cloud Files"
 
-#: libdeja/BackendRackspace.vala:148
+#: libdeja/BackendRackspace.vala:144
 msgid "_API access key"
 msgstr "Khóa truy cập A_PI"
 
-#: libdeja/BackendRackspace.vala:149
+#: libdeja/BackendRackspace.vala:145
 msgid "S_how API access key"
 msgstr "_Hiện khóa truy cập API"
 
-#: libdeja/BackendRackspace.vala:150
+#: libdeja/BackendRackspace.vala:146
 msgid "_Remember API access key"
 msgstr "Nhớ khóa t_ruy cập API"
 
+#: libdeja/BackendRemote.vala:124
+msgid "Waiting for a network connection…"
+msgstr "Đang chờ một kết nối mạng..."
+
 #. Translators: %s is a folder.
-#: libdeja/BackendS3.vala:125
+#: libdeja/BackendS3.vala:121
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "%s trên Amazon S3"
 
-#: libdeja/BackendS3.vala:199
+#: libdeja/BackendS3.vala:195
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr ""
 "Bạn có thể đăng nhập vào tài khoản Amazon S3 <a href=\"%s\">trên mạng</a>."
 
-#: libdeja/BackendS3.vala:200
+#: libdeja/BackendS3.vala:196
 msgid "Connect to Amazon S3"
 msgstr "Kết nối đến Amazon S3"
 
-#: libdeja/BackendS3.vala:201
+#: libdeja/BackendS3.vala:197
 msgid "_Access key ID"
 msgstr "ID khó_a truy cập"
 
-#: libdeja/BackendS3.vala:202
+#: libdeja/BackendS3.vala:198
 msgid "_Secret access key"
 msgstr "Khóa truy cập _bí mật"
 
-#: libdeja/BackendS3.vala:203
+#: libdeja/BackendS3.vala:199
 msgid "S_how secret access key"
 msgstr "_Hiện khóa truy cập bí mật"
 
-#: libdeja/BackendS3.vala:204
+#: libdeja/BackendS3.vala:200
 msgid "_Remember secret access key"
 msgstr "Nhớ khóa t_ruy cập bí mật"
 
-#: libdeja/CommonUtils.vala:438
+#: libdeja/CommonUtils.vala:444
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 
-#: libdeja/CommonUtils.vala:440
+#: libdeja/CommonUtils.vala:446
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 
-#: libdeja/CommonUtils.vala:446
+#: libdeja/CommonUtils.vala:452
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 
-#: libdeja/CommonUtils.vala:468
+#: libdeja/CommonUtils.vala:474
 msgid "Could not start backup tool"
 msgstr ""
 
 #. Translators: this is the home folder and %s is the user's username
-#: libdeja/CommonUtils.vala:570
+#: libdeja/CommonUtils.vala:623
 #, c-format
 msgid "Home (%s)"
 msgstr "Thư mục chính (%s)"
 
 #. Translators: this is the home folder
-#: libdeja/CommonUtils.vala:575
+#: libdeja/CommonUtils.vala:628
 msgid "Home"
 msgstr "Thư mục riêng"
 
 #. Translators: this is the trash folder
-#: libdeja/CommonUtils.vala:580
+#: libdeja/CommonUtils.vala:633
 msgid "Trash"
 msgstr "Sọt rác"
 
@@ -1493,47 +1510,43 @@ msgid "Listing files…"
 msgstr "Đang liệt kê các tập tin..."
 
 #: libdeja/Operation.vala:69 libdeja/Operation.vala:103
-#: libdeja/tools/duplicity/DuplicityJob.vala:385
-#: libdeja/tools/duplicity/DuplicityJob.vala:392
-#: libdeja/tools/duplicity/DuplicityJob.vala:417
-#: libdeja/tools/duplicity/DuplicityJob.vala:422
+#: libdeja/tools/duplicity/DuplicityJob.vala:389
+#: libdeja/tools/duplicity/DuplicityJob.vala:396
+#: libdeja/tools/duplicity/DuplicityJob.vala:421
+#: libdeja/tools/duplicity/DuplicityJob.vala:426
 msgid "Preparing…"
 msgstr "Đang chuẩn bị..."
 
-#: libdeja/Operation.vala:294
-msgid "Another backup operation is already running"
-msgstr "Có một quá trình sao lưu khác đang chạy"
-
-#: libdeja/tools/duplicity/DuplicityJob.vala:89
-#: libdeja/tools/duplicity/DuplicityJob.vala:172
+#: libdeja/tools/duplicity/DuplicityJob.vala:93
+#: libdeja/tools/duplicity/DuplicityJob.vala:176
 msgid "Paused (no network)"
 msgstr "Tạm dừng (không có mạng)"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: libdeja/tools/duplicity/DuplicityJob.vala:449
+#: libdeja/tools/duplicity/DuplicityJob.vala:453
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Không thể phục hồi '%s': Vị trí tập tin không hợp lệ"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: libdeja/tools/duplicity/DuplicityJob.vala:516
+#: libdeja/tools/duplicity/DuplicityJob.vala:524
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Vị trí lưu bản sao lưu quá nhỏ. Hãy chọn nơi có dung lượng trống lớn hơn."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:539
+#: libdeja/tools/duplicity/DuplicityJob.vala:547
 msgid "Backup location does not have enough free space."
 msgstr "Vị trí lưu bản sao lưu không đủ dung lượng trống."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:559
-#: libdeja/tools/duplicity/DuplicityJob.vala:573
+#: libdeja/tools/duplicity/DuplicityJob.vala:567
+#: libdeja/tools/duplicity/DuplicityJob.vala:581
 msgid "Cleaning up…"
 msgstr "Đang dọn dẹp..."
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: libdeja/tools/duplicity/DuplicityJob.vala:669
+#: libdeja/tools/duplicity/DuplicityJob.vala:677
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
@@ -1542,7 +1555,7 @@ msgstr ""
 #. OK, we succeeded yay!  But some files didn't actually restore
 #. because we couldn't write to them.  So tell the user so they
 #. don't think everything is hunky dory.
-#: libdeja/tools/duplicity/DuplicityJob.vala:685
+#: libdeja/tools/duplicity/DuplicityJob.vala:693
 msgid ""
 "Could not restore the following files.  Please make sure you are able to "
 "write to them."
@@ -1551,7 +1564,7 @@ msgstr ""
 #. make text a little nicer than duplicity gives
 #. duplicity gives something like "home/blah/blah not found in archive,
 #. no files restored".
-#: libdeja/tools/duplicity/DuplicityJob.vala:929
+#: libdeja/tools/duplicity/DuplicityJob.vala:937
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Không thể phục hồi '%s': Không tìm thấy tập tin trong bản sao lưu"
@@ -1559,17 +1572,17 @@ msgstr "Không thể phục hồi '%s': Không tìm thấy tập tin trong bản
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: libdeja/tools/duplicity/DuplicityJob.vala:935
-#: libdeja/tools/duplicity/DuplicityJob.vala:1033
-#: libdeja/tools/duplicity/DuplicityJob.vala:1037
+#: libdeja/tools/duplicity/DuplicityJob.vala:951
+#: libdeja/tools/duplicity/DuplicityJob.vala:1050
+#: libdeja/tools/duplicity/DuplicityJob.vala:1054
 msgid "Bad encryption password."
 msgstr "Mật khẩu mã hóa không tốt."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:940
+#: libdeja/tools/duplicity/DuplicityJob.vala:957
 msgid "Computer name changed"
 msgstr "Đã đổi tên máy tính"
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:940
+#: libdeja/tools/duplicity/DuplicityJob.vala:957
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -1579,69 +1592,69 @@ msgstr ""
 "Sao lưu đang tồn tại là của một máy tính có tên %s, nhưng tên máy tính hiện "
 "tại là %s. Nếu bạn không muốn điều này, bạn nên sao lưu sang vị trí khác."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:975
+#: libdeja/tools/duplicity/DuplicityJob.vala:992
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Không đủ quyền khi tạo '%s'."
 
 #. assume error is on backend side
-#: libdeja/tools/duplicity/DuplicityJob.vala:979
-#: libdeja/tools/duplicity/DuplicityJob.vala:983
+#: libdeja/tools/duplicity/DuplicityJob.vala:996
+#: libdeja/tools/duplicity/DuplicityJob.vala:1000
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Không đủ quyền khi đọc '%s'."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:987
+#: libdeja/tools/duplicity/DuplicityJob.vala:1004
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Không đủ quyền khi xóa '%s'."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:994
+#: libdeja/tools/duplicity/DuplicityJob.vala:1011
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Vị trí lưu bản sao lưu '%s' không tồn tại."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1000
-#: libdeja/tools/duplicity/DuplicityJob.vala:1052
+#: libdeja/tools/duplicity/DuplicityJob.vala:1017
+#: libdeja/tools/duplicity/DuplicityJob.vala:1069
 msgid "No space left."
 msgstr "Không đủ dung lượng."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1014
+#: libdeja/tools/duplicity/DuplicityJob.vala:1031
 msgid "Invalid ID."
 msgstr "ID không hợp lệ."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1016
+#: libdeja/tools/duplicity/DuplicityJob.vala:1033
 msgid "Invalid secret key."
 msgstr "Khóa bí mật không hợp lệ."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1018
+#: libdeja/tools/duplicity/DuplicityJob.vala:1035
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Tài khoản dịch vụ Amazon Web của bạn chưa đăng nhập cho dịch vụ S3."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1027
+#: libdeja/tools/duplicity/DuplicityJob.vala:1044
 msgid "S3 bucket name is not available."
 msgstr "Tên thùng trên S3 chưa có sẵn."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1041
+#: libdeja/tools/duplicity/DuplicityJob.vala:1058
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Lỗi khi đọc tập tin '%s'."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1043
+#: libdeja/tools/duplicity/DuplicityJob.vala:1060
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Lỗi khi ghi tập tin '%s'."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1054
+#: libdeja/tools/duplicity/DuplicityJob.vala:1071
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Không còn dung lượng trống tại '%s'."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1062
+#: libdeja/tools/duplicity/DuplicityJob.vala:1079
 msgid "No backup files found"
 msgstr "Không tìm thấy các tập tin sao lưu"
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1112
+#: libdeja/tools/duplicity/DuplicityJob.vala:1129
 msgid "Uploading…"
 msgstr "Đang tải lên..."
 
@@ -1663,6 +1676,108 @@ msgstr ""
 "Công cụ sao lưu Déjà Dup yêu cầu duplicity phiên bản %d.%d.%.2d trở lên, "
 "nhưng chỉ tìm thấy phiên bản %d.%d.%.2d"
 
+#~ msgid "Files"
+#~ msgstr "Tập tin"
+
+#~ msgid "Location in which to hold the backup files."
+#~ msgstr "Nơi lưu trữ các tập tin sao lưu."
+
+#~ msgid "Folder type"
+#~ msgstr "Loại thư mục"
+
+#~ msgid ""
+#~ "Whether the backup location is a mounted external volume or a normal folder."
+#~ msgstr ""
+#~ "Vị trí lưu bản sao lưu là một ổ đĩa gắn ngoài hay một thư mục bình thường."
+
+#~ msgid "Relative path under the external volume"
+#~ msgstr "Đường dẫn tương đối trong ổ đĩa gắn ngoài"
+
+#~ msgid ""
+#~ "If the backup location is on an external volume, this is the path of the "
+#~ "folder on that volume."
+#~ msgstr ""
+#~ "Nếu vị trí lưu bản sao lưu nằm trên một ổ đĩa gắn ngoài, đây là đường dẫn "
+#~ "đến thư mục trên ổ đĩa đó."
+
+#~ msgid "Unique ID of the external volume"
+#~ msgstr "ID đặc biệt của ổ đĩa gắn ngoài"
+
+#~ msgid ""
+#~ "If the backup location is on an external volume, this is its unique "
+#~ "filesystem identifier."
+#~ msgstr ""
+#~ "Nếu vị trí lưu bản sao lưu nằm trên ổ đĩa gắn ngoài, đây là mã nhận dạng hệ "
+#~ "thống tập tin duy nhất của nó."
+
+#~ msgid "Full name of the external volume"
+#~ msgstr "Tên đầy đủ của ổ đĩa gắn ngoài"
+
+#~ msgid ""
+#~ "If the backup location is on an external volume, this is the volume’s longer "
+#~ "descriptive name."
+#~ msgstr ""
+#~ "Nếu vị trí lưu bản sao lưu nằm trên một ổ đĩa gắn ngoài, đây là tên đầy đủ "
+#~ "của ổ đĩa đó."
+
+#~ msgid "Short name of the external volume"
+#~ msgstr "Tên viết tắt của ổ đĩa gắn ngoài"
+
+#~ msgid ""
+#~ "If the backup location is on an external volume, this is the volume’s "
+#~ "shorter name."
+#~ msgstr ""
+#~ "Nếu vị trí lưu bản sao lưu nằm trên một ổ đĩa gắn ngoài, đây là tên rút gọn "
+#~ "của ổ đĩa đó."
+
+#~ msgid "Icon of the external volume"
+#~ msgstr "Biểu tượng của ổ đĩa gắn ngoài"
+
+#~ msgid ""
+#~ "If the backup location is on an external volume, this is the volume’s icon."
+#~ msgstr ""
+#~ "Nếu vị trí lưu bản sao lưu nằm trên một ổ đĩa gắn ngoài, đây là biểu tượng "
+#~ "của ổ đĩa đó."
+
+#~ msgid "_Skip Backup"
+#~ msgstr "_Bỏ qua quá trình sao lưu"
+
+#~ msgid "Show _Progress"
+#~ msgstr "Hiện _tiến độ"
+
+#~ msgid "SSH"
+#~ msgstr "SSH"
+
+#~ msgid "Windows Share"
+#~ msgstr "Windows Share"
+
+#~ msgid "FTP"
+#~ msgstr "FTP"
+
+#~ msgid "Custom Location"
+#~ msgstr "Vị trí tuỳ chọn"
+
+#~ msgid "_URI"
+#~ msgstr "_URI"
+
+#~ msgid "_Server"
+#~ msgstr "_Máy chủ"
+
+#~ msgid "Use secure connection (_HTTPS)"
+#~ msgstr "Dùng kết nối an toàn (_HTTPS)"
+
+#~ msgid "_Port"
+#~ msgstr "Cổ_ng"
+
+#~ msgid "_Domain Name"
+#~ msgstr "Tên _miền"
+
 #, c-format
 #~ msgid "Backup will begin when %s becomes connected."
 #~ msgstr "Quá trình sao lưu sẽ bắt đầu khi %s được kết nối."
+
+#~ msgid "Backup location not available"
+#~ msgstr "Vị trí lưu bản sao lưu chưa sẵn sàng"
+
+#~ msgid "Another backup operation is already running"
+#~ msgstr "Có một quá trình sao lưu khác đang chạy"
