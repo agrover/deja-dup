@@ -51,12 +51,7 @@ screenshots: all
 	
 	@mkdir -p ./builddir/screenshots
 	@rm -f ./builddir/screenshots/*
-	@./tests/shell-local "gsettings set org.gnome.DejaDup backend 'drive';" \
-	               "gsettings set org.gnome.DejaDup.Drive icon 'drive-removable-media';" \
-	               "gsettings set org.gnome.DejaDup.Drive name 'Backup Drive';" \
-	               "gsettings set org.gnome.DejaDup.Drive uuid 'NOPE';" \
-	               "gsettings set org.gnome.DejaDup.Drive folder 'NOPE';"\
-	               "env HOME=/NOPE deja-dup" &
+	@./tests/shell-local "deja-dup" &
 	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-1.png
 	@killall deja-dup
 	
