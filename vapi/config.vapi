@@ -25,4 +25,10 @@ namespace Config {
 	public const string PACKAGE_VERSION;
 	public const string PACKAGE;
 	public const string VERSION;
+
+	public const string DUPLICITY_PACKAGES;
+	public const string GVFS_PACKAGES;
+	public const string BOTO_PACKAGES;
+	public const string CLOUDFILES_PACKAGES;
+	public const string SWIFTCLIENT_PACKAGES;
 }

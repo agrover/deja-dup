@@ -33,6 +33,11 @@ public class BackendOpenstack : Backend
     return new BackendOpenstack();
   }
 
+  public override string[] get_dependencies()
+  {
+    return Config.SWIFTCLIENT_PACKAGES.split(",");
+  }
+
   public override bool is_native() {
     return false;
   }

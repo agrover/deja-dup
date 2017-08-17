@@ -34,6 +34,9 @@ public abstract class Backend : Object
   public abstract string get_location(ref bool as_root); // URI for duplicity
   public abstract string get_location_pretty(); // short description for user
 
+  // list of what-provides hints
+  public virtual string[] get_dependencies() {return {};}
+
   public virtual async bool is_ready(out string when) {when = null; return true;} // must be callable when nothing is mounted, nothing is prepared
 
   public virtual async void get_envp() throws Error {

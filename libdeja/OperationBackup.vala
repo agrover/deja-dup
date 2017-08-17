@@ -29,7 +29,7 @@ public class OperationBackup : Operation
     Object(mode: ToolJob.Mode.BACKUP);
   }
   
-  internal async override void operation_finished(ToolJob job, bool success, bool cancelled, string? detail)
+  internal async override void operation_finished(bool success, bool cancelled, string? detail)
   {
     /* If successfully completed, update time of last backup and run base operation_finished */
     if (success)
@@ -41,7 +41,7 @@ public class OperationBackup : Operation
     if (success && !cancelled)
       yield chain_op(new OperationVerify(), _("Verifying backup…"), detail);
     else
-      yield base.operation_finished(job, success, cancelled, detail);
+      yield base.operation_finished(success, cancelled, detail);
   }
 
   protected override void send_action_file_changed(File file, bool actual)

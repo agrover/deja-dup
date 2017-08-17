@@ -28,6 +28,11 @@ public class DuplicityPlugin : DejaDup.ToolPlugin
     name = "Duplicity";
   }
 
+  public override string[] get_dependencies()
+  {
+    return Config.DUPLICITY_PACKAGES.split(",");
+  }
+
   const int REQUIRED_MAJOR = 0;
   const int REQUIRED_MINOR = 6;
   const int REQUIRED_MICRO = 23;

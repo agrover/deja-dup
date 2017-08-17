@@ -33,7 +33,12 @@ public class BackendGCS : Backend
   public override Backend clone() {
     return new BackendGCS();
   }
-  
+
+  public override string[] get_dependencies()
+  {
+    return Config.BOTO_PACKAGES.split(",");
+  }
+
   public override bool is_native() {
     return false;
   }

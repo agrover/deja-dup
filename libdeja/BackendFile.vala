@@ -23,6 +23,11 @@ namespace DejaDup {
 
 public abstract class BackendFile : Backend
 {
+  public override string[] get_dependencies()
+  {
+    return Config.GVFS_PACKAGES.split(",");
+  }
+
   // Get mountable root
   protected abstract File? get_root_from_settings();
 

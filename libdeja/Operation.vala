@@ -39,6 +39,7 @@ public abstract class Operation : Object
   public signal void progress(double percent);
   public signal void passphrase_required();
   public signal void question(string title, string msg);
+  public signal void install(string[] names, string[] ids);
   public signal void is_full(bool first);
 
   public bool use_cached_password {get; protected set; default = true;}
@@ -102,12 +103,8 @@ public abstract class Operation : Object
   {
     action_desc_changed(_("Preparing…"));  
 
-    if (backend is BackendAuto) {
-      // OK, we're not ready yet.  Let's hold off until we are
-      settings = get_settings();
-      settings.notify["backend"].connect(restart);
-    }
-    else
+    yield check_dependencies();
+    if (!finished) // might have been cancelled during check above
       restart();
   }
 
@@ -126,7 +123,7 @@ public abstract class Operation : Object
     }
 
     try {
-      job = make_tool_job();
+      job = DejaDup.get_tool().create_job();
     }
     catch (Error e) {
       raise_error(e.message, null);
@@ -160,16 +157,20 @@ public abstract class Operation : Object
   {
     if (chained_op != null)
       chained_op.cancel();
-    else
+    else if (job != null)
       job.cancel();
+    else
+      operation_finished.begin(false, true, null);
   }
   
   public void stop()
   {
     if (chained_op != null)
       chained_op.stop();
-    else
+    else if (job != null)
       job.stop();
+    else
+      operation_finished.begin(true, true, null);
   }
   
   protected virtual void connect_to_job()
@@ -177,7 +178,7 @@ public abstract class Operation : Object
     /*
      * Connect Deja Dup to signals
      */
-    job.done.connect((d, o, c, detail) => {operation_finished.begin(d, o, c, detail);});
+    job.done.connect((d, o, c, detail) => {operation_finished.begin(o, c, detail);});
     job.raise_error.connect((d, s, detail) => {raise_error(s, detail);});
     job.action_desc_changed.connect((d, s) => {action_desc_changed(s);});
     job.action_file_changed.connect((d, f, b) => {send_action_file_changed(f, b);});
@@ -206,7 +207,7 @@ public abstract class Operation : Object
       job.encrypt_password = passphrase;
   }
 
-  internal async virtual void operation_finished(ToolJob job, bool success, bool cancelled, string? detail)
+  internal async virtual void operation_finished(bool success, bool cancelled, string? detail)
   {
     finished = true;
 
@@ -258,6 +259,7 @@ public abstract class Operation : Object
         subop.set_passphrase(passphrase);
     });
     subop.question.connect((t, m) => {question(t, m);});
+    subop.install.connect((p, i) => {install(p, i);});
 
     use_cached_password = subop.use_cached_password;
     saved_detail = combine_details(saved_detail, detail);
@@ -267,6 +269,39 @@ public abstract class Operation : Object
     progress(0);
 
     yield subop.start();
+  }
+
+  // Returns true if we're all set, false if we should wait for install
+  async void check_dependencies()
+  {
+    var deps = backend.get_dependencies();
+    foreach (string dep in DejaDup.get_tool().get_dependencies())
+      deps += dep;
+
+    var client = new Pk.Client();
+    Pk.Results results;
+    try {
+      var bitfield = Pk.Bitfield.from_enums(Pk.Filter.NOT_INSTALLED, Pk.Filter.ARCH);
+      results = yield client.resolve_async(bitfield, deps, null, () => {});
+      if (results == null || results.get_error_code() != null)
+        return;
+    } catch (Error e) {
+      raise_error("%s".printf(e.message), null);
+      done(false, false, null);
+      return;
+    }
+
+    // Convert from List to array (I don't know why the API couldn't be friendlier...)
+    var package_array = results.get_package_array();
+    var package_ids = new string[0];
+    var package_names = new string[0];
+    for (var i = 0; i < package_array.length; i++) {
+      package_names += package_array.data[i].get_name();
+      package_ids += package_array.data[i].get_id();
+    }
+
+    if (package_names.length > 0)
+      install(package_names, package_ids); // will block
   }
 }
 

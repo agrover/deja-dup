@@ -168,7 +168,7 @@ public class DejaDupApp : Gtk.Application
       auto_switch.valign = Gtk.Align.CENTER;
       header.pack_end(auto_switch);
 
-      var prefs = new DejaDup.Preferences(auto_switch);
+      var prefs = new DejaDup.Preferences();
       prefs.app = this;
       prefs.border_width = 12;
       main_window.add(prefs);

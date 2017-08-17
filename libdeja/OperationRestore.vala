@@ -60,12 +60,12 @@ public class OperationRestore : Operation
     return null;
   }
   
-  internal async override void operation_finished(ToolJob job, bool success, bool cancelled, string? detail)
+  internal async override void operation_finished(bool success, bool cancelled, string? detail)
   {
     if (success)
       DejaDup.update_last_run_timestamp(DejaDup.TimestampType.RESTORE);
 
-    yield base.operation_finished(job, success, cancelled, detail);
+    yield base.operation_finished(success, cancelled, detail);
   }
 }
 

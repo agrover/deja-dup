@@ -72,7 +72,7 @@ public class OperationVerify : Operation
     base.connect_to_job();
   }
 
-  internal async override void operation_finished(ToolJob job, bool success, bool cancelled, string? detail)
+  internal async override void operation_finished(bool success, bool cancelled, string? detail)
   {
     // Verify results
     if (success) {
@@ -101,7 +101,7 @@ public class OperationVerify : Operation
 
     new RecursiveDelete(metadir).start();
 
-    yield base.operation_finished(job, success, cancelled, detail);
+    yield base.operation_finished(success, cancelled, detail);
   }
 }
 

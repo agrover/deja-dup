@@ -429,6 +429,12 @@ public FilteredSettings get_settings(string? subdir = null, string? path = null)
 }
 
 ToolPlugin tool = null;
+public ToolPlugin get_tool()
+{
+  assert(tool != null);
+  return tool;
+}
+
 void initialize_tool_plugin() throws Error
 {
   var engine = new Peas.Engine ();
@@ -452,13 +458,6 @@ void initialize_tool_plugin() throws Error
     throw new SpawnError.FAILED(_("Backup tool is broken.  Your installation is incomplete."));
 
   tool.activate();
-}
-
-public ToolJob make_tool_job() throws Error
-{
-  if (tool == null)
-    initialize_tool_plugin();
-  return tool.create_job();
 }
 
 public bool initialize(out string header, out string msg)

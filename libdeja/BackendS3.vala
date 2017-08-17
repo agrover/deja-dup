@@ -33,7 +33,12 @@ public class BackendS3 : Backend
   public override Backend clone() {
     return new BackendS3();
   }
-  
+
+  public override string[] get_dependencies()
+  {
+    return Config.BOTO_PACKAGES.split(",");
+  }
+
   public override void add_argv(ToolJob.Mode mode, ref List<string> argv) {
     if (mode == ToolJob.Mode.INVALID)
       argv.append("--s3-use-new-style");

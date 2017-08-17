@@ -45,6 +45,11 @@ public abstract class AssistantOperation : Assistant
   protected StatusIcon status_icon;
   protected bool succeeded = false;
 
+  protected Gtk.Widget backend_install_page {get; private set;}
+  Gtk.Label backend_install_desc;
+  Gtk.Label backend_install_packages;
+  Gtk.ProgressBar backend_install_progress;
+
   Gtk.Entry nag_entry;
   Gtk.Entry encrypt_entry;
   Gtk.Entry encrypt_confirm_entry;
@@ -72,6 +77,7 @@ public abstract class AssistantOperation : Assistant
   protected Gtk.Widget detail_widget;
   Gtk.TextView detail_text_view;
   protected Gtk.Widget summary_page {get; private set;}
+  protected string apply_text {get; set; default = _("_OK");}
   
   protected DejaDup.Operation op;
   uint timeout_id;
@@ -87,6 +93,7 @@ public abstract class AssistantOperation : Assistant
   construct
   {
     add_custom_config_pages();
+    add_backend_install_page();
     add_setup_pages();
     add_confirm_page();
     add_password_page();
@@ -272,6 +279,40 @@ public abstract class AssistantOperation : Assistant
     go_to_page(summary_page);
     set_header_icon("dialog-error");
     page_box.queue_resize();
+  }
+
+  protected Gtk.Widget make_backend_install_page()
+  {
+    int rows = 0;
+    Gtk.Label l;
+
+    var page = new Gtk.Grid();
+    page.row_spacing = 6;
+    page.border_width = 12;
+
+    l = new Gtk.Label(_("In order to continue, the following packages need to be installed:"));
+    l.xalign = 0.0f;
+    l.max_width_chars = 50;
+    l.wrap = true;
+    page.attach(l, 0, rows++, 1, 1);
+    backend_install_desc = l;
+
+    l = new Gtk.Label("");
+    l.halign = Gtk.Align.START;
+    l.max_width_chars = 50;
+    l.wrap = true;
+    l.margin_left = 12;
+    l.use_markup = true;
+    page.attach(l, 0, rows++, 1, 1);
+    backend_install_packages = l;
+
+    backend_install_progress = new Gtk.ProgressBar();
+    backend_install_progress.no_show_all = true;
+    backend_install_progress.hexpand = true;
+    backend_install_progress.hide();
+    page.attach(backend_install_progress, 0, rows++, 1, 1);
+
+    return page;
   }
 
   protected Gtk.Widget make_password_page()
@@ -464,6 +505,14 @@ public abstract class AssistantOperation : Assistant
     return page;
   }
 
+  void add_backend_install_page()
+  {
+    var page = make_backend_install_page();
+    append_page(page, Type.INTERRUPT);
+    set_page_title(page, _("Install Packages"));
+    backend_install_page = page;
+  }
+
   void add_confirm_page()
   {
     /*
@@ -474,7 +523,7 @@ public abstract class AssistantOperation : Assistant
     var page = make_confirm_page();
     if (page == null)
       return;
-    append_page(page, Type.SUMMARY);
+    append_page(page, Type.NORMAL, apply_text);
     set_page_title(page, _("Summary"));
     confirm_page = page;
   }
@@ -524,10 +573,7 @@ public abstract class AssistantOperation : Assistant
     this.op = null;
 
     if (cancelled) {
-      if (success) // stop (resume later) vs cancel
-        Gtk.main_quit();
-      else
-        do_close();
+      do_close();
     }
     else {
       if (success) {
@@ -583,6 +629,7 @@ public abstract class AssistantOperation : Assistant
     op.action_file_changed.connect(set_progress_label_file);
     op.progress.connect(show_progress);
     op.question.connect(show_question);
+    op.install.connect(show_install);
     op.backend.mount_op = new MountOperationAssistant(this);
     op.backend.pause_op.connect(pause_op);
 
@@ -878,6 +925,48 @@ public abstract class AssistantOperation : Assistant
     force_visible(false);
     response.connect(stop_question);
     Gtk.main();
+  }
+
+  async void start_install(string[] package_ids, MainLoop loop)
+  {
+    backend_install_desc.hide();
+    backend_install_packages.hide();
+    backend_install_progress.show();
+
+    try {
+      var client = new Pk.Client();
+      yield client.install_packages_async(0, package_ids, null, (p, t) => {
+        backend_install_progress.fraction = (p.percentage / 100.0).clamp(0, 100);
+      });
+    }
+    catch (Error e) {
+      show_error("%s".printf(e.message), null);
+      return;
+    }
+
+    go_forward();
+    loop.quit();
+  }
+
+  void show_install(DejaDup.Operation op, string[] names, string[] ids)
+  {
+    var text = "";
+    foreach (string s in names) {
+      if (text != "")
+        text += ", ";
+      text += "<b>%s</b>".printf(s);
+    }
+    backend_install_packages.label = text;
+
+    interrupt(backend_install_page, false);
+    set_header_icon("system-software-install");
+    var install_button = add_button(C_("verb", "_Install"), CUSTOM_RESPONSE);
+    var loop = new MainLoop(null);
+    install_button.clicked.connect(() => {start_install.begin(ids, loop);});
+    forward_button = install_button;
+    force_visible(false);
+
+    loop.run();
   }
 
   protected void pause_op(DejaDup.Backend back, string? header, string? msg)

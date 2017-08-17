@@ -35,18 +35,17 @@ public abstract class Assistant : Gtk.Window
   public signal void prepare(Gtk.Widget page);
   public signal void forward();
   public signal void backward();
-  public string apply_text {get; set; default = _("_OK");}
   public bool last_op_was_back {get; private set; default = false;}
 
   public enum Type {
-    NORMAL, INTERRUPT, CHECK, SUMMARY, PROGRESS, FINISH
+    NORMAL, INTERRUPT, CHECK, PROGRESS, FINISH
   }
 
   Gtk.Label header_title;
   protected Gtk.Image header_icon;
   Gtk.HeaderBar header_bar;
   Gtk.Widget back_button;
-  Gtk.Widget forward_button;
+  protected Gtk.Widget forward_button;
   Gtk.Widget cancel_button;
   Gtk.Widget close_button;
   Gtk.Widget resume_button;
@@ -55,8 +54,9 @@ public abstract class Assistant : Gtk.Window
 
   public class PageInfo {
     public Gtk.Widget page;
-    public string title;
+    public string title = "";
     public Type type;
+    public string forward_text = "";
   }
 
   bool interrupt_can_continue = true;
@@ -68,12 +68,13 @@ public abstract class Assistant : Gtk.Window
   public weak List<PageInfo> current;
   List<PageInfo> infos;
 
-  const int APPLY = 1;
-  const int BACK = 2;
-  const int FORWARD = 3;
-  const int CANCEL = 4;
-  const int CLOSE = 5;
-  const int RESUME = 6;
+  protected const int CUSTOM_RESPONSE = -1;
+  protected const int APPLY = 1;
+  protected const int BACK = 2;
+  protected const int FORWARD = 3;
+  protected const int CANCEL = 4;
+  protected const int CLOSE = 5;
+  protected const int RESUME = 6;
 
   construct
   {
@@ -142,6 +143,7 @@ public abstract class Assistant : Gtk.Window
     case CANCEL: canceled(); break;
     case CLOSE: closed(); break;
     case RESUME: resumed(); break;
+    case CUSTOM_RESPONSE: break;
     }
   }
 
@@ -274,7 +276,7 @@ public abstract class Assistant : Gtk.Window
     }
   }
 
-  Gtk.Button add_button(string label, int response_id)
+  protected Gtk.Button add_button(string label, int response_id)
   {
     var btn = new Gtk.Button.with_mnemonic(label);
     btn.can_default = true;
@@ -294,8 +296,8 @@ public abstract class Assistant : Gtk.Window
     weak PageInfo info = current.data;
 
     bool show_cancel = false, show_back = false, show_forward = false,
-         show_apply = false, show_close = false, show_resume = false;
-    string forward_text = _("_Forward");
+         show_close = false, show_resume = false;
+    string forward_text = info.forward_text;
 
     switch (info.type) {
     default:
@@ -303,11 +305,6 @@ public abstract class Assistant : Gtk.Window
       show_cancel = true;
       show_back = current.prev != null;
       show_forward = true;
-      break;
-    case Type.SUMMARY:
-      show_cancel = true;
-      show_back = current.prev != null;
-      show_apply = true;
       break;
     case Type.INTERRUPT:
       show_cancel = true;
@@ -348,12 +345,8 @@ public abstract class Assistant : Gtk.Window
     if (apply_button != null) {
       area.remove(apply_button); DejaDup.destroy_widget(apply_button); apply_button = null;}
 
-    if (show_apply) {
-      apply_button = add_button(apply_text, APPLY);
-      apply_button.grab_default();
-    }
     if (show_forward) {
-      forward_button = add_button(forward_text, FORWARD);
+      forward_button = add_button(info.forward_text, FORWARD);
       forward_button.grab_default();
     }
     if (show_resume) {
@@ -378,14 +371,14 @@ public abstract class Assistant : Gtk.Window
   }
 
   Gtk.Requisition page_box_req;
-  public void append_page(Gtk.Widget page, Type type = Type.NORMAL)
+  public void append_page(Gtk.Widget page, Type type = Type.NORMAL, string forward_text = _("_Forward"))
   {
     var was_empty = infos == null;
 
     var info = new PageInfo();
     info.page = page;
     info.type = type;
-    info.title = "";
+    info.forward_text = forward_text;
     infos.append(info);
 
     page.show_all();

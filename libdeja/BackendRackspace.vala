@@ -33,6 +33,11 @@ public class BackendRackspace : Backend
     return new BackendRackspace();
   }
 
+  public override string[] get_dependencies()
+  {
+    return Config.CLOUDFILES_PACKAGES.split(",");
+  }
+
   public override bool is_native() {
     return false;
   }

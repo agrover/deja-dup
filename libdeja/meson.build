@@ -46,7 +46,7 @@ libdeja = shared_library('deja',
      'uriutils.c'],
     vala_args: common_vflags + ['--pkg=secret', '--pkg=uriutils'],
     c_args: common_cflags,
-    dependencies: [gio_dep, gio_unix_dep, goa_dep, goabackend_dep, peas_dep, secret_dep],
+    dependencies: [gio_dep, gio_unix_dep, goa_dep, goabackend_dep, packagekit_dep, peas_dep, secret_dep],
     install: true,
     install_dir: pkglibdir)
 
