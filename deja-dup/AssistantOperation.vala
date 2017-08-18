@@ -948,7 +948,7 @@ public abstract class AssistantOperation : Assistant
     loop.quit();
   }
 
-  void show_install(DejaDup.Operation op, string[] names, string[] ids)
+  protected void show_install(DejaDup.Operation op, string[] names, string[] ids)
   {
     var text = "";
     foreach (string s in names) {

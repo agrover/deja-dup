@@ -356,6 +356,7 @@ public class AssistantRestoreMissing : AssistantRestore {
     op = query_op_files;
     op.passphrase_required.connect(get_passphrase);
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
+    op.install.connect(show_install);
 
     op.set_state(op_state); // share state between ops
     
