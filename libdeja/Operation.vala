@@ -288,6 +288,9 @@ public abstract class Operation : Object
     } catch (IOError.NOT_FOUND e) {
       // This happens when the packagekit daemon isn't running -- it can't find the socket
       return;
+    } catch (Pk.ControlError e) {
+      // This can happen when the packagekit daemon isn't installed or can't start(?)
+      return;
     } catch (Error e) {
       raise_error("%s".printf(e.message), null);
       done(false, false, null);
