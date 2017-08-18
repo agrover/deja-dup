@@ -30,12 +30,8 @@ Pre-Depends: ${misc:Pre-Depends},
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          gnome-icon-theme-symbolic,
-Recommends: deja-dup-backend-gvfs,
-            duplicity (>= 0.6.23),
+Recommends: duplicity (>= 0.6.23),
             policykit-1,
-Suggests: deja-dup-backend-cloudfiles,
-          deja-dup-backend-s3,
-          deja-dup-backend-gcs,
 Description: Back up your files
  Déjà Dup is a simple backup tool. It hides the complexity of backing up the
  Right Way (encrypted, off-site, and regular) and uses duplicity as the
@@ -47,51 +43,3 @@ Description: Back up your files
   * Incrementally backs up, letting you restore from any particular backup
   * Schedules regular backups
   * Integrates well into your GNOME desktop
-
-Package: deja-dup-backend-gvfs
-Architecture: all
-Depends: ${misc:Depends},
-         deja-dup,
-         gvfs-backends,
-Description: Remote server support for Déjà Dup
- Déjà Dup is a simple backup tool. It hides the complexity of backing up the
- Right Way (encrypted, off-site, and regular) and uses duplicity as the
- backend.
- .
- This package adds FTP, SSH, WebDAV, and Windows Shares support to Déjà Dup.
-
-Package: deja-dup-backend-cloudfiles
-Architecture: all
-Depends: ${misc:Depends},
-         deja-dup,
-         python-cloudfiles,
-Description: Rackspace Cloudfiles support for Déjà Dup
- Déjà Dup is a simple backup tool. It hides the complexity of backing up the
- Right Way (encrypted, off-site, and regular) and uses duplicity as the
- backend.
- .
- This package adds Rackspace Cloudfiles support to Déjà Dup.
-
-Package: deja-dup-backend-gcs
-Architecture: all
-Depends: ${misc:Depends},
-         deja-dup,
-         python-boto (>= 2.20),
-Description: Google Cloud Storage support for Déjà Dup
- Déjà Dup is a simple backup tool. It hides the complexity of backing up the
- Right Way (encrypted, off-site, and regular) and uses duplicity as the
- backend.
- .
- This package adds Google Cloud Storage support to Déjà Dup.
-
-Package: deja-dup-backend-s3
-Architecture: all
-Depends: ${misc:Depends},
-         deja-dup,
-         python-boto (>= 0.9d),
-Description: Amazon S3 support for Déjà Dup
- Déjà Dup is a simple backup tool. It hides the complexity of backing up the
- Right Way (encrypted, off-site, and regular) and uses duplicity as the
- backend.
- .
- This package adds Amazon S3 support to Déjà Dup.
