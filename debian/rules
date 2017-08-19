@@ -2,12 +2,16 @@
 # -*- Mode: Makefile; indent-tabs-mode: t; tab-width: 2 -*-
 
 %:
-	dh $@
+	dh $@ --parallel
 
 override_dh_auto_configure:
 	meson builddir --libexecdir=lib/${DEB_HOST_MULTIARCH} \
 	               --prefix=/usr \
-	               --sysconfdir=/etc
+	               --sysconfdir=/etc \
+	               -Dgvfs_pkgs=gvfs-backends,python-gi,gir1.2-glib-2.0 \
+	               -Dboto_pkgs=python-boto \
+	               -Dcloudfiles_pkgs=python-cloudfiles \
+	               -Dswiftclient_pkgs=python-swiftclient
 
 override_dh_auto_build:
 	ninja -v -C builddir
