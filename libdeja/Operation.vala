@@ -271,6 +271,28 @@ public abstract class Operation : Object
     yield subop.start();
   }
 
+  async Pk.Results? get_pk_results(Pk.Client client, Pk.Bitfield bitfield, string[] pkgs)
+  {
+    Pk.Results results;
+    try {
+      results = yield client.resolve_async(bitfield, pkgs, null, () => {});
+      if (results == null || results.get_error_code() != null)
+        return null;
+    } catch (IOError.NOT_FOUND e) {
+      // This happens when the packagekit daemon isn't running -- it can't find the socket
+      return null;
+    } catch (Pk.ControlError e) {
+      // This can happen when the packagekit daemon isn't installed or can't start(?)
+      return null;
+    } catch (Error e) {
+      raise_error("%s".printf(e.message), null);
+      done(false, false, null);
+      return null;
+    }
+
+    return results;
+  }
+
   // Returns true if we're all set, false if we should wait for install
   async void check_dependencies()
   {
@@ -279,26 +301,40 @@ public abstract class Operation : Object
       deps += dep;
 
     var client = new Pk.Client();
-    Pk.Results results;
-    try {
-      var bitfield = Pk.Bitfield.from_enums(Pk.Filter.NOT_INSTALLED, Pk.Filter.ARCH);
-      results = yield client.resolve_async(bitfield, deps, null, () => {});
-      if (results == null || results.get_error_code() != null)
-        return;
-    } catch (IOError.NOT_FOUND e) {
-      // This happens when the packagekit daemon isn't running -- it can't find the socket
+
+    // Check which deps have any version installed
+    var bitfield = Pk.Bitfield.from_enums(Pk.Filter.INSTALLED, Pk.Filter.ARCH);
+    Pk.Results results = yield get_pk_results(client, bitfield, deps);
+    if (results == null)
       return;
-    } catch (Pk.ControlError e) {
-      // This can happen when the packagekit daemon isn't installed or can't start(?)
-      return;
-    } catch (Error e) {
-      raise_error("%s".printf(e.message), null);
-      done(false, false, null);
-      return;
+
+    // Convert that to a set
+    var installed = new GenericSet<string>(str_hash, str_equal);
+    var package_array = results.get_package_array();
+    for (var i = 0; i < package_array.length; i++) {
+      installed.add(package_array.data[i].get_name());
     }
 
-    // Convert from List to array (I don't know why the API couldn't be friendlier...)
-    var package_array = results.get_package_array();
+    // Now see which packages we actually have to bother installing
+    string[] uninstalled = {};
+    foreach (string pkg in deps) {
+      if (!installed.contains(pkg))
+        uninstalled += pkg;
+    }
+    if (uninstalled.length == 0)
+      return;
+
+    // Now get the list of uninstalled (we do both passes, because if there is
+    // an update for a package, the new version can be returned here, even if
+    // there is an older version installed -- NEWEST or NOT_NEWEST does not
+    // affect this behavior).
+    bitfield = Pk.Bitfield.from_enums(Pk.Filter.NOT_INSTALLED, Pk.Filter.ARCH, Pk.Filter.NEWEST);
+    results = yield get_pk_results(client, bitfield, uninstalled);
+    if (results == null)
+      return;
+
+    // Convert from List to arrays
+    package_array = results.get_package_array();
     var package_ids = new string[0];
     var package_names = new string[0];
     for (var i = 0; i < package_array.length; i++) {
