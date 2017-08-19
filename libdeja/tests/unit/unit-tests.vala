@@ -158,14 +158,14 @@ void migrate_file_remote()
 
   settings.set_string(DejaDup.BACKEND_KEY, "file");
   file.set_string("type", "normal");
-  file.set_string("path", "smb://example.org/test/path");
+  file.set_string("path", "resource://example.org/test/path"); // resource: is built into glib
 
   assert(!file.get_boolean("migrated"));
   DejaDup.initialize(null, null);
 
   assert(settings.get_string(DejaDup.BACKEND_KEY) == "remote");
   assert(file.get_boolean("migrated"));
-  assert(remote.get_string(DejaDup.REMOTE_URI_KEY) == "smb://example.org/test/path");
+  assert(remote.get_string(DejaDup.REMOTE_URI_KEY) == "resource:///example.org/test/path");
   assert(remote.get_string(DejaDup.REMOTE_FOLDER_KEY) == "");
 }
 
