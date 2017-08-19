@@ -1408,6 +1408,8 @@ internal class DuplicityJob : DejaDup.ToolJob
         break;
       case DejaDup.ToolJob.Mode.LIST:
         argv.prepend("list-current-files");
+        if (time != null)
+          argv.append("--time=%s".printf(time));
         argv.append(get_remote());
         break;
       }
