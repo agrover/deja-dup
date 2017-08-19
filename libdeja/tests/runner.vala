@@ -170,7 +170,7 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
   else if (mode == Mode.VERIFY)
     return "'restore' '--gio' '--file-to-restore=%s/deja-dup/metadata' '--force' 'file://%s' '%s/deja-dup/metadata' %s".printf(cachedir.substring(1), backupdir, cachedir, end_str);
   else if (mode == Mode.LIST)
-    return "'list-current-files' '--gio' 'file://%s' %s".printf(backupdir, end_str);
+    return "'list-current-files' '--gio' %s'file://%s' %s".printf(extra, backupdir, end_str);
   else if (mode == Mode.REMOVE)
     return "'remove-all-but-n-full' '%d' '--force' 'file://%s' '--gio' %s".printf(remove_n, backupdir, end_str);
 
