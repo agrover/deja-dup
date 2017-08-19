@@ -109,6 +109,92 @@ void prompt()
   assert(DejaDup.make_prompt_check() == true);
 }
 
+// No backend change should happen
+void migrate_file_s3()
+{
+  var settings = DejaDup.get_settings();
+  var file = DejaDup.get_settings("File");
+
+  settings.set_string(DejaDup.BACKEND_KEY, "s3");
+
+  assert(!file.get_boolean("migrated"));
+  DejaDup.initialize(null, null);
+
+  assert(file.get_boolean("migrated"));
+  assert(settings.get_string(DejaDup.BACKEND_KEY) == "s3");
+}
+
+void migrate_file_drive()
+{
+  var settings = DejaDup.get_settings();
+  var file = DejaDup.get_settings("File");
+  var drive = DejaDup.get_settings(DejaDup.DRIVE_ROOT);
+
+  settings.set_string(DejaDup.BACKEND_KEY, "file");
+  file.set_string("type", "volume");
+  file.set_string("uuid", "uuid");
+  file.set_string("icon", "icon");
+  file.set_string("short-name", "short-name");
+  file.set_string("name", "name");
+  file.set_string("path", "file:///root");
+  file.set_value("relpath", new Variant.bytestring("folder/path"));
+
+  assert(!file.get_boolean("migrated"));
+  DejaDup.initialize(null, null);
+
+  assert(settings.get_string(DejaDup.BACKEND_KEY) == "drive");
+  assert(file.get_boolean("migrated"));
+  assert(drive.get_string(DejaDup.DRIVE_UUID_KEY) == "uuid");
+  assert(drive.get_string(DejaDup.DRIVE_ICON_KEY) == "icon");
+  assert(drive.get_string(DejaDup.DRIVE_NAME_KEY) == "short-name");
+  assert(drive.get_string(DejaDup.DRIVE_FOLDER_KEY) == "folder/path");
+}
+
+void migrate_file_remote()
+{
+  var settings = DejaDup.get_settings();
+  var file = DejaDup.get_settings("File");
+  var remote = DejaDup.get_settings(DejaDup.REMOTE_ROOT);
+
+  settings.set_string(DejaDup.BACKEND_KEY, "file");
+  file.set_string("type", "normal");
+  file.set_string("path", "smb://example.org/test/path");
+
+  assert(!file.get_boolean("migrated"));
+  DejaDup.initialize(null, null);
+
+  assert(settings.get_string(DejaDup.BACKEND_KEY) == "remote");
+  assert(file.get_boolean("migrated"));
+  assert(remote.get_string(DejaDup.REMOTE_URI_KEY) == "smb://example.org/test/path");
+  assert(remote.get_string(DejaDup.REMOTE_FOLDER_KEY) == "");
+}
+
+void migrate_file_local()
+{
+  var settings = DejaDup.get_settings();
+  var file = DejaDup.get_settings("File");
+  var local = DejaDup.get_settings(DejaDup.LOCAL_ROOT);
+
+  settings.set_string(DejaDup.BACKEND_KEY, "file");
+  file.set_string("type", "normal");
+  file.set_string("path", "file:///test/path");
+
+  assert(!file.get_boolean("migrated"));
+  DejaDup.initialize(null, null);
+
+  assert(settings.get_string(DejaDup.BACKEND_KEY) == "local");
+  assert(file.get_boolean("migrated"));
+  assert(local.get_string(DejaDup.LOCAL_FOLDER_KEY) == "/test/path");
+}
+
+string get_top_builddir()
+{
+  var builddir = Environment.get_variable("top_builddir");
+  if (builddir == null)
+    builddir = Path.build_filename(get_top_srcdir(), "builddir");
+  return builddir;
+}
+
 string get_top_srcdir()
 {
   var srcdir = Environment.get_variable("top_srcdir");
@@ -131,6 +217,9 @@ void setup()
 
 void teardown()
 {
+  string[] roots = {"", "File", "Drive", "Local", "Remote"};
+  foreach (string root in roots)
+    DejaDup.get_settings(root).revert(); // works because we are read-only settings mode, which calls delay()
 }
 
 int main(string[] args)
@@ -142,6 +231,7 @@ int main(string[] args)
                              Environment.get_variable("PATH"),
                            true);
   Environment.set_variable("DEJA_DUP_LANGUAGE", "en", true);
+  Environment.set_variable("DEJA_DUP_TOOLS_PATH", Path.build_filename(get_top_builddir(), "libdeja/tools/duplicity"), true);
   Environment.set_variable("GSETTINGS_BACKEND", "memory", true);
   Test.bug_base("https://launchpad.net/bugs/%s");
 
@@ -165,7 +255,13 @@ int main(string[] args)
   if (Posix.system("glib-compile-schemas %s".printf(schema_dir)) != 0)
     warning("Could not compile schemas in %s", schema_dir);
 
+  DejaDup.set_settings_read_only(true);
+
   var unit = new TestSuite("unit");
+  unit.add(new TestCase("migrate-file-drive", setup, migrate_file_drive, teardown));
+  unit.add(new TestCase("migrate-file-local", setup, migrate_file_local, teardown));
+  unit.add(new TestCase("migrate-file-remote", setup, migrate_file_remote, teardown));
+  unit.add(new TestCase("migrate-file-s3", setup, migrate_file_s3, teardown));
   unit.add(new TestCase("parse-dir", setup, parse_dir, teardown));
   unit.add(new TestCase("parse-version", setup, parse_version, teardown));
   unit.add(new TestCase("prompt", setup, prompt, teardown));
