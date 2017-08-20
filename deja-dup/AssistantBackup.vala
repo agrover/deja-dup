@@ -29,12 +29,15 @@ public class AssistantBackup : AssistantOperation
   construct
   {
     title = C_("back up is verb", "Back Up");
-    apply_text = C_("back up is verb", "_Back Up");
 
     can_resume = true;
     resumed.connect(do_resume);
   }
-  
+
+  protected override string get_apply_text() {
+    return C_("back up is verb", "_Back Up");
+  }
+
   protected override DejaDup.Operation? create_op()
   {
     realize();

@@ -77,7 +77,6 @@ public abstract class AssistantOperation : Assistant
   protected Gtk.Widget detail_widget;
   Gtk.TextView detail_text_view;
   protected Gtk.Widget summary_page {get; private set;}
-  protected string apply_text {get; set; default = _("_OK");}
   
   protected DejaDup.Operation op;
   uint timeout_id;
@@ -126,6 +125,8 @@ public abstract class AssistantOperation : Assistant
    */
   protected abstract DejaDup.Operation? create_op();
   protected abstract string get_progress_file_prefix();
+
+  protected abstract string get_apply_text();
 
   bool pulse()
   {
@@ -523,7 +524,7 @@ public abstract class AssistantOperation : Assistant
     var page = make_confirm_page();
     if (page == null)
       return;
-    append_page(page, Type.NORMAL, apply_text);
+    append_page(page, Type.NORMAL, get_apply_text());
     set_page_title(page, _("Summary"));
     confirm_page = page;
   }

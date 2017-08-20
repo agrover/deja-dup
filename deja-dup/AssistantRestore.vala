@@ -66,9 +66,12 @@ public class AssistantRestore : AssistantOperation
   construct
   {
     title = _("Restore");
-    apply_text = _("_Restore");
   }
-  
+
+  protected override string get_apply_text() {
+    return _("_Restore");
+  }
+
   protected override void add_setup_pages()
   {
     add_query_backend_page();
