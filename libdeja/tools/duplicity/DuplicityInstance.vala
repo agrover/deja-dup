@@ -103,20 +103,6 @@ internal class DuplicityInstance : Object
     if (DejaDup.ensure_directory_exists(tempdir))
       argv.append("--tempdir=%s".printf(tempdir));
 
-    // Add logging argument
-    if (as_root) {
-      // Make log file
-      logfile = File.new_tmp(Config.PACKAGE + "-XXXXXX", out logstream);
-      argv.append("--log-file=%s".printf(logfile.get_path()));
-    }
-    else {
-      // Open pipes to communicate with subprocess
-      if (Posix.pipe(pipes) != 0)
-        return false;
-
-      argv.append("--log-fd=%d".printf(pipes[1]));
-    }
-    
     // Finally, actual duplicity command
     argv.prepend("duplicity");
     
@@ -130,7 +116,22 @@ internal class DuplicityInstance : Object
       else
         user_cmd = "%s %s".printf(user_cmd, Shell.quote(a));
     }
-    
+
+    // Add logging argument (after building user-visible command above, as we
+    // don't want users to try to use --log-fd on console and get errors)
+    if (as_root) {
+      // Make log file
+      logfile = File.new_tmp(Config.PACKAGE + "-XXXXXX", out logstream);
+      argv.append("--log-file=%s".printf(logfile.get_path()));
+    }
+    else {
+      // Open pipes to communicate with subprocess
+      if (Posix.pipe(pipes) != 0)
+        return false;
+
+      argv.append("--log-fd=%d".printf(pipes[1]));
+    }
+
     // Run as root if needed
     if (as_root &&
         Environment.find_program_in_path("pkexec") != null) {
