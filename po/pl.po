@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-08-14 17:05-0400\n"
-"PO-Revision-Date: 2017-08-15 13:47+0000\n"
+"POT-Creation-Date: 2017-08-17 00:27-0400\n"
+"PO-Revision-Date: 2017-08-17 14:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2017-08-16 05:23+0000\n"
+"X-Launchpad-Export-Date: 2017-08-18 05:37+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
@@ -94,7 +94,7 @@ msgstr "déjà;deja;dup;"
 msgid "Back Up"
 msgstr "Wykonaj kopię zapasową"
 
-#: data/org.gnome.DejaDup.gschema.xml:9 deja-dup/Preferences.vala:294
+#: data/org.gnome.DejaDup.gschema.xml:9 deja-dup/Preferences.vala:185
 msgid "Folders to save"
 msgstr "Uwzględniane katalogi"
 
@@ -115,7 +115,7 @@ msgstr ""
 "użytkownika i może znajdować się w dowolnym miejscu ścieżki. Wpisy względne "
 "odnoszą się do katalogu domowego użytkownika."
 
-#: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:305
+#: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:196
 msgid "Folders to ignore"
 msgstr "Ignorowane katalogi"
 
@@ -549,7 +549,7 @@ msgstr "Za_kończ"
 msgid "Folder"
 msgstr "Katalog"
 
-#: deja-dup/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:157
+#: deja-dup/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:164
 msgid "Scanning…"
 msgstr "Wyszukiwanie…"
 
@@ -682,46 +682,55 @@ msgstr "Przywrócono i przetestowano pliki."
 msgid "Backing Up…"
 msgstr "Wykonywanie kopii zapasowej…"
 
-#: deja-dup/AssistantOperation.vala:156
+#: deja-dup/AssistantOperation.vala:80
+#: deja-dup/widgets/ConfigLocationFile.vala:53
+msgid "_OK"
+msgstr "_OK"
+
+#: deja-dup/AssistantOperation.vala:163
 msgid "Scanning:"
 msgstr "Wyszukiwanie:"
 
-#: deja-dup/AssistantOperation.vala:240
+#: deja-dup/AssistantOperation.vala:247
 msgid "_Details"
 msgstr "_Szczegóły"
 
-#: deja-dup/AssistantOperation.vala:288
+#: deja-dup/AssistantOperation.vala:293
+msgid "In order to continue, the following packages need to be installed:"
+msgstr "Aby kontynuować, należy zainstalować następujące pakiety:"
+
+#: deja-dup/AssistantOperation.vala:329
 msgid "_Allow restoring without a password"
 msgstr "Zezwolenie na przywracanie bez h_asła"
 
-#: deja-dup/AssistantOperation.vala:294
+#: deja-dup/AssistantOperation.vala:335
 msgid "_Password-protect your backup"
 msgstr "Kopia zapasowa chroniona _hasłem"
 
-#: deja-dup/AssistantOperation.vala:306
+#: deja-dup/AssistantOperation.vala:347
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
 msgstr "Hasło będzie wymagane, aby przywrócić pliki. Lepiej jest je zapisać."
 
-#: deja-dup/AssistantOperation.vala:321 deja-dup/AssistantOperation.vala:390
+#: deja-dup/AssistantOperation.vala:362 deja-dup/AssistantOperation.vala:431
 msgid "E_ncryption password"
 msgstr "Hasło _szyfrowania"
 
-#: deja-dup/AssistantOperation.vala:338
+#: deja-dup/AssistantOperation.vala:379
 msgid "Confir_m password"
 msgstr "P_otwierdzenie hasła"
 
-#: deja-dup/AssistantOperation.vala:351 deja-dup/AssistantOperation.vala:399
+#: deja-dup/AssistantOperation.vala:392 deja-dup/AssistantOperation.vala:440
 msgid "_Show password"
 msgstr "_Wyświetlanie hasła"
 
-#: deja-dup/AssistantOperation.vala:358
+#: deja-dup/AssistantOperation.vala:399
 #: deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Zapamiętanie hasła"
 
-#: deja-dup/AssistantOperation.vala:377
+#: deja-dup/AssistantOperation.vala:418
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -730,15 +739,19 @@ msgstr ""
 "Aby upewnić się, że będzie można pobrać pliki w razie potrzeby, proszę "
 "wprowadzić hasło szyfrowania ponownie, aby wykonać krótki test przywracania."
 
-#: deja-dup/AssistantOperation.vala:404
+#: deja-dup/AssistantOperation.vala:445
 msgid "Test every two _months"
 msgstr "Testowanie co dwa _miesiące"
 
-#: deja-dup/AssistantOperation.vala:478
+#: deja-dup/AssistantOperation.vala:512
+msgid "Install Packages"
+msgstr "Instalacja pakietów"
+
+#: deja-dup/AssistantOperation.vala:527
 msgid "Summary"
 msgstr "Podsumowanie"
 
-#: deja-dup/AssistantOperation.vala:500
+#: deja-dup/AssistantOperation.vala:549
 msgid "Restore Test"
 msgstr "Test przywracania"
 
@@ -748,23 +761,28 @@ msgstr "Test przywracania"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: deja-dup/AssistantOperation.vala:575
+#: deja-dup/AssistantOperation.vala:621
 #: libdeja/tools/duplicity/DuplicityJob.vala:710
 #: libdeja/tools/duplicity/DuplicityJob.vala:1098
 msgid "Failed with an unknown error."
 msgstr "Niepowodzenie, wystąpił nieznany błąd."
 
-#: deja-dup/AssistantOperation.vala:772
+#: deja-dup/AssistantOperation.vala:819
 msgid "Require Password?"
 msgstr "Wymagać hasła?"
 
-#: deja-dup/AssistantOperation.vala:774
+#: deja-dup/AssistantOperation.vala:821
 msgid "Encryption Password Needed"
 msgstr "Wymagane jest hasło szyfrowania"
 
-#: deja-dup/AssistantOperation.vala:846
+#: deja-dup/AssistantOperation.vala:893
 msgid "Backup encryption password"
 msgstr "Hasło szyfrowania kopii zapasowej"
+
+#: deja-dup/AssistantOperation.vala:963
+msgctxt "verb"
+msgid "_Install"
+msgstr "_Zainstaluj"
 
 #: deja-dup/AssistantRestore.vala:69
 msgid "_Restore"
@@ -873,7 +891,7 @@ msgstr[0] "Plik został przywrócony."
 msgstr[1] "Pliki zostały przywrócone."
 msgstr[2] "Pliki zostały przywrócone."
 
-#: deja-dup/AssistantRestore.vala:484 libdeja/Operation.vala:63
+#: deja-dup/AssistantRestore.vala:484 libdeja/Operation.vala:64
 msgid "Restoring…"
 msgstr "Przywracanie…"
 
@@ -922,39 +940,35 @@ msgstr[2] "Wyszukiwanie plików z około %d lat temu…"
 msgid "Scanning finished"
 msgstr "Ukończono wyszukiwanie"
 
-#: deja-dup/Assistant.vala:38 deja-dup/widgets/ConfigLocationFile.vala:53
-msgid "_OK"
-msgstr "_OK"
-
-#: deja-dup/Assistant.vala:298
-msgid "_Forward"
-msgstr "_Dalej"
-
-#: deja-dup/Assistant.vala:316
+#: deja-dup/Assistant.vala:313
 msgid "Co_ntinue"
 msgstr "Ko_ntynuuj"
 
-#: deja-dup/Assistant.vala:322
+#: deja-dup/Assistant.vala:319
 msgctxt "verb"
 msgid "_Test"
 msgstr "_Testuj"
 
-#: deja-dup/Assistant.vala:352 deja-dup/widgets/ConfigList.vala:255
+#: deja-dup/Assistant.vala:353
+msgid "_Resume Later"
+msgstr "_Wznów później"
+
+#: deja-dup/Assistant.vala:357
+msgid "_Back"
+msgstr "_Wstecz"
+
+#: deja-dup/Assistant.vala:359
+msgid "_Close"
+msgstr "Za_mknij"
+
+#: deja-dup/Assistant.vala:363 deja-dup/widgets/ConfigList.vala:255
 #: deja-dup/widgets/ConfigLocationFile.vala:52
 msgid "_Cancel"
 msgstr "_Anuluj"
 
-#: deja-dup/Assistant.vala:354
-msgid "_Close"
-msgstr "Za_mknij"
-
-#: deja-dup/Assistant.vala:358
-msgid "_Back"
-msgstr "_Wstecz"
-
-#: deja-dup/Assistant.vala:360
-msgid "_Resume Later"
-msgstr "_Wznów później"
+#: deja-dup/Assistant.vala:374
+msgid "_Forward"
+msgstr "_Dalej"
 
 #: deja-dup/main.vala:31 deja-dup/monitor/monitor.vala:34
 msgid "Show version"
@@ -1045,67 +1059,53 @@ msgstr "Połącz jako _użytkownik"
 msgid "_Domain"
 msgstr "_Domena"
 
-#: deja-dup/Preferences.vala:105 deja-dup/Preferences.vala:258
-msgid "_Back Up Now…"
-msgstr "_Wykonaj kopię zapasową…"
-
-#: deja-dup/Preferences.vala:107 deja-dup/Preferences.vala:212
-msgid "_Restore…"
-msgstr "P_rzywróć…"
-
-#: deja-dup/Preferences.vala:125
-msgid "Could not install"
-msgstr "Nie można zainstalować"
-
-#: deja-dup/Preferences.vala:159
+#: deja-dup/Preferences.vala:78
 msgid "Categories"
 msgstr "Kategorie"
 
-#: deja-dup/Preferences.vala:212
-msgid "_Install…"
-msgstr "Za_instaluj…"
+#: deja-dup/Preferences.vala:131
+msgid "_Restore…"
+msgstr "P_rzywróć…"
 
-#: deja-dup/Preferences.vala:258
-#: deja-dup/widgets/ConfigLabelDescription.vala:63
-#: deja-dup/widgets/ConfigLabelDescription.vala:87
-msgid "Install…"
-msgstr "Zainstaluj…"
+#: deja-dup/Preferences.vala:163
+msgid "_Back Up Now…"
+msgstr "_Wykonaj kopię zapasową…"
 
-#: deja-dup/Preferences.vala:283
+#: deja-dup/Preferences.vala:174
 msgid "Overview"
 msgstr "Podsumowanie"
 
-#: deja-dup/Preferences.vala:317
+#: deja-dup/Preferences.vala:208
 msgid "_Storage location"
 msgstr "Położenie p_rzechowywania"
 
 #. Translators: storage as in "where to store the backup"
-#: deja-dup/Preferences.vala:334
+#: deja-dup/Preferences.vala:225
 msgid "Storage location"
 msgstr "Położenie przechowywania"
 
-#: deja-dup/Preferences.vala:358
+#: deja-dup/Preferences.vala:248
 msgid "_Automatic backup"
 msgstr "Automatyczne _kopie zapasowe"
 
 #. translators: as in "Every day"
-#: deja-dup/Preferences.vala:369
+#: deja-dup/Preferences.vala:259
 msgid "_Every"
 msgstr "_Co"
 
-#: deja-dup/Preferences.vala:379
+#: deja-dup/Preferences.vala:269
 msgctxt "verb"
 msgid "_Keep"
 msgstr "_Przechowywanie"
 
-#: deja-dup/Preferences.vala:386
+#: deja-dup/Preferences.vala:276
 msgid ""
 "Old backups will be deleted earlier if the storage location is low on space."
 msgstr ""
 "Poprzednie kopie zapasowe będą przechowywane do czasu wyczerpania miejsca na "
 "dysku."
 
-#: deja-dup/Preferences.vala:396
+#: deja-dup/Preferences.vala:286
 msgid "Scheduling"
 msgstr "Planowanie"
 
@@ -1155,8 +1155,8 @@ msgstr "Rozpoczynanie zaplanowanego utworzenia kopii zapasowej"
 msgid "%.1f%% complete"
 msgstr "Ukończono %.1f%%"
 
-#: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:45
-#: libdeja/BackendS3.vala:55
+#: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:50
+#: libdeja/BackendS3.vala:60
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "Wykonanie kopii zapasowej zostanie rozpoczęte po uzyskaniu dostępu do sieci."
@@ -1230,27 +1230,18 @@ msgstr "Brak ostatnich kopii."
 msgid "No backup scheduled."
 msgstr "Brak zaplanowanych kopii zapasowych."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:64
-#, c-format
-msgid ""
-"You can restore existing backups after you first install some necessary "
-"software by clicking the %s button."
-msgstr ""
-"Można przywrócić istniejące kopie zapasowe po zainstalowaniu wymaganego "
-"oprogramowania klikając przycisk %s."
-
 #. This here encodes a lot of outside GUI information in this widget,
 #. but it's a very special case thing.
-#: deja-dup/widgets/ConfigLabelDescription.vala:73
+#: deja-dup/widgets/ConfigLabelDescription.vala:66
 msgid "Restore…"
 msgstr "Przywróć…"
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:75
+#: deja-dup/widgets/ConfigLabelDescription.vala:68
 #, c-format
 msgid "You may use the %s button to browse for existing backups."
 msgstr "Można użyć przycisku %s, aby przeglądać istniejące kopie zapasowe."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:80
+#: deja-dup/widgets/ConfigLabelDescription.vala:73
 #, c-format
 msgid ""
 "You can restore the entire backup with the %s button or use %s to either "
@@ -1259,20 +1250,11 @@ msgstr ""
 "Można przywrócić całą kopię zapasową za pomocą przycisku %s lub użyć "
 "programu %s, aby przywrócić poszczególne pliki lub tylko brakujące."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:88
-#, c-format
-msgid ""
-"You can create a backup after you first install some necessary software by "
-"clicking the %s button."
-msgstr ""
-"Można utworzyć kopię zapasową po zainstalowaniu wymaganego oprogramowania "
-"klikając przycisk %s."
-
-#: deja-dup/widgets/ConfigLabelDescription.vala:94
+#: deja-dup/widgets/ConfigLabelDescription.vala:81
 msgid "Back Up Now…"
 msgstr "Wykonaj kopię zapasową…"
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:95
+#: deja-dup/widgets/ConfigLabelDescription.vala:82
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
@@ -1281,15 +1263,15 @@ msgstr ""
 "Należy <a href=''>włączyć</a> automatyczne tworzenie kopii zapasowych lub "
 "użyć przycisku %s, aby utworzyć kopię w tej chwili."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:101
+#: deja-dup/widgets/ConfigLabelDescription.vala:88
 msgid "A backup automatically starts every day."
 msgstr "Kopia zapasowa jest automatycznie wykonywana każdego dnia."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:103
+#: deja-dup/widgets/ConfigLabelDescription.vala:90
 msgid "A backup automatically starts every week."
 msgstr "Kopia zapasowa jest automatycznie wykonywana każdego tygodnia."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:106
+#: deja-dup/widgets/ConfigLabelDescription.vala:93
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1328,7 +1310,7 @@ msgstr "Katalog lokalny"
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:284 libdeja/BackendS3.vala:118
+#: deja-dup/widgets/ConfigLocation.vala:284 libdeja/BackendS3.vala:123
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -1340,7 +1322,7 @@ msgstr "Google Cloud Storage"
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: deja-dup/widgets/ConfigLocation.vala:290 libdeja/BackendRackspace.vala:65
+#: deja-dup/widgets/ConfigLocation.vala:290 libdeja/BackendRackspace.vala:70
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
@@ -1438,7 +1420,7 @@ msgstr "Nie można wyświetlić %s"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: libdeja/BackendDrive.vala:98 libdeja/CommonUtils.vala:572
+#: libdeja/BackendDrive.vala:98 libdeja/CommonUtils.vala:571
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s w %2$s"
@@ -1488,16 +1470,16 @@ msgstr ""
 "Oczekiwanie na skonfigurowanie konta „%s” w ustawieniach kopii zapasowej…"
 
 #. Translators: %s is a folder.
-#: libdeja/BackendRackspace.vala:68
+#: libdeja/BackendRackspace.vala:73
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "%s w serwisie Rackspace Cloud Files"
 
-#: libdeja/BackendRackspace.vala:111 libdeja/BackendS3.vala:164
+#: libdeja/BackendRackspace.vala:116 libdeja/BackendS3.vala:169
 msgid "Permission denied"
 msgstr "Brak uprawnień"
 
-#: libdeja/BackendRackspace.vala:142
+#: libdeja/BackendRackspace.vala:147
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
@@ -1505,19 +1487,19 @@ msgid ""
 msgstr ""
 "<a href=\"%s\">Tutaj</a> można założyć konto serwisu Rackspace Cloud Files."
 
-#: libdeja/BackendRackspace.vala:143
+#: libdeja/BackendRackspace.vala:148
 msgid "Connect to Rackspace Cloud Files"
 msgstr "Łączenie z serwisem Rackspace Cloud Files"
 
-#: libdeja/BackendRackspace.vala:144
+#: libdeja/BackendRackspace.vala:149
 msgid "_API access key"
 msgstr "Klucz dostępu _API"
 
-#: libdeja/BackendRackspace.vala:145
+#: libdeja/BackendRackspace.vala:150
 msgid "S_how API access key"
 msgstr "Wyświetlanie _klucza dostępu API"
 
-#: libdeja/BackendRackspace.vala:146
+#: libdeja/BackendRackspace.vala:151
 msgid "_Remember API access key"
 msgstr "_Zapamiętanie klucza dostępu API"
 
@@ -1526,72 +1508,72 @@ msgid "Waiting for a network connection…"
 msgstr "Oczekiwanie na połączenie sieciowe…"
 
 #. Translators: %s is a folder.
-#: libdeja/BackendS3.vala:121
+#: libdeja/BackendS3.vala:126
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "%s w serwisie Amazon S3"
 
-#: libdeja/BackendS3.vala:195
+#: libdeja/BackendS3.vala:200
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr "<a href=\"%s\">Tutaj</a> można założyć konto serwisu Amazon S3."
 
-#: libdeja/BackendS3.vala:196
+#: libdeja/BackendS3.vala:201
 msgid "Connect to Amazon S3"
 msgstr "Połącz z Amazon S3"
 
-#: libdeja/BackendS3.vala:197
+#: libdeja/BackendS3.vala:202
 msgid "_Access key ID"
 msgstr "Identyfik_ator klucza dostępu"
 
-#: libdeja/BackendS3.vala:198
+#: libdeja/BackendS3.vala:203
 msgid "_Secret access key"
 msgstr "Tajny klucz do_stępu"
 
-#: libdeja/BackendS3.vala:199
+#: libdeja/BackendS3.vala:204
 msgid "S_how secret access key"
 msgstr "_Wyświetlanie tajnego hasła dostępu"
 
-#: libdeja/BackendS3.vala:200
+#: libdeja/BackendS3.vala:205
 msgid "_Remember secret access key"
 msgstr "_Zapamiętanie tajnego hasła dostępu"
 
-#: libdeja/CommonUtils.vala:444
+#: libdeja/CommonUtils.vala:450
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 "Nie można odnaleźć narzędzia do tworzenia kopii zapasowych w %s. Instalacja "
 "jest niepełna."
 
-#: libdeja/CommonUtils.vala:446
+#: libdeja/CommonUtils.vala:452
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 "Nie można wczytać narzędzia do tworzenia kopii zapasowych. Instalacja jest "
 "niepełna."
 
-#: libdeja/CommonUtils.vala:452
+#: libdeja/CommonUtils.vala:458
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 "Narzędzie do tworzenia kopii zapasowych jest uszkodzone. Instalacja jest "
 "niepełna."
 
-#: libdeja/CommonUtils.vala:474
+#: libdeja/CommonUtils.vala:473
 msgid "Could not start backup tool"
 msgstr "Nie można uruchomić narzędzia do tworzenia kopii zapasowych"
 
 #. Translators: this is the home folder and %s is the user's username
-#: libdeja/CommonUtils.vala:623
+#: libdeja/CommonUtils.vala:622
 #, c-format
 msgid "Home (%s)"
 msgstr "Katalog domowy (%s)"
 
 #. Translators: this is the home folder
-#: libdeja/CommonUtils.vala:628
+#: libdeja/CommonUtils.vala:627
 msgid "Home"
 msgstr "Katalog domowy"
 
 #. Translators: this is the trash folder
-#: libdeja/CommonUtils.vala:633
+#: libdeja/CommonUtils.vala:632
 msgid "Trash"
 msgstr "Kosz"
 
@@ -1610,19 +1592,19 @@ msgid ""
 msgstr ""
 "Kopia zapasowa jest uszkodzona. Należy ją usunąć i spróbować ponownie."
 
-#: libdeja/Operation.vala:61
+#: libdeja/Operation.vala:62
 msgid "Backing up…"
 msgstr "Tworzenie kopii zapasowej…"
 
-#: libdeja/Operation.vala:65
+#: libdeja/Operation.vala:66
 msgid "Checking for backups…"
 msgstr "Sprawdzanie kopii zapasowych…"
 
-#: libdeja/Operation.vala:67
+#: libdeja/Operation.vala:68
 msgid "Listing files…"
 msgstr "Wyświetlanie listy plików…"
 
-#: libdeja/Operation.vala:69 libdeja/Operation.vala:103
+#: libdeja/Operation.vala:70 libdeja/Operation.vala:104
 #: libdeja/tools/duplicity/DuplicityJob.vala:389
 #: libdeja/tools/duplicity/DuplicityJob.vala:396
 #: libdeja/tools/duplicity/DuplicityJob.vala:421
@@ -1665,8 +1647,8 @@ msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
 msgstr ""
-"Nie można wykonać kopii zapasowej następujących plików. Proszę się upewnić, "
-"że można je otworzyć."
+"Nie można wykonać kopii zapasowej poniższych plików. Proszę się upewnić, że "
+"można je otworzyć."
 
 #. OK, we succeeded yay!  But some files didn't actually restore
 #. because we couldn't write to them.  So tell the user so they
@@ -1778,16 +1760,16 @@ msgstr "Nie odnaleziono żadnych plików kopii zapasowych"
 msgid "Uploading…"
 msgstr "Wysyłanie…"
 
-#: libdeja/tools/duplicity/DuplicityPlugin.vala:41
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:46
 msgid "Could not understand duplicity version."
 msgstr "Nie można przetworzyć wersji programu duplicity."
 
-#: libdeja/tools/duplicity/DuplicityPlugin.vala:51
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:56
 #, c-format
 msgid "Could not understand duplicity version ‘%s’."
 msgstr "Nie można przetworzyć wersji programu duplicity „%s”."
 
-#: libdeja/tools/duplicity/DuplicityPlugin.vala:54
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:59
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -1866,8 +1848,33 @@ msgstr ""
 #~ msgid "Show _Progress"
 #~ msgstr "Wyświetlanie p_ostępu"
 
+#~ msgid "Could not install"
+#~ msgstr "Nie można zainstalować"
+
+#~ msgid "_Install…"
+#~ msgstr "Za_instaluj…"
+
+#~ msgid "Install…"
+#~ msgstr "Zainstaluj…"
+
+#, c-format
+#~ msgid ""
+#~ "You can restore existing backups after you first install some necessary "
+#~ "software by clicking the %s button."
+#~ msgstr ""
+#~ "Można przywrócić istniejące kopie zapasowe po zainstalowaniu wymaganego "
+#~ "oprogramowania klikając przycisk %s."
+
 #~ msgid "Caja"
 #~ msgstr "Caja"
+
+#, c-format
+#~ msgid ""
+#~ "You can create a backup after you first install some necessary software by "
+#~ "clicking the %s button."
+#~ msgstr ""
+#~ "Można utworzyć kopię zapasową po zainstalowaniu wymaganego oprogramowania "
+#~ "klikając przycisk %s."
 
 #~ msgid "SSH"
 #~ msgstr "SSH"

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-08-14 17:05-0400\n"
-"PO-Revision-Date: 2017-08-04 23:03+0000\n"
+"POT-Creation-Date: 2017-08-17 00:27-0400\n"
+"PO-Revision-Date: 2017-08-17 23:13+0000\n"
 "Last-Translator: Michael Terry <mike@mterry.name>\n"
 "Language-Team: Khmer <km@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2017-08-16 05:23+0000\n"
+"X-Launchpad-Export-Date: 2017-08-18 05:36+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
@@ -90,7 +90,7 @@ msgstr "déjà;deja;dup;"
 msgid "Back Up"
 msgstr "បម្រុងទុក"
 
-#: data/org.gnome.DejaDup.gschema.xml:9 deja-dup/Preferences.vala:294
+#: data/org.gnome.DejaDup.gschema.xml:9 deja-dup/Preferences.vala:185
 msgid "Folders to save"
 msgstr "ថត​ត្រូវ​រក្សាទុក"
 
@@ -104,7 +104,7 @@ msgid ""
 "relative to the user’s home directory."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:305
+#: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:196
 msgid "Folders to ignore"
 msgstr "ថត​ដែល​ត្រូវ​មិន​អើពើ"
 
@@ -519,7 +519,7 @@ msgstr "ចេញ"
 msgid "Folder"
 msgstr "ថត"
 
-#: deja-dup/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:157
+#: deja-dup/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:164
 msgid "Scanning…"
 msgstr "កំពុង​ភាគរក…"
 
@@ -647,23 +647,32 @@ msgstr "ឯកសារ​របស់​អ្នក​ត្រូវ​បា
 msgid "Backing Up…"
 msgstr "កំពុង​បម្រុងទុក…"
 
-#: deja-dup/AssistantOperation.vala:156
+#: deja-dup/AssistantOperation.vala:80
+#: deja-dup/widgets/ConfigLocationFile.vala:53
+msgid "_OK"
+msgstr "យល់ព្រម"
+
+#: deja-dup/AssistantOperation.vala:163
 msgid "Scanning:"
 msgstr "វិភាគ​រក ៖"
 
-#: deja-dup/AssistantOperation.vala:240
+#: deja-dup/AssistantOperation.vala:247
 msgid "_Details"
 msgstr "សេចក្ដី​លម្អិត"
 
-#: deja-dup/AssistantOperation.vala:288
+#: deja-dup/AssistantOperation.vala:293
+msgid "In order to continue, the following packages need to be installed:"
+msgstr ""
+
+#: deja-dup/AssistantOperation.vala:329
 msgid "_Allow restoring without a password"
 msgstr "អនុញ្ញាត​ឲ្យ​ស្ដារ​ដោយ​គ្មាន​ពាក្យ​សម្ងាត់"
 
-#: deja-dup/AssistantOperation.vala:294
+#: deja-dup/AssistantOperation.vala:335
 msgid "_Password-protect your backup"
 msgstr "ការ​ពាក្យ​ពាក្យ​សម្ងាត់​ការ​បម្រុង​ទុក​របស់​អ្នក"
 
-#: deja-dup/AssistantOperation.vala:306
+#: deja-dup/AssistantOperation.vala:347
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
@@ -671,24 +680,24 @@ msgstr ""
 "អ្នក​នឹង​ត្រូវ​ការ​ពាក្យ​សម្ងាត់​របស់​អ្នក​ ដើម្បី​ស្ដារ​ឯកសារ​របស់​អ្នក ។ "
 "អ្នក​អាច​សរសេរ​​វា​បាន ។"
 
-#: deja-dup/AssistantOperation.vala:321 deja-dup/AssistantOperation.vala:390
+#: deja-dup/AssistantOperation.vala:362 deja-dup/AssistantOperation.vala:431
 msgid "E_ncryption password"
 msgstr "ការ​អ៊ិនគ្រីប​ពាក្យ​សម្ងាត់"
 
-#: deja-dup/AssistantOperation.vala:338
+#: deja-dup/AssistantOperation.vala:379
 msgid "Confir_m password"
 msgstr "អះអាង​ពាក្យ​សម្ងាត់"
 
-#: deja-dup/AssistantOperation.vala:351 deja-dup/AssistantOperation.vala:399
+#: deja-dup/AssistantOperation.vala:392 deja-dup/AssistantOperation.vala:440
 msgid "_Show password"
 msgstr "បង្ហាញ​ពាក្យ​សម្ងាត់"
 
-#: deja-dup/AssistantOperation.vala:358
+#: deja-dup/AssistantOperation.vala:399
 #: deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "ចងចាំ​ពាក្យ​សម្ងាត់"
 
-#: deja-dup/AssistantOperation.vala:377
+#: deja-dup/AssistantOperation.vala:418
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -698,15 +707,19 @@ msgstr ""
 "​អាសន្ន សូម​បញ្ចូល​ពាក្យ​សម្ងាត់​​​ការ​ដាក់​លេខ​កូដ​របស់​អ្នក​ម្ដងទៀត "
 "ដើម្បី​​សង្ខេប​ស្ដារ​ការ​សាកល្បង។"
 
-#: deja-dup/AssistantOperation.vala:404
+#: deja-dup/AssistantOperation.vala:445
 msgid "Test every two _months"
 msgstr "ការ​សាកល្បង​រៀងរាល់​ពីរ​ខែ"
 
-#: deja-dup/AssistantOperation.vala:478
+#: deja-dup/AssistantOperation.vala:512
+msgid "Install Packages"
+msgstr ""
+
+#: deja-dup/AssistantOperation.vala:527
 msgid "Summary"
 msgstr "សង្ខេប"
 
-#: deja-dup/AssistantOperation.vala:500
+#: deja-dup/AssistantOperation.vala:549
 msgid "Restore Test"
 msgstr "ស្ដារ​ការ​សាកល្បង"
 
@@ -716,23 +729,28 @@ msgstr "ស្ដារ​ការ​សាកល្បង"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: deja-dup/AssistantOperation.vala:575
+#: deja-dup/AssistantOperation.vala:621
 #: libdeja/tools/duplicity/DuplicityJob.vala:710
 #: libdeja/tools/duplicity/DuplicityJob.vala:1098
 msgid "Failed with an unknown error."
 msgstr "បាន​បរាជ័យ​​ដោយ​មាន​កំហុស​ដែល​មិន​ស្គាល់ ។"
 
-#: deja-dup/AssistantOperation.vala:772
+#: deja-dup/AssistantOperation.vala:819
 msgid "Require Password?"
 msgstr "ទាមទារ​ពាក្យ​សម្ងាត់​ឬ ?"
 
-#: deja-dup/AssistantOperation.vala:774
+#: deja-dup/AssistantOperation.vala:821
 msgid "Encryption Password Needed"
 msgstr "ត្រូវ​ការ​អ៊ិនគ្រីប​ពាក្យ​សម្ងាត់"
 
-#: deja-dup/AssistantOperation.vala:846
+#: deja-dup/AssistantOperation.vala:893
 msgid "Backup encryption password"
 msgstr "បម្រុង​ទុក​ការ​អ៊ិនគ្រីប​ពាក្យ​សម្ងាត់"
+
+#: deja-dup/AssistantOperation.vala:963
+msgctxt "verb"
+msgid "_Install"
+msgstr ""
 
 #: deja-dup/AssistantRestore.vala:69
 msgid "_Restore"
@@ -837,7 +855,7 @@ msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "ឯកសារ​របស់​អ្នក​ត្រូវ​បានស្ដារ​ដោយ​ជោគជ័យ ។"
 
-#: deja-dup/AssistantRestore.vala:484 libdeja/Operation.vala:63
+#: deja-dup/AssistantRestore.vala:484 libdeja/Operation.vala:64
 msgid "Restoring…"
 msgstr "កំពុង​ស្ដារ…"
 
@@ -882,39 +900,35 @@ msgstr[0] "វិភាគ​រក​ឯកសារ​ពី %d ឆ្នា�
 msgid "Scanning finished"
 msgstr "បាន​បញ្ចប់​ការ​វិភាគរក"
 
-#: deja-dup/Assistant.vala:38 deja-dup/widgets/ConfigLocationFile.vala:53
-msgid "_OK"
-msgstr "យល់ព្រម"
-
-#: deja-dup/Assistant.vala:298
-msgid "_Forward"
-msgstr "ទៅមុខ"
-
-#: deja-dup/Assistant.vala:316
+#: deja-dup/Assistant.vala:313
 msgid "Co_ntinue"
 msgstr "បន្ត"
 
-#: deja-dup/Assistant.vala:322
+#: deja-dup/Assistant.vala:319
 msgctxt "verb"
 msgid "_Test"
 msgstr "សាកល្បង"
 
-#: deja-dup/Assistant.vala:352 deja-dup/widgets/ConfigList.vala:255
+#: deja-dup/Assistant.vala:353
+msgid "_Resume Later"
+msgstr "ធ្វើ​បន្ត​ពេល​ក្រោយ"
+
+#: deja-dup/Assistant.vala:357
+msgid "_Back"
+msgstr "ថយក្រោយ"
+
+#: deja-dup/Assistant.vala:359
+msgid "_Close"
+msgstr "បិទ"
+
+#: deja-dup/Assistant.vala:363 deja-dup/widgets/ConfigList.vala:255
 #: deja-dup/widgets/ConfigLocationFile.vala:52
 msgid "_Cancel"
 msgstr "បោះបង់"
 
-#: deja-dup/Assistant.vala:354
-msgid "_Close"
-msgstr "បិទ"
-
-#: deja-dup/Assistant.vala:358
-msgid "_Back"
-msgstr "ថយក្រោយ"
-
-#: deja-dup/Assistant.vala:360
-msgid "_Resume Later"
-msgstr "ធ្វើ​បន្ត​ពេល​ក្រោយ"
+#: deja-dup/Assistant.vala:374
+msgid "_Forward"
+msgstr "ទៅមុខ"
 
 #: deja-dup/main.vala:31 deja-dup/monitor/monitor.vala:34
 msgid "Show version"
@@ -999,66 +1013,52 @@ msgstr "តភ្ជាប់​ជា​អ្នក​ប្រើ"
 msgid "_Domain"
 msgstr "ដែន"
 
-#: deja-dup/Preferences.vala:105 deja-dup/Preferences.vala:258
-msgid "_Back Up Now…"
-msgstr "បម្រុង​ទុក​ឥឡូវ​នេះ…"
-
-#: deja-dup/Preferences.vala:107 deja-dup/Preferences.vala:212
-msgid "_Restore…"
-msgstr "ស្ដារ…"
-
-#: deja-dup/Preferences.vala:125
-msgid "Could not install"
-msgstr ""
-
-#: deja-dup/Preferences.vala:159
+#: deja-dup/Preferences.vala:78
 msgid "Categories"
 msgstr "ប្រភេទ"
 
-#: deja-dup/Preferences.vala:212
-msgid "_Install…"
-msgstr ""
+#: deja-dup/Preferences.vala:131
+msgid "_Restore…"
+msgstr "ស្ដារ…"
 
-#: deja-dup/Preferences.vala:258
-#: deja-dup/widgets/ConfigLabelDescription.vala:63
-#: deja-dup/widgets/ConfigLabelDescription.vala:87
-msgid "Install…"
-msgstr ""
+#: deja-dup/Preferences.vala:163
+msgid "_Back Up Now…"
+msgstr "បម្រុង​ទុក​ឥឡូវ​នេះ…"
 
-#: deja-dup/Preferences.vala:283
+#: deja-dup/Preferences.vala:174
 msgid "Overview"
 msgstr "ទិដ្ឋភាព​ទូទៅ"
 
-#: deja-dup/Preferences.vala:317
+#: deja-dup/Preferences.vala:208
 msgid "_Storage location"
 msgstr "ទីតាំង​ផ្ទុក"
 
 #. Translators: storage as in "where to store the backup"
-#: deja-dup/Preferences.vala:334
+#: deja-dup/Preferences.vala:225
 msgid "Storage location"
 msgstr "ទីតាំង​ផ្ទុក"
 
-#: deja-dup/Preferences.vala:358
+#: deja-dup/Preferences.vala:248
 msgid "_Automatic backup"
 msgstr "បម្រុង​ទុក​ស្វ័យប្រវត្តិ"
 
 #. translators: as in "Every day"
-#: deja-dup/Preferences.vala:369
+#: deja-dup/Preferences.vala:259
 msgid "_Every"
 msgstr "រៀងរាល់"
 
-#: deja-dup/Preferences.vala:379
+#: deja-dup/Preferences.vala:269
 msgctxt "verb"
 msgid "_Keep"
 msgstr "រក្សាទុក"
 
-#: deja-dup/Preferences.vala:386
+#: deja-dup/Preferences.vala:276
 msgid ""
 "Old backups will be deleted earlier if the storage location is low on space."
 msgstr ""
 "Old backups will be deleted earlier if the storage location is low on space."
 
-#: deja-dup/Preferences.vala:396
+#: deja-dup/Preferences.vala:286
 msgid "Scheduling"
 msgstr "ការ​កំណត់​ពេលវេលា"
 
@@ -1108,8 +1108,8 @@ msgstr "ចាប់ផ្ដើម​ការ​បម្រុង​ទុក
 msgid "%.1f%% complete"
 msgstr "បាន​បញ្ចប់ %.1f%%"
 
-#: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:45
-#: libdeja/BackendS3.vala:55
+#: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:50
+#: libdeja/BackendS3.vala:60
 msgid "Backup will begin when a network connection becomes available."
 msgstr "ការ​បម្រុង​ទុក​នឹង​ចាប់ផ្ដើម នៅ​ពេល​មាន​ការ​តភ្ជាប់​បណ្ដាញ ។"
 
@@ -1174,43 +1174,29 @@ msgstr "មិន​មាន​ព័ត៌មាន​បម្រុង​ប
 msgid "No backup scheduled."
 msgstr "No backup scheduled."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:64
-#, c-format
-msgid ""
-"You can restore existing backups after you first install some necessary "
-"software by clicking the %s button."
-msgstr ""
-
 #. This here encodes a lot of outside GUI information in this widget,
 #. but it's a very special case thing.
-#: deja-dup/widgets/ConfigLabelDescription.vala:73
+#: deja-dup/widgets/ConfigLabelDescription.vala:66
 msgid "Restore…"
 msgstr "ស្ដារ…"
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:75
+#: deja-dup/widgets/ConfigLabelDescription.vala:68
 #, c-format
 msgid "You may use the %s button to browse for existing backups."
 msgstr "អ្នក​អាច​ប្រើ​ប៊ូតុង %s ដើម្បី​រកមើល​ព័ត៌មាន​បម្រុង​ដែល​បាន​ស្រាប់។"
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:80
+#: deja-dup/widgets/ConfigLabelDescription.vala:73
 #, c-format
 msgid ""
 "You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
 msgstr ""
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:88
-#, c-format
-msgid ""
-"You can create a backup after you first install some necessary software by "
-"clicking the %s button."
-msgstr ""
-
-#: deja-dup/widgets/ConfigLabelDescription.vala:94
+#: deja-dup/widgets/ConfigLabelDescription.vala:81
 msgid "Back Up Now…"
 msgstr "បម្រុង​ទុក​ឥឡូវ​នេះ…"
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:95
+#: deja-dup/widgets/ConfigLabelDescription.vala:82
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
@@ -1219,15 +1205,15 @@ msgstr ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
 "start one now."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:101
+#: deja-dup/widgets/ConfigLabelDescription.vala:88
 msgid "A backup automatically starts every day."
 msgstr "ចាប់ផ្ដើម​បម្រុងទុក​​ដោយ​ស្វ័យប្រវត្តិ​ជា​រៀងរាល់​ថ្ងៃ។"
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:103
+#: deja-dup/widgets/ConfigLabelDescription.vala:90
 msgid "A backup automatically starts every week."
 msgstr "ចាប់ផ្ដើម​បម្រុងទុក​ដោយ​ស្វ័យប្រវត្តិ​ជា​រៀងរាល់​សប្ដាហ៍។"
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:106
+#: deja-dup/widgets/ConfigLabelDescription.vala:93
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1264,7 +1250,7 @@ msgstr "ថត​មូលដ្ឋាន"
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:284 libdeja/BackendS3.vala:118
+#: deja-dup/widgets/ConfigLocation.vala:284 libdeja/BackendS3.vala:123
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -1276,7 +1262,7 @@ msgstr ""
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: deja-dup/widgets/ConfigLocation.vala:290 libdeja/BackendRackspace.vala:65
+#: deja-dup/widgets/ConfigLocation.vala:290 libdeja/BackendRackspace.vala:70
 msgid "Rackspace Cloud Files"
 msgstr "ឯកសារ​ Rackspace Cloud"
 
@@ -1366,7 +1352,7 @@ msgstr "មិន​អាច​បង្ហាញ %s បាន​ទេ"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: libdeja/BackendDrive.vala:98 libdeja/CommonUtils.vala:572
+#: libdeja/BackendDrive.vala:98 libdeja/CommonUtils.vala:571
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s លើ %2$s"
@@ -1410,16 +1396,16 @@ msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
 
 #. Translators: %s is a folder.
-#: libdeja/BackendRackspace.vala:68
+#: libdeja/BackendRackspace.vala:73
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "%s នៅ​លើ​ឯកសារ Rackspace Cloud"
 
-#: libdeja/BackendRackspace.vala:111 libdeja/BackendS3.vala:164
+#: libdeja/BackendRackspace.vala:116 libdeja/BackendS3.vala:169
 msgid "Permission denied"
 msgstr "គ្មាន​សិទ្ធ"
 
-#: libdeja/BackendRackspace.vala:142
+#: libdeja/BackendRackspace.vala:147
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
@@ -1428,19 +1414,19 @@ msgstr ""
 "អ្នក​អាច​ចុះឈ្មោះ​សម្រាប់​គណនី​ឯកសារ Rackspace Cloud <a "
 "href=\"%s\">លើ​បណ្ដាញ</a> ។"
 
-#: libdeja/BackendRackspace.vala:143
+#: libdeja/BackendRackspace.vala:148
 msgid "Connect to Rackspace Cloud Files"
 msgstr "តភ្ជាប់​ទៅ​កាន់​ឯកសារ Rackspace Cloud"
 
-#: libdeja/BackendRackspace.vala:144
+#: libdeja/BackendRackspace.vala:149
 msgid "_API access key"
 msgstr "ពាក្យ​គន្លឹះ​ចូល​ដំណើរការ API"
 
-#: libdeja/BackendRackspace.vala:145
+#: libdeja/BackendRackspace.vala:150
 msgid "S_how API access key"
 msgstr "បង្ហាញ​​ពាក្យ​គន្លឹះ​​ចូល​ដំណើរការ API"
 
-#: libdeja/BackendRackspace.vala:146
+#: libdeja/BackendRackspace.vala:151
 msgid "_Remember API access key"
 msgstr "ចងចាំ​​ពាក្យ​គន្លឹះ​​ចូល​ដំណើរការ API"
 
@@ -1449,72 +1435,72 @@ msgid "Waiting for a network connection…"
 msgstr "រង់ចាំ​ការ​តភ្ជាប់​បណ្ដាញ…"
 
 #. Translators: %s is a folder.
-#: libdeja/BackendS3.vala:121
+#: libdeja/BackendS3.vala:126
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "%s នៅ​លើ Amazon S3"
 
-#: libdeja/BackendS3.vala:195
+#: libdeja/BackendS3.vala:200
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr ""
 "អ្នក​អាច​ចុះ​ឈ្មោះ​សម្រាប់​គណនី Amazon S3  <a href=\"%s\">លើ​បណ្ដាញ</a> ។"
 
-#: libdeja/BackendS3.vala:196
+#: libdeja/BackendS3.vala:201
 msgid "Connect to Amazon S3"
 msgstr "តភ្ជាប់​ទៅកាន់ Amazon S3"
 
-#: libdeja/BackendS3.vala:197
+#: libdeja/BackendS3.vala:202
 msgid "_Access key ID"
 msgstr "លេខ​សម្គាល់​​ពាក្យ​គន្លឹះ​​ចូល​ដំណើរការ"
 
-#: libdeja/BackendS3.vala:198
+#: libdeja/BackendS3.vala:203
 msgid "_Secret access key"
 msgstr "ពាក្យ​គន្លឹះ​ចូល​ដំណើរការ​សម្ងាត់"
 
-#: libdeja/BackendS3.vala:199
+#: libdeja/BackendS3.vala:204
 msgid "S_how secret access key"
 msgstr "បង្ហាញ​ពាក្យ​គន្លឹះ​​ចូល​ដំណើរការ​សម្ងាត់"
 
-#: libdeja/BackendS3.vala:200
+#: libdeja/BackendS3.vala:205
 msgid "_Remember secret access key"
 msgstr "ចងចាំ​ពាក្យ​គន្លឹះ​​ចូល​ដំណើរការ​សម្ងាត់"
 
-#: libdeja/CommonUtils.vala:444
+#: libdeja/CommonUtils.vala:450
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 "មិន​អាច​រក​ឃើញ​ឧបករណ៍​ព័ត៌មាន​បម្រុង​ទុក​នៅ​ក្នុង %s ។  "
 "ការ​ដំឡើង​របស់​អ្នក​មិន​ពេញ​លេញ​ឡើយ។"
 
-#: libdeja/CommonUtils.vala:446
+#: libdeja/CommonUtils.vala:452
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 "មិន​អាច​ផ្ទុក​ឧបករណ៍​ព័ត៌មាន​បម្រុង​។ ការ​ដំឡើង​របស់​អ្នក​មិន​ពេញ​លេញ។"
 
-#: libdeja/CommonUtils.vala:452
+#: libdeja/CommonUtils.vala:458
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 "ឧបករណ៍​ព័ត៌មាន​បម្រុង​ត្រូវ​បាន​ខូច។ "
 "ការ​បកប្រែ​របស់​អ្នក​​មិន​ត្រូវ​បាន​បញ្ចប់​ឡើយ។"
 
-#: libdeja/CommonUtils.vala:474
+#: libdeja/CommonUtils.vala:473
 msgid "Could not start backup tool"
 msgstr "មិន​​អាច​ចាប់ផ្ដើម​ឧបករណ៍​បម្រុង"
 
 #. Translators: this is the home folder and %s is the user's username
-#: libdeja/CommonUtils.vala:623
+#: libdeja/CommonUtils.vala:622
 #, c-format
 msgid "Home (%s)"
 msgstr "ផ្ទះ (%s)"
 
 #. Translators: this is the home folder
-#: libdeja/CommonUtils.vala:628
+#: libdeja/CommonUtils.vala:627
 msgid "Home"
 msgstr "ផ្ទះ"
 
 #. Translators: this is the trash folder
-#: libdeja/CommonUtils.vala:633
+#: libdeja/CommonUtils.vala:632
 msgid "Trash"
 msgstr "ធុងសំរាម"
 
@@ -1534,19 +1520,19 @@ msgstr ""
 "ព័ត៌មាន​បម្រុង​របស់​អ្នក​​លេច​ឡើង​ត្រូវ​បាន​ខូច។ "
 "តើ​អ្នក​ចង់​លុប​ឯកសារ​បម្រុង ហើយ​ព្យាយាម​ម្ដងទៀត។"
 
-#: libdeja/Operation.vala:61
+#: libdeja/Operation.vala:62
 msgid "Backing up…"
 msgstr "កំពុង​បម្រុង​ទុក…"
 
-#: libdeja/Operation.vala:65
+#: libdeja/Operation.vala:66
 msgid "Checking for backups…"
 msgstr "កំពុង​​ពិនិត្យមើល​សម្រាប់​ការ​បម្រុង​ទុក…"
 
-#: libdeja/Operation.vala:67
+#: libdeja/Operation.vala:68
 msgid "Listing files…"
 msgstr "កំពុង​អាន​ឯកសារ…"
 
-#: libdeja/Operation.vala:69 libdeja/Operation.vala:103
+#: libdeja/Operation.vala:70 libdeja/Operation.vala:104
 #: libdeja/tools/duplicity/DuplicityJob.vala:389
 #: libdeja/tools/duplicity/DuplicityJob.vala:396
 #: libdeja/tools/duplicity/DuplicityJob.vala:421
@@ -1702,16 +1688,16 @@ msgstr "រក​មិន​ឃើញ​ឯកសារ​​បម្រុង
 msgid "Uploading…"
 msgstr "កំពុង​ផ្ទុក…"
 
-#: libdeja/tools/duplicity/DuplicityPlugin.vala:41
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:46
 msgid "Could not understand duplicity version."
 msgstr "មិន​អាច​ស្គាល់​កំណែ​ដែល​ស្ទួន។"
 
-#: libdeja/tools/duplicity/DuplicityPlugin.vala:51
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:56
 #, c-format
 msgid "Could not understand duplicity version ‘%s’."
 msgstr "មិន​អាច​ស្គាល់​កំណែ​ដែល​ស្ទួន ‘%s’ ។"
 
-#: libdeja/tools/duplicity/DuplicityPlugin.vala:54
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:59
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "

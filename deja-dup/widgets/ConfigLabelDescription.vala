@@ -51,7 +51,7 @@ public class ConfigLabelDescription : ConfigLabel
     base.fill_box();
     label.use_markup = true;
     label.wrap = true;
-    label.max_width_chars = 70;
+    label.max_width_chars = 60;
     // The only links we use is to enable the auto backup, so assume that's what's happening
     label.activate_link.connect(enable_auto_backup);
   }

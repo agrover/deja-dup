@@ -29,11 +29,9 @@ check: all
 	LC_ALL=C.UTF-8 mesontest -C builddir
 
 dist: builddir screenshots pot
-	rm -f builddir/deja-dup-*.tar*
-	@git config tar.tar.xz.command "xz -c"
-	VER=$(shell grep -m 1 version: meson.build | cut -d\' -f2) && \
-	git archive --worktree-attributes --prefix deja-dup-$$VER/ -o builddir/deja-dup-$$VER.tar.xz HEAD
-	gpg --armor --sign --detach-sig builddir/deja-dup-*.tar.xz
+	rm -f builddir/meson-dist/*
+	ninja -C builddir dist
+	gpg --armor --sign --detach-sig builddir/meson-dist/deja-dup-*.tar.xz
 
 clean distclean:
 	rm -rf builddir

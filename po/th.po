@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-08-14 17:05-0400\n"
+"POT-Creation-Date: 2017-08-17 00:27-0400\n"
 "PO-Revision-Date: 2017-08-04 23:04+0000\n"
 "Last-Translator: Michael Terry <mike@mterry.name>\n"
 "Language-Team: Thai <th@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2017-08-16 05:23+0000\n"
+"X-Launchpad-Export-Date: 2017-08-18 05:37+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
@@ -89,7 +89,7 @@ msgstr "déjà;deja;dup;"
 msgid "Back Up"
 msgstr "สำรองข้อมูล"
 
-#: data/org.gnome.DejaDup.gschema.xml:9 deja-dup/Preferences.vala:294
+#: data/org.gnome.DejaDup.gschema.xml:9 deja-dup/Preferences.vala:185
 msgid "Folders to save"
 msgstr "โฟลเดอร์ที่จะบันทึกไว้"
 
@@ -103,7 +103,7 @@ msgid ""
 "relative to the user’s home directory."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:305
+#: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:196
 msgid "Folders to ignore"
 msgstr "โฟลเดอร์ที่จะเพิกเฉย"
 
@@ -511,7 +511,7 @@ msgstr "เ_ลิก"
 msgid "Folder"
 msgstr "โฟลเดอร์"
 
-#: deja-dup/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:157
+#: deja-dup/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:164
 msgid "Scanning…"
 msgstr "กำลังสแกน..."
 
@@ -639,23 +639,32 @@ msgstr "แฟ้มต่างๆ ของคุณได้ถูกกู�
 msgid "Backing Up…"
 msgstr "กำลังสำรองข้อมูล..."
 
-#: deja-dup/AssistantOperation.vala:156
+#: deja-dup/AssistantOperation.vala:80
+#: deja-dup/widgets/ConfigLocationFile.vala:53
+msgid "_OK"
+msgstr "_ตกลง"
+
+#: deja-dup/AssistantOperation.vala:163
 msgid "Scanning:"
 msgstr "การสแกน:"
 
-#: deja-dup/AssistantOperation.vala:240
+#: deja-dup/AssistantOperation.vala:247
 msgid "_Details"
 msgstr "_รายละเอียด"
 
-#: deja-dup/AssistantOperation.vala:288
+#: deja-dup/AssistantOperation.vala:293
+msgid "In order to continue, the following packages need to be installed:"
+msgstr ""
+
+#: deja-dup/AssistantOperation.vala:329
 msgid "_Allow restoring without a password"
 msgstr "_อนุญาตให้กู้คืนโดยไม่ต้องใช้รหัสผ่าน"
 
-#: deja-dup/AssistantOperation.vala:294
+#: deja-dup/AssistantOperation.vala:335
 msgid "_Password-protect your backup"
 msgstr "_รหัสผ่านเพื่อป้องกันข้อมูลสำรองของคุณ"
 
-#: deja-dup/AssistantOperation.vala:306
+#: deja-dup/AssistantOperation.vala:347
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
@@ -663,24 +672,24 @@ msgstr ""
 "คุณจะต้องใช้รหัสผ่านของคุณในการกู้คืนแฟ้มของคุณ "
 "คุณอาจต้องการให้เขียนแฟ้มลงไปด้วย"
 
-#: deja-dup/AssistantOperation.vala:321 deja-dup/AssistantOperation.vala:390
+#: deja-dup/AssistantOperation.vala:362 deja-dup/AssistantOperation.vala:431
 msgid "E_ncryption password"
 msgstr "เ_ข้ารหัสรหัสผ่าน"
 
-#: deja-dup/AssistantOperation.vala:338
+#: deja-dup/AssistantOperation.vala:379
 msgid "Confir_m password"
 msgstr "ยื_นยันรหัสผ่าน"
 
-#: deja-dup/AssistantOperation.vala:351 deja-dup/AssistantOperation.vala:399
+#: deja-dup/AssistantOperation.vala:392 deja-dup/AssistantOperation.vala:440
 msgid "_Show password"
 msgstr "แ_สดงรหัสผ่าน"
 
-#: deja-dup/AssistantOperation.vala:358
+#: deja-dup/AssistantOperation.vala:399
 #: deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_จำรหัสผ่าน"
 
-#: deja-dup/AssistantOperation.vala:377
+#: deja-dup/AssistantOperation.vala:418
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -689,15 +698,19 @@ msgstr ""
 "เพื่อเป็นการตรวจสอบว่าคุณจะสามารถดึงแฟ้มของคุณมาใช้ในยามฉุกเฉินได้ "
 "โปรดป้อนรหัสผ่านการเข้ารหัสข้อมูลของคุณอีกครั้งเพื่อทำการทดสอบแบบสั้น ๆ"
 
-#: deja-dup/AssistantOperation.vala:404
+#: deja-dup/AssistantOperation.vala:445
 msgid "Test every two _months"
 msgstr "_ทดสอบทุก ๆ สองเดือน"
 
-#: deja-dup/AssistantOperation.vala:478
+#: deja-dup/AssistantOperation.vala:512
+msgid "Install Packages"
+msgstr ""
+
+#: deja-dup/AssistantOperation.vala:527
 msgid "Summary"
 msgstr "สรุป"
 
-#: deja-dup/AssistantOperation.vala:500
+#: deja-dup/AssistantOperation.vala:549
 msgid "Restore Test"
 msgstr "เรียกคืนการทดสอบ"
 
@@ -707,23 +720,28 @@ msgstr "เรียกคืนการทดสอบ"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: deja-dup/AssistantOperation.vala:575
+#: deja-dup/AssistantOperation.vala:621
 #: libdeja/tools/duplicity/DuplicityJob.vala:710
 #: libdeja/tools/duplicity/DuplicityJob.vala:1098
 msgid "Failed with an unknown error."
 msgstr "ล้มเหลวโดยไม่ทราบข้อผิดพลาด"
 
-#: deja-dup/AssistantOperation.vala:772
+#: deja-dup/AssistantOperation.vala:819
 msgid "Require Password?"
 msgstr "ต้องใช้รหัสผ่านหรือไม่?"
 
-#: deja-dup/AssistantOperation.vala:774
+#: deja-dup/AssistantOperation.vala:821
 msgid "Encryption Password Needed"
 msgstr "จำเป็นต้องเข้ารหัสรหัสผ่าน"
 
-#: deja-dup/AssistantOperation.vala:846
+#: deja-dup/AssistantOperation.vala:893
 msgid "Backup encryption password"
 msgstr "สำรองข้อมูลการเข้ารหัสรหัสผ่าน"
+
+#: deja-dup/AssistantOperation.vala:963
+msgctxt "verb"
+msgid "_Install"
+msgstr ""
 
 #: deja-dup/AssistantRestore.vala:69
 msgid "_Restore"
@@ -828,7 +846,7 @@ msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "การกู้คืนแฟ้มของคุณสำเร็จแล้ว"
 
-#: deja-dup/AssistantRestore.vala:484 libdeja/Operation.vala:63
+#: deja-dup/AssistantRestore.vala:484 libdeja/Operation.vala:64
 msgid "Restoring…"
 msgstr "กำลังกู้คืน..."
 
@@ -873,39 +891,35 @@ msgstr[0] "กำลังสแกนแฟ้มของ %d ปี ที่�
 msgid "Scanning finished"
 msgstr "การสแกนเสร็จสิ้น"
 
-#: deja-dup/Assistant.vala:38 deja-dup/widgets/ConfigLocationFile.vala:53
-msgid "_OK"
-msgstr "_ตกลง"
-
-#: deja-dup/Assistant.vala:298
-msgid "_Forward"
-msgstr "ถั_ดไป"
-
-#: deja-dup/Assistant.vala:316
+#: deja-dup/Assistant.vala:313
 msgid "Co_ntinue"
 msgstr "_ดำเนินการต่อ"
 
-#: deja-dup/Assistant.vala:322
+#: deja-dup/Assistant.vala:319
 msgctxt "verb"
 msgid "_Test"
 msgstr "_ทดสอบ"
 
-#: deja-dup/Assistant.vala:352 deja-dup/widgets/ConfigList.vala:255
+#: deja-dup/Assistant.vala:353
+msgid "_Resume Later"
+msgstr "_ทำต่อภายหลัง"
+
+#: deja-dup/Assistant.vala:357
+msgid "_Back"
+msgstr "_ย้อนกลับ"
+
+#: deja-dup/Assistant.vala:359
+msgid "_Close"
+msgstr "_ปิด"
+
+#: deja-dup/Assistant.vala:363 deja-dup/widgets/ConfigList.vala:255
 #: deja-dup/widgets/ConfigLocationFile.vala:52
 msgid "_Cancel"
 msgstr "_ยกเลิก"
 
-#: deja-dup/Assistant.vala:354
-msgid "_Close"
-msgstr "_ปิด"
-
-#: deja-dup/Assistant.vala:358
-msgid "_Back"
-msgstr "_ย้อนกลับ"
-
-#: deja-dup/Assistant.vala:360
-msgid "_Resume Later"
-msgstr "_ทำต่อภายหลัง"
+#: deja-dup/Assistant.vala:374
+msgid "_Forward"
+msgstr "ถั_ดไป"
 
 #: deja-dup/main.vala:31 deja-dup/monitor/monitor.vala:34
 msgid "Show version"
@@ -991,67 +1005,53 @@ msgstr "เชื่อมต่อเป็นผู้ใ_ช้"
 msgid "_Domain"
 msgstr "โ_ดเมน"
 
-#: deja-dup/Preferences.vala:105 deja-dup/Preferences.vala:258
-msgid "_Back Up Now…"
-msgstr "_สำรองข้อมูลเดี๋ยวนี้..."
-
-#: deja-dup/Preferences.vala:107 deja-dup/Preferences.vala:212
-msgid "_Restore…"
-msgstr "กู้_คืน..."
-
-#: deja-dup/Preferences.vala:125
-msgid "Could not install"
-msgstr "ไม่สามารถติดตั้งได้"
-
-#: deja-dup/Preferences.vala:159
+#: deja-dup/Preferences.vala:78
 msgid "Categories"
 msgstr "หมวด"
 
-#: deja-dup/Preferences.vala:212
-msgid "_Install…"
-msgstr "_ติดตั้ง…"
+#: deja-dup/Preferences.vala:131
+msgid "_Restore…"
+msgstr "กู้_คืน..."
 
-#: deja-dup/Preferences.vala:258
-#: deja-dup/widgets/ConfigLabelDescription.vala:63
-#: deja-dup/widgets/ConfigLabelDescription.vala:87
-msgid "Install…"
-msgstr "ติดตั้ง…"
+#: deja-dup/Preferences.vala:163
+msgid "_Back Up Now…"
+msgstr "_สำรองข้อมูลเดี๋ยวนี้..."
 
-#: deja-dup/Preferences.vala:283
+#: deja-dup/Preferences.vala:174
 msgid "Overview"
 msgstr "ภาพรวม"
 
-#: deja-dup/Preferences.vala:317
+#: deja-dup/Preferences.vala:208
 msgid "_Storage location"
 msgstr "_ตำแหน่งที่ตั้งของที่เก็บข้อมูล"
 
 #. Translators: storage as in "where to store the backup"
-#: deja-dup/Preferences.vala:334
+#: deja-dup/Preferences.vala:225
 msgid "Storage location"
 msgstr "ตำแหน่งที่ตั้งของที่เก็บข้อมูล"
 
-#: deja-dup/Preferences.vala:358
+#: deja-dup/Preferences.vala:248
 msgid "_Automatic backup"
 msgstr "_สำรองข้อมูลอัตโนมัติ"
 
 #. translators: as in "Every day"
-#: deja-dup/Preferences.vala:369
+#: deja-dup/Preferences.vala:259
 msgid "_Every"
 msgstr "_ทุก"
 
-#: deja-dup/Preferences.vala:379
+#: deja-dup/Preferences.vala:269
 msgctxt "verb"
 msgid "_Keep"
 msgstr "_คงไว้"
 
-#: deja-dup/Preferences.vala:386
+#: deja-dup/Preferences.vala:276
 msgid ""
 "Old backups will be deleted earlier if the storage location is low on space."
 msgstr ""
 "การสำรองข้อมูลครั้งเก่าจะถูกลบ "
 "ถ้าตำแหน่งที่ตั้งของที่เก็บข้อมูลเหลือพื้นที่ว่างน้อย"
 
-#: deja-dup/Preferences.vala:396
+#: deja-dup/Preferences.vala:286
 msgid "Scheduling"
 msgstr "การจัดตารางงาน"
 
@@ -1100,8 +1100,8 @@ msgstr "กำลังเริ่มการสำรองข้อมูล
 msgid "%.1f%% complete"
 msgstr "สมบูรณ์แล้ว %.1f%%"
 
-#: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:45
-#: libdeja/BackendS3.vala:55
+#: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:50
+#: libdeja/BackendS3.vala:60
 msgid "Backup will begin when a network connection becomes available."
 msgstr "การสำรองจะเริ่มขึ้นเมื่อการเชื่อมต่อเครือข่ายเปิดใช้"
 
@@ -1166,47 +1166,29 @@ msgstr "ไม่มีการสำรองข้อมูลเมื่อ
 msgid "No backup scheduled."
 msgstr "ไม่ได้จัดตารางเวลาการสำรองข้อมูล"
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:64
-#, c-format
-msgid ""
-"You can restore existing backups after you first install some necessary "
-"software by clicking the %s button."
-msgstr ""
-"คุณสามารถกู้คืนข้อมูลสำรองที่มีอยู่ได้หลังจากที่คุณติดตั้งซอฟต์แวร์บางรายการท"
-"ี่จำเป็นโดยคลิกปุ่ม %s"
-
 #. This here encodes a lot of outside GUI information in this widget,
 #. but it's a very special case thing.
-#: deja-dup/widgets/ConfigLabelDescription.vala:73
+#: deja-dup/widgets/ConfigLabelDescription.vala:66
 msgid "Restore…"
 msgstr "กู้คืน..."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:75
+#: deja-dup/widgets/ConfigLabelDescription.vala:68
 #, c-format
 msgid "You may use the %s button to browse for existing backups."
 msgstr "คุณสามารถใช้ปุ่ม %s ในการเรียกดูข้อมูลสำรองที่มีอยู่ได้"
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:80
+#: deja-dup/widgets/ConfigLabelDescription.vala:73
 #, c-format
 msgid ""
 "You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
 msgstr ""
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:88
-#, c-format
-msgid ""
-"You can create a backup after you first install some necessary software by "
-"clicking the %s button."
-msgstr ""
-"คุณสามารถสร้างข้อมูลสำรองได้หลังจากที่คุณติดตั้งซอฟต์แวร์บางรายการที่จำเป็นโด"
-"ยคลิกปุ่ม %s"
-
-#: deja-dup/widgets/ConfigLabelDescription.vala:94
+#: deja-dup/widgets/ConfigLabelDescription.vala:81
 msgid "Back Up Now…"
 msgstr "สำรองข้อมูลเดี๋ยวนี้..."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:95
+#: deja-dup/widgets/ConfigLabelDescription.vala:82
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
@@ -1215,15 +1197,15 @@ msgstr ""
 "คุณควรจะ<a href=''>เปิดใช้งาน</a>การสำรองข้อมูลอัตโนมัติหรือกดปุ่ม %s "
 "เพื่อเริ่มสำรองข้อมูลได้เลย"
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:101
+#: deja-dup/widgets/ConfigLabelDescription.vala:88
 msgid "A backup automatically starts every day."
 msgstr "การสำรองข้อมูลจะเริ่มขึ้นโดยอัตโนมัติในทุก ๆ วัน"
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:103
+#: deja-dup/widgets/ConfigLabelDescription.vala:90
 msgid "A backup automatically starts every week."
 msgstr "การสำรองข้อมูลจะเริ่มขึ้นโดยอัตโนมัติในทุก ๆ สัปดาห์"
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:106
+#: deja-dup/widgets/ConfigLabelDescription.vala:93
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1260,7 +1242,7 @@ msgstr "โฟลเดอร์ในเครื่อง"
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:284 libdeja/BackendS3.vala:118
+#: deja-dup/widgets/ConfigLocation.vala:284 libdeja/BackendS3.vala:123
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -1272,7 +1254,7 @@ msgstr "ที่เก็บข้อมูลคลาวด์ของ Googl
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: deja-dup/widgets/ConfigLocation.vala:290 libdeja/BackendRackspace.vala:65
+#: deja-dup/widgets/ConfigLocation.vala:290 libdeja/BackendRackspace.vala:70
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
@@ -1363,7 +1345,7 @@ msgstr "ไม่สามารถแสดงผล %s"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: libdeja/BackendDrive.vala:98 libdeja/CommonUtils.vala:572
+#: libdeja/BackendDrive.vala:98 libdeja/CommonUtils.vala:571
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s บน %2$s"
@@ -1407,16 +1389,16 @@ msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
 
 #. Translators: %s is a folder.
-#: libdeja/BackendRackspace.vala:68
+#: libdeja/BackendRackspace.vala:73
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "%s บน Rackspace Cloud Files"
 
-#: libdeja/BackendRackspace.vala:111 libdeja/BackendS3.vala:164
+#: libdeja/BackendRackspace.vala:116 libdeja/BackendS3.vala:169
 msgid "Permission denied"
 msgstr "ไม่ได้รับอนุญาต"
 
-#: libdeja/BackendRackspace.vala:142
+#: libdeja/BackendRackspace.vala:147
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
@@ -1425,19 +1407,19 @@ msgstr ""
 "คุณสามารถสมัครเพื่อขอรับบัญชี Rackspace Cloud Files <a "
 "href=\"%s\">ออนไลน์</a>"
 
-#: libdeja/BackendRackspace.vala:143
+#: libdeja/BackendRackspace.vala:148
 msgid "Connect to Rackspace Cloud Files"
 msgstr "เชื่อมต่อไปยัง Rackspace Cloud Files"
 
-#: libdeja/BackendRackspace.vala:144
+#: libdeja/BackendRackspace.vala:149
 msgid "_API access key"
 msgstr "กุญแ_จเข้าถึง API"
 
-#: libdeja/BackendRackspace.vala:145
+#: libdeja/BackendRackspace.vala:150
 msgid "S_how API access key"
 msgstr "แส_ดงกุญแจเข้าถึง API"
 
-#: libdeja/BackendRackspace.vala:146
+#: libdeja/BackendRackspace.vala:151
 msgid "_Remember API access key"
 msgstr "จำกุญแจเ_ข้าถึง API"
 
@@ -1446,66 +1428,66 @@ msgid "Waiting for a network connection…"
 msgstr "กำลังรอการเชื่อมต่อเครื่อข่าย..."
 
 #. Translators: %s is a folder.
-#: libdeja/BackendS3.vala:121
+#: libdeja/BackendS3.vala:126
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "%s บน Amazon S3"
 
-#: libdeja/BackendS3.vala:195
+#: libdeja/BackendS3.vala:200
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr "คุณสามารถสมัครเพื่อขอรับบัญชี Amazon S3 <a href=\"%s\">ออนไลน์</a>"
 
-#: libdeja/BackendS3.vala:196
+#: libdeja/BackendS3.vala:201
 msgid "Connect to Amazon S3"
 msgstr "เชื่อมต่อไปยัง Amazon S3"
 
-#: libdeja/BackendS3.vala:197
+#: libdeja/BackendS3.vala:202
 msgid "_Access key ID"
 msgstr "_หมายเลขกุญแจการเข้าใช้"
 
-#: libdeja/BackendS3.vala:198
+#: libdeja/BackendS3.vala:203
 msgid "_Secret access key"
 msgstr "กุญแจ_ลับเพื่อใช้เข้าถึง"
 
-#: libdeja/BackendS3.vala:199
+#: libdeja/BackendS3.vala:204
 msgid "S_how secret access key"
 msgstr "แ_สดงกุญแจ_ลับเพื่อใช้เข้าถึง"
 
-#: libdeja/BackendS3.vala:200
+#: libdeja/BackendS3.vala:205
 msgid "_Remember secret access key"
 msgstr "_จำกุญแจลับเพื่อใช้เข้าถึง"
 
-#: libdeja/CommonUtils.vala:444
+#: libdeja/CommonUtils.vala:450
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr "ไม่พบเครื่องมือสำรองข้อมูลใน %s การติดตั้งของคุณไม่สำเร็จ"
 
-#: libdeja/CommonUtils.vala:446
+#: libdeja/CommonUtils.vala:452
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr "ไม่​สามารถ​โหลด​เครื่องมือสำรองข้อมูลได้ การติดตั้งของคุณไม่สำเร็จ"
 
-#: libdeja/CommonUtils.vala:452
+#: libdeja/CommonUtils.vala:458
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr "เครื่องมือสำรองข้อมูลเสียหาย การติดตั้งของคุณไม่สำเร็จ"
 
-#: libdeja/CommonUtils.vala:474
+#: libdeja/CommonUtils.vala:473
 msgid "Could not start backup tool"
 msgstr "ไม่สามารถเริ่มต้นเครื่องมือสำรองข้อมูลได้"
 
 #. Translators: this is the home folder and %s is the user's username
-#: libdeja/CommonUtils.vala:623
+#: libdeja/CommonUtils.vala:622
 #, c-format
 msgid "Home (%s)"
 msgstr "บ้านของ (%s)"
 
 #. Translators: this is the home folder
-#: libdeja/CommonUtils.vala:628
+#: libdeja/CommonUtils.vala:627
 msgid "Home"
 msgstr "บ้าน"
 
 #. Translators: this is the trash folder
-#: libdeja/CommonUtils.vala:633
+#: libdeja/CommonUtils.vala:632
 msgid "Trash"
 msgstr "ถังขยะ"
 
@@ -1525,19 +1507,19 @@ msgstr ""
 "ข้อมูลสำรองของคุณดูเหมือนจะซ้ำกัน "
 "คุณควรลบข้อมูลสำรองอันเดิมที่มีอยู่แล้วลองใหม่อีกครั้ง"
 
-#: libdeja/Operation.vala:61
+#: libdeja/Operation.vala:62
 msgid "Backing up…"
 msgstr "กำลังสำรองข้อมูล..."
 
-#: libdeja/Operation.vala:65
+#: libdeja/Operation.vala:66
 msgid "Checking for backups…"
 msgstr "กำลังตรวจสอบข้อมูลสำรอง..."
 
-#: libdeja/Operation.vala:67
+#: libdeja/Operation.vala:68
 msgid "Listing files…"
 msgstr "กำลังไล่เรียงแฟ้ม..."
 
-#: libdeja/Operation.vala:69 libdeja/Operation.vala:103
+#: libdeja/Operation.vala:70 libdeja/Operation.vala:104
 #: libdeja/tools/duplicity/DuplicityJob.vala:389
 #: libdeja/tools/duplicity/DuplicityJob.vala:396
 #: libdeja/tools/duplicity/DuplicityJob.vala:421
@@ -1689,16 +1671,16 @@ msgstr "ไม่พบแฟ้มข้อมูลสำรอง"
 msgid "Uploading…"
 msgstr "กำลังอัปโหลด..."
 
-#: libdeja/tools/duplicity/DuplicityPlugin.vala:41
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:46
 msgid "Could not understand duplicity version."
 msgstr "ไม่สามารถเข้าใจรุ่นของ duplicity ได้"
 
-#: libdeja/tools/duplicity/DuplicityPlugin.vala:51
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:56
 #, c-format
 msgid "Could not understand duplicity version ‘%s’."
 msgstr "ไม่สามารถเข้าใจรุ่น '%s' ของ duplicity ได้"
 
-#: libdeja/tools/duplicity/DuplicityPlugin.vala:54
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:59
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -1790,8 +1772,33 @@ msgstr ""
 #~ msgid "Show _Progress"
 #~ msgstr "แสดง_ความคืบหน้า"
 
+#~ msgid "Could not install"
+#~ msgstr "ไม่สามารถติดตั้งได้"
+
+#~ msgid "_Install…"
+#~ msgstr "_ติดตั้ง…"
+
+#~ msgid "Install…"
+#~ msgstr "ติดตั้ง…"
+
+#, c-format
+#~ msgid ""
+#~ "You can restore existing backups after you first install some necessary "
+#~ "software by clicking the %s button."
+#~ msgstr ""
+#~ "คุณสามารถกู้คืนข้อมูลสำรองที่มีอยู่ได้หลังจากที่คุณติดตั้งซอฟต์แวร์บางรายการท"
+#~ "ี่จำเป็นโดยคลิกปุ่ม %s"
+
 #~ msgid "Caja"
 #~ msgstr "Caja"
+
+#, c-format
+#~ msgid ""
+#~ "You can create a backup after you first install some necessary software by "
+#~ "clicking the %s button."
+#~ msgstr ""
+#~ "คุณสามารถสร้างข้อมูลสำรองได้หลังจากที่คุณติดตั้งซอฟต์แวร์บางรายการที่จำเป็นโด"
+#~ "ยคลิกปุ่ม %s"
 
 #~ msgid "SSH"
 #~ msgstr "SSH"

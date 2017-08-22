@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-08-14 17:05-0400\n"
-"PO-Revision-Date: 2017-08-04 23:02+0000\n"
+"POT-Creation-Date: 2017-08-17 00:27-0400\n"
+"PO-Revision-Date: 2017-08-17 23:11+0000\n"
 "Last-Translator: Michael Terry <mike@mterry.name>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2017-08-16 05:23+0000\n"
+"X-Launchpad-Export-Date: 2017-08-18 05:36+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
 "Language: gd\n"
 
@@ -94,7 +94,7 @@ msgstr "déjà;deja;dup;"
 msgid "Back Up"
 msgstr "Dèan lethbhreac-glèidhidh"
 
-#: data/org.gnome.DejaDup.gschema.xml:9 deja-dup/Preferences.vala:294
+#: data/org.gnome.DejaDup.gschema.xml:9 deja-dup/Preferences.vala:185
 msgid "Folders to save"
 msgstr "Pasganan ri an sàbhaladh"
 
@@ -108,7 +108,7 @@ msgid ""
 "relative to the user’s home directory."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:305
+#: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:196
 msgid "Folders to ignore"
 msgstr "Pasganan a thèid a leigeil seachad"
 
@@ -533,7 +533,7 @@ msgstr "_Fàg an-seo"
 msgid "Folder"
 msgstr "Pasgan"
 
-#: deja-dup/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:157
+#: deja-dup/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:164
 msgid "Scanning…"
 msgstr "'Ga sganadh..."
 
@@ -670,23 +670,32 @@ msgstr ""
 msgid "Backing Up…"
 msgstr "A' dèanamh lethbhreac-glèidhidh..."
 
-#: deja-dup/AssistantOperation.vala:156
+#: deja-dup/AssistantOperation.vala:80
+#: deja-dup/widgets/ConfigLocationFile.vala:53
+msgid "_OK"
+msgstr "_Ceart ma-tha"
+
+#: deja-dup/AssistantOperation.vala:163
 msgid "Scanning:"
 msgstr "'Ga sganadh:"
 
-#: deja-dup/AssistantOperation.vala:240
+#: deja-dup/AssistantOperation.vala:247
 msgid "_Details"
 msgstr "_Mion-fhiosrachadh"
 
-#: deja-dup/AssistantOperation.vala:288
+#: deja-dup/AssistantOperation.vala:293
+msgid "In order to continue, the following packages need to be installed:"
+msgstr ""
+
+#: deja-dup/AssistantOperation.vala:329
 msgid "_Allow restoring without a password"
 msgstr "_Ceadaich aiseag às aonais facail-fhaire"
 
-#: deja-dup/AssistantOperation.vala:294
+#: deja-dup/AssistantOperation.vala:335
 msgid "_Password-protect your backup"
 msgstr "Dìon an lethbhreac-glèidhidh agad le _facal-faire"
 
-#: deja-dup/AssistantOperation.vala:306
+#: deja-dup/AssistantOperation.vala:347
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
@@ -694,24 +703,24 @@ msgstr ""
 "Feumaidh tu am facal-faire agad mus urrainn dhut na faidhlichean agad "
 "aiseag. 'S dòcha gum b' fheairrde dhut an sgrìobadh sìos."
 
-#: deja-dup/AssistantOperation.vala:321 deja-dup/AssistantOperation.vala:390
+#: deja-dup/AssistantOperation.vala:362 deja-dup/AssistantOperation.vala:431
 msgid "E_ncryption password"
 msgstr "Facal-faire c_rioptachaidh"
 
-#: deja-dup/AssistantOperation.vala:338
+#: deja-dup/AssistantOperation.vala:379
 msgid "Confir_m password"
 msgstr "Dearb_h am facal-faire"
 
-#: deja-dup/AssistantOperation.vala:351 deja-dup/AssistantOperation.vala:399
+#: deja-dup/AssistantOperation.vala:392 deja-dup/AssistantOperation.vala:440
 msgid "_Show password"
 msgstr "_Seall am facal-faire"
 
-#: deja-dup/AssistantOperation.vala:358
+#: deja-dup/AssistantOperation.vala:399
 #: deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "Cuimhnich am facal-fai_re"
 
-#: deja-dup/AssistantOperation.vala:377
+#: deja-dup/AssistantOperation.vala:418
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -721,15 +730,19 @@ msgstr ""
 "faidhlichean agad ann an èiginn, cuir a-steach am facal-faire crioptachaidh "
 "agad a-rithist gus deuchainn aisig bheag a dhèanamh."
 
-#: deja-dup/AssistantOperation.vala:404
+#: deja-dup/AssistantOperation.vala:445
 msgid "Test every two _months"
 msgstr "Cuir fo dheuchainn a h-uile dà _mhìos"
 
-#: deja-dup/AssistantOperation.vala:478
+#: deja-dup/AssistantOperation.vala:512
+msgid "Install Packages"
+msgstr ""
+
+#: deja-dup/AssistantOperation.vala:527
 msgid "Summary"
 msgstr "Gearr-chunntas"
 
-#: deja-dup/AssistantOperation.vala:500
+#: deja-dup/AssistantOperation.vala:549
 msgid "Restore Test"
 msgstr "Deuchainn aisig"
 
@@ -739,23 +752,28 @@ msgstr "Deuchainn aisig"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: deja-dup/AssistantOperation.vala:575
+#: deja-dup/AssistantOperation.vala:621
 #: libdeja/tools/duplicity/DuplicityJob.vala:710
 #: libdeja/tools/duplicity/DuplicityJob.vala:1098
 msgid "Failed with an unknown error."
 msgstr "Dh'fhàillig e ri linn mearachd nach aithne dhuinn."
 
-#: deja-dup/AssistantOperation.vala:772
+#: deja-dup/AssistantOperation.vala:819
 msgid "Require Password?"
 msgstr "A bheil thu airson 's gun iarrar facal-faire?"
 
-#: deja-dup/AssistantOperation.vala:774
+#: deja-dup/AssistantOperation.vala:821
 msgid "Encryption Password Needed"
 msgstr "Tha feum air facal-faire crioptachaidh"
 
-#: deja-dup/AssistantOperation.vala:846
+#: deja-dup/AssistantOperation.vala:893
 msgid "Backup encryption password"
 msgstr "Facal-faire crioptachadh nan lethbhreacan-glèidhidh"
+
+#: deja-dup/AssistantOperation.vala:963
+msgctxt "verb"
+msgid "_Install"
+msgstr ""
 
 #: deja-dup/AssistantRestore.vala:69
 msgid "_Restore"
@@ -866,7 +884,7 @@ msgstr[1] "Chaidh na faidhlichean agad aiseag."
 msgstr[2] "Chaidh na faidhlichean agad aiseag."
 msgstr[3] "Chaidh na faidhlichean agad aiseag."
 
-#: deja-dup/AssistantRestore.vala:484 libdeja/Operation.vala:63
+#: deja-dup/AssistantRestore.vala:484 libdeja/Operation.vala:64
 msgid "Restoring…"
 msgstr "'Ga aiseag..."
 
@@ -919,39 +937,35 @@ msgstr[3] "A' sganadh airson faidhlichean o %d bliadhna air ais..."
 msgid "Scanning finished"
 msgstr "Deiseil leis an sganadh"
 
-#: deja-dup/Assistant.vala:38 deja-dup/widgets/ConfigLocationFile.vala:53
-msgid "_OK"
-msgstr "_Ceart ma-tha"
-
-#: deja-dup/Assistant.vala:298
-msgid "_Forward"
-msgstr "_Air adhart"
-
-#: deja-dup/Assistant.vala:316
+#: deja-dup/Assistant.vala:313
 msgid "Co_ntinue"
 msgstr "Le_an air adhart"
 
-#: deja-dup/Assistant.vala:322
+#: deja-dup/Assistant.vala:319
 msgctxt "verb"
 msgid "_Test"
 msgstr "_Dèan deuchainn"
 
-#: deja-dup/Assistant.vala:352 deja-dup/widgets/ConfigList.vala:255
+#: deja-dup/Assistant.vala:353
+msgid "_Resume Later"
+msgstr "_Lean air às a dhèidh seo"
+
+#: deja-dup/Assistant.vala:357
+msgid "_Back"
+msgstr "_Air ais"
+
+#: deja-dup/Assistant.vala:359
+msgid "_Close"
+msgstr "_Dùin"
+
+#: deja-dup/Assistant.vala:363 deja-dup/widgets/ConfigList.vala:255
 #: deja-dup/widgets/ConfigLocationFile.vala:52
 msgid "_Cancel"
 msgstr "_Sguir dheth"
 
-#: deja-dup/Assistant.vala:354
-msgid "_Close"
-msgstr "_Dùin"
-
-#: deja-dup/Assistant.vala:358
-msgid "_Back"
-msgstr "_Air ais"
-
-#: deja-dup/Assistant.vala:360
-msgid "_Resume Later"
-msgstr "_Lean air às a dhèidh seo"
+#: deja-dup/Assistant.vala:374
+msgid "_Forward"
+msgstr "_Air adhart"
 
 #: deja-dup/main.vala:31 deja-dup/monitor/monitor.vala:34
 msgid "Show version"
@@ -1036,67 +1050,53 @@ msgstr "Ceangail mar c_hleachdaiche"
 msgid "_Domain"
 msgstr "Àrainn-lì_n"
 
-#: deja-dup/Preferences.vala:105 deja-dup/Preferences.vala:258
-msgid "_Back Up Now…"
-msgstr "Dèan lethbhreac-_glèidhidh an-dràsta..."
-
-#: deja-dup/Preferences.vala:107 deja-dup/Preferences.vala:212
-msgid "_Restore…"
-msgstr "_Aisig..."
-
-#: deja-dup/Preferences.vala:125
-msgid "Could not install"
-msgstr "Cha b' urrainn dhuinn a stàladh"
-
-#: deja-dup/Preferences.vala:159
+#: deja-dup/Preferences.vala:78
 msgid "Categories"
 msgstr "Roinnean-seòrsa"
 
-#: deja-dup/Preferences.vala:212
-msgid "_Install…"
-msgstr "_Stàlaich…"
+#: deja-dup/Preferences.vala:131
+msgid "_Restore…"
+msgstr "_Aisig..."
 
-#: deja-dup/Preferences.vala:258
-#: deja-dup/widgets/ConfigLabelDescription.vala:63
-#: deja-dup/widgets/ConfigLabelDescription.vala:87
-msgid "Install…"
-msgstr "Stàlaich…"
+#: deja-dup/Preferences.vala:163
+msgid "_Back Up Now…"
+msgstr "Dèan lethbhreac-_glèidhidh an-dràsta..."
 
-#: deja-dup/Preferences.vala:283
+#: deja-dup/Preferences.vala:174
 msgid "Overview"
 msgstr "Foir-shealladh"
 
-#: deja-dup/Preferences.vala:317
+#: deja-dup/Preferences.vala:208
 msgid "_Storage location"
 msgstr "_Ionad an glèidhidh"
 
 #. Translators: storage as in "where to store the backup"
-#: deja-dup/Preferences.vala:334
+#: deja-dup/Preferences.vala:225
 msgid "Storage location"
 msgstr "Ionad an glèidhidh"
 
-#: deja-dup/Preferences.vala:358
+#: deja-dup/Preferences.vala:248
 msgid "_Automatic backup"
 msgstr "Lethbhreacan-glèidhidh fèin-obr_achail"
 
 #. translators: as in "Every day"
-#: deja-dup/Preferences.vala:369
+#: deja-dup/Preferences.vala:259
 msgid "_Every"
 msgstr "_Gach"
 
-#: deja-dup/Preferences.vala:379
+#: deja-dup/Preferences.vala:269
 msgctxt "verb"
 msgid "_Keep"
 msgstr "_Cum iad"
 
-#: deja-dup/Preferences.vala:386
+#: deja-dup/Preferences.vala:276
 msgid ""
 "Old backups will be deleted earlier if the storage location is low on space."
 msgstr ""
 "Thèid seann lethbhreacan-glèidhidh a sguabadh às nas tràithe ma tha an rum "
 "a' ruith air ionad a' ghlèidhidh."
 
-#: deja-dup/Preferences.vala:396
+#: deja-dup/Preferences.vala:286
 msgid "Scheduling"
 msgstr "Sgeidealan"
 
@@ -1148,8 +1148,8 @@ msgstr "A' tòiseachadh air lethbhreac-glèidhidh sgeidealaichte"
 msgid "%.1f%% complete"
 msgstr "%.1f%% air a choileanadh"
 
-#: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:45
-#: libdeja/BackendS3.vala:55
+#: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:50
+#: libdeja/BackendS3.vala:60
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "Tòisichidh sinn air an lethbhreac-ghlèidhidh nuair a bhios ceangal lìonraidh "
@@ -1229,49 +1229,31 @@ msgstr "Cha deach lethbhreac-glèidhidh a dhèanamh o chionn fhada."
 msgid "No backup scheduled."
 msgstr "Chan eil lethbhreac-glèidhidh air an sgeideal."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:64
-#, c-format
-msgid ""
-"You can restore existing backups after you first install some necessary "
-"software by clicking the %s button."
-msgstr ""
-"'S urrainn dhut lethbhreacan-glèidhidh aiseag nuair a bhios tu air am bathar-"
-"bog a tha a dhìth a stàladh 's tu a' briogadh air a' phutan \"%s\"."
-
 #. This here encodes a lot of outside GUI information in this widget,
 #. but it's a very special case thing.
-#: deja-dup/widgets/ConfigLabelDescription.vala:73
+#: deja-dup/widgets/ConfigLabelDescription.vala:66
 msgid "Restore…"
 msgstr "Aisig..."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:75
+#: deja-dup/widgets/ConfigLabelDescription.vala:68
 #, c-format
 msgid "You may use the %s button to browse for existing backups."
 msgstr ""
 "'S urrainn dhut am putan %s a cleachdadh gus rùrachadh airson lethbhreacan-"
 "glèidhidh a tha ann."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:80
+#: deja-dup/widgets/ConfigLabelDescription.vala:73
 #, c-format
 msgid ""
 "You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
 msgstr ""
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:88
-#, c-format
-msgid ""
-"You can create a backup after you first install some necessary software by "
-"clicking the %s button."
-msgstr ""
-"'S urrainn dhut lethbhreacan-glèidhidh a chruthachadh nuair a bhios tu air "
-"am bathar-bog a tha a dhìth a stàladh 's tu a' briogadh air a' phutan \"%s\"."
-
-#: deja-dup/widgets/ConfigLabelDescription.vala:94
+#: deja-dup/widgets/ConfigLabelDescription.vala:81
 msgid "Back Up Now…"
 msgstr "Dèan lethbhreac-glèidhidh an-dràsta..."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:95
+#: deja-dup/widgets/ConfigLabelDescription.vala:82
 #, c-format
 msgid ""
 "You should <a href=''>enable</a> automatic backups or use the %s button to "
@@ -1280,18 +1262,18 @@ msgstr ""
 "Bu chòir dhut lethbhreacan-glèidhidh fèin-obrachail a chur <a href=''>an "
 "comas</a> no am putan %s a chleachdadh gus fear a thòiseachadh an-dràsta."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:101
+#: deja-dup/widgets/ConfigLabelDescription.vala:88
 msgid "A backup automatically starts every day."
 msgstr ""
 "Tòisichear gu fèin-obrachail air lethbhreac-glèidhidh a dhèanamh gach latha."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:103
+#: deja-dup/widgets/ConfigLabelDescription.vala:90
 msgid "A backup automatically starts every week."
 msgstr ""
 "Tòisichear gu fèin-obrachail air lethbhreac-glèidhidh a dhèanamh gach "
 "seachdain."
 
-#: deja-dup/widgets/ConfigLabelDescription.vala:106
+#: deja-dup/widgets/ConfigLabelDescription.vala:93
 #, c-format
 msgid "A backup automatically starts every %d day."
 msgid_plural "A backup automatically starts every %d days."
@@ -1339,7 +1321,7 @@ msgstr "Pasgan ionadail"
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:284 libdeja/BackendS3.vala:118
+#: deja-dup/widgets/ConfigLocation.vala:284 libdeja/BackendS3.vala:123
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
@@ -1351,7 +1333,7 @@ msgstr "Google Cloud Storage"
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: deja-dup/widgets/ConfigLocation.vala:290 libdeja/BackendRackspace.vala:65
+#: deja-dup/widgets/ConfigLocation.vala:290 libdeja/BackendRackspace.vala:70
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
@@ -1445,7 +1427,7 @@ msgstr "Cha b' urrainn dhuinn %s a thaisbeanadh"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: libdeja/BackendDrive.vala:98 libdeja/CommonUtils.vala:572
+#: libdeja/BackendDrive.vala:98 libdeja/CommonUtils.vala:571
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s air %2$s"
@@ -1489,16 +1471,16 @@ msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
 
 #. Translators: %s is a folder.
-#: libdeja/BackendRackspace.vala:68
+#: libdeja/BackendRackspace.vala:73
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "%s air Rackspace Cloud Files"
 
-#: libdeja/BackendRackspace.vala:111 libdeja/BackendS3.vala:164
+#: libdeja/BackendRackspace.vala:116 libdeja/BackendS3.vala:169
 msgid "Permission denied"
 msgstr "Chaidh cead a dhiùltadh"
 
-#: libdeja/BackendRackspace.vala:142
+#: libdeja/BackendRackspace.vala:147
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
@@ -1507,19 +1489,19 @@ msgstr ""
 "'S urrainn dhut clàradh airson cunntas Rackspace Cloud Files <a "
 "href=\"%s\">air loidhne</a>."
 
-#: libdeja/BackendRackspace.vala:143
+#: libdeja/BackendRackspace.vala:148
 msgid "Connect to Rackspace Cloud Files"
 msgstr "Ceangail ri Rackspace Cloud Files"
 
-#: libdeja/BackendRackspace.vala:144
+#: libdeja/BackendRackspace.vala:149
 msgid "_API access key"
 msgstr "Iuchair inntrigeadh _API"
 
-#: libdeja/BackendRackspace.vala:145
+#: libdeja/BackendRackspace.vala:150
 msgid "S_how API access key"
 msgstr "S_eall iuchair inntrigeadh API"
 
-#: libdeja/BackendRackspace.vala:146
+#: libdeja/BackendRackspace.vala:151
 msgid "_Remember API access key"
 msgstr "_Cuimhnich iuchair inntrigeadh API"
 
@@ -1528,75 +1510,75 @@ msgid "Waiting for a network connection…"
 msgstr "A' feitheamh ri ceangal lìonraidh..."
 
 #. Translators: %s is a folder.
-#: libdeja/BackendS3.vala:121
+#: libdeja/BackendS3.vala:126
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "%s air Amazon S3"
 
-#: libdeja/BackendS3.vala:195
+#: libdeja/BackendS3.vala:200
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr ""
 "'S urrainn dhut clàradh airson cunntas Amazon S3 <a href=\"%s\">air "
 "loidhne</a>."
 
-#: libdeja/BackendS3.vala:196
+#: libdeja/BackendS3.vala:201
 msgid "Connect to Amazon S3"
 msgstr "Ceangail ri Amazon S3"
 
-#: libdeja/BackendS3.vala:197
+#: libdeja/BackendS3.vala:202
 msgid "_Access key ID"
 msgstr "Iuchair _inntrigeadh ID"
 
-#: libdeja/BackendS3.vala:198
+#: libdeja/BackendS3.vala:203
 msgid "_Secret access key"
 msgstr "Iuchair inntrigidh _dhìomhair"
 
-#: libdeja/BackendS3.vala:199
+#: libdeja/BackendS3.vala:204
 msgid "S_how secret access key"
 msgstr "S_eall an iuchair inntrigidh dhìomhair"
 
-#: libdeja/BackendS3.vala:200
+#: libdeja/BackendS3.vala:205
 msgid "_Remember secret access key"
 msgstr "_Cuimhnich an iuchair inntrigidh dhìomhair"
 
-#: libdeja/CommonUtils.vala:444
+#: libdeja/CommonUtils.vala:450
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr ""
 "Cha b' urrainn dhuinn inneal nan lethbhreacan-glèidhidh a lorg ann an %s. "
 "Chan eil an stàladh agad coileanta."
 
-#: libdeja/CommonUtils.vala:446
+#: libdeja/CommonUtils.vala:452
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr ""
 "Cha b' urrainn dhuinn inneal nan lethbhreacan-glèidhidh a luchdadh. Chan eil "
 "an stàladh agad coileanta."
 
-#: libdeja/CommonUtils.vala:452
+#: libdeja/CommonUtils.vala:458
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr ""
 "Tha inneal nan lethbhreacan-glèidhidh agad briste. Chan eil an stàladh agad "
 "coileanta."
 
-#: libdeja/CommonUtils.vala:474
+#: libdeja/CommonUtils.vala:473
 msgid "Could not start backup tool"
 msgstr ""
 "Cha b' urrainn dhuinn inneal nan lethbhreacan-glèidhidh a thòiseachadh"
 
 #. Translators: this is the home folder and %s is the user's username
-#: libdeja/CommonUtils.vala:623
+#: libdeja/CommonUtils.vala:622
 #, c-format
 msgid "Home (%s)"
 msgstr "Dhachaigh (%s)"
 
 #. Translators: this is the home folder
-#: libdeja/CommonUtils.vala:628
+#: libdeja/CommonUtils.vala:627
 msgid "Home"
 msgstr "Dhachaigh"
 
 #. Translators: this is the trash folder
-#: libdeja/CommonUtils.vala:633
+#: libdeja/CommonUtils.vala:632
 msgid "Trash"
 msgstr "An sgudal"
 
@@ -1616,19 +1598,19 @@ msgstr ""
 "Tha coltas gu bheil an lethbhreac-glèidhidh agad coirbte. Bu chòir dhut an "
 "lethbhreac-glèidhidh a sguabadh às agus feuchainn ris a-rithist."
 
-#: libdeja/Operation.vala:61
+#: libdeja/Operation.vala:62
 msgid "Backing up…"
 msgstr "A' dèanamh an lethbhric-ghlèidhidh..."
 
-#: libdeja/Operation.vala:65
+#: libdeja/Operation.vala:66
 msgid "Checking for backups…"
 msgstr "A' toirt sùil a bheil lethbhreacan-glèidhidh ann..."
 
-#: libdeja/Operation.vala:67
+#: libdeja/Operation.vala:68
 msgid "Listing files…"
 msgstr "A'  dèanamh liosta nam faidhlichean..."
 
-#: libdeja/Operation.vala:69 libdeja/Operation.vala:103
+#: libdeja/Operation.vala:70 libdeja/Operation.vala:104
 #: libdeja/tools/duplicity/DuplicityJob.vala:389
 #: libdeja/tools/duplicity/DuplicityJob.vala:396
 #: libdeja/tools/duplicity/DuplicityJob.vala:421
@@ -1788,16 +1770,16 @@ msgstr "Cha deach faidhlichean lethbhreacan-glèidhidh a lorg"
 msgid "Uploading…"
 msgstr "'Ga luchdadh suas...."
 
-#: libdeja/tools/duplicity/DuplicityPlugin.vala:41
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:46
 msgid "Could not understand duplicity version."
 msgstr "Cha b' urrainn dhuinn an tionndadh de Duplicity a thuigsinn."
 
-#: libdeja/tools/duplicity/DuplicityPlugin.vala:51
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:56
 #, c-format
 msgid "Could not understand duplicity version ‘%s’."
 msgstr "Cha b' urrainn dhuinn an tionndadh de Duplicity, %s, a thuigsinn."
 
-#: libdeja/tools/duplicity/DuplicityPlugin.vala:54
+#: libdeja/tools/duplicity/DuplicityPlugin.vala:59
 #, c-format
 msgid ""
 "Déjà Dup Backup Tool requires at least version %d.%d.%.2d of duplicity, but "
@@ -1890,6 +1872,31 @@ msgstr ""
 
 #~ msgid "Show _Progress"
 #~ msgstr "Seall _an t-adhartas"
+
+#~ msgid "Could not install"
+#~ msgstr "Cha b' urrainn dhuinn a stàladh"
+
+#~ msgid "_Install…"
+#~ msgstr "_Stàlaich…"
+
+#~ msgid "Install…"
+#~ msgstr "Stàlaich…"
+
+#, c-format
+#~ msgid ""
+#~ "You can restore existing backups after you first install some necessary "
+#~ "software by clicking the %s button."
+#~ msgstr ""
+#~ "'S urrainn dhut lethbhreacan-glèidhidh aiseag nuair a bhios tu air am bathar-"
+#~ "bog a tha a dhìth a stàladh 's tu a' briogadh air a' phutan \"%s\"."
+
+#, c-format
+#~ msgid ""
+#~ "You can create a backup after you first install some necessary software by "
+#~ "clicking the %s button."
+#~ msgstr ""
+#~ "'S urrainn dhut lethbhreacan-glèidhidh a chruthachadh nuair a bhios tu air "
+#~ "am bathar-bog a tha a dhìth a stàladh 's tu a' briogadh air a' phutan \"%s\"."
 
 #~ msgid "SSH"
 #~ msgstr "SSH"
