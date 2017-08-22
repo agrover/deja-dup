@@ -863,7 +863,8 @@ public abstract class AssistantOperation : Assistant
       configure_password_page(first);
     }
     else {
-      interrupt(nag_page);
+      // interrupt, but stay visible so user can see reassuring message at end
+      interrupt(nag_page, true /* can_continue */, true /* stay_visible */);
       configure_nag_page();
       nagged = true;
     }

@@ -225,12 +225,12 @@ public abstract class Assistant : Gtk.Window
     }
   }
 
-  public void interrupt(Gtk.Widget page, bool can_continue = true)
+  public void interrupt(Gtk.Widget page, bool can_continue = true, bool stay_visible = false)
   {
     weak List<PageInfo> was = current;
     interrupt_can_continue = can_continue;
     go_to_page(page);
-    if (!visible) { // If we are interrupting from a hidden mode
+    if (!visible && !stay_visible) { // If we are interrupting from a hidden mode
       interrupted_from_hidden = true;
     }
     interrupted = was;
