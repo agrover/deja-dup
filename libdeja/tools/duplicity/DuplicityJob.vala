@@ -19,9 +19,13 @@
 
 using GLib;
 
-// we don't want to include external strings in our pot file
-[CCode (cname = "g_dgettext", cheader_filename = "glib/gi18n-lib.h")]
-public extern unowned string external_dgettext (string? domain, [FormatArg] string msgid);
+[CCode (cheader_filename = "gpgrt.h", cname = "gpg_err_code_t", cprefix = "GPG_ERR_", has_type_id = false)]
+public enum GPGError {
+	BAD_KEY = 19,
+}
+
+[CCode (cheader_filename = "gpgrt.h")]
+public extern unowned string gpg_strerror(GPGError code);
 
 internal class DuplicityJob : DejaDup.ToolJob
 {
@@ -942,10 +946,9 @@ internal class DuplicityJob : DejaDup.ToolJob
         // GPG does not expose the true reason in a machine-readable way for duplicity
         // to pass on.  So we try to find out why it failed by looking for the
         // "bad session key" error message that is given if the password was incorrect.
-        // If we wanted to be even fancier, we'd compile against libgpg-error and use
-        // gpg_strerror(GPG_ERR_BAD_KEY). Any other error should be presented to the
-        // user so they can maybe fix it (bad configuration files or something).
-        var bad_key_msg = external_dgettext("libgpg-error", "Bad session key");
+        // Any other error should be presented to the user so they can maybe fix it
+        // (bad configuration files or something).
+        var bad_key_msg = gpg_strerror(GPGError.BAD_KEY);
         if (text_in.contains(bad_key_msg)) {
           bad_encryption_password(); // notify upper layers, if they want to do anything
           text = _("Bad encryption password.");

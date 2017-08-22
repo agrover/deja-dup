@@ -56,6 +56,10 @@ packagekit_dep = dependency('packagekit-glib2', version: '>=0.6.5')
 peas_dep = dependency('libpeas-1.0')
 secret_dep = dependency('libsecret-1')
 
+# libgpg-error doesn't ship a pkg-config file
+gpgerror_libs = run_command('gpg-error-config', '--libs').stdout().strip()
+gpgerror_dep = declare_dependency(link_args: gpgerror_libs)
+
 # Programs
 appstream_util = find_program('appstream-util')
 dbus_run_session = find_program('dbus-run-session')
