@@ -297,6 +297,7 @@ public abstract class Assistant : Gtk.Window
 
     bool show_cancel = false, show_back = false, show_forward = false,
          show_close = false, show_resume = false;
+    bool has_default = false;
     string forward_text = info.forward_text;
 
     switch (info.type) {
@@ -347,17 +348,23 @@ public abstract class Assistant : Gtk.Window
 
     if (show_forward) {
       forward_button = add_button(info.forward_text, FORWARD);
-      forward_button.grab_default();
+      if (!has_default)
+        forward_button.grab_default();
+      has_default = true;
     }
     if (show_resume) {
       resume_button = add_button(_("_Resume Later"), RESUME);
-      resume_button.grab_default();
+      if (!has_default)
+        resume_button.grab_default();
+      has_default = true;
     }
     if (show_back)
       back_button = add_button(_("_Back"), BACK);
     if (show_close) {
       close_button = add_button(_("_Close"), CLOSE);
-      close_button.grab_default();
+      if (!has_default)
+        close_button.grab_default();
+      has_default = true;
     }
     if (show_cancel)
       cancel_button = add_button(_("_Cancel"), CANCEL);
