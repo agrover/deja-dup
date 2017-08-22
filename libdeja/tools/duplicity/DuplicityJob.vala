@@ -34,6 +34,7 @@ internal class DuplicityJob : DejaDup.ToolJob
   bool was_stopped {get; private set; default = false;}
 
   protected enum State {
+    NOT_STARTED,
     NORMAL,
     DRY_RUN, // used when backing up, and we need to first get time estimate
     STATUS, // used when backing up, and we need to first get collection info
