@@ -16,19 +16,19 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-all: builddir
+all: configure
 	ninja -C builddir
 
 %:
 	@[ "$@" = "Makefile" ] || ninja -C builddir $@
 
-builddir:
-	@[ -d builddir ] || meson builddir
+configure:
+	@[ -f builddir/build.ninja ] || meson builddir
 
 check: all
 	LC_ALL=C.UTF-8 mesontest -C builddir
 
-dist: builddir screenshots pot
+dist: configure screenshots pot
 	rm -f builddir/meson-dist/*
 	ninja -C builddir dist
 	gpg --armor --sign --detach-sig builddir/meson-dist/deja-dup-*.tar.xz
@@ -63,7 +63,7 @@ screenshots: all
 	@gsettings reset org.gnome.desktop.interface icon-theme
 	@gsettings reset org.gnome.desktop.wm.preferences theme
 
-pot: builddir
+pot: configure
 	ninja -C builddir deja-dup-pot help-org.gnome.DejaDup-pot
 
 # call like 'make copy-po TD=path-to-translation-dir'
@@ -77,4 +77,4 @@ copy-po:
 	git add po/*.po
 	git add deja-dup/help/*/*.po
 
-.PHONY: builddir clean dist all copy-po check screenshots
+.PHONY: configure clean dist all copy-po check screenshots
