@@ -26,7 +26,7 @@ configure:
 	@[ -f builddir/build.ninja ] || meson builddir
 
 check: all
-	LC_ALL=C.UTF-8 mesontest -C builddir
+	LC_ALL=C.UTF-8 meson test -C builddir
 
 dist: configure screenshots pot
 	rm -f builddir/meson-dist/*
