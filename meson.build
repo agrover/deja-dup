@@ -52,7 +52,7 @@ goa_dep = dependency('goa-1.0', version: '>= 3.8.0')
 goabackend_dep = dependency('goa-backend-1.0')
 gtk_dep = dependency('gtk+-3.0', version: '>= 3.22')
 nautilus_dep = dependency('libnautilus-extension', required: false)
-packagekit_dep = dependency('packagekit-glib2', version: '>=0.6.5')
+packagekit_dep = dependency('packagekit-glib2', version: '>=0.6.5', required: false)
 peas_dep = dependency('libpeas-1.0')
 secret_dep = dependency('libsecret-1')
 
@@ -88,6 +88,10 @@ common_cflags = [
     '-DLOCALE_DIR="@0@"'.format(localedir),
     '-DTHEME_DIR="@0@"'.format(join_paths(datadir, 'icons')),
     '-DPKG_LIBEXEC_DIR="@0@"'.format(pkglibexecdir)]
+
+if packagekit_dep.found()
+common_vflags += ['--define=HAS_PACKAGEKIT']
+endif
 
 subdir('data')
 subdir('libdeja')

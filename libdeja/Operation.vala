@@ -271,6 +271,7 @@ public abstract class Operation : Object
     yield subop.start();
   }
 
+#if HAS_PACKAGEKIT
   async Pk.Results? get_pk_results(Pk.Client client, Pk.Bitfield bitfield, string[] pkgs)
   {
     Pk.Results results;
@@ -292,10 +293,12 @@ public abstract class Operation : Object
 
     return results;
   }
+#endif
 
   // Returns true if we're all set, false if we should wait for install
   async void check_dependencies()
   {
+#if HAS_PACKAGEKIT
     var deps = backend.get_dependencies();
     foreach (string dep in DejaDup.get_tool().get_dependencies())
       deps += dep;
@@ -344,6 +347,7 @@ public abstract class Operation : Object
 
     if (package_names.length > 0)
       install(package_names, package_ids); // will block
+#endif
   }
 }
 

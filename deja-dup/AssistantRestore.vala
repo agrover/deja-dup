@@ -392,7 +392,9 @@ public class AssistantRestore : AssistantOperation
     op.done.connect(query_finished);
     op.raise_error.connect((o, e, d) => {show_error(e, d);});
     op.passphrase_required.connect(get_passphrase);
+#if HAS_PACKAGEKIT
     op.install.connect(show_install);
+#endif
     query_op.collection_dates.connect(handle_collection_dates);
     op.backend.mount_op = new MountOperationAssistant(this);
     op.backend.pause_op.connect(pause_op);

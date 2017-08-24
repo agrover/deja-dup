@@ -630,7 +630,9 @@ public abstract class AssistantOperation : Assistant
     op.action_file_changed.connect(set_progress_label_file);
     op.progress.connect(show_progress);
     op.question.connect(show_question);
+#if HAS_PACKAGEKIT
     op.install.connect(show_install);
+#endif
     op.backend.mount_op = new MountOperationAssistant(this);
     op.backend.pause_op.connect(pause_op);
 
@@ -929,6 +931,7 @@ public abstract class AssistantOperation : Assistant
     Gtk.main();
   }
 
+#if HAS_PACKAGEKIT
   async void start_install(string[] package_ids, MainLoop loop)
   {
     backend_install_desc.hide();
@@ -970,6 +973,7 @@ public abstract class AssistantOperation : Assistant
 
     loop.run();
   }
+#endif
 
   protected void pause_op(DejaDup.Backend back, string? header, string? msg)
   {
