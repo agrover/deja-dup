@@ -1,0 +1,84 @@
+{
+    "app-id": "org.gnome.DejaDup",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "3.24",
+    "sdk": "org.gnome.Sdk",
+    "command": "deja-dup",
+    "rename-icon": "deja-dup",
+    "finish-args": [
+        "--socket=wayland",
+
+        "--socket=x11",
+        "--share=ipc",
+
+        "--filesystem=host",
+
+        "--share=network",
+        "--system-talk-name=org.freedesktop.NetworkManager",
+
+        "--talk-name=org.freedesktop.secrets",
+        "--talk-name=org.gnome.OnlineAccounts",
+
+        "--filesystem=xdg-run/dconf",
+        "--filesystem=~/.config/dconf:ro",
+        "--talk-name=ca.desrt.dconf",
+        "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
+     ],
+    "modules": [
+        {
+            "name": "librest",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/rest/0.8/rest-0.8.0.tar.xz",
+                    "sha256": "e7b89b200c1417073aef739e8a27ff2ab578056c27796ec74f5886a5e0dff647"
+                }
+            ]
+        },
+        {
+            "name": "gnome-online-accounts",
+            "config-opts": [ "--disable-telepathy", "--disable-documentation", "--disable-gtk-doc" ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.24/gnome-online-accounts-3.24.2.tar.xz",
+                    "sha256": "b70ad52d1541e1e5192dd060bb11552a3af5007ab477aa81d265d1cd1cf7afba"
+                }
+            ]
+        },
+        {
+            "name": "libpeas",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/libpeas/1.21/libpeas-1.21.0.tar.xz",
+                    "sha256": "afb9a8880d53e0599fb1e3ddddfb9d173db18b94d9323f4efd24f07fa241f70c"
+                }
+            ]
+        },
+        {
+            "name": "libgpg-error",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.27.tar.bz2",
+                    "sha256": "4f93aac6fecb7da2b92871bb9ee33032be6a87b174f54abf8ddf0911a22d29d2"
+                }
+            ]
+        },
+        {
+            "name": "deja-dup",
+            "buildsystem": "meson",
+            "builddir": true,
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.launchpad.net/deja-dup"
+                }
+            ],
+            "post-install": [
+                "glib-compile-schemas /app/share/glib-2.0/schemas/"
+            ]
+        }
+    ]
+}
