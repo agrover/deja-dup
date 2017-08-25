@@ -95,7 +95,7 @@ public abstract class StatusIcon : Object
       var note = new Notification(msg);
       if (more != null)
         note.set_body(more);
-      note.set_icon(new ThemedIcon("deja-dup"));
+      note.set_icon(new ThemedIcon("org.gnome.DejaDup"));
       note.set_priority(priority);
       note.set_default_action("app.op-show");
       Application.get_default().send_notification("backup-status", note);
@@ -118,7 +118,7 @@ class ShellStatusIcon : StatusIcon
   construct {
     if (automatic && op.mode == DejaDup.ToolJob.Mode.BACKUP) {
       var note = new Notification(_("Starting scheduled backup"));
-      note.set_icon(new ThemedIcon("deja-dup"));
+      note.set_icon(new ThemedIcon("org.gnome.DejaDup"));
       note.set_default_action("app.op-show");
       Application.get_default().send_notification("backup-status", note);
     }
@@ -135,7 +135,7 @@ class LegacyStatusIcon : StatusIcon
   Gtk.StatusIcon icon;
   construct {
     icon = new Gtk.StatusIcon();
-    icon.icon_name = "deja-dup";
+    icon.icon_name = "org.gnome.DejaDup";
     icon.title = Environment.get_application_name();
     icon.activate.connect(() => {show_window(true);});
 

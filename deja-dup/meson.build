@@ -18,9 +18,6 @@
 
 subdir('widgets')
 
-resources = gnome.compile_resources('resources', 'resources.xml',
-    source_dir: ['ui'])
-
 deja_dup = executable('deja-dup',
     ['main.vala',
      'Assistant.vala',

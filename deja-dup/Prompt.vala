@@ -62,7 +62,7 @@ void show_prompt_notification(Gtk.Application app)
 {
   var note = new Notification(get_header());
   note.set_body(get_body());
-  note.set_icon(new ThemedIcon("deja-dup"));
+  note.set_icon(new ThemedIcon("org.gnome.DejaDup"));
   note.set_default_action("app.prompt-ok");
   note.add_button(get_cancel_button(false), "app.prompt-cancel");
   note.add_button(get_ok_button(false), "app.prompt-ok");
@@ -77,7 +77,7 @@ Gtk.Window show_prompt_dialog(Gtk.Application app)
   dlg.skip_taskbar_hint = false;
   dlg.set_title(_("Backups"));
 
-  var img = new Gtk.Image.from_icon_name("deja-dup", Gtk.IconSize.DIALOG);
+  var img = new Gtk.Image.from_icon_name("org.gnome.DejaDup", Gtk.IconSize.DIALOG);
   img.yalign = 0.0f;
   img.show();
   dlg.set_image(img);

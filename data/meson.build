@@ -72,5 +72,8 @@ vars = configure_file(input: 'org.gnome.DejaDup.policy.in',
     configuration: conf_data,
     install_dir: join_paths(datadir, 'polkit-1', 'actions'))
 
+resources = gnome.compile_resources('resources', 'resources.xml',
+    source_dir: ['ui'])
+
 message('You may need to recompile your gsettings schemas or regenerate
          your icon cache after installation.')

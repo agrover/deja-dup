@@ -130,7 +130,7 @@ public class DejaDupApp : Gtk.Application
       string body = null;
       options.lookup("delay", "s", ref body);
       note.set_body(body);
-      note.set_icon(new ThemedIcon("deja-dup"));
+      note.set_icon(new ThemedIcon("org.gnome.DejaDup"));
       send_notification("backup-status", note);
     }
     else if (options.contains("prompt")) {
@@ -226,7 +226,7 @@ public class DejaDupApp : Gtk.Application
     unowned List<Gtk.Window> list = get_windows();
     Gtk.show_about_dialog(list == null ? null : list.data,
                           "license-type", Gtk.License.GPL_3_0,
-                          "logo-icon-name", "deja-dup",
+                          "logo-icon-name", "org.gnome.DejaDup",
                           "translator-credits", _("translator-credits"),
                           "version", Config.VERSION,
                           "website", "https://wiki.gnome.org/Apps/DejaDup");

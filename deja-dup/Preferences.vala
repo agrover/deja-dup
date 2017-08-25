@@ -111,7 +111,7 @@ public class Preferences : Gtk.Grid
 
     label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
 
-    w = new Gtk.Image.from_icon_name("deja-dup-symbolic", Gtk.IconSize.DIALOG);
+    w = new Gtk.Image.from_icon_name("org.gnome.DejaDup-symbolic", Gtk.IconSize.DIALOG);
     w.halign = Gtk.Align.CENTER;
     w.valign = Gtk.Align.START;
     table.attach(w, 0, row, 1, 3);
