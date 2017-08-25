@@ -77,4 +77,8 @@ copy-po:
 	git add po/*.po
 	git add deja-dup/help/*/*.po
 
-.PHONY: configure clean dist all copy-po check screenshots
+flatpak:
+	mkdir -p builddir
+	flatpak-builder builddir/flatpak flatpak/org.gnome.DejaDup.json
+
+.PHONY: configure clean dist all copy-po check screenshots flatpak
