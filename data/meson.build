@@ -38,6 +38,16 @@ configure_file(input: 'org.gnome.DejaDup.service.in',
     configuration: conf_data,
     install_dir: join_paths(datadir, 'dbus-1', 'services'))
 
+conf_data = configuration_data()
+conf_data.set('pkglibexecdir', pkglibexecdir)
+configure_file(input: 'org.gnome.DejaDup.Monitor.desktop.in',
+    output: 'org.gnome.DejaDup.Monitor.desktop',
+    configuration: conf_data,
+    install_dir: join_paths(etcdir, 'xdg', 'autostart'))
+
+test('validate-org.gnome.DejaDup.Monitor.desktop', desktop_file_validate,
+    args: ['org.gnome.DejaDup.Monitor.desktop'])
+
 deja_dup_desktop = custom_target('org.gnome.DejaDup.desktop',
     input: 'org.gnome.DejaDup.desktop',
     output: 'org.gnome.DejaDup.desktop',
@@ -67,7 +77,7 @@ test('validate-appstream', appstream_util,
 
 conf_data = configuration_data()
 conf_data.set('pkglibexecdir', pkglibexecdir)
-vars = configure_file(input: 'org.gnome.DejaDup.policy.in',
+configure_file(input: 'org.gnome.DejaDup.policy.in',
     output: 'org.gnome.DejaDup.policy',
     configuration: conf_data,
     install_dir: join_paths(datadir, 'polkit-1', 'actions'))

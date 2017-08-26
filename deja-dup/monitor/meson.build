@@ -25,19 +25,3 @@ executable('deja-dup-monitor', ['monitor.vala'],
     install: true,
     install_rpath: pkglibdir,
     install_dir: pkglibexecdir)
-
-conf_data = configuration_data()
-conf_data.set('pkglibexecdir', pkglibexecdir)
-vars = configure_file(input: 'deja-dup-monitor.desktop.in',
-    output: 'deja-dup-monitor.desktop.vars',
-    configuration: conf_data)
-monitor_desktop = custom_target('deja-dup-monitor.desktop',
-    input: vars,
-    output: 'deja-dup-monitor.desktop',
-    # List keywords due to https://savannah.gnu.org/support/?108887
-    command: [msgfmt, '--desktop', '--keyword=Name', '--keyword=Comment', '--template', '@INPUT@', '-d', podir, '-o', '@OUTPUT@'],
-    install: true,
-    install_dir: join_paths(etcdir, 'xdg', 'autostart'))
-
-test('validate-deja-dup-monitor.desktop', desktop_file_validate,
-    args: [monitor_desktop.full_path()])
