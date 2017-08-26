@@ -28,14 +28,15 @@ public abstract class ConfigWidget : Gtk.EventBox
   public Gtk.Widget mnemonic_widget {get; protected set;}
   public string key {get; construct;}
   public string ns {get; construct; default = "";}
+  public FilteredSettings settings {get; construct;}
 
   protected bool syncing;  
-  protected FilteredSettings settings;
-  protected List<FilteredSettings> all_settings;
+  List<FilteredSettings> all_settings;
   construct {
     visible_window = false;
 
-    settings = DejaDup.get_settings(ns);
+    if (settings == null)
+      settings = DejaDup.get_settings(ns);
     
     if (key != null)
       watch_key(key);

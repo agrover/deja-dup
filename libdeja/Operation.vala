@@ -44,7 +44,7 @@ public abstract class Operation : Object
 
   public bool use_cached_password {get; protected set; default = true;}
   public bool needs_password {get; set;}
-  public Backend backend {get; private set;}
+  public Backend backend {get; protected set;}
   public bool use_progress {get {return (job.flags & ToolJob.Flags.NO_PROGRESS) == 0;}
                             set {
                               if (value)
@@ -88,16 +88,11 @@ public abstract class Operation : Object
     set_passphrase(state.passphrase);
   }
 
-  FilteredSettings settings;
   internal ToolJob job;
   protected string passphrase;
   bool finished = false;
   string saved_detail = null;
   Operation chained_op = null;
-  construct
-  {
-    backend = Backend.get_default();
-  }
 
   public async virtual void start()
   {
@@ -110,11 +105,6 @@ public abstract class Operation : Object
 
   void restart()
   {
-    if (settings != null) {
-      settings.notify["backend"].disconnect(restart);
-      settings = null;
-    }
-
     if (job != null) {
       SignalHandler.disconnect_matched(job, SignalMatchType.DATA,
                                        0, 0, null, null, this);

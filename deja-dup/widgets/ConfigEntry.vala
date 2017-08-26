@@ -26,9 +26,9 @@ public class ConfigEntry : ConfigWidget
   public bool is_uri {get; set;}
   public Gtk.Entry entry {get; construct;}
 
-  public ConfigEntry(string key, string ns="", bool is_uri=false)
+  public ConfigEntry(string key, string ns="", FilteredSettings? settings=null, bool is_uri=false)
   {
-    Object(key: key, ns: ns, is_uri: is_uri);
+    Object(key: key, ns: ns, is_uri: is_uri, settings: settings);
   }
   
   public string get_text()

@@ -25,9 +25,9 @@ public class ConfigFolder : ConfigEntry
 {
   public bool abs_allowed {get; construct;}
 
-  public ConfigFolder(string key, string ns="", bool abs_allowed=false)
+  public ConfigFolder(string key, string ns="", FilteredSettings? settings=null, bool abs_allowed=false)
   {
-    Object(key: key, ns: ns, abs_allowed: abs_allowed);
+    Object(key: key, ns: ns, abs_allowed: abs_allowed, settings: settings);
   }
 
   protected override async void set_from_config()

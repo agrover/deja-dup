@@ -377,7 +377,7 @@ public bool is_nag_time()
   return (last_check.compare(now) <= 0);
 }
 
-public string get_folder_key(FilteredSettings settings, string key, bool abs_allowed = false)
+public string get_folder_key(Settings settings, string key, bool abs_allowed = false)
 {
   string folder = settings.get_string(key);
   if (folder.contains("$HOSTNAME")) {
@@ -389,43 +389,9 @@ public string get_folder_key(FilteredSettings settings, string key, bool abs_all
   return folder;
 }
 
-bool settings_read_only = false;
-HashTable<string, FilteredSettings> settings_table = null;
-public void set_settings_read_only(bool ro)
+public FilteredSettings get_settings(string? subdir = null)
 {
-  settings_read_only = ro;
-  if (settings_read_only) {
-    // When read only, we also need to make sure everyone shares the same
-    // settings object.  Otherwise, they will not notice the changes other
-    // parts of the code make.
-    settings_table = new HashTable<string, FilteredSettings>.full(str_hash,
-                                                                str_equal,
-                                                                g_free,
-                                                                g_object_unref);
-  }
-  else {
-    settings_table = null;
-  }
-}
-
-public FilteredSettings get_settings(string? subdir = null, string? path = null)
-{
-  string schema = "org.gnome.DejaDup";
-  if (subdir != null && subdir != "")
-    schema += "." + subdir;
-  FilteredSettings rv;
-  if (settings_read_only) {
-    rv = settings_table.lookup(schema);
-    if (rv == null) {
-      rv = new FilteredSettings(schema, true);
-      rv.delay(); // never to be apply()'d again
-      settings_table.insert(schema, rv);
-    }
-  }
-  else {
-    rv = new FilteredSettings(schema, false);
-  }
-  return rv;
+  return new FilteredSettings(subdir);
 }
 
 ToolPlugin tool = null;

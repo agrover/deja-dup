@@ -215,11 +215,21 @@ void setup()
 {
 }
 
+void reset_keys(Settings settings)
+{
+  var source = SettingsSchemaSource.get_default();
+  var schema = source.lookup(settings.schema_id, true);
+
+  foreach (string key in schema.list_keys())
+    settings.reset(key);
+
+  foreach (string child in schema.list_children())
+    reset_keys(settings.get_child(child));
+}
+
 void teardown()
 {
-  string[] roots = {"", "File", "Drive", "Local", "Remote"};
-  foreach (string root in roots)
-    DejaDup.get_settings(root).revert(); // works because we are read-only settings mode, which calls delay()
+  reset_keys(new Settings("org.gnome.DejaDup"));
 }
 
 int main(string[] args)
@@ -254,8 +264,6 @@ int main(string[] args)
 
   if (Posix.system("glib-compile-schemas %s".printf(schema_dir)) != 0)
     warning("Could not compile schemas in %s", schema_dir);
-
-  DejaDup.set_settings_read_only(true);
 
   var unit = new TestSuite("unit");
   unit.add(new TestCase("migrate-file-drive", setup, migrate_file_drive, teardown));

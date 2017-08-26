@@ -53,6 +53,7 @@ public class AssistantRestore : AssistantOperation
   Gtk.Box cust_box;
   Gtk.FileChooserButton cust_button;
   Gtk.Grid confirm_table;
+  DejaDup.ConfigLocation config_location;
   Gtk.Label confirm_location_label;
   Gtk.Label confirm_location;
   Gtk.Label confirm_date_label;
@@ -90,18 +91,18 @@ public class AssistantRestore : AssistantOperation
              "column-spacing", 12,
              "border-width", 12);
     
-    var location = new DejaDup.ConfigLocation(true, label_sizes);
+    config_location = new DejaDup.ConfigLocation(true, true, label_sizes);
     label = new Gtk.Label.with_mnemonic(_("_Backup location"));
     label.set("xalign", 1.0f,
-              "mnemonic-widget", location);
+              "mnemonic-widget", config_location);
     label_sizes.add_widget(label);
     page.attach(label, 0, rows, 1, 1);
-    location.set("hexpand", true);
-    page.attach(location, 1, rows, 1, 1);
+    config_location.hexpand = true;
+    page.attach(config_location, 1, rows, 1, 1);
     ++rows;
     
-    location.extras.set("hexpand", true);
-    page.attach(location.extras, 0, rows, 2, 1);
+    config_location.extras.hexpand = true;
+    page.attach(config_location.extras, 0, rows, 2, 1);
     ++rows;
 
     page.show_all();
@@ -110,7 +111,7 @@ public class AssistantRestore : AssistantOperation
     // ConfigLocation will need.
     Gtk.Requisition req, hidden;
     page.get_preferred_size(null, out req);
-    hidden = location.hidden_size();
+    hidden = config_location.hidden_size();
     req.width = req.width + hidden.width;
     req.height = req.height + hidden.height;
     page.set_size_request(req.width, req.height);
@@ -294,8 +295,8 @@ public class AssistantRestore : AssistantOperation
 
     realize();
 
-    var rest_op = new DejaDup.OperationRestore(restore_location, date,
-                                               restore_files);
+    var rest_op = new DejaDup.OperationRestore(config_location.get_backend(),
+                                               restore_location, date, restore_files);
     if (this.op_state != null)
       rest_op.set_state(this.op_state);
 
@@ -386,7 +387,7 @@ public class AssistantRestore : AssistantOperation
   {
     realize();
 
-    query_op = new DejaDup.OperationStatus();
+    query_op = new DejaDup.OperationStatus(config_location.get_backend());
     op = query_op;
 
     op.done.connect(query_finished);

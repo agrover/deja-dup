@@ -108,6 +108,8 @@ public class AssistantRestoreMissing : AssistantRestore {
   Gtk.ListStore listmodel;
   Gtk.Label list_dir_label;
 
+  DejaDup.Backend backend;
+
   /* List files page */
   //Gtk.Label current_scan_date = new Gtk.Label(_("Starting…"));
   Gtk.Label current_scan_date;
@@ -115,6 +117,7 @@ public class AssistantRestoreMissing : AssistantRestore {
 
   public AssistantRestoreMissing(File list_dir)
   {
+    backend = DejaDup.Backend.get_default();
     list_directory = list_dir;
   }
 
@@ -349,7 +352,7 @@ public class AssistantRestoreMissing : AssistantRestore {
     realize();
     
     /* Time object does not support GObject-style construction */
-    query_op_files = new DejaDup.OperationFiles(etime, list_directory);
+    query_op_files = new DejaDup.OperationFiles(backend, etime, list_directory);
     query_op_files.listed_current_files.connect(handle_listed_files);
     query_op_files.done.connect(query_files_finished);
     
@@ -464,7 +467,7 @@ public class AssistantRestoreMissing : AssistantRestore {
     var file_list = new GLib.List<File>();
     file_list.append(File.new_for_path(restore_file.name));
     
-    var rest_op = new DejaDup.OperationRestore("/", 
+    var rest_op = new DejaDup.OperationRestore(backend, "/",
                                                restore_file.deleted.format("%s"),
                                                file_list);
     rest_op.set_state(op_state);

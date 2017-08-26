@@ -30,8 +30,12 @@ const string GCS_SERVER = "www.googleapis.com";
 
 public class BackendGCS : Backend
 {
+  public BackendGCS(Settings? settings) {
+    Object(settings: (settings != null ? settings : get_settings(GCS_ROOT)));
+  }
+
   public override Backend clone() {
-    return new BackendGCS();
+    return new BackendGCS(settings);
   }
 
   public override string[] get_dependencies()
@@ -54,8 +58,6 @@ public class BackendGCS : Backend
 
   public override string get_location(ref bool as_root)
   {
-    var settings = get_settings(GCS_ROOT);
-    
     var bucket = settings.get_string(GCS_BUCKET_KEY);
     var folder = get_folder_key(settings, GCS_FOLDER_KEY);
 
@@ -64,7 +66,6 @@ public class BackendGCS : Backend
   
   public override string get_location_pretty()
   {
-    var settings = get_settings(GCS_ROOT);
     var bucket = settings.get_string(GCS_BUCKET_KEY);
     var folder = get_folder_key(settings, GCS_FOLDER_KEY);
     if (folder == "")
@@ -79,7 +80,6 @@ public class BackendGCS : Backend
   string secret_key;
   public override async void get_envp() throws Error
   {
-    var settings = get_settings(GCS_ROOT);
     settings_id = settings.get_string(GCS_ID_KEY);
     id = settings_id == null ? "" : settings_id;
     
@@ -159,7 +159,6 @@ public class BackendGCS : Backend
   }
   
   void got_secret_key() {
-    var settings = get_settings(GCS_ROOT);
     if (id != settings_id)
       settings.set_string(GCS_ID_KEY, id);
     

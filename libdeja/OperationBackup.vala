@@ -25,8 +25,8 @@ public class OperationBackup : Operation
 {
   File metadir;
 
-  public OperationBackup() {
-    Object(mode: ToolJob.Mode.BACKUP);
+  public OperationBackup(Backend backend) {
+    Object(mode: ToolJob.Mode.BACKUP, backend: backend);
   }
   
   internal async override void operation_finished(bool success, bool cancelled, string? detail)
@@ -39,7 +39,7 @@ public class OperationBackup : Operation
       new RecursiveDelete(metadir).start();
 
     if (success && !cancelled)
-      yield chain_op(new OperationVerify(), _("Verifying backup…"), detail);
+      yield chain_op(new OperationVerify(backend), _("Verifying backup…"), detail);
     else
       yield base.operation_finished(success, cancelled, detail);
   }

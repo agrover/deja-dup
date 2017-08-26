@@ -25,8 +25,8 @@ public class ConfigLocationGoa : ConfigLocationTable
 {
   public Goa.Account account {get; construct;}
 
-  public ConfigLocationGoa(Gtk.SizeGroup sg, Goa.Account? account) {
-    Object(label_sizes: sg, account: account);
+  public ConfigLocationGoa(Gtk.SizeGroup sg, FilteredSettings settings, Goa.Account? account) {
+    Object(label_sizes: sg, settings: settings, account: account);
   }
 
   Gtk.Grid hint;
@@ -34,7 +34,7 @@ public class ConfigLocationGoa : ConfigLocationTable
 
   construct {
     add_widget(_("_Folder"),
-               new ConfigFolder(DejaDup.GOA_FOLDER_KEY, DejaDup.GOA_ROOT));
+               new ConfigFolder(DejaDup.GOA_FOLDER_KEY, DejaDup.GOA_ROOT, settings));
 
     // Add optional widget that warns if the account has Files disabled
     create_hint();

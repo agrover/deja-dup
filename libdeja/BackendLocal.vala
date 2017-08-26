@@ -26,8 +26,12 @@ public const string LOCAL_FOLDER_KEY = "folder";
 
 public class BackendLocal : BackendFile
 {
+  public BackendLocal(Settings? settings) {
+    Object(settings: (settings != null ? settings : get_settings(LOCAL_ROOT)));
+  }
+
   public override Backend clone() {
-    return new BackendLocal();
+    return new BackendLocal(settings);
   }
 
   // Get mountable root
@@ -40,8 +44,7 @@ public class BackendLocal : BackendFile
   protected override File? get_file_from_settings()
   {
     var root = get_root_from_settings();
-    var settings = get_settings(LOCAL_ROOT);
-    var folder = settings.get_string(LOCAL_FOLDER_KEY);
+    var folder = get_folder_key(settings, LOCAL_FOLDER_KEY, true);
 
     try {
       return root.get_child_for_display_name(folder);

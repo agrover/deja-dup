@@ -23,6 +23,8 @@ namespace DejaDup {
 
 public abstract class Backend : Object
 {
+  public Settings settings {get; construct;}
+
   public signal void envp_ready(bool success, List<string>? envp, string? error = null);
   public signal void pause_op(string? header, string? msg);
 
@@ -51,10 +53,33 @@ public abstract class Backend : Object
   public virtual void add_argv(ToolJob.Mode mode, ref List<string> argv) {}
   
   public abstract Backend clone();
-  
-  public static string get_default_type()
+
+  public static Backend get_for_type(string backend_name, Settings? settings = null)
   {
-    var settings = get_settings();
+    if (backend_name == "s3")
+      return new BackendS3(settings);
+    else if (backend_name == "gcs")
+      return new BackendGCS(settings);
+    else if (backend_name == "goa")
+      return new BackendGOA(settings);
+    else if (backend_name == "u1")
+      return new BackendU1();
+    else if (backend_name == "rackspace")
+      return new BackendRackspace(settings);
+    else if (backend_name == "openstack")
+      return new BackendOpenstack(settings);
+    else if (backend_name == "drive")
+      return new BackendDrive(settings);
+    else if (backend_name == "remote")
+      return new BackendRemote(settings);
+    else if (backend_name == "local")
+      return new BackendLocal(settings);
+    else
+      return new BackendAuto();
+  }
+
+  public static string get_type_name(Settings settings)
+  {
     var backend = settings.get_string(BACKEND_KEY);
 
     if (backend != "auto" &&
@@ -72,29 +97,14 @@ public abstract class Backend : Object
     return backend;
   }
 
-  public static Backend? get_default()
+  public static Backend get_default()
   {
-    var backend_name = get_default_type();
-    if (backend_name == "s3")
-      return new BackendS3();
-    else if (backend_name == "gcs")
-      return new BackendGCS();
-    else if (backend_name == "goa")
-      return new BackendGOA();
-    else if (backend_name == "u1")
-      return new BackendU1();
-    else if (backend_name == "rackspace")
-      return new BackendRackspace();
-    else if (backend_name == "openstack")
-      return new BackendOpenstack();
-    else if (backend_name == "drive")
-      return new BackendDrive();
-    else if (backend_name == "remote")
-      return new BackendRemote();
-    else if (backend_name == "local")
-      return new BackendLocal();
-    else
-      return new BackendAuto();
+    return get_for_type(get_default_type());
+  }
+
+  public static string get_default_type()
+  {
+    return get_type_name(get_settings());
   }
 }
 

@@ -21,14 +21,12 @@ using GLib;
 
 namespace DejaDup {
 
-public class ConfigLocationTable : Gtk.Grid
+public abstract class ConfigLocationTable : Gtk.Grid
 {
+  public FilteredSettings settings {get; construct;}
   public Gtk.SizeGroup label_sizes {get; construct;}
 
   protected int row = 0;
-  public ConfigLocationTable(Gtk.SizeGroup sg) {
-    Object(label_sizes: sg);
-  }
 
   construct {
     row_spacing = 6;

@@ -39,11 +39,12 @@ public class OperationRestore : Operation
     }
   }
   
-  public OperationRestore(string dest_in,
+  public OperationRestore(Backend backend,
+                          string dest_in,
                           string? time_in = null,
                           List<File>? files_in = null) {
     Object(dest: dest_in, time: time_in, restore_files: files_in,
-           mode: ToolJob.Mode.RESTORE);
+           mode: ToolJob.Mode.RESTORE, backend: backend);
   }
   
   public async override void start()

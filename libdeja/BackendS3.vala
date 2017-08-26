@@ -30,8 +30,12 @@ const string S3_SERVER = "s3.amazonaws.com";
 
 public class BackendS3 : Backend
 {
+  public BackendS3(Settings? settings) {
+    Object(settings: (settings != null ? settings : get_settings(S3_ROOT)));
+  }
+
   public override Backend clone() {
-    return new BackendS3();
+    return new BackendS3(settings);
   }
 
   public override string[] get_dependencies()
@@ -63,8 +67,6 @@ public class BackendS3 : Backend
 
   public override string get_location(ref bool as_root)
   {
-    var settings = get_settings(S3_ROOT);
-    
     var bucket = settings.get_string(S3_BUCKET_KEY);
     var default_bucket = get_default_bucket();
     if (bucket == null || bucket == "" ||
@@ -81,8 +83,6 @@ public class BackendS3 : Backend
   public bool bump_bucket() {
     // OK, the bucket we tried must already exist, so let's use a different
     // one.  We'll take previous bucket name and increment it.
-    var settings = get_settings(S3_ROOT);
-    
     var bucket = settings.get_string(S3_BUCKET_KEY);
     if (bucket == "deja-dup") {
       // Until 7.4, we exposed the bucket name and defaulted to deja-dup.
@@ -117,7 +117,6 @@ public class BackendS3 : Backend
   
   public override string get_location_pretty()
   {
-    var settings = get_settings(S3_ROOT);
     var folder = get_folder_key(settings, S3_FOLDER_KEY);
     if (folder == "")
       return _("Amazon S3");
@@ -131,7 +130,6 @@ public class BackendS3 : Backend
   string secret_key;
   public override async void get_envp() throws Error
   {
-    var settings = get_settings(S3_ROOT);
     settings_id = settings.get_string(S3_ID_KEY);
     id = settings_id == null ? "" : settings_id;
     
@@ -211,7 +209,6 @@ public class BackendS3 : Backend
   }
   
   void got_secret_key() {
-    var settings = get_settings(S3_ROOT);
     if (id != settings_id)
       settings.set_string(S3_ID_KEY, id);
     

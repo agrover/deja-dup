@@ -27,20 +27,22 @@ public const string REMOTE_FOLDER_KEY = "folder";
 
 public class BackendRemote : BackendFile
 {
+  public BackendRemote(Settings? settings) {
+    Object(settings: (settings != null ? settings : get_settings(REMOTE_ROOT)));
+  }
+
   public override Backend clone() {
-    return new BackendRemote();
+    return new BackendRemote(settings);
   }
 
   protected virtual string get_folder()
   {
-    var settings = get_settings(REMOTE_ROOT);
-    return settings.get_string(REMOTE_FOLDER_KEY);
+    return get_folder_key(settings, REMOTE_FOLDER_KEY, true);
   }
 
   // Get mountable root
   protected override File? get_root_from_settings()
   {
-    var settings = get_settings(REMOTE_ROOT);
     var uri = settings.get_string(REMOTE_URI_KEY);
     return File.parse_name(uri);
   }

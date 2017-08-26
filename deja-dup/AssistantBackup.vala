@@ -21,6 +21,8 @@ using GLib;
 
 public class AssistantBackup : AssistantOperation
 {
+  DejaDup.Backend backend;
+
   public AssistantBackup(bool automatic)
   {
     Object(automatic: automatic);
@@ -28,6 +30,8 @@ public class AssistantBackup : AssistantOperation
 
   construct
   {
+    backend = DejaDup.Backend.get_default();
+
     title = C_("back up is verb", "Back Up");
 
     can_resume = true;
@@ -41,7 +45,7 @@ public class AssistantBackup : AssistantOperation
   protected override DejaDup.Operation? create_op()
   {
     realize();
-    var rv = new DejaDup.OperationBackup();
+    var rv = new DejaDup.OperationBackup(backend);
 
     ensure_status_icon(rv);
     if (automatic && (status_icon == null || !status_icon.show_automatic_progress)) {

@@ -40,23 +40,21 @@ public class BackendDrive : BackendFile
     }
   }
 
+  public BackendDrive(Settings? settings) {
+    Object(settings: (settings != null ? settings : get_settings(DRIVE_ROOT)));
+  }
+
   public override Backend clone() {
-    return new BackendDrive();
+    return new BackendDrive(settings);
   }
 
   string get_folder()
   {
-    var settings = get_settings(DRIVE_ROOT);
-    var folder = settings.get_string(DRIVE_FOLDER_KEY);
-    if (folder != "" && folder[0] == '/')
-      return folder.substring(1);
-    else
-      return folder;
+    return get_folder_key(settings, DRIVE_FOLDER_KEY);
   }
 
   Volume get_volume()
   {
-    var settings = get_settings(DRIVE_ROOT);
     var uuid = settings.get_string(DRIVE_UUID_KEY);
     return monitor.get_volume_for_uuid(uuid);
   }
@@ -87,7 +85,6 @@ public class BackendDrive : BackendFile
 
   public override string get_location_pretty()
   {
-    var settings = get_settings(DRIVE_ROOT);
     var name = settings.get_string(DRIVE_NAME_KEY);
     var folder = get_folder();
     if (folder == "")
@@ -101,7 +98,6 @@ public class BackendDrive : BackendFile
   public override async bool is_ready(out string when)
   {
     if (get_volume() == null) {
-      var settings = get_settings(DRIVE_ROOT);
       var name = settings.get_string(DRIVE_NAME_KEY);
       when = _("Backup will begin when %s is connected.").printf(name);
       return false;
@@ -112,7 +108,6 @@ public class BackendDrive : BackendFile
 
   public override Icon? get_icon()
   {
-    var settings = get_settings(DRIVE_ROOT);
     var icon_name = settings.get_string(DRIVE_ICON_KEY);
 
     try {
@@ -124,12 +119,17 @@ public class BackendDrive : BackendFile
     }
   }
 
-  public static void update_volume_info(Volume volume)
+  public static void update_volume_info(Volume volume, Settings settings)
   {
     var name = volume.get_name();
     var icon = volume.get_icon();
 
-    var settings = get_settings(DRIVE_ROOT);
+    // sanity check that these writable settings are for this volume
+    var vol_uuid = volume.get_identifier(VolumeIdentifier.UUID);
+    var settings_uuid = settings.get_string(DRIVE_UUID_KEY);
+    if (vol_uuid != settings_uuid)
+      return;
+
     settings.delay();
 
     settings.set_string(DRIVE_NAME_KEY, name);
@@ -173,14 +173,13 @@ public class BackendDrive : BackendFile
   {
     var vol = yield wait_for_volume();
     yield mount_internal(vol);
-    update_volume_info(vol);
+    update_volume_info(vol, settings);
   }
 
   async Volume wait_for_volume() throws Error
   {
     var vol = get_volume();
     if (vol == null) {
-      var settings = get_settings(DRIVE_ROOT);
       var name = settings.get_string(DRIVE_NAME_KEY);
       pause_op(_("Storage location not available"), _("Waiting for ‘%s’ to become connected…").printf(name));
       var loop = new MainLoop(null, false);

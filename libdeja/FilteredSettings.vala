@@ -33,11 +33,18 @@ namespace DejaDup {
 
 public class FilteredSettings : Settings
 {
-  public bool read_only {get; set;}
+  public bool read_only {get; construct;}
 
-  public FilteredSettings(string schema, bool ro)
+  public FilteredSettings(string? schema = null, bool ro = false)
   {
-    Object(schema_id: schema, read_only: ro);
+    string full_schema = "org.gnome.DejaDup";
+    if (schema != null && schema != "")
+      full_schema += "." + schema;
+
+    Object(schema_id: full_schema, read_only: ro);
+
+    if (ro)
+      delay(); // never to be apply()'d again
   }
 
   public new void apply() {if (!read_only) base.apply();}

@@ -29,8 +29,12 @@ const string RACKSPACE_SERVER = "auth.api.rackspacecloud.com";
 
 public class BackendRackspace : Backend
 {
+  public BackendRackspace(Settings? settings) {
+    Object(settings: (settings != null ? settings : get_settings(RACKSPACE_ROOT)));
+  }
+
   public override Backend clone() {
-    return new BackendRackspace();
+    return new BackendRackspace(settings);
   }
 
   public override string[] get_dependencies()
@@ -53,7 +57,6 @@ public class BackendRackspace : Backend
 
   public override string get_location(ref bool as_root)
   {
-    var settings = get_settings(RACKSPACE_ROOT);
     var container = get_folder_key(settings, RACKSPACE_CONTAINER_KEY);
     if (container == "") {
       container = Environment.get_host_name();
@@ -64,7 +67,6 @@ public class BackendRackspace : Backend
 
   public override string get_location_pretty()
   {
-    var settings = get_settings(RACKSPACE_ROOT);
     var container = settings.get_string(RACKSPACE_CONTAINER_KEY);
     if (container == "")
       return _("Rackspace Cloud Files");
@@ -78,7 +80,6 @@ public class BackendRackspace : Backend
   string secret_key;
   public override async void get_envp() throws Error
   {
-    var settings = get_settings(RACKSPACE_ROOT);
     settings_id = settings.get_string(RACKSPACE_USERNAME_KEY);
     id = settings_id == null ? "" : settings_id;
 
@@ -157,7 +158,6 @@ public class BackendRackspace : Backend
   }
 
   void got_secret_key() {
-    var settings = get_settings(RACKSPACE_ROOT);
     if (id != settings_id)
       settings.set_string(RACKSPACE_USERNAME_KEY, id);
 

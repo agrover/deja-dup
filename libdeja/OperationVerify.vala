@@ -30,8 +30,8 @@ public class OperationVerify : Operation
   File destdir;
   bool nag;
 
-  public OperationVerify() {
-    Object(mode: ToolJob.Mode.RESTORE);
+  public OperationVerify(Backend backend) {
+    Object(mode: ToolJob.Mode.RESTORE, backend: backend);
   }
 
   construct {

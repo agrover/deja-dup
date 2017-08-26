@@ -25,8 +25,8 @@ public class OperationStatus : Operation
 {
   public signal void collection_dates(List<string>? dates);
   
-  public OperationStatus() {
-    Object(mode: ToolJob.Mode.STATUS);
+  public OperationStatus(Backend backend) {
+    Object(mode: ToolJob.Mode.STATUS, backend: backend);
   }
   
   protected override void connect_to_job()

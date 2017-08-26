@@ -23,14 +23,14 @@ namespace DejaDup {
 
 public class ConfigLocationCustom : ConfigLocationTable
 {
-  public ConfigLocationCustom(Gtk.SizeGroup sg) {
-    Object(label_sizes: sg);
+  public ConfigLocationCustom(Gtk.SizeGroup sg, FilteredSettings settings) {
+    Object(label_sizes: sg, settings: settings);
   }
 
   Gtk.Popover hint = null;
   construct {
     var address = new ConfigEntry(DejaDup.REMOTE_URI_KEY, DejaDup.REMOTE_ROOT,
-                                  true);
+                                  settings, true);
     address.set_accessible_name("CustomAddress");
     address.entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY,
                                           "dialog-question-symbolic");
@@ -39,7 +39,7 @@ public class ConfigLocationCustom : ConfigLocationTable
 
     hint = create_hint(address.entry);
 
-    var folder = new ConfigFolder(DejaDup.REMOTE_FOLDER_KEY, DejaDup.REMOTE_ROOT, true);
+    var folder = new ConfigFolder(DejaDup.REMOTE_FOLDER_KEY, DejaDup.REMOTE_ROOT, settings, true);
     folder.set_accessible_name("CustomFolder");
     add_widget(_("_Folder"), folder);
   }

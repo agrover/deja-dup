@@ -476,9 +476,9 @@ void process_operation_block(KeyFile keyfile, string group, BackupRunner br) thr
   }
   var type = keyfile.get_string(group, "Type");
   if (type == "backup")
-    br.op = new DejaDup.OperationBackup();
+    br.op = new DejaDup.OperationBackup(DejaDup.Backend.get_default());
   else if (type == "restore")
-    br.op = new DejaDup.OperationRestore(restoredir, br.restore_date, br.restore_files);
+    br.op = new DejaDup.OperationRestore(DejaDup.Backend.get_default(), restoredir, br.restore_date, br.restore_files);
   else
     assert_not_reached();
 }

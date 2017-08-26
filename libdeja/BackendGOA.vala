@@ -30,8 +30,12 @@ public class BackendGOA : BackendRemote
 {
   static Goa.Client _client;
 
+  public BackendGOA(Settings? settings) {
+    Object(settings: (settings != null ? settings : get_settings(GOA_ROOT)));
+  }
+
   public override Backend clone() {
-    return new BackendGOA();
+    return new BackendGOA(settings);
   }
 
   public static async Goa.Client get_client()
@@ -60,13 +64,11 @@ public class BackendGOA : BackendRemote
 
   protected override string get_folder()
   {
-    var settings = get_settings(GOA_ROOT);
-    return settings.get_string(GOA_FOLDER_KEY);
+    return get_folder_key(settings, GOA_FOLDER_KEY, true);
   }
 
-  public static Goa.Object? get_object_from_settings()
+  public Goa.Object? get_object_from_settings()
   {
-    var settings = get_settings(GOA_ROOT);
     var id = settings.get_string(GOA_ID_KEY);
     return get_client_sync().lookup_by_id(id);
   }
@@ -132,7 +134,6 @@ public class BackendGOA : BackendRemote
   protected override async void mount() throws Error
   {
     if (get_root_from_settings() == null) {
-      var settings = get_settings(GOA_ROOT);
       var type = settings.get_string(GOA_TYPE_KEY);
       var provider = Goa.Provider.get_for_provider_type(type);
 

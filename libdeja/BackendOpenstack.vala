@@ -29,8 +29,12 @@ public const string OPENSTACK_AUTHURL_KEY = "authurl";
 
 public class BackendOpenstack : Backend
 {
+  public BackendOpenstack(Settings? settings) {
+    Object(settings: (settings != null ? settings : get_settings(OPENSTACK_ROOT)));
+  }
+
   public override Backend clone() {
-    return new BackendOpenstack();
+    return new BackendOpenstack(settings);
   }
 
   public override string[] get_dependencies()
@@ -47,7 +51,6 @@ public class BackendOpenstack : Backend
   }
 
   public override async bool is_ready(out string when) {
-    var settings = get_settings(OPENSTACK_ROOT);
     var authurl = get_folder_key(settings, OPENSTACK_AUTHURL_KEY);
     when = _("Backup will begin when a network connection becomes available.");
     return yield Network.get().can_reach (authurl);
@@ -55,7 +58,6 @@ public class BackendOpenstack : Backend
 
   public override string get_location(ref bool as_root)
   {
-    var settings = get_settings(OPENSTACK_ROOT);
     var container = get_folder_key(settings, OPENSTACK_CONTAINER_KEY);
     if (container == "") {
       container = Environment.get_host_name();
@@ -66,7 +68,6 @@ public class BackendOpenstack : Backend
 
   public override string get_location_pretty()
   {
-    var settings = get_settings(OPENSTACK_ROOT);
     var container = settings.get_string(OPENSTACK_CONTAINER_KEY);
     if (container == "")
       return _("OpenStack Swift");
@@ -80,7 +81,6 @@ public class BackendOpenstack : Backend
   string secret_key;
   public override async void get_envp() throws Error
   {
-    var settings = get_settings(OPENSTACK_ROOT);
     settings_id = settings.get_string(OPENSTACK_USERNAME_KEY);
     id = settings_id == null ? "" : settings_id;
 
@@ -130,7 +130,6 @@ public class BackendOpenstack : Backend
       string where = (remember == PasswordSave.FOR_SESSION) ?
                      Secret.COLLECTION_SESSION : Secret.COLLECTION_DEFAULT;
 
-      var settings = get_settings(OPENSTACK_ROOT);
       var authurl = get_folder_key(settings, OPENSTACK_AUTHURL_KEY);
       var tenant = get_folder_key(settings, OPENSTACK_TENANT_KEY);
 
@@ -161,8 +160,6 @@ public class BackendOpenstack : Backend
   }
 
   void got_secret_key() {
-    var settings = get_settings(OPENSTACK_ROOT);
-
     if (id != settings_id)
       settings.set_string(OPENSTACK_USERNAME_KEY, id);
 

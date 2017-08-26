@@ -138,7 +138,7 @@ public abstract class BackendFile : Backend
     // as they allow multiple files with the same name. Querying it
     // anchors the path to the backend object and we don't create a second
     // copy this way.
-    if (!gfile.query_exists()) {
+    if (gfile != null && !gfile.query_exists()) {
       try {
         gfile.make_directory_with_parents (null);
       }

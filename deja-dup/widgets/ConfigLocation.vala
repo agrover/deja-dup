@@ -49,6 +49,7 @@ public class ConfigLocation : ConfigWidget
   public Gtk.EventBox extras {get; private set;}
   public Gtk.SizeGroup label_sizes {get; construct;}
   public bool show_deprecated {get; construct;}
+  public bool read_only {get; construct;}
 
   public Gtk.Requisition hidden_size()
   {
@@ -59,15 +60,19 @@ public class ConfigLocation : ConfigWidget
     return pagereq;
   }
 
-  public ConfigLocation(bool show_deprecated, Gtk.SizeGroup? sg = null)
+  public ConfigLocation(bool show_deprecated, bool read_only, Gtk.SizeGroup? sg = null)
   {
-    Object(show_deprecated: show_deprecated, label_sizes: sg);
+    Object(show_deprecated: show_deprecated, read_only: read_only, label_sizes: sg);
   }
 
   int num_volumes = 0;
 
   int extras_max_width = 0;
   int extras_max_height = 0;
+
+  // Keep a settings around for each type, and pass it off to our extra widgets.
+  // We want to keep our own so that we can mark them read-only as needed.
+  HashTable<string, FilteredSettings> all_settings;
 
   Gtk.ComboBox button;
   Gtk.ListStore store;
@@ -93,6 +98,13 @@ public class ConfigLocation : ConfigWidget
       accessible.set_name("Location");
     }
 
+    all_settings = new HashTable<string, FilteredSettings>(str_hash, str_equal);
+    string[] roots = {"", GOA_ROOT, REMOTE_ROOT, DRIVE_ROOT, LOCAL_ROOT,
+                      S3_ROOT, GCS_ROOT, OPENSTACK_ROOT, RACKSPACE_ROOT};
+    foreach (string? root in roots) {
+      all_settings.insert(root, new FilteredSettings(root, read_only));
+    }
+
     Gtk.TreeIter iter;
 
     if (label_sizes == null)
@@ -112,12 +124,12 @@ public class ConfigLocation : ConfigWidget
 
     add_entry(new ThemedIcon("network-server"),
               _("Network Server"), Group.REMOTE,
-              new ConfigLocationCustom(label_sizes));
+              new ConfigLocationCustom(label_sizes, all_settings[REMOTE_ROOT]));
     add_separator(Group.REMOTE_SEP);
 
     // And a local folder option
     add_entry(new ThemedIcon("folder"), _("Local Folder"),
-              Group.LOCAL, new ConfigLocationFile(label_sizes));
+              Group.LOCAL, new ConfigLocationFile(label_sizes, all_settings[LOCAL_ROOT]));
 
     // Now insert removable drives
     var mon = VolumeMonitor.get();
@@ -155,9 +167,9 @@ public class ConfigLocation : ConfigWidget
     button.changed.connect(handle_changed);
 
     // Watch any key that would cause a row switch
-    watch_key(BACKEND_KEY);
-    watch_key(GOA_ID_KEY, DejaDup.get_settings(GOA_ROOT));
-    watch_key(DRIVE_UUID_KEY, DejaDup.get_settings(DRIVE_ROOT));
+    watch_key(BACKEND_KEY, all_settings[""]);
+    watch_key(GOA_ID_KEY, all_settings[GOA_ROOT]);
+    watch_key(DRIVE_UUID_KEY, all_settings[DRIVE_ROOT]);
   }
 
   void clear_group(int group)
@@ -253,16 +265,15 @@ public class ConfigLocation : ConfigWidget
                   "%s <i>(%s)</i>".printf(account.provider_name,
                                           account.presentation_identity),
                   Group.GOA,
-                  new ConfigLocationGoa(label_sizes, account),
+                  new ConfigLocationGoa(label_sizes, all_settings[GOA_ROOT], account),
                   account.id, type);
         found_one = true;
       }
     }
 
     // Does the user have an old configured type that is now gone?
-    var settings = DejaDup.get_settings(GOA_ROOT);
-    if (settings.get_string(GOA_TYPE_KEY) == type &&
-        BackendGOA.get_object_from_settings() == null)
+    if (all_settings[GOA_ROOT].get_string(GOA_TYPE_KEY) == type &&
+        client.lookup_by_id(all_settings[GOA_ROOT].get_string(GOA_ID_KEY)) == null)
     {
       found_one = false;
     }
@@ -273,7 +284,7 @@ public class ConfigLocation : ConfigWidget
     add_entry(provider.get_provider_icon(null),
               provider.get_provider_name(null),
               Group.GOA,
-              new ConfigLocationGoa(label_sizes, null),
+              new ConfigLocationGoa(label_sizes, all_settings[GOA_ROOT], null),
               "", type);
   }
 
@@ -282,15 +293,15 @@ public class ConfigLocation : ConfigWidget
     // Note that we are using | not || here, because if show_deprecated is set,
     // we want to insert multiple backends.
     if (insert_cloud("s3", _("Amazon S3"), show_deprecated,
-                     new ConfigLocationS3(label_sizes)) |
+                     new ConfigLocationS3(label_sizes, all_settings[S3_ROOT])) |
         insert_cloud("gcs", _("Google Cloud Storage"), show_deprecated,
-                     new ConfigLocationGCS(label_sizes)) |
+                     new ConfigLocationGCS(label_sizes, all_settings[GCS_ROOT])) |
         insert_cloud("u1", _("Ubuntu One"), false, /* u1 is more than deprecated */
                      new ConfigLocationU1(label_sizes)) |
         insert_cloud("rackspace", _("Rackspace Cloud Files"), show_deprecated,
-                     new ConfigLocationRackspace(label_sizes)) |
+                     new ConfigLocationRackspace(label_sizes, all_settings[RACKSPACE_ROOT])) |
         insert_cloud("openstack", _("OpenStack Swift"), show_deprecated,
-                     new ConfigLocationOpenstack(label_sizes)))
+                     new ConfigLocationOpenstack(label_sizes, all_settings[OPENSTACK_ROOT])))
       add_separator(Group.CLOUD_SEP);
   }
 
@@ -299,7 +310,7 @@ public class ConfigLocation : ConfigWidget
     // All cloud backends are deprecated in favor of GOA.  So we only show
     // them if they are already configured as the backend (either from older
     // users or they manually set the gsettings value).
-    var backend = Backend.get_default_type();
+    var backend = Backend.get_type_name(all_settings[""]);
     if (force_show || backend == id) {
       add_entry(new ThemedIcon("deja-dup-cloud"), name, Group.CLOUD, w, id);
       return true;
@@ -431,7 +442,7 @@ public class ConfigLocation : ConfigWidget
     if (num_volumes++ == 0)
       add_separator(Group.VOLUMES_SEP);
     add_entry(icon, name, Group.VOLUMES,
-              new ConfigLocationVolume(label_sizes), uuid);
+              new ConfigLocationVolume(label_sizes, all_settings[DRIVE_ROOT]), uuid);
   }
 
   void update_volume(VolumeMonitor monitor, Volume v)
@@ -461,8 +472,7 @@ public class ConfigLocation : ConfigWidget
       return;
 
     // Make sure it isn't the saved volume; we never want to remove that
-    var fsettings = DejaDup.get_settings(DRIVE_ROOT);
-    var saved_uuid = fsettings.get_string(DRIVE_UUID_KEY);
+    var saved_uuid = all_settings[DRIVE_ROOT].get_string(DRIVE_UUID_KEY);
     if (uuid == saved_uuid)
       return;
 
@@ -478,16 +488,15 @@ public class ConfigLocation : ConfigWidget
   bool update_saved_volume()
   {
     // And add an entry for any saved volume
-    var fsettings = DejaDup.get_settings(DRIVE_ROOT);
-    var uuid = fsettings.get_string(DRIVE_UUID_KEY);
+    var uuid = all_settings[DRIVE_ROOT].get_string(DRIVE_UUID_KEY);
     if (uuid != "") {
       Icon vol_icon = null;
       try {
-        vol_icon = Icon.new_for_string(fsettings.get_string(DRIVE_ICON_KEY));
+        vol_icon = Icon.new_for_string(all_settings[DRIVE_ROOT].get_string(DRIVE_ICON_KEY));
       }
       catch (Error e) {warning("%s\n", e.message);}
 
-      var vol_name = fsettings.get_string(DRIVE_NAME_KEY);
+      var vol_name = all_settings[DRIVE_ROOT].get_string(DRIVE_NAME_KEY);
 
       add_volume_full(uuid, vol_name, vol_icon);
       return true;
@@ -510,7 +519,7 @@ public class ConfigLocation : ConfigWidget
     string goa_type = null;
 
     // Check the backend type, then GIO uri if needed
-    var backend = Backend.get_default_type();
+    var backend = Backend.get_type_name(all_settings[""]);
     if (backend == "gcs" ||
         backend == "openstack" ||
         backend == "rackspace" ||
@@ -520,10 +529,9 @@ public class ConfigLocation : ConfigWidget
       id = backend;
     }
     else if (backend == "goa") {
-      var goa_settings = DejaDup.get_settings(GOA_ROOT);
       group = Group.GOA;
-      id = goa_settings.get_string(GOA_ID_KEY);
-      goa_type = goa_settings.get_string(GOA_TYPE_KEY);
+      id = all_settings[GOA_ROOT].get_string(GOA_ID_KEY);
+      goa_type = all_settings[GOA_ROOT].get_string(GOA_TYPE_KEY);
 
       // Test if the ID is no longer valid, but the type is... we'll fall back
       // to that.
@@ -534,9 +542,8 @@ public class ConfigLocation : ConfigWidget
       }
     }
     else if (backend == "drive") {
-      var fsettings = DejaDup.get_settings(DRIVE_ROOT);
       group = Group.VOLUMES;
-      id = fsettings.get_string(DRIVE_UUID_KEY);
+      id = all_settings[DRIVE_ROOT].get_string(DRIVE_UUID_KEY);
     }
     else if (backend == "remote") {
       group = Group.REMOTE;
@@ -586,19 +593,18 @@ public class ConfigLocation : ConfigWidget
     store.get(iter, Col.GROUP, out group, Col.ID, out id, Col.GOA_TYPE, out goa_type);
 
     if (group == Group.GOA) {
-      var goa_settings = DejaDup.get_settings(GOA_ROOT);
-      goa_settings.set_string(GOA_ID_KEY, id == null ? "" : id);
-      goa_settings.set_string(GOA_TYPE_KEY, goa_type);
-      settings.set_string(BACKEND_KEY, "goa");
+      all_settings[GOA_ROOT].set_string(GOA_ID_KEY, id == null ? "" : id);
+      all_settings[GOA_ROOT].set_string(GOA_TYPE_KEY, goa_type);
+      all_settings[""].set_string(BACKEND_KEY, "goa");
     }
     else if (group == Group.CLOUD)
-      settings.set_string(BACKEND_KEY, id);
+      all_settings[""].set_string(BACKEND_KEY, id);
     else if (group == Group.VOLUMES)
       set_volume_info(iter);
     else if (group == Group.REMOTE)
-      settings.set_string(BACKEND_KEY, "remote");
+      all_settings[""].set_string(BACKEND_KEY, "remote");
     else if (group == Group.LOCAL)
-      settings.set_string(BACKEND_KEY, "local");
+      all_settings[""].set_string(BACKEND_KEY, "local");
     else {
       warning("Unknown location: group %i, id: %s\n", group, id);
     }
@@ -617,7 +623,7 @@ public class ConfigLocation : ConfigWidget
     }
 
     // First things first, we must remember that we set a volume
-    settings.set_string(BACKEND_KEY, "drive");
+    all_settings[""].set_string(BACKEND_KEY, "drive");
 
     var vol = VolumeMonitor.get().get_volume_for_uuid(uuid);
     if (vol == null) {
@@ -625,7 +631,14 @@ public class ConfigLocation : ConfigWidget
       return;
     }
 
-    BackendDrive.update_volume_info(vol);
+    BackendDrive.update_volume_info(vol, all_settings[DRIVE_ROOT]);
+  }
+
+  public Backend get_backend()
+  {
+    var type = Backend.get_type_name(all_settings[""]);
+    var sub_settings = all_settings[type];
+    return Backend.get_for_type(type, sub_settings);
   }
 }
 

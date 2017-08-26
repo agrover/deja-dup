@@ -23,8 +23,8 @@ namespace DejaDup {
 
 public class ConfigLocationFile : ConfigLocationTable
 {
-  public ConfigLocationFile(Gtk.SizeGroup sg) {
-    Object(label_sizes: sg);
+  public ConfigLocationFile(Gtk.SizeGroup sg, FilteredSettings settings) {
+    Object(label_sizes: sg, settings: settings);
   }
 
   ConfigFolder entry;
@@ -32,7 +32,7 @@ public class ConfigLocationFile : ConfigLocationTable
     var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
 
     entry = new ConfigFolder(DejaDup.LOCAL_FOLDER_KEY,
-                             DejaDup.LOCAL_ROOT, true);
+                             DejaDup.LOCAL_ROOT, settings, true);
     entry.set_accessible_name("FileFolder");
 
     var browse = new Gtk.Button.with_mnemonic(_("_Choose Folder…"));
@@ -60,7 +60,6 @@ public class ConfigLocationFile : ConfigLocationTable
     }
 
     if (dlg.run() == Gtk.ResponseType.ACCEPT) {
-      var settings = DejaDup.get_settings(DejaDup.LOCAL_ROOT);
       var file = dlg.get_file();
       var path = home.get_relative_path(file);
       if (path == null)

@@ -23,15 +23,15 @@ namespace DejaDup {
 
 public class ConfigLocationS3 : ConfigLocationTable
 {
-  public ConfigLocationS3(Gtk.SizeGroup sg) {
-    Object(label_sizes: sg);
+  public ConfigLocationS3(Gtk.SizeGroup sg, FilteredSettings settings) {
+    Object(label_sizes: sg, settings: settings);
   }
 
   construct {
     add_widget(_("S3 Access Key I_D"),
-               new ConfigEntry(DejaDup.S3_ID_KEY, DejaDup.S3_ROOT));
+               new ConfigEntry(DejaDup.S3_ID_KEY, DejaDup.S3_ROOT, settings));
     add_widget(_("_Folder"),
-               new ConfigFolder(DejaDup.S3_FOLDER_KEY, DejaDup.S3_ROOT));
+               new ConfigFolder(DejaDup.S3_FOLDER_KEY, DejaDup.S3_ROOT, settings));
   }
 }
 

@@ -213,6 +213,8 @@ public class DejaDupApp : Gtk.Application
     quit_action.set_enabled(false);
     add_window(op);
     op.show_all();
+
+    Gdk.notify_startup_complete();
   }
 
   void help()
@@ -244,7 +246,6 @@ public class DejaDupApp : Gtk.Application
   void backup_full(bool automatic)
   {
     assign_op(new AssistantBackup(automatic));
-    Gdk.notify_startup_complete();
     // showing or not is handled by AssistantBackup
   }
 
@@ -259,15 +260,6 @@ public class DejaDupApp : Gtk.Application
 
   void restore_full(List<File>? file_list)
   {
-    if (file_list.length() == 0) {
-      /* Determine if we should be in read-only mode.  This is done when
-         we're asked to do a generic restore and the user has backed up
-         before.  We do this because they may want to restore from a
-         different backup without adjusting their own settings. */
-      var last_run = DejaDup.last_run_date(DejaDup.TimestampType.BACKUP);
-      if (last_run != "")
-        DejaDup.set_settings_read_only(true);
-    }
     assign_op(new AssistantRestore.with_files(file_list));
   }
 
