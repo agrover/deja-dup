@@ -79,6 +79,8 @@ copy-po:
 
 flatpak:
 	mkdir -p builddir
-	flatpak-builder builddir/flatpak flatpak/org.gnome.DejaDup.json
+	rm -fr builddir/flatpak
+	cd builddir && flatpak-builder --repo=$(HOME)/repo ./flatpak ../flatpak/org.gnome.DejaDup.json
+	flatpak update --user org.gnome.DejaDup
 
 .PHONY: configure clean dist all copy-po check screenshots flatpak

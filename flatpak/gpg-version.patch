@@ -1,0 +1,12 @@
+=== modified file 'duplicity/gpg.py'
+--- a/duplicity/gpg.py    2017-07-11 14:55:38 +0000
++++ b/duplicity/gpg.py    2017-08-27 17:19:21 +0000
+@@ -91,7 +91,7 @@
+ 
+         self.gpg_version = self.get_gpg_version(globals.gpg_binary)
+ 
+-    _version_re = re.compile(r'^gpg.*\(GnuPG(?:/MacGPG2)?\) (?P<maj>[0-9]+)\.(?P<min>[0-9]+)\.(?P<bug>[0-9]+)$')
++    _version_re = re.compile(r'^gpg.*\(GnuPG(?:/MacGPG2)?\) (?P<maj>[0-9]+)\.(?P<min>[0-9]+)\.(?P<bug>[0-9]+)(-.+)?$')
+ 
+     def get_gpg_version(self, binary):
+         gpg = gpginterface.GnuPG()
