@@ -40,13 +40,13 @@ configure_file(input: 'org.gnome.DejaDup.service.in',
 
 conf_data = configuration_data()
 conf_data.set('pkglibexecdir', pkglibexecdir)
-configure_file(input: 'org.gnome.DejaDup.Monitor.desktop.in',
+monitor_desktop = configure_file(input: 'org.gnome.DejaDup.Monitor.desktop.in',
     output: 'org.gnome.DejaDup.Monitor.desktop',
     configuration: conf_data,
     install_dir: join_paths(etcdir, 'xdg', 'autostart'))
 
-test('validate-org.gnome.DejaDup.Monitor.desktop', desktop_file_validate,
-    args: ['org.gnome.DejaDup.Monitor.desktop'])
+test('validate-monitor-desktop', desktop_file_validate,
+    args: [monitor_desktop])
 
 deja_dup_desktop = custom_target('org.gnome.DejaDup.desktop',
     input: 'org.gnome.DejaDup.desktop',
@@ -56,7 +56,7 @@ deja_dup_desktop = custom_target('org.gnome.DejaDup.desktop',
     install: true,
     install_dir: join_paths(datadir, 'applications'))
 
-test('validate-org.gnome.DejaDup.desktop', desktop_file_validate,
+test('validate-desktop', desktop_file_validate,
     args: [deja_dup_desktop.full_path()])
 
 conf_data = configuration_data()
