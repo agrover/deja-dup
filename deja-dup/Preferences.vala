@@ -57,20 +57,21 @@ public class Preferences : Gtk.Grid
   Gtk.Widget make_settings_page()
   {
     var settings_page = new Gtk.Grid();
-    Gtk.Notebook notebook = new Gtk.Notebook();
+    Gtk.Stack stack = new Gtk.Stack();
     Gtk.Widget w;
     Gtk.Label label;
     Gtk.Grid table;
     Gtk.TreeIter iter;
-    int i = 0;
     int row;
+    int i = 0;
+    string name;
     Gtk.SizeGroup label_sizes;
 
     var settings = DejaDup.get_settings();
 
     settings_page.column_spacing = 12;
 
-    var cat_model = new Gtk.ListStore(2, typeof(string), typeof(int));
+    var cat_model = new Gtk.ListStore(2, typeof(string), typeof(string));
     var tree = new Gtk.TreeView.with_model(cat_model);
     var accessible = tree.get_accessible();
     if (accessible != null) {
@@ -87,10 +88,10 @@ public class Preferences : Gtk.Grid
     tree.get_selection().set_mode(Gtk.SelectionMode.SINGLE);
     tree.get_selection().changed.connect(() => {
       Gtk.TreeIter sel_iter;
-      int page;
+      string sel_name;
       if (tree.get_selection().get_selected(null, out sel_iter)) {
-        cat_model.get(sel_iter, 1, out page);
-        notebook.page = page;
+        cat_model.get(sel_iter, 1, out sel_name);
+        stack.visible_child_name = sel_name;
       }
     });
 
@@ -170,8 +171,9 @@ public class Preferences : Gtk.Grid
     table.attach(w, 1, row, 1, 1);
     ++row;
 
-    notebook.append_page(table, null);
-    cat_model.insert_with_values(out iter, i, 0, _("Overview"), 1, i);
+    name = "overview";
+    stack.add_named(table, name);
+    cat_model.insert_with_values(out iter, i, 0, _("Overview"), 1, name);
     ++i;
 
     // Reset page
@@ -181,8 +183,9 @@ public class Preferences : Gtk.Grid
     w.expand = true;
     table.add(w);
 
-    notebook.append_page(table, null);
-    cat_model.insert_with_values(out iter, i, 0, _("Folders to save"), 1, i);
+    name = "include";
+    stack.add_named(table, name);
+    cat_model.insert_with_values(out iter, i, 0, _("Folders to save"), 1, name);
     ++i;
 
     // Reset page
@@ -192,8 +195,9 @@ public class Preferences : Gtk.Grid
     w.expand = true;
     table.add(w);
 
-    notebook.append_page(table, null);
-    cat_model.insert_with_values(out iter, i, 0, _("Folders to ignore"), 1, i);
+    name = "exclude";
+    stack.add_named(table, name);
+    cat_model.insert_with_values(out iter, i, 0, _("Folders to ignore"), 1, name);
     ++i;
 
     // Reset page
@@ -220,9 +224,10 @@ public class Preferences : Gtk.Grid
     table.attach(location.extras, 0, row, 2, 1);
     ++row;
 
-    notebook.append_page(table, null);
+    name = "storage";
+    stack.add_named(table, name);
     // Translators: storage as in "where to store the backup"
-    cat_model.insert_with_values(out iter, i, 0, _("Storage location"), 1, i);
+    cat_model.insert_with_values(out iter, i, 0, _("Storage location"), 1, name);
     ++i;
 
     // Now make sure to reserve the excess space that the hidden bits of
@@ -282,20 +287,19 @@ public class Preferences : Gtk.Grid
     table.attach(label, 1, row, 1, 1);
     ++row;
 
-    notebook.append_page(table, null);
-    cat_model.insert_with_values(out iter, i, 0, _("Scheduling"), 1, i);
+    name = "schedule";
+    stack.add_named(table, name);
+    cat_model.insert_with_values(out iter, i, 0, _("Scheduling"), 1, name);
     ++i;
 
-    notebook.show_all(); // can't switch to pages that aren't shown
+    stack.show_all(); // can't switch to pages that aren't shown
 
     // Select first one by default
     cat_model.get_iter_first(out iter);
     tree.get_selection().select_iter(iter);
 
-    notebook.show_tabs = false;
-    notebook.show_border = false;
-    notebook.expand = true;
-    settings_page.add(notebook);
+    stack.expand = true;
+    settings_page.add(stack);
 
     settings_page.show();
     return settings_page;
