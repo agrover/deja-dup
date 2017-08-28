@@ -15,6 +15,9 @@
         "--share=network",
         "--system-talk-name=org.freedesktop.NetworkManager",
 
+        "--talk-name=org.gtk.vfs",
+        "--talk-name=org.gtk.vfs.*",
+
         "--talk-name=org.freedesktop.secrets",
         "--talk-name=org.gnome.OnlineAccounts",
 
@@ -145,6 +148,33 @@
         },
 
         {
+            "name": "pycairo",
+            "buildsystem": "simple",
+            "build-commands": [
+                "python2 setup.py build",
+                "python2 setup.py install --prefix /app"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/pygobject/pycairo/releases/download/v1.15.1/pycairo-1.15.1.tar.gz",
+                    "sha256": "987d392270247343595d37591f80639ed902fce7e30bd2f944cb1b0a9093553d"
+                }
+            ]
+        },
+        {
+            "name": "pygobject",
+            "config-opts": ["--with-python=python2"],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/pygobject/3.24/pygobject-3.24.1.tar.xz",
+                    "sha256": "a628a95aa0909e13fb08230b1b98fc48adef10b220932f76d62f6821b3fdbffd"
+                }
+            ]
+        },
+
+        {
             "name": "python-boto",
             "buildsystem": "simple",
             "build-commands": [
@@ -192,6 +222,36 @@
             ]
         },
         {
+            "name": "python-certifi",
+            "buildsystem": "simple",
+            "build-commands": [
+                "python2 setup.py build",
+                "python2 setup.py install --single-version-externally-managed --root=/ --prefix /app"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://pypi.python.org/packages/20/d0/3f7a84b0c5b89e94abbd073a5f00c7176089f526edb056686751d5064cbd/certifi-2017.7.27.1.tar.gz",
+                    "sha256": "40523d2efb60523e113b44602298f0960e900388cf3bb6043f645cf57ea9e3f5"
+                }
+            ]
+        },
+        {
+            "name": "python-requests",
+            "buildsystem": "simple",
+            "build-commands": [
+                "python2 setup.py build",
+                "python2 setup.py install --single-version-externally-managed --root=/ --prefix /app"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://pypi.python.org/packages/b0/e1/eab4fc3752e3d240468a8c0b284607899d2fbfb236a56b7377a329aa8d09/requests-2.18.4.tar.gz",
+                    "sha256": "9c443e7324ba5b85070c4a818ade28bfabedf16ea10206da1132edaa6dda237e"
+                }
+            ]
+        },
+        {
             "name": "python-swiftclient",
             "buildsystem": "simple",
             "build-commands": [
@@ -214,7 +274,7 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "git://git.launchpad.net/deja-dup"
+                    "url": ".."
                 }
             ],
             "post-install": [
