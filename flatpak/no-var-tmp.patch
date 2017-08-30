@@ -1,0 +1,17 @@
+# If we use /tmp or /var/tmp, gvfs on the other side of flatpak's container
+# won't see our /var/tmp/xxx path and error out.  So let's restrict ourselves
+# to the user's home dir.
+diff --git a/libdeja/CommonUtils.vala b/libdeja/CommonUtils.vala
+index 208d5405..eb38561d 100644
+--- a/libdeja/CommonUtils.vala
++++ b/libdeja/CommonUtils.vala
+@@ -731,8 +731,7 @@ public string[] get_tempdirs()
+     return {tempdir};
+   // Prefer directories that have their own cleanup logic in case ours isn't
+   // run for a while.  (e.g. /tmp every boot, /var/tmp every now and then)
+-  return {Environment.get_tmp_dir(), "/var/tmp",
+-          Path.build_filename(Environment.get_user_cache_dir(), Config.PACKAGE,
++  return {Path.build_filename(Environment.get_user_cache_dir(), Config.PACKAGE,
+                               "tmp")};
+ }
+ 
