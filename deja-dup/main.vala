@@ -172,6 +172,7 @@ public class DejaDupApp : Gtk.Application
       prefs.app = this;
       prefs.border_width = 12;
       main_window.add(prefs);
+      add_window(main_window);
       main_window.show_all();
     }
   }
@@ -179,9 +180,6 @@ public class DejaDupApp : Gtk.Application
   public override void startup()
   {
     base.startup();
-
-    Gtk.IconTheme.get_default().append_search_path(Config.THEME_DIR);
-    Gtk.Window.set_default_icon_name(Config.PACKAGE);
 
     /* First, check duplicity version info */
     if (!DejaDup.gui_initialize(null)) {
@@ -294,6 +292,9 @@ int main(string[] args)
   // "duplicity" and the act of duplicating data for backup.  As a whole, the
   // phrase "Déjà Dup" may not be very translatable.
   Environment.set_application_name(_("Déjà Dup Backup Tool"));
+  Environment.set_prgname("org.gnome.DejaDup");
+
+  Gtk.Window.set_default_icon_name("org.gnome.DejaDup");
 
   resources_get_resource()._register();
 
