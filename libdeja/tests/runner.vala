@@ -158,21 +158,21 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
   var end_str = "%s'--verbosity=9' '--gpg-options=--no-use-agent' '--archive-dir=%s' '--tempdir=%s' '%s'".printf(enc_str, archive, tempdir, make_fd_arg(as_root));
 
   if (mode == Mode.CLEANUP)
-    return "cleanup '--force' 'file://%s' '--gio' %s".printf(backupdir, end_str);
+    return "cleanup '--force' 'gio+file://%s' %s".printf(backupdir, end_str);
   else if (mode == Mode.RESTORE) {
     string file_arg = "", dest_arg = "";
     if (file_to_restore != null) {
       file_arg = "'--file-to-restore=%s' ".printf(file_to_restore.substring(1)); // skip root /
       dest_arg = file_to_restore;
     }
-    return "'restore' '--gio' %s%s'--force' 'file://%s' '%s%s' %s".printf(file_arg, extra, backupdir, restoredir, dest_arg, end_str);
+    return "'restore' %s%s'--force' 'gio+file://%s' '%s%s' %s".printf(file_arg, extra, backupdir, restoredir, dest_arg, end_str);
   }
   else if (mode == Mode.VERIFY)
-    return "'restore' '--gio' '--file-to-restore=%s/deja-dup/metadata' '--force' 'file://%s' '%s/deja-dup/metadata' %s".printf(cachedir.substring(1), backupdir, cachedir, end_str);
+    return "'restore' '--file-to-restore=%s/deja-dup/metadata' '--force' 'gio+file://%s' '%s/deja-dup/metadata' %s".printf(cachedir.substring(1), backupdir, cachedir, end_str);
   else if (mode == Mode.LIST)
-    return "'list-current-files' '--gio' %s'file://%s' %s".printf(extra, backupdir, end_str);
+    return "'list-current-files' %s'gio+file://%s' %s".printf(extra, backupdir, end_str);
   else if (mode == Mode.REMOVE)
-    return "'remove-all-but-n-full' '%d' '--force' 'file://%s' '--gio' %s".printf(remove_n, backupdir, end_str);
+    return "'remove-all-but-n-full' '%d' '--force' 'gio+file://%s' %s".printf(remove_n, backupdir, end_str);
 
   string source_str = "";
   if (mode == Mode.DRY || mode == Mode.BACKUP)
@@ -243,7 +243,7 @@ string default_args(BackupRunner br, Mode mode = Mode.NONE, bool encrypted = fal
     args += "'--exclude=**' ";
   }
 
-  args += "%s'--gio' %s%s'file://%s' %s".printf(extra, dry_str, source_str, backupdir, end_str);
+  args += "%s %s%s'gio+file://%s' %s".printf(extra, dry_str, source_str, backupdir, end_str);
 
   return args;
 }
