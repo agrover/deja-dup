@@ -34,8 +34,8 @@ public class DuplicityPlugin : DejaDup.ToolPlugin
   }
 
   const int REQUIRED_MAJOR = 0;
-  const int REQUIRED_MINOR = 6;
-  const int REQUIRED_MICRO = 23;
+  const int REQUIRED_MINOR = 7;
+  const int REQUIRED_MICRO = 14;
   void do_initial_setup () throws Error
   {
     string output;

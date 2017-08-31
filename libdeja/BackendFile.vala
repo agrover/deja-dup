@@ -85,7 +85,7 @@ public abstract class BackendFile : Backend
       as_root = false;
     }
 
-    return file.get_uri();
+    return "gio+" + file.get_uri();
   }
 
   public override string get_location_pretty()
@@ -108,9 +108,6 @@ public abstract class BackendFile : Backend
       if (file != null && file.is_native())
         argv.prepend("--exclude=%s".printf(file.get_path()));
     }
-
-    if (mode == ToolJob.Mode.INVALID)
-      argv.prepend("--gio");
   }
 
   // This doesn't *really* worry about envp, it just is a convenient point to
