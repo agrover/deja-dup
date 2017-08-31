@@ -17,14 +17,14 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 project('deja-dup', ['vala', 'c'],
-    version: '35.6',
+    version: '37.0',
     license: 'GPLv3+',
     default_options: [
         'warning_level=1',
         'buildtype=debugoptimized',
     ],
     meson_version: '>= 0.38')
-series = '36'
+series = '38'
 
 gnome = import('gnome')
 i18n = import('i18n')
