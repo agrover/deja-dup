@@ -57,7 +57,7 @@ public class BackendAuto : Backend
     // actively set, not relying on the gschema default).
     var settings = get_settings();
     var goa_settings = get_settings(GOA_ROOT);
-    goa_settings.set_string(GOA_TYPE_KEY, "owncloud");
+    goa_settings.set_string(GOA_TYPE_KEY, "google");
     settings.set_string(BACKEND_KEY, "goa");
   }
 }

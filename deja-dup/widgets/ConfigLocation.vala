@@ -211,14 +211,12 @@ public class ConfigLocation : ConfigWidget
 
     // Insert GNOME Online Account providers. We use a whitelist (rather than
     // adding any that support the Files interface) because we want to control
-    // the quality of the experience. For example, the Google gvfs backend,
-    // at the time of writing, does not support querying filesystem free space.
-    // Without that, the user experience would be poor.
+    // the quality of the experience. For example, the Google gvfs backend
+    // at one point did not support querying filesystem free space. Without
+    // that, the user experience would be poor. So we like to vet the service
+    // before enabling.
+    insert_goa("google");
     insert_goa("owncloud");
-    // TODO: We can enable Google if we have duplicity >= 0.7.14 and GNOME
-    //       bug 785870 is fixed (needs to report FS size) and maybe bug
-    //       768594 too (timeout permission issues).
-    //insert_goa("google");
 
     if (group == Group.GOA) {
       // Find place again
