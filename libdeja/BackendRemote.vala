@@ -101,7 +101,8 @@ public class BackendRemote : BackendFile
       // only called right before attempting an operation.
       return yield root.mount_enclosing_volume(MountMountFlags.NONE, mount_op, null);
     } catch (IOError.ALREADY_MOUNTED e) {
-      return true;
+      when = _("Backup will begin when a network connection becomes available.");
+      return yield Network.get().can_reach(root.get_uri());
     } catch (IOError.FAILED_HANDLED e) {
       // Needed user input, so we know we can reach server
       return true;
