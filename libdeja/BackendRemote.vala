@@ -78,11 +78,12 @@ public class BackendRemote : BackendFile
       // simply check if there is a relative path between the two.
       if (root.equal(mount_root) || !root.has_prefix(mount_root))
         root = mount.get_default_location();
-
-      return root.get_child_for_display_name(folder);
-    } catch (Error e) {
-      return null;
     }
+    catch (Error e) {
+      warning("%s", e.message);
+    }
+
+    return root.get_child_for_display_name(folder);
   }
 
   public override bool is_native() {
