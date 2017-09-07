@@ -85,13 +85,25 @@ public class BackendGOA : BackendRemote
     return File.new_for_uri(files.uri);
   }
 
+  public static string get_provider_name(Goa.Account account)
+  {
+    // Use this until GNOME bug 787413 is fixed, which asks for service-
+    // specific branding to be exposed.
+    switch (account.provider_type) {
+      case "google":
+        return _("Google Drive");
+      default:
+        return account.provider_name;
+    }
+  }
+
   public override string get_location_pretty()
   {
     var obj = get_object_from_settings();
     if (obj == null)
       return "";
     var account = obj.get_account();
-    return "%s (%s)".printf(account.provider_name, account.presentation_identity);
+    return "%s (%s)".printf(get_provider_name(account), account.presentation_identity);
   }
 
   public override async bool is_ready(out string when)

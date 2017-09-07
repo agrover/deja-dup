@@ -260,7 +260,7 @@ public class ConfigLocation : ConfigWidget
         }
         catch (Error e) {warning("%s", e.message);}
         add_entry(icon,
-                  "%s <i>(%s)</i>".printf(account.provider_name,
+                  "%s <i>(%s)</i>".printf(BackendGOA.get_provider_name(account),
                                           account.presentation_identity),
                   Group.GOA,
                   new ConfigLocationGoa(label_sizes, all_settings[GOA_ROOT], account),
