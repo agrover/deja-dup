@@ -83,7 +83,15 @@ public class BackendRemote : BackendFile
       warning("%s", e.message);
     }
 
-    return root.get_child_for_display_name(folder);
+    try {
+      return root.get_child_for_display_name(folder);
+    }
+    catch (Error e) {
+      warning("%s", e.message);
+    }
+
+    // Really?!
+    return root.get_child(folder);
   }
 
   public override bool is_native() {
