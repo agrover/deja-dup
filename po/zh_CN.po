@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-08-22 18:53-0400\n"
+"POT-Creation-Date: 2017-08-31 10:27-0400\n"
 "PO-Revision-Date: 2017-08-17 23:13+0000\n"
 "Last-Translator: shijing <jingshi@ubuntukylin.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2017-08-24 05:35+0000\n"
+"X-Launchpad-Export-Date: 2017-09-01 05:54+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
 "Language: zh\n"
 
@@ -24,7 +24,7 @@ msgstr ""
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:304
+#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:294
 #: libdeja/CommonUtils.vala:145
 msgid "Déjà Dup Backup Tool"
 msgstr "Déjà Dup 备份工具"
@@ -72,22 +72,22 @@ msgstr "备份"
 msgid "Change your backup settings"
 msgstr "更改您的备份设置"
 
-#: data/org.gnome.DejaDup.desktop:8
-#: deja-dup/monitor/deja-dup-monitor.desktop.in:8
-msgid "deja-dup"
+#. Translators: this is the icon name, you probably don't need to change this
+#: data/org.gnome.DejaDup.desktop:9
+msgid "org.gnome.DejaDup"
 msgstr ""
 
 #. Translators: Add whatever keywords you want in your language, separated by semicolons
 #. These keywords are used when searching for applications in dashes, etc.
-#: data/org.gnome.DejaDup.desktop:19
+#: data/org.gnome.DejaDup.desktop:21
 msgid "déjà;deja;dup;"
 msgstr "déjà;deja;dup;备份;"
 
-#: data/org.gnome.DejaDup.desktop:26
+#: data/org.gnome.DejaDup.desktop:28
 msgid "Back Up"
 msgstr "备份"
 
-#: data/org.gnome.DejaDup.gschema.xml:9 deja-dup/Preferences.vala:185
+#: data/org.gnome.DejaDup.gschema.xml:9 deja-dup/Preferences.vala:188
 msgid "Folders to save"
 msgstr "要保存的文件夹"
 
@@ -101,7 +101,7 @@ msgid ""
 "relative to the user’s home directory."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:196
+#: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:200
 msgid "Folders to ignore"
 msgstr "要忽略的文件夹"
 
@@ -421,7 +421,7 @@ msgid ""
 "This is the Authentication URL, or keystone URL for the OpenStack service"
 msgstr "这是认证 URL，或 OpenStack 服务的 keystone URL"
 
-#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:68
+#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:69
 msgid "Restore"
 msgstr "恢复"
 
@@ -429,120 +429,108 @@ msgstr "恢复"
 msgid "Privileges are required to restore files to system locations"
 msgstr ""
 
-#. Translators: Monitor in this sense means something akin to 'watcher', not
-#. a computer screen.  This program acts like a daemon that kicks off
-#. backups at scheduled times.
-#: deja-dup/monitor/deja-dup-monitor.desktop.in:5
-#: deja-dup/monitor/monitor.vala:288
-msgid "Backup Monitor"
-msgstr "备份监视器"
-
-#: deja-dup/monitor/deja-dup-monitor.desktop.in:6
-msgid "Schedules backups at regular intervals"
-msgstr "每隔一段时间进行定期备份"
-
-#: deja-dup/ui/help-overlay.ui:15
+#: data/ui/help-overlay.ui:15
 msgctxt "shortcut window"
 msgid "General"
 msgstr ""
 
-#: deja-dup/ui/help-overlay.ui:20
+#: data/ui/help-overlay.ui:20
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr ""
 
-#: deja-dup/ui/help-overlay.ui:27
+#: data/ui/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Help"
 msgstr ""
 
-#: deja-dup/ui/help-overlay.ui:34
+#: data/ui/help-overlay.ui:34
 msgctxt "shortcut window"
 msgid "Shortcuts"
 msgstr ""
 
-#: deja-dup/ui/menus.ui:7
+#: data/ui/menus.ui:7
 msgid "_Keyboard Shortcuts"
 msgstr ""
 
-#: deja-dup/ui/menus.ui:11
+#: data/ui/menus.ui:11
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: deja-dup/ui/menus.ui:15
+#: data/ui/menus.ui:15
 msgid "_About"
 msgstr ""
 
-#: deja-dup/ui/menus.ui:19
+#: data/ui/menus.ui:19
 msgid "_Quit"
 msgstr "退出(_Q)"
 
-#: deja-dup/ui/restore-missing.ui:18
+#: data/ui/restore-missing.ui:18
 msgid "Folder"
 msgstr "文件夹"
 
-#: deja-dup/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:165
+#: data/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:165
 msgid "Scanning…"
 msgstr "正在扫描..."
 
-#: deja-dup/ui/server-hint.ui:16
+#: data/ui/server-hint.ui:16
 msgid "Server Addresses"
 msgstr ""
 
 #. Translators: This is followed by a list of valid adresses (smb://gnome.org, ssh://192.168.0.1, ftp://[2001:db8::1])
-#: deja-dup/ui/server-hint.ui:29
+#: data/ui/server-hint.ui:29
 msgid ""
 "Server addresses are made up of a protocol prefix and an address. Examples:"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:64
+#: data/ui/server-hint.ui:64
 msgid "Available Protocols"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:78
+#: data/ui/server-hint.ui:78
 msgid "AppleTalk"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:89
+#: data/ui/server-hint.ui:89
 msgid "File Transfer Protocol"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:100
+#: data/ui/server-hint.ui:100
 msgid "Network File System"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:111
+#: data/ui/server-hint.ui:111
 msgid "Samba"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:122
+#: data/ui/server-hint.ui:122
 msgid "SSH File Transfer Protocol"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:133
+#: data/ui/server-hint.ui:133
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: deja-dup/ui/server-hint.ui:144
+#: data/ui/server-hint.ui:144
 msgid "Prefix"
 msgstr ""
 
 #. Translators: do not translate ftp:// and ftps://
-#: deja-dup/ui/server-hint.ui:169
+#: data/ui/server-hint.ui:169
 msgid "ftp:// or ftps://"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:191
+#: data/ui/server-hint.ui:191
 msgid "smb://"
 msgstr ""
 
 #. Translators: do not translate sftp:// and ssh://
-#: deja-dup/ui/server-hint.ui:202
+#: data/ui/server-hint.ui:202
 msgid "sftp:// or ssh://"
 msgstr ""
 
 #. Translators: do not translate dav:// and davs://
-#: deja-dup/ui/server-hint.ui:213
+#: data/ui/server-hint.ui:213
 msgid "dav:// or davs://"
 msgstr ""
 
@@ -564,21 +552,21 @@ msgid "Restore file from backup"
 msgid_plural "Restore files from backup"
 msgstr[0] "从备份中恢复文件"
 
-#: deja-dup/AssistantBackup.vala:31
+#: deja-dup/AssistantBackup.vala:35
 msgctxt "back up is verb"
 msgid "Back Up"
 msgstr "备份"
 
-#: deja-dup/AssistantBackup.vala:38
+#: deja-dup/AssistantBackup.vala:42
 msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "备份(_B)"
 
-#: deja-dup/AssistantBackup.vala:54
+#: deja-dup/AssistantBackup.vala:58
 msgid "Creating the first backup.  This may take a while."
 msgstr "正在创建第一个备份，这可能需要一段时间。"
 
-#: deja-dup/AssistantBackup.vala:55
+#: deja-dup/AssistantBackup.vala:59
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -586,24 +574,24 @@ msgstr "创建一个全新备份以防范备份损坏，这要比正常备份花
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: deja-dup/AssistantBackup.vala:85
+#: deja-dup/AssistantBackup.vala:89
 msgid "Backing up:"
 msgstr "备份："
 
-#: deja-dup/AssistantBackup.vala:94
+#: deja-dup/AssistantBackup.vala:98
 msgid "Backup Failed"
 msgstr "备份失败"
 
-#: deja-dup/AssistantBackup.vala:97
+#: deja-dup/AssistantBackup.vala:101
 msgid "Backup Finished"
 msgstr "备份完成"
 
 #. Also leave ourselves up if we just finished a restore test.
-#: deja-dup/AssistantBackup.vala:101
+#: deja-dup/AssistantBackup.vala:105
 msgid "Your files were successfully backed up and tested."
 msgstr "您的文件已成功备份并通过测试"
 
-#: deja-dup/AssistantBackup.vala:108
+#: deja-dup/AssistantBackup.vala:112
 msgid "Backing Up…"
 msgstr "正在备份..."
 
@@ -685,82 +673,82 @@ msgstr "还原测试"
 msgid "Failed with an unknown error."
 msgstr "因出现未知错误而失败。"
 
-#: deja-dup/AssistantOperation.vala:820
+#: deja-dup/AssistantOperation.vala:822
 msgid "Require Password?"
 msgstr "需要密码？"
 
-#: deja-dup/AssistantOperation.vala:822
+#: deja-dup/AssistantOperation.vala:824
 msgid "Encryption Password Needed"
 msgstr "请输入加密密码"
 
-#: deja-dup/AssistantOperation.vala:895
+#: deja-dup/AssistantOperation.vala:897
 msgid "Backup encryption password"
 msgstr "备份加密密码"
 
-#: deja-dup/AssistantOperation.vala:965
+#: deja-dup/AssistantOperation.vala:968
 msgctxt "verb"
 msgid "_Install"
 msgstr ""
 
-#: deja-dup/AssistantRestore.vala:72
+#: deja-dup/AssistantRestore.vala:73
 msgid "_Restore"
 msgstr "恢复(_R)"
 
-#: deja-dup/AssistantRestore.vala:94
+#: deja-dup/AssistantRestore.vala:95
 msgid "_Backup location"
 msgstr "备份位置(_B)"
 
-#: deja-dup/AssistantRestore.vala:127
+#: deja-dup/AssistantRestore.vala:128
 msgid "Restore From Where?"
 msgstr "从哪里恢复？"
 
-#: deja-dup/AssistantRestore.vala:149
+#: deja-dup/AssistantRestore.vala:150
 msgid "_Date"
 msgstr "日期(_D)"
 
-#: deja-dup/AssistantRestore.vala:172
+#: deja-dup/AssistantRestore.vala:173
 msgid "Restore files to _original locations"
 msgstr "将文件恢复到原始位置(_O)"
 
-#: deja-dup/AssistantRestore.vala:177
+#: deja-dup/AssistantRestore.vala:178
 msgid "Restore to _specific folder"
 msgstr "恢复到指定文件夹(_S)"
 
-#: deja-dup/AssistantRestore.vala:187
+#: deja-dup/AssistantRestore.vala:188
 msgid "Choose destination for restored files"
 msgstr "选择所恢复文件的目的地"
 
-#: deja-dup/AssistantRestore.vala:191
+#: deja-dup/AssistantRestore.vala:192
 msgid "Restore _folder"
 msgstr "恢复文件夹(_F)"
 
-#: deja-dup/AssistantRestore.vala:224
+#: deja-dup/AssistantRestore.vala:225
 msgid "Backup location"
 msgstr "备份位置"
 
-#: deja-dup/AssistantRestore.vala:232
+#: deja-dup/AssistantRestore.vala:233
 msgid "Restore date"
 msgstr "恢复日期"
 
-#: deja-dup/AssistantRestore.vala:240
+#: deja-dup/AssistantRestore.vala:241
 msgid "Restore folder"
 msgstr "恢复文件夹"
 
-#: deja-dup/AssistantRestore.vala:266
+#: deja-dup/AssistantRestore.vala:267
 msgid "Checking for Backups…"
 msgstr "正在检查有无备份..."
 
-#: deja-dup/AssistantRestore.vala:274
+#: deja-dup/AssistantRestore.vala:275
 msgid "Restore From When?"
 msgstr "从何时恢复？"
 
-#: deja-dup/AssistantRestore.vala:282
+#: deja-dup/AssistantRestore.vala:283
 msgid "Restore to Where?"
 msgstr "恢复到何处？"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: deja-dup/AssistantRestore.vala:309
+#: deja-dup/AssistantRestore.vala:310
 msgid "Restoring:"
 msgstr "恢复："
 
@@ -768,85 +756,85 @@ msgstr "恢复："
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: deja-dup/AssistantRestore.vala:351
+#: deja-dup/AssistantRestore.vala:352
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
 #. If we didn't see any dates...  Must not be any backups on the backend
-#: deja-dup/AssistantRestore.vala:364
+#: deja-dup/AssistantRestore.vala:365
 msgid "No backups to restore"
 msgstr "无备份可恢复"
 
-#: deja-dup/AssistantRestore.vala:441
+#: deja-dup/AssistantRestore.vala:444
 msgid "Original location"
 msgstr "原始位置"
 
-#: deja-dup/AssistantRestore.vala:452
+#: deja-dup/AssistantRestore.vala:455
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "要恢复的文件"
 
-#: deja-dup/AssistantRestore.vala:473
+#: deja-dup/AssistantRestore.vala:476
 msgid "Restore Failed"
 msgstr "恢复失败"
 
-#: deja-dup/AssistantRestore.vala:475
+#: deja-dup/AssistantRestore.vala:478
 msgid "Restore Finished"
 msgstr "恢复完成"
 
 #. if it *is* visible, a header will be set already
-#: deja-dup/AssistantRestore.vala:478
+#: deja-dup/AssistantRestore.vala:481
 msgid "Your files were successfully restored."
 msgstr "您的文件已成功恢复。"
 
-#: deja-dup/AssistantRestore.vala:481
+#: deja-dup/AssistantRestore.vala:484
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "您的文件已成功恢复。"
 
-#: deja-dup/AssistantRestore.vala:488 libdeja/Operation.vala:64
+#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:64
 msgid "Restoring…"
 msgstr "正在恢复..."
 
-#: deja-dup/AssistantRestoreMissing.vala:181
+#: deja-dup/AssistantRestoreMissing.vala:184
 msgid "File"
 msgstr "文件"
 
-#: deja-dup/AssistantRestoreMissing.vala:182
+#: deja-dup/AssistantRestoreMissing.vala:185
 msgid "Last seen"
 msgstr "上次查看时间"
 
-#: deja-dup/AssistantRestoreMissing.vala:193
+#: deja-dup/AssistantRestoreMissing.vala:196
 msgid "Restore which Files?"
 msgstr "恢复哪些文件？"
 
 #. Hours
-#: deja-dup/AssistantRestoreMissing.vala:324
+#: deja-dup/AssistantRestoreMissing.vala:327
 msgid "Scanning for files from up to a day ago…"
 msgstr "正在扫描一天内的文件..."
 
-#: deja-dup/AssistantRestoreMissing.vala:327
+#: deja-dup/AssistantRestoreMissing.vala:330
 msgid "Scanning for files from up to a week ago…"
 msgstr "正在扫描一周内的文件..."
 
-#: deja-dup/AssistantRestoreMissing.vala:330
+#: deja-dup/AssistantRestoreMissing.vala:333
 msgid "Scanning for files from up to a month ago…"
 msgstr "正在扫描一个月内的文件..."
 
-#: deja-dup/AssistantRestoreMissing.vala:335
+#: deja-dup/AssistantRestoreMissing.vala:338
 #, c-format
 msgid "Scanning for files from about a month ago…"
 msgid_plural "Scanning for files from about %d months ago…"
 msgstr[0] "正在扫描约 %d 个月内的文件..."
 
-#: deja-dup/AssistantRestoreMissing.vala:342
+#: deja-dup/AssistantRestoreMissing.vala:345
 #, c-format
 msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
 msgstr[0] "正在扫描约 %d 年前的文件..."
 
-#: deja-dup/AssistantRestoreMissing.vala:433
+#: deja-dup/AssistantRestoreMissing.vala:438
 msgid "Scanning finished"
 msgstr "扫描完成"
 
@@ -978,51 +966,51 @@ msgstr "以用户身份连接(_U)"
 msgid "_Domain"
 msgstr "域(_D)"
 
-#: deja-dup/Preferences.vala:78
+#: deja-dup/Preferences.vala:79
 msgid "Categories"
 msgstr "分类"
 
-#: deja-dup/Preferences.vala:131
+#: deja-dup/Preferences.vala:132
 msgid "_Restore…"
 msgstr "恢复(_R)..."
 
-#: deja-dup/Preferences.vala:163
+#: deja-dup/Preferences.vala:164
 msgid "_Back Up Now…"
 msgstr "立即备份(_B)"
 
-#: deja-dup/Preferences.vala:174
+#: deja-dup/Preferences.vala:176
 msgid "Overview"
 msgstr "概览"
 
-#: deja-dup/Preferences.vala:208
+#: deja-dup/Preferences.vala:212
 msgid "_Storage location"
 msgstr "存储位置(_S)"
 
 #. Translators: storage as in "where to store the backup"
-#: deja-dup/Preferences.vala:225
+#: deja-dup/Preferences.vala:230
 msgid "Storage location"
 msgstr "存储位置"
 
-#: deja-dup/Preferences.vala:248
+#: deja-dup/Preferences.vala:253
 msgid "_Automatic backup"
 msgstr "自动备份(_A)"
 
 #. translators: as in "Every day"
-#: deja-dup/Preferences.vala:259
+#: deja-dup/Preferences.vala:264
 msgid "_Every"
 msgstr "每天(_E)"
 
-#: deja-dup/Preferences.vala:269
+#: deja-dup/Preferences.vala:274
 msgctxt "verb"
 msgid "_Keep"
 msgstr "维持原状(_K)"
 
-#: deja-dup/Preferences.vala:276
+#: deja-dup/Preferences.vala:281
 msgid ""
 "Old backups will be deleted earlier if the storage location is low on space."
 msgstr "存储空间不足时，旧的备份将被删除。"
 
-#: deja-dup/Preferences.vala:286
+#: deja-dup/Preferences.vala:292
 msgid "Scheduling"
 msgstr "调度中"
 
@@ -1067,8 +1055,8 @@ msgstr "开始计划备份"
 msgid "%.1f%% complete"
 msgstr "已完成 %.1f%%"
 
-#: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:50
-#: libdeja/BackendS3.vala:60
+#: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:54
+#: libdeja/BackendRemote.vala:104 libdeja/BackendS3.vala:64
 msgid "Backup will begin when a network connection becomes available."
 msgstr "备份将在网络连接可用时开始。"
 
@@ -1076,6 +1064,13 @@ msgstr "备份将在网络连接可用时开始。"
 msgid ""
 "Backup will begin when an unmetered network connection becomes available."
 msgstr ""
+
+#. Translators: Monitor in this sense means something akin to 'watcher', not
+#. a computer screen.  This program acts like a daemon that kicks off
+#. backups at scheduled times.
+#: deja-dup/monitor/monitor.vala:288
+msgid "Backup Monitor"
+msgstr "备份监视器"
 
 #: deja-dup/widgets/ConfigDelete.vala:40
 msgid "At least six months"
@@ -1196,34 +1191,34 @@ msgstr "删除"
 msgid "Choose folders"
 msgstr "选择文件夹"
 
-#: deja-dup/widgets/ConfigLocation.vala:114
+#: deja-dup/widgets/ConfigLocation.vala:126
 msgid "Network Server"
 msgstr ""
 
 #. And a local folder option
-#: deja-dup/widgets/ConfigLocation.vala:119
+#: deja-dup/widgets/ConfigLocation.vala:131
 msgid "Local Folder"
 msgstr "本地文件夹"
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:284 libdeja/BackendS3.vala:123
+#: deja-dup/widgets/ConfigLocation.vala:295 libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: deja-dup/widgets/ConfigLocation.vala:286
+#: deja-dup/widgets/ConfigLocation.vala:297
 msgid "Google Cloud Storage"
 msgstr "谷歌云存储"
 
-#: deja-dup/widgets/ConfigLocation.vala:288 libdeja/BackendU1.vala:45
+#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: deja-dup/widgets/ConfigLocation.vala:290 libdeja/BackendRackspace.vala:70
+#: deja-dup/widgets/ConfigLocation.vala:301 libdeja/BackendRackspace.vala:72
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace 云文件"
 
-#: deja-dup/widgets/ConfigLocation.vala:292
+#: deja-dup/widgets/ConfigLocation.vala:303
 msgid "OpenStack Swift"
 msgstr "OpenStack Swift"
 
@@ -1313,27 +1308,27 @@ msgstr "无法显示 %s"
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: libdeja/BackendDrive.vala:98 libdeja/CommonUtils.vala:571
+#: libdeja/BackendDrive.vala:95 libdeja/CommonUtils.vala:537
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s，在 %2$s"
 
-#: libdeja/BackendDrive.vala:106
+#: libdeja/BackendDrive.vala:102
 #, c-format
 msgid "Backup will begin when %s is connected."
 msgstr ""
 
-#: libdeja/BackendDrive.vala:185 libdeja/BackendGOA.vala:145
-#: libdeja/BackendRemote.vala:124
+#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:146
+#: libdeja/BackendRemote.vala:129
 msgid "Storage location not available"
 msgstr ""
 
-#: libdeja/BackendDrive.vala:185
+#: libdeja/BackendDrive.vala:184
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "正在等待“%s”建立连接..."
 
-#: libdeja/BackendGOA.vala:99
+#: libdeja/BackendGOA.vala:101
 msgid "Backup will begin when a storage location is configured"
 msgstr ""
 
@@ -1341,119 +1336,119 @@ msgstr ""
 #. Translators: "Files" here is the string used in GNOME Online Account
 #. settings checkbox for a given account to enable/disable an account's
 #. Files feature.
-#: libdeja/BackendGOA.vala:109
+#: libdeja/BackendGOA.vala:111
 #, c-format
 msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr ""
 
-#: libdeja/BackendGOA.vala:139
+#: libdeja/BackendGOA.vala:140
 msgid "Waiting for Online Accounts to be configured in your backup settings…"
 msgstr ""
 
 #. Translators: %s is the name of the provider inside of GNOME Online Accounts
-#: libdeja/BackendGOA.vala:142
+#: libdeja/BackendGOA.vala:143
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
 
 #. Translators: %s is a folder.
-#: libdeja/BackendRackspace.vala:73
+#: libdeja/BackendRackspace.vala:75
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr "Rackspace 云文件上的 %s"
 
-#: libdeja/BackendRackspace.vala:116 libdeja/BackendS3.vala:169
+#: libdeja/BackendRackspace.vala:117 libdeja/BackendS3.vala:167
 msgid "Permission denied"
 msgstr "权限不够"
 
-#: libdeja/BackendRackspace.vala:147
+#: libdeja/BackendRackspace.vala:148
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
 "href=\"%s\">online</a>."
 msgstr "您可以在线<a href=\"%s\">注册</a>一个 Rackspace 云文件帐号。"
 
-#: libdeja/BackendRackspace.vala:148
+#: libdeja/BackendRackspace.vala:149
 msgid "Connect to Rackspace Cloud Files"
 msgstr "连接至 Rackspace 云文件服务"
 
-#: libdeja/BackendRackspace.vala:149
+#: libdeja/BackendRackspace.vala:150
 msgid "_API access key"
 msgstr "_API 访问密钥"
 
-#: libdeja/BackendRackspace.vala:150
+#: libdeja/BackendRackspace.vala:151
 msgid "S_how API access key"
 msgstr "显示 API 访问密钥(_H)"
 
-#: libdeja/BackendRackspace.vala:151
+#: libdeja/BackendRackspace.vala:152
 msgid "_Remember API access key"
 msgstr "记住 API 访问密钥(_R)"
 
-#: libdeja/BackendRemote.vala:125
+#: libdeja/BackendRemote.vala:130
 msgid "Waiting for a network connection…"
 msgstr "等待网络连接..."
 
 #. Translators: %s is a folder.
-#: libdeja/BackendS3.vala:126
+#: libdeja/BackendS3.vala:125
 #, c-format
 msgid "%s on Amazon S3"
 msgstr "Amazon S3 上的 %s"
 
-#: libdeja/BackendS3.vala:200
+#: libdeja/BackendS3.vala:198
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr "您可以<a href=\"%s\">在线</a>注册一个 Amazon S3 帐号。"
 
-#: libdeja/BackendS3.vala:201
+#: libdeja/BackendS3.vala:199
 msgid "Connect to Amazon S3"
 msgstr "连接至 Amazon S3"
 
-#: libdeja/BackendS3.vala:202
+#: libdeja/BackendS3.vala:200
 msgid "_Access key ID"
 msgstr "访问密钥 ID(_A)"
 
-#: libdeja/BackendS3.vala:203
+#: libdeja/BackendS3.vala:201
 msgid "_Secret access key"
 msgstr "访问密钥私钥(_S)"
 
-#: libdeja/BackendS3.vala:204
+#: libdeja/BackendS3.vala:202
 msgid "S_how secret access key"
 msgstr "显示访问密钥(_H)"
 
-#: libdeja/BackendS3.vala:205
+#: libdeja/BackendS3.vala:203
 msgid "_Remember secret access key"
 msgstr "记住访问密钥(_R)"
 
-#: libdeja/CommonUtils.vala:450
+#: libdeja/CommonUtils.vala:416
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr "无法找到 %s 中的备份工具。您的安装不完整。"
 
-#: libdeja/CommonUtils.vala:452
+#: libdeja/CommonUtils.vala:418
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr "无法加载备份工具。您的安装不完整。"
 
-#: libdeja/CommonUtils.vala:458
+#: libdeja/CommonUtils.vala:424
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr "备份工具损坏。您的安装不完整。"
 
-#: libdeja/CommonUtils.vala:473
+#: libdeja/CommonUtils.vala:439
 msgid "Could not start backup tool"
 msgstr "无法启动备份工具"
 
 #. Translators: this is the home folder and %s is the user's username
-#: libdeja/CommonUtils.vala:622
+#: libdeja/CommonUtils.vala:588
 #, c-format
 msgid "Home (%s)"
 msgstr "主目录(%s)"
 
 #. Translators: this is the home folder
-#: libdeja/CommonUtils.vala:627
+#: libdeja/CommonUtils.vala:593
 msgid "Home"
 msgstr "主目录"
 
 #. Translators: this is the trash folder
-#: libdeja/CommonUtils.vala:632
+#: libdeja/CommonUtils.vala:598
 msgid "Trash"
 msgstr "回收站"
 
@@ -1461,7 +1456,7 @@ msgstr "回收站"
 msgid "Verifying backup…"
 msgstr "正在验证备份..."
 
-#: libdeja/OperationRestore.vala:51
+#: libdeja/OperationRestore.vala:52
 msgid "Restoring files…"
 msgstr "正在恢复文件..."
 
@@ -1483,7 +1478,7 @@ msgstr "正在检查有无备份..."
 msgid "Listing files…"
 msgstr "正在列出文件..."
 
-#: libdeja/Operation.vala:70 libdeja/Operation.vala:104
+#: libdeja/Operation.vala:70 libdeja/Operation.vala:99
 #: libdeja/tools/duplicity/DuplicityJob.vala:394
 #: libdeja/tools/duplicity/DuplicityJob.vala:401
 #: libdeja/tools/duplicity/DuplicityJob.vala:426
@@ -1710,6 +1705,9 @@ msgstr "Déjà Dup 备份工具至少需要 %d.%d.%.2d 版的 duplicity 软件�
 #~ "Support for local, remote, or cloud backup locations, such as Amazon S3 and "
 #~ "Rackspace Cloud Files"
 #~ msgstr "支持本地、远程或 Amazon S3、Rackspace Cloud Files 等云备份位置。"
+
+#~ msgid "Schedules backups at regular intervals"
+#~ msgstr "每隔一段时间进行定期备份"
 
 #~ msgid "_Skip Backup"
 #~ msgstr "跳过备份(_S)"

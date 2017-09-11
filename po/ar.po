@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-08-22 18:53-0400\n"
+"POT-Creation-Date: 2017-08-31 10:27-0400\n"
 "PO-Revision-Date: 2017-08-04 22:33+0000\n"
 "Last-Translator: Michael Terry <mike@mterry.name>\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2017-08-24 05:34+0000\n"
+"X-Launchpad-Export-Date: 2017-09-01 05:52+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
@@ -24,7 +24,7 @@ msgstr ""
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:304
+#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:294
 #: libdeja/CommonUtils.vala:145
 msgid "Déjà Dup Backup Tool"
 msgstr "أداة النسخ الاحتياطي «ديجا دوب»"
@@ -72,22 +72,22 @@ msgstr "النسخ الاحتياطي"
 msgid "Change your backup settings"
 msgstr "غيّر إعدادات النسخ الاحتياطي"
 
-#: data/org.gnome.DejaDup.desktop:8
-#: deja-dup/monitor/deja-dup-monitor.desktop.in:8
-msgid "deja-dup"
+#. Translators: this is the icon name, you probably don't need to change this
+#: data/org.gnome.DejaDup.desktop:9
+msgid "org.gnome.DejaDup"
 msgstr ""
 
 #. Translators: Add whatever keywords you want in your language, separated by semicolons
 #. These keywords are used when searching for applications in dashes, etc.
-#: data/org.gnome.DejaDup.desktop:19
+#: data/org.gnome.DejaDup.desktop:21
 msgid "déjà;deja;dup;"
 msgstr "ديجا دوب;ديجا;دوب;نسخ احتياطي; نسخة احتياطية; احتياطي;"
 
-#: data/org.gnome.DejaDup.desktop:26
+#: data/org.gnome.DejaDup.desktop:28
 msgid "Back Up"
 msgstr "خُذ نسخة احتياطية"
 
-#: data/org.gnome.DejaDup.gschema.xml:9 deja-dup/Preferences.vala:185
+#: data/org.gnome.DejaDup.gschema.xml:9 deja-dup/Preferences.vala:188
 msgid "Folders to save"
 msgstr "المجلدات التي ستُحفظ"
 
@@ -101,7 +101,7 @@ msgid ""
 "relative to the user’s home directory."
 msgstr ""
 
-#: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:196
+#: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:200
 msgid "Folders to ignore"
 msgstr "المُجلدات التي سيتم تجاهلها"
 
@@ -427,7 +427,7 @@ msgid ""
 "This is the Authentication URL, or keystone URL for the OpenStack service"
 msgstr ""
 
-#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:68
+#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:69
 msgid "Restore"
 msgstr ""
 
@@ -435,120 +435,108 @@ msgstr ""
 msgid "Privileges are required to restore files to system locations"
 msgstr ""
 
-#. Translators: Monitor in this sense means something akin to 'watcher', not
-#. a computer screen.  This program acts like a daemon that kicks off
-#. backups at scheduled times.
-#: deja-dup/monitor/deja-dup-monitor.desktop.in:5
-#: deja-dup/monitor/monitor.vala:288
-msgid "Backup Monitor"
-msgstr "مراقب النسخ الاحتياطي"
-
-#: deja-dup/monitor/deja-dup-monitor.desktop.in:6
-msgid "Schedules backups at regular intervals"
-msgstr "نسخ احتياطي مجدول خلال فترات منتظمة"
-
-#: deja-dup/ui/help-overlay.ui:15
+#: data/ui/help-overlay.ui:15
 msgctxt "shortcut window"
 msgid "General"
 msgstr ""
 
-#: deja-dup/ui/help-overlay.ui:20
+#: data/ui/help-overlay.ui:20
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr ""
 
-#: deja-dup/ui/help-overlay.ui:27
+#: data/ui/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Help"
 msgstr ""
 
-#: deja-dup/ui/help-overlay.ui:34
+#: data/ui/help-overlay.ui:34
 msgctxt "shortcut window"
 msgid "Shortcuts"
 msgstr ""
 
-#: deja-dup/ui/menus.ui:7
+#: data/ui/menus.ui:7
 msgid "_Keyboard Shortcuts"
 msgstr ""
 
-#: deja-dup/ui/menus.ui:11
+#: data/ui/menus.ui:11
 msgid "_Help"
 msgstr "م_ساعدة"
 
-#: deja-dup/ui/menus.ui:15
+#: data/ui/menus.ui:15
 msgid "_About"
 msgstr ""
 
-#: deja-dup/ui/menus.ui:19
+#: data/ui/menus.ui:19
 msgid "_Quit"
 msgstr "ا_خرج"
 
-#: deja-dup/ui/restore-missing.ui:18
+#: data/ui/restore-missing.ui:18
 msgid "Folder"
 msgstr "المجلّد"
 
-#: deja-dup/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:165
+#: data/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:165
 msgid "Scanning…"
 msgstr "يتفحص..."
 
-#: deja-dup/ui/server-hint.ui:16
+#: data/ui/server-hint.ui:16
 msgid "Server Addresses"
 msgstr ""
 
 #. Translators: This is followed by a list of valid adresses (smb://gnome.org, ssh://192.168.0.1, ftp://[2001:db8::1])
-#: deja-dup/ui/server-hint.ui:29
+#: data/ui/server-hint.ui:29
 msgid ""
 "Server addresses are made up of a protocol prefix and an address. Examples:"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:64
+#: data/ui/server-hint.ui:64
 msgid "Available Protocols"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:78
+#: data/ui/server-hint.ui:78
 msgid "AppleTalk"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:89
+#: data/ui/server-hint.ui:89
 msgid "File Transfer Protocol"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:100
+#: data/ui/server-hint.ui:100
 msgid "Network File System"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:111
+#: data/ui/server-hint.ui:111
 msgid "Samba"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:122
+#: data/ui/server-hint.ui:122
 msgid "SSH File Transfer Protocol"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:133
+#: data/ui/server-hint.ui:133
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: deja-dup/ui/server-hint.ui:144
+#: data/ui/server-hint.ui:144
 msgid "Prefix"
 msgstr ""
 
 #. Translators: do not translate ftp:// and ftps://
-#: deja-dup/ui/server-hint.ui:169
+#: data/ui/server-hint.ui:169
 msgid "ftp:// or ftps://"
 msgstr ""
 
-#: deja-dup/ui/server-hint.ui:191
+#: data/ui/server-hint.ui:191
 msgid "smb://"
 msgstr ""
 
 #. Translators: do not translate sftp:// and ssh://
-#: deja-dup/ui/server-hint.ui:202
+#: data/ui/server-hint.ui:202
 msgid "sftp:// or ssh://"
 msgstr ""
 
 #. Translators: do not translate dav:// and davs://
-#: deja-dup/ui/server-hint.ui:213
+#: data/ui/server-hint.ui:213
 msgid "dav:// or davs://"
 msgstr ""
 
@@ -580,21 +568,21 @@ msgstr[3] "استرجع ملفات من نسخة احتياطية"
 msgstr[4] "استرجع ملفات من نسخة احتياطية"
 msgstr[5] "استرجع ملفات من نسخة احتياطية"
 
-#: deja-dup/AssistantBackup.vala:31
+#: deja-dup/AssistantBackup.vala:35
 msgctxt "back up is verb"
 msgid "Back Up"
 msgstr "خُذ نسخة احتياطية"
 
-#: deja-dup/AssistantBackup.vala:38
+#: deja-dup/AssistantBackup.vala:42
 msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "_خُذ نسخة احتياطية"
 
-#: deja-dup/AssistantBackup.vala:54
+#: deja-dup/AssistantBackup.vala:58
 msgid "Creating the first backup.  This may take a while."
 msgstr "يجري إنشاء أول نسخة احتياطية. قد يستغرق هذا بعض الوقت."
 
-#: deja-dup/AssistantBackup.vala:55
+#: deja-dup/AssistantBackup.vala:59
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -604,24 +592,24 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: deja-dup/AssistantBackup.vala:85
+#: deja-dup/AssistantBackup.vala:89
 msgid "Backing up:"
 msgstr "يأخذ نسخة احتياطية من:"
 
-#: deja-dup/AssistantBackup.vala:94
+#: deja-dup/AssistantBackup.vala:98
 msgid "Backup Failed"
 msgstr "فشل النسخ الاحتياطي"
 
-#: deja-dup/AssistantBackup.vala:97
+#: deja-dup/AssistantBackup.vala:101
 msgid "Backup Finished"
 msgstr "انتهى النسخ الاحتياطي"
 
 #. Also leave ourselves up if we just finished a restore test.
-#: deja-dup/AssistantBackup.vala:101
+#: deja-dup/AssistantBackup.vala:105
 msgid "Your files were successfully backed up and tested."
 msgstr "تم نسخ ملفاتك احتياطيًا بنجاح واختبارها."
 
-#: deja-dup/AssistantBackup.vala:108
+#: deja-dup/AssistantBackup.vala:112
 msgid "Backing Up…"
 msgstr "ينسخ احتياطيًا..."
 
@@ -706,82 +694,82 @@ msgstr "اختبار الاسترجاع"
 msgid "Failed with an unknown error."
 msgstr "فشل بخطأ غير معروف."
 
-#: deja-dup/AssistantOperation.vala:820
+#: deja-dup/AssistantOperation.vala:822
 msgid "Require Password?"
 msgstr "طلب كلمة سر؟"
 
-#: deja-dup/AssistantOperation.vala:822
+#: deja-dup/AssistantOperation.vala:824
 msgid "Encryption Password Needed"
 msgstr "مطلوب كلمة سر التشفير"
 
-#: deja-dup/AssistantOperation.vala:895
+#: deja-dup/AssistantOperation.vala:897
 msgid "Backup encryption password"
 msgstr "كلمة سر تشفير النسخ الاحتياطي"
 
-#: deja-dup/AssistantOperation.vala:965
+#: deja-dup/AssistantOperation.vala:968
 msgctxt "verb"
 msgid "_Install"
 msgstr ""
 
-#: deja-dup/AssistantRestore.vala:72
+#: deja-dup/AssistantRestore.vala:73
 msgid "_Restore"
 msgstr "است_رجع"
 
-#: deja-dup/AssistantRestore.vala:94
+#: deja-dup/AssistantRestore.vala:95
 msgid "_Backup location"
 msgstr "_مكان النسخ الاحتياطي"
 
-#: deja-dup/AssistantRestore.vala:127
+#: deja-dup/AssistantRestore.vala:128
 msgid "Restore From Where?"
 msgstr "استرجاع من أين؟"
 
-#: deja-dup/AssistantRestore.vala:149
+#: deja-dup/AssistantRestore.vala:150
 msgid "_Date"
 msgstr "ال_تاريخ"
 
-#: deja-dup/AssistantRestore.vala:172
+#: deja-dup/AssistantRestore.vala:173
 msgid "Restore files to _original locations"
 msgstr "استرجع الملفات للأماكن الأ_صلية"
 
-#: deja-dup/AssistantRestore.vala:177
+#: deja-dup/AssistantRestore.vala:178
 msgid "Restore to _specific folder"
 msgstr "استرجع إلى مجلد _محدد"
 
-#: deja-dup/AssistantRestore.vala:187
+#: deja-dup/AssistantRestore.vala:188
 msgid "Choose destination for restored files"
 msgstr "اختر مجلدا للملفات المسترجعة"
 
-#: deja-dup/AssistantRestore.vala:191
+#: deja-dup/AssistantRestore.vala:192
 msgid "Restore _folder"
 msgstr ""
 
-#: deja-dup/AssistantRestore.vala:224
+#: deja-dup/AssistantRestore.vala:225
 msgid "Backup location"
 msgstr "مكان النسخ الاحتياطي"
 
-#: deja-dup/AssistantRestore.vala:232
+#: deja-dup/AssistantRestore.vala:233
 msgid "Restore date"
 msgstr "تاريخ الاسترجاع"
 
-#: deja-dup/AssistantRestore.vala:240
+#: deja-dup/AssistantRestore.vala:241
 msgid "Restore folder"
 msgstr "مجلد الاسترجاع"
 
-#: deja-dup/AssistantRestore.vala:266
+#: deja-dup/AssistantRestore.vala:267
 msgid "Checking for Backups…"
 msgstr "يتفقد النُسخ الاحتياطية..."
 
-#: deja-dup/AssistantRestore.vala:274
+#: deja-dup/AssistantRestore.vala:275
 msgid "Restore From When?"
 msgstr "استرجاع من أين؟"
 
-#: deja-dup/AssistantRestore.vala:282
+#: deja-dup/AssistantRestore.vala:283
 msgid "Restore to Where?"
 msgstr "استرجاع إلى أين؟"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: deja-dup/AssistantRestore.vala:309
+#: deja-dup/AssistantRestore.vala:310
 msgid "Restoring:"
 msgstr "استعادة:"
 
@@ -789,21 +777,21 @@ msgstr "استعادة:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: deja-dup/AssistantRestore.vala:351
+#: deja-dup/AssistantRestore.vala:352
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
 #. If we didn't see any dates...  Must not be any backups on the backend
-#: deja-dup/AssistantRestore.vala:364
+#: deja-dup/AssistantRestore.vala:365
 msgid "No backups to restore"
 msgstr "لا توجد نسخ احتياطية لاسترجاعها"
 
-#: deja-dup/AssistantRestore.vala:441
+#: deja-dup/AssistantRestore.vala:444
 msgid "Original location"
 msgstr "المكان الأصلي"
 
-#: deja-dup/AssistantRestore.vala:452
+#: deja-dup/AssistantRestore.vala:455
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "الملف الذي سيسترجع"
@@ -813,20 +801,20 @@ msgstr[3] "الملفات التي ستسترجع"
 msgstr[4] "الملفات التي ستسترجع"
 msgstr[5] "الملفات التي ستسترجع"
 
-#: deja-dup/AssistantRestore.vala:473
+#: deja-dup/AssistantRestore.vala:476
 msgid "Restore Failed"
 msgstr "فشل الاسترجاع"
 
-#: deja-dup/AssistantRestore.vala:475
+#: deja-dup/AssistantRestore.vala:478
 msgid "Restore Finished"
 msgstr "انتهى الاسترجاع"
 
 #. if it *is* visible, a header will be set already
-#: deja-dup/AssistantRestore.vala:478
+#: deja-dup/AssistantRestore.vala:481
 msgid "Your files were successfully restored."
 msgstr "استُرجعت ملفاتك بنجاح."
 
-#: deja-dup/AssistantRestore.vala:481
+#: deja-dup/AssistantRestore.vala:484
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "استُرجع ملفك بنجاح."
@@ -836,36 +824,36 @@ msgstr[3] "استُرجعت ملفاتك بنجاح."
 msgstr[4] "استُرجعت ملفاتك بنجاح."
 msgstr[5] "استُرجعت ملفاتك بنجاح."
 
-#: deja-dup/AssistantRestore.vala:488 libdeja/Operation.vala:64
+#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:64
 msgid "Restoring…"
 msgstr "يسترجع..."
 
-#: deja-dup/AssistantRestoreMissing.vala:181
+#: deja-dup/AssistantRestoreMissing.vala:184
 msgid "File"
 msgstr "الملف"
 
-#: deja-dup/AssistantRestoreMissing.vala:182
+#: deja-dup/AssistantRestoreMissing.vala:185
 msgid "Last seen"
 msgstr "آخر رؤية"
 
-#: deja-dup/AssistantRestoreMissing.vala:193
+#: deja-dup/AssistantRestoreMissing.vala:196
 msgid "Restore which Files?"
 msgstr "ما هي الملفات التي تريد استرجاعها؟"
 
 #. Hours
-#: deja-dup/AssistantRestoreMissing.vala:324
+#: deja-dup/AssistantRestoreMissing.vala:327
 msgid "Scanning for files from up to a day ago…"
 msgstr "يتفحص الملفات الموجودة منذ يوم..."
 
-#: deja-dup/AssistantRestoreMissing.vala:327
+#: deja-dup/AssistantRestoreMissing.vala:330
 msgid "Scanning for files from up to a week ago…"
 msgstr "يتفحص الملفات الموجودة منذ أسبوع..."
 
-#: deja-dup/AssistantRestoreMissing.vala:330
+#: deja-dup/AssistantRestoreMissing.vala:333
 msgid "Scanning for files from up to a month ago…"
 msgstr "يتفحص الملفات الموجودة منذ شهر..."
 
-#: deja-dup/AssistantRestoreMissing.vala:335
+#: deja-dup/AssistantRestoreMissing.vala:338
 #, c-format
 msgid "Scanning for files from about a month ago…"
 msgid_plural "Scanning for files from about %d months ago…"
@@ -876,7 +864,7 @@ msgstr[3] "يتفحص الملفات الموجودة منذ ما يقارب %d 
 msgstr[4] "يتفحص الملفات الموجودة منذ ما يقارب %d شهرا..."
 msgstr[5] "يتفحص الملفات الموجودة منذ ما يقارب %d شهر..."
 
-#: deja-dup/AssistantRestoreMissing.vala:342
+#: deja-dup/AssistantRestoreMissing.vala:345
 #, c-format
 msgid "Scanning for files from about a year ago…"
 msgid_plural "Scanning for files from about %d years ago…"
@@ -887,7 +875,7 @@ msgstr[3] "يتفحص الملفات الموجودة منذ ما يقارب %d 
 msgstr[4] "يتفحص الملفات الموجودة منذ ما يقارب %d سنة..."
 msgstr[5] "يتفحص الملفات الموجودة منذ ما يقارب %d سنة..."
 
-#: deja-dup/AssistantRestoreMissing.vala:433
+#: deja-dup/AssistantRestoreMissing.vala:438
 msgid "Scanning finished"
 msgstr "انتهى الفحص"
 
@@ -1008,51 +996,51 @@ msgstr "اتصل كم_ستخدم"
 msgid "_Domain"
 msgstr "ال_نطاق"
 
-#: deja-dup/Preferences.vala:78
+#: deja-dup/Preferences.vala:79
 msgid "Categories"
 msgstr "التصنيفات"
 
-#: deja-dup/Preferences.vala:131
+#: deja-dup/Preferences.vala:132
 msgid "_Restore…"
 msgstr "است_رجع..."
 
-#: deja-dup/Preferences.vala:163
+#: deja-dup/Preferences.vala:164
 msgid "_Back Up Now…"
 msgstr "_خذ نسخة احتياطية الآن..."
 
-#: deja-dup/Preferences.vala:174
+#: deja-dup/Preferences.vala:176
 msgid "Overview"
 msgstr "عــام"
 
-#: deja-dup/Preferences.vala:208
+#: deja-dup/Preferences.vala:212
 msgid "_Storage location"
 msgstr "موقع الت_خزين"
 
 #. Translators: storage as in "where to store the backup"
-#: deja-dup/Preferences.vala:225
+#: deja-dup/Preferences.vala:230
 msgid "Storage location"
 msgstr "موقع التخزين"
 
-#: deja-dup/Preferences.vala:248
+#: deja-dup/Preferences.vala:253
 msgid "_Automatic backup"
 msgstr "النسخ الاحتياطي الآ_لي"
 
 #. translators: as in "Every day"
-#: deja-dup/Preferences.vala:259
+#: deja-dup/Preferences.vala:264
 msgid "_Every"
 msgstr "_كل"
 
-#: deja-dup/Preferences.vala:269
+#: deja-dup/Preferences.vala:274
 msgctxt "verb"
 msgid "_Keep"
 msgstr "الا_حتفاظ بها"
 
-#: deja-dup/Preferences.vala:276
+#: deja-dup/Preferences.vala:281
 msgid ""
 "Old backups will be deleted earlier if the storage location is low on space."
 msgstr "النسخ الاحتياطية القديمة ستُحذف إذا كان موقع التخزين منخفض المساحة."
 
-#: deja-dup/Preferences.vala:286
+#: deja-dup/Preferences.vala:292
 msgid "Scheduling"
 msgstr "الجدولة"
 
@@ -1099,8 +1087,8 @@ msgstr "يبدأ النسخ الاحتياطي المُجدول"
 msgid "%.1f%% complete"
 msgstr "اكتمل %.1f%%"
 
-#: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:50
-#: libdeja/BackendS3.vala:60
+#: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:54
+#: libdeja/BackendRemote.vala:104 libdeja/BackendS3.vala:64
 msgid "Backup will begin when a network connection becomes available."
 msgstr "سيبدأ النسخ الاحتياطي عند الاتصال بالشبكة."
 
@@ -1108,6 +1096,13 @@ msgstr "سيبدأ النسخ الاحتياطي عند الاتصال بالش�
 msgid ""
 "Backup will begin when an unmetered network connection becomes available."
 msgstr ""
+
+#. Translators: Monitor in this sense means something akin to 'watcher', not
+#. a computer screen.  This program acts like a daemon that kicks off
+#. backups at scheduled times.
+#: deja-dup/monitor/monitor.vala:288
+msgid "Backup Monitor"
+msgstr "مراقب النسخ الاحتياطي"
 
 #: deja-dup/widgets/ConfigDelete.vala:40
 msgid "At least six months"
@@ -1250,34 +1245,34 @@ msgstr "أزِل"
 msgid "Choose folders"
 msgstr "اختيار مجلدات"
 
-#: deja-dup/widgets/ConfigLocation.vala:114
+#: deja-dup/widgets/ConfigLocation.vala:126
 msgid "Network Server"
 msgstr ""
 
 #. And a local folder option
-#: deja-dup/widgets/ConfigLocation.vala:119
+#: deja-dup/widgets/ConfigLocation.vala:131
 msgid "Local Folder"
 msgstr ""
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:284 libdeja/BackendS3.vala:123
+#: deja-dup/widgets/ConfigLocation.vala:295 libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr ""
 
-#: deja-dup/widgets/ConfigLocation.vala:286
+#: deja-dup/widgets/ConfigLocation.vala:297
 msgid "Google Cloud Storage"
 msgstr ""
 
-#: deja-dup/widgets/ConfigLocation.vala:288 libdeja/BackendU1.vala:45
+#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "أبونتو ون"
 
-#: deja-dup/widgets/ConfigLocation.vala:290 libdeja/BackendRackspace.vala:70
+#: deja-dup/widgets/ConfigLocation.vala:301 libdeja/BackendRackspace.vala:72
 msgid "Rackspace Cloud Files"
 msgstr ""
 
-#: deja-dup/widgets/ConfigLocation.vala:292
+#: deja-dup/widgets/ConfigLocation.vala:303
 msgid "OpenStack Swift"
 msgstr ""
 
@@ -1372,27 +1367,27 @@ msgstr ""
 
 #. Translators: %2$s is the name of a removable drive, %1$s is a folder
 #. on that removable drive.
-#: libdeja/BackendDrive.vala:98 libdeja/CommonUtils.vala:571
+#: libdeja/BackendDrive.vala:95 libdeja/CommonUtils.vala:537
 #, c-format
 msgid "%1$s on %2$s"
 msgstr "%1$s على %2$s"
 
-#: libdeja/BackendDrive.vala:106
+#: libdeja/BackendDrive.vala:102
 #, c-format
 msgid "Backup will begin when %s is connected."
 msgstr ""
 
-#: libdeja/BackendDrive.vala:185 libdeja/BackendGOA.vala:145
-#: libdeja/BackendRemote.vala:124
+#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:146
+#: libdeja/BackendRemote.vala:129
 msgid "Storage location not available"
 msgstr ""
 
-#: libdeja/BackendDrive.vala:185
+#: libdeja/BackendDrive.vala:184
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr ""
 
-#: libdeja/BackendGOA.vala:99
+#: libdeja/BackendGOA.vala:101
 msgid "Backup will begin when a storage location is configured"
 msgstr ""
 
@@ -1400,119 +1395,119 @@ msgstr ""
 #. Translators: "Files" here is the string used in GNOME Online Account
 #. settings checkbox for a given account to enable/disable an account's
 #. Files feature.
-#: libdeja/BackendGOA.vala:109
+#: libdeja/BackendGOA.vala:111
 #, c-format
 msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr ""
 
-#: libdeja/BackendGOA.vala:139
+#: libdeja/BackendGOA.vala:140
 msgid "Waiting for Online Accounts to be configured in your backup settings…"
 msgstr ""
 
 #. Translators: %s is the name of the provider inside of GNOME Online Accounts
-#: libdeja/BackendGOA.vala:142
+#: libdeja/BackendGOA.vala:143
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
 
 #. Translators: %s is a folder.
-#: libdeja/BackendRackspace.vala:73
+#: libdeja/BackendRackspace.vala:75
 #, c-format
 msgid "%s on Rackspace Cloud Files"
 msgstr ""
 
-#: libdeja/BackendRackspace.vala:116 libdeja/BackendS3.vala:169
+#: libdeja/BackendRackspace.vala:117 libdeja/BackendS3.vala:167
 msgid "Permission denied"
 msgstr "رُفِض الإذن"
 
-#: libdeja/BackendRackspace.vala:147
+#: libdeja/BackendRackspace.vala:148
 #, c-format
 msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
 "href=\"%s\">online</a>."
 msgstr ""
 
-#: libdeja/BackendRackspace.vala:148
+#: libdeja/BackendRackspace.vala:149
 msgid "Connect to Rackspace Cloud Files"
 msgstr ""
 
-#: libdeja/BackendRackspace.vala:149
+#: libdeja/BackendRackspace.vala:150
 msgid "_API access key"
 msgstr ""
 
-#: libdeja/BackendRackspace.vala:150
+#: libdeja/BackendRackspace.vala:151
 msgid "S_how API access key"
 msgstr ""
 
-#: libdeja/BackendRackspace.vala:151
+#: libdeja/BackendRackspace.vala:152
 msgid "_Remember API access key"
 msgstr ""
 
-#: libdeja/BackendRemote.vala:125
+#: libdeja/BackendRemote.vala:130
 msgid "Waiting for a network connection…"
 msgstr "ينتظر الاتصال بالشبكة..."
 
 #. Translators: %s is a folder.
-#: libdeja/BackendS3.vala:126
+#: libdeja/BackendS3.vala:125
 #, c-format
 msgid "%s on Amazon S3"
 msgstr ""
 
-#: libdeja/BackendS3.vala:200
+#: libdeja/BackendS3.vala:198
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
 msgstr ""
 
-#: libdeja/BackendS3.vala:201
+#: libdeja/BackendS3.vala:199
 msgid "Connect to Amazon S3"
 msgstr ""
 
-#: libdeja/BackendS3.vala:202
+#: libdeja/BackendS3.vala:200
 msgid "_Access key ID"
 msgstr "معرّف مفتاح ال_نفاذ"
 
-#: libdeja/BackendS3.vala:203
+#: libdeja/BackendS3.vala:201
 msgid "_Secret access key"
 msgstr "مفتاح النفاذ ال_سري"
 
-#: libdeja/BackendS3.vala:204
+#: libdeja/BackendS3.vala:202
 msgid "S_how secret access key"
 msgstr "_عرض مفتاح النفاذ السري"
 
-#: libdeja/BackendS3.vala:205
+#: libdeja/BackendS3.vala:203
 msgid "_Remember secret access key"
 msgstr "ت_ذكر مفتاح النفاذ السري"
 
-#: libdeja/CommonUtils.vala:450
+#: libdeja/CommonUtils.vala:416
 #, c-format
 msgid "Could not find backup tool in %s.  Your installation is incomplete."
 msgstr "تعذّر العثور على أداة النسخ الاحتياطي في %s. تثبيتك غير مكتمل."
 
-#: libdeja/CommonUtils.vala:452
+#: libdeja/CommonUtils.vala:418
 msgid "Could not load backup tool.  Your installation is incomplete."
 msgstr "تعذّر تحميل أداة النسخ الاحتياطي. تثبيتك غير مكتمل"
 
-#: libdeja/CommonUtils.vala:458
+#: libdeja/CommonUtils.vala:424
 msgid "Backup tool is broken.  Your installation is incomplete."
 msgstr "أداة النسخ الأحتياطي معطوبة. تثبيتك غير مكتمل"
 
-#: libdeja/CommonUtils.vala:473
+#: libdeja/CommonUtils.vala:439
 msgid "Could not start backup tool"
 msgstr "تعذّر بدء أداة النسخ الاحتياطي"
 
 #. Translators: this is the home folder and %s is the user's username
-#: libdeja/CommonUtils.vala:622
+#: libdeja/CommonUtils.vala:588
 #, c-format
 msgid "Home (%s)"
 msgstr "المنزل (%s)"
 
 #. Translators: this is the home folder
-#: libdeja/CommonUtils.vala:627
+#: libdeja/CommonUtils.vala:593
 msgid "Home"
 msgstr "المنزل"
 
 #. Translators: this is the trash folder
-#: libdeja/CommonUtils.vala:632
+#: libdeja/CommonUtils.vala:598
 msgid "Trash"
 msgstr "المُهملات"
 
@@ -1520,7 +1515,7 @@ msgstr "المُهملات"
 msgid "Verifying backup…"
 msgstr "يتحقق من النسخ الاحتياطي..."
 
-#: libdeja/OperationRestore.vala:51
+#: libdeja/OperationRestore.vala:52
 msgid "Restoring files…"
 msgstr "يسترجع الملفات..."
 
@@ -1542,7 +1537,7 @@ msgstr "يتفقد النسخ الاحتياطي..."
 msgid "Listing files…"
 msgstr "يسرد الملفات..."
 
-#: libdeja/Operation.vala:70 libdeja/Operation.vala:104
+#: libdeja/Operation.vala:70 libdeja/Operation.vala:99
 #: libdeja/tools/duplicity/DuplicityJob.vala:394
 #: libdeja/tools/duplicity/DuplicityJob.vala:401
 #: libdeja/tools/duplicity/DuplicityJob.vala:426
@@ -1759,6 +1754,9 @@ msgstr ""
 #~ msgstr ""
 #~ "إذا كان مكان النسخ الاحتياطي على وحدة تخزين خارجية، فإن هذه هي أيقونة الوحدة "
 #~ "التخزينية."
+
+#~ msgid "Schedules backups at regular intervals"
+#~ msgstr "نسخ احتياطي مجدول خلال فترات منتظمة"
 
 #~ msgid "_Skip Backup"
 #~ msgstr "ت_خطّي النسخ الاحتياطي"
