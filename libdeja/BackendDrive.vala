@@ -125,7 +125,7 @@ public class BackendDrive : BackendFile
     var icon = volume.get_icon();
 
     // sanity check that these writable settings are for this volume
-    var vol_uuid = volume.get_identifier(VolumeIdentifier.UUID);
+    var vol_uuid = volume.get_uuid();
     var settings_uuid = settings.get_string(DRIVE_UUID_KEY);
     if (vol_uuid != settings_uuid)
       return;

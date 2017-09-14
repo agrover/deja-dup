@@ -424,8 +424,7 @@ public class ConfigLocation : ConfigWidget
   {
     if (is_allowed_volume(v))
     {
-      add_volume_full(v.get_identifier(VolumeIdentifier.UUID),
-                      v.get_name(), v.get_icon());
+      add_volume_full(v.get_uuid(), v.get_name(), v.get_icon());
     }
   }
 
@@ -445,8 +444,7 @@ public class ConfigLocation : ConfigWidget
 
   void update_volume(VolumeMonitor monitor, Volume v)
   {
-    update_volume_full(v.get_identifier(VolumeIdentifier.UUID),
-                       v.get_name(), v.get_icon());
+    update_volume_full(v.get_uuid(), v.get_name(), v.get_icon());
   }
 
   void update_volume_full(string uuid, string name, Icon icon)
@@ -460,7 +458,7 @@ public class ConfigLocation : ConfigWidget
 
   void remove_volume(VolumeMonitor monitor, Volume v)
   {
-    remove_volume_full(v.get_identifier(VolumeIdentifier.UUID));
+    remove_volume_full(v.get_uuid());
   }
 
   void remove_volume_full(string uuid)
@@ -622,6 +620,7 @@ public class ConfigLocation : ConfigWidget
 
     // First things first, we must remember that we set a volume
     all_settings[""].set_string(BACKEND_KEY, "drive");
+    all_settings[DRIVE_ROOT].set_string(DRIVE_UUID_KEY, uuid);
 
     var vol = VolumeMonitor.get().get_volume_for_uuid(uuid);
     if (vol == null) {
