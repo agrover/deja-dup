@@ -47,8 +47,7 @@ public class AssistantBackup : AssistantOperation
     realize();
     var rv = new DejaDup.OperationBackup(backend);
 
-    ensure_status_icon(rv);
-    if (automatic && (status_icon == null || !status_icon.show_automatic_progress)) {
+    if (automatic) {
       // If in automatic mode, only use progress if it's a full backup (see below)
       rv.use_progress = false;
     }

@@ -45,13 +45,7 @@ public abstract class Operation : Object
   public bool use_cached_password {get; protected set; default = true;}
   public bool needs_password {get; set;}
   public Backend backend {get; protected set;}
-  public bool use_progress {get {return (job.flags & ToolJob.Flags.NO_PROGRESS) == 0;}
-                            set {
-                              if (value)
-                                job.flags = job.flags | ToolJob.Flags.NO_PROGRESS;
-                              else
-                                job.flags = job.flags ^ ToolJob.Flags.NO_PROGRESS;
-                            }}
+  public bool use_progress {get; set; default = true;}
 
   public ToolJob.Mode mode {get; construct; default = ToolJob.Mode.INVALID;}
   
@@ -123,6 +117,8 @@ public abstract class Operation : Object
 
     job.mode = mode;
     job.backend = backend;
+    if (!use_progress)
+      job.flags |= ToolJob.Flags.NO_PROGRESS;
 
     make_argv();
     connect_to_job();

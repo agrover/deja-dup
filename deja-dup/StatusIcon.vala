@@ -56,8 +56,6 @@ public abstract class StatusIcon : Object
   public DejaDup.Operation op {get; construct;}
   public bool automatic {get; construct; default = false;}
 
-  public bool show_automatic_progress {get; protected set; default = false;}
-
   protected string action;
   protected double progress;
 

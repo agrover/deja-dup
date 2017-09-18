@@ -79,6 +79,9 @@ public class BackendRemote : BackendFile
       if (root.equal(mount_root) || !root.has_prefix(mount_root))
         root = mount.get_default_location();
     }
+    catch (IOError.NOT_MOUNTED e) {
+      // ignore
+    }
     catch (Error e) {
       warning("%s", e.message);
     }
