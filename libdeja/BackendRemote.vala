@@ -98,6 +98,22 @@ public class BackendRemote : BackendFile
     return false;
   }
 
+  // Check if we should give nicer message
+  string get_unready_message(File root, Error e)
+  {
+    // SMB likes to give back a very generic error when the host is not
+    // available ("Invalid argument").  Try to work around that here.
+    // TODO: file upstream bug.
+    if (Posix.errno == Posix.EAGAIN &&
+        root.get_uri_scheme() == "smb" &&
+        e.matches(IOError.quark(), 0))
+    {
+      return _("The network server is not available");
+    }
+
+    return e.message;
+  }
+
   public override async bool is_ready(out string when)
   {
     var root = get_root_from_settings();
@@ -111,12 +127,12 @@ public class BackendRemote : BackendFile
       return yield root.mount_enclosing_volume(MountMountFlags.NONE, mount_op, null);
     } catch (IOError.ALREADY_MOUNTED e) {
       when = _("Backup will begin when a network connection becomes available.");
-      return yield Network.get().can_reach(root.get_uri());
+      return Network.get().connected;
     } catch (IOError.FAILED_HANDLED e) {
       // Needed user input, so we know we can reach server
       return true;
     } catch (Error e) {
-      when = e.message;
+      when = get_unready_message(root, e);
       return false;
     }
   }
