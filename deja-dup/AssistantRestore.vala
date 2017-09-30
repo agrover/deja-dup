@@ -53,6 +53,7 @@ public class AssistantRestore : AssistantOperation
   Gtk.Box cust_box;
   Gtk.FileChooserButton cust_button;
   Gtk.Grid confirm_table;
+  Gtk.SizeGroup label_sizes;
   DejaDup.ConfigLocation config_location;
   Gtk.Label confirm_location_label;
   Gtk.Label confirm_location;
@@ -67,6 +68,10 @@ public class AssistantRestore : AssistantOperation
   construct
   {
     title = _("Restore");
+
+    // Must always make ConfigLocation, so we can grab the backend from it
+    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
+    config_location = new DejaDup.ConfigLocation(true, true, label_sizes);
   }
 
   protected override string get_apply_text() {
@@ -84,14 +89,12 @@ public class AssistantRestore : AssistantOperation
   {
     int rows = 0;
     Gtk.Widget label;
-    Gtk.SizeGroup label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
-    
+
     var page = new Gtk.Grid();
     page.set("row-spacing", 6,
              "column-spacing", 12,
              "border-width", 12);
-    
-    config_location = new DejaDup.ConfigLocation(true, true, label_sizes);
+
     label = new Gtk.Label.with_mnemonic(_("_Backup location"));
     label.set("xalign", 1.0f,
               "mnemonic-widget", config_location);
@@ -400,7 +403,7 @@ public class AssistantRestore : AssistantOperation
     op.backend.mount_op = new MountOperationAssistant(this);
     op.backend.pause_op.connect(pause_op);
 
-    op.start.begin();
+    yield op.start();
   }
   
   protected override void do_prepare(Assistant assist, Gtk.Widget page)
