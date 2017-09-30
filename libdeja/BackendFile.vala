@@ -124,6 +124,19 @@ public abstract class BackendFile : Backend
     this.unref();
   }
 
+  async bool query_exists_async(File file)
+  {
+    try {
+      yield file.query_info_async(FileAttribute.STANDARD_TYPE,
+                                  FileQueryInfoFlags.NONE,
+                                  Priority.DEFAULT, null);
+      return true;
+    }
+    catch (Error e) {
+      return false;
+    }
+  }
+
   async void do_mount() throws Error
   {
     yield mount();
@@ -135,7 +148,7 @@ public abstract class BackendFile : Backend
     // as they allow multiple files with the same name. Querying it
     // anchors the path to the backend object and we don't create a second
     // copy this way.
-    if (gfile != null && !gfile.query_exists()) {
+    if (gfile != null && !(yield query_exists_async(gfile))) {
       try {
         gfile.make_directory_with_parents (null);
       }
