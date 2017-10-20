@@ -68,10 +68,6 @@ public class AssistantRestore : AssistantOperation
   construct
   {
     title = _("Restore");
-
-    // Must always make ConfigLocation, so we can grab the backend from it
-    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
-    config_location = new DejaDup.ConfigLocation(true, true, label_sizes);
   }
 
   protected override string get_apply_text() {
@@ -124,6 +120,10 @@ public class AssistantRestore : AssistantOperation
   
   protected override void add_custom_config_pages()
   {
+    // Must always make ConfigLocation, so we can grab the backend from it
+    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
+    config_location = new DejaDup.ConfigLocation(true, true, label_sizes);
+
     // always show for a full restore or if user hasn't ever used us
     if (restore_files == null || !DejaDup.has_seen_settings()) {
       var page = make_backup_location_page();
