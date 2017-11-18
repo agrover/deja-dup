@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-08-31 10:27-0400\n"
-"PO-Revision-Date: 2017-08-17 23:12+0000\n"
-"Last-Translator: Michael Terry <mike@mterry.name>\n"
+"POT-Creation-Date: 2017-09-18 13:47-0400\n"
+"PO-Revision-Date: 2017-10-02 17:31+0000\n"
+"Last-Translator: Dmitriy Kulikov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2017-09-01 05:53+0000\n"
-"X-Generator: Launchpad (build 18446)\n"
+"X-Launchpad-Export-Date: 2017-10-03 05:13+0000\n"
+"X-Generator: Launchpad (build 18471)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
@@ -46,7 +46,8 @@ msgstr ""
 
 #: data/org.gnome.DejaDup.appdata.xml.in:12
 msgid ""
-"Support for local, remote, or cloud backup locations such as Nextcloud"
+"Support for local, remote, or cloud backup locations such as Google Drive "
+"and Nextcloud"
 msgstr ""
 
 #: data/org.gnome.DejaDup.appdata.xml.in:13
@@ -81,7 +82,7 @@ msgstr "Изменить параметры резервного копиров�
 #. Translators: this is the icon name, you probably don't need to change this
 #: data/org.gnome.DejaDup.desktop:9
 msgid "org.gnome.DejaDup"
-msgstr ""
+msgstr "org.gnome.DejaDup"
 
 #. Translators: Add whatever keywords you want in your language, separated by semicolons
 #. These keywords are used when searching for applications in dashes, etc.
@@ -294,24 +295,28 @@ msgid ""
 "The folder hierarchy where backups are stored. Paths can be absolute or "
 "relative to your home directory."
 msgstr ""
+"Иерархия папок, в которых сохраняются резервные копии. Расположения могут "
+"быть абсолютными или относительными к домашней папке."
 
 #: data/org.gnome.DejaDup.gschema.xml:113
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: data/org.gnome.DejaDup.gschema.xml:114
 msgid ""
 "The unique filesystem identifier for the drive, used to recognize the drive "
 "when it is plugged in."
 msgstr ""
+"Уникальный идентификатор накопителя, который используется для опознавания "
+"накопителя при его подключении."
 
 #: data/org.gnome.DejaDup.gschema.xml:118
 msgid "Name"
-msgstr ""
+msgstr "Имя"
 
 #: data/org.gnome.DejaDup.gschema.xml:119
 msgid "The name of the external drive."
-msgstr ""
+msgstr "Имя внешнего накопителя."
 
 #: data/org.gnome.DejaDup.gschema.xml:123
 msgid "Icon"
@@ -326,10 +331,12 @@ msgid ""
 "The folder hierarchy where backups are stored. Paths are relative to the "
 "drive."
 msgstr ""
+"Иерархия папок, в которых сохраняются резервные копии. Расположения могут "
+"быть относительными к диску."
 
 #: data/org.gnome.DejaDup.gschema.xml:136
 msgid "The server address"
-msgstr ""
+msgstr "Адрес сервера"
 
 #: data/org.gnome.DejaDup.gschema.xml:137
 msgid "The URI of the remote server location."
@@ -341,6 +348,8 @@ msgid ""
 "The folder hierarchy where backups are stored. Paths can be absolute or "
 "relative to the host."
 msgstr ""
+"Иерархия папок, в которых сохраняются резервные копии. Расположения могут "
+"быть абсолютными или относительными к имени узла."
 
 #: data/org.gnome.DejaDup.gschema.xml:149
 msgid "Amazon S3 Access Key ID"
@@ -374,8 +383,8 @@ msgid ""
 "An optional folder name to store files in. This folder will be created in "
 "the chosen bucket."
 msgstr ""
-"Необязательное название папки, в которой хранятся файлы. Папка будет создан "
-"в месте назначения."
+"Необязательное название папки, в которой хранятся файлы. Папка будет создана "
+"в выбранном пространстве."
 
 #: data/org.gnome.DejaDup.gschema.xml:167
 msgid "Google Cloud Storage Access Key ID"
@@ -506,7 +515,7 @@ msgstr "Справка"
 #: data/ui/help-overlay.ui:34
 msgctxt "shortcut window"
 msgid "Shortcuts"
-msgstr ""
+msgstr "Комбинации клавиш"
 
 #: data/ui/menus.ui:7
 msgid "_Keyboard Shortcuts"
@@ -534,7 +543,7 @@ msgstr "Сканирование..."
 
 #: data/ui/server-hint.ui:16
 msgid "Server Addresses"
-msgstr ""
+msgstr "Адреса серверов"
 
 #. Translators: This is followed by a list of valid adresses (smb://gnome.org, ssh://192.168.0.1, ftp://[2001:db8::1])
 #: data/ui/server-hint.ui:29
@@ -581,7 +590,7 @@ msgstr "ftp:// или ftps://"
 
 #: data/ui/server-hint.ui:191
 msgid "smb://"
-msgstr ""
+msgstr "smb://"
 
 #. Translators: do not translate sftp:// and ssh://
 #: data/ui/server-hint.ui:202
@@ -625,12 +634,12 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "_Создать резервную копию"
 
-#: deja-dup/AssistantBackup.vala:58
+#: deja-dup/AssistantBackup.vala:57
 msgid "Creating the first backup.  This may take a while."
 msgstr ""
 "Резервная копия создаётся первый раз. Это может занять некоторое время."
 
-#: deja-dup/AssistantBackup.vala:59
+#: deja-dup/AssistantBackup.vala:58
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -640,24 +649,24 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: deja-dup/AssistantBackup.vala:89
+#: deja-dup/AssistantBackup.vala:88
 msgid "Backing up:"
 msgstr "Создается резервная копия для:"
 
-#: deja-dup/AssistantBackup.vala:98
+#: deja-dup/AssistantBackup.vala:97
 msgid "Backup Failed"
 msgstr "Резервное копирование не удалось"
 
-#: deja-dup/AssistantBackup.vala:101
+#: deja-dup/AssistantBackup.vala:100
 msgid "Backup Finished"
 msgstr "Резервное копирование завершено"
 
 #. Also leave ourselves up if we just finished a restore test.
-#: deja-dup/AssistantBackup.vala:105
+#: deja-dup/AssistantBackup.vala:104
 msgid "Your files were successfully backed up and tested."
 msgstr "Резервная копия файлов успешно создана и проверена."
 
-#: deja-dup/AssistantBackup.vala:112
+#: deja-dup/AssistantBackup.vala:111
 msgid "Backing Up…"
 msgstr "Резервное копирование..."
 
@@ -671,7 +680,7 @@ msgstr "_Подробности"
 
 #: deja-dup/AssistantOperation.vala:294
 msgid "In order to continue, the following packages need to be installed:"
-msgstr ""
+msgstr "Чтобы продолжить, необходимо установить следующие пакеты:"
 
 #: deja-dup/AssistantOperation.vala:330
 msgid "_Allow restoring without a password"
@@ -722,7 +731,7 @@ msgstr "Проверять каждые два _месяца"
 
 #: deja-dup/AssistantOperation.vala:513
 msgid "Install Packages"
-msgstr ""
+msgstr "Установить пакеты"
 
 #: deja-dup/AssistantOperation.vala:528
 msgid "Summary"
@@ -759,7 +768,7 @@ msgstr "Сделать резервную копию пароля шифрова
 #: deja-dup/AssistantOperation.vala:968
 msgctxt "verb"
 msgid "_Install"
-msgstr ""
+msgstr "_Установить"
 
 #: deja-dup/AssistantRestore.vala:73
 msgid "_Restore"
@@ -787,7 +796,7 @@ msgstr "Восстановить в _указанную папку"
 
 #: deja-dup/AssistantRestore.vala:188
 msgid "Choose destination for restored files"
-msgstr "Выберите местоположение для восстановленных файлов"
+msgstr "Выберите местоположение для восстанавливаемых файлов"
 
 #: deja-dup/AssistantRestore.vala:192
 msgid "Restore _folder"
@@ -868,7 +877,7 @@ msgstr[0] "Ваш файл был успешно восстановлен."
 msgstr[1] "Ваши файлы были успешно восстановлены."
 msgstr[2] "Ваши файлы были успешно восстановлены."
 
-#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:64
+#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:58
 msgid "Restoring…"
 msgstr "Восстановление..."
 
@@ -1124,32 +1133,32 @@ msgstr "_Не показывать снова"
 msgid "_Open Backup Settings"
 msgstr "_Открыть настройки резервного копирования"
 
-#: deja-dup/StatusIcon.vala:84
+#: deja-dup/StatusIcon.vala:82
 msgid "Backup completed"
 msgstr "Резервное копирование выполнено"
 
-#: deja-dup/StatusIcon.vala:89
+#: deja-dup/StatusIcon.vala:87
 msgid "Backup finished"
 msgstr "Создание резервной копии завершено"
 
-#: deja-dup/StatusIcon.vala:90
+#: deja-dup/StatusIcon.vala:88
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr ""
 "Не все файлы были добавлены в резервную копию. См. диалог, для получения "
 "дополнительных сведений."
 
-#: deja-dup/StatusIcon.vala:120
+#: deja-dup/StatusIcon.vala:118
 msgid "Starting scheduled backup"
 msgstr "Запуск запланированного резервного копирования"
 
-#: deja-dup/StatusIcon.vala:151
+#: deja-dup/StatusIcon.vala:149
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% завершено"
 
 #: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:54
-#: libdeja/BackendRemote.vala:104 libdeja/BackendS3.vala:64
+#: libdeja/BackendRemote.vala:129 libdeja/BackendS3.vala:64
 msgid "Backup will begin when a network connection becomes available."
 msgstr "Резервное копирование будет начато при подключении к сети."
 
@@ -1309,23 +1318,23 @@ msgstr "Локальная папка"
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:295 libdeja/BackendS3.vala:122
+#: deja-dup/widgets/ConfigLocation.vala:293 libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: deja-dup/widgets/ConfigLocation.vala:297
+#: deja-dup/widgets/ConfigLocation.vala:295
 msgid "Google Cloud Storage"
 msgstr "Облачное хранилище Google"
 
-#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendU1.vala:45
+#: deja-dup/widgets/ConfigLocation.vala:297 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: deja-dup/widgets/ConfigLocation.vala:301 libdeja/BackendRackspace.vala:72
+#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendRackspace.vala:72
 msgid "Rackspace Cloud Files"
 msgstr "Облачные файлы Rackspace"
 
-#: deja-dup/widgets/ConfigLocation.vala:303
+#: deja-dup/widgets/ConfigLocation.vala:301
 msgid "OpenStack Swift"
 msgstr "OpenStack Swift"
 
@@ -1430,8 +1439,8 @@ msgstr "%1$s на %2$s"
 msgid "Backup will begin when %s is connected."
 msgstr ""
 
-#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:146
-#: libdeja/BackendRemote.vala:129
+#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:158
+#: libdeja/BackendRemote.vala:154
 msgid "Storage location not available"
 msgstr ""
 
@@ -1440,7 +1449,11 @@ msgstr ""
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Ожидание подключения  ‘%s’ ..."
 
-#: libdeja/BackendGOA.vala:101
+#: libdeja/BackendGOA.vala:94
+msgid "Google Drive"
+msgstr "Google Диск"
+
+#: libdeja/BackendGOA.vala:113
 msgid "Backup will begin when a storage location is configured"
 msgstr ""
 
@@ -1448,17 +1461,17 @@ msgstr ""
 #. Translators: "Files" here is the string used in GNOME Online Account
 #. settings checkbox for a given account to enable/disable an account's
 #. Files feature.
-#: libdeja/BackendGOA.vala:111
+#: libdeja/BackendGOA.vala:123
 #, c-format
 msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr ""
 
-#: libdeja/BackendGOA.vala:140
+#: libdeja/BackendGOA.vala:152
 msgid "Waiting for Online Accounts to be configured in your backup settings…"
 msgstr ""
 
 #. Translators: %s is the name of the provider inside of GNOME Online Accounts
-#: libdeja/BackendGOA.vala:143
+#: libdeja/BackendGOA.vala:155
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
@@ -1498,7 +1511,11 @@ msgstr "_Показать ключ доступа API"
 msgid "_Remember API access key"
 msgstr "П_омнить ключ доступа API"
 
-#: libdeja/BackendRemote.vala:130
+#: libdeja/BackendRemote.vala:111
+msgid "The network server is not available"
+msgstr ""
+
+#: libdeja/BackendRemote.vala:155
 msgid "Waiting for a network connection…"
 msgstr "Ожидание сетевого подключения ..."
 
@@ -1589,19 +1606,19 @@ msgstr ""
 "Вероятно, ваша резервная копия повреждена. Удалите резервную копию и "
 "попробуйте снова."
 
-#: libdeja/Operation.vala:62
+#: libdeja/Operation.vala:56
 msgid "Backing up…"
 msgstr "Резервное копирование..."
 
-#: libdeja/Operation.vala:66
+#: libdeja/Operation.vala:60
 msgid "Checking for backups…"
 msgstr "Проверка резервных копий..."
 
-#: libdeja/Operation.vala:68
+#: libdeja/Operation.vala:62
 msgid "Listing files…"
 msgstr "Список файлов..."
 
-#: libdeja/Operation.vala:70 libdeja/Operation.vala:99
+#: libdeja/Operation.vala:64 libdeja/Operation.vala:93
 #: libdeja/tools/duplicity/DuplicityJob.vala:394
 #: libdeja/tools/duplicity/DuplicityJob.vala:401
 #: libdeja/tools/duplicity/DuplicityJob.vala:426
@@ -1903,9 +1920,6 @@ msgstr ""
 
 #~ msgid "Custom Location"
 #~ msgstr "Другой адрес"
-
-#~ msgid "Google Drive"
-#~ msgstr "Google Диск"
 
 #~ msgid "_URI"
 #~ msgstr "_URI"

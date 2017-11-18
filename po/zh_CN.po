@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-08-31 10:27-0400\n"
+"POT-Creation-Date: 2017-09-18 13:47-0400\n"
 "PO-Revision-Date: 2017-08-17 23:13+0000\n"
 "Last-Translator: shijing <jingshi@ubuntukylin.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2017-09-01 05:54+0000\n"
-"X-Generator: Launchpad (build 18446)\n"
+"X-Launchpad-Export-Date: 2017-09-19 05:33+0000\n"
+"X-Generator: Launchpad (build 18449)\n"
 "Language: zh\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
@@ -42,7 +42,8 @@ msgstr "Déjà Dup 是一个简易备份工具，使用 dupicity 作为后端程
 
 #: data/org.gnome.DejaDup.appdata.xml.in:12
 msgid ""
-"Support for local, remote, or cloud backup locations such as Nextcloud"
+"Support for local, remote, or cloud backup locations such as Google Drive "
+"and Nextcloud"
 msgstr ""
 
 #: data/org.gnome.DejaDup.appdata.xml.in:13
@@ -562,11 +563,11 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "备份(_B)"
 
-#: deja-dup/AssistantBackup.vala:58
+#: deja-dup/AssistantBackup.vala:57
 msgid "Creating the first backup.  This may take a while."
 msgstr "正在创建第一个备份，这可能需要一段时间。"
 
-#: deja-dup/AssistantBackup.vala:59
+#: deja-dup/AssistantBackup.vala:58
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -574,24 +575,24 @@ msgstr "创建一个全新备份以防范备份损坏，这要比正常备份花
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: deja-dup/AssistantBackup.vala:89
+#: deja-dup/AssistantBackup.vala:88
 msgid "Backing up:"
 msgstr "备份："
 
-#: deja-dup/AssistantBackup.vala:98
+#: deja-dup/AssistantBackup.vala:97
 msgid "Backup Failed"
 msgstr "备份失败"
 
-#: deja-dup/AssistantBackup.vala:101
+#: deja-dup/AssistantBackup.vala:100
 msgid "Backup Finished"
 msgstr "备份完成"
 
 #. Also leave ourselves up if we just finished a restore test.
-#: deja-dup/AssistantBackup.vala:105
+#: deja-dup/AssistantBackup.vala:104
 msgid "Your files were successfully backed up and tested."
 msgstr "您的文件已成功备份并通过测试"
 
-#: deja-dup/AssistantBackup.vala:112
+#: deja-dup/AssistantBackup.vala:111
 msgid "Backing Up…"
 msgstr "正在备份..."
 
@@ -793,7 +794,7 @@ msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "您的文件已成功恢复。"
 
-#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:64
+#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:58
 msgid "Restoring…"
 msgstr "正在恢复..."
 
@@ -1033,30 +1034,30 @@ msgstr "不再提示(_D)"
 msgid "_Open Backup Settings"
 msgstr "打开备份设置(_O)"
 
-#: deja-dup/StatusIcon.vala:84
+#: deja-dup/StatusIcon.vala:82
 msgid "Backup completed"
 msgstr "备份完成"
 
-#: deja-dup/StatusIcon.vala:89
+#: deja-dup/StatusIcon.vala:87
 msgid "Backup finished"
 msgstr "备份完成"
 
-#: deja-dup/StatusIcon.vala:90
+#: deja-dup/StatusIcon.vala:88
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr "未能成功备份全部文件。更多细节参见对话框。"
 
-#: deja-dup/StatusIcon.vala:120
+#: deja-dup/StatusIcon.vala:118
 msgid "Starting scheduled backup"
 msgstr "开始计划备份"
 
-#: deja-dup/StatusIcon.vala:151
+#: deja-dup/StatusIcon.vala:149
 #, c-format
 msgid "%.1f%% complete"
 msgstr "已完成 %.1f%%"
 
 #: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:54
-#: libdeja/BackendRemote.vala:104 libdeja/BackendS3.vala:64
+#: libdeja/BackendRemote.vala:129 libdeja/BackendS3.vala:64
 msgid "Backup will begin when a network connection becomes available."
 msgstr "备份将在网络连接可用时开始。"
 
@@ -1202,23 +1203,23 @@ msgstr "本地文件夹"
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:295 libdeja/BackendS3.vala:122
+#: deja-dup/widgets/ConfigLocation.vala:293 libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: deja-dup/widgets/ConfigLocation.vala:297
+#: deja-dup/widgets/ConfigLocation.vala:295
 msgid "Google Cloud Storage"
 msgstr "谷歌云存储"
 
-#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendU1.vala:45
+#: deja-dup/widgets/ConfigLocation.vala:297 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: deja-dup/widgets/ConfigLocation.vala:301 libdeja/BackendRackspace.vala:72
+#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendRackspace.vala:72
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace 云文件"
 
-#: deja-dup/widgets/ConfigLocation.vala:303
+#: deja-dup/widgets/ConfigLocation.vala:301
 msgid "OpenStack Swift"
 msgstr "OpenStack Swift"
 
@@ -1318,8 +1319,8 @@ msgstr "%1$s，在 %2$s"
 msgid "Backup will begin when %s is connected."
 msgstr ""
 
-#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:146
-#: libdeja/BackendRemote.vala:129
+#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:158
+#: libdeja/BackendRemote.vala:154
 msgid "Storage location not available"
 msgstr ""
 
@@ -1328,7 +1329,11 @@ msgstr ""
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "正在等待“%s”建立连接..."
 
-#: libdeja/BackendGOA.vala:101
+#: libdeja/BackendGOA.vala:94
+msgid "Google Drive"
+msgstr "Google Drive"
+
+#: libdeja/BackendGOA.vala:113
 msgid "Backup will begin when a storage location is configured"
 msgstr ""
 
@@ -1336,17 +1341,17 @@ msgstr ""
 #. Translators: "Files" here is the string used in GNOME Online Account
 #. settings checkbox for a given account to enable/disable an account's
 #. Files feature.
-#: libdeja/BackendGOA.vala:111
+#: libdeja/BackendGOA.vala:123
 #, c-format
 msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr ""
 
-#: libdeja/BackendGOA.vala:140
+#: libdeja/BackendGOA.vala:152
 msgid "Waiting for Online Accounts to be configured in your backup settings…"
 msgstr ""
 
 #. Translators: %s is the name of the provider inside of GNOME Online Accounts
-#: libdeja/BackendGOA.vala:143
+#: libdeja/BackendGOA.vala:155
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
@@ -1384,7 +1389,11 @@ msgstr "显示 API 访问密钥(_H)"
 msgid "_Remember API access key"
 msgstr "记住 API 访问密钥(_R)"
 
-#: libdeja/BackendRemote.vala:130
+#: libdeja/BackendRemote.vala:111
+msgid "The network server is not available"
+msgstr ""
+
+#: libdeja/BackendRemote.vala:155
 msgid "Waiting for a network connection…"
 msgstr "等待网络连接..."
 
@@ -1466,19 +1475,19 @@ msgid ""
 "again."
 msgstr "您的备份似乎已经损坏，请删除该备份然后重试。"
 
-#: libdeja/Operation.vala:62
+#: libdeja/Operation.vala:56
 msgid "Backing up…"
 msgstr "正在备份..."
 
-#: libdeja/Operation.vala:66
+#: libdeja/Operation.vala:60
 msgid "Checking for backups…"
 msgstr "正在检查有无备份..."
 
-#: libdeja/Operation.vala:68
+#: libdeja/Operation.vala:62
 msgid "Listing files…"
 msgstr "正在列出文件..."
 
-#: libdeja/Operation.vala:70 libdeja/Operation.vala:99
+#: libdeja/Operation.vala:64 libdeja/Operation.vala:93
 #: libdeja/tools/duplicity/DuplicityJob.vala:394
 #: libdeja/tools/duplicity/DuplicityJob.vala:401
 #: libdeja/tools/duplicity/DuplicityJob.vala:426
@@ -1747,9 +1756,6 @@ msgstr "Déjà Dup 备份工具至少需要 %d.%d.%.2d 版的 duplicity 软件�
 
 #~ msgid "Custom Location"
 #~ msgstr "自定义位置"
-
-#~ msgid "Google Drive"
-#~ msgstr "Google Drive"
 
 #~ msgid "_URI"
 #~ msgstr "_URI"

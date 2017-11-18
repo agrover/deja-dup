@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-08-31 10:27-0400\n"
+"POT-Creation-Date: 2017-09-18 13:47-0400\n"
 "PO-Revision-Date: 2017-08-17 23:11+0000\n"
 "Last-Translator: Michael Terry <mike@mterry.name>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2017-09-01 05:53+0000\n"
-"X-Generator: Launchpad (build 18446)\n"
+"X-Launchpad-Export-Date: 2017-09-19 05:32+0000\n"
+"X-Generator: Launchpad (build 18449)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
@@ -41,7 +41,8 @@ msgstr ""
 
 #: data/org.gnome.DejaDup.appdata.xml.in:12
 msgid ""
-"Support for local, remote, or cloud backup locations such as Nextcloud"
+"Support for local, remote, or cloud backup locations such as Google Drive "
+"and Nextcloud"
 msgstr ""
 
 #: data/org.gnome.DejaDup.appdata.xml.in:13
@@ -567,11 +568,11 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "백업(_B)"
 
-#: deja-dup/AssistantBackup.vala:58
+#: deja-dup/AssistantBackup.vala:57
 msgid "Creating the first backup.  This may take a while."
 msgstr "첫 백업을 만들고 있습니다. 오랜 시간이 필요할 수 있습니다."
 
-#: deja-dup/AssistantBackup.vala:59
+#: deja-dup/AssistantBackup.vala:58
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -579,24 +580,24 @@ msgstr "백업을 사용하지 못할 때를 대비하여 새로운 백업을 �
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: deja-dup/AssistantBackup.vala:89
+#: deja-dup/AssistantBackup.vala:88
 msgid "Backing up:"
 msgstr "백업 중:"
 
-#: deja-dup/AssistantBackup.vala:98
+#: deja-dup/AssistantBackup.vala:97
 msgid "Backup Failed"
 msgstr "백업 실패"
 
-#: deja-dup/AssistantBackup.vala:101
+#: deja-dup/AssistantBackup.vala:100
 msgid "Backup Finished"
 msgstr ""
 
 #. Also leave ourselves up if we just finished a restore test.
-#: deja-dup/AssistantBackup.vala:105
+#: deja-dup/AssistantBackup.vala:104
 msgid "Your files were successfully backed up and tested."
 msgstr ""
 
-#: deja-dup/AssistantBackup.vala:112
+#: deja-dup/AssistantBackup.vala:111
 msgid "Backing Up…"
 msgstr "백업…"
 
@@ -798,7 +799,7 @@ msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "파일을 성공적으로 복구했습니다."
 
-#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:64
+#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:58
 msgid "Restoring…"
 msgstr "복구 중…"
 
@@ -1028,30 +1029,30 @@ msgstr "다시 보지 않기(_D)"
 msgid "_Open Backup Settings"
 msgstr "백업 설정 열기(_O)"
 
-#: deja-dup/StatusIcon.vala:84
+#: deja-dup/StatusIcon.vala:82
 msgid "Backup completed"
 msgstr "백업 완료"
 
-#: deja-dup/StatusIcon.vala:89
+#: deja-dup/StatusIcon.vala:87
 msgid "Backup finished"
 msgstr ""
 
-#: deja-dup/StatusIcon.vala:90
+#: deja-dup/StatusIcon.vala:88
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr ""
 
-#: deja-dup/StatusIcon.vala:120
+#: deja-dup/StatusIcon.vala:118
 msgid "Starting scheduled backup"
 msgstr "예정된 백업 시작"
 
-#: deja-dup/StatusIcon.vala:151
+#: deja-dup/StatusIcon.vala:149
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% 완료"
 
 #: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:54
-#: libdeja/BackendRemote.vala:104 libdeja/BackendS3.vala:64
+#: libdeja/BackendRemote.vala:129 libdeja/BackendS3.vala:64
 msgid "Backup will begin when a network connection becomes available."
 msgstr "네트워크 연결을 사용할 수 있게 되면 백업을 시작합니다."
 
@@ -1200,23 +1201,23 @@ msgstr "로컬 폴더"
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:295 libdeja/BackendS3.vala:122
+#: deja-dup/widgets/ConfigLocation.vala:293 libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: deja-dup/widgets/ConfigLocation.vala:297
+#: deja-dup/widgets/ConfigLocation.vala:295
 msgid "Google Cloud Storage"
 msgstr ""
 
-#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendU1.vala:45
+#: deja-dup/widgets/ConfigLocation.vala:297 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "우분투 원"
 
-#: deja-dup/widgets/ConfigLocation.vala:301 libdeja/BackendRackspace.vala:72
+#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendRackspace.vala:72
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
-#: deja-dup/widgets/ConfigLocation.vala:303
+#: deja-dup/widgets/ConfigLocation.vala:301
 msgid "OpenStack Swift"
 msgstr ""
 
@@ -1317,8 +1318,8 @@ msgstr "%2$s에 있는 %1$s"
 msgid "Backup will begin when %s is connected."
 msgstr "%s 이(가) 연결되면 백업이 시작됩니다."
 
-#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:146
-#: libdeja/BackendRemote.vala:129
+#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:158
+#: libdeja/BackendRemote.vala:154
 msgid "Storage location not available"
 msgstr ""
 
@@ -1327,7 +1328,11 @@ msgstr ""
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "‘%s’을(를) 연결하기를 기다리고 있습니다…"
 
-#: libdeja/BackendGOA.vala:101
+#: libdeja/BackendGOA.vala:94
+msgid "Google Drive"
+msgstr ""
+
+#: libdeja/BackendGOA.vala:113
 msgid "Backup will begin when a storage location is configured"
 msgstr ""
 
@@ -1335,17 +1340,17 @@ msgstr ""
 #. Translators: "Files" here is the string used in GNOME Online Account
 #. settings checkbox for a given account to enable/disable an account's
 #. Files feature.
-#: libdeja/BackendGOA.vala:111
+#: libdeja/BackendGOA.vala:123
 #, c-format
 msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr ""
 
-#: libdeja/BackendGOA.vala:140
+#: libdeja/BackendGOA.vala:152
 msgid "Waiting for Online Accounts to be configured in your backup settings…"
 msgstr ""
 
 #. Translators: %s is the name of the provider inside of GNOME Online Accounts
-#: libdeja/BackendGOA.vala:143
+#: libdeja/BackendGOA.vala:155
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
@@ -1383,7 +1388,11 @@ msgstr "API 접근 키 보이기(_H)"
 msgid "_Remember API access key"
 msgstr "API 접근 키 저장(_R)"
 
-#: libdeja/BackendRemote.vala:130
+#: libdeja/BackendRemote.vala:111
+msgid "The network server is not available"
+msgstr ""
+
+#: libdeja/BackendRemote.vala:155
 msgid "Waiting for a network connection…"
 msgstr "네크워크 연결을 기다리고 있습니다…"
 
@@ -1465,19 +1474,19 @@ msgid ""
 "again."
 msgstr ""
 
-#: libdeja/Operation.vala:62
+#: libdeja/Operation.vala:56
 msgid "Backing up…"
 msgstr "백업…"
 
-#: libdeja/Operation.vala:66
+#: libdeja/Operation.vala:60
 msgid "Checking for backups…"
 msgstr "백업 확인 중…"
 
-#: libdeja/Operation.vala:68
+#: libdeja/Operation.vala:62
 msgid "Listing files…"
 msgstr "파일 목록을 만드는 중…"
 
-#: libdeja/Operation.vala:70 libdeja/Operation.vala:99
+#: libdeja/Operation.vala:64 libdeja/Operation.vala:93
 #: libdeja/tools/duplicity/DuplicityJob.vala:394
 #: libdeja/tools/duplicity/DuplicityJob.vala:401
 #: libdeja/tools/duplicity/DuplicityJob.vala:426

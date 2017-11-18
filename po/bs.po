@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-08-31 10:27-0400\n"
+"POT-Creation-Date: 2017-09-18 13:47-0400\n"
 "PO-Revision-Date: 2017-08-17 23:11+0000\n"
 "Last-Translator: Michael Terry <mike@mterry.name>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2017-09-01 05:53+0000\n"
-"X-Generator: Launchpad (build 18446)\n"
+"X-Launchpad-Export-Date: 2017-09-19 05:31+0000\n"
+"X-Generator: Launchpad (build 18449)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
@@ -42,7 +42,8 @@ msgstr ""
 
 #: data/org.gnome.DejaDup.appdata.xml.in:12
 msgid ""
-"Support for local, remote, or cloud backup locations such as Nextcloud"
+"Support for local, remote, or cloud backup locations such as Google Drive "
+"and Nextcloud"
 msgstr ""
 
 #: data/org.gnome.DejaDup.appdata.xml.in:13
@@ -588,11 +589,11 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "_Napravi rezervnu kopiju"
 
-#: deja-dup/AssistantBackup.vala:58
+#: deja-dup/AssistantBackup.vala:57
 msgid "Creating the first backup.  This may take a while."
 msgstr "Kreiram prvu rezervnu kopiju. To može potrajati."
 
-#: deja-dup/AssistantBackup.vala:59
+#: deja-dup/AssistantBackup.vala:58
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -602,24 +603,24 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: deja-dup/AssistantBackup.vala:89
+#: deja-dup/AssistantBackup.vala:88
 msgid "Backing up:"
 msgstr "Pravim rezervnu kopiju"
 
-#: deja-dup/AssistantBackup.vala:98
+#: deja-dup/AssistantBackup.vala:97
 msgid "Backup Failed"
 msgstr "Pravljenje rezervne kopije je neuspjelo"
 
-#: deja-dup/AssistantBackup.vala:101
+#: deja-dup/AssistantBackup.vala:100
 msgid "Backup Finished"
 msgstr "Pravljenje rezervne kopije jje završeno"
 
 #. Also leave ourselves up if we just finished a restore test.
-#: deja-dup/AssistantBackup.vala:105
+#: deja-dup/AssistantBackup.vala:104
 msgid "Your files were successfully backed up and tested."
 msgstr ""
 
-#: deja-dup/AssistantBackup.vala:112
+#: deja-dup/AssistantBackup.vala:111
 msgid "Backing Up…"
 msgstr "Pravim rezervnu kopiju..."
 
@@ -826,7 +827,7 @@ msgstr[0] "Vaša datoteka je uspješno obnovljena"
 msgstr[1] "Vaše datoteke su uspješno obnovljene"
 msgstr[2] "Vaše datoteke su uspješno obnovljene"
 
-#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:64
+#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:58
 msgid "Restoring…"
 msgstr "Obnavljam…"
 
@@ -1062,32 +1063,32 @@ msgstr "_Ne prikazuj ponovo"
 msgid "_Open Backup Settings"
 msgstr "_Otvori postavke rezervnih kopija"
 
-#: deja-dup/StatusIcon.vala:84
+#: deja-dup/StatusIcon.vala:82
 msgid "Backup completed"
 msgstr "Pravljenje rezervne kopije je završeno"
 
-#: deja-dup/StatusIcon.vala:89
+#: deja-dup/StatusIcon.vala:87
 msgid "Backup finished"
 msgstr "Pravljenje rezervne kopije završeno"
 
-#: deja-dup/StatusIcon.vala:90
+#: deja-dup/StatusIcon.vala:88
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr ""
 "Sve datoteke nisu uspješno rezervno kopirane. Pogledajte dijaloški prozor za "
 "više detalja."
 
-#: deja-dup/StatusIcon.vala:120
+#: deja-dup/StatusIcon.vala:118
 msgid "Starting scheduled backup"
 msgstr "Pokrećem vremenski raspoređene rezervne kopije"
 
-#: deja-dup/StatusIcon.vala:151
+#: deja-dup/StatusIcon.vala:149
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% završeno"
 
 #: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:54
-#: libdeja/BackendRemote.vala:104 libdeja/BackendS3.vala:64
+#: libdeja/BackendRemote.vala:129 libdeja/BackendS3.vala:64
 msgid "Backup will begin when a network connection becomes available."
 msgstr "Sgurnosna kopija će krenuti kada mrežna konekcija postane dostupna."
 
@@ -1238,23 +1239,23 @@ msgstr "Lokalni Folder"
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:295 libdeja/BackendS3.vala:122
+#: deja-dup/widgets/ConfigLocation.vala:293 libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: deja-dup/widgets/ConfigLocation.vala:297
+#: deja-dup/widgets/ConfigLocation.vala:295
 msgid "Google Cloud Storage"
 msgstr ""
 
-#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendU1.vala:45
+#: deja-dup/widgets/ConfigLocation.vala:297 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: deja-dup/widgets/ConfigLocation.vala:301 libdeja/BackendRackspace.vala:72
+#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendRackspace.vala:72
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Datoteke"
 
-#: deja-dup/widgets/ConfigLocation.vala:303
+#: deja-dup/widgets/ConfigLocation.vala:301
 msgid "OpenStack Swift"
 msgstr ""
 
@@ -1355,8 +1356,8 @@ msgstr "%1$s na %2$s"
 msgid "Backup will begin when %s is connected."
 msgstr ""
 
-#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:146
-#: libdeja/BackendRemote.vala:129
+#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:158
+#: libdeja/BackendRemote.vala:154
 msgid "Storage location not available"
 msgstr ""
 
@@ -1365,7 +1366,11 @@ msgstr ""
 msgid "Waiting for ‘%s’ to become connected…"
 msgstr "Čekanje ‘%s’ da se konektuje…"
 
-#: libdeja/BackendGOA.vala:101
+#: libdeja/BackendGOA.vala:94
+msgid "Google Drive"
+msgstr ""
+
+#: libdeja/BackendGOA.vala:113
 msgid "Backup will begin when a storage location is configured"
 msgstr ""
 
@@ -1373,17 +1378,17 @@ msgstr ""
 #. Translators: "Files" here is the string used in GNOME Online Account
 #. settings checkbox for a given account to enable/disable an account's
 #. Files feature.
-#: libdeja/BackendGOA.vala:111
+#: libdeja/BackendGOA.vala:123
 #, c-format
 msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr ""
 
-#: libdeja/BackendGOA.vala:140
+#: libdeja/BackendGOA.vala:152
 msgid "Waiting for Online Accounts to be configured in your backup settings…"
 msgstr ""
 
 #. Translators: %s is the name of the provider inside of GNOME Online Accounts
-#: libdeja/BackendGOA.vala:143
+#: libdeja/BackendGOA.vala:155
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
@@ -1422,7 +1427,11 @@ msgstr "P_rikaži API pristupni ključ"
 msgid "_Remember API access key"
 msgstr "_Zapamti API pristupni ključ"
 
-#: libdeja/BackendRemote.vala:130
+#: libdeja/BackendRemote.vala:111
+msgid "The network server is not available"
+msgstr ""
+
+#: libdeja/BackendRemote.vala:155
 msgid "Waiting for a network connection…"
 msgstr "Čekanje mrežne konekcije..."
 
@@ -1504,19 +1513,19 @@ msgid ""
 "again."
 msgstr ""
 
-#: libdeja/Operation.vala:62
+#: libdeja/Operation.vala:56
 msgid "Backing up…"
 msgstr "Pravim rezervnu kopiju..."
 
-#: libdeja/Operation.vala:66
+#: libdeja/Operation.vala:60
 msgid "Checking for backups…"
 msgstr "Provjera rezervnih kopija"
 
-#: libdeja/Operation.vala:68
+#: libdeja/Operation.vala:62
 msgid "Listing files…"
 msgstr "Listam datoteke..."
 
-#: libdeja/Operation.vala:70 libdeja/Operation.vala:99
+#: libdeja/Operation.vala:64 libdeja/Operation.vala:93
 #: libdeja/tools/duplicity/DuplicityJob.vala:394
 #: libdeja/tools/duplicity/DuplicityJob.vala:401
 #: libdeja/tools/duplicity/DuplicityJob.vala:426
