@@ -168,6 +168,13 @@ public class BackendRemote : BackendFile
 
     var root = get_root_from_settings();
 
+    if (root.get_uri_scheme() == "smb" && root.get_basename() == "/") {
+      // Special sanity check for some edge cases like smb:// where if the user
+      // just puts in smb://server/ as the root, GIO thinks it's a valid root,
+      // but the share never ends up mounted.
+      throw new IOError.FAILED("%s", _("Samba network locations must include both a hostname and a share name."));
+    }
+
     try {
       yield root.mount_enclosing_volume(MountMountFlags.NONE, mount_op, null);
     } catch (IOError.ALREADY_MOUNTED e) {

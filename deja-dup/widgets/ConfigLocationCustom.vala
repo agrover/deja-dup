@@ -35,7 +35,7 @@ public class ConfigLocationCustom : ConfigLocationTable
     address.entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY,
                                           "dialog-question-symbolic");
     address.entry.icon_press.connect(show_hint);
-    add_widget(_("Server _Address"), address);
+    add_widget(_("_Network Location"), address);
 
     hint = create_hint(address.entry);
 
