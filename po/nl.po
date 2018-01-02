@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-09-18 13:47-0400\n"
-"PO-Revision-Date: 2017-09-11 23:32+0000\n"
+"POT-Creation-Date: 2017-11-18 16:04-0500\n"
+"PO-Revision-Date: 2017-12-30 11:21+0000\n"
 "Last-Translator: rob <linuxned@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-09-19 05:31+0000\n"
-"X-Generator: Launchpad (build 18449)\n"
+"X-Launchpad-Export-Date: 2017-12-31 05:34+0000\n"
+"X-Generator: Launchpad (build 18521)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
@@ -48,6 +48,8 @@ msgid ""
 "Support for local, remote, or cloud backup locations such as Google Drive "
 "and Nextcloud"
 msgstr ""
+"Ondersteunt lokale reservekopieën, maar ook reservekopieën op afstand en in "
+"de cloud, bijvoorbeeld bij Google Drive en Nextcloud"
 
 #: data/org.gnome.DejaDup.appdata.xml.in:13
 msgid "Securely encrypts and compresses your data"
@@ -81,7 +83,7 @@ msgstr "Reservekopie-instellingen wijzigen"
 #. Translators: this is the icon name, you probably don't need to change this
 #: data/org.gnome.DejaDup.desktop:9
 msgid "org.gnome.DejaDup"
-msgstr ""
+msgstr "org.gnome.DejaDup"
 
 #. Translators: Add whatever keywords you want in your language, separated by semicolons
 #. These keywords are used when searching for applications in dashes, etc.
@@ -106,6 +108,14 @@ msgid ""
 "by the user’s username and can be anywhere in the path. Relative entries are "
 "relative to the user’s home directory."
 msgstr ""
+"Dit is de lijst met de bestanden waarvan een reservekopie gemaakt zal "
+"worden. De gereserveerde onderdelen $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, "
+"$MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, en $VIDEOS zullen "
+"herkend worden als de speciale mappen van de gebruiker en kunnen zich "
+"eventueel ook aan het begin van een langer pad ($HOME/subdir) bevinden. Het "
+"gereserveerde onderdeel $USER zal vervangen worden door de gebruikersnaam en "
+"kan zich op elke locatie van het pad bevinden. Relatieve onderdelen zijn "
+"relatief aan de Persoonlijke map."
 
 #: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:200
 msgid "Folders to ignore"
@@ -120,6 +130,14 @@ msgid ""
 "Reserved value $USER is replaced by the user’s username and can be anywhere "
 "in the path. Relative entries are relative to the user’s home directory."
 msgstr ""
+"Dit is de lijst met de bestanden waarvan geen reservekopie gemaakt zal "
+"worden. De gereserveerde onderdelen $HOME, $DESKTOP, $DOCUMENTS, $DOWNLOAD, "
+"$MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, en $VIDEOS zullen "
+"herkend worden als de speciale mappen van de gebruiker en kunnen zich "
+"eventueel ook aan het begin van een langer pad ($HOME/subdir) bevinden. Het "
+"gereserveerde onderdeel $USER zal vervangen worden door de gebruikersnaam en "
+"kan zich op elke locatie van het pad bevinden. Relatieve onderdelen zijn "
+"relatief aan de Persoonlijke map."
 
 #: data/org.gnome.DejaDup.gschema.xml:19
 msgid "Whether to request the root password"
@@ -251,13 +269,15 @@ msgstr ""
 
 #: data/org.gnome.DejaDup.gschema.xml:69
 msgid "Whether to use metered networks"
-msgstr ""
+msgstr "Of er een netwerkverbinding met een datalimiet gebruikt moet worden"
 
 #: data/org.gnome.DejaDup.gschema.xml:70
 msgid ""
 "If false, Déjà Dup will refuse to run scheduled backups over metered network "
 "connections (like 4G)."
 msgstr ""
+"Bij nee, zal Déjà Dup geen ingeplande reservekopieën maken over "
+"netwerkverbindingen met een datalimiet (zoals 4G)."
 
 #: data/org.gnome.DejaDup.gschema.xml:88
 msgid "Type of location to store backup"
@@ -283,46 +303,52 @@ msgid ""
 "The folder hierarchy where backups are stored. Paths can be absolute or "
 "relative to your home directory."
 msgstr ""
+"De mapstructuur waarin reservekopieën zijn opgeslagen. Het pad kan absoluut "
+"zijn maar ook relatief aan uw Persoonlijke map."
 
 #: data/org.gnome.DejaDup.gschema.xml:113
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: data/org.gnome.DejaDup.gschema.xml:114
 msgid ""
 "The unique filesystem identifier for the drive, used to recognize the drive "
 "when it is plugged in."
 msgstr ""
+"Dit is het unieke bestandssysteemkenmerk voor de schijf, dat gebruikt zal "
+"worden voor het herkennen van de schijf wanneer die aangesloten wordt."
 
 #: data/org.gnome.DejaDup.gschema.xml:118
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #: data/org.gnome.DejaDup.gschema.xml:119
 msgid "The name of the external drive."
-msgstr ""
+msgstr "De naam van de externe schijf."
 
 #: data/org.gnome.DejaDup.gschema.xml:123
 msgid "Icon"
-msgstr ""
+msgstr "Pictogram"
 
 #: data/org.gnome.DejaDup.gschema.xml:124
 msgid "The icon of the external drive, as a serialized GIcon."
-msgstr ""
+msgstr "Het pictogram van de externe schijf, als een geserialiseerd GIcon."
 
 #: data/org.gnome.DejaDup.gschema.xml:129
 msgid ""
 "The folder hierarchy where backups are stored. Paths are relative to the "
 "drive."
 msgstr ""
+"De mapstructuur waarin reservekopieën zijn opgeslagen. Het pad is relatief "
+"aan de schijf."
 
 #: data/org.gnome.DejaDup.gschema.xml:136
 msgid "The server address"
-msgstr ""
+msgstr "Het serveradres"
 
 #: data/org.gnome.DejaDup.gschema.xml:137
 msgid "The URI of the remote server location."
-msgstr ""
+msgstr "De URI van de serverlocatie op afstand."
 
 #: data/org.gnome.DejaDup.gschema.xml:142
 #: data/org.gnome.DejaDup.gschema.xml:209
@@ -330,6 +356,8 @@ msgid ""
 "The folder hierarchy where backups are stored. Paths can be absolute or "
 "relative to the host."
 msgstr ""
+"De mapstructuur waarin reservekopieën zijn opgeslagen. Het pad kan absoluut "
+"zijn maar ook relatief aan de gastcomputer."
 
 #: data/org.gnome.DejaDup.gschema.xml:149
 msgid "Amazon S3 Access Key ID"
@@ -342,15 +370,15 @@ msgstr ""
 
 #: data/org.gnome.DejaDup.gschema.xml:154
 msgid "The Amazon S3 bucket name to use"
-msgstr "De naam om voor de Amazon S3-opslaglocatie te gebruiken"
+msgstr "De naam om voor de Amazon S3-emmer te gebruiken"
 
 #: data/org.gnome.DejaDup.gschema.xml:155
 msgid ""
 "Which Amazon S3 bucket to store files in. This does not need to exist "
 "already. Only legal hostname strings are valid."
 msgstr ""
-"Op welke Amazon S3-opslaglocatie de bestanden opgeslagen moeten worden. Deze "
-"hoeft nog niet te bestaan. Alleen legale namen zijn geldig."
+"In welke Amazon S3-emmer de bestanden opgeslagen moeten worden. Deze hoeft "
+"nog niet te bestaan. Alleen legale namen zijn geldig."
 
 #: data/org.gnome.DejaDup.gschema.xml:159
 msgid "The Amazon S3 folder"
@@ -363,46 +391,46 @@ msgid ""
 "the chosen bucket."
 msgstr ""
 "Een optionele naam voor een map om bestanden in op te slaan. Deze map zal "
-"gemaakt worden in de gekozen opslaglocatie."
+"gemaakt worden in de gekozen emmer."
 
 #: data/org.gnome.DejaDup.gschema.xml:167
 msgid "Google Cloud Storage Access Key ID"
-msgstr "Google-cloudopslagtoegangssleutel-ID"
+msgstr "Google Cloud Storage-toegangssleutel-ID"
 
 #: data/org.gnome.DejaDup.gschema.xml:168
 msgid ""
 "Your Google Cloud Storage Access Key Identifier. This acts as your Google "
 "Cloud Storage username."
 msgstr ""
-"Uw Google-cloudopslagtoegangssleutel-ID. Deze fungeert als uw Google-"
-"cloudopslaggebruikersnaam."
+"Uw Google Cloud Storage-toegangssleutel-ID. Deze fungeert als uw Google "
+"Cloud Storage-gebruikersnaam."
 
 #: data/org.gnome.DejaDup.gschema.xml:172
 msgid "The Google Cloud Storage bucket name to use"
-msgstr "De naam om voor de Google-cloudopslaglocatie te gebruiken"
+msgstr "De naam om voor de Google Cloud Storage-emmer te gebruiken"
 
 #: data/org.gnome.DejaDup.gschema.xml:173
 msgid ""
 "Which Google Cloud Storage bucket to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
-"Op welke Google-cloudopslaglocatie de bestanden opgeslagen moeten worden. "
+"In welke Google Cloud Storage-emmer de bestanden opgeslagen moeten worden. "
 "Deze hoeft nog niet te bestaan. Alleen legale namen zijn geldig."
 
 #: data/org.gnome.DejaDup.gschema.xml:177
 msgid "The Google Cloud Storage folder"
-msgstr "De Google-cloudopslagmap"
+msgstr "De Google Cloud Storage-map"
 
 #: data/org.gnome.DejaDup.gschema.xml:185
 msgid "The Rackspace Cloud Files container"
-msgstr "De Rackspace Cloud Files-opslaglocatie"
+msgstr "De Rackspace Cloud Files-container"
 
 #: data/org.gnome.DejaDup.gschema.xml:186
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr ""
-"Op welke Rackspace Cloud Files-opslaglocatie de bestanden opgeslagen moeten "
+"In welke Rackspace Cloud Files-container de bestanden opgeslagen moeten "
 "worden. Deze hoeft nog niet te bestaan. Alleen legale namen zijn geldig."
 
 #: data/org.gnome.DejaDup.gschema.xml:190
@@ -415,31 +443,31 @@ msgstr "Dit is uw gebruikersnaam voor de Rackspace Cloud Files-dienst."
 
 #: data/org.gnome.DejaDup.gschema.xml:198
 msgid "Account ID"
-msgstr ""
+msgstr "Account-ID"
 
 #: data/org.gnome.DejaDup.gschema.xml:199
 msgid "The unique ID for the GNOME Online Account."
-msgstr ""
+msgstr "Uniek ID voor GNOME Online Account."
 
 #: data/org.gnome.DejaDup.gschema.xml:203
 msgid "The type of account"
-msgstr ""
+msgstr "Het type account"
 
 #: data/org.gnome.DejaDup.gschema.xml:204
 msgid "The cached type of account that ID represents."
-msgstr ""
+msgstr "Het type account waarmee dit ID in het buffergeheugen opgeslagen is."
 
 #: data/org.gnome.DejaDup.gschema.xml:216
 msgid "The OpenStack Swift container"
-msgstr "De OpenStack Swift-opslaglocatie"
+msgstr "De OpenStack Swift-container"
 
 #: data/org.gnome.DejaDup.gschema.xml:217
 msgid ""
 "Which OpenStack Swift container to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
-"Op welke OpenStack Swift-opslaglocatie de bestanden opgeslagen moeten "
-"worden. Deze hoeft nog niet te bestaan. Alleen legale namen zijn geldig."
+"In welke OpenStack Swift-container de bestanden opgeslagen moeten worden. "
+"Deze hoeft nog niet te bestaan. Alleen legale namen zijn geldig."
 
 #: data/org.gnome.DejaDup.gschema.xml:221
 msgid "Your OpenStack username"
@@ -467,37 +495,39 @@ msgid ""
 msgstr ""
 "Dit is de authenticatie-URL, of keystone-URL voor de OpenStack-dienst"
 
-#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:69
+#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:70
 msgid "Restore"
 msgstr "Herstellen"
 
 #: data/org.gnome.DejaDup.policy.in:11
 msgid "Privileges are required to restore files to system locations"
 msgstr ""
+"U heeft extra rechten nodig om bestanden te kunnen herstellen naar "
+"systeemlocaties"
 
 #: data/ui/help-overlay.ui:15
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Algemeen"
 
 #: data/ui/help-overlay.ui:20
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Afsluiten"
 
 #: data/ui/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 #: data/ui/help-overlay.ui:34
 msgctxt "shortcut window"
 msgid "Shortcuts"
-msgstr ""
+msgstr "Sneltoetsen"
 
 #: data/ui/menus.ui:7
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Sneltoetsen"
 
 #: data/ui/menus.ui:11
 msgid "_Help"
@@ -505,7 +535,7 @@ msgstr "_Help"
 
 #: data/ui/menus.ui:15
 msgid "_About"
-msgstr ""
+msgstr "I_nfo"
 
 #: data/ui/menus.ui:19
 msgid "_Quit"
@@ -521,37 +551,38 @@ msgstr "Zoeken…"
 
 #: data/ui/server-hint.ui:16
 msgid "Server Addresses"
-msgstr ""
+msgstr "Serveradressen"
 
 #. Translators: This is followed by a list of valid adresses (smb://gnome.org, ssh://192.168.0.1, ftp://[2001:db8::1])
 #: data/ui/server-hint.ui:29
 msgid ""
 "Server addresses are made up of a protocol prefix and an address. Examples:"
 msgstr ""
+"Serveradressen bestaan uit een protocolvoorvoegsel en een adres. Voorbeelden:"
 
 #: data/ui/server-hint.ui:64
 msgid "Available Protocols"
-msgstr ""
+msgstr "Beschikbare protocollen"
 
 #: data/ui/server-hint.ui:78
 msgid "AppleTalk"
-msgstr ""
+msgstr "AppleTalk"
 
 #: data/ui/server-hint.ui:89
 msgid "File Transfer Protocol"
-msgstr ""
+msgstr "FTP"
 
 #: data/ui/server-hint.ui:100
 msgid "Network File System"
-msgstr ""
+msgstr "NFS"
 
 #: data/ui/server-hint.ui:111
 msgid "Samba"
-msgstr ""
+msgstr "Samba"
 
 #: data/ui/server-hint.ui:122
 msgid "SSH File Transfer Protocol"
-msgstr ""
+msgstr "SSH FTP"
 
 #: data/ui/server-hint.ui:133
 msgid "WebDAV"
@@ -559,26 +590,26 @@ msgstr "WebDAV"
 
 #: data/ui/server-hint.ui:144
 msgid "Prefix"
-msgstr ""
+msgstr "Voorvoegsel"
 
 #. Translators: do not translate ftp:// and ftps://
 #: data/ui/server-hint.ui:169
 msgid "ftp:// or ftps://"
-msgstr ""
+msgstr "ftp:// of ftps://"
 
 #: data/ui/server-hint.ui:191
 msgid "smb://"
-msgstr ""
+msgstr "smb://"
 
 #. Translators: do not translate sftp:// and ssh://
 #: data/ui/server-hint.ui:202
 msgid "sftp:// or ssh://"
-msgstr ""
+msgstr "sftp:// of ssh://"
 
 #. Translators: do not translate dav:// and davs://
 #: data/ui/server-hint.ui:213
 msgid "dav:// or davs://"
-msgstr ""
+msgstr "dav:// of davs://"
 
 #: deja-dup/nautilus/NautilusExtension.c:172
 msgid "Restore Missing Files…"
@@ -659,6 +690,8 @@ msgstr "_Details"
 #: deja-dup/AssistantOperation.vala:294
 msgid "In order to continue, the following packages need to be installed:"
 msgstr ""
+"Om verder te kunnen gaan dienen de volgende pakketten geïnstalleerd te "
+"worden:"
 
 #: deja-dup/AssistantOperation.vala:330
 msgid "_Allow restoring without a password"
@@ -709,7 +742,7 @@ msgstr "Elke twee _maanden testen"
 
 #: deja-dup/AssistantOperation.vala:513
 msgid "Install Packages"
-msgstr ""
+msgstr "Pakketten installeren"
 
 #: deja-dup/AssistantOperation.vala:528
 msgid "Summary"
@@ -746,67 +779,67 @@ msgstr "Versleutelingswachtwoord"
 #: deja-dup/AssistantOperation.vala:968
 msgctxt "verb"
 msgid "_Install"
-msgstr ""
+msgstr "_Installeren"
 
-#: deja-dup/AssistantRestore.vala:73
+#: deja-dup/AssistantRestore.vala:74
 msgid "_Restore"
 msgstr "He_rstellen"
 
-#: deja-dup/AssistantRestore.vala:95
+#: deja-dup/AssistantRestore.vala:94
 msgid "_Backup location"
 msgstr "_Reservekopielocatie"
 
-#: deja-dup/AssistantRestore.vala:128
+#: deja-dup/AssistantRestore.vala:131
 msgid "Restore From Where?"
 msgstr "Herstellen van waar?"
 
-#: deja-dup/AssistantRestore.vala:150
+#: deja-dup/AssistantRestore.vala:153
 msgid "_Date"
 msgstr "_Datum"
 
-#: deja-dup/AssistantRestore.vala:173
+#: deja-dup/AssistantRestore.vala:176
 msgid "Restore files to _original locations"
 msgstr "Bestanden herstellen naar hun _oorspronkelijke locatie"
 
-#: deja-dup/AssistantRestore.vala:178
+#: deja-dup/AssistantRestore.vala:181
 msgid "Restore to _specific folder"
 msgstr "Herstellen naar een _specifieke map"
 
-#: deja-dup/AssistantRestore.vala:188
+#: deja-dup/AssistantRestore.vala:191
 msgid "Choose destination for restored files"
 msgstr "Selecteer map om te herstellen"
 
-#: deja-dup/AssistantRestore.vala:192
+#: deja-dup/AssistantRestore.vala:195
 msgid "Restore _folder"
 msgstr "_Map herstellen"
 
-#: deja-dup/AssistantRestore.vala:225
+#: deja-dup/AssistantRestore.vala:228
 msgid "Backup location"
 msgstr "Reservekopielocatie"
 
-#: deja-dup/AssistantRestore.vala:233
+#: deja-dup/AssistantRestore.vala:236
 msgid "Restore date"
 msgstr "Hersteldatum"
 
-#: deja-dup/AssistantRestore.vala:241
+#: deja-dup/AssistantRestore.vala:244
 msgid "Restore folder"
 msgstr "Map herstellen"
 
-#: deja-dup/AssistantRestore.vala:267
+#: deja-dup/AssistantRestore.vala:270
 msgid "Checking for Backups…"
 msgstr "Zoeken naar reservekopieën…"
 
-#: deja-dup/AssistantRestore.vala:275
+#: deja-dup/AssistantRestore.vala:278
 msgid "Restore From When?"
 msgstr "Herstellen van welke datum?"
 
-#: deja-dup/AssistantRestore.vala:283
+#: deja-dup/AssistantRestore.vala:286
 msgid "Restore to Where?"
 msgstr "Waar naartoe herstellen?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: deja-dup/AssistantRestore.vala:310
+#: deja-dup/AssistantRestore.vala:313
 msgid "Restoring:"
 msgstr "Herstellen van:"
 
@@ -814,46 +847,46 @@ msgstr "Herstellen van:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: deja-dup/AssistantRestore.vala:352
+#: deja-dup/AssistantRestore.vala:355
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
 #. If we didn't see any dates...  Must not be any backups on the backend
-#: deja-dup/AssistantRestore.vala:365
+#: deja-dup/AssistantRestore.vala:368
 msgid "No backups to restore"
 msgstr "Geen reservekopieën om te herstellen"
 
-#: deja-dup/AssistantRestore.vala:444
+#: deja-dup/AssistantRestore.vala:447
 msgid "Original location"
 msgstr "Oorspronkelijke locatie"
 
-#: deja-dup/AssistantRestore.vala:455
+#: deja-dup/AssistantRestore.vala:458
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "Bestand om te herstellen"
 msgstr[1] "Bestanden om te herstellen"
 
-#: deja-dup/AssistantRestore.vala:476
+#: deja-dup/AssistantRestore.vala:479
 msgid "Restore Failed"
 msgstr "Herstellen mislukt"
 
-#: deja-dup/AssistantRestore.vala:478
+#: deja-dup/AssistantRestore.vala:481
 msgid "Restore Finished"
 msgstr "Herstel is voltooid"
 
 #. if it *is* visible, a header will be set already
-#: deja-dup/AssistantRestore.vala:481
+#: deja-dup/AssistantRestore.vala:484
 msgid "Your files were successfully restored."
 msgstr "Uw bestanden zijn succesvol hersteld."
 
-#: deja-dup/AssistantRestore.vala:484
+#: deja-dup/AssistantRestore.vala:487
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Uw bestand is succesvol hersteld."
 msgstr[1] "Uw bestanden zijn succesvol hersteld."
 
-#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:58
+#: deja-dup/AssistantRestore.vala:494 libdeja/Operation.vala:58
 msgid "Restoring…"
 msgstr "Herstellen..."
 
@@ -948,7 +981,7 @@ msgstr "Verwijderde bestanden herstellen"
 
 #: deja-dup/main.vala:81 deja-dup/main.vala:96 deja-dup/main.vala:122
 msgid "An operation is already in progress"
-msgstr ""
+msgstr "Er is reeds een opdracht gestart om een reservekopie te maken"
 
 #: deja-dup/main.vala:101
 msgid "No directory provided"
@@ -1068,8 +1101,8 @@ msgstr "_Bewaren"
 msgid ""
 "Old backups will be deleted earlier if the storage location is low on space."
 msgstr ""
-"Oude reservekopieën zullen eerder verwijderd worden als de "
-"reservekopielocatie bijna vol is."
+"Oude reservekopieën zullen eerder verwijderd worden als de opslaglocatie "
+"bijna vol is."
 
 #: deja-dup/Preferences.vala:292
 msgid "Scheduling"
@@ -1122,7 +1155,7 @@ msgid "%.1f%% complete"
 msgstr "%.1f%% compleet"
 
 #: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:54
-#: libdeja/BackendRemote.vala:129 libdeja/BackendS3.vala:64
+#: libdeja/BackendRemote.vala:132 libdeja/BackendS3.vala:64
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "Het maken van de reservekopie zal beginnen zodra er een netwerkverbinding "
@@ -1132,6 +1165,8 @@ msgstr ""
 msgid ""
 "Backup will begin when an unmetered network connection becomes available."
 msgstr ""
+"Het maken van de reservekopie zal beginnen zodra er een netwerkverbinding "
+"zonder datalimiet beschikbaar is."
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
@@ -1217,6 +1252,9 @@ msgid ""
 "You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
 msgstr ""
+"U kunt de volledige reservekopie terugzetten met de %s-knop of %s gebruiken "
+"om wijzigingen aan individuele bestanden te herstellen of verwijderde "
+"bestanden terug te plaatsen."
 
 #: deja-dup/widgets/ConfigLabelDescription.vala:81
 msgid "Back Up Now…"
@@ -1269,7 +1307,7 @@ msgstr "Selecteer mappen"
 
 #: deja-dup/widgets/ConfigLocation.vala:126
 msgid "Network Server"
-msgstr ""
+msgstr "Netwerkserver"
 
 #. And a local folder option
 #: deja-dup/widgets/ConfigLocation.vala:131
@@ -1284,7 +1322,7 @@ msgstr "Amazon S3"
 
 #: deja-dup/widgets/ConfigLocation.vala:295
 msgid "Google Cloud Storage"
-msgstr "Google-cloudopslag"
+msgstr "Google Cloud Storage"
 
 #: deja-dup/widgets/ConfigLocation.vala:297 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
@@ -1300,7 +1338,7 @@ msgstr "OpenStack Swift"
 
 #: deja-dup/widgets/ConfigLocationCustom.vala:38
 msgid "Server _Address"
-msgstr ""
+msgstr "Server_adres"
 
 #: deja-dup/widgets/ConfigLocationCustom.vala:44
 #: deja-dup/widgets/ConfigLocationFile.vala:44
@@ -1326,19 +1364,21 @@ msgstr "_OK"
 #. Translators: GCS is Google Cloud Services
 #: deja-dup/widgets/ConfigLocationGCS.vala:32
 msgid "GCS Access Key I_D"
-msgstr ""
+msgstr "GCS -toegangssleutel-I_D"
 
 #. Translators: "Bucket" refers to a term used by Google Cloud Services
 #. see https://cloud.google.com/storage/docs/key-terms#bucket
 #: deja-dup/widgets/ConfigLocationGCS.vala:36
 msgid "_Bucket"
-msgstr ""
+msgstr "_Emmer"
 
 #: deja-dup/widgets/ConfigLocationGoa.vala:56
 msgid ""
 "This account is not yet configured. It cannot be used until you add it to "
 "your Online Accounts."
 msgstr ""
+"Dit account is nog niet ingesteld. Het kan pas gebruikt worden nadat u het "
+"heeft toegevoegd aan uw online accounts."
 
 #. Translators: 'Files' here refers to the feature label in GNOME Online Accounts
 #: deja-dup/widgets/ConfigLocationGoa.vala:60
@@ -1346,14 +1386,17 @@ msgid ""
 "This account has disabled Files support. It cannot be used until Files "
 "support is enabled again for this Online Account."
 msgstr ""
+"Dit account heeft ondersteuning voor Bestanden uitgeschakeld. Het kan pas "
+"weer gebruikt worden totdat ondersteuning voor Bestanden voor dit online "
+"account weer ingeschakeld is."
 
 #: deja-dup/widgets/ConfigLocationGoa.vala:88
 msgid "_Open Online Account Settings"
-msgstr ""
+msgstr "Online Account-instellingen _openen"
 
 #: deja-dup/widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
-msgstr "Opslaglo_catie"
+msgstr "_Container"
 
 #: deja-dup/widgets/ConfigLocationS3.vala:31
 msgid "S3 Access Key I_D"
@@ -1393,17 +1436,17 @@ msgstr "%1$s op %2$s"
 #: libdeja/BackendDrive.vala:102
 #, c-format
 msgid "Backup will begin when %s is connected."
-msgstr ""
+msgstr "Het maken van de reservekopie zal beginnen zodra %s verbonden is."
 
 #: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:158
-#: libdeja/BackendRemote.vala:154
+#: libdeja/BackendRemote.vala:157
 msgid "Storage location not available"
-msgstr ""
+msgstr "Reservekopielocatie is niet beschikbaar"
 
 #: libdeja/BackendDrive.vala:184
 #, c-format
 msgid "Waiting for ‘%s’ to become connected…"
-msgstr "Wachten todat '%s' verbonden is..."
+msgstr "Wachten totdat '%s' verbonden is..."
 
 #: libdeja/BackendGOA.vala:94
 msgid "Google Drive"
@@ -1412,6 +1455,8 @@ msgstr "Google Drive"
 #: libdeja/BackendGOA.vala:113
 msgid "Backup will begin when a storage location is configured"
 msgstr ""
+"Het maken van de reservekopie zal beginnen zodra de reservekopielocatie "
+"ingesteld is"
 
 #. TODO: actually watch for files support turning on or off
 #. Translators: "Files" here is the string used in GNOME Online Account
@@ -1421,16 +1466,22 @@ msgstr ""
 #, c-format
 msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr ""
+"Het maken van de reservekopie zal beginnen zodra ‘%s’ ondersteuning voor "
+"Bestanden heeft ingeschakeld"
 
 #: libdeja/BackendGOA.vala:152
 msgid "Waiting for Online Accounts to be configured in your backup settings…"
 msgstr ""
+"Aan het wachten op Online Accounts omdat deze bezig is met het configureren "
+"van uw reservekopie-instellingen…"
 
 #. Translators: %s is the name of the provider inside of GNOME Online Accounts
 #: libdeja/BackendGOA.vala:155
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
+"Aan het wachten op %s omdat deze bezig is met het configureren van uw "
+"reservekopie-instellingen…"
 
 #. Translators: %s is a folder.
 #: libdeja/BackendRackspace.vala:75
@@ -1448,7 +1499,7 @@ msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
 "href=\"%s\">online</a>."
 msgstr ""
-"U kunt een Rackspace Cloud Files-account <a href=\"%s\">online</a> aanmaken."
+"U kunt <a href=\"%s\">online</a> een Rackspace Cloud Files-account aanmaken."
 
 #: libdeja/BackendRackspace.vala:149
 msgid "Connect to Rackspace Cloud Files"
@@ -1466,11 +1517,11 @@ msgstr "API-toegangssleutel _tonen"
 msgid "_Remember API access key"
 msgstr "API-toegangssleutel _onthouden"
 
-#: libdeja/BackendRemote.vala:111
+#: libdeja/BackendRemote.vala:114
 msgid "The network server is not available"
-msgstr ""
+msgstr "De netwerkserver is niet beschikbaar"
 
-#: libdeja/BackendRemote.vala:155
+#: libdeja/BackendRemote.vala:158
 msgid "Waiting for a network connection…"
 msgstr "Wachten op een netwerkverbinding…"
 
@@ -1483,7 +1534,7 @@ msgstr "%s op Amazon S3"
 #: libdeja/BackendS3.vala:198
 #, c-format
 msgid "You can sign up for an Amazon S3 account <a href=\"%s\">online</a>."
-msgstr "U kunt een Amazon S3-account <a href=\"%s\">online</a> aanmaken."
+msgstr "U kunt <a href=\"%s\">online</a> een Amazon S3-account aanmaken."
 
 #: libdeja/BackendS3.vala:199
 msgid "Connect to Amazon S3"
@@ -1700,7 +1751,7 @@ msgstr ""
 
 #: libdeja/tools/duplicity/DuplicityJob.vala:1048
 msgid "S3 bucket name is not available."
-msgstr "S3-opslaglocatienaam is niet beschikbaar."
+msgstr "S3-emmernaam is niet beschikbaar."
 
 #: libdeja/tools/duplicity/DuplicityJob.vala:1062
 #, c-format
@@ -1898,11 +1949,6 @@ msgstr ""
 #~ msgid "%s at Google Drive"
 #~ msgstr "%s op Google Drive"
 
-#, c-format
-#~ msgid "You can sign up for a Google account <a href=\"%s\">online</a>."
-#~ msgstr ""
-#~ "U kunt <a href=\"%s\">op het internet</a> een Google-account aanmaken."
-
 #~ msgid "Connect to Google Drive"
 #~ msgstr "Verbinden met Google Drive"
 
@@ -1911,3 +1957,13 @@ msgstr ""
 
 #~ msgid "Another backup operation is already running"
 #~ msgstr "Er is reeds een opdracht gestart om een reservekopie te maken"
+
+#, c-format
+#~ msgid "You can sign up for a Google account <a href=\"%s\">online</a>."
+#~ msgstr "U kunt <a href=\"%s\">online</a> een Google-account aanmaken."
+
+#~ msgid "deja-dup"
+#~ msgstr "deja-dup"
+
+#~ msgid "Caja"
+#~ msgstr "Caja"
