@@ -168,7 +168,7 @@ public class BackendRemote : BackendFile
 
     var root = get_root_from_settings();
 
-    if (root.get_uri_scheme() == "smb" && root.get_basename() == "/") {
+    if (root.get_uri_scheme() == "smb" && root.get_uri().split("/").length < 5) {
       // Special sanity check for some edge cases like smb:// where if the user
       // just puts in smb://server/ as the root, GIO thinks it's a valid root,
       // but the share never ends up mounted.
