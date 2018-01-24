@@ -65,6 +65,7 @@ public abstract class ToolJob : Object
 
   public List<File> includes; // BACKUP
   public List<File> excludes; // BACKUP
+  public List<string> exclude_regexps; // BACKUP
 
   protected List<File> _restore_files;
   public List<File> restore_files { // RESTORE

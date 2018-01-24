@@ -59,10 +59,8 @@ public class OperationBackup : Operation
     var exclude_list = settings.get_file_list(EXCLUDE_LIST_KEY);
     
     // Exclude directories no one wants to backup
-    var always_excluded = get_always_excluded_dirs();
-    foreach (string dir in always_excluded)
-      job.excludes.prepend(File.new_for_path(dir));
-    
+    add_always_excluded_dirs(ref job.excludes, ref job.exclude_regexps);
+
     foreach (File s in exclude_list)
       job.excludes.prepend(s);
     foreach (File s in include_list)
@@ -84,17 +82,15 @@ public class OperationBackup : Operation
     return null;
   }
   
-  List<string> get_always_excluded_dirs()
+  void add_always_excluded_dirs(ref List<File> files, ref List<string> regexps)
   {
-    List<string> rv = new List<string>();
-    
     // User doesn't care about cache
     string dir = Environment.get_user_cache_dir();
     if (dir != null) {
-      rv.append(dir);
+      files.prepend(File.new_for_path(dir));
       // We also add our special cache dir because if the user still especially
       // includes the cache dir, we still won't backup our own metadata.
-      rv.append(Path.build_filename(dir, Config.PACKAGE));
+      files.prepend(File.new_for_path(Path.build_filename(dir, Config.PACKAGE)));
     }
 
     // Likewise, user doesn't care about cache-like directories in $HOME.
@@ -104,27 +100,26 @@ public class OperationBackup : Operation
     // When changing this list, remember to update the help documentation too.
     dir = Environment.get_home_dir();
     if (dir != null) {
-      rv.append(Path.build_filename(dir, ".adobe/Flash_Player/AssetCache"));
-      rv.append(Path.build_filename(dir, ".ccache"));
-      rv.append(Path.build_filename(dir, ".gvfs"));
-      rv.append(Path.build_filename(dir, ".Private")); // encrypted copies of stuff in $HOME
-      rv.append(Path.build_filename(dir, ".recent-applications.xbel"));
-      rv.append(Path.build_filename(dir, ".recently-used.xbel"));
-      rv.append(Path.build_filename(dir, ".steam/root"));
-      rv.append(Path.build_filename(dir, ".thumbnails"));
-      rv.append(Path.build_filename(dir, ".xsession-errors"));
+      files.prepend(File.new_for_path(Path.build_filename(dir, ".adobe/Flash_Player/AssetCache")));
+      files.prepend(File.new_for_path(Path.build_filename(dir, ".ccache")));
+      files.prepend(File.new_for_path(Path.build_filename(dir, ".gvfs")));
+      files.prepend(File.new_for_path(Path.build_filename(dir, ".Private"))); // encrypted copies of stuff in $HOME
+      files.prepend(File.new_for_path(Path.build_filename(dir, ".recent-applications.xbel")));
+      files.prepend(File.new_for_path(Path.build_filename(dir, ".recently-used.xbel")));
+      files.prepend(File.new_for_path(Path.build_filename(dir, ".steam/root")));
+      files.prepend(File.new_for_path(Path.build_filename(dir, ".thumbnails")));
+      files.prepend(File.new_for_path(Path.build_filename(dir, ".xsession-errors")));
+      regexps.prepend(Path.build_filename(dir, "snap/*/*/.cache"));
     }
     
     // Skip all of our temporary directories
     foreach (var tempdir in DejaDup.get_tempdirs())
-      rv.append(tempdir);
+      files.prepend(File.new_for_path(tempdir));
 
     // Skip transient directories
-    rv.append("/proc");
-    rv.append("/run");
-    rv.append("/sys");
-    
-    return rv;
+    files.prepend(File.new_for_path("/proc"));
+    files.prepend(File.new_for_path("/run"));
+    files.prepend(File.new_for_path("/sys"));
   }
 
   void fill_metadir() throws Error
