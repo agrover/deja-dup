@@ -89,6 +89,9 @@ public abstract class AssistantOperation : Assistant
   int saved_x;
   int saved_y;
 
+  const int LOGS_LINES_TO_KEEP = 10000;
+  bool adjustment_at_end = true;
+
   construct
   {
     add_custom_config_pages();
@@ -168,7 +171,6 @@ public abstract class AssistantOperation : Assistant
 
     string log_line = prefix + " " + file.get_parse_name();
 
-    bool adjustment_at_end = false;
     Gtk.Adjustment adjust = progress_scroll.get_vadjustment();
     if (adjust.value >= adjust.upper - adjust.page_size ||
         adjust.page_size == 0 || // means never been set, means not realized
@@ -178,19 +180,18 @@ public abstract class AssistantOperation : Assistant
     var buffer = progress_text.buffer;
     if (buffer.get_char_count() > 0)
       log_line = "\n" + log_line;
-    if (buffer.get_line_count() >= 100 && adjustment_at_end) {
-      // If we're watching text scroll by, save memory by only keeping last 100 lines
-      Gtk.TextIter start, line100;
-      buffer.get_start_iter(out start);
-      buffer.get_iter_at_line(out line100, buffer.get_line_count() - 100);
-      buffer.delete(ref start, ref line100);
-    }
-    
+
     Gtk.TextIter iter;
     buffer.get_end_iter(out iter);
     buffer.insert_text(ref iter, log_line, (int)log_line.length);
-    if (adjustment_at_end)
-      adjust.value = adjust.upper;
+
+    if (buffer.get_line_count() >= LOGS_LINES_TO_KEEP && adjustment_at_end) {
+      // If we're watching text scroll by, don't keep everything in memory
+      Gtk.TextIter start, cutoff;
+      buffer.get_start_iter(out start);
+      buffer.get_iter_at_line(out cutoff, buffer.get_line_count() - LOGS_LINES_TO_KEEP);
+      buffer.delete(ref start, ref cutoff);
+    }
   }
   
   protected void set_secondary_label(string text)
@@ -201,6 +202,25 @@ public abstract class AssistantOperation : Assistant
     }
     else
       secondary_label.hide();
+  }
+
+  void update_autoscroll()
+  {
+    if (adjustment_at_end)
+    {
+        Gtk.Adjustment adjust = progress_scroll.get_vadjustment();
+        adjust.value = adjust.upper - adjust.page_size;
+    }
+  }
+
+  bool stop_autoscroll()
+  {
+    Gtk.Adjustment adjust = progress_scroll.get_vadjustment();
+
+    if (adjust.value < adjust.upper - adjust.page_size)
+      adjustment_at_end = false;
+
+    return false;
   }
 
   protected virtual Gtk.Widget make_progress_page()
@@ -238,7 +258,11 @@ public abstract class AssistantOperation : Assistant
 
     progress_text = new Gtk.TextView();
     progress_text.editable = false;
+    progress_text.size_allocate.connect(update_autoscroll);
     progress_scroll = new Gtk.ScrolledWindow(null, null);
+    progress_scroll.scroll_event.connect(stop_autoscroll);
+    ((Gtk.Range)progress_scroll.get_vscrollbar()).change_value.connect(stop_autoscroll);
+    progress_scroll.expand = true;
     progress_scroll.child = progress_text;
     progress_scroll.hscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
     progress_scroll.vscrollbar_policy = Gtk.PolicyType.AUTOMATIC;
