@@ -105,21 +105,27 @@ static TimeSpan time_until(DateTime date)
   return date.difference(new DateTime.now_local());
 }
 
-static void notify_delay(string reason)
+static async void call_remote(string action, string[] args = {})
 {
+  var vargs = new VariantBuilder(new VariantType("av"));
+  foreach (string arg in args) {
+    vargs.add("v", new Variant.string(arg));
+  }
+  var platform_args = new VariantBuilder(new VariantType("a{sv}"));
   try {
-    var command = DejaDup.nice_prefix("deja-dup --delay");
-    string[] argv = command.split(" ");
-    argv += reason;
-
-    Process.spawn_async(null, argv, null,
-                        SpawnFlags.SEARCH_PATH |
-                        SpawnFlags.STDOUT_TO_DEV_NULL |
-                        SpawnFlags.STDERR_TO_DEV_NULL,
-                        null, null);
+    var deja = yield new DBusProxy.for_bus(BusType.SESSION,
+                                           DBusProxyFlags.NONE,
+                                           null,
+                                           "org.gnome.DejaDup",
+                                           "/org/gnome/DejaDup",
+                                           "org.freedesktop.Application",
+                                           null);
+    yield deja.call("ActivateAction",
+                    new Variant("(sava{sv})", action, vargs, platform_args),
+                    DBusCallFlags.NONE, -1, null);
   }
   catch (Error e) {
-    warning("%s\n", e.message);
+    warning("%s", e.message);
   }
 }
 
@@ -150,29 +156,18 @@ static async void kickoff()
   if (!ready) {
     debug("Postponing the backup.");
     if (!was_reactive && when != null)
-      notify_delay(when);
+      yield call_remote("delay", {when});
     return;
   }
 
-  try {
-    debug("Running automatic backup.");
-    var command = DejaDup.nice_prefix("deja-dup --backup --auto");
-    string[] argv = command.split(" ");
+  debug("Running automatic backup.");
 
-    if (DejaDup.in_testing_mode()) {
-      // fake successful and schedule next run
-      DejaDup.update_last_run_timestamp(DejaDup.TimestampType.BACKUP);
-    }
-    else {
-      Process.spawn_async(null, argv, null,
-                          SpawnFlags.SEARCH_PATH |
-                          SpawnFlags.STDOUT_TO_DEV_NULL |
-                          SpawnFlags.STDERR_TO_DEV_NULL,
-                          null, null);
-    }
+  if (DejaDup.in_testing_mode()) {
+    // fake successful and schedule next run
+    DejaDup.update_last_run_timestamp(DejaDup.TimestampType.BACKUP);
   }
-  catch (Error e) {
-    warning("%s\n", e.message);
+  else {
+    yield call_remote("backup-auto");
   }
 }
 

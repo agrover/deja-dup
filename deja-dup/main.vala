@@ -41,10 +41,12 @@ public class DejaDupApp : Gtk.Application
 
   const ActionEntry[] actions = {
     {"backup", backup},
+    {"backup-auto", backup_auto},
     {"restore", restore},
     {"op-show", op_show},
     {"prompt-ok", prompt_ok},
     {"prompt-cancel", prompt_cancel},
+    {"delay", delay, "s"},
     {"help", help},
     {"about", about},
     {"quit", quit},
@@ -126,12 +128,9 @@ public class DejaDupApp : Gtk.Application
       backup_full(options.contains("auto"));
     }
     else if (options.contains("delay")) {
-      var note = new Notification(_("Scheduled backup delayed"));
-      string body = null;
-      options.lookup("delay", "s", ref body);
-      note.set_body(body);
-      note.set_icon(new ThemedIcon("org.gnome.DejaDup"));
-      send_notification("backup-status", note);
+      string reason = null;
+      options.lookup("delay", "s", ref reason);
+      send_delay_notification(reason);
     }
     else if (options.contains("prompt")) {
       var toplevel = prompt(this);
@@ -215,6 +214,21 @@ public class DejaDupApp : Gtk.Application
     Gdk.notify_startup_complete();
   }
 
+  public void delay(GLib.SimpleAction action, GLib.Variant? parameter)
+  {
+    string reason = null;
+    parameter.get("s", ref reason);
+    send_delay_notification(reason);
+  }
+
+  void send_delay_notification(string reason)
+  {
+    var note = new Notification(_("Scheduled backup delayed"));
+    note.set_body(reason);
+    note.set_icon(new ThemedIcon("org.gnome.DejaDup"));
+    send_notification("backup-status", note);
+  }
+
   void help()
   {
     unowned List<Gtk.Window> list = get_windows();
@@ -238,6 +252,13 @@ public class DejaDupApp : Gtk.Application
       op_show();
     } else {
       backup_full(false);
+    }
+  }
+
+  public void backup_auto()
+  {
+    if (op == null) {
+      backup_full(true);
     }
   }
 
