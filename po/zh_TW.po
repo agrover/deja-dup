@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-11-18 16:04-0500\n"
-"PO-Revision-Date: 2017-11-19 03:51+0000\n"
+"POT-Creation-Date: 2018-01-02 17:04-0500\n"
+"PO-Revision-Date: 2018-01-18 10:04+0000\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2017-11-20 05:38+0000\n"
-"X-Generator: Launchpad (build 18505)\n"
+"X-Launchpad-Export-Date: 2018-01-19 05:41+0000\n"
+"X-Generator: Launchpad (build 18532)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
@@ -81,7 +81,7 @@ msgstr "org.gnome.DejaDup"
 #. These keywords are used when searching for applications in dashes, etc.
 #: data/org.gnome.DejaDup.desktop:21
 msgid "déjà;deja;dup;"
-msgstr "déjà;deja;dup;備份;"
+msgstr "déjà;deja;dup;備份;backup;"
 
 #: data/org.gnome.DejaDup.desktop:28
 msgid "Back Up"
@@ -432,7 +432,7 @@ msgid ""
 "This is the Authentication URL, or keystone URL for the OpenStack service"
 msgstr "這是 OpenStack 服務的認證 URL、或 keystone URL"
 
-#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:70
+#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:69
 msgid "Restore"
 msgstr "還原"
 
@@ -485,14 +485,15 @@ msgid "Scanning…"
 msgstr "正在掃描..."
 
 #: data/ui/server-hint.ui:16
-msgid "Server Addresses"
-msgstr "伺服器位址"
+msgid "Network Locations"
+msgstr "網路位置"
 
-#. Translators: This is followed by a list of valid adresses (smb://gnome.org, ssh://192.168.0.1, ftp://[2001:db8::1])
+#. Translators: This is followed by a list of valid adresses (smb://gnome.org/deja-dup, ssh://192.168.0.1, ftp://[2001:db8::1])
 #: data/ui/server-hint.ui:29
 msgid ""
-"Server addresses are made up of a protocol prefix and an address. Examples:"
-msgstr "伺服器位址是由協定前綴和位址所構成。例如："
+"Network locations are made up of a protocol prefix, an address, and "
+"sometimes a path depending on the protocol. Examples:"
+msgstr "網路位置要由協定前綴、位址組成，有時視協定還要提供路徑。範例："
 
 #: data/ui/server-hint.ui:64
 msgid "Available Protocols"
@@ -573,11 +574,11 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "備份(_B)"
 
-#: deja-dup/AssistantBackup.vala:57
+#: deja-dup/AssistantBackup.vala:58
 msgid "Creating the first backup.  This may take a while."
 msgstr "正在建立第一份備份。這會花上一些時間。"
 
-#: deja-dup/AssistantBackup.vala:58
+#: deja-dup/AssistantBackup.vala:59
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -585,24 +586,24 @@ msgstr "正在建立新鮮備份以保護備份免於損壞。這會比一般情
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: deja-dup/AssistantBackup.vala:88
+#: deja-dup/AssistantBackup.vala:89
 msgid "Backing up:"
 msgstr "備份中："
 
-#: deja-dup/AssistantBackup.vala:97
+#: deja-dup/AssistantBackup.vala:98
 msgid "Backup Failed"
 msgstr "備份失敗"
 
-#: deja-dup/AssistantBackup.vala:100
+#: deja-dup/AssistantBackup.vala:101
 msgid "Backup Finished"
 msgstr "備份成功"
 
 #. Also leave ourselves up if we just finished a restore test.
-#: deja-dup/AssistantBackup.vala:104
+#: deja-dup/AssistantBackup.vala:105
 msgid "Your files were successfully backed up and tested."
 msgstr "您的檔案已成功備份並通過測試。"
 
-#: deja-dup/AssistantBackup.vala:111
+#: deja-dup/AssistantBackup.vala:112
 msgid "Backing Up…"
 msgstr "正在備份..."
 
@@ -701,65 +702,65 @@ msgctxt "verb"
 msgid "_Install"
 msgstr "安裝(_I)"
 
-#: deja-dup/AssistantRestore.vala:74
+#: deja-dup/AssistantRestore.vala:73
 msgid "_Restore"
 msgstr "還原(_R)"
 
-#: deja-dup/AssistantRestore.vala:94
+#: deja-dup/AssistantRestore.vala:95
 msgid "_Backup location"
 msgstr "備份位置(_B)"
 
-#: deja-dup/AssistantRestore.vala:131
+#: deja-dup/AssistantRestore.vala:128
 msgid "Restore From Where?"
 msgstr "從何處還原？"
 
-#: deja-dup/AssistantRestore.vala:153
+#: deja-dup/AssistantRestore.vala:150
 msgid "_Date"
 msgstr "日期(_D)"
 
-#: deja-dup/AssistantRestore.vala:176
+#: deja-dup/AssistantRestore.vala:173
 msgid "Restore files to _original locations"
 msgstr "檔案還原至原始位置(_O)"
 
-#: deja-dup/AssistantRestore.vala:181
+#: deja-dup/AssistantRestore.vala:178
 msgid "Restore to _specific folder"
 msgstr "還原至指定資料夾(_S)"
 
-#: deja-dup/AssistantRestore.vala:191
+#: deja-dup/AssistantRestore.vala:188
 msgid "Choose destination for restored files"
 msgstr "為還原的檔案選擇目的地"
 
-#: deja-dup/AssistantRestore.vala:195
+#: deja-dup/AssistantRestore.vala:192
 msgid "Restore _folder"
 msgstr "還原資料夾(_F)"
 
-#: deja-dup/AssistantRestore.vala:228
+#: deja-dup/AssistantRestore.vala:225
 msgid "Backup location"
 msgstr "備份位置"
 
-#: deja-dup/AssistantRestore.vala:236
+#: deja-dup/AssistantRestore.vala:233
 msgid "Restore date"
 msgstr "還原日期"
 
-#: deja-dup/AssistantRestore.vala:244
+#: deja-dup/AssistantRestore.vala:241
 msgid "Restore folder"
 msgstr "還原資料夾"
 
-#: deja-dup/AssistantRestore.vala:270
+#: deja-dup/AssistantRestore.vala:267
 msgid "Checking for Backups…"
 msgstr "正在檢查有否備份..."
 
-#: deja-dup/AssistantRestore.vala:278
+#: deja-dup/AssistantRestore.vala:275
 msgid "Restore From When?"
 msgstr "還原何時？"
 
-#: deja-dup/AssistantRestore.vala:286
+#: deja-dup/AssistantRestore.vala:283
 msgid "Restore to Where?"
 msgstr "還原至何處？"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: deja-dup/AssistantRestore.vala:313
+#: deja-dup/AssistantRestore.vala:310
 msgid "Restoring:"
 msgstr "正在還原："
 
@@ -767,44 +768,44 @@ msgstr "正在還原："
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: deja-dup/AssistantRestore.vala:355
+#: deja-dup/AssistantRestore.vala:352
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
 #. If we didn't see any dates...  Must not be any backups on the backend
-#: deja-dup/AssistantRestore.vala:368
+#: deja-dup/AssistantRestore.vala:365
 msgid "No backups to restore"
 msgstr "沒有要還原的備份檔"
 
-#: deja-dup/AssistantRestore.vala:447
+#: deja-dup/AssistantRestore.vala:444
 msgid "Original location"
 msgstr "原始位置"
 
-#: deja-dup/AssistantRestore.vala:458
+#: deja-dup/AssistantRestore.vala:455
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "要還原的檔案"
 
-#: deja-dup/AssistantRestore.vala:479
+#: deja-dup/AssistantRestore.vala:476
 msgid "Restore Failed"
 msgstr "還原失敗"
 
-#: deja-dup/AssistantRestore.vala:481
+#: deja-dup/AssistantRestore.vala:478
 msgid "Restore Finished"
 msgstr "還原完成"
 
 #. if it *is* visible, a header will be set already
-#: deja-dup/AssistantRestore.vala:484
+#: deja-dup/AssistantRestore.vala:481
 msgid "Your files were successfully restored."
 msgstr "您的檔案已成功還原。"
 
-#: deja-dup/AssistantRestore.vala:487
+#: deja-dup/AssistantRestore.vala:484
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "您的檔案已成功還原。"
 
-#: deja-dup/AssistantRestore.vala:494 libdeja/Operation.vala:58
+#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:64
 msgid "Restoring…"
 msgstr "正在還原..."
 
@@ -1034,30 +1035,30 @@ msgstr "不要再顯示(_D)"
 msgid "_Open Backup Settings"
 msgstr "開啟備份設定(_O)"
 
-#: deja-dup/StatusIcon.vala:82
+#: deja-dup/StatusIcon.vala:84
 msgid "Backup completed"
 msgstr "備份已完成"
 
-#: deja-dup/StatusIcon.vala:87
+#: deja-dup/StatusIcon.vala:89
 msgid "Backup finished"
 msgstr "備份完成"
 
-#: deja-dup/StatusIcon.vala:88
+#: deja-dup/StatusIcon.vala:90
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr "並非所有檔案皆成功備份。請查看對話盒以瞭解詳細資訊。"
 
-#: deja-dup/StatusIcon.vala:118
+#: deja-dup/StatusIcon.vala:120
 msgid "Starting scheduled backup"
 msgstr "正在啟動備份排程"
 
-#: deja-dup/StatusIcon.vala:149
+#: deja-dup/StatusIcon.vala:151
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% 完成"
 
 #: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:54
-#: libdeja/BackendRemote.vala:132 libdeja/BackendS3.vala:64
+#: libdeja/BackendRemote.vala:104 libdeja/BackendS3.vala:64
 msgid "Backup will begin when a network connection becomes available."
 msgstr "當網路連線可用時備份將開始。"
 
@@ -1203,29 +1204,29 @@ msgstr "本地端資料夾"
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:293 libdeja/BackendS3.vala:122
+#: deja-dup/widgets/ConfigLocation.vala:295 libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: deja-dup/widgets/ConfigLocation.vala:295
+#: deja-dup/widgets/ConfigLocation.vala:297
 msgid "Google Cloud Storage"
 msgstr "Google Cloud Storage"
 
-#: deja-dup/widgets/ConfigLocation.vala:297 libdeja/BackendU1.vala:45
+#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendRackspace.vala:72
+#: deja-dup/widgets/ConfigLocation.vala:301 libdeja/BackendRackspace.vala:72
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
-#: deja-dup/widgets/ConfigLocation.vala:301
+#: deja-dup/widgets/ConfigLocation.vala:303
 msgid "OpenStack Swift"
 msgstr "OpenStack Swift"
 
 #: deja-dup/widgets/ConfigLocationCustom.vala:38
-msgid "Server _Address"
-msgstr "伺服器位址(_A)"
+msgid "_Network Location"
+msgstr "網路位置(_N)"
 
 #: deja-dup/widgets/ConfigLocationCustom.vala:44
 #: deja-dup/widgets/ConfigLocationFile.vala:44
@@ -1319,8 +1320,8 @@ msgstr "%2$s 上的 %1$s"
 msgid "Backup will begin when %s is connected."
 msgstr "備份將在連上 %s 時開始。"
 
-#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:158
-#: libdeja/BackendRemote.vala:157
+#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:146
+#: libdeja/BackendRemote.vala:129
 msgid "Storage location not available"
 msgstr "儲存位置無法使用"
 
@@ -1333,7 +1334,7 @@ msgstr "正在等候「%s」完成連接..."
 msgid "Google Drive"
 msgstr "Google 雲端硬碟"
 
-#: libdeja/BackendGOA.vala:113
+#: libdeja/BackendGOA.vala:101
 msgid "Backup will begin when a storage location is configured"
 msgstr "備份將在設定完儲存位置後開始"
 
@@ -1341,17 +1342,17 @@ msgstr "備份將在設定完儲存位置後開始"
 #. Translators: "Files" here is the string used in GNOME Online Account
 #. settings checkbox for a given account to enable/disable an account's
 #. Files feature.
-#: libdeja/BackendGOA.vala:123
+#: libdeja/BackendGOA.vala:111
 #, c-format
 msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr "備份將在「%s」啟用《檔案》支援後開始"
 
-#: libdeja/BackendGOA.vala:152
+#: libdeja/BackendGOA.vala:140
 msgid "Waiting for Online Accounts to be configured in your backup settings…"
 msgstr "等候您備份設定中的線上帳號作設定…"
 
 #. Translators: %s is the name of the provider inside of GNOME Online Accounts
-#: libdeja/BackendGOA.vala:155
+#: libdeja/BackendGOA.vala:143
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
 msgstr "等候您備份設定中的 %s 作設定…"
@@ -1393,9 +1394,17 @@ msgstr "記住 API 存取金鑰(_R)"
 msgid "The network server is not available"
 msgstr "網路伺服器無法使用"
 
-#: libdeja/BackendRemote.vala:158
+#: libdeja/BackendRemote.vala:130
 msgid "Waiting for a network connection…"
 msgstr "正在等候網路連線..."
+
+#. Special sanity check for some edge cases like smb:// where if the user
+#. just puts in smb://server/ as the root, GIO thinks it's a valid root,
+#. but the share never ends up mounted.
+#: libdeja/BackendRemote.vala:175
+msgid ""
+"Samba network locations must include both a hostname and a share name."
+msgstr "Samba 網路位置必須包含主機名稱和共享名稱。"
 
 #. Translators: %s is a folder.
 #: libdeja/BackendS3.vala:125
@@ -1475,19 +1484,19 @@ msgid ""
 "again."
 msgstr "您的備份似乎已損毀。您應該刪除備份並且再試一次。"
 
-#: libdeja/Operation.vala:56
+#: libdeja/Operation.vala:62
 msgid "Backing up…"
 msgstr "正在備份..."
 
-#: libdeja/Operation.vala:60
+#: libdeja/Operation.vala:66
 msgid "Checking for backups…"
 msgstr "正在檢查備份..."
 
-#: libdeja/Operation.vala:62
+#: libdeja/Operation.vala:68
 msgid "Listing files…"
 msgstr "正在列出檔案..."
 
-#: libdeja/Operation.vala:64 libdeja/Operation.vala:93
+#: libdeja/Operation.vala:70 libdeja/Operation.vala:99
 #: libdeja/tools/duplicity/DuplicityJob.vala:394
 #: libdeja/tools/duplicity/DuplicityJob.vala:401
 #: libdeja/tools/duplicity/DuplicityJob.vala:426
@@ -1798,6 +1807,16 @@ msgstr "Déjà Dup 備份工具需要 %d.%d.%.2d 版以上的 duplicity，但是
 
 #~ msgid "Another backup operation is already running"
 #~ msgstr "另一個備份操作正在執行中"
+
+#~ msgid ""
+#~ "Server addresses are made up of a protocol prefix and an address. Examples:"
+#~ msgstr "伺服器位址是由協定前綴和位址所構成。例如："
+
+#~ msgid "Server Addresses"
+#~ msgstr "伺服器位址"
+
+#~ msgid "Server _Address"
+#~ msgstr "伺服器位址(_A)"
 
 #~ msgid ""
 #~ "Support for local, remote, or cloud backup locations such as Nextcloud"

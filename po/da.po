@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-11-18 16:04-0500\n"
-"PO-Revision-Date: 2017-10-19 12:59+0000\n"
+"POT-Creation-Date: 2018-01-02 17:04-0500\n"
+"PO-Revision-Date: 2018-02-10 00:10+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-11-20 05:37+0000\n"
-"X-Generator: Launchpad (build 18505)\n"
+"X-Launchpad-Export-Date: 2018-02-11 06:03+0000\n"
+"X-Generator: Launchpad (build 18544)\n"
 "Language: da\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
@@ -417,15 +417,15 @@ msgstr "Mappen til Google Cloud Storage"
 
 #: data/org.gnome.DejaDup.gschema.xml:185
 msgid "The Rackspace Cloud Files container"
-msgstr "Rackspace Cloud Files-beholder"
+msgstr "Beholder til Rackspace-skyfiler"
 
 #: data/org.gnome.DejaDup.gschema.xml:186
 msgid ""
 "Which Rackspace Cloud Files container to store files in. This does not need "
 "to exist already. Only legal hostname strings are valid."
 msgstr ""
-"Hvilken Rackspace Cloud Files beholder filer skal opbevares i. Den behøver "
-"ikke findes i forvejen. Kun korrekte værtsnavnsstrenge er gyldig."
+"Hvilken beholder til Rackspace-skyfiler som filer skal opbevares i. Den "
+"behøver ikke findes i forvejen. Kun korrekte værtsnavnsstrenge er gyldig."
 
 #: data/org.gnome.DejaDup.gschema.xml:190
 msgid "Your Rackspace username"
@@ -433,7 +433,7 @@ msgstr "Dit Rackspace brugernavn"
 
 #: data/org.gnome.DejaDup.gschema.xml:191
 msgid "This is your username for the Rackspace Cloud Files service."
-msgstr "Dette er dit brugernavn til Rackspace Cloud Files-tjenesten."
+msgstr "Dette er dit brugernavn til tjenesten Rackspace-skyfiler."
 
 #: data/org.gnome.DejaDup.gschema.xml:198
 msgid "Account ID"
@@ -490,7 +490,7 @@ msgstr ""
 "Dette er autentifikations-URL'en eller keystone-URL'en til OpenStack-"
 "tjenesten"
 
-#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:70
+#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:69
 msgid "Restore"
 msgstr "Genopret"
 
@@ -543,15 +543,17 @@ msgid "Scanning…"
 msgstr "Skanner…"
 
 #: data/ui/server-hint.ui:16
-msgid "Server Addresses"
-msgstr "Serveradresser"
+msgid "Network Locations"
+msgstr "Netværksplaceringer"
 
-#. Translators: This is followed by a list of valid adresses (smb://gnome.org, ssh://192.168.0.1, ftp://[2001:db8::1])
+#. Translators: This is followed by a list of valid adresses (smb://gnome.org/deja-dup, ssh://192.168.0.1, ftp://[2001:db8::1])
 #: data/ui/server-hint.ui:29
 msgid ""
-"Server addresses are made up of a protocol prefix and an address. Examples:"
+"Network locations are made up of a protocol prefix, an address, and "
+"sometimes a path depending on the protocol. Examples:"
 msgstr ""
-"Serveradresser består af et protokolpræfiks og en adresse. Eksempler:"
+"Netværksplaceringer består af et protokol-præfiks, en adresse, og nogen "
+"gangen en sti afhængig af protokollen. Eksempler:"
 
 #: data/ui/server-hint.ui:64
 msgid "Available Protocols"
@@ -634,11 +636,11 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "_Sikkerhedskopiér"
 
-#: deja-dup/AssistantBackup.vala:57
+#: deja-dup/AssistantBackup.vala:58
 msgid "Creating the first backup.  This may take a while."
 msgstr "Opretter den første backup. Dette kan tage et stykke tid."
 
-#: deja-dup/AssistantBackup.vala:58
+#: deja-dup/AssistantBackup.vala:59
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -648,24 +650,24 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: deja-dup/AssistantBackup.vala:88
+#: deja-dup/AssistantBackup.vala:89
 msgid "Backing up:"
 msgstr "Sikkerhedskopierer:"
 
-#: deja-dup/AssistantBackup.vala:97
+#: deja-dup/AssistantBackup.vala:98
 msgid "Backup Failed"
 msgstr "Sikkerhedskopiering mislykkedes"
 
-#: deja-dup/AssistantBackup.vala:100
+#: deja-dup/AssistantBackup.vala:101
 msgid "Backup Finished"
 msgstr "Sikkerhedskopiering fuldført"
 
 #. Also leave ourselves up if we just finished a restore test.
-#: deja-dup/AssistantBackup.vala:104
+#: deja-dup/AssistantBackup.vala:105
 msgid "Your files were successfully backed up and tested."
 msgstr "Dine filer blev sikkerhedskopieret og testet."
 
-#: deja-dup/AssistantBackup.vala:111
+#: deja-dup/AssistantBackup.vala:112
 msgid "Backing Up…"
 msgstr "Sikkerhedskopierer…"
 
@@ -769,65 +771,65 @@ msgctxt "verb"
 msgid "_Install"
 msgstr "_Installer"
 
-#: deja-dup/AssistantRestore.vala:74
+#: deja-dup/AssistantRestore.vala:73
 msgid "_Restore"
 msgstr "_Genopret"
 
-#: deja-dup/AssistantRestore.vala:94
+#: deja-dup/AssistantRestore.vala:95
 msgid "_Backup location"
 msgstr "_Placering af sikkerhedskopi"
 
-#: deja-dup/AssistantRestore.vala:131
+#: deja-dup/AssistantRestore.vala:128
 msgid "Restore From Where?"
 msgstr "Genopret hvorfra?"
 
-#: deja-dup/AssistantRestore.vala:153
+#: deja-dup/AssistantRestore.vala:150
 msgid "_Date"
 msgstr "_Dato"
 
-#: deja-dup/AssistantRestore.vala:176
+#: deja-dup/AssistantRestore.vala:173
 msgid "Restore files to _original locations"
 msgstr "Genopret filer til _oprindelige placeringer"
 
-#: deja-dup/AssistantRestore.vala:181
+#: deja-dup/AssistantRestore.vala:178
 msgid "Restore to _specific folder"
 msgstr "Genopret til _specifik mappe"
 
-#: deja-dup/AssistantRestore.vala:191
+#: deja-dup/AssistantRestore.vala:188
 msgid "Choose destination for restored files"
 msgstr "Vælg destination for genoprettede filer"
 
-#: deja-dup/AssistantRestore.vala:195
+#: deja-dup/AssistantRestore.vala:192
 msgid "Restore _folder"
 msgstr "Genopret _mappe"
 
-#: deja-dup/AssistantRestore.vala:228
+#: deja-dup/AssistantRestore.vala:225
 msgid "Backup location"
 msgstr "Placering af sikkerhedskopi"
 
-#: deja-dup/AssistantRestore.vala:236
+#: deja-dup/AssistantRestore.vala:233
 msgid "Restore date"
 msgstr "Genopret dato"
 
-#: deja-dup/AssistantRestore.vala:244
+#: deja-dup/AssistantRestore.vala:241
 msgid "Restore folder"
 msgstr "Genopret mappe"
 
-#: deja-dup/AssistantRestore.vala:270
+#: deja-dup/AssistantRestore.vala:267
 msgid "Checking for Backups…"
 msgstr "Søger efter sikkerhedskopier…"
 
-#: deja-dup/AssistantRestore.vala:278
+#: deja-dup/AssistantRestore.vala:275
 msgid "Restore From When?"
 msgstr "Genopret fra hvornår?"
 
-#: deja-dup/AssistantRestore.vala:286
+#: deja-dup/AssistantRestore.vala:283
 msgid "Restore to Where?"
 msgstr "Hvortil skal der genoprettes?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: deja-dup/AssistantRestore.vala:313
+#: deja-dup/AssistantRestore.vala:310
 msgid "Restoring:"
 msgstr "Genopretter:"
 
@@ -835,46 +837,46 @@ msgstr "Genopretter:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: deja-dup/AssistantRestore.vala:355
+#: deja-dup/AssistantRestore.vala:352
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
 #. If we didn't see any dates...  Must not be any backups on the backend
-#: deja-dup/AssistantRestore.vala:368
+#: deja-dup/AssistantRestore.vala:365
 msgid "No backups to restore"
 msgstr "Ingen sikkerhedskopier at genoprette"
 
-#: deja-dup/AssistantRestore.vala:447
+#: deja-dup/AssistantRestore.vala:444
 msgid "Original location"
 msgstr "Oprindelig placering"
 
-#: deja-dup/AssistantRestore.vala:458
+#: deja-dup/AssistantRestore.vala:455
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "Fil som vil blive genoprettet"
 msgstr[1] "Filer som vil blive genoprettet"
 
-#: deja-dup/AssistantRestore.vala:479
+#: deja-dup/AssistantRestore.vala:476
 msgid "Restore Failed"
 msgstr "Genoprettelse mislykkedes"
 
-#: deja-dup/AssistantRestore.vala:481
+#: deja-dup/AssistantRestore.vala:478
 msgid "Restore Finished"
 msgstr "Genoprettelse fuldført"
 
 #. if it *is* visible, a header will be set already
-#: deja-dup/AssistantRestore.vala:484
+#: deja-dup/AssistantRestore.vala:481
 msgid "Your files were successfully restored."
 msgstr "Dine filer blev genoprettet."
 
-#: deja-dup/AssistantRestore.vala:487
+#: deja-dup/AssistantRestore.vala:484
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Din fil blev genoprettet."
 msgstr[1] "Dine filer blev genoprettet."
 
-#: deja-dup/AssistantRestore.vala:494 libdeja/Operation.vala:58
+#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:64
 msgid "Restoring…"
 msgstr "Genopretter…"
 
@@ -1114,32 +1116,32 @@ msgstr "_Vis ikke igen"
 msgid "_Open Backup Settings"
 msgstr "_Åbn indstillinger for sikkerhedskopiering"
 
-#: deja-dup/StatusIcon.vala:82
+#: deja-dup/StatusIcon.vala:84
 msgid "Backup completed"
 msgstr "Sikkerhedskopiering gennemført"
 
-#: deja-dup/StatusIcon.vala:87
+#: deja-dup/StatusIcon.vala:89
 msgid "Backup finished"
 msgstr "Sikkerhedskopiering fuldført"
 
-#: deja-dup/StatusIcon.vala:88
+#: deja-dup/StatusIcon.vala:90
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr ""
 "Ikke alle filer blev sikkerhedskopieret. Yderligere detaljer fremgår af "
 "dialogvinduet."
 
-#: deja-dup/StatusIcon.vala:118
+#: deja-dup/StatusIcon.vala:120
 msgid "Starting scheduled backup"
 msgstr "Starter planlagt sikkerhedskopiering"
 
-#: deja-dup/StatusIcon.vala:149
+#: deja-dup/StatusIcon.vala:151
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% gennemført"
 
 #: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:54
-#: libdeja/BackendRemote.vala:132 libdeja/BackendS3.vala:64
+#: libdeja/BackendRemote.vala:104 libdeja/BackendS3.vala:64
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "Sikkerhedskopiering vil begynde når en netværkstilslutning bliver "
@@ -1298,29 +1300,29 @@ msgstr "Lokal mappe"
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:293 libdeja/BackendS3.vala:122
+#: deja-dup/widgets/ConfigLocation.vala:295 libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: deja-dup/widgets/ConfigLocation.vala:295
+#: deja-dup/widgets/ConfigLocation.vala:297
 msgid "Google Cloud Storage"
 msgstr "Google Cloud Storage"
 
-#: deja-dup/widgets/ConfigLocation.vala:297 libdeja/BackendU1.vala:45
+#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendRackspace.vala:72
+#: deja-dup/widgets/ConfigLocation.vala:301 libdeja/BackendRackspace.vala:72
 msgid "Rackspace Cloud Files"
-msgstr "Rackspace Cloud Files"
+msgstr "Rackspace-skyfiler"
 
-#: deja-dup/widgets/ConfigLocation.vala:301
+#: deja-dup/widgets/ConfigLocation.vala:303
 msgid "OpenStack Swift"
 msgstr "OpenStack Swift"
 
 #: deja-dup/widgets/ConfigLocationCustom.vala:38
-msgid "Server _Address"
-msgstr "Server_adresse"
+msgid "_Network Location"
+msgstr "_Netværksplacering"
 
 #: deja-dup/widgets/ConfigLocationCustom.vala:44
 #: deja-dup/widgets/ConfigLocationFile.vala:44
@@ -1419,8 +1421,8 @@ msgstr "%1$s på %2$s"
 msgid "Backup will begin when %s is connected."
 msgstr "Sikkerhedskopiering vil begynde når %s er forbundet."
 
-#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:158
-#: libdeja/BackendRemote.vala:157
+#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:146
+#: libdeja/BackendRemote.vala:129
 msgid "Storage location not available"
 msgstr "Lagringsplacering ikke tilgængelig"
 
@@ -1433,7 +1435,7 @@ msgstr "Venter på at \"%s\" bliver forbundet…"
 msgid "Google Drive"
 msgstr "Google Drev"
 
-#: libdeja/BackendGOA.vala:113
+#: libdeja/BackendGOA.vala:101
 msgid "Backup will begin when a storage location is configured"
 msgstr "Sikkerhedskopiering vil begynde når et lagringssted er konfigureret"
 
@@ -1441,21 +1443,21 @@ msgstr "Sikkerhedskopiering vil begynde når et lagringssted er konfigureret"
 #. Translators: "Files" here is the string used in GNOME Online Account
 #. settings checkbox for a given account to enable/disable an account's
 #. Files feature.
-#: libdeja/BackendGOA.vala:123
+#: libdeja/BackendGOA.vala:111
 #, c-format
 msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr ""
 "Sikkerhedskopiering vil begynde når ‘%s’ har aktiveret understøttelse af "
 "Filer"
 
-#: libdeja/BackendGOA.vala:152
+#: libdeja/BackendGOA.vala:140
 msgid "Waiting for Online Accounts to be configured in your backup settings…"
 msgstr ""
 "Venter på at onlinekonti konfigureres i dine indstillinger for "
 "sikkerhedskopiering…"
 
 #. Translators: %s is the name of the provider inside of GNOME Online Accounts
-#: libdeja/BackendGOA.vala:155
+#: libdeja/BackendGOA.vala:143
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
@@ -1465,7 +1467,7 @@ msgstr ""
 #: libdeja/BackendRackspace.vala:75
 #, c-format
 msgid "%s on Rackspace Cloud Files"
-msgstr "%s på Rackspace Cloud Files"
+msgstr "%s på Rackspace-skyfiler"
 
 #: libdeja/BackendRackspace.vala:117 libdeja/BackendS3.vala:167
 msgid "Permission denied"
@@ -1477,11 +1479,11 @@ msgid ""
 "You can sign up for a Rackspace Cloud Files account <a "
 "href=\"%s\">online</a>."
 msgstr ""
-"Du kan oprette en Rackspace Cloud Files-konto <a href=\"%s\">online</a>."
+"Du kan oprette en konto til Rackspace-skyfiler <a href=\"%s\">online</a>."
 
 #: libdeja/BackendRackspace.vala:149
 msgid "Connect to Rackspace Cloud Files"
-msgstr "Forbind til Rackspace Cloud Files"
+msgstr "Forbind til Rackspace-skyfiler"
 
 #: libdeja/BackendRackspace.vala:150
 msgid "_API access key"
@@ -1499,9 +1501,18 @@ msgstr "_Husk API-adgangsnøgle"
 msgid "The network server is not available"
 msgstr "Netværksserveren er ikke tilgængelig"
 
-#: libdeja/BackendRemote.vala:158
+#: libdeja/BackendRemote.vala:130
 msgid "Waiting for a network connection…"
 msgstr "Venter på netværksforbindelse…"
+
+#. Special sanity check for some edge cases like smb:// where if the user
+#. just puts in smb://server/ as the root, GIO thinks it's a valid root,
+#. but the share never ends up mounted.
+#: libdeja/BackendRemote.vala:175
+msgid ""
+"Samba network locations must include both a hostname and a share name."
+msgstr ""
+"Samba-netværksplaceringer skal både indeholde et værtsnavn og et share-navn."
 
 #. Translators: %s is a folder.
 #: libdeja/BackendS3.vala:125
@@ -1588,19 +1599,19 @@ msgstr ""
 "Din sikkerhedskopi synes at være beskadiget. Du bør slette den og forsøge "
 "igen."
 
-#: libdeja/Operation.vala:56
+#: libdeja/Operation.vala:62
 msgid "Backing up…"
 msgstr "Sikkerhedskopierer…"
 
-#: libdeja/Operation.vala:60
+#: libdeja/Operation.vala:66
 msgid "Checking for backups…"
 msgstr "Søger efter sikkerhedskopier…"
 
-#: libdeja/Operation.vala:62
+#: libdeja/Operation.vala:68
 msgid "Listing files…"
 msgstr "Opretter liste over filer…"
 
-#: libdeja/Operation.vala:64 libdeja/Operation.vala:93
+#: libdeja/Operation.vala:70 libdeja/Operation.vala:99
 #: libdeja/tools/duplicity/DuplicityJob.vala:394
 #: libdeja/tools/duplicity/DuplicityJob.vala:401
 #: libdeja/tools/duplicity/DuplicityJob.vala:426
@@ -1924,6 +1935,17 @@ msgstr ""
 #~ msgid "Another backup operation is already running"
 #~ msgstr "En anden sikkerhedskopiering er allerede igang"
 
+#~ msgid "Server Addresses"
+#~ msgstr "Serveradresser"
+
+#~ msgid "Server _Address"
+#~ msgstr "Server_adresse"
+
+#~ msgid ""
+#~ "Server addresses are made up of a protocol prefix and an address. Examples:"
+#~ msgstr ""
+#~ "Serveradresser består af et protokolpræfiks og en adresse. Eksempler:"
+
 #~ msgid "Files"
 #~ msgstr "Filer"
 
@@ -1945,3 +1967,9 @@ msgstr ""
 #~ msgstr ""
 #~ "Du kan oprette en sikkerhedskopi efter du først installerer noget nødvendigt "
 #~ "software ved at klikke på %s-knappen."
+
+#~ msgid ""
+#~ "Support for local, remote, or cloud backup locations such as Nextcloud"
+#~ msgstr ""
+#~ "Understøttelse af placering af sikkerhedskopi på lokal, fjern eller sky, "
+#~ "såsom Nextcloud"

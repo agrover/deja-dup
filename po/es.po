@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-11-18 16:04-0500\n"
-"PO-Revision-Date: 2017-09-11 23:32+0000\n"
-"Last-Translator: Michael Terry <mike@mterry.name>\n"
+"POT-Creation-Date: 2018-01-02 17:04-0500\n"
+"PO-Revision-Date: 2018-03-14 16:08+0000\n"
+"Last-Translator: Rodrigo <rodhos_hp@hotmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-11-20 05:38+0000\n"
-"X-Generator: Launchpad (build 18505)\n"
+"X-Launchpad-Export-Date: 2018-03-15 05:48+0000\n"
+"X-Generator: Launchpad (build 18571)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
@@ -47,6 +47,8 @@ msgid ""
 "Support for local, remote, or cloud backup locations such as Google Drive "
 "and Nextcloud"
 msgstr ""
+"Soporte para respaldo ubicado en forma local, remota o en la nube como "
+"Google Drive y Nextcloud"
 
 #: data/org.gnome.DejaDup.appdata.xml.in:13
 msgid "Securely encrypts and compresses your data"
@@ -155,8 +157,8 @@ msgid ""
 "The last time Déjà Dup was successfully run. This time should be in ISO 8601 "
 "format."
 msgstr ""
-"La última vez que Déjà Dup se ejecutó con éxito. La fecha debería estar en "
-"el formato ISO 8601."
+"La última vez que Déjà Dup se ejecutó correctamente. La fecha debería estar "
+"en el formato ISO 8601."
 
 #: data/org.gnome.DejaDup.gschema.xml:29
 msgid "The last time Déjà Dup backed up"
@@ -179,7 +181,7 @@ msgid ""
 "The last time Déjà Dup successfully completed a restore. This time should be "
 "in ISO 8601 format."
 msgstr ""
-"La última vez que Déjà Dup completó una restauración con éxito. La hora "
+"La última vez que Déjà Dup completó una restauración correctamente. La hora "
 "debería estar en el formato ISO 8601."
 
 #: data/org.gnome.DejaDup.gschema.xml:39
@@ -399,13 +401,16 @@ msgstr ""
 
 #: data/org.gnome.DejaDup.gschema.xml:172
 msgid "The Google Cloud Storage bucket name to use"
-msgstr ""
+msgstr "Nombre de contenedor de Google Cloud Storage a usar"
 
 #: data/org.gnome.DejaDup.gschema.xml:173
 msgid ""
 "Which Google Cloud Storage bucket to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
+"En qué contenedor de Google Cloud Storage guardar los archivos. Esto no "
+"tiene porqué existir aún. Sólo son válidas las cadenas legales de nombre de "
+"equipo."
 
 #: data/org.gnome.DejaDup.gschema.xml:177
 msgid "The Google Cloud Storage folder"
@@ -458,22 +463,24 @@ msgid ""
 "Which OpenStack Swift container to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
+"En qué contenedor de OpenStack Swift guardar los archivos. Esto no tiene "
+"porqué existir aún. Sólo son válidas las cadenas legales de nombre de equipo."
 
 #: data/org.gnome.DejaDup.gschema.xml:221
 msgid "Your OpenStack username"
-msgstr ""
+msgstr "Su nombre de usuario de OpenStack"
 
 #: data/org.gnome.DejaDup.gschema.xml:222
 msgid "This is your username for the OpenStack Swift service."
-msgstr ""
+msgstr "Este es su nombre de usuario para el servicio de OpenStack Swift"
 
 #: data/org.gnome.DejaDup.gschema.xml:226
 msgid "Your OpenStack tenant"
-msgstr ""
+msgstr "Su proyecto OpenStack"
 
 #: data/org.gnome.DejaDup.gschema.xml:227
 msgid "This is your tenant for the OpenStack Swift service."
-msgstr ""
+msgstr "Este es su proyecto para el servicio OpenStack Swift."
 
 #: data/org.gnome.DejaDup.gschema.xml:231
 msgid "Authentication URL"
@@ -483,8 +490,9 @@ msgstr "URL de autenticación"
 msgid ""
 "This is the Authentication URL, or keystone URL for the OpenStack service"
 msgstr ""
+"Este es el URL de autentificación, o URL principal para el servicio OpenStack"
 
-#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:70
+#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:69
 msgid "Restore"
 msgstr "Restaurar"
 
@@ -538,16 +546,17 @@ msgid "Scanning…"
 msgstr "Explorando…"
 
 #: data/ui/server-hint.ui:16
-msgid "Server Addresses"
-msgstr "Direcciones del servidor"
+msgid "Network Locations"
+msgstr "Ubicaciones de red"
 
-#. Translators: This is followed by a list of valid adresses (smb://gnome.org, ssh://192.168.0.1, ftp://[2001:db8::1])
+#. Translators: This is followed by a list of valid adresses (smb://gnome.org/deja-dup, ssh://192.168.0.1, ftp://[2001:db8::1])
 #: data/ui/server-hint.ui:29
 msgid ""
-"Server addresses are made up of a protocol prefix and an address. Examples:"
+"Network locations are made up of a protocol prefix, an address, and "
+"sometimes a path depending on the protocol. Examples:"
 msgstr ""
-"Las direcciones de los servidores se componen de un prefijo de protocolo y "
-"una dirección. Ejemplos:"
+"Las ubicaciones de red consisten en un prefijo de protocolo, una dirección y "
+"algunas veces una ruta dependiendo del protocolo. Ejemplos:"
 
 #: data/ui/server-hint.ui:64
 msgid "Available Protocols"
@@ -630,11 +639,11 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "_Respaldar"
 
-#: deja-dup/AssistantBackup.vala:57
+#: deja-dup/AssistantBackup.vala:58
 msgid "Creating the first backup.  This may take a while."
 msgstr "Creando la primera copia de seguridad. Esto puede tardar un rato."
 
-#: deja-dup/AssistantBackup.vala:58
+#: deja-dup/AssistantBackup.vala:59
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -644,24 +653,24 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: deja-dup/AssistantBackup.vala:88
+#: deja-dup/AssistantBackup.vala:89
 msgid "Backing up:"
 msgstr "Respaldando:"
 
-#: deja-dup/AssistantBackup.vala:97
+#: deja-dup/AssistantBackup.vala:98
 msgid "Backup Failed"
 msgstr "Fallo en la copia de seguridad"
 
-#: deja-dup/AssistantBackup.vala:100
+#: deja-dup/AssistantBackup.vala:101
 msgid "Backup Finished"
 msgstr "Copia de seguridad finalizada"
 
 #. Also leave ourselves up if we just finished a restore test.
-#: deja-dup/AssistantBackup.vala:104
+#: deja-dup/AssistantBackup.vala:105
 msgid "Your files were successfully backed up and tested."
 msgstr "Sus archivos se respaldaron correctamente y se comprobaron."
 
-#: deja-dup/AssistantBackup.vala:111
+#: deja-dup/AssistantBackup.vala:112
 msgid "Backing Up…"
 msgstr "Respaldando..."
 
@@ -765,65 +774,65 @@ msgctxt "verb"
 msgid "_Install"
 msgstr "_Instalar"
 
-#: deja-dup/AssistantRestore.vala:74
+#: deja-dup/AssistantRestore.vala:73
 msgid "_Restore"
 msgstr "_Restaurar"
 
-#: deja-dup/AssistantRestore.vala:94
+#: deja-dup/AssistantRestore.vala:95
 msgid "_Backup location"
 msgstr "_Ubicación de copia de seguridad"
 
-#: deja-dup/AssistantRestore.vala:131
+#: deja-dup/AssistantRestore.vala:128
 msgid "Restore From Where?"
 msgstr "¿Desde dónde restaurar?"
 
-#: deja-dup/AssistantRestore.vala:153
+#: deja-dup/AssistantRestore.vala:150
 msgid "_Date"
 msgstr "_Fecha"
 
-#: deja-dup/AssistantRestore.vala:176
+#: deja-dup/AssistantRestore.vala:173
 msgid "Restore files to _original locations"
 msgstr "Recuperar archivos a la _ubicación original"
 
-#: deja-dup/AssistantRestore.vala:181
+#: deja-dup/AssistantRestore.vala:178
 msgid "Restore to _specific folder"
 msgstr "Restaurar a una carpeta e_specífica"
 
-#: deja-dup/AssistantRestore.vala:191
+#: deja-dup/AssistantRestore.vala:188
 msgid "Choose destination for restored files"
 msgstr "Elegir destino para archivos restaurados"
 
-#: deja-dup/AssistantRestore.vala:195
+#: deja-dup/AssistantRestore.vala:192
 msgid "Restore _folder"
 msgstr "Restaurar _carpeta"
 
-#: deja-dup/AssistantRestore.vala:228
+#: deja-dup/AssistantRestore.vala:225
 msgid "Backup location"
 msgstr "Ubicación de la copia de seguridad"
 
-#: deja-dup/AssistantRestore.vala:236
+#: deja-dup/AssistantRestore.vala:233
 msgid "Restore date"
 msgstr "Restaurar fecha"
 
-#: deja-dup/AssistantRestore.vala:244
+#: deja-dup/AssistantRestore.vala:241
 msgid "Restore folder"
 msgstr "Carpeta de restauración"
 
-#: deja-dup/AssistantRestore.vala:270
+#: deja-dup/AssistantRestore.vala:267
 msgid "Checking for Backups…"
 msgstr "Comprobando respaldos..."
 
-#: deja-dup/AssistantRestore.vala:278
+#: deja-dup/AssistantRestore.vala:275
 msgid "Restore From When?"
 msgstr "¿Desde cuándo restaurar?"
 
-#: deja-dup/AssistantRestore.vala:286
+#: deja-dup/AssistantRestore.vala:283
 msgid "Restore to Where?"
 msgstr "¿Restaurar a dónde?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: deja-dup/AssistantRestore.vala:313
+#: deja-dup/AssistantRestore.vala:310
 msgid "Restoring:"
 msgstr "Restaurando:"
 
@@ -831,46 +840,46 @@ msgstr "Restaurando:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: deja-dup/AssistantRestore.vala:355
+#: deja-dup/AssistantRestore.vala:352
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
 #. If we didn't see any dates...  Must not be any backups on the backend
-#: deja-dup/AssistantRestore.vala:368
+#: deja-dup/AssistantRestore.vala:365
 msgid "No backups to restore"
 msgstr "No hay respaldos que restaurar"
 
-#: deja-dup/AssistantRestore.vala:447
+#: deja-dup/AssistantRestore.vala:444
 msgid "Original location"
 msgstr "Ubicación original"
 
-#: deja-dup/AssistantRestore.vala:458
+#: deja-dup/AssistantRestore.vala:455
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "Archivo a restaurar"
 msgstr[1] "Archivos a restaurar"
 
-#: deja-dup/AssistantRestore.vala:479
+#: deja-dup/AssistantRestore.vala:476
 msgid "Restore Failed"
 msgstr "Restauración fallida"
 
-#: deja-dup/AssistantRestore.vala:481
+#: deja-dup/AssistantRestore.vala:478
 msgid "Restore Finished"
 msgstr "Restauración finalizada"
 
 #. if it *is* visible, a header will be set already
-#: deja-dup/AssistantRestore.vala:484
+#: deja-dup/AssistantRestore.vala:481
 msgid "Your files were successfully restored."
 msgstr "Sus archivos fueron restaurados satisfactoriamente."
 
-#: deja-dup/AssistantRestore.vala:487
+#: deja-dup/AssistantRestore.vala:484
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Su archivo se ha restaurado correctamente."
 msgstr[1] "Sus archivos se han restaurado correctamente."
 
-#: deja-dup/AssistantRestore.vala:494 libdeja/Operation.vala:58
+#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:64
 msgid "Restoring…"
 msgstr "Restaurando..."
 
@@ -965,7 +974,7 @@ msgstr "Restaurar archivos borrados"
 
 #: deja-dup/main.vala:81 deja-dup/main.vala:96 deja-dup/main.vala:122
 msgid "An operation is already in progress"
-msgstr ""
+msgstr "Ya hay una operación en curso"
 
 #: deja-dup/main.vala:101
 msgid "No directory provided"
@@ -1024,6 +1033,7 @@ msgstr ""
 "  Monkey https://launchpad.net/~monkey-libre\n"
 "  Paco Molinero https://launchpad.net/~franciscomol\n"
 "  Rodolfo Guagnini https://launchpad.net/~rodolfo-lagalaxia\n"
+"  Rodrigo https://launchpad.net/~rodhos-hp\n"
 "  Ruben Romero https://launchpad.net/~huayra\n"
 "  Sammael Morgenstern https://launchpad.net/~morgenstjernesammael\n"
 "  Yury Jajitzky https://launchpad.net/~elruso\n"
@@ -1145,31 +1155,31 @@ msgstr "_No mostrar de nuevo"
 msgid "_Open Backup Settings"
 msgstr "_Abrir configuración de copia de seguridad"
 
-#: deja-dup/StatusIcon.vala:82
+#: deja-dup/StatusIcon.vala:84
 msgid "Backup completed"
 msgstr "Respaldo completado"
 
-#: deja-dup/StatusIcon.vala:87
+#: deja-dup/StatusIcon.vala:89
 msgid "Backup finished"
 msgstr "Copia de seguridad finalizada"
 
-#: deja-dup/StatusIcon.vala:88
+#: deja-dup/StatusIcon.vala:90
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr ""
 "No se respaldaron todos los archivos. Vea el diálogo para tener más detalles"
 
-#: deja-dup/StatusIcon.vala:118
+#: deja-dup/StatusIcon.vala:120
 msgid "Starting scheduled backup"
 msgstr "Iniciando el respaldo programado"
 
-#: deja-dup/StatusIcon.vala:149
+#: deja-dup/StatusIcon.vala:151
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% completo"
 
 #: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:54
-#: libdeja/BackendRemote.vala:132 libdeja/BackendS3.vala:64
+#: libdeja/BackendRemote.vala:104 libdeja/BackendS3.vala:64
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "La copia de seguridad se iniciará cuando esté disponible una conexión de red."
@@ -1326,29 +1336,29 @@ msgstr "Carpeta local"
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:293 libdeja/BackendS3.vala:122
+#: deja-dup/widgets/ConfigLocation.vala:295 libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: deja-dup/widgets/ConfigLocation.vala:295
+#: deja-dup/widgets/ConfigLocation.vala:297
 msgid "Google Cloud Storage"
-msgstr ""
+msgstr "Google Cloud Storage"
 
-#: deja-dup/widgets/ConfigLocation.vala:297 libdeja/BackendU1.vala:45
+#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendRackspace.vala:72
+#: deja-dup/widgets/ConfigLocation.vala:301 libdeja/BackendRackspace.vala:72
 msgid "Rackspace Cloud Files"
 msgstr "Archivos en la nube de Rackspace"
 
-#: deja-dup/widgets/ConfigLocation.vala:301
+#: deja-dup/widgets/ConfigLocation.vala:303
 msgid "OpenStack Swift"
 msgstr "OpenStack Swift"
 
 #: deja-dup/widgets/ConfigLocationCustom.vala:38
-msgid "Server _Address"
-msgstr "_Dirección del servidor"
+msgid "_Network Location"
+msgstr "Ubicació_n de red"
 
 #: deja-dup/widgets/ConfigLocationCustom.vala:44
 #: deja-dup/widgets/ConfigLocationFile.vala:44
@@ -1448,8 +1458,8 @@ msgstr "%1$s en %2$s"
 msgid "Backup will begin when %s is connected."
 msgstr "Respaldo comenzará cuando %s esté conectado."
 
-#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:158
-#: libdeja/BackendRemote.vala:157
+#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:146
+#: libdeja/BackendRemote.vala:129
 msgid "Storage location not available"
 msgstr "Ubicación de almacenamiento no disponible"
 
@@ -1462,7 +1472,7 @@ msgstr "Esperando que «%s» se conecte..."
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: libdeja/BackendGOA.vala:113
+#: libdeja/BackendGOA.vala:101
 msgid "Backup will begin when a storage location is configured"
 msgstr ""
 "La copia de seguridad comenzará cuando se configure una ubicación de "
@@ -1472,21 +1482,21 @@ msgstr ""
 #. Translators: "Files" here is the string used in GNOME Online Account
 #. settings checkbox for a given account to enable/disable an account's
 #. Files feature.
-#: libdeja/BackendGOA.vala:123
+#: libdeja/BackendGOA.vala:111
 #, c-format
 msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr ""
 "La copia de seguridad comenzará cuando «%s» tenga activo el soporte de "
 "Archivos"
 
-#: libdeja/BackendGOA.vala:152
+#: libdeja/BackendGOA.vala:140
 msgid "Waiting for Online Accounts to be configured in your backup settings…"
 msgstr ""
 "Esperando a que se configuren Cuentas en línea en su configuración de copias "
 "de seguridad..."
 
 #. Translators: %s is the name of the provider inside of GNOME Online Accounts
-#: libdeja/BackendGOA.vala:155
+#: libdeja/BackendGOA.vala:143
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
@@ -1529,11 +1539,21 @@ msgstr "_Recordar clave de acceso a API"
 
 #: libdeja/BackendRemote.vala:114
 msgid "The network server is not available"
-msgstr ""
+msgstr "El servidor de red no está disponible"
 
-#: libdeja/BackendRemote.vala:158
+#: libdeja/BackendRemote.vala:130
 msgid "Waiting for a network connection…"
 msgstr "Esperando una conexión de red…"
+
+#. Special sanity check for some edge cases like smb:// where if the user
+#. just puts in smb://server/ as the root, GIO thinks it's a valid root,
+#. but the share never ends up mounted.
+#: libdeja/BackendRemote.vala:175
+msgid ""
+"Samba network locations must include both a hostname and a share name."
+msgstr ""
+"Las ubicaciones de red de Samba deben incluir un nombre de anfitrión y un "
+"nombre compartido."
 
 #. Translators: %s is a folder.
 #: libdeja/BackendS3.vala:125
@@ -1619,19 +1639,19 @@ msgstr ""
 "Su copia de seguridad parece estar dañada. Debería eliminar dicha copia y "
 "empezar de nuevo."
 
-#: libdeja/Operation.vala:56
+#: libdeja/Operation.vala:62
 msgid "Backing up…"
 msgstr "Respaldando..."
 
-#: libdeja/Operation.vala:60
+#: libdeja/Operation.vala:66
 msgid "Checking for backups…"
 msgstr "Comprobando copias de seguridad..."
 
-#: libdeja/Operation.vala:62
+#: libdeja/Operation.vala:68
 msgid "Listing files…"
 msgstr "Listando archivos..."
 
-#: libdeja/Operation.vala:64 libdeja/Operation.vala:93
+#: libdeja/Operation.vala:70 libdeja/Operation.vala:99
 #: libdeja/tools/duplicity/DuplicityJob.vala:394
 #: libdeja/tools/duplicity/DuplicityJob.vala:401
 #: libdeja/tools/duplicity/DuplicityJob.vala:426
@@ -1964,3 +1984,15 @@ msgstr ""
 #~ msgstr ""
 #~ "Soporte para ubicaciones de respaldo locales, remotas o en la nube tales "
 #~ "como Nextcloud"
+
+#~ msgid ""
+#~ "Server addresses are made up of a protocol prefix and an address. Examples:"
+#~ msgstr ""
+#~ "Las direcciones de los servidores se componen de un prefijo de protocolo y "
+#~ "una dirección. Ejemplos:"
+
+#~ msgid "Server Addresses"
+#~ msgstr "Direcciones del servidor"
+
+#~ msgid "Server _Address"
+#~ msgstr "_Dirección del servidor"

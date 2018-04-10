@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-11-18 16:04-0500\n"
+"POT-Creation-Date: 2018-01-02 17:04-0500\n"
 "PO-Revision-Date: 2017-08-17 23:11+0000\n"
 "Last-Translator: Michael Terry <mike@mterry.name>\n"
 "Language-Team: English (Canada) <en_CA@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-11-20 05:38+0000\n"
-"X-Generator: Launchpad (build 18505)\n"
+"X-Launchpad-Export-Date: 2018-01-04 05:37+0000\n"
+"X-Generator: Launchpad (build 18521)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
@@ -506,13 +506,14 @@ msgid "Scanning…"
 msgstr "Scanning…"
 
 #: data/ui/server-hint.ui:16
-msgid "Server Addresses"
+msgid "Network Locations"
 msgstr ""
 
-#. Translators: This is followed by a list of valid adresses (smb://gnome.org, ssh://192.168.0.1, ftp://[2001:db8::1])
+#. Translators: This is followed by a list of valid adresses (smb://gnome.org/deja-dup, ssh://192.168.0.1, ftp://[2001:db8::1])
 #: data/ui/server-hint.ui:29
 msgid ""
-"Server addresses are made up of a protocol prefix and an address. Examples:"
+"Network locations are made up of a protocol prefix, an address, and "
+"sometimes a path depending on the protocol. Examples:"
 msgstr ""
 
 #: data/ui/server-hint.ui:64
@@ -735,61 +736,61 @@ msgstr ""
 msgid "_Restore"
 msgstr "_Restore"
 
-#: deja-dup/AssistantRestore.vala:94
+#: deja-dup/AssistantRestore.vala:101
 msgid "_Backup location"
 msgstr "_Backup location"
 
-#: deja-dup/AssistantRestore.vala:131
+#: deja-dup/AssistantRestore.vala:134
 msgid "Restore From Where?"
 msgstr "Restore From Where?"
 
-#: deja-dup/AssistantRestore.vala:153
+#: deja-dup/AssistantRestore.vala:156
 msgid "_Date"
 msgstr "_Date"
 
-#: deja-dup/AssistantRestore.vala:176
+#: deja-dup/AssistantRestore.vala:179
 msgid "Restore files to _original locations"
 msgstr "Restore files to _original locations"
 
-#: deja-dup/AssistantRestore.vala:181
+#: deja-dup/AssistantRestore.vala:184
 msgid "Restore to _specific folder"
 msgstr "Restore to _specific folder"
 
-#: deja-dup/AssistantRestore.vala:191
+#: deja-dup/AssistantRestore.vala:194
 msgid "Choose destination for restored files"
 msgstr "Choose destination for restored files"
 
-#: deja-dup/AssistantRestore.vala:195
+#: deja-dup/AssistantRestore.vala:198
 msgid "Restore _folder"
 msgstr "Restore _folder"
 
-#: deja-dup/AssistantRestore.vala:228
+#: deja-dup/AssistantRestore.vala:231
 msgid "Backup location"
 msgstr "Backup location"
 
-#: deja-dup/AssistantRestore.vala:236
+#: deja-dup/AssistantRestore.vala:239
 msgid "Restore date"
 msgstr "Restore date"
 
-#: deja-dup/AssistantRestore.vala:244
+#: deja-dup/AssistantRestore.vala:247
 msgid "Restore folder"
 msgstr "Restore folder"
 
-#: deja-dup/AssistantRestore.vala:270
+#: deja-dup/AssistantRestore.vala:273
 msgid "Checking for Backups…"
 msgstr "Checking for Backups…"
 
-#: deja-dup/AssistantRestore.vala:278
+#: deja-dup/AssistantRestore.vala:281
 msgid "Restore From When?"
 msgstr "Restore From When?"
 
-#: deja-dup/AssistantRestore.vala:286
+#: deja-dup/AssistantRestore.vala:289
 msgid "Restore to Where?"
 msgstr "Restore to Where?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: deja-dup/AssistantRestore.vala:313
+#: deja-dup/AssistantRestore.vala:317
 msgid "Restoring:"
 msgstr "Restoring:"
 
@@ -797,46 +798,46 @@ msgstr "Restoring:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: deja-dup/AssistantRestore.vala:355
+#: deja-dup/AssistantRestore.vala:359
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
 #. If we didn't see any dates...  Must not be any backups on the backend
-#: deja-dup/AssistantRestore.vala:368
+#: deja-dup/AssistantRestore.vala:372
 msgid "No backups to restore"
 msgstr "No backups to restore"
 
-#: deja-dup/AssistantRestore.vala:447
+#: deja-dup/AssistantRestore.vala:452
 msgid "Original location"
 msgstr "Original location"
 
-#: deja-dup/AssistantRestore.vala:458
+#: deja-dup/AssistantRestore.vala:463
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "File to restore"
 msgstr[1] "Files to restore"
 
-#: deja-dup/AssistantRestore.vala:479
+#: deja-dup/AssistantRestore.vala:484
 msgid "Restore Failed"
 msgstr "Restore Failed"
 
-#: deja-dup/AssistantRestore.vala:481
+#: deja-dup/AssistantRestore.vala:486
 msgid "Restore Finished"
 msgstr "Restore Finished"
 
 #. if it *is* visible, a header will be set already
-#: deja-dup/AssistantRestore.vala:484
+#: deja-dup/AssistantRestore.vala:489
 msgid "Your files were successfully restored."
 msgstr "Your files were successfully restored."
 
-#: deja-dup/AssistantRestore.vala:487
+#: deja-dup/AssistantRestore.vala:492
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Your file was successfully restored."
 msgstr[1] "Your files were successfully restored."
 
-#: deja-dup/AssistantRestore.vala:494 libdeja/Operation.vala:58
+#: deja-dup/AssistantRestore.vala:499 libdeja/Operation.vala:58
 msgid "Restoring…"
 msgstr "Restoring…"
 
@@ -1260,7 +1261,7 @@ msgid "OpenStack Swift"
 msgstr ""
 
 #: deja-dup/widgets/ConfigLocationCustom.vala:38
-msgid "Server _Address"
+msgid "_Network Location"
 msgstr ""
 
 #: deja-dup/widgets/ConfigLocationCustom.vala:44
@@ -1432,6 +1433,14 @@ msgstr ""
 
 #: libdeja/BackendRemote.vala:158
 msgid "Waiting for a network connection…"
+msgstr ""
+
+#. Special sanity check for some edge cases like smb:// where if the user
+#. just puts in smb://server/ as the root, GIO thinks it's a valid root,
+#. but the share never ends up mounted.
+#: libdeja/BackendRemote.vala:175
+msgid ""
+"Samba network locations must include both a hostname and a share name."
 msgstr ""
 
 #. Translators: %s is a folder.

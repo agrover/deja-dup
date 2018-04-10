@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-11-18 16:04-0500\n"
-"PO-Revision-Date: 2017-08-04 23:02+0000\n"
-"Last-Translator: Michael Terry <mike@mterry.name>\n"
+"POT-Creation-Date: 2018-01-02 17:04-0500\n"
+"PO-Revision-Date: 2018-02-28 11:19+0000\n"
+"Last-Translator: Báthory Péter <bathory86p@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-11-20 05:38+0000\n"
-"X-Generator: Launchpad (build 18505)\n"
+"X-Launchpad-Export-Date: 2018-03-01 06:06+0000\n"
+"X-Generator: Launchpad (build 18561)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
@@ -47,6 +47,8 @@ msgid ""
 "Support for local, remote, or cloud backup locations such as Google Drive "
 "and Nextcloud"
 msgstr ""
+"Támogatja a helyi, távoli és felhőbe való biztonsági mentés készítését, mint "
+"például a Google Drive vagy a Nextcloud."
 
 #: data/org.gnome.DejaDup.appdata.xml.in:13
 msgid "Securely encrypts and compresses your data"
@@ -79,7 +81,7 @@ msgstr "Biztonsági mentés beállításainak módosítása"
 #. Translators: this is the icon name, you probably don't need to change this
 #: data/org.gnome.DejaDup.desktop:9
 msgid "org.gnome.DejaDup"
-msgstr ""
+msgstr "org.gnome.DejaDup"
 
 #. Translators: Add whatever keywords you want in your language, separated by semicolons
 #. These keywords are used when searching for applications in dashes, etc.
@@ -104,6 +106,14 @@ msgid ""
 "by the user’s username and can be anywhere in the path. Relative entries are "
 "relative to the user’s home directory."
 msgstr ""
+"Ezen könyvtárakról fog biztonsági mentés készülni. Fenntartott értékek, amik "
+"a felhasználó saját könyvtáraiként lesznek értelmezve: $HOME, $DESKTOP, "
+"$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+"$VIDEOS. Ezek lehetnek egy hosszabb útvonal kezdetei is, pl. "
+"$HOME/alkönyvtár.\r\n"
+"A $USER fenntartott érték a felhasználó nevével lesz behelyettesítve, és az "
+"útvonalban bárhol szerepelhet. A relatív bejegyzések a felhasználó home "
+"könyvtárához képest relatívak."
 
 #: data/org.gnome.DejaDup.gschema.xml:14 deja-dup/Preferences.vala:200
 msgid "Folders to ignore"
@@ -118,6 +128,14 @@ msgid ""
 "Reserved value $USER is replaced by the user’s username and can be anywhere "
 "in the path. Relative entries are relative to the user’s home directory."
 msgstr ""
+"Ezen könyvtárakról nem fog biztonsági mentés készülni. Fenntartott értékek, "
+"amik a felhasználó saját könyvtáraiként lesznek értelmezve: $HOME, $DESKTOP, "
+"$DOCUMENTS, $DOWNLOAD, $MUSIC, $PICTURES, $PUBLIC_SHARE, $TEMPLATES, $TRASH, "
+"$VIDEOS. Ezek lehetnek egy hosszabb útvonal kezdetei is, pl. "
+"$HOME/alkönyvtár.\r\n"
+"A $USER fenntartott érték a felhasználó nevével lesz behelyettesítve, és az "
+"útvonalban bárhol szerepelhet. A relatív bejegyzések a felhasználó home "
+"könyvtárához képest relatívak."
 
 #: data/org.gnome.DejaDup.gschema.xml:19
 msgid "Whether to request the root password"
@@ -247,13 +265,15 @@ msgstr ""
 
 #: data/org.gnome.DejaDup.gschema.xml:69
 msgid "Whether to use metered networks"
-msgstr ""
+msgstr "Fizetős hálózatok használata"
 
 #: data/org.gnome.DejaDup.gschema.xml:70
 msgid ""
 "If false, Déjà Dup will refuse to run scheduled backups over metered network "
 "connections (like 4G)."
 msgstr ""
+"Ha nem, akkor a Déjà Dup nem fog biztonsági mentést ütemezni fizetős "
+"hálózati kapcsolatokon (pl. 4G)."
 
 #: data/org.gnome.DejaDup.gschema.xml:88
 msgid "Type of location to store backup"
@@ -279,46 +299,52 @@ msgid ""
 "The folder hierarchy where backups are stored. Paths can be absolute or "
 "relative to your home directory."
 msgstr ""
+"A biztonsági mentéseket tároló könyvtárstruktúra. Az útvonalak lehetnek "
+"abszolút elérési utak, vagy relatívak a home könyvtárhoz képest."
 
 #: data/org.gnome.DejaDup.gschema.xml:113
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: data/org.gnome.DejaDup.gschema.xml:114
 msgid ""
 "The unique filesystem identifier for the drive, used to recognize the drive "
 "when it is plugged in."
 msgstr ""
+"A meghajtó egyedi fájlrendszer azonosítója. A meghajtó csatlakoztatásakor ez "
+"alapján lehet beazonosítani."
 
 #: data/org.gnome.DejaDup.gschema.xml:118
 msgid "Name"
-msgstr ""
+msgstr "Név"
 
 #: data/org.gnome.DejaDup.gschema.xml:119
 msgid "The name of the external drive."
-msgstr ""
+msgstr "Külső meghajtó neve."
 
 #: data/org.gnome.DejaDup.gschema.xml:123
 msgid "Icon"
-msgstr ""
+msgstr "Ikon"
 
 #: data/org.gnome.DejaDup.gschema.xml:124
 msgid "The icon of the external drive, as a serialized GIcon."
-msgstr ""
+msgstr "A külső meghajtó ikonja, mint szerializált GIcon."
 
 #: data/org.gnome.DejaDup.gschema.xml:129
 msgid ""
 "The folder hierarchy where backups are stored. Paths are relative to the "
 "drive."
 msgstr ""
+"A biztonsági mentéseket tároló könyvtárstruktúra. Az útvonalak a meghajtón "
+"belül relatívak."
 
 #: data/org.gnome.DejaDup.gschema.xml:136
 msgid "The server address"
-msgstr ""
+msgstr "A szerver címe"
 
 #: data/org.gnome.DejaDup.gschema.xml:137
 msgid "The URI of the remote server location."
-msgstr ""
+msgstr "A távoli szerver URI címe."
 
 #: data/org.gnome.DejaDup.gschema.xml:142
 #: data/org.gnome.DejaDup.gschema.xml:209
@@ -326,6 +352,8 @@ msgid ""
 "The folder hierarchy where backups are stored. Paths can be absolute or "
 "relative to the host."
 msgstr ""
+"A biztonsági mentéseket tároló könyvtárstruktúra. Az útvonalak a kiszolgálón "
+"belül lehetnek abszolút vagy relatív hivatkozások."
 
 #: data/org.gnome.DejaDup.gschema.xml:149
 msgid "Amazon S3 Access Key ID"
@@ -364,27 +392,31 @@ msgstr ""
 
 #: data/org.gnome.DejaDup.gschema.xml:167
 msgid "Google Cloud Storage Access Key ID"
-msgstr ""
+msgstr "Google felhőtárhely-hozzáférési kulcs azonosítója"
 
 #: data/org.gnome.DejaDup.gschema.xml:168
 msgid ""
 "Your Google Cloud Storage Access Key Identifier. This acts as your Google "
 "Cloud Storage username."
 msgstr ""
+"Az Ön Google felhőtárhely-hozzáférési kulcs azonosítója. Ez a Google "
+"felhőtárhely felhasználóneveként működik."
 
 #: data/org.gnome.DejaDup.gschema.xml:172
 msgid "The Google Cloud Storage bucket name to use"
-msgstr ""
+msgstr "A használandó Google felhőtárhely „vödör” neve"
 
 #: data/org.gnome.DejaDup.gschema.xml:173
 msgid ""
 "Which Google Cloud Storage bucket to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
+"A használandó Google felhőtárhely „vödör” neve. Nem kell még léteznie. Csak "
+"érvényes gépnév-karakterláncok érvényesek."
 
 #: data/org.gnome.DejaDup.gschema.xml:177
 msgid "The Google Cloud Storage folder"
-msgstr ""
+msgstr "A Google felhőtárhely mappa"
 
 #: data/org.gnome.DejaDup.gschema.xml:185
 msgid "The Rackspace Cloud Files container"
@@ -410,86 +442,88 @@ msgstr ""
 
 #: data/org.gnome.DejaDup.gschema.xml:198
 msgid "Account ID"
-msgstr ""
+msgstr "Azonosító"
 
 #: data/org.gnome.DejaDup.gschema.xml:199
 msgid "The unique ID for the GNOME Online Account."
-msgstr ""
+msgstr "A GNOME Online Account egyedi ID-je."
 
 #: data/org.gnome.DejaDup.gschema.xml:203
 msgid "The type of account"
-msgstr ""
+msgstr "Fiók típusa"
 
 #: data/org.gnome.DejaDup.gschema.xml:204
 msgid "The cached type of account that ID represents."
-msgstr ""
+msgstr "A fiók gyorsítótárazott típusa, amire az ID mutat."
 
 #: data/org.gnome.DejaDup.gschema.xml:216
 msgid "The OpenStack Swift container"
-msgstr ""
+msgstr "Az OpenStack Swift tároló"
 
 #: data/org.gnome.DejaDup.gschema.xml:217
 msgid ""
 "Which OpenStack Swift container to store files in. This does not need to "
 "exist already. Only legal hostname strings are valid."
 msgstr ""
+"A fájlok tárolása ezen OpenStack Swift tárolóban. Nem kell még léteznie. "
+"Csak érvényes gépnév-karakterláncok érvényesek."
 
 #: data/org.gnome.DejaDup.gschema.xml:221
 msgid "Your OpenStack username"
-msgstr ""
+msgstr "OpenStack felhasználónév"
 
 #: data/org.gnome.DejaDup.gschema.xml:222
 msgid "This is your username for the OpenStack Swift service."
-msgstr ""
+msgstr "Az Ön felhasználóneve az OpenStack Swift szolgáltatásban."
 
 #: data/org.gnome.DejaDup.gschema.xml:226
 msgid "Your OpenStack tenant"
-msgstr ""
+msgstr "Az OpenStack lakó"
 
 #: data/org.gnome.DejaDup.gschema.xml:227
 msgid "This is your tenant for the OpenStack Swift service."
-msgstr ""
+msgstr "Az OpenStack Swift szolgáltatás lakója."
 
 #: data/org.gnome.DejaDup.gschema.xml:231
 msgid "Authentication URL"
-msgstr ""
+msgstr "Hitelesítési URL"
 
 #: data/org.gnome.DejaDup.gschema.xml:232
 msgid ""
 "This is the Authentication URL, or keystone URL for the OpenStack service"
-msgstr ""
+msgstr "Az OpenStack szolgáltatás hitelesítési vagy keystone URL-címe"
 
-#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:70
+#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:69
 msgid "Restore"
 msgstr "Visszaállítás"
 
 #: data/org.gnome.DejaDup.policy.in:11
 msgid "Privileges are required to restore files to system locations"
-msgstr ""
+msgstr "A fájlok visszaállítása a rendszerkönyvtárakba jogosultságot igényel"
 
 #: data/ui/help-overlay.ui:15
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Általános"
 
 #: data/ui/help-overlay.ui:20
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Bezárás"
 
 #: data/ui/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Help"
-msgstr ""
+msgstr "Súgó"
 
 #: data/ui/help-overlay.ui:34
 msgctxt "shortcut window"
 msgid "Shortcuts"
-msgstr ""
+msgstr "Gyorsbillentyűk"
 
 #: data/ui/menus.ui:7
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Gyorsbillentyűk"
 
 #: data/ui/menus.ui:11
 msgid "_Help"
@@ -497,7 +531,7 @@ msgstr "_Súgó"
 
 #: data/ui/menus.ui:15
 msgid "_About"
-msgstr ""
+msgstr "_Névjegy"
 
 #: data/ui/menus.ui:19
 msgid "_Quit"
@@ -512,38 +546,41 @@ msgid "Scanning…"
 msgstr "Keresés…"
 
 #: data/ui/server-hint.ui:16
-msgid "Server Addresses"
-msgstr ""
+msgid "Network Locations"
+msgstr "Hálózati helyek"
 
-#. Translators: This is followed by a list of valid adresses (smb://gnome.org, ssh://192.168.0.1, ftp://[2001:db8::1])
+#. Translators: This is followed by a list of valid adresses (smb://gnome.org/deja-dup, ssh://192.168.0.1, ftp://[2001:db8::1])
 #: data/ui/server-hint.ui:29
 msgid ""
-"Server addresses are made up of a protocol prefix and an address. Examples:"
+"Network locations are made up of a protocol prefix, an address, and "
+"sometimes a path depending on the protocol. Examples:"
 msgstr ""
+"A hálózati helyek protokoll előtagból, címből, valamint eseteként útvonalból "
+"állnak – a protokolltól függően. Példák:"
 
 #: data/ui/server-hint.ui:64
 msgid "Available Protocols"
-msgstr ""
+msgstr "Elérhető protokollok"
 
 #: data/ui/server-hint.ui:78
 msgid "AppleTalk"
-msgstr ""
+msgstr "AppleTalk"
 
 #: data/ui/server-hint.ui:89
 msgid "File Transfer Protocol"
-msgstr ""
+msgstr "Fájlátviteli protokoll (FTP)"
 
 #: data/ui/server-hint.ui:100
 msgid "Network File System"
-msgstr ""
+msgstr "Hálózati fájlrendszer (NFS)"
 
 #: data/ui/server-hint.ui:111
 msgid "Samba"
-msgstr ""
+msgstr "Samba"
 
 #: data/ui/server-hint.ui:122
 msgid "SSH File Transfer Protocol"
-msgstr ""
+msgstr "SSH fájlátviteli protokoll"
 
 #: data/ui/server-hint.ui:133
 msgid "WebDAV"
@@ -551,26 +588,26 @@ msgstr "WebDAV"
 
 #: data/ui/server-hint.ui:144
 msgid "Prefix"
-msgstr ""
+msgstr "Előtag"
 
 #. Translators: do not translate ftp:// and ftps://
 #: data/ui/server-hint.ui:169
 msgid "ftp:// or ftps://"
-msgstr ""
+msgstr "ftp:// vagy ftps://"
 
 #: data/ui/server-hint.ui:191
 msgid "smb://"
-msgstr ""
+msgstr "smb://"
 
 #. Translators: do not translate sftp:// and ssh://
 #: data/ui/server-hint.ui:202
 msgid "sftp:// or ssh://"
-msgstr ""
+msgstr "sftp:// vagy ssh://"
 
 #. Translators: do not translate dav:// and davs://
 #: data/ui/server-hint.ui:213
 msgid "dav:// or davs://"
-msgstr ""
+msgstr "dav:// vagy davs://"
 
 #: deja-dup/nautilus/NautilusExtension.c:172
 msgid "Restore Missing Files…"
@@ -602,11 +639,11 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "_Biztonsági mentés"
 
-#: deja-dup/AssistantBackup.vala:57
+#: deja-dup/AssistantBackup.vala:58
 msgid "Creating the first backup.  This may take a while."
 msgstr "Első biztonsági mentés létrehozása. Ez eltarthat egy ideig."
 
-#: deja-dup/AssistantBackup.vala:58
+#: deja-dup/AssistantBackup.vala:59
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -616,24 +653,24 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: deja-dup/AssistantBackup.vala:88
+#: deja-dup/AssistantBackup.vala:89
 msgid "Backing up:"
 msgstr "Biztonsági mentés:"
 
-#: deja-dup/AssistantBackup.vala:97
+#: deja-dup/AssistantBackup.vala:98
 msgid "Backup Failed"
 msgstr "Biztonsági mentés sikertelen"
 
-#: deja-dup/AssistantBackup.vala:100
+#: deja-dup/AssistantBackup.vala:101
 msgid "Backup Finished"
 msgstr "Biztonsági mentés befejeződött"
 
 #. Also leave ourselves up if we just finished a restore test.
-#: deja-dup/AssistantBackup.vala:104
+#: deja-dup/AssistantBackup.vala:105
 msgid "Your files were successfully backed up and tested."
 msgstr "A fájlok mentése és ellenőrzésre sikeres."
 
-#: deja-dup/AssistantBackup.vala:111
+#: deja-dup/AssistantBackup.vala:112
 msgid "Backing Up…"
 msgstr "Biztonsági mentés…"
 
@@ -647,7 +684,7 @@ msgstr "_Részletek"
 
 #: deja-dup/AssistantOperation.vala:294
 msgid "In order to continue, the following packages need to be installed:"
-msgstr ""
+msgstr "A folytatáshoz telepíteni kell az alábbi csomagokat:"
 
 #: deja-dup/AssistantOperation.vala:330
 msgid "_Allow restoring without a password"
@@ -697,7 +734,7 @@ msgstr "Ellenőrzés két _havonta."
 
 #: deja-dup/AssistantOperation.vala:513
 msgid "Install Packages"
-msgstr ""
+msgstr "Csomagok telepítése"
 
 #: deja-dup/AssistantOperation.vala:528
 msgid "Summary"
@@ -734,67 +771,67 @@ msgstr "Biztonsági mentést titkosító jelszó"
 #: deja-dup/AssistantOperation.vala:968
 msgctxt "verb"
 msgid "_Install"
-msgstr ""
+msgstr "_Telepítés"
 
-#: deja-dup/AssistantRestore.vala:74
+#: deja-dup/AssistantRestore.vala:73
 msgid "_Restore"
 msgstr "_Visszaállítás"
 
-#: deja-dup/AssistantRestore.vala:94
+#: deja-dup/AssistantRestore.vala:95
 msgid "_Backup location"
 msgstr "Biztonsági mentés _helye"
 
-#: deja-dup/AssistantRestore.vala:131
+#: deja-dup/AssistantRestore.vala:128
 msgid "Restore From Where?"
 msgstr "Honnan állítson vissza?"
 
-#: deja-dup/AssistantRestore.vala:153
+#: deja-dup/AssistantRestore.vala:150
 msgid "_Date"
 msgstr "Dát_um"
 
-#: deja-dup/AssistantRestore.vala:176
+#: deja-dup/AssistantRestore.vala:173
 msgid "Restore files to _original locations"
 msgstr "Fájlok visszaállítása az _eredeti helyükre"
 
-#: deja-dup/AssistantRestore.vala:181
+#: deja-dup/AssistantRestore.vala:178
 msgid "Restore to _specific folder"
 msgstr "Visszaállítás egy _megadott mappába"
 
-#: deja-dup/AssistantRestore.vala:191
+#: deja-dup/AssistantRestore.vala:188
 msgid "Choose destination for restored files"
 msgstr "Hely kiválasztása a visszaállított fájloknak"
 
-#: deja-dup/AssistantRestore.vala:195
+#: deja-dup/AssistantRestore.vala:192
 msgid "Restore _folder"
 msgstr "_Visszaállítási mappa"
 
-#: deja-dup/AssistantRestore.vala:228
+#: deja-dup/AssistantRestore.vala:225
 msgid "Backup location"
 msgstr "Biztonsági mentés helye"
 
-#: deja-dup/AssistantRestore.vala:236
+#: deja-dup/AssistantRestore.vala:233
 msgid "Restore date"
 msgstr "Visszaállítási dátum"
 
-#: deja-dup/AssistantRestore.vala:244
+#: deja-dup/AssistantRestore.vala:241
 msgid "Restore folder"
 msgstr "Visszaállítási mappa"
 
-#: deja-dup/AssistantRestore.vala:270
+#: deja-dup/AssistantRestore.vala:267
 msgid "Checking for Backups…"
 msgstr "Biztonsági mentések ellenőrzése…"
 
-#: deja-dup/AssistantRestore.vala:278
+#: deja-dup/AssistantRestore.vala:275
 msgid "Restore From When?"
 msgstr "Mikori mentést állítson vissza?"
 
-#: deja-dup/AssistantRestore.vala:286
+#: deja-dup/AssistantRestore.vala:283
 msgid "Restore to Where?"
 msgstr "Visszaállítás helye?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: deja-dup/AssistantRestore.vala:313
+#: deja-dup/AssistantRestore.vala:310
 msgid "Restoring:"
 msgstr "Visszaállítás:"
 
@@ -802,46 +839,46 @@ msgstr "Visszaállítás:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: deja-dup/AssistantRestore.vala:355
+#: deja-dup/AssistantRestore.vala:352
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
 #. If we didn't see any dates...  Must not be any backups on the backend
-#: deja-dup/AssistantRestore.vala:368
+#: deja-dup/AssistantRestore.vala:365
 msgid "No backups to restore"
 msgstr "Nincsenek visszaállítható biztonsági mentések"
 
-#: deja-dup/AssistantRestore.vala:447
+#: deja-dup/AssistantRestore.vala:444
 msgid "Original location"
 msgstr "Eredeti hely"
 
-#: deja-dup/AssistantRestore.vala:458
+#: deja-dup/AssistantRestore.vala:455
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "Fájl visszaállítása"
 msgstr[1] "Fájlok visszaállítása"
 
-#: deja-dup/AssistantRestore.vala:479
+#: deja-dup/AssistantRestore.vala:476
 msgid "Restore Failed"
 msgstr "Visszaállítás sikertelen"
 
-#: deja-dup/AssistantRestore.vala:481
+#: deja-dup/AssistantRestore.vala:478
 msgid "Restore Finished"
 msgstr "Visszaállítás befejeződött"
 
 #. if it *is* visible, a header will be set already
-#: deja-dup/AssistantRestore.vala:484
+#: deja-dup/AssistantRestore.vala:481
 msgid "Your files were successfully restored."
 msgstr "A fájljai sikeresen visszaállításra kerültek."
 
-#: deja-dup/AssistantRestore.vala:487
+#: deja-dup/AssistantRestore.vala:484
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "A fájl sikeresen visszaállításra került."
 msgstr[1] "A fájljai sikeresen visszaállításra kerültek"
 
-#: deja-dup/AssistantRestore.vala:494 libdeja/Operation.vala:58
+#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:64
 msgid "Restoring…"
 msgstr "Visszaállítás…"
 
@@ -936,7 +973,7 @@ msgstr "Visszaállított törölt fájlok"
 
 #: deja-dup/main.vala:81 deja-dup/main.vala:96 deja-dup/main.vala:122
 msgid "An operation is already in progress"
-msgstr ""
+msgstr "Már folyamatban van egy művelet"
 
 #: deja-dup/main.vala:101
 msgid "No directory provided"
@@ -948,7 +985,7 @@ msgstr "Csak egy mappa jeleníthető meg egyszerre"
 
 #: deja-dup/main.vala:111
 msgid "Directory does not exist"
-msgstr ""
+msgstr "A könyvtár nem létezik"
 
 #: deja-dup/main.vala:115
 msgid "You must provide a directory, not a file"
@@ -965,6 +1002,7 @@ msgstr ""
 "  Andras https://launchpad.net/~5-launchpad-citromail-hu\n"
 "  András Bognár https://launchpad.net/~bognarandras-deactivatedaccount\n"
 "  Attila Hammer https://launchpad.net/~hammera\n"
+"  Báthory Péter https://launchpad.net/~bathory\n"
 "  Dr. Tibor Attila ANCA https://launchpad.net/~tibor-anca\n"
 "  Gabor Kelemen https://launchpad.net/~kelemeng\n"
 "  Gergely Szarka https://launchpad.net/~gszarka\n"
@@ -975,6 +1013,7 @@ msgstr ""
 "  Peter Bojtos https://launchpad.net/~peter-bojtos\n"
 "  Péter Trombitás https://launchpad.net/~trombipeti\n"
 "  Richard Somlói https://launchpad.net/~ricsipontaz\n"
+"  Szávics Dániel https://launchpad.net/~szavics-dani-deactivatedaccount\n"
 "  Tóth-Molnár Gábor https://launchpad.net/~gabesz-tm"
 
 #: deja-dup/MountOperationAssistant.vala:36
@@ -1082,32 +1121,32 @@ msgstr "_Ne jelenjen meg többször"
 msgid "_Open Backup Settings"
 msgstr "_Biztonsági mentés beállításainak megnyitása"
 
-#: deja-dup/StatusIcon.vala:82
+#: deja-dup/StatusIcon.vala:84
 msgid "Backup completed"
 msgstr "A biztonsági mentés befejeződött"
 
-#: deja-dup/StatusIcon.vala:87
+#: deja-dup/StatusIcon.vala:89
 msgid "Backup finished"
 msgstr "Biztonsági mentés kész"
 
-#: deja-dup/StatusIcon.vala:88
+#: deja-dup/StatusIcon.vala:90
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr ""
 "Nem sikerült az összes fájlról mentést készíteni. Nézze meg a "
 "párbeszédablakot a részletekért."
 
-#: deja-dup/StatusIcon.vala:118
+#: deja-dup/StatusIcon.vala:120
 msgid "Starting scheduled backup"
 msgstr "Ütemezett biztonsági mentés elkezdése"
 
-#: deja-dup/StatusIcon.vala:149
+#: deja-dup/StatusIcon.vala:151
 #, c-format
 msgid "%.1f%% complete"
 msgstr "%.1f%% kész"
 
 #: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:54
-#: libdeja/BackendRemote.vala:132 libdeja/BackendS3.vala:64
+#: libdeja/BackendRemote.vala:104 libdeja/BackendS3.vala:64
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "A biztonsági mentés megkezdődik, amikor a hálózati kapcsolat elérhetővé "
@@ -1117,6 +1156,8 @@ msgstr ""
 msgid ""
 "Backup will begin when an unmetered network connection becomes available."
 msgstr ""
+"A biztonsági mentés elindul, amint elérhető lesz egy nem fizetős hálózati "
+"kapcsolat."
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
@@ -1201,6 +1242,8 @@ msgid ""
 "You can restore the entire backup with the %s button or use %s to either "
 "revert individual files or restore missing ones."
 msgstr ""
+"Visszaállíthatja a teljes biztonsági mentést a %s gombbal, vagy a %s "
+"segítségével visszaállíthat egy-egy fájlt, vagy helyreállíthat hiányzókat."
 
 #: deja-dup/widgets/ConfigLabelDescription.vala:81
 msgid "Back Up Now…"
@@ -1252,7 +1295,7 @@ msgstr "Válasszon mappákat"
 
 #: deja-dup/widgets/ConfigLocation.vala:126
 msgid "Network Server"
-msgstr ""
+msgstr "Hálózati kiszolgáló"
 
 #. And a local folder option
 #: deja-dup/widgets/ConfigLocation.vala:131
@@ -1261,29 +1304,29 @@ msgstr "Helyi mappa"
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:293 libdeja/BackendS3.vala:122
+#: deja-dup/widgets/ConfigLocation.vala:295 libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: deja-dup/widgets/ConfigLocation.vala:295
+#: deja-dup/widgets/ConfigLocation.vala:297
 msgid "Google Cloud Storage"
-msgstr ""
+msgstr "Google felhőtárhely"
 
-#: deja-dup/widgets/ConfigLocation.vala:297 libdeja/BackendU1.vala:45
+#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendRackspace.vala:72
+#: deja-dup/widgets/ConfigLocation.vala:301 libdeja/BackendRackspace.vala:72
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace felhő fájlok"
 
-#: deja-dup/widgets/ConfigLocation.vala:301
+#: deja-dup/widgets/ConfigLocation.vala:303
 msgid "OpenStack Swift"
-msgstr ""
+msgstr "OpenStack Swift"
 
 #: deja-dup/widgets/ConfigLocationCustom.vala:38
-msgid "Server _Address"
-msgstr ""
+msgid "_Network Location"
+msgstr "_Hálózati hely"
 
 #: deja-dup/widgets/ConfigLocationCustom.vala:44
 #: deja-dup/widgets/ConfigLocationFile.vala:44
@@ -1309,19 +1352,21 @@ msgstr "_OK"
 #. Translators: GCS is Google Cloud Services
 #: deja-dup/widgets/ConfigLocationGCS.vala:32
 msgid "GCS Access Key I_D"
-msgstr ""
+msgstr "Google elérési kulcs I_D"
 
 #. Translators: "Bucket" refers to a term used by Google Cloud Services
 #. see https://cloud.google.com/storage/docs/key-terms#bucket
 #: deja-dup/widgets/ConfigLocationGCS.vala:36
 msgid "_Bucket"
-msgstr ""
+msgstr "_Vödör"
 
 #: deja-dup/widgets/ConfigLocationGoa.vala:56
 msgid ""
 "This account is not yet configured. It cannot be used until you add it to "
 "your Online Accounts."
 msgstr ""
+"Ez a fiók még nincs beállítva. Nem lehet használni, amíg fel nem vette az "
+"Online fiókok közé."
 
 #. Translators: 'Files' here refers to the feature label in GNOME Online Accounts
 #: deja-dup/widgets/ConfigLocationGoa.vala:60
@@ -1329,10 +1374,12 @@ msgid ""
 "This account has disabled Files support. It cannot be used until Files "
 "support is enabled again for this Online Account."
 msgstr ""
+"Ebben a fiókban le van tiltva a Fájlok engedély. Nem lehet használni, amíg "
+"nincsen bekapcsolva a Fájlok engedély ehhez az online fiókhoz."
 
 #: deja-dup/widgets/ConfigLocationGoa.vala:88
 msgid "_Open Online Account Settings"
-msgstr ""
+msgstr "_Online fiók beállítások megnyitása"
 
 #: deja-dup/widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
@@ -1377,12 +1424,12 @@ msgstr "%1$s ezen: %2$s"
 #: libdeja/BackendDrive.vala:102
 #, c-format
 msgid "Backup will begin when %s is connected."
-msgstr ""
+msgstr "A biztonsági mentés elindul, amint %s csatlakozik."
 
-#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:158
-#: libdeja/BackendRemote.vala:157
+#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:146
+#: libdeja/BackendRemote.vala:129
 msgid "Storage location not available"
-msgstr ""
+msgstr "A tárolási hely elérhetetlen"
 
 #: libdeja/BackendDrive.vala:184
 #, c-format
@@ -1393,28 +1440,31 @@ msgstr "Várakozás %s kapcsolódására…"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: libdeja/BackendGOA.vala:113
+#: libdeja/BackendGOA.vala:101
 msgid "Backup will begin when a storage location is configured"
-msgstr ""
+msgstr "A biztonsági mentés elindul, amint a tárolási hely be lesz állítva"
 
 #. TODO: actually watch for files support turning on or off
 #. Translators: "Files" here is the string used in GNOME Online Account
 #. settings checkbox for a given account to enable/disable an account's
 #. Files feature.
-#: libdeja/BackendGOA.vala:123
+#: libdeja/BackendGOA.vala:111
 #, c-format
 msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr ""
+"A biztonsági mentés elindul, amint „%s” Fájlok engedélye be lesz kapcsolva"
 
-#: libdeja/BackendGOA.vala:152
+#: libdeja/BackendGOA.vala:140
 msgid "Waiting for Online Accounts to be configured in your backup settings…"
 msgstr ""
+"Várakozás az Online fiók beállítására az Ön biztonsági mentés beállításaiban…"
 
 #. Translators: %s is the name of the provider inside of GNOME Online Accounts
-#: libdeja/BackendGOA.vala:155
+#: libdeja/BackendGOA.vala:143
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
+"Várakozás a(z) %s beállítására az Ön biztonsági mentés beállításaiban…"
 
 #. Translators: %s is a folder.
 #: libdeja/BackendRackspace.vala:75
@@ -1451,11 +1501,20 @@ msgstr "API elé_rési kulcs megjegyzése"
 
 #: libdeja/BackendRemote.vala:114
 msgid "The network server is not available"
-msgstr ""
+msgstr "A hálózati kiszolgáló elérhetetlen"
 
-#: libdeja/BackendRemote.vala:158
+#: libdeja/BackendRemote.vala:130
 msgid "Waiting for a network connection…"
 msgstr "Várakozás hálózati kapcsolatra…"
+
+#. Special sanity check for some edge cases like smb:// where if the user
+#. just puts in smb://server/ as the root, GIO thinks it's a valid root,
+#. but the share never ends up mounted.
+#: libdeja/BackendRemote.vala:175
+msgid ""
+"Samba network locations must include both a hostname and a share name."
+msgstr ""
+"A Samba hálózati helyeknek gépnevet és megosztásnevet is tartalmaznia kell."
 
 #. Translators: %s is a folder.
 #: libdeja/BackendS3.vala:125
@@ -1537,19 +1596,19 @@ msgid ""
 "again."
 msgstr "A mentés hibásnak tűnik. Törölje le, és próbálja meg újra!"
 
-#: libdeja/Operation.vala:56
+#: libdeja/Operation.vala:62
 msgid "Backing up…"
 msgstr "Biztonsági mentés…"
 
-#: libdeja/Operation.vala:60
+#: libdeja/Operation.vala:66
 msgid "Checking for backups…"
 msgstr "Biztonsági mentések ellenőrzése…"
 
-#: libdeja/Operation.vala:62
+#: libdeja/Operation.vala:68
 msgid "Listing files…"
 msgstr "Fájlok listázása…"
 
-#: libdeja/Operation.vala:64 libdeja/Operation.vala:93
+#: libdeja/Operation.vala:70 libdeja/Operation.vala:99
 #: libdeja/tools/duplicity/DuplicityJob.vala:394
 #: libdeja/tools/duplicity/DuplicityJob.vala:401
 #: libdeja/tools/duplicity/DuplicityJob.vala:426
@@ -1809,6 +1868,31 @@ msgstr ""
 
 #~ msgid "Show _Progress"
 #~ msgstr "_Folyamat megjelenítése"
+
+#~ msgid "Could not install"
+#~ msgstr "Nem sikerült a telepítés"
+
+#~ msgid "_Install…"
+#~ msgstr "_Telepítés…"
+
+#~ msgid "Install…"
+#~ msgstr "Telepítés…"
+
+#, c-format
+#~ msgid ""
+#~ "You can restore existing backups after you first install some necessary "
+#~ "software by clicking the %s button."
+#~ msgstr ""
+#~ "Visszaállíthatja a meglévő biztonsági mentéseket néhány szükséges szoftver "
+#~ "telepítése után. Ehhez kattintson a %s gombra."
+
+#, c-format
+#~ msgid ""
+#~ "You can create a backup after you first install some necessary software by "
+#~ "clicking the %s button."
+#~ msgstr ""
+#~ "Létrehozhat biztonsági mentést néhány szükséges szoftver telepítése után. "
+#~ "Ehhez kattintson a %s gombra."
 
 #~ msgid "SSH"
 #~ msgstr "SSH"
