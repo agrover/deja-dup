@@ -6,10 +6,7 @@ Comment=Schedules backups at regular intervals
 
 Icon=org.gnome.DejaDup
 
-# Try to limit memory -- we have reports of runaway deja-dup-monitor processes
-# but I can't reproduce it.  So until we fix whatever is happening there, try
-# this. LP: #1302416
-Exec=sh -c "ulimit -v 1000000; exec @pkglibexecdir@/deja-dup-monitor"
+Exec=@pkglibexecdir@/deja-dup-monitor
 
 X-GNOME-Autostart-Delay=120
 X-GNOME-AutoRestart=true
