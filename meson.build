@@ -88,6 +88,7 @@ common_cflags = [
     '-DGOA_BACKEND_API_IS_SUBJECT_TO_CHANGE',
     '-DI_KNOW_THE_PACKAGEKIT_GLIB2_API_IS_SUBJECT_TO_CHANGE',
     '-DDUPLICITY_PACKAGES="@0@"'.format(get_option('duplicity_pkgs')),
+    '-DRESTIC_PACKAGES="@0@"'.format(get_option('restic_pkgs')),
     '-DGVFS_PACKAGES="@0@"'.format(get_option('gvfs_pkgs')),
     '-DBOTO_PACKAGES="@0@"'.format(get_option('boto_pkgs')),
     '-DCLOUDFILES_PACKAGES="@0@"'.format(get_option('cloudfiles_pkgs')),

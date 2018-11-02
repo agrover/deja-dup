@@ -17,3 +17,4 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 subdir('duplicity')
+subdir('restic')

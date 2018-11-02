@@ -31,6 +31,7 @@ namespace Config {
 	public const string NAME_SUFFIX;
 
 	public const string DUPLICITY_PACKAGES;
+	public const string RESTIC_PACKAGES;
 	public const string GVFS_PACKAGES;
 	public const string BOTO_PACKAGES;
 	public const string CLOUDFILES_PACKAGES;
