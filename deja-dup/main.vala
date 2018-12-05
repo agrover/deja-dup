@@ -163,6 +163,13 @@ public class DejaDupApp : Gtk.Application
       header.show_close_button = true;
       main_window.set_titlebar(header);
 
+      var menu = this.get_menu_by_id("primary-menu");
+      var menu_button = new Gtk.MenuButton ();
+      menu_button.set_image(new Gtk.Image.from_icon_name("open-menu-symbolic", Gtk.IconSize.BUTTON));
+      menu_button.show();
+      menu_button.set_menu_model(menu);
+      header.pack_end(menu_button);
+
       var auto_switch = new DejaDup.PreferencesPeriodicSwitch();
       auto_switch.valign = Gtk.Align.CENTER;
       header.pack_end(auto_switch);
