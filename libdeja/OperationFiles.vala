@@ -22,8 +22,9 @@ using GLib;
 namespace DejaDup {
 public class OperationFiles : Operation {
   public signal void listed_current_files(string date, string file);
-  public Time time {get; set;} // Default value is 1900-01-00 00:00:00; since epoch hasn't happened yet, its default %s value is -1
   public File source {get; construct;}
+
+  private Time time; // Default value is 1900-01-00 00:00:00; since epoch hasn't happened yet, its default %s value is -1
     
   public OperationFiles(Backend backend,
                         Time? time_in,
@@ -31,6 +32,11 @@ public class OperationFiles : Operation {
     Object(mode: ToolJob.Mode.LIST, source: source, backend: backend);
     if (time_in != null)
         time = time_in;
+  }
+
+  public Time get_time()
+  {
+    return time;
   }
 
   protected override void connect_to_job()

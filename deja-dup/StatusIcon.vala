@@ -19,36 +19,11 @@
 
 using GLib;
 
-/**
- * There are two modes for 'shell' integration:
- * 1) GNOME Shell
- * 2) Legacy
- * 
- * GNOME Shell:
- * No status icon at all.
- * Actions on persistent notifications.
- * Automatic-start and success notifications.
- * 
- * Legacy:
- * Standard GTK+ status icon.
- * Success notification.
- */
-
 public abstract class StatusIcon : Object
 {
   public static StatusIcon create(Gtk.Window window, DejaDup.Operation op, bool automatic)
   {
-    StatusIcon instance = null;
-    switch (DejaDup.get_shell()) {
-    case DejaDup.ShellEnv.GNOME:
-      instance = new ShellStatusIcon(window, op, automatic);
-      break;
-
-    default:
-      instance = new LegacyStatusIcon(window, op, automatic);
-      break;
-    }
-    return instance;
+    return new ShellStatusIcon(window, op, automatic);
   }
 
   public signal void show_window(bool user_click);
@@ -120,34 +95,6 @@ class ShellStatusIcon : StatusIcon
       note.set_default_action("app.op-show");
       Application.get_default().send_notification("backup-status", note);
     }
-  }
-}
-
-class LegacyStatusIcon : StatusIcon
-{
-  public LegacyStatusIcon(Gtk.Window window, DejaDup.Operation op, bool automatic)
-  {
-    Object(window: window, op: op, automatic: automatic);
-  }
-
-  Gtk.StatusIcon icon;
-  construct {
-    icon = new Gtk.StatusIcon();
-    icon.icon_name = "org.gnome.DejaDup";
-    icon.title = Environment.get_application_name();
-    icon.activate.connect(() => {show_window(true);});
-
-    update_progress();
-  }
-
-  protected override void update_progress()
-  {
-    var tooltip = "";
-    if (this.action != null)
-      tooltip = this.action;
-    if (this.progress > 0)
-      tooltip = tooltip + "\n" + _("%.1f%% complete").printf(this.progress * 100);
-    icon.set_tooltip_text(tooltip);
   }
 }
 

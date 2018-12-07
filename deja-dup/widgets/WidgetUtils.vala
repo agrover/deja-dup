@@ -33,24 +33,6 @@ public void show_uri(Gtk.Window? parent, string link)
   }
 }
 
-public enum ShellEnv {
-  NONE,
-  GNOME,
-  LEGACY
-}
-
-private ShellEnv shell = ShellEnv.NONE;
-public ShellEnv get_shell()
-{
-  if (shell == ShellEnv.NONE) {
-    // Use Legacy unless we detect a different shell.
-    var desktop = Environment.get_variable("XDG_CURRENT_DESKTOP");
-    shell = desktop.contains("GNOME") ? ShellEnv.GNOME : ShellEnv.LEGACY;
-  }
-
-  return shell;
-}
-
 bool user_focused(Gtk.Widget win, Gdk.EventFocus e)
 {
   ((Gtk.Window)win).urgency_hint = false;

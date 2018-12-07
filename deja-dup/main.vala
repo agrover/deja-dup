@@ -133,9 +133,7 @@ public class DejaDupApp : Gtk.Application
       send_delay_notification(reason);
     }
     else if (options.contains("prompt")) {
-      var toplevel = prompt(this);
-      if (toplevel != null)
-        add_window(toplevel);
+      prompt(this);
     } else {
       activate();
     }

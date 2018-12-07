@@ -186,7 +186,7 @@ public class AssistantRestoreMissing : AssistantRestore {
 
       treeview.set_headers_visible (true);
 
-      filelistwindow.add_with_viewport(treeview);
+      filelistwindow.add(treeview);
       return page;
   }
 
@@ -252,10 +252,10 @@ public class AssistantRestoreMissing : AssistantRestore {
 
       if (!fileobj.query_exists(null) && !this.allfiles_prev.lookup_extended(filestr, null, null)) {
         if(fileobj.has_parent(this.list_directory)) {
-          var fs = new DeletedFile(filestr, op.time);
+          var fs = new DeletedFile(filestr, op.get_time());
 
           this.listmodel.append (out this.deleted_iter);
-          this.listmodel.set (this.deleted_iter, 0, false, 1, fs.filename(), 2, op.time.format("%c"));
+          this.listmodel.set (this.deleted_iter, 0, false, 1, fs.filename(), 2, op.get_time().format("%c"));
 
           this.allfiles_prev.insert(fileobj.get_path(), fs);
         }

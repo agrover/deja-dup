@@ -242,15 +242,15 @@ internal class DuplicityInstance : Object
   }
   
   void kill_child() {
-    Posix.kill((Posix.pid_t)child_pid, Posix.SIGKILL);
+    Posix.kill((Posix.pid_t)child_pid, Posix.Signal.KILL);
   }
 
   void stop_child() {
-    Posix.kill((Posix.pid_t)child_pid, Posix.SIGSTOP);
+    Posix.kill((Posix.pid_t)child_pid, Posix.Signal.STOP);
   }
 
   void cont_child() {
-    Posix.kill((Posix.pid_t)child_pid, Posix.SIGCONT);
+    Posix.kill((Posix.pid_t)child_pid, Posix.Signal.CONT);
   }
   
   async void read_log_lines()

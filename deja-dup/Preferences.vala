@@ -247,14 +247,13 @@ public class Preferences : Gtk.Grid
     table.halign = Gtk.Align.CENTER;
     row = 0;
 
-    var align = new Gtk.Alignment(0.0f, 0.5f, 0.0f, 0.0f);
     w = new DejaDup.PreferencesPeriodicSwitch();
-    align.add(w);
+    w.halign = Gtk.Align.START;
     label = new Gtk.Label.with_mnemonic(_("_Automatic backup"));
     label.mnemonic_widget = w;
     label.xalign = 1.0f;
     table.attach(label, 0, row, 1, 1);
-    table.attach(align, 1, row, 1, 1);
+    table.attach(w, 1, row, 1, 1);
     ++row;
 
     w = new DejaDup.ConfigPeriod(DejaDup.PERIODIC_PERIOD_KEY);
@@ -308,8 +307,8 @@ public class Preferences : Gtk.Grid
   Gtk.Grid new_panel()
   {
     var table = new Gtk.Grid();
-    table.margin_left = PAGE_HMARGIN;
-    table.margin_right = PAGE_HMARGIN;
+    table.margin_start = PAGE_HMARGIN;
+    table.margin_end = PAGE_HMARGIN;
     table.margin_top = PAGE_VMARGIN;
     table.margin_bottom = PAGE_VMARGIN;
     return table;

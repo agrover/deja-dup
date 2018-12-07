@@ -326,7 +326,7 @@ public abstract class AssistantOperation : Assistant
     l.halign = Gtk.Align.START;
     l.max_width_chars = 50;
     l.wrap = true;
-    l.margin_left = 12;
+    l.margin_start = 12;
     l.use_markup = true;
     page.attach(l, 0, rows++, 1, 1);
     backend_install_packages = l;

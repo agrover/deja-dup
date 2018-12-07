@@ -18,7 +18,7 @@
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
 available=$(ls */ -1d | cut -d/ -f1 | grep -v '^C$')
-linguas=$(echo $LINGUAS | sed 's/ /\n/g')
+linguas=$(cat LINGUAS)
 
 test -n "$linguas"
 test "$available" = "$linguas"

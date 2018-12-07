@@ -31,7 +31,6 @@ using GLib;
 
 public class MountOperationAssistant : MountOperation
 {
-  public string label_button {get; set;}
   public string label_help {get; set;}
   public string label_title {get; set; default = _("Connect to Server");}
   public string label_username {get; set; default = _("_Username");}
@@ -160,14 +159,6 @@ public class MountOperationAssistant : MountOperation
     label = new Gtk.Label("");
     layout.pack_start(label, false, false, 0);
 
-    if (label_button != null) {
-      var alignment = new Gtk.Alignment(0.5f, 0.5f, 0, 0);
-      var button = new Gtk.Button.with_mnemonic(label_button);
-      button.clicked.connect(() => {button_clicked();});
-      alignment.add(button);
-      layout.pack_start(alignment, false, false, 0);
-    }
-
     if ((flags & AskPasswordFlags.ANONYMOUS_SUPPORTED) != 0) {
       anonymous_w = new Gtk.RadioButton.with_mnemonic(null, _("Connect _anonymously"));
       anonymous_w.toggled.connect((b) => {check_valid_inputs();});
@@ -274,8 +265,6 @@ public class MountOperationAssistant : MountOperation
     var valid = is_anonymous() ||
                 (is_valid_entry(username_w) &&
                  is_valid_entry(domain_w));
-    if (label_button != null)
-      valid = false; // buttons are used for backend-driven authentication
     assist.allow_forward(valid);
   }
 

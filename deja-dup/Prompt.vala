@@ -19,17 +19,10 @@
 
 using GLib;
 
-public Gtk.Window? prompt(Gtk.Application app)
+public void prompt(Gtk.Application app)
 {
   DejaDup.update_prompt_time();
-
-  // In GNOME Shell, we show a notification.  Elsewhere, we show a dialog.
-  if (DejaDup.get_shell() == DejaDup.ShellEnv.GNOME) {
-    show_prompt_notification(app);
-    return null;
-  }
-  else
-    return show_prompt_dialog(app);
+  show_prompt_notification(app);
 }
 
 string get_header()
@@ -67,32 +60,5 @@ void show_prompt_notification(Gtk.Application app)
   note.add_button(get_cancel_button(false), "app.prompt-cancel");
   note.add_button(get_ok_button(false), "app.prompt-ok");
   app.send_notification("prompt", note);
-}
-
-Gtk.Window show_prompt_dialog(Gtk.Application app)
-{
-  var dlg = new Gtk.MessageDialog(null, 0, Gtk.MessageType.INFO,
-                                  Gtk.ButtonsType.NONE, "%s", get_header());
-  dlg.format_secondary_text("%s", get_body());
-  dlg.skip_taskbar_hint = false;
-  dlg.set_title(_("Backups"));
-
-  var img = new Gtk.Image.from_icon_name("org.gnome.DejaDup", Gtk.IconSize.DIALOG);
-  img.yalign = 0.0f;
-  img.show();
-  dlg.set_image(img);
-
-  dlg.add_buttons(get_cancel_button(true), Gtk.ResponseType.REJECT,
-                  get_ok_button(true), Gtk.ResponseType.ACCEPT);
-  dlg.response.connect((dlg, resp) => {
-    if (resp == Gtk.ResponseType.REJECT)
-      app.activate_action("prompt-cancel", null);
-    else if (resp == Gtk.ResponseType.ACCEPT)
-      app.activate_action("prompt-ok", null);
-    DejaDup.destroy_widget(dlg);
-  });
-
-  DejaDup.show_background_window_for_shell(dlg);
-  return dlg;
 }
 

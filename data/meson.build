@@ -85,5 +85,5 @@ configure_file(input: 'org.gnome.DejaDup.policy.in',
 resources = gnome.compile_resources('resources', 'resources.xml',
     source_dir: ['ui'])
 
-message('You may need to recompile your gsettings schemas or regenerate
-         your icon cache after installation.')
+message('''You may need to recompile your gsettings schemas or regenerate
+         your icon cache after installation.''')
