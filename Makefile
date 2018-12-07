@@ -40,11 +40,11 @@ deb:
 	DEB_BUILD_OPTIONS=nocheck debuild
 
 screenshots: all
-	@gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
 	@gsettings set org.gnome.desktop.interface font-name 'Cantarell 11'
 	@gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
-	@gsettings set org.gnome.desktop.interface icon-theme 'gnome'
+	@gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
 	@gsettings set org.gnome.desktop.wm.preferences theme 'Adwaita'
+	@gsettings set org.gnome.DejaDup backend 'file'
 	@sleep 5
 	
 	@mkdir -p ./builddir/screenshots
@@ -57,11 +57,11 @@ screenshots: all
 	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-2.png
 	@killall deja-dup
 	
-	@gsettings reset org.gnome.desktop.interface cursor-theme
 	@gsettings reset org.gnome.desktop.interface font-name
 	@gsettings reset org.gnome.desktop.interface gtk-theme
 	@gsettings reset org.gnome.desktop.interface icon-theme
 	@gsettings reset org.gnome.desktop.wm.preferences theme
+	@gsettings reset org.gnome.DejaDup backend
 
 pot: configure
 	ninja -C builddir deja-dup-pot help-org.gnome.DejaDup-pot
