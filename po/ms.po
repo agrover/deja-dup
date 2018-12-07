@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-01-02 17:04-0500\n"
+"POT-Creation-Date: 2018-04-09 20:59-0400\n"
 "PO-Revision-Date: 2017-08-04 23:04+0000\n"
 "Last-Translator: Michael Terry <mike@mterry.name>\n"
 "Language-Team: Malay <ms@li.org>\n"
@@ -15,15 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2018-01-04 05:36+0000\n"
-"X-Generator: Launchpad (build 18521)\n"
+"X-Launchpad-Export-Date: 2018-04-11 05:57+0000\n"
+"X-Generator: Launchpad (build 18609)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:294
+#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:315
 #: libdeja/CommonUtils.vala:145
 msgid "Déjà Dup Backup Tool"
 msgstr "Alat Sandar Déjà Dup"
@@ -68,7 +68,7 @@ msgid "Integrates well into your GNOME desktop"
 msgstr "Sepadu ke dekstop GNOME anda dengan baik"
 
 #. Translators: "Backups" is a noun
-#: data/org.gnome.DejaDup.desktop:5 deja-dup/main.vala:160
+#: data/org.gnome.DejaDup.desktop:5 deja-dup/main.vala:159
 #: deja-dup/Prompt.vala:78
 msgid "Backups"
 msgstr "Sandar"
@@ -80,7 +80,7 @@ msgstr "Ubah tetapan sandar anda"
 #. Translators: this is the icon name, you probably don't need to change this
 #: data/org.gnome.DejaDup.desktop:9
 msgid "org.gnome.DejaDup"
-msgstr ""
+msgstr "org.gnome.DejaDup"
 
 #. Translators: Add whatever keywords you want in your language, separated by semicolons
 #. These keywords are used when searching for applications in dashes, etc.
@@ -260,13 +260,15 @@ msgstr ""
 
 #: data/org.gnome.DejaDup.gschema.xml:69
 msgid "Whether to use metered networks"
-msgstr ""
+msgstr "Sama ada hendak guna rangkaian bermeter"
 
 #: data/org.gnome.DejaDup.gschema.xml:70
 msgid ""
 "If false, Déjà Dup will refuse to run scheduled backups over metered network "
 "connections (like 4G)."
 msgstr ""
+"Jika palsu, Déjà Dup akan tidak mahu jalankan sandar berjadual menerusi "
+"sambungan rangkaian bermeter (seperti 4G)."
 
 #: data/org.gnome.DejaDup.gschema.xml:88
 msgid "Type of location to store backup"
@@ -292,46 +294,52 @@ msgid ""
 "The folder hierarchy where backups are stored. Paths can be absolute or "
 "relative to your home directory."
 msgstr ""
+"Hieraki folder yang mana sandar disimpan. Laluan boleh jadi mutlak atau "
+"relatif dengan direktori rumah anda."
 
 #: data/org.gnome.DejaDup.gschema.xml:113
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: data/org.gnome.DejaDup.gschema.xml:114
 msgid ""
 "The unique filesystem identifier for the drive, used to recognize the drive "
 "when it is plugged in."
 msgstr ""
+"Pengecam sistem fail unik untuk pemacu, digunakan untuk mengenalpasti pemacu "
+"bila ia dipalamkan."
 
 #: data/org.gnome.DejaDup.gschema.xml:118
 msgid "Name"
-msgstr ""
+msgstr "Nama"
 
 #: data/org.gnome.DejaDup.gschema.xml:119
 msgid "The name of the external drive."
-msgstr ""
+msgstr "Nama pemacu luar."
 
 #: data/org.gnome.DejaDup.gschema.xml:123
 msgid "Icon"
-msgstr ""
+msgstr "Ikon"
 
 #: data/org.gnome.DejaDup.gschema.xml:124
 msgid "The icon of the external drive, as a serialized GIcon."
-msgstr ""
+msgstr "Ikon bagi pemacu luar, sebagai GIcon tersiri."
 
 #: data/org.gnome.DejaDup.gschema.xml:129
 msgid ""
 "The folder hierarchy where backups are stored. Paths are relative to the "
 "drive."
 msgstr ""
+"Hieraki folder yang mana sandar disimpan. Laluan adalah relatif dengan "
+"pemacu."
 
 #: data/org.gnome.DejaDup.gschema.xml:136
 msgid "The server address"
-msgstr ""
+msgstr "Alamat pelayan"
 
 #: data/org.gnome.DejaDup.gschema.xml:137
 msgid "The URI of the remote server location."
-msgstr ""
+msgstr "URI bagi lokasi pelayan jauh."
 
 #: data/org.gnome.DejaDup.gschema.xml:142
 #: data/org.gnome.DejaDup.gschema.xml:209
@@ -339,6 +347,8 @@ msgid ""
 "The folder hierarchy where backups are stored. Paths can be absolute or "
 "relative to the host."
 msgstr ""
+"Hieraki folder yang mana sandar disimpan. Laluan boleh jadi mutlak atau "
+"relatif dengan hos."
 
 #: data/org.gnome.DejaDup.gschema.xml:149
 msgid "Amazon S3 Access Key ID"
@@ -425,19 +435,19 @@ msgstr "Merupakan nama pengguna anda untuk perkhidmatan Fail Awan Rackspace."
 
 #: data/org.gnome.DejaDup.gschema.xml:198
 msgid "Account ID"
-msgstr ""
+msgstr "ID Akaun"
 
 #: data/org.gnome.DejaDup.gschema.xml:199
 msgid "The unique ID for the GNOME Online Account."
-msgstr ""
+msgstr "ID unik bagi Akaun Atas Talian GNOME."
 
 #: data/org.gnome.DejaDup.gschema.xml:203
 msgid "The type of account"
-msgstr ""
+msgstr "Jenis akaun"
 
 #: data/org.gnome.DejaDup.gschema.xml:204
 msgid "The cached type of account that ID represents."
-msgstr ""
+msgstr "Jenis cache akaun yang ID wakili"
 
 #: data/org.gnome.DejaDup.gschema.xml:216
 msgid "The OpenStack Swift container"
@@ -483,31 +493,31 @@ msgstr "Pulih"
 
 #: data/org.gnome.DejaDup.policy.in:11
 msgid "Privileges are required to restore files to system locations"
-msgstr ""
+msgstr "Kelayakan diperlukan untuk memulihkan fail ke lokasi sistem"
 
 #: data/ui/help-overlay.ui:15
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Am"
 
 #: data/ui/help-overlay.ui:20
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Keluar"
 
 #: data/ui/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Help"
-msgstr ""
+msgstr "Bantuan"
 
 #: data/ui/help-overlay.ui:34
 msgctxt "shortcut window"
 msgid "Shortcuts"
-msgstr ""
+msgstr "Pintasan"
 
 #: data/ui/menus.ui:7
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "Pintasan Papan _Kekunci"
 
 #: data/ui/menus.ui:11
 msgid "_Help"
@@ -515,7 +525,7 @@ msgstr "Bant_uan"
 
 #: data/ui/menus.ui:15
 msgid "_About"
-msgstr ""
+msgstr "Perih_al"
 
 #: data/ui/menus.ui:19
 msgid "_Quit"
@@ -525,7 +535,7 @@ msgstr "_Keluar"
 msgid "Folder"
 msgstr "Folder"
 
-#: data/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:165
+#: data/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:168
 msgid "Scanning…"
 msgstr "Mengimbas..."
 
@@ -542,27 +552,27 @@ msgstr ""
 
 #: data/ui/server-hint.ui:64
 msgid "Available Protocols"
-msgstr ""
+msgstr "Protokol Tersedia"
 
 #: data/ui/server-hint.ui:78
 msgid "AppleTalk"
-msgstr ""
+msgstr "AppleTalk"
 
 #: data/ui/server-hint.ui:89
 msgid "File Transfer Protocol"
-msgstr ""
+msgstr "Protokol Pemindahan Fail"
 
 #: data/ui/server-hint.ui:100
 msgid "Network File System"
-msgstr ""
+msgstr "Sistem Fail Rangkaian"
 
 #: data/ui/server-hint.ui:111
 msgid "Samba"
-msgstr ""
+msgstr "Samba"
 
 #: data/ui/server-hint.ui:122
 msgid "SSH File Transfer Protocol"
-msgstr ""
+msgstr "Protokol Pemindahan Fail SSH"
 
 #: data/ui/server-hint.ui:133
 msgid "WebDAV"
@@ -570,26 +580,26 @@ msgstr "WebDAV"
 
 #: data/ui/server-hint.ui:144
 msgid "Prefix"
-msgstr ""
+msgstr "Awalan"
 
 #. Translators: do not translate ftp:// and ftps://
 #: data/ui/server-hint.ui:169
 msgid "ftp:// or ftps://"
-msgstr ""
+msgstr "ftp:// atau ftps://"
 
 #: data/ui/server-hint.ui:191
 msgid "smb://"
-msgstr ""
+msgstr "smb://"
 
 #. Translators: do not translate sftp:// and ssh://
 #: data/ui/server-hint.ui:202
 msgid "sftp:// or ssh://"
-msgstr ""
+msgstr "sftp:// atau ssh://"
 
 #. Translators: do not translate dav:// and davs://
 #: data/ui/server-hint.ui:213
 msgid "dav:// or davs://"
-msgstr ""
+msgstr "dav:// atau davs://"
 
 #: deja-dup/nautilus/NautilusExtension.c:172
 msgid "Restore Missing Files…"
@@ -656,27 +666,27 @@ msgstr "Fail anda berjaya disandar dan diuji."
 msgid "Backing Up…"
 msgstr "Menyandar..."
 
-#: deja-dup/AssistantOperation.vala:164
+#: deja-dup/AssistantOperation.vala:167
 msgid "Scanning:"
 msgstr "Mengimbas:"
 
-#: deja-dup/AssistantOperation.vala:248
+#: deja-dup/AssistantOperation.vala:272
 msgid "_Details"
 msgstr "_Perincian"
 
-#: deja-dup/AssistantOperation.vala:294
+#: deja-dup/AssistantOperation.vala:318
 msgid "In order to continue, the following packages need to be installed:"
-msgstr ""
+msgstr "Untuk diteruskan, pakej berikut perlu dipasang:"
 
-#: deja-dup/AssistantOperation.vala:330
+#: deja-dup/AssistantOperation.vala:354
 msgid "_Allow restoring without a password"
 msgstr "_Benarkan pemulihan tanpa kata laluan"
 
-#: deja-dup/AssistantOperation.vala:336
+#: deja-dup/AssistantOperation.vala:360
 msgid "_Password-protect your backup"
 msgstr "_Kata laluan-lindungi sandar anda"
 
-#: deja-dup/AssistantOperation.vala:348
+#: deja-dup/AssistantOperation.vala:372
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
@@ -684,24 +694,24 @@ msgstr ""
 "Anda perlukan kata laluan untuk memulihkan fail anda. Anda mungkin ingin "
 "menulisnya."
 
-#: deja-dup/AssistantOperation.vala:363 deja-dup/AssistantOperation.vala:432
+#: deja-dup/AssistantOperation.vala:387 deja-dup/AssistantOperation.vala:456
 msgid "E_ncryption password"
 msgstr "Kata laluan pen_yulitan"
 
-#: deja-dup/AssistantOperation.vala:380
+#: deja-dup/AssistantOperation.vala:404
 msgid "Confir_m password"
 msgstr "Sah_kan kata laluan"
 
-#: deja-dup/AssistantOperation.vala:393 deja-dup/AssistantOperation.vala:441
+#: deja-dup/AssistantOperation.vala:417 deja-dup/AssistantOperation.vala:465
 msgid "_Show password"
 msgstr "_Papar kata laluan"
 
-#: deja-dup/AssistantOperation.vala:400
+#: deja-dup/AssistantOperation.vala:424
 #: deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Ingat kata laluan"
 
-#: deja-dup/AssistantOperation.vala:419
+#: deja-dup/AssistantOperation.vala:443
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -711,19 +721,19 @@ msgstr ""
 "kecemasan, sila masukkan kata laluan penyulitan anda sekai lagi untuk "
 "membuat ujian pulih yang ringkas."
 
-#: deja-dup/AssistantOperation.vala:446
+#: deja-dup/AssistantOperation.vala:470
 msgid "Test every two _months"
 msgstr "Uji setiap dua _bulan"
 
-#: deja-dup/AssistantOperation.vala:513
+#: deja-dup/AssistantOperation.vala:537
 msgid "Install Packages"
-msgstr ""
+msgstr "Pasang Pakej"
 
-#: deja-dup/AssistantOperation.vala:528
+#: deja-dup/AssistantOperation.vala:552
 msgid "Summary"
 msgstr "Ringkasan"
 
-#: deja-dup/AssistantOperation.vala:550
+#: deja-dup/AssistantOperation.vala:574
 msgid "Restore Test"
 msgstr "Ujian Pulih"
 
@@ -733,28 +743,28 @@ msgstr "Ujian Pulih"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: deja-dup/AssistantOperation.vala:622
-#: libdeja/tools/duplicity/DuplicityJob.vala:715
-#: libdeja/tools/duplicity/DuplicityJob.vala:1102
+#: deja-dup/AssistantOperation.vala:646
+#: libdeja/tools/duplicity/DuplicityJob.vala:721
+#: libdeja/tools/duplicity/DuplicityJob.vala:1108
 msgid "Failed with an unknown error."
 msgstr "Gagal dengan ralat tidak diketahui"
 
-#: deja-dup/AssistantOperation.vala:822
+#: deja-dup/AssistantOperation.vala:846
 msgid "Require Password?"
 msgstr "Perlukan Kata Laluan?"
 
-#: deja-dup/AssistantOperation.vala:824
+#: deja-dup/AssistantOperation.vala:848
 msgid "Encryption Password Needed"
 msgstr "Kata Laluan Penyulitan Diperlukan"
 
-#: deja-dup/AssistantOperation.vala:897
+#: deja-dup/AssistantOperation.vala:921
 msgid "Backup encryption password"
 msgstr "Sandar kata laluan penyulitan"
 
-#: deja-dup/AssistantOperation.vala:968
+#: deja-dup/AssistantOperation.vala:992
 msgctxt "verb"
 msgid "_Install"
-msgstr ""
+msgstr "_Pasang"
 
 #: deja-dup/AssistantRestore.vala:74
 msgid "_Restore"
@@ -954,31 +964,31 @@ msgstr "Dengan segera mulakan sandar"
 msgid "Restore deleted files"
 msgstr "Pulihkan fail yang dipadam"
 
-#: deja-dup/main.vala:81 deja-dup/main.vala:96 deja-dup/main.vala:122
+#: deja-dup/main.vala:83 deja-dup/main.vala:98 deja-dup/main.vala:124
 msgid "An operation is already in progress"
-msgstr ""
+msgstr "Satu operasi sedang berlangsung"
 
-#: deja-dup/main.vala:101
+#: deja-dup/main.vala:103
 msgid "No directory provided"
 msgstr "Tiada direktori disediakan"
 
-#: deja-dup/main.vala:105
+#: deja-dup/main.vala:107
 msgid "Only one directory can be shown at once"
 msgstr "Hanya satu direktori boleh dipaparkan dalam satu masa"
 
-#: deja-dup/main.vala:111
+#: deja-dup/main.vala:113
 msgid "Directory does not exist"
 msgstr ""
 
-#: deja-dup/main.vala:115
+#: deja-dup/main.vala:117
 msgid "You must provide a directory, not a file"
 msgstr "Anda mesti sediakan direktori bukan fail"
 
-#: deja-dup/main.vala:129
+#: deja-dup/main.vala:226
 msgid "Scheduled backup delayed"
 msgstr "Sandar berjadual dilengahkan"
 
-#: deja-dup/main.vala:230
+#: deja-dup/main.vala:244
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -1122,11 +1132,12 @@ msgstr "Sandar akan dimulakan bila sambungan rangkaian ada."
 msgid ""
 "Backup will begin when an unmetered network connection becomes available."
 msgstr ""
+"Sandar akan bermula bila sambungan rangkaian tidak bermeter telah tersedia."
 
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: deja-dup/monitor/monitor.vala:288
+#: deja-dup/monitor/monitor.vala:283
 msgid "Backup Monitor"
 msgstr "Sandar Pemantau"
 
@@ -1259,7 +1270,7 @@ msgstr "Pilih folder"
 
 #: deja-dup/widgets/ConfigLocation.vala:126
 msgid "Network Server"
-msgstr ""
+msgstr "Pelayan Rangkaian"
 
 #. And a local folder option
 #: deja-dup/widgets/ConfigLocation.vala:131
@@ -1316,19 +1327,21 @@ msgstr "_OK"
 #. Translators: GCS is Google Cloud Services
 #: deja-dup/widgets/ConfigLocationGCS.vala:32
 msgid "GCS Access Key I_D"
-msgstr ""
+msgstr "I_D Kunci Capaian GCS"
 
 #. Translators: "Bucket" refers to a term used by Google Cloud Services
 #. see https://cloud.google.com/storage/docs/key-terms#bucket
 #: deja-dup/widgets/ConfigLocationGCS.vala:36
 msgid "_Bucket"
-msgstr ""
+msgstr "_Bucket"
 
 #: deja-dup/widgets/ConfigLocationGoa.vala:56
 msgid ""
 "This account is not yet configured. It cannot be used until you add it to "
 "your Online Accounts."
 msgstr ""
+"Akaun ini belum dikonfigurasikan lagi. Ia tidak dapat digunakan sehingga "
+"anda tambah ia ke dalam Akaun Atas Talian anda."
 
 #. Translators: 'Files' here refers to the feature label in GNOME Online Accounts
 #: deja-dup/widgets/ConfigLocationGoa.vala:60
@@ -1336,10 +1349,12 @@ msgid ""
 "This account has disabled Files support. It cannot be used until Files "
 "support is enabled again for this Online Account."
 msgstr ""
+"Akaun ini telah melumpuhkan sokongan Fail. Ia tidak dapat digunakan sehingga "
+"sokongan Fail dibenarkan kembali untuk Akaun Atas Talian ini."
 
 #: deja-dup/widgets/ConfigLocationGoa.vala:88
 msgid "_Open Online Account Settings"
-msgstr ""
+msgstr "_Buka Tetapan Akaun Atas Talian"
 
 #: deja-dup/widgets/ConfigLocationRackspace.vala:33
 msgid "_Container"
@@ -1383,12 +1398,12 @@ msgstr "%1$s pada %2$s"
 #: libdeja/BackendDrive.vala:102
 #, c-format
 msgid "Backup will begin when %s is connected."
-msgstr ""
+msgstr "Sandar akan bermula bila %s telah bersambung."
 
 #: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:158
 #: libdeja/BackendRemote.vala:157
 msgid "Storage location not available"
-msgstr ""
+msgstr "Lokasi storan tidak tersedia"
 
 #: libdeja/BackendDrive.vala:184
 #, c-format
@@ -1401,7 +1416,7 @@ msgstr "Google Drive"
 
 #: libdeja/BackendGOA.vala:113
 msgid "Backup will begin when a storage location is configured"
-msgstr ""
+msgstr "Sandar akan bermula jika lokasi storan telah dikonfigurkan"
 
 #. TODO: actually watch for files support turning on or off
 #. Translators: "Files" here is the string used in GNOME Online Account
@@ -1410,17 +1425,18 @@ msgstr ""
 #: libdeja/BackendGOA.vala:123
 #, c-format
 msgid "Backup will begin when ‘%s’ has Files support enabled"
-msgstr ""
+msgstr "Sandar akan bermula jika '%s' telah membenarkan sokongan Fail"
 
 #: libdeja/BackendGOA.vala:152
 msgid "Waiting for Online Accounts to be configured in your backup settings…"
 msgstr ""
+"Menunggu Akaun Atas Talian dikonfigurkan dalam tetapan sandar anda..."
 
 #. Translators: %s is the name of the provider inside of GNOME Online Accounts
 #: libdeja/BackendGOA.vala:155
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
-msgstr ""
+msgstr "Menunggu %s dikonfigurkan dalam tetapan sandar anda..."
 
 #. Translators: %s is a folder.
 #: libdeja/BackendRackspace.vala:75
@@ -1567,10 +1583,10 @@ msgid "Listing files…"
 msgstr "Menyenaraikan fail..."
 
 #: libdeja/Operation.vala:64 libdeja/Operation.vala:93
-#: libdeja/tools/duplicity/DuplicityJob.vala:394
-#: libdeja/tools/duplicity/DuplicityJob.vala:401
-#: libdeja/tools/duplicity/DuplicityJob.vala:426
-#: libdeja/tools/duplicity/DuplicityJob.vala:431
+#: libdeja/tools/duplicity/DuplicityJob.vala:400
+#: libdeja/tools/duplicity/DuplicityJob.vala:407
+#: libdeja/tools/duplicity/DuplicityJob.vala:432
+#: libdeja/tools/duplicity/DuplicityJob.vala:437
 msgid "Preparing…"
 msgstr "Menyediakan..."
 
@@ -1580,30 +1596,30 @@ msgid "Paused (no network)"
 msgstr "Dijeda (tiada rangkaian)"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: libdeja/tools/duplicity/DuplicityJob.vala:458
+#: libdeja/tools/duplicity/DuplicityJob.vala:464
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Tidak dapat pulihkan '%s': Bukan lokasi fail yang sah"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: libdeja/tools/duplicity/DuplicityJob.vala:529
+#: libdeja/tools/duplicity/DuplicityJob.vala:535
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Lokasi sandar terlalu kecil. Cuba gunakan sesuatu dengan ruang yang lebih."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:552
+#: libdeja/tools/duplicity/DuplicityJob.vala:558
 msgid "Backup location does not have enough free space."
 msgstr "Lokasi sandar tidak mempunyai ruang bebas yang mencukupi."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:572
-#: libdeja/tools/duplicity/DuplicityJob.vala:586
+#: libdeja/tools/duplicity/DuplicityJob.vala:578
+#: libdeja/tools/duplicity/DuplicityJob.vala:592
 msgid "Cleaning up…"
 msgstr "Membersihkan..."
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: libdeja/tools/duplicity/DuplicityJob.vala:682
+#: libdeja/tools/duplicity/DuplicityJob.vala:688
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
@@ -1613,7 +1629,7 @@ msgstr ""
 #. OK, we succeeded yay!  But some files didn't actually restore
 #. because we couldn't write to them.  So tell the user so they
 #. don't think everything is hunky dory.
-#: libdeja/tools/duplicity/DuplicityJob.vala:698
+#: libdeja/tools/duplicity/DuplicityJob.vala:704
 msgid ""
 "Could not restore the following files.  Please make sure you are able to "
 "write to them."
@@ -1623,7 +1639,7 @@ msgstr ""
 #. make text a little nicer than duplicity gives
 #. duplicity gives something like "home/blah/blah not found in archive,
 #. no files restored".
-#: libdeja/tools/duplicity/DuplicityJob.vala:942
+#: libdeja/tools/duplicity/DuplicityJob.vala:948
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Tidak dapat pulihkan '%s': Fail tidak ditemui didalam sandar"
@@ -1631,17 +1647,17 @@ msgstr "Tidak dapat pulihkan '%s': Fail tidak ditemui didalam sandar"
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: libdeja/tools/duplicity/DuplicityJob.vala:955
-#: libdeja/tools/duplicity/DuplicityJob.vala:1054
-#: libdeja/tools/duplicity/DuplicityJob.vala:1058
+#: libdeja/tools/duplicity/DuplicityJob.vala:961
+#: libdeja/tools/duplicity/DuplicityJob.vala:1060
+#: libdeja/tools/duplicity/DuplicityJob.vala:1064
 msgid "Bad encryption password."
 msgstr "Kata laluan penyulitan rosak."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:961
+#: libdeja/tools/duplicity/DuplicityJob.vala:967
 msgid "Computer name changed"
 msgstr "Nama komputer berubah"
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:961
+#: libdeja/tools/duplicity/DuplicityJob.vala:967
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -1651,71 +1667,71 @@ msgstr ""
 "Sandar sedia ada ialah komputer bernama %s, tetapi nama komputer semasa "
 "ialah %s. Jika ini tidak dijangka, anda patut sandarkannya dilokasi lain."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:996
+#: libdeja/tools/duplicity/DuplicityJob.vala:1002
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Kebenaran dinafikan bila cuba mencipta '%s'."
 
 #. assume error is on backend side
-#: libdeja/tools/duplicity/DuplicityJob.vala:1000
-#: libdeja/tools/duplicity/DuplicityJob.vala:1004
+#: libdeja/tools/duplicity/DuplicityJob.vala:1006
+#: libdeja/tools/duplicity/DuplicityJob.vala:1010
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Kebenaran dinafikan bila cuba membaca '%s'."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1008
+#: libdeja/tools/duplicity/DuplicityJob.vala:1014
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Kebenaran dinafikan bila cuba memadam '%s'."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1015
+#: libdeja/tools/duplicity/DuplicityJob.vala:1021
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Lokasi sandar '%s' tidak wujud."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1021
-#: libdeja/tools/duplicity/DuplicityJob.vala:1073
+#: libdeja/tools/duplicity/DuplicityJob.vala:1027
+#: libdeja/tools/duplicity/DuplicityJob.vala:1079
 msgid "No space left."
 msgstr "Tiada ruang lagi."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1035
+#: libdeja/tools/duplicity/DuplicityJob.vala:1041
 msgid "Invalid ID."
 msgstr "ID tidak sah."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1037
+#: libdeja/tools/duplicity/DuplicityJob.vala:1043
 msgid "Invalid secret key."
 msgstr "kekunci rahsia tidak sah."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1039
+#: libdeja/tools/duplicity/DuplicityJob.vala:1045
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Akaun Perkhidmatan Sesawang Amazon anda tidak ditandatangan untuk "
 "perkhidmatan S3."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1048
+#: libdeja/tools/duplicity/DuplicityJob.vala:1054
 msgid "S3 bucket name is not available."
 msgstr "Nama bakul S3 tiada."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1062
+#: libdeja/tools/duplicity/DuplicityJob.vala:1068
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Ralat membaca fail '%s'."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1064
+#: libdeja/tools/duplicity/DuplicityJob.vala:1070
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Ralat menulis fail '%s'."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1075
+#: libdeja/tools/duplicity/DuplicityJob.vala:1081
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Tiada ruang lagi didalam '%s'."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1083
+#: libdeja/tools/duplicity/DuplicityJob.vala:1089
 msgid "No backup files found"
 msgstr "Tiada fail sandar ditemui"
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1133
+#: libdeja/tools/duplicity/DuplicityJob.vala:1139
 msgid "Uploading…"
 msgstr "Memuat naik..."
 
@@ -1904,3 +1920,17 @@ msgstr ""
 
 #~ msgid "Another backup operation is already running"
 #~ msgstr "Operasi sandar lain sudah berjalan"
+
+#~ msgid ""
+#~ "Support for local, remote, or cloud backup locations such as Nextcloud"
+#~ msgstr "Sokong lokasi setempat, jauh, atau awan seperti Nextcloud"
+
+#~ msgid ""
+#~ "Server addresses are made up of a protocol prefix and an address. Examples:"
+#~ msgstr "Alamat pelayan terbentuk dari awalan protokol dan alamat. Contohnya:"
+
+#~ msgid "Server Addresses"
+#~ msgstr "Alamat Pelayan"
+
+#~ msgid "Server _Address"
+#~ msgstr "_Alamat Pelayan"

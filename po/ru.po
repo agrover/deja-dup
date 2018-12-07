@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-01-02 17:04-0500\n"
-"PO-Revision-Date: 2017-10-02 17:31+0000\n"
+"POT-Creation-Date: 2018-04-09 20:59-0400\n"
+"PO-Revision-Date: 2018-04-21 18:13+0000\n"
 "Last-Translator: Dmitriy Kulikov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,15 +16,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2018-01-04 05:36+0000\n"
-"X-Generator: Launchpad (build 18521)\n"
+"X-Launchpad-Export-Date: 2018-04-22 05:50+0000\n"
+"X-Generator: Launchpad (build 18617)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:294
+#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:315
 #: libdeja/CommonUtils.vala:145
 msgid "Déjà Dup Backup Tool"
 msgstr "Программа резервного копирования Déjà Dup"
@@ -49,6 +49,8 @@ msgid ""
 "Support for local, remote, or cloud backup locations such as Google Drive "
 "and Nextcloud"
 msgstr ""
+"Поддержка локальных, удаленных или облачных расположений резервных копий, "
+"таких как Google Drive и Nextcloud"
 
 #: data/org.gnome.DejaDup.appdata.xml.in:13
 msgid "Securely encrypts and compresses your data"
@@ -70,7 +72,7 @@ msgid "Integrates well into your GNOME desktop"
 msgstr "Интегрируется на должном уровне с рабочим столом GNOME"
 
 #. Translators: "Backups" is a noun
-#: data/org.gnome.DejaDup.desktop:5 deja-dup/main.vala:160
+#: data/org.gnome.DejaDup.desktop:5 deja-dup/main.vala:159
 #: deja-dup/Prompt.vala:78
 msgid "Backups"
 msgstr "Резервные копии"
@@ -320,7 +322,7 @@ msgstr "Имя внешнего накопителя."
 
 #: data/org.gnome.DejaDup.gschema.xml:123
 msgid "Icon"
-msgstr ""
+msgstr "Значок"
 
 #: data/org.gnome.DejaDup.gschema.xml:124
 msgid "The icon of the external drive, as a serialized GIcon."
@@ -340,7 +342,7 @@ msgstr "Адрес сервера"
 
 #: data/org.gnome.DejaDup.gschema.xml:137
 msgid "The URI of the remote server location."
-msgstr ""
+msgstr "URI расположения на удаленном сервере."
 
 #: data/org.gnome.DejaDup.gschema.xml:142
 #: data/org.gnome.DejaDup.gschema.xml:209
@@ -537,13 +539,13 @@ msgstr "_Выход"
 msgid "Folder"
 msgstr "Папка"
 
-#: data/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:165
+#: data/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:168
 msgid "Scanning…"
 msgstr "Сканирование..."
 
 #: data/ui/server-hint.ui:16
 msgid "Network Locations"
-msgstr ""
+msgstr "Сетевые расположения"
 
 #. Translators: This is followed by a list of valid adresses (smb://gnome.org/deja-dup, ssh://192.168.0.1, ftp://[2001:db8::1])
 #: data/ui/server-hint.ui:29
@@ -551,6 +553,8 @@ msgid ""
 "Network locations are made up of a protocol prefix, an address, and "
 "sometimes a path depending on the protocol. Examples:"
 msgstr ""
+"Сетевые расположения состоят из префикса протокола, адреса и, иногда, пути в "
+"зависимости от протокола. Например:"
 
 #: data/ui/server-hint.ui:64
 msgid "Available Protocols"
@@ -671,27 +675,27 @@ msgstr "Резервная копия файлов успешно создана
 msgid "Backing Up…"
 msgstr "Резервное копирование..."
 
-#: deja-dup/AssistantOperation.vala:164
+#: deja-dup/AssistantOperation.vala:167
 msgid "Scanning:"
 msgstr "Сканируется:"
 
-#: deja-dup/AssistantOperation.vala:248
+#: deja-dup/AssistantOperation.vala:272
 msgid "_Details"
 msgstr "_Подробности"
 
-#: deja-dup/AssistantOperation.vala:294
+#: deja-dup/AssistantOperation.vala:318
 msgid "In order to continue, the following packages need to be installed:"
 msgstr "Чтобы продолжить, необходимо установить следующие пакеты:"
 
-#: deja-dup/AssistantOperation.vala:330
+#: deja-dup/AssistantOperation.vala:354
 msgid "_Allow restoring without a password"
 msgstr "_Разрешить восстановление без пароля"
 
-#: deja-dup/AssistantOperation.vala:336
+#: deja-dup/AssistantOperation.vala:360
 msgid "_Password-protect your backup"
 msgstr "Защитите _паролем резервную копию"
 
-#: deja-dup/AssistantOperation.vala:348
+#: deja-dup/AssistantOperation.vala:372
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
@@ -699,24 +703,24 @@ msgstr ""
 "Потребуется указать пароль для восстановления файлов. Возможно, его лучше "
 "записать."
 
-#: deja-dup/AssistantOperation.vala:363 deja-dup/AssistantOperation.vala:432
+#: deja-dup/AssistantOperation.vala:387 deja-dup/AssistantOperation.vala:456
 msgid "E_ncryption password"
 msgstr "Пароль шифрования"
 
-#: deja-dup/AssistantOperation.vala:380
+#: deja-dup/AssistantOperation.vala:404
 msgid "Confir_m password"
 msgstr "Подвер_дить пароль"
 
-#: deja-dup/AssistantOperation.vala:393 deja-dup/AssistantOperation.vala:441
+#: deja-dup/AssistantOperation.vala:417 deja-dup/AssistantOperation.vala:465
 msgid "_Show password"
 msgstr "_Показать пароль"
 
-#: deja-dup/AssistantOperation.vala:400
+#: deja-dup/AssistantOperation.vala:424
 #: deja-dup/MountOperationAssistant.vala:40
 msgid "_Remember password"
 msgstr "_Запомнить пароль"
 
-#: deja-dup/AssistantOperation.vala:419
+#: deja-dup/AssistantOperation.vala:443
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -726,19 +730,19 @@ msgstr ""
 "ситуации, пожалуйста, снова введите пароль для доступа к зашифрованным "
 "данным, чтобы выполнить проверку на восстановление."
 
-#: deja-dup/AssistantOperation.vala:446
+#: deja-dup/AssistantOperation.vala:470
 msgid "Test every two _months"
 msgstr "Проверять каждые два _месяца"
 
-#: deja-dup/AssistantOperation.vala:513
+#: deja-dup/AssistantOperation.vala:537
 msgid "Install Packages"
 msgstr "Установить пакеты"
 
-#: deja-dup/AssistantOperation.vala:528
+#: deja-dup/AssistantOperation.vala:552
 msgid "Summary"
 msgstr "Сводка"
 
-#: deja-dup/AssistantOperation.vala:550
+#: deja-dup/AssistantOperation.vala:574
 msgid "Restore Test"
 msgstr "Проверка восстановления"
 
@@ -748,25 +752,25 @@ msgstr "Проверка восстановления"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: deja-dup/AssistantOperation.vala:622
-#: libdeja/tools/duplicity/DuplicityJob.vala:715
-#: libdeja/tools/duplicity/DuplicityJob.vala:1102
+#: deja-dup/AssistantOperation.vala:646
+#: libdeja/tools/duplicity/DuplicityJob.vala:721
+#: libdeja/tools/duplicity/DuplicityJob.vala:1108
 msgid "Failed with an unknown error."
 msgstr "Не удалось (неизвестная ошибка)"
 
-#: deja-dup/AssistantOperation.vala:822
+#: deja-dup/AssistantOperation.vala:846
 msgid "Require Password?"
 msgstr "Хотите ли вы установить пароль?"
 
-#: deja-dup/AssistantOperation.vala:824
+#: deja-dup/AssistantOperation.vala:848
 msgid "Encryption Password Needed"
 msgstr "Требуется пароль шифрования"
 
-#: deja-dup/AssistantOperation.vala:897
+#: deja-dup/AssistantOperation.vala:921
 msgid "Backup encryption password"
 msgstr "Сделать резервную копию пароля шифрования"
 
-#: deja-dup/AssistantOperation.vala:968
+#: deja-dup/AssistantOperation.vala:992
 msgctxt "verb"
 msgid "_Install"
 msgstr "_Установить"
@@ -789,7 +793,7 @@ msgstr "_Дата"
 
 #: deja-dup/AssistantRestore.vala:179
 msgid "Restore files to _original locations"
-msgstr "Восстановить файлы на их прежнее местоположение"
+msgstr "Восстановить файл на _прежнее место"
 
 #: deja-dup/AssistantRestore.vala:184
 msgid "Restore to _specific folder"
@@ -973,43 +977,43 @@ msgstr "Немедлено начать архивирование"
 msgid "Restore deleted files"
 msgstr "Восстановить удалённые файлы"
 
-#: deja-dup/main.vala:81 deja-dup/main.vala:96 deja-dup/main.vala:122
+#: deja-dup/main.vala:83 deja-dup/main.vala:98 deja-dup/main.vala:124
 msgid "An operation is already in progress"
 msgstr "Операция уже выполняется"
 
-#: deja-dup/main.vala:101
+#: deja-dup/main.vala:103
 msgid "No directory provided"
 msgstr "Папка не указана"
 
-#: deja-dup/main.vala:105
+#: deja-dup/main.vala:107
 msgid "Only one directory can be shown at once"
 msgstr "Только одну папку можно показать сразу"
 
-#: deja-dup/main.vala:111
+#: deja-dup/main.vala:113
 msgid "Directory does not exist"
 msgstr "Каталог не существует"
 
-#: deja-dup/main.vala:115
+#: deja-dup/main.vala:117
 msgid "You must provide a directory, not a file"
 msgstr "Вы должны указать каталог, а не файл"
 
-#: deja-dup/main.vala:129
+#: deja-dup/main.vala:226
 msgid "Scheduled backup delayed"
 msgstr "Отложено создание резервной копии по расписанию"
 
-#: deja-dup/main.vala:230
+#: deja-dup/main.vala:244
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Aleksey Kabanov https://launchpad.net/~ak099\n"
 "  Alex https://launchpad.net/~misterzixy\n"
-"  Alex Stepankov https://launchpad.net/~xeurun\n"
 "  Alexey Ivanov https://launchpad.net/~alexey-ivanov\n"
 "  Alexey Rusaleev https://launchpad.net/~alexey-rusaleev\n"
+"  Alexey Stepankov https://launchpad.net/~xeurun\n"
 "  AsstZD https://launchpad.net/~eskaer-spamsink\n"
 "  Dmitriy Kulikov https://launchpad.net/~kulikoff\n"
 "  Dmitry Shachnev https://launchpad.net/~mitya57\n"
-"  Eugene Marshal https://launchpad.net/~lowrider\n"
+"  Eugene Roskin https://launchpad.net/~lowrider\n"
 "  Ilya Telegin https://launchpad.net/~devi29rus\n"
 "  Int https://launchpad.net/~howrudoin\n"
 "  Ivan Akulov https://launchpad.net/~gxoptg\n"
@@ -1024,6 +1028,7 @@ msgstr ""
 "  Vladimir Yakovlev https://launchpad.net/~nagos\n"
 "  deusbase https://launchpad.net/~deusbase\n"
 "  diablo https://launchpad.net/~diablo\n"
+"  Антон Дерлюк https://launchpad.net/~gespenst-vs\n"
 "  Илья Калитко https://launchpad.net/~kalitko-ilya007\n"
 "  ☠Jay ZDLin☠ https://launchpad.net/~black-buddha666"
 
@@ -1173,9 +1178,9 @@ msgstr ""
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: deja-dup/monitor/monitor.vala:288
+#: deja-dup/monitor/monitor.vala:283
 msgid "Backup Monitor"
-msgstr "Менеджер резервного копирования"
+msgstr "Монитор резервного копирования"
 
 #: deja-dup/widgets/ConfigDelete.vala:40
 msgid "At least six months"
@@ -1341,7 +1346,7 @@ msgstr "OpenStack Swift"
 
 #: deja-dup/widgets/ConfigLocationCustom.vala:38
 msgid "_Network Location"
-msgstr ""
+msgstr "_Сетевое расположение"
 
 #: deja-dup/widgets/ConfigLocationCustom.vala:44
 #: deja-dup/widgets/ConfigLocationFile.vala:44
@@ -1389,6 +1394,9 @@ msgid ""
 "This account has disabled Files support. It cannot be used until Files "
 "support is enabled again for this Online Account."
 msgstr ""
+"Для этой учётной записи отключена поддержка Files. Files не может "
+"использоваться, пока его поддержка не будет повторно включена для этой "
+"сетевой учётной записи."
 
 #: deja-dup/widgets/ConfigLocationGoa.vala:88
 msgid "_Open Online Account Settings"
@@ -1438,12 +1446,12 @@ msgstr "%1$s на %2$s"
 #: libdeja/BackendDrive.vala:102
 #, c-format
 msgid "Backup will begin when %s is connected."
-msgstr ""
+msgstr "Резервное копирование начнётся после подключения %s."
 
 #: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:158
 #: libdeja/BackendRemote.vala:157
 msgid "Storage location not available"
-msgstr ""
+msgstr "Местоположение хранилища недоступно"
 
 #: libdeja/BackendDrive.vala:184
 #, c-format
@@ -1457,6 +1465,7 @@ msgstr "Google Диск"
 #: libdeja/BackendGOA.vala:113
 msgid "Backup will begin when a storage location is configured"
 msgstr ""
+"Резервное копирование начнётся после настройки местоположения хранилища"
 
 #. TODO: actually watch for files support turning on or off
 #. Translators: "Files" here is the string used in GNOME Online Account
@@ -1466,16 +1475,19 @@ msgstr ""
 #, c-format
 msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr ""
+"Резервное копирование начнётся, после включения поддержки Files для ‘%s’"
 
 #: libdeja/BackendGOA.vala:152
 msgid "Waiting for Online Accounts to be configured in your backup settings…"
 msgstr ""
+"Ожидание настройки сетевых учётных записей в параметрах резервного "
+"копирования..."
 
 #. Translators: %s is the name of the provider inside of GNOME Online Accounts
 #: libdeja/BackendGOA.vala:155
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
-msgstr ""
+msgstr "Ожидание настройки %s в параметрах резервного копирования…"
 
 #. Translators: %s is a folder.
 #: libdeja/BackendRackspace.vala:75
@@ -1510,11 +1522,11 @@ msgstr "_Показать ключ доступа API"
 
 #: libdeja/BackendRackspace.vala:152
 msgid "_Remember API access key"
-msgstr "П_омнить ключ доступа API"
+msgstr "_Запомнить ключ доступа API"
 
 #: libdeja/BackendRemote.vala:114
 msgid "The network server is not available"
-msgstr ""
+msgstr "Сетевой сервер недоступен"
 
 #: libdeja/BackendRemote.vala:158
 msgid "Waiting for a network connection…"
@@ -1527,6 +1539,7 @@ msgstr "Ожидание сетевого подключения ..."
 msgid ""
 "Samba network locations must include both a hostname and a share name."
 msgstr ""
+"Сетевые местоположения Samba должны включать имя узла и общего ресурса."
 
 #. Translators: %s is a folder.
 #: libdeja/BackendS3.vala:125
@@ -1628,10 +1641,10 @@ msgid "Listing files…"
 msgstr "Список файлов..."
 
 #: libdeja/Operation.vala:64 libdeja/Operation.vala:93
-#: libdeja/tools/duplicity/DuplicityJob.vala:394
-#: libdeja/tools/duplicity/DuplicityJob.vala:401
-#: libdeja/tools/duplicity/DuplicityJob.vala:426
-#: libdeja/tools/duplicity/DuplicityJob.vala:431
+#: libdeja/tools/duplicity/DuplicityJob.vala:400
+#: libdeja/tools/duplicity/DuplicityJob.vala:407
+#: libdeja/tools/duplicity/DuplicityJob.vala:432
+#: libdeja/tools/duplicity/DuplicityJob.vala:437
 msgid "Preparing…"
 msgstr "Выполняется подготовка..."
 
@@ -1641,31 +1654,31 @@ msgid "Paused (no network)"
 msgstr "Приостановлено (нет сети)"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: libdeja/tools/duplicity/DuplicityJob.vala:458
+#: libdeja/tools/duplicity/DuplicityJob.vala:464
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Невозможно восстановить ‘%s’: Некорректное местоположение файла"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: libdeja/tools/duplicity/DuplicityJob.vala:529
+#: libdeja/tools/duplicity/DuplicityJob.vala:535
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Недостаточно места для резервного копирования. Попробуйте использовать "
 "другой носитель."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:552
+#: libdeja/tools/duplicity/DuplicityJob.vala:558
 msgid "Backup location does not have enough free space."
 msgstr "Недостаточно свободного места для резервного копирования"
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:572
-#: libdeja/tools/duplicity/DuplicityJob.vala:586
+#: libdeja/tools/duplicity/DuplicityJob.vala:578
+#: libdeja/tools/duplicity/DuplicityJob.vala:592
 msgid "Cleaning up…"
 msgstr "Очистка..."
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: libdeja/tools/duplicity/DuplicityJob.vala:682
+#: libdeja/tools/duplicity/DuplicityJob.vala:688
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
@@ -1676,7 +1689,7 @@ msgstr ""
 #. OK, we succeeded yay!  But some files didn't actually restore
 #. because we couldn't write to them.  So tell the user so they
 #. don't think everything is hunky dory.
-#: libdeja/tools/duplicity/DuplicityJob.vala:698
+#: libdeja/tools/duplicity/DuplicityJob.vala:704
 msgid ""
 "Could not restore the following files.  Please make sure you are able to "
 "write to them."
@@ -1687,7 +1700,7 @@ msgstr ""
 #. make text a little nicer than duplicity gives
 #. duplicity gives something like "home/blah/blah not found in archive,
 #. no files restored".
-#: libdeja/tools/duplicity/DuplicityJob.vala:942
+#: libdeja/tools/duplicity/DuplicityJob.vala:948
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Не удалось восстановить  ‘%s’: файл не найден в резервной копии"
@@ -1695,17 +1708,17 @@ msgstr "Не удалось восстановить  ‘%s’: файл не н
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: libdeja/tools/duplicity/DuplicityJob.vala:955
-#: libdeja/tools/duplicity/DuplicityJob.vala:1054
-#: libdeja/tools/duplicity/DuplicityJob.vala:1058
+#: libdeja/tools/duplicity/DuplicityJob.vala:961
+#: libdeja/tools/duplicity/DuplicityJob.vala:1060
+#: libdeja/tools/duplicity/DuplicityJob.vala:1064
 msgid "Bad encryption password."
 msgstr "Неверный пароль шифрования"
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:961
+#: libdeja/tools/duplicity/DuplicityJob.vala:967
 msgid "Computer name changed"
 msgstr "Изменилось название компьютера"
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:961
+#: libdeja/tools/duplicity/DuplicityJob.vala:967
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -1716,69 +1729,69 @@ msgstr ""
 "избежание непредсказуемых последствий, рекомендуется создать резервную копию "
 "на другом носителе."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:996
+#: libdeja/tools/duplicity/DuplicityJob.vala:1002
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Доступ запрещён при попытке создать ‘%s’."
 
 #. assume error is on backend side
-#: libdeja/tools/duplicity/DuplicityJob.vala:1000
-#: libdeja/tools/duplicity/DuplicityJob.vala:1004
+#: libdeja/tools/duplicity/DuplicityJob.vala:1006
+#: libdeja/tools/duplicity/DuplicityJob.vala:1010
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Доступ запрещён при попытке прочитать ‘%s’"
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1008
+#: libdeja/tools/duplicity/DuplicityJob.vala:1014
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Доступ запрещён при попытке удаления ‘%s’"
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1015
+#: libdeja/tools/duplicity/DuplicityJob.vala:1021
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Носитель ‘%s’ не существует."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1021
-#: libdeja/tools/duplicity/DuplicityJob.vala:1073
+#: libdeja/tools/duplicity/DuplicityJob.vala:1027
+#: libdeja/tools/duplicity/DuplicityJob.vala:1079
 msgid "No space left."
 msgstr "Не осталось свободного места"
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1035
+#: libdeja/tools/duplicity/DuplicityJob.vala:1041
 msgid "Invalid ID."
 msgstr "Неправильный ID."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1037
+#: libdeja/tools/duplicity/DuplicityJob.vala:1043
 msgid "Invalid secret key."
 msgstr "Не правильный секретный ключ."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1039
+#: libdeja/tools/duplicity/DuplicityJob.vala:1045
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr "Ваша учётная запись в службе Amazon не имеет подписки в службе S3."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1048
+#: libdeja/tools/duplicity/DuplicityJob.vala:1054
 msgid "S3 bucket name is not available."
 msgstr "Имя набора (bucket) S3 недоступно."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1062
+#: libdeja/tools/duplicity/DuplicityJob.vala:1068
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Ошибка чтения файла ‘%s’."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1064
+#: libdeja/tools/duplicity/DuplicityJob.vala:1070
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Ошибка записи файла ‘%s’."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1075
+#: libdeja/tools/duplicity/DuplicityJob.vala:1081
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Не осталось свободного места на ‘%s’."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1083
+#: libdeja/tools/duplicity/DuplicityJob.vala:1089
 msgid "No backup files found"
 msgstr "Резервных копий не обнаружено"
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1133
+#: libdeja/tools/duplicity/DuplicityJob.vala:1139
 msgid "Uploading…"
 msgstr "Передача…"
 
