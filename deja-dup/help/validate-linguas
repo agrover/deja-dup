@@ -17,8 +17,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-available=$(ls */ -1d | cut -d/ -f1 | grep -v '^C$')
-linguas=$(cat LINGUAS)
+set -e
 
-test -n "$linguas"
-test "$available" = "$linguas"
+pos=$(ls */ -1d | cut -d/ -f1 | grep -v '^C$')
+
+test -e LINGUAS
+echo "$pos" | diff -u LINGUAS -
