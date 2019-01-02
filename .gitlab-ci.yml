@@ -7,9 +7,19 @@ flatpak:
     extends: .flatpak
     image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:3.28
     variables:
-        MANIFEST_PATH: "flatpak/org.gnome.DejaDup.json"
+        MANIFEST_PATH: "flatpak/org.gnome.DejaDupDevel.yaml"
         MESON_ARGS: "-Dprofile=Devel"
         FLATPAK_MODULE: "deja-dup"
         RUNTIME_REPO: "https://sdk.gnome.org/gnome.flatpakrepo"
-        APP_ID: "org.gnome.DejaDup"
+        APP_ID: "org.gnome.DejaDupDevel"
+
+review:
+    extends: .review
+    stage: deploy
+    dependencies:
+        - flatpak
+
+stop_review:
+    extends: .stop_review
+    stage: deploy
 

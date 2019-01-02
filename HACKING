@@ -16,40 +16,10 @@ That will give you a full shell pointing at all your built executables.
  * data: shared schemas, icons, etc
  * vapi: some helper APIs for vala
 
-= Development Notes =
+== Flatpak ==
 
-== How to Release ==
+To build a local flatpak, run 'make flatpak'. You'll want an up-to-date flatpak-builder though.
 
-Steps:
- * Grab latest translations from LP, integrate
- * Update help documentation (new arguments, new gui labels)
- * make check dist
- * debuild, install (to catch any foolish errors that check missed)
- * Update toplevel meson.build version
- * Tag git with new release number (4.0 for 4.0)
- * Update LP (new release, new download)
- * NEWSTABLE: Update LP testing recipe version
- * STABLE: New screenshots if needed for wiki [1]
- * Announce on LP
- * Mark bugs fix released on LP
-
-[1] Screenshots:
- * Alt+PrntScreen to get just the current window
-
-== TODO ==
- * use GResource
-
-== Backend Split Notes ==
-
-What do we need?
- * describe-credentials like:
-   * username
-   * password
-   * folder
- * here-are-credentials (secret how?)
- * put-these
- * get-these
- * list
- * size-of-these (to make sure there is room)
-
-basically, same as duplicity, duh!
+If you're on Ubuntu:
+sudo add-apt-repository ppa:alexlarsson/flatpak
+sudo apt update

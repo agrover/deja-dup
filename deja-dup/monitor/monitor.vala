@@ -116,8 +116,8 @@ static async void call_remote(string action, string[] args = {})
     var deja = yield new DBusProxy.for_bus(BusType.SESSION,
                                            DBusProxyFlags.NONE,
                                            null,
-                                           "org.gnome.DejaDup",
-                                           "/org/gnome/DejaDup",
+                                           Config.APPLICATION_ID,
+                                           "/org/gnome/DejaDup" + Config.PROFILE,
                                            "org.freedesktop.Application",
                                            null);
     yield deja.call("ActivateAction",
@@ -301,7 +301,7 @@ static int main(string[] args)
   var loop = new MainLoop(null, false);
   Idle.add(() => {
     // quit if we can't get the bus name or become disconnected
-    Bus.own_name(BusType.SESSION, "org.gnome.DejaDup.Monitor",
+    Bus.own_name(BusType.SESSION, Config.APPLICATION_ID + ".Monitor",
                  BusNameOwnerFlags.NONE, ()=>{},
                  ()=>{begin_monitoring();},
                  ()=>{loop.quit();});

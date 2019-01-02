@@ -54,7 +54,7 @@ public class DejaDupApp : Gtk.Application
 
   public DejaDupApp()
   {
-    Object(application_id: "org.gnome.DejaDup",
+    Object(application_id: Config.APPLICATION_ID,
            flags: ApplicationFlags.HANDLES_COMMAND_LINE);
     add_main_option_entries(options);
   }
@@ -141,6 +141,13 @@ public class DejaDupApp : Gtk.Application
     return 0;
   }
 
+  public void register_window(Gtk.Window w)
+  {
+    if (Config.PROFILE != "")
+      w.get_style_context().add_class("devel");
+    add_window(w);
+  }
+
   public override void activate()
   {
     base.activate();
@@ -176,7 +183,7 @@ public class DejaDupApp : Gtk.Application
       prefs.app = this;
       prefs.border_width = 12;
       main_window.add(prefs);
-      add_window(main_window);
+      register_window(main_window);
       main_window.show_all();
     }
   }
@@ -213,7 +220,7 @@ public class DejaDupApp : Gtk.Application
     this.op = op;
     this.op.destroy.connect(clear_op);
     quit_action.set_enabled(false);
-    add_window(op);
+    register_window(op);
     op.show_all();
 
     Gdk.notify_startup_complete();
@@ -230,14 +237,15 @@ public class DejaDupApp : Gtk.Application
   {
     var note = new Notification(_("Scheduled backup delayed"));
     note.set_body(reason);
-    note.set_icon(new ThemedIcon("org.gnome.DejaDup"));
+    note.set_icon(new ThemedIcon(Config.ICON_NAME));
     send_notification("backup-status", note);
   }
 
   void help()
   {
     unowned List<Gtk.Window> list = get_windows();
-    DejaDup.show_uri(list == null ? null : list.data, "help:org.gnome.DejaDup");
+    DejaDup.show_uri(list == null ? null : list.data,
+                     "help:" + Config.APPLICATION_ID);
   }
 
   void about()
@@ -245,7 +253,7 @@ public class DejaDupApp : Gtk.Application
     unowned List<Gtk.Window> list = get_windows();
     Gtk.show_about_dialog(list == null ? null : list.data,
                           "license-type", Gtk.License.GPL_3_0,
-                          "logo-icon-name", "org.gnome.DejaDup",
+                          "logo-icon-name", Config.ICON_NAME,
                           "translator-credits", _("translator-credits"),
                           "version", Config.VERSION,
                           "website", "https://wiki.gnome.org/Apps/DejaDup");
@@ -317,10 +325,13 @@ int main(string[] args)
   // context is itself a reference to both the underlying command line tool
   // "duplicity" and the act of duplicating data for backup.  As a whole, the
   // phrase "Déjà Dup" may not be very translatable.
-  Environment.set_application_name(_("Déjà Dup Backup Tool"));
-  Environment.set_prgname("org.gnome.DejaDup");
+  var appname = _("Déjà Dup Backup Tool");
+  if (Config.PROFILE != "")
+    appname = "%s (%s)".printf(appname, Config.PROFILE);
 
-  Gtk.Window.set_default_icon_name("org.gnome.DejaDup");
+  Environment.set_application_name(appname);
+  Environment.set_prgname(Config.APPLICATION_ID);
+  Gtk.Window.set_default_icon_name(Config.ICON_NAME);
 
   resources_get_resource()._register();
 

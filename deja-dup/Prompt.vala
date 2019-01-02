@@ -55,7 +55,7 @@ void show_prompt_notification(Gtk.Application app)
 {
   var note = new Notification(get_header());
   note.set_body(get_body());
-  note.set_icon(new ThemedIcon("org.gnome.DejaDup"));
+  note.set_icon(new ThemedIcon(Config.ICON_NAME));
   note.set_default_action("app.prompt-ok");
   note.add_button(get_cancel_button(false), "app.prompt-cancel");
   note.add_button(get_ok_button(false), "app.prompt-ok");

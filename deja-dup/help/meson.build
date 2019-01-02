@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Déjà Dup.  If not, see <http://www.gnu.org/licenses/>.
 
-gnome.yelp('org.gnome.DejaDup',
+gnome.yelp(application_id,
     sources: ['backup-auto.page',
               'backup-first.page',
               'contribute.page',
@@ -29,7 +29,6 @@ gnome.yelp('org.gnome.DejaDup',
               'restore-revert.page',
               'restore-worst-case.page',
               'support.page'],
-    media: ['figures/deja-dup-icon.png'],
     symlink_media: true)
 
 validate_help_linguas = find_program('./validate-linguas')

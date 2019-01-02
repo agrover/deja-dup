@@ -1,0 +1,183 @@
+# -*- Mode: YAML; indent-tabs-mode: nil; tab-width: 2 -*-
+---
+app-id: org.gnome.DejaDupDevel
+runtime: org.gnome.Platform
+runtime-version: 3.28
+sdk: org.gnome.Sdk
+command: deja-dup
+
+finish-args:
+  - --socket=wayland
+
+  - --socket=x11
+  - --share=ipc
+
+  - --filesystem=host
+
+  - --share=network
+  - --system-talk-name=org.freedesktop.NetworkManager
+
+  - --talk-name=org.gtk.vfs
+  - --talk-name=org.gtk.vfs.*
+
+  - --talk-name=org.freedesktop.secrets
+  - --talk-name=org.gnome.OnlineAccounts
+
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+
+modules:
+  - name: librest
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/librest.git
+        tag: 0.8.1
+
+  - name: gnome-online-accounts
+    config-opts:
+      - --disable-telepathy
+      - --disable-documentation
+      - --disable-gtk-doc
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/gnome-online-accounts.git
+        tag: 3.28.0
+
+
+  - name: libpeas
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/libpeas.git
+        tag: libpeas-1.22.0
+
+
+  - name: libgpg-error
+    sources:
+      - type: archive
+        url: https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.27.tar.bz2
+        sha256: 4f93aac6fecb7da2b92871bb9ee33032be6a87b174f54abf8ddf0911a22d29d2
+
+
+  - name: librsync
+    config-opts:
+      - --enable-shared
+      - --disable-static
+    sources:
+      - type: archive
+        url: https://downloads.sourceforge.net/project/librsync/librsync/0.9.7/librsync-0.9.7.tar.gz
+        sha256: 6633e4605662763a03bb6388529cbdfd3b11a9ec55b8845351c1bd9a92bc41d6
+
+  - name: python-six
+    buildsystem: simple
+    build-commands:
+      - python2 setup.py build
+      - python2 setup.py install --single-version-externally-managed --root=/ --prefix /app
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/b3/b2/238e2590826bfdd113244a40d9d3eb26918bd798fc187e2360a8367068db/six-1.10.0.tar.gz
+        sha256: 105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a
+
+  - name: python-monotonic
+    buildsystem: simple
+    build-commands:
+      - python2 setup.py build
+      - python2 setup.py install --single-version-externally-managed --root=/ --prefix /app
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/96/b3/3e9fa0bdf132a971571cbf0e3f0c8b38834f4f7af8ca9523794f4f5895e0/monotonic-1.3.tar.gz
+        sha256: 2b469e2d7dd403f7f7f79227fe5ad551ee1e76f8bb300ae935209884b93c7c1b
+
+  - name: python-fasteners
+    buildsystem: simple
+    build-commands:
+      - python2 setup.py build
+      - python2 setup.py install --single-version-externally-managed --root=/ --prefix /app
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/f4/6f/41b835c9bf69b03615630f8a6f6d45dafbec95eb4e2bb816638f043552b2/fasteners-0.14.1.tar.gz
+        sha256: 427c76773fe036ddfa41e57d89086ea03111bbac57c55fc55f3006d027107e18
+
+  - name: duplicity
+    buildsystem: simple
+    build-commands:
+      - python2 setup.py build
+      - python2 setup.py install --prefix /app
+    sources:
+      - type: archive
+        url: https://launchpad.net/duplicity/0.7-series/0.7.14/+download/duplicity-0.7.14.tar.gz
+        sha256: 7a3eb74a2a36b004b10add2970b37cfbac0bd693d79513e6311c8e4b8c3dd73e
+
+
+  - name: python-boto
+    buildsystem: simple
+    build-commands:
+      - python2 setup.py build
+      - python2 setup.py install --single-version-externally-managed --root=/ --prefix /app
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/66/e7/fe1db6a5ed53831b53b8a6695a8f134a58833cadb5f2740802bc3730ac15/boto-2.48.0.tar.gz
+        sha256: deb8925b734b109679e3de65856018996338758f4b916ff4fe7bb62b6d7000d1
+
+
+  - name: python-cloudfiles
+    buildsystem: simple
+    build-commands:
+      - python2 setup.py build
+      - python2 setup.py install --single-version-externally-managed --root=/ --prefix /app
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/b5/6d/11d1166c0d1a48eb15daf1b6c748e99c057ebac92e38fa0c19bdad2bc6a0/python-cloudfiles-1.7.11.tar.gz
+        sha256: 13039dd639e4686be020847b932e7a921a7a5b018c855c58190f7bfb48091335
+
+
+  - name: python-pbr
+    buildsystem: simple
+    build-commands:
+      - python2 setup.py build
+      - python2 setup.py install --prefix /app
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/d5/d6/f2bf137d71e4f213b575faa9eb426a8775732432edb67588a8ee836ecb80/pbr-3.1.1.tar.gz
+        sha256: 05f61c71aaefc02d8e37c0a3eeb9815ff526ea28b3b76324769e6158d7f95be1
+
+  - name: python-certifi
+    buildsystem: simple
+    build-commands:
+      - python2 setup.py build
+      - python2 setup.py install --single-version-externally-managed --root=/ --prefix /app
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/20/d0/3f7a84b0c5b89e94abbd073a5f00c7176089f526edb056686751d5064cbd/certifi-2017.7.27.1.tar.gz
+        sha256: 40523d2efb60523e113b44602298f0960e900388cf3bb6043f645cf57ea9e3f5
+
+  - name: python-requests
+    buildsystem: simple
+    build-commands:
+      - python2 setup.py build
+      - python2 setup.py install --single-version-externally-managed --root=/ --prefix /app
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/b0/e1/eab4fc3752e3d240468a8c0b284607899d2fbfb236a56b7377a329aa8d09/requests-2.18.4.tar.gz
+        sha256: 9c443e7324ba5b85070c4a818ade28bfabedf16ea10206da1132edaa6dda237e
+
+  - name: python-swiftclient
+    buildsystem: simple
+    build-commands:
+      - python2 setup.py build
+      - python2 setup.py install --prefix /app
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/9a/a7/fa2e2def232d0c8b32677399f0381e3e6e602ce577e138fff57771a0b9e7/python-swiftclient-3.4.0.tar.gz
+        sha256: 54f7ae339bd076e295dd576ec98e55ba71205ee7e62964b27c8ec80c9351067d
+
+
+  - name: deja-dup
+    buildsystem: meson
+    builddir: true
+    config-opts:
+      - -Dprofile=Devel
+    sources:
+      - type: git
+        url: ..

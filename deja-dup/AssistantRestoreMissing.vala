@@ -135,7 +135,7 @@ public class AssistantRestoreMissing : AssistantRestore {
      * components to it. Deleted files are dynamically added on-the-fly by
      * applicable functions.
      */
-      var builder = new Gtk.Builder.from_resource("/org/gnome/DejaDup/restore-missing.ui");
+      var builder = new Gtk.Builder.from_resource("/org/gnome/DejaDup%s/restore-missing.ui".printf(Config.PROFILE));
       builder.connect_signals(this);
 
       var page = builder.get_object("restore-missing-files") as Gtk.Widget;

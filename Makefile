@@ -23,12 +23,15 @@ all: configure
 	@[ "$@" = "Makefile" ] || ninja -C builddir $@
 
 configure:
+	@[ -f builddir/build.ninja ] || meson -Dprofile=Devel builddir
+
+distconfigure:
 	@[ -f builddir/build.ninja ] || meson builddir
 
 check: all
 	LC_ALL=C.UTF-8 meson test -C builddir
 
-dist: configure screenshots pot
+dist: clean distconfigure screenshots pot
 	rm -f builddir/meson-dist/*
 	ninja -C builddir dist
 	gpg --armor --sign --detach-sig builddir/meson-dist/deja-dup-*.tar.xz
@@ -78,9 +81,11 @@ copy-po:
 	git add deja-dup/help/*/*.po
 
 flatpak:
-	mkdir -p builddir
-	rm -fr builddir/flatpak
-	cd builddir && flatpak-builder --repo=$(HOME)/repo ./flatpak ../flatpak/org.gnome.DejaDup.json
-	flatpak update --user org.gnome.DejaDup
+	flatpak-builder --repo=$(HOME)/repo \
+	                --force-clean \
+	                --state-dir=builddir/.flatpak-builder \
+	                builddir/flatpak \
+	                flatpak/org.gnome.DejaDupDevel.yaml
+	flatpak update --user -y org.gnome.DejaDupDevel
 
-.PHONY: configure clean dist all copy-po check screenshots flatpak
+.PHONY: configure distconfigure clean dist all copy-po check screenshots flatpak

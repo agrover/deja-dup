@@ -729,11 +729,20 @@ public string[] get_tempdirs()
   var tempdir = Environment.get_variable("DEJA_DUP_TEMPDIR");
   if (tempdir != null && tempdir != "")
     return {tempdir};
+
+  var hometmp = Path.build_filename(Environment.get_user_cache_dir(),
+                                    Config.PACKAGE, "tmp");
+
+  // If we use /tmp or /var/tmp from inside of a container like flatpak's, gvfs
+  // (which is outside the container) won't see our /var/tmp/xxx path and error
+  // out.  So we restrict ourselves to the user's home dir in that case.
+  var flatpak_dir = Environment.get_variable("FLATPAK_SANDBOX_DIR");
+  if (flatpak_dir != null && flatpak_dir != "")
+    return {hometmp};
+
   // Prefer directories that have their own cleanup logic in case ours isn't
   // run for a while.  (e.g. /tmp every boot, /var/tmp every now and then)
-  return {Environment.get_tmp_dir(), "/var/tmp",
-          Path.build_filename(Environment.get_user_cache_dir(), Config.PACKAGE,
-                              "tmp")};
+  return {Environment.get_tmp_dir(), "/var/tmp", hometmp};
 }
 
 public async void clean_tempdirs()

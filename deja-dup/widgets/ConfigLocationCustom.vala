@@ -53,7 +53,7 @@ public class ConfigLocationCustom : ConfigLocationTable
 
   Gtk.Popover create_hint(Gtk.Entry parent)
   {
-    var builder = new Gtk.Builder.from_resource("/org/gnome/DejaDup/server-hint.ui");
+    var builder = new Gtk.Builder.from_resource("/org/gnome/DejaDup%s/server-hint.ui".printf(Config.PROFILE));
     var popover = builder.get_object("server_adresses_popover") as Gtk.Popover;
     popover.relative_to = parent;
     return popover;

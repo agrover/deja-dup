@@ -68,6 +68,15 @@ desktop_file_validate = find_program('desktop-file-validate')
 glib_compile_schemas = find_program('glib-compile-schemas')
 msgfmt = find_program('msgfmt')
 
+# Profile support
+profile = get_option('profile')
+application_id = 'org.gnome.DejaDup@0@'.format(profile)
+if profile != ''
+    message('Using profile @0@.'.format(profile))
+else
+    message('Using default profile.')
+endif
+
 common_vflags = [
     '--pkg=config',
     '--pkg=posix',
@@ -86,6 +95,9 @@ common_cflags = [
     '-DPACKAGE="@0@"'.format(meson.project_name()),
     '-DGETTEXT_PACKAGE="@0@"'.format(meson.project_name()),
     '-DVERSION="@0@"'.format(meson.project_version()),
+    '-DPROFILE="@0@"'.format(profile),
+    '-DAPPLICATION_ID="@0@"'.format(application_id),
+    '-DICON_NAME="@0@"'.format(application_id),
     '-DLOCALE_DIR="@0@"'.format(localedir),
     '-DTHEME_DIR="@0@"'.format(join_paths(datadir, 'icons')),
     '-DPKG_LIBEXEC_DIR="@0@"'.format(pkglibexecdir)]
