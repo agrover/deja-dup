@@ -608,7 +608,7 @@ void process_duplicity_run_block(KeyFile keyfile, string run, BackupRunner br) t
   if (as_root)
     dupscript += "\n" + "AS_ROOT";
 
-  var verify_script = "mkdir -p %s/deja-dup/metadata && echo 'This folder can be safely deleted.\\n0' > %s/deja-dup/metadata/README".printf(cachedir, cachedir);
+  var verify_script = "mkdir -p %s/deja-dup/metadata && echo -e 'This folder can be safely deleted.\\n0' > %s/deja-dup/metadata/README".printf(cachedir, cachedir);
   if (mode == Mode.VERIFY)
     dupscript += "\n" + "SCRIPT: " + verify_script;
   if (script != null) {

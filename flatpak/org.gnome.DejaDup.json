@@ -1,7 +1,7 @@
 {
     "app-id": "org.gnome.DejaDup",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.24",
+    "runtime-version": "3.28",
     "sdk": "org.gnome.Sdk",
     "command": "deja-dup",
     "finish-args": [
@@ -31,9 +31,9 @@
             "name": "librest",
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/rest/0.8/rest-0.8.0.tar.xz",
-                    "sha256": "e7b89b200c1417073aef739e8a27ff2ab578056c27796ec74f5886a5e0dff647"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/librest.git",
+                    "tag": "0.8.1"
                 }
             ]
         },
@@ -42,9 +42,9 @@
             "config-opts": [ "--disable-telepathy", "--disable-documentation", "--disable-gtk-doc" ],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.24/gnome-online-accounts-3.24.2.tar.xz",
-                    "sha256": "b70ad52d1541e1e5192dd060bb11552a3af5007ab477aa81d265d1cd1cf7afba"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/gnome-online-accounts.git",
+                    "tag": "3.28.0"
                 }
             ]
         },
@@ -53,9 +53,9 @@
             "name": "libpeas",
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/libpeas/1.21/libpeas-1.21.0.tar.xz",
-                    "sha256": "afb9a8880d53e0599fb1e3ddddfb9d173db18b94d9323f4efd24f07fa241f70c"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/libpeas.git",
+                    "tag": "libpeas-1.22.0"
                 }
             ]
         },
@@ -139,33 +139,6 @@
                     "type": "archive",
                     "url": "https://launchpad.net/duplicity/0.7-series/0.7.14/+download/duplicity-0.7.14.tar.gz",
                     "sha256": "7a3eb74a2a36b004b10add2970b37cfbac0bd693d79513e6311c8e4b8c3dd73e"
-                }
-            ]
-        },
-
-        {
-            "name": "pycairo",
-            "buildsystem": "simple",
-            "build-commands": [
-                "python2 setup.py build",
-                "python2 setup.py install --prefix /app"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://github.com/pygobject/pycairo/releases/download/v1.15.1/pycairo-1.15.1.tar.gz",
-                    "sha256": "987d392270247343595d37591f80639ed902fce7e30bd2f944cb1b0a9093553d"
-                }
-            ]
-        },
-        {
-            "name": "pygobject",
-            "config-opts": ["--with-python=python2"],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/pygobject/3.24/pygobject-3.24.1.tar.xz",
-                    "sha256": "a628a95aa0909e13fb08230b1b98fc48adef10b220932f76d62f6821b3fdbffd"
                 }
             ]
         },
