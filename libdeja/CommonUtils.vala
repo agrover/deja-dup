@@ -777,5 +777,16 @@ public async void clean_tempdirs()
   }
 }
 
+public string try_realpath(string input)
+{
+  var resolved = Posix.realpath(input);
+  return resolved == null ? input : resolved;
+}
+
+public File try_realfile(File input)
+{
+  return File.new_for_path(try_realpath(input.get_path()));
+}
+
 } // end namespace
 

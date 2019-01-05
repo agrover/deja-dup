@@ -304,9 +304,17 @@ public class AssistantRestore : AssistantOperation
 
     realize();
 
+    // Convert any specified files to a de-symlink-ified version, in case the
+    // user is sitting inside a symlinked folder.
+    var resolved_files = new GLib.List<File>();
+    foreach (File f in restore_files) {
+      resolved_files.append(DejaDup.try_realfile(f));
+    }
+
     ensure_config_location();
     var rest_op = new DejaDup.OperationRestore(config_location.get_backend(),
-                                               restore_location, date, restore_files);
+                                               restore_location, date,
+                                               resolved_files);
     if (this.op_state != null)
       rest_op.set_state(this.op_state);
 

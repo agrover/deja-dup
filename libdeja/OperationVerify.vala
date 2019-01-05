@@ -62,7 +62,7 @@ public class OperationVerify : Operation
     if (nag)
       job.flags |= ToolJob.Flags.NO_CACHE;
 
-    string cachedir = Environment.get_user_cache_dir();
+    string cachedir = try_realpath(Environment.get_user_cache_dir());
     metadir = File.new_for_path(Path.build_filename(cachedir, Config.PACKAGE, "metadata"));
     job.restore_files.append(metadir);
 

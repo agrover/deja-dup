@@ -462,7 +462,7 @@ internal class DuplicityJob : DejaDup.ToolJob
           if (local_file == null) {
             // Was not even a file path (maybe something goofy like computer://)
             show_error(_("Could not restore ‘%s’: Not a valid file location").printf(
-                         (restore_files.data as File).get_parse_name()));
+                         restore_files.data.get_parse_name()));
             return false;
           }
 

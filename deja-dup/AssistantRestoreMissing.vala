@@ -67,6 +67,7 @@ public class AssistantRestoreMissing : AssistantRestore {
    * @param //File// ''list_dir'' Directory whose deleted files will be shown.
    */
   private File list_directory;
+  private File display_directory;
 
   private bool backups_queue_filled = false;
   private static int compare_time(Time a, Time b) {
@@ -118,7 +119,8 @@ public class AssistantRestoreMissing : AssistantRestore {
   public AssistantRestoreMissing(File list_dir)
   {
     backend = DejaDup.Backend.get_default();
-    list_directory = list_dir;
+    display_directory = list_dir;
+    list_directory = DejaDup.try_realfile(list_dir);
   }
 
   protected override void add_custom_config_pages()
@@ -208,7 +210,7 @@ public class AssistantRestoreMissing : AssistantRestore {
       restore_files_remaining = restore_files.copy();
     }
     else if (page == listfiles_page) {
-      list_dir_label.label = list_directory.get_parse_name();
+      list_dir_label.label = display_directory.get_parse_name();
       if (!scan_queue) {
         do_query_files_at_date();
         scan_queue = true;
