@@ -90,7 +90,7 @@ public abstract class Operation : Object
 
   public async virtual void start()
   {
-    action_desc_changed(_("Preparing…"));  
+    action_desc_changed(_("Preparing…"));
 
     yield check_dependencies();
     if (!finished) // might have been cancelled during check above

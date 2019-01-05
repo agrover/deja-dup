@@ -83,8 +83,10 @@ public class AssistantRestore : AssistantOperation
 
   void ensure_config_location()
   {
-    label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
-    config_location = new DejaDup.ConfigLocation(true, true, label_sizes);
+    if (config_location == null) {
+      label_sizes = new Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL);
+      config_location = new DejaDup.ConfigLocation(true, true, label_sizes);
+    }
   }
 
   Gtk.Widget make_backup_location_page()
@@ -228,9 +230,10 @@ public class AssistantRestore : AssistantOperation
              "column-spacing", 12,
              "border-width", 12);
     
+    ensure_config_location();
     label = new Gtk.Label(_("Backup location"));
     label.set("xalign", 1.0f, "yalign", 0.0f);
-    w = new DejaDup.ConfigLabelLocation();
+    w = new DejaDup.ConfigLabelLocation(config_location);
     w.set("hexpand", true);
     page.attach(label, 0, rows, 1, 1);
     page.attach(w, 1, rows, 1, 1);

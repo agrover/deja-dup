@@ -21,6 +21,16 @@ using GLib;
 
 namespace DejaDup {
 
+bool str_caseless_equal(string a, string b)
+{
+  return str_equal(a.ascii_down(), b.ascii_down());
+}
+
+uint str_caseless_hash(string a)
+{
+  return str_hash(a.ascii_down());
+}
+
 public class ConfigLocation : ConfigWidget
 {
   enum Col {
@@ -98,7 +108,7 @@ public class ConfigLocation : ConfigWidget
       accessible.set_name("Location");
     }
 
-    all_settings = new HashTable<string, FilteredSettings>(str_hash, str_equal);
+    all_settings = new HashTable<string, FilteredSettings>(str_caseless_hash, str_caseless_equal);
     string[] roots = {"", GOA_ROOT, REMOTE_ROOT, DRIVE_ROOT, LOCAL_ROOT,
                       S3_ROOT, GCS_ROOT, OPENSTACK_ROOT, RACKSPACE_ROOT};
     foreach (string? root in roots) {
@@ -636,6 +646,11 @@ public class ConfigLocation : ConfigWidget
     var type = Backend.get_type_name(all_settings[""]);
     var sub_settings = all_settings[type];
     return Backend.get_for_type(type, sub_settings);
+  }
+
+  public List<unowned FilteredSettings> get_all_settings()
+  {
+    return all_settings.get_values();
   }
 }
 
