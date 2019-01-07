@@ -714,6 +714,13 @@ public abstract class AssistantOperation : Assistant
     }
   }
 
+  public void stop()
+  {
+    hide_everything();
+    if (op != null)
+      op.stop();
+  }
+
   protected virtual void do_cancel()
   {
     hide_everything();

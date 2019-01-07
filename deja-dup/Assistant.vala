@@ -289,6 +289,12 @@ public abstract class Assistant : Gtk.Window
     return btn;
   }
 
+  void make_button_default(Gtk.Widget button)
+  {
+      button.grab_default();
+      button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+  }
+
   void set_buttons()
   {
     return_if_fail(current != null);
@@ -349,13 +355,13 @@ public abstract class Assistant : Gtk.Window
     if (show_forward) {
       forward_button = add_button(info.forward_text, FORWARD);
       if (!has_default)
-        forward_button.grab_default();
+        make_button_default(forward_button);
       has_default = true;
     }
     if (show_resume) {
       resume_button = add_button(_("_Resume Later"), RESUME);
       if (!has_default)
-        resume_button.grab_default();
+        make_button_default(resume_button);
       has_default = true;
     }
     if (show_back)
@@ -363,7 +369,7 @@ public abstract class Assistant : Gtk.Window
     if (show_close) {
       close_button = add_button(_("_Close"), CLOSE);
       if (!has_default)
-        close_button.grab_default();
+        make_button_default(close_button);
       has_default = true;
     }
     if (show_cancel)

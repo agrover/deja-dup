@@ -152,7 +152,9 @@ public class DejaDupApp : Gtk.Application
   {
     base.activate();
 
-    if (main_window != null)
+    if (op != null)
+      op.present_with_time(Gtk.get_current_event_time());
+    else if (main_window != null)
       main_window.present_with_time(Gtk.get_current_event_time());
     else {
       // We're first instance.  Yay!
@@ -188,6 +190,12 @@ public class DejaDupApp : Gtk.Application
     }
   }
 
+  bool exit_cleanly()
+  {
+    quit();
+    return Source.REMOVE;
+  }
+
   public override void startup()
   {
     base.startup();
@@ -202,6 +210,17 @@ public class DejaDupApp : Gtk.Application
     set_accels_for_action("app.help", {"F1"});
     set_accels_for_action("app.quit", {"<Primary>q"});
     quit_action = lookup_action("quit") as SimpleAction;
+
+    // Cleanly exit (shutting down duplicity as we go)
+    Unix.signal_add(ProcessSignal.HUP, exit_cleanly);
+    Unix.signal_add(ProcessSignal.INT, exit_cleanly);
+    Unix.signal_add(ProcessSignal.TERM, exit_cleanly);
+  }
+
+  public override void shutdown()
+  {
+    if (op != null)
+      op.stop();
   }
 
   void clear_op()
@@ -221,6 +240,15 @@ public class DejaDupApp : Gtk.Application
     this.op.destroy.connect(clear_op);
     quit_action.set_enabled(false);
     register_window(op);
+
+    if (main_window != null) {
+      op.transient_for = main_window;
+      op.modal = true;
+      op.destroy_with_parent = true;
+      op.type_hint = Gdk.WindowTypeHint.DIALOG;
+      main_window.present_with_time(Gtk.get_current_event_time());
+    }
+
     op.show_all();
 
     Gdk.notify_startup_complete();
