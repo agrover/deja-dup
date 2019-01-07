@@ -221,6 +221,7 @@ public class DejaDupApp : Gtk.Application
   {
     if (op != null)
       op.stop();
+    base.shutdown();
   }
 
   void clear_op()
