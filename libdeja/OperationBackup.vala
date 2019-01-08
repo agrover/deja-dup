@@ -109,6 +109,7 @@ public class OperationBackup : Operation
       files.prepend(File.new_for_path(Path.build_filename(dir, ".steam/root")));
       files.prepend(File.new_for_path(Path.build_filename(dir, ".thumbnails")));
       files.prepend(File.new_for_path(Path.build_filename(dir, ".xsession-errors")));
+      regexps.prepend(Path.build_filename(dir, ".var/app/*/cache")); // flatpak
       regexps.prepend(Path.build_filename(dir, "snap/*/*/.cache"));
     }
     
