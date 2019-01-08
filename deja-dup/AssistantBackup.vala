@@ -100,7 +100,7 @@ public class AssistantBackup : AssistantOperation
         set_page_title(page, _("Backup Finished"));
 
         // Also leave ourselves up if we just finished a restore test.
-        if (nagged && summary_label.label == null)
+        if (nagged && summary_label.label == "")
           summary_label.label = _("Your files were successfully backed up and tested.");
         // If we don't have a special message to show the user, just bail.
         else if (!detail_widget.get_visible())
