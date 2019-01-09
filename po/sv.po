@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deja-dup\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-04-09 20:59-0400\n"
+"POT-Creation-Date: 2019-01-04 23:05-0500\n"
 "PO-Revision-Date: 2018-07-21 13:32+0000\n"
 "Last-Translator: Jonatan Nyberg <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -15,15 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2018-07-22 05:57+0000\n"
-"X-Generator: Launchpad (build 18730)\n"
+"X-Launchpad-Export-Date: 2019-01-06 04:55+0000\n"
+"X-Generator: Launchpad (build 18847)\n"
 
 #. Translators: The name is a play on the French phrase "déjà vu" meaning
 #. "already seen", but with the "vu" replaced with "dup".  "Dup" in this
 #. context is itself a reference to both the underlying command line tool
 #. "duplicity" and the act of duplicating data for backup.  As a whole, the
 #. phrase "Déjà Dup" may not be very translatable.
-#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:294
+#: data/org.gnome.DejaDup.appdata.xml.in:7 deja-dup/main.vala:328
 #: libdeja/CommonUtils.vala:145
 msgid "Déjà Dup Backup Tool"
 msgstr "Déjà Dup säkerhetskopiering"
@@ -70,27 +70,25 @@ msgid "Integrates well into your GNOME desktop"
 msgstr "Integrerar bra med ditt GNOME-skrivbord"
 
 #. Translators: "Backups" is a noun
-#: data/org.gnome.DejaDup.desktop:5 deja-dup/main.vala:160
-#: deja-dup/Prompt.vala:78
+#: data/org.gnome.DejaDup.desktop.in:5 deja-dup/main.vala:164
 msgid "Backups"
 msgstr "Säkerhetskopior"
 
-#: data/org.gnome.DejaDup.desktop:6
+#: data/org.gnome.DejaDup.desktop.in:6
 msgid "Change your backup settings"
 msgstr "Ändra inställningar för dina säkerhetskopior"
 
-#. Translators: this is the icon name, you probably don't need to change this
-#: data/org.gnome.DejaDup.desktop:9
-msgid "org.gnome.DejaDup"
-msgstr "org.gnome.DejaDup"
+#: data/org.gnome.DejaDup.desktop.in:8
+msgid "@icon@"
+msgstr ""
 
 #. Translators: Add whatever keywords you want in your language, separated by semicolons
 #. These keywords are used when searching for applications in dashes, etc.
-#: data/org.gnome.DejaDup.desktop:21
+#: data/org.gnome.DejaDup.desktop.in:20
 msgid "déjà;deja;dup;"
 msgstr "déjà;deja;dup;"
 
-#: data/org.gnome.DejaDup.desktop:28
+#: data/org.gnome.DejaDup.desktop.in:27
 msgid "Back Up"
 msgstr "Säkerhetskopiera"
 
@@ -490,7 +488,7 @@ msgid ""
 msgstr ""
 "Detta är URL:en för autentisering, eller nyckel-URL för tjänsten OpenStack"
 
-#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:69
+#: data/org.gnome.DejaDup.policy.in:10 deja-dup/AssistantRestore.vala:70
 msgid "Restore"
 msgstr "Återställ"
 
@@ -527,18 +525,14 @@ msgid "_Help"
 msgstr "_Hjälp"
 
 #: data/ui/menus.ui:15
-msgid "_About"
-msgstr "_Om"
-
-#: data/ui/menus.ui:19
-msgid "_Quit"
-msgstr "A_vsluta"
+msgid "_About Backups"
+msgstr ""
 
 #: data/ui/restore-missing.ui:18
 msgid "Folder"
 msgstr "Mapp"
 
-#: data/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:165
+#: data/ui/restore-missing.ui:61 deja-dup/AssistantOperation.vala:168
 msgid "Scanning…"
 msgstr "Söker av…"
 
@@ -636,11 +630,11 @@ msgctxt "back up is verb"
 msgid "_Back Up"
 msgstr "Sä_kerhetskopiera"
 
-#: deja-dup/AssistantBackup.vala:58
+#: deja-dup/AssistantBackup.vala:57
 msgid "Creating the first backup.  This may take a while."
 msgstr "Skapar första säkerhetskopian. Detta kan ta en stund."
 
-#: deja-dup/AssistantBackup.vala:59
+#: deja-dup/AssistantBackup.vala:58
 msgid ""
 "Creating a fresh backup to protect against backup corruption.  This will "
 "take longer than normal."
@@ -650,48 +644,48 @@ msgstr ""
 
 #. Translators:  This is the phrase 'Backing up' in the larger phrase
 #. "Backing up '%s'".  %s is a filename.
-#: deja-dup/AssistantBackup.vala:89
+#: deja-dup/AssistantBackup.vala:88
 msgid "Backing up:"
 msgstr "Säkerhetskopierar:"
 
-#: deja-dup/AssistantBackup.vala:98
+#: deja-dup/AssistantBackup.vala:97
 msgid "Backup Failed"
 msgstr "Säkerhetskopiering misslyckades"
 
-#: deja-dup/AssistantBackup.vala:101
+#: deja-dup/AssistantBackup.vala:100
 msgid "Backup Finished"
 msgstr "Säkerhetskopieringen är färdig"
 
 #. Also leave ourselves up if we just finished a restore test.
-#: deja-dup/AssistantBackup.vala:105
+#: deja-dup/AssistantBackup.vala:104
 msgid "Your files were successfully backed up and tested."
 msgstr "Dina filer säkerhetskopierades och testades med lyckat resultat."
 
-#: deja-dup/AssistantBackup.vala:112
+#: deja-dup/AssistantBackup.vala:111
 msgid "Backing Up…"
 msgstr "Säkerhetskopierar..."
 
-#: deja-dup/AssistantOperation.vala:164
+#: deja-dup/AssistantOperation.vala:167
 msgid "Scanning:"
 msgstr "Söker av:"
 
-#: deja-dup/AssistantOperation.vala:248
+#: deja-dup/AssistantOperation.vala:272
 msgid "_Details"
 msgstr "_Detaljer"
 
-#: deja-dup/AssistantOperation.vala:294
+#: deja-dup/AssistantOperation.vala:318
 msgid "In order to continue, the following packages need to be installed:"
 msgstr "För att fortsätta måste följande paket installeras:"
 
-#: deja-dup/AssistantOperation.vala:330
+#: deja-dup/AssistantOperation.vala:354
 msgid "_Allow restoring without a password"
 msgstr "_Tillåt återskapning utan ett lösenord"
 
-#: deja-dup/AssistantOperation.vala:336
+#: deja-dup/AssistantOperation.vala:360
 msgid "_Password-protect your backup"
 msgstr "_Lösenordsskydda din säkerhetskopia"
 
-#: deja-dup/AssistantOperation.vala:348
+#: deja-dup/AssistantOperation.vala:372
 msgid ""
 "You will need your password to restore your files. You might want to write "
 "it down."
@@ -699,24 +693,24 @@ msgstr ""
 "Du behöver ditt lösenord för att återställa dina filer. Du bör skriva ner "
 "lösenordet och spara det."
 
-#: deja-dup/AssistantOperation.vala:363 deja-dup/AssistantOperation.vala:432
+#: deja-dup/AssistantOperation.vala:387 deja-dup/AssistantOperation.vala:456
 msgid "E_ncryption password"
 msgstr "Kr_ypteringslösenord"
 
-#: deja-dup/AssistantOperation.vala:380
+#: deja-dup/AssistantOperation.vala:404
 msgid "Confir_m password"
 msgstr "B_ekräfta lösenordet"
 
-#: deja-dup/AssistantOperation.vala:393 deja-dup/AssistantOperation.vala:441
+#: deja-dup/AssistantOperation.vala:417 deja-dup/AssistantOperation.vala:465
 msgid "_Show password"
 msgstr "_Visa lösenord"
 
-#: deja-dup/AssistantOperation.vala:400
-#: deja-dup/MountOperationAssistant.vala:40
+#: deja-dup/AssistantOperation.vala:424
+#: deja-dup/MountOperationAssistant.vala:39
 msgid "_Remember password"
 msgstr "_Kom ihåg lösenord"
 
-#: deja-dup/AssistantOperation.vala:419
+#: deja-dup/AssistantOperation.vala:443
 msgid ""
 "In order to check that you will be able to retrieve your files in the case "
 "of an emergency, please enter your encryption password again to perform a "
@@ -726,19 +720,19 @@ msgstr ""
 "skriv ditt krypteringslösenord igen för att utföra ett snabbt "
 "återställningstest."
 
-#: deja-dup/AssistantOperation.vala:446
+#: deja-dup/AssistantOperation.vala:470
 msgid "Test every two _months"
 msgstr "Testa varannan _månad"
 
-#: deja-dup/AssistantOperation.vala:513
+#: deja-dup/AssistantOperation.vala:537
 msgid "Install Packages"
 msgstr "Installera paket"
 
-#: deja-dup/AssistantOperation.vala:528
+#: deja-dup/AssistantOperation.vala:552
 msgid "Summary"
 msgstr "Sammandrag"
 
-#: deja-dup/AssistantOperation.vala:550
+#: deja-dup/AssistantOperation.vala:574
 msgid "Restore Test"
 msgstr "Återställningstest"
 
@@ -748,88 +742,88 @@ msgstr "Återställningstest"
 #. But first, try to restart without a cache, since that seems to quite
 #. frequently fix odd metadata errors with duplicity.  If we hit an error
 #. a second time, we'll show the unknown error message.
-#: deja-dup/AssistantOperation.vala:622
-#: libdeja/tools/duplicity/DuplicityJob.vala:715
-#: libdeja/tools/duplicity/DuplicityJob.vala:1102
+#: deja-dup/AssistantOperation.vala:646
+#: libdeja/tools/duplicity/DuplicityJob.vala:721
+#: libdeja/tools/duplicity/DuplicityJob.vala:1108
 msgid "Failed with an unknown error."
 msgstr "Misslyckades med ett okänt fel."
 
-#: deja-dup/AssistantOperation.vala:822
+#: deja-dup/AssistantOperation.vala:846
 msgid "Require Password?"
 msgstr "Kräv lösenord?"
 
-#: deja-dup/AssistantOperation.vala:824
+#: deja-dup/AssistantOperation.vala:848
 msgid "Encryption Password Needed"
 msgstr "Krypteringslösenord krävs"
 
-#: deja-dup/AssistantOperation.vala:897
+#: deja-dup/AssistantOperation.vala:921
 msgid "Backup encryption password"
 msgstr "Lösenord för kryptering av säkerhetskopia"
 
-#: deja-dup/AssistantOperation.vala:968
+#: deja-dup/AssistantOperation.vala:992
 msgctxt "verb"
 msgid "_Install"
 msgstr "_Installera"
 
-#: deja-dup/AssistantRestore.vala:73
+#: deja-dup/AssistantRestore.vala:74
 msgid "_Restore"
 msgstr "_Återställ"
 
-#: deja-dup/AssistantRestore.vala:95
+#: deja-dup/AssistantRestore.vala:103
 msgid "_Backup location"
 msgstr "_Plats för säkerhetskopia"
 
-#: deja-dup/AssistantRestore.vala:128
+#: deja-dup/AssistantRestore.vala:136
 msgid "Restore From Where?"
 msgstr "Återställ från?"
 
-#: deja-dup/AssistantRestore.vala:150
+#: deja-dup/AssistantRestore.vala:158
 msgid "_Date"
 msgstr "_Datum"
 
-#: deja-dup/AssistantRestore.vala:173
+#: deja-dup/AssistantRestore.vala:181
 msgid "Restore files to _original locations"
 msgstr "Återställ filer till deras _ursprungliga platser"
 
-#: deja-dup/AssistantRestore.vala:178
+#: deja-dup/AssistantRestore.vala:186
 msgid "Restore to _specific folder"
 msgstr "Återställ till _specifik mapp"
 
-#: deja-dup/AssistantRestore.vala:188
+#: deja-dup/AssistantRestore.vala:196
 msgid "Choose destination for restored files"
 msgstr "Välj mål för återställda filer"
 
-#: deja-dup/AssistantRestore.vala:192
+#: deja-dup/AssistantRestore.vala:200
 msgid "Restore _folder"
 msgstr "Återställnings_mapp"
 
-#: deja-dup/AssistantRestore.vala:225
+#: deja-dup/AssistantRestore.vala:234
 msgid "Backup location"
 msgstr "Plats för säkerhetskopior"
 
-#: deja-dup/AssistantRestore.vala:233
+#: deja-dup/AssistantRestore.vala:242
 msgid "Restore date"
 msgstr "Datum för återställande"
 
-#: deja-dup/AssistantRestore.vala:241
+#: deja-dup/AssistantRestore.vala:250
 msgid "Restore folder"
 msgstr "Återställningsmapp"
 
-#: deja-dup/AssistantRestore.vala:267
+#: deja-dup/AssistantRestore.vala:276
 msgid "Checking for Backups…"
 msgstr "Letar efter säkerhetskopior..."
 
-#: deja-dup/AssistantRestore.vala:275
+#: deja-dup/AssistantRestore.vala:284
 msgid "Restore From When?"
 msgstr "Återställ från när?"
 
-#: deja-dup/AssistantRestore.vala:283
+#: deja-dup/AssistantRestore.vala:292
 msgid "Restore to Where?"
 msgstr "Återställ till vilken plats?"
 
 #. Translators:  This is the word 'Restoring' in the phrase
 #. "Restoring '%s'".  %s is a filename.
-#: deja-dup/AssistantRestore.vala:310
+#: deja-dup/AssistantRestore.vala:320
 msgid "Restoring:"
 msgstr "Återskapar:"
 
@@ -837,46 +831,46 @@ msgstr "Återskapar:"
 #. This will be in a list with other strings that just have %x (the
 #. current date).  So make sure if you change this, it still makes
 #. sense in that context.
-#: deja-dup/AssistantRestore.vala:352
+#: deja-dup/AssistantRestore.vala:362
 #, c-format
 msgid "%x %X"
 msgstr "%x %X"
 
 #. If we didn't see any dates...  Must not be any backups on the backend
-#: deja-dup/AssistantRestore.vala:365
+#: deja-dup/AssistantRestore.vala:375
 msgid "No backups to restore"
 msgstr "Inga säkerhetskopior att återställa"
 
-#: deja-dup/AssistantRestore.vala:444
+#: deja-dup/AssistantRestore.vala:455
 msgid "Original location"
 msgstr "Ursprunglig plats"
 
-#: deja-dup/AssistantRestore.vala:455
+#: deja-dup/AssistantRestore.vala:466
 msgid "File to restore"
 msgid_plural "Files to restore"
 msgstr[0] "Fil att återställa"
 msgstr[1] "Filer att återställa"
 
-#: deja-dup/AssistantRestore.vala:476
+#: deja-dup/AssistantRestore.vala:487
 msgid "Restore Failed"
 msgstr "Återställning misslyckades"
 
-#: deja-dup/AssistantRestore.vala:478
+#: deja-dup/AssistantRestore.vala:489
 msgid "Restore Finished"
 msgstr "Återställning färdig"
 
 #. if it *is* visible, a header will be set already
-#: deja-dup/AssistantRestore.vala:481
+#: deja-dup/AssistantRestore.vala:492
 msgid "Your files were successfully restored."
 msgstr "Dina filer har nu återställts."
 
-#: deja-dup/AssistantRestore.vala:484
+#: deja-dup/AssistantRestore.vala:495
 msgid "Your file was successfully restored."
 msgid_plural "Your files were successfully restored."
 msgstr[0] "Din fil har återställts."
 msgstr[1] "Dina filer har återställts."
 
-#: deja-dup/AssistantRestore.vala:491 libdeja/Operation.vala:64
+#: deja-dup/AssistantRestore.vala:502 libdeja/Operation.vala:58
 msgid "Restoring…"
 msgstr "Återskapar..."
 
@@ -969,31 +963,31 @@ msgstr "Påbörja omedelbart en säkerhetskopiering"
 msgid "Restore deleted files"
 msgstr "Återställ borttagna filer"
 
-#: deja-dup/main.vala:81 deja-dup/main.vala:96 deja-dup/main.vala:122
+#: deja-dup/main.vala:83 deja-dup/main.vala:98 deja-dup/main.vala:124
 msgid "An operation is already in progress"
 msgstr "En operation är redan på gång"
 
-#: deja-dup/main.vala:101
+#: deja-dup/main.vala:103
 msgid "No directory provided"
 msgstr "Ingen katalog angavs"
 
-#: deja-dup/main.vala:105
+#: deja-dup/main.vala:107
 msgid "Only one directory can be shown at once"
 msgstr "Endast en katalog kan visas åt gången"
 
-#: deja-dup/main.vala:111
+#: deja-dup/main.vala:113
 msgid "Directory does not exist"
 msgstr "Katalogen finns inte"
 
-#: deja-dup/main.vala:115
+#: deja-dup/main.vala:117
 msgid "You must provide a directory, not a file"
 msgstr "Du måste ange en katalog, inte en fil"
 
-#: deja-dup/main.vala:129
+#: deja-dup/main.vala:238
 msgid "Scheduled backup delayed"
 msgstr "Schemalagd säkerhetskopiering har fördröjts"
 
-#: deja-dup/main.vala:230
+#: deja-dup/main.vala:257
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -1014,37 +1008,37 @@ msgstr ""
 "  Teodor Jönsson https://launchpad.net/~teodor-jonsson-sogeti-"
 "deactivatedaccount"
 
-#: deja-dup/MountOperationAssistant.vala:36
+#: deja-dup/MountOperationAssistant.vala:35
 msgid "Connect to Server"
 msgstr "Anslut till server"
 
-#: deja-dup/MountOperationAssistant.vala:37
+#: deja-dup/MountOperationAssistant.vala:36
 #: deja-dup/widgets/ConfigLocationRackspace.vala:31
 msgid "_Username"
 msgstr "_Användarnamn"
 
-#: deja-dup/MountOperationAssistant.vala:38
+#: deja-dup/MountOperationAssistant.vala:37
 msgid "_Password"
 msgstr "_Lösenord"
 
-#: deja-dup/MountOperationAssistant.vala:39
+#: deja-dup/MountOperationAssistant.vala:38
 msgid "S_how password"
 msgstr "V_isa lösenord"
 
-#: deja-dup/MountOperationAssistant.vala:81
+#: deja-dup/MountOperationAssistant.vala:80
 msgid "Location not available"
 msgstr "Platsen är inte tillgänglig"
 
-#: deja-dup/MountOperationAssistant.vala:172
+#: deja-dup/MountOperationAssistant.vala:163
 msgid "Connect _anonymously"
 msgstr "Anslut _anonymt"
 
-#: deja-dup/MountOperationAssistant.vala:176
+#: deja-dup/MountOperationAssistant.vala:167
 msgid "Connect as u_ser"
 msgstr "Anslut som an_vändare"
 
 #. Translators: this is a Windows networking domain
-#: deja-dup/MountOperationAssistant.vala:219
+#: deja-dup/MountOperationAssistant.vala:210
 msgid "_Domain"
 msgstr "_Domän"
 
@@ -1073,36 +1067,36 @@ msgstr "_Lagringsplats"
 msgid "Storage location"
 msgstr "Lagringsplats"
 
-#: deja-dup/Preferences.vala:253
+#: deja-dup/Preferences.vala:252
 msgid "_Automatic backup"
 msgstr "_Automatisk säkerhetskopiering"
 
 #. translators: as in "Every day"
-#: deja-dup/Preferences.vala:264
+#: deja-dup/Preferences.vala:263
 msgid "_Every"
 msgstr "_Var"
 
-#: deja-dup/Preferences.vala:274
+#: deja-dup/Preferences.vala:273
 msgctxt "verb"
 msgid "_Keep"
 msgstr "_Behåll"
 
-#: deja-dup/Preferences.vala:281
+#: deja-dup/Preferences.vala:280
 msgid ""
 "Old backups will be deleted earlier if the storage location is low on space."
 msgstr ""
 "Gamla säkerhetskopior kommer tas bort tidigare om lagringsplatsen har ont om "
 "utrymme."
 
-#: deja-dup/Preferences.vala:292
+#: deja-dup/Preferences.vala:291
 msgid "Scheduling"
 msgstr "Schema"
 
-#: deja-dup/Prompt.vala:37
+#: deja-dup/Prompt.vala:30
 msgid "Keep your files safe by backing up regularly"
 msgstr "Håll dina filer säkra genom att säkerhetskopiera dem"
 
-#: deja-dup/Prompt.vala:42
+#: deja-dup/Prompt.vala:35
 msgid ""
 "Important documents, data, and settings can be protected by storing them in "
 "a backup. In the case of a disaster, you would be able to recover them from "
@@ -1112,38 +1106,33 @@ msgstr ""
 "en säkerhetskopia. Om en olycka händer så kan du återskapa filerna från din "
 "säkerhetskopia."
 
-#: deja-dup/Prompt.vala:47
+#: deja-dup/Prompt.vala:40
 msgid "_Don't Show Again"
 msgstr "Visa _inte igen"
 
-#: deja-dup/Prompt.vala:55
+#: deja-dup/Prompt.vala:48
 msgid "_Open Backup Settings"
 msgstr "_Öppna inställningar"
 
-#: deja-dup/StatusIcon.vala:84
+#: deja-dup/StatusIcon.vala:57
 msgid "Backup completed"
 msgstr "Säkerhetskopieringen är färdig"
 
-#: deja-dup/StatusIcon.vala:89
+#: deja-dup/StatusIcon.vala:62
 msgid "Backup finished"
 msgstr "Säkerhetskopieringen är färdig"
 
-#: deja-dup/StatusIcon.vala:90
+#: deja-dup/StatusIcon.vala:63
 msgid ""
 "Not all files were successfully backed up.  See dialog for more details."
 msgstr "Alla filer säkerhetskopierades inte. Se dialogrutan för detaljer."
 
-#: deja-dup/StatusIcon.vala:120
+#: deja-dup/StatusIcon.vala:93
 msgid "Starting scheduled backup"
 msgstr "Startar schemalagd säkerhetskopiering"
 
-#: deja-dup/StatusIcon.vala:151
-#, c-format
-msgid "%.1f%% complete"
-msgstr "%.1f%% färdigt"
-
 #: deja-dup/monitor/monitor.vala:82 libdeja/BackendRackspace.vala:54
-#: libdeja/BackendRemote.vala:104 libdeja/BackendS3.vala:64
+#: libdeja/BackendRemote.vala:132 libdeja/BackendS3.vala:64
 msgid "Backup will begin when a network connection becomes available."
 msgstr ""
 "Säkerhetskopieringen kommer att påbörjas när en nätverksanslutning blir "
@@ -1159,7 +1148,7 @@ msgstr ""
 #. Translators: Monitor in this sense means something akin to 'watcher', not
 #. a computer screen.  This program acts like a daemon that kicks off
 #. backups at scheduled times.
-#: deja-dup/monitor/monitor.vala:288
+#: deja-dup/monitor/monitor.vala:283
 msgid "Backup Monitor"
 msgstr "Övervakning för säkerhetskopiering"
 
@@ -1291,34 +1280,34 @@ msgstr "Ta bort"
 msgid "Choose folders"
 msgstr "Välj mappar"
 
-#: deja-dup/widgets/ConfigLocation.vala:126
+#: deja-dup/widgets/ConfigLocation.vala:136
 msgid "Network Server"
 msgstr "Nätverksserver"
 
 #. And a local folder option
-#: deja-dup/widgets/ConfigLocation.vala:131
+#: deja-dup/widgets/ConfigLocation.vala:141
 msgid "Local Folder"
 msgstr "Lokal mapp"
 
 #. Note that we are using | not || here, because if show_deprecated is set,
 #. we want to insert multiple backends.
-#: deja-dup/widgets/ConfigLocation.vala:295 libdeja/BackendS3.vala:122
+#: deja-dup/widgets/ConfigLocation.vala:303 libdeja/BackendS3.vala:122
 msgid "Amazon S3"
 msgstr "Amazon S3"
 
-#: deja-dup/widgets/ConfigLocation.vala:297
+#: deja-dup/widgets/ConfigLocation.vala:305
 msgid "Google Cloud Storage"
 msgstr "Google Cloud-lagring"
 
-#: deja-dup/widgets/ConfigLocation.vala:299 libdeja/BackendU1.vala:45
+#: deja-dup/widgets/ConfigLocation.vala:307 libdeja/BackendU1.vala:45
 msgid "Ubuntu One"
 msgstr "Ubuntu One"
 
-#: deja-dup/widgets/ConfigLocation.vala:301 libdeja/BackendRackspace.vala:72
+#: deja-dup/widgets/ConfigLocation.vala:309 libdeja/BackendRackspace.vala:72
 msgid "Rackspace Cloud Files"
 msgstr "Rackspace Cloud Files"
 
-#: deja-dup/widgets/ConfigLocation.vala:303
+#: deja-dup/widgets/ConfigLocation.vala:311
 msgid "OpenStack Swift"
 msgstr "OpenStack Swift"
 
@@ -1423,8 +1412,8 @@ msgstr "%1$s på %2$s"
 msgid "Backup will begin when %s is connected."
 msgstr "Säkerhetskopiering startar när %s är ansluten."
 
-#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:146
-#: libdeja/BackendRemote.vala:129
+#: libdeja/BackendDrive.vala:184 libdeja/BackendGOA.vala:158
+#: libdeja/BackendRemote.vala:157
 msgid "Storage location not available"
 msgstr "Lagringsplats inte tillgänglig"
 
@@ -1437,7 +1426,7 @@ msgstr "Väntar på att ‘%s’ ska anslutas…"
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: libdeja/BackendGOA.vala:101
+#: libdeja/BackendGOA.vala:113
 msgid "Backup will begin when a storage location is configured"
 msgstr "Säkerhetskopiering börjar när en lagringsplats är konfigurerad"
 
@@ -1445,19 +1434,19 @@ msgstr "Säkerhetskopiering börjar när en lagringsplats är konfigurerad"
 #. Translators: "Files" here is the string used in GNOME Online Account
 #. settings checkbox for a given account to enable/disable an account's
 #. Files feature.
-#: libdeja/BackendGOA.vala:111
+#: libdeja/BackendGOA.vala:123
 #, c-format
 msgid "Backup will begin when ‘%s’ has Files support enabled"
 msgstr "Säkerhetskopiering börjar när \"% s\" har Filstöd aktiverat"
 
-#: libdeja/BackendGOA.vala:140
+#: libdeja/BackendGOA.vala:152
 msgid "Waiting for Online Accounts to be configured in your backup settings…"
 msgstr ""
 "Väntar på att Online-konton ska konfigureras i dina "
 "säkerhetskopieringsinställningar..."
 
 #. Translators: %s is the name of the provider inside of GNOME Online Accounts
-#: libdeja/BackendGOA.vala:143
+#: libdeja/BackendGOA.vala:155
 #, c-format
 msgid "Waiting for %s to be configured in your backup settings…"
 msgstr ""
@@ -1501,7 +1490,7 @@ msgstr "_Kom ihåg åtkomstnyckel för API"
 msgid "The network server is not available"
 msgstr "Nätverksservern är inte tillgänglig"
 
-#: libdeja/BackendRemote.vala:130
+#: libdeja/BackendRemote.vala:158
 msgid "Waiting for a network connection…"
 msgstr "Väntar på en nätverksanslutning..."
 
@@ -1599,23 +1588,23 @@ msgstr ""
 "Din säkerhetskopia verkar vara korrupt. Du bör radera säkerhetskopian och "
 "försöka igen."
 
-#: libdeja/Operation.vala:62
+#: libdeja/Operation.vala:56
 msgid "Backing up…"
 msgstr "Säkerhetskopierar..."
 
-#: libdeja/Operation.vala:66
+#: libdeja/Operation.vala:60
 msgid "Checking for backups…"
 msgstr "Letar efter säkerhetskopior..."
 
-#: libdeja/Operation.vala:68
+#: libdeja/Operation.vala:62
 msgid "Listing files…"
 msgstr "Listar filer…"
 
-#: libdeja/Operation.vala:70 libdeja/Operation.vala:99
-#: libdeja/tools/duplicity/DuplicityJob.vala:394
-#: libdeja/tools/duplicity/DuplicityJob.vala:401
-#: libdeja/tools/duplicity/DuplicityJob.vala:426
-#: libdeja/tools/duplicity/DuplicityJob.vala:431
+#: libdeja/Operation.vala:64 libdeja/Operation.vala:93
+#: libdeja/tools/duplicity/DuplicityJob.vala:400
+#: libdeja/tools/duplicity/DuplicityJob.vala:407
+#: libdeja/tools/duplicity/DuplicityJob.vala:432
+#: libdeja/tools/duplicity/DuplicityJob.vala:437
 msgid "Preparing…"
 msgstr "Förbereder..."
 
@@ -1625,32 +1614,32 @@ msgid "Paused (no network)"
 msgstr "Pausad (inget nätverk)"
 
 #. Was not even a file path (maybe something goofy like computer://)
-#: libdeja/tools/duplicity/DuplicityJob.vala:458
+#: libdeja/tools/duplicity/DuplicityJob.vala:464
 #, c-format
 msgid "Could not restore ‘%s’: Not a valid file location"
 msgstr "Kunde inte återställa \"%s\": Inte en giltig filplats"
 
 #. Tiny backup location.  Suggest they get a larger one.
-#: libdeja/tools/duplicity/DuplicityJob.vala:529
+#: libdeja/tools/duplicity/DuplicityJob.vala:535
 msgid "Backup location is too small.  Try using one with more space."
 msgstr ""
 "Platsen för säkerhetskopian är för liten. Prova att använda en med mer "
 "utrymme."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:552
+#: libdeja/tools/duplicity/DuplicityJob.vala:558
 msgid "Backup location does not have enough free space."
 msgstr ""
 "Platsen för säkerhetskopian har inte tillräckligt med ledigt utrymme."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:572
-#: libdeja/tools/duplicity/DuplicityJob.vala:586
+#: libdeja/tools/duplicity/DuplicityJob.vala:578
+#: libdeja/tools/duplicity/DuplicityJob.vala:592
 msgid "Cleaning up…"
 msgstr "Rensar upp..."
 
 #. OK, we succeeded yay!  But some files didn't make it into the backup
 #. because we couldn't read them.  So tell the user so they don't think
 #. everything is hunky dory.
-#: libdeja/tools/duplicity/DuplicityJob.vala:682
+#: libdeja/tools/duplicity/DuplicityJob.vala:688
 msgid ""
 "Could not back up the following files.  Please make sure you are able to "
 "open them."
@@ -1661,7 +1650,7 @@ msgstr ""
 #. OK, we succeeded yay!  But some files didn't actually restore
 #. because we couldn't write to them.  So tell the user so they
 #. don't think everything is hunky dory.
-#: libdeja/tools/duplicity/DuplicityJob.vala:698
+#: libdeja/tools/duplicity/DuplicityJob.vala:704
 msgid ""
 "Could not restore the following files.  Please make sure you are able to "
 "write to them."
@@ -1672,7 +1661,7 @@ msgstr ""
 #. make text a little nicer than duplicity gives
 #. duplicity gives something like "home/blah/blah not found in archive,
 #. no files restored".
-#: libdeja/tools/duplicity/DuplicityJob.vala:942
+#: libdeja/tools/duplicity/DuplicityJob.vala:948
 #, c-format
 msgid "Could not restore ‘%s’: File not found in backup"
 msgstr "Kunde inte återställa \"%s\": Filen hittades inte i säkerhetskopian"
@@ -1680,17 +1669,17 @@ msgstr "Kunde inte återställa \"%s\": Filen hittades inte i säkerhetskopian"
 #. notify upper layers, if they want to do anything
 #. Duplicity tried to ask the user what the encryption password is.
 #. notify upper layers, if they want to do anything
-#: libdeja/tools/duplicity/DuplicityJob.vala:955
-#: libdeja/tools/duplicity/DuplicityJob.vala:1054
-#: libdeja/tools/duplicity/DuplicityJob.vala:1058
+#: libdeja/tools/duplicity/DuplicityJob.vala:961
+#: libdeja/tools/duplicity/DuplicityJob.vala:1060
+#: libdeja/tools/duplicity/DuplicityJob.vala:1064
 msgid "Bad encryption password."
 msgstr "Krypterat lösenord är felaktigt."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:961
+#: libdeja/tools/duplicity/DuplicityJob.vala:967
 msgid "Computer name changed"
 msgstr "Datornamnet har ändrats"
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:961
+#: libdeja/tools/duplicity/DuplicityJob.vala:967
 #, c-format
 msgid ""
 "The existing backup is of a computer named %s, but the current computer’s "
@@ -1701,70 +1690,70 @@ msgstr ""
 "den aktuella datorn är %s.  Om detta inte var väntat så bör du "
 "säkerhetskopiera till en annan plats."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:996
+#: libdeja/tools/duplicity/DuplicityJob.vala:1002
 #, c-format
 msgid "Permission denied when trying to create ‘%s’."
 msgstr "Åtkomst nekades vid försök att skapa ‘%s’."
 
 #. assume error is on backend side
-#: libdeja/tools/duplicity/DuplicityJob.vala:1000
-#: libdeja/tools/duplicity/DuplicityJob.vala:1004
+#: libdeja/tools/duplicity/DuplicityJob.vala:1006
+#: libdeja/tools/duplicity/DuplicityJob.vala:1010
 #, c-format
 msgid "Permission denied when trying to read ‘%s’."
 msgstr "Åtkomst nekades vid försök att läsa ‘%s’."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1008
+#: libdeja/tools/duplicity/DuplicityJob.vala:1014
 #, c-format
 msgid "Permission denied when trying to delete ‘%s’."
 msgstr "Åtkomst nekades vid försök att ta bort ‘%s’."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1015
+#: libdeja/tools/duplicity/DuplicityJob.vala:1021
 #, c-format
 msgid "Backup location ‘%s’ does not exist."
 msgstr "Platsen för säkerhetskopior ‘%s’ finns inte."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1021
-#: libdeja/tools/duplicity/DuplicityJob.vala:1073
+#: libdeja/tools/duplicity/DuplicityJob.vala:1027
+#: libdeja/tools/duplicity/DuplicityJob.vala:1079
 msgid "No space left."
 msgstr "Inget ledigt utrymme kvar."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1035
+#: libdeja/tools/duplicity/DuplicityJob.vala:1041
 msgid "Invalid ID."
 msgstr "Ogiltigt id."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1037
+#: libdeja/tools/duplicity/DuplicityJob.vala:1043
 msgid "Invalid secret key."
 msgstr "Ogiltig hemlig nyckel."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1039
+#: libdeja/tools/duplicity/DuplicityJob.vala:1045
 msgid "Your Amazon Web Services account is not signed up for the S3 service."
 msgstr ""
 "Ditt konto för Amazon Web Services är inte registrerat för S3-tjänsten."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1048
+#: libdeja/tools/duplicity/DuplicityJob.vala:1054
 msgid "S3 bucket name is not available."
 msgstr "S3 bucket-namnet är inte tillgängligt."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1062
+#: libdeja/tools/duplicity/DuplicityJob.vala:1068
 #, c-format
 msgid "Error reading file ‘%s’."
 msgstr "Fel vid läsning av filen ‘%s’."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1064
+#: libdeja/tools/duplicity/DuplicityJob.vala:1070
 #, c-format
 msgid "Error writing file ‘%s’."
 msgstr "Fel vid skrivning av filen ‘%s’."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1075
+#: libdeja/tools/duplicity/DuplicityJob.vala:1081
 #, c-format
 msgid "No space left in ‘%s’."
 msgstr "Inget ledigt utrymme på ‘%s’."
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1083
+#: libdeja/tools/duplicity/DuplicityJob.vala:1089
 msgid "No backup files found"
 msgstr "Inga säkerhetskopior hittades"
 
-#: libdeja/tools/duplicity/DuplicityJob.vala:1133
+#: libdeja/tools/duplicity/DuplicityJob.vala:1139
 msgid "Uploading…"
 msgstr "Laddar upp..."
 
@@ -1875,6 +1864,10 @@ msgstr ""
 #~ msgid "_Skip Backup"
 #~ msgstr "_Hoppa över säkerhetskopiering"
 
+#, c-format
+#~ msgid "%.1f%% complete"
+#~ msgstr "%.1f%% färdigt"
+
 #~ msgid "Show _Progress"
 #~ msgstr "Visa fö_rlopp"
 
@@ -1886,6 +1879,9 @@ msgstr ""
 
 #~ msgid "Install…"
 #~ msgstr "Installera…"
+
+#~ msgid "_Quit"
+#~ msgstr "A_vsluta"
 
 #, c-format
 #~ msgid ""
@@ -1969,8 +1965,14 @@ msgstr ""
 #~ "Server addresses are made up of a protocol prefix and an address. Examples:"
 #~ msgstr "Serveradresser består av ett protokollprefix och en adress. Exempel:"
 
+#~ msgid "_About"
+#~ msgstr "_Om"
+
 #~ msgid "Server Addresses"
 #~ msgstr "Serveradresser"
 
 #~ msgid "Server _Address"
 #~ msgstr "Server_adress"
+
+#~ msgid "org.gnome.DejaDup"
+#~ msgstr "org.gnome.DejaDup"
