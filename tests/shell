@@ -36,6 +36,9 @@ SHNAME=$(basename $0)
 ROOTDIR=$(mktemp -d --tmpdir dd.XXXXXXXXXX)
 export DEJA_DUP_TEST_ROOT="${ROOTDIR}"
 
+echo "$@" > "$ROOTDIR/runscript.sh"
+cat "$ROOTDIR/runscript.sh"
+
 run_shell()
 {
   ARGS=$@
@@ -69,7 +72,7 @@ if [ "$SHNAME" = "shell" ]; then
   export DEJA_DUP_TOOLS_PATH="${BUILDDIR}/libdeja/tools/duplicity"
   export PATH="${BUILDDIR}/deja-dup/monitor:${BUILDDIR}/deja-dup:${PATH}"
 
-  run_shell $@
+  run_shell "sh $ROOTDIR/runscript.sh"
   exit
 fi
 
@@ -119,4 +122,4 @@ else
   export DEJA_DUP_TEST_SYSTEM=1
 fi
 
-run_shell $@
+run_shell "sh $ROOTDIR/runscript.sh"

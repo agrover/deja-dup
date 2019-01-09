@@ -251,6 +251,7 @@ public class DejaDupApp : Gtk.Application
     }
 
     op.show_all();
+    op.present_with_time(Gtk.get_current_event_time());
 
     Gdk.notify_startup_complete();
   }

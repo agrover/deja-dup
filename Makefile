@@ -52,12 +52,13 @@ screenshots: all
 	
 	@mkdir -p ./builddir/screenshots
 	@rm -f ./builddir/screenshots/*
+	
 	@./tests/shell-local "deja-dup" &
-	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-1.png
+	@gnome-screenshot --window --delay 1 --file data/appdata/01-main.png
 	@killall deja-dup
 	
 	@./tests/shell-local "deja-dup --backup" >/dev/null &
-	@gnome-screenshot --window --delay 1 --file ./builddir/screenshots/screenshot-2.png
+	@gnome-screenshot --window --delay 1 --file data/appdata/02-backup.png
 	@killall deja-dup
 	
 	@gsettings reset org.gnome.desktop.interface font-name
@@ -65,6 +66,8 @@ screenshots: all
 	@gsettings reset org.gnome.desktop.interface icon-theme
 	@gsettings reset org.gnome.desktop.wm.preferences theme
 	@gsettings reset org.gnome.DejaDup backend
+	
+	@eog data/appdata
 
 pot: configure
 	ninja -C builddir deja-dup-pot help-org.gnome.DejaDup-pot
