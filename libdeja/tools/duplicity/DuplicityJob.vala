@@ -524,6 +524,7 @@ internal class DuplicityJob : DejaDup.ToolJob
       return;
     }
 
+    var formatted_progress_total = format_size(progress_total);
     var free = yield backend.get_space();
     var total = yield backend.get_space(false);
     // Sanity check total here, plus this can actually happen if an overflow
@@ -532,7 +533,8 @@ internal class DuplicityJob : DejaDup.ToolJob
       total = free;
     if (total < progress_total) {
         // Tiny backup location.  Suggest they get a larger one.
-        show_error(_("Backup location is too small.  Try using one with more space."));
+        var msg = _("Backup location is too small. Try using one with at least %s.");
+        show_error(msg.printf(formatted_progress_total));
         done(false, false, null);
         return;
     }
@@ -555,7 +557,8 @@ internal class DuplicityJob : DejaDup.ToolJob
         }
       }
       else {
-        show_error(_("Backup location does not have enough free space."));
+        var msg = _("Backup location does not have enough free space. Try using one with at least %s.");
+        show_error(msg.printf(formatted_progress_total));
         done(false, false, null);
         return;
       }
